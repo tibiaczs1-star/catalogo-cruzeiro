@@ -1,0 +1,8 @@
+{
+  "name": "atlas-czs",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "refresh-news": "node server.js --refresh-only"
+  }
+}

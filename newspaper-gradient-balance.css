@@ -1,0 +1,41 @@
+/* Ajuste editorial de gradientes: mais claro, mais jornal */
+.np-newspaper-gradient {
+  border-color: rgba(176, 193, 210, 0.48) !important;
+  box-shadow: 0 8px 20px rgba(10, 24, 40, 0.12) !important;
+}
+
+.np-newspaper-gradient::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    rgba(255, 255, 255, 0.0) 100%
+  ) !important;
+}
+
+.np-newspaper-gradient :where(h1, h2, h3, h4, h5, p, a, span, strong, small, time) {
+  color: #143452 !important;
+  text-shadow: none !important;
+}
+
+.np-newspaper-gradient :where(.tag, .chip, .kicker, .eyebrow, .category, [class*="tag"], [class*="category"]) {
+  background: color-mix(in srgb, #ffffff 84%, #dbe7f1 16%) !important;
+  border: 1px solid rgba(148, 170, 193, 0.62) !important;
+  color: #143655 !important;
+  text-shadow: none !important;
+}
+
+/* Hero principal pode manter leitura clara sem ficar pesado */
+.np-newspaper-hero {
+  color: #f7fbff !important;
+}
+
+.np-newspaper-hero :where(h1, h2, h3, p, a, span, small, time) {
+  color: #f7fbff !important;
+  text-shadow: 0 2px 8px rgba(8, 19, 32, 0.4) !important;
+}
+
+.np-newspaper-hero :where(.tag, .chip, .kicker, .eyebrow, .category, [class*="tag"], [class*="category"]) {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  color: #ffffff !important;
+}

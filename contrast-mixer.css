@@ -1,0 +1,270 @@
+:root {
+  --cm-ink-strong: #0f2946;
+  --cm-ink-soft: #203a56;
+  --cm-chip-bg: color-mix(in srgb, #ffffff 88%, #f2d3b4 12%);
+  --cm-chip-border: color-mix(in srgb, #0f2946 18%, #ffffff 82%);
+  --cm-chip-ink: #0d2947;
+}
+
+/* Base de leitura para cards claros */
+:where(
+  .card,
+  .news-card,
+  .radar-card,
+  .editoria-card,
+  .trending-card,
+  .election-card,
+  .widget-card,
+  .side-card,
+  .detail-side-card
+) {
+  color: var(--cm-ink-strong);
+}
+
+:where(
+  .card,
+  .news-card,
+  .radar-card,
+  .editoria-card,
+  .trending-card,
+  .election-card,
+  .widget-card,
+  .side-card,
+  .detail-side-card
+)
+  :where(p, li, small, time, .meta, .subtitle) {
+  color: color-mix(in srgb, var(--cm-ink-soft) 88%, #ffffff 12%);
+}
+
+/* Painéis escuros/gradiente: força contraste */
+:where(
+  .news-thumb,
+  .mini-thumb,
+  .card-thumb,
+  .hero-card,
+  .top-card,
+  .highlight-card,
+  .featured-card,
+  .destaque-card,
+  .main-highlight-card,
+  .editoria-highlight,
+  .radar-highlight
+) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+:where(
+  .news-thumb,
+  .mini-thumb,
+  .card-thumb,
+  .hero-card,
+  .top-card,
+  .highlight-card,
+  .featured-card,
+  .destaque-card,
+  .main-highlight-card,
+  .editoria-highlight,
+  .radar-highlight
+)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 17, 29, 0.08) 0%,
+    rgba(7, 17, 29, 0.42) 62%,
+    rgba(7, 17, 29, 0.66) 100%
+  );
+}
+
+:where(
+  .news-thumb,
+  .mini-thumb,
+  .card-thumb,
+  .hero-card,
+  .top-card,
+  .highlight-card,
+  .featured-card,
+  .destaque-card,
+  .main-highlight-card,
+  .editoria-highlight,
+  .radar-highlight
+)
+  > * {
+  position: relative;
+  z-index: 1;
+}
+
+:where(
+  .news-thumb,
+  .mini-thumb,
+  .card-thumb,
+  .hero-card,
+  .top-card,
+  .highlight-card,
+  .featured-card,
+  .destaque-card,
+  .main-highlight-card,
+  .editoria-highlight,
+  .radar-highlight
+)
+  :where(h1, h2, h3, h4, h5, p, a, span, strong) {
+  color: #f6fbff;
+  text-shadow: 0 2px 10px rgba(5, 13, 24, 0.56);
+}
+
+/* Chip de categoria com mixer para ficar legível em qualquer fundo */
+:where(
+  .news-thumb,
+  .mini-thumb,
+  .card-thumb,
+  .hero-card,
+  .top-card,
+  .highlight-card,
+  .featured-card,
+  .destaque-card,
+  .main-highlight-card,
+  .editoria-highlight,
+  .radar-highlight
+)
+  :where(
+    .category,
+    .kicker,
+    .eyebrow,
+    .topic,
+    .tag,
+    .chip,
+    .news-category,
+    .news-kicker,
+    .card-category,
+    .card-kicker,
+    [class*="category"],
+    [class*="kicker"],
+    [class*="eyebrow"],
+    [class*="topic"],
+    [class*="tag"]
+  ) {
+  color: #ffffff !important;
+  background: color-mix(in srgb, #0f2946 82%, transparent 18%);
+  border: 1px solid color-mix(in srgb, #ffffff 42%, transparent 58%);
+  border-radius: 999px;
+  padding: 0.26rem 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 8px rgba(6, 16, 30, 0.55) !important;
+}
+
+/* Segurança para a situação do print (texto em marrom pouco contraste) */
+:where(.news-thumb, .mini-thumb, .card-thumb, .hero-card)
+  :where(.negocios, .business, [data-category="negocios"], [data-category="business"]) {
+  color: #ffffff !important;
+}
+
+/* Links sempre visíveis */
+a {
+  text-underline-offset: 2px;
+}
+
+:where(.card, .news-card, .radar-card, .editoria-card, .trending-card, .election-card) a {
+  color: color-mix(in srgb, #123d69 86%, #ffffff 14%);
+}
+
+/* Setor de cards do radar/agregador: texto branco com contraste forte */
+:where(
+  .radar-grid,
+  .radar-cards,
+  .radar-feed,
+  .agregador-grid,
+  .aggregator-grid,
+  .cards-grid,
+  #radarGrid,
+  #radarCards
+)
+  :where(.card, .news-card, .radar-card, .editoria-card, .module-card, article) {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    155deg,
+    rgba(18, 44, 73, 0.94),
+    rgba(31, 65, 102, 0.9)
+  ) !important;
+  border-color: rgba(210, 225, 241, 0.26) !important;
+}
+
+:where(
+  .radar-grid,
+  .radar-cards,
+  .radar-feed,
+  .agregador-grid,
+  .aggregator-grid,
+  .cards-grid,
+  #radarGrid,
+  #radarCards
+)
+  :where(.card, .news-card, .radar-card, .editoria-card, .module-card, article)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(8, 19, 34, 0.28) 100%
+  );
+  z-index: 0;
+}
+
+:where(
+  .radar-grid,
+  .radar-cards,
+  .radar-feed,
+  .agregador-grid,
+  .aggregator-grid,
+  .cards-grid,
+  #radarGrid,
+  #radarCards
+)
+  :where(.card, .news-card, .radar-card, .editoria-card, .module-card, article)
+  > * {
+  position: relative;
+  z-index: 1;
+}
+
+:where(
+  .radar-grid,
+  .radar-cards,
+  .radar-feed,
+  .agregador-grid,
+  .aggregator-grid,
+  .cards-grid,
+  #radarGrid,
+  #radarCards
+)
+  :where(.card, .news-card, .radar-card, .editoria-card, .module-card, article)
+  :where(h1, h2, h3, h4, h5, p, span, small, time, a, strong, .meta, .subtitle, .source) {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(7, 16, 28, 0.62) !important;
+}
+
+:where(
+  .radar-grid,
+  .radar-cards,
+  .radar-feed,
+  .agregador-grid,
+  .aggregator-grid,
+  .cards-grid,
+  #radarGrid,
+  #radarCards
+)
+  :where(.card, .news-card, .radar-card, .editoria-card, .module-card, article)
+  :where(.tag, .chip, .kicker, .eyebrow, .category, [class*="tag"], [class*="category"]) {
+  color: #ffffff !important;
+  background: color-mix(in srgb, #0b2b4d 84%, transparent 16%) !important;
+  border-color: color-mix(in srgb, #ffffff 38%, transparent 62%) !important;
+}

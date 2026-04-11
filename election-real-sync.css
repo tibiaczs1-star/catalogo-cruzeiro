@@ -1,0 +1,207 @@
+.election-real-panel {
+  margin: 30px 0;
+  padding: 18px;
+  border-radius: 24px;
+  border: 1px solid rgba(197, 182, 155, 0.5);
+  background: linear-gradient(175deg, #fff9ee, #f5ead4);
+  box-shadow: 0 16px 36px rgba(16, 38, 61, 0.12);
+}
+
+.election-real-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.election-real-kicker {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #a05229;
+}
+
+.election-real-head h3 {
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.6rem);
+  color: #112d4a;
+}
+
+.election-real-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.election-real-tab {
+  border: 1px solid #c8d2df;
+  background: #fff;
+  color: #1a344f;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.election-real-tab.is-active {
+  background: #11345d;
+  color: #fff;
+  border-color: #11345d;
+}
+
+.election-real-summary {
+  margin: 12px 0 0;
+  color: #33475e;
+}
+
+.election-real-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.election-real-office {
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid #e4dac6;
+  background: #fff;
+}
+
+.election-real-office h4 {
+  margin: 0 0 8px;
+  color: #122f4d;
+}
+
+.election-real-office > p {
+  margin: 0 0 12px;
+  color: #455871;
+}
+
+.election-real-candidate {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #efe5d3;
+  background: #fffcf6;
+  margin-bottom: 10px;
+}
+
+.election-real-photo {
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f2e8d7;
+  border: 2px solid #d8b566;
+}
+
+.election-real-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.election-real-empty-photo {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 0.75rem;
+  color: #6c7582;
+}
+
+.election-real-text h4 {
+  margin: 0;
+  color: #0f2a46;
+}
+
+.election-real-text .candidate-office {
+  margin: 2px 0 6px;
+  color: #b45f2f;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.election-real-status {
+  margin: 0;
+  color: #3c4f64;
+  font-size: 0.88rem;
+}
+
+.election-real-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.election-vote-btn {
+  border: 1px solid #cfd8e3;
+  background: #fff;
+  color: #122f4d;
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.election-real-actions a {
+  color: #1a4f86;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.86rem;
+  align-self: center;
+}
+
+.election-real-extra {
+  margin-top: 10px;
+}
+
+.election-real-extra summary {
+  cursor: pointer;
+  color: #1e3f61;
+  font-weight: 700;
+}
+
+.election-real-extra-list {
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+  color: #41556d;
+}
+
+.election-real-foot {
+  margin-top: 10px;
+}
+
+.election-real-foot a {
+  text-decoration: none;
+  color: #17467a;
+  font-weight: 700;
+}
+
+.ranking-politicos-link {
+  display: inline-flex;
+  margin-top: 8px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1f4f83;
+  text-decoration: none;
+}
+
+.real-candidate-photo {
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.real-candidate-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,35 @@
+.servicos-menu-item {
+  margin-top: 8px;
+}
+
+.servicos-menu-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  border: 1px solid #d4deea;
+  background: linear-gradient(180deg, #ffffff, #edf3f8);
+  color: #112f4d;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.servicos-modulos-row {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.servicos-modulo-link {
+  text-decoration: none;
+  border: 1px solid #d2dbe6;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #143655;
+  background: #ffffff;
+}

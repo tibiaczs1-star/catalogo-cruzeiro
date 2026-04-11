@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: catalogo-cruzeiro-web
+    runtime: node
+    rootDir: backend
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: TZ
+        value: America/Rio_Branco
+
+  - type: worker
+    name: catalogo-cruzeiro-worker
+    runtime: node
+    rootDir: backend
+    plan: starter
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: node workers/catalogo-autoupdate-worker.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: TZ
+        value: America/Rio_Branco
