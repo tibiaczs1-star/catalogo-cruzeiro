@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendas Locais | Catalogo Cruzeiro do Sul</title>
+    <meta
+      name="description"
+      content="Pagina filha de vendas locais para anunciar itens, servicos, veiculos, eletronicos, moda, casa e ofertas de Cruzeiro do Sul."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#102744" />
+    <link rel="canonical" href="{{SITE_URL}}/vendas.html" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css?v=20260415k" />
+    <link rel="stylesheet" href="./vendas-hub.css?v=20260415a" />
+  </head>
+  <body class="sales-page construction-mode">
+    <div class="sales-shell">
+      <header class="sales-topbar">
+        <a class="sales-brand" href="./index.html">
+          <img src="./assets/logo-czs.svg" alt="" />
+          <span>Catalogo Cruzeiro do Sul</span>
+        </a>
+        <nav aria-label="Menu de vendas">
+          <a href="./index.html">Home</a>
+          <a href="./ninjas.html">Ninjas</a>
+          <a href="./catalogo-servicos.html?modulo=locacao-transporte">Locacao e transporte</a>
+          <a class="featured" href="#anunciar">Anunciar venda</a>
+        </nav>
+      </header>
+
+      <aside class="launch-side-notice" aria-label="Aviso de pagina em construcao">
+        <span>subindo em breve...</span>
+        <strong>robos trabalhando</strong>
+      </aside>
+
+      <section class="launch-construction-banner" aria-label="Vendas Locais em construcao">
+        <div class="launch-construction-copy">
+          <span>modo construcao</span>
+          <strong>Vendas Locais esta subindo com robos organizando os cards do marketplace.</strong>
+          <p>
+            A vitrine ja mostra o caminho dos usados, mas lista publica, filtros, destaques
+            e revisao dos anuncios ainda estao sendo encaixados.
+          </p>
+        </div>
+        <div class="launch-construction-bots" aria-hidden="true">
+          <span class="launch-build-crane"></span>
+          <span class="launch-build-card card-a"></span>
+          <span class="launch-build-card card-b"></span>
+          <span class="launch-build-card card-c"></span>
+          <span class="launch-build-bot bot-a"></span>
+          <span class="launch-build-bot bot-b"></span>
+          <span class="launch-build-bot bot-c"></span>
+          <span class="launch-build-bot bot-d"></span>
+          <span class="launch-build-spark spark-a"></span>
+          <span class="launch-build-spark spark-b"></span>
+        </div>
+      </section>
+
+      <main class="sales-layout">
+        <section class="sales-hero">
+          <div class="sales-hero-copy">
+            <p class="sales-eyebrow">marketplace local de usados</p>
+            <h1>Anuncie celular, bike, movel, eletro e desapego local numa vitrine com cara de marketplace.</h1>
+            <p>
+              A pagina assume de vez a proposta de venda de usados com cara de feed local.
+              Celular, sofa, armario, bicicleta, fogao, ferramenta, roupa, item de bebe e outros achados
+              entram num fluxo de anuncio rapido para Cruzeiro do Sul e regiao.
+            </p>
+            <div class="sales-actions">
+              <a class="sales-button primary" href="#anunciar">Quero anunciar</a>
+              <a class="sales-button" href="#lista-vendas">Ver desapegos</a>
+            </div>
+          </div>
+
+          <div class="sales-hero-stage" aria-hidden="true">
+            <div class="sales-stage-grid"></div>
+            <span class="sales-orb orb-a"></span>
+            <span class="sales-orb orb-b"></span>
+
+            <figure class="sales-pop-portal">
+              <div class="sales-pop-portal-shell">
+                <div class="sales-pop-hud">
+                  <span>usados</span>
+                  <span>eletronicos</span>
+                  <span>casa</span>
+                  <span>retirada local</span>
+                </div>
+
+                <div class="sales-pop-frame">
+                  <img
+                    src="./assets/sales-warehouse-pixel.svg"
+                    alt="Ilustracao em pixel art com varios trabalhadores separando itens usados, empilhando produtos e levando caixas para a esteira do marketplace local"
+                    loading="eager"
+                    decoding="async"
+                  />
+                  <div class="sales-pop-glow glow-left"></div>
+                  <div class="sales-pop-glow glow-right"></div>
+                </div>
+              </div>
+
+              <figcaption class="sales-pop-caption">
+                <span>marketplace de usados trabalhando</span>
+                <strong>gente separando, empilhando e levando itens para a esteira como um mercado local de desapegos</strong>
+              </figcaption>
+            </figure>
+
+            <article class="sales-floating-card card-a sales-pop-card">
+              <span>desapego do dia</span>
+              <strong>Celular, mesa, bike, sofa e eletro usado entrando rapido na vitrine local.</strong>
+            </article>
+
+            <article class="sales-floating-card card-b sales-pop-card mobility">
+              <span>giro rapido</span>
+              <strong>Foto boa, estado do item, retirada combinada e entrega no bairro puxando contato.</strong>
+            </article>
+          </div>
+        </section>
+
+        <section class="sales-panel" id="anunciar">
+          <div class="sales-section-head">
+            <div>
+              <p class="sales-eyebrow">formulario de venda</p>
+              <h2>Anuncie item, servico ou oferta com contato direto.</h2>
+            </div>
+            <p>
+              Preencha os dados principais. O sistema salva no backend e mostra a venda na lista
+              por tipo, deixando tudo pronto para migrar para banco persistente na hospedagem.
+            </p>
+          </div>
+
+          <form class="sales-form" id="sales-form">
+            <div class="sales-form-grid">
+              <label>
+                <span>O que voce quer vender?</span>
+                <input name="title" maxlength="120" placeholder="Ex: bicicleta aro 29, celular, sofa, servico de frete" required />
+              </label>
+              <label>
+                <span>Tipo</span>
+                <select name="category" required>
+                  <option value="eletronicos">Eletronicos</option>
+                  <option value="veiculos">Veiculos e transporte</option>
+                  <option value="casa">Casa e moveis</option>
+                  <option value="moda">Moda e acessorios</option>
+                  <option value="servicos">Servicos</option>
+                  <option value="outros">Outros</option>
+                </select>
+              </label>
+              <label>
+                <span>Preco</span>
+                <input name="price" maxlength="60" placeholder="Ex: R$ 350 / a combinar" />
+              </label>
+              <label>
+                <span>Estado do item</span>
+                <input name="condition" maxlength="80" placeholder="Ex: novo, usado, revisado, seminovo" />
+              </label>
+              <label>
+                <span>Seu nome</span>
+                <input name="sellerName" maxlength="90" placeholder="Ex: Joao do Centro" />
+              </label>
+              <label>
+                <span>WhatsApp ou telefone</span>
+                <input name="phone" maxlength="32" placeholder="Ex: (68) 99999-9999" required />
+              </label>
+              <label>
+                <span>Bairro</span>
+                <input name="neighborhood" maxlength="90" placeholder="Ex: Centro, Remanso, Cruzeirao" />
+              </label>
+              <label>
+                <span>Entrega ou retirada</span>
+                <input name="deliveryMode" maxlength="120" placeholder="Ex: buscar no bairro / entrego com taxa" />
+              </label>
+              <label class="full">
+                <span>Descricao</span>
+                <textarea
+                  name="description"
+                  rows="5"
+                  maxlength="1200"
+                  placeholder="Conte detalhes, marca, tamanho, motivo da venda, forma de entrega e qualquer informacao que ajude a pessoa a decidir."
+                ></textarea>
+              </label>
+            </div>
+
+            <div class="sales-form-actions">
+              <button class="sales-button primary" type="submit">Publicar venda</button>
+              <p id="sales-form-status" aria-live="polite">Depois de enviar, a oferta aparece na lista abaixo.</p>
+            </div>
+          </form>
+        </section>
+
+        <section class="sales-panel" id="lista-vendas">
+          <div class="sales-section-head">
+            <div>
+              <p class="sales-eyebrow">lista publica</p>
+              <h2>Itens de venda por tipo.</h2>
+            </div>
+            <p>Use os filtros para navegar entre eletronicos, veiculos, casa, moda, servicos e outros.</p>
+          </div>
+
+          <div class="sales-filter-row" role="group" aria-label="Filtrar vendas por tipo">
+            <button class="sales-filter is-active" type="button" data-sales-filter="">Todos</button>
+            <button class="sales-filter" type="button" data-sales-filter="eletronicos">Eletronicos</button>
+            <button class="sales-filter" type="button" data-sales-filter="veiculos">Veiculos</button>
+            <button class="sales-filter" type="button" data-sales-filter="casa">Casa</button>
+            <button class="sales-filter" type="button" data-sales-filter="moda">Moda</button>
+            <button class="sales-filter" type="button" data-sales-filter="servicos">Servicos</button>
+            <button class="sales-filter" type="button" data-sales-filter="outros">Outros</button>
+          </div>
+
+          <p class="sales-status" id="sales-list-status">Carregando vendas...</p>
+          <div class="sales-list-grid" id="sales-list"></div>
+        </section>
+
+        <section class="sales-panel sales-market-panel" id="rodape-mercado">
+          <div class="sales-section-head">
+            <div>
+              <p class="sales-eyebrow">rodape do marketplace</p>
+              <h2>Categorias que mais giram num marketplace local de usados.</h2>
+            </div>
+            <p>
+              O rodape termina com as frentes que mais fazem sentido aqui:
+              eletronico, casa, mobilidade, moda, ferramenta e eletro para dar leitura rapida da oferta local.
+            </p>
+          </div>
+
+          <div class="sales-market-grid" aria-label="Cards de categorias de usados">
+            <article class="sales-market-card devices">
+              <span>eletronicos usados</span>
+              <h3>Celulares e notebooks</h3>
+              <p>Smartphone, tablet, notebook, videogame, monitor e acessorio que costumam girar rapido.</p>
+            </article>
+
+            <article class="sales-market-card home">
+              <span>casa e moveis</span>
+              <h3>Sofa, armario e mesa</h3>
+              <p>Itens grandes com retirada combinada, foto clara e negociacao direta pelo bairro.</p>
+            </article>
+
+            <article class="sales-market-card mobility">
+              <span>mobilidade</span>
+              <h3>Bikes e transporte</h3>
+              <p>Bicicleta, moto, capacete, cadeirinha e item de deslocamento com procura local forte.</p>
+            </article>
+
+            <article class="sales-market-card fashion">
+              <span>moda e infantil</span>
+              <h3>Roupa, calcado e bebe</h3>
+              <p>Lote, desapego, roupa semi nova, carrinho, berco e item infantil com giro constante.</p>
+            </article>
+
+            <article class="sales-market-card tools">
+              <span>obra e servico</span>
+              <h3>Ferramentas e oficina</h3>
+              <p>Parafusadeira, maquina, escada, compressor e itens de trabalho que pedem vitrine objetiva.</p>
+            </article>
+
+            <article class="sales-market-card electro">
+              <span>eletro e cozinha</span>
+              <h3>Fogao, geladeira e utilidade</h3>
+              <p>Item de casa, cozinha e rotina com espaco para condicao, retirada e bairro logo no card.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script defer src="./runtime-config.js?v=20260415d"></script>
+    <script defer src="./analytics-client.js?v=20260415c"></script>
+    <script defer src="./vendas.js?v=20260415b"></script>
+  </body>
+</html>

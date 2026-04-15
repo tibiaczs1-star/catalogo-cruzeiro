@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Parque de brincadeiras com turma cartoon</title>
+  <desc id="desc">Cena infantil diurna com escorregador, balões e personagens cartoon brincando no parque.</desc>
+  <defs>
+    <linearGradient id="skyPark" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#84ddff"/>
+      <stop offset="1" stop-color="#f8fbff"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#72d780"/>
+      <stop offset="1" stop-color="#53ba67"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#skyPark)"/>
+  <rect y="536" width="960" height="184" fill="url(#grass)"/>
+  <g fill="#ffffff">
+    <ellipse cx="184" cy="128" rx="54" ry="28"/>
+    <ellipse cx="230" cy="130" rx="36" ry="22"/>
+    <ellipse cx="716" cy="112" rx="48" ry="26"/>
+    <ellipse cx="756" cy="112" rx="34" ry="22"/>
+  </g>
+  <g transform="translate(560 214)">
+    <rect x="116" y="92" width="26" height="252" rx="13" fill="#ffb85e"/>
+    <rect x="248" y="92" width="26" height="252" rx="13" fill="#ffb85e"/>
+    <rect x="116" y="92" width="158" height="26" rx="13" fill="#ff8bb5"/>
+    <path d="M190 118c18 48 62 88 120 120v54c-62-18-108-52-144-98z" fill="#6fb8ff"/>
+    <circle cx="104" cy="148" r="18" fill="#ffd45c"/>
+    <circle cx="286" cy="156" r="18" fill="#59cc95"/>
+  </g>
+  <g transform="translate(120 230)">
+    <ellipse cx="162" cy="314" rx="146" ry="40" fill="#91d8ff" opacity=".26"/>
+    <circle cx="70" cy="56" r="24" fill="#ff8bb5"/>
+    <path d="M70 78v112" stroke="#8b6f4a" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="104" cy="92" r="24" fill="#ffd45c"/>
+    <path d="M104 114v98" stroke="#8b6f4a" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="136" cy="64" r="24" fill="#6fb8ff"/>
+    <path d="M136 86v110" stroke="#8b6f4a" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="168" cy="100" r="24" fill="#59cc95"/>
+    <path d="M168 122v96" stroke="#8b6f4a" stroke-width="10" stroke-linecap="round"/>
+    <g transform="translate(214 104)">
+      <circle cx="82" cy="62" r="48" fill="#ffd56d"/>
+      <ellipse cx="82" cy="132" rx="54" ry="72" fill="#7e80ff"/>
+      <polygon points="44,24 58,4 76,24" fill="#ff8a66"/>
+      <polygon points="120,24 106,4 88,24" fill="#ff8a66"/>
+      <circle cx="66" cy="60" r="6" fill="#243b53"/>
+      <circle cx="98" cy="60" r="6" fill="#243b53"/>
+      <path d="M64 84c8 10 16 14 26 14s20-4 30-14" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="8"/>
+      <rect x="36" y="190" width="22" height="76" rx="11" fill="#7e80ff"/>
+      <rect x="106" y="190" width="22" height="76" rx="11" fill="#7e80ff"/>
+      <rect x="16" y="124" width="28" height="22" rx="11" fill="#ffd56d"/>
+      <rect x="120" y="124" width="28" height="22" rx="11" fill="#ffd56d"/>
+    </g>
+  </g>
+  <g transform="translate(454 442)">
+    <ellipse cx="108" cy="104" rx="96" ry="28" fill="#aee39e" opacity=".36"/>
+    <circle cx="108" cy="24" r="18" fill="#ffffff"/>
+    <circle cx="86" cy="64" r="40" fill="#ffd8ea"/>
+    <ellipse cx="86" cy="118" rx="46" ry="54" fill="#ff8bb5"/>
+    <circle cx="72" cy="62" r="6" fill="#243b53"/>
+    <circle cx="100" cy="62" r="6" fill="#243b53"/>
+    <path d="M70 84c8 10 16 12 26 12 10 0 18-2 26-12" fill="none" stroke="#ff8c88" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="156" cy="58" r="30" fill="#91e4ff"/>
+    <ellipse cx="156" cy="106" rx="34" ry="42" fill="#59cc95"/>
+    <circle cx="146" cy="58" r="5" fill="#243b53"/>
+    <circle cx="166" cy="58" r="5" fill="#243b53"/>
+    <path d="M146 76c6 8 12 10 18 10 8 0 12-2 18-10" fill="none" stroke="#ff8c88" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

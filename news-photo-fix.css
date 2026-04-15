@@ -1,0 +1,60 @@
+.news-card.news-photo-fixed,
+.archive-card.news-photo-fixed,
+.live-feed-card.news-photo-fixed,
+.feed-card.news-photo-fixed {
+  --fallback-news-photo: var(--news-photo);
+}
+
+.news-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb),
+.archive-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb),
+.live-feed-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb),
+.feed-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb),
+:is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb).has-photo,
+:is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb).has-real-photo {
+  position: relative;
+  overflow: hidden;
+  background-color: #0d2238 !important;
+  background-image:
+    linear-gradient(180deg, rgba(9, 24, 39, 0.02), rgba(9, 24, 39, 0.32)),
+    var(--news-photo, var(--bg-image)) !important;
+  background-position: var(--bg-position, center) !important;
+  background-size: var(--bg-size, cover) !important;
+  background-repeat: no-repeat !important;
+  filter: saturate(1.08) contrast(1.04);
+}
+
+.news-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::before,
+.archive-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::before,
+.live-feed-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::before,
+.feed-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::before,
+:is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb).has-photo::before,
+:is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb).has-real-photo::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background-image:
+    linear-gradient(180deg, rgba(9, 24, 39, 0.02), rgba(9, 24, 39, 0.32)),
+    var(--news-photo, var(--bg-image)) !important;
+  background-position: var(--bg-position, center) !important;
+  background-size: var(--bg-size, cover) !important;
+  background-repeat: no-repeat !important;
+  opacity: 1 !important;
+  transform: none !important;
+  mix-blend-mode: normal !important;
+  filter: none !important;
+}
+
+.news-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::after,
+.archive-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::after,
+.live-feed-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::after,
+.feed-card.news-photo-fixed :is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb)::after,
+:is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb).has-photo::after,
+:is(.news-thumb, .archive-thumb, .live-feed-thumb, .feed-thumb, .mini-thumb).has-real-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.24), transparent 20%),
+    linear-gradient(180deg, transparent 46%, rgba(9, 24, 39, 0.35));
+}

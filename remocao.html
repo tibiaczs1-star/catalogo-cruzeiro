@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalogo Cruzeiro do Sul | Pedido de Remoção</title>
+    <meta
+      name="description"
+      content="Fluxo de pedido de revisão ou remoção de conteúdo do Catalogo Cruzeiro do Sul com análise manual."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260415e" />
+  </head>
+  <body class="detail-body">
+    <div class="page-shell">
+      <header class="site-header">
+        <div class="top-strip">
+          <p>Pedido de revisão ou remoção com análise manual do Catalogo Cruzeiro do Sul.</p>
+          <a href="./index.html">Voltar para a home</a>
+        </div>
+        <div class="masthead">
+          <a class="brand" href="./index.html" aria-label="Catalogo Cruzeiro do Sul">
+            <img src="./assets/logo-czs.svg" alt="" />
+            <div>
+              <span class="brand-kicker">Cruzeiro do Sul e Vale do Juruá</span>
+              <strong>Catalogo Cruzeiro do Sul</strong>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <main class="detail-main">
+        <section class="detail-shell reveal is-visible">
+          <p class="eyebrow">privacidade e moderação</p>
+          <h1>Solicitação de revisão ou remoção de conteúdo</h1>
+          <p class="detail-lede">
+            Pessoas citadas, retratadas ou responsáveis por material incorporado
+            podem solicitar correção de contexto, crédito, revisão editorial ou
+            remoção. A equipe fará uma verificação manual antes de manter, ajustar
+            ou remover o conteúdo.
+          </p>
+
+          <div class="detail-grid">
+            <form class="detail-content removal-form" id="removal-form">
+              <label for="full-name">Seu nome</label>
+              <input id="full-name" type="text" placeholder="Nome para identificação do pedido" />
+
+              <label for="contact-email">E-mail ou WhatsApp</label>
+              <input id="contact-email" type="text" placeholder="Seu melhor contato" />
+
+              <label for="page-link">Link da página ou notícia</label>
+              <input id="page-link" type="url" placeholder="https://..." />
+
+              <label for="reason">Qual conteúdo deve ser revisado?</label>
+              <textarea
+                id="reason"
+                rows="5"
+                placeholder="Explique se é foto, vídeo, matéria incorporada, legenda, contexto ou outro ponto."
+              ></textarea>
+
+              <label for="proof-file">Arquivo de referência para revisão manual</label>
+              <input id="proof-file" type="file" accept="image/*,video/*" />
+              <p class="field-note" id="proof-name">Nenhum arquivo selecionado.</p>
+
+              <div class="removal-actions">
+                <button type="submit" class="solid-button">Registrar pedido</button>
+                <a
+                  class="solid-button"
+                  href="https://wa.me/5568992269296?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20a%20revis%C3%A3o%20de%20uma%20foto%2C%20v%C3%ADdeo%20ou%20mat%C3%A9ria%20incorporada.%0A%0ALink%3A%0AMotivo%3A%0AContato%20para%20retorno%3A"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enviar pelo WhatsApp
+                </a>
+                <a class="outline-button" href="./index.html">Voltar sem enviar</a>
+              </div>
+
+              <p class="field-note" id="removal-status">
+                O pedido também pode ser enviado pelo WhatsApp 68 99226-9296.
+              </p>
+            </form>
+
+            <aside class="detail-aside" id="como-funciona">
+              <div class="detail-card">
+                <span>como funciona</span>
+                <strong>Revisão manual, não automática</strong>
+                <p>
+                  O site não faz reconhecimento facial automático. O arquivo de referência
+                  serve apenas para ajudar a equipe a localizar e revisar o pedido.
+                </p>
+              </div>
+
+              <div class="detail-card">
+                <span>o que acelera</span>
+                <ul>
+                  <li>Link exato da página</li>
+                  <li>Descrição clara do que incomoda</li>
+                  <li>Contato válido para retorno</li>
+                  <li>Arquivo opcional que ajude a conferência manual</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script defer src="./remocao.js?v=20260415a"></script>
+  </body>
+</html>

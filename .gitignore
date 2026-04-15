@@ -1,0 +1,35 @@
+# Arquivos locais do Windows / manutenção do PC (não sobem para produção)
+openclaude-ollama.ps1
+organizar_e_limpar_pc.ps1
+organizar_para_hd.ps1
+desativar_inicializacao_opcional.ps1
+dxdiag_gpu.txt
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependências e ambiente
+node_modules/
+.env
+.env.local
+.env.production
+.openclaude-profile.json
+
+# Artefatos temporários / automação local
+.chrome-headless-codex/
+.codex-temp/
+.edge-headless/
+recovered-chat-assets/
+recovered-vscode-chat-assets/
+cdp-diagnostic*.json
+playwright-*.png
+home-*-check.png
+mosaic-*.png
+startup-modal-*.png
+
+# OS
+Thumbs.db
+Desktop.ini

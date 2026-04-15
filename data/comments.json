@@ -1,0 +1,18 @@
+[
+  {
+    "id": "seed-comment-1",
+    "name": "Marina A.",
+    "badge": "Membro fundador",
+    "message": "O que me prende aqui e quando o site junta a noticia da rua com documento e linha do tempo. Ai vira servico, nao so opiniao.",
+    "createdAt": "2026-04-10T07:10:00-05:00",
+    "approved": true
+  },
+  {
+    "id": "seed-comment-2",
+    "name": "Paulo R.",
+    "badge": "Leitor nivel 9",
+    "message": "A secao de humor funciona melhor quando bate no assunto do dia com uma imagem forte e pouca enrolacao.",
+    "createdAt": "2026-04-10T07:18:00-05:00",
+    "approved": true
+  }
+]

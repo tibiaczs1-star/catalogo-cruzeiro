@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: catalogo-cruzeiro-web
+    runtime: node
+    rootDir: .
+    plan: starter
+    autoDeployTrigger: commit
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    disk:
+      name: catalogo-data
+      mountPath: /var/data/catalogo
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: TZ
+        value: America/Rio_Branco
+      - key: DATA_DIR
+        value: /var/data/catalogo
+      - key: SITE_URL
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: SUPER_ADMIN_USER
+        sync: false
+      - key: SUPER_ADMIN_PASSWORD
+        sync: false
+      - key: NINJAS_PIX_KEY
+        sync: false
+      - key: NINJAS_MERCHANT_NAME
+        sync: false
+      - key: NINJAS_MERCHANT_CITY
+        sync: false

@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F7F9FC"/>
+  <rect x="40" y="40" width="1120" height="550" rx="36" fill="url(#bg)"/>
+  <rect x="88" y="88" width="1024" height="454" rx="28" fill="#FFFFFF" fill-opacity="0.96"/>
+  <rect x="128" y="132" width="154" height="154" rx="30" fill="#1E3A5F"/>
+  <rect x="158" y="164" width="94" height="20" rx="10" fill="#4A90E2"/>
+  <rect x="158" y="204" width="94" height="14" rx="7" fill="#D9E8F8"/>
+  <rect x="158" y="232" width="72" height="14" rx="7" fill="#D9E8F8"/>
+  <path d="M163 255H248V267H193V281H240V293H193V307H248V319H163V255Z" fill="#FFFFFF"/>
+  <text x="318" y="198" fill="#1E3A5F" font-family="Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="2">CRUZEIRO DO SUL • ACRE</text>
+  <text x="318" y="278" fill="#1E3A5F" font-family="Arial, sans-serif" font-size="64" font-weight="700">Catalogo Cruzeiro do Sul</text>
+  <text x="318" y="336" fill="#4A90E2" font-family="Arial, sans-serif" font-size="26" font-weight="700">Jornal local com leitura moderna, rapida e preparada para web</text>
+  <rect x="318" y="384" width="632" height="2" fill="#D7E3F3"/>
+  <rect x="318" y="422" width="226" height="18" rx="9" fill="#4A90E2"/>
+  <rect x="318" y="458" width="598" height="18" rx="9" fill="#D7E3F3"/>
+  <rect x="318" y="492" width="532" height="18" rx="9" fill="#D7E3F3"/>
+  <rect x="934" y="132" width="130" height="130" rx="28" fill="#F2F2F2"/>
+  <rect x="962" y="164" width="74" height="14" rx="7" fill="#4A90E2"/>
+  <rect x="962" y="194" width="74" height="14" rx="7" fill="#D7E3F3"/>
+  <rect x="962" y="224" width="52" height="14" rx="7" fill="#D7E3F3"/>
+  <defs>
+    <linearGradient id="bg" x1="40" y1="40" x2="1160" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E3A5F"/>
+      <stop offset="0.58" stop-color="#284B73"/>
+      <stop offset="1" stop-color="#15304C"/>
+    </linearGradient>
+  </defs>
+</svg>

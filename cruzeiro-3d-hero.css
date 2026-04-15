@@ -1,0 +1,168 @@
+.crz3d-hero {
+  position: relative;
+  margin: 16px 0 20px;
+  min-height: clamp(300px, 40vw, 460px);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(176, 203, 228, 0.5);
+  background: #123a61;
+  box-shadow: 0 28px 56px rgba(9, 24, 40, 0.24);
+  transform-style: preserve-3d;
+}
+
+.crz3d-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.28), transparent 36%),
+    radial-gradient(circle at 76% 18%, rgba(162, 227, 255, 0.24), transparent 32%),
+    linear-gradient(160deg, rgba(12, 48, 84, 0.38), rgba(24, 87, 132, 0.25)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro_do_Sul-Acre%2C_Brasil.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.crz3d-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 18, 30, 0.14) 0%, rgba(7, 18, 30, 0.62) 100%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(219, 235, 251, 0.07) 0 1px,
+      transparent 1px 48px
+    );
+}
+
+.crz3d-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0.3px);
+  opacity: 0.85;
+  animation: crz3dFloat 8s ease-in-out infinite;
+}
+
+.crz3d-glow.g1 {
+  width: 120px;
+  height: 120px;
+  top: 12%;
+  right: 8%;
+  background: radial-gradient(circle, rgba(139, 229, 255, 0.85), rgba(73, 145, 214, 0.18));
+}
+
+.crz3d-glow.g2 {
+  width: 74px;
+  height: 74px;
+  top: 28%;
+  left: 11%;
+  animation-delay: 0.8s;
+  background: radial-gradient(circle, rgba(255, 216, 161, 0.95), rgba(212, 128, 75, 0.2));
+}
+
+.crz3d-glow.g3 {
+  width: 52px;
+  height: 52px;
+  top: 63%;
+  right: 22%;
+  animation-delay: 1.4s;
+  background: radial-gradient(circle, rgba(168, 243, 197, 0.82), rgba(67, 162, 115, 0.18));
+}
+
+.crz3d-content {
+  position: relative;
+  z-index: 6;
+  height: 100%;
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  padding: clamp(16px, 2.6vw, 30px);
+  color: #f7fbff;
+  transform: translateZ(60px);
+}
+
+.crz3d-kicker {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #cbe8ff;
+}
+
+.crz3d-title {
+  margin: 0;
+  font-size: clamp(1.45rem, 3.8vw, 3.2rem);
+  line-height: 1.04;
+  max-width: 900px;
+}
+
+.crz3d-sub {
+  margin: 0;
+  max-width: 860px;
+  color: #e6f2ff;
+  line-height: 1.5;
+}
+
+.crz3d-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.crz3d-btn {
+  text-decoration: none;
+  border-radius: 999px;
+  min-height: 36px;
+  padding: 8px 14px;
+  font-weight: 800;
+  font-size: 0.88rem;
+}
+
+.crz3d-btn.primary {
+  color: #fff;
+  background: linear-gradient(130deg, #d77e45, #b95e2d);
+  border: 1px solid transparent;
+  box-shadow: 0 10px 22px rgba(8, 20, 34, 0.32);
+}
+
+.crz3d-btn.ghost {
+  color: #f0f7ff;
+  border: 1px solid rgba(220, 235, 251, 0.44);
+  background: rgba(12, 36, 59, 0.34);
+}
+
+.crz3d-chip {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 7;
+  border-radius: 12px;
+  border: 1px solid rgba(220, 236, 252, 0.4);
+  background: rgba(11, 33, 55, 0.42);
+  color: #eef6ff;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transform: translateZ(80px);
+}
+
+.crz3d-chip strong {
+  color: #ffd7a5;
+}
+
+@keyframes crz3dFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.03);
+  }
+}
+
+@media (max-width: 900px) {
+  .crz3d-chip {
+    display: none;
+  }
+}

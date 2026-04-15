@@ -1,0 +1,6 @@
+footer [data-footer-label],
+footer .footer-project-label,
+footer .rodape-label-projeto {
+  display: none !important;
+}
+

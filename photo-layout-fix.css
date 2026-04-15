@@ -1,0 +1,56 @@
+.section-trending-buzz .photo-fit-frame {
+  position: relative;
+  width: 100%;
+  height: clamp(190px, 20vw, 290px) !important;
+  min-height: clamp(190px, 20vw, 290px) !important;
+  border-radius: 12px;
+  overflow: hidden;
+  background-size: cover !important;
+  background-position: center 28% !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 10px 24px rgba(9, 24, 42, 0.22);
+}
+
+.section-trending-buzz .photo-fit-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 19, 32, 0.08) 0%,
+    rgba(8, 19, 32, 0.28) 100%
+  );
+}
+
+.section-trending-buzz .photo-fit-img,
+.section-trending-buzz .photo-fit-frame > img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: cover !important;
+  object-position: 50% 28% !important;
+}
+
+.section-trending-buzz .photo-fit-frame.photo-portrait .photo-fit-img,
+.section-trending-buzz .photo-fit-frame.photo-portrait > img {
+  object-fit: contain !important;
+  background: radial-gradient(circle at center, #284a6f, #112d4d);
+}
+
+.section-trending-buzz .photo-fit-frame.photo-person-safe .photo-fit-img,
+.section-trending-buzz .photo-fit-frame.photo-person-safe > img {
+  object-position: 50% 22% !important;
+}
+
+.section-trending-buzz .photo-fit-frame.photo-face-focus .photo-fit-img,
+.section-trending-buzz .photo-fit-frame.photo-face-focus > img {
+  object-position: var(--face-pos, 50% 24%) !important;
+}
+
+@media (max-width: 900px) {
+  .section-trending-buzz .photo-fit-frame {
+    height: clamp(170px, 43vw, 250px) !important;
+    min-height: clamp(170px, 43vw, 250px) !important;
+  }
+}

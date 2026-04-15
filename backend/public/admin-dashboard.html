@@ -1,0 +1,1275 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Administrativo de Equipe • Catálogo Cruzeiro do Sul</title>
+    <style>
+      :root {
+        --bg: #f4efe4;
+        --card: #ffffff;
+        --ink: #102744;
+        --muted: #526179;
+        --accent: #b85e31;
+        --line: #e7ddc8;
+        --navy: #12365a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding:
+          calc(24px + env(safe-area-inset-top, 0px))
+          calc(24px + env(safe-area-inset-right, 0px))
+          calc(24px + env(safe-area-inset-bottom, 0px))
+          calc(24px + env(safe-area-inset-left, 0px));
+        background: radial-gradient(circle at top, #fff7eb, var(--bg));
+        color: var(--ink);
+        font-family: "Segoe UI", "Inter", sans-serif;
+      }
+
+      .wrap {
+        max-width: 1480px;
+        margin: 0 auto;
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 14px;
+        background: linear-gradient(130deg, #0d2a48, #1a4570);
+        color: #fff;
+        border-radius: 22px;
+        padding: 22px;
+        box-shadow: 0 22px 44px rgba(8, 25, 47, 0.28);
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      .hero p {
+        margin: 0;
+        color: #d9e5f3;
+        max-width: 72ch;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .row {
+        display: grid;
+        gap: 14px;
+      }
+
+      .kpis {
+        grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+        box-shadow: 0 10px 24px rgba(16, 39, 68, 0.08);
+      }
+
+      .card h2 {
+        margin: 0 0 14px;
+        font-size: 1.12rem;
+      }
+
+      .kpi-label {
+        margin: 0 0 10px;
+        color: var(--muted);
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .kpi-value {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 800;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: #f7fbff;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .pill.light {
+        background: #f5e7d7;
+        color: #74411f;
+        border-color: #ead4bb;
+      }
+
+      .table-wrap {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        width: 100%;
+        min-width: 640px;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        text-align: left;
+        border-bottom: 1px solid #eee5d4;
+        padding: 10px 6px;
+        font-size: 0.93rem;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .bar {
+        height: 10px;
+        border-radius: 999px;
+        background: #eef2f7;
+        overflow: hidden;
+      }
+
+      .bar > span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(90deg, #113968, #2f6ca6);
+      }
+
+      .stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.84rem;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .truncate {
+        max-width: 360px;
+        word-break: break-word;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-weight: 700;
+      }
+
+      .status {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: #fff2eb;
+        border: 1px solid #f1d3c1;
+        color: #7b3a18;
+      }
+
+      .admin-auth-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .admin-auth-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+      }
+
+      .field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .field span {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .field input {
+        width: 100%;
+        padding: 11px 12px;
+        border-radius: 12px;
+        border: 1px solid #dfd5c1;
+        background: #fff;
+        color: var(--ink);
+        font-size: 16px;
+      }
+
+      .mini-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .inventory-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 12px;
+      }
+
+      .inventory-item {
+        display: grid;
+        gap: 8px;
+        padding: 14px;
+        border-radius: 16px;
+        border: 1px solid #eee2cd;
+        background: linear-gradient(180deg, #fffdf8, #f7efe2);
+      }
+
+      .inventory-item strong {
+        font-size: 1rem;
+      }
+
+      .inventory-item code {
+        width: fit-content;
+        padding: 4px 7px;
+        border-radius: 999px;
+        background: #eef4fb;
+        color: #183b60;
+      }
+
+      .ready-pill {
+        width: fit-content;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: #e8f7ed;
+        color: #25643a;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      @media (max-width: 980px) {
+        body {
+          padding:
+            calc(16px + env(safe-area-inset-top, 0px))
+            calc(16px + env(safe-area-inset-right, 0px))
+            calc(16px + env(safe-area-inset-bottom, 0px))
+            calc(16px + env(safe-area-inset-left, 0px));
+        }
+
+        .card {
+          padding: 14px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        body {
+          padding:
+            calc(12px + env(safe-area-inset-top, 0px))
+            calc(12px + env(safe-area-inset-right, 0px))
+            calc(12px + env(safe-area-inset-bottom, 0px))
+            calc(12px + env(safe-area-inset-left, 0px));
+        }
+
+        .hero {
+          padding: 18px;
+        }
+
+        .hero h1 {
+          font-size: 1.6rem;
+        }
+
+        .actions .btn,
+        .hero-meta .pill {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 560px) {
+        th,
+        td {
+          font-size: 0.86rem;
+        }
+
+        table {
+          min-width: 560px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <h1>Administrativo de Equipe</h1>
+          <p>
+            Painel protegido por senha para acompanhar acessos, IPs, localização,
+            sessões, votos, opiniões, assinaturas e a saúde operacional do portal.
+          </p>
+        </div>
+        <div class="hero-meta">
+          <span class="pill" id="storageBadge">Storage carregando...</span>
+          <span class="pill" id="periodBadge">Janela completa</span>
+          <span class="pill" id="refreshBadge">Atualização a cada 60s</span>
+        </div>
+      </section>
+
+      <section class="card" id="accessCard" hidden>
+        <h2>Acesso administrativo</h2>
+        <p class="mini-note">
+          Use este bloco quando a senha nao abrir automaticamente ou quando o painel for aberto fora do servidor principal.
+        </p>
+        <form class="admin-auth-form" id="accessForm">
+          <div class="admin-auth-grid">
+            <label class="field">
+              <span>API base</span>
+              <input id="apiBaseInput" type="url" placeholder="http://localhost:3000" />
+            </label>
+            <label class="field">
+              <span>Token admin (opcional)</span>
+              <input id="tokenInput" type="text" placeholder="ADMIN_TOKEN" />
+            </label>
+            <label class="field">
+              <span>Usuario</span>
+              <input id="userInput" type="text" placeholder="admin" />
+            </label>
+            <label class="field">
+              <span>Senha</span>
+              <input id="passwordInput" type="password" placeholder="Sua senha de super admin" />
+            </label>
+          </div>
+          <div class="actions">
+            <button class="btn" type="submit">Entrar no dashboard</button>
+            <button class="btn" id="clearAccessButton" type="button">Limpar credenciais</button>
+          </div>
+          <p class="mini-note" id="accessFeedback"></p>
+        </form>
+      </section>
+
+      <section class="row kpis" id="kpis"></section>
+
+      <section class="row grid-2">
+        <article class="card">
+          <h2>Acessos por página</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Página</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="pagesBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Matérias mais vistas</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Matéria</th>
+                  <th>Categoria / fonte</th>
+                  <th>Views</th>
+                </tr>
+              </thead>
+              <tbody id="articlesBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="row grid-2">
+        <article class="card">
+          <h2>Pulso de votação</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Candidato / Cargo</th>
+                  <th>Votos</th>
+                </tr>
+              </thead>
+              <tbody id="votesBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Inventário de coleta de dados</h2>
+        <p class="mini-note">
+          Este bloco mostra o que o portal já coleta, para que serve e quais coleções estão prontas para migrar para banco persistente na hospedagem.
+        </p>
+        <div class="inventory-grid" id="inventoryGrid"></div>
+      </section>
+
+      <section class="row grid-2">
+        <article class="card">
+          <h2>Calor eleitoral</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Candidato / Cargo</th>
+                  <th>Clima</th>
+                  <th>Positivas / negativas</th>
+                  <th>Cidades</th>
+                </tr>
+              </thead>
+              <tbody id="heatBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Sentimento agregado</h2>
+          <div id="sentimentBoard" class="stack"></div>
+          <h2 style="margin-top:18px">Sinais de reeleição</h2>
+          <div id="reelectionBoard" class="stack"></div>
+        </article>
+      </section>
+
+      <section class="row grid-3">
+        <article class="card">
+          <h2>Dispositivos</h2>
+          <div id="deviceChart" class="stack"></div>
+        </article>
+
+        <article class="card">
+          <h2>Navegadores</h2>
+          <div id="browserChart" class="stack"></div>
+        </article>
+
+        <article class="card">
+          <h2>Consentimento de tracking</h2>
+          <div id="consentChart" class="stack"></div>
+        </article>
+      </section>
+
+      <section class="row grid-2">
+        <article class="card">
+          <h2>Cidades com mais acessos</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cidade</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="cityBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Países com mais acessos</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>País</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="countryBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="row grid-2">
+        <article class="card">
+          <h2>IPs com mais acessos</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>IP</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="ipBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Origem do tráfego</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Referrer</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="referrerBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Últimos acessos</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Quando</th>
+                <th>Página</th>
+                <th>Local</th>
+                <th>Navegador</th>
+                <th>IP</th>
+                <th>Visitante</th>
+                <th>Origem</th>
+              </tr>
+            </thead>
+            <tbody id="recentAccessBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="row grid-2">
+        <article class="card">
+          <h2>Opiniões e comentários recentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Autor</th>
+                  <th>Mensagem</th>
+                  <th>Local</th>
+                  <th>IP</th>
+                </tr>
+              </thead>
+              <tbody id="recentCommentsBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Votos recentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+              <tr>
+                <th>Quando</th>
+                <th>Candidato</th>
+                <th>Clima</th>
+                <th>Escopo</th>
+                <th>Local / eleitor</th>
+                <th>Observação</th>
+                <th>IP</th>
+              </tr>
+            </thead>
+            <tbody id="recentVotesBody"></tbody>
+          </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Assinaturas e contatos recentes</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Quando</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>WhatsApp</th>
+                <th>Origem</th>
+                <th>Local</th>
+                <th>IP</th>
+              </tr>
+            </thead>
+            <tbody id="recentSubscriptionsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="row grid-3">
+        <article class="card">
+          <h2>Pedidos Ninjas recentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Cliente / serviço</th>
+                  <th>Status</th>
+                  <th>Pix</th>
+                </tr>
+              </thead>
+              <tbody id="recentNinjasRequestsBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Currículos Ninjas recentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Profissional</th>
+                  <th>Plano</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentNinjasProfilesBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Vendas recentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Item</th>
+                  <th>Preço</th>
+                  <th>Contato</th>
+                </tr>
+              </thead>
+              <tbody id="recentSalesBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Aluguel VR recente</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Cliente</th>
+                  <th>Data / pacote</th>
+                  <th>Contato</th>
+                </tr>
+              </thead>
+              <tbody id="recentVrRentalBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="card actions">
+        <a class="btn" id="csvAccessLink" href="/api/admin/reports/access.csv" target="_blank">CSV de acessos</a>
+        <a class="btn" id="csvVotesLink" href="/api/admin/reports/votes.csv" target="_blank">CSV de votações</a>
+        <a class="btn" id="csvCommentsLink" href="/api/admin/reports/comments.csv" target="_blank">CSV de opiniões</a>
+        <a class="btn" id="csvSubscriptionsLink" href="/api/admin/reports/subscriptions.csv" target="_blank">CSV de assinaturas</a>
+        <a class="btn" id="rawVisitsLink" href="/api/admin/raw/visits?limit=100" target="_blank">Raw visitas (JSON)</a>
+        <a class="btn" id="rawCommentsLink" href="/api/admin/raw/comments?limit=100" target="_blank">Raw opiniões (JSON)</a>
+        <a class="btn" id="rawVotesLink" href="/api/admin/raw/votes?limit=100" target="_blank">Raw votos (JSON)</a>
+        <a class="btn" id="rawSubscriptionsLink" href="/api/admin/raw/subscriptions?limit=100" target="_blank">Raw assinaturas (JSON)</a>
+        <a class="btn" id="rawNinjasRequestsLink" href="/api/admin/raw/ninjasRequests?limit=100" target="_blank">Raw pedidos Ninjas</a>
+        <a class="btn" id="rawNinjasProfilesLink" href="/api/admin/raw/ninjasProfiles?limit=100" target="_blank">Raw currículos Ninjas</a>
+        <a class="btn" id="rawSalesLink" href="/api/admin/raw/salesListings?limit=100" target="_blank">Raw vendas</a>
+        <a class="btn" id="rawVrRentalLink" href="/api/admin/raw/vrRentalLeads?limit=100" target="_blank">Raw aluguel VR</a>
+        <a class="btn" id="aggregatorLink" href="/api/news/aggregator?limit=50" target="_blank">Agregador (JSON)</a>
+      </section>
+
+      <section class="status" id="statusBox" hidden></section>
+    </main>
+
+    <script>
+      const fmt = new Intl.NumberFormat("pt-BR");
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function formatDateTime(value) {
+        if (!value) return "-";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return escapeHtml(value);
+        return escapeHtml(
+          date.toLocaleString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          })
+        );
+      }
+
+      function renderBars(el, data) {
+        const entries = Object.entries(data || {}).sort((a, b) => b[1] - a[1]);
+        const max = entries[0]?.[1] || 1;
+        el.innerHTML =
+          entries
+            .map(([label, value]) => {
+              const width = Math.max(6, (value / max) * 100);
+              return `
+                <div>
+                  <div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:6px">
+                    <strong>${escapeHtml(label)}</strong>
+                    <span class="pill light">${fmt.format(value)}</span>
+                  </div>
+                  <div class="bar"><span style="width:${width}%"></span></div>
+                </div>
+              `;
+            })
+            .join("") || `<p class="muted">Sem dados ainda.</p>`;
+      }
+
+      function renderKeyValueRows(el, rows, keyField, emptyMessage) {
+        el.innerHTML =
+          rows
+            .map(
+              (row) => `
+                <tr>
+                  <td class="${keyField === "ip" ? "mono" : ""}">${escapeHtml(row[keyField] || "")}</td>
+                  <td><strong>${fmt.format(row.total || 0)}</strong></td>
+                </tr>
+              `
+            )
+            .join("") || `<tr><td colspan="2">${escapeHtml(emptyMessage)}</td></tr>`;
+      }
+
+      function renderRecentRows(el, rows, buildRow, colSpan, emptyMessage) {
+        el.innerHTML =
+          rows.map(buildRow).join("") ||
+          `<tr><td colspan="${colSpan}">${escapeHtml(emptyMessage)}</td></tr>`;
+      }
+
+      function renderInventory(rows) {
+        const el = document.getElementById("inventoryGrid");
+        if (!el) return;
+
+        el.innerHTML =
+          (rows || [])
+            .map(
+              (row) => `
+                <article class="inventory-item">
+                  <span class="ready-pill">${row.readyForDb ? "pronto para banco" : "pendente"}</span>
+                  <strong>${escapeHtml(row.label || row.key || "-")}</strong>
+                  <code>${fmt.format(row.total || 0)} registros</code>
+                  <p class="mini-note">${escapeHtml(row.purpose || "")}</p>
+                  <p class="mini-note"><strong>Origem:</strong> ${escapeHtml(row.source || "-")}</p>
+                </article>
+              `
+            )
+            .join("") || `<p class="muted">Inventário ainda não carregado.</p>`;
+      }
+
+      const ACCESS_STORAGE_KEY = "catalogo_admin_access_v1";
+
+      function normalizeBase(value) {
+        return String(value || "").trim().replace(/\/$/, "");
+      }
+
+      function getStoredAccess() {
+        try {
+          return JSON.parse(sessionStorage.getItem(ACCESS_STORAGE_KEY) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function saveStoredAccess(value) {
+        try {
+          sessionStorage.setItem(ACCESS_STORAGE_KEY, JSON.stringify(value || {}));
+        } catch {
+          // ignore
+        }
+      }
+
+      function clearStoredAccess() {
+        try {
+          sessionStorage.removeItem(ACCESS_STORAGE_KEY);
+        } catch {
+          // ignore
+        }
+      }
+
+      function encodeBasicAuth(user, password) {
+        if (!user || !password) return "";
+        try {
+          return `Basic ${btoa(`${user}:${password}`)}`;
+        } catch {
+          return "";
+        }
+      }
+
+      function resolveAccess() {
+        const params = new URLSearchParams(location.search);
+        const stored = getStoredAccess();
+        const apiBase = normalizeBase(
+          params.get("apiBase") ||
+            stored.apiBase ||
+            (location.protocol === "file:" ? "http://localhost:3000" : location.origin)
+        );
+        const token = String(params.get("token") || stored.token || "").trim();
+        const auth = String(stored.auth || "").trim();
+        const user = String(stored.user || "").trim();
+
+        return { apiBase, token, auth, user };
+      }
+
+      function buildHeaders(access) {
+        const headers = {};
+        if (access?.token) {
+          headers["x-admin-token"] = access.token;
+        }
+        if (access?.auth) {
+          headers.Authorization = access.auth;
+        }
+        return headers;
+      }
+
+      function syncAccessForm() {
+        const access = resolveAccess();
+        document.getElementById("apiBaseInput").value = access.apiBase || "";
+        document.getElementById("tokenInput").value = access.token || "";
+        document.getElementById("userInput").value = access.user || "admin";
+        document.getElementById("passwordInput").value = "";
+      }
+
+      function toggleAccessCard(visible, message = "") {
+        const card = document.getElementById("accessCard");
+        const feedback = document.getElementById("accessFeedback");
+        if (!card) return;
+        card.hidden = !visible;
+        if (feedback) {
+          feedback.textContent = message || "";
+        }
+      }
+
+      function renderHeatRows(el, rows, emptyMessage) {
+        el.innerHTML =
+          rows
+            .map(
+              (row) => `
+                <tr>
+                  <td>
+                    <strong>${escapeHtml(row.candidate || "-")}</strong><br />
+                    <span class="muted">${escapeHtml(row.office || "-")}${row.candidateParty ? ` • ${escapeHtml(row.candidateParty)}` : ""}</span>
+                  </td>
+                  <td><strong>${escapeHtml(row.heatLabel || "-")}</strong></td>
+                  <td><strong>${fmt.format(row.positive || 0)}</strong> / ${fmt.format(row.negative || 0)}</td>
+                  <td class="truncate">${escapeHtml(row.citiesLabel || "-")}</td>
+                </tr>
+              `
+            )
+            .join("") || `<tr><td colspan="4">${escapeHtml(emptyMessage)}</td></tr>`;
+      }
+
+      function setDownloadLinks(token, apiBase) {
+        const links = [
+          ["csvAccessLink", "/api/admin/reports/access.csv"],
+          ["csvVotesLink", "/api/admin/reports/votes.csv"],
+          ["csvCommentsLink", "/api/admin/reports/comments.csv"],
+          ["csvSubscriptionsLink", "/api/admin/reports/subscriptions.csv"],
+          ["rawVisitsLink", "/api/admin/raw/visits?limit=100"],
+          ["rawCommentsLink", "/api/admin/raw/comments?limit=100"],
+          ["rawVotesLink", "/api/admin/raw/votes?limit=100"],
+          ["rawSubscriptionsLink", "/api/admin/raw/subscriptions?limit=100"],
+          ["rawNinjasRequestsLink", "/api/admin/raw/ninjasRequests?limit=100"],
+          ["rawNinjasProfilesLink", "/api/admin/raw/ninjasProfiles?limit=100"],
+          ["rawSalesLink", "/api/admin/raw/salesListings?limit=100"],
+          ["rawVrRentalLink", "/api/admin/raw/vrRentalLeads?limit=100"],
+          ["aggregatorLink", "/api/news/aggregator?limit=50"]
+        ];
+
+        links.forEach(([id, path]) => {
+          const link = document.getElementById(id);
+          if (!link) return;
+          const absolute = `${apiBase || ""}${path}`;
+          const separator = path.includes("?") ? "&" : "?";
+          link.href = token ? `${absolute}${separator}token=${encodeURIComponent(token)}` : absolute;
+        });
+      }
+
+      async function loadDashboard() {
+        const access = resolveAccess();
+        const statusBox = document.getElementById("statusBox");
+        setDownloadLinks(access.token, access.apiBase);
+        syncAccessForm();
+
+        try {
+          const response = await fetch(`${access.apiBase}/api/admin/dashboard`, {
+            headers: buildHeaders(access)
+          });
+
+          const data = await response.json().catch(() => ({}));
+          if (response.status === 401) {
+            toggleAccessCard(true, "Informe usuario e senha de super admin ou token admin para liberar o painel.");
+          }
+          if (!response.ok || data.ok === false) {
+            throw new Error(data.error || "Falha ao carregar o dashboard");
+          }
+
+          statusBox.hidden = true;
+          toggleAccessCard(location.protocol === "file:", location.protocol === "file:" ? "A tela esta conectada ao backend configurado abaixo." : "");
+
+          const totals = data?.totals || {};
+          const engagement = data?.engagement || {};
+          const storage = data?.storage || {};
+          const distributions = data?.distributions || {};
+
+          document.getElementById("storageBadge").textContent = `Storage: ${storage.mode || "desconhecido"} • ${storage.target || "-"}`;
+          document.getElementById("periodBadge").textContent =
+            data?.period?.from || data?.period?.to
+              ? `Filtro: ${formatDateTime(data.period.from)} até ${formatDateTime(data.period.to)}`
+              : "Janela completa";
+
+          const ipTotal = Object.keys(distributions.ip || {}).length;
+          const kpis = [
+            ["Acessos", totals.accesses || 0],
+            ["Visitantes únicos", totals.uniqueVisitors || 0],
+            ["Sessões", totals.uniqueSessions || 0],
+            ["IPs únicos", ipTotal],
+            ["Comentários / opiniões", totals.comments || 0],
+            ["Assinaturas", totals.subscriptions || 0],
+            ["Apoiadores confirmados", totals.supporters || 0],
+            ["Ninjas pedidos", totals.ninjasRequests || 0],
+            ["Ninjas currículos", totals.ninjasProfiles || 0],
+            ["Vendas publicadas", totals.salesListings || 0],
+            ["Pedidos aluguel VR", totals.vrRentalLeads || 0],
+            ["Votações", totals.votes || 0],
+            ["Opiniões eleitorais", totals.opinions || 0],
+            ["Tempo médio sessão", `${fmt.format(engagement.avgSessionSec || 0)}s`],
+            ["Heartbeat médio", `${fmt.format(engagement.avgHeartbeatSec || 0)}s`]
+          ];
+
+          document.getElementById("kpis").innerHTML = kpis
+            .map(
+              ([label, value]) => `
+                <article class="card">
+                  <p class="kpi-label">${escapeHtml(label)}</p>
+                  <p class="kpi-value">${escapeHtml(value)}</p>
+                </article>
+              `
+            )
+            .join("");
+
+          renderKeyValueRows(
+            document.getElementById("pagesBody"),
+            data.topPages || [],
+            "pagePath",
+            "Sem páginas registradas."
+          );
+          renderRecentRows(
+            document.getElementById("articlesBody"),
+            data.mostViewedArticles || [],
+            (row) => `
+              <tr>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.title || row.slug || "-")}</strong><br />
+                  <span class="mono">${escapeHtml(row.slug || "")}</span>
+                </td>
+                <td>${escapeHtml(`${row.category || "-"}${row.source ? ` / ${row.source}` : ""}`)}</td>
+                <td><strong>${fmt.format(row.total || 0)}</strong></td>
+              </tr>
+            `,
+            3,
+            "Sem matérias rastreadas por slug ainda."
+          );
+          renderKeyValueRows(
+            document.getElementById("votesBody"),
+            data.voteBoard || [],
+            "candidate",
+            "Sem votos ainda."
+          );
+          renderHeatRows(
+            document.getElementById("heatBody"),
+            data.electoralHeat || [],
+            "Sem calor eleitoral ainda."
+          );
+          renderBars(document.getElementById("sentimentBoard"), {
+            Positivas: data?.sentimentTotals?.positivo || 0,
+            Negativas: data?.sentimentTotals?.negativo || 0,
+            Mistas: data?.sentimentTotals?.misto || 0,
+            Neutras: data?.sentimentTotals?.neutro || 0
+          });
+          renderBars(document.getElementById("reelectionBoard"), {
+            "Favorável à reeleição": data?.reelectionTotals?.favoravel || 0,
+            "Sinal de desgaste": data?.reelectionTotals?.desgaste || 0,
+            Neutro: data?.reelectionTotals?.neutro || 0
+          });
+          renderBars(document.getElementById("deviceChart"), distributions.device || {});
+          renderBars(document.getElementById("browserChart"), distributions.browser || {});
+          renderBars(document.getElementById("consentChart"), distributions.consent || {});
+          renderKeyValueRows(
+            document.getElementById("cityBody"),
+            Object.entries(distributions.city || {})
+              .map(([city, total]) => ({ city, total }))
+              .sort((a, b) => b.total - a.total)
+              .slice(0, 20),
+            "city",
+            "Sem dados de cidade."
+          );
+          renderKeyValueRows(
+            document.getElementById("countryBody"),
+            data.topCountries || [],
+            "country",
+            "Sem dados de país."
+          );
+          renderKeyValueRows(
+            document.getElementById("ipBody"),
+            data.topIps || [],
+            "ip",
+            "Sem IPs registrados."
+          );
+          renderKeyValueRows(
+            document.getElementById("referrerBody"),
+            data.topReferrers || [],
+            "referrer",
+            "Sem referrers registrados."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentAccessBody"),
+            data.recentVisits || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.at)}</td>
+                <td class="truncate">${escapeHtml(row.pagePath || "/")}</td>
+                <td>${escapeHtml(`${row.city || "-"} / ${row.country || "-"}`)}</td>
+                <td>${escapeHtml(row.browser || "-")}</td>
+                <td class="mono">${escapeHtml(row.ip || "-")}</td>
+                <td class="mono">${escapeHtml(row.visitorId || "-")}</td>
+                <td>${escapeHtml(row.referrerHost || "direto")}</td>
+              </tr>
+            `,
+            7,
+            "Sem acessos recentes."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentCommentsBody"),
+            data.recentComments || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td>${escapeHtml(row.author || "-")}</td>
+                <td class="truncate">${escapeHtml(row.message || "-")}</td>
+                <td>${escapeHtml(row.city || "-")}</td>
+                <td class="mono">${escapeHtml(row.ip || "-")}</td>
+              </tr>
+            `,
+            5,
+            "Sem opiniões recentes."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentVotesBody"),
+            data.recentVotes || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.at)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.candidateName || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.office || "-")}${row.candidateParty ? ` • ${escapeHtml(row.candidateParty)}` : ""}</span>
+                </td>
+                <td>
+                  <strong>${escapeHtml(row.sentiment || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.reelectionSignal || "-")}</span>
+                </td>
+                <td>${escapeHtml(row.scope || "-")}</td>
+                <td>
+                  <strong>${escapeHtml(row.city || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.voterName || "anonimo")}</span>
+                </td>
+                <td class="truncate">
+                  ${escapeHtml(row.observation || "-")}
+                  ${row.voterParty ? `<br /><span class="muted">apoio: ${escapeHtml(row.voterParty)}</span>` : ""}
+                </td>
+                <td class="mono">${escapeHtml(row.ip || "-")}</td>
+              </tr>
+            `,
+            7,
+            "Sem votos recentes."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentSubscriptionsBody"),
+            data.recentSubscriptions || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td>${escapeHtml(row.name || "-")}</td>
+                <td>${escapeHtml(row.email || "-")}</td>
+                <td>${escapeHtml(row.whatsapp || "-")}</td>
+                <td class="truncate">${escapeHtml(row.sourcePage || "-")}</td>
+                <td>${escapeHtml(row.city || "-")}</td>
+                <td class="mono">${escapeHtml(row.ip || "-")}</td>
+              </tr>
+            `,
+            7,
+            "Sem assinaturas recentes."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentNinjasRequestsBody"),
+            data.recentNinjasRequests || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.name || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.service || row.type || "-")}</span>
+                </td>
+                <td>${escapeHtml(row.status || "-")}</td>
+                <td class="mono">${escapeHtml(row.txid || row.paymentStatus || "-")}</td>
+              </tr>
+            `,
+            4,
+            "Sem pedidos Ninjas ainda."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentNinjasProfilesBody"),
+            data.recentNinjasProfiles || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.name || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.area || "-")}</span>
+                </td>
+                <td>${escapeHtml(`${row.plan || "gratis"} / ${row.credits || 0} créditos`)}</td>
+                <td>${escapeHtml(row.status || row.paymentStatus || "-")}</td>
+              </tr>
+            `,
+            4,
+            "Sem currículos Ninjas ainda."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentSalesBody"),
+            data.recentSalesListings || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.title || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.category || "-")}</span>
+                </td>
+                <td>${escapeHtml(row.price || "-")}</td>
+                <td class="truncate">${escapeHtml(`${row.sellerName || "-"} ${row.phone ? `/ ${row.phone}` : ""}`)}</td>
+              </tr>
+            `,
+            4,
+            "Sem vendas cadastradas ainda."
+          );
+
+          renderRecentRows(
+            document.getElementById("recentVrRentalBody"),
+            data.recentVrRentalLeads || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.name || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.city || "-")}</span>
+                </td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.rentalDate || "a combinar")}</strong><br />
+                  <span class="muted">${escapeHtml(`${row.period || "a combinar"} / ${row.package || "-"}`)}</span>
+                </td>
+                <td class="truncate">${escapeHtml(row.phone || "-")}</td>
+              </tr>
+            `,
+            4,
+            "Sem pedidos de VR ainda."
+          );
+
+          renderInventory(data.collectionInventory || []);
+        } catch (error) {
+          statusBox.hidden = false;
+          statusBox.textContent = error?.message || "Falha ao carregar o dashboard.";
+        }
+      }
+
+      document.getElementById("accessForm")?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const apiBase = normalizeBase(document.getElementById("apiBaseInput")?.value || "");
+        const token = String(document.getElementById("tokenInput")?.value || "").trim();
+        const user = String(document.getElementById("userInput")?.value || "").trim();
+        const password = String(document.getElementById("passwordInput")?.value || "");
+        const auth = token ? "" : encodeBasicAuth(user, password);
+
+        saveStoredAccess({
+          apiBase,
+          token,
+          auth,
+          user
+        });
+
+        toggleAccessCard(true, "Tentando autenticar no dashboard...");
+        loadDashboard();
+      });
+
+      document.getElementById("clearAccessButton")?.addEventListener("click", () => {
+        clearStoredAccess();
+        syncAccessForm();
+        toggleAccessCard(true, "Credenciais locais removidas.");
+      });
+
+      syncAccessForm();
+      if (location.protocol === "file:") {
+        toggleAccessCard(true, "Informe a API base e a senha para conectar este HTML ao backend.");
+      }
+
+      loadDashboard();
+      setInterval(loadDashboard, 60000);
+    </script>
+  </body>
+</html>

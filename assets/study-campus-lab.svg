@@ -1,0 +1,76 @@
+<svg width="900" height="700" viewBox="0 0 900 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="110" y1="82" x2="774" y2="610" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFDF8"/>
+      <stop offset="0.54" stop-color="#F2EEE4"/>
+      <stop offset="1" stop-color="#E8EFE3"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="178" y1="430" x2="732" y2="622" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#D9C19A"/>
+      <stop offset="1" stop-color="#B48D58"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="410" y1="210" x2="630" y2="392" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F8FBC"/>
+      <stop offset="1" stop-color="#6C8A64"/>
+    </linearGradient>
+    <linearGradient id="book" x1="182" y1="316" x2="334" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDC875"/>
+      <stop offset="1" stop-color="#CB9440"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="900" height="700" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="700" rx="38" fill="url(#bg)"/>
+  <ellipse cx="182" cy="126" rx="120" ry="82" fill="#4F8FBC" fill-opacity="0.12" filter="url(#shadow)"/>
+  <ellipse cx="724" cy="112" rx="112" ry="78" fill="#D29A38" fill-opacity="0.1" filter="url(#shadow)"/>
+
+  <rect x="140" y="452" width="620" height="140" rx="34" fill="url(#desk)"/>
+  <rect x="168" y="426" width="566" height="34" rx="17" fill="#D5B585"/>
+
+  <rect x="388" y="180" width="254" height="166" rx="28" fill="#1E2E39"/>
+  <rect x="406" y="198" width="218" height="128" rx="20" fill="url(#screen)"/>
+  <rect x="452" y="348" width="124" height="16" rx="8" fill="#233845"/>
+  <rect x="430" y="364" width="166" height="24" rx="12" fill="#304854"/>
+
+  <rect x="180" y="286" width="146" height="196" rx="20" fill="url(#book)"/>
+  <rect x="196" y="304" width="114" height="162" rx="12" fill="#FFF9EA"/>
+  <rect x="218" y="330" width="72" height="12" rx="6" fill="#D29A38"/>
+  <rect x="218" y="354" width="64" height="9" rx="4.5" fill="#6C8A64" fill-opacity="0.72"/>
+  <rect x="218" y="372" width="54" height="9" rx="4.5" fill="#4F8FBC" fill-opacity="0.52"/>
+
+  <rect x="592" y="282" width="112" height="178" rx="22" fill="#DCE7DD"/>
+  <rect x="608" y="302" width="80" height="18" rx="9" fill="#6C8A64"/>
+  <rect x="608" y="332" width="66" height="10" rx="5" fill="#4F8FBC" fill-opacity="0.72"/>
+  <rect x="608" y="350" width="56" height="10" rx="5" fill="#D29A38" fill-opacity="0.72"/>
+  <rect x="608" y="368" width="72" height="10" rx="5" fill="#20303B" fill-opacity="0.24"/>
+
+  <path d="M288 510C310 470 360 454 404 472C444 488 472 526 472 566H294C286 548 281 528 288 510Z" fill="#F6F1E5"/>
+  <path d="M324 506C342 482 378 472 408 482C434 490 452 518 452 546H322C318 532 316 518 324 506Z" fill="#4F8FBC" fill-opacity="0.16"/>
+
+  <path d="M522 250C522 224 543 203 569 203C595 203 616 224 616 250V430H522V250Z" fill="#FFF8EB"/>
+  <rect x="540" y="430" width="58" height="54" rx="16" fill="#D29A38"/>
+  <rect x="548" y="212" width="42" height="206" rx="21" fill="#F6EEE1"/>
+  <path d="M528 266C528 243 546 225 569 225C592 225 610 243 610 266V350H528V266Z" fill="#DFF0F8"/>
+  <path d="M548 246H590V286C590 299.255 579.255 310 566 310H548V246Z" fill="#4F8FBC" fill-opacity="0.42"/>
+
+  <rect x="340" y="250" width="78" height="112" rx="18" fill="#FFF8EB"/>
+  <rect x="352" y="264" width="54" height="10" rx="5" fill="#4F8FBC"/>
+  <rect x="352" y="286" width="42" height="8" rx="4" fill="#20303B" fill-opacity="0.28"/>
+  <rect x="352" y="304" width="48" height="8" rx="4" fill="#6C8A64" fill-opacity="0.42"/>
+  <rect x="352" y="322" width="36" height="8" rx="4" fill="#D29A38" fill-opacity="0.5"/>
+
+  <circle cx="244" cy="172" r="48" fill="#FFF8EB"/>
+  <path d="M228 170C228 155.641 239.641 144 254 144C268.359 144 280 155.641 280 170V200H228V170Z" fill="#4F8FBC" fill-opacity="0.34"/>
+  <circle cx="254" cy="160" r="18" fill="#20303B" fill-opacity="0.24"/>
+
+  <path d="M644 182L660 214H628L644 182Z" fill="#D29A38"/>
+  <path d="M706 206L718 230H694L706 206Z" fill="#4F8FBC"/>
+  <path d="M320 148L334 176H306L320 148Z" fill="#6C8A64"/>
+
+  <text x="192" y="520" fill="#20303B" font-family="Arial, sans-serif" font-size="24" font-weight="700">LEITURA</text>
+  <text x="592" y="500" fill="#20303B" font-family="Arial, sans-serif" font-size="24" font-weight="700">PLANO</text>
+  <text x="430" y="232" fill="#F7F8F3" font-family="Arial, sans-serif" font-size="20" font-weight="700">BUSCA DE ASSUNTOS</text>
+  <text x="430" y="262" fill="#F7F8F3" fill-opacity="0.86" font-family="Arial, sans-serif" font-size="15">trilhas • materias • rotina • TCC</text>
+</svg>

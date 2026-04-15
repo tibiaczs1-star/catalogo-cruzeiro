@@ -1,0 +1,38 @@
+.acre-photo-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+.acre-photo-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 18, 30, 0.22) 0%,
+    rgba(8, 18, 30, 0.54) 58%,
+    rgba(8, 18, 30, 0.82) 100%
+  );
+}
+
+.acre-photo-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.acre-photo-card :where(h1, h2, h3, h4, p, span, a, strong, small, time, .meta) {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(6, 13, 23, 0.62);
+}
+
+.acre-photo-card :where(.tag, .chip, .kicker, .eyebrow, .category, [class*="tag"], [class*="category"]) {
+  background: color-mix(in srgb, #0f2946 82%, transparent 18%) !important;
+  border: 1px solid color-mix(in srgb, #ffffff 36%, transparent 64%) !important;
+  color: #ffffff !important;
+}

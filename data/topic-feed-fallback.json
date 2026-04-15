@@ -1,0 +1,197 @@
+{
+  "study": [
+    {
+      "sourceName": "Inside Higher Ed",
+      "sourceUrl": "https://www.insidehighered.com/news/governance/executive-leadership/2026/04/09/presidents-puzzled-rebuilding-public-trust-higher",
+      "title": "Presidents Puzzled on Rebuilding Public Trust in Higher Ed",
+      "summary": "Levantamento da Inside Higher Ed mostra dirigentes tentando recuperar confianca publica nas universidades enquanto cobram mudancas mais claras na experiencia estudantil.",
+      "publishedAt": "2026-04-09T12:00:00.000Z",
+      "category": "Educacao",
+      "topicGroup": "campus"
+    },
+    {
+      "sourceName": "Inside Higher Ed",
+      "sourceUrl": "https://www.insidehighered.com/news/quick-takes/2026/01/23/key-podcast-teaching-students-agency-age-ai",
+      "title": "The Key Podcast: Teaching Students Agency in the Age of AI",
+      "summary": "Podcast da Inside Higher Ed defende que universidade e escola precisam devolver autonomia aos estudantes em vez de tratar a IA so como atalho ou ameaca.",
+      "publishedAt": "2026-01-23T12:00:00.000Z",
+      "category": "Educacao",
+      "topicGroup": "edtech"
+    },
+    {
+      "sourceName": "EdSurge",
+      "sourceUrl": "https://www.edsurge.com/news/2026-01-27-k-12-edtech-in-2026-five-trends-shaping-the-year-ahead",
+      "title": "K-12 Edtech in 2026: Five Trends Shaping the Year Ahead",
+      "summary": "EdSurge mapeia como escolas estao deixando a corrida por ferramenta nova e passando a cobrar uso consistente, impacto real e menos tecnologia sem proposito.",
+      "publishedAt": "2026-01-27T12:00:00.000Z",
+      "category": "Educacao",
+      "topicGroup": "edtech"
+    },
+    {
+      "sourceName": "EdSurge",
+      "sourceUrl": "https://www.edsurge.com/news/2026-03-30-from-hello-world-to-ai-what-skills-actually-prepare-students-for-the-future",
+      "title": "From \"Hello, World!\" to AI: What Skills Actually Prepare Students for the Future?",
+      "summary": "A pauta discute quais habilidades seguem valendo para os estudantes quando a tecnologia muda rapido e o uso de IA ainda nao tem um papel claro em sala.",
+      "publishedAt": "2026-03-30T12:00:00.000Z",
+      "category": "Educacao",
+      "topicGroup": "edtech"
+    },
+    {
+      "sourceName": "The Hechinger Report",
+      "sourceUrl": "https://hechingerreport.org/faster-thinner-colleges-bachelors-degree-three-years/",
+      "title": "Faster, thinner: Colleges are swiftly trimming a B.A. degree to three years",
+      "summary": "Reportagem da Hechinger mostra faculdades acelerando bacharelados de tres anos para reduzir custo, encurtar trajetoria e responder a pressao por retorno mais rapido.",
+      "publishedAt": "2026-03-11T12:00:00.000Z",
+      "category": "Educacao",
+      "topicGroup": "acesso"
+    },
+    {
+      "sourceName": "The Hechinger Report",
+      "sourceUrl": "https://hechingerreport.org/",
+      "title": "The quest to build a better AI tutor",
+      "summary": "A Hechinger acompanha pesquisas tentando criar tutores de IA que ajudem de verdade sem virar resposta pronta ou dependencia para os alunos.",
+      "publishedAt": "2026-04-06T12:00:00.000Z",
+      "category": "Educacao",
+      "topicGroup": "mundo"
+    }
+  ],
+  "kids": [
+    {
+      "sourceName": "YouTube Blog",
+      "sourceUrl": "https://blog.youtube/",
+      "title": "Who will take home $1M? YouTube To host live MrBeast competition with 50 top streamers",
+      "summary": "YouTube levou MrBeast, IShowSpeed e dezenas de streamers para um evento ao vivo de um milhao de dolares, reforcando o peso dos creators no entretenimento global.",
+      "publishedAt": "2026-04-03T12:00:00.000Z",
+      "category": "Creators",
+      "topicGroup": "creators"
+    },
+    {
+      "sourceName": "YouTube Blog",
+      "sourceUrl": "https://blog.youtube/",
+      "title": "New YouTube report shows how online animators are reshaping the entertainment industry",
+      "summary": "Novo relatorio do YouTube mostra o salto dos animadores independentes e como series feitas para a internet estao ganhando status de fenomeno cultural.",
+      "publishedAt": "2026-04-09T12:00:00.000Z",
+      "category": "Cartoons",
+      "topicGroup": "animation"
+    },
+    {
+      "sourceName": "YouTube Blog",
+      "sourceUrl": "https://blog.youtube/news-and-events/youtube-creator-partnerships-newfronts-2026/",
+      "title": "Discover a new era of brand and creator partnerships on YouTube",
+      "summary": "YouTube apresentou um pacote novo para aproximar marcas e criadores, reforcando como creators viraram parte central do mercado global de video e cultura digital.",
+      "publishedAt": "2026-03-23T12:00:00.000Z",
+      "category": "Creators",
+      "topicGroup": "creators"
+    },
+    {
+      "sourceName": "Xbox Wire",
+      "sourceUrl": "https://news.xbox.com/en-us/2026/03/17/xbox-game-pass-march-2026-wave-2/",
+      "title": "Coming to Xbox Game Pass: Disco Elysium, Resident Evil 7: Biohazard, Final Fantasy IV and More",
+      "summary": "A leva do Game Pass trouxe mistura de terror, RPG classico, party game e aventura casual, mostrando como catalogos seguem ditando conversa entre jovens jogadores.",
+      "publishedAt": "2026-03-17T12:00:00.000Z",
+      "category": "Games",
+      "topicGroup": "games"
+    },
+    {
+      "sourceName": "PlayStation Blog",
+      "sourceUrl": "https://blog.playstation.com/2026/04/01/playstation-plus-monthly-games-for-april-lords-of-the-fallen-tomb-raider-i-iii-remastered-sword-art-online-fractured-daydream/",
+      "title": "PlayStation Plus Monthly Games for April: Lords of the Fallen, Tomb Raider I-III Remastered, Sword Art Online Fractured Daydream",
+      "summary": "O lineup de abril da PS Plus juntou acao, nostalgia e anime com Sword Art Online, ajudando a ligar games e franquias reconhecidas na mesma conversa.",
+      "publishedAt": "2026-04-01T12:00:00.000Z",
+      "category": "Games",
+      "topicGroup": "games"
+    },
+    {
+      "sourceName": "Crunchyroll",
+      "sourceUrl": "https://www.crunchyroll.com/simulcastcalendar?date=2026-04-02&filter=premium",
+      "title": "Ascendance of a Bookworm Season 4 and Welcome to Demon School! Iruma-kun Season 4 hit the simulcast calendar",
+      "summary": "O calendario global da Crunchyroll marcou estreias fortes no comeco de abril e reforcou o peso de sagas com fandom fiel na temporada.",
+      "publishedAt": "2026-04-04T12:00:00.000Z",
+      "category": "Anime",
+      "topicGroup": "anime"
+    }
+  ],
+  "games": [
+    {
+      "sourceName": "Nintendo",
+      "sourceUrl": "https://www.nintendo.com/us/store/products/nintendo-switch-2-mario-kart-world-121472/",
+      "title": "Mario Kart World chega como vitrine do Nintendo Switch 2",
+      "summary": "O site da Nintendo confirma mundo conectado, corridas online com ate 24 pilotos e modos como Grand Prix, Knockout Tour e Free Roam.",
+      "publishedAt": "2026-04-15T12:00:00.000Z",
+      "category": "Games",
+      "topicGroup": "premieres"
+    },
+    {
+      "sourceName": "Xbox Wire",
+      "sourceUrl": "https://news.xbox.com/es-latam/2026/04/07/proximamente-en-xbox-game-pass-kiln-hades-ii-vampire-crawlers-y-mas/",
+      "title": "Coming to Xbox Game Pass: Kiln, Hades II, Vampire Crawlers, and More",
+      "summary": "O Wave 1 de abril no Game Pass destacou Kiln, Hades II e Vampire Crawlers, abrindo caminho para descoberta rapida de jogo novo.",
+      "publishedAt": "2026-04-07T12:00:00.000Z",
+      "category": "Games",
+      "topicGroup": "premieres"
+    },
+    {
+      "sourceName": "PlayStation Blog",
+      "sourceUrl": "https://blog.playstation.com/2026/04/01/playstation-plus-monthly-games-for-april-lords-of-the-fallen-tomb-raider-i-iii-remastered-sword-art-online-fractured-daydream/",
+      "title": "PlayStation Plus Monthly Games for April: Lords of the Fallen, Tomb Raider I-III Remastered, Sword Art Online Fractured Daydream",
+      "summary": "A selecao de abril juntou acao, remaster e anime reconhecivel para quem quer escolher uma campanha nova no fim de semana.",
+      "publishedAt": "2026-04-01T12:00:00.000Z",
+      "category": "Games",
+      "topicGroup": "premieres"
+    },
+    {
+      "sourceName": "Crunchyroll",
+      "sourceUrl": "https://www.crunchyroll.com/simulcastcalendar?date=2026-04-13",
+      "title": "Crunchyroll Simulcast Calendar tracks the anime week in real time",
+      "summary": "O calendario do simulcast continua sendo uma das formas mais rapidas de saber o que estreou, o que volta e o que esta em circulacao no fandom.",
+      "publishedAt": "2026-04-13T12:00:00.000Z",
+      "category": "Anime",
+      "topicGroup": "anime"
+    },
+    {
+      "sourceName": "YouTube Blog",
+      "sourceUrl": "https://blog.youtube/news-and-events/youtube-creator-partnerships-newfronts-2026/",
+      "title": "Discover a new era of brand and creator partnerships on YouTube",
+      "summary": "O YouTube reforcou como creator virou pauta comercial de primeira linha, conectando collab, influenciador e marca como noticia real.",
+      "publishedAt": "2026-03-23T12:00:00.000Z",
+      "category": "Creators",
+      "topicGroup": "creators"
+    },
+    {
+      "sourceName": "YouTube Blog",
+      "sourceUrl": "https://blog.youtube/",
+      "title": "Who will take home $1M? YouTube to host live MrBeast competition with 50 top streamers",
+      "summary": "MrBeast, IShowSpeed e outros streamers gigantes puxaram um evento de grande escala, bom gancho para a editoria de creators e influencia.",
+      "publishedAt": "2026-04-03T12:00:00.000Z",
+      "category": "Creators",
+      "topicGroup": "creators"
+    },
+    {
+      "sourceName": "GameSpot",
+      "sourceUrl": "https://www.gamespot.com/articles/crimson-desert-update-seemingly-replaces-ai-artwork/1100-6539094/",
+      "title": "Crimson Desert update seemingly replaces AI artwork",
+      "summary": "A leitura traz uma pegada de opiniao e critica, puxando debate sobre IA, etica e recepcao de blockbuster para dentro do portal.",
+      "publishedAt": "2026-04-14T12:00:00.000Z",
+      "category": "Opinion",
+      "topicGroup": "analysis"
+    },
+    {
+      "sourceName": "Adrenaline",
+      "sourceUrl": "https://www.adrenaline.com.br/reviews/review-pragmata/",
+      "title": "REVIEW | PRAGMATA",
+      "summary": "Review brasileira util para dar lastro de analise no hub, saindo um pouco do formato de noticia e entrando em leitura com criterio.",
+      "publishedAt": "2026-04-13T12:00:00.000Z",
+      "category": "Review",
+      "topicGroup": "analysis"
+    },
+    {
+      "sourceName": "GameSpot",
+      "sourceUrl": "https://www.gamespot.com/articles/the-super-mario-galaxy-movie-is-either-a-triumph-or-a-trainwreck-depending-on-who-you-ask/1100-6539157/",
+      "title": "The Super Mario Galaxy Movie Is Either A Triumph Or A Trainwreck, Depending On Who You Ask",
+      "summary": "O filme de Mario entrou na conversa com recepcao dividida, servindo como ponte entre cinema, game e discussao cultural.",
+      "publishedAt": "2026-04-01T12:00:00.000Z",
+      "category": "Movies",
+      "topicGroup": "movies"
+    }
+  ]
+}

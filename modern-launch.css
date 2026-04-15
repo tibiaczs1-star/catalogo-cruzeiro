@@ -1,0 +1,445 @@
+:root {
+  --bg: #ffffff;
+  --paper: rgba(255, 255, 255, 0.98);
+  --paper-strong: #ffffff;
+  --surface-soft: rgba(242, 242, 242, 0.94);
+  --surface-card: rgba(247, 250, 252, 0.96);
+  --surface-card-strong: #ffffff;
+  --ink: #18314d;
+  --muted: #5d7086;
+  --navy: #1e3a5f;
+  --navy-soft: #315981;
+  --copper: #4a90e2;
+  --copper-soft: #74acef;
+  --gold: #dbe8f8;
+  --sage: #7b92ae;
+  --line: rgba(30, 58, 95, 0.12);
+  --line-strong: rgba(30, 58, 95, 0.22);
+  --shadow: 0 24px 56px rgba(16, 39, 64, 0.1);
+  --shadow-strong: 0 32px 72px rgba(16, 39, 64, 0.14);
+  --pro-ink: #18314d;
+  --pro-paper: #ffffff;
+  --pro-cream: #ffffff;
+  --pro-bronze: #4a90e2;
+  --pro-gold: #dbe8f8;
+  --pro-cyan: #1e3a5f;
+  --pro-glass: rgba(255, 255, 255, 0.82);
+  --pro-shadow: 0 24px 64px rgba(16, 39, 64, 0.13);
+  --pro-soft-shadow: 0 16px 40px rgba(16, 39, 64, 0.09);
+}
+
+html {
+  background: #ffffff;
+}
+
+body,
+body.pro-design-ready,
+.kids-redesign-page,
+.study-redesign-page,
+.detail-body {
+  color: var(--ink);
+  font-family: "Sora", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(74, 144, 226, 0.14), transparent 24%),
+    radial-gradient(circle at 86% 12%, rgba(30, 58, 95, 0.1), transparent 28%),
+    linear-gradient(180deg, #ffffff 0%, #f7f9fc 54%, #eef3f8 100%);
+}
+
+body::before,
+body.pro-design-ready::before {
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(30, 58, 95, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 58, 95, 0.026) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+body.pro-design-ready::after {
+  opacity: 0.08;
+  background-image:
+    radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.95), transparent 1px),
+    radial-gradient(circle at 84% 12%, rgba(30, 58, 95, 0.55), transparent 1px),
+    radial-gradient(circle at 34% 78%, rgba(74, 144, 226, 0.56), transparent 1px);
+}
+
+h1,
+h2,
+h3,
+h4,
+.brand strong,
+.detail-shell h1,
+.logo-splash-brand-copy strong {
+  color: var(--navy);
+  font-family: "Outfit", "Sora", sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.eyebrow,
+.ticker-live-kicker,
+.brand-kicker,
+.students-brand span,
+.logo-splash-label {
+  color: var(--copper) !important;
+}
+
+.site-header,
+.site-header-stack,
+.students-topbar {
+  isolation: isolate;
+}
+
+.site-header-stack,
+.students-topbar,
+.masthead,
+.top-strip {
+  border-color: rgba(122, 160, 205, 0.28) !important;
+  box-shadow: 0 18px 56px rgba(16, 39, 64, 0.14) !important;
+}
+
+.site-header-stack::before,
+.students-topbar::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent),
+    radial-gradient(circle at var(--pro-mx) var(--pro-my), rgba(74, 144, 226, 0.18), transparent 16rem) !important;
+}
+
+.top-strip,
+.masthead,
+.students-topbar,
+.editorial-home .top-strip,
+.editorial-home .masthead,
+.editorial-home .site-header-stack {
+  background:
+    linear-gradient(135deg, rgba(30, 58, 95, 0.97), rgba(39, 75, 116, 0.93)) !important;
+}
+
+.top-strip p,
+.top-strip a,
+.editorial-home .top-strip p,
+.editorial-home .top-strip a,
+.main-nav a,
+.editorial-home .main-nav a,
+.students-mini-nav a,
+.brand strong,
+.brand-kicker,
+.editorial-home .brand strong,
+.editorial-home .brand-kicker,
+.students-brand strong,
+.students-brand span {
+  color: #f8fbff !important;
+}
+
+.main-nav a:hover,
+.editorial-home .main-nav a:hover,
+.students-mini-nav a:hover,
+.top-strip a:hover {
+  color: #bdddff !important;
+}
+
+.brand img {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 14px 32px rgba(10, 30, 56, 0.22);
+}
+
+.header-quick-links,
+.ticker,
+.ticker-live-shell,
+.section-block,
+.students-card,
+.detail-shell,
+.detail-card,
+.footer-map-shell,
+.footer-chat-box,
+.logo-splash-card {
+  border-color: var(--line) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+.header-quick-links,
+.ticker,
+.ticker-live-shell,
+.section-block,
+.students-card,
+.detail-shell,
+.detail-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 246, 251, 0.94)) !important;
+}
+
+.section-block::before,
+.students-card::before,
+.detail-shell::before {
+  background:
+    radial-gradient(circle at top right, rgba(74, 144, 226, 0.12), transparent 26%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.46), transparent 40%) !important;
+}
+
+.ticker::before,
+.ticker-live-shell::before {
+  background:
+    linear-gradient(90deg, rgba(74, 144, 226, 0.22), transparent),
+    radial-gradient(circle at top right, rgba(30, 58, 95, 0.12), transparent 32%) !important;
+}
+
+.ticker-chip {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(236, 243, 251, 0.92)) !important;
+  border-color: rgba(74, 144, 226, 0.18) !important;
+  box-shadow: 0 10px 24px rgba(16, 39, 64, 0.08) !important;
+}
+
+.ticker-chip-label {
+  background: rgba(30, 58, 95, 0.08) !important;
+  color: var(--navy) !important;
+}
+
+.ticker-chip-text,
+.ticker-live-copy p,
+.detail-card p,
+.detail-card li,
+.site-footer p,
+.students-card p,
+.section-block p {
+  color: var(--muted) !important;
+}
+
+.solid-button,
+.outline-button,
+.students-mini-nav a.featured {
+  border-radius: 999px !important;
+  font-family: "Outfit", "Sora", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+.solid-button,
+.students-mini-nav a.featured {
+  color: #ffffff !important;
+  border-color: rgba(74, 144, 226, 0.18) !important;
+  background: linear-gradient(135deg, #4a90e2, #2c6fbe) !important;
+  box-shadow: 0 12px 28px rgba(74, 144, 226, 0.28) !important;
+}
+
+.solid-button::before,
+.students-mini-nav a.featured::before {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.22), transparent 56%) !important;
+}
+
+.outline-button {
+  color: var(--navy) !important;
+  border-color: rgba(74, 144, 226, 0.32) !important;
+  background: rgba(255, 255, 255, 0.84) !important;
+}
+
+.solid-button:hover,
+.outline-button:hover,
+.students-mini-nav a.featured:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 36px rgba(16, 39, 64, 0.14) !important;
+}
+
+.site-footer,
+.detail-footer {
+  color: #e7f2ff;
+  border-color: rgba(117, 157, 205, 0.16) !important;
+  background:
+    radial-gradient(circle at top right, rgba(245, 180, 93, 0.18), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(88, 192, 217, 0.12), transparent 28%),
+    linear-gradient(160deg, #0d1c2b 0%, #14324a 52%, #173f45 100%) !important;
+}
+
+.site-footer h3,
+.site-footer h4,
+.site-footer .eyebrow,
+.detail-footer .eyebrow {
+  color: #ffffff !important;
+}
+
+.site-footer p,
+.site-footer small,
+.site-footer .footer-meta p,
+.site-footer .footer-chat p {
+  color: rgba(224, 237, 248, 0.9) !important;
+}
+
+.site-footer .footer-photo,
+.site-footer .footer-sitemap,
+.site-footer .footer-chat,
+.site-footer .footer-gallery,
+.site-footer .footer-map-card {
+  background:
+    radial-gradient(circle at top right, rgba(253, 193, 104, 0.12), transparent 26%),
+    linear-gradient(160deg, rgba(9, 21, 35, 0.84), rgba(13, 31, 48, 0.9)) !important;
+  border-color: rgba(189, 221, 255, 0.12) !important;
+  box-shadow: 0 20px 44px rgba(6, 14, 25, 0.22) !important;
+}
+
+.site-footer .footer-map-head a,
+.site-footer .footer-links a {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(189, 221, 255, 0.16) !important;
+  color: #f5fbff !important;
+}
+
+.footer-links a,
+.footer-sitemap a,
+.site-footer a {
+  color: #f1f8ff !important;
+}
+
+.site-footer .footer-sitemap a {
+  color: #d8ecff !important;
+}
+
+.site-footer .footer-sitemap a:hover,
+.site-footer .footer-links a:hover,
+.site-footer .footer-map-head a:hover {
+  color: #ffd79a !important;
+}
+
+.site-footer .footer-chat-box {
+  background: transparent !important;
+}
+
+.site-footer .footer-chat-box input {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #17314d !important;
+  border-color: rgba(189, 221, 255, 0.12) !important;
+}
+
+.site-footer .footer-chat-box button {
+  background: linear-gradient(135deg, #f4b45d, #d58b2f) !important;
+  color: #122335 !important;
+}
+
+.footer-chat-box {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.logo-splash {
+  background:
+    radial-gradient(circle at top left, rgba(74, 144, 226, 0.2), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(30, 58, 95, 0.16), transparent 28%),
+    linear-gradient(145deg, rgba(248, 251, 255, 0.98), rgba(236, 243, 251, 0.96)) !important;
+}
+
+.logo-splash-card {
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(242, 246, 251, 0.94)),
+    rgba(255, 255, 255, 0.92) !important;
+}
+
+.logo-splash-scene-frame {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 28%),
+    linear-gradient(180deg, #5d84af 0%, #1e3a5f 100%) !important;
+}
+
+.mosaic-item.has-real-photo {
+  background: #0d1828 !important;
+  background-image: none !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.mosaic-item.has-real-photo::before {
+  background-image:
+    linear-gradient(180deg, rgba(6, 16, 29, 0.16) 0%, rgba(6, 16, 29, 0.2) 28%, rgba(6, 16, 29, 0.78) 76%, rgba(6, 16, 29, 0.92) 100%),
+    var(--bg-image) !important;
+  background-position: center, var(--bg-position, center 35%) !important;
+  background-size: cover, var(--bg-size, cover) !important;
+  background-repeat: no-repeat, no-repeat !important;
+  filter: saturate(1.04) contrast(1.04) !important;
+}
+
+.mosaic-item.has-real-photo .mosaic-photo {
+  display: none !important;
+}
+
+.kids-redesign-page .students-topbar,
+.study-redesign-page .students-topbar {
+  background:
+    linear-gradient(135deg, rgba(30, 58, 95, 0.98), rgba(42, 79, 123, 0.95)) !important;
+}
+
+.kids-redesign-page .section-block,
+.kids-redesign-page .students-card,
+.study-redesign-page .section-block,
+.study-redesign-page .students-card {
+  border-color: rgba(74, 144, 226, 0.16) !important;
+}
+
+.kids-redesign-page .outline-button,
+.study-redesign-page .outline-button {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #f5fbff !important;
+  border-color: rgba(189, 221, 255, 0.34) !important;
+}
+
+.detail-hero-thumb,
+.footer-gallery-photo,
+.footer-photo {
+  box-shadow: 0 20px 44px rgba(16, 39, 64, 0.12);
+}
+
+@media (max-width: 720px) {
+  .top-strip,
+  .masthead,
+  .students-topbar,
+  .section-block,
+  .students-card,
+  .detail-shell {
+    border-radius: 24px !important;
+  }
+}
+
+/* Guarda final de contraste para cards com foto */
+.mosaic-copy,
+.mosaic-item.main .mosaic-copy,
+.mosaic-copy.compact {
+  background: linear-gradient(180deg, rgba(15, 34, 57, 0.78), rgba(8, 18, 33, 0.95)) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 18px 38px rgba(6, 16, 29, 0.28) !important;
+}
+
+.mosaic-item :is(h1, h2, h3, p, strong, small, a, span),
+.hero-grid article :is(h1, h2, h3, p, strong, small, a, span),
+.lead-story :is(h1, h2, h3, p, strong, small, a, span),
+.cover-story :is(h1, h2, h3, p, strong, small, a, span),
+.main-story-card :is(h1, h2, h3, p, strong, small, a, span),
+.edition-hero-card :is(h1, h2, h3, p, strong, small, a, span),
+.edition-visual-card :is(h1, h2, h3, p, strong, small, a, span) {
+  color: #ffffff !important;
+  text-shadow: 0 4px 16px rgba(4, 12, 22, 0.72) !important;
+}
+
+.mosaic-source,
+.hero-grid article .news-source,
+.lead-story .news-source,
+.cover-story .news-source,
+.main-story-card .news-source,
+.edition-hero-card .news-source,
+.edition-visual-card .news-source {
+  background: rgba(30, 58, 95, 0.94) !important;
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  color: #ffffff !important;
+}
+
+.mosaic-action,
+.hero-grid article .solid-button,
+.hero-grid article .outline-button {
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.mosaic-tag,
+.hero-grid article :is(.eyebrow, .card-kicker, .story-tag),
+.lead-story :is(.eyebrow, .card-kicker, .story-tag),
+.cover-story :is(.eyebrow, .card-kicker, .story-tag),
+.main-story-card :is(.eyebrow, .card-kicker, .story-tag),
+.edition-hero-card :is(.eyebrow, .card-kicker, .story-tag),
+.edition-visual-card :is(.eyebrow, .card-kicker, .story-tag) {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(255, 255, 255, 0.42) !important;
+  color: #17324f !important;
+  text-shadow: none !important;
+}

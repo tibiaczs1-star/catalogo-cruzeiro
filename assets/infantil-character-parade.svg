@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Turminha do clube infantil em desfile</title>
+  <desc id="desc">Ilustração ampla com quatro personagens cartoon infantis em desfile colorido com estrelas e confetes.</desc>
+  <defs>
+    <linearGradient id="paradeBg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff4ce"/>
+      <stop offset=".55" stop-color="#f0f8ff"/>
+      <stop offset="1" stop-color="#ffe6f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#paradeBg)"/>
+  <path d="M0 618c160-52 270-86 442-86 196 0 326 34 484 86 126 42 230 54 354 54v48H0z" fill="#7adf90"/>
+  <path d="M0 658c164-44 294-60 458-60 194 0 326 22 500 72 110 32 202 50 322 50H0z" fill="#5dbd77"/>
+  <g opacity=".85">
+    <circle cx="176" cy="122" r="22" fill="#ffd45c"/>
+    <circle cx="234" cy="176" r="14" fill="#ff8bb5"/>
+    <circle cx="350" cy="104" r="16" fill="#6fb8ff"/>
+    <circle cx="950" cy="130" r="18" fill="#59cc95"/>
+    <circle cx="1092" cy="182" r="16" fill="#ff8a66"/>
+  </g>
+  <g transform="translate(132 268)">
+    <ellipse cx="110" cy="288" rx="108" ry="30" fill="#8ace8c" opacity=".34"/>
+    <circle cx="110" cy="74" r="64" fill="#ffd8ea"/>
+    <ellipse cx="110" cy="168" rx="74" ry="102" fill="#ff8bb5"/>
+    <ellipse cx="70" cy="20" rx="24" ry="56" fill="#ffd8ea" transform="rotate(-12 70 20)"/>
+    <ellipse cx="150" cy="20" rx="24" ry="56" fill="#ffd8ea" transform="rotate(12 150 20)"/>
+    <circle cx="88" cy="74" r="8" fill="#243b53"/>
+    <circle cx="132" cy="74" r="8" fill="#243b53"/>
+    <path d="M90 104c10 14 24 20 42 20 16 0 30-6 42-20" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="10"/>
+    <rect x="56" y="270" width="26" height="112" rx="13" fill="#ff8bb5"/>
+    <rect x="138" y="270" width="26" height="112" rx="13" fill="#ff8bb5"/>
+  </g>
+  <g transform="translate(402 282)">
+    <ellipse cx="110" cy="274" rx="106" ry="28" fill="#8ace8c" opacity=".34"/>
+    <circle cx="110" cy="72" r="60" fill="#ffd56d"/>
+    <ellipse cx="110" cy="160" rx="72" ry="94" fill="#7e80ff"/>
+    <polygon points="64,26 82,0 102,28" fill="#ff8a66"/>
+    <polygon points="156,26 138,0 118,28" fill="#ff8a66"/>
+    <circle cx="90" cy="70" r="8" fill="#243b53"/>
+    <circle cx="130" cy="70" r="8" fill="#243b53"/>
+    <path d="M92 98c10 12 22 18 38 18 14 0 28-6 38-18" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="10"/>
+    <rect x="54" y="154" width="112" height="26" rx="13" fill="#ffffff" opacity=".76"/>
+  </g>
+  <g transform="translate(692 286)">
+    <ellipse cx="110" cy="270" rx="104" ry="28" fill="#8ace8c" opacity=".34"/>
+    <circle cx="110" cy="68" r="58" fill="#91e4ff"/>
+    <ellipse cx="110" cy="154" rx="70" ry="92" fill="#59cc95"/>
+    <ellipse cx="66" cy="58" rx="22" ry="28" fill="#91e4ff"/>
+    <ellipse cx="154" cy="58" rx="22" ry="28" fill="#91e4ff"/>
+    <circle cx="90" cy="66" r="8" fill="#243b53"/>
+    <circle cx="130" cy="66" r="8" fill="#243b53"/>
+    <path d="M90 96c10 12 20 16 36 16 14 0 26-4 40-16" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="10"/>
+    <circle cx="58" cy="166" r="18" fill="#ffffff" opacity=".72"/>
+    <circle cx="162" cy="166" r="18" fill="#ffffff" opacity=".72"/>
+  </g>
+  <g transform="translate(968 288)">
+    <ellipse cx="98" cy="266" rx="96" ry="28" fill="#8ace8c" opacity=".34"/>
+    <circle cx="98" cy="64" r="54" fill="#ffd7ea"/>
+    <ellipse cx="98" cy="150" rx="66" ry="88" fill="#ffb05e"/>
+    <circle cx="80" cy="62" r="8" fill="#243b53"/>
+    <circle cx="116" cy="62" r="8" fill="#243b53"/>
+    <path d="M78 90c8 12 18 16 30 16 12 0 20-4 32-16" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="10"/>
+    <path d="M40 170h116" stroke="#ffffff" stroke-width="12" stroke-linecap="round" opacity=".72"/>
+  </g>
+</svg>

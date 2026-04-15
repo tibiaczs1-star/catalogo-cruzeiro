@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Oficina de pintura com personagens infantis</title>
+  <desc id="desc">Ilustração infantil com personagens cartoon pintando em cavaletes, tintas e confetes coloridos.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff4c8"/>
+      <stop offset="1" stop-color="#ffe0f1"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffd37c"/>
+      <stop offset="1" stop-color="#ffb062"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#bg)"/>
+  <rect y="510" width="960" height="210" fill="url(#floor)"/>
+  <g fill="#ffffff" opacity=".88">
+    <ellipse cx="168" cy="134" rx="52" ry="28"/>
+    <ellipse cx="214" cy="138" rx="36" ry="22"/>
+    <ellipse cx="760" cy="110" rx="58" ry="30"/>
+    <ellipse cx="812" cy="110" rx="36" ry="22"/>
+  </g>
+  <g opacity=".9">
+    <circle cx="126" cy="214" r="18" fill="#ff8bb5"/>
+    <circle cx="194" cy="172" r="12" fill="#59cc95"/>
+    <circle cx="268" cy="226" r="14" fill="#6fb8ff"/>
+    <circle cx="740" cy="196" r="18" fill="#ffd45c"/>
+    <circle cx="820" cy="244" r="12" fill="#ff8a66"/>
+  </g>
+  <g transform="translate(124 220)">
+    <rect x="0" y="242" width="180" height="18" rx="9" fill="#d3834e"/>
+    <path d="M46 242l44-168 44 168" fill="none" stroke="#8d5831" stroke-width="12" stroke-linecap="round"/>
+    <rect x="72" y="64" width="60" height="102" rx="18" fill="#ffffff" stroke="#91d8ff" stroke-width="10"/>
+    <circle cx="96" cy="98" r="16" fill="#ffd45c"/>
+    <circle cx="114" cy="124" r="16" fill="#ff8bb5"/>
+    <circle cx="92" cy="134" r="12" fill="#59cc95"/>
+  </g>
+  <g transform="translate(386 224)">
+    <rect x="0" y="238" width="188" height="18" rx="9" fill="#d3834e"/>
+    <path d="M48 238l48-170 48 170" fill="none" stroke="#8d5831" stroke-width="12" stroke-linecap="round"/>
+    <rect x="76" y="58" width="66" height="110" rx="18" fill="#ffffff" stroke="#ffd17b" stroke-width="10"/>
+    <path d="M88 148c20-44 42-62 42-62s14 18 18 50" fill="none" stroke="#6fb8ff" stroke-width="14" stroke-linecap="round"/>
+    <path d="M100 120c8-18 18-28 26-34" fill="none" stroke="#59cc95" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(650 214)">
+    <rect x="0" y="250" width="184" height="18" rx="9" fill="#d3834e"/>
+    <path d="M44 250l44-176 44 176" fill="none" stroke="#8d5831" stroke-width="12" stroke-linecap="round"/>
+    <rect x="68" y="64" width="64" height="112" rx="18" fill="#ffffff" stroke="#ffb6d2" stroke-width="10"/>
+    <rect x="82" y="88" width="36" height="56" rx="18" fill="#ffd45c"/>
+    <circle cx="100" cy="114" r="8" fill="#ffffff"/>
+  </g>
+  <g transform="translate(248 370)">
+    <ellipse cx="88" cy="176" rx="90" ry="28" fill="#eab171" opacity=".36"/>
+    <circle cx="88" cy="58" r="48" fill="#ffd8ea"/>
+    <ellipse cx="88" cy="126" rx="56" ry="74" fill="#ff8bb5"/>
+    <circle cx="72" cy="56" r="6" fill="#243b53"/>
+    <circle cx="106" cy="56" r="6" fill="#243b53"/>
+    <path d="M72 82c10 10 22 14 34 14 12 0 22-4 32-14" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="8"/>
+    <rect x="128" y="104" width="56" height="18" rx="9" fill="#6fb8ff" transform="rotate(-24 128 104)"/>
+  </g>
+  <g transform="translate(478 388)">
+    <ellipse cx="80" cy="162" rx="84" ry="24" fill="#eab171" opacity=".36"/>
+    <circle cx="80" cy="52" r="44" fill="#ffd56d"/>
+    <ellipse cx="80" cy="116" rx="54" ry="68" fill="#59cc95"/>
+    <polygon points="40,20 54,0 72,20" fill="#ff8a66"/>
+    <polygon points="120,20 106,0 88,20" fill="#ff8a66"/>
+    <circle cx="64" cy="50" r="6" fill="#243b53"/>
+    <circle cx="96" cy="50" r="6" fill="#243b53"/>
+    <path d="M62 74c8 10 18 14 28 14s20-4 30-14" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="8"/>
+    <rect x="14" y="100" width="56" height="18" rx="9" fill="#ffd45c" transform="rotate(28 14 100)"/>
+  </g>
+  <g transform="translate(660 396)">
+    <ellipse cx="82" cy="154" rx="78" ry="22" fill="#eab171" opacity=".36"/>
+    <circle cx="82" cy="50" r="42" fill="#91e4ff"/>
+    <ellipse cx="82" cy="112" rx="50" ry="62" fill="#7e80ff"/>
+    <ellipse cx="48" cy="44" rx="18" ry="20" fill="#91e4ff"/>
+    <ellipse cx="116" cy="44" rx="18" ry="20" fill="#91e4ff"/>
+    <circle cx="68" cy="48" r="6" fill="#243b53"/>
+    <circle cx="96" cy="48" r="6" fill="#243b53"/>
+    <path d="M64 70c8 10 16 14 26 14 10 0 18-4 28-14" fill="none" stroke="#ff8c88" stroke-linecap="round" stroke-width="8"/>
+    <circle cx="132" cy="116" r="16" fill="#ff8bb5"/>
+  </g>
+</svg>

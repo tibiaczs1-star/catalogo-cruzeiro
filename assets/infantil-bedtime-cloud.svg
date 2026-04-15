@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Hora do conto nas nuvens</title>
+  <desc id="desc">Ilustração infantil noturna com lua, estrelas, nuvens e personagens ouvindo uma história.</desc>
+  <defs>
+    <linearGradient id="night" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#5b7dff"/>
+      <stop offset="1" stop-color="#8dc7ff"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e9f6ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#night)"/>
+  <circle cx="760" cy="134" r="74" fill="#fff1b8"/>
+  <g fill="#fff7cc">
+    <circle cx="164" cy="118" r="8"/>
+    <circle cx="226" cy="196" r="10"/>
+    <circle cx="312" cy="94" r="7"/>
+    <circle cx="420" cy="182" r="8"/>
+    <circle cx="590" cy="86" r="9"/>
+    <circle cx="846" cy="264" r="8"/>
+    <circle cx="702" cy="240" r="7"/>
+  </g>
+  <g fill="url(#cloud)">
+    <ellipse cx="242" cy="304" rx="112" ry="52"/>
+    <ellipse cx="338" cy="306" rx="88" ry="42"/>
+    <ellipse cx="512" cy="268" rx="106" ry="48"/>
+    <ellipse cx="610" cy="272" rx="84" ry="40"/>
+  </g>
+  <ellipse cx="474" cy="612" rx="364" ry="102" fill="#d7eefe"/>
+  <g transform="translate(192 350)">
+    <ellipse cx="112" cy="204" rx="116" ry="34" fill="#bedbff" opacity=".55"/>
+    <ellipse cx="112" cy="146" rx="94" ry="46" fill="#ffffff"/>
+    <circle cx="60" cy="120" r="18" fill="#ffd56d"/>
+    <circle cx="112" cy="124" r="18" fill="#ff8bb5"/>
+    <circle cx="164" cy="120" r="18" fill="#59cc95"/>
+    <rect x="68" y="64" width="88" height="64" rx="18" fill="#7e80ff"/>
+    <rect x="82" y="76" width="60" height="10" rx="5" fill="#ffffff" opacity=".75"/>
+    <rect x="82" y="94" width="46" height="10" rx="5" fill="#ffffff" opacity=".55"/>
+    <circle cx="100" cy="138" r="22" fill="#ffd8ea"/>
+    <circle cx="136" cy="138" r="22" fill="#91e4ff"/>
+    <circle cx="118" cy="158" r="18" fill="#ffd45c"/>
+  </g>
+  <g transform="translate(496 334)">
+    <ellipse cx="144" cy="220" rx="130" ry="34" fill="#bedbff" opacity=".55"/>
+    <ellipse cx="144" cy="152" rx="112" ry="54" fill="#ffffff"/>
+    <circle cx="88" cy="100" r="44" fill="#ffd8ea"/>
+    <ellipse cx="88" cy="160" rx="48" ry="62" fill="#ff8bb5"/>
+    <circle cx="72" cy="98" r="6" fill="#243b53"/>
+    <circle cx="104" cy="98" r="6" fill="#243b53"/>
+    <path d="M72 120c8 8 18 12 28 12 10 0 20-4 28-12" fill="none" stroke="#ff8c88" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="190" cy="110" r="42" fill="#91e4ff"/>
+    <ellipse cx="190" cy="164" rx="44" ry="56" fill="#59cc95"/>
+    <circle cx="176" cy="108" r="6" fill="#243b53"/>
+    <circle cx="204" cy="108" r="6" fill="#243b53"/>
+    <path d="M172 128c8 10 16 12 24 12 10 0 18-2 26-12" fill="none" stroke="#ff8c88" stroke-width="8" stroke-linecap="round"/>
+    <path d="M132 54h128l-36 34h-56z" fill="#7e80ff"/>
+  </g>
+  <g transform="translate(100 472)" fill="#ffffff" opacity=".82">
+    <circle cx="0" cy="0" r="8"/>
+    <circle cx="32" cy="12" r="6"/>
+    <circle cx="58" cy="-4" r="7"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "name": "catalogo-cruzeiro-do-sul",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Catálogo Cruzeiro do Sul - portal local com agregador e serviços",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

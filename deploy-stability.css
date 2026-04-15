@@ -1,0 +1,52 @@
+/* Deploy stability layer: keep news cards photographic and predictable. */
+.deploy-photo-ready {
+  position: relative !important;
+  overflow: hidden !important;
+  background: #10233c !important;
+}
+
+.deploy-photo-layer {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 80 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-image:
+    linear-gradient(180deg, rgba(8, 22, 38, 0.04), rgba(8, 22, 38, 0.36)),
+    var(--deploy-photo) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  filter: saturate(1.08) contrast(1.04) !important;
+  pointer-events: none !important;
+}
+
+.deploy-photo-ready::before {
+  opacity: 0 !important;
+}
+
+.deploy-photo-ready::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 90 !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(255, 255, 255, 0.2), transparent 22%),
+    linear-gradient(180deg, transparent 45%, rgba(8, 22, 38, 0.34)) !important;
+}
+
+.deploy-safe .news-card::before,
+.deploy-safe .archive-card::before,
+.deploy-safe .live-feed-card::before,
+.deploy-safe .feed-card::before {
+  display: none !important;
+}
+
+.deploy-safe .news-card,
+.deploy-safe .archive-card,
+.deploy-safe .live-feed-card,
+.deploy-safe .feed-card {
+  transform: none;
+}

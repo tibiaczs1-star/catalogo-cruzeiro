@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo Telefônico • Cruzeiro do Sul</title>
+    <link rel="stylesheet" href="catalogo-servicos.css?v=20260415c" />
+  </head>
+  <body class="catalogo-servicos-page">
+    <main class="svc-wrap">
+      <header class="svc-topbar">
+        <div>
+          Catálogo Cruzeiro do Sul • Serviços por módulo
+        </div>
+        <a href="index.html">Voltar para home</a>
+      </header>
+
+      <section class="svc-hero" id="svcHero">
+        <h1 id="svcTitle">Catálogo Telefônico</h1>
+        <p id="svcSubtitle">
+          Números por módulo: restaurantes, farmácias, saúde, emergência, transporte, locação, ninjas locais e utilidades.
+        </p>
+      </section>
+
+      <section class="svc-controls">
+        <input id="svcSearch" class="svc-search" placeholder="Buscar por nome, serviço ou telefone..." />
+        <div class="svc-tabs" id="svcTabs"></div>
+      </section>
+
+      <section class="svc-featured-shell" id="svcFeatured" hidden></section>
+
+      <section class="svc-grid" id="svcGrid"></section>
+
+      <section class="svc-disclaimer">
+        <strong>Transporte por app:</strong> há botão direto para Uber/99.
+        <strong>Locação e Transporte</strong> segue como módulo do catálogo e
+        <strong>Ninjas Cruzeiro</strong> agora também ganhou uma plataforma própria para pedidos,
+        Pix, currículos e oportunidades locais.
+      </section>
+
+      <section class="svc-sources" id="svcSources"></section>
+    </main>
+
+    <script defer src="runtime-config.js?v=20260415d"></script>
+    <script defer src="analytics-client.js?v=20260415c"></script>
+    <script defer src="catalogo-servicos-data.js?v=20260415c"></script>
+    <script defer src="catalogo-servicos.js?v=20260415c"></script>
+  </body>
+</html>

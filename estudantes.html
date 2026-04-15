@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Para Estudantes | Catalogo Cruzeiro do Sul</title>
+    <meta
+      name="description"
+      content="Hub estudantil com buscador de assuntos, trilhas da educacao infantil ate a faculdade, dicas de rotina, materiais e apoio para vida academica."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#1E3A5F" />
+    <meta name="color-scheme" content="light" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Catalogo Cruzeiro do Sul" />
+    <meta property="og:title" content="Para Estudantes | Catalogo Cruzeiro do Sul" />
+    <meta
+      property="og:description"
+      content="Hub estudantil com busca, trilhas por etapa, assuntos e apoio para a vida academica em um visual mais claro e organizado."
+    />
+    <meta property="og:image" content="{{SITE_URL}}/assets/og-cover.svg" />
+    <meta property="og:url" content="{{SITE_URL}}/estudantes.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="{{SITE_URL}}/estudantes.html" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="./assets/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Lexend:wght@400;500;700;800&family=Orbitron:wght@600;700;800&family=Outfit:wght@500;600;700;800&family=Sora:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=20260415e" />
+    <link rel="stylesheet" href="./pro-design.css?v=20260414c" />
+    <link rel="stylesheet" href="./subpages-redesign.css?v=20260415e" />
+    <link rel="stylesheet" href="./modern-launch.css?v=20260414a" />
+  </head>
+  <body class="students-page study-redesign-page">
+    <div class="page-shell">
+      <header class="students-topbar study-topbar">
+        <div class="students-brand">
+          <img src="./assets/logo-czs.svg" alt="Logo do Catalogo Cruzeiro do Sul" />
+          <div>
+            <span>campus hub</span>
+            <strong>Para estudantes</strong>
+          </div>
+        </div>
+        <nav class="students-mini-nav" aria-label="Menu da area de estudantes">
+          <a href="./index.html">Home</a>
+          <a href="#busca">Busca</a>
+          <a href="#wire-global">Mundo</a>
+          <a href="#trilhas">Trilhas</a>
+          <a href="#assuntos">Assuntos</a>
+          <a href="#faculdade">Faculdade</a>
+          <a class="featured" href="./infantil.html">Canal Tech Gamer</a>
+        </nav>
+      </header>
+
+      <main class="students-layout study-redesign-layout">
+        <section class="students-hero section-block study-campus-hero" id="busca">
+          <div class="study-hero-copy">
+            <p class="eyebrow">do primeiro ao ultimo grau</p>
+            <h1>Organize seus estudos com busca por assunto, trilhas e apoio ate a faculdade.</h1>
+            <p>
+              Busque materia, organize a semana, filtre por etapa e acompanhe sinais reais
+              do que esta mudando na educacao, do ensino basico ao campus.
+            </p>
+
+            <form class="study-search-panel" role="search" aria-label="Buscar assuntos de estudo">
+              <label for="study-search">Buscador de assuntos</label>
+              <div class="study-search-shell">
+                <input
+                  id="study-search"
+                  type="search"
+                  placeholder="Ex: alfabetizacao, fracoes, ingles, redacao, fisica, TCC, ABNT..."
+                />
+                <button type="button" class="solid-button" data-clear-study-search>Limpar</button>
+              </div>
+              <div class="study-filter-chips" role="group" aria-label="Filtros de etapa">
+                <button type="button" class="study-filter-chip is-active" data-study-filter="todos">Todos</button>
+                <button type="button" class="study-filter-chip" data-study-filter="infantil">Infantil</button>
+                <button type="button" class="study-filter-chip" data-study-filter="fundamental">Fundamental</button>
+                <button type="button" class="study-filter-chip" data-study-filter="medio">Ensino Medio</button>
+                <button type="button" class="study-filter-chip" data-study-filter="faculdade">Faculdade</button>
+              </div>
+              <p class="study-search-result" data-study-search-results aria-live="polite">
+                Mostrando 0 trilhas e assuntos.
+              </p>
+            </form>
+          </div>
+
+          <div class="study-hero-stage" data-subpage-reveal data-subpage-tilt>
+            <figure class="study-hero-main-photo">
+              <img
+                src="https://images.pexels.com/photos/6146978/pexels-photo-6146978.jpeg?cs=srgb&dl=pexels-keira-burton-6146978.jpg&fm=jpg"
+                alt="Grupo de estudantes sorrindo no gramado do campus com cadernos e notebook"
+                loading="eager"
+                referrerpolicy="no-referrer"
+              />
+              <figcaption>campus vibes, estudo em grupo, conversa leve e energia jovem</figcaption>
+            </figure>
+
+            <article class="study-hero-mini-card top">
+              <figure class="study-hero-mini-photo">
+                <img
+                  src="https://images.pexels.com/photos/6146983/pexels-photo-6146983.jpeg?cs=srgb&dl=pexels-keira-burton-6146983.jpg&fm=jpg"
+                  alt="Dois estudantes sorrindo enquanto revisam anotações no campus"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-hero-mini-copy">
+                <span>study date</span>
+                <strong>dupla focada</strong>
+                <p>anotacoes, cafe, laptop e um clima bem mais jovem.</p>
+              </div>
+            </article>
+
+            <article class="study-hero-mini-card bottom">
+              <figure class="study-hero-mini-photo">
+                <img
+                  src="https://images.pexels.com/photos/6147219/pexels-photo-6147219.jpeg?cs=srgb&dl=pexels-keira-burton-6147219.jpg&fm=jpg"
+                  alt="Tres estudantes sentados em degraus com notebook e cadernos"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-hero-mini-copy">
+                <span>crew do campus</span>
+                <strong>galera conectada</strong>
+                <p>cara de comunidade real, amigos e rotina universitaria viva.</p>
+              </div>
+            </article>
+
+            <div class="study-hero-lab-note" aria-hidden="true">
+              <img
+                src="./assets/study-campus-lab.svg"
+                alt=""
+              />
+              <span>planner + foco + repertorio</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="students-source-strip section-block study-metric-strip" aria-label="Destaques da area estudantil">
+          <article data-subpage-reveal data-subpage-tilt>
+            <span>etapas</span>
+            <strong>infantil ate faculdade</strong>
+            <p>Uma linha continua de estudo: brincar, alfabetizar, aprofundar, revisar e pesquisar.</p>
+          </article>
+          <article data-subpage-reveal data-subpage-tilt>
+            <span>busca</span>
+            <strong>assuntos e materias</strong>
+            <p>Filtro rapido para localizar portugues, matematica, ciencias, redacao, ingles e vida academica.</p>
+          </article>
+          <article data-subpage-reveal data-subpage-tilt>
+            <span>rotina</span>
+            <strong>plano realista</strong>
+            <p>Trilhas curtas, checklists, mapa semanal e menos cara de portal de noticias.</p>
+          </article>
+          <article data-subpage-reveal data-subpage-tilt>
+            <span>universidade</span>
+            <strong>TCC e pesquisa</strong>
+            <p>Dicas para faculdade, leitura academica, cronograma, ABNT, apresentacao e entrega final.</p>
+          </article>
+          <article data-subpage-reveal data-subpage-tilt>
+            <span>campus mood</span>
+            <strong>jovem e visual</strong>
+            <p>Rostos, grupo, rotina leve e vida de campus deixam o estudo mais proximo do dia a dia.</p>
+          </article>
+          <article data-subpage-reveal data-subpage-tilt>
+            <span>study squad</span>
+            <strong>grupo e projeto</strong>
+            <p>espaco para collab, trabalho em equipe, revisao com amigos e estudo acompanhado.</p>
+          </article>
+        </section>
+
+        <section
+          class="students-card section-block topic-wire-shell study-wire-shell"
+          id="wire-global"
+          data-topic-feed="study"
+          data-topic-feed-limit="11"
+        >
+          <div class="students-section-head">
+            <div>
+              <p class="eyebrow">wire global</p>
+              <h2>Educacao, campus e tecnologia com materias reais do mundo todo.</h2>
+            </div>
+            <p>
+              Acompanhe mudancas em universidade, ensino, IA, acesso e carreira com uma
+              curadoria internacional pensada para quem estuda e quer se manter atualizado.
+            </p>
+          </div>
+          <p class="topic-wire-status" data-topic-feed-status aria-live="polite">
+            Carregando pautas reais desta editoria...
+          </p>
+          <div class="topic-wire-grid" data-topic-feed-grid></div>
+        </section>
+
+        <section class="students-card section-block study-campus-vibe" id="vida-campus">
+          <div class="students-section-head">
+            <div>
+              <p class="eyebrow">vida de campus</p>
+              <h2>Vida de campus, amizade e rotina real para estudar sem se sentir sozinho.</h2>
+            </div>
+            <p>
+              Estudar tambem envolve grupo, revisao em dupla, agenda de prova, pausa, conversa
+              e vida de campus. Esta faixa abre espaco para esse lado mais humano da rotina.
+            </p>
+          </div>
+
+          <div class="study-campus-vibe-grid">
+            <article
+              class="study-campus-vibe-feature"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="vida no campus estudo em grupo estudantes felizes rotina jovem faculdade ensino medio colaboracao projeto"
+              data-study-filter="medio faculdade"
+            >
+              <figure class="study-campus-vibe-photo">
+                <img
+                  src="https://images.pexels.com/photos/6146971/pexels-photo-6146971.jpeg?cs=srgb&dl=pexels-keira-burton-6146971.jpg&fm=jpg"
+                  alt="Tres estudantes estudando juntos no gramado do campus"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-campus-vibe-copy">
+                <span>study squad</span>
+                <h3>Estudar tambem pode ser grupo, conversa boa e meta compartilhada.</h3>
+                <p>
+                  A rotina fica mais forte quando o estudante tem apoio: revisao em dupla,
+                  intervalos, combinados simples e metas pequenas para seguir sem travar.
+                </p>
+                <ul class="study-vibe-tags">
+                  <li>grupo no campus</li>
+                  <li>estudo acompanhado</li>
+                  <li>energia de juventude</li>
+                  <li>cara de universidade viva</li>
+                </ul>
+              </div>
+            </article>
+
+            <article
+              class="study-vibe-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="dupla de estudo cafe campus revisao anotacoes rotina feliz"
+              data-study-filter="fundamental medio faculdade"
+            >
+              <figure class="study-vibe-thumb">
+                <img
+                  src="https://images.pexels.com/photos/6146983/pexels-photo-6146983.jpeg?cs=srgb&dl=pexels-keira-burton-6146983.jpg&fm=jpg"
+                  alt="Dupla de estudantes no campus com notebook e café"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-vibe-card-copy">
+                <span>dupla inteligente</span>
+                <h3>Revisar em dois pode deixar a rotina mais leve e constante.</h3>
+                <p>Use para questoes em dupla, leitura guiada, ingles, redacao e preparo para prova.</p>
+              </div>
+            </article>
+
+            <article
+              class="study-vibe-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="amizade estudantil campus degraus notebook juventude social projeto"
+              data-study-filter="medio faculdade"
+            >
+              <figure class="study-vibe-thumb">
+                <img
+                  src="https://images.pexels.com/photos/6147219/pexels-photo-6147219.jpeg?cs=srgb&dl=pexels-keira-burton-6147219.jpg&fm=jpg"
+                  alt="Jovens estudantes felizes em degraus com notebook"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-vibe-card-copy">
+                <span>crew conectada</span>
+                <h3>Mais clima de galera, projeto e conversa de campus.</h3>
+                <p>Projetos em grupo, apresentacoes e revisao ficam mais leves quando a turma se organiza junto.</p>
+              </div>
+            </article>
+
+            <article
+              class="study-vibe-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="revisao no gramado anotacoes provas campus jovem feliz"
+              data-study-filter="fundamental medio faculdade"
+            >
+              <figure class="study-vibe-thumb">
+                <img
+                  src="https://images.pexels.com/photos/6147010/pexels-photo-6147010.jpeg?cs=srgb&dl=pexels-keira-burton-6147010.jpg&fm=jpg"
+                  alt="Dois estudantes revisando anotações ao ar livre"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-vibe-card-copy">
+                <span>revisao real</span>
+                <h3>Prova, agenda e foco sem pressao excessiva.</h3>
+                <p>Organize o que precisa revisar, marque as duvidas e deixe o proximo passo claro.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="students-card section-block" id="trilhas">
+          <div class="students-section-head">
+            <div>
+              <p class="eyebrow">trilhas por etapa</p>
+              <h2>Mais conteudo do primeiro ao ultimo grau de estudo.</h2>
+            </div>
+            <p>
+              O foco aqui e orientar o estudante pelo nivel certo: o que desenvolver, como
+              praticar, em que tipo de atividade insistir e quando subir de complexidade.
+            </p>
+          </div>
+
+          <div class="study-roadmap-grid">
+            <article
+              class="study-roadmap-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="educacao infantil brincar oralidade escuta coordenacao historia curta contagem cores rotina natureza"
+              data-study-filter="infantil fundamental"
+            >
+              <span class="stage-number">0 a 5</span>
+              <p class="eyebrow">educacao infantil</p>
+              <h3>Brincar, ouvir, falar, desenhar e descobrir o mundo.</h3>
+              <ul>
+                <li>Historias curtas com reconto oral.</li>
+                <li>Musica, corpo, movimento, pintura e encaixe.</li>
+                <li>Contagem simples, cores, tamanhos e rotina.</li>
+              </ul>
+            </article>
+
+            <article
+              class="study-roadmap-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="fundamental anos iniciais alfabetizacao leitura escrita interpretacao matematica basica dinheiro tempo medidas ciencias bairro familia"
+              data-study-filter="fundamental"
+            >
+              <span class="stage-number">1 ao 5</span>
+              <p class="eyebrow">anos iniciais</p>
+              <h3>Alfabetizacao, leitura fluente e problemas do cotidiano.</h3>
+              <ul>
+                <li>Leitura diaria com perguntas sobre personagem, lugar e acao.</li>
+                <li>Operacoes, dinheiro, horas e medidas em situacoes reais.</li>
+                <li>Textos curtos, ciencias basicas e producao de frases.</li>
+              </ul>
+            </article>
+
+            <article
+              class="study-roadmap-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="fundamental anos finais interpretacao porcentagem fracoes graficos ciencias historia geografia argumentos resumo caderno"
+              data-study-filter="fundamental"
+            >
+              <span class="stage-number">6 ao 9</span>
+              <p class="eyebrow">anos finais</p>
+              <h3>Interpretacao, matematica, ciencias e repertorio.</h3>
+              <ul>
+                <li>Resumos por tema, mapa mental e vocabulario da materia.</li>
+                <li>Fracoes, porcentagem, grafico, regra de tres e leitura critica.</li>
+                <li>Historia do Brasil, geografia, ciencias e producao de argumento.</li>
+              </ul>
+            </article>
+
+            <article
+              class="study-roadmap-card highlight"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="ensino medio enem saeb redacao literatura matematica fisica quimica biologia humanas cronograma vestibular"
+              data-study-filter="medio faculdade"
+            >
+              <span class="stage-number">1 a 3</span>
+              <p class="eyebrow">ensino medio</p>
+              <h3>Enem, redacao, exatas, humanas e revisao inteligente.</h3>
+              <ul>
+                <li>Questoes por area e correcao do erro no mesmo dia.</li>
+                <li>Redacao semanal com repertorio e proposta de intervencao.</li>
+                <li>Base forte em matematica antes de temas mais pesados.</li>
+              </ul>
+            </article>
+
+            <article
+              class="study-roadmap-card"
+              data-subpage-reveal
+              data-subpage-tilt
+              data-study-search="faculdade universidade TCC tcc abnt pesquisa artigo seminario metodologia resumo fichamento estagio apresentacao"
+              data-study-filter="faculdade"
+            >
+              <span class="stage-number">campus</span>
+              <p class="eyebrow">faculdade e TCC</p>
+              <h3>Pesquisa, leitura academica, ABNT, apresentacao e entrega.</h3>
+              <ul>
+                <li>Separar tema, problema, cronograma e fontes confiaveis.</li>
+                <li>Fazer fichamento desde cedo para nao sofrer no final.</li>
+                <li>Treinar slide, fala curta e defesa com clareza.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="students-grid study-core-grid">
+          <div class="students-stack">
+            <article class="students-card section-block" id="assuntos">
+              <div class="students-section-head compact">
+                <div>
+                  <p class="eyebrow">assuntos e materias</p>
+                  <h2>Cards pesquisaveis para achar o que estudar mais rapido.</h2>
+                </div>
+                <p>
+                  Os cards abaixo respondem ao buscador para consulta, reforco,
+                  planejamento e revisao por objetivo.
+                </p>
+              </div>
+
+              <div class="study-topic-grid">
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="alfabetizacao leitura escrita silabas palavras texto reconto fluencia"
+                  data-study-filter="infantil fundamental"
+                >
+                  <span>portugues inicial</span>
+                  <h3>Leitura, escrita e fluencia</h3>
+                  <p>Silabas, palavras, reconto, pontuacao basica e interpretacao de pequenos textos.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="matematica fracoes porcentagem geometria medidas tempo dinheiro regra de tres"
+                  data-study-filter="fundamental medio"
+                >
+                  <span>matematica</span>
+                  <h3>Numeros, fracoes, porcentagem e problemas</h3>
+                  <p>Da contagem e operacoes basicas ate graficos, geometria e leitura de dados.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="ciencias corpo humano plantas animais materia energia ecologia saude laboratorio"
+                  data-study-filter="fundamental medio"
+                >
+                  <span>ciencias</span>
+                  <h3>Natureza, corpo, saude e experimentacao</h3>
+                  <p>Observacao, curiosidade, fenomenos naturais, laboratorio e explicacoes do cotidiano.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="historia geografia brasil territorio sociedade cultura mapa tempo espaco cidadania"
+                  data-study-filter="fundamental medio"
+                >
+                  <span>humanas</span>
+                  <h3>Historia, geografia e repertorio</h3>
+                  <p>Tempo historico, mapas, regioes, sociedade, cultura e leitura de contexto local.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="ingles lingua estrangeira vocabulario leitura speaking listening gramatica"
+                  data-study-filter="fundamental medio faculdade"
+                >
+                  <span>ingles</span>
+                  <h3>Leitura de textos, vocabulario e pratica diaria</h3>
+                  <p>Palavras de uso frequente, leitura guiada, escuta, frases uteis e revisao continua.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="redacao enem argumento repertorio coesao introducao desenvolvimento conclusao"
+                  data-study-filter="medio faculdade"
+                >
+                  <span>redacao</span>
+                  <h3>Texto argumentativo e escrita academica</h3>
+                  <p>Estrutura, tese, repertorio, organizacao das ideias e fechamento com clareza.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="tecnologia programacao logica computacao cultura digital pesquisa online seguranca"
+                  data-study-filter="fundamental medio faculdade"
+                >
+                  <span>tecnologia</span>
+                  <h3>Computacao, logica e cultura digital</h3>
+                  <p>Pesquisa segura, pensamento computacional, organizacao digital e projetos criativos.</p>
+                </article>
+
+                <article
+                  class="study-topic-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="faculdade universidade tcc artigo abnt metodologia bibliografia fichamento seminario"
+                  data-study-filter="faculdade"
+                >
+                  <span>vida academica</span>
+                  <h3>TCC, ABNT, artigo e apresentacao</h3>
+                  <p>Pesquisa, fichamento, citacao, cronograma, slide, oralidade e entrega final.</p>
+                </article>
+              </div>
+            </article>
+
+            <article class="students-card section-block" id="materiais">
+              <div class="students-section-head compact">
+                <div>
+                  <p class="eyebrow">materiais e bases</p>
+                  <h2>Fontes seguras para consultar sem perder tempo.</h2>
+                </div>
+                <p>
+                  Consulte bases oficiais, provas, livros gratuitos e referencias para
+                  estudar com fonte confiavel.
+                </p>
+              </div>
+
+              <div class="study-resource-grid">
+                <article
+                  class="study-resource-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="bncc base nacional comum curricular competencias habilidades educacao"
+                  data-study-filter="infantil fundamental medio"
+                >
+                  <strong>BNCC</strong>
+                  <p>Base para saber o que precisa ser desenvolvido em cada etapa da educacao basica.</p>
+                  <a href="https://basenacionalcomum.mec.gov.br/" target="_blank" rel="noreferrer">Abrir BNCC</a>
+                </article>
+                <article
+                  class="study-resource-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="enem provas gabaritos inep simulados vestibular"
+                  data-study-filter="medio faculdade"
+                >
+                  <strong>Enem e Inep</strong>
+                  <p>Provas, gabaritos e referencias para treino serio no ensino medio.</p>
+                  <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/enem/provas-e-gabaritos/2025" target="_blank" rel="noreferrer">Treinar Enem</a>
+                </article>
+                <article
+                  class="study-resource-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="saeb matrizes leitura matematica ciencias referencia"
+                  data-study-filter="fundamental medio"
+                >
+                  <strong>Matrizes do Saeb</strong>
+                  <p>Mostram habilidades cobradas em leitura, matematica e outras areas.</p>
+                  <a href="https://www.gov.br/inep/pt-br/areas-de-atuacao/avaliacao-e-exames-educacionais/saeb/matrizes-e-escalas" target="_blank" rel="noreferrer">Ver matrizes</a>
+                </article>
+                <article
+                  class="study-resource-card"
+                  data-subpage-reveal
+                  data-subpage-tilt
+                  data-study-search="dominio publico livros literatura pesquisa classicos"
+                  data-study-filter="fundamental medio faculdade"
+                >
+                  <strong>Dominio Publico</strong>
+                  <p>Livros gratuitos para leitura, literatura e ampliacao de repertorio.</p>
+                  <a href="https://www.dominiopublico.gov.br/pesquisa/PesquisaObraForm.jsp" target="_blank" rel="noreferrer">Buscar livros</a>
+                </article>
+              </div>
+            </article>
+          </div>
+
+          <div class="students-stack">
+            <article class="students-card section-block study-planner-card">
+              <p class="eyebrow">rotina de estudo</p>
+              <h3>Plano semanal simples para transformar materia acumulada em passos menores.</h3>
+              <div class="study-planner-list">
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>segunda</strong>
+                  <p>Leitura + resumo curto ou reconto, de acordo com a etapa.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>terca</strong>
+                  <p>Matematica com poucos exercicios, mas correcao bem feita.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>quarta</strong>
+                  <p>Ciencias, historia ou geografia com mapa mental ou ficha de estudo.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>quinta</strong>
+                  <p>Portugues, redacao ou ingles com producao curta e revisao.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>sexta</strong>
+                  <p>Simulado curto, autoavaliacao e lista de duvidas.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>sabado</strong>
+                  <p>Projeto livre: pesquisa, leitura, video explicativo ou apresentacao.</p>
+                </article>
+              </div>
+            </article>
+
+            <article
+              class="students-card section-block study-university-card"
+              id="faculdade"
+              data-study-search="faculdade universidade tcc metodologia abnt cronograma artigo seminario slide pesquisa"
+              data-study-filter="faculdade"
+            >
+              <p class="eyebrow">faculdade, TCC e vida academica</p>
+              <h3>Dicas praticas para nao deixar tudo para o fim do semestre.</h3>
+              <div class="study-tcc-steps">
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>1. Tema com recorte</strong>
+                  <p>Escolha um tema que caiba no tempo, no curso e nas fontes que voce realmente consegue ler.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>2. Cronograma realista</strong>
+                  <p>Divida em leitura, fichamento, escrita, revisao e apresentacao. Sem cronograma, o TCC engole tudo.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>3. Fichamento cedo</strong>
+                  <p>Guarde ideias, citacoes e paginas desde a primeira semana para evitar retrabalho.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>4. ABNT sem panico</strong>
+                  <p>Padronize capa, referencias, citacao e sumario aos poucos, nao so no fim.</p>
+                </article>
+                <article data-subpage-reveal data-subpage-tilt>
+                  <strong>5. Defesa e apresentacao</strong>
+                  <p>Treine fala curta, argumento central e respostas para perguntas previsiveis da banca.</p>
+                </article>
+              </div>
+            </article>
+
+            <article class="students-card section-block study-campus-note">
+              <p class="eyebrow">checklist do estudante</p>
+              <h3>Antes de dizer que travou, faz esse circuito.</h3>
+              <div class="students-checklist">
+                <label><input type="checkbox" /> Li o comando duas vezes e marquei o verbo principal.</label>
+                <label><input type="checkbox" /> Separei o que ja sei e o que ainda preciso revisar.</label>
+                <label><input type="checkbox" /> Tentei resolver sozinho antes de olhar resposta.</label>
+                <label><input type="checkbox" /> Corrigi o erro e escrevi por que ele aconteceu.</label>
+                <label><input type="checkbox" /> Pedi ajuda com uma duvida especifica.</label>
+              </div>
+              <figure class="study-note-figure" data-subpage-reveal data-subpage-tilt>
+                <img
+                  src="./assets/study-campus-lab.svg"
+                  alt="Ilustracao de mesa de estudo com livros, anotacoes e tecnologia"
+                />
+              </figure>
+            </article>
+          </div>
+        </section>
+
+        <section class="students-card section-block study-young-energy" id="rotina-jovem">
+          <div class="students-section-head">
+            <div>
+              <p class="eyebrow">rotina jovem e vida real</p>
+              <h2>Campus, organizacao e amizade para manter constancia durante a semana.</h2>
+            </div>
+            <p>
+              Combine foco, estudo em equipe, agenda visual, descanso e pequenas vitorias
+              semanais para chegar melhor nas provas e entregas.
+            </p>
+          </div>
+
+          <div class="study-young-energy-grid">
+            <article class="study-energy-panel main" data-subpage-reveal data-subpage-tilt>
+              <span>semana inteligente</span>
+              <h3>Estude sem gastar toda a energia da semana.</h3>
+              <p>
+                Comece com foco curto, revise o erro, trabalhe em grupo quando fizer sentido,
+                faca uma pausa e deixe a retomada do dia seguinte preparada.
+              </p>
+              <div class="study-energy-track">
+                <article>
+                  <strong>1. abrir</strong>
+                  <p>Escolha uma meta pequena e clara para facilitar o primeiro passo.</p>
+                </article>
+                <article>
+                  <strong>2. praticar</strong>
+                  <p>Resolva poucas questões, mas entenda o erro e anote o padrão.</p>
+                </article>
+                <article>
+                  <strong>3. fechar</strong>
+                  <p>Revise em 5 minutos e deixe o próximo passo pronto.</p>
+                </article>
+              </div>
+            </article>
+
+            <article class="study-energy-panel photo" data-subpage-reveal data-subpage-tilt>
+              <figure class="study-energy-photo">
+                <img
+                  src="https://images.pexels.com/photos/6147219/pexels-photo-6147219.jpeg?cs=srgb&dl=pexels-keira-burton-6147219.jpg&fm=jpg"
+                  alt="Grupo de estudantes reunidos em ambiente universitário"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                />
+              </figure>
+              <div class="study-energy-copy">
+                <span>amizade + meta</span>
+                <h3>Estudar com amigos tambem e repertorio emocional.</h3>
+              </div>
+            </article>
+
+            <article class="study-energy-panel alt" data-subpage-reveal data-subpage-tilt>
+              <span>prova chegando</span>
+              <h3>Modo sprint sem desespero.</h3>
+              <ul>
+                <li>resumao visual na vespera</li>
+                <li>uma revisao por bloco, nao por panico</li>
+                <li>sono, agua e mochila pronta</li>
+              </ul>
+            </article>
+
+            <article class="study-energy-panel glow" data-subpage-reveal data-subpage-tilt>
+              <span>vida fora da aula</span>
+              <h3>Tempo de campus, biblioteca, cafe e respiro também contam.</h3>
+              <ul>
+                <li>pausas curtas sem culpa</li>
+                <li>alternar foco e descanso</li>
+                <li>manter a cabeça boa para continuar</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script defer src="./pro-design.js?v=20260413b"></script>
+    <script defer src="./subpages-redesign.js?v=20260415b"></script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+<svg width="1320" height="860" viewBox="0 0 1320 860" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="154" y1="92" x2="1090" y2="774" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1024"/>
+      <stop offset="0.42" stop-color="#101D43"/>
+      <stop offset="0.72" stop-color="#07192D"/>
+      <stop offset="1" stop-color="#050814"/>
+    </linearGradient>
+    <linearGradient id="neonA" x1="214" y1="206" x2="506" y2="492" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6DB2"/>
+      <stop offset="1" stop-color="#7E63FF"/>
+    </linearGradient>
+    <linearGradient id="neonB" x1="766" y1="172" x2="1112" y2="510" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7EF7FF"/>
+      <stop offset="1" stop-color="#2A78FF"/>
+    </linearGradient>
+    <linearGradient id="neonC" x1="394" y1="452" x2="776" y2="762" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C9FF6A"/>
+      <stop offset="1" stop-color="#2DD4BF"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="234" y1="144" x2="1078" y2="724" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.04"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(664 384) rotate(90) scale(354 486)">
+      <stop stop-color="#7EF7FF" stop-opacity="0.62"/>
+      <stop offset="0.44" stop-color="#7E63FF" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#7EF7FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blurGlow" x="0" y="0" width="1320" height="860" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+
+  <rect width="1320" height="860" rx="54" fill="url(#bg)"/>
+  <ellipse cx="188" cy="138" rx="168" ry="116" fill="#FF6DB2" fill-opacity="0.22" filter="url(#blurGlow)"/>
+  <ellipse cx="1104" cy="130" rx="196" ry="128" fill="#7EF7FF" fill-opacity="0.22" filter="url(#blurGlow)"/>
+  <ellipse cx="708" cy="786" rx="290" ry="116" fill="#7E63FF" fill-opacity="0.18" filter="url(#blurGlow)"/>
+
+  <path d="M82 144C250 76 396 96 540 176C648 235 784 236 944 156C1072 92 1184 96 1282 142V754C1110 808 966 786 822 706C710 644 584 640 438 712C302 779 182 778 82 724V144Z" fill="url(#coreGlow)"/>
+  <path d="M160 124H1160C1192 124 1218 150 1218 182V678C1218 710 1192 736 1160 736H160C128 736 102 710 102 678V182C102 150 128 124 160 124Z" fill="url(#glass)" stroke="#9DF8FF" stroke-opacity="0.2" stroke-width="2"/>
+  <path d="M166 184H1154V676H166V184Z" fill="#071126" fill-opacity="0.46" stroke="white" stroke-opacity="0.08"/>
+
+  <g opacity="0.28" stroke="#7EF7FF" stroke-width="1">
+    <path d="M166 246H1154"/>
+    <path d="M166 308H1154"/>
+    <path d="M166 370H1154"/>
+    <path d="M166 432H1154"/>
+    <path d="M166 494H1154"/>
+    <path d="M166 556H1154"/>
+    <path d="M270 184V676"/>
+    <path d="M384 184V676"/>
+    <path d="M498 184V676"/>
+    <path d="M612 184V676"/>
+    <path d="M726 184V676"/>
+    <path d="M840 184V676"/>
+    <path d="M954 184V676"/>
+    <path d="M1068 184V676"/>
+  </g>
+
+  <circle cx="660" cy="430" r="236" stroke="#7EF7FF" stroke-opacity="0.22" stroke-width="2"/>
+  <circle cx="660" cy="430" r="182" stroke="#FF6DB2" stroke-opacity="0.18" stroke-width="2"/>
+  <circle cx="660" cy="430" r="126" stroke="#C9FF6A" stroke-opacity="0.16" stroke-width="2"/>
+
+  <g transform="translate(514 210)">
+    <path d="M126 2C192 0 250 44 266 108C282 170 250 236 192 264C142 290 78 276 42 232C2 184 -4 114 28 62C50 26 84 6 126 2Z" fill="url(#neonC)"/>
+    <path d="M86 82C114 38 176 36 208 76C240 116 228 180 180 204C150 220 112 214 88 190C60 162 58 118 86 82Z" fill="#071126" fill-opacity="0.5"/>
+    <path d="M68 142C96 126 126 118 158 118C196 118 226 132 244 156C234 214 188 254 132 256C82 258 38 230 18 186C28 166 44 152 68 142Z" fill="#0B1730" fill-opacity="0.46"/>
+    <circle cx="112" cy="118" r="16" fill="#F8FBFF"/>
+    <circle cx="178" cy="118" r="16" fill="#F8FBFF"/>
+    <path d="M108 160C128 176 164 176 186 158" stroke="#F8FBFF" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(238 238)">
+    <rect x="0" y="18" width="238" height="294" rx="42" fill="url(#neonA)" fill-opacity="0.9"/>
+    <path d="M56 92C82 48 150 44 186 84C222 124 214 194 166 222C128 244 78 232 52 196C30 166 32 124 56 92Z" fill="#F8FBFF" fill-opacity="0.96"/>
+    <path d="M34 124C74 70 160 58 212 106C188 108 168 116 150 132C124 154 100 160 74 150C58 144 44 136 34 124Z" fill="#121A3D" fill-opacity="0.78"/>
+    <path d="M90 152H148" stroke="#121A3D" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="82" cy="148" r="10" fill="#121A3D"/>
+    <circle cx="156" cy="148" r="10" fill="#121A3D"/>
+    <path d="M76 236H178" stroke="#FFFFFF" stroke-opacity="0.72" stroke-width="16" stroke-linecap="round"/>
+    <text x="36" y="282" fill="#FFF7FC" font-family="Arial, sans-serif" font-size="28" font-weight="700">ANIME</text>
+  </g>
+
+  <g transform="translate(828 218)">
+    <rect x="0" y="0" width="276" height="318" rx="46" fill="url(#neonB)" fill-opacity="0.88"/>
+    <path d="M62 132C56 74 98 30 150 30C206 30 248 76 238 140C230 198 188 238 134 238C88 238 68 188 62 132Z" fill="#F5FCFF" fill-opacity="0.96"/>
+    <path d="M70 128C92 74 142 56 198 74C214 80 228 88 240 100C234 58 196 24 150 24C102 24 64 58 58 104C58 112 62 122 70 128Z" fill="#08152E" fill-opacity="0.72"/>
+    <rect x="84" y="126" width="118" height="48" rx="24" fill="#0B1730" fill-opacity="0.78"/>
+    <circle cx="116" cy="150" r="8" fill="#7EF7FF"/>
+    <circle cx="170" cy="150" r="8" fill="#7EF7FF"/>
+    <path d="M104 246H214" stroke="#F4FBFF" stroke-opacity="0.8" stroke-width="18" stroke-linecap="round"/>
+    <text x="34" y="286" fill="#F4FBFF" font-family="Arial, sans-serif" font-size="28" font-weight="700">GAME PILOT</text>
+  </g>
+
+  <g transform="translate(174 574)">
+    <rect width="310" height="112" rx="34" fill="#121E38" fill-opacity="0.92" stroke="#FF6DB2" stroke-opacity="0.28"/>
+    <circle cx="68" cy="56" r="34" fill="#FFB6DC"/>
+    <path d="M50 46C62 24 98 28 104 54C84 48 70 50 58 64C52 58 48 52 50 46Z" fill="#152044"/>
+    <path d="M122 42H270" stroke="#F4FBFF" stroke-opacity="0.9" stroke-width="14" stroke-linecap="round"/>
+    <path d="M122 72H238" stroke="#7EF7FF" stroke-opacity="0.72" stroke-width="12" stroke-linecap="round"/>
+    <text x="122" y="96" fill="#FFB6DC" font-family="Arial, sans-serif" font-size="14" font-weight="700">CREATOR MODE</text>
+  </g>
+
+  <g transform="translate(520 594)">
+    <rect width="280" height="118" rx="34" fill="#112B3E" fill-opacity="0.9" stroke="#C9FF6A" stroke-opacity="0.26"/>
+    <rect x="32" y="30" width="70" height="58" rx="18" fill="#C9FF6A"/>
+    <path d="M54 50H80" stroke="#071126" stroke-width="8" stroke-linecap="round"/>
+    <path d="M54 70H92" stroke="#071126" stroke-width="8" stroke-linecap="round"/>
+    <path d="M126 42H236" stroke="#F4FBFF" stroke-opacity="0.9" stroke-width="14" stroke-linecap="round"/>
+    <path d="M126 74H218" stroke="#C9FF6A" stroke-opacity="0.72" stroke-width="12" stroke-linecap="round"/>
+    <text x="126" y="100" fill="#C9FF6A" font-family="Arial, sans-serif" font-size="14" font-weight="700">CARTOON SIGNAL</text>
+  </g>
+
+  <g transform="translate(850 574)">
+    <rect width="304" height="118" rx="34" fill="#151D3A" fill-opacity="0.92" stroke="#7EF7FF" stroke-opacity="0.26"/>
+    <path d="M52 30H114C124 30 132 38 132 48V82C132 92 124 100 114 100H52C42 100 34 92 34 82V48C34 38 42 30 52 30Z" fill="#7EF7FF"/>
+    <circle cx="62" cy="66" r="8" fill="#0A1024"/>
+    <circle cx="104" cy="66" r="8" fill="#0A1024"/>
+    <path d="M76 86H92" stroke="#0A1024" stroke-width="7" stroke-linecap="round"/>
+    <path d="M152 42H266" stroke="#F4FBFF" stroke-opacity="0.9" stroke-width="14" stroke-linecap="round"/>
+    <path d="M152 74H242" stroke="#7EF7FF" stroke-opacity="0.72" stroke-width="12" stroke-linecap="round"/>
+    <text x="152" y="100" fill="#7EF7FF" font-family="Arial, sans-serif" font-size="14" font-weight="700">AI HIGHLIGHT</text>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M626 156L650 204H602L626 156Z" fill="#7EF7FF"/>
+    <path d="M744 150L762 188H724L744 150Z" fill="#FF6DB2"/>
+    <path d="M464 166L482 202H446L464 166Z" fill="#C9FF6A"/>
+    <circle cx="308" cy="176" r="10" fill="#7EF7FF"/>
+    <circle cx="1040" cy="176" r="10" fill="#FF6DB2"/>
+    <circle cx="660" cy="734" r="9" fill="#C9FF6A"/>
+  </g>
+
+  <rect x="232" y="96" width="194" height="46" rx="23" fill="#08152E" fill-opacity="0.82" stroke="#7EF7FF" stroke-opacity="0.24"/>
+  <text x="258" y="126" fill="#EAFBFF" font-family="Arial, sans-serif" font-size="18" font-weight="700">ANIME + GAMES</text>
+  <rect x="886" y="96" width="196" height="46" rx="23" fill="#08152E" fill-opacity="0.82" stroke="#FF6DB2" stroke-opacity="0.24"/>
+  <text x="912" y="126" fill="#FFF7FC" font-family="Arial, sans-serif" font-size="18" font-weight="700">CREATORS + TOONS</text>
+</svg>

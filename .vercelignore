@@ -1,0 +1,17 @@
+node_modules/
+.git/
+.github/
+.codex-temp/
+.edge-headless/
+backend/
+data/agent-messages.json
+data/comments.json
+data/image-preview-cache.json
+data/ninjas-profiles.json
+data/ninjas-requests.json
+data/subscriptions.json
+*.png
+!assets/*.png
+cdp-diagnostic*.json
+dxdiag_gpu.txt
+*.md

@@ -1,0 +1,25 @@
+.admin-menu-item {
+  margin-top: 8px;
+}
+
+.admin-menu-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #d8e1ec;
+  background: linear-gradient(180deg, #ffffff, #f1f5f9);
+  color: #0f2e4e;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 6px 12px rgba(13, 36, 59, 0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.admin-menu-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 18px rgba(13, 36, 59, 0.16);
+}

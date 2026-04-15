@@ -1,0 +1,73 @@
+<svg width="900" height="700" viewBox="0 0 900 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="112" y1="78" x2="770" y2="622" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#120E2A"/>
+      <stop offset="0.52" stop-color="#0B1934"/>
+      <stop offset="1" stop-color="#091221"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="226" y1="176" x2="684" y2="502" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F2B7B"/>
+      <stop offset="0.5" stop-color="#1A5B8F"/>
+      <stop offset="1" stop-color="#10334F"/>
+    </linearGradient>
+    <linearGradient id="cardA" x1="130" y1="412" x2="308" y2="570" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6DB2"/>
+      <stop offset="1" stop-color="#7D62FF"/>
+    </linearGradient>
+    <linearGradient id="cardB" x1="602" y1="396" x2="770" y2="566" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#83F8FF"/>
+      <stop offset="1" stop-color="#2A78FF"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(456 276) rotate(90) scale(266)">
+      <stop stop-color="#97F8FF" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#97F8FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="0" y="0" width="900" height="700" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="700" rx="38" fill="url(#bg)"/>
+  <ellipse cx="742" cy="116" rx="108" ry="76" fill="#7EF7FF" fill-opacity="0.18" filter="url(#glow)"/>
+  <ellipse cx="182" cy="120" rx="96" ry="72" fill="#FF6DB2" fill-opacity="0.14" filter="url(#glow)"/>
+
+  <circle cx="450" cy="344" r="214" stroke="#7EF7FF" stroke-opacity="0.18" stroke-width="2"/>
+  <circle cx="450" cy="344" r="172" stroke="#FF6DB2" stroke-opacity="0.16" stroke-width="2"/>
+  <circle cx="450" cy="344" r="132" fill="url(#orb)"/>
+
+  <rect x="188" y="152" width="524" height="314" rx="34" fill="url(#screen)" stroke="#8EF6FF" stroke-opacity="0.28" stroke-width="3"/>
+  <rect x="216" y="180" width="468" height="258" rx="26" fill="#0B1231" fill-opacity="0.46" stroke="white" stroke-opacity="0.08"/>
+  <rect x="360" y="482" width="176" height="22" rx="11" fill="#122038"/>
+  <rect x="318" y="508" width="262" height="32" rx="16" fill="#162947"/>
+
+  <rect x="122" y="404" width="220" height="154" rx="30" fill="url(#cardA)" fill-opacity="0.88"/>
+  <rect x="558" y="392" width="218" height="170" rx="30" fill="url(#cardB)" fill-opacity="0.88"/>
+  <rect x="610" y="122" width="180" height="108" rx="28" fill="#121E38" fill-opacity="0.88" stroke="#7EF7FF" stroke-opacity="0.18"/>
+  <rect x="96" y="126" width="166" height="110" rx="28" fill="#151D35" fill-opacity="0.82" stroke="#FF6DB2" stroke-opacity="0.22"/>
+
+  <path d="M410 250C450 222 502 229 533 270C560 304 560 354 538 390C527 408 508 426 481 436C471 420 464 400 460 380C459 381 458 382 456 383C442 391 427 397 410 399C408 360 388 325 358 304C369 281 387 264 410 250Z" fill="#B4FF7A"/>
+  <path d="M444 268C466 250 496 251 516 272C536 293 540 326 528 352C522 365 512 376 497 385C490 372 485 357 482 342C481 343 480 344 479 345C468 352 456 357 443 359C442 330 427 304 404 287C412 279 421 273 444 268Z" fill="#0E1730" fill-opacity="0.48"/>
+
+  <circle cx="282" cy="474" r="38" fill="#101B36" fill-opacity="0.42"/>
+  <circle cx="674" cy="462" r="42" fill="#0E1830" fill-opacity="0.38"/>
+  <circle cx="287" cy="474" r="20" fill="#FFF3FD" fill-opacity="0.96"/>
+  <circle cx="674" cy="462" r="22" fill="#F0FBFF" fill-opacity="0.96"/>
+
+  <path d="M664 452L694 464L664 476V452Z" fill="#2A78FF"/>
+  <path d="M278 452H298C306.837 452 314 459.163 314 468V480C314 488.837 306.837 496 298 496H278V452Z" fill="#FF6DB2"/>
+  <path d="M228 220C250 184 294 164 340 170C376 174 410 190 430 220C402 230 374 248 352 272C332 294 320 320 316 348C290 338 265 322 246 298C226 272 220 244 228 220Z" fill="#FF8DD1"/>
+  <path d="M530 214C560 194 598 192 632 208C664 223 690 255 700 292C668 292 636 300 608 318C584 334 566 356 554 382C528 366 508 344 496 318C481 286 492 238 530 214Z" fill="#89FBFF"/>
+
+  <path d="M420 164L435 194H405L420 164Z" fill="#7EF7FF"/>
+  <path d="M498 132L510 156H486L498 132Z" fill="#FF6DB2"/>
+  <path d="M316 152L326 172H306L316 152Z" fill="#C9FF6A"/>
+
+  <text x="132" y="444" fill="#FFF7FC" font-family="Arial, sans-serif" font-size="22" font-weight="700">ANIME</text>
+  <text x="132" y="474" fill="#FFF7FC" fill-opacity="0.88" font-family="Arial, sans-serif" font-size="16">temporada • hype • fandom</text>
+  <text x="572" y="432" fill="#F4FBFF" font-family="Arial, sans-serif" font-size="22" font-weight="700">GAME FEED</text>
+  <text x="572" y="462" fill="#F4FBFF" fill-opacity="0.88" font-family="Arial, sans-serif" font-size="16">clips • coop • eventos</text>
+  <text x="628" y="160" fill="#9DF8FF" font-family="Arial, sans-serif" font-size="18" font-weight="700">CREATOR</text>
+  <text x="628" y="188" fill="#F4FBFF" fill-opacity="0.82" font-family="Arial, sans-serif" font-size="15">review + video + perfil</text>
+  <text x="118" y="164" fill="#FFB6DC" font-family="Arial, sans-serif" font-size="18" font-weight="700">PERSONAGENS</text>
+  <text x="118" y="192" fill="#F4FBFF" fill-opacity="0.82" font-family="Arial, sans-serif" font-size="15">avatars, edits e teorias</text>
+</svg>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/admin/
+Disallow: /backend/
+Disallow: /data/
+
+Sitemap: https://catalogocruzeirodosul.com.br/sitemap.xml

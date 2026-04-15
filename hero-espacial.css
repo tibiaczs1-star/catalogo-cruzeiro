@@ -1,0 +1,172 @@
+.hero-espacial-czs {
+  position: relative;
+  margin: 16px 0 18px;
+  min-height: clamp(280px, 36vw, 420px);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid rgba(180, 203, 227, 0.45);
+  background: #1c466f;
+  box-shadow: 0 24px 46px rgba(10, 27, 44, 0.24);
+  transform-style: preserve-3d;
+}
+
+.hero-espacial-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.22), transparent 42%),
+    radial-gradient(circle at 78% 24%, rgba(141, 233, 255, 0.22), transparent 38%),
+    linear-gradient(150deg, rgba(18, 74, 119, 0.6), rgba(28, 92, 138, 0.5)),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro_do_Sul-Acre%2C_Brasil.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: translateZ(0px);
+}
+
+.hero-espacial-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 20, 34, 0.2) 0%, rgba(7, 20, 34, 0.58) 88%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(208, 227, 246, 0.08) 0 1px,
+      transparent 1px 46px
+    );
+}
+
+.hero-espacial-content {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  display: grid;
+  align-content: end;
+  gap: 10px;
+  padding: clamp(16px, 2.3vw, 28px);
+  color: #f6fbff;
+  transform: translateZ(52px);
+}
+
+.hero-espacial-kicker {
+  margin: 0;
+  font-size: 0.76rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #c7e7ff;
+}
+
+.hero-espacial-title {
+  margin: 0;
+  font-size: clamp(1.45rem, 3.6vw, 3rem);
+  line-height: 1.05;
+  max-width: 860px;
+}
+
+.hero-espacial-sub {
+  margin: 0;
+  max-width: 840px;
+  color: #e5f2ff;
+  line-height: 1.5;
+}
+
+.hero-espacial-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.hero-espacial-btn {
+  text-decoration: none;
+  border-radius: 999px;
+  min-height: 36px;
+  padding: 8px 14px;
+  font-weight: 800;
+  font-size: 0.88rem;
+  border: 1px solid transparent;
+}
+
+.hero-espacial-btn.primary {
+  color: #fff;
+  background: linear-gradient(130deg, #d67b42, #b85a2b);
+  box-shadow: 0 10px 22px rgba(8, 20, 34, 0.3);
+}
+
+.hero-espacial-btn.ghost {
+  color: #f0f7ff;
+  background: rgba(15, 40, 66, 0.34);
+  border-color: rgba(224, 239, 255, 0.42);
+}
+
+.hero-espacial-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(0.2px);
+  opacity: 0.78;
+  animation: heroOrbFloat 8.5s ease-in-out infinite;
+}
+
+.hero-espacial-orb.orb-1 {
+  width: 92px;
+  height: 92px;
+  top: 16%;
+  right: 16%;
+  background: radial-gradient(circle, rgba(119, 228, 255, 0.9), rgba(53, 126, 192, 0.2));
+}
+
+.hero-espacial-orb.orb-2 {
+  width: 56px;
+  height: 56px;
+  top: 27%;
+  right: 28%;
+  animation-delay: 0.6s;
+  background: radial-gradient(circle, rgba(255, 214, 153, 0.95), rgba(210, 118, 68, 0.16));
+}
+
+.hero-espacial-orb.orb-3 {
+  width: 126px;
+  height: 126px;
+  top: 8%;
+  left: 7%;
+  animation-delay: 1.2s;
+  background: radial-gradient(circle, rgba(178, 229, 255, 0.55), rgba(72, 149, 214, 0.16));
+}
+
+.hero-espacial-chip {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(215, 233, 251, 0.42);
+  background: rgba(13, 35, 60, 0.45);
+  padding: 8px 10px;
+  color: #f2f9ff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transform: translateZ(75px);
+}
+
+.hero-espacial-chip strong {
+  color: #ffd6a7;
+}
+
+@keyframes heroOrbFloat {
+  0%,
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.03);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-espacial-chip {
+    display: none;
+  }
+}

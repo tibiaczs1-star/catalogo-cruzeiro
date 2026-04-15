@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pesquisa Completa | Catálogo Cruzeiro do Sul</title>
+  <meta
+    name="description"
+    content="Pesquisa completa do arquivo de notícias verificadas com filtros, rolagem e busca por tema, fonte, editoria e resumo."
+  />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css?v=20260415z" />
+</head>
+<body class="editorial-home archive-browser-page" data-archive-page-size="18">
+  <div class="page-shell">
+    <main class="archive-browser-main">
+      <section class="archive-browser-hero reveal active">
+        <div>
+          <p class="eyebrow">pesquisa completa</p>
+          <h1>Abra o arquivo inteiro, filtre por assunto e role com calma.</h1>
+          <p>
+            Esta aba reúne a base de notícias verificadas em um ambiente próprio de
+            consulta. Pesquise por bairro, órgão, tema, fonte, editoria ou palavra do resumo.
+          </p>
+        </div>
+        <div class="archive-browser-actions">
+          <a class="outline-button" href="./index.html#arquivo-vivo">Voltar para a home</a>
+          <a class="solid-button" href="./index.html#radar">Ir para o radar</a>
+        </div>
+      </section>
+
+      <section id="arquivo-vivo" class="section-block live-feed-shell archive-browser-shell reveal active">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">arquivo vivo em tela cheia</p>
+            <h2>Pesquisa de pautas, temas e fontes</h2>
+          </div>
+          <p>
+            Digite um termo, use os filtros rápidos e percorra a base com espaço de leitura,
+            sem espremimento e sem perder o contexto.
+          </p>
+        </div>
+
+        <div class="live-feed-toolbar">
+          <div class="feed-search">
+            <label for="live-feed-query">Buscar no arquivo</label>
+            <input
+              id="live-feed-query"
+              type="search"
+              autocomplete="off"
+              placeholder="Busque por cheia, escola, política, cultura, obras, bairro ou fonte..."
+              aria-autocomplete="list"
+              aria-controls="arquivo-noticias-sugestoes"
+              aria-expanded="false"
+            />
+            <div
+              class="feed-suggestions"
+              id="arquivo-noticias-sugestoes"
+              role="listbox"
+              aria-label="Sugestões de busca do arquivo"
+              hidden
+            ></div>
+          </div>
+
+          <div class="feed-meta">
+            <strong id="live-feed-count">--</strong>
+            <span id="live-feed-count-label">notícias no recorte atual</span>
+            <small id="live-feed-total">Arquivo local carregando...</small>
+          </div>
+        </div>
+
+        <div class="live-feed-summary">
+          <p class="feed-status" id="live-feed-status">
+            Carregando a base local para busca por título, tema, resumo e fonte.
+          </p>
+
+          <div class="feed-stats" aria-label="Resumo rápido do arquivo">
+            <article class="feed-stat">
+              <span>Atualizado até</span>
+              <strong id="live-feed-updated">--</strong>
+            </article>
+
+            <article class="feed-stat">
+              <span>Tema dominante</span>
+              <strong id="live-feed-focus">--</strong>
+            </article>
+
+            <article class="feed-stat">
+              <span>Fontes ativas</span>
+              <strong id="live-feed-sources">--</strong>
+            </article>
+          </div>
+
+          <div class="feed-filter-row">
+            <div
+              class="feed-filter-group"
+              id="live-feed-filters"
+              aria-label="Filtros rápidos do arquivo"
+            ></div>
+            <button class="feed-clear-button" id="live-feed-clear" type="button" hidden>
+              Limpar filtro
+            </button>
+          </div>
+        </div>
+
+        <div class="live-feed-grid" id="live-feed-grid"></div>
+
+        <div class="load-more-row">
+          <button class="solid-button" id="live-feed-more" type="button">
+            Carregar mais pautas
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script defer src="runtime-config.js?v=20260415a"></script>
+  <script defer src="news-data.js?v=20260415a"></script>
+  <script defer src="arquivo-noticias.js?v=20260415a"></script>
+</body>
+</html>

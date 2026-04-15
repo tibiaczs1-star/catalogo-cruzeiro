@@ -1,0 +1,700 @@
+.ninjas-hub-page {
+  --ninjas-bg: #071223;
+  --ninjas-panel: rgba(10, 20, 40, 0.84);
+  --ninjas-panel-strong: rgba(8, 18, 36, 0.94);
+  --ninjas-line: rgba(131, 233, 255, 0.14);
+  --ninjas-ink: #eff8ff;
+  --ninjas-muted: rgba(224, 238, 255, 0.74);
+  --ninjas-cyan: #8cf6ff;
+  --ninjas-lime: #beff62;
+  --ninjas-pink: #ff74a9;
+  --ninjas-orange: #ffad49;
+  --ninjas-blue: #78aaff;
+  --ninjas-shadow: 0 28px 70px rgba(0, 0, 0, 0.34);
+  color: var(--ninjas-ink);
+  font-family: "Lexend", "Outfit", sans-serif;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255, 116, 169, 0.16), transparent 22%),
+    radial-gradient(circle at 84% 12%, rgba(140, 246, 255, 0.12), transparent 24%),
+    radial-gradient(circle at 50% 120%, rgba(190, 255, 98, 0.1), transparent 32%),
+    linear-gradient(180deg, #040813, #071223 45%, #030712);
+}
+
+.ninjas-hub-page .page-shell {
+  width: min(1750px, calc(100vw - 0.4rem)) !important;
+  max-width: none !important;
+  padding-inline: clamp(0.2rem, 0.75vw, 0.85rem) !important;
+  padding-bottom: 5rem;
+}
+
+.ninjas-hub-page .students-topbar,
+.ninjas-hub-page .section-block,
+.ninjas-hub-page .students-card,
+.ninjas-source-strip {
+  border-color: var(--ninjas-line) !important;
+  background:
+    linear-gradient(145deg, rgba(8, 16, 31, 0.92), rgba(12, 24, 47, 0.84)),
+    radial-gradient(circle at 100% 0%, rgba(140, 246, 255, 0.14), transparent 16rem) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    var(--ninjas-shadow) !important;
+}
+
+.ninjas-hub-page .students-topbar::before,
+.ninjas-hub-page .section-block::before,
+.ninjas-hub-page .students-card::before {
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 24%),
+    repeating-linear-gradient(0deg, rgba(140, 246, 255, 0.024) 0 1px, transparent 1px 8px);
+}
+
+.ninjas-hub-page .students-brand strong,
+.ninjas-hub-page .students-section-head h2,
+.ninjas-hub-page .students-hero h1,
+.ninjas-hub-page .students-card h3,
+.ninjas-hub-page .students-card strong {
+  color: #f5fbff !important;
+  font-family: "Orbitron", "Outfit", sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.ninjas-hub-page .students-brand span,
+.ninjas-hub-page .eyebrow,
+.ninjas-hub-page .students-source-strip span,
+.ninjas-hub-page .students-mini-nav a {
+  color: rgba(211, 240, 255, 0.86) !important;
+}
+
+.ninjas-hub-page .students-card p,
+.ninjas-hub-page .students-section-head > p,
+.ninjas-hub-page .students-hero p,
+.ninjas-hub-page li,
+.ninjas-hub-page label,
+.ninjas-hub-page small {
+  color: var(--ninjas-muted) !important;
+}
+
+.ninjas-hub-page .students-mini-nav a,
+.ninjas-hub-page .students-brand img {
+  background: rgba(8, 16, 31, 0.76);
+  border-color: rgba(140, 246, 255, 0.18);
+  color: var(--ninjas-ink);
+}
+
+.ninjas-hub-page .students-mini-nav a.featured,
+.ninjas-hub-page .solid-button {
+  background: linear-gradient(135deg, rgba(255, 116, 169, 0.96), rgba(104, 126, 255, 0.92)) !important;
+  border-color: transparent !important;
+  color: #fff !important;
+  box-shadow: 0 18px 34px rgba(145, 103, 255, 0.3);
+}
+
+.ninjas-hub-page .outline-button {
+  border-color: rgba(140, 246, 255, 0.24);
+  background: rgba(9, 17, 33, 0.56);
+  color: var(--ninjas-ink);
+}
+
+.ninjas-layout {
+  gap: 1.5rem;
+}
+
+.ninjas-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(500px, 0.92fr);
+  align-items: center;
+  gap: 1.6rem;
+  min-height: 760px;
+  padding: 2.4rem !important;
+  background:
+    radial-gradient(circle at 18% 18%, rgba(255, 116, 169, 0.16), transparent 24%),
+    radial-gradient(circle at 84% 12%, rgba(140, 246, 255, 0.18), transparent 24%),
+    linear-gradient(135deg, rgba(5, 12, 24, 0.98), rgba(13, 27, 53, 0.94)) !important;
+}
+
+.ninjas-hero-copy h1 {
+  max-width: 9.8ch !important;
+  margin-bottom: 1rem;
+  font-size: clamp(2.9rem, 6vw, 5.4rem) !important;
+}
+
+.ninjas-hero-copy > p {
+  max-width: 62ch;
+}
+
+.ninjas-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.6rem;
+}
+
+.ninjas-hero-stats article,
+.ninjas-strip article,
+.ninjas-plan-card,
+.ninjas-tip-card {
+  min-height: 100%;
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(140, 246, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(10, 22, 43, 0.94), rgba(8, 16, 31, 0.76)),
+    radial-gradient(circle at top right, rgba(255, 116, 169, 0.14), transparent 28%);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
+}
+
+.ninjas-hero-stats strong {
+  display: block;
+  color: var(--ninjas-cyan);
+  font-size: 1.8rem;
+}
+
+.ninjas-hero-stage {
+  position: relative;
+  min-height: 620px;
+  display: grid;
+  place-items: center;
+}
+
+.ninjas-stage-main {
+  position: relative;
+  width: min(100%, 640px);
+  display: grid;
+  gap: 1rem;
+  padding: 1.1rem;
+  border-radius: 34px;
+  border: 1px solid rgba(140, 246, 255, 0.16);
+  background:
+    linear-gradient(155deg, rgba(9, 18, 35, 0.96), rgba(16, 31, 60, 0.88)),
+    radial-gradient(circle at top left, rgba(190, 255, 98, 0.1), transparent 20%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 36px 80px rgba(0, 0, 0, 0.36);
+  overflow: hidden;
+}
+
+.ninjas-stage-main::before {
+  content: "";
+  position: absolute;
+  inset: -15% auto auto -10%;
+  width: 16rem;
+  height: 16rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at center, rgba(255, 116, 169, 0.18), transparent 68%);
+  filter: blur(8px);
+}
+
+.ninjas-stage-screen {
+  position: relative;
+  padding: 4.4rem 1rem 1rem;
+  border-radius: 28px;
+  border: 1px solid rgba(140, 246, 255, 0.14);
+  background:
+    linear-gradient(180deg, rgba(10, 20, 39, 0.98), rgba(7, 14, 28, 0.96)),
+    radial-gradient(circle at top right, rgba(120, 170, 255, 0.14), transparent 24%);
+}
+
+.ninjas-stage-track {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.ninjas-stage-track-card {
+  padding: 0.95rem;
+  border-radius: 22px;
+  border: 1px solid rgba(140, 246, 255, 0.1);
+  background: rgba(9, 19, 36, 0.82);
+}
+
+.ninjas-stage-track-card span,
+.ninjas-strip span,
+.ninjas-plan-card > span,
+.ninjas-tip-card > span,
+.ninjas-cv-kicker,
+.ninjas-suggestion-board > span,
+.ninjas-filter-button,
+.ninjas-payment-meta span,
+.ninjas-code-shell span,
+.ninjas-field span,
+.ninjas-opportunity-card .badge {
+  display: inline-flex;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(169, 232, 255, 0.88) !important;
+}
+
+.ninjas-stage-chip {
+  position: absolute;
+  top: 1rem;
+  padding: 0.42rem 0.76rem;
+  border-radius: 999px;
+  border: 1px solid rgba(140, 246, 255, 0.16);
+  background: rgba(8, 18, 35, 0.88);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ninjas-stage-chip.chip-a {
+  left: 1rem;
+  color: var(--ninjas-cyan);
+}
+
+.ninjas-stage-chip.chip-b {
+  right: 8.4rem;
+  color: var(--ninjas-lime);
+}
+
+.ninjas-stage-chip.chip-c {
+  right: 1rem;
+  color: var(--ninjas-pink);
+}
+
+.ninjas-stage-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.ninjas-mini-panel {
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    linear-gradient(180deg, rgba(15, 31, 58, 0.92), rgba(8, 16, 31, 0.8)),
+    radial-gradient(circle at top right, rgba(255, 173, 73, 0.16), transparent 28%);
+}
+
+.ninjas-strip {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.95rem;
+}
+
+.ninjas-request-grid,
+.ninjas-resume-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 1.2rem;
+}
+
+.ninjas-form,
+.ninjas-payment-card,
+.ninjas-cv-preview,
+.ninjas-suggestion-board {
+  padding: 1.15rem;
+  border-radius: 28px;
+  border: 1px solid rgba(140, 246, 255, 0.12);
+  background:
+    linear-gradient(145deg, rgba(8, 16, 31, 0.96), rgba(13, 24, 44, 0.82)),
+    radial-gradient(circle at top right, rgba(120, 170, 255, 0.12), transparent 22%);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.26);
+}
+
+.ninjas-form-grid,
+.ninjas-pro-grid,
+.ninjas-first-job-grid,
+.ninjas-opportunity-grid {
+  display: grid;
+  gap: 0.95rem;
+}
+
+.ninjas-form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ninjas-field {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.ninjas-field-full {
+  grid-column: 1 / -1;
+}
+
+.ninjas-field input,
+.ninjas-field textarea,
+.ninjas-field select,
+.ninjas-code-shell textarea {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(140, 246, 255, 0.14);
+  background: rgba(6, 13, 25, 0.88);
+  color: #f4fbff;
+  padding: 0.92rem 1rem;
+  font: inherit;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.ninjas-field textarea,
+.ninjas-code-shell textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.ninjas-field input:focus,
+.ninjas-field textarea:focus,
+.ninjas-field select:focus,
+.ninjas-code-shell textarea:focus {
+  border-color: rgba(140, 246, 255, 0.34);
+  box-shadow: 0 0 0 4px rgba(140, 246, 255, 0.08);
+}
+
+.ninjas-field input::placeholder,
+.ninjas-field textarea::placeholder {
+  color: rgba(225, 239, 255, 0.36);
+}
+
+.ninjas-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.ninjas-form-status {
+  flex: 1 1 260px;
+  margin: 0;
+  color: rgba(201, 233, 255, 0.86) !important;
+}
+
+.ninjas-payment-card {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.ninjas-payment-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.ninjas-payment-meta article {
+  padding: 0.95rem;
+  border-radius: 20px;
+  border: 1px solid rgba(140, 246, 255, 0.1);
+  background: rgba(8, 16, 31, 0.72);
+}
+
+.ninjas-payment-meta strong {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.98rem;
+  word-break: break-word;
+}
+
+.ninjas-qr-shell {
+  display: grid;
+  place-items: center;
+  min-height: 280px;
+  border-radius: 24px;
+  border: 1px dashed rgba(140, 246, 255, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(236, 244, 252, 0.96)),
+    radial-gradient(circle at top right, rgba(120, 170, 255, 0.18), transparent 24%);
+  padding: 1rem;
+}
+
+.ninjas-qr-shell svg {
+  width: min(100%, 260px);
+  height: auto;
+}
+
+.ninjas-code-shell {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.ninjas-code-shell textarea {
+  min-height: 132px;
+  background: rgba(5, 11, 22, 0.96);
+}
+
+.ninjas-payment-actions,
+.ninjas-template-row,
+.ninjas-filter-row,
+.ninjas-package-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.ninjas-payment-note {
+  margin: 0;
+}
+
+.ninjas-pro-grid,
+.ninjas-first-job-grid,
+.ninjas-opportunity-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ninjas-tag-list,
+.ninjas-cv-preview ul,
+.ninjas-suggestion-board ul {
+  margin: 0.85rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.ninjas-resume-side {
+  display: grid;
+  gap: 1rem;
+}
+
+.ninjas-template-button,
+.ninjas-package-button,
+.ninjas-filter-button {
+  border: 1px solid rgba(140, 246, 255, 0.18);
+  background: rgba(8, 16, 31, 0.72);
+  color: var(--ninjas-ink);
+  border-radius: 999px;
+  padding: 0.74rem 1rem;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.ninjas-template-button:hover,
+.ninjas-package-button:hover,
+.ninjas-filter-button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(140, 246, 255, 0.34);
+}
+
+.ninjas-template-button.is-active,
+.ninjas-package-button.is-active,
+.ninjas-filter-button.is-active {
+  background: linear-gradient(135deg, rgba(19, 49, 88, 0.96), rgba(74, 114, 204, 0.92));
+  border-color: transparent;
+}
+
+.ninjas-plan-selector {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.ninjas-plan-option {
+  position: relative;
+  display: grid;
+  gap: 0.35rem;
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(140, 246, 255, 0.12);
+  background: rgba(8, 16, 31, 0.76);
+  cursor: pointer;
+}
+
+.ninjas-plan-option input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ninjas-plan-option:has(input:checked) {
+  border-color: rgba(190, 255, 98, 0.44);
+  box-shadow: 0 0 0 4px rgba(190, 255, 98, 0.08);
+}
+
+.ninjas-plan-option span {
+  font-weight: 800;
+  color: #f4fbff;
+}
+
+.ninjas-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 22px;
+  border: 1px solid rgba(140, 246, 255, 0.12);
+  background: rgba(8, 16, 31, 0.72);
+}
+
+.ninjas-cv-preview {
+  display: grid;
+  gap: 1rem;
+}
+
+.ninjas-cv-preview section {
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(140, 246, 255, 0.12);
+}
+
+.ninjas-cv-role {
+  margin: -0.2rem 0 0;
+  color: var(--ninjas-cyan) !important;
+  font-weight: 700;
+}
+
+.ninjas-cv-contact {
+  margin: -0.45rem 0 0;
+}
+
+.ninjas-suggestion-board strong {
+  display: block;
+  margin-top: 0.4rem;
+}
+
+.ninjas-opportunity-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.ninjas-updated-note {
+  margin: 0;
+}
+
+.ninjas-opportunity-card {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid rgba(140, 246, 255, 0.12);
+  background:
+    linear-gradient(180deg, rgba(10, 22, 43, 0.96), rgba(7, 14, 28, 0.82)),
+    radial-gradient(circle at top right, rgba(255, 173, 73, 0.14), transparent 28%);
+}
+
+.ninjas-opportunity-card header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.ninjas-opportunity-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.ninjas-opportunity-meta div {
+  padding: 0.8rem;
+  border-radius: 18px;
+  border: 1px solid rgba(140, 246, 255, 0.08);
+  background: rgba(7, 14, 28, 0.64);
+}
+
+.ninjas-source-strip {
+  margin-top: 1rem;
+}
+
+@media (max-width: 1240px) {
+  .ninjas-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ninjas-hero-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1040px) {
+  .ninjas-hero,
+  .ninjas-request-grid,
+  .ninjas-resume-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ninjas-hero-stage {
+    min-height: auto;
+  }
+
+  .ninjas-pro-grid,
+  .ninjas-first-job-grid,
+  .ninjas-opportunity-grid,
+  .ninjas-plan-selector {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .ninjas-hub-page .page-shell {
+    width: min(100vw - 0.8rem, 100%);
+  }
+
+  .ninjas-hero,
+  .ninjas-hub-page .students-card,
+  .ninjas-hub-page .students-source-strip {
+    padding: 1.2rem !important;
+  }
+
+  .ninjas-strip,
+  .ninjas-hero-stats,
+  .ninjas-form-grid,
+  .ninjas-payment-meta,
+  .ninjas-stage-columns,
+  .ninjas-opportunity-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .ninjas-stage-screen {
+    padding-top: 5.6rem;
+  }
+
+  .ninjas-stage-chip {
+    position: static;
+    display: inline-flex;
+    margin: 0 0 0.6rem;
+  }
+
+  .ninjas-payment-actions,
+  .ninjas-template-row,
+  .ninjas-filter-row,
+  .ninjas-package-row,
+  .ninjas-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media print {
+  body.printing-ninjas-cv .page-shell > *:not(main),
+  body.printing-ninjas-cv main > *:not(#curriculo-builder),
+  body.printing-ninjas-cv .ninjas-resume-controls,
+  body.printing-ninjas-cv .ninjas-payment-card,
+  body.printing-ninjas-cv .ninjas-suggestion-board {
+    display: none !important;
+  }
+
+  body.printing-ninjas-cv .ninjas-resume-layout,
+  body.printing-ninjas-cv .ninjas-resume-side {
+    display: block !important;
+  }
+
+  body.printing-ninjas-cv .ninjas-cv-preview {
+    box-shadow: none !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+
+  body.printing-ninjas-cv .ninjas-cv-preview *,
+  body.printing-ninjas-cv .ninjas-cv-role,
+  body.printing-ninjas-cv .ninjas-cv-kicker {
+    color: #111111 !important;
+  }
+}

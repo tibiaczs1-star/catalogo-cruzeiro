@@ -1,0 +1,17 @@
+<svg width="800" height="520" viewBox="0 0 800 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="520" fill="#173A61"/>
+  <rect y="290" width="800" height="230" fill="#295D8E"/>
+  <rect y="340" width="800" height="180" fill="#6DA8D3" fill-opacity="0.55"/>
+  <path d="M0 250C72 220 132 214 198 226C274 239 320 267 383 272C461 279 526 241 589 239C664 236 719 260 800 290V0H0V250Z" fill="#21456E"/>
+  <path d="M450 0H800V295C768 336 714 314 676 305C637 296 587 289 547 280C500 270 474 256 465 233C456 207 459 191 468 154L450 0Z" fill="#9FC4E0" fill-opacity="0.18"/>
+  <rect x="130" y="238" width="76" height="88" rx="10" fill="#E7E4DC" fill-opacity="0.7"/>
+  <polygon points="118,244 168,202 220,244" fill="#D0C2A8" fill-opacity="0.76"/>
+  <rect x="250" y="212" width="96" height="116" rx="12" fill="#EFE8DE" fill-opacity="0.72"/>
+  <polygon points="236,220 298,170 360,220" fill="#D8C5A7" fill-opacity="0.8"/>
+  <rect x="430" y="226" width="72" height="100" rx="10" fill="#ECE5DB" fill-opacity="0.68"/>
+  <polygon points="418,234 466,190 514,234" fill="#D1BE9D" fill-opacity="0.78"/>
+  <rect x="600" y="246" width="84" height="82" rx="10" fill="#EFE8DE" fill-opacity="0.7"/>
+  <polygon points="588,250 642,207 696,250" fill="#D4C09F" fill-opacity="0.8"/>
+  <ellipse cx="144" cy="384" rx="62" ry="10" fill="#B7E0F3" fill-opacity="0.42"/>
+  <ellipse cx="642" cy="398" rx="74" ry="12" fill="#B7E0F3" fill-opacity="0.38"/>
+</svg>
