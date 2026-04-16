@@ -191,10 +191,22 @@
 
         <div class="catalogo-war-tableau" aria-hidden="true">
           <span class="catalogo-war-smoke smoke-left"></span>
+          <span class="catalogo-war-smoke smoke-mid"></span>
           <span class="catalogo-war-smoke smoke-right"></span>
           <span class="catalogo-war-flash flash-left"></span>
+          <span class="catalogo-war-flash flash-center"></span>
           <span class="catalogo-war-flash flash-right"></span>
+          <span class="catalogo-war-bomb bomb-a"></span>
+          <span class="catalogo-war-bomb bomb-b"></span>
+          <span class="catalogo-war-bomb bomb-c"></span>
+          <span class="catalogo-war-bomb bomb-d"></span>
+          <span class="catalogo-war-bomb bomb-e"></span>
+          <span class="catalogo-war-blast blast-a"></span>
+          <span class="catalogo-war-blast blast-b"></span>
+          <span class="catalogo-war-blast blast-c"></span>
+          <span class="catalogo-war-blast blast-d"></span>
           <span class="catalogo-war-tracer tracer-left"></span>
+          <span class="catalogo-war-tracer tracer-mid"></span>
           <span class="catalogo-war-tracer tracer-right"></span>
           <span class="catalogo-war-searchlight light-left"></span>
           <span class="catalogo-war-searchlight light-right"></span>
@@ -210,30 +222,34 @@
           <span class="catalogo-land-ridge ridge-mid"></span>
           <span class="catalogo-land-ridge ridge-front"></span>
           <span class="catalogo-land-trail"></span>
+          <div class="catalogo-battle-line">
+            <span class="catalogo-war-crater crater-a"></span>
+            <span class="catalogo-war-crater crater-b"></span>
+            <span class="catalogo-war-crater crater-c"></span>
+            <span class="catalogo-war-crater crater-d"></span>
 
-          <div class="catalogo-director-stage">
-            <div class="catalogo-pixel-director">
-              <i class="catalogo-director-shadow"></i>
-              <i class="catalogo-director-hair"></i>
-              <i class="catalogo-director-head"></i>
-              <i class="catalogo-director-glasses"></i>
-              <i class="catalogo-director-body"></i>
-              <i class="catalogo-director-arm arm-left">
-                <span class="catalogo-director-hand left-hand"></span>
-              </i>
-              <i class="catalogo-director-arm arm-right">
-                <span class="catalogo-director-hand right-hand"></span>
-                <span class="catalogo-director-laser-burst">
-                  <span class="catalogo-pointer-beam"></span>
-                </span>
-              </i>
-              <i class="catalogo-director-leg leg-left"></i>
-              <i class="catalogo-director-leg leg-right"></i>
+            <div class="catalogo-war-soldier soldier-alpha">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier soldier-beta">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier soldier-gamma">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier soldier-epsilon">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier soldier-zeta">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier soldier-delta">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier soldier-eta">
+              <span class="catalogo-war-rifle"></span>
             </div>
           </div>
-
-          <div class="catalogo-skywatcher watcher-one"></div>
-          <div class="catalogo-skywatcher watcher-two"></div>
         </div>
 
         <div class="catalogo-visual-copy">

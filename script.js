@@ -3142,30 +3142,34 @@ const getInsidersLiteMode = () => {
   return hardwareThreads > 0 && hardwareThreads <= 4;
 };
 
-const getInsidersArmyCount = (requestedCount = 20) => {
-  const safeRequestedCount = Math.max(8, Number.parseInt(requestedCount, 10) || 20);
-  const isCompactViewport = window.matchMedia("(max-width: 960px)").matches;
-
-  if (getInsidersLiteMode()) {
-    return Math.min(safeRequestedCount, isCompactViewport ? 10 : 14);
-  }
-
-  return Math.min(safeRequestedCount, isCompactViewport ? 12 : 20);
+const getInsidersArmyCount = (requestedCount = 5) => {
+  const safeRequestedCount = Number.parseInt(requestedCount, 10) || 5;
+  return Math.min(5, Math.max(5, safeRequestedCount));
 };
 
-const createInsidersArmyRobot = (rowIndex, columnIndex, rowCount, columnCount) => {
+const getInsidersSquadBlueprint = (isCompactViewport = false) => {
+  if (isCompactViewport) {
+    return [
+      { x: 10, y: 43, scale: 0.62, tilt: -11, delay: -0.4, bob: 6.2, palette: "crimson", pose: "sentinel" },
+      { x: 29, y: 31, scale: 0.78, tilt: -7, delay: -1.1, bob: 7.1, palette: "azure", pose: "blade" },
+      { x: 50, y: 18, scale: 0.98, tilt: 0, delay: -0.2, bob: 8.1, palette: "gold", pose: "leader" },
+      { x: 71, y: 31, scale: 0.78, tilt: 7, delay: -1.4, bob: 7.1, palette: "emerald", pose: "striker" },
+      { x: 90, y: 43, scale: 0.62, tilt: 11, delay: -0.8, bob: 6.2, palette: "magenta", pose: "guard" }
+    ];
+  }
+
+  return [
+    { x: 9.5, y: 39, scale: 0.8, tilt: -12, delay: -0.5, bob: 6.7, palette: "crimson", pose: "sentinel" },
+    { x: 28.5, y: 23, scale: 1.01, tilt: -8, delay: -1.3, bob: 7.5, palette: "azure", pose: "blade" },
+    { x: 50, y: 10, scale: 1.28, tilt: 0, delay: -0.1, bob: 8.7, palette: "gold", pose: "leader" },
+    { x: 71.5, y: 23, scale: 1.01, tilt: 8, delay: -1.7, bob: 7.5, palette: "emerald", pose: "striker" },
+    { x: 90.5, y: 39, scale: 0.8, tilt: 12, delay: -0.9, bob: 6.7, palette: "magenta", pose: "guard" }
+  ];
+};
+
+const createInsidersArmyRobot = (config = {}) => {
   const robot = document.createElement("article");
   const fragment = document.createDocumentFragment();
-  const depth = rowCount <= 1 ? 1 : rowIndex / (rowCount - 1);
-  const xRatio = columnCount <= 1 ? 0.5 : columnIndex / (columnCount - 1);
-  const x = 10 + xRatio * 80;
-  const y = 6 + depth * 60;
-  const scale = 0.16 + depth * 0.42;
-  const stepDuration = 0.78 + depth * 0.42;
-  const swing = 16 + depth * 8;
-  const opacity = 0.34 + depth * 0.66;
-  const delay = -1 * (rowIndex * 0.06 + columnIndex * 0.03);
-  const tilt = -8 + depth * 3;
   const partClassNames = [
     "robot-shadow",
     "robot-crest",
@@ -3179,17 +3183,24 @@ const createInsidersArmyRobot = (rowIndex, columnIndex, rowCount, columnCount) =
     "robot-leg leg-left",
     "robot-leg leg-right"
   ];
+  const x = Number(config.x || 50);
+  const y = Number(config.y || 58);
+  const scale = Number(config.scale || 0.82);
+  const delay = Number(config.delay || 0);
+  const tilt = Number(config.tilt || 0);
+  const bob = Number(config.bob || 7.2);
+  const palette = String(config.palette || "gold").trim() || "gold";
+  const pose = String(config.pose || "leader").trim() || "leader";
 
-  robot.className = "insider-robot robot-scout";
+  robot.className = `insider-robot robot-squad palette-${palette} pose-${pose}`;
   robot.style.setProperty("--army-x", `${x.toFixed(2)}%`);
   robot.style.setProperty("--army-y", `${y.toFixed(2)}%`);
   robot.style.setProperty("--army-scale", scale.toFixed(3));
-  robot.style.setProperty("--army-step", `${stepDuration.toFixed(2)}s`);
   robot.style.setProperty("--army-delay", `${delay.toFixed(2)}s`);
-  robot.style.setProperty("--army-swing", `${swing.toFixed(2)}deg`);
   robot.style.setProperty("--army-tilt", `${tilt.toFixed(2)}deg`);
-  robot.style.setProperty("--army-opacity", opacity.toFixed(2));
-  robot.style.setProperty("--robot-z", `${10 + rowIndex}`);
+  robot.style.setProperty("--army-bob", `${bob.toFixed(2)}px`);
+  robot.style.setProperty("--army-opacity", scale >= 1 ? "1" : "0.96");
+  robot.style.setProperty("--robot-z", `${Math.round(scale * 10) + 10}`);
 
   partClassNames.forEach((className) => {
     const part = document.createElement("span");
@@ -3213,28 +3224,16 @@ const initializeInsidersArmy = () => {
 
     buildInsidersArmyChant();
 
-    const totalCount = getInsidersArmyCount(insidersArmyScene.dataset.armyCount || "20");
+    const totalCount = getInsidersArmyCount(insidersArmyScene.dataset.armyCount || "5");
     const isLiteMode = getInsidersLiteMode();
-    const columnCount = Math.max(isLiteMode ? 4 : 5, Math.round(Math.sqrt(totalCount * 1.15)));
-    const rowCount = Math.ceil(totalCount / columnCount);
+    const isCompactViewport = window.matchMedia("(max-width: 960px)").matches;
+    const blueprint = getInsidersSquadBlueprint(isCompactViewport).slice(0, totalCount);
     const fragment = document.createDocumentFragment();
-    let robotIndex = 0;
 
     insidersArmyScene.dataset.armyMode = isLiteMode ? "lite" : "full";
-    insidersArmyScene.style.setProperty("--insiders-army-count", String(totalCount));
-
-    for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
-      for (let columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
-        if (robotIndex >= totalCount) {
-          break;
-        }
-
-        fragment.appendChild(
-          createInsidersArmyRobot(rowIndex, columnIndex, rowCount, columnCount)
-        );
-        robotIndex += 1;
-      }
-    }
+    insidersArmyScene.dataset.armyFormation = "squad";
+    insidersArmyScene.style.setProperty("--insiders-army-count", String(blueprint.length));
+    blueprint.forEach((config) => fragment.appendChild(createInsidersArmyRobot(config)));
 
     insidersArmyScene.textContent = "";
     insidersArmyScene.appendChild(fragment);

@@ -1,52 +1,53 @@
 # CODEX Memory
 
-Ultima atualizacao: 2026-04-16 09:45 -05:00 (America/Rio_Branco)
+Ultima atualizacao: 2026-04-16 12:08 -05:00 (America/Rio_Branco)
 
 ## Preferencia do usuario
 
 - Quando o chat reiniciar, retomar o trabalho sem pedir tudo de novo.
 - Manter uma memoria local do que esta em andamento neste projeto.
+- Trabalhar sem ficar pedindo permissao para fluxo normal.
 
 ## Pedido atual em andamento
 
-Finalizar os ajustes visuais da home e subir a versao:
+Reformular a home com tres focos visuais:
 
-1. reduzir o exercito de robos do rodape para no maximo 20
-2. adicionar uma ceninha de guerra no fundo do pop-up inicial
-3. conferir responsivo para ficar bom no celular, com cara de app
-4. subir e deixar rodando
+1. trocar o "exercito" por uma equipe de 5 robos ocupando o card, com poses de ataque tipo esquadrao
+2. deixar o pop-up inicial com clima mais forte de guerra, com explosoes, bombas e soldados em combate
+3. fazer o logo do Cruzeiro girar no proprio eixo, em vez de parecer orbitar em volta
 
 ## O que ja foi feito
 
-- [index.html](C:/Users/junio/projeto codex/index.html) agora usa `data-army-count="20"` na area do exercito do rodape.
-- [script.js](C:/Users/junio/projeto codex/script.js) passou a limitar o exercito para no maximo 20 no desktop e menos em modo compacto/lite.
-- [styles.css](C:/Users/junio/projeto codex/styles.css) recebeu um ajuste para deixar a area do rodape mais leve e menor.
-- [startup-experience.js](C:/Users/junio/projeto codex/startup-experience.js) ganhou `buildWelcomeVisualMarkup()` para reutilizar a arte visual no pop-up normal e no compacto.
-- [startup-experience.css](C:/Users/junio/projeto codex/startup-experience.css) ganhou a cena de guerra (`catalogo-war-tableau`) e um topo visual compacto para o mobile.
-- O mobile compacto do pop-up foi corrigido para alinhar pelo topo (`.catalogo-welcome.is-compact { place-items: start center; }`), evitando o corte estranho do card.
+- [index.html](C:/Users/junio/projeto codex/index.html) agora fixa o rodape em `data-army-count="5"` e atualiza a copy para "Esquadrão editorial em ataque".
+- [script.js](C:/Users/junio/projeto codex/script.js) passou a travar o rodape em 5 robos e usar um blueprint fixo de posicoes, escala e pose para desktop e mobile.
+- [styles.css](C:/Users/junio/projeto codex/styles.css) recebeu overrides para o esquadrao ocupar mais o card, subir no enquadramento e ganhar poses mais agressivas.
+- [startup-experience.js](C:/Users/junio/projeto codex/startup-experience.js) ganhou mais elementos da cena de guerra: bombas extras, flashes, crateras e novos soldados.
+- [startup-experience.css](C:/Users/junio/projeto codex/startup-experience.css) foi reforcado para puxar o pop-up para uma leitura mais de batalha: fundo escurecido, explosoes maiores, combate mais visivel e ajuste compacto no mobile.
+- [styles.css](C:/Users/junio/projeto codex/styles.css) tambem reforca a animacao de `.southern-cross-orbit` para girar no proprio eixo (`rotateZ`) sem ficar parecendo orbita lateral.
 
 ## Validacoes ja feitas
 
-Capturas em `.codex-temp/visual-verify/`:
+Capturas mais recentes em `.codex-temp/visual-verify/`:
 
-- `startup-popup-desktop.png`
-- `startup-popup-mobile-viewport.png`
-- `footer-army-desktop.png`
-- `footer-army-mobile.png`
+- `turn5-popup-desktop.png`
+- `turn4-popup-mobile.png`
+- `turn8-footer-desktop.png`
+- `turn12-footer-desktop-tall.png`
+- `turn13-squad-desktop.png`
 
 Leitura atual dessas validacoes:
 
-- popup desktop: ok
-- popup mobile: ok apos alinhar o card compacto pelo topo
-- rodape desktop: ok, bem mais leve
-- rodape mobile: ok, botoes e blocos continuam legiveis
+- popup mobile: melhorou bem, a leitura de guerra ficou clara e mais pesada
+- popup desktop: melhorou, mas ainda vale revisar se quiser mais caos visual acima da linha media do card
+- rodape: o bloco foi reduzido para 5 robos e o codigo agora posiciona o esquadrao muito mais alto; as capturas do rodape ficaram inconsistentes por causa do enquadramento do iframe de validacao
+- sintaxe: `node --check script.js` e `node --check startup-experience.js` passaram
 
 ## Pendencia principal agora
 
-- Fazer o deploy final da versao atualizada.
+- Se quiser concluir o ciclo completo, falta fazer o commit/push dessas alteracoes novas e acionar deploy.
 
 ## Observacoes importantes
 
-- O workspace esta com outras alteracoes ja existentes do usuario, inclusive em `news-data.js`, `server.js`, `script.js` e `styles.css`.
-- Arquivos de `data/` mudaram durante as validacoes locais; tomar cuidado para nao subir ruido desnecessario se o deploy for via commit.
-- Tentativa de acesso SSH ao VPS `108.174.144.183:22022` com senha falhou em 2026-04-16, entao o caminho mais provavel de deploy pode ser `git push` para acionar a hospedagem ligada ao GitHub.
+- O workspace continua com outras alteracoes ja existentes do usuario em `news-data.js`, `server.js` e arquivos de `data/`; nao reverter.
+- Arquivos de `data/` mudam durante validacoes locais; evitar incluir ruido desnecessario em commit.
+- O commit anterior que ja foi para `origin/main` foi `5cd6811` (`Ajustar popup inicial e aliviar exercito do rodape`).
