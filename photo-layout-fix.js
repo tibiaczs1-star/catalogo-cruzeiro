@@ -19,7 +19,31 @@
     "girl",
     "boy",
     "face",
-    "model"
+    "model",
+    "rosto",
+    "retrato",
+    "cantor",
+    "cantora",
+    "artista",
+    "ator",
+    "atriz",
+    "jogador",
+    "jogadora",
+    "ciclista",
+    "atleta",
+    "prefeito",
+    "prefeita",
+    "governador",
+    "governadora",
+    "senador",
+    "senadora",
+    "deputado",
+    "deputada",
+    "ministro",
+    "ministra",
+    "presidente",
+    "entrevista",
+    "bbb"
   ];
 
   function normalize(value) {
@@ -103,10 +127,11 @@
       const box = chosen.boundingBox;
       if (!box) return;
 
+      const ratio = img.naturalWidth / Math.max(1, img.naturalHeight);
       const x = ((box.x + box.width / 2) / img.naturalWidth) * 100;
       const y = ((box.y + box.height * 0.4) / img.naturalHeight) * 100;
       const safeX = Math.max(20, Math.min(80, x));
-      const safeY = Math.max(16, Math.min(62, y));
+      const safeY = Math.max(ratio < 1.05 ? 14 : 18, Math.min(ratio < 1.05 ? 38 : 54, y));
 
       frame.classList.add("photo-face-focus");
       frame.style.setProperty("--face-pos", `${safeX}% ${safeY}%`);
@@ -118,17 +143,18 @@
 
   function applyBaseCrop(frame, img) {
     const ratio = img.naturalWidth / Math.max(1, img.naturalHeight);
+    const prefersPerson = hasPersonHint(frame, img);
     frame.classList.remove("photo-portrait", "photo-person-safe", "photo-face-focus");
 
-    if (ratio < 0.95) {
+    if (ratio < 0.68) {
       frame.classList.add("photo-portrait");
-      img.style.objectPosition = "50% 20%";
+      img.style.objectPosition = prefersPerson ? "50% 14%" : "50% 18%";
       return;
     }
 
-    if (hasPersonHint(frame, img)) {
+    if (prefersPerson || ratio < 1.24) {
       frame.classList.add("photo-person-safe");
-      img.style.objectPosition = "50% 22%";
+      img.style.objectPosition = ratio < 0.95 ? "50% 18%" : "50% 22%";
       return;
     }
 

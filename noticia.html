@@ -51,8 +51,8 @@
         "image": ["{{SITE_URL}}/assets/og-cover.svg"]
       }
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260415e" />
-  <link rel="stylesheet" href="noticia-enhance.css?v=20260411j" />
+    <link rel="stylesheet" href="./styles.css?v=20260415v" />
+  <link rel="stylesheet" href="noticia-enhance.css?v=20260415k" />
   <link rel="stylesheet" href="contrast-mixer.css?v=20260411n" />
   <link rel="stylesheet" href="servicos-menu.css?v=20260411m" />
   <link rel="stylesheet" href="rodape-voz-humana.css?v=20260411o" />
@@ -95,6 +95,32 @@
           <div class="analysis-box reveal" id="detail-analysis-container" hidden>
             <p id="detail-analysis"></p>
           </div>
+
+          <section
+            class="detail-fact-tabs reveal"
+            id="detail-fact-tabs"
+            aria-labelledby="detail-fact-tabs-title"
+            hidden
+          >
+            <div class="detail-fact-tabs-header">
+              <p class="eyebrow">leitura editorial da pauta</p>
+              <h2 id="detail-fact-tabs-title">O que importa, o que é verdade e o que exige cautela</h2>
+              <p>
+                Separação rápida do texto-base em quatro frentes: impacto imediato, fatos
+                confirmados, pontos ainda incertos e fake news comprovadamente desmentidas.
+              </p>
+            </div>
+
+            <div class="detail-fact-tabs-shell">
+              <div
+                class="detail-fact-tab-list"
+                id="detail-fact-tabs-list"
+                role="tablist"
+                aria-label="Classificação editorial da matéria"
+              ></div>
+              <div class="detail-fact-panels" id="detail-fact-tabs-panels"></div>
+            </div>
+          </section>
 
           <div class="detail-grid">
             <section class="detail-content" id="detail-content"></section>
@@ -175,7 +201,7 @@
 
     <script defer src="./news-data.js?v=20260414z"></script>
     <script defer src="runtime-config.js?v=20260413d"></script>
-    <script defer src="./noticia.js?v=20260414b"></script>
+    <script defer src="./noticia.js?v=20260415a"></script>
   <script defer src="analytics-client.js?v=20260415b"></script>
   <script defer src="engagement-api.js?v=20260411j"></script>
   <script defer src="servicos-menu.js?v=20260411m"></script>

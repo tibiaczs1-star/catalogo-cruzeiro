@@ -21,6 +21,7 @@ const radarGuide = document.querySelector("#radar-guide");
 const radarGuideLabel = document.querySelector("#radar-guide-label");
 const radarGuideText = document.querySelector("#radar-guide-text");
 const radarGuideScene = radarGuide?.querySelector(".radar-guide-scene");
+const radarGuideSprite = radarGuide?.querySelector(".radar-guide-sprite");
 const radarGuideLaser = radarGuide?.querySelector(".radar-guide-laser");
 const radarGuideLaserDot = radarGuide?.querySelector(".radar-guide-laser-dot");
 const radarGuideLantern = radarGuide?.querySelector(".radar-guide-lantern");
@@ -64,6 +65,8 @@ const heroOfficeBubble = document.querySelector("[data-hero-office-bubble]");
 const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
 const insidersTypedNodes = [...document.querySelectorAll("[data-insiders-typed]")];
 const insidersBootScene = document.querySelector("[data-insiders-boot-scene]");
+const insidersArmyScene = document.querySelector("[data-insiders-army]");
+const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
 const tickerLiveGrid = document.querySelector("#ticker-live-grid");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
@@ -75,42 +78,42 @@ const splashMessages = [
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const tickerPhrasePool = [
-  { label: "Radar", text: "Radar local sobe primeiro o que mexe com Cruzeiro do Sul sem enrolação." },
-  { label: "Arquivo", text: "Arquivo do mês organiza contexto para quem caiu agora na pauta." },
-  { label: "Comunidade", text: "Recados da comunidade entram na roda com leitura rápida e filtro humano." },
+  { label: "Radar", text: "Radar local destaca primeiro o que impacta Cruzeiro do Sul no dia." },
+  { label: "Arquivo", text: "Arquivo do mês ajuda a entender o contexto das notícias mais recentes." },
+  { label: "Comunidade", text: "Recados da comunidade entram com leitura rápida e informação útil." },
   { label: "Serviço", text: "Serviço útil aparece com endereço, horário e caminho para resolver." },
-  { label: "Checagem", text: "Checagem antes do hype continua como regra da bancada." },
+  { label: "Checagem", text: "Cada destaque sobe com checagem, contexto e fonte identificada." },
   { label: "Agenda", text: "Agenda cultural, cinema e teatro correm juntos no painel vivo." },
   { label: "Negócios", text: "Negócios locais ganham espaço com foco no que movimenta a cidade." },
-  { label: "Educação", text: "Escolas, vestibular e oportunidades estudantis ficam no radar contínuo." },
+  { label: "Educação", text: "Escolas, vestibular e oportunidades estudantis ficam sempre por perto." },
   { label: "Trânsito", text: "Mudou a rua, mudou a rotina: o letreiro avisa sem rodeio." },
   { label: "Clima", text: "Tempo, cheia e alerta entram cedo quando afetam o dia da população." },
-  { label: "Cultura", text: "Cultura local aparece com voz própria, não só como nota de rodapé." },
-  { label: "Social", text: "Festas, bastidores e repercussão social passam aqui em ritmo de redação." },
-  { label: "Opinião", text: "Humor e opinião aparecem, mas o fato continua guiando a capa." },
+  { label: "Cultura", text: "A cultura local aparece com voz própria e espaço de verdade." },
+  { label: "Social", text: "Festas, bastidores e repercussão social passam aqui com ritmo leve." },
+  { label: "Opinião", text: "Humor e opinião aparecem sem tirar o foco do fato principal." },
   { label: "Fonte", text: "Resumo original com link para a fonte segue firme em cada bloco." },
-  { label: "Pauta", text: "Pauta quente recebe contexto para não virar só barulho." },
+  { label: "Pauta", text: "Os assuntos mais quentes entram com contexto, não só com barulho." },
   { label: "Bairro", text: "O que acontece no bairro também merece manchete bem tratada." },
   { label: "Plantão", text: "Plantão leve, visual limpo e leitura rápida para quem está no corre." },
-  { label: "Comunidade", text: "Pedido de correção, aviso de evento e pauta de rua entram no fluxo." },
+  { label: "Comunidade", text: "Pedidos de correção, avisos de evento e mensagens úteis entram no fluxo." },
   { label: "Saúde", text: "Saúde, escola e utilidade pública ficam mais fáceis de achar nesta faixa." },
-  { label: "Feira", text: "Feira, comércio e pequenos negócios entram no mapa sem ficarem perdidos." },
-  { label: "Bastidor", text: "Bastidor editorial rodando ao vivo deixa a home com cara de newsroom." },
+  { label: "Feira", text: "Feira, comércio e pequenos negócios entram no mapa com clareza." },
+  { label: "Bastidor", text: "A cobertura mostra movimento e atualização sem perder clareza." },
   { label: "Agenda", text: "Show, peça, oficina e evento local aparecem em uma mesma corrida." },
   { label: "Serviço", text: "Telefone, endereço e atalho de serviço ficam mais perto do clique." },
-  { label: "Rede", text: "O que viraliza na rede só sobe com curadoria e contexto." },
-  { label: "Manchete", text: "Cada trilha mistura contexto, comunidade e chamadas de edição." },
+  { label: "Rede", text: "O que viraliza só sobe com curadoria, contexto e confirmação." },
+  { label: "Manchete", text: "Cada trilha mistura notícia, serviço e comunidade em equilíbrio." },
   { label: "Cobertura", text: "Cobertura regional passa em camadas para leitura rápida e contexto claro." },
-  { label: "Leitor", text: "Leitor local encontra serviço rápido antes mesmo de abrir a matéria." },
+  { label: "Leitor", text: "Quem mora na cidade encontra serviço rápido antes mesmo de abrir a matéria." },
   { label: "Centro", text: "Centro, bairros e zona rural podem dividir o mesmo painel com equilíbrio." },
-  { label: "Política", text: "Política entra com leitura clara, sem parecer mural de campanha." },
+  { label: "Política", text: "Política entra com leitura clara, contexto e nomes identificados." },
   { label: "Mercado", text: "Anúncio, membro e patrocínio convivem sem apagar a informação." },
   { label: "Cultura", text: "Cinema, teatro e agenda criativa ganham mais presença no topo." },
-  { label: "Tempo real", text: "As frases trocam direto para mostrar o que esta acontecendo agora." },
+  { label: "Tempo real", text: "As frases trocam ao longo do dia para acompanhar o que está acontecendo agora." },
   { label: "Curadoria", text: "Curadoria regional mantém o foco no que realmente importa por aqui." },
-  { label: "Destaque", text: "O topo vira uma grade viva em vez de uma faixa parada." },
-  { label: "Vale do Juruá", text: "Vale do Juruá aparece como território vivo, não só como rodapé." },
-  { label: "Redação", text: "Letreiros em movimento deixam a entrada do site mais informativa e pulsante." }
+  { label: "Destaque", text: "O topo vira uma grade viva para mostrar o que mexe com a cidade." },
+  { label: "Vale do Juruá", text: "O Vale do Juruá aparece como território vivo, com contexto e proximidade." },
+  { label: "Redação", text: "A entrada do site reúne atualização contínua, leitura rápida e contexto local." }
 ];
 const tickerRuntime = {
   timerIds: []
@@ -162,17 +165,17 @@ const heroTourismPhotoPool = [
   { file: "CruzeirodoSul-AC-BRA.jpg", title: "Faixa panoramica", note: "leitura horizontal da cidade" }
 ];
 const heroOfficeBubblePool = [
-  "Recebendo documentos da pauta",
-  "Cafe passado e resumo em revisao",
-  "Monitorando grupos e redes locais",
-  "Portal oficial aberto no painel",
-  "Radar local entrando no ar"
+  "Atualizando destaques da cidade",
+  "Resumo local em revisão",
+  "Acompanhando ruas, redes e agenda",
+  "Novas informações entrando no radar",
+  "Edição do dia em atualização"
 ];
 const heroOfficeStatusGroups = [
-  ["Portal oficial ok", "Equipe nas redes", "Cafe e docs na mesa"],
-  ["Pauta do Jurua", "Fonte confirmada", "Texto entrando no ar"],
-  ["Documento recebido", "Monitor ligado", "Radar quase pronto"],
-  ["Checagem em curso", "Headline em ajuste", "Equipe no escritorio"]
+  ["Cobertura local", "Fontes verificadas", "Atualização contínua"],
+  ["Radar do Juruá", "Serviço em destaque", "Leitura rápida"],
+  ["Agenda da cidade", "Contexto local", "Publicação no ar"],
+  ["Movimento da região", "Apuração ativa", "Destaques confirmados"]
 ];
 let lastArchiveBrowserOpenAt = 0;
 
@@ -202,7 +205,7 @@ const buildLiveTickerPhrasePool = (items = []) => {
     .slice(0, 18)
     .map((article) => ({
       label: truncateCopy(article.category || article.sourceName || "Agora", 20),
-      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 108)
+      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 84)
     }));
 };
 
@@ -606,6 +609,165 @@ const paintSurfaceImage = (node, url, position = "center", size = "cover") => {
   node.style.setProperty("background-repeat", "no-repeat", "important");
 };
 
+const thumbLightingCache = new Map();
+
+const clampColorChannel = (value = 0) => Math.min(255, Math.max(0, Math.round(value)));
+
+const buildThumbRgb = (red = 0, green = 0, blue = 0) =>
+  `rgb(${clampColorChannel(red)}, ${clampColorChannel(green)}, ${clampColorChannel(blue)})`;
+
+const buildThumbRgba = (red = 0, green = 0, blue = 0, alpha = 1) =>
+  `rgba(${clampColorChannel(red)}, ${clampColorChannel(green)}, ${clampColorChannel(blue)}, ${alpha})`;
+
+const buildFallbackThumbLighting = (article = {}, url = "") => {
+  const seedSource = String(url || article.slug || article.title || article.category || "thumb");
+  let hash = 0;
+
+  for (const char of seedSource) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+
+  const red = 76 + (hash % 104);
+  const green = 94 + ((hash >> 7) % 92);
+  const blue = 124 + ((hash >> 13) % 108);
+
+  return {
+    accent1: buildThumbRgb(red, green, blue),
+    accent2: buildThumbRgb(red * 0.34, green * 0.36, blue * 0.44),
+    glow: buildThumbRgba(red * 1.12, green * 1.08, blue * 1.04, 0.48),
+    highlight: buildThumbRgba(255, 255, 255, 0.18),
+    shadow: buildThumbRgba(red * 0.26, green * 0.22, blue * 0.3, 0.42)
+  };
+};
+
+const extractThumbLighting = (url, article = {}) => {
+  const cacheKey = String(url || "").trim();
+  const fallback = buildFallbackThumbLighting(article, cacheKey);
+
+  if (!cacheKey) {
+    return Promise.resolve(fallback);
+  }
+
+  if (!thumbLightingCache.has(cacheKey)) {
+    thumbLightingCache.set(
+      cacheKey,
+      new Promise((resolve) => {
+        const sample = new Image();
+        sample.crossOrigin = "anonymous";
+        sample.referrerPolicy = "no-referrer";
+
+        sample.onload = () => {
+          try {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d", { willReadFrequently: true });
+
+            if (!context) {
+              resolve(fallback);
+              return;
+            }
+
+            const sampleSize = 18;
+            canvas.width = sampleSize;
+            canvas.height = sampleSize;
+            context.drawImage(sample, 0, 0, sampleSize, sampleSize);
+
+            const { data } = context.getImageData(0, 0, sampleSize, sampleSize);
+            let totalWeight = 0;
+            let red = 0;
+            let green = 0;
+            let blue = 0;
+            let brightest = { red: 255, green: 244, blue: 194, luminance: 0 };
+
+            for (let index = 0; index < data.length; index += 4) {
+              const alpha = data[index + 3];
+              if (alpha < 48) {
+                continue;
+              }
+
+              const pixelRed = data[index];
+              const pixelGreen = data[index + 1];
+              const pixelBlue = data[index + 2];
+              const luminance =
+                pixelRed * 0.2126 + pixelGreen * 0.7152 + pixelBlue * 0.0722;
+              const weight = 0.35 + luminance / 255;
+
+              totalWeight += weight;
+              red += pixelRed * weight;
+              green += pixelGreen * weight;
+              blue += pixelBlue * weight;
+
+              if (luminance >= brightest.luminance) {
+                brightest = {
+                  red: pixelRed,
+                  green: pixelGreen,
+                  blue: pixelBlue,
+                  luminance
+                };
+              }
+            }
+
+            if (!totalWeight) {
+              resolve(fallback);
+              return;
+            }
+
+            const avgRed = red / totalWeight;
+            const avgGreen = green / totalWeight;
+            const avgBlue = blue / totalWeight;
+
+            resolve({
+              accent1: buildThumbRgb(avgRed * 1.06, avgGreen * 1.03, avgBlue * 1.04),
+              accent2: buildThumbRgb(avgRed * 0.34, avgGreen * 0.31, avgBlue * 0.4),
+              glow: buildThumbRgba(
+                brightest.red * 1.08,
+                brightest.green * 1.06,
+                brightest.blue * 1.02,
+                0.52
+              ),
+              highlight: buildThumbRgba(
+                Math.max(232, brightest.red),
+                Math.max(232, brightest.green),
+                Math.max(228, brightest.blue),
+                0.2
+              ),
+              shadow: buildThumbRgba(avgRed * 0.2, avgGreen * 0.18, avgBlue * 0.24, 0.42)
+            });
+          } catch (_error) {
+            resolve(fallback);
+          }
+        };
+
+        sample.onerror = () => resolve(fallback);
+        sample.src = cacheKey;
+      })
+    );
+  }
+
+  return thumbLightingCache.get(cacheKey) || Promise.resolve(fallback);
+};
+
+const applyThumbPhotoLighting = (node, article, url) => {
+  if (!node || !url) {
+    return;
+  }
+
+  const requestToken = `${article?.slug || article?.id || article?.sourceUrl || url}`;
+  node.dataset.thumbLightingToken = requestToken;
+
+  extractThumbLighting(url, article).then((lighting) => {
+    if (!lighting || node.dataset.thumbLightingToken !== requestToken) {
+      return;
+    }
+
+    node.style.setProperty("--thumb-accent-1", lighting.accent1);
+    node.style.setProperty("--thumb-accent-2", lighting.accent2);
+    node.style.setProperty("--thumb-glow", lighting.glow);
+    node.style.setProperty("--thumb-photo-glow", lighting.glow);
+    node.style.setProperty("--thumb-photo-highlight", lighting.highlight);
+    node.style.setProperty("--thumb-photo-shadow", lighting.shadow);
+  });
+};
+
 const paintMosaicImageElement = (panelNode, url, position = "center 35%") => {
   if (!panelNode || !url) {
     return;
@@ -623,13 +785,83 @@ const paintMosaicImageElement = (panelNode, url, position = "center 35%") => {
   panelNode.classList.add("has-photo", "has-real-photo");
 };
 
+const mosaicImageFocusOverridesBySlug = {
+  "ciclista-acreano-chega-no-panama-para-disputa-do-sul-americano-da-juventude": "center 10%",
+  "governadora-mailza-assis-empossa-novo-delegado-geral-e-anuncia-concurso-publico-da-policia-civil":
+    "center 18%",
+  "bolsa-interrompe-sequencia-de-11-altas-e-cai-0-46": "center 46%"
+};
+
+const mosaicPersonFocusPattern =
+  /\b(ciclista|atleta|jogador|jogadora|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|delegado|delegada|secretario|secretaria|ministro|ministra|presidente|artista|cantor|cantora|ator|atriz|apresentador|apresentadora|treinador|treinadora|empresario|empresaria|medico|medica|juiz|juiza|estudante|aluno|aluna|entrevista)\b/;
+const mosaicGroupScenePattern =
+  /\b(posse|cerimonia|solenidade|evento|auditorio|reuniao|encontro|coletiva|equipe|time|selecao|colegio|grupo|plateia)\b/;
+const mosaicLandscapePattern =
+  /\b(bolsa|mercado|dolar|cidade|rio|ponte|bairro|rodovia|estrada|enchente|cheia|alag|obra|calcadao|orcamento|salario|superavit|petroleo|economia|feira|fachada|predio)\b/;
+
+const inferMosaicImageFocus = (article = {}, panelNode) => {
+  const manualFocus = String(article.imageFocus || "").trim();
+  if (manualFocus) {
+    return manualFocus;
+  }
+
+  const slug = String(article.slug || "").trim();
+  if (slug && mosaicImageFocusOverridesBySlug[slug]) {
+    return mosaicImageFocusOverridesBySlug[slug];
+  }
+
+  const isSideCard = Boolean(panelNode?.classList?.contains("side"));
+  const text = normalizeText(
+    [
+      article.title,
+      article.sourceLabel,
+      article.lede,
+      article.summary,
+      article.category,
+      article.sourceName
+    ].join(" ")
+  );
+
+  const prefersFace = mosaicPersonFocusPattern.test(text);
+  const isGroupScene = mosaicGroupScenePattern.test(text);
+  const isLandscape = mosaicLandscapePattern.test(text);
+
+  if (prefersFace && isGroupScene) {
+    return isSideCard ? "center 16%" : "center 20%";
+  }
+
+  if (prefersFace) {
+    return isSideCard ? "center 12%" : "center 18%";
+  }
+
+  if (isLandscape) {
+    return isSideCard ? "center 46%" : "center 34%";
+  }
+
+  return isSideCard ? "center 28%" : "center 30%";
+};
+
+let thumbImageRequestSequence = 0;
+
 const applyThumbImage = (thumbNode, article) => {
   if (!thumbNode) {
     return;
   }
 
+  const photoCard = thumbNode.closest(".news-card, .archive-card, .live-feed-card, .feed-card");
+  clearSurfaceImage(thumbNode);
+  const requestId = String(++thumbImageRequestSequence);
+  thumbNode.dataset.thumbImageRequest = requestId;
+
+  if (photoCard) {
+    photoCard.classList.remove("news-photo-fixed");
+    delete photoCard.dataset.imageUrl;
+    delete photoCard.dataset.sourceImage;
+    photoCard.style.removeProperty("--news-photo");
+  }
+
   resolveArticleImage(article).then((safeUrl) => {
-    if (!safeUrl) return;
+    if (!safeUrl || thumbNode.dataset.thumbImageRequest !== requestId) return;
     paintSurfaceImage(
       thumbNode,
       safeUrl,
@@ -639,8 +871,8 @@ const applyThumbImage = (thumbNode, article) => {
     thumbNode.dataset.imageUrl = safeUrl;
     thumbNode.dataset.sourceImage = safeUrl;
     thumbNode.classList.add("has-photo", "has-real-photo");
+    applyThumbPhotoLighting(thumbNode, article, safeUrl);
 
-    const photoCard = thumbNode.closest(".news-card, .archive-card, .live-feed-card, .feed-card");
     if (photoCard) {
       photoCard.classList.add("news-photo-fixed");
       photoCard.dataset.imageUrl = safeUrl;
@@ -668,6 +900,14 @@ const clearSurfaceImage = (node) => {
   node.style.removeProperty("--bg-position");
   node.style.removeProperty("--bg-size");
   node.style.removeProperty("--news-photo");
+  node.style.removeProperty("--thumb-accent-1");
+  node.style.removeProperty("--thumb-accent-2");
+  node.style.removeProperty("--thumb-glow");
+  node.style.removeProperty("--thumb-photo-glow");
+  node.style.removeProperty("--thumb-photo-highlight");
+  node.style.removeProperty("--thumb-photo-shadow");
+  delete node.dataset.thumbLightingToken;
+  delete node.dataset.thumbImageRequest;
   node.style.removeProperty("background-image");
   node.style.removeProperty("background-position");
   node.style.removeProperty("background-size");
@@ -687,7 +927,7 @@ const applyMosaicImage = (panelNode, article) => {
 
   resolveArticleImage(article, "hero").then((safeUrl) => {
     if (!safeUrl || panelNode.dataset.mosaicImageRequest !== requestId) return;
-    paintMosaicImageElement(panelNode, safeUrl, article?.imageFocus || "center 35%");
+    paintMosaicImageElement(panelNode, safeUrl, inferMosaicImageFocus(article, panelNode));
   });
 };
 
@@ -1115,6 +1355,60 @@ let radarGuideScanTopic = null;
 let radarGuideManualFocusUntil = Date.now() + 4200;
 const RADAR_GUIDE_MANUAL_LOCK_MS = 1200;
 
+const clampNumber = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const normalizeDegrees = (degrees = 0) => {
+  let normalized = Number(degrees) || 0;
+
+  while (normalized <= -180) normalized += 360;
+  while (normalized > 180) normalized -= 360;
+
+  return normalized;
+};
+
+const rotatePoint = ({ x = 0, y = 0 } = {}, angle = 0) => {
+  const radians = (angle * Math.PI) / 180;
+  const cosine = Math.cos(radians);
+  const sine = Math.sin(radians);
+
+  return {
+    x: x * cosine - y * sine,
+    y: x * sine + y * cosine
+  };
+};
+
+const getRadarGuideHandPose = (sceneRect, targetX, targetY) => {
+  if (!radarGuideSprite || !radarGuideFrontArm) {
+    return null;
+  }
+
+  const spriteRect = radarGuideSprite.getBoundingClientRect();
+  const armWidth = radarGuideFrontArm.offsetWidth || 15;
+  const armHeight = radarGuideFrontArm.offsetHeight || 76;
+  const spriteWidth = radarGuideSprite.offsetWidth || spriteRect.width || 1;
+  const spriteHeight = radarGuideSprite.offsetHeight || spriteRect.height || 1;
+  const scaleX = spriteRect.width / spriteWidth;
+  const scaleY = spriteRect.height / spriteHeight;
+  const shoulderLocalX = radarGuideFrontArm.offsetLeft + armWidth;
+  const shoulderLocalY = radarGuideFrontArm.offsetTop + armHeight * 0.16;
+  const shoulderX = spriteRect.left - sceneRect.left + shoulderLocalX * scaleX;
+  const shoulderY = spriteRect.top - sceneRect.top + shoulderLocalY * scaleY;
+  const shoulderAimAngle = Math.atan2(targetY - shoulderY, targetX - shoulderX) * (180 / Math.PI);
+  const handBaseVector = {
+    x: (-armWidth - 3) * scaleX,
+    y: (-(armHeight * 0.16) - 3) * scaleY
+  };
+  const handBaseAngle = Math.atan2(handBaseVector.y, handBaseVector.x) * (180 / Math.PI);
+  const armAngle = clampNumber(normalizeDegrees(shoulderAimAngle - handBaseAngle), -84, -10);
+  const handOffset = rotatePoint(handBaseVector, armAngle);
+
+  return {
+    armAngle,
+    handX: shoulderX + handOffset.x,
+    handY: shoulderY + handOffset.y
+  };
+};
+
 const getRadarGuideLaserTopic = (topicNodes = [], activeTopic = null) => {
   const nodes = topicNodes.filter(Boolean);
   if (!nodes.length) {
@@ -1165,27 +1459,34 @@ const updateRadarGuideTarget = () => {
   const laserTopic = getRadarGuideLaserTopic(topicNodes, activeTopic);
 
   topicNodes.forEach((topic) => {
-    topic.classList.toggle("is-active", topic === activeTopic);
+    const isLaserTopic = topic === (laserTopic || activeTopic);
+    const isLinkedTopic = topic === activeTopic;
+    topic.classList.toggle("is-active", isLaserTopic);
+    topic.classList.toggle("is-linked", isLinkedTopic);
   });
 
   const sceneRect = radarGuideScene.getBoundingClientRect();
-  const armRect = radarGuideFrontArm.getBoundingClientRect();
   const targetRect = (laserTopic || activeTopic || activeButton).getBoundingClientRect();
   const targetX = targetRect.left + targetRect.width / 2 - sceneRect.left;
   const targetY = targetRect.top + targetRect.height / 2 - sceneRect.top;
-  const handX = armRect.left + armRect.width * 0.12 - sceneRect.left;
-  const handY = armRect.top + armRect.height * 0.12 - sceneRect.top;
+  const handPose = getRadarGuideHandPose(sceneRect, targetX, targetY);
+  const fallbackArmRect = radarGuideFrontArm.getBoundingClientRect();
+  const handX =
+    handPose?.handX ?? fallbackArmRect.left + fallbackArmRect.width * 0.16 - sceneRect.left;
+  const handY =
+    handPose?.handY ?? fallbackArmRect.top + fallbackArmRect.height * 0.12 - sceneRect.top;
   const aimAngle = Math.atan2(targetY - handY, targetX - handX) * (180 / Math.PI);
-  const penAngle = Math.max(-34, Math.min(28, aimAngle + 146));
-  const armAngle = Math.max(-84, Math.min(-10, penAngle - 28));
+  const penAngle = clampNumber(normalizeDegrees(aimAngle - 180), -34, 28);
+  const armAngle = handPose?.armAngle ?? clampNumber(penAngle - 28, -84, -10);
   const penWidth = radarGuideLantern.offsetWidth || 58;
   const penHeight = radarGuideLantern.offsetHeight || 11;
   const penLeft = handX - penWidth + 6;
   const penTop = handY - penHeight / 2;
-  const penRadians = (penAngle * Math.PI) / 180;
-  const penReach = Math.max(20, penWidth - 8);
-  const originX = handX + Math.cos(penRadians) * -penReach;
-  const originY = handY + Math.sin(penRadians) * -penReach;
+  const tipAngle = penAngle + 180;
+  const tipRadians = (tipAngle * Math.PI) / 180;
+  const penReach = Math.max(24, penWidth - 4);
+  const originX = handX + Math.cos(tipRadians) * penReach;
+  const originY = handY + Math.sin(tipRadians) * penReach;
   const distanceX = targetX - originX;
   const distanceY = targetY - originY;
   const length = Math.max(72, Math.hypot(distanceX, distanceY));
@@ -1500,6 +1801,7 @@ const ensureMediaBadge = (node, media) => {
 
 const liveFeedGrid = document.querySelector("#live-feed-grid");
 const liveFeedQuery = document.querySelector("#live-feed-query");
+const liveFeedSuggestions = document.querySelector("#arquivo-noticias-sugestoes");
 const liveFeedMore = document.querySelector("#live-feed-more");
 const liveFeedCount = document.querySelector("#live-feed-count");
 const liveFeedCountLabel = document.querySelector("#live-feed-count-label");
@@ -1781,6 +2083,39 @@ const formatDisplayDate = (value) => {
     year: "numeric",
     timeZone: localeTimeZone
   });
+};
+
+const formatCompactDisplayDate = (value) => {
+  if (!value) {
+    return "Sem data";
+  }
+
+  const parsed = new Date(value);
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed
+      .toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        timeZone: localeTimeZone
+      })
+      .replace(/\./g, "")
+      .replace(/\s+de\s+/gi, " ")
+      .trim();
+  }
+
+  return cleanArticleText(String(value || ""))
+    .replace(/\./g, "")
+    .replace(/\s+de\s+/gi, " ")
+    .trim();
+};
+
+const formatMosaicSourceLabel = (article = {}) => {
+  const sourceName = cleanArticleText(
+    article.sourceName || article.source || article.sourceLabel || "Fonte local"
+  );
+  const dateLabel = formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "");
+  return dateLabel && dateLabel !== "Sem data" ? `${sourceName} • ${dateLabel}` : sourceName;
 };
 
 const decodeBasicEntities = (value = "") =>
@@ -2733,6 +3068,115 @@ const initializeInsidersHeroScene = () => {
   }
 };
 
+const buildInsidersArmyChant = () => {
+  if (!insidersChantTrack || insidersChantTrack.dataset.ready === "true") {
+    return;
+  }
+
+  const slogans = ["INSIDERS", "AQUI TEM VERDADE"];
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < 20; index += 1) {
+    const badge = document.createElement("span");
+    badge.textContent = slogans[index % slogans.length];
+    fragment.appendChild(badge);
+  }
+
+  insidersChantTrack.appendChild(fragment);
+  insidersChantTrack.dataset.ready = "true";
+
+  window.requestAnimationFrame(() => {
+    const midpointBadge =
+      insidersChantTrack.children[Math.floor(insidersChantTrack.children.length / 2)];
+
+    if (midpointBadge instanceof HTMLElement) {
+      insidersChantTrack.style.setProperty("--chant-shift", `${midpointBadge.offsetLeft}px`);
+    }
+  });
+};
+
+const createInsidersArmyRobot = (rowIndex, columnIndex, rowCount, columnCount) => {
+  const robot = document.createElement("article");
+  const fragment = document.createDocumentFragment();
+  const depth = rowCount <= 1 ? 1 : rowIndex / (rowCount - 1);
+  const xRatio = columnCount <= 1 ? 0.5 : columnIndex / (columnCount - 1);
+  const x = 10 + xRatio * 80;
+  const y = 6 + depth * 60;
+  const scale = 0.16 + depth * 0.42;
+  const stepDuration = 0.78 + depth * 0.42;
+  const swing = 16 + depth * 8;
+  const opacity = 0.34 + depth * 0.66;
+  const delay = -1 * (rowIndex * 0.06 + columnIndex * 0.03);
+  const tilt = -8 + depth * 3;
+  const partClassNames = [
+    "robot-shadow",
+    "robot-crest",
+    "robot-head",
+    "robot-eye-band",
+    "robot-core",
+    "robot-shoulder shoulder-left",
+    "robot-shoulder shoulder-right",
+    "robot-arm arm-left",
+    "robot-arm arm-right",
+    "robot-leg leg-left",
+    "robot-leg leg-right"
+  ];
+
+  robot.className = "insider-robot robot-scout";
+  robot.style.setProperty("--army-x", `${x.toFixed(2)}%`);
+  robot.style.setProperty("--army-y", `${y.toFixed(2)}%`);
+  robot.style.setProperty("--army-scale", scale.toFixed(3));
+  robot.style.setProperty("--army-step", `${stepDuration.toFixed(2)}s`);
+  robot.style.setProperty("--army-delay", `${delay.toFixed(2)}s`);
+  robot.style.setProperty("--army-swing", `${swing.toFixed(2)}deg`);
+  robot.style.setProperty("--army-tilt", `${tilt.toFixed(2)}deg`);
+  robot.style.setProperty("--army-opacity", opacity.toFixed(2));
+  robot.style.setProperty("--robot-z", `${10 + rowIndex}`);
+
+  partClassNames.forEach((className) => {
+    const part = document.createElement("span");
+    part.className = className;
+    fragment.appendChild(part);
+  });
+
+  robot.appendChild(fragment);
+  return robot;
+};
+
+const initializeInsidersArmy = () => {
+  buildInsidersArmyChant();
+
+  if (!insidersArmyScene || insidersArmyScene.dataset.armyReady === "true") {
+    return;
+  }
+
+  const totalCount = Math.max(
+    24,
+    Number.parseInt(insidersArmyScene.dataset.armyCount || "100", 10) || 100
+  );
+  const columnCount = Math.max(6, Math.round(Math.sqrt(totalCount)));
+  const rowCount = Math.ceil(totalCount / columnCount);
+  const fragment = document.createDocumentFragment();
+  let robotIndex = 0;
+
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    for (let columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
+      if (robotIndex >= totalCount) {
+        break;
+      }
+
+      fragment.appendChild(
+        createInsidersArmyRobot(rowIndex, columnIndex, rowCount, columnCount)
+      );
+      robotIndex += 1;
+    }
+  }
+
+  insidersArmyScene.textContent = "";
+  insidersArmyScene.appendChild(fragment);
+  insidersArmyScene.dataset.armyReady = "true";
+};
+
 const escapeHtml = (value) =>
   String(value || "")
     .replace(/&/g, "&amp;")
@@ -2882,6 +3326,77 @@ const truncateCopy = (value, maxLength = 140) => {
   return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}...`;
 };
 
+const socialSurfaceBaseScores = {
+  "festas & social": 10,
+  social: 10,
+  cultura: 9,
+  esporte: 7,
+  educacao: 6,
+  negocios: 5,
+  prefeitura: 3,
+  politica: 1,
+  cotidiano: 1,
+  saude: 0,
+  policia: -8,
+  "utilidade publica": -5
+};
+
+const socialSurfaceSignalPattern =
+  /\b(festa|show|festival|evento|agenda|cultura|arte|teatro|cinema|musica|viral|rede social|instagram|tiktok|youtube|influenc|celebridade|aniversario|casamento|exposicao|feira|programacao|oficina|comunidade|historia|superacao|retrato|juventude|turma|bairro|trabalhador|pascoa)\b/;
+
+const socialSurfaceHeavyPattern =
+  /\b(crime|homicidio|prisao|operacao|assalto|roubo|furto|morte|ice|stf|cpi|inss|detran|doenca|hospital|vacina|alagacao|enchente|alerta|beneficiario)\b/;
+
+const socialSurfacePublicEventPattern =
+  /\b(show|festa|festival|programacao|agenda|evento|cultura|credenciamento|trabalhador|pascoa|natal|feira|oficina|artista|apresentacao)\b/;
+
+const getSocialSurfaceScore = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const categoryKey = normalized.categoryKey || normalizeText(normalized.category);
+  const haystack = normalizeText(
+    [
+      normalized.title,
+      normalized.sourceLabel,
+      normalized.lede,
+      normalized.summary,
+      normalized.category,
+      normalized.sourceName
+    ].join(" ")
+  );
+
+  let score = socialSurfaceBaseScores[categoryKey] ?? 0;
+
+  if (socialSurfaceSignalPattern.test(haystack)) {
+    score += 6;
+  }
+
+  if (/\b(viral|instagram|tiktok|youtube|rede|post|video|fotos?)\b/.test(haystack)) {
+    score += 3;
+  }
+
+  if (/\b(show|festival|cinema|teatro|musica|artista|agenda|evento|oficina|feira)\b/.test(haystack)) {
+    score += 3;
+  }
+
+  if (/\b(historia|superacao|comunidade|aluno|estudante|professor|familia|bairro|juventude)\b/.test(haystack)) {
+    score += 2;
+  }
+
+  if (categoryKey === "prefeitura" && socialSurfacePublicEventPattern.test(haystack)) {
+    score += 3;
+  }
+
+  if (socialSurfaceHeavyPattern.test(haystack)) {
+    score -= 7;
+  }
+
+  if (!articleHasUsableImageCandidate(normalized)) {
+    score -= 2;
+  }
+
+  return score;
+};
+
 const pickSocialFallbackArticles = (items = [], count = 0, usedKeys = new Set()) => {
   if (count <= 0) {
     return [];
@@ -2890,30 +3405,84 @@ const pickSocialFallbackArticles = (items = [], count = 0, usedKeys = new Set())
   const candidates = sortRadarArticles(dedupeNewsItems(items)).map((item) =>
     normalizeRuntimeArticle(item)
   );
+  const heroReservedKeys =
+    newsSurfaceReservations.hero instanceof Set ? newsSurfaceReservations.hero : new Set();
+  const rankedCandidates = [...candidates].sort((left, right) => {
+    const scoreDiff = getSocialSurfaceScore(right) - getSocialSurfaceScore(left);
+    if (scoreDiff !== 0) {
+      return scoreDiff;
+    }
+
+    return getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
+  });
   const selected = [];
   const usedImages = new Set();
+  const categoryCounts = new Map();
 
-  candidates.some((article) => {
-    if (selected.length >= count) return true;
+  const tryPushSocialArticle = (
+    article,
+    {
+      allowDuplicateImages = false,
+      allowSecondFromCategory = false,
+      minimumScore = 0
+    } = {}
+  ) => {
+    if (selected.length >= count) {
+      return true;
+    }
+
     const articleKey = getArticleUsageKey(article);
-    if (!articleKey || usedKeys.has(articleKey)) return false;
+    if (!articleKey || usedKeys.has(articleKey) || heroReservedKeys.has(articleKey)) {
+      return false;
+    }
+
+    if (getSocialSurfaceScore(article) < minimumScore) {
+      return false;
+    }
+
+    const categoryKey = article.categoryKey || normalizeText(article.category);
+    const maxPerCategory = allowSecondFromCategory ? 2 : 1;
+    if ((categoryCounts.get(categoryKey) || 0) >= maxPerCategory) {
+      return false;
+    }
+
     const imageKey = getArticleImageKey(article);
-    if (!imageKey || usedImages.has(imageKey)) return false;
-    usedImages.add(imageKey);
+    if (!allowDuplicateImages && imageKey && usedImages.has(imageKey)) {
+      return false;
+    }
+
+    if (imageKey) {
+      usedImages.add(imageKey);
+    }
     usedKeys.add(articleKey);
+    categoryCounts.set(categoryKey, (categoryCounts.get(categoryKey) || 0) + 1);
     selected.push(article);
-    return false;
-  });
+    return selected.length >= count;
+  };
+
+  rankedCandidates.some((article) =>
+    tryPushSocialArticle(article, {
+      minimumScore: 3
+    })
+  );
 
   if (selected.length < count) {
-    candidates.some((article) => {
-      if (selected.length >= count) return true;
-      const articleKey = getArticleUsageKey(article);
-      if (!articleKey || usedKeys.has(articleKey)) return false;
-      usedKeys.add(articleKey);
-      selected.push(article);
-      return false;
-    });
+    rankedCandidates.some((article) =>
+      tryPushSocialArticle(article, {
+        allowSecondFromCategory: true,
+        minimumScore: 1
+      })
+    );
+  }
+
+  if (selected.length < count) {
+    candidates.some((article) =>
+      tryPushSocialArticle(article, {
+        allowDuplicateImages: true,
+        allowSecondFromCategory: true,
+        minimumScore: -2
+      })
+    );
   }
 
   return selected;
@@ -3058,7 +3627,7 @@ const hydrateMosaicHero = (items = []) => {
 
   const editionNode = hero.querySelector(".mosaic-edition");
   if (editionNode && referenceDateKey) {
-    editionNode.textContent = `Edicao visual - ${formatDisplayDate(`${referenceDateKey}T12:00:00`)}`;
+    editionNode.textContent = `Edicao visual • ${formatCompactDisplayDate(`${referenceDateKey}T12:00:00`)}`;
   }
 
   cards.forEach((card, index) => {
@@ -3088,7 +3657,7 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (source) {
-      source.textContent = `${article.sourceName} - ${article.date}`;
+      source.textContent = formatMosaicSourceLabel(article);
     }
 
     if (titleNode) {
@@ -3145,6 +3714,7 @@ hydrateMosaicHero(initialMergedNews);
 hydrateStaticMediaSurfaces();
 initializeHeroTourismHero();
 attachArchiveBrowserLaunchers();
+initializeInsidersArmy();
 initializeInsidersBootScreen();
 initializeInsidersHeroScene();
 
@@ -3237,15 +3807,63 @@ if (window.ELECTIONS_DATA?.offices?.length) {
   const electionOpinionSummaryKey = "catalogo_election_opinion_summary_v1";
   const electionVoterIdKey = "catalogo_election_voter_id_v1";
   const electionVoterProfileKey = "catalogo_election_voter_profile_v1";
-  const electionOffices = window.ELECTIONS_DATA.offices;
+  const electionCycle = String(window.ELECTIONS_DATA.cycle || "").toLowerCase();
+  const generalElectionOfficeIds = new Set([
+    "governador",
+    "senador",
+    "deputado-federal",
+    "deputado-estadual"
+  ]);
+  const electionOffices = window.ELECTIONS_DATA.offices.filter((office) => {
+    const officeId = String(office?.id || "").trim();
+
+    if (!officeId) {
+      return false;
+    }
+
+    if (electionCycle === "geral") {
+      return generalElectionOfficeIds.has(officeId);
+    }
+
+    if (electionCycle === "municipal") {
+      return officeId === "municipal";
+    }
+
+    return true;
+  });
+  const availableElectionOfficeIds = new Set(electionOffices.map((office) => office.id));
   let remoteElectionVotes = null;
   let remoteElectionUserVotes = null;
   let remoteElectionOpinionSummary = null;
   let electionVoteModal = document.querySelector("#electionVoteModal");
   let electionVoteModalState = null;
+
+  electionFilters.forEach((button) => {
+    const officeId = String(button.dataset.office || "").trim();
+    const isAvailable = availableElectionOfficeIds.has(officeId);
+
+    button.hidden = !isAvailable;
+    button.disabled = !isAvailable;
+    button.setAttribute("aria-hidden", isAvailable ? "false" : "true");
+
+    if (!isAvailable) {
+      button.classList.remove("is-active");
+    }
+  });
+
   let activeElectionOfficeId =
-    electionFilters.find((button) => button.classList.contains("is-active"))?.dataset.office ||
-    electionOffices[0].id;
+    electionFilters.find(
+      (button) =>
+        button.classList.contains("is-active") &&
+        availableElectionOfficeIds.has(String(button.dataset.office || "").trim())
+    )?.dataset.office || electionOffices[0]?.id;
+
+  if (!electionOffices.length || !activeElectionOfficeId) {
+    if (electionGrid) {
+      electionGrid.innerHTML =
+        '<div class="feed-empty">Ainda não há cargos disponíveis para o ciclo eleitoral atual.</div>';
+    }
+  } else {
 
   const safeParseJson = (key, fallback) => {
     try {
@@ -3912,6 +4530,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
 
   renderElectionOffice(activeElectionOfficeId);
   hydrateElectionVotes();
+  }
 }
 
 const buildAgentWhatsappUrl = ({ name = "", email = "", subject = "", message = "" }) => {
@@ -4087,6 +4706,78 @@ const getSortedLiveFeedArticles = (items = []) =>
     return String(left.title || "").localeCompare(String(right.title || ""), "pt-BR");
   });
 
+const getLiveFeedSearchTerms = (query = "") =>
+  [...new Set(normalizeText(query).split(/\s+/).filter(Boolean))];
+
+const getLiveFeedQueryScore = (article, query = "") => {
+  const normalizedQuery = normalizeText(query);
+  if (!normalizedQuery) {
+    return 0;
+  }
+
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const title = normalizeText(normalizedArticle.title);
+  const lede = normalizeText(normalizedArticle.lede);
+  const category = normalizeText(normalizedArticle.category);
+  const sourceName = normalizeText(normalizedArticle.sourceName);
+  const sourceLabel = normalizeText(normalizedArticle.sourceLabel);
+  const haystack = normalizeText([title, lede, category, sourceName, sourceLabel].join(" "));
+  const terms = getLiveFeedSearchTerms(normalizedQuery);
+
+  let score = 0;
+  let matchedTerms = 0;
+
+  if (title === normalizedQuery) score += 260;
+  if (title.includes(normalizedQuery)) score += 140;
+  if (sourceLabel.includes(normalizedQuery)) score += 84;
+  if (category === normalizedQuery) score += 72;
+  if (category.includes(normalizedQuery)) score += 34;
+  if (sourceName.includes(normalizedQuery)) score += 28;
+  if (lede.includes(normalizedQuery)) score += 40;
+  if (haystack.includes(normalizedQuery)) score += 18;
+
+  terms.forEach((term) => {
+    let matched = false;
+
+    if (title.includes(term)) {
+      score += 42;
+      matched = true;
+    }
+
+    if (sourceLabel.includes(term)) {
+      score += 22;
+      matched = true;
+    }
+
+    if (category.includes(term)) {
+      score += 18;
+      matched = true;
+    }
+
+    if (sourceName.includes(term)) {
+      score += 14;
+      matched = true;
+    }
+
+    if (lede.includes(term)) {
+      score += 12;
+      matched = true;
+    }
+
+    if (matched || haystack.includes(term)) {
+      matchedTerms += 1;
+    }
+  });
+
+  if (matchedTerms === terms.length && terms.length > 1) {
+    score += 56;
+  } else if (matchedTerms > 0) {
+    score += matchedTerms * 8;
+  }
+
+  return score;
+};
+
 const getLiveFeedFilterOptions = (items = []) => {
   const categoryMap = new Map();
 
@@ -4177,36 +4868,47 @@ const renderLiveFeedFilters = () => {
 };
 
 const getFilteredLiveFeedArticles = () => {
-  const query = normalizeText(liveFeedQuery?.value || "");
+  const query = String(liveFeedQuery?.value || "").trim();
+  const normalizedQuery = normalizeText(query);
   const sortedArticles = getSortedLiveFeedArticles(liveFeedState.items);
+  const categoryFiltered = sortedArticles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      if (
+        liveFeedState.activeCategory &&
+        !articleMatchesCategoryFilter(article, liveFeedState.activeCategory)
+      ) {
+        return false;
+      }
 
-  return sortedArticles.filter((article) => {
-    const normalizedArticle = normalizeRuntimeArticle(article);
-
-    if (
-      liveFeedState.activeCategory &&
-      !articleMatchesCategoryFilter(normalizedArticle, liveFeedState.activeCategory)
-    ) {
-      return false;
-    }
-
-    if (!query) {
       return true;
-    }
+    });
 
-    const haystack = normalizeText(
-      [
-        normalizedArticle.title,
-        normalizedArticle.lede,
-        normalizedArticle.category,
-        normalizedArticle.eyebrow,
-        normalizedArticle.sourceName,
-        normalizedArticle.sourceLabel
-      ].join(" ")
-    );
+  if (!normalizedQuery) {
+    return categoryFiltered;
+  }
 
-    return haystack.includes(query);
-  });
+  return categoryFiltered
+    .map((article) => ({
+      article,
+      score: getLiveFeedQueryScore(article, normalizedQuery)
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score;
+      }
+
+      const rightDate = Date.parse(right.article.publishedAt || "") || parseArticleDate(right.article.date);
+      const leftDate = Date.parse(left.article.publishedAt || "") || parseArticleDate(left.article.date);
+
+      if (rightDate !== leftDate) {
+        return rightDate - leftDate;
+      }
+
+      return String(left.article.title || "").localeCompare(String(right.article.title || ""), "pt-BR");
+    })
+    .map((entry) => entry.article);
 };
 
 const updateLiveFeedSummary = (filtered, visibleSlice) => {
@@ -4306,6 +5008,138 @@ const renderLiveFeed = () => {
   registerArticleCardLinks(liveFeedGrid);
 };
 
+const closeLiveFeedSuggestions = () => {
+  if (!liveFeedSuggestions || !liveFeedQuery) {
+    return;
+  }
+
+  liveFeedSuggestions.hidden = true;
+  liveFeedQuery.setAttribute("aria-expanded", "false");
+};
+
+const getLiveFeedSuggestionArticles = () => {
+  if (!liveFeedQuery) {
+    return [];
+  }
+
+  const query = normalizeText(liveFeedQuery.value);
+  const categoryFiltered = getSortedLiveFeedArticles(liveFeedState.items)
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      if (!liveFeedState.activeCategory) {
+        return true;
+      }
+
+      return articleMatchesCategoryFilter(article, liveFeedState.activeCategory);
+    });
+
+  if (!query) {
+    return categoryFiltered;
+  }
+
+  return categoryFiltered
+    .map((article) => ({
+      article,
+      score: getLiveFeedQueryScore(article, query)
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score;
+      }
+
+      return getArticleSortTimestamp(right.article) - getArticleSortTimestamp(left.article);
+    })
+    .map((entry) => entry.article);
+};
+
+const renderLiveFeedSuggestions = () => {
+  if (!liveFeedSuggestions || !liveFeedQuery) {
+    return;
+  }
+
+  if (document.activeElement !== liveFeedQuery) {
+    closeLiveFeedSuggestions();
+    return;
+  }
+
+  const matches = getLiveFeedSuggestionArticles();
+  liveFeedSuggestions.innerHTML = "";
+
+  if (!matches.length) {
+    closeLiveFeedSuggestions();
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  matches.forEach((article) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "feed-suggestion-button is-article";
+    button.setAttribute("role", "option");
+    button.dataset.slug = article.slug || "";
+
+    const title = document.createElement("strong");
+    title.textContent = article.title;
+
+    const meta = document.createElement("small");
+    meta.textContent = `${article.sourceName} • ${article.date} • ${article.category}`;
+
+    button.append(title, meta);
+    fragment.appendChild(button);
+  });
+
+  liveFeedSuggestions.appendChild(fragment);
+  liveFeedSuggestions.hidden = false;
+  liveFeedQuery.setAttribute("aria-expanded", "true");
+};
+
+const attachLiveFeedAutocomplete = () => {
+  if (!liveFeedSuggestions || !liveFeedQuery || liveFeedSuggestions.dataset.bound === "true") {
+    return;
+  }
+
+  liveFeedSuggestions.dataset.bound = "true";
+  liveFeedQuery.setAttribute("autocomplete", "off");
+  liveFeedQuery.setAttribute("aria-controls", "arquivo-noticias-sugestoes");
+  liveFeedQuery.setAttribute("aria-expanded", "false");
+
+  liveFeedQuery.addEventListener("focus", renderLiveFeedSuggestions);
+  liveFeedQuery.addEventListener("click", renderLiveFeedSuggestions);
+  liveFeedQuery.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeLiveFeedSuggestions();
+    }
+  });
+
+  liveFeedSuggestions.addEventListener("mousedown", (event) => {
+    const button = event.target.closest(".feed-suggestion-button");
+    if (!button) {
+      return;
+    }
+
+    event.preventDefault();
+    const slug = button.dataset.slug || "";
+    const article = slug ? window.NEWS_MAP?.[slug] : null;
+    const nextValue = article?.title || button.querySelector("strong")?.textContent || "";
+
+    liveFeedQuery.value = nextValue;
+    liveFeedState.visibleItems = liveFeedState.pageSize;
+    renderLiveFeed();
+    closeLiveFeedSuggestions();
+    liveFeedQuery.focus();
+  });
+
+  document.addEventListener("mousedown", (event) => {
+    if (event.target === liveFeedQuery || liveFeedSuggestions.contains(event.target)) {
+      return;
+    }
+
+    closeLiveFeedSuggestions();
+  });
+};
+
 const scrollToLiveFeed = () => {
   const target = document.querySelector("#arquivo-vivo") || liveFeedGrid;
 
@@ -4331,6 +5165,7 @@ const applyLiveFeedCategoryFilter = (filter = "todos", { scroll = false } = {}) 
 
   renderLiveFeedFilters();
   renderLiveFeed();
+  renderLiveFeedSuggestions();
 
   if (scroll) {
     scrollToLiveFeed();
@@ -4352,12 +5187,16 @@ const updateLiveFeedItems = (items = [], { resetFilter = true } = {}) => {
   liveFeedState.visibleItems = liveFeedState.pageSize;
   renderLiveFeedFilters();
   renderLiveFeed();
+  renderLiveFeedSuggestions();
 };
 
 if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
+  attachLiveFeedAutocomplete();
+
   liveFeedQuery.addEventListener("input", () => {
     liveFeedState.visibleItems = liveFeedState.pageSize;
     renderLiveFeed();
+    renderLiveFeedSuggestions();
   });
 
   if (liveFeedClear) {
@@ -4372,6 +5211,7 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
 
       renderLiveFeedFilters();
       renderLiveFeed();
+      renderLiveFeedSuggestions();
     });
   }
 
@@ -4432,6 +5272,102 @@ const getLocalTodayIso = () => {
   });
 
   return formatter.format(new Date());
+};
+
+let sidebarClockTimerId = 0;
+
+const getSidebarSafeDateFormatter = (locale, options) => {
+  try {
+    return new Intl.DateTimeFormat(locale, { ...options, timeZone: localeTimeZone });
+  } catch (_error) {
+    return new Intl.DateTimeFormat(locale, options);
+  }
+};
+
+const getSidebarLocalDateParts = (date = new Date()) => {
+  const timeLabel = getSidebarSafeDateFormatter("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23"
+  }).format(date);
+
+  const dateLabel = getSidebarSafeDateFormatter("pt-BR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }).format(date);
+
+  const weekdayLabel = getSidebarSafeDateFormatter("pt-BR", {
+    weekday: "long"
+  }).format(date);
+
+  const hourValue = Number(
+    getSidebarSafeDateFormatter("en-US", {
+      hour: "2-digit",
+      hourCycle: "h23"
+    }).format(date)
+  );
+
+  return {
+    timeLabel,
+    dateLabel,
+    weekdayLabel,
+    hourValue: Number.isFinite(hourValue) ? hourValue : date.getHours()
+  };
+};
+
+const getSidebarDayPeriod = (hourValue = 12) => {
+  if (hourValue < 12) return "manhã";
+  if (hourValue < 18) return "tarde";
+  return "noite";
+};
+
+const buildSidebarSnapshotLabel = () => {
+  const { dateLabel } = getSidebarLocalDateParts();
+  return `snapshot ${dateLabel}`;
+};
+
+const buildSidebarWeatherNote = (weather = {}) => {
+  const { dateLabel, hourValue } = getSidebarLocalDateParts();
+  const period = getSidebarDayPeriod(hourValue);
+  const tonight = String(weather.tonight || "").trim();
+  const prefix = `Leitura pública atualizada para ${dateLabel}, ${period}.`;
+  return tonight ? `${prefix} ${tonight}` : prefix;
+};
+
+const refreshSidebarClock = () => {
+  const clockNode = document.querySelector("#live-clock");
+  const dateNode = document.querySelector("#live-date");
+  const weekdayNode = document.querySelector("#live-weekday");
+
+  if (!clockNode && !dateNode && !weekdayNode) {
+    return;
+  }
+
+  const { timeLabel, dateLabel, weekdayLabel } = getSidebarLocalDateParts();
+
+  if (clockNode) {
+    clockNode.textContent = timeLabel;
+  }
+
+  if (dateNode) {
+    dateNode.textContent = dateLabel;
+  }
+
+  if (weekdayNode) {
+    weekdayNode.textContent = `${weekdayLabel} • Acre • UTC-5`;
+  }
+};
+
+const bindSidebarClock = () => {
+  refreshSidebarClock();
+
+  if (sidebarClockTimerId) {
+    window.clearInterval(sidebarClockTimerId);
+  }
+
+  sidebarClockTimerId = window.setInterval(refreshSidebarClock, 1000);
 };
 
 const getNextHolidayText = (holidayGroups = []) => {
@@ -4694,7 +5630,7 @@ const renderSidebarWidgets = () => {
     <div class="sidebar-heading">
       <div>
         <p class="widget-title">Cruzeiro do Sul Agora</p>
-        <span class="widget-source">snapshot ${sidebarData.snapshotDate}</span>
+        <span class="widget-source">${buildSidebarSnapshotLabel()}</span>
       </div>
       <a class="widget-link" href="${sidebarData.weather.sourceUrl}" target="_blank" rel="noreferrer">clima real</a>
     </div>
@@ -4717,7 +5653,7 @@ const renderSidebarWidgets = () => {
         .map((detail) => `<span>${detail}</span>`)
         .join("")}
     </div>
-    <p class="widget-note">${sidebarData.weather.note} ${sidebarData.weather.observedAt}. ${sidebarData.weather.tonight}</p>
+    <p class="widget-note">${buildSidebarWeatherNote(sidebarData.weather)}</p>
     <p class="widget-note">${nextHolidayText}</p>
     <label class="sidebar-search-inline">
       <span>Buscar no portal</span>
@@ -4883,6 +5819,8 @@ const renderSidebarWidgets = () => {
     </div>
   `;
   }
+
+  bindSidebarClock();
 };
 
 const initializeSidebarWidgets = () => {
@@ -4890,43 +5828,6 @@ const initializeSidebarWidgets = () => {
   document
     .querySelectorAll(".side-rail .reveal")
     .forEach((node) => node.classList.add("active"));
-
-  const clockNode = document.querySelector("#live-clock");
-  const dateNode = document.querySelector("#live-date");
-  const weekdayNode = document.querySelector("#live-weekday");
-
-  const updateClock = () => {
-    const now = new Date();
-
-    if (clockNode) {
-      clockNode.textContent = now.toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit",
-        timeZone: localeTimeZone
-      });
-    }
-
-    if (dateNode) {
-      dateNode.textContent = now.toLocaleDateString("pt-BR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: localeTimeZone
-      });
-    }
-
-    if (weekdayNode) {
-      weekdayNode.textContent = now.toLocaleDateString("pt-BR", {
-        weekday: "long",
-        timeZone: localeTimeZone
-      });
-    }
-  };
-
-  if (clockNode || dateNode || weekdayNode) {
-    updateClock();
-    setInterval(updateClock, 30000);
-  }
 
   const sidebarSearch = document.querySelector("#sidebar-search");
 
@@ -5187,7 +6088,10 @@ const syncSupporterPaymentCard = async (forceNewTxid = false) => {
       subscriptionPixCode.value = payload.copyCode || "";
     }
     if (subscriptionPaymentNote) {
-      subscriptionPaymentNote.textContent = `Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual do Pix antes de entrar no mural.`;
+      const recipientName = String(payload.recipientName || "").trim();
+      subscriptionPaymentNote.textContent = recipientName
+        ? `Recebedor: ${recipientName}. Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual do Pix antes de entrar no mural.`
+        : `Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual do Pix antes de entrar no mural.`;
     }
   } catch (error) {
     if (subscriptionPixQr) {

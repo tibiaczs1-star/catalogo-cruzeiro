@@ -65,7 +65,12 @@ const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "99567741204").trim();
 const NINJAS_PIX_DEFAULT_AMOUNT = 5;
-const NINJAS_MERCHANT_NAME = String(process.env.NINJAS_MERCHANT_NAME || "CATALOGO CZS").trim();
+const NINJAS_PIX_RECEIVER_NAME = String(
+  process.env.NINJAS_PIX_RECEIVER_NAME || "ANTONIO CLOVIS CORREIA DA SILVA JUNIOR"
+).trim();
+const NINJAS_MERCHANT_NAME = String(
+  process.env.NINJAS_MERCHANT_NAME || NINJAS_PIX_RECEIVER_NAME || "CATALOGO CZS"
+).trim();
 const NINJAS_MERCHANT_CITY = String(process.env.NINJAS_MERCHANT_CITY || "CRUZEIRO DO SUL").trim();
 const PREVIEW_CLASS_BY_CATEGORY = {
   cotidiano: "thumb-cheia",
@@ -889,6 +894,10 @@ function cleanShortText(value, maxLength = 160) {
   return String(value || "").replace(/\s+/g, " ").trim().slice(0, maxLength);
 }
 
+function hasPixKeyConfigured() {
+  return Boolean(cleanShortText(NINJAS_PIX_KEY, 77));
+}
+
 function escapeHtml(value) {
   return String(value || "")
     .replace(/&/g, "&amp;")
@@ -1695,6 +1704,11 @@ function buildPixPayload({ amount, txid, description }) {
   const merchantCity = normalizePixText(NINJAS_MERCHANT_CITY || "CRUZEIRO DO SUL", 15) || "CRUZEIRO DO SUL";
   const safeTxid = normalizePixToken(txid || `NJS${Date.now()}`, 25) || `NJS${Date.now()}`;
   const pixKey = cleanShortText(NINJAS_PIX_KEY, 77);
+
+  if (!pixKey) {
+    throw new Error("pix-key-not-configured");
+  }
+
   const accountInfo = [
     buildPixField("00", "br.gov.bcb.pix"),
     buildPixField("01", pixKey)
@@ -1759,6 +1773,8 @@ async function buildNinjasPixConfig({
 
   return {
     key: NINJAS_PIX_KEY,
+    recipientName: NINJAS_PIX_RECEIVER_NAME,
+    merchantName: normalizePixText(NINJAS_MERCHANT_NAME, 25) || "CATALOGO CZS",
     amount: Number(safeAmount.toFixed(2)),
     txid: payload.txid,
     copyCode: payload.copyCode,
@@ -4142,6 +4158,13 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/ninjas/pix") {
+    if (!hasPixKeyConfigured()) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Pagamento Pix indisponivel no momento."
+      });
+    }
+
     const amount = searchParams.get("amount") || NINJAS_PIX_DEFAULT_AMOUNT;
     const txid = searchParams.get("txid") || "";
     const description = searchParams.get("description") || searchParams.get("label") || "Ninjas Cruzeiro";
@@ -4163,6 +4186,14 @@ async function handleApi(req, res, pathname, searchParams) {
     }
 
     const paymentAmount = NINJAS_PIX_DEFAULT_AMOUNT;
+
+    if (!hasPixKeyConfigured()) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Pedidos pagos estao indisponiveis ate configurar a chave Pix."
+      });
+    }
+
     const paymentTxid =
       normalizePixToken(body.paymentTxid || body.txid || `NJSREQ${Date.now()}`, 25) || `NJSREQ${Date.now()}`;
     const nextItem = {
@@ -4217,6 +4248,14 @@ async function handleApi(req, res, pathname, searchParams) {
     const plan =
       rawPlan === "destaque" || rawPlan === "creditos" || rawPlan === "creditos-pro" ? rawPlan : "gratis";
     const paymentAmount = plan === "gratis" ? 0 : Math.max(5, Math.min(100, parseCurrency(body.paymentAmount, 5)));
+
+    if (paymentAmount > 0 && !hasPixKeyConfigured()) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Planos pagos estao indisponiveis ate configurar a chave Pix."
+      });
+    }
+
     const credits = getNinjasCreditsFromPlan(plan, paymentAmount);
     const paymentTxid = paymentAmount
       ? normalizePixToken(body.paymentTxid || body.txid || `NJSPRO${Date.now()}`, 25) || `NJSPRO${Date.now()}`
@@ -4492,6 +4531,13 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/subscriptions/pix") {
+    if (!hasPixKeyConfigured()) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Pagamento Pix indisponivel no momento."
+      });
+    }
+
     const amount = searchParams.get("amount") || 5;
     const txid = searchParams.get("txid") || "";
     const description = searchParams.get("description") || "Apoio Fundador Catalogo";
@@ -4650,6 +4696,14 @@ async function handleApi(req, res, pathname, searchParams) {
     const subs = readJson(path.join(DATA_DIR, "subscriptions.json"), []);
     const plan = String(body.plan || "resumo-7h-gratis").trim() || "resumo-7h-gratis";
     const amount = plan === "fundadores" ? Math.max(1, Math.min(10, parseCurrency(body.amount, 5))) : 0;
+
+    if (plan === "fundadores" && !hasPixKeyConfigured()) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Apoio fundador por Pix esta indisponivel ate configurar a chave Pix."
+      });
+    }
+
     const paymentTxid =
       plan === "fundadores"
         ? normalizePixToken(body.paymentTxid || body.txid || `FUND${Date.now()}`, 25) || `FUND${Date.now()}`

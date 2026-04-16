@@ -261,6 +261,78 @@
     });
   };
 
+  const getSearchTerms = (query = "") =>
+    [...new Set(normalizeText(query).split(/\s+/).filter(Boolean))];
+
+  const getQueryScore = (article, query = "") => {
+    const normalizedQuery = normalizeText(query);
+    if (!normalizedQuery) {
+      return 0;
+    }
+
+    const normalizedArticle = normalizeArticle(article);
+    const title = normalizeText(normalizedArticle.title);
+    const lede = normalizeText(normalizedArticle.lede);
+    const category = normalizeText(normalizedArticle.category);
+    const sourceName = normalizeText(normalizedArticle.sourceName);
+    const sourceLabel = normalizeText(normalizedArticle.sourceLabel);
+    const haystack = normalizeText([title, lede, category, sourceName, sourceLabel].join(" "));
+    const terms = getSearchTerms(normalizedQuery);
+
+    let score = 0;
+    let matchedTerms = 0;
+
+    if (title === normalizedQuery) score += 260;
+    if (title.includes(normalizedQuery)) score += 140;
+    if (sourceLabel.includes(normalizedQuery)) score += 84;
+    if (category === normalizedQuery) score += 72;
+    if (category.includes(normalizedQuery)) score += 34;
+    if (sourceName.includes(normalizedQuery)) score += 28;
+    if (lede.includes(normalizedQuery)) score += 40;
+    if (haystack.includes(normalizedQuery)) score += 18;
+
+    terms.forEach((term) => {
+      let matched = false;
+
+      if (title.includes(term)) {
+        score += 42;
+        matched = true;
+      }
+
+      if (sourceLabel.includes(term)) {
+        score += 22;
+        matched = true;
+      }
+
+      if (category.includes(term)) {
+        score += 18;
+        matched = true;
+      }
+
+      if (sourceName.includes(term)) {
+        score += 14;
+        matched = true;
+      }
+
+      if (lede.includes(term)) {
+        score += 12;
+        matched = true;
+      }
+
+      if (matched || haystack.includes(term)) {
+        matchedTerms += 1;
+      }
+    });
+
+    if (matchedTerms === terms.length && terms.length > 1) {
+      score += 56;
+    } else if (matchedTerms > 0) {
+      score += matchedTerms * 8;
+    }
+
+    return score;
+  };
+
   const getApiUrl = (path) => {
     if (typeof window.CATALOGO_API_BASE === "string" && window.CATALOGO_API_BASE) {
       return `${window.CATALOGO_API_BASE.replace(/\/$/, "")}${path}`;
@@ -368,25 +440,7 @@
   };
 
   const matchesQuery = (article, query = "") => {
-    const normalizedQuery = normalizeText(query);
-
-    if (!normalizedQuery) {
-      return true;
-    }
-
-    const text = normalizeText(
-      [
-        article.title,
-        article.lede,
-        article.category,
-        article.sourceName,
-        article.sourceLabel,
-        ...(Array.isArray(article.highlights) ? article.highlights : []),
-        ...(Array.isArray(article.body) ? article.body : [])
-      ].join(" ")
-    );
-
-    return text.includes(normalizedQuery);
+    return getQueryScore(article, query) > 0;
   };
 
   const buildArticleHref = (article) =>
@@ -477,10 +531,36 @@
     state.initialQueryApplied = true;
   };
 
-  const getFilteredItems = (queryNode) =>
-    state.items.filter(
-      (article) => matchesCategory(article, state.activeCategory) && matchesQuery(article, queryNode?.value || "")
+  const getFilteredItems = (queryNode) => {
+    const queryValue = String(queryNode?.value || "").trim();
+    const categoryFiltered = state.items.filter((article) =>
+      matchesCategory(article, state.activeCategory)
     );
+
+    if (!normalizeText(queryValue)) {
+      return categoryFiltered;
+    }
+
+    return categoryFiltered
+      .map((article) => ({
+        article,
+        score: getQueryScore(article, queryValue)
+      }))
+      .filter((entry) => entry.score > 0)
+      .sort((left, right) => {
+        if (right.score !== left.score) {
+          return right.score - left.score;
+        }
+
+        const dateDiff = getSortTimestamp(right.article) - getSortTimestamp(left.article);
+        if (dateDiff !== 0) {
+          return dateDiff;
+        }
+
+        return String(left.article.title || "").localeCompare(String(right.article.title || ""), "pt-BR");
+      })
+      .map((entry) => entry.article);
+  };
 
   const getDominantCategory = (items) => {
     const counts = new Map();

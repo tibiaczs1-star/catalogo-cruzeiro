@@ -22,7 +22,12 @@ const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "99567741204").trim();
 const NINJAS_PIX_DEFAULT_AMOUNT = 5;
-const NINJAS_MERCHANT_NAME = String(process.env.NINJAS_MERCHANT_NAME || "CATALOGO CZS").trim();
+const NINJAS_PIX_RECEIVER_NAME = String(
+  process.env.NINJAS_PIX_RECEIVER_NAME || "ANTONIO CLOVIS CORREIA DA SILVA JUNIOR"
+).trim();
+const NINJAS_MERCHANT_NAME = String(
+  process.env.NINJAS_MERCHANT_NAME || NINJAS_PIX_RECEIVER_NAME || "CATALOGO CZS"
+).trim();
 const NINJAS_MERCHANT_CITY = String(process.env.NINJAS_MERCHANT_CITY || "CRUZEIRO DO SUL").trim();
 const NEWS_REFRESH_ENABLED = !["0", "false", "off"].includes(
   String(process.env.NEWS_REFRESH_ENABLED || "true").trim().toLowerCase()
@@ -278,6 +283,8 @@ async function buildNinjasPixConfig({ amount, txid, description }) {
   }
   return {
     key: NINJAS_PIX_KEY,
+    recipientName: NINJAS_PIX_RECEIVER_NAME,
+    merchantName: normalizePixText(NINJAS_MERCHANT_NAME, 25) || "CATALOGO CZS",
     amount: Number(safeAmount.toFixed(2)),
     txid: payload.txid,
     copyCode: payload.copyCode,

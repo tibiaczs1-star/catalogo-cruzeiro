@@ -38,9 +38,13 @@ Preencha estas variáveis:
 - `ADMIN_TOKEN=um-token-forte`
 - `SUPER_ADMIN_USER=admin`
 - `SUPER_ADMIN_PASSWORD=uma-senha-forte`
-- `NINJAS_PIX_KEY=` se quiser usar
-- `NINJAS_MERCHANT_NAME=CATALOGO CZS`
+- `NINJAS_PIX_KEY=99567741204`
+- `NINJAS_PIX_RECEIVER_NAME=ANTONIO CLOVIS CORREIA DA SILVA JUNIOR`
+- `NINJAS_MERCHANT_NAME=ANTONIO CLOVIS CORREIA DA SILVA JUNIOR`
 - `NINJAS_MERCHANT_CITY=CRUZEIRO DO SUL`
+
+Observação:
+o BR Code do Pix aceita nome técnico curto no payload, então o sistema normaliza esse campo automaticamente quando precisar.
 
 As demais já estão definidas no `render.yaml`.
 

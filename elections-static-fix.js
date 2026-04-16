@@ -59,8 +59,40 @@
 
     const controls = section.querySelector(".election-controls");
     const panels = Array.from(fallback.querySelectorAll("[data-static-office]"));
+    const availableOfficeIds = new Set(
+      Array.isArray(window.ELECTIONS_DATA?.offices)
+        ? window.ELECTIONS_DATA.offices.map((office) => String(office?.id || "").trim()).filter(Boolean)
+        : []
+    );
+    const filteredPanels = availableOfficeIds.size
+      ? panels.filter((panel) => availableOfficeIds.has(String(panel.dataset.staticOffice || "").trim()))
+      : panels;
     const resultTitle = section.querySelector("#election-results-title");
     const resultMeta = section.querySelector("#election-results-meta");
+
+    controls?.querySelectorAll("button").forEach((button) => {
+      const officeId =
+        officeAliases[button.dataset.office || ""] ||
+        officeAliases[normalizeOffice(button.dataset.office || button.textContent)] ||
+        normalizeOffice(button.dataset.office || button.textContent);
+      const isAvailable = !availableOfficeIds.size || availableOfficeIds.has(officeId);
+
+      button.hidden = !isAvailable;
+      button.disabled = !isAvailable;
+
+      if (!isAvailable) {
+        button.classList.remove("is-active");
+        button.setAttribute("aria-selected", "false");
+      }
+    });
+
+    panels.forEach((panel) => {
+      const officeId = String(panel.dataset.staticOffice || "").trim();
+      if (availableOfficeIds.size && !availableOfficeIds.has(officeId)) {
+        panel.hidden = true;
+      }
+    });
+
     const syncStaticVoteButtons = () => {
       const userVotes = readUserVotes();
 
@@ -80,14 +112,14 @@
 
     const setOffice = (officeId) => {
       const selected = officeAliases[officeId] || officeAliases[normalizeOffice(officeId)] || "governador";
-      const visiblePanels = panels.filter((panel) => panel.dataset.staticOffice === selected);
+      const visiblePanels = filteredPanels.filter((panel) => panel.dataset.staticOffice === selected);
 
-      panels.forEach((panel) => {
+      filteredPanels.forEach((panel) => {
         panel.hidden = selected !== "todos" && panel.dataset.staticOffice !== selected;
       });
 
       if (resultTitle) {
-        const firstPanel = visiblePanels[0] || panels[0];
+        const firstPanel = visiblePanels[0] || filteredPanels[0];
         const label = firstPanel?.querySelector(".election-office-title h3")?.textContent || "cargo";
         resultTitle.textContent = selected === "todos" ? "Preferência de Leitores por Cargo" : `Preferência de Leitores - ${label}`;
       }
@@ -150,7 +182,7 @@
       setOffice(section.querySelector(".election-controls .is-active")?.dataset.office || "governador");
     });
 
-    setOffice("governador");
+    setOffice(filteredPanels[0]?.dataset.staticOffice || "governador");
     syncStaticVoteButtons();
   };
 

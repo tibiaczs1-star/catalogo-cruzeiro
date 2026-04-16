@@ -208,9 +208,12 @@
       nodes.txid.textContent = payload.txid || "";
       nodes.qr.innerHTML = payload.qrSvg || "<p>QR indisponivel no momento.</p>";
       nodes.code.value = payload.copyCode || "";
+      const recipientName = String(payload.recipientName || "").trim();
       nodes.note.textContent =
         payload.confirmationMode === "manual"
-          ? "Confirmacao manual: guarde a referencia e use o comprovante na conferencia."
+          ? recipientName
+            ? `Recebedor: ${recipientName}. Confirmacao manual: guarde a referencia e use o comprovante na conferencia.`
+            : "Confirmacao manual: guarde a referencia e use o comprovante na conferencia."
           : "Pagamento pronto.";
 
       if (kind === "request") {

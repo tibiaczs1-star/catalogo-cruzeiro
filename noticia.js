@@ -60,6 +60,9 @@ const mediaLinkNode = document.querySelector("#detail-media-link");
 const highlightsNode = document.querySelector("#detail-highlights");
 const analysisContainer = document.querySelector("#detail-analysis-container");
 const analysisText = document.querySelector("#detail-analysis");
+const factTabsSection = document.querySelector("#detail-fact-tabs");
+const factTabsListNode = document.querySelector("#detail-fact-tabs-list");
+const factTabsPanelsNode = document.querySelector("#detail-fact-tabs-panels");
 const metaDescriptionNode = document.querySelector("#meta-description");
 const metaRobotsNode = document.querySelector("#meta-robots");
 const canonicalNode = document.querySelector("#meta-canonical");
@@ -252,6 +255,140 @@ const decodeBasicEntities = (value = "") =>
       const parsed = Number(code);
       return Number.isFinite(parsed) ? String.fromCharCode(parsed) : "";
     });
+
+const stripFeedArtifacts = (value = "") =>
+  String(value || "")
+    .replace(/\bdata-[a-z-]+\s*=\s*["'][^"']*["']/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/https?:\/\/[^\s"']+/gi, " ")
+    .replace(/\[\s*\.{3}\s*\]/g, " ")
+    .replace(/The post .*? appeared first on .*?(?:\.|$)/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const stripLeadingMediaCredit = (value = "") => {
+  const raw = String(value || "").trim();
+  const match = raw.match(
+    /^(?:foto|imagem|reprodução|reproducao|arquivo|vídeo|video)\s*:[^.!?]{0,220}\s(?=(?:o|a|os|as|um|uma|em|no|na|nos|nas|neste|nesta|após|apos|depois|para|com)\b)/i
+  );
+  return match ? raw.slice(match[0].length).trim() : raw;
+};
+
+const normalizeEditorialText = (value = "") =>
+  normalizeParagraph(stripLeadingMediaCredit(stripFeedArtifacts(decodeBasicEntities(value))));
+
+const dedupeTextList = (values = []) =>
+  [
+    ...new Set(
+      (Array.isArray(values) ? values : [values])
+        .map((value) => normalizeEditorialText(value))
+        .filter(Boolean)
+    )
+  ];
+
+const normalizeMarkerText = (value = "") =>
+  decodeBasicEntities(String(value || ""))
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+
+const splitIntoSentences = (value = "") => {
+  const cleaned = normalizeEditorialText(value);
+  if (!cleaned) {
+    return [];
+  }
+
+  return (cleaned.match(/[^.!?]+[.!?]?/g) || [])
+    .map((sentence) => normalizeParagraph(sentence))
+    .filter((sentence) => sentence.length > 18);
+};
+
+const getArticleDateLabel = (article = {}) => {
+  const directDate = normalizeEditorialText(article.date || "");
+  if (directDate) {
+    return directDate;
+  }
+
+  if (!article.publishedAt) {
+    return "data recente";
+  }
+
+  try {
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      timeZone: "America/Rio_Branco"
+    }).format(new Date(article.publishedAt));
+  } catch (_error) {
+    return "data recente";
+  }
+};
+
+const UNCERTAINTY_MARKERS = [
+  "pode estar",
+  "pode ser",
+  "podera",
+  "poderiam",
+  "poderia",
+  "cogitada",
+  "cogitado",
+  "sondada",
+  "sondado",
+  "suspeito",
+  "suspeita",
+  "investiga",
+  "investigado",
+  "investigada",
+  "alega",
+  "alegou",
+  "suposto",
+  "suposta",
+  "possivel",
+  "previsao",
+  "estimativa",
+  "projecao",
+  "devera",
+  "tendencia",
+  "expectativa",
+  "indicio",
+  "indicios"
+];
+
+const FAKE_NEWS_MARKERS = [
+  "fake news",
+  "boato",
+  "boatos",
+  "desmentiu",
+  "desmentido",
+  "nao procede",
+  "informacao falsa",
+  "informacoes falsas",
+  "enganoso",
+  "enganosa",
+  "mentira"
+];
+
+const textHasMarker = (value = "", markers = []) => {
+  const normalized = normalizeMarkerText(value);
+  return markers.some((marker) => normalized.includes(marker));
+};
+
+const getArticleSentencePool = (article = {}) =>
+  [
+    article.title,
+    article.sourceLabel,
+    article.lede,
+    article.summary,
+    article.analysis,
+    ...(Array.isArray(article.body) ? article.body : []),
+    ...(Array.isArray(article.highlights) ? article.highlights : [])
+  ]
+    .flatMap((value) => splitIntoSentences(value))
+    .filter(Boolean)
+    .filter((value, index, list) => list.indexOf(value) === index);
+
+const getLimitedItems = (values = [], limit = 4) => dedupeTextList(values).slice(0, limit);
 
 const sanitizeImageUrl = (value) => {
   const raw = String(value || "").trim();
@@ -615,19 +752,19 @@ const applyDetailHeroImage = async (article = {}) => {
 
 const getExpandedBodyParagraphs = (article) => {
   const baseParagraphs = Array.isArray(article.body)
-    ? article.body.map(normalizeParagraph).filter(Boolean)
+    ? article.body.map(normalizeEditorialText).filter(Boolean)
     : [];
-  const fallbackLede = normalizeParagraph(article.lede || "");
-  const source = article.sourceName || "fonte local";
-  const sourceLabel = normalizeParagraph(article.sourceLabel || article.title || "");
-  const category = normalizeParagraph(article.category || "tema local").toLowerCase();
-  const dateLabel = normalizeParagraph(article.date || "data recente");
+  const fallbackLede = normalizeEditorialText(article.lede || article.summary || "");
+  const source = normalizeEditorialText(article.sourceName || "fonte local");
+  const sourceLabel = normalizeEditorialText(article.sourceLabel || article.title || "");
+  const category = normalizeEditorialText(article.category || "tema local").toLowerCase();
+  const dateLabel = getArticleDateLabel(article);
   const highlights = Array.isArray(article.highlights)
-    ? article.highlights.map(normalizeParagraph).filter(Boolean)
+    ? article.highlights.map(normalizeEditorialText).filter(Boolean)
     : [];
 
   const highlightSentence = highlights.length > 0 ? highlights.join(", ") : "atualizacao da pauta";
-  const analysisSentence = normalizeParagraph(article.analysis || "");
+  const analysisSentence = normalizeEditorialText(article.analysis || "");
 
   const generated = [
     fallbackLede
@@ -653,12 +790,253 @@ const getExpandedBodyParagraphs = (article) => {
   return merged;
 };
 
+const buildEditorialFactTabs = (article = {}) => {
+  const sourceName = normalizeEditorialText(article.sourceName || "fonte local");
+  const sourceLabel = normalizeEditorialText(article.sourceLabel || article.title || "texto-base consultado");
+  const title = normalizeEditorialText(article.title || sourceLabel || "esta pauta");
+  const category = normalizeEditorialText(article.category || "tema local");
+  const categoryLower = category.toLowerCase();
+  const dateLabel = getArticleDateLabel(article);
+  const cleanAnalysis = normalizeEditorialText(article.analysis || "");
+  const cleanHighlights = dedupeTextList(article.highlights || []);
+  const sentences = getArticleSentencePool(article);
+  const leadSentence =
+    splitIntoSentences(article.lede || article.summary || article.title || "")[0] || title;
+  const truthSentences = sentences.filter(
+    (sentence) =>
+      !textHasMarker(sentence, UNCERTAINTY_MARKERS) && !textHasMarker(sentence, FAKE_NEWS_MARKERS)
+  );
+  const uncertaintySentences = sentences.filter(
+    (sentence) =>
+      textHasMarker(sentence, UNCERTAINTY_MARKERS) && !textHasMarker(sentence, FAKE_NEWS_MARKERS)
+  );
+  const fakeSentences = sentences.filter((sentence) => textHasMarker(sentence, FAKE_NEWS_MARKERS));
+
+  const importanceItems = getLimitedItems(
+    [
+      ...cleanHighlights,
+      leadSentence,
+      cleanAnalysis,
+      sourceLabel && sourceLabel !== title ? `O eixo central da pauta é: ${sourceLabel}.` : "",
+      `O impacto imediato desta matéria cai sobre ${categoryLower} e pede atenção para os efeitos práticos no dia a dia.`
+    ],
+    4
+  );
+
+  const truthItems = getLimitedItems(
+    [
+      ...truthSentences.slice(0, 3),
+      `Está confirmado que a pauta-base foi publicada por ${sourceName} em ${dateLabel}.`,
+      sourceLabel ? `A referência aberta consultada foi: ${sourceLabel}.` : ""
+    ],
+    4
+  );
+
+  const uncertaintyItems = getLimitedItems(
+    [
+      ...uncertaintySentences.slice(0, 3),
+      textHasMarker(title, UNCERTAINTY_MARKERS) ? title : ""
+    ],
+    4
+  );
+
+  const fakeItems = getLimitedItems(fakeSentences.slice(0, 3), 3);
+
+  return [
+    {
+      id: "importance",
+      label: "O que importa",
+      shortLabel: "impacto imediato",
+      tone: "importance",
+      stateLabel: "Essencial agora",
+      count: importanceItems.length > 0 ? importanceItems.length : 1,
+      description: `Leitura rápida do que realmente mexe com o leitor nesta pauta de ${categoryLower}.`,
+      items:
+        importanceItems.length > 0
+          ? importanceItems
+          : [`O eixo principal desta pauta é ${title} e o acompanhamento segue aberto.`]
+    },
+    {
+      id: "truth",
+      label: "O que é verdade",
+      shortLabel: "confirmado na fonte",
+      tone: "truth",
+      stateLabel: "Confirmado",
+      count: truthItems.length > 0 ? truthItems.length : 1,
+      description: `Aqui entram apenas os pontos sustentados no texto-base e na fonte ${sourceName}.`,
+      items:
+        truthItems.length > 0
+          ? truthItems
+          : [`O que está confirmado até aqui é a existência da publicação original e o tema ${title}.`]
+    },
+    {
+      id: "uncertainty",
+      label: "O que pode não ser verdade",
+      shortLabel: "ainda pede checagem",
+      tone: "uncertainty",
+      stateLabel: "Cautela",
+      count: uncertaintySentences.length,
+      description: "Trechos que dependem de confirmação adicional, contexto novo ou atualização oficial.",
+      items:
+        uncertaintyItems.length > 0
+          ? uncertaintyItems
+          : [
+              "Até agora, o texto-base desta matéria não apresenta um ponto explicitamente tratado como rumor ou dúvida relevante."
+            ]
+    },
+    {
+      id: "fake",
+      label: "Fake news comprovada",
+      shortLabel: "desmentido explícito",
+      tone: "fake",
+      stateLabel: "Desmentido",
+      count: fakeSentences.length,
+      description: "Só entra aqui o que o próprio material aponta claramente como boato ou informação falsa.",
+      items:
+        fakeItems.length > 0
+          ? fakeItems
+          : ["Nenhuma fake news comprovadamente desmentida aparece no texto-base desta matéria."]
+    }
+  ];
+};
+
+const clearFactTabs = () => {
+  if (!factTabsSection || !factTabsListNode || !factTabsPanelsNode) {
+    return;
+  }
+
+  factTabsListNode.innerHTML = "";
+  factTabsPanelsNode.innerHTML = "";
+  factTabsSection.hidden = true;
+};
+
+const renderFactTabs = (article = {}) => {
+  if (!factTabsSection || !factTabsListNode || !factTabsPanelsNode) {
+    return [];
+  }
+
+  const tabs = buildEditorialFactTabs(article);
+  factTabsListNode.innerHTML = "";
+  factTabsPanelsNode.innerHTML = "";
+
+  const activateTab = (tabId) => {
+    const buttons = [...factTabsListNode.querySelectorAll('[role="tab"]')];
+    const panels = [...factTabsPanelsNode.querySelectorAll('[role="tabpanel"]')];
+
+    buttons.forEach((button) => {
+      const isActive = button.dataset.tabId === tabId;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", isActive ? "true" : "false");
+      button.tabIndex = isActive ? 0 : -1;
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.tabId === tabId;
+      panel.hidden = !isActive;
+      panel.classList.toggle("is-active", isActive);
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `detail-fact-tab-button tone-${tab.tone}`;
+    button.id = `detail-fact-tab-${tab.id}`;
+    button.dataset.tabId = tab.id;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", `detail-fact-panel-${tab.id}`);
+    button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+    button.tabIndex = index === 0 ? 0 : -1;
+
+    const buttonLabel = document.createElement("strong");
+    buttonLabel.textContent = tab.label;
+    const buttonHelp = document.createElement("small");
+    buttonHelp.textContent = tab.shortLabel;
+    const buttonCount = document.createElement("span");
+    buttonCount.className = "detail-fact-tab-count";
+    buttonCount.classList.toggle("is-empty", Number(tab.count || 0) === 0);
+    buttonCount.textContent = String(tab.count ?? tab.items.length);
+
+    button.append(buttonLabel, buttonHelp, buttonCount);
+    button.addEventListener("click", () => activateTab(tab.id));
+    button.addEventListener("keydown", (event) => {
+      const buttons = [...factTabsListNode.querySelectorAll('[role="tab"]')];
+      const currentIndex = buttons.findIndex((item) => item.dataset.tabId === tab.id);
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        const next = buttons[(currentIndex + 1) % buttons.length];
+        activateTab(next.dataset.tabId);
+        next.focus();
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        const next = buttons[(currentIndex - 1 + buttons.length) % buttons.length];
+        activateTab(next.dataset.tabId);
+        next.focus();
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        activateTab(buttons[0].dataset.tabId);
+        buttons[0].focus();
+      }
+
+      if (event.key === "End") {
+        event.preventDefault();
+        activateTab(buttons[buttons.length - 1].dataset.tabId);
+        buttons[buttons.length - 1].focus();
+      }
+    });
+    factTabsListNode.appendChild(button);
+
+    const panel = document.createElement("section");
+    panel.className = `detail-fact-panel tone-${tab.tone}`;
+    panel.id = `detail-fact-panel-${tab.id}`;
+    panel.dataset.tabId = tab.id;
+    panel.setAttribute("role", "tabpanel");
+    panel.setAttribute("aria-labelledby", button.id);
+    panel.hidden = index !== 0;
+
+    const badge = document.createElement("span");
+    badge.className = `detail-fact-panel-badge tone-${tab.tone}`;
+    badge.textContent = tab.stateLabel;
+
+    const title = document.createElement("h3");
+    title.textContent = tab.label;
+
+    const description = document.createElement("p");
+    description.className = "detail-fact-panel-note";
+    description.textContent = tab.description;
+
+    const list = document.createElement("ul");
+    tab.items.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    });
+
+    panel.append(badge, title, description, list);
+    factTabsPanelsNode.appendChild(panel);
+  });
+
+  factTabsSection.hidden = false;
+  activateTab(tabs[0]?.id || "importance");
+  return tabs;
+};
+
 const renderNotFound = () => {
   updateArticleSeo(null, { indexable: false });
   titleNode.textContent = "Noticia nao encontrada";
   eyebrowNode.textContent = "catalogo cruzeiro do sul";
   metaNode.textContent = "O link pode estar incompleto ou a noticia ainda nao foi cadastrada.";
   ledeNode.textContent = "Volte para a home e escolha outra pauta.";
+  clearFactTabs();
+  if (analysisContainer) {
+    analysisContainer.hidden = true;
+    analysisContainer.classList.remove("active");
+  }
   sourceLinkNode.href = HOME_RETURN_URL;
   sourceLinkNode.removeAttribute("target");
   sourceLinkNode.removeAttribute("rel");
@@ -689,13 +1067,13 @@ const renderArticle = (article) => {
   updateArticleSeo(article, { indexable: true });
   eyebrowNode.textContent = article.eyebrow || "catalogo cruzeiro do sul";
   titleNode.textContent = article.title || "Abrindo noticia";
-  metaNode.textContent = `${article.date || "Sem data"} • ${article.category || "Noticia"}`;
+  metaNode.textContent = `${getArticleDateLabel(article)} • ${article.category || "Noticia"}`;
 
   resetDetailThumb();
   categoryNode.textContent = article.category || "Noticia";
-  ledeNode.textContent = article.lede || "";
+  ledeNode.textContent = normalizeEditorialText(article.lede || article.summary || "");
   sourceNameNode.textContent = article.sourceName || "Fonte local";
-  sourceLabelNode.textContent = article.sourceLabel || article.title || "";
+  sourceLabelNode.textContent = normalizeEditorialText(article.sourceLabel || article.title || "");
   sourceLinkNode.href = article.sourceUrl || HOME_RETURN_URL;
 
   if (article.sourceUrl && article.sourceUrl.startsWith("http")) {
@@ -707,12 +1085,15 @@ const renderArticle = (article) => {
   }
 
   if (article.analysis && analysisContainer && analysisText) {
-    analysisText.textContent = article.analysis;
+    analysisText.textContent = normalizeEditorialText(article.analysis);
     analysisContainer.hidden = false;
     analysisContainer.classList.add("active");
   } else if (analysisContainer) {
     analysisContainer.hidden = true;
+    analysisContainer.classList.remove("active");
   }
+
+  const editorialTabs = renderFactTabs(article);
 
   void applyDetailHeroImage(article);
 
@@ -764,7 +1145,7 @@ const renderArticle = (article) => {
   });
 
   const generatedDevelopment = Array.isArray(article.development)
-    ? article.development
+    ? article.development.map(normalizeEditorialText).filter(Boolean)
     : [
         `${article.title || "A pauta"} continua em acompanhamento no Catalogo Cruzeiro do Sul com foco nos impactos práticos para a rotina da cidade.`,
         `Na leitura local, o ponto central envolve ${String(article.category || "o tema principal").toLowerCase()} e seus efeitos diretos nos bairros, nos serviços e na vida de quem acompanha o caso.`,
@@ -784,12 +1165,15 @@ const renderArticle = (article) => {
   contentNode.appendChild(developmentBox);
 
   highlightsNode.innerHTML = "";
-  (article.highlights || []).forEach((highlight) => {
+  const quickHighlights =
+    editorialTabs.find((tab) => tab.id === "importance")?.items ||
+    dedupeTextList(article.highlights || []);
+
+  quickHighlights.slice(0, 4).forEach((highlight) => {
     const li = document.createElement("li");
     li.textContent = highlight;
     highlightsNode.appendChild(li);
   });
-
 };
 
 const loadRuntimeArticle = async (targetSlug) => {

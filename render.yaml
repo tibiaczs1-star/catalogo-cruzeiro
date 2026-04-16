@@ -31,6 +31,8 @@ services:
         sync: false
       - key: NINJAS_PIX_KEY
         sync: false
+      - key: NINJAS_PIX_RECEIVER_NAME
+        sync: false
       - key: NINJAS_MERCHANT_NAME
         sync: false
       - key: NINJAS_MERCHANT_CITY

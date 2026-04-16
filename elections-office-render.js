@@ -139,27 +139,6 @@
           proposals: ["trabalhadores", "fiscalização", "serviço público"]
         }
       ]
-    },
-    {
-      id: "municipal",
-      label: "Municipal",
-      scope: "Cruzeiro do Sul e cidades do Juruá",
-      candidates: [
-        {
-          id: "nomes-locais-prefeitura",
-          name: "Pré-candidatos locais",
-          party: "a confirmar",
-          summary: "Espaço reservado para nomes municipais confirmados pela cobertura local.",
-          proposals: ["saúde básica", "ruas", "educação municipal"]
-        },
-        {
-          id: "nomes-locais-camara",
-          name: "Câmara Municipal",
-          party: "a confirmar",
-          summary: "Espaço para lideranças comunitárias e nomes de vereadores em monitoramento.",
-          proposals: ["bairros", "fiscalização", "comunidade"]
-        }
-      ]
     }
   ];
 

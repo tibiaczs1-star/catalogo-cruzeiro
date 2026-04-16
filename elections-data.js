@@ -1,7 +1,9 @@
 window.ELECTIONS_DATA = {
-  updatedAt: "13 de abril de 2026",
+  electionYear: 2026,
+  cycle: "geral",
+  updatedAt: "15 de abril de 2026",
   sourceNote:
-    "Nomes em evidência no noticiário e em pesquisas publicadas. Candidaturas oficiais dependem de registro na Justiça Eleitoral.",
+    "Painel restrito ao pleito geral de 2026 no Acre: Governo, Senado, Câmara Federal e Assembleia Legislativa. Não há eleição municipal neste ciclo, e candidaturas oficiais dependem de registro na Justiça Eleitoral.",
   offices: [
     {
       id: "governador",
@@ -513,39 +515,6 @@ window.ELECTIONS_DATA = {
             "Representação do Vale do Juruá",
             "Educação e infraestrutura",
             "Apoio a produtores e comunidades"
-          ]
-        }
-      ]
-    },
-    {
-      id: "municipal",
-      label: "Municipal",
-      scope: "municipal",
-      badge: "Cruzeiro do Sul",
-      voteLimit: 1,
-      candidates: [
-        {
-          id: "zequinha-lima-municipal",
-          name: "Zequinha Lima",
-          party: "PP",
-          role: "prefeito de Cruzeiro do Sul",
-          imageUrl: "",
-          proposals: [
-            "Gestão municipal e serviços urbanos",
-            "Educação, saúde e infraestrutura local",
-            "Acompanhamento da agenda de Cruzeiro do Sul"
-          ]
-        },
-        {
-          id: "henrique-afonso-municipal",
-          name: "Henrique Afonso",
-          party: "PSD",
-          role: "liderança política local",
-          imageUrl: "",
-          proposals: [
-            "Debate municipal e participação cidadã",
-            "Projetos para bairros e zona rural",
-            "Fiscalização e diálogo comunitário"
           ]
         }
       ]
