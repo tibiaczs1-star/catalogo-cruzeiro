@@ -1,17 +1,17 @@
 :root {
-  --bg: #06111f;
-  --bg-soft: #0d1b30;
-  --card: rgba(8, 21, 38, 0.82);
-  --card-strong: rgba(9, 24, 43, 0.94);
-  --line: rgba(162, 200, 236, 0.18);
-  --line-strong: rgba(166, 213, 255, 0.34);
-  --text: #edf6ff;
-  --text-soft: rgba(237, 246, 255, 0.76);
-  --accent: #79d2ff;
-  --accent-strong: #f4b35d;
-  --accent-soft: #7ef0c5;
-  --danger: #ff8d8d;
-  --shadow: 0 28px 80px rgba(3, 8, 17, 0.42);
+  --bg: #eef3f8;
+  --bg-soft: #dfe7f0;
+  --card: rgba(252, 254, 255, 0.9);
+  --card-strong: rgba(255, 255, 255, 0.97);
+  --line: rgba(20, 47, 74, 0.11);
+  --line-strong: rgba(56, 101, 145, 0.22);
+  --text: #172536;
+  --text-soft: rgba(23, 37, 54, 0.72);
+  --accent: #547fa5;
+  --accent-strong: #7d94aa;
+  --accent-soft: #5d9a92;
+  --danger: #c97373;
+  --shadow: 0 28px 72px rgba(20, 38, 58, 0.12);
   --radius: 28px;
 }
 
@@ -29,10 +29,10 @@ body {
   font-family: "Space Grotesk", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 12% 12%, rgba(121, 210, 255, 0.14), transparent 22%),
-    radial-gradient(circle at 82% 16%, rgba(244, 179, 93, 0.16), transparent 24%),
-    radial-gradient(circle at 50% 100%, rgba(126, 240, 197, 0.08), transparent 26%),
-    linear-gradient(180deg, #071221 0%, #040b15 100%);
+    radial-gradient(circle at 12% 12%, rgba(84, 127, 165, 0.12), transparent 22%),
+    radial-gradient(circle at 82% 16%, rgba(125, 148, 170, 0.12), transparent 24%),
+    radial-gradient(circle at 50% 100%, rgba(93, 154, 146, 0.08), transparent 26%),
+    linear-gradient(180deg, #f7fafc 0%, #eef3f8 62%, #e5ebf3 100%);
 }
 
 body::before,
@@ -45,14 +45,14 @@ body::after {
 
 body::before {
   background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(20, 47, 74, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 47, 74, 0.03) 1px, transparent 1px);
   background-size: 42px 42px;
-  opacity: 0.28;
+  opacity: 0.42;
 }
 
 body::after {
-  background: radial-gradient(circle at center, transparent 42%, rgba(0, 0, 0, 0.38) 100%);
+  background: radial-gradient(circle at center, transparent 48%, rgba(68, 87, 108, 0.12) 100%);
 }
 
 .poll-backdrop {
@@ -60,9 +60,9 @@ body::after {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 22% 18%, rgba(126, 210, 255, 0.12), transparent 14%),
-    radial-gradient(circle at 76% 14%, rgba(255, 192, 118, 0.1), transparent 16%),
-    radial-gradient(circle at 50% 82%, rgba(126, 240, 197, 0.08), transparent 20%);
+    radial-gradient(circle at 22% 18%, rgba(84, 127, 165, 0.12), transparent 14%),
+    radial-gradient(circle at 76% 14%, rgba(125, 148, 170, 0.1), transparent 16%),
+    radial-gradient(circle at 50% 82%, rgba(93, 154, 146, 0.08), transparent 20%);
   filter: blur(10px);
 }
 
@@ -91,8 +91,8 @@ body::after {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(180deg, rgba(12, 28, 47, 0.94), rgba(6, 17, 31, 0.92)),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.04), transparent);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(245, 249, 253, 0.94)),
+    linear-gradient(145deg, rgba(84, 127, 165, 0.04), transparent);
   box-shadow: var(--shadow);
   backdrop-filter: blur(18px);
 }
@@ -101,7 +101,7 @@ body::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 28%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent 28%);
   pointer-events: none;
 }
 
@@ -121,7 +121,7 @@ body::after {
 }
 
 .poll-kicker--soft {
-  color: #b5dcff;
+  color: #6d87a0;
 }
 
 .poll-hero h1,
@@ -169,9 +169,9 @@ body::after {
   min-height: 34px;
   padding: 0.5rem 0.82rem;
   border-radius: 999px;
-  border: 1px solid rgba(176, 221, 255, 0.16);
-  background: rgba(255, 255, 255, 0.04);
-  color: #eaf5ff;
+  border: 1px solid rgba(84, 127, 165, 0.14);
+  background: rgba(255, 255, 255, 0.88);
+  color: #21354a;
   font-size: 0.82rem;
 }
 
@@ -183,9 +183,9 @@ body::after {
   overflow: hidden;
   border: 1px solid rgba(177, 220, 255, 0.14);
   background:
-    radial-gradient(circle at 18% 20%, rgba(121, 210, 255, 0.16), transparent 24%),
-    radial-gradient(circle at 82% 16%, rgba(244, 179, 93, 0.14), transparent 24%),
-    linear-gradient(180deg, rgba(19, 42, 70, 0.7), rgba(7, 16, 27, 0.92));
+    radial-gradient(circle at 18% 20%, rgba(84, 127, 165, 0.18), transparent 24%),
+    radial-gradient(circle at 82% 16%, rgba(125, 148, 170, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(120, 148, 176, 0.42), rgba(58, 78, 102, 0.86));
 }
 
 .scene-glow,
@@ -432,15 +432,15 @@ body::after {
 .poll-stat-grid--admin article {
   padding: 16px;
   border-radius: 18px;
-  border: 1px solid rgba(176, 221, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(84, 127, 165, 0.12);
+  background: rgba(255, 255, 255, 0.82);
 }
 
 .poll-stat-grid strong {
   display: block;
   font-size: 1.8rem;
   line-height: 1;
-  color: #fff7ef;
+  color: #18304a;
 }
 
 .poll-stat-grid span {
@@ -520,8 +520,8 @@ body::after {
 .poll-form-section {
   padding: 22px;
   border-radius: 24px;
-  border: 1px solid rgba(176, 221, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(84, 127, 165, 0.1);
+  background: rgba(250, 253, 255, 0.82);
 }
 
 .poll-section-title {
@@ -538,8 +538,8 @@ body::after {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(180deg, rgba(121, 210, 255, 0.22), rgba(121, 210, 255, 0.08));
-  border: 1px solid rgba(121, 210, 255, 0.26);
+  background: linear-gradient(180deg, rgba(84, 127, 165, 0.18), rgba(84, 127, 165, 0.08));
+  border: 1px solid rgba(84, 127, 165, 0.22);
   color: var(--accent);
   font-weight: 700;
 }
@@ -563,7 +563,7 @@ body::after {
 .poll-field span,
 .poll-rating legend,
 .poll-choice-group legend {
-  color: #dff0ff;
+  color: #29425b;
   font-size: 0.92rem;
   font-weight: 500;
 }
@@ -572,12 +572,12 @@ body::after {
 .poll-field select,
 .poll-field textarea {
   width: 100%;
-  border: 1px solid rgba(180, 224, 255, 0.14);
+  border: 1px solid rgba(84, 127, 165, 0.16);
   border-radius: 16px;
   padding: 0.95rem 1rem;
   font: inherit;
   color: var(--text);
-  background: rgba(6, 17, 31, 0.76);
+  background: rgba(255, 255, 255, 0.94);
   outline: none;
   transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
 }
@@ -585,8 +585,8 @@ body::after {
 .poll-field input:focus,
 .poll-field select:focus,
 .poll-field textarea:focus {
-  border-color: rgba(121, 210, 255, 0.7);
-  background: rgba(9, 23, 41, 0.96);
+  border-color: rgba(84, 127, 165, 0.68);
+  background: #ffffff;
   transform: translateY(-1px);
 }
 
@@ -621,8 +621,8 @@ body::after {
   place-items: center;
   min-height: 58px;
   border-radius: 18px;
-  border: 1px solid rgba(180, 224, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(84, 127, 165, 0.12);
+  background: rgba(255, 255, 255, 0.82);
   cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -642,16 +642,16 @@ body::after {
 }
 
 .poll-rating-scale strong {
-  color: #f8fcff;
+  color: #18304a;
 }
 
 .poll-rating-scale label:has(input:checked),
 .poll-option-card:has(input:checked) {
-  border-color: rgba(121, 210, 255, 0.84);
+  border-color: rgba(84, 127, 165, 0.7);
   background:
-    linear-gradient(180deg, rgba(121, 210, 255, 0.18), rgba(121, 210, 255, 0.08)),
-    rgba(255, 255, 255, 0.03);
-  box-shadow: inset 0 0 0 1px rgba(121, 210, 255, 0.2);
+    linear-gradient(180deg, rgba(84, 127, 165, 0.12), rgba(84, 127, 165, 0.05)),
+    rgba(255, 255, 255, 0.88);
+  box-shadow: inset 0 0 0 1px rgba(84, 127, 165, 0.14);
 }
 
 .poll-option-grid {
@@ -667,8 +667,8 @@ body::after {
   gap: 10px;
   padding: 18px;
   border-radius: 22px;
-  border: 1px solid rgba(180, 224, 255, 0.12);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(84, 127, 165, 0.12);
+  background: rgba(255, 255, 255, 0.84);
   cursor: pointer;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -702,20 +702,20 @@ body::after {
   border: 0;
   border-radius: 18px;
   background:
-    linear-gradient(135deg, #7bd7ff, #f4b35d),
+    linear-gradient(135deg, #5e86ab, #89a4b9),
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent);
-  color: #07121f;
+  color: #f8fbff;
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  box-shadow: 0 18px 38px rgba(121, 210, 255, 0.2);
+  box-shadow: 0 18px 38px rgba(84, 127, 165, 0.16);
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
 .poll-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 44px rgba(121, 210, 255, 0.24);
+  box-shadow: 0 22px 44px rgba(84, 127, 165, 0.2);
   filter: saturate(1.06);
 }
 
@@ -753,22 +753,22 @@ body::after {
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgba(214, 234, 255, 0.58);
+  color: rgba(66, 96, 126, 0.72);
   font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .poll-admin-link:hover {
-  color: rgba(214, 234, 255, 0.9);
+  color: rgba(36, 63, 91, 0.96);
 }
 
 .poll-admin {
   margin-top: 18px;
   padding: 20px;
   border-radius: 24px;
-  border: 1px solid rgba(176, 221, 255, 0.12);
-  background: rgba(3, 12, 23, 0.76);
+  border: 1px solid rgba(84, 127, 165, 0.12);
+  background: rgba(247, 250, 253, 0.9);
 }
 
 .poll-admin-head,
@@ -782,9 +782,9 @@ body::after {
 .poll-admin-close,
 .poll-admin-export,
 .poll-admin-submit {
-  border: 1px solid rgba(176, 221, 255, 0.16);
+  border: 1px solid rgba(84, 127, 165, 0.16);
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.94);
   color: var(--text);
   padding: 0.86rem 1rem;
 }
@@ -815,14 +815,14 @@ body::after {
 .poll-admin-table-wrap {
   overflow: auto;
   border-radius: 20px;
-  border: 1px solid rgba(176, 221, 255, 0.1);
+  border: 1px solid rgba(84, 127, 165, 0.1);
 }
 
 .poll-admin-table {
   width: 100%;
   min-width: 840px;
   border-collapse: collapse;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .poll-admin-table th,
@@ -838,15 +838,15 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 1;
-  background: rgba(5, 16, 28, 0.98);
-  color: #d7eeff;
+  background: rgba(239, 245, 250, 0.98);
+  color: #4a637d;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .poll-admin-table td {
-  color: rgba(237, 246, 255, 0.86);
+  color: rgba(23, 37, 54, 0.86);
   line-height: 1.55;
 }
 

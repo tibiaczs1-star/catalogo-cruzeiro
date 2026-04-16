@@ -3165,6 +3165,17 @@ function sendFile(req, res, filePath, options = {}) {
       Object.entries(options.templateVars).forEach(([key, value]) => {
         html = html.replace(new RegExp(`{{\\s*${key}\\s*}}`, "g"), String(value ?? ""));
       });
+
+      if (
+        options.templateVars.SEO_JSON_LD &&
+        !/<script[^>]+type=["']application\/ld\+json["']/i.test(html)
+      ) {
+        html = html.replace(
+          /<\/head>/i,
+          `    <script type="application/ld+json">${options.templateVars.SEO_JSON_LD}</script>\n  </head>`
+        );
+      }
+
       fileBuffer = Buffer.from(html, "utf-8");
     }
 

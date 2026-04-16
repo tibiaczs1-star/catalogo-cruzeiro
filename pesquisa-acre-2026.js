@@ -231,6 +231,9 @@
     if (!adminPanel) return;
     const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : adminPanel.hidden;
     adminPanel.hidden = !shouldOpen;
+    if (!shouldOpen) {
+      setFeedback(adminFeedback, "");
+    }
     if (shouldOpen) {
       window.setTimeout(() => adminPassword?.focus(), 60);
     }
@@ -289,7 +292,9 @@
 
   async function handleAdminAccess(event) {
     event.preventDefault();
-    const password = String(adminPassword?.value || "").trim();
+    const password = String(adminPassword?.value || "")
+      .trim()
+      .replace(/\s+/g, "");
 
     if (!password) {
       setFeedback(adminFeedback, "Digite a senha administrativa.", "error");
@@ -311,7 +316,9 @@
       const payload = await readJson(response);
 
       if (!response.ok) {
-        throw new Error(payload.error || "Senha invalida.");
+        throw new Error(
+          payload.error || "Senha invalida. Confira a senha cadastrada no servidor e tente de novo."
+        );
       }
 
       lastAdminPayload = payload;

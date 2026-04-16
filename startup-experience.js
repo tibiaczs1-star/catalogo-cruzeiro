@@ -209,15 +209,50 @@
         </div>
 
         <div class="catalogo-prophecy-panel" aria-hidden="true">
-          <span class="catalogo-prophecy-kicker">Previsao do futuro</span>
-          <strong class="catalogo-prophecy-title">Calculando probabilidades com I.A.</strong>
-          <div class="catalogo-prophecy-stream">
-            <span class="catalogo-prophecy-phase phase-binary">01010000 01110010 01100101 01110110 01101001 01110011 01100001 01101111</span>
-            <span class="catalogo-prophecy-phase phase-ascii">50 72 65 76 69 73 61 6F 20 3E 20 6E 6F 74 69 63 69 61</span>
-            <span class="catalogo-prophecy-phase phase-code">parse(binario).toASCII().toPrograma().toNoticia(ia);</span>
-            <span class="catalogo-prophecy-phase phase-news">Meme + guerra + aliens olhando = noticia em formacao</span>
+          <span class="catalogo-prophecy-kicker">Terminal de previsao alegorica</span>
+          <strong class="catalogo-prophecy-title">Codigo, caos e manchete montando a cena</strong>
+          <div class="catalogo-prophecy-console">
+            <span class="catalogo-prophecy-console-line">> boot futuro.exe --origem cruzeiro-do-sul</span>
+            <span class="catalogo-prophecy-console-line">> scan rumores :: meme :: guerra :: aliens :: panico</span>
+            <span class="catalogo-prophecy-console-line">> compilar binario -> ascii -> sintaxe -> alegoria</span>
           </div>
-          <small>binario > ascii > programacao > noticia</small>
+          <div class="catalogo-prophecy-stream">
+            <div class="catalogo-prophecy-phase phase-binary">
+              01000001 01010100 01000001 01010001 01010101 01000101<br />
+              01000001 01001100 01001001 01000101 01001110 01001001 01000111 01000101 01001110 01000001<br />
+              01001001 01001101 01001001 01001110 01000101 01001110 01010100 01000101
+            </div>
+            <div class="catalogo-prophecy-phase phase-ascii">
+              41 54 41 51 55 45 // 41 4C 49 45 4E 49 47 45 4E 41<br />
+              49 4D 49 4E 45 4E 54 45 // 47 55 45 52 52 41<br />
+              4D 55 4E 44 49 41 4C // 49 4D 49 4E 45 4E 54 45
+            </div>
+            <div class="catalogo-prophecy-phase phase-code">
+              const pressagio = parse(bits)<br />
+              &nbsp;&nbsp;.toASCII()<br />
+              &nbsp;&nbsp;.toSintaxe({ caos: true, meme: true, aliens: true });<br />
+              if (pressagio.panico &gt; 87) manchete = "ataque alienigena iminente";
+            </div>
+            <div class="catalogo-prophecy-phase phase-glyph">
+              colchetes viram sirenes<br />
+              barras viram trilhas de fumaca<br />
+              parenteses abrem asas no ceu<br />
+              e a cidade inteira entra em formacao alegorica
+            </div>
+            <div class="catalogo-prophecy-phase phase-alert">
+              <span class="catalogo-prophecy-alert-tag">manchete emergente</span>
+              <strong>ATAQUE ALIENIGENA IMINENTE</strong>
+              <span>GUERRA MUNDIAL IMINENTE</span>
+              <small>o ceu acende, o ruido cresce e a cidade para para olhar</small>
+            </div>
+            <div class="catalogo-prophecy-phase phase-meme">
+              <span class="catalogo-prophecy-alert-tag">revisao final</span>
+              <strong>era so um meme</strong>
+              <span>imagem torta, legenda ruim, susto coletivo</span>
+              <small>reiniciando o terminal para perseguir o proximo exagero</small>
+            </div>
+          </div>
+          <small>terminal > binario > ascii > sintaxe > alegoria > manchete > meme > reboot</small>
         </div>
 
         <div class="catalogo-night-landscape" aria-hidden="true">

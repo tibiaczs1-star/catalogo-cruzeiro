@@ -4355,24 +4355,29 @@ body.catalogo-lock-scroll {
   left: calc(var(--catalogo-laser-length) - 10px);
 }
 
-/* 2026-04-16e: letreiro de previsao no centro do popup e aliens observando */
+/* 2026-04-16e: painel de previsao mais legivel, teatral e cheio */
 .catalogo-prophecy-panel {
+  --catalogo-prophecy-panel-pad-x: 0.96rem;
+  --catalogo-prophecy-panel-pad-y: 0.9rem;
+  --catalogo-prophecy-stream-pad-x: 0.82rem;
+  --catalogo-prophecy-stream-pad-y: 0.72rem;
   position: absolute;
-  left: 1rem;
-  right: 1rem;
-  top: 48%;
+  left: 0.96rem;
+  right: 0.96rem;
+  top: 49%;
   z-index: 6;
   display: grid;
-  gap: 0.34rem;
-  padding: 0.82rem 0.94rem 0.78rem;
-  border-radius: 18px;
-  border: 1px solid rgba(153, 233, 255, 0.18);
+  gap: 0.38rem;
+  padding: var(--catalogo-prophecy-panel-pad-y) var(--catalogo-prophecy-panel-pad-x) 0.82rem;
+  border-radius: 20px;
+  border: 1px solid rgba(153, 233, 255, 0.22);
   background:
-    linear-gradient(180deg, rgba(7, 14, 24, 0.82), rgba(5, 10, 18, 0.92)),
+    linear-gradient(180deg, rgba(4, 10, 20, 0.9), rgba(4, 8, 15, 0.96)),
     radial-gradient(circle at top right, rgba(118, 246, 255, 0.12), transparent 32%);
   box-shadow:
-    0 18px 34px rgba(4, 10, 18, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    0 20px 38px rgba(4, 10, 18, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -24px 34px rgba(255, 109, 70, 0.08);
   overflow: hidden;
   transform: translateY(-50%);
 }
@@ -4387,23 +4392,23 @@ body.catalogo-lock-scroll {
 .catalogo-prophecy-panel::before {
   inset: 0;
   background:
-    repeating-linear-gradient(90deg, rgba(139, 220, 255, 0.06) 0 1px, transparent 1px 24px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 32%, rgba(124, 255, 192, 0.08) 100%);
-  opacity: 0.9;
+    repeating-linear-gradient(90deg, rgba(139, 220, 255, 0.06) 0 1px, transparent 1px 22px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 28%, rgba(124, 255, 192, 0.07) 100%);
+  opacity: 0.94;
 }
 
 .catalogo-prophecy-panel::after {
-  left: -24%;
-  right: -24%;
-  top: 50%;
+  left: -22%;
+  right: -22%;
+  top: 52%;
   height: 18px;
-  background: linear-gradient(90deg, transparent, rgba(124, 255, 192, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(124, 255, 192, 0.24), transparent);
   filter: blur(10px);
-  animation: catalogoProphecySweep 4.8s linear infinite;
+  animation: catalogoProphecySweep 5.4s linear infinite;
 }
 
 .catalogo-prophecy-kicker,
-.catalogo-prophecy-panel small {
+.catalogo-prophecy-panel > small {
   position: relative;
   z-index: 1;
   text-transform: uppercase;
@@ -4412,68 +4417,173 @@ body.catalogo-lock-scroll {
 
 .catalogo-prophecy-kicker {
   color: rgba(156, 233, 255, 0.96);
-  font-size: 0.66rem;
-  font-weight: 800;
+  font-size: 0.64rem;
+  font-weight: 900;
 }
 
 .catalogo-prophecy-title {
   position: relative;
   z-index: 1;
-  color: #fff5e8;
+  max-width: 27ch;
+  color: #fff6e9;
   font-size: 1rem;
-  font-weight: 800;
-  line-height: 1.12;
+  font-weight: 900;
+  line-height: 1.08;
+}
+
+.catalogo-prophecy-console {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.16rem;
+  padding: 0.54rem 0.66rem;
+  border-radius: 14px;
+  border: 1px solid rgba(120, 214, 255, 0.16);
+  background:
+    linear-gradient(180deg, rgba(8, 16, 28, 0.86), rgba(4, 9, 18, 0.92)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 17px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.22);
+  animation: catalogoProphecyConsoleCycle 28s linear infinite;
+}
+
+.catalogo-prophecy-console-line {
+  color: rgba(163, 229, 255, 0.9);
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  text-shadow: 0 0 10px rgba(124, 255, 192, 0.14);
 }
 
 .catalogo-prophecy-stream {
   position: relative;
   z-index: 1;
-  min-height: 1.85rem;
-  margin-top: 0.08rem;
+  min-height: 7rem;
+  padding: var(--catalogo-prophecy-stream-pad-y) var(--catalogo-prophecy-stream-pad-x);
+  border-radius: 16px;
+  border: 1px solid rgba(139, 220, 255, 0.15);
+  background:
+    linear-gradient(180deg, rgba(5, 11, 20, 0.94), rgba(4, 8, 14, 0.98)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 18px);
+  overflow: hidden;
+}
+
+.catalogo-prophecy-stream::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 22%, rgba(255, 116, 76, 0.08) 100%);
+  opacity: 0.88;
+  pointer-events: none;
 }
 
 .catalogo-prophecy-phase {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  inset: var(--catalogo-prophecy-stream-pad-y) var(--catalogo-prophecy-stream-pad-x);
+  display: grid;
+  align-content: start;
+  gap: 0.26rem;
   color: rgba(181, 255, 219, 0.96);
   font-family: "IBM Plex Mono", "Consolas", monospace;
   font-size: 0.82rem;
   font-weight: 700;
-  line-height: 1.45;
-  white-space: nowrap;
-  overflow: hidden;
+  line-height: 1.24;
+  white-space: normal;
   text-shadow: 0 0 14px rgba(124, 255, 192, 0.18);
-  clip-path: inset(0 100% 0 0);
   opacity: 0;
-  animation: catalogoProphecyPhase 12s linear infinite;
+  transform: translateY(12px) scale(0.98);
+  filter: blur(1.6px);
+}
+
+.catalogo-prophecy-phase.phase-binary {
+  animation: catalogoProphecySegment 28s linear infinite;
 }
 
 .catalogo-prophecy-phase.phase-ascii {
-  animation-delay: 3s;
+  animation: catalogoProphecySegment 28s linear infinite 3.2s;
   color: rgba(255, 221, 174, 0.94);
 }
 
 .catalogo-prophecy-phase.phase-code {
-  animation-delay: 6s;
+  animation: catalogoProphecySegment 28s linear infinite 6.4s;
   color: rgba(161, 214, 255, 0.96);
 }
 
-.catalogo-prophecy-phase.phase-news {
-  animation-delay: 9s;
-  color: rgba(255, 244, 228, 0.98);
+.catalogo-prophecy-phase.phase-glyph {
+  animation: catalogoProphecySegment 28s linear infinite 9.6s;
+  color: rgba(255, 236, 196, 0.98);
   font-family: "Outfit", "Segoe UI", sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  line-height: 1.16;
   letter-spacing: 0.03em;
 }
 
-.catalogo-prophecy-panel small {
+.catalogo-prophecy-phase.phase-alert,
+.catalogo-prophecy-phase.phase-meme {
+  color: rgba(255, 244, 228, 0.98);
+  font-family: "Outfit", "Segoe UI", sans-serif;
+  text-shadow:
+    0 0 22px rgba(255, 132, 96, 0.16),
+    0 0 12px rgba(124, 255, 192, 0.1);
+}
+
+.catalogo-prophecy-phase.phase-alert {
+  animation: catalogoProphecyAlert 28s linear infinite 12.8s;
+}
+
+.catalogo-prophecy-phase.phase-meme {
+  animation: catalogoProphecySegment 28s linear infinite 23.4s;
+}
+
+.catalogo-prophecy-alert-tag {
+  width: fit-content;
+  padding: 0.22rem 0.46rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 208, 134, 0.18);
+  background: rgba(255, 124, 86, 0.12);
+  color: rgba(255, 226, 176, 0.94);
+  font-size: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.catalogo-prophecy-phase.phase-alert strong,
+.catalogo-prophecy-phase.phase-meme strong {
+  color: #fff8ee;
+  font-size: 1.08rem;
+  line-height: 0.94;
+  letter-spacing: 0.04em;
+}
+
+.catalogo-prophecy-phase.phase-alert > span:not(.catalogo-prophecy-alert-tag),
+.catalogo-prophecy-phase.phase-meme > span:not(.catalogo-prophecy-alert-tag) {
+  color: rgba(255, 230, 190, 0.96);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.catalogo-prophecy-phase.phase-alert small,
+.catalogo-prophecy-phase.phase-meme small {
+  color: rgba(244, 248, 255, 0.76);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.catalogo-prophecy-panel > small {
   position: relative;
   z-index: 1;
   color: rgba(240, 247, 255, 0.66);
-  font-size: 0.58rem;
-  font-weight: 700;
+  font-size: 0.54rem;
+  font-weight: 800;
 }
 
 .catalogo-skywatcher::before {
@@ -4508,38 +4618,60 @@ body.catalogo-lock-scroll {
 
 @media (max-width: 920px) {
   .catalogo-prophecy-panel {
-    left: 0.78rem;
-    right: 0.78rem;
-    top: 46%;
-    padding: 0.72rem 0.82rem;
+    left: 0.76rem;
+    right: 0.76rem;
+    top: 47%;
+    min-height: 184px;
+    padding:
+      calc(var(--catalogo-prophecy-panel-pad-y) - 0.08rem)
+      calc(var(--catalogo-prophecy-panel-pad-x) - 0.1rem)
+      0.72rem;
   }
 
   .catalogo-prophecy-title {
     font-size: 0.9rem;
   }
 
+  .catalogo-prophecy-console-line {
+    font-size: 0.54rem;
+  }
+
+  .catalogo-prophecy-stream {
+    min-height: 6.4rem;
+  }
+
   .catalogo-prophecy-phase {
     font-size: 0.74rem;
   }
 
+  .catalogo-prophecy-phase.phase-glyph {
+    font-size: 0.84rem;
+  }
+
+  .catalogo-prophecy-phase.phase-alert strong,
+  .catalogo-prophecy-phase.phase-meme strong {
+    font-size: 0.98rem;
+  }
+
   .catalogo-skywatcher.watcher-one {
-    left: 8.2rem;
-    bottom: 34px;
+    left: 8.6rem;
+    bottom: 30px;
   }
 
   .catalogo-skywatcher.watcher-two {
     right: 0.9rem;
-    bottom: 46px;
+    bottom: 42px;
   }
 }
 
 @media (max-width: 760px) {
   .catalogo-prophecy-panel {
-    left: 0.55rem;
-    right: 0.55rem;
-    top: 44%;
+    left: 0.54rem;
+    right: 0.54rem;
+    top: 45%;
     gap: 0.24rem;
-    padding: 0.58rem 0.68rem 0.6rem;
+    min-height: 164px;
+    padding: 0.62rem 0.72rem 0.64rem;
     border-radius: 14px;
   }
 
@@ -4548,22 +4680,48 @@ body.catalogo-lock-scroll {
   }
 
   .catalogo-prophecy-title {
+    max-width: 23ch;
     font-size: 0.76rem;
   }
 
+  .catalogo-prophecy-console {
+    padding: 0.42rem 0.5rem;
+    border-radius: 12px;
+  }
+
+  .catalogo-prophecy-console-line {
+    font-size: 0.48rem;
+  }
+
   .catalogo-prophecy-stream {
-    min-height: 1.55rem;
+    min-height: 5.8rem;
+    border-radius: 12px;
   }
 
   .catalogo-prophecy-phase {
-    font-size: 0.61rem;
+    font-size: 0.62rem;
   }
 
-  .catalogo-prophecy-phase.phase-news {
+  .catalogo-prophecy-phase.phase-glyph {
+    font-size: 0.7rem;
+  }
+
+  .catalogo-prophecy-phase.phase-alert strong,
+  .catalogo-prophecy-phase.phase-meme strong {
+    font-size: 0.82rem;
+  }
+
+  .catalogo-prophecy-phase.phase-alert > span:not(.catalogo-prophecy-alert-tag),
+  .catalogo-prophecy-phase.phase-meme > span:not(.catalogo-prophecy-alert-tag) {
     font-size: 0.66rem;
   }
 
-  .catalogo-prophecy-panel small {
+  .catalogo-prophecy-phase.phase-alert small,
+  .catalogo-prophecy-phase.phase-meme small {
+    font-size: 0.54rem;
+  }
+
+  .catalogo-prophecy-panel > small {
     font-size: 0.5rem;
   }
 
@@ -4583,9 +4741,10 @@ body.catalogo-lock-scroll {
 .catalogo-welcome.is-compact .catalogo-prophecy-panel {
   left: 0.42rem;
   right: 0.42rem;
-  top: 42%;
+  top: 43%;
   gap: 0.18rem;
-  padding: 0.44rem 0.52rem 0.48rem;
+  min-height: 132px;
+  padding: 0.48rem 0.56rem 0.5rem;
   border-radius: 12px;
 }
 
@@ -4598,18 +4757,41 @@ body.catalogo-lock-scroll {
 }
 
 .catalogo-welcome.is-compact .catalogo-prophecy-stream {
-  min-height: 1.22rem;
+  min-height: 4.6rem;
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-console {
+  padding: 0.34rem 0.42rem;
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-console-line {
+  font-size: 0.42rem;
 }
 
 .catalogo-welcome.is-compact .catalogo-prophecy-phase {
-  font-size: 0.54rem;
+  font-size: 0.48rem;
 }
 
-.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-news {
-  font-size: 0.58rem;
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-glyph {
+  font-size: 0.56rem;
 }
 
-.catalogo-welcome.is-compact .catalogo-prophecy-panel small {
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-alert strong,
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-meme strong {
+  font-size: 0.66rem;
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-alert > span:not(.catalogo-prophecy-alert-tag),
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-meme > span:not(.catalogo-prophecy-alert-tag) {
+  font-size: 0.52rem;
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-alert small,
+.catalogo-welcome.is-compact .catalogo-prophecy-phase.phase-meme small {
+  font-size: 0.46rem;
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-panel > small {
   font-size: 0.44rem;
 }
 
@@ -4625,6 +4807,85 @@ body.catalogo-lock-scroll {
   --watcher-scale: 0.42;
 }
 
+/* 2026-04-16g: diretor sobre o letreiro mirando os termos */
+.catalogo-director-stage {
+  left: 0.44rem;
+  top: -72px;
+  bottom: auto;
+  width: 188px;
+  height: 210px;
+  z-index: 8;
+  transform: scale(0.78);
+  transform-origin: left bottom;
+  filter: drop-shadow(0 20px 26px rgba(5, 14, 24, 0.38));
+}
+
+.catalogo-director-stage .catalogo-pixel-director {
+  --catalogo-arm-angle: -58deg;
+  --catalogo-laser-angle: 8deg;
+  --catalogo-arm-x: 104px;
+  --catalogo-arm-y: 90px;
+  --catalogo-laser-length: 102px;
+  --catalogo-beam-length: 252px;
+}
+
+.catalogo-director-stage .catalogo-director-laser-burst {
+  left: 14px;
+  top: 46px;
+}
+
+.catalogo-director-stage .catalogo-pointer-beam {
+  left: calc(var(--catalogo-laser-length) - 10px);
+  transform: rotate(2deg);
+}
+
+@media (max-width: 920px) {
+  .catalogo-director-stage {
+    left: 0.26rem;
+    top: -56px;
+    width: 170px;
+    height: 190px;
+    transform: scale(0.68);
+  }
+
+  .catalogo-director-stage .catalogo-pixel-director {
+    --catalogo-laser-length: 92px;
+    --catalogo-beam-length: 218px;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-director-stage {
+    left: 0.16rem;
+    top: -34px;
+    width: 150px;
+    height: 168px;
+    transform: scale(0.58);
+  }
+
+  .catalogo-director-stage .catalogo-pixel-director {
+    --catalogo-laser-angle: 9deg;
+    --catalogo-laser-length: 78px;
+    --catalogo-beam-length: 178px;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-director-stage {
+  left: 0.08rem;
+  top: -22px;
+  bottom: auto;
+  width: 122px;
+  height: 136px;
+  transform: scale(0.46);
+  z-index: 8;
+}
+
+.catalogo-welcome.is-compact .catalogo-director-stage .catalogo-pixel-director {
+  --catalogo-laser-angle: 8deg;
+  --catalogo-laser-length: 60px;
+  --catalogo-beam-length: 140px;
+}
+
 @keyframes catalogoProphecySweep {
   from {
     transform: translateX(-18%);
@@ -4635,34 +4896,98 @@ body.catalogo-lock-scroll {
   }
 }
 
-@keyframes catalogoProphecyPhase {
+@keyframes catalogoProphecyConsoleCycle {
   0% {
-    opacity: 0;
-    clip-path: inset(0 100% 0 0);
-    transform: translateY(8px);
-  }
-
-  7% {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: translateY(0);
   }
 
   18% {
     opacity: 1;
-    clip-path: inset(0 0 0 0);
     transform: translateY(0);
   }
 
   24% {
+    opacity: 0.16;
+    transform: translateY(-8px);
+  }
+
+  80% {
+    opacity: 0.16;
+    transform: translateY(-8px);
+  }
+
+  86% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogoProphecySegment {
+  0% {
     opacity: 0;
-    clip-path: inset(0 0 0 0);
-    transform: translateY(-6px);
+    transform: translateY(12px) scale(0.98);
+    filter: blur(1.6px);
+  }
+
+  5% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  16% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  22% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.02);
+    filter: blur(1.4px);
   }
 
   100% {
     opacity: 0;
-    clip-path: inset(0 0 0 0);
-    transform: translateY(-6px);
+    transform: translateY(-10px) scale(1.02);
+    filter: blur(1.4px);
+  }
+}
+
+@keyframes catalogoProphecyAlert {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+    filter: blur(1.6px);
+  }
+
+  6% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  42% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  48% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.03);
+    filter: blur(1.4px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.03);
+    filter: blur(1.4px);
   }
 }

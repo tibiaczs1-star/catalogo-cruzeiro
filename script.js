@@ -162,7 +162,14 @@ const heroTourismPhotoPool = [
   { file: "DowntownCZS-AC-BRA2.jpg", title: "Centro em destaque", note: "fachadas, vias e movimento" },
   { file: "Cruzeiro do Sul Acre.jpg", title: "Vista turistica", note: "panorama para abrir a home" },
   { file: "Cruzeiro do Sul-Acre, Brasil.jpg", title: "Acre em foco", note: "cidade aberta para turismo e memoria" },
-  { file: "CruzeirodoSul-AC-BRA.jpg", title: "Faixa panoramica", note: "leitura horizontal da cidade" }
+  { file: "CruzeirodoSul-AC-BRA.jpg", title: "Faixa panoramica", note: "leitura horizontal da cidade" },
+  { file: "Cruzeiro do Sul - Acre.jpg", title: "Vista aerea da cidade", note: "postal atual de Cruzeiro do Sul" },
+  { file: "Cruzeiro do Sul-Acre.jpg", title: "Cruzeiro do Sul aberta", note: "mais um angulo aereo contemporaneo" },
+  { file: "Vista parcial Cruzeiro do Sul AC.jpg", title: "Vista parcial do municipio", note: "quadro urbano vindo do acervo local" },
+  { file: "Ponte 15 de novembro, Cruzeiro do Sul (AC).tif", title: "Memoria da ponte 15", note: "arquivo historico da cidade" },
+  { file: "Ponte 17 de novembro, Cruzeiro do Sul (AC).tif", title: "Memoria da ponte 17", note: "arquivo historico do municipio" },
+  { file: "Cruzeiro do Sul (Acre), Fundo Correio da Manhã - 2.tif", title: "Arquivo do centro", note: "imagem historica de Cruzeiro do Sul" },
+  { file: "Cruzeiro do Sul (Acre), Fundo Correio da Manhã - 3.tif", title: "Arquivo do vale", note: "memoria visual da cidade no passado" }
 ];
 const heroOfficeBubblePool = [
   "Atualizando destaques da cidade",
@@ -1669,7 +1676,7 @@ const renderRadar = (filter = "todos") => {
   setActiveRadarFilter(filter);
   updateRadarGuide(filter, spotlightArticles);
   registerInteractivePanels(radarGrid);
-  registerArticleCardLinks(radarGrid);
+  window.setTimeout(() => registerArticleCardLinks(radarGrid), 0);
 };
 
 if (radarGuide && !performanceLiteMode) {
@@ -2650,6 +2657,160 @@ const buildCommonsTourismPhotoUrl = (fileName = "", width = 1200) => {
 const buildCommonsTourismFallbackUrl = (fileName = "") =>
   `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(String(fileName || "").trim())}`;
 
+const heroTourismDailyPoolState = {
+  dayKey: "",
+  items: []
+};
+
+const heroTourismDailyTarget = 50;
+const heroTourismRotationIntervalMs = 4200;
+const heroTourismDailyTimeZone = "America/Rio_Branco";
+const heroTourismLocalPattern =
+  /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima|rodrigues alves)\b/i;
+const heroTourismFocusPositions = [
+  "center 42%",
+  "center 36%",
+  "center 48%",
+  "center 30%",
+  "center 54%",
+  "center 40%",
+  "center 46%",
+  "center 34%"
+];
+
+const getHeroTourismDayKey = () => {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: heroTourismDailyTimeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(new Date());
+  } catch (_error) {
+    return getLocalDateKey();
+  }
+};
+
+const hashHeroTourismSeed = (value = "") => {
+  let hash = 2166136261;
+  const text = String(value || "");
+
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+};
+
+const buildDailyOrderedHeroItems = (items = [], seedKey = "") =>
+  [...(Array.isArray(items) ? items : [])]
+    .map((item, index) => ({
+      item,
+      rank: hashHeroTourismSeed(`${seedKey}:${index}:${item?.file || item?.proxyUrl || item?.title || ""}`)
+    }))
+    .sort((left, right) => left.rank - right.rank)
+    .map((entry) => entry.item);
+
+const buildHeroTourismRuntimePool = () => {
+  const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
+  const seenImages = new Set();
+
+  return articles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      const haystack = [
+        article.title,
+        article.lede,
+        article.category,
+        article.sourceName,
+        article.sourceLabel
+      ]
+        .filter(Boolean)
+        .join(" ");
+      return heroTourismLocalPattern.test(haystack);
+    })
+    .map((article) => {
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      return imageUrl
+        ? {
+            title: article.title || "Cena local do dia",
+            note: `${article.category || "Cotidiano"} • ${article.sourceName || "Fonte local"}`,
+            proxyUrl: imageUrl,
+            fallbackUrl: imageUrl,
+            focusPosition: "center 42%"
+          }
+        : null;
+    })
+    .filter((photo) => {
+      const imageKey = String(photo?.proxyUrl || "").trim();
+      if (!imageKey || seenImages.has(imageKey)) {
+        return false;
+      }
+      seenImages.add(imageKey);
+      return true;
+    })
+    .slice(0, 24);
+};
+
+const buildHeroTourismDailyPool = () => {
+  const dayKey = getHeroTourismDayKey();
+  if (heroTourismDailyPoolState.dayKey === dayKey && heroTourismDailyPoolState.items.length) {
+    return heroTourismDailyPoolState.items;
+  }
+
+  const merged = [];
+  const seenKeys = new Set();
+  const runtimePool = buildDailyOrderedHeroItems(buildHeroTourismRuntimePool(), `${dayKey}:runtime`);
+  const staticPool = buildDailyOrderedHeroItems(heroTourismPhotoPool, `${dayKey}:static`);
+
+  const pushUniquePhoto = (photo = {}) => {
+    const sourceKey = String(photo.proxyUrl || photo.fallbackUrl || photo.file || photo.title || "").trim();
+    if (!sourceKey || seenKeys.has(sourceKey)) {
+      return false;
+    }
+
+    seenKeys.add(sourceKey);
+    merged.push({
+      ...photo,
+      focusPosition:
+        photo.focusPosition || heroTourismFocusPositions[merged.length % heroTourismFocusPositions.length]
+    });
+    return true;
+  };
+
+  runtimePool.forEach((photo) => pushUniquePhoto(photo));
+  staticPool.forEach((photo) =>
+    pushUniquePhoto({
+      ...photo,
+      proxyUrl: buildCommonsTourismPhotoUrl(photo.file, 1920),
+      fallbackUrl: buildCommonsTourismFallbackUrl(photo.file)
+    })
+  );
+
+  let variantCursor = 0;
+  while (merged.length < heroTourismDailyTarget && staticPool.length) {
+    const basePhoto = staticPool[variantCursor % staticPool.length];
+    const focusIndex = variantCursor % heroTourismFocusPositions.length;
+    const variantNumber = Math.floor(variantCursor / staticPool.length) + 2;
+
+    merged.push({
+      ...basePhoto,
+      proxyUrl: buildCommonsTourismPhotoUrl(basePhoto.file, 1920),
+      fallbackUrl: buildCommonsTourismFallbackUrl(basePhoto.file),
+      focusPosition: heroTourismFocusPositions[(merged.length + focusIndex) % heroTourismFocusPositions.length],
+      note: `${basePhoto.note} • leitura ${variantNumber}`
+    });
+    variantCursor += 1;
+  }
+
+  heroTourismDailyPoolState.dayKey = dayKey;
+  heroTourismDailyPoolState.items = merged.slice(0, heroTourismDailyTarget);
+  return heroTourismDailyPoolState.items;
+};
+
+const getHeroTourismDailyPool = () => buildHeroTourismDailyPool();
+
 const preloadHeroTourismImage = (primaryUrl = "", fallbackUrl = "") =>
   new Promise((resolve) => {
     const candidates = [primaryUrl, fallbackUrl].filter(Boolean);
@@ -2683,20 +2844,14 @@ const preloadHeroTourismImage = (primaryUrl = "", fallbackUrl = "") =>
   });
 
 const getHeroTourismPhoto = (photoIndex = 0) => {
-  if (!heroTourismPhotoPool.length) {
+  const dailyPool = buildHeroTourismDailyPool();
+  if (!dailyPool.length) {
     return null;
   }
 
   const poolIndex =
-    ((Number(photoIndex) % heroTourismPhotoPool.length) + heroTourismPhotoPool.length) %
-    heroTourismPhotoPool.length;
-  const photo = heroTourismPhotoPool[poolIndex];
-
-  return {
-    ...photo,
-    proxyUrl: buildCommonsTourismPhotoUrl(photo.file, 1920),
-    fallbackUrl: buildCommonsTourismFallbackUrl(photo.file)
-  };
+    ((Number(photoIndex) % dailyPool.length) + dailyPool.length) % dailyPool.length;
+  return dailyPool[poolIndex];
 };
 
 const setHeroTourismMeta = (photo) => {
@@ -2730,7 +2885,7 @@ const paintHeroTourismBackdrop = (slideNode, photo) => {
       linear-gradient(180deg, rgba(6, 16, 29, 0.08), rgba(6, 16, 29, 0.24)),
       url("${resolvedUrl}")
     `;
-    slideNode.style.backgroundPosition = "center 44%";
+    slideNode.style.backgroundPosition = photo.focusPosition || "center 44%";
     slideNode.style.backgroundSize = "cover";
     slideNode.dataset.heroBackdropReady = "true";
     return true;
@@ -2822,11 +2977,12 @@ const initializeHeroTourismHero = () => {
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
 
-  if (heroTourismPhotoPool.length > 1) {
+  if (getHeroTourismDailyPool().length > 1) {
     heroTourismRotation.timerId = window.setInterval(() => {
-      const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % heroTourismPhotoPool.length;
+      const currentPool = getHeroTourismDailyPool();
+      const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % currentPool.length;
       renderHeroTourismBackground(nextPhotoIndex);
-    }, 5000);
+    }, heroTourismRotationIntervalMs);
   }
 
   if (heroOfficeStatusNodes.length && heroOfficeStatusGroups.length > 1) {
@@ -3100,7 +3256,7 @@ const buildInsidersArmyChant = () => {
     return;
   }
 
-  const slogans = ["INSIDERS", "AQUI TEM VERDADE"];
+  const slogans = ["GUERRA AO BOATO", "VERDADE EM CAMPO", "DEEPFAKE EM RETIRADA"];
   const fragment = document.createDocumentFragment();
 
   for (let index = 0; index < 20; index += 1) {
@@ -3142,28 +3298,202 @@ const getInsidersLiteMode = () => {
   return hardwareThreads > 0 && hardwareThreads <= 4;
 };
 
-const getInsidersArmyCount = (requestedCount = 5) => {
-  const safeRequestedCount = Number.parseInt(requestedCount, 10) || 5;
-  return Math.min(5, Math.max(5, safeRequestedCount));
+const getInsidersArmyCount = (requestedCount = 3) => {
+  const safeRequestedCount = Number.parseInt(requestedCount, 10) || 3;
+  return Math.min(3, Math.max(3, safeRequestedCount));
 };
 
 const getInsidersSquadBlueprint = (isCompactViewport = false) => {
   if (isCompactViewport) {
     return [
-      { x: 10, y: 43, scale: 0.62, tilt: -11, delay: -0.4, bob: 6.2, palette: "crimson", pose: "sentinel" },
-      { x: 29, y: 31, scale: 0.78, tilt: -7, delay: -1.1, bob: 7.1, palette: "azure", pose: "blade" },
-      { x: 50, y: 18, scale: 0.98, tilt: 0, delay: -0.2, bob: 8.1, palette: "gold", pose: "leader" },
-      { x: 71, y: 31, scale: 0.78, tilt: 7, delay: -1.4, bob: 7.1, palette: "emerald", pose: "striker" },
-      { x: 90, y: 43, scale: 0.62, tilt: 11, delay: -0.8, bob: 6.2, palette: "magenta", pose: "guard" }
+      {
+        x: 17,
+        y: 58,
+        scale: 1.02,
+        tilt: -12,
+        delay: -0.4,
+        bob: 10.4,
+        palette: "crimson",
+        pose: "flank",
+        patrolX: 18,
+        patrolY: 10,
+        parallax: 14,
+        phase: 0.18,
+        speed: 1.72,
+        step: 1.12,
+        eyeFire: "right",
+        beamAngle: 18,
+        beamLength: 154,
+        beamPulse: 0.44
+      },
+      {
+        x: 50,
+        y: 38,
+        scale: 1.2,
+        tilt: -1,
+        delay: -1.1,
+        bob: 11.6,
+        palette: "gold",
+        pose: "command",
+        patrolX: 20,
+        patrolY: 12,
+        parallax: 16,
+        phase: 1.42,
+        speed: 1.9,
+        step: 1.02,
+        eyeFire: "split",
+        beamAngle: 15,
+        beamLength: 178,
+        beamPulse: 0.32
+      },
+      {
+        x: 83,
+        y: 58,
+        scale: 1.02,
+        tilt: 12,
+        delay: -0.8,
+        bob: 10.4,
+        palette: "azure",
+        pose: "breach",
+        patrolX: 18,
+        patrolY: 10,
+        parallax: 14,
+        phase: 2.72,
+        speed: 1.78,
+        step: 1.1,
+        eyeFire: "left",
+        beamAngle: 18,
+        beamLength: 154,
+        beamPulse: 0.48
+      }
     ];
   }
 
   return [
-    { x: 9.5, y: 39, scale: 0.8, tilt: -12, delay: -0.5, bob: 6.7, palette: "crimson", pose: "sentinel" },
-    { x: 28.5, y: 23, scale: 1.01, tilt: -8, delay: -1.3, bob: 7.5, palette: "azure", pose: "blade" },
-    { x: 50, y: 10, scale: 1.28, tilt: 0, delay: -0.1, bob: 8.7, palette: "gold", pose: "leader" },
-    { x: 71.5, y: 23, scale: 1.01, tilt: 8, delay: -1.7, bob: 7.5, palette: "emerald", pose: "striker" },
-    { x: 90.5, y: 39, scale: 0.8, tilt: 12, delay: -0.9, bob: 6.7, palette: "magenta", pose: "guard" }
+    {
+      x: 17.5,
+      y: 56,
+      scale: 1.14,
+      tilt: -12,
+      delay: -0.4,
+      bob: 11.2,
+      palette: "crimson",
+      pose: "flank",
+      patrolX: 24,
+      patrolY: 13,
+      parallax: 18,
+      phase: 0.12,
+      speed: 1.82,
+      step: 1.08,
+      eyeFire: "right",
+      beamAngle: 16,
+      beamLength: 218,
+      beamPulse: 0.44
+    },
+    {
+      x: 50,
+      y: 34,
+      scale: 1.42,
+      tilt: -2,
+      delay: -1.05,
+      bob: 12.8,
+      palette: "gold",
+      pose: "command",
+      patrolX: 28,
+      patrolY: 15,
+      parallax: 22,
+      phase: 1.48,
+      speed: 2.02,
+      step: 0.96,
+      eyeFire: "split",
+      beamAngle: 14,
+      beamLength: 268,
+      beamPulse: 0.3
+    },
+    {
+      x: 82.5,
+      y: 56,
+      scale: 1.14,
+      tilt: 12,
+      delay: -0.7,
+      bob: 11.2,
+      palette: "azure",
+      pose: "breach",
+      patrolX: 24,
+      patrolY: 13,
+      parallax: 18,
+      phase: 2.82,
+      speed: 1.9,
+      step: 1.06,
+      eyeFire: "left",
+      beamAngle: 16,
+      beamLength: 218,
+      beamPulse: 0.48
+    }
+  ];
+};
+
+const getInsidersThreatBlueprint = (isCompactViewport = false) => {
+  if (isCompactViewport) {
+    return [
+      {
+        x: 17,
+        y: 22,
+        scale: 0.88,
+        label: "FAKE NEWS",
+        detail: "ruido armado",
+        tone: "ember",
+        drift: 1.2
+      },
+      {
+        x: 50,
+        y: 17,
+        scale: 1.02,
+        label: "DEEPFAKE",
+        detail: "imagem forjada",
+        tone: "gold",
+        drift: 1.4
+      },
+      {
+        x: 83,
+        y: 23,
+        scale: 0.88,
+        label: "DADOS TORCIDOS",
+        detail: "narrativa suja",
+        tone: "azure",
+        drift: 1.26
+      }
+    ];
+  }
+
+  return [
+    {
+      x: 18,
+      y: 20,
+      scale: 0.94,
+      label: "FAKE NEWS",
+      detail: "ruido armado",
+      tone: "ember",
+      drift: 1.16
+    },
+    {
+      x: 50,
+      y: 14.5,
+      scale: 1.08,
+      label: "DEEPFAKE",
+      detail: "imagem forjada",
+      tone: "gold",
+      drift: 1.36
+    },
+    {
+      x: 82,
+      y: 20,
+      scale: 0.94,
+      label: "DADOS TORCIDOS",
+      detail: "narrativa suja",
+      tone: "azure",
+      drift: 1.22
+    }
   ];
 };
 
@@ -3191,6 +3521,16 @@ const createInsidersArmyRobot = (config = {}) => {
   const bob = Number(config.bob || 7.2);
   const palette = String(config.palette || "gold").trim() || "gold";
   const pose = String(config.pose || "leader").trim() || "leader";
+  const patrolX = Number(config.patrolX || 0);
+  const patrolY = Number(config.patrolY || 0);
+  const parallax = Number(config.parallax || 0);
+  const phase = Number(config.phase || 0);
+  const speed = Number(config.speed || 1);
+  const step = Number(config.step || 1.75);
+  const eyeFire = String(config.eyeFire || "right").trim() || "right";
+  const beamAngle = Number(config.beamAngle || 12);
+  const beamLength = Number(config.beamLength || 180);
+  const beamPulse = Number(config.beamPulse || 0.4);
 
   robot.className = `insider-robot robot-squad palette-${palette} pose-${pose}`;
   robot.style.setProperty("--army-x", `${x.toFixed(2)}%`);
@@ -3199,8 +3539,18 @@ const createInsidersArmyRobot = (config = {}) => {
   robot.style.setProperty("--army-delay", `${delay.toFixed(2)}s`);
   robot.style.setProperty("--army-tilt", `${tilt.toFixed(2)}deg`);
   robot.style.setProperty("--army-bob", `${bob.toFixed(2)}px`);
+  robot.style.setProperty("--army-step", `${step.toFixed(2)}s`);
   robot.style.setProperty("--army-opacity", scale >= 1 ? "1" : "0.96");
   robot.style.setProperty("--robot-z", `${Math.round(scale * 10) + 10}`);
+  robot.style.setProperty("--beam-angle", `${beamAngle.toFixed(2)}deg`);
+  robot.style.setProperty("--beam-length", `${beamLength.toFixed(2)}px`);
+  robot.style.setProperty("--beam-pulse", `${beamPulse.toFixed(2)}s`);
+  robot.dataset.armyPatrolX = patrolX.toFixed(2);
+  robot.dataset.armyPatrolY = patrolY.toFixed(2);
+  robot.dataset.armyParallax = parallax.toFixed(2);
+  robot.dataset.armyPhase = phase.toFixed(2);
+  robot.dataset.armySpeed = speed.toFixed(2);
+  robot.dataset.eyeFire = eyeFire;
 
   partClassNames.forEach((className) => {
     const part = document.createElement("span");
@@ -3208,8 +3558,134 @@ const createInsidersArmyRobot = (config = {}) => {
     fragment.appendChild(part);
   });
 
+  ["beam-left-eye", "beam-right-eye"].forEach((beamClass) => {
+    const beam = document.createElement("span");
+    beam.className = `robot-eye-beam ${beamClass}`;
+    fragment.appendChild(beam);
+  });
+
+  const flare = document.createElement("span");
+  flare.className = "robot-eye-flare";
+  fragment.appendChild(flare);
+
   robot.appendChild(fragment);
   return robot;
+};
+
+const createInsidersArmyThreat = (config = {}) => {
+  const threat = document.createElement("article");
+  const core = document.createElement("div");
+  const chip = document.createElement("span");
+  const title = document.createElement("strong");
+  const detail = document.createElement("small");
+  const x = Number(config.x || 50);
+  const y = Number(config.y || 20);
+  const scale = Number(config.scale || 1);
+  const drift = Number(config.drift || 1.2);
+  const tone = String(config.tone || "ember").trim() || "ember";
+
+  threat.className = `insiders-army-threat tone-${tone}`;
+  threat.style.setProperty("--threat-x", `${x.toFixed(2)}%`);
+  threat.style.setProperty("--threat-y", `${y.toFixed(2)}%`);
+  threat.style.setProperty("--threat-scale", scale.toFixed(3));
+  threat.style.setProperty("--threat-drift", `${drift.toFixed(2)}s`);
+
+  core.className = "insiders-army-threat-core";
+  chip.className = "insiders-army-threat-chip";
+  chip.textContent = "alvo hostil";
+  title.textContent = String(config.label || "FAKE NEWS").trim();
+  detail.textContent = String(config.detail || "ruido armado").trim();
+
+  core.append(chip, title, detail);
+  threat.appendChild(core);
+  return threat;
+};
+
+const bindInsidersArmyMotion = (scene, robots = []) => {
+  if (!scene || scene.dataset.armyMotionBound === "true") {
+    return;
+  }
+
+  const robotList = robots.length ? robots : [...scene.querySelectorAll(".robot-squad")];
+
+  if (!robotList.length) {
+    return;
+  }
+
+  const prefersReducedMotion = performanceLiteMode || splashMotionQuery.matches;
+  const state = {
+    currentX: 0,
+    currentY: 0,
+    targetX: 0,
+    targetY: 0,
+    frameId: 0
+  };
+
+  const setSceneFocus = (x = 50, y = 20) => {
+    scene.style.setProperty("--army-focus-x", `${x.toFixed(2)}%`);
+    scene.style.setProperty("--army-focus-y", `${y.toFixed(2)}%`);
+  };
+
+  const resetFocus = () => {
+    state.targetX = 0;
+    state.targetY = 0;
+    setSceneFocus(50, 20);
+  };
+
+  scene.dataset.armyMotionBound = "true";
+  scene.dataset.armyMotion = prefersReducedMotion ? "static" : "interactive";
+  setSceneFocus(50, 20);
+
+  scene.addEventListener("pointermove", (event) => {
+    if (!motionMediaQuery.matches) {
+      return;
+    }
+
+    const rect = scene.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) {
+      return;
+    }
+
+    const offsetX = (event.clientX - rect.left) / rect.width;
+    const offsetY = (event.clientY - rect.top) / rect.height;
+
+    state.targetX = (offsetX - 0.5) * 2;
+    state.targetY = (offsetY - 0.5) * 2;
+    setSceneFocus(offsetX * 100, offsetY * 100);
+  });
+
+  scene.addEventListener("pointerleave", resetFocus);
+  scene.addEventListener("pointercancel", resetFocus);
+
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  const animateArmy = (now = 0) => {
+    state.currentX += (state.targetX - state.currentX) * 0.15;
+    state.currentY += (state.targetY - state.currentY) * 0.15;
+
+    robotList.forEach((robot, index) => {
+      const patrolX = Number(robot.dataset.armyPatrolX || 0);
+      const patrolY = Number(robot.dataset.armyPatrolY || 0);
+      const parallax = Number(robot.dataset.armyParallax || 0);
+      const phase = Number(robot.dataset.armyPhase || index * 0.65);
+      const speed = Number(robot.dataset.armySpeed || 1);
+      const idleX = Math.sin(now * 0.00195 * speed + phase) * patrolX;
+      const idleY = Math.cos(now * 0.00235 * speed + phase) * patrolY;
+      const pointerX = state.currentX * parallax;
+      const pointerY = state.currentY * (parallax * 0.92);
+
+      robot.style.setProperty("--army-drift-x", `${(idleX + pointerX).toFixed(2)}px`);
+      robot.style.setProperty("--army-drift-y", `${(idleY + pointerY).toFixed(2)}px`);
+      robot.style.setProperty("--army-tilt-extra", `${(state.currentX * (parallax * 0.18)).toFixed(2)}deg`);
+    });
+
+    state.frameId = window.requestAnimationFrame(animateArmy);
+  };
+
+  state.frameId = window.requestAnimationFrame(animateArmy);
 };
 
 const initializeInsidersArmy = () => {
@@ -3224,19 +3700,22 @@ const initializeInsidersArmy = () => {
 
     buildInsidersArmyChant();
 
-    const totalCount = getInsidersArmyCount(insidersArmyScene.dataset.armyCount || "5");
+    const totalCount = getInsidersArmyCount(insidersArmyScene.dataset.armyCount || "3");
     const isLiteMode = getInsidersLiteMode();
     const isCompactViewport = window.matchMedia("(max-width: 960px)").matches;
     const blueprint = getInsidersSquadBlueprint(isCompactViewport).slice(0, totalCount);
+    const threats = getInsidersThreatBlueprint(isCompactViewport);
     const fragment = document.createDocumentFragment();
 
     insidersArmyScene.dataset.armyMode = isLiteMode ? "lite" : "full";
     insidersArmyScene.dataset.armyFormation = "squad";
     insidersArmyScene.style.setProperty("--insiders-army-count", String(blueprint.length));
+    threats.forEach((config) => fragment.appendChild(createInsidersArmyThreat(config)));
     blueprint.forEach((config) => fragment.appendChild(createInsidersArmyRobot(config)));
 
     insidersArmyScene.textContent = "";
     insidersArmyScene.appendChild(fragment);
+    bindInsidersArmyMotion(insidersArmyScene, [...insidersArmyScene.querySelectorAll(".robot-squad")]);
     insidersArmyScene.dataset.armyReady = "true";
   };
 
@@ -3245,6 +3724,10 @@ const initializeInsidersArmy = () => {
     return;
   }
 
+  // Some headless/embedded browsers miss this intersection callback, so keep a
+  // small fallback render to avoid an empty Insiders stage.
+  const fallbackTimer = window.setTimeout(renderArmy, 2200);
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -3252,6 +3735,7 @@ const initializeInsidersArmy = () => {
           return;
         }
 
+        window.clearTimeout(fallbackTimer);
         observer.disconnect();
         renderArmy();
       });

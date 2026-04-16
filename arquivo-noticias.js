@@ -43,7 +43,9 @@
     activeCategory: "",
     visibleItems: pageSize,
     ownsRendering: false,
-    initialQueryApplied: false
+    initialQueryApplied: false,
+    drawerOpen: false,
+    drawerCloseTimer: 0
   };
 
   const normalizeText = (value) =>
@@ -491,7 +493,41 @@
     return card;
   };
 
+  const buildDrawerItem = (article) => {
+    const href = buildArticleHref(article);
+    const item = document.createElement("article");
+    const link = document.createElement("a");
+    const meta = document.createElement("div");
+    const category = document.createElement("span");
+    const date = document.createElement("span");
+    const title = document.createElement("strong");
+    const summary = document.createElement("p");
+    const footer = document.createElement("small");
+
+    item.className = "feed-drawer-item";
+    link.className = "feed-drawer-link";
+    link.href = href;
+
+    if (isExternalUrl(href)) {
+      link.target = "_blank";
+      link.rel = "noreferrer";
+    }
+
+    meta.className = "feed-drawer-item-meta";
+    category.textContent = article.category || "Arquivo";
+    date.textContent = article.date || "Sem data";
+    title.textContent = article.title || "Atualizacao";
+    summary.textContent = article.lede || "Sem resumo.";
+    footer.textContent = `${article.sourceName || "Fonte local"}${article.slug ? " • pauta interna" : " • link externo"}`;
+
+    meta.append(category, date);
+    link.append(meta, title, summary, footer);
+    item.appendChild(link);
+    return item;
+  };
+
   const getNodes = () => ({
+    section: document.querySelector("#arquivo-vivo"),
     grid: document.querySelector("#live-feed-grid"),
     query: document.querySelector("#live-feed-query"),
     more: document.querySelector("#live-feed-more"),
@@ -504,7 +540,14 @@
     focus: document.querySelector("#live-feed-focus"),
     sources: document.querySelector("#live-feed-sources"),
     clear: document.querySelector("#live-feed-clear"),
-    suggestions: document.querySelector("#arquivo-noticias-sugestoes")
+    suggestions: document.querySelector("#arquivo-noticias-sugestoes"),
+    drawer: document.querySelector("#live-feed-drawer"),
+    drawerBackdrop: document.querySelector("#live-feed-drawer-backdrop"),
+    drawerList: document.querySelector("#live-feed-drawer-list"),
+    drawerCount: document.querySelector("#live-feed-drawer-count"),
+    drawerLabel: document.querySelector("#live-feed-drawer-label"),
+    drawerStatus: document.querySelector("#live-feed-drawer-status"),
+    drawerClose: document.querySelector("#live-feed-drawer-close")
   });
 
   const getInitialQuery = () => {
@@ -529,6 +572,116 @@
 
     query.value = initialQuery;
     state.initialQueryApplied = true;
+  };
+
+  const openArchiveDrawer = () => {
+    const { drawer, drawerBackdrop } = getNodes();
+    if (!drawer || !drawerBackdrop || state.drawerOpen) {
+      return;
+    }
+
+    if (state.drawerCloseTimer) {
+      window.clearTimeout(state.drawerCloseTimer);
+      state.drawerCloseTimer = 0;
+    }
+
+    state.drawerOpen = true;
+    drawer.hidden = false;
+    drawerBackdrop.hidden = false;
+    drawer.setAttribute("aria-hidden", "false");
+
+    window.requestAnimationFrame(() => {
+      drawer.classList.add("is-open");
+      drawerBackdrop.classList.add("is-open");
+    });
+  };
+
+  const closeArchiveDrawer = () => {
+    const { drawer, drawerBackdrop } = getNodes();
+    if (!drawer || !drawerBackdrop || !state.drawerOpen) {
+      return;
+    }
+
+    state.drawerOpen = false;
+    drawer.classList.remove("is-open");
+    drawerBackdrop.classList.remove("is-open");
+    drawer.setAttribute("aria-hidden", "true");
+
+    if (state.drawerCloseTimer) {
+      window.clearTimeout(state.drawerCloseTimer);
+    }
+
+    state.drawerCloseTimer = window.setTimeout(() => {
+      drawer.hidden = true;
+      drawerBackdrop.hidden = true;
+      state.drawerCloseTimer = 0;
+    }, 220);
+  };
+
+  const renderArchiveDrawer = (items = state.items) => {
+    const { drawerList, drawerCount, drawerLabel, drawerStatus, query } = getNodes();
+    if (!drawerList || !drawerCount || !drawerLabel || !drawerStatus) {
+      return;
+    }
+
+    const queryText = String(query?.value || "").trim();
+    const activeCategory = String(state.activeCategory || "").trim();
+    const activeContext = [activeCategory, queryText ? `busca "${queryText}"` : ""].filter(Boolean);
+
+    drawerCount.textContent = String(items.length);
+    drawerLabel.textContent =
+      activeContext.length > 0
+        ? "pautas no recorte lateral"
+        : "pautas no arquivo lateral";
+
+    if (!state.items.length) {
+      drawerStatus.textContent = "Carregando a base completa para abrir o arquivo lateral.";
+      drawerList.innerHTML = "";
+      return;
+    }
+
+    if (!items.length) {
+      drawerStatus.textContent = "Nenhuma pauta bateu com esse filtro na barra lateral.";
+      drawerList.innerHTML = '<div class="feed-drawer-empty">Nenhuma pauta encontrada neste recorte.</div>';
+      return;
+    }
+
+    drawerStatus.textContent = activeContext.length
+      ? `Rolagem lateral com ${items.length} pautas filtradas por ${activeContext.join(" e ")}.`
+      : `Rolagem lateral pronta com ${items.length} pautas ja verificadas na base.`;
+
+    drawerList.textContent = "";
+    items.forEach((article) => drawerList.appendChild(buildDrawerItem(article)));
+  };
+
+  const bindArchiveDrawer = () => {
+    const { section, drawerClose } = getNodes();
+
+    if (drawerClose && !drawerClose.dataset.bound) {
+      drawerClose.dataset.bound = "true";
+      drawerClose.addEventListener("click", closeArchiveDrawer);
+    }
+
+    if (!document.body.dataset.archiveDrawerBound) {
+      document.body.dataset.archiveDrawerBound = "true";
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && state.drawerOpen) {
+          closeArchiveDrawer();
+        }
+      });
+
+      document.addEventListener("mousedown", (event) => {
+        if (!state.drawerOpen) {
+          return;
+        }
+
+        if (section?.contains(event.target)) {
+          return;
+        }
+
+        closeArchiveDrawer();
+      });
+    }
   };
 
   const getFilteredItems = (queryNode) => {
@@ -641,11 +794,20 @@
     if (!suggestions.dataset.bound) {
       suggestions.dataset.bound = "true";
 
-      query.addEventListener("focus", updateSuggestions);
-      query.addEventListener("input", updateSuggestions);
+      query.addEventListener("focus", () => {
+        renderArchiveDrawer(getFilteredItems(query));
+        openArchiveDrawer();
+        updateSuggestions();
+      });
+      query.addEventListener("input", () => {
+        renderArchiveDrawer(getFilteredItems(query));
+        openArchiveDrawer();
+        updateSuggestions();
+      });
       query.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           closeSuggestions();
+          closeArchiveDrawer();
         }
       });
 
@@ -769,6 +931,7 @@
     grid.innerHTML = "";
     updateSummary(filtered, visibleSlice);
     renderFilters();
+    renderArchiveDrawer(filtered);
 
     if (!filtered.length) {
       const empty = document.createElement("div");
@@ -835,8 +998,10 @@
     const staticItems = Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [];
     state.items = dedupeArticles(staticItems);
     window.ARQUIVO_NOTICIAS = state.items;
+    bindArchiveDrawer();
     renderAutocomplete();
     attachFallbackRendering();
+    renderArchiveDrawer(state.items);
 
     const refreshFromApi = async () => {
       const apiItems = await fetchArchiveArticles();
@@ -847,6 +1012,7 @@
       state.items = dedupeArticles([...apiItems, ...state.items]);
       window.ARQUIVO_NOTICIAS = state.items;
       renderAutocomplete();
+      renderArchiveDrawer(getFilteredItems(getNodes().query));
 
       if (state.ownsRendering) {
         renderArchive();

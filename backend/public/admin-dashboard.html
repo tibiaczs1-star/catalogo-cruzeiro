@@ -5,13 +5,13 @@
     <title>Administrativo de Equipe • Catálogo Cruzeiro do Sul</title>
     <style>
       :root {
-        --bg: #f4efe4;
+        --bg: #eef3f8;
         --card: #ffffff;
-        --ink: #102744;
-        --muted: #526179;
-        --accent: #b85e31;
-        --line: #e7ddc8;
-        --navy: #12365a;
+        --ink: #162536;
+        --muted: #5b6d80;
+        --accent: #5c86ab;
+        --line: #d9e3ee;
+        --navy: #183a5c;
       }
 
       * {
@@ -25,7 +25,7 @@
           calc(24px + env(safe-area-inset-right, 0px))
           calc(24px + env(safe-area-inset-bottom, 0px))
           calc(24px + env(safe-area-inset-left, 0px));
-        background: radial-gradient(circle at top, #fff7eb, var(--bg));
+        background: radial-gradient(circle at top, #fdfefe, var(--bg));
         color: var(--ink);
         font-family: "Segoe UI", "Inter", sans-serif;
       }
@@ -40,11 +40,11 @@
       .hero {
         display: grid;
         gap: 14px;
-        background: linear-gradient(130deg, #0d2a48, #1a4570);
+        background: linear-gradient(130deg, #20384f, #4d6d8b);
         color: #fff;
         border-radius: 22px;
         padding: 22px;
-        box-shadow: 0 22px 44px rgba(8, 25, 47, 0.28);
+        box-shadow: 0 22px 44px rgba(20, 38, 58, 0.16);
       }
 
       .hero h1 {
@@ -206,9 +206,9 @@
       .status {
         padding: 14px 16px;
         border-radius: 16px;
-        background: #fff2eb;
-        border: 1px solid #f1d3c1;
-        color: #7b3a18;
+        background: #f4f8fc;
+        border: 1px solid #d7e4ef;
+        color: #3f5871;
       }
 
       .admin-auth-form {
@@ -355,9 +355,9 @@
 
       <section class="card" id="accessCard" hidden>
         <h2>Acesso administrativo</h2>
-        <p class="mini-note">
-          Use este bloco quando a senha nao abrir automaticamente ou quando o painel for aberto fora do servidor principal.
-        </p>
+          <p class="mini-note">
+          Use este bloco quando o painel abrir fora do servidor principal. O acesso padrao usa o usuario <strong>admin</strong> com a senha configurada no backend.
+          </p>
         <form class="admin-auth-form" id="accessForm">
           <div class="admin-auth-grid">
             <label class="field">
@@ -370,11 +370,11 @@
             </label>
             <label class="field">
               <span>Usuario</span>
-              <input id="userInput" type="text" placeholder="admin" />
+              <input id="userInput" type="text" placeholder="admin" autocomplete="username" />
             </label>
             <label class="field">
               <span>Senha</span>
-              <input id="passwordInput" type="password" placeholder="Sua senha de super admin" />
+              <input id="passwordInput" type="password" placeholder="Digite a senha administrativa" autocomplete="current-password" />
             </label>
           </div>
           <div class="actions">
@@ -949,7 +949,7 @@
 
           const data = await response.json().catch(() => ({}));
           if (response.status === 401) {
-            toggleAccessCard(true, "Informe usuario e senha de super admin ou token admin para liberar o painel.");
+            toggleAccessCard(true, "Informe o usuario admin com a senha do backend ou um token admin para liberar o painel.");
           }
           if (!response.ok || data.ok === false) {
             throw new Error(data.error || "Falha ao carregar o dashboard");
@@ -1242,7 +1242,7 @@
         event.preventDefault();
         const apiBase = normalizeBase(document.getElementById("apiBaseInput")?.value || "");
         const token = String(document.getElementById("tokenInput")?.value || "").trim();
-        const user = String(document.getElementById("userInput")?.value || "").trim();
+        const user = String(document.getElementById("userInput")?.value || "").trim() || "admin";
         const password = String(document.getElementById("passwordInput")?.value || "");
         const auth = token ? "" : encodeBasicAuth(user, password);
 

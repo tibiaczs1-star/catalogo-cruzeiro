@@ -818,8 +818,9 @@
               <p class="eyebrow">análise editorial</p>
               <h2>Informação verificada, resumo original e saída para a fonte.</h2>
             </div>
-            <p>
-              Agregamos os principais portais da região com observação crítica, contexto e menos ruído na leitura.
+            <p class="signal-band-description">
+              <strong>Leitura mais afiada, contexto local e caminho aberto até a origem.</strong>
+              Cruzamos os principais portais do Acre e do Vale do Juruá, filtramos o ruído, destacamos o que realmente pesa no dia e entregamos a notícia com síntese forte, leitura rápida e saída direta para a fonte.
             </p>
           </section>
 
@@ -1035,6 +1036,42 @@
               Carregar mais pautas
             </button>
           </div>
+
+          <div class="feed-drawer-backdrop" id="live-feed-drawer-backdrop" hidden></div>
+          <aside
+            class="feed-drawer"
+            id="live-feed-drawer"
+            aria-labelledby="live-feed-drawer-title"
+            aria-hidden="true"
+            hidden
+          >
+            <div class="feed-drawer-shell">
+              <div class="feed-drawer-head">
+                <div>
+                  <p class="eyebrow">arquivo lateral</p>
+                  <h3 id="live-feed-drawer-title">Tudo que ja foi pautado</h3>
+                  <p class="feed-drawer-status" id="live-feed-drawer-status">
+                    Abrindo o arquivo completo para rolar por todas as pautas verificadas.
+                  </p>
+                </div>
+                <button
+                  class="feed-drawer-close"
+                  id="live-feed-drawer-close"
+                  type="button"
+                  aria-label="Fechar arquivo lateral"
+                >
+                  Fechar
+                </button>
+              </div>
+
+              <div class="feed-drawer-summary">
+                <strong id="live-feed-drawer-count">--</strong>
+                <span id="live-feed-drawer-label">pautas no arquivo lateral</span>
+              </div>
+
+              <div class="feed-drawer-scroll" id="live-feed-drawer-list" aria-live="polite"></div>
+            </div>
+          </aside>
         </section>
 
         <section class="section-block cadernos-shell">
@@ -2585,19 +2622,19 @@
             <p class="eyebrow">missão editorial</p>
             <h3
               data-insiders-typed
-              data-typed-full="Combate à desinformação. A verdade sempre absoluta."
+              data-typed-full="Guerra à desinformação. Verdade em campo."
             >
-              Combate à desinformação. A verdade sempre absoluta.
+              Guerra à desinformação. Verdade em campo.
             </h3>
             <p>
-              Cinco robôs entram em formação de ataque, seguram o front do card
-              e mantêm o painel pronto para informação clara.
+              Tres robos entram em linha de combate, cruzam o campo de fumaça
+              e empurram boato, deepfake e ruido para fora da leitura.
             </p>
           </div>
 
           <div class="insiders-truth-banner" aria-label="Combate à desinformação">
-            <strong>Combate à desinformação</strong>
-            <span>A verdade sempre absoluta</span>
+            <strong>Guerra à desinformação</strong>
+            <span>Boato em retirada</span>
           </div>
 
           <div class="insiders-chant-rail" aria-label="Coro do exército editorial">
@@ -2608,13 +2645,13 @@
             class="insiders-logo-squad"
             aria-hidden="true"
             data-insiders-army
-            data-army-count="5"
+            data-army-count="3"
           ></div>
 
           <div class="insiders-logo-caption">
             <span>apresenta</span>
             <strong>INSIDERS INFOR</strong>
-            <small>Esquadrão editorial em ataque</small>
+            <small>Trio blindado contra o ruido</small>
           </div>
         </div>
         </section>
