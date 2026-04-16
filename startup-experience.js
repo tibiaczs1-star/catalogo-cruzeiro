@@ -204,6 +204,14 @@
               <span class="catalogo-shooting-star"></span>
             </div>
 
+            <div class="catalogo-chaos-mural" aria-hidden="true">
+              <img
+                src="./assets/startup-chaos-mural.svg"
+                alt=""
+                decoding="async"
+              />
+            </div>
+
             <div class="catalogo-night-landscape" aria-hidden="true">
               <span class="catalogo-horizon-glow"></span>
               <span class="catalogo-land-ridge ridge-back"></span>

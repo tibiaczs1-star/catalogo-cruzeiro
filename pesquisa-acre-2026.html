@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{SEO_TITLE}}</title>
+    <meta name="description" content="{{SEO_DESCRIPTION}}" />
+    <meta name="robots" content="{{SEO_ROBOTS}}" />
+    <meta name="theme-color" content="{{SEO_THEME_COLOR}}" />
+    <meta name="color-scheme" content="{{SEO_COLOR_SCHEME}}" />
+    <meta property="og:type" content="{{SEO_OG_TYPE}}" />
+    <meta property="og:site_name" content="Catalogo Cruzeiro do Sul" />
+    <meta property="og:title" content="{{SEO_OG_TITLE}}" />
+    <meta property="og:description" content="{{SEO_OG_DESCRIPTION}}" />
+    <meta property="og:image" content="{{SEO_OG_IMAGE}}" />
+    <meta property="og:url" content="{{SEO_OG_URL}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{SEO_TWITTER_TITLE}}" />
+    <meta name="twitter:description" content="{{SEO_TWITTER_DESCRIPTION}}" />
+    <meta name="twitter:image" content="{{SEO_TWITTER_IMAGE}}" />
+    <link rel="canonical" href="{{SEO_CANONICAL}}" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260415a" />
+  </head>
+  <body>
+    <div class="poll-backdrop" aria-hidden="true"></div>
+
+    <main class="poll-shell">
+      <aside class="poll-stage">
+        <section class="poll-card poll-hero">
+          <p class="poll-kicker">Sondagem reservada | Acre 2026</p>
+          <h1>Pesquisa de opinião pensada para circular por link direto.</h1>
+          <p class="poll-lead">
+            Página pública, sem aparecer na navegação do site e sem indexação em buscadores. As respostas
+            alimentam parciais automáticas, enquanto os dados completos ficam travados na consulta
+            administrativa.
+          </p>
+
+          <div class="poll-chip-row" aria-label="Características da página">
+            <span>Link discreto</span>
+            <span>Parciais instantâneas</span>
+            <span>Admin protegido</span>
+          </div>
+
+          <div class="poll-hero-scene" aria-hidden="true">
+            <span class="scene-glow scene-glow-a"></span>
+            <span class="scene-glow scene-glow-b"></span>
+            <span class="scene-orbit"></span>
+            <span class="scene-satellite"></span>
+            <span class="scene-celestial"></span>
+            <span class="scene-pulse"></span>
+            <div class="scene-debate">
+              <i class="scene-podium podium-left"></i>
+              <i class="scene-podium podium-right"></i>
+              <i class="scene-wave wave-left"></i>
+              <i class="scene-wave wave-right"></i>
+            </div>
+            <div class="scene-ground">
+              <span class="scene-ridge ridge-back"></span>
+              <span class="scene-ridge ridge-front"></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="poll-card poll-summary" aria-live="polite">
+          <div class="poll-summary-head">
+            <div>
+              <p class="poll-kicker poll-kicker--soft">Parciais públicas</p>
+              <h2>Leitura rápida da sondagem</h2>
+            </div>
+            <p class="poll-summary-updated" id="summaryUpdatedAt">Aguardando respostas</p>
+          </div>
+
+          <div class="poll-stat-grid">
+            <article>
+              <strong id="summaryTotal">0</strong>
+              <span>respostas</span>
+            </article>
+            <article>
+              <strong id="summaryAverage">0,0</strong>
+              <span>satisfação média</span>
+            </article>
+          </div>
+
+          <div class="poll-summary-block">
+            <h3>Voto para 2026</h3>
+            <div class="poll-bar-list" id="voteBars">
+              <p class="poll-empty">As barras aparecem assim que chegarem as primeiras respostas.</p>
+            </div>
+          </div>
+
+          <div class="poll-summary-block">
+            <h3>Maior prioridade</h3>
+            <div class="poll-bar-list" id="priorityBars">
+              <p class="poll-empty">Sem prioridades registradas ainda.</p>
+            </div>
+          </div>
+
+          <div class="poll-summary-block">
+            <h3>Rejeição declarada</h3>
+            <div class="poll-bar-list" id="rejectionBars">
+              <p class="poll-empty">Sem dados suficientes até o momento.</p>
+            </div>
+          </div>
+
+          <div class="poll-summary-block">
+            <h3>Origens mais frequentes</h3>
+            <div class="poll-chip-cloud" id="locationCloud">
+              <span class="poll-empty-chip">Aguardando distribuição</span>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="poll-card poll-form-card">
+        <div class="poll-form-intro">
+          <p class="poll-kicker poll-kicker--soft">Escuta pública</p>
+          <h2>Pesquisa de Opinião Acre 2026</h2>
+          <p>
+            Preencha em menos de dois minutos. O formulário é opinativo, sem caráter científico e pensado
+            para leitura rápida de tendência.
+          </p>
+        </div>
+
+        <form id="acrePollForm" class="poll-form">
+          <section class="poll-form-section">
+            <div class="poll-section-title">
+              <span>1</span>
+              <div>
+                <h3>Sobre você</h3>
+                <p>Contexto mínimo para cruzar o sentimento por perfil e região.</p>
+              </div>
+            </div>
+
+            <div class="poll-field-grid">
+              <label class="poll-field">
+                <span>Área de atuação / trabalho</span>
+                <input type="text" name="profissao" placeholder="Ex.: comércio, agro, saúde..." required />
+              </label>
+
+              <label class="poll-field">
+                <span>Cidade / bairro</span>
+                <input type="text" name="localizacao" placeholder="Ex.: Cruzeiro do Sul - Centro" required />
+              </label>
+
+              <label class="poll-field">
+                <span>Faixa etária</span>
+                <select name="faixaEtaria" required>
+                  <option value="">Selecione</option>
+                  <option value="18 a 24 anos">18 a 24 anos</option>
+                  <option value="25 a 34 anos">25 a 34 anos</option>
+                  <option value="35 a 44 anos">35 a 44 anos</option>
+                  <option value="45 a 59 anos">45 a 59 anos</option>
+                  <option value="60 anos ou mais">60 anos ou mais</option>
+                  <option value="Prefiro nao informar">Prefiro não informar</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <section class="poll-form-section">
+            <div class="poll-section-title">
+              <span>2</span>
+              <div>
+                <h3>Desempenho atual</h3>
+                <p>Leitura de voto anterior e percepção do governo atual.</p>
+              </div>
+            </div>
+
+            <label class="poll-field">
+              <span>Em quem você votou para governador em 2022?</span>
+              <select name="votoAnterior" required>
+                <option value="">Selecione</option>
+                <option value="Gladson Cameli">Gladson Cameli</option>
+                <option value="Jorge Viana">Jorge Viana</option>
+                <option value="Marcia Bittar">Márcia Bittar</option>
+                <option value="Sergio Petecao">Sérgio Petecão</option>
+                <option value="Branco/Nulo">Branco / Nulo</option>
+                <option value="Nao lembro/Nao votei">Não lembro / Não votei</option>
+              </select>
+            </label>
+
+            <fieldset class="poll-rating">
+              <legend>Qual seu nível de satisfação com o governo atual?</legend>
+              <div class="poll-rating-scale">
+                <span>Muito insatisfeito</span>
+                <label><input type="radio" name="satisfacao" value="1" required /><strong>1</strong></label>
+                <label><input type="radio" name="satisfacao" value="2" /><strong>2</strong></label>
+                <label><input type="radio" name="satisfacao" value="3" /><strong>3</strong></label>
+                <label><input type="radio" name="satisfacao" value="4" /><strong>4</strong></label>
+                <label><input type="radio" name="satisfacao" value="5" /><strong>5</strong></label>
+                <span>Muito satisfeito</span>
+              </div>
+            </fieldset>
+          </section>
+
+          <section class="poll-form-section">
+            <div class="poll-section-title">
+              <span>3</span>
+              <div>
+                <h3>Eleições 2026</h3>
+                <p>Escolha principal, rejeição e principal urgência do Acre.</p>
+              </div>
+            </div>
+
+            <fieldset class="poll-choice-group">
+              <legend>Se a eleição fosse hoje, em quem você votaria?</legend>
+              <div class="poll-option-grid">
+                <label class="poll-option-card">
+                  <input type="radio" name="voto2026" value="Alan Rick" required />
+                  <strong>Alan Rick</strong>
+                  <span>Nome testado como opção competitiva.</span>
+                </label>
+                <label class="poll-option-card">
+                  <input type="radio" name="voto2026" value="Mailza Assis" />
+                  <strong>Mailza Assis</strong>
+                  <span>Continuidade de grupo com força de máquina.</span>
+                </label>
+                <label class="poll-option-card">
+                  <input type="radio" name="voto2026" value="Marcus Alexandre" />
+                  <strong>Marcus Alexandre</strong>
+                  <span>Alternativa com memória de gestão e recall.</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="poll-field-grid">
+              <label class="poll-field">
+                <span>Em qual destes você não votaria de jeito nenhum?</span>
+                <select name="rejeicao" required>
+                  <option value="">Selecione</option>
+                  <option value="Nao rejeito nenhum">Não rejeito nenhum</option>
+                  <option value="Alan Rick">Alan Rick</option>
+                  <option value="Mailza Assis">Mailza Assis</option>
+                  <option value="Marcus Alexandre">Marcus Alexandre</option>
+                  <option value="Tiao Bocalom">Tião Bocalom</option>
+                </select>
+              </label>
+
+              <label class="poll-field">
+                <span>O que o Acre mais precisa hoje?</span>
+                <select name="prioridade" required>
+                  <option value="">Selecione</option>
+                  <option value="Emprego e renda">Emprego e renda</option>
+                  <option value="Saude">Saúde</option>
+                  <option value="Seguranca">Segurança</option>
+                  <option value="Educacao">Educação</option>
+                  <option value="Infraestrutura e mobilidade">Infraestrutura e mobilidade</option>
+                  <option value="Combate a corrupcao">Combate à corrupção</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <section class="poll-form-section">
+            <label class="poll-field poll-field--textarea">
+              <span>Comentário obrigatório</span>
+              <textarea
+                name="comentario"
+                rows="4"
+                minlength="10"
+                maxlength="1200"
+                placeholder="Conte em poucas linhas o que mais pesa hoje na sua decisão."
+                required
+              ></textarea>
+            </label>
+          </section>
+
+          <div class="poll-actions">
+            <button class="poll-submit" id="submitButton" type="submit">Enviar e ver parciais</button>
+            <p class="poll-disclaimer">
+              Esta é uma sondagem de opinião sem caráter científico. Não substitui pesquisa registrada no TSE.
+            </p>
+            <p class="poll-feedback" id="formFeedback"></p>
+          </div>
+        </form>
+
+        <div class="poll-admin-entry">
+          <button class="poll-admin-link" id="adminToggle" type="button">Consulta administrativa</button>
+        </div>
+
+        <section class="poll-admin" id="adminPanel" hidden>
+          <div class="poll-admin-head">
+            <div>
+              <p class="poll-kicker poll-kicker--soft">Admin</p>
+              <h3>Consulta administrativa</h3>
+            </div>
+            <button class="poll-admin-close" id="adminClose" type="button">Fechar</button>
+          </div>
+
+          <form class="poll-admin-form" id="adminAccessForm">
+            <label class="poll-field">
+              <span>Senha administrativa</span>
+              <input id="adminPassword" type="password" autocomplete="current-password" placeholder="Digite a senha" />
+            </label>
+            <button class="poll-admin-submit" type="submit">Liberar painel</button>
+            <p class="poll-feedback poll-feedback--inline" id="adminFeedback"></p>
+          </form>
+
+          <div class="poll-admin-dashboard" id="adminDashboard" hidden>
+            <div class="poll-stat-grid poll-stat-grid--admin" id="adminKpis"></div>
+
+            <div class="poll-admin-actions">
+              <button class="poll-admin-export" id="adminExport" type="button">Baixar CSV</button>
+            </div>
+
+            <div class="poll-admin-table-wrap">
+              <table class="poll-admin-table">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Origem</th>
+                    <th>Perfil</th>
+                    <th>2022</th>
+                    <th>2026</th>
+                    <th>Rejeição</th>
+                    <th>Prioridade</th>
+                    <th>Comentário</th>
+                  </tr>
+                </thead>
+                <tbody id="adminTableBody">
+                  <tr>
+                    <td colspan="8">Digite a senha administrativa para ver os registros.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./pesquisa-acre-2026.js?v=20260415a" defer></script>
+  </body>
+</html>

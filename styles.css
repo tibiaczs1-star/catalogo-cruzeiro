@@ -18108,6 +18108,50 @@ a {
   box-shadow: 0 10px 20px rgba(11, 29, 52, 0.12);
 }
 
+.site-footer .footer-utility-buttons {
+  grid-column: 1 / -1 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.72rem;
+  padding: 0.38rem 0 0.1rem;
+}
+
+.site-footer .footer-utility-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  min-height: 42px;
+  padding: 0.6rem 0.95rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(7, 16, 28, 0.72);
+  color: #f7fbff !important;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.site-footer .footer-utility-button-spo {
+  border-color: rgba(140, 224, 255, 0.34);
+  background: linear-gradient(180deg, rgba(9, 34, 60, 0.92), rgba(7, 20, 37, 0.96));
+}
+
+.site-footer .footer-utility-button-tracer {
+  border-color: rgba(244, 179, 93, 0.34);
+  background: linear-gradient(180deg, rgba(51, 31, 16, 0.92), rgba(19, 14, 10, 0.96));
+}
+
+.site-footer .footer-utility-button:hover,
+.site-footer .footer-utility-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(2, 8, 16, 0.24);
+}
+
 .site-footer a:focus-visible,
 .site-footer button:focus-visible,
 .site-footer input:focus-visible {
@@ -18161,6 +18205,15 @@ a {
   .site-footer .footer-bottom {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .site-footer .footer-utility-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-footer .footer-utility-button {
+    width: 100%;
   }
 }
 

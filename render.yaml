@@ -29,6 +29,8 @@ services:
         sync: false
       - key: SUPER_ADMIN_PASSWORD
         sync: false
+      - key: POLL_ADMIN_PASSWORD
+        sync: false
       - key: NINJAS_PIX_KEY
         sync: false
       - key: NINJAS_PIX_RECEIVER_NAME

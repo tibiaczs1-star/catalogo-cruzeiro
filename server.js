@@ -15,7 +15,8 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const SUPER_ADMIN_USER = String(process.env.SUPER_ADMIN_USER || "admin").trim();
-const SUPER_ADMIN_PASSWORD = String(process.env.SUPER_ADMIN_PASSWORD || "99831455A").trim();
+const SUPER_ADMIN_PASSWORD = String(process.env.SUPER_ADMIN_PASSWORD || "99831455a").trim();
+const POLL_ADMIN_PASSWORD = String(process.env.POLL_ADMIN_PASSWORD || "99831455a").trim();
 
 const ROOT_DIR = __dirname;
 const DATA_DIR = process.env.DATA_DIR
@@ -60,6 +61,7 @@ const SALES_LISTINGS_FILE = path.join(DATA_DIR, "sales-listings.json");
 const VR_RENTAL_LEADS_FILE = path.join(DATA_DIR, "vr-rental-leads.json");
 const VISITS_FILE = path.join(DATA_DIR, "visits.json");
 const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
+const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
 const SITE_URL = String(process.env.SITE_URL || "").trim().replace(/\/+$/, "");
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
@@ -126,6 +128,40 @@ const CATEGORY_ALIAS_MAP = {
   "acre 03": "",
   "destaque 1": "",
   "extra total": ""
+};
+const ACRE_2026_POLL_OPTIONS = {
+  ageRanges: [
+    "18 a 24 anos",
+    "25 a 34 anos",
+    "35 a 44 anos",
+    "45 a 59 anos",
+    "60 anos ou mais",
+    "Prefiro nao informar"
+  ],
+  previousVotes: [
+    "Gladson Cameli",
+    "Jorge Viana",
+    "Marcia Bittar",
+    "Sergio Petecao",
+    "Branco/Nulo",
+    "Nao lembro/Nao votei"
+  ],
+  vote2026: ["Alan Rick", "Mailza Assis", "Marcus Alexandre"],
+  rejection: [
+    "Nao rejeito nenhum",
+    "Alan Rick",
+    "Mailza Assis",
+    "Marcus Alexandre",
+    "Tiao Bocalom"
+  ],
+  priorities: [
+    "Emprego e renda",
+    "Saude",
+    "Seguranca",
+    "Educacao",
+    "Infraestrutura e mobilidade",
+    "Combate a corrupcao"
+  ]
 };
 const STATIC_PAGE_SEO = {
   "/": {
@@ -256,6 +292,18 @@ const STATIC_PAGE_SEO = {
     schemaType: "ContactPage",
     sitemap: false,
     fileName: "remocao.html"
+  },
+  "/pesquisa-acre-2026.html": {
+    title: `Pesquisa de Opiniao Acre 2026 | ${SITE_NAME}`,
+    description:
+      "Formulario reservado para captar opiniao publica no Acre em 2026 com parciais automaticas e consulta administrativa protegida.",
+    robots: "noindex,nofollow,noarchive",
+    themeColor: "#081526",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "WebPage",
+    sitemap: false,
+    fileName: "pesquisa-acre-2026.html"
   },
   "/vendas.html": {
     title: `Vendas Locais | ${SITE_NAME}`,
@@ -3635,6 +3683,99 @@ function requireAdmin(req) {
   return hasValidBasic || hasValidToken;
 }
 
+function requireAcre2026PollAdmin(req) {
+  if (requireAdmin(req)) {
+    return true;
+  }
+
+  const password = safeString(req?.headers?.["x-poll-admin-password"] || "", 120);
+  return Boolean(POLL_ADMIN_PASSWORD) && password === POLL_ADMIN_PASSWORD;
+}
+
+function normalizePollChoice(value, allowedValues = [], fallback = "") {
+  const normalized = cleanShortText(value, 120);
+  return allowedValues.includes(normalized) ? normalized : fallback;
+}
+
+function getAcre2026PollResponses() {
+  return getJsonArray(ACRE_2026_POLL_FILE);
+}
+
+function buildPollBreakdown(items = [], key, limit = 10) {
+  const bucket = sumBy(items, (item) => item?.[key] || "Nao informado");
+  const total = Array.isArray(items) ? items.length : 0;
+  return Object.entries(bucket)
+    .map(([label, count]) => ({
+      label,
+      total: Number(count || 0),
+      percent: total ? Number((((Number(count || 0) / total) * 100)).toFixed(1)) : 0
+    }))
+    .sort((left, right) => right.total - left.total)
+    .slice(0, limit);
+}
+
+function buildAcre2026PollSummary(records = getAcre2026PollResponses()) {
+  const items = Array.isArray(records) ? records : [];
+  const totalResponses = items.length;
+  const satisfactionAverage = Number(
+    average(
+      items
+        .map((item) => Number(item.satisfacao || 0))
+        .filter((value) => Number.isFinite(value) && value > 0)
+    ).toFixed(1)
+  );
+
+  return {
+    totalResponses,
+    satisfactionAverage,
+    vote2026: buildPollBreakdown(items, "voto2026", 6),
+    rejection: buildPollBreakdown(items, "rejeicao", 6),
+    priorities: buildPollBreakdown(items, "prioridade", 6),
+    previousVote: buildPollBreakdown(items, "votoAnterior", 6),
+    ageRanges: buildPollBreakdown(items, "faixaEtaria", 6),
+    locations: buildPollBreakdown(items, "localizacao", 8),
+    updatedAt: items[0]?.createdAt || ""
+  };
+}
+
+function buildAcre2026PollPublicPayload() {
+  const items = sortByDateDesc(getAcre2026PollResponses(), "createdAt", 5000);
+  return {
+    ok: true,
+    updatedAt: items[0]?.createdAt || "",
+    summary: buildAcre2026PollSummary(items)
+  };
+}
+
+function buildAcre2026PollAdminPayload() {
+  const items = sortByDateDesc(getAcre2026PollResponses(), "createdAt", 5000);
+  return {
+    ok: true,
+    updatedAt: items[0]?.createdAt || "",
+    summary: buildAcre2026PollSummary(items),
+    records: items.map((item) => ({
+      id: item.id,
+      createdAt: item.createdAt,
+      profissao: item.profissao,
+      localizacao: item.localizacao,
+      faixaEtaria: item.faixaEtaria,
+      votoAnterior: item.votoAnterior,
+      satisfacao: item.satisfacao,
+      voto2026: item.voto2026,
+      rejeicao: item.rejeicao,
+      prioridade: item.prioridade,
+      comentario: item.comentario,
+      city: item.city,
+      country: item.country,
+      browser: item.browser,
+      deviceType: item.deviceType,
+      visitorId: item.visitorId,
+      sessionId: item.sessionId,
+      ip: item.ip
+    }))
+  };
+}
+
 function getElectionVoteBoard(limit = 15) {
   const store = getElectionVoteStore();
   const config = getElectionConfig();
@@ -4422,6 +4563,112 @@ async function handleApi(req, res, pathname, searchParams) {
       item: nextItem,
       message: "Pedido de aluguel VR salvo."
     });
+  }
+
+  if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/summary") {
+    return sendJson(res, 200, buildAcre2026PollPublicPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026") {
+    const body = await parseBody(req);
+    const tracking = buildTrackingMeta(req, body);
+    const records = getAcre2026PollResponses();
+    const profissao = cleanShortText(body.profissao || body.profession, 100);
+    const localizacao = cleanShortText(body.localizacao || body.location, 120);
+    const faixaEtaria = normalizePollChoice(
+      body.faixaEtaria || body.faixa_etaria || body.ageRange,
+      ACRE_2026_POLL_OPTIONS.ageRanges,
+      ""
+    );
+    const votoAnterior = normalizePollChoice(
+      body.votoAnterior || body.voto_anterior || body.previousVote,
+      ACRE_2026_POLL_OPTIONS.previousVotes,
+      ""
+    );
+    const voto2026 = normalizePollChoice(
+      body.voto2026 || body.voto_2026 || body.vote2026,
+      ACRE_2026_POLL_OPTIONS.vote2026,
+      ""
+    );
+    const rejeicao = normalizePollChoice(
+      body.rejeicao || body.rejection,
+      ACRE_2026_POLL_OPTIONS.rejection,
+      ""
+    );
+    const prioridade = normalizePollChoice(
+      body.prioridade || body.priority,
+      ACRE_2026_POLL_OPTIONS.priorities,
+      ""
+    );
+    const satisfacao = Math.max(0, Math.min(5, Number(body.satisfacao || body.satisfaction || 0)));
+    const comentario = safeString(body.comentario || body.comment || "", 1200);
+
+    if (
+      !profissao ||
+      !localizacao ||
+      !faixaEtaria ||
+      !votoAnterior ||
+      !satisfacao ||
+      !voto2026 ||
+      !rejeicao ||
+      !prioridade ||
+      comentario.length < 10
+    ) {
+      return sendJson(res, 400, {
+        ok: false,
+        error:
+          "Preencha todos os campos da pesquisa, incluindo faixa etaria e comentario com pelo menos 10 caracteres."
+      });
+    }
+
+    const nextItem = {
+      id: createRecordId("poll"),
+      profissao,
+      localizacao,
+      faixaEtaria,
+      votoAnterior,
+      satisfacao,
+      voto2026,
+      rejeicao,
+      prioridade,
+      comentario,
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pesquisa-acre-2026.html", 260),
+      pageTitle: cleanShortText(body.pageTitle || tracking.pageTitle || "Pesquisa de Opiniao Acre 2026", 160),
+      visitorId: tracking.visitorId || tracking.cookieVisitorId,
+      sessionId: tracking.sessionId || tracking.cookieSessionId,
+      city: tracking.city,
+      country: tracking.country,
+      ip: tracking.ip,
+      browser: tracking.browser,
+      deviceType: tracking.deviceType,
+      referrerHost: tracking.referrerHost,
+      createdAt: new Date().toISOString()
+    };
+
+    const next = Array.isArray(records) ? records : [];
+    next.push(nextItem);
+    writeJson(ACRE_2026_POLL_FILE, next);
+
+    return sendJson(res, 201, {
+      ok: true,
+      item: {
+        id: nextItem.id,
+        createdAt: nextItem.createdAt
+      },
+      summary: buildAcre2026PollSummary(sortByDateDesc(next, "createdAt", 5000)),
+      message: "Resposta registrada. As parciais ja foram atualizadas."
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026/admin") {
+    if (!requireAcre2026PollAdmin(req)) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Senha administrativa invalida."
+      });
+    }
+
+    return sendJson(res, 200, buildAcre2026PollAdminPayload());
   }
 
   if (req.method === "GET" && pathname === "/api/comments") {
