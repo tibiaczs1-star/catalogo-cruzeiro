@@ -16,8 +16,22 @@ const app = express();
 const PORT = Number(process.env.PORT || 8787);
 const HOST = process.env.HOST || "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
-const SUPER_ADMIN_USER = String(process.env.SUPER_ADMIN_USER || "admin").trim();
-const SUPER_ADMIN_PASSWORD = String(process.env.SUPER_ADMIN_PASSWORD || "99831455a").trim();
+const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
+
+function getRequiredSecret(name, fallbackValue) {
+  const value = String(process.env[name] || "").trim();
+  if (value) return value;
+
+  if (!IS_PRODUCTION) {
+    return fallbackValue;
+  }
+
+  console.warn(`[security] Missing required env ${name} in production. Related admin access is disabled until it is set.`);
+  return `missing-${name.toLowerCase()}-in-production`;
+}
+
+const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "99567741204").trim();

@@ -68,12 +68,18 @@ No Cloudflare:
 2. Troque os nameservers no registrador
 3. Crie os DNS pedidos pelo Render
 
-Normalmente fica assim:
+Para este projeto, o hostname atual do serviço é:
 
-- `CNAME` para `www` apontando para o hostname do Render
-- `A` ou `ALIAS/ANAME` para raiz conforme o Render informar
+- `catalogo-cruzeiro-web.onrender.com`
 
-Deixe a nuvem do Cloudflare em modo `Proxied` quando o SSL estiver estável.
+No Cloudflare, use primeiro em modo `DNS only`:
+
+- `CNAME` `@` -> `catalogo-cruzeiro-web.onrender.com`
+- `CNAME` `www` -> `catalogo-cruzeiro-web.onrender.com`
+
+Remova qualquer registro `AAAA` antes de verificar no Render.
+
+Depois que o certificado estiver emitido e válido, você pode trocar para `Proxied` se quiser.
 
 ## 6. Ajuste final obrigatório
 

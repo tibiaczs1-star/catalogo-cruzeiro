@@ -5,6 +5,10 @@ Dominio alvo desta rodada:
 - `catalogocruzeirodosul.com.br`
 - `www.catalogocruzeirodosul.com.br`
 
+Host atual do Render confirmado nesta rodada:
+
+- `catalogo-cruzeiro-web.onrender.com`
+
 Status verificado localmente em `2026-04-17`:
 
 - raiz: `NXDOMAIN`
@@ -28,18 +32,25 @@ No `Render`:
 2. em `Settings > Custom Domains`, adicionar:
    - `catalogocruzeirodosul.com.br`
    - `www.catalogocruzeirodosul.com.br`
-3. copiar exatamente os registros que o Render pedir
+3. verificar os dominios no painel depois do DNS propagar
 
 No `Cloudflare`:
 
 1. o dominio precisa estar na zona certa
 2. o registrador precisa usar os nameservers do Cloudflare
-3. criar os registros pedidos pelo Render
+3. remover qualquer registro `AAAA`
+4. criar estes registros em modo `DNS only` ate o certificado sair:
 
-Layout esperado na pratica:
+| Tipo | Nome | Destino |
+| --- | --- | --- |
+| `CNAME` | `@` | `catalogo-cruzeiro-web.onrender.com` |
+| `CNAME` | `www` | `catalogo-cruzeiro-web.onrender.com` |
 
-- `www` como `CNAME` para o hostname do Render
-- raiz como `A`, `ALIAS` ou `ANAME`, conforme o Render informar para esse servico
+Observacoes:
+
+- o Render recomenda esse formato para Cloudflare: `CNAME` na raiz e no `www`, ambos apontando para o subdominio `onrender.com`
+- so depois do certificado emitir vale trocar para `Proxied`, se quiser
+- se existir redirecionamento antigo, forwarding ou `AAAA`, remova antes de verificar
 
 ## Variavel obrigatoria
 
@@ -61,7 +72,7 @@ npm run dns:check
 Se voce ja souber o hostname publico do Render, rode:
 
 ```bash
-node scripts/check-dns-readiness.js --domain catalogocruzeirodosul.com.br --render-host SEU-SERVICO.onrender.com
+node scripts/check-dns-readiness.js --domain catalogocruzeirodosul.com.br --render-host catalogo-cruzeiro-web.onrender.com
 ```
 
 ## Sinal verde para ir ao ar
