@@ -390,7 +390,7 @@
     const status = section.querySelector("[data-topic-feed-status]");
 
     if (status) {
-      status.textContent = "Carregando pautas reais desta editoria...";
+      status.textContent = "Buscando novidades reais desta editoria...";
     }
 
     try {
@@ -412,30 +412,28 @@
     const memoryBoard = document.querySelector("[data-memory-board]");
     const memoryStatus = document.querySelector("[data-memory-status]");
     const memoryReset = document.querySelector("[data-memory-reset]");
-    const tetrisBoard = document.querySelector("[data-tetris-board]");
-    const tetrisNext = document.querySelector("[data-tetris-next]");
-    const tetrisScore = document.querySelector("[data-tetris-score]");
-    const tetrisLines = document.querySelector("[data-tetris-lines]");
-    const tetrisLevel = document.querySelector("[data-tetris-level]");
-    const tetrisMessage = document.querySelector("[data-tetris-message]");
-    const tetrisToggle = document.querySelector("[data-tetris-toggle]");
-    const tetrisReset = document.querySelector("[data-tetris-reset]");
-    const tetrisLeft = document.querySelector("[data-tetris-left]");
-    const tetrisRight = document.querySelector("[data-tetris-right]");
-    const tetrisRotate = document.querySelector("[data-tetris-rotate]");
-    const tetrisDown = document.querySelector("[data-tetris-down]");
-    const storyOutput = document.querySelector("[data-story-output]");
-    const storyMix = document.querySelector("[data-story-mix]");
-    const quizQuestion = document.querySelector("[data-quiz-question]");
-    const quizOptions = document.querySelector("[data-quiz-options]");
-    const quizFeedback = document.querySelector("[data-quiz-feedback]");
-    const quizScore = document.querySelector("[data-quiz-score]");
-    const quizNext = document.querySelector("[data-quiz-next]");
+    const wordsearchGrid = document.querySelector("[data-wordsearch-grid]");
+    const wordsearchList = document.querySelector("[data-wordsearch-list]");
+    const wordsearchStatus = document.querySelector("[data-wordsearch-status]");
+    const wordsearchReset = document.querySelector("[data-wordsearch-reset]");
+    const mathTitle = document.querySelector("[data-math-title]");
+    const mathExpression = document.querySelector("[data-math-expression]");
+    const mathChoices = document.querySelector("[data-math-choices]");
+    const mathFeedback = document.querySelector("[data-math-feedback]");
+    const mathScore = document.querySelector("[data-math-score]");
+    const mathNext = document.querySelector("[data-math-next]");
+    const puzzleBoard = document.querySelector("[data-puzzle-board]");
+    const puzzleStatus = document.querySelector("[data-puzzle-status]");
+    const puzzleReset = document.querySelector("[data-puzzle-reset]");
     const drawTitle = document.querySelector("[data-draw-title]");
     const drawPrompt = document.querySelector("[data-draw-prompt]");
     const drawNext = document.querySelector("[data-draw-next]");
+    const sequenceBoard = document.querySelector("[data-sequence-board]");
+    const sequenceStatus = document.querySelector("[data-sequence-status]");
+    const sequenceScore = document.querySelector("[data-sequence-score]");
+    const sequenceStart = document.querySelector("[data-sequence-start]");
 
-    if (!memoryBoard && !tetrisBoard && !storyOutput && !quizQuestion && !drawTitle) return;
+    if (!memoryBoard && !wordsearchGrid && !mathExpression && !puzzleBoard && !drawTitle && !sequenceBoard) return;
 
     const shuffle = (items) =>
       items
@@ -444,12 +442,12 @@
         .map((item) => item.value);
 
     const memoryIcons = [
-      { key: "monica", icon: "MO", label: "Monica da Turma da Monica" },
-      { key: "cebolinha", icon: "CE", label: "Cebolinha da Turma da Monica" },
-      { key: "roblox", icon: "RBX", label: "Roblox" },
-      { key: "minecraft", icon: "MC", label: "Minecraft" },
-      { key: "mario", icon: "M", label: "Mario" },
-      { key: "sonic", icon: "S", label: "Sonic" }
+      { key: "rocket", emoji: "🚀", label: "Foguete" },
+      { key: "ball", emoji: "⚽", label: "Bola" },
+      { key: "kite", emoji: "🪁", label: "Pipa" },
+      { key: "drum", emoji: "🥁", label: "Tambor" },
+      { key: "cake", emoji: "🎂", label: "Bolo" },
+      { key: "teddy", emoji: "🧸", label: "Ursinho" }
     ];
     let firstCard = null;
     let lockMemory = false;
@@ -458,8 +456,13 @@
     const setCardLabel = (button, open) => {
       button.classList.toggle("is-open", open);
       button.innerHTML = open
-        ? `<span class="kids-memory-face">${button.dataset.icon || ""}</span>`
-        : '<span class="kids-memory-face is-hidden">?</span>';
+        ? `
+          <span class="kids-memory-face">
+            <span class="kids-memory-emoji">${button.dataset.emoji || ""}</span>
+            <span class="kids-memory-label">${button.dataset.label || ""}</span>
+          </span>
+        `
+        : '<span class="kids-memory-face is-hidden">✨</span>';
       button.setAttribute("aria-label", open ? `Carta ${button.dataset.label}` : "Carta virada");
     };
 
@@ -476,11 +479,11 @@
               class="kids-memory-card"
               type="button"
               data-value="${value.key}"
-              data-icon="${value.icon}"
+              data-emoji="${value.emoji}"
               data-label="${value.label}"
               data-index="${index}"
             >
-              <span class="kids-memory-face is-hidden">?</span>
+              <span class="kids-memory-face is-hidden">✨</span>
             </button>
           `
         )
@@ -527,407 +530,378 @@
     memoryReset?.addEventListener("click", resetMemory);
     resetMemory();
 
-    if (tetrisBoard && tetrisNext) {
-      const columns = 10;
-      const rows = 16;
-      const previewSize = 4;
-      const createMatrix = (height, width) => Array.from({ length: height }, () => Array(width).fill(""));
-      const cloneMatrix = (matrix) => matrix.map((row) => [...row]);
-      const tetrisPieces = [
-        { key: "monica", icon: "MO", matrix: [[1, 1], [1, 1]] },
-        { key: "cebolinha", icon: "CE", matrix: [[1, 0, 0], [1, 1, 1]] },
-        { key: "magali", icon: "MA", matrix: [[0, 0, 1], [1, 1, 1]] },
-        { key: "roblox", icon: "RBX", matrix: [[1, 1, 1, 1]] },
-        { key: "mario", icon: "M", matrix: [[0, 1, 0], [1, 1, 1]] },
-        { key: "sonic", icon: "S", matrix: [[1, 1, 0], [0, 1, 1]] },
-        { key: "pokemon", icon: "PK", matrix: [[0, 1, 1], [1, 1, 0]] }
-      ];
-
-      const findPiece = (key) => tetrisPieces.find((piece) => piece.key === key) || tetrisPieces[0];
-      const randomPiece = () => {
-        const template = tetrisPieces[Math.floor(Math.random() * tetrisPieces.length)];
-        return {
-          key: template.key,
-          matrix: cloneMatrix(template.matrix),
-          x: Math.floor((columns - template.matrix[0].length) / 2),
-          y: 0
-        };
-      };
-
-      const rotateMatrix = (matrix) =>
-        matrix[0].map((_value, columnIndex) => matrix.map((row) => row[columnIndex]).reverse());
-
-      let frozenBoard = createMatrix(rows, columns);
-      let boardCells = [];
-      let previewCells = [];
-      let currentPiece = null;
-      let nextPiece = randomPiece();
-      let score = 0;
-      let lines = 0;
-      let level = 1;
-      let isRunning = false;
-      let ticker = null;
-
-      const setTetrisMessage = (message) => {
-        if (tetrisMessage) tetrisMessage.textContent = message;
-      };
-
-      const setToggleLabel = () => {
-        if (!tetrisToggle) return;
-        if (isRunning) {
-          tetrisToggle.textContent = "Pausar";
-          return;
-        }
-        tetrisToggle.textContent = score || lines || currentPiece ? "Continuar" : "Comecar";
-      };
-
-      const renderStats = () => {
-        if (tetrisScore) tetrisScore.textContent = `${score} estrelas`;
-        if (tetrisLines) tetrisLines.textContent = String(lines);
-        if (tetrisLevel) tetrisLevel.textContent = String(level);
-        setToggleLabel();
-      };
-
-      const paintGrid = (cells, matrix) => {
-        matrix.forEach((row, y) => {
-          row.forEach((value, x) => {
-            const cell = cells[y * matrix[0].length + x];
-            const piece = value ? findPiece(value) : null;
-            cell.className = "kids-tetris-cell";
-            cell.textContent = "";
-            if (piece) {
-              cell.classList.add("is-filled", `piece-${piece.key}`);
-              cell.textContent = piece.icon;
-            }
-          });
-        });
-      };
-
-      const renderNextPiece = () => {
-        const previewMatrix = createMatrix(previewSize, previewSize);
-        if (nextPiece) {
-          const startY = Math.floor((previewSize - nextPiece.matrix.length) / 2);
-          const startX = Math.floor((previewSize - nextPiece.matrix[0].length) / 2);
-          nextPiece.matrix.forEach((row, y) => {
-            row.forEach((value, x) => {
-              if (!value) return;
-              previewMatrix[startY + y][startX + x] = nextPiece.key;
-            });
-          });
-        }
-        paintGrid(previewCells, previewMatrix);
-      };
-
-      const buildSnapshot = () => {
-        const snapshot = frozenBoard.map((row) => row.slice());
-        if (!currentPiece) return snapshot;
-        currentPiece.matrix.forEach((row, y) => {
-          row.forEach((value, x) => {
-            if (!value) return;
-            const targetY = currentPiece.y + y;
-            const targetX = currentPiece.x + x;
-            if (targetY >= 0 && targetY < rows && targetX >= 0 && targetX < columns) {
-              snapshot[targetY][targetX] = currentPiece.key;
-            }
-          });
-        });
-        return snapshot;
-      };
-
-      const renderBoard = () => {
-        paintGrid(boardCells, buildSnapshot());
-        renderNextPiece();
-        renderStats();
-      };
-
-      const collides = (piece, offsetX = 0, offsetY = 0, matrix = piece.matrix) => {
-        for (let y = 0; y < matrix.length; y += 1) {
-          for (let x = 0; x < matrix[y].length; x += 1) {
-            if (!matrix[y][x]) continue;
-            const nextX = piece.x + x + offsetX;
-            const nextY = piece.y + y + offsetY;
-            if (nextX < 0 || nextX >= columns || nextY >= rows) return true;
-            if (nextY >= 0 && frozenBoard[nextY][nextX]) return true;
-          }
-        }
-        return false;
-      };
-
-      const stopTicker = () => {
-        if (!ticker) return;
-        window.clearInterval(ticker);
-        ticker = null;
-      };
-
-      const getDropDelay = () => Math.max(180, 720 - (level - 1) * 55);
-
-      const startTicker = () => {
-        stopTicker();
-        ticker = window.setInterval(() => {
-          if (!isRunning) return;
-          movePieceDown();
-        }, getDropDelay());
-      };
-
-      const clearLines = () => {
-        let cleared = 0;
-        frozenBoard = frozenBoard.filter((row) => {
-          const full = row.every(Boolean);
-          if (full) cleared += 1;
-          return !full;
-        });
-        while (frozenBoard.length < rows) frozenBoard.unshift(Array(columns).fill(""));
-        if (cleared) {
-          lines += cleared;
-          score += cleared * 12;
-          level = 1 + Math.floor(lines / 4);
-        }
-        return cleared;
-      };
-
-      const spawnPiece = () => {
-        currentPiece = nextPiece || randomPiece();
-        currentPiece.x = Math.floor((columns - currentPiece.matrix[0].length) / 2);
-        currentPiece.y = 0;
-        nextPiece = randomPiece();
-        if (collides(currentPiece)) {
-          currentPiece = null;
-          isRunning = false;
-          stopTicker();
-          setTetrisMessage("A pilha encostou no teto. Aperte Novo jogo para brincar outra vez.");
-          renderBoard();
-          return false;
-        }
-        renderBoard();
-        return true;
-      };
-
-      const resetTetris = () => {
-        frozenBoard = createMatrix(rows, columns);
-        currentPiece = null;
-        nextPiece = randomPiece();
-        score = 0;
-        lines = 0;
-        level = 1;
-        isRunning = false;
-        stopTicker();
-        setTetrisMessage("Junte os blocos conhecidos em linhas completas para ganhar estrelas.");
-        renderBoard();
-      };
-
-      const beginTetris = () => {
-        if (!currentPiece && !spawnPiece()) return;
-        isRunning = true;
-        setTetrisMessage("Valendo! Empilhe Roblox, Mario, Sonic e Turma da Monica com calma.");
-        startTicker();
-        renderBoard();
-      };
-
-      const lockPiece = () => {
-        if (!currentPiece) return;
-        currentPiece.matrix.forEach((row, y) => {
-          row.forEach((value, x) => {
-            if (!value) return;
-            const targetY = currentPiece.y + y;
-            const targetX = currentPiece.x + x;
-            if (targetY >= 0 && targetY < rows) {
-              frozenBoard[targetY][targetX] = currentPiece.key;
-            }
-          });
-        });
-        currentPiece = null;
-        const cleared = clearLines();
-        if (cleared) {
-          setTetrisMessage(
-            cleared > 1
-              ? `Boa! Voce limpou ${cleared} linhas de uma vez.`
-              : "Linha completa! Mais uma estrela para a turma."
-          );
-        }
-        if (!spawnPiece()) return;
-        startTicker();
-      };
-
-      function movePieceDown() {
-        if (!currentPiece) return;
-        if (collides(currentPiece, 0, 1)) {
-          lockPiece();
-          return;
-        }
-        currentPiece.y += 1;
-        renderBoard();
-      }
-
-      const movePieceSide = (direction) => {
-        if (!isRunning || !currentPiece || collides(currentPiece, direction, 0)) return;
-        currentPiece.x += direction;
-        renderBoard();
-      };
-
-      const rotatePiece = () => {
-        if (!isRunning || !currentPiece) return;
-        const rotated = rotateMatrix(currentPiece.matrix);
-        const kicks = [0, -1, 1, -2, 2];
-        for (const kick of kicks) {
-          if (!collides(currentPiece, kick, 0, rotated)) {
-            currentPiece.matrix = rotated;
-            currentPiece.x += kick;
-            renderBoard();
-            return;
-          }
-        }
-      };
-
-      const softDrop = () => {
-        if (!isRunning || !currentPiece) return;
-        if (collides(currentPiece, 0, 1)) {
-          lockPiece();
-          return;
-        }
-        currentPiece.y += 1;
-        score += 1;
-        renderBoard();
-      };
-
-      const toggleTetris = () => {
-        if (isRunning) {
-          isRunning = false;
-          stopTicker();
-          setTetrisMessage("Jogo pausado. Aperte continuar quando quiser.");
-          renderBoard();
-          return;
-        }
-        if (!score && !lines && !currentPiece) {
-          resetTetris();
-        }
-        beginTetris();
-      };
-
-      tetrisBoard.innerHTML = Array.from({ length: rows * columns }, () => '<div class="kids-tetris-cell"></div>').join("");
-      tetrisNext.innerHTML = Array.from({ length: previewSize * previewSize }, () => '<div class="kids-tetris-cell"></div>').join("");
-      boardCells = Array.from(tetrisBoard.querySelectorAll(".kids-tetris-cell"));
-      previewCells = Array.from(tetrisNext.querySelectorAll(".kids-tetris-cell"));
-
-      tetrisToggle?.addEventListener("click", toggleTetris);
-      tetrisReset?.addEventListener("click", () => {
-        resetTetris();
-        beginTetris();
-      });
-      tetrisLeft?.addEventListener("click", () => movePieceSide(-1));
-      tetrisRight?.addEventListener("click", () => movePieceSide(1));
-      tetrisRotate?.addEventListener("click", rotatePiece);
-      tetrisDown?.addEventListener("click", softDrop);
-
-      window.addEventListener("keydown", (event) => {
-        if (!document.body.classList.contains("infantil-child-page")) return;
-        const keyMap = {
-          ArrowLeft: () => movePieceSide(-1),
-          ArrowRight: () => movePieceSide(1),
-          ArrowUp: rotatePiece,
-          ArrowDown: softDrop,
-          " ": () => toggleTetris()
-        };
-        const handler = keyMap[event.key];
-        if (!handler) return;
-        event.preventDefault();
-        handler();
-      });
-
-      resetTetris();
-    }
-
-    const heroes = ["Monica", "Cebolinha", "Mario", "Sonic", "um avatar do Roblox", "um construtor do Minecraft"];
-    const objects = ["um portal de mapa seguro", "uma placa de modo familia", "uma mochila de blocos", "um controle colorido"];
-    const places = ["na rua do Limoeiro", "em um mapa de Roblox revisado", "perto de uma base do Minecraft", "em uma pista de corrida"];
-    const endings = ["e chamou a familia para conferir as regras.", "e marcou os favoritos antes de jogar.", "e combinou tempo de tela antes da proxima fase.", "e guardou a senha em segredo."];
-
-    storyMix?.addEventListener("click", () => {
-      const pick = (list) => list[Math.floor(Math.random() * list.length)];
-      if (storyOutput) {
-        storyOutput.textContent = `${pick(heroes)} encontrou ${pick(objects)} ${pick(places)} ${pick(endings)}`;
-      }
-    });
-
-    const quiz = [
-      {
-        question: "Qual atitude deixa o Roblox mais seguro?",
-        options: ["Passar a senha", "Combinar regras com a familia", "Aceitar qualquer convite"],
-        answer: 1,
-        feedback: "Combinar regras ajuda em chat, compras, amizades e tempo de tela."
-      },
-      {
-        question: "Qual grupo tem Monica, Cebolinha, Cascao e Magali?",
-        options: ["Turma da Monica", "Patrulha Canina", "Mario Kart"],
-        answer: 0,
-        feedback: "A Turma da Monica e uma das referencias brasileiras mais conhecidas para criancas."
-      },
-      {
-        question: "No Minecraft, o que ajuda a voltar para a base?",
-        options: ["Anotar coordenadas", "Jogar tudo fora", "Esconder a cama"],
-        answer: 0,
-        feedback: "Coordenadas, tochas e pontos de referencia ajudam a crianca a nao se perder."
-      }
+    const wordsearchRows = [
+      ["B", "O", "L", "A", "X", "L", "U", "A"],
+      ["Q", "G", "A", "T", "O", "R", "E", "P"],
+      ["P", "I", "P", "A", "F", "O", "C", "A"],
+      ["M", "E", "L", "A", "V", "I", "N", "T"],
+      ["B", "O", "L", "O", "C", "A", "K", "E"],
+      ["T", "E", "D", "D", "Y", "N", "U", "V"],
+      ["C", "A", "S", "A", "R", "O", "C", "A"],
+      ["L", "I", "V", "R", "O", "S", "O", "L"]
     ];
-    let quizIndex = 0;
-    let quizHits = 0;
-    let quizAnswered = 0;
+    const wordTargets = [
+      { word: "BOLA", cells: [[0, 0], [0, 1], [0, 2], [0, 3]] },
+      { word: "LUA", cells: [[0, 5], [0, 6], [0, 7]] },
+      { word: "GATO", cells: [[1, 1], [1, 2], [1, 3], [1, 4]] },
+      { word: "PIPA", cells: [[2, 0], [2, 1], [2, 2], [2, 3]] },
+      { word: "BOLO", cells: [[4, 0], [4, 1], [4, 2], [4, 3]] },
+      { word: "LIVRO", cells: [[7, 0], [7, 1], [7, 2], [7, 3], [7, 4]] }
+    ];
+    let wordButtons = [];
+    let selectedWordCells = [];
+    let foundWords = new Set();
+    let foundWordCells = new Set();
 
-    const renderQuiz = () => {
-      if (!quizQuestion || !quizOptions) return;
-      const current = quiz[quizIndex % quiz.length];
-      quizQuestion.textContent = current.question;
-      quizOptions.innerHTML = current.options
-        .map((option, index) => `<button type="button" data-quiz-answer="${index}">${option}</button>`)
-        .join("");
-      if (quizFeedback) quizFeedback.textContent = "Responda e veja a explicacao.";
-      if (quizScore) quizScore.textContent = `${quizHits} acertos de ${quizAnswered}`;
+    const wordCellKey = (row, column) => `${row}:${column}`;
+    const pathToKeys = (path = []) => path.map(([row, column]) => wordCellKey(row, column));
+
+    const updateWordsearchStatus = (message = "") => {
+      if (!wordsearchStatus) return;
+      if (message) {
+        wordsearchStatus.textContent = message;
+        return;
+      }
+      wordsearchStatus.textContent =
+        foundWords.size === wordTargets.length
+          ? "Voce achou todas as palavras!"
+          : `${foundWords.size} de ${wordTargets.length} palavras encontradas`;
     };
 
-    quizOptions?.addEventListener("click", (event) => {
-      const button = event.target instanceof Element ? event.target.closest("[data-quiz-answer]") : null;
-      if (!button || button.disabled) return;
-      const current = quiz[quizIndex % quiz.length];
-      const selected = Number(button.dataset.quizAnswer);
-      const isCorrect = selected === current.answer;
-      quizAnswered += 1;
-      if (isCorrect) quizHits += 1;
-      Array.from(quizOptions.querySelectorAll("button")).forEach((item) => {
-        item.disabled = true;
-        item.classList.toggle("is-correct", Number(item.dataset.quizAnswer) === current.answer);
+    const renderWordsearchList = () => {
+      if (!wordsearchList) return;
+      wordsearchList.innerHTML = wordTargets
+        .map(
+          (item) => `
+            <li class="${foundWords.has(item.word) ? "is-found" : ""}">
+              <span>${item.word}</span>
+            </li>
+          `
+        )
+        .join("");
+    };
+
+    const syncWordsearchBoard = () => {
+      wordButtons.forEach((button) => {
+        const key = button.dataset.wordCell || "";
+        button.classList.toggle("is-selected", selectedWordCells.includes(key));
+        button.classList.toggle("is-found", foundWordCells.has(key));
       });
-      if (quizFeedback) {
-        quizFeedback.textContent = `${isCorrect ? "Acertou!" : "Quase!"} ${current.feedback}`;
+    };
+
+    const clearWordsearchSelection = () => {
+      selectedWordCells = [];
+      syncWordsearchBoard();
+    };
+
+    const matchesPrefix = (selected, targetKeys) =>
+      selected.every((value, index) => targetKeys[index] === value);
+
+    const findWordsearchMatch = (selected) => {
+      for (const target of wordTargets) {
+        const forward = pathToKeys(target.cells);
+        const reverse = [...forward].reverse();
+        if (
+          selected.length === forward.length &&
+          (matchesPrefix(selected, forward) || matchesPrefix(selected, reverse))
+        ) {
+          return target;
+        }
       }
-      if (quizScore) quizScore.textContent = `${quizHits} acertos de ${quizAnswered}`;
+      return null;
+    };
+
+    const selectionStillValid = (selected) => {
+      if (!selected.length) return true;
+      return wordTargets.some((target) => {
+        if (foundWords.has(target.word)) return false;
+        const forward = pathToKeys(target.cells);
+        const reverse = [...forward].reverse();
+        return matchesPrefix(selected, forward) || matchesPrefix(selected, reverse);
+      });
+    };
+
+    const renderWordsearchBoard = () => {
+      if (!wordsearchGrid) return;
+      wordsearchGrid.innerHTML = wordsearchRows
+        .map((row, rowIndex) =>
+          row
+            .map(
+              (letter, columnIndex) => `
+                <button
+                  class="kids-wordsearch-cell"
+                  type="button"
+                  data-word-cell="${wordCellKey(rowIndex, columnIndex)}"
+                  aria-label="Letra ${letter}"
+                >
+                  ${letter}
+                </button>
+              `
+            )
+            .join("")
+        )
+        .join("");
+      wordButtons = Array.from(wordsearchGrid.querySelectorAll(".kids-wordsearch-cell"));
+      renderWordsearchList();
+      syncWordsearchBoard();
+      updateWordsearchStatus();
+    };
+
+    const resetWordsearch = () => {
+      foundWords = new Set();
+      foundWordCells = new Set();
+      selectedWordCells = [];
+      renderWordsearchBoard();
+    };
+
+    wordsearchGrid?.addEventListener("click", (event) => {
+      const button =
+        event.target instanceof Element ? event.target.closest(".kids-wordsearch-cell") : null;
+      if (!button) return;
+
+      const key = button.dataset.wordCell || "";
+      if (!key || foundWordCells.has(key) || selectedWordCells.includes(key)) return;
+
+      selectedWordCells = [...selectedWordCells, key];
+      syncWordsearchBoard();
+
+      if (!selectionStillValid(selectedWordCells)) {
+        updateWordsearchStatus("Essa trilha nao formou palavra. Tente outra.");
+        window.setTimeout(() => {
+          clearWordsearchSelection();
+          updateWordsearchStatus();
+        }, 420);
+        return;
+      }
+
+      const match = findWordsearchMatch(selectedWordCells);
+      if (!match) {
+        updateWordsearchStatus("Boa! Continue clicando nas letras da mesma palavra.");
+        return;
+      }
+
+      foundWords.add(match.word);
+      pathToKeys(match.cells).forEach((item) => foundWordCells.add(item));
+      clearWordsearchSelection();
+      renderWordsearchList();
+      updateWordsearchStatus(
+        foundWords.size === wordTargets.length
+          ? "Voce achou todas as palavras!"
+          : `Achou ${match.word}!`
+      );
+      syncWordsearchBoard();
     });
 
-    quizNext?.addEventListener("click", () => {
-      quizIndex += 1;
-      renderQuiz();
+    wordsearchReset?.addEventListener("click", resetWordsearch);
+    renderWordsearchBoard();
+
+    const mathObjects = ["🍎", "🧸", "⭐", "🎈", "🧩", "🚗"];
+    let mathHits = 0;
+    let mathAnswered = 0;
+    let currentMathRound = null;
+
+    const renderMathRound = () => {
+      if (!mathChoices || !mathExpression) return;
+
+      const object = mathObjects[Math.floor(Math.random() * mathObjects.length)];
+      const useSubtraction = Math.random() > 0.55;
+      const left = 1 + Math.floor(Math.random() * 5);
+      const right = 1 + Math.floor(Math.random() * (useSubtraction ? left : 5));
+      const answer = useSubtraction ? left - right : left + right;
+      const optionPool = [];
+      [0, -1, 1, -2, 2, 3].forEach((offset) => {
+        const value = Math.max(0, answer + offset);
+        if (!optionPool.includes(value)) {
+          optionPool.push(value);
+        }
+      });
+      while (optionPool.length < 3) {
+        const fallbackValue = answer + optionPool.length + 1;
+        if (!optionPool.includes(fallbackValue)) {
+          optionPool.push(fallbackValue);
+        }
+      }
+      const options = shuffle(optionPool.slice(0, 3));
+
+      currentMathRound = { answer };
+
+      if (mathTitle) {
+        mathTitle.textContent = useSubtraction
+          ? "Quantos brinquedos sobram quando alguns saem?"
+          : "Quantos brinquedos ficam quando tudo se junta?";
+      }
+
+      mathExpression.innerHTML = `
+        <span class="kids-math-group">${object.repeat(left)}</span>
+        <span class="kids-math-operator">${useSubtraction ? "-" : "+"}</span>
+        <span class="kids-math-group">${object.repeat(right)}</span>
+        <span class="kids-math-operator">= ?</span>
+      `;
+      mathChoices.innerHTML = options
+        .map(
+          (option) =>
+            `<button type="button" data-math-answer="${option}" aria-label="Resposta ${option}">${option}</button>`
+        )
+        .join("");
+
+      if (mathFeedback) {
+        mathFeedback.textContent = "Escolha uma resposta para ver o resultado.";
+      }
+      if (mathScore) {
+        mathScore.textContent = `${mathHits} acertos de ${mathAnswered}`;
+      }
+    };
+
+    mathChoices?.addEventListener("click", (event) => {
+      const button = event.target instanceof Element ? event.target.closest("[data-math-answer]") : null;
+      if (!button || button.disabled || !currentMathRound) return;
+
+      const selected = Number(button.dataset.mathAnswer);
+      const isCorrect = selected === currentMathRound.answer;
+      mathAnswered += 1;
+      if (isCorrect) mathHits += 1;
+
+      Array.from(mathChoices.querySelectorAll("button")).forEach((item) => {
+        item.disabled = true;
+        item.classList.toggle(
+          "is-correct",
+          Number(item.dataset.mathAnswer) === currentMathRound.answer
+        );
+      });
+
+      if (mathFeedback) {
+        mathFeedback.textContent = isCorrect
+          ? "Acertou! Essa conta ficou certinha."
+          : `Quase! A resposta certa era ${currentMathRound.answer}.`;
+      }
+      if (mathScore) {
+        mathScore.textContent = `${mathHits} acertos de ${mathAnswered}`;
+      }
     });
 
-    renderQuiz();
+    mathNext?.addEventListener("click", renderMathRound);
+    renderMathRound();
+
+    const puzzleSize = 3;
+    const solvedPuzzle = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+    let puzzleTiles = [...solvedPuzzle];
+
+    const getPuzzleNeighbors = (index) => {
+      const neighbors = [];
+      const row = Math.floor(index / puzzleSize);
+      const column = index % puzzleSize;
+
+      if (row > 0) neighbors.push(index - puzzleSize);
+      if (row < puzzleSize - 1) neighbors.push(index + puzzleSize);
+      if (column > 0) neighbors.push(index - 1);
+      if (column < puzzleSize - 1) neighbors.push(index + 1);
+
+      return neighbors;
+    };
+
+    const isPuzzleSolved = () => puzzleTiles.every((tile, index) => tile === solvedPuzzle[index]);
+
+    const updatePuzzleStatus = (message = "") => {
+      if (!puzzleStatus) return;
+      puzzleStatus.textContent =
+        message || (isPuzzleSolved() ? "Imagem completa! Voce montou tudo." : "Mexa as pecas ate a figura ficar inteira.");
+    };
+
+    const renderPuzzle = () => {
+      if (!puzzleBoard) return;
+      const imageUrl = String(puzzleBoard.dataset.puzzleImage || "").trim().replace(/'/g, "%27");
+      puzzleBoard.innerHTML = puzzleTiles
+        .map((tile, index) => {
+          if (!tile) {
+            return `
+              <button
+                class="kids-puzzle-tile is-empty"
+                type="button"
+                data-puzzle-index="${index}"
+                aria-label="Espaco vazio do quebra-cabeca"
+                tabindex="-1"
+                disabled
+              ></button>
+            `;
+          }
+
+          const sourceIndex = tile - 1;
+          const row = Math.floor(sourceIndex / puzzleSize);
+          const column = sourceIndex % puzzleSize;
+          const positionX = (column / (puzzleSize - 1)) * 100;
+          const positionY = (row / (puzzleSize - 1)) * 100;
+
+          return `
+            <button
+              class="kids-puzzle-tile"
+              type="button"
+              data-puzzle-index="${index}"
+              aria-label="Mover peca ${tile}"
+              style="background-image:url('${imageUrl}');background-size:${puzzleSize * 100}% ${puzzleSize * 100}%;background-position:${positionX}% ${positionY}%"
+            ></button>
+          `;
+        })
+        .join("");
+
+      updatePuzzleStatus();
+    };
+
+    const shufflePuzzle = () => {
+      puzzleTiles = [...solvedPuzzle];
+      let emptyIndex = puzzleTiles.indexOf(0);
+
+      for (let step = 0; step < 160; step += 1) {
+        const neighbors = getPuzzleNeighbors(emptyIndex);
+        const nextIndex = neighbors[Math.floor(Math.random() * neighbors.length)];
+        [puzzleTiles[emptyIndex], puzzleTiles[nextIndex]] = [puzzleTiles[nextIndex], puzzleTiles[emptyIndex]];
+        emptyIndex = nextIndex;
+      }
+
+      if (isPuzzleSolved()) {
+        [puzzleTiles[7], puzzleTiles[8]] = [puzzleTiles[8], puzzleTiles[7]];
+      }
+
+      renderPuzzle();
+    };
+
+    const movePuzzleTile = (index) => {
+      const emptyIndex = puzzleTiles.indexOf(0);
+      if (!getPuzzleNeighbors(emptyIndex).includes(index)) return;
+      [puzzleTiles[emptyIndex], puzzleTiles[index]] = [puzzleTiles[index], puzzleTiles[emptyIndex]];
+      renderPuzzle();
+    };
+
+    puzzleBoard?.addEventListener("click", (event) => {
+      const button = event.target instanceof Element ? event.target.closest("[data-puzzle-index]") : null;
+      if (!button) return;
+      movePuzzleTile(Number(button.dataset.puzzleIndex));
+    });
+
+    puzzleReset?.addEventListener("click", shufflePuzzle);
+    if (puzzleBoard) {
+      shufflePuzzle();
+    }
 
     const drawIdeas = [
       {
-        title: "Desenhe uma cidade estilo Roblox.",
-        prompt: "Crie uma praca, um portal, uma loja de itens e uma placa de seguranca digital."
+        title: "Desenhe um parque cheio de amigos brincando.",
+        prompt: "Use escorregador, balanço, pipa, bola, nuvens e um sol grande no alto."
       },
       {
-        title: "Desenhe uma tirinha da Turma da Monica.",
-        prompt: "Use tres quadros: chegada, confusao divertida e final com uma licao leve."
+        title: "Desenhe um piquenique da Bluey.",
+        prompt: "Desenhe uma toalha, frutas, copos coloridos e amigos sorrindo na grama."
       },
       {
-        title: "Desenhe uma base segura no Minecraft.",
-        prompt: "Coloque cama, bau, tochas, plantacao e uma placa dizendo onde fica a entrada."
+        title: "Desenhe o fundo do mar do Bob Esponja.",
+        prompt: "Use bolhas, casa-abacaxi, estrela-do-mar, caranguejo e um montao de cor."
       },
       {
-        title: "Desenhe uma pista do Mario e do Sonic.",
-        prompt: "Misture curva, moeda, anel, rampa, placa de atalho e uma chegada bem colorida."
+        title: "Desenhe um foguete do Mundo Bita.",
+        prompt: "Pinte o ceu, a lua, estrelas, fumaça colorida e uma porta bem brilhante."
       },
       {
-        title: "Desenhe um card de creator infantil.",
-        prompt: "Crie titulo grande, cor forte, aviso de modo familia e um tema do video."
+        title: "Desenhe uma turma em roda de leitura.",
+        prompt: "Coloque livros, almofadas, tapete, janelinha e bichinhos ouvindo a historia."
       }
     ];
 
@@ -945,6 +919,76 @@
     });
 
     renderDrawIdea();
+
+    const sequenceColors = ["sun", "sky", "leaf", "candy"];
+    let sequencePattern = [];
+    let sequenceInput = [];
+    let sequenceRound = 0;
+    let sequenceLocked = true;
+
+    const sequencePads = Array.from(sequenceBoard?.querySelectorAll("[data-sequence-pad]") || []);
+
+    const setSequenceText = (message) => {
+      if (sequenceStatus) sequenceStatus.textContent = message;
+      if (sequenceScore) sequenceScore.textContent = `rodada ${sequenceRound}`;
+    };
+
+    const flashSequencePad = (color) => {
+      const pad = sequenceBoard?.querySelector(`[data-sequence-pad="${color}"]`);
+      if (!pad) return;
+      pad.classList.add("is-active");
+      window.setTimeout(() => pad.classList.remove("is-active"), 360);
+    };
+
+    const playSequence = () => {
+      if (!sequencePattern.length) return;
+      sequenceLocked = true;
+      setSequenceText("Observe a sequência e prepare a memória.");
+      sequencePattern.forEach((color, index) => {
+        window.setTimeout(() => flashSequencePad(color), 520 * index + 220);
+      });
+      window.setTimeout(() => {
+        sequenceLocked = false;
+        setSequenceText("Agora repita clicando nas mesmas cores.");
+      }, 520 * sequencePattern.length + 260);
+    };
+
+    const startSequenceRound = (reset) => {
+      if (reset) {
+        sequencePattern = [];
+        sequenceRound = 0;
+      }
+      sequenceInput = [];
+      sequenceRound += 1;
+      sequencePattern.push(sequenceColors[Math.floor(Math.random() * sequenceColors.length)]);
+      playSequence();
+    };
+
+    sequenceStart?.addEventListener("click", () => {
+      startSequenceRound(true);
+    });
+
+    sequenceBoard?.addEventListener("click", (event) => {
+      const button = event.target instanceof Element ? event.target.closest("[data-sequence-pad]") : null;
+      if (!button || sequenceLocked) return;
+
+      const value = String(button.dataset.sequencePad || "");
+      flashSequencePad(value);
+      sequenceInput.push(value);
+
+      const currentIndex = sequenceInput.length - 1;
+      if (sequencePattern[currentIndex] !== value) {
+        sequenceLocked = true;
+        setSequenceText("Ops! A ordem escapou. Toque em iniciar para recomeçar.");
+        return;
+      }
+
+      if (sequenceInput.length === sequencePattern.length) {
+        sequenceLocked = true;
+        setSequenceText("Boa! Mais uma cor entrou na sequência.");
+        window.setTimeout(() => startSequenceRound(false), 760);
+      }
+    });
   }
 
   function setupGamesVrRentalPopup() {
@@ -1096,22 +1140,8 @@
     updateWhatsappLink();
 
     const hashWantsPopup = location.hash === "#vr-rental-popup";
-    const autoSeen = (() => {
-      try {
-        return sessionStorage.getItem(AUTO_OPEN_KEY) === "1";
-      } catch (_error) {
-        return false;
-      }
-    })();
-
     if (hashWantsPopup) {
       openModal();
-    } else if (document.body.classList.contains("games-hub-page") && !autoSeen) {
-      window.setTimeout(() => {
-        if (modal.hidden) {
-          openModal();
-        }
-      }, 1400);
     }
   }
 

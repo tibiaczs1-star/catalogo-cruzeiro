@@ -56,7 +56,7 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260415v" />
+    <link rel="stylesheet" href="./styles.css?v=20260417a" />
   <link rel="stylesheet" href="admin-menu.css?v=20260411k" />
   <link rel="stylesheet" href="contrast-mixer.css?v=20260411n" />
   <link rel="stylesheet" href="acre-photo-cards.css?v=20260411m" />
@@ -66,14 +66,14 @@
   <link rel="stylesheet" href="sala-redacao-real.css?v=20260414q" />
   <link rel="stylesheet" href="photo-layout-fix.css?v=20260411ab" />
   <link rel="stylesheet" href="newspaper-gradient-balance.css?v=20260411r" />
-  <link rel="stylesheet" href="agentes-newsroom-hero.css?v=20260415d" />
+  <link rel="stylesheet" href="agentes-newsroom-hero.css?v=20260417a" />
   <link rel="stylesheet" href="startup-experience.css?v=20260413am" />
   <link rel="stylesheet" href="pro-design.css?v=20260414c" />
   <link rel="stylesheet" href="news-photo-fix.css?v=20260415a" />
   <link rel="stylesheet" href="deploy-stability.css?v=20260413a" />
   <link rel="stylesheet" href="./modern-launch.css?v=20260415d" />
 </head>
-  <body class="editorial-home site-loaded fx-lite">
+  <body class="editorial-home site-loaded">
     <div class="logo-splash" aria-hidden="true">
       <div class="logo-splash-noise"></div>
       <div class="logo-splash-orbit orbit-a"></div>
@@ -90,7 +90,7 @@
               <div class="logo-splash-office-shelf shelf-b"></div>
               <div class="logo-splash-office-plant"></div>
               <div class="logo-splash-office-bubble">Destaques locais no ar</div>
-              <div class="logo-splash-briefing-bubble">Edição do dia</div>
+              <div class="logo-splash-briefing-bubble">Bom dia, Juruá</div>
               <div class="logo-splash-news-lane">
                 <span class="logo-splash-news-sheet sheet-a"></span>
                 <span class="logo-splash-news-sheet sheet-b"></span>
@@ -173,8 +173,8 @@
           Notícias, serviços e agenda local reunidos em uma abertura visual feita para Cruzeiro do Sul e o Vale do Juruá.
         </p>
         <div class="logo-splash-meta">
-          <span id="logo-splash-status">Carregando os destaques da edição</span>
-          <span id="logo-splash-date">Carregando capa</span>
+          <span id="logo-splash-status">Preparando os destaques do dia</span>
+          <span id="logo-splash-date">Montando capa</span>
         </div>
         <div class="logo-splash-progress" aria-hidden="true">
           <span></span>
@@ -193,9 +193,15 @@
             <p>Cruzeiro do Sul em foco, com arquivo do mês, agenda local, serviço útil e comunidade no centro.</p>
             <div class="top-strip-actions">
               <a href="#monetizacao">Anuncie aqui</a>
-              <a class="top-strip-secondary" href="./games.html">Canal Tech Gamer</a>
-              <a class="top-strip-secondary" href="./infantil.html">Clube Infantil</a>
-              <a class="top-strip-secondary" href="./estudantes.html">Para estudantes</a>
+              <a
+                class="top-strip-secondary"
+                href="./admin/admin-dashboard.html"
+                data-admin-dashboard-link
+              >
+                Administrativo
+              </a>
+              <a class="top-strip-secondary" href="./pesquisa-acre-2026.html">SPO</a>
+              <a class="top-strip-secondary" href="./admin/admin-dashboard.html">Tracer</a>
             </div>
           </div>
 
@@ -218,6 +224,7 @@
               <a href="#acre-destaque">Acre</a>
               <a href="#trending">Trending</a>
               <a href="#panorama">Panorama</a>
+              <a href="./escritorio.html">Escritório</a>
               <a href="#em-construcao">Insiders Infor</a>
               <a href="#comentarios">Comunidade</a>
             </nav>
@@ -249,21 +256,15 @@
             </div>
           </div>
 
-          <div class="header-quick-links" aria-label="Acesso rápido">
-            <span>Acesso rápido:</span>
-            <a class="solid-button" href="./estudantes.html">Para estudantes</a>
-            <a class="outline-button" href="./games.html">Canal Tech Gamer</a>
-            <a class="outline-button" href="./infantil.html">Clube Infantil</a>
-            <a
-              class="team-admin-button"
-              href="#"
-              data-admin-dashboard-link
-              aria-label="Abrir administrativo de equipe com login protegido"
-            >
-              Administrativo de equipe
-            </a>
-            <a class="outline-button" href="./catalogo-servicos.html?modulo=locacao-transporte">Locação e Transporte</a>
-            <a class="outline-button" href="./ninjas.html">Ninjas Cruzeiro</a>
+          <div class="header-quick-links header-services-strip" aria-label="Entretenimento e serviços">
+            <span>Entretenimento e serviços:</span>
+            <a class="solid-button" href="./games.html">Games</a>
+            <a class="outline-button" href="./infantil.html">Infantil</a>
+            <a class="outline-button" href="./estudantes.html">Estudantil</a>
+            <a class="outline-button" href="./catalogo-servicos.html">Pedido de serviço</a>
+            <a class="outline-button" href="./escritorio.html">Escritório</a>
+            <a class="outline-button" href="./ninjas.html">Ninjas</a>
+            <a class="outline-button" href="./pubpaid.html">Pub Paid</a>
             <a class="outline-button" href="./vendas.html">Vendas locais</a>
           </div>
 
@@ -543,6 +544,16 @@
               </div>
             </div>
           </section>
+          <a
+            class="hero-daily-news-card hero-daily-news-band"
+            href="#radar"
+            data-hero-daily-link
+            aria-label="Abrir notícia destacada da hero"
+          >
+            <span data-hero-daily-category>Destaque do dia</span>
+            <strong data-hero-daily-title>Notícia em destaque</strong>
+            <small data-hero-daily-summary>Resumo da notícia principal selecionada por tema.</small>
+          </a>
         </section>
         <aside class="left-rail">
           <div class="left-rail-stack">
@@ -650,7 +661,7 @@
                     </div>
                     <div class="mosaic-copy compact">
                       <h3>Feira do Peixe movimenta R$ 1,2 milhão</h3>
-                      <p>Produção, consumo e feira popular viraram a pauta mais forte do comércio local.</p>
+                      <p>Produção, consumo e feira popular ganharam destaque no comércio local.</p>
                     </div>
                     <div class="mosaic-bottomline">
                       <span class="mosaic-action">Ver análise</span>
@@ -702,18 +713,18 @@
             <div class="radar-method-card reveal">
               <div class="radar-method-copy">
                 <p class="radar-method-kicker">como o resumo é escolhido</p>
-                <h3>O site compara pautas locais, corta repetição e destaca a versão mais verificável.</h3>
+                <h3>O site compara notícias locais, corta repetição e destaca a versão mais verificável.</h3>
                 <p>
                   O Radar cruza notícias do banco de artigos, observa fonte, data,
                   categoria, contexto e sinais de confirmação. Quando há versões
-                  parecidas, ele prioriza a pauta com origem mais clara, informação
+                  parecidas, ele prioriza a notícia com origem mais clara, informação
                   mais completa e link para conferência.
                 </p>
               </div>
               <ul class="radar-method-points" aria-label="Pontos positivos do resumo">
                 <li>Resumo rápido sem esconder a fonte original.</li>
                 <li>Comparação por tema para achar o que realmente importa.</li>
-                <li>Menos boato: preferência por pauta com data, órgão ou veículo identificado.</li>
+                <li>Menos boato: preferência por notícia com data, órgão ou veículo identificado.</li>
                 <li>Leitura simples para acompanhar cotidiano, prefeitura, polícia, saúde e educação.</li>
               </ul>
             </div>
@@ -990,14 +1001,14 @@
 
             <div class="feed-meta">
               <strong id="live-feed-count">--</strong>
-              <span id="live-feed-count-label">pautas no recorte atual</span>
-              <small id="live-feed-total">Base local carregando...</small>
+              <span id="live-feed-count-label">notícias no recorte atual</span>
+              <small id="live-feed-total">Base local em atualização...</small>
             </div>
           </div>
 
           <div class="live-feed-summary reveal">
             <p class="feed-status" id="live-feed-status">
-              Carregando a base local para busca por tema, resumo e fonte.
+              Atualizando a base local para busca por tema, resumo e fonte.
             </p>
 
             <div class="feed-stats" aria-label="Resumo rápido do arquivo">
@@ -1033,7 +1044,7 @@
 
           <div class="load-more-row">
             <button class="outline-button" id="live-feed-more" type="button">
-              Carregar mais pautas
+              Carregar mais notícias
             </button>
           </div>
 
@@ -1049,9 +1060,9 @@
               <div class="feed-drawer-head">
                 <div>
                   <p class="eyebrow">arquivo lateral</p>
-                  <h3 id="live-feed-drawer-title">Tudo que ja foi pautado</h3>
+                  <h3 id="live-feed-drawer-title">Tudo que ja foi verificado</h3>
                   <p class="feed-drawer-status" id="live-feed-drawer-status">
-                    Abrindo o arquivo completo para rolar por todas as pautas verificadas.
+                    Abrindo o arquivo completo para rolar por todas as notícias verificadas.
                   </p>
                 </div>
                 <button
@@ -1066,7 +1077,7 @@
 
               <div class="feed-drawer-summary">
                 <strong id="live-feed-drawer-count">--</strong>
-                <span id="live-feed-drawer-label">pautas no arquivo lateral</span>
+                <span id="live-feed-drawer-label">notícias no arquivo lateral</span>
               </div>
 
               <div class="feed-drawer-scroll" id="live-feed-drawer-list" aria-live="polite"></div>
@@ -1081,7 +1092,7 @@
               <h2>Mais Editorias</h2>
             </div>
             <p>
-              Para não deixar tudo espremido no radar, as pautas também entram em
+              Para não deixar tudo espremido no radar, as notícias também entram em
               cadernos próprios com leitura rápida e acesso ao texto mais elaborado.
             </p>
           </div>
@@ -1195,7 +1206,7 @@
               <h3>Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul</h3>
               <p>
                 Promoção, chocolate e presente puxam um retrato mais leve da cidade em
-                abril. É pauta de comportamento, consumo e clima de data sazonal.
+                abril. É assunto de comportamento, consumo e clima de data sazonal.
               </p>
               <footer>
                 <span>Fonte consultada: ac24horas</span>
@@ -1242,7 +1253,7 @@
               <span class="news-source">ac24horas • 5 abr 2026</span>
               <h3>Páscoa, boato e reaparição: o caso Lucas Dourado entra no radar das redes acreanas</h3>
               <p>
-                A pauta já circulou em veículo aberto e ajuda a compor uma editoria de
+                O assunto já circulou em veículo aberto e ajuda a compor uma editoria de
                 redes sem inventar fofoca em cima de gente anônima.
               </p>
               <footer>
@@ -1269,12 +1280,12 @@
 
             <article class="social-card reveal delay-2">
               <a class="news-thumb thumb-cultura" href="./noticia.html?slug=credenciamento-pareceristas-culturais" aria-label="Abrir notícia sobre pareceristas culturais em Cruzeiro do Sul">
-                <span>Cultura em pauta</span>
+                <span>Cultura no radar</span>
               </a>
               <span class="news-source">ac24horas • 12 mar 2026</span>
               <h3>Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais</h3>
               <p>
-                O movimento reforça a agenda cultural local e amplia o volume de pautas
+                O movimento reforça a agenda cultural local e amplia o volume de notícias
                 leves, criativas e públicas dentro da editoria.
               </p>
               <footer>
@@ -1317,7 +1328,7 @@
               <h2>Notícias que Importam</h2>
             </div>
             <p>
-              As pautas mais quentes da região, com resumo rápido e caminho direto para a fonte.
+              Os assuntos mais quentes da região, com resumo rápido e caminho direto para a fonte.
             </p>
           </div>
 
@@ -1377,7 +1388,7 @@
 
           <div class="elections-grid reveal">
             <!-- Rendered via script.js -->
-            <div class="feed-empty">Carregando candidatos...</div>
+            <div class="feed-empty">Preparando lista de candidatos...</div>
           </div>
 
           <article class="election-results reveal">
@@ -1459,7 +1470,7 @@
                   <article class="election-candidate-card">
                     <div class="election-candidate-top"><span>MDB</span><b>pré-candidata</b></div>
                     <h4>Jéssica Sales</h4>
-                    <p>Nome com base política no Juruá e presença recorrente em pautas de saúde e representação regional.</p>
+                    <p>Nome com base política no Juruá e presença recorrente em temas de saúde e representação regional.</p>
                     <div class="election-candidate-tags"><span>Juruá</span><span>saúde</span><span>interior</span></div>
                     <button class="election-vote-button" type="button" data-static-vote="deputado-federal" data-static-candidate="jessica-sales-deputada-federal">votar com cidade</button>
                   </article>
@@ -1489,7 +1500,7 @@
                   <article class="election-candidate-card">
                     <div class="election-candidate-top"><span>PSDB</span><b>pré-candidato</b></div>
                     <h4>Luiz Gonzaga</h4>
-                    <p>Nome acompanhado por sua atuação legislativa e articulação em pautas do interior do estado.</p>
+                    <p>Nome acompanhado por sua atuação legislativa e articulação em temas do interior do estado.</p>
                     <div class="election-candidate-tags"><span>interior</span><span>legislativo</span><span>articulação</span></div>
                     <button class="election-vote-button" type="button" data-static-vote="deputado-estadual" data-static-candidate="luiz-gonzaga-deputado-estadual">votar com cidade</button>
                   </article>
@@ -1661,7 +1672,7 @@
               <h2>Tudo Num Lugar Só</h2>
             </div>
             <p>
-              O site não republica matéria inteira. Ele lê a pauta, resume com texto
+              O site não republica matéria inteira. Ele lê a notícia de origem, resume com texto
               próprio, organiza por editoria e usa foto licenciada ou imagem
               real da matéria antes de mandar o leitor para a fonte original.
             </p>
@@ -1670,7 +1681,7 @@
           <div class="desmonte-board">
             <article class="desmonte-card reveal">
               <p class="case-status">etapa 01</p>
-              <h3>Ler a pauta e localizar o fato</h3>
+              <h3>Ler a notícia de origem e localizar o fato</h3>
               <p>
                 A manchete sozinha quase nunca basta. O primeiro corte é separar fato,
                 serviço, disputa política, urgência policial e ruído de rede social.
@@ -2126,7 +2137,7 @@
               <h3>Leitor entra por utilidade e volta por hábito</h3>
               <p>
                 Tempo, cheia, leilão, edital, posto, calendário escolar e fiscalização
-                são pautas que puxam recorrência diária.
+                são assuntos que puxam recorrência diária.
               </p>
             </article>
 
@@ -2157,7 +2168,7 @@
               <h2>Painel do Juruá</h2>
             </div>
             <p>
-              Um bloco de leitura rápida para condensar os números e as pautas que mais
+              Um bloco de leitura rápida para condensar os números e os temas que mais
               voltaram ao noticiário da região ao longo do mês.
             </p>
           </div>
@@ -2201,7 +2212,7 @@
                   <strong id="stake-value">31 dias</strong>
                 </div>
                 <div>
-                  <span>pautas rastreadas</span>
+                  <span>notícias rastreadas</span>
                   <strong id="stake-return">74 notas</strong>
                 </div>
               </div>
@@ -2328,7 +2339,7 @@
             <p class="eyebrow">grátis por e-mail</p>
             <h2>Resumo das 7h grátis no seu e-mail</h2>
             <p>
-              Todo dia cedo, sem custo. A equipe reúne as principais matérias,
+              Toda manhã, sem custo. A equipe reúne as principais matérias,
               monta um resumo curto e envia no e-mail cadastrado para leitura rápida.
             </p>
           </div>
@@ -2377,7 +2388,7 @@
               <div class="newsletter-payment-meta">
                 <article>
                   <span>Chave Pix</span>
-                  <strong data-supporter-pix-key>carregando...</strong>
+                  <strong data-supporter-pix-key>aguarde</strong>
                 </article>
                 <article>
                   <span>Valor</span>
@@ -2385,7 +2396,7 @@
                 </article>
                 <article>
                   <span>Referência</span>
-                  <strong data-supporter-pix-txid>carregando...</strong>
+                  <strong data-supporter-pix-txid>aguarde</strong>
                 </article>
               </div>
               <div class="newsletter-payment-actions">
@@ -2489,7 +2500,7 @@
                   <div>
                     <span class="social-rss-network">Facebook</span>
                     <strong>Alertas de bairro e utilidade pública</strong>
-                    <p>Sobe quando a pauta vira conversa em grupos locais.</p>
+                    <p>Sobe quando o assunto vira conversa em grupos locais.</p>
                   </div>
                   <b>78</b>
                 </article>
@@ -2498,7 +2509,7 @@
                   <div>
                     <span class="social-rss-network">WhatsApp</span>
                     <strong>Pedidos de verificação da comunidade</strong>
-                    <p>Entram como sinal de pauta, mas precisam de checagem antes de publicar.</p>
+                    <p>Entram como sinal de assunto, mas precisam de checagem antes de publicar.</p>
                   </div>
                   <b>72</b>
                 </article>
@@ -2627,8 +2638,8 @@
               Guerra à desinformação. Verdade em campo.
             </h3>
             <p>
-              Tres robos entram em linha de combate, cruzam o campo de fumaça
-              e empurram boato, deepfake e ruido para fora da leitura.
+              Tres blindados editoriais avancam por fumaça, fogo e trincheira
+              inimiga para abrir caminho limpo para a leitura.
             </p>
           </div>
 
@@ -2651,7 +2662,7 @@
           <div class="insiders-logo-caption">
             <span>apresenta</span>
             <strong>INSIDERS INFOR</strong>
-            <small>Trio blindado contra o ruido</small>
+            <small>esquadrao blindado em campo real</small>
           </div>
         </div>
         </section>
@@ -2695,6 +2706,8 @@
             <li><a href="#monthly">Celebridades & Polêmicas</a></li>
             <li><a href="#catalogo-telefonico">Catálogo Telefônico</a></li>
             <li><a href="./catalogo-servicos.html">Catálogo de Serviços</a></li>
+            <li><a href="./escritorio.html">Escritório dos Agentes</a></li>
+            <li><a href="./pubpaid.html">PubPaid Demo</a></li>
             <li><a href="./legal.html">LGPD e Direitos Autorais</a></li>
           </ul>
         </nav>
@@ -2704,9 +2717,9 @@
             <span></span>
             <span></span>
             <span></span>
-            <code>czs://pauta/comunidade</code>
+            <code>czs://leitor/comunidade</code>
           </div>
-          <p class="eyebrow">terminal de pauta</p>
+          <p class="eyebrow">canal direto</p>
           <h3 id="footer-contact-title">Envie sinal, correção ou alerta local.</h3>
           <p>A mensagem abre no fluxo do portal e segue para atendimento pelo WhatsApp.</p>
           <div class="footer-chat-box">
@@ -2749,14 +2762,6 @@
           <span>Apresentado por Insiders Infor</span>
           <a href="./legal.html">Política legal completa</a>
         </div>
-        <div class="footer-utility-buttons" aria-label="Acessos rápidos do portal">
-          <a class="footer-utility-button footer-utility-button-spo" href="./pesquisa-acre-2026.html">
-            SPO
-          </a>
-          <a class="footer-utility-button footer-utility-button-tracer" href="./admin/admin-dashboard.html">
-            Tracer
-          </a>
-        </div>
       </footer>
     </div>
 
@@ -2791,7 +2796,7 @@
             id="agent-mail-message"
             rows="7"
             maxlength="3000"
-            placeholder="Digite aqui seu pedido, pauta, correção, proposta comercial ou mensagem direta."
+            placeholder="Digite aqui seu pedido, notícia, correção, proposta comercial ou mensagem direta."
           ></textarea>
           <div class="agent-mail-actions">
             <button class="solid-button" type="submit">Abrir WhatsApp</button>
@@ -2807,7 +2812,7 @@
     <script defer src="./elections-data.js?v=20260415b"></script>
     <script defer src="./sidebar-data.js?v=20260413a"></script>
   <script defer src="runtime-config.js?v=20260415d"></script>
-    <script defer src="./script.js?v=20260415p"></script>
+    <script defer src="./script.js?v=20260417a"></script>
     <script defer src="./news-photo-fix.js?v=20260415c"></script>
     <script defer src="./social-rss.js?v=20260413a"></script>
     <script defer src="./arquivo-noticias.js?v=20260415b"></script>

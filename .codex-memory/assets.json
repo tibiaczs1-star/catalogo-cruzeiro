@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "lastUpdatedAt": "2026-04-17T08:14:08.916Z",
+  "assets": [
+    {
+      "id": "recovered-chat-assets",
+      "kind": "directory",
+      "path": "recovered-chat-assets",
+      "source": "workspace",
+      "note": "Imagens recuperadas de chats anteriores; referencia local para retomadas visuais."
+    },
+    {
+      "id": "recovered-vscode-chat-assets",
+      "kind": "directory",
+      "path": "recovered-vscode-chat-assets",
+      "source": "workspace",
+      "note": "Imagens recuperadas do historico do VS Code; referencia local para retomadas visuais."
+    },
+    {
+      "id": "session-recovery-review",
+      "kind": "directory",
+      "path": ".codex-temp/session-recovery-review",
+      "source": "workspace",
+      "note": "Capturas de validacao e revisao feitas durante recuperacao de contexto."
+    },
+    {
+      "id": "focus-review",
+      "kind": "directory",
+      "path": ".codex-temp/focus-review",
+      "source": "workspace",
+      "note": "Imagens baixadas para revisao manual de enquadramento e foco."
+    },
+    {
+      "id": "review-team-report-md",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio final da equipe local de revisao apos limpeza editorial: 0 achados",
+      "linkedOrderIds": [
+        "2026-04-17-usar-o-script-local-de-memoria-para-registrar-ordens-e-assets-antes-de-retomar"
+      ],
+      "createdAt": "2026-04-17T06:48:43.198Z"
+    },
+    {
+      "id": "review-team-report-json",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.json",
+      "source": "workspace",
+      "note": "JSON final da equipe local de revisao apos limpeza editorial: 0 achados",
+      "linkedOrderIds": [
+        "2026-04-17-usar-o-script-local-de-memoria-para-registrar-ordens-e-assets-antes-de-retomar"
+      ],
+      "createdAt": "2026-04-17T06:48:51.603Z"
+    },
+    {
+      "id": "escritorio-office-review",
+      "kind": "image",
+      "path": ".codex-temp/escritorio-office-review-2.png",
+      "source": "workspace",
+      "note": "Captura visual final da pagina Escritorio dos Agentes com 13 agentes pixel art organizados por sala",
+      "linkedOrderIds": [
+        "2026-04-17-criar-pagina-escritorio-com-equipe-de-agentes-especialistas-em-pixel-art-animado"
+      ],
+      "createdAt": "2026-04-17T07:06:53.037Z"
+    },
+    {
+      "id": "referencia-escritorio-pixel-art",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/i-built-a-vs-code-extension-that-turns-your-claude-code-v0-MHl3cnRocWUxM2xnMbvtL0B61oe6XNv4AO8qHgKPNvsjjvkkXlOSOZr9d975.webp",
+      "source": "workspace",
+      "note": "Referência enviada pelo usuário para refazer o escritório em pixel art top-down com moldura estilo IDE",
+      "linkedOrderIds": [
+        "2026-04-17-refazer-modelo-visual-do-escritorio-em-pixel-art-top-down-inspirado-na-referenci"
+      ],
+      "createdAt": "2026-04-17T07:17:37.811Z"
+    },
+    {
+      "id": "escritorio-reference-redesign-final",
+      "kind": "image",
+      "path": ".codex-temp/escritorio-reference-redesign-final.png",
+      "source": "workspace",
+      "note": "Captura final do Escritório dos Agentes redesenhado em pixel art top-down estilo IDE com terminal lateral",
+      "linkedOrderIds": [
+        "2026-04-17-refazer-modelo-visual-do-escritorio-em-pixel-art-top-down-inspirado-na-referenci"
+      ],
+      "createdAt": "2026-04-17T07:17:37.871Z"
+    },
+    {
+      "id": "claude-office-visualizer-real-time-pixel-art-visualization-v0-lxk8ahysl4fg1-webp",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/claude-office-visualizer-real-time-pixel-art-visualization-v0-lxk8ahysl4fg1.webp",
+      "source": "workspace",
+      "note": "Referência adicional do usuário para escritório pixel art mais elaborado com terminal e personagens melhores",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T07:55:14.948Z"
+    },
+    {
+      "id": "game-pixel-agents-programacao-codigo-webp",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/game_pixel-agents_programacao_codigo.webp",
+      "source": "workspace",
+      "note": "Referência adicional do usuário para planta top-down com salas, estantes e escritório pixel art",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T07:55:15.054Z"
+    },
+    {
+      "id": "escritorio-floor-art-v1-png",
+      "kind": "image",
+      "path": "assets/escritorio-floor-art-v1.png",
+      "source": "workspace",
+      "note": "Background bitmap pixel art gerado para a planta do Escritorio, usado no mapa em vez de fundo puramente CSS",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T08:04:27.843Z"
+    },
+    {
+      "id": "escritorio-floor-art-v2-png",
+      "kind": "image",
+      "path": "assets/escritorio-floor-art-v2.png",
+      "source": "workspace",
+      "note": "Background bitmap maior do Escritorio, com corredores mais abertos, desk executivo no alto esquerdo e mais folga para circulação dos agentes",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T08:14:08.916Z"
+    }
+  ]
+}

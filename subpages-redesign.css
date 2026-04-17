@@ -1621,9 +1621,10 @@
 }
 
 .kids-vr-feature {
+  grid-column: span 2;
   display: grid;
-  grid-template-columns: minmax(0, 0.94fr) minmax(300px, 0.92fr);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 0.92fr) minmax(380px, 1.08fr);
+  gap: 1.15rem;
   padding: 1.1rem;
   background:
     radial-gradient(circle at 16% 18%, rgba(126, 247, 255, 0.16), transparent 24%),
@@ -1689,7 +1690,7 @@
 .kids-vr-stage {
   position: relative;
   margin: 0;
-  min-height: 360px;
+  min-height: 408px;
   border-radius: 26px;
   border: 1px solid rgba(126, 247, 255, 0.12);
   background:
@@ -1712,8 +1713,9 @@
 .kids-vr-photo-frame {
   position: relative;
   z-index: 1;
-  width: min(100%, 520px);
-  aspect-ratio: 16 / 10.6;
+  width: min(100%, 620px);
+  aspect-ratio: 16 / 9.8;
+  margin-inline: auto;
   border-radius: 28px;
   overflow: hidden;
   background: rgba(5, 12, 26, 0.86);
@@ -1721,9 +1723,9 @@
     0 34px 70px rgba(0, 0, 0, 0.34),
     0 0 0 1px rgba(255, 255, 255, 0.1),
     0 0 42px rgba(126, 247, 255, 0.12);
-  transform: rotateX(6deg) rotateY(-5deg);
-  transform-style: preserve-3d;
-  animation: kidsVrFloat 7.2s ease-in-out infinite;
+  transform: none;
+  transform-style: flat;
+  animation: none;
 }
 
 .kids-vr-photo-frame::after {
@@ -1740,7 +1742,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  padding: clamp(0.35rem, 0.9vw, 0.65rem);
+  object-fit: contain;
   object-position: center;
   filter: saturate(1.05) contrast(1.04);
 }
@@ -4501,6 +4504,7 @@
   }
 
   .kids-vr-feature {
+    grid-column: auto;
     grid-template-columns: minmax(0, 1fr) minmax(320px, 0.94fr);
   }
 
@@ -6058,6 +6062,20 @@
   width: 100%;
   min-height: 48px;
   font-size: clamp(1.6rem, 2vw, 2rem);
+  gap: 0.22rem;
+  text-align: center;
+}
+
+.kids-memory-emoji {
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  line-height: 1;
+}
+
+.kids-memory-label {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .kids-memory-face.is-hidden {
@@ -6530,6 +6548,11 @@ body.games-vr-rental-open {
   min-height: 560px;
 }
 
+.infantil-child-page .kids-floating-card,
+.infantil-child-page .kids-pop-character-card div {
+  display: none !important;
+}
+
 .infantil-child-page .kids-hero-copy > p,
 .infantil-child-page .kids-hero-stats span {
   color: rgba(24, 50, 74, 0.78);
@@ -6576,6 +6599,73 @@ body.games-vr-rental-open {
 .infantil-child-page .kids-play-grid .kids-game-card span {
   background: rgba(41, 150, 204, 0.1) !important;
   color: #25617f !important;
+}
+
+.infantil-child-page .kids-sequence-card {
+  gap: 1rem;
+}
+
+.kids-sequence-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 1rem 0 1.1rem;
+}
+
+.kids-sequence-toolbar strong,
+.kids-sequence-toolbar span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.75rem 0.95rem;
+  border-radius: 18px;
+  border: 1px solid rgba(67, 147, 188, 0.18);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.kids-sequence-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.kids-sequence-pad {
+  min-height: 110px;
+  border: 0;
+  border-radius: 28px;
+  box-shadow: 0 16px 26px rgba(39, 96, 134, 0.12);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+}
+
+.kids-sequence-pad:hover {
+  transform: translateY(-4px);
+}
+
+.kids-sequence-pad.is-active {
+  transform: scale(0.98);
+  filter: brightness(1.12);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.72), 0 16px 32px rgba(39, 96, 134, 0.18);
+}
+
+.kids-sequence-pad.pad-sun {
+  background: linear-gradient(160deg, #ffe067, #ffb33a);
+}
+
+.kids-sequence-pad.pad-sky {
+  background: linear-gradient(160deg, #7ed4ff, #3e87ff);
+}
+
+.kids-sequence-pad.pad-leaf {
+  background: linear-gradient(160deg, #96ef9f, #31bf72);
+}
+
+.kids-sequence-pad.pad-candy {
+  background: linear-gradient(160deg, #ffb2d1, #ff6fae);
 }
 
 .infantil-child-page .kids-memory-card,
@@ -6741,82 +6831,158 @@ body.games-vr-rental-open {
   color: #e94a85 !important;
 }
 
+.kids-real-brand-head {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0.25rem 0 0.85rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid rgba(67, 147, 188, 0.14);
+}
+
+.kids-real-brand-head span {
+  width: fit-content;
+  padding: 0.34rem 0.64rem;
+  border-radius: 999px;
+  background: rgba(12, 35, 58, 0.88);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.kids-real-brand-head strong {
+  color: #18324a;
+  font-family: "Fraunces", "Lexend", sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
 .kids-real-brand-wall {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
+  padding: 0.9rem;
+  border-radius: 28px;
+  background:
+    linear-gradient(160deg, rgba(244, 251, 255, 0.92), rgba(233, 246, 255, 0.88)),
+    radial-gradient(circle at top right, rgba(123, 217, 255, 0.16), transparent 24%);
+  border: 1px solid rgba(67, 147, 188, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
 }
 
 .kids-real-brand-card {
   position: relative;
   overflow: hidden;
-  min-height: 188px;
+  min-height: 180px;
   display: grid;
-  align-content: end;
-  gap: 0.36rem;
-  padding: 1rem;
-  border-radius: 28px;
-  border: 2px solid rgba(255, 255, 255, 0.74);
-  box-shadow: 0 18px 34px rgba(37, 69, 108, 0.15);
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.95rem;
+  border-radius: 26px;
+  border: 1px solid rgba(24, 50, 74, 0.24);
+  box-shadow:
+    0 16px 36px rgba(24, 50, 74, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
-.kids-real-brand-card::before {
-  content: "";
-  position: absolute;
-  inset: -30% auto auto -18%;
-  width: 160px;
-  aspect-ratio: 1;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.34);
-}
-
-.kids-real-brand-card span,
-.kids-real-brand-card small {
+.kids-real-brand-media {
   position: relative;
-  z-index: 1;
-  color: rgba(255, 255, 255, 0.92);
-  font-weight: 900;
-  text-shadow: 0 1px 1px rgba(20, 28, 45, 0.18);
+  overflow: hidden;
+  width: 88px;
+  height: 88px;
+  margin: 0;
+  border-radius: 22px;
+  border: 1px solid rgba(24, 50, 74, 0.14);
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 10px 20px rgba(24, 50, 74, 0.12);
 }
 
-.kids-real-brand-card span {
+.kids-real-brand-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kids-real-brand-media-logo {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(160deg, #e8f3ff, #cfdbff),
+    radial-gradient(circle at top right, rgba(127, 157, 255, 0.22), transparent 30%);
+}
+
+.kids-real-brand-media-logo span {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #24354d, #1a2738);
+  color: #ffffff;
+  font-family: "Orbitron", "Outfit", sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.kids-real-brand-copy {
+  display: grid;
+  gap: 0.26rem;
+}
+
+.kids-real-brand-copy span {
   width: fit-content;
-  padding: 0.34rem 0.62rem;
+  padding: 0.32rem 0.58rem;
   border-radius: 999px;
-  background: rgba(23, 33, 58, 0.28);
-  font-size: 0.72rem;
+  background: #16324a;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.kids-real-brand-card strong {
-  position: relative;
-  z-index: 1;
-  color: #ffffff;
-  font-size: clamp(1.65rem, 2.5vw, 2.6rem);
-  line-height: 0.9;
-  text-shadow: 0 3px 10px rgba(20, 28, 45, 0.2);
+.kids-real-brand-copy strong {
+  color: #16324a;
+  font-size: clamp(1.55rem, 2vw, 2.2rem);
+  line-height: 0.94;
 }
 
-.kids-real-brand-card small {
+.kids-real-brand-copy small {
+  color: #42556f;
   font-size: 0.9rem;
-  line-height: 1.35;
+  line-height: 1.28;
+  font-weight: 800;
 }
 
 .kids-real-brand-card.monica {
-  background: linear-gradient(135deg, #ffcf3f, #ff6f3f);
+  background: linear-gradient(135deg, #fff4a8, #ffd465 55%, #ffb14d);
+  box-shadow:
+    0 16px 36px rgba(164, 98, 0, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
 .kids-real-brand-card.roblox {
-  background: linear-gradient(135deg, #37a7ff, #626cff);
+  background: linear-gradient(135deg, #e1f2ff, #b5d7ff 58%, #7f9dff);
+  box-shadow:
+    0 16px 36px rgba(45, 87, 179, 0.18),
+    0 2px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
 .kids-real-brand-card.mario {
-  background: linear-gradient(135deg, #f04444, #29a7ff);
+  background: linear-gradient(135deg, #ffe0d1, #ffb07c 58%, #ff7b5a);
+  box-shadow:
+    0 16px 36px rgba(176, 60, 25, 0.18),
+    0 2px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
 .kids-real-brand-card.bita {
-  background: linear-gradient(135deg, #30c982, #16a9a2);
+  background: linear-gradient(135deg, #e0fbe8, #a7efc7 58%, #67d6bf);
+  box-shadow:
+    0 16px 36px rgba(32, 126, 104, 0.16),
+    0 2px 0 rgba(255, 255, 255, 0.55) inset;
 }
 
 /* 2026-04-15j: vitrine visual infantil com personagens e universos desejaveis */
@@ -6999,6 +7165,21 @@ body.games-vr-rental-open {
 .infantil-child-page .kids-crew-meta h4,
 .infantil-child-page .kids-crew-meta p {
   color: var(--kids-readable-ink) !important;
+}
+
+.kids-character-photo {
+  width: 104px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(23, 33, 58, 0.12);
+  background: #ffffff;
+  box-shadow: 0 16px 30px rgba(33, 67, 103, 0.16);
+}
+
+.infantil-child-page .kids-character-card {
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
 }
 
 .infantil-child-page .infantil-shell {
@@ -7242,6 +7423,220 @@ body.games-vr-rental-open {
   background: linear-gradient(160deg, #ffde59, #ff8a2a);
 }
 
+.kids-puzzle-topline {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.kids-puzzle-topline strong,
+.kids-wordsearch-toolbar strong,
+.kids-math-card strong {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.kids-puzzle-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: 1rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.kids-puzzle-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  aspect-ratio: 1;
+}
+
+.kids-puzzle-tile {
+  border: 1px solid rgba(126, 247, 255, 0.22);
+  border-radius: 8px;
+  background-color: rgba(7, 17, 34, 0.88);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.kids-puzzle-tile:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201, 255, 106, 0.5);
+  box-shadow: 0 20px 34px rgba(0, 0, 0, 0.28);
+}
+
+.kids-puzzle-tile.is-empty {
+  cursor: default;
+  border-style: dashed;
+  background:
+    linear-gradient(145deg, rgba(5, 12, 24, 0.78), rgba(10, 26, 48, 0.4)),
+    radial-gradient(circle at center, rgba(126, 247, 255, 0.1), transparent 56%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.kids-puzzle-side {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.kids-puzzle-preview {
+  margin: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.kids-puzzle-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(126, 247, 255, 0.2);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.24);
+}
+
+.kids-puzzle-preview figcaption {
+  color: rgba(206, 247, 255, 0.8);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.kids-wordsearch-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.kids-wordsearch-board {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.kids-wordsearch-cell {
+  min-height: 44px;
+  border: 1px solid rgba(126, 247, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(6, 14, 28, 0.88);
+  color: #f5fbff;
+  font: inherit;
+  font-size: 1.02rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.kids-wordsearch-cell:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 208, 109, 0.48);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+}
+
+.kids-wordsearch-cell.is-selected {
+  border-color: rgba(255, 208, 109, 0.78);
+  background: linear-gradient(145deg, rgba(255, 196, 76, 0.88), rgba(255, 134, 98, 0.92));
+  color: #16212f;
+}
+
+.kids-wordsearch-cell.is-found {
+  border-color: rgba(201, 255, 106, 0.56);
+  background: linear-gradient(145deg, rgba(80, 164, 110, 0.92), rgba(28, 98, 63, 0.94));
+}
+
+.kids-wordsearch-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.kids-wordsearch-list li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0.32rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 247, 255, 0.16);
+  background: rgba(8, 18, 35, 0.76);
+  color: rgba(238, 248, 255, 0.82);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.kids-wordsearch-list li.is-found {
+  border-color: rgba(201, 255, 106, 0.48);
+  background: rgba(36, 84, 55, 0.88);
+  color: #f4ffe7;
+}
+
+.kids-math-expression {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+  font-size: 1.12rem;
+}
+
+.kids-math-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.18rem;
+  font-size: 1.62rem;
+  line-height: 1;
+}
+
+.kids-math-operator {
+  font-size: 1.18rem;
+  font-weight: 900;
+}
+
+.kids-math-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 0.8rem;
+}
+
+.kids-math-choices button {
+  min-height: 52px;
+  border: 1px solid rgba(126, 247, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(6, 14, 28, 0.88);
+  color: #f5fbff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.kids-math-choices button.is-correct {
+  border-color: rgba(201, 255, 106, 0.48);
+  background: linear-gradient(145deg, rgba(73, 154, 97, 0.92), rgba(24, 92, 57, 0.94));
+  color: #f4ffe7;
+}
+
+.kids-math-feedback {
+  min-height: 2.8em;
+}
+
 .infantil-child-page .kids-parent-checklist label {
   background: rgba(255, 255, 255, 0.92) !important;
   border-color: rgba(23, 33, 58, 0.12) !important;
@@ -7258,6 +7653,20 @@ body.games-vr-rental-open {
   .games-hub-page .games-feature-grid,
   .infantil-child-page .kids-play-grid {
     grid-template-columns: 1fr !important;
+  }
+
+  .kids-real-brand-wall {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-real-brand-card {
+    grid-template-columns: 72px minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .kids-real-brand-media {
+    width: 72px;
+    height: 72px;
   }
 
   .games-hub-page .kids-hero-visual {
@@ -7294,6 +7703,10 @@ body.games-vr-rental-open {
     grid-template-columns: 1fr;
   }
 
+  .kids-puzzle-shell {
+    grid-template-columns: 1fr;
+  }
+
   .games-vr-rental-copy h2 {
     max-width: 12ch;
     font-size: clamp(2rem, 13vw, 3.2rem);
@@ -7309,6 +7722,10 @@ body.games-vr-rental-open {
 
   .kids-game-news-grid,
   .kids-tips-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kids-math-choices {
     grid-template-columns: 1fr;
   }
 

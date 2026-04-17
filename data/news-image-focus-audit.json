@@ -1,0 +1,911 @@
+{
+  "updatedAt": "2026-04-17T00:34:48.104Z",
+  "sourceFile": "news-data.js",
+  "checkedLimit": 30,
+  "offline": false,
+  "total": 30,
+  "summary": {
+    "ok": 24,
+    "review": 6,
+    "warning": 0,
+    "error": 0,
+    "manualFocus": 12,
+    "newSinceLastAudit": 30,
+    "missingImage": 0,
+    "unreachableImage": 0
+  },
+  "slugs": [
+    "colegio-acreano-e-derrotado-e-vai-disputar-o-bronze-na-serie-prata",
+    "friale-afirma-que-queda-de-temperatura-enganou-acreanos-e-friagem-nao-esta-prevista-para-rio-branco",
+    "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios",
+    "inverno-no-acre-nao-deve-ter-seca-severa-e-pode-registrar-friagens-diz-friale",
+    "chuva-intensa-deixa-avenida-em-brasileia-debaixo-d-agua",
+    "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil",
+    "processo-seletivo-e-suspenso-apos-filho-de-secretaria-passar-em-1-lugar-no-interior-do-acre",
+    "acre-disputa-campeonato-regional-de-bocha-com-14-paratletas",
+    "alerta-de-fofura-policial-mirim-protagoniza-campanha-da-pm-no-acre",
+    "mais-de-5-4-mil-doses-da-vacina-contra-a-covid-19-chegam-ao-acre",
+    "acre-e-outros-17-estados-sao-alvos-de-operacao-contra-violencia-extrema-na-internet",
+    "acreano-wendel-almeida-enfrenta-jefferson-cyborg-no-shooto-brasil-136",
+    "acre-podera-apresentar-ate-seis-projetos-em-programa-de-r-115-milhoes-da-capes",
+    "jordao-celebra-34-anos-com-show-de-evoney-fernandes",
+    "com-presenca-da-familia-mario-sergio-toma-posse-no-tribunal-de-contas-do-acre",
+    "academia-acreana-de-letras-reune-mulheres-de-poder-em-primeira-roda-de-conversa-de-2026",
+    "joabe-lira-solicita-isencao-do-iptu-para-familias-atingidas-pela-enxurrada",
+    "socorro-propoe-jornada-especial-para-professores-em-tratamento-de-saude",
+    "prefeito-decreta-emergencia-e-anuncia-auxilio-a-familias-atingidas-por-enxurradas",
+    "parana-pesquisas-marina-silva-lidera-disputa-ao-senado-em-sp-em-todos-os-cenarios",
+    "acre-participa-da-1-reuniao-do-comite-de-fronteira-centro-brasil-peru-e-leva-propostas-para-ampliar-acordos-internacionais",
+    "fundhacre-recebe-treinamento-da-fiocruz-para-diagnostico-molecular-de-leishmaniose",
+    "fundhacre-realiza-quinto-transplante-de-tecido-osseo-e-amplia-oferta-de-alta-complexidade-no-acre",
+    "acre-alcanca-o-segundo-lugar-no-ranking-nacional-de-matriculas-de-ensino-tecnico-articulado-com-o-ensino-medio",
+    "orgaos-do-eixo-produtivo-alinham-acoes-para-enfrentar-crise-hidrica-e-fortalecer-cadeias-agricolas",
+    "governo-do-acre-leva-servicos-de-emissao-de-documentos-para-detentos-durante-4-edicao-do-programa-registre-se",
+    "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade",
+    "governo-e-prefeitura-realizam-expansao-da-rede-de-agua-em-assis-brasil-e-beneficiam-familias-no-bairro-km-2",
+    "campanha-levara-doses-de-19-vacinas-imunobiologicas-a-comunidades-indigenas-no-acre",
+    "ieptec-convoca-profissionais-bolsistas-aprovados-em-processo-seletivos"
+  ],
+  "reviewQueue": [
+    {
+      "slug": "colegio-acreano-e-derrotado-e-vai-disputar-o-bronze-na-serie-prata",
+      "title": "Colégio Acreano é derrotado e vai disputar o bronze na Série Prata",
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus",
+        "group-scene-without-manual-focus"
+      ],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-18.32.12-1200x927.jpeg",
+      "effectiveFocus": ""
+    },
+    {
+      "slug": "friale-afirma-que-queda-de-temperatura-enganou-acreanos-e-friagem-nao-esta-prevista-para-rio-branco",
+      "title": "Friale afirma que queda de temperatura enganou acreanos e friagem não está prevista para Rio Branco",
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-2026-04-16T180231.746.jpg",
+      "effectiveFocus": ""
+    },
+    {
+      "slug": "processo-seletivo-e-suspenso-apos-filho-de-secretaria-passar-em-1-lugar-no-interior-do-acre",
+      "title": "Processo seletivo é suspenso após filho de secretária passar em 1° lugar no interior do Acre",
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/02/Prefeitura-de-Xapuri.jpg",
+      "effectiveFocus": ""
+    },
+    {
+      "slug": "alerta-de-fofura-policial-mirim-protagoniza-campanha-da-pm-no-acre",
+      "title": "Alerta de fofura: “policial mirim” protagoniza campanha da PM no Acre",
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/thumb-7-e1776370316801.jpeg",
+      "effectiveFocus": ""
+    },
+    {
+      "slug": "acre-e-outros-17-estados-sao-alvos-de-operacao-contra-violencia-extrema-na-internet",
+      "title": "Acre e outros 17 estados são alvos de operação contra violência extrema na internet",
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/5e61d9c72d71461d7d08cbdaf75e14af.webp",
+      "effectiveFocus": ""
+    },
+    {
+      "slug": "acre-participa-da-1-reuniao-do-comite-de-fronteira-centro-brasil-peru-e-leva-propostas-para-ampliar-acordos-internacionais",
+      "title": "Acre participa da 1ª Reunião do Comitê de Fronteira Centro Brasil-Peru e leva propostas para ampliar acordos internacionais",
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ],
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-15.04.24-1024x790.jpeg",
+      "effectiveFocus": ""
+    }
+  ],
+  "items": [
+    {
+      "slug": "colegio-acreano-e-derrotado-e-vai-disputar-o-bronze-na-serie-prata",
+      "title": "Colégio Acreano é derrotado e vai disputar o bronze na Série Prata",
+      "category": "Esporte",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T23:35:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-18.32.12-1200x927.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 927,
+        "ratio": 1.294,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus",
+        "group-scene-without-manual-focus"
+      ]
+    },
+    {
+      "slug": "friale-afirma-que-queda-de-temperatura-enganou-acreanos-e-friagem-nao-esta-prevista-para-rio-branco",
+      "title": "Friale afirma que queda de temperatura enganou acreanos e friagem não está prevista para Rio Branco",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T23:03:09.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-2026-04-16T180231.746.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 976,
+        "height": 695,
+        "ratio": 1.404,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ]
+    },
+    {
+      "slug": "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios",
+      "title": "STF decide que piso nacional deve ser pago a professores temporários",
+      "category": "Utilidade Pública",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T22:39:31.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/mca_abr_numero_de_serie_de_4_digitos_090620_7.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "62% 12%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "inverno-no-acre-nao-deve-ter-seca-severa-e-pode-registrar-friagens-diz-friale",
+      "title": "Inverno no Acre não deve ter seca severa e pode registrar friagens, diz Friale",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T22:06:06.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/06/Imagem-do-WhatsApp-de-2025-06-24-as-18.00.14_ef08f238-1200x675.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "chuva-intensa-deixa-avenida-em-brasileia-debaixo-d-agua",
+      "title": "Chuva intensa deixa avenida em Brasileia debaixo d’água",
+      "category": "Utilidade Pública",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T21:01:41.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/AVENIDA-MARIN.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil",
+      "title": "Governo avança na regularização fundiária e conclui primeira etapa do programa em Assis Brasil",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:43:06.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-16-15-37-26-1200x801.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 801,
+        "ratio": 1.498,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "74% 32%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "processo-seletivo-e-suspenso-apos-filho-de-secretaria-passar-em-1-lugar-no-interior-do-acre",
+      "title": "Processo seletivo é suspenso após filho de secretária passar em 1° lugar no interior do Acre",
+      "category": "Prefeitura",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:38:59.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/02/Prefeitura-de-Xapuri.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ]
+    },
+    {
+      "slug": "acre-disputa-campeonato-regional-de-bocha-com-14-paratletas",
+      "title": "Acre disputa Campeonato Regional de Bocha com 14 paratletas",
+      "category": "Esporte",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:13:37.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-16-14-48-54-1200x595.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 595,
+        "ratio": 2.017,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "78% 43%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "alerta-de-fofura-policial-mirim-protagoniza-campanha-da-pm-no-acre",
+      "title": "Alerta de fofura: “policial mirim” protagoniza campanha da PM no Acre",
+      "category": "Polícia",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:12:25.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/thumb-7-e1776370316801.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ]
+    },
+    {
+      "slug": "mais-de-5-4-mil-doses-da-vacina-contra-a-covid-19-chegam-ao-acre",
+      "title": "Mais de 5,4 mil doses da vacina contra a Covid-19 chegam ao Acre",
+      "category": "Saúde",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:08:59.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/01/vacinacao_drive_thru_universidade_estadual_do_rio_de_janeiro_uerj_tnrgo_abr_2502214589_0.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "acre-e-outros-17-estados-sao-alvos-de-operacao-contra-violencia-extrema-na-internet",
+      "title": "Acre e outros 17 estados são alvos de operação contra violência extrema na internet",
+      "category": "Polícia",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:08:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/5e61d9c72d71461d7d08cbdaf75e14af.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ]
+    },
+    {
+      "slug": "acreano-wendel-almeida-enfrenta-jefferson-cyborg-no-shooto-brasil-136",
+      "title": "Acreano Wendel Almeida enfrenta Jefferson Cyborg no Shooto Brasil 136",
+      "category": "Esporte",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:06:06.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-16-14-27-17.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "acre-podera-apresentar-ate-seis-projetos-em-programa-de-r-115-milhoes-da-capes",
+      "title": "Acre poderá apresentar até seis projetos em programa de R$ 115 milhões da Capes",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T20:05:58.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/12/real_moeda_dinheiro_mcajr_2904223675.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "jordao-celebra-34-anos-com-show-de-evoney-fernandes",
+      "title": "Jordão celebra 34 anos com show de Evoney Fernandes",
+      "category": "Prefeitura",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T19:20:15.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_7070-807x1200.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 807,
+        "height": 1200,
+        "ratio": 0.672,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "40% 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "com-presenca-da-familia-mario-sergio-toma-posse-no-tribunal-de-contas-do-acre",
+      "title": "Com presença da família, Mário Sérgio toma posse no Tribunal de Contas do Acre",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T19:19:08.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/20260416_120215-1200x676.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 676,
+        "ratio": 1.775,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "58% 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "academia-acreana-de-letras-reune-mulheres-de-poder-em-primeira-roda-de-conversa-de-2026",
+      "title": "Academia Acreana de Letras reúne mulheres de poder em primeira roda de conversa de 2026",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T18:25:50.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/NALUH_DETS-.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "30% 58%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "joabe-lira-solicita-isencao-do-iptu-para-familias-atingidas-pela-enxurrada",
+      "title": "Joabe Lira solicita isenção do IPTU para famílias atingidas pela enxurrada",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T18:15:37.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/04/wdffc-1200x799.webp",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/webp",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 799,
+        "ratio": 1.502,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "socorro-propoe-jornada-especial-para-professores-em-tratamento-de-saude",
+      "title": "Socorro propõe jornada especial para professores em tratamento de saúde",
+      "category": "Saúde",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T18:13:33.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-16-12-56-21-1200x740.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 740,
+        "ratio": 1.622,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "49% 26%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeito-decreta-emergencia-e-anuncia-auxilio-a-familias-atingidas-por-enxurradas",
+      "title": "Prefeito decreta emergência e anuncia auxílio a famílias atingidas por enxurradas",
+      "category": "Cultura",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T17:33:57.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-12.12.00.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "78% 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "parana-pesquisas-marina-silva-lidera-disputa-ao-senado-em-sp-em-todos-os-cenarios",
+      "title": "Paraná Pesquisas: Marina Silva lidera disputa ao Senado em SP em todos os cenários",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-16T17:22:52.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/53739879368_9a874ef410_k-676x450-1.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 676,
+        "height": 450,
+        "ratio": 1.502,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "acre-participa-da-1-reuniao-do-comite-de-fronteira-centro-brasil-peru-e-leva-propostas-para-ampliar-acordos-internacionais",
+      "title": "Acre participa da 1ª Reunião do Comitê de Fronteira Centro Brasil-Peru e leva propostas para ampliar acordos internacionais",
+      "category": "Prefeitura",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T23:32:03.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-15.04.24-1024x790.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 790,
+        "ratio": 1.296,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "review",
+      "reasons": [
+        "people-or-group-scene-without-manual-focus"
+      ]
+    },
+    {
+      "slug": "fundhacre-recebe-treinamento-da-fiocruz-para-diagnostico-molecular-de-leishmaniose",
+      "title": "Fundhacre recebe treinamento da Fiocruz para diagnóstico molecular de leishmaniose",
+      "category": "Saúde",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T21:53:47.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Capacitacao-1024x683.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "78% 30%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "fundhacre-realiza-quinto-transplante-de-tecido-osseo-e-amplia-oferta-de-alta-complexidade-no-acre",
+      "title": "Fundhacre realiza quinto transplante de tecido ósseo e amplia oferta de alta complexidade no Acre",
+      "category": "Prefeitura",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T21:25:15.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_8496-1024x683.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "45% 22%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "acre-alcanca-o-segundo-lugar-no-ranking-nacional-de-matriculas-de-ensino-tecnico-articulado-com-o-ensino-medio",
+      "title": "Acre alcança o segundo lugar no ranking nacional de matrículas de ensino técnico articulado com o ensino médio",
+      "category": "Educação",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T21:19:03.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/SEcretario-SEE-e-Presi-IEPTEC-1024x768.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 768,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "38% 26%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "orgaos-do-eixo-produtivo-alinham-acoes-para-enfrentar-crise-hidrica-e-fortalecer-cadeias-agricolas",
+      "title": "Órgãos do eixo produtivo alinham ações para enfrentar crise hídrica e fortalecer cadeias agrícolas",
+      "category": "Utilidade Pública",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T21:14:32.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2025-11-18-at-17.09.38-1024x683-1.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "governo-do-acre-leva-servicos-de-emissao-de-documentos-para-detentos-durante-4-edicao-do-programa-registre-se",
+      "title": "Governo do Acre leva serviços de emissão de documentos para detentos durante 4ª edição do programa Registre-se",
+      "category": "Prefeitura",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T20:33:49.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-12.19.11-1024x660.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 660,
+        "ratio": 1.552,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade",
+      "title": "Governo do Acre capacita órgãos do Executivo estadual sobre Planos de Integridade",
+      "category": "Prefeitura",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T20:25:29.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://cge.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-11.25.50-1024x682.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "60% 40%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governo-e-prefeitura-realizam-expansao-da-rede-de-agua-em-assis-brasil-e-beneficiam-familias-no-bairro-km-2",
+      "title": "Governo e prefeitura realizam expansão da rede de água em Assis Brasil e beneficiam famílias no bairro KM 2",
+      "category": "Utilidade Pública",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T20:23:15.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-16-at-09.46.15-1024x768.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 768,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "campanha-levara-doses-de-19-vacinas-imunobiologicas-a-comunidades-indigenas-no-acre",
+      "title": "Campanha levará doses de 19 vacinas imunobiológicas a comunidades indígenas no Acre",
+      "category": "Saúde",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T20:16:04.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/1684d653-6450-4535-b956-18edde35aff4-1024x683-1.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "ieptec-convoca-profissionais-bolsistas-aprovados-em-processo-seletivos",
+      "title": "Ieptec convoca profissionais bolsistas aprovados em processo seletivos",
+      "category": "Utilidade Pública",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-16T19:20:35.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/FOTO-1-1-1024x576.png",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/png",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 576,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    }
+  ]
+}

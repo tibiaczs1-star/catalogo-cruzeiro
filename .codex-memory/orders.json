@@ -1,0 +1,588 @@
+{
+  "version": 1,
+  "lastUpdatedAt": "2026-04-17T19:28:12.671Z",
+  "orders": [
+    {
+      "id": "2026-04-17-criar-memoria-local-persistente-para-ordens-fotos-e-textos-do-usuario",
+      "createdAt": "2026-04-17T06:20:30.830Z",
+      "updatedAt": "2026-04-17T06:20:30.830Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "ok agora v c e um agente full stak de primeira linha progamador premium, primeira misão crie dentro do seu sistema memoria de toda ordem que eu do, guarde foto e texto para caso os creditos acabar e eu trocar de conta nao perde todo o que eu ja tinha dito pra fazer",
+      "summary": "Criar memoria local persistente para ordens, fotos e textos do usuario",
+      "normalizedTasks": [
+        "Criar sistema local de memoria",
+        "Registrar ordens futuras",
+        "Vincular fotos e textos relevantes"
+      ],
+      "filesTouched": [
+        "AGENTS.md",
+        "CODEX_MEMORY.md",
+        "package.json",
+        ".codex-memory/README.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        "scripts/codex-memory.js"
+      ],
+      "assetRefs": [
+        "recovered-chat-assets",
+        "recovered-vscode-chat-assets",
+        ".codex-temp/session-recovery-review",
+        ".codex-temp/focus-review"
+      ],
+      "tags": [
+        "memoria",
+        "persistencia",
+        "handoff"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-equipe-local-de-revisao-premium-para-auditar-detalhes-do-site",
+      "createdAt": "2026-04-17T06:32:40.371Z",
+      "updatedAt": "2026-04-17T06:32:40.371Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "segunda coisa, eu quero que vc crie uma equipe de agentes revisores que vem sempre o detalhes, tipo titulos em cima de cads, erros editoriais, editoriais feito pra o criador ver e nao pra o leitor, botões sem função, e adicione função, e mais  agentes que procurem mais fontes, e faça isso depois eu vou revisa todo o site com vc",
+      "summary": "Criar equipe local de revisao premium para auditar detalhes do site",
+      "normalizedTasks": [
+        "Criar equipe de revisores",
+        "Auditar textos editoriais internos",
+        "Triar CTAs e funcoes",
+        "Mapear gargalos de fontes"
+      ],
+      "filesTouched": [
+        ".codex-review-team/README.md",
+        ".codex-review-team/agents/ui-detail-reviewer.md",
+        ".codex-review-team/agents/editorial-reader-reviewer.md",
+        ".codex-review-team/agents/cta-function-reviewer.md",
+        ".codex-review-team/agents/source-scout.md",
+        ".codex-review-team/agents/final-publishing-reviewer.md",
+        "scripts/review-team-audit.js",
+        "AGENTS.md",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/review-team/latest-report.md",
+        ".codex-temp/review-team/latest-report.json"
+      ],
+      "tags": [
+        "revisao",
+        "editorial",
+        "fontes",
+        "auditoria"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-usar-o-script-local-de-memoria-para-registrar-ordens-e-assets-antes-de-retomar",
+      "createdAt": "2026-04-17T06:42:31.516Z",
+      "updatedAt": "2026-04-17T06:42:31.516Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "nao eu lhe mandei fazer um script que tirava fotos e guardava todo o texto das ordens que eu dei use ele",
+      "summary": "Usar o script local de memoria para registrar ordens e assets antes de retomar",
+      "normalizedTasks": [
+        "Rodar status da memoria",
+        "Registrar esta ordem",
+        "Usar assets e ordens catalogados na retomada"
+      ],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "memoria",
+        "retomada",
+        "ordens"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-pagina-escritorio-com-equipe-de-agentes-especialistas-em-pixel-art-animado",
+      "createdAt": "2026-04-17T06:55:18.626Z",
+      "updatedAt": "2026-04-17T06:55:18.626Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "ok vamos organizar agora, primeiro vc e o ceo, agente so responde a min e nao me perde permições mais aqui no sistema, quero que crie uma equipe de especialista para o jornal e para as subpaginas todos especialistas em sua area, copy, games, infantil, vendas e criação de design,  editor chefe, editor de revisão e tudos mais agentes que vc achar nescessario crie um botão no menu chamado escritorio, e crie um agente especialista em pioxels art e animação das mesmas, dentro desse website filho vc vai criar somente um escritorio enorme com todos os agentes e quando vc passa o mouse neles eles respondem o que fazem e o que sao e suas especialidades e o que tãpo fazendo no momento, como assiso acontece, vc passa o mouse e diz quero conhecer vc, e abre um pop up com o avatar dele em epixels art falando e explicando tudo, e nnisso eu quero um escritoroi organizado, com divisões, para cada um deles, maquina de cafe lugar pra descnsar, eles andam e conversam trocam ideias e trabalham isso tudo animado em pixel art, com colisão e inteligencia artificial para o andamento dos agentes o  objetivo e saber o que tenho de agentes e pra o puvlico conhecer, cada agente tem um pixel  art baseado no que ele faz, ou seja no que ele e, o modelo de pixels arts deve setar qual sua especiadlidade agora crie essa pagina e os agentes e o botão escriotrio no menu",
+      "summary": "Criar página Escritório com equipe de agentes especialistas em pixel art animado e botão no menu",
+      "normalizedTasks": [
+        "Criar site filho escritorio",
+        "Adicionar botão Escritório no menu",
+        "Montar agentes especialistas por área",
+        "Adicionar pixel art animado com hover e popup",
+        "Registrar rota no servidor",
+        "Validar sintaxe e HTTP"
+      ],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "escritorio",
+        "agentes",
+        "pixel-art",
+        "menu",
+        "site-filho"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-refazer-modelo-visual-do-escritorio-em-pixel-art-top-down-inspirado-na-referenci",
+      "createdAt": "2026-04-17T07:11:19.498Z",
+      "updatedAt": "2026-04-17T07:11:19.498Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "eu quero um escritorio em pixel art tipo assim o, refaça o model",
+      "summary": "Refazer modelo visual do Escritório em pixel art top-down inspirado na referência enviada",
+      "normalizedTasks": [
+        "Recriar layout top-down",
+        "Adicionar salas e móveis pixel art",
+        "Adicionar painel lateral terminal",
+        "Reestilizar agentes como sprites menores",
+        "Validar captura visual"
+      ],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "escritorio",
+        "pixel-art",
+        "referencia",
+        "redesign"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-refinar-o-escritorio-com-cenario-pixel-art-mais-rico-personagens-mais-elaborados",
+      "createdAt": "2026-04-17T07:55:14.948Z",
+      "updatedAt": "2026-04-17T07:55:14.948Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu queria algo mais assim como essas fotos no escritorio, com personagens mais bem elaborados em pixels arts, use o agente de pixels art e crie um backgroud bonito , faça seu melhor e use os agentes para fazer o escriotrio",
+      "summary": "Refinar o Escritorio com cenário pixel art mais rico, personagens mais elaborados e fundo mais bonito",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-reformular-o-popup-inicial-com-mais-terreno-de-guerra-pixel-art-e-copy-de-cookie",
+      "createdAt": "2026-04-17T08:37:55.286Z",
+      "updatedAt": "2026-04-17T08:37:55.286Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "ta lindo agora o que eu quero e voltar ao pop up o problema la e simples vc dimninuoii o  pop up, e euqueria mais espaço e mais terreno pra mostra uma guerra de trincherias com robos contra humanos com tankes de guerras avioes bombas e navios  e o espaço ta pequeno tudo em pixels art, então reformule, e pegue o especialista em copy e o em redação para recriar o texto todo ali das diretrizes sendo menos direto, parece que agente ta dizendo que vai rastrear as cuecas das pessoas seja mais sucinto",
+      "summary": "Reformular o popup inicial com mais terreno de guerra pixel art e copy de cookies mais suave",
+      "normalizedTasks": [
+        "Ampliar popup visual",
+        "Mostrar guerra de trincheiras com robos e humanos",
+        "Suavizar texto das diretrizes de cookies"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        "startup-experience.css"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "popup",
+        "pixel-art",
+        "cookies",
+        "copy"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-expandir-pubpaid-com-modo-demo-de-apostas-lobby-com-rival-npcs-vivos-e-loja-prem",
+      "createdAt": "2026-04-17T09:36:14.918Z",
+      "updatedAt": "2026-04-17T09:36:14.918Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "adicione o modo demo, nos jogos, onde o jogador entra no jogo, vai pro lobby e encontra adversario joga, ganhando ou perde ele perde as moedas que aposto ou ganha moedas, sempre de 2 5 10 20 30 40 50 ou 100 as apostas; e la onde deve ficar o garcom tenha um menu loja, de bebidas com creditos, mais sorte ou azar dependendo da aleatoriedade, com porcentagens pequenas, e upgrades visuais compraveis",
+      "summary": "Expandir PubPaid com modo demo de apostas, lobby com rival, NPCs vivos e loja premium do garcom com bebidas e upgrades",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-expandir-pubpaid-com-clique-direto-no-cenario-macetes-secretos-de-sorte-e-loja-d",
+      "createdAt": "2026-04-17T09:48:43.526Z",
+      "updatedAt": "2026-04-17T09:48:43.526Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o garcon tem que fica ali, ele vende as bebidas e os mini jogos, tem que poder ser acessados com o mouse clicando no ponto do cenario; segredo e que ligar a musica da jukebox da mais chance de sorte, alguns npcs podem sugerir isso, a moca cantando solta um beijinho se clicar nela e isso da uma pequena quantidade de sorte; faca tudo isso e deixe a loja de acessorios de avatar mais clara",
+      "summary": "Expandir PubPaid com clique direto no cenario, macetes secretos de sorte e loja do garcom com bebidas, mesas e acessorios de avatar",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-melhorar-hero-infantil-com-apoio-de-agentes-de-layout-copy-e-cores-adicionar-fot",
+      "createdAt": "2026-04-17T09:52:38.471Z",
+      "updatedAt": "2026-04-17T09:52:38.471Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ta faltando foto e ta ilegivel chame os agentes pra concerta principalmente os de copy leyout e faça um agente especialista em combinação de cores",
+      "summary": "Melhorar hero infantil com apoio de agentes de layout, copy e cores, adicionar foto nos cards e criar agente de combinação de cores",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-melhorar-navegacao-por-mouse-na-pubpaid-posicionar-garcom-visivel-fixar-npcs-beb",
+      "createdAt": "2026-04-17T09:55:06.410Z",
+      "updatedAt": "2026-04-17T09:55:06.410Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e melhor ele navegar pelo mouse pelo salao porque as vezes ele bate em obstaculos invisiveis e os npcs tem que ta bebendo e nas mesas e conversando e dando dicas e o garcon nao ta onde deveria estar, ele nem ta la, e a cantora nao soltou o emotion de beijinho de sorte",
+      "summary": "Melhorar navegacao por mouse na PubPaid, posicionar garcom visivel, fixar NPCs bebendo nas mesas e mostrar visualmente o beijinho de sorte da cantora",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-fazer-acessorios-comprados-da-pubpaid-aparecerem-no-avatar-e-no-inventario-visua",
+      "createdAt": "2026-04-17T09:58:59.395Z",
+      "updatedAt": "2026-04-17T09:58:59.395Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "gostei de quase tudo menos que, bom, os acesosrios coprados nao aparecem, no avatar, vc podia criar esse aacessorios pra encaixa no avatar ou pelo menos aparecer no invettario dele",
+      "summary": "Fazer acessorios comprados da PubPaid aparecerem no avatar e no inventario visual do perfil/loja",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-adicionar-a-pubpaid-um-minigame-solo-de-caca-niqueis-com-alavanca-aposta-e-pagam",
+      "createdAt": "2026-04-17T10:04:08.695Z",
+      "updatedAt": "2026-04-17T10:04:08.695Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "sabe aqueles mini maquinas de jogos, vamos criar um sistema de jogo solo puxando a alavaca fccomo caça nikeis",
+      "summary": "Adicionar a PubPaid um minigame solo de caca-niqueis com alavanca, aposta e pagamento proprio",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-adicionar-a-pubpaid-um-minigame-de-roleta-simples-em-que-vence-quem-tirar-o-maio",
+      "createdAt": "2026-04-17T10:06:34.536Z",
+      "updatedAt": "2026-04-17T10:06:34.536Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e um jogo de roleta onde ganha quem tirar o maior numero regras de jogo de roleta,  incremente esses jogos, e acho que e so por enquanto",
+      "summary": "Adicionar a PubPaid um minigame de roleta simples em que vence quem tirar o maior numero",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-rodar-revisao-coordenada-com-agentes-para-polir-todo-o-site-por-area-corrigindo-",
+      "createdAt": "2026-04-17T10:10:12.608Z",
+      "updatedAt": "2026-04-17T10:10:12.608Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "apois isso faça umareuniao de agentes para corrigir e melhorar todo o site cada agnete na sua area fazendo o melhor e polindo todo o site.... ok",
+      "summary": "Rodar revisao coordenada com agentes para polir todo o site por area, corrigindo linguagem interna e atritos de UX",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-o-escritorio-nerd-com-equipe-publica-de-game-dev-e-integrar-ao-pubpaid",
+      "createdAt": "2026-04-17T16:02:48.314Z",
+      "updatedAt": "2026-04-17T16:02:48.314Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora eu quero um time de agentes no escritorio novo igual aquele outro mais de desenvolvimento de games e design de art e etc, vc vai por escritorio nerd e criar, e vai usar tudo que sabe sobre desenvovkimento e criarr a esquiope de agentes e eles vao redesenhar e melhorar fisica e graficos e elementos do jogo pubpaid, que ja ta no ar",
+      "summary": "Criar o Escritorio Nerd com equipe publica de game dev e integrar ao PubPaid",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-revisar-jogos-de-sorte-arcade-e-fluxo-do-salao-do-pubpaid-com-relatorio-curto-em",
+      "createdAt": "2026-04-17T17:50:28.829Z",
+      "updatedAt": "2026-04-17T17:50:28.829Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "No repositório atual do projeto PubPaid, analise apenas os jogos de sorte/arcade e o salão: copos e dados, caça-níqueis, roleta, NPCs, bartender/waiter tips e fluxo do salão. Leia o código necessário e devolva um relatório curto em português com: 1) o que parece funcionar bem, 2) riscos/bugs ou comportamento pouco convincente, 3) sugestões concretas de melhoria como se viessem da equipe do escritório nerd. Cite arquivo e funções relevantes.",
+      "summary": "Revisar jogos de sorte/arcade e fluxo do salão do PubPaid com relatório curto em português",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-enxugar-o-escritorio-removendo-itens-redundantes-de-visita-equipe-e-transformar-",
+      "createdAt": "2026-04-17T18:26:11.863Z",
+      "updatedAt": "2026-04-17T18:26:11.863Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nao e isso que eu queria veja m visita e euqipe sao reduindantes,  esse mais tambem e se,m sentindo tire ele  a seção terminal ser o codigo deles rodando 24 horas",
+      "summary": "Enxugar o escritorio removendo itens redundantes de visita/equipe e transformar o terminal em codigo da equipe rodando 24h",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-separar-editorial-e-nerd-com-3-mapas-proprios-sprites-contextuais-por-ambiente-e",
+      "createdAt": "2026-04-17T18:34:22.492Z",
+      "updatedAt": "2026-04-17T18:34:22.492Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o escritorio nerd e o editorial tem que ser diferentes, sabe? temque ter 3 mapas diferentes com temas diferentes pra escolher e muda tambem a sprite se for por exemplo num ambiente no espaço nave espacial eles usam capacete de astronauta se for no velho oeste chapeu de cowboy , assim vc tem que criar 3 ambientes  e no visual o que vai mudar  e que a pessoa pode doar coisas pro escritorio, tipo  doe   um computador melhor e etc, ou mais poder computcional , ai abri o pix, ela paga e faz a doação dela, e ai  o inventario deles vai crescendo, crie uma haba inventario, onmde podemos ver o que ja foi comprado tipo uma vaquinha pra melhorar o ambiente de trabalho do editorial nerd e o normal, ou seja e uma vaquinha vc compra um item e ajuda no desenvolvimento do site",
+      "summary": "Separar editorial e nerd com 3 mapas próprios, sprites contextuais por ambiente e vaquinha com inventário de upgrades por escritório",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-refazer-a-abertura-da-dancarina-da-demo-no-pubpaid-tirando-texto-sobre-ela-e-dei",
+      "createdAt": "2026-04-17T18:37:06.603Z",
+      "updatedAt": "2026-04-17T18:37:06.603Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ta feio isso em, feio mesmo texto na cara dela e uma coisa apontando nao sei pra onde, ela so tem que dançar e fuicar falando aqui vc aprende leia como funciona e tocar uma musica dançante ali",
+      "summary": "Refazer a abertura da dançarina da demo no PubPaid, tirando texto sobre ela e deixando a cena mais limpa, dançante e convidativa",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-sistema-de-avaliacao-de-agentes-com-pontos-feedback-positivo-negativo-e-aj",
+      "createdAt": "2026-04-17T18:40:17.794Z",
+      "updatedAt": "2026-04-17T18:40:17.794Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quero que crie um sistema de avaliação de funcionario, se o agente respnsavel fez merda, ele perde pontos se fez bem gfanha pontos e vai aprendendo com isso usando logica neural",
+      "summary": "Criar sistema de avaliacao de agentes com pontos, feedback positivo/negativo e ajuste adaptativo do comportamento",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-transformar-o-final-ruim-do-pubpaid-em-minijogo-runner-de-rua-com-carros-obstacu",
+      "createdAt": "2026-04-17T18:44:45.012Z",
+      "updatedAt": "2026-04-17T18:44:45.012Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "aqui eu quero mudar vc cria um cenario bitmap de rua e de carros , um jogo onde o homen corre pela rua e calçadas e se a mulher acerta ele ele perde 1 credito, ou seja um tipo subwai rush, ele perde velocidade toda vez que bate em obstaculo",
+      "summary": "Transformar o final ruim do PubPaid em minijogo runner de rua com carros, obstaculos, perda de velocidade e perda de 1 credito ao ser alcancado",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-fazer-o-boneco-andar-ate-o-clique-em-vez-de-teleportar-no-pubpaid",
+      "createdAt": "2026-04-17T18:49:07.679Z",
+      "updatedAt": "2026-04-17T18:49:07.679Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "ele ainda ta teletransportanto o boneco eu quero que quando eu clico o boneco va andando fazendo o traçado do caminho ate o local do click",
+      "summary": "Fazer o boneco andar ate o clique em vez de teleportar no PubPaid",
+      "normalizedTasks": [
+        "Substituir teleporte por caminhada ate o clique",
+        "Abrir interacoes so ao chegar no destino"
+      ],
+      "filesTouched": [
+        "pubpaid.js"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-usar-confirmacoes-da-conversa-para-pontuar-agentes-no-escritorio",
+      "createdAt": "2026-04-17T18:52:49.951Z",
+      "updatedAt": "2026-04-17T18:52:49.951Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Já vi onde encaixar sem bagunçar a página. Vou pôr a avaliação dentro do perfil do agente e no terminal, com botões de Mandou bem e Fez merda, além de um aprendizado adaptativo simples que mexe em foco, qualidade e velocidade conforme o histórico. use essas confirmações atraves das nmossas convesas se eu gostei ou nao ... oisso da pontos ou nao pra eles",
+      "summary": "Usar confirmacoes da conversa para pontuar agentes no escritorio",
+      "normalizedTasks": [
+        "Transformar frases de aprovacao e rejeicao em pontos para agentes",
+        "Mostrar sinal da conversa no modal e no terminal"
+      ],
+      "filesTouched": [
+        "escritorio.js",
+        "escritorio.html",
+        "escritorio-nerd.html",
+        "escritorio.css"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-agente-especialista-em-fisica-de-games-para-o-escritorio",
+      "createdAt": "2026-04-17T18:53:56.444Z",
+      "updatedAt": "2026-04-17T18:53:56.444Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "a mecanica dde fisica da sinudca ta orrivel crie um agente especialista em fisica de games",
+      "summary": "Criar agente especialista em fisica de games para o escritorio",
+      "normalizedTasks": [
+        "Adicionar agente de fisica de games ao escritorio principal",
+        "Representar foco em sinuca",
+        "colisao e atrito"
+      ],
+      "filesTouched": [
+        "escritorio.js"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-agente-de-robos-e-redesenhar-o-trio-anti-ruido-da-home",
+      "createdAt": "2026-04-17T18:59:49.686Z",
+      "updatedAt": "2026-04-17T18:59:49.686Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "por fim eu quero um agente especcialista em desenhar robos para minha pagina e redeseenhe meus robos eles estaoestupidamente feios menos 0 pontos pra so agente s que criaram",
+      "summary": "Criar agente de robos e redesenhar o trio anti-ruido da home",
+      "normalizedTasks": [
+        "Adicionar especialista em desenhar robos no escritorio",
+        "Redesenhar a silhueta dos robos da home",
+        "Aplicar penalidade aos agentes responsaveis pelo visual antigo"
+      ],
+      "filesTouched": [
+        "escritorio.js",
+        "script.js",
+        "styles.css"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-refazer-os-robos-da-home-desde-a-base-tirar-leitura-de-danca-e-substituir-baloes",
+      "createdAt": "2026-04-17T19:13:59.587Z",
+      "updatedAt": "2026-04-17T19:13:59.587Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nao e essa era reddesenhar os robos desde o principio e eles parecem ta dançando e dda em vez de baloes como inmigos ali fake news e etc, que ele ilustre com inimigos reais como uma guerra ali emabixo e faça meus robos desde o começoi aqueles tão orriveis",
+      "summary": "Refazer os robos da home desde a base, tirar leitura de danca e substituir baloes por inimigos reais de guerra no rodape",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-manter-temporariamente-a-cena-atual-dos-robos-da-home-e-aplicar-100-pontos-aos-r",
+      "createdAt": "2026-04-17T19:16:33.521Z",
+      "updatedAt": "2026-04-17T19:16:33.521Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "serio ficou uma merda, merda mesmo, nem da pra saber o que e, mais vamos deixa assim por enquanto, - 100 pontos pra quem criou isso",
+      "summary": "Manter temporariamente a cena atual dos robos da home e aplicar -100 pontos aos responsaveis pela versao reprovada",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-desacelerar-a-rotacao-da-hero-para-dar-tempo-de-ler-os-destaques",
+      "createdAt": "2026-04-17T19:17:19.475Z",
+      "updatedAt": "2026-04-17T19:17:19.475Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok, no momento eu quero uma coisa simpless, a jhero ta passando as noticias em destaque rapido mde mais mal da pra ler",
+      "summary": "Desacelerar a rotacao da hero para dar tempo de ler os destaques",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-adicionar-aviso-padrao-de-em-construcao-demonstracao-visual-nos-sites-filhos-que",
+      "createdAt": "2026-04-17T19:20:14.235Z",
+      "updatedAt": "2026-04-17T19:20:14.235Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e toda area que de sub sites que nao ta pronta tem que ter o em contrução, somente para demonstração visual ... aguarde finalização",
+      "summary": "Adicionar aviso padrao de em construcao/demonstracao visual nos sites-filhos que ainda nao estao prontos",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-17-criar-o-escritorio-de-ninjas-com-50-agentes-focados-em-sprites-2d-e-montar-um-re",
+      "createdAt": "2026-04-17T19:28:12.671Z",
+      "updatedAt": "2026-04-17T19:28:12.671Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "proximo passo quero uma equipe de 50 agentes especialista em rodar a internet atras de sprites 2d para ilustrar nossos jogos, e outras coisas, eles captam roubam e criam uma pasta com eles, pra ser repositorio e usado depois, ok? esse escritorio vai chamar escritorio de ninjas",
+      "summary": "Criar o Escritorio de Ninjas com 50 agentes focados em sprites 2D e montar um repositorio local para o acervo visual futuro",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    }
+  ]
+}

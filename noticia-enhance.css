@@ -152,3 +152,196 @@
     gap: 8px;
   }
 }
+
+/* 2026-04-17: layout da materia mais compacto, sem faixa morta em telas largas */
+.detail-main,
+.detail-content-main,
+.article-main,
+.news-detail-main {
+  width: min(1180px, calc(100vw - 2rem));
+  margin-inline: auto;
+}
+
+.detail-shell,
+.article-shell,
+.news-detail-shell {
+  gap: clamp(0.8rem, 1.5vw, 1.2rem) !important;
+  padding: clamp(1rem, 2vw, 1.45rem) !important;
+}
+
+.detail-shell h1,
+.article-shell h1,
+.news-detail-shell h1 {
+  max-width: 980px;
+  font-size: clamp(2rem, 4vw, 3.35rem) !important;
+}
+
+.detail-meta {
+  margin-top: 0.25rem !important;
+}
+
+.detail-hero-thumb,
+.article-hero-thumb,
+.news-detail-hero-thumb {
+  min-height: clamp(260px, 31vw, 430px) !important;
+  aspect-ratio: 16 / 6.4;
+  margin-block: 0 !important;
+  border-radius: clamp(20px, 2.2vw, 28px) !important;
+}
+
+.detail-hero-thumb.has-image,
+.article-hero-thumb.has-image,
+.news-detail-hero-thumb.has-image {
+  box-shadow:
+    inset 0 -78px 92px rgba(6, 16, 30, 0.28),
+    0 18px 36px rgba(5, 20, 40, 0.16) !important;
+}
+
+.detail-lede {
+  max-width: 900px !important;
+  margin-top: 0 !important;
+  font-size: clamp(1rem, 1.2vw, 1.12rem) !important;
+  line-height: 1.58 !important;
+}
+
+.detail-fact-tabs {
+  margin-top: 0.15rem !important;
+}
+
+.detail-grid {
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr) !important;
+  gap: clamp(0.95rem, 1.7vw, 1.35rem) !important;
+  margin-top: 0.35rem !important;
+}
+
+.detail-content {
+  padding: clamp(1rem, 1.6vw, 1.25rem) !important;
+}
+
+.detail-card {
+  padding: 1rem !important;
+}
+
+@media (min-width: 1500px) {
+  .detail-main,
+  .detail-content-main,
+  .article-main,
+  .news-detail-main {
+    width: min(1240px, calc(100vw - 5rem));
+  }
+
+  .detail-hero-thumb,
+  .article-hero-thumb,
+  .news-detail-hero-thumb {
+    min-height: 390px !important;
+    aspect-ratio: 21 / 7;
+  }
+}
+
+@media (max-width: 900px) {
+  .detail-main,
+  .detail-content-main,
+  .article-main,
+  .news-detail-main {
+    width: min(100% - 1rem, 100%);
+  }
+
+  .detail-hero-thumb,
+  .article-hero-thumb,
+  .news-detail-hero-thumb {
+    min-height: clamp(260px, 62vw, 390px) !important;
+    aspect-ratio: 4 / 3;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* 2026-04-17: remover faixa branca morta entre resumo e conteudo */
+.detail-body .detail-main,
+.detail-body .detail-shell,
+.detail-body .detail-shell.active {
+  min-height: 0 !important;
+}
+
+.detail-body .detail-shell,
+.detail-body .detail-shell.active {
+  display: grid !important;
+  grid-template-rows: none !important;
+  grid-auto-rows: auto !important;
+  align-content: start !important;
+  gap: clamp(0.58rem, 1.1vw, 0.9rem) !important;
+}
+
+.detail-body .detail-meta {
+  margin-block: 0 !important;
+}
+
+.detail-body .detail-hero-thumb {
+  margin-block: 0 !important;
+}
+
+.detail-body .detail-lede {
+  margin: 0 !important;
+}
+
+.detail-body .analysis-box[hidden],
+.detail-body .detail-fact-tabs[hidden],
+.detail-body [hidden] {
+  display: none !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.detail-body .analysis-box,
+.detail-body .detail-fact-tabs,
+.detail-body .detail-grid {
+  margin-top: clamp(0.45rem, 0.9vw, 0.75rem) !important;
+}
+
+.detail-body .detail-grid {
+  align-items: start !important;
+  min-height: 0 !important;
+}
+
+.detail-body .detail-content,
+.detail-body .detail-aside {
+  min-height: 0 !important;
+}
+
+.detail-body .detail-extra-paragraph {
+  margin: 0.45rem 0 0 !important;
+}
+
+@media (min-width: 1500px) {
+  .detail-body .detail-shell,
+  .detail-body .detail-shell.active {
+    gap: 0.82rem !important;
+  }
+}
+
+/* 2026-04-16: ultimo guarda para a coluna principal nao esticar vazia */
+.detail-body .detail-grid > *,
+.detail-body .detail-content,
+.detail-body .detail-aside {
+  align-self: start !important;
+  height: auto !important;
+}
+
+.detail-body #detail-content {
+  display: block !important;
+}
+
+.detail-body #detail-content:empty {
+  display: none !important;
+}
+
+.detail-body #detail-content > p {
+  margin: 0 0 0.92rem !important;
+}
+
+.detail-body #detail-content > p:last-child {
+  margin-bottom: 0 !important;
+}

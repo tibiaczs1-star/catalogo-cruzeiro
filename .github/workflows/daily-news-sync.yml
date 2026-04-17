@@ -24,6 +24,9 @@ jobs:
       - name: Run daily collector (once)
         run: node backend/workers/catalogo-autoupdate-worker.js --once
 
+      - name: Audit news image focus
+        run: npm run audit:news-images -- --limit=80
+
       - name: Commit and push updates
         run: |
           git config user.name "catalogo-bot"
@@ -35,4 +38,3 @@ jobs:
           fi
           git commit -m "chore: atualização diária de notícias e empreendimentos"
           git push
-

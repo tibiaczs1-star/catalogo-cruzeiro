@@ -222,6 +222,42 @@ const STATIC_PAGE_SEO = {
     changefreq: "daily",
     fileName: "estudantes.html"
   },
+  "/escritorio.html": {
+    title: `Escritorio dos Agentes | ${SITE_NAME}`,
+    description:
+      "Escritorio pixel art dos agentes especialistas do Catalogo Cruzeiro do Sul, com editoria, copy, games, infantil, vendas, design, revisao, fontes e automacao.",
+    themeColor: "#111827",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.76",
+    changefreq: "weekly",
+    fileName: "escritorio.html"
+  },
+  "/escritorio-nerd.html": {
+    title: `Escritorio Nerd | ${SITE_NAME}`,
+    description:
+      "Escritorio nerd em pixel art com o time de game dev do PubPaid, incluindo game design, fisica, HUD, pixel art, som, playtest e estabilidade.",
+    themeColor: "#170d2d",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.74",
+    changefreq: "weekly",
+    fileName: "escritorio-nerd.html"
+  },
+  "/escritorio-ninjas.html": {
+    title: `Escritorio de Ninjas | ${SITE_NAME}`,
+    description:
+      "Escritorio em pixel art com 50 especialistas focados em sprites 2D, tilesets, props, HUD, efeitos, licencas, curadoria e criacao propria para os jogos do portal.",
+    themeColor: "#0F1628",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.7",
+    changefreq: "weekly",
+    fileName: "escritorio-ninjas.html"
+  },
   "/games.html": {
     title: `Canal Tech Gamer | ${SITE_NAME}`,
     description:
@@ -305,6 +341,18 @@ const STATIC_PAGE_SEO = {
     sitemap: false,
     fileName: "pesquisa-acre-2026.html"
   },
+  "/pubpaid.html": {
+    title: `PubPaid Demo | ${SITE_NAME}`,
+    description:
+      "Demo jogavel de um bar pixelado com avatar, perfil, lobby local, quatro mesas PvP e moedas ficticias para validar a experiencia do PubPaid.",
+    themeColor: "#120C24",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.63",
+    changefreq: "weekly",
+    fileName: "pubpaid.html"
+  },
   "/vendas.html": {
     title: `Vendas Locais | ${SITE_NAME}`,
     description:
@@ -383,28 +431,28 @@ const TOPIC_FEED_CONFIG = {
       topicGroup: "creators"
     },
     {
-      id: "xbox-wire",
-      name: "Xbox Wire",
-      feedUrl: "https://news.xbox.com/en-us/feed/",
-      siteUrl: "https://news.xbox.com/en-us/",
-      defaultCategory: "Games",
-      topicGroup: "games"
+      id: "animation-magazine",
+      name: "Animation Magazine",
+      feedUrl: "https://www.animationmagazine.net/feed/",
+      siteUrl: "https://www.animationmagazine.net/",
+      defaultCategory: "Cartoons",
+      topicGroup: "animation"
     },
     {
-      id: "playstation-blog",
-      name: "PlayStation Blog",
-      feedUrl: "https://feeds.feedburner.com/psblog",
-      siteUrl: "https://blog.playstation.com/",
-      defaultCategory: "Games",
-      topicGroup: "games"
+      id: "awn",
+      name: "Animation World Network",
+      feedUrl: "https://www.awn.com/news/rss.xml",
+      siteUrl: "https://www.awn.com/",
+      defaultCategory: "Cartoons",
+      topicGroup: "animation"
     },
     {
-      id: "the-verge-gaming",
-      name: "The Verge Gaming",
-      feedUrl: "https://www.theverge.com/rss/games/index.xml",
-      siteUrl: "https://www.theverge.com/games",
-      defaultCategory: "Games",
-      topicGroup: "games"
+      id: "cartoon-brew",
+      name: "Cartoon Brew",
+      feedUrl: "https://www.cartoonbrew.com/feed",
+      siteUrl: "https://www.cartoonbrew.com/",
+      defaultCategory: "Cartoons",
+      topicGroup: "animation"
     },
     {
       id: "anime-news-network",
@@ -415,12 +463,12 @@ const TOPIC_FEED_CONFIG = {
       topicGroup: "anime"
     },
     {
-      id: "cartoon-brew",
-      name: "Cartoon Brew",
-      feedUrl: "https://www.cartoonbrew.com/feed",
-      siteUrl: "https://www.cartoonbrew.com/",
-      defaultCategory: "Cartoons",
-      topicGroup: "animation"
+      id: "toy-insider",
+      name: "The Toy Insider",
+      feedUrl: "https://thetoyinsider.com/feed/",
+      siteUrl: "https://thetoyinsider.com/",
+      defaultCategory: "Kids",
+      topicGroup: "games"
     },
     {
       id: "tubefilter",
@@ -504,7 +552,20 @@ const IMAGE_PREVIEW_ALLOWLIST = [
   "insidehighered.com",
   "edsurge.com",
   "hechingerreport.org",
-  "thepienews.com"
+  "thepienews.com",
+  "nintendo.com",
+  "roblox.com",
+  "ir.roblox.com",
+  "crunchyroll.com",
+  "animationmagazine.net",
+  "awn.com",
+  "thetoyinsider.com",
+  "press.disneyplus.com",
+  "bluey.tv",
+  "nick.com",
+  "galinhapintadinha.com.br",
+  "mundobita.com.br",
+  "turmadamonica.uol.com.br"
 ];
 const DYNAMIC_ASSET_BASENAMES = new Set([
   "news-data.js",
@@ -522,7 +583,7 @@ const NINJAS_OPPORTUNITIES = [
     city: "Acre / confirmar lotacao local",
     title: "Painel estadual com funcoes abertas para vendas, recepcao, construcao e suporte",
     summary:
-      "O painel oficial do Sine Acre lista vagas como consultor de vendas, recepcionista, promotor de vendas, vendedor interno, entregador de gas, engenheiro civil em estagio, pedreiro e servente de obras. Como a pagina muda com frequencia e nem sempre destaca o municipio, vale checar se ha encaminhamento para Cruzeiro do Sul.",
+      "O painel oficial do Sine Acre lista vagas como consultor de vendas, recepcionista, promotor de vendas, vendas em loja, entregador de gas, engenheiro civil em estagio, pedreiro e servente de obras. Como a pagina muda com frequencia e nem sempre destaca o municipio, vale checar se ha encaminhamento para Cruzeiro do Sul.",
     publishedAt: "Pesquisa em 14 de abril de 2026",
     deadline: "Atualizacao continua",
     status: "aberto",
@@ -2671,8 +2732,8 @@ function fetchRemoteText(remoteUrl, { timeoutMs = 8000, maxBytes = 1200000, maxR
   });
 }
 
-function fetchRssFeed(feedUrl) {
-  return fetchRemoteText(feedUrl, { timeoutMs: 8000, maxBytes: 1200000 });
+function fetchRssFeed(feedUrl, options = {}) {
+  return fetchRemoteText(feedUrl, { timeoutMs: 4500, maxBytes: 1200000, ...options });
 }
 
 async function refreshRssRuntime(limitPerSource = 30) {
@@ -2828,13 +2889,10 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
     };
   }
 
-  const reports = [];
-  const items = [];
-
-  for (const source of sources) {
+  const sourceResults = await mapWithConcurrency(sources, 4, async (source) => {
     try {
       const xml = await fetchRssFeed(source.feedUrl);
-      const parsedItems = parseRssItems(xml, source)
+      const items = parseRssItems(xml, source)
         .slice(0, limitPerSource)
         .map((item) => ({
           ...item,
@@ -2845,16 +2903,23 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
           defaultCategory: source.defaultCategory || item.category || "Cotidiano"
         }));
 
-      items.push(...parsedItems);
-      reports.push({ source: source.id, ok: true, count: parsedItems.length });
+      return {
+        items,
+        report: { source: source.id, ok: true, count: items.length }
+      };
     } catch (error) {
-      reports.push({ source: source.id, ok: false, error: String(error?.message || "falha") });
+      return {
+        items: [],
+        report: { source: source.id, ok: false, error: String(error?.message || "falha") }
+      };
     }
-  }
+  });
 
-  const enrichedItems = await enrichNewsItemsWithSourceImages(items);
+  const reports = sourceResults.map((entry) => entry.report);
   const normalizedItems = pickBalancedTopicFeedItems(
-    enrichedItems.map((item) => normalizeTopicFeedItem(item, normalizedTopic, item)),
+    sourceResults
+      .flatMap((entry) => entry.items)
+      .map((item) => normalizeTopicFeedItem(item, normalizedTopic, item)),
     Math.max(1, Math.min(40, totalLimit))
   );
 
@@ -2863,11 +2928,12 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
     buildTopicFeedFallback(normalizedTopic, totalLimit),
     totalLimit
   );
+  const enrichedItems = await enrichNewsItemsWithSourceImages(mergedItems);
 
   const payload = {
     topic: normalizedTopic,
     updatedAt: new Date().toISOString(),
-    items: mergedItems,
+    items: enrichedItems,
     reports,
     fallbackUsed: normalizedItems.length === 0
   };
@@ -2910,10 +2976,14 @@ async function getTopicFeed(topic, limit = 12) {
   }
 
   try {
-    const refreshed = await refreshTopicFeed(normalizedTopic, {
-      limitPerSource: 8,
-      totalLimit: Math.max(safeLimit, 12)
-    });
+    const refreshed = await withPromiseTimeout(
+      refreshTopicFeed(normalizedTopic, {
+        limitPerSource: 8,
+        totalLimit: Math.max(safeLimit, 12)
+      }),
+      9000,
+      "topic_feed_timeout"
+    );
 
     if (Array.isArray(refreshed?.items) && refreshed.items.length) {
       return {
@@ -2996,7 +3066,7 @@ function fetchPreviewImage(sourceUrl) {
       return resolve(cached.url || "");
     }
 
-    fetchRemoteText(sourceUrl, { timeoutMs: 5000, maxBytes: 350000 })
+    fetchRemoteText(sourceUrl, { timeoutMs: 2500, maxBytes: 350000 })
       .then((raw) => {
         const imageUrl = extractBestSourceImage(raw, sourceUrl);
         updateImagePreviewCache(sourceUrl, imageUrl);
@@ -3024,14 +3094,39 @@ async function mapWithConcurrency(items = [], limit = 4, mapper) {
   return results;
 }
 
+function withPromiseTimeout(promise, timeoutMs = 9000, reason = "timeout") {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error(reason)), timeoutMs);
+
+    Promise.resolve(promise)
+      .then((value) => {
+        clearTimeout(timer);
+        resolve(value);
+      })
+      .catch((error) => {
+        clearTimeout(timer);
+        reject(error);
+      });
+  });
+}
+
 async function enrichNewsItemsWithSourceImages(items = []) {
   return mapWithConcurrency(items, 4, async (item) => {
     if (!item || !item.sourceUrl) {
       return item;
     }
 
-    const sourceImageUrl = await fetchPreviewImage(item.sourceUrl).catch(() => "");
     const canonicalFeedImage = pickCanonicalFeedImage(item);
+    if (canonicalFeedImage) {
+      return {
+        ...item,
+        feedImageUrl: canonicalFeedImage || item.feedImageUrl || item.imageUrl || "",
+        sourceImageUrl: item.sourceImageUrl || "",
+        imageUrl: canonicalFeedImage || item.imageUrl || item.feedImageUrl || ""
+      };
+    }
+
+    const sourceImageUrl = await fetchPreviewImage(item.sourceUrl).catch(() => "");
     return {
       ...item,
       feedImageUrl: canonicalFeedImage || item.feedImageUrl || item.imageUrl || "",
@@ -3331,7 +3426,7 @@ function getNewsSuggestions(query = "", limit = 80) {
       { type: "titulo", value: item.title, slug: item.slug },
       { type: "editoria", value: item.category, slug: "" },
       { type: "fonte", value: item.sourceName, slug: "" },
-      { type: "pauta", value: item.sourceLabel, slug: item.slug },
+      { type: "assunto", value: item.sourceLabel, slug: item.slug },
       ...(Array.isArray(item.highlights)
         ? item.highlights.map((value) => ({ type: "destaque", value, slug: item.slug }))
         : [])

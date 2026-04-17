@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-17T00:00:00Z",
+  "notes": "Cofre inicial do Escritório de Ninjas. Preencher com lotes curados, origem e status de uso.",
+  "collections": [
+    {
+      "id": "characters",
+      "label": "Characters",
+      "path": "sprites/characters",
+      "status": "ready_for_intake",
+      "allowedSources": ["licensed", "public_domain", "cc_compatible", "original"]
+    },
+    {
+      "id": "enemies",
+      "label": "Enemies",
+      "path": "sprites/enemies",
+      "status": "ready_for_intake",
+      "allowedSources": ["licensed", "public_domain", "cc_compatible", "original"]
+    },
+    {
+      "id": "tilesets",
+      "label": "Tilesets",
+      "path": "sprites/tilesets",
+      "status": "ready_for_intake",
+      "allowedSources": ["licensed", "public_domain", "cc_compatible", "original"]
+    },
+    {
+      "id": "props",
+      "label": "Props",
+      "path": "sprites/props",
+      "status": "ready_for_intake",
+      "allowedSources": ["licensed", "public_domain", "cc_compatible", "original"]
+    },
+    {
+      "id": "ui",
+      "label": "UI and HUD",
+      "path": "sprites/ui",
+      "status": "ready_for_intake",
+      "allowedSources": ["licensed", "public_domain", "cc_compatible", "original"]
+    },
+    {
+      "id": "fx",
+      "label": "Effects",
+      "path": "sprites/fx",
+      "status": "ready_for_intake",
+      "allowedSources": ["licensed", "public_domain", "cc_compatible", "original"]
+    }
+  ],
+  "entries": []
+}

@@ -86,63 +86,83 @@
   function buildWelcomeCopyMarkup() {
     return `
       <p class="catalogo-welcome-kicker">Antes de continuar</p>
-      <h2 id="catalogoWelcomeTitle">Autorize cookies, rastreamento e metricas</h2>
+      <h2 id="catalogoWelcomeTitle">Preferencias de cookies</h2>
       <p class="catalogo-welcome-lead">
-        Ao aceitar, voce libera a captura de cookies e sinais de navegacao para
-        medir acessos, registrar cliques, acompanhar permanencia, entender trilhas
-        de uso e gerar estatisticas para conteudo, produto, campanhas e desempenho.
+        Usamos cookies para entender o uso do portal, melhorar a navegacao e
+        acompanhar metricas essenciais de desempenho e audiencia.
       </p>
 
       <div class="catalogo-terms-summary">
         <article class="catalogo-summary-card">
-          <strong>Cookies analiticos</strong>
-          <p>Registram paginas vistas, origem de acesso, cliques, tempo de navegacao e interacoes gerais.</p>
+          <strong>Essenciais</strong>
+          <p>Mantem recursos basicos do site funcionando corretamente.</p>
         </article>
         <article class="catalogo-summary-card">
-          <strong>Uso dos dados</strong>
-          <p>Esses sinais alimentam relatorios, metricas de audiencia e ajustes editoriais, tecnicos, comerciais e de rastreio de comportamento.</p>
+          <strong>Medicao e desempenho</strong>
+          <p>Ajudam a analisar acessos, paginas mais visitadas e a estabilidade da experiencia.</p>
         </article>
         <article class="catalogo-summary-card">
           <strong>Seu controle</strong>
-          <p>Os detalhes do tratamento, retencao e base legal ficam na pagina legal, que voce pode consultar antes de continuar.</p>
+          <p>Voce pode consultar os detalhes na pagina legal antes de seguir.</p>
         </article>
       </div>
 
       <div class="catalogo-terms-list">
         <div class="catalogo-term-item">
-          <strong>O que coletamos</strong>
-          <span>Cookies, dados do navegador, paginas acessadas, tempo de uso, cliques, votos, origem de visita e interacoes com modulos.</span>
+          <strong>O que usamos</strong>
+          <span>Cookies essenciais e ferramentas de medicao de uso.</span>
         </div>
         <div class="catalogo-term-item">
-          <strong>Para que usamos</strong>
-          <span>Usamos esses dados para rastrear uso, gerar estatisticas, medir campanhas, entender comportamento e melhorar experiencia e desempenho.</span>
+          <strong>Finalidade</strong>
+          <span>Aprimorar conteudo, usabilidade e desempenho do portal.</span>
         </div>
         <div class="catalogo-term-item">
-          <strong>Leitura de comportamento</strong>
-          <span>Os dados de navegacao podem ser ligados ao desempenho de blocos, materias, formularios, votacoes, buscas e recursos interativos do portal.</span>
-        </div>
-        <div class="catalogo-term-item">
-          <strong>Atualizacoes</strong>
-          <span>Ferramentas de medicao, layout e regras podem mudar; por isso o aceite pode ser renovado neste fluxo.</span>
+          <strong>Transparencia</strong>
+          <span>As condicoes podem ser atualizadas conforme o site evolui.</span>
         </div>
       </div>
 
       <label class="catalogo-terms-check">
         <input type="checkbox" id="catalogoAcceptTerms" />
-        <span>Autorizo, neste acesso, o uso de cookies, captura de dados de navegacao e tecnologias de rastreamento para medir interacoes, permanencia, cliques e metricas do portal.</span>
+        <span>Autorizo o uso de cookies e metricas de navegacao neste acesso.</span>
       </label>
 
       <p class="catalogo-welcome-note">
-        Observacao: cookies estritamente necessarios podem continuar ativos para o funcionamento basico do site. Mais detalhes estao na pagina legal.
+        Cookies estritamente necessarios podem permanecer ativos para o funcionamento do site.
       </p>
 
       <div class="catalogo-welcome-actions">
         <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button" disabled>
-          Aceitar cookies e continuar
+          Aceitar e continuar
         </button>
         <a class="catalogo-btn ghost" href="./legal.html" target="_blank" rel="noopener noreferrer">
-          Ver detalhes completos
+          Ver politica
         </a>
+      </div>
+    `;
+  }
+
+  function buildDirectorMarkup() {
+    return `
+      <div class="catalogo-director-stage" aria-hidden="true">
+        <div class="catalogo-pixel-director">
+          <i class="catalogo-director-shadow"></i>
+          <i class="catalogo-director-hair"></i>
+          <i class="catalogo-director-head"></i>
+          <i class="catalogo-director-glasses"></i>
+          <i class="catalogo-director-body"></i>
+          <i class="catalogo-director-arm arm-left">
+            <span class="catalogo-director-hand left-hand"></span>
+          </i>
+          <i class="catalogo-director-arm arm-right">
+            <span class="catalogo-director-hand right-hand"></span>
+            <span class="catalogo-director-laser-burst">
+              <span class="catalogo-pointer-beam"></span>
+            </span>
+          </i>
+          <i class="catalogo-director-leg leg-left"></i>
+          <i class="catalogo-director-leg leg-right"></i>
+        </div>
       </div>
     `;
   }
@@ -154,8 +174,8 @@
       : "catalogo-welcome-visual";
 
     return `
-      <div class="${visualClass}" aria-hidden="true">
-        <div class="catalogo-stage-chip">Cookies, rastreio e dados</div>
+        <div class="${visualClass}" aria-hidden="true">
+        <div class="catalogo-stage-chip">Preferencias e cookies</div>
 
         <div class="catalogo-cosmos">
           <span class="catalogo-sky-glow glow-a"></span>
@@ -178,6 +198,33 @@
             <span class="catalogo-cruzeiro-star star-right"></span>
             <span class="catalogo-cruzeiro-star star-bottom"></span>
           </div>
+          <span class="catalogo-star-alien alien-star-a"></span>
+          <span class="catalogo-star-alien alien-star-b"></span>
+          <span class="catalogo-star-alien alien-star-c"></span>
+          <span class="catalogo-star-alien alien-star-d"></span>
+          <span class="catalogo-star-alien alien-star-e"></span>
+          <span class="catalogo-sky-angel sky-angel-a"></span>
+          <span class="catalogo-sky-angel sky-angel-b"></span>
+          <span class="catalogo-sky-angel sky-angel-c"></span>
+          <span class="catalogo-bomber-plane bomber-plane-a">
+            <span class="catalogo-plane-bomb"></span>
+          </span>
+          <span class="catalogo-bomber-plane bomber-plane-b">
+            <span class="catalogo-plane-bomb"></span>
+          </span>
+          <span class="catalogo-bomber-plane bomber-plane-c">
+            <span class="catalogo-plane-bomb"></span>
+          </span>
+          <span class="catalogo-bomber-plane bomber-plane-d">
+            <span class="catalogo-plane-bomb"></span>
+          </span>
+          <span class="catalogo-war-drone drone-a"></span>
+          <span class="catalogo-war-drone drone-b"></span>
+          <span class="catalogo-war-drone drone-c"></span>
+          <span class="catalogo-space-bus" aria-label="Onibus espacial com Elon Musk sentado">
+            <span class="catalogo-space-bus-window"></span>
+            <span class="catalogo-space-bus-passenger"></span>
+          </span>
           <span class="catalogo-shooting-star"></span>
         </div>
 
@@ -202,6 +249,8 @@
           <span class="catalogo-war-tracer tracer-right"></span>
           <span class="catalogo-war-searchlight light-left"></span>
           <span class="catalogo-war-searchlight light-right"></span>
+          <span class="catalogo-war-jet jet-left"></span>
+          <span class="catalogo-war-jet jet-right"></span>
           <span class="catalogo-war-vehicle vehicle-left"></span>
           <span class="catalogo-war-vehicle vehicle-right"></span>
           <span class="catalogo-war-tower tower-left"></span>
@@ -212,110 +261,119 @@
           <span class="catalogo-prophecy-kicker">Terminal de previsao alegorica</span>
           <strong class="catalogo-prophecy-title">Codigo, caos e manchete montando a cena</strong>
           <div class="catalogo-prophecy-console">
-            <span class="catalogo-prophecy-console-line">> boot futuro.exe --origem cruzeiro-do-sul</span>
-            <span class="catalogo-prophecy-console-line">> scan rumores :: meme :: guerra :: aliens :: panico</span>
-            <span class="catalogo-prophecy-console-line">> compilar binario -> ascii -> sintaxe -> alegoria</span>
+            <span class="catalogo-prophecy-console-line">> pintar linha 01 :: binario bruto</span>
+            <span class="catalogo-prophecy-console-line">> converter :: ASCII :: probabilidade</span>
+            <span class="catalogo-prophecy-console-line">> assinar previsao :: alienigenas</span>
           </div>
           <div class="catalogo-prophecy-stream">
             <div class="catalogo-prophecy-phase phase-binary">
-              01000001 01010100 01000001 01010001 01010101 01000101<br />
-              01000001 01001100 01001001 01000101 01001110 01001001 01000111 01000101 01001110 01000001<br />
-              01001001 01001101 01001001 01001110 01000101 01001110 01010100 01000101
+              01000100 01000101 01010011 01010100 01010010 01010101<br />
+              01001001 01000011 01000001 01001111 00100000 01001101<br />
+              01010101 01001110 01000100 01001001 01000001 01001100
             </div>
             <div class="catalogo-prophecy-phase phase-ascii">
-              41 54 41 51 55 45 // 41 4C 49 45 4E 49 47 45 4E 41<br />
-              49 4D 49 4E 45 4E 54 45 // 47 55 45 52 52 41<br />
-              4D 55 4E 44 49 41 4C // 49 4D 49 4E 45 4E 54 45
+              44 45 53 54 52 55 49 43 41 4F<br />
+              4D 55 4E 44 49 41 4C // 45 4D<br />
+              50 4F 55 43 4F 53 20 44 49 41 53
             </div>
             <div class="catalogo-prophecy-phase phase-code">
-              const pressagio = parse(bits)<br />
-              &nbsp;&nbsp;.toASCII()<br />
-              &nbsp;&nbsp;.toSintaxe({ caos: true, meme: true, aliens: true });<br />
-              if (pressagio.panico &gt; 87) manchete = "ataque alienigena iminente";
+              const probabilidade = IA.calcular({<br />
+              &nbsp;&nbsp;caos: "alto", meme: "viral", aliens: "observando"<br />
+              });<br />
+              if (probabilidade &gt; 0.87) publicar("alerta");
             </div>
             <div class="catalogo-prophecy-phase phase-glyph">
-              colchetes viram sirenes<br />
-              barras viram trilhas de fumaca<br />
-              parenteses abrem asas no ceu<br />
-              e a cidade inteira entra em formacao alegorica
+              probabilidade_final = 98.7%<br />
+              margem_de_absurdo = maxima<br />
+              fonte = "onibus espacial em zigue-zague"<br />
+              status = aguardando assinatura alienigena
             </div>
             <div class="catalogo-prophecy-phase phase-alert">
-              <span class="catalogo-prophecy-alert-tag">manchete emergente</span>
-              <strong>ATAQUE ALIENIGENA IMINENTE</strong>
-              <span>GUERRA MUNDIAL IMINENTE</span>
-              <small>o ceu acende, o ruido cresce e a cidade para para olhar</small>
+              <span class="catalogo-prophecy-alert-tag">meme calculado</span>
+              <strong>DESTRUICAO MUNDIAL EM POUCOS DIAS</strong>
+              <span>se continuar assim</span>
+              <small>assinado: alienigenas perto do Cruzeiro do Sul</small>
             </div>
             <div class="catalogo-prophecy-phase phase-meme">
-              <span class="catalogo-prophecy-alert-tag">revisao final</span>
-              <strong>era so um meme</strong>
-              <span>imagem torta, legenda ruim, susto coletivo</span>
-              <small>reiniciando o terminal para perseguir o proximo exagero</small>
+              <span class="catalogo-prophecy-alert-tag">meme geopolitico do dia</span>
+              <strong>cessar-fogo no papel, drone no ceu, reuniao em looping</strong>
+              <span>enquanto isso, o feed chama de estabilidade e a guerra abre outra aba</span>
+              <small>leitura do momento: diplomacia fragil, drones dominando e paz em buffering</small>
             </div>
           </div>
-          <small>terminal > binario > ascii > sintaxe > alegoria > manchete > meme > reboot</small>
+          <small>terminal > binario > ascii > codigo > probabilidade > meme > reboot</small>
         </div>
 
         <div class="catalogo-night-landscape" aria-hidden="true">
           <span class="catalogo-horizon-glow"></span>
+          <span class="catalogo-sea-band"></span>
+          <span class="catalogo-war-ship ship-left"></span>
+          <span class="catalogo-war-ship ship-center"></span>
+          <span class="catalogo-war-ship ship-right"></span>
           <span class="catalogo-land-ridge ridge-back"></span>
           <span class="catalogo-land-ridge ridge-mid"></span>
           <span class="catalogo-land-ridge ridge-front"></span>
           <span class="catalogo-land-trail"></span>
-          <div class="catalogo-director-stage">
-            <div class="catalogo-pixel-director">
-              <i class="catalogo-director-shadow"></i>
-              <i class="catalogo-director-hair"></i>
-              <i class="catalogo-director-head"></i>
-              <i class="catalogo-director-glasses"></i>
-              <i class="catalogo-director-body"></i>
-              <i class="catalogo-director-arm arm-left">
-                <span class="catalogo-director-hand left-hand"></span>
-              </i>
-              <i class="catalogo-director-arm arm-right">
-                <span class="catalogo-director-hand right-hand"></span>
-                <span class="catalogo-director-laser-burst">
-                  <span class="catalogo-pointer-beam"></span>
-                </span>
-              </i>
-              <i class="catalogo-director-leg leg-left"></i>
-              <i class="catalogo-director-leg leg-right"></i>
-            </div>
-          </div>
           <div class="catalogo-skywatcher watcher-one"></div>
           <div class="catalogo-skywatcher watcher-two"></div>
           <div class="catalogo-battle-line">
+            <span class="catalogo-trench trench-back"></span>
+            <span class="catalogo-trench trench-front"></span>
             <span class="catalogo-war-crater crater-a"></span>
             <span class="catalogo-war-crater crater-b"></span>
             <span class="catalogo-war-crater crater-c"></span>
             <span class="catalogo-war-crater crater-d"></span>
+            <span class="catalogo-war-tank tank-left"></span>
+            <span class="catalogo-war-tank tank-center"></span>
+            <span class="catalogo-war-tank tank-right"></span>
+            <span class="catalogo-field-gun gun-left"></span>
+            <span class="catalogo-field-gun gun-right"></span>
 
-            <div class="catalogo-war-soldier soldier-alpha">
+            <div class="catalogo-war-soldier human-unit runner-unit soldier-alpha">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier soldier-beta">
+            <div class="catalogo-war-soldier robot-unit striker-unit soldier-beta">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier soldier-gamma">
+            <div class="catalogo-war-soldier human-unit soldier-gamma">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier soldier-epsilon">
+            <div class="catalogo-war-soldier robot-unit runner-unit soldier-epsilon">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier soldier-zeta">
+            <div class="catalogo-war-soldier human-unit soldier-zeta">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier soldier-delta">
+            <div class="catalogo-war-soldier robot-unit soldier-delta">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier soldier-eta">
+            <div class="catalogo-war-soldier human-unit soldier-eta">
               <span class="catalogo-war-rifle"></span>
             </div>
+            <div class="catalogo-war-soldier robot-unit striker-unit soldier-theta">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier human-unit soldier-iota">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier robot-unit soldier-kappa">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <div class="catalogo-war-soldier human-unit soldier-lambda">
+              <span class="catalogo-war-rifle"></span>
+            </div>
+            <span class="catalogo-battle-burst burst-a"></span>
+            <span class="catalogo-battle-burst burst-b"></span>
+            <span class="catalogo-battle-burst burst-c"></span>
+            <span class="catalogo-battle-shot shot-a"></span>
+            <span class="catalogo-battle-shot shot-b"></span>
+            <span class="catalogo-battle-shot shot-c"></span>
           </div>
         </div>
 
         <div class="catalogo-visual-copy">
-          <strong>Monitoramento ativo</strong>
-          <span>O aceite libera cookies, cliques e tempo de uso para metricas, testes e ajustes do portal.</span>
+          <strong>Preferencias de navegacao</strong>
+          <span>Seu aceite permite usar cookies e metricas para entender a navegacao e melhorar o portal.</span>
         </div>
       </div>
     `;
@@ -339,25 +397,28 @@
           <div class="catalogo-welcome-copy">
             <div class="catalogo-compact-banner" aria-hidden="true">
               <span class="catalogo-compact-dot"></span>
-              <strong>Cookies, rastreio e dados</strong>
+              <strong>Preferencias e cookies</strong>
             </div>
             ${buildWelcomeCopyMarkup()}
           </div>
         </article>
       `
       : `
-        <article
-          class="catalogo-welcome-card"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="catalogoWelcomeTitle"
-        >
-          ${buildWelcomeVisualMarkup()}
+        <div class="catalogo-welcome-shell">
+          <article
+            class="catalogo-welcome-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="catalogoWelcomeTitle"
+          >
+            ${buildWelcomeVisualMarkup()}
 
-          <div class="catalogo-welcome-copy">
-            ${buildWelcomeCopyMarkup()}
-          </div>
-        </article>
+            <div class="catalogo-welcome-copy">
+              ${buildWelcomeCopyMarkup()}
+            </div>
+          </article>
+          ${buildDirectorMarkup()}
+        </div>
       `;
 
     return modal;

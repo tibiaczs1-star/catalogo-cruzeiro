@@ -60,6 +60,10 @@ const heroInsidersShell = document.querySelector(".hero-insiders-shell");
 const heroTourismSlides = [...document.querySelectorAll("[data-hero-tourism-slide]")];
 const heroTourismTitle = document.querySelector("[data-hero-tourism-title]");
 const heroTourismNote = document.querySelector("[data-hero-tourism-note]");
+const heroDailyNewsCard = document.querySelector("[data-hero-daily-link]");
+const heroDailyNewsCategory = document.querySelector("[data-hero-daily-category]");
+const heroDailyNewsTitle = document.querySelector("[data-hero-daily-title]");
+const heroDailyNewsSummary = document.querySelector("[data-hero-daily-summary]");
 const heroOfficeStatusNodes = [...document.querySelectorAll("[data-hero-office-status]")];
 const heroOfficeBubble = document.querySelector("[data-hero-office-bubble]");
 const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
@@ -68,6 +72,7 @@ const insidersBootScene = document.querySelector("[data-insiders-boot-scene]");
 const insidersArmyScene = document.querySelector("[data-insiders-army]");
 const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
 const tickerLiveGrid = document.querySelector("#ticker-live-grid");
+const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
 const portalWhatsappNumber = "5568992269296";
@@ -92,7 +97,7 @@ const tickerPhrasePool = [
   { label: "Social", text: "Festas, bastidores e repercussão social passam aqui com ritmo leve." },
   { label: "Opinião", text: "Humor e opinião aparecem sem tirar o foco do fato principal." },
   { label: "Fonte", text: "Resumo original com link para a fonte segue firme em cada bloco." },
-  { label: "Pauta", text: "Os assuntos mais quentes entram com contexto, não só com barulho." },
+  { label: "Assunto", text: "Os temas mais quentes entram com contexto, não só com barulho." },
   { label: "Bairro", text: "O que acontece no bairro também merece manchete bem tratada." },
   { label: "Plantão", text: "Plantão leve, visual limpo e leitura rápida para quem está no corre." },
   { label: "Comunidade", text: "Pedidos de correção, avisos de evento e mensagens úteis entram no fluxo." },
@@ -792,11 +797,47 @@ const paintMosaicImageElement = (panelNode, url, position = "center 35%") => {
   panelNode.classList.add("has-photo", "has-real-photo");
 };
 
+const articleImageFocusOverridesBySlug = {
+  "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios": "62% 12%",
+  "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil":
+    "74% 32%",
+  "acre-disputa-campeonato-regional-de-bocha-com-14-paratletas": "78% 43%",
+  "jordao-celebra-34-anos-com-show-de-evoney-fernandes": "40% 38%",
+  "com-presenca-da-familia-mario-sergio-toma-posse-no-tribunal-de-contas-do-acre": "58% 42%",
+  "academia-acreana-de-letras-reune-mulheres-de-poder-em-primeira-roda-de-conversa-de-2026":
+    "30% 58%",
+  "socorro-propoe-jornada-especial-para-professores-em-tratamento-de-saude": "49% 26%",
+  "prefeito-decreta-emergencia-e-anuncia-auxilio-a-familias-atingidas-por-enxurradas": "78% 38%",
+  "traficante-foge-da-policia-e-deixa-esposa-com-bebe-recem-nascido-para-ser-presa": "58% 68%",
+  "fundhacre-recebe-treinamento-da-fiocruz-para-diagnostico-molecular-de-leishmaniose": "78% 30%",
+  "fundhacre-realiza-quinto-transplante-de-tecido-osseo-e-amplia-oferta-de-alta-complexidade-no-acre":
+    "45% 22%",
+  "acre-alcanca-o-segundo-lugar-no-ranking-nacional-de-matriculas-de-ensino-tecnico-articulado-com-o-ensino-medio":
+    "38% 26%",
+  "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
+  "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
+    "58% 16%"
+};
+
 const mosaicImageFocusOverridesBySlug = {
   "ciclista-acreano-chega-no-panama-para-disputa-do-sul-americano-da-juventude": "center 10%",
   "governadora-mailza-assis-empossa-novo-delegado-geral-e-anuncia-concurso-publico-da-policia-civil":
     "40% 18%",
   "bolsa-interrompe-sequencia-de-11-altas-e-cai-0-46": "center 46%"
+};
+
+const resolveArticleImageFocus = (article = {}, fallback = "center") => {
+  const manualFocus = String(article.imageFocus || "").trim();
+  if (manualFocus) {
+    return manualFocus;
+  }
+
+  const slug = String(article.slug || "").trim();
+  if (slug && articleImageFocusOverridesBySlug[slug]) {
+    return articleImageFocusOverridesBySlug[slug];
+  }
+
+  return fallback;
 };
 
 const mosaicPersonFocusPattern =
@@ -827,9 +868,9 @@ const getMosaicStorySignals = (article = {}) => {
 };
 
 const inferMosaicImageFocus = (article = {}, panelNode) => {
-  const manualFocus = String(article.imageFocus || "").trim();
-  if (manualFocus) {
-    return manualFocus;
+  const resolvedFocus = resolveArticleImageFocus(article, "");
+  if (resolvedFocus) {
+    return resolvedFocus;
   }
 
   const slug = String(article.slug || "").trim();
@@ -899,7 +940,7 @@ const applyThumbImage = (thumbNode, article) => {
     paintSurfaceImage(
       thumbNode,
       safeUrl,
-      article?.imageFocus || "center",
+      resolveArticleImageFocus(article, "center"),
       article?.imageFit || "cover"
     );
     thumbNode.dataset.imageUrl = safeUrl;
@@ -2662,8 +2703,8 @@ const heroTourismDailyPoolState = {
   items: []
 };
 
-const heroTourismDailyTarget = 50;
-const heroTourismRotationIntervalMs = 4200;
+const heroTourismDailyTarget = 10;
+const heroTourismRotationIntervalMs = 9000;
 const heroTourismDailyTimeZone = "America/Rio_Branco";
 const heroTourismLocalPattern =
   /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima|rodrigues alves)\b/i;
@@ -2677,6 +2718,20 @@ const heroTourismFocusPositions = [
   "center 46%",
   "center 34%"
 ];
+const heroDailyThemeOrder = [
+  "politica",
+  "prefeitura",
+  "policia",
+  "saude",
+  "educacao",
+  "esporte",
+  "negocios",
+  "cultura",
+  "social",
+  "cotidiano"
+];
+const heroDailyPersonFocusPattern =
+  /\b(presidente|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|vereador|vereadora|delegado|delegada|secretario|secretaria|ministro|ministra|professor|professora|aluno|aluna|estudante|atleta|jogador|jogadora|cantor|cantora|artista|influencer|criador|criadora|empresario|empresaria|medico|medica|familia|mulher|homem|pessoa|equipe|time|colegio|posse|reuniao|entrevista)\b/;
 
 const getHeroTourismDayKey = () => {
   try {
@@ -2712,11 +2767,32 @@ const buildDailyOrderedHeroItems = (items = [], seedKey = "") =>
     .sort((left, right) => left.rank - right.rank)
     .map((entry) => entry.item);
 
+const getHeroDailyArticleFocus = (article = {}) => {
+  const manualFocus = resolveArticleImageFocus(article, "").trim();
+  if (manualFocus) {
+    return manualFocus;
+  }
+
+  const haystack = normalizeText(
+    [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+  );
+
+  if (heroDailyPersonFocusPattern.test(haystack)) {
+    return "center 24%";
+  }
+
+  return "center 42%";
+};
+
+const buildHeroArticleHref = (article = {}) =>
+  article.slug ? `./noticia.html?slug=${encodeURIComponent(article.slug)}` : article.sourceUrl || "#radar";
+
 const buildHeroTourismRuntimePool = () => {
   const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
   const seenImages = new Set();
-
-  return articles
+  const seenThemes = new Set();
+  const todayKey = getHeroTourismDayKey();
+  const normalizedArticles = articles
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => {
       const haystack = [
@@ -2729,28 +2805,54 @@ const buildHeroTourismRuntimePool = () => {
         .filter(Boolean)
         .join(" ");
       return heroTourismLocalPattern.test(haystack);
+    });
+  const todaysArticles = normalizedArticles.filter(
+    (article) => getArticleDateKey(article) === todayKey
+  );
+  const sourceArticles = todaysArticles.length >= 3 ? todaysArticles : normalizedArticles;
+
+  return sourceArticles
+    .filter((article) => {
+      const themeKey = article.categoryKey || normalizeText(article.category);
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      const imageKey = String(imageUrl || "").trim();
+      if (!themeKey || seenThemes.has(themeKey) || !imageKey || seenImages.has(imageKey)) {
+        return false;
+      }
+
+      seenThemes.add(themeKey);
+      seenImages.add(imageKey);
+      return true;
     })
     .map((article) => {
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
-      return imageUrl
-        ? {
-            title: article.title || "Cena local do dia",
-            note: `${article.category || "Cotidiano"} • ${article.sourceName || "Fonte local"}`,
-            proxyUrl: imageUrl,
-            fallbackUrl: imageUrl,
-            focusPosition: "center 42%"
-          }
-        : null;
+      return {
+        title: article.category || "Panorama local",
+        note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte local", 46),
+        proxyUrl: imageUrl,
+        fallbackUrl: imageUrl,
+        focusPosition: getHeroDailyArticleFocus(article),
+        articleTitle: article.title || "Notícia em destaque",
+        articleCategory: article.category || "Destaque",
+        articleSummary: truncateCopy(article.lede || article.summary || "Resumo da notícia em destaque.", 168),
+        articleHref: buildHeroArticleHref(article),
+        themeKey: article.categoryKey || normalizeText(article.category),
+        sourceName: article.sourceName || "Fonte local"
+      };
+    })
+    .sort((left, right) => {
+      const leftIndex = heroDailyThemeOrder.indexOf(left.themeKey);
+      const rightIndex = heroDailyThemeOrder.indexOf(right.themeKey);
+      return (leftIndex === -1 ? 99 : leftIndex) - (rightIndex === -1 ? 99 : rightIndex);
     })
     .filter((photo) => {
       const imageKey = String(photo?.proxyUrl || "").trim();
       if (!imageKey || seenImages.has(imageKey)) {
-        return false;
+        return true;
       }
-      seenImages.add(imageKey);
       return true;
     })
-    .slice(0, 24);
+    .slice(0, heroTourismDailyTarget);
 };
 
 const buildHeroTourismDailyPool = () => {
@@ -2762,7 +2864,6 @@ const buildHeroTourismDailyPool = () => {
   const merged = [];
   const seenKeys = new Set();
   const runtimePool = buildDailyOrderedHeroItems(buildHeroTourismRuntimePool(), `${dayKey}:runtime`);
-  const staticPool = buildDailyOrderedHeroItems(heroTourismPhotoPool, `${dayKey}:static`);
 
   const pushUniquePhoto = (photo = {}) => {
     const sourceKey = String(photo.proxyUrl || photo.fallbackUrl || photo.file || photo.title || "").trim();
@@ -2780,29 +2881,6 @@ const buildHeroTourismDailyPool = () => {
   };
 
   runtimePool.forEach((photo) => pushUniquePhoto(photo));
-  staticPool.forEach((photo) =>
-    pushUniquePhoto({
-      ...photo,
-      proxyUrl: buildCommonsTourismPhotoUrl(photo.file, 1920),
-      fallbackUrl: buildCommonsTourismFallbackUrl(photo.file)
-    })
-  );
-
-  let variantCursor = 0;
-  while (merged.length < heroTourismDailyTarget && staticPool.length) {
-    const basePhoto = staticPool[variantCursor % staticPool.length];
-    const focusIndex = variantCursor % heroTourismFocusPositions.length;
-    const variantNumber = Math.floor(variantCursor / staticPool.length) + 2;
-
-    merged.push({
-      ...basePhoto,
-      proxyUrl: buildCommonsTourismPhotoUrl(basePhoto.file, 1920),
-      fallbackUrl: buildCommonsTourismFallbackUrl(basePhoto.file),
-      focusPosition: heroTourismFocusPositions[(merged.length + focusIndex) % heroTourismFocusPositions.length],
-      note: `${basePhoto.note} • leitura ${variantNumber}`
-    });
-    variantCursor += 1;
-  }
 
   heroTourismDailyPoolState.dayKey = dayKey;
   heroTourismDailyPoolState.items = merged.slice(0, heroTourismDailyTarget);
@@ -2860,11 +2938,28 @@ const setHeroTourismMeta = (photo) => {
   }
 
   if (heroTourismTitle) {
-    heroTourismTitle.textContent = photo.title;
+    heroTourismTitle.textContent = photo.title || photo.articleCategory || "Panorama local";
   }
 
   if (heroTourismNote) {
-    heroTourismNote.textContent = photo.note;
+    heroTourismNote.textContent = photo.note || photo.sourceName || "";
+  }
+
+  if (heroDailyNewsCard) {
+    heroDailyNewsCard.href = photo.articleHref || "#radar";
+  }
+
+  if (heroDailyNewsCategory) {
+    heroDailyNewsCategory.textContent = photo.articleCategory || "Destaque do dia";
+  }
+
+  if (heroDailyNewsTitle) {
+    heroDailyNewsTitle.textContent = photo.articleTitle || photo.title || "Notícia em destaque";
+  }
+
+  if (heroDailyNewsSummary) {
+    heroDailyNewsSummary.textContent =
+      photo.articleSummary || photo.note || "Resumo da notícia principal selecionada por tema.";
   }
 };
 
@@ -3307,195 +3402,139 @@ const getInsidersSquadBlueprint = (isCompactViewport = false) => {
   if (isCompactViewport) {
     return [
       {
-        x: 17,
-        y: 58,
-        scale: 1.02,
-        tilt: -12,
-        delay: -0.4,
-        bob: 10.4,
+        x: 21,
+        y: 60,
+        scale: 1.03,
+        tilt: -4,
+        delay: 0,
+        bob: 0,
         palette: "crimson",
-        pose: "flank",
-        patrolX: 18,
-        patrolY: 10,
-        parallax: 14,
-        phase: 0.18,
-        speed: 1.72,
-        step: 1.12,
-        eyeFire: "right",
-        beamAngle: 18,
-        beamLength: 154,
-        beamPulse: 0.44
+        pose: "guard",
+        patrolX: 0,
+        patrolY: 0,
+        parallax: 0,
+        phase: 0,
+        speed: 0,
+        step: 1,
+        eyeFire: "none",
+        beamAngle: 0,
+        beamLength: 0,
+        beamPulse: 0,
+        static: true
       },
       {
         x: 50,
-        y: 38,
-        scale: 1.2,
-        tilt: -1,
-        delay: -1.1,
-        bob: 11.6,
+        y: 42,
+        scale: 1.18,
+        tilt: 0,
+        delay: 0,
+        bob: 0,
         palette: "gold",
         pose: "command",
-        patrolX: 20,
-        patrolY: 12,
-        parallax: 16,
-        phase: 1.42,
-        speed: 1.9,
-        step: 1.02,
-        eyeFire: "split",
-        beamAngle: 15,
-        beamLength: 178,
-        beamPulse: 0.32
+        patrolX: 0,
+        patrolY: 0,
+        parallax: 0,
+        phase: 0,
+        speed: 0,
+        step: 1,
+        eyeFire: "none",
+        beamAngle: 0,
+        beamLength: 0,
+        beamPulse: 0,
+        static: true
       },
       {
-        x: 83,
-        y: 58,
-        scale: 1.02,
-        tilt: 12,
-        delay: -0.8,
-        bob: 10.4,
+        x: 79,
+        y: 60,
+        scale: 1.03,
+        tilt: 4,
+        delay: 0,
+        bob: 0,
         palette: "azure",
-        pose: "breach",
-        patrolX: 18,
-        patrolY: 10,
-        parallax: 14,
-        phase: 2.72,
-        speed: 1.78,
-        step: 1.1,
-        eyeFire: "left",
-        beamAngle: 18,
-        beamLength: 154,
-        beamPulse: 0.48
+        pose: "guard",
+        patrolX: 0,
+        patrolY: 0,
+        parallax: 0,
+        phase: 0,
+        speed: 0,
+        step: 1,
+        eyeFire: "none",
+        beamAngle: 0,
+        beamLength: 0,
+        beamPulse: 0,
+        static: true
       }
     ];
   }
 
   return [
     {
-      x: 17.5,
-      y: 56,
-      scale: 1.14,
-      tilt: -12,
-      delay: -0.4,
-      bob: 11.2,
+      x: 23,
+      y: 60,
+      scale: 1.08,
+      tilt: -4,
+      delay: 0,
+      bob: 0,
       palette: "crimson",
-      pose: "flank",
-      patrolX: 24,
-      patrolY: 13,
-      parallax: 18,
-      phase: 0.12,
-      speed: 1.82,
-      step: 1.08,
-      eyeFire: "right",
-      beamAngle: 16,
-      beamLength: 218,
-      beamPulse: 0.44
+      pose: "guard",
+      patrolX: 0,
+      patrolY: 0,
+      parallax: 0,
+      phase: 0,
+      speed: 0,
+      step: 1,
+      eyeFire: "none",
+      beamAngle: 0,
+      beamLength: 0,
+      beamPulse: 0,
+      static: true
     },
     {
       x: 50,
-      y: 34,
-      scale: 1.42,
-      tilt: -2,
-      delay: -1.05,
-      bob: 12.8,
+      y: 40,
+      scale: 1.24,
+      tilt: 0,
+      delay: 0,
+      bob: 0,
       palette: "gold",
       pose: "command",
-      patrolX: 28,
-      patrolY: 15,
-      parallax: 22,
-      phase: 1.48,
-      speed: 2.02,
-      step: 0.96,
-      eyeFire: "split",
-      beamAngle: 14,
-      beamLength: 268,
-      beamPulse: 0.3
+      patrolX: 0,
+      patrolY: 0,
+      parallax: 0,
+      phase: 0,
+      speed: 0,
+      step: 1,
+      eyeFire: "none",
+      beamAngle: 0,
+      beamLength: 0,
+      beamPulse: 0,
+      static: true
     },
     {
-      x: 82.5,
-      y: 56,
-      scale: 1.14,
-      tilt: 12,
-      delay: -0.7,
-      bob: 11.2,
-      palette: "azure",
-      pose: "breach",
-      patrolX: 24,
-      patrolY: 13,
-      parallax: 18,
-      phase: 2.82,
-      speed: 1.9,
-      step: 1.06,
-      eyeFire: "left",
-      beamAngle: 16,
-      beamLength: 218,
-      beamPulse: 0.48
-    }
-  ];
-};
-
-const getInsidersThreatBlueprint = (isCompactViewport = false) => {
-  if (isCompactViewport) {
-    return [
-      {
-        x: 17,
-        y: 22,
-        scale: 0.88,
-        label: "FAKE NEWS",
-        detail: "ruido armado",
-        tone: "ember",
-        drift: 1.2
-      },
-      {
-        x: 50,
-        y: 17,
-        scale: 1.02,
-        label: "DEEPFAKE",
-        detail: "imagem forjada",
-        tone: "gold",
-        drift: 1.4
-      },
-      {
-        x: 83,
-        y: 23,
-        scale: 0.88,
-        label: "DADOS TORCIDOS",
-        detail: "narrativa suja",
-        tone: "azure",
-        drift: 1.26
-      }
-    ];
-  }
-
-  return [
-    {
-      x: 18,
-      y: 20,
-      scale: 0.94,
-      label: "FAKE NEWS",
-      detail: "ruido armado",
-      tone: "ember",
-      drift: 1.16
-    },
-    {
-      x: 50,
-      y: 14.5,
+      x: 77,
+      y: 60,
       scale: 1.08,
-      label: "DEEPFAKE",
-      detail: "imagem forjada",
-      tone: "gold",
-      drift: 1.36
-    },
-    {
-      x: 82,
-      y: 20,
-      scale: 0.94,
-      label: "DADOS TORCIDOS",
-      detail: "narrativa suja",
-      tone: "azure",
-      drift: 1.22
+      tilt: 4,
+      delay: 0,
+      bob: 0,
+      palette: "azure",
+      pose: "guard",
+      patrolX: 0,
+      patrolY: 0,
+      parallax: 0,
+      phase: 0,
+      speed: 0,
+      step: 1,
+      eyeFire: "none",
+      beamAngle: 0,
+      beamLength: 0,
+      beamPulse: 0,
+      static: true
     }
   ];
 };
+
+const getInsidersThreatBlueprint = () => [];
 
 const createInsidersArmyRobot = (config = {}) => {
   const robot = document.createElement("article");
@@ -3503,15 +3542,30 @@ const createInsidersArmyRobot = (config = {}) => {
   const partClassNames = [
     "robot-shadow",
     "robot-crest",
+    "robot-horn horn-left",
+    "robot-horn horn-right",
     "robot-head",
+    "robot-neck",
+    "robot-faceplate",
     "robot-eye-band",
+    "robot-collar",
+    "robot-backpack",
+    "robot-backpack-fin fin-left",
+    "robot-backpack-fin fin-right",
     "robot-core",
+    "robot-waist",
     "robot-shoulder shoulder-left",
     "robot-shoulder shoulder-right",
     "robot-arm arm-left",
     "robot-arm arm-right",
+    "robot-forearm-shield shield-left",
+    "robot-cannon cannon-right",
+    "robot-thigh thigh-left",
+    "robot-thigh thigh-right",
     "robot-leg leg-left",
-    "robot-leg leg-right"
+    "robot-leg leg-right",
+    "robot-knee knee-left",
+    "robot-knee knee-right"
   ];
   const x = Number(config.x || 50);
   const y = Number(config.y || 58);
@@ -3531,6 +3585,7 @@ const createInsidersArmyRobot = (config = {}) => {
   const beamAngle = Number(config.beamAngle || 12);
   const beamLength = Number(config.beamLength || 180);
   const beamPulse = Number(config.beamPulse || 0.4);
+  const isStatic = config.static === true;
 
   robot.className = `insider-robot robot-squad palette-${palette} pose-${pose}`;
   robot.style.setProperty("--army-x", `${x.toFixed(2)}%`);
@@ -3551,6 +3606,7 @@ const createInsidersArmyRobot = (config = {}) => {
   robot.dataset.armyPhase = phase.toFixed(2);
   robot.dataset.armySpeed = speed.toFixed(2);
   robot.dataset.eyeFire = eyeFire;
+  robot.dataset.armyStatic = isStatic ? "true" : "false";
 
   partClassNames.forEach((className) => {
     const part = document.createElement("span");
@@ -3575,7 +3631,9 @@ const createInsidersArmyRobot = (config = {}) => {
 const createInsidersArmyThreat = (config = {}) => {
   const threat = document.createElement("article");
   const core = document.createElement("div");
-  const chip = document.createElement("span");
+  const silhouette = document.createElement("div");
+  const trench = document.createElement("div");
+  const decal = document.createElement("span");
   const title = document.createElement("strong");
   const detail = document.createElement("small");
   const x = Number(config.x || 50);
@@ -3583,20 +3641,23 @@ const createInsidersArmyThreat = (config = {}) => {
   const scale = Number(config.scale || 1);
   const drift = Number(config.drift || 1.2);
   const tone = String(config.tone || "ember").trim() || "ember";
+  const type = String(config.type || "bunker").trim() || "bunker";
 
-  threat.className = `insiders-army-threat tone-${tone}`;
+  threat.className = `insiders-army-threat tone-${tone} type-${type}`;
   threat.style.setProperty("--threat-x", `${x.toFixed(2)}%`);
   threat.style.setProperty("--threat-y", `${y.toFixed(2)}%`);
   threat.style.setProperty("--threat-scale", scale.toFixed(3));
   threat.style.setProperty("--threat-drift", `${drift.toFixed(2)}s`);
 
   core.className = "insiders-army-threat-core";
-  chip.className = "insiders-army-threat-chip";
-  chip.textContent = "alvo hostil";
+  silhouette.className = "insiders-army-threat-silhouette";
+  trench.className = "insiders-army-threat-trench";
+  decal.className = "insiders-army-threat-chip";
+  decal.textContent = "guerra contra";
   title.textContent = String(config.label || "FAKE NEWS").trim();
   detail.textContent = String(config.detail || "ruido armado").trim();
 
-  core.append(chip, title, detail);
+  core.append(silhouette, trench, decal, title, detail);
   threat.appendChild(core);
   return threat;
 };
@@ -3633,8 +3694,18 @@ const bindInsidersArmyMotion = (scene, robots = []) => {
   };
 
   scene.dataset.armyMotionBound = "true";
-  scene.dataset.armyMotion = prefersReducedMotion ? "static" : "interactive";
+  const allStatic = robotList.every((robot) => robot.dataset.armyStatic === "true");
+  scene.dataset.armyMotion = prefersReducedMotion || allStatic ? "static" : "interactive";
   setSceneFocus(50, 20);
+
+  if (allStatic) {
+    robotList.forEach((robot) => {
+      robot.style.setProperty("--army-drift-x", "0px");
+      robot.style.setProperty("--army-drift-y", "0px");
+      robot.style.setProperty("--army-tilt-extra", "0deg");
+    });
+    return;
+  }
 
   scene.addEventListener("pointermove", (event) => {
     if (!motionMediaQuery.matches) {
@@ -3756,6 +3827,319 @@ const escapeHtml = (value) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+
+const trendingInfluencerBuzzPool = [
+  {
+    name: "Lia Juruá",
+    handle: "@liajurua • criadora local",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=420&q=80",
+    kicker: "a fala que dividiu a timeline",
+    title:
+      "Cruzeiro do Sul não precisa só viralizar bonito. Precisa ter banheiro, sinalização e rota segura antes de vender turismo.",
+    summary:
+      "A opinião pegou forte porque cutucou o hype da vista panorâmica: parte do público concordou que falta estrutura, enquanto outra parte achou que a crítica diminui o potencial turístico da cidade.",
+    contextLabel: "Por que polemizou",
+    contextTitle: "turismo x estrutura",
+    contextText: "O post colocou influenciadores, empresários e moradores no mesmo debate.",
+    counterLabel: "Resumo do contraponto",
+    counterTitle: "divulgar sem romantizar",
+    counterText: "A crítica não nega o atrativo, mas cobra contexto antes do viral.",
+    meter: 64,
+    reaction: "64% dos comentários monitorados apoiaram a cobrança por estrutura.",
+    likes: "12.5K",
+    comments: "2.3K",
+    shares: "5.8K"
+  },
+  {
+    name: "Nando do Centro",
+    handle: "@nandocentro • bastidores da cidade",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=420&q=80",
+    kicker: "o vídeo que virou debate",
+    title:
+      "Evento grande também precisa combinar fila, estacionamento, internet e pagamento funcionando bem.",
+    summary:
+      "O comentário viralizou depois de um fim de semana movimentado. Comerciantes defenderam a crítica, enquanto produtores culturais lembraram que evento também precisa de patrocínio e apoio público.",
+    contextLabel: "Ponto quente",
+    contextTitle: "evento x operação",
+    contextText: "A discussão saiu do entretenimento e entrou em logística, segurança e venda local.",
+    counterLabel: "Outro lado",
+    counterTitle: "festa também gera renda",
+    counterText: "A defesa dos eventos destacou empregos temporários e movimento no comércio.",
+    meter: 58,
+    reaction: "58% dos comentários pediram planejamento melhor antes de ampliar a agenda.",
+    likes: "9.8K",
+    comments: "1.9K",
+    shares: "3.7K"
+  },
+  {
+    name: "Mara Pixel",
+    handle: "@marapixel • opinião e cotidiano",
+    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1200&q=80",
+    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=420&q=80",
+    kicker: "a thread que não parou",
+    title:
+      "A cidade está cheia de gente criando coisa boa, mas ainda trata internet como enfeite e não como infraestrutura.",
+    summary:
+      "A sequência de posts comparou atendimento, cardápio, localização, agenda e presença digital de negócios locais. O debate cresceu porque muita gente se reconheceu na dificuldade de achar informação básica.",
+    contextLabel: "Por que pegou",
+    contextTitle: "negócio x presença digital",
+    contextText: "A fala conectou loja, serviço, turismo e atendimento no mesmo problema.",
+    counterLabel: "Contraponto",
+    counterTitle: "desafio de operação",
+    counterText: "Pequenos empreendedores lembraram que falta tempo, equipe e orientação.",
+    meter: 71,
+    reaction: "71% dos comentários defenderam presença digital mínima para serviços locais.",
+    likes: "15.2K",
+    comments: "3.1K",
+    shares: "6.4K"
+  },
+  {
+    name: "Theo Acreano",
+    handle: "@theoacreano • humor e opinião",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=420&q=80",
+    kicker: "meme com fundo sério",
+    title:
+      "Se a fofoca chega mais rápido que o aviso oficial, o problema não é só a fofoca. É o canal oficial dormindo.",
+    summary:
+      "A frase começou como meme, mas virou cobrança por comunicação pública mais rápida. O público apontou que boato ocupa o espaço deixado por informação atrasada.",
+    contextLabel: "Faísca",
+    contextTitle: "boato x aviso oficial",
+    contextText: "O humor abriu uma conversa sobre transparência, velocidade e checagem.",
+    counterLabel: "Cuidado",
+    counterTitle: "nem tudo é simples",
+    counterText: "Órgãos públicos alegam que confirmação exige tempo e responsabilidade.",
+    meter: 76,
+    reaction: "76% dos comentários pediram canais oficiais mais diretos.",
+    likes: "18.9K",
+    comments: "4.4K",
+    shares: "8.1K"
+  },
+  {
+    name: "Bia dos Bairros",
+    handle: "@biadosbairros • comunidade",
+    image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=1200&q=80",
+    avatar: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=420&q=80",
+    kicker: "cobrança de bairro",
+    title:
+      "Quando a rua alaga, o print viraliza. Mas quem mora ali não precisa de viral: precisa de resposta.",
+    summary:
+      "O post reuniu vídeos de moradores e reacendeu a cobrança por manutenção, drenagem e retorno público. A repercussão cresceu porque misturou denúncia, rotina e humor local.",
+    contextLabel: "Tema sensível",
+    contextTitle: "bairro x resposta",
+    contextText: "Moradores transformaram uma queixa repetida em pressão pública organizada.",
+    counterLabel: "Outro lado",
+    counterTitle: "obra tem etapa",
+    counterText: "Comentários lembraram que solução urbana depende de projeto e orçamento.",
+    meter: 69,
+    reaction: "69% dos comentários cobraram calendário público de manutenção.",
+    likes: "10.7K",
+    comments: "2.8K",
+    shares: "4.9K"
+  },
+  {
+    name: "Rafa Castanhal",
+    handle: "@rafacastanhal • cultura e rolê",
+    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
+    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=420&q=80",
+    kicker: "opinião de agenda",
+    title:
+      "A cena cultural local não precisa esperar permissão para existir. Precisa de calendário, palco e divulgação decente.",
+    summary:
+      "A fala mexeu com artistas, produtores e público. Muita gente concordou que a cidade tem talento, mas perde público quando eventos saem sem divulgação clara.",
+    contextLabel: "Debate",
+    contextTitle: "cultura x visibilidade",
+    contextText: "Criadores defenderam mais calendário público e menos improviso na divulgação.",
+    counterLabel: "Contraponto",
+    counterTitle: "falta recurso",
+    counterText: "Produtores apontaram custo alto e dificuldade de apoio contínuo.",
+    meter: 62,
+    reaction: "62% dos comentários defenderam uma agenda cultural fixa.",
+    likes: "8.6K",
+    comments: "1.6K",
+    shares: "3.2K"
+  }
+];
+
+const trendingControversyBuzzPool = [
+  {
+    badge: "Polêmica",
+    tone: "hot",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/V%C3%ADa_Cruzeiro_do_Sul_-_Acre.jpg",
+    title: "Mobilidade volta a dividir opiniões",
+    summary: "Ciclovias, estacionamento e rotas de ônibus viraram tema de comentários cruzados entre moradores, comércio e poder público.",
+    likes: "4.3K",
+    comments: "2.1K"
+  },
+  {
+    badge: "Influencers",
+    tone: "viral",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3800383521).jpg",
+    title: "Criadores locais puxam agenda de fim de semana",
+    summary: "Stories, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
+    likes: "7.4K",
+    comments: "980"
+  },
+  {
+    badge: "Comentando",
+    tone: "trending",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3800389269).jpg",
+    title: "Turismo bonito, estrutura cobrada",
+    summary: "Fotos continuam viralizando, mas a conversa do dia cobra placas, banheiros, segurança e acesso mais claro.",
+    likes: "6.2K",
+    comments: "1.7K"
+  },
+  {
+    badge: "Rede quente",
+    tone: "viral",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Acai_bowl_(43110767814).jpg",
+    title: "Produto local vira disputa de fila",
+    summary: "Lanchonetes e pequenos negócios entraram na conversa depois que um sabor regional esgotou rápido.",
+    likes: "5.9K",
+    comments: "740"
+  },
+  {
+    badge: "Bastidor",
+    tone: "hot",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3801204086).jpg",
+    title: "Comunicação oficial demora e meme ocupa espaço",
+    summary: "A timeline cobrou respostas mais rápidas quando boatos circularam antes dos canais formais.",
+    likes: "9.1K",
+    comments: "2.6K"
+  },
+  {
+    badge: "Destaque",
+    tone: "trending",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=80",
+    title: "Nome local entra no radar de marcas",
+    summary: "Jovens criadores e modelos da região aparecem mais em campanhas, vídeos e collabs comerciais.",
+    likes: "11.4K",
+    comments: "1.8K"
+  },
+  {
+    badge: "Cultura",
+    tone: "viral",
+    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1100&q=80",
+    title: "Agenda cultural pede calendário único",
+    summary: "Artistas e público cobram um lugar simples para acompanhar shows, oficinas, teatro e eventos comunitários.",
+    likes: "3.8K",
+    comments: "690"
+  },
+  {
+    badge: "Serviço",
+    tone: "hot",
+    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3800381599).jpg",
+    title: "Bairros cobram retorno sobre manutenção",
+    summary: "Posts de rua, iluminação e drenagem ganharam força porque moradores querem prazo, não só protocolo.",
+    likes: "8.8K",
+    comments: "2.4K"
+  }
+];
+
+const getDailyIndexSeed = (key = getLocalDateKey()) =>
+  String(key)
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+const pickDailyItems = (items = [], count = 1, salt = 0) => {
+  if (!items.length || count <= 0) {
+    return [];
+  }
+
+  const seed = getDailyIndexSeed() + salt;
+  const start = seed % items.length;
+  const picked = [];
+
+  for (let index = 0; index < Math.min(count, items.length); index += 1) {
+    picked.push(items[(start + index) % items.length]);
+  }
+
+  return picked;
+};
+
+const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => `
+  <article class="trending-card main influencer-buzz-card daily-buzz-card reveal ${index ? "delay-1" : ""}">
+    <span class="trend-badge hot">opinião do dia ${index + 1}</span>
+    <div
+      class="trend-photo influencer-hero-photo"
+      style="--trend-image:url('${escapeHtml(item.image)}')"
+    >
+      <div class="influencer-profile">
+        <span class="influencer-avatar" style="--avatar-image:url('${escapeHtml(item.avatar || item.image)}')"></span>
+        <div>
+          <strong>${escapeHtml(item.name)}</strong>
+          <small>${escapeHtml(item.handle)}</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="influencer-buzz-copy">
+      <p class="buzz-kicker">${escapeHtml(item.kicker)}</p>
+      <h3>${escapeHtml(item.title)}</h3>
+      <p>${escapeHtml(item.summary)}</p>
+    </div>
+
+    <div class="buzz-context-grid">
+      <div>
+        <span>${escapeHtml(item.contextLabel)}</span>
+        <strong>${escapeHtml(item.contextTitle)}</strong>
+        <p>${escapeHtml(item.contextText)}</p>
+      </div>
+      <div>
+        <span>${escapeHtml(item.counterLabel)}</span>
+        <strong>${escapeHtml(item.counterTitle)}</strong>
+        <p>${escapeHtml(item.counterText)}</p>
+      </div>
+    </div>
+
+    <div class="buzz-reaction-box" aria-label="Reações à opinião do dia">
+      <span>Reação do dia</span>
+      <div class="reaction-meter">
+        <i style="width: ${Math.max(8, Math.min(100, Number(item.meter || 50)))}%"></i>
+      </div>
+      <p>${escapeHtml(item.reaction)}</p>
+    </div>
+
+    <div class="engagement">
+      <span>${escapeHtml(item.likes)} curtidas</span>
+      <span>${escapeHtml(item.comments)} comentários</span>
+      <span>${escapeHtml(item.shares)} compartilhamentos</span>
+    </div>
+  </article>
+`;
+
+const buildDailyControversyBuzzCard = (item = {}, index = 0) => `
+  <article class="trending-card daily-polemica-card reveal ${index ? "delay-2" : "delay-1"}">
+    <span class="trend-badge ${escapeHtml(item.tone || "trending")}">${escapeHtml(item.badge || "Buzz")}</span>
+    <div
+      class="trend-photo"
+      style="--trend-image:url('${escapeHtml(item.image)}')"
+    ></div>
+    <h3>${escapeHtml(item.title)}</h3>
+    <p>${escapeHtml(item.summary)}</p>
+    <div class="engagement">
+      <span>${escapeHtml(item.likes)} curtidas</span>
+      <span>${escapeHtml(item.comments)} comentários</span>
+    </div>
+  </article>
+`;
+
+const renderDailyTrendingBuzz = () => {
+  if (!trendingBuzzGrid) {
+    return;
+  }
+
+  const influencers = pickDailyItems(trendingInfluencerBuzzPool, 3, 17);
+  const controversies = pickDailyItems(trendingControversyBuzzPool, 3, 53);
+
+  trendingBuzzGrid.classList.add("is-daily-buzz");
+  trendingBuzzGrid.innerHTML = [
+    ...influencers.map(buildDailyInfluencerBuzzCard),
+    ...controversies.map(buildDailyControversyBuzzCard)
+  ].join("");
+};
 
 const setFeedbackState = (node, message, tone = "") => {
   if (!node) {
@@ -4775,7 +5159,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
 
     modal.querySelector("#electionVoteTitle").textContent = `Votar em ${candidate.name}`;
     modal.querySelector("[data-election-vote-lead], #electionVoteLead").textContent =
-      `Seu voto para ${office.label} pede cidade obrigatoria. Nome, partido e observacoes sao opcionais e ajudam a montar o calor eleitoral interno.`;
+      `Seu voto para ${office.label} pede cidade obrigatoria. Nome, partido e observacoes sao opcionais e ajudam a mapear sinais eleitorais.`;
 
     if (form) {
       const cityInput = form.elements.city || form.querySelector("[name='city']");
@@ -5041,7 +5425,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
     });
 
     if (electionDisclaimer) {
-      electionDisclaimer.innerHTML = `<strong>Aviso:</strong> Esta e uma enquete informal de leitores, sem amostragem cientifica e sem valor de pesquisa registrada. A cidade e obrigatoria no voto, e as observacoes alimentam um calor eleitoral interno com sinais positivos, negativos e de reeleicao. ${escapeHtml(window.ELECTIONS_DATA.sourceNote || "")}`;
+      electionDisclaimer.innerHTML = `<strong>Aviso:</strong> Esta e uma enquete informal de leitores, sem amostragem cientifica e sem valor de pesquisa registrada. A cidade e obrigatoria no voto, e as observacoes ajudam a mapear sinais positivos, negativos e de reeleicao. ${escapeHtml(window.ELECTIONS_DATA.sourceNote || "")}`;
     }
 
     renderElectionHeat(office);
@@ -5425,7 +5809,7 @@ const renderLiveFeedFilters = () => {
     button.className = `feed-filter-chip${option.key === liveFeedState.activeCategory ? " is-active" : ""}`;
     button.dataset.category = option.key;
     button.textContent = option.label;
-    button.setAttribute("aria-label", `${option.label}: ${option.count} pauta${option.count === 1 ? "" : "s"}`);
+    button.setAttribute("aria-label", `${option.label}: ${option.count} notícia${option.count === 1 ? "" : "s"}`);
     button.addEventListener("click", () => {
       if (liveFeedState.activeCategory === option.key) {
         return;
@@ -5497,11 +5881,11 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
 
   if (liveFeedCountLabel) {
     liveFeedCountLabel.textContent =
-      activeContext.length > 0 ? "pautas no recorte atual" : "pautas verificadas na base";
+      activeContext.length > 0 ? "notícias no recorte atual" : "notícias verificadas na base";
   }
 
   if (liveFeedTotal) {
-    liveFeedTotal.textContent = `Base local: ${totalItems} pautas verificadas`;
+    liveFeedTotal.textContent = `Base local: ${totalItems} notícias verificadas`;
   }
 
   if (liveFeedUpdated) {
@@ -5528,8 +5912,8 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   if (filtered.length === 0) {
     liveFeedStatus.textContent =
       activeContext.length > 0
-        ? `Nenhuma pauta bateu com ${activeContext.join(" e ")}. Limpe o filtro ou tente outro termo.`
-        : "A base está carregada, mas nenhuma pauta entrou no recorte atual.";
+        ? `Nenhuma notícia bateu com ${activeContext.join(" e ")}. Limpe o filtro ou tente outro termo.`
+        : "A base está pronta, mas nenhuma notícia entrou no recorte atual.";
     return;
   }
 
@@ -5537,18 +5921,18 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
     const loadedText =
       visibleSlice.length < filtered.length
         ? ` Mostrando ${visibleSlice.length} de ${filtered.length} agora.`
-        : ` ${filtered.length} pauta${filtered.length === 1 ? "" : "s"} encontrada${filtered.length === 1 ? "" : "s"}.`;
+        : ` ${filtered.length} notícia${filtered.length === 1 ? "" : "s"} encontrada${filtered.length === 1 ? "" : "s"}.`;
 
     liveFeedStatus.textContent = `Recorte ativo por ${activeContext.join(" e ")}.${loadedText}`;
     return;
   }
 
   if (visibleSlice.length < filtered.length) {
-    liveFeedStatus.textContent = `Arquivo vivo pronto: ${filtered.length} pautas verificadas na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
+    liveFeedStatus.textContent = `Arquivo vivo pronto: ${filtered.length} notícias verificadas na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
     return;
   }
 
-  liveFeedStatus.textContent = `Arquivo vivo com ${filtered.length} pautas verificadas. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e editorias.`;
+  liveFeedStatus.textContent = `Arquivo vivo com ${filtered.length} notícias verificadas. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e editorias.`;
 };
 
 const renderLiveFeed = () => {
@@ -5566,7 +5950,7 @@ const renderLiveFeed = () => {
     const empty = document.createElement("div");
     empty.className = "feed-empty";
     empty.textContent =
-      "Nenhuma pauta encontrada com esse termo. Tente buscar por tema, órgão ou bairro.";
+      "Nenhuma notícia encontrada com esse termo. Tente buscar por tema, órgão ou bairro.";
     liveFeedGrid.appendChild(empty);
     liveFeedMore.hidden = true;
     return;
@@ -6210,7 +6594,7 @@ const renderSidebarWidgets = () => {
     <div class="sidebar-now-grid">
       <div>
         <div class="clock-time" id="live-clock">00:00:00</div>
-        <div class="clock-date" id="live-date">carregando data local...</div>
+        <div class="clock-date" id="live-date">hora local do Acre</div>
         <div class="clock-weekday" id="live-weekday">Acre • UTC-5</div>
       </div>
       <div class="sidebar-weather-badge">
@@ -6593,9 +6977,9 @@ const resetSupporterPaymentCard = () => {
 
   supporterPaymentState.locked = false;
   subscriptionPaymentCard.hidden = true;
-  if (subscriptionPixKey) subscriptionPixKey.textContent = "carregando...";
+  if (subscriptionPixKey) subscriptionPixKey.textContent = "aguarde";
   if (subscriptionPixAmount) subscriptionPixAmount.textContent = formatPixAmountLabel(getFounderAmountValue());
-  if (subscriptionPixTxid) subscriptionPixTxid.textContent = "carregando...";
+  if (subscriptionPixTxid) subscriptionPixTxid.textContent = "aguarde";
   if (subscriptionPixQr) subscriptionPixQr.innerHTML = "";
   if (subscriptionPixCode) subscriptionPixCode.value = "";
   if (subscriptionPaymentNote) {
@@ -6922,6 +7306,7 @@ const attachSubscriptionSubmission = () => {
 attachCommentSubmission();
 attachSubscriptionSubmission();
 attachAgentMailFlow();
+renderDailyTrendingBuzz();
 initializeLiveTicker();
 scheduleHomeBackgroundHydration();
 hydrateFoundersWallFromApi();

@@ -88,7 +88,7 @@
 
     img = document.createElement("img");
     img.className = "photo-fit-img";
-    img.alt = frame.getAttribute("data-photo-alt") || "Imagem da pauta";
+    img.alt = frame.getAttribute("data-photo-alt") || "Imagem da notícia";
     img.loading = "lazy";
     img.decoding = "async";
     img.src = bg;

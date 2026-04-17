@@ -35,7 +35,7 @@ window.SOCIAL_RSS_DATA = [
   {
     network: "Facebook",
     title: "Alertas de bairro e utilidade pública",
-    summary: "Sobe quando a pauta vira conversa em grupos locais e tem serviço prático.",
+    summary: "Sobe quando o assunto vira conversa em grupos locais e tem serviço prático.",
     url: "https://www.facebook.com/search/posts/?q=Cruzeiro%20do%20Sul%20Acre",
     engagement: 79,
     velocity: 66,
@@ -46,7 +46,7 @@ window.SOCIAL_RSS_DATA = [
   {
     network: "WhatsApp",
     title: "Pedidos de verificação da comunidade",
-    summary: "Entram como sinal de pauta, mas precisam de checagem antes de publicar.",
+    summary: "Entram como sinal de assunto, mas precisam de checagem antes de publicar.",
     url: "./remocao.html",
     engagement: 72,
     velocity: 82,

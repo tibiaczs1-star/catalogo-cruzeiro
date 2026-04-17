@@ -317,7 +317,7 @@
       <div class="sidebar-now-grid">
         <div>
           <div class="clock-time" id="live-clock">00:00:00</div>
-          <div class="clock-date" id="live-date">carregando data local...</div>
+          <div class="clock-date" id="live-date">hora local do Acre</div>
           <div class="clock-weekday" id="live-weekday">Acre • UTC-5</div>
         </div>
         <div class="sidebar-weather-badge">

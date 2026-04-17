@@ -6,7 +6,7 @@
   const FOOTER_DOCK_QUERY = "(max-width: 720px)";
   const DETAIL_BODY_CLASS = "detail-body";
   const BUBBLES = [
-    "Recebendo documentos da pauta",
+    "Recebendo documentos do dia",
     "Equipe subindo atualizacao no radar",
     "Cafe passado e texto revisado",
     "Monitorando grupos e redes locais",
@@ -16,7 +16,7 @@
 
   const STATUS_GROUPS = [
     ["Portal oficial ok", "Equipe nas redes", "Cafe e docs na mesa"],
-    ["Pauta do Jurua", "Fonte confirmada", "Texto entrando no ar"],
+    ["Assunto do Jurua", "Fonte confirmada", "Texto entrando no ar"],
     ["Documento recebido", "Monitor ligado", "Radar quase pronto"],
     ["Checagem em curso", "Headline em ajuste", "Equipe no escritorio"],
   ];
@@ -83,7 +83,7 @@
       const heading = dock.querySelector(".catalogo-agents-head strong");
       const description = dock.querySelector(".catalogo-agents-head span");
       if (heading) {
-        heading.textContent = "3 pixels trabalhando na pauta";
+        heading.textContent = "3 pixels cuidando do radar";
       }
       if (description) {
         description.textContent =
@@ -122,7 +122,7 @@
           <div class="catalogo-agents-copy">
             <small>Agentes ao vivo</small>
             <strong>Escritorio pixel do Vale</strong>
-            <span>digitando, levando documentos, tomando cafe e fechando pauta no radar</span>
+            <span>digitando, levando documentos, tomando cafe e atualizando o radar</span>
           </div>
           <button class="catalogo-agents-min" type="button" aria-pressed="false">
             Minimizar escritorio
@@ -242,7 +242,7 @@
             <i class="floating-doc doc-b"></i>
 
             <div class="catalogo-agents-bubble" aria-live="polite">
-              Recebendo documentos da pauta
+              Recebendo documentos do dia
             </div>
           </div>
         </div>

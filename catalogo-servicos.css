@@ -30,6 +30,42 @@ body.catalogo-servicos-page {
   gap: 16px;
 }
 
+.site-demo-notice {
+  display: grid;
+  gap: 0.46rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(185, 95, 49, 0.22);
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(185, 95, 49, 0.12), rgba(255, 255, 255, 0.54)),
+    var(--svc-card);
+  box-shadow: 0 16px 30px rgba(16, 44, 73, 0.08);
+}
+
+.site-demo-notice span {
+  width: fit-content;
+  min-height: 24px;
+  padding: 0.18rem 0.54rem;
+  border-radius: 999px;
+  background: rgba(16, 44, 73, 0.08);
+  color: var(--svc-accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.site-demo-notice strong {
+  font-size: 1rem;
+  line-height: 1.28;
+}
+
+.site-demo-notice p {
+  margin: 0;
+  max-width: 72ch;
+  color: var(--svc-muted);
+}
+
 .svc-topbar {
   background: linear-gradient(130deg, #0e2f52, #1d4f7b);
   color: #eaf3ff;

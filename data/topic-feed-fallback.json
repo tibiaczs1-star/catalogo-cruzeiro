@@ -57,17 +57,17 @@
   ],
   "kids": [
     {
-      "sourceName": "YouTube Blog",
-      "sourceUrl": "https://blog.youtube/",
-      "title": "Who will take home $1M? YouTube To host live MrBeast competition with 50 top streamers",
-      "summary": "YouTube levou MrBeast, IShowSpeed e dezenas de streamers para um evento ao vivo de um milhao de dolares, reforcando o peso dos creators no entretenimento global.",
-      "publishedAt": "2026-04-03T12:00:00.000Z",
-      "category": "Creators",
-      "topicGroup": "creators"
+      "sourceName": "Disney+ Press",
+      "sourceUrl": "https://press.disneyplus.com/news/disney-plus-more-bluey",
+      "title": "Mais Bluey chega ao Disney+ com especial de palco e leva de minisodes",
+      "summary": "O anuncio oficial confirmou a estreia televisiva de Bluey's Big Play em 16 de marco e a chegada dos minisodes ao Disney+ em 20 de maio.",
+      "publishedAt": "2026-03-12T12:00:00.000Z",
+      "category": "Cartoons",
+      "topicGroup": "animation"
     },
     {
       "sourceName": "YouTube Blog",
-      "sourceUrl": "https://blog.youtube/",
+      "sourceUrl": "https://blog.youtube/culture-and-trends/independent-animation-trends-report/",
       "title": "New YouTube report shows how online animators are reshaping the entertainment industry",
       "summary": "Novo relatorio do YouTube mostra o salto dos animadores independentes e como series feitas para a internet estao ganhando status de fenomeno cultural.",
       "publishedAt": "2026-04-09T12:00:00.000Z",
@@ -75,37 +75,37 @@
       "topicGroup": "animation"
     },
     {
+      "sourceName": "Animation World Network",
+      "sourceUrl": "https://awn.com/news/moonbug-debuts-little-angel-spin-emmies-wonder-wardrobe",
+      "title": "Moonbug estreia Emmie's Wonder Wardrobe, spin-off pre-escolar de Little Angel",
+      "summary": "A nova serie animada foi lancada no YouTube com foco em imaginacao, fantasia, criatividade e autoexpressao para o publico pequeno.",
+      "publishedAt": "2026-04-09T12:00:00.000Z",
+      "category": "Cartoons",
+      "topicGroup": "animation"
+    },
+    {
+      "sourceName": "Animation World Network",
+      "sourceUrl": "https://www.awn.com/news/hasbro-appoints-adam-redfern-peppa-pig-showrunner",
+      "title": "Peppa Pig entra em nova fase com Adam Redfern como showrunner",
+      "summary": "A mudanca criativa em Peppa Pig virou pauta internacional e ajuda a acompanhar como as grandes series infantis estao se renovando.",
+      "publishedAt": "2026-04-03T12:00:00.000Z",
+      "category": "Cartoons",
+      "topicGroup": "animation"
+    },
+    {
       "sourceName": "YouTube Blog",
       "sourceUrl": "https://blog.youtube/news-and-events/youtube-creator-partnerships-newfronts-2026/",
-      "title": "Discover a new era of brand and creator partnerships on YouTube",
-      "summary": "YouTube apresentou um pacote novo para aproximar marcas e criadores, reforcando como creators viraram parte central do mercado global de video e cultura digital.",
+      "title": "YouTube reforca parceria entre marcas e criadores em 2026",
+      "summary": "O blog oficial destacou como canais e creators seguem puxando novidades, licenciamento e entretenimento digital para familias e criancas.",
       "publishedAt": "2026-03-23T12:00:00.000Z",
       "category": "Creators",
       "topicGroup": "creators"
     },
     {
-      "sourceName": "Xbox Wire",
-      "sourceUrl": "https://news.xbox.com/en-us/2026/03/17/xbox-game-pass-march-2026-wave-2/",
-      "title": "Coming to Xbox Game Pass: Disco Elysium, Resident Evil 7: Biohazard, Final Fantasy IV and More",
-      "summary": "A leva do Game Pass trouxe mistura de terror, RPG classico, party game e aventura casual, mostrando como catalogos seguem ditando conversa entre jovens jogadores.",
-      "publishedAt": "2026-03-17T12:00:00.000Z",
-      "category": "Games",
-      "topicGroup": "games"
-    },
-    {
-      "sourceName": "PlayStation Blog",
-      "sourceUrl": "https://blog.playstation.com/2026/04/01/playstation-plus-monthly-games-for-april-lords-of-the-fallen-tomb-raider-i-iii-remastered-sword-art-online-fractured-daydream/",
-      "title": "PlayStation Plus Monthly Games for April: Lords of the Fallen, Tomb Raider I-III Remastered, Sword Art Online Fractured Daydream",
-      "summary": "O lineup de abril da PS Plus juntou acao, nostalgia e anime com Sword Art Online, ajudando a ligar games e franquias reconhecidas na mesma conversa.",
-      "publishedAt": "2026-04-01T12:00:00.000Z",
-      "category": "Games",
-      "topicGroup": "games"
-    },
-    {
-      "sourceName": "Crunchyroll",
-      "sourceUrl": "https://www.crunchyroll.com/simulcastcalendar?date=2026-04-02&filter=premium",
-      "title": "Ascendance of a Bookworm Season 4 and Welcome to Demon School! Iruma-kun Season 4 hit the simulcast calendar",
-      "summary": "O calendario global da Crunchyroll marcou estreias fortes no comeco de abril e reforcou o peso de sagas com fandom fiel na temporada.",
+      "sourceName": "Anime News Network",
+      "sourceUrl": "https://www.animenewsnetwork.com/",
+      "title": "Anime News Network segue acompanhando estreias e trailers globais da temporada",
+      "summary": "O radar de anime continua util para reunir series novas, trailers e anuncios que as criancas maiores e adolescentes acompanham semana a semana.",
       "publishedAt": "2026-04-04T12:00:00.000Z",
       "category": "Anime",
       "topicGroup": "anime"

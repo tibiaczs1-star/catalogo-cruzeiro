@@ -84,7 +84,7 @@
       actions.push(`<a class="svc-btn" href="${item.ctaHref}"${target}>${item.ctaLabel || "Ver destaque"}</a>`);
     }
     if (!actions.length) {
-      actions.push(`<span class="svc-tag em-breve">Em breve</span>`);
+      actions.push(`<span class="svc-tag em-breve">Em preparação</span>`);
     }
 
     const statusValue = safe(item.status).replace(/-/g, " ");

@@ -127,7 +127,7 @@
       if (resultMeta) {
         const selectedCandidateId = readUserVotes()[selected];
         resultMeta.textContent = selectedCandidateId
-          ? "Seu voto neste cargo já foi registrado. Cidade e observações entram no painel interno de calor eleitoral."
+          ? "Seu voto neste cargo já foi registrado. Cidade e observações ajudam a mapear sinais eleitorais."
           : "Clique em um nome para votar com cidade obrigatória. Nome, partido e observações continuam opcionais.";
       }
 
@@ -162,7 +162,7 @@
 
       if (!candidateId || typeof window.openElectionVoteModal !== "function") {
         if (resultMeta) {
-          resultMeta.textContent = "A enquete detalhada ainda está carregando. Tente novamente em instantes.";
+          resultMeta.textContent = "A enquete detalhada ainda está abrindo. Tente novamente em instantes.";
         }
         return;
       }

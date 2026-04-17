@@ -175,7 +175,7 @@ window.CATALOGO_SERVICOS_DATA = {
         },
         {
           name: "Moto app local",
-          description: "Serviço de moto em breve no catálogo",
+          description: "Serviço de moto em fase de cadastro",
           status: "em-breve"
         },
         {
@@ -221,7 +221,7 @@ window.CATALOGO_SERVICOS_DATA = {
         eyebrow: "em construção",
         title: "Projeto Uber e Logística CZS em construção",
         description:
-          "A área de Locação e Transporte está reservada para o projeto Uber e Logística CZS. Em breve, as informações oficiais entram aqui.",
+          "A área de Locação e Transporte está reservada para o projeto Uber e Logística CZS. As informações oficiais entram aqui após confirmação.",
         chips: [],
         bullets: [],
         miniCards: []

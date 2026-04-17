@@ -57,6 +57,7 @@
 
   function pickMainTitle() {
     const selectors = [
+      "#detail-title",
       ".detail-title",
       ".article-title",
       ".news-detail-title",
@@ -77,6 +78,7 @@
 
   function pickCategory() {
     const selectors = [
+      "#detail-category",
       ".detail-category",
       ".article-category",
       ".news-category",
@@ -95,7 +97,9 @@
 
   function pickSourceName() {
     const selectors = [
+      "#detail-source-name",
       ".source-name",
+      "#detail-source-name strong",
       ".detail-source strong",
       ".source-card strong",
       ".info-card strong",
@@ -146,7 +150,7 @@
     const source = pickSourceName();
 
     const first = cleanText(
-      `${title ? `No tema "${title}", ` : "Nesta pauta, "}a leitura ampliada mostra como o assunto evolui ao longo do dia e influencia decisões práticas da população, do comércio local e dos serviços públicos.`
+      `${title ? `No tema "${title}", ` : "Nesta notícia, "}a leitura ampliada mostra como o assunto evolui ao longo do dia e influencia decisões práticas da população, do comércio local e dos serviços públicos.`
     );
 
     const second = cleanText(

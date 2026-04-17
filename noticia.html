@@ -3,34 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catalogo Cruzeiro do Sul | Notícia</title>
+    <title>{{SEO_TITLE}}</title>
     <meta
       id="meta-description"
       name="description"
-      content="Página interna do Catalogo Cruzeiro do Sul com resumo editorial, contexto e link para a fonte consultada."
+      content="{{SEO_DESCRIPTION}}"
     />
-    <meta id="meta-robots" name="robots" content="index,follow,max-image-preview:large" />
-    <meta name="theme-color" content="#1E3A5F" />
-    <meta name="color-scheme" content="light" />
-    <meta property="og:type" content="article" />
+    <meta id="meta-robots" name="robots" content="{{SEO_ROBOTS}}" />
+    <meta name="theme-color" content="{{SEO_THEME_COLOR}}" />
+    <meta name="color-scheme" content="{{SEO_COLOR_SCHEME}}" />
+    <meta property="og:type" content="{{SEO_OG_TYPE}}" />
     <meta property="og:site_name" content="Catalogo Cruzeiro do Sul" />
-    <meta id="og-title" property="og:title" content="Catalogo Cruzeiro do Sul | Notícia" />
+    <meta id="og-title" property="og:title" content="{{SEO_OG_TITLE}}" />
     <meta
       id="og-description"
       property="og:description"
-      content="Página interna do Catalogo Cruzeiro do Sul com resumo editorial, contexto e link para a fonte consultada."
+      content="{{SEO_OG_DESCRIPTION}}"
     />
-    <meta id="og-image" property="og:image" content="{{SITE_URL}}/assets/og-cover.svg" />
-    <meta id="og-url" property="og:url" content="{{SITE_URL}}/noticia.html" />
+    <meta id="og-image" property="og:image" content="{{SEO_OG_IMAGE}}" />
+    <meta id="og-url" property="og:url" content="{{SEO_OG_URL}}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta id="twitter-title" name="twitter:title" content="Catalogo Cruzeiro do Sul | Notícia" />
+    <meta id="twitter-title" name="twitter:title" content="{{SEO_TWITTER_TITLE}}" />
     <meta
       id="twitter-description"
       name="twitter:description"
-      content="Página interna do Catalogo Cruzeiro do Sul com resumo editorial, contexto e link para a fonte consultada."
+      content="{{SEO_TWITTER_DESCRIPTION}}"
     />
-    <meta id="twitter-image" name="twitter:image" content="{{SITE_URL}}/assets/og-cover.svg" />
-    <link id="meta-canonical" rel="canonical" href="{{SITE_URL}}/noticia.html" />
+    <meta id="twitter-image" name="twitter:image" content="{{SEO_TWITTER_IMAGE}}" />
+    <link id="meta-canonical" rel="canonical" href="{{SEO_CANONICAL}}" />
     <link rel="manifest" href="./site.webmanifest" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="./assets/favicon-32x32.png" sizes="32x32" type="image/png" />
@@ -43,16 +43,10 @@
       rel="stylesheet"
     />
     <script type="application/ld+json" id="article-structured-data">
-      {
-        "@context": "https://schema.org",
-        "@type": "NewsArticle",
-        "headline": "Catalogo Cruzeiro do Sul",
-        "description": "Página interna do Catalogo Cruzeiro do Sul com resumo editorial, contexto e link para a fonte consultada.",
-        "image": ["{{SITE_URL}}/assets/og-cover.svg"]
-      }
+      {{SEO_JSON_LD}}
     </script>
     <link rel="stylesheet" href="./styles.css?v=20260415v" />
-  <link rel="stylesheet" href="noticia-enhance.css?v=20260415k" />
+  <link rel="stylesheet" href="noticia-enhance.css?v=20260416a" />
   <link rel="stylesheet" href="contrast-mixer.css?v=20260411n" />
   <link rel="stylesheet" href="servicos-menu.css?v=20260411m" />
   <link rel="stylesheet" href="rodape-voz-humana.css?v=20260411o" />
@@ -81,7 +75,7 @@
 
       <main class="detail-main">
         <article class="detail-shell active" id="detail-shell">
-          <p class="eyebrow" id="detail-eyebrow">carregando</p>
+          <p class="eyebrow" id="detail-eyebrow">abrindo notícia</p>
           <h1 id="detail-title">Abrindo notícia...</h1>
           <p class="detail-meta" id="detail-meta"></p>
 
@@ -103,11 +97,11 @@
             hidden
           >
             <div class="detail-fact-tabs-header">
-              <p class="eyebrow">leitura editorial da pauta</p>
-              <h2 id="detail-fact-tabs-title">O que importa, o que é verdade e o que exige cautela</h2>
+              <p class="eyebrow">contexto da notícia</p>
+              <h2 id="detail-fact-tabs-title">O que importa agora, o que já foi confirmado e o que ainda pede atenção</h2>
               <p>
-                Separação rápida do texto-base em quatro frentes: impacto imediato, fatos
-                confirmados, pontos ainda incertos e fake news comprovadamente desmentidas.
+                Leitura rápida do texto em quatro frentes: impacto imediato, fatos
+                confirmados, pontos ainda em aberto e boatos já desmentidos.
               </p>
             </div>
 
@@ -116,7 +110,7 @@
                 class="detail-fact-tab-list"
                 id="detail-fact-tabs-list"
                 role="tablist"
-                aria-label="Classificação editorial da matéria"
+                aria-label="Resumo guiado da matéria"
               ></div>
               <div class="detail-fact-panels" id="detail-fact-tabs-panels"></div>
             </div>
@@ -127,8 +121,8 @@
 
             <aside class="detail-aside">
               <div class="detail-card">
-                <span>fonte consultada</span>
-                <strong id="detail-source-name">Carregando</strong>
+                <span>fonte da notícia</span>
+                <strong id="detail-source-name">Fonte em consulta</strong>
                 <p id="detail-source-label"></p>
                 <a class="solid-button" id="detail-source-link" href="/" target="_blank" rel="noreferrer">
                   Abrir fonte
@@ -136,8 +130,8 @@
               </div>
 
               <div class="detail-card">
-                <span>imagem da pauta</span>
-                <strong id="detail-media-kind">Carregando</strong>
+                <span>imagem da notícia</span>
+                <strong id="detail-media-kind">Crédito em consulta</strong>
                 <p id="detail-media-note"></p>
                 <a class="outline-button" id="detail-media-link" href="./index.html?skipIntro=1">
                   Ver crédito
@@ -151,7 +145,7 @@
 
               <div class="detail-card sponsored-detail">
                 <span>publicação paga</span>
-                <strong>Espaço comercial lateral</strong>
+                <strong>Espaço de divulgação</strong>
                 <p>
                   Publieditorial, agenda patrocinada ou campanha local com selo claro
                   e chamada objetiva dentro da página da notícia.
@@ -168,7 +162,7 @@
 
         <div class="footer-meta">
           <p class="eyebrow">catálogo cruzeiro do sul</p>
-          <h3>Padrão das matérias com foto no topo e pauta viva no rodapé</h3>
+          <h3>Leitura com foto no topo e continuidade até o fim da página</h3>
           <p>
             Cada matéria volta para a home sem reabrir a introdução e mantém um
             encerramento visual estável para toda a leitura.
@@ -201,7 +195,8 @@
 
     <script defer src="./news-data.js?v=20260414z"></script>
     <script defer src="runtime-config.js?v=20260413d"></script>
-    <script defer src="./noticia.js?v=20260415a"></script>
+    <script defer src="./noticia.js?v=20260417b"></script>
+  <script defer src="./noticia-enhance.js?v=20260416a"></script>
   <script defer src="analytics-client.js?v=20260415b"></script>
   <script defer src="engagement-api.js?v=20260411j"></script>
   <script defer src="servicos-menu.js?v=20260411m"></script>

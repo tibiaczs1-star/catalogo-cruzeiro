@@ -201,6 +201,42 @@
     return new Date(Number(year), monthIndex[month] ?? 0, Number(day)).getTime();
   };
 
+  const articleImageFocusOverridesBySlug = {
+    "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios": "62% 12%",
+    "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil":
+      "74% 32%",
+    "acre-disputa-campeonato-regional-de-bocha-com-14-paratletas": "78% 43%",
+    "jordao-celebra-34-anos-com-show-de-evoney-fernandes": "40% 38%",
+    "com-presenca-da-familia-mario-sergio-toma-posse-no-tribunal-de-contas-do-acre": "58% 42%",
+    "academia-acreana-de-letras-reune-mulheres-de-poder-em-primeira-roda-de-conversa-de-2026":
+      "30% 58%",
+    "socorro-propoe-jornada-especial-para-professores-em-tratamento-de-saude": "49% 26%",
+    "prefeito-decreta-emergencia-e-anuncia-auxilio-a-familias-atingidas-por-enxurradas": "78% 38%",
+    "traficante-foge-da-policia-e-deixa-esposa-com-bebe-recem-nascido-para-ser-presa": "58% 68%",
+    "fundhacre-recebe-treinamento-da-fiocruz-para-diagnostico-molecular-de-leishmaniose": "78% 30%",
+    "fundhacre-realiza-quinto-transplante-de-tecido-osseo-e-amplia-oferta-de-alta-complexidade-no-acre":
+      "45% 22%",
+    "acre-alcanca-o-segundo-lugar-no-ranking-nacional-de-matriculas-de-ensino-tecnico-articulado-com-o-ensino-medio":
+      "38% 26%",
+    "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
+    "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
+      "58% 16%"
+  };
+
+  const resolveArticleImageFocus = (article = {}, fallback = "center") => {
+    const manualFocus = String(article.imageFocus || "").trim();
+    if (manualFocus) {
+      return manualFocus;
+    }
+
+    const slug = String(article.slug || slugifyText(article.title || article.sourceLabel || "")).trim();
+    if (slug && articleImageFocusOverridesBySlug[slug]) {
+      return articleImageFocusOverridesBySlug[slug];
+    }
+
+    return fallback;
+  };
+
   const normalizeArticle = (article = {}) => {
     const title = String(article.title || article.sourceLabel || "Atualizacao");
     const category = String(article.category || "Geral");
@@ -226,7 +262,8 @@
       lede,
       date: formatDisplayDate(article.date || article.publishedAt || article.createdAt || ""),
       publishedAt: article.publishedAt || article.createdAt || article.date || "",
-      imageUrl
+      imageUrl,
+      imageFocus: resolveArticleImageFocus({ ...article, slug, title }, article.imageFocus || "")
     };
   };
 
@@ -385,7 +422,7 @@
         paintSurfaceImage(
           thumbNode,
           safeUrl,
-          article.imageFocus || "center",
+          resolveArticleImageFocus(article, "center"),
           article.imageFit || "cover"
         );
         thumbNode.dataset.imageUrl = safeUrl;
@@ -518,7 +555,7 @@
     date.textContent = article.date || "Sem data";
     title.textContent = article.title || "Atualizacao";
     summary.textContent = article.lede || "Sem resumo.";
-    footer.textContent = `${article.sourceName || "Fonte local"}${article.slug ? " • pauta interna" : " • link externo"}`;
+    footer.textContent = `${article.sourceName || "Fonte local"}${article.slug ? " • notícia local" : " • link externo"}`;
 
     meta.append(category, date);
     link.append(meta, title, summary, footer);
@@ -631,24 +668,24 @@
     drawerCount.textContent = String(items.length);
     drawerLabel.textContent =
       activeContext.length > 0
-        ? "pautas no recorte lateral"
-        : "pautas no arquivo lateral";
+        ? "notícias no recorte lateral"
+        : "notícias no arquivo lateral";
 
     if (!state.items.length) {
-      drawerStatus.textContent = "Carregando a base completa para abrir o arquivo lateral.";
+      drawerStatus.textContent = "Preparando a base completa para abrir o arquivo lateral.";
       drawerList.innerHTML = "";
       return;
     }
 
     if (!items.length) {
-      drawerStatus.textContent = "Nenhuma pauta bateu com esse filtro na barra lateral.";
-      drawerList.innerHTML = '<div class="feed-drawer-empty">Nenhuma pauta encontrada neste recorte.</div>';
+      drawerStatus.textContent = "Nenhuma notícia bateu com esse filtro na barra lateral.";
+      drawerList.innerHTML = '<div class="feed-drawer-empty">Nenhuma notícia encontrada neste recorte.</div>';
       return;
     }
 
     drawerStatus.textContent = activeContext.length
-      ? `Rolagem lateral com ${items.length} pautas filtradas por ${activeContext.join(" e ")}.`
-      : `Rolagem lateral pronta com ${items.length} pautas ja verificadas na base.`;
+      ? `Rolagem lateral com ${items.length} notícias filtradas por ${activeContext.join(" e ")}.`
+      : `Rolagem lateral pronta com ${items.length} notícias ja verificadas na base.`;
 
     drawerList.textContent = "";
     items.forEach((article) => drawerList.appendChild(buildDrawerItem(article)));
@@ -878,7 +915,7 @@
     }
 
     if (countLabel) {
-      countLabel.textContent = activeContext.length ? "pautas no recorte atual" : "notícias já postadas";
+      countLabel.textContent = activeContext.length ? "notícias no recorte atual" : "notícias já postadas";
     }
 
     if (total) {
@@ -955,7 +992,7 @@
     state.ownsRendering =
       !grid.children.length ||
       String(count?.textContent || "").trim() === "--" ||
-      normalizeText(status?.textContent || "").includes("carregando");
+      normalizeText(status?.textContent || "").includes("preparando");
 
     if (!state.ownsRendering) {
       return;

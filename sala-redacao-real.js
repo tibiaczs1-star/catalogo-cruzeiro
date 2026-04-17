@@ -112,7 +112,7 @@
     const list = panel.querySelector(".sr-live-list");
     if (!list) return;
 
-    list.innerHTML = `<li>Carregando atualizações reais do agregador...</li>`;
+    list.innerHTML = `<li>Buscando atualizações reais do agregador...</li>`;
 
     try {
       const response = await fetch(`${apiBase()}/api/news/aggregator?limit=6`);

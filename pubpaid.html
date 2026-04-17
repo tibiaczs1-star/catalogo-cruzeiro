@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PubPaid | Bar Pixel Jogavel</title>
+    <meta
+      name="description"
+      content="Um pub em pixel art para explorar, ouvir música de bar e escolher sua mesa favorita da noite."
+    />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="theme-color" content="#100b1f" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Catalogo Cruzeiro do Sul" />
+    <meta property="og:title" content="PubPaid | Bar Pixel Jogavel" />
+    <meta
+      property="og:description"
+      content="Entre no PubPaid, caminhe pelo salão e escolha como a sua noite vai começar."
+    />
+    <meta property="og:image" content="{{SITE_URL}}/assets/pubpaid-exterior-v2.png" />
+    <meta property="og:url" content="{{SITE_URL}}/pubpaid.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="PubPaid | Bar Pixel Jogavel" />
+    <meta
+      name="twitter:description"
+      content="Passe pela porta, conheça o salão e encontre a mesa certa para a sua noite."
+    />
+    <meta name="twitter:image" content="{{SITE_URL}}/assets/pubpaid-exterior-v2.png" />
+    <link rel="canonical" href="{{SITE_URL}}/pubpaid.html" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/favicon-32x32.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="./assets/favicon-16x16.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./pubpaid.css?v=20260417g" />
+  </head>
+  <body class="pubpaid-page">
+    <div class="pubpaid-shell">
+      <header class="pubpaid-topbar">
+        <a class="pubpaid-brand" href="./index.html" aria-label="Voltar para a home">
+          <img src="./assets/logo-czs.svg" alt="" />
+          <div>
+            <span>noite em pixel art</span>
+            <strong>PubPaid</strong>
+          </div>
+        </a>
+
+        <nav class="pubpaid-nav" aria-label="Navegacao principal">
+          <a href="#saloon">Salao</a>
+          <a href="#nerd-lab">Escritório Nerd</a>
+          <a href="#perfil">Perfil</a>
+          <a href="#historico">Historico</a>
+          <a href="./index.html">Home</a>
+        </nav>
+
+        <div class="pubpaid-top-actions">
+          <button class="pubpaid-chip-button" type="button" data-open-tutorial>
+            Tutorial demo 1.0
+          </button>
+          <button class="pubpaid-chip-button" type="button" data-audio-toggle>
+            Musica de bar: off
+          </button>
+          <button class="pubpaid-chip-button" type="button" data-open-profile>
+            Abrir personagem
+          </button>
+          <button class="pubpaid-chip-button danger" type="button" data-reset-demo>
+            Recomeçar a noite
+          </button>
+        </div>
+      </header>
+
+      <section class="site-demo-notice" aria-label="Aviso de demonstração visual">
+        <span>Em construção</span>
+        <strong>Algumas áreas deste site-filho ainda estão em montagem.</strong>
+        <p>Somente demonstração visual por enquanto. Aguarde finalização.</p>
+      </section>
+
+      <main class="pubpaid-main">
+        <section class="pubpaid-world" id="saloon">
+          <div class="pubpaid-world-copy">
+            <p class="pubpaid-eyebrow">bar em pixel art</p>
+            <h1>Entre no PubPaid e descubra se a sua noite vai ser tranquila ou lendária.</h1>
+            <p class="pubpaid-lead">
+              Do lado de fora, a fachada já chama. Lá dentro, o salão aceso reúne música,
+              conversa, NPCs vivos, palco, jukebox, mesas rápidas com rivais e uma loja premium
+              para quem quer esticar a noite.
+            </p>
+            <div class="pubpaid-world-flags" aria-label="Assinatura da experiencia">
+              <span>fachada neon</span>
+              <span>salão aberto</span>
+              <span>mesa rápida</span>
+              <span>loja premium</span>
+              <span>time nerd ativo</span>
+            </div>
+          </div>
+
+          <div class="pubpaid-world-stage">
+            <canvas
+              class="pubpaid-scene-canvas"
+              data-scene-canvas
+              width="960"
+              height="640"
+              aria-label="Salao jogavel do PubPaid"
+            ></canvas>
+          </div>
+
+          <div class="pubpaid-world-hud" aria-label="Leitura do salao">
+            <article>
+              <span>agora</span>
+              <strong data-scene-title>fachada neon</strong>
+              <small data-scene-hint>chegue até a porta principal</small>
+            </article>
+            <article>
+              <span>por aqui</span>
+              <strong data-scene-nearby>entrada principal</strong>
+              <small data-scene-nearby-note>ande com WASD ou pelas setas</small>
+            </article>
+            <article>
+              <span>próximo passo</span>
+              <strong data-scene-prompt>pressione E para interagir</strong>
+              <small data-scene-description>na porta você decide como a sua noite começa</small>
+            </article>
+            <article>
+              <span>saldo</span>
+              <strong data-hud-coins>0</strong>
+              <small>créditos da noite</small>
+            </article>
+          </div>
+
+          <div class="pubpaid-touchbar" aria-label="Controles moveis">
+            <div class="pubpaid-touchbar-grid">
+              <button type="button" data-touch-move="up">Cima</button>
+              <button type="button" data-touch-action>Interagir</button>
+              <button type="button" data-touch-move="left">Esq</button>
+              <button type="button" data-touch-move="down">Baixo</button>
+              <button type="button" data-touch-move="right">Dir</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="pubpaid-info-strip" aria-label="Como jogar">
+          <article>
+            <span>movimento</span>
+            <strong>WASD ou setas</strong>
+            <p>Caminhe pelo pub e se aproxime do que chamar a sua atenção.</p>
+          </article>
+          <article>
+            <span>ação</span>
+            <strong>E, botão central ou mouse</strong>
+            <p>Clique na mesa, no garçom, no palco ou na jukebox para abrir o ponto sem travar na colisão.</p>
+          </article>
+          <article>
+            <span>mesa rápida</span>
+            <strong>sentar + apostar</strong>
+            <p>Entre na mesa, encontre um rival e aposte 2, 5, 10, 20, 30, 40, 50 ou 100.</p>
+          </article>
+          <article>
+            <span>garçom</span>
+            <strong>bebidas e upgrades</strong>
+            <p>Bebidas mexem pouco com a sorte e upgrades visuais deixam o avatar mais premium.</p>
+          </article>
+        </section>
+
+        <section class="pubpaid-dev-crew" id="nerd-lab" aria-labelledby="pubpaid-dev-crew-title">
+          <div class="pubpaid-dev-crew-copy">
+            <p class="pubpaid-eyebrow">escritório nerd do pubpaid</p>
+            <h2 id="pubpaid-dev-crew-title">Um time público de agentes está evoluindo a física, os gráficos e a experiência da noite.</h2>
+            <p>
+              O Escritório Nerd reúne especialistas em game design, colisão, HUD, pixel art,
+              efeitos, economia, som, avatar e playtest para deixar o PubPaid mais vivo,
+              mais claro e mais gostoso de jogar.
+            </p>
+            <div class="pubpaid-dev-crew-actions">
+              <a class="pubpaid-button solid" href="./escritorio-nerd.html">Conhecer o Escritório Nerd</a>
+              <a class="pubpaid-button outline" href="#saloon">Voltar ao salão</a>
+            </div>
+          </div>
+
+          <div class="pubpaid-dev-crew-grid" aria-label="Frentes do time nerd">
+            <article>
+              <span>física</span>
+              <strong>Movimento, clique no cenário e colisão mais confiável</strong>
+              <p>O time está refinando a navegação para o salão responder melhor e travar menos em áreas invisíveis.</p>
+            </article>
+            <article>
+              <span>gráficos</span>
+              <strong>Neon, contraste e profundidade com leitura mais forte</strong>
+              <p>Arte pixel, efeitos e acabamento visual trabalham para destacar a noite sem confundir o jogador.</p>
+            </article>
+            <article>
+              <span>jogo</span>
+              <strong>Mesas, fluxo e recompensas com sensação mais justa</strong>
+              <p>Design de jogo, HUD e playtest cuidam para a experiência parecer clara, viva e divertida do começo ao fim.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="pubpaid-art-line" aria-labelledby="pubpaid-art-line-title">
+          <div class="pubpaid-art-line-copy">
+            <p class="pubpaid-eyebrow">linha de montagem de art design</p>
+            <h2 id="pubpaid-art-line-title">O visual dos jogos agora entra em uma esteira de produção contínua.</h2>
+            <p>
+              O time nerd separou a melhoria visual em fases claras para o `PubPaid`: leitura
+              do hotspot, sprite, acabamento de interface e clima final da mesa. Isso ajuda os
+              jogos a evoluírem como sistema e também como espetáculo.
+            </p>
+          </div>
+
+          <div class="pubpaid-art-line-track" aria-label="Etapas da linha de montagem">
+            <article class="pubpaid-art-step">
+              <span>01</span>
+              <strong>Silhueta e sprite</strong>
+              <p>Personagens, máquinas e pontos do salão recebem leitura mais forte logo no primeiro olhar.</p>
+            </article>
+            <article class="pubpaid-art-step">
+              <span>02</span>
+              <strong>Física e resposta</strong>
+              <p>Movimento, clique e colisão são polidos para a sensação do salão ficar mais justa e mais viva.</p>
+            </article>
+            <article class="pubpaid-art-step">
+              <span>03</span>
+              <strong>HUD e feedback</strong>
+              <p>Placar, prompts e avisos entram para explicar a rodada sem roubar a cena do jogo.</p>
+            </article>
+            <article class="pubpaid-art-step">
+              <span>04</span>
+              <strong>Neon e acabamento</strong>
+              <p>Luzes, contraste, efeitos e detalhes finais fecham cada mesa com mais identidade visual.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="pubpaid-grid">
+          <aside class="pubpaid-panel" id="perfil">
+            <p class="pubpaid-eyebrow">quem está na noite</p>
+            <div class="pubpaid-profile-head">
+              <canvas
+                class="pubpaid-avatar-canvas"
+                data-avatar-canvas
+                width="112"
+                height="112"
+                aria-label="Avatar do jogador"
+              ></canvas>
+              <div class="pubpaid-profile-copy">
+                <strong data-profile-name>Visitante da calçada</strong>
+                <span data-profile-role>Ainda olhando a porta</span>
+                <p data-profile-motto>
+                  Passe pela entrada principal para montar seu personagem e começar a noite.
+                </p>
+              </div>
+            </div>
+
+            <div class="pubpaid-stats-grid" aria-label="Resumo da noite">
+              <article>
+                <span>saldo</span>
+                <strong data-stat-coins>0</strong>
+              </article>
+              <article>
+                <span>vitorias</span>
+                <strong data-stat-wins>0</strong>
+              </article>
+              <article>
+                <span>derrotas</span>
+                <strong data-stat-losses>0</strong>
+              </article>
+              <article>
+                <span>maior premio</span>
+                <strong data-stat-best>0</strong>
+              </article>
+            </div>
+
+            <div class="pubpaid-loadout" data-profile-upgrades aria-label="Acessorios do avatar"></div>
+
+            <button class="pubpaid-button solid" type="button" data-open-profile>
+              Criar personagem
+            </button>
+          </aside>
+
+          <section class="pubpaid-panel">
+            <p class="pubpaid-eyebrow">destaque da vez</p>
+            <h2 data-focus-title>Porta principal</h2>
+            <p class="pubpaid-panel-copy" data-focus-copy>
+              A noite começa na calçada. Chegue até a porta para decidir se você entra ou se volta
+              atrás.
+            </p>
+            <div class="pubpaid-focus-meta">
+              <span data-focus-meta>Primeira parada da noite</span>
+              <span data-focus-scene>fachada</span>
+            </div>
+            <div class="pubpaid-stake-row" data-focus-stakes></div>
+            <button class="pubpaid-button outline" type="button" data-focus-action disabled>
+              Aproxime-se para escolher
+            </button>
+
+            <div class="pubpaid-venue-list" aria-label="Clima do salão">
+              <article data-venue-card="pool">
+                <strong>Sinuca Real</strong>
+                <span>A mesa para quem quer ficar e dominar a noite no detalhe.</span>
+              </article>
+              <article data-venue-card="checkers">
+                <strong>Damas Pixel</strong>
+                <span>Uma disputa mais calma, mas nem por isso menos afiada.</span>
+              </article>
+              <article data-venue-card="cards21">
+                <strong>21 do Bar</strong>
+                <span>Cartas, risco e aquela decisão de pedir mais uma ou parar.</span>
+              </article>
+              <article data-venue-card="poker">
+                <div class="pubpaid-venue-poker" aria-hidden="true">
+                  <span class="pubpaid-venue-poker-table"></span>
+                  <span class="pubpaid-venue-poker-cards"></span>
+                  <span class="pubpaid-venue-poker-chips"></span>
+                </div>
+                <strong>Poker da Mesa Redonda</strong>
+                <span>Segure cartas, troque uma vez e feche a melhor mão da rodada.</span>
+              </article>
+              <article data-venue-card="dicecups">
+                <strong>Copos e Dados</strong>
+                <span>Blefe, leitura de mesa e um pouco de coragem para bancar o palpite.</span>
+              </article>
+              <article data-venue-card="slots">
+                <strong>Caça-Níqueis Neon</strong>
+                <span>Máquina solo com alavanca, três rolos e prêmio rápido no brilho certo.</span>
+              </article>
+              <article data-venue-card="roulette">
+                <div class="pubpaid-venue-roulette" aria-hidden="true">
+                  <span class="pubpaid-venue-roulette-wheel"></span>
+                  <span class="pubpaid-venue-roulette-ball"></span>
+                  <span class="pubpaid-venue-roulette-pointer"></span>
+                </div>
+                <strong>Roleta Alta</strong>
+                <span>Roleta em série curta: gira, sai o número e vence quem fechar mais alto mais vezes.</span>
+              </article>
+              <article data-venue-card="shop">
+                <strong>Loja premium</strong>
+                <span>O garçom vende bebidas com sorte leve e upgrades visuais compráveis.</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="pubpaid-panel" id="historico">
+            <p class="pubpaid-eyebrow">memórias da noite</p>
+            <h2>Últimas rodadas</h2>
+            <div class="pubpaid-history-list" data-history-list>
+              <p class="pubpaid-history-empty">
+                Ainda não rolou nenhuma rodada. Entre no pub e escolha como a sua história começa.
+              </p>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <section class="pubpaid-modal" data-profile-modal hidden>
+      <div class="pubpaid-modal-backdrop" data-close-modal="profile"></div>
+      <div class="pubpaid-modal-card">
+        <div class="pubpaid-modal-head">
+          <div>
+            <p class="pubpaid-eyebrow">seu nome na noite</p>
+            <h2>Monte o seu personagem e receba os primeiros créditos da casa.</h2>
+          </div>
+          <button class="pubpaid-close" type="button" data-close-modal="profile">
+            Fechar
+          </button>
+        </div>
+
+        <form class="pubpaid-form" data-profile-form>
+          <label>
+            <span>Como você quer ser chamado</span>
+            <input type="text" name="name" maxlength="28" placeholder="Ex: Junior Neon" required />
+          </label>
+          <label>
+            <span>Seu estilo</span>
+            <select name="archetype">
+              <option value="neon">Neon hacker</option>
+              <option value="cowboy">Cowboy digital</option>
+              <option value="lounge">Lounge futurista</option>
+              <option value="street">Street glitch</option>
+            </select>
+          </label>
+          <label>
+            <span>O que mais combina com a sua noite</span>
+            <select name="favorite">
+              <option value="pool">Sinuca Real</option>
+              <option value="checkers">Damas Pixel</option>
+              <option value="cards21">21 do Bar</option>
+              <option value="poker">Poker da Mesa Redonda</option>
+              <option value="dicecups">Copos e Dados</option>
+              <option value="slots">Caça-Níqueis Neon</option>
+              <option value="roulette">Roleta Alta</option>
+            </select>
+          </label>
+          <label>
+            <span>Uma frase para apresentar você</span>
+            <textarea
+              name="motto"
+              rows="4"
+              maxlength="180"
+              placeholder="Ex: Entrei pela sinuca, fiquei pela música e só vou embora quando a noite pedir."
+            ></textarea>
+          </label>
+
+          <div class="pubpaid-form-actions">
+            <button class="pubpaid-button solid" type="submit">Entrar no pub</button>
+            <p class="pubpaid-feedback" data-profile-feedback aria-live="polite"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="pubpaid-modal" data-game-modal hidden>
+      <div class="pubpaid-modal-backdrop" data-close-modal="game"></div>
+      <div class="pubpaid-modal-card pubpaid-modal-card-wide">
+        <div class="pubpaid-modal-head">
+          <div>
+            <p class="pubpaid-eyebrow" data-game-kicker>mesa da noite</p>
+            <h2 data-game-title>Sinuca Real</h2>
+            <p class="pubpaid-modal-copy" data-game-subtitle>
+              Escolha a mesa, sinta o clima e veja até onde a noite vai.
+            </p>
+          </div>
+          <button class="pubpaid-close" type="button" data-close-modal="game">
+            Fechar
+          </button>
+        </div>
+
+        <div class="pubpaid-game-host" data-game-host></div>
+      </div>
+    </section>
+
+    <section class="pubpaid-modal" data-shop-modal hidden>
+      <div class="pubpaid-modal-backdrop" data-close-modal="shop"></div>
+      <div class="pubpaid-modal-card pubpaid-modal-card-wide">
+        <div class="pubpaid-modal-head">
+          <div>
+            <p class="pubpaid-eyebrow">garçom do bar</p>
+            <h2>Bebidas da noite, acessórios do avatar e mesas do PubPaid.</h2>
+            <p class="pubpaid-modal-copy">
+              Compre com créditos do pub, beba antes da próxima mesa demo e equipe o seu
+              personagem com um visual mais forte ou abra uma mesa direto do balcão.
+            </p>
+          </div>
+          <button class="pubpaid-close" type="button" data-close-modal="shop">
+            Fechar
+          </button>
+        </div>
+
+        <div class="pubpaid-game-host" data-shop-host></div>
+      </div>
+    </section>
+
+    <section class="pubpaid-modal" data-door-modal hidden>
+      <div class="pubpaid-modal-backdrop" data-close-modal="door"></div>
+      <div class="pubpaid-modal-card pubpaid-door-card">
+        <div class="pubpaid-modal-head">
+          <div>
+            <p class="pubpaid-eyebrow">porta do salao</p>
+            <h2>Vou encher a cara, apostar muito e entrar no salao?</h2>
+            <p class="pubpaid-modal-copy">
+              Ou eu volto pra casa antes da mulher aparecer com o cabo de vassoura?
+            </p>
+          </div>
+          <button class="pubpaid-close" type="button" data-close-modal="door">
+            Fechar
+          </button>
+        </div>
+
+        <div class="pubpaid-door-actions">
+          <button class="pubpaid-button solid" type="button" data-door-choice="enter">
+            Entrar no salao
+          </button>
+          <button class="pubpaid-button danger" type="button" data-door-choice="retreat">
+            Melhor nao, vou fugir
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pubpaid-modal" data-bad-ending-modal hidden>
+      <div class="pubpaid-modal-backdrop" data-close-modal="bad-ending"></div>
+      <div class="pubpaid-modal-card pubpaid-bad-ending-card">
+        <div class="pubpaid-modal-head">
+          <div>
+            <p class="pubpaid-eyebrow">fuga na rua</p>
+            <h2>Corrida da Vassoura</h2>
+            <p class="pubpaid-modal-copy">
+              Corra pela rua e pelas calcadas, desvie dos carros e dos obstaculos e nao deixe a mulher te alcancar.
+              Se ela te acerta, voce perde 1 credito.
+            </p>
+          </div>
+          <button class="pubpaid-close" type="button" data-close-modal="bad-ending">
+            Fechar
+          </button>
+        </div>
+
+        <canvas
+          class="pubpaid-bad-ending-canvas"
+          data-bad-ending-canvas
+          width="640"
+          height="300"
+          aria-label="Minijogo pixel art de fuga na rua"
+        ></canvas>
+
+        <p class="pubpaid-modal-copy pubpaid-bad-ending-hint">
+          Use A/D ou setas para trocar de faixa. Aperte W, seta para cima ou espaço para dar uma arrancada.
+          Bater em obstáculo derruba sua velocidade.
+        </p>
+
+        <div class="pubpaid-door-actions">
+          <button class="pubpaid-button solid" type="button" data-restart-bad-ending>
+            Correr de novo
+          </button>
+          <button class="pubpaid-button outline" type="button" data-close-modal="bad-ending">
+            Fechar corrida
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pubpaid-modal" data-tutorial-modal hidden>
+      <div class="pubpaid-modal-backdrop" data-close-modal="tutorial"></div>
+      <div class="pubpaid-modal-card pubpaid-modal-card-wide pubpaid-tutorial-card">
+        <div class="pubpaid-modal-head">
+          <div>
+            <p class="pubpaid-eyebrow">demo 1.0 • abertura da noite</p>
+            <h2>Bem-vindo ao PubPaid</h2>
+            <p class="pubpaid-modal-copy">
+              Ela abre a noite dançando, chama você para entender o clima do pub e puxa o começo da rodada.
+            </p>
+          </div>
+          <button class="pubpaid-close" type="button" data-close-modal="tutorial">
+            Fechar
+          </button>
+        </div>
+
+        <div class="pubpaid-tutorial-layout">
+          <section class="pubpaid-tutorial-stage">
+            <canvas
+              class="pubpaid-tutorial-canvas"
+              data-tutorial-canvas
+              width="420"
+              height="320"
+              aria-label="Dançarina pixel art apresentando o tutorial do PubPaid"
+            ></canvas>
+            <div class="pubpaid-tutorial-stage-copy">
+              <strong>Dançarina da casa</strong>
+              <span>Aqui você aprende como funciona, entra no clima e depois segue para o salão.</span>
+              <div class="pubpaid-tutorial-stage-actions">
+                <button class="pubpaid-button outline" type="button" data-audio-toggle>
+                  Musica dancante: off
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="pubpaid-tutorial-copy">
+            <article class="pubpaid-tutorial-note is-highlight">
+              <span>entrada rapida</span>
+              <strong>1 credito = 1 real</strong>
+              <p>A leitura e direta para voce entender saldo, aposta e premio sem ficar fazendo conta chata.</p>
+            </article>
+            <article class="pubpaid-tutorial-note">
+              <span>como andar</span>
+              <strong>Clique no salao ou use WASD</strong>
+              <p>Da para andar pelo teclado ou clicar no ponto que chamou sua atencao para chegar sem enrolacao.</p>
+            </article>
+            <article class="pubpaid-tutorial-note">
+              <span>interacoes</span>
+              <strong>Mesas, garcom, palco e jukebox</strong>
+              <p>Chegue perto para abrir jogo, comprar bebida, ouvir dica curta ou mudar o clima da noite.</p>
+            </article>
+            <article class="pubpaid-tutorial-note">
+              <span>ritmo da casa</span>
+              <strong>Ligue a musica e deixe o pub acordar</strong>
+              <p>A jukebox deixa a noite mais viva e a abertura da demo fica bem melhor quando a trilha entra.</p>
+            </article>
+            <article class="pubpaid-tutorial-note">
+              <span>estilo da demo</span>
+              <strong>Seu visual ja entra no clima</strong>
+              <p>O inventario visual comeca pela presenca: nome, estilo e acessorios ajudam a dar cara para a sua noite.</p>
+            </article>
+          </section>
+        </div>
+
+        <div class="pubpaid-door-actions">
+          <button class="pubpaid-button solid" type="button" data-close-modal="tutorial">
+            Entrar na demo
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <script defer src="./runtime-config.js?v=20260415d"></script>
+    <script defer src="./analytics-client.js?v=20260415c"></script>
+    <script defer src="./pubpaid.js?v=20260417g"></script>
+  </body>
+</html>

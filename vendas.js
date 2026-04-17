@@ -96,7 +96,7 @@
 
   async function loadSales() {
     const status = $("#sales-list-status");
-    if (status) status.textContent = "Carregando vendas...";
+    if (status) status.textContent = "Buscando vendas locais...";
 
     try {
       const query = state.filter ? `?category=${encodeURIComponent(state.filter)}` : "";

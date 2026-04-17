@@ -91,6 +91,34 @@ Lista de agentes personalizados criados para este projeto.
 
 ---
 
+## 🎨 Agente Combinação de Cores
+
+**Descrição**: Especialista em paletas, contraste, harmonia visual, gradientes e combinação de cores para interfaces, cards, hero sections e identidade visual.
+
+**Disponível em**: Perfil de usuário
+
+**Como usar**:
+- Abra o chat do Copilot
+- Digite `/` e procure por "Agente Combinação de Cores"
+- Ou: "Agente cores: [sua tarefa]"
+
+**Tarefas que pode fazer**:
+- 🎨 Montar paletas equilibradas para páginas e componentes
+- 🌗 Corrigir contraste e legibilidade de textos
+- 🧩 Harmonizar gradientes, fundos e bordas
+- 🖼️ Sugerir cores para cards com imagem ou sem imagem
+- 🪄 Ajustar visual infantil, editorial, premium ou tech sem perder leitura
+- 📱 Validar combinação de cores em desktop e mobile
+
+**Exemplo de uso**:
+```
+"Agente cores: melhorar a paleta dessa hero infantil"
+"Agente cores: deixar esses cards mais legíveis"
+"Agente cores: criar uma combinação premium para meu dashboard"
+```
+
+---
+
 ## �📝 Como adicionar novos agentes
 
 Se precisar criar mais agentes personalizados:
@@ -107,4 +135,15 @@ Se precisar criar mais agentes personalizados:
 ## Memória operacional do Codex
 
 - Se existir um arquivo `CODEX_MEMORY.md` na raiz do projeto, leia esse arquivo antes de continuar trabalhos já iniciados neste repositório.
+- Se existir o diretório `.codex-memory/`, leia `README.md`, `current-state.md`, `handoff.md`, `orders.json` e `assets.json` antes de continuar trabalhos já iniciados neste repositório.
+- Se existir o diretório `.codex-review-team/`, leia `README.md` e use `npm run review:team` antes de rodadas grandes de revisão visual/editorial/funcional.
 - Quando houver mudanças grandes, validações visuais, deploys ou pendências importantes, atualize `CODEX_MEMORY.md` com um resumo curto do estado atual.
+- Registre cada ordem relevante do usuário na memória local estruturada (`.codex-memory/orders.json`) e vincule capturas, fotos, anexos ou textos úteis em `.codex-memory/assets.json`.
+- Ao encerrar uma rodada importante, atualize `.codex-memory/current-state.md` e `.codex-memory/handoff.md` para facilitar retomada mesmo após troca de conta ou fim de créditos.
+
+## Equipe local de revisão
+
+- A equipe fixa vive em `.codex-review-team/agents/`.
+- O auditor principal fica em `scripts/review-team-audit.js` e gera `.codex-temp/review-team/latest-report.md` e `.codex-temp/review-team/latest-report.json`.
+- O foco da equipe é achar vazamentos editoriais, cards sem hierarquia, CTAs confusos, links quebrados, acessibilidade básica e cobertura fraca de fontes.
+- Use esse fluxo antes de revisão manual com o usuário para chegar com os problemas já triados.

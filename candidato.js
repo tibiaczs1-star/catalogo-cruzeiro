@@ -141,7 +141,7 @@
   const politicalPosition =
     candidate.politicalPosition ||
     candidate.politicalPositionShort ||
-    "Leitura editorial em atualização.";
+    "Perfil público em atualização.";
   const achievements = Array.isArray(candidate.achievements) && candidate.achievements.length
     ? candidate.achievements
     : Array.isArray(candidate.proposals) && candidate.proposals.length

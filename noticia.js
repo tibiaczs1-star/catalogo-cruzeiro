@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
-const OFFLINE_NEWS_CACHE_KEY = "catalogo_news_cache_v1";
-const OFFLINE_LAST_ARTICLE_KEY = "catalogo_last_article_v1";
+const OFFLINE_NEWS_CACHE_KEYS = ["catalogo_news_cache_v2", "catalogo_news_cache_v1"];
+const OFFLINE_LAST_ARTICLE_KEYS = ["catalogo_last_article_v2", "catalogo_last_article_v1"];
 const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
 const DETAIL_FALLBACK_IMAGES = [];
@@ -76,6 +76,38 @@ const twitterImageNode = document.querySelector("#twitter-image");
 const structuredDataNode = document.querySelector("#article-structured-data");
 let detailHeroRequestId = 0;
 const DEFAULT_OG_IMAGE = "./assets/og-cover.svg";
+
+const detailImageFocusOverridesBySlug = {
+  "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios": "62% 12%",
+  "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil":
+    "74% 32%",
+  "acre-disputa-campeonato-regional-de-bocha-com-14-paratletas": "78% 43%",
+  "jordao-celebra-34-anos-com-show-de-evoney-fernandes": "40% 38%",
+  "com-presenca-da-familia-mario-sergio-toma-posse-no-tribunal-de-contas-do-acre": "58% 42%",
+  "academia-acreana-de-letras-reune-mulheres-de-poder-em-primeira-roda-de-conversa-de-2026":
+    "30% 58%",
+  "socorro-propoe-jornada-especial-para-professores-em-tratamento-de-saude": "49% 26%",
+  "prefeito-decreta-emergencia-e-anuncia-auxilio-a-familias-atingidas-por-enxurradas": "78% 38%",
+  "traficante-foge-da-policia-e-deixa-esposa-com-bebe-recem-nascido-para-ser-presa": "58% 68%",
+  "fundhacre-recebe-treinamento-da-fiocruz-para-diagnostico-molecular-de-leishmaniose": "78% 30%",
+  "fundhacre-realiza-quinto-transplante-de-tecido-osseo-e-amplia-oferta-de-alta-complexidade-no-acre":
+    "45% 22%",
+  "acre-alcanca-o-segundo-lugar-no-ranking-nacional-de-matriculas-de-ensino-tecnico-articulado-com-o-ensino-medio":
+    "38% 26%",
+  "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
+  "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
+    "58% 16%"
+};
+
+const resolveDetailImageFocus = (article = {}, fallback = "center 30%") => {
+  const direct = String(article.imageFocus || "").trim();
+  if (direct) {
+    return direct;
+  }
+
+  const articleSlug = normalizeSlug(article.slug || "");
+  return detailImageFocusOverridesBySlug[articleSlug] || fallback;
+};
 
 const truncateSeoText = (value, limit = 180) => {
   const text = String(value || "").replace(/\s+/g, " ").trim();
@@ -690,7 +722,7 @@ const applyResolvedDetailHeroImage = (imageUrl, article = {}) => {
   }
 
   const normalizedImageUrl = sanitizeImageUrl(imageUrl);
-  const backgroundPosition = String(article.imageFocus || "center 30%").trim() || "center 30%";
+  const backgroundPosition = resolveDetailImageFocus(article);
   const backgroundSize = String(article.imageFit || "cover").trim() || "cover";
 
   thumbNode.classList.remove("no-image");
@@ -763,18 +795,18 @@ const getExpandedBodyParagraphs = (article) => {
     ? article.highlights.map(normalizeEditorialText).filter(Boolean)
     : [];
 
-  const highlightSentence = highlights.length > 0 ? highlights.join(", ") : "atualizacao da pauta";
+  const highlightSentence = highlights.length > 0 ? highlights.join(", ") : "atualizacao do assunto";
   const analysisSentence = normalizeEditorialText(article.analysis || "");
 
   const generated = [
     fallbackLede
-      ? `No recorte do Catalogo Cruzeiro do Sul, esta pauta entra como uma leitura de ${category}, com impacto direto no dia a dia da cidade e no servico publico local. ${fallbackLede}`
-      : `No recorte do Catalogo Cruzeiro do Sul, esta pauta entra como uma leitura de ${category}, com impacto direto no dia a dia da cidade e no servico publico local.`,
+      ? `No recorte do Catalogo Cruzeiro do Sul, esta noticia entra em uma leitura de ${category}, com impacto direto no dia a dia da cidade e no servico publico local. ${fallbackLede}`
+      : `No recorte do Catalogo Cruzeiro do Sul, esta noticia entra em uma leitura de ${category}, com impacto direto no dia a dia da cidade e no servico publico local.`,
     `Em ${dateLabel}, a fonte ${source} destacou o seguinte eixo principal: ${sourceLabel}. A repercussao local costuma ir alem do fato inicial e atinge rotas de trabalho, atendimento e rotina dos bairros.`,
     `Os pontos mais observados nesta cobertura sao: ${highlightSentence}. Esse conjunto ajuda a entender o que ja aconteceu e o que ainda pode evoluir nos proximos dias.`,
     analysisSentence
-      ? `Leitura editorial complementar: ${analysisSentence}`
-      : "Leitura editorial complementar: a tendencia local depende da resposta institucional, do acompanhamento comunitario e de nova atualizacao da fonte original.",
+      ? `Contexto complementar: ${analysisSentence}`
+      : "Contexto complementar: a tendencia local depende da resposta institucional, do acompanhamento comunitario e de nova atualizacao da fonte original.",
     "Para continuar bem informado, vale acompanhar o link da fonte consultada e as proximas atualizacoes do Catalogo, especialmente quando houver mudanca de status, novos numeros ou decisao oficial."
   ].filter(Boolean);
 
@@ -793,7 +825,7 @@ const getExpandedBodyParagraphs = (article) => {
 const buildEditorialFactTabs = (article = {}) => {
   const sourceName = normalizeEditorialText(article.sourceName || "fonte local");
   const sourceLabel = normalizeEditorialText(article.sourceLabel || article.title || "texto-base consultado");
-  const title = normalizeEditorialText(article.title || sourceLabel || "esta pauta");
+  const title = normalizeEditorialText(article.title || sourceLabel || "este assunto");
   const category = normalizeEditorialText(article.category || "tema local");
   const categoryLower = category.toLowerCase();
   const dateLabel = getArticleDateLabel(article);
@@ -817,7 +849,7 @@ const buildEditorialFactTabs = (article = {}) => {
       ...cleanHighlights,
       leadSentence,
       cleanAnalysis,
-      sourceLabel && sourceLabel !== title ? `O eixo central da pauta é: ${sourceLabel}.` : "",
+      sourceLabel && sourceLabel !== title ? `O eixo central da noticia é: ${sourceLabel}.` : "",
       `O impacto imediato desta matéria cai sobre ${categoryLower} e pede atenção para os efeitos práticos no dia a dia.`
     ],
     4
@@ -826,7 +858,7 @@ const buildEditorialFactTabs = (article = {}) => {
   const truthItems = getLimitedItems(
     [
       ...truthSentences.slice(0, 3),
-      `Está confirmado que a pauta-base foi publicada por ${sourceName} em ${dateLabel}.`,
+      `Está confirmado que a noticia-base foi publicada por ${sourceName} em ${dateLabel}.`,
       sourceLabel ? `A referência aberta consultada foi: ${sourceLabel}.` : ""
     ],
     4
@@ -850,11 +882,11 @@ const buildEditorialFactTabs = (article = {}) => {
       tone: "importance",
       stateLabel: "Essencial agora",
       count: importanceItems.length > 0 ? importanceItems.length : 1,
-      description: `Leitura rápida do que realmente mexe com o leitor nesta pauta de ${categoryLower}.`,
+      description: `Leitura rápida do que realmente mexe com o leitor neste assunto de ${categoryLower}.`,
       items:
         importanceItems.length > 0
           ? importanceItems
-          : [`O eixo principal desta pauta é ${title} e o acompanhamento segue aberto.`]
+          : [`O eixo principal deste assunto é ${title} e o acompanhamento segue aberto.`]
     },
     {
       id: "truth",
@@ -908,6 +940,7 @@ const clearFactTabs = () => {
   factTabsListNode.innerHTML = "";
   factTabsPanelsNode.innerHTML = "";
   factTabsSection.hidden = true;
+  factTabsSection.classList.remove("active");
 };
 
 const renderFactTabs = (article = {}) => {
@@ -1022,6 +1055,7 @@ const renderFactTabs = (article = {}) => {
   });
 
   factTabsSection.hidden = false;
+  factTabsSection.classList.add("active");
   activateTab(tabs[0]?.id || "importance");
   return tabs;
 };
@@ -1031,7 +1065,7 @@ const renderNotFound = () => {
   titleNode.textContent = "Noticia nao encontrada";
   eyebrowNode.textContent = "catalogo cruzeiro do sul";
   metaNode.textContent = "O link pode estar incompleto ou a noticia ainda nao foi cadastrada.";
-  ledeNode.textContent = "Volte para a home e escolha outra pauta.";
+  ledeNode.textContent = "Volte para a home e escolha outra noticia.";
   clearFactTabs();
   if (analysisContainer) {
     analysisContainer.hidden = true;
@@ -1147,7 +1181,7 @@ const renderArticle = (article) => {
   const generatedDevelopment = Array.isArray(article.development)
     ? article.development.map(normalizeEditorialText).filter(Boolean)
     : [
-        `${article.title || "A pauta"} continua em acompanhamento no Catalogo Cruzeiro do Sul com foco nos impactos práticos para a rotina da cidade.`,
+        `${article.title || "A noticia"} continua em acompanhamento no Catalogo Cruzeiro do Sul com foco nos impactos práticos para a rotina da cidade.`,
         `Na leitura local, o ponto central envolve ${String(article.category || "o tema principal").toLowerCase()} e seus efeitos diretos nos bairros, nos serviços e na vida de quem acompanha o caso.`,
         "O portal segue atualizando esta matéria conforme novas informações oficiais forem publicadas pela fonte original e pelos órgãos locais."
       ];
@@ -1279,18 +1313,26 @@ const readStoredItems = (key) => {
 };
 
 const findStoredArticle = (targetSlug) => {
-  const recentArticle = readStoredItems(OFFLINE_LAST_ARTICLE_KEY);
-  if (recentArticle && normalizeSlug(recentArticle.slug) === targetSlug) {
-    return normalizeDetailArticle(recentArticle);
+  for (const key of OFFLINE_LAST_ARTICLE_KEYS) {
+    const recentArticle = readStoredItems(key);
+    if (recentArticle && normalizeSlug(recentArticle.slug) === targetSlug) {
+      return normalizeDetailArticle(recentArticle);
+    }
   }
 
-  const cachedItems = readStoredItems(OFFLINE_NEWS_CACHE_KEY);
-  if (!Array.isArray(cachedItems)) {
-    return null;
+  for (const key of OFFLINE_NEWS_CACHE_KEYS) {
+    const cachedItems = readStoredItems(key);
+    if (!Array.isArray(cachedItems)) {
+      continue;
+    }
+
+    const item = cachedItems.find((value) => normalizeSlug(value?.slug) === targetSlug) || null;
+    if (item) {
+      return normalizeDetailArticle(item);
+    }
   }
 
-  const item = cachedItems.find((value) => normalizeSlug(value?.slug) === targetSlug) || null;
-  return item ? normalizeDetailArticle(item) : null;
+  return null;
 };
 
 const persistLoadedArticle = (article) => {
@@ -1303,11 +1345,13 @@ const persistLoadedArticle = (article) => {
   const storages = getReadableStorages();
 
   storages.forEach((storage) => {
-    try {
-      storage.setItem(OFFLINE_LAST_ARTICLE_KEY, serialized);
-    } catch (_error) {
-      // Ignora falhas de quota.
-    }
+    OFFLINE_LAST_ARTICLE_KEYS.forEach((key) => {
+      try {
+        storage.setItem(key, serialized);
+      } catch (_error) {
+        // Ignora falhas de quota.
+      }
+    });
   });
 };
 

@@ -35,10 +35,10 @@
     />
     <link rel="stylesheet" href="./styles.css?v=20260415e" />
     <link rel="stylesheet" href="./pro-design.css?v=20260414c" />
-    <link rel="stylesheet" href="./subpages-redesign.css?v=20260415e" />
+    <link rel="stylesheet" href="./subpages-redesign.css?v=20260417c" />
     <link rel="stylesheet" href="./modern-launch.css?v=20260414a" />
   </head>
-  <body class="students-page study-redesign-page">
+  <body class="students-page study-redesign-page construction-mode">
     <div class="page-shell">
       <header class="students-topbar study-topbar">
         <div class="students-brand">
@@ -55,9 +55,15 @@
           <a href="#trilhas">Trilhas</a>
           <a href="#assuntos">Assuntos</a>
           <a href="#faculdade">Faculdade</a>
-          <a class="featured" href="./infantil.html">Canal Tech Gamer</a>
+          <a class="featured" href="./infantil.html">Clube Infantil</a>
         </nav>
       </header>
+
+      <section class="site-demo-notice" aria-label="Aviso de demonstração visual">
+        <span>Em construção</span>
+        <strong>Algumas áreas deste site-filho ainda estão em montagem.</strong>
+        <p>Somente demonstração visual por enquanto. Aguarde finalização.</p>
+      </section>
 
       <main class="students-layout study-redesign-layout">
         <section class="students-hero section-block study-campus-hero" id="busca">
@@ -70,7 +76,7 @@
             </p>
 
             <form class="study-search-panel" role="search" aria-label="Buscar assuntos de estudo">
-              <label for="study-search">Buscador de assuntos</label>
+              <label for="study-search">Buscar assuntos</label>
               <div class="study-search-shell">
                 <input
                   id="study-search"
@@ -90,6 +96,12 @@
                 Mostrando 0 trilhas e assuntos.
               </p>
             </form>
+
+            <div class="students-actions">
+              <a class="solid-button" href="#wire-global">Abrir destaques</a>
+              <a class="outline-button" href="#trilhas">Ver trilhas</a>
+              <a class="outline-button tech-button" href="#faculdade">Ir para faculdade</a>
+            </div>
           </div>
 
           <div class="study-hero-stage" data-subpage-reveal data-subpage-tilt>
@@ -113,7 +125,7 @@
                 />
               </figure>
               <div class="study-hero-mini-copy">
-                <span>study date</span>
+                <span>dupla de estudo</span>
                 <strong>dupla focada</strong>
                 <p>anotacoes, cafe, laptop e um clima bem mais jovem.</p>
               </div>
@@ -129,7 +141,7 @@
                 />
               </figure>
               <div class="study-hero-mini-copy">
-                <span>crew do campus</span>
+                <span>grupo do campus</span>
                 <strong>galera conectada</strong>
                 <p>cara de comunidade real, amigos e rotina universitaria viva.</p>
               </div>
@@ -167,12 +179,12 @@
             <p>Dicas para faculdade, leitura academica, cronograma, ABNT, apresentacao e entrega final.</p>
           </article>
           <article data-subpage-reveal data-subpage-tilt>
-            <span>campus mood</span>
+            <span>vida de campus</span>
             <strong>jovem e visual</strong>
             <p>Rostos, grupo, rotina leve e vida de campus deixam o estudo mais proximo do dia a dia.</p>
           </article>
           <article data-subpage-reveal data-subpage-tilt>
-            <span>study squad</span>
+            <span>estudo em grupo</span>
             <strong>grupo e projeto</strong>
             <p>espaco para collab, trabalho em equipe, revisao com amigos e estudo acompanhado.</p>
           </article>
@@ -186,8 +198,8 @@
         >
           <div class="students-section-head">
             <div>
-              <p class="eyebrow">wire global</p>
-              <h2>Educacao, campus e tecnologia com materias reais do mundo todo.</h2>
+              <p class="eyebrow">destaques globais</p>
+              <h2>Educação, campus, IA e carreira com fontes globais acompanhadas diariamente.</h2>
             </div>
             <p>
               Acompanhe mudancas em universidade, ensino, IA, acesso e carreira com uma
@@ -195,7 +207,7 @@
             </p>
           </div>
           <p class="topic-wire-status" data-topic-feed-status aria-live="polite">
-            Carregando pautas reais desta editoria...
+            Buscando novidades reais desta editoria...
           </p>
           <div class="topic-wire-grid" data-topic-feed-grid></div>
         </section>
@@ -745,6 +757,6 @@
       </main>
     </div>
     <script defer src="./pro-design.js?v=20260413b"></script>
-    <script defer src="./subpages-redesign.js?v=20260415b"></script>
+    <script defer src="./subpages-redesign.js?v=20260417b"></script>
   </body>
 </html>

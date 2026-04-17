@@ -251,7 +251,7 @@ window.SIDEBAR_DATA = {
         label: "bancos e nomes liquidos",
         title: "bolsa segue forte, mas exige entrada com calma",
         summary:
-          "Com o Ibovespa renovando recordes e menos ruido tributario em grandes bancos, o fluxo segue premiando nomes grandes e defensivos. Leitura editorial a partir das fontes do dia.",
+          "Com o Ibovespa renovando recordes e menos ruido tributario em grandes bancos, o fluxo segue premiando nomes grandes e defensivos. Contexto a partir das fontes do dia.",
         sourceName: "Investidor10 + Reuters/TradingView",
         url: "https://investidor10.com.br/noticias/bolsa-bate-recorde-pelo-3-dia-seguido-e-supera-197-mil-pontos-dolar-vai-a-r-5-119716/"
       },

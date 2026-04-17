@@ -48,6 +48,15 @@ body.catalogo-lock-scroll {
   transition: transform 280ms ease;
 }
 
+.catalogo-welcome-shell {
+  position: relative;
+  width: min(1228px, 100%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
 .catalogo-welcome.is-open .catalogo-welcome-card {
   transform: translateY(0) scale(1);
 }
@@ -4989,5 +4998,2752 @@ body.catalogo-lock-scroll {
     opacity: 0;
     transform: translateY(-10px) scale(1.03);
     filter: blur(1.4px);
+  }
+}
+
+/* 2026-04-17: retomada - abertura de materia e popup mais legiveis */
+.catalogo-opening-radar {
+  position: absolute;
+  top: 3.4rem;
+  left: 1rem;
+  z-index: 11;
+  display: grid;
+  gap: 0.08rem;
+  max-width: min(280px, calc(100% - 2rem));
+  padding: 0.72rem 0.86rem;
+  border-radius: 16px;
+  border: 1px solid rgba(154, 232, 255, 0.34);
+  background:
+    linear-gradient(135deg, rgba(6, 18, 38, 0.92), rgba(10, 39, 77, 0.76)),
+    radial-gradient(circle at 10% 0%, rgba(139, 229, 255, 0.2), transparent 60%);
+  color: #f5fbff;
+  box-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.catalogo-opening-radar span {
+  color: #8fe8ff;
+  font-size: 0.66rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.catalogo-opening-radar strong {
+  color: #fff7dd;
+  font-family: "Outfit", "Sora", sans-serif;
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  line-height: 1.02;
+  text-shadow: 0 0 18px rgba(255, 214, 122, 0.18);
+}
+
+.catalogo-opening-radar small {
+  color: rgba(231, 246, 255, 0.84);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.catalogo-prophecy-panel {
+  box-shadow:
+    0 24px 46px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(137, 226, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14) !important;
+}
+
+.catalogo-prophecy-phase.phase-alert strong,
+.catalogo-prophecy-phase.phase-meme strong {
+  text-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.34),
+    0 0 22px rgba(255, 218, 117, 0.28) !important;
+}
+
+.catalogo-visual-copy {
+  z-index: 12;
+  background:
+    linear-gradient(135deg, rgba(4, 14, 32, 0.94), rgba(13, 45, 86, 0.84)) !important;
+  border-color: rgba(147, 225, 255, 0.32) !important;
+}
+
+.catalogo-welcome.is-compact .catalogo-opening-radar {
+  top: 2.9rem;
+  left: 0.7rem;
+  max-width: calc(100% - 1.4rem);
+  padding: 0.56rem 0.66rem;
+  border-radius: 13px;
+}
+
+.catalogo-welcome.is-compact .catalogo-opening-radar strong {
+  font-size: 0.92rem;
+}
+
+@media (max-width: 760px) {
+  .catalogo-opening-radar {
+    top: 3rem;
+    left: 0.75rem;
+    max-width: calc(100% - 1.5rem);
+  }
+}
+
+/* 2026-04-17b: popup refinado apos revisao local */
+.catalogo-opening-radar {
+  top: 1.12rem;
+  right: 1rem;
+  left: auto;
+  z-index: 9;
+  max-width: 218px;
+  padding: 0.58rem 0.72rem;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(4, 13, 28, 0.9), rgba(11, 38, 75, 0.72)),
+    radial-gradient(circle at 10% 0%, rgba(139, 229, 255, 0.16), transparent 60%);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.catalogo-opening-radar span {
+  font-size: 0.58rem;
+}
+
+.catalogo-opening-radar strong {
+  font-size: 0.96rem;
+}
+
+.catalogo-opening-radar small {
+  font-size: 0.66rem;
+}
+
+.catalogo-prophecy-panel {
+  top: 47%;
+  left: 1.08rem;
+  right: 1.08rem;
+  z-index: 7;
+}
+
+.catalogo-prophecy-title {
+  max-width: 30ch;
+}
+
+.catalogo-director-stage {
+  top: -62px;
+  left: 0.62rem;
+  transform: scale(0.72);
+}
+
+.catalogo-director-stage .catalogo-pixel-director {
+  --catalogo-laser-length: 96px;
+  --catalogo-beam-length: 232px;
+}
+
+.catalogo-visual-copy {
+  margin-left: 7.6rem;
+  padding: 0.82rem 0.95rem;
+}
+
+@media (max-width: 920px) {
+  .catalogo-opening-radar {
+    top: 0.9rem;
+    right: 0.78rem;
+    max-width: 190px;
+    padding: 0.5rem 0.62rem;
+  }
+
+  .catalogo-prophecy-panel {
+    top: 46%;
+  }
+
+  .catalogo-director-stage {
+    top: -46px;
+    transform: scale(0.62);
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-opening-radar {
+    display: none;
+  }
+
+  .catalogo-prophecy-panel {
+    top: 46%;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-opening-radar {
+  display: none;
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-panel {
+  top: 44%;
+}
+
+/* 2026-04-17c: aliens na constelacao e onibus espacial do meme */
+.catalogo-star-alien {
+  position: absolute;
+  z-index: 5;
+  width: 24px;
+  height: 30px;
+  border-radius: 50% 50% 42% 42%;
+  background:
+    radial-gradient(circle at 36% 42%, rgba(5, 16, 22, 0.98) 0 2px, transparent 2.4px),
+    radial-gradient(circle at 64% 42%, rgba(5, 16, 22, 0.98) 0 2px, transparent 2.4px),
+    linear-gradient(180deg, #9dffd4 0%, #43c89a 64%, #155a4b 100%);
+  box-shadow:
+    0 0 18px rgba(132, 255, 207, 0.5),
+    inset 0 -4px 0 rgba(6, 45, 42, 0.2);
+  opacity: 0.94;
+  animation: catalogoStarAlienFloat 3.8s ease-in-out infinite;
+}
+
+.catalogo-star-alien::before,
+.catalogo-star-alien::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-star-alien::before {
+  left: 50%;
+  top: -7px;
+  width: 34px;
+  height: 16px;
+  border-radius: 50%;
+  border-top: 2px solid rgba(139, 255, 216, 0.72);
+  transform: translateX(-50%);
+}
+
+.catalogo-star-alien::after {
+  left: 50%;
+  bottom: -6px;
+  width: 32px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 255, 192, 0.22), transparent 70%);
+  transform: translateX(-50%);
+  filter: blur(3px);
+}
+
+.catalogo-star-alien.alien-star-a {
+  left: 188px;
+  top: 70px;
+  transform: rotate(-8deg) scale(0.82);
+}
+
+.catalogo-star-alien.alien-star-b {
+  left: 34px;
+  top: 128px;
+  transform: rotate(9deg) scale(0.72);
+  animation-delay: -1.6s;
+}
+
+.catalogo-space-bus {
+  position: absolute;
+  right: 1.7rem;
+  top: 5.4rem;
+  z-index: 6;
+  width: 138px;
+  height: 58px;
+  border-radius: 30px 46px 46px 30px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96), rgba(174, 207, 238, 0.94) 68%, rgba(111, 151, 199, 0.98)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(120, 158, 205, 0.92));
+  box-shadow:
+    0 0 0 2px rgba(180, 225, 255, 0.24),
+    0 18px 36px rgba(0, 0, 0, 0.28),
+    0 0 24px rgba(126, 247, 255, 0.22);
+  transform: rotate(-8deg);
+  animation: catalogoSpaceBusRide 5.2s ease-in-out infinite;
+}
+
+.catalogo-space-bus::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 17px;
+  width: 28px;
+  height: 22px;
+  border-radius: 999px 0 0 999px;
+  background:
+    radial-gradient(circle at 10% 50%, rgba(255, 196, 92, 0.96) 0 20%, rgba(255, 95, 72, 0.72) 32%, transparent 70%);
+  filter: blur(1px);
+}
+
+.catalogo-space-bus::after {
+  content: "";
+  position: absolute;
+  right: -16px;
+  top: 15px;
+  width: 28px;
+  height: 28px;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  background: linear-gradient(90deg, rgba(166, 214, 255, 0.98), rgba(238, 249, 255, 0.96));
+}
+
+.catalogo-space-bus-window {
+  position: absolute;
+  left: 22px;
+  top: 12px;
+  width: 58px;
+  height: 26px;
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 70% 45%, rgba(122, 255, 200, 0.46), transparent 32%),
+    linear-gradient(135deg, rgba(6, 28, 54, 0.96), rgba(38, 92, 139, 0.92));
+  box-shadow:
+    inset 0 0 0 2px rgba(230, 248, 255, 0.34),
+    0 0 14px rgba(126, 247, 255, 0.24);
+}
+
+.catalogo-space-bus-passenger {
+  position: absolute;
+  left: 44px;
+  top: 15px;
+  width: 20px;
+  height: 30px;
+  border-radius: 8px 8px 5px 5px;
+  background:
+    radial-gradient(circle at 50% 7px, #f4c7a3 0 6px, transparent 6.4px),
+    linear-gradient(180deg, transparent 0 13px, #18273a 13px 100%);
+  box-shadow:
+    0 -2px 0 #5b3c2a,
+    inset 0 -7px 0 rgba(255, 255, 255, 0.12);
+}
+
+.catalogo-space-bus-passenger::after {
+  content: "EM";
+  position: absolute;
+  left: -2px;
+  bottom: 3px;
+  width: 24px;
+  color: #dff7ff;
+  font-family: "IBM Plex Mono", "Consolas", monospace;
+  font-size: 0.42rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.catalogo-prophecy-phase.phase-code,
+.catalogo-prophecy-phase.phase-glyph {
+  color: rgba(155, 222, 255, 0.98);
+}
+
+.catalogo-prophecy-phase.phase-alert strong {
+  font-size: clamp(0.94rem, 2.2vw, 1.28rem);
+  line-height: 1;
+}
+
+@media (max-width: 920px) {
+  .catalogo-star-alien.alien-star-a {
+    left: 164px;
+    top: 68px;
+  }
+
+  .catalogo-star-alien.alien-star-b {
+    left: 38px;
+    top: 122px;
+  }
+
+  .catalogo-space-bus {
+    right: 0.8rem;
+    top: 4.9rem;
+    transform: rotate(-8deg) scale(0.84);
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-star-alien {
+    display: none;
+  }
+
+  .catalogo-space-bus {
+    right: 0.2rem;
+    top: 3.8rem;
+    transform: rotate(-8deg) scale(0.58);
+    opacity: 0.82;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-space-bus,
+.catalogo-welcome.is-compact .catalogo-star-alien {
+  display: none;
+}
+
+@keyframes catalogoStarAlienFloat {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -9px;
+  }
+}
+
+@keyframes catalogoSpaceBusRide {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  35% {
+    translate: -8px -42px;
+  }
+
+  70% {
+    translate: 6px 32px;
+  }
+}
+
+/* 2026-04-17d: diretor centralizado acima do card do terminal */
+.catalogo-director-stage {
+  left: 50% !important;
+  top: calc(47% - 238px) !important;
+  bottom: auto !important;
+  width: 188px;
+  height: 210px;
+  z-index: 10;
+  transform: translateX(-50%) scale(0.72) !important;
+  transform-origin: center bottom;
+}
+
+.catalogo-director-stage .catalogo-pixel-director {
+  --catalogo-arm-angle: -46deg;
+  --catalogo-laser-angle: 72deg;
+  --catalogo-arm-x: 104px;
+  --catalogo-arm-y: 90px;
+  --catalogo-laser-length: 78px;
+  --catalogo-beam-length: 176px;
+}
+
+.catalogo-director-stage .catalogo-director-laser-burst {
+  left: 14px;
+  top: 48px;
+}
+
+.catalogo-director-stage .catalogo-pointer-beam {
+  left: calc(var(--catalogo-laser-length) - 10px);
+  transform: rotate(4deg);
+}
+
+@media (max-width: 920px) {
+  .catalogo-director-stage {
+    top: calc(46% - 204px) !important;
+    transform: translateX(-50%) scale(0.62) !important;
+  }
+
+  .catalogo-director-stage .catalogo-pixel-director {
+    --catalogo-laser-length: 68px;
+    --catalogo-beam-length: 150px;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-director-stage {
+    top: calc(46% - 152px) !important;
+    transform: translateX(-50%) scale(0.46) !important;
+  }
+
+  .catalogo-director-stage .catalogo-pixel-director {
+    --catalogo-laser-angle: 74deg;
+    --catalogo-laser-length: 58px;
+    --catalogo-beam-length: 122px;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-director-stage {
+  left: 50% !important;
+  top: calc(44% - 118px) !important;
+  transform: translateX(-50%) scale(0.36) !important;
+}
+
+/* 2026-04-17e: meme legivel, uma etapa por vez */
+.catalogo-prophecy-panel {
+  top: 54% !important;
+  min-height: 270px;
+}
+
+.catalogo-prophecy-stream {
+  min-height: 8.2rem;
+}
+
+.catalogo-prophecy-phase {
+  opacity: 0;
+  filter: none;
+  transform: translateY(10px);
+}
+
+.catalogo-prophecy-phase.phase-binary {
+  animation: catalogoProphecyBinaryStep 36s linear infinite !important;
+}
+
+.catalogo-prophecy-phase.phase-ascii {
+  animation: catalogoProphecyAsciiStep 36s linear infinite !important;
+}
+
+.catalogo-prophecy-phase.phase-code {
+  animation: catalogoProphecyCodeStep 36s linear infinite !important;
+}
+
+.catalogo-prophecy-phase.phase-glyph {
+  animation: catalogoProphecyGlyphStep 36s linear infinite !important;
+}
+
+.catalogo-prophecy-phase.phase-alert {
+  animation: catalogoProphecyAlertStep 36s linear infinite !important;
+}
+
+.catalogo-prophecy-phase.phase-meme {
+  animation: catalogoProphecyMemeStep 36s linear infinite !important;
+}
+
+.catalogo-prophecy-console {
+  animation-duration: 36s !important;
+}
+
+.catalogo-director-stage {
+  top: calc(54% - 300px) !important;
+  z-index: 8;
+  transform: translateX(-50%) scale(0.64) !important;
+}
+
+.catalogo-director-stage .catalogo-pixel-director {
+  --catalogo-laser-angle: 82deg;
+  --catalogo-laser-length: 64px;
+  --catalogo-beam-length: 138px;
+}
+
+.catalogo-space-bus {
+  right: 0.9rem;
+  top: 7.4rem;
+  transform: rotate(-8deg) scale(0.82);
+  opacity: 0.9;
+}
+
+.catalogo-star-alien.alien-star-a {
+  left: 182px;
+  top: 86px;
+}
+
+.catalogo-star-alien.alien-star-b {
+  left: 48px;
+  top: 154px;
+}
+
+.catalogo-prophecy-phase.phase-alert,
+.catalogo-prophecy-phase.phase-meme {
+  align-content: center;
+  justify-items: start;
+}
+
+.catalogo-prophecy-phase.phase-alert strong,
+.catalogo-prophecy-phase.phase-meme strong {
+  display: block;
+  max-width: 18ch;
+  font-size: clamp(1.08rem, 2.8vw, 1.58rem) !important;
+  line-height: 0.98;
+}
+
+.catalogo-prophecy-phase.phase-alert small,
+.catalogo-prophecy-phase.phase-meme small {
+  max-width: 34ch;
+  color: rgba(244, 248, 255, 0.86);
+}
+
+@media (max-width: 920px) {
+  .catalogo-prophecy-panel {
+    top: 52% !important;
+    min-height: 240px;
+  }
+
+  .catalogo-prophecy-stream {
+    min-height: 7.4rem;
+  }
+
+  .catalogo-director-stage {
+    top: calc(52% - 252px) !important;
+    transform: translateX(-50%) scale(0.52) !important;
+  }
+
+  .catalogo-space-bus {
+    right: 0.25rem;
+    top: 6.2rem;
+    transform: rotate(-8deg) scale(0.66);
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-prophecy-panel {
+    top: 47% !important;
+    min-height: 190px;
+  }
+
+  .catalogo-prophecy-stream {
+    min-height: 6.4rem;
+  }
+
+  .catalogo-director-stage {
+    top: calc(47% - 178px) !important;
+    transform: translateX(-50%) scale(0.4) !important;
+  }
+
+  .catalogo-prophecy-phase.phase-alert strong,
+  .catalogo-prophecy-phase.phase-meme strong {
+    max-width: 17ch;
+    font-size: 0.98rem !important;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-prophecy-panel {
+  top: 46% !important;
+  min-height: 150px;
+}
+
+.catalogo-welcome.is-compact .catalogo-director-stage {
+  top: calc(46% - 132px) !important;
+}
+
+@keyframes catalogoProphecyBinaryStep {
+  0%,
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  18%,
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes catalogoProphecyAsciiStep {
+  0%,
+  15%,
+  35%,
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  18%,
+  31% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogoProphecyCodeStep {
+  0%,
+  31%,
+  51%,
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  35%,
+  47% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogoProphecyGlyphStep {
+  0%,
+  47%,
+  68%,
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  51%,
+  64% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogoProphecyAlertStep {
+  0%,
+  64%,
+  84%,
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  68%,
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogoProphecyMemeStep {
+  0%,
+  80%,
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  84%,
+  96% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  99% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* 2026-04-17g: diretor reposicionado para a direita e mais abaixo, mirando as diretrizes */
+.catalogo-welcome-shell .catalogo-director-stage {
+  left: auto !important;
+  right: clamp(-2.9rem, -2.5vw, -1.4rem) !important;
+  top: clamp(16.2rem, 35vh, 20.6rem) !important;
+  bottom: auto !important;
+  width: 168px;
+  height: 188px;
+  z-index: 9;
+  transform: scale(-0.6, 0.6) !important;
+  transform-origin: right center;
+}
+
+.catalogo-welcome-shell .catalogo-director-stage .catalogo-pixel-director {
+  --catalogo-arm-angle: -58deg;
+  --catalogo-laser-angle: 8deg;
+  --catalogo-arm-x: 100px;
+  --catalogo-arm-y: 88px;
+  --catalogo-laser-length: 92px;
+  --catalogo-beam-length: 1180px;
+}
+
+.catalogo-welcome-shell .catalogo-director-stage .catalogo-director-laser-burst {
+  left: 13px;
+  top: 48px;
+}
+
+.catalogo-welcome-shell .catalogo-director-stage .catalogo-pointer-beam {
+  left: calc(var(--catalogo-laser-length) - 10px);
+  transform: rotate(2deg);
+}
+
+.catalogo-star-alien.alien-star-c,
+.catalogo-star-alien.alien-star-d,
+.catalogo-star-alien.alien-star-e {
+  display: block;
+}
+
+.catalogo-star-alien.alien-star-c {
+  left: 282px;
+  top: 116px;
+  transform: rotate(12deg) scale(0.64);
+  animation-delay: -0.9s;
+}
+
+.catalogo-star-alien.alien-star-d {
+  right: 154px;
+  top: 78px;
+  transform: rotate(-13deg) scale(0.7);
+  animation-delay: -2.3s;
+}
+
+.catalogo-star-alien.alien-star-e {
+  right: 66px;
+  top: 158px;
+  transform: rotate(7deg) scale(0.58);
+  animation-delay: -3.1s;
+}
+
+.catalogo-sky-angel {
+  position: absolute;
+  z-index: 4;
+  width: 50px;
+  height: 58px;
+  border-radius: 50% 50% 42% 42%;
+  background:
+    radial-gradient(circle at 50% 10px, rgba(255, 242, 201, 0.98) 0 6px, transparent 6.5px),
+    linear-gradient(180deg, transparent 0 17px, rgba(255, 246, 221, 0.88) 17px 36px, rgba(151, 217, 255, 0.22) 36px 100%);
+  filter: drop-shadow(0 0 14px rgba(255, 238, 176, 0.42));
+  opacity: 0.82;
+  transform-origin: center bottom;
+  animation: catalogoAngelWatch 5.8s ease-in-out infinite;
+}
+
+.catalogo-sky-angel::before,
+.catalogo-sky-angel::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-sky-angel::before {
+  left: 50%;
+  top: -4px;
+  width: 28px;
+  height: 10px;
+  border: 2px solid rgba(255, 236, 168, 0.86);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 14px rgba(255, 230, 154, 0.4);
+}
+
+.catalogo-sky-angel::after {
+  left: 50%;
+  top: 18px;
+  width: 92px;
+  height: 32px;
+  border-radius: 50% 50% 46% 46%;
+  background:
+    radial-gradient(ellipse at 24% 52%, rgba(255, 255, 246, 0.72) 0 42%, transparent 43%),
+    radial-gradient(ellipse at 76% 52%, rgba(255, 255, 246, 0.72) 0 42%, transparent 43%);
+  transform: translateX(-50%);
+  filter: blur(0.4px);
+}
+
+.catalogo-sky-angel.sky-angel-a {
+  left: 64px;
+  top: 78px;
+  transform: rotate(-7deg) scale(0.74);
+}
+
+.catalogo-sky-angel.sky-angel-b {
+  left: 50%;
+  top: 46px;
+  transform: translateX(-50%) rotate(5deg) scale(0.62);
+  animation-delay: -1.9s;
+}
+
+.catalogo-sky-angel.sky-angel-c {
+  right: 212px;
+  top: 118px;
+  transform: rotate(9deg) scale(0.58);
+  animation-delay: -3.4s;
+}
+
+.catalogo-bomber-plane {
+  position: absolute;
+  z-index: 5;
+  width: 126px;
+  height: 24px;
+  border-radius: 18px 22px 18px 14px;
+  background:
+    linear-gradient(90deg, rgba(18, 22, 30, 0.98), rgba(47, 58, 74, 0.98) 52%, rgba(84, 102, 126, 0.94) 88%, rgba(202, 214, 226, 0.92));
+  box-shadow:
+    0 9px 20px rgba(0, 0, 0, 0.25),
+    0 0 16px rgba(144, 206, 255, 0.16);
+  opacity: 0.86;
+  animation: catalogoBomberFly 9.6s linear infinite;
+}
+
+.catalogo-bomber-plane::before,
+.catalogo-bomber-plane::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-bomber-plane::before {
+  left: 30px;
+  top: -16px;
+  width: 72px;
+  height: 58px;
+  clip-path: polygon(0 50%, 44% 36%, 50% 0, 58% 0, 100% 48%, 62% 64%, 56% 100%, 46% 100%);
+  background:
+    radial-gradient(circle at 52% 34%, rgba(186, 207, 228, 0.88) 0 12%, transparent 13%),
+    linear-gradient(180deg, rgba(26, 31, 41, 0.98), rgba(63, 77, 96, 0.96));
+}
+
+.catalogo-bomber-plane::after {
+  right: -10px;
+  top: 6px;
+  width: 28px;
+  height: 12px;
+  clip-path: polygon(100% 50%, 0 0, 0 100%);
+  background: linear-gradient(90deg, rgba(214, 226, 237, 0.96), rgba(92, 110, 134, 0.96));
+}
+
+.catalogo-bomber-plane .catalogo-plane-bomb {
+  position: absolute;
+  left: 6px;
+  top: -6px;
+  width: 18px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid rgba(218, 230, 242, 0.76);
+  border-left-color: rgba(255, 255, 255, 0.92);
+  border-right-color: rgba(255, 255, 255, 0.16);
+  background: transparent;
+  filter: blur(0.2px);
+  animation: catalogoPropellerSpin 0.16s linear infinite;
+  box-shadow: 0 0 8px rgba(219, 232, 244, 0.18);
+}
+
+.catalogo-bomber-plane .catalogo-plane-bomb::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 30px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  background: rgba(226, 238, 248, 0.9);
+}
+
+.catalogo-bomber-plane .catalogo-plane-bomb::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 2px;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+  background: rgba(226, 238, 248, 0.9);
+}
+
+.catalogo-war-drone {
+  position: absolute;
+  z-index: 6;
+  width: 58px;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(180, 199, 219, 0.96), rgba(68, 87, 109, 0.98));
+  box-shadow:
+    0 8px 16px rgba(0, 0, 0, 0.24),
+    0 0 12px rgba(154, 222, 255, 0.18);
+  opacity: 0.88;
+  animation: catalogoDronePatrol 8.4s ease-in-out infinite;
+}
+
+.catalogo-war-drone::before,
+.catalogo-war-drone::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-war-drone::before {
+  left: -12px;
+  top: 9px;
+  width: 82px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(71, 88, 111, 0.98), rgba(194, 212, 229, 0.96), rgba(71, 88, 111, 0.98));
+}
+
+.catalogo-war-drone::after {
+  left: 23px;
+  top: -12px;
+  width: 12px;
+  height: 46px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(71, 88, 111, 0.98), rgba(194, 212, 229, 0.96), rgba(71, 88, 111, 0.98));
+}
+
+.catalogo-war-drone.drone-a {
+  --drone-scale: 0.76;
+  left: 30%;
+  top: 7.6rem;
+  animation-delay: -1.1s;
+}
+
+.catalogo-war-drone.drone-b {
+  --drone-scale: 0.64;
+  right: 22%;
+  top: 11.6rem;
+  animation-delay: -3.2s;
+}
+
+.catalogo-war-drone.drone-c {
+  --drone-scale: 0.56;
+  right: 5%;
+  top: 6.5rem;
+  animation-delay: -5s;
+}
+
+.catalogo-plane-bomb {
+  position: absolute;
+  left: 50%;
+  top: 28px;
+  width: 12px;
+  height: 28px;
+  border-radius: 8px 8px 6px 6px;
+  background:
+    linear-gradient(180deg, rgba(255, 222, 158, 0.92) 0 14%, rgba(49, 61, 75, 0.98) 14% 100%);
+  transform-origin: center top;
+  animation: catalogoPlaneBombDrop 2.8s linear infinite;
+}
+
+.catalogo-bomber-plane.bomber-plane-a {
+  left: -96px;
+  top: 170px;
+  transform: rotate(4deg) scale(0.76);
+}
+
+.catalogo-bomber-plane.bomber-plane-b {
+  left: 34%;
+  top: 126px;
+  transform: rotate(-3deg) scale(0.62);
+  animation-delay: -3.8s;
+}
+
+.catalogo-bomber-plane.bomber-plane-b .catalogo-plane-bomb {
+  animation-delay: -1.1s;
+}
+
+.catalogo-bomber-plane.bomber-plane-c {
+  right: -110px;
+  top: 206px;
+  transform: rotate(185deg) scale(0.68);
+  animation-name: catalogoBomberFlyReverse;
+  animation-delay: -6.1s;
+}
+
+.catalogo-bomber-plane.bomber-plane-c .catalogo-plane-bomb {
+  animation-delay: -1.8s;
+}
+
+@media (max-width: 920px) {
+  .catalogo-welcome-shell {
+    width: min(1140px, 100%);
+  }
+
+  .catalogo-welcome-shell .catalogo-director-stage {
+    left: auto !important;
+    right: -1.6rem !important;
+    top: clamp(16.8rem, 37vh, 20.8rem) !important;
+    transform: scale(-0.48, 0.48) !important;
+  }
+
+  .catalogo-welcome-shell .catalogo-director-stage .catalogo-pixel-director {
+    --catalogo-laser-length: 84px;
+    --catalogo-beam-length: 980px;
+  }
+
+  .catalogo-star-alien.alien-star-c,
+  .catalogo-star-alien.alien-star-d,
+  .catalogo-star-alien.alien-star-e {
+    transform: scale(0.5);
+  }
+
+  .catalogo-sky-angel {
+    transform: scale(0.5);
+  }
+
+  .catalogo-bomber-plane {
+    transform: scale(0.54);
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-welcome-shell .catalogo-director-stage {
+    display: none;
+  }
+
+  .catalogo-sky-angel.sky-angel-b,
+  .catalogo-sky-angel.sky-angel-c,
+  .catalogo-bomber-plane.bomber-plane-b {
+    display: none;
+  }
+
+  .catalogo-bomber-plane.bomber-plane-a,
+  .catalogo-bomber-plane.bomber-plane-c {
+    opacity: 0.62;
+    transform: scale(0.42);
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-sky-angel,
+.catalogo-welcome.is-compact .catalogo-bomber-plane {
+  display: none;
+}
+
+@keyframes catalogoAngelWatch {
+  0%,
+  100% {
+    translate: 0 0;
+    opacity: 0.7;
+  }
+
+  48% {
+    translate: 0 -8px;
+    opacity: 0.92;
+  }
+}
+
+@keyframes catalogoBomberFly {
+  0% {
+    translate: -12px 0;
+  }
+
+  100% {
+    translate: 720px -46px;
+  }
+}
+
+@keyframes catalogoBomberFlyReverse {
+  0% {
+    translate: 18px 0;
+  }
+
+  100% {
+    translate: -720px -36px;
+  }
+}
+
+@keyframes catalogoPlaneBombDrop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -6px, 0) rotate(4deg);
+  }
+
+  22% {
+    opacity: 0.92;
+  }
+
+  76% {
+    opacity: 0.92;
+    transform: translate3d(-8px, 104px, 0) rotate(46deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(-12px, 138px, 0) rotate(80deg);
+  }
+}
+
+/* 2026-04-17h: ceu mais limpo, constelacao em destaque e guerra mais legivel */
+.catalogo-welcome-shell {
+  align-items: flex-start;
+}
+
+.catalogo-welcome-card {
+  max-height: min(920px, calc(100vh - 32px));
+  align-items: stretch;
+}
+
+.catalogo-welcome-visual {
+  align-self: stretch;
+  min-height: min(920px, calc(100vh - 32px));
+  max-height: min(920px, calc(100vh - 32px));
+}
+
+.catalogo-welcome-copy {
+  align-self: stretch;
+  max-height: min(920px, calc(100vh - 32px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.catalogo-opening-radar {
+  display: none !important;
+}
+
+.catalogo-cosmos {
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.catalogo-cruzeiro-sul {
+  top: 4.5rem !important;
+  left: 5.5rem !important;
+  width: 252px !important;
+  height: 236px !important;
+  z-index: 9 !important;
+  pointer-events: none;
+  isolation: isolate;
+  filter:
+    drop-shadow(0 0 18px rgba(172, 229, 255, 0.5))
+    drop-shadow(0 0 38px rgba(92, 164, 255, 0.26));
+}
+
+.catalogo-cruzeiro-sul::before {
+  content: "";
+  position: absolute;
+  inset: -32px -40px -36px -40px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, rgba(132, 201, 255, 0.26), rgba(88, 136, 224, 0.08) 42%, transparent 72%);
+  box-shadow: inset 0 0 0 1px rgba(198, 235, 255, 0.12);
+}
+
+.catalogo-cruzeiro-trace {
+  opacity: 0.98;
+  box-shadow:
+    0 0 14px rgba(176, 230, 255, 0.36),
+    0 0 24px rgba(122, 178, 255, 0.18);
+}
+
+.catalogo-cruzeiro-star {
+  box-shadow:
+    0 0 24px rgba(181, 233, 255, 0.82),
+    0 0 48px rgba(86, 170, 255, 0.42);
+}
+
+.catalogo-orbital-satellite.satellite-a {
+  left: auto !important;
+  right: 1.4rem !important;
+  top: 4.6rem !important;
+  transform: rotate(-14deg) scale(0.84) !important;
+}
+
+.catalogo-orbital-satellite.satellite-b {
+  left: auto !important;
+  right: 10.5rem !important;
+  top: 13.2rem !important;
+  transform: rotate(11deg) scale(0.72) !important;
+}
+
+.catalogo-ufo.ufo-a {
+  top: 12rem !important;
+  left: 0.9rem !important;
+  transform: rotate(-8deg) scale(0.72) !important;
+}
+
+.catalogo-ufo.ufo-b {
+  left: auto !important;
+  right: 2rem !important;
+  top: 10.2rem !important;
+  transform: rotate(8deg) scale(0.64) !important;
+}
+
+.catalogo-star-alien.alien-star-a {
+  left: 0.7rem !important;
+  top: 6.8rem !important;
+  transform: rotate(-8deg) scale(0.7) !important;
+}
+
+.catalogo-star-alien.alien-star-b {
+  left: 1.4rem !important;
+  top: 13.8rem !important;
+  transform: rotate(8deg) scale(0.66) !important;
+}
+
+.catalogo-star-alien.alien-star-c {
+  left: auto !important;
+  right: 9.2rem !important;
+  top: 3.1rem !important;
+  transform: rotate(12deg) scale(0.54) !important;
+}
+
+.catalogo-star-alien.alien-star-d {
+  right: 1rem !important;
+  top: 6rem !important;
+  transform: rotate(-13deg) scale(0.6) !important;
+}
+
+.catalogo-star-alien.alien-star-e {
+  right: 2.8rem !important;
+  top: 12.8rem !important;
+  transform: rotate(6deg) scale(0.48) !important;
+}
+
+.catalogo-sky-angel.sky-angel-a {
+  left: -0.55rem !important;
+  top: 1.9rem !important;
+  transform: rotate(-8deg) scale(0.5) !important;
+}
+
+.catalogo-sky-angel.sky-angel-b {
+  left: auto !important;
+  right: 4.8rem !important;
+  top: 1.8rem !important;
+  transform: rotate(4deg) scale(0.44) !important;
+}
+
+.catalogo-sky-angel.sky-angel-c {
+  right: 0.9rem !important;
+  top: 10.8rem !important;
+  transform: rotate(9deg) scale(0.46) !important;
+}
+
+.catalogo-war-tableau {
+  inset: auto 0.65rem 11.7rem !important;
+  bottom: 11.7rem !important;
+  height: 172px !important;
+  z-index: 5 !important;
+  opacity: 0.9 !important;
+}
+
+.catalogo-war-smoke.smoke-left {
+  left: 7% !important;
+  bottom: 26px !important;
+}
+
+.catalogo-war-smoke.smoke-mid {
+  left: 39% !important;
+  bottom: 28px !important;
+}
+
+.catalogo-war-smoke.smoke-right {
+  right: 6% !important;
+  bottom: 18px !important;
+}
+
+.catalogo-war-flash.flash-left {
+  left: 10% !important;
+  bottom: 28px !important;
+}
+
+.catalogo-war-flash.flash-center {
+  left: 44% !important;
+  bottom: 36px !important;
+}
+
+.catalogo-war-flash.flash-right {
+  right: 10% !important;
+  bottom: 40px !important;
+}
+
+.catalogo-war-tracer.tracer-left {
+  left: 17% !important;
+  bottom: 110px !important;
+}
+
+.catalogo-war-tracer.tracer-mid {
+  left: 44% !important;
+  bottom: 118px !important;
+}
+
+.catalogo-war-tracer.tracer-right {
+  right: 16% !important;
+  bottom: 114px !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-a {
+  left: -102px !important;
+  top: 13.8rem !important;
+  transform: rotate(6deg) scale(0.72) !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-b {
+  left: auto !important;
+  right: 6.8rem !important;
+  top: 9.1rem !important;
+  transform: rotate(-4deg) scale(0.6) !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-c {
+  right: -112px !important;
+  top: 15.6rem !important;
+  transform: rotate(184deg) scale(0.64) !important;
+}
+
+.catalogo-space-bus {
+  --catalogo-space-bus-scale: 0.92;
+  right: 0.55rem !important;
+  top: 4.2rem !important;
+  width: 152px !important;
+  height: 62px !important;
+  z-index: 7 !important;
+  opacity: 0.96 !important;
+  transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale)) !important;
+  animation: catalogoSpaceBusCruise 14s linear infinite !important;
+}
+
+.catalogo-space-bus-window {
+  left: 24px;
+  top: 13px;
+  width: 62px;
+  height: 28px;
+}
+
+.catalogo-space-bus-passenger {
+  left: 48px;
+  top: 16px;
+}
+
+.catalogo-war-jet {
+  position: absolute;
+  z-index: 6;
+  width: 108px;
+  height: 18px;
+  border-radius: 12px 24px 24px 12px;
+  background:
+    linear-gradient(90deg, rgba(29, 40, 54, 0.98), rgba(110, 134, 160, 0.96) 54%, rgba(224, 236, 246, 0.96));
+  box-shadow:
+    0 12px 22px rgba(0, 0, 0, 0.3),
+    0 0 16px rgba(145, 210, 255, 0.2);
+  filter: drop-shadow(0 6px 10px rgba(4, 10, 18, 0.34));
+  opacity: 0.9;
+  animation: catalogoWarJetPass 6.8s linear infinite;
+}
+
+.catalogo-war-jet::before,
+.catalogo-war-jet::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-war-jet::before {
+  left: 24px;
+  top: -14px;
+  width: 56px;
+  height: 46px;
+  clip-path: polygon(0 54%, 30% 42%, 52% 0, 72% 42%, 100% 54%, 72% 68%, 52% 100%, 30% 68%);
+  background: linear-gradient(180deg, rgba(124, 147, 172, 0.94), rgba(38, 51, 66, 0.98));
+}
+
+.catalogo-war-jet::after {
+  left: -18px;
+  top: 5px;
+  width: 26px;
+  height: 8px;
+  border-radius: 999px 0 0 999px;
+  background: radial-gradient(circle at 0 50%, rgba(255, 185, 88, 0.98), rgba(255, 92, 48, 0.4) 56%, transparent 74%);
+  filter: blur(0.8px);
+}
+
+.catalogo-war-jet.jet-left {
+  left: -98px;
+  bottom: 108px;
+  transform: rotate(7deg) scale(0.76);
+}
+
+.catalogo-war-jet.jet-right {
+  right: -94px;
+  bottom: 126px;
+  transform: rotate(184deg) scale(0.72);
+  animation-name: catalogoWarJetPassReverse;
+  animation-delay: -2.8s;
+}
+
+.catalogo-war-tank {
+  position: absolute;
+  bottom: 8px;
+  z-index: 3;
+  width: 74px;
+  height: 25px;
+  border-radius: 12px 12px 10px 10px;
+  background:
+    linear-gradient(180deg, rgba(58, 76, 96, 0.98), rgba(26, 39, 54, 0.96) 60%, rgba(10, 17, 26, 0.98) 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 6px, rgba(0, 0, 0, 0.18) 6px 9px);
+  box-shadow:
+    0 12px 18px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.catalogo-war-tank::before,
+.catalogo-war-tank::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-war-tank::before {
+  left: 14px;
+  top: -11px;
+  width: 32px;
+  height: 14px;
+  border-radius: 10px 10px 6px 6px;
+  background: linear-gradient(180deg, rgba(90, 114, 138, 0.96), rgba(28, 42, 57, 0.98));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.catalogo-war-tank::after {
+  right: -19px;
+  top: -8px;
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(197, 223, 244, 0.94), rgba(85, 110, 136, 0.98));
+  box-shadow: 0 0 10px rgba(158, 213, 255, 0.16);
+}
+
+.catalogo-war-tank.tank-left {
+  left: 9%;
+  transform: scale(0.94);
+}
+
+.catalogo-war-tank.tank-center {
+  left: 41%;
+  bottom: 12px;
+  transform: scale(1.04);
+}
+
+.catalogo-war-tank.tank-right {
+  right: 7%;
+  transform: scaleX(-1) scale(0.92);
+}
+
+@media (max-width: 920px) {
+  .catalogo-welcome-card {
+    max-height: min(880px, calc(100vh - 24px));
+  }
+
+  .catalogo-welcome-visual,
+  .catalogo-welcome-copy {
+    min-height: min(880px, calc(100vh - 24px));
+    max-height: min(880px, calc(100vh - 24px));
+  }
+
+  .catalogo-cruzeiro-sul {
+    top: 4.6rem !important;
+    left: 4.2rem !important;
+    width: 220px !important;
+    height: 212px !important;
+  }
+
+  .catalogo-space-bus {
+    --catalogo-space-bus-scale: 0.76;
+    right: -0.3rem !important;
+    top: 4.8rem !important;
+  }
+
+  .catalogo-war-jet.jet-left {
+    transform: rotate(7deg) scale(0.58);
+  }
+
+  .catalogo-war-jet.jet-right {
+    transform: rotate(184deg) scale(0.54);
+  }
+
+  .catalogo-war-tank.tank-left {
+    transform: scale(0.82);
+  }
+
+  .catalogo-war-tank.tank-center {
+    transform: scale(0.9);
+  }
+
+  .catalogo-war-tank.tank-right {
+    transform: scaleX(-1) scale(0.8);
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-welcome-card,
+  .catalogo-welcome-visual,
+  .catalogo-welcome-copy {
+    max-height: none;
+    min-height: unset;
+  }
+
+  .catalogo-welcome-copy {
+    overflow-y: visible;
+  }
+
+  .catalogo-cruzeiro-sul {
+    top: 3.9rem !important;
+    left: 2.8rem !important;
+    width: 170px !important;
+    height: 164px !important;
+  }
+
+  .catalogo-space-bus {
+    --catalogo-space-bus-scale: 0.54;
+    right: -1.6rem !important;
+    top: 4.9rem !important;
+  }
+
+  .catalogo-sky-angel.sky-angel-b,
+  .catalogo-war-jet.jet-right,
+  .catalogo-war-tank.tank-right {
+    display: none;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-war-jet,
+.catalogo-welcome.is-compact .catalogo-war-tank {
+  display: none;
+}
+
+@keyframes catalogoSpaceBusCruise {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  22% {
+    transform: translate3d(-34px, 10px, 0) rotate(-2deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  46% {
+    transform: translate3d(-118px, 38px, 0) rotate(4deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  68% {
+    transform: translate3d(-182px, 76px, 0) rotate(8deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  84% {
+    transform: translate3d(-92px, 28px, 0) rotate(2deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+}
+
+@keyframes catalogoWarJetPass {
+  0% {
+    translate: -10px 0;
+  }
+
+  100% {
+    translate: 520px -30px;
+  }
+}
+
+@keyframes catalogoWarJetPassReverse {
+  0% {
+    translate: 8px 0;
+  }
+
+  100% {
+    translate: -520px -22px;
+  }
+}
+
+/* 2026-04-17h: popup com campo de batalha maior e copy mais suave */
+.catalogo-welcome-shell {
+  width: min(1460px, 100%) !important;
+}
+
+.catalogo-welcome-card {
+  width: min(1320px, 97vw) !important;
+  grid-template-columns: minmax(540px, 1.28fr) minmax(360px, 0.82fr) !important;
+}
+
+.catalogo-welcome-visual,
+.catalogo-welcome-copy {
+  min-height: min(980px, calc(100vh - 26px)) !important;
+  max-height: min(980px, calc(100vh - 26px)) !important;
+}
+
+.catalogo-welcome-visual {
+  padding: 1.45rem 1.3rem 1rem !important;
+  background:
+    radial-gradient(circle at 24% 18%, rgba(138, 198, 255, 0.18), transparent 22%),
+    radial-gradient(circle at 72% 28%, rgba(121, 164, 255, 0.14), transparent 18%),
+    linear-gradient(180deg, rgba(14, 31, 54, 0.92) 0%, rgba(23, 52, 85, 0.96) 36%, rgba(31, 68, 102, 0.94) 53%, rgba(17, 35, 56, 0.98) 53.5%, rgba(22, 40, 55, 0.98) 100%) !important;
+}
+
+.catalogo-welcome-copy {
+  padding: 1.48rem 1.34rem 1.36rem !important;
+}
+
+.catalogo-welcome-lead {
+  max-width: 34ch;
+}
+
+.catalogo-terms-summary {
+  gap: 0.8rem !important;
+}
+
+.catalogo-terms-list {
+  gap: 0.72rem !important;
+}
+
+.catalogo-term-item {
+  padding: 0.84rem 0.92rem !important;
+}
+
+.catalogo-stage-chip {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.catalogo-cosmos::after {
+  inset: 8% 8% 26% 8% !important;
+}
+
+.catalogo-prophecy-panel {
+  top: 44.5% !important;
+  left: 1.12rem !important;
+  right: 1.12rem !important;
+}
+
+.catalogo-war-tableau {
+  inset: auto 0.45rem 15rem !important;
+  bottom: 15rem !important;
+  height: 214px !important;
+}
+
+.catalogo-night-landscape {
+  left: 0.3rem !important;
+  right: 0.3rem !important;
+  bottom: 2rem !important;
+  height: 252px !important;
+  overflow: hidden;
+}
+
+.catalogo-sea-band {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: 148px;
+  height: 34px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(93, 147, 183, 0.08), rgba(62, 109, 145, 0.46) 42%, rgba(21, 51, 76, 0.82) 100%);
+  box-shadow:
+    0 0 0 1px rgba(170, 226, 255, 0.1),
+    0 10px 24px rgba(3, 12, 23, 0.24);
+  opacity: 0.76;
+}
+
+.catalogo-war-ship {
+  position: absolute;
+  bottom: 154px;
+  z-index: 2;
+  width: 96px;
+  height: 22px;
+  border-radius: 4px 10px 8px 14px;
+  background:
+    linear-gradient(180deg, rgba(88, 104, 123, 0.96), rgba(28, 37, 49, 0.98) 70%, rgba(10, 15, 24, 0.98));
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  opacity: 0.9;
+}
+
+.catalogo-war-ship::before,
+.catalogo-war-ship::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-war-ship::before {
+  left: 14px;
+  bottom: 16px;
+  width: 24px;
+  height: 16px;
+  background: linear-gradient(180deg, rgba(142, 160, 180, 0.96), rgba(60, 72, 89, 0.98));
+  box-shadow: 26px -4px 0 -2px rgba(116, 134, 154, 0.92);
+}
+
+.catalogo-war-ship::after {
+  right: 16px;
+  bottom: 18px;
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(180deg, rgba(224, 239, 255, 0.92), rgba(125, 150, 176, 0.22));
+  box-shadow: 10px 4px 0 0 rgba(224, 239, 255, 0.82);
+}
+
+.catalogo-war-ship.ship-left {
+  left: 8%;
+  transform: scale(0.88);
+}
+
+.catalogo-war-ship.ship-right {
+  right: 10%;
+  transform: scaleX(-1) scale(0.8);
+}
+
+.catalogo-horizon-glow {
+  bottom: 102px !important;
+  height: 62px !important;
+}
+
+.catalogo-land-ridge.ridge-back {
+  bottom: 118px !important;
+}
+
+.catalogo-land-ridge.ridge-mid {
+  bottom: 76px !important;
+}
+
+.catalogo-battle-line {
+  left: 0.2rem !important;
+  right: 0.2rem !important;
+  bottom: 0 !important;
+  height: 202px !important;
+}
+
+.catalogo-trench {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.catalogo-trench.trench-back {
+  bottom: 88px;
+  height: 30px;
+  background:
+    radial-gradient(circle at 18% 35%, rgba(255, 170, 98, 0.18), transparent 20%),
+    radial-gradient(circle at 62% 40%, rgba(255, 132, 92, 0.16), transparent 18%),
+    linear-gradient(180deg, rgba(56, 44, 37, 0.94), rgba(19, 13, 12, 0.98));
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.24),
+    inset 0 10px 0 rgba(255, 183, 132, 0.06);
+}
+
+.catalogo-trench.trench-front {
+  bottom: 18px;
+  height: 48px;
+  background:
+    repeating-linear-gradient(90deg, rgba(22, 16, 14, 0.98) 0 22px, rgba(52, 37, 31, 0.98) 22px 32px),
+    linear-gradient(180deg, rgba(63, 44, 36, 0.98), rgba(18, 13, 13, 1));
+  box-shadow:
+    0 18px 28px rgba(0, 0, 0, 0.28),
+    inset 0 10px 0 rgba(255, 197, 137, 0.07);
+}
+
+.catalogo-field-gun {
+  position: absolute;
+  bottom: 54px;
+  z-index: 4;
+  width: 58px;
+  height: 18px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(88, 103, 120, 0.94), rgba(24, 35, 48, 0.98));
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.24);
+}
+
+.catalogo-field-gun::before,
+.catalogo-field-gun::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.catalogo-field-gun::before {
+  left: 10px;
+  top: -5px;
+  width: 36px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(191, 213, 232, 0.96), rgba(78, 95, 113, 0.98));
+}
+
+.catalogo-field-gun::after {
+  left: 14px;
+  bottom: -8px;
+  width: 28px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(35, 43, 52, 0.96), rgba(10, 14, 18, 0.98));
+}
+
+.catalogo-field-gun.gun-left {
+  left: 22%;
+}
+
+.catalogo-field-gun.gun-right {
+  right: 21%;
+  transform: scaleX(-1);
+}
+
+.catalogo-war-tank {
+  width: 84px !important;
+  height: 28px !important;
+  bottom: 28px !important;
+}
+
+.catalogo-war-tank.tank-left {
+  left: 10% !important;
+}
+
+.catalogo-war-tank.tank-center {
+  left: 43% !important;
+  bottom: 34px !important;
+}
+
+.catalogo-war-tank.tank-right {
+  right: 8% !important;
+  bottom: 26px !important;
+}
+
+.catalogo-war-soldier {
+  bottom: 24px !important;
+}
+
+.catalogo-war-soldier.human-unit {
+  --soldier-tone: linear-gradient(180deg, #85745f, #2f2a25 74%);
+}
+
+.catalogo-war-soldier.human-unit::before {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(51, 34, 24, 0.92) 0 2px, transparent 2px),
+    linear-gradient(180deg, #d3b59a 0%, #8f6b4a 100%);
+}
+
+.catalogo-war-soldier.robot-unit {
+  --soldier-tone: linear-gradient(180deg, #79b7d5, #29455f 74%);
+}
+
+.catalogo-war-soldier.robot-unit::before {
+  background:
+    radial-gradient(circle at 34% 46%, rgba(149, 241, 255, 0.94) 0 2px, transparent 2.1px),
+    radial-gradient(circle at 66% 46%, rgba(149, 241, 255, 0.94) 0 2px, transparent 2.1px),
+    linear-gradient(180deg, #cde6f6 0%, #5d88a7 100%);
+  box-shadow:
+    inset 0 -2px 0 rgba(31, 61, 87, 0.42),
+    0 0 12px rgba(111, 214, 255, 0.16);
+}
+
+.catalogo-war-soldier.robot-unit .catalogo-war-rifle::after {
+  background: linear-gradient(180deg, rgba(122, 239, 255, 0.96), rgba(61, 152, 182, 0.24));
+}
+
+.catalogo-war-soldier.soldier-theta {
+  left: 56%;
+  --soldier-scale: 0.76;
+  --soldier-direction: -1;
+  --soldier-rifle-angle: -18deg;
+  animation-delay: -0.55s;
+}
+
+.catalogo-war-soldier.soldier-iota {
+  right: 18%;
+  --soldier-scale: 0.7;
+  --soldier-rifle-angle: -26deg;
+  animation-delay: -0.88s;
+}
+
+.catalogo-visual-copy {
+  margin-left: 0 !important;
+  width: min(320px, calc(100% - 2rem)) !important;
+  padding: 0.82rem 0.94rem !important;
+}
+
+@media (max-width: 920px) {
+  .catalogo-welcome-card {
+    width: min(1180px, 97vw) !important;
+    grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr) !important;
+  }
+
+  .catalogo-welcome-visual,
+  .catalogo-welcome-copy {
+    min-height: min(900px, calc(100vh - 24px)) !important;
+    max-height: min(900px, calc(100vh - 24px)) !important;
+  }
+
+  .catalogo-war-tableau {
+    bottom: 13.8rem !important;
+    height: 188px !important;
+  }
+
+  .catalogo-night-landscape {
+    height: 214px !important;
+    bottom: 1.75rem !important;
+  }
+
+  .catalogo-sea-band,
+  .catalogo-war-ship {
+    opacity: 0.72;
+  }
+
+  .catalogo-battle-line {
+    height: 176px !important;
+  }
+
+  .catalogo-field-gun.gun-right,
+  .catalogo-war-soldier.soldier-iota {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-stage-chip {
+    letter-spacing: 0.08em !important;
+  }
+
+  .catalogo-sea-band,
+  .catalogo-war-ship,
+  .catalogo-field-gun,
+  .catalogo-trench.trench-back,
+  .catalogo-war-soldier.soldier-theta,
+  .catalogo-war-soldier.soldier-iota {
+    display: none;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-sea-band,
+.catalogo-welcome.is-compact .catalogo-war-ship,
+.catalogo-welcome.is-compact .catalogo-field-gun,
+.catalogo-welcome.is-compact .catalogo-trench,
+.catalogo-welcome.is-compact .catalogo-war-soldier.soldier-theta,
+.catalogo-welcome.is-compact .catalogo-war-soldier.soldier-iota {
+  display: none;
+}
+
+/* 2026-04-17i: popup ainda maior, guerra mais cheia e onibus espacial com rota segura */
+.catalogo-welcome {
+  padding: clamp(10px, 1.8vw, 20px) !important;
+  place-items: center center !important;
+}
+
+.catalogo-welcome-shell {
+  width: min(1600px, 100%) !important;
+}
+
+.catalogo-welcome-card {
+  width: min(1480px, 99vw) !important;
+  min-height: calc(100vh - 12px) !important;
+  height: calc(100vh - 12px) !important;
+  max-height: calc(100vh - 12px) !important;
+  grid-template-columns: minmax(720px, 1.52fr) minmax(320px, 0.68fr) !important;
+  border-radius: 36px !important;
+}
+
+.catalogo-welcome-visual,
+.catalogo-welcome-copy {
+  min-height: calc(100vh - 12px) !important;
+  height: calc(100vh - 12px) !important;
+  max-height: calc(100vh - 12px) !important;
+}
+
+.catalogo-welcome-visual {
+  padding: 1.45rem 1.4rem 1.1rem !important;
+}
+
+.catalogo-prophecy-panel {
+  top: 43.2% !important;
+  left: 1.24rem !important;
+  right: 1.24rem !important;
+  min-height: 306px !important;
+}
+
+.catalogo-war-tableau {
+  inset: auto 0.3rem 17rem !important;
+  bottom: 17rem !important;
+  height: 244px !important;
+}
+
+.catalogo-night-landscape {
+  left: 0.18rem !important;
+  right: 0.18rem !important;
+  bottom: 0.12rem !important;
+  height: 39% !important;
+}
+
+.catalogo-sea-band {
+  left: 1.5% !important;
+  right: 1.5% !important;
+  bottom: 200px !important;
+  height: 42px !important;
+}
+
+.catalogo-war-ship {
+  bottom: 208px !important;
+  width: 116px !important;
+  height: 26px !important;
+}
+
+.catalogo-war-ship.ship-left {
+  left: 6% !important;
+  transform: scale(0.96) !important;
+}
+
+.catalogo-war-ship.ship-center {
+  left: 46.5%;
+  transform: translateX(-50%) scale(0.86);
+}
+
+.catalogo-war-ship.ship-right {
+  right: 6% !important;
+  transform: scaleX(-1) scale(0.92) !important;
+}
+
+.catalogo-horizon-glow {
+  bottom: 146px !important;
+  height: 74px !important;
+}
+
+.catalogo-land-ridge.ridge-back {
+  bottom: 166px !important;
+}
+
+.catalogo-land-ridge.ridge-mid {
+  bottom: 110px !important;
+}
+
+.catalogo-land-ridge.ridge-front {
+  height: 102px !important;
+}
+
+.catalogo-battle-line {
+  height: min(290px, 84%) !important;
+}
+
+.catalogo-trench.trench-back {
+  bottom: 112px !important;
+  height: 34px !important;
+}
+
+.catalogo-trench.trench-front {
+  bottom: 24px !important;
+  height: 62px !important;
+}
+
+.catalogo-field-gun {
+  bottom: 72px !important;
+}
+
+.catalogo-field-gun.gun-left {
+  left: 18% !important;
+}
+
+.catalogo-field-gun.gun-right {
+  right: 18% !important;
+}
+
+.catalogo-war-tank {
+  width: 96px !important;
+  height: 32px !important;
+  bottom: 40px !important;
+}
+
+.catalogo-war-tank.tank-center {
+  left: 44.5% !important;
+  bottom: 48px !important;
+}
+
+.catalogo-war-soldier {
+  width: 42px !important;
+  height: 112px !important;
+  bottom: 34px !important;
+}
+
+.catalogo-war-soldier.runner-unit {
+  animation: catalogoRunnerDash 1.2s steps(2) infinite !important;
+}
+
+.catalogo-war-soldier.striker-unit {
+  animation:
+    catalogoRunnerDash 1.05s steps(2) infinite,
+    catalogoStrikerLean 1.8s ease-in-out infinite !important;
+}
+
+.catalogo-war-rifle {
+  width: 46px !important;
+}
+
+.catalogo-war-soldier.soldier-alpha {
+  left: 3% !important;
+}
+
+.catalogo-war-soldier.soldier-beta {
+  left: 13.5% !important;
+}
+
+.catalogo-war-soldier.soldier-gamma {
+  left: 25.5% !important;
+}
+
+.catalogo-war-soldier.soldier-epsilon {
+  left: 39% !important;
+}
+
+.catalogo-war-soldier.soldier-theta {
+  left: 52% !important;
+  --soldier-scale: 0.9 !important;
+}
+
+.catalogo-war-soldier.soldier-zeta {
+  left: 64% !important;
+  --soldier-scale: 0.94 !important;
+}
+
+.catalogo-war-soldier.soldier-delta {
+  right: 13% !important;
+}
+
+.catalogo-war-soldier.soldier-iota {
+  right: 23% !important;
+  --soldier-scale: 0.82 !important;
+}
+
+.catalogo-war-soldier.soldier-eta {
+  right: 3% !important;
+}
+
+.catalogo-war-soldier.soldier-kappa {
+  left: 73%;
+  --soldier-scale: 0.78;
+  --soldier-direction: -1;
+  --soldier-rifle-angle: -20deg;
+  animation-delay: -0.68s;
+}
+
+.catalogo-war-soldier.soldier-lambda {
+  left: 85%;
+  --soldier-scale: 0.7;
+  --soldier-rifle-angle: -28deg;
+  animation-delay: -1.12s;
+}
+
+.catalogo-battle-shot,
+.catalogo-battle-burst {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.catalogo-battle-shot {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 244, 170, 0), rgba(255, 241, 162, 0.96) 36%, rgba(255, 136, 78, 0.92) 78%, rgba(255, 92, 70, 0));
+  box-shadow: 0 0 14px rgba(255, 196, 106, 0.34);
+  animation: catalogoBattleShot 0.9s linear infinite;
+}
+
+.catalogo-battle-shot.shot-a {
+  left: 16%;
+  bottom: 112px;
+  width: 108px;
+  transform: rotate(-8deg);
+}
+
+.catalogo-battle-shot.shot-b {
+  left: 54%;
+  bottom: 126px;
+  width: 132px;
+  transform: rotate(4deg);
+  animation-delay: -0.3s;
+}
+
+.catalogo-battle-shot.shot-c {
+  right: 12%;
+  bottom: 96px;
+  width: 82px;
+  transform: rotate(-12deg);
+  animation-delay: -0.55s;
+}
+
+.catalogo-battle-burst {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(255, 247, 184, 0.98) 0 18%, rgba(255, 173, 78, 0.9) 32%, rgba(255, 96, 72, 0.44) 58%, transparent 74%);
+  box-shadow:
+    0 0 20px rgba(255, 167, 98, 0.34),
+    0 0 34px rgba(255, 96, 72, 0.16);
+  animation: catalogoBattleBurst 1.15s ease-out infinite;
+}
+
+.catalogo-battle-burst::before,
+.catalogo-battle-burst::after {
+  content: "";
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 239, 172, 0.92);
+}
+
+.catalogo-battle-burst::before {
+  width: 34px;
+  height: 4px;
+  border-radius: 999px;
+}
+
+.catalogo-battle-burst::after {
+  width: 4px;
+  height: 34px;
+  border-radius: 999px;
+}
+
+.catalogo-battle-burst.burst-a {
+  left: 28%;
+  bottom: 88px;
+}
+
+.catalogo-battle-burst.burst-b {
+  left: 58%;
+  bottom: 72px;
+  animation-delay: -0.42s;
+}
+
+.catalogo-battle-burst.burst-c {
+  right: 20%;
+  bottom: 116px;
+  animation-delay: -0.75s;
+}
+
+.catalogo-war-smoke.smoke-left {
+  left: 5% !important;
+  width: 144px !important;
+  height: 144px !important;
+}
+
+.catalogo-war-smoke.smoke-mid {
+  left: 35% !important;
+  width: 130px !important;
+  height: 130px !important;
+}
+
+.catalogo-war-smoke.smoke-right {
+  right: 5% !important;
+  width: 168px !important;
+  height: 168px !important;
+}
+
+.catalogo-war-flash.flash-left {
+  left: 8% !important;
+  bottom: 36px !important;
+}
+
+.catalogo-war-flash.flash-center {
+  left: 41% !important;
+  bottom: 44px !important;
+}
+
+.catalogo-war-flash.flash-right {
+  right: 8% !important;
+  bottom: 54px !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-a {
+  left: -88px !important;
+  top: 12.4rem !important;
+  transform: rotate(5deg) scale(0.78) !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-b {
+  right: 10rem !important;
+  top: 7.6rem !important;
+  transform: rotate(-4deg) scale(0.68) !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-c {
+  right: -98px !important;
+  top: 13.8rem !important;
+  transform: rotate(184deg) scale(0.76) !important;
+}
+
+.catalogo-bomber-plane.bomber-plane-d {
+  left: 44%;
+  top: 10.2rem;
+  transform: rotate(3deg) scale(0.58);
+  animation-delay: -4.2s;
+}
+
+.catalogo-space-bus {
+  --catalogo-space-bus-scale: 1.04;
+  right: -2rem !important;
+  top: 1.8rem !important;
+  width: 168px !important;
+  height: 68px !important;
+  z-index: 8 !important;
+  transform-origin: center center !important;
+  animation: catalogoSpaceBusOrbitWide 18s ease-in-out infinite !important;
+}
+
+.catalogo-space-bus::before {
+  left: -34px !important;
+  top: 17px !important;
+  width: 42px !important;
+  height: 28px !important;
+  background:
+    radial-gradient(circle at 0 50%, rgba(255, 234, 116, 0.98) 0 18%, rgba(255, 154, 74, 0.88) 38%, rgba(255, 84, 69, 0.5) 58%, transparent 74%) !important;
+  filter: blur(0.8px) !important;
+  animation: catalogoBusThrusterPulse 0.9s steps(2) infinite !important;
+}
+
+.catalogo-space-bus::after {
+  right: -18px !important;
+}
+
+.catalogo-space-bus-window {
+  left: 26px !important;
+  top: 14px !important;
+  width: 70px !important;
+  height: 30px !important;
+}
+
+.catalogo-space-bus-passenger {
+  left: 54px !important;
+  top: 19px !important;
+}
+
+.catalogo-visual-copy {
+  width: min(350px, calc(100% - 2rem)) !important;
+}
+
+@media (max-width: 920px) {
+  .catalogo-welcome-card {
+    width: min(1280px, 98vw) !important;
+    min-height: calc(100vh - 10px) !important;
+    height: calc(100vh - 10px) !important;
+    max-height: calc(100vh - 10px) !important;
+    grid-template-columns: minmax(0, 1.24fr) minmax(300px, 0.76fr) !important;
+  }
+
+  .catalogo-welcome-visual,
+  .catalogo-welcome-copy {
+    min-height: calc(100vh - 10px) !important;
+    height: calc(100vh - 10px) !important;
+    max-height: calc(100vh - 10px) !important;
+  }
+
+  .catalogo-war-tableau {
+    bottom: 15rem !important;
+    height: 214px !important;
+  }
+
+  .catalogo-night-landscape {
+    height: 34% !important;
+  }
+
+  .catalogo-war-ship.ship-center,
+  .catalogo-war-soldier.soldier-lambda {
+    display: none;
+  }
+
+  .catalogo-space-bus {
+    --catalogo-space-bus-scale: 0.84;
+    right: 0.7rem !important;
+    top: 2.4rem !important;
+    animation-name: catalogoSpaceBusOrbitTablet !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-welcome-card,
+  .catalogo-welcome-visual,
+  .catalogo-welcome-copy {
+    max-height: none !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  .catalogo-war-ship.ship-center,
+  .catalogo-war-soldier.soldier-kappa,
+  .catalogo-war-soldier.soldier-lambda,
+  .catalogo-bomber-plane.bomber-plane-d,
+  .catalogo-battle-shot.shot-c,
+  .catalogo-battle-burst.burst-c {
+    display: none;
+  }
+
+  .catalogo-space-bus {
+    --catalogo-space-bus-scale: 0.6;
+    right: -0.5rem !important;
+    top: 2.7rem !important;
+    animation-name: catalogoSpaceBusOrbitMobile !important;
+  }
+}
+
+.catalogo-welcome.is-compact .catalogo-war-ship.ship-center,
+.catalogo-welcome.is-compact .catalogo-war-soldier.soldier-kappa,
+.catalogo-welcome.is-compact .catalogo-war-soldier.soldier-lambda,
+.catalogo-welcome.is-compact .catalogo-bomber-plane.bomber-plane-d,
+.catalogo-welcome.is-compact .catalogo-war-drone,
+.catalogo-welcome.is-compact .catalogo-battle-shot,
+.catalogo-welcome.is-compact .catalogo-battle-burst {
+  display: none;
+}
+
+@keyframes catalogoSpaceBusOrbitWide {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  12% {
+    transform: translate3d(-120px, 24px, 0) rotate(-2deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  26% {
+    transform: translate3d(-300px, 84px, 0) rotate(8deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  40% {
+    transform: translate3d(-560px, 26px, 0) rotate(18deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  52% {
+    transform: translate3d(-700px, -34px, 0) rotate(204deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  66% {
+    transform: translate3d(-470px, -80px, 0) rotate(226deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  82% {
+    transform: translate3d(-180px, -22px, 0) rotate(348deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+}
+
+@keyframes catalogoSpaceBusOrbitTablet {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  30% {
+    transform: translate3d(-240px, 56px, 0) rotate(12deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  54% {
+    transform: translate3d(-430px, 4px, 0) rotate(196deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  78% {
+    transform: translate3d(-180px, -34px, 0) rotate(344deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+}
+
+@keyframes catalogoSpaceBusOrbitMobile {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  34% {
+    transform: translate3d(-120px, 34px, 0) rotate(10deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  58% {
+    transform: translate3d(-210px, -10px, 0) rotate(192deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  82% {
+    transform: translate3d(-80px, -26px, 0) rotate(344deg) scale(var(--catalogo-space-bus-scale));
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-7deg) scale(var(--catalogo-space-bus-scale));
+  }
+}
+
+@keyframes catalogoDronePatrol {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(var(--drone-scale, 1));
+  }
+
+  50% {
+    transform: translate3d(18px, -10px, 0) scale(var(--drone-scale, 1));
+  }
+}
+
+@keyframes catalogoBusThrusterPulse {
+  0%,
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scale(1.14) translateX(-2px);
+    opacity: 1;
+  }
+}
+
+@keyframes catalogoRunnerDash {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  35% {
+    translate: 10px -2px;
+  }
+
+  70% {
+    translate: -4px 2px;
+  }
+}
+
+@keyframes catalogoStrikerLean {
+  0%,
+  100% {
+    filter: drop-shadow(0 18px 22px rgba(5, 12, 20, 0.42));
+  }
+
+  50% {
+    filter: drop-shadow(0 18px 24px rgba(5, 12, 20, 0.52));
+  }
+}
+
+@keyframes catalogoBattleShot {
+  0% {
+    opacity: 0;
+    scale: 0.6 1;
+  }
+
+  25%,
+  70% {
+    opacity: 1;
+    scale: 1 1;
+  }
+
+  100% {
+    opacity: 0;
+    scale: 1.08 1;
+  }
+}
+
+@keyframes catalogoBattleBurst {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes catalogoPropellerSpin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 2026-04-17j: reuniao geral dos agentes - texto mais premium e menos espremido */
+.catalogo-welcome-copy {
+  gap: 1.22rem !important;
+}
+
+.catalogo-welcome-kicker {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.18em !important;
+}
+
+.catalogo-welcome-copy h2 {
+  max-width: 9ch;
+  font-size: clamp(1.94rem, 2.7vw, 3rem) !important;
+  line-height: 0.96 !important;
+}
+
+.catalogo-welcome-lead {
+  max-width: 30ch !important;
+  font-size: 1rem !important;
+  line-height: 1.68 !important;
+}
+
+.catalogo-terms-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.6rem !important;
+}
+
+.catalogo-summary-card {
+  padding: 0.86rem 0.82rem !important;
+  border-radius: 20px !important;
+}
+
+.catalogo-summary-card strong {
+  font-size: 0.78rem !important;
+  letter-spacing: 0.14em !important;
+  line-height: 1.22 !important;
+}
+
+.catalogo-summary-card p {
+  font-size: 0.82rem !important;
+  line-height: 1.5 !important;
+}
+
+.catalogo-term-item {
+  padding: 0.92rem 0.96rem !important;
+}
+
+.catalogo-term-item strong {
+  font-size: 0.94rem !important;
+}
+
+.catalogo-term-item span {
+  font-size: 0.92rem !important;
+  line-height: 1.48 !important;
+}
+
+.catalogo-terms-check {
+  padding: 0.94rem 1rem !important;
+  border-radius: 20px !important;
+}
+
+.catalogo-terms-check span {
+  font-size: 0.94rem !important;
+  line-height: 1.54 !important;
+}
+
+.catalogo-welcome-note {
+  max-width: 36ch;
+}
+
+@media (max-width: 1100px) {
+  .catalogo-welcome-card {
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr) !important;
+  }
+
+  .catalogo-welcome-copy {
+    padding: 1.3rem 1.2rem 1.24rem !important;
+  }
+
+  .catalogo-terms-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .catalogo-summary-card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 760px) {
+  .catalogo-welcome-copy {
+    gap: 0.95rem !important;
+    padding: 1.18rem 1rem 1.12rem !important;
+  }
+
+  .catalogo-welcome-copy h2 {
+    max-width: none;
+    font-size: 2.12rem !important;
+  }
+
+  .catalogo-welcome-lead {
+    max-width: none !important;
+    font-size: 0.98rem !important;
+    line-height: 1.58 !important;
+  }
+
+  .catalogo-terms-summary {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0.56rem !important;
+  }
+
+  .catalogo-summary-card {
+    padding: 0.84rem 0.82rem !important;
+  }
+
+  .catalogo-summary-card p {
+    font-size: 0.92rem !important;
+  }
+
+  .catalogo-term-item {
+    padding: 0.8rem 0.84rem !important;
+  }
+
+  .catalogo-term-item span,
+  .catalogo-terms-check span,
+  .catalogo-welcome-note {
+    font-size: 0.92rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .catalogo-welcome-actions {
+    gap: 0.6rem !important;
+  }
+
+  .catalogo-btn {
+    min-height: 52px !important;
   }
 }

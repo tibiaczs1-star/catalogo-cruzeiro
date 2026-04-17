@@ -6,6 +6,10 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
+    "audit:news-images": "node scripts/audit-news-image-focus.js",
+    "memory:ensure": "node scripts/codex-memory.js ensure",
+    "memory:status": "node scripts/codex-memory.js status",
+    "review:team": "node scripts/review-team-audit.js",
     "start": "node server.js"
   },
   "dependencies": {

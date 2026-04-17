@@ -24,7 +24,7 @@ window.ELECTIONS_DATA = {
           historySummary:
             "Jornalista e administrador nascido em Rio Branco. Foi deputado federal por dois mandatos consecutivos, de 2015 a 2023, e assumiu cadeira no Senado em 2023.",
           politicalPosition:
-            "Leitura editorial baseada em filiação partidária, trajetória pública e alianças: centro-direita, conservador nos costumes e com discurso fortemente municipalista.",
+            "Perfil público baseado em filiação partidária, trajetória pública e alianças: centro-direita, conservador nos costumes e com discurso fortemente municipalista.",
           politicalPositionShort: "centro-direita, conservador e municipalista",
           achievements: [
             "Chegou ao Senado em 2023 e mantém mandato previsto até 2031.",
@@ -96,7 +96,7 @@ window.ELECTIONS_DATA = {
           historySummary:
             "Foi senadora pelo Acre entre 2015 e 2023, integrou a chapa estadual eleita em 2022 e assumiu a SEASDH em 17 de junho de 2024. Em 2 de abril de 2026, recebeu a transmissão do cargo de governadora.",
           politicalPosition:
-            "Leitura editorial baseada em filiação, composição de governo e discurso público: centro-direita governista, com ênfase social, municipalista e de continuidade administrativa.",
+            "Perfil público baseado em filiação, composição de governo e discurso público: centro-direita governista, com ênfase social, municipalista e de continuidade administrativa.",
           politicalPositionShort: "centro-direita governista com foco social",
           achievements: [
             "Idealizou e liderou o programa Juntos Pelo Acre, com mutirões de serviços públicos e cidadania.",
@@ -181,7 +181,7 @@ window.ELECTIONS_DATA = {
           historySummary:
             "Empresário e liderança do campo conservador no Acre. Foi fundador e primeiro prefeito de Acrelândia e comandou a Prefeitura de Rio Branco de 2021 até 4 de abril de 2026.",
           politicalPosition:
-            "Leitura editorial baseada em partido, base de apoio e discurso público: direita, municipalista e fortemente associada ao agronegócio e à gestão conservadora.",
+            "Perfil público baseado em partido, base de apoio e discurso público: direita, municipalista e fortemente associada ao agronegócio e à gestão conservadora.",
           politicalPositionShort: "direita, municipalista e ligada ao agronegócio",
           achievements: [
             "A transmissão de cargo em 4 de abril de 2026 registrou cerca de 50 obras e ações além do previsto no plano de governo, segundo a própria gestão.",
@@ -261,7 +261,7 @@ window.ELECTIONS_DATA = {
           historySummary:
             "Professor doutor da Ufac, com atuação clínica, acadêmica e de pesquisa em infectologia e hepatologia. Ganhou projeção política a partir do campo progressista e do debate técnico em saúde pública.",
           politicalPosition:
-            "Leitura editorial baseada em partido, alianças e declarações públicas: centro-esquerda, progressista e alinhado ao campo político de apoio a Lula no Acre.",
+            "Perfil público baseado em partido, alianças e declarações públicas: centro-esquerda, progressista e alinhado ao campo político de apoio a Lula no Acre.",
           politicalPositionShort: "centro-esquerda, progressista e técnico",
           achievements: [
             "Passou a integrar as diretorias nacionais da Sociedade Brasileira de Hepatologia e da Sociedade Brasileira de Infectologia no início de 2026.",
@@ -327,7 +327,7 @@ window.ELECTIONS_DATA = {
               "Pontuação editorial do Catalogo CZS com base em trajetória pública documentada, presença institucional, entregas registradas e peso atual no debate."
           },
           proposals: [
-            "Saúde como eixo principal da pauta",
+            "Saúde como eixo principal",
             "Renovação política e debate técnico",
             "Serviços públicos com foco no cidadão"
           ]
@@ -372,7 +372,7 @@ window.ELECTIONS_DATA = {
           role: "senador",
           imageUrl: "",
           proposals: [
-            "Pauta econômica liberal",
+            "Agenda econômica liberal",
             "Infraestrutura e orçamento federal",
             "Representação do Acre em Brasília"
           ]
@@ -445,7 +445,7 @@ window.ELECTIONS_DATA = {
           proposals: [
             "Segurança pública e fronteira",
             "Fiscalização federal",
-            "Pauta conservadora e municipalista"
+            "Agenda conservadora e municipalista"
           ]
         },
         {
@@ -476,7 +476,7 @@ window.ELECTIONS_DATA = {
           role: "deputado estadual",
           imageUrl: "",
           proposals: [
-            "Pauta do Juruá e interior do Acre",
+            "Agenda do Juruá e interior do Acre",
             "Infraestrutura regional",
             "Articulação com municípios"
           ]
