@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-16T23:18:06.470Z",
+  "updatedAt": "2026-04-17T11:11:41.415Z",
   "online": true,
   "items": [
     {
@@ -121,6 +121,61 @@
       "imageUrl": "",
       "publishedAt": "2026-04-14T19:01:00.000Z",
       "collectedAt": "2026-04-16T23:18:06.291Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hYzI0aG9yYXMuY29t",
+      "title": "Caixa paga Bolsa Família a beneficiários com NIS de final 2",
+      "summary": "A Caixa Econômica Federal paga nesta sexta-feira (17) a parcela de abril do Bolsa Família aos beneficiários com Número de Inscrição Social (NIS) de final 2. O valor mínimo corresponde a R$ 600, mas com o novo adicional o valor médio do benefício sobe para R$ 678,22. Segundo o Min",
+      "url": "https://ac24horas.com/2026/04/17/caixa-paga-bolsa-familia-a-beneficiarios-com-nis-de-final-2-20/",
+      "source": "ac24horas",
+      "date": "2026-04-17T10:54:31.000Z",
+      "category": "Negócios",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-17T11:11:41.414Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hZ2VuY2lhYnJhc2ls",
+      "title": "Rádio Nacional tem programação especial para o aniversário de Brasília",
+      "summary": "",
+      "url": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/radio-nacional-tem-programacao-especial-para-o-aniversario-de-brasilia",
+      "source": "Agência Brasil - Últimas",
+      "date": "2026-04-17T10:28:00.000Z",
+      "category": "Cotidiano",
+      "location": "Brasil",
+      "createdAt": "2026-04-17T11:11:38.126Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hYzI0YWdyby5jb20v",
+      "title": "Safra de café no Acre deve chegar a 6,9 mil toneladas em 2026",
+      "summary": "Com início da colheita previsto entre maio e junho, setor aposta na valorização do café acreano dentro e fora do país Com a proximidade da colheita, a expectativa para a safra de café em 2026 no Acre é de aproximadamente 6,9 mil toneladas de café canephora (robusta), segundo dado",
+      "url": "https://ac24agro.com/2026/04/17/safra-de-cafe-no-acre-deve-chegar-a-69-mil-toneladas-em-2026/",
+      "source": "ac24horas",
+      "date": "2026-04-17T10:05:57.000Z",
+      "category": "Geral",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-17T11:11:41.414Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9nMS5nbG9iby5jb20v",
+      "title": "Caso Sílvia Raquel: Condenado por matar engenheira tem pena aumentada para 28 anos no Acre",
+      "summary": "",
+      "url": "https://g1.globo.com/ac/acre/noticia/2026/04/17/caso-silvia-raquel-condenado-por-matar-engenheira-tem-pena-aumentada-para-28-anos-no-acre.ghtml",
+      "source": "g1 Acre",
+      "date": "2026-04-17T10:00:44.000Z",
+      "category": "Geral",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-17T11:11:40.278Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hZ2VuY2lhLmFjLmdv",
+      "title": "Defesa Civil Estadual segue em alerta após grande volume de chuvas em municípios do Acre",
+      "summary": "",
+      "url": "https://agencia.ac.gov.br/defesa-civil-estadual-segue-em-alerta-apos-grande-volume-de-chuvas-em-municipios-do-acre/",
+      "source": "Agência de Notícias do Acre",
+      "date": "2026-04-16T23:35:34.000Z",
+      "category": "Geral",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-17T11:11:40.871Z"
     }
   ]
 }

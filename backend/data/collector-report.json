@@ -13,11 +13,24 @@
         "collected": 17,
         "total": 16
       }
+    },
+    {
+      "time": "2026-04-17T11:12:15.745Z",
+      "news": {
+        "previous": 10,
+        "collected": 103,
+        "total": 15
+      },
+      "business": {
+        "previous": 16,
+        "collected": 4,
+        "total": 20
+      }
     }
   ],
   "totals": {
-    "news": 3,
-    "businesses": 16
+    "news": 15,
+    "businesses": 20
   },
-  "lastUpdate": "2026-04-16T11:19:41.424Z"
+  "lastUpdate": "2026-04-17T11:12:15.745Z"
 }
