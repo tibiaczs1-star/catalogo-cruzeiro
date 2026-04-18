@@ -1,10 +1,10 @@
 # Handoff
 
-Updated: 2026-04-18T02:13:58.001Z
+Updated: 2026-04-18T02:49:37.716Z
 
-Adicionados efeitos de luz RGB em drawInteriorLights() da PubPaid; validações passaram com node --check pubpaid.js e GET /pubpaid.html=200.
+Render temporario esta no ar em https://catalogo-cruzeiro-web.onrender.com. Rotas validadas com 200: /, /pubpaid.html, /pesquisa-acre-2026.html, /sitemap.xml, /robots.txt e /api/news. render.yaml foi ajustado para healthCheckPath /.
 
 ## Next
 
-- Se o usuário pedir ajuste fino
-- mexer nas coordenadas/alpha em drawInteriorLights().
+- Usar o dominio onrender por enquanto; quando for para DNS proprio
+- configurar Cloudflare e SITE_URL final.

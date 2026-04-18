@@ -1,15 +1,18 @@
 # Current State
 
-Updated: 2026-04-18T02:29:57.469Z
+Updated: 2026-04-18T02:48:12.768Z
 
 ## Active Goal
 
-- Render pronto para criar serviço free
+- Render no ar com dominio temporario
 
 ## Summary
 
-Commit fd907fd já está no GitHub. Como o host onrender respondeu 404 e o GitHub não tem deployments/statuses, o serviço Render ainda precisa ser criado/conectado. render.yaml foi simplificado para plano free, sem disk, usando SITE_URL do onrender.
+catalogo-cruzeiro-web.onrender.com está servindo home, PubPaid, pesquisa, sitemap e API. PubPaid contém os ajustes recentes. /health oscilou para 404, então o render.yaml será ajustado para usar / como health check.
 
 ## Next
 
-- Commitar render.yaml e criar no painel Render um Blueprint/Web Service a partir do repo Juniorclss/catalogo_cruzeiro_do_sul; depois testar https://catalogo-cruzeiro-web.onrender.com/health.
+- Acompanhar novo deploy do Render após commit e validar home
+- PubPaid
+- pesquisa
+- sitemap e API no domínio onrender.
