@@ -80,20 +80,21 @@ body.catalogo-lock-scroll {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(280px, 0.92fr) minmax(320px, 1fr);
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2.6rem);
-  width: min(1080px, 94vw);
-  padding: clamp(1rem, 3vw, 2rem);
-  border-radius: 28px;
-  border: 1px solid rgba(227, 186, 93, 0.28);
+  grid-template-columns: minmax(360px, 1.08fr) minmax(360px, 0.92fr);
+  align-items: stretch;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  width: min(1180px, 94vw);
+  padding: clamp(1.2rem, 2.8vw, 2.2rem);
+  border-radius: 34px;
+  border: 1px solid rgba(205, 119, 86, 0.42);
   background:
-    linear-gradient(180deg, rgba(120, 17, 33, 0.18), rgba(22, 30, 47, 0) 32%),
-    linear-gradient(180deg, rgba(16, 24, 37, 0.96), rgba(8, 13, 23, 0.98));
+    radial-gradient(circle at 0 20%, rgba(120, 16, 33, 0.46), transparent 24%),
+    radial-gradient(circle at 100% 22%, rgba(120, 16, 33, 0.38), transparent 26%),
+    linear-gradient(180deg, rgba(17, 24, 41, 0.98), rgba(7, 12, 23, 0.99));
   box-shadow:
-    0 32px 78px rgba(3, 8, 16, 0.42),
-    inset 0 1px 0 rgba(255, 236, 186, 0.18),
-    inset 0 -1px 0 rgba(120, 17, 33, 0.28);
+    0 36px 92px rgba(3, 8, 16, 0.48),
+    inset 0 1px 0 rgba(255, 236, 186, 0.1),
+    inset 0 -1px 0 rgba(120, 17, 33, 0.24);
   backdrop-filter: blur(8px);
 }
 
@@ -103,8 +104,8 @@ body.catalogo-lock-scroll {
   inset: 0;
   border-radius: inherit;
   background:
-    linear-gradient(90deg, rgba(88, 10, 24, 0.82), rgba(88, 10, 24, 0) 14%, rgba(88, 10, 24, 0) 86%, rgba(88, 10, 24, 0.82)),
-    linear-gradient(180deg, rgba(255, 228, 162, 0.08), transparent 18%, transparent 78%, rgba(0, 0, 0, 0.22));
+    linear-gradient(90deg, rgba(108, 14, 30, 0.54), rgba(108, 14, 30, 0) 16%, rgba(108, 14, 30, 0) 84%, rgba(108, 14, 30, 0.54)),
+    linear-gradient(180deg, rgba(255, 228, 162, 0.04), transparent 16%, transparent 76%, rgba(0, 0, 0, 0.18));
   pointer-events: none;
 }
 
@@ -124,14 +125,15 @@ body.catalogo-lock-scroll {
 .catalogo-founder-thanks-media {
   position: relative;
   overflow: hidden;
-  min-height: clamp(240px, 38vw, 420px);
-  border-radius: 22px;
-  border: 1px solid rgba(231, 191, 101, 0.22);
+  min-height: clamp(320px, 34vw, 520px);
+  border-radius: 26px;
+  border: 1px solid rgba(197, 156, 82, 0.28);
   box-shadow:
-    0 24px 46px rgba(5, 10, 18, 0.38),
+    0 24px 46px rgba(5, 10, 18, 0.34),
     inset 0 1px 0 rgba(255, 245, 221, 0.16);
   background:
-    linear-gradient(180deg, rgba(17, 26, 38, 0.96), rgba(8, 13, 21, 0.98));
+    radial-gradient(circle at 30% 8%, rgba(255, 227, 160, 0.12), transparent 26%),
+    linear-gradient(180deg, rgba(26, 35, 49, 0.98), rgba(11, 18, 28, 1));
 }
 
 .catalogo-founder-thanks-media::after {
@@ -367,9 +369,10 @@ body.catalogo-lock-scroll {
   position: relative;
   z-index: 2;
   display: grid;
+  align-content: start;
   justify-items: start;
-  gap: 0.8rem;
-  width: min(520px, 100%);
+  gap: 0.95rem;
+  width: min(620px, 100%);
   text-align: left;
   opacity: 0;
   transform: scale(1.12) translateY(18px);
@@ -417,6 +420,8 @@ body.catalogo-lock-scroll {
   font-weight: 800;
   letter-spacing: 0.28em;
   text-transform: uppercase;
+  justify-self: center;
+  text-align: center;
 }
 
 .catalogo-founder-thanks-seal {
@@ -435,6 +440,7 @@ body.catalogo-lock-scroll {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.8),
     0 12px 30px rgba(13, 26, 42, 0.12);
+  justify-self: center;
 }
 
 .catalogo-founder-thanks-logo {
@@ -479,7 +485,7 @@ body.catalogo-lock-scroll {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.85rem;
-  width: min(560px, 100%);
+  width: min(100%, 620px);
 }
 
 .catalogo-founder-banner-card {
@@ -487,7 +493,7 @@ body.catalogo-lock-scroll {
   display: grid;
   align-content: start;
   gap: 0.7rem;
-  min-height: 190px;
+  min-height: 208px;
   padding: 0.8rem;
   overflow: hidden;
   border-radius: 22px;
@@ -525,12 +531,12 @@ body.catalogo-lock-scroll {
   display: grid;
   place-items: center;
   width: 100%;
-  min-height: 130px;
+  min-height: 148px;
 }
 
 .catalogo-founder-banner-card .catalogo-founder-thanks-logo {
-  width: min(220px, 100%);
-  max-height: 132px;
+  width: min(236px, 100%);
+  max-height: 148px;
   object-fit: contain;
 }
 
@@ -542,19 +548,19 @@ body.catalogo-lock-scroll {
 
 .catalogo-founder-thanks-copy strong {
   font-family: "Fraunces", "Georgia", serif;
-  font-size: clamp(1.16rem, 2vw, 1.58rem);
+  font-size: clamp(1.42rem, 2.4vw, 2rem);
   font-weight: 700;
-  line-height: 1.15;
-  max-width: 20ch;
+  line-height: 1.08;
+  max-width: 14ch;
 }
 
 .catalogo-founder-thanks-copy span {
-  font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+  font-size: clamp(1rem, 1.6vw, 1.18rem);
   font-weight: 600;
 }
 
 .catalogo-founder-opening {
-  width: min(520px, 100%);
+  width: min(100%, 620px);
   margin-top: 0.25rem;
   padding: 0.92rem 1rem 1rem;
   border-radius: 18px;
