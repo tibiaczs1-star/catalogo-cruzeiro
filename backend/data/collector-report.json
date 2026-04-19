@@ -39,11 +39,24 @@
         "collected": 10,
         "total": 20
       }
+    },
+    {
+      "time": "2026-04-19T10:59:25.624Z",
+      "news": {
+        "previous": 15,
+        "collected": 92,
+        "total": 15
+      },
+      "business": {
+        "previous": 20,
+        "collected": 0,
+        "total": 20
+      }
     }
   ],
   "totals": {
     "news": 15,
     "businesses": 20
   },
-  "lastUpdate": "2026-04-18T10:59:44.690Z"
+  "lastUpdate": "2026-04-19T10:59:25.624Z"
 }
