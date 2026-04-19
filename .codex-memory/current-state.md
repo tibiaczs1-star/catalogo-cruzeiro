@@ -1,6 +1,6 @@
 # Current State
 
-Updated: 2026-04-19T18:45:00.000Z
+Updated: 2026-04-19T20:10:00.000Z
 
 ## Active Goal
 
@@ -46,6 +46,16 @@ Updated: 2026-04-19T18:45:00.000Z
   - `mosaic-hero` vira destaque principal + apoios empilhados;
   - grids editoriais ficam em 1 coluna no celular e, no tablet, 2 colunas apenas onde faz sentido.
 - Validacoes locais desta rodada mobile/tablet: `npm run review:team` com 0 achados, verificacao de chaves em `styles.css` com `UNBALANCED_BRACES=0`, marcadores `HAS_MOBILE_REBUILD=true` e `HAS_HERO_REFLOW=true`, `GET /` respondeu 200 na porta 3000.
+- Correcao emergencial seguinte feita a partir de capturas reais do usuario: `index.html` passou a carregar `mobile-home-final.css` por ultimo para vencer conflitos de cascata de `agentes-newsroom-hero.css`, `pro-design.css` e `modern-launch.css`.
+- `mobile-home-final.css` simplifica o mobile da home com foco em iPhone/Android:
+  - topo mais curto e com menos links;
+  - `header-services-strip` oculto no celular;
+  - hero sem painel cenografico;
+  - mosaico com alturas menores;
+  - radar sem painel ilustrado no celular;
+  - `arquivo-vivo` com busca, CTA e cards em fluxo normal;
+  - rodape tech sem o grande palco/mega-stage no celular e com chat/botoes em pilha.
+- Validacoes locais desta passada: `npm run review:team` 0 achados, `GET /` 200 com `mobile-home-final.css` presente, checagem headless em iPhone 13 / Galaxy S22 / iPad mini sem overflow lateral; no celular `heroPanelVisible=false`, `radarGuideVisible=false`, `footerMegaVisible=false`, `feed-launch-button` voltou para ~45px de altura e `footer-chat-box input` para ~44px.
 
 ## Next
 
@@ -58,3 +68,4 @@ Updated: 2026-04-19T18:45:00.000Z
 - Conferir no Render o botao `Crescimento Neural` nos quatro escritorios e o envio de ordem de busca PubPaid.
 - Publicar esta rodada no `origin/main` e conferir no Render o topo mobile da home, o novo `PUBPAIDBUILDER`, o splash dos fundadores e o letreiro `Eleições 2026`.
 - Conferir visualmente a home nova em mobile real (Chrome/Android e iPhone widths) e depois publicar essa rodada no `origin/main`.
+- Publicar a camada `mobile-home-final.css` e conferir no Render se o cache do `index.html`/CSS virou para a nova versao.

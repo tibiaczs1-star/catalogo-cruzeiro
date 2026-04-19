@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: 2026-04-19T18:45:00.000Z
+Updated: 2026-04-19T20:10:00.000Z
 
 Retomada obrigatoria: ler `AGENTS.md`, `CODEX_MEMORY.md`, `.codex-memory/current-state.md`, `.codex-memory/orders.json`, `.codex-memory/assets.json` e `.codex-memory/credit-end-protocol.md`.
 
@@ -39,6 +39,16 @@ Retomada obrigatoria: ler `AGENTS.md`, `CODEX_MEMORY.md`, `.codex-memory/current
   - `mosaic-hero` simplificado para 1 destaque + apoios;
   - grids de secoes em 1 coluna no celular e 2 colunas apenas onde util no tablet.
 - Validacoes locais dessa passada: `npm run review:team` com 0 achados, checagem simples de braces em `styles.css` ok (`UNBALANCED_BRACES=0`), marcadores `HAS_MOBILE_REBUILD=true` e `HAS_HERO_REFLOW=true`, `GET /` 200 na porta 3000.
+- Depois de o usuario mandar capturas do Android com erros graves, a estrategia mudou: em vez de confiar apenas em `styles.css`, a home agora usa uma folha final `mobile-home-final.css` carregada por ultimo no `index.html`.
+- Essa folha final resolve os erros mais feios das capturas:
+  - header curto no celular, menos links e aviso de computador mais discreto;
+  - faixa `Entretenimento e serviços` escondida no phone;
+  - hero sem painel cenografico no phone;
+  - mosaico com alturas bem menores;
+  - `#radar .radar-guide-panel` escondido no phone;
+  - `arquivo-vivo` com `feed-launch-button` em largura normal e busca/sugestoes em fluxo estavel;
+  - `footer-tech.footer-mega` sem `footer-mega-stage` no phone e com chat/sitemap/rodape comprimidos em pilha.
+- Validacoes locais desta passada: `npm run review:team` 0 achados; home local 200 com `mobile-home-final.css`; checagem headless em `iphone-13`, `galaxy-s22` e `ipad-mini` sem overflow lateral; no phone `heroPanelVisible=false`, `radarGuideVisible=false`, `footerMegaVisible=false`, `launchButton.height≈45px`, `chatInput.height≈44px`.
 
 ## Pendencias
 
@@ -51,6 +61,7 @@ Retomada obrigatoria: ler `AGENTS.md`, `CODEX_MEMORY.md`, `.codex-memory/current
 - Conferir no Render todos os escritorios com o novo botao `Crescimento Neural`, especialmente se nao sobrepoe o botao `Ordens` em mobile.
 - Ainda falta publicar esta passada; o Render no momento nao recebeu a reconstrução mobile/tablet da home.
 - Proxima retomada: validar visualmente a home mobile em largura de iPhone, Android e tablet e, se ficar boa, fazer commit/push antes da sync no Render Blueprint.
+- Proxima retomada: se o usuario ainda apontar erro no phone, conferir primeiro se ele esta vendo `mobile-home-final.css?v=20260419b`; depois revisar cookies/modal mobile porque a checagem automatica ainda pode abrir esse overlay durante alguns testes.
 
 ## Referencias de jogos pesquisadas
 

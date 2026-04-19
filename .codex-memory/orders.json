@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-19T17:51:42.732Z",
+  "lastUpdatedAt": "2026-04-19T18:33:20.276Z",
   "orders": [
     {
       "id": "2026-04-17-criar-memoria-local-persistente-para-ordens-fotos-e-textos-do-usuario",
@@ -1087,6 +1087,42 @@
       "nextSteps": [
         "Validar visualmente em larguras reais",
         "Publicar no origin/main quando aprovado"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-corrigir-erros-graves-da-home-mobile-a-partir-de-capturas-reais-do-usuario",
+      "createdAt": "2026-04-19T18:33:20.276Z",
+      "updatedAt": "2026-04-19T18:33:20.276Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "ta cheio dcheio de erros, vou manda fotos reuna equipe e corrija coisas que nao se completam que nao cabem dcoisas em cima de coisas",
+      "summary": "Corrigir erros graves da home mobile a partir de capturas reais do usuario",
+      "normalizedTasks": [
+        "Reunir equipe para diagnostico mobile por capturas",
+        "Corrigir header hero e mosaico no phone",
+        "Corrigir radar e arquivo vivo",
+        "Corrigir rodape tech mobile",
+        "Validar em iPhone Android e iPad"
+      ],
+      "filesTouched": [
+        "index.html",
+        "mobile-home-final.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "mobile",
+        "home",
+        "capturas",
+        "android",
+        "iphone",
+        "footer"
+      ],
+      "nextSteps": [
+        "Publicar no origin/main",
+        "Confirmar no Render a carga de mobile-home-final.css"
       ],
       "notes": ""
     }
