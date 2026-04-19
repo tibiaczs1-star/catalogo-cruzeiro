@@ -7,6 +7,7 @@
   const OPEN_DELAY_MS = 260;
   const THANKS_SCREEN_MS = 5000;
   const THANKS_SCREEN_MS_COMPACT = 3200;
+  const THANKS_SCREEN_MS_PHONE = 1800;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
   const FOUNDERS_VIDEO_SRC = "./assets/founders-cafe-pack-anim.mp4";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
@@ -276,6 +277,12 @@
       return () => {};
     }
 
+    const totalDuration = modal?.classList.contains("is-phone")
+      ? THANKS_SCREEN_MS_PHONE
+      : modal?.classList.contains("is-compact")
+        ? THANKS_SCREEN_MS_COMPACT
+        : THANKS_SCREEN_MS;
+
     const startedAt = Date.now();
     let stepIndex = 0;
     openingText.textContent = FOUNDERS_OPENING_STEPS[0];
@@ -284,7 +291,7 @@
 
     const progressTimer = window.setInterval(() => {
       const elapsed = Date.now() - startedAt;
-      const progress = Math.min(100, Math.round((elapsed / THANKS_SCREEN_MS) * 100));
+      const progress = Math.min(100, Math.round((elapsed / totalDuration) * 100));
       openingPercent.textContent = `${progress}%`;
       openingBar.style.width = `${progress}%`;
     }, 120);
@@ -541,7 +548,7 @@
             ${buildWelcomeCopyMarkup()}
           </div>
         </article>
-        ${phone ? "" : buildFounderThanksMarkup()}
+        ${buildFounderThanksMarkup()}
       `
       : `
         <div class="catalogo-welcome-shell">
@@ -577,7 +584,26 @@
     }
 
     if (modal.classList.contains("is-phone")) {
-      closeWelcomeModalImmediately(modal);
+      const thanksVideo = modal.querySelector(".catalogo-founder-thanks-video");
+      modal.__stopFounderOpening = startFounderOpening(modal);
+      modal.classList.add("is-thanking");
+      modal.setAttribute("aria-hidden", "true");
+
+      if (thanksVideo) {
+        try {
+          thanksVideo.currentTime = 0;
+          const playAttempt = thanksVideo.play();
+          if (playAttempt && typeof playAttempt.catch === "function") {
+            playAttempt.catch(() => {});
+          }
+        } catch (_error) {
+          // ignore media playback failures
+        }
+      }
+
+      window.setTimeout(() => {
+        closeWelcomeModalImmediately(modal);
+      }, THANKS_SCREEN_MS_PHONE);
       return;
     }
 
