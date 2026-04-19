@@ -6,8 +6,8 @@
   const READY_FALLBACK_MS = 6800;
   const OPEN_DELAY_MS = 260;
   const THANKS_SCREEN_MS = 5000;
-  const THANKS_SCREEN_MS_COMPACT = 3200;
-  const THANKS_SCREEN_MS_PHONE = 1800;
+  const THANKS_SCREEN_MS_COMPACT = 3600;
+  const THANKS_SCREEN_MS_PHONE = 4200;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
   const FOUNDERS_VIDEO_SRC = "./assets/founders-cafe-pack-anim.mp4";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
@@ -218,7 +218,7 @@
               class="catalogo-founder-thanks-video"
               muted
               playsinline
-              preload="metadata"
+              preload="auto"
               autoplay
               loop
             >
