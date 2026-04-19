@@ -1,6 +1,10 @@
 /* Final emergency layer for the editorial home on mobile/tablet.
    Loaded after all other visual sheets so it wins cascade conflicts. */
 
+.mobile-agent-hub {
+  display: none;
+}
+
 @media (max-width: 980px) {
   body.editorial-home .site-header-stack > .top-strip {
     order: 1;
@@ -45,6 +49,10 @@
     background:
       radial-gradient(circle at top left, rgba(255, 255, 255, 0.26), transparent 24%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(72, 104, 149, 0.08)) !important;
+  }
+
+  body.editorial-home .hero-tourism-backdrop {
+    display: none !important;
   }
 
   body.editorial-home .hero-newsroom-copy {
@@ -207,7 +215,7 @@
     gap: 0.42rem !important;
   }
 
-  body.editorial-home .top-strip-actions a:nth-child(n + 3) {
+  body.editorial-home .top-strip-actions a:nth-child(n + 2) {
     display: none !important;
   }
 
@@ -262,8 +270,62 @@
     border-radius: 14px !important;
   }
 
-  body.editorial-home .main-nav a:nth-child(n + 5) {
+  body.editorial-home .main-nav a:first-child {
     display: none !important;
+  }
+
+  body.editorial-home .main-nav a:nth-child(n + 6) {
+    display: none !important;
+  }
+
+  body.editorial-home .mobile-agent-hub {
+    display: grid !important;
+    gap: 0.45rem;
+    margin-top: 0.1rem;
+    padding: 0.7rem 0.74rem !important;
+    border: 1px solid rgba(211, 229, 248, 0.34);
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(95, 126, 171, 0.94), rgba(122, 151, 191, 0.92));
+    box-shadow:
+      0 14px 28px rgba(61, 86, 117, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  }
+
+  body.editorial-home .mobile-agent-hub summary {
+    list-style: none;
+    cursor: pointer;
+    color: #f7fbff;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  body.editorial-home .mobile-agent-hub summary::-webkit-details-marker {
+    display: none;
+  }
+
+  body.editorial-home .mobile-agent-hub-links {
+    display: grid;
+    gap: 0.42rem;
+  }
+
+  body.editorial-home .mobile-agent-hub-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0.68rem 0.7rem;
+    border-radius: 14px;
+    border: 1px solid rgba(233, 243, 255, 0.26);
+    background: rgba(74, 102, 140, 0.54);
+    color: #f7fbff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-align: center;
+    text-decoration: none;
   }
 
   body.editorial-home .header-actions {

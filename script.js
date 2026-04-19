@@ -137,6 +137,7 @@ const heroTourismRotation = {
   bubbleTimerId: 0,
   statusTimerId: 0
 };
+const useSolidHeroShell = true;
 const heroTourismPhotoPool = [
   { file: "Cidade de Cruzeiro do Sul.jpg", title: "Panorama do centro", note: "vista ampla da cidade" },
   { file: "Cruzeiro do Sul - Acre (3800379687).jpg", title: "Cidade em foco", note: "recorte urbano do municipio" },
@@ -2964,6 +2965,10 @@ const setHeroTourismMeta = (photo) => {
 };
 
 const paintHeroTourismBackdrop = (slideNode, photo) => {
+  if (useSolidHeroShell) {
+    return Promise.resolve(false);
+  }
+
   if (!slideNode || !photo) {
     return Promise.resolve(false);
   }
@@ -3068,11 +3073,22 @@ const initializeHeroTourismHero = () => {
   heroTourismRotation.statusIndex = 0;
   heroTourismRotation.bubbleIndex = 0;
 
-  renderHeroTourismBackground(0, { initial: true });
+  if (useSolidHeroShell) {
+    heroTourismSlides.forEach((slide) => {
+      slide.classList.remove("is-active");
+      slide.style.backgroundImage = "none";
+      slide.dataset.heroBackdropReady = "false";
+    });
+    setHeroTourismMeta(getHeroTourismPhoto(0));
+    heroTourismShell.dataset.heroTourismReady = "solid";
+  } else {
+    renderHeroTourismBackground(0, { initial: true });
+  }
+
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
 
-  if (getHeroTourismDailyPool().length > 1) {
+  if (!useSolidHeroShell && getHeroTourismDailyPool().length > 1) {
     heroTourismRotation.timerId = window.setInterval(() => {
       const currentPool = getHeroTourismDailyPool();
       const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % currentPool.length;

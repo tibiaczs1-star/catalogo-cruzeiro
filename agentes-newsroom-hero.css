@@ -836,6 +836,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  display: none;
   pointer-events: none;
 }
 
@@ -969,8 +970,8 @@
 .hero-daily-news-card {
   display: grid;
   gap: 0.28rem;
-  width: min(100%, 25rem);
-  padding: 0.82rem 0.92rem;
+  width: min(100%, 21rem);
+  padding: 0.74rem 0.84rem;
   border-radius: 18px;
   border: 1px solid rgba(126, 247, 255, 0.22);
   background:
@@ -989,14 +990,14 @@
   grid-column: 1 / -1;
   width: 100%;
   max-width: none;
-  grid-template-columns: minmax(0, 22rem) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
   grid-template-areas:
     "kicker summary"
     "title summary";
-  column-gap: clamp(1rem, 2.2vw, 1.7rem);
+  column-gap: clamp(0.85rem, 2vw, 1.3rem);
   row-gap: 0.2rem;
   align-items: center;
-  padding: 0.98rem 1.08rem 1.02rem;
+  padding: 0.82rem 0.96rem 0.86rem;
   border-radius: 22px;
   background:
     linear-gradient(90deg, rgba(6, 18, 34, 0.92), rgba(8, 38, 58, 0.82)),
@@ -1010,14 +1011,14 @@
 
 .hero-daily-news-band strong {
   grid-area: title;
-  max-width: 20rem;
+  max-width: 16rem;
 }
 
 .hero-daily-news-band small {
   grid-area: summary;
   max-width: none;
-  font-size: 0.84rem;
-  -webkit-line-clamp: 4;
+  font-size: 0.8rem;
+  -webkit-line-clamp: 3;
 }
 
 .hero-daily-news-card:hover,
