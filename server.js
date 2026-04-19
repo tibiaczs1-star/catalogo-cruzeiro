@@ -76,7 +76,11 @@ const VR_RENTAL_LEADS_FILE = path.join(DATA_DIR, "vr-rental-leads.json");
 const VISITS_FILE = path.join(DATA_DIR, "visits.json");
 const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
 const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
+const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
+const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const SITE_URL = String(process.env.SITE_URL || "").trim().replace(/\/+$/, "");
+const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
+const FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "99831455A").trim();
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "99567741204").trim();
@@ -299,6 +303,18 @@ const STATIC_PAGE_SEO = {
     priority: "0.7",
     changefreq: "weekly",
     fileName: "escritorio-ninjas.html"
+  },
+  "/sprites-check-change.html": {
+    title: `SPRTIS CHECK & CHANGE | ${SITE_NAME}`,
+    description:
+      "Painel administrativo para revisar sprites, itens, cenarios e assets capturados pela equipe Ninja antes de aplicar mudancas nos jogos.",
+    themeColor: "#101827",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.48",
+    changefreq: "weekly",
+    fileName: "sprites-check-change.html"
   },
   "/games.html": {
     title: `Canal Tech Gamer | ${SITE_NAME}`,
@@ -3833,6 +3849,187 @@ function requireAdmin(req) {
   return hasValidBasic || hasValidToken;
 }
 
+const SPRITE_IMAGE_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".svg"]);
+const SPRITE_SCAN_ROOTS = [
+  { key: "sprite-vault", label: "Sprite Vault", dir: path.join(ROOT_DIR, "sprite-vault"), publicBase: "/sprite-vault" },
+  { key: "assets", label: "Assets do site", dir: path.join(ROOT_DIR, "assets"), publicBase: "/assets" }
+];
+
+function getAuthValue(req, body = {}, keys = ["password", "token"]) {
+  const requestUrl = new URL(req.url, `http://${req.headers.host}`);
+  const headers = [
+    req.headers["x-sprite-password"],
+    req.headers["x-full-admin-password"],
+    req.headers["x-admin-password"],
+    req.headers["x-admin-token"]
+  ];
+  const candidates = [];
+
+  keys.forEach((key) => {
+    candidates.push(body?.[key]);
+    candidates.push(requestUrl.searchParams.get(key));
+  });
+  headers.forEach((value) => candidates.push(value));
+
+  return cleanShortText(candidates.find((value) => String(value || "").trim()) || "", 160);
+}
+
+function hasFullAdminPassword(value) {
+  const token = cleanShortText(value, 160);
+  return Boolean(token) && (
+    token === FULL_ADMIN_PASSWORD ||
+    token === SUPER_ADMIN_PASSWORD ||
+    token.toLowerCase() === SUPER_ADMIN_PASSWORD.toLowerCase() ||
+    token.toLowerCase() === FULL_ADMIN_PASSWORD.toLowerCase()
+  );
+}
+
+function requireSpriteCheckAccess(req, body = {}) {
+  const authValue = getAuthValue(req, body);
+  return authValue === SPRITE_CHECK_PASSWORD || hasFullAdminPassword(authValue) || requireAdmin(req);
+}
+
+function requireFullAdminOrderAccess(req, body = {}) {
+  const authValue = getAuthValue(req, body);
+  return hasFullAdminPassword(authValue) || requireAdmin(req);
+}
+
+function toPublicAssetUrl(rootConfig, absoluteFilePath) {
+  const relativePath = path.relative(rootConfig.dir, absoluteFilePath).split(path.sep).map(encodeURIComponent).join("/");
+  return `${rootConfig.publicBase}/${relativePath}`;
+}
+
+function categorizeSpriteAsset(relativePath) {
+  const value = normalizeText(relativePath);
+  if (/(character|characters|personagem|avatar|agent|ninja|dealer|garcom|waiter|hero|npc|player|body|head|skin)/i.test(value)) {
+    return "personagens";
+  }
+  if (/(background|cenario|scene|floor|tile|tileset|wall|room|office|bar|pub|interior|exterior|map|terrain)/i.test(value)) {
+    return "cenarios";
+  }
+  if (/(item|items|prop|props|cup|dice|table|chair|coin|card|glass|bottle|jukebox|roulette|pool|ball|furniture)/i.test(value)) {
+    return "itens";
+  }
+  if (/(hud|ui|button|icon|logo|badge|marker|pointer|menu|panel|frame)/i.test(value)) {
+    return "interface";
+  }
+  if (/(fx|effect|spark|light|beam|shadow|glow|particles|smoke|fire)/i.test(value)) {
+    return "efeitos";
+  }
+  return "outros";
+}
+
+function collectSpriteFiles(rootConfig, currentDir = rootConfig.dir, output = []) {
+  if (!fs.existsSync(currentDir)) return output;
+
+  let entries = [];
+  try {
+    entries = fs.readdirSync(currentDir, { withFileTypes: true });
+  } catch (_error) {
+    return output;
+  }
+
+  entries.forEach((entry) => {
+    const absolutePath = path.join(currentDir, entry.name);
+    if (entry.isDirectory()) {
+      collectSpriteFiles(rootConfig, absolutePath, output);
+      return;
+    }
+
+    if (!entry.isFile() || !SPRITE_IMAGE_EXTENSIONS.has(path.extname(entry.name).toLowerCase())) {
+      return;
+    }
+
+    const relativePath = path.relative(rootConfig.dir, absolutePath).split(path.sep).join("/");
+    let stat = null;
+    try {
+      stat = fs.statSync(absolutePath);
+    } catch (_error) {
+      stat = null;
+    }
+
+    output.push({
+      id: `${rootConfig.key}:${relativePath}`,
+      name: path.basename(entry.name, path.extname(entry.name)).replace(/[-_]+/g, " "),
+      fileName: entry.name,
+      extension: path.extname(entry.name).replace(".", "").toLowerCase(),
+      category: categorizeSpriteAsset(relativePath),
+      sourceRoot: rootConfig.label,
+      path: relativePath,
+      publicUrl: toPublicAssetUrl(rootConfig, absolutePath),
+      sizeBytes: stat?.size || 0,
+      updatedAt: stat?.mtime ? stat.mtime.toISOString() : ""
+    });
+  });
+
+  return output;
+}
+
+function buildSpriteCheckPayload() {
+  const reviews = readJson(SPRITE_CHECK_REVIEWS_FILE, {});
+  const reviewMap = reviews && typeof reviews === "object" && !Array.isArray(reviews) ? reviews : {};
+  const items = SPRITE_SCAN_ROOTS.flatMap((rootConfig) => collectSpriteFiles(rootConfig))
+    .sort((a, b) => a.category.localeCompare(b.category) || a.path.localeCompare(b.path))
+    .map((item) => {
+      const review = reviewMap[item.id] && typeof reviewMap[item.id] === "object" ? reviewMap[item.id] : {};
+      return {
+        ...item,
+        status: cleanShortText(review.status || "pending", 40),
+        note: cleanShortText(review.note || "", 500),
+        reviewedAt: cleanShortText(review.reviewedAt || "", 60),
+        reviewedBy: cleanShortText(review.reviewedBy || "", 80)
+      };
+    });
+  const summary = items.reduce(
+    (acc, item) => {
+      acc.total += 1;
+      acc.byCategory[item.category] = (acc.byCategory[item.category] || 0) + 1;
+      acc.byStatus[item.status] = (acc.byStatus[item.status] || 0) + 1;
+      return acc;
+    },
+    { total: 0, byCategory: {}, byStatus: {} }
+  );
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    menuFirst: "CHECKPUBPAID",
+    hierarchy: {
+      fullAdmin: "Junior",
+      ceo: "Codex CEO",
+      flow: "Full Admin -> Codex CEO -> equipes",
+      teams: ["Ninjas", "Nerd", "Editorial", "PubPaid"]
+    },
+    summary,
+    reviews: reviewMap,
+    items
+  };
+}
+
+function normalizeSpriteReviewStatus(value) {
+  const status = cleanShortText(value || "pending", 40).toLowerCase();
+  if (["accepted", "rejected", "pending", "needs-change"].includes(status)) return status;
+  if (status === "aceito" || status === "aprovado") return "accepted";
+  if (status === "reprovado" || status === "recusado") return "rejected";
+  if (status === "ajuste" || status === "needs change") return "needs-change";
+  return "pending";
+}
+
+function buildOfficeOrderPayload() {
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  const safeOrders = Array.isArray(orders) ? orders : [];
+  return {
+    ok: true,
+    hierarchy: {
+      fullAdmin: "Junior",
+      ceo: "Codex CEO",
+      rule: "O Full Admin ordena, o CEO responde, e as equipes recebem tarefas pelo CEO.",
+      teams: ["Ninjas", "Nerd", "Editorial", "PubPaid", "Design", "Revisao"]
+    },
+    orders: safeOrders.slice(-80).reverse()
+  };
+}
+
 function requireAcre2026PollAdmin(req) {
   if (requireAdmin(req)) {
     return true;
@@ -4322,6 +4519,82 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (pathname === "/health") {
     return sendJson(res, 200, { ok: true, service: "catalogo-cruzeiro", time: new Date().toISOString() });
+  }
+
+  if (req.method === "GET" && pathname === "/api/sprites-check") {
+    if (!requireSpriteCheckAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha do CHECKPUBPAID obrigatoria." });
+    }
+
+    return sendJson(res, 200, buildSpriteCheckPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/sprites-check/review") {
+    const body = await parseBody(req);
+    if (!requireSpriteCheckAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Senha do CHECKPUBPAID obrigatoria." });
+    }
+
+    const id = cleanShortText(body.id, 500);
+    const status = normalizeSpriteReviewStatus(body.status);
+    const note = cleanShortText(body.note || "", 500);
+    if (!id) {
+      return sendJson(res, 400, { ok: false, error: "Informe o id do sprite." });
+    }
+
+    const reviews = readJson(SPRITE_CHECK_REVIEWS_FILE, {});
+    const nextReviews = reviews && typeof reviews === "object" && !Array.isArray(reviews) ? reviews : {};
+    nextReviews[id] = {
+      id,
+      status,
+      note,
+      reviewedBy: hasFullAdminPassword(getAuthValue(req, body)) ? "Full Admin" : "CHECKPUBPAID",
+      reviewedAt: new Date().toISOString()
+    };
+    writeJson(SPRITE_CHECK_REVIEWS_FILE, nextReviews);
+
+    return sendJson(res, 200, { ok: true, item: nextReviews[id], summary: buildSpriteCheckPayload().summary });
+  }
+
+  if (req.method === "GET" && pathname === "/api/office-orders") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+
+    return sendJson(res, 200, buildOfficeOrderPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-orders") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+
+    const message = cleanShortText(body.message || body.order || body.text, 1200);
+    if (!message) {
+      return sendJson(res, 400, { ok: false, error: "Escreva a ordem antes de enviar." });
+    }
+
+    const target = cleanShortText(body.target || "Codex CEO", 80);
+    const priority = cleanShortText(body.priority || "normal", 40);
+    const ceoReply =
+      `Recebido, Full Admin. Vou transformar essa ordem em fila para ${target}, cobrar retorno pela hierarquia e registrar o status aqui.`;
+    const order = {
+      id: createRecordId("ord"),
+      from: "Full Admin",
+      to: target,
+      priority,
+      message,
+      ceoReply,
+      status: "recebida-pelo-ceo",
+      hierarchy: "Full Admin -> Codex CEO -> equipes",
+      createdAt: new Date().toISOString()
+    };
+    const orders = readJson(OFFICE_ORDERS_FILE, []);
+    const nextOrders = Array.isArray(orders) ? orders.concat(order).slice(-250) : [order];
+    writeJson(OFFICE_ORDERS_FILE, nextOrders);
+
+    return sendJson(res, 201, { ok: true, order, ceoReply, ...buildOfficeOrderPayload() });
   }
 
   if (req.method === "GET" && pathname === "/api/news/aggregator") {

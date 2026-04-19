@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SPRTIS CHECK & CHANGE | Catalogo Cruzeiro do Sul</title>
+    <meta
+      name="description"
+      content="Painel CHECKPUBPAID para revisar sprites, itens, cenarios e assets capturados pela equipe Ninja."
+    />
+    <link rel="stylesheet" href="./sprites-check-change.css?v=20260419a" />
+  </head>
+  <body>
+    <main class="sprite-control-shell">
+      <aside class="sprite-control-sidebar" aria-label="Menu do painel">
+        <a class="sprite-control-brand" href="./index.html?skipIntro=1">
+          <span class="brand-orb"></span>
+          <strong>SPRTIS CHECK<br />& CHANGE</strong>
+          <small>controle ninja de assets</small>
+        </a>
+        <nav class="sprite-control-menu" data-sprite-menu>
+          <button class="active" type="button" data-category="checkpubpaid">CHECKPUBPAID</button>
+          <button type="button" data-category="personagens">Personagens</button>
+          <button type="button" data-category="itens">Itens e props</button>
+          <button type="button" data-category="cenarios">Cenarios</button>
+          <button type="button" data-category="interface">Interface</button>
+          <button type="button" data-category="efeitos">Efeitos</button>
+          <button type="button" data-category="outros">Outros</button>
+          <button type="button" data-category="todos">Todos</button>
+        </nav>
+        <section class="sprite-hierarchy-card">
+          <span>hierarquia</span>
+          <strong>Full Admin -> CEO -> Equipes</strong>
+          <p>Voce aprova. O CEO organiza. Ninjas e Nerds executam.</p>
+        </section>
+      </aside>
+
+      <section class="sprite-control-main">
+        <header class="sprite-control-hero">
+          <div>
+            <p class="sprite-kicker">CHECKPUBPAID primeiro no menu</p>
+            <h1>Sprites, itens, cenarios e mudancas sob seu controle.</h1>
+            <p>
+              A equipe Ninja separa tudo que existe no cofre. Voce aceita, reprova ou manda ajustar antes de entrar no
+              PubPaid e nos outros subsites.
+            </p>
+          </div>
+          <form class="sprite-login-card" data-sprite-login>
+            <label for="sprite-password">Senha do painel</label>
+            <div>
+              <input id="sprite-password" name="password" type="password" placeholder="99831455" autocomplete="current-password" />
+              <button type="submit">Entrar</button>
+            </div>
+            <small data-sprite-login-status>Restrito ao CHECKPUBPAID.</small>
+          </form>
+        </header>
+
+        <section class="sprite-summary-grid" data-sprite-summary aria-live="polite">
+          <article><span>Total</span><strong>--</strong></article>
+          <article><span>Pendentes</span><strong>--</strong></article>
+          <article><span>Aceitos</span><strong>--</strong></article>
+          <article><span>Reprovados</span><strong>--</strong></article>
+          <article><span>Ajustes</span><strong>--</strong></article>
+        </section>
+
+        <section class="sprite-report-panel">
+          <div>
+            <span>Relatorio Ninja</span>
+            <h2>O que vamos melhorar depois da triagem</h2>
+          </div>
+          <p>
+            Separar personagens em partes equipaveis, mapear itens que podem entrar nos corpos, marcar cenarios de bar,
+            jogos e escritorios, e deixar cada mudanca aprovada antes de virar arte final.
+          </p>
+        </section>
+
+        <section class="sprite-toolbar">
+          <label>
+            Buscar asset
+            <input type="search" data-sprite-search placeholder="garcom, roleta, bar, cadeira..." />
+          </label>
+          <label>
+            Status
+            <select data-sprite-status-filter>
+              <option value="todos">Todos</option>
+              <option value="pending">Pendentes</option>
+              <option value="accepted">Aceitos</option>
+              <option value="rejected">Reprovados</option>
+              <option value="needs-change">Pedir ajuste</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="sprite-grid" data-sprite-grid aria-live="polite">
+          <article class="sprite-empty-state">
+            <strong>Entre com a senha para carregar o cofre.</strong>
+            <p>Depois disso aparece a galeria inteira para aceitar, negar ou pedir ajuste.</p>
+          </article>
+        </section>
+      </section>
+    </main>
+
+    <script src="./sprites-check-change.js?v=20260419a" defer></script>
+  </body>
+</html>

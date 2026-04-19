@@ -14,12 +14,16 @@ Retomada obrigatoria: ler `AGENTS.md`, `CODEX_MEMORY.md`, `.codex-memory/current
 - `npm run review:team`: 0 achados.
 - `node --check server.js` e `node --check scripts/review-team-audit.js`: ok.
 - `npm run audit:news-images`: 30 itens, 23 ok, 7 review, 0 warning/error.
+- Em andamento/concluido localmente: painel `SPRTIS CHECK & CHANGE` em `sprites-check-change.html`, com menu `CHECKPUBPAID`, senha `99831455`, listagem de 2600 assets vindos de `sprite-vault` e `assets`, e salvamento de revisoes em `data/sprite-check-reviews.json`.
+- Chat hierarquico de ordens adicionado aos escritorios por `office-command-chat.js`: senha Full Admin `99831455A`, fluxo `Full Admin -> Codex CEO -> equipes`, APIs `/api/office-orders`.
+- Validacoes locais desta etapa: `node --check server.js`, `node --check sprites-check-change.js`, `node --check office-command-chat.js`, `npm run review:team` com 0 achados, `GET /sprites-check-change.html` 200, `GET /api/sprites-check?password=99831455` ok, `POST /api/office-orders` ok.
 
 ## Pendencias
 
 - Ajustar foco manual das 7 noticias em `data/news-image-focus-audit.json`.
 - PubPaid ainda precisa ficar mais dinamico: copos/dados com animacao e som, roleta com giro/suspense, sinuca com fisica clara.
 - Equipe Ninja recomenda criar kits `sprite-vault/generated/pubpaid/*` e `sprite-vault/generated/offices/agents/*`.
+- Se publicar esta etapa, conferir no Render a URL `https://catalogo-cruzeiro-web.onrender.com/sprites-check-change.html` e os escritorios com botao flutuante `Ordens`.
 
 ## Referencias de jogos pesquisadas
 

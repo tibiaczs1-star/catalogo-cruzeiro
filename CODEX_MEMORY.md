@@ -9,6 +9,12 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 - Trabalhar sem ficar pedindo permissao para fluxo normal.
 - Preservar ordens, fotos e textos relevantes localmente no workspace para sobreviver a fim de creditos, reinicio de chat ou troca de conta.
 
+## Atualizacao rapida 2026-04-19
+
+- Painel `SPRTIS CHECK & CHANGE` criado em `sprites-check-change.html`, com `CHECKPUBPAID` primeiro no menu, senha `99831455`, varredura de `sprite-vault` e `assets`, e botoes de aceitar/reprovar/pedir ajuste por sprite.
+- Chat flutuante de ordens criado para os escritorios via `office-command-chat.js`, com senha Full Admin `99831455A`, hierarquia `Full Admin -> Codex CEO -> equipes` e APIs `/api/office-orders`.
+- Validacoes locais: `node --check server.js`, `node --check sprites-check-change.js`, `node --check office-command-chat.js`, `npm run review:team` com 0 achados, API de sprites retornando 2600 assets.
+
 ## Pedido atual em andamento
 
 Fechar o pacote final desta rodada:

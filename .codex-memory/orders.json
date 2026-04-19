@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-19T14:55:16.445Z",
+  "lastUpdatedAt": "2026-04-19T15:51:57.450Z",
   "orders": [
     {
       "id": "2026-04-17-criar-memoria-local-persistente-para-ordens-fotos-e-textos-do-usuario",
@@ -996,6 +996,21 @@
         "Melhorar dinamica dos jogos PubPaid com animacao, som e suspense"
       ],
       "notes": "Rodada validou rotas do Render, corrigiu imagem quebrada local no Infantil, limpou resumos de feed, zerou review:team e registrou relatorio geral."
+    },
+    {
+      "id": "2026-04-19-criar-painel-sprtis-check-change-e-chat-hierarquico-de-ordens",
+      "createdAt": "2026-04-19T15:51:57.450Z",
+      "updatedAt": "2026-04-19T15:51:57.450Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Criar subsite SPRTIS CHECK E CHANGE para revisar sprites com menu CHECKPUBPAID primeiro, senha 99831455, aceitar/reprovar mudancas, e incluir chat dentro dos escritorios para ordens do Full Admin com senha 99831455A, hierarquia Full Admin -> CEO -> equipes.",
+      "summary": "Criar painel SPRTIS CHECK & CHANGE e chat hierarquico de ordens",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }
