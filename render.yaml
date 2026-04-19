@@ -3,7 +3,7 @@ services:
     name: catalogo-cruzeiro-web
     runtime: node
     rootDir: .
-    plan: free
+    plan: starter
     autoDeployTrigger: commit
     buildCommand: npm install
     startCommand: npm start
