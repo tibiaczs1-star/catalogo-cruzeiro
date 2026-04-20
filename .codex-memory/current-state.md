@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-04-20T09:45:52.239Z
+Updated: 2026-04-20T09:51:18.295Z
 
 ## Active Goal
 
-- Popup de cookies por sessao
+- Popup com homenagem dos fundadores
 
 ## Summary
 
-startup-experience.js agora usa marcador de sessao do navegador para o popup e limpa consentimentos persistentes antigos, mantendo o aceite em F5 e pedindo de novo apenas apos fechar o navegador.
+startup-experience.css foi ajustado para nao apagar o card inteiro em is-thanking; agora so o conteudo do consentimento some e a apresentacao dos fundadores permanece visivel apos o aceite.
 
 ## Next
 
-- Validar em navegador real: aceitar
-- dar F5 e confirmar que nao reabre; depois fechar o navegador e confirmar que volta a pedir consentimento.
+- Validar em navegador real se a homenagem dos fundadores aparece logo apos aceitar os cookies no desktop e no mobile.

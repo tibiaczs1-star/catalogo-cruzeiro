@@ -1,11 +1,10 @@
 # Handoff
 
-Updated: 2026-04-20T09:45:52.239Z
+Updated: 2026-04-20T09:51:18.546Z
 
-Popup de cookies ajustado para uma vez por sessao do navegador. O aceite agora cria cookie de sessao catalogo_terms_welcome_session_v1, mantem o portal liberado no F5 e limpa consentimentos persistentes antigos para o pedido voltar so quando o navegador for fechado e aberto novamente.
+A homenagem dos fundadores voltou: o CSS do estado is-thanking estava zerando a opacidade do .catalogo-welcome-card inteiro, escondendo a propria tela de agradecimento. Agora apenas .catalogo-welcome-visual e .catalogo-welcome-copy saem da cena, mantendo .catalogo-founder-thanks visivel.
 
 ## Next
 
-- Conferir em navegador real o ciclo completo: aceitar
-- F5 sem popup
-- fechar navegador e reabrir com popup novamente.
+- Conferir no navegador real a sequencia completa do popup: consentimento
+- tela dos fundadores e fechamento automatico no desktop/mobile.

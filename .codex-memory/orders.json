@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T09:47:21.119Z",
+  "lastUpdatedAt": "2026-04-20T09:51:18.297Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -1865,6 +1865,21 @@
       "source": "chat",
       "rawRequest": "que a partida paga no pote, 1 + 80 por cento do perderdor, que e descontado do saldo dele, e pra retirada a pessoa pode pedir valor total, ou seja por exemplo 6,70",
       "summary": "Ajustar payout do PubPaid para entrada + 80% da aposta do perdedor e liberar retirada com centavos",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-corrigir-a-tela-de-apresentacao-dos-fundadores-que-sumia-depois-do-aceite-de-coo",
+      "createdAt": "2026-04-20T09:51:18.297Z",
+      "updatedAt": "2026-04-20T09:51:18.297Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "a apresentação dos fundadores depois do pop up de aceitar coklioes n apareceu",
+      "summary": "Corrigir a tela de apresentacao dos fundadores que sumia depois do aceite de cookies",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
