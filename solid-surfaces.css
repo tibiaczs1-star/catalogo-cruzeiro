@@ -19,6 +19,13 @@ body {
   color: var(--solid-ink) !important;
 }
 
+body.editorial-home {
+  background:
+    radial-gradient(circle at top, rgba(111, 181, 255, 0.12), transparent 24%),
+    linear-gradient(180deg, #0f2c52, #0a213d 100%) !important;
+  color: #eef7ff !important;
+}
+
 .top-strip,
 .masthead,
 .editorial-home .top-strip,
@@ -82,11 +89,52 @@ body {
   box-shadow: 0 14px 34px rgba(15, 43, 78, 0.12) !important;
 }
 
+body.editorial-home .top-strip,
+body.editorial-home .masthead,
+body.editorial-home .hero-newsroom-shell,
+body.editorial-home .hero-newsroom-copy,
+body.editorial-home .hero-newsroom-panel,
+body.editorial-home .hero-newsroom-notes,
+body.editorial-home .office-play-strip,
+body.editorial-home .section-block,
+body.editorial-home .projection-card,
+body.editorial-home .mosaic-card,
+body.editorial-home .live-card,
+body.editorial-home .archive-card,
+body.editorial-home .comments-card,
+body.editorial-home .service-card,
+body.editorial-home .topic-card,
+body.editorial-home .news-card,
+body.editorial-home .panel-card,
+body.editorial-home .detail-card,
+body.editorial-home .generated-feed-card,
+body.editorial-home .live-feed-card,
+body.editorial-home .feed-card,
+body.editorial-home .archive-card.tall,
+body.editorial-home .footer-tech-panel,
+body.editorial-home .footer-bottom {
+  background:
+    radial-gradient(circle at top right, rgba(153, 214, 255, 0.12), transparent 28%),
+    linear-gradient(180deg, #1b487e, #13355d 100%) !important;
+  border-color: rgba(183, 223, 255, 0.22) !important;
+  color: #eef7ff !important;
+  box-shadow:
+    0 16px 34px rgba(3, 12, 27, 0.2),
+    inset 0 1px 0 rgba(235, 245, 255, 0.1) !important;
+}
+
 .top-strip,
 .editorial-home .top-strip,
 .masthead,
 .editorial-home .masthead {
   background: linear-gradient(180deg, #f4f8fe, #dde9f8) !important;
+}
+
+body.editorial-home .top-strip,
+body.editorial-home .masthead {
+  background:
+    radial-gradient(circle at top left, rgba(190, 229, 255, 0.16), transparent 26%),
+    linear-gradient(180deg, #275792, #173c69) !important;
 }
 
 .top-strip p,
@@ -107,6 +155,41 @@ body {
 .catalogo-consent-intro p,
 .catalogo-consent-focus p {
   color: var(--solid-ink-soft) !important;
+}
+
+body.editorial-home .top-strip p,
+body.editorial-home .top-strip a,
+body.editorial-home .top-strip-secondary,
+body.editorial-home .hero-newsroom-copy > p,
+body.editorial-home .hero-newsroom-notes span,
+body.editorial-home .section-heading p,
+body.editorial-home .archive-card p,
+body.editorial-home .news-card p,
+body.editorial-home .feed-card p,
+body.editorial-home .live-feed-card p,
+body.editorial-home .generated-feed-card p,
+body.editorial-home .projection-card p,
+body.editorial-home .mosaic-card p,
+body.editorial-home .live-card p,
+body.editorial-home .panel-card p,
+body.editorial-home .detail-card p,
+body.editorial-home .feed-meta span,
+body.editorial-home .feed-meta small,
+body.editorial-home .feed-status,
+body.editorial-home .footer-tech-panel p,
+body.editorial-home .footer-tech-panel a,
+body.editorial-home .footer-bottom {
+  color: #cfe5ff !important;
+}
+
+body.editorial-home .brand strong,
+body.editorial-home h1,
+body.editorial-home h2,
+body.editorial-home h3,
+body.editorial-home .ticker-chip strong,
+body.editorial-home .hero-tourism-meta strong,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band strong {
+  color: #f8fbff !important;
 }
 
 .main-nav a,
@@ -256,5 +339,130 @@ body:has(.poll-shell),
   .poll-form-section,
   .poll-option-card {
     box-shadow: 0 12px 24px rgba(4, 10, 22, 0.24) !important;
+  }
+
+  body.editorial-home {
+    background:
+      radial-gradient(circle at top, rgba(111, 181, 255, 0.14), transparent 26%),
+      linear-gradient(180deg, #0d2d56, #0a2343 100%) !important;
+    color: #eef7ff !important;
+  }
+
+  body.editorial-home .site-header-stack,
+  body.editorial-home .top-strip,
+  body.editorial-home .masthead,
+  body.editorial-home .ticker-live-shell,
+  body.editorial-home .hero-newsroom-shell,
+  body.editorial-home .hero-newsroom-copy,
+  body.editorial-home .hero-newsroom-panel,
+  body.editorial-home .hero-newsroom-notes,
+  body.editorial-home .hero-tourism-meta,
+  body.editorial-home .hero-daily-news-card.hero-daily-news-band,
+  body.editorial-home .office-play-strip,
+  body.editorial-home .section-block,
+  body.editorial-home .projection-card,
+  body.editorial-home .mosaic-card,
+  body.editorial-home .live-card,
+  body.editorial-home .archive-card,
+  body.editorial-home .comments-card,
+  body.editorial-home .service-card,
+  body.editorial-home .topic-card,
+  body.editorial-home .news-card,
+  body.editorial-home .panel-card,
+  body.editorial-home .detail-card,
+  body.editorial-home .generated-feed-card,
+  body.editorial-home .live-feed-card,
+  body.editorial-home .feed-card,
+  body.editorial-home .archive-card.tall,
+  body.editorial-home .mobile-agent-hub,
+  body.editorial-home .footer-tech-panel,
+  body.editorial-home .footer-bottom {
+    background:
+      radial-gradient(circle at top right, rgba(151, 211, 255, 0.14), transparent 26%),
+      linear-gradient(180deg, #1a467d, #123661 100%) !important;
+    color: #eef7ff !important;
+    border-color: rgba(183, 223, 255, 0.22) !important;
+    box-shadow:
+      0 16px 30px rgba(4, 14, 32, 0.22),
+      inset 0 1px 0 rgba(236, 246, 255, 0.12) !important;
+  }
+
+  body.editorial-home .hero-newsroom-copy,
+  body.editorial-home .hero-newsroom-panel,
+  body.editorial-home .hero-tourism-meta,
+  body.editorial-home .hero-daily-news-card.hero-daily-news-band,
+  body.editorial-home .archive-card,
+  body.editorial-home .news-card,
+  body.editorial-home .feed-card,
+  body.editorial-home .live-feed-card,
+  body.editorial-home .generated-feed-card {
+    background:
+      radial-gradient(circle at top left, rgba(194, 231, 255, 0.12), transparent 22%),
+      linear-gradient(180deg, #22538f, #183f70 100%) !important;
+  }
+
+  body.editorial-home .brand strong,
+  body.editorial-home .hero-newsroom-copy h1,
+  body.editorial-home .hero-newsroom-copy h2,
+  body.editorial-home .hero-newsroom-copy h3,
+  body.editorial-home .archive-card h3,
+  body.editorial-home .news-card h3,
+  body.editorial-home .feed-card h3,
+  body.editorial-home .live-feed-card h3,
+  body.editorial-home .generated-feed-card h3,
+  body.editorial-home .section-heading h2,
+  body.editorial-home .ticker-live-head,
+  body.editorial-home .ticker-chip strong,
+  body.editorial-home .hero-tourism-meta strong,
+  body.editorial-home .hero-daily-news-card.hero-daily-news-band strong,
+  body.editorial-home .hero-tourism-head .catalogo-agents-copy strong {
+    color: #f7fbff !important;
+    text-shadow: none !important;
+  }
+
+  body.editorial-home p,
+  body.editorial-home span,
+  body.editorial-home small,
+  body.editorial-home li,
+  body.editorial-home .brand-kicker,
+  body.editorial-home .hero-newsroom-copy > p,
+  body.editorial-home .section-heading p,
+  body.editorial-home .archive-card p,
+  body.editorial-home .news-card p,
+  body.editorial-home .feed-card p,
+  body.editorial-home .live-feed-card p,
+  body.editorial-home .generated-feed-card p,
+  body.editorial-home .ticker-live-copy p,
+  body.editorial-home .hero-tourism-meta small,
+  body.editorial-home .hero-tourism-head .catalogo-agents-copy small,
+  body.editorial-home .hero-tourism-head .catalogo-agents-copy span,
+  body.editorial-home .feed-meta span,
+  body.editorial-home .feed-meta small,
+  body.editorial-home .feed-status {
+    color: #cfe6ff !important;
+  }
+
+  body.editorial-home .chip-button,
+  body.editorial-home .day-chip,
+  body.editorial-home .feed-filter-chip,
+  body.editorial-home .feed-clear-button,
+  body.editorial-home .source-monitor-chip,
+  body.editorial-home .source-monitor-all {
+    background: linear-gradient(180deg, #3d84de, #2f67b7) !important;
+    color: #f8fbff !important;
+    border-color: rgba(204, 232, 255, 0.18) !important;
+  }
+
+  body.editorial-home .news-thumb,
+  body.editorial-home .mosaic-thumb,
+  body.editorial-home .archive-card .news-thumb {
+    background-color: #0f2b4e !important;
+  }
+
+  body.editorial-home .feed-search input,
+  body.editorial-home .footer-chat-box input {
+    background: #0d2746 !important;
+    color: #eff8ff !important;
+    border-color: rgba(188, 225, 255, 0.2) !important;
   }
 }
