@@ -7,6 +7,7 @@
     buttonRendered: false,
     scriptPromise: null
   };
+  const FORCE_REAUTH_KEY = "catalogo_google_force_reauth_v1";
 
   function $(selector, root = document) {
     return root.querySelector(selector);
@@ -62,6 +63,26 @@
 
   function setText(node, value) {
     if (node) node.textContent = String(value || "");
+  }
+
+  function shouldForceReauth() {
+    try {
+      return window.sessionStorage.getItem(FORCE_REAUTH_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function markForceReauth(enabled) {
+    try {
+      if (enabled) {
+        window.sessionStorage.setItem(FORCE_REAUTH_KEY, "1");
+      } else {
+        window.sessionStorage.removeItem(FORCE_REAUTH_KEY);
+      }
+    } catch (_error) {
+      // ignore storage failures
+    }
   }
 
   function syncDom() {
@@ -128,6 +149,9 @@
     if (!state.enabled || state.user) return false;
     await renderGoogleButtons().catch(() => {});
     if (!window.google?.accounts?.id?.prompt) return false;
+    if (shouldForceReauth() && window.google?.accounts?.id?.disableAutoSelect) {
+      window.google.accounts.id.disableAutoSelect();
+    }
     window.google.accounts.id.prompt();
     return true;
   }
@@ -139,6 +163,7 @@
         body: JSON.stringify({ credential: response?.credential || "" })
       });
       state.user = payload.user || null;
+      markForceReauth(false);
       state.buttonRendered = false;
       syncDom();
       emitAuthChange();
@@ -152,10 +177,25 @@
   }
 
   async function logout() {
+    const currentEmail = String(state.user?.email || "").trim();
     try {
       await requestJson("/api/auth/logout", { method: "POST", body: "{}" });
     } catch (_error) {
       // A interface tambem limpa o estado local caso o pedido falhe.
+    }
+    markForceReauth(true);
+    if (window.google?.accounts?.id?.cancel) {
+      window.google.accounts.id.cancel();
+    }
+    if (window.google?.accounts?.id?.disableAutoSelect) {
+      window.google.accounts.id.disableAutoSelect();
+    }
+    if (currentEmail && window.google?.accounts?.id?.revoke) {
+      try {
+        window.google.accounts.id.revoke(currentEmail, () => {});
+      } catch (_error) {
+        // best effort only
+      }
     }
     state.user = null;
     state.buttonRendered = false;

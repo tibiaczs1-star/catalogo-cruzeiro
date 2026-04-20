@@ -666,12 +666,17 @@
     profileForm: document.querySelector("[data-profile-form]"),
     profileFeedback: document.querySelector("[data-profile-feedback]"),
     depositAmount: document.querySelector("[data-pubpaid-deposit-amount]"),
+    depositStepAmount: document.querySelector('[data-pubpaid-step="amount"]'),
+    depositStepName: document.querySelector('[data-pubpaid-step="name"]'),
+    depositStepQr: document.querySelector('[data-pubpaid-step="qr"]'),
+    depositStepConfirm: document.querySelector('[data-pubpaid-step="confirm"]'),
     depositQr: document.querySelector("[data-pubpaid-deposit-qr]"),
     depositorField: document.querySelector("[data-pubpaid-depositor-field]"),
     depositorName: document.querySelector("[data-pubpaid-depositor-name]"),
     depositFeedback: document.querySelector("[data-pubpaid-deposit-feedback]"),
     withdrawAmount: document.querySelector("[data-pubpaid-withdraw-amount]"),
     withdrawFeedback: document.querySelector("[data-pubpaid-withdraw-feedback]"),
+    advanceDepositAmountButton: document.querySelector("[data-pubpaid-advance-amount]"),
     generateDepositButton: document.querySelector("[data-pubpaid-generate-deposit]"),
     registerDepositButton: document.querySelector("[data-pubpaid-register-deposit]"),
     requestWithdrawalButton: document.querySelector("[data-pubpaid-request-withdrawal]"),
@@ -700,7 +705,8 @@
     txid: "",
     qrReady: false,
     locked: false,
-    pendingId: ""
+    pendingId: "",
+    stage: "amount"
   };
   if (sceneCtx) sceneCtx.imageSmoothingEnabled = false;
   const badEndingCtx = refs.badEndingCanvas?.getContext("2d");
@@ -936,6 +942,9 @@
     window.addEventListener("blur", clearPressedDirections);
     window.addEventListener("catalogo:google-auth", handleCatalogoGoogleAuth);
     refs.profileForm?.addEventListener("submit", handleProfileSubmit);
+    refs.advanceDepositAmountButton?.addEventListener("click", () => {
+      unlockDepositNameStep();
+    });
     refs.generateDepositButton?.addEventListener("click", () => {
       void generatePubPaidDepositQr(true);
     });
@@ -947,6 +956,12 @@
     });
     refs.depositAmount?.addEventListener("change", () => {
       resetDepositQrState("Valor alterado. Gere um novo QR Code para esse deposito.");
+      unlockDepositNameStep();
+    });
+    refs.depositorName?.addEventListener("input", () => {
+      if (String(refs.depositorName?.value || "").trim().length >= 3) {
+        unlockDepositQrStep();
+      }
     });
 
     refs.touchMoveButtons.forEach((button) => {
@@ -3628,9 +3643,61 @@
     depositState.qrReady = false;
     depositState.locked = false;
     depositState.pendingId = "";
+    depositState.stage = "amount";
     if (refs.depositQr) {
       refs.depositQr.innerHTML = `<p>${escapeHtml(message)}</p>`;
     }
+    setDepositStepState({
+      amount: true,
+      name: false,
+      qr: false,
+      confirm: false
+    });
+  }
+
+  function setStepVisibility(node, visible) {
+    if (!node) return;
+    node.hidden = !visible;
+    node.classList.toggle("is-open", visible);
+  }
+
+  function setDepositStepState({ amount = true, name = false, qr = false, confirm = false } = {}) {
+    setStepVisibility(refs.depositStepAmount, amount);
+    setStepVisibility(refs.depositStepName, name);
+    setStepVisibility(refs.depositStepQr, qr);
+    setStepVisibility(refs.depositStepConfirm, confirm);
+  }
+
+  function unlockDepositNameStep() {
+    depositState.amount = getDepositAmount();
+    depositState.stage = "name";
+    setDepositStepState({
+      amount: true,
+      name: true,
+      qr: false,
+      confirm: false
+    });
+    refs.depositorName?.focus?.();
+  }
+
+  function unlockDepositQrStep() {
+    depositState.stage = "qr";
+    setDepositStepState({
+      amount: true,
+      name: true,
+      qr: true,
+      confirm: false
+    });
+  }
+
+  function unlockDepositConfirmStep() {
+    depositState.stage = "confirm";
+    setDepositStepState({
+      amount: true,
+      name: true,
+      qr: true,
+      confirm: true
+    });
   }
 
   async function generatePubPaidDepositQr(forceNewTxid = false) {
@@ -3649,7 +3716,7 @@
       if (refs.depositFeedback) {
         refs.depositFeedback.textContent = "Preencha primeiro o nome de quem fez o Pix e depois gere o QR.";
       }
-      refs.depositorField.hidden = false;
+      unlockDepositNameStep();
       refs.depositorName?.focus?.();
       return;
     }
@@ -3679,6 +3746,7 @@
       depositState.txid = payload.txid || depositState.txid;
       depositState.qrReady = true;
       refs.depositQr.innerHTML = payload.qrSvg || "<p>QR indisponivel. Tente gerar novamente.</p>";
+      unlockDepositConfirmStep();
       if (refs.depositFeedback) {
         refs.depositFeedback.textContent =
           `QR criado para ${user.email}: ${amount} creditos, referencia ${depositState.txid}.`;
@@ -3714,7 +3782,7 @@
       if (refs.depositFeedback) {
         refs.depositFeedback.textContent = "Informe o nome de quem fez o Pix para aparecer na dashboard.";
       }
-      refs.depositorField.hidden = false;
+      unlockDepositNameStep();
       refs.depositorName?.focus?.();
       return;
     }

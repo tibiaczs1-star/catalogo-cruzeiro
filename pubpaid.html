@@ -336,36 +336,58 @@
               <p class="pubpaid-eyebrow">caixa pix</p>
               <strong>Depósito e saque manual</strong>
               <span>Créditos grátis foram zerados. Depósitos e retiradas passam pelo admin e ficam pendentes por até 3 horas.</span>
-              <label>
-                <span>Valor em creditos</span>
-                <select data-pubpaid-deposit-amount>
-                  <option value="5">5 creditos</option>
-                  <option value="10" selected>10 creditos</option>
-                  <option value="20">20 creditos</option>
-                  <option value="50">50 creditos</option>
-                  <option value="100">100 creditos</option>
-                </select>
-              </label>
-              <div class="pubpaid-deposit-qr" data-pubpaid-deposit-qr>
-                <p>Informe o nome do pagador e clique em gerar para abrir o QR do deposito.</p>
+              <div class="pubpaid-deposit-step is-open" data-pubpaid-step="amount">
+                <p class="pubpaid-step-kicker">1. Escolha o valor</p>
+                <label>
+                  <span>Valor em creditos</span>
+                  <select data-pubpaid-deposit-amount>
+                    <option value="5">5 creditos</option>
+                    <option value="10" selected>10 creditos</option>
+                    <option value="20">20 creditos</option>
+                    <option value="50">50 creditos</option>
+                    <option value="100">100 creditos</option>
+                  </select>
+                </label>
+                <div class="pubpaid-cashier-actions">
+                  <button class="pubpaid-button solid" type="button" data-pubpaid-advance-amount>
+                    Continuar
+                  </button>
+                </div>
               </div>
-              <label data-pubpaid-depositor-field>
-                <span>Nome de quem fez o Pix</span>
-                <input
-                  type="text"
-                  maxlength="90"
-                  autocomplete="name"
-                  placeholder="Nome que aparece no comprovante"
-                  data-pubpaid-depositor-name
-                />
-              </label>
-              <div class="pubpaid-cashier-actions">
-                <button class="pubpaid-button solid" type="button" data-pubpaid-generate-deposit>
-                  Gerar QR Code
-                </button>
-                <button class="pubpaid-button outline" type="button" data-pubpaid-register-deposit>
-                  Confirmar meu depósito
-                </button>
+
+              <div class="pubpaid-deposit-step" data-pubpaid-step="name" hidden>
+                <p class="pubpaid-step-kicker">2. Identifique o Pix</p>
+                <label data-pubpaid-depositor-field>
+                  <span>Nome de quem fez o Pix</span>
+                  <input
+                    type="text"
+                    maxlength="90"
+                    autocomplete="name"
+                    placeholder="Nome que aparece no comprovante"
+                    data-pubpaid-depositor-name
+                  />
+                </label>
+              </div>
+
+              <div class="pubpaid-deposit-step" data-pubpaid-step="qr" hidden>
+                <p class="pubpaid-step-kicker">3. Gere o QR Code</p>
+                <div class="pubpaid-deposit-qr" data-pubpaid-deposit-qr>
+                  <p>Escolha o valor, informe o nome e abra o QR do deposito.</p>
+                </div>
+                <div class="pubpaid-cashier-actions">
+                  <button class="pubpaid-button solid" type="button" data-pubpaid-generate-deposit>
+                    Gerar QR Code
+                  </button>
+                </div>
+              </div>
+
+              <div class="pubpaid-deposit-step" data-pubpaid-step="confirm" hidden>
+                <p class="pubpaid-step-kicker">4. Avise o admin</p>
+                <div class="pubpaid-cashier-actions">
+                  <button class="pubpaid-button outline" type="button" data-pubpaid-register-deposit>
+                    Confirmar meu depósito
+                  </button>
+                </div>
               </div>
               <label>
                 <span>Solicitar saque</span>
