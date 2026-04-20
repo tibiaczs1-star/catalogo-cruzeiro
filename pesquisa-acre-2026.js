@@ -21,10 +21,11 @@
     activeOfficeId: "",
     votes: {},
     userVotes: {},
-    authUser: null,
+    deviceId: "",
     pendingVote: null,
     statusMessage: ""
   };
+  const DEVICE_KEY = "catalogo_election_device_id_v1";
 
   const numberFormatter = new Intl.NumberFormat("pt-BR");
   const dateFormatter = new Intl.DateTimeFormat("pt-BR", {
@@ -49,11 +50,15 @@
     }
   }
 
-  function getGoogleUser() {
+  function getDeviceId() {
     try {
-      return window.CatalogoGoogleAuth?.getUser?.() || null;
+      const current = window.localStorage.getItem(DEVICE_KEY);
+      if (current) return current;
+      const next = `device-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+      window.localStorage.setItem(DEVICE_KEY, next);
+      return next;
     } catch (_error) {
-      return null;
+      return `device-fallback-${Math.random().toString(36).slice(2, 10)}`;
     }
   }
 
@@ -120,18 +125,11 @@
       .toUpperCase();
   }
 
-  function scheduleGoogleButtonRefresh() {
-    window.setTimeout(() => {
-      window.CatalogoGoogleAuth?.refresh?.();
-    }, 0);
-  }
-
   function renderCandidates() {
     const office = currentOffice();
     if (!candidateGrid || !office) return;
 
     const currentUserVote = state.userVotes?.[office.id] || "";
-    const isSignedIn = Boolean(state.authUser?.sub && state.authUser?.email);
     candidateGrid.innerHTML = (Array.isArray(office.candidates) ? office.candidates : [])
       .map((candidate) => {
         const isCurrentVote = currentUserVote === candidate.id;
@@ -141,25 +139,14 @@
               Você já votou
             </button>
           `
-          : isSignedIn
-            ? `
+            : `
               <button
                 type="button"
                 class="candidate-vote-button"
                 data-vote-button="${escapeHtml(candidate.id)}"
               >
-                Confirmar voto
+                Votar neste dispositivo
               </button>
-            `
-            : `
-              <div class="candidate-google-slot">
-                <small>Entre com Google para votar</small>
-                <div
-                  class="candidate-google-button"
-                  data-google-auth-button
-                  data-candidate-google="${escapeHtml(candidate.id)}"
-                ></div>
-              </div>
             `;
         return `
           <article class="candidate-card${isCurrentVote ? " is-voted" : ""}">
@@ -186,10 +173,6 @@
         `;
       })
       .join("");
-
-    if (!isSignedIn) {
-      scheduleGoogleButtonRefresh();
-    }
   }
 
   function renderResults() {
@@ -280,7 +263,7 @@
   }
 
   async function loadVotes() {
-    const voterId = encodeURIComponent(state.authUser?.sub || "");
+    const voterId = encodeURIComponent(state.deviceId || "");
     const response = await fetch(`/api/elections/votes?voterId=${voterId}`, {
       headers: { Accept: "application/json" }
     });
@@ -292,7 +275,7 @@
     state.votes = payload.votes || {};
     state.userVotes = payload.userVotes || {};
     state.statusMessage = Object.keys(state.userVotes || {}).length
-      ? "<strong>Você já votou.</strong><p>Seu voto da semana já foi registrado. Acompanhe semanalmente para ver as parciais.</p>"
+      ? "<strong>Este dispositivo já votou.</strong><p>Os cargos já registrados neste navegador agora aparecem bloqueados para novo voto.</p>"
       : "";
     renderResults();
     renderCandidates();
@@ -317,7 +300,7 @@
   }
 
   async function submitVote() {
-    if (!state.pendingVote || !state.authUser?.sub || !state.authUser?.email) {
+    if (!state.pendingVote || !state.deviceId) {
       closeVoteModal();
       return;
     }
@@ -343,6 +326,7 @@
           officeId: office.id,
           candidateId: candidate.id,
           city: "Cruzeiro do Sul",
+          voterId: state.deviceId,
           sourcePage: location.pathname,
           pageTitle: document.title
         })
@@ -356,7 +340,7 @@
       state.votes = payload.votes || state.votes;
       state.userVotes = payload.userVotes || state.userVotes;
       state.statusMessage =
-        "<strong>Obrigado por votar.</strong><p>Acompanhe semanalmente para ver como o cenário muda ao longo da campanha.</p>";
+        "<strong>Obrigado por votar.</strong><p>Este dispositivo já registrou seu voto neste cargo. Agora é só acompanhar as parciais.</p>";
       renderResults();
       renderCandidates();
       renderStatusMessage();
@@ -365,7 +349,7 @@
     } catch (error) {
       if (String(error.message || "").toLowerCase().includes("já registrou voto")) {
         state.statusMessage =
-          "<strong>Você já votou.</strong><p>Seu voto da semana já foi registrado. Acompanhe semanalmente para ver as parciais.</p>";
+          "<strong>Este dispositivo já votou.</strong><p>Esse cargo já foi registrado neste navegador. Acompanhe as parciais abaixo.</p>";
         await loadVotes().catch(() => {});
         renderStatusMessage();
         closeVoteModal();
@@ -391,15 +375,6 @@
       const button = event.target.closest("[data-vote-button]");
       if (!button) return;
 
-      state.authUser = getGoogleUser();
-      if (!state.authUser?.sub || !state.authUser?.email) {
-        document.querySelector("[data-google-auth-card]")?.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-        return;
-      }
-
       openVoteModal(button.getAttribute("data-vote-button") || "");
     });
 
@@ -411,14 +386,10 @@
     });
     voteConfirmButton?.addEventListener("click", submitVote);
 
-    window.addEventListener("catalogo:google-auth", async () => {
-      state.authUser = getGoogleUser();
-      await loadVotes().catch(() => {});
-    });
   }
 
   async function init() {
-    state.authUser = getGoogleUser();
+    state.deviceId = getDeviceId();
     bindEvents();
     await loadElectionConfig();
     await loadVotes();

@@ -4165,12 +4165,11 @@ function getElectionPublicSnapshot(voterId = "") {
 }
 
 function recordElectionVote(payload = {}, req = null) {
-  const authUser = readCatalogoAuthSession(req);
   const safeOfficeId = String(payload.officeId || "").trim();
   const safeCandidateId = String(payload.candidateId || "").trim();
-  const safeGoogleSub = safeString(authUser?.sub || "", 160);
-  const safeGoogleEmail = safeString(authUser?.email || "", 160);
-  const safeVoterId = safeString(safeGoogleSub || payload.voterId || payload.deviceId || payload.visitorId, 120);
+  const safeGoogleSub = "";
+  const safeGoogleEmail = "";
+  const safeVoterId = safeString(payload.voterId || payload.deviceId || payload.visitorId, 120);
   const office = getElectionOffice(safeOfficeId);
   const tracking = buildTrackingMeta(req, payload);
   const currentFingerprints = buildWeeklyDeviceFingerprints(tracking);
@@ -4178,10 +4177,6 @@ function recordElectionVote(payload = {}, req = null) {
   const voterName = safeString(payload.name || payload.voterName, 120);
   const voterParty = safeString(payload.party || payload.voterParty, 90);
   const observation = safeString(payload.observation || payload.notes || payload.comment, 1200);
-
-  if (!safeGoogleSub || !safeGoogleEmail) {
-    return { ok: false, status: 401, message: "Entre com Google antes de votar." };
-  }
 
   if (!safeVoterId) {
     return { ok: false, status: 400, message: "Identificador de eleitor ausente." };
@@ -4219,20 +4214,12 @@ function recordElectionVote(payload = {}, req = null) {
       recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprints)
   );
 
-  const googleAlreadyVoted = store.records.some(
-    (item) =>
-      safeString(item.officeId || "", 120) === safeOfficeId &&
-      safeString(item.weekKey || "", 24) === currentWeekKey &&
-      (safeString(item.googleSub || "", 160) === safeGoogleSub ||
-        safeString(item.googleEmail || "", 160) === safeGoogleEmail)
-  );
-
-  if (deviceAlreadyVoted || googleAlreadyVoted) {
+  if (deviceAlreadyVoted) {
     const snapshot = getElectionPublicSnapshot(safeVoterId);
     return {
       ok: false,
       status: 409,
-      message: "Você já votou neste cargo nesta semana.",
+      message: "Este dispositivo já votou neste cargo.",
       ...snapshot
     };
   }

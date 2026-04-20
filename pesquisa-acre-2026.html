@@ -37,30 +37,24 @@
           <p class="eyebrow">Participação cidadã</p>
           <h1>Eleições no Acre</h1>
           <p class="election-hero-lead">
-            Painel público para acompanhar preferência semanal por cargo. Você entra com Google,
-            escolhe um nome e registra um voto por semana em cada disputa.
+            Painel público para acompanhar preferência por cargo. Cada dispositivo registra um
+            voto por cargo e depois acompanha as parciais no próprio painel.
           </p>
           <div class="election-hero-pills">
-            <span>Login Google obrigatório</span>
-            <span>1 voto por semana</span>
+            <span>1 voto por dispositivo</span>
             <span>Parciais abertas</span>
+            <span>Sem login</span>
           </div>
         </div>
 
-        <div class="election-auth-card" data-google-auth-card>
+        <div class="election-auth-card">
           <div class="election-auth-copy">
-            <span>acesso seguro</span>
-            <strong data-google-auth-status>Entre com Google para votar</strong>
-            <p data-google-auth-email>
-              Seu login marca o voto semanal e evita duplicação. Depois do envio, você verá o
-              agradecimento e o convite para acompanhar as parciais.
+            <span>voto local</span>
+            <strong>Este navegador guarda seu voto</strong>
+            <p>
+              O sistema cria um identificador local neste dispositivo. Depois que ele vota em um
+              cargo, não vota de novo no mesmo cargo.
             </p>
-          </div>
-          <div class="election-auth-actions">
-            <div class="election-google-button" data-google-auth-button></div>
-            <button type="button" class="election-logout-button" data-google-auth-logout hidden>
-              Sair do Google
-            </button>
           </div>
         </div>
       </section>
@@ -125,7 +119,6 @@
       </section>
     </div>
 
-    <script src="./site-google-auth.js?v=20260419authpay" defer></script>
-    <script src="./pesquisa-acre-2026.js?v=20260420electionrebuild" defer></script>
+    <script src="./pesquisa-acre-2026.js?v=20260420devicevote" defer></script>
   </body>
 </html>

@@ -184,24 +184,12 @@ body {
   gap: 0.8rem;
 }
 
-.election-google-button,
-.election-google-button > div {
-  width: 100%;
-}
-
-.election-logout-button,
 .button {
   min-height: 46px;
   border-radius: 999px;
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-}
-
-.election-logout-button {
-  border: 1px solid var(--line-strong);
-  background: rgba(7, 20, 40, 0.92);
-  color: #eff8ff;
 }
 
 .election-board {
@@ -371,24 +359,6 @@ body {
   font: inherit;
   font-weight: 800;
   cursor: pointer;
-}
-
-.candidate-google-slot {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.candidate-google-slot small {
-  color: var(--text-soft);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.4;
-}
-
-.candidate-google-button,
-.candidate-google-button > div {
-  width: 100%;
-  min-height: 46px;
 }
 
 .candidate-vote-button[disabled] {
