@@ -2231,6 +2231,10 @@ app.get("/api/admin/dashboard", async (req, res) => {
     locked: Boolean(item.locked),
     depositsApproved: item.depositsApproved || 0,
     withdrawalsApproved: item.withdrawalsApproved || 0,
+    balanceCoins: item.balance || 0,
+    lockedWithdrawalCoins: Boolean(item.locked) ? item.balance || 0 : 0,
+    totalApprovedDeposits: item.depositsApproved || 0,
+    totalApprovedWithdrawals: item.withdrawalsApproved || 0,
     updatedAt: item.updatedAt || item.createdAt
   }));
 
@@ -2311,9 +2315,12 @@ app.get("/api/admin/dashboard", async (req, res) => {
     recentVrRentalLeads,
     pubpaidPendingDeposits,
     pubpaidPendingWithdrawals,
+    pendingPubpaidDeposits: pubpaidPendingDeposits,
+    pendingPubpaidWithdrawals: pubpaidPendingWithdrawals,
     pubpaidRecentDeposits,
     pubpaidRecentWithdrawals,
     pubpaidWallets: pubpaidWalletRows,
+    pubpaidWalletBoard: pubpaidWalletRows,
     collectionInventory
   });
 });
@@ -2367,7 +2374,9 @@ app.get("/api/admin/raw/:key", async (req, res) => {
 
 app.post("/api/admin/pubpaid/deposits/review", async (req, res) => {
   const id = safeString(req.body?.id, 80);
-  const approve = safeString(req.body?.decision || req.body?.status, 40).toLowerCase() === "approve";
+  const decision = safeString(req.body?.decision || req.body?.status, 40).toLowerCase();
+  const approve = decision === "approve" || decision === "aprovar" || decision === "aprovado";
+  const reject = decision === "reject" || decision === "rejeitar" || decision === "rejeitado";
   if (!id) return res.status(400).json({ ok: false, error: "ID do deposito ausente." });
 
   const deposits = ensureArrayItems(await readStore("pubpaidDeposits", []));
@@ -2376,6 +2385,9 @@ app.post("/api/admin/pubpaid/deposits/review", async (req, res) => {
   const current = deposits[index];
   if (!isPubpaidPendingStatus(current?.payment?.status || current?.status)) {
     return res.status(400).json({ ok: false, error: "Esse deposito ja foi revisado." });
+  }
+  if (!approve && !reject) {
+    return res.status(400).json({ ok: false, error: "Decisao invalida." });
   }
 
   const nextItem = {
@@ -2610,3 +2622,17 @@ boot().catch((error) => {
   console.error("[catalogo-czs-backend] falha ao iniciar", error);
   process.exit(1);
 });
+const {
+  buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
+  readStore: readCanonicalPubpaidStore,
+} = require("../pubpaid-runtime");
+
+function buildPubpaidAdminPayload() {
+  const dashboard = buildCanonicalPubpaidAdminPayload(readCanonicalPubpaidStore());
+  return {
+    dashboard,
+    pendingPubpaidDeposits: dashboard.pendingDeposits,
+    pendingPubpaidWithdrawals: dashboard.pendingWithdrawals,
+    pubpaidWalletBoard: dashboard.walletBoard,
+  };
+}

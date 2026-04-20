@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>PubPaid Admin</title>
+    <style>
+      :root {
+        --bg: #120f1f;
+        --card: #1b1630;
+        --card-soft: #241d3d;
+        --ink: #f6f1e8;
+        --muted: #b7abc8;
+        --line: #3d315d;
+        --accent: #f68b33;
+        --accent-2: #27d1b0;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        padding: 24px;
+        background:
+          radial-gradient(circle at top, rgba(246, 139, 51, 0.16), transparent 30%),
+          linear-gradient(180deg, #17122a, var(--bg));
+        color: var(--ink);
+        font-family: "Segoe UI", sans-serif;
+      }
+      .wrap { max-width: 1320px; margin: 0 auto; display: grid; gap: 18px; }
+      .hero, .card {
+        background: linear-gradient(180deg, rgba(36, 29, 61, 0.98), rgba(27, 22, 48, 0.98));
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+      }
+      .hero { padding: 22px; display: grid; gap: 12px; }
+      .hero h1, .card h2 { margin: 0; }
+      .hero p, .mini-note { margin: 0; color: var(--muted); line-height: 1.5; }
+      .meta, .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+      .pill, .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 10px 14px; border-radius: 999px; border: 1px solid var(--line);
+        text-decoration: none; font-weight: 700;
+      }
+      .pill { background: rgba(255,255,255,0.05); color: var(--ink); }
+      .btn { background: #2b2247; color: var(--ink); cursor: pointer; }
+      .btn.primary { background: linear-gradient(135deg, var(--accent), #ffb14a); color: #24150a; border-color: transparent; }
+      .grid { display: grid; gap: 14px; }
+      .grid.kpis { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+      .grid.two { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+      .card { padding: 16px; min-width: 0; }
+      .kpi-label { margin: 0 0 10px; color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: .08em; }
+      .kpi-value { margin: 0; font-size: 1.9rem; font-weight: 800; }
+      .table-wrap {
+        overflow: auto; border: 1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,0.03);
+      }
+      table { width: 100%; min-width: 640px; border-collapse: collapse; }
+      th, td { text-align: left; padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.08); vertical-align: top; }
+      thead tr { background: rgba(246, 139, 51, 0.12); }
+      th { color: #ffe0bf; white-space: nowrap; }
+      tbody tr:last-child td { border-bottom: none; }
+      .truncate { max-width: 320px; word-break: break-word; }
+      .mono { font-family: ui-monospace, Consolas, monospace; font-size: 0.84rem; }
+      .status { padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,0.04); color: var(--ink); }
+      .auth-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+      label { display: grid; gap: 6px; color: var(--muted); font-size: 0.86rem; }
+      input { width: 100%; padding: 11px 12px; border-radius: 12px; border: 1px solid var(--line); background: #130f24; color: var(--ink); font-size: 16px; }
+      @media (max-width: 720px) { body { padding: 12px; } .actions .btn, .meta .pill { width: 100%; } }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <h1>PubPaid Admin</h1>
+          <p>Painel isolado do jogo para revisar depósitos, liberar retiradas, acompanhar carteiras e baixar relatórios sem misturar com o backend geral do jornal.</p>
+        </div>
+        <div class="meta">
+          <span class="pill" id="storageBadge">Storage do jogo</span>
+          <span class="pill" id="updatedBadge">Atualizando...</span>
+        </div>
+      </section>
+
+      <section class="card" id="accessCard" hidden>
+        <h2>Acesso do jogo</h2>
+        <p class="mini-note">Este painel conversa apenas com o backend do PubPaid. Use o usuário <strong>admin</strong> e a senha administrativa do jogo.</p>
+        <form id="accessForm" class="grid">
+          <div class="auth-grid">
+            <label><span>API base</span><input id="apiBaseInput" type="url" placeholder="http://localhost:3000" /></label>
+            <label><span>Token admin (opcional)</span><input id="tokenInput" type="password" placeholder="Se existir" /></label>
+            <label><span>Usuário</span><input id="userInput" type="text" placeholder="admin" autocomplete="username" /></label>
+            <label><span>Senha</span><input id="passwordInput" type="password" placeholder="Senha administrativa" autocomplete="current-password" /></label>
+          </div>
+          <div class="actions">
+            <button class="btn primary" type="submit">Entrar no admin</button>
+            <button class="btn" type="button" id="clearAccessButton">Limpar acesso</button>
+          </div>
+          <p class="mini-note" id="accessFeedback"></p>
+        </form>
+      </section>
+
+      <section class="status" id="statusBox" hidden></section>
+
+      <section class="grid kpis" id="kpiGrid"></section>
+
+      <section class="grid two">
+        <article class="card">
+          <h2>Depósitos pendentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Quando</th><th>Jogador</th><th>Depositante</th><th>Valor</th><th>Referência</th><th>Prazo</th><th>Ação</th></tr></thead>
+              <tbody id="pendingDepositsBody"></tbody>
+            </table>
+          </div>
+        </article>
+        <article class="card">
+          <h2>Retiradas pendentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Quando</th><th>Jogador</th><th>Valor</th><th>Referência</th><th>Prazo</th><th>Ação</th></tr></thead>
+              <tbody id="pendingWithdrawalsBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Carteiras do jogo</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jogador</th><th>Saldo</th><th>Travado</th><th>Depósitos aprovados</th><th>Saques aprovados</th><th>Atualizada</th></tr></thead>
+            <tbody id="walletBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Relatórios do jogo</h2>
+        <div class="actions">
+          <a class="btn" id="csvDepositsLink" href="/api/pubpaid-admin/reports/pubpaid-deposits.csv" target="_blank">CSV depósitos</a>
+          <a class="btn" id="csvWithdrawalsLink" href="/api/pubpaid-admin/reports/pubpaid-withdrawals.csv" target="_blank">CSV retiradas</a>
+          <a class="btn" id="csvWalletsLink" href="/api/pubpaid-admin/reports/pubpaid-wallets.csv" target="_blank">CSV carteiras</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const ACCESS_STORAGE_KEY = "pubpaid_admin_access_v1";
+      let latestAccess = null;
+
+      function normalizeBase(value) { return String(value || "").trim().replace(/\/$/, ""); }
+      function formatDateTime(value) {
+        if (!value) return "-";
+        const date = new Date(value);
+        return Number.isNaN(date.getTime()) ? "-" : date.toLocaleString("pt-BR");
+      }
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, (char) => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[char]));
+      }
+      function getStoredAccess() { try { return JSON.parse(sessionStorage.getItem(ACCESS_STORAGE_KEY) || "{}"); } catch { return {}; } }
+      function saveStoredAccess(value) { try { sessionStorage.setItem(ACCESS_STORAGE_KEY, JSON.stringify(value || {})); } catch {} }
+      function clearStoredAccess() { try { sessionStorage.removeItem(ACCESS_STORAGE_KEY); } catch {} }
+      function encodeBasicAuth(user, password) { return user && password ? `Basic ${btoa(`${user}:${password}`)}` : ""; }
+      function resolveAccess() {
+        const params = new URLSearchParams(location.search);
+        const stored = getStoredAccess();
+        return {
+          apiBase: normalizeBase(params.get("apiBase") || stored.apiBase || (location.protocol === "file:" ? "http://localhost:3000" : location.origin)),
+          token: String(params.get("token") || stored.token || "").trim(),
+          auth: String(stored.auth || "").trim(),
+          user: String(stored.user || "").trim()
+        };
+      }
+      function buildHeaders(access) {
+        const headers = {};
+        if (access?.token) headers["x-admin-token"] = access.token;
+        if (access?.auth) headers.Authorization = access.auth;
+        return headers;
+      }
+      function syncForm() {
+        const access = resolveAccess();
+        document.getElementById("apiBaseInput").value = access.apiBase || "";
+        document.getElementById("tokenInput").value = access.token || "";
+        document.getElementById("userInput").value = access.user || "admin";
+        document.getElementById("passwordInput").value = "";
+      }
+      function toggleAccessCard(visible, message = "") {
+        const card = document.getElementById("accessCard");
+        card.hidden = !visible;
+        document.getElementById("accessFeedback").textContent = message || "";
+      }
+      function setReportLinks(access) {
+        [
+          ["csvDepositsLink", "/api/pubpaid-admin/reports/pubpaid-deposits.csv"],
+          ["csvWithdrawalsLink", "/api/pubpaid-admin/reports/pubpaid-withdrawals.csv"],
+          ["csvWalletsLink", "/api/pubpaid-admin/reports/pubpaid-wallets.csv"]
+        ].forEach(([id, route]) => {
+          const el = document.getElementById(id);
+          const href = `${access.apiBase}${route}`;
+          el.href = access.token ? `${href}?token=${encodeURIComponent(access.token)}` : href;
+        });
+      }
+      function renderTableRows(el, rows, markup, colSpan, emptyMessage) {
+        el.innerHTML = rows.length ? rows.map(markup).join("") : `<tr><td colspan="${colSpan}">${escapeHtml(emptyMessage)}</td></tr>`;
+      }
+      function normalizeDashboardPayload(payload) {
+        const root = payload && typeof payload === "object" ? payload : {};
+        const dashboard = root.dashboard && typeof root.dashboard === "object" ? root.dashboard : root;
+        const pendingDeposits = Array.isArray(root.pendingPubpaidDeposits)
+          ? root.pendingPubpaidDeposits
+          : Array.isArray(dashboard.pendingDeposits) ? dashboard.pendingDeposits : [];
+        const pendingWithdrawals = Array.isArray(root.pendingPubpaidWithdrawals)
+          ? root.pendingPubpaidWithdrawals
+          : Array.isArray(dashboard.pendingWithdrawals) ? dashboard.pendingWithdrawals : [];
+        const walletBoard = Array.isArray(root.pubpaidWalletBoard)
+          ? root.pubpaidWalletBoard
+          : Array.isArray(dashboard.walletBoard) ? dashboard.walletBoard : [];
+        const stats = dashboard.stats || {};
+
+        return {
+          storage: root.storage || dashboard.storage || {},
+          updatedAt: root.updatedAt || dashboard.updatedAt || dashboard.generatedAt || "",
+          totals: root.totals || {
+            pubpaidDeposits: Array.isArray(dashboard.allDeposits) ? dashboard.allDeposits.length : pendingDeposits.length,
+            pubpaidWithdrawals: Array.isArray(dashboard.allWithdrawals) ? dashboard.allWithdrawals.length : pendingWithdrawals.length,
+            pubpaidWallets: walletBoard.length,
+            pubpaidPendingDeposits: stats.pendingDepositCount ?? pendingDeposits.length,
+            pubpaidPendingWithdrawals: stats.pendingWithdrawalCount ?? pendingWithdrawals.length,
+          },
+          pendingPubpaidDeposits: pendingDeposits.map((row) => ({
+            ...row,
+            name: row.name || row.playerName || row.player || "-",
+            email: row.email || row.playerId || "-",
+            depositorName: row.depositorName || row.playerName || row.player || "-",
+            amount: row.amount ?? row.amountCoins ?? row.value ?? 0,
+            txid: row.txid || row.reference || row.referenceLabel || "-",
+            reviewDeadlineAt: row.reviewDeadlineAt || row.reviewedAt || row.createdAt || "",
+          })),
+          pendingPubpaidWithdrawals: pendingWithdrawals.map((row) => ({
+            ...row,
+            name: row.name || row.playerName || row.player || "-",
+            email: row.email || row.playerId || "-",
+            amount: row.amount ?? row.amountCoins ?? row.value ?? 0,
+            txid: row.txid || row.pixKey || row.key || "-",
+            reviewDeadlineAt: row.reviewDeadlineAt || row.reviewedAt || row.createdAt || "",
+          })),
+          pubpaidWalletBoard: walletBoard.map((row) => ({
+            ...row,
+            name: row.name || row.playerName || row.player || "-",
+            email: row.email || row.playerId || "-",
+            updatedAt: row.updatedAt || root.updatedAt || dashboard.updatedAt || dashboard.generatedAt || "",
+          })),
+        };
+      }
+      function renderFromPayload(data) {
+        const normalized = normalizeDashboardPayload(data);
+        document.getElementById("storageBadge").textContent = `Storage: ${normalized.storage?.mode || "pubpaid"} • ${normalized.storage?.target || "-"}`;
+        document.getElementById("updatedBadge").textContent = `Atualizado: ${formatDateTime(normalized.updatedAt)}`;
+
+        const totals = normalized.totals || {};
+        document.getElementById("kpiGrid").innerHTML = [
+          ["Depósitos", totals.pubpaidDeposits || 0],
+          ["Saques", totals.pubpaidWithdrawals || 0],
+          ["Carteiras", totals.pubpaidWallets || 0],
+          ["Pend. depósitos", totals.pubpaidPendingDeposits || 0],
+          ["Pend. saques", totals.pubpaidPendingWithdrawals || 0]
+        ].map(([label, value]) => `<article class="card"><p class="kpi-label">${escapeHtml(label)}</p><p class="kpi-value">${escapeHtml(String(value))}</p></article>`).join("");
+
+        renderTableRows(
+          document.getElementById("pendingDepositsBody"),
+          normalized.pendingPubpaidDeposits || [],
+          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td class="truncate">${escapeHtml(row.depositorName || "-")}</td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td class="mono">${escapeHtml(row.txid || "-")}</td><td>${formatDateTime(row.reviewDeadlineAt)}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
+          7,
+          "Sem depósitos pendentes."
+        );
+
+        renderTableRows(
+          document.getElementById("pendingWithdrawalsBody"),
+          normalized.pendingPubpaidWithdrawals || [],
+          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td class="mono">${escapeHtml(row.txid || "-")}</td><td>${formatDateTime(row.reviewDeadlineAt)}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
+          6,
+          "Sem retiradas pendentes."
+        );
+
+        renderTableRows(
+          document.getElementById("walletBody"),
+          normalized.pubpaidWalletBoard || [],
+          (row) => `<tr><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td><strong>${escapeHtml(String(row.balanceCoins || 0))}</strong></td><td>${escapeHtml(String(row.lockedWithdrawalCoins || 0))}</td><td>${escapeHtml(String(row.totalApprovedDeposits || 0))}</td><td>${escapeHtml(String(row.totalApprovedWithdrawals || 0))}</td><td>${formatDateTime(row.updatedAt)}</td></tr>`,
+          6,
+          "Sem carteiras PubPaid ainda."
+        );
+      }
+      async function loadDashboard() {
+        const access = resolveAccess();
+        latestAccess = access;
+        syncForm();
+        setReportLinks(access);
+        try {
+          const response = await fetch(`${access.apiBase}/api/pubpaid-admin/dashboard`, { headers: buildHeaders(access) });
+          const data = await response.json().catch(() => ({}));
+          if (response.status === 401) {
+            toggleAccessCard(true, "Informe as credenciais administrativas do jogo.");
+          }
+          if (!response.ok || data.ok === false) throw new Error(data.error || "Falha ao carregar o admin do PubPaid.");
+          document.getElementById("statusBox").hidden = true;
+          toggleAccessCard(location.protocol === "file:", location.protocol === "file:" ? "Painel conectado ao backend configurado abaixo." : "");
+          renderFromPayload(data);
+        } catch (error) {
+          const box = document.getElementById("statusBox");
+          box.hidden = false;
+          box.textContent = error?.message || "Falha ao carregar o admin do PubPaid.";
+        }
+      }
+      document.getElementById("accessForm")?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const apiBase = normalizeBase(document.getElementById("apiBaseInput").value || "");
+        const token = String(document.getElementById("tokenInput").value || "").trim();
+        const user = String(document.getElementById("userInput").value || "").trim() || "admin";
+        const password = String(document.getElementById("passwordInput").value || "");
+        saveStoredAccess({ apiBase, token, auth: token ? "" : encodeBasicAuth(user, password), user });
+        toggleAccessCard(true, "Tentando autenticar no admin do jogo...");
+        loadDashboard();
+      });
+      document.getElementById("clearAccessButton")?.addEventListener("click", () => {
+        clearStoredAccess();
+        syncForm();
+        toggleAccessCard(true, "Credenciais locais removidas.");
+      });
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-review]");
+        if (!button) return;
+        const endpoint = button.getAttribute("data-review");
+        const id = button.getAttribute("data-id");
+        const decision = button.getAttribute("data-decision");
+        const statusBox = document.getElementById("statusBox");
+        const original = button.textContent;
+        button.disabled = true;
+        button.textContent = "Enviando...";
+        try {
+          const response = await fetch(`${latestAccess.apiBase}${endpoint}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", ...buildHeaders(latestAccess) },
+            body: JSON.stringify({ id, decision })
+          });
+          const payload = await response.json().catch(() => ({}));
+          if (!response.ok || payload.ok === false) throw new Error(payload.error || "Falha ao revisar item.");
+          statusBox.hidden = false;
+          statusBox.textContent = `Revisão enviada: ${decision === "approve" ? "aprovado" : "rejeitado"}.`;
+          if (payload.dashboard || payload.pendingPubpaidDeposits || payload.pubpaidWalletBoard) {
+            renderFromPayload(payload);
+          } else {
+            await loadDashboard();
+          }
+        } catch (error) {
+          statusBox.hidden = false;
+          statusBox.textContent = error?.message || "Falha ao revisar item do PubPaid.";
+        } finally {
+          button.disabled = false;
+          button.textContent = original;
+        }
+      });
+      syncForm();
+      if (location.protocol === "file:") {
+        toggleAccessCard(true, "Informe a API base e a senha para conectar este painel ao backend do jogo.");
+      }
+      loadDashboard();
+      setInterval(loadDashboard, 60000);
+    </script>
+  </body>
+</html>
+<script>
+  (function stabilizePubpaidAdminPayload() {
+    if (!window.fetch) return;
+    const originalFetch = window.fetch.bind(window);
+
+    function normalizePayload(payload) {
+      if (!payload || typeof payload !== "object") {
+        return payload;
+      }
+
+      const dashboard = payload.dashboard && typeof payload.dashboard === "object"
+        ? payload.dashboard
+        : payload;
+
+      const normalized = Object.assign({}, payload, {
+        dashboard,
+        pendingPubpaidDeposits: Array.isArray(payload.pendingPubpaidDeposits)
+          ? payload.pendingPubpaidDeposits
+          : Array.isArray(dashboard.pendingDeposits) ? dashboard.pendingDeposits : [],
+        pendingPubpaidWithdrawals: Array.isArray(payload.pendingPubpaidWithdrawals)
+          ? payload.pendingPubpaidWithdrawals
+          : Array.isArray(dashboard.pendingWithdrawals) ? dashboard.pendingWithdrawals : [],
+        pubpaidWalletBoard: Array.isArray(payload.pubpaidWalletBoard)
+          ? payload.pubpaidWalletBoard
+          : Array.isArray(dashboard.walletBoard) ? dashboard.walletBoard : [],
+      });
+
+      return normalized;
+    }
+
+    window.fetch = async function patchedFetch(input, init) {
+      const response = await originalFetch(input, init);
+      const url = typeof input === "string" ? input : (input && input.url) || "";
+      if (!url.includes("/api/pubpaid-admin/")) {
+        return response;
+      }
+
+      const contentType = response.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        return response;
+      }
+
+      try {
+        const raw = await response.clone().json();
+        const normalized = normalizePayload(raw);
+        return new Response(JSON.stringify(normalized), {
+          status: response.status,
+          statusText: response.statusText,
+          headers: response.headers,
+        });
+      } catch (_error) {
+        return response;
+      }
+    };
+  })();
+</script>

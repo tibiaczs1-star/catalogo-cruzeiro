@@ -1,7 +1,44 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T06:20:02.054Z",
+  "lastUpdatedAt": "2026-04-20T06:48:00.000Z",
   "orders": [
+    {
+      "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
+      "createdAt": "2026-04-20T06:32:00.000Z",
+      "updatedAt": "2026-04-20T06:48:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "implemente esse game no jornal, coloque no lado esquerdo um botão palavras cruzadas, num card bem bonito, rosa, e ponha obs, uma singela homenagem",
+      "summary": "Criar a pagina Palavras da Rosa e integrar um card rosa na lateral esquerda da home",
+      "normalizedTasks": [
+        "Criar uma pagina jogavel de palavras cruzadas com visual floral",
+        "Adicionar um card rosa na lateral esquerda da home com CTA para o jogo",
+        "Inserir a ideia de singela homenagem no card e na experiencia",
+        "Registrar a nova pagina no server para metadata e servimento estavel"
+      ],
+      "filesTouched": [
+        "palavras-da-rosa.html",
+        "index.html",
+        "styles.css",
+        "server.js",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "jogo",
+        "crossword",
+        "home",
+        "card-lateral",
+        "homenagem"
+      ],
+      "nextSteps": [
+        "Validar visualmente a composicao da lateral esquerda na home",
+        "Publicar no deploy quando o usuario pedir"
+      ],
+      "notes": "Smoke test local confirmou a home com o card e a pagina do jogo com o tabuleiro carregando."
+    },
     {
       "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
       "createdAt": "2026-04-19T23:40:00.000Z",
@@ -1753,6 +1790,21 @@
       "source": "chat",
       "rawRequest": "Fazer um deposito fake de 5 reais, ver se aparece para validar e descobrir por que nem todas as letras entram no campo de confirmacao do nome do depositante.",
       "summary": "Testar deposito fake R$5 e corrigir input do nome do depositante",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-investigar-502-bad-gateway-no-deploy-render-do-pubpaid-dashboard",
+      "createdAt": "2026-04-20T06:28:59.842Z",
+      "updatedAt": "2026-04-20T06:28:59.842Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Depois tentei de novo e deu 502 Bad Gateway no Render ao acessar o site/dashboard do PubPaid.",
+      "summary": "Investigar 502 Bad Gateway no deploy Render do PubPaid/dashboard",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

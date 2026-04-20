@@ -2,6 +2,12 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
+const {
+  buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
+  readStore: readCanonicalPubpaidStore,
+  reviewDeposit: reviewCanonicalPubpaidDeposit,
+  reviewWithdrawal: reviewCanonicalPubpaidWithdrawal,
+} = require("./pubpaid-runtime");
 const vm = require("vm");
 const zlib = require("zlib");
 const { URL } = require("url");
@@ -54,6 +60,7 @@ const DATA_DIR = process.env.DATA_DIR
   : path.join(ROOT_DIR, "data");
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
+const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
@@ -99,6 +106,10 @@ const PUBPAID_SPRITE_SCOUT_FILE = path.join(DATA_DIR, "pubpaid-sprite-scout.json
 const PUBPAID_DEPOSITS_FILE = path.join(DATA_DIR, "pubpaid-deposits.json");
 const PUBPAID_WITHDRAWALS_FILE = path.join(DATA_DIR, "pubpaid-withdrawals.json");
 const PUBPAID_WALLETS_FILE = path.join(DATA_DIR, "pubpaid-wallets.json");
+const LEGACY_BACKEND_DATA_DIR = path.join(ROOT_DIR, "backend", "data");
+const LEGACY_PUBPAID_DEPOSITS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidDeposits.json");
+const LEGACY_PUBPAID_WITHDRAWALS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWithdrawals.json");
+const LEGACY_PUBPAID_WALLETS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWallets.json");
 const SITE_URL = String(process.env.SITE_URL || "").trim().replace(/\/+$/, "");
 const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
 const FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "99831455A").trim();
@@ -470,6 +481,18 @@ const STATIC_PAGE_SEO = {
     changefreq: "weekly",
     fileName: "pubpaid.html"
   },
+  "/palavras-da-rosa.html": {
+    title: `Palavras da Rosa | ${SITE_NAME}`,
+    description:
+      "Jogo especial de palavras cruzadas com tema floral, visual rosa e uma singela homenagem integrada ao jornal.",
+    themeColor: "#E91E63",
+    colorScheme: "light",
+    ogType: "website",
+    schemaType: "Game",
+    priority: "0.58",
+    changefreq: "weekly",
+    fileName: "palavras-da-rosa.html"
+  },
   "/vendas.html": {
     title: `Vendas Locais | ${SITE_NAME}`,
     description:
@@ -834,6 +857,7 @@ function readJson(filePath, fallback) {
 }
 
 function writeJson(filePath, value) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
   fs.writeFileSync(filePath, JSON.stringify(value, null, 2), "utf-8");
 }
 
@@ -2112,6 +2136,11 @@ function parseCurrency(value, fallback = 0) {
     .replace(",", ".");
   const parsed = Number(normalized);
   return Number.isFinite(parsed) ? Number(parsed.toFixed(2)) : fallback;
+}
+
+function clampInteger(value, fallback = 0) {
+  const parsed = Number.parseInt(String(value ?? fallback), 10);
+  return Number.isFinite(parsed) ? parsed : fallback;
 }
 
 function normalizePixText(value, maxLength = 25) {
@@ -4274,6 +4303,7 @@ const SPRITE_SCAN_ROOTS = [
 const SPRITE_CONTEXT_FILES = [
   "index.html",
   "pubpaid.html",
+  "palavras-da-rosa.html",
   "games.html",
   "infantil.html",
   "estudantes.html",
@@ -5186,22 +5216,70 @@ function normalizePubpaidAmount(value, fallback = 10) {
   return PUBPAID_ALLOWED_AMOUNTS.includes(parsed) ? parsed : fallback;
 }
 
+function readMergedPubpaidArray(primaryFile, legacyFile) {
+  const primary = readJson(primaryFile, []);
+  const legacy = readJson(legacyFile, []);
+  const merged = [];
+  const seen = new Set();
+
+  [primary, legacy].forEach((list) => {
+    (Array.isArray(list) ? list : []).forEach((item) => {
+      if (!item || typeof item !== "object") return;
+      const key = [
+        safeString(item.id || "", 160),
+        safeString(item?.payment?.txid || item.reference || "", 80),
+        safeString(item.createdAt || "", 80),
+        safeString(item.walletKey || item?.user?.email || "", 180)
+      ].join("|");
+      if (seen.has(key)) return;
+      seen.add(key);
+      merged.push(item);
+    });
+  });
+
+  return merged;
+}
+
+function writePubpaidArrayCompat(primaryFile, legacyFile, items = []) {
+  const normalized = Array.isArray(items) ? items : [];
+  writeJson(primaryFile, normalized);
+  if (legacyFile) {
+    writeJson(legacyFile, normalized);
+  }
+}
+
+function normalizePubpaidWalletRecord(item = {}) {
+  const coerceInt = (value) => {
+    const parsed = Number.parseInt(String(value ?? 0), 10);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+  const lockedLegacy = item.locked === true ? coerceInt(item.balance || item.balanceCoins || 0) : 0;
+  return {
+    ...item,
+    balanceCoins: coerceInt(item.balanceCoins ?? item.balance ?? 0),
+    lockedWithdrawalCoins: coerceInt(item.lockedWithdrawalCoins ?? lockedLegacy),
+    totalApprovedDeposits: coerceInt(item.totalApprovedDeposits ?? item.depositsApproved ?? 0),
+    totalApprovedWithdrawals: coerceInt(item.totalApprovedWithdrawals ?? item.withdrawalsApproved ?? 0),
+    locked: Boolean(item.locked ?? (coerceInt(item.lockedWithdrawalCoins ?? 0) > 0))
+  };
+}
+
 function getPubpaidWalletStore() {
-  const items = readJson(PUBPAID_WALLETS_FILE, []);
-  return Array.isArray(items) ? items : [];
+  const items = readMergedPubpaidArray(PUBPAID_WALLETS_FILE, LEGACY_PUBPAID_WALLETS_FILE);
+  return (Array.isArray(items) ? items : []).map((item) => normalizePubpaidWalletRecord(item));
 }
 
 function writePubpaidWalletStore(items = []) {
-  writeJson(PUBPAID_WALLETS_FILE, Array.isArray(items) ? items : []);
+  writePubpaidArrayCompat(PUBPAID_WALLETS_FILE, LEGACY_PUBPAID_WALLETS_FILE, items);
 }
 
 function getPubpaidWithdrawals() {
-  const items = readJson(PUBPAID_WITHDRAWALS_FILE, []);
+  const items = readMergedPubpaidArray(PUBPAID_WITHDRAWALS_FILE, LEGACY_PUBPAID_WITHDRAWALS_FILE);
   return Array.isArray(items) ? items : [];
 }
 
 function writePubpaidWithdrawals(items = []) {
-  writeJson(PUBPAID_WITHDRAWALS_FILE, Array.isArray(items) ? items : []);
+  writePubpaidArrayCompat(PUBPAID_WITHDRAWALS_FILE, LEGACY_PUBPAID_WITHDRAWALS_FILE, items);
 }
 
 function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
@@ -5277,7 +5355,7 @@ function isPubpaidPendingStatus(value = "") {
 function buildPubpaidAccountPayload(authUser = {}) {
   const wallet = getPubpaidWallet(authUser);
   const walletKey = getPubpaidWalletKey(authUser);
-  const deposits = getJsonArray(PUBPAID_DEPOSITS_FILE).filter(
+  const deposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE).filter(
     (item) => safeString(item?.walletKey || "", 180).toLowerCase() === walletKey
   );
   const withdrawals = getPubpaidWithdrawals().filter(
@@ -5462,9 +5540,6 @@ function buildAdminDashboardPayload() {
   const acre2026PollSummary = buildAcre2026PollSummary(sortByDateDesc(acre2026Poll, "createdAt", 5000));
   const ninjasRequests = getJsonArray(NINJAS_REQUESTS_FILE);
   const ninjasProfiles = getJsonArray(NINJAS_PROFILES_FILE);
-  const pubpaidDeposits = getJsonArray(PUBPAID_DEPOSITS_FILE);
-  const pubpaidWithdrawals = getPubpaidWithdrawals();
-  const pubpaidWallets = getPubpaidWalletStore();
   const salesListings = getJsonArray(SALES_LISTINGS_FILE);
   const vrRentalLeads = getJsonArray(VR_RENTAL_LEADS_FILE);
   const news = getNews(200);
@@ -5475,14 +5550,8 @@ function buildAdminDashboardPayload() {
   const founderItems = subs.filter(isConfirmedFounderSubscription);
   const pendingFounderItems = subs.filter(isPendingFounderSubscription);
   const pendingNinjasPayments = ninjasRequests
-    .concat(ninjasProfiles, pubpaidDeposits)
+    .concat(ninjasProfiles)
     .filter((item) => String(item?.payment?.status || item.status || "").includes("pendente")).length;
-  const pendingPubpaidDeposits = pubpaidDeposits.filter((item) =>
-    isPubpaidPendingStatus(item?.payment?.status || item?.status)
-  ).length;
-  const pendingPubpaidWithdrawals = pubpaidWithdrawals.filter((item) =>
-    isPubpaidPendingStatus(item?.payment?.status || item?.status)
-  ).length;
 
   const uniqueVisitors = new Set(
     visits.map((item) => item.visitorId || item.cookieVisitorId).filter(Boolean)
@@ -5524,7 +5593,6 @@ function buildAdminDashboardPayload() {
     .concat(comments.map((item) => item.createdAt))
     .concat(subs.map((item) => item.createdAt))
     .concat(voteRecords.map((item) => item.at))
-    .concat(pubpaidDeposits.map((item) => item.createdAt))
     .concat(vrRentalLeads.map((item) => item.createdAt))
     .map((value) => new Date(value || 0).getTime())
     .filter((value) => Number.isFinite(value) && value > 0);
@@ -5554,11 +5622,6 @@ function buildAdminDashboardPayload() {
       opinions: voteRecords.filter((item) => item.observation).length,
       ninjasRequests: ninjasRequests.length,
       ninjasProfiles: ninjasProfiles.length,
-      pubpaidDeposits: pubpaidDeposits.length,
-      pubpaidWithdrawals: pubpaidWithdrawals.length,
-      pubpaidWallets: pubpaidWallets.length,
-      pubpaidPendingDeposits: pendingPubpaidDeposits,
-      pubpaidPendingWithdrawals: pendingPubpaidWithdrawals,
       ninjasPendingPayments: pendingNinjasPayments,
       salesListings: salesListings.length,
       vrRentalLeads: vrRentalLeads.length,
@@ -5675,70 +5738,6 @@ function buildAdminDashboardPayload() {
       paymentStatus: item?.payment?.status || "",
       txid: item?.payment?.txid || ""
     })),
-    recentPubpaidDeposits: sortByDateDesc(pubpaidDeposits, "createdAt", 12).map((item) => ({
-      createdAt: item.createdAt,
-      email: item?.user?.email || "",
-      name: item?.user?.name || "",
-      depositorName: item.depositorName || item?.payment?.depositorName || "",
-      amount: item.amount || 0,
-      creditsRequested: item.creditsRequested || 0,
-      status: item.status || "",
-      paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || ""
-    })),
-    pendingPubpaidDeposits: sortByDateDesc(
-      pubpaidDeposits.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status)),
-      "createdAt",
-      24
-    ).map((item) => ({
-      id: item.id,
-      createdAt: item.createdAt,
-      email: item?.user?.email || "",
-      name: item?.user?.name || "",
-      depositorName: item.depositorName || item?.payment?.depositorName || "",
-      amount: item.amount || 0,
-      creditsRequested: item.creditsRequested || 0,
-      status: item.status || "",
-      paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || "",
-      reviewDeadlineAt: item.reviewDeadlineAt || ""
-    })),
-    recentPubpaidWithdrawals: sortByDateDesc(pubpaidWithdrawals, "createdAt", 12).map((item) => ({
-      createdAt: item.createdAt,
-      email: item?.user?.email || "",
-      name: item?.user?.name || "",
-      amount: item.amount || 0,
-      creditsRequested: item.creditsRequested || 0,
-      status: item.status || "",
-      paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || "",
-      reviewDeadlineAt: item.reviewDeadlineAt || ""
-    })),
-    pendingPubpaidWithdrawals: sortByDateDesc(
-      pubpaidWithdrawals.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status)),
-      "createdAt",
-      24
-    ).map((item) => ({
-      id: item.id,
-      createdAt: item.createdAt,
-      email: item?.user?.email || "",
-      name: item?.user?.name || "",
-      amount: item.amount || 0,
-      creditsRequested: item.creditsRequested || 0,
-      status: item.status || "",
-      paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || "",
-      reviewDeadlineAt: item.reviewDeadlineAt || ""
-    })),
-    pubpaidWalletBoard: sortByDateDesc(pubpaidWallets, "updatedAt", 24).map((item) => ({
-      updatedAt: item.updatedAt || item.createdAt || "",
-      email: item?.user?.email || "",
-      name: item?.user?.name || "",
-      balanceCoins: item.balanceCoins || 0,
-      lockedWithdrawalCoins: item.lockedWithdrawalCoins || 0,
-      totalApprovedDeposits: item.totalApprovedDeposits || 0,
-      totalApprovedWithdrawals: item.totalApprovedWithdrawals || 0
-    })),
     recentSalesListings: sortByDateDesc(salesListings, "createdAt", 12).map((item) => ({
       createdAt: item.createdAt,
       title: item.title || "",
@@ -5767,13 +5766,80 @@ function buildAdminDashboardPayload() {
       voteRecords,
       ninjasRequests,
       ninjasProfiles,
-      pubpaidDeposits,
       salesListings,
       vrRentalLeads
     }),
     electoralHeat,
     sentimentTotals,
     reelectionTotals,
+    updatedAt: new Date().toISOString()
+  };
+}
+
+function buildPubpaidAdminPayload() {
+  const pubpaidDeposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE);
+  const pubpaidWithdrawals = getPubpaidWithdrawals();
+  const pubpaidWallets = getPubpaidWalletStore();
+  const pendingPubpaidDeposits = sortByDateDesc(
+    pubpaidDeposits.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status)),
+    "createdAt",
+    50
+  ).map((item) => ({
+    id: item.id,
+    createdAt: item.createdAt || "",
+    email: item?.user?.email || "",
+    name: item?.user?.name || "",
+    depositorName: item.depositorName || item?.payment?.depositorName || "",
+    amount: item.amount || 0,
+    creditsRequested: item.creditsRequested || 0,
+    status: item.status || "",
+    paymentStatus: item?.payment?.status || "",
+    txid: item?.payment?.txid || "",
+    reviewDeadlineAt: item.reviewDeadlineAt || ""
+  }));
+  const pendingPubpaidWithdrawals = sortByDateDesc(
+    pubpaidWithdrawals.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status)),
+    "createdAt",
+    50
+  ).map((item) => ({
+    id: item.id,
+    createdAt: item.createdAt || "",
+    email: item?.user?.email || "",
+    name: item?.user?.name || "",
+    amount: item.amount || 0,
+    creditsRequested: item.creditsRequested || 0,
+    status: item.status || "",
+    paymentStatus: item?.payment?.status || "",
+    txid: item?.payment?.txid || "",
+    reviewDeadlineAt: item.reviewDeadlineAt || ""
+  }));
+  const pubpaidWalletBoard = sortByDateDesc(pubpaidWallets, "updatedAt", 50).map((item) => ({
+    updatedAt: item.updatedAt || item.createdAt || "",
+    email: item?.user?.email || "",
+    name: item?.user?.name || "",
+    walletKey: item.walletKey || "",
+    balanceCoins: clampInteger(item.balanceCoins),
+    lockedWithdrawalCoins: clampInteger(item.lockedWithdrawalCoins),
+    totalApprovedDeposits: clampInteger(item.totalApprovedDeposits),
+    totalApprovedWithdrawals: clampInteger(item.totalApprovedWithdrawals)
+  }));
+
+  return {
+    ok: true,
+    storage: {
+      mode: "pubpaid-file",
+      target: DATA_DIR
+    },
+    totals: {
+      pubpaidDeposits: pubpaidDeposits.length,
+      pubpaidWithdrawals: pubpaidWithdrawals.length,
+      pubpaidWallets: pubpaidWallets.length,
+      pubpaidPendingDeposits: pendingPubpaidDeposits.length,
+      pubpaidPendingWithdrawals: pendingPubpaidWithdrawals.length
+    },
+    pendingPubpaidDeposits,
+    pendingPubpaidWithdrawals,
+    pubpaidWalletBoard,
     updatedAt: new Date().toISOString()
   };
 }
@@ -6756,7 +6822,7 @@ async function handleApi(req, res, pathname, searchParams) {
     }
 
     const body = await parseBody(req);
-    const deposits = readJson(PUBPAID_DEPOSITS_FILE, []);
+    const deposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE);
     const amount = normalizePubpaidAmount(body.amount, 10);
     const txid = normalizePixToken(body.paymentTxid || body.txid || `PUB${Date.now()}`, 25) || `PUB${Date.now()}`;
     const depositorName = cleanShortText(body.depositorName || body.depositName || body.payerName || "", 90);
@@ -6798,7 +6864,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const next = Array.isArray(deposits) ? deposits : [];
     next.push(nextItem);
-    writeJson(PUBPAID_DEPOSITS_FILE, next);
+    writePubpaidArrayCompat(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE, next);
 
     return sendJson(res, 201, {
       ok: true,
@@ -6878,114 +6944,126 @@ async function handleApi(req, res, pathname, searchParams) {
     });
   }
 
-  if (req.method === "POST" && pathname === "/api/admin/pubpaid/deposits/review") {
+  if (req.method === "GET" && pathname === "/api/pubpaid-admin/dashboard") {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
-    const body = await parseBody(req);
-    const id = cleanShortText(body.id, 120);
-    const decision = normalizeText(body.decision || body.status || "");
-    const note = cleanShortText(body.note || "", 280);
-    const deposits = getJsonArray(PUBPAID_DEPOSITS_FILE);
-    const index = deposits.findIndex((item) => String(item?.id || "") === id);
-    if (index < 0) {
-      return sendJson(res, 404, { ok: false, error: "Deposito nao encontrado." });
-    }
-
-    const current = deposits[index];
-    if (!isPubpaidPendingStatus(current?.payment?.status || current?.status)) {
-      return sendJson(res, 400, { ok: false, error: "Esse deposito ja foi revisado." });
-    }
-
-    const approve = decision === "approve" || decision === "aprovado" || decision === "aprovar";
-    const reject = decision === "reject" || decision === "rejeitado" || decision === "rejeitar";
-    if (!approve && !reject) {
-      return sendJson(res, 400, { ok: false, error: "Decisao invalida." });
-    }
-
-    const nextItem = {
-      ...current,
-      status: approve ? "creditos-liberados" : "deposito-rejeitado",
-      reviewNote: note,
-      reviewedAt: new Date().toISOString(),
-      reviewedBy: SUPER_ADMIN_USER,
-      payment: {
-        ...(current.payment || {}),
-        status: approve ? "confirmado-manual" : "rejeitado-manual"
-      }
-    };
-    deposits[index] = nextItem;
-    writeJson(PUBPAID_DEPOSITS_FILE, deposits);
-
-    if (approve) {
-      updatePubpaidWallet(nextItem.user || {}, (wallet) => ({
-        ...wallet,
-        balanceCoins: clampInteger(wallet.balanceCoins) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0),
-        totalApprovedDeposits: clampInteger(wallet.totalApprovedDeposits) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0)
-      }));
-    }
-
-    return sendJson(res, 200, {
-      ok: true,
-      item: nextItem,
-      dashboard: buildAdminDashboardPayload()
-    });
+    return sendJson(res, 200, buildPubpaidAdminPayload());
   }
 
-  if (req.method === "POST" && pathname === "/api/admin/pubpaid/withdrawals/review") {
+  if (req.method === "POST" && pathname === "/api/pubpaid-admin/deposits/review") {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
     const body = await parseBody(req);
-    const id = cleanShortText(body.id, 120);
-    const decision = normalizeText(body.decision || body.status || "");
-    const note = cleanShortText(body.note || "", 280);
-    const withdrawals = getPubpaidWithdrawals();
-    const index = withdrawals.findIndex((item) => String(item?.id || "") === id);
-    if (index < 0) {
-      return sendJson(res, 404, { ok: false, error: "Saque nao encontrado." });
+    try {
+      const result = await reviewCanonicalPubpaidDeposit({
+        depositId: cleanShortText(body.depositId || body.id, 120),
+        decision: body.decision || body.status || "",
+        reviewer: cleanShortText(body.reviewer || body.adminUser || body.username || SUPER_ADMIN_USER, 120),
+        reason: cleanShortText(body.reason || body.reviewReason || body.note || "", 280),
+      });
+      const payload = buildPubpaidAdminPayload();
+      return sendJson(res, 200, {
+        ok: true,
+        idempotent: result.idempotent,
+        item: result.item,
+        updatedAt: payload.updatedAt,
+        storage: payload.storage,
+        totals: payload.totals,
+        dashboard: payload.dashboard,
+        pendingPubpaidDeposits: payload.pendingPubpaidDeposits,
+        pendingPubpaidWithdrawals: payload.pendingPubpaidWithdrawals,
+        pubpaidWalletBoard: payload.pubpaidWalletBoard,
+      });
+    } catch (error) {
+      console.error("[pubpaid-admin][deposit-review] failed", {
+        depositId: cleanShortText(body.depositId || body.id, 120),
+        decision: normalizeText(body.decision || body.status || ""),
+        message: error?.message || String(error)
+      });
+      return sendJson(res, error?.statusCode || 500, {
+        ok: false,
+        error: error?.message || "Falha ao confirmar o deposito PubPaid."
+      });
     }
+  }
 
-    const current = withdrawals[index];
-    if (!isPubpaidPendingStatus(current?.payment?.status || current?.status)) {
-      return sendJson(res, 400, { ok: false, error: "Esse saque ja foi revisado." });
+  if (req.method === "POST" && pathname === "/api/pubpaid-admin/withdrawals/review") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const body = await parseBody(req);
+    try {
+      const result = await reviewCanonicalPubpaidWithdrawal({
+        withdrawalId: cleanShortText(body.withdrawalId || body.id, 120),
+        decision: body.decision || body.status || "",
+        reviewer: cleanShortText(body.reviewer || body.adminUser || body.username || SUPER_ADMIN_USER, 120),
+        reason: cleanShortText(body.reason || body.reviewReason || body.note || "", 280),
+      });
+      const payload = buildPubpaidAdminPayload();
+      return sendJson(res, 200, {
+        ok: true,
+        idempotent: result.idempotent,
+        item: result.item,
+        updatedAt: payload.updatedAt,
+        storage: payload.storage,
+        totals: payload.totals,
+        dashboard: payload.dashboard,
+        pendingPubpaidDeposits: payload.pendingPubpaidDeposits,
+        pendingPubpaidWithdrawals: payload.pendingPubpaidWithdrawals,
+        pubpaidWalletBoard: payload.pubpaidWalletBoard,
+      });
+    } catch (error) {
+      console.error("[pubpaid-admin][withdrawal-review] failed", {
+        withdrawalId: cleanShortText(body.withdrawalId || body.id, 120),
+        decision: normalizeText(body.decision || body.status || ""),
+        message: error?.message || String(error)
+      });
+      return sendJson(res, error?.statusCode || 500, {
+        ok: false,
+        error: error?.message || "Falha ao confirmar o saque PubPaid."
+      });
     }
+  }
 
-    const approve = decision === "approve" || decision === "aprovado" || decision === "aprovar";
-    const reject = decision === "reject" || decision === "rejeitado" || decision === "rejeitar";
-    if (!approve && !reject) {
-      return sendJson(res, 400, { ok: false, error: "Decisao invalida." });
-    }
-
-    const nextItem = {
-      ...current,
-      status: approve ? "saque-liberado" : "saque-rejeitado",
-      reviewNote: note,
-      reviewedAt: new Date().toISOString(),
-      reviewedBy: SUPER_ADMIN_USER,
-      payment: {
-        ...(current.payment || {}),
-        status: approve ? "confirmado-manual" : "rejeitado-manual"
-      }
-    };
-    withdrawals[index] = nextItem;
-    writePubpaidWithdrawals(withdrawals);
-
-    updatePubpaidWallet(nextItem.user || {}, (wallet) => ({
-      ...wallet,
-      balanceCoins: approve
-        ? clampInteger(wallet.balanceCoins)
-        : clampInteger(wallet.balanceCoins) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0),
-      lockedWithdrawalCoins: Math.max(
-        0,
-        clampInteger(wallet.lockedWithdrawalCoins) - clampInteger(nextItem.creditsRequested || nextItem.amount || 0)
-      ),
-      totalApprovedWithdrawals: approve
-        ? clampInteger(wallet.totalApprovedWithdrawals) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0)
-        : clampInteger(wallet.totalApprovedWithdrawals)
+  if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-deposits.csv") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const rows = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE).map((item) => ({
+      createdAt: item.createdAt || "",
+      player: item?.user?.name || "",
+      email: item?.user?.email || "",
+      depositorName: item.depositorName || item?.payment?.depositorName || "",
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || ""
     }));
+    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,depositorName,amount,creditsRequested,status,paymentStatus,txid\n", "pubpaid_depositos.csv");
+  }
 
-    return sendJson(res, 200, {
-      ok: true,
-      item: nextItem,
-      dashboard: buildAdminDashboardPayload()
-    });
+  if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-withdrawals.csv") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const rows = getPubpaidWithdrawals().map((item) => ({
+      createdAt: item.createdAt || "",
+      player: item?.user?.name || "",
+      email: item?.user?.email || "",
+      amount: item.amount || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || ""
+    }));
+    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,amount,status,paymentStatus,txid\n", "pubpaid_retiradas.csv");
+  }
+
+  if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-wallets.csv") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const rows = getPubpaidWalletStore().map((item) => ({
+      updatedAt: item.updatedAt || item.createdAt || "",
+      player: item?.user?.name || "",
+      email: item?.user?.email || "",
+      walletKey: item.walletKey || "",
+      balanceCoins: clampInteger(item.balanceCoins),
+      lockedWithdrawalCoins: clampInteger(item.lockedWithdrawalCoins),
+      totalApprovedDeposits: clampInteger(item.totalApprovedDeposits),
+      totalApprovedWithdrawals: clampInteger(item.totalApprovedWithdrawals)
+    }));
+    return sendCsv(res, 200, toCsv(rows) || "updatedAt,player,email,walletKey,balanceCoins,lockedWithdrawalCoins,totalApprovedDeposits,totalApprovedWithdrawals\n", "pubpaid_carteiras.csv");
   }
 
   if (req.method === "GET" && pathname === "/api/admin/dashboard") {
@@ -7127,78 +7205,6 @@ async function handleApi(req, res, pathname, searchParams) {
     );
   }
 
-  if (req.method === "GET" && pathname === "/api/admin/reports/pubpaid-deposits.csv") {
-    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
-    const rows = getJsonArray(PUBPAID_DEPOSITS_FILE).map((item) => ({
-      createdAt: item.createdAt,
-      player: item.user?.name || item.name,
-      email: item.user?.email || item.email,
-      depositorName: item.depositorName || item.payment?.depositorName,
-      amount: item.amount,
-      creditsRequested: item.creditsRequested,
-      status: item.status,
-      paymentStatus: item.payment?.status,
-      txid: item.payment?.txid || item.txid,
-      reference: item.payment?.reference || item.reference,
-      reviewedAt: item.reviewedAt,
-      reviewedBy: item.reviewedBy,
-      reviewNote: item.reviewNote,
-      sourcePage: item.sourcePage,
-      ip: item.ip
-    }));
-    return sendCsv(
-      res,
-      200,
-      toCsv(rows) || "createdAt,player,email,depositorName,amount,creditsRequested,status,paymentStatus,txid,reference,reviewedAt,reviewedBy,reviewNote,sourcePage,ip\n",
-      "pubpaid_depositos.csv"
-    );
-  }
-
-  if (req.method === "GET" && pathname === "/api/admin/reports/pubpaid-withdrawals.csv") {
-    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
-    const rows = getPubpaidWithdrawals().map((item) => ({
-      createdAt: item.createdAt,
-      player: item.user?.name || item.name,
-      email: item.user?.email || item.email,
-      amount: item.amount,
-      creditsRequested: item.creditsRequested,
-      status: item.status,
-      paymentStatus: item.payment?.status,
-      reference: item.payment?.reference || item.reference,
-      reviewedAt: item.reviewedAt,
-      reviewedBy: item.reviewedBy,
-      reviewNote: item.reviewNote,
-      sourcePage: item.sourcePage,
-      ip: item.ip
-    }));
-    return sendCsv(
-      res,
-      200,
-      toCsv(rows) || "createdAt,player,email,amount,creditsRequested,status,paymentStatus,reference,reviewedAt,reviewBy,reviewNote,sourcePage,ip\n",
-      "pubpaid_retiradas.csv"
-    );
-  }
-
-  if (req.method === "GET" && pathname === "/api/admin/reports/pubpaid-wallets.csv") {
-    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
-    const rows = getPubpaidWalletStore().map((item) => ({
-      updatedAt: item.updatedAt,
-      player: item.user?.name || item.name,
-      email: item.user?.email || item.email,
-      walletKey: item.walletKey,
-      balanceCoins: item.balanceCoins,
-      lockedWithdrawalCoins: item.lockedWithdrawalCoins,
-      totalApprovedDeposits: item.totalApprovedDeposits,
-      totalApprovedWithdrawals: item.totalApprovedWithdrawals
-    }));
-    return sendCsv(
-      res,
-      200,
-      toCsv(rows) || "updatedAt,player,email,walletKey,balanceCoins,lockedWithdrawalCoins,totalApprovedDeposits,totalApprovedWithdrawals\n",
-      "pubpaid_carteiras.csv"
-    );
-  }
-
   if (req.method === "GET" && pathname.startsWith("/api/admin/raw/")) {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
     const key = pathname.replace("/api/admin/raw/", "");
@@ -7212,9 +7218,6 @@ async function handleApi(req, res, pathname, searchParams) {
       votes: () => getElectionVoteRecords(),
       ninjasRequests: () => getJsonArray(NINJAS_REQUESTS_FILE),
       ninjasProfiles: () => getJsonArray(NINJAS_PROFILES_FILE),
-      pubpaidDeposits: () => getJsonArray(PUBPAID_DEPOSITS_FILE),
-      pubpaidWithdrawals: () => getPubpaidWithdrawals(),
-      pubpaidWallets: () => getPubpaidWalletStore(),
       salesListings: () => getJsonArray(SALES_LISTINGS_FILE),
       vrRentalLeads: () => getJsonArray(VR_RENTAL_LEADS_FILE)
     };
@@ -7235,9 +7238,6 @@ async function handleApi(req, res, pathname, searchParams) {
                   key === "subscriptions" ||
                   key === "acre2026Poll" ||
                   key.startsWith("ninjas") ||
-                  key === "pubpaidDeposits" ||
-                  key === "pubpaidWithdrawals" ||
-                  key === "pubpaidWallets" ||
                   key === "salesListings" ||
                   key === "vrRentalLeads"
                 ? "createdAt"
@@ -7356,7 +7356,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const comments = readJson(path.join(DATA_DIR, "comments.json"), []);
     const subs = readJson(path.join(DATA_DIR, "subscriptions.json"), []);
-    const pubpaidDeposits = readJson(PUBPAID_DEPOSITS_FILE, []);
+    const pubpaidDeposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE);
     const news = getNews(200);
     const biz = getBusinesses();
 
@@ -7388,6 +7388,9 @@ function handleStatic(req, res, pathname, requestUrl) {
   }
 
   if (
+    pathname === "/pubpaid-admin" ||
+    pathname === "/pubpaid-admin/" ||
+    pathname === "/pubpaid-admin.html" ||
     pathname === "/admin" ||
     pathname === "/admin/" ||
     pathname === "/admin/admin-dashboard.html" ||
@@ -7395,6 +7398,12 @@ function handleStatic(req, res, pathname, requestUrl) {
     pathname === "/admin-dashboard.html" ||
     pathname === "/admin_dashboard.html"
   ) {
+    if (pathname === "/pubpaid-admin" || pathname === "/pubpaid-admin/" || pathname === "/pubpaid-admin.html") {
+      return sendFile(req, res, PUBPAID_ADMIN_FILE, {
+        cacheControl: "no-store",
+        templateVars
+      });
+    }
     return sendFile(req, res, ADMIN_DASHBOARD_FILE, {
       cacheControl: "no-store",
       templateVars
@@ -7455,3 +7464,166 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, HOST, () => {
   console.log(`[catalogo] online em http://${HOST}:${PORT}`);
 });
+function buildPubpaidAdminPayload() {
+  const store = readCanonicalPubpaidStore();
+  const dashboard = buildCanonicalPubpaidAdminPayload(store);
+  return {
+    ok: true,
+    updatedAt: dashboard.generatedAt,
+    storage: {
+      mode: "canonical-store",
+      target: "data/pubpaid-store.json",
+    },
+    totals: {
+      pubpaidDeposits: Array.isArray(store.deposits) ? store.deposits.length : 0,
+      pubpaidWithdrawals: Array.isArray(store.withdrawals) ? store.withdrawals.length : 0,
+      pubpaidWallets: Array.isArray(dashboard.walletBoard) ? dashboard.walletBoard.length : 0,
+      pubpaidPendingDeposits: Array.isArray(dashboard.pendingDeposits) ? dashboard.pendingDeposits.length : 0,
+      pubpaidPendingWithdrawals: Array.isArray(dashboard.pendingWithdrawals) ? dashboard.pendingWithdrawals.length : 0,
+    },
+    dashboard,
+    pendingPubpaidDeposits: dashboard.pendingDeposits,
+    pendingPubpaidWithdrawals: dashboard.pendingWithdrawals,
+    pubpaidWalletBoard: dashboard.walletBoard,
+  };
+}
+
+function readMergedPubpaidArray(primaryFile, legacyFile) {
+  const store = readCanonicalPubpaidStore();
+  const normalizedPrimary = String(primaryFile || "");
+  const normalizedLegacy = String(legacyFile || "");
+
+  if (normalizedPrimary.includes("withdraw") || normalizedLegacy.includes("withdraw")) {
+    return store.withdrawals.slice();
+  }
+
+  return store.deposits.slice();
+}
+
+function getPubpaidWalletStore() {
+  return readCanonicalPubpaidStore().wallets;
+}
+
+function writePubpaidArrayCompat(primaryFile, legacyFile, items = []) {
+  const store = readCanonicalPubpaidStore();
+  const normalizedPrimary = String(primaryFile || "");
+  const normalizedLegacy = String(legacyFile || "");
+
+  if (normalizedPrimary.includes("withdraw") || normalizedLegacy.includes("withdraw")) {
+    const nextStore = {
+      ...store,
+      withdrawals: Array.isArray(items) ? items : [],
+    };
+    return require("./pubpaid-runtime").writeStore(nextStore).withdrawals;
+  }
+
+  const nextStore = {
+    ...store,
+    deposits: Array.isArray(items) ? items : [],
+  };
+  return require("./pubpaid-runtime").writeStore(nextStore).deposits;
+}
+
+function savePubpaidWalletStore(wallets = {}) {
+  const store = readCanonicalPubpaidStore();
+  return require("./pubpaid-runtime").writeStore({
+    ...store,
+    wallets: wallets || {},
+  }).wallets;
+}
+
+function sendPubpaidAdminDashboard(res) {
+  const payload = buildPubpaidAdminPayload();
+  return res.json({
+    ok: true,
+    dashboard: payload.dashboard,
+    pendingPubpaidDeposits: payload.pendingPubpaidDeposits,
+    pendingPubpaidWithdrawals: payload.pendingPubpaidWithdrawals,
+    pubpaidWalletBoard: payload.pubpaidWalletBoard,
+  });
+}
+
+function patchPubpaidAdminRoutes() {
+  if (typeof app === "undefined" || !app || !app._router || !Array.isArray(app._router.stack)) {
+    return;
+  }
+
+  const replaceRouteHandler = (routePath, method, handler) => {
+    for (const layer of app._router.stack) {
+      if (!layer || !layer.route || layer.route.path !== routePath) {
+        continue;
+      }
+      if (!layer.route.methods || !layer.route.methods[method]) {
+        continue;
+      }
+      layer.route.stack = [
+        {
+          handle: handler,
+          name: handler.name || "patchedPubpaidHandler",
+          params: undefined,
+          path: undefined,
+          keys: [],
+          method,
+        },
+      ];
+    }
+  };
+
+  replaceRouteHandler("/api/pubpaid-admin/dashboard", "get", function patchedPubpaidDashboard(_req, res) {
+    return sendPubpaidAdminDashboard(res);
+  });
+
+  replaceRouteHandler("/api/pubpaid-admin/deposits/review", "post", async function patchedPubpaidDepositReview(req, res) {
+    try {
+      const body = req.body || {};
+      const result = await reviewCanonicalPubpaidDeposit({
+        depositId: body.depositId || body.id,
+        decision: body.decision,
+        reviewer: body.reviewer || body.adminUser || body.username,
+        reason: body.reason || body.reviewReason,
+      });
+      return res.json({
+        ok: true,
+        idempotent: result.idempotent,
+        item: result.item,
+        dashboard: result.dashboard,
+        pendingPubpaidDeposits: result.dashboard.pendingDeposits,
+        pendingPubpaidWithdrawals: result.dashboard.pendingWithdrawals,
+        pubpaidWalletBoard: result.dashboard.walletBoard,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        ok: false,
+        error: error.message || "Falha ao revisar depósito.",
+      });
+    }
+  });
+
+  replaceRouteHandler("/api/pubpaid-admin/withdrawals/review", "post", async function patchedPubpaidWithdrawalReview(req, res) {
+    try {
+      const body = req.body || {};
+      const result = await reviewCanonicalPubpaidWithdrawal({
+        withdrawalId: body.withdrawalId || body.id,
+        decision: body.decision,
+        reviewer: body.reviewer || body.adminUser || body.username,
+        reason: body.reason || body.reviewReason,
+      });
+      return res.json({
+        ok: true,
+        idempotent: result.idempotent,
+        item: result.item,
+        dashboard: result.dashboard,
+        pendingPubpaidDeposits: result.dashboard.pendingDeposits,
+        pendingPubpaidWithdrawals: result.dashboard.pendingWithdrawals,
+        pubpaidWalletBoard: result.dashboard.walletBoard,
+      });
+    } catch (error) {
+      return res.status(error.statusCode || 500).json({
+        ok: false,
+        error: error.message || "Falha ao revisar saque.",
+      });
+    }
+  });
+}
+
+process.nextTick(patchPubpaidAdminRoutes);

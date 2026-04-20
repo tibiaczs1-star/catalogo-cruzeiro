@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Palavras da Rosa | Jogo de Palavras Cruzadas</title>
+    <meta
+      name="description"
+      content="Palavras da Rosa: um jogo especial de palavras cruzadas em tom de homenagem, com visual floral e clima delicado."
+    />
+    <meta name="theme-color" content="#E91E63" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --rosa-principal: #e91e63;
+        --rosa-claro: #f8bbd9;
+        --rosa-escuro: #ad1457;
+        --rosa-suave: #fce4ec;
+        --rosa-fundo: #fff7fa;
+        --dourado: #ffd166;
+        --dourado-suave: #fff6df;
+        --texto-escuro: #38161f;
+        --texto-medio: #75495b;
+        --branco: #ffffff;
+        --sombra-rosa: 0 18px 46px rgba(233, 30, 99, 0.16);
+        --sombra-dourada: 0 12px 28px rgba(255, 209, 102, 0.22);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background:
+          radial-gradient(circle at top right, rgba(255, 215, 0, 0.14), transparent 24%),
+          radial-gradient(circle at left center, rgba(233, 30, 99, 0.12), transparent 28%),
+          linear-gradient(135deg, #fff7fb 0%, #ffe6ef 44%, #fff2f6 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        color: var(--texto-escuro);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .petals-container {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .petal {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, rgba(233, 30, 99, 0.34) 0%, transparent 70%);
+        border-radius: 50% 0 50% 50%;
+        animation: fall linear infinite;
+        opacity: 0.56;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-120px) rotate(0deg) translateX(0);
+          opacity: 0;
+        }
+        10%,
+        90% {
+          opacity: 0.62;
+        }
+        100% {
+          transform: translateY(100vh) rotate(720deg) translateX(120px);
+          opacity: 0;
+        }
+      }
+
+      .page-shell {
+        position: relative;
+        z-index: 1;
+        width: min(1220px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 1.2rem 0 3rem;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .back-link,
+      .tribute-note {
+        border-radius: 999px;
+        padding: 0.78rem 1.15rem;
+        background: rgba(255, 255, 255, 0.82);
+        border: 1px solid rgba(173, 20, 87, 0.14);
+        box-shadow: var(--sombra-dourada);
+        color: var(--rosa-escuro);
+        backdrop-filter: blur(10px);
+      }
+
+      .back-link {
+        font-weight: 700;
+      }
+
+      .tribute-note {
+        max-width: 520px;
+        font-size: 0.9rem;
+        color: var(--texto-medio);
+        text-align: right;
+      }
+
+      .tribute-note strong {
+        color: var(--rosa-escuro);
+      }
+
+      .game-header {
+        text-align: center;
+        padding: 2rem 1rem 1.2rem;
+        position: relative;
+      }
+
+      .game-title {
+        font-family: "Playfair Display", serif;
+        font-size: clamp(2.6rem, 6vw, 4.9rem);
+        font-weight: 900;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        background: linear-gradient(135deg, var(--rosa-principal) 0%, var(--rosa-escuro) 52%, var(--dourado) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        position: relative;
+      }
+
+      .game-title::after {
+        content: "🌹";
+        position: absolute;
+        right: -58px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.72em;
+        animation: pulse 2.2s ease-in-out infinite;
+      }
+
+      .subtitle {
+        margin-top: 0.75rem;
+        font-size: 1rem;
+        color: var(--texto-medio);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .subtitle strong {
+        color: var(--rosa-escuro);
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: translateY(-50%) scale(1);
+        }
+        50% {
+          transform: translateY(-50%) scale(1.08);
+        }
+      }
+
+      .score-board {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin: 1.6rem 0 1rem;
+        flex-wrap: wrap;
+      }
+
+      .score-item {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(233, 30, 99, 0.14);
+        border-radius: 999px;
+        box-shadow: var(--sombra-rosa);
+        padding: 0.82rem 1.2rem;
+        color: var(--rosa-escuro);
+        font-weight: 600;
+      }
+
+      .timer-display {
+        font-family: "Playfair Display", serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .progress-container {
+        width: min(760px, 100%);
+        height: 10px;
+        margin: 0 auto;
+        background: rgba(248, 187, 217, 0.45);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--rosa-principal), var(--dourado));
+        box-shadow: 0 0 14px rgba(233, 30, 99, 0.28);
+        transition: width 0.35s ease;
+      }
+
+      .game-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 360px;
+        gap: 1.5rem;
+        align-items: start;
+      }
+
+      .grid-section,
+      .clues-panel {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(255, 246, 249, 0.96)),
+          radial-gradient(circle at top right, rgba(255, 215, 102, 0.12), transparent 34%);
+        border-radius: 28px;
+        border: 1px solid rgba(233, 30, 99, 0.12);
+        box-shadow: var(--sombra-rosa);
+      }
+
+      .grid-section {
+        padding: 1.8rem;
+      }
+
+      .clues-panel {
+        padding: 1.6rem;
+        height: fit-content;
+      }
+
+      .grid-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.3rem;
+        flex-wrap: wrap;
+      }
+
+      .grid-title,
+      .clues-title,
+      .instructions h3 {
+        font-family: "Playfair Display", serif;
+        color: var(--rosa-escuro);
+      }
+
+      .grid-title,
+      .clues-title {
+        font-size: 1.6rem;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+      }
+
+      .btn,
+      .hint-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        border: none;
+        border-radius: 14px;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+        padding: 0.76rem 1.15rem;
+      }
+
+      .btn:hover,
+      .hint-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--rosa-principal), var(--rosa-escuro));
+        color: var(--branco);
+        box-shadow: 0 12px 24px rgba(173, 20, 87, 0.24);
+      }
+
+      .btn-secondary {
+        background: var(--rosa-suave);
+        color: var(--rosa-escuro);
+        border: 1px solid rgba(233, 30, 99, 0.12);
+      }
+
+      .hint-btn {
+        background: linear-gradient(135deg, #ffb74d, #f57c00);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(245, 124, 0, 0.22);
+      }
+
+      .hint-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .grid-wrap {
+        overflow-x: auto;
+        padding-bottom: 0.3rem;
+      }
+
+      .crossword-grid {
+        display: inline-grid;
+        grid-template-columns: repeat(13, 1fr);
+        gap: 3px;
+        background: rgba(248, 187, 217, 0.52);
+        padding: 4px;
+        border-radius: 18px;
+        box-shadow: inset 0 2px 10px rgba(95, 33, 57, 0.06);
+      }
+
+      .cell {
+        width: 43px;
+        height: 43px;
+        position: relative;
+        border-radius: 10px;
+        border: 2px solid transparent;
+        background: var(--branco);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.12rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+        user-select: none;
+      }
+
+      .cell:not(.blocked) {
+        cursor: pointer;
+      }
+
+      .cell:not(.blocked):hover {
+        background: #fff0f5;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 18px rgba(95, 33, 57, 0.1);
+        z-index: 2;
+      }
+
+      .cell.active {
+        background: linear-gradient(135deg, #ffe0eb, #fff5f9);
+        border-color: var(--rosa-principal);
+        box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.14);
+      }
+
+      .cell.correct {
+        background: linear-gradient(135deg, #d9f3de, #f2fff4);
+        border-color: #43a047;
+        color: #1b5e20;
+      }
+
+      .cell.wrong {
+        background: linear-gradient(135deg, #ffd8e0, #ffeef2);
+        border-color: #e53935;
+        color: #8e2431;
+      }
+
+      .cell.blocked {
+        background:
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 36%),
+          linear-gradient(135deg, #7a2a52, #4c1630);
+      }
+
+      .cell.blocked::after {
+        content: "✿";
+        color: rgba(255, 255, 255, 0.28);
+        font-size: 0.85rem;
+      }
+
+      .number {
+        position: absolute;
+        top: 2px;
+        left: 4px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        color: var(--rosa-escuro);
+      }
+
+      .clue-section + .clue-section {
+        margin-top: 1.2rem;
+      }
+
+      .clue-section-title {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.85rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid rgba(233, 30, 99, 0.08);
+        color: var(--rosa-principal);
+        font-weight: 800;
+      }
+
+      .clue-item {
+        margin-bottom: 0.55rem;
+        padding: 0.8rem 0.92rem;
+        border-radius: 14px;
+        background: rgba(252, 228, 236, 0.78);
+        border-left: 4px solid transparent;
+        transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+        cursor: pointer;
+      }
+
+      .clue-item:hover {
+        transform: translateX(4px);
+        background: rgba(248, 187, 217, 0.42);
+        border-left-color: var(--rosa-principal);
+      }
+
+      .clue-item.active {
+        background: linear-gradient(90deg, rgba(248, 187, 217, 0.46), rgba(252, 228, 236, 0.82));
+        border-left-color: var(--rosa-principal);
+      }
+
+      .clue-item.solved {
+        background: linear-gradient(90deg, rgba(217, 243, 222, 0.92), rgba(242, 255, 244, 0.96));
+        border-left-color: #43a047;
+        color: #2e7d32;
+        text-decoration: line-through;
+      }
+
+      .clue-text {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.55rem;
+        line-height: 1.45;
+        font-size: 0.94rem;
+      }
+
+      .clue-number {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        flex: 0 0 24px;
+        background: var(--rosa-principal);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      .input-area,
+      .instructions {
+        margin-top: 1.35rem;
+        border-radius: 20px;
+        padding: 1.25rem;
+      }
+
+      .input-area {
+        border: 1px solid rgba(255, 209, 102, 0.5);
+        background: linear-gradient(135deg, var(--dourado-suave), rgba(252, 228, 236, 0.92));
+        text-align: center;
+      }
+
+      .input-hint {
+        color: var(--texto-medio);
+        margin-bottom: 0.95rem;
+        font-size: 0.92rem;
+      }
+
+      .letter-input {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        border: 3px solid rgba(233, 30, 99, 0.18);
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--rosa-escuro);
+        outline: none;
+      }
+
+      .letter-input:focus {
+        border-color: var(--rosa-principal);
+        box-shadow: 0 0 0 5px rgba(233, 30, 99, 0.14);
+      }
+
+      .keyboard-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        color: var(--rosa-escuro);
+        background: rgba(255, 255, 255, 0.66);
+        border-radius: 999px;
+        padding: 0.5rem 0.8rem;
+      }
+
+      .key {
+        border-radius: 6px;
+        border: 1px solid rgba(233, 30, 99, 0.12);
+        background: #fff;
+        box-shadow: 0 2px 0 rgba(233, 30, 99, 0.12);
+        padding: 0.08rem 0.4rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+      }
+
+      .instructions {
+        border: 1px solid rgba(233, 30, 99, 0.1);
+        background: linear-gradient(135deg, rgba(255, 245, 248, 0.95), rgba(255, 255, 255, 0.96));
+      }
+
+      .instructions h3 {
+        margin-bottom: 0.65rem;
+      }
+
+      .instructions ul {
+        list-style: none;
+      }
+
+      .instructions li {
+        color: var(--texto-medio);
+        font-size: 0.94rem;
+        line-height: 1.5;
+      }
+
+      .instructions li + li {
+        margin-top: 0.34rem;
+      }
+
+      .instructions li::before {
+        content: "🌸";
+        margin-right: 0.45rem;
+      }
+
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(35, 10, 23, 0.55);
+        backdrop-filter: blur(8px);
+        z-index: 30;
+        opacity: 0;
+        transition: opacity 0.32s ease;
+      }
+
+      .modal-overlay.show {
+        display: flex;
+        opacity: 1;
+      }
+
+      .modal-content {
+        position: relative;
+        width: min(520px, 100%);
+        overflow: hidden;
+        border-radius: 32px;
+        border: 2px solid rgba(255, 209, 102, 0.72);
+        background: linear-gradient(135deg, #ffffff, #fff3f7);
+        padding: 2.4rem 2rem;
+        text-align: center;
+        box-shadow: 0 30px 80px rgba(95, 33, 57, 0.25);
+        transform: scale(0.88);
+        transition: transform 0.32s ease;
+      }
+
+      .modal-overlay.show .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-content::before {
+        content: "";
+        position: absolute;
+        inset: -40% -30% auto auto;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 209, 102, 0.18), transparent 66%);
+      }
+
+      .victory-icon,
+      .victory-title,
+      .victory-text,
+      .victory-stats,
+      .modal-content .btn {
+        position: relative;
+        z-index: 1;
+      }
+
+      .victory-icon {
+        font-size: 4rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .victory-title {
+        font-family: "Playfair Display", serif;
+        color: var(--rosa-escuro);
+        font-size: 2.3rem;
+        margin-bottom: 0.7rem;
+      }
+
+      .victory-text {
+        color: var(--texto-medio);
+        line-height: 1.6;
+        margin-bottom: 1.4rem;
+      }
+
+      .victory-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+        margin-bottom: 1.4rem;
+      }
+
+      .victory-stat {
+        padding: 0.9rem 0.7rem;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 10px 22px rgba(95, 33, 57, 0.08);
+      }
+
+      .victory-stat-value {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--rosa-principal);
+      }
+
+      .victory-stat-label {
+        margin-top: 0.2rem;
+        font-size: 0.76rem;
+        color: var(--texto-medio);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .confetti {
+        position: fixed;
+        top: -12px;
+        width: 10px;
+        height: 10px;
+        z-index: 40;
+        animation: confetti-fall linear forwards;
+      }
+
+      @keyframes confetti-fall {
+        to {
+          transform: translateY(100vh) rotate(900deg);
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .game-container {
+          grid-template-columns: 1fr;
+        }
+
+        .tribute-note {
+          text-align: left;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .page-shell {
+          width: min(100% - 1rem, 100%);
+          padding-top: 0.8rem;
+        }
+
+        .topbar {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .game-title::after {
+          display: none;
+        }
+
+        .grid-section,
+        .clues-panel {
+          padding: 1.1rem;
+          border-radius: 24px;
+        }
+
+        .cell {
+          width: 31px;
+          height: 31px;
+          border-radius: 8px;
+          font-size: 0.88rem;
+        }
+
+        .number {
+          top: 1px;
+          left: 3px;
+          font-size: 0.52rem;
+        }
+
+        .victory-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="petals-container" id="petals"></div>
+
+    <div class="page-shell">
+      <div class="topbar">
+        <a class="back-link" href="/index.html">← Voltar para o jornal</a>
+        <p class="tribute-note">
+          <strong>OBS:</strong> uma singela homenagem transformada em jogo, com rosa, memória e
+          um jardim de letras para abrir no meio do portal.
+        </p>
+      </div>
+
+      <header class="game-header">
+        <h1 class="game-title">Palavras da Rosa</h1>
+        <p class="subtitle">Desvende o jardim de letras em uma <strong>singela homenagem</strong></p>
+
+        <div class="score-board">
+          <div class="score-item">
+            <span>⏱️</span>
+            <span id="timer" class="timer-display">00:00</span>
+          </div>
+          <div class="score-item">
+            <span>🎯</span>
+            <span>Acertos: <span id="score">0</span>/<span id="total">0</span></span>
+          </div>
+          <div class="score-item">
+            <span>💡</span>
+            <span>Dicas: <span id="hints">3</span></span>
+          </div>
+        </div>
+
+        <div class="progress-container" aria-label="Progresso do jogo">
+          <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+      </header>
+
+      <main class="game-container">
+        <section class="grid-section">
+          <div class="grid-header">
+            <h2 class="grid-title">Tabuleiro Floral</h2>
+            <div class="controls">
+              <button class="btn btn-secondary" type="button" onclick="game.checkAnswers()">
+                ✓ Verificar
+              </button>
+              <button class="hint-btn" id="hintBtn" type="button" onclick="game.useHint()">
+                💡 Dica
+              </button>
+              <button class="btn btn-primary" type="button" onclick="game.resetGame()">
+                🔄 Novo Jogo
+              </button>
+            </div>
+          </div>
+
+          <div class="grid-wrap">
+            <div class="crossword-grid" id="grid"></div>
+          </div>
+
+          <div class="input-area">
+            <p class="input-hint">Clique em uma célula e digite a letra, ou use as pistas ao lado</p>
+            <input
+              id="letterInput"
+              class="letter-input"
+              type="text"
+              maxlength="1"
+              placeholder="?"
+              autocomplete="off"
+            />
+            <div class="keyboard-hint">
+              Use <span class="key">←</span> <span class="key">↑</span> <span class="key">↓</span>
+              <span class="key">→</span> para navegar • <span class="key">DEL</span> para apagar
+            </div>
+          </div>
+
+          <div class="instructions">
+            <h3>Como Jogar</h3>
+            <ul>
+              <li>Clique em uma célula numerada para começar uma palavra.</li>
+              <li>Digite as letras e avance pelo tabuleiro usando teclado ou mouse.</li>
+              <li>As pistas horizontais e verticais ajudam a completar o jardim.</li>
+              <li>Se travar, use uma dica para revelar a letra da célula atual.</li>
+              <li>Complete tudo para abrir a mensagem final da homenagem.</li>
+            </ul>
+          </div>
+        </section>
+
+        <aside class="clues-panel">
+          <h2 class="clues-title">📝 Dicas</h2>
+
+          <div class="clue-section">
+            <div class="clue-section-title"><span>→</span> Horizontais</div>
+            <div id="acrossClues"></div>
+          </div>
+
+          <div class="clue-section">
+            <div class="clue-section-title"><span>↓</span> Verticais</div>
+            <div id="downClues"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <div class="modal-overlay" id="victoryModal">
+      <div class="modal-content">
+        <div class="victory-icon">🏆</div>
+        <h2 class="victory-title">Parabéns!</h2>
+        <p class="victory-text">
+          Você completou o Jardim de Palavras.<br />
+          A homenagem floresceu inteira no tabuleiro.
+        </p>
+        <div class="victory-stats">
+          <div class="victory-stat">
+            <div class="victory-stat-value" id="finalTime">00:00</div>
+            <div class="victory-stat-label">Tempo</div>
+          </div>
+          <div class="victory-stat">
+            <div class="victory-stat-value" id="finalHints">0</div>
+            <div class="victory-stat-label">Dicas usadas</div>
+          </div>
+          <div class="victory-stat">
+            <div class="victory-stat-value" id="finalScore">100%</div>
+            <div class="victory-stat-label">Precisão</div>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="button"
+          style="width: 100%"
+          onclick="game.resetGame(); closeModal();"
+        >
+          🌹 Jogar novamente
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const CROSSWORD_DATA = {
+        across: [
+          {
+            number: 1,
+            clue: "Flor clássica, delicada e símbolo de afeto.",
+            answer: "ROSA",
+            row: 0,
+            col: 0
+          },
+          {
+            number: 4,
+            clue: "Sentimento que inspira a homenagem.",
+            answer: "AMOR",
+            row: 2,
+            col: 0
+          },
+          {
+            number: 6,
+            clue: "Marca suave deixada por uma flor no ar.",
+            answer: "PERFUME",
+            row: 4,
+            col: 0
+          },
+          {
+            number: 8,
+            clue: "Parte macia e colorida da flor.",
+            answer: "PETALA",
+            row: 6,
+            col: 0
+          },
+          {
+            number: 10,
+            clue: "Espaço verde onde o jardim cresce.",
+            answer: "JARDIM",
+            row: 8,
+            col: 0
+          },
+          {
+            number: 12,
+            clue: "Defesa natural do caule da roseira.",
+            answer: "ESPINHO",
+            row: 10,
+            col: 0
+          }
+        ],
+        down: [
+          {
+            number: 2,
+            clue: "Recipiente usado para flores e arranjos.",
+            answer: "VASO",
+            row: 0,
+            col: 9
+          },
+          {
+            number: 3,
+            clue: "Claridade suave que cai sobre o jardim.",
+            answer: "LUZ",
+            row: 0,
+            col: 11
+          },
+          {
+            number: 5,
+            clue: "Doçura feita pelas abelhas.",
+            answer: "MEL",
+            row: 4,
+            col: 9
+          },
+          {
+            number: 7,
+            clue: "Nome geral de uma rosa, lírio ou margarida.",
+            answer: "FLOR",
+            row: 6,
+            col: 11
+          },
+          {
+            number: 9,
+            clue: "Aquilo que dá tom às pétalas.",
+            answer: "COR",
+            row: 8,
+            col: 9
+          }
+        ]
+      };
+
+      class CrosswordGame {
+        constructor() {
+          this.grid = [];
+          this.selectedCell = null;
+          this.direction = "across";
+          this.timer = 0;
+          this.timerInterval = null;
+          this.hints = 3;
+          this.score = 0;
+          this.totalCells = 0;
+          this.filledCells = 0;
+          this.wrongAttempts = 0;
+          this.hintsUsed = 0;
+          this.gridSize = { rows: 13, cols: 13 };
+          this.init();
+        }
+
+        init() {
+          this.createPetals();
+          this.buildGrid();
+          this.renderClues();
+          this.setupInput();
+          this.startTimer();
+          this.updateStats();
+        }
+
+        createPetals() {
+          const container = document.getElementById("petals");
+          container.innerHTML = "";
+          for (let index = 0; index < 16; index += 1) {
+            const petal = document.createElement("div");
+            petal.className = "petal";
+            petal.style.left = `${Math.random() * 100}%`;
+            petal.style.animationDuration = `${Math.random() * 8 + 10}s`;
+            petal.style.animationDelay = `${Math.random() * 8}s`;
+            petal.style.width = `${Math.random() * 14 + 10}px`;
+            petal.style.height = petal.style.width;
+            container.appendChild(petal);
+          }
+        }
+
+        buildGrid() {
+          const gridEl = document.getElementById("grid");
+          gridEl.innerHTML = "";
+
+          this.grid = Array.from({ length: this.gridSize.rows }, () =>
+            Array.from({ length: this.gridSize.cols }, () => ({
+              letter: "",
+              correct: "",
+              number: null,
+              blocked: true,
+              across: null,
+              down: null
+            }))
+          );
+
+          [...CROSSWORD_DATA.across, ...CROSSWORD_DATA.down].forEach((word) => {
+            const isAcross = CROSSWORD_DATA.across.includes(word);
+            for (let index = 0; index < word.answer.length; index += 1) {
+              const row = word.row + (isAcross ? 0 : index);
+              const col = word.col + (isAcross ? index : 0);
+              if (row >= this.gridSize.rows || col >= this.gridSize.cols) {
+                continue;
+              }
+
+              const cell = this.grid[row][col];
+              cell.blocked = false;
+              cell.correct = word.answer[index];
+
+              if (index === 0) {
+                cell.number = word.number;
+              }
+
+              if (isAcross) {
+                cell.across = word.number;
+              } else {
+                cell.down = word.number;
+              }
+            }
+          });
+
+          this.totalCells = 0;
+          for (let row = 0; row < this.gridSize.rows; row += 1) {
+            for (let col = 0; col < this.gridSize.cols; col += 1) {
+              const cell = this.grid[row][col];
+              const cellEl = document.createElement("div");
+              cellEl.className = `cell${cell.blocked ? " blocked" : ""}`;
+              cellEl.dataset.row = String(row);
+              cellEl.dataset.col = String(col);
+
+              if (!cell.blocked) {
+                this.totalCells += 1;
+
+                if (cell.number) {
+                  const numEl = document.createElement("span");
+                  numEl.className = "number";
+                  numEl.textContent = cell.number;
+                  cellEl.appendChild(numEl);
+                }
+
+                const letterEl = document.createElement("span");
+                letterEl.className = "letter";
+                letterEl.textContent = cell.letter;
+                cellEl.appendChild(letterEl);
+                cellEl.addEventListener("click", () => this.selectCell(row, col));
+              }
+
+              gridEl.appendChild(cellEl);
+            }
+          }
+        }
+
+        renderClues() {
+          const renderGroup = (targetId, items, direction) => {
+            document.getElementById(targetId).innerHTML = items
+              .map(
+                (item) => `
+                  <div class="clue-item" data-number="${item.number}" data-direction="${direction}" onclick="game.selectClue(${item.number}, '${direction}')">
+                    <div class="clue-text">
+                      <span class="clue-number">${item.number}</span>
+                      <span>${item.clue}</span>
+                    </div>
+                  </div>
+                `
+              )
+              .join("");
+          };
+
+          renderGroup("acrossClues", CROSSWORD_DATA.across, "across");
+          renderGroup("downClues", CROSSWORD_DATA.down, "down");
+        }
+
+        setupInput() {
+          const input = document.getElementById("letterInput");
+
+          input.addEventListener("input", (event) => {
+            if (!this.selectedCell) {
+              event.target.value = "";
+              return;
+            }
+
+            const char = event.target.value.toUpperCase();
+            if (char && /^[A-ZÀ-ÿ]$/.test(char)) {
+              this.placeLetter(this.selectedCell.row, this.selectedCell.col, char);
+              this.moveNext();
+            }
+
+            event.target.value = "";
+          });
+
+          document.addEventListener("keydown", (event) => {
+            if (!this.selectedCell) {
+              return;
+            }
+
+            const { row, col } = this.selectedCell;
+
+            switch (event.key) {
+              case "ArrowRight":
+                event.preventDefault();
+                this.direction = "across";
+                this.moveCursor(row, col + 1);
+                break;
+              case "ArrowLeft":
+                event.preventDefault();
+                this.direction = "across";
+                this.moveCursor(row, col - 1);
+                break;
+              case "ArrowDown":
+                event.preventDefault();
+                this.direction = "down";
+                this.moveCursor(row + 1, col);
+                break;
+              case "ArrowUp":
+                event.preventDefault();
+                this.direction = "down";
+                this.moveCursor(row - 1, col);
+                break;
+              case "Delete":
+              case "Backspace":
+                event.preventDefault();
+                this.placeLetter(row, col, "");
+                if (event.key === "Backspace") {
+                  this.movePrevious();
+                }
+                break;
+              default:
+                if (event.key.length === 1 && /^[a-zA-Zà-ÿÀ-ÿ]$/.test(event.key)) {
+                  event.preventDefault();
+                  this.placeLetter(row, col, event.key.toUpperCase());
+                  this.moveNext();
+                }
+                break;
+            }
+          });
+        }
+
+        selectCell(row, col) {
+          if (this.grid[row][col].blocked) {
+            return;
+          }
+
+          document.querySelectorAll(".cell").forEach((item) => item.classList.remove("active"));
+          document.querySelectorAll(".clue-item").forEach((item) => item.classList.remove("active"));
+
+          this.selectedCell = { row, col };
+          const cellEl = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+          cellEl?.classList.add("active");
+
+          const cell = this.grid[row][col];
+          if (cell.across && cell.down) {
+            this.direction = this.direction === "across" ? "down" : "across";
+          } else if (cell.across) {
+            this.direction = "across";
+          } else if (cell.down) {
+            this.direction = "down";
+          }
+
+          const clueNumber = this.direction === "across" ? cell.across : cell.down;
+          document
+            .querySelector(`.clue-item[data-number="${clueNumber}"][data-direction="${this.direction}"]`)
+            ?.classList.add("active");
+
+          document.getElementById("letterInput").focus();
+        }
+
+        selectClue(number, direction) {
+          this.direction = direction;
+          const word = CROSSWORD_DATA[direction].find((item) => item.number === number);
+          if (word) {
+            this.selectCell(word.row, word.col);
+          }
+        }
+
+        placeLetter(row, col, letter) {
+          const cell = this.grid[row][col];
+          cell.letter = letter;
+
+          const cellEl = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+          const letterEl = cellEl?.querySelector(".letter");
+          if (letterEl) {
+            letterEl.textContent = letter;
+          }
+
+          cellEl?.classList.remove("correct", "wrong");
+
+          if (letter) {
+            if (letter === cell.correct) {
+              cellEl?.classList.add("correct");
+            } else {
+              cellEl?.classList.add("wrong");
+              this.wrongAttempts += 1;
+            }
+          }
+
+          this.updateStats();
+        }
+
+        moveCursor(row, col) {
+          if (
+            row >= 0 &&
+            row < this.gridSize.rows &&
+            col >= 0 &&
+            col < this.gridSize.cols &&
+            !this.grid[row][col].blocked
+          ) {
+            this.selectCell(row, col);
+          }
+        }
+
+        moveNext() {
+          if (!this.selectedCell) {
+            return;
+          }
+
+          const { row, col } = this.selectedCell;
+          this.moveCursor(this.direction === "down" ? row + 1 : row, this.direction === "across" ? col + 1 : col);
+        }
+
+        movePrevious() {
+          if (!this.selectedCell) {
+            return;
+          }
+
+          const { row, col } = this.selectedCell;
+          this.moveCursor(this.direction === "down" ? row - 1 : row, this.direction === "across" ? col - 1 : col);
+        }
+
+        useHint() {
+          if (this.hints <= 0 || !this.selectedCell) {
+            return;
+          }
+
+          const { row, col } = this.selectedCell;
+          const cell = this.grid[row][col];
+
+          if (cell.letter !== cell.correct) {
+            this.placeLetter(row, col, cell.correct);
+            this.hints -= 1;
+            this.hintsUsed += 1;
+            document.getElementById("hints").textContent = String(this.hints);
+            document.getElementById("hintBtn").disabled = this.hints <= 0;
+            this.moveNext();
+          }
+        }
+
+        checkAnswers() {
+          let correct = 0;
+          let total = 0;
+
+          for (let row = 0; row < this.gridSize.rows; row += 1) {
+            for (let col = 0; col < this.gridSize.cols; col += 1) {
+              const cell = this.grid[row][col];
+              if (cell.blocked) {
+                continue;
+              }
+
+              total += 1;
+              const cellEl = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
+
+              if (cell.letter === cell.correct) {
+                correct += 1;
+                cellEl?.classList.add("correct");
+                cellEl?.classList.remove("wrong");
+              } else if (cell.letter) {
+                cellEl?.classList.add("wrong");
+                cellEl?.classList.remove("correct");
+              }
+            }
+          }
+
+          this.score = correct;
+          this.updateStats();
+
+          if (correct === total) {
+            this.victory();
+          }
+        }
+
+        updateStats() {
+          let filled = 0;
+          let correct = 0;
+
+          for (let row = 0; row < this.gridSize.rows; row += 1) {
+            for (let col = 0; col < this.gridSize.cols; col += 1) {
+              const cell = this.grid[row][col];
+              if (!cell.blocked && cell.letter) {
+                filled += 1;
+                if (cell.letter === cell.correct) {
+                  correct += 1;
+                }
+              }
+            }
+          }
+
+          this.filledCells = filled;
+          document.getElementById("score").textContent = String(correct);
+          document.getElementById("total").textContent = String(this.totalCells);
+          document.getElementById("progressBar").style.width = `${this.totalCells ? (correct / this.totalCells) * 100 : 0}%`;
+
+          this.checkSolvedWords();
+        }
+
+        checkSolvedWords() {
+          const updateWordState = (word, isAcross) => {
+            let solved = true;
+            for (let index = 0; index < word.answer.length; index += 1) {
+              const row = word.row + (isAcross ? 0 : index);
+              const col = word.col + (isAcross ? index : 0);
+              if (this.grid[row][col].letter !== word.answer[index]) {
+                solved = false;
+                break;
+              }
+            }
+
+            document
+              .querySelector(`.clue-item[data-number="${word.number}"][data-direction="${isAcross ? "across" : "down"}"]`)
+              ?.classList.toggle("solved", solved);
+          };
+
+          CROSSWORD_DATA.across.forEach((word) => updateWordState(word, true));
+          CROSSWORD_DATA.down.forEach((word) => updateWordState(word, false));
+        }
+
+        startTimer() {
+          clearInterval(this.timerInterval);
+          this.timerInterval = setInterval(() => {
+            this.timer += 1;
+            const minutes = String(Math.floor(this.timer / 60)).padStart(2, "0");
+            const seconds = String(this.timer % 60).padStart(2, "0");
+            document.getElementById("timer").textContent = `${minutes}:${seconds}`;
+          }, 1000);
+        }
+
+        victory() {
+          clearInterval(this.timerInterval);
+          const minutes = String(Math.floor(this.timer / 60)).padStart(2, "0");
+          const seconds = String(this.timer % 60).padStart(2, "0");
+          document.getElementById("finalTime").textContent = `${minutes}:${seconds}`;
+          document.getElementById("finalHints").textContent = String(this.hintsUsed);
+
+          const accuracy = this.wrongAttempts === 0 ? 100 : Math.max(0, 100 - this.wrongAttempts * 4);
+          document.getElementById("finalScore").textContent = `${accuracy}%`;
+          document.getElementById("victoryModal").classList.add("show");
+          this.createConfetti();
+        }
+
+        createConfetti() {
+          const colors = ["#e91e63", "#f8bbd9", "#ffd166", "#ad1457", "#ffecb3"];
+          for (let index = 0; index < 42; index += 1) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.left = `${Math.random() * 100}%`;
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = `${Math.random() * 2.4 + 2}s`;
+            confetti.style.borderRadius = Math.random() > 0.45 ? "50%" : "2px";
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+          }
+        }
+
+        resetGame() {
+          clearInterval(this.timerInterval);
+          this.timer = 0;
+          this.hints = 3;
+          this.score = 0;
+          this.filledCells = 0;
+          this.wrongAttempts = 0;
+          this.hintsUsed = 0;
+          this.selectedCell = null;
+          this.direction = "across";
+
+          document.getElementById("timer").textContent = "00:00";
+          document.getElementById("hints").textContent = "3";
+          document.getElementById("hintBtn").disabled = false;
+          document.getElementById("letterInput").value = "";
+
+          this.buildGrid();
+          this.renderClues();
+          this.startTimer();
+          this.updateStats();
+        }
+      }
+
+      function closeModal() {
+        document.getElementById("victoryModal").classList.remove("show");
+      }
+
+      const game = new CrosswordGame();
+
+      document.getElementById("victoryModal").addEventListener("click", (event) => {
+        if (event.target === event.currentTarget) {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>

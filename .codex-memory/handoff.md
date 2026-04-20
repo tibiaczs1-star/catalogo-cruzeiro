@@ -1,10 +1,10 @@
 # Handoff
 
-Updated: 2026-04-20T05:23:02.058Z
+Updated: 2026-04-20T06:48:00.000Z
 
-Corrigida regressao da home lavada de branco: os blocos azuis de body.editorial-home em solid-surfaces.css tinham sido removidos e foram restaurados; index.html atualizou o cache-bust para 20260420solidbluehomefix. Validacao local GET / retornou 200 com hasSolidFix=True e hasEditorialHome=True.
+Integrado o jogo `palavras-da-rosa.html` ao portal. A home recebeu um card lateral esquerdo em rosa com CTA "Palavras Cruzadas" e texto de singela homenagem; `server.js` agora indexa a pagina nova no bloco de SEO/static pages. Validacao local: `GET /` retornou 200 com `hasCard=True` e `GET /palavras-da-rosa.html` retornou 200 com `hasGrid=True`.
 
 ## Next
 
-- Se o usuario ainda vir branco
-- investigar cache do navegador/CDN/deploy e confirmar se o arquivo publicado contem body.editorial-home.
+- Se o usuario pedir publicacao, subir deploy com `index.html`, `styles.css`, `server.js` e `palavras-da-rosa.html`.
+- Se quiser mais capricho, melhorar a malha do crossword para mais palavras cruzadas de verdade no mesmo tema.

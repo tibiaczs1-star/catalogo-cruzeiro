@@ -915,7 +915,7 @@
   function preloadImages() {
     return Promise.all([
       loadImage(images.exterior, "./assets/pubpaid-exterior-v2.png"),
-      loadImage(images.interior, "./assets/pubpaid-interior-v3.png"),
+      loadImage(images.interior, "./assets/pubpaid-interior-v5.png"),
       loadImage(images.bartenderTorso, "./assets/pubpaid-bartender-counter-v1.png")
     ]);
   }

@@ -86,6 +86,7 @@
         border: 1px solid var(--line);
         border-radius: 18px;
         padding: 16px;
+        min-width: 0;
         box-shadow: 0 10px 24px rgba(16, 39, 68, 0.08);
       }
 
@@ -130,27 +131,44 @@
       .table-wrap {
         overflow: auto;
         -webkit-overflow-scrolling: touch;
+        border: 1px solid #e7dcc9;
+        border-radius: 14px;
+        background: linear-gradient(180deg, #fffdfa, #fff8ed);
       }
 
       table {
         width: 100%;
         min-width: 640px;
         border-collapse: collapse;
+        background: transparent;
+      }
+
+      thead tr {
+        background: #f5ede0;
       }
 
       th,
       td {
         text-align: left;
         border-bottom: 1px solid #eee5d4;
-        padding: 10px 6px;
+        padding: 12px 10px;
         font-size: 0.93rem;
         vertical-align: top;
+        background: transparent;
       }
 
       th {
-        color: var(--muted);
-        font-weight: 700;
+        color: #17324d;
+        font-weight: 800;
+        white-space: nowrap;
+        text-decoration: none;
+        letter-spacing: 0.01em;
       }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
 
       .bar {
         height: 10px;
@@ -322,6 +340,7 @@
         .card {
           padding: 14px;
         }
+
       }
 
       @media (max-width: 720px) {
@@ -655,66 +674,6 @@
         </div>
       </section>
 
-      <section class="row grid-2" id="pubpaid">
-        <article class="card">
-          <h2>PubPaid • depósitos pendentes</h2>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Quando</th>
-                  <th>Jogador</th>
-                  <th>Depositante</th>
-                  <th>Valor</th>
-                  <th>Referência</th>
-                  <th>Prazo</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="pendingPubpaidDepositsBody"></tbody>
-            </table>
-          </div>
-        </article>
-
-        <article class="card" id="withdrawals">
-          <h2>PubPaid • saques pendentes</h2>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Quando</th>
-                  <th>Jogador</th>
-                  <th>Valor</th>
-                  <th>Referência</th>
-                  <th>Prazo</th>
-                  <th>Ação</th>
-                </tr>
-              </thead>
-              <tbody id="pendingPubpaidWithdrawalsBody"></tbody>
-            </table>
-          </div>
-        </article>
-      </section>
-
-      <section class="card">
-        <h2>PubPaid • carteiras</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Jogador</th>
-                <th>Saldo</th>
-                <th>Travado</th>
-                <th>Depósitos aprovados</th>
-                <th>Saques aprovados</th>
-                <th>Atualizada</th>
-              </tr>
-            </thead>
-            <tbody id="pubpaidWalletBody"></tbody>
-          </table>
-        </div>
-      </section>
-
       <section class="row grid-2">
         <article class="card">
           <h2>Pesquisa Acre 2026 • voto declarado</h2>
@@ -819,15 +778,12 @@
         </article>
       </section>
 
-      <section class="card actions" id="pubpaid-reports">
+      <section class="card actions">
         <a class="btn" id="csvAccessLink" href="/api/admin/reports/access.csv" target="_blank">CSV de acessos</a>
         <a class="btn" id="csvVotesLink" href="/api/admin/reports/votes.csv" target="_blank">CSV de votações</a>
         <a class="btn" id="csvCommentsLink" href="/api/admin/reports/comments.csv" target="_blank">CSV de opiniões</a>
         <a class="btn" id="csvSubscriptionsLink" href="/api/admin/reports/subscriptions.csv" target="_blank">CSV de assinaturas</a>
         <a class="btn" id="csvAcrePollLink" href="/api/admin/reports/acre-2026-poll.csv" target="_blank">CSV pesquisa Acre 2026</a>
-        <a class="btn" id="csvPubpaidDepositsLink" href="/api/admin/reports/pubpaid-deposits.csv" target="_blank">CSV PubPaid depósitos</a>
-        <a class="btn" id="csvPubpaidWithdrawalsLink" href="/api/admin/reports/pubpaid-withdrawals.csv" target="_blank">CSV PubPaid retiradas</a>
-        <a class="btn" id="csvPubpaidWalletsLink" href="/api/admin/reports/pubpaid-wallets.csv" target="_blank">CSV PubPaid carteiras</a>
         <a class="btn" id="rawVisitsLink" href="/api/admin/raw/visits?limit=100" target="_blank">Raw visitas (JSON)</a>
         <a class="btn" id="rawCommentsLink" href="/api/admin/raw/comments?limit=100" target="_blank">Raw opiniões (JSON)</a>
         <a class="btn" id="rawVotesLink" href="/api/admin/raw/votes?limit=100" target="_blank">Raw votos (JSON)</a>
@@ -1072,17 +1028,11 @@
           ["csvCommentsLink", "/api/admin/reports/comments.csv"],
           ["csvSubscriptionsLink", "/api/admin/reports/subscriptions.csv"],
           ["csvAcrePollLink", "/api/admin/reports/acre-2026-poll.csv"],
-          ["csvPubpaidDepositsLink", "/api/admin/reports/pubpaid-deposits.csv"],
-          ["csvPubpaidWithdrawalsLink", "/api/admin/reports/pubpaid-withdrawals.csv"],
-          ["csvPubpaidWalletsLink", "/api/admin/reports/pubpaid-wallets.csv"],
           ["rawVisitsLink", "/api/admin/raw/visits?limit=100"],
           ["rawCommentsLink", "/api/admin/raw/comments?limit=100"],
           ["rawVotesLink", "/api/admin/raw/votes?limit=100"],
           ["rawSubscriptionsLink", "/api/admin/raw/subscriptions?limit=100"],
           ["rawAcrePollLink", "/api/admin/raw/acre2026Poll?limit=100"],
-          ["rawPubpaidDepositsLink", "/api/admin/raw/pubpaidDeposits?limit=100"],
-          ["rawPubpaidWithdrawalsLink", "/api/admin/raw/pubpaidWithdrawals?limit=100"],
-          ["rawPubpaidWalletsLink", "/api/admin/raw/pubpaidWallets?limit=100"],
           ["rawNinjasRequestsLink", "/api/admin/raw/ninjasRequests?limit=100"],
           ["rawNinjasProfilesLink", "/api/admin/raw/ninjasProfiles?limit=100"],
           ["rawSalesLink", "/api/admin/raw/salesListings?limit=100"],
@@ -1097,23 +1047,6 @@
           const separator = path.includes("?") ? "&" : "?";
           link.href = token ? `${absolute}${separator}token=${encodeURIComponent(token)}` : absolute;
         });
-      }
-
-      async function reviewPubpaidItem(endpoint, id, decision) {
-        if (!latestAccess?.apiBase || !id) return;
-        const response = await fetch(`${latestAccess.apiBase}${endpoint}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            ...buildHeaders(latestAccess)
-          },
-          body: JSON.stringify({ id, decision })
-        });
-        const payload = await response.json().catch(() => ({}));
-        if (!response.ok || payload.ok === false) {
-          throw new Error(payload.error || "Falha ao revisar item do PubPaid.");
-        }
-        return payload;
       }
 
       async function loadDashboard() {
@@ -1161,11 +1094,6 @@
             ["Comentários / opiniões", totals.comments || 0],
             ["Assinaturas", totals.subscriptions || 0],
             ["Pesquisa Acre 2026", totals.acre2026PollResponses || 0],
-            ["PubPaid depósitos", totals.pubpaidDeposits || 0],
-            ["PubPaid saques", totals.pubpaidWithdrawals || 0],
-            ["PubPaid carteiras", totals.pubpaidWallets || 0],
-            ["PubPaid pend. depósitos", totals.pubpaidPendingDeposits || 0],
-            ["PubPaid pend. saques", totals.pubpaidPendingWithdrawals || 0],
             ["Apoiadores confirmados", totals.supporters || 0],
             ["Ninjas pedidos", totals.ninjasRequests || 0],
             ["Ninjas currículos", totals.ninjasProfiles || 0],
@@ -1345,80 +1273,6 @@
             "Sem assinaturas recentes."
           );
 
-          renderRecentRows(
-            document.getElementById("pendingPubpaidDepositsBody"),
-            data.pendingPubpaidDeposits || [],
-            (row) => `
-              <tr>
-                <td>${formatDateTime(row.createdAt)}</td>
-                <td class="truncate">
-                  <strong>${escapeHtml(row.name || "-")}</strong><br />
-                  <span class="muted">${escapeHtml(row.email || "-")}</span>
-                </td>
-                <td class="truncate">
-                  <strong>${escapeHtml(row.depositorName || "-")}</strong><br />
-                  <span class="muted">nome do Pix/comprovante</span>
-                </td>
-                <td><strong>${escapeHtml(`${row.amount || 0}`)}</strong> créditos</td>
-                <td class="mono">${escapeHtml(row.txid || "-")}</td>
-                <td>${formatDateTime(row.reviewDeadlineAt)}</td>
-                <td>
-                  <div class="actions">
-                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button>
-                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button>
-                  </div>
-                </td>
-              </tr>
-            `,
-            7,
-            "Sem depósitos pendentes."
-          );
-
-          renderRecentRows(
-            document.getElementById("pendingPubpaidWithdrawalsBody"),
-            data.pendingPubpaidWithdrawals || [],
-            (row) => `
-              <tr>
-                <td>${formatDateTime(row.createdAt)}</td>
-                <td class="truncate">
-                  <strong>${escapeHtml(row.name || "-")}</strong><br />
-                  <span class="muted">${escapeHtml(row.email || "-")}</span>
-                </td>
-                <td><strong>${escapeHtml(`${row.amount || 0}`)}</strong> créditos</td>
-                <td class="mono">${escapeHtml(row.txid || "-")}</td>
-                <td>${formatDateTime(row.reviewDeadlineAt)}</td>
-                <td>
-                  <div class="actions">
-                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button>
-                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button>
-                  </div>
-                </td>
-              </tr>
-            `,
-            6,
-            "Sem saques pendentes."
-          );
-
-          renderRecentRows(
-            document.getElementById("pubpaidWalletBody"),
-            data.pubpaidWalletBoard || [],
-            (row) => `
-              <tr>
-                <td class="truncate">
-                  <strong>${escapeHtml(row.name || "-")}</strong><br />
-                  <span class="muted">${escapeHtml(row.email || "-")}</span>
-                </td>
-                <td><strong>${escapeHtml(`${row.balanceCoins || 0}`)}</strong></td>
-                <td>${escapeHtml(`${row.lockedWithdrawalCoins || 0}`)}</td>
-                <td>${escapeHtml(`${row.totalApprovedDeposits || 0}`)}</td>
-                <td>${escapeHtml(`${row.totalApprovedWithdrawals || 0}`)}</td>
-                <td>${formatDateTime(row.updatedAt)}</td>
-              </tr>
-            `,
-            6,
-            "Sem carteiras PubPaid ainda."
-          );
-
           const pollSummary = data.acre2026PollSummary || {};
           renderBars(
             document.getElementById("acrePollVoteBoard"),
@@ -1557,32 +1411,6 @@
         clearStoredAccess();
         syncAccessForm();
         toggleAccessCard(true, "Credenciais locais removidas.");
-      });
-
-      document.addEventListener("click", async (event) => {
-        const button = event.target.closest("[data-pubpaid-review]");
-        if (!button) return;
-
-        const endpoint = button.getAttribute("data-pubpaid-review");
-        const id = button.getAttribute("data-id");
-        const decision = button.getAttribute("data-decision");
-        const statusBox = document.getElementById("statusBox");
-        const original = button.textContent;
-        button.disabled = true;
-        button.textContent = "Enviando...";
-
-        try {
-          await reviewPubpaidItem(endpoint, id, decision);
-          statusBox.hidden = false;
-          statusBox.textContent = `Revisão enviada: ${decision === "approve" ? "aprovado" : "rejeitado"}.`;
-          await loadDashboard();
-        } catch (error) {
-          statusBox.hidden = false;
-          statusBox.textContent = error?.message || "Falha ao revisar item do PubPaid.";
-        } finally {
-          button.disabled = false;
-          button.textContent = original;
-        }
       });
 
       syncAccessForm();
