@@ -7292,7 +7292,14 @@ function handleStatic(req, res, pathname, requestUrl) {
     return sendXml(res, 200, buildSitemapXml(req));
   }
 
-  if (pathname === "/admin" || pathname === "/admin/" || pathname === "/admin/admin-dashboard.html") {
+  if (
+    pathname === "/admin" ||
+    pathname === "/admin/" ||
+    pathname === "/admin/admin-dashboard.html" ||
+    pathname === "/admin/admin_dashboard.html" ||
+    pathname === "/admin-dashboard.html" ||
+    pathname === "/admin_dashboard.html"
+  ) {
     return sendFile(req, res, ADMIN_DASHBOARD_FILE, {
       cacheControl: "no-store",
       templateVars
