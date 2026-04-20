@@ -795,11 +795,14 @@
     toggleGamePanelButtons: Array.from(document.querySelectorAll("[data-toggle-night-panel]")),
     touchMoveButtons: Array.from(document.querySelectorAll("[data-touch-move]")),
     touchActionButtons: Array.from(document.querySelectorAll("[data-touch-action]")),
+    touchOpenMenuButtons: Array.from(document.querySelectorAll("[data-touch-open-menu]")),
+    scrollTargetButtons: Array.from(document.querySelectorAll("[data-scroll-target]")),
     venueCards: Array.from(document.querySelectorAll("[data-venue-card]")),
     topActions: document.querySelector(".pubpaid-top-actions"),
     topMenu: document.querySelector("[data-top-menu]"),
     topMenuToggle: document.querySelector("[data-top-menu-toggle]"),
     topMenuPanel: document.querySelector("[data-top-menu-panel]"),
+    mobileRotate: document.querySelector("[data-mobile-rotate]"),
     profileModal: document.querySelector("[data-profile-modal]"),
     profileForm: document.querySelector("[data-profile-form]"),
     profileFeedback: document.querySelector("[data-profile-feedback]"),
@@ -903,6 +906,10 @@
     demoMode: false,
     gameMode: false,
     nightPanelOpen: false,
+    mobile: {
+      isMobileViewport: false,
+      isPortraitBlocked: false
+    },
     poolRefs: {
       canvas: null,
       ctx: null,
@@ -1020,6 +1027,7 @@
 
   function init() {
     preloadImages().then(() => {
+      refreshMobileViewportState();
       runtime.npcs = createInteriorNpcs();
       runtime.exteriorWalkers = createExteriorWalkers();
       runtime.exteriorTraffic = createExteriorTraffic();
@@ -1140,7 +1148,95 @@
       });
     });
 
+    refs.touchOpenMenuButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        toggleTopMenu();
+      });
+    });
+
+    refs.scrollTargetButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        const targetId = String(button.dataset.scrollTarget || "").trim();
+        scrollToPubpaidSection(targetId);
+      });
+    });
+
     refs.sceneCanvas?.addEventListener("click", handleSceneCanvasClick);
+    window.addEventListener("resize", refreshMobileViewportState);
+    window.addEventListener("orientationchange", refreshMobileViewportState);
+    document.addEventListener("fullscreenchange", refreshMobileViewportState);
+  }
+
+  function isMobileViewport() {
+    if (window.matchMedia) {
+      return window.matchMedia("(max-width: 840px), (pointer: coarse)").matches;
+    }
+    return window.innerWidth <= 840;
+  }
+
+  function isPortraitMobileViewport() {
+    return isMobileViewport() && window.innerHeight > window.innerWidth;
+  }
+
+  function refreshMobileViewportState() {
+    runtime.mobile.isMobileViewport = isMobileViewport();
+    runtime.mobile.isPortraitBlocked = runtime.gameMode && isPortraitMobileViewport();
+    document.body.classList.toggle("pubpaid-mobile-device", runtime.mobile.isMobileViewport);
+    document.body.classList.toggle("pubpaid-mobile-portrait-blocked", runtime.mobile.isPortraitBlocked);
+    if (refs.mobileRotate) {
+      refs.mobileRotate.hidden = !runtime.mobile.isPortraitBlocked;
+    }
+    if (!runtime.mobile.isMobileViewport) {
+      closeTopMenu();
+    }
+    syncSceneCanvasResolution();
+  }
+
+  function requestLandscapeOrientation() {
+    refreshMobileViewportState();
+    if (!runtime.mobile.isMobileViewport) return;
+    try {
+      const orientation = window.screen?.orientation;
+      const lockRequest = orientation?.lock?.("landscape");
+      if (lockRequest?.catch) {
+        lockRequest.catch(() => {});
+      }
+    } catch (_error) {
+      // Ignore unsupported orientation locks and rely on the rotate overlay.
+    }
+  }
+
+  function scrollToPubpaidSection(targetId) {
+    const safeId = String(targetId || "").trim();
+    if (!safeId) return;
+    const target = document.getElementById(safeId);
+    if (!target) return;
+    closeTopMenu();
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function syncSceneCanvasResolution() {
+    if (!refs.sceneCanvas) return;
+    const pixelRatio = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+    const expectedWidth = Math.round(WORLD.width * pixelRatio);
+    const expectedHeight = Math.round(WORLD.height * pixelRatio);
+    if (refs.sceneCanvas.width === expectedWidth && refs.sceneCanvas.height === expectedHeight) {
+      if (sceneCtx) {
+        sceneCtx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      }
+      return;
+    }
+    refs.sceneCanvas.width = expectedWidth;
+    refs.sceneCanvas.height = expectedHeight;
+    if (sceneCtx) {
+      sceneCtx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      sceneCtx.imageSmoothingEnabled = false;
+    }
   }
 
   function ensureMusicPlayback() {
@@ -4608,6 +4704,7 @@
     const inGame = Boolean(runtime.gameMode);
     document.body.classList.toggle("pubpaid-in-game", inGame);
     document.body.classList.toggle("pubpaid-night-panel-open", false);
+    refreshMobileViewportState();
 
     refs.enterGameButtons.forEach((button) => {
       button.hidden = inGame;
@@ -4657,6 +4754,7 @@
 
     const fullscreenRequest = document.documentElement.requestFullscreen?.();
     if (fullscreenRequest?.catch) fullscreenRequest.catch(() => {});
+    requestLandscapeOrientation();
 
     if (announce) {
       setWorldMessage(
@@ -4687,6 +4785,7 @@
     syncGameModeUi();
     renderAll();
     window.scrollTo({ top: 0, behavior: "smooth" });
+    requestLandscapeOrientation();
     setWorldMessage("Modo treino ativo. Teste os jogos, rode partidas e aprenda sem gastar saldo real.", 3200);
     return true;
   }
@@ -4706,6 +4805,7 @@
 
     const fullscreenExit = document.exitFullscreen?.();
     if (fullscreenExit?.catch) fullscreenExit.catch(() => {});
+    refreshMobileViewportState();
 
     if (announce) {
       setWorldMessage("Você saiu do modo game e voltou para a apresentação do PubPaid.", 2600);

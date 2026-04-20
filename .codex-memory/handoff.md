@@ -1,9 +1,10 @@
 # Handoff
 
-Updated: 2026-04-20T14:36:37.016Z
+Updated: 2026-04-20T22:25:42.587Z
 
-Hero desktop da home corrigida apos feedback: destaques reais voltaram como background da divisao inteira, a coluna do escritorio lateral foi religada e os assets da hero ganharam cache-bust novo em index.html/script.js/agentes-newsroom-hero.css.
+Rodada de reuniao geral no PubPaid: pesquisa de padroes mobile concluida com apoio de agentes; pubpaid.html/pubpaid.css/pubpaid.js receberam menu mobile em icone, overlay de rotacao com atalhos para carteira/historico, quick access no bloco do perfil e canvas com ajuste por devicePixelRatio. Deposito/saque nao tiveram a logica alterada.
 
 ## Next
 
-- Conferir no navegador real se a hero mostra os destaques em tela cheia e se a coluna do escritorio esta aparecendo como antes.
+- Abrir o PubPaid em navegador/celular real para calibrar HUD
+- controles touch e ergonomia do caixa Pix no mobile.

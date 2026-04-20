@@ -1,15 +1,16 @@
 # Current State
 
-Updated: 2026-04-20T14:36:37.017Z
+Updated: 2026-04-20T22:25:42.637Z
 
 ## Active Goal
 
-- Hero desktop restaurada na home
+- PubPaid mobile-first com caixa preservado
 
 ## Summary
 
-A home voltou a usar noticias reais como background integral da hero desktop, com resumo visivel e escritorio lateral direito reativado.
+Reuniao geral fechou padroes mobile para o PubPaid. O jogo agora reforca landscape, tem atalhos mobile para carteira/caixa/historico, overlay de rotacao com acesso ao caixa e canvas ajustado para telas de alta densidade sem mexer na logica de deposito/saque.
 
 ## Next
 
-- Validar visualmente em navegador real se o background esta cobrindo toda a hero e se o escritorio reapareceu na coluna direita sem translucidez indevida.
+- Validar visualmente o PubPaid no celular ou em viewport responsivo real e decidir a proxima rodada: HUD ainda mais enxuto
+- joystick analogico ou hotspots maiores por mesa.

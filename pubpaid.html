@@ -2,7 +2,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>PubPaid | Bar Pixel Jogavel</title>
     <meta
       name="description"
@@ -68,8 +68,14 @@
             data-top-menu-toggle
             aria-expanded="false"
             aria-controls="pubpaid-top-menu-panel"
+            aria-label="Abrir menu do pub"
           >
-            Menu do pub
+            <span class="pubpaid-top-menu-icon" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="pubpaid-top-menu-label">Menu do pub</span>
           </button>
           <div class="pubpaid-top-menu-panel" id="pubpaid-top-menu-panel" data-top-menu-panel hidden>
             <button class="pubpaid-chip-button pubpaid-enter-chip" type="button" data-enter-game>
@@ -87,6 +93,12 @@
             </button>
             <button class="pubpaid-chip-button" type="button" data-open-profile>
               Abrir personagem
+            </button>
+            <button class="pubpaid-chip-button" type="button" data-scroll-target="perfil">
+              Carteira e caixa
+            </button>
+            <button class="pubpaid-chip-button" type="button" data-scroll-target="historico">
+              Ver histórico
             </button>
             <button class="pubpaid-chip-button danger" type="button" data-reset-demo>
               Limpar sessão local
@@ -205,11 +217,40 @@
 
           <div class="pubpaid-touchbar" aria-label="Controles moveis">
             <div class="pubpaid-touchbar-grid">
-              <button type="button" data-touch-move="up">Cima</button>
-              <button type="button" data-touch-action>Interagir</button>
-              <button type="button" data-touch-move="left">Esq</button>
-              <button type="button" data-touch-move="down">Baixo</button>
-              <button type="button" data-touch-move="right">Dir</button>
+              <button type="button" data-touch-move="up" aria-label="Mover para cima">
+                <span aria-hidden="true">▲</span>
+              </button>
+              <button type="button" data-touch-open-menu aria-label="Abrir menu">
+                <span aria-hidden="true">☰</span>
+              </button>
+              <button type="button" data-touch-move="left" aria-label="Mover para a esquerda">
+                <span aria-hidden="true">◀</span>
+              </button>
+              <button type="button" data-touch-move="down" aria-label="Mover para baixo">
+                <span aria-hidden="true">▼</span>
+              </button>
+              <button type="button" data-touch-move="right" aria-label="Mover para a direita">
+                <span aria-hidden="true">▶</span>
+              </button>
+              <button type="button" class="pubpaid-touchbar-action" data-touch-action aria-label="Interagir">
+                <span>OK</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="pubpaid-mobile-rotate" data-mobile-rotate hidden>
+            <div class="pubpaid-mobile-rotate-card">
+              <span class="pubpaid-mobile-rotate-kicker">mobile do pubpaid</span>
+              <strong>Gire o celular para jogar na horizontal</strong>
+              <p>O salão fica mais limpo em landscape, com HUD curto, menu em ícone e controles touch na tela.</p>
+              <div class="pubpaid-mobile-rotate-actions">
+                <button class="pubpaid-button solid" type="button" data-scroll-target="perfil">
+                  Abrir carteira
+                </button>
+                <button class="pubpaid-button outline" type="button" data-scroll-target="historico">
+                  Ver histórico
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -360,6 +401,18 @@
             </div>
 
             <div class="pubpaid-loadout" data-profile-upgrades aria-label="Acessorios do avatar"></div>
+
+            <div class="pubpaid-mobile-quick-access" aria-label="Atalhos mobile do PubPaid">
+              <button class="pubpaid-button outline" type="button" data-open-profile>
+                Personagem
+              </button>
+              <button class="pubpaid-button outline" type="button" data-scroll-target="perfil">
+                Caixa Pix
+              </button>
+              <button class="pubpaid-button outline" type="button" data-scroll-target="historico">
+                Histórico
+              </button>
+            </div>
 
             <div class="pubpaid-cashier-card" data-pubpaid-cashier>
               <p class="pubpaid-eyebrow">caixa pix</p>
