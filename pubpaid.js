@@ -3598,6 +3598,14 @@
     return payload;
   }
 
+  async function ensurePubpaidServerSession() {
+    const session = await requestApiJson("/api/auth/session", { method: "GET" });
+    if (session?.user?.email) {
+      return session.user;
+    }
+    throw new Error("Sua sessão Google expirou no servidor. Entre novamente antes de usar o caixa.");
+  }
+
   function getDepositAmount() {
     const amount = clampInteger(refs.depositAmount?.value || 10);
     return [5, 10, 20, 50, 100].includes(amount) ? amount : 10;
@@ -3627,8 +3635,8 @@
 
   async function generatePubPaidDepositQr(forceNewTxid = false) {
     if (!refs.depositQr) return;
-    const user = getCatalogoGoogleAuthUser();
-    if (!user?.email) {
+    const localUser = getCatalogoGoogleAuthUser();
+    if (!localUser?.email) {
       refs.depositQr.innerHTML = "<p>Entre com Google para gerar o QR do deposito.</p>";
       if (refs.depositFeedback) {
         refs.depositFeedback.textContent = "O caixa só abre para conta Google identificada.";
@@ -3661,6 +3669,7 @@
     }
 
     try {
+      const user = await ensurePubpaidServerSession();
       const params = new URLSearchParams({
         amount: String(amount),
         txid: depositState.txid,
@@ -3682,8 +3691,8 @@
   }
 
   async function registerPubPaidDeposit() {
-    const user = getCatalogoGoogleAuthUser();
-    if (!user?.email) {
+    const localUser = getCatalogoGoogleAuthUser();
+    if (!localUser?.email) {
       if (refs.depositFeedback) refs.depositFeedback.textContent = "Entre com Google antes de avisar o pagamento.";
       return;
     }
@@ -3711,6 +3720,7 @@
     }
 
     try {
+      await ensurePubpaidServerSession();
       const payload = await requestApiJson("/api/pubpaid/deposits", {
         method: "POST",
         body: JSON.stringify({
@@ -3777,6 +3787,7 @@
 
     const amount = getWithdrawalAmount();
     try {
+      await ensurePubpaidServerSession();
       const payload = await requestApiJson("/api/pubpaid/withdrawals", {
         method: "POST",
         body: JSON.stringify({

@@ -5,8 +5,10 @@ const path = require("path");
 const {
   buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
   readStore: readCanonicalPubpaidStore,
+  writeStore: writeCanonicalPubpaidStore,
   reviewDeposit: reviewCanonicalPubpaidDeposit,
   reviewWithdrawal: reviewCanonicalPubpaidWithdrawal,
+  withPubpaidLock: withCanonicalPubpaidLock,
 } = require("./pubpaid-runtime");
 const vm = require("vm");
 const zlib = require("zlib");
@@ -6853,7 +6855,6 @@ async function handleApi(req, res, pathname, searchParams) {
     }
 
     const body = await parseBody(req);
-    const deposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE);
     const amount = normalizePubpaidAmount(body.amount, 10);
     const txid = normalizePixToken(body.paymentTxid || body.txid || `PUB${Date.now()}`, 25) || `PUB${Date.now()}`;
     const depositorName = cleanShortText(body.depositorName || body.depositName || body.payerName || "", 90);
@@ -6893,9 +6894,7 @@ async function handleApi(req, res, pathname, searchParams) {
       createdAt: new Date().toISOString()
     };
 
-    const next = Array.isArray(deposits) ? deposits : [];
-    next.push(nextItem);
-    writePubpaidArrayCompat(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE, next);
+    await appendCanonicalPubpaidItem("deposits", nextItem);
 
     return sendJson(res, 201, {
       ok: true,
@@ -6933,7 +6932,6 @@ async function handleApi(req, res, pathname, searchParams) {
     const txid = normalizePixToken(body.paymentTxid || body.txid || `SAQ${Date.now()}`, 25) || `SAQ${Date.now()}`;
     const tracking = buildTrackingMeta(req, body);
     const reviewDeadlineAt = new Date(Date.now() + PUBPAID_PENDING_WINDOW_MS).toISOString();
-    const withdrawals = getPubpaidWithdrawals();
     const nextItem = {
       id: createRecordId("pubwd"),
       type: "pubpaid-saque",
@@ -6964,8 +6962,7 @@ async function handleApi(req, res, pathname, searchParams) {
       lockedWithdrawalCoins: clampInteger(current.lockedWithdrawalCoins) + amount
     }));
 
-    withdrawals.push(nextItem);
-    writePubpaidWithdrawals(withdrawals);
+    await appendCanonicalPubpaidItem("withdrawals", nextItem);
 
     return sendJson(res, 201, {
       ok: true,
@@ -7517,6 +7514,18 @@ function buildPubpaidAdminPayload() {
     pendingPubpaidWithdrawals: dashboard.pendingWithdrawals,
     pubpaidWalletBoard: dashboard.walletBoard,
   };
+}
+
+async function appendCanonicalPubpaidItem(collectionKey, item) {
+  return withCanonicalPubpaidLock(() => {
+    const store = readCanonicalPubpaidStore();
+    const nextItems = Array.isArray(store?.[collectionKey]) ? store[collectionKey].slice() : [];
+    nextItems.push(item);
+    return writeCanonicalPubpaidStore({
+      ...store,
+      [collectionKey]: nextItems,
+    });
+  });
 }
 
 function readMergedPubpaidArray(primaryFile, legacyFile) {
