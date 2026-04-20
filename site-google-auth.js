@@ -124,6 +124,14 @@
     state.buttonRendered = true;
   }
 
+  async function promptSignIn() {
+    if (!state.enabled || state.user) return false;
+    await renderGoogleButtons().catch(() => {});
+    if (!window.google?.accounts?.id?.prompt) return false;
+    window.google.accounts.id.prompt();
+    return true;
+  }
+
   async function handleCredential(response) {
     try {
       const payload = await requestJson("/api/auth/google", {
@@ -188,6 +196,7 @@
     isReady: () => state.ready,
     isEnabled: () => state.enabled,
     isSignedIn: () => Boolean(state.user),
+    promptSignIn,
     refresh,
     logout
   };

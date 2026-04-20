@@ -5322,10 +5322,14 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       if (!getCatalogoGoogleAuthUser()?.email) {
         setFeedbackState(
           feedback,
-          "Entre com Google antes de votar. Cada dispositivo só registra um voto por cargo a cada semana.",
+          window.CatalogoGoogleAuth?.isEnabled?.()
+            ? "Clique no botao Google acima para entrar antes de votar. Depois volte aqui e confirme o voto."
+            : "Login Google ainda nao esta configurado no servidor, entao o voto fica bloqueado para evitar duplicidade.",
           "is-error"
         );
-        document.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        modal.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        modal.querySelector("[data-google-auth-button]")?.focus?.();
+        window.CatalogoGoogleAuth?.promptSignIn?.();
         return;
       }
 
@@ -5404,10 +5408,26 @@ if (window.ELECTIONS_DATA?.offices?.length) {
     setFeedbackState(modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback"), "", "");
     modal.hidden = false;
     document.body.classList.add("election-vote-open");
+    window.CatalogoGoogleAuth?.refresh?.();
+    if (!getCatalogoGoogleAuthUser()?.email) {
+      setFeedbackState(
+        modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback"),
+        window.CatalogoGoogleAuth?.isEnabled?.()
+          ? "Entre com Google neste painel antes de confirmar o voto."
+          : "Login Google ainda nao configurado no servidor; o voto so libera quando a autenticacao estiver ativa.",
+        "is-error"
+      );
+      window.CatalogoGoogleAuth?.promptSignIn?.();
+    }
     window.setTimeout(() => {
       const cityInput = form?.elements?.city || form?.querySelector?.("[name='city']");
-      cityInput?.focus();
-      cityInput?.select?.();
+      const authButton = modal.querySelector("[data-google-auth-button]");
+      if (getCatalogoGoogleAuthUser()?.email) {
+        cityInput?.focus();
+        cityInput?.select?.();
+      } else {
+        authButton?.focus?.();
+      }
     }, 20);
   };
 

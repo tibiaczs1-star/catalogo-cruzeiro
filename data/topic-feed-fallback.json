@@ -111,6 +111,44 @@
       "topicGroup": "anime"
     }
   ],
+  "anime": [
+    {
+      "sourceName": "Crunchyroll",
+      "sourceUrl": "https://www.crunchyroll.com/simulcastcalendar",
+      "title": "Calendario de simulcast ajuda a acompanhar a semana dos animes",
+      "summary": "O calendario de estreias segue como guia rapido para saber o que voltou, o que estreou e o que merece contexto antes de viralizar no fandom.",
+      "publishedAt": "2026-04-13T12:00:00.000Z",
+      "category": "Anime",
+      "topicGroup": "premieres"
+    },
+    {
+      "sourceName": "Anime News Network",
+      "sourceUrl": "https://www.animenewsnetwork.com/",
+      "title": "Anime News Network monitora trailers, industria e temporadas globais",
+      "summary": "A fonte ajuda a separar anuncio oficial, rumor e movimentacao de mercado para transformar anime em editoria organizada.",
+      "publishedAt": "2026-04-12T12:00:00.000Z",
+      "category": "Anime",
+      "topicGroup": "industry"
+    },
+    {
+      "sourceName": "YouTube Blog",
+      "sourceUrl": "https://blog.youtube/culture-and-trends/independent-animation-trends-report/",
+      "title": "Animacao independente mostra a forca de comunidades, criadores e fandoms",
+      "summary": "A conversa de anime tambem passa por animacao online, fanart, dublagem, canais de review e comunidades que descobrem obras fora da TV tradicional.",
+      "publishedAt": "2026-04-09T12:00:00.000Z",
+      "category": "Creators",
+      "topicGroup": "community"
+    },
+    {
+      "sourceName": "PlayStation Blog",
+      "sourceUrl": "https://blog.playstation.com/2026/04/01/playstation-plus-monthly-games-for-april-lords-of-the-fallen-tomb-raider-i-iii-remastered-sword-art-online-fractured-daydream/",
+      "title": "Sword Art Online no PS Plus reforca a ponte entre anime e games",
+      "summary": "Quando franquias de anime entram em servicos de jogos, a editoria cruza lancamento, fandom, acessibilidade e descoberta para novos publicos.",
+      "publishedAt": "2026-04-01T12:00:00.000Z",
+      "category": "Games",
+      "topicGroup": "games"
+    }
+  ],
   "games": [
     {
       "sourceName": "Nintendo",

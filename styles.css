@@ -6340,13 +6340,15 @@ input[type="range"] {
   inset: 0;
   z-index: 80;
   display: grid;
-  place-items: center;
+  align-items: start;
+  justify-items: center;
   padding:
-    calc(1rem + env(safe-area-inset-top, 0px))
+    calc(0.45rem + env(safe-area-inset-top, 0px))
     1rem
-    calc(1rem + env(safe-area-inset-bottom, 0px));
+    calc(0.75rem + env(safe-area-inset-bottom, 0px));
   background: rgba(6, 15, 27, 0.64);
   backdrop-filter: blur(16px);
+  overflow: hidden;
 }
 
 .election-vote-modal-backdrop {
@@ -6359,8 +6361,12 @@ input[type="range"] {
   z-index: 1;
   width: min(100%, 640px);
   display: grid;
-  gap: 1rem;
-  padding: 1.45rem;
+  gap: 0.72rem;
+  max-height: calc(100vh - 1.2rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  margin-top: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem 1.15rem 0.85rem;
   border-radius: 28px;
   border: 1px solid rgba(16, 35, 60, 0.1);
   background:
@@ -6384,28 +6390,29 @@ input[type="range"] {
 }
 
 .election-vote-dialog h3 {
-  margin: -0.35rem 0 0;
+  margin: -0.25rem 2.6rem 0 0;
   color: var(--navy);
   font-family: "Outfit", sans-serif;
-  font-size: clamp(1.55rem, 3vw, 2rem);
+  font-size: clamp(1.35rem, 2.4vw, 1.78rem);
   line-height: 1.02;
 }
 
 .election-vote-lead {
   margin: 0;
   color: rgba(16, 35, 60, 0.72);
-  line-height: 1.6;
+  line-height: 1.42;
+  font-size: 0.94rem;
 }
 
 .election-vote-form {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.62rem;
 }
 
 .election-vote-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.85rem;
+  gap: 0.62rem;
 }
 
 .election-vote-field.full {
@@ -6414,7 +6421,7 @@ input[type="range"] {
 
 .election-vote-form label {
   display: grid;
-  gap: 0.42rem;
+  gap: 0.32rem;
   color: var(--navy);
   font-size: 0.9rem;
   font-weight: 700;
@@ -6423,8 +6430,8 @@ input[type="range"] {
 .election-vote-form input,
 .election-vote-form textarea {
   width: 100%;
-  padding: 0.95rem 1rem;
-  border-radius: 18px;
+  padding: 0.72rem 0.85rem;
+  border-radius: 15px;
   border: 1px solid rgba(16, 35, 60, 0.12);
   background: rgba(255, 255, 255, 0.92);
   color: var(--navy);
@@ -6433,7 +6440,8 @@ input[type="range"] {
 }
 
 .election-vote-form textarea {
-  min-height: 140px;
+  min-height: 84px;
+  max-height: 128px;
 }
 
 .election-vote-note,
@@ -6444,7 +6452,7 @@ input[type="range"] {
 
 .election-vote-note {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.8rem;
 }
 
 .election-vote-feedback {
@@ -6470,11 +6478,18 @@ input[type="range"] {
 }
 
 .election-vote-actions {
+  position: sticky;
+  bottom: -0.85rem;
+  z-index: 2;
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 0.15rem;
+  margin: 0.05rem -1.15rem -0.85rem;
+  padding: 0.72rem 1.15rem 0.85rem;
+  border-top: 1px solid rgba(16, 35, 60, 0.1);
+  background: linear-gradient(180deg, rgba(247, 250, 253, 0.9), rgba(255, 255, 255, 0.98));
+  box-shadow: 0 -16px 28px rgba(16, 35, 60, 0.08);
 }
 
 @media (max-width: 720px) {
@@ -6485,13 +6500,18 @@ input[type="range"] {
   }
 
   .election-vote-dialog {
-    padding: 1.2rem;
+    max-height: calc(100vh - 0.85rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    padding: 0.9rem 0.9rem 0.75rem;
     border-radius: 24px;
   }
 
   .election-vote-actions {
     flex-direction: column-reverse;
     align-items: stretch;
+    margin-right: -0.9rem;
+    margin-left: -0.9rem;
+    padding-right: 0.9rem;
+    padding-left: 0.9rem;
   }
 
   .election-vote-actions .solid-button,
@@ -12441,6 +12461,27 @@ input[type="range"] {
   --thumb-accent-1: #9d7d26;
   --thumb-accent-2: #3d3013;
   --thumb-glow: rgba(255, 230, 126, 0.46);
+}
+
+.news-thumb.thumb-games,
+.mini-thumb.thumb-games {
+  --thumb-accent-1: #1c86c8;
+  --thumb-accent-2: #132c5e;
+  --thumb-glow: rgba(84, 255, 213, 0.44);
+}
+
+.news-thumb.thumb-anime,
+.mini-thumb.thumb-anime {
+  --thumb-accent-1: #d94bff;
+  --thumb-accent-2: #2a155d;
+  --thumb-glow: rgba(102, 217, 255, 0.44);
+}
+
+.news-thumb.thumb-fashion,
+.mini-thumb.thumb-fashion {
+  --thumb-accent-1: #d64b8d;
+  --thumb-accent-2: #341123;
+  --thumb-glow: rgba(247, 191, 95, 0.44);
 }
 
 /* Preserva a foto real aplicada pelo JS nas thumbs da home. */

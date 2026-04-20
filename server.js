@@ -375,6 +375,18 @@ const STATIC_PAGE_SEO = {
     changefreq: "daily",
     fileName: "games.html"
   },
+  "/animes.html": {
+    title: `Radar Anime | ${SITE_NAME}`,
+    description:
+      "Pagina editorial de anime, manga, dublagem, cultura pop, trailers, estreias, comunidades de fas e pontes com games.",
+    themeColor: "#1D1238",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.78",
+    changefreq: "daily",
+    fileName: "animes.html"
+  },
   "/infantil.html": {
     title: `Clube Infantil | ${SITE_NAME}`,
     description:
@@ -7101,6 +7113,77 @@ async function handleApi(req, res, pathname, searchParams) {
       200,
       toCsv(rows) || "createdAt,profissao,localizacao,faixaEtaria,votoAnterior,satisfacao,voto2026,rejeicao,prioridade,comentario,sourcePage,pageTitle,visitorId,sessionId,city,country,ip,browser,deviceType\n",
       "pesquisa_acre_2026.csv"
+    );
+  }
+
+  if (req.method === "GET" && pathname === "/api/admin/reports/pubpaid-deposits.csv") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const rows = getJsonArray(PUBPAID_DEPOSITS_FILE).map((item) => ({
+      createdAt: item.createdAt,
+      player: item.user?.name || item.name,
+      email: item.user?.email || item.email,
+      amount: item.amount,
+      creditsRequested: item.creditsRequested,
+      status: item.status,
+      paymentStatus: item.payment?.status,
+      txid: item.payment?.txid || item.txid,
+      reference: item.payment?.reference || item.reference,
+      reviewedAt: item.reviewedAt,
+      reviewedBy: item.reviewedBy,
+      reviewNote: item.reviewNote,
+      sourcePage: item.sourcePage,
+      ip: item.ip
+    }));
+    return sendCsv(
+      res,
+      200,
+      toCsv(rows) || "createdAt,player,email,amount,creditsRequested,status,paymentStatus,txid,reference,reviewedAt,reviewedBy,reviewNote,sourcePage,ip\n",
+      "pubpaid_depositos.csv"
+    );
+  }
+
+  if (req.method === "GET" && pathname === "/api/admin/reports/pubpaid-withdrawals.csv") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const rows = getPubpaidWithdrawals().map((item) => ({
+      createdAt: item.createdAt,
+      player: item.user?.name || item.name,
+      email: item.user?.email || item.email,
+      amount: item.amount,
+      creditsRequested: item.creditsRequested,
+      status: item.status,
+      paymentStatus: item.payment?.status,
+      reference: item.payment?.reference || item.reference,
+      reviewedAt: item.reviewedAt,
+      reviewedBy: item.reviewedBy,
+      reviewNote: item.reviewNote,
+      sourcePage: item.sourcePage,
+      ip: item.ip
+    }));
+    return sendCsv(
+      res,
+      200,
+      toCsv(rows) || "createdAt,player,email,amount,creditsRequested,status,paymentStatus,reference,reviewedAt,reviewBy,reviewNote,sourcePage,ip\n",
+      "pubpaid_retiradas.csv"
+    );
+  }
+
+  if (req.method === "GET" && pathname === "/api/admin/reports/pubpaid-wallets.csv") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const rows = getPubpaidWalletStore().map((item) => ({
+      updatedAt: item.updatedAt,
+      player: item.user?.name || item.name,
+      email: item.user?.email || item.email,
+      walletKey: item.walletKey,
+      balanceCoins: item.balanceCoins,
+      lockedWithdrawalCoins: item.lockedWithdrawalCoins,
+      totalApprovedDeposits: item.totalApprovedDeposits,
+      totalApprovedWithdrawals: item.totalApprovedWithdrawals
+    }));
+    return sendCsv(
+      res,
+      200,
+      toCsv(rows) || "updatedAt,player,email,walletKey,balanceCoins,lockedWithdrawalCoins,totalApprovedDeposits,totalApprovedWithdrawals\n",
+      "pubpaid_carteiras.csv"
     );
   }
 

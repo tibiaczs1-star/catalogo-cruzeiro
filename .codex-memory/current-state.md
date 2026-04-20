@@ -1,16 +1,18 @@
 # Current State
 
-Updated: 2026-04-20T05:22:56.723Z
+Updated: 2026-04-20T05:38:54.479Z
 
 ## Active Goal
 
-- Home azul restaurada
+- Modal de voto ajustado para Chrome 100%
 
 ## Summary
 
-solid-surfaces.css recebeu de volta os overrides body.editorial-home da versao azul validada no anonimo; index.html agora usa cache-bust 20260420solidbluehomefix.
+styles.css agora alinha o modal de voto no topo, limita altura em 100vh, reduz campos/textarea e deixa as acoes sticky no rodape do painel; index.html usa cache-bust styles.css?v=20260420votemodaltop.
 
 ## Next
 
-- Usuario deve fazer refresh forte no navegador/deploy; se ainda aparecer branco
-- checar cache/CDN ou screenshots reais.
+- Se usuario pedir deploy
+- incluir alteracoes de voto
+- PubPaid dashboards
+- editorias Games/Animes/Moda e modal compacto em um commit isolado.
