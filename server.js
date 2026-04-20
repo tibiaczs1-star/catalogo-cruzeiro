@@ -4165,9 +4165,12 @@ function getElectionPublicSnapshot(voterId = "") {
 }
 
 function recordElectionVote(payload = {}, req = null) {
+  const authUser = readCatalogoAuthSession(req);
   const safeOfficeId = String(payload.officeId || "").trim();
   const safeCandidateId = String(payload.candidateId || "").trim();
-  const safeVoterId = safeString(payload.voterId || payload.deviceId || payload.visitorId, 120);
+  const safeGoogleSub = safeString(authUser?.sub || "", 160);
+  const safeGoogleEmail = safeString(authUser?.email || "", 160);
+  const safeVoterId = safeString(safeGoogleSub || payload.voterId || payload.deviceId || payload.visitorId, 120);
   const office = getElectionOffice(safeOfficeId);
   const tracking = buildTrackingMeta(req, payload);
   const currentFingerprints = buildWeeklyDeviceFingerprints(tracking);
@@ -4175,6 +4178,10 @@ function recordElectionVote(payload = {}, req = null) {
   const voterName = safeString(payload.name || payload.voterName, 120);
   const voterParty = safeString(payload.party || payload.voterParty, 90);
   const observation = safeString(payload.observation || payload.notes || payload.comment, 1200);
+
+  if (!safeGoogleSub || !safeGoogleEmail) {
+    return { ok: false, status: 401, message: "Entre com Google antes de votar." };
+  }
 
   if (!safeVoterId) {
     return { ok: false, status: 400, message: "Identificador de eleitor ausente." };
@@ -4212,12 +4219,20 @@ function recordElectionVote(payload = {}, req = null) {
       recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprints)
   );
 
-  if (deviceAlreadyVoted) {
+  const googleAlreadyVoted = store.records.some(
+    (item) =>
+      safeString(item.officeId || "", 120) === safeOfficeId &&
+      safeString(item.weekKey || "", 24) === currentWeekKey &&
+      (safeString(item.googleSub || "", 160) === safeGoogleSub ||
+        safeString(item.googleEmail || "", 160) === safeGoogleEmail)
+  );
+
+  if (deviceAlreadyVoted || googleAlreadyVoted) {
     const snapshot = getElectionPublicSnapshot(safeVoterId);
     return {
       ok: false,
       status: 409,
-      message: "Este dispositivo já registrou voto para esse cargo nesta semana. Aguarde a próxima rodada.",
+      message: "Seu login Google já registrou voto para esse cargo nesta semana. Aguarde a próxima rodada.",
       ...snapshot
     };
   }
@@ -4251,8 +4266,8 @@ function recordElectionVote(payload = {}, req = null) {
     ip: tracking.ip,
     browser: tracking.browser,
     deviceType: tracking.deviceType,
-    googleEmail: "",
-    googleSub: "",
+    googleEmail: safeGoogleEmail,
+    googleSub: safeGoogleSub,
     visitorId: tracking.visitorId || tracking.cookieVisitorId,
     sessionId: tracking.sessionId || tracking.cookieSessionId,
     weekKey: currentWeekKey,
@@ -4265,6 +4280,7 @@ function recordElectionVote(payload = {}, req = null) {
     ok: true,
     alreadyVoted: false,
     status: 200,
+    message: "Obrigado por votar. Acompanhe semanalmente para ver as parciais.",
     ...snapshot,
     updatedAt: snapshot.updatedAt || new Date().toISOString()
   };

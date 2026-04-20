@@ -13303,10 +13303,10 @@ input[type="range"] {
 }
 
 .crossword-teaser-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.85rem;
+  display: grid;
+  gap: 0.28rem;
+  align-items: start;
+  justify-items: start;
   padding: 0.96rem 1.05rem;
   border-radius: 18px;
   background: linear-gradient(135deg, #f03d83, #ad1457);
@@ -13315,16 +13315,20 @@ input[type="range"] {
 }
 
 .crossword-teaser-link span {
+  display: block;
   font-size: 0.73rem;
   font-weight: 800;
   letter-spacing: 0.14em;
+  line-height: 1.1;
   text-transform: uppercase;
   opacity: 0.86;
 }
 
 .crossword-teaser-link strong {
+  display: block;
   font-size: 0.98rem;
   font-weight: 800;
+  line-height: 1.08;
 }
 
 .crossword-teaser-link:hover {

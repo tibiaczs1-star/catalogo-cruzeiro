@@ -68,6 +68,7 @@ const heroDailyNewsSummary = document.querySelector("[data-hero-daily-summary]")
 const heroTopicCards = [...document.querySelectorAll("[data-hero-topic-card]")];
 const heroOfficeStatusNodes = [...document.querySelectorAll("[data-hero-office-status]")];
 const heroOfficeBubble = document.querySelector("[data-hero-office-bubble]");
+const heroOfficeFeedItems = [...document.querySelectorAll("[data-hero-office-item]")];
 const heroTopicTrack = document.querySelector("[data-hero-topic-track]");
 const heroTopicDots = document.querySelector("[data-hero-topic-dots]");
 let heroDesktopHighlightItems = [];
@@ -800,8 +801,33 @@ const articleImageFocusOverridesBySlug = {
     "38% 26%",
   "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
   "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
-    "58% 16%"
+    "58% 16%",
+  "morre-o-pai-de-ana-paula-renault-a-dois-dias-da-final-do-bbb-26": "center 18%",
+  "com-um-a-menos-palmeiras-segura-athletico-pr-e-vence-pelo-brasileirao": "center 22%",
+  "com-falha-de-lyanco-coritiba-vence-atletico-mg-no-campeonato-brasileiro": "center 22%",
+  "internacional-perde-para-o-mirassol-e-se-aproxima-do-z-4-do-brasileirao": "center 22%",
+  "paratletas-acreanos-conquistam-9-medalhas-no-regional-de-bocha": "center 24%",
+  "brasileia-entrega-premiacao-aos-vencedores-do-2-campeonato-de-pesca": "center 24%",
+  "mailza-e-gladson-se-encontram-em-manaus-para-reuniao-de-alinhamento-politico": "center 20%",
+  "presidentes-de-bairros-denunciam-obra-irregular-e-mobilizam-embargo": "center 20%",
+  "eua-ameacam-peru-apos-governo-sugerir-pausa-em-compra-de-avioes-de-combate": "center 18%",
+  "denuncia-de-maus-tratos-contra-vendedor-de-bananas-termina-em-reconhecimento-de-ato-de-cuidado-em-rio-branco":
+    "center 18%",
+  "pista-goleia-o-ame-no-campeonato-estadual-de-futsal-sub-15": "center 22%",
+  "seguranca-publica-intensifica-acoes-em-comunidades-indigenas-e-fortalece-seguranca-comunitaria-em-santa-rosa-do-purus":
+    "center 24%",
+  "governo-e-instituicoes-parceiras-certificam-40-alunos-na-1-etapa-do-projeto-pao-na-estrada":
+    "center 22%",
+  "crianca-desaparece-apos-naufragio-no-rio-purus-bombeiros-fazem-buscas": "center 18%",
+  "com-foco-na-prevencao-prefeitura-de-mancio-lima-realiza-acao-de-saude-no-bairro-iracema":
+    "center 22%"
 };
+
+const articlePersonFocusPattern =
+  /\b(rosto|face|pai|mae|mãe|filho|filha|crianca|criança|jovem|mulher|homem|prefeito|prefeita|governador|governadora|senador|senadora|deputado|deputada|presidente|atleta|jogador|jogadora|paratleta|cantor|cantora|ator|atriz|influenciadora|influenciador|motociclista|suspeito|vendedor|aluno|alunos|familia|família)\b/;
+const articleGroupFocusPattern =
+  /\b(grupo|equipe|time|selecao|seleção|cerimonia|cerimônia|premiacao|premiação|reuniao|reunião|evento|acao|ação|campeonato|jogos|comunidades|indigenas|indígenas|alunos|familias|famílias)\b/;
+const articlePortraitFocusPattern = /\b(retrato|posse|entrevista|discurso|falou|reuniao|reunião|alinhamento)\b/;
 
 const mosaicImageFocusOverridesBySlug = {
   "ciclista-acreano-chega-no-panama-para-disputa-do-sul-americano-da-juventude": "center 10%",
@@ -819,6 +845,19 @@ const resolveArticleImageFocus = (article = {}, fallback = "center") => {
   const slug = String(article.slug || "").trim();
   if (slug && articleImageFocusOverridesBySlug[slug]) {
     return articleImageFocusOverridesBySlug[slug];
+  }
+
+  const haystack = normalizeText(
+    [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+  );
+  if (articlePortraitFocusPattern.test(haystack)) {
+    return "center 18%";
+  }
+  if (articlePersonFocusPattern.test(haystack) && articleGroupFocusPattern.test(haystack)) {
+    return "center 22%";
+  }
+  if (articlePersonFocusPattern.test(haystack)) {
+    return "center 20%";
   }
 
   return fallback;
@@ -2882,10 +2921,10 @@ const getHeroDailyArticleFocus = (article = {}) => {
   );
 
   if (heroDailyPersonFocusPattern.test(haystack)) {
-    return "center 24%";
+    return "center 12%";
   }
 
-  return "center 42%";
+  return "center 34%";
 };
 
 const buildHeroArticleHref = (article = {}) =>
@@ -3239,6 +3278,42 @@ const renderHeroDesktopHighlights = (items = []) => {
   mountHeroDesktopCarouselDots(safeItems.length);
 };
 
+const renderHeroOfficeFeed = (items = []) => {
+  if (!heroOfficeFeedItems.length) {
+    return;
+  }
+
+  const safeItems = Array.isArray(items) ? items.filter(Boolean).slice(0, heroOfficeFeedItems.length) : [];
+
+  heroOfficeFeedItems.forEach((card, index) => {
+    const item = safeItems[index];
+    const categoryNode = card.querySelector("[data-hero-office-item-category]");
+    const titleNode = card.querySelector("[data-hero-office-item-title]");
+
+    if (!item) {
+      card.hidden = true;
+      return;
+    }
+
+    card.hidden = false;
+    card.href = item.articleHref || "#radar";
+
+    if (categoryNode) {
+      categoryNode.textContent = truncateCopy(
+        item.articleCategory || item.title || "Cobertura local",
+        30
+      );
+    }
+
+    if (titleNode) {
+      titleNode.textContent = truncateCopy(
+        item.articleTitle || item.title || "Atualização do Vale do Juruá",
+        78
+      );
+    }
+  });
+};
+
 const syncHeroDesktopCarousel = (index = 0) => {
   if (!heroTopicTrack || !heroTopicCards.length) {
     return;
@@ -3436,6 +3511,7 @@ const initializeHeroTourismHero = () => {
   heroTourismRotation.statusIndex = 0;
   heroTourismRotation.bubbleIndex = 0;
   renderHeroDesktopHighlights(dailyPool);
+  renderHeroOfficeFeed(dailyPool);
 
   if (shouldUseSolidHeroShell()) {
     heroTourismSlides.forEach((slide) => {
@@ -7980,6 +8056,7 @@ const hydrateDynamicNews = async () => {
       "todos";
     hydrateMosaicHero(merged);
     hydrateStaticMediaSurfaces();
+    initializeHeroTourismHero();
     renderSidebarWidgets();
     renderRadar(activeFilter);
     updateLiveFeedItems(merged, { resetFilter: false });

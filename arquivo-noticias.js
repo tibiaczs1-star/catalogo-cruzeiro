@@ -220,8 +220,33 @@
       "38% 26%",
     "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
     "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
-      "58% 16%"
+      "58% 16%",
+    "morre-o-pai-de-ana-paula-renault-a-dois-dias-da-final-do-bbb-26": "center 18%",
+    "com-um-a-menos-palmeiras-segura-athletico-pr-e-vence-pelo-brasileirao": "center 22%",
+    "com-falha-de-lyanco-coritiba-vence-atletico-mg-no-campeonato-brasileiro": "center 22%",
+    "internacional-perde-para-o-mirassol-e-se-aproxima-do-z-4-do-brasileirao": "center 22%",
+    "paratletas-acreanos-conquistam-9-medalhas-no-regional-de-bocha": "center 24%",
+    "brasileia-entrega-premiacao-aos-vencedores-do-2-campeonato-de-pesca": "center 24%",
+    "mailza-e-gladson-se-encontram-em-manaus-para-reuniao-de-alinhamento-politico": "center 20%",
+    "presidentes-de-bairros-denunciam-obra-irregular-e-mobilizam-embargo": "center 20%",
+    "eua-ameacam-peru-apos-governo-sugerir-pausa-em-compra-de-avioes-de-combate": "center 18%",
+    "denuncia-de-maus-tratos-contra-vendedor-de-bananas-termina-em-reconhecimento-de-ato-de-cuidado-em-rio-branco":
+      "center 18%",
+    "pista-goleia-o-ame-no-campeonato-estadual-de-futsal-sub-15": "center 22%",
+    "seguranca-publica-intensifica-acoes-em-comunidades-indigenas-e-fortalece-seguranca-comunitaria-em-santa-rosa-do-purus":
+      "center 24%",
+    "governo-e-instituicoes-parceiras-certificam-40-alunos-na-1-etapa-do-projeto-pao-na-estrada":
+      "center 22%",
+    "crianca-desaparece-apos-naufragio-no-rio-purus-bombeiros-fazem-buscas": "center 18%",
+    "com-foco-na-prevencao-prefeitura-de-mancio-lima-realiza-acao-de-saude-no-bairro-iracema":
+      "center 22%"
   };
+
+  const articlePersonFocusPattern =
+    /\b(rosto|face|pai|mae|mãe|filho|filha|crianca|criança|jovem|mulher|homem|prefeito|prefeita|governador|governadora|senador|senadora|deputado|deputada|presidente|atleta|jogador|jogadora|paratleta|cantor|cantora|ator|atriz|influenciadora|influenciador|motociclista|suspeito|vendedor|aluno|alunos|familia|família)\b/;
+  const articleGroupFocusPattern =
+    /\b(grupo|equipe|time|selecao|seleção|cerimonia|cerimônia|premiacao|premiação|reuniao|reunião|evento|acao|ação|campeonato|jogos|comunidades|indigenas|indígenas|alunos|familias|famílias)\b/;
+  const articlePortraitFocusPattern = /\b(retrato|posse|entrevista|discurso|falou|reuniao|reunião|alinhamento)\b/;
 
   const resolveArticleImageFocus = (article = {}, fallback = "center") => {
     const manualFocus = String(article.imageFocus || "").trim();
@@ -232,6 +257,19 @@
     const slug = String(article.slug || slugifyText(article.title || article.sourceLabel || "")).trim();
     if (slug && articleImageFocusOverridesBySlug[slug]) {
       return articleImageFocusOverridesBySlug[slug];
+    }
+
+    const haystack = normalizeText(
+      [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+    );
+    if (articlePortraitFocusPattern.test(haystack)) {
+      return "center 18%";
+    }
+    if (articlePersonFocusPattern.test(haystack) && articleGroupFocusPattern.test(haystack)) {
+      return "center 22%";
+    }
+    if (articlePersonFocusPattern.test(haystack)) {
+      return "center 20%";
     }
 
     return fallback;
