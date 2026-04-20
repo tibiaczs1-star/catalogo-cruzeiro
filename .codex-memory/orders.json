@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T06:06:02.246Z",
+  "lastUpdatedAt": "2026-04-20T06:12:22.686Z",
   "orders": [
     {
       "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
@@ -1723,6 +1723,21 @@
       "source": "chat",
       "rawRequest": "A entrada era um pop up, com os fundadores e luzes.",
       "summary": "Restaurar popup de entrada dos fundadores",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-corrigir-dashboard-pubpaid-505-e-botao-confirmar-deposito",
+      "createdAt": "2026-04-20T06:12:22.686Z",
+      "updatedAt": "2026-04-20T06:12:22.686Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Dashboard caiu de novo com 505; fiz deposito e nao deu para confirmar os creditos. Depois mudar 'avisa' para 'Confirmar meu deposito'.",
+      "summary": "Corrigir dashboard PubPaid 505 e botao Confirmar meu deposito",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

@@ -32,6 +32,21 @@ function getRequiredSecret(name, fallbackValue) {
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
 const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
+const GOOGLE_AUTH_CLIENT_ID = String(
+  process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
+).trim();
+const SITE_AUTH_SESSION_SECRET = String(
+  process.env.SITE_AUTH_SESSION_SECRET ||
+    process.env.PUBPAID_SESSION_SECRET ||
+    (IS_PRODUCTION ? "" : "catalogo-local-google-auth-session")
+).trim();
+const SITE_AUTH_COOKIE = "catalogo_google_session";
+const SITE_AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
+const GOOGLE_ID_TOKEN_CERTS_URL = "https://www.googleapis.com/oauth2/v1/certs";
+let googleIdTokenCertCache = {
+  certs: null,
+  expiresAt: 0
+};
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
@@ -72,6 +87,9 @@ const STORE_DEFAULTS = {
   ninjasProfiles: [],
   salesListings: [],
   vrRentalLeads: [],
+  pubpaidDeposits: [],
+  pubpaidWithdrawals: [],
+  pubpaidWallets: [],
   news: {
     updatedAt: null,
     online: false,
@@ -342,6 +360,248 @@ function safeEmail(value) {
   return ok ? email : "";
 }
 
+function base64UrlEncode(value) {
+  return Buffer.from(String(value || ""), "utf8")
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+function base64UrlToBuffer(value) {
+  const normalized = String(value || "").replace(/-/g, "+").replace(/_/g, "/");
+  const padding = normalized.length % 4;
+  const padded = padding ? normalized + "=".repeat(4 - padding) : normalized;
+  return Buffer.from(padded, "base64");
+}
+
+function parseJwtJson(part) {
+  return JSON.parse(base64UrlToBuffer(part).toString("utf8"));
+}
+
+function safeTimingCompare(left, right) {
+  const leftBuffer = Buffer.from(String(left || ""));
+  const rightBuffer = Buffer.from(String(right || ""));
+  if (leftBuffer.length !== rightBuffer.length) return false;
+  return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function isCatalogoGoogleAuthEnabled() {
+  return Boolean(GOOGLE_AUTH_CLIENT_ID && SITE_AUTH_SESSION_SECRET);
+}
+
+function parseCookies(req) {
+  const header = String(req?.headers?.cookie || "");
+  return header.split(";").reduce((cookies, part) => {
+    const divider = part.indexOf("=");
+    if (divider < 0) return cookies;
+    const key = part.slice(0, divider).trim();
+    const value = part.slice(divider + 1).trim();
+    if (!key) return cookies;
+    try {
+      cookies[key] = decodeURIComponent(value);
+    } catch (_error) {
+      cookies[key] = value;
+    }
+    return cookies;
+  }, {});
+}
+
+function serializeCookie(name, value, options = {}) {
+  const parts = [`${name}=${encodeURIComponent(value)}`];
+  if (options.maxAge !== undefined) parts.push(`Max-Age=${Number(options.maxAge) || 0}`);
+  if (options.path) parts.push(`Path=${options.path}`);
+  if (options.httpOnly) parts.push("HttpOnly");
+  if (options.secure) parts.push("Secure");
+  if (options.sameSite) parts.push(`SameSite=${options.sameSite}`);
+  return parts.join("; ");
+}
+
+function appendSetCookie(res, cookie) {
+  const current = res.getHeader("Set-Cookie");
+  if (!current) {
+    res.setHeader("Set-Cookie", cookie);
+    return;
+  }
+  const next = Array.isArray(current) ? current.concat(cookie) : [current, cookie];
+  res.setHeader("Set-Cookie", next);
+}
+
+function isSecureRequest(req) {
+  const forwardedProto = String(req?.headers?.["x-forwarded-proto"] || "").toLowerCase();
+  return forwardedProto.includes("https") || Boolean(req?.socket?.encrypted) || IS_PRODUCTION;
+}
+
+function createCatalogoAuthToken(user) {
+  const now = Date.now();
+  const payload = {
+    sub: safeString(user.sub, 120),
+    email: safeEmail(user.email),
+    name: safeString(user.name || user.givenName || "", 120),
+    givenName: safeString(user.givenName, 80),
+    familyName: safeString(user.familyName, 80),
+    picture: safeString(user.picture, 360),
+    iat: now,
+    exp: now + SITE_AUTH_MAX_AGE_SECONDS * 1000
+  };
+  const body = base64UrlEncode(JSON.stringify(payload));
+  const signature = base64UrlEncode(
+    crypto.createHmac("sha256", SITE_AUTH_SESSION_SECRET).update(body).digest()
+  );
+  return `${body}.${signature}`;
+}
+
+function readCatalogoAuthSession(req) {
+  if (!isCatalogoGoogleAuthEnabled()) return null;
+  const token = parseCookies(req)[SITE_AUTH_COOKIE];
+  if (!token || !token.includes(".")) return null;
+  const [body, signature] = token.split(".");
+  const expected = base64UrlEncode(
+    crypto.createHmac("sha256", SITE_AUTH_SESSION_SECRET).update(body).digest()
+  );
+  if (!safeTimingCompare(signature, expected)) return null;
+
+  try {
+    const payload = JSON.parse(base64UrlToBuffer(body).toString("utf8"));
+    if (!payload?.sub || !payload?.email) return null;
+    if (Number(payload.exp || 0) < Date.now()) return null;
+    return {
+      sub: safeString(payload.sub, 120),
+      email: safeEmail(payload.email),
+      name: safeString(payload.name, 120),
+      givenName: safeString(payload.givenName, 80),
+      familyName: safeString(payload.familyName, 80),
+      picture: safeString(payload.picture, 360)
+    };
+  } catch (_error) {
+    return null;
+  }
+}
+
+function publicAuthUser(user) {
+  if (!user) return null;
+  return {
+    sub: safeString(user.sub, 120),
+    email: safeEmail(user.email),
+    name: safeString(user.name, 120),
+    givenName: safeString(user.givenName, 80),
+    familyName: safeString(user.familyName, 80),
+    picture: safeString(user.picture, 360)
+  };
+}
+
+function setCatalogoAuthCookie(req, res, user) {
+  appendSetCookie(
+    res,
+    serializeCookie(SITE_AUTH_COOKIE, createCatalogoAuthToken(user), {
+      maxAge: SITE_AUTH_MAX_AGE_SECONDS,
+      path: "/",
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: isSecureRequest(req)
+    })
+  );
+}
+
+function clearCatalogoAuthCookie(req, res) {
+  appendSetCookie(
+    res,
+    serializeCookie(SITE_AUTH_COOKIE, "", {
+      maxAge: 0,
+      path: "/",
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: isSecureRequest(req)
+    })
+  );
+}
+
+async function fetchGoogleIdTokenCerts() {
+  if (googleIdTokenCertCache.certs && googleIdTokenCertCache.expiresAt > Date.now()) {
+    return googleIdTokenCertCache.certs;
+  }
+
+  const response = await fetch(GOOGLE_ID_TOKEN_CERTS_URL, {
+    headers: { Accept: "application/json" }
+  });
+  if (!response.ok) {
+    throw new Error("Nao foi possivel carregar as chaves publicas do Google.");
+  }
+
+  const certs = await response.json();
+  const cacheControl = String(response.headers.get("cache-control") || "");
+  const maxAgeMatch = cacheControl.match(/max-age=(\d+)/i);
+  const maxAgeMs = maxAgeMatch ? Number(maxAgeMatch[1]) * 1000 : 60 * 60 * 1000;
+  googleIdTokenCertCache = {
+    certs,
+    expiresAt: Date.now() + Math.max(5 * 60 * 1000, maxAgeMs - 60 * 1000)
+  };
+  return certs;
+}
+
+async function verifyGoogleIdToken(idToken) {
+  if (!isCatalogoGoogleAuthEnabled()) {
+    throw new Error("Login Google ainda nao esta configurado neste ambiente.");
+  }
+
+  const parts = String(idToken || "").split(".");
+  if (parts.length !== 3) {
+    throw new Error("Credencial Google invalida.");
+  }
+
+  const header = parseJwtJson(parts[0]);
+  const claims = parseJwtJson(parts[1]);
+  if (header.alg !== "RS256" || !header.kid) {
+    throw new Error("Assinatura Google nao reconhecida.");
+  }
+
+  const certs = await fetchGoogleIdTokenCerts();
+  const cert = certs?.[header.kid];
+  if (!cert) {
+    googleIdTokenCertCache = { certs: null, expiresAt: 0 };
+    throw new Error("Chave publica do Google nao encontrada.");
+  }
+
+  const verifier = crypto.createVerify("RSA-SHA256");
+  verifier.update(`${parts[0]}.${parts[1]}`);
+  verifier.end();
+  if (!verifier.verify(cert, base64UrlToBuffer(parts[2]))) {
+    throw new Error("Assinatura Google invalida.");
+  }
+
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  if (String(claims.aud || "") !== GOOGLE_AUTH_CLIENT_ID) {
+    throw new Error("Credencial Google emitida para outro aplicativo.");
+  }
+  if (!["accounts.google.com", "https://accounts.google.com"].includes(String(claims.iss || ""))) {
+    throw new Error("Emissor Google invalido.");
+  }
+  if (Number(claims.exp || 0) <= nowSeconds) {
+    throw new Error("Credencial Google expirada.");
+  }
+  if (!claims.sub) {
+    throw new Error("Credencial Google sem identificador.");
+  }
+  if (!claims.email) {
+    throw new Error("Credencial Google sem e-mail.");
+  }
+
+  const emailVerified = claims.email_verified === true || claims.email_verified === "true";
+  if (claims.email && !emailVerified) {
+    throw new Error("Confirme o e-mail no Google antes de continuar.");
+  }
+
+  return {
+    sub: safeString(claims.sub, 120),
+    email: safeEmail(claims.email),
+    name: safeString(claims.name, 120),
+    givenName: safeString(claims.given_name, 80),
+    familyName: safeString(claims.family_name, 80),
+    picture: safeString(claims.picture, 360),
+    emailVerified
+  };
+}
+
 function normalizeUrl(value) {
   const url = safeString(value, 500);
   if (!url) return "";
@@ -482,6 +742,133 @@ async function writeStore(key, data) {
 
 function buildId(prefix = "id") {
   return `${prefix}_${crypto.randomBytes(8).toString("hex")}`;
+}
+
+function normalizePubpaidAmount(value, fallback = 10) {
+  const amount = parseCurrency(value, fallback);
+  return Math.max(1, Math.min(1000, Number(amount.toFixed(2))));
+}
+
+function isPubpaidPendingStatus(status) {
+  return ["pendente-manual", "aguardando-confirmacao-pix", "pending", "em-analise"].includes(
+    safeString(status, 60).toLowerCase()
+  );
+}
+
+function getPubpaidWalletKey(user) {
+  const email = safeEmail(user?.email);
+  return email ? `email:${email}` : `sub:${safeString(user?.sub, 120) || "anon"}`;
+}
+
+function publicPubpaidUser(user) {
+  return publicAuthUser(user) || {
+    sub: "",
+    email: "",
+    name: "",
+    givenName: "",
+    familyName: "",
+    picture: ""
+  };
+}
+
+function summarizePubpaidDeposit(item = {}) {
+  return {
+    id: item.id || "",
+    createdAt: item.createdAt,
+    reviewDeadlineAt: item.reviewDeadlineAt,
+    email: item?.user?.email || "",
+    name: item?.user?.name || "",
+    depositorName: item.depositorName || item?.payment?.depositorName || "",
+    amount: item.amount || 0,
+    creditsRequested: item.creditsRequested || 0,
+    status: item.status || "",
+    paymentStatus: item?.payment?.status || "",
+    txid: item?.payment?.txid || item.reference || "",
+    sourcePage: item?.tracking?.pagePath || item.sourcePage || "",
+    ip: item?.tracking?.ip || ""
+  };
+}
+
+function summarizePubpaidWithdrawal(item = {}) {
+  return {
+    id: item.id || "",
+    createdAt: item.createdAt,
+    reviewDeadlineAt: item.reviewDeadlineAt,
+    email: item?.user?.email || "",
+    name: item?.user?.name || "",
+    amount: item.amount || 0,
+    status: item.status || "",
+    pixKey: item.pixKey || "",
+    txid: item.reference || item.txid || "",
+    sourcePage: item?.tracking?.pagePath || item.sourcePage || "",
+    ip: item?.tracking?.ip || ""
+  };
+}
+
+async function creditPubpaidWallet(user, credits, meta = {}) {
+  const amount = Math.max(0, Math.floor(Number(credits || 0)));
+  if (!amount) return null;
+  const wallets = await readStore("pubpaidWallets", []);
+  const walletKey = getPubpaidWalletKey(user);
+  const index = wallets.findIndex((item) => item.walletKey === walletKey);
+  const now = nowIso();
+  const current =
+    index >= 0
+      ? wallets[index]
+      : {
+          id: buildId("pubwallet"),
+          walletKey,
+          user: publicPubpaidUser(user),
+          balance: 0,
+          depositsApproved: 0,
+          withdrawalsApproved: 0,
+          locked: false,
+          createdAt: now
+        };
+  const next = {
+    ...current,
+    user: publicPubpaidUser(user),
+    balance: Math.max(0, Number(current.balance || 0) + amount),
+    depositsApproved: Number(current.depositsApproved || 0) + amount,
+    updatedAt: now,
+    lastDepositId: meta.depositId || current.lastDepositId || ""
+  };
+  if (index >= 0) wallets[index] = next;
+  else wallets.push(next);
+  await writeStore("pubpaidWallets", wallets);
+  return next;
+}
+
+async function getOrCreatePubpaidWallet(user) {
+  const wallets = await readStore("pubpaidWallets", []);
+  const walletKey = getPubpaidWalletKey(user);
+  const existing = wallets.find((item) => item.walletKey === walletKey);
+  if (existing) return existing;
+  const now = nowIso();
+  const wallet = {
+    id: buildId("pubwallet"),
+    walletKey,
+    user: publicPubpaidUser(user),
+    balance: 0,
+    depositsApproved: 0,
+    withdrawalsApproved: 0,
+    locked: false,
+    createdAt: now,
+    updatedAt: now
+  };
+  wallets.push(wallet);
+  await writeStore("pubpaidWallets", wallets);
+  return wallet;
+}
+
+async function updatePubpaidWallet(walletKey, updater) {
+  const wallets = await readStore("pubpaidWallets", []);
+  const index = wallets.findIndex((item) => item.walletKey === walletKey);
+  if (index < 0) return null;
+  const next = updater(wallets[index]);
+  wallets[index] = { ...next, updatedAt: nowIso() };
+  await writeStore("pubpaidWallets", wallets);
+  return wallets[index];
 }
 
 function stripHtml(text) {
@@ -836,6 +1223,54 @@ app.get("/api/health", (_req, res) => {
     service: "catalogo-czs-backend",
     time: nowIso()
   });
+});
+
+app.get("/api/auth/config", (_req, res) => {
+  res.json({
+    ok: true,
+    enabled: isCatalogoGoogleAuthEnabled(),
+    provider: "google",
+    clientId: isCatalogoGoogleAuthEnabled() ? GOOGLE_AUTH_CLIENT_ID : "",
+    requiredFor: ["newsletter", "fundadores", "pubpaid", "pagamentos"]
+  });
+});
+
+app.get("/api/auth/session", (req, res) => {
+  res.json({
+    ok: true,
+    enabled: isCatalogoGoogleAuthEnabled(),
+    user: publicAuthUser(readCatalogoAuthSession(req))
+  });
+});
+
+app.post("/api/auth/google", async (req, res) => {
+  try {
+    if (!isCatalogoGoogleAuthEnabled()) {
+      return res.status(503).json({
+        ok: false,
+        error: "Login Google ainda nao esta configurado neste ambiente."
+      });
+    }
+
+    const credential = safeString(req.body?.credential, 6000);
+    if (!credential) {
+      return res.status(400).json({ ok: false, error: "Credencial Google ausente." });
+    }
+
+    const user = await verifyGoogleIdToken(credential);
+    setCatalogoAuthCookie(req, res, user);
+    return res.json({ ok: true, user: publicAuthUser(user) });
+  } catch (error) {
+    return res.status(400).json({
+      ok: false,
+      error: safeString(error?.message || "Falha ao validar o login Google.", 240)
+    });
+  }
+});
+
+app.post("/api/auth/logout", (req, res) => {
+  clearCatalogoAuthCookie(req, res);
+  res.json({ ok: true });
 });
 
 app.post("/api/subscriptions", async (req, res) => {
@@ -1317,6 +1752,188 @@ app.get("/api/ninjas/pix", async (req, res) => {
   res.json({ ok: true, ...payload });
 });
 
+app.get("/api/pubpaid/deposit/pix", async (req, res) => {
+  const authUser = readCatalogoAuthSession(req);
+  if (!authUser) {
+    return res.status(401).json({
+      ok: false,
+      error: "Entre com Google para gerar o QR code de deposito."
+    });
+  }
+
+  try {
+    const amount = normalizePubpaidAmount(req.query.amount, 10);
+    const txid = normalizePixToken(req.query.txid || `PUB${Date.now()}`, 25);
+    const pix = await buildNinjasPixConfig({
+      amount,
+      txid,
+      description: req.query.description || "PubPaid Creditos"
+    });
+    return res.json({
+      ok: true,
+      amount,
+      credits: Math.floor(amount),
+      txid: pix.txid,
+      qrSvg: pix.qrSvg,
+      keyVisible: false,
+      confirmationMode: "manual"
+    });
+  } catch (error) {
+    const missingPix = String(error?.message || "") === "pix-key-not-configured";
+    return res.status(missingPix ? 503 : 500).json({
+      ok: false,
+      error: missingPix ? "Pix ainda nao configurado no servidor." : "Nao foi possivel gerar o QR do PubPaid."
+    });
+  }
+});
+
+app.post("/api/pubpaid/deposits", async (req, res) => {
+  const authUser = readCatalogoAuthSession(req);
+  if (!authUser) {
+    return res.status(401).json({
+      ok: false,
+      error: "Entre com Google para registrar o deposito."
+    });
+  }
+
+  const body = req.body || {};
+  const amount = normalizePubpaidAmount(body.amount, 10);
+  const txid = normalizePixToken(body.paymentTxid || body.txid || `PUB${Date.now()}`, 25) || `PUB${Date.now()}`;
+  const depositorName = safeString(body.depositorName || body.depositName || body.payerName || "", 90);
+  if (!depositorName || depositorName.length < 3) {
+    return res.status(400).json({
+      ok: false,
+      error: "Informe o nome de quem fez o Pix para a conferencia manual."
+    });
+  }
+
+  const deposits = await readStore("pubpaidDeposits", []);
+  const tracking = buildTrackingMeta(req, body);
+  const reviewDeadlineAt = new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString();
+  const item = {
+    id: buildId("pubdep"),
+    type: "pubpaid-deposito",
+    user: publicPubpaidUser(authUser),
+    depositorName,
+    walletKey: getPubpaidWalletKey(authUser),
+    amount,
+    creditsRequested: Math.floor(amount),
+    reference: txid,
+    payment: {
+      method: "pix-qr-code",
+      keyVisible: false,
+      txid,
+      depositorName,
+      status: "pendente-manual",
+      confirmationMode: "manual"
+    },
+    status: "pendente-manual",
+    reviewDeadlineAt,
+    tracking,
+    createdAt: nowIso()
+  };
+  const next = Array.isArray(deposits) ? deposits : [];
+  next.push(item);
+  await writeStore("pubpaidDeposits", next);
+
+  return res.status(201).json({
+    ok: true,
+    item,
+    message: "Deposito PubPaid registrado. Os creditos ficam pendentes por ate 3 horas ou ate a confirmacao manual no admin."
+  });
+});
+
+app.get("/api/pubpaid/account", async (req, res) => {
+  const authUser = readCatalogoAuthSession(req);
+  if (!authUser) {
+    return res.status(401).json({
+      ok: false,
+      error: "Entre com Google para abrir a carteira do PubPaid."
+    });
+  }
+
+  const wallet = await getOrCreatePubpaidWallet(authUser);
+  const deposits = await readStore("pubpaidDeposits", []);
+  const withdrawals = await readStore("pubpaidWithdrawals", []);
+  const walletKey = getPubpaidWalletKey(authUser);
+  const pendingDeposits = (Array.isArray(deposits) ? deposits : []).filter(
+    (item) => item.walletKey === walletKey && isPubpaidPendingStatus(item?.payment?.status || item?.status)
+  );
+  const pendingWithdrawals = (Array.isArray(withdrawals) ? withdrawals : []).filter(
+    (item) => item.walletKey === walletKey && isPubpaidPendingStatus(item?.payment?.status || item?.status)
+  );
+
+  return res.json({
+    ok: true,
+    user: publicPubpaidUser(authUser),
+    wallet: {
+      ...wallet,
+      balanceCoins: Math.floor(Number(wallet.balance || 0))
+    },
+    pending: {
+      deposits: pendingDeposits.length,
+      withdrawals: pendingWithdrawals.length
+    }
+  });
+});
+
+app.post("/api/pubpaid/withdrawals", async (req, res) => {
+  const authUser = readCatalogoAuthSession(req);
+  if (!authUser) {
+    return res.status(401).json({
+      ok: false,
+      error: "Entre com Google para pedir retirada."
+    });
+  }
+
+  const amount = Math.max(1, Math.floor(Number(req.body?.amount || 0)));
+  const wallet = await getOrCreatePubpaidWallet(authUser);
+  if (amount > Number(wallet.balance || 0)) {
+    return res.status(400).json({
+      ok: false,
+      error: "Saldo insuficiente para pedir retirada."
+    });
+  }
+
+  const walletKey = getPubpaidWalletKey(authUser);
+  const withdrawals = await readStore("pubpaidWithdrawals", []);
+  const item = {
+    id: buildId("pubwd"),
+    type: "pubpaid-retirada",
+    user: publicPubpaidUser(authUser),
+    walletKey,
+    amount,
+    status: "pendente-manual",
+    reference: normalizePixToken(req.body?.reference || `PUBWD${Date.now()}`, 25),
+    payment: {
+      method: "manual",
+      status: "pendente-manual",
+      confirmationMode: "manual"
+    },
+    reviewDeadlineAt: new Date(Date.now() + 3 * 60 * 60 * 1000).toISOString(),
+    tracking: buildTrackingMeta(req, req.body || {}),
+    createdAt: nowIso()
+  };
+  withdrawals.push(item);
+  await writeStore("pubpaidWithdrawals", withdrawals);
+
+  const nextWallet = await updatePubpaidWallet(walletKey, (current) => ({
+    ...current,
+    balance: Math.max(0, Number(current.balance || 0) - amount),
+    withdrawalsApproved: Number(current.withdrawalsApproved || 0)
+  }));
+
+  return res.status(201).json({
+    ok: true,
+    item,
+    wallet: {
+      ...nextWallet,
+      balanceCoins: Math.floor(Number(nextWallet?.balance || 0))
+    },
+    message: "Retirada PubPaid enviada para confirmacao manual."
+  });
+});
+
 app.post("/api/ninjas/requests", async (req, res) => {
   const service = safeString(req.body.service || req.body.requestTitle || req.body.requestType, 140);
   const phone = safeString(req.body.phone || req.body.whatsapp || req.body.contactPhone, 32).replace(/[^\d()+\-\s]/g, "");
@@ -1440,6 +2057,9 @@ app.get("/api/admin/dashboard", async (req, res) => {
   const ninjasProfiles = await readStore("ninjasProfiles", []);
   const salesListings = await readStore("salesListings", []);
   const vrRentalLeads = await readStore("vrRentalLeads", []);
+  const pubpaidDeposits = await readStore("pubpaidDeposits", []);
+  const pubpaidWithdrawals = await readStore("pubpaidWithdrawals", []);
+  const pubpaidWallets = await readStore("pubpaidWallets", []);
   const storageInfo = store.describe();
 
   const inRange = (dateStr) => {
@@ -1459,6 +2079,15 @@ app.get("/api/admin/dashboard", async (req, res) => {
   const ninjasProfilesR = (Array.isArray(ninjasProfiles) ? ninjasProfiles : []).filter((item) => inRange(item.createdAt));
   const salesListingsR = (Array.isArray(salesListings) ? salesListings : []).filter((item) => inRange(item.createdAt));
   const vrRentalLeadsR = (Array.isArray(vrRentalLeads) ? vrRentalLeads : []).filter((item) => inRange(item.createdAt));
+  const pubpaidDepositsR = (Array.isArray(pubpaidDeposits) ? pubpaidDeposits : []).filter((item) => inRange(item.createdAt));
+  const pubpaidWithdrawalsR = (Array.isArray(pubpaidWithdrawals) ? pubpaidWithdrawals : []).filter((item) => inRange(item.createdAt));
+  const pubpaidWalletsR = Array.isArray(pubpaidWallets) ? pubpaidWallets : [];
+  const pendingPubpaidDeposits = pubpaidDepositsR.filter((item) =>
+    isPubpaidPendingStatus(item?.payment?.status || item?.status)
+  );
+  const pendingPubpaidWithdrawals = pubpaidWithdrawalsR.filter((item) =>
+    isPubpaidPendingStatus(item?.payment?.status || item?.status)
+  );
 
   const uniqueVisitors = new Set(visitsR.map((item) => item.visitorId).filter(Boolean));
   const uniqueSessions = new Set(visitsR.map((item) => item.sessionId).filter(Boolean));
@@ -1584,6 +2213,21 @@ app.get("/api/admin/dashboard", async (req, res) => {
     city: item.city || ""
   }));
 
+  const pubpaidRecentDeposits = sortByDateDesc(pubpaidDepositsR, "createdAt", 12).map(summarizePubpaidDeposit);
+  const pubpaidRecentWithdrawals = sortByDateDesc(pubpaidWithdrawalsR, "createdAt", 12).map(summarizePubpaidWithdrawal);
+  const pubpaidPendingDeposits = sortByDateDesc(pendingPubpaidDeposits, "createdAt", 50).map(summarizePubpaidDeposit);
+  const pubpaidPendingWithdrawals = sortByDateDesc(pendingPubpaidWithdrawals, "createdAt", 50).map(summarizePubpaidWithdrawal);
+  const pubpaidWalletRows = sortByDateDesc(pubpaidWalletsR, "updatedAt", 50).map((item) => ({
+    walletKey: item.walletKey || "",
+    email: item?.user?.email || "",
+    name: item?.user?.name || "",
+    balance: item.balance || 0,
+    locked: Boolean(item.locked),
+    depositsApproved: item.depositsApproved || 0,
+    withdrawalsApproved: item.withdrawalsApproved || 0,
+    updatedAt: item.updatedAt || item.createdAt
+  }));
+
   const collectionInventory = [
     ["visits", "Acessos e paginas vistas", visitsR.length, "analytics-client.js -> /api/analytics/visit"],
     ["heartbeats", "Tempo de permanencia", hbR.length, "analytics-client.js -> /api/analytics/heartbeat"],
@@ -1593,7 +2237,10 @@ app.get("/api/admin/dashboard", async (req, res) => {
     ["ninjasRequests", "Pedidos Ninjas de clientes", ninjasRequestsR.length, "ninjas.html -> /api/ninjas/requests"],
     ["ninjasProfiles", "Curriculos e trabalhadores Ninjas", ninjasProfilesR.length, "ninjas.html -> /api/ninjas/profiles"],
     ["salesListings", "Pagina filha de vendas", salesListingsR.length, "vendas.html -> /api/sales/listings"],
-    ["vrRentalLeads", "Pedidos de aluguel VR", vrRentalLeadsR.length, "games.html popup -> /api/vr-rental/leads"]
+    ["vrRentalLeads", "Pedidos de aluguel VR", vrRentalLeadsR.length, "games.html popup -> /api/vr-rental/leads"],
+    ["pubpaidDeposits", "Depositos PubPaid", pubpaidDepositsR.length, "pubpaid.html -> /api/pubpaid/deposits"],
+    ["pubpaidWithdrawals", "Retiradas PubPaid", pubpaidWithdrawalsR.length, "pubpaid.html -> /api/pubpaid/withdrawals"],
+    ["pubpaidWallets", "Carteiras PubPaid", pubpaidWalletsR.length, "PubPaid creditos manuais"]
   ].map(([key, label, total, source]) => ({
     key,
     label,
@@ -1623,7 +2270,12 @@ app.get("/api/admin/dashboard", async (req, res) => {
       ninjasRequests: ninjasRequestsR.length,
       ninjasProfiles: ninjasProfilesR.length,
       salesListings: salesListingsR.length,
-      vrRentalLeads: vrRentalLeadsR.length
+      vrRentalLeads: vrRentalLeadsR.length,
+      pubpaidDeposits: pubpaidDepositsR.length,
+      pubpaidWithdrawals: pubpaidWithdrawalsR.length,
+      pubpaidWallets: pubpaidWalletsR.length,
+      pubpaidPendingDeposits: pendingPubpaidDeposits.length,
+      pubpaidPendingWithdrawals: pendingPubpaidWithdrawals.length
     },
     engagement: {
       avgHeartbeatSec: Number(avgHeartbeat.toFixed(2)),
@@ -1651,6 +2303,11 @@ app.get("/api/admin/dashboard", async (req, res) => {
     recentNinjasProfiles,
     recentSalesListings,
     recentVrRentalLeads,
+    pubpaidPendingDeposits,
+    pubpaidPendingWithdrawals,
+    pubpaidRecentDeposits,
+    pubpaidRecentWithdrawals,
+    pubpaidWallets: pubpaidWalletRows,
     collectionInventory
   });
 });
@@ -1668,6 +2325,9 @@ app.get("/api/admin/raw/:key", async (req, res) => {
     "ninjasProfiles",
     "salesListings",
     "vrRentalLeads",
+    "pubpaidDeposits",
+    "pubpaidWithdrawals",
+    "pubpaidWallets",
     "news"
   ]);
 
@@ -1697,6 +2357,66 @@ app.get("/api/admin/raw/:key", async (req, res) => {
     key,
     data
   });
+});
+
+app.post("/api/admin/pubpaid/deposits/review", async (req, res) => {
+  const id = safeString(req.body?.id, 80);
+  const approve = safeString(req.body?.decision || req.body?.status, 40).toLowerCase() === "approve";
+  if (!id) return res.status(400).json({ ok: false, error: "ID do deposito ausente." });
+
+  const deposits = await readStore("pubpaidDeposits", []);
+  const index = deposits.findIndex((item) => String(item?.id || "") === id);
+  if (index < 0) return res.status(404).json({ ok: false, error: "Deposito PubPaid nao encontrado." });
+  const current = deposits[index];
+  if (!isPubpaidPendingStatus(current?.payment?.status || current?.status)) {
+    return res.status(400).json({ ok: false, error: "Esse deposito ja foi revisado." });
+  }
+
+  const nextItem = {
+    ...current,
+    status: approve ? "creditos-liberados" : "deposito-rejeitado",
+    payment: {
+      ...(current.payment || {}),
+      status: approve ? "confirmado-manual" : "rejeitado-manual"
+    },
+    reviewedAt: nowIso(),
+    reviewedBy: "admin",
+    reviewNote: safeString(req.body?.note, 240)
+  };
+  deposits[index] = nextItem;
+  await writeStore("pubpaidDeposits", deposits);
+
+  let wallet = null;
+  if (approve) {
+    wallet = await creditPubpaidWallet(current.user, current.creditsRequested || current.amount || 0, {
+      depositId: current.id
+    });
+  }
+
+  return res.json({ ok: true, item: nextItem, wallet });
+});
+
+app.post("/api/admin/pubpaid/withdrawals/review", async (req, res) => {
+  const id = safeString(req.body?.id, 80);
+  if (!id) return res.status(400).json({ ok: false, error: "ID da retirada ausente." });
+
+  const withdrawals = await readStore("pubpaidWithdrawals", []);
+  const index = withdrawals.findIndex((item) => String(item?.id || "") === id);
+  if (index < 0) return res.status(404).json({ ok: false, error: "Retirada PubPaid nao encontrada." });
+  const approve = safeString(req.body?.decision || req.body?.status, 40).toLowerCase() === "approve";
+  withdrawals[index] = {
+    ...withdrawals[index],
+    status: approve ? "retirada-liberada" : "retirada-rejeitada",
+    payment: {
+      ...(withdrawals[index].payment || {}),
+      status: approve ? "confirmado-manual" : "rejeitado-manual"
+    },
+    reviewedAt: nowIso(),
+    reviewedBy: "admin",
+    reviewNote: safeString(req.body?.note, 240)
+  };
+  await writeStore("pubpaidWithdrawals", withdrawals);
+  return res.json({ ok: true, item: withdrawals[index] });
 });
 
 app.get("/api/admin/reports/access.csv", async (_req, res) => {
@@ -1801,6 +2521,57 @@ app.get("/api/admin/reports/subscriptions.csv", async (_req, res) => {
 
   res.setHeader("Content-Type", "text/csv; charset=utf-8");
   res.setHeader("Content-Disposition", "attachment; filename=assinaturas_catalogo_czs.csv");
+  res.send(toCsv(rows));
+});
+
+app.get("/api/admin/reports/pubpaid-deposits.csv", async (_req, res) => {
+  const deposits = await readStore("pubpaidDeposits", []);
+  const rows = (Array.isArray(deposits) ? deposits : []).map((item) => ({
+    createdAt: item.createdAt,
+    player: item.user?.name || item.name,
+    email: item.user?.email || item.email,
+    depositorName: item.depositorName || item.payment?.depositorName,
+    amount: item.amount,
+    creditsRequested: item.creditsRequested,
+    status: item.status,
+    paymentStatus: item.payment?.status,
+    txid: item.payment?.txid,
+    reference: item.reference,
+    reviewedAt: item.reviewedAt,
+    reviewedBy: item.reviewedBy,
+    reviewNote: item.reviewNote,
+    sourcePage: item.tracking?.pagePath || item.sourcePage,
+    ip: item.tracking?.ip
+  }));
+
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", "attachment; filename=pubpaid_depositos.csv");
+  res.send(toCsv(rows));
+});
+
+app.get("/api/admin/reports/pubpaid-withdrawals.csv", async (_req, res) => {
+  const withdrawals = await readStore("pubpaidWithdrawals", []);
+  const rows = (Array.isArray(withdrawals) ? withdrawals : []).map(summarizePubpaidWithdrawal);
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", "attachment; filename=pubpaid_retiradas.csv");
+  res.send(toCsv(rows));
+});
+
+app.get("/api/admin/reports/pubpaid-wallets.csv", async (_req, res) => {
+  const wallets = await readStore("pubpaidWallets", []);
+  const rows = (Array.isArray(wallets) ? wallets : []).map((item) => ({
+    walletKey: item.walletKey,
+    player: item.user?.name,
+    email: item.user?.email,
+    balance: item.balance,
+    depositsApproved: item.depositsApproved,
+    withdrawalsApproved: item.withdrawalsApproved,
+    locked: item.locked,
+    updatedAt: item.updatedAt,
+    createdAt: item.createdAt
+  }));
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", "attachment; filename=pubpaid_carteiras.csv");
   res.send(toCsv(rows));
 });
 

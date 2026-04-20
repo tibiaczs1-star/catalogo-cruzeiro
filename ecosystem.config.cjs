@@ -10,6 +10,8 @@ module.exports = {
       env: {
         NODE_ENV: "production",
         PORT: 3000,
+        GOOGLE_AUTH_CLIENT_ID: process.env.GOOGLE_AUTH_CLIENT_ID,
+        SITE_AUTH_SESSION_SECRET: process.env.SITE_AUTH_SESSION_SECRET,
       },
     },
     {
@@ -25,4 +27,3 @@ module.exports = {
     },
   ],
 };
-
