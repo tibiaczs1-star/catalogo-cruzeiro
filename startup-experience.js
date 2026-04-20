@@ -71,11 +71,7 @@
       return true;
     }
 
-    try {
-      return sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1";
-    } catch (_error) {
-      return false;
-    }
+    return false;
   }
 
   function connectionPrefersLite() {
@@ -570,7 +566,7 @@
     const phone = options.phone === true;
     const modal = document.createElement("section");
     modal.id = MODAL_ID;
-    modal.className = `catalogo-welcome${compact ? " is-compact" : ""}${phone ? " is-phone is-cookie-only" : ""}`;
+    modal.className = `catalogo-welcome${compact ? " is-compact" : ""}${phone ? " is-phone" : ""}`;
     modal.setAttribute("aria-hidden", "true");
     modal.innerHTML = `
       <article
@@ -579,7 +575,7 @@
         aria-modal="true"
         aria-labelledby="catalogoWelcomeTitle"
       >
-        ${phone ? "" : buildWelcomeVisualMarkup({ compact })}
+        ${buildWelcomeVisualMarkup({ compact, phone })}
         <div class="catalogo-welcome-copy">
           <div class="catalogo-compact-banner" aria-hidden="true">
             <span class="catalogo-compact-dot"></span>
@@ -587,6 +583,7 @@
           </div>
           ${buildWelcomeCopyMarkup()}
         </div>
+        ${buildFounderThanksMarkup()}
       </article>
     `;
 
@@ -703,7 +700,19 @@
 
           rememberWelcomeAcceptedThisSession();
           dispatchConsent(true);
-          closeWelcomeModal(modal);
+          modal.classList.add("is-thanking");
+          const stopFounderOpening = startFounderOpening(modal);
+          modal.__stopFounderOpening = stopFounderOpening;
+
+          const thanksDuration = modal.classList.contains("is-phone")
+            ? THANKS_SCREEN_MS_PHONE
+            : modal.classList.contains("is-compact")
+              ? THANKS_SCREEN_MS_COMPACT
+              : THANKS_SCREEN_MS;
+
+          window.setTimeout(() => {
+            closeWelcomeModal(modal);
+          }, thanksDuration);
         });
 
         window.setTimeout(() => {

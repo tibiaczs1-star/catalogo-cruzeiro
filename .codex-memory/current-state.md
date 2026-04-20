@@ -1,17 +1,16 @@
 # Current State
 
-Updated: 2026-04-20T06:02:38.282Z
+Updated: 2026-04-20T06:06:02.246Z
 
 ## Active Goal
 
-- Entrada dos patrocinadores visivel
+- Popup de entrada dos fundadores restaurado
 
 ## Summary
 
-Home agora tem card explicito "Entrada dos patrocinadores" abaixo da hero e card proprio na secao #monetizacao; botoes abrem o formulario de contato com assunto/mensagem comercial pre-preenchidos e index.html usa styles.css?v=20260420sponsorentry.
+O popup inicial de fundadores/luzes voltou a abrir na home em refresh normal: startup-experience.js nao pula mais a abertura por aceite salvo em sessionStorage, mantendo a tela de homenagem dos fundadores apos aceitar; index.html usa startup-experience.css/js?v=20260420founderpopup.
 
 ## Next
 
-- Deployar e testar na home com refresh forte
-- clicar em Entrar como patrocinador
-- confirmar modal com assunto e mensagem preenchidos.
+- Deployar e testar na home com refresh forte.
+- Aceitar o popup e confirmar que a tela de fundadores com luzes aparece antes de entrar na home.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T06:02:38.282Z",
+  "lastUpdatedAt": "2026-04-20T06:06:02.246Z",
   "orders": [
     {
       "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
@@ -1708,6 +1708,21 @@
       "source": "chat",
       "rawRequest": "A entrada dos patrocinadores nao apareceu ainda.",
       "summary": "Corrigir entrada dos patrocinadores na home",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-restaurar-popup-de-entrada-dos-fundadores",
+      "createdAt": "2026-04-20T06:06:02.246Z",
+      "updatedAt": "2026-04-20T06:06:02.246Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "A entrada era um pop up, com os fundadores e luzes.",
+      "summary": "Restaurar popup de entrada dos fundadores",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
