@@ -1,17 +1,16 @@
 # Current State
 
-Updated: 2026-04-20T06:48:00.000Z
+Updated: 2026-04-20T09:45:52.239Z
 
 ## Active Goal
 
-- Integrar o jogo Palavras da Rosa ao jornal com acesso lateral elegante
+- Popup de cookies por sessao
 
 ## Summary
 
-Nova pagina `palavras-da-rosa.html` criada com jogo de palavras cruzadas tematico em rosa, cronometro, dicas, modal de vitoria e mensagem de homenagem. A home agora ganhou um card lateral esquerdo rosa com CTA para abrir o jogo. `server.js` recebeu metadata/SEO da nova pagina e o smoke test local confirmou `GET /` com o card visivel e `GET /palavras-da-rosa.html` com o tabuleiro carregando.
+startup-experience.js agora usa marcador de sessao do navegador para o popup e limpa consentimentos persistentes antigos, mantendo o aceite em F5 e pedindo de novo apenas apos fechar o navegador.
 
 ## Next
 
-- Validar visualmente o card rosa na lateral esquerda em desktop e mobile.
-- Fazer deploy quando o usuario pedir acesso publicado.
-- Se o usuario quiser, refinar o tabuleiro para um crossword mais denso com mais cruzamentos reais.
+- Validar em navegador real: aceitar
+- dar F5 e confirmar que nao reabre; depois fechar o navegador e confirmar que volta a pedir consentimento.

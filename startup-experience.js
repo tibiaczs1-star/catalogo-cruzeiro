@@ -8,7 +8,15 @@
   const THANKS_SCREEN_MS = 5000;
   const THANKS_SCREEN_MS_COMPACT = 3600;
   const THANKS_SCREEN_MS_PHONE = 6800;
+  const CONSENT_KEY = "catalogo_lgpd_consent_v1";
+  const CONSENT_COOKIE = "catalogo_tracking_consent";
+  const COOKIE_MAX_AGE_DAYS = 180;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
+  const WELCOME_SESSION_COOKIE = "catalogo_terms_welcome_session_v1";
+  const LEGACY_WELCOME_ACCEPT_KEYS = [
+    "catalogo_terms_welcome_accepted_v1",
+    "catalogo_terms_welcome_accepted_v2"
+  ];
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
@@ -35,6 +43,70 @@
       localStorage.removeItem("catalogo_lgpd_consent_v3");
     } catch (_error) {
       // ignore storage failures
+    }
+  }
+
+  function clearLocalItem(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+
+  function setCookie(name, value, options = {}) {
+    let cookie = `${name}=${encodeURIComponent(value)}; path=${options.path || "/"}; SameSite=${options.sameSite || "Lax"}`;
+
+    if (typeof options.days === "number") {
+      const expiresAt = new Date(Date.now() + options.days * 24 * 60 * 60 * 1000);
+      cookie += `; Expires=${expiresAt.toUTCString()}`;
+    }
+
+    if (options.secure || location.protocol === "https:") {
+      cookie += "; Secure";
+    }
+
+    document.cookie = cookie;
+  }
+
+  function getCookie(name) {
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const match = document.cookie.match(new RegExp(`(?:^|; )${escaped}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : "";
+  }
+
+  function clearCookie(name) {
+    document.cookie = `${name}=; path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=Lax`;
+  }
+
+  function persistConsentState(state) {
+    if (state !== "accepted" && state !== "rejected") {
+      return;
+    }
+
+    clearLocalItem(CONSENT_KEY);
+    setCookie(CONSENT_COOKIE, state);
+  }
+
+  function rememberWelcomeAcceptedThisBrowserSession() {
+    setCookie(WELCOME_SESSION_COOKIE, "1");
+  }
+
+  function hasAcceptedWelcomeInThisBrowserSession() {
+    return getCookie(WELCOME_SESSION_COOKIE) === "1";
+  }
+
+  function resetConsentForNewBrowserSession() {
+    if (hasAcceptedWelcomeInThisBrowserSession()) {
+      return;
+    }
+
+    clearStoredConsent();
+    clearLocalItem(CONSENT_KEY);
+    clearCookie(CONSENT_COOKIE);
+
+    for (const key of LEGACY_WELCOME_ACCEPT_KEYS) {
+      clearLocalItem(key);
     }
   }
 
@@ -69,6 +141,18 @@
   function shouldSkipWelcomeModal() {
     if (window.__CATALOGO_SKIP_HOME_WELCOME__ === true) {
       return true;
+    }
+
+    if (hasAcceptedWelcomeInThisBrowserSession()) {
+      return true;
+    }
+
+    try {
+      if (sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1") {
+        return true;
+      }
+    } catch (_error) {
+      // ignore storage failures
     }
 
     return false;
@@ -655,6 +739,8 @@
   }
 
   ready(() => {
+    resetConsentForNewBrowserSession();
+
     if (shouldSkipWelcomeModal()) {
       removeLegacyConsentBanner();
       const oldModal = document.getElementById(MODAL_ID);
@@ -664,8 +750,6 @@
       dispatchIntroFinished();
       return;
     }
-
-    clearStoredConsent();
 
     whenSiteReady(() => {
       runWhenBrowserIsIdle(() => {
@@ -698,7 +782,10 @@
             return;
           }
 
+          clearStoredConsent();
+          persistConsentState("accepted");
           rememberWelcomeAcceptedThisSession();
+          rememberWelcomeAcceptedThisBrowserSession();
           dispatchConsent(true);
           modal.classList.add("is-thanking");
           const stopFounderOpening = startFounderOpening(modal);

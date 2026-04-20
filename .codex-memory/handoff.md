@@ -1,10 +1,11 @@
 # Handoff
 
-Updated: 2026-04-20T06:48:00.000Z
+Updated: 2026-04-20T09:45:52.239Z
 
-Integrado o jogo `palavras-da-rosa.html` ao portal. A home recebeu um card lateral esquerdo em rosa com CTA "Palavras Cruzadas" e texto de singela homenagem; `server.js` agora indexa a pagina nova no bloco de SEO/static pages. Validacao local: `GET /` retornou 200 com `hasCard=True` e `GET /palavras-da-rosa.html` retornou 200 com `hasGrid=True`.
+Popup de cookies ajustado para uma vez por sessao do navegador. O aceite agora cria cookie de sessao catalogo_terms_welcome_session_v1, mantem o portal liberado no F5 e limpa consentimentos persistentes antigos para o pedido voltar so quando o navegador for fechado e aberto novamente.
 
 ## Next
 
-- Se o usuario pedir publicacao, subir deploy com `index.html`, `styles.css`, `server.js` e `palavras-da-rosa.html`.
-- Se quiser mais capricho, melhorar a malha do crossword para mais palavras cruzadas de verdade no mesmo tema.
+- Conferir em navegador real o ciclo completo: aceitar
+- F5 sem popup
+- fechar navegador e reabrir com popup novamente.
