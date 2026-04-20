@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-20T06:19:49.752Z",
+  "updatedAt": "2026-04-20T11:41:00.571Z",
   "online": true,
   "items": [
     {
@@ -121,6 +121,61 @@
       "imageUrl": "",
       "publishedAt": "2026-04-17T10:00:00.000Z",
       "collectedAt": "2026-04-20T06:19:49.202Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hYzI0aG9yYXMuY29t",
+      "title": "Rio Acre atinge 10,75 metros e segue em elevação, aponta Defesa Civil",
+      "summary": "",
+      "url": "https://ac24horas.com/2026/04/20/rio-acre-atinge-1075-metros-e-segue-em-elevacao-aponta-defesa-civil/",
+      "source": "ac24horas",
+      "date": "2026-04-20T11:25:10.000Z",
+      "category": "Cotidiano",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-20T11:41:00.570Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hZ2VuY2lhYnJhc2ls",
+      "title": "Caixa paga Bolsa Família a beneficiários com NIS de final 3",
+      "summary": "",
+      "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/caixa-paga-bolsa-familia-beneficiarios-com-nis-de-final-3",
+      "source": "Agência Brasil - Últimas",
+      "date": "2026-04-20T10:14:00.000Z",
+      "category": "Cotidiano",
+      "location": "Brasil",
+      "createdAt": "2026-04-20T11:40:57.577Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hYzI0YWdyby5jb20v",
+      "title": "Arroba segue pressionada no Acre e limita rentabilidade do pecuarista",
+      "summary": "Relação de troca mais baixa indica reposição relativamente acessível, mas revela desvalorização do mercado local O mercado do boi gordo no Acre atravessa um momento de pressão nos preços da arroba, refletindo diretamente na rentabilidade dos pecuaristas e no equilíbrio entre vend",
+      "url": "https://ac24agro.com/2026/04/20/arroba-segue-pressionada-no-acre-e-limita-rentabilidade-do-pecuarista/",
+      "source": "ac24horas",
+      "date": "2026-04-20T10:05:26.000Z",
+      "category": "Cotidiano",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-20T11:41:00.571Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9nMS5nbG9iby5jb20v",
+      "title": "Dia dos Povos Indígenas: Debates, cultura e articulação compõem programação em Rio Branco",
+      "summary": "",
+      "url": "https://g1.globo.com/ac/acre/noticia/2026/04/20/dia-dos-povos-indigenas-debates-cultura-e-articulacao-compoem-programacao-em-rio-branco.ghtml",
+      "source": "g1 Acre",
+      "date": "2026-04-20T10:00:42.000Z",
+      "category": "Cotidiano",
+      "location": "Brasil",
+      "createdAt": "2026-04-20T11:40:59.397Z"
+    },
+    {
+      "id": "aHR0cHM6Ly9hZ2VuY2lhLmFjLmdv",
+      "title": "Governo do Acre transforma a realidade de famílias atípicas em Acrelândia",
+      "summary": "",
+      "url": "https://agencia.ac.gov.br/governo-do-acre-transforma-a-realidade-de-familias-atipicas-em-acrelandia/",
+      "source": "Agência de Notícias do Acre",
+      "date": "2026-04-19T14:21:32.000Z",
+      "category": "Política",
+      "location": "Acre / Cruzeiro do Sul",
+      "createdAt": "2026-04-20T11:40:59.947Z"
     }
   ]
 }
