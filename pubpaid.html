@@ -40,6 +40,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./pubpaid.css?v=20260419authpay" />
+    <link rel="stylesheet" href="./solid-surfaces.css?v=20260419solidfinal" />
   </head>
   <body class="pubpaid-page" data-office-command-mode="embedded">
     <div class="pubpaid-shell">
@@ -89,66 +90,58 @@
         </div>
       </header>
 
-      <section class="site-demo-notice" aria-label="Aviso de demonstração visual">
-        <span>Modo valendo</span>
-        <strong>Não existe mais crédito grátis.</strong>
-        <p>Todo acesso ao salão depende de conta Google e saldo liberado manualmente após depósito.</p>
-      </section>
-
       <main class="pubpaid-main">
         <section class="pubpaid-world" id="saloon">
           <div class="pubpaid-world-copy">
             <p class="pubpaid-eyebrow">bar em pixel art</p>
-            <h1>Entre no PubPaid e descubra se a sua noite vai ser tranquila ou lendária.</h1>
+            <h1>PubPaid</h1>
             <p class="pubpaid-lead">
-              Do lado de fora, a fachada já chama. Lá dentro, o salão aceso reúne música,
-              conversa, NPCs vivos, palco, jukebox, mesas rápidas com rivais e uma loja premium
-              para quem quer esticar a noite.
+              Entre primeiro pela splash do jogo. Depois do login Google o salão abre ocupando a tela principal.
             </p>
             <div class="pubpaid-world-flags" aria-label="Assinatura da experiencia">
-              <span>fachada neon</span>
-              <span>salão aberto</span>
-              <span>mesa rápida</span>
-              <span>loja premium</span>
-              <span>time nerd ativo</span>
+              <span>entrada oficial</span>
+              <span>login google</span>
+              <span>modo demo</span>
+              <span>salão em tela cheia</span>
             </div>
 
-            <div class="pubpaid-entry-flow" aria-label="Fluxo de entrada do jogo">
-              <div class="pubpaid-entry-steps">
-                <article class="pubpaid-entry-step">
-                  <span>01</span>
-                  <strong>Conecte seu Google</strong>
-                  <p>Seu saldo, depósito, saque e histórico ficam ligados a uma conta real.</p>
-                </article>
-                <article class="pubpaid-entry-step">
-                  <span>02</span>
-                  <strong>Monte o avatar</strong>
-                  <p>Escolha nome, estilo e mesa favorita antes de abrir o salão valendo.</p>
-                </article>
-                <article class="pubpaid-entry-step">
-                  <span>03</span>
-                  <strong>Entre no game full tela</strong>
-                  <p>Ao entrar, a apresentação some e o PubPaid toma a tela inteira com o painel dentro do jogo.</p>
-                </article>
+            <div class="pubpaid-splash-card" data-google-auth-card aria-label="Entrada principal do PubPaid">
+              <div class="pubpaid-splash-copy">
+                <span class="pubpaid-splash-kicker">bitmap de entrada</span>
+                <strong data-google-auth-status>Entre com Google para jogar</strong>
+                <p data-google-auth-email>
+                  Google libera personagem, saldo, depósito e histórico. Sem Google você entra só no modo demo.
+                </p>
               </div>
-
-              <div class="pubpaid-entry-actions">
+              <div class="pubpaid-splash-actions">
+                <div class="pubpaid-google-button" data-google-auth-button></div>
+                <button class="pubpaid-button outline" type="button" data-google-auth-logout hidden>
+                  Sair do Google
+                </button>
                 <button class="pubpaid-button solid" type="button" data-enter-game>
-                  Entrar no game
+                  Entrar com Google
                 </button>
-                <a class="pubpaid-button outline" href="#perfil">Ver login, valores e carteira</a>
-                <button class="pubpaid-button outline" type="button" data-open-profile>
-                  Montar avatar
+                <button class="pubpaid-button outline" type="button" data-enter-demo>
+                  Entrar só na demo
+                </button>
+                <button class="pubpaid-button ghost" type="button" data-open-tutorial>
+                  Ver como funciona
                 </button>
               </div>
-
               <p class="pubpaid-entry-caption">
-                O salão agora abre em duas etapas: primeiro a vitrine da noite, depois o jogo em tela cheia.
+                A carteira real aparece só para quem entrou com Google. A demo abre o salão sem Pix nem depósito.
               </p>
             </div>
           </div>
 
           <div class="pubpaid-world-stage">
+            <div class="pubpaid-splash-bitmap" aria-hidden="true">
+              <div class="pubpaid-splash-bitmap-copy">
+                <span>noite aberta</span>
+                <strong>PUBPAID</strong>
+                <small>Entre pela conta Google ou rode só a demo.</small>
+              </div>
+            </div>
             <canvas
               class="pubpaid-scene-canvas"
               data-scene-canvas
@@ -305,13 +298,17 @@
             </div>
 
             <div class="pubpaid-google-card" data-google-auth-card>
-              <span>login obrigatorio</span>
-              <strong data-google-auth-status>Entre com Google para jogar</strong>
-              <p data-google-auth-email>Seu personagem, depositos e saldo ficam ligados a uma conta identificada.</p>
-              <div class="pubpaid-google-button" data-google-auth-button></div>
-              <button class="pubpaid-button outline" type="button" data-google-auth-logout hidden>
-                Sair do Google
-              </button>
+              <div class="pubpaid-google-copy">
+                <span>login obrigatorio</span>
+                <strong data-google-auth-status>Entre com Google para jogar</strong>
+                <p data-google-auth-email>Seu personagem, depositos e saldo ficam ligados a uma conta identificada.</p>
+              </div>
+              <div class="pubpaid-google-actions">
+                <div class="pubpaid-google-button" data-google-auth-button></div>
+                <button class="pubpaid-button outline" type="button" data-google-auth-logout hidden>
+                  Sair do Google
+                </button>
+              </div>
             </div>
 
             <div class="pubpaid-stats-grid" aria-label="Resumo da noite">

@@ -1158,6 +1158,69 @@ body.catalogo-lock-scroll {
   max-height: 96px;
 }
 
+.catalogo-welcome.is-cookie-only {
+  place-items: center;
+  padding: 14px;
+  background:
+    radial-gradient(circle at top, rgba(97, 166, 255, 0.14), transparent 26%),
+    rgba(7, 18, 34, 0.84);
+  backdrop-filter: blur(10px);
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-welcome-card {
+  width: min(560px, calc(100vw - 24px));
+  grid-template-columns: 1fr;
+  border-radius: 22px;
+  border: 1px solid rgba(150, 205, 255, 0.28);
+  background:
+    radial-gradient(circle at top right, rgba(157, 214, 255, 0.16), transparent 28%),
+    linear-gradient(180deg, rgba(12, 39, 76, 0.98), rgba(8, 24, 50, 0.99));
+  box-shadow:
+    0 28px 64px rgba(2, 9, 19, 0.4),
+    inset 0 1px 0 rgba(220, 240, 255, 0.14);
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-welcome-copy {
+  padding: clamp(1.15rem, 4vw, 1.6rem);
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-compact-banner {
+  margin-bottom: 0.9rem;
+  border-color: rgba(159, 215, 255, 0.24);
+  background: rgba(10, 35, 67, 0.84);
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-welcome-copy h2,
+.catalogo-welcome.is-cookie-only .catalogo-welcome-lead,
+.catalogo-welcome.is-cookie-only .catalogo-summary-card p,
+.catalogo-welcome.is-cookie-only .catalogo-term-item span,
+.catalogo-welcome.is-cookie-only .catalogo-terms-check span,
+.catalogo-welcome.is-cookie-only .catalogo-welcome-note,
+.catalogo-welcome.is-cookie-only .catalogo-consent-intro p,
+.catalogo-welcome.is-cookie-only .catalogo-consent-focus p {
+  color: rgba(232, 242, 255, 0.92);
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-summary-card,
+.catalogo-welcome.is-cookie-only .catalogo-term-item,
+.catalogo-welcome.is-cookie-only .catalogo-consent-intro,
+.catalogo-welcome.is-cookie-only .catalogo-consent-focus,
+.catalogo-welcome.is-cookie-only .catalogo-terms-check {
+  border-color: rgba(154, 209, 255, 0.18);
+  background:
+    linear-gradient(180deg, rgba(17, 53, 97, 0.94), rgba(11, 32, 60, 0.96));
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-btn.primary {
+  background: linear-gradient(135deg, #5fafff, #2f79e8);
+}
+
+.catalogo-welcome.is-cookie-only .catalogo-btn.ghost {
+  color: #e6f3ff;
+  border-color: rgba(164, 216, 255, 0.22);
+  background: rgba(10, 34, 64, 0.64);
+}
+
 .catalogo-welcome.is-phone {
   place-items: center;
   padding: 10px;

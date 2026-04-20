@@ -4073,17 +4073,24 @@ function getElectionPublicSnapshot(voterId = "") {
     userVotes,
     opinionSummary: buildElectionOpinionSummary(currentWeekRecords),
     weeklyTrend,
+    totalHistoryVotes: getElectionVoteRecords().length,
     currentWeekKey,
     updatedAt: store.updatedAt
   };
 }
 
 function recordElectionVote(payload = {}, req = null) {
+  const authUser = readCatalogoAuthSession(req);
+  if (!authUser?.email || !authUser?.sub) {
+    return { ok: false, status: 401, message: "Entre com Google para registrar voto e evitar duplicidade semanal." };
+  }
+
   const safeOfficeId = String(payload.officeId || "").trim();
   const safeCandidateId = String(payload.candidateId || "").trim();
-  const safeVoterId = String(payload.voterId || "").trim().slice(0, 120);
+  const safeVoterId = safeString(authUser.sub || authUser.email, 120);
   const office = getElectionOffice(safeOfficeId);
   const tracking = buildTrackingMeta(req, payload);
+  const currentFingerprints = buildWeeklyDeviceFingerprints(tracking);
   const city = safeString(payload.city || tracking.city || "", 80);
   const voterName = safeString(payload.name || payload.voterName, 120);
   const voterParty = safeString(payload.party || payload.voterParty, 90);
@@ -4119,6 +4126,22 @@ function recordElectionVote(payload = {}, req = null) {
     };
   }
 
+  const deviceAlreadyVoted = store.records.some(
+    (item) =>
+      safeString(item.officeId || "", 120) === safeOfficeId &&
+      recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprints)
+  );
+
+  if (deviceAlreadyVoted) {
+    const snapshot = getElectionPublicSnapshot(safeVoterId);
+    return {
+      ok: false,
+      status: 409,
+      message: "Este dispositivo já registrou voto para esse cargo nesta semana. Aguarde a próxima rodada.",
+      ...snapshot
+    };
+  }
+
   store.votes[safeOfficeId][safeCandidateId] =
     Number(store.votes[safeOfficeId][safeCandidateId] || 0) + 1;
   store.voters[safeVoterId][safeOfficeId] = {
@@ -4148,6 +4171,8 @@ function recordElectionVote(payload = {}, req = null) {
     ip: tracking.ip,
     browser: tracking.browser,
     deviceType: tracking.deviceType,
+    googleEmail: safeString(authUser.email, 160),
+    googleSub: safeString(authUser.sub, 160),
     visitorId: tracking.visitorId || tracking.cookieVisitorId,
     sessionId: tracking.sessionId || tracking.cookieSessionId,
     weekKey: currentWeekKey,
@@ -4873,6 +4898,34 @@ function getAcre2026PollResponses() {
   return getJsonArray(ACRE_2026_POLL_FILE);
 }
 
+function buildWeeklyDeviceFingerprints(tracking = {}) {
+  return [
+    tracking.visitorId || tracking.cookieVisitorId || "",
+    tracking.sessionId || tracking.cookieSessionId || "",
+    tracking.ip || ""
+  ]
+    .map((item) => safeString(item, 160))
+    .filter(Boolean);
+}
+
+function recordMatchesWeeklyDevice(item = {}, currentWeekKey = "", fingerprints = []) {
+  if (!currentWeekKey || !Array.isArray(fingerprints) || !fingerprints.length) {
+    return false;
+  }
+
+  if (safeString(item.weekKey || "", 24) !== currentWeekKey) {
+    return false;
+  }
+
+  const savedFingerprints = [
+    safeString(item.visitorId || "", 160),
+    safeString(item.sessionId || "", 160),
+    safeString(item.ip || "", 160)
+  ].filter(Boolean);
+
+  return fingerprints.some((fingerprint) => savedFingerprints.includes(fingerprint));
+}
+
 function buildPollBreakdown(items = [], key, limit = 10) {
   const bucket = sumBy(items, (item) => item?.[key] || "Nao informado");
   const total = Array.isArray(items) ? items.length : 0;
@@ -4951,7 +5004,11 @@ function buildAcre2026PollPublicPayload() {
   return {
     ok: true,
     updatedAt: items[0]?.createdAt || "",
-    summary: buildAcre2026PollSummary(items)
+    summary: buildAcre2026PollSummary(items),
+    weekly: buildWeeklyTrendSeries(items, {
+      valueField: "voto2026",
+      totalLabel: "totalResponses"
+    })
   };
 }
 
@@ -5007,6 +5064,10 @@ function buildAcre2026PollBridgePayload() {
       topDirection,
       desiredCycle,
       candidateProfiles: Array.isArray(summary.candidateProfiles) ? summary.candidateProfiles.slice(0, 4) : [],
+      weekly: buildWeeklyTrendSeries(items, {
+        valueField: "voto2026",
+        totalLabel: "totalResponses"
+      }),
       updatedAt: summary.updatedAt || ""
     },
     journal: {
@@ -5043,6 +5104,8 @@ function buildAcre2026PollAdminPayload() {
       country: item.country,
       browser: item.browser,
       deviceType: item.deviceType,
+      googleEmail: item.googleEmail,
+      googleSub: item.googleSub,
       visitorId: item.visitorId,
       sessionId: item.sessionId,
       ip: item.ip
@@ -6313,17 +6376,19 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser?.email || !authUser?.sub) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para votar. Isso evita duplicação e libera apenas um voto por dispositivo a cada semana."
+      });
+    }
+
     const body = await parseBody(req);
     const tracking = buildTrackingMeta(req, body);
     const records = getAcre2026PollResponses();
     const currentWeekKey = getWeekBucketKey(new Date().toISOString());
-    const currentFingerprint = [
-      tracking.visitorId || tracking.cookieVisitorId || "",
-      tracking.sessionId || tracking.cookieSessionId || "",
-      tracking.ip || ""
-    ]
-      .map((item) => safeString(item, 160))
-      .filter(Boolean);
+    const currentFingerprint = buildWeeklyDeviceFingerprints(tracking);
     const profissao = cleanShortText(body.profissao || body.profession, 100);
     const localizacao = cleanShortText(body.localizacao || body.location, 120);
     const faixaEtaria = normalizePollChoice(
@@ -6414,19 +6479,15 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    const hasWeeklyVote = records.some((item) => {
-      if (getWeekBucketKey(item?.createdAt || "") !== currentWeekKey) {
-        return false;
-      }
-      const fingerprints = [
-        safeString(item.visitorId || "", 160),
-        safeString(item.sessionId || "", 160),
-        safeString(item.ip || "", 160)
-      ].filter(Boolean);
-      return currentFingerprint.some((fingerprint) => fingerprints.includes(fingerprint));
-    });
+    const hasWeeklyVote = records.some((item) => recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprint));
+    const hasWeeklyGoogleVote = records.some(
+      (item) =>
+        safeString(item.weekKey || "", 24) === currentWeekKey &&
+        (safeString(item.googleSub || "", 160) === safeString(authUser.sub, 160) ||
+          safeString(item.googleEmail || "", 160) === safeString(authUser.email, 160))
+    );
 
-    if (hasWeeklyVote) {
+    if (hasWeeklyVote || hasWeeklyGoogleVote) {
       return sendJson(res, 409, {
         ok: false,
         error: "Seu dispositivo/local já registrou uma resposta nesta semana. Aguarde a próxima rodada para votar de novo."
@@ -6461,6 +6522,8 @@ async function handleApi(req, res, pathname, searchParams) {
       browser: tracking.browser,
       deviceType: tracking.deviceType,
       referrerHost: tracking.referrerHost,
+      googleEmail: safeString(authUser.email, 160),
+      googleSub: safeString(authUser.sub, 160),
       weekKey: currentWeekKey,
       createdAt: new Date().toISOString()
     };

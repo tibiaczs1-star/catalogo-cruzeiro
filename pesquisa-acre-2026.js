@@ -77,6 +77,14 @@
     };
   }
 
+  function getGoogleUser() {
+    try {
+      return window.CatalogoGoogleAuth?.getUser?.() || null;
+    } catch (_error) {
+      return null;
+    }
+  }
+
   function renderBarList(container, items, tone, emptyMessage) {
     if (!container) return;
 
@@ -338,6 +346,12 @@
     event.preventDefault();
     if (!form || !submitButton) return;
 
+    if (!getGoogleUser()?.email) {
+      setFeedback(formFeedback, "Entre com Google antes de votar. A pesquisa aceita um voto por dispositivo a cada semana.", "error");
+      document.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
     if (!form.reportValidity()) {
       setFeedback(formFeedback, "Preencha todos os campos antes de enviar.", "error");
       return;
@@ -381,6 +395,13 @@
   }
 
   form?.addEventListener("submit", handleFormSubmit);
+  window.addEventListener("catalogo:google-auth", () => {
+    if (getGoogleUser()?.email) {
+      setFeedback(formFeedback, "Google conectado. Seu dispositivo libera uma resposta por semana e guarda o histórico da eleição.", "success");
+      return;
+    }
+    setFeedback(formFeedback, "Entre com Google para liberar o voto semanal.", "error");
+  });
   loadPublicSummary().catch(() => {});
   loadPollBridge().catch(() => {});
 })();

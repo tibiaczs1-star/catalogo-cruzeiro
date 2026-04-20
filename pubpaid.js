@@ -714,6 +714,7 @@
     tutorialStartedAt: 0,
     gameTimer: null,
     profileEntryMode: false,
+    demoMode: false,
     gameMode: false,
     nightPanelOpen: false,
     poolRefs: {
@@ -1041,6 +1042,12 @@
     const enterGameTrigger = event.target.closest("[data-enter-game]");
     if (enterGameTrigger) {
       enterGameExperience();
+      return;
+    }
+
+    const enterDemoTrigger = event.target.closest("[data-enter-demo]");
+    if (enterDemoTrigger) {
+      enterDemoExperience();
       return;
     }
 
@@ -2790,11 +2797,13 @@
     const hasGoogle = hasGoogleSession();
     const registered = hasAvatarProfile();
     const favorite = TABLE_META[state.profile.favorite];
-    setText(refs.profileName, registered ? state.profile.name : "Visitante da calcada");
+    setText(refs.profileName, registered ? state.profile.name : runtime.demoMode ? "Visitante demo" : "Visitante da calcada");
     setText(
       refs.profileRole,
       registered
         ? `${PALETTES[state.profile.archetype].label}${hasUpgrade("vip-title") ? " VIP" : ""} • ${favorite?.label || "PubPaid"}`
+        : runtime.demoMode
+          ? "Demo aberta sem carteira real"
         : hasGoogle
           ? "Google conectado, avatar pendente"
           : "Ainda do lado de fora"
@@ -2803,6 +2812,8 @@
       refs.profileMotto,
       registered
         ? state.profile.motto || "Entrou no pub, encontrou sua mesa e deixou a noite seguir."
+        : runtime.demoMode
+          ? "Você entrou só para testar o salão. Conecte o Google para liberar personagem, saldo e caixa Pix."
         : hasGoogle
           ? "A conta Google já está pronta. Falta escolher nome, estilo e mesa favorita."
           : "Chegue até a porta principal para conectar o Google, criar seu personagem e começar a noite."
@@ -2815,6 +2826,26 @@
 
     drawAvatarPreview();
     renderProfileLoadout();
+    syncCashierState();
+  }
+
+  function syncCashierState() {
+    const walletReady = canUseRealWallet();
+    if (refs.generateDepositButton) refs.generateDepositButton.disabled = !walletReady;
+    if (refs.registerDepositButton) refs.registerDepositButton.disabled = !walletReady;
+    if (refs.requestWithdrawalButton) refs.requestWithdrawalButton.disabled = !walletReady;
+
+    if (!walletReady && refs.depositFeedback) {
+      refs.depositFeedback.textContent = hasGoogleSession()
+        ? "Finalize o avatar para liberar o caixa real."
+        : "O caixa real aparece depois do login Google e do avatar.";
+    }
+
+    if (!walletReady && refs.withdrawFeedback) {
+      refs.withdrawFeedback.textContent = runtime.demoMode
+        ? "Modo demo não libera depósito nem retirada."
+        : "A retirada só abre para conta Google identificada.";
+    }
   }
 
   function drawAvatarPreview() {
@@ -3278,8 +3309,12 @@
     return Boolean((state.profile.avatarReady || state.profile.registered) && String(state.profile.name || "").trim().length >= 2);
   }
 
-  function canEnterPubGame() {
+  function canUseRealWallet() {
     return hasGoogleSession() && hasAvatarProfile();
+  }
+
+  function canEnterPubGame() {
+    return runtime.demoMode || canUseRealWallet();
   }
 
   function focusProfileAccess(message) {
@@ -3293,7 +3328,7 @@
   function syncGameModeUi() {
     const inGame = Boolean(runtime.gameMode);
     document.body.classList.toggle("pubpaid-in-game", inGame);
-    document.body.classList.toggle("pubpaid-night-panel-open", inGame && runtime.nightPanelOpen);
+    document.body.classList.toggle("pubpaid-night-panel-open", false);
 
     refs.enterGameButtons.forEach((button) => {
       button.hidden = inGame;
@@ -3304,9 +3339,9 @@
     });
 
     refs.toggleGamePanelButtons.forEach((button) => {
-      button.hidden = !inGame;
-      button.textContent = runtime.nightPanelOpen ? "Fechar painel" : "Painel da noite";
-      button.setAttribute("aria-expanded", runtime.nightPanelOpen ? "true" : "false");
+      button.hidden = true;
+      button.textContent = "Painel da noite";
+      button.setAttribute("aria-expanded", "false");
     });
   }
 
@@ -3337,12 +3372,14 @@
       return false;
     }
 
+    runtime.demoMode = false;
     runtime.gameMode = true;
     runtime.nightPanelOpen = false;
     if (runtime.scene !== "interior") enterInterior();
 
     syncGameModeUi();
     renderAll();
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     const fullscreenRequest = document.documentElement.requestFullscreen?.();
     if (fullscreenRequest?.catch) fullscreenRequest.catch(() => {});
@@ -3353,9 +3390,32 @@
     return true;
   }
 
+  function enterDemoExperience() {
+    runtime.profileEntryMode = false;
+    runtime.demoMode = true;
+    runtime.gameMode = true;
+    runtime.nightPanelOpen = false;
+    if (runtime.scene !== "interior") enterInterior();
+    if (!state.profile.name) {
+      state.profile.name = "Visitante demo";
+      state.profile.motto = "Passeando pela versão demonstrativa do PubPaid.";
+      state.profile.favorite = state.profile.favorite || "pool";
+    }
+    if (!hasGoogleSession()) {
+      state.wallet.coins = Math.max(state.wallet.coins, 20);
+    }
+    saveState();
+    syncGameModeUi();
+    renderAll();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setWorldMessage("Modo demo ligado. Explore o salão em tela cheia antes de conectar sua conta Google.", 3200);
+    return true;
+  }
+
   function exitGameExperience({ announce = true } = {}) {
     runtime.gameMode = false;
     runtime.nightPanelOpen = false;
+    runtime.demoMode = false;
     closeGameModal(true);
     closeShopModal();
     closeWaiterModal();
@@ -3377,8 +3437,36 @@
     const user = getCatalogoGoogleAuthUser();
     if (user?.email) {
       applyGoogleProfile(user, { announce: false });
+      openGameFromGoogleSession({ announce: false, openProfileIfNeeded: true });
       void syncPubpaidAccount();
     }
+  }
+
+  function openGameFromGoogleSession({ announce = true, openProfileIfNeeded = true } = {}) {
+    if (!hasGoogleSession()) {
+      return false;
+    }
+
+    runtime.profileEntryMode = true;
+    runtime.demoMode = false;
+    enterGameExperience({ skipChecks: true, announce: false });
+
+    if (hasAvatarProfile()) {
+      if (announce) {
+        setWorldMessage("Google conferido. O PubPaid já abriu em tela cheia.", 3200);
+      }
+      return true;
+    }
+
+    if (openProfileIfNeeded) {
+      openProfileModal({ entryMode: true });
+      setText(refs.profileFeedback, "Google conectado. O salão já abriu em tela cheia. Agora finalize o avatar.");
+    }
+
+    if (announce) {
+      setWorldMessage("Google conectado. O PubPaid abriu em tela cheia e aguarda seu avatar.", 3200);
+    }
+    return true;
   }
 
   function handleCatalogoGoogleAuth(event) {
@@ -3388,6 +3476,7 @@
         exitGameExperience({ announce: false });
         setWorldMessage("Google desconectado. A página voltou para a entrada do PubPaid.", 3400);
       }
+      runtime.demoMode = false;
       state.wallet.coins = 0;
       saveState();
       renderAll();
@@ -3402,16 +3491,7 @@
     applyGoogleProfile(user, { announce: true });
     void syncPubpaidAccount();
     void generatePubPaidDepositQr(false);
-
-    if (runtime.profileEntryMode) {
-      if (hasAvatarProfile()) {
-        enterGameExperience({ skipChecks: true, announce: false });
-        setWorldMessage("Google conferido. O PubPaid já abriu em tela cheia.", 3200);
-      } else {
-        openProfileModal({ entryMode: true });
-        setText(refs.profileFeedback, "Google conectado. Agora finalize o avatar para entrar no game.");
-      }
-    }
+    openGameFromGoogleSession({ announce: true, openProfileIfNeeded: true });
   }
 
   function applyGoogleProfile(user, { announce = true } = {}) {
@@ -7437,6 +7517,7 @@
     state = createInitialState();
     runtime.activeGame = null;
     runtime.profileEntryMode = false;
+    runtime.demoMode = false;
     runtime.gameMode = false;
     runtime.nightPanelOpen = false;
     refs.gameModal.hidden = true;

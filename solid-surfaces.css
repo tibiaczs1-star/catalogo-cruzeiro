@@ -1,0 +1,260 @@
+:root {
+  --solid-page: #eef3fb;
+  --solid-surface: #ffffff;
+  --solid-surface-muted: #f2f6fc;
+  --solid-surface-strong: #dce7f6;
+  --solid-line: #c4d3e8;
+  --solid-ink: #163252;
+  --solid-ink-soft: #4b6484;
+  --solid-brand: #1f4f88;
+  --solid-brand-strong: #163c6c;
+  --solid-brand-deep: #0f2b4e;
+  --solid-accent: #d93c3c;
+  --solid-accent-strong: #b62222;
+  --solid-night: #091a32;
+}
+
+body {
+  background: var(--solid-page) !important;
+  color: var(--solid-ink) !important;
+}
+
+.top-strip,
+.masthead,
+.editorial-home .top-strip,
+.editorial-home .masthead,
+.hero-newsroom-shell,
+.hero-newsroom-copy,
+.hero-newsroom-panel,
+.hero-newsroom-notes,
+.office-play-strip,
+.footer-tech-panel,
+.footer-bottom,
+.cookie-consent-banner,
+.catalogo-welcome-card,
+.catalogo-summary-card,
+.catalogo-term-item,
+.catalogo-consent-intro,
+.catalogo-consent-focus,
+.catalogo-terms-check,
+.pubpaid-topbar,
+.pubpaid-panel,
+.pubpaid-modal-card,
+.pubpaid-modal-backdrop,
+.pubpaid-grid,
+.pubpaid-world-copy,
+.pubpaid-world-hud article,
+.pubpaid-touchbar,
+.poll-card,
+.poll-form-section,
+.poll-option-card,
+.poll-insight-card,
+.poll-bridge-signal,
+.poll-bridge-news-card,
+.poll-flag-card,
+.poll-marquee,
+.poll-count-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.top-strip,
+.masthead,
+.editorial-home .top-strip,
+.editorial-home .masthead,
+.hero-newsroom-shell,
+.hero-newsroom-copy,
+.hero-newsroom-panel,
+.hero-newsroom-notes,
+.office-play-strip,
+.footer-tech-panel,
+.footer-bottom,
+.cookie-consent-banner,
+.catalogo-welcome-card,
+.catalogo-summary-card,
+.catalogo-term-item,
+.catalogo-consent-intro,
+.catalogo-consent-focus,
+.catalogo-terms-check {
+  background: var(--solid-surface) !important;
+  border-color: var(--solid-line) !important;
+  color: var(--solid-ink) !important;
+  box-shadow: 0 14px 34px rgba(15, 43, 78, 0.12) !important;
+}
+
+.top-strip,
+.editorial-home .top-strip,
+.masthead,
+.editorial-home .masthead {
+  background: linear-gradient(180deg, #f4f8fe, #dde9f8) !important;
+}
+
+.top-strip p,
+.top-strip a,
+.top-strip-secondary,
+.editorial-home .top-strip p,
+.editorial-home .top-strip a,
+.editorial-home .top-strip-secondary,
+.hero-newsroom-copy > p,
+.hero-newsroom-notes span,
+.footer-tech-panel p,
+.footer-tech-panel a,
+.footer-bottom,
+.cookie-consent-banner p,
+.catalogo-welcome-lead,
+.catalogo-summary-card p,
+.catalogo-term-item span,
+.catalogo-consent-intro p,
+.catalogo-consent-focus p {
+  color: var(--solid-ink-soft) !important;
+}
+
+.main-nav a,
+.hero-newsroom-actions a,
+.office-play-button,
+.footer-utility-buttons a,
+.footer-bottom-utility-buttons a,
+.catalogo-btn.primary,
+.cookie-consent-accept {
+  background: linear-gradient(180deg, var(--solid-brand), var(--solid-brand-strong)) !important;
+  border-color: var(--solid-brand-strong) !important;
+  color: #f8fbff !important;
+  box-shadow: 0 12px 24px rgba(15, 43, 78, 0.18) !important;
+}
+
+.main-nav .nav-game-link,
+.hero-newsroom-actions .hero-primary,
+.office-play-button.office-play-button-game {
+  background: linear-gradient(180deg, #ec5353, var(--solid-accent-strong)) !important;
+  border-color: #8d1b1b !important;
+  color: #fff6f6 !important;
+}
+
+.main-nav a:hover,
+.hero-newsroom-actions a:hover,
+.office-play-button:hover,
+.footer-utility-buttons a:hover,
+.footer-bottom-utility-buttons a:hover,
+.catalogo-btn.primary:hover,
+.cookie-consent-accept:hover {
+  filter: brightness(1.04) !important;
+}
+
+.catalogo-welcome,
+.pubpaid-modal,
+.pubpaid-modal-backdrop {
+  background: rgba(8, 22, 40, 0.78) !important;
+}
+
+body.pubpaid-page {
+  background: linear-gradient(180deg, #120818, #1b0f28 36%, #24143a 100%) !important;
+  color: #f5f1ff !important;
+}
+
+.pubpaid-topbar,
+.pubpaid-panel,
+.pubpaid-modal-card,
+.pubpaid-grid,
+.pubpaid-world-copy,
+.pubpaid-world-hud article,
+.pubpaid-touchbar {
+  background: linear-gradient(180deg, #170c27, #24143a) !important;
+  border-color: #4e3374 !important;
+  color: #f7f1ff !important;
+  box-shadow: 0 18px 40px rgba(5, 2, 10, 0.34) !important;
+}
+
+.pubpaid-panel-copy,
+.pubpaid-modal-copy,
+.pubpaid-topbar span,
+.pubpaid-chip-button,
+.pubpaid-nav a {
+  color: #dfd1ff !important;
+}
+
+.pubpaid-chip-button,
+.pubpaid-cta,
+.pubpaid-action,
+.pubpaid-auth-button {
+  background: linear-gradient(180deg, #274f87, #17365f) !important;
+  border-color: #6ea9f3 !important;
+  color: #f4f9ff !important;
+}
+
+.pubpaid-enter-chip,
+.pubpaid-primary-action,
+.pubpaid-cta-primary {
+  background: linear-gradient(180deg, #ea5757, #b82222) !important;
+  border-color: #ffb3b3 !important;
+}
+
+body:has(.poll-shell),
+.poll-body {
+  background: linear-gradient(180deg, #0d2340, #0a1730 100%) !important;
+  color: #edf5ff !important;
+}
+
+.poll-card,
+.poll-form-section,
+.poll-option-card,
+.poll-insight-card,
+.poll-bridge-signal,
+.poll-bridge-news-card,
+.poll-flag-card,
+.poll-marquee,
+.poll-count-card {
+  background: linear-gradient(180deg, #13345d, #0d2340) !important;
+  border-color: #5f9fe0 !important;
+  color: #edf5ff !important;
+  box-shadow: 0 18px 42px rgba(2, 10, 24, 0.28) !important;
+}
+
+.poll-card::before,
+.poll-form-section::before,
+.poll-option-card::before,
+.poll-insight-card::before,
+.poll-bridge-news-card::before,
+.poll-flag-card::before {
+  display: none !important;
+}
+
+.poll-kicker,
+.poll-eyebrow,
+.poll-chip,
+.poll-mini,
+.poll-insight-card p,
+.poll-form-section p,
+.poll-option-card span {
+  color: #bfd9f8 !important;
+}
+
+.poll-flag-acre,
+.poll-flag-brasil {
+  box-shadow: 0 10px 24px rgba(5, 15, 30, 0.26) !important;
+}
+
+@media (max-width: 740px) {
+  .hero-newsroom-shell,
+  .hero-newsroom-copy,
+  .hero-newsroom-panel,
+  .hero-newsroom-notes,
+  .office-play-strip,
+  .footer-tech-panel,
+  .footer-bottom,
+  .catalogo-welcome-card {
+    box-shadow: 0 10px 22px rgba(15, 43, 78, 0.14) !important;
+  }
+
+  .pubpaid-topbar,
+  .pubpaid-panel,
+  .pubpaid-modal-card,
+  .pubpaid-grid,
+  .pubpaid-world-copy,
+  .pubpaid-world-hud article,
+  .pubpaid-touchbar,
+  .poll-card,
+  .poll-form-section,
+  .poll-option-card {
+    box-shadow: 0 12px 24px rgba(4, 10, 22, 0.24) !important;
+  }
+}

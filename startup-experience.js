@@ -570,48 +570,25 @@
     const phone = options.phone === true;
     const modal = document.createElement("section");
     modal.id = MODAL_ID;
-    modal.className = compact ? "catalogo-welcome is-compact" : "catalogo-welcome";
-    if (phone) {
-      modal.classList.add("is-phone");
-    }
+    modal.className = `catalogo-welcome${compact ? " is-compact" : ""}${phone ? " is-phone is-cookie-only" : ""}`;
     modal.setAttribute("aria-hidden", "true");
-    modal.innerHTML = compact
-      ? `
-        <article
-          class="catalogo-welcome-card"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="catalogoWelcomeTitle"
-        >
-          ${phone ? buildWelcomeVisualMarkup({ compact: true, phone: true }) : buildWelcomeVisualMarkup({ compact: true })}
-          <div class="catalogo-welcome-copy">
-            <div class="catalogo-compact-banner" aria-hidden="true">
-              <span class="catalogo-compact-dot"></span>
-              <strong>Preferencias e cookies</strong>
-            </div>
-            ${buildWelcomeCopyMarkup()}
+    modal.innerHTML = `
+      <article
+        class="catalogo-welcome-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="catalogoWelcomeTitle"
+      >
+        ${phone ? "" : buildWelcomeVisualMarkup({ compact })}
+        <div class="catalogo-welcome-copy">
+          <div class="catalogo-compact-banner" aria-hidden="true">
+            <span class="catalogo-compact-dot"></span>
+            <strong>Preferencias e cookies</strong>
           </div>
-        </article>
-        ${buildFounderThanksMarkup()}
-      `
-      : `
-        <div class="catalogo-welcome-shell">
-          <article
-            class="catalogo-welcome-card"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="catalogoWelcomeTitle"
-          >
-            ${buildWelcomeVisualMarkup()}
-
-            <div class="catalogo-welcome-copy">
-              ${buildWelcomeCopyMarkup()}
-            </div>
-          </article>
-          ${buildDirectorMarkup()}
+          ${buildWelcomeCopyMarkup()}
         </div>
-        ${buildFounderThanksMarkup()}
-      `;
+      </article>
+    `;
 
     return modal;
   }
@@ -623,39 +600,10 @@
   }
 
   function closeWelcomeModal(modal) {
-    if (!modal || modal.classList.contains("is-thanking") || modal.classList.contains("is-leaving")) {
+    if (!modal || modal.classList.contains("is-leaving")) {
       return;
     }
-
-    if (modal.classList.contains("is-phone")) {
-      modal.__stopFounderOpening = startFounderOpening(modal);
-      modal.classList.add("is-thanking");
-      modal.setAttribute("aria-hidden", "true");
-
-      window.setTimeout(() => {
-        closeWelcomeModalImmediately(modal);
-      }, THANKS_SCREEN_MS_PHONE);
-      return;
-    }
-
-    const thanksDuration = modal.classList.contains("is-compact")
-      ? THANKS_SCREEN_MS_COMPACT
-      : THANKS_SCREEN_MS;
-    modal.__stopFounderOpening = startFounderOpening(modal);
-    modal.classList.add("is-thanking");
-    modal.setAttribute("aria-hidden", "true");
-
-    window.setTimeout(() => {
-      modal.classList.add("is-leaving");
-      document.body.classList.remove("catalogo-lock-scroll");
-      window.setTimeout(() => {
-        if (typeof modal.__stopFounderOpening === "function") {
-          modal.__stopFounderOpening();
-        }
-        modal.remove();
-        dispatchIntroFinished();
-      }, 320);
-    }, thanksDuration);
+    closeWelcomeModalImmediately(modal);
   }
 
   function closeWelcomeModalImmediately(modal) {

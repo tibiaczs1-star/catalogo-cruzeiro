@@ -26,7 +26,8 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260419bridge" />
+    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260419spoazure" />
+    <link rel="stylesheet" href="./solid-surfaces.css?v=20260419solidfinal" />
   </head>
   <body>
     <div class="poll-backdrop" aria-hidden="true"></div>
@@ -48,6 +49,39 @@
           </div>
 
           <div class="poll-hero-scene poll-hero-scene-election" aria-hidden="true">
+            <div class="poll-cosmic-strip">
+              <span class="poll-star-lane lane-a"></span>
+              <span class="poll-star-lane lane-b"></span>
+              <span class="poll-orbit-spark orbit-a"></span>
+              <span class="poll-orbit-spark orbit-b"></span>
+            </div>
+            <div class="poll-southern-cross" aria-hidden="true">
+              <span class="cross-link link-vertical"></span>
+              <span class="cross-link link-left"></span>
+              <span class="cross-link link-right"></span>
+              <span class="cross-link link-bottom"></span>
+              <span class="cross-star star-top"></span>
+              <span class="cross-star star-left"></span>
+              <span class="cross-star star-core"></span>
+              <span class="cross-star star-right"></span>
+              <span class="cross-star star-bottom"></span>
+            </div>
+            <div class="poll-hero-flags">
+              <article class="poll-flag-card poll-flag-card-acre">
+                <span class="poll-flag-kicker">orgulho local</span>
+                <div class="poll-flag-acre" aria-label="Bandeira do Acre">
+                  <span class="acre-star"></span>
+                </div>
+              </article>
+              <article class="poll-flag-card poll-flag-card-brasil">
+                <span class="poll-flag-kicker">presença nacional</span>
+                <div class="poll-flag-brasil" aria-label="Bandeira do Brasil">
+                  <span class="brasil-diamond"></span>
+                  <span class="brasil-orb"></span>
+                  <span class="brasil-band"></span>
+                </div>
+              </article>
+            </div>
             <span class="election-scene-light light-left"></span>
             <span class="election-scene-light light-center"></span>
             <span class="election-scene-light light-right"></span>
@@ -178,6 +212,20 @@
             montado para acompanhar humor, prioridade percebida e tendencia declarada.
           </p>
         </div>
+
+        <section class="poll-auth-card" data-google-auth-card aria-label="Autenticação Google da pesquisa">
+          <div class="poll-auth-copy">
+            <span>login semanal</span>
+            <strong data-google-auth-status>Entre com Google para votar</strong>
+            <p data-google-auth-email>
+              Para evitar duplicação, a SPO aceita um voto por dispositivo a cada semana e mantém o histórico acumulado da eleição.
+            </p>
+          </div>
+          <div class="poll-auth-actions">
+            <div class="poll-google-button" data-google-auth-button></div>
+            <button class="poll-auth-logout" type="button" data-google-auth-logout hidden>Sair do Google</button>
+          </div>
+        </section>
 
         <form id="acrePollForm" class="poll-form">
           <section class="poll-form-section">
@@ -440,7 +488,7 @@
           <div class="poll-actions">
             <button class="poll-submit" id="submitButton" type="submit">Enviar e ver parciais</button>
             <p class="poll-disclaimer">
-              Esta é uma sondagem de opinião sem caráter científico. Não substitui pesquisa registrada no TSE.
+              Esta é uma sondagem de opinião sem caráter científico. Não substitui pesquisa registrada no TSE. O acesso exige Google e libera um voto por dispositivo a cada semana.
             </p>
             <p class="poll-feedback" id="formFeedback"></p>
           </div>
@@ -473,6 +521,7 @@
       </section>
     </main>
 
-    <script src="./pesquisa-acre-2026.js?v=20260419bridge" defer></script>
+    <script src="./site-google-auth.js?v=20260419authpay" defer></script>
+    <script src="./pesquisa-acre-2026.js?v=20260419spoazuregoogle" defer></script>
   </body>
 </html>

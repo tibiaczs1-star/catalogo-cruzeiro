@@ -5319,6 +5319,16 @@ if (window.ELECTIONS_DATA?.offices?.length) {
         return;
       }
 
+      if (!getCatalogoGoogleAuthUser()?.email) {
+        setFeedbackState(
+          feedback,
+          "Entre com Google antes de votar. Cada dispositivo só registra um voto por cargo a cada semana.",
+          "is-error"
+        );
+        document.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+
       submitButton.disabled = true;
       submitButton.textContent = "Registrando...";
       setFeedbackState(feedback, "", "");
@@ -5377,7 +5387,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
 
     modal.querySelector("#electionVoteTitle").textContent = `Votar em ${candidate.name}`;
     modal.querySelector("[data-election-vote-lead], #electionVoteLead").textContent =
-      `Seu voto para ${office.label} pede cidade obrigatoria. Nome, partido e observacoes sao opcionais e ajudam a mapear sinais eleitorais.`;
+      `Seu voto para ${office.label} pede login Google e cidade obrigatoria. Cada dispositivo registra um voto por cargo a cada semana.`;
 
     if (form) {
       const cityInput = form.elements.city || form.querySelector("[name='city']");

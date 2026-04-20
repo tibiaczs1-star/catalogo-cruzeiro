@@ -534,66 +534,99 @@ canvas {
   color: var(--pub-text);
 }
 
-.pubpaid-entry-flow {
+.pubpaid-splash-card {
   display: grid;
-  gap: 14px;
-  margin-top: 20px;
+  gap: 16px;
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 32%),
+    linear-gradient(135deg, rgba(111, 134, 255, 0.18), rgba(255, 98, 189, 0.12)),
+    rgba(11, 8, 24, 0.96);
 }
 
-.pubpaid-entry-steps {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.pubpaid-entry-step {
+.pubpaid-splash-copy {
   display: grid;
   gap: 8px;
-  padding: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%),
-    linear-gradient(135deg, rgba(112, 235, 255, 0.12), rgba(255, 98, 189, 0.1)),
-    rgba(11, 8, 24, 0.88);
 }
 
-.pubpaid-entry-step span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  min-height: 32px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--pub-gold);
+.pubpaid-splash-kicker {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pub-gold);
 }
 
-.pubpaid-entry-step strong {
-  display: block;
-  font-size: 16px;
+.pubpaid-splash-copy strong {
+  font-size: 24px;
   line-height: 1.45;
 }
 
-.pubpaid-entry-step p,
+.pubpaid-splash-copy p,
 .pubpaid-entry-caption {
   margin: 0;
   color: var(--pub-muted);
   line-height: 1.55;
 }
 
-.pubpaid-entry-actions {
-  display: flex;
-  flex-wrap: wrap;
+.pubpaid-splash-actions {
+  display: grid;
   gap: 12px;
 }
 
-.pubpaid-entry-actions .pubpaid-button {
-  flex: 1 1 220px;
+.pubpaid-splash-actions .pubpaid-google-button,
+.pubpaid-splash-actions .pubpaid-button {
+  width: 100%;
+}
+
+.pubpaid-splash-bitmap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: end;
+  padding: 24px;
+  background:
+    linear-gradient(180deg, rgba(7, 5, 14, 0.18), rgba(7, 5, 14, 0.58)),
+    url("./assets/pubpaid-exterior-v2.png") center / cover no-repeat;
+}
+
+.pubpaid-splash-bitmap-copy {
+  width: min(420px, 100%);
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  background: rgba(10, 8, 18, 0.88);
+  box-shadow: 0 20px 34px rgba(0, 0, 0, 0.26);
+}
+
+.pubpaid-splash-bitmap-copy span,
+.pubpaid-splash-bitmap-copy small {
+  display: block;
+}
+
+.pubpaid-splash-bitmap-copy span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--pub-gold);
+}
+
+.pubpaid-splash-bitmap-copy strong {
+  display: block;
+  margin-top: 10px;
+  font-family: "Press Start 2P", monospace;
+  font-size: clamp(28px, 5vw, 54px);
+  line-height: 1.2;
+  color: #fff6d8;
+}
+
+.pubpaid-splash-bitmap-copy small {
+  margin-top: 14px;
+  color: var(--pub-muted);
+  line-height: 1.5;
 }
 
 .pubpaid-world-stage {
@@ -689,12 +722,48 @@ canvas {
   border-radius: var(--pub-radius);
 }
 
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-topbar {
+  display: none;
+}
+
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-main {
+  margin-top: 0;
+}
+
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(320px, 440px) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 36px 30px;
+}
+
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world-stage {
+  min-height: 100vh;
+}
+
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-scene-canvas,
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world-hud,
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-info-strip,
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-dev-crew,
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-art-line,
+body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-grid {
+  display: none !important;
+}
+
 body.pubpaid-page.pubpaid-in-game {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-shell {
-  width: 100vw;
+  width: 100%;
   max-width: none;
   padding: 0;
 }
@@ -704,24 +773,26 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-nav,
 body.pubpaid-page.pubpaid-in-game .pubpaid-world-copy,
 body.pubpaid-page.pubpaid-in-game .pubpaid-info-strip,
 body.pubpaid-page.pubpaid-in-game .pubpaid-dev-crew,
-body.pubpaid-page.pubpaid-in-game .pubpaid-art-line {
+body.pubpaid-page.pubpaid-in-game .pubpaid-art-line,
+body.pubpaid-page.pubpaid-in-game .pubpaid-splash-bitmap {
   display: none !important;
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-main {
   margin-top: 0;
-  gap: 0;
+  gap: 18px;
+  padding-bottom: 40px;
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-topbar {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  right: 14px;
-  z-index: 45;
+  position: sticky;
+  top: 0;
+  z-index: 60;
   grid-template-columns: auto 1fr;
   gap: 14px;
   padding: 12px 14px;
+  margin: 0;
+  border-radius: 0;
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 48%),
     linear-gradient(135deg, rgba(9, 18, 44, 0.9), rgba(25, 10, 39, 0.9)),
@@ -729,15 +800,16 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-topbar {
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-world {
-  position: fixed;
-  inset: 0;
+  position: relative;
+  min-height: calc(100vh - 76px);
   gap: 0;
   z-index: 10;
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-world-stage {
-  position: absolute;
-  inset: 0;
+  position: sticky;
+  top: 76px;
+  min-height: calc(100vh - 76px);
   display: grid;
   place-items: center;
   border: none;
@@ -760,14 +832,14 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-world-stage::after {
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-scene-canvas {
-  width: min(100vw, calc(100vh * 1.5));
-  max-height: 100vh;
+  width: min(100vw, calc((100vh - 76px) * 1.5));
+  max-height: calc(100vh - 76px);
   margin: auto;
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud {
-  position: fixed;
-  top: 96px;
+  position: absolute;
+  top: 18px;
   left: 16px;
   right: 16px;
   z-index: 35;
@@ -784,7 +856,7 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud article {
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-touchbar {
-  position: fixed;
+  position: absolute;
   left: 16px;
   right: 16px;
   bottom: 16px;
@@ -794,22 +866,16 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-touchbar {
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-grid {
-  position: fixed;
-  top: 96px;
-  right: 16px;
-  bottom: 16px;
-  width: min(430px, calc(100vw - 32px));
-  grid-template-columns: 1fr;
+  width: min(1480px, calc(100vw - 32px));
+  margin: 0 auto;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1fr) minmax(300px, 0.94fr);
   align-content: start;
-  overflow-y: auto;
-  padding-right: 4px;
-  z-index: 48;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateX(22px);
-  transition:
-    opacity 180ms ease,
-    transform 180ms ease;
+  padding: 0 16px;
+  z-index: 20;
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  visibility: visible;
 }
 
 body.pubpaid-page.pubpaid-in-game .pubpaid-grid .pubpaid-panel {
@@ -820,15 +886,8 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-grid .pubpaid-panel {
   backdrop-filter: blur(16px);
 }
 
-body.pubpaid-page.pubpaid-in-game:not(.pubpaid-night-panel-open) .pubpaid-grid {
-  visibility: hidden;
-}
-
-body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(0);
-  visibility: visible;
+body.pubpaid-page.pubpaid-in-game .pubpaid-grid .pubpaid-panel {
+  min-height: 100%;
 }
 
 .pubpaid-profile-head {
@@ -877,6 +936,23 @@ body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 14px 26px rgba(0, 0, 0, 0.22);
 }
 
+.pubpaid-google-card {
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.pubpaid-google-copy,
+.pubpaid-google-actions {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.pubpaid-google-actions {
+  align-content: center;
+}
+
 .pubpaid-google-card span,
 .pubpaid-cashier-card > span,
 .pubpaid-cashier-card label span {
@@ -905,6 +981,17 @@ body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
 
 .pubpaid-google-button {
   min-height: 40px;
+}
+
+.pubpaid-google-actions .pubpaid-button {
+  width: 100%;
+}
+
+@media (max-width: 780px) {
+  .pubpaid-google-card {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
 }
 
 .pubpaid-cashier-card label {
@@ -1109,6 +1196,16 @@ body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
 
 .pubpaid-button.outline {
   background: rgba(255, 255, 255, 0.03);
+}
+
+.pubpaid-button.ghost {
+  background: rgba(8, 10, 20, 0.82);
+  color: var(--pub-cyan);
+}
+
+.pubpaid-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .pubpaid-focus-meta {
@@ -3717,12 +3814,22 @@ body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
     grid-template-columns: 1fr;
   }
 
-  .pubpaid-entry-steps {
+  .pubpaid-splash-bitmap {
+    position: relative;
+    min-height: 54vh;
+  }
+
+  body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world {
     grid-template-columns: 1fr;
   }
 
-  .pubpaid-entry-actions {
-    flex-direction: column;
+  body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world-copy,
+  body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world-stage {
+    min-height: auto;
+  }
+
+  body.pubpaid-page:not(.pubpaid-in-game) .pubpaid-world-copy {
+    padding: 18px 14px;
   }
 
   .pubpaid-art-line-track {
@@ -3771,25 +3878,19 @@ body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
   }
 
   body.pubpaid-page.pubpaid-in-game .pubpaid-topbar {
-    top: 10px;
-    left: 10px;
-    right: 10px;
     gap: 10px;
   }
 
   body.pubpaid-page.pubpaid-in-game .pubpaid-grid {
-    top: 112px;
-    left: 10px;
-    right: 10px;
-    bottom: 116px;
-    width: auto;
+    width: min(100vw - 20px, 1480px);
+    grid-template-columns: 1fr;
+    padding: 0 10px;
   }
 
   body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud {
-    top: auto;
+    top: 12px;
     left: 10px;
     right: 10px;
-    bottom: 122px;
     grid-template-columns: 1fr;
   }
 
@@ -3805,7 +3906,7 @@ body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
   }
 
   body.pubpaid-page.pubpaid-in-game .pubpaid-scene-canvas {
-    width: 100vw;
+    width: min(100vw, calc((100vh - 76px) * 1.5));
   }
 }
 

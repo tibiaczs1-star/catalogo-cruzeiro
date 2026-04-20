@@ -5,6 +5,14 @@
   display: none;
 }
 
+body.editorial-home .site-footer .footer-utility-buttons {
+  display: none;
+}
+
+body.editorial-home .site-footer .footer-bottom-utility-buttons {
+  display: flex;
+}
+
 @media (max-width: 980px) {
   body.editorial-home .site-header-stack > .top-strip {
     order: 1;
@@ -1041,6 +1049,10 @@
       0 18px 30px rgba(3, 15, 30, 0.18) !important;
   }
 
+  body.editorial-home .hero-office-panel .catalogo-agents-scene .window-row {
+    display: none !important;
+  }
+
   body.editorial-home .catalogo-agents-bubble {
     background: rgba(7, 33, 66, 0.94) !important;
     color: #f5fbff !important;
@@ -1103,5 +1115,132 @@
 @media (max-width: 740px) {
   body.editorial-home .hero-newsroom-panel.hero-office-panel {
     display: grid !important;
+  }
+}
+
+/* 2026-04-19: reparo final da home mobile
+   - admin/checkpubpaid desce para o rodape
+   - remove blocos que estavam desmontando a hero
+   - reforca a leitura do topo no celular */
+@media (max-width: 740px) {
+  body.editorial-home .top-strip,
+  body.editorial-home .top-strip-actions,
+  body.editorial-home .device-version-notice,
+  body.editorial-home .header-services-strip,
+  body.editorial-home .mobile-agent-hub,
+  body.editorial-home .main-nav .nav-admin-link {
+    display: none !important;
+  }
+
+  body.editorial-home .site-header-stack {
+    gap: 0.65rem !important;
+    padding: 0.42rem !important;
+    border-radius: 24px !important;
+    background:
+      radial-gradient(circle at top, rgba(111, 181, 255, 0.18), transparent 30%),
+      linear-gradient(180deg, rgba(23, 61, 112, 0.98), rgba(11, 37, 77, 0.99)) !important;
+    border: 1px solid rgba(165, 214, 255, 0.2) !important;
+    box-shadow:
+      0 18px 36px rgba(5, 16, 35, 0.22),
+      inset 0 1px 0 rgba(222, 241, 255, 0.14) !important;
+  }
+
+  body.editorial-home .masthead,
+  body.editorial-home .ticker-live-shell {
+    background:
+      radial-gradient(circle at top right, rgba(164, 217, 255, 0.16), transparent 28%),
+      linear-gradient(180deg, rgba(33, 80, 142, 0.98), rgba(19, 55, 104, 0.99)) !important;
+    border: 1px solid rgba(179, 223, 255, 0.2) !important;
+    box-shadow:
+      0 14px 28px rgba(4, 14, 32, 0.18),
+      inset 0 1px 0 rgba(227, 242, 255, 0.14) !important;
+  }
+
+  body.editorial-home .masthead {
+    gap: 0.82rem !important;
+    padding: 0.94rem !important;
+  }
+
+  body.editorial-home .brand {
+    align-items: center !important;
+  }
+
+  body.editorial-home .brand img {
+    width: 52px !important;
+    height: 52px !important;
+    padding: 8px !important;
+    border-radius: 18px !important;
+    background:
+      radial-gradient(circle at top, rgba(255, 218, 153, 0.24), transparent 38%),
+      linear-gradient(180deg, rgba(8, 31, 63, 0.96), rgba(16, 50, 92, 0.98)) !important;
+    border: 1px solid rgba(198, 229, 255, 0.22) !important;
+    box-shadow:
+      0 10px 22px rgba(5, 15, 33, 0.22),
+      inset 0 1px 0 rgba(239, 247, 255, 0.14) !important;
+  }
+
+  body.editorial-home .brand-kicker {
+    color: rgba(203, 228, 255, 0.84) !important;
+  }
+
+  body.editorial-home .brand strong {
+    font-size: clamp(1.46rem, 7vw, 1.88rem) !important;
+    color: #f5fbff !important;
+    text-shadow: 0 10px 20px rgba(5, 16, 35, 0.18) !important;
+  }
+
+  body.editorial-home .main-nav {
+    grid-template-columns: 1fr !important;
+    gap: 0.54rem !important;
+  }
+
+  body.editorial-home .main-nav a {
+    width: 100% !important;
+    min-height: 46px !important;
+    border-radius: 16px !important;
+    font-size: 0.74rem !important;
+    letter-spacing: 0.08em !important;
+    border: 1px solid rgba(189, 227, 255, 0.16) !important;
+    background:
+      linear-gradient(180deg, rgba(32, 79, 140, 0.98), rgba(21, 60, 115, 0.99)) !important;
+    box-shadow:
+      0 10px 20px rgba(6, 18, 39, 0.16),
+      inset 0 1px 0 rgba(230, 243, 255, 0.12) !important;
+  }
+
+  body.editorial-home .main-nav a[href="./games.html"],
+  body.editorial-home .main-nav a[href="./catalogo-servicos.html"],
+  body.editorial-home .main-nav a[href="#monetizacao"] {
+    display: none !important;
+  }
+
+  body.editorial-home .ticker-live-shell {
+    display: none !important;
+  }
+
+  body.editorial-home .main-nav a.nav-game-link {
+    background:
+      linear-gradient(135deg, rgba(147, 16, 26, 0.99), rgba(238, 72, 72, 0.96)) !important;
+    border-color: rgba(255, 196, 196, 0.24) !important;
+  }
+
+  body.editorial-home .site-footer .footer-utility-buttons {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    padding-top: 0.2rem !important;
+  }
+
+  body.editorial-home .site-footer .footer-bottom-utility-buttons {
+    display: none !important;
+  }
+
+  body.editorial-home .site-footer .footer-utility-button {
+    width: 100% !important;
+    min-height: 44px !important;
+    font-size: 0.76rem !important;
+    letter-spacing: 0.08em !important;
+    border-radius: 12px !important;
   }
 }
