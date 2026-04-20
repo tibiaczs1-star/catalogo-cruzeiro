@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T02:25:30.222Z",
+  "lastUpdatedAt": "2026-04-20T02:39:15.133Z",
   "orders": [
     {
       "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
@@ -1558,6 +1558,21 @@
       "source": "chat",
       "rawRequest": "puixe da sua memoria o que vc estava fazendo reculperando os botoes de paid e escritorios e a cores la da primeira iamgem as bolas tem que a cor da segunda imagem e os escritorios desapareceram faça os botoes reaparecer",
       "summary": "Recuperar botoes de PubPaid e escritorios no topo e alinhar o azul da hero/faixa com a referencia escura",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-aumentar-sprites-e-legibilidade-da-marcha-insiders-trocar-video-do-cafe-por-foto",
+      "createdAt": "2026-04-20T02:39:15.133Z",
+      "updatedAt": "2026-04-20T02:39:15.133Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quero os sprois maioores os baloes de fala mais visiveis e que um nao cubra o outro chame os agentes de imagem e edicção e todos os especializados pra ageita isso depois faça deploy; troque o video do cafe cruzeiro por foto estatica; crie a div abaixo da hero com escritorios e entrar no jogo",
+      "summary": "Aumentar sprites e legibilidade da marcha Insiders, trocar video do Cafe por foto estatica e publicar faixa abaixo da hero com escritorios e entrar no jogo",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

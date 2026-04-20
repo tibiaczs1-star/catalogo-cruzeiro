@@ -21154,6 +21154,145 @@ body.fx-lite .insiders-command-stage .robot-squad .robot-shadow {
   color: #ffffff !important;
 }
 
+.office-play-strip {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.86fr);
+  gap: 1rem;
+  margin: 0 0 1.1rem;
+}
+
+.office-play-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 0.82rem;
+  padding: 1.2rem 1.25rem;
+  border-radius: 26px;
+  border: 1px solid rgba(190, 224, 255, 0.2);
+  box-shadow:
+    0 22px 44px rgba(7, 24, 49, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.office-play-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top left, rgba(208, 232, 255, 0.16), transparent 28%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 34%);
+}
+
+.office-play-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.office-play-card-offices {
+  background:
+    radial-gradient(circle at 84% 18%, rgba(131, 183, 243, 0.18), transparent 26%),
+    linear-gradient(145deg, rgba(41, 67, 109, 0.98), rgba(34, 57, 94, 0.98));
+}
+
+.office-play-card-game {
+  background:
+    radial-gradient(circle at 88% 16%, rgba(255, 167, 167, 0.16), transparent 28%),
+    linear-gradient(145deg, rgba(88, 18, 28, 0.98), rgba(132, 23, 33, 0.98));
+}
+
+.office-play-kicker {
+  color: rgba(222, 240, 255, 0.92);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.office-play-card strong {
+  color: #f7fbff;
+  font-size: clamp(1.1rem, 1.4vw, 1.5rem);
+  line-height: 1.16;
+}
+
+.office-play-card p {
+  margin: 0;
+  max-width: 54ch;
+  color: rgba(231, 241, 255, 0.86);
+  line-height: 1.52;
+}
+
+.office-play-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.office-play-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.78rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(206, 231, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f7fbff;
+  font-size: 0.86rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 12px 24px rgba(4, 14, 31, 0.16);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.office-play-actions a:hover,
+.office-play-actions a:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(231, 244, 255, 0.3);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.office-play-game-button {
+  gap: 0.6rem;
+  border-color: rgba(255, 186, 186, 0.32) !important;
+  background: linear-gradient(135deg, rgba(160, 24, 37, 0.98), rgba(234, 69, 69, 0.96)) !important;
+  color: #fff8f6 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 234, 234, 0.18),
+    0 16px 28px rgba(107, 16, 26, 0.28) !important;
+}
+
+.office-play-game-button:hover,
+.office-play-game-button:focus-visible {
+  border-color: rgba(255, 211, 211, 0.48) !important;
+  background: linear-gradient(135deg, rgba(182, 28, 42, 0.99), rgba(245, 83, 83, 0.97)) !important;
+}
+
+@media (max-width: 980px) {
+  .office-play-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .office-play-card {
+    padding: 1rem;
+    border-radius: 22px;
+  }
+
+  .office-play-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .office-play-actions a {
+    width: 100%;
+  }
+}
+
 .source-monitor-copy {
   margin: 0.7rem 0 0;
   max-width: 54ch;

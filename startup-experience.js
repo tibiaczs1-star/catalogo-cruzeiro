@@ -9,7 +9,7 @@
   const THANKS_SCREEN_MS_COMPACT = 3600;
   const THANKS_SCREEN_MS_PHONE = 6800;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
-  const FOUNDERS_VIDEO_SRC = "./assets/founders-cafe-pack-anim.mp4";
+  const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
   const FOUNDERS_RECOMMENCER_LOGO_SRC = "./assets/founders-recommencer-logo.svg";
@@ -231,16 +231,13 @@
               <span>Fundador em cena</span>
               <strong>Cafe Cruzeiro</strong>
             </div>
-            <video
-              class="catalogo-founder-thanks-video"
-              muted
-              playsinline
-              preload="auto"
-              autoplay
-              loop
-            >
-              <source src="${FOUNDERS_VIDEO_SRC}" type="video/mp4" />
-            </video>
+            <img
+              class="catalogo-founder-thanks-image"
+              src="${FOUNDERS_CAFE_IMAGE_SRC}"
+              alt="Pacote do Cafe Cruzeiro em destaque no palco dos fundadores"
+              decoding="async"
+              loading="eager"
+            />
             <div class="catalogo-founder-stage-applause" aria-hidden="true">
               <span>aplausos</span>
               <i></i>
@@ -257,7 +254,7 @@
                 <span>Fundador em cena</span>
                 <div class="catalogo-founder-thanks-logo-wrap catalogo-founder-thanks-copy-card">
                   <strong>Cafe Cruzeiro</strong>
-                  <small>video de abertura e palco do portal</small>
+                  <small>imagem de abertura e palco do portal</small>
                 </div>
               </article>
               <article class="catalogo-founder-banner-card catalogo-founder-banner-card-grupoas">
@@ -631,22 +628,9 @@
     }
 
     if (modal.classList.contains("is-phone")) {
-      const thanksVideo = modal.querySelector(".catalogo-founder-thanks-video");
       modal.__stopFounderOpening = startFounderOpening(modal);
       modal.classList.add("is-thanking");
       modal.setAttribute("aria-hidden", "true");
-
-      if (thanksVideo) {
-        try {
-          thanksVideo.currentTime = 0;
-          const playAttempt = thanksVideo.play();
-          if (playAttempt && typeof playAttempt.catch === "function") {
-            playAttempt.catch(() => {});
-          }
-        } catch (_error) {
-          // ignore media playback failures
-        }
-      }
 
       window.setTimeout(() => {
         closeWelcomeModalImmediately(modal);
@@ -657,22 +641,9 @@
     const thanksDuration = modal.classList.contains("is-compact")
       ? THANKS_SCREEN_MS_COMPACT
       : THANKS_SCREEN_MS;
-    const thanksVideo = modal.querySelector(".catalogo-founder-thanks-video");
     modal.__stopFounderOpening = startFounderOpening(modal);
     modal.classList.add("is-thanking");
     modal.setAttribute("aria-hidden", "true");
-
-    if (thanksVideo) {
-      try {
-        thanksVideo.currentTime = 0;
-        const playAttempt = thanksVideo.play();
-        if (playAttempt && typeof playAttempt.catch === "function") {
-          playAttempt.catch(() => {});
-        }
-      } catch (_error) {
-        // ignore media playback failures
-      }
-    }
 
     window.setTimeout(() => {
       modal.classList.add("is-leaving");

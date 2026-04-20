@@ -126,26 +126,30 @@
     const compact = state.width < 720;
     const rowCount = compact ? 5 : 6;
     const marchers = [];
+    const stagePadding = compact ? state.width * 0.04 : state.width * 0.055;
+    const usableWidth = state.width - stagePadding * 2;
 
     for (let row = 0; row < rowCount; row += 1) {
       const depth = row / Math.max(1, rowCount - 1);
       const density = 1 - depth;
       const count = compact
-        ? Math.round(lerp(16, 9, depth))
-        : Math.round(lerp(22, 11, depth));
-      const baseY = lerp(state.height * 0.48, state.height * 0.9, Math.pow(depth, 1.06));
+        ? Math.round(lerp(12, 6, depth))
+        : Math.round(lerp(16, 8, depth));
+      const baseY = lerp(state.height * 0.43, state.height * 0.9, Math.pow(depth, 1.02));
       const scale = lerp(0.22, compact ? 0.84 : 1.06, Math.pow(depth, 1.16));
+      const rowOffset = ((row % 2 === 0 ? -1 : 1) * usableWidth) / Math.max(28, compact ? 20 : 24);
 
       for (let index = 0; index < count; index += 1) {
         const seed = row * 101 + index * 13.17;
         const offset = hash(seed + 0.4) - 0.5;
-        const jitterX = offset * lerp(state.width * 0.018, state.width * 0.05, density);
-        const jitterY = (hash(seed + 0.8) - 0.5) * lerp(8, 18, depth);
-        const x = ((index + 0.5) / count) * state.width + jitterX;
+        const slotX = stagePadding + ((index + 0.5) / count) * usableWidth;
+        const jitterX = offset * lerp(state.width * 0.012, state.width * 0.034, density);
+        const jitterY = (hash(seed + 0.8) - 0.5) * lerp(10, 22, depth);
+        const x = clamp(slotX + jitterX + rowOffset, stagePadding, state.width - stagePadding);
         const y = baseY + jitterY;
         const palette = paletteBank[Math.floor(hash(seed + 1.2) * paletteBank.length)];
-        const holdPlacard = depth > 0.26 && hash(seed + 2.1) > (depth > 0.72 ? 0.38 : 0.63);
-        const widePlacard = holdPlacard && depth > 0.6 && hash(seed + 2.8) > 0.58;
+        const holdPlacard = depth > 0.2 && hash(seed + 2.1) > (depth > 0.72 ? 0.56 : 0.76);
+        const widePlacard = holdPlacard && depth > 0.58 && hash(seed + 2.8) > 0.7;
 
         marchers.push({
           x,
@@ -160,6 +164,9 @@
           holdPlacard,
           widePlacard,
           placardLabel: placardLabels[Math.floor(hash(seed + 4.9) * placardLabels.length)],
+          placardLift: lerp(2.6, 4.8, hash(seed + 5.3)),
+          placardSide: hash(seed + 5.7) > 0.5 ? 1 : -1,
+          placardTilt: (hash(seed + 6.1) - 0.5) * lerp(0.8, 2.2, depth),
           cap: hash(seed + 6.2) > 0.72,
           backpack: hash(seed + 7.7) > 0.78
         });
@@ -169,23 +176,23 @@
     state.marchers = marchers.sort((left, right) => left.depth - right.depth);
     state.banners = [
       {
-        x: state.width * 0.28,
-        y: state.height * (compact ? 0.72 : 0.74),
-        width: state.width * (compact ? 0.24 : 0.22),
+        x: state.width * 0.23,
+        y: state.height * (compact ? 0.72 : 0.75),
+        width: state.width * (compact ? 0.28 : 0.24),
         label: leadBanners[0],
         tone: "#ffd375"
       },
       {
         x: state.width * 0.56,
-        y: state.height * (compact ? 0.76 : 0.78),
-        width: state.width * (compact ? 0.26 : 0.24),
+        y: state.height * (compact ? 0.79 : 0.81),
+        width: state.width * (compact ? 0.3 : 0.26),
         label: leadBanners[1],
         tone: "#89d8ff"
       },
       {
-        x: state.width * 0.76,
-        y: state.height * (compact ? 0.69 : 0.72),
-        width: state.width * (compact ? 0.2 : 0.18),
+        x: state.width * 0.82,
+        y: state.height * (compact ? 0.68 : 0.71),
+        width: state.width * (compact ? 0.22 : 0.2),
         label: leadBanners[2],
         tone: "#ffb984"
       }
@@ -227,13 +234,13 @@
 
   const drawLeadBanner = (banner, time) => {
     const wave = motionQuery.matches ? 0 : Math.sin(time * 0.0016 + banner.x * 0.002) * 6;
-    const bannerHeight = Math.max(22, Math.round(banner.width * 0.14));
+    const bannerHeight = Math.max(28, Math.round(banner.width * 0.18));
     const left = Math.round(banner.x - banner.width / 2 + state.driftX * 0.35);
     const top = Math.round(banner.y + wave);
     const fold = Math.round(Math.max(4, bannerHeight * 0.16));
 
     context.fillStyle = "rgba(31, 22, 18, 0.24)";
-    context.fillRect(left + 10, top + bannerHeight + 10, Math.round(banner.width * 0.82), 10);
+    context.fillRect(left + 10, top + bannerHeight + 12, Math.round(banner.width * 0.82), 12);
 
     context.fillStyle = "rgba(244, 236, 214, 0.9)";
     context.fillRect(left, top, Math.round(banner.width), bannerHeight);
@@ -246,7 +253,7 @@
     context.fillRect(left + Math.round(banner.width) - 11, top, 3, bannerHeight + 22);
 
     context.fillStyle = "#162031";
-    context.font = `900 ${Math.max(10, Math.round(bannerHeight * 0.42))}px Outfit, sans-serif`;
+    context.font = `900 ${Math.max(13, Math.round(bannerHeight * 0.44))}px Outfit, sans-serif`;
     context.textAlign = "center";
     context.textBaseline = "middle";
     context.fillText(banner.label[0], left + banner.width / 2, top + bannerHeight * 0.34);
@@ -258,24 +265,30 @@
       return;
     }
 
-    const placardWidth = marcher.widePlacard ? pixel * 18 : pixel * 12;
-    const placardHeight = marcher.widePlacard ? pixel * 8 : pixel * 6;
-    const top = headTop - placardHeight - pixel * 4;
-    const left = Math.round(baseX - placardWidth / 2);
+    const placardWidth = marcher.widePlacard ? pixel * 21 : pixel * 15;
+    const placardHeight = marcher.widePlacard ? pixel * 10 : pixel * 8;
+    const top = Math.round(headTop - placardHeight - pixel * marcher.placardLift);
+    const left = Math.round(baseX - placardWidth / 2 + marcher.placardSide * pixel * 0.9);
+    const stakeHeight = marcher.widePlacard ? pixel * 7 : pixel * 6;
 
+    context.fillStyle = "rgba(9, 12, 18, 0.16)";
+    context.fillRect(left + pixel, top + placardHeight + stakeHeight + pixel, placardWidth - pixel * 2, pixel * 2);
     context.fillStyle = "rgba(246, 239, 220, 0.94)";
     context.fillRect(left, top, placardWidth, placardHeight);
     context.fillStyle = "rgba(148, 101, 57, 0.7)";
     context.fillRect(left, top, placardWidth, pixel);
-    context.fillRect(left + pixel * 2, top + placardHeight, pixel, pixel * 6);
-    context.fillRect(left + placardWidth - pixel * 3, top + placardHeight, pixel, pixel * 6);
+    context.fillStyle = "rgba(208, 178, 129, 0.9)";
+    context.fillRect(left + pixel * 0.8, top + pixel * 0.8, placardWidth - pixel * 1.6, placardHeight - pixel * 1.6);
+    context.fillStyle = "rgba(148, 101, 57, 0.78)";
+    context.fillRect(left + pixel * 2, top + placardHeight, pixel, stakeHeight);
+    context.fillRect(left + placardWidth - pixel * 3, top + placardHeight, pixel, stakeHeight);
 
     context.fillStyle = marcher.palette.accent;
     context.fillRect(left, top, placardWidth, Math.max(pixel, 2));
     context.fillStyle = "#141b28";
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.font = `900 ${Math.max(6, Math.round(pixel * 2.1))}px "IBM Plex Mono", monospace`;
+    context.font = `900 ${Math.max(8, Math.round(pixel * 2.45))}px "IBM Plex Mono", monospace`;
 
     const lines = marcher.widePlacard ? splitLabel(marcher.placardLabel) : [marcher.placardLabel];
     lines.slice(0, 2).forEach((line, index) => {
@@ -285,7 +298,7 @@
   };
 
   const drawMarcher = (marcher, time) => {
-    const pixel = Math.max(1, Math.round(marcher.scale * 3));
+    const pixel = Math.max(1, Math.round(marcher.scale * 4));
     const bob = motionQuery.matches ? 0 : Math.sin(time * 0.005 * marcher.speed + marcher.phase) * pixel;
     const stride = motionQuery.matches ? 0 : Math.sin(time * 0.009 * marcher.speed + marcher.phase);
     const armLift = Math.round(stride * pixel * 1.5);
