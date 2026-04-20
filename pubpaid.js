@@ -701,7 +701,7 @@
 
   const sceneCtx = refs.sceneCanvas?.getContext("2d");
   const depositState = {
-    amount: 10,
+    amount: null,
     txid: "",
     qrReady: false,
     locked: false,
@@ -3622,8 +3622,9 @@
   }
 
   function getDepositAmount() {
-    const amount = clampInteger(refs.depositAmount?.value || 10);
-    return [5, 10, 20, 50, 100].includes(amount) ? amount : 10;
+    const raw = String(refs.depositAmount?.value || "").trim();
+    const amount = clampInteger(raw);
+    return [5, 10, 20, 50, 100].includes(amount) ? amount : null;
   }
 
   function getWithdrawalAmount() {
@@ -3669,7 +3670,15 @@
   }
 
   function unlockDepositNameStep() {
-    depositState.amount = getDepositAmount();
+    const amount = getDepositAmount();
+    if (!amount) {
+      if (refs.depositFeedback) {
+        refs.depositFeedback.textContent = "Escolha um valor antes de continuar no deposito.";
+      }
+      refs.depositAmount?.focus?.();
+      return;
+    }
+    depositState.amount = amount;
     depositState.stage = "name";
     setDepositStepState({
       amount: true,
@@ -3722,6 +3731,12 @@
     }
 
     const amount = getDepositAmount();
+    if (!amount) {
+      if (refs.depositFeedback) {
+        refs.depositFeedback.textContent = "Escolha um valor antes de gerar o QR Code.";
+      }
+      return;
+    }
     if (forceNewTxid || !depositState.txid || depositState.amount !== amount) {
       depositState.txid = buildDepositTxid();
       depositState.qrReady = false;
@@ -3745,7 +3760,19 @@
       const payload = await requestApiJson(`/api/pubpaid/deposit/pix?${params.toString()}`, { method: "GET" });
       depositState.txid = payload.txid || depositState.txid;
       depositState.qrReady = true;
-      refs.depositQr.innerHTML = payload.qrSvg || "<p>QR indisponivel. Tente gerar novamente.</p>";
+      refs.depositQr.innerHTML = `
+        ${payload.qrSvg || "<p>QR indisponivel. Tente gerar novamente.</p>"}
+        <div class="pubpaid-pix-meta">
+          <div>
+            <strong>Chave Pix</strong>
+            <span class="pubpaid-pix-box">${escapeHtml(payload.pixKey || "Indisponivel")}</span>
+          </div>
+          <div>
+            <strong>Codigo Pix copia e cola</strong>
+            <span class="pubpaid-pix-box">${escapeHtml(payload.copyCode || "Indisponivel")}</span>
+          </div>
+        </div>
+      `;
       unlockDepositConfirmStep();
       if (refs.depositFeedback) {
         refs.depositFeedback.textContent =

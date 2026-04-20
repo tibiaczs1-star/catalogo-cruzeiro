@@ -1103,6 +1103,33 @@ body.pubpaid-page.pubpaid-in-game .pubpaid-grid .pubpaid-panel {
   text-align: center;
 }
 
+.pubpaid-pix-meta {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pubpaid-pix-meta strong {
+  color: #14233d;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pubpaid-pix-box {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(11, 28, 51, 0.08);
+  color: #14233d;
+  font-size: 12px;
+  line-height: 1.5;
+  word-break: break-all;
+  font-family: "IBM Plex Mono", "Fira Code", monospace;
+}
+
 .pubpaid-cashier-actions {
   display: grid;
   gap: 8px;

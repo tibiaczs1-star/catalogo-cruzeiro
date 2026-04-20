@@ -2267,10 +2267,12 @@ async function buildNinjasPixConfig({
 
   return {
     paymentMethod: "pix-qr-code",
-    keyVisible: false,
+    keyVisible: true,
     merchantName: normalizePixText(NINJAS_MERCHANT_NAME, 25) || "CATALOGO CZS",
     amount: Number(safeAmount.toFixed(2)),
     txid: payload.txid,
+    pixKey: cleanShortText(NINJAS_PIX_KEY, 77),
+    copyCode: payload.copyCode,
     qrSvg,
     confirmationMode: "manual"
   };
