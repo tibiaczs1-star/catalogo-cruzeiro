@@ -78,7 +78,14 @@ function normalizeDeposit(item = {}, index = 0) {
     item.amountCoins ?? item.amount ?? item.valueCoins ?? item.value ?? item.coins ?? item.creditsRequested
   );
   const playerId = normalizeText(
-    item.playerId ?? item.userId ?? item.playerSlug ?? item.email ?? item.whatsApp ?? item.user?.email,
+    item.playerId ??
+      item.walletKey ??
+      item.userId ??
+      item.playerSlug ??
+      item.user?.sub ??
+      item.email ??
+      item.whatsApp ??
+      item.user?.email,
     ""
   );
   const playerName = normalizeText(
@@ -108,7 +115,10 @@ function normalizeWithdrawal(item = {}, index = 0) {
   const amount = normalizeMoney(
     item.amountCoins ?? item.amount ?? item.valueCoins ?? item.value ?? item.coins
   );
-  const playerId = normalizeText(item.playerId ?? item.userId ?? item.playerSlug ?? item.email ?? item.whatsApp, "");
+  const playerId = normalizeText(
+    item.playerId ?? item.walletKey ?? item.userId ?? item.playerSlug ?? item.user?.sub ?? item.email ?? item.whatsApp,
+    ""
+  );
   const playerName = normalizeText(item.playerName ?? item.player ?? item.name ?? item.solicitante, "Jogador");
   return {
     id: normalizeId("withdrawal", item.id, index),
