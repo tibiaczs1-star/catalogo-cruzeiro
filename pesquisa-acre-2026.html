@@ -26,99 +26,80 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260420electionrebuild" />
+    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260420freshdevicevote" />
   </head>
   <body>
-    <div class="election-page-noise" aria-hidden="true"></div>
-
-    <main class="election-shell">
-      <section class="election-hero">
-        <div class="election-hero-copy">
-          <p class="eyebrow">Participação cidadã</p>
-          <h1>Eleições no Acre</h1>
-          <p class="election-hero-lead">
-            Painel público para acompanhar preferência por cargo. Cada dispositivo registra um
-            voto por cargo e depois acompanha as parciais no próprio painel.
+    <main class="poll-shell">
+      <section class="poll-hero">
+        <div class="poll-hero-copy">
+          <p class="poll-eyebrow">Participação cidadã</p>
+          <h1>Pesquisa eleitoral do Acre</h1>
+          <p class="poll-lead">
+            Uma leitura simples para votar por cargo e acompanhar as parciais. Cada navegador
+            registra um voto por cargo e depois fica bloqueado naquele cargo.
           </p>
-          <div class="election-hero-pills">
-            <span>1 voto por dispositivo</span>
-            <span>Parciais abertas</span>
+          <div class="poll-hero-chips">
             <span>Sem login</span>
+            <span>1 voto por dispositivo</span>
+            <span>Parcial aberta</span>
           </div>
         </div>
 
-        <div class="election-auth-card">
-          <div class="election-auth-copy">
-            <span>voto local</span>
-            <strong>Este navegador guarda seu voto</strong>
-            <p>
-              O sistema cria um identificador local neste dispositivo. Depois que ele vota em um
-              cargo, não vota de novo no mesmo cargo.
-            </p>
-          </div>
-        </div>
+        <aside class="poll-hero-card">
+          <span class="poll-card-kicker">Como funciona</span>
+          <strong>Você vota, o dispositivo guarda, o painel atualiza.</strong>
+          <p>
+            O bloqueio é feito por este navegador. Se ele já votou em um cargo, o botão daquele
+            cargo fica fechado e a parcial continua visível.
+          </p>
+        </aside>
       </section>
 
-      <section class="election-board">
-        <div class="election-board-head">
+      <section class="poll-board">
+        <header class="poll-board-head">
           <div>
-            <p class="eyebrow">Escolha o cargo</p>
-            <h2>Painel semanal de voto</h2>
+            <p class="poll-eyebrow">Cargos em votação</p>
+            <h2>Painel semanal</h2>
           </div>
-          <p class="election-updated" id="electionUpdatedAt">Carregando painel...</p>
-        </div>
+          <p class="poll-updated" id="pollUpdatedAt">Carregando dados...</p>
+        </header>
 
-        <div class="office-tabs" id="officeTabs" role="tablist" aria-label="Cargos em votação"></div>
+        <div class="poll-office-tabs" id="pollOfficeTabs" role="tablist" aria-label="Cargos"></div>
 
-        <div class="office-stage">
-          <div class="office-stage-copy">
-            <p class="eyebrow" id="officeBadge">Cargo</p>
-            <h3 id="officeTitle">Selecione um cargo</h3>
-            <p id="officeSummary">Os nomes e parciais da disputa aparecem aqui.</p>
+        <section class="poll-office-panel" id="pollOfficePanel" aria-live="polite">
+          <div class="poll-office-copy">
+            <p class="poll-eyebrow" id="pollOfficeBadge">Cargo</p>
+            <h3 id="pollOfficeTitle">Carregando...</h3>
+            <p id="pollOfficeSummary">Os nomes monitorados neste cargo aparecem abaixo.</p>
           </div>
-          <div class="office-stage-meta">
-            <span id="officeScope">Escopo</span>
-            <span id="officeVoteRule">1 voto semanal</span>
+          <div class="poll-office-meta">
+            <span id="pollOfficeScope">Escopo</span>
+            <span id="pollOfficeRule">1 voto por dispositivo</span>
           </div>
-        </div>
-
-        <section class="candidate-grid" id="candidateGrid" aria-live="polite">
-          <p class="election-empty">Carregando candidatos...</p>
         </section>
 
-        <section class="results-panel">
-          <div class="results-head">
+        <section class="poll-feedback" id="pollFeedback" hidden aria-live="polite"></section>
+
+        <section class="poll-candidate-grid" id="pollCandidateGrid" aria-live="polite">
+          <p class="poll-empty">Carregando candidatos...</p>
+        </section>
+
+        <section class="poll-results">
+          <div class="poll-results-head">
             <div>
-              <p class="eyebrow">Parciais da semana</p>
-              <h3 id="resultsTitle">Resultado parcial</h3>
+              <p class="poll-eyebrow">Parciais</p>
+              <h3 id="pollResultsTitle">Resultado parcial</h3>
             </div>
-            <p class="results-note" id="resultsNote">As barras sobem assim que os votos entram.</p>
+            <p class="poll-results-note" id="pollResultsNote">As barras aparecem quando entram votos.</p>
           </div>
 
-          <div class="results-bars" id="resultsBars">
-            <p class="election-empty">Sem votos registrados nesta semana.</p>
+          <div class="poll-results-list" id="pollResultsList">
+            <p class="poll-empty">Sem votos registrados por enquanto.</p>
           </div>
-        </section>
-
-        <section class="thanks-banner" id="thanksBanner" hidden>
-          <strong>Obrigado por votar.</strong>
-          <p>Acompanhe semanalmente para ver como o cenário muda ao longo da campanha.</p>
         </section>
       </section>
     </main>
 
-    <div class="vote-modal-backdrop" id="voteModalBackdrop" hidden>
-      <section class="vote-modal" role="dialog" aria-modal="true" aria-labelledby="voteModalTitle">
-        <p class="eyebrow">Confirmar voto</p>
-        <h2 id="voteModalTitle">Registrar voto</h2>
-        <p id="voteModalText">Confirme seu voto para continuar.</p>
-        <div class="vote-modal-actions">
-          <button type="button" class="button button-ghost" id="voteCancelButton">Cancelar</button>
-          <button type="button" class="button button-solid" id="voteConfirmButton">Confirmar voto</button>
-        </div>
-      </section>
-    </div>
-
-    <script src="./pesquisa-acre-2026.js?v=20260420devicevote" defer></script>
+    <script src="./pesquisa-acre-2026.js?v=20260420freshdevicevote" defer></script>
   </body>
 </html>

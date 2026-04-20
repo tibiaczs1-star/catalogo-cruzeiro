@@ -4201,9 +4201,10 @@ function recordElectionVote(payload = {}, req = null) {
   if (currentVoteEntry.candidateId && currentVoteEntry.weekKey === currentWeekKey) {
     const snapshot = getElectionPublicSnapshot(safeVoterId);
     return {
-      ok: true,
+      ok: false,
       alreadyVoted: true,
-      status: 200,
+      status: 409,
+      message: "Este dispositivo já votou neste cargo.",
       ...snapshot
     };
   }

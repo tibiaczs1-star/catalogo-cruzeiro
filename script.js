@@ -1227,7 +1227,7 @@ const initializeLiveTicker = () => {
 
   clearLiveTickerRuntime();
 
-  const laneNodes = [...tickerLiveGrid.querySelectorAll(".ticker-lane")].slice(0, 2);
+  const laneNodes = [...tickerLiveGrid.querySelectorAll(".ticker-lane")].slice(0, 1);
   const activeTickerPhrasePool = getTickerPhrasePool();
 
   if (!laneNodes.length || activeTickerPhrasePool.length === 0) {
@@ -1245,7 +1245,7 @@ const initializeLiveTicker = () => {
   const lanes = laneNodes.map((laneNode, laneIndex) => {
     const track = document.createElement("div");
     track.className = "ticker-track";
-    track.style.setProperty("--ticker-duration", `${34 + laneIndex * 4}s`);
+    track.style.setProperty("--ticker-duration", "34s");
 
     const primarySegment = document.createElement("div");
     primarySegment.className = "ticker-segment";
@@ -5391,6 +5391,93 @@ document.addEventListener("click", (event) => {
   if (article) {
     persistOfflineArticle(article);
   }
+});
+
+const getAnchorScrollOffset = () => {
+  const headerStack = document.querySelector("#site-header-stack");
+  const headerHeight = headerStack?.getBoundingClientRect().height || 0;
+  return headerHeight + 18;
+};
+
+const scrollSectionIntoView = (target, { updateHash = true } = {}) => {
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const rect = target.getBoundingClientRect();
+  const absoluteTop = window.scrollY + rect.top;
+  const offsetTop = getAnchorScrollOffset();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  const targetHeight = rect.height || target.offsetHeight || 0;
+  const freeSpace = Math.max(0, viewportHeight - offsetTop - targetHeight);
+  const centerOffset = offsetTop + freeSpace / 2;
+  const nextTop = Math.max(0, absoluteTop - centerOffset);
+
+  window.scrollTo({
+    top: nextTop,
+    behavior: splashMotionQuery.matches ? "auto" : "smooth"
+  });
+
+  if (updateHash && target.id) {
+    try {
+      const nextUrl = `${window.location.pathname}${window.location.search}#${target.id}`;
+      window.history.replaceState({}, document.title, nextUrl);
+    } catch (_error) {
+      // Se o navegador bloquear a troca do hash, a rolagem continua valendo.
+    }
+  }
+};
+
+document.addEventListener("click", (event) => {
+  const anchor = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
+  if (!anchor) {
+    return;
+  }
+
+  const href = anchor.getAttribute("href") || "";
+  if (!href || href === "#") {
+    return;
+  }
+
+  const target = document.querySelector(href);
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  event.preventDefault();
+  scrollSectionIntoView(target);
+});
+
+window.addEventListener("hashchange", () => {
+  const hash = window.location.hash || "";
+  if (!hash || hash === "#") {
+    return;
+  }
+
+  const target = document.querySelector(hash);
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    scrollSectionIntoView(target, { updateHash: false });
+  }, 20);
+});
+
+window.addEventListener("load", () => {
+  const hash = window.location.hash || "";
+  if (!hash || hash === "#") {
+    return;
+  }
+
+  const target = document.querySelector(hash);
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    scrollSectionIntoView(target, { updateHash: false });
+  }, 60);
 });
 
 // --- Elections: poll by office with one vote per browser/office ---
