@@ -145,9 +145,40 @@
     state.buttonRendered = true;
   }
 
+  function focusAuthCard() {
+    const card = document.querySelector("[data-google-auth-card]");
+    if (!card) return;
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.add("google-auth-spotlight");
+    window.setTimeout(() => card.classList.remove("google-auth-spotlight"), 1800);
+  }
+
+  function triggerRenderedGoogleButton() {
+    const host = document.querySelector("[data-google-auth-button]:not([hidden])");
+    if (!host) return false;
+
+    const clickableNode =
+      host.querySelector('div[role="button"]') ||
+      host.querySelector("iframe") ||
+      host.firstElementChild;
+
+    if (!clickableNode || typeof clickableNode.click !== "function") {
+      return false;
+    }
+
+    clickableNode.click();
+    return true;
+  }
+
   async function promptSignIn() {
     if (!state.enabled || state.user) return false;
     await renderGoogleButtons().catch(() => {});
+    focusAuthCard();
+
+    if (triggerRenderedGoogleButton()) {
+      return true;
+    }
+
     if (!window.google?.accounts?.id?.prompt) return false;
     if (shouldForceReauth() && window.google?.accounts?.id?.disableAutoSelect) {
       window.google.accounts.id.disableAutoSelect();
