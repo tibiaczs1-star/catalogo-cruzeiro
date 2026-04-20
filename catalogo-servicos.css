@@ -788,6 +788,112 @@ body.catalogo-servicos-page {
   color: #174879;
 }
 
+.svc-ads-rack {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid rgba(185, 95, 49, 0.16);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 216, 154, 0.18), transparent 26%),
+    linear-gradient(145deg, rgba(255, 250, 241, 0.98), rgba(243, 236, 224, 0.96));
+  box-shadow: 0 18px 36px rgba(16, 44, 73, 0.08);
+}
+
+.svc-ads-rack[hidden] {
+  display: none !important;
+}
+
+.svc-ads-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.svc-ads-head span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0.16rem 0.58rem;
+  border-radius: 999px;
+  background: rgba(185, 95, 49, 0.12);
+  color: var(--svc-accent);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.svc-ads-head strong {
+  display: block;
+  margin-top: 0.42rem;
+  color: #0f2d4e;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+.svc-ads-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.svc-ad-slot {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  min-height: 146px;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px dashed rgba(16, 44, 73, 0.18);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(247, 241, 231, 0.9)),
+    linear-gradient(rgba(16, 44, 73, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 44, 73, 0.06) 1px, transparent 1px);
+  background-size: cover, 18px 18px, 18px 18px;
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 14px 28px rgba(16, 44, 73, 0.06);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.svc-ad-slot:hover {
+  transform: translateY(-2px);
+  border-color: rgba(185, 95, 49, 0.32);
+  box-shadow: 0 18px 34px rgba(16, 44, 73, 0.1);
+}
+
+.svc-ad-slot span {
+  color: var(--svc-accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.svc-ad-slot strong {
+  color: #143457;
+  font-family: "Outfit", sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.16;
+}
+
+.svc-ad-slot small {
+  color: #58708a;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.svc-ad-slot-wide {
+  min-height: 170px;
+  border-style: solid;
+  background:
+    radial-gradient(circle at top right, rgba(74, 144, 226, 0.18), transparent 28%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(238, 246, 255, 0.94));
+}
+
 body.catalogo-servicos-page[data-svc-module="locacao-transporte"] .svc-hero {
   box-shadow:
     0 22px 44px rgba(13, 30, 48, 0.18),
@@ -945,6 +1051,10 @@ body.catalogo-servicos-page[data-svc-module="locacao-transporte"] .svc-hero {
   .svc-construction-strip {
     grid-template-columns: 1fr;
   }
+
+  .svc-ads-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 700px) {
@@ -977,6 +1087,26 @@ body.catalogo-servicos-page[data-svc-module="locacao-transporte"] .svc-hero {
 
   .svc-feature-mini-row {
     grid-template-columns: 1fr;
+  }
+
+  .svc-ads-rack {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .svc-ads-head {
+    align-items: start;
+  }
+
+  .svc-ads-head .svc-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .svc-ad-slot,
+  .svc-ad-slot-wide {
+    min-height: 132px;
+    padding: 0.92rem;
   }
 }
 

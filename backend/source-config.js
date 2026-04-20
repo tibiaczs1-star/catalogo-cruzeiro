@@ -26,5 +26,40 @@ module.exports = [
     feedUrl: "https://www.cruzeirodosul.ac.gov.br/feed",
     siteUrl: "https://www.cruzeirodosul.ac.gov.br/",
     defaultCategory: "Utilidade Publica"
+  },
+  {
+    id: "jurua-24-horas",
+    name: "Jurua 24 Horas",
+    feedUrl: "https://jurua24horas.com/feed/",
+    siteUrl: "https://jurua24horas.com/",
+    defaultCategory: "Cotidiano"
+  },
+  {
+    id: "jurua-comunicacao",
+    name: "Jurua Comunicacao",
+    feedUrl: "https://juruacomunicacao.com.br/feed/",
+    siteUrl: "https://juruacomunicacao.com.br/",
+    defaultCategory: "Cotidiano"
+  },
+  {
+    id: "batelao",
+    name: "Batelao",
+    feedUrl: "https://batelao.com/feed/",
+    siteUrl: "https://batelao.com/",
+    defaultCategory: "Cotidiano"
+  },
+  {
+    id: "tribuna-do-jurua",
+    name: "Tribuna do Jurua",
+    feedUrl: "https://tribunadojurua.com.br/feed/",
+    siteUrl: "https://tribunadojurua.com.br/",
+    defaultCategory: "Cotidiano"
+  },
+  {
+    id: "portal-do-jurua",
+    name: "Portal do Jurua",
+    feedUrl: "https://www.portaldojurua.com.br/feed/",
+    siteUrl: "https://www.portaldojurua.com.br/",
+    defaultCategory: "Cotidiano"
   }
 ];

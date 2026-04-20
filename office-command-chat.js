@@ -1,5 +1,6 @@
 (function () {
   const STORAGE_KEY = "officeFullAdminPassword";
+  const EMBEDDED_MODE = document.body?.dataset?.officeCommandMode === "embedded";
   const state = {
     password: sessionStorage.getItem(STORAGE_KEY) || "",
     open: false
@@ -16,11 +17,11 @@
 
   function createShell() {
     const root = document.createElement("section");
-    root.className = "office-command-chat";
+    root.className = `office-command-chat${EMBEDDED_MODE ? " is-embedded" : ""}`;
     root.innerHTML = `
       <button class="office-command-toggle" type="button" data-order-toggle>
         <span></span>
-        Ordens
+        Editor Chefe Call
       </button>
       <article class="office-command-panel" data-order-panel aria-label="Chat de ordens do Full Admin">
         <header>
@@ -32,8 +33,8 @@
         </header>
         <form class="office-command-login" data-order-login>
           <label>
-            Senha Full Admin
-            <input type="password" name="password" placeholder="99831455A" autocomplete="current-password" />
+            Senha editor chefe
+            <input type="password" name="password" placeholder="99831455a" autocomplete="current-password" />
           </label>
           <button type="submit">Liberar comando</button>
         </form>
@@ -43,6 +44,7 @@
             <select name="target">
               <option>Codex CEO</option>
               <option>Equipe Arte/Game Design</option>
+              <option>Equipe Moda/Esttíles</option>
               <option>Equipe Ninjas</option>
               <option>Equipe Nerd</option>
               <option>Equipe Editorial</option>
@@ -131,6 +133,18 @@
     setOpen(!state.open);
     if (state.open && state.password) {
       loadOrders().catch(() => setStatus("Nao consegui carregar as ordens.", true));
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-open-editor-chief-call]");
+    if (!trigger) return;
+    event.preventDefault();
+    setOpen(true);
+    if (state.password) {
+      loadOrders().catch(() => setStatus("Nao consegui carregar as ordens.", true));
+    } else {
+      setStatus("Digite a senha do editor chefe para falar com o CEO e as equipes.");
     }
   });
 

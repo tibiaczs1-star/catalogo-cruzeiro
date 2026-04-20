@@ -17,6 +17,13 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 - `Escritorio de Arte` criado em `escritorio-arte.html` com `escritorio-arte-config.js`: 50 agentes de Design Art e Programacao de Game Design, trabalhando junto com Ninjas para aprender/aplicar pixel art, sprites, game engine, colisao, fisica, mapeamento, mapas, som, QA e build. Menus e chat de ordens atualizados com `Equipe Arte/Game Design`.
 - `SPRTIS CHECK & CHANGE` foi corrigido depois do feedback forte do usuario: nao mostra mais senha no placeholder, nao lista `assets` ja publicados, agrupa frames em sprites animados, abre avaliacao em tela cheia, usa `<img>` e nao canvas para preview, e inclui observacoes de modo construcao para mapas/cenarios. Validacao local: 2107 grupos, 190 animados, 1668 mapas/cenarios, 0 `assets` na fila.
 
+## Atualizacao rapida 2026-04-20
+
+- A hero mobile da home foi restaurada sem voltar com o fundo removido: o bloco principal e a lateral azul voltaram a aparecer, os cards de destaque ficaram opacos de novo e a coluna azul da cobertura local deixou de sumir no mobile.
+- O acesso do jogo voltou para o topo da home com destaque vermelho animado e icone, tanto no menu principal quanto no hub mobile de escritórios.
+- A `PubPaid` passou para fluxo em duas etapas: a pagina mostra vitrine, funcionalidades e valores; depois o usuario entra em modo game full screen so apos Google + avatar, com o antigo bloco inferior reaproveitado como painel interno da noite.
+- Validacoes desta rodada: `node --check pubpaid.js`, `node --check startup-experience.js` e `npm run review:team` com 0 achados.
+
 ## Pedido atual em andamento
 
 Fechar o pacote final desta rodada:
@@ -233,6 +240,15 @@ Leitura atual dessas validacoes:
 - quinta passada grande na `PubPaid`: [pubpaid.js](C:/Users/junio/projeto codex/pubpaid.js), [pubpaid.html](C:/Users/junio/projeto codex/pubpaid.html) e [pubpaid.css](C:/Users/junio/projeto codex/pubpaid.css) ganharam modo demo explicito com lobby e apostas fixas (`2, 5, 10, 20, 30, 40, 50, 100`), rivais da casa, loja premium do garçom com bebidas consumíveis de sorte/azar leve, upgrades visuais permanentes e NPCs vivos no salão com falas decorativas sem colisão.
 - balanceamento novo da `PubPaid`: a taxa da casa foi reduzida para também fazer sentido nas apostas menores do modo demo, evitando que entradas de `2` e `5` quase não tivessem retorno.
 - validações desta passada da `PubPaid`: `node --check pubpaid.js` passou de novo e [pubpaid.css](C:/Users/junio/projeto codex/pubpaid.css) ficou com `brace-balance=0`; a conferência visual do novo posicionamento do garçom, NPCs e balões ainda pede navegador real.
+- retomada assumida em 2026-04-19: a sessão anterior não estava mais executando; não havia Node/Chrome preso antes da retomada. O servidor local foi iniciado em `http://127.0.0.1:3000` com PID `17004`.
+- validação da retomada: `node --check` passou para `server.js`, `script.js`, `startup-experience.js`, `pubpaid.js`, `site-google-auth.js`, `pesquisa-acre-2026.js`, `catalogo-servicos.js`, `escritorio.js`, `ninjas.js`, `noticia.js`, `backend/server.js`, `backend/source-config.js`, `esttiles-config.js` e `office-command-chat.js`; `npm run review:team` ficou com `totalIssues: 0` em 86 arquivos.
+- CSS da retomada: `styles.css`, `startup-experience.css`, `pubpaid.css`, `pesquisa-acre-2026.css`, `catalogo-servicos.css`, `mobile-home-final.css` e `esttiles.css` ficaram com `brace-balance=0`.
+- rotas locais validadas na retomada: `/`, `/pubpaid.html`, `/ninjas.html`, `/pesquisa-acre-2026.html`, `/catalogo-servicos.html`, `/esttiles.html` e `/fontes-monitoradas.html` responderam `200`; `/api/auth/config`, `/api/auth/session`, `/api/pesquisa-acre-2026/bridge` e `/api/news?limit=3` responderam ok.
+- segurança Pix/Auth na retomada: localmente o Google Auth aparece desativado por falta de `GOOGLE_AUTH_CLIENT_ID`, como esperado; `/api/pubpaid/deposit/pix` e `/api/pubpaid/deposits` bloqueiam sem Google (`401`); `/api/ninjas/pix` fica indisponível sem `NINJAS_PIX_KEY` (`503`); as respostas testadas não expõem `copyCode` nem `key`.
+- validação visual automática da retomada: Chrome/Edge headless não geraram PNG nesta máquina mesmo com perfis temporários e foram encerrados; a conferência visual final segue dependente de navegador real.
+- rodada PubPaid/admin em 2026-04-20: [server.js](C:/Users/junio/projeto codex/server.js) ganhou carteira PubPaid, saques pendentes, revisão manual de depósitos/saques e série semanal Acre 2026; [backend/public/admin-dashboard.html](C:/Users/junio/projeto codex/backend/public/admin-dashboard.html) agora mostra KPIs PubPaid, filas pendentes, carteiras e variação semanal; [pubpaid.html](C:/Users/junio/projeto codex/pubpaid.html) recebeu o botão de topo `Editor Chefe Call`; [office-command-chat.js](C:/Users/junio/projeto codex/office-command-chat.js) abre por esse botão; [pesquisa-acre-2026.css](C:/Users/junio/projeto codex/pesquisa-acre-2026.css) inverteu mobile para formulário em cima e resultados embaixo.
+- dados do jogo zerados em 2026-04-20: `data/pubpaid-deposits.json`, `data/pubpaid-withdrawals.json`, `data/pubpaid-wallets.json` e `data/pubpaid-sprite-scout.json` foram recriados com `[]` para tirar saldo legado local.
+- enquete eleitoral da home semanal em 2026-04-20: [server.js](C:/Users/junio/projeto codex/server.js) passou a normalizar votos antigos, bloquear repetição só na semana corrente, entregar `currentWeekKey` e `weeklyTrend` e montar o snapshot público da home com votos/opinião da semana atual; [script.js](C:/Users/junio/projeto codex/script.js) trocou a mensagem da home para deixar claro que o voto vale por semana; [backend/public/admin-dashboard.html](C:/Users/junio/projeto codex/backend/public/admin-dashboard.html) ganhou a seção `Home eleitoral • variação semanal`.
 
 ## Pendencia principal agora
 

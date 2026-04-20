@@ -1,0 +1,44 @@
+.office-page-fashion {
+  --office-accent: #f4b387;
+  --office-accent-strong: #f59e78;
+  --office-accent-soft: #fde8d7;
+  --office-panel: #182235;
+  --office-line: rgba(246, 220, 198, 0.16);
+  --office-line-strong: rgba(246, 220, 198, 0.28);
+  --office-bg:
+    radial-gradient(circle at 14% 10%, rgba(244, 179, 135, 0.14), transparent 22%),
+    radial-gradient(circle at 84% 14%, rgba(247, 220, 186, 0.12), transparent 24%),
+    radial-gradient(circle at 48% 82%, rgba(244, 153, 114, 0.1), transparent 24%),
+    linear-gradient(180deg, #11192a 0%, #182235 48%, #0e1422 100%);
+}
+
+.office-page-fashion .office-hero,
+.office-page-fashion .office-vscode-frame,
+.office-page-fashion .office-support-note,
+.office-page-fashion .office-modal-card,
+.office-page-fashion .office-terminal-panel,
+.office-page-fashion .office-control-panel,
+.office-page-fashion .office-agent,
+.office-page-fashion .office-roster-grid article {
+  background: linear-gradient(180deg, #1a2539, #111827) !important;
+  border-color: rgba(244, 197, 164, 0.22) !important;
+}
+
+.office-page-fashion .office-hero-panel,
+.office-page-fashion .office-live-panel,
+.office-page-fashion .office-modal-status,
+.office-page-fashion .office-support-selected {
+  background: #111827 !important;
+  color: #f8ede4 !important;
+}
+
+.office-page-fashion .office-room {
+  background: linear-gradient(180deg, #efe3d8, #dbc5b3) !important;
+  color: #3d2418 !important;
+}
+
+.office-page-fashion .office-agent-bubble,
+.office-page-fashion .office-dialogue {
+  background: #101722 !important;
+  color: #f8ede4 !important;
+}

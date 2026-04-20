@@ -141,8 +141,8 @@
                   </div>
                   <div class="ninjas-stage-track-card">
                     <span>pix</span>
-                    <strong>gera QR e copia e cola</strong>
-                    <p>referencia unica, chave fixa e confirmacao manual do pagamento.</p>
+                    <strong>gera QR protegido</strong>
+                    <p>referencia unica, chave oculta e confirmacao manual do pagamento.</p>
                   </div>
                   <div class="ninjas-stage-track-card">
                     <span>profissional</span>
@@ -176,8 +176,8 @@
           </article>
           <article data-subpage-reveal data-subpage-tilt>
             <span>pix unico</span>
-            <strong>qr code + copia e cola</strong>
-            <p>cada fluxo gera sua propria referencia para facilitar organizacao e conferencia.</p>
+            <strong>qr code protegido</strong>
+            <p>cada fluxo gera sua propria referencia sem expor chave Pix ou CPF na tela.</p>
           </article>
           <article data-subpage-reveal data-subpage-tilt>
             <span>curriculo free</span>
@@ -280,14 +280,14 @@
               <p class="eyebrow">pix do pedido</p>
               <h3>R$ 5 para entrar no radar local</h3>
               <p>
-                A chave do projeto vale para o site inteiro. O QR code abaixo ja sai com
-                referencia propria para esse pedido.
+                O QR code abaixo ja sai com referencia propria para esse pedido.
+                A chave fica protegida dentro do QR.
               </p>
 
               <div class="ninjas-payment-meta">
                 <article>
-                  <span>Chave Pix</span>
-                  <strong data-pix-key>aguarde</strong>
+                  <span>Pix protegido</span>
+                  <strong data-pix-key>oculta no QR</strong>
                 </article>
                 <article>
                   <span>Referencia</span>
@@ -297,13 +297,12 @@
 
               <div class="ninjas-qr-shell" data-pix-qr aria-live="polite"></div>
 
-              <label class="ninjas-code-shell">
-                <span>Copia e cola</span>
+              <label class="ninjas-code-shell" hidden>
+                <span>Codigo protegido</span>
                 <textarea readonly data-pix-code rows="6"></textarea>
               </label>
 
               <div class="ninjas-payment-actions">
-                <button class="solid-button" type="button" data-copy-pix>Copia Pix</button>
                 <button class="outline-button" type="button" data-refresh-pix>Gerar nova referencia</button>
               </div>
 
@@ -345,7 +344,7 @@
               <ul class="ninjas-tag-list">
                 <li>valor baixo</li>
                 <li>visibilidade imediata</li>
-                <li>mesma chave Pix do projeto</li>
+                <li>mesmo fluxo de QR protegido do projeto</li>
               </ul>
             </article>
 
@@ -365,7 +364,7 @@
               <h3>Fluxo simples, claro e util para o publico</h3>
               <p>
                 O visitante ja consegue pedir servico, mandar curriculo, escolher destaque,
-                comprar creditos e acompanhar vagas. O Pix entra com QR e copia e cola,
+                comprar creditos e acompanhar vagas. O Pix entra por QR Code protegido,
                 e a conferencia do pagamento fica manual para manter tudo organizado.
               </p>
               <a class="outline-button" href="#curriculo-builder">Montar perfil agora</a>
@@ -514,8 +513,8 @@
 
                 <div class="ninjas-payment-meta">
                   <article>
-                    <span>Chave Pix</span>
-                    <strong data-pix-key>sem pagamento</strong>
+                    <span>Pix protegido</span>
+                    <strong data-pix-key>oculta no QR</strong>
                   </article>
                   <article>
                     <span>Referencia</span>
@@ -525,13 +524,12 @@
 
                 <div class="ninjas-qr-shell" data-pix-qr></div>
 
-                <label class="ninjas-code-shell">
-                  <span>Copia e cola</span>
+                <label class="ninjas-code-shell" hidden>
+                  <span>Codigo protegido</span>
                   <textarea readonly data-pix-code rows="6"></textarea>
                 </label>
 
                 <div class="ninjas-payment-actions">
-                  <button class="solid-button" type="button" data-copy-pix>Copiar pagamento</button>
                   <button class="outline-button" type="button" data-refresh-pix>Atualizar codigo</button>
                 </div>
 

@@ -1,0 +1,163 @@
+.insiders-command-stage.is-crowd-march {
+  grid-template-rows: auto auto auto auto minmax(700px, 1fr) !important;
+  min-height: 1160px !important;
+  gap: 0.9rem !important;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-stage-terminal,
+.insiders-command-stage.is-crowd-march .insiders-command-copy,
+.insiders-command-stage.is-crowd-march .insiders-truth-banner,
+.insiders-command-stage.is-crowd-march .insiders-chant-rail,
+.insiders-command-stage.is-crowd-march .insiders-logo-caption {
+  position: relative;
+  z-index: 3;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-command-copy p:last-child {
+  max-width: 58ch;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd {
+  position: relative !important;
+  isolation: isolate;
+  grid-row: 5;
+  min-height: 100% !important;
+  height: 100%;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 194, 137, 0.24);
+  background:
+    linear-gradient(180deg, rgba(8, 13, 26, 0.16), rgba(8, 13, 26, 0.22)),
+    url("./assets/insiders-empty-street-v1.png") center 54% / cover no-repeat !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -44px 74px rgba(255, 138, 88, 0.12),
+    0 32px 68px rgba(4, 10, 19, 0.38) !important;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd::before,
+.insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd::before {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(134, 209, 255, 0.18), transparent 26%),
+    radial-gradient(circle at 50% 72%, rgba(255, 186, 112, 0.18), transparent 34%),
+    linear-gradient(180deg, rgba(7, 14, 26, 0.14) 0%, rgba(7, 14, 26, 0.02) 26%, rgba(4, 8, 16, 0.12) 62%, rgba(4, 7, 12, 0.48) 100%);
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd::after {
+  inset: auto -4% -4%;
+  height: 38%;
+  background:
+    radial-gradient(circle at 50% 10%, rgba(255, 216, 162, 0.18), transparent 38%),
+    linear-gradient(180deg, rgba(5, 8, 14, 0), rgba(5, 8, 14, 0.54) 44%, rgba(5, 8, 14, 0.92) 100%);
+  filter: blur(4px);
+  z-index: 2;
+}
+
+.insiders-crowd-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-caption {
+  width: min(90%, 440px) !important;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid rgba(148, 214, 255, 0.18);
+  background:
+    linear-gradient(135deg, rgba(7, 16, 31, 0.86), rgba(13, 24, 42, 0.68));
+  box-shadow:
+    0 20px 44px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-caption strong {
+  letter-spacing: 0.08em;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-logo-caption small {
+  color: rgba(220, 236, 255, 0.74);
+}
+
+.insiders-command-stage.is-crowd-march .insiders-truth-banner {
+  border-color: rgba(255, 194, 137, 0.22);
+  background:
+    linear-gradient(135deg, rgba(255, 214, 118, 0.16), rgba(255, 142, 91, 0.14)),
+    rgba(8, 15, 28, 0.88);
+}
+
+.insiders-command-stage.is-crowd-march .insiders-truth-banner span {
+  white-space: normal;
+}
+
+.insiders-command-stage.is-crowd-march .insiders-chant-track span {
+  letter-spacing: 0.08em !important;
+}
+
+@media (max-width: 960px) {
+  .insiders-command-stage.is-crowd-march {
+    grid-template-rows: auto auto auto auto minmax(560px, 1fr) !important;
+    min-height: 1040px !important;
+  }
+
+  .insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd {
+    border-radius: 26px;
+    background-position: center 50% !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .insiders-command-stage.is-crowd-march {
+    grid-template-rows: auto auto auto auto minmax(500px, 1fr) !important;
+    min-height: 980px !important;
+    gap: 0.78rem !important;
+  }
+
+  .insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd {
+    border-radius: 24px;
+    background-position: center 48% !important;
+  }
+
+  .insiders-command-stage.is-crowd-march .insiders-logo-caption {
+    width: min(92%, 360px) !important;
+    padding: 0.84rem 0.92rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .insiders-command-stage.is-crowd-march {
+    min-height: 930px !important;
+  }
+
+  .insiders-command-stage.is-crowd-march .insiders-command-copy p:last-child {
+    max-width: none;
+  }
+
+  .insiders-command-stage.is-crowd-march .insiders-truth-banner {
+    gap: 0.56rem;
+  }
+
+  .insiders-command-stage.is-crowd-march .insiders-truth-banner span {
+    min-height: 0;
+    font-size: 0.88rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insiders-command-stage.is-crowd-march .insiders-logo-squad-crowd::after {
+    filter: none;
+  }
+}

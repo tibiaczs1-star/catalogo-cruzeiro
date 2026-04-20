@@ -39,9 +39,9 @@
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./pubpaid.css?v=20260418waiter" />
+    <link rel="stylesheet" href="./pubpaid.css?v=20260419authpay" />
   </head>
-  <body class="pubpaid-page">
+  <body class="pubpaid-page" data-office-command-mode="embedded">
     <div class="pubpaid-shell">
       <header class="pubpaid-topbar">
         <a class="pubpaid-brand" href="./index.html" aria-label="Voltar para a home">
@@ -61,8 +61,18 @@
         </nav>
 
         <div class="pubpaid-top-actions">
+          <button class="pubpaid-chip-button pubpaid-enter-chip" type="button" data-enter-game>
+            <span class="pubpaid-enter-chip-icon" aria-hidden="true"></span>
+            <span>Entrar no game</span>
+          </button>
+          <button class="pubpaid-chip-button" type="button" data-toggle-night-panel hidden>
+            Painel da noite
+          </button>
+          <button class="pubpaid-chip-button" type="button" data-exit-game hidden>
+            Sair do game
+          </button>
           <button class="pubpaid-chip-button" type="button" data-open-tutorial>
-            Tutorial demo 1.0
+            Guia da noite
           </button>
           <button class="pubpaid-chip-button" type="button" data-audio-toggle>
             Musica de bar: off
@@ -70,16 +80,19 @@
           <button class="pubpaid-chip-button" type="button" data-open-profile>
             Abrir personagem
           </button>
+          <button class="pubpaid-chip-button" type="button" data-open-editor-chief-call>
+            Editor Chefe Call
+          </button>
           <button class="pubpaid-chip-button danger" type="button" data-reset-demo>
-            Recomeçar a noite
+            Limpar sessão local
           </button>
         </div>
       </header>
 
       <section class="site-demo-notice" aria-label="Aviso de demonstração visual">
-        <span>Em construção</span>
-        <strong>Algumas áreas deste site-filho ainda estão em montagem.</strong>
-        <p>Somente demonstração visual por enquanto. Aguarde finalização.</p>
+        <span>Modo valendo</span>
+        <strong>Não existe mais crédito grátis.</strong>
+        <p>Todo acesso ao salão depende de conta Google e saldo liberado manualmente após depósito.</p>
       </section>
 
       <main class="pubpaid-main">
@@ -98,6 +111,40 @@
               <span>mesa rápida</span>
               <span>loja premium</span>
               <span>time nerd ativo</span>
+            </div>
+
+            <div class="pubpaid-entry-flow" aria-label="Fluxo de entrada do jogo">
+              <div class="pubpaid-entry-steps">
+                <article class="pubpaid-entry-step">
+                  <span>01</span>
+                  <strong>Conecte seu Google</strong>
+                  <p>Seu saldo, depósito, saque e histórico ficam ligados a uma conta real.</p>
+                </article>
+                <article class="pubpaid-entry-step">
+                  <span>02</span>
+                  <strong>Monte o avatar</strong>
+                  <p>Escolha nome, estilo e mesa favorita antes de abrir o salão valendo.</p>
+                </article>
+                <article class="pubpaid-entry-step">
+                  <span>03</span>
+                  <strong>Entre no game full tela</strong>
+                  <p>Ao entrar, a apresentação some e o PubPaid toma a tela inteira com o painel dentro do jogo.</p>
+                </article>
+              </div>
+
+              <div class="pubpaid-entry-actions">
+                <button class="pubpaid-button solid" type="button" data-enter-game>
+                  Entrar no game
+                </button>
+                <a class="pubpaid-button outline" href="#perfil">Ver login, valores e carteira</a>
+                <button class="pubpaid-button outline" type="button" data-open-profile>
+                  Montar avatar
+                </button>
+              </div>
+
+              <p class="pubpaid-entry-caption">
+                O salão agora abre em duas etapas: primeiro a vitrine da noite, depois o jogo em tela cheia.
+              </p>
             </div>
           </div>
 
@@ -257,6 +304,16 @@
               </div>
             </div>
 
+            <div class="pubpaid-google-card" data-google-auth-card>
+              <span>login obrigatorio</span>
+              <strong data-google-auth-status>Entre com Google para jogar</strong>
+              <p data-google-auth-email>Seu personagem, depositos e saldo ficam ligados a uma conta identificada.</p>
+              <div class="pubpaid-google-button" data-google-auth-button></div>
+              <button class="pubpaid-button outline" type="button" data-google-auth-logout hidden>
+                Sair do Google
+              </button>
+            </div>
+
             <div class="pubpaid-stats-grid" aria-label="Resumo da noite">
               <article>
                 <span>saldo</span>
@@ -277,6 +334,50 @@
             </div>
 
             <div class="pubpaid-loadout" data-profile-upgrades aria-label="Acessorios do avatar"></div>
+
+            <div class="pubpaid-cashier-card" data-pubpaid-cashier>
+              <p class="pubpaid-eyebrow">caixa pix</p>
+              <strong>Depósito e saque manual</strong>
+              <span>Créditos grátis foram zerados. Depósitos e retiradas passam pelo admin e ficam pendentes por até 3 horas.</span>
+              <label>
+                <span>Valor em creditos</span>
+                <select data-pubpaid-deposit-amount>
+                  <option value="5">5 creditos</option>
+                  <option value="10" selected>10 creditos</option>
+                  <option value="20">20 creditos</option>
+                  <option value="50">50 creditos</option>
+                  <option value="100">100 creditos</option>
+                </select>
+              </label>
+              <div class="pubpaid-deposit-qr" data-pubpaid-deposit-qr>
+                <p>Entre com Google e gere o QR do deposito.</p>
+              </div>
+              <div class="pubpaid-cashier-actions">
+                <button class="pubpaid-button solid" type="button" data-pubpaid-generate-deposit>
+                  Gerar QR Code
+                </button>
+                <button class="pubpaid-button outline" type="button" data-pubpaid-register-deposit>
+                  Avisei o pagamento
+                </button>
+              </div>
+              <label>
+                <span>Solicitar saque</span>
+                <select data-pubpaid-withdraw-amount>
+                  <option value="5">5 creditos</option>
+                  <option value="10" selected>10 creditos</option>
+                  <option value="20">20 creditos</option>
+                  <option value="50">50 creditos</option>
+                  <option value="100">100 creditos</option>
+                </select>
+              </label>
+              <div class="pubpaid-cashier-actions">
+                <button class="pubpaid-button outline" type="button" data-pubpaid-request-withdrawal>
+                  Pedir retirada
+                </button>
+              </div>
+              <p class="pubpaid-feedback" data-pubpaid-withdraw-feedback aria-live="polite"></p>
+              <p class="pubpaid-feedback" data-pubpaid-deposit-feedback aria-live="polite"></p>
+            </div>
 
             <button class="pubpaid-button solid" type="button" data-open-profile>
               Criar personagem
@@ -394,7 +495,7 @@
         <div class="pubpaid-modal-head">
           <div>
             <p class="pubpaid-eyebrow">seu nome na noite</p>
-            <h2>Monte o seu personagem e receba os primeiros créditos da casa.</h2>
+            <h2>Monte o seu personagem com Google. Créditos grátis foram zerados.</h2>
           </div>
           <button class="pubpaid-close" type="button" data-close-modal="profile">
             Fechar
@@ -473,7 +574,7 @@
             <p class="pubpaid-eyebrow">garçom do bar</p>
             <h2>Bebidas da noite, acessórios do avatar e mesas do PubPaid.</h2>
             <p class="pubpaid-modal-copy">
-              Compre com créditos do pub, beba antes da próxima mesa demo e equipe o seu
+              Compre com créditos do pub, beba antes da próxima mesa e equipe o seu
               personagem com um visual mais forte ou abra uma mesa direto do balcão.
             </p>
           </div>
@@ -616,7 +717,7 @@
       <div class="pubpaid-modal-card pubpaid-modal-card-wide pubpaid-tutorial-card">
         <div class="pubpaid-modal-head">
           <div>
-            <p class="pubpaid-eyebrow">demo 1.0 • abertura da noite</p>
+            <p class="pubpaid-eyebrow">abertura da noite</p>
             <h2>Bem-vindo ao PubPaid</h2>
             <p class="pubpaid-modal-copy">
               Ela abre a noite dançando, chama você para entender o clima do pub e puxa o começo da rodada.
@@ -666,10 +767,10 @@
             <article class="pubpaid-tutorial-note">
               <span>ritmo da casa</span>
               <strong>Ligue a musica e deixe o pub acordar</strong>
-              <p>A jukebox deixa a noite mais viva e a abertura da demo fica bem melhor quando a trilha entra.</p>
+              <p>A jukebox deixa a noite mais viva e a abertura fica bem melhor quando a trilha entra.</p>
             </article>
             <article class="pubpaid-tutorial-note">
-              <span>estilo da demo</span>
+              <span>estilo da noite</span>
               <strong>Seu visual ja entra no clima</strong>
               <p>O inventario visual comeca pela presenca: nome, estilo e acessorios ajudam a dar cara para a sua noite.</p>
             </article>
@@ -678,7 +779,7 @@
 
         <div class="pubpaid-door-actions">
           <button class="pubpaid-button solid" type="button" data-close-modal="tutorial">
-            Entrar na demo
+            Entrar no salão
           </button>
         </div>
       </div>
@@ -686,6 +787,8 @@
 
     <script defer src="./runtime-config.js?v=20260415d"></script>
     <script defer src="./analytics-client.js?v=20260415c"></script>
-    <script defer src="./pubpaid.js?v=20260417y"></script>
+    <script defer src="./site-google-auth.js?v=20260419authpay"></script>
+    <script defer src="./pubpaid.js?v=20260419authpay"></script>
+    <script defer src="./office-command-chat.js?v=20260419call"></script>
   </body>
 </html>

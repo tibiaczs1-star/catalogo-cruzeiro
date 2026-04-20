@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-19T14:55:16.445Z",
+  "lastUpdatedAt": "2026-04-20T02:04:40.072Z",
   "assets": [
     {
       "id": "recovered-chat-assets",
@@ -198,6 +198,60 @@
         "2026-04-19-rodada-geral-de-validacao-atualizacao-pesquisa-open-source-de-jogos-e-relatorio-"
       ],
       "createdAt": "2026-04-19T14:55:16.445Z"
+    },
+    {
+      "id": "reuniao-geral-fontes-jurua-2026-04-19-md",
+      "kind": "report",
+      "path": ".codex-temp/reports/reuniao-geral-fontes-jurua-2026-04-19.md",
+      "source": "workspace",
+      "note": "Relatório da reunião geral com mapeamento de fontes do Vale do Juruá, blogs, redes e prioridades editoriais",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-19T20:04:45.507Z"
+    },
+    {
+      "id": "insiders-empty-street-v1-png",
+      "kind": "image",
+      "path": "assets/insiders-empty-street-v1.png",
+      "source": "workspace",
+      "note": "Bitmap da avenida vazia usado no novo palco de marcha do rodape Insiders",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T00:48:51.501Z"
+    },
+    {
+      "id": "gravando-2026-04-19-202609-mp4",
+      "kind": "video",
+      "path": "c:/Users/junio/Downloads/Gravando 2026-04-19 202609.mp4",
+      "source": "workspace",
+      "note": "Vídeo enviado pelo usuário mostrando a hero desktop sem os destaques visuais e com lateral translúcida.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T01:38:23.072Z"
+    },
+    {
+      "id": "chat-attachment-hero-blue-tone-feedback-2026-04-20",
+      "kind": "image",
+      "path": "[chat-attachment] hero-blue-tone-feedback-2026-04-20",
+      "source": "workspace",
+      "note": "Captura enviada no chat mostrando a hero principal ainda cinza/lavada; o usuário pediu que o bloco ficasse claramente em tom azul.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T01:40:58.480Z"
+    },
+    {
+      "id": "captura-de-tela-2026-04-19-205135-png",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/Captura de tela 2026-04-19 205135.png",
+      "source": "workspace",
+      "note": "Captura do usuario mostrando a faixa superior azul com botoes no topo da home",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T02:04:39.926Z"
+    },
+    {
+      "id": "captura-de-tela-2026-04-19-205117-png",
+      "kind": "image",
+      "path": "c:/Users/junio/OneDrive/Imagens/Screenshots/Captura de tela 2026-04-19 205117.png",
+      "source": "workspace",
+      "note": "Captura do usuario com circulos marcando problemas na hero desktop e na faixa inferior azul",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T02:04:40.072Z"
     }
   ]
 }

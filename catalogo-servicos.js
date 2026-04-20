@@ -229,6 +229,45 @@
       : "<strong>Fontes:</strong> diretórios públicos e canais oficiais.";
   }
 
+  function renderAds(module) {
+    const el = document.getElementById("svcAdsRack");
+    if (!el || !module) return;
+
+    const moduleTitle = safe(module.title || "Serviços locais");
+    const moduleLabel = safe(module.adLabel || module.title || "catalogo local");
+
+    el.hidden = false;
+    el.innerHTML = `
+      <div class="svc-ads-head">
+        <div>
+          <span>espacos de propaganda</span>
+          <strong>Banners prontos para vender neste modulo</strong>
+        </div>
+        <a class="svc-btn" href="./index.html#monetizacao">Reservar anuncio</a>
+      </div>
+
+      <div class="svc-ads-grid">
+        <a class="svc-ad-slot svc-ad-slot-wide" href="./index.html#monetizacao">
+          <span>banner principal 728 x 90</span>
+          <strong>${moduleTitle} com chamada premium no topo desta area</strong>
+          <small>Espaco para marca, servico, clinica, loja, agenda ou campanha local com clique direto.</small>
+        </a>
+
+        <a class="svc-ad-slot" href="./index.html#monetizacao">
+          <span>vitrine local</span>
+          <strong>Card patrocinado dentro de ${moduleLabel}</strong>
+          <small>Formato enxuto para telefone, WhatsApp, bairro, oferta e CTA.</small>
+        </a>
+
+        <a class="svc-ad-slot" href="./index.html#monetizacao">
+          <span>destaque de bairro</span>
+          <strong>Anuncio rapido para publico da regiao</strong>
+          <small>Bom para eventos, restaurantes, farmacias, servicos e utilidade publica patrocinada.</small>
+        </a>
+      </div>
+    `;
+  }
+
   function renderModule(module) {
     if (!module) return;
     updateHero(module);
@@ -243,6 +282,7 @@
       if (disclaimer) {
         disclaimer.hidden = true;
       }
+      renderAds(module);
       renderSources(module);
       return;
     }
@@ -253,6 +293,7 @@
       disclaimer.hidden = false;
     }
     grid.innerHTML = module.items.map(cardHtml).join("");
+    renderAds(module);
     renderSources(module);
   }
 

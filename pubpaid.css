@@ -265,6 +265,59 @@ canvas {
   gap: 10px;
 }
 
+.pubpaid-enter-chip {
+  gap: 10px;
+  border-color: rgba(255, 150, 150, 0.32) !important;
+  background: linear-gradient(135deg, rgba(128, 16, 24, 0.98), rgba(235, 70, 70, 0.94)) !important;
+  color: #fff8f5 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 233, 233, 0.18),
+    0 16px 28px rgba(118, 14, 22, 0.28);
+  animation: pubpaidEnterPulse 1.85s ease-in-out infinite;
+}
+
+.pubpaid-enter-chip:hover,
+.pubpaid-enter-chip:focus-visible {
+  border-color: rgba(255, 196, 196, 0.52) !important;
+  background: linear-gradient(135deg, rgba(153, 20, 30, 0.99), rgba(247, 91, 91, 0.96)) !important;
+}
+
+.pubpaid-enter-chip-icon {
+  position: relative;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 38% 34%, rgba(255, 248, 242, 0.96), rgba(255, 206, 188, 0.92) 34%, rgba(135, 12, 22, 0.94) 72%);
+  box-shadow:
+    0 0 0 1px rgba(255, 234, 229, 0.16),
+    0 0 18px rgba(255, 118, 118, 0.42);
+}
+
+.pubpaid-enter-chip-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 6px solid rgba(255, 247, 241, 0.98);
+  transform: translate(-35%, -50%);
+}
+
+@keyframes pubpaidEnterPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  48% {
+    transform: scale(1.08);
+  }
+}
+
 .pubpaid-main {
   display: grid;
   gap: 18px;
@@ -481,6 +534,68 @@ canvas {
   color: var(--pub-text);
 }
 
+.pubpaid-entry-flow {
+  display: grid;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.pubpaid-entry-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pubpaid-entry-step {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 32%),
+    linear-gradient(135deg, rgba(112, 235, 255, 0.12), rgba(255, 98, 189, 0.1)),
+    rgba(11, 8, 24, 0.88);
+}
+
+.pubpaid-entry-step span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  min-height: 32px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--pub-gold);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.pubpaid-entry-step strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.pubpaid-entry-step p,
+.pubpaid-entry-caption {
+  margin: 0;
+  color: var(--pub-muted);
+  line-height: 1.55;
+}
+
+.pubpaid-entry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pubpaid-entry-actions .pubpaid-button {
+  flex: 1 1 220px;
+}
+
 .pubpaid-world-stage {
   position: relative;
   overflow: hidden;
@@ -574,6 +689,148 @@ canvas {
   border-radius: var(--pub-radius);
 }
 
+body.pubpaid-page.pubpaid-in-game {
+  overflow: hidden;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-shell {
+  width: 100vw;
+  max-width: none;
+  padding: 0;
+}
+
+body.pubpaid-page.pubpaid-in-game .site-demo-notice,
+body.pubpaid-page.pubpaid-in-game .pubpaid-nav,
+body.pubpaid-page.pubpaid-in-game .pubpaid-world-copy,
+body.pubpaid-page.pubpaid-in-game .pubpaid-info-strip,
+body.pubpaid-page.pubpaid-in-game .pubpaid-dev-crew,
+body.pubpaid-page.pubpaid-in-game .pubpaid-art-line {
+  display: none !important;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-main {
+  margin-top: 0;
+  gap: 0;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-topbar {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 45;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 12px 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 48%),
+    linear-gradient(135deg, rgba(9, 18, 44, 0.9), rgba(25, 10, 39, 0.9)),
+    rgba(7, 8, 18, 0.82);
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-world {
+  position: fixed;
+  inset: 0;
+  gap: 0;
+  z-index: 10;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-world-stage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 98, 189, 0.14), transparent 20%),
+    radial-gradient(circle at 14% 70%, rgba(112, 235, 255, 0.12), transparent 24%),
+    linear-gradient(180deg, rgba(10, 4, 19, 0.98), rgba(3, 3, 8, 1));
+  box-shadow: none;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-world-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(2, 5, 12, 0.42), transparent 16%, transparent 74%, rgba(2, 5, 12, 0.7)),
+    radial-gradient(circle at center, transparent 58%, rgba(1, 1, 3, 0.3));
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-scene-canvas {
+  width: min(100vw, calc(100vh * 1.5));
+  max-height: 100vh;
+  margin: auto;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud {
+  position: fixed;
+  top: 96px;
+  left: 16px;
+  right: 16px;
+  z-index: 35;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  pointer-events: none;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud article {
+  backdrop-filter: blur(14px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 36%),
+    linear-gradient(135deg, rgba(10, 28, 54, 0.78), rgba(27, 10, 43, 0.82)),
+    rgba(6, 7, 14, 0.76);
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-touchbar {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 40;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-grid {
+  position: fixed;
+  top: 96px;
+  right: 16px;
+  bottom: 16px;
+  width: min(430px, calc(100vw - 32px));
+  grid-template-columns: 1fr;
+  align-content: start;
+  overflow-y: auto;
+  padding-right: 4px;
+  z-index: 48;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(22px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+body.pubpaid-page.pubpaid-in-game .pubpaid-grid .pubpaid-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 36%),
+    linear-gradient(135deg, rgba(13, 30, 58, 0.9), rgba(30, 13, 52, 0.92)),
+    rgba(7, 8, 18, 0.84);
+  backdrop-filter: blur(16px);
+}
+
+body.pubpaid-page.pubpaid-in-game:not(.pubpaid-night-panel-open) .pubpaid-grid {
+  visibility: hidden;
+}
+
+body.pubpaid-page.pubpaid-in-game.pubpaid-night-panel-open .pubpaid-grid {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  visibility: visible;
+}
+
 .pubpaid-profile-head {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -606,6 +863,90 @@ canvas {
   margin: 12px 0 0;
   color: var(--pub-muted);
   line-height: 1.55;
+}
+
+.pubpaid-google-card,
+.pubpaid-cashier-card {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: var(--pub-radius);
+  border: 1px solid rgba(109, 232, 255, 0.18);
+  background: linear-gradient(145deg, rgba(20, 33, 66, 0.96), rgba(35, 21, 52, 0.96));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 14px 26px rgba(0, 0, 0, 0.22);
+}
+
+.pubpaid-google-card span,
+.pubpaid-cashier-card > span,
+.pubpaid-cashier-card label span {
+  color: var(--pub-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.pubpaid-google-card > span,
+.pubpaid-cashier-card > .pubpaid-eyebrow {
+  color: var(--pub-cyan);
+}
+
+.pubpaid-google-card strong,
+.pubpaid-cashier-card strong {
+  color: var(--pub-text);
+  font-size: 18px;
+}
+
+.pubpaid-google-card p,
+.pubpaid-cashier-card p {
+  margin: 0;
+  color: var(--pub-muted);
+  line-height: 1.5;
+}
+
+.pubpaid-google-button {
+  min-height: 40px;
+}
+
+.pubpaid-cashier-card label {
+  display: grid;
+  gap: 7px;
+}
+
+.pubpaid-cashier-card select {
+  width: 100%;
+  padding: 12px 13px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--pub-text);
+  font: inherit;
+}
+
+.pubpaid-deposit-qr {
+  display: grid;
+  place-items: center;
+  min-height: 178px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px dashed rgba(255, 219, 128, 0.28);
+  background: #fffaf1;
+  color: #182033;
+}
+
+.pubpaid-deposit-qr svg {
+  width: min(100%, 168px);
+  height: auto;
+}
+
+.pubpaid-deposit-qr p {
+  color: #26364e;
+  font-weight: 800;
+  text-align: center;
+}
+
+.pubpaid-cashier-actions {
+  display: grid;
+  gap: 8px;
 }
 
 .pubpaid-stats-grid {
@@ -3127,6 +3468,165 @@ canvas {
   background: rgba(0, 0, 0, 0.18);
 }
 
+.office-command-chat {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 90;
+  color: #fff7da;
+  font-family: "Chakra Petch", sans-serif;
+}
+
+.office-command-chat.is-embedded .office-command-toggle {
+  display: none;
+}
+
+.office-command-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+  width: min(430px, calc(100vw - 30px));
+  max-height: min(680px, calc(100vh - 120px));
+  overflow: auto;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    rgba(11, 17, 31, 0.98);
+  background-size: 18px 18px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.62);
+}
+
+.office-command-chat.is-open .office-command-panel {
+  display: block;
+}
+
+.office-command-panel header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.office-command-panel header span,
+.office-command-login label,
+.office-command-form label {
+  color: #ffd36b;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.office-command-panel header strong {
+  display: block;
+  margin-top: 4px;
+}
+
+.office-command-panel header button,
+.office-command-login button,
+.office-command-form button,
+.office-command-toggle {
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff7da;
+  font-weight: 900;
+}
+
+.office-command-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45), 0 0 26px rgba(112, 243, 255, 0.16);
+}
+
+.office-command-toggle span {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: #7cffb2;
+  box-shadow: 0 0 16px rgba(124, 255, 178, 0.75);
+}
+
+.office-command-login,
+.office-command-form {
+  display: grid;
+  gap: 12px;
+  padding: 16px 18px;
+}
+
+.office-command-form {
+  grid-template-columns: 1fr 1fr;
+}
+
+.office-command-form .wide,
+.office-command-form button {
+  grid-column: 1 / -1;
+}
+
+.office-command-login label,
+.office-command-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.office-command-login input,
+.office-command-form select,
+.office-command-form textarea {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 8px;
+  padding: 11px 12px;
+  background: rgba(0, 0, 0, 0.22);
+  color: #fff7da;
+}
+
+.office-command-form button {
+  background: linear-gradient(135deg, #ffd36b, #ff8a4c);
+  color: #261504;
+}
+
+.office-command-status {
+  margin: 0 18px 14px;
+  padding: 12px;
+  border: 1px solid rgba(124, 255, 178, 0.26);
+  border-radius: 8px;
+  background: rgba(124, 255, 178, 0.08);
+  color: #bbffd5;
+}
+
+.office-command-status.is-error {
+  border-color: rgba(255, 94, 114, 0.34);
+  background: rgba(255, 94, 114, 0.1);
+  color: #ffb5c1;
+}
+
+.office-command-log {
+  display: grid;
+  gap: 10px;
+  padding: 0 18px 18px;
+}
+
+.office-command-log article,
+.office-command-empty {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.office-command-log article span,
+.office-command-log article small {
+  color: #b6c9e7;
+}
+
 @media (max-width: 1180px) {
   .pubpaid-topbar {
     grid-template-columns: 1fr;
@@ -3146,6 +3646,10 @@ canvas {
   .pubpaid-dev-crew,
   .pubpaid-grid {
     grid-template-columns: 1fr;
+  }
+
+  .pubpaid-entry-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .pubpaid-art-line-track {
@@ -3213,6 +3717,14 @@ canvas {
     grid-template-columns: 1fr;
   }
 
+  .pubpaid-entry-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .pubpaid-entry-actions {
+    flex-direction: column;
+  }
+
   .pubpaid-art-line-track {
     grid-template-columns: 1fr;
   }
@@ -3257,6 +3769,44 @@ canvas {
   .pubpaid-roulette-bet span {
     font-size: 10px;
   }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-topbar {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    gap: 10px;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-grid {
+    top: 112px;
+    left: 10px;
+    right: 10px;
+    bottom: 116px;
+    width: auto;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud {
+    top: auto;
+    left: 10px;
+    right: 10px;
+    bottom: 122px;
+    grid-template-columns: 1fr;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-world-hud article:nth-child(n + 3) {
+    display: none;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-touchbar {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    max-width: none;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-scene-canvas {
+    width: 100vw;
+  }
 }
 
 @media (max-width: 640px) {
@@ -3300,6 +3850,21 @@ canvas {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .office-command-chat {
+    right: 12px;
+    left: 12px;
+    bottom: 12px;
+  }
+
+  .office-command-panel {
+    width: auto;
+    left: 0;
+  }
+
+  .office-command-form {
+    grid-template-columns: 1fr;
+  }
+
   .pubpaid-shop-games-grid {
     grid-template-columns: 1fr;
   }
@@ -3335,6 +3900,16 @@ canvas {
     right: 50px;
     bottom: 34px;
     width: 46px;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-top-actions {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  body.pubpaid-page.pubpaid-in-game .pubpaid-top-actions .pubpaid-chip-button {
+    flex: 1 1 148px;
   }
 }
 

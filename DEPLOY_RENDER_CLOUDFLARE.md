@@ -38,9 +38,9 @@ Preencha estas variáveis:
 - `ADMIN_TOKEN=um-token-forte`
 - `SUPER_ADMIN_USER=admin`
 - `SUPER_ADMIN_PASSWORD=uma-senha-forte`
-- `NINJAS_PIX_KEY=99567741204`
-- `NINJAS_PIX_RECEIVER_NAME=ANTONIO CLOVIS CORREIA DA SILVA JUNIOR`
-- `NINJAS_MERCHANT_NAME=ANTONIO CLOVIS CORREIA DA SILVA JUNIOR`
+- `NINJAS_PIX_KEY=<sua-chave-pix-somente-no-render>`
+- `NINJAS_PIX_RECEIVER_NAME=<nome-do-recebedor>`
+- `NINJAS_MERCHANT_NAME=<nome-comercial-do-recebedor>`
 - `NINJAS_MERCHANT_CITY=CRUZEIRO DO SUL`
 
 Observação:

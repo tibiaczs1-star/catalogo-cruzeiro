@@ -277,6 +277,29 @@
         color: #183b60;
       }
 
+      .trend-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .trend-item {
+        display: grid;
+        gap: 8px;
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid #d9e3ee;
+        background: #f8fbff;
+      }
+
+      .trend-meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 0.86rem;
+        color: var(--muted);
+      }
+
       .ready-pill {
         width: fit-content;
         padding: 5px 9px;
@@ -634,13 +657,76 @@
 
       <section class="row grid-2">
         <article class="card">
+          <h2>PubPaid • depósitos pendentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Jogador</th>
+                  <th>Valor</th>
+                  <th>Referência</th>
+                  <th>Prazo</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="pendingPubpaidDepositsBody"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>PubPaid • saques pendentes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Quando</th>
+                  <th>Jogador</th>
+                  <th>Valor</th>
+                  <th>Referência</th>
+                  <th>Prazo</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+              <tbody id="pendingPubpaidWithdrawalsBody"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>PubPaid • carteiras</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Jogador</th>
+                <th>Saldo</th>
+                <th>Travado</th>
+                <th>Depósitos aprovados</th>
+                <th>Saques aprovados</th>
+                <th>Atualizada</th>
+              </tr>
+            </thead>
+            <tbody id="pubpaidWalletBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="row grid-2">
+        <article class="card">
           <h2>Pesquisa Acre 2026 • voto declarado</h2>
           <div id="acrePollVoteBoard" class="stack"></div>
           <h2 style="margin-top:18px">Pesquisa Acre 2026 • prioridades</h2>
           <div id="acrePollPriorityBoard" class="stack"></div>
+          <h2 style="margin-top:18px">Home eleitoral • variação semanal</h2>
+          <div id="electionWeeklyBoard" class="trend-list"></div>
         </article>
 
         <article class="card">
+          <h2>Pesquisa Acre 2026 • variação semanal</h2>
+          <div id="acrePollWeeklyBoard" class="trend-list"></div>
           <h2>Respostas recentes da pesquisa Acre 2026</h2>
           <div class="table-wrap">
             <table>
@@ -840,7 +926,40 @@
             .join("") || `<p class="muted">Inventário ainda não carregado.</p>`;
       }
 
+      function renderWeeklyTrend(container, rows) {
+        if (!container) return;
+
+        if (!Array.isArray(rows) || !rows.length) {
+          container.innerHTML = `<p class="muted">Sem histórico semanal suficiente ainda.</p>`;
+          return;
+        }
+
+        container.innerHTML = rows
+          .slice(0, 8)
+          .map((row) => {
+            const leaders = Array.isArray(row.topValues || row.labels)
+              ? (row.topValues || row.labels)
+                  .slice(0, 3)
+                  .map((item) => `${escapeHtml(item.label)} (${fmt.format(item.total || 0)})`)
+                  .join(" • ")
+              : "Sem liderança";
+
+            return `
+              <article class="trend-item">
+                <div class="trend-meta">
+                  <strong>${escapeHtml(row.weekLabel || row.weekKey || row.week || "Semana")}</strong>
+                  <span>${fmt.format(row.totalResponses || row.totalVotes || row.total || 0)} respostas</span>
+                </div>
+                <div>${leaders}</div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
       const ACCESS_STORAGE_KEY = "catalogo_admin_access_v1";
+      let latestAccess = null;
+      let latestDashboardData = null;
 
       function normalizeBase(value) {
         return String(value || "").trim().replace(/\/$/, "");
@@ -954,6 +1073,9 @@
           ["rawVotesLink", "/api/admin/raw/votes?limit=100"],
           ["rawSubscriptionsLink", "/api/admin/raw/subscriptions?limit=100"],
           ["rawAcrePollLink", "/api/admin/raw/acre2026Poll?limit=100"],
+          ["rawPubpaidDepositsLink", "/api/admin/raw/pubpaidDeposits?limit=100"],
+          ["rawPubpaidWithdrawalsLink", "/api/admin/raw/pubpaidWithdrawals?limit=100"],
+          ["rawPubpaidWalletsLink", "/api/admin/raw/pubpaidWallets?limit=100"],
           ["rawNinjasRequestsLink", "/api/admin/raw/ninjasRequests?limit=100"],
           ["rawNinjasProfilesLink", "/api/admin/raw/ninjasProfiles?limit=100"],
           ["rawSalesLink", "/api/admin/raw/salesListings?limit=100"],
@@ -970,8 +1092,26 @@
         });
       }
 
+      async function reviewPubpaidItem(endpoint, id, decision) {
+        if (!latestAccess?.apiBase || !id) return;
+        const response = await fetch(`${latestAccess.apiBase}${endpoint}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...buildHeaders(latestAccess)
+          },
+          body: JSON.stringify({ id, decision })
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || payload.ok === false) {
+          throw new Error(payload.error || "Falha ao revisar item do PubPaid.");
+        }
+        return payload;
+      }
+
       async function loadDashboard() {
         const access = resolveAccess();
+        latestAccess = access;
         const statusBox = document.getElementById("statusBox");
         setDownloadLinks(access.token, access.apiBase);
         syncAccessForm();
@@ -988,6 +1128,8 @@
           if (!response.ok || data.ok === false) {
             throw new Error(data.error || "Falha ao carregar o dashboard");
           }
+
+          latestDashboardData = data;
 
           statusBox.hidden = true;
           toggleAccessCard(location.protocol === "file:", location.protocol === "file:" ? "A tela esta conectada ao backend configurado abaixo." : "");
@@ -1012,6 +1154,11 @@
             ["Comentários / opiniões", totals.comments || 0],
             ["Assinaturas", totals.subscriptions || 0],
             ["Pesquisa Acre 2026", totals.acre2026PollResponses || 0],
+            ["PubPaid depósitos", totals.pubpaidDeposits || 0],
+            ["PubPaid saques", totals.pubpaidWithdrawals || 0],
+            ["PubPaid carteiras", totals.pubpaidWallets || 0],
+            ["PubPaid pend. depósitos", totals.pubpaidPendingDeposits || 0],
+            ["PubPaid pend. saques", totals.pubpaidPendingWithdrawals || 0],
             ["Apoiadores confirmados", totals.supporters || 0],
             ["Ninjas pedidos", totals.ninjasRequests || 0],
             ["Ninjas currículos", totals.ninjasProfiles || 0],
@@ -1191,6 +1338,76 @@
             "Sem assinaturas recentes."
           );
 
+          renderRecentRows(
+            document.getElementById("pendingPubpaidDepositsBody"),
+            data.pendingPubpaidDeposits || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.name || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.email || "-")}</span>
+                </td>
+                <td><strong>${escapeHtml(`${row.amount || 0}`)}</strong> créditos</td>
+                <td class="mono">${escapeHtml(row.txid || "-")}</td>
+                <td>${formatDateTime(row.reviewDeadlineAt)}</td>
+                <td>
+                  <div class="actions">
+                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button>
+                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button>
+                  </div>
+                </td>
+              </tr>
+            `,
+            6,
+            "Sem depósitos pendentes."
+          );
+
+          renderRecentRows(
+            document.getElementById("pendingPubpaidWithdrawalsBody"),
+            data.pendingPubpaidWithdrawals || [],
+            (row) => `
+              <tr>
+                <td>${formatDateTime(row.createdAt)}</td>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.name || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.email || "-")}</span>
+                </td>
+                <td><strong>${escapeHtml(`${row.amount || 0}`)}</strong> créditos</td>
+                <td class="mono">${escapeHtml(row.txid || "-")}</td>
+                <td>${formatDateTime(row.reviewDeadlineAt)}</td>
+                <td>
+                  <div class="actions">
+                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button>
+                    <button class="btn" type="button" data-pubpaid-review="/api/admin/pubpaid/withdrawals/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button>
+                  </div>
+                </td>
+              </tr>
+            `,
+            6,
+            "Sem saques pendentes."
+          );
+
+          renderRecentRows(
+            document.getElementById("pubpaidWalletBody"),
+            data.pubpaidWalletBoard || [],
+            (row) => `
+              <tr>
+                <td class="truncate">
+                  <strong>${escapeHtml(row.name || "-")}</strong><br />
+                  <span class="muted">${escapeHtml(row.email || "-")}</span>
+                </td>
+                <td><strong>${escapeHtml(`${row.balanceCoins || 0}`)}</strong></td>
+                <td>${escapeHtml(`${row.lockedWithdrawalCoins || 0}`)}</td>
+                <td>${escapeHtml(`${row.totalApprovedDeposits || 0}`)}</td>
+                <td>${escapeHtml(`${row.totalApprovedWithdrawals || 0}`)}</td>
+                <td>${formatDateTime(row.updatedAt)}</td>
+              </tr>
+            `,
+            6,
+            "Sem carteiras PubPaid ainda."
+          );
+
           const pollSummary = data.acre2026PollSummary || {};
           renderBars(
             document.getElementById("acrePollVoteBoard"),
@@ -1200,6 +1417,8 @@
             document.getElementById("acrePollPriorityBoard"),
             Object.fromEntries((pollSummary.priorities || []).map((item) => [item.label, item.total]))
           );
+          renderWeeklyTrend(document.getElementById("electionWeeklyBoard"), data.electionWeekly || []);
+          renderWeeklyTrend(document.getElementById("acrePollWeeklyBoard"), data.acre2026PollWeekly || []);
           renderRecentRows(
             document.getElementById("recentAcrePollBody"),
             data.recentAcre2026Poll || [],
@@ -1327,6 +1546,32 @@
         clearStoredAccess();
         syncAccessForm();
         toggleAccessCard(true, "Credenciais locais removidas.");
+      });
+
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-pubpaid-review]");
+        if (!button) return;
+
+        const endpoint = button.getAttribute("data-pubpaid-review");
+        const id = button.getAttribute("data-id");
+        const decision = button.getAttribute("data-decision");
+        const statusBox = document.getElementById("statusBox");
+        const original = button.textContent;
+        button.disabled = true;
+        button.textContent = "Enviando...";
+
+        try {
+          await reviewPubpaidItem(endpoint, id, decision);
+          statusBox.hidden = false;
+          statusBox.textContent = `Revisão enviada: ${decision === "approve" ? "aprovado" : "rejeitado"}.`;
+          await loadDashboard();
+        } catch (error) {
+          statusBox.hidden = false;
+          statusBox.textContent = error?.message || "Falha ao revisar item do PubPaid.";
+        } finally {
+          button.disabled = false;
+          button.textContent = original;
+        }
       });
 
       syncAccessForm();

@@ -422,6 +422,81 @@ const getArticleSentencePool = (article = {}) =>
 
 const getLimitedItems = (values = [], limit = 4) => dedupeTextList(values).slice(0, limit);
 
+const getFactCheckVerdict = ({
+  sourceName = "fonte consultada",
+  dateLabel = "data recente",
+  truthCount = 0,
+  uncertaintyCount = 0,
+  fakeCount = 0,
+  title = "este assunto"
+} = {}) => {
+  if (fakeCount > 0) {
+    return {
+      tone: "fake",
+      label: "Resultado da checagem",
+      shortLabel: "desmentido no material",
+      stateLabel: "Boato identificado",
+      count: 1,
+      description:
+        "O cruzamento do texto-base encontrou desmentido explícito ou menção direta a boato/fake news.",
+      items: [
+        `Resultado editorial: há sinal claro de boato ou informação falsa associado a ${title}.`,
+        `Base usada no veredito: texto publicado por ${sourceName} em ${dateLabel}.`,
+        "Leitura final: trate os trechos marcados como desmentidos, não como fato confirmado."
+      ]
+    };
+  }
+
+  if (uncertaintyCount > 0 && truthCount === 0) {
+    return {
+      tone: "uncertainty",
+      label: "Resultado da checagem",
+      shortLabel: "sem base fechada",
+      stateLabel: "Inconclusivo",
+      count: 1,
+      description:
+        "O material consultado não traz base suficiente para fechar um veredito como fato consolidado.",
+      items: [
+        `Resultado editorial: não dá para classificar ${title} como fake news, mas também não dá para cravar como fato fechado só com este material.`,
+        `Base usada no veredito: texto publicado por ${sourceName} em ${dateLabel}.`,
+        "Leitura final: o assunto segue inconclusivo e pede confirmação adicional antes de virar certeza."
+      ]
+    };
+  }
+
+  if (uncertaintyCount > 0) {
+    return {
+      tone: "uncertainty",
+      label: "Resultado da checagem",
+      shortLabel: "sem sinal de fake news",
+      stateLabel: "Confirmado com ressalvas",
+      count: 1,
+      description:
+        "Há base real no texto consultado, mas alguns pontos ainda dependem de atualização ou confirmação complementar.",
+      items: [
+        `Resultado editorial: não há sinal de fake news no texto-base sobre ${title}.`,
+        `Base usada no veredito: texto publicado por ${sourceName} em ${dateLabel}.`,
+        "Leitura final: a notícia é tratada como válida, com ressalvas apenas nos pontos ainda sem fechamento total."
+      ]
+    };
+  }
+
+  return {
+    tone: "truth",
+    label: "Resultado da checagem",
+    shortLabel: "sem sinal de fake news",
+    stateLabel: "Confirmado",
+    count: 1,
+    description:
+      "O texto-base sustenta a leitura sem sinal de boato ou desmentido explícito no material consultado.",
+    items: [
+      `Resultado editorial: ${title} não aparece como fake news no material analisado.`,
+      `Base usada no veredito: publicação de ${sourceName} em ${dateLabel}.`,
+      "Leitura final: o que está no texto-base pode ser tratado como conteúdo confirmado na fonte consultada."
+    ]
+  };
+};
+
 const sanitizeImageUrl = (value) => {
   const raw = String(value || "").trim();
   if (!raw) {
@@ -873,11 +948,36 @@ const buildEditorialFactTabs = (article = {}) => {
   );
 
   const fakeItems = getLimitedItems(fakeSentences.slice(0, 3), 3);
+  const verdictTab = getFactCheckVerdict({
+    sourceName,
+    dateLabel,
+    truthCount: truthItems.length,
+    uncertaintyCount: uncertaintySentences.length,
+    fakeCount: fakeSentences.length,
+    title
+  });
 
   return [
     {
+      id: "verdict",
+      ...verdictTab
+    },
+    {
+      id: "truth",
+      label: "Fatos confirmados",
+      shortLabel: "base confirmada",
+      tone: "truth",
+      stateLabel: "Confirmado",
+      count: truthItems.length > 0 ? truthItems.length : 1,
+      description: `Aqui entram apenas os pontos que o texto-base sustenta com clareza na fonte ${sourceName}.`,
+      items:
+        truthItems.length > 0
+          ? truthItems
+          : [`O que está confirmado até aqui é a existência da publicação original e o tema ${title}.`]
+    },
+    {
       id: "importance",
-      label: "O que importa",
+      label: "O que importa agora",
       shortLabel: "impacto imediato",
       tone: "importance",
       stateLabel: "Essencial agora",
@@ -889,45 +989,32 @@ const buildEditorialFactTabs = (article = {}) => {
           : [`O eixo principal deste assunto é ${title} e o acompanhamento segue aberto.`]
     },
     {
-      id: "truth",
-      label: "O que é verdade",
-      shortLabel: "confirmado na fonte",
-      tone: "truth",
-      stateLabel: "Confirmado",
-      count: truthItems.length > 0 ? truthItems.length : 1,
-      description: `Aqui entram apenas os pontos sustentados no texto-base e na fonte ${sourceName}.`,
-      items:
-        truthItems.length > 0
-          ? truthItems
-          : [`O que está confirmado até aqui é a existência da publicação original e o tema ${title}.`]
-    },
-    {
       id: "uncertainty",
-      label: "O que pode não ser verdade",
-      shortLabel: "ainda pede checagem",
+      label: "O que ainda não foi comprovado",
+      shortLabel: "sem fechamento total",
       tone: "uncertainty",
-      stateLabel: "Cautela",
+      stateLabel: "Inconclusivo",
       count: uncertaintySentences.length,
-      description: "Trechos que dependem de confirmação adicional, contexto novo ou atualização oficial.",
+      description: "Pontos que ainda não fecham prova completa dentro do material consultado.",
       items:
         uncertaintyItems.length > 0
           ? uncertaintyItems
           : [
-              "Até agora, o texto-base desta matéria não apresenta um ponto explicitamente tratado como rumor ou dúvida relevante."
+              "O material consultado não deixou ponto relevante sem comprovação fechada."
             ]
     },
     {
       id: "fake",
-      label: "Fake news comprovada",
+      label: "Boato ou fake news",
       shortLabel: "desmentido explícito",
       tone: "fake",
       stateLabel: "Desmentido",
       count: fakeSentences.length,
-      description: "Só entra aqui o que o próprio material aponta claramente como boato ou informação falsa.",
+      description: "Só entra aqui o que o próprio material marca de forma explícita como boato ou informação falsa.",
       items:
         fakeItems.length > 0
           ? fakeItems
-          : ["Nenhuma fake news comprovadamente desmentida aparece no texto-base desta matéria."]
+          : ["Resultado: o texto-base não traz boato ou fake news desmentida de forma explícita."]
     }
   ];
 };

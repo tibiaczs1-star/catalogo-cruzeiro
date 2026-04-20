@@ -8,6 +8,7 @@
   const summaryTotal = document.getElementById("summaryTotal");
   const summaryAverage = document.getElementById("summaryAverage");
   const summaryUpdatedAt = document.getElementById("summaryUpdatedAt");
+  const bridgeUpdatedAt = document.getElementById("bridgeUpdatedAt");
   const voteBars = document.getElementById("voteBars");
   const priorityBars = document.getElementById("priorityBars");
   const stateDirectionBars = document.getElementById("stateDirectionBars");
@@ -16,6 +17,8 @@
   const voteCertaintyBars = document.getElementById("voteCertaintyBars");
   const locationCloud = document.getElementById("locationCloud");
   const candidateProfiles = document.getElementById("candidateProfiles");
+  const pollBridgeSignals = document.getElementById("pollBridgeSignals");
+  const pollBridgeNews = document.getElementById("pollBridgeNews");
   const numberFormatter = new Intl.NumberFormat("pt-BR");
   const decimalFormatter = new Intl.NumberFormat("pt-BR", {
     minimumFractionDigits: 1,
@@ -139,6 +142,100 @@
       .join("");
   }
 
+  function renderBridgeSignals(poll = {}) {
+    if (!pollBridgeSignals) return;
+
+    const cards = [];
+    if (poll.leadVote?.label) {
+      cards.push({
+        label: "Voto mais citado",
+        title: poll.leadVote.label,
+        meta: `${numberFormatter.format(poll.leadVote.total || 0)} respostas • ${decimalFormatter.format(poll.leadVote.percent || 0)}%`,
+        tone: "vote"
+      });
+    }
+    if (poll.topPriority?.label) {
+      cards.push({
+        label: "Prioridade dominante",
+        title: poll.topPriority.label,
+        meta: `${numberFormatter.format(poll.topPriority.total || 0)} menções`,
+        tone: "priority"
+      });
+    }
+    if (poll.topDirection?.label) {
+      cards.push({
+        label: "Rumo percebido",
+        title: poll.topDirection.label,
+        meta: `${numberFormatter.format(poll.topDirection.total || 0)} respostas`,
+        tone: "direction"
+      });
+    }
+    if (poll.desiredCycle?.label) {
+      cards.push({
+        label: "Desejo de ciclo",
+        title: poll.desiredCycle.label,
+        meta: `${numberFormatter.format(poll.desiredCycle.total || 0)} respostas`,
+        tone: "cycle"
+      });
+    }
+
+    if (!cards.length) {
+      pollBridgeSignals.innerHTML = `<p class="poll-empty">A leitura cruzada aparece assim que os dados forem carregados.</p>`;
+      return;
+    }
+
+    pollBridgeSignals.innerHTML = cards
+      .map(
+        (card) => `
+          <article class="poll-bridge-signal" data-tone="${escapeHtml(card.tone)}">
+            <span>${escapeHtml(card.label)}</span>
+            <strong>${escapeHtml(card.title)}</strong>
+            <small>${escapeHtml(card.meta)}</small>
+          </article>
+        `
+      )
+      .join("");
+  }
+
+  function renderBridgeNews(items = []) {
+    if (!pollBridgeNews) return;
+
+    if (!Array.isArray(items) || !items.length) {
+      pollBridgeNews.innerHTML = `<p class="poll-empty">As matérias ligadas ao clima político entram aqui.</p>`;
+      return;
+    }
+
+    pollBridgeNews.innerHTML = items
+      .map(
+        (item) => `
+          <article class="poll-bridge-news-card">
+            <span>${escapeHtml(item.category || "Política")} • ${escapeHtml(item.sourceName || "Fonte local")}</span>
+            <strong>${escapeHtml(item.title || "Atualização política")}</strong>
+            <p>${escapeHtml(item.summary || "Sem resumo disponível.")}</p>
+            <div class="poll-bridge-news-actions">
+              <a href="${escapeHtml(item.localUrl || item.sourceUrl || "#")}">Abrir no jornal</a>
+              <a href="${escapeHtml(item.sourceUrl || item.localUrl || "#")}" target="_blank" rel="noreferrer">Ver fonte</a>
+            </div>
+          </article>
+        `
+      )
+      .join("");
+  }
+
+  function renderPollBridge(payload = {}) {
+    const poll = payload.poll || {};
+    const journal = payload.journal || {};
+
+    if (bridgeUpdatedAt) {
+      bridgeUpdatedAt.textContent = poll.totalResponses
+        ? `SPO com ${numberFormatter.format(poll.totalResponses)} respostas • ${formatDateTime(poll.updatedAt || payload.updatedAt)}`
+        : "Jornal e SPO em sincronização";
+    }
+
+    renderBridgeSignals(poll);
+    renderBridgeNews(journal.items);
+  }
+
   function renderPublicSummary(payload = {}) {
     const summary = payload.summary || {};
     const totalResponses = Number(summary.totalResponses || 0);
@@ -218,6 +315,25 @@
     }
   }
 
+  async function loadPollBridge() {
+    try {
+      const response = await fetch("/api/pesquisa-acre-2026/bridge", {
+        headers: {
+          Accept: "application/json"
+        }
+      });
+      const payload = await readJson(response);
+      if (!response.ok) {
+        throw new Error(payload.error || "Nao foi possivel cruzar pesquisa e jornal.");
+      }
+      renderPollBridge(payload);
+    } catch (_error) {
+      if (bridgeUpdatedAt) {
+        bridgeUpdatedAt.textContent = "Ponte jornal + SPO indisponivel no momento";
+      }
+    }
+  }
+
   async function handleFormSubmit(event) {
     event.preventDefault();
     if (!form || !submitButton) return;
@@ -254,6 +370,7 @@
       form.reset();
       setFeedback(formFeedback, data.message || "Resposta registrada com sucesso.", "success");
       await loadPublicSummary();
+      await loadPollBridge();
       summaryCard?.scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
       setFeedback(formFeedback, error.message || "Falha ao enviar a pesquisa.", "error");
@@ -265,4 +382,5 @@
 
   form?.addEventListener("submit", handleFormSubmit);
   loadPublicSummary().catch(() => {});
+  loadPollBridge().catch(() => {});
 })();

@@ -137,7 +137,11 @@ const heroTourismRotation = {
   bubbleTimerId: 0,
   statusTimerId: 0
 };
-const useSolidHeroShell = true;
+const heroDesktopBackdropMedia =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(min-width: 1041px)")
+    : null;
+const shouldUseSolidHeroShell = () => !heroDesktopBackdropMedia?.matches;
 const heroTourismPhotoPool = [
   { file: "Cidade de Cruzeiro do Sul.jpg", title: "Panorama do centro", note: "vista ampla da cidade" },
   { file: "Cruzeiro do Sul - Acre (3800379687).jpg", title: "Cidade em foco", note: "recorte urbano do municipio" },
@@ -2856,6 +2860,51 @@ const buildHeroTourismRuntimePool = () => {
     .slice(0, heroTourismDailyTarget);
 };
 
+const buildHeroTourismFallbackPool = () => {
+  const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
+  const normalizedArticles = articles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      const haystack = [
+        article.title,
+        article.lede,
+        article.summary,
+        article.category,
+        article.sourceName,
+        article.sourceLabel
+      ]
+        .filter(Boolean)
+        .join(" ");
+      return heroTourismLocalPattern.test(haystack);
+    });
+  const dayKey = getHeroTourismDayKey();
+  const fallbackArticles = buildDailyOrderedHeroItems(
+    normalizedArticles.slice(0, heroTourismDailyTarget * 3),
+    `${dayKey}:fallback-articles`
+  );
+  const fallbackPhotos = buildDailyOrderedHeroItems(heroTourismPhotoPool, `${dayKey}:fallback-photos`);
+
+  return fallbackPhotos.map((photo, index) => {
+    const article = fallbackArticles[index % Math.max(fallbackArticles.length, 1)] || null;
+    const title = article?.category || photo.title || "Panorama local";
+    const summaryText = article?.lede || article?.summary || photo.note || "Resumo da notícia em destaque.";
+
+    return {
+      title,
+      note: truncateCopy(article?.sourceName || article?.sourceLabel || photo.note || "Fonte local", 46),
+      proxyUrl: buildCommonsTourismPhotoUrl(photo.file, 1200),
+      fallbackUrl: buildCommonsTourismFallbackUrl(photo.file),
+      focusPosition: article ? getHeroDailyArticleFocus(article) : "",
+      articleTitle: article?.title || photo.title || "Notícia em destaque",
+      articleCategory: article?.category || "Destaque do dia",
+      articleSummary: truncateCopy(summaryText, 168),
+      articleHref: article ? buildHeroArticleHref(article) : "#radar",
+      themeKey: article?.categoryKey || normalizeText(article?.category || photo.title || "destaque"),
+      sourceName: article?.sourceName || photo.note || "Acervo local"
+    };
+  });
+};
+
 const buildHeroTourismDailyPool = () => {
   const dayKey = getHeroTourismDayKey();
   if (heroTourismDailyPoolState.dayKey === dayKey && heroTourismDailyPoolState.items.length) {
@@ -2882,6 +2931,14 @@ const buildHeroTourismDailyPool = () => {
   };
 
   runtimePool.forEach((photo) => pushUniquePhoto(photo));
+  if (merged.length < heroTourismDailyTarget) {
+    const fallbackPool = buildHeroTourismFallbackPool();
+    fallbackPool.forEach((photo) => {
+      if (merged.length < heroTourismDailyTarget) {
+        pushUniquePhoto(photo);
+      }
+    });
+  }
 
   heroTourismDailyPoolState.dayKey = dayKey;
   heroTourismDailyPoolState.items = merged.slice(0, heroTourismDailyTarget);
@@ -2965,7 +3022,7 @@ const setHeroTourismMeta = (photo) => {
 };
 
 const paintHeroTourismBackdrop = (slideNode, photo) => {
-  if (useSolidHeroShell) {
+  if (shouldUseSolidHeroShell()) {
     return Promise.resolve(false);
   }
 
@@ -3073,7 +3130,7 @@ const initializeHeroTourismHero = () => {
   heroTourismRotation.statusIndex = 0;
   heroTourismRotation.bubbleIndex = 0;
 
-  if (useSolidHeroShell) {
+  if (shouldUseSolidHeroShell()) {
     heroTourismSlides.forEach((slide) => {
       slide.classList.remove("is-active");
       slide.style.backgroundImage = "none";
@@ -3088,7 +3145,7 @@ const initializeHeroTourismHero = () => {
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
 
-  if (!useSolidHeroShell && getHeroTourismDailyPool().length > 1) {
+  if (!shouldUseSolidHeroShell() && getHeroTourismDailyPool().length > 1) {
     heroTourismRotation.timerId = window.setInterval(() => {
       const currentPool = getHeroTourismDailyPool();
       const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % currentPool.length;
@@ -4686,6 +4743,17 @@ const initialMergedNews = syncNewsDataset(initialStaticNews);
 hydrateMosaicHero(initialMergedNews);
 hydrateStaticMediaSurfaces();
 initializeHeroTourismHero();
+if (heroDesktopBackdropMedia) {
+  const handleHeroShellModeChange = () => {
+    initializeHeroTourismHero();
+  };
+
+  if (typeof heroDesktopBackdropMedia.addEventListener === "function") {
+    heroDesktopBackdropMedia.addEventListener("change", handleHeroShellModeChange);
+  } else if (typeof heroDesktopBackdropMedia.addListener === "function") {
+    heroDesktopBackdropMedia.addListener(handleHeroShellModeChange);
+  }
+}
 attachArchiveBrowserLaunchers();
 initializeInsidersArmy();
 initializeInsidersBootScreen();
@@ -4775,6 +4843,9 @@ if (window.ELECTIONS_DATA?.offices?.length) {
   const electionHeatMeta = document.querySelector("#election-heat-meta");
   const electionHeatGrid = document.querySelector("#election-heat-grid");
   const electionDisclaimer = document.querySelector("#election-disclaimer");
+  const electionSpoMeta = document.querySelector("#election-spo-meta");
+  const electionSpoGrid = document.querySelector("#electionSpoGrid");
+  const electionSpoNews = document.querySelector("#electionSpoNews");
   const electionVotesKey = "catalogo_election_votes_by_office_v1";
   const electionUserVotesKey = "catalogo_election_user_votes_v1";
   const electionOpinionSummaryKey = "catalogo_election_opinion_summary_v1";
@@ -4808,6 +4879,8 @@ if (window.ELECTIONS_DATA?.offices?.length) {
   let remoteElectionVotes = null;
   let remoteElectionUserVotes = null;
   let remoteElectionOpinionSummary = null;
+  let remoteElectionWeeklyTrend = null;
+  let electionSpoBridgePayload = null;
   let electionVoteModal = document.querySelector("#electionVoteModal");
   let electionVoteModalState = null;
 
@@ -4897,6 +4970,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
 
   const getElectionOpinionSummary = () =>
     remoteElectionOpinionSummary || safeParseJson(electionOpinionSummaryKey, {});
+  const getElectionWeeklyTrend = () => remoteElectionWeeklyTrend || [];
 
   const getOfficeVotes = (officeId) => {
     const votes = getElectionVotes();
@@ -4924,6 +4998,134 @@ if (window.ELECTIONS_DATA?.offices?.length) {
     }
 
     return Math.max(6, Math.min(100, Math.round((value / total) * 100)));
+  };
+
+  const formatElectionSpoDate = (value = "") => {
+    if (!value) {
+      return "Sem atualização";
+    }
+
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) {
+      return String(value);
+    }
+
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "short",
+      hour: "2-digit",
+      minute: "2-digit"
+    }).format(parsed);
+  };
+
+  const renderElectionSpoBridge = (office) => {
+    if (!electionSpoGrid || !electionSpoNews) {
+      return;
+    }
+
+    const payload = electionSpoBridgePayload;
+    const poll = payload?.poll || {};
+    const newsItems = Array.isArray(payload?.journal?.items) ? payload.journal.items : [];
+    const cards = [];
+
+    if (poll.leadVote?.label) {
+      cards.push({
+        kicker: "Voto mais citado",
+        title: poll.leadVote.label,
+        detail: `${poll.leadVote.percent || 0}% na SPO`
+      });
+    }
+
+    if (poll.topPriority?.label) {
+      cards.push({
+        kicker: "Prioridade do eleitor",
+        title: poll.topPriority.label,
+        detail: `${poll.topPriority.total || 0} menções na coleta`
+      });
+    }
+
+    if (poll.topDirection?.label) {
+      cards.push({
+        kicker: "Rumo percebido",
+        title: poll.topDirection.label,
+        detail: `${poll.topDirection.total || 0} respostas`
+      });
+    }
+
+    if (poll.desiredCycle?.label) {
+      cards.push({
+        kicker: "Desejo de ciclo",
+        title: poll.desiredCycle.label,
+        detail: `${poll.desiredCycle.total || 0} respostas`
+      });
+    }
+
+    if (!cards.length) {
+      electionSpoGrid.innerHTML = `
+        <article class="election-spo-card is-empty">
+          <strong>Sem sinal suficiente ainda.</strong>
+          <p>A SPO ainda não reuniu massa para devolver leitura forte ao jornal.</p>
+        </article>
+      `;
+    } else {
+      electionSpoGrid.innerHTML = cards
+        .slice(0, 4)
+        .map(
+          (card) => `
+            <article class="election-spo-card">
+              <span>${escapeHtml(card.kicker)}</span>
+              <strong>${escapeHtml(card.title)}</strong>
+              <p>${escapeHtml(card.detail)}</p>
+            </article>
+          `
+        )
+        .join("");
+    }
+
+    if (electionSpoMeta) {
+      if (poll.totalResponses) {
+        electionSpoMeta.textContent = `${poll.totalResponses} respostas na SPO • ${newsItems.length} matérias cruzadas • atualizado em ${formatElectionSpoDate(
+          poll.updatedAt || payload.updatedAt
+        )}.`;
+      } else {
+        electionSpoMeta.textContent = "A pesquisa pública ainda está reunindo base para alimentar o jornal.";
+      }
+    }
+
+    if (!newsItems.length) {
+      electionSpoNews.innerHTML = `
+        <article class="election-spo-news-card is-empty">
+          <strong>O jornal ainda não devolveu pautas cruzadas.</strong>
+        </article>
+      `;
+      return;
+    }
+
+    electionSpoNews.innerHTML = newsItems
+      .map(
+        (item) => `
+          <article class="election-spo-news-card">
+            <span>${escapeHtml(item.category || "Política")} • ${escapeHtml(item.sourceName || "Fonte local")}</span>
+            <strong>${escapeHtml(item.title || "Atualização política")}</strong>
+            <p>${escapeHtml(item.summary || "Sem resumo disponível.")}</p>
+            <div class="election-spo-news-actions">
+              <a href="${escapeHtml(item.localUrl || item.sourceUrl || "#")}">Abrir no jornal</a>
+              <a href="${escapeHtml(item.sourceUrl || item.localUrl || "#")}" target="_blank" rel="noreferrer">Ver fonte</a>
+            </div>
+          </article>
+        `
+      )
+      .join("");
+  };
+
+  const loadElectionSpoBridge = async () => {
+    try {
+      electionSpoBridgePayload = await requestApiJson("/api/pesquisa-acre-2026/bridge", { method: "GET" });
+    } catch (_error) {
+      electionSpoBridgePayload = null;
+    }
+
+    renderElectionSpoBridge(getElectionOffice(activeElectionOfficeId));
   };
 
   const renderElectionHeat = (office) => {
@@ -5211,6 +5413,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       remoteElectionVotes = payload.votes || {};
       remoteElectionUserVotes = payload.userVotes || {};
       remoteElectionOpinionSummary = payload.opinionSummary || {};
+      remoteElectionWeeklyTrend = payload.weeklyTrend || [];
       writeElectionStorage(electionVotesKey, remoteElectionVotes);
       writeElectionStorage(electionUserVotesKey, remoteElectionUserVotes);
       writeElectionStorage(electionOpinionSummaryKey, remoteElectionOpinionSummary);
@@ -5249,6 +5452,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       remoteElectionVotes = payload.votes || {};
       remoteElectionUserVotes = payload.userVotes || {};
       remoteElectionOpinionSummary = payload.opinionSummary || {};
+      remoteElectionWeeklyTrend = payload.weeklyTrend || [];
       writeElectionStorage(electionVotesKey, remoteElectionVotes);
       writeElectionStorage(electionUserVotesKey, remoteElectionUserVotes);
       writeElectionStorage(electionOpinionSummaryKey, remoteElectionOpinionSummary);
@@ -5418,9 +5622,11 @@ if (window.ELECTIONS_DATA?.offices?.length) {
     }
 
     if (electionResultsMeta) {
+      const currentWeek = getElectionWeeklyTrend()[getElectionWeeklyTrend().length - 1] || null;
+      const currentWeekTotal = Number(currentWeek?.totalVotes || currentWeek?.total || 0);
       electionResultsMeta.textContent = selectedCandidateId
-        ? `Seu voto neste cargo ja foi registrado. Total atual: ${totalVotes} voto${totalVotes === 1 ? "" : "s"}. Cidade foi coletada e as observacoes ajudam a ler o clima eleitoral.`
-        : `Escolha uma opcao para ${office.label}. A cidade e obrigatoria; nome, partido e observacao continuam opcionais.`;
+        ? `Seu voto neste cargo ja foi registrado nesta semana. Total atual: ${totalVotes} voto${totalVotes === 1 ? "" : "s"}${currentWeekTotal ? ` • semana corrente: ${currentWeekTotal}` : ""}. Cidade foi coletada e as observacoes ajudam a ler o clima eleitoral.`
+        : `Escolha uma opcao para ${office.label}. A cidade e obrigatoria; nome, partido e observacao continuam opcionais. O bloqueio de voto vale por semana.`;
     }
 
     electionResultsBars.innerHTML = "";
@@ -5445,6 +5651,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
     }
 
     renderElectionHeat(office);
+    renderElectionSpoBridge(office);
   };
 
   const renderElectionOffice = (officeId = activeElectionOfficeId) => {
@@ -5503,6 +5710,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
 
   renderElectionOffice(activeElectionOfficeId);
   hydrateElectionVotes();
+  loadElectionSpoBridge();
   }
 }
 
@@ -6986,6 +7194,26 @@ const getFounderAmountValue = () => {
   return Math.max(1, Math.min(10, Number.isFinite(rawAmount) ? rawAmount : 5));
 };
 
+const getCatalogoGoogleAuthUser = () => {
+  try {
+    return window.CatalogoGoogleAuth?.getUser?.() || null;
+  } catch (_error) {
+    return null;
+  }
+};
+
+const syncSubscriptionGoogleIdentity = () => {
+  const user = getCatalogoGoogleAuthUser();
+  if (subscriptionEmailInput) {
+    subscriptionEmailInput.value = user?.email || "";
+    subscriptionEmailInput.readOnly = true;
+    subscriptionEmailInput.placeholder = user?.email || "Entre com Google para preencher o e-mail";
+  }
+  if (subscriptionNameInput && user && !subscriptionNameInput.value.trim()) {
+    subscriptionNameInput.value = user.name || user.givenName || "";
+  }
+};
+
 const resetSupporterPaymentCard = () => {
   if (!subscriptionPaymentCard) {
     return;
@@ -6993,7 +7221,7 @@ const resetSupporterPaymentCard = () => {
 
   supporterPaymentState.locked = false;
   subscriptionPaymentCard.hidden = true;
-  if (subscriptionPixKey) subscriptionPixKey.textContent = "aguarde";
+  if (subscriptionPixKey) subscriptionPixKey.textContent = "oculta no QR";
   if (subscriptionPixAmount) subscriptionPixAmount.textContent = formatPixAmountLabel(getFounderAmountValue());
   if (subscriptionPixTxid) subscriptionPixTxid.textContent = "aguarde";
   if (subscriptionPixQr) subscriptionPixQr.innerHTML = "";
@@ -7024,6 +7252,21 @@ const syncSupporterPaymentCard = async (forceNewTxid = false) => {
   const founderAmount = getFounderAmountValue();
   supporterPaymentState.amount = founderAmount;
 
+  const authUser = getCatalogoGoogleAuthUser();
+  if (!authUser?.email) {
+    subscriptionPaymentCard.hidden = false;
+    if (subscriptionPixKey) subscriptionPixKey.textContent = "oculta no QR";
+    if (subscriptionPixTxid) subscriptionPixTxid.textContent = "aguarde login";
+    if (subscriptionPixQr) {
+      subscriptionPixQr.innerHTML = "<p>Entre com Google para gerar o QR code protegido.</p>";
+    }
+    if (subscriptionPaymentNote) {
+      subscriptionPaymentNote.textContent =
+        "O QR code de fundador só é criado depois que a conta Google identifica o apoiador.";
+    }
+    return;
+  }
+
   if (forceNewTxid || !supporterPaymentState.txid) {
     supporterPaymentState.txid = buildSupporterTxid();
   }
@@ -7050,21 +7293,19 @@ const syncSupporterPaymentCard = async (forceNewTxid = false) => {
     if (subscriptionFounderAmountInput) {
       subscriptionFounderAmountInput.value = String(Math.round(resolvedAmount));
     }
-    if (subscriptionPixKey) subscriptionPixKey.textContent = payload.key || "";
+    if (subscriptionPixKey) subscriptionPixKey.textContent = "oculta no QR";
     if (subscriptionPixAmount) subscriptionPixAmount.textContent = formatPixAmountLabel(resolvedAmount);
     if (subscriptionPixTxid) subscriptionPixTxid.textContent = supporterPaymentState.txid;
     if (subscriptionPixQr) {
       subscriptionPixQr.innerHTML =
-        payload.qrSvg || "<p>QR code indisponível no momento. Use o copia e cola abaixo.</p>";
+        payload.qrSvg || "<p>QR code indisponível no momento. Tente atualizar a referência.</p>";
     }
     if (subscriptionPixCode) {
-      subscriptionPixCode.value = payload.copyCode || "";
+      subscriptionPixCode.value = "";
     }
     if (subscriptionPaymentNote) {
-      const recipientName = String(payload.recipientName || "").trim();
-      subscriptionPaymentNote.textContent = recipientName
-        ? `Recebedor: ${recipientName}. Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual do Pix antes de entrar no mural.`
-        : `Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual do Pix antes de entrar no mural.`;
+      subscriptionPaymentNote.textContent =
+        `QR Code criado para ${authUser.email}. Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual antes de entrar no mural.`;
     }
   } catch (error) {
     if (subscriptionPixQr) {
@@ -7108,7 +7349,7 @@ const toggleFounderAmountField = () => {
   if (subscriptionSubmitButton) {
     subscriptionSubmitButton.textContent = founderActive
       ? "Quero virar fundador"
-      : "Receber grátis no e-mail";
+      : "Receber com Google";
   }
 
   if (!founderActive) {
@@ -7178,6 +7419,14 @@ const attachSubscriptionSubmission = () => {
   }
 
   toggleFounderAmountField();
+  syncSubscriptionGoogleIdentity();
+  window.addEventListener("catalogo:google-auth", () => {
+    syncSubscriptionGoogleIdentity();
+    if (isFounderPlan(subscriptionPlanInput.value)) {
+      void syncSupporterPaymentCard(true);
+    }
+  });
+
   if (isFounderPlan(subscriptionPlanInput.value)) {
     void syncSupporterPaymentCard(true);
   }
@@ -7243,14 +7492,19 @@ const attachSubscriptionSubmission = () => {
   subscriptionForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const email = subscriptionEmailInput.value.trim();
-    const name = subscriptionNameInput?.value?.trim() || "";
+    const authUser = getCatalogoGoogleAuthUser();
+    const email = authUser?.email || "";
+    const name = subscriptionNameInput?.value?.trim() || authUser?.name || authUser?.givenName || "";
     const plan = subscriptionPlanInput.value;
     const founderAmount = getFounderAmountValue();
 
-    if (!email) {
-      setFeedbackState(subscriptionFeedback, "Preencha o e-mail para assinar.", "is-error");
-      subscriptionEmailInput.focus();
+    if (!authUser?.email) {
+      setFeedbackState(
+        subscriptionFeedback,
+        "Entre com Google para assinar, apoiar ou gerar QR Code Pix.",
+        "is-error"
+      );
+      document.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
@@ -7302,10 +7556,11 @@ const attachSubscriptionSubmission = () => {
         }
       } else {
         subscriptionForm.reset();
+        syncSubscriptionGoogleIdentity();
         toggleFounderAmountField();
         setFeedbackState(
           subscriptionFeedback,
-          "Resumo das 7h grátis registrado. A partir de agora ele cai no seu e-mail.",
+          "Resumo das 7h registrado na sua conta Google. A partir de agora ele cai no seu e-mail.",
           "is-success"
         );
       }

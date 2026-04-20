@@ -1,7 +1,6 @@
 (function () {
   const STORAGE_KEY = "pubpaid_arcade_state_v3";
   const TUTORIAL_SESSION_KEY = "pubpaid_demo_tutorial_seen_v1";
-  const STARTER_COINS = 100;
   const DEMO_STAKES = [2, 5, 10, 20, 30, 40, 50, 100];
   const HISTORY_LIMIT = 12;
   const WORLD = { width: 960, height: 640 };
@@ -625,12 +624,23 @@
     openTutorialButtons: Array.from(document.querySelectorAll("[data-open-tutorial]")),
     openProfileButtons: Array.from(document.querySelectorAll("[data-open-profile]")),
     resetButtons: Array.from(document.querySelectorAll("[data-reset-demo]")),
+    enterGameButtons: Array.from(document.querySelectorAll("[data-enter-game]")),
+    exitGameButtons: Array.from(document.querySelectorAll("[data-exit-game]")),
+    toggleGamePanelButtons: Array.from(document.querySelectorAll("[data-toggle-night-panel]")),
     touchMoveButtons: Array.from(document.querySelectorAll("[data-touch-move]")),
     touchActionButtons: Array.from(document.querySelectorAll("[data-touch-action]")),
     venueCards: Array.from(document.querySelectorAll("[data-venue-card]")),
     profileModal: document.querySelector("[data-profile-modal]"),
     profileForm: document.querySelector("[data-profile-form]"),
     profileFeedback: document.querySelector("[data-profile-feedback]"),
+    depositAmount: document.querySelector("[data-pubpaid-deposit-amount]"),
+    depositQr: document.querySelector("[data-pubpaid-deposit-qr]"),
+    depositFeedback: document.querySelector("[data-pubpaid-deposit-feedback]"),
+    withdrawAmount: document.querySelector("[data-pubpaid-withdraw-amount]"),
+    withdrawFeedback: document.querySelector("[data-pubpaid-withdraw-feedback]"),
+    generateDepositButton: document.querySelector("[data-pubpaid-generate-deposit]"),
+    registerDepositButton: document.querySelector("[data-pubpaid-register-deposit]"),
+    requestWithdrawalButton: document.querySelector("[data-pubpaid-request-withdrawal]"),
     doorModal: document.querySelector("[data-door-modal]"),
     doorChoiceButtons: Array.from(document.querySelectorAll("[data-door-choice]")),
     badEndingModal: document.querySelector("[data-bad-ending-modal]"),
@@ -651,6 +661,11 @@
   };
 
   const sceneCtx = refs.sceneCanvas?.getContext("2d");
+  const depositState = {
+    amount: 10,
+    txid: "",
+    locked: false
+  };
   if (sceneCtx) sceneCtx.imageSmoothingEnabled = false;
   const badEndingCtx = refs.badEndingCanvas?.getContext("2d");
   if (badEndingCtx) badEndingCtx.imageSmoothingEnabled = false;
@@ -699,6 +714,8 @@
     tutorialStartedAt: 0,
     gameTimer: null,
     profileEntryMode: false,
+    gameMode: false,
+    nightPanelOpen: false,
     poolRefs: {
       canvas: null,
       ctx: null,
@@ -730,11 +747,17 @@
     return {
       profile: {
         registered: false,
+        avatarReady: false,
         name: "",
         archetype: "neon",
         motto: "",
         favorite: "pool",
-        bonusClaimed: false
+        bonusClaimed: false,
+        authProvider: "",
+        googleSub: "",
+        googleEmail: "",
+        googlePicture: "",
+        starterCreditsRevoked: false
       },
       wallet: {
         coins: 0,
@@ -759,7 +782,7 @@
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) return createInitialState();
       const parsed = JSON.parse(raw);
-      return {
+      const nextState = {
         profile: {
           ...createInitialState().profile,
           ...(parsed?.profile || {})
@@ -783,6 +806,18 @@
         },
         history: Array.isArray(parsed?.history) ? parsed.history.slice(0, HISTORY_LIMIT) : []
       };
+      if (!Object.prototype.hasOwnProperty.call(parsed?.profile || {}, "avatarReady") && nextState.profile.registered) {
+        nextState.profile.avatarReady = true;
+      }
+      if (nextState.profile.avatarReady) {
+        nextState.profile.registered = true;
+      }
+      if (nextState.profile.bonusClaimed && !nextState.profile.starterCreditsRevoked) {
+        nextState.wallet.coins = Math.max(0, clampInteger(nextState.wallet.coins) - 100);
+        nextState.profile.starterCreditsRevoked = true;
+      }
+      nextState.wallet.coins = 0;
+      return nextState;
     } catch (error) {
       return createInitialState();
     }
@@ -799,6 +834,7 @@
       fillProfileForm();
       renderAll();
       bindEvents();
+      syncExistingGoogleAuth();
       ensureMusicPlayback();
       runtime.lastFrame = performance.now();
       runtime.rafId = window.requestAnimationFrame(loop);
@@ -861,7 +897,21 @@
     document.addEventListener("keyup", handleKeyUp);
     document.addEventListener("click", handleClick);
     window.addEventListener("blur", clearPressedDirections);
+    window.addEventListener("catalogo:google-auth", handleCatalogoGoogleAuth);
     refs.profileForm?.addEventListener("submit", handleProfileSubmit);
+    refs.generateDepositButton?.addEventListener("click", () => {
+      void generatePubPaidDepositQr(true);
+    });
+    refs.registerDepositButton?.addEventListener("click", () => {
+      void registerPubPaidDeposit();
+    });
+    refs.requestWithdrawalButton?.addEventListener("click", () => {
+      void requestPubPaidWithdrawal();
+    });
+    refs.depositAmount?.addEventListener("change", () => {
+      depositState.locked = false;
+      void generatePubPaidDepositQr(true);
+    });
 
     refs.touchMoveButtons.forEach((button) => {
       const direction = button.dataset.touchMove;
@@ -923,6 +973,10 @@
         closeWaiterModal();
       } else if (refs.jukeboxModal?.hidden === false) {
         closeJukeboxModal();
+      } else if (runtime.nightPanelOpen) {
+        toggleNightPanel(false);
+      } else if (runtime.gameMode) {
+        exitGameExperience();
       }
       return;
     }
@@ -983,6 +1037,24 @@
 
   function handleClick(event) {
     ensureMusicPlayback();
+
+    const enterGameTrigger = event.target.closest("[data-enter-game]");
+    if (enterGameTrigger) {
+      enterGameExperience();
+      return;
+    }
+
+    const exitGameTrigger = event.target.closest("[data-exit-game]");
+    if (exitGameTrigger) {
+      exitGameExperience();
+      return;
+    }
+
+    const toggleGamePanelTrigger = event.target.closest("[data-toggle-night-panel]");
+    if (toggleGamePanelTrigger) {
+      toggleNightPanel();
+      return;
+    }
 
     const profileTrigger = event.target.closest("[data-open-profile]");
     if (profileTrigger) {
@@ -1061,13 +1133,6 @@
     }
 
     if (event.target.closest("[data-start-game]")) {
-      if (runtime.activeGame) runtime.activeGame.isPractice = false;
-      startActiveGame();
-      return;
-    }
-
-    if (event.target.closest("[data-start-game-practice]")) {
-      if (runtime.activeGame) runtime.activeGame.isPractice = true;
       startActiveGame();
       return;
     }
@@ -2156,7 +2221,7 @@
   }
 
   function drawPlayerLabel() {
-    const label = state.profile.registered
+    const label = hasAvatarProfile()
       ? `${state.profile.name}${hasUpgrade("vip-title") ? " VIP" : ""}`
       : "visitante";
     sceneCtx.save();
@@ -2549,15 +2614,21 @@
     }
 
     if (focus.type === "door") {
+      const hasGoogle = hasGoogleSession();
+      const hasAvatar = hasAvatarProfile();
       return {
         title: "Entrada principal",
-        copy: state.profile.registered
-          ? "A porta está aberta. É só entrar e deixar a noite continuar."
-          : "Aqui começa a sua noite no PubPaid, com personagem montado e créditos da casa.",
-        meta: state.profile.registered ? "entre no pub" : "comece por aqui",
-        description: state.profile.registered
-          ? "Sempre que quiser, a entrada leva você de volta ao salão."
-          : "Na primeira vez, você escolhe seu estilo e já entra no clima.",
+        copy: canEnterPubGame()
+          ? "A porta está aberta. Um clique e o PubPaid assume a tela toda."
+          : hasGoogle
+            ? "O Google já está ligado. Falta só montar o avatar para o salão abrir valendo."
+            : "Aqui começa a sua noite no PubPaid: primeiro Google, depois avatar, depois o game em tela cheia.",
+        meta: canEnterPubGame() ? "entrar no game" : hasGoogle ? "montar avatar" : "conectar google",
+        description: canEnterPubGame()
+          ? "Sempre que quiser, a entrada leva você de volta ao salão em modo full tela."
+          : hasAvatar
+            ? "Seu avatar já existe, mas você precisa reconectar o Google para entrar."
+            : "A primeira entrada prepara a conta, o personagem e a carteira antes do jogo.",
         venueKey: "door"
       };
     }
@@ -2587,7 +2658,7 @@
       return {
         title: "Garcom do bar",
         copy: activeDrink
-          ? `${activeDrink.name} ja esta pronto para a proxima rodada demo.`
+          ? `${activeDrink.name} ja esta pronto para a proxima rodada valendo.`
           : "Bebidas com sorte pequena, acessorios do avatar e lobbies das mesas saindo direto do balcao.",
         meta: activeDrink ? "bebida equipada" : "abrir catalogo",
         description: "As bebidas podem puxar um fiapo de sorte ou azar. Os acessorios visuais ficam com voce.",
@@ -2667,9 +2738,9 @@
     }
 
     if (runtime.prompt.type === "door") {
-      return state.profile.registered
-        ? "pressione E para decidir se entra"
-        : "pressione E para começar a sua noite";
+      if (canEnterPubGame()) return "pressione E para entrar no game em tela cheia";
+      if (hasGoogleSession()) return "pressione E para montar o avatar";
+      return "pressione E para conectar Google e começar";
     }
     if (runtime.prompt.type === "exit") return "pressione E para voltar para a calçada";
     if (runtime.prompt.type === "stage") return "pressione E para chamar a cantora";
@@ -2701,7 +2772,11 @@
     if (interaction.type === "shop") return "Abrir loja premium";
     if (interaction.type === "tips") return "Ouvir dica do garcom";
     if (interaction.type === "jukebox") return runtime.audio.enabled ? "Desligar musica" : "Ligar musica";
-    if (interaction.type === "door") return state.profile.registered ? "Escolher na porta" : "Começar a noite";
+    if (interaction.type === "door") {
+      if (canEnterPubGame()) return "Entrar no game";
+      if (hasGoogleSession()) return "Montar avatar";
+      return "Conectar Google";
+    }
     if (interaction.type === "exit") return "Voltar para fora";
     return "Interagir";
   }
@@ -2712,20 +2787,25 @@
   }
 
   function renderProfile() {
-    const registered = state.profile.registered;
+    const hasGoogle = hasGoogleSession();
+    const registered = hasAvatarProfile();
     const favorite = TABLE_META[state.profile.favorite];
     setText(refs.profileName, registered ? state.profile.name : "Visitante da calcada");
     setText(
       refs.profileRole,
       registered
         ? `${PALETTES[state.profile.archetype].label}${hasUpgrade("vip-title") ? " VIP" : ""} • ${favorite?.label || "PubPaid"}`
-        : "Ainda do lado de fora"
+        : hasGoogle
+          ? "Google conectado, avatar pendente"
+          : "Ainda do lado de fora"
     );
     setText(
       refs.profileMotto,
       registered
         ? state.profile.motto || "Entrou no pub, encontrou sua mesa e deixou a noite seguir."
-        : "Chegue até a porta principal para criar seu personagem e começar a noite."
+        : hasGoogle
+          ? "A conta Google já está pronta. Falta escolher nome, estilo e mesa favorita."
+          : "Chegue até a porta principal para conectar o Google, criar seu personagem e começar a noite."
     );
 
     setText(refs.statCoins, formatCoins(state.wallet.coins));
@@ -3070,7 +3150,7 @@
     state.shop.activeDrinkId = drink.id;
     saveState();
     renderAll();
-    renderShopModal(`${drink.name} foi servida. A proxima mesa demo ja vai carregar esse efeito.`);
+      renderShopModal(`${drink.name} foi servida. A proxima mesa ja vai carregar esse efeito.`);
   }
 
   function openTableFromShop(gameId) {
@@ -3096,6 +3176,7 @@
     renderGameModal();
     if (refs.shopModal?.hidden === false) renderShopModal("");
     if (refs.jukeboxModal?.hidden === false) renderJukeboxModal("");
+    syncGameModeUi();
   }
 
   function fillProfileForm() {
@@ -3106,8 +3187,8 @@
     refs.profileForm.elements.namedItem("motto").value = state.profile.motto || "";
   }
 
-  function openProfileModal() {
-    runtime.profileEntryMode = runtime.scene === "exterior" && !state.profile.registered;
+  function openProfileModal({ entryMode = false } = {}) {
+    runtime.profileEntryMode = Boolean(entryMode);
     fillProfileForm();
     setText(refs.profileFeedback, "");
     refs.profileModal.hidden = false;
@@ -3181,10 +3262,360 @@
     if (refs.jukeboxModal) refs.jukeboxModal.hidden = true;
   }
 
+  function getCatalogoGoogleAuthUser() {
+    try {
+      return window.CatalogoGoogleAuth?.getUser?.() || null;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function hasGoogleSession() {
+    return Boolean(getCatalogoGoogleAuthUser()?.email);
+  }
+
+  function hasAvatarProfile() {
+    return Boolean((state.profile.avatarReady || state.profile.registered) && String(state.profile.name || "").trim().length >= 2);
+  }
+
+  function canEnterPubGame() {
+    return hasGoogleSession() && hasAvatarProfile();
+  }
+
+  function focusProfileAccess(message) {
+    document.getElementById("perfil")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+    if (message) setWorldMessage(message, 3200);
+  }
+
+  function syncGameModeUi() {
+    const inGame = Boolean(runtime.gameMode);
+    document.body.classList.toggle("pubpaid-in-game", inGame);
+    document.body.classList.toggle("pubpaid-night-panel-open", inGame && runtime.nightPanelOpen);
+
+    refs.enterGameButtons.forEach((button) => {
+      button.hidden = inGame;
+    });
+
+    refs.exitGameButtons.forEach((button) => {
+      button.hidden = !inGame;
+    });
+
+    refs.toggleGamePanelButtons.forEach((button) => {
+      button.hidden = !inGame;
+      button.textContent = runtime.nightPanelOpen ? "Fechar painel" : "Painel da noite";
+      button.setAttribute("aria-expanded", runtime.nightPanelOpen ? "true" : "false");
+    });
+  }
+
+  function toggleNightPanel(forceState) {
+    if (!runtime.gameMode) {
+      runtime.nightPanelOpen = false;
+      syncGameModeUi();
+      return;
+    }
+
+    runtime.nightPanelOpen =
+      typeof forceState === "boolean"
+        ? forceState
+        : !runtime.nightPanelOpen;
+    syncGameModeUi();
+  }
+
+  function enterGameExperience({ skipChecks = false, announce = true } = {}) {
+    if (!skipChecks && !hasGoogleSession()) {
+      runtime.profileEntryMode = true;
+      focusProfileAccess("Entre com Google para liberar o acesso ao PubPaid.");
+      return false;
+    }
+
+    if (!skipChecks && !hasAvatarProfile()) {
+      openProfileModal({ entryMode: true });
+      setText(refs.profileFeedback, "Google conectado. Agora monte o avatar para abrir o salão.");
+      return false;
+    }
+
+    runtime.gameMode = true;
+    runtime.nightPanelOpen = false;
+    if (runtime.scene !== "interior") enterInterior();
+
+    syncGameModeUi();
+    renderAll();
+
+    const fullscreenRequest = document.documentElement.requestFullscreen?.();
+    if (fullscreenRequest?.catch) fullscreenRequest.catch(() => {});
+
+    if (announce) {
+      setWorldMessage("Portas abertas. O PubPaid tomou a tela inteira.", 2600);
+    }
+    return true;
+  }
+
+  function exitGameExperience({ announce = true } = {}) {
+    runtime.gameMode = false;
+    runtime.nightPanelOpen = false;
+    closeGameModal(true);
+    closeShopModal();
+    closeWaiterModal();
+    closeJukeboxModal();
+    enterExterior();
+
+    syncGameModeUi();
+    renderAll();
+
+    const fullscreenExit = document.exitFullscreen?.();
+    if (fullscreenExit?.catch) fullscreenExit.catch(() => {});
+
+    if (announce) {
+      setWorldMessage("Você saiu do modo game e voltou para a apresentação do PubPaid.", 2600);
+    }
+  }
+
+  function syncExistingGoogleAuth() {
+    const user = getCatalogoGoogleAuthUser();
+    if (user?.email) {
+      applyGoogleProfile(user, { announce: false });
+      void syncPubpaidAccount();
+    }
+  }
+
+  function handleCatalogoGoogleAuth(event) {
+    const user = event?.detail?.user || getCatalogoGoogleAuthUser();
+    if (!user?.email) {
+      if (runtime.gameMode) {
+        exitGameExperience({ announce: false });
+        setWorldMessage("Google desconectado. A página voltou para a entrada do PubPaid.", 3400);
+      }
+      state.wallet.coins = 0;
+      saveState();
+      renderAll();
+      if (refs.depositFeedback) {
+        refs.depositFeedback.textContent = "Entre com Google para gerar deposito e salvar o personagem.";
+      }
+      if (refs.withdrawFeedback) {
+        refs.withdrawFeedback.textContent = "Entre com Google para abrir a carteira do PubPaid.";
+      }
+      return;
+    }
+    applyGoogleProfile(user, { announce: true });
+    void syncPubpaidAccount();
+    void generatePubPaidDepositQr(false);
+
+    if (runtime.profileEntryMode) {
+      if (hasAvatarProfile()) {
+        enterGameExperience({ skipChecks: true, announce: false });
+        setWorldMessage("Google conferido. O PubPaid já abriu em tela cheia.", 3200);
+      } else {
+        openProfileModal({ entryMode: true });
+        setText(refs.profileFeedback, "Google conectado. Agora finalize o avatar para entrar no game.");
+      }
+    }
+  }
+
+  function applyGoogleProfile(user, { announce = true } = {}) {
+    const hadAvatar = hasAvatarProfile();
+    state.profile.authProvider = "google";
+    state.profile.googleSub = String(user.sub || "");
+    state.profile.googleEmail = String(user.email || "");
+    state.profile.googlePicture = String(user.picture || "");
+    if (!state.profile.name) {
+      state.profile.name = String(user.givenName || user.name || "Jogador Google").slice(0, 28);
+    }
+    if (!state.profile.motto) {
+      state.profile.motto = "Entrou com Google, sem crédito grátis, pronto para depositar no caixa.";
+    }
+    if (!state.profile.bonusClaimed) {
+      state.profile.bonusClaimed = true;
+    }
+    state.profile.starterCreditsRevoked = true;
+
+    saveState();
+    fillProfileForm();
+    renderAll();
+    void syncPubpaidAccount();
+
+    if (announce) {
+      setWorldMessage(
+        hadAvatar
+          ? "Conta Google conferida. O salão já pode abrir em tela cheia."
+          : "Conta Google conectada. Agora monte o avatar para entrar no PubPaid valendo.",
+        3400
+      );
+    }
+  }
+
+  async function requestApiJson(url, options = {}) {
+    const response = await fetch(url, {
+      credentials: "same-origin",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...(options.headers || {})
+      },
+      ...options
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || payload.ok === false) {
+      throw new Error(payload.error || payload.message || "Nao foi possivel falar com o caixa agora.");
+    }
+    return payload;
+  }
+
+  function getDepositAmount() {
+    const amount = clampInteger(refs.depositAmount?.value || 10);
+    return [5, 10, 20, 50, 100].includes(amount) ? amount : 10;
+  }
+
+  function getWithdrawalAmount() {
+    const amount = clampInteger(refs.withdrawAmount?.value || 10);
+    return [5, 10, 20, 50, 100].includes(amount) ? amount : 10;
+  }
+
+  function buildDepositTxid() {
+    return `PUB${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`
+      .replace(/[^A-Za-z0-9]/g, "")
+      .toUpperCase()
+      .slice(0, 25);
+  }
+
+  async function generatePubPaidDepositQr(forceNewTxid = false) {
+    if (!refs.depositQr) return;
+    const user = getCatalogoGoogleAuthUser();
+    if (!user?.email) {
+      refs.depositQr.innerHTML = "<p>Entre com Google para gerar o QR do deposito.</p>";
+      if (refs.depositFeedback) {
+        refs.depositFeedback.textContent = "O caixa só abre para conta Google identificada.";
+      }
+      return;
+    }
+
+    const amount = getDepositAmount();
+    if (forceNewTxid || !depositState.txid || depositState.amount !== amount) {
+      depositState.txid = buildDepositTxid();
+      depositState.locked = false;
+    }
+    depositState.amount = amount;
+    refs.depositQr.innerHTML = "<p>Gerando QR Code protegido...</p>";
+    if (refs.depositFeedback) {
+      refs.depositFeedback.textContent = "A chave Pix fica escondida; use somente o QR Code.";
+    }
+
+    try {
+      const params = new URLSearchParams({
+        amount: String(amount),
+        txid: depositState.txid,
+        description: "PubPaid Creditos"
+      });
+      const payload = await requestApiJson(`/api/pubpaid/deposit/pix?${params.toString()}`, { method: "GET" });
+      depositState.txid = payload.txid || depositState.txid;
+      refs.depositQr.innerHTML = payload.qrSvg || "<p>QR indisponivel. Tente gerar novamente.</p>";
+      if (refs.depositFeedback) {
+        refs.depositFeedback.textContent =
+          `QR criado para ${user.email}: ${amount} creditos, referencia ${depositState.txid}.`;
+      }
+    } catch (error) {
+      refs.depositQr.innerHTML = `<p>${escapeHtml(error.message)}</p>`;
+      if (refs.depositFeedback) refs.depositFeedback.textContent = "Nao foi possivel gerar o QR agora.";
+    }
+  }
+
+  async function registerPubPaidDeposit() {
+    const user = getCatalogoGoogleAuthUser();
+    if (!user?.email) {
+      if (refs.depositFeedback) refs.depositFeedback.textContent = "Entre com Google antes de avisar o pagamento.";
+      return;
+    }
+    if (!depositState.txid) {
+      await generatePubPaidDepositQr(true);
+    }
+    if (!depositState.txid) return;
+
+    try {
+      const payload = await requestApiJson("/api/pubpaid/deposits", {
+        method: "POST",
+        body: JSON.stringify({
+          amount: depositState.amount || getDepositAmount(),
+          paymentTxid: depositState.txid,
+          sourcePage: window.location.pathname
+        })
+      });
+      depositState.locked = true;
+      if (refs.depositFeedback) {
+        refs.depositFeedback.textContent =
+          payload.message || "Deposito avisado. Os creditos entram depois da confirmacao manual.";
+      }
+      void syncPubpaidAccount();
+      setWorldMessage("Deposito enviado para conferencia. Nenhum credito gratis foi liberado automaticamente.", 3600);
+    } catch (error) {
+      if (refs.depositFeedback) refs.depositFeedback.textContent = String(error.message || "Falha ao registrar deposito.");
+    }
+  }
+
+  async function syncPubpaidAccount() {
+    const user = getCatalogoGoogleAuthUser();
+    if (!user?.email) {
+      state.wallet.coins = 0;
+      saveState();
+      renderAll();
+      return;
+    }
+
+    try {
+      const payload = await requestApiJson("/api/pubpaid/account", { method: "GET" });
+      state.wallet.coins = clampInteger(payload?.wallet?.balanceCoins || 0);
+      saveState();
+      renderAll();
+      if (refs.withdrawFeedback) {
+        const pendingDeposits = clampInteger(payload?.pending?.deposits || 0);
+        const pendingWithdrawals = clampInteger(payload?.pending?.withdrawals || 0);
+        refs.withdrawFeedback.textContent =
+          pendingDeposits || pendingWithdrawals
+            ? `Pendencias atuais: ${pendingDeposits} deposito(s) e ${pendingWithdrawals} retirada(s).`
+            : "Sem pendencias abertas na carteira agora.";
+      }
+    } catch (error) {
+      if (refs.withdrawFeedback) {
+        refs.withdrawFeedback.textContent = String(error.message || "Nao consegui atualizar a carteira.");
+      }
+    }
+  }
+
+  async function requestPubPaidWithdrawal() {
+    const user = getCatalogoGoogleAuthUser();
+    if (!user?.email) {
+      if (refs.withdrawFeedback) refs.withdrawFeedback.textContent = "Entre com Google antes de pedir retirada.";
+      return;
+    }
+
+    const amount = getWithdrawalAmount();
+    try {
+      const payload = await requestApiJson("/api/pubpaid/withdrawals", {
+        method: "POST",
+        body: JSON.stringify({
+          amount,
+          sourcePage: window.location.pathname
+        })
+      });
+      state.wallet.coins = clampInteger(payload?.wallet?.balanceCoins || state.wallet.coins);
+      saveState();
+      renderAll();
+      if (refs.withdrawFeedback) {
+        refs.withdrawFeedback.textContent =
+          payload.message || "Retirada enviada. O admin revisa manualmente em ate 3 horas.";
+      }
+      setWorldMessage("Retirada enviada para revisao manual do admin.", 3200);
+    } catch (error) {
+      if (refs.withdrawFeedback) refs.withdrawFeedback.textContent = String(error.message || "Falha ao pedir retirada.");
+    }
+  }
+
   function handleProfileSubmit(event) {
     event.preventDefault();
     if (!refs.profileForm) return;
 
+    const shouldEnterGameAfterProfile = runtime.profileEntryMode;
     const formData = new FormData(refs.profileForm);
     const name = String(formData.get("name") || "").trim();
     const archetype = normalizeArchetype(formData.get("archetype"));
@@ -3196,30 +3627,44 @@
       return;
     }
 
+    const authUser = getCatalogoGoogleAuthUser();
+    if (!authUser?.email) {
+      setText(refs.profileFeedback, "Entre com Google para salvar o personagem e abrir o caixa.");
+      return;
+    }
+
     const firstEntry = !state.profile.bonusClaimed;
     state.profile.registered = true;
+    state.profile.avatarReady = true;
     state.profile.name = name;
     state.profile.archetype = archetype;
     state.profile.favorite = favorite;
     state.profile.motto = motto;
+    state.profile.authProvider = "google";
+    state.profile.googleSub = String(authUser.sub || "");
+    state.profile.googleEmail = String(authUser.email || "");
+    state.profile.googlePicture = String(authUser.picture || "");
 
     if (firstEntry) {
       state.profile.bonusClaimed = true;
-      state.wallet.coins += STARTER_COINS;
+      state.profile.starterCreditsRevoked = true;
+      state.wallet.coins = 0;
     }
 
     saveState();
     closeModal("profile");
     renderAll();
 
-    if (runtime.scene === "exterior") {
-      enterInterior();
+    if (shouldEnterGameAfterProfile) {
+      enterGameExperience({ skipChecks: true, announce: false });
     }
 
     setWorldMessage(
-      firstEntry
-        ? `${STARTER_COINS} créditos chegaram. Agora a porta do pub está aberta para você.`
-        : "Seu personagem foi atualizado e o salão já reconheceu você.",
+      shouldEnterGameAfterProfile
+        ? "Avatar salvo. O PubPaid abriu em tela cheia e o salão já reconheceu você."
+        : firstEntry
+          ? "Personagem salvo com Google. Créditos grátis zerados: gere um QR no caixa para depositar."
+          : "Seu personagem foi atualizado e o salão já reconheceu você.",
       2800
     );
   }
@@ -3264,12 +3709,19 @@
     closeModal("door");
 
     if (choice === "enter") {
-      if (!state.profile.registered) {
-        openProfileModal();
-      } else {
-        enterInterior();
-        setWorldMessage("A porta abriu e o salão recebeu você.", 2200);
+      if (!hasGoogleSession()) {
+        runtime.profileEntryMode = true;
+        focusProfileAccess("Entre com Google para destravar a entrada do PubPaid.");
+        return;
       }
+
+      if (!hasAvatarProfile()) {
+        openProfileModal({ entryMode: true });
+        setText(refs.profileFeedback, "Agora falta só montar o avatar para abrir o salão.");
+        return;
+      }
+
+      enterGameExperience({ skipChecks: true, announce: true });
       return;
     }
 
@@ -3333,9 +3785,9 @@
     }
 
     if (interaction.type === "shop") {
-      if (!state.profile.registered) {
+      if (!canEnterPubGame()) {
         openWaiterModal();
-        setWorldMessage("O garcom apareceu. Monte seu personagem para comprar e jogar.", 2400);
+        setWorldMessage("O garcom apareceu. Primeiro passe por Google e avatar para jogar valendo.", 2400);
         return;
       }
       openWaiterModal();
@@ -3358,8 +3810,8 @@
     }
 
     if (interaction.type === "game") {
-      if (!state.profile.registered) {
-        setWorldMessage("Passe primeiro pela porta e monte seu personagem antes de escolher uma mesa.", 2200);
+      if (!canEnterPubGame()) {
+        setWorldMessage("Entre com Google, monte o avatar e abra o salão antes de escolher uma mesa.", 2400);
         return;
       }
       openGameLobby(interaction.gameId);
@@ -3382,12 +3834,19 @@
     }
 
     if (runtime.scene === "exterior") {
-      if (!state.profile.registered) {
-        openDoorDecision();
-        setWorldMessage("Primeiro passe pela porta para começar a noite.", 2200);
+      if (!hasGoogleSession()) {
+        runtime.profileEntryMode = true;
+        focusProfileAccess("Primeiro conecte o Google para liberar o acesso ao salão.");
         return;
       }
-      enterInterior();
+
+      if (!hasAvatarProfile()) {
+        openProfileModal({ entryMode: true });
+        setText(refs.profileFeedback, "Monte o avatar antes de pular direto para uma mesa.");
+        return;
+      }
+
+      enterGameExperience({ skipChecks: true, announce: false });
     }
 
     const interaction = findInteractionByVenueKey(key);
@@ -4069,13 +4528,12 @@
     clearGameTimer();
     runtime.activeGame = {
       id: normalized,
-      mode: "demo",
+      mode: "valendo",
       screen: "lobby",
       stake: TABLE_META[normalized].stakes[0],
       payout: 0,
       houseFee: 0,
       opponent: { ...HOUSE_OPPONENTS[normalized] },
-      isPractice: false,
       feedback: "",
       summary: "",
       result: "",
@@ -4209,7 +4667,6 @@
 
     const isSolo = Boolean(TABLE_META[game.id].isSolo);
     const startLabel = isSolo ? "Sentar na maquina" : "Encontrar rival";
-    const practiceLabel = isSolo ? "Testar de graca" : "Mesa demo gratis";
     const flowLines = isSolo
       ? `
         <li>Voce joga sozinho contra a maquina e a aposta entra no instante em que a rodada começa.</li>
@@ -4240,10 +4697,9 @@
           <p>${escapeHtml(game.opponent.bio)}</p>
           ${game.activeDrink ? `<p class="pubpaid-feedback">A bebida pode dar boa sorte em ${Math.round(game.activeDrink.goodChance * 100)}% ou azar em ${Math.round(game.activeDrink.badChance * 100)}% da rodada.</p>` : ""}
           <div class="pubpaid-stake-row">${stakes}</div>
-          <p class="pubpaid-feedback">Entrada livre: abra uma rodada de aquecimento sem mexer no seu saldo.</p>
+          <p class="pubpaid-feedback">Toda mesa agora consome saldo real da sua carteira aprovada.</p>
           <div class="pubpaid-card-actions">
             <button class="pubpaid-card-button" type="button" data-start-game>${escapeHtml(startLabel)}</button>
-            <button class="pubpaid-card-button" type="button" data-start-game-practice>${escapeHtml(practiceLabel)}</button>
             <button class="pubpaid-card-button" type="button" data-close-finished>Voltar ao salao</button>
           </div>
           ${game.feedback ? `<p class="pubpaid-feedback">${escapeHtml(game.feedback)}</p>` : ""}
@@ -4290,9 +4746,7 @@
   function startActiveGame() {
     const game = runtime.activeGame;
     if (!game || game.screen !== "lobby") return;
-    const isPractice = Boolean(game.isPractice);
-
-    if (!isPractice && state.wallet.coins < game.stake) {
+    if (state.wallet.coins < game.stake) {
       game.feedback = `Saldo insuficiente. Voce precisa de ${formatCoins(game.stake)}.`;
       renderGameModal();
       return;
@@ -4300,13 +4754,11 @@
 
     game.feedback = "";
     game.startedAt = new Date().toISOString();
-    game.houseFee = isPractice ? 0 : getHouseFee(game.stake);
-    game.payout = isPractice ? 0 : game.stake * 2 - game.houseFee;
-    game.fortune = isPractice ? null : rollDrinkFortune(game.activeDrink, game.stake, getSecretLuckBoost());
+    game.houseFee = getHouseFee(game.stake);
+    game.payout = game.stake * 2 - game.houseFee;
+    game.fortune = rollDrinkFortune(game.activeDrink, game.stake, getSecretLuckBoost());
     game.screen = "playing";
-    if (!isPractice) {
-      state.wallet.coins -= game.stake;
-    }
+    state.wallet.coins -= game.stake;
     state.shop.activeDrinkId = "";
     if (state.secrets.singerCharm > 0) state.secrets.singerCharm -= 1;
 
@@ -4421,27 +4873,17 @@
   function finalizeGame(result, summary) {
     const game = runtime.activeGame;
     if (!game || game.screen === "finished") return;
-    const isPractice = Boolean(game.isPractice);
 
     clearGameTimer();
     clearPoolRefs(false);
 
-    const resolved = isPractice
-      ? {
-          result,
-          summary,
-          coinDelta: 0,
-          fortuneNote: "Rodada de aquecimento concluida: seu saldo ficou intacto nesta partida."
-        }
-      : resolveFortuneOutcome(game, result, summary);
+    const resolved = resolveFortuneOutcome(game, result, summary);
     game.screen = "finished";
     game.result = resolved.result;
     game.summary = resolved.summary;
     game.fortuneNote = resolved.fortuneNote;
 
-    if (isPractice) {
-      game.resultAmount = "demo gratis";
-    } else if (resolved.result === "win") {
+    if (resolved.result === "win") {
       const finalPayout = Math.max(0, game.payout + resolved.coinDelta);
       state.wallet.coins += finalPayout;
       state.wallet.wins += 1;
@@ -4460,7 +4902,7 @@
 
     state.history.unshift({
       id: `history-${Date.now()}`,
-      title: `${TABLE_META[game.id].label}${isPractice ? " - demo" : ""}`,
+      title: `${TABLE_META[game.id].label}`,
       result: resolved.result,
       summary: resolved.summary,
       amount: game.resultAmount,
@@ -6989,9 +7431,14 @@
   function resetDemo() {
     stopMusic();
     clearGameTimer();
+    const fullscreenExit = document.exitFullscreen?.();
+    if (fullscreenExit?.catch) fullscreenExit.catch(() => {});
     window.localStorage.removeItem(STORAGE_KEY);
     state = createInitialState();
     runtime.activeGame = null;
+    runtime.profileEntryMode = false;
+    runtime.gameMode = false;
+    runtime.nightPanelOpen = false;
     refs.gameModal.hidden = true;
     if (refs.shopModal) refs.shopModal.hidden = true;
     if (refs.waiterModal) refs.waiterModal.hidden = true;

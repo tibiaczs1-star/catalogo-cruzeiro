@@ -181,11 +181,11 @@
       "Plano gratuito ativo",
       "Ao escolher destaque ou pacote de creditos, o QR code sera exibido neste painel."
     );
-    nodes.key.textContent = "sem pagamento";
+    nodes.key.textContent = "oculta no QR";
     nodes.txid.textContent = "sem pagamento";
     nodes.qr.innerHTML = "<p>O plano gratuito nao precisa de QR code.</p>";
     nodes.code.value = "";
-    nodes.note.textContent = "Plano gratuito nao exige pagamento. Planos pagos usam confirmacao manual.";
+    nodes.note.textContent = "Plano gratuito nao exige pagamento. Planos pagos usam QR Code e confirmacao manual.";
     $("#ninjas-profile-amount").value = "0";
     $("#ninjas-profile-txid-input").value = "";
   }
@@ -204,16 +204,13 @@
       url.searchParams.set("description", description);
       const payload = await requestJson(url.toString(), { headers: { Accept: "application/json" } });
 
-      nodes.key.textContent = payload.key || "";
+      nodes.key.textContent = "oculta no QR";
       nodes.txid.textContent = payload.txid || "";
       nodes.qr.innerHTML = payload.qrSvg || "<p>QR indisponivel no momento.</p>";
-      nodes.code.value = payload.copyCode || "";
-      const recipientName = String(payload.recipientName || "").trim();
+      nodes.code.value = "";
       nodes.note.textContent =
         payload.confirmationMode === "manual"
-          ? recipientName
-            ? `Recebedor: ${recipientName}. Confirmacao manual: guarde a referencia e use o comprovante na conferencia.`
-            : "Confirmacao manual: guarde a referencia e use o comprovante na conferencia."
+          ? "Confirmacao manual: use o QR Code, guarde a referencia e o comprovante."
           : "Pagamento pronto.";
 
       if (kind === "request") {
@@ -564,9 +561,8 @@
       const nodes = getPaymentNodes(card);
 
       nodes.copyButton?.addEventListener("click", async () => {
-        const ok = await copyText(nodes.code?.value || "");
         if (nodes.note) {
-          nodes.note.textContent = ok ? "Codigo Pix copiado." : "Nao foi possivel copiar o codigo agora.";
+          nodes.note.textContent = "Por seguranca, o pagamento fica somente no QR Code desta referencia.";
         }
       });
 

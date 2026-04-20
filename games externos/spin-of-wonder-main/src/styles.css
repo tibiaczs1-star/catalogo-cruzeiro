@@ -1,0 +1,155 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-felt: var(--felt);
+  --color-felt-dark: var(--felt-dark);
+  --color-gold: var(--gold);
+  --color-gold-dark: var(--gold-dark);
+  --color-roulette-red: var(--roulette-red);
+  --color-roulette-black: var(--roulette-black);
+  --color-roulette-green: var(--roulette-green);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  /* Casino dark luxury theme */
+  --background: oklch(0.18 0.02 150);
+  --foreground: oklch(0.97 0.02 90);
+
+  --card: oklch(0.22 0.03 150);
+  --card-foreground: oklch(0.97 0.02 90);
+
+  --popover: oklch(0.22 0.03 150);
+  --popover-foreground: oklch(0.97 0.02 90);
+
+  --primary: oklch(0.78 0.15 85);
+  --primary-foreground: oklch(0.18 0.02 150);
+
+  --secondary: oklch(0.28 0.04 150);
+  --secondary-foreground: oklch(0.97 0.02 90);
+
+  --muted: oklch(0.25 0.02 150);
+  --muted-foreground: oklch(0.7 0.02 90);
+
+  --accent: oklch(0.78 0.15 85);
+  --accent-foreground: oklch(0.18 0.02 150);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+
+  --border: oklch(0.32 0.04 150 / 50%);
+  --input: oklch(0.32 0.04 150);
+  --ring: oklch(0.78 0.15 85);
+
+  /* Casino specific tokens */
+  --felt: oklch(0.32 0.08 150);
+  --felt-dark: oklch(0.22 0.06 150);
+  --gold: oklch(0.82 0.17 85);
+  --gold-dark: oklch(0.62 0.14 75);
+  --roulette-red: oklch(0.55 0.22 25);
+  --roulette-black: oklch(0.16 0.01 270);
+  --roulette-green: oklch(0.45 0.14 150);
+
+  /* Gradients & shadows */
+  --gradient-felt: radial-gradient(ellipse at center, oklch(0.36 0.08 150) 0%, oklch(0.22 0.06 150) 100%);
+  --gradient-gold: linear-gradient(135deg, oklch(0.88 0.16 90) 0%, oklch(0.62 0.14 75) 100%);
+  --gradient-bg: radial-gradient(ellipse at top, oklch(0.24 0.04 150) 0%, oklch(0.12 0.02 150) 100%);
+
+  --shadow-gold: 0 0 30px oklch(0.78 0.15 85 / 40%), 0 4px 12px oklch(0 0 0 / 40%);
+  --shadow-deep: 0 20px 60px -10px oklch(0 0 0 / 60%), 0 0 0 1px oklch(0.78 0.15 85 / 20%);
+  --shadow-chip: 0 4px 8px oklch(0 0 0 / 40%), inset 0 -2px 0 oklch(0 0 0 / 20%), inset 0 1px 0 oklch(1 0 0 / 20%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  body {
+    background: var(--gradient-bg);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .bg-felt {
+    background: var(--gradient-felt);
+  }
+  .bg-gold-gradient {
+    background: var(--gradient-gold);
+  }
+  .text-gold {
+    color: var(--gold);
+  }
+  .shadow-gold {
+    box-shadow: var(--shadow-gold);
+  }
+  .shadow-deep {
+    box-shadow: var(--shadow-deep);
+  }
+  .shadow-chip {
+    box-shadow: var(--shadow-chip);
+  }
+
+  .roulette-spin {
+    transition: transform 6s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+  }
+
+  .ball-spin {
+    transition: transform 6s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .chip-stack {
+    box-shadow:
+      0 1px 0 oklch(0 0 0 / 30%),
+      0 2px 0 oklch(0 0 0 / 25%),
+      0 3px 0 oklch(0 0 0 / 20%),
+      0 4px 6px oklch(0 0 0 / 40%);
+  }
+
+  @keyframes win-flash {
+    0%, 100% { box-shadow: 0 0 0 0 var(--gold); }
+    50% { box-shadow: 0 0 30px 8px var(--gold); }
+  }
+  .animate-win {
+    animation: win-flash 1.2s ease-in-out 3;
+  }
+
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(0) scale(0.8); }
+    20% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+    100% { opacity: 0; transform: translateY(-60px) scale(1); }
+  }
+  .animate-float-up {
+    animation: float-up 1.6s ease-out forwards;
+  }
+}

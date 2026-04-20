@@ -7,9 +7,10 @@
   const OPEN_DELAY_MS = 260;
   const THANKS_SCREEN_MS = 5000;
   const THANKS_SCREEN_MS_COMPACT = 3600;
-  const THANKS_SCREEN_MS_PHONE = 4200;
+  const THANKS_SCREEN_MS_PHONE = 6800;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
   const FOUNDERS_VIDEO_SRC = "./assets/founders-cafe-pack-anim.mp4";
+  const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
   const FOUNDERS_RECOMMENCER_LOGO_SRC = "./assets/founders-recommencer-logo.svg";
   const FOUNDERS_OPENING_STEPS = [
@@ -108,38 +109,53 @@
       <p class="catalogo-welcome-kicker">Antes de continuar</p>
       <h2 id="catalogoWelcomeTitle">Preferencias de cookies</h2>
       <p class="catalogo-welcome-lead">
-        Usamos cookies para entender o uso do portal, melhorar a navegacao e
-        acompanhar metricas essenciais de desempenho e audiencia.
+        Cookies essenciais mantem o portal estavel. Ja a medicao basica ajuda a
+        entender leitura, carregamento, desempenho e pontos de melhoria desta visita.
       </p>
+
+      <div class="catalogo-consent-intro">
+        <strong>Leitura rapida desta etapa</strong>
+        <p>
+          Nao e cadastro extra nem tela de venda. Esta entrada so organiza o uso de
+          cookies essenciais e metricas basicas para que o portal rode melhor.
+        </p>
+      </div>
 
       <div class="catalogo-terms-summary">
         <article class="catalogo-summary-card">
-          <strong>Essenciais</strong>
-          <p>Mantem recursos basicos do site funcionando corretamente.</p>
+          <strong>Base do portal</strong>
+          <p>Segura recursos essenciais, carregamento minimo e continuidade da sessao.</p>
         </article>
         <article class="catalogo-summary-card">
-          <strong>Medicao e desempenho</strong>
-          <p>Ajudam a analisar acessos, paginas mais visitadas e a estabilidade da experiencia.</p>
+          <strong>Medicao da visita</strong>
+          <p>Mostra onde a leitura flui, onde trava e quais editorias pedem ajuste.</p>
         </article>
         <article class="catalogo-summary-card">
           <strong>Seu controle</strong>
-          <p>Voce pode consultar os detalhes na pagina legal antes de seguir.</p>
+          <p>A politica continua aberta para consulta antes e depois da entrada no site.</p>
         </article>
       </div>
 
       <div class="catalogo-terms-list">
         <div class="catalogo-term-item">
-          <strong>O que usamos</strong>
-          <span>Cookies essenciais e ferramentas de medicao de uso.</span>
+          <strong>O que fica ligado</strong>
+          <span>Cookies essenciais, leitura de desempenho e sinais basicos de navegacao.</span>
         </div>
         <div class="catalogo-term-item">
-          <strong>Finalidade</strong>
-          <span>Aprimorar conteudo, usabilidade e desempenho do portal.</span>
+          <strong>O que isso melhora</strong>
+          <span>Capas, velocidade, carregamento das editorias e estabilidade geral do portal.</span>
         </div>
         <div class="catalogo-term-item">
           <strong>Transparencia</strong>
-          <span>As condicoes podem ser atualizadas conforme o site evolui.</span>
+          <span>As condicoes acompanham a evolucao do site e permanecem descritas na politica.</span>
         </div>
+      </div>
+
+      <div class="catalogo-consent-focus" aria-hidden="true">
+        <strong>Concordancia desta visita</strong>
+        <p>
+          A marcacao abaixo libera a entrada com essas medicoes basicas ativas neste acesso.
+        </p>
       </div>
 
       <label class="catalogo-terms-check">
@@ -149,6 +165,7 @@
 
       <p class="catalogo-welcome-note">
         Cookies estritamente necessarios podem permanecer ativos para o funcionamento do site.
+        A politica completa continua disponivel em nova aba para revisao.
       </p>
 
       <div class="catalogo-welcome-actions">
@@ -236,6 +253,25 @@
             <p class="catalogo-founder-thanks-kicker catalogo-founder-reveal reveal-1">Socios fundadores</p>
             <span class="catalogo-founder-thanks-seal catalogo-founder-reveal reveal-2">Homenagem de abertura</span>
             <div class="catalogo-founder-banner-rail catalogo-founder-reveal reveal-3">
+              <article class="catalogo-founder-banner-card catalogo-founder-banner-card-cafe">
+                <span>Fundador em cena</span>
+                <div class="catalogo-founder-thanks-logo-wrap catalogo-founder-thanks-copy-card">
+                  <strong>Cafe Cruzeiro</strong>
+                  <small>video de abertura e palco do portal</small>
+                </div>
+              </article>
+              <article class="catalogo-founder-banner-card catalogo-founder-banner-card-grupoas">
+                <span>Apoiador em destaque</span>
+                <div class="catalogo-founder-thanks-logo-wrap">
+                  <img
+                    class="catalogo-founder-thanks-logo"
+                    src="${FOUNDERS_GRUPO_AS_LOGO_SRC}"
+                    alt="Logo do Grupo A.S"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              </article>
               <article class="catalogo-founder-banner-card">
                 <span>Fundadora em destaque</span>
                 <div class="catalogo-founder-thanks-logo-wrap">
@@ -261,7 +297,7 @@
                 </div>
               </article>
             </div>
-            <strong class="catalogo-founder-reveal reveal-4">Cafe Cruzeiro, Dra. Geane Campo e Recommencer em destaque no palco de abertura.</strong>
+            <strong class="catalogo-founder-reveal reveal-4">Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer em destaque no palco de abertura.</strong>
             <span class="catalogo-founder-reveal reveal-5">Obrigado por manter este portal vivo. As noticias estao entrando no ar.</span>
             <div class="catalogo-founder-opening catalogo-founder-reveal reveal-5" aria-live="polite">
               <div class="catalogo-founder-opening-head">
@@ -321,8 +357,9 @@
 
   function buildWelcomeVisualMarkup(options = {}) {
     const compact = options.compact === true;
+    const phone = options.phone === true;
     const visualClass = compact
-      ? "catalogo-welcome-visual catalogo-welcome-visual-compact"
+      ? `catalogo-welcome-visual catalogo-welcome-visual-compact${phone ? " catalogo-welcome-visual-phone" : ""}`
       : "catalogo-welcome-visual";
 
     return `
@@ -549,7 +586,7 @@
           aria-modal="true"
           aria-labelledby="catalogoWelcomeTitle"
         >
-          ${phone ? "" : buildWelcomeVisualMarkup({ compact: true })}
+          ${phone ? buildWelcomeVisualMarkup({ compact: true, phone: true }) : buildWelcomeVisualMarkup({ compact: true })}
           <div class="catalogo-welcome-copy">
             <div class="catalogo-compact-banner" aria-hidden="true">
               <span class="catalogo-compact-dot"></span>

@@ -26,7 +26,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260418c" />
+    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260419bridge" />
   </head>
   <body>
     <div class="poll-backdrop" aria-hidden="true"></div>
@@ -138,6 +138,32 @@
             <h3>Leitura por candidato</h3>
             <div class="poll-insight-grid" id="candidateProfiles">
               <p class="poll-empty">Os perfis aparecem quando houver massa de respostas.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="poll-card poll-bridge" aria-live="polite">
+          <div class="poll-summary-head">
+            <div>
+              <p class="poll-kicker poll-kicker--soft">SPO + Jornal</p>
+              <h2>Leitura cruzada do momento</h2>
+            </div>
+            <p class="poll-summary-updated" id="bridgeUpdatedAt">Aguardando ponte de dados</p>
+          </div>
+
+          <p class="poll-bridge-copy">
+            A SPO envia sinais de voto, prioridade e humor. O jornal devolve contexto, nomes em foco e
+            matérias que ajudam a ler por que o tema subiu.
+          </p>
+
+          <div class="poll-bridge-signals" id="pollBridgeSignals">
+            <p class="poll-empty">A leitura cruzada aparece assim que os dados forem carregados.</p>
+          </div>
+
+          <div class="poll-summary-block">
+            <h3>O que o jornal está vendo agora</h3>
+            <div class="poll-bridge-news" id="pollBridgeNews">
+              <p class="poll-empty">As matérias ligadas ao clima político entram aqui.</p>
             </div>
           </div>
         </section>
@@ -447,6 +473,6 @@
       </section>
     </main>
 
-    <script src="./pesquisa-acre-2026.js?v=20260418c" defer></script>
+    <script src="./pesquisa-acre-2026.js?v=20260419bridge" defer></script>
   </body>
 </html>

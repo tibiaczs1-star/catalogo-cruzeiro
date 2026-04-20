@@ -670,7 +670,7 @@
           }
         ];
   const defaultTheme = officeConfig.defaultTheme || environments[0]?.id || "editorial-hq";
-  const supportPixKey = officeConfig.supportPixKey || "99567741204";
+  const supportPixKey = officeConfig.supportPixKey || "";
   const supportIntro =
     officeConfig.supportIntro ||
     "A vaquinha do escritório deixa o apoio visível: cada item empurra uma melhoria concreta para o ambiente de trabalho.";
@@ -1353,9 +1353,9 @@
     if (!officeState.selectedSupportItemId && supportCatalog[0]) {
       officeState.selectedSupportItemId = supportCatalog[0].id;
     }
-    if (pixKeyOutput) pixKeyOutput.textContent = supportPixKey;
+    if (pixKeyOutput) pixKeyOutput.textContent = "QR Code protegido";
     if (supportFeedback) {
-      supportFeedback.textContent = "Escolha um item, copie a chave Pix e registre a melhoria quando quiser marcar a vaquinha.";
+      supportFeedback.textContent = "Escolha um item e use o fluxo de QR Code protegido para marcar a vaquinha.";
     }
     selectSupportItem(officeState.selectedSupportItemId, false);
     supportModal.hidden = false;
@@ -2122,14 +2122,8 @@
   supportOpenButtons.forEach((button) => button.addEventListener("click", openSupportModal));
 
   pixCopyButton?.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(supportPixKey);
-      const selectedItem = getSelectedSupportItem();
-      if (supportFeedback) {
-        supportFeedback.textContent = `Chave Pix ${supportPixKey} copiada para ${selectedItem?.name || "a vaquinha"}.`;
-      }
-    } catch (_error) {
-      if (supportFeedback) supportFeedback.textContent = `Chave Pix: ${supportPixKey}`;
+    if (supportFeedback) {
+      supportFeedback.textContent = "Por seguranca, a chave Pix nao aparece. Use o QR Code protegido no fluxo de pagamento.";
     }
   });
   supportConfirmButton?.addEventListener("click", confirmSupportItem);
@@ -2272,7 +2266,7 @@
   loadGossipLog();
   loadInventory();
   document.body.dataset.officeVariant = officeVariant;
-  if (pixKeyOutput) pixKeyOutput.textContent = supportPixKey;
+  if (pixKeyOutput) pixKeyOutput.textContent = "QR Code protegido";
   renderEnvironmentOptions();
   renderSupportCatalog();
   renderInventoryPanel();

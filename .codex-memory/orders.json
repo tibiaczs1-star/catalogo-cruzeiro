@@ -1,7 +1,108 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-19T18:33:20.276Z",
+  "lastUpdatedAt": "2026-04-20T02:25:30.222Z",
   "orders": [
+    {
+      "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
+      "createdAt": "2026-04-19T23:40:00.000Z",
+      "updatedAt": "2026-04-19T23:59:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "implemente o login por google no pubpoaid; para se cadastrar naquela nossas news teler, do email tambem so usar google; transforma toda area de pagamento pra nao aparecer codigo pix cpf, validar com qr code criado na hora; zere tudo de credito gratis, todo mundo tem que deposita agora",
+      "summary": "Adicionar login Google, esconder Pix por QR protegido e zerar creditos gratis do PubPaid",
+      "normalizedTasks": [
+        "Criar autenticacao Google central validada no servidor",
+        "Exigir Google na newsletter, fundadores e PubPaid",
+        "Remover CPF, chave Pix e copia-e-cola da interface publica",
+        "Gerar QR Pix dinamico sem devolver key/copyCode em JSON publico",
+        "Adicionar caixa de deposito no PubPaid",
+        "Zerar starter credits e migrar bonus antigo de 100 creditos"
+      ],
+      "filesTouched": [
+        "server.js",
+        "site-google-auth.js",
+        "index.html",
+        "script.js",
+        "styles.css",
+        "pubpaid.html",
+        "pubpaid.js",
+        "pubpaid.css",
+        "ninjas.html",
+        "ninjas.js",
+        "escritorio.js",
+        "escritorio.html",
+        "escritorio-nerd.html",
+        "escritorio-ninjas.html",
+        "escritorio-arte.html",
+        "esttiles.html",
+        "backend/server.js",
+        "render.yaml",
+        "DEPLOY_RENDER_CLOUDFLARE.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/review-team/latest-report.md",
+        ".codex-temp/review-team/latest-report.json"
+      ],
+      "tags": [
+        "google-auth",
+        "pix",
+        "qr-code",
+        "pubpaid",
+        "pagamentos",
+        "newsletter"
+      ],
+      "nextSteps": [
+        "Configurar GOOGLE_AUTH_CLIENT_ID e SITE_AUTH_SESSION_SECRET no Render",
+        "Confirmar NINJAS_PIX_KEY e nomes do recebedor no Render",
+        "Fazer deploy e testar login Google real no dominio publicado"
+      ],
+      "notes": "O QR Pix usa a chave apenas dentro do payload do QR gerado no servidor; key/copyCode nao sao retornados nas respostas publicas."
+    },
+    {
+      "id": "2026-04-19-integrar-pesquisa-spo-com-jornal-em-duas-vias",
+      "createdAt": "2026-04-19T23:10:00.000Z",
+      "updatedAt": "2026-04-19T23:36:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "eu quero que a pesquisa spo entre dados pro jornal e a pesquisa do jornal pra spo",
+      "summary": "Cruzar a SPO com o jornal em duas vias",
+      "normalizedTasks": [
+        "Criar payload comum com sinais da pesquisa e matérias políticas",
+        "Mostrar o jornal dentro da página da pesquisa",
+        "Mostrar o pulso da SPO dentro da área de eleições do jornal"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pesquisa-acre-2026.html",
+        "pesquisa-acre-2026.js",
+        "pesquisa-acre-2026.css",
+        "index.html",
+        "script.js",
+        "styles.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        "review-team-report-md",
+        "review-team-report-json"
+      ],
+      "tags": [
+        "spo",
+        "pesquisa",
+        "jornal",
+        "eleicoes",
+        "integracao"
+      ],
+      "nextSteps": [
+        "Validar visualmente a nova ponte na home e na página da pesquisa",
+        "Publicar no deploy quando o usuário pedir"
+      ],
+      "notes": "A rota /api/pesquisa-acre-2026/bridge centraliza os sinais da pesquisa e o recorte político do noticiário."
+    },
     {
       "id": "2026-04-17-criar-memoria-local-persistente-para-ordens-fotos-e-textos-do-usuario",
       "createdAt": "2026-04-17T06:20:30.830Z",
@@ -1124,6 +1225,344 @@
         "Publicar no origin/main",
         "Confirmar no Render a carga de mobile-home-final.css"
       ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-transformar-a-checagem-da-noticia-em-veredito-claro-sobre-confirmado-inconclusiv",
+      "createdAt": "2026-04-19T19:37:06.980Z",
+      "updatedAt": "2026-04-19T19:37:06.980Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "isso e pra ser uma checagem, então ele tem que me dizer o que e eo que nao e, exemplo se e fake news ou não, ele tem que que dizer, e etc, ele tem que da resultados e nao perguntas, ele tem que checar e cruzer e nao ficar arndubio",
+      "summary": "Transformar a checagem da notícia em veredito claro sobre confirmado, inconclusivo e fake news",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-fazer-reuniao-geral-e-mapear-fontes-de-noticia-blogs-e-redes-do-vale-do-jurua-e-",
+      "createdAt": "2026-04-19T20:04:45.507Z",
+      "updatedAt": "2026-04-19T20:04:45.507Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "depoois faça uma reunião geral ordem do aministrador, aparando areastaas e comparando e quero um que busquem na internet toda dtoda fonte de notricia do vale do jurua e redodesas e me deem um relatorio sobre quais sao inclusive bloigs redes sociais tudo",
+      "summary": "Fazer reunião geral e mapear fontes de notícia, blogs e redes do Vale do Juruá e entorno com relatório",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-implementar-reuniao-das-fontes-endurecer-mobile-e-criar-o-subsite-esttiles-com-5",
+      "createdAt": "2026-04-19T21:34:17.170Z",
+      "updatedAt": "2026-04-19T21:34:17.170Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu queroque vc pegue tudo da reunião e implemete; volte ao trabalhando impletando tudo que a reuniao deu, mais uma coisa a versão mobile ta cheia de erros ... quero um suhb site do editrial de moda ja funcional e monte uma equipe de 50 agente de moda, sub site esttiles, e suba todos os escritorios pra cima no menu, embaixo editoriais em cima funções e escritorios e jogo",
+      "summary": "Implementar reunião das fontes, endurecer mobile e criar o subsite Esttíles com 50 agentes de moda e menu reorganizado",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-ajustar-homenagem-dos-fundadores-no-mobile-e-completar-os-3-banners",
+      "createdAt": "2026-04-19T22:15:00.000Z",
+      "updatedAt": "2026-04-19T22:15:00.000Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "no mobile a estrutura de fundadores nao ta aparecendo direito ela some em 1 segundo, faça uma estrtura semelhante ao de destkop mais pra mobile, e coloque os 3 fundadores em banners nas divisões adequqadas",
+      "summary": "Reforçar a homenagem dos fundadores no mobile e mostrar os 3 fundadores em banners",
+      "normalizedTasks": [
+        "Aumentar o tempo da homenagem dos fundadores no phone",
+        "Criar um palco mobile semelhante ao desktop",
+        "Manter o video do Cafe Cruzeiro visivel no menor breakpoint",
+        "Adicionar o terceiro banner de fundador no splash",
+        "Adicionar o terceiro banner de fundador no mural da home"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        "startup-experience.css",
+        "index.html",
+        "styles.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "mobile",
+        "fundadores",
+        "splash",
+        "home",
+        "cache"
+      ],
+      "nextSteps": [
+        "Publicar a rodada no deploy",
+        "Validar a abertura mobile publicada"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-refinar-a-tela-de-cookies-e-reposicionar-o-diretor-para-mirar-a-concordancia",
+      "createdAt": "2026-04-19T22:40:00.000Z",
+      "updatedAt": "2026-04-19T22:40:00.000Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "isso ta feio.... melhorede mais informações, mais nao diretaseu quero esse carinha mais pra baixo, pra lanterna aponta pro espaço do que o usuario tem que concorda",
+      "summary": "Refinar a tela de cookies e reposicionar o diretor para apontar para a area de concordancia",
+      "normalizedTasks": [
+        "Melhorar a copy de consentimento sem ficar seca ou excessivamente tecnica",
+        "Adicionar mais contexto na tela de cookies",
+        "Dar mais destaque visual para a area da concordancia",
+        "Descer o diretor para que a lanterna mire o aceite",
+        "Melhorar os botoes no phone"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        "startup-experience.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "cookies",
+        "consentimento",
+        "desktop",
+        "tablet",
+        "mobile",
+        "diretor"
+      ],
+      "nextSteps": [
+        "Validar visualmente a tela de cookies",
+        "Publicar no deploy se o usuario aprovar"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-criar-espacos-de-banners-e-propaganda-na-area-vazia-do-catalogo-de-servicos",
+      "createdAt": "2026-04-19T22:55:00.000Z",
+      "updatedAt": "2026-04-19T22:55:00.000Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "todda essa area de baixo ai quero que vc implemente espaços pra banners de propaganda ads",
+      "summary": "Criar uma regua de banners e propaganda na area vazia do catalogo de servicos",
+      "normalizedTasks": [
+        "Adicionar uma area propria de ads ao catalogo de servicos",
+        "Renderizar slots de banner no modulo ativo",
+        "Deixar a regua responsiva para desktop e phone",
+        "Preparar CTA de reserva para monetizacao"
+      ],
+      "filesTouched": [
+        "catalogo-servicos.html",
+        "catalogo-servicos.js",
+        "catalogo-servicos.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "ads",
+        "monetizacao",
+        "catalogo-servicos",
+        "mobile"
+      ],
+      "nextSteps": [
+        "Validar visualmente a regua de banners",
+        "Publicar no deploy se o usuario aprovar"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-explicar-retomada-da-sessao-anterior-e-estado-atual-do-projeto",
+      "createdAt": "2026-04-19T23:44:56.757Z",
+      "updatedAt": "2026-04-19T23:44:56.757Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "parece que vc travou na outra seção me explique o que ta acontecendo",
+      "summary": "Explicar retomada da sessao anterior e estado atual do projeto",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-19-assumir-a-sessao-interrompida-validar-o-pacote-local-e-continuar-a-retomada-oper",
+      "createdAt": "2026-04-19T23:46:20.493Z",
+      "updatedAt": "2026-04-19T23:51:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "assuma",
+      "summary": "Assumir a sessão interrompida, validar o pacote local e continuar a retomada operacional",
+      "normalizedTasks": [
+        "Confirmar que a sessão anterior não estava mais trabalhando",
+        "Validar sintaxe dos principais JS alterados",
+        "Rodar auditoria local de revisão",
+        "Validar CSS principal com brace-balance",
+        "Subir servidor local e checar rotas críticas",
+        "Registrar estado e handoff da retomada"
+      ],
+      "filesTouched": [
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "retomada",
+        "validacao",
+        "handoff",
+        "deploy"
+      ],
+      "nextSteps": [
+        "Validar visualmente no navegador real em http://127.0.0.1:3000",
+        "Configurar envs Google/Pix no Render antes de testar login e pagamentos reais",
+        "Publicar quando o usuario mandar"
+      ],
+      "notes": "Servidor local ativo no PID 17004. Chrome/Edge headless não geraram screenshots nesta máquina."
+    },
+    {
+      "id": "2026-04-19-comecar-implementacao-do-pacote-jogo-sem-creditos-gratis-pagamentos-manuais-admi",
+      "createdAt": "2026-04-19T23:55:39.818Z",
+      "updatedAt": "2026-04-19T23:55:39.818Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vai",
+      "summary": "Comecar implementacao do pacote: jogo sem creditos gratis, pagamentos manuais, admin, pesquisa semanal e SPO forte",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-finalizar-o-bloco-da-rua-no-rodape-insiders-com-avenida-vazia-e-multidao-animada",
+      "createdAt": "2026-04-20T00:41:22.958Z",
+      "updatedAt": "2026-04-20T00:41:22.958Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "termine a parte da rua",
+      "summary": "Finalizar o bloco da rua no rodape Insiders com avenida vazia e multidao animada",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-retomar-do-ponto-atual-e-continuar-as-ordens-em-andamento-a-partir-do-popup-star",
+      "createdAt": "2026-04-20T00:46:59.557Z",
+      "updatedAt": "2026-04-20T00:46:59.557Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu acho que travou, continue daqui, e siga essas ordens",
+      "summary": "Retomar do ponto atual e continuar as ordens em andamento a partir do popup/startup-experience",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-restaurar-hero-mobile-recolocar-botao-do-jogo-no-topo-com-destaque-e-refatorar-e",
+      "createdAt": "2026-04-20T00:51:23.563Z",
+      "updatedAt": "2026-04-20T00:51:23.563Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu dei ordens pra tira o fundo da hero mobile, nao pra quebra a hero que tava antes que era linda, restaure tudo ali e do lado ali tem que ficar azul, la ficava as principais noticias ta transparente ajeite isso; recoloque o botao do jogo no topo junto com os escritorios; o botao do jogo precisa de icone e destaque vermelho animado; a pagina do jogo deve ter uma entrada/apresentacao e, ao entrar, abrir o jogo em tela cheia com login Google e criacao de avatar",
+      "summary": "Restaurar hero mobile, recolocar botão do jogo no topo com destaque e refatorar entrada da PubPaid para fluxo apresentação -> jogo full screen com Google e avatar",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-corrigir-a-hero-desktop-restaurando-os-destaques-visuais-removendo-a-translucide",
+      "createdAt": "2026-04-20T01:38:23.131Z",
+      "updatedAt": "2026-04-20T01:38:23.131Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "mano vc estragou a hero denovo, do destop, sumio totalmente os destaques que viam da hero, e pra piorar continua tranlucido do lado <L<<<< vou ti manda o video da cagada / corrija",
+      "summary": "Corrigir a hero desktop restaurando os destaques visuais, removendo a translucidez lateral e usando o vídeo enviado como referência",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-deixar-a-hero-principal-em-tom-azul-de-verdade-removendo-o-aspecto-cinza-lavado-",
+      "createdAt": "2026-04-20T01:40:58.280Z",
+      "updatedAt": "2026-04-20T01:40:58.280Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "caraca mano nao consegue mesmo deixa isso em tom azul nao?",
+      "summary": "Deixar a hero principal em tom azul de verdade, removendo o aspecto cinza/lavado mostrado na captura",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-corrigir-a-hero-para-nao-cortar-o-titulo-de-cobertura-e-garantir-que-pubpaid-gam",
+      "createdAt": "2026-04-20T01:47:19.237Z",
+      "updatedAt": "2026-04-20T01:47:19.237Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "isso e pra ser quadrado ta vendo que cober4tura ta cortado o texto? e cade o botão que eu pedi no meu pro pubpaid? game? e os escritorios? vc ta pedido carA?",
+      "summary": "Corrigir a hero para não cortar o título de cobertura e garantir que PubPaid/game e escritórios apareçam no topo da home",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-corrigir-topo-menu-da-home-restaurar-botoes-de-escritorios-e-ajustar-hero-deskto",
+      "createdAt": "2026-04-20T02:04:39.896Z",
+      "updatedAt": "2026-04-20T02:04:39.896Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "os botoes no menu em cima não apareceram, nem os escritorios nem nada... corrigir topo/menu, hero desktop e pontos/bola com a cor da referencia",
+      "summary": "Corrigir topo/menu da home, restaurar botoes de escritorios e ajustar hero desktop e pontos azuis",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-recuperar-botoes-de-pubpaid-e-escritorios-no-topo-e-alinhar-o-azul-da-hero-faixa",
+      "createdAt": "2026-04-20T02:25:30.222Z",
+      "updatedAt": "2026-04-20T02:25:30.222Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "puixe da sua memoria o que vc estava fazendo reculperando os botoes de paid e escritorios e a cores la da primeira iamgem as bolas tem que a cor da segunda imagem e os escritorios desapareceram faça os botoes reaparecer",
+      "summary": "Recuperar botoes de PubPaid e escritorios no topo e alinhar o azul da hero/faixa com a referencia escura",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
       "notes": ""
     }
   ]

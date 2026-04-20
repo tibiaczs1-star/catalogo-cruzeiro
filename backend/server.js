@@ -34,10 +34,10 @@ const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
 const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
-const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "99567741204").trim();
+const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
 const NINJAS_PIX_DEFAULT_AMOUNT = 5;
 const NINJAS_PIX_RECEIVER_NAME = String(
-  process.env.NINJAS_PIX_RECEIVER_NAME || "ANTONIO CLOVIS CORREIA DA SILVA JUNIOR"
+  process.env.NINJAS_PIX_RECEIVER_NAME || "CATALOGO CRUZEIRO"
 ).trim();
 const NINJAS_MERCHANT_NAME = String(
   process.env.NINJAS_MERCHANT_NAME || NINJAS_PIX_RECEIVER_NAME || "CATALOGO CZS"
@@ -252,9 +252,11 @@ function computePixCrc16(payload) {
 function buildPixPayload({ amount, txid, description }) {
   const safeAmount = Math.max(0.01, Math.min(99999.99, parseCurrency(amount, NINJAS_PIX_DEFAULT_AMOUNT))).toFixed(2);
   const safeTxid = normalizePixToken(txid || `NJS${Date.now()}`, 25) || `NJS${Date.now()}`;
+  const pixKey = safeString(NINJAS_PIX_KEY, 77);
+  if (!pixKey) throw new Error("pix-key-not-configured");
   const accountInfo = [
     buildPixField("00", "br.gov.bcb.pix"),
-    buildPixField("01", safeString(NINJAS_PIX_KEY, 77))
+    buildPixField("01", pixKey)
   ];
   const safeDescription = normalizePixText(description, 40);
   if (safeDescription) accountInfo.push(buildPixField("02", safeDescription));
@@ -296,12 +298,11 @@ async function buildNinjasPixConfig({ amount, txid, description }) {
     }
   }
   return {
-    key: NINJAS_PIX_KEY,
-    recipientName: NINJAS_PIX_RECEIVER_NAME,
+    paymentMethod: "pix-qr-code",
+    keyVisible: false,
     merchantName: normalizePixText(NINJAS_MERCHANT_NAME, 25) || "CATALOGO CZS",
     amount: Number(safeAmount.toFixed(2)),
     txid: payload.txid,
-    copyCode: payload.copyCode,
     qrSvg,
     confirmationMode: "manual"
   };
@@ -1305,6 +1306,9 @@ app.get("/api/ninjas/opportunities", (_req, res) => {
 });
 
 app.get("/api/ninjas/pix", async (req, res) => {
+  if (!NINJAS_PIX_KEY) {
+    return res.status(503).json({ ok: false, error: "Pagamento Pix indisponivel no momento." });
+  }
   const payload = await buildNinjasPixConfig({
     amount: req.query.amount || NINJAS_PIX_DEFAULT_AMOUNT,
     txid: req.query.txid || "",
@@ -1341,7 +1345,8 @@ app.post("/api/ninjas/requests", async (req, res) => {
     status: "aguardando-confirmacao-pix",
     payment: {
       amount: NINJAS_PIX_DEFAULT_AMOUNT,
-      key: NINJAS_PIX_KEY,
+      method: "pix-qr-code",
+      keyVisible: false,
       txid: paymentTxid,
       status: "pendente-manual",
       confirmationMode: "manual"
@@ -1387,7 +1392,8 @@ app.post("/api/ninjas/profiles", async (req, res) => {
     status: paymentAmount ? "aguardando-confirmacao-pix" : "perfil-gratuito-recebido",
     payment: {
       amount: paymentAmount,
-      key: paymentAmount ? NINJAS_PIX_KEY : "",
+      method: paymentAmount ? "pix-qr-code" : "none",
+      keyVisible: false,
       txid: paymentAmount ? normalizePixToken(req.body.paymentTxid || req.body.txid || `NJSPRO${Date.now()}`, 25) : "",
       status: paymentAmount ? "pendente-manual" : "nao-aplicavel",
       confirmationMode: paymentAmount ? "manual" : "none"

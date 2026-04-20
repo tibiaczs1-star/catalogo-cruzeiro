@@ -1,4 +1,5 @@
 const http = require("http");
+const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
@@ -31,6 +32,21 @@ function getRequiredSecret(name, fallbackValue) {
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
 const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
 const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "99831455a");
+const GOOGLE_AUTH_CLIENT_ID = String(
+  process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
+).trim();
+const SITE_AUTH_SESSION_SECRET = String(
+  process.env.SITE_AUTH_SESSION_SECRET ||
+    process.env.PUBPAID_SESSION_SECRET ||
+    (IS_PRODUCTION ? "" : "catalogo-local-google-auth-session")
+).trim();
+const SITE_AUTH_COOKIE = "catalogo_google_session";
+const SITE_AUTH_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
+const GOOGLE_ID_TOKEN_CERTS_URL = "https://www.googleapis.com/oauth2/v1/certs";
+let googleIdTokenCertCache = {
+  certs: null,
+  expiresAt: 0
+};
 
 const ROOT_DIR = __dirname;
 const DATA_DIR = process.env.DATA_DIR
@@ -80,20 +96,25 @@ const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_NEURAL_GROWTH_FILE = path.join(DATA_DIR, "office-neural-growth.json");
 const PUBPAID_SPRITE_SCOUT_FILE = path.join(DATA_DIR, "pubpaid-sprite-scout.json");
+const PUBPAID_DEPOSITS_FILE = path.join(DATA_DIR, "pubpaid-deposits.json");
+const PUBPAID_WITHDRAWALS_FILE = path.join(DATA_DIR, "pubpaid-withdrawals.json");
+const PUBPAID_WALLETS_FILE = path.join(DATA_DIR, "pubpaid-wallets.json");
 const SITE_URL = String(process.env.SITE_URL || "").trim().replace(/\/+$/, "");
 const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
 const FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "99831455A").trim();
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
-const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "99567741204").trim();
+const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
 const NINJAS_PIX_DEFAULT_AMOUNT = 5;
 const NINJAS_PIX_RECEIVER_NAME = String(
-  process.env.NINJAS_PIX_RECEIVER_NAME || "ANTONIO CLOVIS CORREIA DA SILVA JUNIOR"
+  process.env.NINJAS_PIX_RECEIVER_NAME || "CATALOGO CRUZEIRO"
 ).trim();
 const NINJAS_MERCHANT_NAME = String(
   process.env.NINJAS_MERCHANT_NAME || NINJAS_PIX_RECEIVER_NAME || "CATALOGO CZS"
 ).trim();
 const NINJAS_MERCHANT_CITY = String(process.env.NINJAS_MERCHANT_CITY || "CRUZEIRO DO SUL").trim();
+const PUBPAID_ALLOWED_AMOUNTS = [5, 10, 20, 50, 100];
+const PUBPAID_PENDING_WINDOW_MS = 3 * 60 * 60 * 1000;
 const PREVIEW_CLASS_BY_CATEGORY = {
   cotidiano: "thumb-cheia",
   saude: "thumb-saude",
@@ -317,6 +338,18 @@ const STATIC_PAGE_SEO = {
     priority: "0.72",
     changefreq: "weekly",
     fileName: "escritorio-arte.html"
+  },
+  "/esttiles.html": {
+    title: `Esttiles | Editorial de Moda e Estilo | ${SITE_NAME}`,
+    description:
+      "Subsite editorial de moda com 50 agentes de estilo, passarela, beleza, fotografia, branding, vitrine e cobertura de moda local e cultural.",
+    themeColor: "#182235",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.72",
+    changefreq: "weekly",
+    fileName: "esttiles.html"
   },
   "/sprites-check-change.html": {
     title: `SPRTIS CHECK & CHANGE | ${SITE_NAME}`,
@@ -1101,6 +1134,243 @@ function safeString(value, max = 400) {
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, max);
+}
+
+function base64UrlEncode(value) {
+  const buffer = Buffer.isBuffer(value) ? value : Buffer.from(String(value));
+  return buffer.toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function base64UrlToBuffer(value) {
+  let normalized = String(value || "").replace(/-/g, "+").replace(/_/g, "/");
+  while (normalized.length % 4) normalized += "=";
+  return Buffer.from(normalized, "base64");
+}
+
+function parseJwtJson(part) {
+  return JSON.parse(base64UrlToBuffer(part).toString("utf8"));
+}
+
+function safeTimingCompare(left, right) {
+  const leftBuffer = Buffer.from(String(left || ""));
+  const rightBuffer = Buffer.from(String(right || ""));
+  if (leftBuffer.length !== rightBuffer.length) return false;
+  return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function isCatalogoGoogleAuthEnabled() {
+  return Boolean(GOOGLE_AUTH_CLIENT_ID && SITE_AUTH_SESSION_SECRET);
+}
+
+function parseCookies(req) {
+  const header = String(req?.headers?.cookie || "");
+  return header.split(";").reduce((cookies, part) => {
+    const divider = part.indexOf("=");
+    if (divider < 0) return cookies;
+    const key = part.slice(0, divider).trim();
+    const value = part.slice(divider + 1).trim();
+    if (!key) return cookies;
+    try {
+      cookies[key] = decodeURIComponent(value);
+    } catch (_error) {
+      cookies[key] = value;
+    }
+    return cookies;
+  }, {});
+}
+
+function serializeCookie(name, value, options = {}) {
+  const parts = [`${name}=${encodeURIComponent(value)}`];
+  if (options.maxAge !== undefined) parts.push(`Max-Age=${Number(options.maxAge) || 0}`);
+  if (options.path) parts.push(`Path=${options.path}`);
+  if (options.httpOnly) parts.push("HttpOnly");
+  if (options.secure) parts.push("Secure");
+  if (options.sameSite) parts.push(`SameSite=${options.sameSite}`);
+  return parts.join("; ");
+}
+
+function appendSetCookie(res, cookie) {
+  const current = res.getHeader("Set-Cookie");
+  if (!current) {
+    res.setHeader("Set-Cookie", cookie);
+    return;
+  }
+  const next = Array.isArray(current) ? current.concat(cookie) : [current, cookie];
+  res.setHeader("Set-Cookie", next);
+}
+
+function isSecureRequest(req) {
+  const forwardedProto = String(req?.headers?.["x-forwarded-proto"] || "").toLowerCase();
+  return forwardedProto.includes("https") || Boolean(req?.socket?.encrypted) || IS_PRODUCTION;
+}
+
+function createCatalogoAuthToken(user) {
+  const now = Date.now();
+  const payload = {
+    sub: safeString(user.sub, 120),
+    email: cleanEmail(user.email),
+    name: safeString(user.name || user.givenName || "", 120),
+    givenName: safeString(user.givenName, 80),
+    familyName: safeString(user.familyName, 80),
+    picture: safeString(user.picture, 360),
+    iat: now,
+    exp: now + SITE_AUTH_MAX_AGE_SECONDS * 1000
+  };
+  const body = base64UrlEncode(JSON.stringify(payload));
+  const signature = base64UrlEncode(crypto.createHmac("sha256", SITE_AUTH_SESSION_SECRET).update(body).digest());
+  return `${body}.${signature}`;
+}
+
+function readCatalogoAuthSession(req) {
+  if (!isCatalogoGoogleAuthEnabled()) return null;
+  const token = parseCookies(req)[SITE_AUTH_COOKIE];
+  if (!token || !token.includes(".")) return null;
+  const [body, signature] = token.split(".");
+  const expected = base64UrlEncode(crypto.createHmac("sha256", SITE_AUTH_SESSION_SECRET).update(body).digest());
+  if (!safeTimingCompare(signature, expected)) return null;
+
+  try {
+    const payload = JSON.parse(base64UrlToBuffer(body).toString("utf8"));
+    if (!payload?.sub || !payload?.email) return null;
+    if (Number(payload.exp || 0) < Date.now()) return null;
+    return {
+      sub: safeString(payload.sub, 120),
+      email: cleanEmail(payload.email),
+      name: safeString(payload.name, 120),
+      givenName: safeString(payload.givenName, 80),
+      familyName: safeString(payload.familyName, 80),
+      picture: safeString(payload.picture, 360)
+    };
+  } catch (_error) {
+    return null;
+  }
+}
+
+function publicAuthUser(user) {
+  if (!user) return null;
+  return {
+    sub: safeString(user.sub, 120),
+    email: cleanEmail(user.email),
+    name: safeString(user.name, 120),
+    givenName: safeString(user.givenName, 80),
+    familyName: safeString(user.familyName, 80),
+    picture: safeString(user.picture, 360)
+  };
+}
+
+function setCatalogoAuthCookie(req, res, user) {
+  appendSetCookie(
+    res,
+    serializeCookie(SITE_AUTH_COOKIE, createCatalogoAuthToken(user), {
+      maxAge: SITE_AUTH_MAX_AGE_SECONDS,
+      path: "/",
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: isSecureRequest(req)
+    })
+  );
+}
+
+function clearCatalogoAuthCookie(req, res) {
+  appendSetCookie(
+    res,
+    serializeCookie(SITE_AUTH_COOKIE, "", {
+      maxAge: 0,
+      path: "/",
+      httpOnly: true,
+      sameSite: "Lax",
+      secure: isSecureRequest(req)
+    })
+  );
+}
+
+async function fetchGoogleIdTokenCerts() {
+  if (googleIdTokenCertCache.certs && googleIdTokenCertCache.expiresAt > Date.now()) {
+    return googleIdTokenCertCache.certs;
+  }
+
+  const response = await fetch(GOOGLE_ID_TOKEN_CERTS_URL, {
+    headers: { Accept: "application/json" }
+  });
+  if (!response.ok) {
+    throw new Error("Nao foi possivel carregar as chaves publicas do Google.");
+  }
+
+  const certs = await response.json();
+  const cacheControl = String(response.headers.get("cache-control") || "");
+  const maxAgeMatch = cacheControl.match(/max-age=(\d+)/i);
+  const maxAgeMs = maxAgeMatch ? Number(maxAgeMatch[1]) * 1000 : 60 * 60 * 1000;
+  googleIdTokenCertCache = {
+    certs,
+    expiresAt: Date.now() + Math.max(5 * 60 * 1000, maxAgeMs - 60 * 1000)
+  };
+  return certs;
+}
+
+async function verifyGoogleIdToken(idToken) {
+  if (!isCatalogoGoogleAuthEnabled()) {
+    throw new Error("Login Google ainda nao esta configurado neste ambiente.");
+  }
+
+  const parts = String(idToken || "").split(".");
+  if (parts.length !== 3) {
+    throw new Error("Credencial Google invalida.");
+  }
+
+  const header = parseJwtJson(parts[0]);
+  const claims = parseJwtJson(parts[1]);
+  if (header.alg !== "RS256" || !header.kid) {
+    throw new Error("Assinatura Google nao reconhecida.");
+  }
+
+  const certs = await fetchGoogleIdTokenCerts();
+  const cert = certs?.[header.kid];
+  if (!cert) {
+    googleIdTokenCertCache = { certs: null, expiresAt: 0 };
+    throw new Error("Chave publica do Google nao encontrada.");
+  }
+
+  const verifier = crypto.createVerify("RSA-SHA256");
+  verifier.update(`${parts[0]}.${parts[1]}`);
+  verifier.end();
+  if (!verifier.verify(cert, base64UrlToBuffer(parts[2]))) {
+    throw new Error("Assinatura Google invalida.");
+  }
+
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  if (String(claims.aud || "") !== GOOGLE_AUTH_CLIENT_ID) {
+    throw new Error("Credencial Google emitida para outro aplicativo.");
+  }
+  if (!["accounts.google.com", "https://accounts.google.com"].includes(String(claims.iss || ""))) {
+    throw new Error("Emissor Google invalido.");
+  }
+  if (Number(claims.exp || 0) <= nowSeconds) {
+    throw new Error("Credencial Google expirada.");
+  }
+  if (claims.nbf && Number(claims.nbf) > nowSeconds + 30) {
+    throw new Error("Credencial Google ainda nao esta valida.");
+  }
+  if (!claims.sub) {
+    throw new Error("Credencial Google sem identificador.");
+  }
+  if (!claims.email) {
+    throw new Error("Credencial Google sem e-mail.");
+  }
+
+  const emailVerified = claims.email_verified === true || claims.email_verified === "true";
+  if (claims.email && !emailVerified) {
+    throw new Error("Confirme o e-mail no Google antes de continuar.");
+  }
+
+  return {
+    sub: safeString(claims.sub, 120),
+    email: cleanEmail(claims.email),
+    name: safeString(claims.name, 120),
+    givenName: safeString(claims.given_name, 80),
+    familyName: safeString(claims.family_name, 80),
+    picture: safeString(claims.picture, 360),
+    emailVerified
+  };
 }
 
 function buildAbsoluteUrl(baseUrl, value = "/") {
@@ -1953,12 +2223,11 @@ async function buildNinjasPixConfig({
   }
 
   return {
-    key: NINJAS_PIX_KEY,
-    recipientName: NINJAS_PIX_RECEIVER_NAME,
+    paymentMethod: "pix-qr-code",
+    keyVisible: false,
     merchantName: normalizePixText(NINJAS_MERCHANT_NAME, 25) || "CATALOGO CZS",
     amount: Number(safeAmount.toFixed(2)),
     txid: payload.txid,
-    copyCode: payload.copyCode,
     qrSvg,
     confirmationMode: "manual"
   };
@@ -2056,6 +2325,7 @@ function buildCollectionInventory({
   voteRecords,
   ninjasRequests,
   ninjasProfiles,
+  pubpaidDeposits,
   salesListings,
   vrRentalLeads
 }) {
@@ -2118,6 +2388,14 @@ function buildCollectionInventory({
       total: ninjasProfiles.length,
       source: "ninjas.html -> /api/ninjas/profiles",
       purpose: "Banco de profissionais, curriculo, area, plano gratis/destaque/creditos e Pix.",
+      readyForDb: true
+    },
+    {
+      key: "pubpaidDeposits",
+      label: "Depositos PubPaid",
+      total: pubpaidDeposits.length,
+      source: "pubpaid.html -> /api/pubpaid/deposits",
+      purpose: "Controla depositos em QR Code, conta Google, referencia e confirmacao manual.",
       readyForDb: true
     },
     {
@@ -3540,6 +3818,48 @@ function getElectionVotesFile() {
   return path.join(DATA_DIR, "election-votes.json");
 }
 
+function getCurrentWeekBucketKey() {
+  return getWeekBucketKey(new Date().toISOString());
+}
+
+function normalizeElectionVoterOfficeEntry(entry) {
+  if (typeof entry === "string") {
+    return {
+      candidateId: safeString(entry, 160),
+      weekKey: getCurrentWeekBucketKey(),
+      at: ""
+    };
+  }
+
+  if (entry && typeof entry === "object" && !Array.isArray(entry)) {
+    const candidateId = safeString(entry.candidateId || entry.vote || entry.value || "", 160);
+    const at = safeString(entry.at || entry.createdAt || "", 80);
+    return {
+      candidateId,
+      weekKey: safeString(entry.weekKey || "", 24) || getWeekBucketKey(at || new Date().toISOString()),
+      at
+    };
+  }
+
+  return {
+    candidateId: "",
+    weekKey: "",
+    at: ""
+  };
+}
+
+function getElectionCurrentUserVotes(voterRecord = {}, weekKey = getCurrentWeekBucketKey()) {
+  const currentVotes = {};
+  Object.entries(voterRecord || {}).forEach(([officeId, rawEntry]) => {
+    const entry = normalizeElectionVoterOfficeEntry(rawEntry);
+    if (!entry.candidateId || entry.weekKey !== weekKey) {
+      return;
+    }
+    currentVotes[officeId] = entry.candidateId;
+  });
+  return currentVotes;
+}
+
 function getElectionVoteStore() {
   const store = readJson(getElectionVotesFile(), {});
   return {
@@ -3570,8 +3890,8 @@ function getElectionCandidate(office, candidateId) {
   return candidates.find((candidate) => candidate.id === candidateId) || null;
 }
 
-function buildElectionOpinionSummary() {
-  const records = getElectionVoteRecords();
+function buildElectionOpinionSummary(recordsInput = null) {
+  const records = Array.isArray(recordsInput) ? recordsInput : getElectionVoteRecords();
   const summary = {};
 
   records.forEach((record) => {
@@ -3718,14 +4038,42 @@ function buildElectionOpinionSummary() {
   );
 }
 
+function buildElectionVotesFromRecords(records = []) {
+  const votes = {};
+  (Array.isArray(records) ? records : []).forEach((record) => {
+    const officeId = safeString(record.officeId || "", 120);
+    const candidateId = safeString(record.candidateId || "", 160);
+    if (!officeId || !candidateId) {
+      return;
+    }
+    votes[officeId] = votes[officeId] || {};
+    votes[officeId][candidateId] = Number(votes[officeId][candidateId] || 0) + 1;
+  });
+  return votes;
+}
+
 function getElectionPublicSnapshot(voterId = "") {
   const store = getElectionVoteStore();
   const safeVoterId = String(voterId || "").slice(0, 120);
-  const userVotes = safeVoterId && store.voters[safeVoterId] ? store.voters[safeVoterId] : {};
+  const currentWeekKey = getCurrentWeekBucketKey();
+  const voterRecord = safeVoterId && store.voters[safeVoterId] ? store.voters[safeVoterId] : {};
+  const userVotes = getElectionCurrentUserVotes(voterRecord, currentWeekKey);
+  const currentWeekRecords = getElectionVoteRecords().filter(
+    (record) => safeString(record.weekKey || "", 24) === currentWeekKey
+  );
+  const weeklyTrend = buildWeeklyTrendSeries(
+    getElectionVoteRecords().map((record) => ({
+      ...record,
+      weeklyLabel: `${record.candidateName || record.candidateId || "Candidato"} (${record.office || record.officeId || "Cargo"})`
+    })),
+    { valueField: "weeklyLabel", totalLabel: "totalVotes" }
+  );
   return {
-    votes: store.votes,
+    votes: buildElectionVotesFromRecords(currentWeekRecords),
     userVotes,
-    opinionSummary: buildElectionOpinionSummary(),
+    opinionSummary: buildElectionOpinionSummary(currentWeekRecords),
+    weeklyTrend,
+    currentWeekKey,
     updatedAt: store.updatedAt
   };
 }
@@ -3755,11 +4103,13 @@ function recordElectionVote(payload = {}, req = null) {
 
   const candidate = getElectionCandidate(office, safeCandidateId);
   const store = getElectionVoteStore();
+  const currentWeekKey = getCurrentWeekBucketKey();
   store.votes[safeOfficeId] = store.votes[safeOfficeId] || {};
   store.voters[safeVoterId] = store.voters[safeVoterId] || {};
   store.records = Array.isArray(store.records) ? store.records : [];
 
-  if (store.voters[safeVoterId][safeOfficeId]) {
+  const currentVoteEntry = normalizeElectionVoterOfficeEntry(store.voters[safeVoterId][safeOfficeId]);
+  if (currentVoteEntry.candidateId && currentVoteEntry.weekKey === currentWeekKey) {
     const snapshot = getElectionPublicSnapshot(safeVoterId);
     return {
       ok: true,
@@ -3771,7 +4121,11 @@ function recordElectionVote(payload = {}, req = null) {
 
   store.votes[safeOfficeId][safeCandidateId] =
     Number(store.votes[safeOfficeId][safeCandidateId] || 0) + 1;
-  store.voters[safeVoterId][safeOfficeId] = safeCandidateId;
+  store.voters[safeVoterId][safeOfficeId] = {
+    candidateId: safeCandidateId,
+    weekKey: currentWeekKey,
+    at: new Date().toISOString()
+  };
   const opinion = analyzeElectionObservation(observation);
 
   store.records.push({
@@ -3796,6 +4150,7 @@ function recordElectionVote(payload = {}, req = null) {
     deviceType: tracking.deviceType,
     visitorId: tracking.visitorId || tracking.cookieVisitorId,
     sessionId: tracking.sessionId || tracking.cookieSessionId,
+    weekKey: currentWeekKey,
     at: new Date().toISOString()
   });
   writeElectionVoteStore(store);
@@ -4600,12 +4955,78 @@ function buildAcre2026PollPublicPayload() {
   };
 }
 
+function pickMeaningfulPollLeader(items = [], blockedLabels = []) {
+  const blocked = new Set((Array.isArray(blockedLabels) ? blockedLabels : []).map((item) => normalizeText(item)));
+  return (Array.isArray(items) ? items : []).find((item) => !blocked.has(normalizeText(item?.label || ""))) || items[0] || null;
+}
+
+function isElectionJournalNewsItem(item = {}) {
+  const category = normalizeText(item.category || "");
+  if (category === "politica" || category === "prefeitura") {
+    return true;
+  }
+
+  const haystack = normalizeText(
+    [item.title, item.summary, item.sourceName, item.sourceLabel, item.category, item.location].join(" ")
+  );
+
+  return /\b(eleic|governador|governadora|vice-governadora|senador|senado|deputad|prefeit|governo|politic|candidat|partido|alianc|mailza|gladson|alan rick|jorge viana|bocalom|petecao|marcio bittar|thor dantas)\b/.test(
+    haystack
+  );
+}
+
+function buildAcre2026PollBridgePayload() {
+  const items = sortByDateDesc(getAcre2026PollResponses(), "createdAt", 5000);
+  const summary = buildAcre2026PollSummary(items);
+  const leadVote = pickMeaningfulPollLeader(summary.vote2026, ["Ainda nao decidi", "Branco/Nulo"]);
+  const topPriority = summary.priorities?.[0] || null;
+  const topDirection = summary.stateDirection?.[0] || null;
+  const desiredCycle = pickMeaningfulPollLeader(summary.desiredCycle, ["Nao sabe"]);
+  const journalItems = getNews(160)
+    .filter(isElectionJournalNewsItem)
+    .slice(0, 4)
+    .map((item) => ({
+      slug: safeString(item.slug, 160),
+      title: safeString(item.title, 180),
+      summary: safeString(item.summary, 280),
+      category: safeString(item.category, 60),
+      sourceName: safeString(item.sourceName || item.source, 80),
+      publishedAt: item.date || item.publishedAt || "",
+      localUrl: item.slug ? `/noticia.html?slug=${encodeURIComponent(item.slug)}` : safeString(item.url, 420),
+      sourceUrl: safeString(item.url || item.sourceUrl, 420)
+    }));
+
+  return {
+    ok: true,
+    updatedAt: summary.updatedAt || journalItems[0]?.publishedAt || "",
+    poll: {
+      totalResponses: Number(summary.totalResponses || 0),
+      satisfactionAverage: Number(summary.satisfactionAverage || 0),
+      leadVote,
+      topPriority,
+      topDirection,
+      desiredCycle,
+      candidateProfiles: Array.isArray(summary.candidateProfiles) ? summary.candidateProfiles.slice(0, 4) : [],
+      updatedAt: summary.updatedAt || ""
+    },
+    journal: {
+      totalItems: journalItems.length,
+      items: journalItems
+    }
+  };
+}
+
 function buildAcre2026PollAdminPayload() {
   const items = sortByDateDesc(getAcre2026PollResponses(), "createdAt", 5000);
+  const weekly = buildWeeklyTrendSeries(items, {
+    valueField: "voto2026",
+    totalLabel: "totalResponses"
+  });
   return {
     ok: true,
     updatedAt: items[0]?.createdAt || "",
     summary: buildAcre2026PollSummary(items),
+    weekly,
     records: items.map((item) => ({
       id: item.id,
       createdAt: item.createdAt,
@@ -4625,6 +5046,216 @@ function buildAcre2026PollAdminPayload() {
       visitorId: item.visitorId,
       sessionId: item.sessionId,
       ip: item.ip
+    }))
+  };
+}
+
+function getWeekBucketKey(value = "") {
+  const date = new Date(value || Date.now());
+  if (Number.isNaN(date.getTime())) {
+    return "week-unknown";
+  }
+
+  const utc = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  const day = utc.getUTCDay() || 7;
+  utc.setUTCDate(utc.getUTCDate() + 4 - day);
+  const yearStart = new Date(Date.UTC(utc.getUTCFullYear(), 0, 1));
+  const weekNo = Math.ceil((((utc - yearStart) / 86400000) + 1) / 7);
+  return `${utc.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+}
+
+function buildWeeklyTrendSeries(records = [], { valueField = "", totalLabel = "total" } = {}) {
+  const bucket = new Map();
+  (Array.isArray(records) ? records : []).forEach((item) => {
+    const key = getWeekBucketKey(item?.createdAt || item?.at || "");
+    if (!bucket.has(key)) {
+      bucket.set(key, {
+        week: key,
+        total: 0,
+        labels: {}
+      });
+    }
+    const entry = bucket.get(key);
+    entry.total += 1;
+    const label = safeString(item?.[valueField] || "", 120) || "não informado";
+    entry.labels[label] = (entry.labels[label] || 0) + 1;
+  });
+
+  const weeks = Array.from(bucket.values()).sort((a, b) => String(a.week).localeCompare(String(b.week), "pt-BR"));
+  return weeks.map((entry, index) => {
+    const topEntries = Object.entries(entry.labels)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([label, total]) => ({
+        label,
+        total,
+        percent: entry.total ? Number(((total / entry.total) * 100).toFixed(1)) : 0
+      }));
+    const previous = weeks[index - 1];
+    return {
+      week: entry.week,
+      [totalLabel]: entry.total,
+      total: entry.total,
+      labels: topEntries,
+      changeFromPrevious: previous ? entry.total - previous.total : 0
+    };
+  });
+}
+
+function getPubpaidWalletKey(user = {}) {
+  return safeString(user?.sub || user?.email || "", 180).toLowerCase();
+}
+
+function normalizePubpaidAmount(value, fallback = 10) {
+  const parsed = Number(parseCurrency(value, fallback));
+  return PUBPAID_ALLOWED_AMOUNTS.includes(parsed) ? parsed : fallback;
+}
+
+function getPubpaidWalletStore() {
+  const items = readJson(PUBPAID_WALLETS_FILE, []);
+  return Array.isArray(items) ? items : [];
+}
+
+function writePubpaidWalletStore(items = []) {
+  writeJson(PUBPAID_WALLETS_FILE, Array.isArray(items) ? items : []);
+}
+
+function getPubpaidWithdrawals() {
+  const items = readJson(PUBPAID_WITHDRAWALS_FILE, []);
+  return Array.isArray(items) ? items : [];
+}
+
+function writePubpaidWithdrawals(items = []) {
+  writeJson(PUBPAID_WITHDRAWALS_FILE, Array.isArray(items) ? items : []);
+}
+
+function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
+  const key = getPubpaidWalletKey(authUser);
+  if (!key) {
+    return null;
+  }
+
+  const wallets = getPubpaidWalletStore();
+  let wallet = wallets.find((item) => safeString(item.walletKey || "", 180).toLowerCase() === key) || null;
+
+  if (!wallet && createIfMissing) {
+    wallet = {
+      id: createRecordId("pubwallet"),
+      walletKey: key,
+      user: publicAuthUser(authUser),
+      balanceCoins: 0,
+      lockedWithdrawalCoins: 0,
+      totalApprovedDeposits: 0,
+      totalApprovedWithdrawals: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    wallets.push(wallet);
+    writePubpaidWalletStore(wallets);
+  }
+
+  return wallet;
+}
+
+function updatePubpaidWallet(authUser = {}, updater = null) {
+  const key = getPubpaidWalletKey(authUser);
+  if (!key) {
+    return null;
+  }
+
+  const wallets = getPubpaidWalletStore();
+  let index = wallets.findIndex((item) => safeString(item.walletKey || "", 180).toLowerCase() === key);
+  if (index < 0) {
+    wallets.push({
+      id: createRecordId("pubwallet"),
+      walletKey: key,
+      user: publicAuthUser(authUser),
+      balanceCoins: 0,
+      lockedWithdrawalCoins: 0,
+      totalApprovedDeposits: 0,
+      totalApprovedWithdrawals: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    });
+    index = wallets.length - 1;
+  }
+
+  const current = wallets[index];
+  const next = typeof updater === "function" ? updater({ ...current }) || current : current;
+  next.user = publicAuthUser(authUser);
+  next.walletKey = key;
+  next.balanceCoins = Math.max(0, clampInteger(next.balanceCoins));
+  next.lockedWithdrawalCoins = Math.max(0, clampInteger(next.lockedWithdrawalCoins));
+  next.totalApprovedDeposits = Math.max(0, clampInteger(next.totalApprovedDeposits));
+  next.totalApprovedWithdrawals = Math.max(0, clampInteger(next.totalApprovedWithdrawals));
+  next.updatedAt = new Date().toISOString();
+  wallets[index] = next;
+  writePubpaidWalletStore(wallets);
+  return next;
+}
+
+function isPubpaidPendingStatus(value = "") {
+  const normalized = normalizeText(value);
+  return normalized.includes("pendente") || normalized.includes("aguardando");
+}
+
+function buildPubpaidAccountPayload(authUser = {}) {
+  const wallet = getPubpaidWallet(authUser);
+  const walletKey = getPubpaidWalletKey(authUser);
+  const deposits = getJsonArray(PUBPAID_DEPOSITS_FILE).filter(
+    (item) => safeString(item?.walletKey || "", 180).toLowerCase() === walletKey
+  );
+  const withdrawals = getPubpaidWithdrawals().filter(
+    (item) => safeString(item?.walletKey || "", 180).toLowerCase() === walletKey
+  );
+  const pendingDeposits = deposits.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status));
+  const pendingWithdrawals = withdrawals.filter((item) =>
+    isPubpaidPendingStatus(item?.payment?.status || item?.status || item?.status)
+  );
+
+  return {
+    ok: true,
+    user: publicAuthUser(authUser),
+    wallet: wallet
+      ? {
+          balanceCoins: clampInteger(wallet.balanceCoins),
+          lockedWithdrawalCoins: clampInteger(wallet.lockedWithdrawalCoins),
+          totalApprovedDeposits: clampInteger(wallet.totalApprovedDeposits),
+          totalApprovedWithdrawals: clampInteger(wallet.totalApprovedWithdrawals),
+          createdAt: wallet.createdAt || "",
+          updatedAt: wallet.updatedAt || ""
+        }
+      : {
+          balanceCoins: 0,
+          lockedWithdrawalCoins: 0,
+          totalApprovedDeposits: 0,
+          totalApprovedWithdrawals: 0,
+          createdAt: "",
+          updatedAt: ""
+        },
+    pending: {
+      deposits: pendingDeposits.length,
+      withdrawals: pendingWithdrawals.length
+    },
+    recentDeposits: sortByDateDesc(deposits, "createdAt", 8).map((item) => ({
+      id: item.id,
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || "",
+      createdAt: item.createdAt || "",
+      reviewDeadlineAt: item.reviewDeadlineAt || ""
+    })),
+    recentWithdrawals: sortByDateDesc(withdrawals, "createdAt", 8).map((item) => ({
+      id: item.id,
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || "",
+      createdAt: item.createdAt || "",
+      reviewDeadlineAt: item.reviewDeadlineAt || ""
     }))
   };
 }
@@ -4756,6 +5387,9 @@ function buildAdminDashboardPayload() {
   const acre2026PollSummary = buildAcre2026PollSummary(sortByDateDesc(acre2026Poll, "createdAt", 5000));
   const ninjasRequests = getJsonArray(NINJAS_REQUESTS_FILE);
   const ninjasProfiles = getJsonArray(NINJAS_PROFILES_FILE);
+  const pubpaidDeposits = getJsonArray(PUBPAID_DEPOSITS_FILE);
+  const pubpaidWithdrawals = getPubpaidWithdrawals();
+  const pubpaidWallets = getPubpaidWalletStore();
   const salesListings = getJsonArray(SALES_LISTINGS_FILE);
   const vrRentalLeads = getJsonArray(VR_RENTAL_LEADS_FILE);
   const news = getNews(200);
@@ -4766,8 +5400,14 @@ function buildAdminDashboardPayload() {
   const founderItems = subs.filter(isConfirmedFounderSubscription);
   const pendingFounderItems = subs.filter(isPendingFounderSubscription);
   const pendingNinjasPayments = ninjasRequests
-    .concat(ninjasProfiles)
+    .concat(ninjasProfiles, pubpaidDeposits)
     .filter((item) => String(item?.payment?.status || item.status || "").includes("pendente")).length;
+  const pendingPubpaidDeposits = pubpaidDeposits.filter((item) =>
+    isPubpaidPendingStatus(item?.payment?.status || item?.status)
+  ).length;
+  const pendingPubpaidWithdrawals = pubpaidWithdrawals.filter((item) =>
+    isPubpaidPendingStatus(item?.payment?.status || item?.status)
+  ).length;
 
   const uniqueVisitors = new Set(
     visits.map((item) => item.visitorId || item.cookieVisitorId).filter(Boolean)
@@ -4809,6 +5449,7 @@ function buildAdminDashboardPayload() {
     .concat(comments.map((item) => item.createdAt))
     .concat(subs.map((item) => item.createdAt))
     .concat(voteRecords.map((item) => item.at))
+    .concat(pubpaidDeposits.map((item) => item.createdAt))
     .concat(vrRentalLeads.map((item) => item.createdAt))
     .map((value) => new Date(value || 0).getTime())
     .filter((value) => Number.isFinite(value) && value > 0);
@@ -4838,6 +5479,11 @@ function buildAdminDashboardPayload() {
       opinions: voteRecords.filter((item) => item.observation).length,
       ninjasRequests: ninjasRequests.length,
       ninjasProfiles: ninjasProfiles.length,
+      pubpaidDeposits: pubpaidDeposits.length,
+      pubpaidWithdrawals: pubpaidWithdrawals.length,
+      pubpaidWallets: pubpaidWallets.length,
+      pubpaidPendingDeposits: pendingPubpaidDeposits,
+      pubpaidPendingWithdrawals: pendingPubpaidWithdrawals,
       ninjasPendingPayments: pendingNinjasPayments,
       salesListings: salesListings.length,
       vrRentalLeads: vrRentalLeads.length,
@@ -4894,6 +5540,16 @@ function buildAdminDashboardPayload() {
       sentiment: item.sentiment || "neutro",
       reelectionSignal: item.reelectionSignal || "neutro"
     })),
+    electionWeekly: buildWeeklyTrendSeries(
+      voteRecords.map((item) => ({
+        ...item,
+        weeklyLabel: `${item.candidateName || item.candidateId || "Candidato"} (${item.office || item.officeId || "Cargo"})`
+      })),
+      {
+        valueField: "weeklyLabel",
+        totalLabel: "totalVotes"
+      }
+    ),
     recentSubscriptions: sortByDateDesc(subs, "createdAt", 18).map((item) => ({
       createdAt: item.createdAt,
       name: item.name || "",
@@ -4904,6 +5560,10 @@ function buildAdminDashboardPayload() {
       ip: item.ip || ""
     })),
     acre2026PollSummary,
+    acre2026PollWeekly: buildWeeklyTrendSeries(acre2026Poll, {
+      valueField: "voto2026",
+      totalLabel: "totalResponses"
+    }),
     recentAcre2026Poll: sortByDateDesc(acre2026Poll, "createdAt", 18).map((item) => ({
       createdAt: item.createdAt,
       profissao: item.profissao || "",
@@ -4940,6 +5600,68 @@ function buildAdminDashboardPayload() {
       paymentStatus: item?.payment?.status || "",
       txid: item?.payment?.txid || ""
     })),
+    recentPubpaidDeposits: sortByDateDesc(pubpaidDeposits, "createdAt", 12).map((item) => ({
+      createdAt: item.createdAt,
+      email: item?.user?.email || "",
+      name: item?.user?.name || "",
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || ""
+    })),
+    pendingPubpaidDeposits: sortByDateDesc(
+      pubpaidDeposits.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status)),
+      "createdAt",
+      24
+    ).map((item) => ({
+      id: item.id,
+      createdAt: item.createdAt,
+      email: item?.user?.email || "",
+      name: item?.user?.name || "",
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || "",
+      reviewDeadlineAt: item.reviewDeadlineAt || ""
+    })),
+    recentPubpaidWithdrawals: sortByDateDesc(pubpaidWithdrawals, "createdAt", 12).map((item) => ({
+      createdAt: item.createdAt,
+      email: item?.user?.email || "",
+      name: item?.user?.name || "",
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || "",
+      reviewDeadlineAt: item.reviewDeadlineAt || ""
+    })),
+    pendingPubpaidWithdrawals: sortByDateDesc(
+      pubpaidWithdrawals.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status)),
+      "createdAt",
+      24
+    ).map((item) => ({
+      id: item.id,
+      createdAt: item.createdAt,
+      email: item?.user?.email || "",
+      name: item?.user?.name || "",
+      amount: item.amount || 0,
+      creditsRequested: item.creditsRequested || 0,
+      status: item.status || "",
+      paymentStatus: item?.payment?.status || "",
+      txid: item?.payment?.txid || "",
+      reviewDeadlineAt: item.reviewDeadlineAt || ""
+    })),
+    pubpaidWalletBoard: sortByDateDesc(pubpaidWallets, "updatedAt", 24).map((item) => ({
+      updatedAt: item.updatedAt || item.createdAt || "",
+      email: item?.user?.email || "",
+      name: item?.user?.name || "",
+      balanceCoins: item.balanceCoins || 0,
+      lockedWithdrawalCoins: item.lockedWithdrawalCoins || 0,
+      totalApprovedDeposits: item.totalApprovedDeposits || 0,
+      totalApprovedWithdrawals: item.totalApprovedWithdrawals || 0
+    })),
     recentSalesListings: sortByDateDesc(salesListings, "createdAt", 12).map((item) => ({
       createdAt: item.createdAt,
       title: item.title || "",
@@ -4968,6 +5690,7 @@ function buildAdminDashboardPayload() {
       voteRecords,
       ninjasRequests,
       ninjasProfiles,
+      pubpaidDeposits,
       salesListings,
       vrRentalLeads
     }),
@@ -4989,6 +5712,46 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (pathname === "/health") {
     return sendJson(res, 200, { ok: true, service: "catalogo-cruzeiro", time: new Date().toISOString() });
+  }
+
+  if (req.method === "GET" && pathname === "/api/auth/config") {
+    return sendJson(res, 200, {
+      ok: true,
+      enabled: isCatalogoGoogleAuthEnabled(),
+      provider: "google",
+      clientId: isCatalogoGoogleAuthEnabled() ? GOOGLE_AUTH_CLIENT_ID : "",
+      requiredFor: ["newsletter", "fundadores", "pubpaid", "pagamentos"]
+    });
+  }
+
+  if (req.method === "GET" && pathname === "/api/auth/session") {
+    return sendJson(res, 200, {
+      ok: true,
+      enabled: isCatalogoGoogleAuthEnabled(),
+      user: publicAuthUser(readCatalogoAuthSession(req))
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/auth/google") {
+    const body = await parseBody(req);
+    try {
+      const user = await verifyGoogleIdToken(body.credential || body.idToken || body.token);
+      setCatalogoAuthCookie(req, res, user);
+      return sendJson(res, 200, {
+        ok: true,
+        user: publicAuthUser(user)
+      });
+    } catch (error) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: String(error?.message || "Login Google nao foi validado.")
+      });
+    }
+  }
+
+  if (req.method === "POST" && pathname === "/api/auth/logout") {
+    clearCatalogoAuthCookie(req, res);
+    return sendJson(res, 200, { ok: true });
   }
 
   if (req.method === "GET" && pathname === "/api/sprites-check") {
@@ -5327,7 +6090,8 @@ async function handleApi(req, res, pathname, searchParams) {
       status: "aguardando-confirmacao-pix",
       payment: {
         amount: paymentAmount,
-        key: NINJAS_PIX_KEY,
+        method: "pix-qr-code",
+        keyVisible: false,
         txid: paymentTxid,
         status: "pendente-manual",
         confirmationMode: "manual"
@@ -5402,7 +6166,8 @@ async function handleApi(req, res, pathname, searchParams) {
       status: paymentAmount ? "aguardando-confirmacao-pix" : "perfil-gratuito-recebido",
       payment: {
         amount: paymentAmount,
-        key: paymentAmount ? NINJAS_PIX_KEY : "",
+        method: paymentAmount ? "pix-qr-code" : "none",
+        keyVisible: false,
         txid: paymentTxid,
         status: paymentAmount ? "pendente-manual" : "nao-aplicavel",
         confirmationMode: paymentAmount ? "manual" : "none"
@@ -5543,10 +6308,22 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildAcre2026PollPublicPayload());
   }
 
+  if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/bridge") {
+    return sendJson(res, 200, buildAcre2026PollBridgePayload());
+  }
+
   if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026") {
     const body = await parseBody(req);
     const tracking = buildTrackingMeta(req, body);
     const records = getAcre2026PollResponses();
+    const currentWeekKey = getWeekBucketKey(new Date().toISOString());
+    const currentFingerprint = [
+      tracking.visitorId || tracking.cookieVisitorId || "",
+      tracking.sessionId || tracking.cookieSessionId || "",
+      tracking.ip || ""
+    ]
+      .map((item) => safeString(item, 160))
+      .filter(Boolean);
     const profissao = cleanShortText(body.profissao || body.profession, 100);
     const localizacao = cleanShortText(body.localizacao || body.location, 120);
     const faixaEtaria = normalizePollChoice(
@@ -5637,6 +6414,25 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
+    const hasWeeklyVote = records.some((item) => {
+      if (getWeekBucketKey(item?.createdAt || "") !== currentWeekKey) {
+        return false;
+      }
+      const fingerprints = [
+        safeString(item.visitorId || "", 160),
+        safeString(item.sessionId || "", 160),
+        safeString(item.ip || "", 160)
+      ].filter(Boolean);
+      return currentFingerprint.some((fingerprint) => fingerprints.includes(fingerprint));
+    });
+
+    if (hasWeeklyVote) {
+      return sendJson(res, 409, {
+        ok: false,
+        error: "Seu dispositivo/local já registrou uma resposta nesta semana. Aguarde a próxima rodada para votar de novo."
+      });
+    }
+
     const nextItem = {
       id: createRecordId("poll"),
       profissao,
@@ -5665,6 +6461,7 @@ async function handleApi(req, res, pathname, searchParams) {
       browser: tracking.browser,
       deviceType: tracking.deviceType,
       referrerHost: tracking.referrerHost,
+      weekKey: currentWeekKey,
       createdAt: new Date().toISOString()
     };
 
@@ -5801,6 +6598,14 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/subscriptions/pix") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para gerar um QR code de apoio."
+      });
+    }
+
     if (!hasPixKeyConfigured()) {
       return sendJson(res, 503, {
         ok: false,
@@ -5820,6 +6625,281 @@ async function handleApi(req, res, pathname, searchParams) {
       defaultAmount: 5
     });
     return sendJson(res, 200, { ok: true, ...payload });
+  }
+
+  if (req.method === "GET" && pathname === "/api/pubpaid/deposit/pix") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para gerar o QR code de deposito."
+      });
+    }
+
+    if (!hasPixKeyConfigured()) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "Depositos Pix indisponiveis ate configurar a chave Pix."
+      });
+    }
+
+    const amount = normalizePubpaidAmount(searchParams.get("amount") || 10, 10);
+    const txid = searchParams.get("txid") || "";
+    const description = searchParams.get("description") || "PubPaid Creditos";
+    const payload = await buildNinjasPixConfig({
+      amount,
+      txid,
+      description,
+      minAmount: 5,
+      maxAmount: 100,
+      defaultAmount: 10
+    });
+    return sendJson(res, 200, { ok: true, ...payload, user: publicAuthUser(authUser) });
+  }
+
+  if (req.method === "GET" && pathname === "/api/pubpaid/account") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para abrir a carteira do PubPaid."
+      });
+    }
+
+    return sendJson(res, 200, buildPubpaidAccountPayload(authUser));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/deposits") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para registrar o deposito."
+      });
+    }
+
+    const body = await parseBody(req);
+    const deposits = readJson(PUBPAID_DEPOSITS_FILE, []);
+    const amount = normalizePubpaidAmount(body.amount, 10);
+    const txid = normalizePixToken(body.paymentTxid || body.txid || `PUB${Date.now()}`, 25) || `PUB${Date.now()}`;
+    const tracking = buildTrackingMeta(req, body);
+    const wallet = getPubpaidWallet(authUser);
+    const reviewDeadlineAt = new Date(Date.now() + PUBPAID_PENDING_WINDOW_MS).toISOString();
+    const nextItem = {
+      id: createRecordId("pubdep"),
+      type: "pubpaid-deposito",
+      user: publicAuthUser(authUser),
+      walletKey: wallet?.walletKey || getPubpaidWalletKey(authUser),
+      amount: Number(amount.toFixed(2)),
+      creditsRequested: Math.floor(amount),
+      status: "aguardando-confirmacao-pix",
+      payment: {
+        method: "pix-qr-code",
+        keyVisible: false,
+        txid,
+        status: "pendente-manual",
+        confirmationMode: "manual"
+      },
+      reviewDeadlineAt,
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid.html", 260),
+      visitorId: tracking.visitorId || tracking.cookieVisitorId,
+      sessionId: tracking.sessionId || tracking.cookieSessionId,
+      city: tracking.city,
+      country: tracking.country,
+      ip: tracking.ip,
+      createdAt: new Date().toISOString()
+    };
+
+    const next = Array.isArray(deposits) ? deposits : [];
+    next.push(nextItem);
+    writeJson(PUBPAID_DEPOSITS_FILE, next);
+
+    return sendJson(res, 201, {
+      ok: true,
+      item: nextItem,
+      message: "Deposito PubPaid registrado. Os creditos ficam pendentes por ate 3 horas ou ate a confirmacao manual no admin."
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/withdrawals") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para solicitar saque."
+      });
+    }
+
+    const body = await parseBody(req);
+    const amount = normalizePubpaidAmount(body.amount, 10);
+    const wallet = getPubpaidWallet(authUser);
+    if (!wallet) {
+      return sendJson(res, 400, {
+        ok: false,
+        error: "Carteira PubPaid indisponivel."
+      });
+    }
+
+    if (clampInteger(wallet.balanceCoins) < amount) {
+      return sendJson(res, 400, {
+        ok: false,
+        error: "Saldo insuficiente para solicitar esse saque."
+      });
+    }
+
+    const txid = normalizePixToken(body.paymentTxid || body.txid || `SAQ${Date.now()}`, 25) || `SAQ${Date.now()}`;
+    const tracking = buildTrackingMeta(req, body);
+    const reviewDeadlineAt = new Date(Date.now() + PUBPAID_PENDING_WINDOW_MS).toISOString();
+    const withdrawals = getPubpaidWithdrawals();
+    const nextItem = {
+      id: createRecordId("pubwd"),
+      type: "pubpaid-saque",
+      user: publicAuthUser(authUser),
+      walletKey: wallet.walletKey,
+      amount: Number(amount.toFixed(2)),
+      creditsRequested: Math.floor(amount),
+      status: "aguardando-confirmacao-saque",
+      payment: {
+        method: "pix-manual",
+        txid,
+        status: "pendente-manual",
+        confirmationMode: "manual"
+      },
+      reviewDeadlineAt,
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid.html", 260),
+      visitorId: tracking.visitorId || tracking.cookieVisitorId,
+      sessionId: tracking.sessionId || tracking.cookieSessionId,
+      city: tracking.city,
+      country: tracking.country,
+      ip: tracking.ip,
+      createdAt: new Date().toISOString()
+    };
+
+    updatePubpaidWallet(authUser, (current) => ({
+      ...current,
+      balanceCoins: Math.max(0, clampInteger(current.balanceCoins) - amount),
+      lockedWithdrawalCoins: clampInteger(current.lockedWithdrawalCoins) + amount
+    }));
+
+    withdrawals.push(nextItem);
+    writePubpaidWithdrawals(withdrawals);
+
+    return sendJson(res, 201, {
+      ok: true,
+      item: nextItem,
+      wallet: buildPubpaidAccountPayload(authUser).wallet,
+      message: "Saque solicitado. O valor fica travado por ate 3 horas ou ate revisao manual no admin."
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/admin/pubpaid/deposits/review") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const body = await parseBody(req);
+    const id = cleanShortText(body.id, 120);
+    const decision = normalizeText(body.decision || body.status || "");
+    const note = cleanShortText(body.note || "", 280);
+    const deposits = getJsonArray(PUBPAID_DEPOSITS_FILE);
+    const index = deposits.findIndex((item) => String(item?.id || "") === id);
+    if (index < 0) {
+      return sendJson(res, 404, { ok: false, error: "Deposito nao encontrado." });
+    }
+
+    const current = deposits[index];
+    if (!isPubpaidPendingStatus(current?.payment?.status || current?.status)) {
+      return sendJson(res, 400, { ok: false, error: "Esse deposito ja foi revisado." });
+    }
+
+    const approve = decision === "approve" || decision === "aprovado" || decision === "aprovar";
+    const reject = decision === "reject" || decision === "rejeitado" || decision === "rejeitar";
+    if (!approve && !reject) {
+      return sendJson(res, 400, { ok: false, error: "Decisao invalida." });
+    }
+
+    const nextItem = {
+      ...current,
+      status: approve ? "creditos-liberados" : "deposito-rejeitado",
+      reviewNote: note,
+      reviewedAt: new Date().toISOString(),
+      reviewedBy: SUPER_ADMIN_USER,
+      payment: {
+        ...(current.payment || {}),
+        status: approve ? "confirmado-manual" : "rejeitado-manual"
+      }
+    };
+    deposits[index] = nextItem;
+    writeJson(PUBPAID_DEPOSITS_FILE, deposits);
+
+    if (approve) {
+      updatePubpaidWallet(nextItem.user || {}, (wallet) => ({
+        ...wallet,
+        balanceCoins: clampInteger(wallet.balanceCoins) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0),
+        totalApprovedDeposits: clampInteger(wallet.totalApprovedDeposits) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0)
+      }));
+    }
+
+    return sendJson(res, 200, {
+      ok: true,
+      item: nextItem,
+      dashboard: buildAdminDashboardPayload()
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/admin/pubpaid/withdrawals/review") {
+    if (!requireAdmin(req)) return sendAdminUnauthorized(res);
+    const body = await parseBody(req);
+    const id = cleanShortText(body.id, 120);
+    const decision = normalizeText(body.decision || body.status || "");
+    const note = cleanShortText(body.note || "", 280);
+    const withdrawals = getPubpaidWithdrawals();
+    const index = withdrawals.findIndex((item) => String(item?.id || "") === id);
+    if (index < 0) {
+      return sendJson(res, 404, { ok: false, error: "Saque nao encontrado." });
+    }
+
+    const current = withdrawals[index];
+    if (!isPubpaidPendingStatus(current?.payment?.status || current?.status)) {
+      return sendJson(res, 400, { ok: false, error: "Esse saque ja foi revisado." });
+    }
+
+    const approve = decision === "approve" || decision === "aprovado" || decision === "aprovar";
+    const reject = decision === "reject" || decision === "rejeitado" || decision === "rejeitar";
+    if (!approve && !reject) {
+      return sendJson(res, 400, { ok: false, error: "Decisao invalida." });
+    }
+
+    const nextItem = {
+      ...current,
+      status: approve ? "saque-liberado" : "saque-rejeitado",
+      reviewNote: note,
+      reviewedAt: new Date().toISOString(),
+      reviewedBy: SUPER_ADMIN_USER,
+      payment: {
+        ...(current.payment || {}),
+        status: approve ? "confirmado-manual" : "rejeitado-manual"
+      }
+    };
+    withdrawals[index] = nextItem;
+    writePubpaidWithdrawals(withdrawals);
+
+    updatePubpaidWallet(nextItem.user || {}, (wallet) => ({
+      ...wallet,
+      balanceCoins: approve
+        ? clampInteger(wallet.balanceCoins)
+        : clampInteger(wallet.balanceCoins) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0),
+      lockedWithdrawalCoins: Math.max(
+        0,
+        clampInteger(wallet.lockedWithdrawalCoins) - clampInteger(nextItem.creditsRequested || nextItem.amount || 0)
+      ),
+      totalApprovedWithdrawals: approve
+        ? clampInteger(wallet.totalApprovedWithdrawals) + clampInteger(nextItem.creditsRequested || nextItem.amount || 0)
+        : clampInteger(wallet.totalApprovedWithdrawals)
+    }));
+
+    return sendJson(res, 200, {
+      ok: true,
+      item: nextItem,
+      dashboard: buildAdminDashboardPayload()
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/admin/dashboard") {
@@ -5974,6 +7054,9 @@ async function handleApi(req, res, pathname, searchParams) {
       votes: () => getElectionVoteRecords(),
       ninjasRequests: () => getJsonArray(NINJAS_REQUESTS_FILE),
       ninjasProfiles: () => getJsonArray(NINJAS_PROFILES_FILE),
+      pubpaidDeposits: () => getJsonArray(PUBPAID_DEPOSITS_FILE),
+      pubpaidWithdrawals: () => getPubpaidWithdrawals(),
+      pubpaidWallets: () => getPubpaidWalletStore(),
       salesListings: () => getJsonArray(SALES_LISTINGS_FILE),
       vrRentalLeads: () => getJsonArray(VR_RENTAL_LEADS_FILE)
     };
@@ -5994,6 +7077,9 @@ async function handleApi(req, res, pathname, searchParams) {
                   key === "subscriptions" ||
                   key === "acre2026Poll" ||
                   key.startsWith("ninjas") ||
+                  key === "pubpaidDeposits" ||
+                  key === "pubpaidWithdrawals" ||
+                  key === "pubpaidWallets" ||
                   key === "salesListings" ||
                   key === "vrRentalLeads"
                 ? "createdAt"
@@ -6009,6 +7095,14 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "POST" && pathname === "/api/subscriptions") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Entre com Google para assinar, apoiar ou entrar no mural."
+      });
+    }
+
     const body = await parseBody(req);
     const tracking = buildTrackingMeta(req, body);
     const subs = readJson(path.join(DATA_DIR, "subscriptions.json"), []);
@@ -6028,8 +7122,10 @@ async function handleApi(req, res, pathname, searchParams) {
         : "";
     const nextItem = {
       id: createRecordId("s"),
-      email: cleanEmail(body.email),
-      name: cleanShortText(body.name, 100),
+      email: authUser.email,
+      name: cleanShortText(body.name || authUser.name || authUser.givenName, 100),
+      authProvider: "google",
+      googleSub: authUser.sub,
       whatsapp: cleanPhone(body.whatsapp || body.phone),
       interests: normalizeListInput(body.interests, { maxItems: 8, itemLength: 60 }),
       plan,
@@ -6046,14 +7142,16 @@ async function handleApi(req, res, pathname, searchParams) {
         plan === "fundadores"
           ? {
               amount,
-              key: NINJAS_PIX_KEY,
+              method: "pix-qr-code",
+              keyVisible: false,
               txid: paymentTxid,
               status: "pendente-manual",
               confirmationMode: "manual"
             }
           : {
               amount: 0,
-              key: "",
+              method: "none",
+              keyVisible: false,
               txid: "",
               status: "nao-aplicavel",
               confirmationMode: "none"
@@ -6100,6 +7198,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const comments = readJson(path.join(DATA_DIR, "comments.json"), []);
     const subs = readJson(path.join(DATA_DIR, "subscriptions.json"), []);
+    const pubpaidDeposits = readJson(PUBPAID_DEPOSITS_FILE, []);
     const news = getNews(200);
     const biz = getBusinesses();
 
@@ -6108,6 +7207,7 @@ async function handleApi(req, res, pathname, searchParams) {
       totals: {
         comments: Array.isArray(comments) ? comments.length : 0,
         subscriptions: Array.isArray(subs) ? subs.length : 0,
+        pubpaidDeposits: Array.isArray(pubpaidDeposits) ? pubpaidDeposits.length : 0,
         news: Array.isArray(news) ? news.length : 0,
         businesses: Array.isArray(biz) ? biz.length : 0,
       },
