@@ -5764,7 +5764,7 @@ const buildAgentWhatsappUrl = ({ name = "", email = "", subject = "", message = 
   return `https://wa.me/${portalWhatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
 };
 
-const openAgentMailModal = (prefillMessage = "") => {
+const openAgentMailModal = (prefillMessage = "", prefillSubject = "") => {
   if (!agentMailModal) {
     return;
   }
@@ -5774,6 +5774,10 @@ const openAgentMailModal = (prefillMessage = "") => {
 
   if (prefillMessage && agentMailMessageInput && !agentMailMessageInput.value.trim()) {
     agentMailMessageInput.value = prefillMessage;
+  }
+
+  if (prefillSubject && agentMailSubjectInput && !agentMailSubjectInput.value.trim()) {
+    agentMailSubjectInput.value = prefillSubject;
   }
 
   setFeedbackState(agentMailFeedback, "", "");
@@ -5805,8 +5809,11 @@ const attachAgentMailFlow = () => {
     button.addEventListener("click", (event) => {
       event.preventDefault();
       const shouldUseFooterDraft = button === footerChatSend;
-      const prefillMessage = shouldUseFooterDraft ? String(footerChatInput?.value || "").trim() : "";
-      openAgentMailModal(prefillMessage);
+      const prefillMessage = shouldUseFooterDraft
+        ? String(footerChatInput?.value || "").trim()
+        : String(button.dataset.agentMessage || "").trim();
+      const prefillSubject = String(button.dataset.agentSubject || "").trim();
+      openAgentMailModal(prefillMessage, prefillSubject);
     });
   });
 

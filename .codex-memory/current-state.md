@@ -1,18 +1,17 @@
 # Current State
 
-Updated: 2026-04-20T05:57:43.194Z
+Updated: 2026-04-20T06:02:38.282Z
 
 ## Active Goal
 
-- PubPaid deposito manual corrigido
+- Entrada dos patrocinadores visivel
 
 ## Summary
 
-Ao avisar pagamento, PubPaid exige nome do depositante, envia depositorName para /api/pubpaid/deposits, esconde QR e mostra aviso de conferencia ate 3h; dashboard admin mostra coluna Depositante e servidor inclui depositorName no payload/CSV.
+Home agora tem card explicito "Entrada dos patrocinadores" abaixo da hero e card proprio na secao #monetizacao; botoes abrem o formulario de contato com assunto/mensagem comercial pre-preenchidos e index.html usa styles.css?v=20260420sponsorentry.
 
 ## Next
 
-- Deployar e testar fluxo real: gerar QR
-- preencher nome
-- avisar pagamento
-- abrir dashboard e aprovar deposito.
+- Deployar e testar na home com refresh forte
+- clicar em Entrar como patrocinador
+- confirmar modal com assunto e mensagem preenchidos.

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T05:57:36.329Z",
+  "lastUpdatedAt": "2026-04-20T06:02:38.282Z",
   "orders": [
     {
       "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
@@ -1693,6 +1693,21 @@
       "source": "chat",
       "rawRequest": "Corrigir depósito PubPaid: quando o usuário clica 'Avisei o pagamento', pedir nome do depositante, esconder QR, mostrar espera de até 3h e criar depósito pendente no dashboard admin com dados para confirmação manual.",
       "summary": "Corrigir fluxo de depósito pendente PubPaid no dashboard",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-corrigir-entrada-dos-patrocinadores-na-home",
+      "createdAt": "2026-04-20T06:02:38.282Z",
+      "updatedAt": "2026-04-20T06:02:38.282Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "A entrada dos patrocinadores nao apareceu ainda.",
+      "summary": "Corrigir entrada dos patrocinadores na home",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
