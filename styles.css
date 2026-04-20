@@ -12484,6 +12484,10 @@ input[type="range"] {
   --thumb-glow: rgba(247, 191, 95, 0.44);
 }
 
+.editorial-home .header-services-strip a {
+  display: inline-flex !important;
+}
+
 /* Preserva a foto real aplicada pelo JS nas thumbs da home. */
 .news-thumb.has-photo,
 .mini-thumb.has-photo {

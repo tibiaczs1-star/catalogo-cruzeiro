@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T05:38:49.694Z",
+  "lastUpdatedAt": "2026-04-20T05:44:27.399Z",
   "orders": [
     {
       "id": "2026-04-19-google-auth-pix-qr-sem-chave-e-pubpaid-sem-creditos-gratis",
@@ -1633,6 +1633,21 @@
       "source": "chat",
       "rawRequest": "Puxar mais a caixa de voto do jornal para cima; em 100% do Chrome nao da para ver o lugar de confirmar voto.",
       "summary": "Subir modal de voto e manter confirmar voto visivel",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-20-adicionar-games-animes-moda-nos-botoes-de-editorias",
+      "createdAt": "2026-04-20T05:44:27.399Z",
+      "updatedAt": "2026-04-20T05:44:27.399Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Os novos editoriais Games, Animes e Moda nao estao nos botoes da faixa Editoriais.",
+      "summary": "Adicionar Games Animes Moda nos botoes de editorias",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
