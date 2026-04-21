@@ -3621,7 +3621,7 @@ function getStaticCacheControl(filePath, hasVersionParam = false) {
   const ext = path.extname(filePath).toLowerCase();
   const baseName = path.basename(filePath);
 
-  if (ext === ".html") {
+  if (ext === ".html" || ext === ".css" || ext === ".js") {
     return "no-store";
   }
 
@@ -3646,10 +3646,10 @@ function getStaticCacheControl(filePath, hasVersionParam = false) {
   }
 
   if (hasVersionParam) {
-    return "public, max-age=31536000, immutable";
+    return "no-store";
   }
 
-  return "public, max-age=300";
+  return "no-store";
 }
 
 function maybeCompressBuffer(req, mimeType, buffer) {
@@ -6660,13 +6660,11 @@ async function handleApi(req, res, pathname, searchParams) {
       !rejeicao ||
       !prioridade ||
       !atencaoPolitica ||
-      !fatorDecisivo ||
-      comentario.length < 10
+      !fatorDecisivo
     ) {
       return sendJson(res, 400, {
         ok: false,
-        error:
-          "Preencha todos os campos da pesquisa, incluindo faixa etaria e comentario com pelo menos 10 caracteres."
+        error: "Preencha todos os campos obrigatorios da pesquisa, incluindo a faixa etaria."
       });
     }
 

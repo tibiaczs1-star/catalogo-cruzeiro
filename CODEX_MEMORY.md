@@ -29,6 +29,8 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 - A dashboard administrativa da SPO em [pesquisa-acre-2026-admin.html](C:/Users/junio/projeto codex/pesquisa-acre-2026-admin.html) foi ampliada para um painel analitico de verdade, com filtros por recorte, KPIs, leitura executiva, tendencia semanal, fluxos entre perguntas, saude da base, breakdowns por campo, cruzamentos por idade/local/profissao, sinais de comentarios e tabela rica para relatorio.
 - O cliente de [pesquisa-acre-2026-admin.js](C:/Users/junio/projeto codex/pesquisa-acre-2026-admin.js) agora aplica filtros em tempo real, gera exportacao CSV filtrada e monta as secoes analiticas em cima do recorte ativo.
 - O backend em [server.js](C:/Users/junio/projeto codex/server.js) passou a devolver mais campos administrativos da pesquisa e mais breakdowns/resumos para apoiar relatorios completos.
+- Ajuste rapido novo: [pesquisa-acre-2026.html](C:/Users/junio/projeto codex/pesquisa-acre-2026.html) deixou o comentario opcional e [server.js](C:/Users/junio/projeto codex/server.js) removeu a exigencia desse campo no backend.
+- Ajuste rapido novo: [server.js](C:/Users/junio/projeto codex/server.js) agora responde HTML, CSS e JS publicos com `Cache-Control: no-store`, para forcar cada entrada no site a puxar a versao mais atual do codigo.
 
 ## Pedido atual em andamento
 

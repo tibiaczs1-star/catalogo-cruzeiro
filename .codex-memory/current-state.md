@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-04-21T15:16:14.148Z
+Updated: 2026-04-21T15:19:24.277Z
 
 ## Active Goal
 
-- Dashboard analitica da SPO ampliada
+- Pesquisa sem comentario obrigatorio e site sem cache
 
 ## Summary
 
-A consulta administrativa da Pesquisa Acre 2026 foi ampliada com filtros por recorte, KPIs, gráficos por campo de entrada, cruzamentos por perfil/candidato/local/profissão, sinais de comentários, tabela rica e exportação filtrada. O backend administrativo agora devolve mais campos para relatório.
+A pesquisa Acre 2026 nao exige mais comentario no formulario nem no backend. O servidor agora responde HTML, CSS e JS publicos com no-store para forcar sempre a versao mais atual ao entrar no site.
 
 ## Next
 
-- Publicar o pacote da dashboard analítica da SPO e validar no deploy com dados reais.
+- Publicar o ajuste rapido e validar no deploy se o navegador passa a puxar sempre a versao atualizada.
