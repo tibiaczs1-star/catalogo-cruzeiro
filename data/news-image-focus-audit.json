@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-04-20T11:41:05.683Z",
+  "updatedAt": "2026-04-21T11:22:15.312Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 80,
   "offline": false,
   "total": 70,
   "summary": {
-    "ok": 38,
-    "review": 16,
+    "ok": 54,
+    "review": 0,
     "warning": 0,
     "error": 16,
-    "manualFocus": 0,
-    "newSinceLastAudit": 47,
+    "manualFocus": 16,
+    "newSinceLastAudit": 0,
     "missingImage": 16,
     "unreachableImage": 0
   },
@@ -88,140 +88,6 @@
   ],
   "reviewQueue": [
     {
-      "slug": "morre-o-pai-de-ana-paula-renault-a-dois-dias-da-final-do-bbb-26",
-      "title": "Morre o pai de Ana Paula Renault, a dois dias da final do BBB 26",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-19-57-45.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "com-um-a-menos-palmeiras-segura-athletico-pr-e-vence-pelo-brasileirao",
-      "title": "Com um a menos, Palmeiras segura Athletico-PR e vence pelo Brasileirão",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/GettyImages-2272107307-1200x882.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "com-falha-de-lyanco-coritiba-vence-atletico-mg-no-campeonato-brasileiro",
-      "title": "Com falha de Lyanco, Coritiba vence Atlético-MG no Campeonato Brasileiro",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/Breno_Lopes-e1776632068725.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "internacional-perde-para-o-mirassol-e-se-aproxima-do-z-4-do-brasileirao",
-      "title": "Internacional perde para o Mirassol e se aproxima do Z-4 do Brasileirão",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/inter_mirassol_brasileirao-e1776610677921.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "paratletas-acreanos-conquistam-9-medalhas-no-regional-de-bocha",
-      "title": "Paratletas acreanos conquistam 9 medalhas no Regional de Bocha",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-19-37-52-1200x900.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "brasileia-entrega-premiacao-aos-vencedores-do-2-campeonato-de-pesca",
-      "title": "Brasiléia entrega premiação aos vencedores do 2º Campeonato de Pesca",
-      "level": "review",
-      "reasons": [
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-19-at-15.19.51-1200x800.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "mailza-e-gladson-se-encontram-em-manaus-para-reuniao-de-alinhamento-politico",
-      "title": "Mailza e Gladson se encontram em Manaus para reunião de “alinhamento politico”",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-19-at-13.37.59-1200x900.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "presidentes-de-bairros-denunciam-obra-irregular-e-mobilizam-embargo",
-      "title": "Presidentes de bairros denunciam obra irregular e mobilizam embargo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/OBRA_IPE-.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "eua-ameacam-peru-apos-governo-sugerir-pausa-em-compra-de-avioes-de-combate",
-      "title": "EUA ameaçam Peru após governo sugerir pausa em compra de aviões de combate",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/b2bfca44-c370-4768-8b99-7fb06b4ad395.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "denuncia-de-maus-tratos-contra-vendedor-de-bananas-termina-em-reconhecimento-de-ato-de-cuidado-em-rio-branco",
-      "title": "Denúncia de maus-tratos contra vendedor de bananas termina em reconhecimento de ato de cuidado em Rio Branco",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/1000109990-1200x994.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "pista-goleia-o-ame-no-campeonato-estadual-de-futsal-sub-15",
-      "title": "Pista goleia o AME no Campeonato Estadual de Futsal Sub-15",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-11-05-27-1200x845.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "seguranca-publica-intensifica-acoes-em-comunidades-indigenas-e-fortalece-seguranca-comunitaria-em-santa-rosa-do-purus",
-      "title": "Segurança pública intensifica ações em comunidades indígenas e fortalece segurança comunitária em Santa Rosa do Purus",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/464bf3b7-9e05-4784-b1f4-3bf4beb8cca8-1024x768.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "governo-e-instituicoes-parceiras-certificam-40-alunos-na-1-etapa-do-projeto-pao-na-estrada",
-      "title": "Governo e instituições parceiras certificam 40 alunos na 1ª etapa do projeto Pão na Estrada",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-18-at-17.15.56-1024x768.jpeg",
-      "effectiveFocus": ""
-    },
-    {
       "slug": "endrick-marca-contra-o-psg-com-apenas-cinco-minutos-de-jogo-veja",
       "title": "Endrick marca contra o PSG com apenas cinco minutos de jogo; veja",
       "level": "error",
@@ -273,16 +139,6 @@
       "effectiveFocus": ""
     },
     {
-      "slug": "crianca-desaparece-apos-naufragio-no-rio-purus-bombeiros-fazem-buscas",
-      "title": "Criança desaparece após naufrágio no Rio Purus; bombeiros fazem buscas",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/99-4-e1776548057559.png?resize=563%2C750&#038;ssl=1",
-      "effectiveFocus": ""
-    },
-    {
       "slug": "vozes-da-floresta-em-conquista",
       "title": "Vozes da floresta em conquista",
       "level": "error",
@@ -290,26 +146,6 @@
         "missing-image-url"
       ],
       "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "governo-e-instituicoes-parceiras-certificam-40-alunos-na-1-etapa-do-projeto-pao-na-estrada",
-      "title": "Governo e instituições parceiras certificam 40 alunos na 1ª etapa do projeto Pão na Estrada",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-18-at-17.15.56-1024x768.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "com-foco-na-prevencao-prefeitura-de-mancio-lima-realiza-acao-de-saude-no-bairro-iracema",
-      "title": "Com foco na prevenção, Prefeitura de Mâncio Lima realiza ação de saúde no Bairro Iracema",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-18-at-20.09.30-2.jpg",
       "effectiveFocus": ""
     },
     {
@@ -429,22 +265,22 @@
       "category": "Negócios",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T01:06:07.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-19-57-45.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 18%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -453,7 +289,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T00:55:49.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/flamengo-bahia-brasileirao-1-e1776643670549-1200x676.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -480,7 +316,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T00:54:23.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/GettyImages-2272107307-1200x882.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -491,17 +327,16 @@
         "ratio": 1.361,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -510,7 +345,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T00:53:20.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/neymar-decepcionado-santos-fluminense-e1776634446922-1200x675.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -537,23 +372,22 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T00:51:58.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/Breno_Lopes-e1776632068725.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/webp",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -562,22 +396,22 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T00:49:42.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/inter_mirassol_brasileirao-e1776610677921.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/webp",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -586,7 +420,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-20T00:48:28.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-19-37-52-1200x900.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -597,17 +431,16 @@
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 24%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -616,7 +449,7 @@
       "category": "Cotidiano",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T22:45:29.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f2dec8e1-3b87-494c-a13f-152cf1c499d5-1200x675.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -643,7 +476,7 @@
       "category": "Cotidiano",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T22:39:01.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/08/mg_7893.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -665,7 +498,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T20:39:40.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-19-at-15.19.51-1200x800.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -676,16 +509,16 @@
         "ratio": 1.5,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 24%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -694,7 +527,7 @@
       "category": "Cultura",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T20:07:03.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/TESTE.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -716,7 +549,7 @@
       "category": "Prefeitura",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T18:46:14.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-19-at-13.37.59-1200x900.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -727,17 +560,16 @@
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 20%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -746,22 +578,22 @@
       "category": "Polícia",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T18:39:09.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/OBRA_IPE-.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 20%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -770,7 +602,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T18:34:57.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-13-12-33-1200x595.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -797,22 +629,22 @@
       "category": "Prefeitura",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T18:26:16.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/b2bfca44-c370-4768-8b99-7fb06b4ad395.webp",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/webp",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 18%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -821,7 +653,7 @@
       "category": "Cotidiano",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T18:23:54.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-19-at-12.43.52-2-1200x675.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -848,7 +680,7 @@
       "category": "Polícia",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T17:12:40.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/1000109990-1200x994.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -859,16 +691,16 @@
         "ratio": 1.207,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 18%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -877,7 +709,7 @@
       "category": "Educação",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T17:03:28.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-11-55-11-1200x684.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -904,7 +736,7 @@
       "category": "Cotidiano",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T16:56:46.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-19-at-11.13.24.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -926,7 +758,7 @@
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-19T16:14:48.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-11-05-27-1200x845.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -937,16 +769,16 @@
         "ratio": 1.42,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -955,7 +787,7 @@
       "category": "Prefeitura",
       "sourceName": "Agencia Acre",
       "publishedAt": "2026-04-19T21:17:22.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/464bf3b7-9e05-4784-b1f4-3bf4beb8cca8-1024x768.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -966,16 +798,16 @@
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 24%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1076,16 +908,16 @@
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1229,7 +1061,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-04-20T00:54:06.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/gov-23-1024x682-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1256,7 +1088,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-04-19T20:51:46.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/gov-23-1024x682-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1283,7 +1115,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-04-19T14:54:37.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/gov-23-1024x682-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1310,7 +1142,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-04-19T14:48:52.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/gov-23-1024x682-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1364,7 +1196,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-04-19T14:40:56.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/gov-23-1024x682-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1418,7 +1250,7 @@
       "category": "Saúde",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-04-19T14:31:46.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/gov-23-1024x682-1.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1499,7 +1331,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-20T00:30:44.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-19-18-50-55-1200x675.avif",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1526,7 +1358,7 @@
       "category": "Esporte",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-20T00:21:35.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -1550,7 +1382,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-19T16:07:20.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://contilnetnoticias.com.br/wp-content/uploads/2025/10/huni-kuin-diego-gurgel.jpeg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1572,7 +1404,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-19T16:01:47.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -1624,7 +1456,7 @@
       "category": "Cotidiano",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-19T15:52:37.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -1648,7 +1480,7 @@
       "category": "Polícia",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-19T00:30:06.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -1672,7 +1504,7 @@
       "category": "Polícia",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-19T00:23:23.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -1696,22 +1528,22 @@
       "category": "Negócios",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-18T21:34:48.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/99-4-e1776548057559.png?resize=563%2C750&#038;ssl=1",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/png",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 18%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1720,7 +1552,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-04-18T21:28:18.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/whatsapp-video-2026-04-18-at-15.27.10-1_mp4_avc_240p.original-150x150.avif",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
@@ -1836,16 +1668,16 @@
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1962,22 +1794,22 @@
       "category": "Saúde",
       "sourceName": "Batelao",
       "publishedAt": "2026-04-19T00:31:43.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-18-at-20.09.30-2.jpg",
       "imageStatus": "ok",
       "imageHttpStatus": 200,
       "imageContentType": "image/jpeg",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -2013,7 +1845,7 @@
       "category": "Polícia",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-03-23T20:55:20.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2037,7 +1869,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-03-18T17:13:35.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2063,7 +1895,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-03-18T14:54:19.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2087,7 +1919,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-03-12T20:34:01.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2113,7 +1945,7 @@
       "category": "Polícia",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-02-23T15:02:43.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2137,7 +1969,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-02-04T21:28:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2163,7 +1995,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2026-02-02T17:02:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2187,7 +2019,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2025-12-09T21:11:05.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2213,7 +2045,7 @@
       "category": "Utilidade Pública",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2025-12-09T14:49:06.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
@@ -2238,7 +2070,7 @@
       "category": "Cotidiano",
       "sourceName": "Tribuna do Jurua",
       "publishedAt": "2025-11-24T19:20:30.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "",
       "imageStatus": "missing",
       "imageHttpStatus": null,
