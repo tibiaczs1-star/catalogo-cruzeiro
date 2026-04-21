@@ -5169,15 +5169,10 @@ function recordMatchesWeeklyDevice(item = {}, currentWeekKey = "", fingerprints 
   return fingerprints.some((fingerprint) => savedFingerprints.includes(fingerprint));
 }
 
-function findAcre2026WeeklyVoteForAuth(
-  authUser = {},
-  weekKey = getWeekBucketKey(new Date().toISOString()),
-  fingerprints = []
-) {
+function findAcre2026WeeklyVoteForAuth(authUser = {}, weekKey = getWeekBucketKey(new Date().toISOString())) {
   const googleSub = safeString(authUser?.sub || "", 160);
   const googleEmail = safeString(authUser?.email || "", 160);
-  const hasDeviceFingerprint = Array.isArray(fingerprints) && fingerprints.length > 0;
-  if (!googleSub && !googleEmail && !hasDeviceFingerprint) return null;
+  if (!googleSub && !googleEmail) return null;
 
   const records = getAcre2026PollResponses();
   return (
@@ -5185,19 +5180,14 @@ function findAcre2026WeeklyVoteForAuth(
       (item) =>
         safeString(item.weekKey || "", 24) === weekKey &&
         ((googleSub && safeString(item.googleSub || "", 160) === googleSub) ||
-          (googleEmail && safeString(item.googleEmail || "", 160) === googleEmail) ||
-          (hasDeviceFingerprint && recordMatchesWeeklyDevice(item, weekKey, fingerprints)))
+          (googleEmail && safeString(item.googleEmail || "", 160) === googleEmail))
     ) || null
   );
 }
 
-function buildAcre2026PollCurrentUserPayload(authUser = {}, tracking = {}) {
+function buildAcre2026PollCurrentUserPayload(authUser = {}) {
   const weekKey = getWeekBucketKey(new Date().toISOString());
-  const existingVote = findAcre2026WeeklyVoteForAuth(
-    authUser,
-    weekKey,
-    buildWeeklyDeviceFingerprints(tracking)
-  );
+  const existingVote = findAcre2026WeeklyVoteForAuth(authUser, weekKey);
   return {
     ok: true,
     authenticated: Boolean(authUser?.email && authUser?.sub),
@@ -6795,7 +6785,7 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    return sendJson(res, 200, buildAcre2026PollCurrentUserPayload(authUser, buildTrackingMeta(req, {})));
+    return sendJson(res, 200, buildAcre2026PollCurrentUserPayload(authUser));
   }
 
   if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026") {
@@ -6803,14 +6793,13 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!authUser?.email || !authUser?.sub) {
       return sendJson(res, 401, {
         ok: false,
-        error: "Entre com Google para votar. Isso evita duplicação e libera apenas um voto por dispositivo a cada semana."
+        error: "Entre com Google para votar. Isso evita duplicação e libera apenas um voto por conta Google a cada semana."
       });
     }
 
     const body = await parseBody(req);
     const tracking = buildTrackingMeta(req, body);
     const currentWeekKey = getWeekBucketKey(new Date().toISOString());
-    const currentFingerprint = buildWeeklyDeviceFingerprints(tracking);
     const profissao = cleanShortText(body.profissao || body.profession, 100);
     const localizacao = cleanShortText(body.localizacao || body.location, 120);
     const faixaEtaria = normalizePollChoice(
@@ -6903,9 +6892,6 @@ async function handleApi(req, res, pathname, searchParams) {
     try {
       mutationResult = await mutateJsonFile(ACRE_2026_POLL_FILE, [], (currentRecords) => {
         const records = Array.isArray(currentRecords) ? currentRecords : [];
-        const hasWeeklyVote = records.some((item) =>
-          recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprint)
-        );
         const hasWeeklyGoogleVote = records.some(
           (item) =>
             safeString(item.weekKey || "", 24) === currentWeekKey &&
@@ -6913,9 +6899,9 @@ async function handleApi(req, res, pathname, searchParams) {
               safeString(item.googleEmail || "", 160) === safeString(authUser.email, 160))
         );
 
-        if (hasWeeklyVote || hasWeeklyGoogleVote) {
+        if (hasWeeklyGoogleVote) {
           const error = new Error(
-            "Seu dispositivo/local já registrou uma resposta nesta semana. Aguarde a próxima rodada para votar de novo."
+            "Este Google já registrou uma resposta nesta semana. Aguarde a próxima rodada para votar de novo."
           );
           error.statusCode = 409;
           throw error;

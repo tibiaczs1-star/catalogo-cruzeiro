@@ -1,22 +1,23 @@
 # Current State
 
-Updated: 2026-04-21T16:04:48.872Z
+Updated: 2026-04-21T16:31:55.175Z
 
 ## Active Goal
 
-- SPO: reforço do bloqueio pós-voto
+- SPO: regra correta por conta Google
 
 ## Summary
 
-Depois do usuário relatar que ainda via o formulário, /api/pesquisa-acre-2026/me passou a procurar voto semanal também por fingerprint de dispositivo/IP, não só por Google. No frontend, quando concluído, o bloco de parciais é movido para dentro do card logo abaixo do obrigado.
+O teste com duas contas mostrou que bloquear por dispositivo/IP distorcia a coleta. A SPO agora limita uma resposta por conta Google por semana; contas Google diferentes podem votar no mesmo aparelho e entram no panorama geral.
 
 ## Next
 
-- Subir o commit e aguardar o Render servir votegate2; testar com o mesmo Google/dispositivo que votou.
+- Subir commit
+- aguardar deploy e testar duas contas Google diferentes; a parcial deve somar as respostas globais.
 
 ## Files In Focus
 
 - server.js
 - pesquisa-acre-2026.js
-- pesquisa-acre-2026.css
 - pesquisa-acre-2026.html
+- CODEX_MEMORY.md

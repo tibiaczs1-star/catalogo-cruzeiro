@@ -445,7 +445,7 @@
         setPollCompletedState(false);
         setFeedback(
           formFeedback,
-          "Google conectado. Seu dispositivo libera uma resposta por semana e guarda o historico da eleicao.",
+          "Google conectado. Esta conta libera uma resposta por semana e as parciais mostram o panorama geral.",
           "success"
         );
       }
@@ -481,7 +481,7 @@
     if (!form || !submitButton) return;
 
     if (!getGoogleUser()?.email) {
-      setFeedback(formFeedback, "Entre com Google antes de votar. A pesquisa aceita um voto por dispositivo a cada semana.", "error");
+      setFeedback(formFeedback, "Entre com Google antes de votar. A pesquisa aceita um voto por conta Google a cada semana.", "error");
       document.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
@@ -516,7 +516,7 @@
           setPollCompletedState(
             true,
             data.error ||
-              "Seu Google ou dispositivo ja registrou uma resposta nesta semana. As parciais ficam liberadas."
+              "Este Google ja registrou uma resposta nesta semana. As parciais gerais ficam liberadas."
           );
           await loadPublicSummary();
           await loadPollBridge();

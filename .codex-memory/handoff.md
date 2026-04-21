@@ -1,18 +1,17 @@
 # Handoff
 
-Updated: 2026-04-21T16:04:49.056Z
+Updated: 2026-04-21T16:31:55.175Z
 
-Reforço aplicado na SPO: /me agora detecta voto semanal por Google e por fingerprint do request; frontend move .poll-summary para depois do painel de obrigado quando isCompleted, escondendo formulário/auth/método/admin. Cache bust atualizado para votegate2.
+Correção de regra da SPO: removido bloqueio por dispositivo/IP da Pesquisa Acre 2026; backend agora considera duplicidade semanal apenas por googleSub/googleEmail. Textos trocados para 'conta Google' e cache bust atualizado para googlevote.
 
 ## Next
 
-- Depois do deploy
-- confirmar no HTML remoto se aparece votegate2 e testar a página com Google já votante.
+- Após deploy
+- abrir com duas contas Google diferentes no mesmo dispositivo e confirmar que ambas podem votar e que as parciais globais somam as respostas.
 
 ## Files In Focus
 
 - server.js
 - pesquisa-acre-2026.js
-- pesquisa-acre-2026.css
 - pesquisa-acre-2026.html
 - .codex-memory/orders.json

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-21T16:04:25.612Z",
+  "lastUpdatedAt": "2026-04-21T16:31:55.188Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -2403,6 +2403,34 @@
         "spo",
         "parciais",
         "bloqueio"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-21-corrigir-regra-da-spo-para-parciais-globais-e-voto-por-conta-google",
+      "createdAt": "2026-04-21T16:31:55.188Z",
+      "updatedAt": "2026-04-21T16:31:55.188Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "eu voltei 2 vezes dyuas contas google, e percebi que a so ta voltando meu proprio voto e nao o panorama geral, ou seja so computada no resultado parcial meu proprio voto",
+      "summary": "Corrigir regra da SPO para parciais globais e voto por conta Google",
+      "normalizedTasks": [
+        "Remover bloqueio por dispositivo/IP na SPO",
+        "manter limite semanal por conta Google",
+        "atualizar textos e cache bust"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pesquisa-acre-2026.js",
+        "pesquisa-acre-2026.html",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "spo",
+        "google",
+        "parciais"
       ],
       "nextSteps": [],
       "notes": ""
