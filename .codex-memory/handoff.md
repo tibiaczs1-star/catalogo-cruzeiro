@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-04-21T15:19:24.277Z
+Updated: 2026-04-21T15:25:07.665Z
 
-O comentario da pesquisa virou opcional no front e no backend. O cache do site foi endurecido para no-store em HTML, CSS e JS publicos, evitando pagina ou codigo desatualizado apos mudancas na pesquisa.
+A SPO agora grava votos com escrita atômica e fila serializada para não perder registros em gravações próximas. O render.yaml foi preparado com disk e DATA_DIR persistente para o serviço web. Teste local real confirmou persistência após restart.
 
 ## Next
 
-- Subir a correcao rapida e confirmar o comportamento no deploy.
+- Subir essa correção e depois conferir no deploy se o serviço Render aplicou o disk persistente ou se precisa ajuste manual no dashboard.

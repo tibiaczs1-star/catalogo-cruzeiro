@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-21T15:19:24.021Z",
+  "lastUpdatedAt": "2026-04-21T15:25:07.484Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -2300,6 +2300,21 @@
       "source": "chat",
       "rawRequest": "altere rapidamente muito rapidamente, o comentario obrigatorio, tire, essa obrigação e force a entrada do site por qualquer pessoa a atualizar sempre, pra nunca fica dezatualizado em caso de mnudança de pesquisa, ele sempre que entra tem se atualizar ao codigo e tudo atual",
       "summary": "Tirar obrigatoriedade do comentário da pesquisa e forçar atualização sem cache do site",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-21-blindar-persistencia-dos-votos-da-pesquisa-acre-2026-contra-perda-e-sobrescrita",
+      "createdAt": "2026-04-21T15:25:07.484Z",
+      "updatedAt": "2026-04-21T15:25:07.484Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "AGORA EU TER CERTEZA QUE TODA VEZ QUE EU ATUALIZO A PAGINA NAO PERCO VOTOS ANTERIOR, AFINAL EU NOTEI ESSE BUG",
+      "summary": "Blindar persistência dos votos da pesquisa Acre 2026 contra perda e sobrescrita",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

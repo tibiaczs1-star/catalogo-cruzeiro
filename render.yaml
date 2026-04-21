@@ -8,6 +8,10 @@ services:
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /
+    disk:
+      name: app-data
+      mountPath: /opt/render/project/src/render-data
+      sizeGB: 5
     envVars:
       - key: NODE_ENV
         value: production
@@ -15,6 +19,8 @@ services:
         value: America/Rio_Branco
       - key: SITE_URL
         value: https://catalogo-cruzeiro-web.onrender.com
+      - key: DATA_DIR
+        value: /opt/render/project/src/render-data
       - key: ADMIN_TOKEN
         sync: false
       - key: SUPER_ADMIN_USER

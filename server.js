@@ -57,9 +57,10 @@ let googleIdTokenCertCache = {
 };
 
 const ROOT_DIR = __dirname;
+const DEFAULT_DATA_DIR = path.join(ROOT_DIR, "data");
 const DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
-  : path.join(ROOT_DIR, "data");
+  : DEFAULT_DATA_DIR;
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
@@ -186,6 +187,7 @@ const CATEGORY_ALIAS_MAP = {
 };
 const ACRE_2026_POLL_OPTIONS = {
   ageRanges: [
+    "16 a 17 anos",
     "18 a 24 anos",
     "25 a 34 anos",
     "35 a 44 anos",
@@ -838,9 +840,30 @@ const COMPRESSIBLE_MIME_TYPES = [
 
 let imagePreviewCacheLoaded = false;
 let imagePreviewCacheWriteTimer = null;
+const JSON_FILE_MUTATION_QUEUES = new Map();
 
 function ensureDataDir() {
   if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  seedDataDirFromDefault();
+}
+
+function seedDataDirFromDefault() {
+  if (path.resolve(DATA_DIR) === path.resolve(DEFAULT_DATA_DIR)) {
+    return;
+  }
+
+  if (!fs.existsSync(DEFAULT_DATA_DIR)) {
+    return;
+  }
+
+  const entries = fs.readdirSync(DEFAULT_DATA_DIR, { withFileTypes: true });
+  entries.forEach((entry) => {
+    if (!entry.isFile()) return;
+    const sourcePath = path.join(DEFAULT_DATA_DIR, entry.name);
+    const targetPath = path.join(DATA_DIR, entry.name);
+    if (fs.existsSync(targetPath)) return;
+    fs.copyFileSync(sourcePath, targetPath);
+  });
 }
 
 function safeJoin(base, targetPath) {
@@ -861,7 +884,37 @@ function readJson(filePath, fallback) {
 
 function writeJson(filePath, value) {
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  fs.writeFileSync(filePath, JSON.stringify(value, null, 2), "utf-8");
+  const tempFilePath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
+  fs.writeFileSync(tempFilePath, JSON.stringify(value, null, 2), "utf-8");
+  fs.renameSync(tempFilePath, filePath);
+}
+
+function mutateJsonFile(filePath, fallback, mutator) {
+  const previousTask = JSON_FILE_MUTATION_QUEUES.get(filePath) || Promise.resolve();
+  const nextTask = previousTask
+    .catch(() => {})
+    .then(async () => {
+      const currentValue = readJson(filePath, fallback);
+      const result = await Promise.resolve(mutator(currentValue));
+      const payload =
+        result &&
+        typeof result === "object" &&
+        !Array.isArray(result) &&
+        Object.prototype.hasOwnProperty.call(result, "value")
+          ? result
+          : { value: result };
+      writeJson(filePath, payload.value);
+      return payload;
+    });
+
+  const queueMarker = nextTask.catch(() => {});
+  JSON_FILE_MUTATION_QUEUES.set(filePath, queueMarker);
+
+  return nextTask.finally(() => {
+    if (JSON_FILE_MUTATION_QUEUES.get(filePath) === queueMarker) {
+      JSON_FILE_MUTATION_QUEUES.delete(filePath);
+    }
+  });
 }
 
 function loadImagePreviewCache() {
@@ -6577,7 +6630,6 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const body = await parseBody(req);
     const tracking = buildTrackingMeta(req, body);
-    const records = getAcre2026PollResponses();
     const currentWeekKey = getWeekBucketKey(new Date().toISOString());
     const currentFingerprint = buildWeeklyDeviceFingerprints(tracking);
     const profissao = cleanShortText(body.profissao || body.profession, 100);
@@ -6668,66 +6720,88 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    const hasWeeklyVote = records.some((item) => recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprint));
-    const hasWeeklyGoogleVote = records.some(
-      (item) =>
-        safeString(item.weekKey || "", 24) === currentWeekKey &&
-        (safeString(item.googleSub || "", 160) === safeString(authUser.sub, 160) ||
-          safeString(item.googleEmail || "", 160) === safeString(authUser.email, 160))
-    );
+    let mutationResult;
+    try {
+      mutationResult = await mutateJsonFile(ACRE_2026_POLL_FILE, [], (currentRecords) => {
+        const records = Array.isArray(currentRecords) ? currentRecords : [];
+        const hasWeeklyVote = records.some((item) =>
+          recordMatchesWeeklyDevice(item, currentWeekKey, currentFingerprint)
+        );
+        const hasWeeklyGoogleVote = records.some(
+          (item) =>
+            safeString(item.weekKey || "", 24) === currentWeekKey &&
+            (safeString(item.googleSub || "", 160) === safeString(authUser.sub, 160) ||
+              safeString(item.googleEmail || "", 160) === safeString(authUser.email, 160))
+        );
 
-    if (hasWeeklyVote || hasWeeklyGoogleVote) {
-      return sendJson(res, 409, {
-        ok: false,
-        error: "Seu dispositivo/local já registrou uma resposta nesta semana. Aguarde a próxima rodada para votar de novo."
+        if (hasWeeklyVote || hasWeeklyGoogleVote) {
+          const error = new Error(
+            "Seu dispositivo/local já registrou uma resposta nesta semana. Aguarde a próxima rodada para votar de novo."
+          );
+          error.statusCode = 409;
+          throw error;
+        }
+
+        const nextItem = {
+          id: createRecordId("poll"),
+          profissao,
+          localizacao,
+          faixaEtaria,
+          votoAnterior,
+          satisfacao,
+          avaliacaoGoverno,
+          direcaoEstado,
+          desejoCiclo,
+          voto2026,
+          segundaOpcao,
+          certezaVoto,
+          rejeicao,
+          prioridade,
+          atencaoPolitica,
+          fatorDecisivo,
+          comentario,
+          sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pesquisa-acre-2026.html", 260),
+          pageTitle: cleanShortText(body.pageTitle || tracking.pageTitle || "Pesquisa de Opiniao Acre 2026", 160),
+          visitorId: tracking.visitorId || tracking.cookieVisitorId,
+          sessionId: tracking.sessionId || tracking.cookieSessionId,
+          city: tracking.city,
+          country: tracking.country,
+          ip: tracking.ip,
+          browser: tracking.browser,
+          deviceType: tracking.deviceType,
+          referrerHost: tracking.referrerHost,
+          googleEmail: safeString(authUser.email, 160),
+          googleSub: safeString(authUser.sub, 160),
+          weekKey: currentWeekKey,
+          createdAt: new Date().toISOString()
+        };
+
+        const next = records.slice();
+        next.push(nextItem);
+
+        return {
+          value: next,
+          item: nextItem,
+          records: next
+        };
       });
+    } catch (error) {
+      if (error?.statusCode === 409) {
+        return sendJson(res, 409, {
+          ok: false,
+          error: error.message
+        });
+      }
+      throw error;
     }
-
-    const nextItem = {
-      id: createRecordId("poll"),
-      profissao,
-      localizacao,
-      faixaEtaria,
-      votoAnterior,
-      satisfacao,
-      avaliacaoGoverno,
-      direcaoEstado,
-      desejoCiclo,
-      voto2026,
-      segundaOpcao,
-      certezaVoto,
-      rejeicao,
-      prioridade,
-      atencaoPolitica,
-      fatorDecisivo,
-      comentario,
-      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pesquisa-acre-2026.html", 260),
-      pageTitle: cleanShortText(body.pageTitle || tracking.pageTitle || "Pesquisa de Opiniao Acre 2026", 160),
-      visitorId: tracking.visitorId || tracking.cookieVisitorId,
-      sessionId: tracking.sessionId || tracking.cookieSessionId,
-      city: tracking.city,
-      country: tracking.country,
-      ip: tracking.ip,
-      browser: tracking.browser,
-      deviceType: tracking.deviceType,
-      referrerHost: tracking.referrerHost,
-      googleEmail: safeString(authUser.email, 160),
-      googleSub: safeString(authUser.sub, 160),
-      weekKey: currentWeekKey,
-      createdAt: new Date().toISOString()
-    };
-
-    const next = Array.isArray(records) ? records : [];
-    next.push(nextItem);
-    writeJson(ACRE_2026_POLL_FILE, next);
 
     return sendJson(res, 201, {
       ok: true,
       item: {
-        id: nextItem.id,
-        createdAt: nextItem.createdAt
+        id: mutationResult.item.id,
+        createdAt: mutationResult.item.createdAt
       },
-      summary: buildAcre2026PollSummary(sortByDateDesc(next, "createdAt", 5000)),
+      summary: buildAcre2026PollSummary(sortByDateDesc(mutationResult.records, "createdAt", 5000)),
       message: "Resposta registrada. As parciais ja foram atualizadas."
     });
   }

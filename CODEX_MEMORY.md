@@ -31,6 +31,9 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 - O backend em [server.js](C:/Users/junio/projeto codex/server.js) passou a devolver mais campos administrativos da pesquisa e mais breakdowns/resumos para apoiar relatorios completos.
 - Ajuste rapido novo: [pesquisa-acre-2026.html](C:/Users/junio/projeto codex/pesquisa-acre-2026.html) deixou o comentario opcional e [server.js](C:/Users/junio/projeto codex/server.js) removeu a exigencia desse campo no backend.
 - Ajuste rapido novo: [server.js](C:/Users/junio/projeto codex/server.js) agora responde HTML, CSS e JS publicos com `Cache-Control: no-store`, para forcar cada entrada no site a puxar a versao mais atual do codigo.
+- Blindagem nova da SPO: [server.js](C:/Users/junio/projeto codex/server.js) agora grava os votos da Pesquisa Acre 2026 com escrita atomica e fila de mutacao por arquivo, evitando sobrescrita quando votos chegam em sequencia muito proxima.
+- Blindagem nova do deploy: [render.yaml](C:/Users/junio/projeto codex/render.yaml) foi preparado com `disk` persistente e `DATA_DIR` dedicado (`/opt/render/project/src/render-data`) para os votos da SPO sobreviverem a restart/redeploy no Render; o backend tambem passa a semear esse diretorio com os arquivos-base da pasta `data/` quando estiver vazio.
+- Correcao importante: o backend da pesquisa agora reconhece tambem a faixa etaria `16 a 17 anos`, alinhando servidor e formulario.
 
 ## Pedido atual em andamento
 
