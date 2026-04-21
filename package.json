@@ -6,6 +6,7 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
+    "agents:run": "node scripts/real-agents-runtime.js",
     "audit:news-images": "node scripts/audit-news-image-focus.js",
     "deploy:storage-check": "node scripts/check-render-storage.js",
     "dns:check": "node scripts/check-dns-readiness.js",

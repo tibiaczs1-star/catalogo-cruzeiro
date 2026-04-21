@@ -2,6 +2,7 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
+const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
   buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
   readStore: readCanonicalPubpaidStore,
@@ -67,6 +68,10 @@ const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
+const REAL_AGENTS_RUNTIME_SCRIPT = path.join(ROOT_DIR, "scripts", "real-agents-runtime.js");
+const REAL_AGENTS_REGISTRY_FILE = path.join(ROOT_DIR, ".codex-agents", "registry.json");
+const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
+const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
 const SITE_NAME = "Catalogo Cruzeiro do Sul";
 const SITE_REGION_NAME = "Cruzeiro do Sul e Vale do Jurua";
 const DEFAULT_SITE_DESCRIPTION =
@@ -87,6 +92,7 @@ const PUBLIC_STATIC_EXTENSIONS = new Set([
 ]);
 const PRIVATE_STATIC_SEGMENTS = new Set([
   ".codex-temp",
+  ".codex-agents",
   ".edge-headless",
   ".git",
   ".github",
@@ -101,6 +107,7 @@ const SALES_LISTINGS_FILE = path.join(DATA_DIR, "sales-listings.json");
 const VR_RENTAL_LEADS_FILE = path.join(DATA_DIR, "vr-rental-leads.json");
 const VISITS_FILE = path.join(DATA_DIR, "visits.json");
 const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
+const COMMUNITY_REPORTS_FILE = path.join(DATA_DIR, "community-reports.json");
 const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
@@ -319,6 +326,18 @@ const STATIC_PAGE_SEO = {
     changefreq: "weekly",
     fileName: "escritorio.html"
   },
+  "/real-agents.html": {
+    title: `Agentes Reais em Operacao | ${SITE_NAME}`,
+    description:
+      "Painel operacional dos agentes reais do Catalogo Cruzeiro do Sul, com escritorios, capacidades, fila de monitoramento e ideias geradas a partir do jornal.",
+    themeColor: "#101827",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.74",
+    changefreq: "hourly",
+    fileName: "real-agents.html"
+  },
   "/escritorio-nerd.html": {
     title: `Escritorio Nerd | ${SITE_NAME}`,
     description:
@@ -485,6 +504,18 @@ const STATIC_PAGE_SEO = {
     priority: "0.63",
     changefreq: "weekly",
     fileName: "pubpaid.html"
+  },
+  "/pubpaid-v2.html": {
+    title: `PubPaid 2.0 | Rua Viva e PvP`,
+    description:
+      "Laboratorio jogavel da PubPaid 2.0 com rua viva, fachada do bar, creditos de teste e blueprint PvP real.",
+    robots: "noindex,nofollow",
+    themeColor: "#070A18",
+    colorScheme: "dark",
+    ogType: "website",
+    schemaType: "Game",
+    sitemap: false,
+    fileName: "pubpaid-v2.html"
   },
   "/palavras-da-rosa.html": {
     title: `Palavras da Rosa | ${SITE_NAME}`,
@@ -4925,6 +4956,162 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+function normalizeCommunityReport(item = {}) {
+  return {
+    id: cleanShortText(item.id, 80),
+    name: cleanShortText(item.name || "Morador local", 80),
+    neighborhood: cleanShortText(item.neighborhood || item.bairro || "Bairro nao informado", 90),
+    city: cleanShortText(item.city || "Cruzeiro do Sul - AC", 90),
+    topic: cleanShortText(item.topic || "Relato comunitario", 100),
+    message: cleanShortText(item.message || item.details || item.text, 900),
+    contact: cleanShortText(item.contact || item.phone || item.whatsapp || "", 100),
+    status: cleanShortText(item.status || "nao-checado", 40),
+    verificationStatus: cleanShortText(item.verificationStatus || "nao-checado", 40),
+    publicNote:
+      "Participacao comunitaria voluntaria. Informacao recebida da populacao, ainda nao checada pela equipe.",
+    createdAt: cleanShortText(item.createdAt || new Date().toISOString(), 60)
+  };
+}
+
+function getCommunityReportsPayload(limit = 8) {
+  const reports = readJson(COMMUNITY_REPORTS_FILE, []);
+  const safeReports = Array.isArray(reports) ? reports : [];
+  const publicItems = safeReports
+    .map(normalizeCommunityReport)
+    .filter((item) => item.message && item.verificationStatus !== "checado")
+    .slice()
+    .reverse()
+    .slice(0, Math.max(1, Math.min(40, limit)));
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    label: "Participacao comunitaria voluntaria",
+    verificationRule:
+      "Este bloco mostra apenas relatos ainda nao checados. Informacoes verificadas devem sair daqui e virar checagem, servico ou noticia em area propria.",
+    total: publicItems.length,
+    items: publicItems
+  };
+}
+
+function recordCommunityReport(body = {}, req = null) {
+  const tracking = req ? buildTrackingMeta(req, body) : {};
+  const message = cleanShortText(body.message || body.details || body.text, 900);
+  const neighborhood = cleanShortText(body.neighborhood || body.bairro, 90);
+  const topic = cleanShortText(body.topic || body.subject || "Relato comunitario", 100);
+
+  if (!message || message.length < 12) {
+    return {
+      ok: false,
+      status: 400,
+      error: "Escreva um relato com um pouco mais de contexto para a equipe avaliar."
+    };
+  }
+
+  const report = normalizeCommunityReport({
+    id: createRecordId("com"),
+    name: cleanShortText(body.name || body.author || "Morador local", 80),
+    neighborhood: neighborhood || "Bairro nao informado",
+    city: cleanShortText(body.city || "Cruzeiro do Sul - AC", 90),
+    topic,
+    message,
+    contact: cleanShortText(body.contact || body.phone || body.whatsapp || "", 100),
+    status: "recebido-nao-checado",
+    verificationStatus: "nao-checado",
+    sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/", 260),
+    visitorId: tracking.visitorId || tracking.cookieVisitorId,
+    sessionId: tracking.sessionId || tracking.cookieSessionId,
+    ip: tracking.ip,
+    createdAt: new Date().toISOString()
+  });
+
+  const reports = readJson(COMMUNITY_REPORTS_FILE, []);
+  const nextReports = Array.isArray(reports) ? reports.concat(report).slice(-300) : [report];
+  writeJson(COMMUNITY_REPORTS_FILE, nextReports);
+
+  appendOfficeOrder({
+    id: createRecordId("ord"),
+    from: "Comunidade",
+    to: "Codex CEO + Revisor Bento + Sofia Fontes",
+    priority: "normal",
+    message: `Relato comunitario nao checado recebido: ${report.topic} em ${report.neighborhood}. ${report.message}`,
+    ceoReply:
+      "Recebido. O relato fica publico como nao checado e entra na fila para verificacao antes de virar noticia.",
+    status: "relato-comunitario-nao-checado",
+    hierarchy: "Comunidade -> Avatar comunitario -> Codex CEO -> agentes de verificacao",
+    createdAt: report.createdAt
+  });
+
+  return {
+    ok: true,
+    status: 201,
+    item: report,
+    message:
+      "Relato recebido. Ele fica marcado como nao checado e pode aparecer na area de participacao comunitaria voluntaria."
+  };
+}
+
+function buildRealAgentsPayload() {
+  const registry = readJson(REAL_AGENTS_REGISTRY_FILE, null);
+  const latestRun = readJson(REAL_AGENTS_RUN_FILE, null);
+  const latestRunMd = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
+    ? fs.readFileSync(REAL_AGENTS_RUN_MD_FILE, "utf-8")
+    : "";
+  const agents = Array.isArray(registry?.agents) ? registry.agents : [];
+  const queue = Array.isArray(latestRun?.queue) ? latestRun.queue : [];
+
+  return {
+    ok: Boolean(registry && latestRun),
+    updatedAt: new Date().toISOString(),
+    registryGeneratedAt: registry?.generatedAt || "",
+    runGeneratedAt: latestRun?.generatedAt || "",
+    summary: {
+      totalAgents: Number(registry?.totalAgents || agents.length || 0),
+      totalOffices: Array.isArray(registry?.offices) ? registry.offices.length : 0,
+      totalRoles: Array.isArray(registry?.roles) ? registry.roles.length : 0,
+      newsItems: Number(latestRun?.summary?.newsItems || 0),
+      reviewIssues: Number(latestRun?.summary?.reviewIssues || 0),
+      activeQueue: queue.length
+    },
+    offices: Array.isArray(registry?.offices) ? registry.offices : [],
+    roles: Array.isArray(registry?.roles) ? registry.roles : [],
+    agents: agents.map((agent) => ({
+      id: agent.id,
+      slug: agent.slug,
+      name: agent.name,
+      officeKey: agent.officeKey,
+      officeLabel: agent.officeLabel,
+      role: agent.role,
+      title: agent.title,
+      specialty: agent.specialty,
+      capabilities: Array.isArray(agent.capabilities) ? agent.capabilities.slice(0, 12) : [],
+      monitoringFocus: Array.isArray(agent.monitoringFocus) ? agent.monitoringFocus.slice(0, 10) : [],
+      deliverables: Array.isArray(agent.deliverables) ? agent.deliverables : [],
+      newsroomBridge: agent.newsroomBridge || ""
+    })),
+    news: latestRun?.news || null,
+    officeStatus: Array.isArray(latestRun?.offices) ? latestRun.offices : [],
+    queue,
+    reportMarkdown: latestRunMd
+  };
+}
+
+function runRealAgentsRuntime() {
+  try {
+    const summary = runRealAgentsRuntimeLocal();
+    return {
+      ok: true,
+      summary,
+      payload: buildRealAgentsPayload()
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      error: String(error?.message || error || "Falha ao rodar agentes reais.")
+    };
+  }
+}
+
 const PUBPAID_SPRITE_SCOUT_SOURCES = [
   {
     name: "Kenney Assets",
@@ -6382,6 +6569,44 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildNeuralGrowthPayload());
   }
 
+  if (req.method === "GET" && pathname === "/api/real-agents") {
+    const payload = buildRealAgentsPayload();
+    if (!payload.ok) {
+      return sendJson(res, 404, {
+        ok: false,
+        error: "Agentes reais ainda nao foram gerados. Rode npm run agents:run ou use POST /api/real-agents/run."
+      });
+    }
+
+    return sendJson(res, 200, payload);
+  }
+
+  if (req.method === "POST" && pathname === "/api/real-agents/run") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+
+    const result = runRealAgentsRuntime();
+    if (!result.ok) {
+      return sendJson(res, 500, result);
+    }
+
+    appendOfficeOrder({
+      id: createRecordId("ord"),
+      from: "Full Admin",
+      to: "Codex CEO + agentes reais",
+      priority: cleanShortText(body.priority || "alta", 40),
+      message: cleanShortText(body.message || "Rodada operacional dos agentes reais renovada pelo painel.", 1200),
+      ceoReply: "Rodada renovada. Os agentes reais atualizaram fila, monitoramento e ideias em cima do jornal atual.",
+      status: "rodada-real-agents-gerada",
+      hierarchy: "Full Admin -> Codex CEO -> 181 agentes reais",
+      createdAt: new Date().toISOString()
+    });
+
+    return sendJson(res, 201, { ok: true, ...result.payload });
+  }
+
   if (req.method === "POST" && pathname === "/api/office-neural-growth/pulse") {
     const body = await parseBody(req);
     if (!requireFullAdminOrderAccess(req, body)) {
@@ -6421,6 +6646,17 @@ async function handleApi(req, res, pathname, searchParams) {
     const limit = Number(searchParams.get("limit") || 500);
     const items = getNewsArchive(limit);
     return sendJson(res, 200, { ok: true, total: items.length, items });
+  }
+
+  if (req.method === "GET" && pathname === "/api/community/reports") {
+    const limit = Number(searchParams.get("limit") || 8);
+    return sendJson(res, 200, getCommunityReportsPayload(limit));
+  }
+
+  if (req.method === "POST" && pathname === "/api/community/reports") {
+    const body = await parseBody(req);
+    const result = recordCommunityReport(body, req);
+    return sendJson(res, result.status || 201, result);
   }
 
   if (req.method === "GET" && pathname === "/api/topic-feed") {
