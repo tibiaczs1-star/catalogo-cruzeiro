@@ -31,6 +31,11 @@
     });
   }
 
+  function formatInterval(ms) {
+    const minutes = Math.max(1, Math.round(Number(ms || 0) / 60000));
+    return `${minutes} min`;
+  }
+
   function normalize(value) {
     return String(value || "")
       .toLowerCase()
@@ -46,13 +51,15 @@
 
   function renderStats(payload) {
     const summary = payload.summary || {};
+    const autoRun = payload.autoRun || {};
     const stats = [
       ["Agentes", summary.totalAgents],
       ["Escritórios", summary.totalOffices],
       ["Funções", summary.totalRoles],
       ["Notícias lidas", summary.newsItems],
       ["Achados", summary.reviewIssues],
-      ["Fila ativa", summary.activeQueue]
+      ["Fila ativa", summary.activeQueue],
+      ["Auto", autoRun.enabled ? formatInterval(autoRun.intervalMs) : "off"]
     ];
 
     statsEl.innerHTML = stats
@@ -134,14 +141,18 @@
     renderStats(payload);
     renderMiniRows(officeListEl, payload.offices, "office", "agents");
     renderMiniRows(roleListEl, payload.roles, "role", "agents");
+    const autoRun = payload.autoRun || {};
+    const autoText = autoRun.enabled
+      ? ` • Auto: ${formatInterval(autoRun.intervalMs)} • Ciclos: ${autoRun.cycles || 0}`
+      : " • Auto: desligado";
     runMetaEl.textContent = `Rodada: ${formatDate(payload.runGeneratedAt)} • Registry: ${formatDate(
       payload.registryGeneratedAt
-    )}`;
+    )}${autoText}`;
     renderQueue(payload);
   }
 
-  async function loadAgents() {
-    setStatus("Abrindo agentes...");
+  async function loadAgents(silent) {
+    if (!silent) setStatus("Abrindo agentes...");
     const response = await fetch("/api/real-agents", { headers: { Accept: "application/json" } });
     const payload = await response.json();
     if (!response.ok || !payload.ok) {
@@ -187,4 +198,7 @@
   });
 
   loadAgents().catch((error) => setStatus(error.message, "bad"));
+  window.setInterval(() => {
+    loadAgents(true).catch((error) => setStatus(error.message, "bad"));
+  }, 60 * 1000);
 })();

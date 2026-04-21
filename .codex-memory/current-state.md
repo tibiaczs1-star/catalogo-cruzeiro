@@ -1,15 +1,21 @@
 # Current State
 
-Updated: 2026-04-21T23:23:07.112Z
+Updated: 2026-04-21T23:43:43.065Z
 
 ## Active Goal
 
-- PubPaid com chat público do Escritório Nerd
+- Agentes reais em ciclo automatico
 
 ## Summary
 
-Foi adicionado nerd-team-chat.js, um chat público sem senha para conversar com agentes desenvolvedores sobre PubPaid, sprites, Phaser, física, HUD, QA, mobile e próximos passos. PubPaid e Escritório Nerd carregam o widget; o menu do PubPaid tem botão para falar com os agentes e link para conhecer a equipe.
+Servidor configurado para rodar os 181 agentes reais automaticamente a cada 5 minutos. A API /api/real-agents agora expõe autoRun com intervalo, ciclos, estado de execução e histórico curto; o painel real-agents mostra o intervalo automático e atualiza periodicamente.
 
 ## Next
 
-- Evoluir o chat para respostas mais ricas por agente e seguir no jogo: spritesheets animáveis e primeira mesa/minigame Phaser real.
+- Acompanhar o painel real-agents.html em produção depois do deploy para confirmar ciclos reais
+
+## Files In Focus
+
+- server.js
+- real-agents.js
+- real-agents.css

@@ -72,6 +72,20 @@ const REAL_AGENTS_RUNTIME_SCRIPT = path.join(ROOT_DIR, "scripts", "real-agents-r
 const REAL_AGENTS_REGISTRY_FILE = path.join(ROOT_DIR, ".codex-agents", "registry.json");
 const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
 const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
+const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
+const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
+const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
+  ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
+  : 5 * 60 * 1000;
+const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "").toLowerCase() === "true";
+const realAgentsAutoRunState = {
+  running: false,
+  timer: null,
+  startedAt: "",
+  lastRunAt: "",
+  lastError: "",
+  cycles: 0
+};
 const SITE_NAME = "Catalogo Cruzeiro do Sul";
 const SITE_REGION_NAME = "Cruzeiro do Sul e Vale do Jurua";
 const DEFAULT_SITE_DESCRIPTION =
@@ -5057,6 +5071,7 @@ function buildRealAgentsPayload() {
   const latestRunMd = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
     ? fs.readFileSync(REAL_AGENTS_RUN_MD_FILE, "utf-8")
     : "";
+  const history = readRealAgentsRunHistory();
   const agents = Array.isArray(registry?.agents) ? registry.agents : [];
   const queue = Array.isArray(latestRun?.queue) ? latestRun.queue : [];
 
@@ -5072,6 +5087,16 @@ function buildRealAgentsPayload() {
       newsItems: Number(latestRun?.summary?.newsItems || 0),
       reviewIssues: Number(latestRun?.summary?.reviewIssues || 0),
       activeQueue: queue.length
+    },
+    autoRun: {
+      enabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
+      intervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
+      running: realAgentsAutoRunState.running,
+      startedAt: realAgentsAutoRunState.startedAt,
+      lastRunAt: realAgentsAutoRunState.lastRunAt,
+      lastError: realAgentsAutoRunState.lastError,
+      cycles: realAgentsAutoRunState.cycles,
+      history
     },
     offices: Array.isArray(registry?.offices) ? registry.offices : [],
     roles: Array.isArray(registry?.roles) ? registry.roles : [],
@@ -5096,20 +5121,90 @@ function buildRealAgentsPayload() {
   };
 }
 
-function runRealAgentsRuntime() {
+function readRealAgentsRunHistory() {
+  const history = readJson(REAL_AGENTS_RUN_HISTORY_FILE, []);
+  return Array.isArray(history) ? history.slice(0, 24) : [];
+}
+
+function recordRealAgentsRunHistory(entry) {
+  const history = readRealAgentsRunHistory();
+  writeJson(REAL_AGENTS_RUN_HISTORY_FILE, [
+    {
+      at: entry.at || new Date().toISOString(),
+      trigger: entry.trigger || "manual",
+      ok: Boolean(entry.ok),
+      totalAgents: Number(entry.totalAgents || 0),
+      newsItems: Number(entry.newsItems || 0),
+      reviewIssues: Number(entry.reviewIssues || 0),
+      queueItems: Number(entry.queueItems || 0),
+      error: cleanShortText(entry.error || "", 280)
+    },
+    ...history
+  ].slice(0, 24));
+}
+
+function runRealAgentsRuntime(options = {}) {
+  const trigger = cleanShortText(options.trigger || "manual", 80);
+  const at = new Date().toISOString();
   try {
     const summary = runRealAgentsRuntimeLocal();
+    const payload = buildRealAgentsPayload();
+    recordRealAgentsRunHistory({
+      at,
+      trigger,
+      ok: true,
+      totalAgents: payload.summary.totalAgents,
+      newsItems: payload.summary.newsItems,
+      reviewIssues: payload.summary.reviewIssues,
+      queueItems: payload.summary.activeQueue
+    });
     return {
       ok: true,
       summary,
       payload: buildRealAgentsPayload()
     };
   } catch (error) {
+    recordRealAgentsRunHistory({
+      at,
+      trigger,
+      ok: false,
+      error: String(error?.message || error || "Falha ao rodar agentes reais.")
+    });
     return {
       ok: false,
       error: String(error?.message || error || "Falha ao rodar agentes reais.")
     };
   }
+}
+
+function runRealAgentsAutoCycle(trigger) {
+  if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.running) return;
+
+  realAgentsAutoRunState.running = true;
+  realAgentsAutoRunState.startedAt = new Date().toISOString();
+  const result = runRealAgentsRuntime({ trigger });
+  realAgentsAutoRunState.running = false;
+  realAgentsAutoRunState.lastRunAt = new Date().toISOString();
+  realAgentsAutoRunState.cycles += 1;
+  realAgentsAutoRunState.lastError = result.ok ? "" : result.error || "Falha ao rodar agentes reais.";
+
+  if (result.ok) {
+    console.log(`[catalogo] agentes reais atualizados (${trigger})`);
+  } else {
+    console.warn(`[catalogo] falha no ciclo dos agentes reais (${trigger}): ${realAgentsAutoRunState.lastError}`);
+  }
+}
+
+function startRealAgentsAutoRunner() {
+  if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.timer) return;
+
+  realAgentsAutoRunState.timer = setInterval(() => {
+    runRealAgentsAutoCycle("auto-5-minutos");
+  }, REAL_AGENTS_AUTO_RUN_INTERVAL_MS);
+
+  setTimeout(() => {
+    runRealAgentsAutoCycle("auto-inicializacao");
+  }, Math.min(15 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_MS));
 }
 
 const PUBPAID_SPRITE_SCOUT_SOURCES = [
@@ -6587,7 +6682,7 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
-    const result = runRealAgentsRuntime();
+    const result = runRealAgentsRuntime({ trigger: "manual-painel" });
     if (!result.ok) {
       return sendJson(res, 500, result);
     }
@@ -8736,6 +8831,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`[catalogo] online em http://${HOST}:${PORT}`);
+  startRealAgentsAutoRunner();
 });
 function buildPubpaidAdminPayload() {
   const store = readCanonicalPubpaidStore();

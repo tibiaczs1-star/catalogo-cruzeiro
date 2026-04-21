@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-21T23:26:37.679Z",
+  "lastUpdatedAt": "2026-04-21T23:44:56.127Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -2967,6 +2967,53 @@
       "source": "chat",
       "rawRequest": "Usuario pediu reunir agentes funcionais e criar solução para evitar que manchetes/fotos principais apareçam com corte ruim, como apenas pedaço da cabeça de alguém na abertura.",
       "summary": "Blindar fotos de manchete contra corte ruim/topo de cabeça",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-21-ativar-ciclo-automatico-de-5-em-5-minutos-para-agentes-reais",
+      "createdAt": "2026-04-21T23:43:33.277Z",
+      "updatedAt": "2026-04-21T23:43:33.277Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "continue 5 em 5 minutos",
+      "summary": "Ativar ciclo automatico de 5 em 5 minutos para agentes reais",
+      "normalizedTasks": [
+        "agendador automatico no servidor",
+        "estado autoRun na API",
+        "painel mostrando intervalo e ciclos",
+        "validar endpoint"
+      ],
+      "filesTouched": [
+        "server.js",
+        "real-agents.js",
+        "real-agents.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "agentes-reais",
+        "automacao",
+        "servidor",
+        "monitoramento"
+      ],
+      "nextSteps": [],
+      "notes": "O servidor passa a disparar a runtime dos agentes a cada 5 minutos, com historico curto e protecao contra execucao simultanea."
+    },
+    {
+      "id": "2026-04-21-enviar-alertas-de-foto-ruim-pelo-whatsapp",
+      "createdAt": "2026-04-21T23:44:56.127Z",
+      "updatedAt": "2026-04-21T23:44:56.127Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuario pediu integrar WhatsApp para receber notícia/foto ruim detectada pela auditoria.",
+      "summary": "Enviar alertas de foto ruim pelo WhatsApp",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

@@ -1,10 +1,20 @@
 # Handoff
 
-Updated: 2026-04-21T23:23:07.280Z
+Updated: 2026-04-21T23:43:43.028Z
 
-Chat público do Escritório Nerd integrado ao PubPaid: novo nerd-team-chat.js, botão 'Falar com agentes sobre o jogo' no menu do PubPaid, botão 'Falar com a equipe' no Escritório Nerd e estilos adicionados em pubpaid.css/escritorio.css.
+Ativado ciclo automático dos agentes reais: server.js agenda runRealAgentsRuntimeLocal a cada 5 minutos, grava data/real-agents-run-history.json em runtime e expõe autoRun na API. real-agents.js mostra Auto 5 min/ciclos e faz refresh do painel a cada 60s.
 
 ## Next
 
-- Refinar respostas por agente
-- reduzir duplicação de CSS se virar componente global e continuar sprites/minigames no PubPaid Phaser.
+- Se publicar
+- confirmar /api/real-agents em produção e observar autoRun.cycles após alguns minutos
+
+## Files In Focus
+
+- server.js
+- real-agents.js
+- real-agents.css
+
+## Related Orders
+
+- 2026-04-21-ativar-ciclo-automatico-de-5-em-5-minutos-para-agentes-reais
