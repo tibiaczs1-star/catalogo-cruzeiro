@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-04-20T23:28:42.494Z
+Updated: 2026-04-21T14:28:52.108Z
 
 ## Active Goal
 
-- Pesquisa eleitoral separada de novo
+- SPO com seleção destacada aprovada
 
 ## Summary
 
-A camada eleitoral da home voltou a mostrar uma chamada simples do jornal, sem a ponte SPO x Jornal. A pagina pesquisa-acre-2026 foi restaurada do commit 44b5785 para recuperar a rotina completa anterior da SPO.
+A seleção dos cards na SPO agora fica amarela, com check e animação curta. O usuário indicou que esta parte está ok e pediu para subir.
 
 ## Next
 
-- Validar no navegador se o botão da pesquisa da home abre corretamente e se a SPO antiga carrega o formulario
-- resumo e consulta administrativa.
+- Publicar só o ajuste visual da seleção na pesquisa e depois seguir para o próximo feedback do usuário.

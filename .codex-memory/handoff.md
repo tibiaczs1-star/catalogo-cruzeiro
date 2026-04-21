@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-04-20T23:28:42.511Z
+Updated: 2026-04-21T14:28:52.110Z
 
-Home eleitoral sem cruzamento SPO x Jornal; agora existe um bloco simples de pesquisa do portal. A SPO foi restaurada para a versao completa anterior usando o commit 44b5785 em pesquisa-acre-2026.html/js/css.
+A SPO recebeu destaque amarelo forte no card selecionado, com check no canto e animação curta. O usuário aprovou essa parte e pediu para subir.
 
 ## Next
 
-- Testar visual e fluxo real da home para a SPO e confirmar se o usuario quer mais limpeza na pagina da SPO restaurada.
+- Continuar a partir do próximo ajuste visual/editorial solicitado pelo usuário.

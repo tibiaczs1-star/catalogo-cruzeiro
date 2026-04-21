@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-20T23:28:42.328Z",
+  "lastUpdatedAt": "2026-04-21T14:28:52.118Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -2255,6 +2255,21 @@
       "source": "chat",
       "rawRequest": "PESQUISA ELEITORAL SAO 2 , UMA EA SPO, E VC SUMIO COM ELA, A OUTRA E A DO PORTAL, QUE O BOTÃO N FUNCIONA. ...... AGORA ENTENDEMOS PORQUE NEH? VOLTE A PESQUISA SIMPLES PRO JORNAL NA CAMADA ELETORAL, E TIRE ELA DA SPO, E TRANSFORME A SPO NUMA ROTINA COMPLETA COMO ERA ANTES, BUSQUE DA SUA MEMORIA O QUE VC FEZ FOI TROCAR A POSIÇÃO DAS PESQUISAS E SUMIR COM UMA",
       "summary": "Separar de novo a pesquisa simples do jornal e restaurar a SPO completa",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-21-subir-o-ajuste-visual-aprovado-da-selecao-na-spo",
+      "createdAt": "2026-04-21T14:28:52.118Z",
+      "updatedAt": "2026-04-21T14:28:52.118Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok agora suba e eu acho que esta parte esta ok",
+      "summary": "Subir o ajuste visual aprovado da seleção na SPO",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
