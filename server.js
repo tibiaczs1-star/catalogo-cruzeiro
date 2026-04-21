@@ -5169,10 +5169,15 @@ function recordMatchesWeeklyDevice(item = {}, currentWeekKey = "", fingerprints 
   return fingerprints.some((fingerprint) => savedFingerprints.includes(fingerprint));
 }
 
-function findAcre2026WeeklyVoteForAuth(authUser = {}, weekKey = getWeekBucketKey(new Date().toISOString())) {
+function findAcre2026WeeklyVoteForAuth(
+  authUser = {},
+  weekKey = getWeekBucketKey(new Date().toISOString()),
+  fingerprints = []
+) {
   const googleSub = safeString(authUser?.sub || "", 160);
   const googleEmail = safeString(authUser?.email || "", 160);
-  if (!googleSub && !googleEmail) return null;
+  const hasDeviceFingerprint = Array.isArray(fingerprints) && fingerprints.length > 0;
+  if (!googleSub && !googleEmail && !hasDeviceFingerprint) return null;
 
   const records = getAcre2026PollResponses();
   return (
@@ -5180,14 +5185,19 @@ function findAcre2026WeeklyVoteForAuth(authUser = {}, weekKey = getWeekBucketKey
       (item) =>
         safeString(item.weekKey || "", 24) === weekKey &&
         ((googleSub && safeString(item.googleSub || "", 160) === googleSub) ||
-          (googleEmail && safeString(item.googleEmail || "", 160) === googleEmail))
+          (googleEmail && safeString(item.googleEmail || "", 160) === googleEmail) ||
+          (hasDeviceFingerprint && recordMatchesWeeklyDevice(item, weekKey, fingerprints)))
     ) || null
   );
 }
 
-function buildAcre2026PollCurrentUserPayload(authUser = {}) {
+function buildAcre2026PollCurrentUserPayload(authUser = {}, tracking = {}) {
   const weekKey = getWeekBucketKey(new Date().toISOString());
-  const existingVote = findAcre2026WeeklyVoteForAuth(authUser, weekKey);
+  const existingVote = findAcre2026WeeklyVoteForAuth(
+    authUser,
+    weekKey,
+    buildWeeklyDeviceFingerprints(tracking)
+  );
   return {
     ok: true,
     authenticated: Boolean(authUser?.email && authUser?.sub),
@@ -6785,7 +6795,7 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    return sendJson(res, 200, buildAcre2026PollCurrentUserPayload(authUser));
+    return sendJson(res, 200, buildAcre2026PollCurrentUserPayload(authUser, buildTrackingMeta(req, {})));
   }
 
   if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026") {

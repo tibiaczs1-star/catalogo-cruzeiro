@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-21T15:49:53.738Z",
+  "lastUpdatedAt": "2026-04-21T16:04:25.612Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -2375,6 +2375,34 @@
         "google",
         "voto",
         "parciais"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-21-reforcar-bloqueio-da-spo-porque-o-formulario-ainda-aparecia-apos-voto",
+      "createdAt": "2026-04-21T16:04:25.612Z",
+      "updatedAt": "2026-04-21T16:04:25.612Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "deu certo nao",
+      "summary": "Reforçar bloqueio da SPO porque o formulário ainda aparecia após voto",
+      "normalizedTasks": [
+        "Fazer /me reconhecer voto por dispositivo/IP além de Google",
+        "mover parciais para dentro do card concluído",
+        "atualizar cache bust votegate2"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pesquisa-acre-2026.js",
+        "pesquisa-acre-2026.css",
+        "pesquisa-acre-2026.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "spo",
+        "parciais",
+        "bloqueio"
       ],
       "nextSteps": [],
       "notes": ""

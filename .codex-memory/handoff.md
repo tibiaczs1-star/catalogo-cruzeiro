@@ -1,18 +1,18 @@
 # Handoff
 
-Updated: 2026-04-21T15:50:20.138Z
+Updated: 2026-04-21T16:04:49.056Z
 
-Correção de fluxo da SPO pronta: backend ganhou /api/pesquisa-acre-2026/me para identificar voto semanal pelo Google; frontend esconde formulário/auth/método/admin quando já votou, mostra painel concluído e rola para parciais. Cache bust atualizado para votegate.
+Reforço aplicado na SPO: /me agora detecta voto semanal por Google e por fingerprint do request; frontend move .poll-summary para depois do painel de obrigado quando isCompleted, escondendo formulário/auth/método/admin. Cache bust atualizado para votegate2.
 
 ## Next
 
-- Após deploy no Render
-- abrir /pesquisa-acre-2026.html com Google que já votou; a página deve mostrar estado concluído e parciais
-- sem formulário.
+- Depois do deploy
+- confirmar no HTML remoto se aparece votegate2 e testar a página com Google já votante.
 
 ## Files In Focus
 
 - server.js
 - pesquisa-acre-2026.js
+- pesquisa-acre-2026.css
 - pesquisa-acre-2026.html
 - .codex-memory/orders.json

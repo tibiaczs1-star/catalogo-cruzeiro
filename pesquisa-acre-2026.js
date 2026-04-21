@@ -26,6 +26,12 @@
   const pollBridgeSignals = document.getElementById("pollBridgeSignals");
   const pollBridgeNews = document.getElementById("pollBridgeNews");
   const pollCompletionKey = "acre_poll_completed_v2";
+  const summaryHome = summaryCard
+    ? {
+        parent: summaryCard.parentElement,
+        nextSibling: summaryCard.nextElementSibling
+      }
+    : null;
   const numberFormatter = new Intl.NumberFormat("pt-BR");
   const decimalFormatter = new Intl.NumberFormat("pt-BR", {
     minimumFractionDigits: 1,
@@ -96,6 +102,7 @@
     if (!formCard) return;
 
     formCard.classList.toggle("is-completed", Boolean(isCompleted));
+    document.documentElement.classList.toggle("has-acre-poll-completed", Boolean(isCompleted));
 
     [authCard, form, methodCard, adminEntry].forEach((node) => {
       if (node) {
@@ -111,6 +118,22 @@
       thanksMessage.textContent =
         message ||
         "Seu voto foi registrado com sucesso. As parciais públicas continuam logo abaixo, mas a área de votação fica encerrada após o envio.";
+    }
+
+    if (summaryCard && summaryHome?.parent) {
+      if (isCompleted) {
+        summaryCard.hidden = false;
+        summaryCard.classList.add("is-inline-after-vote");
+        thanksPanel?.insertAdjacentElement("afterend", summaryCard);
+      } else {
+        summaryCard.classList.remove("is-inline-after-vote");
+        summaryCard.hidden = false;
+        if (summaryHome.nextSibling && summaryHome.nextSibling.parentElement === summaryHome.parent) {
+          summaryHome.parent.insertBefore(summaryCard, summaryHome.nextSibling);
+        } else {
+          summaryHome.parent.appendChild(summaryCard);
+        }
+      }
     }
 
     try {

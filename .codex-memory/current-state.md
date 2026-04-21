@@ -1,21 +1,22 @@
 # Current State
 
-Updated: 2026-04-21T15:50:20.142Z
+Updated: 2026-04-21T16:04:48.872Z
 
 ## Active Goal
 
-- SPO: bloquear formulário para Google já votante
+- SPO: reforço do bloqueio pós-voto
 
 ## Summary
 
-A pesquisa agora consulta /api/pesquisa-acre-2026/me quando o Google conecta. Se o usuário já votou na semana, o formulário é escondido e as parciais são carregadas/mostradas. Erro 409 no envio também vira estado de voto concluído, não erro comum.
+Depois do usuário relatar que ainda via o formulário, /api/pesquisa-acre-2026/me passou a procurar voto semanal também por fingerprint de dispositivo/IP, não só por Google. No frontend, quando concluído, o bloco de parciais é movido para dentro do card logo abaixo do obrigado.
 
 ## Next
 
-- Subir a correção e aguardar deploy; testar entrando com o mesmo Google que já votou e confirmar que aparece apenas o painel de participação concluída + parciais.
+- Subir o commit e aguardar o Render servir votegate2; testar com o mesmo Google/dispositivo que votou.
 
 ## Files In Focus
 
 - server.js
 - pesquisa-acre-2026.js
+- pesquisa-acre-2026.css
 - pesquisa-acre-2026.html
