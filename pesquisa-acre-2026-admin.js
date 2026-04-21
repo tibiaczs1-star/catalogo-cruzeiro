@@ -26,6 +26,11 @@
   const tableMeta = document.getElementById("pollAdminTableMeta");
   const exportButton = document.getElementById("pollAdminExport");
   const clearFiltersButton = document.getElementById("pollAdminClearFilters");
+  const electionLine = document.getElementById("pollAdminElectionLine");
+  const voteDonut = document.getElementById("pollAdminVoteDonut");
+  const priorityDonut = document.getElementById("pollAdminPriorityDonut");
+  const rejectionVisual = document.getElementById("pollAdminRejectionVisual");
+  const politicalAnalysis = document.getElementById("pollAdminPoliticalAnalysis");
   const filters = {
     search: document.getElementById("pollAdminSearch"),
     vote2026: document.getElementById("pollAdminFilterVote2026"),
@@ -266,6 +271,7 @@
     dateStyle: "short",
     timeStyle: "short"
   });
+  const CHART_COLORS = ["#2457d6", "#008a72", "#b87800", "#b63d2f", "#6d56d8", "#0f7aa5", "#7a5d18"];
 
   let lastPayload = null;
   let lastFilteredRecords = [];
@@ -855,6 +861,212 @@
       .join("");
   }
 
+  function polarToCartesian(cx, cy, radius, angle) {
+    const radians = ((angle - 90) * Math.PI) / 180;
+    return {
+      x: cx + radius * Math.cos(radians),
+      y: cy + radius * Math.sin(radians)
+    };
+  }
+
+  function describeArc(cx, cy, radius, startAngle, endAngle) {
+    const start = polarToCartesian(cx, cy, radius, endAngle);
+    const end = polarToCartesian(cx, cy, radius, startAngle);
+    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+    return ["M", start.x, start.y, "A", radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(" ");
+  }
+
+  function renderDonutHtml(items = [], title = "Total") {
+    const validItems = (Array.isArray(items) ? items : []).filter((item) => Number(item.total || 0) > 0).slice(0, 6);
+    if (!validItems.length) {
+      return `<p class="poll-admin-empty">Sem dados suficientes para gerar o gráfico.</p>`;
+    }
+
+    let cursor = 0;
+    const arcs = validItems
+      .map((item, index) => {
+        const value = Math.max(0, Number(item.percent || 0));
+        const start = cursor;
+        const end = cursor + (value / 100) * 360;
+        cursor = end;
+        return `<path d="${describeArc(60, 60, 44, start, end)}" style="stroke:${CHART_COLORS[index % CHART_COLORS.length]}"></path>`;
+      })
+      .join("");
+    const total = validItems.reduce((sum, item) => sum + Number(item.total || 0), 0);
+
+    return `
+      <div class="poll-admin-donut-chart">
+        <svg viewBox="0 0 120 120" role="img" aria-label="${escapeHtml(title)}">
+          <circle cx="60" cy="60" r="44"></circle>
+          ${arcs}
+          <text x="60" y="56">${numberFormatter.format(total)}</text>
+          <text x="60" y="72">registros</text>
+        </svg>
+      </div>
+      <div class="poll-admin-chart-legend">
+        ${validItems
+          .map(
+            (item, index) => `
+              <span>
+                <i style="background:${CHART_COLORS[index % CHART_COLORS.length]}"></i>
+                ${escapeHtml(item.label)}
+                <b>${formatPercent(item.percent)}</b>
+              </span>
+            `
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
+  function renderElectionLine(records = []) {
+    if (!electionLine) return;
+    const weekly = buildWeeklyTrendSeries(records, "voto2026");
+    const topNames = buildBreakdown(records, "voto2026", 4).map((item) => item.label);
+
+    if (!weekly.length || !topNames.length) {
+      electionLine.innerHTML = `<p class="poll-admin-empty">Sem série temporal para desenhar linha eleitoral.</p>`;
+      return;
+    }
+
+    const width = 760;
+    const height = 280;
+    const padding = { top: 26, right: 24, bottom: 44, left: 42 };
+    const usableWidth = width - padding.left - padding.right;
+    const usableHeight = height - padding.top - padding.bottom;
+    const xFor = (index) => padding.left + (weekly.length <= 1 ? usableWidth / 2 : (index / (weekly.length - 1)) * usableWidth);
+    const yFor = (percent) => padding.top + usableHeight - (Math.max(0, Math.min(100, Number(percent || 0))) / 100) * usableHeight;
+
+    const lines = topNames
+      .map((name, nameIndex) => {
+        const points = weekly
+          .map((week, weekIndex) => {
+            const entry = (week.labels || []).find((item) => item.label === name);
+            return `${xFor(weekIndex)},${yFor(entry?.percent || 0)}`;
+          })
+          .join(" ");
+        return `<polyline points="${points}" style="stroke:${CHART_COLORS[nameIndex % CHART_COLORS.length]}"></polyline>`;
+      })
+      .join("");
+
+    const dots = topNames
+      .map((name, nameIndex) =>
+        weekly
+          .map((week, weekIndex) => {
+            const entry = (week.labels || []).find((item) => item.label === name);
+            const percent = entry?.percent || 0;
+            return `<circle cx="${xFor(weekIndex)}" cy="${yFor(percent)}" r="4" style="fill:${CHART_COLORS[nameIndex % CHART_COLORS.length]}"><title>${escapeHtml(name)} ${formatWeekLabel(week.week)} ${formatPercent(percent)}</title></circle>`;
+          })
+          .join("")
+      )
+      .join("");
+
+    electionLine.innerHTML = `
+      <svg class="poll-admin-line-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Linha eleitoral semanal">
+        <path d="M${padding.left} ${padding.top} V${height - padding.bottom} H${width - padding.right}"></path>
+        <path d="M${padding.left} ${yFor(50)} H${width - padding.right}"></path>
+        <path d="M${padding.left} ${yFor(25)} H${width - padding.right}"></path>
+        <path d="M${padding.left} ${yFor(75)} H${width - padding.right}"></path>
+        ${lines}
+        ${dots}
+        ${weekly
+          .map(
+            (week, index) =>
+              `<text x="${xFor(index)}" y="${height - 16}">${escapeHtml(formatWeekLabel(week.week).replace(" · ", " "))}</text>`
+          )
+          .join("")}
+      </svg>
+      <div class="poll-admin-chart-legend poll-admin-chart-legend--inline">
+        ${topNames
+          .map(
+            (name, index) => `
+              <span><i style="background:${CHART_COLORS[index % CHART_COLORS.length]}"></i>${escapeHtml(name)}</span>
+            `
+          )
+          .join("")}
+      </div>
+    `;
+  }
+
+  function renderVisualCharts(records = []) {
+    if (voteDonut) {
+      voteDonut.innerHTML = renderDonutHtml(buildBreakdown(records, "voto2026", 6), "Pizza do voto");
+    }
+    if (priorityDonut) {
+      priorityDonut.innerHTML = renderDonutHtml(buildBreakdown(records, "prioridade", 6), "Agenda pública");
+    }
+    if (rejectionVisual) {
+      rejectionVisual.innerHTML = renderBarRowsHtml(
+        buildBreakdown(records, "rejeicao", 8),
+        "rejection",
+        "Sem rejeição suficiente no recorte."
+      );
+    }
+    renderElectionLine(records);
+  }
+
+  function renderPoliticalAnalysis(records = []) {
+    if (!politicalAnalysis) return;
+
+    if (!records.length) {
+      politicalAnalysis.innerHTML = `<p class="poll-admin-empty">Sem base para análise política no recorte atual.</p>`;
+      return;
+    }
+
+    const voteTop = buildBreakdown(records, "voto2026", 3);
+    const leader = voteTop[0] || null;
+    const second = voteTop[1] || null;
+    const rejection = getLeader(records, "rejeicao");
+    const priority = getLeader(records, "prioridade");
+    const changeShare = getPercentForLabel(records, "desejoCiclo", "Mudança");
+    const continuityShare = getPercentForLabel(records, "desejoCiclo", "Continuidade");
+    const decidedShare = getPercentForLabel(records, "certezaVoto", "Ja esta decidido");
+    const margin = leader && second ? Number((leader.percent - second.percent).toFixed(1)) : 0;
+    const volatility = Math.max(0, Math.min(100, 100 - decidedShare + (leader && second && margin < 8 ? 10 : 0)));
+    const leaderRejected = leader && rejection && normalizeText(leader.label) === normalizeText(rejection.label);
+
+    const cards = [
+      {
+        title: "Competitividade",
+        value: leader ? `${leader.label} lidera` : "Sem líder",
+        text: second
+          ? `A diferença sobre ${second.label} é de ${decimalFormatter.format(margin)} ponto(s) no recorte.`
+          : "Ainda falta segundo nome robusto para medir distância."
+      },
+      {
+        title: "Volatilidade",
+        value: formatPercent(volatility),
+        text: volatility >= 45 ? "Há bastante campo disputável; filtros por local e idade podem mudar a leitura." : "O recorte aparece mais consolidado, mas continua sendo enquete espontânea."
+      },
+      {
+        title: "Humor de ciclo",
+        value: `${formatPercent(changeShare)} mudança`,
+        text: `Continuidade aparece com ${formatPercent(continuityShare)}. Esse bloco ajuda a separar voto de protesto, gestão e alternância.`
+      },
+      {
+        title: "Risco de rejeição",
+        value: rejection?.label || "Sem rejeição clara",
+        text: leaderRejected
+          ? "Atenção: o nome que lidera também aparece como maior bloqueio."
+          : priority
+            ? `A cobrança dominante gira em torno de ${priority.label}.`
+            : "Sem agenda dominante suficiente para qualificar risco."
+      }
+    ];
+
+    politicalAnalysis.innerHTML = cards
+      .map(
+        (card) => `
+          <article>
+            <span>${escapeHtml(card.title)}</span>
+            <strong>${escapeHtml(card.value)}</strong>
+            <p>${escapeHtml(card.text)}</p>
+          </article>
+        `
+      )
+      .join("");
+  }
+
   function renderFlowList(container, items = [], emptyMessage) {
     if (!container) return;
 
@@ -1270,6 +1482,8 @@
     }
 
     renderKpis(records, totalRecords);
+    renderVisualCharts(records);
+    renderPoliticalAnalysis(records);
     renderNarrative(records, totalRecords);
     renderTimeline(records);
     renderFlows(records);

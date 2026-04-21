@@ -11,7 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260421adminpolish" />
+    <link rel="stylesheet" href="./pesquisa-acre-2026.css?v=20260421admincharts2" />
     <link rel="stylesheet" href="./solid-surfaces.css?v=20260419solidfinal" />
   </head>
   <body class="poll-admin-page">
@@ -167,6 +167,58 @@
             </section>
 
             <div class="poll-stat-grid poll-stat-grid--admin" id="pollAdminKpis"></div>
+
+            <section class="poll-admin-visual-grid" aria-label="Gráficos eleitorais e leitura política">
+              <article class="poll-admin-panel poll-admin-visual-panel poll-admin-visual-panel--line">
+                <div class="poll-admin-panel-head">
+                  <div>
+                    <h3>Linha eleitoral</h3>
+                    <p>Evolução semanal dos nomes mais fortes no recorte atual.</p>
+                  </div>
+                </div>
+                <div class="poll-admin-line-visual" id="pollAdminElectionLine"></div>
+              </article>
+
+              <article class="poll-admin-panel poll-admin-visual-panel">
+                <div class="poll-admin-panel-head">
+                  <div>
+                    <h3>Pizza do voto</h3>
+                    <p>Distribuição da intenção principal para 2026.</p>
+                  </div>
+                </div>
+                <div class="poll-admin-donut-visual" id="pollAdminVoteDonut"></div>
+              </article>
+
+              <article class="poll-admin-panel poll-admin-visual-panel">
+                <div class="poll-admin-panel-head">
+                  <div>
+                    <h3>Agenda pública</h3>
+                    <p>Prioridades que mais organizam a opinião.</p>
+                  </div>
+                </div>
+                <div class="poll-admin-donut-visual" id="pollAdminPriorityDonut"></div>
+              </article>
+
+              <article class="poll-admin-panel poll-admin-visual-panel">
+                <div class="poll-admin-panel-head">
+                  <div>
+                    <h3>Rejeição comparada</h3>
+                    <p>Bloqueios mais relevantes dentro do recorte.</p>
+                  </div>
+                </div>
+                <div class="poll-admin-rejection-visual" id="pollAdminRejectionVisual"></div>
+              </article>
+
+              <article class="poll-admin-panel poll-admin-visual-panel poll-admin-visual-panel--analysis">
+                <div class="poll-admin-panel-head">
+                  <div>
+                    <h3>Análise política</h3>
+                    <p>Sinais automáticos para decisão editorial, relatório e leitura de cenário.</p>
+                  </div>
+                </div>
+                <div class="poll-admin-analysis-grid" id="pollAdminPoliticalAnalysis"></div>
+              </article>
+            </section>
 
             <section class="poll-admin-layout-grid">
               <article class="poll-admin-panel">
@@ -328,6 +380,6 @@
       </section>
     </main>
 
-    <script src="./pesquisa-acre-2026-admin.js?v=20260421adminpolish" defer></script>
+    <script src="./pesquisa-acre-2026-admin.js?v=20260421admincharts2" defer></script>
   </body>
 </html>
