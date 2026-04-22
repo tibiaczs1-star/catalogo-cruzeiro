@@ -5134,6 +5134,8 @@ function buildRealAgentsPayload() {
     })),
     news: latestRun?.news || null,
     dailyContext: latestRun?.dailyContext || null,
+    awards: latestRun?.awards || null,
+    scoreboard: latestRun?.scoreboard || null,
     officeStatus: Array.isArray(latestRun?.offices) ? latestRun.offices : [],
     queue,
     reportMarkdown: latestRunMd

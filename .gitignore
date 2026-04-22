@@ -24,6 +24,7 @@ node_modules/
 data/real-agents-memory.json
 data/real-agents-run-history.json
 data/cheffe-call-state.json
+data/real-agents-scoreboard.json
 .edge-headless/
 recovered-chat-assets/
 recovered-vscode-chat-assets/

@@ -1,26 +1,15 @@
 # Current State
 
-Updated: 2026-04-22T00:12:02.895Z
+Updated: 2026-04-22T01:06:10.902Z
 
 ## Active Goal
 
-- Cheffe Call dos agentes
+- Premiacao dos agentes reais
 
 ## Summary
 
-Criada a sala Cheffe Call: entrada no menu principal do jornal, teatro bitmap com agentes sentados e Full Admin no palco, terminal de reuniao, API para pausar/liberar runtimes, opinioes por perspectiva e contexto diario com agente do dia, escritorio do dia e acao do dia.
+Painel real-agents agora tem pontuacao por rodada, premios visuais com fotinha e placares acumulados do dia, semana e mes. API validada com lideres nos tres periodos.
 
 ## Next
 
-- Publicar e testar em producao abrindo uma Cheffe Call real
-- depois liberar as runtimes
-
-## Files In Focus
-
-- cheffe-call.html
-- cheffe-call.css
-- cheffe-call.js
-- index.html
-- server.js
-- scripts/real-agents-runtime.js
-- .gitignore
+- Subir commit do pacote de agentes e conferir deploy

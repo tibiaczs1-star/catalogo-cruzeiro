@@ -1,23 +1,10 @@
 # Handoff
 
-Updated: 2026-04-22T00:12:02.882Z
+Updated: 2026-04-22T01:06:10.901Z
 
-Cheffe Call implementado. /cheffe-call.html mostra sala bitmap, placar diario e opinioes. server.js adiciona /api/cheffe-call, /api/cheffe-call/start e /api/cheffe-call/release; auto-run dos agentes pula ciclos enquanto a reuniao estiver ativa. scripts/real-agents-runtime.js calcula dailyContext com agentOfDay, officeOfDay e actionOfDay a partir de autonomia/urgencia/confianca/ciclos.
+Implementado sistema de pontos/premios dos agentes: runtime calcula awards, fotos CSS, podium e scoreboard diario/semanal/mensal persistido em data/real-agents-scoreboard.json; API entrega awards/scoreboard; real-agents.html exibe hall de premios e placar de temporadas.
 
 ## Next
 
-- Verificar no deploy que Cheffe Call aparece no menu e que /api/cheffe-call retorna dailyContext; abrir chamada com senha Full Admin e depois liberar runtimes
-
-## Files In Focus
-
-- cheffe-call.html
-- cheffe-call.css
-- cheffe-call.js
-- index.html
-- server.js
-- scripts/real-agents-runtime.js
-- .gitignore
-
-## Related Orders
-
-- 2026-04-22-criar-cheffe-call-com-teatro-bitmap-pausa-de-runtime-e-contexto-diario-dos-agent
+- Depois do push
+- validar /real-agents.html em producao e decidir se espelha o hall no Escritorio e Cheffe Call.

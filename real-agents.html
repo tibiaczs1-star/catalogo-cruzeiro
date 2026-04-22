@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agentes Reais em Operação • Catálogo Cruzeiro do Sul</title>
-    <link rel="stylesheet" href="real-agents.css?v=20260421b" />
+    <link rel="stylesheet" href="real-agents.css?v=20260422a" />
   </head>
   <body class="real-agents-page">
     <header class="agents-topbar">
@@ -36,6 +36,29 @@
 
       <section class="agents-stats" id="agentsStats" aria-label="Resumo dos agentes"></section>
 
+      <section class="agents-awards" aria-labelledby="awardsTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Caça aos melhores</p>
+            <h2 id="awardsTitle">Pontuação e premiações do escritório</h2>
+          </div>
+          <p id="awardsChase">Disputa dos agentes em atualização.</p>
+        </div>
+        <div id="awardsPodium" class="agents-podium"></div>
+        <div id="awardsCatalog" class="agents-awards-catalog" aria-label="Tipos de premiação"></div>
+      </section>
+
+      <section class="agents-scoreboard" aria-labelledby="scoreboardTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Temporadas</p>
+            <h2 id="scoreboardTitle">Placar do dia, da semana e do mês</h2>
+          </div>
+          <p>Os pontos acumulam a cada rodada operacional e renovam a disputa entre agentes e escritórios.</p>
+        </div>
+        <div id="scoreboardPeriods" class="agents-scoreboard-grid"></div>
+      </section>
+
       <section class="agents-layout">
         <aside class="agents-sidebar">
           <div class="agents-panel">
@@ -61,6 +84,6 @@
       </section>
     </main>
 
-    <script defer src="real-agents.js?v=20260421b"></script>
+    <script defer src="real-agents.js?v=20260422a"></script>
   </body>
 </html>

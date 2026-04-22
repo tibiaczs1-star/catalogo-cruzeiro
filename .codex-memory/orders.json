@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-22T00:11:49.981Z",
+  "lastUpdatedAt": "2026-04-22T01:05:34.686Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -3098,6 +3098,36 @@
       ],
       "nextSteps": [],
       "notes": "Cheffe Call usa /api/cheffe-call, /api/cheffe-call/start e /api/cheffe-call/release. Quando ativo, o auto-run de 5 minutos fica pausado."
+    },
+    {
+      "id": "2026-04-22-adicionar-pontuacao-ranking-e-premiacoes-visuais-com-fotinha-para-os-agentes-cac",
+      "createdAt": "2026-04-22T00:22:29.973Z",
+      "updatedAt": "2026-04-22T00:22:29.973Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e que uma conversa nossa travou depois de criar o escritorio, eu queria que eles tivessem pontuação premiação com fotinha no escritorio varios tipos de premiação pra eles podeem caçar ser os melhores",
+      "summary": "Adicionar pontuacao, ranking e premiacoes visuais com fotinha para os agentes cacarem o topo",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-adicionar-placar-diario-semanal-mensal-dos-agentes-e-subir-se-validado",
+      "createdAt": "2026-04-22T01:05:34.686Z",
+      "updatedAt": "2026-04-22T01:05:34.686Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok por dia, por semana e nos mes, e eles tem que pontuar e etc, ta certo isso se for pode subir",
+      "summary": "Adicionar placar diario semanal mensal dos agentes e subir se validado",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

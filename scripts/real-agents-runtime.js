@@ -15,6 +15,7 @@ const RUN_MD_FILE = path.join(RUNTIME_DIR, "latest-run.md");
 const RUNTIME_NEWS_FILE = path.join(ROOT_DIR, "data", "runtime-news.json");
 const ARCHIVE_NEWS_FILE = path.join(ROOT_DIR, "data", "news-archive.json");
 const AGENT_MEMORY_FILE = path.join(ROOT_DIR, "data", "real-agents-memory.json");
+const AGENT_SCOREBOARD_FILE = path.join(ROOT_DIR, "data", "real-agents-scoreboard.json");
 const REVIEW_REPORT_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
 const DEFAULT_OFFICE_FILE = path.join(ROOT_DIR, "escritorio.js");
 const OFFICE_CONFIG_FILES = [
@@ -193,6 +194,27 @@ function normalizeDate(value) {
   const date = new Date(value || Date.now());
   if (Number.isNaN(date.getTime())) return new Date(0);
   return date;
+}
+
+function pad2(value) {
+  return String(value).padStart(2, "0");
+}
+
+function getIsoWeekKey(date) {
+  const current = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const day = current.getUTCDay() || 7;
+  current.setUTCDate(current.getUTCDate() + 4 - day);
+  const yearStart = new Date(Date.UTC(current.getUTCFullYear(), 0, 1));
+  const week = Math.ceil(((current - yearStart) / 86400000 + 1) / 7);
+  return `${current.getUTCFullYear()}-W${pad2(week)}`;
+}
+
+function getPeriodKeys(date = new Date()) {
+  return {
+    day: date.toISOString().slice(0, 10),
+    week: getIsoWeekKey(date),
+    month: `${date.getFullYear()}-${pad2(date.getMonth() + 1)}`
+  };
 }
 
 function getRoleProfile(role) {
@@ -628,6 +650,327 @@ function buildDailyAgentContext(queue) {
   };
 }
 
+function getAgentAwardCatalog() {
+  return [
+    {
+      id: "gold-hunt",
+      title: "Cacador de Ouro",
+      shortTitle: "Ouro",
+      icon: "T",
+      description: "melhor pontuacao geral da rodada"
+    },
+    {
+      id: "sharp-eye",
+      title: "Olho de Aguia",
+      shortTitle: "Foco",
+      icon: "V",
+      description: "maior urgencia operacional"
+    },
+    {
+      id: "trusted-hand",
+      title: "Mao Confiavel",
+      shortTitle: "Confianca",
+      icon: "C",
+      description: "maior confianca acumulada"
+    },
+    {
+      id: "office-spark",
+      title: "Chama do Escritorio",
+      shortTitle: "Escritorio",
+      icon: "E",
+      description: "melhor agente de cada escritorio"
+    },
+    {
+      id: "hunter",
+      title: "Cacador da Rodada",
+      shortTitle: "Cacador",
+      icon: "H",
+      description: "mais ciclos e autonomia combinados"
+    },
+    {
+      id: "rookie-rise",
+      title: "Subida Relampago",
+      shortTitle: "Evolucao",
+      icon: "R",
+      description: "agente com poucos ciclos que ja pontuou alto"
+    }
+  ];
+}
+
+function buildAgentPhoto(agent) {
+  const initials = String(agent.name || "?")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+  const palettes = {
+    ceo: ["#f6c453", "#8b5cf6"],
+    editor: ["#60a5fa", "#22c55e"],
+    review: ["#fb7185", "#f97316"],
+    copy: ["#facc15", "#38bdf8"],
+    sources: ["#34d399", "#0f766e"],
+    social: ["#f472b6", "#a855f7"],
+    design: ["#22d3ee", "#2563eb"],
+    pixel: ["#f97316", "#84cc16"],
+    dev: ["#94a3b8", "#06b6d4"],
+    games: ["#a3e635", "#14b8a6"],
+    kids: ["#fbbf24", "#fb7185"],
+    sales: ["#f59e0b", "#10b981"]
+  };
+  const colors = palettes[agent.role] || ["#5eead4", "#64748b"];
+  return {
+    initials: initials || "?",
+    primary: colors[0],
+    secondary: colors[1],
+    badge: String(agent.role || "agent").slice(0, 3).toUpperCase()
+  };
+}
+
+function scoreAgentPerformance(item) {
+  const autonomy = Number(item.autonomy?.autonomy || 0);
+  const urgency = Number(item.autonomy?.urgency || 0);
+  const confidence = Number(item.autonomy?.confidence || 0);
+  const cycles = Number(item.autonomy?.cycles || 0);
+  return Math.round(autonomy * 3 + urgency * 1.35 + confidence * 1.15 + Math.min(80, cycles * 4));
+}
+
+function buildAwardedQueue(queue) {
+  return queue.map((item) => ({
+    ...item,
+    photo: buildAgentPhoto(item),
+    points: scoreAgentPerformance(item),
+    awards: []
+  }));
+}
+
+function giveAward(target, award, rank) {
+  if (!target) return;
+  target.awards.push({
+    ...award,
+    rank
+  });
+}
+
+function buildAgentAwards(queue) {
+  const catalog = getAgentAwardCatalog();
+  const byId = Object.fromEntries(catalog.map((award) => [award.id, award]));
+  const ranked = queue.slice().sort((a, b) => b.points - a.points || String(a.name).localeCompare(String(b.name), "pt-BR"));
+
+  ranked.slice(0, 3).forEach((item, index) => giveAward(item, byId["gold-hunt"], index + 1));
+  queue
+    .slice()
+    .sort((a, b) => Number(b.autonomy?.urgency || 0) - Number(a.autonomy?.urgency || 0))
+    .slice(0, 3)
+    .forEach((item, index) => giveAward(item, byId["sharp-eye"], index + 1));
+  queue
+    .slice()
+    .sort((a, b) => Number(b.autonomy?.confidence || 0) - Number(a.autonomy?.confidence || 0))
+    .slice(0, 3)
+    .forEach((item, index) => giveAward(item, byId["trusted-hand"], index + 1));
+  queue
+    .slice()
+    .sort(
+      (a, b) =>
+        Number(b.autonomy?.cycles || 0) * 3 +
+        Number(b.autonomy?.autonomy || 0) -
+        (Number(a.autonomy?.cycles || 0) * 3 + Number(a.autonomy?.autonomy || 0))
+    )
+    .slice(0, 3)
+    .forEach((item, index) => giveAward(item, byId.hunter, index + 1));
+
+  const officeLeaders = new Map();
+  queue.forEach((item) => {
+    const current = officeLeaders.get(item.officeLabel);
+    if (!current || item.points > current.points) officeLeaders.set(item.officeLabel, item);
+  });
+  [...officeLeaders.values()].forEach((item) => giveAward(item, byId["office-spark"], 1));
+
+  const rookie = queue
+    .filter((item) => Number(item.autonomy?.cycles || 0) <= 4)
+    .sort((a, b) => b.points - a.points)[0];
+  giveAward(rookie, byId["rookie-rise"], 1);
+
+  const podium = ranked.slice(0, 12).map((item, index) => ({
+    rank: index + 1,
+    slug: item.slug,
+    name: item.name,
+    office: item.officeLabel,
+    role: item.role,
+    points: item.points,
+    photo: item.photo,
+    awards: item.awards,
+    autonomy: item.autonomy?.autonomy || 0,
+    urgency: item.autonomy?.urgency || 0,
+    confidence: item.autonomy?.confidence || 0,
+    intent: item.autonomy?.intent || ""
+  }));
+
+  return {
+    catalog,
+    podium,
+    totalAwards: queue.reduce((total, item) => total + item.awards.length, 0),
+    chaseLine: podium[0]
+      ? `${podium[0].name} esta no topo com ${podium[0].points} pontos, mas ${podium[1]?.name || "a equipe"} ainda pode virar na proxima rodada.`
+      : "A caca aos melhores comeca na proxima rodada."
+  };
+}
+
+function readAgentScoreboardStore() {
+  const payload = readJson(AGENT_SCOREBOARD_FILE, {});
+  return {
+    version: 1,
+    updatedAt: payload.updatedAt || "",
+    periods: payload.periods && typeof payload.periods === "object" ? payload.periods : {}
+  };
+}
+
+function createEmptyPeriod(key, type) {
+  return {
+    key,
+    type,
+    updatedAt: "",
+    agents: {},
+    offices: {}
+  };
+}
+
+function addScoreToPeriod(period, item, nowIso) {
+  const agentKey = item.slug || item.id || slugify(item.name);
+  const officeKey = item.officeKey || slugify(item.officeLabel);
+  const points = Number(item.points || 0);
+  const awards = Array.isArray(item.awards) ? item.awards.length : 0;
+
+  const agent = period.agents[agentKey] || {
+    slug: agentKey,
+    name: item.name,
+    office: item.officeLabel,
+    officeKey,
+    role: item.role,
+    photo: item.photo,
+    points: 0,
+    runs: 0,
+    awards: 0,
+    bestRun: 0,
+    lastIntent: "",
+    lastSeenAt: ""
+  };
+  agent.name = item.name;
+  agent.office = item.officeLabel;
+  agent.officeKey = officeKey;
+  agent.role = item.role;
+  agent.photo = item.photo;
+  agent.points += points;
+  agent.runs += 1;
+  agent.awards += awards;
+  agent.bestRun = Math.max(Number(agent.bestRun || 0), points);
+  agent.lastIntent = item.autonomy?.intent || agent.lastIntent || "";
+  agent.lastSeenAt = nowIso;
+  period.agents[agentKey] = agent;
+
+  const office = period.offices[officeKey] || {
+    officeKey,
+    office: item.officeLabel,
+    points: 0,
+    runs: 0,
+    awards: 0,
+    agents: {}
+  };
+  office.office = item.officeLabel;
+  office.points += points;
+  office.runs += 1;
+  office.awards += awards;
+  office.agents[agentKey] = true;
+  period.offices[officeKey] = office;
+  period.updatedAt = nowIso;
+}
+
+function rankPeriod(period, limit = 12) {
+  const agents = Object.values(period.agents || {})
+    .map((agent) => ({
+      ...agent,
+      average: Math.round(Number(agent.points || 0) / Math.max(1, Number(agent.runs || 0)))
+    }))
+    .sort((a, b) => Number(b.points || 0) - Number(a.points || 0) || String(a.name).localeCompare(String(b.name), "pt-BR"))
+    .slice(0, limit)
+    .map((agent, index) => ({ rank: index + 1, ...agent }));
+
+  const offices = Object.values(period.offices || {})
+    .map((office) => ({
+      officeKey: office.officeKey,
+      office: office.office,
+      points: office.points,
+      runs: office.runs,
+      awards: office.awards,
+      agents: Object.keys(office.agents || {}).length,
+      average: Math.round(Number(office.points || 0) / Math.max(1, Number(office.runs || 0)))
+    }))
+    .sort((a, b) => Number(b.points || 0) - Number(a.points || 0) || String(a.office).localeCompare(String(b.office), "pt-BR"))
+    .slice(0, 8)
+    .map((office, index) => ({ rank: index + 1, ...office }));
+
+  return {
+    key: period.key,
+    type: period.type,
+    updatedAt: period.updatedAt,
+    leaders: agents,
+    offices
+  };
+}
+
+function updateAgentScoreboard(queue) {
+  const store = readAgentScoreboardStore();
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const keys = getPeriodKeys(now);
+
+  Object.entries(keys).forEach(([type, key]) => {
+    const periodId = `${type}:${key}`;
+    const period = store.periods[periodId] || createEmptyPeriod(key, type);
+    queue.forEach((item) => addScoreToPeriod(period, item, nowIso));
+    store.periods[periodId] = period;
+  });
+
+  Object.keys(store.periods).forEach((periodId) => {
+    const [type] = periodId.split(":");
+    if (type === "day") {
+      const dayPeriods = Object.keys(store.periods).filter((id) => id.startsWith("day:")).sort().reverse();
+      if (dayPeriods.indexOf(periodId) >= 45) delete store.periods[periodId];
+    }
+    if (type === "week") {
+      const weekPeriods = Object.keys(store.periods).filter((id) => id.startsWith("week:")).sort().reverse();
+      if (weekPeriods.indexOf(periodId) >= 18) delete store.periods[periodId];
+    }
+    if (type === "month") {
+      const monthPeriods = Object.keys(store.periods).filter((id) => id.startsWith("month:")).sort().reverse();
+      if (monthPeriods.indexOf(periodId) >= 14) delete store.periods[periodId];
+    }
+  });
+
+  ensureDir(path.dirname(AGENT_SCOREBOARD_FILE));
+  writeJson(AGENT_SCOREBOARD_FILE, {
+    version: 1,
+    updatedAt: nowIso,
+    periods: store.periods
+  });
+
+  return {
+    updatedAt: nowIso,
+    current: {
+      day: rankPeriod(store.periods[`day:${keys.day}`]),
+      week: rankPeriod(store.periods[`week:${keys.week}`]),
+      month: rankPeriod(store.periods[`month:${keys.month}`])
+    },
+    labels: {
+      day: keys.day,
+      week: keys.week,
+      month: keys.month
+    },
+    retainedPeriods: Object.keys(store.periods).length
+  };
+}
+
 function buildRegistry(agents) {
   return {
     generatedAt: new Date().toISOString(),
@@ -755,7 +1098,7 @@ function main() {
   const context = { newsItems, newsSummary, reviewReport };
   const memoryStore = readAgentMemoryStore();
 
-  const queue = agents.map((agent) => {
+  const queue = buildAwardedQueue(agents.map((agent) => {
     const assignment = buildAssignment(agent, context);
     return {
       id: agent.id,
@@ -767,7 +1110,7 @@ function main() {
       assignment,
       autonomy: updateAgentMemory(agent, assignment, context, memoryStore)
     };
-  });
+  }));
 
   writeAgentMemoryStore(memoryStore);
 
@@ -780,6 +1123,8 @@ function main() {
   }));
   const autonomySummary = summarizeAutonomy(queue);
   const dailyContext = buildDailyAgentContext(queue);
+  const awards = buildAgentAwards(queue);
+  const scoreboard = updateAgentScoreboard(queue);
 
   const runReport = {
     generatedAt: new Date().toISOString(),
@@ -794,6 +1139,8 @@ function main() {
     },
     news: newsSummary,
     autonomy: autonomySummary,
+    awards,
+    scoreboard,
     dailyContext,
     offices: officeStatus,
     queue
