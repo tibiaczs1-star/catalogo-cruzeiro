@@ -15,6 +15,8 @@ try {
 const app = express();
 const PORT = Number(process.env.PORT || 8787);
 const HOST = process.env.HOST || "0.0.0.0";
+const ROOT_DIR = path.join(__dirname, "..");
+const INDEX2_FILE = path.join(ROOT_DIR, "index2.html");
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
 
@@ -2598,8 +2600,13 @@ app.get("/", (_req, res) => {
     ok: true,
     service: "Catálogo Cruzeiro do Sul backend",
     docs: "/admin/admin-dashboard.html",
+    index2: "/index2.html",
     time: nowIso()
   });
+});
+
+app.get(["/index2", "/index2.html"], (_req, res) => {
+  res.sendFile(INDEX2_FILE);
 });
 
 async function boot() {

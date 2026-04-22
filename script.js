@@ -896,7 +896,9 @@ const getMosaicStorySignals = (article = {}) => {
 const inferMosaicImageFocus = (article = {}, panelNode) => {
   const resolvedFocus = resolveArticleImageFocus(article, "");
   if (resolvedFocus) {
-    return resolvedFocus;
+    return normalizeHeroSafeFocusPosition(resolvedFocus, {
+      hasPeople: getMosaicStorySignals(article).prefersFace
+    });
   }
 
   const slug = String(article.slug || "").trim();
@@ -908,11 +910,11 @@ const inferMosaicImageFocus = (article = {}, panelNode) => {
   const { prefersFace, isGroupScene, isLandscape } = getMosaicStorySignals(article);
 
   if (prefersFace && isGroupScene) {
-    return isSideCard ? "42% 16%" : "40% 20%";
+    return isSideCard ? "42% 30%" : "40% 34%";
   }
 
   if (prefersFace) {
-    return isSideCard ? "center 12%" : "center 18%";
+    return isSideCard ? "center 30%" : "center 34%";
   }
 
   if (isLandscape) {
@@ -1028,7 +1030,14 @@ const applyMosaicImage = (panelNode, article) => {
 
   resolveArticleImage(article, "hero").then((safeUrl) => {
     if (!safeUrl || panelNode.dataset.mosaicImageRequest !== requestId) return;
-    paintMosaicImageElement(panelNode, safeUrl, inferMosaicImageFocus(article, panelNode));
+    const layoutMode = inferMosaicLayoutMode(article, panelNode);
+    const imageFit = layoutMode === "portrait-safe" ? "contain" : "cover";
+    panelNode.dataset.mosaicLayout = layoutMode;
+    paintSurfaceImage(panelNode, safeUrl, inferMosaicImageFocus(article, panelNode), imageFit);
+    panelNode.dataset.imageUrl = safeUrl;
+    panelNode.dataset.sourceImage = safeUrl;
+    panelNode.style.setProperty("--news-photo", `url('${safeUrl}')`);
+    panelNode.classList.add("has-photo", "has-real-photo");
   });
 };
 

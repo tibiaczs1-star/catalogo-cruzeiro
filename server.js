@@ -66,6 +66,7 @@ const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
+const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
 const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
 const REAL_AGENTS_RUNTIME_SCRIPT = path.join(ROOT_DIR, "scripts", "real-agents-runtime.js");
@@ -519,6 +520,18 @@ const STATIC_PAGE_SEO = {
     schemaType: "WebPage",
     sitemap: false,
     fileName: "pesquisa-acre-2026.html"
+  },
+  "/analyses.html": {
+    title: `Analyses | Auditoria Manual de Fotos | ${SITE_NAME}`,
+    description:
+      "Fila manual da auditoria de fotos do Catalogo, com noticias em analise, motivos do bloqueio e atalhos para revisar imagem, foco e materia.",
+    robots: "noindex,follow",
+    themeColor: "#0C1324",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    sitemap: false,
+    fileName: "analyses.html"
   },
   "/pubpaid.html": {
     title: `PubPaid Demo | ${SITE_NAME}`,
@@ -7365,6 +7378,40 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/summary") {
     return sendJson(res, 200, buildAcre2026PollPublicPayload());
+  }
+
+  if (req.method === "GET" && pathname === "/api/news-image-focus-audit") {
+    const report = readJson(NEWS_IMAGE_FOCUS_AUDIT_FILE, {});
+    const reviewQueue = Array.isArray(report.reviewQueue) ? report.reviewQueue : [];
+    const summary = report && typeof report.summary === "object" ? report.summary : {};
+    return sendJson(res, 200, {
+      ok: true,
+      updatedAt: report.updatedAt || "",
+      checkedLimit: Number(report.checkedLimit || 0) || 0,
+      total: Number(report.total || 0) || 0,
+      offline: Boolean(report.offline),
+      summary: {
+        ok: Number(summary.ok || 0) || 0,
+        review: Number(summary.review || 0) || 0,
+        warning: Number(summary.warning || 0) || 0,
+        error: Number(summary.error || 0) || 0,
+        manualFocus: Number(summary.manualFocus || 0) || 0,
+        newSinceLastAudit: Number(summary.newSinceLastAudit || 0) || 0,
+        missingImage: Number(summary.missingImage || 0) || 0,
+        unreachableImage: Number(summary.unreachableImage || 0) || 0
+      },
+      reviewQueue: reviewQueue.map((item) => ({
+        slug: safeString(item.slug || "", 200),
+        title: safeString(item.title || "Sem titulo", 220),
+        level: safeString(item.level || "review", 24),
+        reasons: Array.isArray(item.reasons)
+          ? item.reasons.map((reason) => safeString(reason || "", 120)).filter(Boolean)
+          : [],
+        imageUrl: safeString(item.imageUrl || "", 1000),
+        effectiveFocus: safeString(item.effectiveFocus || "", 80),
+        articleUrl: item.slug ? `/noticia.html?slug=${encodeURIComponent(item.slug)}` : ""
+      }))
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/bridge") {

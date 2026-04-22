@@ -26,6 +26,10 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 
 ## Atualizacao rapida 2026-04-21
 
+- Reuniao de agentes funcionais para a foto de manchete: a hero da home passou a usar foco seguro para cenas com pessoas/grupos, evitando que um recorte largo mostre so topo de cabeca; a auditoria `scripts/audit-news-image-focus.js` agora marca `hero-focus-too-high-for-wide-headline`.
+- O workflow diario `.github/workflows/daily-news-sync.yml` agora roda `npm run audit:news-images -- --limit=80 --strict-new`, bloqueando itens novos que entrem com foto ausente, pessoa/grupo sem foco manual ou foco alto demais para manchete larga.
+- Integracao de WhatsApp para essa auditoria: `scripts/audit-news-image-focus.js` aceita `--notify-whatsapp=new|all` e envia alerta pela WhatsApp Cloud API quando as secrets `WHATSAPP_ALERT_ENABLED`, `WHATSAPP_CLOUD_TOKEN`, `WHATSAPP_CLOUD_PHONE_NUMBER_ID` e `WHATSAPP_ALERT_TO` estiverem configuradas; o workflow diario ja chama `--notify-whatsapp=new`.
+- Validacoes desta rodada: `node --check script.js`, `node --check scripts/audit-news-image-focus.js`, `node --check pubpaid-v2.js`, `npm run audit:news-images -- --offline --limit=80 --strict-new`, `npm run review:team` com 0 achados e `GET /` local em `127.0.0.1:4078` com `200`.
 - A dashboard administrativa da SPO em [pesquisa-acre-2026-admin.html](C:/Users/junio/projeto codex/pesquisa-acre-2026-admin.html) foi ampliada para um painel analitico de verdade, com filtros por recorte, KPIs, leitura executiva, tendencia semanal, fluxos entre perguntas, saude da base, breakdowns por campo, cruzamentos por idade/local/profissao, sinais de comentarios e tabela rica para relatorio.
 - O cliente de [pesquisa-acre-2026-admin.js](C:/Users/junio/projeto codex/pesquisa-acre-2026-admin.js) agora aplica filtros em tempo real, gera exportacao CSV filtrada e monta as secoes analiticas em cima do recorte ativo.
 - O backend em [server.js](C:/Users/junio/projeto codex/server.js) passou a devolver mais campos administrativos da pesquisa e mais breakdowns/resumos para apoiar relatorios completos.

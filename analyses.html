@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analyses | Catalogo Cruzeiro do Sul</title>
+    <meta
+      name="description"
+      content="Fila manual da auditoria de fotos do Catalogo, com noticias em analise, motivos do bloqueio e atalhos para revisar imagem, foco e materia."
+    />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="theme-color" content="#0C1324" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./analyses.css?v=20260421a" />
+  </head>
+  <body>
+    <main class="analysis-shell">
+      <section class="analysis-hero">
+        <div class="analysis-hero-copy">
+          <p class="analysis-kicker">Manual Review Queue</p>
+          <h1>Analyses</h1>
+          <p class="analysis-summary">
+            Tudo que a auditoria marcou como <strong>review</strong> ou <strong>error</strong> fica aqui para análise manual
+            de foto, foco e enquadramento antes de ganhar a home ou abrir matéria.
+          </p>
+          <div class="analysis-hero-actions">
+            <a class="analysis-link analysis-link-primary" href="./index.html">Voltar para a home</a>
+            <a class="analysis-link" href="./pesquisa-acre-2026.html">Abrir SPO</a>
+          </div>
+        </div>
+        <div class="analysis-status-board" id="analysis-status-board" aria-live="polite">
+          <div class="analysis-stat">
+            <span class="analysis-stat-label">Em análise</span>
+            <strong id="analysis-stat-open">--</strong>
+          </div>
+          <div class="analysis-stat">
+            <span class="analysis-stat-label">Erros</span>
+            <strong id="analysis-stat-error">--</strong>
+          </div>
+          <div class="analysis-stat">
+            <span class="analysis-stat-label">Atualizado</span>
+            <strong id="analysis-stat-updated">--</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="analysis-toolbar" aria-label="Filtros da fila manual">
+        <div class="analysis-filter-group" role="tablist" aria-label="Filtrar por nível">
+          <button class="analysis-filter is-active" type="button" data-filter="all">All</button>
+          <button class="analysis-filter" type="button" data-filter="error">Errors</button>
+          <button class="analysis-filter" type="button" data-filter="review">Review</button>
+        </div>
+        <p class="analysis-toolbar-note">
+          Itens com pessoa, grupo, foto ausente ou foco alto demais entram aqui para conferência manual.
+        </p>
+      </section>
+
+      <section class="analysis-panels">
+        <article class="analysis-panel">
+          <header class="analysis-panel-header">
+            <div>
+              <p class="analysis-panel-kicker">Audit Snapshot</p>
+              <h2>Resumo da rodada</h2>
+            </div>
+          </header>
+          <div class="analysis-metrics" id="analysis-metrics"></div>
+        </article>
+
+        <article class="analysis-panel analysis-panel-queue">
+          <header class="analysis-panel-header">
+            <div>
+              <p class="analysis-panel-kicker">Manual Queue</p>
+              <h2>Itens em análise</h2>
+            </div>
+            <span class="analysis-queue-count" id="analysis-queue-count">0 itens</span>
+          </header>
+          <div class="analysis-empty" id="analysis-empty" hidden>
+            Nenhum item pendente. A auditoria está limpa nesta rodada.
+          </div>
+          <div class="analysis-card-grid" id="analysis-card-grid"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./analyses.js?v=20260421a" defer></script>
+  </body>
+</html>

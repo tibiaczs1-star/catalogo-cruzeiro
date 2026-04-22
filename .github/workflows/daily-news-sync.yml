@@ -25,7 +25,12 @@ jobs:
         run: node backend/workers/catalogo-autoupdate-worker.js --once
 
       - name: Audit news image focus
-        run: npm run audit:news-images -- --limit=80
+        run: npm run audit:news-images -- --limit=80 --strict-new --notify-whatsapp=new
+        env:
+          WHATSAPP_ALERT_ENABLED: ${{ secrets.WHATSAPP_ALERT_ENABLED }}
+          WHATSAPP_CLOUD_TOKEN: ${{ secrets.WHATSAPP_CLOUD_TOKEN }}
+          WHATSAPP_CLOUD_PHONE_NUMBER_ID: ${{ secrets.WHATSAPP_CLOUD_PHONE_NUMBER_ID }}
+          WHATSAPP_ALERT_TO: ${{ secrets.WHATSAPP_ALERT_TO }}
 
       - name: Commit and push updates
         run: |

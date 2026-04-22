@@ -16,6 +16,7 @@ const FRONTEND_FILES = [
 const DEFAULT_TIMEOUT_MS = 9000;
 const DEFAULT_CONCURRENCY = 5;
 const DEFAULT_LIMIT = 80;
+const WHATSAPP_MESSAGE_LIMIT = 3800;
 
 const personPattern =
   /\b(ciclista|atleta|jogador|jogadora|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|delegado|delegada|secretario|secretaria|ministro|ministra|presidente|artista|cantor|cantora|ator|atriz|apresentador|apresentadora|treinador|treinadora|empresario|empresaria|medico|medica|juiz|juiza|estudante|aluno|aluna|professor|professora|entrevista|familia|mae|pai|crianca|indigena)\b/;
@@ -29,12 +30,22 @@ function parseArgs(argv) {
     concurrency: DEFAULT_CONCURRENCY,
     limit: DEFAULT_LIMIT,
     offline: false,
-    strict: false
+    strict: false,
+    strictNew: false,
+    notifyWhatsapp: "off"
   };
 
   argv.forEach((arg) => {
     if (arg === "--offline") options.offline = true;
     if (arg === "--strict") options.strict = true;
+    if (arg === "--strict-new") options.strictNew = true;
+    if (arg === "--notify-whatsapp") options.notifyWhatsapp = "all";
+    if (arg.startsWith("--notify-whatsapp=")) {
+      const mode = String(arg.replace("--notify-whatsapp=", "") || "").trim().toLowerCase();
+      if (["off", "all", "new"].includes(mode)) {
+        options.notifyWhatsapp = mode;
+      }
+    }
     if (arg.startsWith("--limit=")) {
       const parsed = Number(arg.replace("--limit=", ""));
       if (Number.isFinite(parsed) && parsed > 0) options.limit = Math.floor(parsed);
@@ -165,6 +176,15 @@ function getEffectiveFocus(article, focusOverrides) {
   return slug ? String(focusOverrides[slug] || "").trim() : "";
 }
 
+function parseFocusY(focus) {
+  const tokens = String(focus || "").trim().split(/\s+/).filter(Boolean);
+  const yToken = tokens[1] || "";
+  const match = yToken.match(/^(-?\d+(?:\.\d+)?)%$/);
+  if (!match) return null;
+  const parsed = Number(match[1]);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
 function classifyArticle(article, imageCheck, focusOverrides, previousSlugs) {
   const slug = String(article.slug || article.id || article.url || article.title || "").trim();
   const title = String(article.title || article.sourceLabel || slug || "Sem titulo").trim();
@@ -206,6 +226,12 @@ function classifyArticle(article, imageCheck, focusOverrides, previousSlugs) {
 
   if (effectiveFocus) {
     reasons.push("manual-focus-present");
+  }
+
+  const focusY = parseFocusY(effectiveFocus);
+  if (peopleScene && focusY !== null && focusY < 28) {
+    level = level === "error" ? level : "review";
+    reasons.push("hero-focus-too-high-for-wide-headline");
   }
 
   return {
@@ -278,6 +304,111 @@ async function checkImageUrl(url, offline) {
       error: error.name === "AbortError" ? "timeout" : error.message
     };
   }
+}
+
+function getPublicArticleUrl(item) {
+  const siteUrl = String(process.env.SITE_URL || process.env.PUBLIC_SITE_URL || "").trim().replace(/\/+$/, "");
+  if (!siteUrl || !item.slug) return "";
+  return `${siteUrl}/noticia.html?slug=${encodeURIComponent(item.slug)}`;
+}
+
+function formatReasons(reasons = []) {
+  const labels = {
+    "missing-image-url": "sem imagem",
+    "image-unreachable": "imagem fora do ar",
+    "image-content-type-not-confirmed": "tipo de imagem nao confirmado",
+    "people-or-group-scene-without-manual-focus": "pessoa/grupo sem foco manual",
+    "group-scene-without-manual-focus": "grupo sem foco manual",
+    "manual-focus-present": "tem foco manual",
+    "hero-focus-too-high-for-wide-headline": "foco alto demais para manchete larga"
+  };
+  return reasons.map((reason) => labels[reason] || reason).join(", ");
+}
+
+function buildWhatsappAuditMessage(items = [], report = {}) {
+  const badItems = Array.isArray(items) ? items.filter(Boolean) : [];
+  const header = [
+    "Alerta do Catalogo: foto de noticia precisa revisao",
+    `Gerado em: ${new Date(report.updatedAt || Date.now()).toLocaleString("pt-BR", {
+      timeZone: "America/Rio_Branco"
+    })}`,
+    `Fila: ${badItems.length} item(ns)`
+  ];
+
+  const lines = badItems.slice(0, 8).flatMap((item, index) => {
+    const articleUrl = getPublicArticleUrl(item);
+    return [
+      "",
+      `${index + 1}. ${item.title || item.slug || "Sem titulo"}`,
+      `Nivel: ${item.level || "review"}`,
+      `Motivo: ${formatReasons(item.reasons) || "revisao de foto"}`,
+      item.effectiveFocus ? `Foco atual: ${item.effectiveFocus}` : "Foco atual: sem foco manual",
+      articleUrl ? `Abrir: ${articleUrl}` : "",
+      item.imageUrl ? `Imagem: ${item.imageUrl}` : ""
+    ].filter(Boolean);
+  });
+
+  if (badItems.length > 8) {
+    lines.push("", `Mais ${badItems.length - 8} item(ns) no arquivo data/news-image-focus-audit.json.`);
+  }
+
+  return [...header, ...lines].join("\n").slice(0, WHATSAPP_MESSAGE_LIMIT);
+}
+
+function getWhatsappConfig() {
+  return {
+    enabled: /^(1|true|yes|sim)$/i.test(String(process.env.WHATSAPP_ALERT_ENABLED || "")),
+    token: String(process.env.WHATSAPP_CLOUD_TOKEN || "").trim(),
+    phoneNumberId: String(process.env.WHATSAPP_CLOUD_PHONE_NUMBER_ID || "").trim(),
+    to: String(process.env.WHATSAPP_ALERT_TO || "").replace(/[^\d]/g, "")
+  };
+}
+
+async function sendWhatsappAuditAlert(items = [], report = {}) {
+  const config = getWhatsappConfig();
+  if (!items.length) return;
+
+  const message = buildWhatsappAuditMessage(items, report);
+  if (!config.enabled) {
+    console.log("[news-focus-audit] WhatsApp desativado. Configure WHATSAPP_ALERT_ENABLED=true para enviar alertas.");
+    return;
+  }
+
+  if (!config.token || !config.phoneNumberId || !config.to) {
+    const link = config.to ? `https://wa.me/${config.to}?text=${encodeURIComponent(message)}` : "";
+    console.warn("[news-focus-audit] WhatsApp sem credenciais completas. Configure WHATSAPP_CLOUD_TOKEN, WHATSAPP_CLOUD_PHONE_NUMBER_ID e WHATSAPP_ALERT_TO.");
+    if (link) {
+      console.warn(`[news-focus-audit] Link manual: ${link}`);
+    }
+    return;
+  }
+
+  const response = await fetch(
+    `https://graph.facebook.com/v19.0/${encodeURIComponent(config.phoneNumberId)}/messages`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${config.token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        to: config.to,
+        type: "text",
+        text: {
+          preview_url: true,
+          body: message
+        }
+      })
+    }
+  );
+
+  const body = await response.text();
+  if (!response.ok) {
+    throw new Error(`WhatsApp Cloud API ${response.status}: ${body.slice(0, 500)}`);
+  }
+
+  console.log(`[news-focus-audit] alerta WhatsApp enviado para ${config.to}.`);
 }
 
 async function mapWithConcurrency(items, concurrency, mapper) {
@@ -369,7 +500,33 @@ async function run() {
     });
   }
 
-  if (options.strict && (summary.error > 0 || summary.warning > 0)) {
+  const newBlockers = items.filter(
+    (item) => item.isNewSinceLastAudit && item.level !== "ok"
+  );
+
+  const whatsappItems =
+    options.notifyWhatsapp === "new"
+      ? newBlockers
+      : options.notifyWhatsapp === "all"
+        ? items.filter((item) => item.level !== "ok")
+        : [];
+
+  if (whatsappItems.length) {
+    try {
+      await sendWhatsappAuditAlert(whatsappItems, report);
+    } catch (error) {
+      console.error(`[news-focus-audit] falha ao enviar WhatsApp: ${error.message}`);
+      process.exitCode = 1;
+    }
+  }
+
+  if (options.strictNew && newBlockers.length) {
+    console.error(`[news-focus-audit] strict-new bloqueou ${newBlockers.length} item(ns) novo(s) para revisao de foto.`);
+    newBlockers.slice(0, 12).forEach((item) => {
+      console.error(`[news-focus-audit] novo ${item.level}: ${item.slug} (${item.reasons.join(", ")})`);
+    });
+    process.exitCode = 1;
+  } else if (options.strict && (summary.error > 0 || summary.warning > 0)) {
     process.exitCode = 1;
   }
 }

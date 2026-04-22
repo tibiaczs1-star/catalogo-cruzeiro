@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ord-mo97nfce8tzzd2",
+    "from": "Full Admin",
+    "to": "Codex CEO + agentes reais",
+    "priority": "alta",
+    "message": "Teste local do painel Agentes Reais.",
+    "ceoReply": "Rodada renovada. Os agentes reais atualizaram fila, monitoramento e ideias em cima do jornal atual.",
+    "status": "rodada-real-agents-gerada",
+    "hierarchy": "Full Admin -> Codex CEO -> 181 agentes reais",
+    "createdAt": "2026-04-21T22:43:52.046Z"
+  },
+  {
+    "id": "ord-mo980d41v6kox8",
+    "from": "Full Admin",
+    "to": "Codex CEO + agentes reais",
+    "priority": "alta",
+    "message": "Teste local final do painel Agentes Reais.",
+    "ceoReply": "Rodada renovada. Os agentes reais atualizaram fila, monitoramento e ideias em cima do jornal atual.",
+    "status": "rodada-real-agents-gerada",
+    "hierarchy": "Full Admin -> Codex CEO -> 181 agentes reais",
+    "createdAt": "2026-04-21T22:53:55.681Z"
+  },
+  {
+    "id": "ord-mo98u9740cm88c",
+    "from": "Full Admin",
+    "to": "Codex CEO + agentes reais",
+    "priority": "alta",
+    "message": "Rodada operacional dos agentes reais renovada pelo painel.",
+    "ceoReply": "Rodada renovada. Os agentes reais atualizaram fila, monitoramento e ideias em cima do jornal atual.",
+    "status": "rodada-real-agents-gerada",
+    "hierarchy": "Full Admin -> Codex CEO -> 181 agentes reais",
+    "createdAt": "2026-04-21T23:17:10.288Z"
+  },
+  {
+    "id": "ord-mo98uesmtrua1t",
+    "from": "Comunidade",
+    "to": "Codex CEO + Revisor Bento + Sofia Fontes",
+    "priority": "normal",
+    "message": "Relato comunitario nao checado recebido: Relato comunitario em Centro. Olha, isso aconteceu no bairro e seria bom verificar antes de publicar.",
+    "ceoReply": "Recebido. O relato fica publico como nao checado e entra na fila para verificacao antes de virar noticia.",
+    "status": "relato-comunitario-nao-checado",
+    "hierarchy": "Comunidade -> Avatar comunitario -> Codex CEO -> agentes de verificacao",
+    "createdAt": "2026-04-21T23:17:17.541Z"
+  },
+  {
+    "id": "ord-mo98xb6ze8ws4a",
+    "from": "Full Admin",
+    "to": "Codex CEO + todos os agentes",
+    "priority": "alta",
+    "message": "Reunir todos os agentes para avaliar e acompanhar a nova frente de participacao comunitaria voluntaria, sempre separando relatos nao checados de noticias verificadas.",
+    "ceoReply": "Recebido, Full Admin. Vou transformar essa ordem em fila para Codex CEO + todos os agentes, cobrar retorno pela hierarquia e registrar o status aqui.",
+    "status": "recebida-pelo-ceo",
+    "hierarchy": "Full Admin -> Codex CEO -> equipes",
+    "createdAt": "2026-04-21T23:19:32.843Z"
+  },
+  {
+    "id": "ord-mo9ao6ydshgtcg",
+    "from": "Full Admin",
+    "to": "Cheffe Call + todos os agentes reais",
+    "priority": "maxima",
+    "message": "Teste local: reunir agentes e pausar runtime.",
+    "ceoReply": "Cheffe Call aberto. Rotinas automaticas pausadas, agentes em escuta, memoria de reuniao criada e opinioes aguardando aprovacao.",
+    "status": "cheffe-call-ativo",
+    "hierarchy": "Full Admin -> Cheffe Call -> 181 agentes reais",
+    "createdAt": "2026-04-22T00:08:26.674Z"
+  }
+]

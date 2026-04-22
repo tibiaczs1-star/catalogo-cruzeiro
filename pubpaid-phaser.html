@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>PubPaid 2.0 | Núcleo Phaser</title>
+    <meta
+      name="description"
+      content="Núcleo definitivo em Phaser da PubPaid 2.0, com scenes, HUD, serviços e migração total do jogo."
+    />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#07101c" />
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260421b" />
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.90.0/dist/phaser.min.js"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260421b"></script>
+  </head>
+  <body class="pubpaid-phaser-page">
+    <main class="ppg-shell">
+      <section class="ppg-hero">
+        <div class="ppg-hero-copy">
+          <p class="ppg-kicker">núcleo definitivo</p>
+          <h1>PubPaid 2.0 em Phaser.</h1>
+          <p>
+            A migração do jogo saiu do laboratório e entrou em estrutura definitiva: scenes, HUD,
+            serviços e fluxo preparado para absorver rua, salão, carteira e PvP sem continuar
+            inchando um arquivo só.
+          </p>
+          <div class="ppg-actions">
+            <a class="ppg-button primary" href="./pubpaid.html">Voltar à PubPaid atual</a>
+            <a class="ppg-button" href="./escritorio-nerd.html">Conheça nossa equipe de agentes desenvolvedores</a>
+            <a class="ppg-button" href="./pubpaid-v2.html">Ver laboratório anterior</a>
+          </div>
+        </div>
+        <div class="ppg-status">
+          <span class="ppg-kicker">estado da migração</span>
+          <strong>Núcleo modular ativo</strong>
+          <p data-game-account-label>
+            Rua e salão já estão organizados em scenes separadas. O próximo salto é ligar tudo à carteira e ao matchmaking real.
+          </p>
+        </div>
+      </section>
+
+      <section class="ppg-stage">
+        <div class="ppg-canvas-shell">
+          <div id="pubpaid-phaser-root" class="ppg-game" aria-label="Jogo PubPaid 2.0 em Phaser"></div>
+          <div class="ppg-hud" data-game-hud>
+            <article>
+              <span>scene</span>
+              <strong data-game-scene>street</strong>
+            </article>
+            <article>
+              <span>focus</span>
+              <strong data-game-focus>porta principal</strong>
+            </article>
+            <article>
+              <span>modo</span>
+              <strong data-game-mode>nucleo phaser</strong>
+            </article>
+            <article>
+              <span>teste</span>
+              <strong data-game-test-balance>100</strong>
+            </article>
+            <article>
+              <span>real</span>
+              <strong data-game-real-balance>0</strong>
+            </article>
+            <article>
+              <span>objetivo</span>
+              <strong data-game-objective>entrar no PubPaid</strong>
+            </article>
+            <article>
+              <span>nerd</span>
+              <strong data-game-nerd-agent>Pixo FX</strong>
+            </article>
+          </div>
+          <div class="ppg-prompt" data-game-prompt>
+            Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão.
+          </div>
+          <aside class="ppg-panel" data-game-panel hidden aria-live="polite">
+            <div class="ppg-panel-head">
+              <div>
+                <span class="ppg-kicker" data-game-panel-kicker>interação</span>
+                <h2 data-game-panel-title>Ponto do jogo</h2>
+              </div>
+              <button type="button" data-game-panel-close aria-label="Fechar painel">✕</button>
+            </div>
+            <p data-game-panel-body></p>
+            <div class="ppg-panel-chips" data-game-panel-chips></div>
+            <div class="ppg-panel-actions" data-game-panel-actions></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="ppg-notes">
+        <article>
+          <span class="ppg-kicker">scenes</span>
+          <h2>Estrutura viva</h2>
+          <p>BootScene, StreetScene, InteriorScene e UIScene já separam responsabilidades para a migração total continuar limpa.</p>
+        </article>
+        <article>
+          <span class="ppg-kicker">services</span>
+          <h2>Próxima camada</h2>
+          <p>O próximo passo é ligar esse núcleo aos serviços reais de conta, carteira, depósito, saque e matchmaking sem voltar para o monolito anterior.</p>
+        </article>
+        <article>
+          <span class="ppg-kicker">escritório nerd</span>
+          <h2>Equipe do portal no jogo</h2>
+          <p>O PubPaid usa o time já existente do Escritório Nerd: Pixo FX, Gabi Avatar, Otto Physics, Beto HUD, Zed Engine e Tami QA orientam sprites, avatar, movimento, HUD, estado e playtest.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
