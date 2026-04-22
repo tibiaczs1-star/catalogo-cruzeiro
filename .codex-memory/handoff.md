@@ -1,24 +1,23 @@
 # Handoff
 
-Updated: 2026-04-21T23:51:27.061Z
+Updated: 2026-04-22T00:12:02.882Z
 
-Camada de autonomia implementada nos agentes reais: scripts/real-agents-runtime.js grava memoria por agente em data/real-agents-memory.json, calcula modo autonomo, intencao, urgencia, confianca e proxima checagem. server.js expõe summary/autonomy. real-agents mostra Autonomos/Media IA e cada card mostra barra/intencao. escritorio.js mostra autonomia e intencao no terminal.
+Cheffe Call implementado. /cheffe-call.html mostra sala bitmap, placar diario e opinioes. server.js adiciona /api/cheffe-call, /api/cheffe-call/start e /api/cheffe-call/release; auto-run dos agentes pula ciclos enquanto a reuniao estiver ativa. scripts/real-agents-runtime.js calcula dailyContext com agentOfDay, officeOfDay e actionOfDay a partir de autonomia/urgencia/confianca/ciclos.
 
 ## Next
 
-- Em produção
-- conferir /api/real-agents depois de alguns ciclos: autonomousAgents deve ficar em 181 e cycles/memoryLog devem crescer
+- Verificar no deploy que Cheffe Call aparece no menu e que /api/cheffe-call retorna dailyContext; abrir chamada com senha Full Admin e depois liberar runtimes
 
 ## Files In Focus
 
-- scripts/real-agents-runtime.js
+- cheffe-call.html
+- cheffe-call.css
+- cheffe-call.js
+- index.html
 - server.js
-- real-agents.html
-- real-agents.js
-- real-agents.css
-- escritorio.js
+- scripts/real-agents-runtime.js
 - .gitignore
 
 ## Related Orders
 
-- 2026-04-21-dar-mais-autonomia-operacional-aos-agentes-reais
+- 2026-04-22-criar-cheffe-call-com-teatro-bitmap-pausa-de-runtime-e-contexto-diario-dos-agent

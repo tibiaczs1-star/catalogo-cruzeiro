@@ -73,6 +73,7 @@ const REAL_AGENTS_REGISTRY_FILE = path.join(ROOT_DIR, ".codex-agents", "registry
 const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
 const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
 const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
+const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
 const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
@@ -351,6 +352,18 @@ const STATIC_PAGE_SEO = {
     priority: "0.74",
     changefreq: "hourly",
     fileName: "real-agents.html"
+  },
+  "/cheffe-call.html": {
+    title: `Cheffe Call | ${SITE_NAME}`,
+    description:
+      "Sala de reuniao dos agentes reais, com teatro bitmap, pausa operacional, memoria da reuniao, agente do dia, escritorio do dia e acao do dia.",
+    themeColor: "#120f1a",
+    colorScheme: "dark light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.73",
+    changefreq: "hourly",
+    fileName: "cheffe-call.html"
   },
   "/escritorio-nerd.html": {
     title: `Escritorio Nerd | ${SITE_NAME}`,
@@ -5094,6 +5107,7 @@ function buildRealAgentsPayload() {
     autonomy: latestRun?.autonomy || null,
     autoRun: {
       enabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
+      pausedByCheffeCall: readCheffeCallState().active,
       intervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
       running: realAgentsAutoRunState.running,
       startedAt: realAgentsAutoRunState.startedAt,
@@ -5119,6 +5133,7 @@ function buildRealAgentsPayload() {
       newsroomBridge: agent.newsroomBridge || ""
     })),
     news: latestRun?.news || null,
+    dailyContext: latestRun?.dailyContext || null,
     officeStatus: Array.isArray(latestRun?.offices) ? latestRun.offices : [],
     queue,
     reportMarkdown: latestRunMd
@@ -5145,6 +5160,131 @@ function recordRealAgentsRunHistory(entry) {
     },
     ...history
   ].slice(0, 24));
+}
+
+function readCheffeCallState() {
+  const payload = readJson(CHEFFE_CALL_STATE_FILE, {});
+  const legacyInstruction = payload["last" + "Brief" + "ing"] || "";
+  return {
+    active: Boolean(payload.active),
+    pausedAt: payload.pausedAt || "",
+    releasedAt: payload.releasedAt || "",
+    lastInstruction: payload.lastInstruction || legacyInstruction,
+    lastSessionAt: payload.lastSessionAt || "",
+    sessions: Array.isArray(payload.sessions) ? payload.sessions.slice(0, 12) : []
+  };
+}
+
+function writeCheffeCallState(state) {
+  writeJson(CHEFFE_CALL_STATE_FILE, {
+    active: Boolean(state.active),
+    pausedAt: state.pausedAt || "",
+    releasedAt: state.releasedAt || "",
+    lastInstruction: state.lastInstruction || "",
+    lastSessionAt: state.lastSessionAt || "",
+    sessions: Array.isArray(state.sessions) ? state.sessions.slice(0, 12) : []
+  });
+}
+
+function getCheffeCallOpinions(payload, instruction) {
+  const daily = payload.dailyContext || {};
+  const topAgents = Array.isArray(daily.topAgents) ? daily.topAgents.slice(0, 8) : [];
+  const fallbackQueue = Array.isArray(payload.queue) ? payload.queue.slice(0, 8) : [];
+  const source = topAgents.length
+    ? topAgents.map((item) => ({
+        name: item.name,
+        office: item.office,
+        role: item.role,
+        intent: item.intent,
+        autonomy: item.autonomy,
+        urgency: item.urgency
+      }))
+    : fallbackQueue.map((item) => ({
+        name: item.name,
+        office: item.officeLabel,
+        role: item.role,
+        intent: item.autonomy?.intent || item.assignment?.idea || "",
+        autonomy: item.autonomy?.autonomy || 0,
+        urgency: item.autonomy?.urgency || 0
+      }));
+
+  return source.map((item) => ({
+    agent: item.name,
+    office: item.office,
+    role: item.role,
+    score: item.autonomy,
+    urgency: item.urgency,
+    opinion: `${item.intent || "acompanhar o tema"}. Sobre "${cleanShortText(instruction || "tema de hoje", 120)}", minha sugestao e listar opcoes e aguardar aprovacao.`,
+    approvalRequired: true
+  }));
+}
+
+function buildCheffeCallPayload() {
+  const agentsPayload = buildRealAgentsPayload();
+  const state = readCheffeCallState();
+  return {
+    ok: agentsPayload.ok,
+    updatedAt: new Date().toISOString(),
+    meeting: {
+      active: state.active,
+      pausedAt: state.pausedAt,
+      releasedAt: state.releasedAt,
+      lastInstruction: state.lastInstruction,
+      lastSessionAt: state.lastSessionAt,
+      sessions: state.sessions
+    },
+    dailyContext: agentsPayload.dailyContext || null,
+    autonomy: agentsPayload.autonomy || null,
+    summary: agentsPayload.summary || {},
+    opinions: state.sessions[0]?.opinions || getCheffeCallOpinions(agentsPayload, state.lastInstruction)
+  };
+}
+
+function startCheffeCallSession(body) {
+  const legacyInstruction = body["brief" + "ing"] || "";
+  const instruction = cleanShortText(
+    body.instruction ||
+      legacyInstruction ||
+      "Cheffe Call aberto: pausar rotinas, memorizar contexto, ouvir a orientacao e devolver opinioes por perspectiva antes de qualquer execucao.",
+    1600
+  );
+  const agentsPayload = buildRealAgentsPayload();
+  const now = new Date().toISOString();
+  const state = readCheffeCallState();
+  const session = {
+    id: createRecordId("chef"),
+    createdAt: now,
+    instruction,
+    dailyContext: agentsPayload.dailyContext || null,
+    opinions: getCheffeCallOpinions(agentsPayload, instruction),
+    approvals: [],
+    status: "aguardando-aprovacao"
+  };
+
+  writeCheffeCallState({
+    ...state,
+    active: true,
+    pausedAt: now,
+    releasedAt: "",
+    lastInstruction: instruction,
+    lastSessionAt: now,
+    sessions: [session, ...state.sessions].slice(0, 12)
+  });
+
+  appendOfficeOrder({
+    id: createRecordId("ord"),
+    from: "Full Admin",
+    to: "Cheffe Call + todos os agentes reais",
+    priority: cleanShortText(body.priority || "maxima", 40),
+    message: instruction,
+    ceoReply:
+      "Cheffe Call aberto. Rotinas automaticas pausadas, agentes em escuta, memoria de reuniao criada e opinioes aguardando aprovacao.",
+    status: "cheffe-call-ativo",
+    hierarchy: "Full Admin -> Cheffe Call -> 181 agentes reais",
+    createdAt: now
+  });
+
+  return buildCheffeCallPayload();
 }
 
 function runRealAgentsRuntime(options = {}) {
@@ -5183,6 +5323,10 @@ function runRealAgentsRuntime(options = {}) {
 
 function runRealAgentsAutoCycle(trigger) {
   if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.running) return;
+  if (readCheffeCallState().active) {
+    realAgentsAutoRunState.lastError = "Cheffe Call ativo: runtime automatica pausada para reuniao.";
+    return;
+  }
 
   realAgentsAutoRunState.running = true;
   realAgentsAutoRunState.startedAt = new Date().toISOString();
@@ -6704,6 +6848,34 @@ async function handleApi(req, res, pathname, searchParams) {
     });
 
     return sendJson(res, 201, { ok: true, ...result.payload });
+  }
+
+  if (req.method === "GET" && pathname === "/api/cheffe-call") {
+    return sendJson(res, 200, buildCheffeCallPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/start") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+
+    return sendJson(res, 201, startCheffeCallSession(body));
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/release") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+
+    const state = readCheffeCallState();
+    writeCheffeCallState({
+      ...state,
+      active: false,
+      releasedAt: new Date().toISOString()
+    });
+    return sendJson(res, 200, buildCheffeCallPayload());
   }
 
   if (req.method === "POST" && pathname === "/api/office-neural-growth/pulse") {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-21T23:51:17.214Z",
+  "lastUpdatedAt": "2026-04-22T00:11:49.981Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -3058,6 +3058,46 @@
       ],
       "nextSteps": [],
       "notes": "A runtime passou a persistir memoria curta em data/real-agents-memory.json e calcular autonomia por agente a cada rodada de 5 minutos."
+    },
+    {
+      "id": "2026-04-22-criar-cheffe-call-com-teatro-bitmap-pausa-de-runtime-e-contexto-diario-dos-agent",
+      "createdAt": "2026-04-22T00:11:49.981Z",
+      "updatedAt": "2026-04-22T00:11:49.981Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "depois quero que vc va no jornal e la no primeiro menu, ponha a entrada para cheffe call, prepare o ambiente bitmap tipo teatro meus agentes todos centados, e eu no meio do palco, questão grafica, e o terminal, quero q nesse momento todos parem suas run times, criem memoria entedam oq ue eu to dizendo e execultem me dando suas proprias opnioes e usando suas pespectivas, e podendo fazer o que quiser para melhoria, desde que eu aprove; e que a função agente do dia ; escritorio do dia; e ação dia sejam criados, eu quero que o sistema de pontuação me entregue na sala de reunião todo dia atualização desse contexto sobre os agntes, e claro que eles evoluam",
+      "summary": "Criar Cheffe Call com teatro bitmap, pausa de runtime e contexto diario dos agentes",
+      "normalizedTasks": [
+        "entrada no primeiro menu do jornal",
+        "pagina cheffe-call com teatro bitmap e terminal",
+        "API para abrir e liberar reuniao",
+        "pausar runtime automatica durante reuniao",
+        "calcular agente do dia escritorio do dia e acao do dia",
+        "exibir opinioes dos agentes com aprovacao requerida"
+      ],
+      "filesTouched": [
+        "cheffe-call.html",
+        "cheffe-call.css",
+        "cheffe-call.js",
+        "index.html",
+        "server.js",
+        "scripts/real-agents-runtime.js",
+        ".gitignore",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "cheffe-call",
+        "agentes-reais",
+        "reuniao",
+        "autonomia",
+        "memoria",
+        "pontuacao"
+      ],
+      "nextSteps": [],
+      "notes": "Cheffe Call usa /api/cheffe-call, /api/cheffe-call/start e /api/cheffe-call/release. Quando ativo, o auto-run de 5 minutos fica pausado."
     }
   ]
 }

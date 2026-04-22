@@ -539,6 +539,95 @@ function summarizeAutonomy(queue) {
   };
 }
 
+function buildDailyAgentContext(queue) {
+  const today = new Date().toISOString().slice(0, 10);
+  const rankedAgents = queue
+    .slice()
+    .sort((a, b) => {
+      const aScore =
+        Number(a.autonomy?.autonomy || 0) * 2 +
+        Number(a.autonomy?.urgency || 0) +
+        Number(a.autonomy?.confidence || 0) +
+        Number(a.autonomy?.cycles || 0);
+      const bScore =
+        Number(b.autonomy?.autonomy || 0) * 2 +
+        Number(b.autonomy?.urgency || 0) +
+        Number(b.autonomy?.confidence || 0) +
+        Number(b.autonomy?.cycles || 0);
+      return bScore - aScore || String(a.name).localeCompare(String(b.name), "pt-BR");
+    });
+
+  const officeScores = new Map();
+  queue.forEach((item) => {
+    const current = officeScores.get(item.officeLabel) || {
+      office: item.officeLabel,
+      agents: 0,
+      autonomy: 0,
+      urgency: 0,
+      actions: []
+    };
+    current.agents += 1;
+    current.autonomy += Number(item.autonomy?.autonomy || 0);
+    current.urgency += Number(item.autonomy?.urgency || 0);
+    current.actions.push(item.assignment?.action || "");
+    officeScores.set(item.officeLabel, current);
+  });
+
+  const offices = [...officeScores.values()]
+    .map((office) => ({
+      ...office,
+      averageAutonomy: Math.round(office.autonomy / Math.max(1, office.agents)),
+      averageUrgency: Math.round(office.urgency / Math.max(1, office.agents)),
+      topAction: office.actions.find(Boolean) || "manter observacao ativa"
+    }))
+    .sort((a, b) => b.averageAutonomy + b.averageUrgency - (a.averageAutonomy + a.averageUrgency));
+
+  const agentOfDay = rankedAgents[0] || null;
+  const officeOfDay = offices[0] || null;
+
+  return {
+    date: today,
+    agentOfDay: agentOfDay
+      ? {
+          name: agentOfDay.name,
+          office: agentOfDay.officeLabel,
+          role: agentOfDay.role,
+          score: agentOfDay.autonomy?.autonomy || 0,
+          urgency: agentOfDay.autonomy?.urgency || 0,
+          confidence: agentOfDay.autonomy?.confidence || 0,
+          intent: agentOfDay.autonomy?.intent || "",
+          action: agentOfDay.assignment?.action || ""
+        }
+      : null,
+    officeOfDay: officeOfDay
+      ? {
+          office: officeOfDay.office,
+          agents: officeOfDay.agents,
+          averageAutonomy: officeOfDay.averageAutonomy,
+          averageUrgency: officeOfDay.averageUrgency,
+          action: officeOfDay.topAction
+        }
+      : null,
+    actionOfDay: agentOfDay
+      ? {
+          title: agentOfDay.assignment?.deliverable || "acao operacional",
+          owner: agentOfDay.name,
+          office: agentOfDay.officeLabel,
+          action: agentOfDay.assignment?.action || "",
+          reason: agentOfDay.autonomy?.intent || ""
+        }
+      : null,
+    topAgents: rankedAgents.slice(0, 12).map((item) => ({
+      name: item.name,
+      office: item.officeLabel,
+      role: item.role,
+      autonomy: item.autonomy?.autonomy || 0,
+      urgency: item.autonomy?.urgency || 0,
+      intent: item.autonomy?.intent || ""
+    }))
+  };
+}
+
 function buildRegistry(agents) {
   return {
     generatedAt: new Date().toISOString(),
@@ -690,6 +779,7 @@ function main() {
       "monitoramento do jornal"
   }));
   const autonomySummary = summarizeAutonomy(queue);
+  const dailyContext = buildDailyAgentContext(queue);
 
   const runReport = {
     generatedAt: new Date().toISOString(),
@@ -704,6 +794,7 @@ function main() {
     },
     news: newsSummary,
     autonomy: autonomySummary,
+    dailyContext,
     offices: officeStatus,
     queue
   };

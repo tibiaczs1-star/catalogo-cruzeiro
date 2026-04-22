@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
+    <link rel="stylesheet" href="cheffe-call.css?v=20260421a" />
+  </head>
+  <body class="cheffe-call-page">
+    <header class="call-topbar">
+      <a href="./index.html">Jornal</a>
+      <a href="./real-agents.html">Agentes reais</a>
+      <a href="./escritorio.html">Escritório</a>
+      <a href="./escritorio-arte.html">Arte</a>
+      <a href="./escritorio-ninjas.html">Ninjas</a>
+    </header>
+
+    <main class="call-shell">
+      <section class="call-theater" aria-labelledby="callTitle">
+        <div class="call-stage-copy">
+          <p class="call-kicker">Sala de reunião</p>
+          <h1 id="callTitle">Cheffe Call</h1>
+          <p>
+            Chame todos os agentes, pause a rotina automática, registre memória da reunião e receba opiniões antes
+            de aprovar qualquer ação.
+          </p>
+        </div>
+
+        <div class="bitmap-theater" aria-label="Teatro bitmap com agentes reunidos">
+          <div class="theater-curtain"></div>
+          <div class="theater-lights">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="theater-seats" id="agentAudience" aria-hidden="true"></div>
+          <div class="stage-platform">
+            <div class="stage-person stage-cheffe" title="Você no centro do palco">
+              <span class="person-head"></span>
+              <span class="person-body"></span>
+            </div>
+            <div class="stage-glow"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="daily-board" aria-label="Contexto diário dos agentes">
+        <article>
+          <span>Agente do dia</span>
+          <strong id="agentOfDay">Atualizando...</strong>
+          <p id="agentOfDayMeta">Pontuação e intenção aparecem aqui.</p>
+        </article>
+        <article>
+          <span>Escritório do dia</span>
+          <strong id="officeOfDay">Atualizando...</strong>
+          <p id="officeOfDayMeta">Autonomia média e foco diário.</p>
+        </article>
+        <article>
+          <span>Ação do dia</span>
+          <strong id="actionOfDay">Atualizando...</strong>
+          <p id="actionOfDayMeta">Nada executa sem aprovação.</p>
+        </article>
+      </section>
+
+      <section class="call-workspace">
+        <form class="call-console" id="cheffeCallForm">
+          <label>
+            Senha Full Admin
+            <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+          </label>
+          <label>
+            Orientação para todos
+            <textarea
+              name="instruction"
+              rows="7"
+              placeholder="Ex: parem a rotina, entendam este contexto, deem opinião própria por perspectiva e proponham melhorias sem executar nada antes da minha aprovação."
+            ></textarea>
+          </label>
+          <div class="call-actions">
+            <button type="submit">Abrir Cheffe Call</button>
+            <button type="button" id="releaseCall">Liberar runtimes</button>
+          </div>
+          <p id="callStatus" role="status">Sala em preparo.</p>
+        </form>
+
+        <section class="call-terminal" aria-label="Terminal da reunião">
+          <pre id="callTerminal">boot cheffe-call...</pre>
+        </section>
+      </section>
+
+      <section class="call-opinions" aria-labelledby="opinionsTitle">
+        <div class="section-head">
+          <p class="call-kicker">Perspectivas</p>
+          <h2 id="opinionsTitle">Opiniões dos agentes</h2>
+        </div>
+        <div id="opinionsList" class="opinions-list"></div>
+      </section>
+    </main>
+
+    <script defer src="cheffe-call.js?v=20260421a"></script>
+  </body>
+</html>

@@ -23,6 +23,7 @@ node_modules/
 .codex-temp/
 data/real-agents-memory.json
 data/real-agents-run-history.json
+data/cheffe-call-state.json
 .edge-headless/
 recovered-chat-assets/
 recovered-vscode-chat-assets/
