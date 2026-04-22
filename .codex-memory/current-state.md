@@ -4,12 +4,12 @@ Updated: 2026-04-22T02:05:00.000Z
 
 ## Active Goal
 
-- Fechar e subir o pacote consolidado do dia
+- Subir o restante do pacote sem incluir a frente PubPaid
 
 ## Summary
 
-Pacote local consolidado para subida: painel real-agents com premios e placares, auditoria de fotos/noticias endurecida com fila manual em Analyses, workflow diario com alerta WhatsApp, ajustes de backend/config ja prontos para deploy e frente PubPaid/PubPaid V2/Phaser incluida no lote. Home 2 segue como teste paralelo e nao entra como item a fechar nesta rodada.
+Lote desta passada separado do PubPaid: manifestos em `.codex-agents/registry.json`, sincronizacao mais nova de `data/runtime-news.json` e `news-data.js`, alem da ponte `index2` (`index2.html`, `index2-bridge.css`, `index2-bridge.js`). Os arquivos `pubpaid*.html/css/js` ficam locais e nao entram nesta subida.
 
 ## Next
 
-- Fazer commit/push do lote completo e conferir producao
+- Fazer commit/push seletivo sem PubPaid e conferir producao

@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Index 2 | Catalogo Boom</title>
+  <link rel="stylesheet" href="/index2-bridge.css?v=20260421b" />
   <style>
     :root {
       --paper: #f6f0e4;
@@ -2152,6 +2153,176 @@
       <div class="wall-grid" id="admin-wall-grid"></div>
     </section>
 
+    <section class="section index2-bridge-shell" id="system-bridge">
+      <header class="section-head">
+        <div>
+          <span class="section-kicker">Project bridge</span>
+          <h2>A index2 herda os motores do jornal por API, sem encostar na home oficial.</h2>
+        </div>
+        <p>
+          Esta camada puxa as superfícies reais do sistema para dentro do projeto 2: arquivo, comentários, relatos da comunidade,
+          newsletter, fundadores, auth e contato com a equipe.
+        </p>
+      </header>
+
+      <div class="bridge-overview-grid">
+        <article class="bridge-panel bridge-status-panel">
+          <span class="mini-kicker">Auth / session</span>
+          <h3>Estado real da conta e do login Google</h3>
+          <p id="index2-auth-status-text">Checando a sessão compartilhada do ecossistema...</p>
+          <div class="bridge-status-chips" id="index2-auth-status-chips"></div>
+          <div class="bridge-link-row">
+            <a href="/pubpaid.html">Abrir PubPaid</a>
+            <a href="/index.html#newsletter">Abrir newsletter no jornal</a>
+          </div>
+        </article>
+
+        <article class="bridge-panel bridge-status-panel">
+          <span class="mini-kicker">Founders / newsletter</span>
+          <h3>Mural real de fundadores e status do programa</h3>
+          <p id="index2-founders-summary">Carregando totais de assinatura e fundadores confirmados...</p>
+          <div class="bridge-status-chips" id="index2-founders-totals"></div>
+          <div class="bridge-link-row">
+            <a href="#index2-subscription-form">Assinar aqui na index2</a>
+            <a href="/index.html#newsletter">Ver quadro original</a>
+          </div>
+        </article>
+
+        <article class="bridge-panel bridge-status-panel">
+          <span class="mini-kicker">Archive / comments / community</span>
+          <h3>Fluxo editorial e participação do leitor</h3>
+          <p id="index2-activity-summary">Carregando os sinais públicos do jornal original...</p>
+          <div class="bridge-status-chips" id="index2-activity-chips"></div>
+          <div class="bridge-link-row">
+            <a href="#index2-archive-results">Pesquisar arquivo</a>
+            <a href="#index2-comments-feed">Ler comentários</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="bridge-grid bridge-grid-primary">
+        <article class="bridge-panel bridge-panel-wide">
+          <span class="mini-kicker">Arquivo herdado</span>
+          <h3>Busca local em cima do mesmo acervo do jornal</h3>
+          <p>
+            A index2 pesquisa e reaproveita a base real de notícias do projeto, sem duplicar o jornal nem criar um feed paralelo.
+          </p>
+          <form class="bridge-form bridge-search-form" id="index2-archive-form">
+            <label class="bridge-field">
+              <span>Buscar notícia, fonte ou categoria</span>
+              <input id="index2-archive-query" type="search" placeholder="Ex.: transporte, Bruno Gagliasso, saúde, ac24horas" />
+            </label>
+            <button type="submit">Search archive</button>
+          </form>
+          <div class="bridge-results" id="index2-archive-results"></div>
+        </article>
+
+        <article class="bridge-panel">
+          <span class="mini-kicker">Comentários reais</span>
+          <h3>Leitura da comunidade</h3>
+          <p>Os comentários publicados no sistema principal aparecem aqui também.</p>
+          <div class="bridge-feed" id="index2-comments-feed"></div>
+        </article>
+      </div>
+
+      <div class="bridge-grid">
+        <article class="bridge-panel">
+          <span class="mini-kicker">Comentar pela index2</span>
+          <h3>Enviar comentário para o mesmo backend</h3>
+          <form class="bridge-form" id="index2-comment-form">
+            <label class="bridge-field">
+              <span>Nome</span>
+              <input id="index2-comment-name" type="text" maxlength="80" placeholder="Seu nome ou apelido" required />
+            </label>
+            <label class="bridge-field">
+              <span>Comentário</span>
+              <textarea id="index2-comment-message" maxlength="300" placeholder="Escreva o que você achou..." required></textarea>
+            </label>
+            <button type="submit">Publish comment</button>
+            <p class="bridge-feedback" id="index2-comment-feedback" role="status"></p>
+          </form>
+        </article>
+
+        <article class="bridge-panel">
+          <span class="mini-kicker">Relatos comunitários</span>
+          <h3>Registrar aviso do bairro pelo projeto 2</h3>
+          <form class="bridge-form" id="index2-community-form">
+            <label class="bridge-field">
+              <span>Título curto</span>
+              <input id="index2-community-title" type="text" maxlength="120" placeholder="Ex.: Rua sem luz no bairro..." required />
+            </label>
+            <label class="bridge-field">
+              <span>Bairro ou referência</span>
+              <input id="index2-community-location" type="text" maxlength="120" placeholder="Bairro, rua, ponte, escola..." />
+            </label>
+            <label class="bridge-field">
+              <span>Relato</span>
+              <textarea id="index2-community-message" maxlength="500" placeholder="Conte o que aconteceu e o que precisa verificar." required></textarea>
+            </label>
+            <button type="submit">Send report</button>
+            <p class="bridge-feedback" id="index2-community-feedback" role="status"></p>
+          </form>
+          <div class="bridge-feed" id="index2-community-feed"></div>
+        </article>
+      </div>
+
+      <div class="bridge-grid">
+        <article class="bridge-panel">
+          <span class="mini-kicker">Newsletter / founders</span>
+          <h3>Mesma assinatura do ecossistema, agora pela index2</h3>
+          <form class="bridge-form" id="index2-subscription-form">
+            <label class="bridge-field">
+              <span>Nome</span>
+              <input id="index2-subscription-name" type="text" maxlength="100" placeholder="Seu nome" required />
+            </label>
+            <label class="bridge-field">
+              <span>E-mail</span>
+              <input id="index2-subscription-email" type="email" maxlength="120" placeholder="voce@email.com" required />
+            </label>
+            <label class="bridge-field">
+              <span>Plano</span>
+              <select id="index2-subscription-plan">
+                <option value="resumo-7h-gratis">Resumo das 7h</option>
+                <option value="fundadores">Fundadores</option>
+              </select>
+            </label>
+            <label class="bridge-field" id="index2-founder-amount-wrap" hidden>
+              <span>Valor do apoio fundador</span>
+              <input id="index2-founder-amount" type="number" min="1" max="10" step="1" value="5" />
+            </label>
+            <button type="submit">Join from index2</button>
+            <p class="bridge-feedback" id="index2-subscription-feedback" role="status"></p>
+          </form>
+          <div class="bridge-founders-wall" id="index2-founders-wall"></div>
+        </article>
+
+        <article class="bridge-panel">
+          <span class="mini-kicker">Contato da equipe</span>
+          <h3>Mensagem direta para os agentes</h3>
+          <form class="bridge-form" id="index2-agent-form">
+            <label class="bridge-field">
+              <span>Nome</span>
+              <input id="index2-agent-name" type="text" maxlength="80" placeholder="Seu nome" />
+            </label>
+            <label class="bridge-field">
+              <span>E-mail</span>
+              <input id="index2-agent-email" type="email" maxlength="120" placeholder="voce@email.com" />
+            </label>
+            <label class="bridge-field">
+              <span>Assunto</span>
+              <input id="index2-agent-subject" type="text" maxlength="120" placeholder="Assunto da mensagem" />
+            </label>
+            <label class="bridge-field">
+              <span>Mensagem</span>
+              <textarea id="index2-agent-message" maxlength="1200" placeholder="Escreva sua mensagem para a equipe." required></textarea>
+            </label>
+            <button type="submit">Send to agents</button>
+            <p class="bridge-feedback" id="index2-agent-feedback" role="status"></p>
+          </form>
+        </article>
+      </div>
+    </section>
+
     <footer class="footer-crowd" id="footer-crowd">
       <div class="footer-crowd-head">
         <div class="footer-crowd-copy">
@@ -2196,6 +2367,7 @@
     </footer>
   </div>
   <script src="/news-data.js"></script>
+  <script src="/index2-bridge.js?v=20260421b" defer></script>
   <script>
     const REAL_MODULES = [
       { title: "Home principal", href: "/index.html", note: "Radar, hero, arquivo, fluxo editorial e agenda viva." },

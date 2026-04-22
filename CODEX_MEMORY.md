@@ -44,6 +44,10 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 - Force-sync admin da SPO: [server.js](C:/Users/junio/projeto codex/server.js) ganhou `/api/pesquisa-acre-2026/admin/force-sync` para normalizar/deduplicar votos reais existentes em `acre-2026-poll.json` e recalcular parciais; teste local com 2 votos simulados retornou total publico 2.
 - Aviso legal da SPO: [pesquisa-acre-2026.html](C:/Users/junio/projeto codex/pesquisa-acre-2026.html) passou a apresentar a pagina como enquete/sondagem espontanea pessoal, sem carater cientifico, sem plano amostral, sem representatividade estatistica e nao registrada no TSE; tambem explica o uso do Google para limitar uma resposta por conta e nao exibir dados pessoais nas parciais.
 
+## Atualizacao rapida 2026-04-22
+
+- O usuario pediu para subir tudo que faltou menos a frente `PubPaid`; a rodada de commit/push desta passada deve incluir apenas manifestos/registry, sincronizacao de noticias e a ponte da `index2`, deixando `pubpaid.html`, `pubpaid-v2.html`, `pubpaid-phaser.html` e afins fora do commit.
+
 ## Pedido atual em andamento
 
 Fechar o pacote final desta rodada:
