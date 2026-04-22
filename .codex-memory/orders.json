@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-22T01:05:34.686Z",
+  "lastUpdatedAt": "2026-04-22T01:22:49.593Z",
   "orders": [
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
@@ -3122,6 +3122,21 @@
       "source": "chat",
       "rawRequest": "ok por dia, por semana e nos mes, e eles tem que pontuar e etc, ta certo isso se for pode subir",
       "summary": "Adicionar placar diario semanal mensal dos agentes e subir se validado",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-subir-manifestos-atualizados-dos-agentes-reais",
+      "createdAt": "2026-04-22T01:22:49.593Z",
+      "updatedAt": "2026-04-22T01:22:49.593Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Manifestos",
+      "summary": "Subir manifestos atualizados dos agentes reais",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
