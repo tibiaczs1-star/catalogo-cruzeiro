@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentes Reais em Operação • Catálogo Cruzeiro do Sul</title>
+    <link rel="stylesheet" href="real-agents.css?v=20260422a" />
+    <link rel="stylesheet" href="./uix-design-system.css?v=20260422a" />
+  </head>
+  <body class="real-agents-page">
+    <header class="agents-topbar">
+      <a href="index.html">Home</a>
+      <a href="escritorio.html">Escritório</a>
+      <a href="escritorio-arte.html">Arte</a>
+      <a href="escritorio-ninjas.html">Ninjas</a>
+    </header>
+
+    <main class="agents-shell">
+      <section class="agents-hero" aria-labelledby="agentsTitle">
+        <div>
+          <p class="agents-kicker">Operação viva</p>
+          <h1 id="agentsTitle">Agentes reais do jornal</h1>
+          <p>
+            Cadastro, capacidades, monitoramento e fila de trabalho dos agentes que acompanham as notícias,
+            revisões e oportunidades do portal.
+          </p>
+        </div>
+        <form class="agents-runner" id="agentsRunner">
+          <label>
+            Senha Full Admin
+            <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+          </label>
+          <button type="submit">Rodar agora</button>
+          <span id="agentsStatus" role="status">Abrindo operação...</span>
+        </form>
+      </section>
+
+      <section class="agents-stats" id="agentsStats" aria-label="Resumo dos agentes"></section>
+
+      <section class="agents-awards" aria-labelledby="awardsTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Caça aos melhores</p>
+            <h2 id="awardsTitle">Pontuação e premiações do escritório</h2>
+          </div>
+          <p id="awardsChase">Disputa dos agentes em atualização.</p>
+        </div>
+        <div id="awardsPodium" class="agents-podium"></div>
+        <div id="awardsCatalog" class="agents-awards-catalog" aria-label="Tipos de premiação"></div>
+      </section>
+
+      <section class="agents-scoreboard" aria-labelledby="scoreboardTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Temporadas</p>
+            <h2 id="scoreboardTitle">Placar do dia, da semana e do mês</h2>
+          </div>
+          <p>Os pontos acumulam a cada rodada operacional e renovam a disputa entre agentes e escritórios.</p>
+        </div>
+        <div id="scoreboardPeriods" class="agents-scoreboard-grid"></div>
+      </section>
+
+      <section class="agents-layout">
+        <aside class="agents-sidebar">
+          <div class="agents-panel">
+            <h2>Escritórios</h2>
+            <div id="officeList" class="agents-office-list"></div>
+          </div>
+          <div class="agents-panel">
+            <h2>Funções</h2>
+            <div id="roleList" class="agents-role-list"></div>
+          </div>
+        </aside>
+
+        <section class="agents-main-panel" aria-labelledby="queueTitle">
+          <div class="agents-toolbar">
+            <div>
+              <h2 id="queueTitle">Fila operacional</h2>
+              <p id="runMeta">Última rodada ainda não carregada.</p>
+            </div>
+            <input id="agentSearch" type="search" placeholder="Buscar agente, escritório, função ou tarefa" />
+          </div>
+          <div id="queueList" class="agents-queue"></div>
+        </section>
+      </section>
+    </main>
+
+    <script defer src="real-agents.js?v=20260422a"></script>
+  </body>
+</html>

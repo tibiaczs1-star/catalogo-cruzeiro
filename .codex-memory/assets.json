@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-21T22:51:05.958Z",
+  "lastUpdatedAt": "2026-04-22T12:14:41.489Z",
   "assets": [
     {
       "id": "recovered-chat-assets",
@@ -290,6 +290,247 @@
       "note": "Captura desktop da PubPaid Phaser com HUD do Escritório Nerd integrado",
       "linkedOrderIds": [],
       "createdAt": "2026-04-21T22:51:05.958Z"
+    },
+    {
+      "id": "pubpaid-design-reuniao-2026-04-21-md",
+      "kind": "report",
+      "path": ".codex-temp/reports/pubpaid-design-reuniao-2026-04-21.md",
+      "source": "workspace",
+      "note": "Relatorio da reuniao de pesquisa do PubPaid 2.0 com stack recomendada, agentes convocados e decisao de matar a splash externa.",
+      "linkedOrderIds": [
+        "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design"
+      ],
+      "createdAt": "2026-04-22T04:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-game-design-stack-md",
+      "kind": "doc",
+      "path": "PUBPAID_GAME_DESIGN_STACK.md",
+      "source": "workspace",
+      "note": "Documento central do projeto com direcao, ferramentas, extensoes recomendadas e proxima arquitetura do PubPaid 2.0.",
+      "linkedOrderIds": [
+        "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design"
+      ],
+      "createdAt": "2026-04-22T04:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-intro-scene-final-shot",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-intro-scene-final/shot-0.png",
+      "source": "workspace",
+      "note": "Captura final da IntroScene PubPaid em Phaser: fachada noturna, placa PUB PAID no predio, card de aceite sobre o canvas sem erro de console.",
+      "linkedOrderIds": [
+        "2026-04-22-criar-introscene-phaser-da-fachada-pubpaid-com-placa-no-predio"
+      ],
+      "createdAt": "2026-04-22T05:37:22.287Z"
+    },
+    {
+      "id": "pubpaid-bitmap-intro-start-shot",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-bitmap-intro-start/shot-0.png",
+      "source": "workspace",
+      "note": "Captura do inicio da abertura PubPaid com o primeiro bitmap rodando limpo, sem overlay.",
+      "linkedOrderIds": [
+        "2026-04-22-montar-abertura-pubpaid-com-6-bitmaps-e-ui-de-termos-login-sobre-frame-final"
+      ],
+      "createdAt": "2026-04-22T05:52:08.606Z"
+    },
+    {
+      "id": "pubpaid-bitmap-intro-final-shot",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-bitmap-intro-final/shot-0.png",
+      "source": "workspace",
+      "note": "Captura do frame 6 congelado com painel pixel de termos sobre o jogo, inspirado na referencia de interface enviada pelo usuario.",
+      "linkedOrderIds": [
+        "2026-04-22-montar-abertura-pubpaid-com-6-bitmaps-e-ui-de-termos-login-sobre-frame-final"
+      ],
+      "createdAt": "2026-04-22T05:52:08.623Z"
+    },
+    {
+      "id": "output-web-game-full-page-pubpaid-adjust",
+      "kind": "image",
+      "path": "output/web-game/full-page-pubpaid-adjust.png",
+      "source": "workspace",
+      "note": "Captura do frame final PubPaid 2 com painel de termos reduzido e alinhado no canto inferior direito.",
+      "linkedOrderIds": [
+        "2026-04-22-ajustar-abertura-pubpaid-2-painel-e-entrada-local"
+      ],
+      "createdAt": "2026-04-22T05:36:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-street-after-local-entry",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-street-after-local-entry.png",
+      "source": "workspace",
+      "note": "Captura apos aceitar termos e entrar no modo local; StreetScene e UIScene ativas sem erro de console.",
+      "linkedOrderIds": [
+        "2026-04-22-ajustar-abertura-pubpaid-2-painel-e-entrada-local"
+      ],
+      "createdAt": "2026-04-22T05:36:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-intro-seq-contact-sheet",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-intro-seq-contact-sheet.jpg",
+      "source": "workspace",
+      "note": "Prancheta com os 16 frames da abertura PubPaid 2, incluindo intermediarios gerados entre os 6 bitmaps originais.",
+      "linkedOrderIds": [
+        "2026-04-22-criar-frames-intermediarios-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T05:50:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-intro-16frames-overlay",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-intro-16frames-overlay.png",
+      "source": "workspace",
+      "note": "Captura da abertura PubPaid 2 apos tocar a sequencia de 16 frames e abrir o painel de termos sem erros.",
+      "linkedOrderIds": [
+        "2026-04-22-criar-frames-intermediarios-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T05:50:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-16bit-sound-toggle",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-16bit-sound-toggle.png",
+      "source": "workspace",
+      "note": "Captura do botao Som ligado durante a intro PubPaid 2 com trilha 16-bit ativa.",
+      "linkedOrderIds": [
+        "2026-04-22-adicionar-trilha-sonora-16bit-tech-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:08:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-16bit-sound-street",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-16bit-sound-street.png",
+      "source": "workspace",
+      "note": "Captura apos entrada local na StreetScene mantendo music=on sem erros de console.",
+      "linkedOrderIds": [
+        "2026-04-22-adicionar-trilha-sonora-16bit-tech-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:08:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-sound-synced-intro",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-sound-synced-intro.png",
+      "source": "workspace",
+      "note": "Captura final da intro com Som ligado e musicIntroSynced=yes.",
+      "linkedOrderIds": [
+        "2026-04-22-sincronizar-trilha-16bit-com-frames-da-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:22:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-sound-synced-street",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-sound-synced-street.png",
+      "source": "workspace",
+      "note": "Captura da StreetScene mantendo music=on e musicIntroSynced=yes apos a entrada.",
+      "linkedOrderIds": [
+        "2026-04-22-sincronizar-trilha-16bit-com-frames-da-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:22:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-permission-gate",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-permission-gate.png",
+      "source": "workspace",
+      "note": "Captura da tela de permissões antes da intro PubPaid 2: ativar som e tela cheia.",
+      "linkedOrderIds": [
+        "2026-04-22-adicionar-gate-permissoes-som-fullscreen-antes-intro-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:42:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-permission-started",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-permission-started.png",
+      "source": "workspace",
+      "note": "Captura apos ativar permissões: intro iniciada com fullscreen e musica sincronizada.",
+      "linkedOrderIds": [
+        "2026-04-22-adicionar-gate-permissoes-som-fullscreen-antes-intro-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:42:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-premium-intro-lights-mid",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-premium-intro-lights-mid.png",
+      "source": "workspace",
+      "note": "Captura no meio da intro premium com glow de celular, luzes e partículas.",
+      "linkedOrderIds": [
+        "2026-04-22-deixar-intro-pubpaid-premium-com-luzes-camera-10s"
+      ],
+      "createdAt": "2026-04-22T07:02:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-premium-intro-lights-overlay",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-premium-intro-lights-overlay.png",
+      "source": "workspace",
+      "note": "Captura final da intro premium com overlay de termos apos 10.26s, fullscreen e musica sincronizada.",
+      "linkedOrderIds": [
+        "2026-04-22-deixar-intro-pubpaid-premium-com-luzes-camera-10s"
+      ],
+      "createdAt": "2026-04-22T07:02:00.000-05:00"
+    },
+    {
+      "id": "uix-original-20260422-060240",
+      "kind": "backup",
+      "path": ".codex-backups/uix-original-20260422-060240",
+      "source": "workspace",
+      "note": "Backup completo antes da rodada UIX Design Pass A: patch binário, status git, HEAD e cópia dos arquivos alterados/novos relevantes.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-22T11:13:40.182Z"
+    },
+    {
+      "id": "uix-pass-a-20260422-061527",
+      "kind": "backup",
+      "path": ".codex-backups/uix-pass-a-20260422-061527",
+      "source": "workspace",
+      "note": "Backup da versão UIX Pass A antes de aplicar a rodada Pass B de contraste premium.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-22T11:21:10.358Z"
+    },
+    {
+      "id": "pubpaid-pixel-enter-street-v4-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-pixel-enter-street-v4.png",
+      "source": "workspace",
+      "note": "Validacao do fluxo apos clicar no Enter Game pixelado: splash fechada e StreetScene ativa",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-22T12:03:14.684Z"
+    },
+    {
+      "id": "pubpaid-pixel-enter-menu-v4-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-pixel-enter-menu-v4.png",
+      "source": "workspace",
+      "note": "Menu final do PubPaid 2 redesenhado em pixel art sobre o frame final da intro",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-22T12:03:14.714Z"
+    },
+    {
+      "id": "pubpaid-mobile-iphone13-menu-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-mobile-iphone13-menu.png",
+      "source": "workspace",
+      "note": "Validacao do menu pixelado do PubPaid 2 em viewport iPhone 13",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-22T12:14:41.437Z"
+    },
+    {
+      "id": "pubpaid-mobile-pixel7-street-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-mobile-pixel7-street.png",
+      "source": "workspace",
+      "note": "Validacao da StreetScene do PubPaid 2 em viewport Pixel 7 com HUD mobile",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-22T12:14:41.489Z"
     }
   ]
 }

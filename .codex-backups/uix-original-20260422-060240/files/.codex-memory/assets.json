@@ -1,0 +1,438 @@
+{
+  "version": 1,
+  "lastUpdatedAt": "2026-04-22T05:52:08.623Z",
+  "assets": [
+    {
+      "id": "recovered-chat-assets",
+      "kind": "directory",
+      "path": "recovered-chat-assets",
+      "source": "workspace",
+      "note": "Imagens recuperadas de chats anteriores; referencia local para retomadas visuais."
+    },
+    {
+      "id": "recovered-vscode-chat-assets",
+      "kind": "directory",
+      "path": "recovered-vscode-chat-assets",
+      "source": "workspace",
+      "note": "Imagens recuperadas do historico do VS Code; referencia local para retomadas visuais."
+    },
+    {
+      "id": "session-recovery-review",
+      "kind": "directory",
+      "path": ".codex-temp/session-recovery-review",
+      "source": "workspace",
+      "note": "Capturas de validacao e revisao feitas durante recuperacao de contexto."
+    },
+    {
+      "id": "focus-review",
+      "kind": "directory",
+      "path": ".codex-temp/focus-review",
+      "source": "workspace",
+      "note": "Imagens baixadas para revisao manual de enquadramento e foco."
+    },
+    {
+      "id": "review-team-report-md",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio final da equipe local de revisao apos limpeza editorial: 0 achados",
+      "linkedOrderIds": [
+        "2026-04-17-usar-o-script-local-de-memoria-para-registrar-ordens-e-assets-antes-de-retomar"
+      ],
+      "createdAt": "2026-04-17T06:48:43.198Z"
+    },
+    {
+      "id": "review-team-report-json",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.json",
+      "source": "workspace",
+      "note": "JSON final da equipe local de revisao apos limpeza editorial: 0 achados",
+      "linkedOrderIds": [
+        "2026-04-17-usar-o-script-local-de-memoria-para-registrar-ordens-e-assets-antes-de-retomar"
+      ],
+      "createdAt": "2026-04-17T06:48:51.603Z"
+    },
+    {
+      "id": "escritorio-office-review",
+      "kind": "image",
+      "path": ".codex-temp/escritorio-office-review-2.png",
+      "source": "workspace",
+      "note": "Captura visual final da pagina Escritorio dos Agentes com 13 agentes pixel art organizados por sala",
+      "linkedOrderIds": [
+        "2026-04-17-criar-pagina-escritorio-com-equipe-de-agentes-especialistas-em-pixel-art-animado"
+      ],
+      "createdAt": "2026-04-17T07:06:53.037Z"
+    },
+    {
+      "id": "referencia-escritorio-pixel-art",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/i-built-a-vs-code-extension-that-turns-your-claude-code-v0-MHl3cnRocWUxM2xnMbvtL0B61oe6XNv4AO8qHgKPNvsjjvkkXlOSOZr9d975.webp",
+      "source": "workspace",
+      "note": "Referência enviada pelo usuário para refazer o escritório em pixel art top-down com moldura estilo IDE",
+      "linkedOrderIds": [
+        "2026-04-17-refazer-modelo-visual-do-escritorio-em-pixel-art-top-down-inspirado-na-referenci"
+      ],
+      "createdAt": "2026-04-17T07:17:37.811Z"
+    },
+    {
+      "id": "escritorio-reference-redesign-final",
+      "kind": "image",
+      "path": ".codex-temp/escritorio-reference-redesign-final.png",
+      "source": "workspace",
+      "note": "Captura final do Escritório dos Agentes redesenhado em pixel art top-down estilo IDE com terminal lateral",
+      "linkedOrderIds": [
+        "2026-04-17-refazer-modelo-visual-do-escritorio-em-pixel-art-top-down-inspirado-na-referenci"
+      ],
+      "createdAt": "2026-04-17T07:17:37.871Z"
+    },
+    {
+      "id": "claude-office-visualizer-real-time-pixel-art-visualization-v0-lxk8ahysl4fg1-webp",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/claude-office-visualizer-real-time-pixel-art-visualization-v0-lxk8ahysl4fg1.webp",
+      "source": "workspace",
+      "note": "Referência adicional do usuário para escritório pixel art mais elaborado com terminal e personagens melhores",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T07:55:14.948Z"
+    },
+    {
+      "id": "game-pixel-agents-programacao-codigo-webp",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/game_pixel-agents_programacao_codigo.webp",
+      "source": "workspace",
+      "note": "Referência adicional do usuário para planta top-down com salas, estantes e escritório pixel art",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T07:55:15.054Z"
+    },
+    {
+      "id": "escritorio-floor-art-v1-png",
+      "kind": "image",
+      "path": "assets/escritorio-floor-art-v1.png",
+      "source": "workspace",
+      "note": "Background bitmap pixel art gerado para a planta do Escritorio, usado no mapa em vez de fundo puramente CSS",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T08:04:27.843Z"
+    },
+    {
+      "id": "escritorio-floor-art-v2-png",
+      "kind": "image",
+      "path": "assets/escritorio-floor-art-v2.png",
+      "source": "workspace",
+      "note": "Background bitmap maior do Escritorio, com corredores mais abertos, desk executivo no alto esquerdo e mais folga para circulação dos agentes",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T08:14:08.916Z"
+    },
+    {
+      "id": "manifest-json",
+      "kind": "data",
+      "path": "sprite-vault/manifest.json",
+      "source": "workspace",
+      "note": "Manifesto inicial do cofre de sprites com o primeiro lote Kenney em CC0",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T19:49:00.451Z"
+    },
+    {
+      "id": "dns-runbook-catalogo-md",
+      "kind": "doc",
+      "path": "DNS_RUNBOOK_CATALOGO.md",
+      "source": "workspace",
+      "note": "Runbook concreto para ativacao de DNS e dominio publico do portal",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-17T19:52:37.553Z"
+    },
+    {
+      "id": "pubpaid-roulette-bar-backdrop-v2",
+      "kind": "image",
+      "path": "assets/pubpaid-roulette-bar-backdrop-v2.png",
+      "source": "workspace",
+      "note": "Bitmap novo do canto de bar usado atras da roleta compacta da PubPaid",
+      "linkedOrderIds": [
+        "2026-04-17-restaurar-a-roleta-da-pubpaid-para-um-visual-mais-compacto-com-garcom-fixo-no-balcao-e-jukebox-mais-lenta"
+      ],
+      "createdAt": "2026-04-17T23:30:00.000Z"
+    },
+    {
+      "id": "pubpaid-roulette-dealer-v2",
+      "kind": "image",
+      "path": "assets/pubpaid-roulette-dealer-v2.png",
+      "source": "workspace",
+      "note": "Bitmap novo da operadora estatica da roleta compacta da PubPaid",
+      "linkedOrderIds": [
+        "2026-04-17-restaurar-a-roleta-da-pubpaid-para-um-visual-mais-compacto-com-garcom-fixo-no-balcao-e-jukebox-mais-lenta"
+      ],
+      "createdAt": "2026-04-17T23:30:00.000Z"
+    },
+    {
+      "id": "escritorio-floor-art-west-v1-png",
+      "kind": "image",
+      "path": "assets/escritorio-floor-art-west-v1.png",
+      "source": "workspace",
+      "note": "Bitmap tematico do Velho Oeste para o escritorio, preservando a leitura de colisao da planta",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-18T00:40:54.337Z"
+    },
+    {
+      "id": "escritorio-floor-art-arcade-v1-png",
+      "kind": "image",
+      "path": "assets/escritorio-floor-art-arcade-v1.png",
+      "source": "workspace",
+      "note": "Bitmap tematico neon para o escritorio nerd arcade, no mesmo enquadramento top-down do mapa original",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-18T00:40:54.376Z"
+    },
+    {
+      "id": "founders-recommencer-logo-svg",
+      "kind": "image",
+      "path": "assets/founders-recommencer-logo.svg",
+      "source": "workspace",
+      "note": "Logo Recommencer aplicado aos fundadores no splash e banners",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-18T01:41:31.889Z"
+    },
+    {
+      "id": "reuniao-geral-escritorios-2026-04-19",
+      "kind": "report",
+      "path": ".codex-temp/reports/reuniao-geral-escritorios-2026-04-19.md",
+      "source": "workspace",
+      "note": "Relatorio da reuniao geral dos escritorios: validacao Render/local, achados editoriais, pesquisa open source dos jogos e relatorio Ninja de sprites.",
+      "linkedOrderIds": [
+        "2026-04-19-rodada-geral-de-validacao-atualizacao-pesquisa-open-source-de-jogos-e-relatorio-"
+      ],
+      "createdAt": "2026-04-19T14:55:16.445Z"
+    },
+    {
+      "id": "reuniao-geral-fontes-jurua-2026-04-19-md",
+      "kind": "report",
+      "path": ".codex-temp/reports/reuniao-geral-fontes-jurua-2026-04-19.md",
+      "source": "workspace",
+      "note": "Relatório da reunião geral com mapeamento de fontes do Vale do Juruá, blogs, redes e prioridades editoriais",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-19T20:04:45.507Z"
+    },
+    {
+      "id": "insiders-empty-street-v1-png",
+      "kind": "image",
+      "path": "assets/insiders-empty-street-v1.png",
+      "source": "workspace",
+      "note": "Bitmap da avenida vazia usado no novo palco de marcha do rodape Insiders",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T00:48:51.501Z"
+    },
+    {
+      "id": "gravando-2026-04-19-202609-mp4",
+      "kind": "video",
+      "path": "c:/Users/junio/Downloads/Gravando 2026-04-19 202609.mp4",
+      "source": "workspace",
+      "note": "Vídeo enviado pelo usuário mostrando a hero desktop sem os destaques visuais e com lateral translúcida.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T01:38:23.072Z"
+    },
+    {
+      "id": "chat-attachment-hero-blue-tone-feedback-2026-04-20",
+      "kind": "image",
+      "path": "[chat-attachment] hero-blue-tone-feedback-2026-04-20",
+      "source": "workspace",
+      "note": "Captura enviada no chat mostrando a hero principal ainda cinza/lavada; o usuário pediu que o bloco ficasse claramente em tom azul.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T01:40:58.480Z"
+    },
+    {
+      "id": "captura-de-tela-2026-04-19-205135-png",
+      "kind": "image",
+      "path": "c:/Users/junio/Downloads/Captura de tela 2026-04-19 205135.png",
+      "source": "workspace",
+      "note": "Captura do usuario mostrando a faixa superior azul com botoes no topo da home",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T02:04:39.926Z"
+    },
+    {
+      "id": "captura-de-tela-2026-04-19-205117-png",
+      "kind": "image",
+      "path": "c:/Users/junio/OneDrive/Imagens/Screenshots/Captura de tela 2026-04-19 205117.png",
+      "source": "workspace",
+      "note": "Captura do usuario com circulos marcando problemas na hero desktop e na faixa inferior azul",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-20T02:04:40.072Z"
+    },
+    {
+      "id": "pubpaid-v2-street-bg-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid-v2-street-bg-v1.png",
+      "source": "workspace",
+      "note": "Background bitmap pixel art da rua/fachada PubPaid 2.0, gerado para substituir o desenho por retângulos no canvas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-21T19:43:33.116Z"
+    },
+    {
+      "id": "latest-run-md",
+      "kind": "report",
+      "path": ".codex-temp/real-agents/latest-run.md",
+      "source": "workspace",
+      "note": "Primeira rodada operacional dos agentes reais do projeto",
+      "linkedOrderIds": [
+        "2026-04-21-listar-todos-os-agentes-subagentes-equipes-locais-prompts-do-copilot-agentes-vis"
+      ],
+      "createdAt": "2026-04-21T20:34:44.876Z"
+    },
+    {
+      "id": "nerd-hud-mobile-fixed-full-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-phaser-review/nerd-hud-mobile-fixed-full.png",
+      "source": "workspace",
+      "note": "Captura mobile full-page da PubPaid Phaser após corrigir HUD nerd cortado",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-21T22:51:05.931Z"
+    },
+    {
+      "id": "nerd-hud-desktop-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-phaser-review/nerd-hud-desktop.png",
+      "source": "workspace",
+      "note": "Captura desktop da PubPaid Phaser com HUD do Escritório Nerd integrado",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-21T22:51:05.958Z"
+    },
+    {
+      "id": "pubpaid-design-reuniao-2026-04-21-md",
+      "kind": "report",
+      "path": ".codex-temp/reports/pubpaid-design-reuniao-2026-04-21.md",
+      "source": "workspace",
+      "note": "Relatorio da reuniao de pesquisa do PubPaid 2.0 com stack recomendada, agentes convocados e decisao de matar a splash externa.",
+      "linkedOrderIds": [
+        "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design"
+      ],
+      "createdAt": "2026-04-22T04:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-game-design-stack-md",
+      "kind": "doc",
+      "path": "PUBPAID_GAME_DESIGN_STACK.md",
+      "source": "workspace",
+      "note": "Documento central do projeto com direcao, ferramentas, extensoes recomendadas e proxima arquitetura do PubPaid 2.0.",
+      "linkedOrderIds": [
+        "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design"
+      ],
+      "createdAt": "2026-04-22T04:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-intro-scene-final-shot",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-intro-scene-final/shot-0.png",
+      "source": "workspace",
+      "note": "Captura final da IntroScene PubPaid em Phaser: fachada noturna, placa PUB PAID no predio, card de aceite sobre o canvas sem erro de console.",
+      "linkedOrderIds": [
+        "2026-04-22-criar-introscene-phaser-da-fachada-pubpaid-com-placa-no-predio"
+      ],
+      "createdAt": "2026-04-22T05:37:22.287Z"
+    },
+    {
+      "id": "pubpaid-bitmap-intro-start-shot",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-bitmap-intro-start/shot-0.png",
+      "source": "workspace",
+      "note": "Captura do inicio da abertura PubPaid com o primeiro bitmap rodando limpo, sem overlay.",
+      "linkedOrderIds": [
+        "2026-04-22-montar-abertura-pubpaid-com-6-bitmaps-e-ui-de-termos-login-sobre-frame-final"
+      ],
+      "createdAt": "2026-04-22T05:52:08.606Z"
+    },
+    {
+      "id": "pubpaid-bitmap-intro-final-shot",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-bitmap-intro-final/shot-0.png",
+      "source": "workspace",
+      "note": "Captura do frame 6 congelado com painel pixel de termos sobre o jogo, inspirado na referencia de interface enviada pelo usuario.",
+      "linkedOrderIds": [
+        "2026-04-22-montar-abertura-pubpaid-com-6-bitmaps-e-ui-de-termos-login-sobre-frame-final"
+      ],
+      "createdAt": "2026-04-22T05:52:08.623Z"
+    },
+    {
+      "id": "output-web-game-full-page-pubpaid-adjust",
+      "kind": "image",
+      "path": "output/web-game/full-page-pubpaid-adjust.png",
+      "source": "workspace",
+      "note": "Captura do frame final PubPaid 2 com painel de termos reduzido e alinhado no canto inferior direito.",
+      "linkedOrderIds": [
+        "2026-04-22-ajustar-abertura-pubpaid-2-painel-e-entrada-local"
+      ],
+      "createdAt": "2026-04-22T05:36:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-street-after-local-entry",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-street-after-local-entry.png",
+      "source": "workspace",
+      "note": "Captura apos aceitar termos e entrar no modo local; StreetScene e UIScene ativas sem erro de console.",
+      "linkedOrderIds": [
+        "2026-04-22-ajustar-abertura-pubpaid-2-painel-e-entrada-local"
+      ],
+      "createdAt": "2026-04-22T05:36:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-intro-seq-contact-sheet",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-intro-seq-contact-sheet.jpg",
+      "source": "workspace",
+      "note": "Prancheta com os 16 frames da abertura PubPaid 2, incluindo intermediarios gerados entre os 6 bitmaps originais.",
+      "linkedOrderIds": [
+        "2026-04-22-criar-frames-intermediarios-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T05:50:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-intro-16frames-overlay",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-intro-16frames-overlay.png",
+      "source": "workspace",
+      "note": "Captura da abertura PubPaid 2 apos tocar a sequencia de 16 frames e abrir o painel de termos sem erros.",
+      "linkedOrderIds": [
+        "2026-04-22-criar-frames-intermediarios-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T05:50:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-16bit-sound-toggle",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-16bit-sound-toggle.png",
+      "source": "workspace",
+      "note": "Captura do botao Som ligado durante a intro PubPaid 2 com trilha 16-bit ativa.",
+      "linkedOrderIds": [
+        "2026-04-22-adicionar-trilha-sonora-16bit-tech-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:08:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-16bit-sound-street",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-16bit-sound-street.png",
+      "source": "workspace",
+      "note": "Captura apos entrada local na StreetScene mantendo music=on sem erros de console.",
+      "linkedOrderIds": [
+        "2026-04-22-adicionar-trilha-sonora-16bit-tech-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:08:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-sound-synced-intro",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-sound-synced-intro.png",
+      "source": "workspace",
+      "note": "Captura final da intro com Som ligado e musicIntroSynced=yes.",
+      "linkedOrderIds": [
+        "2026-04-22-sincronizar-trilha-16bit-com-frames-da-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:22:00.000-05:00"
+    },
+    {
+      "id": "output-web-game-pubpaid-sound-synced-street",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-sound-synced-street.png",
+      "source": "workspace",
+      "note": "Captura da StreetScene mantendo music=on e musicIntroSynced=yes apos a entrada.",
+      "linkedOrderIds": [
+        "2026-04-22-sincronizar-trilha-16bit-com-frames-da-abertura-pubpaid-2"
+      ],
+      "createdAt": "2026-04-22T06:22:00.000-05:00"
+    }
+  ]
+}

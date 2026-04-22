@@ -1,10 +1,10 @@
 # Handoff
 
-Updated: 2026-04-22T02:05:00.000Z
+Updated: 2026-04-22T22:53:54.386Z
 
-Rodada atual separada por pedido do usuario: subir apenas o que falta fora de `PubPaid`, incluindo manifestos/registry, noticias atualizadas e a ponte da `index2`. Os arquivos `pubpaid.html`, `pubpaid-v2.html`, `pubpaid-phaser.html` e relacionados ficam fora do commit desta vez.
+agentes-newsroom-hero.css recebeu camada final 2026-04-22c para a hero da home: grid desktop em foto principal + coluna editorial, painel de escritório/carrossel ocultos na primeira dobra, daily band virou faixa compacta. node --check script.js passou, CSS brace-balance=0 e GET /?skipWelcome=1 retornou 200.
 
 ## Next
 
-- Depois do push
-- validar em producao a `index2`, o feed/noticias atualizadas e se os manifestos publicados batem com o registry
+- Abrir a home no navegador e conferir a primeira dobra; se houver ajuste
+- mexer na camada 2026-04-22c em agentes-newsroom-hero.css.

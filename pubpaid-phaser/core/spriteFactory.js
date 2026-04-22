@@ -1,14 +1,21 @@
 const TEXTURE_KEYS = {
   player: "ppg-player-sprite",
   bartender: "ppg-bartender-sprite",
+  waiterHero: "ppg-waiter-hero-sprite",
   singer: "ppg-singer-sprite",
   guestA: "ppg-guest-a-sprite",
   guestB: "ppg-guest-b-sprite"
 };
 
+const IDLE_FRAME_COUNT = 4;
+
+function frameKey(key, frame) {
+  return `${key}-idle-${frame}`;
+}
+
 function drawPixel(ctx, x, y, width, height, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y, width, height);
+  ctx.fillRect(Math.round(x), Math.round(y), width, height);
 }
 
 function buildCanvas(width, height, painter) {
@@ -21,63 +28,204 @@ function buildCanvas(width, height, painter) {
   return canvas;
 }
 
-function createPlayerCanvas() {
-  return buildCanvas(48, 72, (ctx) => {
-    drawPixel(ctx, 10, 62, 28, 6, "rgba(0,0,0,.45)");
-    drawPixel(ctx, 16, 2, 18, 8, "#2b1a23");
-    drawPixel(ctx, 14, 10, 22, 18, "#d89a6d");
-    drawPixel(ctx, 17, 15, 4, 3, "#fff2d0");
-    drawPixel(ctx, 29, 15, 4, 3, "#fff2d0");
-    drawPixel(ctx, 16, 28, 20, 6, "#ffd06d");
-    drawPixel(ctx, 11, 34, 30, 20, "#50efff");
-    drawPixel(ctx, 8, 36, 6, 20, "#253149");
-    drawPixel(ctx, 38, 36, 6, 20, "#253149");
-    drawPixel(ctx, 17, 54, 7, 12, "#182030");
-    drawPixel(ctx, 29, 54, 7, 12, "#182030");
+function bodyOffset(frame) {
+  return [0, -1, 0, 1][frame % IDLE_FRAME_COUNT];
+}
+
+function armOffset(frame) {
+  return [0, 1, 0, -1][frame % IDLE_FRAME_COUNT];
+}
+
+function blinkFrame(frame) {
+  return frame === 2;
+}
+
+function drawHead(ctx, x, y, hair, skin, frame) {
+  drawPixel(ctx, x + 2, y, 10, 2, "#151515");
+  drawPixel(ctx, x + 1, y + 2, 12, 2, "#151515");
+  drawPixel(ctx, x, y + 4, 14, 10, "#151515");
+  drawPixel(ctx, x + 2, y + 2, 10, 12, skin);
+  drawPixel(ctx, x + 2, y + 2, 10, 5, hair);
+  drawPixel(ctx, x + 1, y + 4, 2, 5, hair);
+  drawPixel(ctx, x + 10, y + 4, 2, 7, hair);
+  if (blinkFrame(frame)) {
+    drawPixel(ctx, x + 4, y + 9, 2, 1, "#111111");
+    drawPixel(ctx, x + 8, y + 9, 2, 1, "#111111");
+  } else {
+    drawPixel(ctx, x + 4, y + 8, 2, 3, "#111111");
+    drawPixel(ctx, x + 8, y + 8, 2, 3, "#111111");
+  }
+  drawPixel(ctx, x + 5, y + 12, 4, 1, "#8c5a55");
+}
+
+function drawTorso(ctx, x, y, shirt, detail) {
+  drawPixel(ctx, x + 1, y, 10, 2, "#151515");
+  drawPixel(ctx, x, y + 2, 12, 9, "#151515");
+  drawPixel(ctx, x + 1, y + 2, 10, 8, shirt);
+  if (detail) {
+    drawPixel(ctx, x + 3, y + 3, 6, 4, detail);
+  }
+}
+
+function drawLegs(ctx, x, y, pants, shoes, frame) {
+  const spread = frame === 1 || frame === 3 ? 1 : 0;
+  drawPixel(ctx, x + 1, y, 4, 7, pants);
+  drawPixel(ctx, x + 7, y, 4, 7, pants);
+  drawPixel(ctx, x + 1 - spread, y + 7, 5, 2, shoes);
+  drawPixel(ctx, x + 6 + spread, y + 7, 5, 2, shoes);
+}
+
+function drawArms(ctx, x, y, sleeve, skin, frame) {
+  const lift = armOffset(frame);
+  drawPixel(ctx, x - 2, y + 1 + lift, 2, 7, "#151515");
+  drawPixel(ctx, x - 1, y + 2 + lift, 2, 5, sleeve);
+  drawPixel(ctx, x - 1, y + 7 + lift, 2, 2, skin);
+  drawPixel(ctx, x + 12, y + 1 - lift, 2, 7, "#151515");
+  drawPixel(ctx, x + 11, y + 2 - lift, 2, 5, sleeve);
+  drawPixel(ctx, x + 11, y + 7 - lift, 2, 2, skin);
+}
+
+function drawHeldItem(ctx, x, y, item, frame) {
+  if (!item) return;
+  const lift = frame === 1 ? -1 : frame === 2 ? -2 : 0;
+  if (item === "glass") {
+    drawPixel(ctx, x + 13, y + 4 + lift, 4, 6, "#d8a24f");
+    drawPixel(ctx, x + 13, y + 4 + lift, 4, 2, "#fff1c0");
+  }
+  if (item === "mic") {
+    drawPixel(ctx, x + 13, y - 2 + lift, 2, 10, "#f0c85d");
+    drawPixel(ctx, x + 12, y - 3 + lift, 4, 2, "#fff0bf");
+  }
+  if (item === "beer") {
+    drawPixel(ctx, x - 4, y + 4 + lift, 4, 6, "#d8a24f");
+    drawPixel(ctx, x - 4, y + 4 + lift, 4, 2, "#fff1c0");
+  }
+}
+
+function drawCharacterSheetSprite(ctx, spec, frame = 0) {
+  const yOffset = bodyOffset(frame);
+  const baseX = 16;
+  const baseY = 8 + yOffset;
+
+  drawPixel(ctx, 13, 46, 18, 3, "rgba(0,0,0,.28)");
+  drawHead(ctx, baseX, baseY, spec.hair, spec.skin, frame);
+  drawTorso(ctx, baseX + 1, baseY + 15, spec.shirt, spec.detail);
+  drawArms(ctx, baseX + 1, baseY + 15, spec.sleeve || spec.shirt, spec.skin, frame);
+  drawHeldItem(ctx, baseX + 1, baseY + 15, spec.item, frame);
+  drawLegs(ctx, baseX + 1, baseY + 26, spec.pants, spec.shoes, frame);
+}
+
+function createBaseCharacter(spec, frame = 0) {
+  return buildCanvas(48, 56, (ctx) => {
+    drawCharacterSheetSprite(ctx, spec, frame);
   });
 }
 
-function createBartenderCanvas() {
-  return buildCanvas(54, 74, (ctx) => {
-    drawPixel(ctx, 14, 66, 26, 5, "rgba(0,0,0,.45)");
-    drawPixel(ctx, 18, 4, 20, 9, "#2f1a1f");
-    drawPixel(ctx, 16, 13, 24, 20, "#d89a6d");
-    drawPixel(ctx, 20, 20, 4, 3, "#ffffff");
-    drawPixel(ctx, 31, 20, 4, 3, "#ffffff");
-    drawPixel(ctx, 18, 33, 24, 10, "#f4f0e1");
-    drawPixel(ctx, 13, 43, 34, 16, "#111827");
-    drawPixel(ctx, 23, 41, 10, 5, "#8ef0a3");
-    drawPixel(ctx, 14, 58, 8, 10, "#20283b");
-    drawPixel(ctx, 33, 58, 8, 10, "#20283b");
-    drawPixel(ctx, 42, 34, 7, 18, "#ffd06d");
+function createPlayerCanvas(frame = 0) {
+  return createBaseCharacter({
+    hair: "#2d2f38",
+    skin: "#efc1a3",
+    shirt: "#50efff",
+    sleeve: "#2d3f56",
+    detail: "#87fbff",
+    pants: "#253148",
+    shoes: "#111827"
+  }, frame);
+}
+
+function createBartenderCanvas(frame = 0) {
+  return createBaseCharacter({
+    hair: "#6f4a35",
+    skin: "#efc1a3",
+    shirt: "#f1efe8",
+    sleeve: "#d5dde8",
+    detail: "#1f2f47",
+    pants: "#253148",
+    shoes: "#111827",
+    item: "glass"
+  }, frame);
+}
+
+function createWaiterHeroCanvas(frame = 0) {
+  const yOffset = bodyOffset(frame);
+  const trayLift = frame === 1 ? -1 : frame === 2 ? -2 : 0;
+  const step = frame === 1 ? 1 : frame === 3 ? -1 : 0;
+  return buildCanvas(64, 76, (ctx) => {
+    drawPixel(ctx, 17, 66, 28, 4, "rgba(0,0,0,.3)");
+
+    drawPixel(ctx, 24 + step, 4 + yOffset, 18, 3, "#151515");
+    drawPixel(ctx, 21 + step, 7 + yOffset, 24, 3, "#151515");
+    drawPixel(ctx, 19 + step, 10 + yOffset, 28, 20, "#151515");
+    drawPixel(ctx, 22 + step, 8 + yOffset, 22, 21, "#f0c0a0");
+    drawPixel(ctx, 22 + step, 8 + yOffset, 22, 7, "#6f4630");
+    drawPixel(ctx, 20 + step, 12 + yOffset, 6, 9, "#6f4630");
+    drawPixel(ctx, 38 + step, 12 + yOffset, 6, 11, "#6f4630");
+    drawPixel(ctx, 24 + step, 16 + yOffset, 6, 2, "#b88065");
+    drawPixel(ctx, 36 + step, 16 + yOffset, 6, 2, "#b88065");
+    if (blinkFrame(frame)) {
+      drawPixel(ctx, 26 + step, 21 + yOffset, 4, 1, "#151515");
+      drawPixel(ctx, 36 + step, 21 + yOffset, 4, 1, "#151515");
+    } else {
+      drawPixel(ctx, 26 + step, 20 + yOffset, 4, 3, "#151515");
+      drawPixel(ctx, 36 + step, 20 + yOffset, 4, 3, "#151515");
+    }
+    drawPixel(ctx, 31 + step, 26 + yOffset, 6, 1, "#8d554c");
+
+    drawPixel(ctx, 25 + step, 30 + yOffset, 16, 5, "#ffffff");
+    drawPixel(ctx, 29 + step, 31 + yOffset, 8, 4, "#111827");
+    drawPixel(ctx, 31 + step, 35 + yOffset, 4, 4, "#c79a40");
+
+    drawPixel(ctx, 19 + step, 36 + yOffset, 28, 3, "#151515");
+    drawPixel(ctx, 17 + step, 39 + yOffset, 32, 17, "#151515");
+    drawPixel(ctx, 20 + step, 39 + yOffset, 26, 16, "#f4f1e9");
+    drawPixel(ctx, 25 + step, 40 + yOffset, 16, 14, "#151d2b");
+    drawPixel(ctx, 28 + step, 42 + yOffset, 10, 10, "#23304a");
+    drawPixel(ctx, 21 + step, 54 + yOffset, 7, 3, "#d7deeb");
+    drawPixel(ctx, 39 + step, 54 + yOffset, 7, 3, "#d7deeb");
+
+    drawPixel(ctx, 12 + step, 38 + yOffset, 7, 15, "#151515");
+    drawPixel(ctx, 13 + step, 39 + yOffset, 5, 14, "#d7deeb");
+    drawPixel(ctx, 12 + step, 52 + yOffset, 6, 3, "#f0c0a0");
+    drawPixel(ctx, 48 + step, 37 + yOffset + trayLift, 8, 14, "#151515");
+    drawPixel(ctx, 49 + step, 38 + yOffset + trayLift, 6, 13, "#d7deeb");
+    drawPixel(ctx, 48 + step, 50 + yOffset + trayLift, 7, 3, "#f0c0a0");
+
+    drawPixel(ctx, 44 + step, 34 + yOffset + trayLift, 17, 3, "#151515");
+    drawPixel(ctx, 46 + step, 32 + yOffset + trayLift, 13, 2, "#d0a35a");
+    drawPixel(ctx, 48 + step, 27 + yOffset + trayLift, 5, 5, "#e6b45e");
+    drawPixel(ctx, 55 + step, 26 + yOffset + trayLift, 4, 6, "#8ef0a3");
+
+    drawPixel(ctx, 24 + step, 56 + yOffset, 8, 9, "#253148");
+    drawPixel(ctx, 36 + step, 56 + yOffset, 8, 9, "#253148");
+    drawPixel(ctx, 22 + step, 65 + yOffset, 11, 3, "#111827");
+    drawPixel(ctx, 35 + step, 65 + yOffset, 11, 3, "#111827");
   });
 }
 
-function createSingerCanvas() {
-  return buildCanvas(50, 78, (ctx) => {
-    drawPixel(ctx, 12, 68, 26, 5, "rgba(0,0,0,.45)");
-    drawPixel(ctx, 16, 4, 22, 14, "#5b2038");
-    drawPixel(ctx, 15, 18, 24, 19, "#d89a6d");
-    drawPixel(ctx, 20, 25, 4, 3, "#fff2d0");
-    drawPixel(ctx, 31, 25, 4, 3, "#fff2d0");
-    drawPixel(ctx, 11, 37, 30, 22, "#ff4fb8");
-    drawPixel(ctx, 36, 28, 4, 28, "#ffd06d");
-    drawPixel(ctx, 17, 59, 7, 12, "#20283b");
-    drawPixel(ctx, 29, 59, 7, 12, "#20283b");
-  });
+function createSingerCanvas(frame = 0) {
+  return createBaseCharacter({
+    hair: "#8d63c6",
+    skin: "#efc1a3",
+    shirt: "#ef6bc1",
+    sleeve: "#ef6bc1",
+    detail: "#ffb0dc",
+    pants: "#253148",
+    shoes: "#111827",
+    item: "mic"
+  }, frame);
 }
 
-function createGuestCanvas(shirt, accent) {
-  return buildCanvas(44, 62, (ctx) => {
-    drawPixel(ctx, 10, 54, 24, 5, "rgba(0,0,0,.45)");
-    drawPixel(ctx, 15, 4, 16, 7, "#2f1c1c");
-    drawPixel(ctx, 13, 11, 20, 16, "#d89a6d");
-    drawPixel(ctx, 17, 17, 3, 3, accent);
-    drawPixel(ctx, 27, 17, 3, 3, accent);
-    drawPixel(ctx, 10, 27, 26, 18, shirt);
-    drawPixel(ctx, 14, 45, 6, 12, "#20283b");
-    drawPixel(ctx, 26, 45, 6, 12, "#20283b");
-  });
+function createGuestCanvas(shirt, detail, frame = 0) {
+  return createBaseCharacter({
+    hair: "#7a573e",
+    skin: "#efc1a3",
+    shirt,
+    sleeve: shirt,
+    detail,
+    pants: "#253148",
+    shoes: "#111827",
+    item: frame === 2 ? "beer" : null
+  }, frame);
 }
 
 export function ensureCoreSprites(scene) {
@@ -85,22 +233,54 @@ export function ensureCoreSprites(scene) {
   const definitions = [
     [TEXTURE_KEYS.player, createPlayerCanvas],
     [TEXTURE_KEYS.bartender, createBartenderCanvas],
+    [TEXTURE_KEYS.waiterHero, createWaiterHeroCanvas],
     [TEXTURE_KEYS.singer, createSingerCanvas],
-    [TEXTURE_KEYS.guestA, () => createGuestCanvas("#8ef0a3", "#e9fff0")],
-    [TEXTURE_KEYS.guestB, () => createGuestCanvas("#ffcf6d", "#fff2cb")]
+    [TEXTURE_KEYS.guestA, (frame) => createGuestCanvas("#34c4a1", "#baf7ea", frame)],
+    [TEXTURE_KEYS.guestB, (frame) => createGuestCanvas("#f0bf6a", "#fff0c5", frame)]
   ];
 
   definitions.forEach(([key, factory]) => {
-    if (!textures.exists(key)) {
-      textures.addCanvas(key, factory(), true);
+    for (let frame = 0; frame < IDLE_FRAME_COUNT; frame += 1) {
+      const nextFrameKey = frameKey(key, frame);
+      if (textures.exists(nextFrameKey)) textures.remove(nextFrameKey);
+      textures.addCanvas(nextFrameKey, factory(frame));
     }
+    if (textures.exists(key)) textures.remove(key);
+    textures.addCanvas(key, factory(0));
   });
+}
+
+export function getIdleFrameKeys(key) {
+  return Array.from({ length: IDLE_FRAME_COUNT }, (_item, index) => frameKey(key, index));
 }
 
 export function addSpriteActor(scene, key, x, y, scale = 1) {
   const sprite = scene.add.image(x, y, key);
   sprite.setOrigin(0.5, 1);
   sprite.setScale(scale);
+  return sprite;
+}
+
+export function addIdleSpriteActor(scene, key, x, y, scale = 1, options = {}) {
+  const frames = getIdleFrameKeys(key).filter((textureKey) => scene.textures.exists(textureKey));
+  const sprite = scene.add.image(x, y, frames[0] || key);
+  sprite.setOrigin(0.5, 1);
+  sprite.setScale(scale);
+  if (frames.length > 1) {
+    let frameIndex = 0;
+    const frameDuration = options.frameDuration || 240;
+    const delay = options.delay || 0;
+    scene.time.delayedCall(delay, () => {
+      scene.time.addEvent({
+        delay: frameDuration,
+        loop: true,
+        callback: () => {
+          frameIndex = (frameIndex + 1) % frames.length;
+          sprite.setTexture(frames[frameIndex]);
+        }
+      });
+    });
+  }
   return sprite;
 }
 

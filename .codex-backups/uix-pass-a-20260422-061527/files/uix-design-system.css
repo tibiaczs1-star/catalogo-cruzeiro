@@ -1,0 +1,300 @@
+/*
+  UIX Design Pass A
+  Camada reversivel de polimento visual geral. Remover este arquivo/link volta o visual base.
+*/
+:root {
+  --uix-ink: #111827;
+  --uix-muted: #526174;
+  --uix-paper: #f7f3ea;
+  --uix-surface: rgba(255, 255, 255, 0.88);
+  --uix-surface-strong: #ffffff;
+  --uix-line: rgba(17, 24, 39, 0.12);
+  --uix-blue: #173f6f;
+  --uix-cyan: #0e8aa8;
+  --uix-red: #c73535;
+  --uix-gold: #d99a2b;
+  --uix-green: #0f766e;
+  --uix-shadow: 0 22px 70px rgba(17, 24, 39, 0.16);
+  --uix-soft-shadow: 0 14px 36px rgba(17, 24, 39, 0.1);
+  --uix-radius: 8px;
+}
+
+html {
+  scroll-padding-top: 112px;
+}
+
+body.editorial-home,
+body:not(.pubpaid-phaser-page):not(.office-page):not(.cheffe-call-page):not(.agents-page):not(.real-agents-page) {
+  color: var(--uix-ink);
+  background:
+    linear-gradient(180deg, rgba(247, 243, 234, 0.98), rgba(237, 242, 247, 0.96) 42%, rgba(246, 248, 250, 0.98)),
+    radial-gradient(circle at 16% 0%, rgba(14, 138, 168, 0.12), transparent 34%),
+    radial-gradient(circle at 90% 12%, rgba(217, 154, 43, 0.13), transparent 30%);
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid rgba(14, 138, 168, 0.72);
+  outline-offset: 3px;
+}
+
+:where(.solid-button, .outline-button, .ppg-button, .office-button, .sales-filter, .chip-button, button) {
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+:where(.solid-button, .outline-button, .ppg-button, .office-button):hover,
+:where(.chip-button, .sales-filter, .election-filter):hover {
+  transform: translateY(-1px);
+}
+
+.site-header-stack {
+  backdrop-filter: blur(18px);
+}
+
+.top-strip {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.main-header {
+  box-shadow: 0 18px 48px rgba(17, 24, 39, 0.12);
+}
+
+.main-nav,
+.footer-sitemap,
+.office-nav,
+.call-topbar {
+  gap: clamp(0.35rem, 1vw, 0.75rem);
+}
+
+.main-nav a,
+.top-strip-secondary,
+.footer-utility-button,
+.office-nav a,
+.call-topbar a {
+  border-radius: var(--uix-radius);
+  letter-spacing: 0;
+}
+
+.main-nav a:not(.nav-game-link):not(.nav-admin-link) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.main-nav a:is(:hover, :focus-visible),
+.top-strip-secondary:is(:hover, :focus-visible),
+.office-nav a:is(:hover, :focus-visible),
+.call-topbar a:is(:hover, :focus-visible) {
+  box-shadow: 0 10px 26px rgba(12, 22, 38, 0.2);
+}
+
+.hero-newsroom-shell,
+.hero-newsroom-panel,
+.office-play-strip,
+.section-block,
+.newsletter,
+.footer-tech-panel {
+  border-radius: var(--uix-radius);
+}
+
+.hero-newsroom-shell {
+  box-shadow: var(--uix-shadow);
+  overflow: hidden;
+}
+
+.hero-copy h1,
+.section-header h2,
+.office-hero h1,
+.call-stage-copy h1,
+.agents-hero h1,
+.ppg-topbar h1 {
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.hero-copy p,
+.section-header p,
+.office-hero p,
+.call-stage-copy p,
+.agents-hero p,
+.ppg-topbar p {
+  text-wrap: pretty;
+}
+
+.office-play-strip,
+.community-signal,
+.archive-shell,
+.elections-shell,
+.comments-layout,
+.monetization-grid,
+.newsletter {
+  box-shadow: var(--uix-soft-shadow);
+  border: 1px solid var(--uix-line);
+}
+
+:where(.news-card, .archive-card, .live-feed-card, .business-card, .membership-card, .sidebar-widget, .side-card, .comment-card, .students-card, .sales-panel, .bridge-panel) {
+  border-radius: var(--uix-radius) !important;
+  border-color: var(--uix-line) !important;
+  box-shadow: 0 12px 34px rgba(17, 24, 39, 0.09);
+}
+
+:where(.news-card, .archive-card, .live-feed-card, .business-card, .membership-card, .sidebar-widget, .side-card, .comment-card):hover {
+  box-shadow: 0 18px 46px rgba(17, 24, 39, 0.14);
+}
+
+:where(.news-thumb, .hero-desktop-topic-photo, .community-agent-avatar, .office-terminal-avatar, .agent-spotlight-photo) {
+  border-radius: var(--uix-radius);
+}
+
+.left-rail-nav {
+  border-radius: var(--uix-radius);
+  box-shadow: 0 14px 38px rgba(17, 24, 39, 0.1);
+}
+
+.left-rail-nav a {
+  border-radius: 6px;
+}
+
+:where(input, textarea, select) {
+  border-radius: var(--uix-radius) !important;
+}
+
+:where(input, textarea, select):focus {
+  border-color: rgba(14, 138, 168, 0.74) !important;
+  box-shadow: 0 0 0 4px rgba(14, 138, 168, 0.13) !important;
+}
+
+.chip-button.is-active,
+.election-filter.is-active,
+.sales-filter.is-active {
+  box-shadow: 0 10px 24px rgba(14, 138, 168, 0.2);
+}
+
+.agent-mail-panel,
+.election-vote-dialog,
+.office-modal-panel,
+.ppg-splash-card,
+.ppg-panel {
+  border-radius: var(--uix-radius) !important;
+  box-shadow: var(--uix-shadow) !important;
+}
+
+.office-page,
+.cheffe-call-page,
+.agents-page,
+.real-agents-page,
+.pubpaid-phaser-page {
+  --uix-ink: #edf6ff;
+  --uix-muted: #a9b8cc;
+  background:
+    radial-gradient(circle at 16% 10%, rgba(14, 138, 168, 0.24), transparent 30%),
+    radial-gradient(circle at 86% 18%, rgba(217, 154, 43, 0.2), transparent 26%),
+    linear-gradient(180deg, #0c1324, #121827 46%, #0d111d);
+}
+
+.office-shell,
+.call-shell,
+.agents-shell,
+.ppg-shell {
+  width: min(1440px, calc(100% - 32px));
+  margin-inline: auto;
+}
+
+.office-topbar,
+.call-topbar,
+.agents-hero,
+.ppg-topbar {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px);
+}
+
+.office-hero,
+.call-theater,
+.agents-main-panel,
+.agents-awards,
+.agents-scoreboard,
+.ppg-stage,
+.ppg-notes article {
+  border-radius: var(--uix-radius) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 22px 68px rgba(0, 0, 0, 0.28);
+}
+
+.office-vscode-frame,
+.bitmap-theater,
+.ppg-canvas-shell {
+  border-radius: var(--uix-radius) !important;
+  box-shadow: 0 26px 80px rgba(0, 0, 0, 0.38);
+}
+
+.ppg-hud article,
+.agents-stat,
+.daily-card,
+.call-terminal,
+.meeting-log-panel,
+.call-opinions {
+  border-radius: var(--uix-radius) !important;
+}
+
+.ppg-topbar {
+  align-items: center;
+}
+
+.ppg-topbar-copy {
+  max-width: 760px;
+}
+
+.ppg-stage--official {
+  min-height: min(82svh, 900px);
+}
+
+.ppg-game canvas {
+  image-rendering: pixelated;
+}
+
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 82px;
+  }
+
+  .office-shell,
+  .call-shell,
+  .agents-shell,
+  .ppg-shell {
+    width: min(100% - 18px, 1440px);
+  }
+
+  .main-nav,
+  .quick-nav,
+  .office-nav,
+  .call-topbar,
+  .ppg-topbar-actions {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    flex-wrap: nowrap;
+  }
+
+  .main-nav a,
+  .quick-nav a,
+  .office-nav a,
+  .call-topbar a,
+  .ppg-button {
+    white-space: nowrap;
+  }
+
+  .section-block,
+  .hero-newsroom-shell,
+  .office-play-strip,
+  .newsletter {
+    border-radius: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

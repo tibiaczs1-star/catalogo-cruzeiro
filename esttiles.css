@@ -42,3 +42,99 @@
   background: #101722 !important;
   color: #f8ede4 !important;
 }
+
+/* 2026-04-22: acabamento premium do Esttíles */
+.office-page-fashion .office-topbar {
+  border-color: rgba(244, 197, 164, 0.22) !important;
+  background:
+    linear-gradient(180deg, rgba(24, 34, 53, 0.94), rgba(16, 23, 36, 0.92)) !important;
+  box-shadow:
+    0 24px 48px rgba(10, 14, 24, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.office-page-fashion .office-nav a {
+  border-radius: 14px;
+}
+
+.office-page-fashion .office-hero {
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at top left, rgba(244, 179, 135, 0.14), transparent 22%),
+    radial-gradient(circle at 84% 12%, rgba(247, 220, 186, 0.12), transparent 24%),
+    linear-gradient(145deg, rgba(24, 34, 53, 0.96), rgba(17, 24, 39, 0.92)) !important;
+  box-shadow:
+    0 30px 62px rgba(9, 14, 24, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.office-page-fashion .office-hero-copy h1 {
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+.office-page-fashion .office-hero-copy p,
+.office-page-fashion .office-hero-panel p {
+  color: rgba(248, 237, 228, 0.82) !important;
+}
+
+.office-page-fashion .office-hero-panel {
+  border-radius: 24px;
+  border: 1px solid rgba(244, 197, 164, 0.16) !important;
+  box-shadow:
+    0 18px 38px rgba(9, 14, 24, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+.office-page-fashion .office-vscode-frame,
+.office-page-fashion .office-terminal-panel {
+  border-radius: 28px;
+  box-shadow:
+    0 26px 56px rgba(10, 14, 24, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+.office-page-fashion .office-capture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.office-page-fashion .office-capture-card {
+  padding: 1rem 1.05rem;
+  border-radius: 22px;
+  border: 1px solid rgba(244, 197, 164, 0.18);
+  background:
+    radial-gradient(circle at top right, rgba(244, 179, 135, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(26, 37, 57, 0.98), rgba(17, 24, 39, 0.94));
+  box-shadow:
+    0 18px 38px rgba(10, 14, 24, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.office-page-fashion .office-capture-card span {
+  display: inline-flex;
+  margin-bottom: 0.45rem;
+  color: rgba(247, 220, 186, 0.82);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.office-page-fashion .office-capture-card h3 {
+  margin: 0 0 0.4rem;
+  color: #fff1e8;
+}
+
+.office-page-fashion .office-capture-card p {
+  margin: 0;
+  color: rgba(248, 237, 228, 0.78);
+}
+
+@media (max-width: 900px) {
+  .office-page-fashion .office-capture-grid {
+    grid-template-columns: 1fr;
+  }
+}

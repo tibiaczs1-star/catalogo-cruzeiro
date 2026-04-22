@@ -1,0 +1,952 @@
+body.editorial-home {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(122, 178, 229, 0.12), transparent 24%),
+    linear-gradient(180deg, #f4f7fb 0%, #edf2f8 100%);
+}
+
+/* 2026-04-22: restaura marcha mobile e corrige leitura do Trending */
+body.editorial-home #trending .trending-card,
+body.editorial-home #trending .influencer-buzz-card,
+body.editorial-home #trending .daily-buzz-card,
+body.editorial-home #trending .daily-polemica-card {
+  color: #f7fbff !important;
+  background:
+    linear-gradient(180deg, rgba(12, 30, 54, 0.96), rgba(16, 44, 76, 0.98)) !important;
+  border-color: rgba(137, 199, 255, 0.22) !important;
+  box-shadow:
+    0 22px 46px rgba(7, 18, 33, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+body.editorial-home #trending .influencer-buzz-copy,
+body.editorial-home #trending .buzz-context-grid,
+body.editorial-home #trending .buzz-reaction-box,
+body.editorial-home #trending .engagement {
+  position: relative;
+  z-index: 2;
+}
+
+body.editorial-home #trending .influencer-buzz-copy h3,
+body.editorial-home #trending .daily-polemica-card h3,
+body.editorial-home #trending .buzz-context-grid strong,
+body.editorial-home #trending .buzz-reaction-box span {
+  color: #ffffff !important;
+  text-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+}
+
+body.editorial-home #trending .influencer-buzz-copy p,
+body.editorial-home #trending .buzz-context-grid p,
+body.editorial-home #trending .buzz-reaction-box p,
+body.editorial-home #trending .daily-polemica-card p,
+body.editorial-home #trending .engagement span {
+  color: rgba(226, 241, 255, 0.92) !important;
+  opacity: 1 !important;
+}
+
+body.editorial-home #trending .buzz-kicker,
+body.editorial-home #trending .buzz-context-grid span {
+  color: #9bd8ff !important;
+  opacity: 1 !important;
+}
+
+body.editorial-home #trending .buzz-context-grid > div,
+body.editorial-home #trending .buzz-reaction-box {
+  background:
+    linear-gradient(180deg, rgba(75, 113, 150, 0.34), rgba(28, 58, 92, 0.46)) !important;
+  border-color: rgba(168, 216, 255, 0.2) !important;
+}
+
+body.editorial-home #trending .trend-photo {
+  opacity: 1 !important;
+}
+
+body.editorial-home #trending,
+body.editorial-home .site-footer.footer-tech.footer-mega .footer-mega-stage {
+  content-visibility: visible !important;
+  contain-intrinsic-size: auto !important;
+}
+
+@media (max-width: 760px) {
+  body.editorial-home #trending.section-block {
+    padding-inline: 0.75rem !important;
+  }
+
+  body.editorial-home #trending .trending-grid,
+  body.editorial-home #trending .trending-grid.is-daily-buzz {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.9rem !important;
+  }
+
+  body.editorial-home #trending .trending-card,
+  body.editorial-home #trending .influencer-buzz-card,
+  body.editorial-home #trending .daily-buzz-card,
+  body.editorial-home #trending .daily-polemica-card {
+    width: 100% !important;
+    min-height: 0 !important;
+    padding: 0.86rem !important;
+    border-radius: 22px !important;
+  }
+
+  body.editorial-home #trending .trend-photo,
+  body.editorial-home #trending .daily-polemica-card .trend-photo,
+  body.editorial-home #trending .daily-buzz-card .influencer-hero-photo {
+    min-height: 240px !important;
+    border-radius: 18px !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  body.editorial-home #trending .influencer-profile {
+    left: 0.7rem !important;
+    right: 0.7rem !important;
+    bottom: 0.7rem !important;
+    width: auto !important;
+    min-height: 74px !important;
+    padding: 0.6rem 0.7rem !important;
+    border-radius: 16px !important;
+    background: rgba(4, 13, 27, 0.9) !important;
+  }
+
+  body.editorial-home #trending .influencer-buzz-copy h3,
+  body.editorial-home #trending .daily-polemica-card h3 {
+    font-size: clamp(1.25rem, 6vw, 1.55rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  body.editorial-home #trending .influencer-buzz-copy p,
+  body.editorial-home #trending .daily-polemica-card p,
+  body.editorial-home #trending .buzz-context-grid p,
+  body.editorial-home #trending .buzz-reaction-box p {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .footer-mega-stage,
+  body.editorial-home .site-footer.footer-tech.footer-mega .construction-showcase {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.82rem !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-stage-terminal,
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-code-screen,
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-card-assembly,
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-chant-rail {
+    display: none !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-code-screen .insiders-code-diagram,
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-code-screen > p:not(.eyebrow),
+  body.editorial-home .site-footer.footer-tech.footer-mega .construction-service-grid,
+  body.editorial-home .site-footer.footer-tech.footer-mega .construction-badges,
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-card-assembly-copy p {
+    display: none !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-command-stage.is-crowd-march {
+    display: grid !important;
+    grid-template-rows: auto auto minmax(420px, 1fr) auto !important;
+    min-height: 620px !important;
+    padding: 0.85rem !important;
+    border-radius: 22px !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-command-copy {
+    padding: 0.82rem !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-command-copy h3 {
+    font-size: clamp(1.25rem, 8vw, 1.8rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-truth-banner {
+    display: flex !important;
+    min-height: 0 !important;
+    padding: 0.66rem !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-logo-squad-crowd {
+    display: block !important;
+    min-height: 420px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    background-position: center 52% !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-crowd-canvas {
+    display: block !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad {
+    animation:
+      insidersBattleAdvance calc(var(--army-step, 1s) * 1.02) linear infinite var(--army-delay, 0s),
+      insidersBattleRecoil calc(var(--army-step, 1s) * 2.6) ease-in-out infinite var(--army-delay, 0s) !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad .leg-left {
+    animation: insidersBattleLegLeft calc(var(--army-step, 1s) * 0.9) linear infinite var(--army-delay, 0s) !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad .leg-right {
+    animation: insidersBattleLegRight calc(var(--army-step, 1s) * 0.9) linear infinite var(--army-delay, 0s) !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad .arm-left {
+    animation: insidersBattleShield calc(var(--army-step, 1s) * 0.94) ease-in-out infinite var(--army-delay, 0s) !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad .arm-right {
+    animation: insidersBattleFire calc(var(--army-step, 1s) * 0.86) ease-in-out infinite var(--army-delay, 0s) !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad .robot-shadow {
+    animation: insidersBattleShadow calc(var(--army-step, 1s) * 1.02) linear infinite var(--army-delay, 0s) !important;
+  }
+}
+
+body.editorial-home :is(
+  #trending,
+  #social,
+  #monetizacao,
+  #newsletter,
+  #founders,
+  #comentarios,
+  #panorama,
+  #negocios,
+  #eleicoes,
+  #entretenimento,
+  #arquivo
+) {
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
+}
+
+body.editorial-home :is(.left-rail, .side-rail, .section-block, .mosaic-hero, .community-signal-section) {
+  contain: layout paint style;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.editorial-home *,
+  body.editorial-home *::before,
+  body.editorial-home *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body.editorial-home .site-header-stack {
+  border-color: rgba(120, 186, 245, 0.18) !important;
+  box-shadow:
+    0 28px 60px rgba(8, 20, 36, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+body.editorial-home .hero-desktop-topic-card,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band {
+  border-color: rgba(157, 212, 255, 0.14) !important;
+  box-shadow:
+    0 22px 48px rgba(8, 19, 34, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+body.editorial-home .hero-desktop-topic-copy {
+  background: rgba(8, 19, 37, 0.9) !important;
+}
+
+body.editorial-home .hero-daily-news-card.hero-daily-news-band {
+  background:
+    linear-gradient(180deg, rgba(8, 18, 35, 0.18), rgba(8, 18, 35, 0.78)),
+    linear-gradient(155deg, rgba(12, 31, 55, 0.98), rgba(21, 49, 82, 0.94)) !important;
+}
+
+body.editorial-home .hero-daily-news-card.hero-daily-news-band span {
+  color: #9ed5ff !important;
+}
+
+body.editorial-home .hero-daily-news-card.hero-daily-news-band strong,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band small {
+  color: #f8fbff !important;
+}
+
+body.editorial-home #social .social-card.wide,
+body.editorial-home .trending-card.main {
+  box-shadow:
+    0 26px 52px rgba(8, 19, 34, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+body.editorial-home #trending.section-block {
+  background:
+    radial-gradient(circle at 12% 14%, rgba(239, 193, 78, 0.08), transparent 18%),
+    radial-gradient(circle at 86% 18%, rgba(123, 191, 255, 0.1), transparent 22%),
+    linear-gradient(180deg, rgba(252, 248, 241, 0.98), rgba(244, 239, 231, 0.97)) !important;
+}
+
+body.editorial-home #trending .section-heading {
+  align-items: end;
+}
+
+body.editorial-home #trending .section-heading h2 {
+  color: #1a385d !important;
+  letter-spacing: 0 !important;
+}
+
+body.editorial-home #trending .section-heading p {
+  color: rgba(40, 66, 99, 0.76) !important;
+  max-width: 42ch;
+}
+
+body.editorial-home #trending .trending-grid.is-daily-buzz {
+  gap: 1.1rem;
+}
+
+body.editorial-home #trending .daily-buzz-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px !important;
+  border: 1px solid rgba(112, 171, 232, 0.18) !important;
+  background:
+    radial-gradient(circle at 50% -8%, rgba(126, 247, 255, 0.09), transparent 24%),
+    radial-gradient(circle at 12% 12%, rgba(239, 193, 78, 0.12), transparent 22%),
+    linear-gradient(180deg, rgba(14, 31, 53, 0.99), rgba(24, 49, 81, 0.97)) !important;
+  box-shadow:
+    0 28px 54px rgba(8, 19, 34, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    border-color 240ms ease !important;
+}
+
+body.editorial-home #trending .daily-buzz-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, transparent 0 34%, rgba(255, 255, 255, 0.08) 48%, transparent 62%),
+    radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.06), transparent 18%);
+  opacity: 0.6;
+  pointer-events: none;
+  transform: translateX(-18%);
+  transition: transform 420ms ease, opacity 280ms ease;
+}
+
+body.editorial-home #trending .daily-buzz-card:hover {
+  transform: translateY(-6px) scale(1.005);
+  border-color: rgba(145, 206, 255, 0.28) !important;
+  box-shadow:
+    0 34px 72px rgba(7, 18, 33, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card:hover::before {
+  transform: translateX(8%);
+  opacity: 0.82;
+}
+
+body.editorial-home #trending .daily-buzz-card .trend-badge {
+  top: 0.8rem;
+  left: 1rem;
+  min-height: 1.25rem;
+  padding: 0.34rem 0.78rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff7f73, #ff9b70) !important;
+  color: #fffdf8 !important;
+  box-shadow: 0 10px 22px rgba(255, 127, 115, 0.18);
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-hero-photo {
+  min-height: clamp(226px, 18vw, 300px);
+  margin-bottom: 0.3rem;
+  border-radius: 22px;
+  border: 1px solid rgba(160, 214, 255, 0.08);
+  box-shadow: inset 0 -64px 84px rgba(4, 12, 23, 0.34);
+  transition: transform 340ms ease, box-shadow 340ms ease;
+}
+
+body.editorial-home #trending .daily-buzz-card:hover .influencer-hero-photo {
+  transform: translateY(-2px) scale(1.012);
+  box-shadow:
+    inset 0 -84px 104px rgba(4, 12, 23, 0.44),
+    0 18px 38px rgba(8, 19, 34, 0.22);
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-hero-photo::after {
+  background:
+    linear-gradient(180deg, rgba(5, 12, 23, 0.06), rgba(5, 12, 23, 0.88)),
+    radial-gradient(circle at 18% 78%, rgba(243, 197, 75, 0.18), transparent 34%) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-profile {
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  padding: 0.72rem 0.8rem;
+  border-color: rgba(173, 223, 255, 0.18) !important;
+  background: rgba(6, 18, 35, 0.86) !important;
+  box-shadow: 0 14px 30px rgba(5, 13, 24, 0.24);
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-avatar {
+  width: 56px;
+  height: 56px;
+  border-width: 2px;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.24),
+    0 0 0 3px rgba(143, 220, 255, 0.08);
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-profile strong {
+  color: #ffffff !important;
+  font-size: 1.02rem;
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-profile small {
+  color: rgba(225, 241, 255, 0.78) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .buzz-kicker,
+body.editorial-home #trending .daily-buzz-card .buzz-context-grid span,
+body.editorial-home #trending .daily-buzz-card .buzz-reaction-box span {
+  color: #9fd5ff !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-buzz-copy {
+  gap: 0.65rem;
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-buzz-copy h3 {
+  color: #f9fbff !important;
+  font-size: clamp(1.34rem, 1.8vw, 1.88rem) !important;
+  line-height: 1.02 !important;
+  text-wrap: balance;
+}
+
+body.editorial-home #trending .daily-buzz-card .influencer-buzz-copy p:not(.buzz-kicker) {
+  color: rgba(229, 239, 249, 0.88) !important;
+  font-size: 0.95rem !important;
+  line-height: 1.52 !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .buzz-context-grid {
+  gap: 0.7rem;
+}
+
+body.editorial-home #trending .daily-buzz-card .buzz-context-grid div,
+body.editorial-home #trending .daily-buzz-card .buzz-reaction-box {
+  border-radius: 16px;
+  border-color: rgba(160, 214, 255, 0.14) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.06)),
+    rgba(7, 18, 34, 0.74) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .buzz-context-grid strong,
+body.editorial-home #trending .daily-buzz-card .buzz-reaction-box strong {
+  color: #ffffff !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .buzz-context-grid p,
+body.editorial-home #trending .daily-buzz-card .buzz-reaction-box p {
+  color: rgba(225, 238, 252, 0.82) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .reaction-meter {
+  height: 10px;
+  margin-top: 0.35rem;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(159, 211, 255, 0.08);
+}
+
+body.editorial-home .trending-card.main .reaction-meter i {
+  background: #efc14e !important;
+  box-shadow: 0 8px 18px rgba(239, 193, 78, 0.18);
+}
+
+body.editorial-home #trending .daily-buzz-card .engagement {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(160, 214, 255, 0.12) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card .engagement span {
+  color: rgba(208, 227, 246, 0.7) !important;
+  font-size: 0.78rem;
+}
+
+body.editorial-home #trending .daily-buzz-card.reveal {
+  animation: premiumBuzzRise 640ms cubic-bezier(0.18, 0.8, 0.22, 1) both;
+}
+
+body.editorial-home #trending .daily-buzz-card.reveal.delay-1 {
+  animation-delay: 90ms;
+}
+
+body.editorial-home #trending .daily-buzz-card.reveal.delay-2 {
+  animation-delay: 180ms;
+}
+
+@keyframes premiumBuzzRise {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.editorial-home #trending .daily-buzz-card.reveal {
+    animation: none;
+  }
+
+  body.editorial-home #trending .daily-buzz-card,
+  body.editorial-home #trending .daily-buzz-card::before,
+  body.editorial-home #trending .daily-buzz-card .influencer-hero-photo {
+    transition: none !important;
+  }
+}
+
+body.editorial-home .founders-shell {
+  background:
+    radial-gradient(circle at 12% 12%, rgba(237, 197, 86, 0.16), transparent 22%),
+    radial-gradient(circle at 88% 14%, rgba(109, 169, 233, 0.14), transparent 26%),
+    linear-gradient(180deg, rgba(255, 252, 245, 0.98), rgba(243, 238, 228, 0.96)) !important;
+}
+
+body.editorial-home .founders-summary {
+  align-items: end;
+  margin-bottom: 1.4rem;
+}
+
+body.editorial-home .founders-summary strong {
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+}
+
+body.editorial-home .founders-summary span {
+  color: rgba(33, 60, 93, 0.74);
+  font-weight: 700;
+}
+
+body.editorial-home .founders-banner-strip {
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+body.editorial-home .founder-banner-card {
+  min-height: 220px;
+  padding: 1.15rem;
+  border-radius: 24px;
+  display: grid;
+  align-content: start;
+}
+
+body.editorial-home .founder-banner-card-cafe {
+  grid-column: span 5;
+  background:
+    radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.46), transparent 28%),
+    linear-gradient(155deg, rgba(255, 242, 205, 0.98), rgba(244, 213, 130, 0.96)) !important;
+}
+
+body.editorial-home .founder-banner-card-grupoas {
+  grid-column: span 2;
+}
+
+body.editorial-home .founder-banner-card-light {
+  grid-column: span 2;
+}
+
+body.editorial-home .founder-banner-card-dark {
+  grid-column: span 3;
+}
+
+body.editorial-home .founder-banner-card span {
+  margin-bottom: 0.9rem;
+}
+
+body.editorial-home .founder-banner-card img {
+  width: min(100%, 180px);
+  max-height: 110px;
+  place-self: center;
+}
+
+body.editorial-home .founder-banner-copy {
+  min-height: 0;
+  gap: 0.55rem;
+}
+
+body.editorial-home .founder-banner-copy strong {
+  font-size: clamp(1.7rem, 2.5vw, 2.2rem);
+  line-height: 0.94;
+}
+
+body.editorial-home .founder-banner-copy p {
+  max-width: 30ch;
+  font-size: 1rem;
+}
+
+body.editorial-home .founders-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+body.editorial-home .founder-card {
+  min-height: 144px;
+  display: grid;
+  align-content: center;
+}
+
+body.editorial-home .founder-card.is-empty {
+  border-style: solid;
+  border-color: rgba(191, 156, 80, 0.22);
+  background:
+    radial-gradient(circle at top right, rgba(255, 233, 166, 0.18), transparent 32%),
+    linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(247, 240, 227, 0.94));
+}
+
+body.editorial-home .founder-card.is-empty strong {
+  color: #8d5e1f;
+}
+
+body.editorial-home .construction-showcase {
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 1.4rem;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 12% 16%, rgba(104, 195, 255, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(9, 19, 36, 0.98), rgba(7, 15, 28, 0.98));
+  border: 1px solid rgba(128, 196, 255, 0.12);
+  border-radius: 30px;
+}
+
+body.editorial-home .insiders-code-screen {
+  border-color: rgba(128, 196, 255, 0.12) !important;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(104, 195, 255, 0.1), transparent 22%),
+    linear-gradient(180deg, rgba(9, 20, 38, 0.98), rgba(6, 14, 27, 0.98)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 24px 48px rgba(7, 17, 30, 0.18);
+}
+
+body.editorial-home .insiders-code-screen::before {
+  background:
+    linear-gradient(rgba(126, 247, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 247, 255, 0.018) 1px, transparent 1px) !important;
+  background-size: 34px 34px !important;
+  opacity: 0.22 !important;
+}
+
+body.editorial-home .insiders-code-screen::after {
+  background: none !important;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+body.editorial-home .insiders-code-screen h2,
+body.editorial-home .insiders-code-screen p,
+body.editorial-home .insiders-code-screen strong,
+body.editorial-home .insiders-code-screen small,
+body.editorial-home .insiders-code-screen [data-insiders-code-line] {
+  color: #f5fbff !important;
+}
+
+body.editorial-home .insiders-code-screen .eyebrow,
+body.editorial-home .insiders-code-screen .construction-card-status,
+body.editorial-home .construction-badges span {
+  color: #9fd5ff !important;
+}
+
+body.editorial-home .construction-service-card {
+  border-color: rgba(160, 214, 255, 0.12) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.04)),
+    rgba(8, 18, 35, 0.92) !important;
+  box-shadow: none !important;
+}
+
+body.editorial-home .construction-service-card::after {
+  opacity: 0.2 !important;
+}
+
+body.editorial-home .insiders-command-stage {
+  border-color: rgba(125, 190, 245, 0.12) !important;
+  background:
+    linear-gradient(180deg, rgba(10, 18, 31, 0.98), rgba(8, 14, 24, 0.98)) !important;
+}
+
+body.editorial-home .insiders-command-stage .insiders-logo-caption {
+  background: rgba(8, 18, 35, 0.86) !important;
+  border-color: rgba(160, 214, 255, 0.14) !important;
+}
+
+@media (max-width: 1100px) {
+  body.editorial-home .founders-banner-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.editorial-home .founder-banner-card-cafe,
+  body.editorial-home .founder-banner-card-grupoas,
+  body.editorial-home .founder-banner-card-light,
+  body.editorial-home .founder-banner-card-dark {
+    grid-column: span 1;
+  }
+
+  body.editorial-home .construction-showcase {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  body.editorial-home .ticker-live-shell,
+  body.editorial-home .community-signal-section,
+  body.editorial-home .office-play-strip,
+  body.editorial-home .mosaic-hero {
+    content-visibility: auto;
+    contain-intrinsic-size: 760px;
+  }
+
+  body.editorial-home .section-block,
+  body.editorial-home .hero-section,
+  body.editorial-home .founders-section,
+  body.editorial-home .construction-showcase,
+  body.editorial-home .daily-buzz-card,
+  body.editorial-home .social-card.wide {
+    border-radius: 20px !important;
+  }
+
+  body.editorial-home #trending .trending-grid.is-daily-buzz {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.editorial-home #trending .daily-buzz-card {
+    min-height: auto !important;
+    padding: 1rem !important;
+  }
+
+  body.editorial-home #trending .daily-buzz-card .influencer-hero-photo {
+    min-height: 168px !important;
+    border-radius: 16px !important;
+  }
+
+  body.editorial-home .founders-grid,
+  body.editorial-home .founders-banner-strip {
+    grid-template-columns: 1fr !important;
+  }
+
+  body.editorial-home .founder-card,
+  body.editorial-home .founder-banner-card {
+    min-height: unset !important;
+  }
+
+  body.editorial-home .construction-showcase,
+  body.editorial-home .insiders-command-stage,
+  body.editorial-home .insiders-code-screen {
+    padding: 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body.editorial-home .logo-splash {
+    display: none !important;
+  }
+
+  body.editorial-home {
+    overflow: auto !important;
+  }
+
+  body.editorial-home .page-shell {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  body.editorial-home .site-header-stack,
+  body.editorial-home .top-strip,
+  body.editorial-home .masthead,
+  body.editorial-home .section-block {
+    overflow: clip;
+  }
+
+  body.editorial-home .device-version-notice {
+    display: none !important;
+  }
+
+  body.editorial-home .top-strip {
+    padding-inline: 0.85rem !important;
+  }
+
+  body.editorial-home .top-strip-actions a:nth-child(n + 2) {
+    display: none !important;
+  }
+
+  body.editorial-home .masthead {
+    padding: 0.95rem !important;
+  }
+
+  body.editorial-home .header-southern-cross,
+  body.editorial-home .header-quick-links,
+  body.editorial-home .ticker-live-shell,
+  body.editorial-home .hero-desktop-topic-carousel,
+  body.editorial-home .hero-newsroom-panel {
+    display: none !important;
+  }
+
+  body.editorial-home .mobile-agent-hub {
+    display: block !important;
+  }
+
+  body.editorial-home .main-nav {
+    gap: 0.45rem !important;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  body.editorial-home .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.editorial-home .main-nav a,
+  body.editorial-home .header-actions .outline-button,
+  body.editorial-home .header-actions .solid-button,
+  body.editorial-home .header-quick-links .outline-button,
+  body.editorial-home .header-quick-links .solid-button {
+    min-height: 42px;
+  }
+
+  body.editorial-home .founder-banner-copy strong,
+  body.editorial-home #trending .section-heading h2 {
+    line-height: 1.02 !important;
+  }
+
+  body.editorial-home .construction-badges,
+  body.editorial-home .hero-meta,
+  body.editorial-home .header-quick-links {
+    gap: 0.5rem !important;
+  }
+
+  body.editorial-home .side-rail .sidebar-widget:nth-child(n + 5),
+  body.editorial-home .side-rail .side-card:nth-child(n + 2) {
+    display: none !important;
+  }
+
+  body.editorial-home .office-play-strip,
+  body.editorial-home .community-signal-section {
+    display: none !important;
+  }
+}
+
+/* 2026-04-22: diferenciacao editorial do Trending no estado final montado pelo JS */
+body.editorial-home #trending .daily-buzz-card:nth-child(1) {
+  border-color: rgba(255, 169, 128, 0.22) !important;
+  background:
+    radial-gradient(circle at 50% -8%, rgba(255, 190, 150, 0.12), transparent 24%),
+    radial-gradient(circle at 12% 12%, rgba(239, 193, 78, 0.12), transparent 22%),
+    linear-gradient(180deg, rgba(14, 31, 53, 0.99), rgba(24, 49, 81, 0.97)) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card:nth-child(2) {
+  border-color: rgba(124, 205, 255, 0.2) !important;
+  background:
+    radial-gradient(circle at 82% 10%, rgba(126, 247, 255, 0.12), transparent 22%),
+    radial-gradient(circle at 16% 16%, rgba(126, 176, 255, 0.1), transparent 24%),
+    linear-gradient(180deg, rgba(11, 34, 60, 0.99), rgba(21, 57, 93, 0.97)) !important;
+}
+
+body.editorial-home #trending .daily-buzz-card:nth-child(3) {
+  border-color: rgba(212, 155, 255, 0.18) !important;
+  background:
+    radial-gradient(circle at 84% 14%, rgba(210, 160, 255, 0.1), transparent 22%),
+    radial-gradient(circle at 18% 20%, rgba(255, 196, 128, 0.08), transparent 22%),
+    linear-gradient(180deg, rgba(20, 30, 58, 0.99), rgba(36, 48, 89, 0.97)) !important;
+}
+
+body.editorial-home #trending .daily-polemica-card:nth-child(4) {
+  border-color: rgba(201, 114, 131, 0.18) !important;
+  background:
+    radial-gradient(circle at top right, rgba(255, 204, 214, 0.18), transparent 24%),
+    linear-gradient(160deg, rgba(244, 229, 232, 0.98), rgba(225, 192, 198, 0.93)) !important;
+}
+
+body.editorial-home #trending .daily-polemica-card:nth-child(5) {
+  border-color: rgba(147, 108, 205, 0.18) !important;
+  background:
+    radial-gradient(circle at top right, rgba(221, 198, 255, 0.18), transparent 24%),
+    linear-gradient(160deg, rgba(239, 231, 247, 0.98), rgba(216, 201, 234, 0.93)) !important;
+}
+
+body.editorial-home #trending .daily-polemica-card:nth-child(6) {
+  border-color: rgba(105, 175, 123, 0.18) !important;
+  background:
+    radial-gradient(circle at top right, rgba(199, 236, 203, 0.18), transparent 24%),
+    linear-gradient(160deg, rgba(232, 243, 231, 0.98), rgba(202, 223, 200, 0.93)) !important;
+}
+
+body.editorial-home #trending .daily-polemica-card:nth-child(4) h3,
+body.editorial-home #trending .daily-polemica-card:nth-child(5) h3,
+body.editorial-home #trending .daily-polemica-card:nth-child(6) h3 {
+  color: #203652 !important;
+}
+
+body.editorial-home #trending .daily-polemica-card:nth-child(4) p,
+body.editorial-home #trending .daily-polemica-card:nth-child(4) .engagement span,
+body.editorial-home #trending .daily-polemica-card:nth-child(5) p,
+body.editorial-home #trending .daily-polemica-card:nth-child(5) .engagement span,
+body.editorial-home #trending .daily-polemica-card:nth-child(6) p,
+body.editorial-home #trending .daily-polemica-card:nth-child(6) .engagement span {
+  color: rgba(39, 63, 95, 0.92) !important;
+}
+
+/* 2026-04-22: Social com diferenciação editorial estável na camada final */
+body.editorial-home #social .social-card.social-commerce {
+  border-color: rgba(201, 151, 61, 0.16) !important;
+}
+
+body.editorial-home #social .social-card.social-culture {
+  border-color: rgba(154, 101, 181, 0.16) !important;
+}
+
+body.editorial-home #social .social-card.social-network {
+  border-color: rgba(82, 144, 207, 0.16) !important;
+}
+
+body.editorial-home #social .social-card.social-buzz {
+  border-color: rgba(197, 108, 124, 0.16) !important;
+}
+
+body.editorial-home #social .social-card.social-human {
+  border-color: rgba(93, 155, 106, 0.16) !important;
+}
+
+body.editorial-home #social .social-card.social-agenda {
+  border-color: rgba(110, 133, 188, 0.16) !important;
+}
+
+body.editorial-home #social .social-card.social-commerce .news-source {
+  color: rgba(141, 92, 24, 0.84) !important;
+}
+
+body.editorial-home #social .social-card.social-culture .news-source {
+  color: rgba(118, 70, 145, 0.84) !important;
+}
+
+body.editorial-home #social .social-card.social-network .news-source {
+  color: rgba(50, 96, 148, 0.84) !important;
+}
+
+body.editorial-home #social .social-card.social-buzz .news-source {
+  color: rgba(149, 72, 92, 0.84) !important;
+}
+
+body.editorial-home #social .social-card.social-human .news-source {
+  color: rgba(61, 119, 76, 0.84) !important;
+}
+
+body.editorial-home #social .social-card.social-agenda .news-source {
+  color: rgba(81, 98, 151, 0.84) !important;
+}

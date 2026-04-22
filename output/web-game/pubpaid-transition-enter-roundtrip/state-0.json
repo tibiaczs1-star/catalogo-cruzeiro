@@ -1,0 +1,15 @@
+scene=street
+activeScenes=boot-scene, street-scene, ui-scene
+focus=rua viva
+objective=Entrar no PubPaid pela porta principal
+prompt=Rua viva carregada no núcleo definitivo. Explore ou siga para a porta.
+testBalance=100
+realBalance=0
+music=on
+musicStyle=16-bit techno layered
+musicIntroSynced=yes
+introStarted=yes
+fullscreen=yes
+orientationBlocked=no
+panelOpen=false
+panelTitle=Ponto do jogo

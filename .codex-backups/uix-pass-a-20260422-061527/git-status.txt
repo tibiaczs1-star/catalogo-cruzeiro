@@ -1,0 +1,49 @@
+ M .codex-agents/registry.json
+ M .codex-memory/assets.json
+ M .codex-memory/current-state.md
+ M .codex-memory/handoff.md
+ M .codex-memory/orders.json
+ M CODEX_MEMORY.md
+ M cheffe-call.css
+ M cheffe-call.html
+ M cheffe-call.js
+ M data/heartbeats.json
+ M data/image-preview-cache.json
+ M data/office-orders.json
+ M data/runtime-news.json
+ M data/visits.json
+ M escritorio-arte.html
+ M escritorio-nerd.html
+ M escritorio-ninjas.html
+ M escritorio.css
+ M escritorio.html
+ M escritorio.js
+ M index.html
+ M index2.html
+ M news-data.js
+ M package-lock.json
+ M package.json
+ M pesquisa-acre-2026.html
+ M progress.md
+ M pubpaid-phaser.css
+ M pubpaid-phaser.html
+ M pubpaid-phaser/app.js
+ M pubpaid-phaser/scenes/BootScene.js
+ M pubpaid-phaser/scenes/StreetScene.js
+ M pubpaid-v2.html
+ M pubpaid.html
+ M real-agents.html
+ M scripts/review-team-audit.js
+ M server.js
+?? .codex-backups/
+?? .vscode/
+?? PUBPAID_GAME_DESIGN_STACK.md
+?? assets/pubpaid/
+?? assets/vendor/
+?? data/topic-feed-games.json
+?? output/
+?? pubpaid-phaser/audio/
+?? pubpaid-phaser/scenes/IntroScene.js
+?? scripts/__pycache__/
+?? scripts/generate-pubpaid-intro-inbetweens.py
+?? uix-design-system.css

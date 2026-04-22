@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-04-22T02:05:00.000Z
+Updated: 2026-04-22T22:53:54.356Z
 
 ## Active Goal
 
-- Subir o restante do pacote sem incluir a frente PubPaid
+- Hero premium da home
 
 ## Summary
 
-Lote desta passada separado do PubPaid: manifestos em `.codex-agents/registry.json`, sincronizacao mais nova de `data/runtime-news.json` e `news-data.js`, alem da ponte `index2` (`index2.html`, `index2-bridge.css`, `index2-bridge.js`). Os arquivos `pubpaid*.html/css/js` ficam locais e nao entram nesta subida.
+Reunião de agentes decidiu abandonar a hero com laterais/ticker brigando e aplicar capa editorial premium: foto dominante, coluna sólida de leitura e faixa compacta Agora no radar.
 
 ## Next
 
-- Fazer commit/push seletivo sem PubPaid e conferir producao
+- Validar visualmente no navegador real e ajustar espaçamentos finos se o usuário apontar corte ou excesso.

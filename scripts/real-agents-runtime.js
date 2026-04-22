@@ -12,10 +12,14 @@ const RUNTIME_DIR = path.join(ROOT_DIR, ".codex-temp", "real-agents");
 const REGISTRY_FILE = path.join(AGENTS_DIR, "registry.json");
 const RUN_FILE = path.join(RUNTIME_DIR, "latest-run.json");
 const RUN_MD_FILE = path.join(RUNTIME_DIR, "latest-run.md");
+const AGENT_ARTIFACTS_DIR = path.join(RUNTIME_DIR, "artifacts");
+const AGENT_ACTIONS_FILE = path.join(ROOT_DIR, "data", "real-agents-actions.json");
 const RUNTIME_NEWS_FILE = path.join(ROOT_DIR, "data", "runtime-news.json");
 const ARCHIVE_NEWS_FILE = path.join(ROOT_DIR, "data", "news-archive.json");
 const AGENT_MEMORY_FILE = path.join(ROOT_DIR, "data", "real-agents-memory.json");
 const AGENT_SCOREBOARD_FILE = path.join(ROOT_DIR, "data", "real-agents-scoreboard.json");
+const OFFICE_ORDERS_FILE = path.join(ROOT_DIR, "data", "office-orders.json");
+const HEARTBEATS_FILE = path.join(ROOT_DIR, "data", "heartbeats.json");
 const REVIEW_REPORT_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
 const DEFAULT_OFFICE_FILE = path.join(ROOT_DIR, "escritorio.js");
 const OFFICE_CONFIG_FILES = [
@@ -118,6 +122,11 @@ function writeJson(filePath, payload) {
   fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf-8");
 }
 
+function writeText(filePath, content) {
+  ensureDir(path.dirname(filePath));
+  fs.writeFileSync(filePath, content, "utf-8");
+}
+
 function slugify(value) {
   return String(value || "")
     .toLowerCase()
@@ -126,6 +135,15 @@ function slugify(value) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 90);
+}
+
+function hashString(value) {
+  let hash = 0;
+  const text = String(value || "");
+  for (let index = 0; index < text.length; index += 1) {
+    hash = (hash * 31 + text.charCodeAt(index)) >>> 0;
+  }
+  return hash;
 }
 
 function unique(values) {
@@ -461,42 +479,251 @@ function scoreAgentAutonomy(agent, assignment, context, previousMemory) {
 }
 
 function chooseAgentIntent(agent, assignment, scores, previousMemory) {
+  const cycles = Number(previousMemory.cycles || 0);
+  const previousAutonomy = Number(previousMemory.autonomy || 0);
+  const previousConfidence = Number(previousMemory.confidence || 0);
+  const isGrowing = scores.autonomy > previousAutonomy || scores.confidence > previousConfidence;
+
   if (scores.urgency >= 82) {
-    return `abrir alerta proprio sobre ${assignment.headline}`;
+    return `crescer rapido abrindo alerta proprio sobre ${assignment.headline}`;
   }
 
   if (agent.role === "ceo") {
-    return "redistribuir prioridades sem esperar comando manual";
+    return "subir o nivel da equipe redistribuindo prioridades sem esperar comando manual";
   }
 
   if (agent.role === "review") {
-    return "bloquear pequenos vazamentos editoriais antes de virarem publicos";
+    return "ganhar confianca bloqueando pequenos vazamentos editoriais antes de virarem publicos";
   }
 
   if (agent.role === "sources") {
-    return "procurar lacunas de fonte e preparar sugestao de checagem";
+    return "crescer em autoridade procurando lacunas de fonte e preparando checagem";
   }
 
   if (agent.role === "dev") {
-    return "propor automacao quando detectar tarefa repetida";
+    return "subir de patente propondo automacao quando detectar tarefa repetida";
   }
 
   if (previousMemory.lastIntent && scores.confidence < 65) {
     return previousMemory.lastIntent;
   }
 
-  return `puxar melhoria propria para ${assignment.deliverable}`;
+  if (cycles >= 3 && !isGrowing) {
+    return `sair da estagnacao assumindo uma melhoria propria em ${assignment.deliverable}`;
+  }
+
+  return `puxar melhoria propria para crescer em ${assignment.deliverable}`;
+}
+
+function buildGrowthPlan(agent, assignment, scores, previousMemory) {
+  const cycles = Number(previousMemory.cycles || 0);
+  const previousAutonomy = Number(previousMemory.autonomy || 0);
+  const previousConfidence = Number(previousMemory.confidence || 0);
+  const autonomyDelta = scores.autonomy - previousAutonomy;
+  const confidenceDelta = scores.confidence - previousConfidence;
+  const ambition = clampNumber(
+    52 + scores.urgency * 0.18 + scores.confidence * 0.12 + Math.min(20, cycles * 2) + (autonomyDelta > 0 ? 8 : 0),
+    1,
+    100
+  );
+  const targetPoints = Math.round(
+    scores.autonomy * 3 +
+      scores.urgency * 1.35 +
+      scores.confidence * 1.15 +
+      ambition * 0.4 +
+      Math.min(80, cycles * 4)
+  );
+  const promotionTarget =
+    ambition >= 88
+      ? "liderar a rodada"
+      : ambition >= 74
+        ? "bater meta propria"
+        : ambition >= 60
+          ? "subir para ativo"
+          : "sair do modo assistido";
+  const growthAction =
+    autonomyDelta < 0
+      ? `recuperar ${Math.abs(Math.round(autonomyDelta))} pontos de autonomia em ${assignment.deliverable}`
+      : confidenceDelta < 0
+        ? `recuperar confiança entregando ${assignment.deliverable}`
+        : `transformar ${assignment.deliverable} em entrega melhor que a rodada anterior`;
+
+  return {
+    ambition: Math.round(ambition),
+    targetPoints,
+    promotionTarget,
+    growthAction,
+    autonomyDelta: Math.round(autonomyDelta),
+    confidenceDelta: Math.round(confidenceDelta),
+    wantsToGrow: true
+  };
+}
+
+function getRelevantOrders(agent, orders) {
+  return (orders || []).filter((order) => {
+    const target = `${order.to || ""} ${order.message || ""} ${order.hierarchy || ""}`.toLowerCase();
+    return (
+      target.includes(String(agent.name || "").toLowerCase()) ||
+      target.includes(String(agent.officeLabel || "").toLowerCase()) ||
+      target.includes(String(agent.role || "").toLowerCase()) ||
+      target.includes("todos os agentes") ||
+      target.includes("agentes reais")
+    );
+  });
+}
+
+function getReviewImpact(agent, orders) {
+  const relevant = getRelevantOrders(agent, orders || []);
+  return relevant.reduce(
+    (impact, order) => {
+      const status = String(order.review?.status || order.status || "").toLowerCase();
+      if (status === "aprovado") impact.approved += 1;
+      if (status === "reprovado") impact.rejected += 1;
+      if (status === "reaberto") impact.reopened += 1;
+      return impact;
+    },
+    { approved: 0, rejected: 0, reopened: 0 }
+  );
+}
+
+function getOrderAgentMatches(order, agents) {
+  const target = `${order.to || ""} ${order.message || ""} ${order.hierarchy || ""}`.toLowerCase();
+  return (agents || []).filter((agent) => {
+    return (
+      target.includes(String(agent.name || "").toLowerCase()) ||
+      target.includes(String(agent.officeLabel || "").toLowerCase()) ||
+      target.includes(String(agent.role || "").toLowerCase()) ||
+      target.includes("todos os agentes") ||
+      target.includes("agentes reais")
+    );
+  });
+}
+
+function getRecentHeartbeats(heartbeats, limit = 60) {
+  return Array.isArray(heartbeats) ? heartbeats.slice(-limit) : [];
+}
+
+function buildLifeState(agent, assignment, context, scores, growth, previousMemory) {
+  const previousLife = previousMemory.life || {};
+  const relevantOrders = getRelevantOrders(agent, context.officeOrders).slice(0, 12);
+  const reviewImpact = getReviewImpact(agent, context.officeOrders);
+  const recentHeartbeats = getRecentHeartbeats(context.heartbeats, 80);
+  const pressureFromOrders = relevantOrders.length * 4;
+  const pressureFromReview = Math.min(24, Number(context.reviewReport?.issues?.length || 0) * 2);
+  const pressure = clampNumber(scores.urgency + pressureFromOrders + pressureFromReview, 1, 100);
+  const cycle = Number(previousMemory.cycles || 0) + 1;
+  const seed = hashString(`${agent.slug}:${cycle}:${assignment.headline}:${relevantOrders[0]?.id || "none"}`);
+  const roll = seed % 100;
+  const priorEnergy = Number(previousLife.energy ?? 74);
+  const priorMorale = Number(previousLife.morale ?? 71);
+  const recovery = (scores.confidence >= 80 ? 16 : scores.confidence >= 68 ? 11 : 7) + reviewImpact.approved * 4;
+  const drain =
+    Math.round(pressure * 0.11) +
+    (growth.ambition >= 88 ? 4 : 0) +
+    reviewImpact.rejected * 8 +
+    reviewImpact.reopened * 4;
+  const energy = clampNumber(priorEnergy - drain + recovery, 28, 100);
+  const moraleSwing =
+    (growth.autonomyDelta > 0 ? 5 : growth.confidenceDelta > 0 ? 3 : growth.autonomyDelta < 0 ? -5 : -1) +
+    reviewImpact.approved * 7 -
+    reviewImpact.rejected * 11 -
+    reviewImpact.reopened * 4;
+  const morale = clampNumber(priorMorale + moraleSwing + (energy >= 70 ? 2 : -3), 20, 100);
+  const successScore =
+    scores.autonomy * 0.42 +
+    scores.confidence * 0.31 +
+    morale * 0.15 +
+    energy * 0.12 -
+    pressure * 0.05 +
+    (previousLife.streak > 0 ? Math.min(8, previousLife.streak * 2) : 0);
+
+  let outcome = "partial";
+  if ((scores.autonomy >= 68 && scores.confidence >= 68 && energy >= 38 && roll > 18) || successScore >= 58) {
+    outcome = "success";
+  } else if (successScore <= 44 || roll < 8) {
+    outcome = "failure";
+  }
+  if (reviewImpact.rejected > 0 && roll < 52) outcome = "failure";
+  if (reviewImpact.approved > 0 && roll > 12) outcome = "success";
+
+  const completedTasks = Number(previousLife.completedTasks || 0) + (outcome === "success" ? 1 : 0);
+  const partialTasks = Number(previousLife.partialTasks || 0) + (outcome === "partial" ? 1 : 0);
+  const failedTasks = Number(previousLife.failedTasks || 0) + (outcome === "failure" ? 1 : 0);
+  const streak =
+    outcome === "success"
+      ? Math.max(1, Number(previousLife.streak || 0) + 1)
+      : outcome === "failure"
+        ? Math.min(-1, Number(previousLife.streak || 0) - 1)
+        : 0;
+  const xpGain = outcome === "success" ? 18 : outcome === "partial" ? 8 : 1;
+  const xp = Number(previousLife.xp || 0) + xpGain;
+  const level = 1 + Math.floor(xp / 120);
+  const rank =
+    level >= 12
+      ? "lendario"
+      : level >= 9
+        ? "elite"
+        : level >= 6
+          ? "senior"
+          : level >= 3
+            ? "pleno"
+            : "junior";
+  const fatigue = clampNumber(100 - energy, 0, 100);
+  const status =
+    outcome === "failure"
+      ? "sob pressao"
+      : energy <= 32
+        ? "exausto"
+        : pressure >= 85
+          ? "overdrive"
+          : outcome === "success"
+            ? "entregando"
+            : "em progresso";
+  const lastEvent =
+    outcome === "success"
+      ? `entregou ${assignment.deliverable} e subiu o nivel da rodada`
+      : outcome === "failure"
+        ? `falhou em ${assignment.deliverable} e voltou para correção`
+        : `seguiu vivo em ${assignment.deliverable}, mas ainda sem fechar a rodada`;
+  const queueDepth = relevantOrders.length + Math.max(0, Number(context.newsSummary?.totalItems || 0) - 24);
+
+  return {
+    status,
+    outcome,
+    energy: Math.round(energy),
+    morale: Math.round(morale),
+    fatigue: Math.round(fatigue),
+    pressure: Math.round(pressure),
+    queueDepth,
+    assignedOrders: relevantOrders.length,
+    completedTasks,
+    partialTasks,
+    failedTasks,
+    streak,
+    xp,
+    level,
+    rank,
+    heartbeatLoad: recentHeartbeats.length,
+    lastEvent,
+    lastOrderId: relevantOrders[0]?.id || "",
+    lastOrderMessage: relevantOrders[0]?.message || "",
+    manualReview: reviewImpact,
+    alive: true
+  };
 }
 
 function updateAgentMemory(agent, assignment, context, memoryStore) {
   const previous = memoryStore.agents[agent.slug] || {};
   const scores = scoreAgentAutonomy(agent, assignment, context, previous);
   const intent = chooseAgentIntent(agent, assignment, scores, previous);
+  const growth = buildGrowthPlan(agent, assignment, scores, previous);
+  const life = buildLifeState(agent, assignment, context, scores, growth, previous);
   const now = new Date();
   const nextCheck = new Date(now.getTime() + (scores.urgency >= 80 ? 2 : 5) * 60 * 1000).toISOString();
   const note = {
     at: now.toISOString(),
     intent,
+    growth,
     action: assignment.action,
     signal: assignment.monitor,
     autonomy: scores.autonomy,
@@ -517,6 +744,8 @@ function updateAgentMemory(agent, assignment, context, memoryStore) {
     lastHeadline: assignment.headline,
     lastAction: assignment.action,
     lastIntent: intent,
+    growth,
+    life,
     nextCheckAt: nextCheck,
     autonomy: scores.autonomy,
     urgency: scores.urgency,
@@ -527,6 +756,8 @@ function updateAgentMemory(agent, assignment, context, memoryStore) {
   return {
     mode: scores.autonomy >= 75 ? "autonomo-alto" : scores.autonomy >= 55 ? "autonomo-ativo" : "assistido",
     intent,
+    growth,
+    life,
     urgency: scores.urgency,
     confidence: scores.confidence,
     autonomy: scores.autonomy,
@@ -559,6 +790,316 @@ function summarizeAutonomy(queue) {
         urgency: item.autonomy?.urgency || 0
       }))
   };
+}
+
+function summarizeLife(queue) {
+  const alive = queue.filter((item) => item.autonomy?.life?.alive);
+  const successes = alive.filter((item) => item.autonomy?.life?.outcome === "success");
+  const failures = alive.filter((item) => item.autonomy?.life?.outcome === "failure");
+  const exhausted = alive.filter((item) => Number(item.autonomy?.life?.energy || 0) <= 32);
+  const overdrive = alive.filter((item) => String(item.autonomy?.life?.status || "") === "overdrive");
+  const averageEnergy =
+    alive.reduce((total, item) => total + Number(item.autonomy?.life?.energy || 0), 0) / Math.max(1, alive.length);
+  const averageMorale =
+    alive.reduce((total, item) => total + Number(item.autonomy?.life?.morale || 0), 0) / Math.max(1, alive.length);
+  const byOffice = new Map();
+
+  alive.forEach((item) => {
+    const current = byOffice.get(item.officeLabel) || {
+      office: item.officeLabel,
+      agents: 0,
+      delivered: 0,
+      failed: 0,
+      energy: 0,
+      morale: 0
+    };
+    current.agents += 1;
+    current.delivered += item.autonomy?.life?.outcome === "success" ? 1 : 0;
+    current.failed += item.autonomy?.life?.outcome === "failure" ? 1 : 0;
+    current.energy += Number(item.autonomy?.life?.energy || 0);
+    current.morale += Number(item.autonomy?.life?.morale || 0);
+    byOffice.set(item.officeLabel, current);
+  });
+
+  return {
+    aliveAgents: alive.length,
+    deliveredAgents: successes.length,
+    failedAgents: failures.length,
+    exhaustedAgents: exhausted.length,
+    overdriveAgents: overdrive.length,
+    averageEnergy: Math.round(averageEnergy),
+    averageMorale: Math.round(averageMorale),
+    offices: [...byOffice.values()]
+      .map((office) => ({
+        office: office.office,
+        agents: office.agents,
+        delivered: office.delivered,
+        failed: office.failed,
+        averageEnergy: Math.round(office.energy / Math.max(1, office.agents)),
+        averageMorale: Math.round(office.morale / Math.max(1, office.agents))
+      }))
+      .sort((a, b) => b.delivered - a.delivered || b.averageMorale - a.averageMorale)
+  };
+}
+
+function buildLiveEventFeed(queue, limit = 24) {
+  return queue
+    .slice()
+    .sort((a, b) => Number(b.points || 0) - Number(a.points || 0))
+    .slice(0, limit)
+    .map((item, index) => ({
+      id: `${item.slug}-event-${index + 1}`,
+      at: item.autonomy?.nextCheckAt || new Date().toISOString(),
+      name: item.name,
+      office: item.officeLabel,
+      role: item.role,
+      status: item.autonomy?.life?.status || "ativo",
+      outcome: item.autonomy?.life?.outcome || "partial",
+      points: item.points || 0,
+      level: item.autonomy?.life?.level || 1,
+      rank: item.autonomy?.life?.rank || "junior",
+      message: item.autonomy?.life?.lastEvent || item.assignment?.action || "agente em operacao"
+    }));
+}
+
+function buildOfficeLogs(queue, limitPerOffice = 8) {
+  const byOffice = new Map();
+  queue.forEach((item) => {
+    const office = item.officeLabel || "Escritorio";
+    const current = byOffice.get(office) || [];
+    current.push({
+      at: item.autonomy?.nextCheckAt || new Date().toISOString(),
+      name: item.name,
+      role: item.role,
+      outcome: item.autonomy?.life?.outcome || "partial",
+      status: item.autonomy?.life?.status || "ativo",
+      points: item.points || 0,
+      message: item.autonomy?.life?.lastEvent || item.assignment?.action || "agente em operacao"
+    });
+    byOffice.set(office, current);
+  });
+
+  return [...byOffice.entries()]
+    .map(([office, logs]) => ({
+      office,
+      totalLogs: logs.length,
+      items: logs
+        .sort((a, b) => Number(b.points || 0) - Number(a.points || 0))
+        .slice(0, limitPerOffice)
+    }))
+    .sort((a, b) => b.totalLogs - a.totalLogs || String(a.office).localeCompare(String(b.office), "pt-BR"));
+}
+
+function buildAgentTimelines(queue, limitPerAgent = 10) {
+  return queue.map((item) => {
+    const memory = Array.isArray(item.autonomy?.memory) ? item.autonomy.memory : [];
+    const life = item.autonomy?.life || {};
+    const current = {
+      at: item.autonomy?.nextCheckAt || new Date().toISOString(),
+      type: life.outcome || "partial",
+      title: life.lastEvent || item.assignment?.action || "rodada operacional",
+      points: item.points || 0,
+      status: life.status || "ativo"
+    };
+    const history = memory.map((entry) => ({
+      at: entry.at,
+      type: "memoria",
+      title: entry.action || entry.intent || "memoria operacional",
+      points: 0,
+      status: entry.signal || ""
+    }));
+    return {
+      slug: item.slug,
+      name: item.name,
+      office: item.officeLabel,
+      role: item.role,
+      level: life.level || 1,
+      rank: life.rank || "junior",
+      events: [current, ...history].slice(0, limitPerAgent)
+    };
+  });
+}
+
+function getActionKindForRole(role) {
+  return {
+    ceo: "prioridade-operacional",
+    editor: "ajuste-editorial",
+    review: "auditoria",
+    copy: "copy-sugerida",
+    sources: "checagem-fonte",
+    social: "gancho-social",
+    design: "melhoria-visual",
+    pixel: "asset-brief",
+    dev: "automacao-proposta",
+    games: "experiencia-interativa",
+    kids: "adaptacao-familia",
+    sales: "oportunidade-comercial"
+  }[role] || "observacao";
+}
+
+function buildAgentArtifactMarkdown(item) {
+  const life = item.autonomy?.life || {};
+  const growth = item.autonomy?.growth || {};
+  const performance = item.performance || {};
+  return [
+    `# ${item.name} - ${item.officeLabel}`,
+    "",
+    `- Funcao: ${item.role}`,
+    `- Status: ${life.status || "ativo"} / ${life.outcome || "partial"}`,
+    `- Pontos liquidos: ${item.points || 0}`,
+    `- Meta: ${growth.promotionTarget || "crescer"}`,
+    `- Penalidade: ${performance.penalty || 0} (${performance.penaltyReason || "sem penalidade"})`,
+    "",
+    "## Ordem / Contexto",
+    "",
+    `- Manchete: ${item.assignment?.headline || ""}`,
+    `- Acao: ${item.assignment?.action || ""}`,
+    `- Ideia: ${item.assignment?.idea || ""}`,
+    `- Monitor: ${item.assignment?.monitor || ""}`,
+    "",
+    "## Entrega verificavel",
+    "",
+    life.outcome === "success"
+      ? `Entregou ${item.assignment?.deliverable || "observacao"} com base na rodada atual.`
+      : life.outcome === "failure"
+        ? `Falhou em ${item.assignment?.deliverable || "observacao"} e precisa de revisao manual.`
+        : `Gerou progresso parcial em ${item.assignment?.deliverable || "observacao"}.`,
+    "",
+    "## Proximo passo sugerido",
+    "",
+    growth.growthAction || item.autonomy?.intent || "Aguardar nova ordem.",
+    ""
+  ].join("\n");
+}
+
+function buildExecutableActions(queue, limit = 36) {
+  ensureDir(AGENT_ARTIFACTS_DIR);
+  const selected = queue
+    .slice()
+    .sort((a, b) => Number(b.points || 0) - Number(a.points || 0))
+    .slice(0, limit);
+
+  return selected.map((item, index) => {
+    const fileName = `${String(index + 1).padStart(2, "0")}-${item.slug}.md`;
+    const artifactPath = path.join(AGENT_ARTIFACTS_DIR, fileName);
+    writeText(artifactPath, buildAgentArtifactMarkdown(item));
+    return {
+      id: `act-${item.slug}-${index + 1}`,
+      slug: item.slug,
+      agent: item.name,
+      office: item.officeLabel,
+      role: item.role,
+      kind: getActionKindForRole(item.role),
+      status: "aguardando-aprovacao",
+      points: item.points || 0,
+      outcome: item.autonomy?.life?.outcome || "partial",
+      title: item.assignment?.action || item.autonomy?.intent || "acao operacional",
+      artifact: path.relative(ROOT_DIR, artifactPath).replace(/\\/g, "/"),
+      createdAt: new Date().toISOString()
+    };
+  });
+}
+
+function buildOfficeDashboard(queue, orders) {
+  const byOffice = new Map();
+  queue.forEach((item) => {
+    const life = item.autonomy?.life || {};
+    const office = item.officeLabel || "Escritorio";
+    const current = byOffice.get(office) || {
+      office,
+      agents: 0,
+      delivered: 0,
+      failed: 0,
+      partial: 0,
+      points: 0,
+      energy: 0,
+      morale: 0,
+      topAgents: [],
+      riskAgents: []
+    };
+    current.agents += 1;
+    current.delivered += life.outcome === "success" ? 1 : 0;
+    current.failed += life.outcome === "failure" ? 1 : 0;
+    current.partial += life.outcome === "partial" ? 1 : 0;
+    current.points += Number(item.points || 0);
+    current.energy += Number(life.energy || 0);
+    current.morale += Number(life.morale || 0);
+    current.topAgents.push({ name: item.name, points: item.points || 0, status: life.status || "" });
+    if (life.outcome === "failure" || Number(life.energy || 0) <= 32) {
+      current.riskAgents.push({ name: item.name, points: item.points || 0, status: life.status || "" });
+    }
+    byOffice.set(office, current);
+  });
+
+  return [...byOffice.values()].map((office) => {
+    const officeOrders = (orders || []).filter((order) =>
+      String(`${order.to || ""} ${order.message || ""}`).toLowerCase().includes(String(office.office).toLowerCase())
+    );
+    return {
+      ...office,
+      deliveryRate: Math.round((office.delivered / Math.max(1, office.agents)) * 100),
+      failureRate: Math.round((office.failed / Math.max(1, office.agents)) * 100),
+      averageEnergy: Math.round(office.energy / Math.max(1, office.agents)),
+      averageMorale: Math.round(office.morale / Math.max(1, office.agents)),
+      openOrders: officeOrders.filter((order) => ["recebida", "em-execucao", "reaberto"].includes(order.status)).length,
+      closedOrders: officeOrders.filter((order) => ["entregue", "aprovado"].includes(order.status)).length,
+      topAgents: office.topAgents.sort((a, b) => b.points - a.points).slice(0, 5),
+      riskAgents: office.riskAgents.sort((a, b) => a.points - b.points).slice(0, 5)
+    };
+  });
+}
+
+function updateOfficeOrdersLifecycle(orders, agents, queue, nowIso) {
+  const safeOrders = Array.isArray(orders) ? orders.slice() : [];
+  const queueBySlug = new Map((queue || []).map((item) => [item.slug, item]));
+
+  return safeOrders.map((order) => {
+    const matches = getOrderAgentMatches(order, agents).slice(0, 24);
+    if (!matches.length) {
+      return order;
+    }
+
+    const assignments = matches.map((agent) => {
+      const runtime = queueBySlug.get(agent.slug);
+      const life = runtime?.autonomy?.life || {};
+      const outcome = life.outcome || "partial";
+      const status =
+        outcome === "success" ? "entregue" : outcome === "failure" ? "falhou" : "em-execucao";
+      return {
+        agentId: agent.id,
+        slug: agent.slug,
+        name: agent.name,
+        office: agent.officeLabel,
+        role: agent.role,
+        status,
+        outcome,
+        points: runtime?.points || 0,
+        lastEvent: life.lastEvent || runtime?.assignment?.action || "",
+        updatedAt: nowIso
+      };
+    });
+
+    const delivered = assignments.filter((item) => item.status === "entregue").length;
+    const failed = assignments.filter((item) => item.status === "falhou").length;
+    const running = assignments.filter((item) => item.status === "em-execucao").length;
+    const nextStatus = delivered > 0 && failed === 0 && running === 0 ? "entregue" : failed > 0 ? "falhou" : "em-execucao";
+
+    return {
+      ...order,
+      status:
+        order.status === "cheffe-call-ativo"
+          ? order.status
+          : nextStatus,
+      assignedAgents: assignments.length,
+      assignments,
+      executionSummary: {
+        delivered,
+        failed,
+        running
+      },
+      lastRuntimeAt: nowIso
+    };
+  });
 }
 
 function buildDailyAgentContext(queue) {
@@ -733,16 +1274,70 @@ function scoreAgentPerformance(item) {
   const urgency = Number(item.autonomy?.urgency || 0);
   const confidence = Number(item.autonomy?.confidence || 0);
   const cycles = Number(item.autonomy?.cycles || 0);
-  return Math.round(autonomy * 3 + urgency * 1.35 + confidence * 1.15 + Math.min(80, cycles * 4));
+  const growth = item.autonomy?.growth || {};
+  const life = item.autonomy?.life || {};
+  const manualReview = life.manualReview || {};
+  const ambition = Number(growth.ambition || 0);
+  const targetPoints = Number(growth.targetPoints || 0);
+  const growthBonus = ambition * 0.75 + Math.min(90, targetPoints / 6);
+  const lifeBonus =
+    Number(life.energy || 0) * 0.4 +
+    Number(life.morale || 0) * 0.36 +
+    (life.outcome === "success" ? 28 : life.outcome === "partial" ? 10 : 0) +
+    Math.max(0, Number(life.streak || 0)) * 6;
+  const grossPoints = Math.round(
+    autonomy * 3 + urgency * 1.35 + confidence * 1.15 + Math.min(80, cycles * 4) + growthBonus + lifeBonus
+  );
+  const autonomyDelta = Number(growth.autonomyDelta || 0);
+  const confidenceDelta = Number(growth.confidenceDelta || 0);
+  const missedTarget = targetPoints > 0 && grossPoints < targetPoints;
+  const stalledGrowth = cycles >= 4 && autonomyDelta <= 0 && confidenceDelta <= 0;
+  const penalty =
+    (missedTarget ? Math.min(90, Math.round((targetPoints - grossPoints) * 0.42)) : 0) +
+    (autonomyDelta < 0 ? Math.min(45, Math.abs(autonomyDelta) * 4) : 0) +
+    (confidenceDelta < 0 ? Math.min(35, Math.abs(confidenceDelta) * 3) : 0) +
+    (stalledGrowth ? Math.min(42, 10 + Math.round(ambition * 0.18)) : 0) +
+    (life.outcome === "failure" ? 34 : 0) +
+    (Number(life.energy || 0) <= 32 ? 22 : 0) +
+    Number(manualReview.rejected || 0) * 55 +
+    Number(manualReview.reopened || 0) * 24 -
+    Number(manualReview.approved || 0) * 26 +
+    (cycles >= 4 && ambition < 62 ? 18 : 0);
+  const netPoints = Math.max(0, grossPoints - penalty);
+
+  item.performance = {
+    grossPoints,
+    targetPoints,
+    penalty,
+    netPoints,
+    missedTarget,
+    penaltyReason: penalty
+      ? [
+          missedTarget ? "nao bateu a meta da rodada" : "",
+          stalledGrowth ? "nao evoluiu contra a rodada anterior" : "",
+          autonomyDelta < 0 ? "perdeu autonomia" : "",
+          confidenceDelta < 0 ? "perdeu confianca" : "",
+          cycles >= 4 && ambition < 62 ? "ambicao baixa apos varios ciclos" : ""
+        ]
+          .filter(Boolean)
+          .join("; ")
+      : "meta batida ou mantida"
+  };
+
+  return netPoints;
 }
 
 function buildAwardedQueue(queue) {
-  return queue.map((item) => ({
-    ...item,
-    photo: buildAgentPhoto(item),
-    points: scoreAgentPerformance(item),
-    awards: []
-  }));
+  return queue.map((item) => {
+    const points = scoreAgentPerformance(item);
+    return {
+      ...item,
+      performance: item.performance,
+      photo: buildAgentPhoto(item),
+      points,
+      awards: []
+    };
+  });
 }
 
 function giveAward(target, award, rank) {
@@ -1095,7 +1690,9 @@ function main() {
   const newsItems = loadNewsItems();
   const newsSummary = summarizeNews(newsItems);
   const reviewReport = readJson(REVIEW_REPORT_FILE, { issues: [], sources: { topicSummary: [] } });
-  const context = { newsItems, newsSummary, reviewReport };
+  const officeOrders = readJson(OFFICE_ORDERS_FILE, []);
+  const heartbeats = readJson(HEARTBEATS_FILE, []);
+  const context = { newsItems, newsSummary, reviewReport, officeOrders, heartbeats };
   const memoryStore = readAgentMemoryStore();
 
   const queue = buildAwardedQueue(agents.map((agent) => {
@@ -1122,7 +1719,20 @@ function main() {
       "monitoramento do jornal"
   }));
   const autonomySummary = summarizeAutonomy(queue);
+  const lifeSummary = summarizeLife(queue);
   const dailyContext = buildDailyAgentContext(queue);
+  const liveEvents = buildLiveEventFeed(queue);
+  const officeLogs = buildOfficeLogs(queue);
+  const updatedOrders = updateOfficeOrdersLifecycle(officeOrders, agents, queue, new Date().toISOString());
+  const agentTimelines = buildAgentTimelines(queue);
+  const officeDashboard = buildOfficeDashboard(queue, updatedOrders);
+  const executableActions = buildExecutableActions(queue);
+  writeJson(OFFICE_ORDERS_FILE, updatedOrders);
+  writeJson(AGENT_ACTIONS_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    actions: executableActions
+  });
   const awards = buildAgentAwards(queue);
   const scoreboard = updateAgentScoreboard(queue);
 
@@ -1135,15 +1745,28 @@ function main() {
       reviewIssues: (reviewReport.issues || []).length,
       autonomousAgents: autonomySummary.autonomousAgents,
       highAutonomyAgents: autonomySummary.highAutonomyAgents,
-      averageAutonomy: autonomySummary.averageAutonomy
+      averageAutonomy: autonomySummary.averageAutonomy,
+      aliveAgents: lifeSummary.aliveAgents,
+      deliveredAgents: lifeSummary.deliveredAgents,
+      failedAgents: lifeSummary.failedAgents,
+      exhaustedAgents: lifeSummary.exhaustedAgents,
+      averageEnergy: lifeSummary.averageEnergy,
+      averageMorale: lifeSummary.averageMorale
     },
     news: newsSummary,
     autonomy: autonomySummary,
+    life: lifeSummary,
     awards,
     scoreboard,
     dailyContext,
+    liveEvents,
+    officeLogs,
+    agentTimelines,
+    officeDashboard,
+    executableActions,
     offices: officeStatus,
-    queue
+    queue,
+    orders: updatedOrders.slice(-80).reverse()
   };
 
   writeJson(RUN_FILE, runReport);

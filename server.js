@@ -74,7 +74,9 @@ const REAL_AGENTS_REGISTRY_FILE = path.join(ROOT_DIR, ".codex-agents", "registry
 const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
 const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
 const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
+const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
+const CHEFFE_CALL_PROMPTS_FILE = path.join(ROOT_DIR, "docs", "cheffe-call-181-prompts.json");
 const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
@@ -128,6 +130,7 @@ const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_NEURAL_GROWTH_FILE = path.join(DATA_DIR, "office-neural-growth.json");
+const WHATSAPP_CHAT_LOG_FILE = path.join(DATA_DIR, "whatsapp-chat-log.json");
 const PUBPAID_SPRITE_SCOUT_FILE = path.join(DATA_DIR, "pubpaid-sprite-scout.json");
 const PUBPAID_DEPOSITS_FILE = path.join(DATA_DIR, "pubpaid-deposits.json");
 const PUBPAID_WITHDRAWALS_FILE = path.join(DATA_DIR, "pubpaid-withdrawals.json");
@@ -138,6 +141,19 @@ const LEGACY_PUBPAID_DEPOSITS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaid
 const LEGACY_PUBPAID_WITHDRAWALS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWithdrawals.json");
 const LEGACY_PUBPAID_WALLETS_FILE = path.join(LEGACY_BACKEND_DATA_DIR, "pubpaidWallets.json");
 const SITE_URL = String(process.env.SITE_URL || "").trim().replace(/\/+$/, "");
+const WHATSAPP_CHAT_ENABLED = String(process.env.WHATSAPP_CHAT_ENABLED || "").trim().toLowerCase() === "true";
+const WHATSAPP_CLOUD_TOKEN = String(process.env.WHATSAPP_CLOUD_TOKEN || "").trim();
+const WHATSAPP_CLOUD_PHONE_NUMBER_ID = String(process.env.WHATSAPP_CLOUD_PHONE_NUMBER_ID || "").trim();
+const WHATSAPP_WEBHOOK_VERIFY_TOKEN = String(process.env.WHATSAPP_WEBHOOK_VERIFY_TOKEN || "").trim();
+const WHATSAPP_CHAT_AUTOREPLY_ENABLED =
+  String(process.env.WHATSAPP_CHAT_AUTOREPLY_ENABLED || "").trim().toLowerCase() !== "false";
+const WHATSAPP_CHAT_AUTOREPLY_TEXT = String(
+  process.env.WHATSAPP_CHAT_AUTOREPLY_TEXT ||
+    "Recebi sua mensagem aqui no WhatsApp. A ponte com o Catalogo/Codex esta ativa e eu vou responder por aqui assim que possivel."
+)
+  .replace(/\s+/g, " ")
+  .trim()
+  .slice(0, 1000);
 const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
 const FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "99831455A").trim();
 const LOCALE = "pt-BR";
@@ -357,7 +373,7 @@ const STATIC_PAGE_SEO = {
   "/cheffe-call.html": {
     title: `Cheffe Call | ${SITE_NAME}`,
     description:
-      "Sala de reuniao dos agentes reais, com teatro bitmap, pausa operacional, memoria da reuniao, agente do dia, escritorio do dia e acao do dia.",
+      "Sala de reuniao dos agentes reais, com escritorio bitmap, pausa operacional, memoria da reuniao, agente do dia, escritorio do dia e acao do dia.",
     themeColor: "#120f1a",
     colorScheme: "dark light",
     ogType: "website",
@@ -1397,11 +1413,130 @@ function cleanPhone(value) {
   return String(value || "").replace(/[^\d()+\-\s]/g, "").replace(/\s+/g, " ").trim().slice(0, 32);
 }
 
+function cleanPhoneDigits(value) {
+  return String(value || "").replace(/\D/g, "").slice(0, 32);
+}
+
 function safeString(value, max = 400) {
   return String(value || "")
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, max);
+}
+
+function getWhatsappChatConfig() {
+  return {
+    enabled: WHATSAPP_CHAT_ENABLED,
+    token: WHATSAPP_CLOUD_TOKEN,
+    phoneNumberId: WHATSAPP_CLOUD_PHONE_NUMBER_ID,
+    verifyToken: WHATSAPP_WEBHOOK_VERIFY_TOKEN,
+    autoReplyEnabled: WHATSAPP_CHAT_AUTOREPLY_ENABLED,
+    autoReplyText: WHATSAPP_CHAT_AUTOREPLY_TEXT
+  };
+}
+
+function extractWhatsappInboundMessages(payload) {
+  const entries = Array.isArray(payload?.entry) ? payload.entry : [];
+  return entries.flatMap((entry) =>
+    (Array.isArray(entry?.changes) ? entry.changes : []).flatMap((change) => {
+      const value = change?.value || {};
+      const contacts = Array.isArray(value?.contacts) ? value.contacts : [];
+      const contactByWaId = new Map(
+        contacts
+          .map((contact) => [cleanPhoneDigits(contact?.wa_id), contact])
+          .filter(([waId]) => waId)
+      );
+      const metadata = value?.metadata || {};
+      const messages = Array.isArray(value?.messages) ? value.messages : [];
+
+      return messages
+        .map((message) => {
+          const from = cleanPhoneDigits(message?.from);
+          const contact = contactByWaId.get(from) || null;
+          const type = String(message?.type || "unknown").trim().toLowerCase();
+          let text = "";
+
+          if (type === "text") {
+            text = String(message?.text?.body || "");
+          } else if (type === "button") {
+            text = String(message?.button?.text || "");
+          } else if (type === "interactive") {
+            text = String(
+              message?.interactive?.button_reply?.title ||
+                message?.interactive?.list_reply?.title ||
+                ""
+            );
+          }
+
+          return {
+            id: String(message?.id || ""),
+            from,
+            profileName: safeString(contact?.profile?.name || "", 120),
+            type,
+            text: safeString(text, 4000),
+            timestamp: Number(message?.timestamp || 0) || 0,
+            rawTimestamp: String(message?.timestamp || ""),
+            phoneNumberId: String(metadata?.phone_number_id || ""),
+            displayPhoneNumber: String(metadata?.display_phone_number || "")
+          };
+        })
+        .filter((item) => item.from && item.id);
+    })
+  );
+}
+
+async function sendWhatsappTextMessage(to, message) {
+  const config = getWhatsappChatConfig();
+  const target = cleanPhoneDigits(to);
+  const bodyText = safeString(message, 1000);
+
+  if (!config.enabled) {
+    return { ok: false, skipped: true, reason: "disabled" };
+  }
+
+  if (!config.token || !config.phoneNumberId || !target || !bodyText) {
+    return { ok: false, skipped: true, reason: "missing-config" };
+  }
+
+  const response = await fetch(
+    `https://graph.facebook.com/v19.0/${encodeURIComponent(config.phoneNumberId)}/messages`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${config.token}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messaging_product: "whatsapp",
+        to: target,
+        type: "text",
+        text: {
+          preview_url: false,
+          body: bodyText
+        }
+      })
+    }
+  );
+
+  const responseText = await response.text();
+  if (!response.ok) {
+    throw new Error(`WhatsApp Cloud API ${response.status}: ${responseText.slice(0, 500)}`);
+  }
+
+  return {
+    ok: true,
+    responseText
+  };
+}
+
+function appendWhatsappChatLog(items) {
+  if (!Array.isArray(items) || !items.length) return [];
+
+  const current = readJson(WHATSAPP_CHAT_LOG_FILE, []);
+  const next = Array.isArray(current) ? current : [];
+  next.push(...items);
+  writeJson(WHATSAPP_CHAT_LOG_FILE, next);
+  return items;
 }
 
 function base64UrlEncode(value) {
@@ -4996,6 +5131,101 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+function reviewOfficeOrder(body = {}) {
+  const orderId = cleanShortText(body.orderId || body.id, 120);
+  const status = cleanShortText(body.status || body.reviewStatus, 40).toLowerCase();
+  const note = cleanShortText(body.note || body.message || "", 800);
+  const allowed = {
+    approved: "aprovado",
+    approve: "aprovado",
+    aprovado: "aprovado",
+    rejected: "reprovado",
+    reject: "reprovado",
+    reprovado: "reprovado",
+    reopened: "reaberto",
+    reopen: "reaberto",
+    reaberto: "reaberto"
+  };
+  const nextStatus = allowed[status];
+  if (!orderId || !nextStatus) {
+    return { ok: false, status: 400, error: "Informe orderId e status aprovado/reprovado/reaberto." };
+  }
+
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  const safeOrders = Array.isArray(orders) ? orders : [];
+  let found = null;
+  const nextOrders = safeOrders.map((order) => {
+    if (order.id !== orderId) return order;
+    found = {
+      ...order,
+      status: nextStatus,
+      review: {
+        status: nextStatus,
+        note,
+        reviewedBy: "Full Admin",
+        reviewedAt: new Date().toISOString()
+      },
+      reviewHistory: [
+        {
+          status: nextStatus,
+          note,
+          reviewedBy: "Full Admin",
+          reviewedAt: new Date().toISOString()
+        },
+        ...(Array.isArray(order.reviewHistory) ? order.reviewHistory : [])
+      ].slice(0, 20)
+    };
+    return found;
+  });
+
+  if (!found) return { ok: false, status: 404, error: "Ordem nao encontrada." };
+  writeJson(OFFICE_ORDERS_FILE, nextOrders);
+  return { ok: true, order: found };
+}
+
+function reviewRealAgentAction(body = {}) {
+  const actionId = cleanShortText(body.actionId || body.id, 160);
+  const status = cleanShortText(body.status || "", 40).toLowerCase();
+  const note = cleanShortText(body.note || "", 800);
+  const allowed = {
+    aprovado: "aprovado",
+    approve: "aprovado",
+    approved: "aprovado",
+    reprovado: "reprovado",
+    reject: "reprovado",
+    rejected: "reprovado",
+    aplicar: "aprovado-para-aplicar"
+  };
+  const nextStatus = allowed[status];
+  if (!actionId || !nextStatus) {
+    return { ok: false, status: 400, error: "Informe actionId e status aprovado/reprovado." };
+  }
+  const store = readJson(REAL_AGENTS_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  let found = null;
+  const nextActions = actions.map((action) => {
+    if (action.id !== actionId) return action;
+    found = {
+      ...action,
+      status: nextStatus,
+      review: {
+        status: nextStatus,
+        note,
+        reviewedBy: "Full Admin",
+        reviewedAt: new Date().toISOString()
+      }
+    };
+    return found;
+  });
+  if (!found) return { ok: false, status: 404, error: "Acao nao encontrada." };
+  writeJson(REAL_AGENTS_ACTIONS_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    actions: nextActions
+  });
+  return { ok: true, action: found };
+}
+
 function normalizeCommunityReport(item = {}) {
   return {
     id: cleanShortText(item.id, 80),
@@ -5115,9 +5345,16 @@ function buildRealAgentsPayload() {
       activeQueue: queue.length,
       autonomousAgents: Number(latestRun?.summary?.autonomousAgents || 0),
       highAutonomyAgents: Number(latestRun?.summary?.highAutonomyAgents || 0),
-      averageAutonomy: Number(latestRun?.summary?.averageAutonomy || 0)
+      averageAutonomy: Number(latestRun?.summary?.averageAutonomy || 0),
+      aliveAgents: Number(latestRun?.summary?.aliveAgents || 0),
+      deliveredAgents: Number(latestRun?.summary?.deliveredAgents || 0),
+      failedAgents: Number(latestRun?.summary?.failedAgents || 0),
+      exhaustedAgents: Number(latestRun?.summary?.exhaustedAgents || 0),
+      averageEnergy: Number(latestRun?.summary?.averageEnergy || 0),
+      averageMorale: Number(latestRun?.summary?.averageMorale || 0)
     },
     autonomy: latestRun?.autonomy || null,
+    life: latestRun?.life || null,
     autoRun: {
       enabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
       pausedByCheffeCall: readCheffeCallState().active,
@@ -5147,6 +5384,14 @@ function buildRealAgentsPayload() {
     })),
     news: latestRun?.news || null,
     dailyContext: latestRun?.dailyContext || null,
+    liveEvents: Array.isArray(latestRun?.liveEvents) ? latestRun.liveEvents : [],
+    officeLogs: Array.isArray(latestRun?.officeLogs) ? latestRun.officeLogs : [],
+    agentTimelines: Array.isArray(latestRun?.agentTimelines) ? latestRun.agentTimelines : [],
+    officeDashboard: Array.isArray(latestRun?.officeDashboard) ? latestRun.officeDashboard : [],
+    executableActions: Array.isArray(latestRun?.executableActions)
+      ? latestRun.executableActions
+      : (Array.isArray(readJson(REAL_AGENTS_ACTIONS_FILE, {})?.actions) ? readJson(REAL_AGENTS_ACTIONS_FILE, {}).actions : []),
+    orders: Array.isArray(latestRun?.orders) ? latestRun.orders : [],
     awards: latestRun?.awards || null,
     scoreboard: latestRun?.scoreboard || null,
     officeStatus: Array.isArray(latestRun?.offices) ? latestRun.offices : [],
@@ -5223,15 +5468,64 @@ function getCheffeCallOpinions(payload, instruction) {
         urgency: item.autonomy?.urgency || 0
       }));
 
-  return source.map((item) => ({
-    agent: item.name,
-    office: item.office,
-    role: item.role,
-    score: item.autonomy,
-    urgency: item.urgency,
-    opinion: `${item.intent || "acompanhar o tema"}. Sobre "${cleanShortText(instruction || "tema de hoje", 120)}", minha sugestao e listar opcoes e aguardar aprovacao.`,
-    approvalRequired: true
-  }));
+  const subject = cleanShortText(instruction || "tema de hoje", 140);
+  const angles = [
+    {
+      match: /\b(ceo|coord|gest|admin|owner|lead|produtor)\b/i,
+      text: (item) =>
+        `${item.intent || "Organizo a prioridade da rodada"}. Sobre "${subject}", eu separaria em decisao principal, risco e primeira entrega aprovada antes de chamar execucao.`
+    },
+    {
+      match: /\b(editor|jornal|news|redac|manchete|copy|texto|foto)\b/i,
+      text: (item) =>
+        `${item.intent || "Cuido da leitura publica"}. Sobre "${subject}", eu ajustaria a mensagem para o visitante entender em 5 segundos o que precisa pedir aos agentes.`
+    },
+    {
+      match: /\b(review|revis|proof|qualidade|clean|tag)\b/i,
+      text: (item) =>
+        `${item.intent || "Procuro falhas antes de publicar"}. Sobre "${subject}", minha prioridade e cortar repeticao, marcar o que falta e impedir que resposta generica passe como opiniao.`
+    },
+    {
+      match: /\b(arte|design|pixel|sprite|visual|modelo|foto)\b/i,
+      text: (item) =>
+        `${item.intent || "Olho a cena e a identidade visual"}. Sobre "${subject}", eu deixaria cada agente reconhecivel, com pose propria, destaque de fala e foto/premio visivel.`
+    },
+    {
+      match: /\b(dev|code|sistema|autom|terminal|tech|acesso)\b/i,
+      text: (item) =>
+        `${item.intent || "Ligo a conversa ao terminal"}. Sobre "${subject}", eu criaria comandos separados por agente e registraria entrada, resposta, status e proxima acao.`
+    },
+    {
+      match: /\b(ninja|fonte|proof|segur|audit|chec)\b/i,
+      text: (item) =>
+        `${item.intent || "Valido risco e fonte"}. Sobre "${subject}", eu exigiria evidencia do que foi decidido e deixaria claro o que ainda depende da sua aprovacao.`
+    }
+  ];
+  const fallbackAngles = [
+    (item) =>
+      `${item.intent || "Escutei o tema"}. Sobre "${subject}", eu proponho transformar a fala em uma tarefa pequena, com dono e criterio de aceite.`,
+    (item) =>
+      `${item.intent || "Estou acompanhando"}. Sobre "${subject}", eu vejo valor em comparar duas alternativas antes de mexer no site.`,
+    (item) =>
+      `${item.intent || "Entrei na reuniao"}. Sobre "${subject}", minha sugestao e responder curto, mostrar impacto e pedir permissao para executar.`,
+    (item) =>
+      `${item.intent || "Analisei o pedido"}. Sobre "${subject}", eu faria uma rodada de opinioes por area e destacaria divergencias em vez de repetir consenso.`
+  ];
+
+  return source.map((item, index) => {
+    const signature = `${item.name || ""} ${item.office || ""} ${item.role || ""}`;
+    const angle = angles.find((entry) => entry.match.test(signature));
+    const opinion = angle ? angle.text(item) : fallbackAngles[index % fallbackAngles.length](item);
+    return {
+      agent: item.name,
+      office: item.office,
+      role: item.role,
+      score: item.autonomy,
+      urgency: item.urgency,
+      opinion,
+      approvalRequired: true
+    };
+  });
 }
 
 function buildCheffeCallPayload() {
@@ -5251,6 +5545,7 @@ function buildCheffeCallPayload() {
     dailyContext: agentsPayload.dailyContext || null,
     autonomy: agentsPayload.autonomy || null,
     summary: agentsPayload.summary || {},
+    queue: Array.isArray(agentsPayload.queue) ? agentsPayload.queue : [],
     opinions: state.sessions[0]?.opinions || getCheffeCallOpinions(agentsPayload, state.lastInstruction)
   };
 }
@@ -6375,6 +6670,137 @@ function buildElectionHeatBoard(limit = 12) {
     .slice(0, limit);
 }
 
+function buildHourlyDistribution(items = [], dateKey = "at") {
+  const buckets = Array.from({ length: 24 }, (_, hour) => ({
+    hour,
+    label: `${String(hour).padStart(2, "0")}:00`,
+    total: 0
+  }));
+
+  items.forEach((item) => {
+    const date = new Date(item?.[dateKey] || 0);
+    if (Number.isNaN(date.getTime())) return;
+    buckets[date.getHours()].total += 1;
+  });
+
+  return buckets;
+}
+
+function buildDailySeries(seriesMap = {}, days = 14) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const keys = Object.keys(seriesMap);
+  const rows = [];
+
+  for (let offset = days - 1; offset >= 0; offset -= 1) {
+    const date = new Date(today);
+    date.setDate(today.getDate() - offset);
+    const key = date.toISOString().slice(0, 10);
+    const row = {
+      date: key,
+      label: date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" }),
+      total: 0
+    };
+
+    keys.forEach((name) => {
+      const total = Number(seriesMap[name]?.[key] || 0);
+      row[name] = total;
+      row.total += total;
+    });
+
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+function buildSourceSegments(visits = []) {
+  const bucket = {
+    direto: 0,
+    social: 0,
+    busca: 0,
+    referencia: 0
+  };
+
+  visits.forEach((item) => {
+    const ref = summarizeReferrer(item?.referrer).toLowerCase();
+    if (!ref || ref === "direto") {
+      bucket.direto += 1;
+      return;
+    }
+    if (/(google|bing|yahoo|duckduckgo)/.test(ref)) {
+      bucket.busca += 1;
+      return;
+    }
+    if (/(facebook|instagram|whatsapp|tiktok|x\.com|twitter|youtube|telegram)/.test(ref)) {
+      bucket.social += 1;
+      return;
+    }
+    bucket.referencia += 1;
+  });
+
+  return bucket;
+}
+
+function buildExecutivePriorities({
+  totals = {},
+  founderItems = [],
+  pendingFounderItems = [],
+  pendingNinjasPayments = 0,
+  voteRecords = [],
+  acre2026Poll = [],
+  recentSalesListings = [],
+  recentVrRentalLeads = []
+} = {}) {
+  const priorities = [];
+  const supportConversion = totals.subscriptions
+    ? Number(((founderItems.length / totals.subscriptions) * 100).toFixed(1))
+    : 0;
+  const pollShare = totals.accesses
+    ? Number(((totals.acre2026PollResponses / totals.accesses) * 100).toFixed(2))
+    : 0;
+  const opinionShare = totals.votes
+    ? Number(((voteRecords.filter((item) => item.observation).length / totals.votes) * 100).toFixed(1))
+    : 0;
+
+  priorities.push({
+    title: "Conversão em apoio fundador",
+    tone: supportConversion >= 8 ? "good" : supportConversion >= 3 ? "watch" : "alert",
+    metric: `${supportConversion}%`,
+    detail: `${founderItems.length} confirmados de ${totals.subscriptions || 0} contatos captados`
+  });
+  priorities.push({
+    title: "Pendências financeiras em fila",
+    tone: pendingFounderItems.length + pendingNinjasPayments > 6 ? "alert" : pendingFounderItems.length + pendingNinjasPayments > 0 ? "watch" : "good",
+    metric: fmtNumber(pendingFounderItems.length + pendingNinjasPayments),
+    detail: `${pendingFounderItems.length} fundadores e ${pendingNinjasPayments} pagamentos Ninjas aguardando ação`
+  });
+  priorities.push({
+    title: "Pulso eleitoral com comentário",
+    tone: opinionShare >= 40 ? "good" : opinionShare >= 20 ? "watch" : "alert",
+    metric: `${opinionShare}%`,
+    detail: `${voteRecords.filter((item) => item.observation).length} votos com observação registrada`
+  });
+  priorities.push({
+    title: "Captação da pesquisa Acre 2026",
+    tone: pollShare >= 5 ? "good" : pollShare >= 2 ? "watch" : "alert",
+    metric: `${pollShare}%`,
+    detail: `${totals.acre2026PollResponses || 0} respostas em relação ao total de acessos`
+  });
+  priorities.push({
+    title: "Mercado local em movimento",
+    tone: recentSalesListings.length + recentVrRentalLeads.length >= 6 ? "good" : "watch",
+    metric: fmtNumber((totals.salesListings || 0) + (totals.vrRentalLeads || 0)),
+    detail: `${totals.salesListings || 0} vendas e ${totals.vrRentalLeads || 0} leads de aluguel VR`
+  });
+
+  return priorities;
+}
+
+function fmtNumber(value) {
+  return Number.isFinite(Number(value)) ? Number(value).toLocaleString("pt-BR") : String(value || 0);
+}
+
 function buildAdminDashboardPayload() {
   const visits = getJsonArray(VISITS_FILE);
   const heartbeats = getJsonArray(HEARTBEATS_FILE);
@@ -6384,6 +6810,7 @@ function buildAdminDashboardPayload() {
   const acre2026PollSummary = buildAcre2026PollSummary(sortByDateDesc(acre2026Poll, "createdAt", 5000));
   const ninjasRequests = getJsonArray(NINJAS_REQUESTS_FILE);
   const ninjasProfiles = getJsonArray(NINJAS_PROFILES_FILE);
+  const pubpaidDeposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE);
   const salesListings = getJsonArray(SALES_LISTINGS_FILE);
   const vrRentalLeads = getJsonArray(VR_RENTAL_LEADS_FILE);
   const news = getNews(200);
@@ -6411,6 +6838,21 @@ function buildAdminDashboardPayload() {
   const byReferrer = sumBy(visits, (item) => summarizeReferrer(item.referrer));
   const byConsent = sumBy(visits, (item) => item.trackingConsent || "desconhecido");
   const byPage = sumBy(visits, (item) => item.pagePath || "/");
+  const sourceSegments = buildSourceSegments(visits);
+  const activityByDayRaw = {
+    accesses: sumBy(visits, (item) => String(item.at || "").slice(0, 10) || "sem-data"),
+    comments: sumBy(comments, (item) => String(item.createdAt || "").slice(0, 10) || "sem-data"),
+    subscriptions: sumBy(subs, (item) => String(item.createdAt || "").slice(0, 10) || "sem-data"),
+    votes: sumBy(voteRecords, (item) => String(item.at || "").slice(0, 10) || "sem-data"),
+    poll: sumBy(acre2026Poll, (item) => String(item.createdAt || "").slice(0, 10) || "sem-data")
+  };
+  const hourlyActivity = {
+    accesses: buildHourlyDistribution(visits, "at"),
+    comments: buildHourlyDistribution(comments, "createdAt"),
+    subscriptions: buildHourlyDistribution(subs, "createdAt"),
+    votes: buildHourlyDistribution(voteRecords, "at")
+  };
+  const dailyActivity = buildDailySeries(activityByDayRaw, 14);
 
   const sessionDurations = {};
   heartbeats.forEach((item) => {
@@ -6445,6 +6887,57 @@ function buildAdminDashboardPayload() {
     from: activityDates.length ? new Date(Math.min(...activityDates)).toISOString() : null,
     to: activityDates.length ? new Date(Math.max(...activityDates)).toISOString() : null
   };
+  const conversion = {
+    visitToCommentRate: visits.length ? Number(((comments.length / visits.length) * 100).toFixed(2)) : 0,
+    visitToSubscriptionRate: visits.length ? Number(((subs.length / visits.length) * 100).toFixed(2)) : 0,
+    visitToPollRate: visits.length ? Number(((acre2026Poll.length / visits.length) * 100).toFixed(2)) : 0,
+    subscriptionToFounderRate: subs.length ? Number(((founderItems.length / subs.length) * 100).toFixed(2)) : 0,
+    ninjasDemandRate: visits.length ? Number((((ninjasRequests.length + ninjasProfiles.length) / visits.length) * 100).toFixed(2)) : 0
+  };
+  const topCityTotal = topEntries(byCity, "city", 1)[0]?.total || 0;
+  const topCountryTotal = topEntries(byCountry, "country", 1)[0]?.total || 0;
+  const geoReach = {
+    topCityShare: visits.length ? Number(((topCityTotal / visits.length) * 100).toFixed(2)) : 0,
+    topCountryShare: visits.length ? Number(((topCountryTotal / visits.length) * 100).toFixed(2)) : 0,
+    totalCities: Object.keys(byCity).length,
+    totalCountries: Object.keys(byCountry).length
+  };
+  const executiveSummary = buildExecutivePriorities({
+    totals: {
+      accesses: visits.length,
+      subscriptions: subs.length,
+      acre2026PollResponses: acre2026Poll.length,
+      salesListings: salesListings.length,
+      vrRentalLeads: vrRentalLeads.length,
+      votes: voteRecords.length
+    },
+    founderItems,
+    pendingFounderItems,
+    pendingNinjasPayments,
+    voteRecords,
+    acre2026Poll,
+    recentSalesListings: salesListings,
+    recentVrRentalLeads: vrRentalLeads
+  });
+  const funnel = [
+    { label: "Acessos", total: visits.length },
+    { label: "Visitantes únicos", total: uniqueVisitors.size },
+    { label: "Sessões", total: uniqueSessions.size },
+    { label: "Comentários", total: comments.length },
+    { label: "Assinaturas", total: subs.length },
+    { label: "Fundadores", total: founderItems.length },
+    { label: "Pesquisa Acre 2026", total: acre2026Poll.length },
+    { label: "Pedidos Ninjas", total: ninjasRequests.length },
+    { label: "Currículos Ninjas", total: ninjasProfiles.length },
+    { label: "Vendas", total: salesListings.length },
+    { label: "VR Leads", total: vrRentalLeads.length }
+  ];
+  const opportunityBoard = [
+    { label: "Fundadores pendentes", total: pendingFounderItems.length, tone: pendingFounderItems.length ? "watch" : "good" },
+    { label: "Pagamentos Ninjas pendentes", total: pendingNinjasPayments, tone: pendingNinjasPayments ? "alert" : "good" },
+    { label: "Cidades alcançadas", total: Object.keys(byCity).length, tone: Object.keys(byCity).length >= 8 ? "good" : "watch" },
+    { label: "Fontes de tráfego ativas", total: Object.keys(byReferrer).length, tone: Object.keys(byReferrer).length >= 4 ? "good" : "watch" }
+  ];
 
   return {
     ok: true,
@@ -6476,6 +6969,14 @@ function buildAdminDashboardPayload() {
       avgHeartbeatSec: Number(average(heartbeats.map((item) => Number(item.durationSec || 0))).toFixed(2)),
       avgSessionSec: Number(average(Object.values(sessionDurations)).toFixed(2))
     },
+    executiveSummary,
+    funnel,
+    conversion,
+    geoReach,
+    sourceSegments,
+    hourlyActivity,
+    dailyActivity,
+    opportunityBoard,
     distributions: {
       device: byDevice,
       browser: byBrowser,
@@ -6610,6 +7111,7 @@ function buildAdminDashboardPayload() {
       voteRecords,
       ninjasRequests,
       ninjasProfiles,
+      pubpaidDeposits,
       salesListings,
       vrRentalLeads
     }),
@@ -6699,6 +7201,92 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (pathname === "/health") {
     return sendJson(res, 200, { ok: true, service: "catalogo-cruzeiro", time: new Date().toISOString() });
+  }
+
+  if (req.method === "GET" && pathname === "/api/whatsapp/webhook") {
+    const config = getWhatsappChatConfig();
+    const mode = String(searchParams.get("hub.mode") || "").trim();
+    const token = String(searchParams.get("hub.verify_token") || "").trim();
+    const challenge = String(searchParams.get("hub.challenge") || "");
+
+    if (!config.enabled) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "WhatsApp chat desativado. Defina WHATSAPP_CHAT_ENABLED=true para habilitar."
+      });
+    }
+
+    if (!config.verifyToken) {
+      return sendJson(res, 500, {
+        ok: false,
+        error: "WHATSAPP_WEBHOOK_VERIFY_TOKEN nao configurado."
+      });
+    }
+
+    if (mode === "subscribe" && token === config.verifyToken) {
+      return sendText(res, 200, challenge || "ok");
+    }
+
+    return sendJson(res, 403, { ok: false, error: "Falha na verificacao do webhook do WhatsApp." });
+  }
+
+  if (req.method === "POST" && pathname === "/api/whatsapp/webhook") {
+    const config = getWhatsappChatConfig();
+    const body = await parseBody(req);
+
+    if (!config.enabled) {
+      return sendJson(res, 503, {
+        ok: false,
+        error: "WhatsApp chat desativado. Defina WHATSAPP_CHAT_ENABLED=true para habilitar."
+      });
+    }
+
+    const inboundItems = extractWhatsappInboundMessages(body);
+    const createdAt = new Date().toISOString();
+    const logItems = inboundItems.map((item) => ({
+      id: item.id,
+      channel: "whatsapp",
+      direction: "inbound",
+      from: item.from,
+      profileName: item.profileName,
+      type: item.type,
+      text: item.text,
+      receivedAt: item.rawTimestamp || createdAt,
+      createdAt,
+      phoneNumberId: item.phoneNumberId,
+      displayPhoneNumber: item.displayPhoneNumber
+    }));
+
+    appendWhatsappChatLog(logItems);
+
+    if (config.autoReplyEnabled && config.autoReplyText) {
+      for (const item of inboundItems) {
+        if (!item.from || !item.text) continue;
+        try {
+          const sendResult = await sendWhatsappTextMessage(item.from, config.autoReplyText);
+          if (sendResult?.ok) {
+            appendWhatsappChatLog([
+              {
+                id: `out-${Date.now()}-${item.from}`,
+                channel: "whatsapp",
+                direction: "outbound",
+                to: item.from,
+                type: "text",
+                text: config.autoReplyText,
+                createdAt: new Date().toISOString()
+              }
+            ]);
+          }
+        } catch (error) {
+          console.warn(`[whatsapp-chat] falha ao responder ${item.from}: ${error.message}`);
+        }
+      }
+    }
+
+    return sendJson(res, 200, {
+      ok: true,
+      received: inboundItems.length
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/admin/storage-health") {
@@ -6814,13 +7402,40 @@ async function handleApi(req, res, pathname, searchParams) {
       priority,
       message,
       ceoReply,
-      status: "recebida-pelo-ceo",
+      status: "recebida",
       hierarchy: "Full Admin -> Codex CEO -> equipes",
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
+      assignedAgents: 0,
+      assignments: [],
+      executionSummary: {
+        delivered: 0,
+        failed: 0,
+        running: 0
+      }
     };
     appendOfficeOrder(order);
 
     return sendJson(res, 201, { ok: true, order, ceoReply, ...buildOfficeOrderPayload() });
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-orders/review") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const result = reviewOfficeOrder(body);
+    if (!result.ok) return sendJson(res, result.status || 400, result);
+    return sendJson(res, 200, { ok: true, ...result, ...buildOfficeOrderPayload() });
+  }
+
+  if (req.method === "POST" && pathname === "/api/real-agents/actions/review") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const result = reviewRealAgentAction(body);
+    if (!result.ok) return sendJson(res, result.status || 400, result);
+    return sendJson(res, 200, result);
   }
 
   if (req.method === "GET" && pathname === "/api/office-neural-growth") {
@@ -6867,6 +7482,14 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/cheffe-call") {
     return sendJson(res, 200, buildCheffeCallPayload());
+  }
+
+  if (req.method === "GET" && pathname === "/api/cheffe-call/prompts") {
+    const payload = readJson(CHEFFE_CALL_PROMPTS_FILE, null);
+    if (!payload) {
+      return sendJson(res, 404, { ok: false, error: "Arquivo de prompts da Cheffe Call nao encontrado." });
+    }
+    return sendJson(res, 200, { ok: true, ...payload });
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/start") {

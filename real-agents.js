@@ -5,6 +5,7 @@
   };
 
   const statsEl = document.querySelector("#agentsStats");
+  const ordersListEl = document.querySelector("#ordersList");
   const officeListEl = document.querySelector("#officeList");
   const roleListEl = document.querySelector("#roleList");
   const queueListEl = document.querySelector("#queueList");
@@ -12,10 +13,16 @@
   const awardsCatalogEl = document.querySelector("#awardsCatalog");
   const awardsChaseEl = document.querySelector("#awardsChase");
   const scoreboardPeriodsEl = document.querySelector("#scoreboardPeriods");
+  const liveEventsEl = document.querySelector("#liveEvents");
+  const officeLogsEl = document.querySelector("#officeLogs");
+  const officeDashboardEl = document.querySelector("#officeDashboard");
+  const agentTimelinesEl = document.querySelector("#agentTimelines");
+  const agentActionsEl = document.querySelector("#agentActions");
   const runMetaEl = document.querySelector("#runMeta");
   const statusEl = document.querySelector("#agentsStatus");
   const searchEl = document.querySelector("#agentSearch");
   const runnerEl = document.querySelector("#agentsRunner");
+  const directOrderEl = document.querySelector("#agentsDirectOrder");
 
   function escapeHtml(value) {
     return String(value || "")
@@ -58,6 +65,10 @@
     const autoRun = payload.autoRun || {};
     const stats = [
       ["Agentes", summary.totalAgents],
+      ["Vivos", summary.aliveAgents || 0],
+      ["Entregas", summary.deliveredAgents || 0],
+      ["Falhas", summary.failedAgents || 0],
+      ["Exaustos", summary.exhaustedAgents || 0],
       ["Escritórios", summary.totalOffices],
       ["Funções", summary.totalRoles],
       ["Notícias lidas", summary.newsItems],
@@ -65,6 +76,8 @@
       ["Fila ativa", summary.activeQueue],
       ["Autônomos", summary.autonomousAgents || 0],
       ["Média IA", `${summary.averageAutonomy || 0}%`],
+      ["Energia", `${summary.averageEnergy || 0}%`],
+      ["Moral", `${summary.averageMorale || 0}%`],
       ["Auto", autoRun.enabled ? formatInterval(autoRun.intervalMs) : "off"]
     ];
 
@@ -93,6 +106,120 @@
         `;
       })
       .join("");
+  }
+
+  function renderOrders(payload) {
+    if (!ordersListEl) return;
+    const orders = Array.isArray(payload.orders) ? payload.orders.slice(0, 8) : [];
+    ordersListEl.innerHTML = orders.length
+      ? orders
+          .map(
+            (order) => `
+              <div class="agents-mini-row">
+                <strong>${escapeHtml(order.to || "Codex CEO")} • ${escapeHtml(order.status || "recebida")}</strong>
+                <span>${escapeHtml(
+                  `${order.executionSummary?.delivered || 0}/${order.assignedAgents || 0}`
+                )}</span>
+                <div class="agent-order-actions">
+                  <button type="button" data-review-order="${escapeHtml(order.id)}" data-review-status="aprovado">Aprovar</button>
+                  <button type="button" data-review-order="${escapeHtml(order.id)}" data-review-status="reprovado">Reprovar</button>
+                  <button type="button" data-review-order="${escapeHtml(order.id)}" data-review-status="reaberto">Reabrir</button>
+                </div>
+              </div>
+            `
+          )
+          .join("")
+      : '<p class="agents-empty">Sem ordens rastreadas.</p>';
+  }
+
+  function renderOfficeDashboard(payload) {
+    if (!officeDashboardEl) return;
+    const dashboards = Array.isArray(payload.officeDashboard) ? payload.officeDashboard : [];
+    officeDashboardEl.innerHTML = dashboards.length
+      ? dashboards
+          .map(
+            (office) => `
+              <article class="agent-period-board">
+                <div class="agent-period-head">
+                  <span>${escapeHtml(office.office)}</span>
+                  <strong>${escapeHtml(office.deliveryRate)}% entrega</strong>
+                </div>
+                <div class="agent-office-mini">
+                  <span>falha ${escapeHtml(office.failureRate)}%</span>
+                  <span>energia ${escapeHtml(office.averageEnergy)}%</span>
+                  <span>moral ${escapeHtml(office.averageMorale)}%</span>
+                  <span>ordens abertas ${escapeHtml(office.openOrders || 0)}</span>
+                </div>
+                <div class="agent-period-leaders">
+                  ${(office.topAgents || [])
+                    .map(
+                      (agent, index) => `
+                        <div class="agent-period-row">
+                          <span class="agent-period-rank">#${escapeHtml(index + 1)}</span>
+                          <div style="grid-column: span 2;">
+                            <strong>${escapeHtml(agent.name)} • ${escapeHtml(agent.points)} pts</strong>
+                            <p>${escapeHtml(agent.status)}</p>
+                          </div>
+                        </div>
+                      `
+                    )
+                    .join("")}
+                </div>
+              </article>
+            `
+          )
+          .join("")
+      : '<p class="agents-empty">Sem dashboard por escritório.</p>';
+  }
+
+  function renderAgentTimelines(payload) {
+    if (!agentTimelinesEl) return;
+    const timelines = Array.isArray(payload.agentTimelines) ? payload.agentTimelines.slice(0, 24) : [];
+    agentTimelinesEl.innerHTML = timelines.length
+      ? timelines
+          .map(
+            (agent) => `
+              <article class="agent-award-type">
+                <span>${escapeHtml(agent.rank || "AG")}</span>
+                <div>
+                  <strong>${escapeHtml(agent.name)} • nível ${escapeHtml(agent.level || 1)}</strong>
+                  <p>${escapeHtml(agent.office)} • ${escapeHtml(agent.role)}</p>
+                  ${(agent.events || [])
+                    .slice(0, 3)
+                    .map((event) => `<p>${escapeHtml(event.type)} • ${escapeHtml(event.title)} • ${escapeHtml(event.points || 0)} pts</p>`)
+                    .join("")}
+                </div>
+              </article>
+            `
+          )
+          .join("")
+      : '<p class="agents-empty">Sem timeline por agente.</p>';
+  }
+
+  function renderAgentActions(payload) {
+    if (!agentActionsEl) return;
+    const actions = Array.isArray(payload.executableActions) ? payload.executableActions.slice(0, 24) : [];
+    agentActionsEl.innerHTML = actions.length
+      ? actions
+          .map(
+            (action) => `
+              <article class="agent-award-type">
+                <span>${escapeHtml(action.kind || "acao")}</span>
+                <div>
+                  <strong>${escapeHtml(action.agent)} • ${escapeHtml(action.points)} pts</strong>
+                  <p>${escapeHtml(action.office)} • ${escapeHtml(action.status)}</p>
+                  <p>${escapeHtml(action.title)}</p>
+                  <p>${escapeHtml(action.artifact)}</p>
+                  <div class="agent-order-actions">
+                    <button type="button" data-review-action="${escapeHtml(action.id)}" data-review-status="aprovado">Aprovar</button>
+                    <button type="button" data-review-action="${escapeHtml(action.id)}" data-review-status="reprovado">Reprovar</button>
+                  </div>
+                </div>
+              </article>
+            `
+          )
+          .join("")
+      : '<p class="agents-empty">Sem ações reais geradas ainda.</p>';
   }
 
   function renderAgentPhoto(photo, name) {
@@ -221,6 +348,62 @@
       .join("");
   }
 
+  function renderLiveEvents(payload) {
+    if (!liveEventsEl) return;
+    const events = Array.isArray(payload.liveEvents) ? payload.liveEvents.slice(0, 12) : [];
+    liveEventsEl.innerHTML = events.length
+      ? events
+          .map(
+            (event) => `
+              <article class="agent-award-type">
+                <span>${escapeHtml(event.outcome === "success" ? "OK" : event.outcome === "failure" ? "!!" : "..")}</span>
+                <div>
+                  <strong>${escapeHtml(event.name)} • ${escapeHtml(event.points)} pts</strong>
+                  <p>${escapeHtml(event.office)} • ${escapeHtml(event.status)} • nível ${escapeHtml(event.level)} ${escapeHtml(event.rank)}</p>
+                  <p>${escapeHtml(event.message)}</p>
+                </div>
+              </article>
+            `
+          )
+          .join("")
+      : '<p class="agents-empty">Sem eventos vivos ainda.</p>';
+  }
+
+  function renderOfficeLogs(payload) {
+    if (!officeLogsEl) return;
+    const officeLogs = Array.isArray(payload.officeLogs) ? payload.officeLogs : [];
+    officeLogsEl.innerHTML = officeLogs.length
+      ? officeLogs
+          .map(
+            (office) => `
+              <article class="agent-period-board">
+                <div class="agent-period-head">
+                  <span>${escapeHtml(office.office)}</span>
+                  <strong>${escapeHtml(office.totalLogs)} logs</strong>
+                </div>
+                <div class="agent-period-leaders">
+                  ${(office.items || [])
+                    .map(
+                      (item) => `
+                        <div class="agent-period-row">
+                          <span class="agent-period-rank">${escapeHtml(item.outcome === "success" ? "OK" : item.outcome === "failure" ? "!!" : "..")}</span>
+                          <div style="grid-column: span 2;">
+                            <strong>${escapeHtml(item.name)} • ${escapeHtml(item.points)} pts</strong>
+                            <p>${escapeHtml(item.role)} • ${escapeHtml(item.status)}</p>
+                            <p>${escapeHtml(item.message)}</p>
+                          </div>
+                        </div>
+                      `
+                    )
+                    .join("")}
+                </div>
+              </article>
+            `
+          )
+          .join("")
+      : '<p class="agents-empty">Sem logs por escritório ainda.</p>';
+  }
+
   function queueMatches(item) {
     const query = normalize(state.query);
     if (!query) return true;
@@ -248,6 +431,7 @@
       .map((item) => {
         const assignment = item.assignment || {};
         const autonomy = item.autonomy || {};
+        const life = autonomy.life || {};
         return `
           <article class="agent-work-item">
             <div class="agent-work-id">
@@ -257,6 +441,7 @@
               <div class="agent-pill-row">
                 <span class="agent-pill">${escapeHtml(assignment.deliverable || "entrega")}</span>
                 <span class="agent-pill">${escapeHtml(autonomy.mode || "assistido")}</span>
+                <span class="agent-pill">${escapeHtml(life.status || "ativo")}</span>
                 <span class="agent-pill">${escapeHtml(item.points || 0)} pts</span>
               </div>
               <div class="agent-award-row">
@@ -271,15 +456,28 @@
               <p><strong>Ação:</strong> ${escapeHtml(assignment.action)}</p>
               <p><b>Ideia:</b> ${escapeHtml(assignment.idea)}</p>
               <p><b>Monitor:</b> ${escapeHtml(assignment.monitor)}</p>
+              <p><b>Vida operacional:</b> ${escapeHtml(life.lastEvent || "sem evento recente")}</p>
               <div class="agent-autonomy-meter" aria-label="Autonomia operacional">
                 <span style="width: ${Math.max(0, Math.min(100, Number(autonomy.autonomy || 0)))}%"></span>
+              </div>
+              <div class="agent-autonomy-meter" aria-label="Energia operacional">
+                <span style="width: ${Math.max(0, Math.min(100, Number(life.energy || 0)))}%"></span>
               </div>
               <p><b>Intenção própria:</b> ${escapeHtml(autonomy.intent || "aguardando memoria")}</p>
               <p class="agent-autonomy-line">
                 Autonomia ${escapeHtml(autonomy.autonomy || 0)}% • urgência ${escapeHtml(
                   autonomy.urgency || 0
-                )}% • confiança ${escapeHtml(autonomy.confidence || 0)}% • próxima checagem ${escapeHtml(
+                )}% • confiança ${escapeHtml(autonomy.confidence || 0)}% • energia ${escapeHtml(
+                  life.energy || 0
+                )}% • moral ${escapeHtml(life.morale || 0)}% • próxima checagem ${escapeHtml(
                   formatDate(autonomy.nextCheckAt)
+                )}
+              </p>
+              <p class="agent-autonomy-line">
+                Entregas ${escapeHtml(life.completedTasks || 0)} • parciais ${escapeHtml(life.partialTasks || 0)} • falhas ${escapeHtml(
+                  life.failedTasks || 0
+                )} • streak ${escapeHtml(life.streak || 0)} • nível ${escapeHtml(life.level || 1)} ${escapeHtml(
+                  life.rank || "junior"
                 )}
               </p>
             </div>
@@ -294,6 +492,12 @@
     renderStats(payload);
     renderAwards(payload);
     renderScoreboard(payload);
+    renderLiveEvents(payload);
+    renderOfficeLogs(payload);
+    renderOfficeDashboard(payload);
+    renderAgentTimelines(payload);
+    renderAgentActions(payload);
+    renderOrders(payload);
     renderMiniRows(officeListEl, payload.offices, "office", "agents");
     renderMiniRows(roleListEl, payload.roles, "role", "agents");
     const autoRun = payload.autoRun || {};
@@ -350,6 +554,87 @@
 
   runnerEl?.addEventListener("submit", (event) => {
     runAgents(event).catch((error) => setStatus(error.message, "bad"));
+  });
+
+  directOrderEl?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    (async () => {
+      const form = new FormData(directOrderEl);
+      const password = String(form.get("password") || "").trim();
+      const target = String(form.get("target") || "").trim();
+      const priority = String(form.get("priority") || "").trim() || "alta";
+      const message = String(form.get("message") || "").trim();
+      if (!password || !message) {
+        setStatus("Senha e ordem sao obrigatorias.", "bad");
+        return;
+      }
+      setStatus(`Enviando ordem para ${target || "Codex CEO"}...`);
+      const response = await fetch("/api/office-orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ password, target: target || "Codex CEO", priority, message })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao enviar ordem.");
+      }
+      directOrderEl.reset();
+      setStatus(`Ordem enviada para ${target || "Codex CEO"}.`, "ok");
+    })().catch((error) => setStatus(error.message, "bad"));
+  });
+
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-review-order]");
+    if (!button) return;
+    const password = prompt("Senha Full Admin para revisar a ordem:");
+    if (!password) return;
+    const note = prompt("Observação curta da revisão:") || "";
+    (async () => {
+      setStatus("Registrando revisão da ordem...");
+      const response = await fetch("/api/office-orders/review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          password,
+          orderId: button.dataset.reviewOrder,
+          status: button.dataset.reviewStatus,
+          note
+        })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao revisar ordem.");
+      }
+      setStatus(`Ordem ${button.dataset.reviewStatus}. Rode a equipe para aplicar impacto.`, "ok");
+      loadAgents(true).catch((error) => setStatus(error.message, "bad"));
+    })().catch((error) => setStatus(error.message, "bad"));
+  });
+
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-review-action]");
+    if (!button) return;
+    const password = prompt("Senha Full Admin para revisar a ação:");
+    if (!password) return;
+    const note = prompt("Observação curta da ação:") || "";
+    (async () => {
+      setStatus("Registrando revisão da ação...");
+      const response = await fetch("/api/real-agents/actions/review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          password,
+          actionId: button.dataset.reviewAction,
+          status: button.dataset.reviewStatus,
+          note
+        })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao revisar ação.");
+      }
+      setStatus(`Ação ${button.dataset.reviewStatus}.`, "ok");
+      loadAgents(true).catch((error) => setStatus(error.message, "bad"));
+    })().catch((error) => setStatus(error.message, "bad"));
   });
 
   loadAgents().catch((error) => setStatus(error.message, "bad"));

@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "moonshot-ai.kimi-code",
+    "grimaldi-tech.aseprite-preview",
+    "Moonlit.vscode-tmx-preview",
+    "unique-skills.phaser-dev-helper",
+    "streetsidesoftware.code-spell-checker",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-next"
+  ]
+}

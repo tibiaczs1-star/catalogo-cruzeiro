@@ -1,0 +1,1406 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e16]:
+      - link "Catalogo Cruzeiro do Sul" [ref=e17] [cursor=pointer]:
+        - /url: "#topo"
+        - generic [ref=e18]:
+          - generic [ref=e19]: Cruzeiro do Sul e Vale do Juruá
+          - strong [ref=e20]: Catalogo Cruzeiro do Sul
+      - generic [ref=e21]:
+        - link "Resumo grátis no e-mail" [ref=e22] [cursor=pointer]:
+          - /url: "#newsletter"
+        - link "Seja fundador" [ref=e23] [cursor=pointer]:
+          - /url: "#newsletter"
+      - group "Menu principal do portal" [ref=e2266]:
+        - generic "Menu do portal" [ref=e2267] [cursor=pointer]
+  - main [ref=e150]:
+    - region "Abertura principal do Catalogo Cruzeiro do Sul" [ref=e151]:
+      - generic [ref=e152]:
+        - paragraph [ref=e153]: cruzeiro do sul e vale do jurua
+        - heading "Cruzeiro do Sul e o Vale do Juruá com notícia, serviço e agenda em um só lugar." [level=1] [ref=e154]
+        - paragraph [ref=e155]: Acompanhe os principais destaques da região com radar local, arquivo do mês, agenda cultural, serviço útil e espaço para a comunidade.
+        - generic [ref=e156]:
+          - link "Abrir radar" [ref=e157] [cursor=pointer]:
+            - /url: "#radar"
+          - link "Ver arquivo" [ref=e158] [cursor=pointer]:
+            - /url: ./arquivo.html
+        - generic [ref=e160]:
+          - generic [ref=e161]: Politica
+          - strong [ref=e162]: Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru
+          - generic [ref=e163]: Durante a sessão desta quarta-feira (22), na Assembleia Legislativa do Estado do Acre (Aleac), o deputado Luiz Gonzaga (PSDB), primeiro-secretário da Casa, relatou a p...
+      - region "Cobertura local em tempo real" [ref=e168]:
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - generic [ref=e171]: cobertura local
+            - strong [ref=e172]: Atualização contínua do Vale
+            - generic [ref=e173]: Notícias, serviços, agenda e movimentos da cidade acompanhados ao longo do dia.
+          - generic "Chamadas rápidas da cobertura local" [ref=e174]:
+            - link "Politica Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre..." [ref=e175] [cursor=pointer]:
+              - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+              - generic [ref=e176]: Politica
+              - strong [ref=e177]: Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre...
+            - link "Prefeitura Governo prorroga o prazo para recursos da homologação das inscrições de briga..." [ref=e178] [cursor=pointer]:
+              - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+              - generic [ref=e179]: Prefeitura
+              - strong [ref=e180]: Governo prorroga o prazo para recursos da homologação das inscrições de briga...
+            - link "Policia Mais de 50 mandados de prisão foram cumpridos em Cruzeiro do Sul" [ref=e181] [cursor=pointer]:
+              - /url: ./noticia.html?slug=mais-de-50-mandados-de-prisao-foram-cumpridos-em-cruzeiro-do-sul
+              - generic [ref=e182]: Policia
+              - strong [ref=e183]: Mais de 50 mandados de prisão foram cumpridos em Cruzeiro do Sul
+        - generic [ref=e265]: Atualizando destaques da cidade
+      - link "Abrir notícia destacada da hero" [ref=e266] [cursor=pointer]:
+        - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+        - generic [ref=e267]: Politica
+        - strong [ref=e268]: Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru
+        - generic [ref=e269]: Durante a sessão desta quarta-feira (22), na Assembleia Legislativa do Estado do Acre (Aleac), o deputado Luiz Gonzaga (PSDB), primeiro-secretário da Casa, relatou a p...
+    - group "Escritorios de agentes" [ref=e2268]:
+      - generic "Jogos, moda e equipes" [ref=e2269] [cursor=pointer]
+    - text: 01000111 01000001 01001101 01000101 01010011 00100000 01001001 01001110 01000110 01000001 01001110 01010100 01001001 01001100 00100000 01000101 01010011 01010100 01010101 01000100 01000001 01001110 01010100 01001001 01001100 00100000 01010000 01000101 01000100 01001001 01000100 01001111 00100000 01000100 01000101 00100000 01010011 01000101 01010010 01010110 01001001 01000011 01001111 00100000 01001110 01001001 01001110 01001010 01000001 01010011 00100000 01010000 01010101 01000010 00100000 01010000 01000001 01001001 01000100 00100000 01010110 01000101 01001110 01000100 01000001 01010011 00100000 01001100 01001111 01000011 01000001 01001001 01010011 P R A ✚
+    - generic [ref=e389]:
+      - region "Capa da edição" [ref=e390]:
+        - generic [ref=e391]:
+          - generic [ref=e392]: Edicao visual • 22 abr 2026
+          - paragraph [ref=e393]: Três destaques que ajudam a entender o clima de Cruzeiro do Sul agora.
+        - article [ref=e394] [cursor=pointer]:
+          - link "Destaque do radar Agencia Acre • 22 abr 2026 Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), prorrogou... Abrir materia" [ref=e395]:
+            - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+            - generic [ref=e396]:
+              - generic [ref=e397]:
+                - generic [ref=e398]: Destaque do radar
+                - generic [ref=e399]: Agencia Acre • 22 abr 2026
+              - generic [ref=e400]:
+                - heading "Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários" [level=1] [ref=e401]
+                - paragraph [ref=e402]: O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), prorrogou...
+              - generic [ref=e404]: Abrir materia
+        - generic [ref=e405]:
+          - article [ref=e406] [cursor=pointer]:
+            - link "Política ac24horas • 22 abr 2026 Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru Durante a sessão desta quarta-feira (22), na Assembleia Legisla... Ler cobertura" [ref=e407]:
+              - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+              - generic [ref=e408]:
+                - generic [ref=e409]:
+                  - generic [ref=e410]: Política
+                  - generic [ref=e411]: ac24horas • 22 abr 2026
+                - generic [ref=e412]:
+                  - heading "Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru" [level=3] [ref=e413]
+                  - paragraph [ref=e414]: Durante a sessão desta quarta-feira (22), na Assembleia Legisla...
+                - generic [ref=e416]: Ler cobertura
+          - article [ref=e417] [cursor=pointer]:
+            - link "Política ac24horas • 22 abr 2026 Jarude critica crise no transporte coletivo e cobra providências dos órgãos de controle Durante a sessão desta quarta-feira (22), na Assembleia Legisla... Ler cobertura" [ref=e418]:
+              - /url: ./noticia.html?slug=jarude-critica-crise-no-transporte-coletivo-e-cobra-providencias-dos-orgaos-de-controle
+              - generic [ref=e419]:
+                - generic [ref=e420]:
+                  - generic [ref=e421]: Política
+                  - generic [ref=e422]: ac24horas • 22 abr 2026
+                - generic [ref=e423]:
+                  - heading "Jarude critica crise no transporte coletivo e cobra providências dos órgãos de controle" [level=3] [ref=e424]
+                  - paragraph [ref=e425]: Durante a sessão desta quarta-feira (22), na Assembleia Legisla...
+                - generic [ref=e427]: Ler cobertura
+      - generic [ref=e428]:
+        - generic [ref=e429]:
+          - generic [ref=e430]:
+            - paragraph [ref=e431]: agregador local
+            - heading "Radar CZS" [level=2] [ref=e432]
+          - tablist "Filtros do radar" [ref=e433]:
+            - tab "Tudo" [selected] [ref=e434] [cursor=pointer]
+            - tab "Cotidiano" [ref=e435] [cursor=pointer]
+            - tab "Prefeitura" [ref=e436] [cursor=pointer]
+            - tab "Política" [ref=e437] [cursor=pointer]
+            - tab "Polícia" [ref=e438] [cursor=pointer]
+            - tab "Saúde" [ref=e439] [cursor=pointer]
+            - tab "Educação" [ref=e440] [cursor=pointer]
+            - tab "Negócios" [ref=e441] [cursor=pointer]
+            - tab "Cultura" [ref=e442] [cursor=pointer]
+            - tab "Esporte" [ref=e443] [cursor=pointer]
+        - generic [ref=e445]:
+          - paragraph [ref=e446]: como o resumo é escolhido
+          - heading "O site compara notícias locais, corta repetição e destaca a versão mais verificável." [level=3] [ref=e447]
+          - paragraph [ref=e448]: O Radar cruza notícias do banco de artigos, observa fonte, data, categoria, contexto e sinais de confirmação. Quando há versões parecidas, ele prioriza a notícia com origem mais clara, informação mais completa e link para conferência.
+        - generic [ref=e454]:
+          - generic [ref=e455]:
+            - article [ref=e2270] [cursor=pointer]:
+              - link "Abrir noticia Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários" [ref=e2271]:
+                - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+                - generic [ref=e2272]: Utilidade Pública
+              - generic [ref=e2273]: Agencia Acre • 22 de abr. de 2026
+              - heading "Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários" [level=3] [ref=e2274]
+              - paragraph [ref=e2275]: O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), prorrogou até quinta-feira, 23, o prazo para interposição de recursos referentes ao resultado da homologação das inscrições do processo seletivo destinado à contratação de 50 brigadistas comunitários, que atuarão nas unidades de conservação (UCs) estaduais. A ampliação do prazo tem como ...
+              - generic [ref=e2276]:
+                - generic [ref=e2277]: "Fonte consultada: Agencia Acre"
+                - link "ler análise" [ref=e2278]:
+                  - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+            - article [ref=e2279] [cursor=pointer]:
+              - link "Abrir noticia Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru" [ref=e2280]:
+                - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+                - generic [ref=e2281]: Política
+              - generic [ref=e2282]: ac24horas • 22 de abr. de 2026
+              - heading "Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru" [level=3] [ref=e2283]
+              - paragraph [ref=e2284]: Durante a sessão desta quarta-feira (22), na Assembleia Legislativa do Estado do Acre (Aleac), o deputado Luiz Gonzaga (PSDB), primeiro-secretário da Casa, relatou a participação em um encontro internacional realizado na cidade de Pucallpa, no Peru, onde representou o Parlamento acreano em discussões voltadas ao fortalecimento da integração entre o Acre e o país vizinho. ...
+              - generic [ref=e2285]:
+                - generic [ref=e2286]: "Fonte consultada: ac24horas"
+                - link "ler análise" [ref=e2287]:
+                  - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+          - text: CZS EDITOR
+      - generic [ref=e505]:
+        - generic [ref=e506]:
+          - paragraph [ref=e507]: análise editorial
+          - heading "Informação verificada, resumo original e saída para a fonte." [level=2] [ref=e508]
+        - paragraph [ref=e509]:
+          - strong [ref=e510]: Leitura mais afiada, contexto local e caminho aberto até a origem.
+          - text: Cruzamos os principais portais do Acre e do Vale do Juruá, filtramos o ruído, destacamos o que realmente pesa no dia e entregamos a notícia com síntese forte, leitura rápida e saída direta para a fonte.
+      - generic [ref=e511]:
+        - generic [ref=e512]:
+          - generic [ref=e513]:
+            - paragraph [ref=e514]: 1 a 9 de abril de 2026
+            - heading "Arquivo de Abril" [level=2] [ref=e515]
+          - paragraph [ref=e516]: "O arquivo reúne o que já explodiu em Cruzeiro do Sul neste começo de mês: cheia, saúde, serviço, assistência e rotina urbana."
+        - generic [ref=e517]:
+          - button "Hoje" [ref=e518] [cursor=pointer]
+          - button "7 dias" [ref=e519] [cursor=pointer]
+          - button "15 dias" [ref=e520] [cursor=pointer]
+          - button "30 dias" [ref=e521] [cursor=pointer]
+          - button "Cheia" [ref=e522] [cursor=pointer]
+          - button "Saúde" [ref=e523] [cursor=pointer]
+        - generic [ref=e524]:
+          - article [ref=e525] [cursor=pointer]:
+            - link "Abrir notícia sobre impacto da cheia" [ref=e526]:
+              - /url: ./noticia.html?slug=mais-12-mil-afetados
+              - generic [ref=e527]: 1º de abril
+            - generic [ref=e528]: 1 abr • impacto inicial
+            - heading "O mês já abre com mais de 12 mil afetados e expansão dos abrigos" [level=3] [ref=e529]
+            - paragraph [ref=e530]: A primeira semana mostra que a cheia escala rápido em Cruzeiro do Sul, com famílias removidas, bairros inundados e acolhimento escolar.
+            - generic [ref=e531]:
+              - generic [ref=e532]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e533]:
+                - /url: ./noticia.html?slug=mais-12-mil-afetados
+          - article [ref=e534] [cursor=pointer]:
+            - link "Abrir notícia sobre retorno de famílias após a vazante" [ref=e535]:
+              - /url: ./noticia.html?slug=vazante-retorno-familias
+              - generic [ref=e536]: Cheia e retorno
+            - generic [ref=e537]: 4 a 9 abr • cheia do Juruá
+            - heading "A água subiu, os abrigos abriram e a cidade passou a girar em torno da enchente" [level=3] [ref=e538]
+            - paragraph [ref=e539]: A linha do mês ficou marcada por nível do rio acima da cota, abertura de abrigos, retorno gradual de famílias e remanejamento de serviços.
+            - generic [ref=e540]:
+              - generic [ref=e541]: "04 abr: mais de 200 pessoas em abrigos"
+              - generic [ref=e542]: "08 abr: tenda passa a atender UBSs afetadas"
+              - generic [ref=e543]: "09 abr: famílias começam retorno gradual"
+            - generic [ref=e544]:
+              - generic [ref=e545]: "Fonte consultada: Juruá Online e ac24horas"
+              - link "ler análise" [ref=e546]:
+                - /url: ./noticia.html?slug=vazante-retorno-familias
+          - article [ref=e547] [cursor=pointer]:
+            - link "Abrir notícia sobre distribuição de água" [ref=e548]:
+              - /url: ./noticia.html?slug=agua-mineral-familias-cheia
+              - generic [ref=e549]: 3 de abril
+            - generic [ref=e550]: 3 abr • resposta prática
+            - heading "Água mineral e apoio logístico viram prioridade nos bairros atingidos" [level=3] [ref=e551]
+            - paragraph [ref=e552]: A distribuição de água tratada e suprimentos mostra como a cobertura de enchente também é serviço básico, não só número do rio.
+            - generic [ref=e553]:
+              - generic [ref=e554]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e555]:
+                - /url: ./noticia.html?slug=agua-mineral-familias-cheia
+          - article [ref=e556] [cursor=pointer]:
+            - link "Abrir notícia sobre rotina nos bairros alagados" [ref=e557]:
+              - /url: ./noticia.html?slug=moradores-rotina-cheia
+              - generic [ref=e558]: 4 de abril
+            - generic [ref=e559]: 4 abr • vida cotidiana
+            - heading "Mesmo alagados, bairros seguem tentando manter a rotina entre barro e improviso" [level=3] [ref=e560]
+            - paragraph [ref=e561]: "Essa é a notícia que mostra o lado menos estatístico da cheia: gente convivendo com água, perda e adaptação enquanto o socorro avança."
+            - generic [ref=e562]:
+              - generic [ref=e563]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e564]:
+                - /url: ./noticia.html?slug=moradores-rotina-cheia
+          - article [ref=e565] [cursor=pointer]:
+            - link "Abrir notícia sobre saúde nos abrigos" [ref=e566]:
+              - /url: ./noticia.html?slug=saude-familias-abrigadas
+              - generic [ref=e567]: 4 de abril
+            - generic [ref=e568]: 4 abr • assistência
+            - heading "Atendimento de saúde dentro dos abrigos vira eixo para segurar a crise" [level=3] [ref=e569]
+            - paragraph [ref=e570]: A cobertura passa a misturar enchente e prevenção sanitária, com equipes tentando evitar agravamento entre deslocados e idosos.
+            - generic [ref=e571]:
+              - generic [ref=e572]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e573]:
+                - /url: ./noticia.html?slug=saude-familias-abrigadas
+          - article [ref=e574] [cursor=pointer]:
+            - link "Abrir notícia sobre atendimento temporário de saúde" [ref=e575]:
+              - /url: ./noticia.html?slug=tenda-saude-cheia-jurua
+              - generic [ref=e576]: 8 de abril
+            - generic [ref=e577]: 8 abr • saude emergencial
+            - heading "Tenda de atendimento vira linha de frente da saúde após inundação de UBSs" [level=3] [ref=e578]
+            - paragraph [ref=e579]: "A cheia saiu do mapa do rio e entrou de vez na rotina da assistência: unidades alagadas, equipe deslocada e atendimento mantido em estrutura temporária para não interromper vacinação, consultas e exames."
+            - generic [ref=e580]:
+              - generic [ref=e581]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e582]:
+                - /url: ./noticia.html?slug=tenda-saude-cheia-jurua
+      - generic [ref=e583]:
+        - generic [ref=e584]:
+          - generic [ref=e585]:
+            - paragraph [ref=e586]: arquivo vivo
+            - heading "Mais notícias verificadas" [level=2] [ref=e587]
+          - paragraph [ref=e588]: Use este arquivo para achar noticias por tema, fonte, editoria ou palavra do resumo. Os atalhos abaixo puxam recortes prontos da base sem tirar a pessoa da home.
+        - generic [ref=e589]:
+          - generic [ref=e590]:
+            - generic [ref=e591]: Buscar no arquivo
+            - searchbox "Buscar no arquivo" [ref=e592]
+            - button "Ver tudo em nova aba" [ref=e593] [cursor=pointer]
+          - generic [ref=e594]:
+            - strong [ref=e595]: "75"
+            - text: notícias verificadas na base
+            - generic [ref=e596]: "Base local: 75 notícias verificadas"
+        - generic [ref=e597]:
+          - paragraph [ref=e598]: "Arquivo vivo pronto: 75 notícias verificadas na base. As 6 mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo."
+          - generic "Resumo rápido do arquivo" [ref=e599]:
+            - article [ref=e600]:
+              - generic [ref=e601]: Atualizado até
+              - strong [ref=e602]: 22 de abr. de 2026
+            - article [ref=e603]:
+              - generic [ref=e604]: Tema dominante
+              - strong [ref=e605]: Polícia
+            - article [ref=e606]:
+              - generic [ref=e607]: Fontes ativas
+              - strong [ref=e608]: 6 fontes
+          - generic [ref=e609]:
+            - generic "Filtros rápidos do arquivo" [ref=e610]:
+              - 'button "Tudo: 75 notícias" [ref=e2288] [cursor=pointer]': Tudo
+              - 'button "Polícia: 17 notícias" [ref=e2289] [cursor=pointer]': Polícia
+              - 'button "Utilidade Pública: 17 notícias" [ref=e2290] [cursor=pointer]': Utilidade Pública
+              - 'button "Prefeitura: 9 notícias" [ref=e2291] [cursor=pointer]': Prefeitura
+              - 'button "Cotidiano: 8 notícias" [ref=e2292] [cursor=pointer]': Cotidiano
+              - 'button "Educação: 7 notícias" [ref=e2293] [cursor=pointer]': Educação
+              - 'button "Saúde: 5 notícias" [ref=e2294] [cursor=pointer]': Saúde
+              - 'button "Política: 4 notícias" [ref=e2295] [cursor=pointer]': Política
+            - button "Limpar filtro" [ref=e2296] [cursor=pointer]
+        - generic [ref=e619]:
+          - article [ref=e2297] [cursor=pointer]:
+            - link "Abrir noticia Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários" [ref=e2298]:
+              - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+              - generic [ref=e2299]: Utilidade Pública
+            - generic [ref=e2300]: Agencia Acre • 22 de abr. de 2026
+            - heading "Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários" [level=3] [ref=e2301]
+            - paragraph [ref=e2302]: O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), prorrogou até quinta-feira, 23, o prazo para interposição de recursos referentes ao resultado da homologação das inscrições do processo seletivo destinado à contratação de 50 brigadistas comunitários, que atuarão nas unidades de conservação (UCs) estaduais. A ampliação do prazo tem como ...
+            - generic [ref=e2303]:
+              - generic [ref=e2304]: "Fonte consultada: Agencia Acre"
+              - link "ler análise" [ref=e2305]:
+                - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+          - article [ref=e2306] [cursor=pointer]:
+            - link "Abrir noticia Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru" [ref=e2307]:
+              - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+              - generic [ref=e2308]: Política
+            - generic [ref=e2309]: ac24horas • 22 de abr. de 2026
+            - heading "Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru" [level=3] [ref=e2310]
+            - paragraph [ref=e2311]: Durante a sessão desta quarta-feira (22), na Assembleia Legislativa do Estado do Acre (Aleac), o deputado Luiz Gonzaga (PSDB), primeiro-secretário da Casa, relatou a participação em um encontro internacional realizado na cidade de Pucallpa, no Peru, onde representou o Parlamento acreano em discussões voltadas ao fortalecimento da integração entre o Acre e o país vizinho. ...
+            - generic [ref=e2312]:
+              - generic [ref=e2313]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e2314]:
+                - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+          - article [ref=e2315] [cursor=pointer]:
+            - link "Abrir noticia Jarude critica crise no transporte coletivo e cobra providências dos órgãos de controle" [ref=e2316]:
+              - /url: ./noticia.html?slug=jarude-critica-crise-no-transporte-coletivo-e-cobra-providencias-dos-orgaos-de-controle
+              - generic [ref=e2317]: Política
+            - generic [ref=e2318]: ac24horas • 22 de abr. de 2026
+            - heading "Jarude critica crise no transporte coletivo e cobra providências dos órgãos de controle" [level=3] [ref=e2319]
+            - paragraph [ref=e2320]: Durante a sessão desta quarta-feira (22), na Assembleia Legislativa do Estado do Acre (Aleac), o deputado Emerson Jarude (Novo) voltou a criticar a situação do transporte coletivo em Rio Branco, após a capital amanhecer novamente sem ônibus circulando nas ruas. Jarude afirmou que a paralisação do transporte público é um problema antigo que, segundo ele, ...
+            - generic [ref=e2321]:
+              - generic [ref=e2322]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e2323]:
+                - /url: ./noticia.html?slug=jarude-critica-crise-no-transporte-coletivo-e-cobra-providencias-dos-orgaos-de-controle
+          - article [ref=e2324] [cursor=pointer]:
+            - link "Abrir noticia Cruzeiro do Sul conta com casa de farinha móvel mecanizada para fortalecer produção rural" [ref=e2325]:
+              - /url: ./noticia.html?slug=cruzeiro-do-sul-conta-com-casa-de-farinha-movel-mecanizada-para-fortalecer-producao-rural
+              - generic [ref=e2326]: Prefeitura
+            - generic [ref=e2327]: ac24horas • 22 de abr. de 2026
+            - heading "Cruzeiro do Sul conta com casa de farinha móvel mecanizada para fortalecer produção rural" [level=3] [ref=e2328]
+            - paragraph [ref=e2329]: Cruzeiro do Sul conta agora com uma casa de farinha móvel mecanizada para modernizar e fortalecer a produção do item agrícola na região. A estrutura adquirida pela Prefeitura ,chega como alternativa à produção tradicional, permitindo mais agilidade, redução de custos e melhoria na qualidade da farinha produzida pelos agricultores locais. A casa de farinha móvel ...
+            - generic [ref=e2330]:
+              - generic [ref=e2331]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e2332]:
+                - /url: ./noticia.html?slug=cruzeiro-do-sul-conta-com-casa-de-farinha-movel-mecanizada-para-fortalecer-producao-rural
+          - article [ref=e2333] [cursor=pointer]:
+            - link "Abrir noticia Porto Walter amplia programa Novo Olhar e atende alunos da zona rural" [ref=e2334]:
+              - /url: ./noticia.html?slug=porto-walter-amplia-programa-novo-olhar-e-atende-alunos-da-zona-rural
+              - generic [ref=e2335]: Educação
+            - generic [ref=e2336]: ac24horas • 22 de abr. de 2026
+            - heading "Porto Walter amplia programa Novo Olhar e atende alunos da zona rural" [level=3] [ref=e2337]
+            - paragraph [ref=e2338]: Após atender os alunos da rede municipal de ensino da zona urbana e os idosos com consultas, exames e óculos através do Programa Novo Olhar, a Prefeitura de Porto Walter ampliou as ações para a zona rural do município. Os atendimentos nesta quarta-feira, 22,são feitos na Escola Venceslau Brás, na Comunidade Vitória, na Escola Raimunda ...
+            - generic [ref=e2339]:
+              - generic [ref=e2340]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e2341]:
+                - /url: ./noticia.html?slug=porto-walter-amplia-programa-novo-olhar-e-atende-alunos-da-zona-rural
+          - article [ref=e2342] [cursor=pointer]:
+            - link "Abrir noticia Prefeitura lança projeto “Empreende Mais Rio Branco” com serviços, feira e palestras no Mercado do São Francisco" [ref=e2343]:
+              - /url: ./noticia.html?slug=prefeitura-lanca-projeto-empreende-mais-rio-branco-com-servicos-feira-e-palestras-no-mercado-do-sao-francisco
+              - generic [ref=e2344]: Cotidiano
+            - generic [ref=e2345]: ac24horas • 22 de abr. de 2026
+            - heading "Prefeitura lança projeto “Empreende Mais Rio Branco” com serviços, feira e palestras no Mercado do São Francisco" [level=3] [ref=e2346]
+            - paragraph [ref=e2347]: A Prefeitura de Rio Branco lança, nesta quarta-feira (22), a primeira edição do projeto “Empreende Mais Rio Branco”, iniciativa que busca aproximar a população de serviços públicos e incentivar o desenvolvimento econômico local. O evento ocorre no Mercado Municipal do São Francisco e vai até sexta-feira (24). Coordenado pela Sala do Empreendedor da Prefeitura de ...
+            - generic [ref=e2348]:
+              - generic [ref=e2349]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e2350]:
+                - /url: ./noticia.html?slug=prefeitura-lanca-projeto-empreende-mais-rio-branco-com-servicos-feira-e-palestras-no-mercado-do-sao-francisco
+        - button "Carregar mais notícias" [ref=e675] [cursor=pointer]
+      - generic [ref=e676]:
+        - generic [ref=e677]:
+          - generic [ref=e678]:
+            - paragraph [ref=e679]: cadernos de abril
+            - heading "Mais Editorias" [level=2] [ref=e680]
+          - paragraph [ref=e681]: Para não deixar tudo espremido no radar, as notícias também entram em cadernos próprios com leitura rápida e acesso ao texto mais elaborado.
+        - generic [ref=e682]:
+          - article [ref=e683]:
+            - generic [ref=e684]:
+              - paragraph [ref=e685]: games
+              - heading "Editorial gamer, lançamentos e cultura jogável" [level=3] [ref=e686]
+            - 'link "More Branches, More Choice: A Before‑and‑After Look at Diablo IV’s Skill Trees Xbox Wire • 22 abr 2026" [ref=e687] [cursor=pointer]':
+              - /url: ./games.html
+              - generic [ref=e689]:
+                - strong [ref=e690]: "More Branches, More Choice: A Before‑and‑After Look at Diablo IV’s Skill Trees"
+                - generic [ref=e691]: Xbox Wire • 22 abr 2026
+            - link "How news organisations are thinking video-first YouTube Blog • 22 abr 2026" [ref=e692] [cursor=pointer]:
+              - /url: ./escritorio-arte.html
+              - generic [ref=e694]:
+                - strong [ref=e695]: How news organisations are thinking video-first
+                - generic [ref=e696]: YouTube Blog • 22 abr 2026
+          - article [ref=e697]:
+            - generic [ref=e698]:
+              - paragraph [ref=e699]: animes
+              - heading "Anime, mangá, dublagem e cultura pop" [level=3] [ref=e700]
+            - link "Radar Anime acompanha estreias, temporadas, trailers e comunidades de fãs editoria própria • curadoria geek" [ref=e701] [cursor=pointer]:
+              - /url: ./animes.html
+              - generic [ref=e703]:
+                - strong [ref=e704]: Radar Anime acompanha estreias, temporadas, trailers e comunidades de fãs
+                - generic [ref=e705]: editoria própria • curadoria geek
+            - link "Anime conversa com games, creators, fanart e tendências do público jovem cultura pop • feed cruzado" [ref=e706] [cursor=pointer]:
+              - /url: ./games.html#radar-global
+              - generic [ref=e708]:
+                - strong [ref=e709]: Anime conversa com games, creators, fanart e tendências do público jovem
+                - generic [ref=e710]: cultura pop • feed cruzado
+          - article [ref=e711]:
+            - generic [ref=e712]:
+              - paragraph [ref=e713]: moda
+              - 'heading "Esttíles: moda, beleza e produção visual" [level=3] [ref=e714]'
+            - link "Grupo de estilistas e agentes cuida de looks, beleza, passarela e vitrine local 50 agentes • editorial de moda" [ref=e715] [cursor=pointer]:
+              - /url: ./esttiles.html
+              - generic [ref=e717]:
+                - strong [ref=e718]: Grupo de estilistas e agentes cuida de looks, beleza, passarela e vitrine local
+                - generic [ref=e719]: 50 agentes • editorial de moda
+            - link "Equipe combina styling, fotografia, maquiagem, branding e direção criativa Esttíles • sala de moda" [ref=e720] [cursor=pointer]:
+              - /url: ./esttiles.html#equipe
+              - generic [ref=e722]:
+                - strong [ref=e723]: Equipe combina styling, fotografia, maquiagem, branding e direção criativa
+                - generic [ref=e724]: Esttíles • sala de moda
+          - article [ref=e725]:
+            - generic [ref=e726]:
+              - paragraph [ref=e727]: educação
+              - heading "Campus, escola e permanência estudantil" [level=3] [ref=e728]
+            - link "Porto Walter amplia programa Novo Olhar e atende alunos da zona rural ac24horas • 22 abr 2026" [ref=e729] [cursor=pointer]:
+              - /url: ./noticia.html?slug=porto-walter-amplia-programa-novo-olhar-e-atende-alunos-da-zona-rural
+              - generic [ref=e731]:
+                - strong [ref=e732]: Porto Walter amplia programa Novo Olhar e atende alunos da zona rural
+                - generic [ref=e733]: ac24horas • 22 abr 2026
+            - link "Estudantes de Rio Branco embarcam para Brasília e iniciam jornada rumo à NASA e Disney ac24horas • 22 abr 2026" [ref=e734] [cursor=pointer]:
+              - /url: ./noticia.html?slug=estudantes-de-rio-branco-embarcam-para-brasilia-e-iniciam-jornada-rumo-a-nasa-e-disney
+              - generic [ref=e736]:
+                - strong [ref=e737]: Estudantes de Rio Branco embarcam para Brasília e iniciam jornada rumo à NASA e Disney
+                - generic [ref=e738]: ac24horas • 22 abr 2026
+          - article [ref=e739]:
+            - generic [ref=e740]:
+              - paragraph [ref=e741]: prefeitura e ações
+              - heading "Resposta pública, defesa civil e logística" [level=3] [ref=e742]
+            - link "Cruzeiro do Sul conta com casa de farinha móvel mecanizada para fortalecer produção rural ac24horas • 22 abr 2026" [ref=e743] [cursor=pointer]:
+              - /url: ./noticia.html?slug=cruzeiro-do-sul-conta-com-casa-de-farinha-movel-mecanizada-para-fortalecer-producao-rural
+              - generic [ref=e745]:
+                - strong [ref=e746]: Cruzeiro do Sul conta com casa de farinha móvel mecanizada para fortalecer produção rural
+                - generic [ref=e747]: ac24horas • 22 abr 2026
+            - link "Governo do Acre abre seleção de estágio com bolsas que podem chegar a R$ 12 mil Jurua 24 Horas • 22 abr 2026" [ref=e748] [cursor=pointer]:
+              - /url: ./noticia.html?slug=governo-do-acre-abre-selecao-de-estagio-com-bolsas-que-podem-chegar-a-r-12-mil
+              - generic [ref=e750]:
+                - strong [ref=e751]: Governo do Acre abre seleção de estágio com bolsas que podem chegar a R$ 12 mil
+                - generic [ref=e752]: Jurua 24 Horas • 22 abr 2026
+          - article [ref=e753]:
+            - generic [ref=e754]:
+              - paragraph [ref=e755]: social
+              - heading "Abrigo, rotina e cuidado no meio da crise" [level=3] [ref=e756]
+            - link "Mesmo alagados, bairros tentam manter rotina em Cruzeiro do Sul ac24horas • 04 abr 2026" [ref=e2351] [cursor=pointer]:
+              - /url: ./noticia.html?slug=moradores-rotina-cheia
+              - generic [ref=e759]:
+                - strong [ref=e760]: Mesmo alagados, bairros tentam manter rotina em Cruzeiro do Sul
+                - generic [ref=e761]: ac24horas • 04 abr 2026
+            - link "Sem ônibus em Rio Branco, cadeirante percorre mais de 20 km para buscar remédio ac24horas • 22 abr 2026" [ref=e2352] [cursor=pointer]:
+              - /url: ./noticia.html?slug=sem-onibus-em-rio-branco-cadeirante-percorre-mais-de-20-km-para-buscar-remedio
+              - generic [ref=e764]:
+                - strong [ref=e765]: Sem ônibus em Rio Branco, cadeirante percorre mais de 20 km para buscar remédio
+                - generic [ref=e766]: ac24horas • 22 abr 2026
+          - article [ref=e767]:
+            - generic [ref=e768]:
+              - paragraph [ref=e769]: utilidade pública
+              - heading "O que muda na vida prática da cidade" [level=3] [ref=e770]
+            - link "Prefeitura lança projeto “Empreende Mais Rio Branco” com serviços, feira e palestras no Mercado... ac24horas • 22 abr 2026" [ref=e771] [cursor=pointer]:
+              - /url: ./noticia.html?slug=prefeitura-lanca-projeto-empreende-mais-rio-branco-com-servicos-feira-e-palestras-no-mercado-do-sao-francisco
+              - generic [ref=e773]:
+                - strong [ref=e774]: Prefeitura lança projeto “Empreende Mais Rio Branco” com serviços, feira e palestras no Mercado...
+                - generic [ref=e775]: ac24horas • 22 abr 2026
+            - link "“Super quarta” de reajustes deve elevar conta de luz para milhões de brasileiros Jurua 24 Horas • 22 abr 2026" [ref=e776] [cursor=pointer]:
+              - /url: ./noticia.html?slug=super-quarta-de-reajustes-deve-elevar-conta-de-luz-para-milhoes-de-brasileiros
+              - generic [ref=e778]:
+                - strong [ref=e779]: “Super quarta” de reajustes deve elevar conta de luz para milhões de brasileiros
+                - generic [ref=e780]: Jurua 24 Horas • 22 abr 2026
+      - generic [ref=e781]:
+        - generic [ref=e782]:
+          - generic [ref=e783]:
+            - paragraph [ref=e784]: festas, social e redes
+            - heading "Festas & Social" [level=2] [ref=e785]
+          - paragraph [ref=e786]: Aqui entram agenda pública, clima de festa, buzz de rede e retratos da cidade em modo mais leve. Quando não houver foto própria ou licenciada, a capa entra com imagem real da notícia.
+        - generic [ref=e787]:
+          - article [ref=e788]:
+            - 'link "Abrir notícia: Usina de Arte João Donato celebra 20 anos com programação cultural gratuita em Rio Branco" [ref=e789] [cursor=pointer]':
+              - /url: ./noticia.html?slug=usina-de-arte-joao-donato-celebra-20-anos-com-programacao-cultural-gratuita-em-rio-branco
+              - generic [ref=e790]: Cultura
+            - generic [ref=e791]: Agencia Acre • 21 de abr. de 2026
+            - heading "Usina de Arte João Donato celebra 20 anos com programação cultural gratuita em Rio Branco" [level=3] [ref=e792]
+            - paragraph [ref=e793]: A Usina de Arte João Donato, um dos mais importantes espaços de difusão e formação cultural do Acre, comemora 20 anos de atividades com uma programaç...
+            - generic [ref=e794]:
+              - generic [ref=e795]: "Fonte consultada: Agencia Acre"
+              - link "ler análise" [ref=e796] [cursor=pointer]:
+                - /url: ./noticia.html?slug=usina-de-arte-joao-donato-celebra-20-anos-com-programacao-cultural-gratuita-em-rio-branco
+          - article [ref=e797]:
+            - 'link "Abrir notícia: Porto Walter amplia programa Novo Olhar e atende alunos da zona rural" [ref=e798] [cursor=pointer]':
+              - /url: ./noticia.html?slug=porto-walter-amplia-programa-novo-olhar-e-atende-alunos-da-zona-rural
+              - generic [ref=e799]: Educação
+            - generic [ref=e800]: ac24horas • 22 de abr. de 2026
+            - heading "Porto Walter amplia programa Novo Olhar e atende alunos da zona rural" [level=3] [ref=e801]
+            - paragraph [ref=e802]: Após atender os alunos da rede municipal de ensino da zona urbana e os idosos com consultas, exames e óculos através do Programa Novo Olhar, a Prefei...
+            - generic [ref=e803]:
+              - generic [ref=e804]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e805] [cursor=pointer]:
+                - /url: ./noticia.html?slug=porto-walter-amplia-programa-novo-olhar-e-atende-alunos-da-zona-rural
+          - article [ref=e806]:
+            - 'link "Abrir notícia: Governo do Acre divulga resultado da homologação das inscrições do processo seletivo para brigadistas comunitários" [ref=e807] [cursor=pointer]':
+              - /url: ./noticia.html?slug=governo-do-acre-divulga-resultado-da-homologacao-das-inscricoes-do-processo-seletivo-para-brigadistas-comunitarios
+              - generic [ref=e808]: Prefeitura
+            - generic [ref=e809]: Batelao • 21 de abr. de 2026
+            - heading "Governo do Acre divulga resultado da homologação das inscrições do processo seletivo para brigadistas comunitários" [level=3] [ref=e810]
+            - paragraph [ref=e811]: Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou nesta segunda-feira, 20, o resultado da...
+            - generic [ref=e812]:
+              - generic [ref=e813]: "Fonte consultada: Batelao"
+              - link "ler análise" [ref=e814] [cursor=pointer]:
+                - /url: ./noticia.html?slug=governo-do-acre-divulga-resultado-da-homologacao-das-inscricoes-do-processo-seletivo-para-brigadistas-comunitarios
+          - article [ref=e815]:
+            - 'link "Abrir notícia: Venda de ingressos para Copa do Mundo é reaberta a 50 dias da abertura" [ref=e816] [cursor=pointer]':
+              - /url: ./noticia.html?slug=venda-de-ingressos-para-copa-do-mundo-e-reaberta-a-50-dias-da-abertura
+              - generic [ref=e817]: Esporte
+            - generic [ref=e818]: ac24horas • 22 de abr. de 2026
+            - heading "Venda de ingressos para Copa do Mundo é reaberta a 50 dias da abertura" [level=3] [ref=e819]
+            - paragraph [ref=e820]: Faltando 50 dias para o início da Copa do Mundo de 2026, a venda de ingressos pela Federação Internacional de Futebol (Fifa) foi reaberta nesta quart...
+            - generic [ref=e821]:
+              - generic [ref=e822]: "Fonte consultada: ac24horas"
+              - link "ler análise" [ref=e823] [cursor=pointer]:
+                - /url: ./noticia.html?slug=venda-de-ingressos-para-copa-do-mundo-e-reaberta-a-50-dias-da-abertura
+          - article [ref=e824]:
+            - 'link "Abrir notícia: Venda de ingressos da Copa do Mundo é reaberta a 50 dias da abertura" [ref=e825] [cursor=pointer]':
+              - /url: ./noticia.html?slug=venda-de-ingressos-da-copa-do-mundo-e-reaberta-a-50-dias-da-abertura
+              - generic [ref=e826]: Negócios
+            - generic [ref=e827]: Jurua 24 Horas • 22 de abr. de 2026
+            - heading "Venda de ingressos da Copa do Mundo é reaberta a 50 dias da abertura" [level=3] [ref=e828]
+            - paragraph [ref=e829]: A FIFA reabriu a venda de ingressos para a Copa do Mundo de 2026 a exatamente 50 dias do início do torneio, marcado para 11 de junho. O novo lote com...
+            - generic [ref=e830]:
+              - generic [ref=e831]: "Fonte consultada: Jurua 24 Horas"
+              - link "ler análise" [ref=e832] [cursor=pointer]:
+                - /url: ./noticia.html?slug=venda-de-ingressos-da-copa-do-mundo-e-reaberta-a-50-dias-da-abertura
+          - article [ref=e833]:
+            - 'link "Abrir notícia: Com participação de 36 equipes, sorteio do Copão Manciolimense de Futebol é realizado na Prefeitura" [ref=e834] [cursor=pointer]':
+              - /url: ./noticia.html?slug=com-participacao-de-36-equipes-sorteio-do-copao-manciolimense-de-futebol-e-realizado-na-prefeitura
+              - generic [ref=e835]: Saúde
+            - generic [ref=e836]: Batelao • 20 de abr. de 2026
+            - heading "Com participação de 36 equipes, sorteio do Copão Manciolimense de Futebol é realizado na Prefeitura" [level=3] [ref=e837]
+            - paragraph [ref=e838]: Na manhã desta segunda-feira, 20, no auditório da Prefeitura de Mâncio Lima, foi realizado o sorteio do Copão Manciolimense de Futebol 2026. O evento...
+            - generic [ref=e839]:
+              - generic [ref=e840]: "Fonte consultada: Batelao"
+              - link "ler análise" [ref=e841] [cursor=pointer]:
+                - /url: ./noticia.html?slug=com-participacao-de-36-equipes-sorteio-do-copao-manciolimense-de-futebol-e-realizado-na-prefeitura
+          - article [ref=e842]:
+            - generic [ref=e843]:
+              - generic [ref=e844]:
+                - paragraph [ref=e845]: revisão de conteúdo
+                - heading "Pedido de revisão ou remoção" [level=2] [ref=e846]
+              - paragraph [ref=e847]: Pessoas citadas, retratadas ou responsáveis por conteúdo incorporado podem solicitar revisão manual, correção de contexto, crédito ou remoção.
+            - generic [ref=e848]:
+              - link "Enviar revisão pelo WhatsApp" [ref=e849] [cursor=pointer]:
+                - /url: https://wa.me/5568992269296?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20a%20revis%C3%A3o%20de%20uma%20foto%2C%20v%C3%ADdeo%20ou%20mat%C3%A9ria%20incorporada.%0A%0ALink%3A%0AMotivo%3A%0AContato%20para%20retorno%3A
+              - link "Solicitar pela página" [ref=e850] [cursor=pointer]:
+                - /url: ./remocao.html
+      - generic [ref=e851]:
+        - generic [ref=e852]:
+          - generic [ref=e853]:
+            - paragraph [ref=e854]: destaques da semana
+            - heading "Notícias que Importam" [level=2] [ref=e855]
+          - paragraph [ref=e856]: Os assuntos mais quentes da região, com resumo rápido e caminho direto para a fonte.
+        - generic [ref=e857]:
+          - article [ref=e858]:
+            - paragraph [ref=e859]: principal
+            - heading "Enchente do Juruá continua impactando rotina de Cruzeiro do Sul" [level=3] [ref=e860]
+            - paragraph [ref=e861]: A água está em vazante, mas ainda há cerca de 150 famílias fora de casa, com abrigos funcionando normalmente e atendimento de saúde contínuo.
+            - generic [ref=e862]:
+              - generic [ref=e863]: ac24horas • 10 abr 2026
+              - link "Ler análise →" [ref=e864] [cursor=pointer]:
+                - /url: "#radar"
+          - article [ref=e865]:
+            - paragraph [ref=e866]: região
+            - heading "Sebrae lança programa para fortalecer pequenos negócios" [level=3] [ref=e867]
+            - paragraph [ref=e868]: Edital com mentoria, diagnóstico gerencial e apoio a microempresas da região entra em fase de inscrição.
+            - generic [ref=e869]:
+              - generic [ref=e870]: Juruá Online • 9 abr 2026
+              - link "Ler análise →" [ref=e871] [cursor=pointer]:
+                - /url: "#negocios"
+          - article [ref=e872]:
+            - paragraph [ref=e873]: educação
+            - heading "IFAC abre novas vagas para professor na área de tecnologia" [level=3] [ref=e874]
+            - paragraph [ref=e875]: Seleção com salário até R$ 8 mil para atuação em cursos presenciais e EaD em Cruzeiro do Sul.
+            - generic [ref=e876]:
+              - generic [ref=e877]: ac24horas • 8 abr 2026
+              - link "Ler análise →" [ref=e878] [cursor=pointer]:
+                - /url: "#arquivo-vivo"
+      - generic [ref=e879]:
+        - generic [ref=e880]:
+          - generic [ref=e881]:
+            - paragraph [ref=e882]: participação cidadã
+            - heading "Eleições no Acre" [level=2] [ref=e883]
+          - paragraph [ref=e884]: Pesquisa informal voltada ao pleito geral de 2026 no Acre. Aqui entram só pré-candidatos e nomes em articulação para Governo, Senado, Câmara Federal e Assembleia Legislativa.
+        - region "Pesquisa eleitoral do jornal" [ref=e885]:
+          - generic [ref=e886]:
+            - paragraph [ref=e887]: Pesquisa eleitoral do jornal
+            - heading "Leitura local refeita para aparecer primeiro e com método mais claro." [level=3] [ref=e888]
+            - paragraph [ref=e889]: Reorganizada com foco editorial, a pesquisa do portal agora entra no topo da cobertura eleitoral para entregar intenção de voto, humor do eleitorado e prioridades públicas numa leitura mais limpa, mais forte e mais útil para o leitor.
+            - generic "Especialistas reunidos" [ref=e890]:
+              - generic [ref=e891]: especialistas em pesquisa de opinião
+              - generic [ref=e892]: leitura estatística de tendência
+              - generic [ref=e893]: edição local e recorte regional
+          - generic [ref=e894]:
+            - article [ref=e895]:
+              - generic [ref=e896]: Radar atual
+              - strong [ref=e897]: 4 cargos monitorados
+              - paragraph [ref=e898]: Governador, Senado, Câmara Federal e Assembleia em uma só vitrine pública.
+            - article [ref=e899]:
+              - generic [ref=e900]: Leitura média
+              - strong [ref=e901]: Cidade + voto + humor
+              - paragraph [ref=e902]: A pesquisa cruza preferência declarada com observação qualitativa do eleitor.
+            - article [ref=e903]:
+              - generic [ref=e904]: Fluxo editorial
+              - strong [ref=e905]: Consulta rápida e parcial visível
+              - paragraph [ref=e906]: O leitor entende o cenário sem sair da editoria e sem confundir com a SPO.
+            - generic [ref=e907]:
+              - link "Ver nomes monitorados" [ref=e908] [cursor=pointer]:
+                - /url: "#election-candidates"
+              - link "Abrir parciais" [ref=e909] [cursor=pointer]:
+                - /url: "#election-results-title"
+        - generic [ref=e910]:
+          - button "Governador" [ref=e911] [cursor=pointer]
+          - button "Senador" [ref=e912] [cursor=pointer]
+          - button "Dep. Federal" [ref=e913] [cursor=pointer]
+          - button "Dep. Estadual" [ref=e914] [cursor=pointer]
+        - generic [ref=e915]:
+          - article [ref=e916]:
+            - generic [ref=e917]:
+              - generic [ref=e918]: AR
+              - generic [ref=e919]:
+                - generic [ref=e920]: Governo do Acre
+                - heading "Alan Rick" [level=3] [ref=e921]
+                - paragraph [ref=e922]: Republicanos • senador
+            - paragraph [ref=e923]: Jornalista e administrador nascido em Rio Branco. Foi deputado federal por dois mandatos consecutivos, de 2015 a 2023, e assumiu cadeira no Senado em 2023.
+            - paragraph [ref=e924]: Senador pelo Acre, em exercício no Senado Federal em 14 de abril de 2026, com mandato de 2023 a 2031.
+            - generic [ref=e925]:
+              - generic [ref=e926]: centro-direita, conservador e municipalista
+              - generic [ref=e927]: Pontuação editorial 83
+            - generic [ref=e928]:
+              - heading "Realizações e focos" [level=4] [ref=e929]
+              - list [ref=e930]:
+                - listitem [ref=e931]: Chegou ao Senado em 2023 e mantém mandato previsto até 2031.
+                - listitem [ref=e932]: Acumula oito anos de atuação documentada na Câmara dos Deputados, entre 2015 e 2023.
+                - listitem [ref=e933]: Em 2026 aparece em exercício no Senado e com participação atual na Comissão de Assuntos Econômicos.
+            - generic [ref=e934]:
+              - link "Ver histórico e pontuação" [ref=e935] [cursor=pointer]:
+                - /url: ./candidato.html?office=governador&candidate=alan-rick-governador
+              - button "Votar neste dispositivo" [ref=e936] [cursor=pointer]
+              - paragraph [ref=e937]: Cada dispositivo pode registrar um voto por cargo a cada semana.
+          - article [ref=e938]:
+            - generic [ref=e939]:
+              - generic [ref=e940]: MA
+              - generic [ref=e941]:
+                - generic [ref=e942]: Governo do Acre
+                - heading "Mailza Assis" [level=3] [ref=e943]
+                - paragraph [ref=e944]: PP • governadora
+            - paragraph [ref=e945]: Foi senadora pelo Acre entre 2015 e 2023, integrou a chapa estadual eleita em 2022 e assumiu a SEASDH em 17 de junho de 2024. Em 2 de abril de 2026, recebeu a transmissão do cargo de governadora.
+            - paragraph [ref=e946]: Governadora do Acre desde 2 de abril de 2026; antes disso, era vice-governadora e titular da Secretaria de Estado de Assistência Social e Direitos Humanos.
+            - generic [ref=e947]:
+              - generic [ref=e948]: centro-direita governista com foco social
+              - generic [ref=e949]: Pontuação editorial 86
+            - generic [ref=e950]:
+              - heading "Realizações e focos" [level=4] [ref=e951]
+              - list [ref=e952]:
+                - listitem [ref=e953]: Idealizou e liderou o programa Juntos Pelo Acre, com mutirões de serviços públicos e cidadania.
+                - listitem [ref=e954]: O programa Guarda-Roupa Social entregou 114.256 peças a mais de 70 mil pessoas nos 22 municípios, segundo balanço oficial publicado em 29 de janeiro de 2026.
+                - listitem [ref=e955]: Como governadora em exercício, participou da entrega de mil títulos definitivos em Feijó em 7 de novembro de 2025.
+            - generic [ref=e956]:
+              - link "Ver histórico e pontuação" [ref=e957] [cursor=pointer]:
+                - /url: ./candidato.html?office=governador&candidate=mailza-assis-governadora
+              - button "Votar neste dispositivo" [ref=e958] [cursor=pointer]
+              - paragraph [ref=e959]: Cada dispositivo pode registrar um voto por cargo a cada semana.
+          - article [ref=e960]:
+            - generic [ref=e961]:
+              - generic [ref=e962]: TB
+              - generic [ref=e963]:
+                - generic [ref=e964]: Governo do Acre
+                - heading "Tião Bocalom" [level=3] [ref=e965]
+                - paragraph [ref=e966]: PL • ex-prefeito de Rio Branco
+            - paragraph [ref=e967]: Empresário e liderança do campo conservador no Acre. Foi fundador e primeiro prefeito de Acrelândia e comandou a Prefeitura de Rio Branco de 2021 até 4 de abril de 2026.
+            - paragraph [ref=e968]: Ex-prefeito de Rio Branco desde 4 de abril de 2026, data em que transmitiu o cargo a Alysson Bestene.
+            - generic [ref=e969]:
+              - generic [ref=e970]: direita, municipalista e ligada ao agronegócio
+              - generic [ref=e971]: Pontuação editorial 80
+            - generic [ref=e972]:
+              - heading "Realizações e focos" [level=4] [ref=e973]
+              - list [ref=e974]:
+                - listitem [ref=e975]: A transmissão de cargo em 4 de abril de 2026 registrou cerca de 50 obras e ações além do previsto no plano de governo, segundo a própria gestão.
+                - listitem [ref=e976]: A prestação de contas da prefeitura destacou investimentos em educação, saúde e agricultura ao fim do ciclo administrativo.
+                - listitem [ref=e977]: Antes de Rio Branco, ficou conhecido por ter sido fundador e primeiro prefeito de Acrelândia.
+            - generic [ref=e978]:
+              - link "Ver histórico e pontuação" [ref=e979] [cursor=pointer]:
+                - /url: ./candidato.html?office=governador&candidate=tiao-bocalom-governador
+              - button "Votar neste dispositivo" [ref=e980] [cursor=pointer]
+              - paragraph [ref=e981]: Cada dispositivo pode registrar um voto por cargo a cada semana.
+          - article [ref=e982]:
+            - generic [ref=e983]:
+              - generic [ref=e984]: TD
+              - generic [ref=e985]:
+                - generic [ref=e986]: Governo do Acre
+                - heading "Thor Dantas" [level=3] [ref=e987]
+                - paragraph [ref=e988]: PSB • médico
+            - paragraph [ref=e989]: Professor doutor da Ufac, com atuação clínica, acadêmica e de pesquisa em infectologia e hepatologia. Ganhou projeção política a partir do campo progressista e do debate técnico em saúde pública.
+            - paragraph [ref=e990]: Médico infectologista e hepatologista; assumiu o comando estadual do PSB em 1 de abril de 2026, fortalecendo a pré-candidatura ao governo.
+            - generic [ref=e991]:
+              - generic [ref=e992]: centro-esquerda, progressista e técnico
+              - generic [ref=e993]: Pontuação editorial 74
+            - generic [ref=e994]:
+              - heading "Realizações e focos" [level=4] [ref=e995]
+              - list [ref=e996]:
+                - listitem [ref=e997]: Passou a integrar as diretorias nacionais da Sociedade Brasileira de Hepatologia e da Sociedade Brasileira de Infectologia no início de 2026.
+                - listitem [ref=e998]: Foi apontado como um dos coordenadores da implantação do exame de carga viral de hepatite delta na rede pública do Acre.
+                - listitem [ref=e999]: Assumiu a presidência estadual do PSB em 1 de abril de 2026.
+            - generic [ref=e1000]:
+              - link "Ver histórico e pontuação" [ref=e1001] [cursor=pointer]:
+                - /url: ./candidato.html?office=governador&candidate=thor-dantas-governador
+              - button "Votar neste dispositivo" [ref=e1002] [cursor=pointer]
+              - paragraph [ref=e1003]: Cada dispositivo pode registrar um voto por cargo a cada semana.
+        - article [ref=e1004]:
+          - paragraph [ref=e1005]: Pesquisa Local - Catalogo CZS
+          - generic "Acompanhar preferencias por cargo" [ref=e1156]:
+            - button "Preferência para Governador" [ref=e1157] [cursor=pointer]
+            - button "Preferência para Senador" [ref=e1158] [cursor=pointer]
+            - button "Preferência para Dep. Federal" [ref=e1159] [cursor=pointer]
+            - button "Preferência para Dep. Estadual" [ref=e1160] [cursor=pointer]
+          - heading "Preferência para Governador" [level=3] [ref=e1161]
+          - paragraph [ref=e1162]: Escolha uma opcao para Governador. A cidade e obrigatoria; nome, partido e observacao continuam opcionais. O bloqueio de voto vale por semana neste dispositivo.
+          - generic [ref=e1163]:
+            - generic [ref=e1164]:
+              - generic [ref=e1165]: Alan Rick (Republicanos)
+              - strong [ref=e1168]:
+                - text: 0%
+                - generic [ref=e1169]: 0 votos
+            - generic [ref=e1170]:
+              - generic [ref=e1171]: Mailza Assis (PP)
+              - strong [ref=e1174]:
+                - text: 0%
+                - generic [ref=e1175]: 0 votos
+            - generic [ref=e1176]:
+              - generic [ref=e1177]: Tião Bocalom (PL)
+              - strong [ref=e1180]:
+                - text: 0%
+                - generic [ref=e1181]: 0 votos
+            - generic [ref=e1182]:
+              - generic [ref=e1183]: Thor Dantas (PSB)
+              - strong [ref=e1186]:
+                - text: 0%
+                - generic [ref=e1187]: 0 votos
+          - generic [ref=e1188]:
+            - generic [ref=e1189]:
+              - paragraph [ref=e1190]: Calor eleitoral
+              - heading "Calor eleitoral para Governador" [level=4] [ref=e1191]
+              - paragraph [ref=e1192]: As observacoes enviadas junto com o voto alimentam um termometro de favor, pressao ou neutralidade.
+            - article [ref=e1194]:
+              - strong [ref=e1195]: Sem sinais suficientes ainda.
+              - paragraph [ref=e1196]: Os proximos votos com observacoes vao mostrar aqui o clima local de cada nome.
+          - paragraph [ref=e1197]:
+            - strong [ref=e1198]: "Aviso:"
+            - text: "Esta e uma enquete informal de leitores, sem amostragem cientifica e sem valor de pesquisa registrada. A cidade e obrigatoria no voto, e as observacoes ajudam a mapear sinais positivos, negativos e de reeleicao. Painel restrito ao pleito geral de 2026 no Acre: Governo, Senado, Câmara Federal e Assembleia Legislativa. Não há eleição municipal neste ciclo, e candidaturas oficiais dependem de registro na Justiça Eleitoral."
+      - generic [ref=e1199]:
+        - generic [ref=e1200]:
+          - generic [ref=e1201]:
+            - paragraph [ref=e1202]: Anuncie aqui
+            - heading "Seu Negócio em Destaque" [level=2] [ref=e1203]
+          - paragraph [ref=e1204]: Espaço para pequenos negócios, marcas locais e empreendedores de Cruzeiro do Sul e Vale do Juruá.
+        - generic [ref=e1205]:
+          - article [ref=e1206]:
+            - heading "Sua loja, seu serviço, sua marca" [level=3] [ref=e1207]
+            - paragraph [ref=e1208]: Empresas locais ganham presença em cards editoriais com chamada direta para contato.
+            - link "Anuncie" [ref=e1209] [cursor=pointer]:
+              - /url: "#monetizacao"
+          - article [ref=e1210]:
+            - heading "Estética, saúde ou bem-estar" [level=3] [ref=e1211]
+            - paragraph [ref=e1212]: Sua clínica, salão ou consultório com destaque visual e chamada direta para contato.
+            - link "Anuncie" [ref=e1213] [cursor=pointer]:
+              - /url: "#monetizacao"
+          - article [ref=e1214]:
+            - heading "Imóvel, obra ou reforma" [level=3] [ref=e1215]
+            - paragraph [ref=e1216]: Construtora, imobiliária ou profissional de construção em Cruzeiro do Sul ganha visibilidade.
+            - link "Anuncie" [ref=e1217] [cursor=pointer]:
+              - /url: "#monetizacao"
+          - article [ref=e1218]:
+            - heading "Educação, tecnologia, cursos" [level=3] [ref=e1219]
+            - paragraph [ref=e1220]: Escolas, plataformas de educação e treinamento com público engajado e local.
+            - link "Anuncie" [ref=e1221] [cursor=pointer]:
+              - /url: "#monetizacao"
+        - generic [ref=e1222]:
+          - paragraph [ref=e1223]:
+            - strong [ref=e1224]: Quer anunciar?
+            - text: Entre em contato para conhecer formatos, planos e disponibilidade.
+          - button "Fale com a equipe" [ref=e1225] [cursor=pointer]
+      - generic [ref=e1226]:
+        - generic [ref=e1227]:
+          - generic [ref=e1228]:
+            - paragraph [ref=e1229]: agregação editorial
+            - heading "Tudo Num Lugar Só" [level=2] [ref=e1230]
+          - paragraph [ref=e1231]: O site não republica matéria inteira. Ele lê a notícia de origem, resume com texto próprio, organiza por editoria e usa foto licenciada ou imagem real da matéria antes de mandar o leitor para a fonte original.
+        - generic [ref=e1232]:
+          - article [ref=e1233]:
+            - paragraph [ref=e1234]: etapa 01
+            - heading "Ler a notícia de origem e localizar o fato" [level=3] [ref=e1235]
+            - paragraph [ref=e1236]: A manchete sozinha quase nunca basta. O primeiro corte é separar fato, serviço, disputa política, urgência policial e ruído de rede social.
+          - article [ref=e1237]:
+            - paragraph [ref=e1238]: etapa 02
+            - heading "O que entra no resumo" [level=3] [ref=e1239]
+            - list [ref=e1240]:
+              - listitem [ref=e1241]: Data e local com clareza
+              - listitem [ref=e1242]: Impacto prático para a cidade
+              - listitem [ref=e1243]: Contexto mínimo para não distorcer
+              - listitem [ref=e1244]: Link direto para a fonte consultada
+          - article [ref=e1245]:
+            - paragraph [ref=e1246]: etapa 03
+            - heading "Como a home entrega a informação" [level=3] [ref=e1247]
+            - paragraph [ref=e1248]: Card curto para leitura rápida, arquivo para quem perdeu o mês e painel para temas que reaparecem ao longo da cobertura.
+      - generic [ref=e1249]:
+        - generic [ref=e1250]:
+          - generic [ref=e1251]:
+            - paragraph [ref=e1252]: diversão e cultura
+            - heading "Entretenimento" [level=2] [ref=e1253]
+          - paragraph [ref=e1254]: Filmes, peças de teatro e o melhor da agenda cultural do Acre em um recorte rápido.
+        - generic [ref=e1255]:
+          - article [ref=e1256]:
+            - generic [ref=e1257]:
+              - generic [ref=e1258]: 🎬
+              - heading "Filmes em Destaque" [level=3] [ref=e1259]
+            - generic [ref=e1260]:
+              - article [ref=e1261]:
+                - generic [ref=e1263]:
+                  - generic [ref=e1264]:
+                    - 'heading "Duna: Parte Dois" [level=4] [ref=e1265]'
+                    - paragraph [ref=e1266]: Ficção científica | 2h 46min
+                    - paragraph [ref=e1267]: A saga continua com novos cenários e personagens intrigantes.
+                  - generic [ref=e1268]: ⭐ 8.5/10
+              - article [ref=e1269]:
+                - generic [ref=e1271]:
+                  - generic [ref=e1272]:
+                    - heading "Divertida Mente 2" [level=4] [ref=e1273]
+                    - paragraph [ref=e1274]: Animação | 1h 36min
+                    - paragraph [ref=e1275]: Riley retorna com novas emoções e aventuras no cinema.
+                  - generic [ref=e1276]: ⭐ 8.2/10
+              - article [ref=e1277]:
+                - generic [ref=e1279]:
+                  - generic [ref=e1280]:
+                    - heading "Oppenheimer" [level=4] [ref=e1281]
+                    - paragraph [ref=e1282]: Drama | 3h 0min
+                    - paragraph [ref=e1283]: A história do físico que mudou o mundo para sempre.
+                  - generic [ref=e1284]: ⭐ 9.0/10
+          - article [ref=e1285]:
+            - generic [ref=e1286]:
+              - generic [ref=e1287]: 🎭
+              - heading "Peças em Destaque" [level=3] [ref=e1288]
+            - generic [ref=e1289]:
+              - article [ref=e1290]:
+                - generic [ref=e2353]:
+                  - generic [ref=e2354]:
+                    - heading "A Hora e a Vez de Augusto Matraga" [level=4] [ref=e1292]
+                    - paragraph [ref=e1293]: Teatro | Dramaturgia Clássica
+                    - paragraph [ref=e1294]: Montagem de palco com leitura intensa, atmosfera dramática e encenação pensada para destacar o texto e os personagens.
+                    - generic [ref=e1295]:
+                      - generic [ref=e1296]: 75 min
+                      - generic [ref=e1297]: Elenco regional
+                      - generic [ref=e1298]: 12 anos
+                    - paragraph [ref=e1299]: "Local: Centro de Cultura de Cruzeiro do Sul"
+                  - generic [ref=e2355]: Abr 15-24 | 20h
+              - article [ref=e1300]:
+                - generic [ref=e2356]:
+                  - generic [ref=e2357]:
+                    - heading "O Encontro" [level=4] [ref=e1302]
+                    - paragraph [ref=e1303]: Comédia | Autoria Local
+                    - paragraph [ref=e1304]: Peça com ritmo leve e humor de observação, criada para uma noite de plateia cheia e interação mais próxima com o público.
+                    - generic [ref=e1305]:
+                      - generic [ref=e1306]: 90 min
+                      - generic [ref=e1307]: Sessão popular
+                      - generic [ref=e1308]: Livre
+                    - paragraph [ref=e1309]: "Local: Teatro Municipal"
+                  - generic [ref=e2358]: Abr 18-20 | 19h
+              - article [ref=e1310]:
+                - generic [ref=e2359]:
+                  - generic [ref=e2360]:
+                    - heading "Romeu e Julieta Reimaginado" [level=4] [ref=e1312]
+                    - paragraph [ref=e1313]: Drama | Adaptação Contemporânea
+                    - paragraph [ref=e1314]: Adaptação com visual contemporâneo, direção mais cinematográfica e foco em luz, trilha e presença de cena.
+                    - generic [ref=e1315]:
+                      - generic [ref=e1316]: 85 min
+                      - generic [ref=e1317]: Nova montagem
+                      - generic [ref=e1318]: 14 anos
+                    - paragraph [ref=e1319]: "Local: Centro de Artes"
+                  - generic [ref=e2361]: Abr 22-30 | 21h
+      - generic [ref=e1320]:
+        - generic [ref=e1321]:
+          - generic [ref=e1322]:
+            - paragraph [ref=e1323]: no estado
+            - heading "O que Rola no Acre" [level=2] [ref=e1324]
+          - paragraph [ref=e1325]: Notícias, eventos e assuntos importantes do Estado além de Cruzeiro do Sul.
+        - generic [ref=e1326]:
+          - article [ref=e1327]:
+            - generic [ref=e1328]: Rio Branco
+            - heading "Assembleia Legislativa debate políticas ambientais" [level=3] [ref=e1329]
+            - paragraph [ref=e1330]: Deputados discutem preservação da Floresta Amazônica e impacto das mudanças climáticas no Acre.
+            - generic [ref=e1331]:
+              - generic [ref=e1332]: 10 abr 2026
+              - link "Ler mais →" [ref=e1333] [cursor=pointer]:
+                - /url: "#arquivo"
+          - article [ref=e1334]:
+            - generic [ref=e1335]: Sena Madureira
+            - heading "Feira Agropecuária movimenta economia local" [level=3] [ref=e1336]
+            - paragraph [ref=e1337]: Produtores locais expõem gado de qualidade e tecnologia no campo. Evento atrai visitantes de toda a região.
+            - generic [ref=e1338]:
+              - generic [ref=e1339]: 9 abr 2026
+              - link "Ler mais →" [ref=e1340] [cursor=pointer]:
+                - /url: "#arquivo"
+          - article [ref=e1341]:
+            - generic [ref=e1342]: Feijó
+            - heading "Projeto de turismo comunitário ganha reconhecimento" [level=3] [ref=e1343]
+            - paragraph [ref=e1344]: Iniciativa implementa roteiros de ecoturismo e gera renda para famílias da região. Parceria com ministério.
+            - generic [ref=e1345]:
+              - generic [ref=e1346]: 8 abr 2026
+              - link "Ler mais →" [ref=e1347] [cursor=pointer]:
+                - /url: "#arquivo"
+          - article [ref=e1348]:
+            - generic [ref=e1349]: Tarauacá
+            - heading "Escola indígena recebe investimento em infraestrutura" [level=3] [ref=e1350]
+            - paragraph [ref=e1351]: Novas salas de aula e biblioteca comunitária ampliam acesso à educação para aldeias do interior.
+            - generic [ref=e1352]:
+              - generic [ref=e1353]: 7 abr 2026
+              - link "Ler mais →" [ref=e1354] [cursor=pointer]:
+                - /url: "#arquivo"
+      - generic [ref=e1355]:
+        - generic [ref=e1356]:
+          - generic [ref=e1357]:
+            - paragraph [ref=e1358]: no radar da galera
+            - heading "Trending & Buzz" [level=2] [ref=e1359]
+          - paragraph [ref=e1360]: O que as pessoas mais estão comentando, compartilhando e fazendo por aqui.
+        - generic [ref=e1361]:
+          - article [ref=e1362]:
+            - generic [ref=e1363]: opinião do dia 1
+            - generic [ref=e1364]:
+              - generic [ref=e1367]:
+                - strong [ref=e1368]: Rafa Castanhal
+                - generic [ref=e1369]: "@rafacastanhal • cultura e rolê"
+              - img "Imagem da notícia" [ref=e2362]
+            - generic [ref=e1370]:
+              - paragraph [ref=e1371]: opinião de agenda
+              - heading "A cena cultural local não precisa esperar permissão para existir. Precisa de calendário, palco e divulgação decente." [level=3] [ref=e1372]
+              - paragraph [ref=e1373]: A fala mexeu com artistas, produtores e público. Muita gente concordou que a cidade tem talento, mas perde público quando eventos saem sem divulgação clara.
+            - generic [ref=e1374]:
+              - generic [ref=e1375]:
+                - generic [ref=e1376]: Debate
+                - strong [ref=e1377]: cultura x visibilidade
+                - paragraph [ref=e1378]: Criadores defenderam mais calendário público e menos improviso na divulgação.
+              - generic [ref=e1379]:
+                - generic [ref=e1380]: Contraponto
+                - strong [ref=e1381]: falta recurso
+                - paragraph [ref=e1382]: Produtores apontaram custo alto e dificuldade de apoio contínuo.
+            - generic "Reações à opinião do dia" [ref=e1383]:
+              - generic [ref=e1384]: Reação do dia
+              - paragraph [ref=e1387]: 62% dos comentários defenderam uma agenda cultural fixa.
+            - generic [ref=e1388]:
+              - generic [ref=e1389]: 8.6K curtidas
+              - generic [ref=e1390]: 1.6K comentários
+              - generic [ref=e1391]: 3.2K compartilhamentos
+          - article [ref=e1392]:
+            - generic [ref=e1393]: opinião do dia 2
+            - generic [ref=e1394]:
+              - generic [ref=e1397]:
+                - strong [ref=e1398]: Lia Juruá
+                - generic [ref=e1399]: "@liajurua • criadora local"
+              - img "Imagem da notícia" [ref=e2363]
+            - generic [ref=e1400]:
+              - paragraph [ref=e1401]: a fala que dividiu a timeline
+              - heading "Cruzeiro do Sul não precisa só viralizar bonito. Precisa ter banheiro, sinalização e rota segura antes de vender turismo." [level=3] [ref=e1402]
+              - paragraph [ref=e1403]: "A opinião pegou forte porque cutucou o hype da vista panorâmica: parte do público concordou que falta estrutura, enquanto outra parte achou que a crítica diminui o potencial turístico da cidade."
+            - generic [ref=e1404]:
+              - generic [ref=e1405]:
+                - generic [ref=e1406]: Por que polemizou
+                - strong [ref=e1407]: turismo x estrutura
+                - paragraph [ref=e1408]: O post colocou influenciadores, empresários e moradores no mesmo debate.
+              - generic [ref=e1409]:
+                - generic [ref=e1410]: Resumo do contraponto
+                - strong [ref=e1411]: divulgar sem romantizar
+                - paragraph [ref=e1412]: A crítica não nega o atrativo, mas cobra contexto antes do viral.
+            - generic "Reações à opinião do dia" [ref=e1413]:
+              - generic [ref=e1414]: Reação do dia
+              - paragraph [ref=e1417]: 64% dos comentários monitorados apoiaram a cobrança por estrutura.
+            - generic [ref=e1418]:
+              - generic [ref=e1419]: 12.5K curtidas
+              - generic [ref=e1420]: 2.3K comentários
+              - generic [ref=e1421]: 5.8K compartilhamentos
+          - article [ref=e1422]:
+            - generic [ref=e1423]: opinião do dia 3
+            - generic [ref=e1424]:
+              - generic [ref=e1427]:
+                - strong [ref=e1428]: Nando do Centro
+                - generic [ref=e1429]: "@nandocentro • bastidores da cidade"
+              - img "Imagem da notícia" [ref=e2364]
+            - generic [ref=e1430]:
+              - paragraph [ref=e1431]: o vídeo que virou debate
+              - heading "Evento grande também precisa combinar fila, estacionamento, internet e pagamento funcionando bem." [level=3] [ref=e1432]
+              - paragraph [ref=e1433]: O comentário viralizou depois de um fim de semana movimentado. Comerciantes defenderam a crítica, enquanto produtores culturais lembraram que evento também precisa de patrocínio e apoio público.
+            - generic [ref=e1434]:
+              - generic [ref=e1435]:
+                - generic [ref=e1436]: Ponto quente
+                - strong [ref=e1437]: evento x operação
+                - paragraph [ref=e1438]: A discussão saiu do entretenimento e entrou em logística, segurança e venda local.
+              - generic [ref=e1439]:
+                - generic [ref=e1440]: Outro lado
+                - strong [ref=e1441]: festa também gera renda
+                - paragraph [ref=e1442]: A defesa dos eventos destacou empregos temporários e movimento no comércio.
+            - generic "Reações à opinião do dia" [ref=e1443]:
+              - generic [ref=e1444]: Reação do dia
+              - paragraph [ref=e1447]: 58% dos comentários pediram planejamento melhor antes de ampliar a agenda.
+            - generic [ref=e1448]:
+              - generic [ref=e1449]: 9.8K curtidas
+              - generic [ref=e1450]: 1.9K comentários
+              - generic [ref=e1451]: 3.7K compartilhamentos
+          - article [ref=e1452]:
+            - generic [ref=e1453]: Influencers
+            - img "Imagem da notícia" [ref=e2365]
+            - heading "Criadores locais puxam agenda de fim de semana" [level=3] [ref=e1455]
+            - paragraph [ref=e1456]: Stories, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.
+            - generic [ref=e1457]:
+              - generic [ref=e1458]: 7.4K curtidas
+              - generic [ref=e1459]: 980 comentários
+          - article [ref=e1460]:
+            - generic [ref=e1461]: Comentando
+            - img "Imagem da notícia" [ref=e2366]
+            - heading "Turismo bonito, estrutura cobrada" [level=3] [ref=e1463]
+            - paragraph [ref=e1464]: Fotos continuam viralizando, mas a conversa do dia cobra placas, banheiros, segurança e acesso mais claro.
+            - generic [ref=e1465]:
+              - generic [ref=e1466]: 6.2K curtidas
+              - generic [ref=e1467]: 1.7K comentários
+          - article [ref=e1468]:
+            - generic [ref=e1469]: Rede quente
+            - img "Imagem da notícia" [ref=e2367]
+            - heading "Produto local vira disputa de fila" [level=3] [ref=e1471]
+            - paragraph [ref=e1472]: Lanchonetes e pequenos negócios entraram na conversa depois que um sabor regional esgotou rápido.
+            - generic [ref=e1473]:
+              - generic [ref=e1474]: 5.9K curtidas
+              - generic [ref=e1475]: 740 comentários
+        - generic [ref=e1476]:
+          - paragraph [ref=e1477]: "Hashtags em alta agora:"
+          - generic [ref=e1478]:
+            - button "#CZS" [ref=e1479] [cursor=pointer]
+            - button "#ValedoJurua" [ref=e1480] [cursor=pointer]
+            - button "#AcreQueAma" [ref=e1481] [cursor=pointer]
+            - button "#Local" [ref=e1482] [cursor=pointer]
+            - button "#DesdeAqui" [ref=e1483] [cursor=pointer]
+      - generic [ref=e1484]:
+        - generic [ref=e1485]:
+          - generic [ref=e1486]:
+            - paragraph [ref=e1487]: recorte do mês
+            - heading "Celebridades & Polêmicas" [level=2] [ref=e1488]
+          - paragraph [ref=e1489]: Quem concentrou atenção nas redes e quais temas continuam em debate na cidade.
+        - generic [ref=e1490]:
+          - article [ref=e1491]:
+            - generic [ref=e1492]: Celebridades da semana
+            - heading "Humoristas e criadores locais seguem no topo dos compartilhamentos" [level=3] [ref=e1494]
+            - paragraph [ref=e1495]: Vídeos curtos e bastidores de eventos continuam puxando engajamento regional.
+            - generic [ref=e1496]: Atualizado em 12 abr 2026
+          - article [ref=e1497]:
+            - generic [ref=e1498]: Influencers em alta
+            - heading "Nova geração de criadores conecta rádio, eventos e redes sociais" [level=3] [ref=e1500]
+            - paragraph [ref=e1501]: Conteúdo regional cresce com parcerias e presença nos bairros.
+            - generic [ref=e1502]: Atualizado em 11 abr 2026
+          - article [ref=e1503]:
+            - generic [ref=e1504]: Polêmicas da semana
+            - heading "Projeto de mobilidade urbana segue dividindo opiniões" [level=3] [ref=e1506]
+            - paragraph [ref=e1507]: Comunidade pede ajustes, audiências e participação nas decisões.
+            - generic [ref=e1508]: Atualizado em 10 abr 2026
+          - article [ref=e1509]:
+            - generic [ref=e1510]: Polêmicas da semana
+            - heading "Debate sobre áreas de risco entra no radar das lideranças" [level=3] [ref=e1512]
+            - paragraph [ref=e1513]: Comunidades querem diálogo antes de decisões definitivas.
+            - generic [ref=e1514]: Atualizado em 9 abr 2026
+      - generic [ref=e1515]:
+        - generic [ref=e1516]:
+          - generic [ref=e1517]:
+            - paragraph [ref=e1518]: módulos de cobertura
+            - heading "Sala de Redação" [level=2] [ref=e1519]
+          - paragraph [ref=e1520]: Além das notícias principais, a home ganha módulos estáveis para o leitor entender rápido onde cada assunto entra.
+        - generic [ref=e1521]:
+          - article [ref=e1522]:
+            - paragraph [ref=e1523]: política local
+            - heading "Verba, bastidor e disputa por entrega" [level=3] [ref=e1524]
+            - paragraph [ref=e1525]: Onde entram anúncios de recurso, movimentos da prefeitura, Estado, parlamentares e efeitos concretos dessas articulações.
+          - article [ref=e1526]:
+            - paragraph [ref=e1527]: polícia
+            - heading "Ocorrência urgente sem poluição visual" [level=3] [ref=e1528]
+            - paragraph [ref=e1529]: Prisões, buscas, homicídios, apreensões e ocorrências entram com data, bairro e ponto principal, sem transformar tudo em espetáculo.
+            - generic [ref=e2368]:
+              - paragraph [ref=e2369]: Já em produção
+              - list [ref=e2370]:
+                - listitem [ref=e2371]: Ocorrências confirmadas com horário e bairro
+                - listitem [ref=e2372]: Alertas de segurança com atualização diária
+                - listitem [ref=e2373]: Quadro de queda/alta de crimes por recorte local
+              - link "Abrir módulo" [ref=e2374] [cursor=pointer]:
+                - /url: index.html#radar
+          - article [ref=e1530]:
+            - paragraph [ref=e1531]: serviço
+            - heading "Leitor entra por utilidade e volta por hábito" [level=3] [ref=e1532]
+            - paragraph [ref=e1533]: Tempo, cheia, leilão, edital, posto, calendário escolar e fiscalização são assuntos que puxam recorrência diária.
+            - generic [ref=e2375]:
+              - paragraph [ref=e2376]: Já em produção
+              - list [ref=e2377]:
+                - listitem [ref=e2378]: Calendário escolar, provas e editais em um só lugar
+                - listitem [ref=e2379]: Agenda de serviços e canais oficiais de atendimento
+                - listitem [ref=e2380]: Bloco de utilidades com números prontos para ligar
+              - link "Abrir módulo" [ref=e2381] [cursor=pointer]:
+                - /url: catalogo-servicos.html?modulo=utilidades
+          - article [ref=e1534]:
+            - paragraph [ref=e1535]: saúde
+            - heading "Hospital, UBS, campanha e alerta entram no mesmo mapa" [level=3] [ref=e1536]
+            - paragraph [ref=e1537]: Isso ajuda o leitor a ligar crise respiratória, enchente, atendimento de emergência e ações preventivas numa mesma leitura.
+            - generic [ref=e2382]:
+              - paragraph [ref=e2383]: Já em produção
+              - list [ref=e2384]:
+                - listitem [ref=e2385]: Hospitais, UBS e campanha atualizados
+                - listitem [ref=e2386]: Mapa de vacinação e prevenção por bairro
+                - listitem [ref=e2387]: Canal rápido para emergências de saúde
+              - link "Abrir módulo" [ref=e2388] [cursor=pointer]:
+                - /url: catalogo-servicos.html?modulo=saude
+          - article [ref=e1538]:
+            - paragraph [ref=e1539]: cultura e cidade
+            - heading "Nem só de urgência vive a home" [level=3] [ref=e1540]
+            - paragraph [ref=e1541]: Reforma de espaço público, agenda, prêmio local e memória urbana dão profundidade para o portal não ficar refém apenas da correria diária.
+            - generic [ref=e2389]:
+              - paragraph [ref=e2390]: Já em produção
+              - list [ref=e2391]:
+                - listitem [ref=e2392]: Eventos, festivais e agenda da semana
+                - listitem [ref=e2393]: Projetos locais, memória e patrimônio da cidade
+                - listitem [ref=e2394]: Cobertura de lazer, turismo e economia criativa
+              - link "Abrir módulo" [ref=e2395] [cursor=pointer]:
+                - /url: index.html#trending
+          - generic [ref=e2396]:
+            - paragraph [ref=e2397]: Já em produção
+            - list [ref=e2398]:
+              - listitem [ref=e2399]: Ocorrências confirmadas com horário e bairro
+              - listitem [ref=e2400]: Alertas de segurança com atualização diária
+              - listitem [ref=e2401]: Quadro de queda/alta de crimes por recorte local
+            - link "Abrir módulo" [ref=e2402] [cursor=pointer]:
+              - /url: index.html#radar
+        - generic [ref=e2403]:
+          - paragraph [ref=e2404]: Atualizações reais da redação
+          - list [ref=e2405]:
+            - listitem [ref=e2406]:
+              - link "Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários" [ref=e2407] [cursor=pointer]:
+                - /url: ./noticia.html?slug=governo-prorroga-o-prazo-para-recursos-da-homologacao-das-inscricoes-de-brigadistas-comunitarios
+              - text: Governo prorroga o prazo para recursos da homologação das inscrições de brigadistas comunitários
+            - listitem [ref=e2408]:
+              - link "Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru" [ref=e2409] [cursor=pointer]:
+                - /url: ./noticia.html?slug=gonzaga-destaca-acordos-internacionais-e-defende-retomada-de-voos-entre-acre-e-peru
+              - text: Gonzaga destaca acordos internacionais e defende retomada de voos entre Acre e Peru
+            - listitem [ref=e2410]:
+              - link "Jarude critica crise no transporte coletivo e cobra providências dos órgãos de controle" [ref=e2411] [cursor=pointer]:
+                - /url: ./noticia.html?slug=jarude-critica-crise-no-transporte-coletivo-e-cobra-providencias-dos-orgaos-de-controle
+              - text: Jarude critica crise no transporte coletivo e cobra providências dos órgãos de controle
+            - listitem [ref=e2412]:
+              - link "Cruzeiro do Sul conta com casa de farinha móvel mecanizada para fortalecer produção rural" [ref=e2413] [cursor=pointer]:
+                - /url: ./noticia.html?slug=cruzeiro-do-sul-conta-com-casa-de-farinha-movel-mecanizada-para-fortalecer-producao-rural
+              - text: Cruzeiro do Sul conta com casa de farinha móvel mecanizada para fortalecer produção rural
+            - listitem [ref=e2414]:
+              - link "Porto Walter amplia programa Novo Olhar e atende alunos da zona rural" [ref=e2415] [cursor=pointer]:
+                - /url: ./noticia.html?slug=porto-walter-amplia-programa-novo-olhar-e-atende-alunos-da-zona-rural
+              - text: Porto Walter amplia programa Novo Olhar e atende alunos da zona rural
+            - listitem [ref=e2416]:
+              - link "Prefeitura lança projeto “Empreende Mais Rio Branco” com serviços, feira e palestras no Mercado do São Francisco" [ref=e2417] [cursor=pointer]:
+                - /url: ./noticia.html?slug=prefeitura-lanca-projeto-empreende-mais-rio-branco-com-servicos-feira-e-palestras-no-mercado-do-sao-francisco
+              - text: Prefeitura lança projeto “Empreende Mais Rio Branco” com serviços, feira e palestras no Mercado do São Francisco
+      - generic [ref=e1542]:
+        - generic [ref=e1543]:
+          - generic [ref=e1544]:
+            - paragraph [ref=e1545]: dados e serviço
+            - heading "Painel do Juruá" [level=2] [ref=e1546]
+          - paragraph [ref=e1547]: Um bloco de leitura rápida para condensar os números e os temas que mais voltaram ao noticiário da região ao longo do mês.
+        - generic [ref=e1548]:
+          - article [ref=e1549]:
+            - paragraph [ref=e1550]: última leitura
+            - heading "Quatro números que ajudam a entender o mês" [level=3] [ref=e1551]
+            - generic [ref=e1552]:
+              - generic [ref=e1553]:
+                - text: nível do rio
+                - strong [ref=e1554]: 14,15 m
+              - generic [ref=e1555]:
+                - text: abrigados
+                - strong [ref=e1556]: "233"
+              - generic [ref=e1557]:
+                - text: leilão detran
+                - strong [ref=e1558]: "104"
+              - generic [ref=e1559]:
+                - text: verba na saúde
+                - strong [ref=e1560]: R$ 3 mi
+            - generic [ref=e1561]:
+              - button "Cheia" [ref=e1562] [cursor=pointer]
+              - button "Saúde" [ref=e1563] [cursor=pointer]
+          - article [ref=e1564]:
+            - paragraph [ref=e1565]: janela de cobertura
+            - heading "Arraste para navegar pelo mês" [level=3] [ref=e1566]
+            - generic [ref=e1567]: Dias monitorados
+            - slider "Dias monitorados" [ref=e1568]: "31"
+            - generic [ref=e1569]:
+              - generic [ref=e1570]:
+                - text: janela
+                - strong [ref=e1571]: 31 dias
+              - generic [ref=e1572]:
+                - text: notícias rastreadas
+                - strong [ref=e1573]: 74 notas
+          - article [ref=e1574]:
+            - paragraph [ref=e1575]: fontes monitoradas
+            - heading "De onde a curadoria parte antes de resumir" [level=3] [ref=e1576]
+            - paragraph [ref=e1577]: A curadoria cruza portais locais, fonte oficial e cobertura pública antes de transformar o dia em leitura rápida.
+            - generic "Fontes monitoradas pela curadoria" [ref=e1578]:
+              - link "Juruá Online" [ref=e1579] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#jurua-online
+              - link "Juruá 24 Horas" [ref=e1580] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#jurua-24-horas
+              - link "ac24horas" [ref=e1581] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#ac24horas
+              - link "Agência Acre" [ref=e1582] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#agencia-acre
+              - link "Batelão" [ref=e1583] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#batelao
+              - link "Tribuna do Juruá" [ref=e1584] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#tribuna-do-jurua
+              - link "Prefeitura de CZS" [ref=e1585] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html#prefeitura-czs
+            - generic [ref=e1586]:
+              - generic [ref=e1587]: O radar agora separa fonte principal, apoio regional, blog e rede social para não misturar alarme com prova.
+              - link "Veja todas" [ref=e1588] [cursor=pointer]:
+                - /url: ./fontes-monitoradas.html
+      - generic [ref=e1589]:
+        - generic [ref=e1590]:
+          - generic [ref=e1591]:
+            - paragraph [ref=e1592]: participação local
+            - heading "Voz da Rua" [level=2] [ref=e1593]
+          - paragraph [ref=e1594]: A comunidade participa com identificação, moderação e espaço para respostas úteis, relatos locais e correções construtivas.
+        - generic [ref=e1595]:
+          - generic [ref=e1596]:
+            - generic [ref=e1597]: Seu nome
+            - textbox "Seu nome" [ref=e1598]:
+              - /placeholder: Como quer aparecer na comunidade
+            - generic [ref=e1599]: Deixe sua opinião
+            - textbox "Deixe sua opinião" [ref=e1600]:
+              - /placeholder: Escreva como se fosse um leitor ativo da comunidade...
+            - paragraph [ref=e1601]
+            - generic [ref=e1602]:
+              - generic [ref=e1603]: 0 / 180
+              - button "Enviar comentário" [ref=e1604] [cursor=pointer]
+          - generic [ref=e1605]:
+            - article [ref=e2418]:
+              - generic [ref=e2419]:
+                - strong [ref=e2420]: Marina A.
+                - generic [ref=e2421]: Membro fundador
+              - paragraph [ref=e2422]: “O que me prende aqui e quando o site junta a noticia da rua com documento e linha do tempo. Ai vira servico, nao so opiniao.”
+            - article [ref=e2423]:
+              - generic [ref=e2424]:
+                - strong [ref=e2425]: Paulo R.
+                - generic [ref=e2426]: Leitor nivel 9
+              - paragraph [ref=e2427]: “A secao de humor funciona melhor quando bate no assunto do dia com uma imagem forte e pouca enrolacao.”
+      - generic [ref=e1616]:
+        - generic:
+          - generic [ref=e1617]:
+            - paragraph [ref=e1618]: publicidade local
+            - heading "Espaços comerciais organizados para marcas da região" [level=2] [ref=e1619]
+          - paragraph [ref=e1620]: Formatos comerciais aparecem com identificação clara, integração ao conteúdo e leitura confortável para o público.
+        - article [ref=e1621]:
+          - text: banner principal 970 x 250
+          - strong [ref=e1622]: Patrocínio master da edição
+          - paragraph [ref=e1623]: Ideal para construtora, faculdade, clínica, varejo ou campanha local.
+        - article [ref=e1624]:
+          - text: slot lateral premium
+          - strong [ref=e1625]: Publicidade contextual
+          - paragraph [ref=e1626]: Fica entre o radar e a comunidade, com boa visibilidade recorrente.
+        - article [ref=e1627]:
+          - text: entrada dos patrocinadores
+          - strong [ref=e1628]: Quero anunciar no Catalogo
+          - paragraph [ref=e1629]: Abra o atendimento comercial já com assunto de patrocínio preenchido para combinar formato, valor, prazo, arte e link de destino.
+          - button "Abrir entrada dos patrocinadores" [ref=e1630] [cursor=pointer]
+        - article [ref=e1631]:
+          - text: fundadores do catalogo
+          - strong [ref=e1632]: Apoio leve para manter o portal vivo
+          - paragraph [ref=e1633]: "O único apoio pago para o leitor comum fica aqui: de R$ 1 a R$ 10. Quem apoiar entra no mural de fundadores e ganha uma estrela de reconhecimento no site."
+          - generic "Pix protegido para apoiar como fundador" [ref=e1634]:
+            - generic [ref=e1635]: Pix protegido
+            - strong [ref=e1636]: QR Code gerado na hora
+            - generic [ref=e1637]: "A chave fica oculta: o apoio abre um QR unico, com referencia propria, para confirmar o pagamento."
+          - link "Abrir formulario e Pix" [ref=e1638] [cursor=pointer]:
+            - /url: "#newsletter"
+      - generic [ref=e1639]:
+        - generic [ref=e1640]:
+          - paragraph [ref=e1641]: por e-mail com Google
+          - heading "Resumo das 7h no seu e-mail" [level=2] [ref=e1642]
+          - paragraph [ref=e1643]: Toda manhã, a equipe reúne as principais matérias e envia um resumo curto. O cadastro usa Google para evitar e-mail falso, duplicidade e bagunça na base.
+        - generic [ref=e1645]:
+          - generic [ref=e1646]: Identificação obrigatória
+          - strong [ref=e1647]: Login Google precisa ser configurado no Render
+          - paragraph [ref=e1648]: Configure GOOGLE_AUTH_CLIENT_ID e SITE_AUTH_SESSION_SECRET para liberar o acesso.
+        - generic [ref=e1649]:
+          - textbox "Seu nome" [ref=e1650]
+          - textbox "Entre com Google para preencher o e-mail" [ref=e1651]
+          - combobox "Plano de assinatura" [ref=e1652]:
+            - option "Resumo das 7h no e-mail" [selected]
+            - option "Fundadores do Catalogo"
+          - button "Receber com Google" [ref=e1653] [cursor=pointer]
+        - paragraph [ref=e1654]: "Resumo das 7h: cai no e-mail validado pelo Google. Fundadores: apoio simbólico de R$ 1 a R$ 10 com nome público no mural e estrela de fundador, após confirmação manual por QR Code Pix."
+        - generic [ref=e1655]:
+          - link "Locação e Transporte" [ref=e1656] [cursor=pointer]:
+            - /url: ./catalogo-servicos.html?modulo=locacao-transporte
+          - link "Ninjas Cruzeiro" [ref=e1657] [cursor=pointer]:
+            - /url: ./ninjas.html
+        - paragraph [ref=e1658]
+      - generic [ref=e1659]:
+        - generic [ref=e1660]:
+          - generic [ref=e1661]:
+            - paragraph [ref=e1662]: fundadores
+            - heading "Mural de quem ajudou a abrir o portal" [level=2] [ref=e1663]
+          - paragraph [ref=e1664]: Apoios confirmados recebem estrela pública e ajudam a manter a cobertura local em funcionamento.
+        - generic [ref=e1665]:
+          - strong [ref=e1666]: 0 fundadores até agora
+          - generic [ref=e1667]: apoio livre entre R$ 1 e R$ 10
+        - generic "Fundadores em destaque" [ref=e1668]:
+          - article [ref=e1669]:
+            - generic [ref=e1670]: Fundador em cena
+            - generic [ref=e1671]:
+              - strong [ref=e1672]: Cafe Cruzeiro
+              - paragraph [ref=e1673]: Parceiro de abertura e presenca em destaque no palco dos fundadores.
+          - article [ref=e1674]:
+            - generic [ref=e1675]: Apoiador em destaque
+            - img "Logo do Grupo A.S"
+          - article [ref=e1676]:
+            - generic [ref=e1677]: Fundadora em destaque
+            - img "Logo da Dra. Geane Campo"
+          - article [ref=e1678]:
+            - generic [ref=e1679]: Marca fundadora
+            - img "Logo da Recommencer"
+        - article [ref=e1681]:
+          - strong [ref=e1682]: ★ Seu nome pode abrir esta lista
+          - paragraph [ref=e1683]: Os primeiros apoiadores aparecem aqui como fundadores do portal.
+  - contentinfo "Radar local com pulso de dados, serviço e comunidade." [ref=e2098]:
+    - generic "Avenida em marcha da Insiders Infor" [ref=e2167]:
+      - generic [ref=e2173]:
+        - paragraph [ref=e2174]: marcha editorial
+        - heading "Nós somos os Insiders. Liberdade e verdade em marcha." [level=3] [ref=e2175]
+        - paragraph [ref=e2176]: Uma avenida aberta vira palco para a multidão Insiders, com faixas, passos e placas pedindo liberdade, verdade e voz pública no mesmo pulso.
+      - generic "Chamada principal da marcha Insiders" [ref=e2177]:
+        - strong [ref=e2178]: NOS SOMOS OS INSIDERS
+        - generic [ref=e2179]: QUEREMOS LIBERDADE E VERDADE
+      - generic [ref=e2182]:
+        - generic [ref=e2183]: apresenta
+        - strong [ref=e2184]: INSIDERS INFOR
+        - generic [ref=e2185]: Cada leitura, cada acesso e cada feed back ajudam a empurrar a verdade para frente, porque a verdade é o começo da liberdade.
+    - region "Catálogo Cruzeiro do Sul" [ref=e2186]:
+      - img [ref=e2187]
+      - paragraph [ref=e2188]: central juruá online
+      - heading "Radar local com pulso de dados, serviço e comunidade." [level=2] [ref=e2189]
+      - paragraph [ref=e2190]: "Uma base digital para acompanhar Cruzeiro do Sul: notícias, serviços, rotas úteis e contato direto com a equipe."
+      - generic "Status do portal" [ref=e2191]:
+        - generic [ref=e2192]:
+          - strong [ref=e2193]: 24h
+          - generic [ref=e2194]: monitoramento
+        - generic [ref=e2195]:
+          - strong [ref=e2196]: IA
+          - generic [ref=e2197]: curadoria assistida
+        - generic [ref=e2198]:
+          - strong [ref=e2199]: AC
+          - generic [ref=e2200]: Vale do Juruá
+      - generic [ref=e2201]:
+        - link "Voltar ao radar" [ref=e2202] [cursor=pointer]:
+          - /url: "#radar"
+        - link "Chamar no WhatsApp" [ref=e2203] [cursor=pointer]:
+          - /url: https://wa.me/5568992269296
+        - text: "> stream.binario --jurua --online 0101 1010 0011"
+      - generic "Atalhos administrativos e tecnicos" [ref=e2428]:
+        - link "CheckPubPaid" [ref=e2429] [cursor=pointer]:
+          - /url: ./sprites-check-change.html
+        - link "Administrativo" [ref=e2430] [cursor=pointer]:
+          - /url: ./admin/admin-dashboard.html
+        - link "SPO" [ref=e2431] [cursor=pointer]:
+          - /url: ./pesquisa-acre-2026.html
+        - link "Tracer" [ref=e2432] [cursor=pointer]:
+          - /url: ./admin/admin-dashboard.html
+    - navigation "Mapa do site" [ref=e2204]:
+      - heading "Rotas rápidas" [level=3] [ref=e2205]
+      - list [ref=e2206]:
+        - listitem [ref=e2207]:
+          - link "// Radar CZS" [ref=e2208] [cursor=pointer]:
+            - /url: "#radar"
+        - listitem [ref=e2209]:
+          - link "// Arquivo de Abril" [ref=e2210] [cursor=pointer]:
+            - /url: "#arquivo"
+        - listitem [ref=e2211]:
+          - link "// Entretenimento" [ref=e2212] [cursor=pointer]:
+            - /url: "#entretenimento"
+        - listitem [ref=e2213]:
+          - link "// Trending & Buzz" [ref=e2214] [cursor=pointer]:
+            - /url: "#trending"
+        - listitem [ref=e2215]:
+          - link "// Celebridades & Polêmicas" [ref=e2216] [cursor=pointer]:
+            - /url: "#monthly"
+        - listitem [ref=e2217]:
+          - link "// Catálogo Telefônico" [ref=e2218] [cursor=pointer]:
+            - /url: "#catalogo-telefonico"
+        - text: // // // // //
+    - region "Envie sinal, correção ou alerta local." [ref=e2229]:
+      - code [ref=e2234]: czs://leitor/comunidade
+      - paragraph [ref=e2235]: canal direto
+      - heading "Envie sinal, correção ou alerta local." [level=3] [ref=e2236]
+      - paragraph [ref=e2237]: A mensagem abre no fluxo do portal e segue para atendimento pelo WhatsApp.
+      - generic [ref=e2238]:
+        - textbox "Mensagem para a equipe" [ref=e2239]:
+          - /placeholder: Escreva sua mensagem...
+        - button "Enviar" [ref=e2240] [cursor=pointer]
+      - generic [ref=e2241]:
+        - link "Centro no mapa" [ref=e2242] [cursor=pointer]:
+          - /url: https://www.google.com/maps/search/?api=1&query=-7.62759%2C-72.67756
+        - link "Transparência legal" [ref=e2243] [cursor=pointer]:
+          - /url: ./legal.html
+    - region "Status tecnológico do portal" [ref=e2244]:
+      - article [ref=e2245]:
+        - generic [ref=e2246]: sincronização
+        - strong [ref=e2247]: online
+        - generic [ref=e2248]: home + serviços
+      - article [ref=e2249]:
+        - generic [ref=e2250]: fontes
+        - strong [ref=e2251]: creditadas
+        - generic [ref=e2252]: links originais
+      - article [ref=e2253]:
+        - generic [ref=e2254]: canal
+        - strong [ref=e2255]: aberto
+        - generic [ref=e2256]: comunidade
+    - generic [ref=e2257]:
+      - generic [ref=e2258]: © 2026 Catálogo Cruzeiro do Sul
+      - generic [ref=e2259]: Apresentado por Insiders Infor
+      - link "Política legal completa" [ref=e2260] [cursor=pointer]:
+        - /url: ./legal.html

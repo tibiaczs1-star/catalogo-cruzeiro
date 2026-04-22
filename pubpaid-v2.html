@@ -3,191 +3,170 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>PubPaid 2.0 | Rua Viva e PvP</title>
+    <title>PubPaid 2.0 | Jogo Oficial</title>
     <meta
       name="description"
-      content="Laboratório jogável da PubPaid 2.0 com rua viva, fachada do bar, créditos de teste e blueprint PvP real."
+      content="Linha oficial da PubPaid 2.0, agora centrada no núcleo Phaser com rua, salão, HUD e base para carteira e PvP real."
     />
     <meta name="robots" content="noindex,nofollow" />
-    <meta name="theme-color" content="#070a18" />
-    <meta name="color-scheme" content="dark" />
-    <link rel="stylesheet" href="./pubpaid-v2.css?v=20260421streetpvp" />
+    <meta name="theme-color" content="#07101c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260422cinematic" />
+    <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
+    <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260422cinematic"></script>
   </head>
-  <body class="pubpaid-v2-page">
-    <main class="ppv2-shell">
-      <section class="ppv2-hero" aria-labelledby="ppv2-title">
-        <div class="ppv2-copy">
-          <p class="ppv2-kicker">laboratório PubPaid 2.0</p>
-          <h1 id="ppv2-title">A noite começa na rua.</h1>
+  <body class="pubpaid-phaser-page pubpaid-phaser-page--official">
+    <main class="ppg-shell ppg-shell--official">
+      <header class="ppg-topbar" aria-label="Barra do PubPaid 2.0">
+        <div class="ppg-topbar-copy">
+          <p class="ppg-kicker">pubpaid 2.0 oficial</p>
+          <h1>A abertura agora é uma sequência bitmap dentro do jogo.</h1>
           <p>
-            O jogador chega pela cidade, encontra a fachada do PubPaid, recebe o convite
-            de teste e só depois entra nas mesas reais com PvP, escrow e regras auditáveis.
-          </p>
-          <div class="ppv2-flow" aria-label="Fluxo principal">
-            <span>Splash</span>
-            <span>Rua viva</span>
-            <span>Google</span>
-            <span>Teste</span>
-            <span>PvP real</span>
-          </div>
-          <div class="ppv2-actions">
-            <button class="ppv2-button primary" type="button" data-enter-street>Enter game</button>
-            <a class="ppv2-button" href="./pubpaid-phaser.html">Abrir núcleo Phaser</a>
-            <a class="ppv2-button" href="./pubpaid.html">Voltar à PubPaid atual</a>
-          </div>
-        </div>
-
-        <div class="ppv2-terminal" aria-label="Painel da experiência">
-          <span>CEO / ordem atual</span>
-          <strong>Construir sem quebrar a versão atual.</strong>
-          <p>
-            Esta página é a mesa de desenho jogável: define rua, fluxo, carteira, sprites
-            e contrato PvP antes de ligar dinheiro real.
+            Seis frames montam a chegada, o celular, o toque, o neon e o frame final congelado.
+            Depois entram termos, Google e a rua em tela cheia.
           </p>
         </div>
-      </section>
+        <div class="ppg-topbar-actions">
+          <button class="ppg-button primary" type="button" data-enter-game>Entrar no jogo</button>
+          <button class="ppg-button" type="button" data-exit-game hidden>Sair do jogo</button>
+          <a class="ppg-button primary" href="./pubpaid.html">Voltar à PubPaid atual</a>
+          <a class="ppg-button" href="./escritorio-nerd.html">Equipe de agentes desenvolvedores</a>
+        </div>
+      </header>
 
-      <section class="ppv2-game ppv2-fullscreen-stage" aria-label="Rua viva do PubPaid 2.0">
-        <div class="ppv2-screen">
-          <canvas
-            class="ppv2-canvas"
-            data-ppv2-canvas
-            width="1280"
-            height="720"
-            aria-label="Mapa em pixel art da rua em frente ao PubPaid"
-          ></canvas>
-          <div class="ppv2-hud">
-            <article>
-              <span>cena</span>
-              <strong data-scene-name>Rua do PubPaid</strong>
-            </article>
-            <article>
-              <span>modo</span>
-              <strong data-mode-name>teste seguro</strong>
-            </article>
-            <article>
-              <span>teste</span>
-              <strong data-test-coins>100</strong>
-            </article>
-            <article>
-              <span>real</span>
-              <strong data-real-coins>0</strong>
-            </article>
-            <article>
-              <span>foco</span>
-              <strong data-focus-name>porta principal</strong>
-            </article>
+      <section class="ppg-stage ppg-stage--official" aria-label="Jogo oficial da PubPaid 2.0">
+        <div class="ppg-canvas-shell ppg-canvas-shell--official">
+          <div id="pubpaid-phaser-root" class="ppg-game" aria-label="Jogo PubPaid 2.0 em Phaser"></div>
+          <div class="ppg-orientation-gate" data-orientation-gate hidden>
+            <section class="ppg-orientation-card" aria-label="Orientação recomendada para o PubPaid 2.0">
+              <p class="ppg-kicker">mobile mode</p>
+              <h2>Mude para horizontal.</h2>
+              <p>O PubPaid 2 foi preparado para jogar com o celular deitado.</p>
+              <span data-orientation-status>Gire o aparelho para continuar.</span>
+            </section>
           </div>
-          <div class="ppv2-prompt" data-prompt>
-            Clique na porta do PubPaid ou caminhe pela rua.
-          </div>
-          <div class="ppv2-touch-controls" aria-label="Controles touch">
-            <button type="button" data-touch-move="up" aria-label="Mover para cima">▲</button>
-            <button type="button" data-touch-move="left" aria-label="Mover para esquerda">◀</button>
-            <button type="button" data-touch-action aria-label="Interagir">OK</button>
-            <button type="button" data-touch-move="right" aria-label="Mover para direita">▶</button>
-            <button type="button" data-touch-move="down" aria-label="Mover para baixo">▼</button>
-          </div>
-          <aside class="ppv2-micro-panel" data-micro-panel hidden aria-live="polite">
-            <div class="ppv2-micro-panel__head">
-              <div>
-                <span class="ppv2-card-kicker" data-panel-kicker>interação</span>
-                <h3 data-panel-title>Ponto de interesse</h3>
-              </div>
-              <button type="button" class="ppv2-micro-panel__close" data-close-panel aria-label="Fechar painel">
-                ✕
+          <button class="ppg-audio-toggle" type="button" data-audio-toggle aria-pressed="false">
+            Som 16-bit
+          </button>
+          <div class="ppg-permission-gate" data-permission-gate>
+            <section class="ppg-permission-card" aria-label="Permissões para iniciar PubPaid 2.0">
+              <p class="ppg-kicker">antes da abertura</p>
+              <h2>Ative som e tela cheia.</h2>
+              <p>
+                A música entra no primeiro frame. Toque para liberar áudio, pedir tela cheia e começar a intro.
+              </p>
+              <button class="ppg-button primary" type="button" data-start-experience>
+                Ativar e começar
               </button>
+              <span data-permission-status>Som 16-bit + fullscreen</span>
+            </section>
+          </div>
+          <div class="ppg-splash" data-splash-screen aria-live="polite" hidden>
+            <section class="ppg-splash-card ppg-splash-step is-active" data-splash-step="terms" hidden>
+              <p class="ppg-kicker">system ready</p>
+              <h2>Enter game</h2>
+              <label class="ppg-terms-check">
+                <input type="checkbox" data-terms-checkbox />
+                <span>
+                  Continuar inicia a run no PubPaid 2.0.
+                </span>
+              </label>
+              <p class="ppg-splash-note">
+                toque para entrar
+              </p>
+              <div class="ppg-splash-actions">
+                <button class="ppg-button primary" type="button" data-accept-terms>Enter game</button>
+              </div>
+            </section>
+
+            <section class="ppg-splash-card ppg-splash-step" data-splash-step="auth" hidden data-google-auth-card>
+              <p class="ppg-kicker">access port</p>
+              <h2 data-auth-title>Access ready</h2>
+              <p data-google-auth-status>Escolha como entrar.</p>
+              <p class="ppg-splash-note" data-google-auth-email>
+                login gate
+              </p>
+              <div class="ppg-google-stack ppg-google-stack--fit">
+                <div class="ppg-google-slot" data-google-auth-button></div>
+                <button class="ppg-button" type="button" data-google-auth-logout hidden>Sair do Google</button>
+                <button class="ppg-button primary" type="button" data-open-game disabled>Enter game</button>
+              </div>
+            </section>
+          </div>
+          <div class="ppg-hud" data-game-hud>
+            <article class="ppg-hud-debug">
+              <span>scene</span>
+              <strong data-game-scene>street</strong>
+            </article>
+            <article class="ppg-hud-debug">
+              <span>focus</span>
+              <strong data-game-focus>porta principal</strong>
+            </article>
+            <article class="ppg-hud-debug">
+              <span>modo</span>
+              <strong data-game-mode>nucleo phaser</strong>
+            </article>
+            <article class="ppg-hud-chip">
+              <span>teste</span>
+              <strong data-game-test-balance>100</strong>
+            </article>
+            <article class="ppg-hud-chip">
+              <span>real</span>
+              <strong data-game-real-balance>0</strong>
+            </article>
+            <article class="ppg-hud-agent">
+              <span>nerd</span>
+              <strong data-game-nerd-agent>Pixo FX</strong>
+            </article>
+          </div>
+          <div class="ppg-prompt" data-game-prompt>
+            <span class="ppg-prompt-kicker">objetivo</span>
+            <strong data-game-objective>entrar no PubPaid</strong>
+            <span data-game-prompt-copy>Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão.</span>
+          </div>
+          <aside class="ppg-panel" data-game-panel hidden aria-live="polite">
+            <div class="ppg-panel-head">
+              <div>
+                <span class="ppg-kicker" data-game-panel-kicker>interação</span>
+                <h2 data-game-panel-title>Ponto do jogo</h2>
+              </div>
+              <button type="button" data-game-panel-close aria-label="Fechar painel">✕</button>
             </div>
-            <p class="ppv2-micro-panel__body" data-panel-body></p>
-            <div class="ppv2-micro-panel__chips" data-panel-chips></div>
-            <div class="ppv2-micro-panel__actions" data-panel-actions></div>
+            <p data-game-panel-body></p>
+            <div class="ppg-panel-chips" data-game-panel-chips></div>
+            <div class="ppg-panel-actions" data-game-panel-actions></div>
           </aside>
         </div>
-
-        <aside class="ppv2-panel" aria-label="Plano de produção">
-          <div class="ppv2-card ppv2-status-card">
-            <span class="ppv2-card-kicker">onboarding</span>
-            <h2>Tá duro? Experimente.</h2>
-            <p>
-              Após Google, o jogador ganha 100 créditos de teste. Eles só funcionam em
-              IA/máquina e nunca viram saque, aposta real ou prêmio.
-            </p>
-            <button class="ppv2-button primary" type="button" data-open-test>Simular convite</button>
-          </div>
-
-          <div class="ppv2-card">
-            <span class="ppv2-card-kicker">PvP real</span>
-            <h2>Checklist da primeira mesa</h2>
-            <ul class="ppv2-checklist">
-              <li>Matchmaking por jogo e valor.</li>
-              <li>Escrow antes da partida iniciar.</li>
-              <li>Servidor autoritativo para jogadas.</li>
-              <li>Abandono: 60s para reconectar.</li>
-              <li>Vencedor recebe 80% do pote.</li>
-              <li>Logs e replay mínimo para auditoria.</li>
-            </ul>
-          </div>
-
-          <div class="ppv2-card">
-            <span class="ppv2-card-kicker">ordem dos jogos</span>
-            <div class="ppv2-game-list">
-              <button type="button" data-select-table="darts">Dardos</button>
-              <button type="button" data-select-table="checkers">Dama</button>
-              <button type="button" data-select-table="truco">Truco</button>
-              <button type="button" data-select-table="poker">Poker</button>
-            </div>
-            <p data-table-copy>
-              Dardos e Dama abrem o teste por terem menos RNG e serem mais fáceis de auditar.
-            </p>
-          </div>
-        </aside>
       </section>
 
-      <section class="ppv2-city-plan" aria-label="Plano da cidade futura">
+      <section class="ppg-notes ppg-notes--official">
         <article>
-          <span>norte</span>
-          <strong>Arcade fechado</strong>
-          <p>Silhueta pronta para virar prédio de eventos e rankings.</p>
+          <span class="ppg-kicker">visão</span>
+          <h2>Jogar em vez de simular</h2>
+          <p>O foco agora é fazer a 2.0 funcionar como jogo de verdade: tela limpa, cenas sólidas, transição real e menos fachada de protótipo.</p>
         </article>
         <article>
-          <span>leste</span>
-          <strong>Rua circular</strong>
-          <p>Primeiro atalho do futuro anel de cidade.</p>
+          <span class="ppg-kicker">próxima camada</span>
+          <h2>Serviços e PvP</h2>
+          <p data-game-account-label>Rua e salão já estão organizados em scenes separadas. O próximo salto é ligar tudo à carteira e ao matchmaking real.</p>
         </article>
         <article>
-          <span>sul</span>
-          <strong>Ponto de ônibus</strong>
-          <p>Base para fast travel quando a cidade crescer.</p>
-        </article>
-        <article>
-          <span>oeste</span>
-          <strong>Beco lateral</strong>
-          <p>Área de NPCs, missões e pequenos segredos.</p>
+          <span class="ppg-kicker">ordem técnica</span>
+          <h2>Base certa</h2>
+          <p>Sprites, HUD, input, estado, cenas e overlays agora ficam na mesma linha oficial. O laboratório antigo deixa de guiar a evolução do produto.</p>
         </article>
       </section>
+
+      <footer class="ppg-footer-nav" aria-label="Acessos do PubPaid">
+        <a class="ppg-button" href="./index.html">Jornal</a>
+        <a class="ppg-button" href="./admin-dashboard.html">Administrador geral</a>
+        <a class="ppg-button" href="./pubpaid-admin.html">Administrador do PubPaid</a>
+      </footer>
     </main>
-
-    <div class="ppv2-modal" data-test-modal hidden>
-      <div class="ppv2-modal-card">
-        <span class="ppv2-card-kicker">modo experimental</span>
-        <h2>Tá duro? Experimente.</h2>
-        <p>
-          Você recebeu 100 créditos de teste para conhecer a casa contra IA simples.
-          Esse saldo não é apostável em PvP real, não saca e não se mistura com sua carteira.
-        </p>
-        <div class="ppv2-avatar-row">
-          <div class="ppv2-avatar" aria-hidden="true">
-            <span></span>
-          </div>
-          <div>
-            <strong>Visitante da Calçada</strong>
-            <small>Skin inicial de teste. Sprites públicos e premium liberam após crédito real aprovado.</small>
-          </div>
-        </div>
-        <button class="ppv2-button primary" type="button" data-close-test>Começar teste</button>
-      </div>
-    </div>
-
-    <script src="./pubpaid-v2.js?v=20260421streetpvp" defer></script>
   </body>
 </html>

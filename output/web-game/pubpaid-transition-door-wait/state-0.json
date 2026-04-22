@@ -1,0 +1,15 @@
+scene=intro
+activeScenes=boot-scene, intro-scene
+focus=frame final congelado
+objective=Aceitar termos e entrar com Google
+prompt=Frame final congelado. Interface de entrada pronta sobre a cena.
+testBalance=100
+realBalance=0
+music=on
+musicStyle=16-bit techno layered
+musicIntroSynced=yes
+introStarted=yes
+fullscreen=yes
+orientationBlocked=no
+panelOpen=false
+panelTitle=Ponto do jogo

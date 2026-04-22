@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Agentes Reais em Operação • Catálogo Cruzeiro do Sul</title>
     <link rel="stylesheet" href="real-agents.css?v=20260422a" />
+    <link rel="stylesheet" href="./uix-design-system.css?v=20260422b" />
   </head>
   <body class="real-agents-page">
     <header class="agents-topbar">
@@ -59,8 +60,89 @@
         <div id="scoreboardPeriods" class="agents-scoreboard-grid"></div>
       </section>
 
+      <section class="agents-awards" aria-labelledby="liveEventsTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Vida real</p>
+            <h2 id="liveEventsTitle">Eventos vivos da rodada</h2>
+          </div>
+          <p>O que os agentes acabaram de entregar, falhar ou empurrar no escritório.</p>
+        </div>
+        <div id="liveEvents" class="agents-awards-catalog" aria-label="Eventos vivos"></div>
+      </section>
+
+      <section class="agents-awards" aria-labelledby="officeLogsTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Auditoria</p>
+            <h2 id="officeLogsTitle">Logs por escritório</h2>
+          </div>
+          <p>Últimas ações registradas por cada escritório para você verificar o que cada base fez.</p>
+        </div>
+        <div id="officeLogs" class="agents-scoreboard-grid" aria-label="Logs dos escritórios"></div>
+      </section>
+
+      <section class="agents-awards" aria-labelledby="officeDashboardTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Gestão</p>
+            <h2 id="officeDashboardTitle">Dashboard por escritório</h2>
+          </div>
+          <p>Taxa de entrega, risco, energia e agentes que puxam ou travam cada time.</p>
+        </div>
+        <div id="officeDashboard" class="agents-scoreboard-grid" aria-label="Dashboard dos escritórios"></div>
+      </section>
+
+      <section class="agents-awards" aria-labelledby="agentTimelineTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Histórico</p>
+            <h2 id="agentTimelineTitle">Timeline por agente</h2>
+          </div>
+          <p>Eventos recentes dos agentes para auditoria individual.</p>
+        </div>
+        <div id="agentTimelines" class="agents-awards-catalog" aria-label="Timeline dos agentes"></div>
+      </section>
+
+      <section class="agents-awards" aria-labelledby="actionsTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Bancada</p>
+            <h2 id="actionsTitle">Ações reais para aprovação</h2>
+          </div>
+          <p>Entregas materializadas em arquivos para revisar antes de aplicar no portal.</p>
+        </div>
+        <div id="agentActions" class="agents-awards-catalog" aria-label="Ações reais dos agentes"></div>
+      </section>
+
       <section class="agents-layout">
         <aside class="agents-sidebar">
+          <div class="agents-panel">
+            <h2>Ordem direta</h2>
+            <form class="agents-runner" id="agentsDirectOrder">
+              <label>
+                Alvo
+                <input name="target" type="text" placeholder="Revisor Bento ou Escritorio de Arte" />
+              </label>
+              <label>
+                Prioridade
+                <input name="priority" type="text" placeholder="alta" />
+              </label>
+              <label>
+                Senha
+                <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+              </label>
+              <label>
+                Ordem
+                <input name="message" type="text" placeholder="Fechar QA do escritorio e reportar falhas" />
+              </label>
+              <button type="submit">Enviar ordem</button>
+            </form>
+          </div>
+          <div class="agents-panel">
+            <h2>Ordens vivas</h2>
+            <div id="ordersList" class="agents-office-list"></div>
+          </div>
           <div class="agents-panel">
             <h2>Escritórios</h2>
             <div id="officeList" class="agents-office-list"></div>

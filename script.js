@@ -69,6 +69,9 @@ const heroTopicCards = [...document.querySelectorAll("[data-hero-topic-card]")];
 const heroOfficeStatusNodes = [...document.querySelectorAll("[data-hero-office-status]")];
 const heroOfficeBubble = document.querySelector("[data-hero-office-bubble]");
 const heroOfficeFeedItems = [...document.querySelectorAll("[data-hero-office-item]")];
+const heroOfficePhoto = document.querySelector("[data-hero-office-photo]");
+const heroOfficePhotoCategory = document.querySelector("[data-hero-office-photo-category]");
+const heroOfficePhotoTitle = document.querySelector("[data-hero-office-photo-title]");
 const heroTopicTrack = document.querySelector("[data-hero-topic-track]");
 const heroTopicDots = document.querySelector("[data-hero-topic-dots]");
 const communityAgentForm = document.querySelector("#community-agent-form");
@@ -2703,16 +2706,16 @@ const resolveApiBases = () => {
     addBase(currentOrigin);
   }
 
-  if (isLocalHttp && window.location.port !== "3000") {
-    localBaseCandidates.forEach(addBase);
+  if (isLocalHttp) {
+    addBase(currentOrigin);
   }
 
   configuredBases.forEach((base) => {
-    if (isFileMode || isLocalHttp || base === currentOrigin || isLocalLikeBase(base)) {
+    if (isFileMode || base === currentOrigin || (!isLocalHttp && isLocalLikeBase(base))) {
       addBase(base);
     }
   });
-  if (isFileMode || isLocalHttp || configuredBase === currentOrigin || isLocalLikeBase(configuredBase)) {
+  if (isFileMode || configuredBase === currentOrigin || (!isLocalHttp && isLocalLikeBase(configuredBase))) {
     addBase(configuredBase);
   }
 
@@ -2722,7 +2725,7 @@ const resolveApiBases = () => {
     localBaseCandidates.forEach(addBase);
   }
 
-  if (isLocalHttp) {
+  if (isFileMode) {
     localBaseCandidates.forEach(addBase);
   }
 
@@ -2852,7 +2855,7 @@ const heroTourismDailyPoolState = {
 };
 
 const heroTourismDailyTarget = 10;
-const heroTourismRotationIntervalMs = 9000;
+const heroTourismRotationIntervalMs = 4000;
 const heroTourismDailyTimeZone = "America/Rio_Branco";
 const heroTourismLocalPattern =
   /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima|rodrigues alves)\b/i;
@@ -2991,7 +2994,7 @@ const heroDailyPersonFocusPattern =
 
 const normalizeHeroSafeFocusPosition = (focusPosition = "", { hasPeople = false } = {}) => {
   const rawFocus = String(focusPosition || "").trim();
-  const fallback = hasPeople ? "center 34%" : "center 42%";
+  const fallback = hasPeople ? "center 32%" : "center 38%";
   if (!rawFocus) {
     return fallback;
   }
@@ -3010,8 +3013,8 @@ const normalizeHeroSafeFocusPosition = (focusPosition = "", { hasPeople = false 
     return fallback;
   }
 
-  const safeMin = hasPeople ? 28 : 24;
-  const safeMax = hasPeople ? 62 : 70;
+  const safeMin = hasPeople ? 24 : 28;
+  const safeMax = hasPeople ? 52 : 60;
   const safeY = Math.min(safeMax, Math.max(safeMin, yValue));
   return `${xToken} ${safeY}%`;
 };
@@ -3056,10 +3059,10 @@ const getHeroDailyArticleFocus = (article = {}) => {
   }
 
   if (hasPeople) {
-    return "center 34%";
+    return "center 32%";
   }
 
-  return "center 34%";
+  return "center 38%";
 };
 
 const buildHeroArticleHref = (article = {}) =>
@@ -3423,6 +3426,15 @@ const renderHeroDesktopHighlights = (items = []) => {
   mountHeroDesktopCarouselDots(safeItems.length);
 };
 
+const shouldUseLiteHomeRuntime = () => {
+  const narrowViewport = window.matchMedia("(max-width: 640px)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const saveData = Boolean(connection?.saveData);
+  const slowConnection = /2g/.test(String(connection?.effectiveType || ""));
+  return narrowViewport || reducedMotion || saveData || slowConnection;
+};
+
 const renderHeroOfficeFeed = (items = []) => {
   if (!heroOfficeFeedItems.length) {
     return;
@@ -3457,6 +3469,31 @@ const renderHeroOfficeFeed = (items = []) => {
       );
     }
   });
+
+  const leadItem = safeItems[0];
+  if (leadItem && heroOfficePhoto) {
+    const imageUrl = leadItem.proxyUrl || leadItem.fallbackUrl || "";
+    const safeFocus = normalizeHeroSafeFocusPosition(leadItem.focusPosition, {
+      hasPeople: Boolean(leadItem.hasPeopleScene)
+    });
+    heroOfficePhoto.style.setProperty("--hero-office-photo-image", imageUrl ? `url("${imageUrl}")` : "none");
+    heroOfficePhoto.style.setProperty("--hero-office-photo-focus", safeFocus);
+    heroOfficePhoto.classList.toggle("has-photo", Boolean(imageUrl));
+  }
+
+  if (leadItem && heroOfficePhotoCategory) {
+    heroOfficePhotoCategory.textContent = truncateCopy(
+      leadItem.articleCategory || leadItem.title || "Cobertura local",
+      30
+    );
+  }
+
+  if (leadItem && heroOfficePhotoTitle) {
+    heroOfficePhotoTitle.textContent = truncateCopy(
+      leadItem.articleTitle || leadItem.title || "Atualização do Vale do Juruá",
+      72
+    );
+  }
 };
 
 const syncHeroDesktopCarousel = (index = 0) => {
@@ -3477,6 +3514,9 @@ const syncHeroDesktopCarousel = (index = 0) => {
   const activeItem = heroDesktopHighlightItems[safeIndex];
   if (activeItem) {
     setHeroTourismMeta(activeItem);
+    if (!shouldUseSolidHeroShell()) {
+      renderHeroTourismBackground(safeIndex);
+    }
   }
 
   visibleCards.forEach((card, cardIndex) => {
@@ -3536,7 +3576,7 @@ const restartHeroDesktopCarouselTimer = () => {
 
   heroTourismRotation.topicTimerId = window.setInterval(() => {
     syncHeroDesktopCarousel(heroTourismRotation.activeTopicIndex + 1);
-  }, 4800);
+  }, 4000);
 };
 
 const paintHeroTourismBackdrop = (slideNode, photo) => {
@@ -3634,6 +3674,8 @@ const initializeHeroTourismHero = () => {
     return;
   }
 
+  const liteRuntime = shouldUseLiteHomeRuntime();
+
   const dailyPool = getHeroTourismDailyPool();
 
   if (heroTourismRotation.timerId) {
@@ -3660,7 +3702,7 @@ const initializeHeroTourismHero = () => {
   renderHeroDesktopHighlights(dailyPool);
   renderHeroOfficeFeed(dailyPool);
 
-  if (shouldUseSolidHeroShell()) {
+  if (shouldUseSolidHeroShell() || liteRuntime) {
     heroTourismSlides.forEach((slide) => {
       slide.classList.remove("is-active");
       slide.style.backgroundImage = "none";
@@ -3675,7 +3717,7 @@ const initializeHeroTourismHero = () => {
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
 
-  if (!shouldUseSolidHeroShell() && dailyPool.length > 1) {
+  if (!shouldUseSolidHeroShell() && !liteRuntime && dailyPool.length > 1 && heroTopicCards.length === 0) {
     heroTourismRotation.timerId = window.setInterval(() => {
       const currentPool = getHeroTourismDailyPool();
       if (!currentPool.length) {
@@ -3687,7 +3729,7 @@ const initializeHeroTourismHero = () => {
     }, heroTourismRotationIntervalMs);
   }
 
-  if (heroOfficeStatusNodes.length && heroOfficeStatusGroups.length > 1) {
+  if (!liteRuntime && heroOfficeStatusNodes.length && heroOfficeStatusGroups.length > 1) {
     heroTourismRotation.statusTimerId = window.setInterval(() => {
       heroTourismRotation.statusIndex =
         (heroTourismRotation.statusIndex + 1) % heroOfficeStatusGroups.length;
@@ -3695,7 +3737,7 @@ const initializeHeroTourismHero = () => {
     }, 4200);
   }
 
-  if (heroOfficeBubble && heroOfficeBubblePool.length > 1) {
+  if (!liteRuntime && heroOfficeBubble && heroOfficeBubblePool.length > 1) {
     heroTourismRotation.bubbleTimerId = window.setInterval(() => {
       heroTourismRotation.bubbleIndex =
         (heroTourismRotation.bubbleIndex + 1) % heroOfficeBubblePool.length;
@@ -3703,7 +3745,9 @@ const initializeHeroTourismHero = () => {
     }, 3600);
   }
 
-  restartHeroDesktopCarouselTimer();
+  if (!liteRuntime) {
+    restartHeroDesktopCarouselTimer();
+  }
 };
 
 const openArchiveBrowser = (seedQuery = "") => {
@@ -4441,8 +4485,8 @@ const trendingInfluencerBuzzPool = [
   {
     name: "Lia Juruá",
     handle: "@liajurua • criadora local",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1200&q=80",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=420&q=80",
+    image: "./assets/home-cache/trend-lia-jurua.jpg",
+    avatar: "./assets/home-cache/trend-lia-jurua.jpg",
     kicker: "a fala que dividiu a timeline",
     title:
       "Cruzeiro do Sul não precisa só viralizar bonito. Precisa ter banheiro, sinalização e rota segura antes de vender turismo.",
@@ -4463,8 +4507,8 @@ const trendingInfluencerBuzzPool = [
   {
     name: "Nando do Centro",
     handle: "@nandocentro • bastidores da cidade",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=420&q=80",
+    image: "./assets/home-cache/trend-nando-centro.jpg",
+    avatar: "./assets/home-cache/trend-nando-centro.jpg",
     kicker: "o vídeo que virou debate",
     title:
       "Evento grande também precisa combinar fila, estacionamento, internet e pagamento funcionando bem.",
@@ -4485,8 +4529,8 @@ const trendingInfluencerBuzzPool = [
   {
     name: "Mara Pixel",
     handle: "@marapixel • opinião e cotidiano",
-    image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=1200&q=80",
-    avatar: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=420&q=80",
+    image: "./assets/home-cache/trend-mara-pixel.jpg",
+    avatar: "./assets/home-cache/trend-mara-pixel.jpg",
     kicker: "a thread que não parou",
     title:
       "A cidade está cheia de gente criando coisa boa, mas ainda trata internet como enfeite e não como infraestrutura.",
@@ -4507,8 +4551,8 @@ const trendingInfluencerBuzzPool = [
   {
     name: "Theo Acreano",
     handle: "@theoacreano • humor e opinião",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=1200&q=80",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=420&q=80",
+    image: "./assets/home-cache/trend-theo-acreano.jpg",
+    avatar: "./assets/home-cache/trend-theo-acreano.jpg",
     kicker: "meme com fundo sério",
     title:
       "Se a fofoca chega mais rápido que o aviso oficial, o problema não é só a fofoca. É o canal oficial dormindo.",
@@ -4529,8 +4573,8 @@ const trendingInfluencerBuzzPool = [
   {
     name: "Bia dos Bairros",
     handle: "@biadosbairros • comunidade",
-    image: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=1200&q=80",
-    avatar: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=420&q=80",
+    image: "./assets/home-cache/trend-bia-bairros.jpg",
+    avatar: "./assets/home-cache/trend-bia-bairros.jpg",
     kicker: "cobrança de bairro",
     title:
       "Quando a rua alaga, o print viraliza. Mas quem mora ali não precisa de viral: precisa de resposta.",
@@ -4551,8 +4595,8 @@ const trendingInfluencerBuzzPool = [
   {
     name: "Rafa Castanhal",
     handle: "@rafacastanhal • cultura e rolê",
-    image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1200&q=80",
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=420&q=80",
+    image: "./assets/home-cache/trend-rafa-castanhal.jpg",
+    avatar: "./assets/home-cache/trend-rafa-castanhal.jpg",
     kicker: "opinião de agenda",
     title:
       "A cena cultural local não precisa esperar permissão para existir. Precisa de calendário, palco e divulgação decente.",
@@ -4576,7 +4620,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Polêmica",
     tone: "hot",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/V%C3%ADa_Cruzeiro_do_Sul_-_Acre.jpg",
+    image: "./assets/home-cache/buzz-via-cruzeiro.jpg",
     title: "Mobilidade volta a dividir opiniões",
     summary: "Ciclovias, estacionamento e rotas de ônibus viraram tema de comentários cruzados entre moradores, comércio e poder público.",
     likes: "4.3K",
@@ -4585,7 +4629,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Influencers",
     tone: "viral",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3800383521).jpg",
+    image: "./assets/home-cache/buzz-cruzeiro-01.jpg",
     title: "Criadores locais puxam agenda de fim de semana",
     summary: "Stories, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
     likes: "7.4K",
@@ -4594,7 +4638,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Comentando",
     tone: "trending",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3800389269).jpg",
+    image: "./assets/home-cache/buzz-cruzeiro-02.jpg",
     title: "Turismo bonito, estrutura cobrada",
     summary: "Fotos continuam viralizando, mas a conversa do dia cobra placas, banheiros, segurança e acesso mais claro.",
     likes: "6.2K",
@@ -4603,7 +4647,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Rede quente",
     tone: "viral",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Acai_bowl_(43110767814).jpg",
+    image: "./assets/home-cache/buzz-acai-bowl.jpg",
     title: "Produto local vira disputa de fila",
     summary: "Lanchonetes e pequenos negócios entraram na conversa depois que um sabor regional esgotou rápido.",
     likes: "5.9K",
@@ -4612,7 +4656,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Bastidor",
     tone: "hot",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3801204086).jpg",
+    image: "./assets/home-cache/buzz-cruzeiro-03.jpg",
     title: "Comunicação oficial demora e meme ocupa espaço",
     summary: "A timeline cobrou respostas mais rápidas quando boatos circularam antes dos canais formais.",
     likes: "9.1K",
@@ -4621,7 +4665,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Destaque",
     tone: "trending",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1100&q=80",
+    image: "./assets/home-cache/buzz-model-local.jpg",
     title: "Nome local entra no radar de marcas",
     summary: "Jovens criadores e modelos da região aparecem mais em campanhas, vídeos e collabs comerciais.",
     likes: "11.4K",
@@ -4630,7 +4674,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Cultura",
     tone: "viral",
-    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1100&q=80",
+    image: "./assets/home-cache/buzz-cultura-show.jpg",
     title: "Agenda cultural pede calendário único",
     summary: "Artistas e público cobram um lugar simples para acompanhar shows, oficinas, teatro e eventos comunitários.",
     likes: "3.8K",
@@ -4639,7 +4683,7 @@ const trendingControversyBuzzPool = [
   {
     badge: "Serviço",
     tone: "hot",
-    image: "https://commons.wikimedia.org/wiki/Special:FilePath/Cruzeiro%20do%20Sul%20-%20Acre%20(3800381599).jpg",
+    image: "./assets/home-cache/buzz-cruzeiro-04.jpg",
     title: "Bairros cobram retorno sobre manutenção",
     summary: "Posts de rua, iluminação e drenagem ganharam força porque moradores querem prazo, não só protocolo.",
     likes: "8.8K",

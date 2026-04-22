@@ -10,6 +10,25 @@
   const COOKIE_MAX_AGE_DAYS = 180;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
   const WELCOME_SESSION_COOKIE = "catalogo_terms_welcome_session_v1";
+  const WELCOME_DAILY_KEY = "catalogo_terms_welcome_seen_day_v1";
+  const WELCOME_DAILY_COOKIE = "catalogo_terms_welcome_seen_day_v1";
+  const FOUNDER_PRELUDE_SESSION_KEY = "catalogo_founder_prelude_seen_session_v1";
+  const THANKS_SCREEN_MS = 5200;
+  const THANKS_SCREEN_MS_COMPACT = 4600;
+  const THANKS_SCREEN_MS_PHONE = 3800;
+  const FOUNDER_PRELUDE_MS = 5600;
+  const FOUNDER_PRELUDE_MS_COMPACT = 5200;
+  const FOUNDER_PRELUDE_MS_PHONE = 5000;
+  const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.png";
+  const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.png";
+  const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
+  const FOUNDERS_RECOMMENCER_LOGO_SRC = "./assets/founders-recommencer-logo.png";
+  const FOUNDERS_OPENING_STEPS = [
+    "ativando palco luminoso dos fundadores",
+    "calibrando logos em camadas 3D",
+    "sincronizando energia do portal",
+    "liberando a edição principal"
+  ];
   const LEGACY_WELCOME_ACCEPT_KEYS = [
     "catalogo_terms_welcome_accepted_v1",
     "catalogo_terms_welcome_accepted_v2"
@@ -78,11 +97,49 @@
     setCookie(WELCOME_SESSION_COOKIE, "1");
   }
 
+  function getTodayKey() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  function rememberWelcomeAcceptedToday() {
+    const todayKey = getTodayKey();
+
+    try {
+      localStorage.setItem(WELCOME_DAILY_KEY, todayKey);
+    } catch (_error) {
+      // ignore storage failures
+    }
+
+    setCookie(WELCOME_DAILY_COOKIE, todayKey, { days: COOKIE_MAX_AGE_DAYS });
+  }
+
+  function hasAcceptedWelcomeToday() {
+    const todayKey = getTodayKey();
+
+    try {
+      if (localStorage.getItem(WELCOME_DAILY_KEY) === todayKey) {
+        return true;
+      }
+    } catch (_error) {
+      // ignore storage failures
+    }
+
+    return getCookie(WELCOME_DAILY_COOKIE) === todayKey;
+  }
+
   function hasAcceptedWelcomeInThisBrowserSession() {
     return getCookie(WELCOME_SESSION_COOKIE) === "1";
   }
 
   function resetConsentForNewBrowserSession() {
+    if (hasAcceptedWelcomeToday()) {
+      return;
+    }
+
     if (hasAcceptedWelcomeInThisBrowserSession()) {
       return;
     }
@@ -124,12 +181,41 @@
     }
   }
 
+  function rememberFounderPreludeInThisSession() {
+    try {
+      sessionStorage.setItem(FOUNDER_PRELUDE_SESSION_KEY, "1");
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+
+  function hasSeenFounderPreludeInThisSession() {
+    try {
+      return sessionStorage.getItem(FOUNDER_PRELUDE_SESSION_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
   function shouldSkipWelcomeModal() {
     if (window.__CATALOGO_SKIP_HOME_WELCOME__ === true) {
       return true;
     }
 
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("skipWelcome") === "1" || params.get("skipIntro") === "1") {
+        return true;
+      }
+    } catch (_error) {
+      // ignore URL parsing failures
+    }
+
     if (hasAcceptedWelcomeInThisBrowserSession()) {
+      return true;
+    }
+
+    if (hasAcceptedWelcomeToday()) {
       return true;
     }
 
@@ -161,6 +247,10 @@
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       connectionPrefersLite()
     );
+  }
+
+  function releaseFounderPreludeGate() {
+    document.body.classList.remove("founder-prelude-pending");
   }
 
   function shouldUsePhoneWelcome() {
@@ -433,6 +523,154 @@
       openingPercent.textContent = "100%";
       openingBar.style.width = "100%";
     };
+  }
+
+  function createFounderPrelude() {
+    const prelude = document.createElement("section");
+    prelude.className = "catalogo-founder-prelude";
+    prelude.setAttribute("aria-hidden", "true");
+    prelude.innerHTML = `
+      <div class="catalogo-founder-prelude-stars">
+        <span class="starfield starfield-a"></span>
+        <span class="starfield starfield-b"></span>
+        <span class="star a"></span>
+        <span class="star b"></span>
+        <span class="star c"></span>
+        <span class="star d"></span>
+        <span class="star e"></span>
+        <span class="star f"></span>
+        <span class="star g"></span>
+        <span class="star h"></span>
+        <span class="star i"></span>
+        <span class="star j"></span>
+        <span class="constellation constellation-a"></span>
+        <span class="constellation constellation-b"></span>
+        <span class="grid grid-a"></span>
+        <span class="grid grid-b"></span>
+        <span class="orbit orbit-a"></span>
+        <span class="orbit orbit-b"></span>
+        <span class="office-core"></span>
+        <span class="data-column data-column-a"></span>
+        <span class="data-column data-column-b"></span>
+        <span class="ring ring-a"></span>
+        <span class="ring ring-b"></span>
+        <span class="beam beam-a"></span>
+        <span class="beam beam-b"></span>
+        <span class="nebula nebula-a"></span>
+        <span class="nebula nebula-b"></span>
+        <span class="cinema-light light-a"></span>
+        <span class="cinema-light light-b"></span>
+        <span class="cinema-light light-c"></span>
+        <span class="cinema-flare flare-a"></span>
+        <span class="cinema-flare flare-b"></span>
+        <span class="cinema-curtain curtain-left"></span>
+        <span class="cinema-curtain curtain-right"></span>
+        <span class="premium-particle particle-a"></span>
+        <span class="premium-particle particle-b"></span>
+        <span class="premium-particle particle-c"></span>
+        <span class="premium-particle particle-d"></span>
+      </div>
+      <div class="catalogo-founder-prelude-shell">
+        <div class="catalogo-founder-prelude-hud hud-left" aria-hidden="true">
+          <span>FOUNDERS LINK</span>
+          <strong>SYNC 4/4</strong>
+          <small>portal / cookies / assets / motion</small>
+          <em>escritorio orbital em alinhamento fino</em>
+        </div>
+        <div class="catalogo-founder-prelude-hud hud-right" aria-hidden="true">
+          <span>ORBITAL DESK</span>
+          <strong>READYING</strong>
+          <small>cinematic loader online</small>
+          <em>estrelas vetoriais e malha 3D ativas</em>
+        </div>
+        <div class="catalogo-founder-prelude-side side-left" aria-hidden="true">
+          <span>OFFICE GRID</span>
+          <strong>Nodes live</strong>
+          <small>briefing, render, cache, analytics</small>
+        </div>
+        <div class="catalogo-founder-prelude-side side-right" aria-hidden="true">
+          <span>STAR DESK</span>
+          <strong>Motion+Light</strong>
+          <small>glow, orbit, preload, premium pass</small>
+        </div>
+        <div class="catalogo-founder-prelude-copy">
+          <span>fundadores</span>
+          <strong>Quem sustenta o portal entra primeiro em cena</strong>
+          <small>Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer</small>
+        </div>
+        <div class="catalogo-founder-prelude-logos">
+          <figure class="logo-card cafe"><img src="${FOUNDERS_CAFE_IMAGE_SRC}" alt="Cafe Cruzeiro" loading="eager" decoding="async" /></figure>
+          <figure class="logo-card grupo"><img src="${FOUNDERS_GRUPO_AS_LOGO_SRC}" alt="Grupo A.S" loading="eager" decoding="async" /></figure>
+          <figure class="logo-card geane"><img src="${FOUNDERS_GEANE_LOGO_SRC}" alt="Dra. Geane Campo" loading="eager" decoding="async" /></figure>
+          <figure class="logo-card recommencer"><img src="${FOUNDERS_RECOMMENCER_LOGO_SRC}" alt="Recommencer" loading="eager" decoding="async" /></figure>
+        </div>
+        <div class="catalogo-founder-prelude-loading" aria-live="polite">
+          <div class="catalogo-founder-prelude-loading-head">
+            <strong>Preparando portal e popup</strong>
+            <span data-founder-prelude-percent>0%</span>
+          </div>
+          <div class="catalogo-founder-prelude-loading-bar">
+            <span data-founder-prelude-bar></span>
+          </div>
+          <p data-founder-prelude-text>energizando a abertura dos fundadores</p>
+        </div>
+      </div>
+    `;
+    return prelude;
+  }
+
+  function showFounderPreludeThen(callback) {
+    rememberFounderPreludeInThisSession();
+    const prelude = createFounderPrelude();
+    document.body.appendChild(prelude);
+    document.body.classList.add("catalogo-lock-scroll");
+
+    window.requestAnimationFrame(() => {
+      prelude.classList.add("is-open");
+    });
+
+    const duration = window.matchMedia("(max-width: 760px)").matches
+      ? FOUNDER_PRELUDE_MS_PHONE
+      : shouldUseCompactWelcome()
+        ? FOUNDER_PRELUDE_MS_COMPACT
+        : FOUNDER_PRELUDE_MS;
+
+    const percentNode = prelude.querySelector("[data-founder-prelude-percent]");
+    const barNode = prelude.querySelector("[data-founder-prelude-bar]");
+    const textNode = prelude.querySelector("[data-founder-prelude-text]");
+    const steps = [
+      "energizando a abertura dos fundadores",
+      "montando estrelas e logos em cena",
+      "pre carregando popup de cookies",
+      "liberando a home principal"
+    ];
+    let stepIndex = 0;
+    const startedAt = Date.now();
+    const progressTimer = window.setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      const progress = Math.min(100, Math.round((elapsed / duration) * 100));
+      if (percentNode) percentNode.textContent = `${progress}%`;
+      if (barNode) barNode.style.width = `${progress}%`;
+    }, 90);
+    const stepTimer = window.setInterval(() => {
+      stepIndex = Math.min(stepIndex + 1, steps.length - 1);
+      if (textNode) textNode.textContent = steps[stepIndex];
+    }, Math.max(420, Math.round(duration / 4)));
+
+    window.setTimeout(() => {
+      window.clearInterval(progressTimer);
+      window.clearInterval(stepTimer);
+      if (percentNode) percentNode.textContent = "100%";
+      if (barNode) barNode.style.width = "100%";
+      if (textNode) textNode.textContent = steps[steps.length - 1];
+      prelude.classList.remove("is-open");
+      prelude.classList.add("is-leaving");
+      window.setTimeout(() => {
+        prelude.remove();
+        document.body.classList.remove("catalogo-lock-scroll");
+        callback();
+      }, 280);
+    }, duration);
   }
 
   function buildWelcomeVisualMarkup(options = {}) {
@@ -743,21 +981,23 @@
   ready(() => {
     resetConsentForNewBrowserSession();
 
-    if (shouldSkipWelcomeModal()) {
-      removeLegacyConsentBanner();
-      const oldModal = document.getElementById(MODAL_ID);
-      if (oldModal) {
-        oldModal.remove();
-      }
-      dispatchIntroFinished();
-      return;
-    }
-
-    whenSiteReady(() => {
-      runWhenBrowserIsIdle(() => {
+    const continueAfterFounderPrelude = () => {
+      if (shouldSkipWelcomeModal()) {
         removeLegacyConsentBanner();
         const oldModal = document.getElementById(MODAL_ID);
         if (oldModal) {
+          oldModal.remove();
+        }
+        releaseFounderPreludeGate();
+        dispatchIntroFinished();
+        return;
+      }
+
+      whenSiteReady(() => {
+        runWhenBrowserIsIdle(() => {
+          removeLegacyConsentBanner();
+          const oldModal = document.getElementById(MODAL_ID);
+          if (oldModal) {
           oldModal.remove();
         }
 
@@ -772,6 +1012,7 @@
         const requiresCheckbox = Boolean(checkbox);
 
         if (!acceptButton) {
+          releaseFounderPreludeGate();
           closeWelcomeModalImmediately(modal);
           return;
         }
@@ -791,14 +1032,25 @@
           persistConsentState("accepted");
           rememberWelcomeAcceptedThisSession();
           rememberWelcomeAcceptedThisBrowserSession();
+          rememberWelcomeAcceptedToday();
           dispatchConsent(true);
           closeWelcomeModal(modal);
         });
 
         window.setTimeout(() => {
+          releaseFounderPreludeGate();
           openWelcomeModal(modal);
         }, OPEN_DELAY_MS);
+        });
       });
-    });
+    };
+
+    if (hasSeenFounderPreludeInThisSession()) {
+      releaseFounderPreludeGate();
+      continueAfterFounderPrelude();
+      return;
+    }
+
+    showFounderPreludeThen(continueAfterFounderPrelude);
   });
 })();

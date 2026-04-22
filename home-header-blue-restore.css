@@ -1,0 +1,301 @@
+/* Restaura o topo azul da home quando camadas de "glass" o deixam lavado. */
+body.editorial-home .site-header-stack {
+  border: 1px solid rgba(146, 214, 255, 0.2) !important;
+  background:
+    radial-gradient(circle at 50% 4%, rgba(168, 224, 255, 0.2), transparent 18%),
+    radial-gradient(circle at 18% 14%, rgba(255, 255, 255, 0.12), transparent 14%),
+    radial-gradient(circle at 82% 18%, rgba(126, 196, 255, 0.16), transparent 16%),
+    linear-gradient(145deg, #0a1d37 0%, #123156 42%, #173d67 72%, #0c2442 100%) !important;
+  box-shadow:
+    0 30px 60px rgba(5, 14, 28, 0.26),
+    inset 0 1px 0 rgba(230, 245, 255, 0.12),
+    inset 0 -22px 42px rgba(4, 11, 23, 0.26) !important;
+}
+
+body.editorial-home .site-header-stack::before {
+  opacity: 0.92 !important;
+}
+
+body.editorial-home .site-header-stack::after {
+  opacity: 1 !important;
+}
+
+body.editorial-home .top-strip,
+body.editorial-home .masthead {
+  box-shadow: none !important;
+  color: #f5fbff !important;
+}
+
+body.editorial-home .top-strip {
+  border-color: rgba(177, 228, 255, 0.12) !important;
+  background:
+    linear-gradient(90deg, rgba(7, 18, 36, 0.74), rgba(8, 21, 42, 0.34) 46%, rgba(7, 18, 36, 0.68)) !important;
+}
+
+body.editorial-home .top-strip p {
+  color: rgba(233, 246, 255, 0.9) !important;
+}
+
+body.editorial-home .top-strip a,
+body.editorial-home .top-strip-secondary {
+  color: #f7fbff !important;
+}
+
+body.editorial-home .top-strip a {
+  border-color: rgba(176, 226, 255, 0.2) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 10px 22px rgba(3, 10, 22, 0.14) !important;
+}
+
+body.editorial-home .top-strip-secondary {
+  background: rgba(168, 221, 255, 0.08) !important;
+}
+
+body.editorial-home .masthead {
+  border-top: 1px solid rgba(172, 227, 255, 0.08);
+  border-bottom: 1px solid rgba(172, 227, 255, 0.08);
+  background:
+    radial-gradient(circle at 50% 4%, rgba(157, 215, 255, 0.1), transparent 20%),
+    linear-gradient(180deg, rgba(10, 24, 47, 0.28), rgba(7, 18, 35, 0.08)) !important;
+}
+
+body.editorial-home .brand strong {
+  color: #f5fbff !important;
+  text-shadow: 0 10px 24px rgba(3, 10, 22, 0.26);
+}
+
+body.editorial-home .brand-kicker {
+  color: rgba(165, 226, 255, 0.82) !important;
+}
+
+body.editorial-home .main-nav a {
+  border: 1px solid rgba(171, 228, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: rgba(239, 248, 255, 0.92) !important;
+  text-shadow: 0 4px 12px rgba(3, 10, 22, 0.22);
+}
+
+body.editorial-home .main-nav a:hover,
+body.editorial-home .main-nav a:focus-visible {
+  border-color: rgba(179, 231, 255, 0.2) !important;
+  background: rgba(162, 224, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+
+body.editorial-home .header-actions .outline-button,
+body.editorial-home .header-quick-links .outline-button {
+  border-color: rgba(171, 228, 255, 0.18) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)) !important;
+  color: #f7fbff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 12px 28px rgba(3, 10, 22, 0.16) !important;
+}
+
+body.editorial-home .header-actions .solid-button,
+body.editorial-home .header-quick-links .solid-button {
+  color: #0a1d37 !important;
+  background: linear-gradient(180deg, #ffd788, #f6a53b) !important;
+  border-color: rgba(255, 215, 136, 0.44) !important;
+}
+
+/* Destaque amarelo para cards de Policia, com leitura forte sobre o azul do portal. */
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="policia"],
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="polícia"] {
+  background:
+    radial-gradient(circle at 86% 12%, rgba(255, 255, 255, 0.36), transparent 38%),
+    linear-gradient(165deg, rgba(255, 217, 123, 0.98), rgba(244, 193, 73, 0.96)) !important;
+  border: 1px solid rgba(137, 89, 8, 0.24) !important;
+  box-shadow:
+    0 18px 34px rgba(13, 29, 52, 0.18),
+    inset 0 1px 0 rgba(255, 250, 230, 0.72) !important;
+  color: #10233c !important;
+}
+
+body.editorial-home #radar .news-card[data-category="policia"],
+body.editorial-home #radar .news-card[data-category="polícia"] {
+  background:
+    radial-gradient(circle at 88% 10%, rgba(255, 247, 214, 0.82), transparent 34%),
+    linear-gradient(170deg, rgba(255, 221, 131, 0.98), rgba(244, 194, 78, 0.95)) !important;
+  border-color: rgba(125, 82, 8, 0.22) !important;
+}
+
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="policia"] :is(h3, a, strong),
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="polícia"] :is(h3, a, strong),
+body.editorial-home #radar .news-card[data-category="policia"] :is(h3, a, strong),
+body.editorial-home #radar .news-card[data-category="polícia"] :is(h3, a, strong) {
+  color: #10233c !important;
+}
+
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="policia"] :is(p, .news-source, footer, footer span, small),
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="polícia"] :is(p, .news-source, footer, footer span, small),
+body.editorial-home #radar .news-card[data-category="policia"] :is(p, .news-source, footer, footer span, small),
+body.editorial-home #radar .news-card[data-category="polícia"] :is(p, .news-source, footer, footer span, small) {
+  color: rgba(16, 35, 60, 0.86) !important;
+}
+
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="policia"] .news-thumb,
+body.editorial-home :is(.news-card, .archive-card, .live-feed-card, .generated-feed-card, .feed-card)[data-category="polícia"] .news-thumb,
+body.editorial-home #radar .news-card[data-category="policia"] .news-thumb,
+body.editorial-home #radar .news-card[data-category="polícia"] .news-thumb {
+  border-color: rgba(16, 35, 60, 0.16) !important;
+  box-shadow:
+    0 12px 26px rgba(16, 35, 60, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.46) !important;
+}
+
+/* Ajustes finos de legibilidade nos blocos que estavam escurecendo demais. */
+body.editorial-home .hero-desktop-topic-card,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band {
+  background:
+    linear-gradient(180deg, rgba(7, 16, 31, 0.2), rgba(7, 16, 31, 0.72)),
+    linear-gradient(150deg, rgba(13, 31, 55, 0.96), rgba(18, 44, 76, 0.94)) !important;
+  border-color: rgba(160, 214, 255, 0.16) !important;
+  box-shadow:
+    0 22px 44px rgba(7, 18, 34, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+body.editorial-home .hero-desktop-topic-card::after,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band::after {
+  opacity: 0.18 !important;
+}
+
+body.editorial-home .hero-desktop-topic-copy {
+  background: rgba(8, 19, 37, 0.84) !important;
+  border: 1px solid rgba(156, 214, 255, 0.14) !important;
+  box-shadow: 0 16px 34px rgba(5, 13, 24, 0.24) !important;
+}
+
+body.editorial-home .hero-desktop-topic-copy small,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band span {
+  color: rgba(159, 211, 255, 0.96) !important;
+}
+
+body.editorial-home .hero-desktop-topic-copy strong,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band strong {
+  color: #ffffff !important;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.24) !important;
+}
+
+body.editorial-home .hero-desktop-topic-copy span,
+body.editorial-home .hero-daily-news-card.hero-daily-news-band small {
+  color: rgba(235, 244, 255, 0.92) !important;
+}
+
+body.editorial-home .caderno-card,
+body.editorial-home .caderno-card h3,
+body.editorial-home .caderno-card .card-kicker,
+body.editorial-home .caderno-card .mini-story strong {
+  color: #14304f !important;
+}
+
+body.editorial-home .caderno-card .mini-story small {
+  color: rgba(20, 48, 79, 0.76) !important;
+}
+
+body.editorial-home .caderno-card:nth-child(3) {
+  background:
+    radial-gradient(circle at 84% 8%, rgba(255, 250, 231, 0.48), transparent 26%),
+    linear-gradient(160deg, rgba(241, 228, 164, 0.98), rgba(220, 191, 103, 0.94)) !important;
+  border-color: rgba(118, 88, 15, 0.18) !important;
+}
+
+body.editorial-home .caderno-card:nth-child(3) .mini-story {
+  border-top-color: rgba(20, 48, 79, 0.12) !important;
+}
+
+body.editorial-home .caderno-card:nth-child(3) .mini-thumb.has-photo {
+  border: 1px solid rgba(20, 48, 79, 0.14) !important;
+  box-shadow:
+    0 18px 32px rgba(16, 35, 60, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+body.editorial-home #social .social-card.wide {
+  background:
+    radial-gradient(circle at 88% 10%, rgba(247, 199, 91, 0.16), transparent 24%),
+    linear-gradient(145deg, rgba(15, 33, 55, 0.98), rgba(28, 54, 86, 0.96)) !important;
+  color: #f8fbff !important;
+  border-color: rgba(156, 214, 255, 0.14) !important;
+}
+
+body.editorial-home #social .social-card.wide :is(h2, p, .eyebrow, .section-heading p, .section-heading h2) {
+  color: #f8fbff !important;
+}
+
+body.editorial-home #social .social-card.wide .section-heading p {
+  color: rgba(228, 239, 252, 0.84) !important;
+}
+
+body.editorial-home #social .social-card.wide .outline-button {
+  border-color: rgba(166, 218, 255, 0.22) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #f8fbff !important;
+}
+
+body.editorial-home #social .social-card.wide .solid-button {
+  background: #f3c54b !important;
+  color: #10233c !important;
+  border-color: rgba(243, 197, 75, 0.4) !important;
+}
+
+body.editorial-home .trending-card.main {
+  background:
+    radial-gradient(circle at 84% 8%, rgba(244, 199, 88, 0.14), transparent 24%),
+    linear-gradient(160deg, rgba(14, 32, 54, 0.99), rgba(30, 55, 87, 0.96)) !important;
+  border-color: rgba(156, 214, 255, 0.14) !important;
+  box-shadow: 0 28px 56px rgba(8, 20, 36, 0.18) !important;
+}
+
+body.editorial-home .trending-card.main .influencer-hero-photo::after {
+  background:
+    linear-gradient(180deg, rgba(5, 12, 23, 0.08), rgba(5, 12, 23, 0.86)),
+    radial-gradient(circle at 18% 78%, rgba(243, 197, 75, 0.16), transparent 34%) !important;
+}
+
+body.editorial-home .trending-card.main .influencer-profile {
+  background: rgba(8, 19, 37, 0.88) !important;
+  border-color: rgba(171, 224, 255, 0.2) !important;
+}
+
+body.editorial-home .trending-card.main .buzz-kicker {
+  color: #9fd3ff !important;
+}
+
+body.editorial-home .trending-card.main .influencer-buzz-copy h3,
+body.editorial-home .trending-card.main .influencer-buzz-copy p:not(.buzz-kicker),
+body.editorial-home .trending-card.main .engagement span {
+  color: #f8fbff !important;
+}
+
+body.editorial-home .trending-card.main .buzz-context-grid div,
+body.editorial-home .trending-card.main .buzz-reaction-box {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(162, 216, 255, 0.16) !important;
+}
+
+body.editorial-home .trending-card.main .buzz-context-grid span,
+body.editorial-home .trending-card.main .buzz-reaction-box span {
+  color: #9fd3ff !important;
+}
+
+body.editorial-home .trending-card.main .buzz-context-grid strong,
+body.editorial-home .trending-card.main .buzz-context-grid p,
+body.editorial-home .trending-card.main .buzz-reaction-box p {
+  color: #f8fbff !important;
+}
+
+body.editorial-home .trending-card.main .reaction-meter {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(159, 211, 255, 0.12) !important;
+}
+
+body.editorial-home .trending-card.main .reaction-meter i {
+  background: #f0c14f !important;
+  box-shadow: 0 0 0 1px rgba(255, 225, 132, 0.1), 0 8px 18px rgba(240, 193, 79, 0.18) !important;
+}

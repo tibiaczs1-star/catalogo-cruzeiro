@@ -1,7 +1,48 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-22T01:22:49.593Z",
+  "lastUpdatedAt": "2026-04-22T22:53:54.089Z",
   "orders": [
+    {
+      "id": "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design",
+      "createdAt": "2026-04-22T04:15:00.000Z",
+      "updatedAt": "2026-04-22T04:15:00.000Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "baixa tudo e organiza tudo, e vamos melhorar esse jogo",
+      "summary": "Baixar, organizar e consolidar a base de ferramentas, skills, extensoes e direcao do PubPaid 2.0 para evoluir o jogo corretamente",
+      "normalizedTasks": [
+        "Consolidar relatorio de direcao de game design",
+        "Registrar stack oficial de ferramentas para arte, mapa, audio e UI",
+        "Preparar recomendacoes de extensoes para o editor",
+        "Fechar a diretriz de matar a splash externa e migrar para IntroScene"
+      ],
+      "filesTouched": [
+        "PUBPAID_GAME_DESIGN_STACK.md",
+        ".vscode/extensions.json",
+        ".vscode/settings.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/assets.json",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        "pubpaid-design-reuniao-2026-04-21-md",
+        "pubpaid-game-design-stack-md"
+      ],
+      "tags": [
+        "pubpaid",
+        "game-design",
+        "extensoes",
+        "skills",
+        "organizacao"
+      ],
+      "nextSteps": [
+        "Instalar as extensoes recomendadas no editor",
+        "Criar a IntroScene do PubPaid 2.0",
+        "Remover a splash externa da rota pubpaid-v2"
+      ],
+      "notes": "A rodada consolidou skills ja instaladas e formalizou a direcao correta: tudo importante deve acontecer dentro da tela do jogo."
+    },
     {
       "id": "2026-04-20-implementar-palavras-da-rosa-no-jornal-com-card-lateral",
       "createdAt": "2026-04-20T06:32:00.000Z",
@@ -3137,6 +3178,967 @@
       "source": "chat",
       "rawRequest": "Manifestos",
       "summary": "Subir manifestos atualizados dos agentes reais",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-reformular-o-teatro-reuniao-dos-agentes-como-mini-game-interativo-com-agentes-se",
+      "createdAt": "2026-04-22T05:19:48.900Z",
+      "updatedAt": "2026-04-22T05:19:48.900Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu quero que reformule meu teatro, primeiro nao tem como eu manda comandos pra eles, e o teatro ta vazio eui quero os desenhos de todos os agentes centados conversando, levantando mao e interagindo pra falar, tem que ser uma reunião interattiva, eu chego digo o assunto recebo opnioes leio e uso terminal pra fazer pedidos especificos ou passar codigos, quero eles como se fosse um mini game e claro as fotos do funcionario do dia e das outras promos do dia mes semana ano, pontução e etc, essa sala inpisra eles e deve ser inpirada",
+      "summary": "Reformular o teatro/reuniao dos agentes como mini game interativo com agentes sentados, conversas, comando por assunto, terminal para pedidos/codigos, fotos/promos de funcionario do dia/semana/mes/ano e pontuacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-criar-introscene-phaser-da-fachada-pubpaid-com-placa-no-predio",
+      "createdAt": "2026-04-22T05:37:11.992Z",
+      "updatedAt": "2026-04-22T05:37:11.992Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "reuniao de agentes, montar a cena PubPaid com a placa/logo no predio usando as tecnologias do jogo",
+      "summary": "Criar IntroScene Phaser da fachada PubPaid com placa no predio",
+      "normalizedTasks": [
+        "Convocar revisao de agentes para direcao visual e tecnica",
+        "Criar IntroScene com fachada noturna e letreiro PUB PAID",
+        "Migrar onboarding para acontecer sobre o canvas Phaser",
+        "Validar com Playwright"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "progress.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "pubpaid-intro-scene-final-shot"
+      ],
+      "tags": [
+        "pubpaid",
+        "phaser",
+        "intro-scene",
+        "pixel-art",
+        "onboarding"
+      ],
+      "nextSteps": [
+        "Evoluir a IntroScene com spritesheets reais do personagem/celular/cerveja",
+        "Abrir login Google dentro de um overlay mais diegetico",
+        "Transformar assets em pipeline Aseprite/Tiled"
+      ],
+      "notes": "A placa PUB PAID da fachada virou a logo viva da IntroScene; o card de aceite fica no canto inferior direito para nao cobrir a composicao principal."
+    },
+    {
+      "id": "2026-04-22-montar-abertura-pubpaid-com-6-bitmaps-e-ui-de-termos-login-sobre-frame-final",
+      "createdAt": "2026-04-22T05:51:54.689Z",
+      "updatedAt": "2026-04-22T05:51:54.689Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "primeiras 6 sao a montagem de entrada, use efeitos que façam parecer animado; ultima imagem e ideia da interface de entrada; depois entramos no game full tela",
+      "summary": "Montar abertura PubPaid com 6 bitmaps e UI de termos/Login sobre frame final",
+      "normalizedTasks": [
+        "Copiar 6 bitmaps para assets/pubpaid/intro",
+        "Refazer IntroScene como timeline cinematografica",
+        "Exibir interface apenas apos congelar o frame final",
+        "Validar inicio e final com Playwright"
+      ],
+      "filesTouched": [
+        "assets/pubpaid/intro/pubpaid-intro-01.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-02.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-03.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-04.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-05.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-06.jpeg",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css"
+      ],
+      "assetRefs": [
+        "pubpaid-bitmap-intro-start-shot",
+        "pubpaid-bitmap-intro-final-shot"
+      ],
+      "tags": [
+        "pubpaid",
+        "bitmap-intro",
+        "phaser",
+        "google-login",
+        "game-ui"
+      ],
+      "nextSteps": [
+        "Ajustar tempo exato de cada frame com o usuario olhando no navegador",
+        "Conectar login Google real no painel final",
+        "Continuar desenvolvimento da StreetScene em tela cheia"
+      ],
+      "notes": "As 6 primeiras imagens viraram a montagem de entrada. A ultima referencia guiou a UI pixel de termos/Login. Enter/click pula para o frame final congelado."
+    },
+    {
+      "id": "2026-04-22-criar-prompt-briefing-completo-de-uix-design-do-site-cobrindo-menus-funcoes-modu",
+      "createdAt": "2026-04-22T10:37:40.450Z",
+      "updatedAt": "2026-04-22T10:37:40.450Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "crie um prompt pra criar um uix design completo do meu site, de tudo que ele tem detalhado, para saber cada função e cada menu e cada coisa nele pra passar pra ideia de design num especialista em design",
+      "summary": "Criar prompt/briefing completo de UIX design do site, cobrindo menus, funções, módulos e páginas para entregar a um especialista em design.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-ajustar-abertura-pubpaid-2-painel-e-entrada-local",
+      "createdAt": "2026-04-22T05:36:00.000-05:00",
+      "updatedAt": "2026-04-22T05:36:00.000-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "ajuste",
+      "summary": "Ajustar abertura PubPaid 2 com painel menor, timing melhor e entrada local",
+      "normalizedTasks": [
+        "Acelerar timeline dos 6 bitmaps da abertura",
+        "Reposicionar e reduzir painel de termos/Login",
+        "Liberar entrada de teste local quando Google nao estiver configurado",
+        "Trocar Phaser CDN por arquivo local",
+        "Corrigir erros de console na transicao para StreetScene"
+      ],
+      "filesTouched": [
+        "assets/vendor/phaser.min.js",
+        "package.json",
+        "package-lock.json",
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "progress.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "output-web-game-full-page-pubpaid-adjust",
+        "output-web-game-pubpaid-street-after-local-entry"
+      ],
+      "tags": [
+        "pubpaid",
+        "phaser",
+        "intro",
+        "local-auth",
+        "visual-adjust"
+      ],
+      "nextSteps": [
+        "Aprovar visualmente o painel final com o usuario",
+        "Evoluir StreetScene para ocupar a experiencia como jogo full-screen",
+        "Configurar login Google real no Render"
+      ],
+      "notes": "Painel final validado com Playwright em 768x713. Entrada local chegou em street-scene e ui-scene sem erros de console."
+    },
+    {
+      "id": "2026-04-22-criar-frames-intermediarios-abertura-pubpaid-2",
+      "createdAt": "2026-04-22T05:50:00.000-05:00",
+      "updatedAt": "2026-04-22T05:50:00.000-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "e se poder crie frames entre eles usando o mesmo modelo",
+      "summary": "Criar frames intermediarios entre os bitmaps da abertura PubPaid 2",
+      "normalizedTasks": [
+        "Gerar frames intermediarios entre os 6 bitmaps originais",
+        "Preservar arquivos originais e criar sequencia nova normalizada",
+        "Atualizar BootScene para carregar a sequencia de 16 frames",
+        "Atualizar IntroScene para tocar a timeline completa",
+        "Validar com Playwright e capturas"
+      ],
+      "filesTouched": [
+        "scripts/generate-pubpaid-intro-inbetweens.py",
+        "assets/pubpaid/intro/pubpaid-intro-seq-01.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-02.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-03.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-04.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-05.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-06.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-07.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-08.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-09.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-10.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-11.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-12.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-13.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-14.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-15.jpeg",
+        "assets/pubpaid/intro/pubpaid-intro-seq-16.jpeg",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "progress.md"
+      ],
+      "assetRefs": [
+        "output-web-game-pubpaid-intro-seq-contact-sheet",
+        "output-web-game-pubpaid-intro-16frames-overlay"
+      ],
+      "tags": [
+        "pubpaid",
+        "intro",
+        "inbetween-frames",
+        "phaser",
+        "bitmap-sequence"
+      ],
+      "nextSteps": [
+        "Ajustar timing fino da sequencia se o usuario achar longa ou curta",
+        "Opcionalmente gerar in-betweens por IA/edicao manual se precisar de menos ghosting entre poses distantes"
+      ],
+      "notes": "Os frames intermediarios foram feitos por interpolacao/crossfade e polimento local para preservar o mesmo estilo dos bitmaps originais, sem substituir os 6 arquivos base."
+    },
+    {
+      "id": "2026-04-22-adicionar-trilha-sonora-16bit-tech-pubpaid-2",
+      "createdAt": "2026-04-22T06:08:00.000-05:00",
+      "updatedAt": "2026-04-22T06:08:00.000-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "adicione uma trilha sonora 16 bits bem tipo tecnologia e nao dsimples, quiero ela seja boa",
+      "summary": "Adicionar trilha sonora 16-bit tecnologica e rica ao PubPaid 2",
+      "normalizedTasks": [
+        "Criar sintetizador Web Audio 16-bit com camadas",
+        "Adicionar botao de som no palco do jogo",
+        "Ligar musica ao primeiro clique/tecla por politica de autoplay",
+        "Expor estado da musica no render_game_to_text",
+        "Validar intro e StreetScene sem erros de console"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/audio/chipTechSoundtrack.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "progress.md"
+      ],
+      "assetRefs": [
+        "output-web-game-pubpaid-16bit-sound-toggle",
+        "output-web-game-pubpaid-16bit-sound-street"
+      ],
+      "tags": [
+        "pubpaid",
+        "audio",
+        "16bit",
+        "web-audio",
+        "techno"
+      ],
+      "nextSteps": [
+        "Ajustar volume/timbre ao gosto do usuario no navegador",
+        "Adicionar variação de trilha para interior/jukebox depois"
+      ],
+      "notes": "Trilha gerada em tempo real com arpejos, baixo, pads, percussao sintetica e glitches. Nao depende de arquivo de audio externo."
+    },
+    {
+      "id": "2026-04-22-sincronizar-trilha-16bit-com-frames-da-abertura-pubpaid-2",
+      "createdAt": "2026-04-22T06:22:00.000-05:00",
+      "updatedAt": "2026-04-22T06:22:00.000-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "o som ja e ligado de entrada, entao deve bater o topo da musica com os frames de entrada e depois so da continuidade",
+      "summary": "Sincronizar trilha 16-bit com os frames da abertura PubPaid 2",
+      "normalizedTasks": [
+        "Iniciar/reiniciar a trilha no topo da IntroScene",
+        "Emitir eventos de frame na abertura",
+        "Tocar acentos 16-bit nas transicoes importantes",
+        "Manter a trilha continua ao entrar na StreetScene",
+        "Validar musicIntroSynced no navegador"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/audio/chipTechSoundtrack.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "progress.md"
+      ],
+      "assetRefs": [
+        "output-web-game-pubpaid-sound-synced-intro",
+        "output-web-game-pubpaid-sound-synced-street"
+      ],
+      "tags": [
+        "pubpaid",
+        "audio-sync",
+        "intro",
+        "16bit",
+        "phaser"
+      ],
+      "nextSteps": [
+        "Ajustar acentos por frame se o usuario quiser cortes mais fortes ou mais discretos",
+        "Adicionar variacao musical propria para o interior do bar depois"
+      ],
+      "notes": "A trilha fica armada desde pubpaid:intro-start, reinicia compasso no frame 1, recebe acentos por pubpaid:intro-frame e continua sem reset na StreetScene."
+    },
+    {
+      "id": "2026-04-22-criar-backup-recuperavel-e-iniciar-rodada-de-melhoria-visual-geral-do-site-usand",
+      "createdAt": "2026-04-22T11:02:25.704Z",
+      "updatedAt": "2026-04-22T11:02:25.704Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "reuna minha equipe todas de agente especialistas pra usar esse prompt pra melhorar a aparência geral do site, mas antes crie um backup; se não gostarmos tentamos outra versão e, se der errado, voltamos à original",
+      "summary": "Criar backup recuperável e iniciar rodada de melhoria visual geral do site usando briefing UIX e equipe de agentes especialistas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-adicionar-gate-permissoes-som-fullscreen-antes-intro-pubpaid-2",
+      "createdAt": "2026-04-22T06:42:00.000-05:00",
+      "updatedAt": "2026-04-22T06:42:00.000-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "e nao apareceu a musica, então antes da intro começar eui quero que o jogo peça permições nescessarias e ja abra em full scree,m",
+      "summary": "Adicionar gate de permissões para som e fullscreen antes da intro PubPaid 2",
+      "normalizedTasks": [
+        "Criar tela antes da intro para liberar som e fullscreen",
+        "Impedir BootScene de iniciar IntroScene automaticamente",
+        "Pedir fullscreen no canvas shell por gesto do usuario",
+        "Destravar Web Audio antes do primeiro frame",
+        "Iniciar intro so depois das permissoes"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser.css",
+        "progress.md"
+      ],
+      "assetRefs": [
+        "output-web-game-pubpaid-permission-gate",
+        "output-web-game-pubpaid-permission-started"
+      ],
+      "tags": [
+        "pubpaid",
+        "permissions",
+        "fullscreen",
+        "audio",
+        "intro"
+      ],
+      "nextSteps": [
+        "Testar manualmente no navegador do usuario porque fullscreen depende de gesto real e politica do navegador",
+        "Ajustar copy ou visual do gate se o usuario quiser mais estilo arcade"
+      ],
+      "notes": "O clique em Ativar e começar pede fullscreen, inicia soundtrack.startIntro e dispara intro-scene. Playwright confirmou fullscreen=yes, music=on e musicIntroSynced=yes."
+    },
+    {
+      "id": "2026-04-22-deixar-intro-pubpaid-premium-com-luzes-camera-10s",
+      "createdAt": "2026-04-22T07:02:00.000-05:00",
+      "updatedAt": "2026-04-22T07:02:00.000-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "a abertura ta linda, agora quero que adicione efeitos nao so de trasição mais luzes e camera, coisas bem bonnitas pra deixa a intro premium, e desacele um pouco ela se preciso crie mais frames ela tem que ter no minimo 10 segundos",
+      "summary": "Deixar a intro PubPaid premium com luzes, câmera e duração mínima de 10s",
+      "normalizedTasks": [
+        "Desacelerar timeline da intro para no minimo 10 segundos",
+        "Adicionar efeitos de luz, glow, sweep neon e partículas",
+        "Adicionar câmera com micro-zoom e shake por frame",
+        "Manter audio sincronizado e continuidade para StreetScene",
+        "Validar duração, overlay final e console"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "progress.md"
+      ],
+      "assetRefs": [
+        "output-web-game-pubpaid-premium-intro-lights-mid",
+        "output-web-game-pubpaid-premium-intro-lights-overlay"
+      ],
+      "tags": [
+        "pubpaid",
+        "intro",
+        "premium",
+        "camera",
+        "lighting"
+      ],
+      "nextSteps": [
+        "Ajustar intensidade dos brilhos se o usuario quiser mais espetáculo ou mais sutileza",
+        "Criar frames adicionais reais apenas se a interpolacao atual ainda parecer curta no navegador manual"
+      ],
+      "notes": "A intro ficou com 16 frames e 10.26s. Novos efeitos: lightWash, phoneGlow, sweepLight, neonRays, sparkLayer, letterbox e camera zoom/shake."
+    },
+    {
+      "id": "2026-04-22-rodada-uix-design-pass-b-convocar-agentes-elevar-acabamento-premium-e-corrigir-c",
+      "createdAt": "2026-04-22T11:15:28.095Z",
+      "updatedAt": "2026-04-22T11:15:28.095Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ficou bom mais ainda quero mais premium, e uma reunião geral pra resolver porque algumas partes simplesmente tao ilegíveis em questão de cores",
+      "summary": "Rodada UIX Design Pass B: convocar agentes, elevar acabamento premium e corrigir contraste/legibilidade de cores em áreas ilegíveis.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-restaurar-o-site-ao-estado-do-backup-original-anterior-a-rodada-uix-premium",
+      "createdAt": "2026-04-22T11:27:44.024Z",
+      "updatedAt": "2026-04-22T11:27:44.024Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "odiei, as cores ainda são ilegíveis em alguns cantos, vamos deixar pra lá, volta como tava no backup",
+      "summary": "Restaurar o site ao estado do backup original anterior à rodada UIX premium.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-restaurar-especificamente-o-azul-e-a-legibilidade-do-cabecalho-topo-da-home",
+      "createdAt": "2026-04-22T11:29:32.838Z",
+      "updatedAt": "2026-04-22T11:29:32.838Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "porque ta dessa cor, deveria ser azul, era azul, ta ilegivel",
+      "summary": "Restaurar especificamente o azul e a legibilidade do cabeçalho/topo da home.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-transformar-cards-da-editoria-policia-em-destaque-amarelo-legivel-combinando-com",
+      "createdAt": "2026-04-22T11:33:21.495Z",
+      "updatedAt": "2026-04-22T11:33:21.495Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "odei isso, use como se fosse um destaque, um card amarelo que combine com esse azul e a fonte tem que ficar clara a leitura no site",
+      "summary": "Transformar cards da editoria Polícia em destaque amarelo legível, combinando com o azul da home.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-ajustar-o-layout-da-tela-cheffe-call-para-abrir-o-palco-e-aliviar-o-aperto-das-c",
+      "createdAt": "2026-04-22T12:01:10.495Z",
+      "updatedAt": "2026-04-22T12:01:10.495Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "isso ta espremido",
+      "summary": "Ajustar o layout da tela Cheffe Call para abrir o palco e aliviar o aperto das colunas laterais",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-refinar-o-menu-final-do-pubpaid-2-para-um-enter-game-em-pixel-art-integrado-ao-f",
+      "createdAt": "2026-04-22T12:03:14.683Z",
+      "updatedAt": "2026-04-22T12:03:14.683Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "pixels art, e nao uma coisa dessa grotesca ai no meio use pixels art pro menu de entra no game",
+      "summary": "Refinar o menu final do PubPaid 2 para um Enter Game em pixel art integrado ao frame final",
+      "normalizedTasks": [
+        "Transformar o overlay final em HUD pixelado",
+        "Manter o enter game dentro do frame final da intro",
+        "Ajustar o clique para entrar direto no jogo local"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-pixel-enter-menu-v4.png",
+        "output/web-game/pubpaid-pixel-enter-street-v4.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pubpaid-2",
+        "intro",
+        "pixel-art",
+        "ui"
+      ],
+      "nextSteps": [
+        "Validar com o usuario se quer mais ornamentos pixelados nos botoes",
+        "Expandir o mesmo vocabulário visual para o login Google se ele voltar"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-fechar-a-versao-responsiva-do-pubpaid-2-para-celulares-e-ios",
+      "createdAt": "2026-04-22T12:14:41.407Z",
+      "updatedAt": "2026-04-22T12:14:41.407Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nunca de ter pronta a versão repositiva tambem para celulares e ios",
+      "summary": "Fechar a versao responsiva do PubPaid 2 para celulares e iOS",
+      "normalizedTasks": [
+        "Ajustar safe areas e viewport mobile",
+        "Adaptar HUD prompt e overlays para telas verticais",
+        "Criar fallback de fullscreen para Safari/iOS e validar em iPhone e Android"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-mobile-iphone13-menu.png",
+        "output/web-game/pubpaid-mobile-iphone13-street.png",
+        "output/web-game/pubpaid-mobile-pixel7-menu.png",
+        "output/web-game/pubpaid-mobile-pixel7-street.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pubpaid-2",
+        "mobile",
+        "ios",
+        "responsive"
+      ],
+      "nextSteps": [
+        "Validar em aparelho real iPhone",
+        "Revisar se quer esconder a interface editorial abaixo do jogo em celular"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-forcar-o-pubpaid-2-a-operar-em-horizontal-no-celular-com-popup-de-orientacao",
+      "createdAt": "2026-04-22T12:21:18.154Z",
+      "updatedAt": "2026-04-22T12:21:18.154Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "2aeu quero que ele funcione sempre assim, o jogo ta sempre na horizontal no celular, ele força isso ou se muda posição ele diz no pop up, mude pra horizeontal",
+      "summary": "Forcar o PubPaid 2 a operar em horizontal no celular com popup de orientacao",
+      "normalizedTasks": [
+        "Adicionar bloqueio de orientacao em retrato",
+        "Exibir popup pedindo para mudar para horizontal",
+        "Tentar travar orientation lock landscape quando o navegador permitir"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-mobile-orientation-portrait.png",
+        "output/web-game/pubpaid-mobile-orientation-landscape-menu.png",
+        "output/web-game/pubpaid-mobile-orientation-landscape-street.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pubpaid-2",
+        "mobile",
+        "orientation",
+        "ios"
+      ],
+      "nextSteps": [
+        "Validar em aparelho real girando em tempo real",
+        "Decidir se deve esconder o restante da pagina enquanto o bloqueio de orientacao estiver ativo"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-criar-base-de-integracao-do-whatsapp-para-o-usuario-falar-com-o-projeto-codex",
+      "createdAt": "2026-04-22T12:34:41.082Z",
+      "updatedAt": "2026-04-22T12:34:41.082Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu queria poder falar com v direto do meu zap",
+      "summary": "Criar base de integração do WhatsApp para o usuário falar com o projeto/Codex",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-remover-a-etapa-intermediaria-de-access-port-no-fluxo-local-do-pubpaid-2",
+      "createdAt": "2026-04-22T13:51:22.079Z",
+      "updatedAt": "2026-04-22T13:51:22.079Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "cara me some com essa merda",
+      "summary": "Remover a etapa intermediaria de access port no fluxo local do PubPaid 2",
+      "normalizedTasks": [
+        "Pular o passo auth quando termos ja estiverem aceitos e o acesso local estiver liberado",
+        "Levar o final da intro direto para a StreetScene no modo local"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/app.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-local-no-more-shit-terms.png",
+        "output/web-game/pubpaid-local-no-more-shit-direct.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pubpaid-2",
+        "flow",
+        "local-access"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-redesenhar-a-cheffe-call-com-fundo-mais-tecnologico-iluminacao-3d-efeitos-visuai",
+      "createdAt": "2026-04-22T14:34:39.928Z",
+      "updatedAt": "2026-04-22T14:34:39.928Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "se de crie um backgroud maneiro e iluminação coisas 3d tudo de mais tecnologico em efeitos visuais, junte a equipe reuna e veja o que da pra melhorar em questão de design e fluxo",
+      "summary": "Redesenhar a Cheffe Call com fundo mais tecnológico, iluminação 3D, efeitos visuais e melhorias de fluxo com apoio da equipe local",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-instalar-a-extensao-kimi-code-no-vs-code-local-e-confirmar-se-ficou-disponivel",
+      "createdAt": "2026-04-22T16:28:15.080Z",
+      "updatedAt": "2026-04-22T16:28:15.080Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "instale o kime coude porque ele nao apareceu aaqui",
+      "summary": "Instalar a extensao Kimi Code no VS Code local e confirmar se ficou disponivel",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-diagnosticar-por-que-o-vs-code-reabriu-sem-mostrar-o-kimi-apesar-da-extensao-ins",
+      "createdAt": "2026-04-22T16:40:13.365Z",
+      "updatedAt": "2026-04-22T16:40:13.365Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "do vs code fechou e nao abriu o kime",
+      "summary": "Diagnosticar por que o VS Code reabriu sem mostrar o Kimi apesar da extensao instalada",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-retomar-limpeza-enxugamento-mobile-da-home-preservando-os-robos-no-rodape-e-o-ro",
+      "createdAt": "2026-04-22T19:15:44.730Z",
+      "updatedAt": "2026-04-22T19:15:44.730Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "TRAVOU QUANDO ESTASVAMOS FINZALIANDO A PARTE MOBILE DE ENXURGA O SITE, E OBS, EU QUERO OS ROB OS NO RODAPE E AQUELE RODAPE QUE RODAVA A MULTIDÃO DE PESSOAS E PLACAS",
+      "summary": "Retomar limpeza/enxugamento mobile da home preservando os robos no rodape e o rodape animado com multidao de pessoas e placas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-criar-o-google-port-como-bitmap-dentro-da-rua-e-manter-o-enter-game-limpo-no-fra",
+      "createdAt": "2026-04-22T19:22:19.026Z",
+      "updatedAt": "2026-04-22T19:22:19.026Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "FAÇA",
+      "summary": "Criar o Google Port como bitmap dentro da rua e manter o Enter Game limpo no frame final",
+      "normalizedTasks": [
+        "Remover overlay HTML do Google na rua",
+        "Criar placa Google Port dentro da StreetScene em Phaser",
+        "Manter o Enter Game como bitmap limpo com hitbox invisivel",
+        "Adicionar brilho discreto na placa final da intro"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-enter-bitmap-clean-neon.png",
+        "output/web-game/pubpaid-google-port-phaser-bitmap.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pubpaid-2",
+        "phaser",
+        "google",
+        "bitmap"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-remover-a-vitrine-dos-robos-do-rodape-mobile-e-manter-somente-a-multidao-com-pla",
+      "createdAt": "2026-04-22T19:27:44.689Z",
+      "updatedAt": "2026-04-22T19:27:44.689Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "MAIS ERA PRA TIRAR AQUELES 3 ROBO, DEIXA SO A MULTIDÃO",
+      "summary": "Remover a vitrine dos robos do rodape mobile e manter somente a multidao com placas da Insiders.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-reunir-equipe-e-planejar-layout-super-premium-por-editoria-com-prompts-especific",
+      "createdAt": "2026-04-22T19:30:19.363Z",
+      "updatedAt": "2026-04-22T19:30:19.363Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "OK, AGORA O QUE DEVEMOS FAZER, E SEGUIR POR TODOS OS EDITORAIS AGEITANDO O LEYOUT SUPER PREMIUM PARA CADA, REUNA A EQUIPE,  E FAÇA UM LEYOUT SUPER PREMIUM COM PROMPTS PARA CADA SERÇÃO EDITORAIAL",
+      "summary": "Reunir equipe e planejar layout super premium por editoria, com prompts específicos para cada seção editorial.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-mapear-hotspots-da-rua-do-pubpaid-2-com-feedback-visual-neon",
+      "createdAt": "2026-04-22T19:31:36.550Z",
+      "updatedAt": "2026-04-22T19:31:36.550Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "MMANDA VER",
+      "summary": "Mapear hotspots da rua do PubPaid 2 com feedback visual neon",
+      "normalizedTasks": [
+        "Remover marcador debug da entrada",
+        "Criar hotspots para porta terminal e Google Port",
+        "Adicionar feedback visual pixel/neon",
+        "Abrir painéis de terminal e Google Port"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/StreetScene.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-street-hotspots-neon.png",
+        "output/web-game/pubpaid-terminal-hotspot-panel.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pubpaid-2",
+        "street",
+        "hotspots",
+        "phaser"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-implementar-diferenciacao-premium-entre-editorias-cadernos-na-home-mantendo-a-ba",
+      "createdAt": "2026-04-22T19:40:31.136Z",
+      "updatedAt": "2026-04-22T19:40:31.136Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "MANDA VER: diferenciar um pouco tipo game e design tecnologico, anime e design de anime, moda e moda assim por diante, sem mudar a base",
+      "summary": "Implementar diferenciacao premium entre editorias/cadernos na home, mantendo a base visual do jornal.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-continuar-aplicando-o-redesign-premium-por-editoria-sem-pausar-para-pedir-confir",
+      "createdAt": "2026-04-22T20:02:02.164Z",
+      "updatedAt": "2026-04-22T20:02:02.164Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "CONTINUE CARA, SO FAÇA NEM ME PERGUNTA",
+      "summary": "Continuar aplicando o redesign premium por editoria sem pausar para pedir confirmacao, com foco agora em Hero e Radar Local.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-seguir-no-fluxo-planejado-do-redesign-premium-agora-avancando-para-trending-e-mo",
+      "createdAt": "2026-04-22T20:07:10.971Z",
+      "updatedAt": "2026-04-22T20:07:10.971Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "SO SEGUE O FLUXO",
+      "summary": "Seguir no fluxo planejado do redesign premium, agora avancando para Trending e Monthly na home.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-ajeitar-anime-e-seguir-com-noticia-e-arquivo",
+      "createdAt": "2026-04-22T20:36:00.000Z",
+      "updatedAt": "2026-04-22T20:45:00.000Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "file:///C:/Users/junio/projeto%20codex/animes.html GEITE ISSO TAMBEM E SIGA COM NOTICIA E ARQUIVO",
+      "summary": "Ajeitar Anime e seguir em paralelo com Noticia e Arquivo.",
+      "normalizedTasks": [
+        "Dar acabamento premium para Anime",
+        "Dar acabamento premium para Noticia",
+        "Dar acabamento premium para Arquivo"
+      ],
+      "filesTouched": [
+        "styles.css",
+        "noticia-enhance.css"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "anime",
+        "noticia",
+        "arquivo",
+        "premium",
+        "editorial"
+      ],
+      "nextSteps": [
+        "Revisar mobile fino das tres paginas",
+        "Seguir para outras subpaginas editoriais"
+      ],
+      "notes": "Rodada executada com camadas finais de CSS, preservando HTML e scripts existentes."
+    },
+    {
+      "id": "2026-04-22-executar-de-uma-vez-as-3-proximas-frentes-acabamento-geral-da-home-estudantes-e-",
+      "createdAt": "2026-04-22T20:17:47.690Z",
+      "updatedAt": "2026-04-22T20:31:00.000Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "FAÇA OS 3 DE UMA VEZ",
+      "summary": "Executar de uma vez as 3 proximas frentes: acabamento geral da home, Estudantes e Infantil.",
+      "normalizedTasks": [
+        "Aplicar acabamento premium final na home",
+        "Dar assinatura premium propria para Estudantes",
+        "Dar assinatura premium propria para Infantil"
+      ],
+      "filesTouched": [
+        "styles.css",
+        "subpages-redesign.css"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "estudantes",
+        "infantil",
+        "premium",
+        "editorial"
+      ],
+      "nextSteps": [
+        "Avancar para Noticia e Arquivo",
+        "Revisar ajuste fino mobile de Estudantes e Infantil"
+      ],
+      "notes": "Rodada executada via camada final de CSS para manter a base estrutural existente."
+    },
+    {
+      "id": "2026-04-22-retomar-a-atualizacao-mobile-travada-e-continuar-o-ajuste-fino-mobile-de-anime-n",
+      "createdAt": "2026-04-22T20:52:46.331Z",
+      "updatedAt": "2026-04-22T20:52:46.331Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "deu problema em, na anossa att da mobile version a conversa travou",
+      "summary": "Retomar a atualização mobile travada e continuar o ajuste fino mobile de Anime, Noticia e Arquivo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-reformular-cores-e-movimento-da-pagina-anime-com-direcao-visual-mais-apropriada-",
+      "createdAt": "2026-04-22T20:56:10.791Z",
+      "updatedAt": "2026-04-22T20:56:10.791Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "file:///C:/Users/junio/projeto%20codex/animes.html as cores tão horriveis estude sobre animes e cores e faça o site animado, afinal e sobre animes",
+      "summary": "Reformular cores e movimento da página Anime com direção visual mais apropriada ao tema de animes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-fazer-o-popup-inicial-aparecer-somente-uma-vez-por-navegador-usuario",
+      "createdAt": "2026-04-22T21:12:18.014Z",
+      "updatedAt": "2026-04-22T21:12:18.014Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "adorei, agora quero que faça o pop up aparecer so uma vez",
+      "summary": "Fazer o popup inicial aparecer somente uma vez por navegador/usuario.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-criar-splash-premium-luminosa-high-tech-3d-dos-fundadores-apos-o-popup-inicial",
+      "createdAt": "2026-04-22T21:13:18.752Z",
+      "updatedAt": "2026-04-22T21:13:18.752Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e queria uma spash depois dele apresentand os fundadores mais essa bem tipo premium iluminous tec e hightec 3d",
+      "summary": "Criar splash premium luminosa high-tech/3D dos fundadores após o popup inicial.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-mudar-a-logica-do-popup-para-aparecer-no-maximo-uma-vez-por-dia",
+      "createdAt": "2026-04-22T21:35:53.495Z",
+      "updatedAt": "2026-04-22T21:35:53.495Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "A LGOICA DO POP UP E APARECER UMA VEZ, A CADA DIA, PORQUE TODO DIA EU VOU M UDAR O SPLASH DELE E PODE MUDA ALGO, ENTÃO APARECER UMA VEZ POR DIA DEPOIS NAO APARECE MAIS",
+      "summary": "Mudar a lógica do popup para aparecer no máximo uma vez por dia.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-22-reunir-agentes-de-web-design-cores-e-editorial-para-decidir-uma-nova-direcao-pre",
+      "createdAt": "2026-04-22T22:53:54.089Z",
+      "updatedAt": "2026-04-22T22:53:54.089Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "reuna 0os agentes todos faççam uma reuniao e decidam essa hero",
+      "summary": "Reunir agentes de web design, cores e editorial para decidir uma nova direção premium para a hero da home",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

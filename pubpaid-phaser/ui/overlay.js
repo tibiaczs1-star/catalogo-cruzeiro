@@ -9,7 +9,7 @@ const refs = {
   realBalance: document.querySelector("[data-game-real-balance]"),
   objective: document.querySelector("[data-game-objective]"),
   nerdAgent: document.querySelector("[data-game-nerd-agent]"),
-  prompt: document.querySelector("[data-game-prompt]"),
+  prompt: document.querySelector("[data-game-prompt-copy]"),
   panel: document.querySelector("[data-game-panel]"),
   panelKicker: document.querySelector("[data-game-panel-kicker]"),
   panelTitle: document.querySelector("[data-game-panel-title]"),

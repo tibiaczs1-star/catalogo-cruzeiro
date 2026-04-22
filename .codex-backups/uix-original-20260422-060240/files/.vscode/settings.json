@@ -1,0 +1,18 @@
+{
+  "files.associations": {
+    "*.ase": "binary",
+    "*.aseprite": "binary",
+    "*.tmx": "xml",
+    "*.tsx": "xml"
+  },
+  "files.exclude": {
+    "**/.codex-temp": true
+  },
+  "editor.renderWhitespace": "selection",
+  "editor.minimap.enabled": false,
+  "workbench.editorAssociations": {
+    "*.ase": "default",
+    "*.aseprite": "default",
+    "*.tmx": "default"
+  }
+}

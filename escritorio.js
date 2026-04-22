@@ -573,6 +573,16 @@
   const gossipKicker = document.querySelector("[data-gossip-kicker]");
   const gossipText = document.querySelector("[data-gossip-text]");
   const gossipMeta = document.querySelector("[data-gossip-meta]");
+  const theaterPanel = document.querySelector("[data-office-theater]");
+  const theaterForm = document.querySelector("[data-theater-form]");
+  const theaterSubject = document.querySelector("[data-theater-subject]");
+  const theaterOpinions = document.querySelector("[data-theater-opinions]");
+  const theaterAwards = document.querySelector("[data-theater-awards]");
+  const theaterTitle = document.querySelector("[data-theater-title]");
+  const theaterSummary = document.querySelector("[data-theater-summary]");
+  const theaterTerminalButton = document.querySelector("[data-theater-terminal]");
+  const terminalCommandForm = document.querySelector("[data-terminal-command-form]");
+  const terminalCommandInput = document.querySelector("[data-terminal-command-input]");
 
   if (!officeWorld || !agentLayer || !rosterGrid) return;
 
@@ -686,7 +696,11 @@
     gossipLog: [],
     realAgentsReady: false,
     realAgentMap: new Map(),
+    realAgentMaxPoints: 0,
     activeAgentId: null,
+    theaterMode: false,
+    theaterSubject: "",
+    theaterRound: 0,
     selectedSupportItemId: supportCatalog[0]?.id || null,
     inventory: []
   };
@@ -863,8 +877,72 @@
     return agent?.evaluation || createDefaultEvaluation();
   }
 
+  function getAgentPerformance(agent) {
+    const realProcess = getRealAgentProcess(agent);
+    if (!realProcess) {
+      return {
+        ready: false,
+        score: getAgentEvaluation(agent).score,
+        points: 0,
+        label: "aguardando rodada real",
+        title: "Sem dados reais conectados ainda; usando avaliação local."
+      };
+    }
+
+    const autonomy = realProcess.autonomy || {};
+    const growth = autonomy.growth || {};
+    const runtimePerformance = realProcess.performance || {};
+    const points = Number(realProcess.points || 0);
+    const penalty = Number(runtimePerformance.penalty || 0);
+    const maxPoints = Math.max(1, Number(officeState.realAgentMaxPoints || points || 1));
+    const awards = Array.isArray(realProcess.awards) ? realProcess.awards.length : 0;
+    const cycles = Number(autonomy.cycles || 0);
+    const autonomyValue = Number(autonomy.autonomy || 0);
+    const confidence = Number(autonomy.confidence || 0);
+    const urgency = Number(autonomy.urgency || 0);
+    const ambition = Number(growth.ambition || 0);
+    const activityScore = Math.min(100, (points / maxPoints) * 100);
+    const targetScore = Math.min(
+      100,
+      autonomyValue * 0.28 +
+        confidence * 0.2 +
+        urgency * 0.14 +
+        ambition * 0.2 +
+        Math.min(100, cycles * 8) * 0.1 +
+        awards * 8
+    );
+    const manualScore = getAgentEvaluation(agent).score;
+    const score = clampScore(activityScore * 0.44 + targetScore * 0.36 + manualScore * 0.2);
+    const label =
+      score >= 88
+        ? "meta batida"
+        : score >= 74
+          ? "ativo"
+          : score >= 58
+            ? "em aquecimento"
+            : "precisa render";
+
+    return {
+      ready: true,
+      score,
+      points,
+      awards,
+      cycles,
+      ambition,
+      growth,
+      penalty,
+      missedTarget: Boolean(runtimePerformance.missedTarget),
+      penaltyReason: runtimePerformance.penaltyReason || "",
+      autonomy: autonomyValue,
+      confidence,
+      urgency,
+      label,
+      title: `${points} pts líquidos • penalidade ${penalty} • ambição ${ambition}% • meta: ${growth.promotionTarget || "crescer"} • ${runtimePerformance.penaltyReason || growth.growthAction || "buscar proxima entrega"}`
+    };
+  }
+
   function getAgentEvaluationLevel(agent) {
-    const score = getAgentEvaluation(agent).score;
+    const score = getAgentPerformance(agent).score;
     if (score >= 88) return "Elite em alta";
     if (score >= 74) return "Equipe estavel";
     if (score >= 58) return "Em observacao";
@@ -872,6 +950,12 @@
   }
 
   function getAgentEvaluationTrend(agent) {
+    const performance = getAgentPerformance(agent);
+    if (performance.ready) {
+      if (performance.score >= 88) return "Meta batida";
+      if (performance.score >= 74) return "Ativo";
+      if (performance.score <= 57) return "Baixo ritmo";
+    }
     const streak = getAgentEvaluation(agent).streak;
     if (streak >= 2) return "Subindo";
     if (streak <= -2) return "Caindo";
@@ -1017,15 +1101,17 @@
   function refreshAgentEvaluationUI(agent) {
     if (!agent) return;
     const evaluation = getAgentEvaluation(agent);
+    const performance = getAgentPerformance(agent);
     if (agent.rosterScoreEl) {
-      agent.rosterScoreEl.textContent = `${evaluation.score} pts`;
+      agent.rosterScoreEl.textContent = `${performance.score} pts • ${performance.label}`;
+      agent.rosterScoreEl.title = performance.title;
     }
     if (agent.el) {
       agent.el.dataset.evalLevel = getAgentEvaluationLevel(agent);
     }
     if (officeState.activeAgentId === agent.id) {
       if (modalEvalLevel) modalEvalLevel.textContent = getAgentEvaluationLevel(agent);
-      if (modalEvalScore) modalEvalScore.textContent = `${evaluation.score}`;
+      if (modalEvalScore) modalEvalScore.textContent = `${performance.score}`;
       if (modalEvalTrend) modalEvalTrend.textContent = getAgentEvaluationTrend(agent);
       if (modalEvalLearning) modalEvalLearning.textContent = formatPercent01(evaluation.neural.learning);
       if (modalEvalNeural) modalEvalNeural.textContent = getAgentNeuralSummary(agent);
@@ -1802,9 +1888,11 @@
     const agentRegistry = Array.isArray(payload?.agents) ? payload.agents : [];
     const registryBySlug = new Map(agentRegistry.map((item) => [item.slug, item]));
     const map = new Map();
+    let maxPoints = 0;
 
     queue.forEach((item) => {
       if (!item?.slug) return;
+      maxPoints = Math.max(maxPoints, Number(item.points || 0));
       map.set(item.slug, {
         ...registryBySlug.get(item.slug),
         ...item,
@@ -1812,6 +1900,7 @@
       });
     });
 
+    officeState.realAgentMaxPoints = maxPoints;
     return map;
   }
 
@@ -1827,6 +1916,7 @@
 
       officeState.realAgentMap = buildRealAgentMap(payload);
       officeState.realAgentsReady = true;
+      agents.forEach((agent) => refreshAgentEvaluationUI(agent));
       const activeAgent = agents.find((item) => item.id === officeState.activeAgentId) || agents[0];
       if (activeAgent) {
         renderTerminal(activeAgent, "Terminal real conectado aos agentes operacionais do jornal.");
@@ -1886,6 +1976,7 @@
     officeState.activeAgentId = agent.id;
     const skills = agent.skills.join(", ");
     const evaluation = getAgentEvaluation(agent);
+    const performance = getAgentPerformance(agent);
     const realProcess = getRealAgentProcess(agent);
     const realStatus = officeState.realAgentsReady ? "conectado ao runtime real" : "aguardando runtime real";
     terminalOutput.textContent = [
@@ -1897,7 +1988,19 @@
       `runtime: codigo ativo 24h`,
       `terminal: ${realStatus}`,
       `autonomia: ${getTerminalAutonomy(realProcess)}`,
-      `avaliacao: ${evaluation.score} pts (${getAgentEvaluationLevel(agent)})`,
+      `placar: ${performance.score} pts (${getAgentEvaluationLevel(agent)})`,
+      `meta: ${performance.ready ? performance.title : "aguardando dados reais da proxima rodada"}`,
+      `penalidade: ${
+        performance.ready
+          ? `${performance.penalty || 0} pts | ${performance.penaltyReason || "sem perda nesta rodada"}`
+          : "aguardando rodada real"
+      }`,
+      `crescimento: ${
+        performance.ready
+          ? `${performance.growth?.promotionTarget || "crescer"} | ambicao ${performance.ambition}% | ${performance.growth?.growthAction || "buscar entrega melhor"}`
+          : "aguardando plano de crescimento"
+      }`,
+      `feedback humano: ${evaluation.score} pts`,
       `neural: foco ${formatPercent01(evaluation.neural.focus)} | qualidade ${formatPercent01(evaluation.neural.quality)} | ritmo ${formatPercent01(evaluation.neural.speed)}`,
       `conversa: ${getAgentConversationSummary(agent)}`,
       `entrega: ${getTerminalDeliverable(realProcess)}`,
@@ -1914,38 +2017,178 @@
     refreshAgentEvaluationUI(agent);
   }
 
+  function getTheaterOpinion(agent, subject, index) {
+    const cleanSubject = String(subject || "a próxima rodada do projeto").trim();
+    const roleOpeners = {
+      ceo: "Eu abriria a reunião separando prioridade, risco e primeiro passo.",
+      editor: "Minha leitura é começar pela hierarquia: o que o visitante precisa entender primeiro.",
+      review: "Eu olharia os pontos de quebra: texto confuso, botão sem função e estado sem resposta.",
+      copy: "Eu cortaria o excesso e deixaria o pedido com uma frase de ação bem clara.",
+      games: "Eu trataria como loop de jogo: entrada, reação dos agentes, recompensa e próximo comando.",
+      kids: "Eu deixaria a interação mais visual e segura, com respostas curtas e fáceis de acompanhar.",
+      sales: "Eu colocaria uma recompensa visível: pontos, destaque e motivo para voltar.",
+      design: "Eu defenderia uma sala mais inspiradora, com mesa, luz e poses que mostrem conversa.",
+      pixel: "Eu faria os sprites sentarem, levantarem a mão e piscarem quando forem chamados.",
+      dev: "Eu ligaria o assunto ao terminal para transformar opinião em pedido executável.",
+      sources: "Eu pediria contexto e fonte antes de qualquer decisão que vire publicação.",
+      social: "Eu olharia o que rende conversa pública sem perder clareza."
+    };
+    const closer = [
+      "Minha sugestão é testar pequeno, medir a reação e subir a melhor versão.",
+      "Eu consigo assumir uma parte disso se você mandar o pedido pelo terminal.",
+      "Se você colar um trecho de código, eu respondo olhando para a minha especialidade.",
+      "Isso merece uma rodada com todos levantando ponto por ponto."
+    ][index % 4];
+    return `${roleOpeners[agent.role] || "Eu vejo um caminho prático para isso."} Assunto: ${cleanSubject}. ${closer}`;
+  }
+
+  function renderTheaterAwards() {
+    if (!theaterAwards) return;
+    const scored = agents
+      .map((agent, index) => ({
+        agent,
+        score: getAgentEvaluation(agent).score + ((index * 7) % 19)
+      }))
+      .sort((a, b) => b.score - a.score);
+    const periods = [
+      { label: "funcionário do dia", offset: 0 },
+      { label: "promo da semana", offset: 1 },
+      { label: "destaque do mês", offset: 2 },
+      { label: "lenda do ano", offset: 3 }
+    ];
+    const fragment = document.createDocumentFragment();
+    periods.forEach((period) => {
+      const winner = scored[period.offset % scored.length]?.agent || agents[0];
+      const card = document.createElement("article");
+      card.className = "office-theater-award-card";
+      const photo = document.createElement("div");
+      photo.className = `office-theater-award-photo role-${winner.role}`;
+      photo.append(createAvatar(winner));
+      const copy = document.createElement("div");
+      const score = getAgentEvaluation(winner).score;
+      copy.innerHTML = `<span></span><strong></strong><p></p>`;
+      copy.querySelector("span").textContent = period.label;
+      copy.querySelector("strong").textContent = winner.name;
+      copy.querySelector("p").textContent = `${score} pts • ${getAgentEvaluationLevel(winner)}`;
+      card.append(photo, copy);
+      fragment.append(card);
+    });
+    theaterAwards.replaceChildren(fragment);
+  }
+
+  function renderTheaterOpinions(subject) {
+    if (!theaterOpinions) return;
+    const activeSubject = String(subject || "").trim() || "a próxima rodada do projeto";
+    officeState.theaterSubject = activeSubject;
+    officeState.theaterRound += 1;
+    const orderedAgents = agents
+      .slice()
+      .sort((a, b) => getAgentEvaluation(b).score - getAgentEvaluation(a).score)
+      .slice(0, Math.min(agents.length, 10));
+    const fragment = document.createDocumentFragment();
+    orderedAgents.forEach((agent, index) => {
+      const article = document.createElement("article");
+      article.className = "office-theater-opinion";
+      const avatar = document.createElement("div");
+      avatar.className = `office-theater-speaker role-${agent.role}`;
+      avatar.append(createAvatar(agent));
+      const copy = document.createElement("div");
+      const text = getTheaterOpinion(agent, activeSubject, index);
+      copy.innerHTML = `<span></span><strong></strong><p></p>`;
+      copy.querySelector("span").textContent = `${getAgentEvaluation(agent).score} pts • levantou a mão`;
+      copy.querySelector("strong").textContent = agent.name;
+      copy.querySelector("p").textContent = text;
+      article.append(avatar, copy);
+      fragment.append(article);
+      window.setTimeout(() => {
+        agent.el?.classList.add("is-talking", "is-raising-hand");
+        if (agent.bubbleText) agent.bubbleText.textContent = text;
+        renderTerminal(agent, text);
+        window.setTimeout(() => agent.el?.classList.remove("is-talking", "is-raising-hand"), 1800);
+      }, 180 * index);
+    });
+    theaterOpinions.replaceChildren(fragment);
+    if (theaterTitle) theaterTitle.textContent = "Reunião aberta";
+    if (theaterSummary) theaterSummary.textContent = `Assunto em debate: ${activeSubject}`;
+    setFeedText(`Reunião aberta: ${orderedAgents.length} agentes deram opinião sobre "${activeSubject}".`);
+    renderTheaterAwards();
+  }
+
+  function sendTerminalCommand(rawCommand) {
+    const command = String(rawCommand || "").trim();
+    if (!command) {
+      setFeedText("Terminal aguardando um pedido, assunto ou trecho de codigo.");
+      terminalCommandInput?.focus();
+      return;
+    }
+    const agent = agents.find((item) => item.id === officeState.activeAgentId) || agents[0];
+    officeState.theaterSubject = command;
+    renderTerminal(agent, `comando recebido do usuario: ${command.slice(0, 220)}`);
+    syncAgentTask(agent, "lendo comando enviado pelo terminal");
+    agent.el?.classList.add("is-talking", "is-raising-hand");
+    window.setTimeout(() => agent.el?.classList.remove("is-talking", "is-raising-hand"), 1800);
+    if (terminalCommandInput) terminalCommandInput.value = "";
+    if (theaterSubject && !theaterSubject.value.trim()) theaterSubject.value = command;
+    setFeedText(`${agent.name} recebeu seu pedido no terminal e colocou a equipe em modo de execução.`);
+  }
+
   function gatherTeam() {
     const meetingSpots = [
-      { x: sx(612), y: sy(314) },
-      { x: sx(666), y: sy(314) },
-      { x: sx(720), y: sy(314) },
-      { x: sx(774), y: sy(314) },
-      { x: sx(828), y: sy(314) },
-      { x: sx(612), y: sy(350) },
-      { x: sx(666), y: sy(350) },
-      { x: sx(720), y: sy(350) },
-      { x: sx(774), y: sy(350) },
-      { x: sx(828), y: sy(350) },
-      { x: sx(548), y: sy(330) },
-      { x: sx(880), y: sy(330) }
+      { x: sx(430), y: sy(242) },
+      { x: sx(514), y: sy(226) },
+      { x: sx(598), y: sy(226) },
+      { x: sx(682), y: sy(242) },
+      { x: sx(736), y: sy(294) },
+      { x: sx(730), y: sy(354) },
+      { x: sx(670), y: sy(404) },
+      { x: sx(584), y: sy(420) },
+      { x: sx(498), y: sy(404) },
+      { x: sx(438), y: sy(354) },
+      { x: sx(432), y: sy(294) },
+      { x: sx(556), y: sy(292) },
+      { x: sx(612), y: sy(292) },
+      { x: sx(556), y: sy(354) },
+      { x: sx(612), y: sy(354) }
     ];
 
+    officeState.theaterMode = true;
+    officeWorld.classList.add("is-theater-mode");
+    theaterPanel?.classList.add("is-open");
     agents.forEach((agent, index) => {
       const spot = meetingSpots[index % meetingSpots.length];
+      agent.meetingReturnRoom = agent.meetingReturnRoom || agent.room;
+      agent.room = "dev";
+      agent.x = spot.x;
+      agent.y = spot.y;
       agent.target = {
         x: spot.x,
         y: spot.y,
         task: officeConfig.gatherTask || "reunido com a equipe para alinhar a próxima rodada",
-        pauseMs: 4800
+        pauseMs: 180000
       };
-      agent.pauseUntil = 0;
-      syncAgentTask(agent, "indo para a reunião geral da equipe");
+      agent.pauseUntil = Date.now() + 180000;
+      agent.stuckFrames = 0;
+      agent.el?.classList.add("is-seated");
+      syncAgentTask(agent, "sentado na reunião interativa");
+      setAgentPosition(agent);
     });
 
-    setFeedText("Equipe reunida: jornal e nerd entraram em alinhamento para melhorar operação, arte, revisão e sistema.");
+    renderTheaterAwards();
+    setFeedText("Reunião aberta: agentes sentados, placar carregado e microfone pronto para o seu assunto.");
+    theaterSubject?.focus();
   }
 
   function resetOfficeControls() {
+    officeState.theaterMode = false;
+    officeWorld.classList.remove("is-theater-mode");
+    theaterPanel?.classList.remove("is-open");
+    agents.forEach((agent) => {
+      if (agent.meetingReturnRoom) agent.room = agent.meetingReturnRoom;
+      agent.meetingReturnRoom = null;
+      agent.pauseUntil = 0;
+      agent.target = pickTarget(agent);
+      agent.el?.classList.remove("is-seated", "is-raising-hand");
+    });
     setActiveTab("team");
     applyOfficeTheme(defaultTheme, false);
     applyVisualBoost(false, false);
@@ -2151,6 +2394,23 @@
       if (!agent) return;
       submitConversationFeedback(agent);
     }
+  });
+
+  theaterForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!officeState.theaterMode) gatherTeam();
+    renderTheaterOpinions(theaterSubject?.value || "");
+  });
+
+  theaterTerminalButton?.addEventListener("click", () => {
+    const subject = String(theaterSubject?.value || "").trim();
+    if (terminalCommandInput && subject) terminalCommandInput.value = subject;
+    sendTerminalCommand(subject);
+  });
+
+  terminalCommandForm?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    sendTerminalCommand(terminalCommandInput?.value || "");
   });
 
   sideRailButtons.forEach((button) => {

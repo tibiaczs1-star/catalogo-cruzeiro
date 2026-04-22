@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
-    <link rel="stylesheet" href="cheffe-call.css?v=20260421a" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260422bitmap-topfill" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -24,9 +24,95 @@
             Chame todos os agentes, pause a rotina automática, registre memória da reunião e receba opiniões antes
             de aprovar qualquer ação.
           </p>
+          <div class="call-quick-guide" aria-label="Fluxo rápido da reunião">
+            <article>
+              <span>Fluxo</span>
+              <strong>Ouvir, comparar, aprovar</strong>
+              <p>Abra o assunto, deixe a sala reagir e transforme a melhor ideia em tarefa ou execução.</p>
+            </article>
+            <article>
+              <span>Modo local</span>
+              <strong>Sem senha para simular</strong>
+              <p>Se a senha ficar vazia, a reunião entra em modo visual para experimentar o fluxo e o design.</p>
+            </article>
+            <article>
+              <span>Senha</span>
+              <strong>Só para runtime real</strong>
+              <p>Use a senha Full Admin apenas quando quiser pausar rotinas reais e operar a Cheffe Call ao vivo.</p>
+            </article>
+          </div>
+          <div class="call-mode-banner" id="callModeBanner" aria-live="polite">
+            <span>Modo visual</span>
+            <strong>Simulação aberta sem senha</strong>
+          </div>
+          <section class="call-workspace">
+            <form class="call-console" id="cheffeCallForm">
+              <label>
+                Senha Full Admin
+                <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
+              </label>
+              <label>
+                Assunto da reunião
+                <textarea
+                  name="instruction"
+                  rows="4"
+                  placeholder="Ex: reorganizar o escritório, receber opiniões, distribuir comandos específicos e deixar a sala mais forte."
+                ></textarea>
+              </label>
+              <label>
+                Terminal: pedido específico ou código
+                <textarea
+                  name="command"
+                  rows="4"
+                  placeholder="Cole aqui um pedido direto, trecho de código ou tarefa para o agente ativo analisar."
+                ></textarea>
+              </label>
+              <div class="call-actions">
+                <button type="submit">Enviar mensagem</button>
+                <button type="button" id="sendTerminalCommand">Enviar ao terminal</button>
+                <button type="button" id="nextSpeaker">Próximo</button>
+                <button type="button" id="markGoodIdea">Boa ideia</button>
+                <button type="button" id="releaseCall">Liberar automações</button>
+              </div>
+              <p id="callStatus" role="status">Sala pronta para assunto visual. Use senha só para pausar runtime real.</p>
+            </form>
+
+            <section class="call-terminal" aria-label="Terminal da reunião">
+              <pre id="callTerminal">boot cheffe-call...</pre>
+            </section>
+          </section>
         </div>
 
-        <div class="bitmap-theater" aria-label="Teatro bitmap com agentes reunidos">
+        <div class="bitmap-theater" aria-label="Escritório bitmap com agentes reunidos">
+          <div class="theater-atmosphere" aria-hidden="true">
+            <span class="atmo-beam beam-left"></span>
+            <span class="atmo-beam beam-center"></span>
+            <span class="atmo-beam beam-right"></span>
+            <span class="atmo-orb orb-left"></span>
+            <span class="atmo-orb orb-right"></span>
+            <span class="atmo-grid"></span>
+          </div>
+          <div class="theater-overhead-city" aria-hidden="true">
+            <span class="overhead-rail rail-left"></span>
+            <span class="overhead-rail rail-center"></span>
+            <span class="overhead-rail rail-right"></span>
+            <span class="overhead-cable cable-left"></span>
+            <span class="overhead-cable cable-right"></span>
+            <span class="overhead-node node-a"></span>
+            <span class="overhead-node node-b"></span>
+            <span class="overhead-node node-c"></span>
+            <span class="overhead-panel panel-left"></span>
+            <span class="overhead-panel panel-center"></span>
+            <span class="overhead-panel panel-right"></span>
+            <span class="overhead-drone drone-left"></span>
+            <span class="overhead-drone drone-right"></span>
+            <span class="overhead-scanline"></span>
+          </div>
+          <div class="theater-hologram-band" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           <div class="theater-curtain"></div>
           <div class="theater-lights">
             <span></span>
@@ -35,7 +121,15 @@
             <span></span>
             <span></span>
           </div>
-          <div class="theater-seats" id="agentAudience" aria-hidden="true"></div>
+          <div class="meeting-table" aria-hidden="true">
+            <span>CHEFFE CALL</span>
+          </div>
+          <div class="active-speech-bubble" id="activeSpeechBubble" aria-live="polite">
+            <span>Aguardando fala</span>
+            <strong>Chame a reunião</strong>
+            <p>O agente ativo vai falar aqui, um por vez.</p>
+          </div>
+          <div class="theater-seats" id="agentAudience" aria-label="Agentes sentados na reunião"></div>
           <div class="stage-platform">
             <div class="stage-person stage-cheffe" title="Você no centro do palco">
               <span class="person-head"></span>
@@ -44,50 +138,141 @@
             <div class="stage-glow"></div>
           </div>
         </div>
-      </section>
 
-      <section class="daily-board" aria-label="Contexto diário dos agentes">
-        <article>
-          <span>Agente do dia</span>
-          <strong id="agentOfDay">Atualizando...</strong>
-          <p id="agentOfDayMeta">Pontuação e intenção aparecem aqui.</p>
-        </article>
-        <article>
-          <span>Escritório do dia</span>
-          <strong id="officeOfDay">Atualizando...</strong>
-          <p id="officeOfDayMeta">Autonomia média e foco diário.</p>
-        </article>
-        <article>
-          <span>Ação do dia</span>
-          <strong id="actionOfDay">Atualizando...</strong>
-          <p id="actionOfDayMeta">Nada executa sem aprovação.</p>
-        </article>
-      </section>
+        <div class="data-center-floor" aria-hidden="true">
+          <span class="data-trace trace-left"></span>
+          <span class="data-trace trace-center"></span>
+          <span class="data-trace trace-right"></span>
+          <span class="data-core"></span>
+          <span class="data-hub hub-left"></span>
+          <span class="data-hub hub-right"></span>
+          <span class="data-rack rack-left-a"></span>
+          <span class="data-rack rack-left-b"></span>
+          <span class="data-rack rack-center-a"></span>
+          <span class="data-rack rack-center-b"></span>
+          <span class="data-rack rack-right-a"></span>
+          <span class="data-rack rack-right-b"></span>
+          <span class="data-terminal terminal-left"></span>
+          <span class="data-terminal terminal-right"></span>
+          <span class="data-bus"></span>
+          <span class="dc-worker worker-left"></span>
+          <span class="dc-worker worker-center"></span>
+          <span class="dc-worker worker-right"></span>
+          <span class="dc-crate crate-left"></span>
+          <span class="dc-crate crate-right"></span>
+          <span class="dc-spark spark-a"></span>
+          <span class="dc-spark spark-b"></span>
+          <span class="dc-bubble bubble-left">porra</span>
+          <span class="dc-bubble bubble-center">ssd?</span>
+          <span class="dc-bubble bubble-right">reinicia</span>
+        </div>
 
-      <section class="call-workspace">
-        <form class="call-console" id="cheffeCallForm">
-          <label>
-            Senha Full Admin
-            <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
-          </label>
-          <label>
-            Orientação para todos
-            <textarea
-              name="instruction"
-              rows="7"
-              placeholder="Ex: parem a rotina, entendam este contexto, deem opinião própria por perspectiva e proponham melhorias sem executar nada antes da minha aprovação."
-            ></textarea>
-          </label>
-          <div class="call-actions">
-            <button type="submit">Abrir Cheffe Call</button>
-            <button type="button" id="releaseCall">Liberar runtimes</button>
-          </div>
-          <p id="callStatus" role="status">Sala em preparo.</p>
-        </form>
-
-        <section class="call-terminal" aria-label="Terminal da reunião">
-          <pre id="callTerminal">boot cheffe-call...</pre>
+        <section class="daily-board" aria-label="Contexto diário dos agentes">
+          <article class="agent-spotlight-card">
+            <div class="agent-spotlight-photo" id="agentOfDayAvatar" aria-hidden="true">
+              <span class="spotlight-rays"></span>
+              <span class="spotlight-agent-head"></span>
+              <span class="spotlight-agent-body"></span>
+              <span class="spotlight-agent-arm arm-left"></span>
+              <span class="spotlight-agent-arm arm-right"></span>
+              <span class="spotlight-agent-confetti c1"></span>
+              <span class="spotlight-agent-confetti c2"></span>
+              <span class="spotlight-agent-confetti c3"></span>
+            </div>
+            <div class="agent-spotlight-copy">
+              <span>Agente do dia</span>
+              <strong id="agentOfDay">Atualizando...</strong>
+              <p id="agentOfDayMeta">Pontuação e intenção aparecem aqui.</p>
+              <div class="agent-neural-progress" aria-label="Crescimento neural do agente do dia">
+                <i id="agentNeuralBar"></i>
+              </div>
+              <p class="agent-award-note" id="agentAwardNote">
+                Objetivo neural em leitura. Quando um agente atinge uma meta, a sala inteira vê o avanço.
+              </p>
+              <div class="agent-spotlight-actions">
+                <button type="button" id="voteAgentOfDay">Votar no avatar</button>
+                <button type="button" id="openAgentFile">Abrir ficha completa</button>
+              </div>
+            </div>
+          </article>
+          <article>
+            <span>Escritório do dia</span>
+            <strong id="officeOfDay">Atualizando...</strong>
+            <p id="officeOfDayMeta">Autonomia média e foco diário.</p>
+          </article>
+          <article>
+            <span>Ação do dia</span>
+            <strong id="actionOfDay">Atualizando...</strong>
+            <p id="actionOfDayMeta">Nada executa sem aprovação.</p>
+          </article>
+          <article class="call-mini-terminal">
+            <span>Terminal da sala</span>
+            <strong>Fluxo neural</strong>
+            <p>Mensagem, resposta, voto e ficha ficam no mesmo ambiente para parecer operação viva.</p>
+          </article>
         </section>
+      </section>
+
+      <section class="call-secondary-grid" aria-label="Painéis da operação">
+        <article class="task-queue-panel" aria-labelledby="taskQueueTitle">
+          <div class="section-head">
+            <p class="call-kicker">Fila ativa</p>
+            <h2 id="taskQueueTitle">Tarefas e prompts</h2>
+          </div>
+          <div id="taskQueueList" class="task-queue-list"></div>
+        </article>
+        <article class="meeting-log-panel" aria-labelledby="meetingLogTitle">
+          <div class="section-head">
+            <p class="call-kicker">Logs da reunião</p>
+            <h2 id="meetingLogTitle">Registro das falas</h2>
+          </div>
+          <div id="meetingLogList" class="meeting-log-list"></div>
+        </article>
+      </section>
+
+      <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
+        <div class="section-head">
+          <p class="call-kicker">181 agentes</p>
+          <h2 id="promptCommandTitle">Console de prompts da Cheffe Call</h2>
+        </div>
+        <div class="prompt-command-layout">
+          <article class="prompt-command-panel">
+            <label class="prompt-field">
+              <span>Modo de consulta</span>
+              <select id="promptModeSelect">
+                <option value="global">Prompt supremo</option>
+                <option value="office">Por escritório</option>
+                <option value="agent">Por agente</option>
+              </select>
+            </label>
+            <label class="prompt-field">
+              <span>Escritório</span>
+              <select id="promptOfficeSelect">
+                <option value="">Selecione um escritório</option>
+              </select>
+            </label>
+            <label class="prompt-field">
+              <span>Agente</span>
+              <select id="promptAgentSelect">
+                <option value="">Selecione um agente</option>
+              </select>
+            </label>
+            <div class="prompt-quick-actions">
+              <button type="button" id="loadPromptToInstruction">Jogar no assunto</button>
+              <button type="button" id="loadPromptToTerminal">Jogar no terminal</button>
+              <button type="button" id="copyPromptText">Copiar prompt</button>
+            </div>
+            <p class="prompt-console-meta" id="promptConsoleMeta">Carregando diretivas da equipe...</p>
+          </article>
+
+          <article class="prompt-preview-panel">
+            <div class="prompt-preview-head">
+              <strong id="promptPreviewTitle">Prompt supremo</strong>
+              <span id="promptPreviewBadge">Cheffe Call</span>
+            </div>
+            <pre id="promptPreviewText" class="prompt-preview-text">Preparando a reunião dos 181 agentes...</pre>
+          </article>
+        </div>
       </section>
 
       <section class="call-opinions" aria-labelledby="opinionsTitle">
@@ -99,6 +284,6 @@
       </section>
     </main>
 
-    <script defer src="cheffe-call.js?v=20260421a"></script>
+    <script defer src="cheffe-call.js?v=20260422queue-topfill"></script>
   </body>
 </html>

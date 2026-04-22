@@ -39,7 +39,7 @@
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./escritorio.css?v=20260418arcade" />
+    <link rel="stylesheet" href="./escritorio.css?v=20260422theater" />
   </head>
   <body class="office-page">
     <div class="office-shell">
@@ -53,7 +53,7 @@
         </a>
 
         <nav class="office-nav" aria-label="Navegação do escritório">
-          <a href="./sprites-check-change.html">CHECKPUBPAID</a>
+          <a href="./pubpaid-v2.html">PubPaid 2</a>
           <a href="#planta">Escritório</a>
           <a href="#terminal">Terminal 24h</a>
           <a href="#inventario">Inventário</a>
@@ -100,11 +100,11 @@
           <div class="office-section-head">
             <div>
               <p class="office-eyebrow">planta animada</p>
-              <h2 id="office-world-title">Um escritório vivo, com áreas de criação, revisão, tecnologia e atendimento.</h2>
+              <h2 id="office-world-title">Um escritório vivo para reunir agentes, pedir opinião e transformar assunto em ação.</h2>
             </div>
             <p>
-              Os agentes circulam pelas próprias estações, descansam no lounge, passam pelo café
-              e mostram como a equipe se organiza ao longo do dia.
+              Chame a reunião, diga o assunto, leia as opiniões e use o terminal para passar pedidos
+              específicos ou trechos de código para a equipe.
             </p>
           </div>
 
@@ -118,7 +118,7 @@
 
             <div class="office-vscode-body">
               <aside class="office-side-rail" aria-label="Atalhos do escritório">
-                <button type="button" data-office-action="gather" title="Reunir equipe">+</button>
+                <button type="button" data-office-action="gather" title="Abrir reunião">+</button>
                 <button type="button" data-office-action="reset" title="Voltar ao mapa">⌂</button>
                 <button type="button" data-office-action="cafe" title="Dar um café para o time">☕</button>
                 <button type="button" data-office-action="terminal" title="Abrir modo terminal">▣</button>
@@ -213,6 +213,17 @@
                   </div>
                   <div class="office-map-ambient office-floor-runner" aria-hidden="true"></div>
                   <div class="office-map-ambient office-code-cable" aria-hidden="true"></div>
+                  <div class="office-map-ambient office-lazer-zone" aria-hidden="true">
+                    <span class="lazer-wall-panel"></span>
+                    <span class="lazer-screen"></span>
+                    <span class="lazer-console"></span>
+                    <span class="lazer-shelf"></span>
+                    <span class="lazer-puff lazer-puff-a"></span>
+                    <span class="lazer-puff lazer-puff-b"></span>
+                    <span class="lazer-puff lazer-puff-c"></span>
+                    <span class="lazer-rug"></span>
+                    <span class="lazer-plant"></span>
+                  </div>
 
                   <article class="office-room room-ceo">
                     <span>CEO</span>
@@ -236,7 +247,7 @@
                   </article>
                   <article class="office-room room-cafe">
                     <span>Pausa</span>
-                    <strong>Café • Lounge</strong>
+                    <strong>Lazer • Games • Lounge</strong>
                   </article>
                   <article class="office-room room-dev">
                     <span>Sistema</span>
@@ -295,6 +306,37 @@
 
                   <div class="office-agent-layer" data-agent-layer></div>
                   <div class="office-dialogue-layer" data-dialogue-layer aria-hidden="true"></div>
+                  <section class="office-theater-panel" data-office-theater aria-label="Teatro interativo dos agentes">
+                    <div class="office-theater-stage" aria-hidden="true">
+                      <span class="office-theater-table"></span>
+                      <span class="office-theater-chair chair-a"></span>
+                      <span class="office-theater-chair chair-b"></span>
+                      <span class="office-theater-chair chair-c"></span>
+                      <span class="office-theater-chair chair-d"></span>
+                      <span class="office-theater-chair chair-e"></span>
+                      <span class="office-theater-chair chair-f"></span>
+                    </div>
+                    <div class="office-theater-copy">
+                      <span>reunião interativa</span>
+                      <strong data-theater-title>Teatro dos Agentes</strong>
+                      <p data-theater-summary>Reúna todos, diga o assunto e veja quem levanta a mão para responder.</p>
+                    </div>
+                    <form class="office-theater-form" data-theater-form>
+                      <label for="theaterSubject">Assunto da reunião</label>
+                      <textarea
+                        id="theaterSubject"
+                        data-theater-subject
+                        rows="3"
+                        placeholder="Ex.: revisar a abertura do PubPaid, corrigir um layout mobile, analisar este código..."
+                      ></textarea>
+                      <div class="office-theater-actions">
+                        <button class="office-button primary" type="submit">Ouvir opiniões</button>
+                        <button class="office-button" type="button" data-theater-terminal>Mandar ao terminal</button>
+                      </div>
+                    </form>
+                    <div class="office-theater-opinions" data-theater-opinions aria-live="polite"></div>
+                    <div class="office-theater-awards" data-theater-awards aria-label="Premiações dos agentes"></div>
+                  </section>
                 </div>
               </div>
 
@@ -313,6 +355,16 @@
 status: equipe online
 fluxo: codigo, conteudo, revisao e deploy em andamento
 acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
+                <form class="office-terminal-command" data-terminal-command-form>
+                  <label for="terminalCommandInput">Pedido específico ou código</label>
+                  <textarea
+                    id="terminalCommandInput"
+                    data-terminal-command-input
+                    rows="5"
+                    placeholder="Cole aqui um pedido, trecho de código ou instrução para o agente ativo..."
+                  ></textarea>
+                  <button class="office-button primary" type="submit">Enviar comando</button>
+                </form>
                 <div class="office-live-panel" aria-live="polite">
                   <span>rodando 24h</span>
                   <strong data-office-feed>Codigo, conteudo, revisao e atendimento funcionando sem parar no escritorio.</strong>
@@ -499,7 +551,7 @@ acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
       </article>
     </div>
 
-    <script src="./escritorio.js?v=20260417n" defer></script>
+    <script src="./escritorio.js?v=20260422theater" defer></script>
     <script src="./office-command-chat.js?v=20260419a" defer></script>
     <script src="./office-neural-subsystem.js?v=20260419a" defer></script>
   </body>
