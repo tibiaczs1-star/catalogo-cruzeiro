@@ -1699,6 +1699,10 @@ const getRadarSpotlightArticles = (filter = "todos") => {
       return false;
     }
 
+    if (!articleHasUsableImageCandidate(article)) {
+      return false;
+    }
+
     const articleKey = getRadarArticleKey(article);
     if (!articleKey || seenKeys.has(articleKey)) {
       return false;
@@ -2386,6 +2390,26 @@ const cleanArticleExcerpt = (value = "", fallback = "") => {
   return text || cleanArticleText(fallback || value || "");
 };
 
+const heroUnsafeImageOverrides = {
+  "aliado-de-mailza-pastor-reginaldo-e-nomeado-para-cargo-de-adjunto-na-secretaria-de-governo":
+    "https://ac24horas.com/wp-content/uploads/2025/12/PALACIO-SERGIO-VALE-e1720103436277-1200x812.webp"
+};
+
+function resolveSafeArticleImageUrl(article = {}, fallback = "") {
+  const sanitizedFallback = sanitizeImageUrl(fallback);
+  const slug = String(article?.slug || "").trim().toLowerCase();
+  const overrideUrl = heroUnsafeImageOverrides[slug] || "";
+  const candidateUrl = String(
+    article?.imageUrl || article?.feedImageUrl || article?.sourceImageUrl || fallback || ""
+  ).trim();
+
+  if (overrideUrl && /img_6556-1024x723\.jpeg/i.test(candidateUrl)) {
+    return sanitizeImageUrl(overrideUrl);
+  }
+
+  return sanitizedFallback;
+}
+
 const normalizeRuntimeArticle = (article = {}) => {
   const title = cleanArticleText(article.title || "Atualizacao");
   const categoryKey = normalizeNewsCategoryKey(article.category, {
@@ -2407,7 +2431,8 @@ const normalizeRuntimeArticle = (article = {}) => {
   const originalImageUrl = String(article.feedImageUrl || article.imageUrl || "");
   const originalSourceImageUrl = String(article.sourceImageUrl || "");
   const originalFeedImageUrl = String(article.feedImageUrl || article.imageUrl || "");
-  const imageUrl = sanitizeImageUrl(
+  const imageUrl = resolveSafeArticleImageUrl(
+    article,
     originalImageUrl ||
       originalFeedImageUrl ||
       extractInlineArticleImage(article) ||
@@ -2636,11 +2661,14 @@ const pickRadarLeadArticles = (articles = []) => {
   const sameDayArticles = sortRadarArticles(
     articles.filter((article) => getArticleDateKey(article) === referenceDateKey)
   );
+  const sameDayArticlesWithImage = sameDayArticles.filter((article) =>
+    articleHasUsableImageCandidate(article, "hero")
+  );
   const leadArticles = [];
   const selectedKeys = new Set();
   const selectedImages = new Set();
 
-  sameDayArticles.some((article) => {
+  sameDayArticlesWithImage.some((article) => {
     if (leadArticles.length >= 3) return true;
     pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
     return false;
@@ -2650,14 +2678,17 @@ const pickRadarLeadArticles = (articles = []) => {
     const fallbackArticles = sortRadarArticles(
       articles.filter((article) => !selectedKeys.has(getRadarArticleKey(article)))
     );
+    const fallbackArticlesWithImage = fallbackArticles.filter((article) =>
+      articleHasUsableImageCandidate(article, "hero")
+    );
 
-    fallbackArticles.some((article) => {
+    fallbackArticlesWithImage.some((article) => {
       pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
       return leadArticles.length >= 3;
     });
 
     if (leadArticles.length < 3) {
-      sameDayArticles.some((article) => {
+      sameDayArticlesWithImage.some((article) => {
         if (leadArticles.length >= 3) return true;
         pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages, true);
         return false;
@@ -2665,7 +2696,7 @@ const pickRadarLeadArticles = (articles = []) => {
     }
 
     if (leadArticles.length < 3) {
-      fallbackArticles.some((article) => {
+      fallbackArticlesWithImage.some((article) => {
         if (leadArticles.length >= 3) return true;
         pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages, true);
         return false;
@@ -5046,6 +5077,8 @@ const applyCadernoStoryArticle = (storyNode, article, { preserveHref = false } =
   }
 
   if (thumbNode) {
+    const hasUsableImage = articleHasUsableImageCandidate(article);
+    storyNode.classList.toggle("story-without-photo", !hasUsableImage);
     thumbNode.dataset.topic = getThumbTopic(thumbNode, article);
     applyThumbImage(thumbNode, article);
   }
@@ -5101,7 +5134,13 @@ const hydrateCadernoCards = async (items = []) => {
     stories.forEach((storyNode) => {
       const thumbNode = storyNode.querySelector(".mini-thumb");
       if (thumbNode) {
-        thumbNode.classList.add("has-photo");
+        const hasInlinePhoto =
+          thumbNode.classList.contains("has-photo") &&
+          /url\(/i.test(
+            `${thumbNode.style.getPropertyValue("--bg-image")} ${thumbNode.style.backgroundImage || ""}`
+          );
+        storyNode.classList.toggle("story-without-photo", !hasInlinePhoto);
+        thumbNode.classList.toggle("has-photo", hasInlinePhoto);
       }
     });
   });

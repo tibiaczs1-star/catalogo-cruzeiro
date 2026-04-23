@@ -4204,6 +4204,25 @@ function normalizeNewsItem(item) {
   };
 }
 
+const ARTICLE_UNSAFE_IMAGE_OVERRIDES = {
+  "aliado-de-mailza-pastor-reginaldo-e-nomeado-para-cargo-de-adjunto-na-secretaria-de-governo":
+    "https://ac24horas.com/wp-content/uploads/2025/12/PALACIO-SERGIO-VALE-e1720103436277-1200x812.webp"
+};
+
+function resolveSafeArticleRecordImage(item, fallback = "") {
+  const slug = String(item?.slug || slugify(item?.title || "") || "").trim().toLowerCase();
+  const overrideUrl = ARTICLE_UNSAFE_IMAGE_OVERRIDES[slug] || "";
+  const candidateUrl = String(
+    item?.feedImageUrl || item?.imageUrl || item?.sourceImageUrl || item?.image || fallback || ""
+  ).trim();
+
+  if (overrideUrl && /img_6556-1024x723\.jpeg/i.test(candidateUrl)) {
+    return overrideUrl;
+  }
+
+  return fallback;
+}
+
 function normalizeArticleRecord(item) {
   const title = String(item.title || "Atualizacao");
   const categoryKey = normalizeNewsCategoryKey(item.category, {
@@ -4237,9 +4256,15 @@ function normalizeArticleRecord(item) {
     body: Array.isArray(item.body) ? item.body.filter(Boolean) : [],
     highlights: Array.isArray(item.highlights) ? item.highlights.filter(Boolean) : [],
     development: Array.isArray(item.development) ? item.development.filter(Boolean) : [],
-    imageUrl: item.feedImageUrl || item.imageUrl || item.sourceImageUrl || item.image || "",
+    imageUrl: resolveSafeArticleRecordImage(
+      item,
+      item.feedImageUrl || item.imageUrl || item.sourceImageUrl || item.image || ""
+    ),
     sourceImageUrl: item.sourceImageUrl || "",
-    feedImageUrl: item.feedImageUrl || item.imageUrl || item.sourceImageUrl || "",
+    feedImageUrl: resolveSafeArticleRecordImage(
+      item,
+      item.feedImageUrl || item.imageUrl || item.sourceImageUrl || ""
+    ),
     imageCredit: item.imageCredit || "",
     imageFocus: item.imageFocus || "",
     imageFit: item.imageFit || "",
