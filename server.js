@@ -91,6 +91,12 @@ const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_IN
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
   : 30 * 60 * 1000;
+const TOPIC_FEED_AUTO_REFRESH_INTERVAL_INPUT = Number(
+  process.env.TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS || 20 * 60 * 1000
+);
+const TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS = Number.isFinite(TOPIC_FEED_AUTO_REFRESH_INTERVAL_INPUT)
+  ? Math.max(5 * 60 * 1000, TOPIC_FEED_AUTO_REFRESH_INTERVAL_INPUT)
+  : 20 * 60 * 1000;
 const realAgentsAutoRunState = {
   running: false,
   timer: null,
@@ -105,6 +111,14 @@ const articleIntegrityAutoState = {
   lastRunAt: "",
   lastError: "",
   cycles: 0
+};
+const topicFeedAutoState = {
+  running: false,
+  timer: null,
+  lastRunAt: "",
+  lastError: "",
+  cycles: 0,
+  lastTopics: []
 };
 const SITE_NAME = "Catalogo Cruzeiro do Sul";
 const SITE_REGION_NAME = "Cruzeiro do Sul e Vale do Jurua";
@@ -641,6 +655,12 @@ const TOPIC_FEED_TTL_MS = Math.max(
   Number(process.env.TOPIC_FEED_TTL_MS || 1000 * 60 * 15)
 );
 const TOPIC_FEED_FALLBACK_FILE = path.join(ROOT_DIR, "data", "topic-feed-fallback.json");
+const COVERAGE_LAYER_PRIORITY = {
+  jurua: 0,
+  acre: 1,
+  brasil: 2,
+  global: 3
+};
 const TOPIC_FEED_CONFIG = {
   study: [
     {
@@ -851,16 +871,318 @@ const TOPIC_FEED_CONFIG = {
       defaultCategory: "Politica",
       topicGroup: "nacional"
     }
+  ],
+  jurua: [
+    {
+      id: "jurua-comunicacao",
+      name: "Jurua Comunicacao",
+      feedUrl: "https://juruacomunicacao.com.br/feed/",
+      siteUrl: "https://juruacomunicacao.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "jurua-24h",
+      name: "Jurua 24 Horas",
+      feedUrl: "https://jurua24horas.com/feed/",
+      siteUrl: "https://jurua24horas.com/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "jurua-em-tempo",
+      name: "Jurua em Tempo",
+      feedUrl: "https://www.juruaemtempo.com.br/feed/",
+      siteUrl: "https://www.juruaemtempo.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "jurua-online",
+      name: "Jurua Online",
+      feedUrl: "https://juruaonline.com.br/feed/",
+      siteUrl: "https://juruaonline.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "tribuna-do-jurua",
+      name: "Tribuna do Jurua",
+      feedUrl: "https://tribunadojurua.com.br/feed/",
+      siteUrl: "https://tribunadojurua.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "portal-do-jurua",
+      name: "Portal do Jurua",
+      feedUrl: "https://www.portaldojurua.com.br/feeds/posts/default",
+      siteUrl: "https://www.portaldojurua.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "voz-do-norte",
+      name: "Voz do Norte",
+      feedUrl: "https://www.vozdonorte.com.br/feed/",
+      siteUrl: "https://www.vozdonorte.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    },
+    {
+      id: "batelao",
+      name: "Portal Batelao",
+      feedUrl: "https://batelao.com/feed/",
+      siteUrl: "https://batelao.com/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "jurua"
+    }
+  ],
+  acre: [
+    {
+      id: "ac24horas",
+      name: "ac24horas",
+      feedUrl: "https://ac24horas.com/feed/",
+      siteUrl: "https://ac24horas.com/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "acre"
+    },
+    {
+      id: "ac24agro",
+      name: "ac24agro",
+      feedUrl: "https://ac24agro.com/feed/",
+      siteUrl: "https://ac24agro.com/",
+      defaultCategory: "Agro",
+      topicGroup: "acre"
+    },
+    {
+      id: "agencia-acre",
+      name: "Agencia de Noticias do Acre",
+      feedUrl: "https://agencia.ac.gov.br/feed/",
+      siteUrl: "https://agencia.ac.gov.br/",
+      defaultCategory: "Governo",
+      topicGroup: "acre"
+    },
+    {
+      id: "acre-online",
+      name: "AcreOnline",
+      feedUrl: "https://acreonline.net/feed/",
+      siteUrl: "https://acreonline.net/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "acre"
+    },
+    {
+      id: "acre-noticias",
+      name: "Acre Noticias",
+      feedUrl: "https://www.acre.com.br/feed/",
+      siteUrl: "https://www.acre.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "acre"
+    },
+    {
+      id: "acre-news",
+      name: "AcreNews",
+      feedUrl: "https://acrenews.com.br/feed/",
+      siteUrl: "https://acrenews.com.br/",
+      defaultCategory: "Cotidiano",
+      topicGroup: "acre"
+    }
+  ],
+  brasil: [
+    {
+      id: "g1-brasil",
+      name: "G1 Brasil",
+      feedUrl: "https://g1.globo.com/rss/g1/brasil/",
+      siteUrl: "https://g1.globo.com/brasil/",
+      defaultCategory: "Brasil",
+      topicGroup: "brasil"
+    },
+    {
+      id: "g1-politica",
+      name: "G1 Politica",
+      feedUrl: "https://g1.globo.com/rss/g1/politica/",
+      siteUrl: "https://g1.globo.com/politica/",
+      defaultCategory: "Politica",
+      topicGroup: "brasil"
+    },
+    {
+      id: "cnn-brasil",
+      name: "CNN Brasil",
+      feedUrl: "https://www.cnnbrasil.com.br/feed/",
+      siteUrl: "https://www.cnnbrasil.com.br/",
+      defaultCategory: "Brasil",
+      topicGroup: "brasil"
+    },
+    {
+      id: "cnn-brasil-politica",
+      name: "CNN Brasil Politica",
+      feedUrl: "https://www.cnnbrasil.com.br/politica/feed/",
+      siteUrl: "https://www.cnnbrasil.com.br/politica/",
+      defaultCategory: "Politica",
+      topicGroup: "brasil"
+    },
+    {
+      id: "agencia-brasil-geral",
+      name: "Agencia Brasil",
+      feedUrl: "https://agenciabrasil.ebc.com.br/rss/geral/feed.xml",
+      siteUrl: "https://agenciabrasil.ebc.com.br/geral",
+      defaultCategory: "Brasil",
+      topicGroup: "brasil"
+    },
+    {
+      id: "agencia-brasil-politica",
+      name: "Agencia Brasil Politica",
+      feedUrl: "https://agenciabrasil.ebc.com.br/rss/politica/feed.xml",
+      siteUrl: "https://agenciabrasil.ebc.com.br/politica",
+      defaultCategory: "Politica",
+      topicGroup: "brasil"
+    }
+  ],
+  films: [
+    {
+      id: "g1-pop-arte-filmes",
+      name: "G1 Pop & Arte",
+      feedUrl: "https://g1.globo.com/rss/g1/pop-arte/",
+      siteUrl: "https://g1.globo.com/pop-arte/",
+      defaultCategory: "Filmes",
+      topicGroup: "cinema",
+      coverageLayer: "brasil"
+    },
+    {
+      id: "variety-film",
+      name: "Variety Film",
+      feedUrl: "https://variety.com/v/film/feed/",
+      siteUrl: "https://variety.com/v/film/",
+      defaultCategory: "Filmes",
+      topicGroup: "cinema",
+      coverageLayer: "global"
+    },
+    {
+      id: "deadline-film",
+      name: "Deadline Film",
+      feedUrl: "https://deadline.com/category/film/feed/",
+      siteUrl: "https://deadline.com/category/film/",
+      defaultCategory: "Filmes",
+      topicGroup: "cinema",
+      coverageLayer: "global"
+    }
+  ],
+  theater: [
+    {
+      id: "playbill-news",
+      name: "Playbill",
+      feedUrl: "https://playbill.com/rss/news",
+      siteUrl: "https://playbill.com/",
+      defaultCategory: "Teatro",
+      topicGroup: "teatro",
+      coverageLayer: "global"
+    },
+    {
+      id: "broadwayworld",
+      name: "BroadwayWorld",
+      feedUrl: "https://www.broadwayworld.com/rss/news_main.cfm",
+      siteUrl: "https://www.broadwayworld.com/",
+      defaultCategory: "Teatro",
+      topicGroup: "teatro",
+      coverageLayer: "global"
+    }
+  ],
+  tech: [
+    {
+      id: "the-verge-tech",
+      name: "The Verge",
+      feedUrl: "https://www.theverge.com/rss/index.xml",
+      siteUrl: "https://www.theverge.com/tech",
+      defaultCategory: "Tecnologia",
+      topicGroup: "tech",
+      coverageLayer: "global"
+    },
+    {
+      id: "techcrunch",
+      name: "TechCrunch",
+      feedUrl: "https://techcrunch.com/feed/",
+      siteUrl: "https://techcrunch.com/",
+      defaultCategory: "Tecnologia",
+      topicGroup: "tech",
+      coverageLayer: "global"
+    },
+    {
+      id: "cnn-brasil-tecnologia",
+      name: "CNN Brasil Tecnologia",
+      feedUrl: "https://www.cnnbrasil.com.br/tecnologia/feed/",
+      siteUrl: "https://www.cnnbrasil.com.br/tecnologia/",
+      defaultCategory: "Tecnologia",
+      topicGroup: "tech",
+      coverageLayer: "brasil"
+    }
+  ],
+  economy: [
+    {
+      id: "g1-economia",
+      name: "G1 Economia",
+      feedUrl: "https://g1.globo.com/rss/g1/economia/",
+      siteUrl: "https://g1.globo.com/economia/",
+      defaultCategory: "Economia",
+      topicGroup: "economia",
+      coverageLayer: "brasil"
+    },
+    {
+      id: "cnn-brasil-economia",
+      name: "CNN Brasil Economia",
+      feedUrl: "https://www.cnnbrasil.com.br/economia/feed/",
+      siteUrl: "https://www.cnnbrasil.com.br/economia/",
+      defaultCategory: "Economia",
+      topicGroup: "economia",
+      coverageLayer: "brasil"
+    },
+    {
+      id: "agencia-brasil-economia",
+      name: "Agencia Brasil Economia",
+      feedUrl: "https://agenciabrasil.ebc.com.br/rss/economia/feed.xml",
+      siteUrl: "https://agenciabrasil.ebc.com.br/economia",
+      defaultCategory: "Economia",
+      topicGroup: "economia",
+      coverageLayer: "brasil"
+    }
+  ],
+  world: [
+    {
+      id: "g1-mundo",
+      name: "G1 Mundo",
+      feedUrl: "https://g1.globo.com/rss/g1/mundo/",
+      siteUrl: "https://g1.globo.com/mundo/",
+      defaultCategory: "Mundo",
+      topicGroup: "mundo",
+      coverageLayer: "brasil"
+    },
+    {
+      id: "bbc-world",
+      name: "BBC World",
+      feedUrl: "https://feeds.bbci.co.uk/news/world/rss.xml",
+      siteUrl: "https://www.bbc.com/news/world",
+      defaultCategory: "Mundo",
+      topicGroup: "mundo",
+      coverageLayer: "global"
+    }
   ]
 };
 const IMAGE_PREVIEW_ALLOWLIST = [
   "ac24horas.com",
+  "ac24agro.com",
+  "acreonline.net",
+  "acre.com.br",
+  "acrenews.com.br",
   "g1.globo.com",
   "cnnbrasil.com.br",
+  "agenciabrasil.ebc.com.br",
   "jurua24horas.com",
   "juruacomunicacao.com.br",
+  "juruaemtempo.com.br",
   "juruaonline.com.br",
   "tribunadojurua.com.br",
+  "portaldojurua.com.br",
+  "vozdonorte.com.br",
+  "batelao.com",
   "agencia.ac.gov.br",
   "cruzeirodosul.net",
   "cruzeirodosul.ac.gov.br",
@@ -894,6 +1216,79 @@ const IMAGE_PREVIEW_ALLOWLIST = [
   "mundobita.com.br",
   "turmadamonica.uol.com.br"
 ];
+
+function normalizeHostCandidate(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+
+  try {
+    const normalizedUrl = /^https?:\/\//i.test(raw) ? raw : `https://${raw.replace(/^\/+/, "")}`;
+    return new URL(normalizedUrl).hostname.toLowerCase().replace(/^www\./, "");
+  } catch (_error) {
+    return raw.toLowerCase().replace(/^https?:\/\//i, "").replace(/^www\./, "").split("/")[0];
+  }
+}
+
+function collectConfiguredPreviewHosts() {
+  const hosts = new Set();
+
+  IMAGE_PREVIEW_ALLOWLIST.forEach((entry) => {
+    const normalized = normalizeHostCandidate(entry);
+    if (normalized) {
+      hosts.add(normalized);
+    }
+  });
+
+  Object.values(TOPIC_FEED_CONFIG).forEach((group) => {
+    if (!Array.isArray(group)) {
+      return;
+    }
+
+    group.forEach((source) => {
+      [source?.siteUrl, source?.feedUrl, source?.sourceUrl, source?.url].forEach((value) => {
+        const normalized = normalizeHostCandidate(value);
+        if (normalized) {
+          hosts.add(normalized);
+        }
+      });
+    });
+  });
+
+  [NINJAS_OPPORTUNITIES].forEach((collection) => {
+    if (!Array.isArray(collection)) {
+      return;
+    }
+
+    collection.forEach((item) => {
+      [item?.sourceUrl, item?.url, item?.website].forEach((value) => {
+        const normalized = normalizeHostCandidate(value);
+        if (normalized) {
+          hosts.add(normalized);
+        }
+      });
+    });
+  });
+
+  return hosts;
+}
+
+function collectPreviewHostsFromNewsRecords(records = []) {
+  const hosts = new Set();
+  const items = Array.isArray(records) ? records : [];
+
+  items.forEach((item) => {
+    [item?.sourceUrl, item?.url, item?.link, item?.source].forEach((value) => {
+      const normalized = normalizeHostCandidate(value);
+      if (normalized) {
+        hosts.add(normalized);
+      }
+    });
+  });
+
+  return hosts;
+}
+
+let IMAGE_PREVIEW_DYNAMIC_ALLOWLIST = new Set();
 const DYNAMIC_ASSET_BASENAMES = new Set([
   "news-data.js",
   "social-rss-data.js",
@@ -1007,6 +1402,7 @@ const NINJAS_OPPORTUNITIES = [
       "https://www.cruzeirodosul.ac.gov.br/post/prefeitura-de-cruzeiro-do-sul-lan%C3%A7a-editais-da-lei-aldir-blanc-2026-de-r-r-634-mil-e-fortalece-ince"
   }
 ];
+IMAGE_PREVIEW_DYNAMIC_ALLOWLIST = collectConfiguredPreviewHosts();
 const IMAGE_PREVIEW_CACHE = new Map();
 const IMAGE_PREVIEW_TTL_MS = 1000 * 60 * 60 * 12;
 const REMOTE_REQUEST_HEADERS = {
@@ -3715,6 +4111,18 @@ function normalizeTopicFeedItem(item = {}, topic = "", sourceMeta = {}) {
   return {
     ...normalizedRecord,
     topic: normalizedTopic,
+    coverageLayer:
+      normalizeText(
+        item.coverageLayer ||
+          sourceMeta.coverageLayer ||
+          (normalizedTopic === "jurua"
+            ? "jurua"
+            : normalizedTopic === "acre"
+              ? "acre"
+              : normalizedTopic === "brasil" || normalizedTopic === "politics" || normalizedTopic === "economy"
+                ? "brasil"
+                : "global")
+      ) || "global",
     topicGroup:
       normalizeText(item.topicGroup || sourceMeta.topicGroup || normalizedRecord.categoryKey || "") || "",
     summary: cleanShortText(item.summary || item.lede || item.description || normalizedRecord.summary, 260),
@@ -3753,6 +4161,20 @@ function pickBalancedTopicFeedItems(items = [], limit = 12) {
       buckets.set(groupKey, []);
     }
     buckets.get(groupKey).push(item);
+  });
+
+  buckets.forEach((bucket, key) => {
+    buckets.set(
+      key,
+      bucket.sort((left, right) => {
+        const leftPriority = COVERAGE_LAYER_PRIORITY[String(left.coverageLayer || "global")] ?? 99;
+        const rightPriority = COVERAGE_LAYER_PRIORITY[String(right.coverageLayer || "global")] ?? 99;
+        if (leftPriority !== rightPriority) {
+          return leftPriority - rightPriority;
+        }
+        return sortArticleItems(left, right);
+      })
+    );
   });
 
   const selected = [];
@@ -3937,8 +4359,8 @@ async function getTopicFeed(topic, limit = 12) {
 
 function isAllowedPreviewHost(hostname) {
   if (!hostname) return false;
-  const cleanHost = hostname.toLowerCase();
-  return IMAGE_PREVIEW_ALLOWLIST.some(
+  const cleanHost = String(hostname || "").toLowerCase().replace(/^www\./, "");
+  return [...IMAGE_PREVIEW_DYNAMIC_ALLOWLIST].some(
     (allowed) => cleanHost === allowed || cleanHost.endsWith(`.${allowed}`)
   );
 }
@@ -4023,6 +4445,10 @@ function withPromiseTimeout(promise, timeoutMs = 9000, reason = "timeout") {
 }
 
 async function enrichNewsItemsWithSourceImages(items = []) {
+  collectPreviewHostsFromNewsRecords(items).forEach((host) => {
+    IMAGE_PREVIEW_DYNAMIC_ALLOWLIST.add(host);
+  });
+
   return mapWithConcurrency(items, 4, async (item) => {
     if (!item || !item.sourceUrl) {
       return item;
@@ -4476,6 +4902,65 @@ function normalizeElectionVoterOfficeEntry(entry) {
     weekKey: "",
     at: ""
   };
+}
+
+function getAutoRefreshTopicList() {
+  return Object.keys(TOPIC_FEED_CONFIG)
+    .map((topic) => normalizeText(topic))
+    .filter(Boolean);
+}
+
+async function runTopicFeedsAutoCycle(trigger = "manual") {
+  if (topicFeedAutoState.running) {
+    return {
+      ok: false,
+      trigger,
+      updatedAt: topicFeedAutoState.lastRunAt,
+      error: "topic-feeds-auto-runner-busy"
+    };
+  }
+
+  topicFeedAutoState.running = true;
+  const topics = getAutoRefreshTopicList();
+  const reports = [];
+
+  try {
+    for (const topic of topics) {
+      const payload = await refreshTopicFeed(topic, { limitPerSource: 8, totalLimit: 12 });
+      reports.push({
+        topic,
+        count: Array.isArray(payload?.items) ? payload.items.length : 0,
+        fallbackUsed: Boolean(payload?.fallbackUsed)
+      });
+    }
+
+    topicFeedAutoState.lastRunAt = new Date().toISOString();
+    topicFeedAutoState.lastError = "";
+    topicFeedAutoState.cycles += 1;
+    topicFeedAutoState.lastTopics = topics;
+    console.log(`[catalogo] topic feeds atualizados (${trigger}) -> ${topics.join(", ")}`);
+
+    return {
+      ok: true,
+      trigger,
+      updatedAt: topicFeedAutoState.lastRunAt,
+      topics,
+      reports
+    };
+  } catch (error) {
+    topicFeedAutoState.lastError = String(error?.message || error || "falha na atualizacao de topic feeds");
+    console.warn(`[catalogo] falha no ciclo de topic feeds (${trigger}): ${topicFeedAutoState.lastError}`);
+    return {
+      ok: false,
+      trigger,
+      updatedAt: new Date().toISOString(),
+      topics,
+      reports,
+      error: topicFeedAutoState.lastError
+    };
+  } finally {
+    topicFeedAutoState.running = false;
+  }
 }
 
 function getElectionCurrentUserVotes(voterRecord = {}, weekKey = getCurrentWeekBucketKey()) {
@@ -6359,6 +6844,18 @@ function startArticleIntegrityAutoRunner() {
   setTimeout(() => {
     runArticleIntegrityAudit("auto-inicializacao");
   }, Math.min(20 * 1000, ARTICLE_INTEGRITY_INTERVAL_MS));
+}
+
+function startTopicFeedAutoRunner() {
+  if (topicFeedAutoState.timer) return;
+
+  topicFeedAutoState.timer = setInterval(() => {
+    runTopicFeedsAutoCycle("auto-20-minutos").catch(() => {});
+  }, TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS);
+
+  setTimeout(() => {
+    runTopicFeedsAutoCycle("auto-inicializacao").catch(() => {});
+  }, Math.min(25 * 1000, TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS));
 }
 
 const PUBPAID_SPRITE_SCOUT_SOURCES = [
@@ -10491,6 +10988,7 @@ server.listen(PORT, HOST, () => {
   console.log(`[catalogo] online em http://${HOST}:${PORT}`);
   startRealAgentsAutoRunner();
   startArticleIntegrityAutoRunner();
+  startTopicFeedAutoRunner();
 });
 function buildPubpaidAdminPayload() {
   const store = readCanonicalPubpaidStore();
