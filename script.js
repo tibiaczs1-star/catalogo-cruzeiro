@@ -2183,17 +2183,19 @@ const monthIndex = {
   dezembro: 11
 };
 
-const normalizeText = (value) =>
-  String(value || "")
+function normalizeText(value) {
+  return String(value || "")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim();
+}
 
-const slugifyText = (value) =>
-  normalizeText(value)
+function slugifyText(value) {
+  return normalizeText(value)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
 
 const getLocalDateKey = (date = new Date()) => {
   const parts = new Intl.DateTimeFormat("en-US", {
