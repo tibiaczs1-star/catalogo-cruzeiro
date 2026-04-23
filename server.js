@@ -1467,6 +1467,29 @@ function writeJson(filePath, value) {
   fs.renameSync(tempFilePath, filePath);
 }
 
+function normalizeJsonArrayPayload(payload) {
+  if (Array.isArray(payload)) {
+    return payload;
+  }
+
+  if (payload && typeof payload === "object" && Array.isArray(payload.items)) {
+    return payload.items;
+  }
+
+  return [];
+}
+
+function readMergedNewsCollection(fileName) {
+  const liveItems = normalizeJsonArrayPayload(readJson(path.join(DATA_DIR, fileName), []));
+
+  if (path.resolve(DATA_DIR) === path.resolve(DEFAULT_DATA_DIR)) {
+    return liveItems;
+  }
+
+  const defaultItems = normalizeJsonArrayPayload(readJson(path.join(DEFAULT_DATA_DIR, fileName), []));
+  return liveItems.concat(defaultItems);
+}
+
 function mutateJsonFile(filePath, fallback, mutator) {
   const previousTask = JSON_FILE_MUTATION_QUEUES.get(filePath) || Promise.resolve();
   const nextTask = previousTask
@@ -4736,14 +4759,14 @@ function normalizeArticleRecord(item) {
 }
 
 function getRawNewsItems() {
-  const runtime = readJson(path.join(DATA_DIR, "runtime-news.json"), []);
-  const archive = readJson(path.join(DATA_DIR, "news-archive.json"), []);
+  const runtime = readMergedNewsCollection("runtime-news.json");
+  const archive = readMergedNewsCollection("news-archive.json");
   const staticNews = getStaticNewsItems();
   const homeLinkedFallbacks = parseHomeLinkedArticleFallbacks();
 
   return []
-    .concat(Array.isArray(runtime) ? runtime : runtime.items || [])
-    .concat(Array.isArray(archive) ? archive : archive.items || [])
+    .concat(runtime)
+    .concat(archive)
     .concat(homeLinkedFallbacks)
     .concat(staticNews);
 }
@@ -5352,12 +5375,12 @@ function recordElectionVote(payload = {}, req = null) {
 }
 
 function getNews(limit = 30) {
-  const runtime = readJson(path.join(DATA_DIR, "runtime-news.json"), []);
-  const archive = readJson(path.join(DATA_DIR, "news-archive.json"), []);
+  const runtime = readMergedNewsCollection("runtime-news.json");
+  const archive = readMergedNewsCollection("news-archive.json");
   const staticNews = getStaticNewsItems();
   const items = []
-    .concat(Array.isArray(runtime) ? runtime : runtime.items || [])
-    .concat(Array.isArray(archive) ? archive : archive.items || [])
+    .concat(runtime)
+    .concat(archive)
     .concat(staticNews)
     .map(normalizeNewsItem);
 
