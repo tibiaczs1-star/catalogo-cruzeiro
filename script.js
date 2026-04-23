@@ -5210,60 +5210,366 @@ const pickDailyItems = (items = [], count = 1, salt = 0) => {
   return picked;
 };
 
-const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => `
-  <article class="trending-card influencer-buzz-card daily-buzz-card opinion-buzz-card reveal ${
-    index > 2 ? "delay-2" : index ? "delay-1" : ""
-  }">
-    <span class="trend-badge hot">opinião do dia ${index + 1}</span>
-    <div
-      class="trend-photo influencer-hero-photo"
-      style="--trend-image:url('${escapeHtml(item.image)}')"
-    >
-      <div class="influencer-profile">
-        <span class="influencer-avatar" style="--avatar-image:url('${escapeHtml(item.avatar || item.image)}')"></span>
-        <div>
-          <strong>${escapeHtml(item.name)}</strong>
-          <small>${escapeHtml(item.handle)}</small>
+const getBuzzSignalScore = (item = {}) =>
+  Math.round(
+    Number(item.engagement || 0) * 0.35 +
+      Number(item.velocity || 0) * 0.25 +
+      Number(item.trust || 0) * 0.25 +
+      Number(item.utility || 0) * 0.15
+  );
+
+const getBuzzNetworkContexts = () => {
+  const fallbackFeed = [
+    {
+      network: "Instagram",
+      summary: "Repercussao visual, story e postagem curta.",
+      signals: ["imagem forte", "comentarios", "compartilhamento"],
+      engagement: 92,
+      velocity: 88,
+      trust: 76,
+      utility: 70
+    },
+    {
+      network: "TikTok",
+      summary: "Video curto e aceleracao de assunto nas primeiras horas.",
+      signals: ["video curto", "repeticao", "viral"],
+      engagement: 94,
+      velocity: 95,
+      trust: 62,
+      utility: 60
+    },
+    {
+      network: "YouTube",
+      summary: "Contexto maior, opiniao longa e video de bastidor.",
+      signals: ["contexto", "opiniao", "retencao"],
+      engagement: 81,
+      velocity: 68,
+      trust: 84,
+      utility: 82
+    },
+    {
+      network: "Facebook",
+      summary: "Grupo local, bairro e servico publico em conversa.",
+      signals: ["grupos", "bairro", "servico"],
+      engagement: 76,
+      velocity: 66,
+      trust: 74,
+      utility: 90
+    },
+    {
+      network: "WhatsApp",
+      summary: "Boato, alerta e pedido de confirmacao da comunidade.",
+      signals: ["encaminhado", "alerta", "checagem"],
+      engagement: 72,
+      velocity: 82,
+      trust: 52,
+      utility: 78
+    },
+    {
+      network: "X/Twitter",
+      summary: "Termometro de debate e comentario rapido.",
+      signals: ["tempo real", "debate", "ruido alto"],
+      engagement: 68,
+      velocity: 88,
+      trust: 55,
+      utility: 62
+    }
+  ];
+
+  return (Array.isArray(window.SOCIAL_RSS_DATA) ? window.SOCIAL_RSS_DATA : fallbackFeed)
+    .map((item) => ({
+      ...item,
+      relevance: getBuzzSignalScore(item)
+    }))
+    .sort((left, right) => right.relevance - left.relevance);
+};
+
+const getBuzzFallbackItems = () => [
+  ...trendingInfluencerBuzzPool.map((item) => ({
+    title: item.title,
+    summary: item.summary,
+    imageUrl: item.image,
+    sourceImageUrl: item.avatar || item.image,
+    sourceName: item.name || "Radar social",
+    sourceUrl: "./index.html#trending",
+    publishedAt: new Date().toISOString(),
+    category: "Buzz",
+    topicGroup: "creators",
+    networkHint: item.handle || item.kicker || ""
+  })),
+  ...trendingControversyBuzzPool.map((item) => ({
+    title: item.title,
+    summary: item.summary,
+    imageUrl: item.image,
+    sourceImageUrl: item.image,
+    sourceName: item.badge || "Radar social",
+    sourceUrl: "./index.html#trending",
+    publishedAt: new Date().toISOString(),
+    category: item.badge || "Buzz",
+    topicGroup: "novidades",
+    networkHint: item.tone || ""
+  }))
+];
+
+const getBuzzControversyScore = (article = {}) => {
+  const haystack = normalizeText(
+    [
+      article.title,
+      article.summary,
+      article.lede,
+      article.category,
+      article.topicGroup,
+      article.sourceName,
+      article.networkHint
+    ].join(" ")
+  );
+
+  let score = 24;
+
+  if (/\b(layoff|demiss|corta|corte|reevaluat|reavali|controvers|polem|divide|debate|critica|meme|boato|rumor|viral)\b/.test(haystack)) {
+    score += 28;
+  }
+
+  if (/\b(xbox|meta|youtube|shorts|journalism|video-first|independent|future|memo|controle|parental)\b/.test(haystack)) {
+    score += 18;
+  }
+
+  if (/\b(coment|publico|reacoes|opiniao|timeline|rede|social)\b/.test(haystack)) {
+    score += 12;
+  }
+
+  if (/\b(cotidiano|creators|novidades)\b/.test(haystack)) {
+    score += 6;
+  }
+
+  return score;
+};
+
+const resolveBuzzNetworkContext = (article = {}, index = 0) => {
+  const contexts = getBuzzNetworkContexts();
+  const haystack = normalizeText(
+    [
+      article.sourceUrl,
+      article.sourceName,
+      article.title,
+      article.summary,
+      article.lede,
+      article.topicGroup,
+      article.networkHint
+    ].join(" ")
+  );
+
+  const directMatch =
+    contexts.find((item) => {
+      const network = normalizeText(item.network);
+      return (
+        (network.includes("instagram") && /\b(instagram|reel|reels|story)\b/.test(haystack)) ||
+        (network.includes("tiktok") && /\b(tiktok|video curto)\b/.test(haystack)) ||
+        (network.includes("youtube") && /\b(youtube|video-first|creator|journalism)\b/.test(haystack)) ||
+        (network.includes("facebook") && /\b(facebook|grupo|bairro)\b/.test(haystack)) ||
+        (network.includes("whatsapp") && /\b(whatsapp|encaminhad|boato|alerta)\b/.test(haystack)) ||
+        ((network.includes("twitter") || network === "x") && /\b(twitter|x.com|post)\b/.test(haystack))
+      );
+    }) || null;
+
+  if (directMatch) {
+    return directMatch;
+  }
+
+  if (/\b(creators|journalism|video|canal)\b/.test(haystack)) {
+    return contexts.find((item) => /youtube/i.test(item.network)) || contexts[0];
+  }
+
+  if (/\b(viral|trend|reel|imagem|produto|marca)\b/.test(haystack)) {
+    return contexts.find((item) => /instagram/i.test(item.network)) || contexts[0];
+  }
+
+  if (/\b(alerta|boato|comunidade|bairro|familia)\b/.test(haystack)) {
+    return contexts.find((item) => /facebook|whatsapp/i.test(item.network)) || contexts[0];
+  }
+
+  return contexts[index % Math.max(contexts.length, 1)] || {
+    network: "Rede social",
+    summary: "Repercussao em plataformas sociais.",
+    signals: ["debate", "comentarios", "compartilhamento"],
+    relevance: 70
+  };
+};
+
+const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) => {
+  const haystack = normalizeText(
+    [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
+  );
+  const seed = getDailyIndexSeed(`${article.title || "buzz"}:${index}`);
+  const baseMeter = 52 + (seed % 23);
+  const networkName = networkContext.network || "rede";
+  const primarySignal = Array.isArray(networkContext.signals) ? networkContext.signals[0] || "comentarios" : "comentarios";
+
+  if (/\b(layoff|demiss|corte|job|staff)\b/.test(haystack)) {
+    return {
+      meter: 74,
+      kicker: `polemica forte em ${networkName.toLowerCase()}`,
+      debateAxis: "emprego x estrategia",
+      publicMood: "predominou preocupacao publica",
+      reaction: `A leitura do publico puxou mais para critica e apreensao, com debate sobre impacto real por tras do anuncio que explodiu em ${networkName}.`,
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(reevaluat|reavali|future|memo|strategy|xbox)\b/.test(haystack)) {
+    return {
+      meter: 66,
+      kicker: `debate quente em ${networkName.toLowerCase()}`,
+      debateAxis: "expectativa x desconfianca",
+      publicMood: "o publico ficou dividido",
+      reaction: "A conversa do publico ficou entre curiosidade e desconfianca, com uma ala animada com mudanca e outra cobrando prova pratica antes do hype.",
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(journalism|video-first|independent|credibil|news)\b/.test(haystack)) {
+    return {
+      meter: 61,
+      kicker: `assunto em alta em ${networkName.toLowerCase()}`,
+      debateAxis: "credibilidade x formato",
+      publicMood: "predominou apoio com cobranca",
+      reaction: "A opiniao do publico inclinou para apoio ao formato, mas com cobranca por mais clareza, apuracao e consistencia na conversa social.",
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(parental|famil|healthy digital habits|shorts)\b/.test(haystack)) {
+    return {
+      meter: 58,
+      kicker: `tema sensivel em ${networkName.toLowerCase()}`,
+      debateAxis: "protecao x liberdade de uso",
+      publicMood: "predominou cautela",
+      reaction: "A reacao publica foi mais cautelosa, com apoio a protecao das familias, mas tambem cobranca para nao virar controle excessivo.",
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(sale|deal|promo|desconto|produto|speaker)\b/.test(haystack)) {
+    return {
+      meter: 55,
+      kicker: `caso quente em ${networkName.toLowerCase()}`,
+      debateAxis: "oportunidade x exagero",
+      publicMood: "predominou curiosidade",
+      reaction: "O publico reagiu mais no eixo da curiosidade e da disputa por oportunidade, com parte da conversa tratando o caso como hype acelerado em rede.",
+      signalLabel: primarySignal
+    };
+  }
+
+  return {
+    meter: baseMeter,
+    kicker: `tema em repercussao em ${networkName.toLowerCase()}`,
+    debateAxis: "hype x leitura critica",
+    publicMood: "debate publico em andamento",
+    reaction: `A opiniao do publico ficou espalhada entre apoio, critica e cautela, com ${networkName} funcionando como termometro principal da conversa.`,
+    signalLabel: primarySignal
+  };
+};
+
+const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
+  const article = normalizeRuntimeArticle(item);
+  const href = buildArticleHref(article);
+  const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+  const networkContext = resolveBuzzNetworkContext(article, index);
+  const pulse = buildBuzzAudiencePulse(article, networkContext, index);
+  const photoUrl = getArticleDisplayImageUrl(article) || article.imageUrl || "./assets/home-cache/buzz-cruzeiro-01.jpg";
+  const avatarUrl = article.sourceImageUrl || photoUrl;
+  const dateLabel =
+    formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+    article.date ||
+    "agora";
+  const sourceMeta = [article.sourceName || networkContext.network || "Fonte ativa", dateLabel]
+    .filter(Boolean)
+    .join(" • ");
+  const headline = truncateCopy(article.title || "Polemica em repercussao nas redes", 110);
+  const summary = truncateCopy(
+    article.summary || article.lede || "O assunto entrou na conversa publica e segue em monitoramento editorial.",
+    190
+  );
+  const networkLabel = `${networkContext.network || "Rede"} • polemica ${index + 1}`;
+  const signalLine = `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentarios"}`;
+  const debateLine = `debate: ${pulse.debateAxis}`;
+
+  return `
+    <article class="trending-card influencer-buzz-card daily-buzz-card opinion-buzz-card reveal ${
+      index > 2 ? "delay-2" : index ? "delay-1" : ""
+    }">
+      <span class="trend-badge hot">${escapeHtml(networkLabel)}</span>
+      <a
+        class="trend-photo influencer-hero-photo"
+        href="${escapeRuntimeAttribute(href)}"${externalAttrs}
+        aria-label="${escapeRuntimeAttribute(headline)}"
+        style="--trend-image:url('${escapeHtml(photoUrl)}')"
+      >
+        <div class="influencer-profile">
+          <span class="influencer-avatar" style="--avatar-image:url('${escapeHtml(avatarUrl)}')"></span>
+          <div>
+            <strong>${escapeHtml(networkContext.network || "Rede social")}</strong>
+            <small>${escapeHtml(sourceMeta)}</small>
+          </div>
         </div>
+      </a>
+
+      <div class="influencer-buzz-copy">
+        <p class="buzz-kicker">${escapeHtml(pulse.kicker)}</p>
+        <h3>
+          <a class="buzz-card-link" href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(headline)}</a>
+        </h3>
+        <p>${escapeHtml(summary)}</p>
       </div>
-    </div>
 
-    <div class="influencer-buzz-copy">
-      <p class="buzz-kicker">${escapeHtml(item.kicker)}</p>
-      <h3>${escapeHtml(item.title)}</h3>
-      <p>${escapeHtml(item.summary)}</p>
-    </div>
-
-    <div class="buzz-inline-meta" aria-label="Resumo dos lados do debate">
-      <span>${escapeHtml(item.contextLabel)}: ${escapeHtml(item.contextTitle)}</span>
-      <span>${escapeHtml(item.counterLabel)}: ${escapeHtml(item.counterTitle)}</span>
-    </div>
-
-    <div class="buzz-reaction-box" aria-label="Reações à opinião do dia">
-      <span>Reação do dia</span>
-      <div class="reaction-meter">
-        <i style="width: ${Math.max(8, Math.min(100, Number(item.meter || 50)))}%"></i>
+      <div class="buzz-inline-meta" aria-label="Sinais da rede e eixo do debate">
+        <span>${escapeHtml(signalLine)}</span>
+        <span>${escapeHtml(debateLine)}</span>
       </div>
-      <p>${escapeHtml(item.reaction)}</p>
-    </div>
 
-    <div class="engagement">
-      <span>${escapeHtml(item.likes)} curtidas</span>
-      <span>${escapeHtml(item.comments)} comentários</span>
-      <span>${escapeHtml(item.shares)} compartilhamentos</span>
-    </div>
-  </article>
-`;
+      <div class="buzz-reaction-box" aria-label="Opiniao do publico sobre o tema">
+        <span>opiniao do publico</span>
+        <div class="reaction-meter">
+          <i style="width: ${Math.max(12, Math.min(100, Number(pulse.meter || 50)))}%"></i>
+        </div>
+        <p>${escapeHtml(pulse.reaction)}</p>
+      </div>
+
+      <div class="engagement buzz-opinion-footer">
+        <span>${escapeHtml(pulse.publicMood)}</span>
+        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>abrir caso</a>
+      </div>
+    </article>
+  `;
+};
 
 const renderDailyTrendingBuzz = async (options = {}) => {
   if (!trendingBuzzGrid) {
     return;
   }
 
-  const influencers = pickDailyItems(trendingInfluencerBuzzPool, 6, 17);
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 12, options);
+  const liveCases = dedupeNewsItems(liveBuzzItems)
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((item) => item.title && (item.sourceUrl || item.slug))
+    .sort((left, right) => {
+      const scoreDiff = getBuzzControversyScore(right) - getBuzzControversyScore(left);
+      if (scoreDiff !== 0) {
+        return scoreDiff;
+      }
+
+      return getArticlePublishedTime(right) - getArticlePublishedTime(left);
+    })
+    .slice(0, 6);
+
+  const selectedCases =
+    liveCases.length >= 6
+      ? liveCases
+      : [...liveCases, ...pickDailyItems(getBuzzFallbackItems(), 6 - liveCases.length, 31)].slice(0, 6);
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
-  trendingBuzzGrid.innerHTML = influencers.map(buildDailyInfluencerBuzzCard).join("");
+  trendingBuzzGrid.innerHTML = selectedCases.map(buildDailyInfluencerBuzzCard).join("");
+  registerArticleCardLinks(trendingBuzzGrid);
 };
 
 const setFeedbackState = (node, message, tone = "") => {
