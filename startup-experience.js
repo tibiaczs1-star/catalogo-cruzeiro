@@ -270,6 +270,24 @@
           Usamos só o básico para o portal funcionar melhor e medir o carregamento desta visita.
         </p>
 
+        <div class="catalogo-mobile-founder-strip" aria-label="Fundadores em destaque na abertura">
+          <p class="catalogo-mobile-founder-kicker">Fundadores em cena</p>
+          <div class="catalogo-mobile-founder-logos">
+            <figure class="catalogo-mobile-founder-logo is-cafe">
+              <img src="${FOUNDERS_CAFE_IMAGE_SRC}" alt="Cafe Cruzeiro" loading="eager" decoding="async" />
+            </figure>
+            <figure class="catalogo-mobile-founder-logo">
+              <img src="${FOUNDERS_GRUPO_AS_LOGO_SRC}" alt="Grupo A.S" loading="eager" decoding="async" />
+            </figure>
+            <figure class="catalogo-mobile-founder-logo">
+              <img src="${FOUNDERS_GEANE_LOGO_SRC}" alt="Dra. Geane Campo" loading="eager" decoding="async" />
+            </figure>
+            <figure class="catalogo-mobile-founder-logo">
+              <img src="${FOUNDERS_RECOMMENCER_LOGO_SRC}" alt="Recommencer" loading="eager" decoding="async" />
+            </figure>
+          </div>
+        </div>
+
         <div class="catalogo-welcome-actions">
           <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button">
             Aceitar e continuar

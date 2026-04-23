@@ -1243,7 +1243,7 @@ body.founder-prelude-pending .logo-splash {
 .catalogo-welcome.is-phone {
   place-items: end center;
   padding: 0 10px 10px;
-  background: linear-gradient(180deg, rgba(7, 19, 34, 0), rgba(7, 19, 34, 0.16));
+  background: linear-gradient(180deg, rgba(8, 10, 14, 0), rgba(8, 10, 14, 0.22));
   backdrop-filter: none;
 }
 
@@ -1253,10 +1253,10 @@ body.founder-prelude-pending .logo-splash {
   min-height: auto;
   grid-template-columns: 1fr;
   border-radius: 18px 18px 0 0;
-  border-color: rgba(166, 218, 255, 0.34);
+  border-color: rgba(255, 226, 170, 0.18);
   background:
-    radial-gradient(circle at top, rgba(105, 182, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, rgba(14, 43, 84, 0.98), rgba(8, 24, 50, 0.99));
+    radial-gradient(circle at top, rgba(255, 209, 122, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(18, 16, 20, 0.98), rgba(9, 10, 14, 0.99));
   box-shadow:
     0 -12px 34px rgba(3, 9, 19, 0.34),
     inset 0 1px 0 rgba(255, 255, 255, 0.28);
@@ -1278,12 +1278,12 @@ body.founder-prelude-pending .logo-splash {
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.14em;
-  color: rgba(197, 230, 255, 0.96);
+  color: rgba(255, 221, 169, 0.92);
 }
 
 .catalogo-welcome.is-phone .catalogo-welcome-copy h2 {
   margin: 0;
-  color: #f4f8ff;
+  color: #fff5df;
   font-size: 1.24rem;
   line-height: 1.18;
 }
@@ -1293,7 +1293,63 @@ body.founder-prelude-pending .logo-splash {
   font-size: 0.96rem;
   font-weight: 500;
   line-height: 1.5;
-  color: rgba(236, 244, 255, 0.92);
+  color: rgba(255, 240, 214, 0.84);
+}
+
+.catalogo-mobile-founder-strip {
+  display: grid;
+  gap: 0.62rem;
+  margin-top: 0.2rem;
+  padding: 0.78rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 222, 163, 0.16);
+  background:
+    radial-gradient(circle at top, rgba(255, 208, 120, 0.12), transparent 42%),
+    linear-gradient(180deg, rgba(29, 24, 20, 0.94), rgba(15, 14, 16, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.catalogo-mobile-founder-kicker {
+  margin: 0;
+  color: rgba(255, 216, 144, 0.94);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.catalogo-mobile-founder-logos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.catalogo-mobile-founder-logo {
+  display: grid;
+  place-items: center;
+  min-height: 64px;
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 228, 181, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.catalogo-mobile-founder-logo.is-cafe {
+  background:
+    radial-gradient(circle at center, rgba(255, 211, 128, 0.12), transparent 60%),
+    rgba(255, 255, 255, 0.03);
+}
+
+.catalogo-mobile-founder-logo img {
+  display: block;
+  width: 100%;
+  max-width: 120px;
+  max-height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.2));
 }
 
 .catalogo-welcome.is-phone .catalogo-welcome-actions {
