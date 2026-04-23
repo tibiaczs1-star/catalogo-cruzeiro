@@ -2924,18 +2924,18 @@ const ensureMobileHomeLeadLayout = () => {
   const siteHeaderStack = document.querySelector(".site-header-stack");
   const masthead = document.querySelector(".masthead");
   const mainNav = document.querySelector(".main-nav");
+  const editorialStrip = document.querySelector(".header-services-strip");
   const mainLayout = document.querySelector(".main-layout");
   const heroShell = document.querySelector(".hero-newsroom-shell.hero-restored-shell");
   const officePlayStrip = document.querySelector(".office-play-strip");
 
-  if (!siteHeaderStack || !masthead || !mainNav || !mainLayout || !heroShell) {
+  if (!siteHeaderStack || !masthead || !mainLayout || !heroShell) {
     return;
   }
 
   const moveAfterHero = [
     document.querySelector(".top-strip"),
     document.querySelector(".device-version-notice"),
-    document.querySelector(".mobile-agent-hub"),
     document.querySelector(".top-construction-yard"),
     document.querySelector(".ticker-live-shell"),
     document.querySelector(".header-services-strip")
@@ -2946,20 +2946,39 @@ const ensureMobileHomeLeadLayout = () => {
       const dropdown = document.createElement("details");
       dropdown.className = "mobile-main-nav-dropdown";
       dropdown.setAttribute("aria-label", "Menu principal do portal");
-      dropdown.innerHTML = `<summary>Menu do portal</summary>`;
+      dropdown.innerHTML = `<summary>Editoriais</summary><div class="mobile-main-nav-links"></div>`;
       mobileHomeDomState.menuDropdown = dropdown;
     }
 
-    if (!mobileHomeDomState.initialized) {
-      mobileHomeDomState.placeHolders.set(
-        mainNav,
-        (() => {
-          const marker = document.createComment("mobile-main-nav-placeholder");
-          mainNav.parentNode?.insertBefore(marker, mainNav);
-          return marker;
-        })()
-      );
+    const mobileLinksWrap = mobileHomeDomState.menuDropdown.querySelector(".mobile-main-nav-links");
+    if (mobileLinksWrap) {
+      const mobileEditorialPriority = [
+        "#radar",
+        "#acre-destaque",
+        "#politica-global",
+        "#entretenimento",
+        "#social",
+        "#trending",
+        "#panorama",
+        "#arquivo"
+      ];
+      const stripLinks = editorialStrip
+        ? [...editorialStrip.querySelectorAll("a[href]")].map((anchor) => ({
+            href: anchor.getAttribute("href") || "",
+            label: anchor.textContent?.trim() || ""
+          }))
+        : [];
+      const editorialLinks = mobileEditorialPriority
+        .map((targetHref) => stripLinks.find((link) => link.href === targetHref))
+        .filter((link) => link?.href && link?.label)
+        .map(
+          (link) => `<a href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a>`
+        );
 
+      mobileLinksWrap.innerHTML = editorialLinks.join("");
+    }
+
+    if (!mobileHomeDomState.initialized) {
       moveAfterHero.forEach((node) => {
         const marker = document.createComment(`mobile-home-placeholder-${node.className || node.tagName}`);
         node.parentNode?.insertBefore(marker, node);
@@ -2968,10 +2987,6 @@ const ensureMobileHomeLeadLayout = () => {
 
       mobileHomeDomState.movedNodes = moveAfterHero;
       mobileHomeDomState.initialized = true;
-    }
-
-    if (!mobileHomeDomState.menuDropdown.contains(mainNav)) {
-      mobileHomeDomState.menuDropdown.appendChild(mainNav);
     }
 
     if (!masthead.contains(mobileHomeDomState.menuDropdown)) {
@@ -2987,11 +3002,7 @@ const ensureMobileHomeLeadLayout = () => {
     return;
   }
 
-  if (mobileHomeDomState.menuDropdown && mobileHomeDomState.menuDropdown.contains(mainNav)) {
-    const placeholder = mobileHomeDomState.placeHolders.get(mainNav);
-    if (placeholder?.parentNode) {
-      placeholder.parentNode.insertBefore(mainNav, placeholder.nextSibling);
-    }
+  if (mobileHomeDomState.menuDropdown && masthead.contains(mobileHomeDomState.menuDropdown)) {
     mobileHomeDomState.menuDropdown.remove();
   }
 
