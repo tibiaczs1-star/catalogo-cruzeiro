@@ -584,17 +584,7 @@ const resolveArticleImage = async (article, surface = "default") => {
       cacheKey,
       (async () => {
         const directImage = candidates.length ? await preloadFirstAvailableImage(candidates) : "";
-        if (directImage) {
-          return directImage;
-        }
-
-        const sourcePreviewImage = await resolveSourcePreviewImage(article);
-        if (!sourcePreviewImage || isIllustrativeImage({ ...article, imageUrl: sourcePreviewImage })) {
-          return "";
-        }
-
-        const sourceCandidates = buildImageLoadCandidates(sourcePreviewImage);
-        return preloadFirstAvailableImage(sourceCandidates);
+        return directImage || "";
       })()
     );
   }
@@ -1894,14 +1884,29 @@ const loadCommunityReports = async () => {
   if (!communityReportList) return;
 
   try {
-    const response = await fetch("/api/community/reports?limit=6", {
-      headers: { Accept: "application/json" }
-    });
-    const payload = await response.json();
-    renderCommunityReports(Array.isArray(payload.items) ? payload.items : []);
+    const payload = await requestApiJson("/api/community/reports?limit=6");
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    renderCommunityReports(items);
+    return items;
   } catch (_error) {
     renderCommunityReports([]);
+    return [];
   }
+};
+
+const revealCommunityReportsAfterSubmit = () => {
+  const section = document.querySelector("#participacao-comunitaria");
+  const board = document.querySelector(".community-signal-board");
+  const target = board || section || communityReportList;
+
+  if (!target) {
+    return;
+  }
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
 };
 
 const submitCommunityReport = async (event) => {
@@ -1909,6 +1914,7 @@ const submitCommunityReport = async (event) => {
   if (!communityAgentForm || !communityAgentFeedback) return;
 
   const formData = new FormData(communityAgentForm);
+  const submitButton = communityAgentForm.querySelector('button[type="submit"]');
   const message = String(formData.get("message") || "").trim();
   if (message.length < 12) {
     communityAgentFeedback.textContent = "Conte um pouco mais para a equipe entender o que precisa verificar.";
@@ -1916,6 +1922,10 @@ const submitCommunityReport = async (event) => {
   }
 
   communityAgentFeedback.textContent = "Agente recebendo o relato como não checado...";
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+  }
 
   const analyticsContext = getAnalyticsContext();
   const payload = {
@@ -1930,22 +1940,26 @@ const submitCommunityReport = async (event) => {
   };
 
   try {
-    const response = await fetch("/api/community/reports", {
+    const result = await requestApiJson("/api/community/reports", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(payload)
     });
-    const result = await response.json();
-    if (!response.ok || !result.ok) {
-      throw new Error(result.error || "Não foi possível registrar o relato.");
-    }
 
     communityAgentFeedback.textContent =
       "Relato registrado como não checado. Ele entrou na fila dos agentes para verificação.";
     communityAgentForm.reset();
-    await loadCommunityReports();
+    const refreshedItems = await loadCommunityReports();
+    if (!Array.isArray(refreshedItems) || !refreshedItems.length) {
+      renderCommunityReports(result?.item ? [result.item] : []);
+    }
+    revealCommunityReportsAfterSubmit();
   } catch (error) {
     communityAgentFeedback.textContent = error.message || "Falha ao registrar. Tente novamente.";
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "Enviar relato não checado";
+    }
   }
 };
 
@@ -2504,13 +2518,15 @@ const getArticleSortTimestamp = (article = {}) =>
 
 const getRadarArticleKey = (article = {}) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
+  const canonicalDateKey = getArticleDateKey(normalizedArticle);
+  const canonicalTitleKey = slugifyText(normalizedArticle.title || "");
+  const canonicalPairKey = [canonicalTitleKey, canonicalDateKey].filter(Boolean).join("::");
+
   return (
-    normalizedArticle.sourceUrl ||
+    canonicalPairKey ||
     normalizedArticle.slug ||
     normalizedArticle.id ||
-    normalizeText(
-      [normalizedArticle.title, normalizedArticle.date, normalizedArticle.sourceName].join(" ")
-    )
+    normalizeText([normalizedArticle.title, normalizedArticle.date].join(" "))
   );
 };
 
@@ -2577,7 +2593,7 @@ const sortRadarArticles = (articles = []) =>
   });
 
 const getArticleDisplayImageUrl = (article = {}, surface = "default") =>
-  collectArticleImageCandidates(article, surface)[0] || "";
+  getArticlePreferredImageUrl(article, surface);
 
 const getArticlePreferredImageUrl = (article = {}, surface = "default") => {
   const candidates = collectArticleImageCandidates(article, surface).filter(

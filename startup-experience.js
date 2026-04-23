@@ -13,6 +13,8 @@
   const WELCOME_DAILY_KEY = "catalogo_terms_welcome_seen_day_v1";
   const WELCOME_DAILY_COOKIE = "catalogo_terms_welcome_seen_day_v1";
   const FOUNDER_PRELUDE_SESSION_KEY = "catalogo_founder_prelude_seen_session_v1";
+  const FOUNDER_PRELUDE_DAILY_KEY = "catalogo_founder_prelude_seen_day_v1";
+  const FOUNDER_PRELUDE_DAILY_COOKIE = "catalogo_founder_prelude_seen_day_v1";
   const THANKS_SCREEN_MS = 5200;
   const THANKS_SCREEN_MS_COMPACT = 4600;
   const THANKS_SCREEN_MS_PHONE = 3800;
@@ -190,6 +192,32 @@
     }
   }
 
+  function rememberFounderPreludeToday() {
+    const todayKey = getTodayKey();
+
+    try {
+      localStorage.setItem(FOUNDER_PRELUDE_DAILY_KEY, todayKey);
+    } catch (_error) {
+      // ignore storage failures
+    }
+
+    setCookie(FOUNDER_PRELUDE_DAILY_COOKIE, todayKey, { days: COOKIE_MAX_AGE_DAYS });
+  }
+
+  function hasSeenFounderPreludeToday() {
+    const todayKey = getTodayKey();
+
+    try {
+      if (localStorage.getItem(FOUNDER_PRELUDE_DAILY_KEY) === todayKey) {
+        return true;
+      }
+    } catch (_error) {
+      // ignore storage failures
+    }
+
+    return getCookie(FOUNDER_PRELUDE_DAILY_COOKIE) === todayKey;
+  }
+
   function hasSeenFounderPreludeInThisSession() {
     try {
       return sessionStorage.getItem(FOUNDER_PRELUDE_SESSION_KEY) === "1";
@@ -255,10 +283,14 @@
   }
 
   function shouldUsePhoneWelcome() {
-    return (
-      window.matchMedia("(max-width: 760px)").matches ||
-      (window.matchMedia("(max-width: 720px)").matches && connectionPrefersLite())
-    );
+    const narrowViewport = window.matchMedia("(max-width: 760px)").matches;
+    const liteViewport = window.matchMedia("(max-width: 720px)").matches && connectionPrefersLite();
+    const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const noHover = window.matchMedia("(hover: none)").matches;
+    const mobileUserAgent =
+      /Android|iPhone|iPad|iPod|Windows Phone|Mobile/i.test(navigator.userAgent || "");
+
+    return (narrowViewport || liteViewport) && (coarsePointer || noHover || mobileUserAgent);
   }
 
   function hasStoredConsent() {
@@ -673,6 +705,7 @@
 
   function showFounderPreludeThen(callback) {
     rememberFounderPreludeInThisSession();
+    rememberFounderPreludeToday();
     const prelude = createFounderPrelude();
     document.body.appendChild(prelude);
     document.body.classList.add("catalogo-lock-scroll");
@@ -1097,21 +1130,23 @@
     resetConsentForNewBrowserSession();
     const phoneFlow = shouldUsePhoneWelcome();
 
-    const continueAfterFounderPrelude = () => {
+    const continueAfterFounderPrelude = (options = {}) => {
+      const shouldShowReturningLoader = options.afterFounderPrelude === true || !phoneFlow;
+
       if (shouldSkipWelcomeModal()) {
         removeLegacyConsentBanner();
         const oldModal = document.getElementById(MODAL_ID);
         if (oldModal) {
           oldModal.remove();
         }
-        if (phoneFlow) {
-          releaseFounderPreludeGate();
-          dispatchIntroFinished();
+        if (shouldShowReturningLoader) {
+          showReturningLoaderThen(() => {
+            dispatchIntroFinished();
+          });
           return;
         }
-        showReturningLoaderThen(() => {
-          dispatchIntroFinished();
-        });
+        releaseFounderPreludeGate();
+        dispatchIntroFinished();
         return;
       }
 
@@ -1125,54 +1160,63 @@
           removeLegacyConsentBanner();
           const oldModal = document.getElementById(MODAL_ID);
           if (oldModal) {
-          oldModal.remove();
-        }
+            oldModal.remove();
+          }
 
-        const modal = createWelcomeModal({
-          compact: shouldUseCompactWelcome(),
-          phone: shouldUsePhoneWelcome()
-        });
-        document.body.appendChild(modal);
-
-        const checkbox = modal.querySelector("#catalogoAcceptTerms");
-        const acceptButton = modal.querySelector("#catalogoAcceptButton");
-        const requiresCheckbox = Boolean(checkbox);
-
-        if (!acceptButton) {
-          releaseFounderPreludeGate();
-          closeWelcomeModalImmediately(modal);
-          return;
-        }
-
-        if (checkbox) {
-          checkbox.addEventListener("change", () => {
-            acceptButton.disabled = !checkbox.checked;
+          const modal = createWelcomeModal({
+            compact: shouldUseCompactWelcome(),
+            phone: shouldUsePhoneWelcome()
           });
-        }
+          document.body.appendChild(modal);
 
-        acceptButton.addEventListener("click", () => {
-          if (requiresCheckbox && !checkbox.checked) {
+          const checkbox = modal.querySelector("#catalogoAcceptTerms");
+          const acceptButton = modal.querySelector("#catalogoAcceptButton");
+          const requiresCheckbox = Boolean(checkbox);
+
+          if (!acceptButton) {
+            releaseFounderPreludeGate();
+            closeWelcomeModalImmediately(modal);
             return;
           }
 
-          clearStoredConsent();
-          persistConsentState("accepted");
-          rememberWelcomeAcceptedThisSession();
-          rememberWelcomeAcceptedThisBrowserSession();
-          rememberWelcomeAcceptedToday();
-          dispatchConsent(true);
-          closeWelcomeModal(modal);
-        });
+          if (checkbox) {
+            checkbox.addEventListener("change", () => {
+              acceptButton.disabled = !checkbox.checked;
+            });
+          }
 
-        window.setTimeout(() => {
-          releaseFounderPreludeGate();
-          openWelcomeModal(modal);
-        }, OPEN_DELAY_MS);
+          acceptButton.addEventListener("click", () => {
+            if (requiresCheckbox && !checkbox.checked) {
+              return;
+            }
+
+            clearStoredConsent();
+            persistConsentState("accepted");
+            rememberWelcomeAcceptedThisSession();
+            rememberWelcomeAcceptedThisBrowserSession();
+            rememberWelcomeAcceptedToday();
+            dispatchConsent(true);
+            closeWelcomeModal(modal);
+          });
+
+          const openModal = () => {
+            window.setTimeout(() => {
+              releaseFounderPreludeGate();
+              openWelcomeModal(modal);
+            }, OPEN_DELAY_MS);
+          };
+
+          if (shouldShowReturningLoader) {
+            showReturningLoaderThen(openModal);
+            return;
+          }
+
+          openModal();
         });
       });
     };
 
-    if (hasSeenFounderPreludeInThisSession()) {
+    if (hasSeenFounderPreludeToday() || hasSeenFounderPreludeInThisSession()) {
       releaseFounderPreludeGate();
       continueAfterFounderPrelude();
       return;
@@ -1184,6 +1228,6 @@
       return;
     }
 
-    showFounderPreludeThen(continueAfterFounderPrelude);
+    showFounderPreludeThen(() => continueAfterFounderPrelude({ afterFounderPrelude: true }));
   });
 })();

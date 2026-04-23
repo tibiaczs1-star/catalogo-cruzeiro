@@ -15020,16 +15020,14 @@ input[type="range"] {
 :is(.news-thumb, .feed-thumb, .live-feed-thumb, .archive-thumb).thumb-educacao,
 :is(.news-thumb, .feed-thumb, .live-feed-thumb, .archive-thumb).thumb-educacao-alt {
   background-image:
-    linear-gradient(180deg, rgba(16, 35, 60, 0.03), rgba(16, 35, 60, 0.34)),
-    url("./assets/home-cache/fallback-educacao.jpg");
+    linear-gradient(145deg, rgba(65, 79, 145, 0.92), rgba(23, 30, 57, 0.98));
   background-position: center;
   background-size: cover;
 }
 
 :is(.thumb-educacao, .thumb-educacao-alt)::before {
   background-image:
-    linear-gradient(180deg, rgba(16, 35, 60, 0.03), rgba(16, 35, 60, 0.34)),
-    url("./assets/home-cache/fallback-educacao.jpg") !important;
+    linear-gradient(145deg, rgba(65, 79, 145, 0.92), rgba(23, 30, 57, 0.98)) !important;
   background-position: center !important;
   background-size: cover !important;
 }
@@ -15038,32 +15036,28 @@ input[type="range"] {
 :is(.news-thumb, .feed-thumb, .live-feed-thumb, .archive-thumb).thumb-servico,
 :is(.news-thumb, .feed-thumb, .live-feed-thumb, .archive-thumb).thumb-cotidiano {
   background-image:
-    linear-gradient(180deg, rgba(16, 35, 60, 0.03), rgba(16, 35, 60, 0.34)),
-    url("./assets/home-cache/fallback-cotidiano.jpg");
+    linear-gradient(145deg, rgba(141, 100, 48, 0.92), rgba(59, 42, 27, 0.98));
   background-position: center;
   background-size: cover;
 }
 
 :is(.thumb-servico, .thumb-cotidiano)::before {
   background-image:
-    linear-gradient(180deg, rgba(16, 35, 60, 0.03), rgba(16, 35, 60, 0.34)),
-    url("./assets/home-cache/fallback-cotidiano.jpg") !important;
+    linear-gradient(145deg, rgba(141, 100, 48, 0.92), rgba(59, 42, 27, 0.98)) !important;
   background-position: center !important;
   background-size: cover !important;
 }
 
 :is(.news-thumb, .feed-thumb, .live-feed-thumb, .archive-thumb).thumb-cheia {
   background-image:
-    linear-gradient(180deg, rgba(16, 35, 60, 0.03), rgba(16, 35, 60, 0.34)),
-    url("./assets/home-cache/fallback-cheia.jpg");
+    linear-gradient(145deg, rgba(31, 95, 154, 0.92), rgba(14, 38, 71, 0.98));
   background-position: center;
   background-size: cover;
 }
 
 .thumb-cheia::before {
   background-image:
-    linear-gradient(180deg, rgba(16, 35, 60, 0.03), rgba(16, 35, 60, 0.34)),
-    url("./assets/home-cache/fallback-cheia.jpg") !important;
+    linear-gradient(145deg, rgba(31, 95, 154, 0.92), rgba(14, 38, 71, 0.98)) !important;
   background-position: center !important;
   background-size: cover !important;
 }
@@ -15887,7 +15881,7 @@ body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-acti
 }
 
 body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-actions .outline-button,
-body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-notes span {
+body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-notes a {
   border-color: rgba(210, 232, 255, 0.18) !important;
   background: rgba(255, 255, 255, 0.1) !important;
   color: rgba(232, 242, 255, 0.9) !important;
@@ -16817,7 +16811,7 @@ body {
     display: none;
   }
 
-  .editorial-home .hero-newsroom-notes span {
+  .editorial-home .hero-newsroom-notes a {
     flex: 0 0 auto;
     white-space: nowrap;
   }
@@ -17173,7 +17167,7 @@ body {
     display: none;
   }
 
-  .editorial-home .hero-newsroom-notes span:nth-child(n + 4) {
+  .editorial-home .hero-newsroom-notes a:nth-child(n + 4) {
     display: none;
   }
 
@@ -19586,7 +19580,7 @@ body.editorial-home [data-hero-tourism-title] {
   color: #fff8eb;
 }
 
-body.editorial-home .hero-newsroom-notes span {
+body.editorial-home .hero-newsroom-notes a {
   border-color: rgba(183, 218, 249, 0.14);
   background: rgba(8, 18, 36, 0.32);
   color: rgba(237, 244, 252, 0.76);
