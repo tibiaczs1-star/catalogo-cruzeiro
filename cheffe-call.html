@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
-    <link rel="stylesheet" href="cheffe-call.css?v=20260422bitmap-topfill" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260423admin-functional" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -13,6 +14,9 @@
       <a href="./escritorio.html">Escritório</a>
       <a href="./escritorio-arte.html">Arte</a>
       <a href="./escritorio-ninjas.html">Ninjas</a>
+      <button type="button" class="call-topbar-action" id="toggleFullscreenMode">Tela cheia</button>
+      <button type="button" class="call-topbar-action" id="toggleHudMode">HUD</button>
+      <button type="button" class="call-topbar-action" id="toggleLowerDecks">Decks</button>
     </header>
 
     <main class="call-shell">
@@ -47,6 +51,7 @@
           </div>
           <section class="call-workspace">
             <form class="call-console" id="cheffeCallForm">
+              <input class="call-hidden-username" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" />
               <label>
                 Senha Full Admin
                 <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
@@ -83,90 +88,161 @@
           </section>
         </div>
 
-        <div class="bitmap-theater" aria-label="Escritório bitmap com agentes reunidos">
-          <div class="theater-atmosphere" aria-hidden="true">
-            <span class="atmo-beam beam-left"></span>
-            <span class="atmo-beam beam-center"></span>
-            <span class="atmo-beam beam-right"></span>
-            <span class="atmo-orb orb-left"></span>
-            <span class="atmo-orb orb-right"></span>
-            <span class="atmo-grid"></span>
+        <div class="theater-stack">
+          <canvas class="call-game-canvas" id="cheffeCallGameCanvas" aria-hidden="true"></canvas>
+          <div class="call-scene-jpg-layer" aria-hidden="true">
+            <div class="scene-jpg scene-jpg-theater"></div>
+            <div class="scene-jpg scene-jpg-sublevel"></div>
           </div>
-          <div class="theater-overhead-city" aria-hidden="true">
-            <span class="overhead-rail rail-left"></span>
-            <span class="overhead-rail rail-center"></span>
-            <span class="overhead-rail rail-right"></span>
-            <span class="overhead-cable cable-left"></span>
-            <span class="overhead-cable cable-right"></span>
-            <span class="overhead-node node-a"></span>
-            <span class="overhead-node node-b"></span>
-            <span class="overhead-node node-c"></span>
-            <span class="overhead-panel panel-left"></span>
-            <span class="overhead-panel panel-center"></span>
-            <span class="overhead-panel panel-right"></span>
-            <span class="overhead-drone drone-left"></span>
-            <span class="overhead-drone drone-right"></span>
-            <span class="overhead-scanline"></span>
+          <div class="call-scene-ornaments" aria-hidden="true">
+            <span class="ornament ornament-rig-left"></span>
+            <span class="ornament ornament-rig-right"></span>
+            <span class="ornament ornament-cable-left"></span>
+            <span class="ornament ornament-cable-right"></span>
+            <span class="ornament ornament-neon-left"></span>
+            <span class="ornament ornament-neon-right"></span>
           </div>
-          <div class="theater-hologram-band" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="call-scene-lighting" aria-hidden="true">
+            <span class="scene-light beam-a"></span>
+            <span class="scene-light beam-b"></span>
+            <span class="scene-light beam-c"></span>
+            <span class="scene-light glow-stage"></span>
+            <span class="scene-light glow-sublevel"></span>
           </div>
-          <div class="theater-curtain"></div>
-          <div class="theater-lights">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="meeting-table" aria-hidden="true">
-            <span>CHEFFE CALL</span>
-          </div>
-          <div class="active-speech-bubble" id="activeSpeechBubble" aria-live="polite">
-            <span>Aguardando fala</span>
-            <strong>Chame a reunião</strong>
-            <p>O agente ativo vai falar aqui, um por vez.</p>
-          </div>
-          <div class="theater-seats" id="agentAudience" aria-label="Agentes sentados na reunião"></div>
-          <div class="stage-platform">
-            <div class="stage-person stage-cheffe" title="Você no centro do palco">
-              <span class="person-head"></span>
-              <span class="person-body"></span>
+          <div class="bitmap-theater" aria-label="Teatro da reunião com agentes reunidos">
+            <div class="theater-atmosphere" aria-hidden="true">
+              <span class="atmo-beam beam-left"></span>
+              <span class="atmo-beam beam-center"></span>
+              <span class="atmo-beam beam-right"></span>
+              <span class="atmo-orb orb-left"></span>
+              <span class="atmo-orb orb-right"></span>
+              <span class="atmo-grid"></span>
             </div>
-            <div class="stage-glow"></div>
+            <div class="theater-overhead-city" aria-hidden="true">
+              <span class="overhead-rail rail-left"></span>
+              <span class="overhead-rail rail-center"></span>
+              <span class="overhead-rail rail-right"></span>
+              <span class="overhead-cable cable-left"></span>
+              <span class="overhead-cable cable-right"></span>
+              <span class="overhead-node node-a"></span>
+              <span class="overhead-node node-b"></span>
+              <span class="overhead-node node-c"></span>
+              <span class="overhead-panel panel-left"></span>
+              <span class="overhead-panel panel-center"></span>
+              <span class="overhead-panel panel-right"></span>
+              <span class="overhead-drone drone-left"></span>
+              <span class="overhead-drone drone-right"></span>
+              <span class="overhead-scanline"></span>
+            </div>
+            <div class="theater-marquee" aria-hidden="true">
+              <span class="marquee-bulbs bulbs-top"></span>
+              <span class="marquee-bulbs bulbs-left"></span>
+              <span class="marquee-bulbs bulbs-right"></span>
+            </div>
+            <div class="theater-hologram-band" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="theater-curtain"></div>
+            <div class="theater-lights">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="theater-side-gallery" aria-hidden="true">
+              <span class="gallery-balcony balcony-top balcony-left"></span>
+              <span class="gallery-balcony balcony-mid balcony-left"></span>
+              <span class="gallery-balcony balcony-top balcony-right"></span>
+              <span class="gallery-balcony balcony-mid balcony-right"></span>
+              <span class="gallery-rail rail-top rail-left"></span>
+              <span class="gallery-rail rail-mid rail-left"></span>
+              <span class="gallery-rail rail-top rail-right"></span>
+              <span class="gallery-rail rail-mid rail-right"></span>
+              <span class="gallery-projector projector-left"></span>
+              <span class="gallery-projector projector-left projector-upper"></span>
+              <span class="gallery-projector projector-right"></span>
+              <span class="gallery-projector projector-right projector-upper"></span>
+              <span class="gallery-booth booth-left"></span>
+              <span class="gallery-booth booth-left booth-upper"></span>
+              <span class="gallery-booth booth-right"></span>
+              <span class="gallery-booth booth-right booth-upper"></span>
+              <span class="gallery-stair stair-left"></span>
+              <span class="gallery-stair stair-left stair-upper"></span>
+              <span class="gallery-stair stair-right"></span>
+              <span class="gallery-stair stair-right stair-upper"></span>
+            </div>
+            <div class="theater-premium-rig" aria-hidden="true">
+              <span class="premium-laser laser-a"></span>
+              <span class="premium-laser laser-b"></span>
+              <span class="premium-laser laser-c"></span>
+              <span class="premium-spot spot-a"></span>
+              <span class="premium-spot spot-b"></span>
+              <span class="premium-spot spot-c"></span>
+              <span class="premium-vinyl"></span>
+              <span class="premium-eq eq-a"></span>
+              <span class="premium-eq eq-b"></span>
+              <span class="premium-eq eq-c"></span>
+              <span class="premium-note note-a"></span>
+              <span class="premium-note note-b"></span>
+              <span class="premium-note note-c"></span>
+              <span class="premium-star star-a"></span>
+              <span class="premium-star star-b"></span>
+              <span class="premium-star star-c"></span>
+            </div>
+            <div class="stage-showline" aria-hidden="true">
+              <span class="showline showline-left"></span>
+              <span class="showline showline-center"></span>
+              <span class="showline showline-right"></span>
+            </div>
+            <div class="theater-speaker-wall" aria-hidden="true">
+              <span class="prop-speaker speaker-left"></span>
+              <span class="prop-speaker speaker-right"></span>
+              <span class="sub-speaker sub-left"></span>
+              <span class="sub-speaker sub-right"></span>
+            </div>
+            <div class="meeting-table" aria-hidden="true">
+              <span>CHEFFE CALL</span>
+            </div>
+            <div class="active-speech-bubble" id="activeSpeechBubble" aria-live="polite">
+              <span>Aguardando fala</span>
+              <strong>Chame a reunião</strong>
+              <p>O agente ativo vai falar aqui, um por vez.</p>
+            </div>
+            <div class="raised-hand-board" id="raisedHandBoard" aria-live="polite">
+              <span>Fila de fala</span>
+              <strong>Quem levantou a mão</strong>
+              <div class="raised-hand-list" id="raisedHandList"></div>
+            </div>
+            <div class="theater-seats" id="agentAudience" aria-label="Avatares participando da reunião"></div>
+            <div class="stage-platform">
+              <div class="stage-person stage-cheffe" title="Você no centro do palco">
+                <span class="person-head"></span>
+                <span class="person-body"></span>
+              </div>
+              <div class="stage-glow"></div>
+            </div>
+            <div class="theater-pets" aria-hidden="true">
+              <span class="pet pet-dog">
+                <i class="pet-shadow"></i>
+                <i class="pet-body"></i>
+                <i class="pet-head"></i>
+                <i class="pet-tail"></i>
+              </span>
+              <span class="pet pet-cat">
+                <i class="pet-shadow"></i>
+                <i class="pet-body"></i>
+                <i class="pet-head"></i>
+                <i class="pet-tail"></i>
+              </span>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="data-center-floor" aria-hidden="true">
-          <span class="data-trace trace-left"></span>
-          <span class="data-trace trace-center"></span>
-          <span class="data-trace trace-right"></span>
-          <span class="data-core"></span>
-          <span class="data-hub hub-left"></span>
-          <span class="data-hub hub-right"></span>
-          <span class="data-rack rack-left-a"></span>
-          <span class="data-rack rack-left-b"></span>
-          <span class="data-rack rack-center-a"></span>
-          <span class="data-rack rack-center-b"></span>
-          <span class="data-rack rack-right-a"></span>
-          <span class="data-rack rack-right-b"></span>
-          <span class="data-terminal terminal-left"></span>
-          <span class="data-terminal terminal-right"></span>
-          <span class="data-bus"></span>
-          <span class="dc-worker worker-left"></span>
-          <span class="dc-worker worker-center"></span>
-          <span class="dc-worker worker-right"></span>
-          <span class="dc-crate crate-left"></span>
-          <span class="dc-crate crate-right"></span>
-          <span class="dc-spark spark-a"></span>
-          <span class="dc-spark spark-b"></span>
-          <span class="dc-bubble bubble-left">porra</span>
-          <span class="dc-bubble bubble-center">ssd?</span>
-          <span class="dc-bubble bubble-right">reinicia</span>
-        </div>
-
+      <section class="call-info-deck" aria-label="Painel operacional abaixo da reunião">
         <section class="daily-board" aria-label="Contexto diário dos agentes">
           <article class="agent-spotlight-card">
             <div class="agent-spotlight-photo" id="agentOfDayAvatar" aria-hidden="true">
@@ -210,10 +286,38 @@
             <strong>Fluxo neural</strong>
             <p>Mensagem, resposta, voto e ficha ficam no mesmo ambiente para parecer operação viva.</p>
           </article>
-        </section>
+          <article class="achievement-board-card">
+            <span>Achievements vivos</span>
+            <strong id="achievementHeadline">Funcionários e escritórios em disputa real</strong>
+            <p id="achievementChaseLine">Pontuação, autonomia e evolução do runtime aparecem aqui.</p>
+            <div class="achievement-period-grid">
+              <section class="achievement-period-card" aria-label="Ranking da hora">
+                <span>Da hora</span>
+                <strong id="achievementHourLeader">Atualizando...</strong>
+                <p id="achievementHourMeta">Mais pontos na rodada atual.</p>
+              </section>
+              <section class="achievement-period-card" aria-label="Ranking do dia">
+                <span>Do dia</span>
+                <strong id="achievementDayLeader">Atualizando...</strong>
+                <p id="achievementDayMeta">Corrida diária de pontos e awards.</p>
+              </section>
+              <section class="achievement-period-card" aria-label="Ranking da semana">
+                <span>Da semana</span>
+                <strong id="achievementWeekLeader">Atualizando...</strong>
+                <p id="achievementWeekMeta">Acúmulo semanal e consistência.</p>
+              </section>
+              <section class="achievement-period-card" aria-label="Ranking do mês">
+                <span>Do mês</span>
+                <strong id="achievementMonthLeader">Atualizando...</strong>
+                <p id="achievementMonthMeta">Quem sustenta a liderança mais longa.</p>
+              </section>
+            </div>
+          </article>
+      </section>
       </section>
 
-      <section class="call-secondary-grid" aria-label="Painéis da operação">
+      <section class="call-lower-decks" aria-label="Painéis da operação">
+        <section class="call-secondary-grid" aria-label="Painéis da operação">
         <article class="task-queue-panel" aria-labelledby="taskQueueTitle">
           <div class="section-head">
             <p class="call-kicker">Fila ativa</p>
@@ -228,9 +332,39 @@
           </div>
           <div id="meetingLogList" class="meeting-log-list"></div>
         </article>
-      </section>
+        <article class="call-admin-panel" aria-labelledby="callAdminTitle">
+          <div class="section-head">
+            <p class="call-kicker">Admin</p>
+            <h2 id="callAdminTitle">Comando administrativo</h2>
+          </div>
+          <div class="call-admin-status-grid">
+            <div class="call-admin-status-card">
+              <span>Runtime</span>
+              <strong id="adminRuntimeState">Aguardando leitura</strong>
+              <p id="adminRuntimeMeta">Estado das automações e dos agentes reais.</p>
+            </div>
+            <div class="call-admin-status-card">
+              <span>Sessão</span>
+              <strong id="adminSessionState">Aguardando leitura</strong>
+              <p id="adminSessionMeta">Situação da reunião e do último assunto.</p>
+            </div>
+            <div class="call-admin-status-card">
+              <span>Última ação</span>
+              <strong id="adminLastActionState">Aguardando leitura</strong>
+              <p id="adminLastActionMeta">Logs, fila e decisões acumuladas.</p>
+            </div>
+          </div>
+          <div class="call-admin-actions">
+            <button type="button" id="adminRunAgentsNow">Rodar agentes agora</button>
+            <button type="button" id="adminReleaseRoom">Encerrar reunião</button>
+            <button type="button" id="adminClearSession">Limpar sessão</button>
+            <button type="button" id="adminExportSnapshot">Exportar snapshot</button>
+            <button type="button" id="adminOpenRealAgents">Abrir agentes reais</button>
+          </div>
+        </article>
+        </section>
 
-      <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
+        <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
         <div class="section-head">
           <p class="call-kicker">181 agentes</p>
           <h2 id="promptCommandTitle">Console de prompts da Cheffe Call</h2>
@@ -262,7 +396,7 @@
               <button type="button" id="loadPromptToTerminal">Jogar no terminal</button>
               <button type="button" id="copyPromptText">Copiar prompt</button>
             </div>
-            <p class="prompt-console-meta" id="promptConsoleMeta">Carregando diretivas da equipe...</p>
+            <p class="prompt-console-meta" id="promptConsoleMeta">Diretivas da equipe aparecem aqui quando a reunião sincroniza.</p>
           </article>
 
           <article class="prompt-preview-panel">
@@ -273,17 +407,39 @@
             <pre id="promptPreviewText" class="prompt-preview-text">Preparando a reunião dos 181 agentes...</pre>
           </article>
         </div>
-      </section>
+        </section>
 
-      <section class="call-opinions" aria-labelledby="opinionsTitle">
+        <section class="call-opinions" aria-labelledby="opinionsTitle">
         <div class="section-head">
           <p class="call-kicker">Perspectivas</p>
           <h2 id="opinionsTitle">Opiniões dos agentes</h2>
         </div>
         <div id="opinionsList" class="opinions-list"></div>
       </section>
+      </section>
+
+      <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de comando rápida">
+        <label class="call-command-field">
+          <span>Comando rápido</span>
+          <input
+            id="quickInstructionInput"
+            name="quickInstruction"
+            type="text"
+            placeholder="Digite uma ordem para a sala e pressione Enter"
+            autocomplete="off"
+          />
+        </label>
+        <div class="call-command-actions">
+          <button type="submit">Enviar</button>
+          <button type="button" id="quickRefreshAgents">Atualizar</button>
+          <button type="button" id="focusCommandDetails">Detalhes</button>
+          <button type="button" id="quickNextSpeaker">Próximo</button>
+          <button type="button" id="quickOpenDecks">Logs</button>
+        </div>
+      </form>
     </main>
 
-    <script defer src="cheffe-call.js?v=20260422queue-topfill"></script>
+    <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
+    <script defer src="cheffe-call.js?v=20260423admin-functional"></script>
   </body>
 </html>

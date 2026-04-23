@@ -78,6 +78,26 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - `app.js` agora pede fullscreen no `.ppg-canvas-shell`, destrava o Web Audio com `soundtrack.startIntro()` e só então inicia `intro-scene`.
 - O debug passou a mostrar `introStarted=yes/no` e `fullscreen=yes/no`.
 - Validações: `node --check` passou em `app.js`, `BootScene.js` e `chipTechSoundtrack.js`; CSS ficou com `brace-balance=0`; Playwright confirmou antes `music=off/introStarted=no`, depois `music=on/musicIntroSynced=yes/fullscreen=yes`.
+
+## 2026-04-22 cheffe-call game shell
+
+- O usuario aprovou transformar `cheffe-call` em experiencia de jogo fullscreen e pediu para chamar nerds/especialistas em game design para a reuniao de direcao.
+- Reuniao de subagentes fechou a direcao: teatro dominante na viewport, data center vivo como subsolo, HUD fina nas bordas e decks/logs recolhiveis.
+- `cheffe-call.html` ganhou acoes de shell no topo (`Tela cheia`, `HUD`, `Decks`) e os paineis inferiores foram agrupados em `call-lower-decks`.
+- `cheffe-call.css` recebeu camada forte de overrides `2026-04-22e` para virar shell de jogo fullscreen: palco central expandido, HUD lateral compacta, subsolo vivo com racks/terminais/trabalhadores, e deck inferior fixo/recolhivel.
+- `cheffe-call.js` ganhou toggles de tela cheia/HUD/decks, atalhos de teclado (`f`, `h`, `l`, `c`, `n`, `a`, `i`, `t`), alem de `window.render_game_to_text()` e `window.advanceTime(ms)` para validacao estilo web-game.
+- Validacoes locais desta rodada: `node --check cheffe-call.js`, `brace-balance=0` em `cheffe-call.css` e contagem de `<section>` equilibrada em `cheffe-call.html`.
+- TODO seguinte: abrir o `cheffe-call` no navegador e validar visualmente a shell fullscreen; depois separar a cena central em modulo de jogo hibrido DOM + Phaser/canvas, com arte propria para teatro e data center.
+
+## 2026-04-23 cheffe-call command bar + scene canvas
+
+- `cheffe-call.html` agora inclui `canvas` de cena (`#cheffeCallGameCanvas`) e `call-command-bar` fixa no rodape para ordem rapida.
+- `cheffe-call-game.js` foi criado para dar respiracao de jogo a cena: particulas, shafts, trafego de dados, pulso de palco e onda de subsolo reagindo ao estado do speaker/HUD/decks.
+- `cheffe-call.js` passou a sincronizar a command bar com o formulario principal, expor eventos `cheffe-call:scene-state` para o canvas e manter atalhos/estado da shell.
+- `cheffe-call.css` recebeu a camada visual da command bar, empilhamento correto do canvas e mais refinamento na composicao fullscreen.
+- Revisoes visuais reais geradas em `output/playwright/cheffe-call-fullscreen-check.png` ate `cheffe-call-fullscreen-check-5.png`; a ultima captura confirma command bar fixa, HUDs sobrepostos e cena central viva.
+- Validacoes locais desta passada: `node --check cheffe-call.js` passou varias vezes, `brace-balance=0` no CSS e `GET http://127.0.0.1:4123/cheffe-call.html` segue `200`.
+- Pendencia real que sobrou para elevar mais ainda: trocar os bitmaps reaproveitados por arte propria do teatro/data center ou entrar com modulo Phaser mais completo na area central.
 - Capturas novas: `output/web-game/pubpaid-permission-gate.png` e `output/web-game/pubpaid-permission-started.png`.
 
 ## 2026-04-22 intro premium com luzes e camera
@@ -125,3 +145,37 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - A intensidade foi ajustada em duas rodadas para ficar perceptível sem cobrir personagens, hotspots ou mesas.
 - Capturas: `output/web-game/pubpaid-salao-neon-max.png` e `output/web-game/pubpaid-salao-neon-max-v2.png`.
 - Validações: `node --check pubpaid-phaser/scenes/InteriorScene.js`; browser confirmou `scene=interior`, `musicZone=salon`, `musicStyle=16-bit samba brasileiro hip-hop` e `ERRORS=[]`.
+
+## 2026-04-23 cheffe-call ponte operacional real
+
+- server.js ganhou POST /api/cheffe-call/action, trilha de logs/decisoes/aprovacoes por sessao e sincronizacao da Cheffe Call com eal-agents-actions.json e office-orders.json.
+- uildCheffeCallPayload() agora devolve meeting.currentSession com logs, decisions, pprovals e ctionStats, permitindo a sala refletir estado operacional real.
+- cheffe-call.js passou a hidratar fila/logs vindos do backend, usar a senha para transformar pprove, implement, 	ask, 	erminal e efresh em acoes reais e adicionou o botao Atualizar na command bar.
+- Validacao operacional local: POST /api/cheffe-call/action com efresh registrou log de runtime; pprove para Bento Producer gravou aprovacao/decisao na sessao e marcou a acao correspondente como provado em data/real-agents-actions.json.
+- Captura nova: output/playwright/cheffe-call-operational-bridge.png mostrando fila ativa e registro das falas preenchidos pela ponte operacional.
+- Proximo ganho grande: levar mais dessas acoes do palco para execucao automatica por tipo de agente, em vez de parar em ordem/fila/revisao.
+
+
+## 2026-04-23 cheffe-call premium stage + office lock polish
+
+- O teatro ganhou marquise de bulbs, notas musicais flutuando, lasers/spots/equalizer mais fortes e os pets ficaram mais visiveis nos cantos.
+- scritorio.html, scritorio.js e scritorio.css agora mostram um banner proprio de Cheffe Call ativa e deixam o mapa mais escurecido/fechado quando a equipe saiu para a reuniao.
+- A rodada reforcou a fantasia de palco premium e a leitura de que os escritorios entram em pausa enquanto a sala principal assume o comando.
+
+
+2026-04-23 cheffe-call premium theater polish + real office lock validation
+- finalizei spot-c e showline do palco premium
+- validei cheffe-call em http://127.0.0.1:4126/cheffe-call.html e escritório travado em http://127.0.0.1:4126/escritorio.html
+- capturas: output/playwright/cheffe-call-fullscreen-finish-v3.png e output/playwright/escritorio-cheffe-locked-real.png
+
+## 2026-04-23 cheffe-call admin deploy functional
+
+- `server.js` agora blinda a Cheffe Call para deploy: `/api/cheffe-call` responde `ok: true` mesmo sem `latest-run`, usando fallback operacional até a runtime real entrar.
+- `getCheffeCallOpinions()` ganhou equipe-base de fallback para a sala continuar viva quando não houver payload real dos agentes.
+- Foi criado `POST /api/cheffe-call/admin/clear`, protegido por Full Admin, para limpar a sessão atual sem derrubar a página.
+- `cheffe-call.html` ganhou um painel administrativo dedicado com status de runtime, status da sessão, última ação e botões reais para rodar agentes, encerrar reunião, limpar sessão, exportar snapshot e abrir `real-agents.html`.
+- `cheffe-call.js` passou a renderizar o estado administrativo e acionar `/api/real-agents/run`, `/api/cheffe-call/release` e `/api/cheffe-call/admin/clear`.
+- Cache-bust atualizado para `20260423admin-functional` em `cheffe-call.html`.
+- Validações desta passada: `node --check server.js`, `node --check cheffe-call.js`, `node --check cheffe-call-game.js`, `brace-balance=0` em `cheffe-call.css`, `GET /api/cheffe-call` com `ok=true`, `POST /api/cheffe-call/admin/clear` com `401` sem senha e `200` com senha, `POST /api/real-agents/run` com `200`.
+- TODO seguinte: se o usuário pedir deploy, revisar o `git diff`, separar ruído de `data/` e `output/`, e então preparar commit/push desta frente; depois voltar ao mapeamento fino de avatar/cadeira.
+

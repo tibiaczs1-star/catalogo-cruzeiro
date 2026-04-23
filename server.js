@@ -6142,6 +6142,45 @@ function startCheffeCallSession(body) {
   return buildCheffeCallPayload();
 }
 
+function clearCheffeCallSession(body) {
+  const sessionId = cleanShortText(body.sessionId || "", 120);
+  const state = readCheffeCallState();
+  const sessionIndex = sessionId
+    ? state.sessions.findIndex((item) => item.id === sessionId)
+    : 0;
+  if (sessionIndex < 0 || !state.sessions[sessionIndex]) {
+    return { ok: false, status: 404, error: "Sessão da Cheffe Call não encontrada." };
+  }
+
+  const now = new Date().toISOString();
+  const target = state.sessions[sessionIndex];
+  const nextSessions = state.sessions.slice();
+  nextSessions[sessionIndex] = {
+    ...target,
+    approvals: [],
+    decisions: [],
+    logs: [
+      normalizeCheffeCallLog({
+        createdAt: now,
+        kindLabel: "sessão limpa",
+        agent: "Cheffe Call",
+        office: "Sistema",
+        text: "A sessão foi limpa pelo painel administrativo, preservando apenas assunto e opiniões."
+      })
+    ],
+    status: "aguardando-aprovacao",
+    updatedAt: now
+  };
+
+  writeCheffeCallState({
+    ...state,
+    sessions: nextSessions,
+    lastSessionAt: now
+  });
+
+  return buildCheffeCallPayload();
+}
+
 function runRealAgentsRuntime(options = {}) {
   const trigger = cleanShortText(options.trigger || "manual", 80);
   const at = new Date().toISOString();
@@ -8098,6 +8137,19 @@ async function handleApi(req, res, pathname, searchParams) {
       releasedAt: new Date().toISOString()
     });
     return sendJson(res, 200, buildCheffeCallPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/admin/clear") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+
+    const payload = clearCheffeCallSession(body);
+    if (!payload.ok) {
+      return sendJson(res, payload.status || 400, payload);
+    }
+    return sendJson(res, 200, payload);
   }
 
   if (req.method === "POST" && pathname === "/api/office-neural-growth/pulse") {

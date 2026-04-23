@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-22T22:53:54.089Z",
+  "lastUpdatedAt": "2026-04-23T13:41:26.401Z",
   "orders": [
     {
       "id": "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design",
@@ -4143,6 +4143,298 @@
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-transformar-o-cheffe-call-em-centro-de-comando-operacional-do-jornal-com-agentes",
+      "createdAt": "2026-04-23T00:39:59.272Z",
+      "updatedAt": "2026-04-23T00:39:59.272Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "essas reunioes sao pra eles relametne existirem, dar opniao receber tarefas treais tudo sobre o ecosistema do jornal e todas as funções dele e tudo que tem nele controlado por eles 24 horas .... então so termine quando realmente eu poder controla tudo dali e eles forem quase reaiis vivendo quase realmente",
+      "summary": "Transformar o Cheffe Call em centro de comando operacional do jornal com agentes persistentes, opinando, recebendo tarefas e controlando funcoes 24h a partir da reuniao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-remover-tom-azul-do-popup-de-cookies-no-mobile-e-mostrar-fundadores-ja-na-entrad",
+      "createdAt": "2026-04-23T01:24:41.959Z",
+      "updatedAt": "2026-04-23T01:24:41.959Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "primeiro o pop up de cokkies do mobile tem fundo azul e nao aparece os fundadores na entrada so nos banners",
+      "summary": "Remover tom azul do popup de cookies no mobile e mostrar fundadores ja na entrada mobile.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-transformar-o-cheffe-call-em-jogo-operacional-real-em-camadas-canvas-de-colisao-",
+      "createdAt": "2026-04-23T02:43:06.455Z",
+      "updatedAt": "2026-04-23T02:43:06.455Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "bom a ordem e essa .... esqueleto en canva, para colisão, engenheiros de game design trabalhando nos menus e botrões, depois jpg, de cenario em cima do canva, depois enfeites, depois luz, e iluminação efeitos e depois em cima disso tudo, das cadeiras, os avatares originais como eles são no escritorio em questão de sprite visual, personagem , e tudo mais , um game vivo onde vc e 0o progamador e o chefe de 181 agentes vivos, so que la tem uma reunião que controla todo meu ecosistema de site; ee nao e de brincadeira e na realidade, e todos precisam ganhar pontos ou perde pontos pra chegar aos archuiventes, que e funcioanrio do dia, da hora, da semana, do mes, e aprender e aumentatr po marchine leaning, e por ai vai",
+      "summary": "Transformar o Cheffe Call em jogo operacional real em camadas: canvas de colisão, cenário JPG, ornamentos, luz, avatares originais dos escritórios e sistema vivo de pontos/achievements/aprendizado dos 181 agentes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-implementar-carteira-real-escrow-abandono-de-60-segundos-auditoria-e-conexao-da-",
+      "createdAt": "2026-04-23T11:40:10.447Z",
+      "updatedAt": "2026-04-23T11:40:10.447Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "faça tudo isso ai",
+      "summary": "Implementar carteira real, escrow, abandono de 60 segundos, auditoria e conexão da PubPaid 2.0 Phaser com PvP real",
+      "normalizedTasks": [
+        "Adicionar campos available/lockedMatch/lockedWithdrawal na carteira PubPaid",
+        "Travar escrow ao entrar na fila PvP",
+        "Liquidar 80/20 ou refund em empate",
+        "Adicionar abandono com reconexão em 60 segundos",
+        "Conectar HUD e painéis da PubPaid 2.0 às APIs reais"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/ui/overlay.js",
+        "pubpaid-phaser/ui/panelActions.js",
+        "pubpaid-phaser/scenes/InteriorScene.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "pubpaid-v2",
+        "pvp",
+        "escrow",
+        "carteira",
+        "phaser"
+      ],
+      "nextSteps": [
+        "Testar fluxo com duas contas Google reais",
+        "Validar visualmente no navegador a fila de Dardos e Dama",
+        "Expor cards de auditoria PvP no admin visual se necessário"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-mover-informacoes-operacionais-da-cheffe-call-para-um-deck-abaixo-do-teatro-e-li",
+      "createdAt": "2026-04-23T12:00:43.037Z",
+      "updatedAt": "2026-04-23T12:00:43.037Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "crie uma divisão abaixo agora com todas essas informações que estavam estragando a HUD; rever a operação para ficar funcional",
+      "summary": "Mover informações operacionais da Cheffe Call para um deck abaixo do teatro e limpar a HUD da cena",
+      "normalizedTasks": [
+        "mover daily-board para fora do teatro|criar call-info-deck abaixo da cena|deixar comando e painéis fora da imagem|validar sintaxe e abrir no Chrome"
+      ],
+      "filesTouched": [
+        "cheffe-call.html",
+        "cheffe-call.css"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "cheffe-call",
+        "hud",
+        "layout",
+        "operacional"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-construir-a-pubpaid-2-0-sem-abrir-navegador-ou-pedir-teste-mostrando-apenas-resu",
+      "createdAt": "2026-04-23T12:02:11.416Z",
+      "updatedAt": "2026-04-23T12:02:11.416Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "so crie o jogo, e me mostra aqui o que foi feito quando eu quiser, eu peço pra textan",
+      "summary": "Construir a PubPaid 2.0 sem abrir navegador ou pedir teste, mostrando apenas resumo quando solicitado",
+      "normalizedTasks": [
+        "Parar fluxo de abrir/testar visualmente sem pedido",
+        "Criar serviço cliente PvP",
+        "Criar painel de mesa ativa",
+        "Adicionar ações reais de Dardos e Dama"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/services/pvpService.js",
+        "pubpaid-phaser/ui/panelActions.js",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/ui/overlay.js",
+        "pubpaid-v2.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "jogo",
+        "pvp",
+        "sem-teste-visual"
+      ],
+      "nextSteps": [
+        "Continuar construindo UI jogável e arte sem abrir navegador até o usuário pedir teste"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-regra-visual-da-pubpaid-2-0-toda-mecanica-deve-vir-com-camadas-de-pixel-art-ilum",
+      "createdAt": "2026-04-23T12:06:58.350Z",
+      "updatedAt": "2026-04-23T12:06:58.350Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "sempre lembre de colocar camadas visuais perfeitas e em pixels art, nao so canva esqueleto",
+      "summary": "Regra visual da PubPaid 2.0: toda mecânica deve vir com camadas de pixel art, iluminação e acabamento, não apenas canvas/esqueleto funcional",
+      "normalizedTasks": [
+        "Registrar regra visual permanente da PubPaid 2.0",
+        "Aplicar pixel art e acabamento a novas mecânicas",
+        "Evitar entregar apenas estrutura funcional sem camada visual"
+      ],
+      "filesTouched": [
+        "CODEX_MEMORY.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "pixel-art",
+        "direcao-visual",
+        "game-design"
+      ],
+      "nextSteps": [
+        "Nas próximas rodadas",
+        "construir mecânica junto com camada visual em pixel art"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-ampliar-atualizacao-automatica-de-noticias-para-temas-globais-entretenimento-e-p",
+      "createdAt": "2026-04-23T13:01:52.420Z",
+      "updatedAt": "2026-04-23T13:01:52.420Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuário percebeu que assuntos como fofocas, novidades, filmes, peças, Michael Jackson, Bolsonaro e temas globais não atualizam automaticamente ou com frequência; pediu atualização mais frequente e pesquisa global que não dependa do Vale do Juruá.",
+      "summary": "Ampliar atualização automática de notícias para temas globais, entretenimento e política nacional",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-priorizar-vale-do-jurua-e-acre-antes-dos-globais",
+      "createdAt": "2026-04-23T13:03:30.583Z",
+      "updatedAt": "2026-04-23T13:03:30.583Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuário reforçou que o foco editorial agora é: Vale do Juruá primeiro, Acre/destaque importante depois, e só então captação global de entretenimento e relevância.",
+      "summary": "Priorizar Vale do Juruá e Acre antes dos globais",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-substituir-pesquisa-eleitoral-por-destaques-globais-de-politica",
+      "createdAt": "2026-04-23T13:10:53.118Z",
+      "updatedAt": "2026-04-23T13:10:53.118Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuário pediu para deletar a pesquisa eleitoral e trocar por destaques globais de política.",
+      "summary": "Substituir pesquisa eleitoral por destaques globais de política",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-criar-fluxo-de-entrada-mobile-simplificado",
+      "createdAt": "2026-04-23T13:26:18.642Z",
+      "updatedAt": "2026-04-23T13:26:18.642Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuário pediu para o mobile ter entradas próprias: sem fundadores/popup desktop, cookies como dropdown/barra inferior aceita uma vez, e uma animação simples de carregamento entre páginas no lugar da entrada teatral do desktop.",
+      "summary": "Criar fluxo de entrada mobile simplificado",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-adotar-frente-permanente-de-imagem-ilustracao-2d-e-pixel-art-para-a-pubpaid-2-0-",
+      "createdAt": "2026-04-23T13:29:23.782Z",
+      "updatedAt": "2026-04-23T13:29:23.782Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "use sempre a skills de imagens e baixe tudo sobre poder de fazer ilustração 2d",
+      "summary": "Adotar frente permanente de imagem, ilustração 2D e pixel art para a PubPaid 2.0, com pipeline e ferramentas mapeadas",
+      "normalizedTasks": [
+        "Reforçar prioridade de imagem e pixel art",
+        "Mapear ferramentas utilizáveis para arte 2D",
+        "Documentar pipeline visual da PubPaid"
+      ],
+      "filesTouched": [
+        "PUBPAID_2D_ART_PIPELINE.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "imagem",
+        "ilustracao-2d",
+        "pixel-art",
+        "ferramentas"
+      ],
+      "nextSteps": [
+        "Usar o pipeline 2D nas próximas mesas",
+        "Gerar assets visuais novos com direção consistente"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-adicionar-funcoes-administrativas-reais-na-cheffe-call-para-deploy-funcional",
+      "createdAt": "2026-04-23T13:41:26.401Z",
+      "updatedAt": "2026-04-23T13:41:26.401Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "ok agora funções administrativas",
+      "summary": "Adicionar funções administrativas reais na Cheffe Call para deploy funcional",
+      "normalizedTasks": [
+        "criar painel admin|rodar agentes agora|encerrar reunião|limpar sessão|exportar snapshot|validar endpoints"
+      ],
+      "filesTouched": [
+        "cheffe-call.html",
+        "cheffe-call.css",
+        "cheffe-call.js",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "cheffe-call",
+        "admin",
+        "deploy"
+      ],
       "nextSteps": [],
       "notes": ""
     }

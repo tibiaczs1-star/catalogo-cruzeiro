@@ -1,10 +1,21 @@
 # Handoff
 
-Updated: 2026-04-22T22:53:54.386Z
+Updated: 2026-04-23T14:05:00.000Z
 
-agentes-newsroom-hero.css recebeu camada final 2026-04-22c para a hero da home: grid desktop em foto principal + coluna editorial, painel de escritório/carrossel ocultos na primeira dobra, daily band virou faixa compacta. node --check script.js passou, CSS brace-balance=0 e GET /?skipWelcome=1 retornou 200.
+PubPaid 2.0 segue como frente principal. Nesta passada, `panelActions.js` passou a montar settlement view para partidas encerradas, `overlay.js` renderiza card de resultado com payout/casa e `pubpaid-phaser.css` ganhou a camada visual correspondente. Em `InteriorScene.js`, Dardos e Dama agora exibem resultado diretamente no salão com badge `WIN/LOSS/DRAW`, glow pulsante e texto de payout, e as placas externas mudam para `FINAL` em match concluída. Sintaxe passou em `node --check` para os JS tocados e o CSS ficou com `brace-balance=0`.
 
 ## Next
 
-- Abrir a home no navegador e conferir a primeira dobra; se houver ajuste
-- mexer na camada 2026-04-22c em agentes-newsroom-hero.css.
+- Continuar sem abrir navegador, como o usuário pediu
+- Avançar para FX mais ricos em pixel art nas mesas: partículas, clarões, payout pop e estados finais mais teatrais
+- Depois produzir props/sprites 2D dedicados para cada mesa
+
+## Files In Focus
+
+- pubpaid-phaser/scenes/InteriorScene.js
+- pubpaid-phaser/ui/panelActions.js
+- pubpaid-phaser/ui/overlay.js
+- pubpaid-phaser.css
+- .codex-memory/orders.json
+- .codex-memory/current-state.md
+- .codex-memory/handoff.md

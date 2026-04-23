@@ -9,6 +9,8 @@
   const markGoodIdeaEl = document.querySelector("#markGoodIdea");
   const opinionsEl = document.querySelector("#opinionsList");
   const speechBubbleEl = document.querySelector("#activeSpeechBubble");
+  const raisedHandBoard = document.querySelector("#raisedHandBoard");
+  const raisedHandList = document.querySelector("#raisedHandList");
   const meetingLogList = document.querySelector("#meetingLogList");
   const callModeBanner = document.querySelector("#callModeBanner");
   const taskQueueList = document.querySelector("#taskQueueList");
@@ -19,11 +21,42 @@
   const agentAwardNote = document.querySelector("#agentAwardNote");
   const voteAgentOfDay = document.querySelector("#voteAgentOfDay");
   const openAgentFile = document.querySelector("#openAgentFile");
+  const fullscreenToggleEl = document.querySelector("#toggleFullscreenMode");
+  const hudToggleEl = document.querySelector("#toggleHudMode");
+  const lowerDecksToggleEl = document.querySelector("#toggleLowerDecks");
+  const commandBarEl = document.querySelector("#cheffeCommandBar");
+  const quickInstructionInput = document.querySelector("#quickInstructionInput");
+  const focusCommandDetails = document.querySelector("#focusCommandDetails");
+  const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
+  const quickOpenDecks = document.querySelector("#quickOpenDecks");
+  const quickRefreshAgents = document.querySelector("#quickRefreshAgents");
   const officeOfDayEl = document.querySelector("#officeOfDay");
   const officeOfDayMetaEl = document.querySelector("#officeOfDayMeta");
   const actionOfDayEl = document.querySelector("#actionOfDay");
   const actionOfDayMetaEl = document.querySelector("#actionOfDayMeta");
+  const achievementHeadlineEl = document.querySelector("#achievementHeadline");
+  const achievementChaseLineEl = document.querySelector("#achievementChaseLine");
+  const achievementHourLeaderEl = document.querySelector("#achievementHourLeader");
+  const achievementHourMetaEl = document.querySelector("#achievementHourMeta");
+  const achievementDayLeaderEl = document.querySelector("#achievementDayLeader");
+  const achievementDayMetaEl = document.querySelector("#achievementDayMeta");
+  const achievementWeekLeaderEl = document.querySelector("#achievementWeekLeader");
+  const achievementWeekMetaEl = document.querySelector("#achievementWeekMeta");
+  const achievementMonthLeaderEl = document.querySelector("#achievementMonthLeader");
+  const achievementMonthMetaEl = document.querySelector("#achievementMonthMeta");
+  const adminRuntimeStateEl = document.querySelector("#adminRuntimeState");
+  const adminRuntimeMetaEl = document.querySelector("#adminRuntimeMeta");
+  const adminSessionStateEl = document.querySelector("#adminSessionState");
+  const adminSessionMetaEl = document.querySelector("#adminSessionMeta");
+  const adminLastActionStateEl = document.querySelector("#adminLastActionState");
+  const adminLastActionMetaEl = document.querySelector("#adminLastActionMeta");
+  const adminRunAgentsNow = document.querySelector("#adminRunAgentsNow");
+  const adminReleaseRoom = document.querySelector("#adminReleaseRoom");
+  const adminClearSession = document.querySelector("#adminClearSession");
+  const adminExportSnapshot = document.querySelector("#adminExportSnapshot");
+  const adminOpenRealAgents = document.querySelector("#adminOpenRealAgents");
   const theaterEl = document.querySelector(".bitmap-theater");
+  const lowerDecksEl = document.querySelector(".call-lower-decks");
   const instructionInput = formEl?.querySelector('[name="instruction"]');
   const commandInput = formEl?.querySelector('[name="command"]');
   const promptModeSelect = document.querySelector("#promptModeSelect");
@@ -58,8 +91,50 @@
   let meetingLogs = [];
   let taskQueue = [];
   let raisedHandName = "";
+  let raisedHandQueue = [];
   let promptConsoleData = null;
   let activePromptPayload = { title: "Prompt supremo", badge: "Cheffe Call", text: "" };
+  let lowerDecksOpen = false;
+  let currentMeetingSessionId = "";
+  let latestCallPayload = null;
+
+  function syncGameShellState() {
+    document.body.classList.toggle("call-hud-hidden", document.body.dataset.hud === "hidden");
+    document.body.classList.toggle("call-lower-open", lowerDecksOpen);
+    if (lowerDecksEl) lowerDecksEl.setAttribute("aria-hidden", lowerDecksOpen ? "false" : "true");
+    window.dispatchEvent(
+      new CustomEvent("cheffe-call:scene-state", {
+        detail: {
+          hudHidden: document.body.dataset.hud === "hidden",
+          lowerDecksOpen,
+          speaker: currentOpinions[activeSpeakerIndex % Math.max(1, currentOpinions.length)] || null
+        }
+      })
+    );
+  }
+
+  async function toggleFullscreen() {
+    const root = document.documentElement;
+    try {
+      if (!document.fullscreenElement) {
+        await root.requestFullscreen?.();
+      } else {
+        await document.exitFullscreen?.();
+      }
+    } catch (_error) {
+      setStatus("Nao foi possivel alternar tela cheia agora.", "bad");
+    }
+  }
+
+  function toggleHudVisibility() {
+    document.body.dataset.hud = document.body.dataset.hud === "hidden" ? "visible" : "hidden";
+    syncGameShellState();
+  }
+
+  function toggleLowerDecksVisibility(forceState) {
+    lowerDecksOpen = typeof forceState === "boolean" ? forceState : !lowerDecksOpen;
+    syncGameShellState();
+  }
 
   function slugify(value) {
     return String(value || "")
@@ -105,6 +180,10 @@
     if (!statusEl) return;
     statusEl.textContent = message;
     statusEl.style.color = tone === "bad" ? "var(--call-red)" : tone === "ok" ? "var(--call-green)" : "";
+  }
+
+  function getAdminPassword() {
+    return String(new FormData(formEl).get("password") || "").trim();
   }
 
   function updatePromptPreview(payload) {
@@ -237,6 +316,18 @@
   }
 
   function getAgentPersona(item) {
+    const spriteProfile = item?.spriteProfile || null;
+    if (spriteProfile) {
+      return {
+        accent: spriteProfile.accent || "#7fe7ff",
+        jacket: spriteProfile.jacket || spriteProfile.secondary || "#1d2740",
+        accessory: spriteProfile.accessory || "badge",
+        prop: spriteProfile.prop || "tablet",
+        hairStyle: spriteProfile.hairStyle || "short",
+        skin: spriteProfile.skin || "#f2c5a0",
+        hair: spriteProfile.hair || "#17101b"
+      };
+    }
     const signature = `${getAgentDisplayName(item)} ${getAgentOffice(item)} ${item?.role || ""}`.toLowerCase();
     const photo = item?.photo || {};
     const skin = ["#f2c5a0", "#e8ae83", "#d99b72", "#f0d0aa"][hashValue(signature) % 4];
@@ -335,13 +426,24 @@
     const daily = payload?.dailyContext || {};
     const topAgents = Array.isArray(daily.topAgents) ? daily.topAgents : [];
     const queue = Array.isArray(payload?.queue) ? payload.queue : [];
+    const registry = Array.isArray(payload?.agents) ? payload.agents : [];
+    const registryBySlug = new Map(registry.map((item) => [item.slug, item]));
+    const registryByNameOffice = new Map(
+      registry.map((item) => [`${item.name || item.agent}|${item.officeLabel || item.office}`, item])
+    );
     const source = queue.length ? queue : topAgents;
     const mapped = source
-      .map((item) => ({
+      .map((item) => {
+        const registryMatch =
+          registryBySlug.get(item.slug) ||
+          registryByNameOffice.get(`${item.name || item.agent}|${item.office || item.officeLabel}`) ||
+          null;
+        return {
         id: item.id,
         slug: item.slug,
         agent: item.name || item.agent,
         office: item.office || item.officeLabel,
+        officeLabel: item.officeLabel || registryMatch?.officeLabel || item.office,
         role: item.role || item.title || "agent",
         score: item.score || item.autonomy?.autonomy || item.autonomy || 0,
         urgency: item.urgency || item.autonomy?.urgency || 0,
@@ -351,9 +453,12 @@
         assignment: item.assignment || null,
         autonomy: item.autonomy || null,
         photo: item.photo || null,
+        officeKey: item.officeKey || registryMatch?.officeKey || null,
+        spriteProfile: item.spriteProfile || registryMatch?.spriteProfile || null,
         points: item.points || 0,
         awards: Array.isArray(item.awards) ? item.awards : []
-      }))
+      };
+      })
       .filter((item) => item.agent);
     return mapped.length ? mapped : fallbackAgents;
   }
@@ -418,7 +523,7 @@
             index % 3 === 0 ? "#151018" : index % 3 === 1 ? "#47301d" : "#232b44"
           };--delay:${
             (index % 17) * 80
-          }ms">${renderAgentSprite(agent)}<span class="seat-state-icon" aria-hidden="true"></span><span class="agent-name-tag">${escapeHtml(name)}</span></span>`;
+          }ms">${renderAgentPhotoToken(agent)}${renderAgentSprite(agent)}<span class="seat-state-icon" aria-hidden="true"></span><span class="agent-name-tag">${escapeHtml(name)}</span></span>`;
         }
       )
       .join("");
@@ -430,13 +535,45 @@
     const runningNames = new Set(taskQueue.filter((item) => item.state === "running").map((item) => item.agent));
     const fallbackNames = new Set(taskQueue.filter((item) => item.state === "fallback").map((item) => item.agent));
     const terminalNames = new Set(taskQueue.filter((item) => item.state === "terminal").map((item) => item.agent));
+    const raisedNames = new Set([raisedHandName, ...raisedHandQueue].filter(Boolean));
     audienceEl.querySelectorAll(".seat-agent").forEach((seat) => {
       const name = seat.dataset.agentName || "";
       seat.classList.toggle("is-implementing", runningNames.has(name));
       seat.classList.toggle("is-fallback", fallbackNames.has(name));
       seat.classList.toggle("is-terminal", terminalNames.has(name));
-      seat.classList.toggle("is-hand-raised", Boolean(raisedHandName) && raisedHandName === name);
+      seat.classList.toggle("is-hand-raised", raisedNames.has(name));
     });
+  }
+
+  function refreshRaisedHandQueue() {
+    if (!currentOpinions.length) {
+      raisedHandQueue = [];
+    } else {
+      const activeName = getAgentDisplayName(currentOpinions[activeSpeakerIndex]);
+      raisedHandQueue = currentOpinions
+        .map((item) => getAgentDisplayName(item))
+        .filter((name) => name && name !== activeName)
+        .slice(0, 4);
+    }
+
+    if (!raisedHandList) return;
+    if (!raisedHandQueue.length) {
+      raisedHandBoard?.classList.remove("is-live");
+      raisedHandList.innerHTML = '<p class="raised-hand-empty">Ninguém aguardando a vez.</p>';
+      return;
+    }
+
+    raisedHandBoard?.classList.add("is-live");
+    raisedHandList.innerHTML = raisedHandQueue
+      .map(
+        (name, index) => `
+          <span class="raised-hand-chip ${index === 0 ? "is-next" : ""}">
+            <i>${index === 0 ? "Proximo" : `Fila ${index + 1}`}</i>
+            <strong>${escapeHtml(name)}</strong>
+          </span>
+        `
+      )
+      .join("");
   }
 
   function buildLocalOpinions(subject, command) {
@@ -571,6 +708,60 @@
 
     actionOfDayEl.textContent = action.title || "Sem ação";
     actionOfDayMetaEl.textContent = action.action || "As propostas aguardam aprovação do Full Admin.";
+  }
+
+  function getPeriodLeader(scoreboard, periodKey) {
+    const leaders = scoreboard?.current?.[periodKey]?.leaders;
+    return Array.isArray(leaders) && leaders.length ? leaders[0] : null;
+  }
+
+  function formatLeaderMeta(leader, fallbackText) {
+    if (!leader) return fallbackText;
+    return `${leader.office || "Escritório"} • ${leader.points || 0} pts • média ${leader.average || 0}`;
+  }
+
+  function renderAchievements(payload) {
+    const awards = payload?.awards || {};
+    const scoreboard = payload?.scoreboard || {};
+    const podium = Array.isArray(awards.podium) ? awards.podium : [];
+    const liveLeader = podium[0] || getPeriodLeader(scoreboard, "day") || null;
+    const dayLeader = getPeriodLeader(scoreboard, "day");
+    const weekLeader = getPeriodLeader(scoreboard, "week");
+    const monthLeader = getPeriodLeader(scoreboard, "month");
+
+    if (achievementHeadlineEl) {
+      achievementHeadlineEl.textContent = liveLeader
+        ? `${liveLeader.name} puxa a reunião agora`
+        : "Funcionários e escritórios em disputa real";
+    }
+
+    if (achievementChaseLineEl) {
+      achievementChaseLineEl.textContent =
+        awards.chaseLine ||
+        "A evolução dos agentes depende de entregas, constância, autonomia e leitura real do ecossistema.";
+    }
+
+    if (achievementHourLeaderEl) achievementHourLeaderEl.textContent = liveLeader?.name || "Sem rodada";
+    if (achievementHourMetaEl) {
+      achievementHourMetaEl.textContent = liveLeader
+        ? `${liveLeader.office || "Escritório"} • ${liveLeader.points || 0} pts • ${liveLeader.awards?.length || 0} awards`
+        : "Mais pontos na rodada atual.";
+    }
+
+    if (achievementDayLeaderEl) achievementDayLeaderEl.textContent = dayLeader?.name || "Sem líder";
+    if (achievementDayMetaEl) {
+      achievementDayMetaEl.textContent = formatLeaderMeta(dayLeader, "Corrida diária de pontos e awards.");
+    }
+
+    if (achievementWeekLeaderEl) achievementWeekLeaderEl.textContent = weekLeader?.name || "Sem líder";
+    if (achievementWeekMetaEl) {
+      achievementWeekMetaEl.textContent = formatLeaderMeta(weekLeader, "Acúmulo semanal e consistência.");
+    }
+
+    if (achievementMonthLeaderEl) achievementMonthLeaderEl.textContent = monthLeader?.name || "Sem líder";
+    if (achievementMonthMetaEl) {
+      achievementMonthMetaEl.textContent = formatLeaderMeta(monthLeader, "Quem sustenta a liderança mais longa.");
+    }
   }
 
   function renderOpinions(payload) {
@@ -715,6 +906,7 @@
     activeSpeakerIndex = (activeSpeakerIndex + 1) % currentOpinions.length;
     const active = currentOpinions[activeSpeakerIndex];
     raisedHandName = getAgentDisplayName(active);
+    refreshRaisedHandQueue();
     applyAudienceStates();
     showActiveSpeaker();
     addMeetingLog({
@@ -726,6 +918,7 @@
     window.setTimeout(() => {
       if (raisedHandName === getAgentDisplayName(active)) {
         raisedHandName = "";
+        refreshRaisedHandQueue();
         applyAudienceStates();
       }
     }, 1600);
@@ -750,9 +943,40 @@
       .join("");
   }
 
+  function hydrateMeetingArtifacts(payload) {
+    const session = payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
+    currentMeetingSessionId = session?.id || "";
+
+    if (Array.isArray(session?.logs)) {
+      meetingLogs = session.logs.map((item) => ({
+        time: item.time || String(item.createdAt || "").slice(11, 16) || "--:--",
+        kind: item.kind || "",
+        kindLabel: item.kindLabel || "fala",
+        agent: item.agent || "Cheffe Call",
+        text: item.text || ""
+      }));
+      renderMeetingLogs();
+    }
+
+    if (Array.isArray(session?.decisions)) {
+      taskQueue = session.decisions.map((item) => ({
+        state: item.state || "",
+        kindLabel: item.kindLabel || "fila",
+        agent: item.agent || "Cheffe Call",
+        title: item.title || "Ação da Cheffe Call",
+        text: item.text || "",
+        howTo: item.howTo || "",
+        prompt: item.prompt || ""
+      }));
+      renderTaskQueue();
+      applyAudienceStates();
+    }
+  }
+
   function setSpeakerQueue(opinions, reset = true) {
     currentOpinions = Array.isArray(opinions) && opinions.length ? opinions : [];
     if (reset) activeSpeakerIndex = 0;
+    refreshRaisedHandQueue();
     showActiveSpeaker();
   }
 
@@ -776,12 +1000,13 @@
             <strong>${escapeHtml(activeName)}</strong>
             <p>${escapeHtml(active.opinion || "Aguardando fala.")}</p>
             <div class="speech-actions">
-              <button type="button" data-idea-action="approve">Aprovar</button>
-              <button type="button" data-idea-action="implement">Implementar ideia</button>
-              <button type="button" data-idea-action="variation">Pedir ajuste</button>
-              <button type="button" data-idea-action="task">Criar tarefa</button>
-              <button type="button" data-idea-action="terminal">Mandar ao terminal</button>
-              <button type="button" data-idea-action="next">Próximo agente</button>
+              <button type="button" data-idea-action="approve">Aprovar A</button>
+              <button type="button" data-idea-action="implement">Implementar I</button>
+              <button type="button" data-idea-action="variation">Ajuste V</button>
+              <button type="button" data-idea-action="task">Tarefa T</button>
+              <button type="button" data-idea-action="terminal">Terminal M</button>
+              <button type="button" data-idea-action="file">Ficha F</button>
+              <button type="button" data-idea-action="next">Próximo N</button>
             </div>
           </div>
         </div>
@@ -796,7 +1021,47 @@
     ].join("\n");
   }
 
-  function handleIdeaAction(action) {
+  function renderGameState() {
+    const active = currentOpinions[activeSpeakerIndex % Math.max(1, currentOpinions.length)] || null;
+    const visibleAgents = Array.from(document.querySelectorAll(".seat-agent"))
+      .slice(0, 12)
+      .map((seat) => ({
+        name: seat.dataset.agentName || "",
+        speaking: seat.classList.contains("is-speaking"),
+        handRaised: seat.classList.contains("is-hand-raised"),
+        implementing: seat.classList.contains("is-implementing")
+      }));
+    return JSON.stringify({
+      mode: document.body.dataset.hud === "hidden" ? "cinematic" : "hud",
+      fullscreen: Boolean(document.fullscreenElement),
+      lowerDecksOpen,
+      speaker: active ? getAgentDisplayName(active) : "",
+      instruction: instructionInput?.value || "",
+      command: commandInput?.value || "",
+      sessionId: currentMeetingSessionId,
+      visibleAgents,
+      queueSize: taskQueue.length,
+      logs: meetingLogs.length,
+      raisedHands: raisedHandQueue,
+      theater: { seats: visibleAgents.length, stage: "south", background: "nerd-straight-seats" },
+      coords: "screen-space, full meeting theater, stage at south/bottom"
+    });
+  }
+
+  window.render_game_to_text = renderGameState;
+  window.advanceTime = (ms = 16) => {
+    const turns = Math.max(1, Math.round(ms / 250));
+    for (let index = 0; index < turns; index += 1) {
+      if (currentOpinions.length) {
+        activeSpeakerIndex = (activeSpeakerIndex + 1) % currentOpinions.length;
+      }
+    }
+    showActiveSpeaker();
+    applyAudienceStates();
+    return renderGameState();
+  };
+
+  async function handleIdeaAction(action) {
     const active = currentOpinions[activeSpeakerIndex];
     if (!active) {
       setStatus("Nenhuma ideia ativa para interagir.", "bad");
@@ -805,6 +1070,11 @@
     const agentName = getAgentDisplayName(active);
     const idea = active.opinion || "";
     if (action === "approve") {
+      if (await postRoomAction("approve", active)) {
+        setStatus(`${agentName} recebeu aprovação formal na Cheffe Call.`, "ok");
+        moveToNextSpeaker("próxima fala");
+        return;
+      }
       const packet = buildExecutionPacket(active, "implement");
       addMeetingLog({ kind: "good", kindLabel: "boa ideia", agent: agentName, text: idea });
       enqueueTask({
@@ -821,6 +1091,11 @@
       return;
     }
     if (action === "implement") {
+      if (await postRoomAction("implement", active)) {
+        setStatus(`${agentName} entrou em execução real pela Cheffe Call.`, "ok");
+        moveToNextSpeaker("próxima fala");
+        return;
+      }
       const implementation = active?.assignment?.action || `Começar a executar a proposta de ${agentName}.`;
       const packet = buildExecutionPacket(active, "implement");
       enqueueTask({
@@ -850,6 +1125,10 @@
       return;
     }
     if (action === "variation") {
+      if (await postRoomAction("variation", active, { title: `Pedir alternativa para ${agentName}` })) {
+        setStatus(`${agentName} recebeu pedido real de segunda opção.`, "ok");
+        return;
+      }
       const variation = `${buildOpinionForAgent(active, "variação solicitada", activeSpeakerIndex)} Quero uma segunda opção antes de executar.`;
       active.opinion = variation;
       enqueueTask({
@@ -865,6 +1144,10 @@
       return;
     }
     if (action === "task") {
+      if (await postRoomAction("task", active)) {
+        setStatus(`Tarefa real registrada para ${agentName}.`, "ok");
+        return;
+      }
       const task = `Tarefa criada para ${agentName}: transformar a ideia em entrega revisável, com critério de aceite e próxima ação.`;
       const packet = buildExecutionPacket(active, "implement");
       enqueueTask({
@@ -887,6 +1170,10 @@
       return;
     }
     if (action === "terminal") {
+      if (await postRoomAction("terminal", active, { title: active?.assignment?.action || idea })) {
+        setStatus(`Terminal real recebeu a ordem de ${agentName}.`, "ok");
+        return;
+      }
       enqueueTask({
         state: "terminal",
         kindLabel: "terminal",
@@ -916,6 +1203,10 @@
       setStatus(`Ideia de ${agentName} foi enviada ao terminal.`, "ok");
       return;
     }
+    if (action === "file") {
+      window.location.href = `./real-agents.html?agent=${encodeURIComponent(slugify(agentName))}`;
+      return;
+    }
     if (action === "next") {
       moveToNextSpeaker("levantou a mão");
     }
@@ -923,6 +1214,8 @@
 
   function renderTerminal(payload) {
     const meeting = payload.meeting || {};
+    const session = meeting.currentSession || meeting.sessions?.[0] || {};
+    const sessionStats = session.actionStats || {};
     const summary = payload.summary || {};
     const daily = payload.dailyContext || {};
     const agent = daily.agentOfDay || {};
@@ -937,19 +1230,64 @@
       `agente_do_dia: ${agent.name || "aguardando"}`,
       `escritorio_do_dia: ${office.office || "aguardando"}`,
       `acao_do_dia: ${action.action || "aguardando aprovacao"}`,
+      `aprovacoes: ${sessionStats.approvals || 0}`,
+      `fila_reuniao: ${sessionStats.decisions || 0}`,
+      `execucoes: ${sessionStats.running || 0}`,
       `orientacao: ${meeting.lastInstruction || "nenhuma orientacao ativa"}`,
       "protocolo: ouvir -> memorizar -> opinar -> aguardar aprovacao"
     ].join("\n");
     setModeBanner(meeting.active ? "real" : "visual", meeting.active ? "Runtimes pausadas para reunião em andamento" : "Simulação aberta sem senha e sem impacto operacional");
   }
 
+  function renderAdminState(payload) {
+    const meeting = payload?.meeting || {};
+    const session = meeting.currentSession || meeting.sessions?.[0] || {};
+    const summary = payload?.summary || {};
+    const agentsReady = Boolean(payload?.agentsReady);
+    const logsCount = Array.isArray(session?.logs) ? session.logs.length : 0;
+    const decisionsCount = Array.isArray(session?.decisions) ? session.decisions.length : 0;
+
+    if (adminRuntimeStateEl) {
+      adminRuntimeStateEl.textContent = meeting.active ? "Runtimes pausadas" : "Runtimes livres";
+    }
+    if (adminRuntimeMetaEl) {
+      adminRuntimeMetaEl.textContent = agentsReady
+        ? `${summary.totalAgents || 0} agentes visíveis • autonomia média ${summary.averageAutonomy || 0}%`
+        : "Fallback visual ativo até a runtime real publicar a rodada dos agentes.";
+    }
+
+    if (adminSessionStateEl) {
+      adminSessionStateEl.textContent = session?.status || (meeting.active ? "em reunião" : "sem reunião ativa");
+    }
+    if (adminSessionMetaEl) {
+      adminSessionMetaEl.textContent = meeting.lastInstruction
+        ? `Assunto: ${String(meeting.lastInstruction).slice(0, 110)}`
+        : "Nenhum assunto operacional registrado ainda.";
+    }
+
+    if (adminLastActionStateEl) {
+      adminLastActionStateEl.textContent = logsCount ? `${logsCount} logs` : "Sem ações recentes";
+    }
+    if (adminLastActionMetaEl) {
+      adminLastActionMetaEl.textContent = `${decisionsCount} decisões na fila • sessão ${session?.id || "não iniciada"}`;
+    }
+  }
+
   function render(payload) {
+    latestCallPayload = payload;
     currentRealAgents = extractRealAgents(payload);
     renderAudience(payload.summary?.totalAgents || currentRealAgents.length || 181, [], currentRealAgents);
     renderDaily(payload);
+    renderAchievements(payload);
     renderOpinions(payload);
+    hydrateMeetingArtifacts(payload);
     renderTerminal(payload);
+    renderAdminState(payload);
     setStatus(payload.meeting?.active ? "Cheffe Call ativo. Runtimes pausadas." : "Sala pronta.", "ok");
+    if (quickInstructionInput && !quickInstructionInput.matches(":focus")) {
+      quickInstructionInput.value = instructionInput?.value || payload.meeting?.lastInstruction || "";
+    }
+    syncGameShellState();
   }
 
   function renderLocalMeeting(subject, command) {
@@ -987,6 +1325,47 @@
           action: command || "Ouvir, opinar, pontuar e aguardar aprovação."
         }
       },
+      awards: {
+        chaseLine: `${opinions[0].agent} abriu a rodada local. A liderança muda conforme aprovação, execução e constância.`,
+        podium: opinions.slice(0, 3).map((item, index) => ({
+          rank: index + 1,
+          name: item.agent,
+          office: item.office,
+          points: 120 - index * 14,
+          awards: index === 0 ? [{ id: "local-lead" }] : []
+        }))
+      },
+      scoreboard: {
+        current: {
+          day: {
+            leaders: opinions.slice(0, 4).map((item, index) => ({
+              rank: index + 1,
+              name: item.agent,
+              office: item.office,
+              points: 320 - index * 33,
+              average: 80 - index * 4
+            }))
+          },
+          week: {
+            leaders: opinions.slice(1, 5).map((item, index) => ({
+              rank: index + 1,
+              name: item.agent,
+              office: item.office,
+              points: 1140 - index * 88,
+              average: 83 - index * 3
+            }))
+          },
+          month: {
+            leaders: opinions.slice(2, 6).map((item, index) => ({
+              rank: index + 1,
+              name: item.agent,
+              office: item.office,
+              points: 4820 - index * 240,
+              average: 86 - index * 2
+            }))
+          }
+        }
+      },
       queue: currentRealAgents,
       opinions
     };
@@ -994,6 +1373,7 @@
     currentRealAgents = opinions;
     renderAudience(181, opinions.slice(0, 1).map((item) => item.agent), currentRealAgents);
     renderDaily(payload);
+    renderAchievements(payload);
     renderOpinions(payload);
     setSpeakerQueue(opinions);
     addMeetingLog({
@@ -1039,6 +1419,29 @@
     const payload = await response.json();
     if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha na Cheffe Call.");
     render(payload);
+    return payload;
+  }
+
+  async function postRoomAction(action, active, extras = {}) {
+    const password = getAdminPassword();
+    if (!password) return false;
+    const packet = active ? buildExecutionPacket(active, action === "terminal" ? "prompt" : "implement") : null;
+    await postCall("/api/cheffe-call/action", {
+      password,
+      action,
+      sessionId: currentMeetingSessionId,
+      instruction: instructionInput?.value || "",
+      command: commandInput?.value || "",
+      agent: active ? getAgentDisplayName(active) : "Cheffe Call",
+      office: active ? getAgentOffice(active) : "Sistema",
+      role: active?.role || "",
+      title: extras.title || active?.assignment?.action || active?.action || active?.opinion || "Ação da reunião",
+      opinion: active?.opinion || "",
+      howTo: extras.howTo || packet?.howTo || "",
+      prompt: extras.prompt || packet?.prompt || "",
+      ...extras
+    });
+    return true;
   }
 
   formEl?.addEventListener("submit", (event) => {
@@ -1053,6 +1456,17 @@
     }
     setStatus("Abrindo Cheffe Call...");
     postCall("/api/cheffe-call/start", { password, instruction }).catch((error) => setStatus(error.message, "bad"));
+  });
+
+  commandBarEl?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const quickInstruction = String(quickInstructionInput?.value || "").trim();
+    if (!quickInstruction) {
+      setStatus("Digite uma ordem rápida antes de enviar.", "bad");
+      return;
+    }
+    if (instructionInput) instructionInput.value = quickInstruction;
+    renderLocalMeeting(quickInstruction, String(commandInput?.value || "").trim());
   });
 
   sendTerminalEl?.addEventListener("click", () => {
@@ -1097,8 +1511,11 @@
 
   speechBubbleEl?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-idea-action]");
-    if (!button) return;
-    handleIdeaAction(button.dataset.ideaAction);
+    if (!button) {
+      speechBubbleEl.classList.toggle("is-expanded");
+      return;
+    }
+    handleIdeaAction(button.dataset.ideaAction).catch((error) => setStatus(error.message, "bad"));
   });
 
   opinionsEl?.addEventListener("click", (event) => {
@@ -1108,7 +1525,7 @@
     if (Number.isFinite(index)) {
       activeSpeakerIndex = index;
       showActiveSpeaker();
-      handleIdeaAction(button.dataset.listIdeaAction);
+      handleIdeaAction(button.dataset.listIdeaAction).catch((error) => setStatus(error.message, "bad"));
     }
   });
 
@@ -1138,6 +1555,99 @@
   openAgentFile?.addEventListener("click", () => {
     const name = currentAgentOfDay?.name || currentAgentOfDay?.agent || "";
     window.location.href = `./real-agents.html?agent=${encodeURIComponent(slugify(name))}`;
+  });
+
+  fullscreenToggleEl?.addEventListener("click", () => {
+    toggleFullscreen();
+  });
+
+  hudToggleEl?.addEventListener("click", () => {
+    toggleHudVisibility();
+  });
+
+  lowerDecksToggleEl?.addEventListener("click", () => {
+    toggleLowerDecksVisibility();
+  });
+
+  focusCommandDetails?.addEventListener("click", () => {
+    instructionInput?.focus();
+    toggleHudVisibility();
+    document.body.dataset.hud = "visible";
+    syncGameShellState();
+  });
+
+  quickNextSpeaker?.addEventListener("click", () => {
+    moveToNextSpeaker("atalho command bar");
+  });
+
+  quickOpenDecks?.addEventListener("click", () => {
+    toggleLowerDecksVisibility();
+  });
+
+  quickRefreshAgents?.addEventListener("click", () => {
+    postRoomAction("refresh", null).catch((error) => setStatus(error.message, "bad"));
+  });
+
+  adminRunAgentsNow?.addEventListener("click", () => {
+    const password = getAdminPassword();
+    if (!password) {
+      setStatus("Digite a senha Full Admin para rodar os agentes reais.", "bad");
+      return;
+    }
+    setStatus("Rodando agentes reais...");
+    fetch("/api/real-agents/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        password,
+        message: instructionInput?.value || "Rodada manual disparada pela Cheffe Call."
+      })
+    })
+      .then(async (response) => {
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+        return loadCall();
+      })
+      .then(() => setStatus("Rodada manual dos agentes concluída e sala atualizada.", "ok"))
+      .catch((error) => setStatus(error.message, "bad"));
+  });
+
+  adminReleaseRoom?.addEventListener("click", () => {
+    const password = getAdminPassword();
+    if (!password) {
+      setStatus("Digite a senha Full Admin para encerrar a reunião.", "bad");
+      return;
+    }
+    setStatus("Encerrando reunião real...");
+    postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
+  });
+
+  adminClearSession?.addEventListener("click", () => {
+    const password = getAdminPassword();
+    if (!password) {
+      setStatus("Digite a senha Full Admin para limpar a sessão.", "bad");
+      return;
+    }
+    setStatus("Limpando sessão atual...");
+    postCall("/api/cheffe-call/admin/clear", { password, sessionId: currentMeetingSessionId }).catch((error) =>
+      setStatus(error.message, "bad")
+    );
+  });
+
+  adminExportSnapshot?.addEventListener("click", async () => {
+    try {
+      if (!latestCallPayload) throw new Error("Ainda não há snapshot carregado.");
+      const snapshot = JSON.stringify(latestCallPayload, null, 2);
+      const copied = await copyText(snapshot);
+      if (!copied) throw new Error("Não foi possível copiar o snapshot para a área de transferência.");
+      setStatus("Snapshot da Cheffe Call copiado.", "ok");
+    } catch (error) {
+      setStatus(error.message, "bad");
+    }
+  });
+
+  adminOpenRealAgents?.addEventListener("click", () => {
+    window.location.href = "./real-agents.html";
   });
 
   promptModeSelect?.addEventListener("change", () => {
@@ -1198,6 +1708,64 @@
     const copied = await copyText(activePromptPayload.text || "");
     setStatus(copied ? "Prompt copiado para a área de transferência." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
   });
+
+  document.addEventListener("keydown", (event) => {
+    const target = event.target;
+    if (target instanceof HTMLElement) {
+      const tag = target.tagName.toLowerCase();
+      if (tag === "input" || tag === "textarea" || tag === "select" || target.isContentEditable) return;
+    }
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    const key = event.key.toLowerCase();
+    if (key === "f") {
+      event.preventDefault();
+      toggleFullscreen();
+    }
+    if (key === "h") {
+      event.preventDefault();
+      toggleHudVisibility();
+    }
+    if (key === "l") {
+      event.preventDefault();
+      toggleLowerDecksVisibility();
+    }
+    if (key === "c") {
+      event.preventDefault();
+      quickInstructionInput?.focus();
+    }
+    if (key === "n") {
+      event.preventDefault();
+      moveToNextSpeaker("atalho do palco");
+    }
+    if (key === "a") {
+      event.preventDefault();
+      handleIdeaAction("approve").catch((error) => setStatus(error.message, "bad"));
+    }
+    if (key === "i") {
+      event.preventDefault();
+      handleIdeaAction("implement").catch((error) => setStatus(error.message, "bad"));
+    }
+    if (key === "t") {
+      event.preventDefault();
+      handleIdeaAction("task").catch((error) => setStatus(error.message, "bad"));
+    }
+    if (key === "r") {
+      event.preventDefault();
+      postRoomAction("refresh", null).catch((error) => setStatus(error.message, "bad"));
+    }
+    if (event.key === "Escape") {
+      toggleLowerDecksVisibility(false);
+    }
+  });
+
+  document.addEventListener("fullscreenchange", () => {
+    if (fullscreenToggleEl) {
+      fullscreenToggleEl.textContent = document.fullscreenElement ? "Sair da tela" : "Tela cheia";
+    }
+  });
+
+  document.body.dataset.hud = "visible";
+  syncGameShellState();
 
   initPromptConsole();
   loadCall().catch((error) => setStatus(error.message, "bad"));
