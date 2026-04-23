@@ -1576,3 +1576,98 @@ body.editorial-home .site-footer .footer-bottom-utility-buttons {
     min-height: 360px !important;
   }
 }
+
+/* 2026-04-23: no mobile a foto do mosaico precisa respirar sem texto por cima. */
+@media (max-width: 740px) {
+  body.editorial-home .mosaic-item,
+  body.editorial-home .mosaic-item.main,
+  body.editorial-home .mosaic-item.side {
+    display: grid !important;
+    min-height: 0 !important;
+    background-image: none !important;
+    background-color: #071321 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  body.editorial-home .mosaic-item::before {
+    position: relative !important;
+    inset: auto !important;
+    z-index: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    height: clamp(190px, 58vw, 260px) !important;
+    background:
+      linear-gradient(180deg, rgba(7, 19, 33, 0.02), rgba(7, 19, 33, 0.12)),
+      var(--bg-image) center / cover no-repeat !important;
+    opacity: 1 !important;
+  }
+
+  body.editorial-home .mosaic-item::after {
+    display: none !important;
+  }
+
+  body.editorial-home .mosaic-item > a {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  body.editorial-home .mosaic-shell,
+  body.editorial-home .mosaic-shell.compact {
+    min-height: 0 !important;
+    padding: 0.88rem !important;
+    gap: 0.76rem !important;
+    background:
+      radial-gradient(circle at 92% 0%, rgba(69, 145, 230, 0.18), transparent 34%),
+      linear-gradient(180deg, #0b1828 0%, #07111d 100%) !important;
+  }
+
+  body.editorial-home .mosaic-topline {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    justify-items: start !important;
+    gap: 0.42rem !important;
+  }
+
+  body.editorial-home .mosaic-tag,
+  body.editorial-home .mosaic-source {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    white-space: normal !important;
+    color: #f8fbff !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  body.editorial-home .mosaic-copy,
+  body.editorial-home .mosaic-item.main .mosaic-copy,
+  body.editorial-home .mosaic-copy.compact {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  body.editorial-home .mosaic-item.main h1,
+  body.editorial-home .mosaic-item.side h3 {
+    color: #ffffff !important;
+    text-shadow: none !important;
+  }
+
+  body.editorial-home .mosaic-item p,
+  body.editorial-home .mosaic-item.main p {
+    color: rgba(238, 246, 255, 0.86) !important;
+  }
+
+  body.editorial-home .mosaic-bottomline {
+    align-items: start !important;
+  }
+
+  body.editorial-home .mosaic-stat {
+    display: none !important;
+  }
+}
