@@ -19313,6 +19313,15 @@ a {
     0 0 0 1px color-mix(in srgb, var(--caderno-accent-strong) 24%, rgba(255, 255, 255, 0.4));
 }
 
+body.editorial-home .cadernos-shell .caderno-card .mini-story strong {
+  color: var(--caderno-ink) !important;
+}
+
+body.editorial-home .cadernos-shell .caderno-card .mini-story small {
+  color: color-mix(in srgb, var(--caderno-ink) 76%, rgba(255, 255, 255, 0.18)) !important;
+  font-weight: 600;
+}
+
 .caderno-card.editorial-games {
   --caderno-accent-strong: #1ea4dd;
   --caderno-ink: #0d2754;
@@ -19503,6 +19512,16 @@ body.editorial-home #social .social-card.social-agenda {
   background:
     radial-gradient(circle at top right, rgba(204, 214, 255, 0.2), transparent 24%),
     linear-gradient(160deg, rgba(232, 236, 244, 0.98), rgba(205, 214, 232, 0.93)) !important;
+}
+
+body.editorial-home #social .social-card p,
+body.editorial-home #social .social-card footer span {
+  color: color-mix(in srgb, var(--social-ink) 76%, rgba(255, 255, 255, 0.12)) !important;
+}
+
+body.editorial-home #social .social-card footer a {
+  color: color-mix(in srgb, var(--social-accent) 68%, #0d2d4e 32%) !important;
+  font-weight: 700;
 }
 
 /* 2026-04-22: capa premium e radar com leitura mais editorial */
@@ -19784,6 +19803,15 @@ body.editorial-home #trending .trending-card.main {
 body.editorial-home #trending .trending-card.main .trend-badge {
   background: rgba(13, 26, 44, 0.72);
   color: rgba(255, 223, 184, 0.94);
+}
+
+body.editorial-home #trending .trending-card.main .buzz-kicker,
+body.editorial-home #trending .trending-card.main .influencer-profile strong,
+body.editorial-home #trending .trending-card.main .influencer-profile small,
+body.editorial-home #trending .trending-card.main .buzz-context-grid span,
+body.editorial-home #trending .trending-card.main .buzz-reaction-box span,
+body.editorial-home #trending .trending-card.main .engagement span {
+  color: rgba(244, 248, 255, 0.92) !important;
 }
 
 body.editorial-home #trending .trending-card.main .buzz-context-grid div,

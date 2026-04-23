@@ -279,7 +279,7 @@ legacyOfflineStorageKeys.forEach((storageKey) => {
   });
 });
 const initialStaticNews = Array.isArray(window.NEWS_DATA) ? [...window.NEWS_DATA] : [];
-const authorialHomePreviewBySlug = {
+const homepageStaticPreviewBySlug = {
   "michael-jackson-filme-cine-romeu-cruzeiro-do-sul": {
     slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     title: "Filme de Michael Jackson entra no radar com peso global e chance de movimentar o Cine Romeu",
@@ -299,6 +299,146 @@ const authorialHomePreviewBySlug = {
     feedImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
     sourceImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
     imageFocus: "center 22%"
+  },
+  "fila-ovos-pascoa": {
+    slug: "fila-ovos-pascoa",
+    title: "Fila de ovos de Pascoa vira cena de rua e mostra o apetite do comercio em Cruzeiro do Sul",
+    category: "Pascoa na cidade",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    imageFocus: "center 42%"
+  },
+  "aldir-blanc-cultura-czs": {
+    slug: "aldir-blanc-cultura-czs",
+    title: "Editais da Lei Aldir Blanc colocam artistas, produtores e agenda cultural no centro",
+    category: "Cultura local",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    imageFocus: "center 34%"
+  },
+  "victor-macario-viral": {
+    slug: "victor-macario-viral",
+    title: "Video bem editado, rosto conhecido e assunto local: a formula do viral acreano da semana",
+    category: "Radar de redes",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/trend-theo-acreano.jpg",
+    feedImageUrl: "./assets/home-cache/trend-theo-acreano.jpg",
+    sourceImageUrl: "./assets/home-cache/trend-theo-acreano.jpg",
+    imageFocus: "center 20%"
+  },
+  "lucas-dourado-pascoa": {
+    slug: "lucas-dourado-pascoa",
+    title: "Pascoa, boato e reaparicao: o caso Lucas Dourado entra no radar das redes acreanas",
+    category: "Buzz publico",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    imageFocus: "center 34%"
+  },
+  "eja-czs-superacao": {
+    slug: "eja-czs-superacao",
+    title: "Historias de superacao na EJA de Cruzeiro do Sul inspiram novos estudantes",
+    category: "Historias reais",
+    sourceName: "Agencia Acre",
+    imageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    imageFocus: "center 34%"
+  },
+  "credenciamento-pareceristas-culturais": {
+    slug: "credenciamento-pareceristas-culturais",
+    title: "Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais",
+    category: "Cultura no radar",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    imageFocus: "center 36%"
+  },
+  "ifac-professores-czs": {
+    slug: "ifac-professores-czs",
+    title: "Ifac abre selecao para professor substituto em Cruzeiro do Sul",
+    category: "Educacao",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    imageFocus: "center 30%"
+  },
+  "ifac-auxilio-cheia": {
+    slug: "ifac-auxilio-cheia",
+    title: "Ifac anuncia auxilio emergencial para estudantes afetados pela cheia",
+    category: "Educacao",
+    sourceName: "Jurua Online",
+    imageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    imageFocus: "center 34%"
+  },
+  "zequinha-assistencia-cheia": {
+    slug: "zequinha-assistencia-cheia",
+    title: "Zequinha intensifica assistencia as familias afetadas pela cheia",
+    category: "Prefeitura e acoes",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "agua-mineral-familias-cheia": {
+    slug: "agua-mineral-familias-cheia",
+    title: "Prefeitura distribui agua mineral para bairros atingidos",
+    category: "Prefeitura e acoes",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "saude-familias-abrigadas": {
+    slug: "saude-familias-abrigadas",
+    title: "Saude chega as familias que foram levadas para abrigos",
+    category: "Social",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "moradores-rotina-cheia": {
+    slug: "moradores-rotina-cheia",
+    title: "Moradores mantem a rotina mesmo com ruas e quintais alagados",
+    category: "Social",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "mais-12-mil-afetados": {
+    slug: "mais-12-mil-afetados",
+    title: "Mais de 12 mil pessoas afetadas e abertura do segundo abrigo",
+    category: "Utilidade publica",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "vazante-jurua-segue": {
+    slug: "vazante-jurua-segue",
+    title: "Vazante continua, mas centenas ainda seguem fora de casa",
+    category: "Utilidade publica",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
   }
 };
 
@@ -308,7 +448,7 @@ const getHomepageHydrationArticle = (slug = "") => {
     return null;
   }
 
-  return window.NEWS_MAP?.[normalizedSlug] || authorialHomePreviewBySlug[normalizedSlug] || null;
+  return window.NEWS_MAP?.[normalizedSlug] || homepageStaticPreviewBySlug[normalizedSlug] || null;
 };
 
 const thumbTopicFallbacks = {
@@ -1177,7 +1317,7 @@ const hydrateStaticThumbs = (newsMap = {}) => {
 if (window.NEWS_DATA) {
   hydrateStaticThumbs(
     {
-      ...authorialHomePreviewBySlug,
+      ...homepageStaticPreviewBySlug,
       ...Object.fromEntries(window.NEWS_DATA.map((item) => [item.slug, item]))
     }
   );
@@ -3519,7 +3659,6 @@ const preloadHeroTourismImage = (primaryUrl = "", fallbackUrl = "") =>
 
       const loader = new Image();
       loader.decoding = "async";
-      loader.referrerPolicy = "no-referrer";
       loader.loading = "eager";
 
       loader.onload = () => {
@@ -3813,14 +3952,15 @@ const paintHeroTourismBackdrop = (slideNode, photo) => {
   slideNode.dataset.heroBackdropToken = requestToken;
 
   return preloadHeroTourismImage(photo.proxyUrl, photo.fallbackUrl).then((resolvedUrl) => {
-    if (slideNode.dataset.heroBackdropToken !== requestToken || !resolvedUrl) {
+    const paintUrl = resolvedUrl || sanitizeImageUrl(photo.proxyUrl || photo.fallbackUrl || "");
+    if (slideNode.dataset.heroBackdropToken !== requestToken || !paintUrl) {
       return false;
     }
 
     slideNode.style.backgroundImage = `
       linear-gradient(180deg, rgba(7, 18, 36, 0.14), rgba(7, 18, 36, 0.34)),
       linear-gradient(90deg, rgba(10, 23, 45, 0.4), rgba(10, 23, 45, 0.08) 40%, rgba(10, 23, 45, 0.48)),
-      url("${resolvedUrl}")
+      url("${paintUrl}")
     `;
     slideNode.style.backgroundPosition = normalizeHeroSafeFocusPosition(photo.focusPosition, {
       hasPeople: Boolean(photo.hasPeopleScene)
@@ -5113,36 +5253,51 @@ const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2) =
   const normalizedItems = dedupeNewsItems(items).map((item) => normalizeRuntimeArticle(item));
   const selected = [];
   const seen = new Set();
+  const tryPushArticle = (item, { requireImage = false } = {}) => {
+    if (selected.length >= count || !item) {
+      return;
+    }
+
+    const key = getRadarArticleKey(item);
+    if (seen.has(key)) {
+      return;
+    }
+
+    if (requireImage && !articleHasUsableImageCandidate(item)) {
+      return;
+    }
+
+    seen.add(key);
+    selected.push(item);
+  };
 
   priorities.forEach((priority) => {
     normalizedItems.forEach((item) => {
-      if (selected.length >= count) {
-        return;
+      if (item.categoryKey === priority) {
+        tryPushArticle(item, { requireImage: true });
       }
-
-      const key = getRadarArticleKey(item);
-      if (seen.has(key) || item.categoryKey !== priority) {
-        return;
-      }
-
-      seen.add(key);
-      selected.push(item);
     });
   });
 
   if (selected.length < count) {
+    priorities.forEach((priority) => {
+      normalizedItems.forEach((item) => {
+        if (item.categoryKey === priority) {
+          tryPushArticle(item);
+        }
+      });
+    });
+  }
+
+  if (selected.length < count) {
     normalizedItems.forEach((item) => {
-      if (selected.length >= count) {
-        return;
-      }
+      tryPushArticle(item, { requireImage: true });
+    });
+  }
 
-      const key = getRadarArticleKey(item);
-      if (seen.has(key)) {
-        return;
-      }
-
-      seen.add(key);
-      selected.push(item);
+  if (selected.length < count) {
+    normalizedItems.forEach((item) => {
+      tryPushArticle(item);
     });
   }
 
@@ -5954,7 +6109,12 @@ const hydrateSocialCards = (items = []) => {
 
     if (article && articleKey && !usedKeys.has(articleKey)) {
       const hasUsableImage = articleHasUsableImageCandidate(article);
-      card.classList.toggle("card-without-photo", !hasUsableImage);
+      if (!hasUsableImage) {
+        missingCards.push(card);
+        return;
+      }
+
+      card.classList.toggle("card-without-photo", false);
       usedKeys.add(articleKey);
       appliedArticles.push(article);
       if (linkNode) {
