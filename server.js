@@ -4802,13 +4802,60 @@ function sortArticleItems(left, right) {
   return Number(right.priority || 0) - Number(left.priority || 0);
 }
 
+function getArticleRecordQualityScore(item = {}) {
+  const imageUrl = String(item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "").trim();
+  const bodyCount = Array.isArray(item.body) ? item.body.filter(Boolean).length : 0;
+  const highlightsCount = Array.isArray(item.highlights) ? item.highlights.filter(Boolean).length : 0;
+  const developmentCount = Array.isArray(item.development) ? item.development.filter(Boolean).length : 0;
+  const title = String(item.title || "").trim();
+  const lede = String(item.lede || item.summary || item.description || "").trim();
+  const analysis = String(item.analysis || "").trim();
+  const sourceUrl = String(item.sourceUrl || item.url || item.link || "").trim();
+  const id = String(item.id || "").trim().toLowerCase();
+  let score = 0;
+
+  if (title) score += 10;
+  if (lede) score += Math.min(12, Math.ceil(lede.length / 40));
+  if (analysis) score += Math.min(14, Math.ceil(analysis.length / 50));
+  if (imageUrl) score += 30;
+  if (sourceUrl && sourceUrl !== "#") score += 6;
+  if (String(item.publishedAt || item.date || "").trim()) score += 3;
+  score += Math.min(24, bodyCount * 4);
+  score += Math.min(12, highlightsCount * 2);
+  score += Math.min(9, developmentCount * 3);
+
+  if (id.startsWith("home-linked-")) {
+    score -= 40;
+  }
+
+  return score;
+}
+
+function shouldReplaceArticleRecord(existing, candidate) {
+  if (!existing) {
+    return true;
+  }
+
+  const existingScore = getArticleRecordQualityScore(existing);
+  const candidateScore = getArticleRecordQualityScore(candidate);
+
+  if (candidateScore !== existingScore) {
+    return candidateScore > existingScore;
+  }
+
+  const existingDate = new Date(existing.publishedAt || existing.date || 0).getTime();
+  const candidateDate = new Date(candidate.publishedAt || candidate.date || 0).getTime();
+
+  return candidateDate > existingDate;
+}
+
 function getArticleNews(limit = 30) {
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
 
   items.forEach((item) => {
     const key = item.slug || item.sourceUrl || item.id || item.title;
-    if (!map.has(key)) {
+    if (shouldReplaceArticleRecord(map.get(key), item)) {
       map.set(key, item);
     }
   });
