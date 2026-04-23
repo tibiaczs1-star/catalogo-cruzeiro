@@ -70,13 +70,7 @@
 }
 
 .hero-photo-grid {
-  position: absolute;
-  inset: 12px;
-  z-index: 0;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1.2fr;
-  gap: 10px;
-  pointer-events: none;
+  display: none !important;
 }
 
 .hero-photo-tile {
@@ -449,7 +443,7 @@
 }
 
 .detail-body .detail-aside {
-  gap: 0.9rem;
+  gap: 1.25rem;
 }
 
 .detail-body .detail-card {

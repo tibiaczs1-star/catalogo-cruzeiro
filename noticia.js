@@ -8,7 +8,7 @@ const AUTHORIAL_DETAIL_ARTICLES = {
   "michael-jackson-filme-cine-romeu-cruzeiro-do-sul": {
     id: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
-    title: "Filme de Michael Jackson vira estreia de peso para 2026 e entra no radar do Cine Romeu",
+    title: "Filme de Michael Jackson vira estreia forte de 2026 e pode movimentar o Cine Romeu",
     eyebrow: "cinema e impacto cultural",
     date: "23 de abril de 2026",
     publishedAt: "2026-04-23T08:55:00-05:00",
@@ -23,7 +23,7 @@ const AUTHORIAL_DETAIL_ARTICLES = {
     imageCredit: "Crédito: trailer oficial de Michael / Lionsgate",
     imageFocus: "center 28%",
     lede: "O longa Michael, dirigido por Antoine Fuqua e estrelado por Jaafar Jackson, chega aos cinemas em 24 de abril de 2026 com lançamento global e ambição de evento de grande circuito.",
-    summary: "O longa Michael, dirigido por Antoine Fuqua e estrelado por Jaafar Jackson, chega aos cinemas em 24 de abril de 2026 com lançamento global e ambição de evento de grande circuito. Em Cruzeiro do Sul, isso entra no radar porque o Cine Romeu segue como a principal sala local para produções de apelo popular e pode transformar a estreia em pauta de cidade.",
+    summary: "O longa Michael, dirigido por Antoine Fuqua e estrelado por Jaafar Jackson, chega aos cinemas em 24 de abril de 2026 com lançamento global e ambição de evento de grande circuito. Em Cruzeiro do Sul, o Cine Romeu segue como a principal sala local para produções de apelo popular e pode transformar a estreia em assunto forte da cidade.",
     analysis: "Este artigo autoral entra como destaque porque junta memória pop, indústria cultural e circuito exibidor com reflexo concreto em Cruzeiro do Sul. Michael Jackson segue como um nome gigantesco da música global, e um filme com distribuição ampla, suporte em IMAX e protagonista da própria família tende a mobilizar curiosidade, debate e bilheteria também fora dos grandes centros.",
     body: [
       "A produção ganhou corpo como um dos lançamentos fortes do primeiro semestre de 2026. A data de estreia internacional foi fixada para 24 de abril de 2026, com distribuição da Lionsgate nos Estados Unidos e da Universal no mercado internacional.",
@@ -31,16 +31,16 @@ const AUTHORIAL_DETAIL_ARTICLES = {
       "No plano cultural, Michael Jackson continua sendo um dos artistas mais influentes da música pop, com impacto em dança, clipes, performance, moda, turnês e indústria fonográfica. Mesmo quando a recepção crítica diverge sobre o recorte da cinebiografia, o tamanho do personagem por si só já transforma o filme em acontecimento.",
       "Para Cruzeiro do Sul, a conversa não é abstrata. O Cine Romeu, no Hortência Center, segue como referência local de exibição e já recebeu sessões de festivais e circuitos culturais recentes. Quando um título com esse tamanho entra em cartaz, ele também funciona como termômetro do apetite do público local por grandes estreias.",
       "Se Michael chegar à grade do Cine Romeu, a estreia pode abrir uma janela rara para aproximar o debate global de cinema da rotina cultural da cidade. Não é só um filme sobre um astro: é uma oportunidade de movimentar bilheteria, conversa pública e presença do cinema como programa urbano em Cruzeiro do Sul.",
-      "Na escolha editorial do Catalogo, esta pauta merece vitrine porque transforma uma estreia internacional em assunto local palpável: programação, fila, comentário de plateia e movimento cultural no centro da cidade."
+      "Em Cruzeiro do Sul, a estreia ganha peso por poder movimentar programação, plateia e conversa cultural em torno do Cine Romeu."
     ],
     highlights: [
       "Estreia internacional marcada para 24 de abril de 2026",
       "Direção de Antoine Fuqua e roteiro de John Logan",
       "Jaafar Jackson vive Michael na tela",
-      "Cine Romeu entra no radar local para a exibição"
+      "Cine Romeu aparece como a principal vitrine local para a exibicao"
     ],
     development: [
-      "Na leitura editorial, a importância do filme está em unir memória pop, indústria cultural e circuito exibidor ao mesmo tempo.",
+      "A força do filme está em unir memória pop, indústria cultural e circuito exibidor ao mesmo tempo.",
       "O nome Michael Jackson ainda mobiliza gerações diferentes, da nostalgia do videoclipe ao público mais novo que conhece a obra por streaming e recortes virais.",
       "Em Cruzeiro do Sul, qualquer chegada do filme ao Cine Romeu merece cobertura própria, com foco em programação, procura do público e reação local à estreia."
     ]
@@ -48,7 +48,7 @@ const AUTHORIAL_DETAIL_ARTICLES = {
   "filme-bolsonaro-memes-reacao-redes": {
     id: "filme-bolsonaro-memes-reacao-redes",
     slug: "filme-bolsonaro-memes-reacao-redes",
-    title: "Filme sobre Bolsonaro entra no radar com memes, ironias e gente bastante irritada nas redes",
+    title: "Filme sobre Bolsonaro ganha memes, ironias e gente bastante irritada nas redes",
     eyebrow: "humor e repercussao",
     date: "23 de abril de 2026",
     publishedAt: "2026-04-23T09:05:00-05:00",
@@ -71,7 +71,7 @@ const AUTHORIAL_DETAIL_ARTICLES = {
       "Parte da reação online foi puxada pelo teaser que virou alvo de piadas por erros em inglês. Veículos como VEJA e Farol da Bahia registraram que o vídeo foi recebido com chacota, inclusive por frases promocionais mal escritas, como se o próprio trailer tivesse pedido revisão no grupo da família e ninguém tivesse visto a tempo.",
       "Outro combustível para o humor foi a notícia de que o teaser de Dark Horse incomodou a equipe de Beyoncé por uso indevido de música. A combinação de grandiloquência, polêmica e acabamento questionado deu ao debate um tom quase inevitável: metade disputa política, metade roteiro involuntário de comédia de internet.",
       "No fim, o mais interessante não é só o filme em si, mas o efeito colateral. Há gente furiosa porque o projeto tenta heroicizar demais. Há gente furiosa porque achou o material tecnicamente fraco. E há uma multidão apenas se divertindo com o fato de que, no Brasil, até trailer político corre o risco de estrear primeiro como meme.",
-      "Na leitura do Catalogo, o valor desta pauta está menos em defender ou atacar o projeto e mais em mostrar como a internet brasileira pega um material de pretensão épica e o redistribui como comédia política em tempo real."
+      "O ponto mais interessante aqui esta em mostrar como a internet brasileira transforma um material de pretensao epica em comentario e meme quase em tempo real."
     ],
     highlights: [
       "A Colisão dos Destinos está listado para 14 de maio de 2026",
@@ -80,7 +80,7 @@ const AUTHORIAL_DETAIL_ARTICLES = {
       "Tema chegou ao debate público em tom de meme e irritação"
     ],
     development: [
-      "O diferencial editorial aqui é tratar a repercussão como fenômeno de linguagem de internet, e não só como pauta partidária.",
+      "Aqui, a repercussão aparece menos como disputa partidária e mais como fenômeno de linguagem de internet.",
       "Quando um projeto tenta nascer como épico e desembarca como print compartilhável, a web brasileira rapidamente muda o gênero do filme sem pedir autorização.",
       "Se surgirem novos trailers, vale acompanhar menos a propaganda oficial e mais o que o público faz com ela, porque é aí que a história realmente ganha tração."
     ]
@@ -178,8 +178,38 @@ const detailImageFocusOverridesBySlug = {
     "38% 26%",
   "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
   "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
-    "58% 16%"
+    "58% 16%",
+  "bittar-sobre-ato-de-jv-nao-tem-votos-para-ganhar-de-mim-e-o-caminho-dele-e-o-tapetao": "center 30%",
+  "esquenta-junino-2026-abre-temporada-cultural-com-quadrilhas-no-acre": "center 30%",
+  "jorge-viana-aciona-stf-e-flavio-dino-investiga-emendas-de-bittar-a-santa-casa-e-obras-de-infraestrutura":
+    "center 30%",
+  "mais-de-200-inqueritos-foram-instaurados-na-delegacia-da-mulher-em-cruzeiro-do-sul": "center 30%",
+  "circuito-country-em-epitaciolandia-tera-controle-de-acesso-de-criancas-e-adolescentes": "center 30%",
+  "moradores-indigenas-cavam-estrada-para-escapar-da-lama-em-ramal-de-assis-brasil": "center 30%",
+  "lula-preve-judicializacao-caso-desoneracao-seja-incluida-em-fim-da-6-215-1": "center 30%",
+  "trump-diz-que-eua-tem-8220-controle-total-8221-sobre-o-estreito-de-ormuz": "center 30%",
+  "prefeitura-de-cruzeiro-do-sul-realiza-4-edicao-do-programa-de-aquisicao-de-alimentos-com-investimento-de-r-225-mil":
+    "center 30%",
+  "voluntarios-da-adventist-health-atendem-milhares-de-pessoas-em-voluntariado-nas-filipinas":
+    "center 30%",
+  "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua": "center 30%",
+  "edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara": "center 30%",
+  "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre":
+    "center 30%",
+  "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse": "center 30%",
+  "edital-de-eleicao-e-posse-8211-ascak": "center 30%",
+  "exposicao-mostra-o-olhar-afro-brasileiro-da-fotografa-lita-cerqueira": "center 30%",
+  "justica-nega-pedido-de-careca-do-inss-para-barrar-apelido": "center 30%",
+  "sistema-prisional-de-sao-paulo-registra-uma-morte-a-cada-19-horas": "center 30%",
+  "lula-qualidade-do-agro-e-essencial-para-ampliar-exportacoes": "center 30%",
+  "stf-determina-atualizacao-anual-do-valor-do-minimo-existencial": "center 30%",
+  "estado-de-sao-paulo-tem-mais-duas-mortes-por-febre-amarela": "center 30%",
+  "enviado-de-trump-sugere-que-italia-substitua-ira-na-copa-do-mundo": "center 30%"
 };
+
+const detailArticlesWithoutHeroImage = new Set([
+  "mega-sena-sorteia-nesta-quinta-feira-premio-acumulado-em-r-70-milhoes"
+]);
 
 const resolveDetailImageFocus = (article = {}, fallback = "center 30%") => {
   const direct = String(article.imageFocus || "").trim();
@@ -522,9 +552,9 @@ const getFactCheckVerdict = ({
       description:
         "O cruzamento do texto-base encontrou desmentido explícito ou menção direta a boato/fake news.",
       items: [
-        `Resultado editorial: há sinal claro de boato ou informação falsa associado a ${title}.`,
-        `Base usada no veredito: texto publicado por ${sourceName} em ${dateLabel}.`,
-        "Leitura final: trate os trechos marcados como desmentidos, não como fato confirmado."
+        `Há sinal claro de boato ou informação falsa associado a ${title}.`,
+        `Base da leitura: texto publicado por ${sourceName} em ${dateLabel}.`,
+        "Os trechos marcados como desmentidos devem ser lidos com cautela e não como fato confirmado."
       ]
     };
   }
@@ -539,9 +569,9 @@ const getFactCheckVerdict = ({
       description:
         "O material consultado não traz base suficiente para fechar um veredito como fato consolidado.",
       items: [
-        `Resultado editorial: não dá para classificar ${title} como fake news, mas também não dá para cravar como fato fechado só com este material.`,
-        `Base usada no veredito: texto publicado por ${sourceName} em ${dateLabel}.`,
-        "Leitura final: o assunto segue inconclusivo e pede confirmação adicional antes de virar certeza."
+        `Ainda não dá para classificar ${title} como fato totalmente fechado só com este material.`,
+        `Base da leitura: texto publicado por ${sourceName} em ${dateLabel}.`,
+        "O assunto segue inconclusivo e pede confirmação adicional antes de virar certeza."
       ]
     };
   }
@@ -556,9 +586,9 @@ const getFactCheckVerdict = ({
       description:
         "Há base real no texto consultado, mas alguns pontos ainda dependem de atualização ou confirmação complementar.",
       items: [
-        `Resultado editorial: não há sinal de fake news no texto-base sobre ${title}.`,
-        `Base usada no veredito: texto publicado por ${sourceName} em ${dateLabel}.`,
-        "Leitura final: a notícia é tratada como válida, com ressalvas apenas nos pontos ainda sem fechamento total."
+        `Não há sinal de fake news no texto-base sobre ${title}.`,
+        `Base da leitura: texto publicado por ${sourceName} em ${dateLabel}.`,
+        "A notícia é tratada como válida, com ressalvas apenas nos pontos ainda sem fechamento total."
       ]
     };
   }
@@ -572,9 +602,9 @@ const getFactCheckVerdict = ({
     description:
       "O texto-base sustenta a leitura sem sinal de boato ou desmentido explícito no material consultado.",
     items: [
-      `Resultado editorial: ${title} não aparece como fake news no material analisado.`,
-      `Base usada no veredito: publicação de ${sourceName} em ${dateLabel}.`,
-      "Leitura final: o que está no texto-base pode ser tratado como conteúdo confirmado na fonte consultada."
+      `${title} não aparece como fake news no material analisado.`,
+      `Base da leitura: publicação de ${sourceName} em ${dateLabel}.`,
+      "O que está no texto-base pode ser tratado como conteúdo confirmado na fonte consultada."
     ]
   };
 };
@@ -705,12 +735,22 @@ const isIllustrativeImage = (article = {}, candidate = "") => {
 };
 
 const normalizeDetailArticle = (article = {}) => {
+  const normalizedSlug = normalizeSlug(article.slug || "");
   const inlineImageUrl = extractInlineArticleImage(article);
   const canonicalFeedImage =
     article.feedImageUrl || article.imageUrl || article.image || inlineImageUrl || "";
   const canonicalSourceImage = article.sourceImageUrl || "";
   const canonicalImage =
     canonicalFeedImage || inlineImageUrl || canonicalSourceImage || article.image || "";
+
+  if (detailArticlesWithoutHeroImage.has(normalizedSlug)) {
+    return {
+      ...article,
+      feedImageUrl: "",
+      imageUrl: "",
+      sourceImageUrl: ""
+    };
+  }
 
   return {
     ...article,
@@ -944,39 +984,14 @@ const getExpandedBodyParagraphs = (article) => {
     ? article.body.map(normalizeEditorialText).filter(Boolean)
     : [];
   const fallbackLede = normalizeEditorialText(article.lede || article.summary || "");
-  const source = normalizeEditorialText(article.sourceName || "fonte local");
-  const sourceLabel = normalizeEditorialText(article.sourceLabel || article.title || "");
-  const category = normalizeEditorialText(article.category || "tema local").toLowerCase();
-  const dateLabel = getArticleDateLabel(article);
-  const highlights = Array.isArray(article.highlights)
-    ? article.highlights.map(normalizeEditorialText).filter(Boolean)
-    : [];
 
-  const highlightSentence = highlights.length > 0 ? highlights.join(", ") : "atualizacao do assunto";
-  const analysisSentence = normalizeEditorialText(article.analysis || "");
-
-  const generated = [
-    fallbackLede
-      ? `No recorte do Catalogo Cruzeiro do Sul, esta noticia entra em uma leitura de ${category}, com impacto direto no dia a dia da cidade e no servico publico local. ${fallbackLede}`
-      : `No recorte do Catalogo Cruzeiro do Sul, esta noticia entra em uma leitura de ${category}, com impacto direto no dia a dia da cidade e no servico publico local.`,
-    `Em ${dateLabel}, a fonte ${source} destacou o seguinte eixo principal: ${sourceLabel}. A repercussao local costuma ir alem do fato inicial e atinge rotas de trabalho, atendimento e rotina dos bairros.`,
-    `Os pontos mais observados nesta cobertura sao: ${highlightSentence}. Esse conjunto ajuda a entender o que ja aconteceu e o que ainda pode evoluir nos proximos dias.`,
-    analysisSentence
-      ? `Contexto complementar: ${analysisSentence}`
-      : "Contexto complementar: a tendencia local depende da resposta institucional, do acompanhamento comunitario e de nova atualizacao da fonte original.",
-    "Para continuar bem informado, vale acompanhar o link da fonte consultada e as proximas atualizacoes do Catalogo, especialmente quando houver mudanca de status, novos numeros ou decisao oficial."
-  ].filter(Boolean);
-
-  const merged = [...baseParagraphs];
-  while (merged.length < 5 && generated.length > 0) {
-    merged.push(generated.shift());
+  if (baseParagraphs.length > 0) {
+    return baseParagraphs;
   }
 
-  if (merged.length === 0) {
-    return generated.slice(0, 5);
-  }
-
-  return merged;
+  return fallbackLede
+    ? [fallbackLede]
+    : ["A matéria segue em atualização conforme novas informações forem publicadas pela fonte consultada."];
 };
 
 const buildEditorialFactTabs = (article = {}) => {
@@ -1347,25 +1362,23 @@ const renderArticle = (article) => {
     contentNode.appendChild(p);
   });
 
-  const generatedDevelopment = Array.isArray(article.development)
+  const explicitDevelopment = Array.isArray(article.development)
     ? article.development.map(normalizeEditorialText).filter(Boolean)
-    : [
-        `${article.title || "A noticia"} continua em acompanhamento no Catalogo Cruzeiro do Sul com foco nos impactos práticos para a rotina da cidade.`,
-        `Na leitura local, o ponto central envolve ${String(article.category || "o tema principal").toLowerCase()} e seus efeitos diretos nos bairros, nos serviços e na vida de quem acompanha o caso.`,
-        "O portal segue atualizando esta matéria conforme novas informações oficiais forem publicadas pela fonte original e pelos órgãos locais."
-      ];
+    : [];
 
-  const developmentBox = document.createElement("section");
-  developmentBox.className = "detail-development";
-  const developmentTitle = document.createElement("h4");
-  developmentTitle.textContent = "Desenvolvimento da Materia";
-  developmentBox.appendChild(developmentTitle);
-  generatedDevelopment.forEach((line) => {
-    const paragraph = document.createElement("p");
-    paragraph.textContent = line;
-    developmentBox.appendChild(paragraph);
-  });
-  contentNode.appendChild(developmentBox);
+  if (explicitDevelopment.length > 0) {
+    const developmentBox = document.createElement("section");
+    developmentBox.className = "detail-development";
+    const developmentTitle = document.createElement("h4");
+    developmentTitle.textContent = "Contexto adicional";
+    developmentBox.appendChild(developmentTitle);
+    explicitDevelopment.forEach((line) => {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = line;
+      developmentBox.appendChild(paragraph);
+    });
+    contentNode.appendChild(developmentBox);
+  }
 
   highlightsNode.innerHTML = "";
   const quickHighlights =

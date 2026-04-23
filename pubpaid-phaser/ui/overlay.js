@@ -1,5 +1,5 @@
 import { subscribeGameState } from "../core/gameState.js";
-import { runPanelAction } from "../ui/panelActions.js";
+import { handlePanelCheckersCell, handlePanelDartsAim, runPanelAction } from "../ui/panelActions.js";
 
 const refs = {
   scene: document.querySelector("[data-game-scene]"),
@@ -42,8 +42,15 @@ function renderActions(actions = []) {
     button.textContent = action.label;
     button.dataset.panelAction = action.id;
     if (action.primary) button.classList.add("is-primary");
+    if (window.__PUBPAID_PANEL_BUSY__) button.disabled = true;
     refs.panelActions.appendChild(button);
   });
+}
+
+function renderPanelStatus(view) {
+  if (!view?.phase) return "";
+  const phaseClass = String(view.phase).replace(/[^a-z0-9-]/gi, "-").toLowerCase();
+  return `<div class="ppg-panel-status is-${phaseClass}"><span>${view.phase}</span></div>`;
 }
 
 function renderDartsView(view) {
@@ -64,15 +71,18 @@ function renderDartsView(view) {
     <div class="ppg-darts-view" aria-label="Mesa de Dardos">
       <div class="ppg-darts-cabinet">
         <div class="ppg-darts-marquee">DARTS</div>
-        <div class="ppg-darts-board">
+        <button class="ppg-darts-board${view.canPlay ? " is-aimable" : ""}" type="button" data-darts-aim-board ${view.canPlay ? "" : "disabled"}>
           <span class="ring r1"></span>
           <span class="ring r2"></span>
           <span class="ring r3"></span>
           <span class="bull"></span>
+          ${view.canPlay ? `<span class="ppg-aim-reticle"></span>` : ""}
+          ${view.busy ? `<span class="ppg-panel-busy-pulse"></span>` : ""}
           ${dartPins}
-        </div>
+        </button>
       </div>
       <div class="ppg-match-stats">
+        ${renderPanelStatus(view)}
         <span>rodada ${view.round}/${view.maxRounds}</span>
         <strong>${view.playerOneScore} x ${view.playerTwoScore}</strong>
         <small>P1 ${throwLabel(view.playerOneThrow)}</small>
@@ -87,9 +97,14 @@ function renderDartsView(view) {
 function renderCheckersView(view) {
   const board = Array.isArray(view.board) && view.board.length ? view.board : Array.from({ length: 8 }, () => Array(8).fill(""));
   const moveHints = Array.isArray(view.legalMoves) ? view.legalMoves : [];
-  const hintKeys = new Set(moveHints.flatMap((move) => [
+  const selected = view.selected || null;
+  const focusedHints = selected
+    ? moveHints.filter((move) => move?.from?.row === selected.row && move?.from?.col === selected.col)
+    : moveHints;
+  const hintKeys = new Set(focusedHints.flatMap((move) => [
     `${move?.from?.row}:${move?.from?.col}:from`,
-    `${move?.to?.row}:${move?.to?.col}:to`
+    `${move?.to?.row}:${move?.to?.col}:to`,
+    move?.capture ? `${move.capture.row}:${move.capture.col}:capture` : ""
   ]));
   const cells = board.flatMap((row, rowIndex) =>
     row.map((piece, colIndex) => {
@@ -98,7 +113,9 @@ function renderCheckersView(view) {
       const king = piece && piece === String(piece).toUpperCase();
       const from = hintKeys.has(`${rowIndex}:${colIndex}:from`);
       const to = hintKeys.has(`${rowIndex}:${colIndex}:to`);
-      return `<span class="${dark ? "dark" : "light"}${from ? " move-from" : ""}${to ? " move-to" : ""}" aria-label="linha ${rowIndex + 1}, coluna ${colIndex + 1}">${piece ? `<b class="${owner}${king ? " king" : ""}">${king ? "K" : ""}</b>` : ""}</span>`;
+      const capture = hintKeys.has(`${rowIndex}:${colIndex}:capture`);
+      const isSelected = selected?.row === rowIndex && selected?.col === colIndex;
+      return `<button type="button" class="${dark ? "dark" : "light"}${from ? " move-from" : ""}${to ? " move-to" : ""}${capture ? " move-capture" : ""}${isSelected ? " is-selected" : ""}" data-checkers-cell="${rowIndex}-${colIndex}" ${view.canPlay ? "" : "disabled"} aria-label="linha ${rowIndex + 1}, coluna ${colIndex + 1}">${piece ? `<b class="${owner}${king ? " king" : ""}">${king ? "K" : ""}</b>` : ""}</button>`;
     })
   ).join("");
   return `
@@ -108,9 +125,11 @@ function renderCheckersView(view) {
         <div class="ppg-checkers-board">${cells}</div>
       </div>
       <div class="ppg-match-stats">
+        ${renderPanelStatus(view)}
         <span>turno</span>
         <strong>${view.turn || "-"}</strong>
         <small>voce: ${view.seat || "-"}</small>
+        ${selected ? `<small>seleção ${String.fromCharCode(65 + selected.col)}${selected.row + 1}</small>` : ""}
       </div>
     </div>
     ${renderSettlementView(view.settlement)}
@@ -164,6 +183,32 @@ export function bindOverlay() {
     runPanelAction("close-panel");
   });
 
+  refs.panelView?.addEventListener("click", (event) => {
+    const board = event.target.closest("[data-darts-aim-board]");
+    if (board && !board.disabled) {
+      const rect = board.getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      handlePanelDartsAim(x, y);
+      return;
+    }
+    const cell = event.target.closest("[data-checkers-cell]");
+    if (cell && !cell.disabled) {
+      const [row, col] = cell.dataset.checkersCell.split("-").map((item) => Number(item));
+      handlePanelCheckersCell(row, col);
+    }
+  });
+
+  refs.panelView?.addEventListener("pointermove", (event) => {
+    const board = event.target.closest("[data-darts-aim-board]");
+    if (!board || board.disabled) return;
+    const rect = board.getBoundingClientRect();
+    const x = Math.max(8, Math.min(92, ((event.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(8, Math.min(92, ((event.clientY - rect.top) / rect.height) * 100));
+    board.style.setProperty("--aim-x", `${x}%`);
+    board.style.setProperty("--aim-y", `${y}%`);
+  });
+
   subscribeGameState((state) => {
     if (refs.scene) refs.scene.textContent = state.currentScene;
     if (refs.focus) refs.focus.textContent = state.focus;
@@ -191,6 +236,8 @@ export function bindOverlay() {
     if (refs.panelTitle) refs.panelTitle.textContent = state.panel.title;
     if (refs.panelBody) refs.panelBody.textContent = state.panel.body;
     renderChips(state.panel.chips);
+    window.__PUBPAID_PANEL_BUSY__ = Boolean(state.panelBusy);
+    refs.panel?.classList.toggle("is-busy", Boolean(state.panelBusy));
     renderPanelView(state.panel.view);
     renderActions(state.panel.actions);
   });

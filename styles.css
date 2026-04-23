@@ -1996,15 +1996,15 @@ body.site-loaded .page-shell {
     transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
   }
 
-  body.editorial-home.mobile-simple-loading .page-shell,
-  body.editorial-home.mobile-page-transition .page-shell {
+  body.editorial-home.mobile-simple-shell .page-shell,
+  body.editorial-home.mobile-page-shift .page-shell {
     opacity: 0.18;
     transform: translateY(8px) scale(0.992);
     filter: saturate(0.92) blur(0.8px);
   }
 
-  body.editorial-home.mobile-simple-loading::before,
-  body.editorial-home.mobile-page-transition::before {
+  body.editorial-home.mobile-simple-shell::before,
+  body.editorial-home.mobile-page-shift::before {
     content: "";
     position: fixed;
     inset: 0;
@@ -2013,8 +2013,8 @@ body.site-loaded .page-shell {
     z-index: 259;
   }
 
-  body.editorial-home.mobile-simple-loading::after,
-  body.editorial-home.mobile-page-transition::after {
+  body.editorial-home.mobile-simple-shell::after,
+  body.editorial-home.mobile-page-shift::after {
     content: "";
     position: fixed;
     left: 16px;

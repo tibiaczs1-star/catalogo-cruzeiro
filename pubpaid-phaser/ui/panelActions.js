@@ -17,6 +17,7 @@ export function openPanel(content) {
 }
 
 export function closePanel() {
+  updateGameState({ panelBusy: false, panelSelection: null });
   updatePanel({
     open: false,
     kicker: "interação",
@@ -177,7 +178,16 @@ function buildPvpView({ gameId, state, match, seat }) {
       playerOneThrow: darts.lastPlayerOne || darts.playerOneThrow || null,
       playerTwoThrow: darts.lastPlayerTwo || darts.playerTwoThrow || null,
       history: darts.history || [],
-      settlement
+      settlement,
+      canPlay: state === "active" && match?.turn === seat,
+      busy: gameState.panelBusy,
+      phase: gameState.panelBusy
+        ? "enviando"
+        : state === "active" && match?.turn === seat
+          ? "sua vez"
+          : state === "active"
+            ? "aguardando"
+            : state
     };
   }
   if (gameId === "checkers") {
@@ -189,10 +199,35 @@ function buildPvpView({ gameId, state, match, seat }) {
       turn: match?.turn || "",
       board,
       legalMoves: match?.turn === seat ? getLegalCheckersMoves(board, seat).slice(0, 6) : [],
-      settlement
+      settlement,
+      selected: gameState.panelSelection,
+      canPlay: state === "active" && match?.turn === seat,
+      busy: gameState.panelBusy,
+      phase: gameState.panelBusy
+        ? "enviando"
+        : state === "active" && match?.turn === seat
+          ? "sua vez"
+          : state === "active"
+            ? "aguardando"
+            : state
     };
   }
   return null;
+}
+
+function setPanelBusy(isBusy, prompt = "") {
+  updateGameState({
+    panelBusy: Boolean(isBusy),
+    objective: isBusy ? "Jogada enviada" : gameState.objective,
+    prompt: prompt || gameState.prompt
+  });
+}
+
+function clearPanelBusyWithError(message) {
+  updateGameState({
+    panelBusy: false,
+    prompt: message || "A mesa demorou a responder. Tente atualizar."
+  });
 }
 
 function getCheckersOwner(piece = "") {
@@ -317,6 +352,22 @@ export function runPanelAction(actionId) {
     return;
   }
 
+  if (actionId === "open-game-lobby-darts" || actionId === "open-game-lobby-checkers") {
+    const gameId = actionId.endsWith("checkers") ? "checkers" : "darts";
+    closePanel();
+    updateGameState({
+      activeGameId: gameId,
+      selectedTable: gameId,
+      lobbyPhase: "selecting",
+      objective: "Abrir lobby do jogo",
+      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+      prompt: `${gameId === "darts" ? "Dardos" : "Dama"} escolhido. Abrindo lobby separado.`
+    });
+    window.pubpaidPhaserGame?.scene?.stop?.("interior-scene");
+    window.pubpaidPhaserGame?.scene?.start?.("game-lobby-scene", { gameId });
+    return;
+  }
+
   if (actionId === "suggest-darts") {
     setSelectedTable("darts");
     updateGameState({
@@ -405,62 +456,116 @@ export function runPanelAction(actionId) {
   }
 
   if (actionId.startsWith("pvp-darts-")) {
+    if (gameState.panelBusy) return;
     const [, , aimX = "50", aimY = "50"] = actionId.split("-");
     const aim = {
       x: Number(aimX) || 50,
       y: Number(aimY) || 50
     };
-    updateGameState({
-      objective: "Arremesso enviado",
-      prompt: "Dardo lançado. Aguardando resposta da mesa."
-    });
+    setPanelBusy(true, "Dardo lançado. Aguardando resposta da mesa.");
     throwDarts(gameState.pvpMatchId, aim.x, aim.y).then((payload) => {
+      setPanelBusy(false);
       if (payload?.ok) {
         openPvpPanel(payload);
       } else {
         updateGameState({ prompt: payload?.error || "Arremesso recusado pela mesa." });
       }
-    });
+    }).catch(() => clearPanelBusyWithError("Falha ao enviar o dardo."));
     return;
   }
 
   if (actionId.startsWith("pvp-checkers-move-")) {
+    if (gameState.panelBusy) return;
     const move = decodeCheckersMove(actionId.replace("pvp-checkers-move-", ""));
     if (!move) {
       updateGameState({ prompt: "Movimento de Dama inválido no painel." });
       return;
     }
-    updateGameState({
-      objective: "Movimento enviado",
-      prompt: "Movimento de Dama enviado para validacao do servidor."
-    });
+    setPanelBusy(true, "Movimento de Dama enviado para validacao do servidor.");
     moveCheckers(gameState.pvpMatchId, move).then((payload) => {
+      setPanelBusy(false);
+      updateGameState({ panelSelection: null });
       if (payload?.ok) {
         openPvpPanel(payload);
       } else {
         updateGameState({ prompt: payload?.error || "Movimento recusado pela mesa." });
       }
-    });
+    }).catch(() => clearPanelBusyWithError("Falha ao enviar o movimento."));
     return;
   }
 
   if (actionId === "pvp-checkers-auto") {
+    if (gameState.panelBusy) return;
     const match = gameState.pvpMatch || {};
     const move = getAutoCheckersMove(match.board || [], gameState.pvpSeat || "playerOne");
     if (!move) {
       updateGameState({ prompt: "Nenhuma jogada legal encontrada para sua vez." });
       return;
     }
-    updateGameState({
-      objective: "Movimento enviado",
-      prompt: "Movimento de Dama enviado para validacao do servidor."
-    });
+    setPanelBusy(true, "Movimento de Dama enviado para validacao do servidor.");
     moveCheckers(gameState.pvpMatchId, move).then((payload) => {
+      setPanelBusy(false);
       if (payload?.ok) {
         openPvpPanel(payload);
       } else {
         updateGameState({ prompt: payload?.error || "Movimento recusado pela mesa." });
       }
-    });
+    }).catch(() => clearPanelBusyWithError("Falha ao enviar o movimento."));
+  }
+}
+
+export function handlePanelDartsAim(aimX, aimY) {
+  if (gameState.panelBusy || gameState.pvpStatus !== "active") return;
+  if (gameState.pvpMatch?.turn !== gameState.pvpSeat) {
+    updateGameState({ prompt: "Aguarde sua vez para mirar." });
+    return;
+  }
+  const x = Math.max(8, Math.min(92, Math.round(Number(aimX) || 50)));
+  const y = Math.max(8, Math.min(92, Math.round(Number(aimY) || 50)));
+  setPanelBusy(true, `Mira enviada em ${x}, ${y}.`);
+  throwDarts(gameState.pvpMatchId, x, y).then((payload) => {
+    setPanelBusy(false);
+    if (payload?.ok) {
+      openPvpPanel(payload);
+    } else {
+      updateGameState({ prompt: payload?.error || "Arremesso recusado pela mesa." });
+    }
+  }).catch(() => clearPanelBusyWithError("Falha ao enviar o dardo."));
+}
+
+export function handlePanelCheckersCell(row, col) {
+  if (gameState.panelBusy || gameState.pvpStatus !== "active") return;
+  const match = gameState.pvpMatch || {};
+  if (match.turn !== gameState.pvpSeat) {
+    updateGameState({ prompt: "Aguarde sua vez na Dama." });
+    return;
+  }
+  const legalMoves = getLegalCheckersMoves(match.board || [], gameState.pvpSeat || "playerOne");
+  const selected = gameState.panelSelection;
+  const fromMoves = legalMoves.filter((move) => move.from.row === row && move.from.col === col);
+  if (!selected && fromMoves.length) {
+    updateGameState({ panelSelection: { row, col }, prompt: "Peça selecionada. Agora escolha o destino." });
+    openPvpPanel({ state: gameState.pvpStatus, gameId: "checkers", match, seat: gameState.pvpSeat });
+    return;
+  }
+  if (selected) {
+    const chosen = legalMoves.find((move) =>
+      move.from.row === selected.row &&
+      move.from.col === selected.col &&
+      move.to.row === row &&
+      move.to.col === col
+    );
+    if (chosen) {
+      updateGameState({ panelSelection: null });
+      runPanelAction(`pvp-checkers-move-${encodeCheckersMove(chosen)}`);
+      return;
+    }
+    if (fromMoves.length) {
+      updateGameState({ panelSelection: { row, col }, prompt: "Peça trocada. Escolha o destino." });
+      openPvpPanel({ state: gameState.pvpStatus, gameId: "checkers", match, seat: gameState.pvpSeat });
+      return;
+    }
+    updateGameState({ panelSelection: null, prompt: "Destino inválido. Selecione uma peça com jogada legal." });
+    openPvpPanel({ state: gameState.pvpStatus, gameId: "checkers", match, seat: gameState.pvpSeat });
   }
 }

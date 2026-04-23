@@ -9662,7 +9662,7 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   object-position: center center;
 }
 
-.catalogo-founder-prelude-loading {
+.catalogo-founder-prelude-stage {
   width: min(620px, 92vw);
   padding: 1rem 1.05rem 1.1rem;
   border-radius: 22px;
@@ -9674,7 +9674,7 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   backdrop-filter: blur(16px);
 }
 
-.catalogo-founder-prelude-loading-head {
+.catalogo-founder-prelude-stage-head {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -9682,19 +9682,19 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   color: #fff;
 }
 
-.catalogo-founder-prelude-loading-head strong {
+.catalogo-founder-prelude-stage-head strong {
   color: #ffe29a;
   font-size: 0.95rem;
   letter-spacing: 0.02em;
 }
 
-.catalogo-founder-prelude-loading-head span {
+.catalogo-founder-prelude-stage-head span {
   color: #7eeeff;
   font-size: 0.88rem;
   font-weight: 900;
 }
 
-.catalogo-founder-prelude-loading-bar {
+.catalogo-founder-prelude-stage-bar {
   margin-top: 0.7rem;
   height: 12px;
   border-radius: 999px;
@@ -9702,7 +9702,7 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   overflow: hidden;
 }
 
-.catalogo-founder-prelude-loading-bar span {
+.catalogo-founder-prelude-stage-bar span {
   display: block;
   width: 0;
   height: 100%;
@@ -9711,7 +9711,7 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   box-shadow: 0 0 24px rgba(126, 238, 255, 0.34);
 }
 
-.catalogo-founder-prelude-loading p {
+.catalogo-founder-prelude-stage p {
   margin: 0.72rem 0 0;
   color: rgba(223, 239, 255, 0.74);
   font-size: 0.84rem;
@@ -10538,7 +10538,7 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   transform-origin: center center;
 }
 
-.catalogo-founder-prelude-loading {
+  .catalogo-founder-prelude-stage {
   border-color: rgba(117, 234, 255, 0.28);
   box-shadow:
     0 24px 64px rgba(0,0,0,0.34),

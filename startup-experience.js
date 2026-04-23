@@ -259,6 +259,16 @@
     return false;
   }
 
+  function isSkipIntroNavigation() {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const rawValue = String(params.get("skipIntro") || "").trim().toLowerCase();
+      return rawValue === "1" || rawValue === "true" || rawValue === "yes";
+    } catch (_error) {
+      return false;
+    }
+  }
+
   function connectionPrefersLite() {
     const connection =
       navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
@@ -658,24 +668,24 @@
         <div class="catalogo-founder-prelude-hud hud-left" aria-hidden="true">
           <span>FOUNDERS LINK</span>
           <strong>SYNC 4/4</strong>
-          <small>portal / cookies / assets / motion</small>
-          <em>escritorio orbital em alinhamento fino</em>
+          <small>portal / acesso / identidade / abertura</small>
+          <em>entrada especial dos apoiadores em preparo</em>
         </div>
         <div class="catalogo-founder-prelude-hud hud-right" aria-hidden="true">
           <span>ORBITAL DESK</span>
           <strong>READYING</strong>
-          <small>cinematic loader online</small>
-          <em>estrelas vetoriais e malha 3D ativas</em>
+          <small>abertura cinematica em curso</small>
+          <em>luzes e elementos visuais entrando em cena</em>
         </div>
         <div class="catalogo-founder-prelude-side side-left" aria-hidden="true">
           <span>OFFICE GRID</span>
           <strong>Nodes live</strong>
-          <small>briefing, render, cache, analytics</small>
+          <small>portal, marcas, cena e movimento</small>
         </div>
         <div class="catalogo-founder-prelude-side side-right" aria-hidden="true">
           <span>STAR DESK</span>
           <strong>Motion+Light</strong>
-          <small>glow, orbit, preload, premium pass</small>
+          <small>luz, orbita, abertura e destaque</small>
         </div>
         <div class="catalogo-founder-prelude-copy">
           <span>fundadores</span>
@@ -688,12 +698,12 @@
           <figure class="logo-card geane"><img src="${FOUNDERS_GEANE_LOGO_SRC}" alt="Dra. Geane Campo" loading="eager" decoding="async" /></figure>
           <figure class="logo-card recommencer"><img src="${FOUNDERS_RECOMMENCER_LOGO_SRC}" alt="Recommencer" loading="eager" decoding="async" /></figure>
         </div>
-        <div class="catalogo-founder-prelude-loading" aria-live="polite">
-          <div class="catalogo-founder-prelude-loading-head">
+        <div class="catalogo-founder-prelude-stage" aria-live="polite">
+          <div class="catalogo-founder-prelude-stage-head">
             <strong>Preparando portal e popup</strong>
             <span data-founder-prelude-percent>0%</span>
           </div>
-          <div class="catalogo-founder-prelude-loading-bar">
+          <div class="catalogo-founder-prelude-stage-bar">
             <span data-founder-prelude-bar></span>
           </div>
           <p data-founder-prelude-text>energizando a abertura dos fundadores</p>
@@ -726,7 +736,7 @@
     const steps = [
       "energizando a abertura dos fundadores",
       "montando estrelas e logos em cena",
-      "pre carregando popup de cookies",
+      "preparando a entrada principal do portal",
       "liberando a home principal"
     ];
     let stepIndex = 0;
@@ -924,31 +934,31 @@
             <div class="catalogo-war-soldier human-unit runner-unit soldier-alpha">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier robot-unit striker-unit soldier-beta">
+            <div class="catalogo-war-soldier human-unit striker-unit soldier-beta">
               <span class="catalogo-war-rifle"></span>
             </div>
             <div class="catalogo-war-soldier human-unit soldier-gamma">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier robot-unit runner-unit soldier-epsilon">
+            <div class="catalogo-war-soldier human-unit runner-unit soldier-epsilon">
               <span class="catalogo-war-rifle"></span>
             </div>
             <div class="catalogo-war-soldier human-unit soldier-zeta">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier robot-unit soldier-delta">
+            <div class="catalogo-war-soldier human-unit soldier-delta">
               <span class="catalogo-war-rifle"></span>
             </div>
             <div class="catalogo-war-soldier human-unit soldier-eta">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier robot-unit striker-unit soldier-theta">
+            <div class="catalogo-war-soldier human-unit striker-unit soldier-theta">
               <span class="catalogo-war-rifle"></span>
             </div>
             <div class="catalogo-war-soldier human-unit soldier-iota">
               <span class="catalogo-war-rifle"></span>
             </div>
-            <div class="catalogo-war-soldier robot-unit soldier-kappa">
+            <div class="catalogo-war-soldier human-unit soldier-kappa">
               <span class="catalogo-war-rifle"></span>
             </div>
             <div class="catalogo-war-soldier human-unit soldier-lambda">
@@ -1072,7 +1082,28 @@
     }, 280);
   }
 
+  function clearStaleWelcomeArtifacts() {
+    document
+      .querySelectorAll(".catalogo-welcome.is-splash-loader.is-leaving, .catalogo-welcome.is-splash-loader")
+      .forEach((node) => {
+        node.remove();
+      });
+
+    if (!document.querySelector(".catalogo-welcome.is-open")) {
+      document.body.classList.remove("catalogo-lock-scroll");
+    }
+  }
+
   function showReturningLoaderThen(callback) {
+    if (isSkipIntroNavigation()) {
+      clearStaleWelcomeArtifacts();
+      releaseFounderPreludeGate();
+      if (typeof callback === "function") {
+        callback();
+      }
+      return;
+    }
+
     whenSiteReady(() => {
       runWhenBrowserIsIdle(() => {
         const loader = createReturningLoaderModal({
@@ -1133,6 +1164,12 @@
   }
 
   ready(() => {
+    clearStaleWelcomeArtifacts();
+
+    window.addEventListener("pageshow", () => {
+      clearStaleWelcomeArtifacts();
+    });
+
     resetConsentForNewBrowserSession();
     const phoneFlow = shouldUsePhoneWelcome();
 

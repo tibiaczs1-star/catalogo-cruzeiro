@@ -8,6 +8,9 @@ import { BootScene } from "./scenes/BootScene.js";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
 import { InteriorScene } from "./scenes/InteriorScene.js";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js";
+import { DartsGameScene } from "./scenes/DartsGameScene.js";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
 bindOverlay();
@@ -23,7 +26,7 @@ const config = {
     width: GAME_WIDTH,
     height: GAME_HEIGHT
   },
-  scene: [BootScene, IntroScene, StreetScene, InteriorScene, UIScene]
+  scene: [BootScene, IntroScene, StreetScene, InteriorScene, GameLobbyScene, DartsGameScene, CheckersGameScene, UIScene]
 };
 
 const game = new Phaser.Game(config);
@@ -193,6 +196,15 @@ async function requestLandscapeLock() {
   }
 }
 
+function withTimeout(promise, fallback = false, timeoutMs = 900) {
+  return Promise.race([
+    promise,
+    new Promise((resolve) => {
+      window.setTimeout(() => resolve(fallback), timeoutMs);
+    })
+  ]);
+}
+
 function setPermissionStatus(message) {
   if (refs.permissionStatus) {
     refs.permissionStatus.textContent = message;
@@ -224,25 +236,26 @@ function startIntroScene() {
 async function activateExperience() {
   if (isOrientationBlocked()) {
     syncOrientationGate();
-    setPermissionStatus("Mude para horizontal para comecar.");
-    return;
+    setPermissionStatus("Modo retrato detectado. Iniciando mesmo assim para teste.");
   }
   if (refs.startExperience) {
     refs.startExperience.disabled = true;
   }
-  setPermissionStatus("Liberando tela cheia e som...");
-  const fullscreenOk = await requestFullscreen();
-  const orientationOk = await requestLandscapeLock();
+  setPermissionStatus("Iniciando abertura...");
   soundtrack.startIntro();
   syncAudioButton();
+  startIntroScene();
+  const [fullscreenOk, orientationOk] = await Promise.all([
+    withTimeout(requestFullscreen(), false, 900),
+    withTimeout(requestLandscapeLock(), false, 900)
+  ]);
   setPermissionStatus(
     fullscreenOk || orientationOk
-      ? "Tela cheia ativa. Iniciando..."
+      ? "Tela cheia ativa."
       : isIOS
         ? "Som ativo. No iPhone/iPad, continue em tela ampla no Safari."
-        : "Som ativo. Iniciando..."
+        : "Som ativo."
   );
-  startIntroScene();
   if (refs.startExperience) {
     refs.startExperience.disabled = false;
   }
@@ -494,6 +507,10 @@ window.render_game_to_text = () => {
     `pvpStatus=${gameState.pvpStatus}`,
     `pvpGameId=${gameState.pvpGameId}`,
     `pvpMatchId=${gameState.pvpMatchId}`,
+    `activeGameId=${gameState.activeGameId}`,
+    `lobbyPhase=${gameState.lobbyPhase}`,
+    `dartsGame=${gameState.dartsGame ? JSON.stringify(gameState.dartsGame) : "none"}`,
+    `checkersGame=${gameState.checkersGame ? JSON.stringify(gameState.checkersGame) : "none"}`,
     `music=${soundtrack.getState().playing ? "on" : "off"}`,
     `musicStyle=${soundtrack.getState().style}`,
     `musicZone=${soundtrack.getState().zone}`,

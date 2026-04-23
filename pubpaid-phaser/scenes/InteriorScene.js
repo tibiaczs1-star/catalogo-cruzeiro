@@ -1,20 +1,16 @@
 import { GAME_HEIGHT, GAME_WIDTH, INTERIOR_BOUNDS } from "../config/gameConfig.js";
 import { addIdleSpriteActor, addSpriteActor, ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
-import { openPanel, runPanelAction } from "../ui/panelActions.js";
+import { closePanel, openPanel } from "../ui/panelActions.js";
 import { gameState, updateGameState } from "../core/gameState.js";
-import { fetchPvpState } from "../services/pvpService.js";
 
 const INTERIOR_PANELS = {
-  bartender: {
-    kicker: "balcão",
-    title: "Bartender operacional",
-    body: "O bartender já virou um ponto real do núcleo: daqui saem recarga de teste, orientação de mesa e, depois, drinks e onboarding premium.",
-    chips: ["tutorial", "drinks", "mesa sugerida", NERD_TEAM.hud.name],
-    actions: [
-      { id: "reset-test", label: "Recarregar teste", primary: true },
-      { id: "suggest-darts", label: "Sugerir mesa" }
-    ]
+  waiter: {
+    kicker: "garçom",
+    title: "Garçom dos jogos",
+    body: "Ele abre o lobby próprio. Na próxima tela você escolhe o jogo, acha oponente, define aposta e confirma a partida.",
+    chips: ["hub", "lobby separado", "garçom", NERD_TEAM.hud.name],
+    actions: [{ id: "close-panel", label: "Fechar" }]
   },
   stage: {
     kicker: "palco",
@@ -22,28 +18,6 @@ const INTERIOR_PANELS = {
     body: "O palco agora é um nó de evento do salão. Ele pode ativar clima de noite, buff visual e chamadas para mesas ou torneios.",
     chips: ["evento", "buff visual", "crowd mood", NERD_TEAM.sprite.name],
     actions: [{ id: "toggle-stage-event", label: "Ativar evento", primary: true }]
-  },
-  west: {
-    kicker: "lounge",
-    title: "Mesa oeste PvP",
-    body: "A mesa oeste já pode abrir Dama com escrow real: saldo disponível trava na entrada, partida sem RNG e liquidação automática no fim.",
-    chips: ["escrow real", "dama", "sem RNG", NERD_TEAM.engine.name],
-    actions: [
-      { id: "join-checkers-pvp", label: "Dama 10 créditos", primary: true },
-      { id: "leave-pvp", label: "Sair da fila" },
-      { id: "close-panel", label: "Fechar" }
-    ]
-  },
-  east: {
-    kicker: "premium",
-    title: "Alvo leste PvP",
-    body: "Dardos virou o MVP real mais simples para testar pareamento, escrow, turno e resultado auditável antes dos jogos com mais sorte.",
-    chips: ["escrow real", "dardos", "hitbox", NERD_TEAM.qa.name],
-    actions: [
-      { id: "join-darts-pvp", label: "Dardos 10 créditos", primary: true },
-      { id: "leave-pvp", label: "Sair da fila" },
-      { id: "close-panel", label: "Fechar" }
-    ]
   }
 };
 
@@ -89,6 +63,10 @@ export class InteriorScene extends Phaser.Scene {
       checkers: { signature: "" }
     };
     this.resultFloatTexts = [];
+    this.actionFxState = {
+      darts: { signature: "" },
+      checkers: { signature: "" }
+    };
   }
 
   create() {
@@ -98,7 +76,7 @@ export class InteriorScene extends Phaser.Scene {
     this.buildAmbientFx();
 
     this.actors = [
-      this.addActor(TEXTURE_KEYS.waiterHero, 176, 244, 1.05, 2400, 0xfff0c0),
+      this.addActor(TEXTURE_KEYS.waiterHero, 306, 456, 0.08, 2400, 0xfff0c0),
       this.addActor(TEXTURE_KEYS.singer, 1058, 250, 1.1, 1600, 0xff7bd0),
       this.addActor(TEXTURE_KEYS.guestA, 320, 504, 1.02, 2100, 0x8ef0a3),
       this.addActor(TEXTURE_KEYS.guestB, 862, 492, 1.02, 2300, 0xffd06d)
@@ -122,14 +100,11 @@ export class InteriorScene extends Phaser.Scene {
       .setDepth(1.4);
 
     this.zones = [
-      { id: "bartender", x: 180, y: 252, radius: 84, color: 0xffd06d, label: "BAR", objective: "Falar com o bartender" },
+      { id: "waiter", x: 306, y: 438, radius: 72, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom" },
       { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco" },
-      { id: "west", x: 318, y: 490, radius: 84, color: 0x50efff, label: "LOUNGE", objective: "Abrir fila casual" },
-      { id: "east", x: 860, y: 480, radius: 84, color: 0xffd06d, label: "PREMIUM", objective: "Abrir fila premium" },
       { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua" }
     ];
     this.zoneHotspots = this.zones.map((zone) => this.buildZoneHotspot(zone));
-    this.buildPvpDecor();
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -157,16 +132,16 @@ export class InteriorScene extends Phaser.Scene {
         focus: "salão",
         objective: "Explorar pontos ativos do salão",
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
-        prompt: "Destino marcado dentro do salão. Aproxime-se de um ponto ativo e aperte Enter."
+        prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir o lobby."
       });
     });
 
     updateGameState({
       currentScene: "interior",
       focus: "salão",
-      objective: "Escolher um ponto ativo no salão",
+      objective: "Falar com o garçom para escolher jogo",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Salão definitivo carregado. Bartender, palco, mesas lounge e saída já vivem em scene própria."
+      prompt: "Salão definitivo carregado. O garçom no centro abre o lobby; os jogos acontecem fora do bar, em tela própria."
     });
   }
 
@@ -376,8 +351,30 @@ export class InteriorScene extends Phaser.Scene {
     const base = this.add.container(x, y).setDepth(1.2);
     const shadow = this.add.ellipse(0, 70, 168, 26, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
+    const floorPad = this.add.rectangle(0, 78, 196, 34, 0x0b1220, 0.92)
+      .setStrokeStyle(2, 0xffd06d, 0.16);
+    const floorStripeA = this.add.rectangle(-46, 78, 56, 4, 0x50efff, 0.16)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const floorStripeB = this.add.rectangle(46, 78, 56, 4, 0xff4fb8, 0.16)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const backPanel = this.add.rectangle(0, -4, 178, 190, 0x070a14, 0.72)
+      .setStrokeStyle(2, 0x50efff, 0.1);
+    const leftColumn = this.add.rectangle(-86, 6, 12, 162, 0x23111f, 1)
+      .setStrokeStyle(2, 0xffd06d, 0.2);
+    const rightColumn = this.add.rectangle(86, 6, 12, 162, 0x23111f, 1)
+      .setStrokeStyle(2, 0xffd06d, 0.2);
+    const cableA = this.add.rectangle(-70, 54, 46, 3, 0x50efff, 0.22)
+      .setRotation(0.26)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const cableB = this.add.rectangle(70, 48, 48, 3, 0xff4fb8, 0.22)
+      .setRotation(-0.24)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
     const cabinet = this.add.rectangle(0, 0, 156, 172, 0x160c15, 1)
       .setStrokeStyle(3, 0xffd06d, 0.28);
+    const cabinetSideLeft = this.add.rectangle(-66, 4, 18, 152, 0x2b1526, 0.92)
+      .setStrokeStyle(1, 0x07101c, 0.54);
+    const cabinetSideRight = this.add.rectangle(66, 4, 18, 152, 0x0c1726, 0.92)
+      .setStrokeStyle(1, 0x07101c, 0.54);
     const cabinetGlow = this.add.rectangle(0, 0, 148, 164, 0xff4fb8, 0.05)
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const marquee = this.add.rectangle(0, -68, 88, 18, 0xffd06d, 0.94)
@@ -411,6 +408,14 @@ export class InteriorScene extends Phaser.Scene {
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const scorePlate = this.add.rectangle(0, 58, 112, 24, 0x08101d, 0.94)
       .setStrokeStyle(2, 0x50efff, 0.34);
+    const coinTray = this.add.rectangle(0, 94, 82, 12, 0x0b1220, 0.96)
+      .setStrokeStyle(2, 0xffd06d, 0.28);
+    const coinA = this.add.circle(-22, 94, 4, 0xffd06d, 0.9)
+      .setStrokeStyle(1, 0x07101c, 0.65);
+    const coinB = this.add.circle(-8, 94, 4, 0xffd06d, 0.8)
+      .setStrokeStyle(1, 0x07101c, 0.65);
+    const coinC = this.add.circle(8, 94, 4, 0x50efff, 0.76)
+      .setStrokeStyle(1, 0x07101c, 0.65);
     const scoreText = this.add.text(0, 58, "0  X  0", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "12px",
@@ -457,7 +462,17 @@ export class InteriorScene extends Phaser.Scene {
 
     base.add([
       shadow,
+      floorPad,
+      floorStripeA,
+      floorStripeB,
+      backPanel,
+      leftColumn,
+      rightColumn,
+      cableA,
+      cableB,
       cabinet,
+      cabinetSideLeft,
+      cabinetSideRight,
       cabinetGlow,
       marquee,
       marqueeText,
@@ -471,6 +486,10 @@ export class InteriorScene extends Phaser.Scene {
       railLeft,
       railRight,
       scorePlate,
+      coinTray,
+      coinA,
+      coinB,
+      coinC,
       scoreText,
       roundText,
       resultFlash,
@@ -497,6 +516,15 @@ export class InteriorScene extends Phaser.Scene {
       stagger: 140,
       ease: "Sine.easeInOut"
     });
+    this.tweens.add({
+      targets: [floorStripeA, floorStripeB, coinA, coinB, coinC],
+      alpha: { from: 0.12, to: 0.42 },
+      duration: 1180,
+      yoyo: true,
+      repeat: -1,
+      stagger: 90,
+      ease: "Sine.easeInOut"
+    });
 
     return {
       base,
@@ -512,7 +540,12 @@ export class InteriorScene extends Phaser.Scene {
       pinA,
       pinB,
       railLeft,
-      railRight
+      railRight,
+      floorStripeA,
+      floorStripeB,
+      coinA,
+      coinB,
+      coinC
     };
   }
 
@@ -520,8 +553,24 @@ export class InteriorScene extends Phaser.Scene {
     const base = this.add.container(x, y).setDepth(1.2);
     const shadow = this.add.ellipse(0, 68, 182, 28, 0x000000, 0.22)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
+    const rug = this.add.rectangle(0, 78, 206, 38, 0x08101d, 0.9)
+      .setStrokeStyle(2, 0x50efff, 0.18);
+    const rugLineA = this.add.rectangle(-52, 78, 58, 4, 0xffd06d, 0.14)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const rugLineB = this.add.rectangle(52, 78, 58, 4, 0x8ef0a3, 0.14)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const chairLeft = this.add.rectangle(-102, 18, 26, 62, 0x21111f, 0.96)
+      .setStrokeStyle(2, 0xffd06d, 0.18);
+    const chairRight = this.add.rectangle(102, 18, 26, 62, 0x131b22, 0.96)
+      .setStrokeStyle(2, 0x50efff, 0.18);
     const table = this.add.rectangle(0, 0, 168, 154, 0x140b12, 1)
       .setStrokeStyle(3, 0x50efff, 0.24);
+    const tableBevelTop = this.add.rectangle(0, -70, 152, 8, 0xffd06d, 0.14)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const tableBevelBottom = this.add.rectangle(0, 70, 152, 8, 0x50efff, 0.12)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const tableLegA = this.add.rectangle(-68, 62, 14, 30, 0x0a0710, 0.95);
+    const tableLegB = this.add.rectangle(68, 62, 14, 30, 0x0a0710, 0.95);
     const felt = this.add.rectangle(0, 0, 140, 126, 0x131b22, 1)
       .setStrokeStyle(2, 0xffd06d, 0.18);
     const lampGlow = this.add.ellipse(0, -6, 154, 140, 0x8ef0a3, 0.08)
@@ -538,6 +587,12 @@ export class InteriorScene extends Phaser.Scene {
     }).setOrigin(0.5);
     const turnPlate = this.add.rectangle(0, 66, 110, 22, 0x08101d, 0.94)
       .setStrokeStyle(2, 0x8ef0a3, 0.28);
+    const cupLeft = this.add.rectangle(-78, -44, 14, 18, 0xffd06d, 0.78)
+      .setStrokeStyle(2, 0x07101c, 0.6);
+    const cupRight = this.add.rectangle(78, -42, 14, 18, 0x50efff, 0.72)
+      .setStrokeStyle(2, 0x07101c, 0.6);
+    const chipStack = this.add.rectangle(80, 48, 22, 10, 0xff4fb8, 0.76)
+      .setStrokeStyle(2, 0x07101c, 0.6);
     const turnText = this.add.text(0, 66, "TURN P1", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "10px",
@@ -614,13 +669,25 @@ export class InteriorScene extends Phaser.Scene {
 
     base.add([
       shadow,
+      rug,
+      rugLineA,
+      rugLineB,
+      chairLeft,
+      chairRight,
+      tableLegA,
+      tableLegB,
       table,
+      tableBevelTop,
+      tableBevelBottom,
       felt,
       lampGlow,
       resultGlow,
       scanBeam,
       labelPlate,
       labelText,
+      cupLeft,
+      cupRight,
+      chipStack,
       ...tiles,
       ...pieces.flatMap((entry) => [entry.piece, entry.crown]),
       turnPlate,
@@ -638,6 +705,15 @@ export class InteriorScene extends Phaser.Scene {
       repeat: -1,
       ease: "Sine.easeInOut"
     });
+    this.tweens.add({
+      targets: [rugLineA, rugLineB, cupLeft, cupRight, chipStack],
+      alpha: { from: 0.12, to: 0.36 },
+      duration: 1450,
+      yoyo: true,
+      repeat: -1,
+      stagger: 110,
+      ease: "Sine.easeInOut"
+    });
 
     return {
       base,
@@ -651,6 +727,11 @@ export class InteriorScene extends Phaser.Scene {
       payoutText,
       tiles,
       pieces,
+      rugLineA,
+      rugLineB,
+      cupLeft,
+      cupRight,
+      chipStack,
       boardOriginX,
       boardOriginY,
       cell
@@ -752,6 +833,125 @@ export class InteriorScene extends Phaser.Scene {
       life: 42,
       maxLife: 42
     });
+  }
+
+  spawnDartThrowFx(stage, throwEntry) {
+    if (!stage || !throwEntry) return;
+    const x = 860 + (Number(throwEntry.x ?? throwEntry.aimX ?? 50) - 50) * 0.9;
+    const y = 514 + (Number(throwEntry.y ?? throwEntry.aimY ?? 50) - 50) * 0.9 - 2;
+    const dart = this.add.rectangle(860, 610, 24, 4, throwEntry.seat === "playerTwo" ? 0xff4fb8 : 0x50efff, 0.98)
+      .setStrokeStyle(1, 0x07101c, 0.85)
+      .setRotation(-0.55)
+      .setDepth(2.1);
+    const trail = this.add.rectangle(860, 610, 38, 2, 0xffd06d, 0.32)
+      .setBlendMode(Phaser.BlendModes.SCREEN)
+      .setRotation(-0.55)
+      .setDepth(2.09);
+
+    this.tweens.add({
+      targets: [dart, trail],
+      x,
+      y,
+      duration: 360,
+      ease: "Cubic.easeOut",
+      onComplete: () => {
+        dart.destroy();
+        trail.destroy();
+        this.cameras.main.shake(90, 0.0025);
+        stage.impactRing?.setStrokeStyle(3, 0xffd06d, 0.78);
+        stage.scoreText?.setScale(1.16);
+        this.tweens.add({
+          targets: stage.scoreText,
+          scale: 1,
+          duration: 180,
+          ease: "Back.easeOut"
+        });
+        for (let index = 0; index < 8; index += 1) {
+          this.resultParticles.push({
+            x,
+            y,
+            vx: Phaser.Math.FloatBetween(-1.3, 1.3),
+            vy: Phaser.Math.FloatBetween(-1.8, -0.4),
+            life: Phaser.Math.Between(14, 24),
+            maxLife: Phaser.Math.Between(14, 24),
+            size: Phaser.Math.Between(2, 4),
+            color: index % 2 ? 0xffd06d : 0x50efff,
+            kind: "spark"
+          });
+        }
+      }
+    });
+  }
+
+  spawnCheckersMoveFx(stage, moveEntry) {
+    if (!stage || !moveEntry?.from || !moveEntry?.to) return;
+    const fromX = 318 + stage.boardOriginX + moveEntry.from.col * stage.cell;
+    const fromY = 520 + stage.boardOriginY + moveEntry.from.row * stage.cell;
+    const toX = 318 + stage.boardOriginX + moveEntry.to.col * stage.cell;
+    const toY = 520 + stage.boardOriginY + moveEntry.to.row * stage.cell;
+    const color = moveEntry.seat === "playerTwo" ? 0xff4fb8 : 0x50efff;
+    const ghost = this.add.circle(fromX, fromY, 7, color, 0.98)
+      .setStrokeStyle(2, 0xffd06d, 0.72)
+      .setDepth(2.12);
+    const halo = this.add.circle(fromX, fromY, 12, color, 0.16)
+      .setBlendMode(Phaser.BlendModes.SCREEN)
+      .setDepth(2.11);
+
+    this.tweens.add({
+      targets: [ghost, halo],
+      x: toX,
+      y: toY,
+      duration: 420,
+      ease: "Cubic.easeInOut",
+      onComplete: () => {
+        ghost.destroy();
+        halo.destroy();
+        if (moveEntry.capture) {
+          const captureX = 318 + stage.boardOriginX + moveEntry.capture.col * stage.cell;
+          const captureY = 520 + stage.boardOriginY + moveEntry.capture.row * stage.cell;
+          for (let index = 0; index < 10; index += 1) {
+            this.resultParticles.push({
+              x: captureX,
+              y: captureY,
+              vx: Phaser.Math.FloatBetween(-1.1, 1.1),
+              vy: Phaser.Math.FloatBetween(-1.5, -0.3),
+              life: Phaser.Math.Between(16, 28),
+              maxLife: Phaser.Math.Between(16, 28),
+              size: Phaser.Math.Between(2, 4),
+              color: index % 2 ? 0xff4fb8 : 0xffd06d,
+              kind: "diamond"
+            });
+          }
+        }
+        stage.turnText?.setScale(1.12);
+        this.tweens.add({
+          targets: stage.turnText,
+          scale: 1,
+          duration: 180,
+          ease: "Back.easeOut"
+        });
+      }
+    });
+  }
+
+  syncActionFxTriggers() {
+    const dartsMatch = gameState.pvpGameId === "darts" ? gameState.pvpMatch : null;
+    const dart = dartsMatch?.lastThrow || null;
+    const dartSignature = dart ? `${dartsMatch.id}:${dart.seat}:${dart.at || dartsMatch.updatedAt || ""}:${dart.x}:${dart.y}` : "";
+    if (dartSignature && this.actionFxState.darts.signature !== dartSignature) {
+      this.actionFxState.darts.signature = dartSignature;
+      this.spawnDartThrowFx(this.pvpDecor?.darts?.target, dart);
+    }
+    if (!dartSignature) this.actionFxState.darts.signature = "";
+
+    const checkersMatch = gameState.pvpGameId === "checkers" ? gameState.pvpMatch : null;
+    const move = checkersMatch?.lastMove || null;
+    const moveSignature = move ? `${checkersMatch.id}:${move.seat}:${move.at || checkersMatch.updatedAt || ""}:${move.from?.row}:${move.from?.col}:${move.to?.row}:${move.to?.col}` : "";
+    if (moveSignature && this.actionFxState.checkers.signature !== moveSignature) {
+      this.actionFxState.checkers.signature = moveSignature;
+      this.spawnCheckersMoveFx(this.pvpDecor?.checkers?.board, move);
+    }
+    if (!moveSignature) this.actionFxState.checkers.signature = "";
   }
 
   syncResultFxTriggers() {
@@ -1177,10 +1377,8 @@ export class InteriorScene extends Phaser.Scene {
   }
 
   getZoneLabel(zoneId) {
-    if (zoneId === "bartender") return "balcão do bartender";
+    if (zoneId === "waiter") return "garçom dos jogos";
     if (zoneId === "stage") return "palco da cantora";
-    if (zoneId === "west") return "mesa lounge oeste";
-    if (zoneId === "east") return "mesa lounge leste";
     if (zoneId === "exit") return "saída para rua";
     return "salão";
   }
@@ -1205,7 +1403,7 @@ export class InteriorScene extends Phaser.Scene {
     const zone = this.getNearestZone();
     if (!zone) {
       updateGameState({
-        prompt: "Chegue perto do balcão, palco, mesa oeste, mesa leste ou saída."
+        prompt: "Chegue perto do garçom no centro do salão ou da saída."
       });
       return;
     }
@@ -1215,25 +1413,21 @@ export class InteriorScene extends Phaser.Scene {
       return;
     }
 
-    if (zone.id === "west") {
-      fetchPvpState("checkers").then((payload) => {
-        if (!payload?.ok) {
-          openPanel(INTERIOR_PANELS[zone.id]);
-          return;
-        }
-        runPanelAction("refresh-pvp");
+    if (zone.id === "waiter") {
+      updateGameState({
+        currentScene: "game-lobby",
+        activeGameId: "",
+        lobbyPhase: "selecting",
+        objective: "Escolher jogo no lobby",
+        focus: "lobby dos jogos",
+        nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+        prompt: "Garçom abriu o lobby separado. Escolha o jogo na próxima tela."
       });
-    } else if (zone.id === "east") {
-      fetchPvpState("darts").then((payload) => {
-        if (!payload?.ok) {
-          openPanel(INTERIOR_PANELS[zone.id]);
-          return;
-        }
-        runPanelAction("refresh-pvp");
-      });
-    } else {
-      openPanel(INTERIOR_PANELS[zone.id]);
+      this.scene.start("game-lobby-scene", { gameId: "" });
+      return;
     }
+
+    openPanel(INTERIOR_PANELS[zone.id]);
     updateGameState({
       focus: this.getZoneLabel(zone.id),
       objective: "Escolher ação no painel",
@@ -1352,18 +1546,7 @@ export class InteriorScene extends Phaser.Scene {
         : 0.04 + (Math.sin(this.time.now / 220) + 1) * 0.01
     );
 
-    this.syncPvpDecorVisuals();
-    this.syncResultFxTriggers();
-    this.updateDartsStageVisual();
-    this.updateCheckersStageVisual();
     this.updateResultFxParticles();
-
-    if (this.time.now - this.pvpSyncAt > 9000) {
-      this.pvpSyncAt = this.time.now;
-      if (gameState.pvpGameId === "darts" || gameState.pvpGameId === "checkers") {
-        fetchPvpState(gameState.pvpGameId);
-      }
-    }
 
     updateGameState({
       currentScene: "interior",
@@ -1371,16 +1554,18 @@ export class InteriorScene extends Phaser.Scene {
       objective: zone
         ? zone.id === "exit"
           ? "Voltar para a rua"
-          : zone.id === "east" && gameState.pvpGameId === "darts" && gameState.pvpStatus === "active"
-            ? "Acompanhar a mesa de Dardos"
-          : "Apertar Enter para interagir"
-        : "Explorar pontos ativos do salão",
+          : zone.id === "waiter"
+            ? "Apertar Enter para abrir o lobby"
+            : "Apertar Enter para interagir"
+        : "Falar com o garçom no centro",
       nerdAgent: formatNerdAgent(zone ? zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud : NERD_TEAM.physics),
       prompt: zone
         ? zone.id === "exit"
           ? "Saída localizada. Aperte Enter para voltar para a rua."
-          : `${zone.label} ativo. Aperte Enter para abrir a interface do núcleo.`
-        : "Explore o salão definitivo em Phaser. Os pontos ativos brilham no mapa."
+          : zone.id === "waiter"
+            ? "Garçom localizado. Aperte Enter para abrir o lobby de jogos."
+            : `${zone.label} ativo. Aperte Enter para interagir.`
+        : "Explore o salão. O garçom no centro abre todos os jogos."
     });
   }
 
@@ -1407,7 +1592,7 @@ export class InteriorScene extends Phaser.Scene {
     });
     this.cameras.main.once("camerafadeoutcomplete", () => {
       this.player.clearTint();
-      runPanelAction("close-panel");
+      closePanel();
       this.scene.start("street-scene");
     });
     this.cameras.main.fadeOut(460, 5, 12, 8);

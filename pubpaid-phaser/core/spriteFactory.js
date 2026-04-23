@@ -2,6 +2,9 @@ const TEXTURE_KEYS = {
   player: "ppg-player-sprite",
   bartender: "ppg-bartender-sprite",
   waiterHero: "ppg-waiter-hero-sprite",
+  waiterLobby: "ppg-waiter-lobby-sprite",
+  waiterLobbySpeaking: "ppg-waiter-lobby-speaking-sprite",
+  singerLobby: "ppg-singer-lobby-sprite",
   singer: "ppg-singer-sprite",
   guestA: "ppg-guest-a-sprite",
   guestB: "ppg-guest-b-sprite"
@@ -233,7 +236,6 @@ export function ensureCoreSprites(scene) {
   const definitions = [
     [TEXTURE_KEYS.player, createPlayerCanvas],
     [TEXTURE_KEYS.bartender, createBartenderCanvas],
-    [TEXTURE_KEYS.waiterHero, createWaiterHeroCanvas],
     [TEXTURE_KEYS.singer, createSingerCanvas],
     [TEXTURE_KEYS.guestA, (frame) => createGuestCanvas("#34c4a1", "#baf7ea", frame)],
     [TEXTURE_KEYS.guestB, (frame) => createGuestCanvas("#f0bf6a", "#fff0c5", frame)]

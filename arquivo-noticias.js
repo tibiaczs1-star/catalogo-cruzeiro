@@ -239,7 +239,33 @@
       "center 22%",
     "crianca-desaparece-apos-naufragio-no-rio-purus-bombeiros-fazem-buscas": "center 18%",
     "com-foco-na-prevencao-prefeitura-de-mancio-lima-realiza-acao-de-saude-no-bairro-iracema":
-      "center 22%"
+      "center 22%",
+    "bittar-sobre-ato-de-jv-nao-tem-votos-para-ganhar-de-mim-e-o-caminho-dele-e-o-tapetao": "center 30%",
+    "esquenta-junino-2026-abre-temporada-cultural-com-quadrilhas-no-acre": "center 30%",
+    "jorge-viana-aciona-stf-e-flavio-dino-investiga-emendas-de-bittar-a-santa-casa-e-obras-de-infraestrutura":
+      "center 30%",
+    "mais-de-200-inqueritos-foram-instaurados-na-delegacia-da-mulher-em-cruzeiro-do-sul": "center 30%",
+    "circuito-country-em-epitaciolandia-tera-controle-de-acesso-de-criancas-e-adolescentes": "center 30%",
+    "moradores-indigenas-cavam-estrada-para-escapar-da-lama-em-ramal-de-assis-brasil": "center 30%",
+    "lula-preve-judicializacao-caso-desoneracao-seja-incluida-em-fim-da-6-215-1": "center 30%",
+    "trump-diz-que-eua-tem-8220-controle-total-8221-sobre-o-estreito-de-ormuz": "center 30%",
+    "prefeitura-de-cruzeiro-do-sul-realiza-4-edicao-do-programa-de-aquisicao-de-alimentos-com-investimento-de-r-225-mil":
+      "center 30%",
+    "voluntarios-da-adventist-health-atendem-milhares-de-pessoas-em-voluntariado-nas-filipinas":
+      "center 30%",
+    "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua": "center 30%",
+    "edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara": "center 30%",
+    "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre":
+      "center 30%",
+    "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse": "center 30%",
+    "edital-de-eleicao-e-posse-8211-ascak": "center 30%",
+    "exposicao-mostra-o-olhar-afro-brasileiro-da-fotografa-lita-cerqueira": "center 30%",
+    "justica-nega-pedido-de-careca-do-inss-para-barrar-apelido": "center 30%",
+    "sistema-prisional-de-sao-paulo-registra-uma-morte-a-cada-19-horas": "center 30%",
+    "lula-qualidade-do-agro-e-essencial-para-ampliar-exportacoes": "center 30%",
+    "stf-determina-atualizacao-anual-do-valor-do-minimo-existencial": "center 30%",
+    "estado-de-sao-paulo-tem-mais-duas-mortes-por-febre-amarela": "center 30%",
+    "enviado-de-trump-sugere-que-italia-substitua-ira-na-copa-do-mundo": "center 30%"
   };
 
   const articlePersonFocusPattern =

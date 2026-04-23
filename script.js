@@ -82,7 +82,9 @@ const cadernoCards = [...document.querySelectorAll(".cadernos-grid .caderno-card
 const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
 const insidersTypedNodes = [...document.querySelectorAll("[data-insiders-typed]")];
 const insidersBootScene = document.querySelector("[data-insiders-boot-scene]");
-const insidersArmyScene = document.querySelector("[data-insiders-army]");
+const insidersArmyScene = document.querySelector(
+  "[data-insiders-army]:not([data-insiders-crowd-stage])"
+);
 const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
 const tickerLiveGrid = document.querySelector("#ticker-live-grid");
 const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
@@ -829,7 +831,33 @@ const articleImageFocusOverridesBySlug = {
     "center 22%",
   "crianca-desaparece-apos-naufragio-no-rio-purus-bombeiros-fazem-buscas": "center 18%",
   "com-foco-na-prevencao-prefeitura-de-mancio-lima-realiza-acao-de-saude-no-bairro-iracema":
-    "center 22%"
+    "center 22%",
+  "bittar-sobre-ato-de-jv-nao-tem-votos-para-ganhar-de-mim-e-o-caminho-dele-e-o-tapetao": "center 30%",
+  "esquenta-junino-2026-abre-temporada-cultural-com-quadrilhas-no-acre": "center 30%",
+  "jorge-viana-aciona-stf-e-flavio-dino-investiga-emendas-de-bittar-a-santa-casa-e-obras-de-infraestrutura":
+    "center 30%",
+  "mais-de-200-inqueritos-foram-instaurados-na-delegacia-da-mulher-em-cruzeiro-do-sul": "center 30%",
+  "circuito-country-em-epitaciolandia-tera-controle-de-acesso-de-criancas-e-adolescentes": "center 30%",
+  "moradores-indigenas-cavam-estrada-para-escapar-da-lama-em-ramal-de-assis-brasil": "center 30%",
+  "lula-preve-judicializacao-caso-desoneracao-seja-incluida-em-fim-da-6-215-1": "center 30%",
+  "trump-diz-que-eua-tem-8220-controle-total-8221-sobre-o-estreito-de-ormuz": "center 30%",
+  "prefeitura-de-cruzeiro-do-sul-realiza-4-edicao-do-programa-de-aquisicao-de-alimentos-com-investimento-de-r-225-mil":
+    "center 30%",
+  "voluntarios-da-adventist-health-atendem-milhares-de-pessoas-em-voluntariado-nas-filipinas":
+    "center 30%",
+  "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua": "center 30%",
+  "edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara": "center 30%",
+  "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre":
+    "center 30%",
+  "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse": "center 30%",
+  "edital-de-eleicao-e-posse-8211-ascak": "center 30%",
+  "exposicao-mostra-o-olhar-afro-brasileiro-da-fotografa-lita-cerqueira": "center 30%",
+  "justica-nega-pedido-de-careca-do-inss-para-barrar-apelido": "center 30%",
+  "sistema-prisional-de-sao-paulo-registra-uma-morte-a-cada-19-horas": "center 30%",
+  "lula-qualidade-do-agro-e-essencial-para-ampliar-exportacoes": "center 30%",
+  "stf-determina-atualizacao-anual-do-valor-do-minimo-existencial": "center 30%",
+  "estado-de-sao-paulo-tem-mais-duas-mortes-por-febre-amarela": "center 30%",
+  "enviado-de-trump-sugere-que-italia-substitua-ira-na-copa-do-mundo": "center 30%"
 };
 
 const articlePersonFocusPattern =
@@ -952,21 +980,79 @@ const inferMosaicLayoutMode = (article = {}, panelNode) => {
 
 let thumbImageRequestSequence = 0;
 
+const getThumbFallbackImageUrl = (thumbNode) => {
+  const photoCard = thumbNode?.closest?.(".news-card, .archive-card, .live-feed-card, .feed-card");
+  const fallbackCandidates = [
+    thumbNode?.dataset?.imageUrl,
+    thumbNode?.dataset?.sourceImage,
+    photoCard?.dataset?.imageUrl,
+    photoCard?.dataset?.sourceImage
+  ];
+
+  for (const candidate of fallbackCandidates) {
+    const safeCandidate = sanitizeImageUrl(candidate);
+    if (safeCandidate) {
+      return safeCandidate;
+    }
+  }
+
+  const inlineBackground =
+    thumbNode?.style?.getPropertyValue("--bg-image") ||
+    thumbNode?.style?.getPropertyValue("--news-photo") ||
+    photoCard?.style?.getPropertyValue("--news-photo") ||
+    "";
+  const extractedInlineUrl = extractImageUrlFromText(inlineBackground);
+  if (extractedInlineUrl) {
+    return extractedInlineUrl;
+  }
+
+  const cssBackground =
+    thumbNode?.style?.backgroundImage ||
+    photoCard?.style?.backgroundImage ||
+    "";
+  return extractImageUrlFromText(cssBackground);
+};
+
 const applyThumbImage = (thumbNode, article) => {
   if (!thumbNode) {
     return;
   }
 
   const photoCard = thumbNode.closest(".news-card, .archive-card, .live-feed-card, .feed-card");
-  clearSurfaceImage(thumbNode);
+  const immediateImageUrl = sanitizeImageUrl(
+    getArticleDisplayImageUrl(article) || getThumbFallbackImageUrl(thumbNode)
+  );
+  const immediateFocus = resolveArticleImageFocus(article, "center");
+  const immediateFit = article?.imageFit || "cover";
+
+  if (immediateImageUrl) {
+    paintSurfaceImage(thumbNode, immediateImageUrl, immediateFocus, immediateFit);
+    thumbNode.dataset.imageUrl = immediateImageUrl;
+    thumbNode.dataset.sourceImage = immediateImageUrl;
+    thumbNode.classList.add("has-photo", "has-real-photo");
+    applyThumbPhotoLighting(thumbNode, article, immediateImageUrl);
+
+    if (photoCard) {
+      photoCard.classList.add("news-photo-fixed");
+      photoCard.dataset.imageUrl = immediateImageUrl;
+      photoCard.dataset.sourceImage = immediateImageUrl;
+      photoCard.style.setProperty("--news-photo", `url('${immediateImageUrl}')`);
+    }
+  } else {
+    clearSurfaceImage(thumbNode);
+  }
   const requestId = String(++thumbImageRequestSequence);
   thumbNode.dataset.thumbImageRequest = requestId;
 
-  if (photoCard) {
+  if (photoCard && !immediateImageUrl) {
     photoCard.classList.remove("news-photo-fixed");
     delete photoCard.dataset.imageUrl;
     delete photoCard.dataset.sourceImage;
     photoCard.style.removeProperty("--news-photo");
+  }
+
+  if (!article) {
+    return;
   }
 
   resolveArticleImage(article).then((safeUrl) => {
@@ -1082,11 +1168,13 @@ const formatSplashStamp = () => {
 };
 
 const setupSplashExperience = () => {
+  document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
+
   if (mobileIntroMedia?.matches) {
-    document.body.classList.add("mobile-simple-loading");
+    document.body.classList.add("mobile-simple-shell");
     window.setTimeout(() => {
       document.body.classList.add("site-loaded", "mobile-intro-ready");
-      document.body.classList.remove("mobile-simple-loading");
+      document.body.classList.remove("mobile-simple-shell");
     }, 180);
     return;
   }
@@ -1174,11 +1262,24 @@ const setupSplashExperience = () => {
   window.setTimeout(releaseSplash, remaining);
 };
 
+const clearMobilePageTransitionState = () => {
+  document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
+  document.body.classList.add("site-loaded");
+};
+
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", setupSplashExperience, { once: true });
 } else {
   setupSplashExperience();
 }
+
+window.addEventListener("pageshow", clearMobilePageTransitionState);
+window.addEventListener("focus", clearMobilePageTransitionState);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    clearMobilePageTransitionState();
+  }
+});
 
 const buildTickerChip = (phrase) => {
   const chip = document.createElement("article");
@@ -1437,7 +1538,7 @@ const radarGuideThemes = {
   },
   cotidiano: {
     label: "Cotidiano",
-    text: "A curadoria mira o feixe no cotidiano para subir o que mexe direto com a rotina da cidade e o pulso do dia."
+    text: "Aqui entram os assuntos que mexem direto com a rotina da cidade, do transporte aos serviços que afetam o dia."
   },
   prefeitura: {
     label: "Prefeitura",
@@ -1445,7 +1546,7 @@ const radarGuideThemes = {
   },
   politica: {
     label: "Política",
-    text: "O feixe sobe para assembleia, disputas institucionais, decisões de gabinete e movimentos do poder."
+    text: "Esta camada reúne decisões, movimentos institucionais e disputas que ajudam a entender o cenário político local."
   },
   policia: {
     label: "Polícia",
@@ -1453,11 +1554,11 @@ const radarGuideThemes = {
   },
   saude: {
     label: "Saúde",
-    text: "A luz do editor puxa campanhas, atendimento, prevenção e tudo que impacta cuidado público."
+    text: "Saúde reúne campanhas, atendimento, prevenção e tudo o que mexe com o cuidado público na cidade."
   },
   educacao: {
     label: "Educação",
-    text: "O apontador do editor sobe para escola, calendário letivo, esporte estudantil e formação."
+    text: "Educação acompanha escola, calendário letivo, formação, campus e oportunidades para estudantes e professores."
   },
   negocios: {
     label: "Negócios",
@@ -4497,7 +4598,10 @@ const initializeInsidersArmy = () => {
     return;
   }
 
-  if (insidersArmyScene.classList.contains("insiders-logo-squad-crowd")) {
+  if (
+    insidersArmyScene.classList.contains("insiders-logo-squad-crowd") ||
+    insidersArmyScene.hasAttribute("data-insiders-crowd-stage")
+  ) {
     buildInsidersArmyChant();
     insidersArmyScene.dataset.armyReady = "true";
     insidersArmyScene.dataset.armyMode = "crowd-march";
@@ -4567,6 +4671,9 @@ const escapeHtml = (value) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+
+const escapeRuntimeAttribute = (value) =>
+  String(value || "").replace(/"/g, "&quot;");
 
 const trendingInfluencerBuzzPool = [
   {
@@ -4866,8 +4973,45 @@ const buildDailyControversyBuzzCard = (item = {}, index = 0) => `
   </article>
 `;
 
-const renderDailyTrendingBuzz = () => {
+const renderDailyTrendingBuzz = async (options = {}) => {
   if (!trendingBuzzGrid) {
+    return;
+  }
+
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 8, options);
+  const selectedLiveBuzz = dedupeNewsItems(liveBuzzItems)
+    .filter((item) => item.title && (item.sourceUrl || item.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, 6);
+
+  if (selectedLiveBuzz.length >= 3) {
+    trendingBuzzGrid.classList.add("is-daily-buzz");
+    trendingBuzzGrid.innerHTML = selectedLiveBuzz
+      .map((item, index) => {
+        const href = buildArticleHref(item);
+        const photoUrl = getArticleDisplayImageUrl(item) || "./assets/home-cache/buzz-cruzeiro-01.jpg";
+        return `
+          <article class="trending-card daily-polemica-card reveal ${index ? "delay-1" : ""}">
+            <span class="trend-badge ${index === 0 ? "viral" : "trending"}">${escapeHtml(item.category || "Buzz")}</span>
+            <a
+              class="trend-photo"
+              href="${escapeRuntimeAttribute(href)}"
+              aria-label="${escapeRuntimeAttribute(truncateCopy(item.title || "Abrir repercussao", 120))}"
+              style="--trend-image:url('${escapeHtml(photoUrl)}')"
+            ></a>
+            <h3>${escapeHtml(truncateCopy(item.title || "Repercussão do dia", 92))}</h3>
+            <p>${escapeHtml(truncateCopy(item.summary || item.lede || "Atualização em acompanhamento.", 178))}</p>
+            <div class="engagement">
+              <span>${escapeHtml(item.sourceName || "Fonte ativa")}</span>
+              <span>${escapeHtml(
+                formatCompactDisplayDate(item.publishedAt || item.date || item.createdAt || "") || "agora"
+              )}</span>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+    registerArticleCardLinks(trendingBuzzGrid);
     return;
   }
 
@@ -5028,28 +5172,171 @@ const readOfflineStorage = (key) => {
 };
 
 const topicFeedClientCache = new Map();
+const TOPIC_FEED_CACHE_TTL_MS = 90 * 1000;
+let topicSurfaceRefreshTimerId = 0;
 
-const fetchTopicFeedCached = async (topic, limit = 4) => {
+const fetchTopicFeedCached = async (topic, limit = 4, options = {}) => {
   const normalizedTopic = normalizeText(topic);
   const safeLimit = Math.max(1, Number(limit) || 4);
   const cacheKey = `${normalizedTopic}:${safeLimit}`;
+  const forceRefresh = options.forceRefresh === true;
+  const cachedEntry = topicFeedClientCache.get(cacheKey);
+  const isFresh =
+    cachedEntry &&
+    typeof cachedEntry.createdAt === "number" &&
+    Date.now() - cachedEntry.createdAt < TOPIC_FEED_CACHE_TTL_MS;
 
-  if (!topicFeedClientCache.has(cacheKey)) {
+  if (!cachedEntry || forceRefresh || !isFresh) {
     topicFeedClientCache.set(
       cacheKey,
-      requestApiJson(`/api/topic-feed?topic=${encodeURIComponent(normalizedTopic)}&limit=${safeLimit}`, {
-        method: "GET"
-      })
-        .then((payload) =>
-          Array.isArray(payload?.items)
-            ? payload.items.map((item) => normalizeRuntimeArticle(item))
-            : []
+      {
+        createdAt: Date.now(),
+        promise: requestApiJson(
+          `/api/topic-feed?topic=${encodeURIComponent(normalizedTopic)}&limit=${safeLimit}`,
+          {
+            method: "GET"
+          }
         )
-        .catch(() => [])
+          .then((payload) =>
+            Array.isArray(payload?.items)
+              ? payload.items.map((item) => normalizeRuntimeArticle(item))
+              : []
+          )
+          .catch(() => [])
+      }
     );
   }
 
-  return topicFeedClientCache.get(cacheKey) || [];
+  return topicFeedClientCache.get(cacheKey)?.promise || [];
+};
+
+const getArticlePublishedTime = (article = {}) => {
+  const rawValue = article.publishedAt || article.date || article.createdAt || "";
+  const timestamp = Date.parse(rawValue);
+  return Number.isFinite(timestamp) ? timestamp : 0;
+};
+
+const getRecentTopicFallbackArticles = (matcher, limit = 6) =>
+  dedupeNewsItems(window.NEWS_DATA || [])
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => article.title && (article.sourceUrl || article.slug) && matcher(article))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, limit);
+
+const buildTopicUtilityCards = (items = []) =>
+  items
+    .map((item) => `
+      <article class="global-politics-card">
+        <p class="eyebrow">${escapeHtml(item.eyebrow || "política")}</p>
+        <h3>${escapeHtml(item.title || "Atualização política")}</h3>
+        <p>${escapeHtml(item.summary || "Use este bloco para seguir para o arquivo político e não desperdiçar espaço com placeholder.")}</p>
+        <footer>
+          <span>${escapeHtml(item.label || "atalho editorial")}</span>
+          <a href="${escapeRuntimeAttribute(item.href || "./arquivo.html")}">${escapeHtml(item.cta || "Abrir agora")}</a>
+        </footer>
+      </article>
+    `)
+    .join("");
+
+const buildBuzzSidebarItemsFromArticles = (items = []) =>
+  dedupeNewsItems(items)
+    .filter((article) => article?.title && (article?.sourceUrl || article?.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, 5)
+    .map((article, index) => ({
+      slug: article.slug || "",
+      kicker:
+        index === 0
+          ? "buzz atualizado"
+          : normalizeText(article.category || "").includes("cultura")
+            ? "cultura e conversa"
+            : "rede em movimento",
+      stat:
+        formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+        "agora"
+    }));
+
+const buildDynamicMarketPayload = (articles = [], fallbackMarket = {}) => {
+  const selected = dedupeNewsItems(articles)
+    .filter((article) => article?.title && (article?.sourceUrl || article?.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, 4);
+
+  if (!selected.length) {
+    return {
+      ...fallbackMarket,
+      snapshotLabel: buildSidebarSnapshotLabel()
+    };
+  }
+
+  const latest = selected[0];
+  const sourceCount = new Set(selected.map((article) => article.sourceName).filter(Boolean)).size;
+  const latestDateLabel =
+    formatCompactDisplayDate(latest.publishedAt || latest.date || latest.createdAt || "") || "agora";
+
+  return {
+    sourceName: "Radar economico",
+    sourceUrl: latest.sourceUrl || latest.url || fallbackMarket.sourceUrl || "./arquivo.html",
+    snapshotLabel: `economia viva • ${buildSidebarSnapshotLabel()}`,
+    quotes: [
+      {
+        label: "Atualizado",
+        value: latestDateLabel,
+        note: "manchetes reais puxadas do feed"
+      },
+      {
+        label: "Fontes",
+        value: `${Math.max(1, sourceCount)}`,
+        note: "origens acompanhadas nesta rodada"
+      },
+      {
+        label: "Recorte",
+        value: "sem numero fake",
+        note: "contexto vivo em vez de cotação inventada"
+      }
+    ],
+    moves: selected.slice(0, 3).map((article, index) => ({
+      bias: index === 0 ? "up" : "mixed",
+      badge: index === 0 ? "agora" : "monitorando",
+      label: article.category || "Economia",
+      title: truncateCopy(article.title || "Atualização econômica", 88),
+      summary: truncateCopy(
+        article.summary || article.lede || "Leitura econômica em acompanhamento.",
+        180
+      ),
+      sourceName: article.sourceName || "Fonte ativa",
+      url: buildArticleHref(article)
+    })),
+    opinionTitle: "Leitura financeira do Catalogo",
+    opinionText:
+      "Este painel agora tenta captar economia nova do feed ativo antes de cair no fallback local. A ideia é mostrar novidade real, não quadro parado.",
+    pocketTips: selected.slice(0, 2).map((article) => ({
+      tag: normalizeText(article.category || "economia") || "economia",
+      dateLabel:
+        formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+        "agora",
+      title: truncateCopy(article.title || "Atualização econômica", 76),
+      meta: truncateCopy(
+        article.summary || article.lede || "Contexto econômico em acompanhamento.",
+        90
+      ),
+      sourceName: article.sourceName || "Fonte ativa",
+      url: buildArticleHref(article)
+    }))
+  };
+};
+
+const scheduleTopicSurfaceRefresh = () => {
+  if (topicSurfaceRefreshTimerId) {
+    return;
+  }
+
+  topicSurfaceRefreshTimerId = window.setInterval(() => {
+    void renderDailyTrendingBuzz({ forceRefresh: true });
+    void renderGlobalPoliticsHighlights({ forceRefresh: true });
+    renderRegionalPoliticsHighlights(window.NEWS_DATA || []);
+    renderSidebarWidgets({ forceRefresh: true });
+  }, 60 * 1000);
 };
 
 const persistOfflineNewsCache = (items = []) => {
@@ -5173,22 +5460,54 @@ const hydrateCadernoCards = async (items = []) => {
   await Promise.all(cardTasks);
 };
 
-const renderGlobalPoliticsHighlights = async () => {
+const renderGlobalPoliticsHighlights = async (options = {}) => {
   const grid = document.querySelector("#global-politics-grid[data-topic-feed]");
   if (!grid) {
     return;
   }
 
-  const items = await fetchTopicFeedCached(grid.dataset.topicFeed || "politics", 6);
+  const items = await fetchTopicFeedCached(grid.dataset.topicFeed || "politics", 6, options);
   const selected = dedupeNewsItems(items)
     .filter((item) => item.title && (item.sourceUrl || item.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
     .slice(0, 6);
 
-  if (!selected.length) {
+  const fallbackItems = selected.length
+    ? []
+    : getRecentTopicFallbackArticles(isRegionalPoliticsArticle, 6);
+  const finalItems = selected.length ? selected : fallbackItems;
+
+  if (!finalItems.length) {
+    grid.innerHTML = buildTopicUtilityCards([
+      {
+        eyebrow: "política nacional",
+        title: "Abrir arquivo político completo",
+        summary: "Quando o feed não entregar manchetes novas agora, este atalho leva para o arquivo e evita card morto.",
+        label: "utilidade editorial",
+        href: "./arquivo.html",
+        cta: "Ver arquivo"
+      },
+      {
+        eyebrow: "contexto",
+        title: "Voltar ao radar principal da home",
+        summary: "Use o radar principal para encontrar a notícia política mais recente já incorporada na edição local.",
+        label: "atalho útil",
+        href: "#radar",
+        cta: "Abrir radar"
+      },
+      {
+        eyebrow: "busca",
+        title: "Buscar política no portal",
+        summary: "A busca lateral ajuda a localizar eleição, prefeitura, governo, Câmara, Acre e Brasília sem depender só deste bloco.",
+        label: "busca interna",
+        href: "#sidebar-now",
+        cta: "Usar busca"
+      }
+    ]);
     return;
   }
 
-  grid.innerHTML = selected
+  grid.innerHTML = finalItems
     .map((item) => {
       const href = item.slug
         ? `./noticia.html?slug=${encodeURIComponent(item.slug)}`
@@ -5201,7 +5520,7 @@ const renderGlobalPoliticsHighlights = async () => {
           <p>${escapeHtml(truncateCopy(item.summary || item.lede || "Atualização de política em acompanhamento.", 190))}</p>
           <footer>
             <span>${escapeHtml(source)}</span>
-            <a href="${escapeHtml(href)}">Ler destaque</a>
+            <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
           </footer>
         </article>
       `;
@@ -5295,13 +5614,13 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
     .map(({ scope, article }) => {
       if (!article) {
         return `
-          <article class="global-politics-card" data-scope="${escapeAttribute(scope.key)}">
+          <article class="global-politics-card" data-scope="${escapeRuntimeAttribute(scope.key)}">
             <p class="eyebrow">${escapeHtml(scope.label)}</p>
             <h3>${escapeHtml(scope.fallbackTitle)}</h3>
-            <p>Assim que houver notícia compatível no feed, este espaço prioriza política regional nessa camada.</p>
+            <p>Sem manchete perfeita nesta camada agora, use este bloco como atalho útil para continuar a leitura política sem espaço morto.</p>
             <footer>
-              <span>Fila editorial</span>
-              <a href="#radar">Abrir radar</a>
+              <span>utilidade editorial</span>
+              <a href="${escapeRuntimeAttribute(scope.key === "brasil" ? "#politica-global" : "./arquivo.html")}">${scope.key === "brasil" ? "Ver contexto" : "Abrir arquivo"}</a>
             </footer>
           </article>
         `;
@@ -5310,13 +5629,13 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
       const href = buildArticleHref(article);
       const source = formatMosaicSourceLabel(article);
       return `
-        <article class="global-politics-card" data-scope="${escapeAttribute(scope.key)}">
+          <article class="global-politics-card" data-scope="${escapeRuntimeAttribute(scope.key)}">
           <p class="eyebrow">${escapeHtml(scope.label)}</p>
           <h3>${escapeHtml(truncateCopy(article.title || scope.fallbackTitle, 120))}</h3>
           <p>${escapeHtml(truncateCopy(article.summary || article.lede || "Atualização política em acompanhamento.", 190))}</p>
           <footer>
             <span>${escapeHtml(source)}</span>
-            <a href="${escapeAttribute(href)}">Ler destaque</a>
+            <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
           </footer>
         </article>
       `;
@@ -5776,7 +6095,13 @@ if (mobileHomeLeadMedia) {
   }
 }
 
-const articleCardSelector = [".news-card", ".archive-card", ".mosaic-item", ".global-politics-card"].join(", ");
+const articleCardSelector = [
+  ".news-card",
+  ".archive-card",
+  ".mosaic-item",
+  ".global-politics-card",
+  ".trending-card"
+].join(", ");
 const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
 
 const getPrimaryCardLink = (card) =>
@@ -5872,7 +6197,7 @@ const initializeMobilePagePrefetch = () => {
       return;
     }
 
-    document.body.classList.add("mobile-page-transition");
+    document.body.classList.add("mobile-page-shift");
   });
 };
 
@@ -8189,7 +8514,7 @@ const buildListPanelMarkup = ({
 const buildMarketMarkup = (market) => `
   <div class="sidebar-heading">
     <div>
-      <p class="widget-title">Radar de Bolsa</p>
+      <p class="widget-title">Radar de Mercado</p>
       <span class="widget-source">${market.snapshotLabel}</span>
     </div>
     <a class="widget-link" href="${escapeAttribute(market.sourceUrl)}"${getSidebarLinkAttrs(market.sourceUrl)}>fechamento</a>
@@ -8233,7 +8558,7 @@ const buildMarketMarkup = (market) => `
   </div>
 `;
 
-const renderSidebarWidgets = () => {
+const renderSidebarWidgets = (options = {}) => {
   if (!sidebarData) {
     return;
   }
@@ -8352,7 +8677,13 @@ const renderSidebarWidgets = () => {
   }
 
   if (marketPanel) {
-    marketPanel.innerHTML = buildMarketMarkup(sidebarData.market);
+    marketPanel.innerHTML = buildMarketMarkup({
+      ...sidebarData.market,
+      snapshotLabel: buildSidebarSnapshotLabel()
+    });
+    void fetchTopicFeedCached("economy", 6, options).then((items) => {
+      marketPanel.innerHTML = buildMarketMarkup(buildDynamicMarketPayload(items, sidebarData.market));
+    });
   }
 
   if (agendaPanel) {
@@ -8406,6 +8737,25 @@ const renderSidebarWidgets = () => {
       ${buildStoryMarkup(sidebarData.buzz, "buzz")}
     </div>
   `;
+    void fetchTopicFeedCached("buzz", 8, options).then((items) => {
+      const liveBuzzItems = buildBuzzSidebarItemsFromArticles(items);
+      if (!liveBuzzItems.length) {
+        return;
+      }
+
+      buzzPanel.innerHTML = `
+        <div class="sidebar-heading">
+          <div>
+            <p class="widget-title">Rede, Festas & Fofoca</p>
+            <span class="widget-source">captando novidade real do feed</span>
+          </div>
+          <span class="widget-link passive-link">forçando busca por coisa nova</span>
+        </div>
+        <div class="sidebar-photo-list">
+          ${buildStoryMarkup(liveBuzzItems, "buzz")}
+        </div>
+      `;
+    });
   }
 
   if (popularPanel) {
@@ -9049,6 +9399,7 @@ attachCommunitySignalFlow();
 attachSubscriptionSubmission();
 attachAgentMailFlow();
 renderDailyTrendingBuzz();
+scheduleTopicSurfaceRefresh();
 initializeLiveTicker();
 scheduleHomeBackgroundHydration();
 hydrateFoundersWallFromApi();

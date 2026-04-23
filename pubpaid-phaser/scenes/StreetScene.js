@@ -7,8 +7,8 @@ import { updateGameState } from "../core/gameState.js";
 const TERMINAL_PANEL = {
   kicker: "terminal",
   title: "Missões locais",
-  body: "Terminal pronto para receber missões, contratos de teste e chamadas de carteira. Por enquanto ele só marca o ponto no mapa da rua.",
-  chips: ["missões", "teste local", "carteira depois"],
+  body: "Terminal pronto para receber missões, contratos rápidos e chamadas de carteira. Por enquanto ele marca o ponto principal no mapa da rua.",
+  chips: ["missoes", "atalho rapido", "carteira em seguida"],
   actions: [{ id: "close-panel", label: "Fechar", primary: true }]
 };
 

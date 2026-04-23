@@ -51,7 +51,7 @@ function buildGlobalPrompt(registry) {
     "1. Cada agente responde a partir da sua especialidade real.",
     "2. Toda ideia precisa melhorar leitura, hierarquia, confiança ou sensação tecnológica.",
     "3. Efeito visual sem função deve ser cortado.",
-    "4. O resultado final deve parecer produto premium, não protótipo decorado.",
+    "4. O resultado final deve parecer produto premium, nao rascunho decorado.",
     "",
     "Formato de resposta exigido:",
     "- Diagnóstico breve do bloco analisado",

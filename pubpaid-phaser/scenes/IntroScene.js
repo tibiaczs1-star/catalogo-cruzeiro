@@ -220,7 +220,7 @@ export class IntroScene extends Phaser.Scene {
     this.vignette = this.add.graphics();
     this.drawVignette();
 
-    this.caption = this.add.text(48, GAME_HEIGHT - 54, "carregando abertura", {
+    this.caption = this.add.text(48, GAME_HEIGHT - 54, "abertura em curso", {
       fontFamily: "Trebuchet MS, Verdana, sans-serif",
       fontSize: "18px",
       fontStyle: "bold",

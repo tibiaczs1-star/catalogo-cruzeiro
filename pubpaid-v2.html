@@ -20,7 +20,22 @@
     <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260422cinematic" />
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260422cinematic"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260423checkersassets"></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        window.setTimeout(function () {
+          if (window.pubpaidPhaserGame || location.protocol !== "file:") return;
+          var status = document.querySelector("[data-permission-status]");
+          var button = document.querySelector("[data-start-experience]");
+          if (status) {
+            status.textContent = "Abra por servidor local para carregar o jogo completo.";
+          }
+          if (button) {
+            button.textContent = "Precisa de servidor local";
+          }
+        }, 1200);
+      });
+    </script>
   </head>
   <body class="pubpaid-phaser-page pubpaid-phaser-page--official">
     <main class="ppg-shell ppg-shell--official">
@@ -163,7 +178,7 @@
         <article>
           <span class="ppg-kicker">visão</span>
           <h2>Jogar em vez de simular</h2>
-          <p>O foco agora é fazer a 2.0 funcionar como jogo de verdade: tela limpa, cenas sólidas, transição real e menos fachada de protótipo.</p>
+          <p>O foco agora e fazer a 2.0 funcionar como jogo de verdade: tela limpa, cenas solidas, transicao real e presenca mais segura na tela.</p>
         </article>
         <article>
           <span class="ppg-kicker">próxima camada</span>
