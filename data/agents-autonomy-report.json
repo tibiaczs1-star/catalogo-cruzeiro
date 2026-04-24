@@ -1,8 +1,8 @@
 {
-  "ok": false,
+  "ok": true,
   "trigger": "once",
-  "startedAt": "2026-04-24T01:13:15.014Z",
-  "finishedAt": "2026-04-24T01:13:15.251Z",
+  "startedAt": "2026-04-24T11:21:34.211Z",
+  "finishedAt": "2026-04-24T11:21:34.713Z",
   "actions": [
     {
       "id": "news-editorial-body",
@@ -23,8 +23,8 @@
     {
       "id": "review-team",
       "agentGroup": "equipe local de revisao",
-      "status": "failed",
-      "output": "spawnSync C:\\Program Files\\nodejs\\node.exe EPERM"
+      "status": "done",
+      "output": "{\n  \"reportJson\": \".codex-temp/review-team/latest-report.json\",\n  \"reportMd\": \".codex-temp/review-team/latest-report.md\",\n  \"filesAudited\": 131,\n  \"totalIssues\": 1\n}"
     }
   ]
 }
