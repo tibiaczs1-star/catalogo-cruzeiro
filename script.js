@@ -1,7 +1,6 @@
 ﻿const revealNodes = document.querySelectorAll(".reveal");
-const filterButtons = document.querySelectorAll(".chip-button");
+const radarFilterButtons = document.querySelectorAll("#radar .chip-button[data-filter]");
 const dayChips = document.querySelectorAll(".day-chip");
-const newsCards = document.querySelectorAll(".news-card");
 const betButtons = document.querySelectorAll(".bet-option");
 const parallaxNodes = document.querySelectorAll("[data-parallax]");
 const stakeInput = document.querySelector("#stake");
@@ -15,16 +14,454 @@ const commentsFeed = document.querySelector(".comments-feed");
 const commentFeedback = document.querySelector("#comment-feedback");
 const charCount = document.querySelector("#char-count");
 const guideTip = document.querySelector("#guide-tip");
-const menuToggle = document.querySelector("#menu-toggle");
-const siteHeader = document.querySelector(".site-header");
+const splashRoot = document.querySelector(".logo-splash");
+const splashStatus = document.querySelector("#logo-splash-status");
+const splashDate = document.querySelector("#logo-splash-date");
+const radarGuide = document.querySelector("#radar-guide");
+const radarGuideLabel = document.querySelector("#radar-guide-label");
+const radarGuideText = document.querySelector("#radar-guide-text");
+const radarGuideScene = radarGuide?.querySelector(".radar-guide-scene");
+const radarGuideSprite = radarGuide?.querySelector(".radar-guide-sprite");
+const radarGuideLaser = radarGuide?.querySelector(".radar-guide-laser");
+const radarGuideLaserDot = radarGuide?.querySelector(".radar-guide-laser-dot");
+const radarGuideLantern = radarGuide?.querySelector(".radar-guide-lantern");
+const radarGuideFrontArm = radarGuide?.querySelector(".radar-guide-arm.arm-front");
 const thumbNodes = document.querySelectorAll(".news-thumb, .mini-thumb");
 const subscriptionForm = document.querySelector("#subscription-form");
 const subscriptionNameInput = document.querySelector("#subscription-name");
 const subscriptionEmailInput = document.querySelector("#subscription-email");
 const subscriptionPlanInput = document.querySelector("#subscription-plan");
+const subscriptionFounderWrap = document.querySelector("#subscription-founder-wrap");
+const subscriptionFounderAmountInput = document.querySelector("#subscription-founder-amount");
 const subscriptionFeedback = document.querySelector("#subscription-feedback");
+const subscriptionSubmitButton = document.querySelector("#subscription-submit");
+const subscriptionPaymentCard = document.querySelector("#subscription-payment-card");
+const subscriptionPixKey = document.querySelector("[data-supporter-pix-key]");
+const subscriptionPixAmount = document.querySelector("[data-supporter-pix-amount]");
+const subscriptionPixTxid = document.querySelector("[data-supporter-pix-txid]");
+const subscriptionPixQr = document.querySelector("#subscription-pix-qr");
+const subscriptionPixCode = document.querySelector("#subscription-pix-code");
+const subscriptionPaymentNote = document.querySelector("#subscription-payment-note");
+const subscriptionCopyPixButton = document.querySelector("#subscription-copy-pix");
+const subscriptionRefreshPixButton = document.querySelector("#subscription-refresh-pix");
+const foundersCount = document.querySelector("#founders-count");
+const foundersList = document.querySelector("#founders-list");
+const agentMailModal = document.querySelector("#agent-mail-modal");
+const agentMailForm = document.querySelector("#agent-mail-form");
+const agentMailNameInput = document.querySelector("#agent-mail-name");
+const agentMailEmailInput = document.querySelector("#agent-mail-email");
+const agentMailSubjectInput = document.querySelector("#agent-mail-subject");
+const agentMailMessageInput = document.querySelector("#agent-mail-message");
+const agentMailFeedback = document.querySelector("#agent-mail-feedback");
+const footerChatInput = document.querySelector("#footer-chat-input");
+const footerChatSend = document.querySelector("#footer-chat-send");
+const heroTourismShell = document.querySelector(".hero-newsroom-shell");
+const heroInsidersShell = document.querySelector(".hero-insiders-shell");
+const heroTourismSlides = [...document.querySelectorAll("[data-hero-tourism-slide]")];
+const heroTourismKicker = document.querySelector("[data-hero-tourism-kicker]");
+const heroTourismTitle = document.querySelector("[data-hero-tourism-title]");
+const heroTourismNote = document.querySelector("[data-hero-tourism-note]");
+const heroDailyNewsCard = document.querySelector("[data-hero-daily-link]");
+const heroDailyNewsCategory = document.querySelector("[data-hero-daily-category]");
+const heroDailyNewsTitle = document.querySelector("[data-hero-daily-title]");
+const heroDailyNewsSummary = document.querySelector("[data-hero-daily-summary]");
+const heroTopicCards = [...document.querySelectorAll("[data-hero-topic-card]")];
+const heroOfficeStatusNodes = [...document.querySelectorAll("[data-hero-office-status]")];
+const heroOfficeBubble = document.querySelector("[data-hero-office-bubble]");
+const heroOfficeFeedItems = [...document.querySelectorAll("[data-hero-office-item]")];
+const heroOfficePhoto = document.querySelector("[data-hero-office-photo]");
+const heroOfficePhotoCategory = document.querySelector("[data-hero-office-photo-category]");
+const heroOfficePhotoTitle = document.querySelector("[data-hero-office-photo-title]");
+const heroTopicTrack = document.querySelector("[data-hero-topic-track]");
+const heroTopicDots = document.querySelector("[data-hero-topic-dots]");
+const communityAgentForm = document.querySelector("#community-agent-form");
+const communityAgentFeedback = document.querySelector("#community-agent-feedback");
+const communityReportList = document.querySelector("#community-report-list");
+let heroDesktopHighlightItems = [];
+const cadernoCards = [...document.querySelectorAll(".cadernos-grid .caderno-card")];
+const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
+const insidersTypedNodes = [...document.querySelectorAll("[data-insiders-typed]")];
+const insidersBootScene = document.querySelector("[data-insiders-boot-scene]");
+const insidersArmyScene = document.querySelector(
+  "[data-insiders-army]:not([data-insiders-crowd-stage])"
+);
+const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
+const tickerLiveGrid = document.querySelector("#ticker-live-grid");
+const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
+const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
+const portalWhatsappNumber = "5568992269296";
+const splashMessages = [
+  "Abrindo os destaques de Cruzeiro do Sul",
+  "Notícias, serviços e agenda em uma só leitura",
+  "Atualizando a edição com foco no Vale do Juruá"
+];
+const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const tickerPhrasePool = [
+  { label: "Radar", text: "Radar local destaca primeiro o que impacta Cruzeiro do Sul no dia." },
+  { label: "Arquivo", text: "Arquivo do mês ajuda a entender o contexto das notícias mais recentes." },
+  { label: "Comunidade", text: "Recados da comunidade entram com leitura rápida e informação útil." },
+  { label: "Serviço", text: "Serviço útil aparece com endereço, horário e caminho para resolver." },
+  { label: "Checagem", text: "Cada destaque sobe com checagem, contexto e fonte identificada." },
+  { label: "Agenda", text: "Agenda cultural, cinema e teatro correm juntos no painel vivo." },
+  { label: "Negócios", text: "Negócios locais ganham espaço com foco no que movimenta a cidade." },
+  { label: "Educação", text: "Escolas, vestibular e oportunidades estudantis ficam sempre por perto." },
+  { label: "Trânsito", text: "Mudou a rua, mudou a rotina: o letreiro avisa sem rodeio." },
+  { label: "Clima", text: "Tempo, cheia e alerta entram cedo quando afetam o dia da população." },
+  { label: "Cultura", text: "A cultura local aparece com voz própria e espaço de verdade." },
+  { label: "Social", text: "Festas, bastidores e repercussão social passam aqui com ritmo leve." },
+  { label: "Opinião", text: "Humor e opinião aparecem sem tirar o foco do fato principal." },
+  { label: "Fonte", text: "Resumo original com link para a fonte segue firme em cada bloco." },
+  { label: "Assunto", text: "Os temas mais quentes entram com contexto, não só com barulho." },
+  { label: "Bairro", text: "O que acontece no bairro também merece manchete bem tratada." },
+  { label: "Plantão", text: "Plantão leve, visual limpo e leitura rápida para quem está no corre." },
+  { label: "Comunidade", text: "Pedidos de correção, avisos de evento e mensagens úteis entram no fluxo." },
+  { label: "Saúde", text: "Saúde, escola e utilidade pública ficam mais fáceis de achar nesta faixa." },
+  { label: "Feira", text: "Feira, comércio e pequenos negócios entram no mapa com clareza." },
+  { label: "Bastidor", text: "A cobertura mostra movimento e atualização sem perder clareza." },
+  { label: "Agenda", text: "Show, peça, oficina e evento local aparecem em uma mesma corrida." },
+  { label: "Serviço", text: "Telefone, endereço e atalho de serviço ficam mais perto do clique." },
+  { label: "Rede", text: "O que viraliza só sobe com curadoria, contexto e confirmação." },
+  { label: "Manchete", text: "Cada trilha mistura notícia, serviço e comunidade em equilíbrio." },
+  { label: "Cobertura", text: "Cobertura regional passa em camadas para leitura rápida e contexto claro." },
+  { label: "Leitor", text: "Quem mora na cidade encontra serviço rápido antes mesmo de abrir a matéria." },
+  { label: "Centro", text: "Centro, bairros e zona rural podem dividir o mesmo painel com equilíbrio." },
+  { label: "Política", text: "Política entra com leitura clara, contexto e nomes identificados." },
+  { label: "Mercado", text: "Anúncio, membro e patrocínio convivem sem apagar a informação." },
+  { label: "Cultura", text: "Cinema, teatro e agenda criativa ganham mais presença no topo." },
+  { label: "Tempo real", text: "As frases trocam ao longo do dia para acompanhar o que está acontecendo agora." },
+  { label: "Curadoria", text: "Curadoria regional mantém o foco no que realmente importa por aqui." },
+  { label: "Destaque", text: "O topo vira uma grade viva para mostrar o que mexe com a cidade." },
+  { label: "Vale do Juruá", text: "O Vale do Juruá aparece como território vivo, com contexto e proximidade." },
+  { label: "Redação", text: "A entrada do site reúne atualização contínua, leitura rápida e contexto local." }
+];
+const tickerRuntime = {
+  timerIds: []
+};
+const supporterPaymentState = {
+  txid: "",
+  amount: 5,
+  locked: false
+};
+const heroTourismRotation = {
+  photoIndex: 0,
+  activeSlideIndex: 0,
+  activeTopicIndex: 0,
+  statusIndex: 0,
+  bubbleIndex: 0,
+  timerId: 0,
+  bubbleTimerId: 0,
+  statusTimerId: 0,
+  topicTimerId: 0
+};
+const heroDesktopBackdropMedia =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(min-width: 1041px)")
+    : null;
+const shouldUseSolidHeroShell = () => !heroDesktopBackdropMedia?.matches;
+const heroOfficeBubblePool = [
+  "Atualizando destaques da cidade",
+  "Resumo local em revisão",
+  "Acompanhando ruas, redes e agenda",
+  "Novas informações entrando no radar",
+  "Edição do dia em atualização"
+];
+const heroOfficeStatusGroups = [
+  ["Cobertura local", "Fontes verificadas", "Atualização contínua"],
+  ["Radar do Juruá", "Serviço em destaque", "Leitura rápida"],
+  ["Agenda da cidade", "Contexto local", "Publicação no ar"],
+  ["Movimento da região", "Apuração ativa", "Destaques confirmados"]
+];
+const mobileHomeLeadMedia =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(max-width: 740px)")
+    : null;
+const mobileIntroMedia =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(max-width: 760px)")
+    : null;
+const mobileHomeDomState = {
+  initialized: false,
+  menuDropdown: null,
+  movedNodes: [],
+  placeHolders: new Map()
+};
+let lastArchiveBrowserOpenAt = 0;
+
+const clearLiveTickerRuntime = () => {
+  tickerRuntime.timerIds.forEach((timerId) => {
+    window.clearTimeout(timerId);
+    window.clearInterval(timerId);
+  });
+  tickerRuntime.timerIds = [];
+};
+
+const buildLiveTickerPhrasePool = (items = []) => {
+  const seenKeys = new Set();
+
+  return (Array.isArray(items) ? items : [])
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => {
+      const key = article.slug || article.sourceUrl || article.id || article.title;
+
+      if (!article.title || seenKeys.has(key)) {
+        return false;
+      }
+
+      seenKeys.add(key);
+      return true;
+    })
+    .slice(0, 18)
+    .map((article) => ({
+      label: truncateCopy(article.category || article.sourceName || "Agora", 20),
+      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 84)
+    }));
+};
+
+const getTickerPhrasePool = () => {
+  const livePhrases = buildLiveTickerPhrasePool(window.NEWS_DATA || []);
+  return livePhrases.length >= 6 ? livePhrases : [...livePhrases, ...tickerPhrasePool];
+};
+const splashStorageKey = "catalogo_splash_seen_v1";
+const skipHomeIntroKey = "catalogo_skip_home_intro_once";
+const offlineNewsCacheKey = "catalogo_news_cache_v2";
+const offlineLastArticleKey = "catalogo_last_article_v2";
+const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
+const urlSearchParams = new URLSearchParams(window.location.search);
+const urlRequestsSkipHomeIntro = (() => {
+  const rawValue = String(urlSearchParams.get("skipIntro") || "").trim().toLowerCase();
+  return rawValue === "1" || rawValue === "true" || rawValue === "yes";
+})();
+const clearSkipHomeIntroParamFromUrl = () => {
+  if (!urlRequestsSkipHomeIntro || !window.history?.replaceState) {
+    return;
+  }
+
+  try {
+    const cleanUrl = new URL(window.location.href);
+    cleanUrl.searchParams.delete("skipIntro");
+    const nextUrl = `${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`;
+    window.history.replaceState({}, document.title, nextUrl);
+  } catch (_error) {
+    // Mantem a URL original se o navegador restringir a mudanca.
+  }
+};
+const shouldSkipHomeIntro = (() => {
+  if (urlRequestsSkipHomeIntro) {
+    try {
+      sessionStorage.setItem(skipHomeIntroKey, "1");
+    } catch (_error) {
+      // Continua pulando nesta visita mesmo sem sessionStorage.
+    }
+
+    clearSkipHomeIntroParamFromUrl();
+    return true;
+  }
+
+  try {
+    return sessionStorage.getItem(skipHomeIntroKey) === "1";
+  } catch (_error) {
+    return false;
+  }
+})();
+const splashBootStartedAt =
+  typeof performance !== "undefined" && typeof performance.now === "function"
+    ? performance.now()
+    : Date.now();
+window.__CATALOGO_SKIP_HOME_INTRO__ = shouldSkipHomeIntro;
+legacyOfflineStorageKeys.forEach((storageKey) => {
+  [window.localStorage, window.sessionStorage].forEach((storage) => {
+    try {
+      storage?.removeItem(storageKey);
+    } catch (_error) {
+      // Ignora ambientes sem storage disponivel.
+    }
+  });
+});
 const initialStaticNews = Array.isArray(window.NEWS_DATA) ? [...window.NEWS_DATA] : [];
+const homepageStaticPreviewBySlug = {
+  "pixel-art-nao-e-nostalgia-e-interface": {
+    slug: "pixel-art-nao-e-nostalgia-e-interface",
+    title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
+    category: "Games e arte",
+    sourceName: "Cheffe Call - agentes de Arte e Game Design",
+    imageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    feedImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    sourceImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    imageFocus: "center 48%",
+    heroFeatured: true
+  },
+  "michael-jackson-filme-cine-romeu-cruzeiro-do-sul": {
+    slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
+    title: "Filme de Michael Jackson entra no radar com peso global e chance de movimentar o Cine Romeu",
+    category: "Cinema em destaque",
+    sourceName: "Editorial Catalogo Cruzeiro do Sul",
+    imageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
+    feedImageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
+    sourceImageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
+    imageFocus: "center 28%"
+  },
+  "filme-bolsonaro-memes-reacao-redes": {
+    slug: "filme-bolsonaro-memes-reacao-redes",
+    title: "Filme sobre Bolsonaro ja chega cercado por memes, ironias e uma boa dose de gente irritada",
+    category: "Memes e politica pop",
+    sourceName: "Editorial Catalogo Cruzeiro do Sul",
+    imageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
+    feedImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
+    sourceImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
+    imageFocus: "center 22%"
+  },
+  "fila-ovos-pascoa": {
+    slug: "fila-ovos-pascoa",
+    title: "Fila de ovos de Pascoa vira cena de rua e mostra o apetite do comercio em Cruzeiro do Sul",
+    category: "Pascoa na cidade",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    imageFocus: "center 42%"
+  },
+  "aldir-blanc-cultura-czs": {
+    slug: "aldir-blanc-cultura-czs",
+    title: "Editais da Lei Aldir Blanc colocam artistas, produtores e agenda cultural no centro",
+    category: "Cultura local",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    imageFocus: "center 34%"
+  },
+  "victor-macario-viral": {
+    slug: "victor-macario-viral",
+    title: "Video bem editado, rosto conhecido e assunto local: a formula do viral acreano da semana",
+    category: "Radar de redes",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/trend-theo-acreano.jpg",
+    feedImageUrl: "./assets/home-cache/trend-theo-acreano.jpg",
+    sourceImageUrl: "./assets/home-cache/trend-theo-acreano.jpg",
+    imageFocus: "center 20%"
+  },
+  "lucas-dourado-pascoa": {
+    slug: "lucas-dourado-pascoa",
+    title: "Pascoa, boato e reaparicao: o caso Lucas Dourado entra no radar das redes acreanas",
+    category: "Buzz publico",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    imageFocus: "center 34%"
+  },
+  "eja-czs-superacao": {
+    slug: "eja-czs-superacao",
+    title: "Historias de superacao na EJA de Cruzeiro do Sul inspiram novos estudantes",
+    category: "Historias reais",
+    sourceName: "Agencia Acre",
+    imageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    imageFocus: "center 34%"
+  },
+  "credenciamento-pareceristas-culturais": {
+    slug: "credenciamento-pareceristas-culturais",
+    title: "Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais",
+    category: "Cultura no radar",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    imageFocus: "center 36%"
+  },
+  "ifac-professores-czs": {
+    slug: "ifac-professores-czs",
+    title: "Ifac abre selecao para professor substituto em Cruzeiro do Sul",
+    category: "Educacao",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    imageFocus: "center 30%"
+  },
+  "ifac-auxilio-cheia": {
+    slug: "ifac-auxilio-cheia",
+    title: "Ifac anuncia auxilio emergencial para estudantes afetados pela cheia",
+    category: "Educacao",
+    sourceName: "Jurua Online",
+    imageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-educacao.jpg",
+    imageFocus: "center 34%"
+  },
+  "zequinha-assistencia-cheia": {
+    slug: "zequinha-assistencia-cheia",
+    title: "Zequinha intensifica assistencia as familias afetadas pela cheia",
+    category: "Prefeitura e acoes",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "agua-mineral-familias-cheia": {
+    slug: "agua-mineral-familias-cheia",
+    title: "Prefeitura distribui agua mineral para bairros atingidos",
+    category: "Prefeitura e acoes",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "saude-familias-abrigadas": {
+    slug: "saude-familias-abrigadas",
+    title: "Saude chega as familias que foram levadas para abrigos",
+    category: "Social",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "moradores-rotina-cheia": {
+    slug: "moradores-rotina-cheia",
+    title: "Moradores mantem a rotina mesmo com ruas e quintais alagados",
+    category: "Social",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "mais-12-mil-afetados": {
+    slug: "mais-12-mil-afetados",
+    title: "Mais de 12 mil pessoas afetadas e abertura do segundo abrigo",
+    category: "Utilidade publica",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  },
+  "vazante-jurua-segue": {
+    slug: "vazante-jurua-segue",
+    title: "Vazante continua, mas centenas ainda seguem fora de casa",
+    category: "Utilidade publica",
+    sourceName: "ac24horas",
+    imageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    feedImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    sourceImageUrl: "./assets/home-cache/fallback-cheia.jpg",
+    imageFocus: "center 34%"
+  }
+};
+
+const getHomepageHydrationArticle = (slug = "") => {
+  const normalizedSlug = String(slug || "").trim();
+  if (!normalizedSlug) {
+    return null;
+  }
+
+  return window.NEWS_MAP?.[normalizedSlug] || homepageStaticPreviewBySlug[normalizedSlug] || null;
+};
+
 const thumbTopicFallbacks = {
   "thumb-cheia": "Cheia",
   "thumb-saude": "Saude",
@@ -65,36 +502,1131 @@ const getThumbTopic = (thumbNode, article) => {
   return thumbTopicFallbacks[fallbackClass] || "Radar";
 };
 
-// Convert visual thumbs into simple topical cards.
-if (window.NEWS_DATA) {
-  const newsMap = Object.fromEntries(
-    window.NEWS_DATA.map((item) => [item.slug, item])
+const sanitizeImageUrl = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return "";
+  }
+
+  const cleaned = raw.replace(/'/g, "%27");
+  const needsProxy = /ac24horas\.com|jurua24horas\.com|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br|static\.wixstatic\.com|agencia\.ac\.gov\.br|www\.amac\.com\.br|ifac\.edu\.br|portalacre\.com\.br/i.test(
+    cleaned
   );
 
+  if (!needsProxy || /images\.weserv\.nl/i.test(cleaned)) {
+    return cleaned;
+  }
+
+  const withoutProtocol = cleaned.replace(/^https?:\/\//i, "");
+  return `https://images.weserv.nl/?url=${encodeURIComponent(withoutProtocol)}`;
+};
+
+const pushUniqueImageCandidate = (bucket, value) => {
+  const normalized = String(value || "").trim();
+  if (!normalized || bucket.includes(normalized)) {
+    return;
+  }
+
+  bucket.push(normalized);
+};
+
+const buildImageLoadCandidates = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return [];
+  }
+
+  const directUrl = raw.replace(/'/g, "%27");
+  const proxiedUrl = sanitizeImageUrl(directUrl);
+  const candidates = [];
+
+  pushUniqueImageCandidate(candidates, directUrl);
+  pushUniqueImageCandidate(candidates, proxiedUrl);
+
+  return candidates;
+};
+
+const unwrapProxyImageUrl = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return "";
+  }
+
+  if (!/images\.weserv\.nl/i.test(raw)) {
+    return raw;
+  }
+
+  try {
+    const parsed = new URL(raw);
+    const proxiedValue = parsed.searchParams.get("url") || "";
+    return proxiedValue ? `https://${decodeURIComponent(proxiedValue)}` : raw;
+  } catch (_error) {
+    return raw;
+  }
+};
+
+const getImageFingerprint = (value) => {
+  const raw = unwrapProxyImageUrl(value);
+  if (!raw) {
+    return "";
+  }
+
+  try {
+    const parsed = new URL(raw);
+    return decodeURIComponent(`${parsed.hostname}${parsed.pathname}`)
+      .toLowerCase()
+      .replace(/-\d{2,4}x\d{2,4}(?=\.[a-z0-9]+$)/i, "")
+      .replace(/\.(avif|gif|jpe?g|png|webp)$/i, "");
+  } catch (_error) {
+    return raw
+      .toLowerCase()
+      .replace(/^https?:\/\//i, "")
+      .replace(/\?.*$/, "")
+      .replace(/-\d{2,4}x\d{2,4}(?=\.[a-z0-9]+$)/i, "")
+      .replace(/\.(avif|gif|jpe?g|png|webp)$/i, "");
+  }
+};
+
+const buildOrderedImageSources = (article = {}, surface = "default") => {
+  const inlineImageUrl = extractInlineArticleImage(article);
+  const sharedValues = [
+    article.image,
+    article.media?.imageUrl,
+    article.media?.image,
+    article.media?.src,
+    article.media?.url
+  ];
+
+  const canonicalValues = [
+    article.imageUrl,
+    article.originalImageUrl,
+    inlineImageUrl,
+    article.feedImageUrl,
+    article.originalFeedImageUrl,
+    ...sharedValues,
+    article.originalSourceImageUrl,
+    article.sourceImageUrl
+  ];
+
+  if (surface === "hero") {
+    return canonicalValues;
+  }
+
+  return canonicalValues;
+};
+
+const collectArticleImageCandidates = (article = {}, surface = "default") => {
+  const candidates = [];
+  const seenFingerprints = new Set();
+  const seenUrls = new Set();
+  const values = buildOrderedImageSources(article, surface);
+
+  values.forEach((value) => {
+    buildImageLoadCandidates(value).forEach((candidate) => {
+      const normalizedCandidate = String(candidate || "").trim();
+      const fingerprint = getImageFingerprint(normalizedCandidate);
+
+      if (
+        !normalizedCandidate ||
+        seenUrls.has(normalizedCandidate) ||
+        (fingerprint && seenFingerprints.has(fingerprint))
+      ) {
+        return;
+      }
+
+      seenUrls.add(normalizedCandidate);
+      if (fingerprint) {
+        seenFingerprints.add(fingerprint);
+      }
+      candidates.push(normalizedCandidate);
+    });
+  });
+
+  return candidates;
+};
+
+const preloadFirstAvailableImage = (candidates = []) =>
+  new Promise((resolve) => {
+    const queue = [...candidates];
+
+    const tryNext = () => {
+      const candidate = queue.shift();
+      if (!candidate) {
+        resolve("");
+        return;
+      }
+
+      const preloader = new Image();
+      preloader.onload = () => resolve(candidate);
+      preloader.onerror = tryNext;
+      preloader.src = candidate;
+    };
+
+    tryNext();
+  });
+
+const extractImageUrlFromText = (value) => {
+  const raw = String(value || "")
+    .replace(/&quot;/gi, '"')
+    .replace(/\\(["'])/g, "$1");
+  if (!raw) {
+    return "";
+  }
+
+  const directPatterns = [
+    /data-large-file\s*=\s*["']([^"']+)["']/i,
+    /data-medium-file\s*=\s*["']([^"']+)["']/i,
+    /<img[^>]+src\s*=\s*["']([^"']+)["']/i,
+    /src\s*=\s*["']([^"']+\.(?:avif|gif|jpe?g|png|webp)(?:\?[^"']*)?)["']/i
+  ];
+
+  for (const pattern of directPatterns) {
+    const match = raw.match(pattern);
+    if (match?.[1]) {
+      return sanitizeImageUrl(
+        match[1].replace(/\\\//g, "/").replace(/&amp;/gi, "&").trim()
+      );
+    }
+  }
+
+  const looseUrlMatch = raw.match(
+    /https?:\/\/[^\s"'<>]+?\.(?:avif|gif|jpe?g|png|webp)(?:\?[^\s"'<>]*)?/i
+  );
+  if (looseUrlMatch?.[0]) {
+    return sanitizeImageUrl(looseUrlMatch[0].replace(/&amp;/gi, "&"));
+  }
+
+  return "";
+};
+
+const extractInlineArticleImage = (article = {}) => {
+  const candidates = [
+    article.imageUrl,
+    article.image,
+    article.media?.imageUrl,
+    article.media?.image,
+    article.media?.src,
+    article.media?.url,
+    article.summary,
+    article.lede,
+    article.description,
+    Array.isArray(article.body) ? article.body.join(" ") : "",
+    Array.isArray(article.highlights) ? article.highlights.join(" ") : ""
+  ];
+
+  for (const candidate of candidates) {
+    const imageUrl = extractImageUrlFromText(candidate);
+    if (imageUrl) {
+      return imageUrl;
+    }
+  }
+
+  return "";
+};
+
+const isIllustrativeImage = (article) => {
+  const imageUrl = String(article?.imageUrl || "");
+  const credit = String(article?.imageCredit || "").toLowerCase();
+  if (/images\.unsplash\.com/i.test(imageUrl)) return true;
+  if (credit.includes("ilustrativa")) return true;
+  return false;
+};
+
+const articleImageResolveCache = new Map();
+const sourcePreviewImageResolveCache = new Map();
+
+const resolveSourcePreviewImage = async (article = {}) => {
+  const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+
+  if (!sourceUrl) {
+    return "";
+  }
+
+  if (!sourcePreviewImageResolveCache.has(sourceUrl)) {
+    sourcePreviewImageResolveCache.set(
+      sourceUrl,
+      requestApiJson(`/api/preview-image?url=${encodeURIComponent(sourceUrl)}`, {
+        method: "GET"
+      })
+        .then((payload) => sanitizeImageUrl(payload?.imageUrl || ""))
+        .catch(() => "")
+    );
+  }
+
+  return sourcePreviewImageResolveCache.get(sourceUrl) || "";
+};
+
+const resolveArticleImage = async (article, surface = "default") => {
+  if (!article) return "";
+  const candidates = collectArticleImageCandidates(article, surface).filter(
+    (candidate) => !isIllustrativeImage({ ...article, imageUrl: candidate })
+  );
+
+  const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+  const cacheKey = `${surface}::${candidates.join("||")}::${sourceUrl}`;
+  if (!articleImageResolveCache.has(cacheKey)) {
+    articleImageResolveCache.set(
+      cacheKey,
+      (async () => {
+        const directImage = candidates.length ? await preloadFirstAvailableImage(candidates) : "";
+        if (directImage) {
+          return directImage;
+        }
+
+        const sourcePreviewImage = await resolveSourcePreviewImage(article);
+        if (!sourcePreviewImage) {
+          return "";
+        }
+
+        return (await preloadFirstAvailableImage(buildImageLoadCandidates(sourcePreviewImage))) || "";
+      })()
+    );
+  }
+
+  return articleImageResolveCache.get(cacheKey) || "";
+};
+
+const paintSurfaceImage = (node, url, position = "center", size = "cover") => {
+  if (!node || !url) {
+    return;
+  }
+  node.style.setProperty("--bg-image", `url('${url}')`);
+  node.style.setProperty("--news-photo", `url('${url}')`);
+  node.style.setProperty("--bg-position", position);
+  node.style.setProperty("--bg-size", size);
+  node.style.setProperty("background-image", `url('${url}')`, "important");
+  node.style.setProperty("background-position", position, "important");
+  node.style.setProperty("background-size", size, "important");
+  node.style.setProperty("background-repeat", "no-repeat", "important");
+};
+
+const thumbLightingCache = new Map();
+
+const clampColorChannel = (value = 0) => Math.min(255, Math.max(0, Math.round(value)));
+
+const buildThumbRgb = (red = 0, green = 0, blue = 0) =>
+  `rgb(${clampColorChannel(red)}, ${clampColorChannel(green)}, ${clampColorChannel(blue)})`;
+
+const buildThumbRgba = (red = 0, green = 0, blue = 0, alpha = 1) =>
+  `rgba(${clampColorChannel(red)}, ${clampColorChannel(green)}, ${clampColorChannel(blue)}, ${alpha})`;
+
+const buildFallbackThumbLighting = (article = {}, url = "") => {
+  const seedSource = String(url || article.slug || article.title || article.category || "thumb");
+  let hash = 0;
+
+  for (const char of seedSource) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+
+  const red = 76 + (hash % 104);
+  const green = 94 + ((hash >> 7) % 92);
+  const blue = 124 + ((hash >> 13) % 108);
+
+  return {
+    accent1: buildThumbRgb(red, green, blue),
+    accent2: buildThumbRgb(red * 0.34, green * 0.36, blue * 0.44),
+    glow: buildThumbRgba(red * 1.12, green * 1.08, blue * 1.04, 0.48),
+    highlight: buildThumbRgba(255, 255, 255, 0.18),
+    shadow: buildThumbRgba(red * 0.26, green * 0.22, blue * 0.3, 0.42)
+  };
+};
+
+const extractThumbLighting = (url, article = {}) => {
+  const cacheKey = String(url || "").trim();
+  const fallback = buildFallbackThumbLighting(article, cacheKey);
+
+  if (!cacheKey) {
+    return Promise.resolve(fallback);
+  }
+
+  if (!thumbLightingCache.has(cacheKey)) {
+    thumbLightingCache.set(
+      cacheKey,
+      new Promise((resolve) => {
+        const sample = new Image();
+        sample.crossOrigin = "anonymous";
+        sample.referrerPolicy = "no-referrer";
+
+        sample.onload = () => {
+          try {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d", { willReadFrequently: true });
+
+            if (!context) {
+              resolve(fallback);
+              return;
+            }
+
+            const sampleSize = 18;
+            canvas.width = sampleSize;
+            canvas.height = sampleSize;
+            context.drawImage(sample, 0, 0, sampleSize, sampleSize);
+
+            const { data } = context.getImageData(0, 0, sampleSize, sampleSize);
+            let totalWeight = 0;
+            let red = 0;
+            let green = 0;
+            let blue = 0;
+            let brightest = { red: 255, green: 244, blue: 194, luminance: 0 };
+
+            for (let index = 0; index < data.length; index += 4) {
+              const alpha = data[index + 3];
+              if (alpha < 48) {
+                continue;
+              }
+
+              const pixelRed = data[index];
+              const pixelGreen = data[index + 1];
+              const pixelBlue = data[index + 2];
+              const luminance =
+                pixelRed * 0.2126 + pixelGreen * 0.7152 + pixelBlue * 0.0722;
+              const weight = 0.35 + luminance / 255;
+
+              totalWeight += weight;
+              red += pixelRed * weight;
+              green += pixelGreen * weight;
+              blue += pixelBlue * weight;
+
+              if (luminance >= brightest.luminance) {
+                brightest = {
+                  red: pixelRed,
+                  green: pixelGreen,
+                  blue: pixelBlue,
+                  luminance
+                };
+              }
+            }
+
+            if (!totalWeight) {
+              resolve(fallback);
+              return;
+            }
+
+            const avgRed = red / totalWeight;
+            const avgGreen = green / totalWeight;
+            const avgBlue = blue / totalWeight;
+
+            resolve({
+              accent1: buildThumbRgb(avgRed * 1.06, avgGreen * 1.03, avgBlue * 1.04),
+              accent2: buildThumbRgb(avgRed * 0.34, avgGreen * 0.31, avgBlue * 0.4),
+              glow: buildThumbRgba(
+                brightest.red * 1.08,
+                brightest.green * 1.06,
+                brightest.blue * 1.02,
+                0.52
+              ),
+              highlight: buildThumbRgba(
+                Math.max(232, brightest.red),
+                Math.max(232, brightest.green),
+                Math.max(228, brightest.blue),
+                0.2
+              ),
+              shadow: buildThumbRgba(avgRed * 0.2, avgGreen * 0.18, avgBlue * 0.24, 0.42)
+            });
+          } catch (_error) {
+            resolve(fallback);
+          }
+        };
+
+        sample.onerror = () => resolve(fallback);
+        sample.src = cacheKey;
+      })
+    );
+  }
+
+  return thumbLightingCache.get(cacheKey) || Promise.resolve(fallback);
+};
+
+const applyThumbPhotoLighting = (node, article, url) => {
+  if (!node || !url) {
+    return;
+  }
+
+  const requestToken = `${article?.slug || article?.id || article?.sourceUrl || url}`;
+  node.dataset.thumbLightingToken = requestToken;
+
+  extractThumbLighting(url, article).then((lighting) => {
+    if (!lighting || node.dataset.thumbLightingToken !== requestToken) {
+      return;
+    }
+
+    node.style.setProperty("--thumb-accent-1", lighting.accent1);
+    node.style.setProperty("--thumb-accent-2", lighting.accent2);
+    node.style.setProperty("--thumb-glow", lighting.glow);
+    node.style.setProperty("--thumb-photo-glow", lighting.glow);
+    node.style.setProperty("--thumb-photo-highlight", lighting.highlight);
+    node.style.setProperty("--thumb-photo-shadow", lighting.shadow);
+  });
+};
+
+const paintMosaicImageElement = (panelNode, url, position = "center 35%") => {
+  if (!panelNode || !url) {
+    return;
+  }
+
+  const mosaicPhoto = panelNode.querySelector(".mosaic-photo");
+  if (mosaicPhoto) {
+    mosaicPhoto.remove();
+  }
+
+  panelNode.dataset.imageUrl = url;
+  panelNode.dataset.sourceImage = url;
+  panelNode.style.setProperty("--news-photo", `url('${url}')`);
+  paintSurfaceImage(panelNode, url, position, "cover");
+  panelNode.classList.add("has-photo", "has-real-photo");
+};
+
+const articleImageFocusOverridesBySlug = {
+  "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios": "62% 12%",
+  "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil":
+    "74% 32%",
+  "acre-disputa-campeonato-regional-de-bocha-com-14-paratletas": "78% 43%",
+  "jordao-celebra-34-anos-com-show-de-evoney-fernandes": "40% 38%",
+  "com-presenca-da-familia-mario-sergio-toma-posse-no-tribunal-de-contas-do-acre": "58% 42%",
+  "academia-acreana-de-letras-reune-mulheres-de-poder-em-primeira-roda-de-conversa-de-2026":
+    "30% 58%",
+  "socorro-propoe-jornada-especial-para-professores-em-tratamento-de-saude": "49% 26%",
+  "prefeito-decreta-emergencia-e-anuncia-auxilio-a-familias-atingidas-por-enxurradas": "78% 38%",
+  "traficante-foge-da-policia-e-deixa-esposa-com-bebe-recem-nascido-para-ser-presa": "58% 68%",
+  "fundhacre-recebe-treinamento-da-fiocruz-para-diagnostico-molecular-de-leishmaniose": "78% 30%",
+  "fundhacre-realiza-quinto-transplante-de-tecido-osseo-e-amplia-oferta-de-alta-complexidade-no-acre":
+    "45% 22%",
+  "acre-alcanca-o-segundo-lugar-no-ranking-nacional-de-matriculas-de-ensino-tecnico-articulado-com-o-ensino-medio":
+    "38% 26%",
+  "governo-do-acre-capacita-orgaos-do-executivo-estadual-sobre-planos-de-integridade": "60% 40%",
+  "governo-do-acre-amplia-acesso-a-identidade-para-indigenas-com-acao-da-policia-civil-na-casai":
+    "58% 16%",
+  "morre-o-pai-de-ana-paula-renault-a-dois-dias-da-final-do-bbb-26": "center 18%",
+  "com-um-a-menos-palmeiras-segura-athletico-pr-e-vence-pelo-brasileirao": "center 22%",
+  "com-falha-de-lyanco-coritiba-vence-atletico-mg-no-campeonato-brasileiro": "center 22%",
+  "internacional-perde-para-o-mirassol-e-se-aproxima-do-z-4-do-brasileirao": "center 22%",
+  "paratletas-acreanos-conquistam-9-medalhas-no-regional-de-bocha": "center 24%",
+  "brasileia-entrega-premiacao-aos-vencedores-do-2-campeonato-de-pesca": "center 24%",
+  "mailza-e-gladson-se-encontram-em-manaus-para-reuniao-de-alinhamento-politico": "center 20%",
+  "presidentes-de-bairros-denunciam-obra-irregular-e-mobilizam-embargo": "center 20%",
+  "eua-ameacam-peru-apos-governo-sugerir-pausa-em-compra-de-avioes-de-combate": "center 18%",
+  "denuncia-de-maus-tratos-contra-vendedor-de-bananas-termina-em-reconhecimento-de-ato-de-cuidado-em-rio-branco":
+    "center 18%",
+  "pista-goleia-o-ame-no-campeonato-estadual-de-futsal-sub-15": "center 22%",
+  "seguranca-publica-intensifica-acoes-em-comunidades-indigenas-e-fortalece-seguranca-comunitaria-em-santa-rosa-do-purus":
+    "center 24%",
+  "governo-e-instituicoes-parceiras-certificam-40-alunos-na-1-etapa-do-projeto-pao-na-estrada":
+    "center 22%",
+  "crianca-desaparece-apos-naufragio-no-rio-purus-bombeiros-fazem-buscas": "center 18%",
+  "com-foco-na-prevencao-prefeitura-de-mancio-lima-realiza-acao-de-saude-no-bairro-iracema":
+    "center 22%",
+  "bittar-sobre-ato-de-jv-nao-tem-votos-para-ganhar-de-mim-e-o-caminho-dele-e-o-tapetao": "center 30%",
+  "esquenta-junino-2026-abre-temporada-cultural-com-quadrilhas-no-acre": "center 30%",
+  "jorge-viana-aciona-stf-e-flavio-dino-investiga-emendas-de-bittar-a-santa-casa-e-obras-de-infraestrutura":
+    "center 30%",
+  "mais-de-200-inqueritos-foram-instaurados-na-delegacia-da-mulher-em-cruzeiro-do-sul": "center 30%",
+  "circuito-country-em-epitaciolandia-tera-controle-de-acesso-de-criancas-e-adolescentes": "center 30%",
+  "moradores-indigenas-cavam-estrada-para-escapar-da-lama-em-ramal-de-assis-brasil": "center 30%",
+  "lula-preve-judicializacao-caso-desoneracao-seja-incluida-em-fim-da-6-215-1": "center 30%",
+  "trump-diz-que-eua-tem-8220-controle-total-8221-sobre-o-estreito-de-ormuz": "center 30%",
+  "prefeitura-de-cruzeiro-do-sul-realiza-4-edicao-do-programa-de-aquisicao-de-alimentos-com-investimento-de-r-225-mil":
+    "center 30%",
+  "voluntarios-da-adventist-health-atendem-milhares-de-pessoas-em-voluntariado-nas-filipinas":
+    "center 30%",
+  "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua": "center 30%",
+  "edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara": "center 30%",
+  "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre":
+    "center 30%",
+  "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse": "center 30%",
+  "edital-de-eleicao-e-posse-8211-ascak": "center 30%",
+  "exposicao-mostra-o-olhar-afro-brasileiro-da-fotografa-lita-cerqueira": "center 30%",
+  "justica-nega-pedido-de-careca-do-inss-para-barrar-apelido": "center 30%",
+  "sistema-prisional-de-sao-paulo-registra-uma-morte-a-cada-19-horas": "center 30%",
+  "lula-qualidade-do-agro-e-essencial-para-ampliar-exportacoes": "center 30%",
+  "stf-determina-atualizacao-anual-do-valor-do-minimo-existencial": "center 30%",
+  "estado-de-sao-paulo-tem-mais-duas-mortes-por-febre-amarela": "center 30%",
+  "enviado-de-trump-sugere-que-italia-substitua-ira-na-copa-do-mundo": "center 30%"
+};
+
+const articlePersonFocusPattern =
+  /\b(rosto|face|pai|mae|mãe|filho|filha|crianca|criança|jovem|mulher|homem|prefeito|prefeita|governador|governadora|senador|senadora|deputado|deputada|presidente|atleta|jogador|jogadora|paratleta|cantor|cantora|ator|atriz|influenciadora|influenciador|motociclista|suspeito|vendedor|aluno|alunos|familia|família)\b/;
+const articleGroupFocusPattern =
+  /\b(grupo|equipe|time|selecao|seleção|cerimonia|cerimônia|premiacao|premiação|reuniao|reunião|evento|acao|ação|campeonato|jogos|comunidades|indigenas|indígenas|alunos|familias|famílias)\b/;
+const articlePortraitFocusPattern = /\b(retrato|posse|entrevista|discurso|falou|reuniao|reunião|alinhamento)\b/;
+
+const mosaicImageFocusOverridesBySlug = {
+  "ciclista-acreano-chega-no-panama-para-disputa-do-sul-americano-da-juventude": "center 10%",
+  "governadora-mailza-assis-empossa-novo-delegado-geral-e-anuncia-concurso-publico-da-policia-civil":
+    "40% 18%",
+  "bolsa-interrompe-sequencia-de-11-altas-e-cai-0-46": "center 46%"
+};
+
+const resolveArticleImageFocus = (article = {}, fallback = "center") => {
+  const manualFocus = String(article.imageFocus || "").trim();
+  if (manualFocus) {
+    return manualFocus;
+  }
+
+  const slug = String(article.slug || "").trim();
+  if (slug && articleImageFocusOverridesBySlug[slug]) {
+    return articleImageFocusOverridesBySlug[slug];
+  }
+
+  const haystack = normalizeText(
+    [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+  );
+  if (articlePortraitFocusPattern.test(haystack)) {
+    return "center 18%";
+  }
+  if (articlePersonFocusPattern.test(haystack) && articleGroupFocusPattern.test(haystack)) {
+    return "center 22%";
+  }
+  if (articlePersonFocusPattern.test(haystack)) {
+    return "center 20%";
+  }
+
+  return fallback;
+};
+
+const mosaicPersonFocusPattern =
+  /\b(ciclista|atleta|jogador|jogadora|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|delegado|delegada|secretario|secretaria|ministro|ministra|presidente|artista|cantor|cantora|ator|atriz|apresentador|apresentadora|treinador|treinadora|empresario|empresaria|medico|medica|juiz|juiza|estudante|aluno|aluna|entrevista)\b/;
+const mosaicGroupScenePattern =
+  /\b(posse|cerimonia|solenidade|evento|auditorio|reuniao|encontro|coletiva|equipe|time|selecao|colegio|grupo|plateia)\b/;
+const mosaicLandscapePattern =
+  /\b(bolsa|mercado|dolar|cidade|rio|ponte|bairro|rodovia|estrada|enchente|cheia|alag|obra|calcadao|orcamento|salario|superavit|petroleo|economia|feira|fachada|predio)\b/;
+
+const getMosaicStorySignals = (article = {}) => {
+  const text = normalizeText(
+    [
+      article.title,
+      article.sourceLabel,
+      article.lede,
+      article.summary,
+      article.category,
+      article.sourceName
+    ].join(" ")
+  );
+
+  return {
+    text,
+    prefersFace: mosaicPersonFocusPattern.test(text),
+    isGroupScene: mosaicGroupScenePattern.test(text),
+    isLandscape: mosaicLandscapePattern.test(text)
+  };
+};
+
+const inferMosaicImageFocus = (article = {}, panelNode) => {
+  const resolvedFocus = resolveArticleImageFocus(article, "");
+  if (resolvedFocus) {
+    return normalizeHeroSafeFocusPosition(resolvedFocus, {
+      hasPeople: getMosaicStorySignals(article).prefersFace
+    });
+  }
+
+  const slug = String(article.slug || "").trim();
+  if (slug && mosaicImageFocusOverridesBySlug[slug]) {
+    return mosaicImageFocusOverridesBySlug[slug];
+  }
+
+  const isSideCard = Boolean(panelNode?.classList?.contains("side"));
+  const { prefersFace, isGroupScene, isLandscape } = getMosaicStorySignals(article);
+
+  if (prefersFace && isGroupScene) {
+    return isSideCard ? "42% 30%" : "40% 34%";
+  }
+
+  if (prefersFace) {
+    return isSideCard ? "center 30%" : "center 34%";
+  }
+
+  if (isLandscape) {
+    return isSideCard ? "center 46%" : "center 34%";
+  }
+
+  return isSideCard ? "center 28%" : "center 30%";
+};
+
+const inferMosaicLayoutMode = (article = {}, panelNode) => {
+  const manualLayout = String(article.imageLayout || article.mosaicLayout || "").trim();
+  if (manualLayout) {
+    return manualLayout;
+  }
+
+  const isMainCard = Boolean(panelNode?.classList?.contains("main"));
+  const { prefersFace, isGroupScene, isLandscape } = getMosaicStorySignals(article);
+
+  if (prefersFace && isGroupScene) {
+    return "group-safe";
+  }
+
+  if (isMainCard && prefersFace && !isLandscape) {
+    return "portrait-safe";
+  }
+
+  return "default";
+};
+
+let thumbImageRequestSequence = 0;
+
+const getThumbFallbackImageUrl = (thumbNode) => {
+  const photoCard = thumbNode?.closest?.(".news-card, .archive-card, .live-feed-card, .feed-card");
+  const fallbackCandidates = [
+    thumbNode?.dataset?.imageUrl,
+    thumbNode?.dataset?.sourceImage,
+    photoCard?.dataset?.imageUrl,
+    photoCard?.dataset?.sourceImage
+  ];
+
+  for (const candidate of fallbackCandidates) {
+    const safeCandidate = sanitizeImageUrl(candidate);
+    if (safeCandidate) {
+      return safeCandidate;
+    }
+  }
+
+  const inlineBackground =
+    thumbNode?.style?.getPropertyValue("--bg-image") ||
+    thumbNode?.style?.getPropertyValue("--news-photo") ||
+    photoCard?.style?.getPropertyValue("--news-photo") ||
+    "";
+  const extractedInlineUrl = extractImageUrlFromText(inlineBackground);
+  if (extractedInlineUrl) {
+    return extractedInlineUrl;
+  }
+
+  const cssBackground =
+    thumbNode?.style?.backgroundImage ||
+    photoCard?.style?.backgroundImage ||
+    "";
+  return extractImageUrlFromText(cssBackground);
+};
+
+const applyThumbImage = (thumbNode, article) => {
+  if (!thumbNode) {
+    return;
+  }
+
+  const photoCard = thumbNode.closest(".news-card, .archive-card, .live-feed-card, .feed-card");
+  const immediateImageUrl = sanitizeImageUrl(
+    getArticleDisplayImageUrl(article) || getThumbFallbackImageUrl(thumbNode)
+  );
+  const immediateFocus = resolveArticleImageFocus(article, "center");
+  const immediateFit = article?.imageFit || "cover";
+
+  if (immediateImageUrl) {
+    paintSurfaceImage(thumbNode, immediateImageUrl, immediateFocus, immediateFit);
+    thumbNode.dataset.imageUrl = immediateImageUrl;
+    thumbNode.dataset.sourceImage = immediateImageUrl;
+    thumbNode.classList.add("has-photo", "has-real-photo");
+    applyThumbPhotoLighting(thumbNode, article, immediateImageUrl);
+
+    if (photoCard) {
+      photoCard.classList.add("news-photo-fixed");
+      photoCard.dataset.imageUrl = immediateImageUrl;
+      photoCard.dataset.sourceImage = immediateImageUrl;
+      photoCard.style.setProperty("--news-photo", `url('${immediateImageUrl}')`);
+    }
+  } else {
+    clearSurfaceImage(thumbNode);
+  }
+  const requestId = String(++thumbImageRequestSequence);
+  thumbNode.dataset.thumbImageRequest = requestId;
+
+  if (photoCard && !immediateImageUrl) {
+    photoCard.classList.remove("news-photo-fixed");
+    delete photoCard.dataset.imageUrl;
+    delete photoCard.dataset.sourceImage;
+    photoCard.style.removeProperty("--news-photo");
+  }
+
+  if (!article) {
+    return;
+  }
+
+  if (immediateImageUrl) {
+    return;
+  }
+
+  resolveArticleImage(article).then((safeUrl) => {
+    if (!safeUrl || thumbNode.dataset.thumbImageRequest !== requestId) return;
+    paintSurfaceImage(
+      thumbNode,
+      safeUrl,
+      resolveArticleImageFocus(article, "center"),
+      article?.imageFit || "cover"
+    );
+    thumbNode.dataset.imageUrl = safeUrl;
+    thumbNode.dataset.sourceImage = safeUrl;
+    thumbNode.classList.add("has-photo", "has-real-photo");
+    applyThumbPhotoLighting(thumbNode, article, safeUrl);
+
+    if (photoCard) {
+      photoCard.classList.add("news-photo-fixed");
+      photoCard.dataset.imageUrl = safeUrl;
+      photoCard.dataset.sourceImage = safeUrl;
+      photoCard.style.setProperty("--news-photo", `url('${safeUrl}')`);
+    }
+  });
+};
+
+const clearSurfaceImage = (node) => {
+  if (!node) {
+    return;
+  }
+
+  const mosaicPhoto = node.querySelector?.(".mosaic-photo");
+  if (mosaicPhoto) {
+    mosaicPhoto.remove();
+  }
+
+  node.classList.remove("has-photo");
+  node.classList.remove("has-real-photo");
+  delete node.dataset.imageUrl;
+  delete node.dataset.sourceImage;
+  node.style.removeProperty("--bg-image");
+  node.style.removeProperty("--bg-position");
+  node.style.removeProperty("--bg-size");
+  node.style.removeProperty("--news-photo");
+  node.style.removeProperty("--thumb-accent-1");
+  node.style.removeProperty("--thumb-accent-2");
+  node.style.removeProperty("--thumb-glow");
+  node.style.removeProperty("--thumb-photo-glow");
+  node.style.removeProperty("--thumb-photo-highlight");
+  node.style.removeProperty("--thumb-photo-shadow");
+  delete node.dataset.thumbLightingToken;
+  delete node.dataset.thumbImageRequest;
+  node.style.removeProperty("background-image");
+  node.style.removeProperty("background-position");
+  node.style.removeProperty("background-size");
+  node.style.removeProperty("background-repeat");
+};
+
+let mosaicImageRequestSequence = 0;
+
+const applyMosaicImage = (panelNode, article) => {
+  if (!panelNode) {
+    return;
+  }
+
+  const requestId = String(++mosaicImageRequestSequence);
+  panelNode.dataset.mosaicImageRequest = requestId;
+  clearSurfaceImage(panelNode);
+
+  resolveArticleImage(article, "hero").then((safeUrl) => {
+    if (!safeUrl || panelNode.dataset.mosaicImageRequest !== requestId) return;
+    const layoutMode = inferMosaicLayoutMode(article, panelNode);
+    const imageFit = layoutMode === "portrait-safe" ? "contain" : "cover";
+    panelNode.dataset.mosaicLayout = layoutMode;
+    paintSurfaceImage(panelNode, safeUrl, inferMosaicImageFocus(article, panelNode), imageFit);
+    panelNode.dataset.imageUrl = safeUrl;
+    panelNode.dataset.sourceImage = safeUrl;
+    panelNode.style.setProperty("--news-photo", `url('${safeUrl}')`);
+    panelNode.classList.add("has-photo", "has-real-photo");
+  });
+};
+
+const hydrateStaticThumbs = (newsMap = {}) => {
   thumbNodes.forEach((thumbNode) => {
     const slug = getSlugFromThumbNode(thumbNode);
-    const article = newsMap[slug];
+    const article = newsMap?.[slug];
     thumbNode.dataset.topic = getThumbTopic(thumbNode, article);
+    applyThumbImage(thumbNode, article);
   });
+};
+
+if (window.NEWS_DATA) {
+  hydrateStaticThumbs(
+    {
+      ...homepageStaticPreviewBySlug,
+      ...Object.fromEntries(window.NEWS_DATA.map((item) => [item.slug, item]))
+    }
+  );
 }
+
+const formatSplashStamp = () => {
+  const now = new Date();
+  const dateText = new Intl.DateTimeFormat("pt-BR", {
+    weekday: "short",
+    day: "2-digit",
+    month: "long",
+    timeZone: localeTimeZone
+  })
+    .format(now)
+    .replace(/\.$/, "");
+  const timeText = new Intl.DateTimeFormat("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: localeTimeZone
+  }).format(now);
+
+  return `${dateText.charAt(0).toUpperCase()}${dateText.slice(1)} • ${timeText}`;
+};
+
+const setupSplashExperience = () => {
+  document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
+
+  if (mobileIntroMedia?.matches) {
+    document.body.classList.add("mobile-simple-shell");
+    window.setTimeout(() => {
+      document.body.classList.add("site-loaded", "mobile-intro-ready");
+      document.body.classList.remove("mobile-simple-shell");
+    }, 180);
+    return;
+  }
+
+  if (performanceLiteMode) {
+    document.body.classList.add("site-loaded");
+    return;
+  }
+
+  if (shouldSkipHomeIntro) {
+    try {
+      sessionStorage.setItem(splashStorageKey, "1");
+      sessionStorage.removeItem(skipHomeIntroKey);
+    } catch (_error) {
+      // ignore session storage failures
+    }
+
+    document.body.classList.add("site-loaded");
+    return;
+  }
+
+  if (!splashRoot) {
+    document.body.classList.add("site-loaded");
+    return;
+  }
+
+  if (splashDate) {
+    splashDate.textContent = formatSplashStamp();
+  }
+
+  let splashReleased = false;
+  let messageIndex = 0;
+  let messageTimer = 0;
+  let hasSeenSplash = false;
+
+  try {
+    hasSeenSplash = sessionStorage.getItem(splashStorageKey) === "1";
+  } catch (_error) {
+    hasSeenSplash = false;
+  }
+
+  splashRoot.classList.toggle("is-repeat-visit", hasSeenSplash);
+
+  if (splashStatus) {
+    splashStatus.textContent = splashMessages[messageIndex];
+
+    if (!splashMotionQuery.matches) {
+      messageTimer = window.setInterval(() => {
+        messageIndex = (messageIndex + 1) % splashMessages.length;
+        splashStatus.textContent = splashMessages[messageIndex];
+      }, 760);
+    }
+  }
+
+  const releaseSplash = () => {
+    if (splashReleased) {
+      return;
+    }
+
+    splashReleased = true;
+
+    if (messageTimer) {
+      window.clearInterval(messageTimer);
+    }
+
+    requestAnimationFrame(() => {
+      document.body.classList.add("site-loaded");
+    });
+
+    try {
+      sessionStorage.setItem(splashStorageKey, "1");
+    } catch (_error) {
+      // ignore session storage failures
+    }
+  };
+
+  const currentTime =
+    typeof performance !== "undefined" && typeof performance.now === "function"
+      ? performance.now()
+      : Date.now();
+  const elapsed = currentTime - splashBootStartedAt;
+  const minimumDuration = splashMotionQuery.matches ? 100 : 5000;
+  const remaining = Math.max(100, minimumDuration - elapsed);
+
+  window.setTimeout(releaseSplash, remaining);
+};
+
+const clearMobilePageTransitionState = () => {
+  document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
+  document.body.classList.add("site-loaded");
+};
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupSplashExperience, { once: true });
+} else {
+  setupSplashExperience();
+}
+
+window.addEventListener("pageshow", clearMobilePageTransitionState);
+window.addEventListener("focus", clearMobilePageTransitionState);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) {
+    clearMobilePageTransitionState();
+  }
+});
+
+const buildTickerChip = (phrase) => {
+  const chip = document.createElement("article");
+  chip.className = "ticker-chip";
+  chip.innerHTML = `
+    <span class="ticker-chip-label"></span>
+    <span class="ticker-chip-text"></span>
+    <span class="ticker-chip-caret" aria-hidden="true"></span>
+  `;
+  setTickerChipPhrase(chip, phrase);
+  return chip;
+};
+
+const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
+  if (!chip || !phrase) {
+    return;
+  }
+
+  const labelNode = chip.querySelector(".ticker-chip-label");
+  const textNode = chip.querySelector(".ticker-chip-text");
+  const nextLabel = String(phrase.label || "Ao vivo").trim();
+  const nextText = String(phrase.text || "").trim();
+
+  if (chip._typingInterval) {
+    window.clearInterval(chip._typingInterval);
+    chip._typingInterval = 0;
+  }
+
+  if (chip._typingDoneTimer) {
+    window.clearTimeout(chip._typingDoneTimer);
+    chip._typingDoneTimer = 0;
+  }
+
+  if (labelNode) {
+    labelNode.textContent = nextLabel;
+  }
+
+  if (!textNode) {
+    return;
+  }
+
+  chip.classList.remove("is-typing");
+
+  if (!type || splashMotionQuery.matches) {
+    textNode.textContent = nextText;
+    return;
+  }
+
+  textNode.textContent = "";
+  chip.classList.add("is-typing");
+
+  let charIndex = 0;
+  const typingSpeed = Math.max(18, Math.min(34, Math.floor(960 / Math.max(nextText.length, 1))));
+
+  chip._typingInterval = window.setInterval(() => {
+    charIndex += 1;
+    textNode.textContent = nextText.slice(0, charIndex);
+
+    if (charIndex >= nextText.length) {
+      window.clearInterval(chip._typingInterval);
+      chip._typingInterval = 0;
+      chip._typingDoneTimer = window.setTimeout(() => {
+        chip.classList.remove("is-typing");
+      }, 520);
+    }
+  }, typingSpeed);
+};
+
+const initializeLiveTicker = () => {
+  if (!tickerLiveGrid) {
+    return;
+  }
+
+  clearLiveTickerRuntime();
+
+  const laneNodes = [...tickerLiveGrid.querySelectorAll(".ticker-lane")].slice(0, 1);
+  const activeTickerPhrasePool = getTickerPhrasePool();
+
+  if (!laneNodes.length || activeTickerPhrasePool.length === 0) {
+    return;
+  }
+
+  const phrasesPerLane = 10;
+  let phraseCursor = 0;
+  const nextPhrase = () => {
+    const phrase = activeTickerPhrasePool[phraseCursor % activeTickerPhrasePool.length];
+    phraseCursor += 1;
+    return phrase;
+  };
+
+  const lanes = laneNodes.map((laneNode, laneIndex) => {
+    const track = document.createElement("div");
+    track.className = "ticker-track";
+    track.style.setProperty("--ticker-duration", "34s");
+
+    const primarySegment = document.createElement("div");
+    primarySegment.className = "ticker-segment";
+
+    const cloneSegment = document.createElement("div");
+    cloneSegment.className = "ticker-segment";
+    cloneSegment.setAttribute("aria-hidden", "true");
+
+    const primaryChips = [];
+    const cloneChips = [];
+
+    for (let chipIndex = 0; chipIndex < phrasesPerLane; chipIndex += 1) {
+      const phrase = nextPhrase();
+      const primaryChip = buildTickerChip(phrase);
+      const cloneChip = buildTickerChip(phrase);
+
+      cloneChip.classList.add("is-clone");
+      primarySegment.appendChild(primaryChip);
+      cloneSegment.appendChild(cloneChip);
+      primaryChips.push(primaryChip);
+      cloneChips.push(cloneChip);
+    }
+
+    track.append(primarySegment, cloneSegment);
+    laneNode.replaceChildren(track);
+
+    return {
+      primaryChips,
+      cloneChips,
+      rotationIndex: laneIndex % phrasesPerLane
+    };
+  });
+
+  if (splashMotionQuery.matches) {
+    return;
+  }
+
+  lanes.forEach((lane, laneIndex) => {
+    const cycleLane = () => {
+      lane.rotationIndex = (lane.rotationIndex + 1) % lane.primaryChips.length;
+      const phrase = nextPhrase();
+      setTickerChipPhrase(lane.primaryChips[lane.rotationIndex], phrase, { type: true });
+      setTickerChipPhrase(lane.cloneChips[lane.rotationIndex], phrase);
+    };
+
+    const timeoutId = window.setTimeout(() => {
+      cycleLane();
+      const intervalId = window.setInterval(cycleLane, 2600 + laneIndex * 240);
+      tickerRuntime.timerIds.push(intervalId);
+    }, 1100 + laneIndex * 320);
+
+    tickerRuntime.timerIds.push(timeoutId);
+  });
+};
 
 const guideMessages = [
   "Comece pelo Radar para ver o que mexeu com Cruzeiro do Sul nesta semana.",
   "No Arquivo de Abril você revê o mês até agora sem perder a linha do tempo.",
   "Festas & Social reúne clima de Páscoa, cultura e buzz público de rede.",
-  "Se você não quer estar aqui, o botão Remoção te leva para revisão manual."
+  "Pedidos de revisão ou remoção passam por análise manual da equipe."
 ];
-const candidatesList = ["gladson", "mailza", "alan", "jorge"];
 
-if (menuToggle && siteHeader) {
-  menuToggle.addEventListener("click", () => {
-    const collapsed = siteHeader.classList.toggle("is-collapsed");
-    menuToggle.textContent = collapsed ? "Mostrar Menu" : "Ocultar Menu";
-    menuToggle.setAttribute("aria-expanded", String(!collapsed));
-  });
-}
-
-if ("IntersectionObserver" in window) {
+if (!performanceLiteMode && "IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -138,6 +1670,14 @@ const bindInteractivePanel = (panel) => {
   panel.dataset.motionBound = "true";
   panel.classList.add("interactive-panel");
 
+  const hasPhotoSurface =
+    panel.matches(".news-card, .archive-card, .mosaic-item, .trending-card, .month-card") ||
+    panel.querySelector(".news-thumb, .mini-thumb, .trend-photo, .month-photo");
+
+  if (hasPhotoSurface) {
+    return;
+  }
+
   const resetPanel = () => {
     panel.style.transform = "";
   };
@@ -161,7 +1701,7 @@ const bindInteractivePanel = (panel) => {
 };
 
 const registerInteractivePanels = (root = document) => {
-  if (!root) {
+  if (performanceLiteMode || !root) {
     return;
   }
 
@@ -181,46 +1721,359 @@ const registerInteractivePanels = (root = document) => {
 
 registerInteractivePanels();
 
-// FUNÃ‡ÃƒO PARA RENDERIZAR O RADAR (HOME)
+const radarGuideThemes = {
+  todos: {
+    label: "Tudo",
+    text: "Uma leitura rápida do que mais importa no momento em Cruzeiro do Sul e na região, reunindo os assuntos que estão puxando o dia."
+  },
+  cotidiano: {
+    label: "Cotidiano",
+    text: "Aqui entram os assuntos que mexem direto com a rotina da cidade, do transporte aos serviços que afetam o dia."
+  },
+  prefeitura: {
+    label: "Prefeitura",
+    text: "O radar marca entregas, obras, decretos e movimentos oficiais da gestão."
+  },
+  politica: {
+    label: "Política",
+    text: "Esta camada reúne decisões, movimentos institucionais e disputas que ajudam a entender o cenário político local."
+  },
+  policia: {
+    label: "Polícia",
+    text: "A mira sobe para segurança, operações e ocorrências que pedem atenção imediata."
+  },
+  saude: {
+    label: "Saúde",
+    text: "Saúde reúne campanhas, atendimento, prevenção e tudo o que mexe com o cuidado público na cidade."
+  },
+  educacao: {
+    label: "Educação",
+    text: "Educação acompanha escola, calendário letivo, formação, campus e oportunidades para estudantes e professores."
+  },
+  negocios: {
+    label: "Negócios",
+    text: "A leitura abre comércio, economia local, feiras, renda e movimentação do mercado regional."
+  },
+  cultura: {
+    label: "Cultura",
+    text: "A lanterna vira para agenda criativa, festivais, cinema, arte e o que mexe com o circuito cultural."
+  },
+  esporte: {
+    label: "Esporte",
+    text: "A mira entra no gramado e nas quadras para destacar jogos, atletas, campeonatos e bastidores esportivos."
+  }
+};
+
+let radarGuideTargetFrame = 0;
+let radarGuideScanIndex = 0;
+let radarGuideScanTimer = 0;
+let radarGuideScanTopic = null;
+let radarGuideManualFocusUntil = Date.now() + 4200;
+const RADAR_GUIDE_MANUAL_LOCK_MS = 1200;
+
+const clampNumber = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const normalizeDegrees = (degrees = 0) => {
+  let normalized = Number(degrees) || 0;
+
+  while (normalized <= -180) normalized += 360;
+  while (normalized > 180) normalized -= 360;
+
+  return normalized;
+};
+
+const rotatePoint = ({ x = 0, y = 0 } = {}, angle = 0) => {
+  const radians = (angle * Math.PI) / 180;
+  const cosine = Math.cos(radians);
+  const sine = Math.sin(radians);
+
+  return {
+    x: x * cosine - y * sine,
+    y: x * sine + y * cosine
+  };
+};
+
+const getRadarGuideHandPose = (sceneRect, targetX, targetY) => {
+  if (!radarGuideSprite || !radarGuideFrontArm) {
+    return null;
+  }
+
+  const spriteRect = radarGuideSprite.getBoundingClientRect();
+  const armWidth = radarGuideFrontArm.offsetWidth || 15;
+  const armHeight = radarGuideFrontArm.offsetHeight || 76;
+  const spriteWidth = radarGuideSprite.offsetWidth || spriteRect.width || 1;
+  const spriteHeight = radarGuideSprite.offsetHeight || spriteRect.height || 1;
+  const scaleX = spriteRect.width / spriteWidth;
+  const scaleY = spriteRect.height / spriteHeight;
+  const shoulderLocalX = radarGuideFrontArm.offsetLeft + armWidth;
+  const shoulderLocalY = radarGuideFrontArm.offsetTop + armHeight * 0.16;
+  const shoulderX = spriteRect.left - sceneRect.left + shoulderLocalX * scaleX;
+  const shoulderY = spriteRect.top - sceneRect.top + shoulderLocalY * scaleY;
+  const shoulderAimAngle = Math.atan2(targetY - shoulderY, targetX - shoulderX) * (180 / Math.PI);
+  const handBaseVector = {
+    x: (-armWidth - 3) * scaleX,
+    y: (-(armHeight * 0.16) - 3) * scaleY
+  };
+  const handBaseAngle = Math.atan2(handBaseVector.y, handBaseVector.x) * (180 / Math.PI);
+  const armAngle = clampNumber(normalizeDegrees(shoulderAimAngle - handBaseAngle), -84, -10);
+  const handOffset = rotatePoint(handBaseVector, armAngle);
+
+  return {
+    armAngle,
+    handX: shoulderX + handOffset.x,
+    handY: shoulderY + handOffset.y
+  };
+};
+
+const getRadarGuideLaserTopic = (topicNodes = [], activeTopic = null) => {
+  const nodes = topicNodes.filter(Boolean);
+  if (!nodes.length) {
+    return activeTopic;
+  }
+
+  if (Date.now() < radarGuideManualFocusUntil) {
+    radarGuideScanTopic = activeTopic || nodes[0];
+    return radarGuideScanTopic;
+  }
+
+  const pool = nodes.filter((topic) => topic !== radarGuideScanTopic);
+  const nextPool = pool.length ? pool : nodes;
+  const nextTopic = nextPool[Math.floor(Math.random() * nextPool.length)] || activeTopic || nodes[0];
+  radarGuideScanTopic = nextTopic;
+  return nextTopic;
+};
+
+const startRadarGuideScan = () => {
+  if (!radarGuide || radarGuideScanTimer || performanceLiteMode) {
+    return;
+  }
+
+  radarGuideScanTimer = window.setInterval(() => {
+    if (document.hidden) {
+      return;
+    }
+
+    radarGuideScanIndex += 1;
+    scheduleRadarGuideTarget();
+  }, 1800);
+};
+
+const updateRadarGuideTarget = () => {
+  if (!radarGuide || !radarGuideScene || !radarGuideLaser || !radarGuideLantern || !radarGuideFrontArm) {
+    return;
+  }
+
+  const activeButton = document.querySelector("#radar .chip-button.is-active[data-filter]");
+  if (!activeButton) {
+    return;
+  }
+
+  const activeFilter = activeButton.dataset.filter || "todos";
+  const topicNodes = [...radarGuideScene.querySelectorAll(".radar-office-topic[data-filter]")];
+  const activeTopic =
+    topicNodes.find((topic) => topic.dataset.filter === activeFilter) || topicNodes[0];
+  const laserTopic = getRadarGuideLaserTopic(topicNodes, activeTopic);
+
+  topicNodes.forEach((topic) => {
+    const isLaserTopic = topic === (laserTopic || activeTopic);
+    const isLinkedTopic = topic === activeTopic;
+    topic.classList.toggle("is-active", isLaserTopic);
+    topic.classList.toggle("is-linked", isLinkedTopic);
+  });
+
+  const sceneRect = radarGuideScene.getBoundingClientRect();
+  const targetRect = (laserTopic || activeTopic || activeButton).getBoundingClientRect();
+  const targetX = targetRect.left + targetRect.width / 2 - sceneRect.left;
+  const targetY = targetRect.top + targetRect.height / 2 - sceneRect.top;
+  const handPose = getRadarGuideHandPose(sceneRect, targetX, targetY);
+  const fallbackArmRect = radarGuideFrontArm.getBoundingClientRect();
+  const handX =
+    handPose?.handX ?? fallbackArmRect.left + fallbackArmRect.width * 0.16 - sceneRect.left;
+  const handY =
+    handPose?.handY ?? fallbackArmRect.top + fallbackArmRect.height * 0.12 - sceneRect.top;
+  const aimAngle = Math.atan2(targetY - handY, targetX - handX) * (180 / Math.PI);
+  const penAngle = clampNumber(normalizeDegrees(aimAngle - 180), -34, 28);
+  const armAngle = handPose?.armAngle ?? clampNumber(penAngle - 28, -84, -10);
+  const penWidth = radarGuideLantern.offsetWidth || 58;
+  const penHeight = radarGuideLantern.offsetHeight || 11;
+  const penLeft = handX - penWidth + 6;
+  const penTop = handY - penHeight / 2;
+  const tipAngle = penAngle + 180;
+  const tipRadians = (tipAngle * Math.PI) / 180;
+  const penReach = Math.max(24, penWidth - 4);
+  const originX = handX + Math.cos(tipRadians) * penReach;
+  const originY = handY + Math.sin(tipRadians) * penReach;
+  const distanceX = targetX - originX;
+  const distanceY = targetY - originY;
+  const length = Math.max(72, Math.hypot(distanceX, distanceY));
+  const angle = Math.atan2(distanceY, distanceX) * (180 / Math.PI);
+
+  radarGuide.style.setProperty("--radar-laser-origin-x", `${originX}px`);
+  radarGuide.style.setProperty("--radar-laser-origin-y", `${originY}px`);
+  radarGuide.style.setProperty("--radar-laser-target-x", `${targetX}px`);
+  radarGuide.style.setProperty("--radar-laser-target-y", `${targetY}px`);
+  radarGuide.style.setProperty("--radar-laser-length", `${length}px`);
+  radarGuide.style.setProperty("--radar-laser-angle", `${angle}deg`);
+  radarGuide.style.setProperty("--radar-guide-pen-angle", `${penAngle}deg`);
+  radarGuide.style.setProperty("--radar-guide-arm-angle", `${armAngle}deg`);
+  radarGuide.style.setProperty("--radar-guide-pen-left", `${penLeft}px`);
+  radarGuide.style.setProperty("--radar-guide-pen-top", `${penTop}px`);
+  radarGuide.classList.add("is-tracking-chip");
+
+  if (radarGuideLaserDot) {
+    radarGuideLaserDot.dataset.target = (laserTopic || activeTopic || activeButton).textContent.trim();
+  }
+};
+
+const scheduleRadarGuideTarget = () => {
+  if (!radarGuide || !radarGuideScene || !radarGuideLaser || !radarGuideLantern) {
+    return;
+  }
+
+  if (radarGuideTargetFrame) {
+    window.cancelAnimationFrame(radarGuideTargetFrame);
+  }
+
+  radarGuideTargetFrame = window.requestAnimationFrame(() => {
+    radarGuideTargetFrame = 0;
+    updateRadarGuideTarget();
+  });
+};
+
+const updateRadarGuide = (filter = "todos", spotlightArticles = []) => {
+  if (!radarGuide) {
+    return;
+  }
+
+  const theme = radarGuideThemes[filter] || radarGuideThemes.todos;
+  const leadTitle = spotlightArticles[0]?.title
+    ? ` Em destaque agora: ${spotlightArticles[0].title}.`
+    : "";
+
+  radarGuide.dataset.theme = filter;
+
+  if (radarGuideLabel) {
+    radarGuideLabel.textContent = theme.label;
+  }
+
+  if (radarGuideText) {
+    radarGuideText.textContent = `${theme.text}${leadTitle}`;
+  }
+
+  radarGuideScanIndex = 0;
+  radarGuideScanTopic = null;
+  radarGuideManualFocusUntil = Date.now() + RADAR_GUIDE_MANUAL_LOCK_MS;
+  scheduleRadarGuideTarget();
+};
+
+const setActiveRadarFilter = (filter = "todos") => {
+  radarFilterButtons.forEach((button) => {
+    const isActive = button.dataset.filter === filter;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+};
+
+const getRadarSpotlightArticles = (filter = "todos") => {
+  const allArticles = sortRadarArticles([...(window.NEWS_DATA || [])]);
+  const normalizedFilter = normalizeText(filter);
+  const filteredArticles =
+    normalizedFilter === "todos"
+      ? allArticles
+      : allArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter));
+  const spotlight = [];
+  const seenKeys = new Set();
+
+  const pushUnique = (article) => {
+    if (!article) {
+      return false;
+    }
+
+    if (!articleHasUsableImageCandidate(article)) {
+      return false;
+    }
+
+    const articleKey = getRadarArticleKey(article);
+    if (!articleKey || seenKeys.has(articleKey)) {
+      return false;
+    }
+
+    seenKeys.add(articleKey);
+    spotlight.push(article);
+    return spotlight.length >= 2;
+  };
+
+  if (normalizedFilter === "todos") {
+    const { leadArticles } = pickRadarLeadArticles(allArticles);
+    leadArticles.some(pushUnique);
+  }
+
+  filteredArticles.some(pushUnique);
+
+  if (spotlight.length < 2) {
+    allArticles.some(pushUnique);
+  }
+
+  return spotlight.slice(0, 2);
+};
+
+// FUNÇÃO PARA RENDERIZAR O RADAR (HOME)
 const renderRadar = (filter = "todos") => {
   const radarGrid = document.querySelector("#radar .news-grid");
-  if (!radarGrid || !window.NEWS_DATA) return;
+  if (!radarGrid || !window.NEWS_DATA) {
+    return;
+  }
 
-  const filtered = window.NEWS_DATA.filter(article => 
-    filter === "todos" || normalizeText(article.category) === normalizeText(filter)
-  ).slice(0, 10); // Exibir as 10 principais no radar
+  const spotlightArticles = getRadarSpotlightArticles(filter);
 
   radarGrid.innerHTML = "";
-  filtered.forEach((article, index) => {
+  radarGrid.dataset.activeFilter = filter;
+
+  spotlightArticles.forEach((article, index) => {
     const card = buildFeedCard(article);
-    if (index === 0 && filter === "todos") card.classList.add("featured");
-    card.classList.add("reveal");
+    card.classList.add(
+      "radar-spotlight-card",
+      "radar-top-story",
+      "reveal",
+      "active"
+    );
+    card.dataset.radarRank = String(index + 1);
+
+    if (index === 0) {
+      card.classList.add("featured", "featured-primary");
+    } else {
+      card.classList.add("featured-secondary");
+    }
+
     radarGrid.appendChild(card);
   });
 
-  // Re-observar novos nÃ³s se o observer existir
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("active");
-        }
-      });
-    }, { threshold: 0.1 });
-    radarGrid.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  if (spotlightArticles.length === 0) {
+    const emptyState = document.createElement("article");
+    emptyState.className = "news-card radar-empty-state reveal active";
+    emptyState.innerHTML = `
+      <span class="news-source">Radar CZS</span>
+      <h3>Sem destaque encontrado para este tema agora.</h3>
+      <p>Troque o chip acima para abrir outro módulo do radar local.</p>
+    `;
+    radarGrid.appendChild(emptyState);
   }
 
+  setActiveRadarFilter(filter);
+  updateRadarGuide(filter, spotlightArticles);
   registerInteractivePanels(radarGrid);
+  window.setTimeout(() => registerArticleCardLinks(radarGrid), 0);
 };
 
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const { filter } = button.dataset;
-    filterButtons.forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    renderRadar(filter);
-  });
-});
+if (radarGuide && !performanceLiteMode) {
+  window.addEventListener("resize", scheduleRadarGuideTarget);
+  window.addEventListener("scroll", scheduleRadarGuideTarget, { passive: true });
+  startRadarGuideScan();
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(scheduleRadarGuideTarget).catch(() => {});
+  }
+}
 
 dayChips.forEach((button) => {
   button.addEventListener("click", () => {
@@ -263,8 +2116,8 @@ const buildCommentCard = (comment) => {
   const message = document.createElement("p");
 
   article.className = "comment-card reveal active";
-  author.textContent = comment.name || "Leitor local";
-  badge.textContent = comment.badge || "Comunidade";
+  author.textContent = comment.name || comment.author || "Leitor local";
+  badge.textContent = comment.badge || comment.city || "Comunidade";
   message.textContent = `“${comment.message || ""}”`;
 
   header.append(author, badge);
@@ -283,6 +2136,133 @@ const renderCommentsFeed = (items = []) => {
   });
 };
 
+const getAnalyticsContext = () => {
+  try {
+    return window.CatalogoAnalytics?.getContext?.() || {};
+  } catch {
+    return {};
+  }
+};
+
+const buildCommunityReportCard = (report = {}) => {
+  const article = document.createElement("article");
+  const header = document.createElement("header");
+  const badge = document.createElement("span");
+  const title = document.createElement("strong");
+  const message = document.createElement("p");
+  const footer = document.createElement("small");
+
+  article.className = "community-report-card";
+  badge.textContent = "não checado";
+  title.textContent = report.neighborhood || "Bairro não informado";
+  message.textContent = report.message || "";
+  footer.textContent = `${report.name || "Morador local"} • participação comunitária voluntária`;
+
+  header.append(badge, title);
+  article.append(header, message, footer);
+  return article;
+};
+
+const renderCommunityReports = (items = []) => {
+  if (!communityReportList) return;
+
+  communityReportList.innerHTML = "";
+  if (!items.length) {
+    const empty = document.createElement("p");
+    empty.className = "community-report-empty";
+    empty.textContent = "Ainda não há relatos comunitários aguardando checagem neste bloco.";
+    communityReportList.appendChild(empty);
+    return;
+  }
+
+  items.forEach((item) => {
+    communityReportList.appendChild(buildCommunityReportCard(item));
+  });
+};
+
+const loadCommunityReports = async () => {
+  if (!communityReportList) return;
+
+  try {
+    const payload = await requestApiJson("/api/community/reports?limit=6");
+    const items = Array.isArray(payload.items) ? payload.items : [];
+    renderCommunityReports(items);
+    return items;
+  } catch (_error) {
+    renderCommunityReports([]);
+    return [];
+  }
+};
+
+const revealCommunityReportsAfterSubmit = () => {
+  const section = document.querySelector("#participacao-comunitaria");
+  const board = document.querySelector(".community-signal-board");
+  const target = board || section || communityReportList;
+
+  if (!target) {
+    return;
+  }
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+};
+
+const submitCommunityReport = async (event) => {
+  event.preventDefault();
+  if (!communityAgentForm || !communityAgentFeedback) return;
+
+  const formData = new FormData(communityAgentForm);
+  const submitButton = communityAgentForm.querySelector('button[type="submit"]');
+  const message = String(formData.get("message") || "").trim();
+  if (message.length < 12) {
+    communityAgentFeedback.textContent = "Conte um pouco mais para a equipe entender o que precisa verificar.";
+    return;
+  }
+
+  communityAgentFeedback.textContent = "Agente recebendo o relato como não checado...";
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Enviando...";
+  }
+
+  const analyticsContext = getAnalyticsContext();
+  const payload = {
+    name: String(formData.get("name") || "").trim(),
+    contact: String(formData.get("contact") || "").trim(),
+    neighborhood: String(formData.get("neighborhood") || "").trim(),
+    message,
+    topic: "Relato comunitário",
+    sourcePage: window.location.pathname,
+    visitorId: analyticsContext.visitorId,
+    sessionId: analyticsContext.sessionId
+  };
+
+  try {
+    const result = await requestApiJson("/api/community/reports", {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+
+    communityAgentFeedback.textContent =
+      "Relato registrado como não checado. Ele entrou na fila dos agentes para verificação.";
+    communityAgentForm.reset();
+    const refreshedItems = await loadCommunityReports();
+    if (!Array.isArray(refreshedItems) || !refreshedItems.length) {
+      renderCommunityReports(result?.item ? [result.item] : []);
+    }
+    revealCommunityReportsAfterSubmit();
+  } catch (error) {
+    communityAgentFeedback.textContent = error.message || "Falha ao registrar. Tente novamente.";
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = "Enviar relato não checado";
+    }
+  }
+};
+
 let pointerX = window.innerWidth / 2;
 let pointerY = window.innerHeight / 2;
 let scrollY = window.scrollY;
@@ -297,7 +2277,7 @@ const renderParallax = () => {
   });
 };
 
-if (parallaxNodes.length > 0) {
+if (!performanceLiteMode && parallaxNodes.length > 0) {
   renderParallax();
 
   window.addEventListener("mousemove", (event) => {
@@ -316,7 +2296,7 @@ if (parallaxNodes.length > 0) {
   );
 }
 
-if (guideTip) {
+if (guideTip && !performanceLiteMode) {
   let guideIndex = 0;
 
   window.setInterval(() => {
@@ -358,22 +2338,24 @@ const ensureMediaBadge = (node, media) => {
   node.appendChild(badge);
 };
 
-if (thumbNodes.length > 0 && window.NEWS_MAP) {
-  thumbNodes.forEach((node) => {
-    const slugFromHref = getSlugFromLink(node.closest("a") || node);
-    const article = window.NEWS_MAP?.[slugFromHref];
-    ensureMediaBadge(node, article?.media);
-  });
-}
-
 const liveFeedGrid = document.querySelector("#live-feed-grid");
 const liveFeedQuery = document.querySelector("#live-feed-query");
+const liveFeedSuggestions = document.querySelector("#arquivo-noticias-sugestoes");
 const liveFeedMore = document.querySelector("#live-feed-more");
 const liveFeedCount = document.querySelector("#live-feed-count");
+const liveFeedCountLabel = document.querySelector("#live-feed-count-label");
+const liveFeedTotal = document.querySelector("#live-feed-total");
+const liveFeedStatus = document.querySelector("#live-feed-status");
+const liveFeedFilters = document.querySelector("#live-feed-filters");
+const liveFeedUpdated = document.querySelector("#live-feed-updated");
+const liveFeedFocus = document.querySelector("#live-feed-focus");
+const liveFeedSources = document.querySelector("#live-feed-sources");
+const liveFeedClear = document.querySelector("#live-feed-clear");
 const liveFeedState = {
   pageSize: 6,
   visibleItems: 6,
-  items: [...initialStaticNews]
+  items: [...initialStaticNews],
+  activeCategory: ""
 };
 
 const monthIndex = {
@@ -391,12 +2373,407 @@ const monthIndex = {
   dezembro: 11
 };
 
-const normalizeText = (value) =>
-  String(value || "")
+function normalizeText(value) {
+  return String(value || "")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim();
+}
+
+function slugifyText(value) {
+  return normalizeText(value)
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+const getLocalDateKey = (date = new Date()) => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: localeTimeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(date);
+
+  const dateParts = Object.fromEntries(
+    parts
+      .filter((part) => part.type !== "literal")
+      .map((part) => [part.type, part.value])
+  );
+
+  return `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+};
+
+const previewClassByCategory = {
+  cotidiano: "thumb-cheia",
+  saude: "thumb-saude",
+  negocios: "thumb-pascoa",
+  policia: "thumb-policia",
+  educacao: "thumb-educacao",
+  prefeitura: "thumb-politica",
+  politica: "thumb-politica",
+  esporte: "thumb-cultura",
+  "utilidade publica": "thumb-alerta",
+  "festas & social": "thumb-social",
+  social: "thumb-social",
+  cultura: "thumb-cultura"
+};
+
+const categoryLabelByKey = {
+  cotidiano: "Cotidiano",
+  prefeitura: "Prefeitura",
+  politica: "Política",
+  policia: "Polícia",
+  saude: "Saúde",
+  educacao: "Educação",
+  negocios: "Negócios",
+  cultura: "Cultura",
+  esporte: "Esporte",
+  social: "Social",
+  "festas & social": "Festas & Social",
+  "utilidade publica": "Utilidade Pública"
+};
+
+const categoryAliasMap = {
+  cotidiano: "cotidiano",
+  politica: "politica",
+  policia: "policia",
+  saude: "saude",
+  educacao: "educacao",
+  economia: "negocios",
+  negocios: "negocios",
+  cultura: "cultura",
+  variedades: "cultura",
+  esporte: "esporte",
+  "destaques esporte": "esporte",
+  governo: "prefeitura",
+  prefeitura: "prefeitura",
+  editais: "utilidade publica",
+  detran: "utilidade publica",
+  social: "social",
+  "festas & social": "festas & social",
+  "ac24horas play": "cultura",
+  newsletter: "",
+  nacional: "",
+  geral: "",
+  acre: "",
+  "acre 03": "",
+  "destaque 1": "",
+  "extra total": ""
+};
+
+const genericCategoryKeys = new Set([
+  "",
+  "newsletter",
+  "nacional",
+  "geral",
+  "acre",
+  "acre 03",
+  "destaque 1",
+  "extra total"
+]);
+
+const radarCategoryRelevance = {
+  cotidiano: 6,
+  saude: 5,
+  "utilidade publica": 5,
+  prefeitura: 4,
+  politica: 4,
+  policia: 4,
+  educacao: 4,
+  esporte: 4,
+  negocios: 3,
+  cultura: 3,
+  "festas & social": 2,
+  social: 2
+};
+
+const isKnownCategoryKey = (categoryKey = "") => Boolean(categoryLabelByKey[categoryKey]);
+
+const formatCategoryLabel = (categoryKey = "") =>
+  categoryLabelByKey[categoryKey] || categoryLabelByKey.cotidiano;
+
+const inferCategoryKeyFromContent = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+
+  if (!haystack) {
+    return "";
+  }
+
+  if (
+    /\b(policia|policial|preso|prende|prisao|trafico|crime|assalto|roubo|furto|homicidio|estupr|foragido|delegacia|delegado|operacao)\b/.test(
+      haystack
+    )
+  ) {
+    return "policia";
+  }
+
+  if (
+    /\b(saude|hospital|ubs|upa|medic|vacina|vacinacao|dengue|cirurg|sus|atendimento|doenca|doula)\b/.test(
+      haystack
+    )
+  ) {
+    return "saude";
+  }
+
+  if (
+    /\b(educacao|escola|colegio|ifac|ufac|universidade|estudante|enem|vestibular|aula|ensino|professor)\b/.test(
+      haystack
+    )
+  ) {
+    return "educacao";
+  }
+
+  if (
+    /\b(esporte|futebol|basquete|campeonato|atleta|jogo|serie d|tourao|humaita|galvez)\b/.test(
+      haystack
+    )
+  ) {
+    return "esporte";
+  }
+
+  if (
+    /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
+      haystack
+    )
+  ) {
+    return "utilidade publica";
+  }
+
+  if (
+    /\b(aleac|camara|deputad|senador|ministro|stj|stf|eleicao|eleitoral|parlamento|monopolio aereo)\b/.test(
+      haystack
+    )
+  ) {
+    return "politica";
+  }
+
+  if (
+    /\b(prefeitura|governo|governador|governadora|prefeito|prefeita|secretaria|secretario|gestao|obras?)\b/.test(
+      haystack
+    )
+  ) {
+    return "prefeitura";
+  }
+
+  if (/\b(negocio|economia|comercio|empresa|empreendedor|mercado|feira)\b/.test(haystack)) {
+    return "negocios";
+  }
+
+  if (/\b(festa|social|celebridade|aniversario|casamento|coluna social)\b/.test(haystack)) {
+    return "festas & social";
+  }
+
+  if (
+    /\b(cultura|cinema|teatro|show|festival|musica|arte|artista|entretenimento|variedades)\b/.test(
+      haystack
+    )
+  ) {
+    return "cultura";
+  }
+
+  return "";
+};
+
+const normalizeNewsCategoryKey = (rawCategory = "", context = {}) => {
+  const rawKey = normalizeText(rawCategory);
+  const mappedKey = Object.prototype.hasOwnProperty.call(categoryAliasMap, rawKey)
+    ? categoryAliasMap[rawKey]
+    : "";
+
+  if (mappedKey) {
+    return mappedKey;
+  }
+
+  if (rawKey && !genericCategoryKeys.has(rawKey) && isKnownCategoryKey(rawKey)) {
+    return rawKey;
+  }
+
+  const inferredKey = inferCategoryKeyFromContent(
+    [rawCategory, context.title, context.summary, context.sourceName, context.sourceLabel].join(" ")
+  );
+  if (inferredKey) {
+    return inferredKey;
+  }
+
+  const defaultKey = normalizeText(context.defaultCategory || "");
+  if (isKnownCategoryKey(defaultKey)) {
+    return defaultKey;
+  }
+
+  return "cotidiano";
+};
+
+const formatDisplayDate = (value) => {
+  if (!value) {
+    return "Sem data";
+  }
+
+  if (typeof value === "string" && !/^\d{4}-\d{2}-\d{2}/.test(value)) {
+    return value;
+  }
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return String(value);
+  }
+
+  return parsed.toLocaleDateString("pt-BR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: localeTimeZone
+  });
+};
+
+const formatCompactDisplayDate = (value) => {
+  if (!value) {
+    return "Sem data";
+  }
+
+  const parsed = new Date(value);
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed
+      .toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        timeZone: localeTimeZone
+      })
+      .replace(/\./g, "")
+      .replace(/\s+de\s+/gi, " ")
+      .trim();
+  }
+
+  return cleanArticleText(String(value || ""))
+    .replace(/\./g, "")
+    .replace(/\s+de\s+/gi, " ")
+    .trim();
+};
+
+const formatMosaicSourceLabel = (article = {}) => {
+  const sourceName = cleanArticleText(
+    article.sourceName || article.source || article.sourceLabel || "Fonte local"
+  );
+  const dateLabel = formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "");
+  return dateLabel && dateLabel !== "Sem data" ? `${sourceName} • ${dateLabel}` : sourceName;
+};
+
+const decodeBasicEntities = (value = "") =>
+  String(value || "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&quot;/gi, '"')
+    .replace(/&amp;/gi, "&")
+    .replace(/&hellip;|&#8230;/gi, "...")
+    .replace(/&#8211;|&#8212;/gi, "-")
+    .replace(/&#8216;|&#8217;/gi, "'")
+    .replace(/&#8220;|&#8221;/gi, '"')
+    .replace(/&#(\d+);/g, (_match, code) => {
+      const parsed = Number(code);
+      return Number.isFinite(parsed) ? String.fromCharCode(parsed) : "";
+    });
+
+const cleanArticleText = (value = "") =>
+  decodeBasicEntities(value)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const cleanArticleExcerpt = (value = "", fallback = "") => {
+  let text = cleanArticleText(value || fallback || "");
+
+  text = text
+    .replace(/\s*["“”]?\s*data-medium-file="[^"]*"/gi, " ")
+    .replace(/\s*data-large-file="[^"]*"/gi, " ")
+    .replace(/\s*data-orig-file="[^"]*"/gi, " ")
+    .replace(/\s*data-orig-size="[^"]*"/gi, " ")
+    .replace(/\s*srcset="[^"]*"/gi, " ")
+    .replace(/\s*src="[^"]*"/gi, " ")
+    .replace(/\s*The post .*? appeared first on .*?\.?$/i, "")
+    .replace(/\[\s*\.{3}\s*\]|\[\s*…\s*\]/g, "...")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (/^(foto|fotos|imagem|imagens|screenshot|arquivo|reproducao|reprodução)\s*:/i.test(text)) {
+    text = text
+      .replace(
+        /^(foto|fotos|imagem|imagens|screenshot|arquivo|reproducao|reprodução)\s*:\s*.*?(?=\s+(A|O|As|Os|Uma|Um|Na|No|Em|Foi|Com|Pontos|Fortes|Durante)\b)/i,
+        ""
+      )
+      .trim();
+  }
+
+  return text || cleanArticleText(fallback || value || "");
+};
+
+const heroUnsafeImageOverrides = {
+  "aliado-de-mailza-pastor-reginaldo-e-nomeado-para-cargo-de-adjunto-na-secretaria-de-governo":
+    "https://ac24horas.com/wp-content/uploads/2025/12/PALACIO-SERGIO-VALE-e1720103436277-1200x812.webp"
+};
+
+function resolveSafeArticleImageUrl(article = {}, fallback = "") {
+  const sanitizedFallback = sanitizeImageUrl(fallback);
+  const slug = String(article?.slug || "").trim().toLowerCase();
+  const overrideUrl = heroUnsafeImageOverrides[slug] || "";
+  const candidateUrl = String(
+    article?.imageUrl || article?.feedImageUrl || article?.sourceImageUrl || fallback || ""
+  ).trim();
+
+  if (overrideUrl && /img_6556-1024x723\.jpeg/i.test(candidateUrl)) {
+    return sanitizeImageUrl(overrideUrl);
+  }
+
+  return sanitizedFallback;
+}
+
+const normalizeRuntimeArticle = (article = {}) => {
+  const title = cleanArticleText(article.title || "Atualizacao");
+  const categoryKey = normalizeNewsCategoryKey(article.category, {
+    defaultCategory: article.defaultCategory,
+    title,
+    summary: article.lede || article.summary || article.description,
+    sourceName: article.sourceName || article.source || article.sourceLabel
+  });
+  const category = formatCategoryLabel(categoryKey);
+  const sourceName = cleanArticleText(
+    article.sourceName || article.source || article.sourceLabel || "Fonte local"
+  );
+  const sourceUrl = article.sourceUrl || article.url || article.link || "#";
+  const lede = cleanArticleExcerpt(
+    article.lede || article.summary || article.description || "Sem resumo.",
+    article.sourceLabel || article.title || "Sem resumo."
+  );
+  const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
+  const originalImageUrl = String(article.feedImageUrl || article.imageUrl || "");
+  const originalSourceImageUrl = String(article.sourceImageUrl || "");
+  const originalFeedImageUrl = String(article.feedImageUrl || article.imageUrl || "");
+  const imageUrl = resolveSafeArticleImageUrl(
+    article,
+    originalImageUrl ||
+      originalFeedImageUrl ||
+      extractInlineArticleImage(article) ||
+      originalSourceImageUrl
+  );
+
+  return {
+    ...article,
+    id: article.id || slug || sourceUrl || title,
+    slug,
+    title,
+    category,
+    categoryKey,
+    previewClass: article.previewClass || previewClassByCategory[categoryKey] || "thumb-servico",
+    sourceName,
+    sourceUrl,
+    sourceLabel: cleanArticleText(article.sourceLabel || title),
+    lede,
+    date: formatDisplayDate(article.date || article.publishedAt || article.createdAt || ""),
+    originalImageUrl,
+    originalSourceImageUrl,
+    originalFeedImageUrl,
+    imageUrl
+  };
+};
 
 const parseArticleDate = (value) => {
   const normalized = normalizeText(value).replace("º", "");
@@ -410,11 +2787,335 @@ const parseArticleDate = (value) => {
   return new Date(Number(year), monthIndex[month] ?? 0, Number(day)).getTime();
 };
 
-const atlasApiBase = window.location.protocol.startsWith("http")
-  ? ""
-  : "http://localhost:3000";
+const getArticleDateKey = (article = {}) => {
+  const rawValue = article.publishedAt || article.date || article.createdAt || "";
 
-const getApiUrl = (path) => `${atlasApiBase}${path}`;
+  if (!rawValue) {
+    return "";
+  }
+
+  if (typeof rawValue === "string") {
+    const isoMatch = rawValue.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (isoMatch) {
+      return isoMatch[1];
+    }
+
+    const normalized = normalizeText(rawValue).replace("º", "");
+    const longDateMatch = normalized.match(/(\d{1,2}) de ([a-z]+) de (\d{4})/);
+
+    if (longDateMatch) {
+      const [, day, month, year] = longDateMatch;
+      const monthNumber = String((monthIndex[month] ?? 0) + 1).padStart(2, "0");
+      const dayNumber = String(Number(day)).padStart(2, "0");
+      return `${year}-${monthNumber}-${dayNumber}`;
+    }
+  }
+
+  const parsed = new Date(rawValue);
+  return Number.isNaN(parsed.getTime()) ? "" : getLocalDateKey(parsed);
+};
+
+const getArticleSortTimestamp = (article = {}) =>
+  Date.parse(article.publishedAt || article.createdAt || "") || parseArticleDate(article.date || "");
+
+const getRadarArticleKey = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const canonicalDateKey = getArticleDateKey(normalizedArticle);
+  const canonicalTitleKey = slugifyText(normalizedArticle.title || "");
+  const canonicalPairKey = [canonicalTitleKey, canonicalDateKey].filter(Boolean).join("::");
+
+  return (
+    canonicalPairKey ||
+    normalizedArticle.slug ||
+    normalizedArticle.id ||
+    normalizeText([normalizedArticle.title, normalizedArticle.date].join(" "))
+  );
+};
+
+const getRadarRelevanceScore = (article = {}) =>
+  radarCategoryRelevance[
+    normalizeRuntimeArticle(article).categoryKey || normalizeText(article.category)
+  ] || 0;
+
+const articleCategoryGroups = {
+  cotidiano: ["cotidiano"],
+  prefeitura: ["prefeitura", "politica", "utilidade publica", "gestao publica"],
+  politica: ["politica", "prefeitura", "utilidade publica", "gestao publica"],
+  policia: ["policia", "seguranca"],
+  saude: ["saude"],
+  educacao: ["educacao"],
+  negocios: ["negocios", "economia"],
+  cultura: ["cultura", "variedades"],
+  social: ["social", "festas & social"],
+  esporte: ["esporte"]
+};
+
+const getArticleCategoryGroup = (filter = "") => {
+  const normalizedFilter = normalizeText(filter);
+  return articleCategoryGroups[normalizedFilter] || (normalizedFilter ? [normalizedFilter] : []);
+};
+
+const articleMatchesCategoryFilter = (article = {}, filter = "") => {
+  const normalizedFilter = normalizeText(filter);
+
+  if (!normalizedFilter || normalizedFilter === "todos") {
+    return true;
+  }
+
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const categoryKey = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+  return getArticleCategoryGroup(normalizedFilter).includes(categoryKey);
+};
+
+const sortRadarArticles = (articles = []) =>
+  [...articles].sort((left, right) => {
+    const dateDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
+    if (dateDiff !== 0) {
+      return dateDiff;
+    }
+
+    const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
+    if (priorityDiff !== 0) {
+      return priorityDiff;
+    }
+
+    const relevanceDiff = getRadarRelevanceScore(right) - getRadarRelevanceScore(left);
+    if (relevanceDiff !== 0) {
+      return relevanceDiff;
+    }
+
+    const imageDiff =
+      Number(articleHasUsableImageCandidate(right, "hero")) -
+      Number(articleHasUsableImageCandidate(left, "hero"));
+    if (imageDiff !== 0) {
+      return imageDiff;
+    }
+
+    return String(left.title || "").localeCompare(String(right.title || ""), "pt-BR");
+  });
+
+function getArticleDisplayImageUrl(article = {}, surface = "default") {
+  return getArticlePreferredImageUrl(article, surface);
+}
+
+function getArticlePreferredImageUrl(article = {}, surface = "default") {
+  const candidates = collectArticleImageCandidates(article, surface).filter(
+    (candidate) => !isIllustrativeImage({ ...article, imageUrl: candidate })
+  );
+  return candidates[0] || "";
+}
+
+function articleHasUsableImageCandidate(article = {}, surface = "default") {
+  return Boolean(getArticlePreferredImageUrl(article, surface));
+}
+
+function getArticleImageKey(article = {}, surface = "default") {
+  return getImageFingerprint(getArticleDisplayImageUrl(article, surface));
+}
+
+const newsSurfaceReservations = {
+  hero: new Set(),
+  social: new Set(),
+  buzz: new Set(),
+  popular: new Set()
+};
+
+const getArticleUsageKey = (article = {}) => getRadarArticleKey(normalizeRuntimeArticle(article));
+
+const reserveSurfaceArticles = (surfaceName = "", articles = []) => {
+  if (!surfaceName) {
+    return;
+  }
+
+  newsSurfaceReservations[surfaceName] = new Set(
+    (Array.isArray(articles) ? articles : [])
+      .map((article) => getArticleUsageKey(article))
+      .filter(Boolean)
+  );
+};
+
+const buildReservedArticleKeys = (excludedSurfaces = []) => {
+  const excluded = new Set(excludedSurfaces);
+  const reserved = new Set();
+
+  Object.entries(newsSurfaceReservations).forEach(([surfaceName, surfaceKeys]) => {
+    if (excluded.has(surfaceName) || !(surfaceKeys instanceof Set)) {
+      return;
+    }
+
+    surfaceKeys.forEach((key) => reserved.add(key));
+  });
+
+  return reserved;
+};
+
+const pushUniqueArticle = (
+  article,
+  bucket,
+  selectedKeys,
+  selectedImages,
+  allowDuplicateImages = false
+) => {
+  const articleKey = getRadarArticleKey(article);
+  if (selectedKeys.has(articleKey)) {
+    return false;
+  }
+
+  const imageKey = getArticleImageKey(article, "hero");
+  if (!allowDuplicateImages && imageKey && selectedImages.has(imageKey)) {
+    return false;
+  }
+
+  selectedKeys.add(articleKey);
+  if (imageKey) {
+    selectedImages.add(imageKey);
+  }
+  bucket.push(article);
+  return true;
+};
+
+const pickRadarLeadArticles = (articles = []) => {
+  const todayKey = getLocalDateKey();
+  const availableDateKeys = [...new Set(articles.map((article) => getArticleDateKey(article)).filter(Boolean))]
+    .sort((left, right) => right.localeCompare(left));
+  const referenceDateKey = availableDateKeys.find((dateKey) => dateKey <= todayKey) || availableDateKeys[0] || "";
+  const sameDayArticles = sortRadarArticles(
+    articles.filter((article) => getArticleDateKey(article) === referenceDateKey)
+  );
+  const sameDayArticlesWithImage = sameDayArticles.filter((article) =>
+    articleHasUsableImageCandidate(article, "hero")
+  );
+  const leadArticles = [];
+  const selectedKeys = new Set();
+  const selectedImages = new Set();
+
+  sameDayArticlesWithImage.some((article) => {
+    if (leadArticles.length >= 3) return true;
+    pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
+    return false;
+  });
+
+  if (leadArticles.length < 3) {
+    const fallbackArticles = sortRadarArticles(
+      articles.filter((article) => !selectedKeys.has(getRadarArticleKey(article)))
+    );
+    const fallbackArticlesWithImage = fallbackArticles.filter((article) =>
+      articleHasUsableImageCandidate(article, "hero")
+    );
+
+    fallbackArticlesWithImage.some((article) => {
+      pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
+      return leadArticles.length >= 3;
+    });
+
+    if (leadArticles.length < 3) {
+      sameDayArticlesWithImage.some((article) => {
+        if (leadArticles.length >= 3) return true;
+        pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages, true);
+        return false;
+      });
+    }
+
+    if (leadArticles.length < 3) {
+      fallbackArticlesWithImage.some((article) => {
+        if (leadArticles.length >= 3) return true;
+        pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages, true);
+        return false;
+      });
+    }
+  }
+
+  return { leadArticles, referenceDateKey };
+};
+
+const resolveApiBases = () => {
+  const bases = [];
+  const addBase = (value) => {
+    const normalized = String(value || "").trim().replace(/\/$/, "");
+    if (!normalized || bases.includes(normalized)) {
+      return;
+    }
+    bases.push(normalized);
+  };
+  const localBaseCandidates = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:8787",
+    "http://127.0.0.1:8787"
+  ];
+  const configuredBases = Array.isArray(window.CATALOGO_API_BASES) ? window.CATALOGO_API_BASES : [];
+  const configuredBase =
+    typeof window.CATALOGO_API_BASE === "string" && window.CATALOGO_API_BASE
+      ? window.CATALOGO_API_BASE
+      : "";
+  const localHostPattern = /^(localhost|127(?:\.\d{1,3}){3})$/i;
+  const isLocalHttp = window.location.protocol.startsWith("http") && localHostPattern.test(window.location.hostname);
+  const isFileMode = window.location.protocol === "file:";
+  const currentOrigin = String(window.location.origin || "").trim().replace(/\/$/, "");
+  const isLocalLikeBase = (value) => {
+    const normalized = String(value || "").trim().replace(/\/$/, "");
+
+    if (!normalized) {
+      return false;
+    }
+
+    try {
+      const parsed = new URL(normalized);
+      return localHostPattern.test(parsed.hostname);
+    } catch (_error) {
+      return false;
+    }
+  };
+
+  if (!isFileMode && !isLocalHttp) {
+    addBase(currentOrigin);
+  }
+
+  if (isLocalHttp) {
+    addBase(currentOrigin);
+  }
+
+  configuredBases.forEach((base) => {
+    if (isFileMode || base === currentOrigin || (!isLocalHttp && isLocalLikeBase(base))) {
+      addBase(base);
+    }
+  });
+  if (isFileMode || configuredBase === currentOrigin || (!isLocalHttp && isLocalLikeBase(configuredBase))) {
+    addBase(configuredBase);
+  }
+
+  if (window.location.protocol.startsWith("http")) {
+    addBase(currentOrigin);
+  } else {
+    localBaseCandidates.forEach(addBase);
+  }
+
+  if (isFileMode) {
+    localBaseCandidates.forEach(addBase);
+  }
+
+  return bases.length ? bases : localBaseCandidates;
+};
+
+const rememberApiBase = (base = "") => {
+  const normalized = String(base || "").trim().replace(/\/$/, "");
+  if (!normalized) {
+    return;
+  }
+
+  window.CATALOGO_API_BASE = normalized;
+  window.CATALOGO_API_BASES = [normalized].concat(
+    (Array.isArray(window.CATALOGO_API_BASES) ? window.CATALOGO_API_BASES : []).filter(
+      (candidate) => String(candidate || "").trim().replace(/\/$/, "") !== normalized
+    )
+  );
+
+  try {
+    localStorage.setItem("catalogo_api_base", normalized);
+  } catch {
+    // ignore
+  }
+};
 
 const requestApiJson = async (path, options = {}) => {
   const nextHeaders = { ...(options.headers || {}) };
@@ -423,17 +3124,1886 @@ const requestApiJson = async (path, options = {}) => {
     nextHeaders["Content-Type"] = "application/json";
   }
 
-  const response = await fetch(getApiUrl(path), {
-    headers: nextHeaders,
-    ...options
-  });
-
-  if (!response.ok) {
-    const payload = await response.json().catch(() => ({}));
-    throw new Error(payload.error || `Falha em ${path}`);
+  if (!nextHeaders.Accept) {
+    nextHeaders.Accept = "application/json";
   }
 
-  return response.json();
+  let lastError = null;
+  const bases = resolveApiBases();
+
+  for (let index = 0; index < bases.length; index += 1) {
+    const apiBase = bases[index];
+
+    try {
+      const response = await fetch(`${apiBase}${path}`, {
+        ...options,
+        headers: nextHeaders
+      });
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        const message = payload.error || payload.message || `Falha em ${path}`;
+        const canRetry = (response.status === 404 || response.status === 405) && index < bases.length - 1;
+
+        if (canRetry) {
+          lastError = new Error(message);
+          continue;
+        }
+
+        throw new Error(message);
+      }
+
+      const contentType = String(response.headers.get("content-type") || "").toLowerCase();
+      if (!contentType.includes("json")) {
+        const invalidPayloadError = new Error(`Resposta invalida em ${path}`);
+        if (index < bases.length - 1) {
+          lastError = invalidPayloadError;
+          continue;
+        }
+        throw invalidPayloadError;
+      }
+
+      const payload = await response.json().catch(() => null);
+      if (!payload || typeof payload !== "object") {
+        const invalidPayloadError = new Error(`Resposta invalida em ${path}`);
+        if (index < bases.length - 1) {
+          lastError = invalidPayloadError;
+          continue;
+        }
+        throw invalidPayloadError;
+      }
+
+      rememberApiBase(apiBase);
+      return payload;
+    } catch (error) {
+      lastError = error;
+
+      if (!(error instanceof TypeError) || index >= bases.length - 1) {
+        break;
+      }
+    }
+  }
+
+  throw lastError || new Error(`Falha em ${path}`);
+};
+
+const copyTextToClipboard = async (value = "") => {
+  const text = String(value || "").trim();
+  if (!text) {
+    return false;
+  }
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch (_error) {
+    // Continua para o fallback abaixo.
+  }
+
+  const helper = document.createElement("textarea");
+  helper.value = text;
+  helper.setAttribute("readonly", "readonly");
+  helper.style.position = "fixed";
+  helper.style.opacity = "0";
+  document.body.appendChild(helper);
+  helper.select();
+  const copied = document.execCommand("copy");
+  helper.remove();
+  return copied;
+};
+
+const heroTourismDailyPoolState = {
+  dayKey: "",
+  items: []
+};
+
+const heroTourismDailyTarget = 10;
+const heroTourismRotationIntervalMs = 4000;
+const heroTourismDailyTimeZone = "America/Rio_Branco";
+const heroTourismLocalPattern =
+  /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima|rodrigues alves)\b/i;
+const heroTourismFocusPositions = [
+  "center 42%",
+  "center 36%",
+  "center 48%",
+  "center 30%",
+  "center 54%",
+  "center 40%",
+  "center 46%",
+  "center 34%"
+];
+const heroDailyThemeOrder = [
+  "games",
+  "politica",
+  "prefeitura",
+  "policia",
+  "saude",
+  "educacao",
+  "esporte",
+  "negocios",
+  "cultura",
+  "social",
+  "cotidiano"
+];
+const heroDailyAreaLabels = {
+  politica: "Politica",
+  prefeitura: "Prefeitura",
+  policia: "Policia",
+  saude: "Saude",
+  educacao: "Educacao",
+  esporte: "Esporte",
+  negocios: "Negocios",
+  cultura: "Cultura",
+  social: "Social",
+  cotidiano: "Cotidiano",
+  comunidade: "Comunidade",
+  servicos: "Servicos",
+  entretenimento: "Entretenimento",
+  games: "Games",
+  infantil: "Infantil",
+  estudantes: "Estudantil",
+  acre: "Acre",
+  trending: "Trending"
+};
+
+const ensureMobileHomeLeadLayout = () => {
+  if (!document.body.classList.contains("editorial-home")) {
+    return;
+  }
+
+  const isMobile = mobileHomeLeadMedia?.matches;
+  const siteHeaderStack = document.querySelector(".site-header-stack");
+  const masthead = document.querySelector(".masthead");
+  const mainNav = document.querySelector(".main-nav");
+  const editorialStrip = document.querySelector(".header-services-strip");
+  const mainLayout = document.querySelector(".main-layout");
+  const heroShell = document.querySelector(".hero-newsroom-shell.hero-restored-shell");
+  const officePlayStrip = document.querySelector(".office-play-strip");
+
+  if (!siteHeaderStack || !masthead || !mainLayout || !heroShell) {
+    return;
+  }
+
+  const moveAfterHero = [
+    document.querySelector(".top-strip"),
+    document.querySelector(".device-version-notice"),
+    document.querySelector(".top-construction-yard"),
+    document.querySelector(".ticker-live-shell"),
+    document.querySelector(".header-services-strip")
+  ].filter(Boolean);
+
+  if (isMobile) {
+    if (!mobileHomeDomState.menuDropdown) {
+      const dropdown = document.createElement("details");
+      dropdown.className = "mobile-main-nav-dropdown";
+      dropdown.setAttribute("aria-label", "Menu principal do portal");
+      dropdown.innerHTML = `<summary>Editoriais</summary><div class="mobile-main-nav-links"></div>`;
+      mobileHomeDomState.menuDropdown = dropdown;
+    }
+
+    const mobileLinksWrap = mobileHomeDomState.menuDropdown.querySelector(".mobile-main-nav-links");
+    if (mobileLinksWrap) {
+      const mobileEditorialPriority = [
+        "#radar",
+        "#acre-destaque",
+        "#politica-global",
+        "#entretenimento",
+        "#social",
+        "#trending",
+        "#panorama",
+        "#arquivo"
+      ];
+      const stripLinks = editorialStrip
+        ? [...editorialStrip.querySelectorAll("a[href]")].map((anchor) => ({
+            href: anchor.getAttribute("href") || "",
+            label: anchor.textContent?.trim() || ""
+          }))
+        : [];
+      const editorialLinks = mobileEditorialPriority
+        .map((targetHref) => stripLinks.find((link) => link.href === targetHref))
+        .filter((link) => link?.href && link?.label)
+        .map(
+          (link) => `<a href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a>`
+        );
+
+      mobileLinksWrap.innerHTML = editorialLinks.join("");
+    }
+
+    if (!mobileHomeDomState.initialized) {
+      moveAfterHero.forEach((node) => {
+        const marker = document.createComment(`mobile-home-placeholder-${node.className || node.tagName}`);
+        node.parentNode?.insertBefore(marker, node);
+        mobileHomeDomState.placeHolders.set(node, marker);
+      });
+
+      mobileHomeDomState.movedNodes = moveAfterHero;
+      mobileHomeDomState.initialized = true;
+    }
+
+    if (!masthead.contains(mobileHomeDomState.menuDropdown)) {
+      masthead.appendChild(mobileHomeDomState.menuDropdown);
+    }
+
+    const anchorNode = officePlayStrip || heroShell.nextSibling;
+    moveAfterHero.forEach((node) => {
+      if (node.parentNode !== mainLayout) {
+        mainLayout.insertBefore(node, anchorNode);
+      }
+    });
+    return;
+  }
+
+  if (mobileHomeDomState.menuDropdown && masthead.contains(mobileHomeDomState.menuDropdown)) {
+    mobileHomeDomState.menuDropdown.remove();
+  }
+
+  mobileHomeDomState.movedNodes.forEach((node) => {
+    const placeholder = mobileHomeDomState.placeHolders.get(node);
+    if (placeholder?.parentNode) {
+      placeholder.parentNode.insertBefore(node, placeholder.nextSibling);
+    }
+  });
+};
+const heroDailyPersonFocusPattern =
+  /\b(presidente|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|vereador|vereadora|delegado|delegada|secretario|secretaria|ministro|ministra|professor|professora|aluno|aluna|estudante|atleta|jogador|jogadora|cantor|cantora|artista|influencer|criador|criadora|empresario|empresaria|medico|medica|familia|mulher|homem|pessoa|equipe|time|colegio|posse|reuniao|entrevista)\b/;
+
+const normalizeHeroSafeFocusPosition = (focusPosition = "", { hasPeople = false } = {}) => {
+  const rawFocus = String(focusPosition || "").trim();
+  const fallback = hasPeople ? "center 32%" : "center 38%";
+  if (!rawFocus) {
+    return fallback;
+  }
+
+  const tokens = rawFocus.split(/\s+/).filter(Boolean);
+  const xToken = tokens[0] || "center";
+  const yToken = tokens[1] || "";
+  const yMatch = yToken.match(/^(-?\d+(?:\.\d+)?)%$/);
+
+  if (!yMatch) {
+    return rawFocus;
+  }
+
+  const yValue = Number(yMatch[1]);
+  if (!Number.isFinite(yValue)) {
+    return fallback;
+  }
+
+  const safeMin = hasPeople ? 24 : 28;
+  const safeMax = hasPeople ? 52 : 60;
+  const safeY = Math.min(safeMax, Math.max(safeMin, yValue));
+  return `${xToken} ${safeY}%`;
+};
+
+const getHeroTourismDayKey = () => {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: heroTourismDailyTimeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }).format(new Date());
+  } catch (_error) {
+    return getLocalDateKey();
+  }
+};
+
+const hashHeroTourismSeed = (value = "") => {
+  let hash = 2166136261;
+  const text = String(value || "");
+
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+
+  return hash >>> 0;
+};
+
+const buildDailyOrderedHeroItems = (items = []) =>
+  [...(Array.isArray(items) ? items : [])];
+
+const getHeroDailyArticleFocus = (article = {}) => {
+  const manualFocus = resolveArticleImageFocus(article, "").trim();
+  const haystack = normalizeText(
+    [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+  );
+  const hasPeople = heroDailyPersonFocusPattern.test(haystack);
+
+  if (manualFocus) {
+    return normalizeHeroSafeFocusPosition(manualFocus, { hasPeople });
+  }
+
+  if (hasPeople) {
+    return "center 32%";
+  }
+
+  return "center 38%";
+};
+
+const buildHeroArticleHref = (article = {}) =>
+  article.slug ? `./noticia.html?slug=${encodeURIComponent(article.slug)}` : article.sourceUrl || "#radar";
+
+const getHeroAreaKey = (article = {}) => {
+  const categoryKey = normalizeText(article.categoryKey || article.category || "");
+  const haystack = normalizeText(
+    [article.title, article.lede, article.summary, article.category, article.sourceName, article.sourceLabel].join(" ")
+  );
+
+  if (/(prefeitura|municipio|municipal|secretaria)/.test(categoryKey) || /\b(prefeitura|secretaria|municipal|bocalom)\b/.test(haystack)) {
+    return "prefeitura";
+  }
+  if (/(politica|eleic|govern|senad|deput|veread)/.test(categoryKey) || /\b(eleic|governador|senador|deputad|vereador|politic|partido|aleac)\b/.test(haystack)) {
+    return "politica";
+  }
+  if (/(policia|seguranca|segurança)/.test(categoryKey) || /\b(policia|delegacia|operacao|prisao|homicidio|seguranca)\b/.test(haystack)) {
+    return "policia";
+  }
+  if (/(saude|saúde)/.test(categoryKey) || /\b(saude|hospital|ubs|vacina|medic|atendimento)\b/.test(haystack)) {
+    return "saude";
+  }
+  if (/(educacao|educação|estudo|study)/.test(categoryKey) || /\b(escola|enem|vestibular|aluno|estudante|ifac|educacao)\b/.test(haystack)) {
+    return "educacao";
+  }
+  if (/(esporte|sports)/.test(categoryKey) || /\b(futebol|campeonato|partida|esporte|atleta|time)\b/.test(haystack)) {
+    return "esporte";
+  }
+  if (/(negocios|negócios|economia|comercio|comércio)/.test(categoryKey) || /\b(comercio|empresa|negocio|feira|mercado|empreendedor)\b/.test(haystack)) {
+    return "negocios";
+  }
+  if (/(cultura|arte|evento|agenda)/.test(categoryKey) || /\b(show|teatro|cultura|festival|oficina|agenda)\b/.test(haystack)) {
+    return "cultura";
+  }
+  if (/(social|festa|celebridade)/.test(categoryKey) || /\b(festa|social|aniversario|casamento|ensaio)\b/.test(haystack)) {
+    return "social";
+  }
+  if (/(games|jogos)/.test(categoryKey)) {
+    return "games";
+  }
+  if (/(kids|infantil)/.test(categoryKey)) {
+    return "infantil";
+  }
+  if (/(study|estud)/.test(categoryKey)) {
+    return "estudantes";
+  }
+  if (/(trending|buzz|viral)/.test(categoryKey)) {
+    return "trending";
+  }
+  return categoryKey || "cotidiano";
+};
+
+const buildHeroTourismRuntimePool = () => {
+  const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
+  const seenImages = new Set();
+  const seenAreas = new Set();
+  const todayKey = getHeroTourismDayKey();
+  const normalizedArticles = articles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      const haystack = [
+        article.title,
+        article.lede,
+        article.category,
+        article.sourceName,
+        article.sourceLabel
+      ]
+        .filter(Boolean)
+        .join(" ");
+      return heroTourismLocalPattern.test(haystack);
+    });
+  const todaysArticles = normalizedArticles.filter(
+    (article) => getArticleDateKey(article) === todayKey
+  );
+  const sourceArticles = todaysArticles.length >= 3 ? todaysArticles : normalizedArticles;
+
+  return sourceArticles
+    .filter((article) => {
+      const areaKey = getHeroAreaKey(article);
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      const imageKey = String(imageUrl || "").trim();
+      if (!areaKey || seenAreas.has(areaKey) || !imageKey || seenImages.has(imageKey)) {
+        return false;
+      }
+
+      seenAreas.add(areaKey);
+      seenImages.add(imageKey);
+      return true;
+    })
+    .map((article) => {
+      const areaKey = getHeroAreaKey(article);
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      const storyText = normalizeText(
+        [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+      );
+      return {
+        title: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
+        note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte local", 46),
+        proxyUrl: imageUrl,
+        fallbackUrl: imageUrl,
+        focusPosition: getHeroDailyArticleFocus(article),
+        hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
+        articleTitle: article.title || "Notícia em destaque",
+        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
+        articleSummary: truncateCopy(article.lede || article.summary || "Resumo da notícia em destaque.", 168),
+        articleHref: buildHeroArticleHref(article),
+        themeKey: areaKey,
+        sourceName: article.sourceName || "Fonte local"
+      };
+    })
+    .sort((left, right) => {
+      const leftIndex = heroDailyThemeOrder.indexOf(left.themeKey);
+      const rightIndex = heroDailyThemeOrder.indexOf(right.themeKey);
+      return (leftIndex === -1 ? 99 : leftIndex) - (rightIndex === -1 ? 99 : rightIndex);
+    })
+    .filter((photo) => {
+      const imageKey = String(photo?.proxyUrl || "").trim();
+      if (!imageKey || seenImages.has(imageKey)) {
+        return true;
+      }
+      return true;
+    })
+    .slice(0, heroTourismDailyTarget);
+};
+
+const buildHeroTourismFallbackPool = () => {
+  const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
+  const seenAreas = new Set();
+  const normalizedArticles = articles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      const haystack = [
+        article.title,
+        article.lede,
+        article.summary,
+        article.category,
+        article.sourceName,
+        article.sourceLabel
+      ]
+        .filter(Boolean)
+        .join(" ");
+      return heroTourismLocalPattern.test(haystack);
+    });
+  return buildDailyOrderedHeroItems(
+    normalizedArticles.slice(0, heroTourismDailyTarget * 4),
+    `${getHeroTourismDayKey()}:fallback-areas`
+  )
+    .filter((article) => {
+      const areaKey = getHeroAreaKey(article);
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      if (!areaKey || !imageUrl || seenAreas.has(areaKey)) {
+        return false;
+      }
+      seenAreas.add(areaKey);
+      return true;
+    })
+    .map((article) => {
+      const areaKey = getHeroAreaKey(article);
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      const storyText = normalizeText(
+        [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+      );
+      return {
+        title: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
+        note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte local", 46),
+        proxyUrl: imageUrl,
+        fallbackUrl: imageUrl,
+        focusPosition: getHeroDailyArticleFocus(article),
+        hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
+        articleTitle: article.title || "Notícia em destaque",
+        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
+        articleSummary: truncateCopy(article.lede || article.summary || "Resumo da notícia em destaque.", 168),
+        articleHref: buildHeroArticleHref(article),
+        themeKey: areaKey,
+        sourceName: article.sourceName || "Fonte local"
+      };
+    });
+};
+
+const buildHeroTourismDailyPool = () => {
+  const dayKey = getHeroTourismDayKey();
+  if (heroTourismDailyPoolState.dayKey === dayKey && heroTourismDailyPoolState.items.length) {
+    return heroTourismDailyPoolState.items;
+  }
+
+  const merged = [];
+  const seenKeys = new Set();
+  const featuredPool = (Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => article.heroFeatured || article.featuredHero)
+    .map((article) => {
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      return {
+        title: article.category || "Destaque autoral",
+        note: truncateCopy(article.sourceName || "Editorial Catalogo Cruzeiro do Sul", 46),
+        proxyUrl: imageUrl,
+        fallbackUrl: imageUrl,
+        focusPosition: getHeroDailyArticleFocus(article),
+        hasPeopleScene: false,
+        articleTitle: article.title || "Matéria autoral em destaque",
+        articleCategory: article.category || "Destaque autoral",
+        articleSummary: truncateCopy(article.lede || article.summary || "Artigo autoral em destaque.", 168),
+        articleHref: buildHeroArticleHref(article),
+        themeKey: getHeroAreaKey(article),
+        sourceName: article.sourceName || "Editorial Catalogo Cruzeiro do Sul"
+      };
+    })
+    .filter((item) => item.proxyUrl && item.articleHref);
+  const runtimePool = buildDailyOrderedHeroItems(buildHeroTourismRuntimePool(), `${dayKey}:runtime`);
+
+  const pushUniquePhoto = (photo = {}) => {
+    const sourceKey = String(photo.proxyUrl || photo.fallbackUrl || photo.file || photo.title || "").trim();
+    if (!sourceKey || seenKeys.has(sourceKey)) {
+      return false;
+    }
+
+    seenKeys.add(sourceKey);
+    merged.push({
+      ...photo,
+      focusPosition:
+        photo.focusPosition || heroTourismFocusPositions[merged.length % heroTourismFocusPositions.length]
+    });
+    return true;
+  };
+
+  featuredPool.forEach((photo) => pushUniquePhoto(photo));
+  runtimePool.forEach((photo) => pushUniquePhoto(photo));
+  if (merged.length < heroTourismDailyTarget) {
+    const fallbackPool = buildHeroTourismFallbackPool();
+    fallbackPool.forEach((photo) => {
+      if (merged.length < heroTourismDailyTarget) {
+        pushUniquePhoto(photo);
+      }
+    });
+  }
+
+  heroTourismDailyPoolState.dayKey = dayKey;
+  heroTourismDailyPoolState.items = merged.slice(0, heroTourismDailyTarget);
+  return heroTourismDailyPoolState.items;
+};
+
+const getHeroTourismDailyPool = () => buildHeroTourismDailyPool();
+
+const preloadHeroTourismImage = (primaryUrl = "", fallbackUrl = "") =>
+  new Promise((resolve) => {
+    const candidates = [primaryUrl, fallbackUrl].filter(Boolean);
+
+    const tryLoad = (index = 0) => {
+      const targetUrl = candidates[index];
+      if (!targetUrl) {
+        resolve("");
+        return;
+      }
+
+      const loader = new Image();
+      loader.decoding = "async";
+      loader.loading = "eager";
+
+      loader.onload = () => {
+        const finalize = () => resolve(targetUrl);
+        if (typeof loader.decode === "function") {
+          loader.decode().catch(() => {}).finally(finalize);
+          return;
+        }
+        finalize();
+      };
+
+      loader.onerror = () => tryLoad(index + 1);
+      loader.src = targetUrl;
+    };
+
+    tryLoad(0);
+  });
+
+const getHeroTourismPhoto = (photoIndex = 0) => {
+  const dailyPool = buildHeroTourismDailyPool();
+  if (!dailyPool.length) {
+    return null;
+  }
+
+  const poolIndex =
+    ((Number(photoIndex) % dailyPool.length) + dailyPool.length) % dailyPool.length;
+  return dailyPool[poolIndex];
+};
+
+const setHeroTourismMeta = (photo) => {
+  if (!photo) {
+    return;
+  }
+
+  if (heroTourismKicker) {
+    heroTourismKicker.textContent = photo.articleCategory || photo.title || "Area em destaque";
+  }
+
+  if (heroTourismTitle) {
+    heroTourismTitle.textContent =
+      photo.articleTitle || photo.title || "Notícia principal em destaque";
+  }
+
+  if (heroTourismNote) {
+    heroTourismNote.textContent =
+      truncateCopy(
+        photo.articleSummary || photo.note || photo.sourceName || "Resumo da notícia principal da área selecionada.",
+        180
+      );
+  }
+
+  if (heroDailyNewsCard) {
+    heroDailyNewsCard.href = photo.articleHref || "#radar";
+  }
+
+  if (heroDailyNewsCategory) {
+    heroDailyNewsCategory.textContent = photo.articleCategory || "Area em destaque";
+  }
+
+  if (heroDailyNewsTitle) {
+    heroDailyNewsTitle.textContent = photo.articleTitle || photo.title || "Notícia em destaque";
+  }
+
+  if (heroDailyNewsSummary) {
+    heroDailyNewsSummary.textContent =
+      photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para esta editoria.";
+  }
+};
+
+const renderHeroDesktopHighlights = (items = []) => {
+  if (!heroTopicCards.length) {
+    return;
+  }
+
+  const safeItems = Array.isArray(items) ? items.filter(Boolean).slice(0, heroTopicCards.length) : [];
+  heroDesktopHighlightItems = safeItems;
+
+  heroTopicCards.forEach((card, index) => {
+    const item = safeItems[index];
+    const categoryNode = card.querySelector("[data-hero-topic-category]");
+    const titleNode = card.querySelector("[data-hero-topic-title]");
+    const summaryNode = card.querySelector("[data-hero-topic-summary]");
+    const photoNode = card.querySelector("[data-hero-topic-photo]");
+
+    if (!item) {
+      card.hidden = true;
+      return;
+    }
+
+    card.hidden = false;
+    card.href = item.articleHref || "#radar";
+
+    if (categoryNode) {
+      categoryNode.textContent = item.articleCategory || item.title || "Area em destaque";
+    }
+
+    if (titleNode) {
+      titleNode.textContent = truncateCopy(
+        item.articleTitle || item.title || "Noticia principal do dia",
+        86
+      );
+    }
+
+    if (summaryNode) {
+      summaryNode.textContent = truncateCopy(
+        item.articleSummary || item.note || "Resumo curto do destaque mais importante desta editoria.",
+        120
+      );
+    }
+
+    if (photoNode) {
+      const imageUrl = item.proxyUrl || item.fallbackUrl || "";
+      photoNode.style.backgroundImage = imageUrl
+        ? `linear-gradient(180deg, rgba(8, 20, 38, 0.04), rgba(8, 20, 38, 0.3)), url("${imageUrl}")`
+        : "linear-gradient(135deg, rgba(64, 109, 160, 0.7), rgba(15, 39, 66, 0.92))";
+      photoNode.style.backgroundPosition = normalizeHeroSafeFocusPosition(item.focusPosition, {
+        hasPeople: Boolean(item.hasPeopleScene)
+      });
+      photoNode.style.backgroundSize = "cover";
+    }
+  });
+
+  heroTourismRotation.activeTopicIndex = 0;
+  syncHeroDesktopCarousel(0);
+  mountHeroDesktopCarouselDots(safeItems.length);
+};
+
+const shouldUseLiteHomeRuntime = () => {
+  const narrowViewport = window.matchMedia("(max-width: 640px)").matches;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const saveData = Boolean(connection?.saveData);
+  const slowConnection = /2g/.test(String(connection?.effectiveType || ""));
+  return narrowViewport || reducedMotion || saveData || slowConnection;
+};
+
+const renderHeroOfficeFeed = (items = []) => {
+  if (!heroOfficeFeedItems.length) {
+    return;
+  }
+
+  const safeItems = Array.isArray(items) ? items.filter(Boolean).slice(0, heroOfficeFeedItems.length) : [];
+
+  heroOfficeFeedItems.forEach((card, index) => {
+    const item = safeItems[index];
+    const categoryNode = card.querySelector("[data-hero-office-item-category]");
+    const titleNode = card.querySelector("[data-hero-office-item-title]");
+
+    if (!item) {
+      card.hidden = true;
+      return;
+    }
+
+    card.hidden = false;
+    card.href = item.articleHref || "#radar";
+
+    if (categoryNode) {
+      categoryNode.textContent = truncateCopy(
+        item.articleCategory || item.title || "Cobertura local",
+        30
+      );
+    }
+
+    if (titleNode) {
+      titleNode.textContent = truncateCopy(
+        item.articleTitle || item.title || "Atualização do Vale do Juruá",
+        78
+      );
+    }
+  });
+
+  const leadItem = safeItems[0];
+  if (leadItem && heroOfficePhoto) {
+    const imageUrl = leadItem.proxyUrl || leadItem.fallbackUrl || "";
+    const safeFocus = normalizeHeroSafeFocusPosition(leadItem.focusPosition, {
+      hasPeople: Boolean(leadItem.hasPeopleScene)
+    });
+    heroOfficePhoto.style.setProperty("--hero-office-photo-image", imageUrl ? `url("${imageUrl}")` : "none");
+    heroOfficePhoto.style.setProperty("--hero-office-photo-focus", safeFocus);
+    heroOfficePhoto.classList.toggle("has-photo", Boolean(imageUrl));
+  }
+
+  if (leadItem && heroOfficePhotoCategory) {
+    heroOfficePhotoCategory.textContent = truncateCopy(
+      leadItem.articleCategory || leadItem.title || "Cobertura local",
+      30
+    );
+  }
+
+  if (leadItem && heroOfficePhotoTitle) {
+    heroOfficePhotoTitle.textContent = truncateCopy(
+      leadItem.articleTitle || leadItem.title || "Atualização do Vale do Juruá",
+      72
+    );
+  }
+};
+
+const syncHeroDesktopCarousel = (index = 0) => {
+  if (!heroTopicTrack || !heroTopicCards.length) {
+    return;
+  }
+
+  const visibleCards = heroTopicCards.filter((card) => !card.hidden);
+  if (!visibleCards.length) {
+    heroTopicTrack.style.transform = "translate3d(0, 0, 0)";
+    return;
+  }
+
+  const safeIndex = ((Number(index) % visibleCards.length) + visibleCards.length) % visibleCards.length;
+  heroTourismRotation.activeTopicIndex = safeIndex;
+  heroTopicTrack.style.transform = `translate3d(-${safeIndex * 100}%, 0, 0)`;
+
+  const activeItem = heroDesktopHighlightItems[safeIndex];
+  if (activeItem) {
+    setHeroTourismMeta(activeItem);
+    if (!shouldUseSolidHeroShell()) {
+      renderHeroTourismBackground(safeIndex);
+    }
+  }
+
+  visibleCards.forEach((card, cardIndex) => {
+    card.classList.toggle("is-current", cardIndex === safeIndex);
+  });
+
+  if (heroTopicDots) {
+    [...heroTopicDots.children].forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === safeIndex);
+      dot.setAttribute("aria-pressed", dotIndex === safeIndex ? "true" : "false");
+    });
+  }
+};
+
+const mountHeroDesktopCarouselDots = (count = 0) => {
+  if (!heroTopicDots) {
+    return;
+  }
+
+  const safeCount = Math.max(0, Number(count) || 0);
+  heroTopicDots.innerHTML = "";
+
+  if (safeCount <= 1) {
+    heroTopicDots.hidden = true;
+    return;
+  }
+
+  heroTopicDots.hidden = false;
+  for (let index = 0; index < safeCount; index += 1) {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-topic-dot";
+    dot.setAttribute("aria-label", `Abrir destaque ${index + 1}`);
+    dot.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+    dot.addEventListener("click", () => {
+      syncHeroDesktopCarousel(index);
+      restartHeroDesktopCarouselTimer();
+    });
+    heroTopicDots.appendChild(dot);
+  }
+};
+
+const restartHeroDesktopCarouselTimer = () => {
+  if (heroTourismRotation.topicTimerId) {
+    window.clearInterval(heroTourismRotation.topicTimerId);
+    heroTourismRotation.topicTimerId = 0;
+  }
+
+  if (!heroTopicTrack) {
+    return;
+  }
+
+  const visibleCards = heroTopicCards.filter((card) => !card.hidden);
+  if (visibleCards.length <= 1) {
+    return;
+  }
+
+  heroTourismRotation.topicTimerId = window.setInterval(() => {
+    syncHeroDesktopCarousel(heroTourismRotation.activeTopicIndex + 1);
+  }, 4000);
+};
+
+const paintHeroTourismBackdrop = (slideNode, photo) => {
+  if (shouldUseSolidHeroShell()) {
+    return Promise.resolve(false);
+  }
+
+  if (!slideNode || !photo) {
+    return Promise.resolve(false);
+  }
+
+  const requestToken = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  slideNode.dataset.heroBackdropToken = requestToken;
+
+  return preloadHeroTourismImage(photo.proxyUrl, photo.fallbackUrl).then((resolvedUrl) => {
+    const paintUrl = resolvedUrl || sanitizeImageUrl(photo.proxyUrl || photo.fallbackUrl || "");
+    if (slideNode.dataset.heroBackdropToken !== requestToken || !paintUrl) {
+      return false;
+    }
+
+    slideNode.style.backgroundImage = `
+      linear-gradient(180deg, rgba(7, 18, 36, 0.14), rgba(7, 18, 36, 0.34)),
+      linear-gradient(90deg, rgba(10, 23, 45, 0.4), rgba(10, 23, 45, 0.08) 40%, rgba(10, 23, 45, 0.48)),
+      url("${paintUrl}")
+    `;
+    slideNode.style.backgroundPosition = normalizeHeroSafeFocusPosition(photo.focusPosition, {
+      hasPeople: Boolean(photo.hasPeopleScene)
+    });
+    slideNode.style.backgroundSize = "cover";
+    slideNode.dataset.heroBackdropReady = "true";
+    return true;
+  });
+};
+
+const rotateHeroOfficeStatus = (groupIndex = 0) => {
+  if (!heroOfficeStatusNodes.length || !heroOfficeStatusGroups.length) {
+    return;
+  }
+
+  const nextGroup = heroOfficeStatusGroups[groupIndex % heroOfficeStatusGroups.length] || [];
+  heroOfficeStatusNodes.forEach((node, index) => {
+    node.textContent = nextGroup[index] || nextGroup[nextGroup.length - 1] || node.textContent;
+  });
+};
+
+const rotateHeroOfficeBubble = (bubbleIndex = 0) => {
+  if (!heroOfficeBubble || !heroOfficeBubblePool.length) {
+    return;
+  }
+
+  heroOfficeBubble.textContent =
+    heroOfficeBubblePool[bubbleIndex % heroOfficeBubblePool.length] || heroOfficeBubble.textContent;
+  heroOfficeBubble.classList.remove("is-pop");
+  window.requestAnimationFrame(() => {
+    heroOfficeBubble.classList.add("is-pop");
+  });
+};
+
+const renderHeroTourismBackground = (photoIndex = 0, { initial = false } = {}) => {
+  if (!heroTourismSlides.length) {
+    return;
+  }
+
+  const photo = getHeroTourismPhoto(photoIndex);
+  if (!photo) {
+    return;
+  }
+
+  const activeSlide =
+    heroTourismSlides[heroTourismRotation.activeSlideIndex] || heroTourismSlides[0];
+  const fallbackNextSlide = heroTourismSlides.find((slide) => slide !== activeSlide) || activeSlide;
+  const nextSlide = initial ? activeSlide : fallbackNextSlide;
+
+  paintHeroTourismBackdrop(nextSlide, photo).then((painted) => {
+    if (!painted) {
+      return;
+    }
+
+    setHeroTourismMeta(photo);
+
+    heroTourismSlides.forEach((slide) => {
+      slide.classList.toggle("is-active", slide === nextSlide);
+    });
+
+    heroTourismRotation.activeSlideIndex = Math.max(heroTourismSlides.indexOf(nextSlide), 0);
+    heroTourismRotation.photoIndex = photoIndex;
+
+    if (heroTourismShell) {
+      heroTourismShell.dataset.heroTourismReady = "true";
+    }
+  });
+};
+
+const initializeHeroTourismHero = () => {
+  if (!heroTourismShell || !heroTourismSlides.length) {
+    return;
+  }
+
+  const liteRuntime = shouldUseLiteHomeRuntime();
+
+  const dailyPool = getHeroTourismDailyPool();
+
+  if (heroTourismRotation.timerId) {
+    window.clearInterval(heroTourismRotation.timerId);
+  }
+
+  if (heroTourismRotation.statusTimerId) {
+    window.clearInterval(heroTourismRotation.statusTimerId);
+  }
+
+  if (heroTourismRotation.bubbleTimerId) {
+    window.clearInterval(heroTourismRotation.bubbleTimerId);
+  }
+
+  if (heroTourismRotation.topicTimerId) {
+    window.clearInterval(heroTourismRotation.topicTimerId);
+  }
+
+  heroTourismRotation.photoIndex = 0;
+  heroTourismRotation.activeSlideIndex = 0;
+  heroTourismRotation.activeTopicIndex = 0;
+  heroTourismRotation.statusIndex = 0;
+  heroTourismRotation.bubbleIndex = 0;
+  renderHeroDesktopHighlights(dailyPool);
+  renderHeroOfficeFeed(dailyPool);
+
+  if (shouldUseSolidHeroShell() || liteRuntime) {
+    heroTourismSlides.forEach((slide) => {
+      slide.classList.remove("is-active");
+      slide.style.backgroundImage = "none";
+      slide.dataset.heroBackdropReady = "false";
+    });
+    setHeroTourismMeta(dailyPool[0] || getHeroTourismPhoto(0));
+    heroTourismShell.dataset.heroTourismReady = "solid";
+  } else {
+    renderHeroTourismBackground(0, { initial: true });
+  }
+
+  rotateHeroOfficeStatus(0);
+  rotateHeroOfficeBubble(0);
+
+  if (!shouldUseSolidHeroShell() && !liteRuntime && dailyPool.length > 1 && heroTopicCards.length === 0) {
+    heroTourismRotation.timerId = window.setInterval(() => {
+      const currentPool = getHeroTourismDailyPool();
+      if (!currentPool.length) {
+        return;
+      }
+
+      const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % currentPool.length;
+      renderHeroTourismBackground(nextPhotoIndex);
+    }, heroTourismRotationIntervalMs);
+  }
+
+  if (!liteRuntime && heroOfficeStatusNodes.length && heroOfficeStatusGroups.length > 1) {
+    heroTourismRotation.statusTimerId = window.setInterval(() => {
+      heroTourismRotation.statusIndex =
+        (heroTourismRotation.statusIndex + 1) % heroOfficeStatusGroups.length;
+      rotateHeroOfficeStatus(heroTourismRotation.statusIndex);
+    }, 4200);
+  }
+
+  if (!liteRuntime && heroOfficeBubble && heroOfficeBubblePool.length > 1) {
+    heroTourismRotation.bubbleTimerId = window.setInterval(() => {
+      heroTourismRotation.bubbleIndex =
+        (heroTourismRotation.bubbleIndex + 1) % heroOfficeBubblePool.length;
+      rotateHeroOfficeBubble(heroTourismRotation.bubbleIndex);
+    }, 3600);
+  }
+
+  if (!liteRuntime) {
+    restartHeroDesktopCarouselTimer();
+  }
+};
+
+const openArchiveBrowser = (seedQuery = "") => {
+  const now = Date.now();
+  if (now - lastArchiveBrowserOpenAt < 700) {
+    return;
+  }
+
+  lastArchiveBrowserOpenAt = now;
+  const archiveUrl = new URL("./arquivo.html", window.location.href);
+  const normalizedQuery = String(seedQuery || "").trim();
+
+  if (normalizedQuery) {
+    archiveUrl.searchParams.set("q", normalizedQuery);
+  }
+
+  window.open(archiveUrl.toString(), "_blank", "noopener,noreferrer");
+};
+
+const attachArchiveBrowserLaunchers = () => {
+  if (!archiveBrowserLaunchers.length) {
+    return;
+  }
+
+  archiveBrowserLaunchers.forEach((launcher) => {
+    if (!launcher || launcher.dataset.archiveBrowserBound === "true") {
+      return;
+    }
+
+    launcher.dataset.archiveBrowserBound = "true";
+    const launch = (event) => {
+      event?.preventDefault?.();
+      const inputValue =
+        launcher instanceof HTMLInputElement
+          ? String(launcher.value || "").trim()
+          : String(liveFeedQuery?.value || "").trim();
+      openArchiveBrowser(inputValue);
+    };
+
+    if (launcher instanceof HTMLInputElement) {
+      launcher.addEventListener("focus", launch);
+      launcher.addEventListener("click", launch);
+      launcher.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          launch(event);
+        }
+      });
+      return;
+    }
+
+    launcher.addEventListener("click", launch);
+    launcher.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        launch(event);
+      }
+    });
+  });
+};
+
+const typeInsidersLine = (node, text, delay, step) => {
+  if (!node) {
+    return;
+  }
+
+  if (splashMotionQuery.matches) {
+    node.textContent = text;
+    return;
+  }
+
+  node.textContent = "";
+  let index = 0;
+  window.setTimeout(function tick() {
+    index += 1;
+    node.textContent = text.slice(0, index);
+
+    if (index < text.length) {
+      window.setTimeout(tick, step);
+    }
+  }, delay);
+};
+
+const insidersBootPhaseNode = insidersBootScene?.querySelector("[data-insiders-boot-phase]") || null;
+const insidersTerminalStream = insidersBootScene?.querySelector("[data-insiders-terminal-stream]") || null;
+const insidersAsciiGlyphs = "01<>[]{}()/\\|=+*#%@&$░▒▓█";
+const insidersCodeGlyphs = "const render local_stack = compose(dev, design, infra, dados);{}[]()<>/_$.:";
+
+const insidersBootPhases = {
+  code: "CODE_STREAM > BIN_STREAM > ASCII_DECODE > UI_RENDER",
+  binary: "CODE_STREAM > [BIN_STREAM] > ASCII_DECODE > UI_RENDER",
+  ascii: "CODE_STREAM > BIN_STREAM > [ASCII_DECODE] > UI_RENDER",
+  render: "CODE_STREAM > BIN_STREAM > ASCII_DECODE > [UI_RENDER]"
+};
+
+const getRandomGlyph = () =>
+  insidersAsciiGlyphs[Math.floor(Math.random() * insidersAsciiGlyphs.length)] || "0";
+
+const getRandomCodeGlyph = () =>
+  insidersCodeGlyphs[Math.floor(Math.random() * insidersCodeGlyphs.length)] || "_";
+
+const buildBinaryMask = (text = "") =>
+  [...String(text)].map((char) => (/\s/.test(char) ? char : Math.random() > 0.5 ? "1" : "0")).join("");
+
+const buildCodeMask = (text = "", revealCount = 0) => {
+  let visibleChars = 0;
+  return [...String(text)]
+    .map((char) => {
+      if (/\s/.test(char)) {
+        return char;
+      }
+
+      if (visibleChars < revealCount) {
+        visibleChars += 1;
+        return char;
+      }
+
+      visibleChars += 1;
+      return getRandomCodeGlyph();
+    })
+    .join("");
+};
+
+const buildAsciiMask = (text = "", revealCount = 0) =>
+  [...String(text)]
+    .map((char, index) => {
+      if (/\s/.test(char)) return char;
+      return index < revealCount ? char : getRandomGlyph();
+    })
+    .join("");
+
+const waitFrame = () =>
+  new Promise((resolve) => {
+    window.requestAnimationFrame(resolve);
+  });
+
+const waitFrames = async (count = 1) => {
+  for (let frame = 0; frame < count; frame += 1) {
+    await waitFrame();
+  }
+};
+
+const setInsidersBootPhase = (phase) => {
+  if (!insidersBootPhaseNode) {
+    return;
+  }
+
+  insidersBootPhaseNode.textContent = insidersBootPhases[phase] || insidersBootPhases.render;
+};
+
+const animateInsidersTerminalStream = async () => {
+  if (!insidersTerminalStream || insidersTerminalStream.dataset.ready === "true") {
+    return;
+  }
+
+  const codeText = "const localStack = compose(dev, design, infra, dados);";
+  const finalText = "render local_stack => operacao legivel para tela e atendimento";
+
+  insidersTerminalStream.dataset.ready = "true";
+
+  if (splashMotionQuery.matches) {
+    insidersTerminalStream.textContent = finalText;
+    setInsidersBootPhase("render");
+    return;
+  }
+
+  insidersTerminalStream.classList.add("is-code");
+  setInsidersBootPhase("code");
+  insidersTerminalStream.textContent = "";
+
+  for (let reveal = 0; reveal <= codeText.length; reveal += 4) {
+    insidersTerminalStream.textContent = buildCodeMask(codeText, reveal);
+    await waitFrames(2);
+  }
+
+  insidersTerminalStream.classList.remove("is-code");
+  insidersTerminalStream.classList.add("is-binary");
+  setInsidersBootPhase("binary");
+
+  for (let frame = 0; frame < 8; frame += 1) {
+    insidersTerminalStream.textContent = buildBinaryMask(codeText);
+    await waitFrames(2);
+  }
+
+  insidersTerminalStream.classList.remove("is-binary");
+  insidersTerminalStream.classList.add("is-ascii");
+  setInsidersBootPhase("ascii");
+
+  for (let reveal = 0; reveal <= finalText.length; reveal += 3) {
+    insidersTerminalStream.textContent = buildAsciiMask(finalText, reveal);
+    await waitFrames(2);
+  }
+
+  insidersTerminalStream.classList.remove("is-ascii");
+  insidersTerminalStream.classList.add("is-typing");
+  setInsidersBootPhase("render");
+  insidersTerminalStream.textContent = "";
+
+  const chars = [...finalText];
+  for (let charIndex = 0; charIndex < chars.length; charIndex += 2) {
+    insidersTerminalStream.textContent = chars.slice(0, charIndex + 2).join("");
+    await waitFrames(2);
+  }
+
+  insidersTerminalStream.textContent = finalText;
+  insidersTerminalStream.classList.remove("is-typing");
+  insidersTerminalStream.classList.add("is-rendered");
+  if (insidersBootPhaseNode) {
+    insidersBootPhaseNode.textContent = "CODE_STREAM > BIN_STREAM > ASCII_DECODE > UI_RENDER";
+  }
+};
+
+const animateInsidersCodeLine = async (node, index = 0) => {
+  if (!node || node.dataset.insidersBootReady === "true") {
+    return;
+  }
+
+  const finalText = String(node.dataset.insidersFinal || node.textContent || "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!finalText) {
+    return;
+  }
+
+  node.dataset.insidersFinal = finalText;
+  node.dataset.insidersBootReady = "true";
+  node.setAttribute("aria-label", finalText);
+
+  const currentHeight = node.getBoundingClientRect().height;
+  if (currentHeight > 0) {
+    node.style.minHeight = `${Math.ceil(currentHeight)}px`;
+  }
+
+  if (splashMotionQuery.matches) {
+    node.textContent = finalText;
+    return;
+  }
+
+  node.classList.add("is-code");
+  setInsidersBootPhase("code");
+
+  const chars = [...finalText];
+  const codeStep = Math.max(2, Math.ceil(chars.length / 10));
+
+  for (let reveal = 0; reveal <= chars.length; reveal += codeStep) {
+    node.textContent = buildCodeMask(finalText, reveal);
+    await waitFrames(2);
+  }
+
+  node.classList.remove("is-code");
+  node.classList.add("is-binary");
+  setInsidersBootPhase("binary");
+
+  for (let frame = 0; frame < 7; frame += 1) {
+    node.textContent = buildBinaryMask(finalText);
+    await waitFrames(2);
+  }
+
+  node.classList.remove("is-binary");
+  node.classList.add("is-ascii");
+  setInsidersBootPhase("ascii");
+
+  const step = Math.max(2, Math.ceil(chars.length / 12));
+
+  for (let reveal = 0; reveal <= chars.length; reveal += step) {
+    node.textContent = buildAsciiMask(finalText, reveal);
+    await waitFrames(2);
+  }
+
+  node.classList.remove("is-ascii");
+  node.classList.add("is-typing");
+  setInsidersBootPhase("render");
+  node.textContent = "";
+
+  const typeStep = node.closest(".construction-service-card") || node.closest(".construction-badges") ? 3 : 2;
+  for (let charIndex = 0; charIndex < chars.length; charIndex += typeStep) {
+    node.textContent = chars.slice(0, charIndex + typeStep).join("");
+    await waitFrames(2);
+  }
+
+  node.textContent = finalText;
+  node.classList.remove("is-typing");
+  window.setTimeout(() => {
+    node.style.minHeight = "";
+  }, 360 + index * 12);
+};
+
+const runInsidersBootSequence = async () => {
+  if (!insidersBootScene || insidersBootScene.dataset.bootStarted === "true") {
+    return;
+  }
+
+  const screen = insidersBootScene.querySelector(".insiders-code-screen");
+  const codeLines = [...insidersBootScene.querySelectorAll("[data-insiders-code-line]")];
+
+  if (!screen || !codeLines.length) {
+    return;
+  }
+
+  insidersBootScene.dataset.bootStarted = "true";
+  screen.classList.add("is-booting");
+
+  void animateInsidersTerminalStream();
+
+  const introLines = codeLines.slice(0, 4);
+  const moduleLines = codeLines.slice(4);
+
+  for (let index = 0; index < introLines.length; index += 1) {
+    await animateInsidersCodeLine(introLines[index], index);
+  }
+
+  moduleLines.forEach((node, index) => {
+    window.setTimeout(() => {
+      void animateInsidersCodeLine(node, introLines.length + index);
+    }, index * 95);
+  });
+
+  window.setTimeout(() => {
+    screen.classList.add("is-ready");
+  }, 460);
+};
+
+const initializeInsidersBootScreen = () => {
+  if (!insidersBootScene) {
+    return;
+  }
+
+  if (splashMotionQuery.matches || !("IntersectionObserver" in window)) {
+    void runInsidersBootSequence();
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        observer.disconnect();
+        void runInsidersBootSequence();
+      });
+    },
+    { threshold: 0.28 }
+  );
+
+  observer.observe(insidersBootScene);
+};
+
+const initializeInsidersHeroScene = () => {
+  if (!insidersTypedNodes.length) {
+    return;
+  }
+
+  insidersTypedNodes.forEach((node, index) => {
+    if (!node || node.dataset.typedReady === "true") {
+      return;
+    }
+
+    const fullText = String(node.dataset.typedFull || node.textContent || "").trim();
+    if (!fullText) {
+      return;
+    }
+
+    node.dataset.typedReady = "true";
+    node.setAttribute("aria-label", fullText);
+    typeInsidersLine(node, fullText, 220 + index * 320, node.closest(".construction-showcase") ? 11 : 13);
+  });
+
+  if (heroInsidersShell) {
+    window.requestAnimationFrame(() => {
+      heroInsidersShell.classList.add("is-ready");
+    });
+  }
+};
+
+const buildInsidersArmyChant = () => {
+  if (!insidersChantTrack || insidersChantTrack.dataset.ready === "true") {
+    return;
+  }
+
+  const slogans = ["GUERRA AO BOATO", "VERDADE EM CAMPO", "DEEPFAKE EM RETIRADA"];
+  const fragment = document.createDocumentFragment();
+
+  for (let index = 0; index < 20; index += 1) {
+    const badge = document.createElement("span");
+    badge.textContent = slogans[index % slogans.length];
+    fragment.appendChild(badge);
+  }
+
+  insidersChantTrack.appendChild(fragment);
+  insidersChantTrack.dataset.ready = "true";
+
+  window.requestAnimationFrame(() => {
+    const midpointBadge =
+      insidersChantTrack.children[Math.floor(insidersChantTrack.children.length / 2)];
+
+    if (midpointBadge instanceof HTMLElement) {
+      insidersChantTrack.style.setProperty("--chant-shift", `${midpointBadge.offsetLeft}px`);
+    }
+  });
+};
+
+const getInsidersLiteMode = () => {
+  if (performanceLiteMode || splashMotionQuery.matches) {
+    return true;
+  }
+
+  const connection =
+    navigator.connection || navigator.mozConnection || navigator.webkitConnection || null;
+  if (connection && (connection.saveData || /(?:^|slow-)?2g$/i.test(String(connection.effectiveType || "")))) {
+    return true;
+  }
+
+  const deviceMemory = Number(navigator.deviceMemory || 0);
+  if (deviceMemory > 0 && deviceMemory <= 4) {
+    return true;
+  }
+
+  const hardwareThreads = Number(navigator.hardwareConcurrency || 0);
+  return hardwareThreads > 0 && hardwareThreads <= 4;
+};
+
+const getInsidersArmyCount = (requestedCount = 3) => {
+  const safeRequestedCount = Number.parseInt(requestedCount, 10) || 3;
+  return Math.min(3, Math.max(3, safeRequestedCount));
+};
+
+const getInsidersSquadBlueprint = (isCompactViewport = false) => {
+  if (isCompactViewport) {
+    return [
+      {
+        x: 21,
+        y: 60,
+        scale: 1.03,
+        tilt: -4,
+        delay: 0,
+        bob: 0,
+        palette: "crimson",
+        pose: "guard",
+        patrolX: 0,
+        patrolY: 0,
+        parallax: 0,
+        phase: 0,
+        speed: 0,
+        step: 1,
+        eyeFire: "none",
+        beamAngle: 0,
+        beamLength: 0,
+        beamPulse: 0,
+        static: true
+      },
+      {
+        x: 50,
+        y: 42,
+        scale: 1.18,
+        tilt: 0,
+        delay: 0,
+        bob: 0,
+        palette: "gold",
+        pose: "command",
+        patrolX: 0,
+        patrolY: 0,
+        parallax: 0,
+        phase: 0,
+        speed: 0,
+        step: 1,
+        eyeFire: "none",
+        beamAngle: 0,
+        beamLength: 0,
+        beamPulse: 0,
+        static: true
+      },
+      {
+        x: 79,
+        y: 60,
+        scale: 1.03,
+        tilt: 4,
+        delay: 0,
+        bob: 0,
+        palette: "azure",
+        pose: "guard",
+        patrolX: 0,
+        patrolY: 0,
+        parallax: 0,
+        phase: 0,
+        speed: 0,
+        step: 1,
+        eyeFire: "none",
+        beamAngle: 0,
+        beamLength: 0,
+        beamPulse: 0,
+        static: true
+      }
+    ];
+  }
+
+  return [
+    {
+      x: 23,
+      y: 60,
+      scale: 1.08,
+      tilt: -4,
+      delay: 0,
+      bob: 0,
+      palette: "crimson",
+      pose: "guard",
+      patrolX: 0,
+      patrolY: 0,
+      parallax: 0,
+      phase: 0,
+      speed: 0,
+      step: 1,
+      eyeFire: "none",
+      beamAngle: 0,
+      beamLength: 0,
+      beamPulse: 0,
+      static: true
+    },
+    {
+      x: 50,
+      y: 40,
+      scale: 1.24,
+      tilt: 0,
+      delay: 0,
+      bob: 0,
+      palette: "gold",
+      pose: "command",
+      patrolX: 0,
+      patrolY: 0,
+      parallax: 0,
+      phase: 0,
+      speed: 0,
+      step: 1,
+      eyeFire: "none",
+      beamAngle: 0,
+      beamLength: 0,
+      beamPulse: 0,
+      static: true
+    },
+    {
+      x: 77,
+      y: 60,
+      scale: 1.08,
+      tilt: 4,
+      delay: 0,
+      bob: 0,
+      palette: "azure",
+      pose: "guard",
+      patrolX: 0,
+      patrolY: 0,
+      parallax: 0,
+      phase: 0,
+      speed: 0,
+      step: 1,
+      eyeFire: "none",
+      beamAngle: 0,
+      beamLength: 0,
+      beamPulse: 0,
+      static: true
+    }
+  ];
+};
+
+const getInsidersThreatBlueprint = () => [];
+
+const createInsidersArmyRobot = (config = {}) => {
+  const robot = document.createElement("article");
+  const fragment = document.createDocumentFragment();
+  const partClassNames = [
+    "robot-shadow",
+    "robot-crest",
+    "robot-horn horn-left",
+    "robot-horn horn-right",
+    "robot-head",
+    "robot-neck",
+    "robot-faceplate",
+    "robot-eye-band",
+    "robot-collar",
+    "robot-backpack",
+    "robot-backpack-fin fin-left",
+    "robot-backpack-fin fin-right",
+    "robot-core",
+    "robot-waist",
+    "robot-shoulder shoulder-left",
+    "robot-shoulder shoulder-right",
+    "robot-arm arm-left",
+    "robot-arm arm-right",
+    "robot-forearm-shield shield-left",
+    "robot-cannon cannon-right",
+    "robot-thigh thigh-left",
+    "robot-thigh thigh-right",
+    "robot-leg leg-left",
+    "robot-leg leg-right",
+    "robot-knee knee-left",
+    "robot-knee knee-right"
+  ];
+  const x = Number(config.x || 50);
+  const y = Number(config.y || 58);
+  const scale = Number(config.scale || 0.82);
+  const delay = Number(config.delay || 0);
+  const tilt = Number(config.tilt || 0);
+  const bob = Number(config.bob || 7.2);
+  const palette = String(config.palette || "gold").trim() || "gold";
+  const pose = String(config.pose || "leader").trim() || "leader";
+  const patrolX = Number(config.patrolX || 0);
+  const patrolY = Number(config.patrolY || 0);
+  const parallax = Number(config.parallax || 0);
+  const phase = Number(config.phase || 0);
+  const speed = Number(config.speed || 1);
+  const step = Number(config.step || 1.75);
+  const eyeFire = String(config.eyeFire || "right").trim() || "right";
+  const beamAngle = Number(config.beamAngle || 12);
+  const beamLength = Number(config.beamLength || 180);
+  const beamPulse = Number(config.beamPulse || 0.4);
+  const isStatic = config.static === true;
+
+  robot.className = `insider-robot robot-squad palette-${palette} pose-${pose}`;
+  robot.style.setProperty("--army-x", `${x.toFixed(2)}%`);
+  robot.style.setProperty("--army-y", `${y.toFixed(2)}%`);
+  robot.style.setProperty("--army-scale", scale.toFixed(3));
+  robot.style.setProperty("--army-delay", `${delay.toFixed(2)}s`);
+  robot.style.setProperty("--army-tilt", `${tilt.toFixed(2)}deg`);
+  robot.style.setProperty("--army-bob", `${bob.toFixed(2)}px`);
+  robot.style.setProperty("--army-step", `${step.toFixed(2)}s`);
+  robot.style.setProperty("--army-opacity", scale >= 1 ? "1" : "0.96");
+  robot.style.setProperty("--robot-z", `${Math.round(scale * 10) + 10}`);
+  robot.style.setProperty("--beam-angle", `${beamAngle.toFixed(2)}deg`);
+  robot.style.setProperty("--beam-length", `${beamLength.toFixed(2)}px`);
+  robot.style.setProperty("--beam-pulse", `${beamPulse.toFixed(2)}s`);
+  robot.dataset.armyPatrolX = patrolX.toFixed(2);
+  robot.dataset.armyPatrolY = patrolY.toFixed(2);
+  robot.dataset.armyParallax = parallax.toFixed(2);
+  robot.dataset.armyPhase = phase.toFixed(2);
+  robot.dataset.armySpeed = speed.toFixed(2);
+  robot.dataset.eyeFire = eyeFire;
+  robot.dataset.armyStatic = isStatic ? "true" : "false";
+
+  partClassNames.forEach((className) => {
+    const part = document.createElement("span");
+    part.className = className;
+    fragment.appendChild(part);
+  });
+
+  ["beam-left-eye", "beam-right-eye"].forEach((beamClass) => {
+    const beam = document.createElement("span");
+    beam.className = `robot-eye-beam ${beamClass}`;
+    fragment.appendChild(beam);
+  });
+
+  const flare = document.createElement("span");
+  flare.className = "robot-eye-flare";
+  fragment.appendChild(flare);
+
+  robot.appendChild(fragment);
+  return robot;
+};
+
+const createInsidersArmyThreat = (config = {}) => {
+  const threat = document.createElement("article");
+  const core = document.createElement("div");
+  const silhouette = document.createElement("div");
+  const trench = document.createElement("div");
+  const decal = document.createElement("span");
+  const title = document.createElement("strong");
+  const detail = document.createElement("small");
+  const x = Number(config.x || 50);
+  const y = Number(config.y || 20);
+  const scale = Number(config.scale || 1);
+  const drift = Number(config.drift || 1.2);
+  const tone = String(config.tone || "ember").trim() || "ember";
+  const type = String(config.type || "bunker").trim() || "bunker";
+
+  threat.className = `insiders-army-threat tone-${tone} type-${type}`;
+  threat.style.setProperty("--threat-x", `${x.toFixed(2)}%`);
+  threat.style.setProperty("--threat-y", `${y.toFixed(2)}%`);
+  threat.style.setProperty("--threat-scale", scale.toFixed(3));
+  threat.style.setProperty("--threat-drift", `${drift.toFixed(2)}s`);
+
+  core.className = "insiders-army-threat-core";
+  silhouette.className = "insiders-army-threat-silhouette";
+  trench.className = "insiders-army-threat-trench";
+  decal.className = "insiders-army-threat-chip";
+  decal.textContent = "guerra contra";
+  title.textContent = String(config.label || "FAKE NEWS").trim();
+  detail.textContent = String(config.detail || "ruido armado").trim();
+
+  core.append(silhouette, trench, decal, title, detail);
+  threat.appendChild(core);
+  return threat;
+};
+
+const bindInsidersArmyMotion = (scene, robots = []) => {
+  if (!scene || scene.dataset.armyMotionBound === "true") {
+    return;
+  }
+
+  const robotList = robots.length ? robots : [...scene.querySelectorAll(".robot-squad")];
+
+  if (!robotList.length) {
+    return;
+  }
+
+  const prefersReducedMotion = performanceLiteMode || splashMotionQuery.matches;
+  const state = {
+    currentX: 0,
+    currentY: 0,
+    targetX: 0,
+    targetY: 0,
+    frameId: 0
+  };
+
+  const setSceneFocus = (x = 50, y = 20) => {
+    scene.style.setProperty("--army-focus-x", `${x.toFixed(2)}%`);
+    scene.style.setProperty("--army-focus-y", `${y.toFixed(2)}%`);
+  };
+
+  const resetFocus = () => {
+    state.targetX = 0;
+    state.targetY = 0;
+    setSceneFocus(50, 20);
+  };
+
+  scene.dataset.armyMotionBound = "true";
+  const allStatic = robotList.every((robot) => robot.dataset.armyStatic === "true");
+  scene.dataset.armyMotion = prefersReducedMotion || allStatic ? "static" : "interactive";
+  setSceneFocus(50, 20);
+
+  if (allStatic) {
+    robotList.forEach((robot) => {
+      robot.style.setProperty("--army-drift-x", "0px");
+      robot.style.setProperty("--army-drift-y", "0px");
+      robot.style.setProperty("--army-tilt-extra", "0deg");
+    });
+    return;
+  }
+
+  scene.addEventListener("pointermove", (event) => {
+    if (!motionMediaQuery.matches) {
+      return;
+    }
+
+    const rect = scene.getBoundingClientRect();
+
+    if (!rect.width || !rect.height) {
+      return;
+    }
+
+    const offsetX = (event.clientX - rect.left) / rect.width;
+    const offsetY = (event.clientY - rect.top) / rect.height;
+
+    state.targetX = (offsetX - 0.5) * 2;
+    state.targetY = (offsetY - 0.5) * 2;
+    setSceneFocus(offsetX * 100, offsetY * 100);
+  });
+
+  scene.addEventListener("pointerleave", resetFocus);
+  scene.addEventListener("pointercancel", resetFocus);
+
+  if (prefersReducedMotion) {
+    return;
+  }
+
+  const animateArmy = (now = 0) => {
+    state.currentX += (state.targetX - state.currentX) * 0.15;
+    state.currentY += (state.targetY - state.currentY) * 0.15;
+
+    robotList.forEach((robot, index) => {
+      const patrolX = Number(robot.dataset.armyPatrolX || 0);
+      const patrolY = Number(robot.dataset.armyPatrolY || 0);
+      const parallax = Number(robot.dataset.armyParallax || 0);
+      const phase = Number(robot.dataset.armyPhase || index * 0.65);
+      const speed = Number(robot.dataset.armySpeed || 1);
+      const idleX = Math.sin(now * 0.00195 * speed + phase) * patrolX;
+      const idleY = Math.cos(now * 0.00235 * speed + phase) * patrolY;
+      const pointerX = state.currentX * parallax;
+      const pointerY = state.currentY * (parallax * 0.92);
+
+      robot.style.setProperty("--army-drift-x", `${(idleX + pointerX).toFixed(2)}px`);
+      robot.style.setProperty("--army-drift-y", `${(idleY + pointerY).toFixed(2)}px`);
+      robot.style.setProperty("--army-tilt-extra", `${(state.currentX * (parallax * 0.18)).toFixed(2)}deg`);
+    });
+
+    state.frameId = window.requestAnimationFrame(animateArmy);
+  };
+
+  state.frameId = window.requestAnimationFrame(animateArmy);
+};
+
+const initializeInsidersArmy = () => {
+  if (!insidersArmyScene || insidersArmyScene.dataset.armyReady === "true") {
+    return;
+  }
+
+  if (
+    insidersArmyScene.classList.contains("insiders-logo-squad-crowd") ||
+    insidersArmyScene.hasAttribute("data-insiders-crowd-stage")
+  ) {
+    buildInsidersArmyChant();
+    insidersArmyScene.dataset.armyReady = "true";
+    insidersArmyScene.dataset.armyMode = "crowd-march";
+    return;
+  }
+
+  const renderArmy = () => {
+    if (!insidersArmyScene || insidersArmyScene.dataset.armyReady === "true") {
+      return;
+    }
+
+    buildInsidersArmyChant();
+
+    const totalCount = getInsidersArmyCount(insidersArmyScene.dataset.armyCount || "3");
+    const isLiteMode = getInsidersLiteMode();
+    const isCompactViewport = window.matchMedia("(max-width: 960px)").matches;
+    const blueprint = getInsidersSquadBlueprint(isCompactViewport).slice(0, totalCount);
+    const threats = getInsidersThreatBlueprint(isCompactViewport);
+    const fragment = document.createDocumentFragment();
+
+    insidersArmyScene.dataset.armyMode = isLiteMode ? "lite" : "full";
+    insidersArmyScene.dataset.armyFormation = "squad";
+    insidersArmyScene.style.setProperty("--insiders-army-count", String(blueprint.length));
+    threats.forEach((config) => fragment.appendChild(createInsidersArmyThreat(config)));
+    blueprint.forEach((config) => fragment.appendChild(createInsidersArmyRobot(config)));
+
+    insidersArmyScene.textContent = "";
+    insidersArmyScene.appendChild(fragment);
+    bindInsidersArmyMotion(insidersArmyScene, [...insidersArmyScene.querySelectorAll(".robot-squad")]);
+    insidersArmyScene.dataset.armyReady = "true";
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    window.setTimeout(renderArmy, 180);
+    return;
+  }
+
+  // Some headless/embedded browsers miss this intersection callback, so keep a
+  // small fallback render to avoid an empty Insiders stage.
+  const fallbackTimer = window.setTimeout(renderArmy, 2200);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        window.clearTimeout(fallbackTimer);
+        observer.disconnect();
+        renderArmy();
+      });
+    },
+    {
+      rootMargin: "320px 0px",
+      threshold: 0.05
+    }
+  );
+
+  observer.observe(insidersArmyScene);
 };
 
 const escapeHtml = (value) =>
@@ -443,6 +5013,668 @@ const escapeHtml = (value) =>
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
+
+const escapeRuntimeAttribute = (value) =>
+  String(value || "").replace(/"/g, "&quot;");
+
+const trendingInfluencerBuzzPool = [
+  {
+    name: "Lia Juruá",
+    handle: "@liajurua • criadora local",
+    image: "./assets/home-cache/trend-lia-jurua.jpg",
+    avatar: "./assets/home-cache/trend-lia-jurua.jpg",
+    kicker: "a fala que dividiu a timeline",
+    title:
+      "Cruzeiro do Sul não precisa só viralizar bonito. Precisa ter banheiro, sinalização e rota segura antes de vender turismo.",
+    summary:
+      "A opinião pegou forte porque cutucou o hype da vista panorâmica: parte do público concordou que falta estrutura, enquanto outra parte achou que a crítica diminui o potencial turístico da cidade.",
+    contextLabel: "Por que polemizou",
+    contextTitle: "turismo x estrutura",
+    contextText: "O post colocou influenciadores, empresários e moradores no mesmo debate.",
+    counterLabel: "Resumo do contraponto",
+    counterTitle: "divulgar sem romantizar",
+    counterText: "A crítica não nega o atrativo, mas cobra contexto antes do viral.",
+    meter: 64,
+    reaction: "64% dos comentários monitorados apoiaram a cobrança por estrutura.",
+    likes: "12.5K",
+    comments: "2.3K",
+    shares: "5.8K"
+  },
+  {
+    name: "Nando do Centro",
+    handle: "@nandocentro • bastidores da cidade",
+    image: "./assets/home-cache/trend-nando-centro.jpg",
+    avatar: "./assets/home-cache/trend-nando-centro.jpg",
+    kicker: "o vídeo que virou debate",
+    title:
+      "Evento grande também precisa combinar fila, estacionamento, internet e pagamento funcionando bem.",
+    summary:
+      "O comentário viralizou depois de um fim de semana movimentado. Comerciantes defenderam a crítica, enquanto produtores culturais lembraram que evento também precisa de patrocínio e apoio público.",
+    contextLabel: "Ponto quente",
+    contextTitle: "evento x operação",
+    contextText: "A discussão saiu do entretenimento e entrou em logística, segurança e venda local.",
+    counterLabel: "Outro lado",
+    counterTitle: "festa também gera renda",
+    counterText: "A defesa dos eventos destacou empregos temporários e movimento no comércio.",
+    meter: 58,
+    reaction: "58% dos comentários pediram planejamento melhor antes de ampliar a agenda.",
+    likes: "9.8K",
+    comments: "1.9K",
+    shares: "3.7K"
+  },
+  {
+    name: "Mara Pixel",
+    handle: "@marapixel • opinião e cotidiano",
+    image: "./assets/home-cache/trend-mara-pixel.jpg",
+    avatar: "./assets/home-cache/trend-mara-pixel.jpg",
+    kicker: "a thread que não parou",
+    title:
+      "A cidade está cheia de gente criando coisa boa, mas ainda trata internet como enfeite e não como infraestrutura.",
+    summary:
+      "A sequência de posts comparou atendimento, cardápio, localização, agenda e presença digital de negócios locais. O debate cresceu porque muita gente se reconheceu na dificuldade de achar informação básica.",
+    contextLabel: "Por que pegou",
+    contextTitle: "negócio x presença digital",
+    contextText: "A fala conectou loja, serviço, turismo e atendimento no mesmo problema.",
+    counterLabel: "Contraponto",
+    counterTitle: "desafio de operação",
+    counterText: "Pequenos empreendedores lembraram que falta tempo, equipe e orientação.",
+    meter: 71,
+    reaction: "71% dos comentários defenderam presença digital mínima para serviços locais.",
+    likes: "15.2K",
+    comments: "3.1K",
+    shares: "6.4K"
+  },
+  {
+    name: "Theo Acreano",
+    handle: "@theoacreano • humor e opinião",
+    image: "./assets/home-cache/trend-theo-acreano.jpg",
+    avatar: "./assets/home-cache/trend-theo-acreano.jpg",
+    kicker: "meme com fundo sério",
+    title:
+      "Se a fofoca chega mais rápido que o aviso oficial, o problema não é só a fofoca. É o canal oficial dormindo.",
+    summary:
+      "A frase começou como meme, mas virou cobrança por comunicação pública mais rápida. O público apontou que boato ocupa o espaço deixado por informação atrasada.",
+    contextLabel: "Faísca",
+    contextTitle: "boato x aviso oficial",
+    contextText: "O humor abriu uma conversa sobre transparência, velocidade e checagem.",
+    counterLabel: "Cuidado",
+    counterTitle: "nem tudo é simples",
+    counterText: "Órgãos públicos alegam que confirmação exige tempo e responsabilidade.",
+    meter: 76,
+    reaction: "76% dos comentários pediram canais oficiais mais diretos.",
+    likes: "18.9K",
+    comments: "4.4K",
+    shares: "8.1K"
+  },
+  {
+    name: "Bia dos Bairros",
+    handle: "@biadosbairros • comunidade",
+    image: "./assets/home-cache/trend-bia-bairros.jpg",
+    avatar: "./assets/home-cache/trend-bia-bairros.jpg",
+    kicker: "cobrança de bairro",
+    title:
+      "Quando a rua alaga, o print viraliza. Mas quem mora ali não precisa de viral: precisa de resposta.",
+    summary:
+      "O post reuniu vídeos de moradores e reacendeu a cobrança por manutenção, drenagem e retorno público. A repercussão cresceu porque misturou denúncia, rotina e humor local.",
+    contextLabel: "Tema sensível",
+    contextTitle: "bairro x resposta",
+    contextText: "Moradores transformaram uma queixa repetida em pressão pública organizada.",
+    counterLabel: "Outro lado",
+    counterTitle: "obra tem etapa",
+    counterText: "Comentários lembraram que solução urbana depende de projeto e orçamento.",
+    meter: 69,
+    reaction: "69% dos comentários cobraram calendário público de manutenção.",
+    likes: "10.7K",
+    comments: "2.8K",
+    shares: "4.9K"
+  },
+  {
+    name: "Rafa Castanhal",
+    handle: "@rafacastanhal • cultura e rolê",
+    image: "./assets/home-cache/trend-rafa-castanhal.jpg",
+    avatar: "./assets/home-cache/trend-rafa-castanhal.jpg",
+    kicker: "opinião de agenda",
+    title:
+      "A cena cultural local não precisa esperar permissão para existir. Precisa de calendário, palco e divulgação decente.",
+    summary:
+      "A fala mexeu com artistas, produtores e público. Muita gente concordou que a cidade tem talento, mas perde público quando eventos saem sem divulgação clara.",
+    contextLabel: "Debate",
+    contextTitle: "cultura x visibilidade",
+    contextText: "Criadores defenderam mais calendário público e menos improviso na divulgação.",
+    counterLabel: "Contraponto",
+    counterTitle: "falta recurso",
+    counterText: "Produtores apontaram custo alto e dificuldade de apoio contínuo.",
+    meter: 62,
+    reaction: "62% dos comentários defenderam uma agenda cultural fixa.",
+    likes: "8.6K",
+    comments: "1.6K",
+    shares: "3.2K"
+  }
+];
+
+const trendingControversyBuzzPool = [
+  {
+    badge: "Polêmica",
+    tone: "hot",
+    image: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+    title: "Mobilidade volta a dividir opiniões",
+    summary: "Ciclovias, estacionamento e rotas de ônibus viraram tema de comentários cruzados entre moradores, comércio e poder público.",
+    likes: "4.3K",
+    comments: "2.1K"
+  },
+  {
+    badge: "Influencers",
+    tone: "viral",
+    image: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    title: "Criadores locais puxam agenda de fim de semana",
+    summary: "Stories, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
+    likes: "7.4K",
+    comments: "980"
+  },
+  {
+    badge: "Comentando",
+    tone: "trending",
+    image: "./assets/home-cache/buzz-cruzeiro-02.jpg",
+    title: "Turismo bonito, estrutura cobrada",
+    summary: "Fotos continuam viralizando, mas a conversa do dia cobra placas, banheiros, segurança e acesso mais claro.",
+    likes: "6.2K",
+    comments: "1.7K"
+  },
+  {
+    badge: "Rede quente",
+    tone: "viral",
+    image: "./assets/home-cache/buzz-acai-bowl.jpg",
+    title: "Produto local vira disputa de fila",
+    summary: "Lanchonetes e pequenos negócios entraram na conversa depois que um sabor regional esgotou rápido.",
+    likes: "5.9K",
+    comments: "740"
+  },
+  {
+    badge: "Bastidor",
+    tone: "hot",
+    image: "./assets/home-cache/buzz-cruzeiro-03.jpg",
+    title: "Comunicação oficial demora e meme ocupa espaço",
+    summary: "A timeline cobrou respostas mais rápidas quando boatos circularam antes dos canais formais.",
+    likes: "9.1K",
+    comments: "2.6K"
+  },
+  {
+    badge: "Destaque",
+    tone: "trending",
+    image: "./assets/home-cache/buzz-model-local.jpg",
+    title: "Nome local entra no radar de marcas",
+    summary: "Jovens criadores e modelos da região aparecem mais em campanhas, vídeos e collabs comerciais.",
+    likes: "11.4K",
+    comments: "1.8K"
+  },
+  {
+    badge: "Cultura",
+    tone: "viral",
+    image: "./assets/home-cache/buzz-cultura-show.jpg",
+    title: "Agenda cultural pede calendário único",
+    summary: "Artistas e público cobram um lugar simples para acompanhar shows, oficinas, teatro e eventos comunitários.",
+    likes: "3.8K",
+    comments: "690"
+  },
+  {
+    badge: "Serviço",
+    tone: "hot",
+    image: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    title: "Bairros cobram retorno sobre manutenção",
+    summary: "Posts de rua, iluminação e drenagem ganharam força porque moradores querem prazo, não só protocolo.",
+    likes: "8.8K",
+    comments: "2.4K"
+  }
+];
+
+const getDailyIndexSeed = (key = getLocalDateKey()) =>
+  String(key)
+    .split("")
+    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+const pickDailyItems = (items = [], count = 1, salt = 0) => {
+  if (!items.length || count <= 0) {
+    return [];
+  }
+
+  const seed = getDailyIndexSeed() + salt;
+  const start = seed % items.length;
+  const picked = [];
+
+  for (let index = 0; index < Math.min(count, items.length); index += 1) {
+    picked.push(items[(start + index) % items.length]);
+  }
+
+  return picked;
+};
+
+const getBuzzSignalScore = (item = {}) =>
+  Math.round(
+    Number(item.engagement || 0) * 0.35 +
+      Number(item.velocity || 0) * 0.25 +
+      Number(item.trust || 0) * 0.25 +
+      Number(item.utility || 0) * 0.15
+  );
+
+const getBuzzNetworkContexts = () => {
+  const fallbackFeed = [
+    {
+      network: "Instagram",
+      summary: "Repercussao visual, story e postagem curta.",
+      signals: ["imagem forte", "comentarios", "compartilhamento"],
+      engagement: 92,
+      velocity: 88,
+      trust: 76,
+      utility: 70
+    },
+    {
+      network: "TikTok",
+      summary: "Video curto e aceleracao de assunto nas primeiras horas.",
+      signals: ["video curto", "repeticao", "viral"],
+      engagement: 94,
+      velocity: 95,
+      trust: 62,
+      utility: 60
+    },
+    {
+      network: "YouTube",
+      summary: "Contexto maior, opiniao longa e video de bastidor.",
+      signals: ["contexto", "opiniao", "retencao"],
+      engagement: 81,
+      velocity: 68,
+      trust: 84,
+      utility: 82
+    },
+    {
+      network: "Facebook",
+      summary: "Grupo local, bairro e servico publico em conversa.",
+      signals: ["grupos", "bairro", "servico"],
+      engagement: 76,
+      velocity: 66,
+      trust: 74,
+      utility: 90
+    },
+    {
+      network: "WhatsApp",
+      summary: "Boato, alerta e pedido de confirmacao da comunidade.",
+      signals: ["encaminhado", "alerta", "checagem"],
+      engagement: 72,
+      velocity: 82,
+      trust: 52,
+      utility: 78
+    },
+    {
+      network: "X/Twitter",
+      summary: "Termometro de debate e comentario rapido.",
+      signals: ["tempo real", "debate", "ruido alto"],
+      engagement: 68,
+      velocity: 88,
+      trust: 55,
+      utility: 62
+    }
+  ];
+
+  return (Array.isArray(window.SOCIAL_RSS_DATA) ? window.SOCIAL_RSS_DATA : fallbackFeed)
+    .map((item) => ({
+      ...item,
+      relevance: getBuzzSignalScore(item)
+    }))
+    .sort((left, right) => right.relevance - left.relevance);
+};
+
+const getBuzzFallbackItems = () => [
+  ...trendingInfluencerBuzzPool.map((item) => ({
+    title: item.title,
+    summary: item.summary,
+    imageUrl: item.image,
+    sourceImageUrl: item.avatar || item.image,
+    sourceName: item.name || "Radar social",
+    sourceUrl: "./index.html#trending",
+    publishedAt: new Date().toISOString(),
+    category: "Buzz",
+    topicGroup: "creators",
+    networkHint: item.handle || item.kicker || ""
+  })),
+  ...trendingControversyBuzzPool.map((item) => ({
+    title: item.title,
+    summary: item.summary,
+    imageUrl: item.image,
+    sourceImageUrl: item.image,
+    sourceName: item.badge || "Radar social",
+    sourceUrl: "./index.html#trending",
+    publishedAt: new Date().toISOString(),
+    category: item.badge || "Buzz",
+    topicGroup: "novidades",
+    networkHint: item.tone || ""
+  }))
+];
+
+const getBuzzControversyScore = (article = {}) => {
+  const haystack = normalizeText(
+    [
+      article.title,
+      article.summary,
+      article.lede,
+      article.category,
+      article.topicGroup,
+      article.sourceName,
+      article.networkHint
+    ].join(" ")
+  );
+
+  let score = 24;
+
+  if (/\b(layoff|demiss|corta|corte|reevaluat|reavali|controvers|polem|divide|debate|critica|meme|boato|rumor|viral)\b/.test(haystack)) {
+    score += 28;
+  }
+
+  if (/\b(xbox|meta|youtube|shorts|journalism|video-first|independent|future|memo|controle|parental)\b/.test(haystack)) {
+    score += 18;
+  }
+
+  if (/\b(coment|publico|reacoes|opiniao|timeline|rede|social)\b/.test(haystack)) {
+    score += 12;
+  }
+
+  if (/\b(cotidiano|creators|novidades)\b/.test(haystack)) {
+    score += 6;
+  }
+
+  return score;
+};
+
+const buzzBrazilianDomains = [
+  "g1.globo.com",
+  "globo.com",
+  "terra.com.br",
+  "cnnbrasil.com.br",
+  "agenciabrasil.ebc.com.br",
+  "ac24horas.com",
+  "contilnetnoticias.com.br",
+  "jurua24horas.com",
+  "juruaemtempo.com.br",
+  "juruacomunicacao.com.br",
+  "acre.com.br",
+  "acrenews.com.br"
+];
+
+const buzzBlockedGlobalDomains = [
+  "theverge.com",
+  "blog.youtube",
+  "youtube.com",
+  "xbox.com",
+  "playstation.com",
+  "techcrunch.com",
+  "animenewsnetwork.com",
+  "awn.com",
+  "animationmagazine.net",
+  "cartoonbrew.com",
+  "tubefilter.com"
+];
+
+const getBuzzHostname = (value = "") => {
+  try {
+    return new URL(String(value || ""), window.location.href).hostname.replace(/^www\./i, "").toLowerCase();
+  } catch (error) {
+    return "";
+  }
+};
+
+const isBrazilBuzzArticle = (article = {}) => {
+  const sourceUrl = article.sourceUrl || article.url || article.link || "";
+  const hostname = getBuzzHostname(sourceUrl);
+  const coverageLayer = normalizeText(article.coverageLayer || "");
+  const sourceName = normalizeText(article.sourceName || "");
+  const text = normalizeText([article.title, article.summary, article.lede, article.category, sourceName].join(" "));
+
+  if (["acre", "jurua", "brasil"].includes(coverageLayer)) {
+    return true;
+  }
+
+  if (hostname && buzzBlockedGlobalDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))) {
+    return false;
+  }
+
+  if (hostname && buzzBrazilianDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))) {
+    return true;
+  }
+
+  if (hostname.endsWith(".br")) {
+    return true;
+  }
+
+  return /\b(brasil|brasileir|acre|rio branco|cruzeiro do sul|sao paulo|são paulo|rio de janeiro|bahia|minas|parana|paraná|nordeste|amazonia|amazônia|globo|g1|terra|cnn brasil|agencia brasil|agência brasil)\b/.test(
+    text
+  );
+};
+
+const resolveBuzzNetworkContext = (article = {}, index = 0) => {
+  const contexts = getBuzzNetworkContexts();
+  const haystack = normalizeText(
+    [
+      article.sourceUrl,
+      article.sourceName,
+      article.title,
+      article.summary,
+      article.lede,
+      article.topicGroup,
+      article.networkHint
+    ].join(" ")
+  );
+
+  const directMatch =
+    contexts.find((item) => {
+      const network = normalizeText(item.network);
+      return (
+        (network.includes("instagram") && /\b(instagram|reel|reels|story)\b/.test(haystack)) ||
+        (network.includes("tiktok") && /\b(tiktok|video curto)\b/.test(haystack)) ||
+        (network.includes("youtube") && /\b(youtube|video-first|creator|journalism)\b/.test(haystack)) ||
+        (network.includes("facebook") && /\b(facebook|grupo|bairro)\b/.test(haystack)) ||
+        (network.includes("whatsapp") && /\b(whatsapp|encaminhad|boato|alerta)\b/.test(haystack)) ||
+        ((network.includes("twitter") || network === "x") && /\b(twitter|x.com|post)\b/.test(haystack))
+      );
+    }) || null;
+
+  if (directMatch) {
+    return directMatch;
+  }
+
+  if (/\b(creators|journalism|video|canal)\b/.test(haystack)) {
+    return contexts.find((item) => /youtube/i.test(item.network)) || contexts[0];
+  }
+
+  if (/\b(viral|trend|reel|imagem|produto|marca)\b/.test(haystack)) {
+    return contexts.find((item) => /instagram/i.test(item.network)) || contexts[0];
+  }
+
+  if (/\b(alerta|boato|comunidade|bairro|familia)\b/.test(haystack)) {
+    return contexts.find((item) => /facebook|whatsapp/i.test(item.network)) || contexts[0];
+  }
+
+  return contexts[index % Math.max(contexts.length, 1)] || {
+    network: "Rede social",
+    summary: "Repercussao em plataformas sociais.",
+    signals: ["debate", "comentarios", "compartilhamento"],
+    relevance: 70
+  };
+};
+
+const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) => {
+  const haystack = normalizeText(
+    [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
+  );
+  const seed = getDailyIndexSeed(`${article.title || "buzz"}:${index}`);
+  const baseMeter = 52 + (seed % 23);
+  const networkName = networkContext.network || "rede";
+  const primarySignal = Array.isArray(networkContext.signals) ? networkContext.signals[0] || "comentarios" : "comentarios";
+
+  if (/\b(layoff|demiss|corte|job|staff)\b/.test(haystack)) {
+    return {
+      meter: 74,
+      kicker: `polemica forte em ${networkName.toLowerCase()}`,
+      debateAxis: "emprego x estrategia",
+      publicMood: "predominou preocupacao publica",
+      reaction: `A leitura do publico puxou mais para critica e apreensao, com debate sobre impacto real por tras do anuncio que explodiu em ${networkName}.`,
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(reevaluat|reavali|future|memo|strategy|xbox)\b/.test(haystack)) {
+    return {
+      meter: 66,
+      kicker: `debate quente em ${networkName.toLowerCase()}`,
+      debateAxis: "expectativa x desconfianca",
+      publicMood: "o publico ficou dividido",
+      reaction: "A conversa do publico ficou entre curiosidade e desconfianca, com uma ala animada com mudanca e outra cobrando prova pratica antes do hype.",
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(journalism|video-first|independent|credibil|news)\b/.test(haystack)) {
+    return {
+      meter: 61,
+      kicker: `assunto em alta em ${networkName.toLowerCase()}`,
+      debateAxis: "credibilidade x formato",
+      publicMood: "predominou apoio com cobranca",
+      reaction: "A opiniao do publico inclinou para apoio ao formato, mas com cobranca por mais clareza, apuracao e consistencia na conversa social.",
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(parental|famil|healthy digital habits|shorts)\b/.test(haystack)) {
+    return {
+      meter: 58,
+      kicker: `tema sensivel em ${networkName.toLowerCase()}`,
+      debateAxis: "protecao x liberdade de uso",
+      publicMood: "predominou cautela",
+      reaction: "A reacao publica foi mais cautelosa, com apoio a protecao das familias, mas tambem cobranca para nao virar controle excessivo.",
+      signalLabel: primarySignal
+    };
+  }
+
+  if (/\b(sale|deal|promo|desconto|produto|speaker)\b/.test(haystack)) {
+    return {
+      meter: 55,
+      kicker: `caso quente em ${networkName.toLowerCase()}`,
+      debateAxis: "oportunidade x exagero",
+      publicMood: "predominou curiosidade",
+      reaction: "O publico reagiu mais no eixo da curiosidade e da disputa por oportunidade, com parte da conversa tratando o caso como hype acelerado em rede.",
+      signalLabel: primarySignal
+    };
+  }
+
+  return {
+    meter: baseMeter,
+    kicker: `tema em repercussao em ${networkName.toLowerCase()}`,
+    debateAxis: "hype x leitura critica",
+    publicMood: "debate publico em andamento",
+    reaction: `A opiniao do publico ficou espalhada entre apoio, critica e cautela, com ${networkName} funcionando como termometro principal da conversa.`,
+    signalLabel: primarySignal
+  };
+};
+
+const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
+  const article = normalizeRuntimeArticle(item);
+  const href = buildArticleHref(article);
+  const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+  const networkContext = resolveBuzzNetworkContext(article, index);
+  const pulse = buildBuzzAudiencePulse(article, networkContext, index);
+  const photoUrl = getArticleDisplayImageUrl(article) || article.imageUrl || "./assets/home-cache/buzz-cruzeiro-01.jpg";
+  const avatarUrl = article.sourceImageUrl || photoUrl;
+  const dateLabel =
+    formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+    article.date ||
+    "agora";
+  const sourceMeta = [article.sourceName || networkContext.network || "Fonte ativa", dateLabel]
+    .filter(Boolean)
+    .join(" • ");
+  const headline = truncateCopy(article.title || "Polemica em repercussao nas redes", 110);
+  const summary = truncateCopy(
+    article.summary || article.lede || "O assunto entrou na conversa publica e segue em monitoramento editorial.",
+    190
+  );
+  const networkLabel = `${networkContext.network || "Rede"} • polemica ${index + 1}`;
+  const signalLine = `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentarios"}`;
+  const debateLine = `debate: ${pulse.debateAxis}`;
+
+  return `
+    <article class="trending-card influencer-buzz-card daily-buzz-card opinion-buzz-card reveal ${
+      index > 2 ? "delay-2" : index ? "delay-1" : ""
+    }">
+      <span class="trend-badge hot">${escapeHtml(networkLabel)}</span>
+      <a
+        class="trend-photo influencer-hero-photo"
+        href="${escapeRuntimeAttribute(href)}"${externalAttrs}
+        aria-label="${escapeRuntimeAttribute(headline)}"
+        style="--trend-image:url('${escapeHtml(photoUrl)}')"
+      >
+        <div class="influencer-profile">
+          <span class="influencer-avatar" style="--avatar-image:url('${escapeHtml(avatarUrl)}')"></span>
+          <div>
+            <strong>${escapeHtml(networkContext.network || "Rede social")}</strong>
+            <small>${escapeHtml(sourceMeta)}</small>
+          </div>
+        </div>
+      </a>
+
+      <div class="influencer-buzz-copy">
+        <p class="buzz-kicker">${escapeHtml(pulse.kicker)}</p>
+        <h3>
+          <a class="buzz-card-link" href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(headline)}</a>
+        </h3>
+        <p>${escapeHtml(summary)}</p>
+      </div>
+
+      <div class="buzz-inline-meta" aria-label="Sinais da rede e eixo do debate">
+        <span>${escapeHtml(signalLine)}</span>
+        <span>${escapeHtml(debateLine)}</span>
+      </div>
+
+      <div class="buzz-reaction-box" aria-label="Opiniao do publico sobre o tema">
+        <span>opiniao do publico</span>
+        <div class="reaction-meter">
+          <i style="width: ${Math.max(12, Math.min(100, Number(pulse.meter || 50)))}%"></i>
+        </div>
+        <p>${escapeHtml(pulse.reaction)}</p>
+      </div>
+
+      <div class="engagement buzz-opinion-footer">
+        <span>${escapeHtml(pulse.publicMood)}</span>
+        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>abrir caso</a>
+      </div>
+    </article>
+  `;
+};
+
+const renderDailyTrendingBuzz = async (options = {}) => {
+  if (!trendingBuzzGrid) {
+    return;
+  }
+
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 12, options);
+  const liveCases = dedupeNewsItems(liveBuzzItems)
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter(isBrazilBuzzArticle)
+    .filter((item) => item.title && (item.sourceUrl || item.slug))
+    .sort((left, right) => {
+      const scoreDiff = getBuzzControversyScore(right) - getBuzzControversyScore(left);
+      if (scoreDiff !== 0) {
+        return scoreDiff;
+      }
+
+      return getArticlePublishedTime(right) - getArticlePublishedTime(left);
+    })
+    .slice(0, 6);
+
+  const selectedCases =
+    liveCases.length >= 6
+      ? liveCases
+      : [...liveCases, ...pickDailyItems(getBuzzFallbackItems(), 6 - liveCases.length, 31)].slice(0, 6);
+
+  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
+  trendingBuzzGrid.innerHTML = selectedCases.map(buildDailyInfluencerBuzzCard).join("");
+  registerArticleCardLinks(trendingBuzzGrid);
+};
 
 const setFeedbackState = (node, message, tone = "") => {
   if (!node) {
@@ -461,13 +5693,16 @@ const dedupeNewsItems = (items = []) => {
   const mergedMap = new Map();
 
   items.forEach((item) => {
+    const normalizedItem = normalizeRuntimeArticle(item);
     const key =
-      item.sourceUrl ||
-      item.slug ||
-      normalizeText([item.title, item.date, item.sourceName].join(" "));
+      normalizedItem.sourceUrl ||
+      normalizedItem.slug ||
+      normalizeText(
+        [normalizedItem.title, normalizedItem.date, normalizedItem.sourceName].join(" ")
+      );
 
     if (!mergedMap.has(key)) {
-      mergedMap.set(key, item);
+      mergedMap.set(key, normalizedItem);
     }
   });
 
@@ -478,73 +5713,2589 @@ const dedupeNewsItems = (items = []) => {
   });
 };
 
+const cadernoCategoryPriority = {
+  educacao: ["educacao"],
+  "prefeitura e acoes": ["prefeitura", "politica", "cotidiano", "saude"],
+  social: ["social", "saude", "cotidiano"],
+  "utilidade publica": ["servicos", "cotidiano", "saude", "prefeitura"]
+};
+
+const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2) => {
+  const normalizedItems = dedupeNewsItems(items).map((item) => normalizeRuntimeArticle(item));
+  const selected = [];
+  const seen = new Set();
+  const tryPushArticle = (item, { requireImage = false } = {}) => {
+    if (selected.length >= count || !item) {
+      return;
+    }
+
+    const key = getRadarArticleKey(item);
+    if (seen.has(key)) {
+      return;
+    }
+
+    if (requireImage && !articleHasUsableImageCandidate(item)) {
+      return;
+    }
+
+    seen.add(key);
+    selected.push(item);
+  };
+
+  priorities.forEach((priority) => {
+    normalizedItems.forEach((item) => {
+      if (item.categoryKey === priority) {
+        tryPushArticle(item, { requireImage: true });
+      }
+    });
+  });
+
+  if (selected.length < count) {
+    priorities.forEach((priority) => {
+      normalizedItems.forEach((item) => {
+        if (item.categoryKey === priority) {
+          tryPushArticle(item);
+        }
+      });
+    });
+  }
+
+  if (selected.length < count) {
+    normalizedItems.forEach((item) => {
+      tryPushArticle(item, { requireImage: true });
+    });
+  }
+
+  if (selected.length < count) {
+    normalizedItems.forEach((item) => {
+      tryPushArticle(item);
+    });
+  }
+
+  return selected.slice(0, count);
+};
+
+const writeOfflineStorage = (key, value) => {
+  const serialized = JSON.stringify(value);
+  const storages = [];
+
+  try {
+    if (window.sessionStorage) {
+      storages.push(window.sessionStorage);
+    }
+  } catch (error) {
+    // Ignora ambiente sem sessionStorage.
+  }
+
+  try {
+    if (window.localStorage) {
+      storages.push(window.localStorage);
+    }
+  } catch (error) {
+    // Ignora ambiente sem localStorage.
+  }
+
+  storages.forEach((storage) => {
+    try {
+      storage.setItem(key, serialized);
+    } catch (error) {
+      // Ignora limite de storage.
+    }
+  });
+};
+
+const readOfflineStorage = (key) => {
+  const storages = [];
+
+  try {
+    if (window.sessionStorage) {
+      storages.push(window.sessionStorage);
+    }
+  } catch (error) {
+    // Ignora ambiente sem sessionStorage.
+  }
+
+  try {
+    if (window.localStorage) {
+      storages.push(window.localStorage);
+    }
+  } catch (error) {
+    // Ignora ambiente sem localStorage.
+  }
+
+  for (const storage of storages) {
+    try {
+      const raw = storage.getItem(key);
+      if (!raw) {
+        continue;
+      }
+
+      return JSON.parse(raw);
+    } catch (error) {
+      // Tenta o proximo storage.
+    }
+  }
+};
+
+const topicFeedClientCache = new Map();
+const TOPIC_FEED_CACHE_TTL_MS = 90 * 1000;
+let topicSurfaceRefreshTimerId = 0;
+
+const fetchTopicFeedCached = async (topic, limit = 4, options = {}) => {
+  const normalizedTopic = normalizeText(topic);
+  const safeLimit = Math.max(1, Number(limit) || 4);
+  const cacheKey = `${normalizedTopic}:${safeLimit}`;
+  const forceRefresh = options.forceRefresh === true;
+  const cachedEntry = topicFeedClientCache.get(cacheKey);
+  const isFresh =
+    cachedEntry &&
+    typeof cachedEntry.createdAt === "number" &&
+    Date.now() - cachedEntry.createdAt < TOPIC_FEED_CACHE_TTL_MS;
+
+  if (!cachedEntry || forceRefresh || !isFresh) {
+    topicFeedClientCache.set(
+      cacheKey,
+      {
+        createdAt: Date.now(),
+        promise: requestApiJson(
+          `/api/topic-feed?topic=${encodeURIComponent(normalizedTopic)}&limit=${safeLimit}`,
+          {
+            method: "GET"
+          }
+        )
+          .then((payload) =>
+            Array.isArray(payload?.items)
+              ? payload.items.map((item) => normalizeRuntimeArticle(item))
+              : []
+          )
+          .catch(() => [])
+      }
+    );
+  }
+
+  return topicFeedClientCache.get(cacheKey)?.promise || [];
+};
+
+const getArticlePublishedTime = (article = {}) => {
+  const rawValue = article.publishedAt || article.date || article.createdAt || "";
+  const timestamp = Date.parse(rawValue);
+  return Number.isFinite(timestamp) ? timestamp : 0;
+};
+
+const getRecentTopicFallbackArticles = (matcher, limit = 6) =>
+  dedupeNewsItems(window.NEWS_DATA || [])
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => article.title && (article.sourceUrl || article.slug) && matcher(article))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, limit);
+
+const buildTopicUtilityCards = (items = []) =>
+  items
+    .map((item) => `
+      <article class="global-politics-card">
+        <p class="eyebrow">${escapeHtml(item.eyebrow || "política")}</p>
+        <h3>${escapeHtml(item.title || "Atualização política")}</h3>
+        <p>${escapeHtml(item.summary || "Use este bloco para seguir para o arquivo político e não desperdiçar espaço com placeholder.")}</p>
+        <footer>
+          <span>${escapeHtml(item.label || "atalho editorial")}</span>
+          <a href="${escapeRuntimeAttribute(item.href || "./arquivo.html")}">${escapeHtml(item.cta || "Abrir agora")}</a>
+        </footer>
+      </article>
+    `)
+    .join("");
+
+const buildBuzzSidebarItemsFromArticles = (items = []) =>
+  dedupeNewsItems(items)
+    .filter((article) => article?.title && (article?.sourceUrl || article?.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, 5)
+    .map((article, index) => ({
+      slug: article.slug || "",
+      kicker:
+        index === 0
+          ? "buzz atualizado"
+          : normalizeText(article.category || "").includes("cultura")
+            ? "cultura e conversa"
+            : "rede em movimento",
+      stat:
+        formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+        "agora"
+    }));
+
+const buildDynamicMarketPayload = (articles = [], fallbackMarket = {}) => {
+  const selected = dedupeNewsItems(articles)
+    .filter((article) => article?.title && (article?.sourceUrl || article?.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, 4);
+
+  if (!selected.length) {
+    return {
+      ...fallbackMarket,
+      snapshotLabel: buildSidebarSnapshotLabel()
+    };
+  }
+
+  const latest = selected[0];
+  const sourceCount = new Set(selected.map((article) => article.sourceName).filter(Boolean)).size;
+  const latestDateLabel =
+    formatCompactDisplayDate(latest.publishedAt || latest.date || latest.createdAt || "") || "agora";
+
+  return {
+    sourceName: "Radar economico",
+    sourceUrl: latest.sourceUrl || latest.url || fallbackMarket.sourceUrl || "./arquivo.html",
+    snapshotLabel: `economia viva • ${buildSidebarSnapshotLabel()}`,
+    quotes: [
+      {
+        label: "Atualizado",
+        value: latestDateLabel,
+        note: "manchetes reais puxadas do feed"
+      },
+      {
+        label: "Fontes",
+        value: `${Math.max(1, sourceCount)}`,
+        note: "origens acompanhadas nesta rodada"
+      },
+      {
+        label: "Recorte",
+        value: "sem numero fake",
+        note: "contexto vivo em vez de cotação inventada"
+      }
+    ],
+    moves: selected.slice(0, 3).map((article, index) => ({
+      bias: index === 0 ? "up" : "mixed",
+      badge: index === 0 ? "agora" : "monitorando",
+      label: article.category || "Economia",
+      title: truncateCopy(article.title || "Atualização econômica", 88),
+      summary: truncateCopy(
+        article.summary || article.lede || "Leitura econômica em acompanhamento.",
+        180
+      ),
+      sourceName: article.sourceName || "Fonte ativa",
+      url: buildArticleHref(article)
+    })),
+    opinionTitle: "Leitura financeira do Catalogo",
+    opinionText:
+      "Este painel agora tenta captar economia nova do feed ativo antes de cair no fallback local. A ideia é mostrar novidade real, não quadro parado.",
+    pocketTips: selected.slice(0, 2).map((article) => ({
+      tag: normalizeText(article.category || "economia") || "economia",
+      dateLabel:
+        formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+        "agora",
+      title: truncateCopy(article.title || "Atualização econômica", 76),
+      meta: truncateCopy(
+        article.summary || article.lede || "Contexto econômico em acompanhamento.",
+        90
+      ),
+      sourceName: article.sourceName || "Fonte ativa",
+      url: buildArticleHref(article)
+    }))
+  };
+};
+
+const scheduleTopicSurfaceRefresh = () => {
+  if (topicSurfaceRefreshTimerId) {
+    return;
+  }
+
+  topicSurfaceRefreshTimerId = window.setInterval(() => {
+    void renderDailyTrendingBuzz({ forceRefresh: true });
+    void renderGlobalPoliticsHighlights({ forceRefresh: true });
+    renderRegionalPoliticsHighlights(window.NEWS_DATA || []);
+    renderSidebarWidgets({ forceRefresh: true });
+  }, 60 * 1000);
+};
+
+const persistOfflineNewsCache = (items = []) => {
+  const normalizedItems = dedupeNewsItems(items).slice(0, 180);
+
+  if (normalizedItems.length === 0) {
+    return;
+  }
+
+  writeOfflineStorage(offlineNewsCacheKey, normalizedItems);
+};
+
+const persistOfflineArticle = (article) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+
+  if (!normalizedArticle.slug) {
+    return;
+  }
+
+  writeOfflineStorage(offlineLastArticleKey, normalizedArticle);
+
+  const cachedItems = readOfflineStorage(offlineNewsCacheKey);
+  const mergedItems = Array.isArray(cachedItems)
+    ? dedupeNewsItems([normalizedArticle, ...cachedItems])
+    : [normalizedArticle];
+  writeOfflineStorage(offlineNewsCacheKey, mergedItems.slice(0, 180));
+};
+
+const applyCadernoStoryArticle = (storyNode, article, { preserveHref = false } = {}) => {
+  if (!storyNode || !article) {
+    return;
+  }
+
+  const titleNode = storyNode.querySelector("strong");
+  const metaNode = storyNode.querySelector("small");
+  const thumbNode = storyNode.querySelector(".mini-thumb");
+
+  if (!preserveHref && article.slug) {
+    const href = `./noticia.html?slug=${encodeURIComponent(article.slug)}`;
+    storyNode.setAttribute("href", href);
+    applyArticleLinkAttrs(storyNode, href);
+  }
+
+  if (titleNode) {
+    titleNode.textContent = truncateCopy(article.title || "Notícia em destaque", 96);
+  }
+
+  if (metaNode) {
+    metaNode.textContent = formatMosaicSourceLabel(article);
+  }
+
+  if (thumbNode) {
+    const hasUsableImage = articleHasUsableImageCandidate(article);
+    storyNode.classList.toggle("story-without-photo", !hasUsableImage);
+    thumbNode.dataset.topic = getThumbTopic(thumbNode, article);
+    applyThumbImage(thumbNode, article);
+  }
+};
+
+const hydrateCadernoCards = async (items = []) => {
+  if (!cadernoCards.length) {
+    return;
+  }
+
+  const normalizedItems = dedupeNewsItems(items);
+  const cardTasks = cadernoCards.map(async (card) => {
+    const kicker = normalizeText(card.querySelector(".card-kicker")?.textContent || "");
+    const stories = [...card.querySelectorAll(".mini-story")];
+
+    if (!stories.length) {
+      return;
+    }
+
+    if (cadernoCategoryPriority[kicker]) {
+      const articles = pickCadernoArticlesByPriority(
+        normalizedItems,
+        cadernoCategoryPriority[kicker],
+        stories.length
+      );
+
+      stories.forEach((storyNode, index) => {
+        applyCadernoStoryArticle(storyNode, articles[index]);
+      });
+      return;
+    }
+
+    if (kicker === "games" || kicker === "animes") {
+      const topic = kicker === "games" ? "games" : "kids";
+      const topicItems = await fetchTopicFeedCached(topic, 6);
+      const filteredItems =
+        kicker === "animes"
+          ? topicItems.filter((item) =>
+              /anime|animacao|animation|cartoon/i.test(
+                [item.category, item.sourceName, item.title].join(" ")
+              )
+            )
+          : topicItems;
+
+      stories.forEach((storyNode, index) => {
+        applyCadernoStoryArticle(storyNode, filteredItems[index] || topicItems[index], {
+          preserveHref: true
+        });
+      });
+      return;
+    }
+
+    stories.forEach((storyNode) => {
+      const thumbNode = storyNode.querySelector(".mini-thumb");
+      if (thumbNode) {
+        const hasInlinePhoto =
+          thumbNode.classList.contains("has-photo") &&
+          /url\(/i.test(
+            `${thumbNode.style.getPropertyValue("--bg-image")} ${thumbNode.style.backgroundImage || ""}`
+          );
+        storyNode.classList.toggle("story-without-photo", !hasInlinePhoto);
+        thumbNode.classList.toggle("has-photo", hasInlinePhoto);
+      }
+    });
+  });
+
+  await Promise.all(cardTasks);
+};
+
+const renderGlobalPoliticsHighlights = async (options = {}) => {
+  const grid = document.querySelector("#global-politics-grid[data-topic-feed]");
+  if (!grid) {
+    return;
+  }
+
+  const items = await fetchTopicFeedCached(grid.dataset.topicFeed || "politics", 6, options);
+  const selected = dedupeNewsItems(items)
+    .filter((item) => item.title && (item.sourceUrl || item.slug))
+    .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+    .slice(0, 6);
+
+  const fallbackItems = selected.length
+    ? []
+    : getRecentTopicFallbackArticles(isRegionalPoliticsArticle, 6);
+  const finalItems = selected.length ? selected : fallbackItems;
+
+  if (!finalItems.length) {
+    grid.innerHTML = buildTopicUtilityCards([
+      {
+        eyebrow: "política nacional",
+        title: "Abrir arquivo político completo",
+        summary: "Quando o feed não entregar manchetes novas agora, este atalho leva para o arquivo e evita card morto.",
+        label: "utilidade editorial",
+        href: "./arquivo.html",
+        cta: "Ver arquivo"
+      },
+      {
+        eyebrow: "contexto",
+        title: "Voltar ao radar principal da home",
+        summary: "Use o radar principal para encontrar a notícia política mais recente já incorporada na edição local.",
+        label: "atalho útil",
+        href: "#radar",
+        cta: "Abrir radar"
+      },
+      {
+        eyebrow: "busca",
+        title: "Buscar política no portal",
+        summary: "A busca lateral ajuda a localizar eleição, prefeitura, governo, Câmara, Acre e Brasília sem depender só deste bloco.",
+        label: "busca interna",
+        href: "#sidebar-now",
+        cta: "Usar busca"
+      }
+    ]);
+    return;
+  }
+
+  grid.innerHTML = finalItems
+    .map((item) => {
+      const href = item.slug
+        ? `./noticia.html?slug=${encodeURIComponent(item.slug)}`
+        : item.sourceUrl || item.url || "#";
+      const source = formatMosaicSourceLabel(item);
+      return `
+        <article class="global-politics-card">
+          <p class="eyebrow">${escapeHtml(item.category || item.eyebrow || "política")}</p>
+          <h3>${escapeHtml(truncateCopy(item.title || "Destaque de política", 120))}</h3>
+          <p>${escapeHtml(truncateCopy(item.summary || item.lede || "Atualização de política em acompanhamento.", 190))}</p>
+          <footer>
+            <span>${escapeHtml(source)}</span>
+            <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
+          </footer>
+        </article>
+      `;
+    })
+    .join("");
+
+  registerArticleCardLinks(grid);
+};
+
+const regionalPoliticsScopes = [
+  {
+    key: "jurua",
+    label: "Vale do Juruá",
+    fallbackTitle: "Movimentos políticos locais abrem esta divisão",
+    matcher: /cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|mancio lima|mâncio lima|rodrigues alves|porto walter|marechal thaumaturgo/i
+  },
+  {
+    key: "acre",
+    label: "Acre",
+    fallbackTitle: "Governo estadual e Assembleia entram em seguida",
+    matcher: /acre|rio branco|governador|governadora|mailza|assembleia legislativa|aleac|secretaria de estado|palacio rio branco|palácio rio branco/i
+  },
+  {
+    key: "brasil",
+    label: "Brasil",
+    fallbackTitle: "Brasília aparece como explicação, não como centro",
+    matcher: /brasil|brasilia|brasília|stf|congresso|senado|camara dos deputados|câmara dos deputados|lula|bolsonaro|governo federal|ministerio|ministério/i
+  }
+];
+
+const regionalPoliticsPoliticalPattern =
+  /politic|polític|prefeit|govern|secretari|deputad|vereador|camara|câmara|assembleia|aleac|stf|congresso|senado|eleiç|eleic|nomeaç|nomeac|exoneraç|exonerac|partido|progressistas|pl\b|pt\b|mdb\b|psd\b|união|uniao/i;
+
+const getRegionalPoliticsScope = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const haystack = [
+    normalized.title,
+    normalized.lede,
+    normalized.summary,
+    normalized.category,
+    normalized.sourceName,
+    normalized.sourceLabel
+  ].join(" ");
+
+  return regionalPoliticsScopes.find((scope) => scope.matcher.test(haystack))?.key || "";
+};
+
+const isRegionalPoliticsArticle = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const haystack = [
+    normalized.title,
+    normalized.lede,
+    normalized.summary,
+    normalized.category,
+    normalized.sourceName,
+    normalized.sourceLabel
+  ].join(" ");
+
+  return normalizeText(normalized.category).includes("politica") || regionalPoliticsPoliticalPattern.test(haystack);
+};
+
+const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
+  const grid = document.querySelector("#regional-politics-grid[data-regional-politics]");
+  if (!grid) {
+    return;
+  }
+
+  const candidates = sortRadarArticles(dedupeNewsItems(items))
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => article.title && (article.sourceUrl || article.slug) && isRegionalPoliticsArticle(article));
+  const usedKeys = new Set();
+
+  const selected = regionalPoliticsScopes.map((scope) => {
+    const primary = candidates.find((article) => {
+      const key = getArticleUsageKey(article);
+      return key && !usedKeys.has(key) && getRegionalPoliticsScope(article) === scope.key;
+    });
+    const fallback = candidates.find((article) => {
+      const key = getArticleUsageKey(article);
+      return key && !usedKeys.has(key);
+    });
+    const article = primary || fallback || null;
+    const key = article ? getArticleUsageKey(article) : "";
+    if (key) {
+      usedKeys.add(key);
+    }
+    return { scope, article };
+  });
+
+  grid.innerHTML = selected
+    .map(({ scope, article }) => {
+      if (!article) {
+        return `
+          <article class="global-politics-card" data-scope="${escapeRuntimeAttribute(scope.key)}">
+            <p class="eyebrow">${escapeHtml(scope.label)}</p>
+            <h3>${escapeHtml(scope.fallbackTitle)}</h3>
+            <p>Sem manchete perfeita nesta camada agora, use este bloco como atalho útil para continuar a leitura política sem espaço morto.</p>
+            <footer>
+              <span>utilidade editorial</span>
+              <a href="${escapeRuntimeAttribute(scope.key === "brasil" ? "#politica-global" : "./arquivo.html")}">${scope.key === "brasil" ? "Ver contexto" : "Abrir arquivo"}</a>
+            </footer>
+          </article>
+        `;
+      }
+
+      const href = buildArticleHref(article);
+      const source = formatMosaicSourceLabel(article);
+      return `
+          <article class="global-politics-card" data-scope="${escapeRuntimeAttribute(scope.key)}">
+          <p class="eyebrow">${escapeHtml(scope.label)}</p>
+          <h3>${escapeHtml(truncateCopy(article.title || scope.fallbackTitle, 120))}</h3>
+          <p>${escapeHtml(truncateCopy(article.summary || article.lede || "Atualização política em acompanhamento.", 190))}</p>
+          <footer>
+            <span>${escapeHtml(source)}</span>
+            <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
+          </footer>
+        </article>
+      `;
+    })
+    .join("");
+
+  registerArticleCardLinks(grid);
+};
+
 const syncNewsDataset = (runtimeItems = []) => {
   const merged = dedupeNewsItems([...(runtimeItems || []), ...initialStaticNews]);
   window.NEWS_DATA = merged;
   window.NEWS_MAP = Object.fromEntries(merged.map((item) => [item.slug, item]));
+  persistOfflineNewsCache(merged);
   return merged;
 };
 
-// --- Elections: render candidates and setup filters ---
-if (window.ELECTIONS_DATA) {
-  const renderCandidates = (level = "todos") => {
-    const grid = document.querySelector(".elections-grid");
-    if (!grid) return;
+const truncateCopy = (value, maxLength = 140) => {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}...`;
+};
 
-    grid.innerHTML = "";
-    Object.entries(window.ELECTIONS_DATA).forEach(([key, candidate]) => {
-      if (level !== "todos" && candidate.level !== level) return;
+const socialSurfaceBaseScores = {
+  "festas & social": 10,
+  social: 10,
+  cultura: 9,
+  esporte: 7,
+  educacao: 6,
+  negocios: 5,
+  prefeitura: 3,
+  politica: 1,
+  cotidiano: 1,
+  saude: 0,
+  policia: -8,
+  "utilidade publica": -5
+};
 
-      const card = document.createElement("article");
-      card.className = "candidate-card news-card reveal active";
-      card.dataset.level = candidate.level;
-      
-      card.innerHTML = `
-        <header class="candidate-header">
-          <div class="candidate-avatar ${candidate.imageUrl ? 'has-photo' : ''}" 
-               style="--candidate-photo:url('${candidate.imageUrl || ''}');">
-            ${candidate.imageUrl ? "" : candidate.name.charAt(0)}
+const socialSurfaceSignalPattern =
+  /\b(festa|show|festival|evento|agenda|cultura|arte|teatro|cinema|musica|viral|rede social|instagram|tiktok|youtube|influenc|celebridade|aniversario|casamento|exposicao|feira|programacao|oficina|comunidade|historia|superacao|retrato|juventude|turma|bairro|trabalhador|pascoa)\b/;
+
+const socialSurfaceHeavyPattern =
+  /\b(crime|homicidio|prisao|operacao|assalto|roubo|furto|morte|ice|stf|cpi|inss|detran|doenca|hospital|vacina|alagacao|enchente|alerta|beneficiario)\b/;
+
+const socialSurfacePublicEventPattern =
+  /\b(show|festa|festival|programacao|agenda|evento|cultura|credenciamento|trabalhador|pascoa|natal|feira|oficina|artista|apresentacao)\b/;
+
+const getSocialSurfaceScore = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const categoryKey = normalized.categoryKey || normalizeText(normalized.category);
+  const haystack = normalizeText(
+    [
+      normalized.title,
+      normalized.sourceLabel,
+      normalized.lede,
+      normalized.summary,
+      normalized.category,
+      normalized.sourceName
+    ].join(" ")
+  );
+
+  let score = socialSurfaceBaseScores[categoryKey] ?? 0;
+
+  if (socialSurfaceSignalPattern.test(haystack)) {
+    score += 6;
+  }
+
+  if (/\b(viral|instagram|tiktok|youtube|rede|post|video|fotos?)\b/.test(haystack)) {
+    score += 3;
+  }
+
+  if (/\b(show|festival|cinema|teatro|musica|artista|agenda|evento|oficina|feira)\b/.test(haystack)) {
+    score += 3;
+  }
+
+  if (/\b(historia|superacao|comunidade|aluno|estudante|professor|familia|bairro|juventude)\b/.test(haystack)) {
+    score += 2;
+  }
+
+  if (categoryKey === "prefeitura" && socialSurfacePublicEventPattern.test(haystack)) {
+    score += 3;
+  }
+
+  if (socialSurfaceHeavyPattern.test(haystack)) {
+    score -= 7;
+  }
+
+  if (!articleHasUsableImageCandidate(normalized)) {
+    score -= 2;
+  }
+
+  return score;
+};
+
+const pickSocialFallbackArticles = (items = [], count = 0, usedKeys = new Set()) => {
+  if (count <= 0) {
+    return [];
+  }
+
+  const candidates = sortRadarArticles(dedupeNewsItems(items)).map((item) =>
+    normalizeRuntimeArticle(item)
+  );
+  const heroReservedKeys =
+    newsSurfaceReservations.hero instanceof Set ? newsSurfaceReservations.hero : new Set();
+  const rankedCandidates = [...candidates].sort((left, right) => {
+    const scoreDiff = getSocialSurfaceScore(right) - getSocialSurfaceScore(left);
+    if (scoreDiff !== 0) {
+      return scoreDiff;
+    }
+
+    return getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
+  });
+  const selected = [];
+  const usedImages = new Set();
+  const categoryCounts = new Map();
+
+  const tryPushSocialArticle = (
+    article,
+    {
+      allowDuplicateImages = false,
+      allowSecondFromCategory = false,
+      minimumScore = 0
+    } = {}
+  ) => {
+    if (selected.length >= count) {
+      return true;
+    }
+
+    const articleKey = getArticleUsageKey(article);
+    if (!articleKey || usedKeys.has(articleKey) || heroReservedKeys.has(articleKey)) {
+      return false;
+    }
+
+    if (getSocialSurfaceScore(article) < minimumScore) {
+      return false;
+    }
+
+    if (!articleHasUsableImageCandidate(article)) {
+      return false;
+    }
+
+    const categoryKey = article.categoryKey || normalizeText(article.category);
+    const maxPerCategory = allowSecondFromCategory ? 2 : 1;
+    if ((categoryCounts.get(categoryKey) || 0) >= maxPerCategory) {
+      return false;
+    }
+
+    const imageKey = getArticleImageKey(article);
+    if (!allowDuplicateImages && imageKey && usedImages.has(imageKey)) {
+      return false;
+    }
+
+    if (imageKey) {
+      usedImages.add(imageKey);
+    }
+    usedKeys.add(articleKey);
+    categoryCounts.set(categoryKey, (categoryCounts.get(categoryKey) || 0) + 1);
+    selected.push(article);
+    return selected.length >= count;
+  };
+
+  rankedCandidates.some((article) =>
+    tryPushSocialArticle(article, {
+      minimumScore: 3
+    })
+  );
+
+  if (selected.length < count) {
+    rankedCandidates.some((article) =>
+      tryPushSocialArticle(article, {
+        allowSecondFromCategory: true,
+        minimumScore: 1
+      })
+    );
+  }
+
+  if (selected.length < count) {
+    candidates.some((article) =>
+      tryPushSocialArticle(article, {
+        allowDuplicateImages: true,
+        allowSecondFromCategory: true,
+        minimumScore: -2
+      })
+    );
+  }
+
+  return selected;
+};
+
+const applySocialCardFromArticle = (card, article) => {
+  if (!card || !article) {
+    return;
+  }
+
+  const normalized = normalizeRuntimeArticle(article);
+  const linkNode = card.querySelector(".news-thumb");
+  const tagNode = linkNode?.querySelector("span");
+  const sourceNode = card.querySelector(".news-source");
+  const titleNode = card.querySelector("h3");
+  const copyNode = card.querySelector("p");
+  const footerSource = card.querySelector("footer span");
+  const footerLink = card.querySelector("footer a");
+  const href = buildArticleHref(normalized);
+
+  if (linkNode) {
+    linkNode.href = href;
+    applyArticleLinkAttrs(linkNode, href);
+    linkNode.setAttribute("aria-label", `Abrir notícia: ${normalized.title}`);
+  }
+
+  if (tagNode) {
+    tagNode.textContent = truncateCopy(normalized.category, 22);
+  }
+
+  if (sourceNode) {
+    sourceNode.textContent = `${normalized.sourceName} • ${normalized.date}`;
+  }
+
+  if (titleNode) {
+    titleNode.textContent = normalized.title;
+  }
+
+  if (copyNode) {
+    copyNode.textContent = truncateCopy(normalized.lede, 150);
+  }
+
+  if (footerSource) {
+    footerSource.textContent = `Fonte consultada: ${normalized.sourceName}`;
+  }
+
+  if (footerLink) {
+    footerLink.href = href;
+    applyArticleLinkAttrs(footerLink, href);
+  }
+
+  if (linkNode) {
+    const hasUsableImage = articleHasUsableImageCandidate(normalized);
+    card.classList.toggle("card-without-photo", !hasUsableImage);
+    applyThumbImage(linkNode, normalized);
+  }
+};
+
+const hydrateSocialCards = (items = []) => {
+  const cards = [...document.querySelectorAll(".social-card")].filter(
+    (card) => !card.classList.contains("wide")
+  );
+  if (!cards.length || !window.NEWS_MAP) {
+    reserveSurfaceArticles("social", []);
+    return;
+  }
+
+  const missingCards = [];
+  const appliedArticles = [];
+  const usedKeys = buildReservedArticleKeys(["social"]);
+  const pinnedSocialSlugs = new Set([
+    "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
+    "filme-bolsonaro-memes-reacao-redes"
+  ]);
+
+  cards.forEach((card) => {
+    const linkNode = card.querySelector(".news-thumb");
+    const slugFromHref = getSlugFromLink(linkNode);
+    const article = getHomepageHydrationArticle(slugFromHref);
+    const articleKey = getArticleUsageKey(article);
+
+    if (slugFromHref && pinnedSocialSlugs.has(slugFromHref)) {
+      const hasUsableImage = articleHasUsableImageCandidate(article);
+      card.classList.toggle("card-without-photo", !hasUsableImage);
+      if (linkNode) {
+        applyThumbImage(linkNode, article);
+      }
+      return;
+    }
+
+    if (article && articleKey && !usedKeys.has(articleKey)) {
+      const hasUsableImage = articleHasUsableImageCandidate(article);
+      if (!hasUsableImage) {
+        missingCards.push(card);
+        return;
+      }
+
+      card.classList.toggle("card-without-photo", false);
+      usedKeys.add(articleKey);
+      appliedArticles.push(article);
+      if (linkNode) {
+        applyThumbImage(linkNode, article);
+      }
+      return;
+    }
+    missingCards.push(card);
+  });
+
+  if (!missingCards.length) {
+    return;
+  }
+
+  const fallbackArticles = pickSocialFallbackArticles(
+    items,
+    missingCards.length,
+    usedKeys
+  );
+
+  missingCards.forEach((card, index) => {
+    const article = fallbackArticles[index];
+    if (!article) {
+      return;
+    }
+    appliedArticles.push(article);
+    applySocialCardFromArticle(card, article);
+  });
+
+  reserveSurfaceArticles("social", appliedArticles);
+};
+
+const hydrateStaticMediaSurfaces = () => {
+  if (thumbNodes.length > 0 && window.NEWS_MAP) {
+    thumbNodes.forEach((node) => {
+      const slugFromHref = getSlugFromLink(node.closest("a") || node);
+      const article = getHomepageHydrationArticle(slugFromHref);
+      ensureMediaBadge(node, article?.media);
+    });
+  }
+
+  if (window.NEWS_MAP) {
+    hydrateStaticThumbs(window.NEWS_MAP);
+    hydrateSocialCards(window.NEWS_DATA || []);
+    hydrateCadernoCards(window.NEWS_DATA || []);
+  }
+
+};
+
+const hydrateMosaicHero = (items = []) => {
+  const hero = document.querySelector(".mosaic-hero");
+  if (!hero) {
+    reserveSurfaceArticles("hero", []);
+    return;
+  }
+
+  const cards = [...hero.querySelectorAll(".mosaic-item")];
+  if (cards.length === 0) {
+    return;
+  }
+
+  const { leadArticles, referenceDateKey } = pickRadarLeadArticles(dedupeNewsItems(items));
+  if (!leadArticles.length) {
+    reserveSurfaceArticles("hero", []);
+    return;
+  }
+
+  const editionNode = hero.querySelector(".mosaic-edition");
+  if (editionNode && referenceDateKey) {
+    editionNode.textContent = `Edicao visual • ${formatCompactDisplayDate(`${referenceDateKey}T12:00:00`)}`;
+  }
+
+  cards.forEach((card, index) => {
+    const article = normalizeRuntimeArticle(leadArticles[index] || leadArticles[0]);
+    const link = card.querySelector("a");
+    const tag = card.querySelector(".mosaic-tag");
+    const source = card.querySelector(".mosaic-source");
+    const titleNode = card.querySelector("h1, h3");
+    const copyNode = card.querySelector(".mosaic-copy p");
+    const statNode = card.querySelector(".mosaic-stat");
+    const actionNode = card.querySelector(".mosaic-action");
+    const href = buildArticleHref(article);
+
+    if (link) {
+      link.href = href;
+      applyArticleLinkAttrs(link, href);
+    }
+
+    card.dataset.category = normalizeText(article.category);
+    [...card.classList]
+      .filter((className) => className.startsWith("thumb-"))
+      .forEach((className) => card.classList.remove(className));
+    card.classList.add(article.previewClass);
+    card.dataset.mosaicLayout = inferMosaicLayoutMode(article, card);
+
+    if (tag) {
+      tag.textContent = index === 0 ? "Destaque do radar" : truncateCopy(article.category, 22);
+    }
+
+    if (source) {
+      source.textContent = formatMosaicSourceLabel(article);
+    }
+
+    if (titleNode) {
+      titleNode.textContent = article.title;
+    }
+
+    if (copyNode) {
+      copyNode.textContent = truncateCopy(article.lede, index === 0 ? 88 : 64);
+    }
+
+    if (statNode) {
+      statNode.textContent =
+        index === 0
+          ? truncateCopy(article.summary || article.lede, 84)
+          : truncateCopy(article.sourceLabel || article.title, 68);
+    }
+
+    if (actionNode) {
+      actionNode.textContent = index === 0 ? "Abrir materia" : "Ler cobertura";
+    }
+
+    applyMosaicImage(card, article);
+  });
+
+  reserveSurfaceArticles("hero", leadArticles);
+};
+
+const buildArticleHref = (article) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+
+  if (normalizedArticle.slug) {
+    return `./noticia.html?slug=${encodeURIComponent(normalizedArticle.slug)}`;
+  }
+
+  return normalizedArticle.sourceUrl || "#";
+};
+
+const applyArticleLinkAttrs = (linkNode, href) => {
+  if (!linkNode) {
+    return;
+  }
+
+  linkNode.removeAttribute("target");
+  linkNode.removeAttribute("rel");
+
+  if (/^https?:\/\//i.test(href)) {
+    linkNode.setAttribute("target", "_blank");
+    linkNode.setAttribute("rel", "noreferrer");
+  }
+};
+
+const initialMergedNews = syncNewsDataset(initialStaticNews);
+ensureMobileHomeLeadLayout();
+hydrateMosaicHero(initialMergedNews);
+hydrateStaticMediaSurfaces();
+initializeHeroTourismHero();
+if (heroDesktopBackdropMedia) {
+  const handleHeroShellModeChange = () => {
+    initializeHeroTourismHero();
+  };
+
+  if (typeof heroDesktopBackdropMedia.addEventListener === "function") {
+    heroDesktopBackdropMedia.addEventListener("change", handleHeroShellModeChange);
+  } else if (typeof heroDesktopBackdropMedia.addListener === "function") {
+    heroDesktopBackdropMedia.addListener(handleHeroShellModeChange);
+  }
+}
+attachArchiveBrowserLaunchers();
+initializeInsidersArmy();
+initializeInsidersBootScreen();
+initializeInsidersHeroScene();
+if (mobileHomeLeadMedia) {
+  const handleMobileHomeLeadChange = () => {
+    ensureMobileHomeLeadLayout();
+  };
+
+  if (typeof mobileHomeLeadMedia.addEventListener === "function") {
+    mobileHomeLeadMedia.addEventListener("change", handleMobileHomeLeadChange);
+  } else if (typeof mobileHomeLeadMedia.addListener === "function") {
+    mobileHomeLeadMedia.addListener(handleMobileHomeLeadChange);
+  }
+}
+
+const articleCardSelector = [
+  ".news-card",
+  ".archive-card",
+  ".mosaic-item",
+  ".global-politics-card",
+  ".trending-card"
+].join(", ");
+const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
+
+const getPrimaryCardLink = (card) =>
+  card?.querySelector?.('a[href*="noticia.html?slug="], a[href]') || null;
+
+const bindArticleCardLink = (card) => {
+  if (!card || card.dataset.cardLinkBound === "true") {
+    return;
+  }
+
+  const primaryLink = getPrimaryCardLink(card);
+  if (!primaryLink) {
+    return;
+  }
+
+  card.dataset.cardLinkBound = "true";
+  card.classList.add("is-card-link");
+  card.addEventListener("click", (event) => {
+    if (event.defaultPrevented || event.target.closest(cardInteractiveSelector)) {
+      return;
+    }
+
+    const href = primaryLink.getAttribute("href") || "";
+    const match = href.match(/[?&]slug=([^&#]+)/i);
+    const slugFromHref = match ? decodeURIComponent(match[1]) : "";
+    const article = slugFromHref ? window.NEWS_MAP?.[slugFromHref] : null;
+
+    if (article) {
+      persistOfflineArticle(article);
+    }
+
+    primaryLink.click();
+  });
+};
+
+const registerArticleCardLinks = (root = document) => {
+  if (!root) {
+    return;
+  }
+
+  const cards = [];
+
+  if (root.matches?.(articleCardSelector)) {
+    cards.push(root);
+  }
+
+  const nestedCards = root.querySelectorAll
+    ? [...root.querySelectorAll(articleCardSelector)]
+    : [];
+
+  cards.push(...nestedCards);
+  cards.forEach(bindArticleCardLink);
+};
+
+registerArticleCardLinks();
+renderRegionalPoliticsHighlights(initialMergedNews);
+renderGlobalPoliticsHighlights();
+
+const initializeMobilePagePrefetch = () => {
+  if (!mobileIntroMedia?.matches) {
+    return;
+  }
+
+  const prefetched = new Set();
+  const ensurePrefetch = (href) => {
+    if (!href || prefetched.has(href) || /^https?:\/\//i.test(href) || href.startsWith("#")) {
+      return;
+    }
+
+    const normalizedHref = href.replace(/#.*/, "");
+    if (!normalizedHref || prefetched.has(normalizedHref)) {
+      return;
+    }
+
+    prefetched.add(normalizedHref);
+    const link = document.createElement("link");
+    link.rel = "prefetch";
+    link.href = normalizedHref;
+    link.as = "document";
+    document.head.appendChild(link);
+  };
+
+  document.querySelectorAll("a[href]").forEach((anchor) => {
+    const href = anchor.getAttribute("href") || "";
+    anchor.addEventListener("pointerenter", () => ensurePrefetch(href), { passive: true });
+    anchor.addEventListener("touchstart", () => ensurePrefetch(href), { passive: true, once: true });
+  });
+
+  document.addEventListener("click", (event) => {
+    const anchor = event.target instanceof Element ? event.target.closest("a[href]") : null;
+    const href = anchor?.getAttribute("href") || "";
+    if (!anchor || !href || /^https?:\/\//i.test(href) || href.startsWith("#")) {
+      return;
+    }
+
+    document.body.classList.add("mobile-page-shift");
+  });
+};
+
+initializeMobilePagePrefetch();
+
+document.addEventListener("click", (event) => {
+  const link = event.target instanceof Element ? event.target.closest('a[href*="noticia.html?slug="]') : null;
+  if (!link) {
+    return;
+  }
+
+  const href = link.getAttribute("href") || "";
+  const match = href.match(/[?&]slug=([^&#]+)/i);
+  const slugFromHref = match ? decodeURIComponent(match[1]) : "";
+  const article = slugFromHref ? window.NEWS_MAP?.[slugFromHref] : null;
+
+  if (article) {
+    persistOfflineArticle(article);
+  }
+});
+
+const getAnchorScrollOffset = () => {
+  const headerStack = document.querySelector("#site-header-stack");
+  const headerHeight = headerStack?.getBoundingClientRect().height || 0;
+  return headerHeight + 18;
+};
+
+const scrollSectionIntoView = (target, { updateHash = true } = {}) => {
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const rect = target.getBoundingClientRect();
+  const absoluteTop = window.scrollY + rect.top;
+  const offsetTop = getAnchorScrollOffset();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+  const targetHeight = rect.height || target.offsetHeight || 0;
+  const freeSpace = Math.max(0, viewportHeight - offsetTop - targetHeight);
+  const centerOffset = offsetTop + freeSpace / 2;
+  const nextTop = Math.max(0, absoluteTop - centerOffset);
+
+  window.scrollTo({
+    top: nextTop,
+    behavior: splashMotionQuery.matches ? "auto" : "smooth"
+  });
+
+  if (updateHash && target.id) {
+    try {
+      const nextUrl = `${window.location.pathname}${window.location.search}#${target.id}`;
+      window.history.replaceState({}, document.title, nextUrl);
+    } catch (_error) {
+      // Se o navegador bloquear a troca do hash, a rolagem continua valendo.
+    }
+  }
+};
+
+document.addEventListener("click", (event) => {
+  const anchor = event.target instanceof Element ? event.target.closest('a[href^="#"]') : null;
+  if (!anchor) {
+    return;
+  }
+
+  const href = anchor.getAttribute("href") || "";
+  if (!href || href === "#") {
+    return;
+  }
+
+  const target = document.querySelector(href);
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  event.preventDefault();
+  scrollSectionIntoView(target);
+});
+
+window.addEventListener("hashchange", () => {
+  const hash = window.location.hash || "";
+  if (!hash || hash === "#") {
+    return;
+  }
+
+  const target = document.querySelector(hash);
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    scrollSectionIntoView(target, { updateHash: false });
+  }, 20);
+});
+
+window.addEventListener("load", () => {
+  const hash = window.location.hash || "";
+  if (!hash || hash === "#") {
+    return;
+  }
+
+  const target = document.querySelector(hash);
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  window.setTimeout(() => {
+    scrollSectionIntoView(target, { updateHash: false });
+  }, 60);
+});
+
+// --- Elections: poll by office with one vote per browser/office ---
+if (window.ELECTIONS_DATA?.offices?.length) {
+  const electionGrid = document.querySelector(".elections-grid");
+  const electionFilters = [...document.querySelectorAll(".election-filter[data-office]")];
+  const staticElectionVoteButtons = [...document.querySelectorAll("[data-static-vote][data-static-candidate]")];
+  const electionResultsTitle = document.querySelector("#election-results-title");
+  const electionResultsMeta = document.querySelector("#election-results-meta");
+  const electionResultsBars = document.querySelector("#election-results-bars");
+  const electionResultsOfficeButtons = document.querySelector("#election-results-office-buttons");
+  const electionHeatTitle = document.querySelector("#election-heat-title");
+  const electionHeatMeta = document.querySelector("#election-heat-meta");
+  const electionHeatGrid = document.querySelector("#election-heat-grid");
+  const electionDisclaimer = document.querySelector("#election-disclaimer");
+  const electionVotesKey = "catalogo_election_votes_by_office_v1";
+  const electionUserVotesKey = "catalogo_election_user_votes_v1";
+  const electionOpinionSummaryKey = "catalogo_election_opinion_summary_v1";
+  const electionLastVoteKey = "catalogo_election_last_vote_v1";
+  const electionVoterIdKey = "catalogo_election_voter_id_v1";
+  const electionVoterProfileKey = "catalogo_election_voter_profile_v1";
+  const electionCycle = String(window.ELECTIONS_DATA.cycle || "").toLowerCase();
+  const generalElectionOfficeIds = new Set([
+    "governador",
+    "senador",
+    "deputado-federal",
+    "deputado-estadual"
+  ]);
+  const electionOffices = window.ELECTIONS_DATA.offices.filter((office) => {
+    const officeId = String(office?.id || "").trim();
+
+    if (!officeId) {
+      return false;
+    }
+
+    if (electionCycle === "geral") {
+      return generalElectionOfficeIds.has(officeId);
+    }
+
+    if (electionCycle === "municipal") {
+      return officeId === "municipal";
+    }
+
+    return true;
+  });
+  const availableElectionOfficeIds = new Set(electionOffices.map((office) => office.id));
+  let remoteElectionVotes = null;
+  let remoteElectionUserVotes = null;
+  let remoteElectionOpinionSummary = null;
+  let remoteElectionWeeklyTrend = null;
+  let electionVoteModal = document.querySelector("#electionVoteModal");
+  let electionVoteModalState = null;
+  let electionVoteToastTimer = 0;
+  let activeElectionResultsOfficeId = "";
+
+  const showElectionVoteToast = (message = "Acompanhe semanalmente as parciais.") => {
+    let toast = document.querySelector("#catalogoElectionVoteToast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "catalogoElectionVoteToast";
+      toast.className = "election-vote-toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      document.body.appendChild(toast);
+    }
+
+    toast.innerHTML = `<strong>Obrigado por votar.</strong><span>${escapeHtml(message)}</span>`;
+    toast.classList.add("is-visible");
+
+    if (electionVoteToastTimer) {
+      window.clearTimeout(electionVoteToastTimer);
+    }
+
+    electionVoteToastTimer = window.setTimeout(() => {
+      toast.classList.remove("is-visible");
+    }, 5000);
+  };
+
+  const writeElectionLastVote = (payload = {}) => {
+    writeElectionStorage(electionLastVoteKey, {
+      ...payload,
+      savedAt: new Date().toISOString()
+    });
+  };
+
+  const readElectionLastVote = () => safeParseJson(electionLastVoteKey, {});
+
+  const ensureElectionVoteSuccessModal = () => {
+    let modal = document.querySelector("#catalogoElectionVoteSuccessModal");
+    if (!modal) {
+      modal = document.createElement("section");
+      modal.id = "catalogoElectionVoteSuccessModal";
+      modal.className = "election-success-modal";
+      modal.hidden = true;
+      modal.innerHTML = `
+        <div class="election-success-backdrop" data-election-success-close></div>
+        <article class="election-success-dialog" role="dialog" aria-modal="true" aria-labelledby="electionSuccessTitle">
+          <button class="election-success-close" type="button" data-election-success-close aria-label="Fechar">×</button>
+          <p class="panel-label">Participacao confirmada</p>
+          <h3 id="electionSuccessTitle">Obrigado por participar.</h3>
+          <p class="election-success-lead" data-election-success-message>
+            Seu voto entrou na memoria semanal desta leitura eleitoral.
+          </p>
+          <div class="election-success-meta">
+            <article>
+              <span>Cargo</span>
+              <strong data-election-success-office>Governador</strong>
+            </article>
+            <article>
+              <span>Escolha registrada</span>
+              <strong data-election-success-candidate>Nome do candidato</strong>
+            </article>
+            <article>
+              <span>Cidade informada</span>
+              <strong data-election-success-city>Rio Branco</strong>
+            </article>
           </div>
-          <div>
-            <h3 class="fraunces" style="margin:0; font-size:1.4rem;">${candidate.name}</h3>
-            <span class="eyebrow" style="color:var(--copper); font-size:0.85rem; font-weight:700;">${candidate.party} | ${candidate.level.toUpperCase()}</span>
+          <p class="election-success-note">
+            Continue acompanhando as parciais semanais e os graficos de todo o periodo para ver como o humor do eleitorado evolui.
+          </p>
+          <div class="election-success-actions">
+            <button class="solid-button" type="button" data-election-success-follow>Acompanhar parciais e graficos</button>
+            <button class="outline-button" type="button" data-election-success-close>Fechar</button>
           </div>
-        </header>
-        <div class="candidate-propostas" style="margin-top:1rem; flex:1;">
-          <h4 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted)">Principais Propostas</h4>
-          <ul style="padding-left:1.1rem; margin-top:0.5rem; color:var(--muted); font-size:0.92rem; line-height:1.6;">
-            ${candidate.propostas.map(p => `<li>${p}</li>`).join('')}
-          </ul>
-        </div>
-        <footer style="margin-top:1.5rem; padding-top:1rem; border-top:1px solid rgba(16,35,60,0.08);">
-          <button class="chip-button vote-button" data-candidate="${key}" style="width:100%; justify-content:center;">Simular Voto</button>
-        </footer>
+        </article>
       `;
-      grid.appendChild(card);
+      document.body.appendChild(modal);
+    }
+
+    if (modal.dataset.bound === "1") {
+      return modal;
+    }
+
+    modal.dataset.bound = "1";
+    const close = () => {
+      modal.hidden = true;
+      document.body.classList.remove("election-vote-open");
+    };
+
+    modal.addEventListener("click", (event) => {
+      if (
+        event.target === modal ||
+        event.target?.matches?.(".election-success-backdrop, [data-election-success-close]")
+      ) {
+        close();
+      }
     });
 
-    // Re-initialize polling listeners for new buttons
-    if (typeof initializeElectionPolling === 'function') {
-      initializeElectionPolling();
+    modal.querySelectorAll("[data-election-success-close]").forEach((button) => {
+      button.addEventListener("click", close);
+    });
+
+    modal.querySelector("[data-election-success-follow]")?.addEventListener("click", () => {
+      close();
+      document.querySelector("#elections")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) {
+        close();
+      }
+    });
+
+    return modal;
+  };
+
+  const showElectionVoteSuccessModal = ({ officeLabel = "", candidateName = "", city = "" } = {}) => {
+    const modal = ensureElectionVoteSuccessModal();
+    modal.querySelector("[data-election-success-office]").textContent = officeLabel || "Cargo";
+    modal.querySelector("[data-election-success-candidate]").textContent = candidateName || "Candidato";
+    modal.querySelector("[data-election-success-city]").textContent = city || "Cidade informada";
+    modal.querySelector("[data-election-success-message]").textContent =
+      `Voto autenticado neste dispositivo e confirmado para ${candidateName || "o candidato"} em ${officeLabel || "um cargo"}${city ? `, com cidade ${city}` : ""}.`;
+    modal.hidden = false;
+    document.body.classList.add("election-vote-open");
+  };
+
+  electionFilters.forEach((button) => {
+    const officeId = String(button.dataset.office || "").trim();
+    const isAvailable = availableElectionOfficeIds.has(officeId);
+
+    button.hidden = !isAvailable;
+    button.disabled = !isAvailable;
+    button.setAttribute("aria-hidden", isAvailable ? "false" : "true");
+
+    if (!isAvailable) {
+      button.classList.remove("is-active");
+    }
+  });
+
+  let activeElectionOfficeId =
+    electionFilters.find(
+      (button) =>
+        button.classList.contains("is-active") &&
+        availableElectionOfficeIds.has(String(button.dataset.office || "").trim())
+    )?.dataset.office || electionOffices[0]?.id;
+  activeElectionResultsOfficeId = activeElectionOfficeId || electionOffices[0]?.id || "";
+
+  if (!electionOffices.length || !activeElectionOfficeId) {
+    if (electionGrid) {
+      electionGrid.innerHTML =
+        '<div class="feed-empty">Ainda não há cargos disponíveis para o ciclo eleitoral atual.</div>';
+    }
+  } else {
+
+  const safeParseJson = (key, fallback) => {
+    try {
+      return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
+    } catch (_error) {
+      return fallback;
     }
   };
 
-  const setupElectionFilters = () => {
-    const filters = document.querySelectorAll(".election-filter");
-    filters.forEach((f) =>
-      f.addEventListener("click", () => {
-        filters.forEach((x) => x.classList.remove("is-active"));
-        f.classList.add("is-active");
-        renderCandidates(f.dataset.level);
-      })
-    );
+  const writeElectionStorage = (key, value) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (_error) {
+      // Se o navegador bloquear localStorage, a enquete continua visual.
+    }
   };
 
-  renderCandidates();
-  setupElectionFilters();
-}
+  const getElectionVoterProfile = () =>
+    safeParseJson(electionVoterProfileKey, {
+      city: "",
+      name: "",
+      party: ""
+    });
+
+  const writeElectionVoterProfile = (profile = {}) => {
+    writeElectionStorage(electionVoterProfileKey, {
+      city: String(profile.city || "").trim().slice(0, 80),
+      name: String(profile.name || "").trim().slice(0, 120),
+      party: String(profile.party || "").trim().slice(0, 90)
+    });
+  };
+
+  const getElectionVoterId = () => {
+    try {
+      const stored = localStorage.getItem(electionVoterIdKey);
+      if (stored) {
+        return stored;
+      }
+
+      const nextId =
+        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `voter-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      localStorage.setItem(electionVoterIdKey, nextId);
+      return nextId;
+    } catch (_error) {
+      return `session-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+  };
+
+  const getElectionOffice = (officeId = activeElectionOfficeId) =>
+    electionOffices.find((office) => office.id === officeId) || electionOffices[0];
+
+  const getElectionResultsOffice = (officeId = activeElectionResultsOfficeId || activeElectionOfficeId) =>
+    getElectionOffice(officeId);
+
+  const getElectionVotes = () => remoteElectionVotes || safeParseJson(electionVotesKey, {});
+
+  const getElectionUserVotes = () =>
+    remoteElectionUserVotes || safeParseJson(electionUserVotesKey, {});
+
+  const getElectionOpinionSummary = () =>
+    remoteElectionOpinionSummary || safeParseJson(electionOpinionSummaryKey, {});
+  const getElectionWeeklyTrend = () => remoteElectionWeeklyTrend || [];
+
+  const cloneElectionData = (value, fallback) => {
+    try {
+      return JSON.parse(JSON.stringify(value ?? fallback));
+    } catch (_error) {
+      return fallback;
+    }
+  };
+
+  const getElectionClientWeekKey = () => {
+    const now = new Date();
+    const utc = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+    const weekday = utc.getUTCDay() || 7;
+    utc.setUTCDate(utc.getUTCDate() + 4 - weekday);
+    const yearStart = new Date(Date.UTC(utc.getUTCFullYear(), 0, 1));
+    const weekNo = Math.ceil((((utc - yearStart) / 86400000) + 1) / 7);
+    return `${utc.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`;
+  };
+
+  const analyzeLocalElectionObservation = (value = "") => {
+    const text = normalizeText(value);
+    if (!text) {
+      return { label: "equilibrado", bucket: "neutralCount" };
+    }
+
+    const positivePattern = /\b(apoio|bom|boa|forte|melhor|aprovo|preparado|competente|confio|reeleicao|continuidade|favoravel)\b/;
+    const negativePattern = /\b(ruim|fraco|fraca|desgaste|rejeicao|rejeição|critica|critico|pessimo|péssimo|contra|troca|mudanca|mudança|nao voto)\b/;
+
+    if (positivePattern.test(text) && !negativePattern.test(text)) {
+      return { label: "favor e aprovacao", bucket: "positiveCount" };
+    }
+
+    if (negativePattern.test(text) && !positivePattern.test(text)) {
+      return { label: "pressao e critica", bucket: "negativeCount" };
+    }
+
+    return { label: "equilibrado", bucket: "neutralCount" };
+  };
+
+  const applyLocalElectionVoteFallback = (officeId, candidateId, voterMeta = {}) => {
+    const nextVotes = cloneElectionData(getElectionVotes(), {});
+    const nextUserVotes = cloneElectionData(getElectionUserVotes(), {});
+    const nextOpinionSummary = cloneElectionData(getElectionOpinionSummary(), {});
+    const nextWeeklyTrend = cloneElectionData(getElectionWeeklyTrend(), []);
+    const office = getElectionOffice(officeId);
+    const candidate = office?.candidates?.find((item) => item.id === candidateId);
+    const city = String(voterMeta.city || "").trim();
+    const observation = String(voterMeta.observation || "").trim();
+    const weekKey = getElectionClientWeekKey();
+    const opinion = analyzeLocalElectionObservation(observation);
+
+    nextVotes[officeId] = nextVotes[officeId] || {};
+    nextVotes[officeId][candidateId] = Number(nextVotes[officeId][candidateId] || 0) + 1;
+    nextUserVotes[officeId] = candidateId;
+
+    const officeBucket = nextOpinionSummary[officeId] || { totalComments: 0, candidates: [] };
+    officeBucket.candidates = Array.isArray(officeBucket.candidates) ? officeBucket.candidates : [];
+    let candidateBucket = officeBucket.candidates.find((item) => item.candidateId === candidateId);
+
+    if (!candidateBucket) {
+      candidateBucket = {
+        candidateId,
+        candidateName: candidate?.name || "Nome em leitura",
+        candidateParty: candidate?.party || "",
+        totalVotes: 0,
+        commentCount: 0,
+        positiveCount: 0,
+        neutralCount: 0,
+        negativeCount: 0,
+        topCity: city || "",
+        moodLabel: "amostra inicial"
+      };
+      officeBucket.candidates.push(candidateBucket);
+    }
+
+    candidateBucket.totalVotes = Number(candidateBucket.totalVotes || 0) + 1;
+    if (observation) {
+      officeBucket.totalComments = Number(officeBucket.totalComments || 0) + 1;
+      candidateBucket.commentCount = Number(candidateBucket.commentCount || 0) + 1;
+      candidateBucket[opinion.bucket] = Number(candidateBucket[opinion.bucket] || 0) + 1;
+      candidateBucket.moodLabel = opinion.label;
+    }
+    if (city) {
+      candidateBucket.topCity = city;
+    }
+    nextOpinionSummary[officeId] = officeBucket;
+
+    const existingWeek = nextWeeklyTrend.find((item) => item.weekKey === weekKey);
+    if (existingWeek) {
+      existingWeek.totalVotes = Number(existingWeek.totalVotes || existingWeek.total || 0) + 1;
+      existingWeek.total = existingWeek.totalVotes;
+    } else {
+      nextWeeklyTrend.push({ weekKey, totalVotes: 1, total: 1 });
+    }
+
+    remoteElectionVotes = nextVotes;
+    remoteElectionUserVotes = nextUserVotes;
+    remoteElectionOpinionSummary = nextOpinionSummary;
+    remoteElectionWeeklyTrend = nextWeeklyTrend;
+    writeElectionStorage(electionVotesKey, nextVotes);
+    writeElectionStorage(electionUserVotesKey, nextUserVotes);
+    writeElectionStorage(electionOpinionSummaryKey, nextOpinionSummary);
+    renderElectionOffice(officeId);
+
+    return {
+      ok: true,
+      alreadyVoted: false,
+      localFallback: true,
+      votes: nextVotes,
+      userVotes: nextUserVotes,
+      opinionSummary: nextOpinionSummary,
+      weeklyTrend: nextWeeklyTrend
+    };
+  };
+
+  const getOfficeVotes = (officeId) => {
+    const votes = getElectionVotes();
+    return votes[officeId] || {};
+  };
+
+  const getUserOfficeVote = (officeId) => getElectionUserVotes()[officeId] || "";
+
+  const getElectionOpinionOffice = (officeId) => getElectionOpinionSummary()[officeId] || null;
+
+  const getElectionMoodClass = (label = "") => {
+    const normalized = String(label || "").toLowerCase();
+    if (normalized.includes("favor")) return "is-hot";
+    if (normalized.includes("press")) return "is-cold";
+    return "is-neutral";
+  };
+
+  const getElectionHeatBarWidth = (value, total) => {
+    if (!value) {
+      return 0;
+    }
+
+    if (!total) {
+      return value > 0 ? 8 : 0;
+    }
+
+    return Math.max(6, Math.min(100, Math.round((value / total) * 100)));
+  };
+
+  const renderElectionHeat = (office) => {
+    if (!electionHeatGrid || !office) {
+      return;
+    }
+
+    const summary = getElectionOpinionOffice(office.id);
+    const candidates = Array.isArray(summary?.candidates) ? summary.candidates.slice(0, 4) : [];
+    const totalSignals = Number(summary?.totalComments || 0);
+
+    if (electionHeatTitle) {
+      electionHeatTitle.textContent = `Calor eleitoral para ${office.label}`;
+    }
+
+    if (electionHeatMeta) {
+      electionHeatMeta.textContent = totalSignals
+        ? `${totalSignals} observacao(oes) com leitura de humor e reeleicao percebida nesta faixa.`
+        : "As observacoes enviadas junto com o voto alimentam um termometro de favor, pressao ou neutralidade.";
+    }
+
+    if (!candidates.length) {
+      electionHeatGrid.innerHTML = `
+        <article class="election-heat-card is-empty">
+          <strong>Sem sinais suficientes ainda.</strong>
+          <p>Os proximos votos com observacoes vao mostrar aqui o clima local de cada nome.</p>
+        </article>
+      `;
+      return;
+    }
+
+    electionHeatGrid.innerHTML = candidates
+      .map((item) => {
+        const positiveCount = Number(item.positiveCount || 0);
+        const neutralCount = Number(item.neutralCount || 0);
+        const negativeCount = Number(item.negativeCount || 0);
+        const commentCount = Number(item.commentCount || 0);
+        const totalCount = Math.max(commentCount, positiveCount + neutralCount + negativeCount);
+        const moodLabel = item.moodLabel || "equilibrado";
+
+        return `
+          <article class="election-heat-card">
+            <div class="election-heat-card-header">
+              <strong>${escapeHtml(item.candidateName || "Nome em leitura")}</strong>
+              <span>${escapeHtml(item.candidateParty || office.label || "cargo")} • ${Number(item.totalVotes || 0)} voto(s)</span>
+            </div>
+            <span class="election-heat-mood ${getElectionMoodClass(moodLabel)}">${escapeHtml(moodLabel)}</span>
+            <div class="election-heat-bars">
+              <div class="election-heat-stat">
+                <div class="election-heat-stat-row">
+                  <span>positivo</span>
+                  <strong>${positiveCount}</strong>
+                </div>
+                <div class="election-heat-bar"><span class="is-positive" style="width:${getElectionHeatBarWidth(positiveCount, totalCount)}%"></span></div>
+              </div>
+              <div class="election-heat-stat">
+                <div class="election-heat-stat-row">
+                  <span>neutro</span>
+                  <strong>${neutralCount}</strong>
+                </div>
+                <div class="election-heat-bar"><span class="is-neutral" style="width:${getElectionHeatBarWidth(neutralCount, totalCount)}%"></span></div>
+              </div>
+              <div class="election-heat-stat">
+                <div class="election-heat-stat-row">
+                  <span>negativo</span>
+                  <strong>${negativeCount}</strong>
+                </div>
+                <div class="election-heat-bar"><span class="is-negative" style="width:${getElectionHeatBarWidth(negativeCount, totalCount)}%"></span></div>
+              </div>
+            </div>
+            <p class="election-heat-card-meta">
+              ${commentCount ? `${commentCount} comentario(s) local(is)` : "Ainda sem comentario qualitativo"}${item.topCity ? ` • cidade mais citada: ${escapeHtml(item.topCity)}` : ""}.
+            </p>
+          </article>
+        `;
+      })
+      .join("");
+  };
+
+  const ensureElectionVoteModal = () => {
+    if (electionVoteModal) {
+      if (electionVoteModal.dataset.voteModalBound === "1") {
+        return electionVoteModal;
+      }
+    } else {
+      electionVoteModal = document.querySelector("#electionVoteModal");
+    }
+
+    if (!electionVoteModal) {
+      const modal = document.createElement("section");
+      modal.id = "electionVoteModal";
+      modal.className = "election-vote-modal";
+      modal.hidden = true;
+      modal.innerHTML = `
+        <div class="election-vote-modal-backdrop" data-election-vote-close></div>
+        <article class="election-vote-dialog" role="dialog" aria-modal="true" aria-labelledby="electionVoteTitle">
+          <button class="election-vote-close" type="button" aria-label="Fechar coleta de voto" data-election-vote-close>&times;</button>
+          <p class="panel-label">Pesquisa local com contexto</p>
+          <h3 id="electionVoteTitle">Registrar voto com cidade</h3>
+          <p class="election-vote-lead" data-election-vote-lead>
+            Informe sua cidade. Nome, partido e observacao sao opcionais.
+          </p>
+          <form class="election-vote-form" novalidate>
+            <div class="election-vote-form-grid">
+              <label class="election-vote-field">
+                <span>Cidade</span>
+                <input type="text" name="city" maxlength="80" autocomplete="address-level2" required />
+              </label>
+              <label class="election-vote-field">
+                <span>Seu nome (opcional)</span>
+                <input type="text" name="voterName" maxlength="120" autocomplete="name" />
+              </label>
+              <label class="election-vote-field">
+                <span>Partido ou apoio (opcional)</span>
+                <input type="text" name="voterParty" maxlength="90" autocomplete="organization-title" />
+              </label>
+            </div>
+            <label class="election-vote-field full">
+              <span>Observacoes sobre o candidato</span>
+              <textarea name="comment" maxlength="420"></textarea>
+            </label>
+            <p class="election-vote-feedback" data-election-vote-feedback aria-live="polite"></p>
+            <div class="election-vote-actions">
+              <button class="outline-button" type="button" data-election-vote-close>Cancelar</button>
+              <button class="solid-button" type="submit" data-election-vote-submit>Confirmar voto</button>
+            </div>
+          </form>
+        </article>
+      `;
+      document.body.appendChild(modal);
+      electionVoteModal = modal;
+    }
+
+    const modal = electionVoteModal;
+    const closeModal = ({ reset = false } = {}) => {
+      modal.hidden = true;
+      document.body.classList.remove("election-vote-open");
+      modal.querySelector("[data-election-vote-confirm-panel]")?.setAttribute("hidden", "");
+      delete modal.dataset.confirmReady;
+      if (reset) {
+        modal.querySelector(".election-vote-form")?.reset();
+        setFeedbackState(
+          modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback"),
+          "",
+          ""
+        );
+      }
+      electionVoteModalState = null;
+    };
+
+    modal.__closeElectionVote = closeModal;
+
+    if (modal.dataset.voteModalBound === "1") {
+      return modal;
+    }
+
+    modal.dataset.voteModalBound = "1";
+    const confirmPanel = ensureElectionVoteConfirmPanel(modal);
+
+    const setConfirmPanelVisible = (visible, payload = {}) => {
+      if (!confirmPanel) {
+        return;
+      }
+
+      confirmPanel.hidden = !visible;
+      if (!visible) {
+        delete modal.dataset.confirmReady;
+        return;
+      }
+
+      modal.dataset.confirmReady = "1";
+      confirmPanel.querySelector("[data-election-vote-confirm-title]").textContent =
+        `Confirmar voto em ${payload.candidateName || "candidato"}?`;
+      confirmPanel.querySelector("[data-election-vote-confirm-text]").textContent =
+        `Você vai computar sua preferência para ${payload.officeLabel || "este cargo"} em ${payload.candidateName || "um nome"}${payload.city ? `, com cidade ${payload.city}` : ""}.`;
+    };
+
+    modal.addEventListener("click", (event) => {
+      if (
+        event.target === modal ||
+        event.target?.matches?.(".election-vote-modal-backdrop, [data-election-vote-close], [data-close-election-vote]")
+      ) {
+        setConfirmPanelVisible(false);
+        closeModal();
+      }
+    });
+
+    modal.querySelectorAll("[data-close-election-vote], [data-election-vote-close]").forEach((button) => {
+      button.addEventListener("click", () => {
+        setConfirmPanelVisible(false);
+        closeModal();
+      });
+    });
+
+    modal.querySelector(".election-vote-form")?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!electionVoteModalState) {
+        return;
+      }
+
+      const form = event.currentTarget;
+      const cityInput = form.elements.city || form.querySelector("[name='city']");
+      const nameInput = form.elements.voterName || form.elements.name || form.querySelector("[name='voterName'], [name='name']");
+      const partyInput = form.elements.voterParty || form.elements.party || form.querySelector("[name='voterParty'], [name='party']");
+      const commentInput = form.elements.comment || form.elements.observation || form.querySelector("[name='comment'], [name='observation']");
+      const city = String(cityInput?.value || "").trim();
+      const name = String(nameInput?.value || "").trim();
+      const party = String(partyInput?.value || "").trim();
+      const observation = String(commentInput?.value || "").trim();
+      const feedback = modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback");
+      const submitButton = modal.querySelector("[data-election-vote-submit], #electionVoteSubmitButton");
+
+      if (!city) {
+        setFeedbackState(feedback, "Informe a cidade para registrar o voto.", "is-error");
+        cityInput?.focus();
+        return;
+      }
+
+      const office = getElectionOffice(electionVoteModalState.officeId);
+      const candidate = office?.candidates?.find((item) => item.id === electionVoteModalState.candidateId);
+      const confirmationText = `Confirmar voto em ${candidate?.name || "este candidato"} para ${office?.label || "este cargo"}${city ? `, com cidade ${city}` : ""}?`;
+      if (typeof window.confirm === "function" && !window.confirm(confirmationText)) {
+        setFeedbackState(
+          feedback,
+          "Voto revisado. Você pode ajustar os dados antes de confirmar.",
+          ""
+        );
+        return;
+      }
+
+      confirmPanel?.querySelector("[data-election-vote-confirm-submit]")?.click();
+    });
+
+    confirmPanel?.querySelector("[data-election-vote-confirm-cancel]")?.addEventListener("click", () => {
+      setConfirmPanelVisible(false);
+      setFeedbackState(
+        modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback"),
+        "Você pode revisar a cidade e os detalhes antes de confirmar.",
+        ""
+      );
+    });
+
+    confirmPanel?.querySelector("[data-election-vote-confirm-submit]")?.addEventListener("click", async () => {
+      if (!electionVoteModalState) {
+        return;
+      }
+
+      const form = modal.querySelector(".election-vote-form");
+      const cityInput = form?.elements?.city || form?.querySelector?.("[name='city']");
+      const nameInput = form?.elements?.voterName || form?.elements?.name || form?.querySelector?.("[name='voterName'], [name='name']");
+      const partyInput = form?.elements?.voterParty || form?.elements?.party || form?.querySelector?.("[name='voterParty'], [name='party']");
+      const commentInput = form?.elements?.comment || form?.elements?.observation || form?.querySelector?.("[name='comment'], [name='observation']");
+      const city = String(cityInput?.value || "").trim();
+      const name = String(nameInput?.value || "").trim();
+      const party = String(partyInput?.value || "").trim();
+      const observation = String(commentInput?.value || "").trim();
+      const feedback = modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback");
+      const submitButton = modal.querySelector("[data-election-vote-submit], #electionVoteSubmitButton");
+      const confirmSubmitButton = confirmPanel.querySelector("[data-election-vote-confirm-submit]");
+      const office = getElectionOffice(electionVoteModalState.officeId);
+      const candidate = office?.candidates?.find((item) => item.id === electionVoteModalState.candidateId);
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Registrando...";
+      if (confirmSubmitButton) {
+        confirmSubmitButton.disabled = true;
+        confirmSubmitButton.textContent = "Computando...";
+      }
+      setFeedbackState(feedback, "", "");
+
+      try {
+        const submitResult = await submitElectionVote(electionVoteModalState.officeId, electionVoteModalState.candidateId, {
+          city,
+          name,
+          party,
+          observation
+        });
+        writeElectionVoterProfile({ city, name, party });
+        try {
+          localStorage.setItem("catalogo_user_city", city);
+          localStorage.setItem("catalogo_user_country", "Brasil");
+        } catch (_error) {
+          // segue sem bloquear o voto
+        }
+        writeElectionLastVote({
+          officeId: electionVoteModalState.officeId,
+          officeLabel: office?.label || "",
+          candidateId: electionVoteModalState.candidateId,
+          candidateName: candidate?.name || "",
+          city
+        });
+        activeElectionResultsOfficeId = electionVoteModalState.officeId;
+        renderElectionResultsOfficeButtons();
+        closeModal({ reset: true });
+        showElectionVoteSuccessModal({
+          officeLabel: office?.label || "",
+          candidateName: candidate?.name || "",
+          city
+        });
+        showElectionVoteToast(
+          submitResult?.localFallback
+            ? "Backend oscilando: voto salvo neste dispositivo e placar atualizado localmente."
+            : "Obrigado pela participacao. Acompanhe as parciais semanais e os graficos."
+        );
+      } catch (error) {
+        setFeedbackState(
+          feedback,
+          String(error?.message || "Nao foi possivel registrar o voto agora."),
+          "is-error"
+        );
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Confirmar voto";
+        if (confirmSubmitButton) {
+          confirmSubmitButton.disabled = false;
+          confirmSubmitButton.textContent = "Sim, confirmar voto";
+        }
+        setConfirmPanelVisible(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) {
+        closeModal();
+      }
+    });
+
+    return modal;
+  };
+
+  const openElectionVoteModal = (officeId, candidateId) => {
+    const office = getElectionOffice(officeId);
+    const candidate = office?.candidates?.find((item) => item.id === candidateId);
+    if (!office || !candidate) {
+      return;
+    }
+
+    const modal = ensureElectionVoteModal();
+    const form = modal.querySelector(".election-vote-form");
+    const profile = getElectionVoterProfile();
+    const lastVote = readElectionLastVote();
+
+    electionVoteModalState = {
+      officeId,
+      candidateId
+    };
+
+    modal.querySelector("#electionVoteTitle").textContent = `Votar em ${candidate.name}`;
+    modal.querySelector("[data-election-vote-lead], #electionVoteLead").textContent =
+      lastVote?.candidateName && lastVote?.officeLabel
+        ? `Seu ultimo voto salvo foi em ${lastVote.candidateName} para ${lastVote.officeLabel}. Agora o voto para ${office.label} pede cidade obrigatoria e confirmacao final neste dispositivo.`
+        : `Seu voto para ${office.label} pede cidade obrigatoria e confirmacao final. Cada dispositivo registra um voto por cargo a cada semana.`;
+
+    if (form) {
+      const cityInput = form.elements.city || form.querySelector("[name='city']");
+      const nameInput = form.elements.voterName || form.elements.name || form.querySelector("[name='voterName'], [name='name']");
+      const partyInput = form.elements.voterParty || form.elements.party || form.querySelector("[name='voterParty'], [name='party']");
+      const commentInput = form.elements.comment || form.elements.observation || form.querySelector("[name='comment'], [name='observation']");
+
+      if (cityInput) cityInput.value = profile.city || "";
+      if (nameInput) nameInput.value = profile.name || "";
+      if (partyInput) partyInput.value = profile.party || "";
+      if (commentInput) commentInput.value = "";
+    }
+
+    setFeedbackState(modal.querySelector("[data-election-vote-feedback], #electionVoteFeedback"), "", "");
+    modal.querySelector("[data-election-vote-confirm-panel]")?.setAttribute("hidden", "");
+    delete modal.dataset.confirmReady;
+    modal.hidden = false;
+    document.body.classList.add("election-vote-open");
+    const authCard = modal.querySelector("[data-google-auth-card]");
+    if (authCard) authCard.hidden = true;
+    window.setTimeout(() => {
+      const cityInput = form?.elements?.city || form?.querySelector?.("[name='city']");
+      cityInput?.focus();
+      cityInput?.select?.();
+    }, 20);
+  };
+
+  const ensureElectionVoteConfirmPanel = (modal) => {
+    if (!modal) {
+      return null;
+    }
+
+    let panel = modal.querySelector("[data-election-vote-confirm-panel]");
+    if (panel) {
+      return panel;
+    }
+
+    panel = document.createElement("section");
+    panel.className = "election-vote-confirm-panel";
+    panel.setAttribute("data-election-vote-confirm-panel", "");
+    panel.hidden = true;
+    panel.innerHTML = `
+      <div class="election-vote-confirm-copy">
+        <span class="panel-label">Confirmar voto</span>
+        <strong data-election-vote-confirm-title>Você confirma este voto?</strong>
+        <p data-election-vote-confirm-text>
+          Revise o cargo, o candidato e a cidade antes de confirmar.
+        </p>
+      </div>
+      <div class="election-vote-confirm-actions">
+        <button class="outline-button" type="button" data-election-vote-confirm-cancel>Revisar</button>
+        <button class="solid-button" type="button" data-election-vote-confirm-submit>Sim, confirmar voto</button>
+      </div>
+    `;
+
+    modal.querySelector(".election-vote-form")?.appendChild(panel);
+    return panel;
+  };
+
+  const renderElectionResultsOfficeButtons = () => {
+    if (!electionResultsOfficeButtons) {
+      return;
+    }
+
+    const selectedOfficeId = activeElectionResultsOfficeId || activeElectionOfficeId;
+    electionResultsOfficeButtons.innerHTML = electionOffices
+      .map(
+        (office) => `
+          <button
+            class="election-office-button${selectedOfficeId === office.id ? " active" : ""}"
+            type="button"
+            data-election-results-office="${escapeHtml(office.id)}"
+          >
+            Preferência para ${escapeHtml(office.label)}
+          </button>
+        `
+      )
+      .join("");
+  };
+
+  window.openElectionVoteModal = openElectionVoteModal;
+
+  const hydrateElectionVotes = async () => {
+    try {
+      const voterId = getElectionVoterId();
+      const payload = await requestApiJson(
+        `/api/elections/votes?voterId=${encodeURIComponent(voterId)}`,
+        { method: "GET" }
+      );
+      remoteElectionVotes = payload.votes || {};
+      remoteElectionUserVotes = payload.userVotes || {};
+      remoteElectionOpinionSummary = payload.opinionSummary || {};
+      remoteElectionWeeklyTrend = payload.weeklyTrend || [];
+      writeElectionStorage(electionVotesKey, remoteElectionVotes);
+      writeElectionStorage(electionUserVotesKey, remoteElectionUserVotes);
+      writeElectionStorage(electionOpinionSummaryKey, remoteElectionOpinionSummary);
+      renderElectionOffice(activeElectionOfficeId);
+    } catch (_error) {
+      // Mantem a votação local se o backend não estiver disponível.
+    }
+  };
+
+  const submitElectionVote = async (officeId, candidateId, voterMeta = {}) => {
+    const userVotes = getElectionUserVotes();
+    const city = String(voterMeta.city || "").trim();
+
+    if (userVotes[officeId]) {
+      renderElectionOffice(officeId);
+      return { ok: true, alreadyVoted: true, localOnly: true };
+    }
+
+    if (!city) {
+      throw new Error("Informe a cidade para registrar o voto.");
+    }
+
+    try {
+      const payload = await requestApiJson("/api/elections/votes", {
+        method: "POST",
+        body: JSON.stringify({
+          officeId,
+          candidateId,
+          voterId: getElectionVoterId(),
+          city,
+          name: String(voterMeta.name || "").trim(),
+          party: String(voterMeta.party || "").trim(),
+          observation: String(voterMeta.observation || "").trim()
+        })
+      });
+      remoteElectionVotes = payload.votes || {};
+      remoteElectionUserVotes = payload.userVotes || {};
+      remoteElectionOpinionSummary = payload.opinionSummary || {};
+      remoteElectionWeeklyTrend = payload.weeklyTrend || [];
+      writeElectionStorage(electionVotesKey, remoteElectionVotes);
+      writeElectionStorage(electionUserVotesKey, remoteElectionUserVotes);
+      writeElectionStorage(electionOpinionSummaryKey, remoteElectionOpinionSummary);
+      window.dispatchEvent(
+        new CustomEvent("catalogo:election-vote-updated", {
+          detail: { officeId, candidateId }
+        })
+      );
+      renderElectionOffice(officeId);
+      return;
+    } catch (error) {
+      applyLocalElectionVoteFallback(officeId, candidateId, voterMeta);
+      return {
+        ok: true,
+        alreadyVoted: false,
+        localFallback: true,
+        message: String(
+          error?.message ||
+            "O backend oscilou, mas o voto foi salvo localmente neste dispositivo."
+        )
+      };
+    }
+  };
+
+  const getCandidateInitials = (name = "") =>
+    String(name)
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0])
+      .join("")
+      .toUpperCase() || "?";
+
+  const candidatePhotoResolveCache = new Map();
+
+  const resolveCandidatePhoto = async (candidate = {}) => {
+    const directCandidates = [];
+    [candidate.imageUrl, candidate.photoUrl, candidate.avatarUrl].forEach((value) => {
+      buildImageLoadCandidates(value).forEach((imageCandidate) =>
+        pushUniqueImageCandidate(directCandidates, imageCandidate)
+      );
+    });
+
+    if (directCandidates.length) {
+      const directPhoto = await preloadFirstAvailableImage(directCandidates);
+      if (directPhoto) {
+        return directPhoto;
+      }
+    }
+
+    const sourceUrl = String(candidate.sourceUrl || candidate.imageSourceUrl || "").trim();
+    if (!sourceUrl || sourceUrl === "#") {
+      return "";
+    }
+
+    if (!candidatePhotoResolveCache.has(sourceUrl)) {
+      candidatePhotoResolveCache.set(
+        sourceUrl,
+        requestApiJson(`/api/preview-image?url=${encodeURIComponent(sourceUrl)}`, {
+          method: "GET"
+        })
+          .then((payload) =>
+            preloadFirstAvailableImage(buildImageLoadCandidates(payload?.imageUrl || ""))
+          )
+          .catch(() => "")
+      );
+    }
+
+    return candidatePhotoResolveCache.get(sourceUrl) || "";
+  };
+
+  const applyCandidatePhoto = (avatarNode, candidate = {}) => {
+    if (!avatarNode) {
+      return;
+    }
+
+    resolveCandidatePhoto(candidate).then((photoUrl) => {
+      if (!photoUrl) {
+        return;
+      }
+
+      avatarNode.style.setProperty("--candidate-photo", `url('${photoUrl}')`);
+      avatarNode.classList.add("has-photo");
+    });
+  };
+
+  const buildCandidatePortalUrl = (officeId, candidateId) =>
+    `./candidato.html?office=${encodeURIComponent(officeId)}&candidate=${encodeURIComponent(candidateId)}`;
+
+  const buildCandidateCard = (office, candidate) => {
+    const card = document.createElement("article");
+    const votedCandidateId = getUserOfficeVote(office.id);
+    const hasVoteInOffice = Boolean(votedCandidateId);
+    const isSelected = votedCandidateId === candidate.id;
+    const initial = getCandidateInitials(candidate.name);
+    const summary =
+      candidate.historySummary ||
+      candidate.summary ||
+      "Nome monitorado na cobertura politica do Catalogo CZS.";
+    const currentPosition = String(candidate.currentPosition || "").trim();
+    const politicalPosition = String(
+      candidate.politicalPositionShort || candidate.politicalPosition || ""
+    ).trim();
+    const scoreTotal = Number(candidate.score?.total || 0);
+    const voteStatusText = isSelected
+      ? "Seu voto para este cargo ja foi confirmado nesta semana."
+      : hasVoteInOffice
+        ? "Este dispositivo ja usou o voto semanal neste cargo."
+        : "Cada dispositivo pode registrar um voto por cargo a cada semana.";
+    const highlights = Array.isArray(candidate.achievements) && candidate.achievements.length
+      ? candidate.achievements.slice(0, 3)
+      : Array.isArray(candidate.proposals) && candidate.proposals.length
+        ? candidate.proposals.slice(0, 3)
+        : ["Perfil em atualização"];
+
+    card.className = "candidate-card news-card reveal active";
+    card.dataset.office = office.id;
+    card.dataset.candidate = candidate.id;
+
+    card.innerHTML = `
+      <header class="candidate-header">
+        <div class="candidate-avatar">${initial}</div>
+        <div>
+          <span class="candidate-office">${office.badge || office.label}</span>
+          <h3>${candidate.name}</h3>
+          <p class="candidate-party">${candidate.party || "partido em atualização"} • ${candidate.role || office.label}</p>
+        </div>
+      </header>
+      <p class="candidate-summary">${escapeHtml(summary)}</p>
+      ${currentPosition ? `<p class="candidate-status">${escapeHtml(currentPosition)}</p>` : ""}
+      <div class="candidate-meta-chips">
+        ${politicalPosition ? `<span>${escapeHtml(politicalPosition)}</span>` : ""}
+        ${scoreTotal ? `<span>Pontuação editorial ${escapeHtml(String(scoreTotal))}</span>` : ""}
+      </div>
+      <div class="candidate-propostas">
+        <h4>Realizações e focos</h4>
+        <ul>
+          ${highlights.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+      </div>
+      <footer class="candidate-vote-footer">
+        <a class="candidate-portal-link" href="${buildCandidatePortalUrl(office.id, candidate.id)}">
+          Ver histórico e pontuação
+        </a>
+        <button
+          class="chip-button vote-button${isSelected ? " voted" : ""}"
+          type="button"
+          data-office="${office.id}"
+          data-candidate="${candidate.id}"
+          ${hasVoteInOffice ? "disabled" : ""}
+        >
+          ${isSelected ? "Voto registrado" : hasVoteInOffice ? "Voto já usado neste cargo" : "Votar neste dispositivo"}
+        </button>
+        <p class="candidate-vote-status${isSelected ? " is-success" : hasVoteInOffice ? " is-locked" : ""}">
+          ${escapeHtml(voteStatusText)}
+        </p>
+      </footer>
+    `;
+
+    applyCandidatePhoto(card.querySelector(".candidate-avatar"), candidate);
+
+    return card;
+  };
+
+  const renderElectionResults = (office) => {
+    if (!electionResultsBars) {
+      return;
+    }
+
+    const officeVotes = getOfficeVotes(office.id);
+    const totalVotes = (office.candidates || []).reduce(
+      (sum, candidate) => sum + Number(officeVotes[candidate.id] || 0),
+      0
+    );
+    const selectedCandidateId = getUserOfficeVote(office.id);
+    activeElectionResultsOfficeId = office.id;
+    renderElectionResultsOfficeButtons();
+
+    if (electionResultsTitle) {
+      electionResultsTitle.textContent = `Preferência para ${office.label}`;
+    }
+
+    if (electionResultsMeta) {
+      const currentWeek = getElectionWeeklyTrend()[getElectionWeeklyTrend().length - 1] || null;
+      const currentWeekTotal = Number(currentWeek?.totalVotes || currentWeek?.total || 0);
+      electionResultsMeta.textContent = selectedCandidateId
+        ? `Seu voto neste cargo ja foi registrado nesta semana. Total atual: ${totalVotes} voto${totalVotes === 1 ? "" : "s"}${currentWeekTotal ? ` • semana corrente: ${currentWeekTotal}` : ""}. Para trocar de nome, so na proxima rodada semanal deste dispositivo.`
+        : `Escolha uma opcao para ${office.label}. A cidade e obrigatoria; nome, partido e observacao continuam opcionais. O bloqueio de voto vale por semana neste dispositivo.`;
+    }
+
+    electionResultsBars.innerHTML = "";
+
+    (office.candidates || []).forEach((candidate) => {
+      const votes = Number(officeVotes[candidate.id] || 0);
+      const percentage = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+      const item = document.createElement("div");
+      item.className = `result-item${selectedCandidateId === candidate.id ? " is-user-choice" : ""}`;
+      item.innerHTML = `
+        <span>${candidate.name} (${candidate.party || "partido em atualização"})</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${Math.max(percentage, votes > 0 ? 3 : 0)}%"></div>
+        </div>
+        <strong>${percentage}% <small>${votes} voto${votes === 1 ? "" : "s"}</small></strong>
+      `;
+      electionResultsBars.appendChild(item);
+    });
+
+    if (electionDisclaimer) {
+      electionDisclaimer.innerHTML = `<strong>Aviso:</strong> Esta e uma enquete informal de leitores, sem amostragem cientifica e sem valor de pesquisa registrada. A cidade e obrigatoria no voto, e as observacoes ajudam a mapear sinais positivos, negativos e de reeleicao. ${escapeHtml(window.ELECTIONS_DATA.sourceNote || "")}`;
+    }
+
+    renderElectionHeat(office);
+  };
+
+  const renderElectionOffice = (officeId = activeElectionOfficeId) => {
+    const office = getElectionOffice(officeId);
+
+    if (!electionGrid || !office) {
+      return;
+    }
+
+    activeElectionOfficeId = office.id;
+    electionFilters.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.office === office.id);
+    });
+
+    electionGrid.innerHTML = "";
+
+    if (!office.candidates?.length) {
+      const empty = document.createElement("div");
+      empty.className = "feed-empty";
+      empty.textContent = "Ainda não há nomes cadastrados para este cargo.";
+      electionGrid.appendChild(empty);
+      renderElectionResults({ ...office, candidates: [] });
+      return;
+    }
+
+    office.candidates.forEach((candidate) => {
+      electionGrid.appendChild(buildCandidateCard(office, candidate));
+    });
+
+    renderElectionResults(getElectionResultsOffice(activeElectionResultsOfficeId || office.id));
+    registerInteractivePanels(electionGrid);
+  };
+
+  electionFilters.forEach((button) => {
+    button.addEventListener("click", () => {
+      renderElectionOffice(button.dataset.office);
+    });
+  });
+
+  electionGrid?.addEventListener("click", (event) => {
+    const button = event.target instanceof Element ? event.target.closest(".vote-button[data-office][data-candidate]") : null;
+    if (!button || button.disabled) {
+      return;
+    }
+
+    const officeId = button.dataset.office;
+    const candidateId = button.dataset.candidate;
+    openElectionVoteModal(officeId, candidateId);
+  });
+
+  electionResultsOfficeButtons?.addEventListener("click", (event) => {
+    const button =
+      event.target instanceof Element
+        ? event.target.closest("[data-election-results-office]")
+        : null;
+    const officeId = String(button?.getAttribute("data-election-results-office") || "").trim();
+    if (!officeId) {
+      return;
+    }
+
+    activeElectionResultsOfficeId = officeId;
+    renderElectionResults(getElectionResultsOffice(officeId));
+  });
+
+  staticElectionVoteButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const officeId = String(button.dataset.staticVote || "").trim();
+      const candidateId = String(button.dataset.staticCandidate || "").trim();
+      if (!officeId || !candidateId) {
+        return;
+      }
+      openElectionVoteModal(officeId, candidateId);
+    });
+  });
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === electionVotesKey || event.key === electionUserVotesKey) {
+      renderElectionOffice(activeElectionOfficeId);
+    }
+  });
+
+    renderElectionOffice(activeElectionOfficeId);
+    hydrateElectionVotes();
+    }
+  }
+
+const buildAgentWhatsappUrl = ({ name = "", email = "", subject = "", message = "" }) => {
+  const lines = ["Olá, segue uma mensagem enviada pelo Catalogo Cruzeiro do Sul.", ""];
+
+  if (name) {
+    lines.push(`Nome: ${name}`);
+  }
+
+  if (email) {
+    lines.push(`E-mail: ${email}`);
+  }
+
+  lines.push("", message, "", "Enviado pelo formulario Fale com a equipe.");
+
+  if (subject) {
+    lines.splice(1, 0, `Assunto: ${subject}`);
+  }
+
+  return `https://wa.me/${portalWhatsappNumber}?text=${encodeURIComponent(lines.join("\n"))}`;
+};
+
+const openAgentMailModal = (prefillMessage = "", prefillSubject = "") => {
+  if (!agentMailModal) {
+    return;
+  }
+
+  agentMailModal.hidden = false;
+  document.body.classList.add("agent-mail-open");
+
+  if (prefillMessage && agentMailMessageInput && !agentMailMessageInput.value.trim()) {
+    agentMailMessageInput.value = prefillMessage;
+  }
+
+  if (prefillSubject && agentMailSubjectInput && !agentMailSubjectInput.value.trim()) {
+    agentMailSubjectInput.value = prefillSubject;
+  }
+
+  setFeedbackState(agentMailFeedback, "", "");
+  window.setTimeout(() => {
+    agentMailMessageInput?.focus();
+  }, 20);
+};
+
+const closeAgentMailModal = ({ reset = false } = {}) => {
+  if (!agentMailModal) {
+    return;
+  }
+
+  agentMailModal.hidden = true;
+  document.body.classList.remove("agent-mail-open");
+
+  if (reset) {
+    agentMailForm?.reset();
+    setFeedbackState(agentMailFeedback, "", "");
+  }
+};
+
+const attachAgentMailFlow = () => {
+  if (!agentMailModal || !agentMailForm || !agentMailMessageInput) {
+    return;
+  }
+
+  document.querySelectorAll("[data-open-agent-mail]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const shouldUseFooterDraft = button === footerChatSend;
+      const prefillMessage = shouldUseFooterDraft
+        ? String(footerChatInput?.value || "").trim()
+        : String(button.dataset.agentMessage || "").trim();
+      const prefillSubject = String(button.dataset.agentSubject || "").trim();
+      openAgentMailModal(prefillMessage, prefillSubject);
+    });
+  });
+
+  document.querySelectorAll("[data-close-agent-mail]").forEach((button) => {
+    button.addEventListener("click", () => closeAgentMailModal());
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !agentMailModal.hidden) {
+      closeAgentMailModal();
+    }
+  });
+
+  agentMailForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const name = String(agentMailNameInput?.value || "").trim();
+    const email = String(agentMailEmailInput?.value || "").trim();
+    const subject =
+      String(agentMailSubjectInput?.value || "").trim() || "Contato pelo Catalogo Cruzeiro do Sul";
+    const message = String(agentMailMessageInput?.value || "").trim();
+
+    if (message.length < 5) {
+      setFeedbackState(agentMailFeedback, "Escreva uma mensagem com pelo menos 5 caracteres.", "is-error");
+      agentMailMessageInput.focus();
+      return;
+    }
+
+    setFeedbackState(agentMailFeedback, "Preparando a mensagem no WhatsApp...", "");
+
+    try {
+      await requestApiJson("/api/agent-messages", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+          recipient: `WhatsApp ${portalWhatsappNumber}`
+        })
+      });
+    } catch (_error) {
+      // Mesmo sem backend, o WhatsApp continua como caminho principal.
+    }
+
+    window.location.href = buildAgentWhatsappUrl({ name, email, subject, message });
+    setFeedbackState(
+      agentMailFeedback,
+      "Mensagem pronta no WhatsApp. Confirme o envio para 68 99226-9296.",
+      "is-success"
+    );
+  });
+};
 
 const buildFeedCard = (article) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
   const card = document.createElement("article");
   const thumb = document.createElement("a");
   const chip = document.createElement("span");
@@ -556,25 +8307,30 @@ const buildFeedCard = (article) => {
   const link = document.createElement("a");
 
   card.className = "news-card generated-feed-card reveal active";
-  card.dataset.category = normalizeText(article.category);
+  card.dataset.category = normalizeText(normalizedArticle.category);
 
-  thumb.className = `news-thumb ${article.previewClass}`;
-  thumb.href = `./noticia.html?slug=${article.slug}`;
-  thumb.setAttribute("aria-label", `Abrir notícia ${article.title}`);
-  thumb.dataset.topic = article.category;
+  const href = buildArticleHref(normalizedArticle);
 
-  chip.textContent = article.category;
+  thumb.className = `news-thumb ${normalizedArticle.previewClass}`;
+  thumb.href = href;
+  thumb.setAttribute("aria-label", `Abrir noticia ${normalizedArticle.title}`);
+  thumb.dataset.topic = normalizedArticle.category;
+  applyThumbImage(thumb, normalizedArticle);
+  applyArticleLinkAttrs(thumb, href);
+
+  chip.textContent = normalizedArticle.category;
   thumb.append(chip);
 
   source.className = "news-source";
-  source.textContent = `${article.sourceName} • ${article.date}`;
+  source.textContent = `${normalizedArticle.sourceName} • ${normalizedArticle.date}`;
 
-  title.textContent = article.title;
-  summary.textContent = article.lede;
+  title.textContent = normalizedArticle.title;
+  summary.textContent = normalizedArticle.lede;
 
-  category.textContent = `Fonte consultada: ${article.sourceName}`;
-  link.href = `./noticia.html?slug=${article.slug}`;
+  category.textContent = `Fonte consultada: ${normalizedArticle.sourceName}`;
+  link.href = href;
   link.textContent = "ler análise";
+  applyArticleLinkAttrs(link, href);
 
   footer.append(category, link);
   card.append(thumb, source, title, summary, footer);
@@ -582,12 +8338,8 @@ const buildFeedCard = (article) => {
   return card;
 };
 
-// Inicializar Radar apenas depois que as dependências do card estiverem prontas.
-renderRadar();
-
-const getFilteredLiveFeedArticles = () => {
-  const query = normalizeText(liveFeedQuery?.value || "");
-  const sortedArticles = [...liveFeedState.items].sort((left, right) => {
+const getSortedLiveFeedArticles = (items = []) =>
+  [...items].sort((left, right) => {
     const rightDate = Date.parse(right.publishedAt || "") || parseArticleDate(right.date);
     const leftDate = Date.parse(left.publishedAt || "") || parseArticleDate(left.date);
 
@@ -595,27 +8347,279 @@ const getFilteredLiveFeedArticles = () => {
       return rightDate - leftDate;
     }
 
-    return left.title.localeCompare(right.title, "pt-BR");
+    return String(left.title || "").localeCompare(String(right.title || ""), "pt-BR");
   });
 
-  return sortedArticles.filter((article) => {
-    if (!query) {
-      return true;
+const getLiveFeedSearchTerms = (query = "") =>
+  [...new Set(normalizeText(query).split(/\s+/).filter(Boolean))];
+
+const getLiveFeedQueryScore = (article, query = "") => {
+  const normalizedQuery = normalizeText(query);
+  if (!normalizedQuery) {
+    return 0;
+  }
+
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const title = normalizeText(normalizedArticle.title);
+  const lede = normalizeText(normalizedArticle.lede);
+  const category = normalizeText(normalizedArticle.category);
+  const sourceName = normalizeText(normalizedArticle.sourceName);
+  const sourceLabel = normalizeText(normalizedArticle.sourceLabel);
+  const haystack = normalizeText([title, lede, category, sourceName, sourceLabel].join(" "));
+  const terms = getLiveFeedSearchTerms(normalizedQuery);
+
+  let score = 0;
+  let matchedTerms = 0;
+
+  if (title === normalizedQuery) score += 260;
+  if (title.includes(normalizedQuery)) score += 140;
+  if (sourceLabel.includes(normalizedQuery)) score += 84;
+  if (category === normalizedQuery) score += 72;
+  if (category.includes(normalizedQuery)) score += 34;
+  if (sourceName.includes(normalizedQuery)) score += 28;
+  if (lede.includes(normalizedQuery)) score += 40;
+  if (haystack.includes(normalizedQuery)) score += 18;
+
+  terms.forEach((term) => {
+    let matched = false;
+
+    if (title.includes(term)) {
+      score += 42;
+      matched = true;
     }
 
-    const haystack = normalizeText(
-      [
-        article.title,
-        article.lede,
-        article.category,
-        article.eyebrow,
-        article.sourceName,
-        article.sourceLabel
-      ].join(" ")
-    );
+    if (sourceLabel.includes(term)) {
+      score += 22;
+      matched = true;
+    }
 
-    return haystack.includes(query);
+    if (category.includes(term)) {
+      score += 18;
+      matched = true;
+    }
+
+    if (sourceName.includes(term)) {
+      score += 14;
+      matched = true;
+    }
+
+    if (lede.includes(term)) {
+      score += 12;
+      matched = true;
+    }
+
+    if (matched || haystack.includes(term)) {
+      matchedTerms += 1;
+    }
   });
+
+  if (matchedTerms === terms.length && terms.length > 1) {
+    score += 56;
+  } else if (matchedTerms > 0) {
+    score += matchedTerms * 8;
+  }
+
+  return score;
+};
+
+const getLiveFeedFilterOptions = (items = []) => {
+  const categoryMap = new Map();
+
+  items.forEach((article) => {
+    const normalizedArticle = normalizeRuntimeArticle(article);
+    const key = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+
+    if (!key) {
+      return;
+    }
+
+    const current = categoryMap.get(key) || {
+      key,
+      label: normalizedArticle.category,
+      count: 0
+    };
+
+    current.count += 1;
+    categoryMap.set(key, current);
+  });
+
+  const sortedCategories = [...categoryMap.values()]
+    .sort((left, right) => right.count - left.count || left.label.localeCompare(right.label, "pt-BR"))
+    .slice(0, 7);
+
+  return [
+    {
+      key: "",
+      label: "Tudo",
+      count: items.length
+    },
+    ...sortedCategories
+  ];
+};
+
+const getLiveFeedActiveFilterLabel = () => {
+  if (!liveFeedState.activeCategory) {
+    return "";
+  }
+
+  return (
+    getLiveFeedFilterOptions(liveFeedState.items).find(
+      (option) => option.key === liveFeedState.activeCategory
+    )?.label ||
+    radarGuideThemes[liveFeedState.activeCategory]?.label ||
+    liveFeedState.activeCategory
+  );
+};
+
+const getLiveFeedDominantCategory = (items = []) =>
+  getLiveFeedFilterOptions(items).find((option) => option.key)?.label || "Arquivo geral";
+
+const getLiveFeedLatestDate = (items = []) => {
+  const latestArticle = getSortedLiveFeedArticles(items)[0];
+  return latestArticle ? normalizeRuntimeArticle(latestArticle).date : "--";
+};
+
+const getLiveFeedSourceCount = (items = []) =>
+  new Set(items.map((article) => normalizeRuntimeArticle(article).sourceName).filter(Boolean)).size;
+
+const renderLiveFeedFilters = () => {
+  if (!liveFeedFilters) {
+    return;
+  }
+
+  const filterOptions = getLiveFeedFilterOptions(liveFeedState.items);
+  liveFeedFilters.innerHTML = "";
+
+  filterOptions.forEach((option) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `feed-filter-chip${option.key === liveFeedState.activeCategory ? " is-active" : ""}`;
+    button.dataset.category = option.key;
+    button.textContent = option.label;
+    button.setAttribute("aria-label", `${option.label}: ${option.count} notícia${option.count === 1 ? "" : "s"}`);
+    button.addEventListener("click", () => {
+      if (liveFeedState.activeCategory === option.key) {
+        return;
+      }
+
+      liveFeedState.activeCategory = option.key;
+      liveFeedState.visibleItems = liveFeedState.pageSize;
+      renderLiveFeedFilters();
+      renderLiveFeed();
+    });
+    liveFeedFilters.appendChild(button);
+  });
+};
+
+const getFilteredLiveFeedArticles = () => {
+  const query = String(liveFeedQuery?.value || "").trim();
+  const normalizedQuery = normalizeText(query);
+  const sortedArticles = getSortedLiveFeedArticles(liveFeedState.items);
+  const categoryFiltered = sortedArticles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      if (
+        liveFeedState.activeCategory &&
+        !articleMatchesCategoryFilter(article, liveFeedState.activeCategory)
+      ) {
+        return false;
+      }
+
+      return true;
+    });
+
+  if (!normalizedQuery) {
+    return categoryFiltered;
+  }
+
+  return categoryFiltered
+    .map((article) => ({
+      article,
+      score: getLiveFeedQueryScore(article, normalizedQuery)
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score;
+      }
+
+      const rightDate = Date.parse(right.article.publishedAt || "") || parseArticleDate(right.article.date);
+      const leftDate = Date.parse(left.article.publishedAt || "") || parseArticleDate(left.article.date);
+
+      if (rightDate !== leftDate) {
+        return rightDate - leftDate;
+      }
+
+      return String(left.article.title || "").localeCompare(String(right.article.title || ""), "pt-BR");
+    })
+    .map((entry) => entry.article);
+};
+
+const updateLiveFeedSummary = (filtered, visibleSlice) => {
+  const totalItems = liveFeedState.items.length;
+  const queryText = String(liveFeedQuery?.value || "").trim();
+  const activeFilterLabel = getLiveFeedActiveFilterLabel();
+  const summarySource = filtered.length > 0 ? filtered : liveFeedState.items;
+  const activeContext = [activeFilterLabel, queryText ? `busca "${queryText}"` : ""].filter(Boolean);
+
+  if (liveFeedCount) {
+    liveFeedCount.textContent = String(filtered.length);
+  }
+
+  if (liveFeedCountLabel) {
+    liveFeedCountLabel.textContent =
+      activeContext.length > 0 ? "notícias no recorte atual" : "notícias verificadas na base";
+  }
+
+  if (liveFeedTotal) {
+    liveFeedTotal.textContent = `Base local: ${totalItems} notícias verificadas`;
+  }
+
+  if (liveFeedUpdated) {
+    liveFeedUpdated.textContent = getLiveFeedLatestDate(summarySource);
+  }
+
+  if (liveFeedFocus) {
+    liveFeedFocus.textContent = getLiveFeedDominantCategory(summarySource);
+  }
+
+  if (liveFeedSources) {
+    const sourceCount = getLiveFeedSourceCount(summarySource);
+    liveFeedSources.textContent = `${sourceCount} ${sourceCount === 1 ? "fonte" : "fontes"}`;
+  }
+
+  if (liveFeedClear) {
+    liveFeedClear.hidden = activeContext.length === 0;
+  }
+
+  if (!liveFeedStatus) {
+    return;
+  }
+
+  if (filtered.length === 0) {
+    liveFeedStatus.textContent =
+      activeContext.length > 0
+        ? `Nenhuma notícia bateu com ${activeContext.join(" e ")}. Limpe o filtro ou tente outro termo.`
+        : "A base está pronta, mas nenhuma notícia entrou no recorte atual.";
+    return;
+  }
+
+  if (activeContext.length > 0) {
+    const loadedText =
+      visibleSlice.length < filtered.length
+        ? ` Mostrando ${visibleSlice.length} de ${filtered.length} agora.`
+        : ` ${filtered.length} notícia${filtered.length === 1 ? "" : "s"} encontrada${filtered.length === 1 ? "" : "s"}.`;
+
+    liveFeedStatus.textContent = `Recorte ativo por ${activeContext.join(" e ")}.${loadedText}`;
+    return;
+  }
+
+  if (visibleSlice.length < filtered.length) {
+    liveFeedStatus.textContent = `Arquivo vivo pronto: ${filtered.length} notícias verificadas na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
+    return;
+  }
+
+  liveFeedStatus.textContent = `Arquivo vivo com ${filtered.length} notícias verificadas. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e editorias.`;
 };
 
 const renderLiveFeed = () => {
@@ -627,13 +8631,13 @@ const renderLiveFeed = () => {
   const visibleSlice = filtered.slice(0, liveFeedState.visibleItems);
 
   liveFeedGrid.innerHTML = "";
-  liveFeedCount.textContent = String(filtered.length);
+  updateLiveFeedSummary(filtered, visibleSlice);
 
   if (filtered.length === 0) {
     const empty = document.createElement("div");
     empty.className = "feed-empty";
     empty.textContent =
-      "Nenhuma pauta encontrada com esse termo. Tente buscar por tema, órgão ou bairro.";
+      "Nenhuma notícia encontrada com esse termo. Tente buscar por tema, órgão ou bairro.";
     liveFeedGrid.appendChild(empty);
     liveFeedMore.hidden = true;
     return;
@@ -645,19 +8649,215 @@ const renderLiveFeed = () => {
 
   liveFeedMore.hidden = visibleSlice.length >= filtered.length;
   registerInteractivePanels(liveFeedGrid);
+  registerArticleCardLinks(liveFeedGrid);
 };
 
-const updateLiveFeedItems = (items = []) => {
-  liveFeedState.items = [...items];
+const closeLiveFeedSuggestions = () => {
+  if (!liveFeedSuggestions || !liveFeedQuery) {
+    return;
+  }
+
+  liveFeedSuggestions.hidden = true;
+  liveFeedQuery.setAttribute("aria-expanded", "false");
+};
+
+const getLiveFeedSuggestionArticles = () => {
+  if (!liveFeedQuery) {
+    return [];
+  }
+
+  const query = normalizeText(liveFeedQuery.value);
+  const categoryFiltered = getSortedLiveFeedArticles(liveFeedState.items)
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => {
+      if (!liveFeedState.activeCategory) {
+        return true;
+      }
+
+      return articleMatchesCategoryFilter(article, liveFeedState.activeCategory);
+    });
+
+  if (!query) {
+    return categoryFiltered;
+  }
+
+  return categoryFiltered
+    .map((article) => ({
+      article,
+      score: getLiveFeedQueryScore(article, query)
+    }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => {
+      if (right.score !== left.score) {
+        return right.score - left.score;
+      }
+
+      return getArticleSortTimestamp(right.article) - getArticleSortTimestamp(left.article);
+    })
+    .map((entry) => entry.article);
+};
+
+const renderLiveFeedSuggestions = () => {
+  if (!liveFeedSuggestions || !liveFeedQuery) {
+    return;
+  }
+
+  if (document.activeElement !== liveFeedQuery) {
+    closeLiveFeedSuggestions();
+    return;
+  }
+
+  const matches = getLiveFeedSuggestionArticles();
+  liveFeedSuggestions.innerHTML = "";
+
+  if (!matches.length) {
+    closeLiveFeedSuggestions();
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  matches.forEach((article) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "feed-suggestion-button is-article";
+    button.setAttribute("role", "option");
+    button.dataset.slug = article.slug || "";
+
+    const title = document.createElement("strong");
+    title.textContent = article.title;
+
+    const meta = document.createElement("small");
+    meta.textContent = `${article.sourceName} • ${article.date} • ${article.category}`;
+
+    button.append(title, meta);
+    fragment.appendChild(button);
+  });
+
+  liveFeedSuggestions.appendChild(fragment);
+  liveFeedSuggestions.hidden = false;
+  liveFeedQuery.setAttribute("aria-expanded", "true");
+};
+
+const attachLiveFeedAutocomplete = () => {
+  if (!liveFeedSuggestions || !liveFeedQuery || liveFeedSuggestions.dataset.bound === "true") {
+    return;
+  }
+
+  liveFeedSuggestions.dataset.bound = "true";
+  liveFeedQuery.setAttribute("autocomplete", "off");
+  liveFeedQuery.setAttribute("aria-controls", "arquivo-noticias-sugestoes");
+  liveFeedQuery.setAttribute("aria-expanded", "false");
+
+  liveFeedQuery.addEventListener("focus", renderLiveFeedSuggestions);
+  liveFeedQuery.addEventListener("click", renderLiveFeedSuggestions);
+  liveFeedQuery.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeLiveFeedSuggestions();
+    }
+  });
+
+  liveFeedSuggestions.addEventListener("mousedown", (event) => {
+    const button = event.target.closest(".feed-suggestion-button");
+    if (!button) {
+      return;
+    }
+
+    event.preventDefault();
+    const slug = button.dataset.slug || "";
+    const article = slug ? window.NEWS_MAP?.[slug] : null;
+    const nextValue = article?.title || button.querySelector("strong")?.textContent || "";
+
+    liveFeedQuery.value = nextValue;
+    liveFeedState.visibleItems = liveFeedState.pageSize;
+    renderLiveFeed();
+    closeLiveFeedSuggestions();
+    liveFeedQuery.focus();
+  });
+
+  document.addEventListener("mousedown", (event) => {
+    if (event.target === liveFeedQuery || liveFeedSuggestions.contains(event.target)) {
+      return;
+    }
+
+    closeLiveFeedSuggestions();
+  });
+};
+
+const scrollToLiveFeed = () => {
+  const target = document.querySelector("#arquivo-vivo") || liveFeedGrid;
+
+  if (!target) {
+    return;
+  }
+
+  target.scrollIntoView({
+    behavior: splashMotionQuery.matches ? "auto" : "smooth",
+    block: "start"
+  });
+};
+
+const applyLiveFeedCategoryFilter = (filter = "todos", { scroll = false } = {}) => {
+  if (!liveFeedGrid || !liveFeedQuery || !liveFeedMore || !liveFeedCount) {
+    return;
+  }
+
+  const normalizedFilter = normalizeText(filter);
+  liveFeedState.activeCategory = normalizedFilter === "todos" ? "" : normalizedFilter;
   liveFeedState.visibleItems = liveFeedState.pageSize;
+  liveFeedQuery.value = "";
+
+  renderLiveFeedFilters();
   renderLiveFeed();
+  renderLiveFeedSuggestions();
+
+  if (scroll) {
+    scrollToLiveFeed();
+  }
+};
+
+radarFilterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter || "todos";
+    renderRadar(filter);
+    applyLiveFeedCategoryFilter(filter, { scroll: true });
+  });
+});
+
+const updateLiveFeedItems = (items = [], { resetFilter = true } = {}) => {
+  const currentCategory = liveFeedState.activeCategory;
+  liveFeedState.items = [...items];
+  liveFeedState.activeCategory = resetFilter ? "" : currentCategory;
+  liveFeedState.visibleItems = liveFeedState.pageSize;
+  renderLiveFeedFilters();
+  renderLiveFeed();
+  renderLiveFeedSuggestions();
 };
 
 if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
+  attachLiveFeedAutocomplete();
+
   liveFeedQuery.addEventListener("input", () => {
     liveFeedState.visibleItems = liveFeedState.pageSize;
     renderLiveFeed();
+    renderLiveFeedSuggestions();
   });
+
+  if (liveFeedClear) {
+    liveFeedClear.addEventListener("click", () => {
+      liveFeedState.activeCategory = "";
+      liveFeedState.visibleItems = liveFeedState.pageSize;
+
+      if (liveFeedQuery) {
+        liveFeedQuery.value = "";
+        liveFeedQuery.focus();
+      }
+
+      renderLiveFeedFilters();
+      renderLiveFeed();
+      renderLiveFeedSuggestions();
+    });
+  }
 
   liveFeedMore.addEventListener("click", () => {
     liveFeedState.visibleItems += liveFeedState.pageSize;
@@ -667,83 +8867,8 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
   updateLiveFeedItems(window.NEWS_DATA || []);
 }
 
-// SISTEMA DE VOTAÃ‡ÃƒO PARA ELEIÃ‡Ã•ES
-function initializeElectionPolling() {
-  // Recuperar dados salvos do localStorage
-  const savedVotes = JSON.parse(localStorage.getItem("election-votes") || JSON.stringify({
-    gladson: 0,
-    mailza: 0,
-    alan: 0,
-    jorge: 0
-  }));
-
-  // Atualizar barras de resultado
-  const updateResults = () => {
-    const total = Object.values(savedVotes).reduce((sum, val) => sum + val, 0);
-    
-    candidatesList.forEach((candidate) => {
-      const resultFill = document.querySelector(`#result-${candidate}`);
-      const percentText = document.querySelector(`#percent-${candidate}`);
-      
-      if (resultFill && percentText) {
-        const percentage = total > 0 ? Math.round((savedVotes[candidate] / total) * 100) : 0;
-        resultFill.style.width = `${percentage}%`;
-        percentText.textContent = `${percentage}%`;
-      }
-    });
-  };
-
-  // Inicializar exibiÃ§Ã£o
-  updateResults();
-
-  // Adicionar listeners nos botÃµes de votaÃ§Ã£o
-  document.querySelectorAll(".vote-button").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const candidate = button.dataset.candidate;
-
-      if (savedVotes.hasOwnProperty(candidate)) {
-        // Incrementar voto
-        savedVotes[candidate]++;
-        
-        // Salvar no localStorage
-        localStorage.setItem("election-votes", JSON.stringify(savedVotes));
-        sessionStorage.setItem(`voted-${candidate}`, "true");
-        
-        // Atualizar UI
-        updateResults();
-        
-        // Feedback visual
-        button.classList.add("voted");
-        button.disabled = true;
-        button.textContent = "✓ Votado";
-        
-        // Animar
-        button.style.transform = "scale(0.95)";
-        setTimeout(() => {
-          button.style.transform = "scale(1)";
-        }, 200);
-      }
-    });
-
-    // Verificar se o usuÃ¡rio jÃ¡ votou
-    const candidate = button.dataset.candidate;
-    const userVote = JSON.parse(sessionStorage.getItem(`voted-${candidate}`) || "null");
-    if (userVote) {
-      button.classList.add("voted");
-      button.disabled = true;
-      button.textContent = "✓ Votado";
-    }
-  });
-
-  // Detectar novo voto via outro tab/janela
-  window.addEventListener("storage", (e) => {
-    if (e.key === "election-votes" && e.newValue) {
-      Object.assign(savedVotes, JSON.parse(e.newValue));
-      updateResults();
-    }
-  });
-}
-
+// Inicializar o radar somente depois que os helpers e normalizadores ja existem.
+renderRadar();
 
 // --- WIDGETS LATERAIS ---
 const sidebarData = window.SIDEBAR_DATA || null;
@@ -791,6 +8916,102 @@ const getLocalTodayIso = () => {
   });
 
   return formatter.format(new Date());
+};
+
+let sidebarClockTimerId = 0;
+
+const getSidebarSafeDateFormatter = (locale, options) => {
+  try {
+    return new Intl.DateTimeFormat(locale, { ...options, timeZone: localeTimeZone });
+  } catch (_error) {
+    return new Intl.DateTimeFormat(locale, options);
+  }
+};
+
+const getSidebarLocalDateParts = (date = new Date()) => {
+  const timeLabel = getSidebarSafeDateFormatter("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23"
+  }).format(date);
+
+  const dateLabel = getSidebarSafeDateFormatter("pt-BR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  }).format(date);
+
+  const weekdayLabel = getSidebarSafeDateFormatter("pt-BR", {
+    weekday: "long"
+  }).format(date);
+
+  const hourValue = Number(
+    getSidebarSafeDateFormatter("en-US", {
+      hour: "2-digit",
+      hourCycle: "h23"
+    }).format(date)
+  );
+
+  return {
+    timeLabel,
+    dateLabel,
+    weekdayLabel,
+    hourValue: Number.isFinite(hourValue) ? hourValue : date.getHours()
+  };
+};
+
+const getSidebarDayPeriod = (hourValue = 12) => {
+  if (hourValue < 12) return "manhã";
+  if (hourValue < 18) return "tarde";
+  return "noite";
+};
+
+const buildSidebarSnapshotLabel = () => {
+  const { dateLabel } = getSidebarLocalDateParts();
+  return `snapshot ${dateLabel}`;
+};
+
+const buildSidebarWeatherNote = (weather = {}) => {
+  const { dateLabel, hourValue } = getSidebarLocalDateParts();
+  const period = getSidebarDayPeriod(hourValue);
+  const tonight = String(weather.tonight || "").trim();
+  const prefix = `Leitura pública atualizada para ${dateLabel}, ${period}.`;
+  return tonight ? `${prefix} ${tonight}` : prefix;
+};
+
+const refreshSidebarClock = () => {
+  const clockNode = document.querySelector("#live-clock");
+  const dateNode = document.querySelector("#live-date");
+  const weekdayNode = document.querySelector("#live-weekday");
+
+  if (!clockNode && !dateNode && !weekdayNode) {
+    return;
+  }
+
+  const { timeLabel, dateLabel, weekdayLabel } = getSidebarLocalDateParts();
+
+  if (clockNode) {
+    clockNode.textContent = timeLabel;
+  }
+
+  if (dateNode) {
+    dateNode.textContent = dateLabel;
+  }
+
+  if (weekdayNode) {
+    weekdayNode.textContent = `${weekdayLabel} • Acre • UTC-5`;
+  }
+};
+
+const bindSidebarClock = () => {
+  refreshSidebarClock();
+
+  if (sidebarClockTimerId) {
+    window.clearInterval(sidebarClockTimerId);
+  }
+
+  sidebarClockTimerId = window.setInterval(refreshSidebarClock, 1000);
 };
 
 const getNextHolidayText = (holidayGroups = []) => {
@@ -853,31 +9074,91 @@ const buildAgendaMarkup = (items) =>
     })
     .join("");
 
-const buildStoryMarkup = (items) =>
-  items
-    .map((item) => {
-      const article = window.NEWS_MAP?.[item.slug];
+const pickSidebarFallbackStories = (count = 0, usedKeys = new Set()) => {
+  if (count <= 0) {
+    return [];
+  }
 
-      if (!article) {
-        return "";
-      }
+  const candidates = (window.NEWS_DATA || [])
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => getArticleUsageKey(article));
+  const selected = [];
+  const usedImages = new Set();
 
-      const href = `./noticia.html?slug=${article.slug}`;
-      const photoStyle = article.imageUrl
-        ? ` style="--story-photo:url('${article.imageUrl}')"`
-        : "";
+  candidates.some((article) => {
+    if (selected.length >= count) return true;
+    const articleKey = getArticleUsageKey(article);
+    if (!articleKey || usedKeys.has(articleKey)) return false;
+    const imageKey = getArticleImageKey(article);
+    if (!imageKey || usedImages.has(imageKey)) return false;
+    usedImages.add(imageKey);
+    usedKeys.add(articleKey);
+    selected.push(article);
+    return false;
+  });
 
-      return `
-        <a class="sidebar-photo-card" href="${href}"${photoStyle}>
-          <div class="sidebar-photo-copy">
-            <span>${item.kicker}</span>
-            <strong>${article.title}</strong>
-            <small>${item.stat} • ${article.sourceName}</small>
-          </div>
-        </a>
-      `;
-    })
-    .join("");
+  if (selected.length < count) {
+    candidates.some((article) => {
+      if (selected.length >= count) return true;
+      const articleKey = getArticleUsageKey(article);
+      if (!articleKey || usedKeys.has(articleKey)) return false;
+      usedKeys.add(articleKey);
+      selected.push(article);
+      return false;
+    });
+  }
+
+  return selected;
+};
+
+const buildStoryMarkup = (items, surfaceName = "") =>
+  (() => {
+    const usedKeys = buildReservedArticleKeys(surfaceName ? [surfaceName] : []);
+    const selectedArticles = [];
+    const fallbackArticles = pickSidebarFallbackStories(items.length, usedKeys);
+    let fallbackIndex = 0;
+
+    const markup = items
+      .map((item) => {
+        const requestedArticle = item.slug ? window.NEWS_MAP?.[item.slug] : null;
+        const requestedKey = requestedArticle ? getArticleUsageKey(requestedArticle) : "";
+        const shouldUseRequested = Boolean(requestedArticle && requestedKey && !usedKeys.has(requestedKey));
+        const rawArticle = shouldUseRequested ? requestedArticle : fallbackArticles[fallbackIndex++];
+
+        if (!rawArticle) {
+          return "";
+        }
+
+        const article = normalizeRuntimeArticle(rawArticle);
+        const articleKey = getArticleUsageKey(article);
+        if (articleKey) {
+          usedKeys.add(articleKey);
+          selectedArticles.push(article);
+        }
+        const href = buildArticleHref(article);
+        const photoUrl = getArticleDisplayImageUrl(article);
+        const photoStyle = photoUrl
+          ? ` style="--story-photo:url('${photoUrl}')"`
+          : "";
+
+        return `
+          <a class="sidebar-photo-card" href="${escapeAttribute(href)}"${getSidebarLinkAttrs(href)}${photoStyle}>
+            <div class="sidebar-photo-copy">
+              <span>${item.kicker}</span>
+              <strong>${article.title}</strong>
+              <small>${item.stat} • ${article.sourceName}</small>
+            </div>
+          </a>
+        `;
+      })
+      .join("");
+
+    if (surfaceName) {
+      reserveSurfaceArticles(surfaceName, selectedArticles);
+    }
+
+    return markup;
+  })();
 
 const buildListPanelMarkup = ({
   title,
@@ -908,7 +9189,7 @@ const buildListPanelMarkup = ({
 const buildMarketMarkup = (market) => `
   <div class="sidebar-heading">
     <div>
-      <p class="widget-title">Radar de Bolsa</p>
+      <p class="widget-title">Radar de Mercado</p>
       <span class="widget-source">${market.snapshotLabel}</span>
     </div>
     <a class="widget-link" href="${escapeAttribute(market.sourceUrl)}"${getSidebarLinkAttrs(market.sourceUrl)}>fechamento</a>
@@ -952,10 +9233,13 @@ const buildMarketMarkup = (market) => `
   </div>
 `;
 
-const renderSidebarWidgets = () => {
+const renderSidebarWidgets = (options = {}) => {
   if (!sidebarData) {
     return;
   }
+
+  reserveSurfaceArticles("buzz", []);
+  reserveSurfaceArticles("popular", []);
 
   const nowPanel = document.querySelector("#sidebar-now");
   const holidaysPanel = document.querySelector("#sidebar-holidays");
@@ -971,21 +9255,7 @@ const renderSidebarWidgets = () => {
   const commercialPanel = document.querySelector("#sidebar-commercial");
   const adsPanel = document.querySelector("#sidebar-ads");
 
-  if (
-    !nowPanel ||
-    !holidaysPanel ||
-    !nationalPanel ||
-    !politicsPanel ||
-    !marketPanel ||
-    !agendaPanel ||
-    !worldPanel ||
-    !varietiesPanel ||
-    !famousPanel ||
-    !buzzPanel ||
-    !popularPanel ||
-    !commercialPanel ||
-    !adsPanel
-  ) {
+  if (!nowPanel) {
     return;
   }
 
@@ -1004,14 +9274,14 @@ const renderSidebarWidgets = () => {
     <div class="sidebar-heading">
       <div>
         <p class="widget-title">Cruzeiro do Sul Agora</p>
-        <span class="widget-source">snapshot ${sidebarData.snapshotDate}</span>
+        <span class="widget-source">${buildSidebarSnapshotLabel()}</span>
       </div>
       <a class="widget-link" href="${sidebarData.weather.sourceUrl}" target="_blank" rel="noreferrer">clima real</a>
     </div>
     <div class="sidebar-now-grid">
       <div>
         <div class="clock-time" id="live-clock">00:00:00</div>
-        <div class="clock-date" id="live-date">carregando data local...</div>
+        <div class="clock-date" id="live-date">hora local do Acre</div>
         <div class="clock-weekday" id="live-weekday">Acre • UTC-5</div>
       </div>
       <div class="sidebar-weather-badge">
@@ -1027,7 +9297,7 @@ const renderSidebarWidgets = () => {
         .map((detail) => `<span>${detail}</span>`)
         .join("")}
     </div>
-    <p class="widget-note">${sidebarData.weather.note} ${sidebarData.weather.observedAt}. ${sidebarData.weather.tonight}</p>
+    <p class="widget-note">${buildSidebarWeatherNote(sidebarData.weather)}</p>
     <p class="widget-note">${nextHolidayText}</p>
     <label class="sidebar-search-inline">
       <span>Buscar no portal</span>
@@ -1035,7 +9305,8 @@ const renderSidebarWidgets = () => {
     </label>
   `;
 
-  holidaysPanel.innerHTML = `
+  if (holidaysPanel) {
+    holidaysPanel.innerHTML = `
     <div class="sidebar-heading">
       <div>
         <p class="widget-title">Feriados no Radar</p>
@@ -1058,56 +9329,78 @@ const renderSidebarWidgets = () => {
       </section>
     </div>
   `;
+  }
 
-  nationalPanel.innerHTML = buildListPanelMarkup({
-    title: "Nacional do Dia",
-    source: "servico, consumo e custo de vida no radar",
-    items: sidebarData.national,
-    actionLabel: "economia",
-    actionUrl: "https://agenciabrasil.ebc.com.br/economia"
-  });
+  if (nationalPanel) {
+    nationalPanel.innerHTML = buildListPanelMarkup({
+      title: "Nacional do Dia",
+      source: "servico, consumo e custo de vida no radar",
+      items: sidebarData.national,
+      actionLabel: "economia",
+      actionUrl: "https://agenciabrasil.ebc.com.br/economia"
+    });
+  }
 
-  politicsPanel.innerHTML = buildListPanelMarkup({
-    title: "Politica",
-    source: "Brasilia, eleicoes e mudancas de equipe",
-    items: sidebarData.politics,
-    actionLabel: "politica",
-    actionUrl: "https://agenciabrasil.ebc.com.br/politica"
-  });
+  if (politicsPanel) {
+    politicsPanel.innerHTML = buildListPanelMarkup({
+      title: "Politica",
+      source: "Brasilia, eleicoes e mudancas de equipe",
+      items: sidebarData.politics,
+      actionLabel: "politica",
+      actionUrl: "https://agenciabrasil.ebc.com.br/politica"
+    });
+  }
 
-  marketPanel.innerHTML = buildMarketMarkup(sidebarData.market);
+  if (marketPanel) {
+    marketPanel.innerHTML = buildMarketMarkup({
+      ...sidebarData.market,
+      snapshotLabel: buildSidebarSnapshotLabel()
+    });
+    void fetchTopicFeedCached("economy", 6, options).then((items) => {
+      marketPanel.innerHTML = buildMarketMarkup(buildDynamicMarketPayload(items, sidebarData.market));
+    });
+  }
 
-  agendaPanel.innerHTML = buildListPanelMarkup({
-    title: "Agenda & Servico",
-    source: "acoes uteis com data certa",
-    items: sidebarData.agenda
-  });
+  if (agendaPanel) {
+    agendaPanel.innerHTML = buildListPanelMarkup({
+      title: "Agenda & Servico",
+      source: "acoes uteis com data certa",
+      items: sidebarData.agenda
+    });
+  }
 
-  worldPanel.innerHTML = buildListPanelMarkup({
-    title: "Internacional",
-    source: "mundo, energia, juros e ciencia",
-    items: sidebarData.world,
-    actionLabel: "mundo",
-    actionUrl: "https://agenciabrasil.ebc.com.br/internacional"
-  });
+  if (worldPanel) {
+    worldPanel.innerHTML = buildListPanelMarkup({
+      title: "Internacional",
+      source: "mundo, energia, juros e ciencia",
+      items: sidebarData.world,
+      actionLabel: "mundo",
+      actionUrl: "https://agenciabrasil.ebc.com.br/internacional"
+    });
+  }
 
-  varietiesPanel.innerHTML = buildListPanelMarkup({
-    title: "Variedades",
-    source: "cinema, museu, cultura e conversa",
-    items: sidebarData.varieties,
-    actionLabel: "cultura",
-    actionUrl: "https://agenciabrasil.ebc.com.br/cultura"
-  });
+  if (varietiesPanel) {
+    varietiesPanel.innerHTML = buildListPanelMarkup({
+      title: "Variedades",
+      source: "cinema, museu, cultura e conversa",
+      items: sidebarData.varieties,
+      actionLabel: "cultura",
+      actionUrl: "https://agenciabrasil.ebc.com.br/cultura"
+    });
+  }
 
-  famousPanel.innerHTML = buildListPanelMarkup({
-    title: "Famosos",
-    source: "pop, relacionamento e bastidor",
-    items: sidebarData.famous,
-    actionLabel: "gshow",
-    actionUrl: "https://gshow.globo.com/cultura-pop/famosos/"
-  });
+  if (famousPanel) {
+    famousPanel.innerHTML = buildListPanelMarkup({
+      title: "Famosos",
+      source: "pop, relacionamento e bastidor",
+      items: sidebarData.famous,
+      actionLabel: "gshow",
+      actionUrl: "https://gshow.globo.com/cultura-pop/famosos/"
+    });
+  }
 
-  buzzPanel.innerHTML = `
+  if (buzzPanel) {
+    buzzPanel.innerHTML = `
     <div class="sidebar-heading">
       <div>
         <p class="widget-title">Rede, Festas & Fofoca</p>
@@ -1116,11 +9409,32 @@ const renderSidebarWidgets = () => {
       <span class="widget-link passive-link">com foto quando houver</span>
     </div>
     <div class="sidebar-photo-list">
-      ${buildStoryMarkup(sidebarData.buzz)}
+      ${buildStoryMarkup(sidebarData.buzz, "buzz")}
     </div>
   `;
+    void fetchTopicFeedCached("buzz", 8, options).then((items) => {
+      const liveBuzzItems = buildBuzzSidebarItemsFromArticles(items);
+      if (!liveBuzzItems.length) {
+        return;
+      }
 
-  popularPanel.innerHTML = `
+      buzzPanel.innerHTML = `
+        <div class="sidebar-heading">
+          <div>
+            <p class="widget-title">Rede, Festas & Fofoca</p>
+            <span class="widget-source">captando novidade real do feed</span>
+          </div>
+          <span class="widget-link passive-link">forçando busca por coisa nova</span>
+        </div>
+        <div class="sidebar-photo-list">
+          ${buildStoryMarkup(liveBuzzItems, "buzz")}
+        </div>
+      `;
+    });
+  }
+
+  if (popularPanel) {
+    popularPanel.innerHTML = `
     <div class="sidebar-heading">
       <div>
         <p class="widget-title">Mais Vistos do Catalogo</p>
@@ -1129,11 +9443,13 @@ const renderSidebarWidgets = () => {
       <span class="widget-link passive-link">atalhos rapidos</span>
     </div>
     <div class="sidebar-photo-list compact">
-      ${buildStoryMarkup(sidebarData.popular)}
+      ${buildStoryMarkup(sidebarData.popular, "popular")}
     </div>
   `;
+  }
 
-  commercialPanel.innerHTML = `
+  if (commercialPanel) {
+    commercialPanel.innerHTML = `
     <p class="card-kicker">publicidade local</p>
     <h3>Banner premium, publieditorial e agenda paga</h3>
     <p>
@@ -1147,8 +9463,10 @@ const renderSidebarWidgets = () => {
     </div>
     <a class="solid-button" href="#monetizacao">Reservar a lateral</a>
   `;
+  }
 
-  adsPanel.innerHTML = `
+  if (adsPanel) {
+    adsPanel.innerHTML = `
     <p class="card-kicker">ads e divulgacao</p>
     <h3>Espacos prontos para vender</h3>
     <div class="sidebar-ad-grid">
@@ -1169,6 +9487,9 @@ const renderSidebarWidgets = () => {
       </a>
     </div>
   `;
+  }
+
+  bindSidebarClock();
 };
 
 const initializeSidebarWidgets = () => {
@@ -1176,42 +9497,6 @@ const initializeSidebarWidgets = () => {
   document
     .querySelectorAll(".side-rail .reveal")
     .forEach((node) => node.classList.add("active"));
-
-  const clockNode = document.querySelector("#live-clock");
-  const dateNode = document.querySelector("#live-date");
-  const weekdayNode = document.querySelector("#live-weekday");
-
-  const updateClock = () => {
-    const now = new Date();
-
-    if (clockNode) {
-      clockNode.textContent = now.toLocaleTimeString("pt-BR", {
-        hour12: false,
-        timeZone: localeTimeZone
-      });
-    }
-
-    if (dateNode) {
-      dateNode.textContent = now.toLocaleDateString("pt-BR", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: localeTimeZone
-      });
-    }
-
-    if (weekdayNode) {
-      weekdayNode.textContent = now.toLocaleDateString("pt-BR", {
-        weekday: "long",
-        timeZone: localeTimeZone
-      });
-    }
-  };
-
-  if (clockNode || dateNode || weekdayNode) {
-    updateClock();
-    setInterval(updateClock, 1000);
-  }
 
   const sidebarSearch = document.querySelector("#sidebar-search");
 
@@ -1245,9 +9530,17 @@ const hydrateDynamicNews = async () => {
     }
 
     const merged = syncNewsDataset(runtimeItems);
-    const activeFilter = document.querySelector(".chip-button.is-active")?.dataset.filter || "todos";
+    const activeFilter =
+      document.querySelector("#radar .chip-button.is-active[data-filter]")?.dataset.filter ||
+      "todos";
+    hydrateMosaicHero(merged);
+    hydrateStaticMediaSurfaces();
+    initializeHeroTourismHero();
+    renderRegionalPoliticsHighlights(merged);
+    renderSidebarWidgets();
     renderRadar(activeFilter);
-    updateLiveFeedItems(merged);
+    updateLiveFeedItems(merged, { resetFilter: false });
+    initializeLiveTicker();
   } catch (error) {
     // Mantem o fallback estatico quando a API nao estiver ligada.
   }
@@ -1255,8 +9548,12 @@ const hydrateDynamicNews = async () => {
 
 const hydrateCommentsFromApi = async () => {
   try {
-    const payload = await requestApiJson("/api/comments", { method: "GET" });
-    const comments = Array.isArray(payload.items) ? payload.items : [];
+    const payload = await requestApiJson("/api/comments?limit=8", { method: "GET" });
+    const comments = Array.isArray(payload.items)
+      ? payload.items
+      : Array.isArray(payload.comments)
+        ? payload.comments
+        : [];
 
     if (comments.length > 0) {
       renderCommentsFeed(comments.slice(0, 8));
@@ -1264,6 +9561,30 @@ const hydrateCommentsFromApi = async () => {
   } catch (error) {
     // Mantem os comentarios estaticos quando a API nao estiver ligada.
   }
+};
+
+const scheduleHomeBackgroundHydration = () => {
+  const run = () => {
+    const execute = () => {
+      hydrateDynamicNews();
+      hydrateCommentsFromApi();
+      window.setInterval(hydrateDynamicNews, 300000);
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(execute, { timeout: 1800 });
+      return;
+    }
+
+    window.setTimeout(execute, 300);
+  };
+
+  if (document.readyState === "complete") {
+    run();
+    return;
+  }
+
+  window.addEventListener("load", run, { once: true });
 };
 
 const attachCommentSubmission = () => {
@@ -1291,12 +9612,21 @@ const attachCommentSubmission = () => {
     setFeedbackState(commentFeedback, "Enviando comentario...", "");
 
     try {
+      const analyticsContext = getAnalyticsContext();
       const payload = await requestApiJson("/api/comments", {
         method: "POST",
         body: JSON.stringify({
+          articleId: "home-comunidade",
+          pagePath: `${window.location.pathname || "/"}${window.location.search || ""}`,
+          author: name,
           name,
           message,
-          badge: "Leitor local"
+          badge: "Leitor local",
+          visitorId: analyticsContext.visitorId || "",
+          sessionId: analyticsContext.sessionId || "",
+          cookieVisitorId: analyticsContext.cookieVisitorId || "",
+          cookieSessionId: analyticsContext.cookieSessionId || "",
+          trackingConsent: analyticsContext.consent || ""
         })
       });
 
@@ -1334,42 +9664,405 @@ const attachCommentSubmission = () => {
   });
 };
 
+const attachCommunitySignalFlow = () => {
+  loadCommunityReports();
+  communityAgentForm?.addEventListener("submit", submitCommunityReport);
+};
+
+const isFounderPlan = (value = "") => String(value || "").trim() === "fundadores";
+
+const buildSupporterTxid = () =>
+  `FUND${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`
+    .replace(/[^A-Za-z0-9]/g, "")
+    .toUpperCase()
+    .slice(0, 25);
+
+const formatPixAmountLabel = (value = 0) =>
+  Number(value || 0).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2
+  });
+
+const getFounderAmountValue = () => {
+  const rawAmount = Number(subscriptionFounderAmountInput?.value || 5);
+  return Math.max(1, Math.min(10, Number.isFinite(rawAmount) ? rawAmount : 5));
+};
+
+const getCatalogoGoogleAuthUser = () => {
+  try {
+    return window.CatalogoGoogleAuth?.getUser?.() || null;
+  } catch (_error) {
+    return null;
+  }
+};
+
+const syncSubscriptionGoogleIdentity = () => {
+  const user = getCatalogoGoogleAuthUser();
+  if (subscriptionEmailInput) {
+    subscriptionEmailInput.value = user?.email || "";
+    subscriptionEmailInput.readOnly = true;
+    subscriptionEmailInput.placeholder = user?.email || "Entre com Google para preencher o e-mail";
+  }
+  if (subscriptionNameInput && user && !subscriptionNameInput.value.trim()) {
+    subscriptionNameInput.value = user.name || user.givenName || "";
+  }
+};
+
+const resetSupporterPaymentCard = () => {
+  if (!subscriptionPaymentCard) {
+    return;
+  }
+
+  supporterPaymentState.locked = false;
+  subscriptionPaymentCard.hidden = true;
+  if (subscriptionPixKey) subscriptionPixKey.textContent = "oculta no QR";
+  if (subscriptionPixAmount) subscriptionPixAmount.textContent = formatPixAmountLabel(getFounderAmountValue());
+  if (subscriptionPixTxid) subscriptionPixTxid.textContent = "aguarde";
+  if (subscriptionPixQr) subscriptionPixQr.innerHTML = "";
+  if (subscriptionPixCode) subscriptionPixCode.value = "";
+  if (subscriptionPaymentNote) {
+    subscriptionPaymentNote.textContent = "O apoio só entra no mural depois da confirmação manual do pagamento.";
+  }
+};
+
+const syncSupporterPaymentCard = async (forceNewTxid = false) => {
+  if (!subscriptionPlanInput || !subscriptionPaymentCard) {
+    return;
+  }
+
+  if (!isFounderPlan(subscriptionPlanInput.value)) {
+    resetSupporterPaymentCard();
+    return;
+  }
+
+  if (supporterPaymentState.locked && forceNewTxid) {
+    if (subscriptionPaymentNote) {
+      subscriptionPaymentNote.textContent =
+        "Esta referência já foi vinculada ao apoio enviado. Use este mesmo código Pix ou recarregue a página para começar outro apoio.";
+    }
+    return;
+  }
+
+  const founderAmount = getFounderAmountValue();
+  supporterPaymentState.amount = founderAmount;
+
+  const authUser = getCatalogoGoogleAuthUser();
+  if (!authUser?.email) {
+    subscriptionPaymentCard.hidden = false;
+    if (subscriptionPixKey) subscriptionPixKey.textContent = "oculta no QR";
+    if (subscriptionPixTxid) subscriptionPixTxid.textContent = "aguarde login";
+    if (subscriptionPixQr) {
+      subscriptionPixQr.innerHTML = "<p>Entre com Google para gerar o QR code protegido.</p>";
+    }
+    if (subscriptionPaymentNote) {
+      subscriptionPaymentNote.textContent =
+        "O QR code de fundador só é criado depois que a conta Google identifica o apoiador.";
+    }
+    return;
+  }
+
+  if (forceNewTxid || !supporterPaymentState.txid) {
+    supporterPaymentState.txid = buildSupporterTxid();
+  }
+
+  subscriptionPaymentCard.hidden = false;
+  if (subscriptionPixAmount) {
+    subscriptionPixAmount.textContent = formatPixAmountLabel(founderAmount);
+  }
+  if (subscriptionPixQr) {
+    subscriptionPixQr.innerHTML = "<p>Gerando QR code do apoio...</p>";
+  }
+
+  try {
+    const params = new URLSearchParams({
+      amount: String(founderAmount),
+      txid: supporterPaymentState.txid,
+      description: "Apoio Fundador Catalogo"
+    });
+    const payload = await requestApiJson(`/api/subscriptions/pix?${params.toString()}`, { method: "GET" });
+    const resolvedAmount = Number(payload.amount || founderAmount);
+
+    supporterPaymentState.txid = payload.txid || supporterPaymentState.txid;
+    supporterPaymentState.amount = resolvedAmount;
+    if (subscriptionFounderAmountInput) {
+      subscriptionFounderAmountInput.value = String(Math.round(resolvedAmount));
+    }
+    if (subscriptionPixKey) subscriptionPixKey.textContent = "oculta no QR";
+    if (subscriptionPixAmount) subscriptionPixAmount.textContent = formatPixAmountLabel(resolvedAmount);
+    if (subscriptionPixTxid) subscriptionPixTxid.textContent = supporterPaymentState.txid;
+    if (subscriptionPixQr) {
+      subscriptionPixQr.innerHTML =
+        payload.qrSvg || "<p>QR code indisponível no momento. Tente atualizar a referência.</p>";
+    }
+    if (subscriptionPixCode) {
+      subscriptionPixCode.value = "";
+    }
+    if (subscriptionPaymentNote) {
+      subscriptionPaymentNote.textContent =
+        `QR Code criado para ${authUser.email}. Apoio de ${formatPixAmountLabel(resolvedAmount)} aguardando confirmação manual antes de entrar no mural.`;
+    }
+  } catch (error) {
+    if (subscriptionPixQr) {
+      subscriptionPixQr.innerHTML = "<p>Não foi possível gerar o QR code agora.</p>";
+    }
+    if (subscriptionPaymentNote) {
+      subscriptionPaymentNote.textContent = String(error?.message || "Falha ao gerar o pagamento.");
+    }
+  }
+};
+
+const activateFounderPlan = ({ focusAmount = false } = {}) => {
+  if (!subscriptionPlanInput) {
+    return;
+  }
+
+  subscriptionPlanInput.value = "fundadores";
+  toggleFounderAmountField();
+  void syncSupporterPaymentCard(true);
+
+  if (focusAmount && subscriptionFounderAmountInput) {
+    window.setTimeout(() => {
+      subscriptionFounderAmountInput.focus();
+      subscriptionFounderAmountInput.select?.();
+    }, 120);
+  }
+};
+
+const toggleFounderAmountField = () => {
+  if (!subscriptionFounderWrap || !subscriptionPlanInput) {
+    return;
+  }
+
+  const founderActive = isFounderPlan(subscriptionPlanInput.value);
+  subscriptionFounderWrap.hidden = !founderActive;
+
+  if (subscriptionFounderAmountInput) {
+    subscriptionFounderAmountInput.disabled = !founderActive;
+  }
+
+  if (subscriptionSubmitButton) {
+    subscriptionSubmitButton.textContent = founderActive
+      ? "Quero virar fundador"
+      : "Receber com Google";
+  }
+
+  if (!founderActive) {
+    resetSupporterPaymentCard();
+    supporterPaymentState.txid = "";
+  }
+};
+
+const buildFounderCard = (founder = {}) => {
+  const card = document.createElement("article");
+  const amount = Number(founder.amount || 0);
+  const safeName = String(founder.name || "Fundador do Catalogo").trim() || "Fundador do Catalogo";
+  const joinedAt = founder.createdAt
+    ? new Date(founder.createdAt).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        timeZone: localeTimeZone
+      })
+    : "agora";
+
+  card.className = "founder-card";
+  card.innerHTML = `
+    <strong>★ ${escapeHtml(safeName)}</strong>
+    <p>Fundador do Catalogo CZS com apoio simbólico${amount ? ` de R$ ${amount}` : ""}.</p>
+    <span>entrou em ${escapeHtml(joinedAt)}</span>
+  `;
+  return card;
+};
+
+const renderFoundersWall = (items = [], totalFounders = items.length) => {
+  if (!foundersList || !foundersCount) {
+    return;
+  }
+
+  const founders = (Array.isArray(items) ? items : []).filter((item) => item?.name);
+  foundersCount.textContent = `${totalFounders} ${totalFounders === 1 ? "fundador" : "fundadores"} até agora`;
+
+  if (!founders.length) {
+    foundersList.innerHTML = `
+      <article class="founder-card is-empty">
+        <strong>★ Seu nome pode abrir esta lista</strong>
+        <p>Os primeiros apoiadores aparecem aqui como fundadores do portal.</p>
+      </article>
+    `;
+    return;
+  }
+
+  foundersList.innerHTML = "";
+  founders.slice(0, 18).forEach((founder) => {
+    foundersList.appendChild(buildFounderCard(founder));
+  });
+};
+
+const hydrateFoundersWallFromApi = async () => {
+  try {
+    const payload = await requestApiJson("/api/subscriptions", { method: "GET" });
+    renderFoundersWall(payload.founders || [], Number(payload?.totals?.founders || 0));
+  } catch (_error) {
+    // Mantem o mural estatico quando a API nao estiver ligada.
+  }
+};
+
 const attachSubscriptionSubmission = () => {
   if (!subscriptionForm || !subscriptionEmailInput || !subscriptionPlanInput) {
     return;
   }
 
-  subscriptionForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  toggleFounderAmountField();
+  syncSubscriptionGoogleIdentity();
+  window.addEventListener("catalogo:google-auth", () => {
+    syncSubscriptionGoogleIdentity();
+    if (isFounderPlan(subscriptionPlanInput.value)) {
+      void syncSupporterPaymentCard(true);
+    }
+  });
 
-    const email = subscriptionEmailInput.value.trim();
-    const name = subscriptionNameInput?.value?.trim() || "";
-    const plan = subscriptionPlanInput.value;
+  if (isFounderPlan(subscriptionPlanInput.value)) {
+    void syncSupporterPaymentCard(true);
+  }
 
-    if (!email) {
-      setFeedbackState(subscriptionFeedback, "Preencha o e-mail para assinar.", "is-error");
-      subscriptionEmailInput.focus();
+  document.querySelectorAll("[data-founder-cta]").forEach((cta) => {
+    cta.addEventListener("click", () => {
+      activateFounderPlan({ focusAmount: true });
+      window.setTimeout(() => {
+        subscriptionPaymentCard?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 180);
+    });
+  });
+
+  subscriptionPlanInput.addEventListener("change", () => {
+    toggleFounderAmountField();
+    if (isFounderPlan(subscriptionPlanInput.value)) {
+      void syncSupporterPaymentCard(true);
+    }
+  });
+
+  subscriptionFounderAmountInput?.addEventListener("input", () => {
+    if (!isFounderPlan(subscriptionPlanInput.value)) {
       return;
     }
 
-    setFeedbackState(subscriptionFeedback, "Registrando assinatura...", "");
+    if (supporterPaymentState.locked) {
+      if (subscriptionPaymentNote) {
+        subscriptionPaymentNote.textContent =
+          "O apoio já foi enviado com a referência atual. Recarregue a página se quiser começar outro pagamento.";
+      }
+      subscriptionFounderAmountInput.value = String(supporterPaymentState.amount || 5);
+      return;
+    }
+
+    void syncSupporterPaymentCard(true);
+  });
+
+  subscriptionCopyPixButton?.addEventListener("click", async () => {
+    const copied = await copyTextToClipboard(subscriptionPixCode?.value || "");
+    if (subscriptionPaymentNote) {
+      subscriptionPaymentNote.textContent = copied
+        ? "Código Pix copiado para o apoio de fundador."
+        : "Não consegui copiar o código Pix agora.";
+    }
+  });
+
+    subscriptionRefreshPixButton?.addEventListener("click", () => {
+    if (!isFounderPlan(subscriptionPlanInput.value)) {
+      return;
+    }
+
+    if (supporterPaymentState.locked) {
+      if (subscriptionPaymentNote) {
+        subscriptionPaymentNote.textContent =
+          "A referência já está presa ao apoio enviado. Use este código Pix para concluir o pagamento.";
+      }
+      return;
+    }
+
+    void syncSupporterPaymentCard(true);
+  });
+
+  subscriptionForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const authUser = getCatalogoGoogleAuthUser();
+    const email = authUser?.email || "";
+    const name = subscriptionNameInput?.value?.trim() || authUser?.name || authUser?.givenName || "";
+    const plan = subscriptionPlanInput.value;
+    const founderAmount = getFounderAmountValue();
+
+    if (!authUser?.email) {
+      setFeedbackState(
+        subscriptionFeedback,
+        "Entre com Google para assinar, apoiar ou gerar QR Code Pix.",
+        "is-error"
+      );
+      document.querySelector("[data-google-auth-card]")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+
+    if (isFounderPlan(plan) && name.length < 2) {
+      setFeedbackState(subscriptionFeedback, "Para entrar nos fundadores, informe um nome publico.", "is-error");
+      subscriptionNameInput?.focus();
+      return;
+    }
+
+    if (isFounderPlan(plan) && (founderAmount < 1 || founderAmount > 10)) {
+      setFeedbackState(subscriptionFeedback, "O apoio de fundador precisa ficar entre R$ 1 e R$ 10.", "is-error");
+      subscriptionFounderAmountInput?.focus();
+      return;
+    }
+
+    if (isFounderPlan(plan) && !supporterPaymentState.txid) {
+      await syncSupporterPaymentCard(true);
+    }
+
+    setFeedbackState(
+      subscriptionFeedback,
+      isFounderPlan(plan) ? "Registrando apoio e vinculando a referência do Pix..." : "Registrando assinatura...",
+      ""
+    );
 
     try {
-      await requestApiJson("/api/subscriptions", {
+      const payload = await requestApiJson("/api/subscriptions", {
         method: "POST",
         body: JSON.stringify({
           email,
           name,
-          plan
+          plan,
+          amount: isFounderPlan(plan) ? founderAmount : 0,
+          paymentTxid: isFounderPlan(plan) ? supporterPaymentState.txid : ""
         })
       });
 
-      subscriptionForm.reset();
-      setFeedbackState(subscriptionFeedback, "Assinatura recebida. Agora o backend ja guardou seu contato.", "is-success");
+      if (isFounderPlan(plan)) {
+        supporterPaymentState.locked = true;
+        setFeedbackState(
+          subscriptionFeedback,
+          `Apoio de fundador registrado com referência ${supporterPaymentState.txid}. Agora conclua o Pix de R$ ${founderAmount} no quadro acima. O nome entra no mural após confirmação manual.`,
+          "is-success"
+        );
+        if (subscriptionPaymentNote) {
+          subscriptionPaymentNote.textContent =
+            payload?.message ||
+            "Apoio registrado e aguardando confirmação manual do Pix antes de entrar no mural.";
+        }
+      } else {
+        subscriptionForm.reset();
+        syncSubscriptionGoogleIdentity();
+        toggleFounderAmountField();
+        setFeedbackState(
+          subscriptionFeedback,
+          "Resumo das 7h registrado na sua conta Google. A partir de agora ele cai no seu e-mail.",
+          "is-success"
+        );
+      }
     } catch (error) {
       setFeedbackState(
         subscriptionFeedback,
-        "Nao consegui falar com o backend agora. Ligue o servidor para receber assinaturas reais.",
+        String(error?.message || "Nao consegui falar com o backend agora. Ligue o servidor para receber assinaturas reais."),
         "is-error"
       );
     }
@@ -1377,7 +10070,11 @@ const attachSubscriptionSubmission = () => {
 };
 
 attachCommentSubmission();
+attachCommunitySignalFlow();
 attachSubscriptionSubmission();
-hydrateDynamicNews();
-hydrateCommentsFromApi();
-window.setInterval(hydrateDynamicNews, 300000);
+attachAgentMailFlow();
+renderDailyTrendingBuzz();
+scheduleTopicSurfaceRefresh();
+initializeLiveTicker();
+scheduleHomeBackgroundHydration();
+hydrateFoundersWallFromApi();
