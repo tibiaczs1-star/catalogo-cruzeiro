@@ -1,15 +1,13 @@
 # Handoff
 
-Updated: 2026-04-24T13:36:20.100Z
+Updated: 2026-04-24T15:27:04.048Z
 
-PubPaid 2.0 agora esta na fase de treino visual de personagens. O usuario pediu 20 personagens para formar um modelo visual de RPG 32-bit / PS1 indie atual. Use os prompts de producao e o manual mestre; nao integrar assets no runtime antes de aprovacao anti-procedural.
+Plano mestre de codificacao 2D consolidado. Use PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md como ordem tecnica antes de mexer no jogo. O projeto deve ficar 100% 2D: Phaser para mundo e DOM pixel art para UI.
 
 ## Next
 
-- Gerar folha visual dos 20 personagens; avaliar contra o manual; produzir sprites individuais apenas dos aprovados; manter StreetScene/InteriorScene sem personagens ruins/procedurais.
+- Primeiro passo: criar mapQuerySystem.js e assetManifest.js; nao reintroduzir personagens/canvas procedural; validar porta e UI com smoke test.
 
 ## Files In Focus
 
-- PUBPAID_20_PERSONAGENS_MODELO_RPG32.md
-- PUBPAID_20_PERSONAGENS_PROMPTS_RPG32.md
-- PUBPAID_MANUAL_MESTRE_DIRECAO_ARTE.md
+- PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md

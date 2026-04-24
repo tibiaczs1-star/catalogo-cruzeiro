@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T15:10:21.152Z",
+  "lastUpdatedAt": "2026-04-24T15:27:03.688Z",
   "orders": [
     {
       "id": "2026-04-24-agente-19-plano-continuo-treinamento-arte-pubpaid",
@@ -5449,6 +5449,73 @@
       ],
       "nextSteps": [
         "gerar prancha visual de exemplos e depois implementar somente o estilo aprovado"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-treinar-agentes-em-codificacao-de-jogos-2d-para-pubpaid-2-0",
+      "createdAt": "2026-04-24T15:22:14.903Z",
+      "updatedAt": "2026-04-24T15:22:14.903Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora eles tem que aprender sobre codificação de jogos 2d, tudo que poderem sobre, e principalmente sobre como utilizar pixels art 2 d em interfaces e mapas para interface e tudo ser interativo, maiss totalmetne 2d, libere os agentes pra treinar e aprender faça um prompt para isso antes",
+      "summary": "Treinar agentes em codificacao de jogos 2D para PubPaid 2.0",
+      "normalizedTasks": [
+        "criar prompt mestre de treino 2D",
+        "treinar arquitetura Phaser",
+        "mapas e colisao",
+        "input",
+        "spritesheets",
+        "UI pixel art",
+        "QA"
+      ],
+      "filesTouched": [
+        "PUBPAID_PROMPT_TREINO_CODIFICACAO_2D.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "game-dev",
+        "2d",
+        "phaser",
+        "pixel-art",
+        "ui"
+      ],
+      "nextSteps": [
+        "coletar devolutivas dos seis agentes e consolidar plano de implementacao"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-consolidar-plano-mestre-de-codificacao-2d-do-pubpaid",
+      "createdAt": "2026-04-24T15:27:03.688Z",
+      "updatedAt": "2026-04-24T15:27:03.688Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "consolidar aprendizado dos agentes sobre codificacao 2d",
+      "summary": "Consolidar plano mestre de codificacao 2D do PubPaid",
+      "normalizedTasks": [
+        "consolidar arquitetura 2D",
+        "mapas",
+        "colisao",
+        "input",
+        "spritesheets",
+        "UI pixel art",
+        "QA"
+      ],
+      "filesTouched": [
+        "PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md",
+        "PUBPAID_PROMPT_TREINO_CODIFICACAO_2D.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "2d",
+        "phaser",
+        "arquitetura"
+      ],
+      "nextSteps": [
+        "implementar mapQuerySystem e assetManifest como primeiro passo"
       ],
       "notes": ""
     }

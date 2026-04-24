@@ -1,20 +1,20 @@
 # Current State
 
-Updated: 2026-04-24T15:10:21.150Z
+Updated: 2026-04-24T15:27:03.902Z
 
 ## Active Goal
 
-- PubPaid 2.0 - exemplos de interface
+- PubPaid 2.0 - plano mestre de codificacao 2D consolidado
 
 ## Summary
 
-Foi criada uma direcao de UI para PubPaid 2.0: HUD minimo, prompt de porta, menu de pausa, diario/mapa, dialogo e paineis internos do bar. A UI deve parecer vidro escuro, latao, neon controlado e luz ambar, nunca dashboard/app/Canva.
+A rodada de agentes de codificacao 2D foi consolidada em PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md. A ordem aprovada e: fonte unica de mapa, manifesto de assets, PlayerController, InteractionSystem, DepthSystem, spritesheets reais, UI pixel art DOM e QA smoke.
 
 ## Next
 
-- Gerar prancha visual de interfaces; escolher 1 linha aprovada; implementar CSS/HTML sem cobrir playfield.
+- Implementar mapQuerySystem.js e assetManifest.js sem mudar visual; depois padronizar porta/interacoes; depois PlayerController e HUD minimo.
 
 ## Files In Focus
 
-- PUBPAID_UI_EXEMPLOS_INTERFACE.md
-- PUBPAID_MANUAL_MESTRE_DIRECAO_ARTE.md
+- PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md
+- PUBPAID_PROMPT_TREINO_CODIFICACAO_2D.md
