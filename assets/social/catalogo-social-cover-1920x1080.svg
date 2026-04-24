@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Banner horizontal do Catalogo Cruzeiro do Sul</title>
+  <desc id="desc">Banner horizontal para capa, YouTube, Facebook e chamada larga do Catalogo Cruzeiro do Sul.</desc>
+  <defs>
+    <linearGradient id="wideBg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#061325"/>
+      <stop offset="0.46" stop-color="#123f66"/>
+      <stop offset="1" stop-color="#eba94b"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 800 35px/1 Arial, Helvetica, sans-serif; letter-spacing: 6px; text-transform: uppercase; }
+      .brand { font: 900 92px/0.95 Arial, Helvetica, sans-serif; letter-spacing: -1px; }
+      .headline { font: 900 112px/0.92 Arial, Helvetica, sans-serif; letter-spacing: -2px; }
+      .body { font: 650 38px/1.25 Arial, Helvetica, sans-serif; }
+      .tag { font: 850 29px/1 Arial, Helvetica, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+    </style>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#wideBg)"/>
+  <path d="M-70 880 C260 672 540 910 826 752 C1128 585 1358 620 1990 340 L1990 1080 L-70 1080 Z" fill="#062840" opacity="0.78"/>
+  <path d="M690 905 C930 772 1114 865 1338 742 C1548 627 1690 590 1870 506" fill="none" stroke="#effbff" stroke-width="11" stroke-linecap="round" opacity="0.82"/>
+  <g opacity="0.98">
+    <circle cx="1524" cy="162" r="9" fill="#fff5c5"/>
+    <circle cx="1572" cy="228" r="6" fill="#fff5c5"/>
+    <circle cx="1480" cy="244" r="5" fill="#fff5c5"/>
+    <circle cx="1524" cy="302" r="8" fill="#fff5c5"/>
+    <circle cx="1638" cy="300" r="5" fill="#fff5c5"/>
+  </g>
+  <text x="104" y="112" fill="#ffffff" class="kicker">Cruzeiro do Sul • Acre • 24h</text>
+  <text x="104" y="238" fill="#ffffff" class="brand">Catálogo Cruzeiro do Sul</text>
+  <text x="104" y="420" fill="#ffffff" class="headline">Tá chegando o novo.</text>
+  <text x="104" y="504" fill="#eaf8ff" class="body">Informação, entretenimento e caminhos da cidade</text>
+  <text x="104" y="554" fill="#eaf8ff" class="body">sem poluição, sem ideologia e com serviço o dia inteiro.</text>
+  <g transform="translate(104 636)">
+    <rect width="285" height="62" rx="31" fill="#ffcf63"/>
+    <text x="30" y="41" fill="#09223a" class="tag">informar</text>
+    <rect x="308" width="300" height="62" rx="31" fill="#ffffff" opacity="0.92"/>
+    <text x="338" y="41" fill="#09223a" class="tag">entreter</text>
+    <rect x="631" width="360" height="62" rx="31" fill="#ffffff" opacity="0.88"/>
+    <text x="661" y="41" fill="#09223a" class="tag">mostrar caminhos</text>
+  </g>
+  <text x="104" y="982" fill="#ffffff" class="body">@catalogocruzeirodosul</text>
+</svg>

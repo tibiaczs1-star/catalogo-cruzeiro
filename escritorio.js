@@ -543,6 +543,7 @@
   const supportInventoryText = document.querySelector("[data-support-inventory-text]");
   const supportOpenButtons = Array.from(document.querySelectorAll("[data-open-support-modal]"));
   const supportConfirmButton = document.querySelector("[data-confirm-support-item]");
+  const supportNotifyButton = document.querySelector("[data-notify-support-payment]");
   const titlebarButtons = Array.from(document.querySelectorAll("[data-office-titlebar]"));
   const modal = document.querySelector("[data-agent-modal]");
   const modalAvatar = document.querySelector("[data-modal-avatar]");
@@ -565,6 +566,8 @@
   const supportModal = document.querySelector("[data-support-modal]");
   const supportFeedback = document.querySelector("[data-support-feedback]");
   const pixKeyOutput = document.querySelector("[data-support-pix-key]");
+  const pixCodeOutput = document.querySelector("[data-support-pix-code]");
+  const pixQrImage = document.querySelector("[data-support-qr]");
   const pixCopyButton = document.querySelector("[data-copy-pix-key]");
   const coffeeMachine = document.querySelector(".coffee-machine");
   const shortcutsModal = document.querySelector("[data-shortcuts-modal]");
@@ -584,6 +587,7 @@
   const theaterTerminalButton = document.querySelector("[data-theater-terminal]");
   const terminalCommandForm = document.querySelector("[data-terminal-command-form]");
   const terminalCommandInput = document.querySelector("[data-terminal-command-input]");
+  const paidOfferButtons = Array.from(document.querySelectorAll("[data-paid-offer]"));
 
   if (!officeWorld || !agentLayer || !rosterGrid) return;
 
@@ -622,7 +626,7 @@
 
   const officeVariant = document.body.classList.contains("office-page-nerd") ? "nerd" : "editorial";
   const officeKey = officeConfig.officeKey || officeVariant;
-  const environments =
+  let environments =
     Array.isArray(officeConfig.environments) && officeConfig.environments.length
       ? officeConfig.environments
       : [
@@ -704,6 +708,9 @@
     theaterRound: 0,
     cheffeCallActive: false,
     selectedSupportItemId: supportCatalog[0]?.id || null,
+    supportPix: null,
+    supportRequest: null,
+    paidOffer: null,
     inventory: []
   };
 
@@ -1238,7 +1245,66 @@
     return supportItemMap.get(officeState.selectedSupportItemId) || supportCatalog[0] || null;
   }
 
-  function loadInventory() {
+  function slugifyOfficeValue(value = "") {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 70);
+  }
+
+  function normalizeCustomEnvironment(rawEnvironment = {}) {
+    const label = String(rawEnvironment.label || rawEnvironment.itemName || "Ambiente comprado").trim();
+    const id = rawEnvironment.id || `custom-${slugifyOfficeValue(label)}-${Date.now()}`;
+    return {
+      id,
+      label,
+      shortLabel: rawEnvironment.shortLabel || "Novo",
+      description:
+        rawEnvironment.description ||
+        "Ambiente liberado por apoio pago e confirmado no backend deste escritorio.",
+      spriteKit: rawEnvironment.spriteKit || "default",
+      focusLabel: rawEnvironment.focusLabel || label,
+      isCustom: true
+    };
+  }
+
+  function applyCustomEnvironments(customEnvironments = []) {
+    if (!Array.isArray(customEnvironments) || !customEnvironments.length) return;
+    customEnvironments.forEach((rawEnvironment) => {
+      const environment = normalizeCustomEnvironment(rawEnvironment);
+      if (!environmentMap.has(environment.id)) {
+        environments.push(environment);
+      }
+      environmentMap.set(environment.id, environment);
+    });
+    renderEnvironmentOptions();
+    refreshEnvironmentUI();
+  }
+
+  async function loadInventory() {
+    try {
+      const response = await fetch(`./api/office-work?officeKey=${encodeURIComponent(officeKey)}`, {
+        headers: { Accept: "application/json" }
+      });
+      if (response.ok) {
+        const payload = await response.json();
+        officeState.inventory = Array.isArray(payload.inventory)
+          ? payload.inventory.map((item) => ({
+              id: item.id,
+              addedAt: item.addedAt ? new Date(item.addedAt).toLocaleDateString("pt-BR") : "agora"
+            }))
+          : [];
+        applyCustomEnvironments(payload.customEnvironments);
+        renderInventoryPanel();
+        return;
+      }
+    } catch (_error) {
+      // local fallback below
+    }
+
     try {
       const raw = window.localStorage.getItem(inventoryStorageKey);
       officeState.inventory = raw ? JSON.parse(raw) : [];
@@ -1443,15 +1509,66 @@
     if (!officeState.selectedSupportItemId && supportCatalog[0]) {
       officeState.selectedSupportItemId = supportCatalog[0].id;
     }
+    officeState.supportPix = null;
+    officeState.supportRequest = null;
     if (pixKeyOutput) pixKeyOutput.textContent = "QR Code protegido";
-    if (supportFeedback) {
-      supportFeedback.textContent = "Escolha um item e use o fluxo de QR Code protegido para marcar a vaquinha.";
+    if (pixCodeOutput) {
+      pixCodeOutput.value = "";
+      pixCodeOutput.hidden = true;
     }
-    selectSupportItem(officeState.selectedSupportItemId, false);
+    if (pixQrImage) {
+      pixQrImage.removeAttribute("src");
+      pixQrImage.hidden = true;
+    }
+    if (supportFeedback) {
+      supportFeedback.textContent = officeState.paidOffer
+        ? "Gere o Pix desta opção paga, avise o pagamento e confirme no backend para liberar."
+        : "Escolha um item, gere o Pix e avise o pagamento. O item entra no inventario depois da conferencia.";
+    }
+    if (officeState.paidOffer) {
+      selectPaidOffer(officeState.paidOffer.kind === "custom-environment" ? "environment" : "terminal", false);
+    } else {
+      selectSupportItem(officeState.selectedSupportItemId, false);
+    }
     supportModal.hidden = false;
     document.body.style.overflow = "hidden";
     pixCopyButton?.focus();
     setFeedText("A vaquinha do escritório foi aberta com itens concretos para melhorar o ambiente de trabalho.");
+  }
+
+  function selectPaidOffer(kind = "terminal", askSuggestion = true) {
+    const offerKind = kind === "environment" ? "environment" : "terminal";
+    if (offerKind === "environment") {
+      const suggestion =
+        askSuggestion && typeof prompt === "function"
+          ? String(prompt("Qual ambiente a pessoa sugeriu? Ex.: laboratório neon, ilha de edição, sala futurista...") || "").trim()
+          : "";
+      const label = suggestion ? `Ambiente: ${suggestion}` : "Novo ambiente sugerido";
+      officeState.paidOffer = {
+        id: `paid-environment-${slugifyOfficeValue(suggestion || officeKey || "ambiente")}`,
+        name: label,
+        description: suggestion
+          ? `Ambiente comprado por apoiador para este escritório: ${suggestion}. Depois da conferência, aparece no seletor de ambientes.`
+          : "Ambiente comprado por apoiador. Depois da conferência, aparece no seletor de ambientes deste escritório.",
+        price: 100,
+        kind: "custom-environment"
+      };
+    } else {
+      officeState.paidOffer = {
+        id: `paid-terminal-${officeKey}`,
+        name: "Passe de interação no terminal",
+        description: "Uma pergunta divertida, curiosa ou interativa para o agente ativo responder. Não altera o site.",
+        price: 20,
+        kind: "terminal-pass"
+      };
+    }
+    if (supportItemName) supportItemName.textContent = officeState.paidOffer.name;
+    if (supportItemDescription) supportItemDescription.textContent = officeState.paidOffer.description;
+    if (supportItemPrice) supportItemPrice.textContent = formatCurrency(officeState.paidOffer.price);
+    supportCatalogHost?.querySelectorAll("[data-support-item]").forEach((button) => {
+      button.classList.remove("is-active");
+    });
+    setFeedText(`${officeState.paidOffer.name} selecionado para pagamento separado deste escritório.`);
   }
 
   function renderSupportCatalog() {
@@ -1496,28 +1613,137 @@
     }
   }
 
-  function confirmSupportItem() {
-    const item = getSelectedSupportItem();
+  async function generateSupportPix() {
+    const item = officeState.paidOffer || getSelectedSupportItem();
     if (!item) return;
-    if (hasInventoryItem(item.id)) {
-      if (supportFeedback) {
-        supportFeedback.textContent = `${item.name} já está no inventário deste escritório.`;
+    try {
+      if (supportFeedback) supportFeedback.textContent = "Gerando QR Pix seguro...";
+      const response = await fetch("./api/office-support/pix", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          officeKey,
+          itemId: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          kind: item.kind || "inventory-item"
+        })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao gerar Pix.");
       }
-      return;
+      officeState.supportPix = payload;
+      if (pixKeyOutput) pixKeyOutput.textContent = `${payload.receiverName} • ${payload.pixKey}`;
+      if (pixCodeOutput) {
+        pixCodeOutput.value = payload.pixCode || "";
+        pixCodeOutput.hidden = false;
+      }
+      if (pixQrImage && payload.qrDataUrl) {
+        pixQrImage.src = payload.qrDataUrl;
+        pixQrImage.hidden = false;
+      }
+      if (payload.pixCode && navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(payload.pixCode).catch(() => {});
+      }
+      if (supportFeedback) {
+        supportFeedback.textContent = `Pix de ${formatCurrency(item.price)} gerado. Copia e cola pronto para ${payload.receiverName}.`;
+      }
+    } catch (error) {
+      if (supportFeedback) supportFeedback.textContent = error.message || "Falha ao gerar Pix.";
     }
+  }
 
-    officeState.inventory.unshift({
-      id: item.id,
-      addedAt: new Date().toLocaleDateString("pt-BR")
-    });
-    saveInventory();
-    renderInventoryPanel();
-    renderSupportCatalog();
-    selectSupportItem(item.id, false);
-    if (supportFeedback) {
-      supportFeedback.textContent = `${item.name} foi registrado no inventário local desta vaquinha.`;
+  async function notifySupportPayment() {
+    const item = officeState.paidOffer || getSelectedSupportItem();
+    if (!item) return;
+    try {
+      if (supportFeedback) supportFeedback.textContent = "Registrando apoio pendente para conferencia...";
+      const response = await fetch("./api/office-support/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          officeKey,
+          itemId: item.id,
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          kind: item.kind || "inventory-item"
+        })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao registrar apoio.");
+      }
+      officeState.supportPix = payload;
+      officeState.supportRequest = payload.request;
+      if (pixKeyOutput) pixKeyOutput.textContent = `${payload.receiverName} • ${payload.pixKey}`;
+      if (pixCodeOutput) {
+        pixCodeOutput.value = payload.pixCode || "";
+        pixCodeOutput.hidden = false;
+      }
+      if (pixQrImage && payload.qrDataUrl) {
+        pixQrImage.src = payload.qrDataUrl;
+        pixQrImage.hidden = false;
+      }
+      if (supportFeedback) {
+        supportFeedback.textContent = `Apoio pendente criado (${payload.request.id}). Agora falta a conferencia Full Admin para entrar no inventario.`;
+      }
+    } catch (error) {
+      if (supportFeedback) supportFeedback.textContent = error.message || "Falha ao registrar apoio.";
     }
-    setFeedText(`${item.name} agora aparece no inventário do escritório como melhoria apoiada.`);
+  }
+
+  async function confirmSupportItem() {
+    const item = officeState.paidOffer || getSelectedSupportItem();
+    if (!item) return;
+    const requestId = officeState.supportRequest?.id || prompt("ID do apoio pendente para confirmar:");
+    if (!requestId) return;
+    const password = prompt("Senha Full Admin para confirmar o pagamento Pix:");
+    if (!password) return;
+
+    try {
+      if (supportFeedback) supportFeedback.textContent = "Conferindo e liberando inventario...";
+      const response = await fetch("./api/office-support/confirm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ password, requestId })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao confirmar apoio.");
+      }
+      officeState.inventory = Array.isArray(payload.inventory)
+        ? payload.inventory.map((entry) => ({
+            id: entry.id,
+            addedAt: entry.addedAt ? new Date(entry.addedAt).toLocaleDateString("pt-BR") : "agora"
+          }))
+        : officeState.inventory;
+      if (payload.environment) {
+        applyCustomEnvironments([payload.environment]);
+        applyOfficeTheme(payload.environment.id);
+      }
+      if (payload.terminalPasses) {
+        setFeedText("Passe do terminal liberado para este escritório. A próxima interação será consumida no terminal.");
+      }
+      saveInventory();
+      renderInventoryPanel();
+      renderSupportCatalog();
+      if (payload.environment || payload.terminalPasses) {
+        selectPaidOffer(item.kind === "custom-environment" ? "environment" : "terminal", false);
+      } else {
+        selectSupportItem(item.id, false);
+      }
+      if (supportFeedback) {
+        supportFeedback.textContent = payload.environment
+          ? `${item.name} foi confirmado e apareceu como novo ambiente deste escritorio.`
+          : `${item.name} foi confirmado e entrou no inventario vivo deste escritorio.`;
+      }
+      setFeedText(`${item.name} foi confirmado neste escritorio depois da conferencia do Pix.`);
+    } catch (error) {
+      if (supportFeedback) supportFeedback.textContent = error.message || "Falha ao confirmar apoio.";
+    }
   }
 
   function closeSupportModal() {
@@ -2135,7 +2361,7 @@
     renderTheaterAwards();
   }
 
-  function sendTerminalCommand(rawCommand) {
+  async function sendTerminalCommand(rawCommand) {
     const command = String(rawCommand || "").trim();
     if (!command) {
       setFeedText("Terminal aguardando um pedido, assunto ou trecho de codigo.");
@@ -2143,14 +2369,37 @@
       return;
     }
     const agent = agents.find((item) => item.id === officeState.activeAgentId) || agents[0];
+    try {
+      const response = await fetch("./api/office-terminal/consume", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          officeKey,
+          agentId: agent.id,
+          agentName: agent.name,
+          command
+        })
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        selectPaidOffer("terminal");
+        openSupportModal();
+        if (supportFeedback) supportFeedback.textContent = payload.error || "Terminal pago: gere o Pix de R$ 20 para liberar a interação.";
+        return;
+      }
+    } catch (_error) {
+      setFeedText("Nao consegui validar o passe pago do terminal agora. Tente novamente em instantes.");
+      return;
+    }
     officeState.theaterSubject = command;
-    renderTerminal(agent, `comando recebido do usuario: ${command.slice(0, 220)}`);
-    syncAgentTask(agent, "lendo comando enviado pelo terminal");
+    const answer = `${agent.name} respondeu: ${getTheaterOpinion(agent, command, 0)}`;
+    renderTerminal(agent, answer);
+    syncAgentTask(agent, "respondendo uma interacao paga do terminal");
     agent.el?.classList.add("is-talking", "is-raising-hand");
     window.setTimeout(() => agent.el?.classList.remove("is-talking", "is-raising-hand"), 1800);
     if (terminalCommandInput) terminalCommandInput.value = "";
     if (theaterSubject && !theaterSubject.value.trim()) theaterSubject.value = command;
-    setFeedText(`${agent.name} recebeu seu pedido no terminal e colocou a equipe em modo de execução.`);
+    setFeedText(`${agent.name} respondeu sua interacao paga no terminal.`);
   }
 
   function gatherTeam() {
@@ -2434,6 +2683,13 @@
     sendTerminalCommand(terminalCommandInput?.value || "");
   });
 
+  paidOfferButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectPaidOffer(button.dataset.paidOffer || "terminal");
+      openSupportModal();
+    });
+  });
+
   sideRailButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const action = button.dataset.officeAction;
@@ -2519,11 +2775,8 @@
   coffeeMachine?.addEventListener("click", openSupportModal);
   supportOpenButtons.forEach((button) => button.addEventListener("click", openSupportModal));
 
-  pixCopyButton?.addEventListener("click", async () => {
-    if (supportFeedback) {
-      supportFeedback.textContent = "Por seguranca, a chave Pix nao aparece. Use o QR Code protegido no fluxo de pagamento.";
-    }
-  });
+  pixCopyButton?.addEventListener("click", generateSupportPix);
+  supportNotifyButton?.addEventListener("click", notifySupportPayment);
   supportConfirmButton?.addEventListener("click", confirmSupportItem);
 
   function chooseConversation() {

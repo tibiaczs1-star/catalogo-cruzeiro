@@ -71,17 +71,16 @@ export class GameLobbyScene extends Phaser.Scene {
   create() {
     this.game.events.emit("pubpaid:music-zone", "game");
     this.buildBackdrop();
-    this.buildFrame();
-    this.renderLobby();
+    this.tableLayer = this.add.container(0, 0).setDepth(1);
+    this.drawLobbyWaiter(1088, 654, "Escolha a mesa.");
+    this.game.events.emit("pubpaid:open-dom-lobby");
     updateGameState({
       currentScene: "game-lobby",
-      activeGameId: this.gameId,
+      activeGameId: "",
       lobbyPhase: "selecting",
-      objective: this.gameId ? "Escolher aposta e achar oponente" : "Escolher jogo",
-      focus: this.gameId ? `lobby de ${this.meta.title}` : "catálogo do garçom",
-      prompt: this.gameId
-        ? "Lobby separado aberto. Confirme aposta, encontre adversário e entre na tela própria da partida."
-        : "Catálogo aberto. Escolha Dardos ou Dama para iniciar o fluxo."
+      objective: "Escolher jogo",
+      focus: "catálogo do garçom",
+      prompt: "Escolha Dardos ou Dama para iniciar a mesa."
     });
   }
 

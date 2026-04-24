@@ -12,6 +12,14 @@ const TEXTURE_KEYS = {
 
 const IDLE_FRAME_COUNT = 4;
 
+export const PUBPAID_WORLD_SCALE = {
+  doorHeightPx: 205,
+  adultForegroundPx: 124,
+  adultMidgroundPx: 96,
+  adultBackgroundPx: 78,
+  dogPx: 34
+};
+
 function frameKey(key, frame) {
   return `${key}-idle-${frame}`;
 }
@@ -107,19 +115,56 @@ function drawHeldItem(ctx, x, y, item, frame) {
 
 function drawCharacterSheetSprite(ctx, spec, frame = 0) {
   const yOffset = bodyOffset(frame);
-  const baseX = 16;
-  const baseY = 8 + yOffset;
+  const step = frame === 1 ? 1 : frame === 3 ? -1 : 0;
+  const x = 22 + step;
+  const y = 10 + yOffset;
+  const outline = "#11131a";
 
-  drawPixel(ctx, 13, 46, 18, 3, "rgba(0,0,0,.28)");
-  drawHead(ctx, baseX, baseY, spec.hair, spec.skin, frame);
-  drawTorso(ctx, baseX + 1, baseY + 15, spec.shirt, spec.detail);
-  drawArms(ctx, baseX + 1, baseY + 15, spec.sleeve || spec.shirt, spec.skin, frame);
-  drawHeldItem(ctx, baseX + 1, baseY + 15, spec.item, frame);
-  drawLegs(ctx, baseX + 1, baseY + 26, spec.pants, spec.shoes, frame);
+  drawPixel(ctx, 17, 108, 30, 4, "rgba(0,0,0,.3)");
+
+  drawPixel(ctx, x + 5, y, 13, 3, outline);
+  drawPixel(ctx, x + 3, y + 3, 18, 3, outline);
+  drawPixel(ctx, x + 2, y + 6, 20, 18, outline);
+  drawPixel(ctx, x + 4, y + 4, 16, 20, spec.skin);
+  drawPixel(ctx, x + 4, y + 4, 16, 7, spec.hair);
+  drawPixel(ctx, x + 2, y + 8, 5, 10, spec.hair);
+  drawPixel(ctx, x + 17, y + 8, 4, 12, spec.hair);
+  if (blinkFrame(frame)) {
+    drawPixel(ctx, x + 7, y + 15, 3, 1, outline);
+    drawPixel(ctx, x + 14, y + 15, 3, 1, outline);
+  } else {
+    drawPixel(ctx, x + 7, y + 14, 3, 3, outline);
+    drawPixel(ctx, x + 14, y + 14, 3, 3, outline);
+  }
+  drawPixel(ctx, x + 10, y + 21, 7, 1, "#8c5a55");
+
+  drawPixel(ctx, x + 3, y + 25, 18, 5, outline);
+  drawPixel(ctx, x + 1, y + 30, 22, 31, outline);
+  drawPixel(ctx, x + 4, y + 30, 16, 29, spec.shirt);
+  drawPixel(ctx, x + 7, y + 32, 10, 14, spec.detail || spec.shirt);
+  drawPixel(ctx, x + 10, y + 30, 3, 31, "rgba(255,255,255,.13)");
+
+  const armLift = armOffset(frame);
+  drawPixel(ctx, x - 5, y + 31 + armLift, 6, 30, outline);
+  drawPixel(ctx, x - 4, y + 33 + armLift, 4, 24, spec.sleeve || spec.shirt);
+  drawPixel(ctx, x - 4, y + 57 + armLift, 4, 6, spec.skin);
+  drawPixel(ctx, x + 23, y + 31 - armLift, 6, 30, outline);
+  drawPixel(ctx, x + 24, y + 33 - armLift, 4, 24, spec.sleeve || spec.shirt);
+  drawPixel(ctx, x + 24, y + 57 - armLift, 4, 6, spec.skin);
+
+  const legSpread = frame === 1 || frame === 3 ? 2 : 0;
+  drawPixel(ctx, x + 3, y + 61, 8, 39, outline);
+  drawPixel(ctx, x + 14, y + 61, 8, 39, outline);
+  drawPixel(ctx, x + 4, y + 62, 6, 36, spec.pants);
+  drawPixel(ctx, x + 15, y + 62, 6, 36, spec.pants);
+  drawPixel(ctx, x + 1 - legSpread, y + 98, 12, 5, spec.shoes);
+  drawPixel(ctx, x + 13 + legSpread, y + 98, 12, 5, spec.shoes);
+
+  drawHeldItem(ctx, x + 4, y + 30, spec.item, frame);
 }
 
 function createBaseCharacter(spec, frame = 0) {
-  return buildCanvas(48, 56, (ctx) => {
+  return buildCanvas(64, 116, (ctx) => {
     drawCharacterSheetSprite(ctx, spec, frame);
   });
 }
@@ -247,8 +292,9 @@ export function ensureCoreSprites(scene) {
       if (textures.exists(nextFrameKey)) textures.remove(nextFrameKey);
       textures.addCanvas(nextFrameKey, factory(frame));
     }
-    if (textures.exists(key)) textures.remove(key);
-    textures.addCanvas(key, factory(0));
+    if (!textures.exists(key)) {
+      textures.addCanvas(key, factory(0));
+    }
   });
 }
 
@@ -264,7 +310,7 @@ export function addSpriteActor(scene, key, x, y, scale = 1) {
 }
 
 export function addIdleSpriteActor(scene, key, x, y, scale = 1, options = {}) {
-  const frames = getIdleFrameKeys(key).filter((textureKey) => scene.textures.exists(textureKey));
+  const frames = options.staticBitmap ? [] : getIdleFrameKeys(key).filter((textureKey) => scene.textures.exists(textureKey));
   const sprite = scene.add.image(x, y, frames[0] || key);
   sprite.setOrigin(0.5, 1);
   sprite.setScale(scale);

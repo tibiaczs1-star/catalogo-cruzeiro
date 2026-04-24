@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH, INTERIOR_BOUNDS } from "../config/gameConfig.js";
-import { addIdleSpriteActor, addSpriteActor, ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { addIdleSpriteActor, ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { closePanel, openPanel } from "../ui/panelActions.js";
 import { gameState, updateGameState } from "../core/gameState.js";
@@ -76,10 +76,10 @@ export class InteriorScene extends Phaser.Scene {
     this.buildAmbientFx();
 
     this.actors = [
-      this.addActor(TEXTURE_KEYS.waiterHero, 306, 456, 0.08, 2400, 0xfff0c0),
-      this.addActor(TEXTURE_KEYS.singer, 1058, 250, 1.1, 1600, 0xff7bd0),
-      this.addActor(TEXTURE_KEYS.guestA, 320, 504, 1.02, 2100, 0x8ef0a3),
-      this.addActor(TEXTURE_KEYS.guestB, 862, 492, 1.02, 2300, 0xffd06d)
+      this.addActor(TEXTURE_KEYS.waiterHero, 306, 456, 0.075, 2400, 0xfff0c0),
+      this.addActor(TEXTURE_KEYS.singer, 1056, 322, 0.078, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.32, alpha: 0.92 }),
+      this.addActor(TEXTURE_KEYS.guestB, 874, 528, 0.06, 2600, 0x50efff, { staticBitmap: true, depth: 2.18, alpha: 0.82 }),
+      this.addActor(TEXTURE_KEYS.guestA, 1112, 530, 0.062, 2800, 0xffd06d, { staticBitmap: true, depth: 2.2, alpha: 0.82 })
     ];
 
     this.player = this.buildPlayer(640, 608);
@@ -1307,20 +1307,27 @@ export class InteriorScene extends Phaser.Scene {
   }
 
   buildPlayer(x, y) {
-    const player = addSpriteActor(this, TEXTURE_KEYS.player, x, y, 1.12);
-    player.setDepth(2.55);
+    const player = this.add.container(x, y).setDepth(2.55);
+    const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
+      .setBlendMode(Phaser.BlendModes.MULTIPLY);
+    const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
+      .setOrigin(0.5, 1)
+      .setScale(0.083);
+    player.add([shadow, sprite]);
     return player;
   }
 
-  addActor(textureKey, x, y, scale, pulseDuration, glowColor) {
-    const glow = this.add.ellipse(x, y - 8, 42 * scale, 18 * scale, glowColor, 0.1)
+  addActor(textureKey, x, y, scale, pulseDuration, glowColor, options = {}) {
+    const glow = this.add.ellipse(x, y - 8, Math.max(34, 680 * scale), Math.max(10, 150 * scale), glowColor, 0.1)
       .setBlendMode(Phaser.BlendModes.SCREEN)
       .setDepth(2.36);
     const actor = addIdleSpriteActor(this, textureKey, x, y, scale, {
       frameDuration: 220,
-      delay: Math.floor((x + y) % 170)
+      delay: Math.floor((x + y) % 170),
+      staticBitmap: Boolean(options.staticBitmap)
     });
-    actor.setDepth(2.45);
+    actor.setDepth(options.depth || 2.45);
+    if (options.alpha) actor.setAlpha(options.alpha);
     this.tweens.add({
       targets: glow,
       alpha: { from: 0.04, to: 0.14 },

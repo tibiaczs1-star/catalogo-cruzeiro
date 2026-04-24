@@ -118,6 +118,57 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 ## 2026-04-22 salao premium pass
 
 - `InteriorScene.js` foi polida para casar com a rua: palco com beams e orb, névoa de lounge, reflexos no piso, bands de luz e hotspots diegéticos para bar, palco, lounge, premium e saída.
+
+## 2026-04-23 fluxo correto e jogos separados
+
+- O fluxo da `PubPaid 2.0` foi corrigido para: intro -> rua -> porta -> salão -> garçom -> lobby -> oponente -> aposta -> confirmação -> tela própria do jogo.
+- `GameLobbyScene.js` virou o lobby oficial com seleção Dardos/Dama, aposta, adversário IA e confirmação.
+- Foram adicionados fundos bitmap pixel art/2D para lobby, sala de Dardos e sala de Dama em `assets/pubpaid/lobby/`.
+- Criada `DartsGameScene.js`: alvo clicável, mira, arremesso do jogador, resposta da IA, três rodadas, placar, resultado e botões de lobby/salão.
+- Criada `CheckersGameScene.js`: tabuleiro grande, seleção de peça, movimentos, capturas simples, coroação, resposta da IA, condição de vitória/derrota/empate e botões de lobby/salão.
+- `app.js`, `gameState.js` e `render_game_to_text()` agora expõem `dartsGame` e `checkersGame` para debug textual.
+- Validações estáticas: `node --check` passou para `DartsGameScene.js`, `CheckersGameScene.js`, `GameLobbyScene.js`, `app.js` e `gameState.js`.
+- TODO próximo: quando o usuário pedir teste visual, rodar Playwright no fluxo completo e refinar input/legibilidade; depois conectar essas cenas ao settlement real da carteira/PvP.
+
+## 2026-04-23 correção do salão pelo garçom
+
+- Removidas as zonas antigas de jogo dentro do salão (`west/east`, Dardos/Dama/PvP como interação interna).
+- O garçom voltou para o centro do salão como NPC pequeno e clicável/aproximável.
+- Enter perto do garçom agora abre diretamente `game-lobby-scene`.
+- O lobby agora abre como catálogo do garçom quando vem do salão: Dardos e Dama são opções clicáveis; só depois aparecem aposta, busca de oponente e confirmação.
+- `pubpaid-v2.html` ganhou cache-bust `20260423waiterlobby`.
+- Validações: `node --check` passou para `InteriorScene.js`, `GameLobbyScene.js` e `app.js`; `rg` não encontrou mais `west/east`, `fetchPvpState` ou ações de lobby antigas dentro do salão.
+
+## 2026-04-23 garçom em sprite PNG
+
+- Reunião rápida com agentes de direção de arte e UX/game flow definiu: personagem agora deve ser sprite PNG, e não render procedural/canvas.
+- Gerados e integrados dois sprites transparentes do garçom:
+  - `assets/pubpaid/characters/waiter-salon-small-v1.png`
+  - `assets/pubpaid/characters/waiter-lobby-large-v1.png`
+- `BootScene.js` carrega os dois PNGs como `ppg-waiter-hero-sprite` e `ppg-waiter-lobby-sprite`.
+- `spriteFactory.js` parou de registrar o garçom por canvas.
+- `InteriorScene.js` usa o sprite pequeno no centro do salão.
+- `GameLobbyScene.js` usa o sprite grande no lobby, com janela de fala/instrução do garçom.
+- `pubpaid-v2.html` ganhou cache-bust `20260423waitersprite`.
+- Validações: `node --check` passou para `spriteFactory.js`, `BootScene.js`, `InteriorScene.js` e `GameLobbyScene.js`.
+
+## 2026-04-23 lobby com garçom falando e público
+
+- Gerado novo fundo `assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png` com pub pixel art, pessoas sentadas/bebendo/dançando e espaço central limpo para garçom/HUD.
+- Gerada variante `assets/pubpaid/characters/waiter-lobby-speaking-v1.png` com a boca aberta, mantendo o mesmo garçom.
+- `BootScene.js` agora carrega o novo fundo de lobby e `ppg-waiter-lobby-speaking-sprite`.
+- `GameLobbyScene.js` alterna a textura do garçom entre boca fechada e boca aberta enquanto ele fala.
+- O lobby foi aproximado da referência: título `ESCOLHA SUA MESA`, fala do garçom e dois cards grandes `Dama`/`Dardos` na parte inferior/esquerda com visual de HUD.
+- `pubpaid-v2.html` ganhou cache-bust `20260423talkingwaiter`.
+- Validações: `node --check` passou para `spriteFactory.js`, `BootScene.js` e `GameLobbyScene.js`.
+
+## 2026-04-23 cantora no lobby
+
+- Gerada `assets/pubpaid/characters/singer-lobby-v1.png`, cantora pixel art PNG transparente no mesmo acabamento do garçom.
+- `BootScene.js` carrega `ppg-singer-lobby-sprite`.
+- `GameLobbyScene.js` posiciona a cantora no canto direito/lateral do lobby com brilho e idle vertical leve, sem cobrir garçom/cards.
+- `pubpaid-v2.html` ganhou cache-bust `20260423lobbysinger`.
+- Validações: `node --check` passou para `spriteFactory.js`, `BootScene.js` e `GameLobbyScene.js`.
 - Os hotspots do salão agora seguem a mesma lógica da rua: clique aproxima, `Enter` interage, e o foco visual muda conforme a proximidade.
 - `StreetScene.js` e `InteriorScene.js` passaram a chamar `ensureCoreSprites(this)` localmente para não depender só do bootstrap no registro das texturas base.
 - Validações: `node --check` passou em `StreetScene.js` e `InteriorScene.js`; captura nova em `output/web-game/pubpaid-salao-premium-pass.png`; runtime sem console error (`ERRORS=[]`).

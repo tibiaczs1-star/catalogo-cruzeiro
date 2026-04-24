@@ -1227,6 +1227,10 @@ const applyThumbImage = (thumbNode, article) => {
     return;
   }
 
+  if (immediateImageUrl) {
+    return;
+  }
+
   resolveArticleImage(article).then((safeUrl) => {
     if (!safeUrl || thumbNode.dataset.thumbImageRequest !== requestId) return;
     paintSurfaceImage(
@@ -5345,6 +5349,71 @@ const getBuzzControversyScore = (article = {}) => {
   return score;
 };
 
+const buzzBrazilianDomains = [
+  "g1.globo.com",
+  "globo.com",
+  "terra.com.br",
+  "cnnbrasil.com.br",
+  "agenciabrasil.ebc.com.br",
+  "ac24horas.com",
+  "contilnetnoticias.com.br",
+  "jurua24horas.com",
+  "juruaemtempo.com.br",
+  "juruacomunicacao.com.br",
+  "acre.com.br",
+  "acrenews.com.br"
+];
+
+const buzzBlockedGlobalDomains = [
+  "theverge.com",
+  "blog.youtube",
+  "youtube.com",
+  "xbox.com",
+  "playstation.com",
+  "techcrunch.com",
+  "animenewsnetwork.com",
+  "awn.com",
+  "animationmagazine.net",
+  "cartoonbrew.com",
+  "tubefilter.com"
+];
+
+const getBuzzHostname = (value = "") => {
+  try {
+    return new URL(String(value || ""), window.location.href).hostname.replace(/^www\./i, "").toLowerCase();
+  } catch (error) {
+    return "";
+  }
+};
+
+const isBrazilBuzzArticle = (article = {}) => {
+  const sourceUrl = article.sourceUrl || article.url || article.link || "";
+  const hostname = getBuzzHostname(sourceUrl);
+  const coverageLayer = normalizeText(article.coverageLayer || "");
+  const sourceName = normalizeText(article.sourceName || "");
+  const text = normalizeText([article.title, article.summary, article.lede, article.category, sourceName].join(" "));
+
+  if (["acre", "jurua", "brasil"].includes(coverageLayer)) {
+    return true;
+  }
+
+  if (hostname && buzzBlockedGlobalDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))) {
+    return false;
+  }
+
+  if (hostname && buzzBrazilianDomains.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))) {
+    return true;
+  }
+
+  if (hostname.endsWith(".br")) {
+    return true;
+  }
+
+  return /\b(brasil|brasileir|acre|rio branco|cruzeiro do sul|sao paulo|são paulo|rio de janeiro|bahia|minas|parana|paraná|nordeste|amazonia|amazônia|globo|g1|terra|cnn brasil|agencia brasil|agência brasil)\b/.test(
+    text
+  );
+};
+
 const resolveBuzzNetworkContext = (article = {}, index = 0) => {
   const contexts = getBuzzNetworkContexts();
   const haystack = normalizeText(
@@ -5551,6 +5620,7 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   const liveBuzzItems = await fetchTopicFeedCached("buzz", 12, options);
   const liveCases = dedupeNewsItems(liveBuzzItems)
     .map((item) => normalizeRuntimeArticle(item))
+    .filter(isBrazilBuzzArticle)
     .filter((item) => item.title && (item.sourceUrl || item.slug))
     .sort((left, right) => {
       const scoreDiff = getBuzzControversyScore(right) - getBuzzControversyScore(left);

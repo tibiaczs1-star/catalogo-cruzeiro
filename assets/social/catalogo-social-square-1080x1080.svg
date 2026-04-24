@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Post quadrado do Catalogo Cruzeiro do Sul</title>
+  <desc id="desc">Arte quadrada para Instagram e Facebook anunciando a nova fase do portal.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#08182b"/>
+      <stop offset="0.52" stop-color="#18537d"/>
+      <stop offset="1" stop-color="#e8a947"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 800 30px/1 Arial, Helvetica, sans-serif; letter-spacing: 5px; text-transform: uppercase; }
+      .brand { font: 900 76px/0.95 Arial, Helvetica, sans-serif; letter-spacing: -1px; }
+      .headline { font: 900 104px/0.9 Arial, Helvetica, sans-serif; letter-spacing: -2px; }
+      .body { font: 650 36px/1.22 Arial, Helvetica, sans-serif; }
+      .tag { font: 800 28px/1 Arial, Helvetica, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+    </style>
+  </defs>
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <circle cx="846" cy="188" r="118" fill="#ffd36e" opacity="0.16"/>
+  <circle cx="846" cy="188" r="72" fill="#fff3bd" opacity="0.22"/>
+  <g opacity="0.98">
+    <circle cx="804" cy="124" r="8" fill="#fff5c5"/>
+    <circle cx="844" cy="178" r="5" fill="#fff5c5"/>
+    <circle cx="772" cy="190" r="4.5" fill="#fff5c5"/>
+    <circle cx="806" cy="235" r="7" fill="#fff5c5"/>
+    <circle cx="892" cy="238" r="4" fill="#fff5c5"/>
+  </g>
+  <path d="M-50 820 C156 694 314 824 496 736 C680 648 812 620 1130 476 L1130 1080 L-50 1080 Z" fill="#062840" opacity="0.78"/>
+  <path d="M80 908 C248 812 392 908 544 828 C700 746 828 710 1000 642" fill="none" stroke="#effbff" stroke-width="10" stroke-linecap="round" opacity="0.82"/>
+  <text x="70" y="90" fill="#ffffff" class="kicker">Catálogo Cruzeiro do Sul</text>
+  <text x="70" y="194" fill="#ffffff" class="headline">Tá</text>
+  <text x="70" y="292" fill="#ffffff" class="headline">chegando</text>
+  <text x="70" y="390" fill="#ffffff" class="headline">o novo</text>
+  <text x="70" y="478" fill="#eaf8ff" class="body">Informar. Entreter.</text>
+  <text x="70" y="526" fill="#eaf8ff" class="body">Mostrar caminhos.</text>
+  <text x="70" y="574" fill="#eaf8ff" class="body">24 horas por dia.</text>
+  <g transform="translate(70 642)">
+    <rect width="325" height="58" rx="29" fill="#ffcf63"/>
+    <text x="30" y="39" fill="#09223a" class="tag">sem poluição</text>
+    <rect x="348" width="326" height="58" rx="29" fill="#ffffff" opacity="0.92"/>
+    <text x="378" y="39" fill="#09223a" class="tag">sem ideologia</text>
+  </g>
+  <text x="70" y="1000" fill="#ffffff" class="body">@catalogocruzeirodosul</text>
+</svg>

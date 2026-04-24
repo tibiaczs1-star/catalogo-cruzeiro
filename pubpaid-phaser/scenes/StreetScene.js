@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH, STREET_BOUNDS } from "../config/gameConfig.js";
-import { addSpriteActor, ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { addIdleSpriteActor, ensureCoreSprites, PUBPAID_WORLD_SCALE, TEXTURE_KEYS } from "../core/spriteFactory.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { openPanel } from "../ui/panelActions.js";
 import { updateGameState } from "../core/gameState.js";
@@ -42,6 +42,9 @@ export class StreetScene extends Phaser.Scene {
     this.doorReadyGlow = null;
     this.transitionVeil = null;
     this.transitionLabel = null;
+    this.pedestrians = [];
+    this.vehicles = [];
+    this.streetSfxTimer = null;
   }
 
   create() {
@@ -49,6 +52,7 @@ export class StreetScene extends Phaser.Scene {
     this.game.events.emit("pubpaid:music-zone", "street");
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "street-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientStreetFx();
+    this.buildStreetLife();
     this.googlePortSign = this.buildGooglePortSign(1056, 512);
     this.transitionVeil = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x04060d, 0)
       .setDepth(20)
@@ -90,6 +94,7 @@ export class StreetScene extends Phaser.Scene {
     this.scale.on("resize", this.handleResize, this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.scale.off("resize", this.handleResize, this);
+      this.streetSfxTimer?.remove(false);
     });
     this.handleResize(this.scale.gameSize);
 
@@ -107,10 +112,10 @@ export class StreetScene extends Phaser.Scene {
       this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
       updateGameState({
         currentScene: "street",
-        focus: "rua viva",
+        focus: "rua principal",
         objective: "Aproximar da porta principal",
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
-        prompt: "Destino marcado. Caminhe até a porta ou siga pelo beco para o futuro mapa circular."
+        prompt: "Destino marcado. Caminhe até a porta principal; a rua agora usa figurantes bitmap em escala controlada."
       });
     });
 
@@ -192,6 +197,54 @@ export class StreetScene extends Phaser.Scene {
     ];
     reflectionLayer.ppgReflectionLayer = true;
     this.reflectionBands.graphics = reflectionLayer;
+  }
+
+  buildStreetLife() {
+    const people = [
+      { key: TEXTURE_KEYS.guestA, x: 94, y: 558, toX: 216, delay: 180, scale: 0.072, shadow: 50 },
+      { key: TEXTURE_KEYS.guestA, x: 918, y: 558, toX: 812, delay: 620, scale: 0.066, shadow: 46 },
+      { key: TEXTURE_KEYS.guestA, x: 682, y: 500, toX: 752, delay: 1200, scale: 0.052, shadow: 38 },
+      { key: TEXTURE_KEYS.guestA, x: 1138, y: 578, toX: 1042, delay: 880, scale: 0.06, shadow: 42 }
+    ];
+
+    people.forEach((person, index) => {
+      const sprite = addIdleSpriteActor(this, person.key, person.x, person.y, person.scale, {
+        frameDuration: 260,
+        delay: person.delay,
+        staticBitmap: true
+      });
+      sprite.setDepth(person.y > 540 ? 2.25 : 1.62);
+      sprite.setAlpha(0.88);
+      sprite.setFlipX(person.toX < person.x);
+      const shadow = this.add.ellipse(person.x, person.y + 2, person.shadow, person.shadow * 0.2, 0x000000, 0.22)
+        .setDepth(sprite.depth - 0.02)
+        .setBlendMode(Phaser.BlendModes.MULTIPLY);
+      this.pedestrians.push({ sprite, shadow });
+      this.tweens.add({
+        targets: [sprite, shadow],
+        x: person.toX,
+        duration: 4200 + index * 540,
+        delay: person.delay,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.easeInOut",
+        onYoyo: () => sprite.setFlipX(!sprite.flipX),
+        onRepeat: () => sprite.setFlipX(!sprite.flipX)
+      });
+    });
+
+    const scaleNote = this.add.text(18, 704, `escala adulta: player ~${PUBPAID_WORLD_SCALE.adultForegroundPx}px / porta ~${PUBPAID_WORLD_SCALE.doorHeightPx}px`, {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "9px",
+      color: "#8fa0ba",
+      stroke: "#02050d",
+      strokeThickness: 2
+    }).setAlpha(0.36).setDepth(4).setScrollFactor(0);
+    this.time.delayedCall(1800, () => {
+      this.tweens.add({ targets: scaleNote, alpha: 0, duration: 900, ease: "Sine.easeOut" });
+    });
+
+    this.streetSfxTimer = null;
   }
 
   buildHotspot({ id, x, y, width, height, color, label }) {
@@ -414,7 +467,14 @@ export class StreetScene extends Phaser.Scene {
   }
 
   buildPlayer(x, y) {
-    return addSpriteActor(this, TEXTURE_KEYS.player, x, y, 1.04);
+    const player = this.add.container(x, y).setDepth(2.42);
+    const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
+      .setBlendMode(Phaser.BlendModes.MULTIPLY);
+    const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
+      .setOrigin(0.5, 1)
+      .setScale(0.083);
+    player.add([shadow, sprite]);
+    return player;
   }
 
   handleResize(gameSize) {

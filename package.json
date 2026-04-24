@@ -6,6 +6,8 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
+    "agents:cycle": "node scripts/agents-autonomy-cycle.js --once",
+    "agents:daemon": "node scripts/agents-autonomy-cycle.js --daemon",
     "agents:run": "node scripts/real-agents-runtime.js",
     "audit:news-images": "node scripts/audit-news-image-focus.js",
     "deploy:storage-check": "node scripts/check-render-storage.js",

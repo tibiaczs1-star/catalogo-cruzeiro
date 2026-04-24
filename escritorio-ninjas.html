@@ -336,6 +336,8 @@ acao: passe o mouse em um agente para ver o processo atual</code></pre>
                 <span>pix</span>
                 <p data-support-pix-key>QR Code protegido</p>
                 <strong data-support-item-price>R$ 0</strong>
+                <img data-support-qr alt="QR Code Pix do item selecionado" hidden />
+                <textarea data-support-pix-code readonly hidden aria-label="Pix copia e cola"></textarea>
               </div>
             </div>
             <div class="office-support-catalog" data-support-catalog></div>
@@ -344,8 +346,9 @@ acao: passe o mouse em um agente para ver o processo atual</code></pre>
               <p data-support-inventory-text>Nenhum upgrade registrado ainda.</p>
             </div>
             <div class="office-support-actions office-support-actions-wide">
-              <button class="office-button primary" type="button" data-copy-pix-key>Usar QR protegido</button>
-              <button class="office-button" type="button" data-confirm-support-item>Registrar item no inventário</button>
+              <button class="office-button primary" type="button" data-copy-pix-key>Gerar QR Pix</button>
+              <button class="office-button" type="button" data-notify-support-payment>Avisei o pagamento</button>
+              <button class="office-button" type="button" data-confirm-support-item>Confirmar pagamento</button>
               <span data-support-feedback aria-live="polite">Escolha um item da vaquinha para copiar o Pix e registrar o upgrade.</span>
             </div>
           </div>

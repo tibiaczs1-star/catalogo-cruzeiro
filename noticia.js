@@ -541,6 +541,32 @@ const getArticleSentencePool = (article = {}) =>
 
 const getLimitedItems = (values = [], limit = 4) => dedupeTextList(values).slice(0, limit);
 
+const getEditorialFingerprint = (value = "") =>
+  normalizeMarkerText(value)
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const isRepeatedEditorialParagraph = (paragraph = "", reference = "") => {
+  const paragraphKey = getEditorialFingerprint(paragraph);
+  const referenceKey = getEditorialFingerprint(reference);
+
+  if (!paragraphKey || !referenceKey) {
+    return false;
+  }
+
+  if (paragraphKey === referenceKey) {
+    return true;
+  }
+
+  const shortest = Math.min(paragraphKey.length, referenceKey.length);
+  if (shortest < 80) {
+    return false;
+  }
+
+  return paragraphKey.includes(referenceKey) || referenceKey.includes(paragraphKey);
+};
+
 const getFactCheckVerdict = ({
   sourceName = "fonte consultada",
   dateLabel = "data recente",
@@ -1075,12 +1101,30 @@ const getExpandedBodyParagraphs = (article) => {
   const fallbackLede = normalizeEditorialText(article.lede || article.summary || "");
 
   if (baseParagraphs.length > 0) {
-    return baseParagraphs;
+    const uniqueParagraphs = baseParagraphs.filter(
+      (paragraph) => !isRepeatedEditorialParagraph(paragraph, fallbackLede)
+    );
+
+    if (uniqueParagraphs.length > 0) {
+      return uniqueParagraphs;
+    }
   }
 
-  return fallbackLede
-    ? [fallbackLede]
-    : ["A matéria segue em atualização conforme novas informações forem publicadas pela fonte consultada."];
+  const title = normalizeEditorialText(article.title || "o assunto");
+  const sourceName = normalizeEditorialText(article.sourceName || "a fonte consultada");
+  const category = normalizeEditorialText(article.category || "notícia local").toLowerCase();
+  const dateLabel = getArticleDateLabel(article);
+  const sourceLabel = normalizeEditorialText(article.sourceLabel || "");
+  const highlights = dedupeTextList(article.highlights || []).filter(
+    (item) => item !== fallbackLede && item !== title
+  );
+  const firstHighlight = highlights[0] || sourceLabel || title;
+
+  return [
+    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e depende de servicos, seguranca, mobilidade, saude, educacao ou decisao publica local.`,
+    `${firstHighlight} e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a tres pontos: origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.`,
+    "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+  ];
 };
 
 const buildEditorialFactTabs = (article = {}) => {

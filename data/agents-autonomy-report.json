@@ -1,0 +1,30 @@
+{
+  "ok": false,
+  "trigger": "once",
+  "startedAt": "2026-04-24T01:13:15.014Z",
+  "finishedAt": "2026-04-24T01:13:15.251Z",
+  "actions": [
+    {
+      "id": "news-editorial-body",
+      "agentGroup": "copy/editor/review/sources",
+      "status": "done",
+      "changedRuntimeItems": 0,
+      "changedStaticItems": 0,
+      "detail": "Garantiu body editorial proprio em noticias captadas e removeu repeticao entre resumo e corpo."
+    },
+    {
+      "id": "real-agents-runtime",
+      "agentGroup": "181 agentes reais",
+      "status": "done",
+      "totalAgents": 181,
+      "totalOffices": 5,
+      "newsItems": 150
+    },
+    {
+      "id": "review-team",
+      "agentGroup": "equipe local de revisao",
+      "status": "failed",
+      "output": "spawnSync C:\\Program Files\\nodejs\\node.exe EPERM"
+    }
+  ]
+}

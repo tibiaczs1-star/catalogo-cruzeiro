@@ -1,7 +1,216 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-23T13:41:26.401Z",
+  "lastUpdatedAt": "2026-04-24T02:19:13.427Z",
   "orders": [
+    {
+      "id": "2026-04-24-rastrear-e-blindar-foto-aleatoria-de-verduras-nas-materias",
+      "createdAt": "2026-04-24T01:34:12.707Z",
+      "updatedAt": "2026-04-24T01:34:12.707Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "descubra de onde vem essa foto que fica aparecendo aleatoriamente pelo meu site sem sentido nenhum de ordem aos agentes pra achar origem e porque ela fica aparecendo em algumas materias; retome tudo",
+      "summary": "Rastrear origem da foto de verduras/mercado e corrigir vazamento de fallback/preview em materias sem relacao.",
+      "normalizedTasks": [
+        "Acionar agentes para investigar assets, componentes e dados",
+        "Identificar origem local/remota da foto",
+        "Corrigir extrator/cache de preview que reaproveitava imagem errada",
+        "Impedir cliente de sobrescrever imagem ja definida por preview remoto",
+        "Limpar cache contaminado e validar auditoria de fotos"
+      ],
+      "filesTouched": [
+        "server.js",
+        "script.js",
+        "data/image-preview-cache.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        "assets/home-cache/fallback-cheia.jpg",
+        "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-23-at-15.13.05-1.jpg"
+      ],
+      "tags": [
+        "noticias",
+        "imagens",
+        "fallback",
+        "cache",
+        "preview-image",
+        "auditoria"
+      ],
+      "nextSteps": [
+        "Separar este pacote das muitas mudancas antigas antes de commit/push",
+        "Se atualizar feeds online, monitorar se novas imagens repetidas voltam ao cache"
+      ],
+      "notes": "Regra reforcada: se nao houver foto real confiavel da materia, nao buscar/usar imagem aleatoria do HTML inteiro ou preview tardio."
+    },
+    {
+      "id": "2026-04-24-pubpaid-global-qualquer-conta",
+      "createdAt": "2026-04-24T01:15:00.000Z",
+      "updatedAt": "2026-04-24T01:15:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "faça esse projeto ser global pra qualquer conta",
+      "summary": "Criar uma retomada global da PubPaid 2.0 dentro do workspace para qualquer conta/agente continuar mesmo sem o thread/projeto antigo.",
+      "normalizedTasks": [
+        "Criar arquivo de handoff global da PubPaid 2.0",
+        "Apontar AGENTS.md para esse arquivo",
+        "Apontar README do pacote PubPaid e memoria local para esse arquivo",
+        "Registrar a globalizacao na memoria operacional"
+      ],
+      "filesTouched": [
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        "AGENTS.md",
+        "PUBPAID_2_PACKAGE_README.md",
+        ".codex-memory/README.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "handoff",
+        "global",
+        "memory"
+      ],
+      "nextSteps": [
+        "Se trocar de conta, abrir o workspace e mandar o agente ler PUBPAID_2_GLOBAL_HANDOFF.md",
+        "Manter esse arquivo atualizado depois de mudanças grandes na PubPaid 2.0"
+      ],
+      "notes": "Isto nao altera a lista interna de projetos da plataforma, mas torna a frente portavel dentro do repositório/workspace."
+    },
+    {
+      "id": "2026-04-24-pubpaid-2-retomar-sprites-recortados",
+      "createdAt": "2026-04-24T01:05:00.000Z",
+      "updatedAt": "2026-04-24T01:05:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "continue com a ideia que estavamos trabalhando",
+      "summary": "Retomar a PubPaid 2.0 no ponto em que o thread sumiu, recortando sprites bitmap bons para canvases justos e religando vida leve na rua/salao sem voltar aos assets rejeitados.",
+      "normalizedTasks": [
+        "Criar sprites derivados com canvas justo para adulto, cliente sentado e cantora",
+        "Atualizar BootScene para carregar os derivados",
+        "Religar pedestres bitmap na rua em escala adulta",
+        "Trocar marcadores neutros por player/cantora/clientes PNG no salao",
+        "Manter veiculos e cachorro rejeitados fora do runtime"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "assets/pubpaid/sprites/adult-standing-tight-v1.png",
+        "assets/pubpaid/sprites/guest-seated-tight-v1.png",
+        "assets/pubpaid/sprites/singer-stage-tight-v1.png",
+        "assets/pubpaid/PUBPAID_ASSET_SOURCES.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        "adult-standing-tight-v1.png",
+        "guest-seated-tight-v1.png",
+        "singer-stage-tight-v1.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "sprites",
+        "pixel-art",
+        "visual-scale"
+      ],
+      "nextSteps": [
+        "Validar visualmente no browser real a escala dos personagens",
+        "Criar pacote bitmap coerente para veiculos e cachorro",
+        "Validar fluxo completo ate Dardos e Dama"
+      ],
+      "notes": "A retomada seguiu a regra: reintroduzir vida só com PNG bitmap recortado e escala controlada. Carros, moto e cachorro continuam desligados porque ainda nao combinam com o fundo."
+    },
+    {
+      "id": "2026-04-24-pubpaid-limpeza-visual-escala-sprites",
+      "createdAt": "2026-04-24T00:42:00.000Z",
+      "updatedAt": "2026-04-24T00:42:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "execute o prompt e todas as ações necessárias: trocar sprites, carros, motos, animais e efeitos que não combinam, corrigir escala gigante dentro do bar e deixar tudo coerente antes de religar",
+      "summary": "Limpar o runtime do PubPaid 2.0 removendo sprites/veículos/animal improvisados que quebravam escala e registrar um guia de proporções para o próximo pacote bitmap coerente.",
+      "normalizedTasks": [
+        "Desligar a rua viva improvisada até existir asset bitmap aprovado",
+        "Remover sprites gigantes/misturados do interior do bar",
+        "Registrar guia de escala adulta e status dos assets",
+        "Atualizar cache-buster e memória local"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "PUBPAID_VISUAL_SCALE_GUIDE.md",
+        "assets/pubpaid/PUBPAID_ASSET_SOURCES.md",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        "pubpaid-lobby-bg-v2-crowd.png",
+        "guest-standing-v2.png",
+        "guest-seated-v2.png",
+        "pubpaid-car-side-v1.png",
+        "pubpaid-motorbike-side-v1.png",
+        "pubpaid-street-dog-v1.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "pixel-art",
+        "sprite-scale",
+        "visual-cleanup"
+      ],
+      "nextSteps": [
+        "Criar pacote bitmap coerente para adultos, veículos, cachorro e pessoas do bar",
+        "Validar visualmente em 1280x720 e mobile horizontal",
+        "Religar buildStreetLife somente após aprovação visual"
+      ],
+      "notes": "A limpeza preferiu retirar o que destoava em vez de insistir em assets provisórios. O jogo fica mais vazio por enquanto, mas sem o bug visual de pernas gigantes e estilos misturados."
+    },
+    {
+      "id": "2026-04-23-pubpaid-2-dom-ui-dardos-dama-jogaveis",
+      "createdAt": "2026-04-23T23:15:00.000Z",
+      "updatedAt": "2026-04-23T23:15:00.000Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "faça o prompt premium: tornar todo 2d pixel art jogável os primeiros dois jogos, e criar toda parte de interface sem depender de canvas",
+      "summary": "Criar camada DOM de interface do PubPaid 2.0 e iniciar loop jogável local para Dardos e Dama sem depender do canvas para HUD/lobby/painéis.",
+      "normalizedTasks": [
+        "Criar UI DOM para HUD, lobby, Dardos, Dama e resultado",
+        "Conectar Dardos Phaser a comandos DOM de arremesso e resultado",
+        "Criar Dama jogável em tabuleiro DOM com IA local simples",
+        "Manter Phaser como palco de mundo/cenas e DOM como camada de interface"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/scenes/DartsGameScene.js",
+        "pubpaid-phaser/scenes/GameLobbyScene.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "game-ui",
+        "dom-ui",
+        "dardos",
+        "dama",
+        "pixel-art"
+      ],
+      "nextSteps": [
+        "Rodar visualmente pubpaid-v2.html por servidor local",
+        "Ajustar sobreposicoes desktop/mobile horizontal",
+        "Desligar ou suavizar botoes canvas antigos dos minigames se competirem com a UI DOM"
+      ],
+      "notes": "Primeiro corte implementado: DOM assume lobby/controles/resultados; Dardos recebe evento DOM; Dama tem tabuleiro DOM local."
+    },
     {
       "id": "2026-04-22-baixar-organizar-ferramentas-e-melhorar-a-base-do-pubpaid-2-com-stack-real-de-game-design",
       "createdAt": "2026-04-22T04:15:00.000Z",
@@ -4435,6 +4644,496 @@
         "admin",
         "deploy"
       ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-ajustar-visual-editorial-de-bloco-de-noticias-com-destaque-do-radar-e-copy-sobre",
+      "createdAt": "2026-04-23T13:54:25.390Z",
+      "updatedAt": "2026-04-23T13:54:25.390Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Edicao visual • 23 abr 2026 Três destaques que ajudam a entender o clima de Cruzeiro do Sul agora. Destaque do radar Jurua 24 Horas • 23 abr 2026 Aliado de Mailza, Pastor Reginaldo é nomeado para cargo de adjunto na Secretaria de Governo A governadora do Acre, Mailza Assis Cameli (Progressistas), nomeou o pastor Reginaldo F...",
+      "summary": "Ajustar visual/editorial de bloco de noticias com destaque do radar e copy sobre clima de Cruzeiro do Sul",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-adicionar-botao-e-secao-politica-regional-com-prioridade-editorial-vale-do-jurua",
+      "createdAt": "2026-04-23T14:16:04.772Z",
+      "updatedAt": "2026-04-23T14:16:04.772Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "crie mais um botão e a divisão politica regional; a divisão vem com noticias de politica regional vale do jurua, depois acre, depois brasil",
+      "summary": "Adicionar botão e seção Política Regional com prioridade editorial Vale do Juruá, Acre e Brasil",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-subir-pacote-atual-e-ordenar-atualizacao-geral-do-site-de-noticias-com-fontes-ma",
+      "createdAt": "2026-04-23T14:19:21.077Z",
+      "updatedAt": "2026-04-23T14:19:21.077Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "suba as coisas e de ordem geral pra toda equipe atualizar todo o site de noticias com o que tem mais atual, capta mais locais e puxa material inclusive mais entretenimento",
+      "summary": "Subir pacote atual e ordenar atualização geral do site de notícias com fontes mais atuais, mais locais e mais entretenimento",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-usuario-quer-conversar-sobre-ajustes-mobile-primeira-queixa-tela-de-carregamento",
+      "createdAt": "2026-04-23T14:42:14.453Z",
+      "updatedAt": "2026-04-23T14:42:14.453Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos conversa sobre ajusttes no mobile, primeiro cade a tela de carregamento pra ele carregar primeiro antes de abrir ? segundo",
+      "summary": "Usuario quer conversar sobre ajustes mobile; primeira queixa: tela de carregamento/splash nao aparece antes de abrir a home no celular.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art",
+      "createdAt": "2026-04-23T15:10:00.000Z",
+      "updatedAt": "2026-04-23T15:10:00.000Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "Corrigir a logica do PubPaid 2.0: intro, rua, porta, salao, garcom, lobby, oponente, aposta, confirma e tela propria do jogo; pesquisar/usar imagens, sprites e objetos melhores porque os graficos estavam ruins; fazer tudo de uma vez.",
+      "summary": "Reestruturar PubPaid 2.0 para jogos separados por lobby e melhorar a camada visual com assets pixel art/2D.",
+      "normalizedTasks": [
+        "Transformar salao em hub e nao palco das partidas",
+        "Adicionar lobby separado com aposta, busca de oponente IA e confirmacao",
+        "Abrir tela propria para cada jogo",
+        "Gerar e integrar fundos pixel art/2D para lobby, dardos e dama"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/GameLobbyScene.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/ui/panelActions.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/core/gameState.js",
+        "assets/pubpaid/lobby/pubpaid-lobby-bg-v1.png",
+        "assets/pubpaid/lobby/pubpaid-darts-room-v1.png",
+        "assets/pubpaid/lobby/pubpaid-checkers-room-v1.png",
+        "assets/pubpaid/PUBPAID_ASSET_SOURCES.md"
+      ],
+      "assetRefs": [
+        "pubpaid-lobby-bg-v1-png",
+        "pubpaid-darts-room-v1-png",
+        "pubpaid-checkers-room-v1-png"
+      ],
+      "tags": [
+        "pubpaid",
+        "phaser",
+        "pixel-art",
+        "lobby",
+        "game-flow"
+      ],
+      "nextSteps": [
+        "Evoluir Dardos e Dama para cenas jogaveis completas separadas",
+        "Adicionar sprites animados de garcom/oponente e props interativos"
+      ],
+      "notes": "Usuario pediu para parar de abrir/testar sem pedido e focar em construir; manter esse fluxo."
+    },
+    {
+      "id": "2026-04-23-remover-loader-retorno-desktop-home",
+      "createdAt": "2026-04-23T17:18:00.000Z",
+      "updatedAt": "2026-04-23T17:18:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "isso nbao deve aparecer no destop- ja tem um carregamento antes lembra?",
+      "summary": "Remover no desktop o painel alternativo de retorno 'Abrindo a home já quase pronta', porque o carregamento anterior já cobre essa etapa.",
+      "normalizedTasks": [
+        "Localizar o painel de carregamento alternativo da home",
+        "Impedir que ele apareça no fluxo desktop de visitante recorrente",
+        "Preservar a liberação normal da home após o prelude"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "desktop",
+        "loader",
+        "startup"
+      ],
+      "nextSteps": [
+        "Validar manualmente no navegador desktop quando o usuário abrir a home"
+      ],
+      "notes": "O fluxo skipWelcome/visitante recorrente agora chama releaseFounderPreludeGate() e dispatchIntroFinished() diretamente no desktop."
+    },
+    {
+      "id": "2026-04-23-corrigir-envio-de-relato-comunitario-e-retorno-para-o-quadro-da-populacao",
+      "createdAt": "2026-04-23T17:31:00.000Z",
+      "updatedAt": "2026-04-23T17:31:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "faça e ageite o envio de relato ta mandando pra reiniciar a pagina e não pros relatos na imagem posterior, o que indica que,   nao ta validando essa parte e dando as noticias da população",
+      "summary": "Corrigir o envio de relato comunitário para não parecer reinício de página e levar o usuário ao quadro de informações da população após o submit.",
+      "normalizedTasks": [
+        "Blindar o submit do formulário de relato com o helper de API principal",
+        "Evitar regressão visual durante o envio com botão bloqueado e feedback claro",
+        "Atualizar a lista de relatos e rolar a tela para o quadro comunitário após sucesso"
+      ],
+      "filesTouched": [
+        "script.js",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "comunidade",
+        "relatos",
+        "formulario"
+      ],
+      "nextSteps": [
+        "Validar manualmente que o novo relato aparece no bloco 'informações da população'"
+      ],
+      "notes": "O submit agora usa requestApiJson(), desabilita o botão durante o envio, recarrega a lista de relatos e chama scrollIntoView() para o quadro comunitário."
+    },
+    {
+      "id": "2026-04-23-restaurar-widget-redes-em-alta-que-ficou-sem-hidratacao",
+      "createdAt": "2026-04-23T17:40:00.000Z",
+      "updatedAt": "2026-04-23T17:40:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "vc tambem matou essa area tente ageita",
+      "summary": "Restaurar o widget 'Redes em alta' que ficou com aparência vazia por falta do script de hidratação.",
+      "normalizedTasks": [
+        "Localizar a área quebrada na lateral social/RSS",
+        "Confirmar se o script de renderização estava ausente no HTML",
+        "Religar o carregamento do social-rss.js após o arquivo de dados"
+      ],
+      "filesTouched": [
+        "index.html",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "sidebar",
+        "social-rss",
+        "hidratacao"
+      ],
+      "nextSteps": [
+        "Validar manualmente que o bloco volta a listar Instagram, TikTok, YouTube, Facebook e WhatsApp"
+      ],
+      "notes": "index.html voltou a carregar social-rss.js depois de social-rss-data.js, restaurando a renderização do widget."
+    },
+    {
+      "id": "2026-04-23-limitar-abertura-dos-fundadores-a-uma-vez-por-dia",
+      "createdAt": "2026-04-23T17:47:00.000Z",
+      "updatedAt": "2026-04-23T17:47:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "a abertura dos fundadores tambem so abre uma vez por dia",
+      "summary": "Fazer a abertura dos fundadores respeitar a mesma lógica diária do popup principal.",
+      "normalizedTasks": [
+        "Adicionar chave diária para a abertura dos fundadores",
+        "Marcar a abertura como vista no dia ao exibi-la",
+        "Pular o prelude quando ele já tiver sido visto na data atual"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "fundadores",
+        "prelude",
+        "daily"
+      ],
+      "nextSteps": [
+        "Validar manualmente que a abertura reaparece no dia seguinte e não reaparece no mesmo dia"
+      ],
+      "notes": "A abertura dos fundadores agora usa FOUNDER_PRELUDE_DAILY_KEY/COOKIE, além da proteção de sessão."
+    },
+    {
+      "id": "2026-04-23-eliminar-duplicatas-editoriais-e-remover-foto-falsa-das-superficies",
+      "createdAt": "2026-04-23T18:08:00.000Z",
+      "updatedAt": "2026-04-23T18:08:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "cheque tudo no website e de um orden pra evitar ta repeindo a mesma noticia em cima da outra ou noticias sem foto , com ilustração aleatoria, se nao tem foto deixa sem foto, mais nao poem besrteira",
+      "summary": "Reforçar a home contra repetição da mesma notícia entre superfícies e impedir imagem inventada quando a matéria não tem foto real.",
+      "normalizedTasks": [
+        "Deduplicar notícias republicadas por título e data, não apenas por URL de origem",
+        "Parar de usar preview externo ou ilustração como se fosse foto da matéria",
+        "Trocar fallbacks bitmap de thumbs por superfícies neutras quando não houver foto"
+      ],
+      "filesTouched": [
+        "script.js",
+        "styles.css",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "editorial",
+        "dedupe",
+        "fotos"
+      ],
+      "nextSteps": [
+        "Rodar validação visual manual na home para conferir cards sem foto e blocos sem repetição imediata"
+      ],
+      "notes": "Ordem editorial permanente: se a notícia não tiver foto real aproveitável, a superfície deve ficar sem foto; não usar preview ilustrativo, logo do site ou bitmap aleatório."
+    },
+    {
+      "id": "2026-04-23-atualizar-home-viva-para-buzz-trading-dar-utilidade-real-aos-cards-de-politica-r",
+      "createdAt": "2026-04-23T20:25:28.547Z",
+      "updatedAt": "2026-04-23T20:25:28.547Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "forca atualizacao estatica do buzz/trading quando capta coisas novas e forca procura coisas novas; da utilidade os cards de politica que ficam so ocupando espaco; matar a duplicacao de imagem na materia e esconder o card captacao exemplo; cortar os robos do popup/Insiders e forcar a multidao",
+      "summary": "Atualizar home viva para buzz/trading, dar utilidade real aos cards de politica, remover duplicacao de imagem/card de captacao na materia e trocar robos visuais por multidao",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-abrir-rodada-executiva-dos-181-agentes-para-auditoria-total-do-portal-saneamento",
+      "createdAt": "2026-04-23T21:04:51.861Z",
+      "updatedAt": "2026-04-23T21:04:51.861Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "emitir ordens executivas para os 181 agentes varrerem o site atras de bugs, noticias sem fotos, blocos com cara de IA ou linguagem interna, partes estaticas que precisam captacao ativa, o bug das 3 fotos se seguindo, atualizar toda a base de noticias, contar quantas noticias temos e preparar subida para o Render apos checagem manual",
+      "summary": "Abrir rodada executiva dos 181 agentes para auditoria total do portal, saneamento editorial, base de noticias e preparacao de deploy",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-corrigir-api-do-detalhe-para-que-artigos-autorais-nao-sejam-sobrescritos-por-fal",
+      "createdAt": "2026-04-23T23:42:23.186Z",
+      "updatedAt": "2026-04-23T23:42:23.186Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "reveja que as duas noticias altorais tao sem foto, tipoa do michael jackson eu digo dentro da analise",
+      "summary": "Corrigir API do detalhe para que artigos autorais nao sejam sobrescritos por fallback home-linked sem foto nas analises internas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-23-verificar-e-corrigir-noticia-do-michael-jackson-no-render-onde-a-foto-aparece-in",
+      "createdAt": "2026-04-23T23:48:03.142Z",
+      "updatedAt": "2026-04-23T23:48:03.142Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "https://catalogo-cruzeiro-web.onrender.com/noticia.html?slug=michael-jackson-filme-cine-romeu-cruzeiro-do-sul a foto aparece e some, verifique",
+      "summary": "Verificar e corrigir notícia do Michael Jackson no Render onde a foto aparece inicialmente e some após carregamento/hidratação.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-corrigir-fluxo-de-abertura-da-home-separar-splash-grande-do-mini-loader-de-avata",
+      "createdAt": "2026-04-24T00:05:30.816Z",
+      "updatedAt": "2026-04-24T00:05:30.816Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "primeiro a cena de abertura de carregamento e a outra menor, a dos avatares do escritorio so que a menor vc ta usando a maior, e quando eu volto ou carrego qualquer coisa e volto fica preto tudo, demora e depois abre o site, ajuste esses dois erros",
+      "summary": "Corrigir fluxo de abertura da home: separar splash grande do mini loader de avatares/escritório e eliminar tela preta em retorno/recarregamento antes da home abrir.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-corrigir-a-pagina-interna-de-noticia-para-nao-repetir-o-resumo-no-corpo-e-criar-",
+      "createdAt": "2026-04-24T00:32:18.900Z",
+      "updatedAt": "2026-04-24T00:32:18.900Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "da uma olhada nisso o texto se repete em baixo, certo? nao.... o artigo quando vc abre a materia tem que ter o titulo ai resumo, e o editorial proprio falando disso na parte que ta vaga ali em baixo repetindo o que disse em cima? nao esta certo pegue meus 181 agente reais e faça uma reunião/ primeiro um prompt para revisar tudo isso",
+      "summary": "Corrigir a pagina interna de noticia para nao repetir o resumo no corpo e criar prompt de reuniao dos 181 agentes reais para revisar hierarquia editorial das materias.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-acionar-prompt-de-reuniao-editorial-e-ordenar-execucao-pelos-181-agentes-reais-p",
+      "createdAt": "2026-04-24T00:36:04.616Z",
+      "updatedAt": "2026-04-24T00:36:04.616Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora acione o prompt e de ordem de execulção, todos os agentes devem corrigir os artigos que tão repetindo ou sem texto editorial feito por eles mesmo com resumo em baixo da captação da noticia",
+      "summary": "Acionar prompt de reunião editorial e ordenar execução pelos 181 agentes reais para corrigir artigos com resumo repetido ou sem texto editorial próprio abaixo da captação.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-verificar-se-os-181-agentes-cumpriram-a-ordem-editorial-e-corrigir-de-verdade-os",
+      "createdAt": "2026-04-24T00:38:34.855Z",
+      "updatedAt": "2026-04-24T00:38:34.855Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "depois verifique se os agentes fizeram oque foram mandandos",
+      "summary": "Verificar se os 181 agentes cumpriram a ordem editorial e corrigir de verdade os artigos sem corpo ou com resumo repetido.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-adicionar-rotina-permanente-aos-agentes-editoriais-copy-revisao-fontes-para-nunc",
+      "createdAt": "2026-04-24T00:40:12.968Z",
+      "updatedAt": "2026-04-24T00:40:12.968Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "depois adicione aos agentes especificos essa rotina, os que mas trabalharam escrevendo noticias, ou coisa parecida",
+      "summary": "Adicionar rotina permanente aos agentes editoriais/copy/revisao/fontes para nunca repetir resumo no corpo e criar texto editorial proprio quando a captacao vier sem body.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-criar-motor-de-autonomia-real-para-agentes-ciclo-24h-no-servidor-script-daemon-c",
+      "createdAt": "2026-04-24T00:46:36.394Z",
+      "updatedAt": "2026-04-24T00:46:36.394Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "pois faça eles ter, quando eu subo o comit, eles deveriam ser atualziados, e trabalhar 24 horas por dia principalmente na captção de noticias, e todas as outras coisas e fazer correç~eos e etc, então faça a parte de parar de da cracha, e e fazer eles autonomos",
+      "summary": "Criar motor de autonomia real para agentes: ciclo 24h no servidor, script/daemon, correcoes editoriais automaticas em noticias captadas, workflow no commit e painel com prova das ações.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-renomear-botao-da-home-para-relatorio-geral-exigir-senha-ao-entrar-no-relatorio-",
+      "createdAt": "2026-04-24T00:51:08.614Z",
+      "updatedAt": "2026-04-24T00:51:08.614Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "mude o botão agentes reais para relatorio geral, e peça senha la quando entrar, alem disso tem 4 escritorios especificos, quero que leia essas paginas e me diga as funções delas, ou pelo menos que funções ja deveriam ter sido implementadas ou estão la como função decorativa e deveria implementar",
+      "summary": "Renomear botão da home para Relatório geral, exigir senha ao entrar no relatório e revisar funções reais/decorativas dos quatro escritórios.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-transformar-inventario-dos-escritorios-em-vaquinha-pix-real-com-qr-copia-e-cola-",
+      "createdAt": "2026-04-24T01:01:40.565Z",
+      "updatedAt": "2026-04-24T01:01:40.565Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "esse inventario no caso e pras pessoas compra coisas e me da mais poder de fogo... se a pessoa compra paga com qr code para min 99566741204 antonio clovis ou codigo",
+      "summary": "Transformar inventario dos escritorios em vaquinha Pix real com QR/copia-e-cola, apoio pendente e confirmacao Full Admin antes de aparecer no inventario.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-restringir-bloco-trending-buzz-polemicas-para-puxar-somente-assuntos-e-fontes-do",
+      "createdAt": "2026-04-24T01:09:58.101Z",
+      "updatedAt": "2026-04-24T01:09:58.101Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "isso deve puxar coisas so do brasil / retome",
+      "summary": "Restringir bloco Trending & Buzz/polêmicas para puxar somente assuntos e fontes do Brasil, removendo fontes globais como The Verge e YouTube Blog.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-criar-campanha-banner-poster-para-catalogo-cruzeiro-do-sul-com-mensagem-de-chega",
+      "createdAt": "2026-04-24T02:16:07.203Z",
+      "updatedAt": "2026-04-24T02:16:07.203Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "crie um banner poster e tudo mais para o catalogo cruzeiro do sul, a ideia e, ta chegando ao novo, algo pra liberta, pra informa e intrreter e te mostra todos os caminhos 24 horas por dia, sem posuição ou ideologia",
+      "summary": "Criar campanha/banner/poster para Catalogo Cruzeiro do Sul com mensagem de chegada do novo, informar, entreter e mostrar caminhos 24h sem posicao/ideologia.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-adaptar-campanha-do-catalogo-cruzeiro-do-sul-para-redes-sociais-com-artes-de-pos",
+      "createdAt": "2026-04-24T02:16:51.424Z",
+      "updatedAt": "2026-04-24T02:16:51.424Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e pra rede sociais",
+      "summary": "Adaptar campanha do Catalogo Cruzeiro do Sul para redes sociais com artes de post, story/reels e banner horizontal.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-fechar-commit-e-subir-o-pacote-pronto-para-origin-main",
+      "createdAt": "2026-04-24T02:19:13.427Z",
+      "updatedAt": "2026-04-24T02:19:13.427Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora que temos tudo pronto vamos subir o commits",
+      "summary": "Fechar commit e subir o pacote pronto para origin/main.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
       "nextSteps": [],
       "notes": ""
     }

@@ -134,6 +134,7 @@ Se precisar criar mais agentes personalizados:
 
 ## Memória operacional do Codex
 
+- Se o trabalho for sobre `PubPaid 2.0`, leia primeiro `PUBPAID_2_GLOBAL_HANDOFF.md`; esse arquivo e o ponto de retomada global para qualquer conta/agente quando o projeto/thread antigo sumir da lista.
 - Se existir um arquivo `CODEX_MEMORY.md` na raiz do projeto, leia esse arquivo antes de continuar trabalhos já iniciados neste repositório.
 - Se existir o diretório `.codex-memory/`, leia `README.md`, `current-state.md`, `handoff.md`, `orders.json` e `assets.json` antes de continuar trabalhos já iniciados neste repositório.
 - Se existir `.codex-memory/credit-end-protocol.md`, leia esse arquivo em toda retomada e sempre que a sessão estiver perto do fim dos créditos.

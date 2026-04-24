@@ -14,6 +14,7 @@ Evitar perder contexto quando:
 
 ## Arquivos principais
 
+- `../PUBPAID_2_GLOBAL_HANDOFF.md`: retomada global da PubPaid 2.0 para qualquer conta/agente.
 - `current-state.md`: foco atual, contexto vivo e proximos passos.
 - `handoff.md`: resumo curto para retomada rapida por outra sessao.
 - `orders.json`: historico estruturado das ordens do usuario.

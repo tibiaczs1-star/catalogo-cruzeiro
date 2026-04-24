@@ -1,21 +1,9 @@
 # Handoff
 
-Updated: 2026-04-23T14:05:00.000Z
+Updated: 2026-04-24T02:19:25.895Z
 
-PubPaid 2.0 segue como frente principal. Nesta passada, `panelActions.js` passou a montar settlement view para partidas encerradas, `overlay.js` renderiza card de resultado com payout/casa e `pubpaid-phaser.css` ganhou a camada visual correspondente. Em `InteriorScene.js`, Dardos e Dama agora exibem resultado diretamente no salão com badge `WIN/LOSS/DRAW`, glow pulsante e texto de payout, e as placas externas mudam para `FINAL` em match concluída. Sintaxe passou em `node --check` para os JS tocados e o CSS ficou com `brace-balance=0`.
+Pacote social criado em assets/social: feed 1080x1350, quadrado 1080x1080, story 1080x1920, cover 1920x1080 e arquivo de legendas. Tema: Ta chegando o novo, informar, entreter e mostrar caminhos 24h, sem poluicao e sem ideologia.
 
 ## Next
 
-- Continuar sem abrir navegador, como o usuário pediu
-- Avançar para FX mais ricos em pixel art nas mesas: partículas, clarões, payout pop e estados finais mais teatrais
-- Depois produzir props/sprites 2D dedicados para cada mesa
-
-## Files In Focus
-
-- pubpaid-phaser/scenes/InteriorScene.js
-- pubpaid-phaser/ui/panelActions.js
-- pubpaid-phaser/ui/overlay.js
-- pubpaid-phaser.css
-- .codex-memory/orders.json
-- .codex-memory/current-state.md
-- .codex-memory/handoff.md
+- Opcional: exportar para PNG/JPG e/ou inserir uma faixa da campanha na home.

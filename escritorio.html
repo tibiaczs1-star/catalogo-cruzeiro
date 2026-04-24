@@ -363,15 +363,54 @@ status: equipe online
 fluxo: codigo, conteudo, revisao e deploy em andamento
 acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
                 <form class="office-terminal-command" data-terminal-command-form>
-                  <label for="terminalCommandInput">Pedido específico ou código</label>
+                  <label for="terminalCommandInput">Pergunta paga aos agentes</label>
                   <textarea
                     id="terminalCommandInput"
                     data-terminal-command-input
                     rows="5"
-                    placeholder="Cole aqui um pedido, trecho de código ou instrução para o agente ativo..."
+                    placeholder="Pergunte algo divertido, interativo ou curioso para o agente ativo..."
                   ></textarea>
-                  <button class="office-button primary" type="submit">Enviar comando</button>
+                  <button class="office-button primary" type="submit">Interagir por R$ 20</button>
                 </form>
+                <div class="office-paid-menu" aria-label="Opções pagas do escritório">
+                  <article>
+                    <span>R$ 20</span>
+                    <strong>Interagir no terminal</strong>
+                    <p>Faça uma pergunta aos agentes, peça opinião, brincadeira, bastidor ou resposta personalizada. Não altera o site.</p>
+                    <button type="button" data-paid-offer="terminal">Gerar Pix do terminal</button>
+                  </article>
+                  <article>
+                    <span>R$ 100</span>
+                    <strong>Comprar ambiente</strong>
+                    <p>Você compra um novo cenário para este escritório. Depois da confirmação, ele aparece como ambiente liberado.</p>
+                    <button type="button" data-paid-offer="environment">Gerar Pix do ambiente</button>
+                  </article>
+                </div>
+                <section class="office-visit-promo" aria-label="Visite e apoie os escritórios virtuais">
+                  <div class="office-visit-scene" aria-hidden="true">
+                    <span class="office-visit-avatar avatar-a"></span>
+                    <span class="office-visit-avatar avatar-b"></span>
+                    <span class="office-visit-avatar avatar-c"></span>
+                    <span class="office-visit-console"></span>
+                    <span class="office-visit-spark spark-a"></span>
+                    <span class="office-visit-spark spark-b"></span>
+                    <span class="office-visit-spark spark-c"></span>
+                  </div>
+                  <div class="office-visit-copy">
+                    <span>ambiente virtual vivo</span>
+                    <strong>Entre nos escritórios, doe para uma equipe específica e veja o lugar crescer.</strong>
+                    <p>
+                      Cada escritório tem sua própria vaquinha, inventário e terminal. O apoio equipa aquela equipe,
+                      libera interações pagas com os agentes e pode virar um novo ambiente sugerido por quem comprou.
+                    </p>
+                    <div class="office-visit-links">
+                      <a href="./escritorio.html">Editorial</a>
+                      <a href="./escritorio-arte.html">Arte/Game</a>
+                      <a href="./escritorio-ninjas.html">Ninjas</a>
+                      <a href="./esttiles.html">Esttíles</a>
+                    </div>
+                  </div>
+                </section>
                 <div class="office-live-panel" aria-live="polite">
                   <span>rodando 24h</span>
                   <strong data-office-feed>Codigo, conteudo, revisao e atendimento funcionando sem parar no escritorio.</strong>
@@ -498,6 +537,8 @@ acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
               <span>pix</span>
               <p data-support-pix-key>QR Code protegido</p>
               <strong data-support-item-price>R$ 0</strong>
+              <img data-support-qr alt="QR Code Pix do item selecionado" hidden />
+              <textarea data-support-pix-code readonly hidden aria-label="Pix copia e cola"></textarea>
             </div>
           </div>
           <div class="office-support-catalog" data-support-catalog></div>
@@ -506,8 +547,9 @@ acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
             <p data-support-inventory-text>Nenhuma melhoria registrada ainda.</p>
           </div>
           <div class="office-support-actions office-support-actions-wide">
-            <button class="office-button primary" type="button" data-copy-pix-key>Usar QR protegido</button>
-            <button class="office-button" type="button" data-confirm-support-item>Registrar item no inventário</button>
+            <button class="office-button primary" type="button" data-copy-pix-key>Gerar QR Pix</button>
+            <button class="office-button" type="button" data-notify-support-payment>Avisei o pagamento</button>
+            <button class="office-button" type="button" data-confirm-support-item>Confirmar pagamento</button>
             <span data-support-feedback aria-live="polite">Escolha um item da vaquinha para copiar o Pix e registrar a melhoria.</span>
           </div>
         </div>

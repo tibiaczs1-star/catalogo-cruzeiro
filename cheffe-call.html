@@ -35,20 +35,58 @@
               <p>Abra o assunto, deixe a sala reagir e transforme a melhor ideia em tarefa ou execução.</p>
             </article>
             <article>
-              <span>Modo local</span>
-              <strong>Sem senha para simular</strong>
-              <p>Se a senha ficar vazia, a reunião entra em modo visual para experimentar o fluxo e o design.</p>
+              <span>Relatório</span>
+              <strong>Sem senha só consulta</strong>
+              <p>Sem senha, a sala apenas mostra o estado atual dos agentes. Ordem, aprovação e execução exigem Full Admin.</p>
             </article>
             <article>
               <span>Senha</span>
-              <strong>Só para runtime real</strong>
-              <p>Use a senha Full Admin apenas quando quiser pausar rotinas reais e operar a Cheffe Call ao vivo.</p>
+              <strong>Runtime real</strong>
+              <p>Use a senha Full Admin para pausar rotinas, ouvir opiniões reais, aprovar ideias e mandar executar.</p>
             </article>
           </div>
           <div class="call-mode-banner" id="callModeBanner" aria-live="polite">
-            <span>Modo visual</span>
-            <strong>Simulação aberta sem senha</strong>
+            <span>Relatório</span>
+            <strong>Consulta aberta. Operação exige senha Full Admin.</strong>
           </div>
+          <section class="call-real-flow" aria-labelledby="callRealFlowTitle">
+            <div class="call-real-flow-head">
+              <span>fluxo real</span>
+              <strong id="callRealFlowTitle">Como operar sem se perder</strong>
+            </div>
+            <ol id="callRealFlowSteps">
+              <li data-flow-step="password">
+                <span>1</span>
+                <strong>Senha</strong>
+                <p>Digite Full Admin para comandar. Sem senha, só consulta.</p>
+              </li>
+              <li data-flow-step="meeting">
+                <span>2</span>
+                <strong>Abrir reunião</strong>
+                <p>Escreva a ordem e envie para pausar rotinas e ouvir agentes reais.</p>
+              </li>
+              <li data-flow-step="opinions">
+                <span>3</span>
+                <strong>Ouvir opiniões</strong>
+                <p>Use Próximo para navegar pela fala de cada agente.</p>
+              </li>
+              <li data-flow-step="decision">
+                <span>4</span>
+                <strong>Decidir</strong>
+                <p>Aprove, peça ajuste, transforme em tarefa ou mande implementar.</p>
+              </li>
+              <li data-flow-step="report">
+                <span>5</span>
+                <strong>Acompanhar</strong>
+                <p>Veja fila, logs, ações e escritórios no relatório abaixo.</p>
+              </li>
+              <li data-flow-step="release">
+                <span>6</span>
+                <strong>Liberar</strong>
+                <p>Quando terminar, libere as automações dos agentes.</p>
+              </li>
+            </ol>
+          </section>
           <section class="call-workspace">
             <form class="call-console" id="cheffeCallForm">
               <input class="call-hidden-username" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" />
@@ -79,7 +117,7 @@
                 <button type="button" id="markGoodIdea">Boa ideia</button>
                 <button type="button" id="releaseCall">Liberar automações</button>
               </div>
-              <p id="callStatus" role="status">Sala pronta para assunto visual. Use senha só para pausar runtime real.</p>
+              <p id="callStatus" role="status">Sala pronta para relatório real. Digite a senha para comandar os agentes.</p>
             </form>
 
             <section class="call-terminal" aria-label="Terminal da reunião">
@@ -424,6 +462,44 @@
         </div>
         <div id="opinionsList" class="opinions-list"></div>
       </section>
+      </section>
+
+      <section class="call-agent-report" aria-labelledby="callAgentReportTitle">
+        <div class="section-head">
+          <p class="call-kicker">Relatório geral</p>
+          <h2 id="callAgentReportTitle">Operação real dos agentes</h2>
+        </div>
+        <div class="call-report-summary" id="callReportSummary"></div>
+        <div class="call-report-grid">
+          <article class="call-report-panel">
+            <div class="section-head">
+              <p class="call-kicker">Fila real</p>
+              <h3>Tarefas em andamento</h3>
+            </div>
+            <div id="callReportQueue" class="call-report-list"></div>
+          </article>
+          <article class="call-report-panel">
+            <div class="section-head">
+              <p class="call-kicker">Escritórios</p>
+              <h3>Entrega e risco</h3>
+            </div>
+            <div id="callReportOffices" class="call-report-list"></div>
+          </article>
+          <article class="call-report-panel">
+            <div class="section-head">
+              <p class="call-kicker">Aprovação</p>
+              <h3>Ações prontas</h3>
+            </div>
+            <div id="callReportActions" class="call-report-list"></div>
+          </article>
+          <article class="call-report-panel">
+            <div class="section-head">
+              <p class="call-kicker">Logs</p>
+              <h3>Últimos sinais</h3>
+            </div>
+            <div id="callReportLogs" class="call-report-list"></div>
+          </article>
+        </div>
       </section>
 
       <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de comando rápida">

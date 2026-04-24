@@ -21,6 +21,8 @@ node_modules/
 # Artefatos temporários / automação local
 .chrome-headless-codex/
 .codex-temp/
+.playwright-cli/
+output/playwright/
 data/real-agents-memory.json
 data/real-agents-run-history.json
 data/cheffe-call-state.json

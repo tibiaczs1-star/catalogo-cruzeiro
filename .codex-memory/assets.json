@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-22T12:14:41.489Z",
+  "lastUpdatedAt": "2026-04-24T02:19:12.125Z",
   "assets": [
     {
       "id": "recovered-chat-assets",
@@ -531,6 +531,186 @@
       "note": "Validacao da StreetScene do PubPaid 2 em viewport Pixel 7 com HUD mobile",
       "linkedOrderIds": [],
       "createdAt": "2026-04-22T12:14:41.489Z"
+    },
+    {
+      "id": "cheffe-call-operational-bridge-png",
+      "kind": "image",
+      "path": "output/playwright/cheffe-call-operational-bridge.png",
+      "source": "workspace",
+      "note": "Captura da Cheffe Call com ponte operacional real, fila e logs vindos do backend.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-23T00:49:10.417Z"
+    },
+    {
+      "id": "cheffe-call-fullscreen-finish-v3-png",
+      "kind": "screenshot",
+      "path": "output/playwright/cheffe-call-fullscreen-finish-v3.png",
+      "source": "playwright",
+      "note": "Cheffe Call premium fullscreen com palco e data center validados",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-23T01:43:06.601Z"
+    },
+    {
+      "id": "escritorio-cheffe-locked-real-png",
+      "kind": "screenshot",
+      "path": "output/playwright/escritorio-cheffe-locked-real.png",
+      "source": "playwright",
+      "note": "Escritorio validado com banner e estado de equipe em reuniao no Cheffe Call",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-23T01:43:06.660Z"
+    },
+    {
+      "id": "pubpaid-lobby-bg-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/lobby/pubpaid-lobby-bg-v1.png",
+      "source": "imagegen",
+      "note": "Fundo bitmap pixel art do lobby separado do PubPaid 2.0, gerado para substituir a base visual de formas/canvas.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T15:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-darts-room-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/lobby/pubpaid-darts-room-v1.png",
+      "source": "imagegen",
+      "note": "Fundo bitmap pixel art para tela propria de Dardos no PubPaid 2.0.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T15:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-checkers-room-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/lobby/pubpaid-checkers-room-v1.png",
+      "source": "imagegen",
+      "note": "Fundo bitmap pixel art para tela propria de Dama no PubPaid 2.0.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T15:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-waiter-salon-small-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/characters/waiter-salon-small-v1.png",
+      "source": "imagegen",
+      "note": "Sprite PNG transparente do garcom pequeno para o centro do salao PubPaid; substitui o garcom desenhado por canvas.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T16:28:00.000Z"
+    },
+    {
+      "id": "pubpaid-waiter-lobby-large-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/characters/waiter-lobby-large-v1.png",
+      "source": "imagegen",
+      "note": "Sprite PNG transparente do garcom grande/detalhado para cena de lobby, dialogo e instrucoes.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T16:28:00.000Z"
+    },
+    {
+      "id": "pubpaid-lobby-bg-v2-crowd-png",
+      "kind": "image",
+      "path": "assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png",
+      "source": "imagegen",
+      "note": "Fundo pixel art do lobby PubPaid com pessoas sentadas, bebendo e dancando ao fundo, deixando espaco central para o garcom e HUD.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T17:05:00.000Z"
+    },
+    {
+      "id": "pubpaid-waiter-lobby-speaking-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/characters/waiter-lobby-speaking-v1.png",
+      "source": "imagegen",
+      "note": "Variante PNG transparente do garcom do lobby com boca aberta/falando para animacao por troca de textura.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T17:05:00.000Z"
+    },
+    {
+      "id": "pubpaid-singer-lobby-v1-png",
+      "kind": "image",
+      "path": "assets/pubpaid/characters/singer-lobby-v1.png",
+      "source": "imagegen",
+      "note": "Cantora pixel art PNG transparente para compor o canto do lobby no mesmo acabamento do garcom.",
+      "linkedOrderIds": [
+        "2026-04-23-pubpaid-2-corrigir-fluxo-e-melhorar-graficos-com-assets-pixel-art"
+      ],
+      "createdAt": "2026-04-23T17:18:00.000Z"
+    },
+    {
+      "id": "reuniao-executiva-181-agentes-2026-04-23-md",
+      "kind": "report",
+      "path": ".codex-temp/reports/reuniao-executiva-181-agentes-2026-04-23.md",
+      "source": "workspace",
+      "note": "Relatorio executivo da reuniao com os 181 agentes: ordens, achados, lacunas de imagem e pipeline de noticias",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-23T21:11:41.337Z"
+    },
+    {
+      "id": "michael-detail-live-after-deploy-png",
+      "kind": "image",
+      "path": "output/playwright/michael-detail-live-after-deploy.png",
+      "source": "workspace",
+      "note": "Validação Playwright ao vivo após hotfix: matéria do Michael Jackson no Render manteve hero has-image/topImage=resolved após 6s, sem erros de console.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T00:01:30.918Z"
+    },
+    {
+      "id": "pubpaid-tight-sprites-2026-04-24",
+      "kind": "directory",
+      "path": "assets/pubpaid/sprites",
+      "source": "workspace",
+      "note": "Derivados PNG com canvas justo para reintroduzir player, pedestres, cliente sentado e cantora na PubPaid 2.0 sem quebrar a escala adulta.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-2-retomar-sprites-recortados"
+      ],
+      "createdAt": "2026-04-24T01:05:00.000Z"
+    },
+    {
+      "id": "catalogo-social-square-1080x1080-svg",
+      "kind": "image",
+      "path": "assets/social/catalogo-social-square-1080x1080.svg",
+      "source": "workspace",
+      "note": "Arte social quadrada 1080x1080 da campanha Ta chegando o novo do Catalogo Cruzeiro do Sul",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:19:11.888Z"
+    },
+    {
+      "id": "catalogo-social-feed-1080x1350-svg",
+      "kind": "image",
+      "path": "assets/social/catalogo-social-feed-1080x1350.svg",
+      "source": "workspace",
+      "note": "Arte social vertical 1080x1350 da campanha Ta chegando o novo do Catalogo Cruzeiro do Sul",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:19:11.903Z"
+    },
+    {
+      "id": "catalogo-social-story-1080x1920-svg",
+      "kind": "image",
+      "path": "assets/social/catalogo-social-story-1080x1920.svg",
+      "source": "workspace",
+      "note": "Arte social story/reels 1080x1920 da campanha Ta chegando o novo do Catalogo Cruzeiro do Sul",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:19:12.109Z"
+    },
+    {
+      "id": "catalogo-social-cover-1920x1080-svg",
+      "kind": "image",
+      "path": "assets/social/catalogo-social-cover-1920x1080.svg",
+      "source": "workspace",
+      "note": "Banner horizontal 1920x1080 da campanha Ta chegando o novo do Catalogo Cruzeiro do Sul",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:19:12.125Z"
     }
   ]
 }

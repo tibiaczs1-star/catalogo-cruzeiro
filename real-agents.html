@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agentes Reais em Operação • Catálogo Cruzeiro do Sul</title>
+    <title>Relatório Geral dos Agentes • Catálogo Cruzeiro do Sul</title>
     <link rel="stylesheet" href="real-agents.css?v=20260422a" />
     <link rel="stylesheet" href="./uix-design-system.css?v=20260422b" />
   </head>
@@ -15,11 +15,24 @@
       <a href="escritorio-ninjas.html">Ninjas</a>
     </header>
 
-    <main class="agents-shell">
+    <section class="agents-access-gate" id="agentsAccessGate" aria-labelledby="agentsGateTitle">
+      <form class="agents-access-card" id="agentsAccessForm">
+        <p class="agents-kicker">acesso restrito</p>
+        <h1 id="agentsGateTitle">Relatório geral dos agentes</h1>
+        <label>
+          Senha Full Admin
+          <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" autofocus />
+        </label>
+        <button type="submit">Entrar</button>
+        <span id="agentsAccessStatus" role="status">Digite a senha para abrir o relatório.</span>
+      </form>
+    </section>
+
+    <main class="agents-shell" id="agentsShell" hidden>
       <section class="agents-hero" aria-labelledby="agentsTitle">
         <div>
           <p class="agents-kicker">Operação viva</p>
-          <h1 id="agentsTitle">Agentes reais do jornal</h1>
+          <h1 id="agentsTitle">Relatório geral dos agentes</h1>
           <p>
             Cadastro, capacidades, monitoramento e fila de trabalho dos agentes que acompanham as notícias,
             revisões e oportunidades do portal.
@@ -36,6 +49,17 @@
       </section>
 
       <section class="agents-stats" id="agentsStats" aria-label="Resumo dos agentes"></section>
+
+      <section class="agents-awards" aria-labelledby="autonomyRunnerTitle">
+        <div class="agents-awards-head">
+          <div>
+            <p class="agents-kicker">Trabalho autônomo</p>
+            <h2 id="autonomyRunnerTitle">Correções reais aplicadas</h2>
+          </div>
+          <p>Prova do ciclo que corrige notícias captadas, roda agentes e valida a publicação.</p>
+        </div>
+        <div id="autonomyRunner" class="agents-awards-catalog" aria-label="Ciclo autônomo dos agentes"></div>
+      </section>
 
       <section class="agents-awards" aria-labelledby="awardsTitle">
         <div class="agents-awards-head">

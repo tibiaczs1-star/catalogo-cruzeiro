@@ -74,6 +74,12 @@
   const loadPromptToInstruction = document.querySelector("#loadPromptToInstruction");
   const loadPromptToTerminal = document.querySelector("#loadPromptToTerminal");
   const copyPromptText = document.querySelector("#copyPromptText");
+  const callReportSummary = document.querySelector("#callReportSummary");
+  const callReportQueue = document.querySelector("#callReportQueue");
+  const callReportOffices = document.querySelector("#callReportOffices");
+  const callReportActions = document.querySelector("#callReportActions");
+  const callReportLogs = document.querySelector("#callReportLogs");
+  const realFlowSteps = Array.from(document.querySelectorAll("[data-flow-step]"));
 
   const fallbackAgents = [
     { agent: "Codex CEO", office: "Comando", role: "prioridade", score: 92 },
@@ -102,6 +108,7 @@
   let lowerDecksOpen = false;
   let currentMeetingSessionId = "";
   let latestCallPayload = null;
+  let cheffeAdminPassword = window.sessionStorage.getItem("cheffeCallFullAdminPassword") || "";
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -239,28 +246,6 @@
       .replace(/^-+|-+$/g, "");
   }
 
-  function getVoteKey(agent) {
-    return `cheffe_agent_vote:${slugify(agent?.name || agent?.agent || "agente")}`;
-  }
-
-  function getAgentVotes(agent) {
-    try {
-      return Number(window.localStorage.getItem(getVoteKey(agent)) || 0);
-    } catch (_error) {
-      return 0;
-    }
-  }
-
-  function addAgentVote(agent) {
-    const nextVotes = getAgentVotes(agent) + 1;
-    try {
-      window.localStorage.setItem(getVoteKey(agent), String(nextVotes));
-    } catch (_error) {
-      // ignore storage failures
-    }
-    return nextVotes;
-  }
-
   function escapeHtml(value) {
     return String(value || "")
       .replace(/&/g, "&amp;")
@@ -277,7 +262,27 @@
   }
 
   function getAdminPassword() {
-    return String(new FormData(formEl).get("password") || "").trim();
+    const formPassword = formEl ? String(new FormData(formEl).get("password") || "").trim() : "";
+    return formPassword || cheffeAdminPassword;
+  }
+
+  function rememberAdminPassword(password) {
+    const cleanPassword = String(password || "").trim();
+    if (!cleanPassword) return;
+    cheffeAdminPassword = cleanPassword;
+    try {
+      window.sessionStorage.setItem("cheffeCallFullAdminPassword", cleanPassword);
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+
+  function requireAdminPassword(actionLabel = "operar a Cheffe Call") {
+    const password = getAdminPassword();
+    if (password) return password;
+    setStatus(`Digite a senha Full Admin para ${actionLabel}.`, "bad");
+    formEl?.querySelector('[name="password"]')?.focus();
+    return "";
   }
 
   function updatePromptPreview(payload) {
@@ -384,10 +389,10 @@
 
   function setModeBanner(mode, detail) {
     if (!callModeBanner) return;
-    callModeBanner.dataset.mode = mode || "visual";
+    callModeBanner.dataset.mode = mode || "report";
     callModeBanner.innerHTML = `
-      <span>${escapeHtml(mode === "real" ? "Runtime real" : "Modo visual")}</span>
-      <strong>${escapeHtml(detail || (mode === "real" ? "Runtimes pausadas para operação" : "Simulação aberta sem senha"))}</strong>
+      <span>${escapeHtml(mode === "real" ? "Runtime real" : "Relatório real")}</span>
+      <strong>${escapeHtml(detail || (mode === "real" ? "Runtimes pausadas para operação" : "Consulta aberta. Comandos exigem senha Full Admin."))}</strong>
     `;
   }
 
@@ -409,6 +414,11 @@
       .reduce((sum, char) => sum + char.charCodeAt(0), 0);
   }
 
+  function pickVisual(signature, values, salt = 0) {
+    if (!Array.isArray(values) || !values.length) return "";
+    return values[(hashValue(`${signature}:${salt}`) + salt) % values.length];
+  }
+
   function getAgentPersona(item) {
     const spriteProfile = item?.spriteProfile || null;
     if (spriteProfile) {
@@ -419,42 +429,48 @@
         prop: spriteProfile.prop || "tablet",
         hairStyle: spriteProfile.hairStyle || "short",
         skin: spriteProfile.skin || "#f2c5a0",
-        hair: spriteProfile.hair || "#17101b"
+        hair: spriteProfile.hair || "#17101b",
+        face: spriteProfile.face || "calm",
+        bodyShape: spriteProfile.bodyShape || "standard",
+        pattern: spriteProfile.pattern || "plain"
       };
     }
     const signature = `${getAgentDisplayName(item)} ${getAgentOffice(item)} ${item?.role || ""}`.toLowerCase();
     const photo = item?.photo || {};
-    const skin = ["#f2c5a0", "#e8ae83", "#d99b72", "#f0d0aa"][hashValue(signature) % 4];
-    const hair = ["#17101b", "#3a2419", "#24283d", "#5a351f", "#111827"][hashValue(signature) % 5];
+    const skin = pickVisual(signature, ["#f2c5a0", "#e8ae83", "#d99b72", "#f0d0aa", "#c98765", "#b97754"], 1);
+    const hair = pickVisual(signature, ["#17101b", "#3a2419", "#24283d", "#5a351f", "#111827", "#6b4a2f", "#d7b16a"], 2);
     const profile = {
-      accent: photo.primary || "#7fe7ff",
-      jacket: photo.secondary || "#1d2740",
-      accessory: "badge",
-      prop: "tablet",
-      hairStyle: "short",
+      accent: photo.primary || pickVisual(signature, ["#7fe7ff", "#f4c96b", "#73eba8", "#f56d7a", "#cda6ff", "#ff7ab6", "#ffb65c"], 3),
+      jacket: photo.secondary || pickVisual(signature, ["#1d2740", "#302653", "#113323", "#3a1930", "#4a2813", "#142446", "#26323f"], 4),
+      accessory: pickVisual(signature, ["badge", "glasses", "headset", "visor", "cap", "tie", "bow"], 5),
+      prop: pickVisual(signature, ["tablet", "clipboard", "stylus", "toolkit", "gamepad", "phone", "book"], 6),
+      hairStyle: pickVisual(signature, ["short", "swept", "bob", "wave", "spiky", "bun", "flat", "mohawk"], 7),
       skin,
-      hair
+      hair,
+      face: pickVisual(signature, ["calm", "focus", "smile", "serious", "spark"], 8),
+      bodyShape: pickVisual(signature, ["standard", "wide", "slim", "tall"], 9),
+      pattern: pickVisual(signature, ["plain", "stripe", "badge", "sash", "panel"], 10)
     };
     if (/ceo|coord|gest|admin|produtor|prioridade|comando/.test(signature)) {
-      return { ...profile, accent: "#f4c96b", jacket: "#2b2234", accessory: "tie", prop: "tablet", hairStyle: "swept" };
+      return { ...profile, accent: "#f4c96b", jacket: "#2b2234", accessory: "tie", prop: "tablet", pattern: "sash" };
     }
     if (/review|revis|proof|qualidade|clean|audit/.test(signature)) {
-      return { ...profile, accent: "#cda6ff", jacket: "#302653", accessory: "glasses", prop: "clipboard", hairStyle: "bob" };
+      return { ...profile, accent: "#cda6ff", jacket: "#302653", accessory: "glasses", prop: "clipboard", pattern: "badge" };
     }
     if (/arte|design|foto|visual|pixel|sprite|tag/.test(signature)) {
-      return { ...profile, accent: "#ff7ab6", jacket: "#3a1930", accessory: "bow", prop: "stylus", hairStyle: "wave" };
+      return { ...profile, accent: "#ff7ab6", jacket: "#3a1930", accessory: "bow", prop: "stylus", pattern: "stripe" };
     }
     if (/dev|sistema|terminal|code|autom|runtime|dados/.test(signature)) {
-      return { ...profile, accent: "#73eba8", jacket: "#113323", accessory: "headset", prop: "toolkit", hairStyle: "short" };
+      return { ...profile, accent: "#73eba8", jacket: "#113323", accessory: "headset", prop: "toolkit", pattern: "panel" };
     }
     if (/games|game|loop|play|nerd/.test(signature)) {
-      return { ...profile, accent: "#7fe7ff", jacket: "#142446", accessory: "visor", prop: "gamepad", hairStyle: "spiky" };
+      return { ...profile, accent: "#7fe7ff", jacket: "#142446", accessory: "visor", prop: "gamepad", pattern: "stripe" };
     }
     if (/venda|promo|market|pix|acesso|social/.test(signature)) {
-      return { ...profile, accent: "#ffb65c", jacket: "#4a2813", accessory: "cap", prop: "phone", hairStyle: "swept" };
+      return { ...profile, accent: "#ffb65c", jacket: "#4a2813", accessory: "cap", prop: "phone", pattern: "badge" };
     }
     if (/fonte|source|study|educ|kids|ninja|segur/.test(signature)) {
-      return { ...profile, accent: "#73eba8", jacket: "#1e3a2f", accessory: "glasses", prop: "book", hairStyle: "bun" };
+      return { ...profile, accent: "#73eba8", jacket: "#1e3a2f", accessory: "glasses", prop: "book", pattern: "sash" };
     }
     return profile;
   }
@@ -469,6 +485,9 @@
         data-accessory="${persona.accessory}"
         data-prop="${persona.prop}"
         data-hair-style="${persona.hairStyle}"
+        data-face="${persona.face}"
+        data-body="${persona.bodyShape}"
+        data-pattern="${persona.pattern}"
         style="--agent-skin:${persona.skin};--agent-hair:${persona.hair};--agent-accent:${persona.accent};--agent-jacket:${persona.jacket}"
         aria-label="${label}"
       >
@@ -582,6 +601,11 @@
       dailyContext: realPayload.dailyContext || cheffePayload.dailyContext || null,
       autonomy: realPayload.autonomy || cheffePayload.autonomy || null,
       queue: Array.isArray(realPayload.queue) ? realPayload.queue : cheffePayload.queue || [],
+      liveEvents: Array.isArray(realPayload.liveEvents) ? realPayload.liveEvents : cheffePayload.liveEvents || [],
+      officeLogs: Array.isArray(realPayload.officeLogs) ? realPayload.officeLogs : cheffePayload.officeLogs || [],
+      officeDashboard: Array.isArray(realPayload.officeDashboard) ? realPayload.officeDashboard : cheffePayload.officeDashboard || [],
+      executableActions: Array.isArray(realPayload.executableActions) ? realPayload.executableActions : cheffePayload.executableActions || [],
+      orders: Array.isArray(realPayload.orders) ? realPayload.orders : cheffePayload.orders || [],
       awards: realPayload.awards || cheffePayload.awards || null,
       scoreboard: realPayload.scoreboard || cheffePayload.scoreboard || null
     };
@@ -605,17 +629,26 @@
     if (!audienceEl) return;
     const colors = ["#7fe7ff", "#f4c96b", "#73eba8", "#f56d7a", "#cda6ff"];
     const sourceAgents = Array.isArray(agentList) && agentList.length ? agentList : fallbackAgents;
+    const totalSeats = Math.min(181, Number(count || 90));
+    const columns = window.matchMedia("(max-width: 980px)").matches ? 10 : 20;
     audienceEl.innerHTML = Array.from({ length: Math.min(181, Number(count || 90)) })
       .map(
         (_, index) => {
           const agent = sourceAgents[index % sourceAgents.length];
           const name = getAgentDisplayName(agent);
           const isSpeaking = speakerNames.includes(name);
+          const row = Math.floor(index / columns);
+          const column = index % columns;
+          const centerOffset = column - (columns - 1) / 2;
+          const depth = totalSeats > columns ? row / Math.max(1, Math.ceil(totalSeats / columns) - 1) : 0;
+          const seatX = Math.round(centerOffset * (depth > 0.64 ? 1.35 : depth > 0.32 ? 1.1 : 0.82));
+          const seatY = Math.round((depth - 0.5) * 9);
+          const seatScale = Number((0.72 + depth * 0.46).toFixed(2));
           return `<span class="seat-agent has-sprite ${isSpeaking ? "is-speaking" : ""}" data-agent-index="${index}" data-agent-name="${escapeHtml(name)}" title="${escapeHtml(
             `${name} • ${getAgentOffice(agent)}`
           )}" style="--agent-color:${colors[index % colors.length]};--agent-hair:${
             index % 3 === 0 ? "#151018" : index % 3 === 1 ? "#47301d" : "#232b44"
-          };--delay:${
+          };--seat-x:${seatX}px;--seat-y:${seatY}px;--seat-scale:${seatScale};--delay:${
             (index % 17) * 80
           }ms">${renderAgentPhotoToken(agent)}${renderAgentSprite(agent)}<span class="seat-state-icon" aria-hidden="true"></span><span class="agent-name-tag">${escapeHtml(name)}</span></span>`;
         }
@@ -668,23 +701,6 @@
         `
       )
       .join("");
-  }
-
-  function buildLocalOpinions(subject, command) {
-    const cleanSubject = subject || "a reunião dos agentes";
-    const cleanCommand = command || "sem código colado ainda";
-    const templates = [
-      "Eu começaria definindo o objetivo da sala e a primeira ação que você quer aprovar.",
-      "A reunião precisa mostrar resposta visual: sentado, levantando a mão, falando e pontuando.",
-      "O terminal deve receber pedido específico sem misturar com senha; senha só para operação real.",
-      "Eu criaria pontuação visível para dar vontade de acompanhar funcionário do dia, semana, mês e ano.",
-      "A sala precisa inspirar: luz, mesa central, gente conversando e painel vivo, não um palco vazio.",
-      "Se tiver código, eu separaria análise, risco e patch antes de executar qualquer coisa."
-    ];
-    return fallbackAgents.slice(0, 10).map((agent, index) => ({
-      ...agent,
-      opinion: `${templates[index % templates.length]} Assunto: ${cleanSubject}. Terminal: ${cleanCommand.slice(0, 120)}.`
-    }));
   }
 
   function buildOpinionForAgent(item, subject, index) {
@@ -757,7 +773,6 @@
     const matchingRealAgent = currentRealAgents.find((item) => getAgentDisplayName(item) === agent.name) || null;
     currentAgentOfDay = agent.name ? { ...matchingRealAgent, ...agent, agent: agent.name } : currentRealAgents[0] || fallbackAgents[0];
     const neuralScore = Math.max(42, Math.min(100, Number(agent.score || agent.autonomy || 82)));
-    const votes = getAgentVotes(currentAgentOfDay);
     if (agentOfDayAvatar) {
       agentOfDayAvatar.innerHTML = `
         <span class="spotlight-rays"></span>
@@ -782,7 +797,7 @@
 
     agentOfDayEl.textContent = agent.name || "Sem rodada";
     agentOfDayMetaEl.textContent = agent.name
-      ? `${agent.office} • autonomia ${agent.score || 0}% • ${votes} votos no avatar • ${
+      ? `${agent.office} • autonomia ${agent.score || 0}% • ${
           agent.intent || "intencao em formacao"
         }`
       : "Rode os agentes para calcular o destaque.";
@@ -1336,7 +1351,7 @@
       `orientacao: ${meeting.lastInstruction || "nenhuma orientacao ativa"}`,
       "protocolo: ouvir -> memorizar -> opinar -> aguardar aprovacao"
     ].join("\n");
-    setModeBanner(meeting.active ? "real" : "visual", meeting.active ? "Runtimes pausadas para reunião em andamento" : "Simulação aberta sem senha e sem impacto operacional");
+    setModeBanner(meeting.active ? "real" : "report", meeting.active ? "Runtimes pausadas para reunião em andamento" : "Relatório real aberto. Comandos exigem senha Full Admin.");
   }
 
   function renderAdminState(payload) {
@@ -1353,7 +1368,7 @@
     if (adminRuntimeMetaEl) {
       adminRuntimeMetaEl.textContent = agentsReady
         ? `${summary.totalAgents || 0} agentes visíveis • autonomia média ${summary.averageAutonomy || 0}%`
-        : "Fallback visual ativo até a runtime real publicar a rodada dos agentes.";
+        : "Aguardando a runtime real publicar a rodada completa dos agentes.";
     }
 
     if (adminSessionStateEl) {
@@ -1373,6 +1388,135 @@
     }
   }
 
+  function renderReportList(container, items, renderItem, emptyText) {
+    if (!container) return;
+    container.innerHTML = Array.isArray(items) && items.length
+      ? items.map(renderItem).join("")
+      : `<p class="opinion-body">${escapeHtml(emptyText || "Sem dados nesta rodada.")}</p>`;
+  }
+
+  function renderAgentReport(payload) {
+    const summary = payload.summary || {};
+    const session = payload.meeting?.currentSession || null;
+    const actions = Array.isArray(payload.executableActions) ? payload.executableActions.slice(0, 8) : [];
+    const queue = Array.isArray(payload.queue) ? payload.queue.slice(0, 8) : [];
+    const offices = Array.isArray(payload.officeDashboard) ? payload.officeDashboard.slice(0, 6) : [];
+    const logs = [
+      ...(Array.isArray(session?.logs) ? session.logs : []),
+      ...(Array.isArray(payload.liveEvents) ? payload.liveEvents.slice(0, 8) : [])
+    ].slice(0, 10);
+
+    if (callReportSummary) {
+      const meetingState = payload.meeting?.active ? "reunião ativa" : "rotina liberada";
+      callReportSummary.innerHTML = [
+        ["Agentes", summary.totalAgents || 0],
+        ["Autônomos", summary.autonomousAgents || 0],
+        ["Autonomia média", `${summary.averageAutonomy || 0}%`],
+        ["Entregas", summary.deliveredAgents || 0],
+        ["Falhas", summary.failedAgents || 0],
+        ["Fila", queue.length],
+        ["Ações", actions.length],
+        ["Estado", meetingState]
+      ]
+        .map(
+          ([label, value]) => `
+            <article>
+              <span>${escapeHtml(label)}</span>
+              <strong>${escapeHtml(value)}</strong>
+            </article>
+          `
+        )
+        .join("");
+    }
+
+    renderReportList(
+      callReportQueue,
+      queue,
+      (item) => `
+        <article class="call-report-item">
+          <span>${escapeHtml(item.officeLabel || item.office || "Escritório")} • ${escapeHtml(item.role || "agent")}</span>
+          <strong>${escapeHtml(item.name || item.agent || "Agente")}</strong>
+          <p>${escapeHtml(item.assignment?.action || item.autonomy?.intent || item.action || "Rodada operacional em leitura.")}</p>
+        </article>
+      `,
+      "Nenhuma tarefa operacional carregada."
+    );
+
+    renderReportList(
+      callReportOffices,
+      offices,
+      (office) => `
+        <article class="call-report-item">
+          <span>${escapeHtml(office.agents || 0)} agentes • risco ${escapeHtml(office.failureRate || 0)}%</span>
+          <strong>${escapeHtml(office.office || "Escritório")}</strong>
+          <p>Entrega ${escapeHtml(office.deliveryRate || 0)}% • energia ${escapeHtml(office.averageEnergy || 0)}% • moral ${escapeHtml(office.averageMorale || 0)}%</p>
+        </article>
+      `,
+      "Sem dashboard dos escritórios."
+    );
+
+    renderReportList(
+      callReportActions,
+      actions,
+      (action) => `
+        <article class="call-report-item">
+          <span>${escapeHtml(action.status || "aguardando")} • ${escapeHtml(action.kind || "ação")}</span>
+          <strong>${escapeHtml(action.agent || "Agente")}</strong>
+          <p>${escapeHtml(action.title || action.artifact || "Ação pronta para aprovação.")}</p>
+        </article>
+      `,
+      "Sem ações pendentes para aprovação."
+    );
+
+    renderReportList(
+      callReportLogs,
+      logs,
+      (log) => `
+        <article class="call-report-item">
+          <span>${escapeHtml(log.kindLabel || log.type || "log")}</span>
+          <strong>${escapeHtml(log.agent || log.name || "Cheffe Call")}</strong>
+          <p>${escapeHtml(log.text || log.title || log.message || "Sinal registrado na rodada.")}</p>
+        </article>
+      `,
+      "Sem logs recentes."
+    );
+  }
+
+  function updateRealFlow(payload = latestCallPayload) {
+    if (!realFlowSteps.length) return;
+    const passwordReady = Boolean(getAdminPassword());
+    const meeting = payload?.meeting || {};
+    const session = meeting.currentSession || meeting.sessions?.[0] || null;
+    const opinionsReady = Array.isArray(payload?.opinions) && payload.opinions.length > 0;
+    const decisionsReady = Array.isArray(session?.decisions) && session.decisions.length > 0;
+    const reportReady = Array.isArray(payload?.queue) && payload.queue.length > 0;
+    const completed = new Set([
+      passwordReady ? "password" : "",
+      session ? "meeting" : "",
+      opinionsReady ? "opinions" : "",
+      decisionsReady ? "decision" : "",
+      reportReady ? "report" : "",
+      !meeting.active && session ? "release" : ""
+    ].filter(Boolean));
+    const nextStep =
+      !passwordReady
+        ? "password"
+        : !session
+          ? "meeting"
+          : !opinionsReady
+            ? "opinions"
+            : !decisionsReady
+              ? "decision"
+              : meeting.active
+                ? "release"
+                : "report";
+    realFlowSteps.forEach((step) => {
+      const key = step.dataset.flowStep || "";
+      step.classList.toggle("is-done", completed.has(key));
+      step.classList.toggle("is-active", key === nextStep);
+    });
+  }
+
   function render(payload) {
     latestCallPayload = payload;
     currentRealAgents = extractRealAgents(payload);
@@ -1383,6 +1527,8 @@
     hydrateMeetingArtifacts(payload);
     renderTerminal(payload);
     renderAdminState(payload);
+    renderAgentReport(payload);
+    updateRealFlow(payload);
     setStatus(payload.meeting?.active ? "Cheffe Call ativo. Runtimes pausadas." : "Sala pronta.", "ok");
     if (quickInstructionInput && !quickInstructionInput.matches(":focus")) {
       quickInstructionInput.value = instructionInput?.value || payload.meeting?.lastInstruction || "";
@@ -1390,113 +1536,12 @@
     syncGameShellState();
   }
 
-  function renderLocalMeeting(subject, command) {
-    const opinions = currentRealAgents.length
-      ? buildOpinionsFromAgents(currentRealAgents, subject || "reunião visual aberta").map((item) => ({
-          ...item,
-          opinion: `${item.opinion} Terminal: ${(command || "aguardando pedido específico").slice(0, 120)}.`
-        }))
-      : buildLocalOpinions(subject, command);
-    const payload = {
-      summary: {
-        totalAgents: 181,
-        autonomousAgents: 181,
-        averageAutonomy: 86
-      },
-      meeting: {
-        active: true,
-        lastInstruction: subject || "reunião visual aberta"
-      },
-      dailyContext: {
-        agentOfDay: {
-          name: opinions[0].agent,
-          office: opinions[0].office,
-          score: opinions[0].score,
-          intent: "abrir a conversa e organizar prioridade"
-        },
-        officeOfDay: {
-          office: "Cheffe Call",
-          agents: 181,
-          averageAutonomy: 86,
-          averageUrgency: 72
-        },
-        actionOfDay: {
-          title: "Reunião interativa",
-          action: command || "Ouvir, opinar, pontuar e aguardar aprovação."
-        }
-      },
-      awards: {
-        chaseLine: `${opinions[0].agent} abriu a rodada local. A liderança muda conforme aprovação, execução e constância.`,
-        podium: opinions.slice(0, 3).map((item, index) => ({
-          rank: index + 1,
-          name: item.agent,
-          office: item.office,
-          points: 120 - index * 14,
-          awards: index === 0 ? [{ id: "local-lead" }] : []
-        }))
-      },
-      scoreboard: {
-        current: {
-          day: {
-            leaders: opinions.slice(0, 4).map((item, index) => ({
-              rank: index + 1,
-              name: item.agent,
-              office: item.office,
-              points: 320 - index * 33,
-              average: 80 - index * 4
-            }))
-          },
-          week: {
-            leaders: opinions.slice(1, 5).map((item, index) => ({
-              rank: index + 1,
-              name: item.agent,
-              office: item.office,
-              points: 1140 - index * 88,
-              average: 83 - index * 3
-            }))
-          },
-          month: {
-            leaders: opinions.slice(2, 6).map((item, index) => ({
-              rank: index + 1,
-              name: item.agent,
-              office: item.office,
-              points: 4820 - index * 240,
-              average: 86 - index * 2
-            }))
-          }
-        }
-      },
-      queue: currentRealAgents,
-      opinions
-    };
-    theaterEl?.classList.add("is-meeting-live");
-    currentRealAgents = opinions;
-    renderAudience(181, opinions.slice(0, 1).map((item) => item.agent), currentRealAgents);
-    renderDaily(payload);
-    renderAchievements(payload);
-    renderOpinions(payload);
-    setSpeakerQueue(opinions);
-    addMeetingLog({
-      kindLabel: "reunião aberta",
-      agent: "Cheffe Call",
-      text: subject || "Reunião visual aberta."
-    });
-    terminalEl.textContent = [
-      "> cheffe-call/visual-meeting",
-      "modo: reunião interativa local",
-      "senha: não exigida para ouvir opiniões visuais",
-      `assunto: ${subject || "sem assunto informado"}`,
-      `terminal: ${command || "aguardando pedido específico ou código"}`,
-      "protocolo: ouvir -> comparar opiniões -> pedir execução específica -> aprovar"
-    ].join("\n");
-    setModeBanner("visual", "Simulação local em andamento sem pausar runtimes reais");
-    setStatus("Reunião visual aberta. Agentes levantaram a mão e responderam.", "ok");
-  }
-
   async function loadCall() {
+    const password = getAdminPassword();
+    const realUrl = password ? `/api/real-agents?password=${encodeURIComponent(password)}` : "";
     const [callResult, realResult] = await Promise.allSettled([
       fetch("/api/cheffe-call", { headers: { Accept: "application/json" } }),
-      fetch("/api/real-agents", { headers: { Accept: "application/json" } })
+      realUrl ? fetch(realUrl, { headers: { Accept: "application/json" } }) : Promise.resolve(null)
     ]);
     if (callResult.status !== "fulfilled") throw new Error("Nao foi possivel carregar a Cheffe Call.");
 
@@ -1504,13 +1549,14 @@
     if (!callResult.value.ok || !callPayload.ok) throw new Error(callPayload.error || "Nao foi possivel carregar a Cheffe Call.");
 
     let realPayload = null;
-    if (realResult.status === "fulfilled" && realResult.value.ok) {
+    if (realResult.status === "fulfilled" && realResult.value?.ok) {
       realPayload = await realResult.value.json();
     }
     render(mergeCheffeAndRealPayload(callPayload, realPayload));
   }
 
   async function postCall(path, body) {
+    if (body?.password) rememberAdminPassword(body.password);
     const response = await fetch(path, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -1523,8 +1569,8 @@
   }
 
   async function postRoomAction(action, active, extras = {}) {
-    const password = getAdminPassword();
-    if (!password) return false;
+    const password = requireAdminPassword("registrar decisões reais dos agentes");
+    if (!password) throw new Error("Senha Full Admin obrigatória para registrar decisões reais dos agentes.");
     const packet = active ? buildExecutionPacket(active, action === "terminal" ? "prompt" : "implement") : null;
     await postCall("/api/cheffe-call/action", {
       password,
@@ -1549,11 +1595,12 @@
     const form = new FormData(formEl);
     const password = String(form.get("password") || "").trim();
     const instruction = String(form.get("instruction") || "").trim();
-    const command = String(form.get("command") || "").trim();
     if (!password) {
-      renderLocalMeeting(instruction, command);
+      setStatus("Digite a senha Full Admin para abrir uma reunião real com os agentes.", "bad");
+      formEl?.querySelector('[name="password"]')?.focus();
       return;
     }
+    rememberAdminPassword(password);
     setStatus("Abrindo Cheffe Call...");
     postCall("/api/cheffe-call/start", { password, instruction }).catch((error) => setStatus(error.message, "bad"));
   });
@@ -1565,25 +1612,37 @@
       setStatus("Digite uma ordem rápida antes de enviar.", "bad");
       return;
     }
+    const password = requireAdminPassword("enviar ordem rápida real");
+    if (!password) return;
     if (instructionInput) instructionInput.value = quickInstruction;
-    renderLocalMeeting(quickInstruction, String(commandInput?.value || "").trim());
+    setStatus("Enviando ordem rápida real para a Cheffe Call...");
+    postCall("/api/cheffe-call/start", { password, instruction: quickInstruction }).catch((error) =>
+      setStatus(error.message, "bad")
+    );
   });
 
   sendTerminalEl?.addEventListener("click", () => {
     const form = new FormData(formEl);
     const instruction = String(form.get("instruction") || "").trim();
     const command = String(form.get("command") || "").trim();
+    const password = requireAdminPassword("enviar comando real ao terminal dos agentes");
+    if (!password) return;
     if (!instruction && !command) {
       setStatus("Digite o assunto ou cole um pedido/código antes de enviar ao terminal.", "bad");
       return;
     }
-    renderLocalMeeting(instruction || "pedido direto ao terminal", command);
-    terminalEl.textContent += "\nacao: pedido enviado ao terminal visual dos agentes";
-    addMeetingLog({
-      kindLabel: "comando terminal",
-      agent: "Você",
-      text: command || instruction
-    });
+    const active = currentOpinions[activeSpeakerIndex] || null;
+    const runTerminal = () =>
+      postRoomAction("terminal", active, {
+        title: instruction || command || "Pedido direto ao terminal",
+        command: command || instruction,
+        prompt: command || instruction
+      });
+    const action = currentMeetingSessionId
+      ? runTerminal()
+      : postCall("/api/cheffe-call/start", { password, instruction: instruction || "Pedido direto ao terminal" }).then(runTerminal);
+    setStatus("Enviando comando real ao terminal da Cheffe Call...");
+    action.catch((error) => setStatus(error.message, "bad"));
   });
 
   nextSpeakerEl?.addEventListener("click", () => {
@@ -1600,13 +1659,7 @@
       setStatus("Nenhuma fala ativa para marcar como boa ideia.", "bad");
       return;
     }
-    addMeetingLog({
-      kind: "good",
-      kindLabel: "boa ideia",
-      agent: getAgentDisplayName(active),
-      text: active.opinion
-    });
-    setStatus(`${getAgentDisplayName(active)} ganhou sinal positivo nessa rodada.`, "ok");
+    handleIdeaAction("approve").catch((error) => setStatus(error.message, "bad"));
   });
 
   speechBubbleEl?.addEventListener("click", (event) => {
@@ -1630,9 +1683,8 @@
   });
 
   releaseEl?.addEventListener("click", () => {
-    const password = String(new FormData(formEl).get("password") || "").trim();
+    const password = requireAdminPassword("liberar as runtimes");
     if (!password) {
-      setStatus("Digite a senha Full Admin para liberar as runtimes.", "bad");
       return;
     }
     setStatus("Liberando runtimes...");
@@ -1641,15 +1693,16 @@
 
   voteAgentOfDay?.addEventListener("click", () => {
     if (!currentAgentOfDay) return;
-    const votes = addAgentVote(currentAgentOfDay);
-    setStatus(`${currentAgentOfDay.name || currentAgentOfDay.agent} recebeu seu voto no avatar. Total local: ${votes}.`, "ok");
-    renderDaily({
-      dailyContext: {
-        agentOfDay: currentAgentOfDay,
-        officeOfDay: { office: officeOfDayEl?.textContent || "", agents: 181, averageAutonomy: 86, averageUrgency: 72 },
-        actionOfDay: { title: actionOfDayEl?.textContent || "", action: actionOfDayMetaEl?.textContent || "" }
-      }
-    });
+    const target = {
+      ...currentAgentOfDay,
+      opinion: `Destaque aprovado pela Cheffe Call para ${currentAgentOfDay.name || currentAgentOfDay.agent}.`
+    };
+    postRoomAction("approve", target, {
+      title: `Destaque do agente do dia: ${currentAgentOfDay.name || currentAgentOfDay.agent}`,
+      opinion: target.opinion
+    })
+      .then(() => setStatus(`${currentAgentOfDay.name || currentAgentOfDay.agent} recebeu destaque real na Cheffe Call.`, "ok"))
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   openAgentFile?.addEventListener("click", () => {
@@ -1685,15 +1738,32 @@
   });
 
   quickRefreshAgents?.addEventListener("click", () => {
-    postRoomAction("refresh", null).catch((error) => setStatus(error.message, "bad"));
+    const password = getAdminPassword();
+    if (!password) {
+      loadCall().then(() => setStatus("Relatório real atualizado. Para rodar os agentes, digite a senha Full Admin.", "ok")).catch((error) => setStatus(error.message, "bad"));
+      return;
+    }
+    setStatus("Rodando agentes reais e atualizando a Cheffe Call...");
+    fetch("/api/real-agents/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        password,
+        message: instructionInput?.value || "Atualização manual pela Cheffe Call."
+      })
+    })
+      .then(async (response) => {
+        const payload = await response.json();
+        if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+        return loadCall();
+      })
+      .then(() => setStatus("Agentes reais rodados e relatório atualizado.", "ok"))
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   adminRunAgentsNow?.addEventListener("click", () => {
-    const password = getAdminPassword();
-    if (!password) {
-      setStatus("Digite a senha Full Admin para rodar os agentes reais.", "bad");
-      return;
-    }
+    const password = requireAdminPassword("rodar os agentes reais");
+    if (!password) return;
     setStatus("Rodando agentes reais...");
     fetch("/api/real-agents/run", {
       method: "POST",
@@ -1713,21 +1783,15 @@
   });
 
   adminReleaseRoom?.addEventListener("click", () => {
-    const password = getAdminPassword();
-    if (!password) {
-      setStatus("Digite a senha Full Admin para encerrar a reunião.", "bad");
-      return;
-    }
+    const password = requireAdminPassword("encerrar a reunião real");
+    if (!password) return;
     setStatus("Encerrando reunião real...");
     postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
   });
 
   adminClearSession?.addEventListener("click", () => {
-    const password = getAdminPassword();
-    if (!password) {
-      setStatus("Digite a senha Full Admin para limpar a sessão.", "bad");
-      return;
-    }
+    const password = requireAdminPassword("limpar a sessão real");
+    if (!password) return;
     setStatus("Limpando sessão atual...");
     postCall("/api/cheffe-call/admin/clear", { password, sessionId: currentMeetingSessionId }).catch((error) =>
       setStatus(error.message, "bad")
@@ -1851,7 +1915,7 @@
     }
     if (key === "r") {
       event.preventDefault();
-      postRoomAction("refresh", null).catch((error) => setStatus(error.message, "bad"));
+      quickRefreshAgents?.click();
     }
     if (event.key === "Escape") {
       toggleLowerDecksVisibility(false);
@@ -1865,6 +1929,10 @@
   });
 
   document.body.dataset.hud = "visible";
+  if (cheffeAdminPassword && formEl?.querySelector('[name="password"]')) {
+    formEl.querySelector('[name="password"]').value = cheffeAdminPassword;
+  }
+  formEl?.querySelector('[name="password"]')?.addEventListener("input", () => updateRealFlow());
   syncGameShellState();
 
   initPromptConsole();

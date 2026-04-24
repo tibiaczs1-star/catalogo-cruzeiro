@@ -43,6 +43,27 @@ const DEFAULT_ROLE_PROFILE = {
   deliverables: ["alertas", "ideias", "observacoes operacionais"]
 };
 
+const EDITORIAL_BODY_ROUTINE = {
+  roles: new Set(["editor", "review", "copy", "sources"]),
+  capabilities: [
+    "detectar resumo repetido no corpo da materia",
+    "criar corpo editorial proprio quando a captacao vier sem texto",
+    "separar titulo, resumo, checagem, corpo editorial e fonte"
+  ],
+  monitoringFocus: [
+    "materias sem body editorial",
+    "duplicacao entre lede/summary e corpo",
+    "fallback editorial honesto sem inventar fatos"
+  ],
+  deliverables: [
+    "corpo editorial sem resumo repetido",
+    "alerta de materia sem desenvolvimento",
+    "revisao de hierarquia titulo-resumo-corpo-fonte"
+  ],
+  prompt:
+    "Rotina obrigatoria: ao revisar noticia captada, nunca repetir o resumo no corpo. Se a captacao trouxer apenas summary/lede, produzir corpo editorial proprio, transparente e contextualizado com fonte, data, impacto e cautelas, sem inventar fatos."
+};
+
 const ROLE_PROFILES = {
   ceo: {
     capabilities: ["priorizacao editorial", "coordenacao de frentes", "decisao de foco"],
@@ -297,10 +318,25 @@ function enrichAgent(agent) {
   const roleProfile = getRoleProfile(agent.role);
   const overlay = buildOfficeOverlay(agent);
   const slug = slugify(`${agent.officeKey}-${agent.id || agent.name}`);
-  const skills = unique([...(agent.skills || []), ...(roleProfile.capabilities || [])]);
-  const capabilities = unique([...(overlay.journalCapabilities || []), ...(roleProfile.capabilities || []), ...(agent.skills || [])]);
-  const monitoringFocus = unique([...(roleProfile.monitoringFocus || []), ...(overlay.monitoringExtra || []), agent.specialty]);
-  const deliverables = unique(roleProfile.deliverables || []);
+  const hasEditorialBodyRoutine = EDITORIAL_BODY_ROUTINE.roles.has(agent.role);
+  const editorialCapabilities = hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.capabilities : [];
+  const editorialMonitoring = hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.monitoringFocus : [];
+  const editorialDeliverables = hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.deliverables : [];
+  const skills = unique([...(agent.skills || []), ...(roleProfile.capabilities || []), ...editorialCapabilities]);
+  const capabilities = unique([
+    ...(overlay.journalCapabilities || []),
+    ...(roleProfile.capabilities || []),
+    ...editorialCapabilities,
+    ...(agent.skills || [])
+  ]);
+  const monitoringFocus = unique([
+    ...(roleProfile.monitoringFocus || []),
+    ...editorialMonitoring,
+    ...(overlay.monitoringExtra || []),
+    agent.specialty
+  ]);
+  const deliverables = unique([...(roleProfile.deliverables || []), ...editorialDeliverables]);
+  const routinePrompt = hasEditorialBodyRoutine ? ` ${EDITORIAL_BODY_ROUTINE.prompt}` : "";
 
   return {
     id: agent.id || slug,
@@ -319,10 +355,12 @@ function enrichAgent(agent) {
     monitoringFocus,
     deliverables,
     newsroomBridge: overlay.newsroomBridge,
+    editorialBodyRoutine: hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.prompt : "",
     workingPrompt:
       `Voce e ${agent.name}, agente real do ${agent.officeLabel}. ` +
       `Seu papel e ${agent.title || agent.role}. ` +
-      `Monitore continuamente o jornal, destaque sinais relevantes, proponha ideias praticas e entregue saidas curtas e acionaveis em ${deliverables.join(", ")}.`
+      `Monitore continuamente o jornal, destaque sinais relevantes, proponha ideias praticas e entregue saidas curtas e acionaveis em ${deliverables.join(", ")}.` +
+      routinePrompt
   };
 }
 
@@ -1068,7 +1106,15 @@ function updateOfficeOrdersLifecycle(orders, agents, queue, nowIso) {
   const queueBySlug = new Map((queue || []).map((item) => [item.slug, item]));
 
   return safeOrders.map((order) => {
-    const matches = getOrderAgentMatches(order, agents).slice(0, 24);
+    const orderScope = String(
+      `${order.priority || ""} ${order.to || ""} ${order.message || ""}`
+    ).toLowerCase();
+    const wantsFullTeam =
+      orderScope.includes("181 agentes") || String(order.priority || "").toLowerCase() === "critica";
+    const matches = getOrderAgentMatches(order, agents).slice(
+      0,
+      wantsFullTeam ? agents.length : 24
+    );
     if (!matches.length) {
       return order;
     }
@@ -1622,6 +1668,16 @@ function writeAgentManifest(agent) {
     "",
     agent.newsroomBridge,
     "",
+    ...(agent.editorialBodyRoutine
+      ? [
+          "## Editorial Body Routine",
+          "",
+          `- ${agent.editorialBodyRoutine}`,
+          "- Conferir se `body` nao repete `summary`, `lede` ou `description`.",
+          "- Quando faltar corpo captado, entregar texto editorial proprio com fonte, data, contexto e cautela.",
+          ""
+        ]
+      : []),
     "## Autonomy Protocol",
     "",
     "- Mantem memoria curta entre ciclos.",

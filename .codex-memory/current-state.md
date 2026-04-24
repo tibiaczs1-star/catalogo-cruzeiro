@@ -1,23 +1,16 @@
 # Current State
 
-Updated: 2026-04-23T14:05:00.000Z
+Updated: 2026-04-24T02:19:25.879Z
 
 ## Active Goal
 
-- PubPaid 2.0 com mesas PvP vivas, pixel art e feedback de resultado dentro do salão
+- Campanha social Catalogo Cruzeiro do Sul
 
 ## Summary
 
-A PubPaid 2.0 em `pubpaid-v2.html` + `pubpaid-phaser/` já tem fila real, escrow, painel jogável, minicenário de Dardos no salão, minicenário de Dama no salão e agora também feedback visual de resultado. O painel mostra bloco de vitória/derrota/empate com payout e taxa da casa; o salão reage com glow, badge e texto de payout nas duas mesas quando a partida fecha.
+Criado pacote de artes SVG para redes sociais com post vertical, quadrado, story/reels e banner horizontal, mais copy de legenda para lancamento e patrocinador.
 
 ## Next
 
-- Subir a camada seguinte de FX pixel art: partículas, estouro de placar, brilho de payout e comemoração/derrota por mesa
-- Depois enriquecer props 2D dedicados de Dardos e Dama para tirar ainda mais cara de protótipo
-
-## Files In Focus
-
-- pubpaid-phaser/scenes/InteriorScene.js
-- pubpaid-phaser/ui/panelActions.js
-- pubpaid-phaser/ui/overlay.js
-- pubpaid-phaser.css
+- Se quiser publicar em PNG/JPG
+- exportar os SVGs de assets/social ou abrir no navegador/Canva e baixar no formato final.

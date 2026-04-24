@@ -13,7 +13,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:34:46.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/JORGE-E-BITTAR-.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/JORGE-E-BITTAR-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Bittar sobre ato de JV: “não tem votos para ganhar de mim e o caminho dele é o tapetão”. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Bittar sobre ato de JV: “não tem votos para ganhar de mim e o caminho dele é o tapetão” e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/trafego-na-estrada-do-aeroporto-de-rio-branco-tera-mudanca-nesta-sexta-feira/",
@@ -29,7 +34,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:19:04.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-15-13-07-1200x900.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-15-13-07-1200x900.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Tráfego na estrada do aeroporto de Rio Branco terá mudança nesta sexta-feira. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Tráfego na estrada do aeroporto de Rio Branco terá mudança nesta sexta-feira e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/levantamento-revela-que-acre-esta-entre-os-estados-com-maior-intensidade-da-jornada-6x1/",
@@ -45,7 +55,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:16:22.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/976x695_IMAGEM-DESTACADA-2026-02-20T105828.029.webp",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/976x695_IMAGEM-DESTACADA-2026-02-20T105828.029.webp",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Levantamento revela que Acre está entre os estados com maior intensidade da jornada 6×1. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Levantamento revela que Acre está entre os estados com maior intensidade da jornada 6×1 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/relatada-por-alan-rick-lei-cria-incentivo-direto-a-reciclagem-no-pais/",
@@ -61,7 +76,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:04:13.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-14-46-21-1200x801.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-14-46-21-1200x801.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Relatada por Alan Rick, lei cria incentivo direto à reciclagem no país. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Relatada por Alan Rick, lei cria incentivo direto à reciclagem no país e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/friale-ve-inverno-dentro-da-media-e-sem-cenario-de-seca-severa-no-acre/",
@@ -77,7 +97,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:56:05.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/06/Imagem-do-WhatsApp-de-2025-06-24-as-18.00.14_ef08f238-1200x675.webp",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2025/06/Imagem-do-WhatsApp-de-2025-06-24-as-18.00.14_ef08f238-1200x675.webp",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Friale vê inverno dentro da média e sem cenário de seca severa no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Friale vê inverno dentro da média e sem cenário de seca severa no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/acidente-na-via-chico-mendes-termina-com-morte-de-motociclista/",
@@ -93,7 +118,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:38:17.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/MORTE_DETS-.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/MORTE_DETS-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Acidente na Via Chico Mendes termina com morte de motociclista. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acidente na Via Chico Mendes termina com morte de motociclista e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/iphan-leva-indigenas-de-27-etnias-a-sitio-arqueologico-com-geoglifos-no-acre/",
@@ -109,7 +139,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:18:09.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_7652.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_7652.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Iphan leva indígenas de 27 etnias a sítio arqueológico com geoglifos no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Iphan leva indígenas de 27 etnias a sítio arqueológico com geoglifos no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/esquenta-junino-2026-abre-temporada-cultural-com-quadrilhas-no-acre/",
@@ -125,7 +160,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:16:34.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/15o-Esquenta-Junino-5.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/15o-Esquenta-Junino-5.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Esquenta Junino 2026 abre temporada cultural com quadrilhas no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Esquenta Junino 2026 abre temporada cultural com quadrilhas no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/urgente-jorge-viana-aciona-stf-e-flavio-dino-investiga-emendas-de-bittar-a-santa-casa-e-obras-de-infraestrutura/",
@@ -141,7 +181,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:50:23.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/JORGE_BITTAR-E-DINO-.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/JORGE_BITTAR-E-DINO-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Jorge Viana aciona STF e Flávio Dino investiga emendas de Bittar à Santa Casa e obras de infraestrutura. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Jorge Viana aciona STF e Flávio Dino investiga emendas de Bittar à Santa Casa e obras de infraestrutura e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/caixa-cita-normas-mas-nao-esclarece-fechamento-de-loterica-no-rui-lino/",
@@ -157,7 +202,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:01:26.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/dab941ed-5482-43b9-8e98-b6662164de3a-1200x900.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/dab941ed-5482-43b9-8e98-b6662164de3a-1200x900.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Caixa cita normas, mas não esclarece fechamento de lotérica no Rui Lino. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Caixa cita normas, mas não esclarece fechamento de lotérica no Rui Lino e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/prefeitura-paga-ricco-e-transporte-publico-continua-funcionando-em-rio-branco/",
@@ -173,7 +223,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:51:15.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.41.42-1200x805.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.41.42-1200x805.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Prefeitura paga Ricco e transporte público continua funcionando em Rio Branco. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Prefeitura paga Ricco e transporte público continua funcionando em Rio Branco e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/ex-detento-e-ferido-a-facadas-em-ataque-no-bairro-da-paz/",
@@ -189,7 +244,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:38:34.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.14.47-1200x675.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.14.47-1200x675.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Ex-detento é ferido a facadas em ataque no Bairro da Paz. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ex-detento é ferido a facadas em ataque no Bairro da Paz e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/mais-de-200-inqueritos-foram-instaurados-na-delegacia-da-mulher-em-cruzeiro-do-sul/",
@@ -205,7 +265,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:29:11.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_0188-1.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_0188-1.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Mais de 200 inquéritos foram instaurados na Delegacia da Mulher em Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Mais de 200 inquéritos foram instaurados na Delegacia da Mulher em Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/apos-trocar-tiros-com-faccao-policiais-prendem-traficante-na-br-364/",
@@ -221,7 +286,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:26:05.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-10-49-02-840x1200.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-10-49-02-840x1200.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Após trocar tiros com facção, policiais prendem traficante na BR-364. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Após trocar tiros com facção, policiais prendem traficante na BR-364 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/circuito-country-em-epitaciolandia-tera-controle-de-acesso-de-criancas-e-adolescentes/",
@@ -237,7 +307,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:22:41.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/065ded_ae43e983b9ec4c2994dcd274d6089436mv2.avif",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/065ded_ae43e983b9ec4c2994dcd274d6089436mv2.avif",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Circuito Country em Epitaciolândia terá controle de acesso de crianças e adolescentes. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Circuito Country em Epitaciolândia terá controle de acesso de crianças e adolescentes e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/acidente-deixa-idoso-com-amputacao-no-pe-e-mulher-com-escoriacoes/",
@@ -253,7 +328,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:16:55.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-11.49.38-1200x764.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-11.49.38-1200x764.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Acidente deixa idoso com amputação no pé e mulher com escoriações. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acidente deixa idoso com amputação no pé e mulher com escoriações e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/moradores-indigenas-cavam-estrada-para-escapar-da-lama-em-ramal-de-assis-brasil/",
@@ -269,7 +349,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:14:49.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/894042f7-4935-42d3-88e4-3dac0754b45d-1200x900.jpeg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/894042f7-4935-42d3-88e4-3dac0754b45d-1200x900.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Moradores indígenas cavam estrada para escapar da lama em ramal de Assis Brasil. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Moradores indígenas cavam estrada para escapar da lama em ramal de Assis Brasil e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/no-jurua-governadora-mailza-anuncia-investimentos-na-educacao-e-habitacao/",
@@ -285,7 +370,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:03:42.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-11-56-11-1200x800.jpg",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-23-11-56-11-1200x800.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre No Juruá, governadora Mailza anuncia investimentos na educação e habitação. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "No Juruá, governadora Mailza anuncia investimentos na educação e habitação e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/lula-preve-judicializacao-caso-desoneracao-seja-incluida-em-fim-da-6x1/",
@@ -301,7 +391,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:58:40.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/lula-e1771612080144.webp",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/lula-e1771612080144.webp",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Lula prevê judicialização caso desoneração seja incluída em fim da 6&#215;1. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Lula prevê judicialização caso desoneração seja incluída em fim da 6&#215;1 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://ac24horas.com/2026/04/23/trump-diz-que-eua-tem-controle-total-sobre-o-estreito-de-ormuz/",
@@ -317,7 +412,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:54:30.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/GettyImages-2268828737.webp",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/GettyImages-2268828737.webp",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "ac24horas publicou em 23 de abr de 2026 a base desta noticia sobre Trump diz que EUA têm \"controle total\" sobre o Estreito de Ormuz. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Trump diz que EUA têm \"controle total\" sobre o Estreito de Ormuz e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/acre-alcanca-marca-positiva-com-metade-da-populacao-aprovando-atuacao-da-seguranca-publica/",
@@ -333,7 +433,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:36:03.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/e71ca882-fe04-4708-91bb-00369e86b563-1024x682.jpg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/e71ca882-fe04-4708-91bb-00369e86b563-1024x682.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Acre alcança marca positiva, com metade da população aprovando atuação da Segurança Pública. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acre alcança marca positiva, com metade da população aprovando atuação da Segurança Pública e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/governo-do-estado-define-ultimos-detalhes-logisticos-do-projeto-acao-de-cidadania-no-sistema-penitenciario/",
@@ -349,7 +454,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:08:18.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-11.14.58-1024x577.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-11.14.58-1024x577.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Governo do Estado define últimos detalhes logísticos do Projeto Ação de Cidadania no Sistema Penitenciário. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo do Estado define últimos detalhes logísticos do Projeto Ação de Cidadania no Sistema Penitenciário e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/conselho-de-assistencia-social-realiza-3a-reuniao-ordinaria-e-alinha-politicas-publicas-de-estado/",
@@ -365,7 +475,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:00:28.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-09.19.11-1024x683.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-09.19.11-1024x683.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Conselho de Assistência Social realiza 3ª reunião ordinária e alinha políticas públicas de Estado. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Conselho de Assistência Social realiza 3ª reunião ordinária e alinha políticas públicas de Estado e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/em-reuniao-tecnica-no-stf-governo-do-acre-apresenta-avancos-na-implementacao-do-cadastro-ambiental-rural/",
@@ -381,7 +496,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:00:08.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/55224739782_56a842fd36_k-1024x683.jpg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/55224739782_56a842fd36_k-1024x683.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Em reunião técnica no STF, governo do Acre apresenta avanços na implementação do Cadastro Ambiental Rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Em reunião técnica no STF, governo do Acre apresenta avanços na implementação do Cadastro Ambiental Rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/roda-de-conversa-reune-instituicoes-para-debater-politicas-publicas-voltadas-aos-povos-indigenas-no-acre/",
@@ -397,7 +517,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:55:24.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.24.22-1024x682.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.24.22-1024x682.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Roda de conversa reúne instituições para debater políticas públicas voltadas aos povos indígenas no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Roda de conversa reúne instituições para debater políticas públicas voltadas aos povos indígenas no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/governo-realiza-reuniao-com-conselhos-e-comites-para-fortalecimento-de-politicas-publicas/",
@@ -413,7 +538,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:51:37.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-11.47.19-1024x682.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-11.47.19-1024x682.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Governo realiza reunião com conselhos e comitês para fortalecimento de políticas públicas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo realiza reunião com conselhos e comitês para fortalecimento de políticas públicas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/culturas-e-politicas-indigenas-ganham-destaque-em-evento-alusivo-ao-dia-dos-povos-originarios-no-acre/",
@@ -429,7 +559,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:26:51.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.26.00-1024x682.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.26.00-1024x682.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Culturas e políticas indígenas ganham destaque em evento alusivo ao Dia dos Povos Originários no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Culturas e políticas indígenas ganham destaque em evento alusivo ao Dia dos Povos Originários no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/governadora-mailza-entrega-kits-escolares-formaliza-convenio-e-garante-revitalizacao-de-escolas-mistas-da-zona-rural-de-cruzeiro-do-sul/",
@@ -445,7 +580,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:08:43.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-3-1024x577.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-3-1024x577.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares, formaliza convênio e garante revitalização de escolas mistas da zona rural de Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega kits escolares, formaliza convênio e garante revitalização de escolas mistas da zona rural de Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/governo-promove-vacinacao-para-servidores-e-da-policia-civil-em-rio-branco/",
@@ -461,7 +601,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:13:59.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/32-1024x682.png",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/32-1024x682.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Governo promove vacinação para servidores e da Polícia Civil em Rio Branco. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo promove vacinação para servidores e da Polícia Civil em Rio Branco e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agencia.ac.gov.br/programa-pre-enem-legal-realiza-aulao-para-alunos-da-escola-adalci-simoes-em-senador-guiomard/",
@@ -477,7 +622,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:53:21.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_9001-1024x681.jpg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_9001-1024x681.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Acre publicou em 23 de abr de 2026 a base desta noticia sobre Programa Pré-Enem Legal realiza aulão para alunos da escola Adalci Simões, em Senador Guiomard. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Programa Pré-Enem Legal realiza aulão para alunos da escola Adalci Simões, em Senador Guiomard e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/levantamento-revela-que-acre-esta-entre-os-estados-com-maior-intensidade-da-jornada-6x1/",
@@ -493,7 +643,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:39:11.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Levantamento revela que Acre está entre os estados com maior intensidade da jornada 6×1. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Levantamento revela que Acre está entre os estados com maior intensidade da jornada 6×1 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/justica-do-acre-determina-que-estado-e-municipio-criem-plano-estruturado-para-atendimento-a-autistas/",
@@ -509,7 +664,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:16:48.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Justiça do Acre determina que Estado e Município criem plano estruturado para atendimento a autistas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Justiça do Acre determina que Estado e Município criem plano estruturado para atendimento a autistas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/inmet-alerta-para-chuvas-intensas-e-ventos-de-ate-100-km-h-no-vale-do-jurua/",
@@ -525,7 +685,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:16:11.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Inmet alerta para chuvas intensas e ventos de até 100 km/h no Vale do Juruá. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Inmet alerta para chuvas intensas e ventos de até 100 km/h no Vale do Juruá e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/fim-da-escala-6x1-avanca-e-zezinho-barbary-defende-mudanca-com-responsabilidade-para-o-acre/",
@@ -541,7 +706,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:10:19.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Fim da escala 6&#215;1 avança e Zezinho Barbary defende mudança com responsabilidade para o Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Fim da escala 6&#215;1 avança e Zezinho Barbary defende mudança com responsabilidade para o Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/iphan-leva-indigenas-de-27-etnias-a-sitio-arqueologico-com-geoglifos-no-acre/",
@@ -557,7 +727,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:01:43.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Iphan leva indígenas de 27 etnias a sítio arqueológico com geoglifos no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Iphan leva indígenas de 27 etnias a sítio arqueológico com geoglifos no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/friale-ve-inverno-dentro-da-media-e-sem-cenario-de-seca-severa-no-acre/",
@@ -573,7 +748,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:01:18.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Friale vê inverno dentro da média e sem cenário de seca severa no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Friale vê inverno dentro da média e sem cenário de seca severa no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/relatada-por-alan-rick-lei-cria-incentivo-direto-a-reciclagem-no-pais/",
@@ -589,7 +769,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:52:52.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Relatada por Alan Rick, lei cria incentivo direto à reciclagem no país. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Relatada por Alan Rick, lei cria incentivo direto à reciclagem no país e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/acidente-na-via-chico-mendes-termina-com-morte-de-motociclista/",
@@ -605,7 +790,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:49:21.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Acidente na Via Chico Mendes termina com morte de motociclista. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acidente na Via Chico Mendes termina com morte de motociclista e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-kits-escolares-formaliza-convenio-e-garante-revitalizacao-de-escolas-mistas-da-zona-rural-de-cruzeiro-do-sul/",
@@ -621,7 +811,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:43:57.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/CAPA-3-1024x577-1.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares, formaliza convênio e garante revitalização de escolas mistas da zona rural de Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega kits escolares, formaliza convênio e garante revitalização de escolas mistas da zona rural de Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://jurua24horas.com/2026/04/cruzeiro-do-sul-realiza-4a-edicao-do-programa-de-aquisicao-de-alimentos/",
@@ -637,7 +832,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:39:12.000Z",
     "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-13.55.00-1024x682.jpeg",
     "feedImageUrl": "",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-13.55.00-1024x682.jpeg"
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-13.55.00-1024x682.jpeg",
+    "body": [
+      "Jurua 24 Horas publicou em 23 de abr de 2026 a base desta noticia sobre Cruzeiro do Sul realiza 4ª edição do Programa de Aquisição de Alimentos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Cruzeiro do Sul realiza 4ª edição do Programa de Aquisição de Alimentos e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/ue-aprova-ajuda-bilionaria-a-ucrania-e-novas-sancoes-contra-a-russia/",
@@ -653,7 +853,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:37:03.000Z",
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/84-3.png?fit=900%2C597&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/84-3.png?fit=900%2C597&#038;ssl=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre UE aprova ajuda bilionária à Ucrânia e novas sanções contra a Rússia. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "UE aprova ajuda bilionária à Ucrânia e novas sanções contra a Rússia e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/goiano-leva-filhos-ao-rio-para-ver-o-flamengo-e-se-afoga-em-copacabana/",
@@ -669,7 +874,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:34:31.000Z",
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/85-5.png?fit=900%2C538&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/85-5.png?fit=900%2C538&#038;ssl=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Goiano leva filhos ao Rio para ver o Flamengo e se afoga em Copacabana. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Goiano leva filhos ao Rio para ver o Flamengo e se afoga em Copacabana e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre esporte, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/prefeitura-de-cruzeiro-do-sul-restringe-circulacao-de-veiculos-pesados-no-perimetro-urbano/",
@@ -685,7 +895,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:21:56.000Z",
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/86-1.webp?fit=1080%2C675&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/86-1.webp?fit=1080%2C675&#038;ssl=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul restringe circulação de veículos pesados no perímetro urbano. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Prefeitura de Cruzeiro do Sul restringe circulação de veículos pesados no perímetro urbano e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/ipem-encontra-14-bicos-de-combustivel-com-irregularidades-no-acre/",
@@ -701,7 +916,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:19:59.000Z",
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_7589-1200x800.avif",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_7589-1200x800.avif",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Ipem encontra 14 bicos de combustível com irregularidades no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ipem encontra 14 bicos de combustível com irregularidades no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/acreano-joao-miguel-conquista-1o-titulo-atuando-pelo-gremio/",
@@ -717,7 +937,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:15:29.000Z",
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/88-2.jpg?fit=960%2C813&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/88-2.jpg?fit=960%2C813&#038;ssl=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Acreano João Miguel conquista 1º título atuando pelo Grêmio. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acreano João Miguel conquista 1º título atuando pelo Grêmio e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/vidro-da-fachada-da-honda-e-quebrado-na-regiao-central-de-cruzeiro-do-sul/",
@@ -733,7 +958,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:10:14.000Z",
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/89-7.png?fit=1200%2C800&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/89-7.png?fit=1200%2C800&#038;ssl=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Vidro da fachada da Honda é quebrado na região central de Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Vidro da fachada da Honda é quebrado na região central de Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/governo-federal-libera-estudos-cientificos-na-serra-do-divisor-no-acre/",
@@ -749,7 +979,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:07:51.000Z",
     "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/90-3.jpg?fit=1200%2C800&#038;ssl=1",
     "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/90-3.jpg?fit=1200%2C800&#038;ssl=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Governo federal libera estudos científicos na Serra do Divisor, no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo federal libera estudos científicos na Serra do Divisor, no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/rio-jurua-segue-em-elevacao-em-cruzeiro-do-sul-nesta-quinta/",
@@ -765,7 +1000,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:00:45.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-cheia.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-cheia.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Rio Juruá segue em elevação em Cruzeiro do Sul nesta quinta. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Rio Juruá segue em elevação em Cruzeiro do Sul nesta quinta e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul/",
@@ -781,7 +1021,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T15:55:41.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-policia.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-policia.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Faccionada ameaça esposa de militar e é presa em Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Faccionada ameaça esposa de militar e é presa em Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://juruacomunicacao.com.br/suspeito-de-matar-irmaos-e-encontrado-morto-em-cela-em-boca-do-acre/",
@@ -797,7 +1042,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T15:53:05.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-policia.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-policia.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Jurua Comunicacao publicou em 23 de abr de 2026 a base desta noticia sobre Suspeito de matar irmãos é encontrado morto em cela em Boca do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Suspeito de matar irmãos é encontrado morto em cela em Boca do Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realiza-4a-edicao-do-programa-de-aquisicao-de-alimentos-com-investimento-de-r-225-mil/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=prefeitura-de-cruzeiro-do-sul-realiza-4a-edicao-do-programa-de-aquisicao-de-alimentos-com-investimento-de-r-225-mil",
@@ -813,7 +1063,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:24:32.000Z",
     "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-23-at-15.13.05-1.jpg",
     "feedImageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-23-at-15.13.05-1.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul realiza 4ª edição do Programa de Aquisição de Alimentos com investimento de R$ 225 mil. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Prefeitura de Cruzeiro do Sul realiza 4ª edição do Programa de Aquisição de Alimentos com investimento de R$ 225 mil e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/culturas-e-politicas-indigenas-ganham-destaque-em-evento-alusivo-ao-dia-dos-povos-originarios-no-acre/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=culturas-e-politicas-indigenas-ganham-destaque-em-evento-alusivo-ao-dia-dos-povos-originarios-no-acre",
@@ -829,7 +1084,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:52:00.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.26.00-1024x682.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-12.26.00-1024x682.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Culturas e políticas indígenas ganham destaque em evento alusivo ao Dia dos Povos Originários no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Culturas e políticas indígenas ganham destaque em evento alusivo ao Dia dos Povos Originários no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/governadora-mailza-entrega-kits-escolares-formaliza-convenio-e-garante-revitalizacao-de-escolas-mistas-da-zona-rural-de-cruzeiro-do-sul/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=governadora-mailza-entrega-kits-escolares-formaliza-convenio-e-garante-revitalizacao-de-escolas-mistas-da-zona-rural-de-cruzeiro-do-sul",
@@ -845,7 +1105,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:46:11.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-3-1024x577.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-3-1024x577.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares, formaliza convênio e garante revitalização de escolas mistas da zona rural de Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega kits escolares, formaliza convênio e garante revitalização de escolas mistas da zona rural de Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/governo-promove-vacinacao-para-servidores-e-da-policia-civil-em-rio-branco/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=governo-promove-vacinacao-para-servidores-e-da-policia-civil-em-rio-branco",
@@ -861,7 +1126,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:20:38.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/32-1024x682.png",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/32-1024x682.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Governo promove vacinação para servidores e da Polícia Civil em Rio Branco. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo promove vacinação para servidores e da Polícia Civil em Rio Branco e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/programa-pre-enem-legal-realiza-aulao-para-alunos-da-escola-adalci-simoes-em-senador-guiomard/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=programa-pre-enem-legal-realiza-aulao-para-alunos-da-escola-adalci-simoes-em-senador-guiomard",
@@ -877,7 +1147,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:52:50.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_9001-1024x681.jpg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_9001-1024x681.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Programa Pré-Enem Legal realiza aulão para alunos da escola Adalci Simões, em Senador Guiomard. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Programa Pré-Enem Legal realiza aulão para alunos da escola Adalci Simões, em Senador Guiomard e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/voluntarios-da-adventist-health-atendem-milhares-de-pessoas-em-voluntariado-nas-filipinas/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=voluntarios-da-adventist-health-atendem-milhares-de-pessoas-em-voluntariado-nas-filipinas",
@@ -893,7 +1168,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:32:12.000Z",
     "imageUrl": "https://batelao.com/upload/2026/04/005-12.jpeg",
     "feedImageUrl": "https://batelao.com/upload/2026/04/005-12.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Voluntários da Adventist Health atendem milhares de pessoas em voluntariado nas Filipinas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Voluntários da Adventist Health atendem milhares de pessoas em voluntariado nas Filipinas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/servidores-da-educacao-nao-docentes-tem-ate-sexta-feira-para-participar-da-selecao-para-cursos-tecnicos-do-ieptec/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=servidores-da-educacao-nao-docentes-tem-ate-sexta-feira-para-participar-da-selecao-para-cursos-tecnicos-do-ieptec",
@@ -909,7 +1189,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:02:21.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/FOTO-1-3-1024x683.png",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/FOTO-1-3-1024x683.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Servidores da Educação não docentes têm até sexta-feira para participar da seleção para cursos técnicos do Ieptec. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Servidores da Educação não docentes têm até sexta-feira para participar da seleção para cursos técnicos do Ieptec e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/governo-nomeia-novo-procurador-geral-adjunto-do-estado/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=governo-nomeia-novo-procurador-geral-adjunto-do-estado",
@@ -925,7 +1210,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T15:58:41.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/DSC07062.jpg-1024x576.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/DSC07062.jpg-1024x576.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Governo nomeia novo procurador-geral adjunto do Estado. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo nomeia novo procurador-geral adjunto do Estado e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/governo-e-ministerio-publico-chegam-a-acordo-para-garantir-avanco-de-habitacoes-populares-no-irineu-serra/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=governo-e-ministerio-publico-chegam-a-acordo-para-garantir-avanco-de-habitacoes-populares-no-irineu-serra",
@@ -941,7 +1231,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T15:32:01.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-22-at-18.36.16-1024x768.jpeg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-22-at-18.36.16-1024x768.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Governo e Ministério Público chegam a acordo para garantir avanço de habitações populares no Irineu Serra. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governo e Ministério Público chegam a acordo para garantir avanço de habitações populares no Irineu Serra e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://batelao.com/ipem-divulga-balanco-trimestral-das-fiscalizacoes-em-postos-de-combustiveis-no-acre/?utm_source=rss&#038;utm_medium=rss&#038;utm_campaign=ipem-divulga-balanco-trimestral-das-fiscalizacoes-em-postos-de-combustiveis-no-acre",
@@ -957,7 +1252,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T13:37:57.000Z",
     "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_7879-1024x683.jpg",
     "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_7879-1024x683.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Batelao publicou em 23 de abr de 2026 a base desta noticia sobre Ipem divulga balanço trimestral das fiscalizações em postos de combustíveis no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ipem divulga balanço trimestral das fiscalizações em postos de combustíveis no Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-instalacao-josias-o-da-silva-ltda/",
@@ -973,7 +1273,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-20T20:11:06.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 20 de abr de 2026 a base desta noticia sobre Licença de Instalação &#8211; Josias O. Da Silva Ltda. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Licença de Instalação &#8211; Josias O. Da Silva Ltda e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
@@ -989,7 +1294,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-03-23T20:55:20.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 23 de mar de 2026 a base desta noticia sobre Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-da-assembleia-geral-extraordinaria-coopertransgua/",
@@ -1005,7 +1315,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-03-18T17:13:35.000Z",
     "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
     "feedImageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 18 de mar de 2026 a base desta noticia sobre EDITAL DE CONVOCAÇÃO DA ASSEMBLEIA GERAL EXTRAORDINÁRIA &#8211; COOPERTRANSGUA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "EDITAL DE CONVOCAÇÃO DA ASSEMBLEIA GERAL EXTRAORDINÁRIA &#8211; COOPERTRANSGUA e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/recebimento-licenca-previa-josias-o-da-silva-epp/",
@@ -1021,7 +1336,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-03-18T14:54:19.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 18 de mar de 2026 a base desta noticia sobre Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/geral/edital-de-convocacao-de-assembleia-geral-ordinaria-coopeguajara/",
@@ -1037,7 +1357,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-03-12T20:34:01.000Z",
     "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/Coopeguajara-edital.jpg",
     "feedImageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/Coopeguajara-edital.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 12 de mar de 2026 a base desta noticia sobre Edital de Convocação de Assembleia Geral Ordinária &#8211; Coopeguajará. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Edital de Convocação de Assembleia Geral Ordinária &#8211; Coopeguajará e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
@@ -1053,7 +1378,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-02-23T15:02:43.000Z",
     "imageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
     "feedImageUrl": "https://catalogo-cruzeiro-web.onrender.com/assets/scene-servico.svg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 23 de fev de 2026 a base desta noticia sobre Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-estadodo-acre/",
@@ -1069,7 +1399,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-02-04T21:28:00.000Z",
     "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
     "feedImageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 04 de fev de 2026 a base desta noticia sobre Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/geral/edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre/",
@@ -1085,7 +1420,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-02-02T17:02:00.000Z",
     "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-11.09.29.jpeg",
     "feedImageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-11.09.29.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 02 de fev de 2026 a base desta noticia sobre Edital de Convocação &#8211; Associação de Cabelereiros de Cruzeiro do Sul &#8211; Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Edital de Convocação &#8211; Associação de Cabelereiros de Cruzeiro do Sul &#8211; Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-geral-de-eleicao-e-posse/",
@@ -1101,7 +1441,12 @@ window.NEWS_DATA = [
     "publishedAt": "2025-12-09T21:11:05.000Z",
     "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
     "feedImageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 09 de dez de 2025 a base desta noticia sobre Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-eleicao-e-posse-ascak/",
@@ -1117,7 +1462,12 @@ window.NEWS_DATA = [
     "publishedAt": "2025-12-09T14:49:06.000Z",
     "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
     "feedImageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Tribuna do Jurua publicou em 09 de dez de 2025 a base desta noticia sobre EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/igreja-matriz-de-sao-jorge-no-rio-e-elevada-santuario",
@@ -1133,7 +1483,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:00:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687066&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687066&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Igreja Matriz de São Jorge no Rio é elevada a santuário. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Igreja Matriz de São Jorge no Rio é elevada a santuário e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/brasil-perde-r-47-bilhoes-ao-apostar-em-petroleo-na-foz-do-amazonas",
@@ -1149,7 +1504,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:43:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687045&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687045&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Brasil pode perder R$ 47 bi ao priorizar petróleo na Foz do Amazonas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Brasil pode perder R$ 47 bi ao priorizar petróleo na Foz do Amazonas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/exposicao-mostra-o-olhar-afro-brasileiro-da-fotografa-lita-cerqueira",
@@ -1165,7 +1525,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:37:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687064&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687064&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Exposição mostra o olhar afro-brasileiro da fotógrafa Lita Cerqueira. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Exposição mostra o olhar afro-brasileiro da fotógrafa Lita Cerqueira e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/justica-nega-pedido-de-careca-do-inss-para-barrar-apelido",
@@ -1181,7 +1546,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:09:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687061&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687061&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Justiça nega pedido de Careca do INSS para barrar apelido. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Justiça nega pedido de Careca do INSS para barrar apelido e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-04/camara-aprova-multa-para-quem-descartar-lixo-em-vias-publicas",
@@ -1197,7 +1567,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:56:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687060&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687060&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Câmara aprova multa para quem descartar lixo em vias públicas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Câmara aprova multa para quem descartar lixo em vias públicas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-04/sistema-prisional-de-sp-registra-uma-morte-cada-19-horas",
@@ -1213,7 +1588,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:55:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1686926&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1686926&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Sistema prisional de São Paulo registra uma morte a cada 19 horas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Sistema prisional de São Paulo registra uma morte a cada 19 horas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/lula-qualidade-do-agro-e-essencial-para-ampliar-exportacoes",
@@ -1229,7 +1609,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:54:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687059&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687059&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Lula: qualidade do agro é essencial para ampliar exportações. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Lula: qualidade do agro é essencial para ampliar exportações e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/stf-determina-atualizacao-anual-do-valor-do-minimo-existencial",
@@ -1245,7 +1630,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:36:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687058&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687058&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre STF determina atualização anual do valor do mínimo existencial. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "STF determina atualização anual do valor do mínimo existencial e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre utilidade pública, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/saude/noticia/2026-04/estado-de-sao-paulo-tem-mais-duas-mortes-por-febre-amarela",
@@ -1261,7 +1651,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:11:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687055&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687055&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Estado de São Paulo tem mais duas mortes por febre amarela. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Estado de São Paulo tem mais duas mortes por febre amarela e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/enviado-de-trump-sugere-que-italia-substitua-ira-na-copa-do-mundo",
@@ -1277,7 +1672,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T17:47:00.000Z",
     "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687048&o=rss",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687048&o=rss",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "Agencia Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Enviado de Trump sugere que Itália substitua Irã na Copa do Mundo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Enviado de Trump sugere que Itália substitua Irã na Copa do Mundo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre esporte, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/23/cantor-dv4d-acusado-de-homicidio-guardava-pornografia-infantil-no-celular-diz-tv.ghtml",
@@ -1293,7 +1693,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T18:51:00.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/lA1J1k7WeOAOxZT7kfLRcILmfwY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/c/r/wNeIQPQNCGdYJdEZ3WzQ/afp-20260420-a8fb6gh-v1-midres-ussingerd4vdsarraignmentinlosangeles.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/lA1J1k7WeOAOxZT7kfLRcILmfwY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/c/r/wNeIQPQNCGdYJdEZ3WzQ/afp-20260420-a8fb6gh-v1-midres-ussingerd4vdsarraignmentinlosangeles.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Cantor D4vd, acusado de homicídio, guardava pornografia infantil no celular, diz TV. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Cantor D4vd, acusado de homicídio, guardava pornografia infantil no celular, diz TV e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/sp/sao-paulo/noticia/2026/04/23/meu-coracao-esta-transbordando-de-alegria-giovanna-roque-que-ja-foi-agredida-por-mc-ryan-comemora-soltura.ghtml",
@@ -1309,7 +1714,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T16:26:36.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/cm_8DbaGMLPijUW14gLHenQe6K4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/N/BJrih7RIqDnkhCU9tgUg/imagem-redimensionada.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/cm_8DbaGMLPijUW14gLHenQe6K4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/N/BJrih7RIqDnkhCU9tgUg/imagem-redimensionada.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre 'Meu coração está transbordando de alegria': Giovanna Roque comemora liberdade de namorado, MC Ryan. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "'Meu coração está transbordando de alegria': Giovanna Roque comemora liberdade de namorado, MC Ryan e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/economia/noticia/2026/04/23/acionistas-warner-paramount-veja-os-numeros.ghtml",
@@ -1325,7 +1735,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T15:25:16.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/TIYto_rVRz1Ymj5DR6aEvhg6Rp0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/4/FOll2MTMCQ0anE7G5NrQ/estrada-da-vida-2026-02-10t184948.613.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/TIYto_rVRz1Ymj5DR6aEvhg6Rp0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/4/FOll2MTMCQ0anE7G5NrQ/estrada-da-vida-2026-02-10t184948.613.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Acionistas da Warner aprovam venda para a Paramount; veja os números. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acionistas da Warner aprovam venda para a Paramount; veja os números e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/economia/noticia/2026/04/23/acionistas-da-warner-bros-aprovam-a-aquisicao-pela-paramount.ghtml",
@@ -1341,7 +1756,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T14:42:34.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/49K3CAnwbf-e5wP-V-6ZZ3DyKK8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/P/I/AfCMzFTBmN6Yym7rbtfw/2026-02-27t003234z-1-lynxmpem1q018-rtroptp-4-empresas-netflix-warner-bros-dis.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/49K3CAnwbf-e5wP-V-6ZZ3DyKK8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/P/I/AfCMzFTBmN6Yym7rbtfw/2026-02-27t003234z-1-lynxmpem1q018-rtroptp-4-empresas-netflix-warner-bros-dis.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Acionistas da Warner Bros aprovam a aquisição pela Paramount. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Acionistas da Warner Bros aprovam a aquisição pela Paramount e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/23/ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia.ghtml",
@@ -1357,7 +1777,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T13:52:30.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/TktUb-cEVSlycDJDh8AOckbAM5E=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/t/Q/to3J2QQ26r4vIcNGMovg/2561-judorotea-l-album-edit-berroinc.-berroinc.cc-priisma-.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/TktUb-cEVSlycDJDh8AOckbAM5E=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/t/Q/to3J2QQ26r4vIcNGMovg/2561-judorotea-l-album-edit-berroinc.-berroinc.cc-priisma-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/23/drake-instala-palacio-de-gelo-no-canada-para-divulgar-album-e-bombeiros-intervem-por-seguranca.ghtml",
@@ -1373,7 +1798,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T11:24:03.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/jFSN9iLvTU4XRL6lwhVM756fEn4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/g/gBSscATBGBgyaceb5UzA/design-sem-nome-40-.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/jFSN9iLvTU4XRL6lwhVM756fEn4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/g/g/gBSscATBGBgyaceb5UzA/design-sem-nome-40-.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Drake instala 'palácio de gelo' no Canadá para divulgar álbum e bombeiros intervêm por segurança. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Drake instala 'palácio de gelo' no Canadá para divulgar álbum e bombeiros intervêm por segurança e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/23/musicas-e-texto-de-chico-buarque-movem-com-precisao-a-remontagem-de-gota-dagua-em-cena-em-sao-paulo.ghtml",
@@ -1389,7 +1819,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T11:17:02.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/LcxWx8yH4E2yemKq1SJdMngfgKg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/W/l/xNXbj6SROQ0GWuTPNWKg/gotadaguabarbaracampos.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/LcxWx8yH4E2yemKq1SJdMngfgKg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/W/l/xNXbj6SROQ0GWuTPNWKg/gotadaguabarbaracampos.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Músicas e texto de Chico Buarque movem com precisão a remontagem de 'Gota d'água' em cena em São Paulo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Músicas e texto de Chico Buarque movem com precisão a remontagem de 'Gota d'água' em cena em São Paulo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre festas & social, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/23/novo-show-com-replica-de-tubarao-e-mais-artistas-na-empresa-os-planos-de-mc-ryan-sp-antes-da-prisao.ghtml",
@@ -1405,7 +1840,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T05:00:35.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/vA-4oZtMEDGGLlx2EE_CaqzGHZo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/R/D2YC6iRBm9MSrSsho23A/captura-de-tela-2026-04-15-152948.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/vA-4oZtMEDGGLlx2EE_CaqzGHZo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/R/D2YC6iRBm9MSrSsho23A/captura-de-tela-2026-04-15-152948.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 23 de abr de 2026 a base desta noticia sobre Show com réplica de tubarão e investimento em novos talentos: os planos de MC Ryan SP antes da prisão. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Show com réplica de tubarão e investimento em novos talentos: os planos de MC Ryan SP antes da prisão e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/23/globopop-veja-como-seguir-o-jornalismo-do-g1-e-da-globo-no-novo-aplicativo-de-videos.ghtml",
@@ -1421,7 +1861,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T03:01:16.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/uZ81XvPVxtUmUTWXB_HnYaspZJQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/Q/fSfcy2ROy6AG8yw0wJjQ/sem-nome-1200-x-900-px-4-.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/uZ81XvPVxtUmUTWXB_HnYaspZJQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/Q/fSfcy2ROy6AG8yw0wJjQ/sem-nome-1200-x-900-px-4-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre GloboPop: veja como seguir o jornalismo do g1 e da Globo no novo aplicativo de vídeos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "GloboPop: veja como seguir o jornalismo do g1 e da Globo no novo aplicativo de vídeos e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/22/caso-d4vd-autopsia-aponta-causa-da-morte-de-garota-de-14-anos-cantor-e-acusado-de-assassinato.ghtml",
@@ -1437,7 +1882,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T22:55:55.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/AALNj6olvmYxb8AOFgyqrK3KTYs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/q/W/2pcVkLQO2RL4hphAUHRQ/fotos-g1-1920-x-1080-px-5-.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/AALNj6olvmYxb8AOFgyqrK3KTYs=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/q/W/2pcVkLQO2RL4hphAUHRQ/fotos-g1-1920-x-1080-px-5-.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Caso D4vd: autópsia aponta causa da morte de garota de 14 anos; cantor é acusado de assassinato. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Caso D4vd: autópsia aponta causa da morte de garota de 14 anos; cantor é acusado de assassinato e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/22/naldo-benny-recebe-netinho-de-paula-em-casa-para-feats-em-dois-sucessos-do-grupo-de-pagode-negritude-junior.ghtml",
@@ -1453,7 +1903,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T21:38:03.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/X37oH89MAi6f1j9nplII4vPlNtI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/3/PxN5s4TRCYBpunKioeVg/cdn-emcasa-99-1-.jpeg",
     "feedImageUrl": "https://s2-g1.glbimg.com/X37oH89MAi6f1j9nplII4vPlNtI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/3/PxN5s4TRCYBpunKioeVg/cdn-emcasa-99-1-.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Naldo Benny recebe Netinho de Paula em casa para feats em dois sucessos do grupo de pagode Negritude Junior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Naldo Benny recebe Netinho de Paula em casa para feats em dois sucessos do grupo de pagode Negritude Junior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/22/darrell-sheets-quem-da-mais-morre.ghtml",
@@ -1469,7 +1924,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T19:28:05.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/hRsPocreclKUexG4kpLBdVSysrE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/R/a/8ycTEnQU2jETbt61MQ6Q/ok-so-the-guy-said-your-skin-on-your-face-is-sagging-and-we-cant-get-a-good-image-so-please-put.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/hRsPocreclKUexG4kpLBdVSysrE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/R/a/8ycTEnQU2jETbt61MQ6Q/ok-so-the-guy-said-your-skin-on-your-face-is-sagging-and-we-cant-get-a-good-image-so-please-put.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Darrell Sheets, do reality 'Quem Dá Mais?', morre aos 67 anos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Darrell Sheets, do reality 'Quem Dá Mais?', morre aos 67 anos e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/22/juliana-linhares-ecoa-o-canto-torto-de-belchior-no-segundo-album-solo-veja-a-capa-do-disco-ate-cansar-o-cansaco.ghtml",
@@ -1485,7 +1945,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T15:40:05.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/Qn65BZD2ggUvMvNhiLu64M9bk4w=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/B/M/DCqtr1SJOS85cBTB3z7w/ate-cansar-o-cansaco-capa-3000x3000-.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/Qn65BZD2ggUvMvNhiLu64M9bk4w=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/B/M/DCqtr1SJOS85cBTB3z7w/ate-cansar-o-cansaco-capa-3000x3000-.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/22/juliano-cazarre-lanca-curso-para-homens-enfraquecidos-e-atrizes-questionam-discurso-que-mata-mulheres.ghtml",
@@ -1501,7 +1966,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T15:01:06.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/S07MR-lRzPSWXh8LLsIotTz8XGY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/2/X7VpJMRoqBkWKdkau0yw/design-sem-nome-39-.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/S07MR-lRzPSWXh8LLsIotTz8XGY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/G/2/X7VpJMRoqBkWKdkau0yw/design-sem-nome-39-.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Juliano Cazarré lança curso para 'homens enfraquecidos' e atrizes questionam: 'Discurso que mata mulheres'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Juliano Cazarré lança curso para 'homens enfraquecidos' e atrizes questionam: 'Discurso que mata mulheres' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/22/geraldo-azevedo-se-desvia-dos-hits-no-album-ao-vivo-em-que-perpetua-recorte-do-corrente-show-da-turne-oitentacao.ghtml",
@@ -1517,7 +1987,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T14:28:29.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/XBSWggcWdrtFp7ZnTWIsmaw-EF4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/A/4/SBRs13SCOanExo5s3juw/geraldo-azevedo-foto-thiagolemosc-3-.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/XBSWggcWdrtFp7ZnTWIsmaw-EF4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/A/4/SBRs13SCOanExo5s3juw/geraldo-azevedo-foto-thiagolemosc-3-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Geraldo Azevedo se desvia dos hits no álbum ao vivo em que perpetua recorte do show da corrente turnê 'Oitentação'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Geraldo Azevedo se desvia dos hits no álbum ao vivo em que perpetua recorte do show da corrente turnê 'Oitentação' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/economia/noticia/2026/04/22/obras-de-arte-joias-e-carros-de-luxo-o-que-da-para-comprar-com-os-r-57-milhoes-do-bbb-26.ghtml",
@@ -1533,7 +2008,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T13:57:38.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/D2ZSWFDkNDpQnc3QlCYiVJ8Xqcg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2020/c/q/ucsNfvR1G7AUAR47kBuA/p90373795-highres-the-new-bmw-x6-m50i-.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/D2ZSWFDkNDpQnc3QlCYiVJ8Xqcg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2020/c/q/ucsNfvR1G7AUAR47kBuA/p90373795-highres-the-new-bmw-x6-m50i-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Obras de arte, joias e carros de luxo: o que dá para comprar com os R$ 5,7 milhões do BBB 26. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Obras de arte, joias e carros de luxo: o que dá para comprar com os R$ 5,7 milhões do BBB 26 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre prefeitura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/22/jack-quaid-filho-de-meg-ryan-e-dennis-quaid-se-casa-com-claudia-doumit.ghtml",
@@ -1549,7 +2029,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T13:06:43.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/jkqxIwpJ_BBUqtS7CYqHEJt3dA4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/9/w/5C4LTnS9q7hWqe6XixKw/jack.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/jkqxIwpJ_BBUqtS7CYqHEJt3dA4=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/9/w/5C4LTnS9q7hWqe6XixKw/jack.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Jack Quaid, filho de Meg Ryan e Dennis Quaid, se casa com Claudia Doumit. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Jack Quaid, filho de Meg Ryan e Dennis Quaid, se casa com Claudia Doumit e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre festas & social, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/22/por-que-o-bilionario-magnata-do-k-pop-por-tras-do-bts-pode-ser-preso.ghtml",
@@ -1565,7 +2050,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T12:44:16.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/ZR-Pv9Hnjj9EWl7LZAoWg-HpSzw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/9/eAIARtRiG2mczaCXn5Ng/113acd10-3d6a-11f1-bb8a-374117ea6afa.jpg.webp",
     "feedImageUrl": "https://s2-g1.glbimg.com/ZR-Pv9Hnjj9EWl7LZAoWg-HpSzw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/l/9/eAIARtRiG2mczaCXn5Ng/113acd10-3d6a-11f1-bb8a-374117ea6afa.jpg.webp",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Por que o bilionário magnata do K-pop por trás do BTS pode ser preso?. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Por que o bilionário magnata do K-pop por trás do BTS pode ser preso? e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/22/percussionista-airto-moreira-volta-ao-estudio-e-lanca-album-em-parceria-com-o-pianista-ricardo-bacelar-maracanos.ghtml",
@@ -1581,7 +2071,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T12:30:19.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/sh5mSl9uh6taKp1GF06COPmcerw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/s/0/UEwJOHRVOVRdtEZqNjZg/credit-maria-bacelar-04.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/sh5mSl9uh6taKp1GF06COPmcerw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/s/0/UEwJOHRVOVRdtEZqNjZg/credit-maria-bacelar-04.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Percussionista Airto Moreira volta ao estúdio e lança álbum em parceria com o pianista Ricardo Bacelar, 'Maracanós'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Percussionista Airto Moreira volta ao estúdio e lança álbum em parceria com o pianista Ricardo Bacelar, 'Maracanós' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/22/segundo-lugar-no-bbb-26-relembre-a-trajetoria-de-superacao-de-tia-milena.ghtml",
@@ -1597,7 +2092,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T12:26:01.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/uIBNYN9ZYl8mMtQWJMWrFHv1e1A=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/y/1/aTAYzBRzSBwKgO4LZ7Aw/milena-1.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/uIBNYN9ZYl8mMtQWJMWrFHv1e1A=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/y/1/aTAYzBRzSBwKgO4LZ7Aw/milena-1.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Segundo lugar no 'BBB 26': relembre a trajetória de superação de 'Tia Milena'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Segundo lugar no 'BBB 26': relembre a trajetória de superação de 'Tia Milena' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre esporte, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/22/ana-paula-se-torna-a-participante-mais-velha-a-ganhar-o-bbb-veja-lista.ghtml",
@@ -1613,7 +2113,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T11:18:23.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/2GKhtuWMuzSV2IKQPFkcGmOZ4u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/U/XKIGxeT5GmhSarLuMBng/design-sem-nome-13-.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/2GKhtuWMuzSV2IKQPFkcGmOZ4u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/U/XKIGxeT5GmhSarLuMBng/design-sem-nome-13-.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Ana Paula se torna a participante mais velha a ganhar o BBB; veja lista. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ana Paula se torna a participante mais velha a ganhar o BBB; veja lista e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre educação, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/22/de-desclassificada-a-protagonista-a-jornada-da-heroina-de-ana-paula-renault-no-bbb-26.ghtml",
@@ -1629,7 +2134,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T11:07:03.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/cTUtyYTsd6zN64QD_-F0MZ1aaA8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/m/knNrC6TzmqME1IAS49rw/img-1680.jpg.jpeg",
     "feedImageUrl": "https://s2-g1.glbimg.com/cTUtyYTsd6zN64QD_-F0MZ1aaA8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/m/knNrC6TzmqME1IAS49rw/img-1680.jpg.jpeg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre De desclassificada a protagonista: a jornada da heroína de Ana Paula Renault no 'BBB 26'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "De desclassificada a protagonista: a jornada da heroína de Ana Paula Renault no 'BBB 26' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/22/paulo-miklos-canta-beto-guedes-criolo-paulo-diniz-rita-lee-e-sergio-sampaio-no-album-de-interprete-coisas-da-vida.ghtml",
@@ -1645,7 +2155,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T09:00:54.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/G-Ow_30VCmG3VNKNGk0d922AtTg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/P/1/iFGYvJQJqOSxBmB4elew/miklos2026.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/G-Ow_30VCmG3VNKNGk0d922AtTg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/P/1/iFGYvJQJqOSxBmB4elew/miklos2026.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Paulo Miklos canta Beto Guedes, Criolo, Paulo Diniz, Rita Lee e Sérgio Sampaio no álbum de intérprete 'Coisas da vida'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Paulo Miklos canta Beto Guedes, Criolo, Paulo Diniz, Rita Lee e Sérgio Sampaio no álbum de intérprete 'Coisas da vida' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/fantastico/noticia/2026/04/22/de-parada-cardiorrespiratoria-a-convulsao-flagrantes-mostram-atendimentos-de-emergencia-no-metro-de-sp-video.ghtml",
@@ -1661,7 +2176,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T06:01:00.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/fX2uvBI_FtlUW4kMoUdL9xG27es=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/K/v/HxlyyqQ2WyJCuwJbGGCg/14539828-360p-300k-h264-2ch-128k-44100-aac-1776722122-frame-at-6m32s.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/fX2uvBI_FtlUW4kMoUdL9xG27es=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/K/v/HxlyyqQ2WyJCuwJbGGCg/14539828-360p-300k-h264-2ch-128k-44100-aac-1776722122-frame-at-6m32s.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre De parada cardiorrespiratória a convulsão: flagrantes mostram atendimentos de emergência no metrô de SP; vídeo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "De parada cardiorrespiratória a convulsão: flagrantes mostram atendimentos de emergência no metrô de SP; vídeo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/22/karol-g-anuncia-show-no-brasil-em-2027.ghtml",
@@ -1677,7 +2197,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T05:52:40.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/JzaSObztC_ECdNJ1H7PrNJrmsUA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/D/Q/SBUP7tSeO1MCY5VRcKMg/afp-20260413-a7kl2y8-v1-highres-day3coachellavalleymusicartsfestival.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/JzaSObztC_ECdNJ1H7PrNJrmsUA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/D/Q/SBUP7tSeO1MCY5VRcKMg/afp-20260413-a7kl2y8-v1-highres-day3coachellavalleymusicartsfestival.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 22 de abr de 2026 a base desta noticia sobre Karol G anuncia show no Brasil em 2027. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Karol G anuncia show no Brasil em 2027 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre negócios, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/noticia/2026/04/22/ana-paula-e-a-campea-do-bbb-26-e-ganha-premio-de-r-57-milhoes.ghtml",
@@ -1693,7 +2218,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-22T03:28:23.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/2GKhtuWMuzSV2IKQPFkcGmOZ4u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/U/XKIGxeT5GmhSarLuMBng/design-sem-nome-13-.png",
     "feedImageUrl": "https://s2-g1.glbimg.com/2GKhtuWMuzSV2IKQPFkcGmOZ4u8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/V/U/XKIGxeT5GmhSarLuMBng/design-sem-nome-13-.png",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 21 de abr de 2026 a base desta noticia sobre Ana Paula é a campeã do 'BBB 26' e ganha prêmio de R$ 5,7 milhões. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ana Paula é a campeã do 'BBB 26' e ganha prêmio de R$ 5,7 milhões e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre esporte, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/21/morre-aos-70-anos-moogie-canazio-conceituado-engenheiro-de-som-e-produtor-da-industria-fonografica.ghtml",
@@ -1709,7 +2239,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-21T22:49:11.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/_MXZnNEoQ4iyfuaqWX5GsPn9rTo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/b/5/U9YAkZTiaMe8lHUhtXwg/moogiecanazio.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/_MXZnNEoQ4iyfuaqWX5GsPn9rTo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/b/5/U9YAkZTiaMe8lHUhtXwg/moogiecanazio.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 21 de abr de 2026 a base desta noticia sobre Morre aos 70 anos Moogie Canazio, conceituado engenheiro de som e produtor da indústria fonográfica. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Morre aos 70 anos Moogie Canazio, conceituado engenheiro de som e produtor da indústria fonográfica e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/rj/rio-de-janeiro/todo-mundo-no-rio/noticia/2026/04/21/anitta-convite-de-shakira-para-show-em-copacabana-colombiana-elogia-brasileira-rainha.ghtml",
@@ -1725,7 +2260,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-21T19:31:17.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/fXCiPuqBprLVUbmQOucC9G8nMyg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/m/upM0AtSHWMDqQI8SAYjA/blank-2-grids-collage-8-.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/fXCiPuqBprLVUbmQOucC9G8nMyg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/m/upM0AtSHWMDqQI8SAYjA/blank-2-grids-collage-8-.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 21 de abr de 2026 a base desta noticia sobre Anitta revela convite de Shakira para show em Copacabana, e colombiana elogia: 'Rainha!'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Anitta revela convite de Shakira para show em Copacabana, e colombiana elogia: 'Rainha!' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre festas & social, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/21/musical-retrata-zeze-motta-com-toda-a-plenitude-da-atriz-e-cantora-que-driblou-o-racismo-com-talento-e-a-forca-da-arte.ghtml",
@@ -1741,7 +2281,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-21T17:50:54.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/KQvDLd333xACJvNN2Ux_x_xMLYU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/f/SZ1m49Qa6cVvkw2Fdc0A/prazerzeze.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/KQvDLd333xACJvNN2Ux_x_xMLYU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/f/SZ1m49Qa6cVvkw2Fdc0A/prazerzeze.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 21 de abr de 2026 a base desta noticia sobre Musical retrata Zezé Motta com toda a plenitude da atriz e cantora que driblou o racismo com talento e a força da arte. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Musical retrata Zezé Motta com toda a plenitude da atriz e cantora que driblou o racismo com talento e a força da arte e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/21/morre-ator-de-chaves-ricardo-de-pascual-aos-85-anos.ghtml",
@@ -1757,7 +2302,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-21T17:11:59.000Z",
     "imageUrl": "https://s2-g1.glbimg.com/t5CQqOYAyIRWaDZniOG0h3uWEMU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/6/70Utt6Qz2Ak2wT88XLHw/ricardo-de-pascual-furtado.jpg",
     "feedImageUrl": "https://s2-g1.glbimg.com/t5CQqOYAyIRWaDZniOG0h3uWEMU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/6/70Utt6Qz2Ak2wT88XLHw/ricardo-de-pascual-furtado.jpg",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "G1 Pop & Arte publicou em 21 de abr de 2026 a base desta noticia sobre Ricardo de Pascual, que interpretou Sr. Furtado em 'Chaves', morre aos 85 anos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Ricardo de Pascual, que interpretou Sr. Furtado em 'Chaves', morre aos 85 anos e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre saúde, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/politica/desembargador-suspende-uso-de-bens-do-df-para-socorrer-brb/",
@@ -1773,7 +2323,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:09:15.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL8011J-BASEIMAGE.jpg?w=800&h=534&crop=1",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL8011J-BASEIMAGE.jpg?w=800&h=534&crop=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Desembargador suspende uso de bens do DF para socorrer BRB. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Desembargador suspende uso de bens do DF para socorrer BRB e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/agro/presidente-do-bb-preve-95-da-carteira-em-agro-em-dia-em-2026/",
@@ -1789,7 +2344,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:08:41.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Presidente-do-BB.png?w=792&h=475&crop=1",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Presidente-do-BB.png?w=792&h=475&crop=1",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Presidente do BB prevê 95% da carteira em agro em dia em 2026. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Presidente do BB prevê 95% da carteira em agro em dia em 2026 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/agro/mbrf-investe-us-70-milhoes-na-ampliacao-de-complexo-frigorifico-no-uruguai/",
@@ -1805,7 +2365,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:06:52.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/GranjaMBRF_ToledoPR_Alta-1.png?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/GranjaMBRF_ToledoPR_Alta-1.png?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre MBRF investe US$ 70 milhões na ampliação de complexo frigorífico no Uruguai. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "MBRF investe US$ 70 milhões na ampliação de complexo frigorífico no Uruguai e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/agro/exportacoes-de-insumos-agricolas-registram-recorde-no-primeiro-trimestre/",
@@ -1821,7 +2386,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T20:05:56.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/FERTILIZANTES.jpg?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/FERTILIZANTES.jpg?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Exportações de insumos agrícolas registram recorde no primeiro trimestre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Exportações de insumos agrícolas registram recorde no primeiro trimestre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/entretenimento/thiaguinho-luisa-sonza-marina-sena-veja-atracoes-da-virada-cultural-2026/",
@@ -1837,7 +2407,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:59:08.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/02/llanydd-lloyd-carnaval-espanha-e1770729930927.jpg?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/02/llanydd-lloyd-carnaval-espanha-e1770729930927.jpg?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Thiaguinho, Luísa Sonza, Marina Sena: veja atrações da Virada Cultural 2026. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Thiaguinho, Luísa Sonza, Marina Sena: veja atrações da Virada Cultural 2026 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cultura, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/politica/pec-6x1-hugo-fala-em-relator-com-boa-interlocucao-e-cita-paulinho-da-forca/",
@@ -1853,7 +2428,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:58:26.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/plenario-camara-deputados-2025.jpg?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/plenario-camara-deputados-2025.jpg?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre PEC 6&#215;1: Hugo fala em relator com boa interlocução e cita Paulinho da Força. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "PEC 6&#215;1: Hugo fala em relator com boa interlocução e cita Paulinho da Força e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/politica/analise-prisao-de-ex-presidente-do-brb-abre-corrida-por-delacoes/",
@@ -1869,7 +2449,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:57:01.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/Foto-Lucio-Bernardo-Jr-Agencia-Brasilia-e1769724893827.avif?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/Foto-Lucio-Bernardo-Jr-Agencia-Brasilia-e1769724893827.avif?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Análise: Prisão de ex-presidente do BRB abre corrida por delações. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Análise: Prisão de ex-presidente do BRB abre corrida por delações e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre política, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/mc-ryan-poze-do-rodo-e-choquei-pf-pede-prisao-preventiva-de-investigados/",
@@ -1885,7 +2470,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:56:30.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/12/mc-ryan-sp.png?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/12/mc-ryan-sp.png?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre MC Ryan, Poze do Rodo e Choquei: PF pede prisão preventiva de investigados. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "MC Ryan, Poze do Rodo e Choquei: PF pede prisão preventiva de investigados e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre polícia, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/tenis/bicampeao-olimpico-avalia-joao-fonseca-e-manda-recado-ao-tenista/",
@@ -1901,7 +2491,12 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:55:03.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/Bola-de-tenis-e1765884089327.png?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/Bola-de-tenis-e1765884089327.png?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Bicampeão olímpico avalia João Fonseca e manda recado ao tenista. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Bicampeão olímpico avalia João Fonseca e manda recado ao tenista e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   },
   {
     "id": "https://www.cnnbrasil.com.br/agro/trigo-fecha-em-alta-em-chicago-com-suporte-do-clima-nos-eua-e-demanda/",
@@ -1917,6 +2512,11 @@ window.NEWS_DATA = [
     "publishedAt": "2026-04-23T19:54:45.000Z",
     "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2026binary_LYNXMPEM050RI-BASEIMAGE.jpg?w=200",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2026binary_LYNXMPEM050RI-BASEIMAGE.jpg?w=200",
-    "sourceImageUrl": ""
+    "sourceImageUrl": "",
+    "body": [
+      "CNN Brasil publicou em 23 de abr de 2026 a base desta noticia sobre Trigo fecha em alta em Chicago com suporte do clima nos EUA e demanda. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Trigo fecha em alta em Chicago com suporte do clima nos EUA e demanda e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial sobre cotidiano, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ]
   }
 ];

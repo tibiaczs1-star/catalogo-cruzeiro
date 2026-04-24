@@ -1,9 +1,14 @@
 (function () {
   const state = {
     payload: null,
-    query: ""
+    query: "",
+    password: sessionStorage.getItem("realAgentsReportPassword") || ""
   };
 
+  const accessGateEl = document.querySelector("#agentsAccessGate");
+  const accessFormEl = document.querySelector("#agentsAccessForm");
+  const accessStatusEl = document.querySelector("#agentsAccessStatus");
+  const shellEl = document.querySelector("#agentsShell");
   const statsEl = document.querySelector("#agentsStats");
   const ordersListEl = document.querySelector("#ordersList");
   const officeListEl = document.querySelector("#officeList");
@@ -11,6 +16,7 @@
   const queueListEl = document.querySelector("#queueList");
   const awardsPodiumEl = document.querySelector("#awardsPodium");
   const awardsCatalogEl = document.querySelector("#awardsCatalog");
+  const autonomyRunnerEl = document.querySelector("#autonomyRunner");
   const awardsChaseEl = document.querySelector("#awardsChase");
   const scoreboardPeriodsEl = document.querySelector("#scoreboardPeriods");
   const liveEventsEl = document.querySelector("#liveEvents");
@@ -58,6 +64,33 @@
     if (!statusEl) return;
     statusEl.textContent = message;
     statusEl.style.color = tone === "bad" ? "var(--agent-red)" : tone === "ok" ? "var(--agent-green)" : "";
+  }
+
+  function setAccessStatus(message, tone) {
+    if (!accessStatusEl) return;
+    accessStatusEl.textContent = message;
+    accessStatusEl.style.color = tone === "bad" ? "var(--agent-red)" : tone === "ok" ? "var(--agent-green)" : "";
+  }
+
+  function openReportShell() {
+    if (accessGateEl) accessGateEl.hidden = true;
+    if (shellEl) shellEl.hidden = false;
+  }
+
+  async function verifyAccess(password) {
+    const response = await fetch("/api/real-agents/access", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ password })
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Senha invalida.");
+    }
+    state.password = password;
+    sessionStorage.setItem("realAgentsReportPassword", password);
+    openReportShell();
+    await loadAgents();
   }
 
   function renderStats(payload) {
@@ -220,6 +253,32 @@
           )
           .join("")
       : '<p class="agents-empty">Sem ações reais geradas ainda.</p>';
+  }
+
+  function renderAutonomyRunner(payload) {
+    if (!autonomyRunnerEl) return;
+    const runner = payload.autonomyRunner || {};
+    const report = runner.report || {};
+    const actions = Array.isArray(report.actions) ? report.actions : [];
+
+    autonomyRunnerEl.innerHTML = `
+      <div class="agents-award-card">
+        <strong>${runner.running ? "Rodando agora" : report.ok ? "Ciclo validado" : "Aguardando ciclo"}</strong>
+        <span>Último ciclo: ${escapeHtml(formatDate(runner.lastRunAt || report.finishedAt))}</span>
+        <small>${escapeHtml(runner.lastError || `Ciclos nesta sessão: ${runner.cycles || 0}`)}</small>
+      </div>
+      ${actions
+        .map(
+          (action) => `
+            <div class="agents-award-card">
+              <strong>${escapeHtml(action.id || "acao")}</strong>
+              <span>${escapeHtml(action.agentGroup || "agentes")} • ${escapeHtml(action.status || "")}</span>
+              <small>${escapeHtml(action.detail || action.output || `${action.totalAgents || 0} agentes`)}</small>
+            </div>
+          `
+        )
+        .join("")}
+    `;
   }
 
   function renderAgentPhoto(photo, name) {
@@ -490,6 +549,7 @@
   function render(payload) {
     state.payload = payload;
     renderStats(payload);
+    renderAutonomyRunner(payload);
     renderAwards(payload);
     renderScoreboard(payload);
     renderLiveEvents(payload);
@@ -512,7 +572,9 @@
 
   async function loadAgents(silent) {
     if (!silent) setStatus("Abrindo agentes...");
-    const response = await fetch("/api/real-agents", { headers: { Accept: "application/json" } });
+    const response = await fetch(`/api/real-agents?password=${encodeURIComponent(state.password)}`, {
+      headers: { Accept: "application/json" }
+    });
     const payload = await response.json();
     if (!response.ok || !payload.ok) {
       throw new Error(payload.error || "Nao foi possivel carregar os agentes.");
@@ -554,6 +616,20 @@
 
   runnerEl?.addEventListener("submit", (event) => {
     runAgents(event).catch((error) => setStatus(error.message, "bad"));
+  });
+
+  accessFormEl?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = new FormData(accessFormEl);
+    const password = String(form.get("password") || "").trim();
+    if (!password) {
+      setAccessStatus("Digite a senha Full Admin.", "bad");
+      return;
+    }
+    setAccessStatus("Verificando acesso...");
+    verifyAccess(password)
+      .then(() => setAccessStatus("Acesso liberado.", "ok"))
+      .catch((error) => setAccessStatus(error.message, "bad"));
   });
 
   directOrderEl?.addEventListener("submit", (event) => {
@@ -637,8 +713,15 @@
     })().catch((error) => setStatus(error.message, "bad"));
   });
 
-  loadAgents().catch((error) => setStatus(error.message, "bad"));
+  if (state.password) {
+    verifyAccess(state.password).catch(() => {
+      sessionStorage.removeItem("realAgentsReportPassword");
+      state.password = "";
+      if (accessGateEl) accessGateEl.hidden = false;
+      if (shellEl) shellEl.hidden = true;
+    });
+  }
   window.setInterval(() => {
-    loadAgents(true).catch((error) => setStatus(error.message, "bad"));
+    if (state.password) loadAgents(true).catch((error) => setStatus(error.message, "bad"));
   }, 60 * 1000);
 })();

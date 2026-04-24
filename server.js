@@ -2,6 +2,7 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
+const { execFile } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
   parseHomeLinkedArticleFallbacks,
@@ -79,6 +80,8 @@ const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "
 const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
 const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
 const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
+const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
+const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-autonomy-cycle.js");
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
 const CHEFFE_CALL_PROMPTS_FILE = path.join(ROOT_DIR, "docs", "cheffe-call-181-prompts.json");
@@ -101,6 +104,12 @@ const realAgentsAutoRunState = {
   running: false,
   timer: null,
   startedAt: "",
+  lastRunAt: "",
+  lastError: "",
+  cycles: 0
+};
+const realAgentsAutonomyState = {
+  running: false,
   lastRunAt: "",
   lastError: "",
   cycles: 0
@@ -159,6 +168,10 @@ const COMMUNITY_REPORTS_FILE = path.join(DATA_DIR, "community-reports.json");
 const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
+const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
+const PIX_RECEIVER_KEY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_KEY || "99566741204", 120);
+const PIX_RECEIVER_NAME = cleanShortText(process.env.OFFICE_SUPPORT_PIX_RECEIVER_NAME || "ANTONIO CLOVIS", 25);
+const PIX_RECEIVER_CITY = cleanShortText(process.env.OFFICE_SUPPORT_PIX_CITY || "CRUZEIRO SUL", 15);
 const OFFICE_NEURAL_GROWTH_FILE = path.join(DATA_DIR, "office-neural-growth.json");
 const WHATSAPP_CHAT_LOG_FILE = path.join(DATA_DIR, "whatsapp-chat-log.json");
 const PUBPAID_SPRITE_SCOUT_FILE = path.join(DATA_DIR, "pubpaid-sprite-scout.json");
@@ -811,7 +824,8 @@ const TOPIC_FEED_CONFIG = {
       feedUrl: "https://g1.globo.com/rss/g1/pop-arte/",
       siteUrl: "https://g1.globo.com/pop-arte/",
       defaultCategory: "Cultura",
-      topicGroup: "cinema"
+      topicGroup: "cinema",
+      coverageLayer: "brasil"
     },
     {
       id: "terra-diversao",
@@ -819,23 +833,26 @@ const TOPIC_FEED_CONFIG = {
       feedUrl: "https://www.terra.com.br/rss/Controller?channelid=7f6c931cc6b6d310VgnVCM4000009bcceb0aRCRD",
       siteUrl: "https://www.terra.com.br/diversao/",
       defaultCategory: "Cultura",
-      topicGroup: "celebridades"
+      topicGroup: "celebridades",
+      coverageLayer: "brasil"
     },
     {
-      id: "the-verge",
-      name: "The Verge",
-      feedUrl: "https://www.theverge.com/rss/index.xml",
-      siteUrl: "https://www.theverge.com/",
-      defaultCategory: "Novidades",
-      topicGroup: "novidades"
+      id: "cnn-brasil-entretenimento",
+      name: "CNN Brasil Entretenimento",
+      feedUrl: "https://www.cnnbrasil.com.br/entretenimento/feed/",
+      siteUrl: "https://www.cnnbrasil.com.br/entretenimento/",
+      defaultCategory: "Entretenimento",
+      topicGroup: "celebridades",
+      coverageLayer: "brasil"
     },
     {
-      id: "youtube-blog",
-      name: "YouTube Blog",
-      feedUrl: "https://blog.youtube/rss",
-      siteUrl: "https://blog.youtube/",
-      defaultCategory: "Novidades",
-      topicGroup: "creators"
+      id: "agencia-brasil-cultura",
+      name: "Agencia Brasil Cultura",
+      feedUrl: "https://agenciabrasil.ebc.com.br/rss/cultura/feed.xml",
+      siteUrl: "https://agenciabrasil.ebc.com.br/cultura",
+      defaultCategory: "Cultura",
+      topicGroup: "cultura",
+      coverageLayer: "brasil"
     }
   ],
   politics: [
@@ -3874,7 +3891,7 @@ function extractBestSourceImage(html, baseUrl) {
   const focusedMarkupBlocks = [
     rawHtml.match(/<article\b[\s\S]*?<\/article>/i)?.[0] || "",
     rawHtml.match(/<main\b[\s\S]*?<\/main>/i)?.[0] || "",
-    rawHtml
+    rawHtml.match(/<div[^>]+(?:class|id)=["'][^"']*(?:post|entry|article|content|materia|noticia)[^"']*["'][^>]*>[\s\S]*?<\/div>/i)?.[0] || ""
   ].filter(Boolean);
 
   focusedMarkupBlocks.forEach((block) => {
@@ -4091,7 +4108,7 @@ async function refreshRssRuntime(limitPerSource = 30) {
     deduped.push(item);
   });
 
-  const enrichedItems = await enrichNewsItemsWithSourceImages(deduped);
+  const enrichedItems = (await enrichNewsItemsWithSourceImages(deduped)).map(normalizeArticleRecord);
 
   const payload = {
     lastAttemptAt: new Date().toISOString(),
@@ -4233,6 +4250,70 @@ function buildTopicFeedFallback(topic, limit = 12) {
     .slice(0, Math.max(1, Math.min(40, limit)));
 }
 
+const BUZZ_BRAZILIAN_DOMAINS = [
+  "g1.globo.com",
+  "globo.com",
+  "terra.com.br",
+  "cnnbrasil.com.br",
+  "agenciabrasil.ebc.com.br",
+  "ac24horas.com",
+  "contilnetnoticias.com.br",
+  "jurua24horas.com",
+  "juruaemtempo.com.br",
+  "juruacomunicacao.com.br",
+  "acre.com.br",
+  "acrenews.com.br"
+];
+
+const BUZZ_BLOCKED_GLOBAL_DOMAINS = [
+  "theverge.com",
+  "blog.youtube",
+  "youtube.com",
+  "xbox.com",
+  "playstation.com",
+  "techcrunch.com",
+  "animenewsnetwork.com",
+  "awn.com",
+  "animationmagazine.net",
+  "cartoonbrew.com",
+  "tubefilter.com"
+];
+
+function getTopicFeedHostname(value = "") {
+  try {
+    return new URL(String(value || "")).hostname.replace(/^www\./i, "").toLowerCase();
+  } catch (error) {
+    return "";
+  }
+}
+
+function isBrazilianBuzzItem(item = {}) {
+  const hostname = getTopicFeedHostname(item.sourceUrl || item.url || item.link || "");
+  const coverageLayer = normalizeText(item.coverageLayer || "");
+  const sourceName = normalizeText(item.sourceName || item.source || "");
+  const text = normalizeText([item.title, item.summary, item.lede, item.category, sourceName].join(" "));
+
+  if (["acre", "jurua", "brasil"].includes(coverageLayer)) {
+    return true;
+  }
+
+  if (hostname && BUZZ_BLOCKED_GLOBAL_DOMAINS.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))) {
+    return false;
+  }
+
+  if (hostname && BUZZ_BRAZILIAN_DOMAINS.some((domain) => hostname === domain || hostname.endsWith(`.${domain}`))) {
+    return true;
+  }
+
+  if (hostname.endsWith(".br")) {
+    return true;
+  }
+
+  return /\b(brasil|brasileir|acre|rio branco|cruzeiro do sul|sao paulo|são paulo|rio de janeiro|bahia|minas|parana|paraná|nordeste|amazonia|amazônia|globo|g1|terra|cnn brasil|agencia brasil|agência brasil)\b/.test(
+    text
+  );
+}
+
 async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } = {}) {
   const normalizedTopic = normalizeText(topic);
   const sources = getTopicFeedSources(normalizedTopic);
@@ -4281,8 +4362,10 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
   );
 
   const mergedItems = mergeTopicFeedItems(
-    normalizedItems,
-    buildTopicFeedFallback(normalizedTopic, totalLimit),
+    normalizedTopic === "buzz" ? normalizedItems.filter(isBrazilianBuzzItem) : normalizedItems,
+    normalizedTopic === "buzz"
+      ? buildTopicFeedFallback(normalizedTopic, totalLimit).filter(isBrazilianBuzzItem)
+      : buildTopicFeedFallback(normalizedTopic, totalLimit),
     totalLimit
   );
   const enrichedItems = await enrichNewsItemsWithSourceImages(mergedItems);
@@ -4317,16 +4400,17 @@ async function getTopicFeed(topic, limit = 12) {
   const cachedItems = Array.isArray(cached?.items)
     ? cached.items.map((item) => normalizeTopicFeedItem(item, normalizedTopic, item))
     : [];
+  const scopedCachedItems = normalizedTopic === "buzz" ? cachedItems.filter(isBrazilianBuzzItem) : cachedItems;
   const cachedUpdatedAt = cached?.updatedAt ? Date.parse(cached.updatedAt) : 0;
   const cacheIsFresh =
-    cachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < TOPIC_FEED_TTL_MS;
+    scopedCachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < TOPIC_FEED_TTL_MS;
 
   if (cacheIsFresh) {
     return {
       ok: true,
       topic: normalizedTopic,
       updatedAt: cached.updatedAt,
-      items: cachedItems.slice(0, safeLimit),
+      items: scopedCachedItems.slice(0, safeLimit),
       reports: Array.isArray(cached?.reports) ? cached.reports : [],
       fallbackUsed: Boolean(cached?.fallbackUsed)
     };
@@ -4666,6 +4750,10 @@ function normalizeNewsItem(item) {
   const sourceUrl = item.url || item.sourceUrl || item.link || "#";
   const sourceName = item.source || item.sourceName || item.sourceLabel || "Fonte local";
   const slug = String(item.slug || slugify(title) || item.id || "").trim();
+  const imageUrl = resolveSafeArticleRecordImage(
+    item,
+    item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || ""
+  );
   const category = normalizeNewsCategoryLabel(item.category, {
     defaultCategory: item.defaultCategory,
     title,
@@ -4684,6 +4772,13 @@ function normalizeNewsItem(item) {
     sourceName,
     sourceLabel: item.sourceLabel || title,
     category,
+    imageUrl,
+    feedImageUrl: imageUrl || item.feedImageUrl || "",
+    sourceImageUrl: imageUrl || item.sourceImageUrl || "",
+    originalImageUrl: item.originalImageUrl || item.imageUrl || "",
+    originalFeedImageUrl: item.originalFeedImageUrl || item.feedImageUrl || "",
+    originalSourceImageUrl: item.originalSourceImageUrl || item.sourceImageUrl || "",
+    imageFocus: item.imageFocus || "",
     location: item.location || "Cruzeiro do Sul",
     date: item.date || item.publishedAt || item.createdAt || new Date().toISOString(),
   };
@@ -4706,6 +4801,52 @@ function resolveSafeArticleRecordImage(item, fallback = "") {
   }
 
   return fallback;
+}
+
+function normalizeEditorialFingerprint(value = "") {
+  return stripHtml(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/the post .*? appeared first on .*?(?:\.|$)/gi, " ")
+    .replace(/https?:\/\/\S+/gi, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isRepeatedEditorialText(paragraph = "", reference = "") {
+  const paragraphKey = normalizeEditorialFingerprint(paragraph);
+  const referenceKey = normalizeEditorialFingerprint(reference);
+
+  if (!paragraphKey || !referenceKey) return false;
+  if (paragraphKey === referenceKey) return true;
+
+  const shortest = Math.min(paragraphKey.length, referenceKey.length);
+  return shortest >= 80 && (paragraphKey.includes(referenceKey) || referenceKey.includes(paragraphKey));
+}
+
+function buildFallbackEditorialBody(item = {}) {
+  const title = cleanShortText(stripHtml(item.title || "este assunto"), 180);
+  const sourceName = cleanShortText(stripHtml(item.sourceName || item.source || item.sourceLabel || "a fonte consultada"), 90);
+  const category = cleanShortText(stripHtml(item.category || "noticia local"), 80).toLowerCase();
+  const publishedAt = item.publishedAt || item.date || item.createdAt || new Date().toISOString();
+  const dateLabel = item.date || formatDisplayDate(publishedAt);
+  const sourceLabel = cleanShortText(stripHtml(item.sourceLabel || title), 180);
+
+  return [
+    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.`,
+    `${sourceLabel} e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.`,
+    "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+  ];
+}
+
+function normalizeEditorialBody(item = {}) {
+  const lede = item.lede || item.summary || item.description || "";
+  const body = Array.isArray(item.body) ? item.body.map((line) => cleanFeedText(line)).filter(Boolean) : [];
+  const uniqueBody = body.filter((paragraph) => !isRepeatedEditorialText(paragraph, lede));
+
+  return uniqueBody.length ? uniqueBody : buildFallbackEditorialBody(item);
 }
 
 function normalizeArticleRecord(item) {
@@ -4738,7 +4879,7 @@ function normalizeArticleRecord(item) {
     lede: item.lede || item.summary || item.description || "Sem resumo.",
     summary: item.summary || item.lede || item.description || "Sem resumo.",
     analysis: item.analysis || "",
-    body: Array.isArray(item.body) ? item.body.filter(Boolean) : [],
+    body: normalizeEditorialBody({ ...item, title, sourceName, sourceLabel: item.sourceLabel || title }),
     highlights: Array.isArray(item.highlights) ? item.highlights.filter(Boolean) : [],
     development: Array.isArray(item.development) ? item.development.filter(Boolean) : [],
     imageUrl: resolveSafeArticleRecordImage(
@@ -5517,6 +5658,274 @@ function requireFullAdminOrderAccess(req, body = {}) {
   return hasFullAdminPassword(authValue) || requireAdmin(req);
 }
 
+function readOfficeWorkStore() {
+  const store = readJson(OFFICE_WORK_FILE, { version: 1, updatedAt: "", offices: {}, actions: [], supportRequests: [] });
+  return {
+    version: 1,
+    updatedAt: store.updatedAt || "",
+    offices: store.offices && typeof store.offices === "object" ? store.offices : {},
+    actions: Array.isArray(store.actions) ? store.actions : [],
+    supportRequests: Array.isArray(store.supportRequests) ? store.supportRequests : [],
+    terminalPasses: Array.isArray(store.terminalPasses) ? store.terminalPasses : [],
+    customEnvironments: Array.isArray(store.customEnvironments) ? store.customEnvironments : []
+  };
+}
+
+function writeOfficeWorkStore(store) {
+  writeJson(OFFICE_WORK_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    offices: store.offices || {},
+    actions: Array.isArray(store.actions) ? store.actions.slice(0, 500) : [],
+    supportRequests: Array.isArray(store.supportRequests) ? store.supportRequests.slice(0, 500) : [],
+    terminalPasses: Array.isArray(store.terminalPasses) ? store.terminalPasses.slice(0, 500) : [],
+    customEnvironments: Array.isArray(store.customEnvironments) ? store.customEnvironments.slice(0, 200) : []
+  });
+}
+
+function normalizeOfficeKey(value = "") {
+  return slugify(cleanShortText(value || "editorial-hq", 80)) || "editorial-hq";
+}
+
+function getOfficeWorkPayload(officeKey = "") {
+  const key = normalizeOfficeKey(officeKey);
+  const store = readOfficeWorkStore();
+  const office = store.offices[key] || { inventory: [] };
+  return {
+    ok: true,
+    officeKey: key,
+    inventory: Array.isArray(office.inventory) ? office.inventory : [],
+    supportRequests: store.supportRequests.filter((item) => item.officeKey === key).slice(0, 80),
+    terminalPasses: store.terminalPasses.filter((item) => item.officeKey === key).slice(0, 80),
+    customEnvironments: store.customEnvironments.filter((item) => item.officeKey === key).slice(0, 40),
+    actions: store.actions.filter((action) => action.officeKey === key).slice(0, 80),
+    allActions: store.actions.slice(0, 120)
+  };
+}
+
+function addOfficeWorkAction(body = {}) {
+  const officeKey = normalizeOfficeKey(body.officeKey || body.office || "editorial-hq");
+  const store = readOfficeWorkStore();
+  const action = {
+    id: createRecordId("work"),
+    officeKey,
+    officeLabel: cleanShortText(body.officeLabel || officeKey, 120),
+    agentId: cleanShortText(body.agentId || "", 120),
+    agentName: cleanShortText(body.agentName || "", 120),
+    kind: cleanShortText(body.kind || "terminal-command", 80),
+    status: cleanShortText(body.status || "queued", 60),
+    title: cleanShortText(body.title || body.command || "Acao do escritorio", 180),
+    detail: cleanShortText(body.detail || body.command || "", 1200),
+    source: cleanShortText(body.source || "office-ui", 80),
+    createdAt: new Date().toISOString()
+  };
+  store.actions.unshift(action);
+  writeOfficeWorkStore(store);
+  return action;
+}
+
+function addOfficeInventoryItem(body = {}) {
+  const officeKey = normalizeOfficeKey(body.officeKey || body.office || "editorial-hq");
+  const itemId = cleanShortText(body.itemId || body.id || "", 120);
+  if (!itemId) return { ok: false, status: 400, error: "itemId obrigatorio." };
+
+  const store = readOfficeWorkStore();
+  const office = store.offices[officeKey] || { inventory: [] };
+  const inventory = Array.isArray(office.inventory) ? office.inventory : [];
+  if (!inventory.some((item) => item.id === itemId)) {
+    inventory.unshift({
+      id: itemId,
+      name: cleanShortText(body.name || itemId, 180),
+      description: cleanShortText(body.description || "", 500),
+      price: Number(body.price || 0),
+      addedAt: new Date().toISOString()
+    });
+  }
+  store.offices[officeKey] = { ...office, inventory };
+  const action = {
+    id: createRecordId("work"),
+    officeKey,
+    officeLabel: cleanShortText(body.officeLabel || officeKey, 120),
+    agentId: "",
+    agentName: "Inventario do escritorio",
+    kind: "inventory-support",
+    status: "done",
+    title: `Inventario atualizado: ${body.name || itemId}`,
+    detail: body.description || "Item registrado no inventario persistente do escritorio.",
+    source: "office-inventory",
+    createdAt: new Date().toISOString()
+  };
+  store.actions.unshift(action);
+  writeOfficeWorkStore(store);
+  return { ok: true, officeKey, inventory, action };
+}
+
+function pixField(id, value) {
+  const text = String(value || "");
+  return `${id}${String(text.length).padStart(2, "0")}${text}`;
+}
+
+function crc16Pix(payload) {
+  let crc = 0xffff;
+  for (let index = 0; index < payload.length; index += 1) {
+    crc ^= payload.charCodeAt(index) << 8;
+    for (let bit = 0; bit < 8; bit += 1) {
+      crc = crc & 0x8000 ? (crc << 1) ^ 0x1021 : crc << 1;
+      crc &= 0xffff;
+    }
+  }
+  return crc.toString(16).toUpperCase().padStart(4, "0");
+}
+
+function buildOfficeSupportPixPayload({ amount = 0, txid = "APOIO", description = "" } = {}) {
+  const merchantAccount = pixField("00", "br.gov.bcb.pix") +
+    pixField("01", PIX_RECEIVER_KEY) +
+    (description ? pixField("02", cleanShortText(description, 70)) : "");
+  const amountText = Number(amount || 0).toFixed(2);
+  const payloadWithoutCrc = [
+    pixField("00", "01"),
+    pixField("26", merchantAccount),
+    pixField("52", "0000"),
+    pixField("53", "986"),
+    Number(amount || 0) > 0 ? pixField("54", amountText) : "",
+    pixField("58", "BR"),
+    pixField("59", PIX_RECEIVER_NAME),
+    pixField("60", PIX_RECEIVER_CITY),
+    pixField("62", pixField("05", cleanShortText(txid, 25) || "APOIO"))
+  ].join("");
+  const crcInput = `${payloadWithoutCrc}6304`;
+  return `${crcInput}${crc16Pix(crcInput)}`;
+}
+
+async function buildOfficeSupportPixResponse(body = {}) {
+  const officeKey = normalizeOfficeKey(body.officeKey || body.office || "editorial-hq");
+  const itemId = cleanShortText(body.itemId || body.id || "", 120);
+  const itemName = cleanShortText(body.name || itemId || "Apoio ao escritorio", 80);
+  const amount = Number(body.price || body.amount || 0);
+  const txid = cleanShortText(`APOIO${Date.now().toString(36).slice(-8)}`, 25);
+  const pixCode = buildOfficeSupportPixPayload({
+    amount,
+    txid,
+    description: `${officeKey} ${itemName}`
+  });
+  const qrDataUrl = QRCode ? await QRCode.toDataURL(pixCode, { margin: 1, width: 280 }) : "";
+
+  return {
+    ok: true,
+    officeKey,
+    itemId,
+    itemName,
+    amount,
+    txid,
+    pixKey: PIX_RECEIVER_KEY,
+    receiverName: PIX_RECEIVER_NAME,
+    pixCode,
+    qrDataUrl
+  };
+}
+
+function createOfficeSupportRequest(body = {}, pixPayload = {}) {
+  const store = readOfficeWorkStore();
+  const request = {
+    id: createRecordId("support"),
+    officeKey: pixPayload.officeKey,
+    itemId: pixPayload.itemId,
+    itemName: pixPayload.itemName,
+    kind: cleanShortText(body.kind || "inventory-item", 80),
+    description: cleanShortText(body.description || "", 500),
+    amount: pixPayload.amount,
+    txid: pixPayload.txid,
+    pixKey: PIX_RECEIVER_KEY,
+    receiverName: PIX_RECEIVER_NAME,
+    status: "pending-payment-check",
+    createdAt: new Date().toISOString()
+  };
+  store.supportRequests.unshift(request);
+  store.actions.unshift({
+    id: createRecordId("work"),
+    officeKey: request.officeKey,
+    officeLabel: cleanShortText(body.officeLabel || request.officeKey, 120),
+    agentName: "Vaquinha Pix",
+    kind: "support-payment",
+    status: "pending-payment-check",
+    title: `Apoio pendente: ${request.itemName}`,
+    detail: `Aguardando conferencia Pix de R$ ${request.amount.toFixed(2)} para ${PIX_RECEIVER_NAME}.`,
+    source: "office-support",
+    createdAt: request.createdAt
+  });
+  writeOfficeWorkStore(store);
+  return request;
+}
+
+function approveOfficeSupportRequest(body = {}) {
+  const requestId = cleanShortText(body.requestId || body.supportId || "", 120);
+  const store = readOfficeWorkStore();
+  const request = store.supportRequests.find((item) => item.id === requestId);
+  if (!request) return { ok: false, status: 404, error: "Apoio nao encontrado." };
+  request.status = "paid-confirmed";
+  request.confirmedAt = new Date().toISOString();
+  writeOfficeWorkStore(store);
+  if (request.kind === "terminal-pass") {
+    const nextStore = readOfficeWorkStore();
+    nextStore.terminalPasses.unshift({
+      id: createRecordId("terminal"),
+      officeKey: request.officeKey,
+      requestId: request.id,
+      amount: request.amount,
+      usesLeft: 1,
+      createdAt: new Date().toISOString()
+    });
+    writeOfficeWorkStore(nextStore);
+    return { ok: true, officeKey: request.officeKey, terminalPasses: nextStore.terminalPasses };
+  }
+  if (request.kind === "custom-environment") {
+    const nextStore = readOfficeWorkStore();
+    const environment = {
+      id: slugify(`${request.officeKey}-${request.itemName}-${Date.now()}`),
+      officeKey: request.officeKey,
+      label: request.itemName,
+      shortLabel: "novo ambiente",
+      description: request.description || "Ambiente comprado e liberado pelo Full Admin.",
+      focusLabel: request.itemName,
+      spriteKit: "default",
+      createdAt: new Date().toISOString()
+    };
+    nextStore.customEnvironments.unshift(environment);
+    writeOfficeWorkStore(nextStore);
+    return { ok: true, officeKey: request.officeKey, environment };
+  }
+  return addOfficeInventoryItem({
+    officeKey: request.officeKey,
+    itemId: request.itemId,
+    name: request.itemName,
+    description: request.description || `Apoio confirmado via Pix ${request.txid}.`,
+    price: request.amount
+  });
+}
+
+function consumeOfficeTerminalPass(body = {}) {
+  const officeKey = normalizeOfficeKey(body.officeKey || body.office || "editorial-hq");
+  const store = readOfficeWorkStore();
+  const pass = store.terminalPasses.find((item) => item.officeKey === officeKey && Number(item.usesLeft || 0) > 0);
+  if (!pass) return { ok: false, status: 402, error: "Terminal pago: gere um Pix de R$ 20 e confirme o pagamento para liberar uma interação." };
+  pass.usesLeft = Math.max(0, Number(pass.usesLeft || 0) - 1);
+  pass.usedAt = new Date().toISOString();
+  store.actions.unshift({
+    id: createRecordId("work"),
+    officeKey,
+    officeLabel: cleanShortText(body.officeLabel || officeKey, 120),
+    agentName: cleanShortText(body.agentName || "Terminal", 120),
+    kind: "terminal-interaction",
+    status: "done",
+    title: "Interacao paga no terminal",
+    detail: cleanShortText(body.command || "", 1200),
+    source: "office-terminal",
+    createdAt: new Date().toISOString()
+  });
+  writeOfficeWorkStore(store);
+  return { ok: true, pass };
+}
+
 function toPublicAssetUrl(rootConfig, absoluteFilePath) {
   const relativePath = path.relative(rootConfig.dir, absoluteFilePath).split(path.sep).map(encodeURIComponent).join("/");
   return `${rootConfig.publicBase}/${relativePath}`;
@@ -6064,6 +6473,7 @@ function recordCommunityReport(body = {}, req = null) {
 function buildRealAgentsPayload() {
   const registry = readJson(REAL_AGENTS_REGISTRY_FILE, null);
   const latestRun = readJson(REAL_AGENTS_RUN_FILE, null);
+  const autonomyReport = readJson(REAL_AGENTS_AUTONOMY_REPORT_FILE, null);
   const latestRunMd = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
     ? fs.readFileSync(REAL_AGENTS_RUN_MD_FILE, "utf-8")
     : "";
@@ -6105,6 +6515,14 @@ function buildRealAgentsPayload() {
       lastError: realAgentsAutoRunState.lastError,
       cycles: realAgentsAutoRunState.cycles,
       history
+    },
+    autonomyRunner: {
+      enabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
+      running: realAgentsAutonomyState.running,
+      lastRunAt: realAgentsAutonomyState.lastRunAt || autonomyReport?.finishedAt || "",
+      lastError: realAgentsAutonomyState.lastError,
+      cycles: realAgentsAutonomyState.cycles,
+      report: autonomyReport
     },
     offices: Array.isArray(registry?.offices) ? registry.offices : [],
     roles: Array.isArray(registry?.roles) ? registry.roles : [],
@@ -6699,6 +7117,16 @@ function buildCheffeCallPayload() {
       averageAutonomy: Number(agentsPayload.summary?.averageAutonomy || 82)
     },
     queue: Array.isArray(agentsPayload.queue) ? agentsPayload.queue : [],
+    liveEvents: Array.isArray(agentsPayload.liveEvents) ? agentsPayload.liveEvents : [],
+    officeLogs: Array.isArray(agentsPayload.officeLogs) ? agentsPayload.officeLogs : [],
+    agentTimelines: Array.isArray(agentsPayload.agentTimelines) ? agentsPayload.agentTimelines : [],
+    officeDashboard: Array.isArray(agentsPayload.officeDashboard) ? agentsPayload.officeDashboard : [],
+    executableActions: Array.isArray(agentsPayload.executableActions) ? agentsPayload.executableActions : [],
+    orders: Array.isArray(agentsPayload.orders) ? agentsPayload.orders : [],
+    autoRun: agentsPayload.autoRun || null,
+    autonomyRunner: agentsPayload.autonomyRunner || null,
+    awards: agentsPayload.awards || null,
+    scoreboard: agentsPayload.scoreboard || null,
     opinions: state.sessions[0]?.opinions || getCheffeCallOpinions(agentsPayload, state.lastInstruction)
   };
 }
@@ -6850,9 +7278,37 @@ function runRealAgentsAutoCycle(trigger) {
 
   if (result.ok) {
     console.log(`[catalogo] agentes reais atualizados (${trigger})`);
+    runRealAgentsAutonomyCycle(`runtime-${trigger}`);
   } else {
     console.warn(`[catalogo] falha no ciclo dos agentes reais (${trigger}): ${realAgentsAutoRunState.lastError}`);
   }
+}
+
+function runRealAgentsAutonomyCycle(trigger = "auto") {
+  if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutonomyState.running) return;
+  realAgentsAutonomyState.running = true;
+
+  execFile(process.execPath, [REAL_AGENTS_AUTONOMY_SCRIPT, "--once"], {
+    cwd: ROOT_DIR,
+    env: {
+      ...process.env,
+      AGENTS_AUTONOMY_TRIGGER: trigger
+    },
+    timeout: 2 * 60 * 1000
+  }, (error) => {
+    realAgentsAutonomyState.running = false;
+    realAgentsAutonomyState.lastRunAt = new Date().toISOString();
+    realAgentsAutonomyState.cycles += 1;
+    realAgentsAutonomyState.lastError = error
+      ? String(error?.message || error || "falha no ciclo autonomo")
+      : "";
+
+    if (realAgentsAutonomyState.lastError) {
+      console.warn(`[catalogo] ciclo autonomo dos agentes falhou (${trigger}): ${realAgentsAutonomyState.lastError}`);
+    } else {
+      console.log(`[catalogo] ciclo autonomo dos agentes aplicado (${trigger})`);
+    }
+  });
 }
 
 function startRealAgentsAutoRunner() {
@@ -8717,6 +9173,37 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, { ok: true, ...result, ...buildOfficeOrderPayload() });
   }
 
+  if (req.method === "GET" && pathname === "/api/office-work") {
+    return sendJson(res, 200, getOfficeWorkPayload(searchParams.get("officeKey") || ""));
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-support/pix") {
+    const body = await parseBody(req);
+    return sendJson(res, 200, await buildOfficeSupportPixResponse(body));
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-support/request") {
+    const body = await parseBody(req);
+    const pixPayload = await buildOfficeSupportPixResponse(body);
+    const request = createOfficeSupportRequest(body, pixPayload);
+    return sendJson(res, 201, { ok: true, request, ...pixPayload });
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-support/confirm") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para confirmar pagamento." });
+    }
+    const result = approveOfficeSupportRequest(body);
+    return sendJson(res, result.ok ? 200 : result.status || 400, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/office-terminal/consume") {
+    const body = await parseBody(req);
+    const result = consumeOfficeTerminalPass(body);
+    return sendJson(res, result.ok ? 200 : result.status || 400, result);
+  }
+
   if (req.method === "POST" && pathname === "/api/real-agents/actions/review") {
     const body = await parseBody(req);
     if (!requireFullAdminOrderAccess(req, body)) {
@@ -8732,6 +9219,9 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/real-agents") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para abrir o relatorio geral." });
+    }
     const payload = buildRealAgentsPayload();
     if (!payload.ok) {
       return sendJson(res, 404, {
@@ -8741,6 +9231,15 @@ async function handleApi(req, res, pathname, searchParams) {
     }
 
     return sendJson(res, 200, payload);
+  }
+
+  if (req.method === "POST" && pathname === "/api/real-agents/access") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin invalida." });
+    }
+
+    return sendJson(res, 200, { ok: true });
   }
 
   if (req.method === "POST" && pathname === "/api/real-agents/run") {
@@ -8753,6 +9252,7 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!result.ok) {
       return sendJson(res, 500, result);
     }
+    runRealAgentsAutonomyCycle("manual-painel");
 
     appendOfficeOrder({
       id: createRecordId("ord"),

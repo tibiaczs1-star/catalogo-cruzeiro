@@ -2,6 +2,7 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
+import { bindDomGameInterface } from "./ui/domGameInterface.js";
 import { closePanel } from "./ui/panelActions.js";
 import { syncPubpaidAccount } from "./services/accountService.js";
 import { BootScene } from "./scenes/BootScene.js";
@@ -30,6 +31,7 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+bindDomGameInterface(game);
 const soundtrack = createPubPaidSoundtrack();
 const isIOS =
   /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
@@ -467,6 +469,11 @@ window.addEventListener("focus", () => {
 
 game.events.on("pubpaid:intro-ready", () => {
   openSplash("terms");
+});
+
+game.events.on("pubpaid:intro-enter", () => {
+  setAcceptedTerms(true);
+  startGame();
 });
 
 game.events.on("pubpaid:intro-start", () => {

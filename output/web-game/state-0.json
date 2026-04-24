@@ -1,9 +1,1 @@
-scene=intro
-activeScenes=intro-scene
-focus=frame final congelado
-objective=Aceitar termos e entrar com Google
-prompt=Frame 6 congelado. Interface de entrada pronta sobre a cena.
-testBalance=100
-realBalance=0
-panelOpen=false
-panelTitle=Ponto do jogo
+{"mode":"hud","fullscreen":false,"lowerDecksOpen":false,"speaker":"Editora Ari","instruction":"","command":"","sessionId":"chef-mo9x1bp79dnq7m","visibleAgents":[{"name":"Codex CEO","speaking":false,"handRaised":false,"implementing":false},{"name":"Editora Ari","speaking":true,"handRaised":false,"implementing":false},{"name":"Revisor Bento","speaking":false,"handRaised":false,"implementing":false},{"name":"Lia Copy","speaking":false,"handRaised":false,"implementing":false},{"name":"Nina Texto","speaking":false,"handRaised":false,"implementing":false},{"name":"Kai Gamer","speaking":false,"handRaised":false,"implementing":false},{"name":"Mila Kids","speaking":false,"handRaised":false,"implementing":false},{"name":"Nico Study","speaking":false,"handRaised":false,"implementing":false},{"name":"Vera Vendas","speaking":false,"handRaised":false,"implementing":false},{"name":"Dara Design","speaking":false,"handRaised":false,"implementing":false},{"name":"Pixo","speaking":false,"handRaised":false,"implementing":false},{"name":"Rex RoboForge","speaking":false,"handRaised":false,"implementing":false}],"queueSize":1,"logs":2,"dataCenter":{"workers":3,"racks":6,"traces":3},"coords":"screen-space, theater top, datacenter bottom"}

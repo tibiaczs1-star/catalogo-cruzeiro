@@ -24,6 +24,9 @@ jobs:
       - name: Run daily collector (once)
         run: node backend/workers/catalogo-autoupdate-worker.js --once
 
+      - name: Run autonomous agents cycle
+        run: npm run agents:cycle
+
       - name: Audit news image focus
         run: npm run audit:news-images -- --limit=80 --strict-new --notify-whatsapp=new
         env:
@@ -36,7 +39,7 @@ jobs:
         run: |
           git config user.name "catalogo-bot"
           git config user.email "catalogo-bot@users.noreply.github.com"
-          git add data/*.json backend/data/*.json 2>/dev/null || true
+          git add data/*.json backend/data/*.json news-data.js .codex-agents/registry.json .codex-agents/agents/*.md .codex-temp/real-agents/*.json .codex-temp/real-agents/*.md 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Sem alterações para commit."
             exit 0

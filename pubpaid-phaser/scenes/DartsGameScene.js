@@ -68,12 +68,27 @@ export class DartsGameScene extends Phaser.Scene {
 
   create() {
     this.game.events.emit("pubpaid:music-zone", "game");
+    this.game.events.on("pubpaid:darts-dom-throw", this.handleDomThrow, this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.game.events.off("pubpaid:darts-dom-throw", this.handleDomThrow, this);
+    });
     this.layer = this.add.container(0, 0);
     this.drawBackdrop();
     this.drawHud();
     this.drawBoard();
     this.bindAim();
     this.syncState("Trave angulo e forca para acertar o alvo da parede.");
+  }
+
+  handleDomThrow() {
+    if (this.phase !== "aim") return;
+    if (this.lockStage === "angle") {
+      this.lockStage = "power";
+      this.updateHud("Angulo travado. Toque em Arremessar de novo para soltar.");
+      this.syncState("Angulo travado. Agora escolha a força.");
+      return;
+    }
+    this.playerThrowFromMeters();
   }
 
   drawBackdrop() {
@@ -191,6 +206,10 @@ export class DartsGameScene extends Phaser.Scene {
     this.makeButton(850, 506, 160, 34, "SAIR SALAO", () => this.backToSalon(), false);
     this.updateHud(`Partida fechada: ${headline.toLowerCase()} por ${this.playerScore} x ${this.aiScore}.`);
     this.syncState(`Partida fechada: ${headline}.`);
+    this.game.events.emit("pubpaid:darts-result", {
+      result,
+      body: `${headline}: ${this.playerScore} x ${this.aiScore}.`
+    });
   }
 
   restartMatch() {

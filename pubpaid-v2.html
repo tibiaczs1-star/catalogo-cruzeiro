@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260422cinematic" />
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260423lobbyclean1" />
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260423checkersassets"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260424tightsprites1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -171,6 +171,74 @@
             <div class="ppg-panel-chips" data-game-panel-chips></div>
             <div class="ppg-panel-actions" data-game-panel-actions></div>
           </aside>
+          <section class="ppg-dom-game-ui" data-dom-game-ui aria-live="polite">
+            <div class="ppg-dom-topline">
+              <span data-dom-ui-scene>rua</span>
+              <strong data-dom-ui-objective>Entrar no PubPaid</strong>
+              <button type="button" data-dom-return-salon hidden>Salão</button>
+            </div>
+
+            <aside class="ppg-dom-lobby" data-dom-lobby hidden>
+              <header>
+                <span class="ppg-kicker">lobby</span>
+                <h2>Escolha a mesa</h2>
+              </header>
+              <div class="ppg-dom-game-cards">
+                <button type="button" class="ppg-dom-game-card is-darts" data-dom-start-game="darts">
+                  <span>Dardos</span>
+                  <strong>3 rodadas</strong>
+                </button>
+                <button type="button" class="ppg-dom-game-card is-checkers" data-dom-start-game="checkers">
+                  <span>Dama</span>
+                  <strong>turnos locais</strong>
+                </button>
+              </div>
+            </aside>
+
+            <aside class="ppg-dom-darts" data-dom-darts hidden>
+              <header>
+                <span class="ppg-kicker">dardos</span>
+                <h2 data-dom-darts-title>Mesa aberta</h2>
+              </header>
+              <div class="ppg-dom-score">
+                <strong data-dom-darts-score>0 x 0</strong>
+                <span data-dom-darts-round>rodada 1/3</span>
+              </div>
+              <p data-dom-darts-status>Mire no alvo e arremesse.</p>
+              <div class="ppg-dom-actions">
+                <button type="button" class="primary" data-dom-darts-throw>Arremessar</button>
+                <button type="button" data-dom-game-reset="darts">Revanche</button>
+                <button type="button" data-dom-open-lobby>Lobby</button>
+              </div>
+            </aside>
+
+            <aside class="ppg-dom-checkers" data-dom-checkers hidden>
+              <header>
+                <span class="ppg-kicker">dama</span>
+                <h2 data-dom-checkers-title>Sua vez</h2>
+              </header>
+              <div class="ppg-dom-checkers-board" data-dom-checkers-board aria-label="Tabuleiro de dama"></div>
+              <div class="ppg-dom-score">
+                <strong data-dom-checkers-score>12 x 12</strong>
+                <span data-dom-checkers-status>Escolha uma peça.</span>
+              </div>
+              <div class="ppg-dom-actions">
+                <button type="button" data-dom-game-reset="checkers">Reiniciar</button>
+                <button type="button" data-dom-open-lobby>Lobby</button>
+              </div>
+            </aside>
+
+            <aside class="ppg-dom-result" data-dom-result hidden>
+              <span class="ppg-kicker" data-dom-result-game>resultado</span>
+              <h2 data-dom-result-title>Partida encerrada</h2>
+              <p data-dom-result-body></p>
+              <div class="ppg-dom-actions">
+                <button type="button" class="primary" data-dom-result-again>Jogar de novo</button>
+                <button type="button" data-dom-open-lobby>Lobby</button>
+                <button type="button" data-dom-return-salon>Salão</button>
+              </div>
+            </aside>
+          </section>
         </div>
       </section>
 

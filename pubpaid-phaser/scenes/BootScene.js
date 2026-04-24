@@ -29,10 +29,11 @@ export class BootScene extends Phaser.Scene {
     this.load.image("ppg-waiter-hero-sprite", "./assets/pubpaid/characters/waiter-salon-small-v1.png");
     this.load.image("ppg-waiter-lobby-sprite", "./assets/pubpaid/characters/waiter-lobby-large-v1.png");
     this.load.image("ppg-waiter-lobby-speaking-sprite", "./assets/pubpaid/characters/waiter-lobby-speaking-v1.png");
+    this.load.image("ppg-player-sprite", "./assets/pubpaid/sprites/adult-standing-tight-v1.png");
     this.load.image("ppg-singer-lobby-sprite", "./assets/pubpaid/characters/singer-lobby-v1.png");
-    this.load.image("ppg-singer-sprite", "./assets/pubpaid/characters/singer-stage-v2.png");
-    this.load.image("ppg-guest-a-sprite", "./assets/pubpaid/characters/guest-standing-v2.png");
-    this.load.image("ppg-guest-b-sprite", "./assets/pubpaid/characters/guest-seated-v2.png");
+    this.load.image("ppg-singer-sprite", "./assets/pubpaid/sprites/singer-stage-tight-v1.png");
+    this.load.image("ppg-guest-a-sprite", "./assets/pubpaid/sprites/adult-standing-tight-v1.png");
+    this.load.image("ppg-guest-b-sprite", "./assets/pubpaid/sprites/guest-seated-tight-v1.png");
   }
 
   create() {
