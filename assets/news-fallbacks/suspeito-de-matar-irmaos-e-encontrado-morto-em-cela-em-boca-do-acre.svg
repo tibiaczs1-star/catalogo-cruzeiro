@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="1" stop-color="#20242d"/>
+    </linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0v42" fill="none" stroke="rgba(255,255,255,.055)" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect width="1200" height="720" fill="url(#grid)"/>
+  <rect x="86" y="82" width="1028" height="556" rx="28" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+  <rect x="126" y="126" width="260" height="48" rx="24" fill="hsl(224 78% 58%)"/>
+  <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">POLÍCIA</text>
+  <circle cx="986" cy="158" r="76" fill="hsl(224 78% 58%)" opacity=".9"/>
+  <circle cx="1038" cy="210" r="52" fill="hsl(279 72% 48%)" opacity=".78"/>
+  <path d="M126 492h948" stroke="hsl(224 78% 58%)" stroke-width="12" stroke-linecap="round" opacity=".82"/>
+  <text x="126" y="292" fill="#fff8ea" font-family="Georgia, serif" font-size="56" font-weight="700">
+    <tspan x="126" dy="0">Suspeito de matar irmãos é encontr</tspan>
+    <tspan x="126" dy="70">ado morto em cela em Boca do Acre</tspan>
+    <tspan x="126" dy="70"></tspan>
+  </text>
+  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="25" font-weight="700">Jurua Comunicacao • imagem editorial para evitar repetição</text>
+</svg>

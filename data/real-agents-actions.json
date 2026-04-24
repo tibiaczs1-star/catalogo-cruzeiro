@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-24T16:20:17.728Z",
+  "updatedAt": "2026-04-24T16:32:58.391Z",
   "actions": [
     {
       "id": "act-editorial-hq-dev-automacao-1",
@@ -10,11 +10,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/01-editorial-hq-dev-automacao.md",
-      "createdAt": "2026-04-24T16:20:17.706Z"
+      "createdAt": "2026-04-24T16:32:58.369Z"
     },
     {
       "id": "act-editorial-hq-otto-physics-2",
@@ -24,11 +24,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/02-editorial-hq-otto-physics.md",
-      "createdAt": "2026-04-24T16:20:17.706Z"
+      "createdAt": "2026-04-24T16:32:58.370Z"
     },
     {
       "id": "act-nerd-studio-zed-engine-3",
@@ -38,11 +38,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/03-nerd-studio-zed-engine.md",
-      "createdAt": "2026-04-24T16:20:17.707Z"
+      "createdAt": "2026-04-24T16:32:58.370Z"
     },
     {
       "id": "act-arte-game-design-collision-4",
@@ -52,11 +52,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/04-arte-game-design-collision.md",
-      "createdAt": "2026-04-24T16:20:17.707Z"
+      "createdAt": "2026-04-24T16:32:58.371Z"
     },
     {
       "id": "act-arte-game-design-physics-5",
@@ -66,11 +66,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/05-arte-game-design-physics.md",
-      "createdAt": "2026-04-24T16:20:17.708Z"
+      "createdAt": "2026-04-24T16:32:58.371Z"
     },
     {
       "id": "act-arte-game-design-controls-6",
@@ -80,11 +80,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/06-arte-game-design-controls.md",
-      "createdAt": "2026-04-24T16:20:17.708Z"
+      "createdAt": "2026-04-24T16:32:58.371Z"
     },
     {
       "id": "act-arte-game-design-engine-arch-7",
@@ -94,11 +94,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/07-arte-game-design-engine-arch.md",
-      "createdAt": "2026-04-24T16:20:17.709Z"
+      "createdAt": "2026-04-24T16:32:58.372Z"
     },
     {
       "id": "act-arte-game-design-npc-ai-8",
@@ -108,11 +108,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/08-arte-game-design-npc-ai.md",
-      "createdAt": "2026-04-24T16:20:17.709Z"
+      "createdAt": "2026-04-24T16:32:58.372Z"
     },
     {
       "id": "act-arte-game-design-pool-physics-9",
@@ -122,11 +122,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/09-arte-game-design-pool-physics.md",
-      "createdAt": "2026-04-24T16:20:17.710Z"
+      "createdAt": "2026-04-24T16:32:58.373Z"
     },
     {
       "id": "act-arte-game-design-spritesheet-export-10",
@@ -136,11 +136,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/10-arte-game-design-spritesheet-export.md",
-      "createdAt": "2026-04-24T16:20:17.711Z"
+      "createdAt": "2026-04-24T16:32:58.373Z"
     },
     {
       "id": "act-arte-game-design-optimizer-11",
@@ -150,11 +150,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/11-arte-game-design-optimizer.md",
-      "createdAt": "2026-04-24T16:20:17.711Z"
+      "createdAt": "2026-04-24T16:32:58.374Z"
     },
     {
       "id": "act-arte-game-design-deploy-games-12",
@@ -164,11 +164,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/12-arte-game-design-deploy-games.md",
-      "createdAt": "2026-04-24T16:20:17.712Z"
+      "createdAt": "2026-04-24T16:32:58.374Z"
     },
     {
       "id": "act-esttiles-fashion-ecommerce-13",
@@ -178,11 +178,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/13-esttiles-fashion-ecommerce.md",
-      "createdAt": "2026-04-24T16:20:17.713Z"
+      "createdAt": "2026-04-24T16:32:58.374Z"
     },
     {
       "id": "act-esttiles-fashion-cms-fashion-14",
@@ -192,11 +192,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/14-esttiles-fashion-cms-fashion.md",
-      "createdAt": "2026-04-24T16:20:17.713Z"
+      "createdAt": "2026-04-24T16:32:58.375Z"
     },
     {
       "id": "act-esttiles-fashion-data-fashion-15",
@@ -206,11 +206,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/15-esttiles-fashion-data-fashion.md",
-      "createdAt": "2026-04-24T16:20:17.714Z"
+      "createdAt": "2026-04-24T16:32:58.375Z"
     },
     {
       "id": "act-esttiles-fashion-photo-pipeline-16",
@@ -220,11 +220,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/16-esttiles-fashion-photo-pipeline.md",
-      "createdAt": "2026-04-24T16:20:17.714Z"
+      "createdAt": "2026-04-24T16:32:58.376Z"
     },
     {
       "id": "act-esttiles-fashion-calendar-fashion-17",
@@ -234,11 +234,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/17-esttiles-fashion-calendar-fashion.md",
-      "createdAt": "2026-04-24T16:20:17.715Z"
+      "createdAt": "2026-04-24T16:32:58.376Z"
     },
     {
       "id": "act-esttiles-fashion-trend-ai-18",
@@ -248,11 +248,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/18-esttiles-fashion-trend-ai.md",
-      "createdAt": "2026-04-24T16:20:17.715Z"
+      "createdAt": "2026-04-24T16:32:58.376Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-deploy-19",
@@ -262,193 +262,193 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 824,
+      "points": 830,
       "outcome": "success",
       "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/19-esttiles-fashion-fashion-deploy.md",
-      "createdAt": "2026-04-24T16:20:17.715Z"
+      "createdAt": "2026-04-24T16:32:58.377Z"
     },
     {
-      "id": "act-nerd-studio-otto-physics-20",
-      "slug": "nerd-studio-otto-physics",
-      "agent": "Otto Physics",
-      "office": "Escritorio Nerd",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 818,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/20-nerd-studio-otto-physics.md",
-      "createdAt": "2026-04-24T16:20:17.716Z"
-    },
-    {
-      "id": "act-arte-game-design-camera-21",
-      "slug": "arte-game-design-camera",
-      "agent": "Bia Camera",
-      "office": "Escritorio de Arte",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 818,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/21-arte-game-design-camera.md",
-      "createdAt": "2026-04-24T16:20:17.716Z"
-    },
-    {
-      "id": "act-arte-game-design-state-machine-22",
-      "slug": "arte-game-design-state-machine",
-      "agent": "Rui State",
-      "office": "Escritorio de Arte",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 818,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/22-arte-game-design-state-machine.md",
-      "createdAt": "2026-04-24T16:20:17.717Z"
-    },
-    {
-      "id": "act-arte-game-design-map-tools-23",
-      "slug": "arte-game-design-map-tools",
-      "agent": "Vini MapTool",
-      "office": "Escritorio de Arte",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 818,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/23-arte-game-design-map-tools.md",
-      "createdAt": "2026-04-24T16:20:17.717Z"
-    },
-    {
-      "id": "act-editorial-hq-ceo-codex-24",
+      "id": "act-editorial-hq-ceo-codex-20",
       "slug": "editorial-hq-ceo-codex",
       "agent": "Codex CEO",
       "office": "Escritorio Principal",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/24-editorial-hq-ceo-codex.md",
-      "createdAt": "2026-04-24T16:20:17.718Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/20-editorial-hq-ceo-codex.md",
+      "createdAt": "2026-04-24T16:32:58.378Z"
     },
     {
-      "id": "act-editorial-hq-editor-chefe-25",
+      "id": "act-editorial-hq-editor-chefe-21",
       "slug": "editorial-hq-editor-chefe",
       "agent": "Editora Ari",
       "office": "Escritorio Principal",
       "role": "editor",
       "kind": "ajuste-editorial",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "revisar a hierarquia de capa com prioridade para Prefeitura de Tarauacá abre processo seletivo para contratação temporária",
-      "artifact": ".codex-temp/real-agents/artifacts/25-editorial-hq-editor-chefe.md",
-      "createdAt": "2026-04-24T16:20:17.718Z"
+      "title": "revisar a hierarquia de capa com prioridade para Em Cruzeiro do Sul, governadora Mailza fortalece segurança no trânsito ao entregar capacetes e CNHs Sociais",
+      "artifact": ".codex-temp/real-agents/artifacts/21-editorial-hq-editor-chefe.md",
+      "createdAt": "2026-04-24T16:32:58.379Z"
     },
     {
-      "id": "act-nerd-studio-codex-nerd-26",
+      "id": "act-nerd-studio-codex-nerd-22",
       "slug": "nerd-studio-codex-nerd",
       "agent": "Codex Nerd Lead",
       "office": "Escritorio Nerd",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/26-nerd-studio-codex-nerd.md",
-      "createdAt": "2026-04-24T16:20:17.719Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/22-nerd-studio-codex-nerd.md",
+      "createdAt": "2026-04-24T16:32:58.379Z"
     },
     {
-      "id": "act-ninja-vault-ninja-chief-27",
+      "id": "act-nerd-studio-otto-physics-23",
+      "slug": "nerd-studio-otto-physics",
+      "agent": "Otto Physics",
+      "office": "Escritorio Nerd",
+      "role": "dev",
+      "kind": "automacao-proposta",
+      "status": "aguardando-aprovacao",
+      "points": 824,
+      "outcome": "success",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
+      "artifact": ".codex-temp/real-agents/artifacts/23-nerd-studio-otto-physics.md",
+      "createdAt": "2026-04-24T16:32:58.380Z"
+    },
+    {
+      "id": "act-ninja-vault-ninja-chief-24",
       "slug": "ninja-vault-ninja-chief",
       "agent": "Codex Ninja Lead",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/27-ninja-vault-ninja-chief.md",
-      "createdAt": "2026-04-24T16:20:17.719Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/24-ninja-vault-ninja-chief.md",
+      "createdAt": "2026-04-24T16:32:58.380Z"
     },
     {
-      "id": "act-ninja-vault-ninja-ops-28",
+      "id": "act-ninja-vault-ninja-ops-25",
       "slug": "ninja-vault-ninja-ops",
       "agent": "Lia Ops",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/28-ninja-vault-ninja-ops.md",
-      "createdAt": "2026-04-24T16:20:17.720Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/25-ninja-vault-ninja-ops.md",
+      "createdAt": "2026-04-24T16:32:58.381Z"
     },
     {
-      "id": "act-ninja-vault-ninja-scope-29",
+      "id": "act-ninja-vault-ninja-scope-26",
       "slug": "ninja-vault-ninja-scope",
       "agent": "Mira Scope",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/29-ninja-vault-ninja-scope.md",
-      "createdAt": "2026-04-24T16:20:17.720Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/26-ninja-vault-ninja-scope.md",
+      "createdAt": "2026-04-24T16:32:58.381Z"
     },
     {
-      "id": "act-ninja-vault-ninja-rights-30",
+      "id": "act-ninja-vault-ninja-rights-27",
       "slug": "ninja-vault-ninja-rights",
       "agent": "Tessa Licença",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/30-ninja-vault-ninja-rights.md",
-      "createdAt": "2026-04-24T16:20:17.721Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/27-ninja-vault-ninja-rights.md",
+      "createdAt": "2026-04-24T16:32:58.382Z"
     },
     {
-      "id": "act-ninja-vault-ninja-archive-31",
+      "id": "act-ninja-vault-ninja-archive-28",
       "slug": "ninja-vault-ninja-archive",
       "agent": "Bento Vault",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/31-ninja-vault-ninja-archive.md",
-      "createdAt": "2026-04-24T16:20:17.721Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/28-ninja-vault-ninja-archive.md",
+      "createdAt": "2026-04-24T16:32:58.383Z"
     },
     {
-      "id": "act-arte-game-design-arte-lead-32",
+      "id": "act-arte-game-design-arte-lead-29",
       "slug": "arte-game-design-arte-lead",
       "agent": "Ari Art Lead",
       "office": "Escritorio de Arte",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
-      "artifact": ".codex-temp/real-agents/artifacts/32-arte-game-design-arte-lead.md",
-      "createdAt": "2026-04-24T16:20:17.721Z"
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
+      "artifact": ".codex-temp/real-agents/artifacts/29-arte-game-design-arte-lead.md",
+      "createdAt": "2026-04-24T16:32:58.383Z"
+    },
+    {
+      "id": "act-arte-game-design-camera-30",
+      "slug": "arte-game-design-camera",
+      "agent": "Bia Camera",
+      "office": "Escritorio de Arte",
+      "role": "dev",
+      "kind": "automacao-proposta",
+      "status": "aguardando-aprovacao",
+      "points": 824,
+      "outcome": "success",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
+      "artifact": ".codex-temp/real-agents/artifacts/30-arte-game-design-camera.md",
+      "createdAt": "2026-04-24T16:32:58.384Z"
+    },
+    {
+      "id": "act-arte-game-design-state-machine-31",
+      "slug": "arte-game-design-state-machine",
+      "agent": "Rui State",
+      "office": "Escritorio de Arte",
+      "role": "dev",
+      "kind": "automacao-proposta",
+      "status": "aguardando-aprovacao",
+      "points": 824,
+      "outcome": "success",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
+      "artifact": ".codex-temp/real-agents/artifacts/31-arte-game-design-state-machine.md",
+      "createdAt": "2026-04-24T16:32:58.384Z"
+    },
+    {
+      "id": "act-arte-game-design-map-tools-32",
+      "slug": "arte-game-design-map-tools",
+      "agent": "Vini MapTool",
+      "office": "Escritorio de Arte",
+      "role": "dev",
+      "kind": "automacao-proposta",
+      "status": "aguardando-aprovacao",
+      "points": 824,
+      "outcome": "success",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
+      "artifact": ".codex-temp/real-agents/artifacts/32-arte-game-design-map-tools.md",
+      "createdAt": "2026-04-24T16:32:58.385Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-lead-33",
@@ -458,11 +458,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 817,
+      "points": 824,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
       "artifact": ".codex-temp/real-agents/artifacts/33-esttiles-fashion-fashion-lead.md",
-      "createdAt": "2026-04-24T16:20:17.722Z"
+      "createdAt": "2026-04-24T16:32:58.385Z"
     },
     {
       "id": "act-ninja-vault-ninja-dns-34",
@@ -472,11 +472,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 811,
+      "points": 818,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Negócios, Utilidade Pública",
+      "title": "redistribuir foco entre Utilidade Pública, Cotidiano, Negócios",
       "artifact": ".codex-temp/real-agents/artifacts/34-ninja-vault-ninja-dns.md",
-      "createdAt": "2026-04-24T16:20:17.723Z"
+      "createdAt": "2026-04-24T16:32:58.385Z"
     },
     {
       "id": "act-editorial-hq-copy-chief-35",
@@ -486,11 +486,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 805,
+      "points": 811,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Prefeitura de Tarauacá abre processo seletivo para contratação temporária",
+      "title": "reescrever titulo, apoio e gancho de clique para Em Cruzeiro do Sul, governadora Mailza fortalece segurança no trânsito ao entregar capacetes e CNHs Sociais",
       "artifact": ".codex-temp/real-agents/artifacts/35-editorial-hq-copy-chief.md",
-      "createdAt": "2026-04-24T16:20:17.723Z"
+      "createdAt": "2026-04-24T16:32:58.386Z"
     },
     {
       "id": "act-editorial-hq-texto-office-36",
@@ -500,11 +500,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 805,
+      "points": 811,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Prefeitura de Tarauacá abre processo seletivo para contratação temporária",
+      "title": "reescrever titulo, apoio e gancho de clique para Em Cruzeiro do Sul, governadora Mailza fortalece segurança no trânsito ao entregar capacetes e CNHs Sociais",
       "artifact": ".codex-temp/real-agents/artifacts/36-editorial-hq-texto-office.md",
-      "createdAt": "2026-04-24T16:20:17.724Z"
+      "createdAt": "2026-04-24T16:32:58.386Z"
     }
   ]
 }

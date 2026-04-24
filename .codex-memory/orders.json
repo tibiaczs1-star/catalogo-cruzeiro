@@ -1,7 +1,59 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T16:17:07.419Z",
+  "lastUpdatedAt": "2026-04-24T16:39:00.000Z",
   "orders": [
+    {
+      "id": "2026-04-24-re-rodada-do-dia-geral-online-first",
+      "createdAt": "2026-04-24T16:39:00.000Z",
+      "updatedAt": "2026-04-24T16:39:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "faça a re rodada do dia geral",
+      "summary": "Executar Re Rodada do Dia Geral: ler online primeiro, sincronizar noticias localmente, acionar agentes, corrigir fotos faltantes/repetidas por divisao, revisar offline, preparar subida e recaptura online.",
+      "normalizedTasks": [
+        "ler site online antes da revisao local",
+        "sincronizar base online para runtime-news e news-data",
+        "acionar ciclo dos 181 agentes e review team",
+        "corrigir imagens ausentes, genericas ou repetidas na mesma divisao",
+        "zerar auditoria editorial e auditoria de fotos",
+        "subir somente arquivos da rodada sem incluir PubPaid WIP"
+      ],
+      "filesTouched": [
+        "scripts/re-rodada-dia-geral.js",
+        "scripts/audit-news-image-focus.js",
+        "data/runtime-news.json",
+        "data/re-rodada-dia-geral-report.json",
+        "data/news-image-focus-audit.json",
+        "news-data.js",
+        "assets/news-fallbacks/"
+      ],
+      "assetRefs": [
+        "assets/news-fallbacks/anitta-revela-convite-de-shakira-para-show-em-copacabana-e-colombiana-elogia-rainha.svg",
+        "assets/news-fallbacks/credenciamento-pareceristas-culturais.svg",
+        "assets/news-fallbacks/defesa-civil-estadual-reforca-acoes-de-prevencao-em-visita-a-mancio-lima.svg",
+        "assets/news-fallbacks/eja-czs-superacao.svg",
+        "assets/news-fallbacks/faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul.svg",
+        "assets/news-fallbacks/fila-ovos-pascoa.svg",
+        "assets/news-fallbacks/ifac-auxilio-cheia.svg",
+        "assets/news-fallbacks/rio-jurua-segue-em-elevacao-em-cruzeiro-do-sul-nesta-quinta.svg",
+        "assets/news-fallbacks/saude-25-agosto-ubs.svg",
+        "assets/news-fallbacks/suspeito-de-matar-irmaos-e-encontrado-morto-em-cela-em-boca-do-acre.svg"
+      ],
+      "tags": [
+        "re-rodada-do-dia",
+        "noticias",
+        "online-first",
+        "render",
+        "agentes",
+        "auditoria-fotos"
+      ],
+      "nextSteps": [
+        "confirmar deploy no Render",
+        "reler online apos deploy para fechar recaptura",
+        "manter PubPaid WIP fora do pacote desta rodada"
+      ],
+      "notes": "Validacoes locais: review:team 0 achados; audit:news-images 120/120 ok; duplicatas por divisao 0; imagens faltantes 0."
+    },
     {
       "id": "2026-04-24-agente-19-plano-continuo-treinamento-arte-pubpaid",
       "createdAt": "2026-04-24T13:55:00.000Z",

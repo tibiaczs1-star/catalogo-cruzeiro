@@ -275,6 +275,13 @@ async function checkImageUrl(url, offline) {
   if (!url) return { status: "missing" };
   if (offline) return { status: "skipped-offline" };
 
+  if (/^(?:\.\/|\/)?assets\//i.test(String(url || ""))) {
+    const localPath = path.join(ROOT_DIR, String(url).replace(/^\.\//, "").replace(/^\//, ""));
+    return fs.existsSync(localPath)
+      ? { status: "ok", httpStatus: 200, contentType: "image/svg+xml" }
+      : { status: "unreachable", httpStatus: 404, contentType: "" };
+  }
+
   try {
     let response = await fetchWithTimeout(url, { method: "HEAD" });
     if (!response.ok || response.status === 405) {
