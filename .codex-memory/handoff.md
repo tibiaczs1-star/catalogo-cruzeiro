@@ -1,32 +1,41 @@
 # Handoff
 
-Updated: 2026-04-24T18:21:00.000Z
+Updated: 2026-04-24T18:51:00.000Z
 
-Re Rodada do Dia Geral executada novamente como rotina online-first. Primeiro foi baixado o estado do Render, depois a base local foi sincronizada, os agentes/auditorias foram acionados, fotos repetidas ou ausentes foram saneadas e a revisão editorial final zerou achados.
+Reunião mobile-only rodada e fila implementada. O arquivo `PROMPT_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md` foi usado para abrir a Cheffe Call e acionar os 181 agentes reais. Como Chefe, o Codex cortou as respostas genéricas que não tinham evidência mobile concreta e gerou a ata em `RELATORIO_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md`.
 
-A seção `#entretenimento` da home foi atualizada: o fallback deixou de usar Duna/Oppenheimer/peças fictícias e o `script.js` agora hidrata os cards com matérias reais de cinema, teatro e cultura captadas pelo site.
+Fila aprovada e aplicada:
+- P1: entretenimento mobile denso e pouco escaneável.
+- P1: filtro de entretenimento precisa evitar fallback fraco/antigo no mobile.
+- P2: chips do radar precisam comunicar rolagem horizontal.
+- P2: faixa de fundadores precisa ser revisada no mobile.
+- P2: elementos decorativos fora da viewport devem ser reduzidos/ocultados no mobile.
 
-Resultado local final:
-- 120 noticias auditadas.
-- 0 imagens faltando.
-- 0 fotos duplicadas dentro da mesma divisao.
-- 0 achados no `review:team`.
-- 120/120 ok no `audit:news-images`.
+Arquivos da implementação:
+- `index.html`
+- `script.js`
+- `mobile-home-final.css`
 
-Importante: PubPaid 2.0 continua com arquivos WIP locais e nao deve entrar no commit/deploy desta rodada.
+Validação:
+- `node --check script.js`
+- `npm run review:team` com 0 achados em 135 arquivos
+- Playwright 390x844: sem overflow global
+- Playwright 430x932: sem overflow global
+- Playwright 1440x900: sem overflow global e desktop preservado
+
+Importante: PubPaid 2.0 continua com arquivos WIP locais e nao deve entrar nessa rodada mobile do portal.
 
 ## Next
 
-- Commitar e subir apenas o pacote da Re Rodada.
-- Empurrar para o Render e reler o online depois do deploy.
-- Manter a regra: toda nova Re Rodada deve ler online antes, sincronizar local, revisar offline, subir e recapturar online.
+- Se o usuário mandar subir, stage/commit/push apenas os arquivos desta rodada mobile e os docs/memória pertinentes.
+- Não incluir PubPaid WIP.
+- Não incluir ruído operacional de `data/` salvo se o usuário pedir.
 
 ## Files In Focus
 
-- scripts/re-rodada-dia-geral.js
-- scripts/audit-news-image-focus.js
-- data/runtime-news.json
-- data/re-rodada-dia-geral-report.json
-- news-data.js
+- PROMPT_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md
+- RELATORIO_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md
+- mobile-home-final.css
+- styles.css
 - index.html
 - script.js

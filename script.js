@@ -6339,6 +6339,18 @@ const entertainmentHeavyPattern =
 const entertainmentOffTopicPattern =
   /\b(reality|podcast|[aá]lbum|rapper|hip hop|macaxeira|agricultura|jur[ií]dico|convic[cç][aã]o|tribunal|comissariado|embarque|menores|ufac|professor|processo seletivo|sal[aá]rios?|governo|governadora|cnh|certifica[cç][aã]o|seguran[cç]a no tr[aâ]nsito|assembleia|cooper|licen[cç]a)\b/;
 
+const entertainmentRemoteStagePattern =
+  /\b(juiz de fora|minas gerais|belo horizonte|s[aã]o paulo|rio de janeiro|curitiba|porto alegre|recife|salvador|fortaleza)\b/;
+
+const entertainmentLocalStagePattern =
+  /\b(cruzeiro do sul|jurua|juru[aá]|acre|rio branco|cine romeu|teatro dos n[aá]uas|vale do juru[aá]|cultura local|lei aldir blanc)\b/;
+
+const getEntertainmentAgeDays = (article = {}) => {
+  const timestamp = getArticleSortTimestamp(article);
+  if (!timestamp) return Number.POSITIVE_INFINITY;
+  return Math.max(0, (Date.now() - timestamp) / 86400000);
+};
+
 const getEntertainmentScore = (article = {}, mode = "film") => {
   const normalized = normalizeRuntimeArticle(article);
   const haystack = normalizeText(
@@ -6357,11 +6369,21 @@ const getEntertainmentScore = (article = {}, mode = "film") => {
   const pattern = mode === "stage" ? entertainmentStagePattern : entertainmentFilmPattern;
   const hasFilmCore = /\b(cinema|filme|cinebiografia|bilheteria|michael jackson|movie|film)\b/.test(haystack);
   const hasOffTopic = entertainmentOffTopicPattern.test(haystack);
+  const ageDays = getEntertainmentAgeDays(normalized);
   if (mode === "film" && !hasFilmCore) {
     return -20;
   }
   if (mode === "stage" && hasOffTopic) {
     return -20;
+  }
+  if (mode === "stage" && !entertainmentLocalStagePattern.test(haystack)) {
+    return -20;
+  }
+  if (mode === "stage" && entertainmentRemoteStagePattern.test(haystack) && !entertainmentLocalStagePattern.test(haystack)) {
+    return -24;
+  }
+  if (mode === "stage" && ageDays > 120 && !entertainmentLocalStagePattern.test(haystack)) {
+    return -22;
   }
   const hasDirectMatch = pattern.test(haystack);
   let score = hasDirectMatch ? 18 : -12;
@@ -6373,6 +6395,10 @@ const getEntertainmentScore = (article = {}, mode = "film") => {
   if (/\b(global|variety|playbill|broadway|deadline|g1|agencia brasil)\b/.test(haystack)) score += 2;
   if (entertainmentHeavyPattern.test(haystack)) score -= 12;
   if (hasOffTopic) score -= 40;
+  if (mode === "stage" && entertainmentRemoteStagePattern.test(haystack)) score -= 18;
+  if (mode === "stage" && !entertainmentLocalStagePattern.test(haystack)) score -= 12;
+  if (ageDays > 45) score -= mode === "stage" ? 6 : 2;
+  if (ageDays > 120) score -= mode === "stage" ? 12 : 5;
   if (!articleHasUsableImageCandidate(normalized)) score -= 2;
 
   return score;

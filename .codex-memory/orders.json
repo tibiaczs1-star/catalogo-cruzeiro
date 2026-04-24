@@ -1,7 +1,129 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T18:21:00.000Z",
+  "lastUpdatedAt": "2026-04-24T19:30:00.000Z",
   "orders": [
+    {
+      "id": "2026-04-24-implementar-fila-cheffe-call-mobile-only",
+      "createdAt": "2026-04-24T19:30:00.000Z",
+      "updatedAt": "2026-04-24T19:30:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "pode implementar acho que vc ja e inteligente pra entender como funciona",
+      "summary": "Implementar a fila P1/P2 aprovada pela Cheffe Call mobile-only sem tocar desktop nem PubPaid.",
+      "normalizedTasks": [
+        "compactar entretenimento no mobile",
+        "endurecer selecao de cultura/palco para priorizar conteudo local e evitar fallback fraco",
+        "adicionar sinal e trilho horizontal seguro aos chips do radar",
+        "revisar faixa de fundadores como trilho mobile sem scroll global",
+        "ocultar decoracoes laterais fora da viewport no mobile",
+        "validar 390x844, 430x932 e 1440x900"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "mobile-home-final.css",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        "RELATORIO_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md",
+        "PROMPT_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md"
+      ],
+      "tags": [
+        "mobile",
+        "cheffe-call",
+        "home",
+        "entretenimento",
+        "qa",
+        "no-desktop-change",
+        "no-pubpaid"
+      ],
+      "nextSteps": [
+        "se o usuario mandar subir, commitar apenas os arquivos desta rodada mobile e memoria pertinente",
+        "manter PubPaid WIP fora do pacote",
+        "evitar incluir ruido operacional de data"
+      ],
+      "notes": "Validacoes: node --check script.js; npm run review:team 0 achados em 135 arquivos; Playwright 390x844 scrollWidth=390/clientWidth=390; 430x932 scrollWidth=430/clientWidth=430; 1440x900 sem overflow global."
+    },
+    {
+      "id": "2026-04-24-rodar-reuniao-cheffe-call-mobile-only",
+      "createdAt": "2026-04-24T18:51:00.000Z",
+      "updatedAt": "2026-04-24T18:51:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "agore rode a reunião prompt primeiro vc e o chefe",
+      "summary": "Rodar a Cheffe Call mobile-only com Codex como Chefe, acionar 181 agentes, cortar respostas genericas e gerar ata/fila de execucao mobile-only baseada em evidencias de viewport.",
+      "normalizedTasks": [
+        "abrir Cheffe Call com prompt mobile-only",
+        "acionar real agents runtime com ordem mobile-only",
+        "coletar evidencias em 390x844 e 430x932",
+        "comparar com desktop 1440x900",
+        "gerar relatorio da reuniao com fila P1/P2 aprovada"
+      ],
+      "filesTouched": [
+        "RELATORIO_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md",
+        "data/cheffe-call-state.json",
+        "data/office-orders.json",
+        "data/real-agents-actions.json",
+        "data/real-agents-memory.json",
+        "data/real-agents-scoreboard.json",
+        ".codex-temp/real-agents/latest-run.json",
+        ".codex-temp/real-agents/latest-run.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/mobile-meeting-entertainment-390.png"
+      ],
+      "tags": [
+        "cheffe-call",
+        "mobile",
+        "meeting-run",
+        "qa",
+        "no-desktop-change"
+      ],
+      "nextSteps": [
+        "implementar apenas P1/P2 mobile-only se usuario autorizar",
+        "validar 390x844, 430x932 e 1440x900 antes de commit",
+        "nao tocar PubPaid nem desktop"
+      ],
+      "notes": "Runtime gerou 181 agentes/36 acoes, mas Chefe recusou respostas genericas sem evidencia mobile. Evidencias reais coletadas com Playwright."
+    },
+    {
+      "id": "2026-04-24-prompt-cheffe-call-mobile-only",
+      "createdAt": "2026-04-24T18:34:00.000Z",
+      "updatedAt": "2026-04-24T18:34:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "agora reuna toda equipe, pra reunizão zinha do mobile... faça a mesma rotina so que so voltada pra mobile, sem mexer no webdesktop, agora faça o prompt",
+      "summary": "Criar prompt de Cheffe Call mobile-only para reunir os 181 agentes e revisar apenas experiência mobile sem alterar webdesktop.",
+      "normalizedTasks": [
+        "criar prompt de reuniao mobile-only",
+        "definir regra soberana de nao mexer no desktop",
+        "convocar times de leitura, layout, toque, imagem, performance e QA",
+        "definir fila P0/P1/P2/P3 e criterio de pronto",
+        "registrar memoria local"
+      ],
+      "filesTouched": [
+        "PROMPT_CHEFFE_CALL_MOBILE_ONLY_2026-04-24.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "cheffe-call",
+        "mobile",
+        "prompt",
+        "qa",
+        "no-desktop-change"
+      ],
+      "nextSteps": [
+        "executar prompt na Cheffe Call quando usuario autorizar",
+        "capturar mobile 390x844 e 430x932 antes de corrigir",
+        "validar desktop para provar nao regressao"
+      ],
+      "notes": "Prompt criado sem mexer em layout/codigo do site e sem tocar PubPaid WIP."
+    },
     {
       "id": "2026-04-24-re-rodada-diaria-subir-entretimento-e-sync",
       "createdAt": "2026-04-24T18:21:00.000Z",
