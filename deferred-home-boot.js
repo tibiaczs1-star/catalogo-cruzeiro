@@ -15,7 +15,6 @@
     "sala-redacao-real.js?v=20260414q",
     "photo-layout-fix.js?v=20260411ab",
     "agentes-newsroom-hero.js?v=20260413ac",
-    "startup-experience.js?v=20260424startup-office-loader",
     "pro-design.js?v=20260413b"
   ];
   function loadScript(src) {
