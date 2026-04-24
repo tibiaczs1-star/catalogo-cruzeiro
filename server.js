@@ -3727,7 +3727,118 @@ function shouldIgnoreImageUrl(value) {
   if (/(?:logo|favicon|icon|avatar|emoji|gravatar|pixel|placeholder|spacer|blank)\b/i.test(imageUrl)) {
     return true;
   }
+  if (
+    imageUrl.includes("agenciabrasil.ebc.com.br/ebc.png") ||
+    imageUrl.includes("/edital-assinado-")
+  ) {
+    return true;
+  }
   return false;
+}
+
+function getArticleImageUrl(item = {}) {
+  return item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "";
+}
+
+function getArticleDivisionKey(item = {}) {
+  return normalizeText(item.categoryKey || item.category || item.eyebrow || "sem-categoria") || "sem-categoria";
+}
+
+function normalizeComparableImageUrl(value) {
+  return String(value || "")
+    .trim()
+    .replace(/[?#].*$/g, "")
+    .replace(/-\d{2,5}x\d{2,5}(?=\.[a-z]{3,5}$)/i, "")
+    .toLowerCase();
+}
+
+function buildNewsFallbackSvg(item = {}, reason = "fallback") {
+  const title = cleanShortText(item.title || item.sourceLabel || "Notícia em revisão", 110);
+  const category = cleanShortText(item.category || item.eyebrow || "Notícia", 40).toUpperCase();
+  const source = cleanShortText(item.sourceName || "Catálogo", 42);
+  const hue = (hashString(`${item.slug || title}|${reason}`) % 280) + 20;
+  const accent = `hsl(${hue} 78% 58%)`;
+  const accent2 = `hsl(${(hue + 55) % 360} 72% 48%)`;
+  const escapedTitle = escapeHtml(title);
+  const escapedCategory = escapeHtml(category);
+  const escapedSource = escapeHtml(source);
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="${escapedTitle}">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.58" stop-color="#101827"/>
+      <stop offset="1" stop-color="#1b2028"/>
+    </linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0v42" fill="none" stroke="rgba(255,255,255,.055)" stroke-width="2"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)"/>
+  <rect width="1200" height="720" fill="url(#grid)"/>
+  <rect x="86" y="82" width="1028" height="556" rx="28" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+  <rect x="126" y="126" width="214" height="48" rx="24" fill="${accent}"/>
+  <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">${escapedCategory}</text>
+  <circle cx="986" cy="158" r="76" fill="${accent}" opacity=".9"/>
+  <circle cx="1038" cy="210" r="52" fill="${accent2}" opacity=".78"/>
+  <path d="M126 492h948" stroke="${accent}" stroke-width="12" stroke-linecap="round" opacity=".82"/>
+  <text x="126" y="292" fill="#fff8ea" font-family="Georgia, serif" font-size="56" font-weight="700">
+    <tspan x="126" dy="0">${escapedTitle.slice(0, 34)}</tspan>
+    <tspan x="126" dy="70">${escapedTitle.slice(34, 68)}</tspan>
+    <tspan x="126" dy="70">${escapedTitle.slice(68, 102)}</tspan>
+  </text>
+  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="25" font-weight="700">${escapedSource} • imagem editorial gerada para evitar repetição</text>
+</svg>
+`;
+}
+
+function ensureNewsFallbackImage(item = {}, reason = "fallback") {
+  const slug = slugify(item.slug || item.title || createRecordId("noticia"));
+  const fileName = `${slug || createRecordId("noticia")}.svg`;
+  const relativeUrl = `/assets/news-fallbacks/${fileName}`;
+  const filePath = path.join(ROOT_DIR, "assets", "news-fallbacks", fileName);
+  try {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, buildNewsFallbackSvg(item, reason), "utf-8");
+    }
+  } catch (_error) {
+    return "";
+  }
+  return relativeUrl;
+}
+
+function repairNewsImagesForDisplay(items = []) {
+  const seenByDivision = new Map();
+  return (Array.isArray(items) ? items : []).map((item) => {
+    const currentImage = getArticleImageUrl(item);
+    const division = getArticleDivisionKey(item);
+    const imageKey = normalizeComparableImageUrl(currentImage);
+    const duplicateKey = imageKey ? `${division}|${imageKey}` : "";
+    const isBadImage = !currentImage || shouldIgnoreImageUrl(currentImage);
+    const isRepeatedInDivision = duplicateKey && seenByDivision.has(duplicateKey);
+
+    if (duplicateKey && !seenByDivision.has(duplicateKey)) {
+      seenByDivision.set(duplicateKey, item.slug || item.id || currentImage);
+    }
+
+    if (!isBadImage && !isRepeatedInDivision) return item;
+
+    const reason = isBadImage ? "imagem-ausente-ou-generica" : "foto-repetida-na-mesma-divisao";
+    const fallbackUrl = ensureNewsFallbackImage(item, reason);
+    if (!fallbackUrl) return item;
+
+    return {
+      ...item,
+      imageUrl: fallbackUrl,
+      feedImageUrl: fallbackUrl,
+      sourceImageUrl: fallbackUrl,
+      imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      imageFocus: item.imageFocus || "center 50%",
+      imageQuality: reason,
+      originalImageUrl: currentImage || item.originalImageUrl || ""
+    };
+  });
 }
 
 function getImageCandidateScore(value) {
@@ -4108,7 +4219,9 @@ async function refreshRssRuntime(limitPerSource = 30) {
     deduped.push(item);
   });
 
-  const enrichedItems = (await enrichNewsItemsWithSourceImages(deduped)).map(normalizeArticleRecord);
+  const enrichedItems = repairNewsImagesForDisplay(
+    (await enrichNewsItemsWithSourceImages(deduped)).map(normalizeArticleRecord)
+  );
 
   const payload = {
     lastAttemptAt: new Date().toISOString(),
@@ -4368,7 +4481,7 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
       : buildTopicFeedFallback(normalizedTopic, totalLimit),
     totalLimit
   );
-  const enrichedItems = await enrichNewsItemsWithSourceImages(mergedItems);
+  const enrichedItems = repairNewsImagesForDisplay(await enrichNewsItemsWithSourceImages(mergedItems));
 
   const payload = {
     topic: normalizedTopic,

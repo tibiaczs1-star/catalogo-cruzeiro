@@ -1,0 +1,295 @@
+{
+  "ok": true,
+  "generatedAt": "2026-04-24T16:20:46.870Z",
+  "totalItems": 240,
+  "runtimeItems": 120,
+  "staticItems": 120,
+  "duplicateImageGroups": 3,
+  "missingImageItems": 8,
+  "weakImageItems": 0,
+  "duplicates": [
+    {
+      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png",
+      "count": 20,
+      "uniqueSlugs": 10,
+      "items": [
+        {
+          "collection": "runtime",
+          "slug": "pesquisadores-defendem-caminhos-para-gestao-publica-antirracista",
+          "title": "Pesquisadores defendem caminhos para gestão pública antirracista",
+          "sourceName": "Agencia Brasil",
+          "category": "Educação"
+        },
+        {
+          "collection": "runtime",
+          "slug": "cmn-libera-linha-de-capital-de-giro-a-cooperativas-de-leite-no-pronaf",
+          "title": "CMN libera linha de capital de giro a cooperativas de leite no Pronaf",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "runtime",
+          "slug": "caixa-paga-bolsa-familia-a-beneficiarios-com-nis-de-final-6",
+          "title": "Caixa paga Bolsa Família a beneficiários com NIS de final 6",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "runtime",
+          "slug": "cmn-amplia-incentivo-nacional-em-linha-de-credito-do-fat-para-inovacao",
+          "title": "CMN amplia incentivo nacional em linha de crédito do FAT para inovação",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "runtime",
+          "slug": "aposentados-e-pensionistas-do-inss-comecam-a-receber-13-nesta-sexta",
+          "title": "Aposentados e pensionistas do INSS começam a receber 13º nesta sexta",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "runtime",
+          "slug": "palmeiras-bate-jacuipense-e-encaminha-classificacao-na-copa-do-brasil",
+          "title": "Palmeiras bate Jacuipense e encaminha classificação na Copa do Brasil",
+          "sourceName": "Agencia Brasil",
+          "category": "Esporte"
+        },
+        {
+          "collection": "runtime",
+          "slug": "alunos-da-usp-protestam-por-melhores-condicoes-de-moradia-e-refeicoes",
+          "title": "Alunos da USP protestam por melhores condições de moradia e refeições",
+          "sourceName": "Agencia Brasil",
+          "category": "Educação"
+        },
+        {
+          "collection": "runtime",
+          "slug": "lula-vai-a-sp-para-tirar-excesso-de-pele-na-cabeca-e-tratar-tendinite",
+          "title": "Lula vai a SP para tirar excesso de pele na cabeça e tratar tendinite",
+          "sourceName": "Agencia Brasil",
+          "category": "Política"
+        },
+        {
+          "collection": "runtime",
+          "slug": "mega-sena-acumulada-vai-sortear-r-100-milhoes-no-proximo-sabado",
+          "title": "Mega-Sena acumulada vai sortear R$ 100 milhões no próximo sábado",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "runtime",
+          "slug": "mec-livros-tera-acervo-ampliado-para-25-mil-obras",
+          "title": "MEC Livros terá acervo ampliado para 25 mil obras",
+          "sourceName": "Agencia Brasil",
+          "category": "Educação"
+        },
+        {
+          "collection": "static",
+          "slug": "pesquisadores-defendem-caminhos-para-gestao-publica-antirracista",
+          "title": "Pesquisadores defendem caminhos para gestão pública antirracista",
+          "sourceName": "Agencia Brasil",
+          "category": "Educação"
+        },
+        {
+          "collection": "static",
+          "slug": "cmn-libera-linha-de-capital-de-giro-a-cooperativas-de-leite-no-pronaf",
+          "title": "CMN libera linha de capital de giro a cooperativas de leite no Pronaf",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "static",
+          "slug": "caixa-paga-bolsa-familia-a-beneficiarios-com-nis-de-final-6",
+          "title": "Caixa paga Bolsa Família a beneficiários com NIS de final 6",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "static",
+          "slug": "cmn-amplia-incentivo-nacional-em-linha-de-credito-do-fat-para-inovacao",
+          "title": "CMN amplia incentivo nacional em linha de crédito do FAT para inovação",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "static",
+          "slug": "aposentados-e-pensionistas-do-inss-comecam-a-receber-13-nesta-sexta",
+          "title": "Aposentados e pensionistas do INSS começam a receber 13º nesta sexta",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "static",
+          "slug": "palmeiras-bate-jacuipense-e-encaminha-classificacao-na-copa-do-brasil",
+          "title": "Palmeiras bate Jacuipense e encaminha classificação na Copa do Brasil",
+          "sourceName": "Agencia Brasil",
+          "category": "Esporte"
+        },
+        {
+          "collection": "static",
+          "slug": "alunos-da-usp-protestam-por-melhores-condicoes-de-moradia-e-refeicoes",
+          "title": "Alunos da USP protestam por melhores condições de moradia e refeições",
+          "sourceName": "Agencia Brasil",
+          "category": "Educação"
+        },
+        {
+          "collection": "static",
+          "slug": "lula-vai-a-sp-para-tirar-excesso-de-pele-na-cabeca-e-tratar-tendinite",
+          "title": "Lula vai a SP para tirar excesso de pele na cabeça e tratar tendinite",
+          "sourceName": "Agencia Brasil",
+          "category": "Política"
+        },
+        {
+          "collection": "static",
+          "slug": "mega-sena-acumulada-vai-sortear-r-100-milhoes-no-proximo-sabado",
+          "title": "Mega-Sena acumulada vai sortear R$ 100 milhões no próximo sábado",
+          "sourceName": "Agencia Brasil",
+          "category": "Negócios"
+        },
+        {
+          "collection": "static",
+          "slug": "mec-livros-tera-acervo-ampliado-para-25-mil-obras",
+          "title": "MEC Livros terá acervo ampliado para 25 mil obras",
+          "sourceName": "Agencia Brasil",
+          "category": "Educação"
+        }
+      ]
+    },
+    {
+      "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg",
+      "count": 6,
+      "uniqueSlugs": 3,
+      "items": [
+        {
+          "collection": "runtime",
+          "slug": "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+          "title": "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+          "sourceName": "Tribuna do Jurua",
+          "category": "Utilidade Pública"
+        },
+        {
+          "collection": "runtime",
+          "slug": "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse",
+          "title": "Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse",
+          "sourceName": "Tribuna do Jurua",
+          "category": "Utilidade Pública"
+        },
+        {
+          "collection": "runtime",
+          "slug": "edital-de-eleicao-e-posse-8211-ascak",
+          "title": "EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK",
+          "sourceName": "Tribuna do Jurua",
+          "category": "Utilidade Pública"
+        },
+        {
+          "collection": "static",
+          "slug": "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+          "title": "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+          "sourceName": "Tribuna do Jurua",
+          "category": "Utilidade Pública"
+        },
+        {
+          "collection": "static",
+          "slug": "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse",
+          "title": "Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse",
+          "sourceName": "Tribuna do Jurua",
+          "category": "Utilidade Pública"
+        },
+        {
+          "collection": "static",
+          "slug": "edital-de-eleicao-e-posse-8211-ascak",
+          "title": "EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK",
+          "sourceName": "Tribuna do Jurua",
+          "category": "Utilidade Pública"
+        }
+      ]
+    },
+    {
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/guerra-eua-israel-ira.jpg",
+      "count": 4,
+      "uniqueSlugs": 2,
+      "items": [
+        {
+          "collection": "runtime",
+          "slug": "delegacao-do-ira-nao-deve-negociar-com-os-eua-no-paquistao-dizem-fontes",
+          "title": "Delegação do Irã não deve negociar com os EUA no Paquistão, dizem fontes",
+          "sourceName": "CNN Brasil",
+          "category": "Política"
+        },
+        {
+          "collection": "runtime",
+          "slug": "hegseth-diz-que-luta-por-ormuz-e-mais-da-europa-do-que-dos-eua",
+          "title": "Hegseth diz que luta por Ormuz é mais da Europa do que dos EUA",
+          "sourceName": "CNN Brasil",
+          "category": "Prefeitura"
+        },
+        {
+          "collection": "static",
+          "slug": "delegacao-do-ira-nao-deve-negociar-com-os-eua-no-paquistao-dizem-fontes",
+          "title": "Delegação do Irã não deve negociar com os EUA no Paquistão, dizem fontes",
+          "sourceName": "CNN Brasil",
+          "category": "Política"
+        },
+        {
+          "collection": "static",
+          "slug": "hegseth-diz-que-luta-por-ormuz-e-mais-da-europa-do-que-dos-eua",
+          "title": "Hegseth diz que luta por Ormuz é mais da Europa do que dos EUA",
+          "sourceName": "CNN Brasil",
+          "category": "Prefeitura"
+        }
+      ]
+    }
+  ],
+  "missing": [
+    {
+      "collection": "runtime",
+      "slug": "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+      "title": "Licença de Instalação &#8211; Josias O. Da Silva Ltda",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "runtime",
+      "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+      "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "runtime",
+      "slug": "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+      "title": "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "runtime",
+      "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+      "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "static",
+      "slug": "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+      "title": "Licença de Instalação &#8211; Josias O. Da Silva Ltda",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "static",
+      "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+      "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "static",
+      "slug": "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+      "title": "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP",
+      "sourceName": "Tribuna do Jurua"
+    },
+    {
+      "collection": "static",
+      "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+      "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+      "sourceName": "Tribuna do Jurua"
+    }
+  ],
+  "weak": [],
+  "decision": "Cheffe Call: imagens duplicadas, ausentes ou fracas entram em fila de revisao antes de hero."
+}

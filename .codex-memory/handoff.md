@@ -1,13 +1,16 @@
 # Handoff
 
-Updated: 2026-04-24T15:27:04.048Z
+Updated: 2026-04-24T16:08:32.141Z
 
-Plano mestre de codificacao 2D consolidado. Use PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md como ordem tecnica antes de mexer no jogo. O projeto deve ficar 100% 2D: Phaser para mundo e DOM pixel art para UI.
+Rua viva fase 1 aplicada e sintaxe validada. O manifesto foi colocado em pubpaid-phaser/config/assetManifest.js porque pastas chamadas data sao privadas no server. Nao reintroduzir agentes/terminal/google ou personagens/canvas procedurais na rua.
 
 ## Next
 
-- Primeiro passo: criar mapQuerySystem.js e assetManifest.js; nao reintroduzir personagens/canvas procedural; validar porta e UI com smoke test.
+- Testar visualmente http://127.0.0.1:3000/pubpaid-v2.html; implementar HUD minimo aprovado; depois PlayerController.
 
 ## Files In Focus
 
-- PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md
+- pubpaid-phaser/scenes/StreetScene.js
+- pubpaid-phaser/systems/mapQuerySystem.js
+- pubpaid-phaser/config/assetManifest.js
+- pubpaid-phaser/config/mapTypes.js

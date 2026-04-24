@@ -1,20 +1,21 @@
 # Current State
 
-Updated: 2026-04-24T15:27:03.902Z
+Updated: 2026-04-24T16:17:07.416Z
 
 ## Active Goal
 
-- PubPaid 2.0 - plano mestre de codificacao 2D consolidado
+- PubPaid 2.0 - abertura limpa de UI antiga
 
 ## Summary
 
-A rodada de agentes de codificacao 2D foi consolidada em PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md. A ordem aprovada e: fonte unica de mapa, manifesto de assets, PlayerController, InteractionSystem, DepthSystem, spritesheets reais, UI pixel art DOM e QA smoke.
+Corrigido vazamento de painel antigo de resultado/lobby sobre a tela de abertura. A raiz data-dom-game-ui agora nasce hidden/is-hidden, o CSS respeita hidden com display none important para todos os paineis DOM e o JS mantem a raiz escondida ate lobbyPhase/currentScene exigir.
 
 ## Next
 
-- Implementar mapQuerySystem.js e assetManifest.js sem mudar visual; depois padronizar porta/interacoes; depois PlayerController e HUD minimo.
+- Usuario deve recarregar com cache novo; validar abertura sem painel antigo; depois construir HUD novo da linha visual aprovada.
 
 ## Files In Focus
 
-- PUBPAID_PLANO_MESTRE_CODIFICACAO_2D.md
-- PUBPAID_PROMPT_TREINO_CODIFICACAO_2D.md
+- pubpaid-v2.html
+- pubpaid-phaser.css
+- pubpaid-phaser/ui/domGameInterface.js

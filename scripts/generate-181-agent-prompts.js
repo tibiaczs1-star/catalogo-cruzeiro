@@ -54,7 +54,7 @@ function buildGlobalPrompt(registry) {
     "4. Se a ordem não toca sua especialidade, memória, fila ou uma ideia própria realmente útil, o agente não fala.",
     "5. Toda ideia precisa melhorar leitura, hierarquia, confiança, operação real ou sensação tecnológica.",
     "6. Efeito visual sem função deve ser cortado.",
-    "7. O resultado final deve parecer produto premium, não protótipo decorado.",
+    "7. O resultado final deve parecer produto editorial acabado, com leitura clara e utilidade real.",
     "",
     "Formato de resposta exigido:",
     "- Por que levantei a mão",

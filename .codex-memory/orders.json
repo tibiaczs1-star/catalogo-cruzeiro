@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T15:27:03.688Z",
+  "lastUpdatedAt": "2026-04-24T16:17:07.419Z",
   "orders": [
     {
       "id": "2026-04-24-agente-19-plano-continuo-treinamento-arte-pubpaid",
@@ -5516,6 +5516,72 @@
       ],
       "nextSteps": [
         "implementar mapQuerySystem e assetManifest como primeiro passo"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-dar-vida-na-rua-do-pubpaid-2-0-sem-assets-procedurais",
+      "createdAt": "2026-04-24T16:04:48.527Z",
+      "updatedAt": "2026-04-24T16:04:48.527Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos começar dando vida aquela rua; retomar trabalho",
+      "summary": "Dar vida na rua do PubPaid 2.0 sem assets procedurais",
+      "normalizedTasks": [
+        "criar mapQuerySystem",
+        "criar assetManifest",
+        "remover ligacao visual com agentes na rua",
+        "usar porta do mapa",
+        "adicionar luzes e reflexos ambientais"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/systems/mapQuerySystem.js",
+        "pubpaid-phaser/data/assetManifest.js",
+        "pubpaid-phaser/config/mapTypes.js",
+        "pubpaid-v2.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "rua",
+        "2d",
+        "phaser",
+        "mapa",
+        "ambiente"
+      ],
+      "nextSteps": [
+        "testar no navegador; depois implementar HUD minimo aprovado"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-remover-vazamento-visual-de-ui-antiga-canvas-na-abertura",
+      "createdAt": "2026-04-24T16:17:07.419Z",
+      "updatedAt": "2026-04-24T16:17:07.419Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "isso e um canva antigo, feio, e eu pedi pra sumir com eles",
+      "summary": "Remover vazamento visual de UI antiga/canvas na abertura",
+      "normalizedTasks": [
+        "esconder DOM game UI por padrao",
+        "corrigir hidden no CSS",
+        "impedir resultado/lobby aparecer antes do jogo"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/ui/domGameInterface.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "ui",
+        "bugfix",
+        "abertura"
+      ],
+      "nextSteps": [
+        "verificar visualmente abertura limpa; seguir com HUD novo aprovado"
       ],
       "notes": ""
     }

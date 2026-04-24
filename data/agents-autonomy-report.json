@@ -1,8 +1,8 @@
 {
   "ok": true,
   "trigger": "once",
-  "startedAt": "2026-04-24T11:21:34.211Z",
-  "finishedAt": "2026-04-24T11:21:34.713Z",
+  "startedAt": "2026-04-24T16:20:17.504Z",
+  "finishedAt": "2026-04-24T16:20:18.137Z",
   "actions": [
     {
       "id": "news-editorial-body",
@@ -18,13 +18,13 @@
       "status": "done",
       "totalAgents": 181,
       "totalOffices": 5,
-      "newsItems": 150
+      "newsItems": 120
     },
     {
       "id": "review-team",
       "agentGroup": "equipe local de revisao",
       "status": "done",
-      "output": "{\n  \"reportJson\": \".codex-temp/review-team/latest-report.json\",\n  \"reportMd\": \".codex-temp/review-team/latest-report.md\",\n  \"filesAudited\": 131,\n  \"totalIssues\": 1\n}"
+      "output": "{\n  \"reportJson\": \".codex-temp/review-team/latest-report.json\",\n  \"reportMd\": \".codex-temp/review-team/latest-report.md\",\n  \"filesAudited\": 134,\n  \"totalIssues\": 3\n}"
     }
   ]
 }

@@ -24,8 +24,8 @@ const AUTHORIAL_DETAIL_ARTICLES = {
     imageFocus: "center 48%",
     heroFeatured: true,
     lede: "Pixel art funciona quando cada quadrado ajuda o olho a entender forma, função e movimento; quando vira ruído, deixa de ser estilo e começa a atrapalhar a interface.",
-    summary: "Ari Pipeline, Bia Camera e Dora AI executaram a pauta na Cheffe Call e chegaram a uma decisão comum: pixel art bom não é encher a tela de detalhe, é decidir o que precisa ser lido primeiro.",
-    analysis: "A leitura autoral assinada pelos agentes nesta rodada é simples: no site, na PubPaid e nas cenas de agentes, pixel art deve servir à operação. O visual precisa criar personagem, mapa, hierarquia e clima, mas sem sacrificar leitura. A referência técnica vem de materiais clássicos da comunidade, como o tutorial de Pixel Joint sobre clusters, anti-aliasing, dithering e erros comuns, e da curadoria de Lospec, que organiza estudos de paleta, linhas, animação e sprites.",
+    summary: "A leitura central do artigo é direta: pixel art bom não é encher a tela de detalhe, é decidir o que precisa ser lido primeiro.",
+    analysis: "A leitura autoral assinada pelos agentes nesta rodada é simples: em sites, jogos e interfaces, pixel art deve servir à operação. O visual precisa criar personagem, mapa, hierarquia e clima, mas sem sacrificar leitura. A referência técnica vem de materiais clássicos da comunidade, como o tutorial de Pixel Joint sobre clusters, anti-aliasing, dithering e erros comuns, e da curadoria de Lospec, que organiza estudos de paleta, linhas, animação e sprites.",
     body: [
       "Ari Pipeline abriu a execução com a decisão de tratar pixel art como tecnologia de leitura, não como filtro retrô. Em um jogo ou interface editorial, ela trabalha com poucos blocos, contraste forte e silhueta reconhecível para que o usuário entenda onde está, quem fala e qual ação importa.",
       "O tutorial de Pixel Joint reforça pontos que aparecem direto nos nossos testes: anti-aliasing manual, dithering, clusters de pixels, banding, pillow-shading e ruído. Traduzindo para produto: se um personagem só fica bonito parado, mas some no cenário, ele falhou. Se uma textura chama mais atenção que o botão principal, ela virou obstáculo.",
@@ -41,7 +41,7 @@ const AUTHORIAL_DETAIL_ARTICLES = {
       "Na PubPaid e na Cheffe Call, arte precisa comunicar estado, direção e ação"
     ],
     development: [
-      "Criar guia interno de paleta para PubPaid, Cheffe Call e cards editoriais.",
+      "Criar um guia publico de paleta para jogos, avatares e cards editoriais.",
       "Revisar sprites por três critérios: silhueta, contraste e função na tela.",
       "Transformar cada melhoria visual em teste jogável ou navegável antes de aprovar."
     ]

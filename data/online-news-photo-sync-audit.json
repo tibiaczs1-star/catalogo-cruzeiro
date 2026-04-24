@@ -1,0 +1,478 @@
+{
+  "generatedAt": "2026-04-24T16:23:54.448Z",
+  "online": {
+    "label": "online-render",
+    "total": 120,
+    "missing": 12,
+    "sameDivisionDuplicates": 2,
+    "similarSameDivision": 0,
+    "missingItems": [
+      {
+        "slug": "rio-jurua-segue-em-elevacao-em-cruzeiro-do-sul-nesta-quinta",
+        "title": "Rio Juruá segue em elevação em Cruzeiro do Sul nesta quinta",
+        "category": "utilidade publica",
+        "sourceName": "Jurua Comunicacao",
+        "imageUrl": ""
+      },
+      {
+        "slug": "faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul",
+        "title": "Faccionada ameaça esposa de militar e é presa em Cruzeiro do Sul",
+        "category": "policia",
+        "sourceName": "Jurua Comunicacao",
+        "imageUrl": ""
+      },
+      {
+        "slug": "suspeito-de-matar-irmaos-e-encontrado-morto-em-cela-em-boca-do-acre",
+        "title": "Suspeito de matar irmãos é encontrado morto em cela em Boca do Acre",
+        "category": "policia",
+        "sourceName": "Jurua Comunicacao",
+        "imageUrl": ""
+      },
+      {
+        "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+        "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+        "category": "policia",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+        "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+        "category": "policia",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "saude-25-agosto-ubs",
+        "title": "UBS do 25 de Agosto promove dia de saúde em movimento para idosos",
+        "category": "saude",
+        "sourceName": "Juruá Online",
+        "imageUrl": ""
+      },
+      {
+        "slug": "eja-czs-superacao",
+        "title": "Histórias de superação na EJA de Cruzeiro do Sul inspiram novos estudantes",
+        "category": "educacao",
+        "sourceName": "Agência Acre",
+        "imageUrl": ""
+      },
+      {
+        "slug": "ifac-auxilio-cheia",
+        "title": "Ifac anuncia auxílio emergencial para estudantes afetados pela cheia",
+        "category": "educacao",
+        "sourceName": "Juruá Online",
+        "imageUrl": ""
+      },
+      {
+        "slug": "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+        "title": "Licença de Instalação &#8211; Josias O. Da Silva Ltda",
+        "category": "utilidade publica",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+        "title": "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP",
+        "category": "utilidade publica",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "fila-ovos-pascoa",
+        "title": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
+        "category": "social",
+        "sourceName": "ac24horas",
+        "imageUrl": ""
+      },
+      {
+        "slug": "credenciamento-pareceristas-culturais",
+        "title": "Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais",
+        "category": "cultura",
+        "sourceName": "ac24horas",
+        "imageUrl": ""
+      }
+    ],
+    "sameDivision": [
+      {
+        "key": "utilidade publica|https://jurua24horas.com/wp-content/uploads/2026/04/whatsapp-image-2026-04-23-at-13.55.00.jpeg",
+        "count": 2,
+        "uniqueSlugs": 2,
+        "category": "utilidade publica",
+        "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-13.55.00-1024x682.jpeg",
+        "items": [
+          {
+            "slug": "prefeitura-e-governo-abrem-jogos-escolares-2026-em-cruzeiro-do-sul",
+            "title": "Prefeitura e governo abrem Jogos Escolares 2026 em Cruzeiro do Sul",
+            "category": "utilidade publica",
+            "sourceName": "Jurua 24 Horas",
+            "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-13.55.00-1024x682.jpeg"
+          },
+          {
+            "slug": "defesa-civil-estadual-reforca-acoes-de-prevencao-em-visita-a-mancio-lima",
+            "title": "Defesa Civil Estadual reforça ações de prevenção em visita à Mâncio Lima",
+            "category": "utilidade publica",
+            "sourceName": "Jurua 24 Horas",
+            "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-13.55.00-1024x682.jpeg"
+          }
+        ]
+      },
+      {
+        "key": "utilidade publica|https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
+        "count": 4,
+        "uniqueSlugs": 4,
+        "category": "utilidade publica",
+        "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg",
+        "items": [
+          {
+            "slug": "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse",
+            "title": "Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          },
+          {
+            "slug": "edital-de-eleicao-e-posse-8211-ascak",
+            "title": "EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          },
+          {
+            "slug": "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua",
+            "title": "EDITAL DE CONVOCAÇÃO DA ASSEMBLEIA GERAL EXTRAORDINÁRIA &#8211; COOPERTRANSGUA",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg"
+          },
+          {
+            "slug": "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+            "title": "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          }
+        ]
+      }
+    ],
+    "similar": []
+  },
+  "localRuntime": {
+    "label": "local-runtime",
+    "total": 120,
+    "missing": 4,
+    "sameDivisionDuplicates": 3,
+    "similarSameDivision": 0,
+    "missingItems": [
+      {
+        "slug": "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+        "title": "Licença de Instalação &#8211; Josias O. Da Silva Ltda",
+        "category": "utilidade publica",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+        "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+        "category": "policia",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+        "title": "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP",
+        "category": "utilidade publica",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+        "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+        "category": "policia",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      }
+    ],
+    "sameDivision": [
+      {
+        "key": "utilidade publica|https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
+        "count": 4,
+        "uniqueSlugs": 4,
+        "category": "utilidade publica",
+        "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
+        "items": [
+          {
+            "slug": "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua",
+            "title": "EDITAL DE CONVOCAÇÃO DA ASSEMBLEIA GERAL EXTRAORDINÁRIA &#8211; COOPERTRANSGUA",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg"
+          },
+          {
+            "slug": "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+            "title": "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          },
+          {
+            "slug": "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse",
+            "title": "Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          },
+          {
+            "slug": "edital-de-eleicao-e-posse-8211-ascak",
+            "title": "EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          }
+        ]
+      },
+      {
+        "key": "educacao|https://agenciabrasil.ebc.com.br/ebc.png",
+        "count": 3,
+        "uniqueSlugs": 3,
+        "category": "educacao",
+        "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687114&o=rss",
+        "items": [
+          {
+            "slug": "pesquisadores-defendem-caminhos-para-gestao-publica-antirracista",
+            "title": "Pesquisadores defendem caminhos para gestão pública antirracista",
+            "category": "educacao",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687114&o=rss"
+          },
+          {
+            "slug": "alunos-da-usp-protestam-por-melhores-condicoes-de-moradia-e-refeicoes",
+            "title": "Alunos da USP protestam por melhores condições de moradia e refeições",
+            "category": "educacao",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687110&o=rss"
+          },
+          {
+            "slug": "mec-livros-tera-acervo-ampliado-para-25-mil-obras",
+            "title": "MEC Livros terá acervo ampliado para 25 mil obras",
+            "category": "educacao",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687106&o=rss"
+          }
+        ]
+      },
+      {
+        "key": "negocios|https://agenciabrasil.ebc.com.br/ebc.png",
+        "count": 5,
+        "uniqueSlugs": 5,
+        "category": "negocios",
+        "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687113&o=rss",
+        "items": [
+          {
+            "slug": "cmn-libera-linha-de-capital-de-giro-a-cooperativas-de-leite-no-pronaf",
+            "title": "CMN libera linha de capital de giro a cooperativas de leite no Pronaf",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687113&o=rss"
+          },
+          {
+            "slug": "caixa-paga-bolsa-familia-a-beneficiarios-com-nis-de-final-6",
+            "title": "Caixa paga Bolsa Família a beneficiários com NIS de final 6",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687047&o=rss"
+          },
+          {
+            "slug": "cmn-amplia-incentivo-nacional-em-linha-de-credito-do-fat-para-inovacao",
+            "title": "CMN amplia incentivo nacional em linha de crédito do FAT para inovação",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687115&o=rss"
+          },
+          {
+            "slug": "aposentados-e-pensionistas-do-inss-comecam-a-receber-13-nesta-sexta",
+            "title": "Aposentados e pensionistas do INSS começam a receber 13º nesta sexta",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687063&o=rss"
+          },
+          {
+            "slug": "mega-sena-acumulada-vai-sortear-r-100-milhoes-no-proximo-sabado",
+            "title": "Mega-Sena acumulada vai sortear R$ 100 milhões no próximo sábado",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687107&o=rss"
+          }
+        ]
+      }
+    ],
+    "similar": []
+  },
+  "localStatic": {
+    "label": "local-static",
+    "total": 120,
+    "missing": 4,
+    "sameDivisionDuplicates": 3,
+    "similarSameDivision": 0,
+    "missingItems": [
+      {
+        "slug": "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+        "title": "Licença de Instalação &#8211; Josias O. Da Silva Ltda",
+        "category": "utilidade publica",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+        "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+        "category": "policia",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+        "title": "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP",
+        "category": "utilidade publica",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      },
+      {
+        "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+        "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+        "category": "policia",
+        "sourceName": "Tribuna do Jurua",
+        "imageUrl": ""
+      }
+    ],
+    "sameDivision": [
+      {
+        "key": "utilidade publica|https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
+        "count": 4,
+        "uniqueSlugs": 4,
+        "category": "utilidade publica",
+        "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg",
+        "items": [
+          {
+            "slug": "edital-de-convocacao-da-assembleia-geral-extraordinaria-8211-coopertransgua",
+            "title": "EDITAL DE CONVOCAÇÃO DA ASSEMBLEIA GERAL EXTRAORDINÁRIA &#8211; COOPERTRANSGUA",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2.jpg"
+          },
+          {
+            "slug": "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+            "title": "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          },
+          {
+            "slug": "edital-de-convocacao-8211-assembleia-geral-de-eleicao-e-posse",
+            "title": "Edital de Convocação &#8211; Assembleia Geral de Eleição e Posse",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          },
+          {
+            "slug": "edital-de-eleicao-e-posse-8211-ascak",
+            "title": "EDITAL DE ELEIÇAO E POSSE &#8211; ASCAK",
+            "category": "utilidade publica",
+            "sourceName": "Tribuna do Jurua",
+            "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/edital-assinado-2-360x180.jpg"
+          }
+        ]
+      },
+      {
+        "key": "educacao|https://agenciabrasil.ebc.com.br/ebc.png",
+        "count": 3,
+        "uniqueSlugs": 3,
+        "category": "educacao",
+        "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687114&o=rss",
+        "items": [
+          {
+            "slug": "pesquisadores-defendem-caminhos-para-gestao-publica-antirracista",
+            "title": "Pesquisadores defendem caminhos para gestão pública antirracista",
+            "category": "educacao",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687114&o=rss"
+          },
+          {
+            "slug": "alunos-da-usp-protestam-por-melhores-condicoes-de-moradia-e-refeicoes",
+            "title": "Alunos da USP protestam por melhores condições de moradia e refeições",
+            "category": "educacao",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687110&o=rss"
+          },
+          {
+            "slug": "mec-livros-tera-acervo-ampliado-para-25-mil-obras",
+            "title": "MEC Livros terá acervo ampliado para 25 mil obras",
+            "category": "educacao",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687106&o=rss"
+          }
+        ]
+      },
+      {
+        "key": "negocios|https://agenciabrasil.ebc.com.br/ebc.png",
+        "count": 5,
+        "uniqueSlugs": 5,
+        "category": "negocios",
+        "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687113&o=rss",
+        "items": [
+          {
+            "slug": "cmn-libera-linha-de-capital-de-giro-a-cooperativas-de-leite-no-pronaf",
+            "title": "CMN libera linha de capital de giro a cooperativas de leite no Pronaf",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687113&o=rss"
+          },
+          {
+            "slug": "caixa-paga-bolsa-familia-a-beneficiarios-com-nis-de-final-6",
+            "title": "Caixa paga Bolsa Família a beneficiários com NIS de final 6",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687047&o=rss"
+          },
+          {
+            "slug": "cmn-amplia-incentivo-nacional-em-linha-de-credito-do-fat-para-inovacao",
+            "title": "CMN amplia incentivo nacional em linha de crédito do FAT para inovação",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687115&o=rss"
+          },
+          {
+            "slug": "aposentados-e-pensionistas-do-inss-comecam-a-receber-13-nesta-sexta",
+            "title": "Aposentados e pensionistas do INSS começam a receber 13º nesta sexta",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687063&o=rss"
+          },
+          {
+            "slug": "mega-sena-acumulada-vai-sortear-r-100-milhoes-no-proximo-sabado",
+            "title": "Mega-Sena acumulada vai sortear R$ 100 milhões no próximo sábado",
+            "category": "negocios",
+            "sourceName": "Agencia Brasil",
+            "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687107&o=rss"
+          }
+        ]
+      }
+    ],
+    "similar": []
+  },
+  "localAfterRepairAt": "2026-04-24T16:27:18.171Z",
+  "localRuntimeAfterRepair": {
+    "label": "local-runtime-after-repair",
+    "total": 120,
+    "missing": 0,
+    "sameDivisionDuplicates": 0,
+    "missingItems": [],
+    "sameDivision": []
+  },
+  "localStaticAfterRepair": {
+    "label": "local-static-after-repair",
+    "total": 120,
+    "missing": 0,
+    "sameDivisionDuplicates": 0,
+    "missingItems": [],
+    "sameDivision": []
+  }
+}
