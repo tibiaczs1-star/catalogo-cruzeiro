@@ -4358,7 +4358,8 @@ body.cheffe-call-page {
   gap: 6px;
 }
 
-.call-command-field span {
+.call-command-field span,
+.call-command-field > label {
   color: rgba(223, 249, 255, 0.72);
   font-size: 0.7rem;
   font-weight: 900;
@@ -6866,8 +6867,68 @@ body.call-lower-open .call-lower-decks {
   margin: 0 8px 16px !important;
   transform: none !important;
   min-height: 74px !important;
-  grid-template-columns: minmax(0, 1fr) auto !important;
+  grid-template-columns: minmax(150px, 0.22fr) minmax(0, 1fr) auto !important;
   padding: 12px 14px !important;
+}
+
+.call-command-bar.is-pulsing {
+  border-color: rgba(244, 201, 107, 0.66) !important;
+  box-shadow:
+    0 0 0 2px rgba(244, 201, 107, 0.18),
+    0 18px 46px rgba(0, 0, 0, 0.36) !important;
+}
+
+.call-command-password {
+  max-width: 220px !important;
+}
+
+.call-command-password-row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 58px !important;
+  gap: 8px !important;
+  align-items: center !important;
+}
+
+.call-command-password input {
+  min-height: 48px !important;
+  border-color: rgba(244, 201, 107, 0.26) !important;
+  background:
+    linear-gradient(180deg, rgba(36, 22, 13, 0.86), rgba(6, 9, 15, 0.94)),
+    rgba(244, 201, 107, 0.05) !important;
+}
+
+.call-command-password-row button {
+  min-width: 58px !important;
+  min-height: 48px !important;
+  padding: 0 10px !important;
+  border-color: rgba(244, 201, 107, 0.42) !important;
+  color: #201018 !important;
+  background: var(--call-gold) !important;
+}
+
+.call-command-password-row button:disabled {
+  cursor: wait !important;
+  opacity: 0.62 !important;
+}
+
+.call-password-status {
+  min-height: 15px !important;
+  color: rgba(223, 249, 255, 0.68) !important;
+  font-size: 0.68rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+}
+
+.call-password-status[data-tone="ok"] {
+  color: var(--call-green) !important;
+}
+
+.call-password-status[data-tone="bad"] {
+  color: var(--call-red) !important;
+}
+
+.call-password-status[data-tone="pending"] {
+  color: var(--call-gold) !important;
 }
 
 @media (max-width: 1500px) {
@@ -7263,8 +7324,8 @@ body.call-lower-open .call-lower-decks {
 .seat-agent:nth-child(n + 55):nth-child(-n + 126) .call-agent-sprite,
 .seat-agent:nth-child(n + 127) .call-agent-sprite {
   left: calc(50% + var(--seat-x, 0px)) !important;
-  top: calc(7px + var(--seat-y, 0px)) !important;
-  transform: translateX(-50%) scale(var(--seat-scale, 0.92)) !important;
+  top: calc(2px + var(--seat-y, 0px)) !important;
+  transform: translateX(-50%) scale(var(--seat-scale, 1)) !important;
   transform-origin: center bottom !important;
 }
 
@@ -7312,8 +7373,9 @@ body.call-lower-open .call-lower-decks {
 }
 
 .seat-agent .call-agent-photo-token {
-  right: calc(50% - var(--seat-x, 0px) - 1px) !important;
-  top: calc(1px + var(--seat-y, 0px)) !important;
+  right: calc(50% - var(--seat-x, 0px)) !important;
+  top: calc(0px + var(--seat-y, 0px)) !important;
+  transform: translateX(50%) scale(1.08) !important;
   opacity: 0.62 !important;
 }
 
@@ -7321,7 +7383,7 @@ body.call-lower-open .call-lower-decks {
 .seat-agent.is-hand-raised .call-agent-sprite,
 .seat-agent.is-implementing .call-agent-sprite {
   left: calc(50% + var(--seat-x, 0px)) !important;
-  transform: translateX(-50%) scale(calc(var(--seat-scale, 0.92) + 0.18)) !important;
+  transform: translateX(-50%) scale(calc(var(--seat-scale, 1) + 0.16)) !important;
   z-index: 22 !important;
 }
 

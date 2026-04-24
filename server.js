@@ -89,7 +89,7 @@ const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   : 5 * 60 * 1000;
-const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "").toLowerCase() === "true";
+const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
 const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_INTERVAL_MS || 30 * 60 * 1000);
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
@@ -7023,64 +7023,102 @@ function getCheffeCallOpinions(payload, instruction) {
         }
       ];
 
-  const subject = cleanShortText(instruction || "tema de hoje", 140);
-  const angles = [
-    {
-      match: /\b(ceo|coord|gest|admin|owner|lead|produtor)\b/i,
-      text: (item) =>
-        `${item.intent || "Organizo a prioridade da rodada"}. Sobre "${subject}", eu separaria em decisao principal, risco e primeira entrega aprovada antes de chamar execucao.`
-    },
-    {
-      match: /\b(editor|jornal|news|redac|manchete|copy|texto|foto)\b/i,
-      text: (item) =>
-        `${item.intent || "Cuido da leitura publica"}. Sobre "${subject}", eu ajustaria a mensagem para o visitante entender em 5 segundos o que precisa pedir aos agentes.`
-    },
-    {
-      match: /\b(review|revis|proof|qualidade|clean|tag)\b/i,
-      text: (item) =>
-        `${item.intent || "Procuro falhas antes de publicar"}. Sobre "${subject}", minha prioridade e cortar repeticao, marcar o que falta e impedir que resposta generica passe como opiniao.`
-    },
-    {
-      match: /\b(arte|design|pixel|sprite|visual|modelo|foto)\b/i,
-      text: (item) =>
-        `${item.intent || "Olho a cena e a identidade visual"}. Sobre "${subject}", eu deixaria cada agente reconhecivel, com pose propria, destaque de fala e foto/premio visivel.`
-    },
-    {
-      match: /\b(dev|code|sistema|autom|terminal|tech|acesso)\b/i,
-      text: (item) =>
-        `${item.intent || "Ligo a conversa ao terminal"}. Sobre "${subject}", eu criaria comandos separados por agente e registraria entrada, resposta, status e proxima acao.`
-    },
-    {
-      match: /\b(ninja|fonte|proof|segur|audit|chec)\b/i,
-      text: (item) =>
-        `${item.intent || "Valido risco e fonte"}. Sobre "${subject}", eu exigiria evidencia do que foi decidido e deixaria claro o que ainda depende da sua aprovacao.`
-    }
+  const subject = cleanShortText(instruction || "tema de hoje", 180);
+  const subjectTokens = new Set(
+    String(subject)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((token) => token.length >= 4)
+  );
+  const actionMemory = Array.isArray(payload.executableActions) ? payload.executableActions : [];
+  const queueMemory = Array.isArray(payload.queue) ? payload.queue : [];
+  const roleFocus = [
+    { role: /\b(ceo|lead|coord|produtor)\b/i, words: ["prioridade", "reuniao", "decisao", "fluxo"], lens: "prioridade e decisão" },
+    { role: /\b(dev|code|sistema|autom|terminal)\b/i, words: ["comando", "terminal", "api", "senha", "botao", "fluxo", "funciona"], lens: "fluxo técnico e API" },
+    { role: /\b(review|revis|proof|audit|segur|qualidade)\b/i, words: ["erro", "falha", "nao", "quebrado", "validar", "risco"], lens: "risco e validação" },
+    { role: /\b(copy|texto|editor|jornal|manchete)\b/i, words: ["fala", "opiniao", "texto", "prompt", "mensagem"], lens: "clareza da fala" },
+    { role: /\b(arte|design|pixel|visual|foto)\b/i, words: ["avatar", "cadeira", "visual", "cena", "layout"], lens: "encaixe visual" },
+    { role: /\b(sources|fonte|ninja)\b/i, words: ["fonte", "evidencia", "memoria", "historico", "rastrear"], lens: "evidência e memória" }
   ];
-  const fallbackAngles = [
-    (item) =>
-      `${item.intent || "Escutei o tema"}. Sobre "${subject}", eu proponho transformar a fala em uma tarefa pequena, com dono e criterio de aceite.`,
-    (item) =>
-      `${item.intent || "Estou acompanhando"}. Sobre "${subject}", eu vejo valor em comparar duas alternativas antes de mexer no site.`,
-    (item) =>
-      `${item.intent || "Entrei na reuniao"}. Sobre "${subject}", minha sugestao e responder curto, mostrar impacto e pedir permissao para executar.`,
-    (item) =>
-      `${item.intent || "Analisei o pedido"}. Sobre "${subject}", eu faria uma rodada de opinioes por area e destacaria divergencias em vez de repetir consenso.`
-  ];
+  const ideaTriggers = new Set(["ideia", "ideias", "sugestao", "melhorar", "criar", "fazer", "resolver", "como", "novo", "fluxo", "visual", "comando"]);
 
-  return source.map((item, index) => {
-    const signature = `${item.name || ""} ${item.office || ""} ${item.role || ""}`;
-    const angle = angles.find((entry) => entry.match.test(signature));
-    const opinion = angle ? angle.text(item) : fallbackAngles[index % fallbackAngles.length](item);
-    return {
-      agent: item.name,
-      office: item.office,
-      role: item.role,
-      score: item.autonomy,
-      urgency: item.urgency,
-      opinion,
-      approvalRequired: true
-    };
-  });
+  const memoryMatchesAgent = (item) => {
+    const haystack = actionMemory
+      .concat(queueMemory)
+      .filter((entry) => (
+        String(entry.agent || entry.name || "").toLowerCase() === String(item.name || "").toLowerCase() ||
+        String(entry.office || entry.officeLabel || "").toLowerCase() === String(item.office || "").toLowerCase()
+      ))
+      .map((entry) => cleanShortText(entry.title || entry.action || entry.message || entry.text || entry.status || "", 160))
+      .filter(Boolean);
+    return haystack.slice(0, 2);
+  };
+
+  const useful = source
+    .map((item) => {
+      const signature = `${item.name || ""} ${item.office || ""} ${item.role || ""} ${item.intent || ""}`;
+      const normalizedSignature = signature
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+      const focus = roleFocus.find((entry) => entry.role.test(signature) || entry.words.some((word) => subjectTokens.has(word)));
+      const matchingTokens = [...subjectTokens].filter((token) => normalizedSignature.includes(token)).slice(0, 4);
+      const memories = memoryMatchesAgent(item);
+      const hasDirectUse = Boolean(focus && focus.words.some((word) => subjectTokens.has(word)));
+      const hasMemory = memories.length > 0;
+      const hasOwnIdea = Boolean(focus && [...subjectTokens].some((token) => ideaTriggers.has(token)));
+      const highUrgency = Number(item.urgency || 0) >= 76;
+      if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency) return null;
+      const evidence = hasMemory
+        ? `memória: ${memories.join(" | ")}`
+        : hasOwnIdea
+          ? `ideia própria ligada à especialidade (${focus?.lens || "triagem"})`
+          : matchingTokens.length
+          ? `conecta com: ${matchingTokens.join(", ")}`
+          : `urgência operacional ${Number(item.urgency || 0)}%`;
+      const nextAction = focus?.lens === "fluxo técnico e API"
+        ? "testar o clique contra endpoint real e mostrar sucesso/erro na interface"
+        : focus?.lens === "risco e validação"
+          ? "bloquear fala sem evidência e registrar o motivo no log"
+          : focus?.lens === "encaixe visual"
+            ? "ajustar só o ponto visual que afeta a leitura da cena"
+            : focus?.lens === "clareza da fala"
+              ? "reescrever a resposta como diagnóstico curto, não discurso"
+              : "transformar a ordem em decisão rastreável com dono";
+      return {
+        agent: item.name,
+        office: item.office,
+        role: item.role,
+        score: item.autonomy,
+        urgency: item.urgency,
+        evidence,
+        opinion: [
+          `Levanto a mão porque tenho ${evidence}.`,
+          `Meu foco em "${subject}" é ${focus?.lens || "memória operacional"}, não opinião genérica.`,
+          `Próxima ação útil: ${nextAction}.`,
+          hasOwnIdea ? `Minha ideia só entra se você quiser testar essa hipótese na próxima rodada.` : `Se isso não tocar a ordem atual, eu fico em silêncio.`
+        ].join(" "),
+        approvalRequired: true
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => Number(b.urgency || 0) - Number(a.urgency || 0))
+    .slice(0, 8);
+
+  return useful.length
+    ? useful
+    : [{
+        agent: "Cheffe Call",
+        office: "Sistema",
+        role: "triagem",
+        score: 0,
+        urgency: 0,
+        evidence: "nenhum agente encontrou memória ou ligação direta com a ordem",
+        opinion: `Nenhum agente deve levantar a mão agora: não há memória, ação pendente ou evidência ligada a "${subject}". Refine a ordem ou rode os agentes reais para gerar memória nova.`,
+        approvalRequired: false
+      }];
 }
 
 function buildCheffeCallPayload() {

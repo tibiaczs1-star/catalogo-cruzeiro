@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260423admin-functional" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260424-prompt-console-real" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -503,6 +503,20 @@
       </section>
 
       <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de comando rápida">
+        <div class="call-command-field call-command-password">
+          <label for="quickPasswordInput">Senha Full Admin</label>
+          <div class="call-command-password-row">
+            <input
+              id="quickPasswordInput"
+              name="quickPassword"
+              type="password"
+              placeholder="Senha"
+              autocomplete="current-password"
+            />
+            <button type="button" id="quickPasswordConfirm">OK</button>
+          </div>
+          <small id="quickPasswordStatus" class="call-password-status" aria-live="polite">Aguardando senha.</small>
+        </div>
         <label class="call-command-field">
           <span>Comando rápido</span>
           <input
@@ -524,6 +538,6 @@
     </main>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260423admin-functional"></script>
+    <script defer src="cheffe-call.js?v=20260424-prompt-console-real"></script>
   </body>
 </html>

@@ -25,6 +25,9 @@
   const hudToggleEl = document.querySelector("#toggleHudMode");
   const lowerDecksToggleEl = document.querySelector("#toggleLowerDecks");
   const commandBarEl = document.querySelector("#cheffeCommandBar");
+  const quickPasswordInput = document.querySelector("#quickPasswordInput");
+  const quickPasswordConfirm = document.querySelector("#quickPasswordConfirm");
+  const quickPasswordStatus = document.querySelector("#quickPasswordStatus");
   const quickInstructionInput = document.querySelector("#quickInstructionInput");
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
@@ -261,15 +264,25 @@
     statusEl.style.color = tone === "bad" ? "var(--call-red)" : tone === "ok" ? "var(--call-green)" : "";
   }
 
+  function setPasswordStatus(message, tone) {
+    if (!quickPasswordStatus) return;
+    quickPasswordStatus.textContent = message;
+    quickPasswordStatus.dataset.tone = tone || "";
+  }
+
   function getAdminPassword() {
     const formPassword = formEl ? String(new FormData(formEl).get("password") || "").trim() : "";
-    return formPassword || cheffeAdminPassword;
+    const quickPassword = quickPasswordInput ? String(quickPasswordInput.value || "").trim() : "";
+    return quickPassword || formPassword || cheffeAdminPassword;
   }
 
   function rememberAdminPassword(password) {
     const cleanPassword = String(password || "").trim();
     if (!cleanPassword) return;
     cheffeAdminPassword = cleanPassword;
+    if (quickPasswordInput && quickPasswordInput.value !== cleanPassword) quickPasswordInput.value = cleanPassword;
+    const formPasswordInput = formEl?.querySelector('[name="password"]');
+    if (formPasswordInput && formPasswordInput.value !== cleanPassword) formPasswordInput.value = cleanPassword;
     try {
       window.sessionStorage.setItem("cheffeCallFullAdminPassword", cleanPassword);
     } catch (_error) {
@@ -277,11 +290,38 @@
     }
   }
 
+  async function validateAdminPassword(password) {
+    const response = await fetch("/api/real-agents/access", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ password }),
+      cache: "no-store"
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Senha Full Admin recusada.");
+    }
+    return payload;
+  }
+
+  async function loadRealAgentsReport(password) {
+    const response = await fetch(`/api/real-agents?password=${encodeURIComponent(password)}`, {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Nao foi possivel carregar agentes reais.");
+    }
+    return payload;
+  }
+
   function requireAdminPassword(actionLabel = "operar a Cheffe Call") {
     const password = getAdminPassword();
     if (password) return password;
     setStatus(`Digite a senha Full Admin para ${actionLabel}.`, "bad");
-    formEl?.querySelector('[name="password"]')?.focus();
+    setPasswordStatus("Senha obrigatória.", "bad");
+    (quickPasswordInput || formEl?.querySelector('[name="password"]'))?.focus();
     return "";
   }
 
@@ -290,6 +330,25 @@
     if (promptPreviewTitle) promptPreviewTitle.textContent = activePromptPayload.title || "Prompt";
     if (promptPreviewBadge) promptPreviewBadge.textContent = activePromptPayload.badge || "Cheffe Call";
     if (promptPreviewText) promptPreviewText.textContent = activePromptPayload.text || "";
+  }
+
+  function getActivePromptText() {
+    return String(activePromptPayload?.text || promptPreviewText?.textContent || "").trim();
+  }
+
+  function syncVisibleInstruction(value) {
+    const text = String(value || "").trim();
+    if (instructionInput) instructionInput.value = text;
+    if (quickInstructionInput) quickInstructionInput.value = text;
+    quickInstructionInput?.focus();
+  }
+
+  function setCommandBarPulse() {
+    commandBarEl?.classList.remove("is-pulsing");
+    window.requestAnimationFrame(() => {
+      commandBarEl?.classList.add("is-pulsing");
+      window.setTimeout(() => commandBarEl?.classList.remove("is-pulsing"), 1200);
+    });
   }
 
   function fillSelect(select, options, placeholder) {
@@ -639,11 +698,10 @@
           const isSpeaking = speakerNames.includes(name);
           const row = Math.floor(index / columns);
           const column = index % columns;
-          const centerOffset = column - (columns - 1) / 2;
           const depth = totalSeats > columns ? row / Math.max(1, Math.ceil(totalSeats / columns) - 1) : 0;
-          const seatX = Math.round(centerOffset * (depth > 0.64 ? 1.35 : depth > 0.32 ? 1.1 : 0.82));
-          const seatY = Math.round((depth - 0.5) * 9);
-          const seatScale = Number((0.72 + depth * 0.46).toFixed(2));
+          const seatX = -8;
+          const seatY = Math.round((depth - 0.5) * 4);
+          const seatScale = Number((0.78 + depth * 0.3).toFixed(2));
           return `<span class="seat-agent has-sprite ${isSpeaking ? "is-speaking" : ""}" data-agent-index="${index}" data-agent-name="${escapeHtml(name)}" title="${escapeHtml(
             `${name} • ${getAgentOffice(agent)}`
           )}" style="--agent-color:${colors[index % colors.length]};--agent-hair:${
@@ -1536,12 +1594,39 @@
     syncGameShellState();
   }
 
+  function activateMeetingResponse(instruction, payload) {
+    const subject = String(instruction || payload?.meeting?.lastInstruction || "ordem recebida").trim();
+    const session = payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
+    const opinions = normalizeOpinions(payload?.opinions || session?.opinions || [], subject);
+    if (!opinions.length) {
+      setStatus("Reunião aberta, mas nenhum agente retornou fala ainda.", "bad");
+      return;
+    }
+    setSpeakerQueue(opinions, true);
+    const active = opinions[0];
+    raisedHandName = getAgentDisplayName(active);
+    raisedHandQueue = opinions.slice(1, 5).map((item) => getAgentDisplayName(item)).filter(Boolean);
+    refreshRaisedHandQueue();
+    applyAudienceStates();
+    showActiveSpeaker();
+    addMeetingLog({
+      kindLabel: "ordem recebida",
+      agent: "Full Admin",
+      text: subject
+    });
+    addMeetingLog({
+      kindLabel: "primeira reação",
+      agent: getAgentDisplayName(active),
+      text: active.opinion || ""
+    });
+    setStatus(`${getAgentDisplayName(active)} respondeu. Use Próximo para ouvir os outros agentes.`, "ok");
+  }
+
   async function loadCall() {
     const password = getAdminPassword();
-    const realUrl = password ? `/api/real-agents?password=${encodeURIComponent(password)}` : "";
     const [callResult, realResult] = await Promise.allSettled([
       fetch("/api/cheffe-call", { headers: { Accept: "application/json" } }),
-      realUrl ? fetch(realUrl, { headers: { Accept: "application/json" } }) : Promise.resolve(null)
+      password ? loadRealAgentsReport(password) : Promise.resolve(null)
     ]);
     if (callResult.status !== "fulfilled") throw new Error("Nao foi possivel carregar a Cheffe Call.");
 
@@ -1550,7 +1635,7 @@
 
     let realPayload = null;
     if (realResult.status === "fulfilled" && realResult.value?.ok) {
-      realPayload = await realResult.value.json();
+      realPayload = realResult.value;
     }
     render(mergeCheffeAndRealPayload(callPayload, realPayload));
   }
@@ -1615,10 +1700,55 @@
     const password = requireAdminPassword("enviar ordem rápida real");
     if (!password) return;
     if (instructionInput) instructionInput.value = quickInstruction;
-    setStatus("Enviando ordem rápida real para a Cheffe Call...");
-    postCall("/api/cheffe-call/start", { password, instruction: quickInstruction }).catch((error) =>
-      setStatus(error.message, "bad")
-    );
+    setStatus("Enviando ordem rápida real para os agentes...");
+    postCall("/api/cheffe-call/start", { password, instruction: quickInstruction })
+      .then((payload) => activateMeetingResponse(quickInstruction, payload))
+      .catch((error) => setStatus(error.message, "bad"));
+  });
+
+  quickPasswordConfirm?.addEventListener("click", async () => {
+    const password = String(quickPasswordInput?.value || "").trim();
+    if (!password) {
+      setStatus("Digite a senha Full Admin e clique em OK.", "bad");
+      setPasswordStatus("Digite a senha primeiro.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    quickPasswordConfirm.disabled = true;
+    setPasswordStatus("Validando senha...", "pending");
+    setStatus("Validando senha Full Admin...");
+    try {
+      await validateAdminPassword(password);
+      rememberAdminPassword(password);
+      const openPayload = await postCall("/api/cheffe-call/start", {
+        password,
+        instruction: quickInstructionInput?.value || "Cheffe Call aberta. Aguardando ordem do Full Admin."
+      });
+      setPasswordStatus("Senha validada. Reunião aberta.", "ok");
+      if (quickInstructionInput?.value) {
+        activateMeetingResponse(quickInstructionInput.value, openPayload);
+      } else {
+        setStatus("Senha validada. Reunião aberta: escreva a ordem e clique Enviar.", "ok");
+      }
+    } catch (error) {
+      cheffeAdminPassword = "";
+      try {
+        window.sessionStorage.removeItem("cheffeCallFullAdminPassword");
+      } catch (_storageError) {
+        // ignore storage failures
+      }
+      setPasswordStatus(error.message || "Senha recusada.", "bad");
+      setStatus(error.message || "Senha Full Admin recusada.", "bad");
+      quickPasswordInput?.focus();
+    } finally {
+      quickPasswordConfirm.disabled = false;
+    }
+  });
+
+  quickPasswordInput?.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    quickPasswordConfirm?.click();
   });
 
   sendTerminalEl?.addEventListener("click", () => {
@@ -1855,21 +1985,49 @@
   });
 
   loadPromptToInstruction?.addEventListener("click", () => {
-    if (!instructionInput) return;
-    instructionInput.value = activePromptPayload.text || "";
-    instructionInput.focus();
-    setStatus("Prompt carregado no assunto da reunião.", "ok");
+    const promptText = getActivePromptText();
+    if (!promptText) {
+      setStatus("Escolha um prompt antes de jogar no assunto.", "bad");
+      return;
+    }
+    syncVisibleInstruction(promptText);
+    setCommandBarPulse();
+    setStatus("Prompt jogado no Comando rápido. Clique Enviar para falar com os agentes.", "ok");
   });
 
   loadPromptToTerminal?.addEventListener("click", () => {
-    if (!commandInput) return;
-    commandInput.value = activePromptPayload.text || "";
-    commandInput.focus();
-    setStatus("Prompt carregado no terminal da sala.", "ok");
+    const promptText = getActivePromptText();
+    if (!promptText) {
+      setStatus("Escolha um prompt antes de jogar no terminal.", "bad");
+      return;
+    }
+    if (commandInput) commandInput.value = promptText;
+    syncVisibleInstruction(promptText);
+    setCommandBarPulse();
+    const password = getAdminPassword();
+    if (!password) {
+      setStatus("Prompt pronto no Comando rápido. Valide a senha e clique Enviar.", "bad");
+      setPasswordStatus("Senha obrigatória para enviar ao terminal.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    setStatus("Enviando prompt ao terminal real da Cheffe Call...");
+    postCall("/api/cheffe-call/start", { password, instruction: promptText })
+      .then((payload) => {
+        activateMeetingResponse(promptText, payload);
+        const active = currentOpinions[activeSpeakerIndex] || null;
+        return postRoomAction("terminal", active, {
+          title: activePromptPayload.title || "Prompt enviado ao terminal",
+          command: promptText,
+          prompt: promptText
+        });
+      })
+      .then(() => setStatus("Prompt enviado ao terminal e agentes reagiram.", "ok"))
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   copyPromptText?.addEventListener("click", async () => {
-    const copied = await copyText(activePromptPayload.text || "");
+    const copied = await copyText(getActivePromptText());
     setStatus(copied ? "Prompt copiado para a área de transferência." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
   });
 
