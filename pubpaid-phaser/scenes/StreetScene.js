@@ -1,8 +1,14 @@
 import { GAME_HEIGHT, GAME_WIDTH, STREET_BOUNDS } from "../config/gameConfig.js";
-import { isPointWalkable, STREET_SCENE_MAP } from "../config/sceneMap.js";
 import { ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
 import { updateGameState } from "../core/gameState.js";
-const PUB_DOOR = STREET_SCENE_MAP.interactionPoints.find((point) => point.id === "street_pub_door");
+import {
+  getInteractionAt,
+  getInteractionById,
+  getNearestInteraction,
+  isWalkable
+} from "../systems/mapQuerySystem.js";
+
+const PUB_DOOR = getInteractionById("street", "street_pub_door");
 
 export class StreetScene extends Phaser.Scene {
   constructor() {
@@ -33,6 +39,8 @@ export class StreetScene extends Phaser.Scene {
     this.streetSfxTimer = null;
     this.cityWindows = [];
     this.streetSetpieces = [];
+    this.livingStreetLights = [];
+    this.roadLightStreaks = [];
   }
 
   create() {
@@ -103,7 +111,7 @@ export class StreetScene extends Phaser.Scene {
         currentScene: "street",
         focus: "rua principal",
         objective: "Aproximar da porta principal",
-        prompt: "Destino marcado. Caminhe até a porta principal; a rua agora usa figurantes bitmap em escala controlada."
+        prompt: "Destino marcado. A rua ganhou luz, chuva e reflexos vivos; siga para a porta principal."
       });
     });
 
@@ -275,11 +283,61 @@ export class StreetScene extends Phaser.Scene {
 
   buildTrafficFx() {
     this.vehicles = [];
+    const roadLanes = [
+      { x: -160, y: 586, width: 132, color: 0x50efff, delay: 0, duration: 5200 },
+      { x: GAME_WIDTH + 180, y: 646, width: 176, color: 0xff4fb8, delay: 1600, duration: 6200 },
+      { x: -220, y: 620, width: 108, color: 0xffd06d, delay: 3200, duration: 5600 }
+    ];
+    roadLanes.forEach((lane, index) => {
+      const streak = this.add.rectangle(lane.x, lane.y, lane.width, 4, lane.color, 0.16)
+        .setBlendMode(Phaser.BlendModes.SCREEN)
+        .setDepth(1.5);
+      const reflection = this.add.rectangle(lane.x, lane.y + 22, lane.width * 1.22, 7, lane.color, 0.08)
+        .setBlendMode(Phaser.BlendModes.SCREEN)
+        .setDepth(1.12);
+      this.roadLightStreaks.push(streak, reflection);
+      this.tweens.add({
+        targets: [streak, reflection],
+        x: index === 1 ? -220 : GAME_WIDTH + 220,
+        alpha: { from: 0, to: 0.22 },
+        duration: lane.duration,
+        delay: lane.delay,
+        repeat: -1,
+        repeatDelay: 1200,
+        ease: "Sine.easeInOut",
+        yoyo: false,
+        onRepeat: () => {
+          streak.setX(lane.x);
+          reflection.setX(lane.x);
+        }
+      });
+    });
   }
 
   buildStreetLife() {
     this.pedestrians = [];
     this.streetSetpieces = [];
+    const livingLights = [
+      { x: 988, y: 386, width: 64, height: 86, color: 0x64e5ff, alpha: 0.08, delay: 0 },
+      { x: 1084, y: 360, width: 78, height: 112, color: 0xffd06d, alpha: 0.06, delay: 320 },
+      { x: 204, y: 222, width: 132, height: 88, color: 0x50efff, alpha: 0.08, delay: 640 },
+      { x: 444, y: 370, width: 92, height: 54, color: 0xff4fb8, alpha: 0.05, delay: 960 }
+    ];
+    livingLights.forEach((light) => {
+      const glow = this.add.rectangle(light.x, light.y, light.width, light.height, light.color, light.alpha)
+        .setBlendMode(Phaser.BlendModes.SCREEN)
+        .setDepth(1.36);
+      this.livingStreetLights.push(glow);
+      this.tweens.add({
+        targets: glow,
+        alpha: { from: light.alpha * 0.35, to: light.alpha * 1.7 },
+        duration: 1200 + light.delay,
+        delay: light.delay,
+        yoyo: true,
+        repeat: -1,
+        ease: "Sine.easeInOut"
+      });
+    });
   }
 
   buildHotspot({ id, x, y, width, height, color, label, visible = true }) {
@@ -351,7 +409,8 @@ export class StreetScene extends Phaser.Scene {
   }
 
   findHotspotAt(x, y) {
-    if (this.isPointOnDoor(x, y)) {
+    const interaction = getInteractionAt("street", x, y);
+    if (interaction?.id === "street_pub_door") {
       return this.doorHotspot;
     }
     return this.hotspots.find((hotspot) => {
@@ -367,14 +426,7 @@ export class StreetScene extends Phaser.Scene {
   }
 
   isPointOnDoor(x, y) {
-    const withinDoorRect = (
-      x >= PUB_DOOR.x - PUB_DOOR.width / 2 &&
-      x <= PUB_DOOR.x + PUB_DOOR.width / 2 &&
-      y >= PUB_DOOR.y - PUB_DOOR.height / 2 &&
-      y <= PUB_DOOR.y + PUB_DOOR.height / 2
-    );
-    const closeToThreshold = Phaser.Math.Distance.Between(x, y, PUB_DOOR.entryX, PUB_DOOR.entryY) < PUB_DOOR.radius;
-    return withinDoorRect || closeToThreshold;
+    return getInteractionAt("street", x, y)?.id === "street_pub_door";
   }
 
   setActiveHotspot(hotspot) {
@@ -436,19 +488,19 @@ export class StreetScene extends Phaser.Scene {
   tryMovePlayer(dx, dy) {
     const tryX = Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
     const tryY = Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
-    if (isPointWalkable(STREET_SCENE_MAP, tryX, tryY)) {
+    if (isWalkable("street", tryX, tryY)) {
       this.player.x = tryX;
       this.player.y = tryY;
       return true;
     }
 
     const axisX = Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
-    if (isPointWalkable(STREET_SCENE_MAP, axisX, this.player.y)) {
+    if (isWalkable("street", axisX, this.player.y)) {
       this.player.x = axisX;
       return true;
     }
     const axisY = Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
-    if (isPointWalkable(STREET_SCENE_MAP, this.player.x, axisY)) {
+    if (isWalkable("street", this.player.x, axisY)) {
       this.player.y = axisY;
       return true;
     }
@@ -474,19 +526,15 @@ export class StreetScene extends Phaser.Scene {
 
   tryNearestHotspot() {
     if (this.isTransitioning) return;
-    const nearest = this.hotspots
-      .map((hotspot) => ({
-        hotspot,
-        distance: Phaser.Math.Distance.Between(
-          this.player.x,
-          this.player.y,
-          hotspot.ppgHotspot.x,
-          hotspot.ppgHotspot.y
-        )
-      }))
-      .sort((a, b) => a.distance - b.distance)[0];
+    const nearestInteraction = getNearestInteraction("street", this.player.x, this.player.y);
+    const nearest = nearestInteraction
+      ? {
+        hotspot: nearestInteraction.point.id === "street_pub_door" ? this.doorHotspot : null,
+        distance: nearestInteraction.distance
+      }
+      : null;
     if (nearest && nearest.distance < 110) {
-      this.handleHotspot(nearest.hotspot);
+      if (nearest.hotspot) this.handleHotspot(nearest.hotspot);
     }
   }
 
