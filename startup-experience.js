@@ -289,7 +289,7 @@
   }
 
   function releaseFounderPreludeGate() {
-    document.body.classList.remove("founder-prelude-pending");
+    document.body.classList.remove("founder-prelude-pending", "founder-prelude-active");
   }
 
   function shouldUsePhoneWelcome() {
@@ -718,7 +718,7 @@
     rememberFounderPreludeToday();
     const prelude = createFounderPrelude();
     document.body.appendChild(prelude);
-    document.body.classList.add("catalogo-lock-scroll");
+    document.body.classList.add("catalogo-lock-scroll", "founder-prelude-active");
 
     window.requestAnimationFrame(() => {
       prelude.classList.add("is-open");
@@ -762,7 +762,7 @@
       prelude.classList.add("is-leaving");
       window.setTimeout(() => {
         prelude.remove();
-        document.body.classList.remove("catalogo-lock-scroll");
+        document.body.classList.remove("catalogo-lock-scroll", "founder-prelude-active");
         callback();
       }, 280);
     }, duration);
@@ -1012,16 +1012,8 @@
   function createReturningLoaderModal(options = {}) {
     const modal = document.createElement("section");
     modal.id = `${MODAL_ID}ReturningLoader`;
-    modal.className = "catalogo-welcome is-splash-loader";
+    modal.className = "catalogo-welcome is-splash-loader is-office-loader";
     modal.setAttribute("aria-hidden", "true");
-    const splashSource = document.querySelector(".logo-splash");
-    let splashMarkup = "";
-
-    if (splashSource) {
-      splashMarkup = splashSource.outerHTML
-        .replace(/id="logo-splash-status"/g, 'data-returning-splash-status')
-        .replace(/id="logo-splash-date"/g, 'data-returning-splash-date');
-    }
 
     modal.innerHTML = `
       <article
@@ -1030,7 +1022,56 @@
         aria-live="polite"
         aria-label="Preparando a abertura do portal"
       >
-        ${splashMarkup}
+        <div class="catalogo-return-office-loader">
+          <div class="catalogo-return-office-scene" aria-hidden="true">
+            <div class="return-office-window"></div>
+            <div class="return-office-board">
+              <span>NEWS</span>
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+            <div class="return-office-desk desk-left">
+              <span class="screen"></span>
+              <span class="keyboard"></span>
+            </div>
+            <div class="return-office-desk desk-right">
+              <span class="screen"></span>
+              <span class="keyboard"></span>
+            </div>
+            <div class="return-office-avatar avatar-editor">
+              <span class="head"></span>
+              <span class="body"></span>
+              <span class="arm arm-left"></span>
+              <span class="arm arm-right"></span>
+            </div>
+            <div class="return-office-avatar avatar-reporter">
+              <span class="head"></span>
+              <span class="body"></span>
+              <span class="arm arm-left"></span>
+              <span class="arm arm-right"></span>
+            </div>
+            <div class="return-office-avatar avatar-runner">
+              <span class="head"></span>
+              <span class="body"></span>
+              <span class="arm arm-left"></span>
+              <span class="arm arm-right"></span>
+              <span class="paper"></span>
+            </div>
+            <div class="return-office-papers">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <div class="catalogo-return-office-copy">
+            <span>Escritório editorial</span>
+            <strong>Reabrindo a home</strong>
+            <p data-returning-splash-status>Preparando os destaques do dia</p>
+            <small data-returning-splash-date>Montando capa</small>
+            <div class="catalogo-return-office-bar" aria-hidden="true"><i></i></div>
+          </div>
+        </div>
       </article>
     `;
 
@@ -1104,25 +1145,23 @@
       return;
     }
 
+    const loader = createReturningLoaderModal({
+      phone: shouldUsePhoneWelcome()
+    });
+
+    document.body.appendChild(loader);
+    window.setTimeout(() => {
+      releaseFounderPreludeGate();
+      openWelcomeModal(loader);
+    }, 40);
+
     whenSiteReady(() => {
-      runWhenBrowserIsIdle(() => {
-        const loader = createReturningLoaderModal({
-          phone: shouldUsePhoneWelcome()
-        });
-
-        document.body.appendChild(loader);
-        window.setTimeout(() => {
-          releaseFounderPreludeGate();
-          openWelcomeModal(loader);
-        }, 40);
-
-        window.setTimeout(() => {
-          closeWelcomeModalImmediately(loader);
-          if (typeof callback === "function") {
-            callback();
-          }
-        }, RETURNING_LOADER_MS);
-      });
+      window.setTimeout(() => {
+        closeWelcomeModalImmediately(loader);
+        if (typeof callback === "function") {
+          callback();
+        }
+      }, RETURNING_LOADER_MS);
     });
   }
 
