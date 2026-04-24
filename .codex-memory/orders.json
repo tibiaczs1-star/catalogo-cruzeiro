@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T19:30:00.000Z",
+  "lastUpdatedAt": "2026-04-24T21:00:41.407Z",
   "orders": [
     {
       "id": "2026-04-24-implementar-fila-cheffe-call-mobile-only",
@@ -5804,6 +5804,99 @@
       "nextSteps": [
         "verificar visualmente abertura limpa; seguir com HUD novo aprovado"
       ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-pubpaid-2-0-consertar-ativacao-da-intro-e-refazer-abertura-com-entrar-sair-integ",
+      "createdAt": "2026-04-24T20:09:20.156Z",
+      "updatedAt": "2026-04-24T20:09:20.156Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ok, vamos começar pelo começo, ele nao ativa, mais nem inicia, a intro, e refaça a intro toda, baseada na que tem ja, mais com sua propria arte, e lembre-se de acrescentar na pripria arte, entra no jogo ou sair do jogo",
+      "summary": "PubPaid 2.0: consertar ativacao da intro e refazer abertura com Entrar/Sair integrados na arte",
+      "normalizedTasks": [
+        "corrigir boot da intro",
+        "remover gate DOM antigo",
+        "recriar menu final da abertura",
+        "mapear sceneMap ausente",
+        "validar no Playwright"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser/config/sceneMap.js"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-intro-menu-check/shot-0.png",
+        "output/web-game/pubpaid-intro-enter-check/shot-0.png"
+      ],
+      "tags": [
+        "pubpaid-v2",
+        "intro",
+        "phaser",
+        "2d-game"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-pubpaid-2-0-melhorar-entrar-sair-e-remover-frame-enter-game-antigo",
+      "createdAt": "2026-04-24T20:43:38.499Z",
+      "updatedAt": "2026-04-24T21:00:41.407Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "vamos contnuar o pubpaid daqui o 2.0., pra nao ter ruido, reuna toda equipe e peça pra agentes espçecificos que foram trainands, melhorar a interface de entrar e sair do game para mais inspirado, e pra tentar achar a falha na intro que vc fez, que aparece um frame que tinha escrito enter game, que e somente um a demonstração que usei antes, ajuste tudo isso, primeiro",
+      "summary": "PubPaid 2.0: reunir equipe, melhorar interface Entrar/Sair e remover frame antigo ENTER GAME da intro",
+      "normalizedTasks": [
+        "acionar equipe local/agentes treinados para revisar a intro",
+        "achar e remover vazamento do frame antigo ENTER GAME",
+        "melhorar a interface de entrar e sair do game com visual mais inspirado",
+        "validar no navegador e atualizar memoria"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-phaser.css",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-intro-fix-20260424-v3/menu-enter-selected.png",
+        "output/web-game/pubpaid-intro-fix-20260424-v3/menu-exit-selected.png",
+        "output/web-game/pubpaid-intro-fix-20260424-v3/after-enter-street.png",
+        "output/web-game/pubpaid-intro-exit-check-20260424/after-exit.png"
+      ],
+      "tags": [
+        "pubpaid-v2",
+        "intro",
+        "game-ui",
+        "review-team",
+        "phaser"
+      ],
+      "nextSteps": [
+        "seguir depois para polimento fino de sprites/rua/salao se aprovado visualmente"
+      ],
+      "notes": "Equipe local review:team retornou totalIssues 0. Agentes explorer apontaram IntroScene frame final/label ENTER GAME e splash DOM como fontes. Correção removeu intro-frame-16 da sequência, zerou legendas técnicas e trocou o menu por ficha/placa diegética. Playwright: hasEnterGame=false; Enter leva para street-scene/ui-scene."
+    },
+    {
+      "id": "2026-04-24-prioridade-editorial-corrigir-captura-de-fotos-do-batelao-mailza-e-evitar-materi",
+      "createdAt": "2026-04-24T20:59:03.589Z",
+      "updatedAt": "2026-04-24T20:59:03.589Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Prioridade no site: captar fotos da Mailza governadora e corrigir matérias sem foto/repetidas; usuário apontou matéria do Batelão com 5 fotos na fonte e nenhuma no site, pedindo investigar por que batelao.com não funciona.",
+      "summary": "Prioridade editorial: corrigir captura de fotos do Batelão/Mailza e evitar matérias sem foto/repetidas",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
       "notes": ""
     }
   ]

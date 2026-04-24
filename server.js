@@ -3645,7 +3645,15 @@ function decodeHtml(value) {
     .replace(/&#39;/gi, "'")
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">")
-    .replace(/&nbsp;/gi, " ");
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&#(\d+);/g, (_match, code) => {
+      const numericCode = Number(code);
+      return Number.isFinite(numericCode) ? String.fromCharCode(numericCode) : "";
+    })
+    .replace(/&#x([0-9a-f]+);/gi, (_match, code) => {
+      const numericCode = Number.parseInt(code, 16);
+      return Number.isFinite(numericCode) ? String.fromCharCode(numericCode) : "";
+    });
 }
 
 function stripHtml(value) {
@@ -3736,8 +3744,18 @@ function shouldIgnoreImageUrl(value) {
   return false;
 }
 
+function isGeneratedNewsFallbackImage(value) {
+  const imageUrl = String(value || "").trim().toLowerCase();
+  return /(?:^|\/)assets\/news-fallbacks\//i.test(imageUrl);
+}
+
+function isUsableNewsImageUrl(value) {
+  return Boolean(value) && !shouldIgnoreImageUrl(value) && !isGeneratedNewsFallbackImage(value);
+}
+
 function getArticleImageUrl(item = {}) {
-  return item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "";
+  const candidates = [item.imageUrl, item.feedImageUrl, item.sourceImageUrl, item.image].filter(Boolean);
+  return candidates.find(isUsableNewsImageUrl) || candidates[0] || "";
 }
 
 function getArticleDivisionKey(item = {}) {
@@ -3815,7 +3833,7 @@ function repairNewsImagesForDisplay(items = []) {
     const division = getArticleDivisionKey(item);
     const imageKey = normalizeComparableImageUrl(currentImage);
     const duplicateKey = imageKey ? `${division}|${imageKey}` : "";
-    const isBadImage = !currentImage || shouldIgnoreImageUrl(currentImage);
+    const isBadImage = !isUsableNewsImageUrl(currentImage);
     const isRepeatedInDivision = duplicateKey && seenByDivision.has(duplicateKey);
 
     if (duplicateKey && !seenByDivision.has(duplicateKey)) {
@@ -3934,10 +3952,12 @@ function pickCanonicalFeedImage(item = {}) {
   const candidates = [
     item.feedImageUrl,
     item.imageUrl,
+    item.sourceImageUrl,
+    item.image,
     extractImageFromMarkup(inlineMarkup, sourceUrl)
   ];
 
-  return candidates.find((candidate) => !shouldIgnoreImageUrl(candidate)) || "";
+  return candidates.find(isUsableNewsImageUrl) || "";
 }
 
 function extractBestSourceImage(html, baseUrl) {
@@ -4685,16 +4705,18 @@ async function enrichNewsItemsWithSourceImages(items = []) {
     }
 
     const sourceImageUrl = await fetchPreviewImage(item.sourceUrl).catch(() => "");
+    const bestImageUrl =
+      canonicalFeedImage ||
+      sourceImageUrl ||
+      [item.sourceImageUrl, item.feedImageUrl, item.imageUrl, item.image].find(isUsableNewsImageUrl) ||
+      item.imageUrl ||
+      item.feedImageUrl ||
+      "";
     return {
       ...item,
       feedImageUrl: canonicalFeedImage || item.feedImageUrl || item.imageUrl || "",
       sourceImageUrl: sourceImageUrl || item.sourceImageUrl || "",
-      imageUrl:
-        canonicalFeedImage ||
-        sourceImageUrl ||
-        item.imageUrl ||
-        item.feedImageUrl ||
-        ""
+      imageUrl: bestImageUrl
     };
   });
 }
@@ -4865,7 +4887,7 @@ function normalizeNewsItem(item) {
   const slug = String(item.slug || slugify(title) || item.id || "").trim();
   const imageUrl = resolveSafeArticleRecordImage(
     item,
-    item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || ""
+    pickPreferredArticleRecordImage(item)
   );
   const category = normalizeNewsCategoryLabel(item.category, {
     defaultCategory: item.defaultCategory,
@@ -4914,6 +4936,17 @@ function resolveSafeArticleRecordImage(item, fallback = "") {
   }
 
   return fallback;
+}
+
+function pickPreferredArticleRecordImage(item = {}, fallback = "") {
+  const candidates = [
+    item.sourceImageUrl,
+    item.feedImageUrl,
+    item.imageUrl,
+    item.image,
+    fallback
+  ].filter(Boolean);
+  return candidates.find(isUsableNewsImageUrl) || candidates[0] || "";
 }
 
 function normalizeEditorialFingerprint(value = "") {
@@ -4997,12 +5030,12 @@ function normalizeArticleRecord(item) {
     development: Array.isArray(item.development) ? item.development.filter(Boolean) : [],
     imageUrl: resolveSafeArticleRecordImage(
       item,
-      item.feedImageUrl || item.imageUrl || item.sourceImageUrl || item.image || ""
+      pickPreferredArticleRecordImage(item)
     ),
     sourceImageUrl: item.sourceImageUrl || "",
     feedImageUrl: resolveSafeArticleRecordImage(
       item,
-      item.feedImageUrl || item.imageUrl || item.sourceImageUrl || ""
+      pickPreferredArticleRecordImage(item, item.feedImageUrl || item.sourceImageUrl || item.imageUrl || "")
     ),
     imageCredit: item.imageCredit || "",
     imageFocus: item.imageFocus || "",
