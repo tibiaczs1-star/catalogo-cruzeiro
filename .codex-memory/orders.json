@@ -1,7 +1,212 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T02:19:13.427Z",
+  "lastUpdatedAt": "2026-04-24T15:10:21.152Z",
   "orders": [
+    {
+      "id": "2026-04-24-agente-19-plano-continuo-treinamento-arte-pubpaid",
+      "createdAt": "2026-04-24T13:55:00.000Z",
+      "updatedAt": "2026-04-24T13:55:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Voce e o Agente 19 de uma equipe de 19 agentes de estudo... Entregue agora: plano continuo de estudo e treinamento para a equipe de arte da PubPaid 2.0, por fases: hoje, esta semana, depois e padrao permanente.",
+      "summary": "Criado plano continuo de estudo e treinamento do Agente 19 para a equipe de arte da PubPaid 2.0, com fases, fontes externas, skills/ferramentas, rotina de avaliacao e transformacao de estudo em producao real.",
+      "normalizedTasks": [
+        "Criar plano por fases: hoje, esta semana, depois e padrao permanente",
+        "Listar fontes externas recorrentes para treinamento de arte 2D/pixel art",
+        "Mapear skills e ferramentas disponiveis no ambiente",
+        "Definir rotina de avaliacao e gate anti-procedural",
+        "Registrar o conhecimento no nucleo da equipe"
+      ],
+      "filesTouched": [
+        ".codex-memory/agent-19-continuous-training-plan.md",
+        "PUBPAID_NUCLEO_CONHECIMENTO_ARTE.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "agente-19",
+        "treinamento",
+        "arte-jogo",
+        "pixel-art",
+        "nucleo-de-conhecimento"
+      ],
+      "nextSteps": [
+        "Gerar manual mestre da direcao artistica usando os 19 arquivos de agente",
+        "Comecar lote-piloto pequeno de assets com validacao no fundo real",
+        "Manter personagens, animais e veiculos fora do runtime ate passarem no gate anti-procedural"
+      ]
+    },
+    {
+      "id": "2026-04-24-agente-09-props-catalogo-pubpaid",
+      "createdAt": "2026-04-24T13:30:00.000Z",
+      "updatedAt": "2026-04-24T13:30:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Voce e o Agente 09 de uma equipe de 19 agentes de estudo... Entregue agora: catalogo de props necessarios para a PubPaid 2.0, fontes externas, skills/ferramentas relevantes e plano de treino.",
+      "summary": "Criado nucleo do Agente 09 para props de rua e props de bar da PubPaid 2.0, com catalogo, fontes externas, mapeamento de skills/ferramentas e plano de treino.",
+      "normalizedTasks": [
+        "Definir catalogo de props necessarios da rua e do bar",
+        "Listar fontes externas uteis para estudo de props 2D/pixel art",
+        "Mapear skills e ferramentas relevantes do ambiente",
+        "Definir plano de treino permanente do Agente 09",
+        "Registrar o conhecimento no nucleo da equipe"
+      ],
+      "filesTouched": [
+        ".codex-memory/agent-09-props-catalog.md",
+        "PUBPAID_NUCLEO_CONHECIMENTO_ARTE.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "agente-09",
+        "props",
+        "pixel-art",
+        "nucleo-de-conhecimento"
+      ],
+      "nextSteps": [
+        "Abrir os agentes 13 a 19",
+        "Usar o catalogo para priorizar props de leitura do mapa antes de props de acabamento",
+        "Cruzar o catalogo com sceneMap e com os proximos pacotes de assets reais"
+      ]
+    },
+    {
+      "id": "2026-04-24-pubpaid-player-8dir-rpg-walk",
+      "createdAt": "2026-04-24T04:57:07.685Z",
+      "updatedAt": "2026-04-24T04:57:07.685Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "fazer animações reais sprites, andar em 8 direções com 3 sprites por direção, parar de parecer pular e andar como RPG real",
+      "summary": "Implementada primeira base técnica de caminhada RPG 8 direções x 3 frames para o player da rua PubPaid 2.0.",
+      "normalizedTasks": [
+        "Criar spritesheet 8 direcoes por 3 frames",
+        "Carregar spritesheet no BootScene",
+        "Substituir player da rua por sprite animado direcional",
+        "Mapear vetor de movimento para direcao visual",
+        "Atualizar cache-bust e validar sintaxe"
+      ],
+      "filesTouched": [
+        "assets/pubpaid/sprites/rpg/player-8dir-walk-v1.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-v2.html"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/sprites/rpg/player-8dir-walk-v1.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "spritesheet",
+        "rpg",
+        "8-directions",
+        "player"
+      ],
+      "nextSteps": [
+        "Validar visualmente no navegador com Ctrl+F5",
+        "Refinar arte do spritesheet se a silhueta precisar melhorar",
+        "Criar pipeline equivalente para civis e NPCs"
+      ]
+    },
+    {
+      "id": "2026-04-24-pubpaid-civis-rua-pixel-art",
+      "createdAt": "2026-04-24T04:54:21.005Z",
+      "updatedAt": "2026-04-24T04:54:21.005Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "criar pra fora do bar mendigos, carros e motos sem canva, bebado jogado no chao, gente no terminal de onibus, senhoras esperando, garotos com capuz, velhos de bengala, varios no mesmo estilo pixel art",
+      "summary": "Criar pacote inicial de civis exclusivos da rua para PubPaid 2.0, sem Canva e sem reutilizar atendentes do bar.",
+      "normalizedTasks": [
+        "Criar sprites bitmap locais de civis de rua",
+        "Carregar assets no BootScene",
+        "Distribuir civis na StreetScene por ponto de onibus, calcada e rua",
+        "Remover atendente/garcom da rua",
+        "Atualizar cache-bust e validar sintaxe"
+      ],
+      "filesTouched": [
+        "assets/pubpaid/street/civilians/street-homeless-sitting-v1.png",
+        "assets/pubpaid/street/civilians/street-drunk-floor-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-lady-v1.png",
+        "assets/pubpaid/street/civilians/street-hooded-boy-v1.png",
+        "assets/pubpaid/street/civilians/street-old-cane-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-man-bag-v1.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-v2.html"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/street/civilians/street-homeless-sitting-v1.png",
+        "assets/pubpaid/street/civilians/street-drunk-floor-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-lady-v1.png",
+        "assets/pubpaid/street/civilians/street-hooded-boy-v1.png",
+        "assets/pubpaid/street/civilians/street-old-cane-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-man-bag-v1.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "street",
+        "civilians",
+        "pixel-art",
+        "no-canva"
+      ],
+      "nextSteps": [
+        "Validar visualmente no navegador com Ctrl+F5",
+        "Se aprovado, criar segunda leva com mais variações e frames de caminhada por strip"
+      ]
+    },
+    {
+      "id": "2026-04-24-pubpaid-identidade-rua-carros",
+      "createdAt": "2026-04-24T04:39:24.767Z",
+      "updatedAt": "2026-04-24T04:39:24.767Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "quero mais identidade visual e os carros e as coisas da rua",
+      "summary": "Adicionar identidade visual de rua na PubPaid 2.0 com carros/moto em pixel art, props de calcada, brilho de marca e vapor/neon no cenario.",
+      "normalizedTasks": [
+        "Criar assets bitmap de veiculos e props de rua",
+        "Carregar novos assets no BootScene",
+        "Substituir carros procedurais por imagens animadas",
+        "Adicionar carrinho, placa, reflexos, vapor e glow de fachada",
+        "Validar sintaxe e ausencia de ligacao com agentes"
+      ],
+      "filesTouched": [
+        "assets/pubpaid/street/pubpaid-taxi-neon-v1.png",
+        "assets/pubpaid/street/pubpaid-moto-neon-v1.png",
+        "assets/pubpaid/street/pubpaid-food-cart-v1.png",
+        "assets/pubpaid/street/pubpaid-street-sign-v1.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-v2.html",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/street/pubpaid-taxi-neon-v1.png",
+        "assets/pubpaid/street/pubpaid-moto-neon-v1.png",
+        "assets/pubpaid/street/pubpaid-food-cart-v1.png",
+        "assets/pubpaid/street/pubpaid-street-sign-v1.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "game",
+        "street",
+        "vehicles",
+        "pixel-art",
+        "identity"
+      ],
+      "nextSteps": [
+        "Manter servidor aberto com node server.js e abrir http://127.0.0.1:3000/pubpaid-v2.html",
+        "Fazer Ctrl+F5 por causa do cache-bust 20260424streetidentity1",
+        "Validar visualmente porta, fluxo de entrada e leitura dos veiculos na rua"
+      ]
+    },
     {
       "id": "2026-04-24-rastrear-e-blindar-foto-aleatoria-de-verduras-nas-materias",
       "createdAt": "2026-04-24T01:34:12.707Z",
@@ -5135,6 +5340,116 @@
       "assetRefs": [],
       "tags": [],
       "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-ajustar-avatares-clientes-da-pubpaid-2-0-para-ficarem-sentados-centralizados-no-",
+      "createdAt": "2026-04-24T02:36:49.373Z",
+      "updatedAt": "2026-04-24T02:36:49.373Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nao tem como sentar os avates no meio da cadeira nao? [imagem de avatar fora do centro da cadeira]",
+      "summary": "Ajustar avatares/clientes da PubPaid 2.0 para ficarem sentados centralizados no meio das cadeiras.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-na-cheffe-call-centralizar-os-agentes-nas-cadeiras-e-aumentar-levemente-a-escala",
+      "createdAt": "2026-04-24T02:38:57.789Z",
+      "updatedAt": "2026-04-24T02:38:57.789Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu estou falando da call do chefe so pra botar os agentes sentados na cadeira direito e deixa eles um pouco maiorzinho pra ficar mais combinando com o tamanho do cenario",
+      "summary": "Na Cheffe Call, centralizar os agentes nas cadeiras e aumentar levemente a escala para combinar com o cenário.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-iniciar-o-primeiro-pacote-da-rua-pubpaid-2-0-com-setpieces-bitmap-anotados-pelo-",
+      "createdAt": "2026-04-24T12:18:38.457Z",
+      "updatedAt": "2026-04-24T12:18:38.457Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "achoque ja pode começar com esses",
+      "summary": "Iniciar o primeiro pacote da rua PubPaid 2.0 com setpieces bitmap anotados pelo usuario: mulher de guarda-chuva no ponto, mendigo dormindo com zzz, carros bitmap na rua, gato no telhado e efeitos de luz na fachada, cidade e beco.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-treinar-agentes-em-pixel-art-e-criar-folha-visual-com-20-personagens-rpg-32-bit",
+      "createdAt": "2026-04-24T13:36:20.102Z",
+      "updatedAt": "2026-04-24T13:36:20.102Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faca eles treinarem pixels artes e faca 20 personagens pra criar um modelo visual, estilo rpg 32 bits, algo como no ps1 ou jogos indie de atualmente",
+      "summary": "Treinar agentes em pixel art e criar folha visual com 20 personagens RPG 32-bit",
+      "normalizedTasks": [
+        "treinar pixel art",
+        "criar 20 personagens modelo",
+        "gerar folha visual",
+        "manter fora do runtime ate aprovacao"
+      ],
+      "filesTouched": [
+        "PUBPAID_20_PERSONAGENS_MODELO_RPG32.md",
+        "PUBPAID_20_PERSONAGENS_PROMPTS_RPG32.md",
+        "PUBPAID_MANUAL_MESTRE_DIRECAO_ARTE.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "arte",
+        "pixel-art",
+        "personagens",
+        "rpg32"
+      ],
+      "nextSteps": [
+        "gerar folha visual unica dos 20 personagens",
+        "avaliar anti-procedural",
+        "recortar apenas aprovados"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-criar-exemplos-de-interface-para-pubpaid-2-0",
+      "createdAt": "2026-04-24T15:10:21.152Z",
+      "updatedAt": "2026-04-24T15:10:21.152Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quero exemplos de interfac qu casariam com nosso projeto",
+      "summary": "Criar exemplos de interface para PubPaid 2.0",
+      "normalizedTasks": [
+        "definir HUD minimo",
+        "definir prompt da porta",
+        "definir pausa",
+        "definir dialogo",
+        "definir diario/mapa",
+        "definir UI interna do bar"
+      ],
+      "filesTouched": [
+        "PUBPAID_UI_EXEMPLOS_INTERFACE.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid-v2",
+        "ui",
+        "interface",
+        "hud"
+      ],
+      "nextSteps": [
+        "gerar prancha visual de exemplos e depois implementar somente o estilo aprovado"
+      ],
       "notes": ""
     }
   ]

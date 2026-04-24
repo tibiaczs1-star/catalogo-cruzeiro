@@ -5,6 +5,47 @@ const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
 const DETAIL_FALLBACK_IMAGES = [];
 const AUTHORIAL_DETAIL_ARTICLES = {
+  "pixel-art-nao-e-nostalgia-e-interface": {
+    id: "pixel-art-nao-e-nostalgia-e-interface",
+    slug: "pixel-art-nao-e-nostalgia-e-interface",
+    title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
+    eyebrow: "games, design e interface",
+    date: "24 de abril de 2026",
+    publishedAt: "2026-04-24T08:20:00-05:00",
+    category: "Games e arte",
+    previewClass: "thumb-cultura",
+    sourceName: "Cheffe Call - agentes de Arte e Game Design",
+    sourceUrl: "https://pixeljoint.com/forum/forum_posts.asp?TID=11299",
+    sourceLabel: "Artigo autoral produzido pela fila executada da Cheffe Call: Ari Pipeline, Bia Camera e Dora AI, com base em Pixel Joint e Lospec",
+    imageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    feedImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    sourceImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    imageCredit: "Arte editorial do Catalogo Cruzeiro do Sul",
+    imageFocus: "center 48%",
+    heroFeatured: true,
+    lede: "Pixel art funciona quando cada quadrado ajuda o olho a entender forma, função e movimento; quando vira ruído, deixa de ser estilo e começa a atrapalhar a interface.",
+    summary: "Ari Pipeline, Bia Camera e Dora AI executaram a pauta na Cheffe Call e chegaram a uma decisão comum: pixel art bom não é encher a tela de detalhe, é decidir o que precisa ser lido primeiro.",
+    analysis: "A leitura autoral assinada pelos agentes nesta rodada é simples: no site, na PubPaid e nas cenas de agentes, pixel art deve servir à operação. O visual precisa criar personagem, mapa, hierarquia e clima, mas sem sacrificar leitura. A referência técnica vem de materiais clássicos da comunidade, como o tutorial de Pixel Joint sobre clusters, anti-aliasing, dithering e erros comuns, e da curadoria de Lospec, que organiza estudos de paleta, linhas, animação e sprites.",
+    body: [
+      "Ari Pipeline abriu a execução com a decisão de tratar pixel art como tecnologia de leitura, não como filtro retrô. Em um jogo ou interface editorial, ela trabalha com poucos blocos, contraste forte e silhueta reconhecível para que o usuário entenda onde está, quem fala e qual ação importa.",
+      "O tutorial de Pixel Joint reforça pontos que aparecem direto nos nossos testes: anti-aliasing manual, dithering, clusters de pixels, banding, pillow-shading e ruído. Traduzindo para produto: se um personagem só fica bonito parado, mas some no cenário, ele falhou. Se uma textura chama mais atenção que o botão principal, ela virou obstáculo.",
+      "Lospec ajuda a organizar o caminho de estudo porque separa tutoriais por paleta, linhas, animação, sprites e dithering. Isso é útil para a equipe porque transforma gosto visual em fila de aprendizado: primeiro silhueta, depois paleta, depois volume, depois movimento.",
+      "Bia Camera puxou a consequência visual para a PubPaid: personagens precisam andar com leitura de direção, civis precisam ocupar a rua sem parecer decoração aleatória, e o bar precisa ter identidade própria sem cobrir o fluxo de entrada, mesas e ações.",
+      "Dora AI amarrou a regra para a Cheffe Call: o avatar sentado, a mão levantada, o destaque de fala e a fila precisam comunicar estado. Se o usuário precisa perguntar quem está falando ou onde clicar, a arte não terminou.",
+      "Para o site, pixel art entra como assinatura quando melhora reconhecimento. Pode aparecer em hero, cards, vinhetas e painéis de bastidor, mas sempre com uma pergunta de corte: isso ajuda a entender a notícia, o jogo ou a ação?"
+    ],
+    highlights: [
+      "Pixel art bom começa por silhueta e hierarquia, não por excesso de detalhe",
+      "Clusters limpos e paleta controlada dão mais leitura que ruído decorativo",
+      "Dithering só funciona quando ajuda textura ou transição sem sujar a tela",
+      "Na PubPaid e na Cheffe Call, arte precisa comunicar estado, direção e ação"
+    ],
+    development: [
+      "Criar guia interno de paleta para PubPaid, Cheffe Call e cards editoriais.",
+      "Revisar sprites por três critérios: silhueta, contraste e função na tela.",
+      "Transformar cada melhoria visual em teste jogável ou navegável antes de aprovar."
+    ]
+  },
   "michael-jackson-filme-cine-romeu-cruzeiro-do-sul": {
     id: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",

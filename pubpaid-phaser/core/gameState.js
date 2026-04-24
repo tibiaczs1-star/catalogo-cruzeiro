@@ -26,7 +26,7 @@ export const gameState = {
   stageEventActive: false,
   loungeQueue: "",
   objective: "Entrar no PubPaid pela porta principal",
-  nerdAgent: "Pixo FX: sprites, neon e efeitos",
+  systemStatus: "Jogo local",
   panel: {
     open: false,
     kicker: "interação",

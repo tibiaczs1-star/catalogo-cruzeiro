@@ -11,7 +11,7 @@ const refs = {
   lockedMatchBalance: document.querySelector("[data-game-locked-match-balance]"),
   pvpStatus: document.querySelector("[data-game-pvp-status]"),
   objective: document.querySelector("[data-game-objective]"),
-  nerdAgent: document.querySelector("[data-game-nerd-agent]"),
+  systemStatus: document.querySelector("[data-game-system-status]"),
   prompt: document.querySelector("[data-game-prompt-copy]"),
   panel: document.querySelector("[data-game-panel]"),
   panelKicker: document.querySelector("[data-game-panel-kicker]"),
@@ -223,7 +223,7 @@ export function bindOverlay() {
         : state.pvpStatus;
     }
     if (refs.objective) refs.objective.textContent = state.objective;
-    if (refs.nerdAgent) refs.nerdAgent.textContent = state.nerdAgent;
+    if (refs.systemStatus) refs.systemStatus.textContent = state.systemStatus || "Jogo local";
     if (refs.prompt) refs.prompt.textContent = state.prompt;
     if (refs.accountLabel) {
       refs.accountLabel.textContent =

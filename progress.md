@@ -230,3 +230,11 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Validações desta passada: `node --check server.js`, `node --check cheffe-call.js`, `node --check cheffe-call-game.js`, `brace-balance=0` em `cheffe-call.css`, `GET /api/cheffe-call` com `ok=true`, `POST /api/cheffe-call/admin/clear` com `401` sem senha e `200` com senha, `POST /api/real-agents/run` com `200`.
 - TODO seguinte: se o usuário pedir deploy, revisar o `git diff`, separar ruído de `data/` e `output/`, e então preparar commit/push desta frente; depois voltar ao mapeamento fino de avatar/cadeira.
 
+## 2026-04-24 cheffe-call seat center
+
+- Ajustei a plateia da Cheffe Call para os agentes ficarem no centro das cadeiras: `cheffe-call.js` agora zera o deslocamento lateral por assento, reduz o deslocamento vertical e aumenta a escala base dos avatares.
+- `cheffe-call.css` centraliza sprite e token/foto no meio da cadeira, baixa levemente o topo do sprite e mantém destaque maior para agente falando/mão levantada/implementando.
+- `cheffe-call.html` recebeu cache-bust `20260424-seat-center`.
+- Validações: `node --check cheffe-call.js`, `node --check cheffe-call-game.js`, `brace-balance=0` em `cheffe-call.css`, `GET /cheffe-call.html` local retornou `200`.
+- Limitação: screenshot automática por `npx @playwright/cli` e Chrome/Edge headless falhou por permissão/elevacão no Windows; validar no navegador real se ainda precisa microajuste de `top` ou `seatScale`.
+

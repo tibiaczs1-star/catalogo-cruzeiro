@@ -25,13 +25,13 @@
   const hudToggleEl = document.querySelector("#toggleHudMode");
   const lowerDecksToggleEl = document.querySelector("#toggleLowerDecks");
   const commandBarEl = document.querySelector("#cheffeCommandBar");
+  const cheffeAccessModal = document.querySelector("#cheffeAccessModal");
   const quickPasswordInput = document.querySelector("#quickPasswordInput");
   const quickPasswordConfirm = document.querySelector("#quickPasswordConfirm");
   const quickPasswordStatus = document.querySelector("#quickPasswordStatus");
   const quickInstructionInput = document.querySelector("#quickInstructionInput");
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
-  const quickOpenDecks = document.querySelector("#quickOpenDecks");
   const quickRefreshAgents = document.querySelector("#quickRefreshAgents");
   const officeOfDayEl = document.querySelector("#officeOfDay");
   const officeOfDayMetaEl = document.querySelector("#officeOfDayMeta");
@@ -258,6 +258,75 @@
       .replace(/'/g, "&#39;");
   }
 
+  function getActiveSession(payload = latestCallPayload) {
+    return payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
+  }
+
+  function buildSessionSummaryText(payload = latestCallPayload) {
+    const session = getActiveSession(payload);
+    const logs = Array.isArray(session?.logs) ? session.logs : [];
+    const decisions = Array.isArray(session?.decisions) ? session.decisions : [];
+    const lastLog = logs[0];
+    const lastDecision = decisions[0];
+    return [
+      `Status: ${session?.status || (payload?.meeting?.active ? "reunião ativa" : "sem reunião ativa")}`,
+      `Assunto: ${session?.instruction || payload?.meeting?.lastInstruction || "nenhum assunto ativo"}`,
+      `Fila ativa: ${decisions.length}`,
+      `Logs: ${logs.length}`,
+      lastDecision ? `Última decisão: ${lastDecision.kindLabel || lastDecision.state || "decisão"} - ${lastDecision.title || lastDecision.text || ""}` : "Última decisão: nenhuma",
+      lastLog ? `Último log: ${lastLog.kindLabel || "log"} - ${lastLog.text || ""}` : "Último log: nenhum"
+    ].join("\n");
+  }
+
+  function buildFullLogText(payload = latestCallPayload) {
+    const session = getActiveSession(payload);
+    const logs = Array.isArray(session?.logs) ? session.logs : [];
+    const decisions = Array.isArray(session?.decisions) ? session.decisions : [];
+    const logLines = logs.length
+      ? logs.map((item, index) => `${index + 1}. ${item.kindLabel || "log"} | ${item.agent || "Cheffe Call"} | ${item.text || ""}`)
+      : ["Sem logs registrados."];
+    const decisionLines = decisions.length
+      ? decisions.map((item, index) => `${index + 1}. ${item.kindLabel || item.state || "fila"} | ${item.agent || "Cheffe Call"} | ${item.title || item.text || ""}`)
+      : ["Sem decisões na fila."];
+    return [
+      "RESUMO",
+      buildSessionSummaryText(payload),
+      "",
+      "FILA / DECISÕES",
+      ...decisionLines,
+      "",
+      "LOG COMPLETO",
+      ...logLines
+    ].join("\n");
+  }
+
+  function openCheffeInfoPopup(title, text) {
+    let modal = document.querySelector("#cheffeInfoPopup");
+    if (!modal) {
+      modal = document.createElement("div");
+      modal.id = "cheffeInfoPopup";
+      modal.className = "cheffe-info-popup";
+      modal.innerHTML = `
+        <div class="cheffe-info-card" role="dialog" aria-modal="true" aria-labelledby="cheffeInfoTitle">
+          <div class="cheffe-info-head">
+            <h2 id="cheffeInfoTitle"></h2>
+            <button type="button" data-cheffe-info-close>Fechar</button>
+          </div>
+          <pre id="cheffeInfoText"></pre>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal || event.target.closest("[data-cheffe-info-close]")) {
+          modal.classList.remove("is-open");
+        }
+      });
+    }
+    modal.querySelector("#cheffeInfoTitle").textContent = title;
+    modal.querySelector("#cheffeInfoText").textContent = text;
+    modal.classList.add("is-open");
+  }
+
   function setStatus(message, tone) {
     if (!statusEl) return;
     statusEl.textContent = message;
@@ -268,6 +337,18 @@
     if (!quickPasswordStatus) return;
     quickPasswordStatus.textContent = message;
     quickPasswordStatus.dataset.tone = tone || "";
+  }
+
+  function openAccessModal(message = "Digite a senha Full Admin para entrar na Cheffe Call.", tone = "") {
+    cheffeAccessModal?.classList.remove("is-unlocked");
+    document.body.classList.add("cheffe-access-locked");
+    setPasswordStatus(message, tone);
+    setTimeout(() => quickPasswordInput?.focus(), 30);
+  }
+
+  function closeAccessModal() {
+    cheffeAccessModal?.classList.add("is-unlocked");
+    document.body.classList.remove("cheffe-access-locked");
   }
 
   function getAdminPassword() {
@@ -288,6 +369,7 @@
     } catch (_error) {
       // ignore storage failures
     }
+    closeAccessModal();
   }
 
   async function validateAdminPassword(password) {
@@ -320,8 +402,7 @@
     const password = getAdminPassword();
     if (password) return password;
     setStatus(`Digite a senha Full Admin para ${actionLabel}.`, "bad");
-    setPasswordStatus("Senha obrigatória.", "bad");
-    (quickPasswordInput || formEl?.querySelector('[name="password"]'))?.focus();
+    openAccessModal("Senha obrigatória para liberar a Cheffe Call.", "bad");
     return "";
   }
 
@@ -1298,22 +1379,28 @@
       return;
     }
     if (action === "variation") {
-      if (await postRoomAction("variation", active, { title: `Pedir alternativa para ${agentName}` })) {
-        setStatus(`${agentName} recebeu pedido real de segunda opção.`, "ok");
+      const packet = buildExecutionPacket(active, "prompt");
+      const adjustmentPrompt = packet.prompt || `Ajuste a proposta de ${agentName}: ${idea}`;
+      if (await postRoomAction("terminal", active, { title: `Prompt de ajuste para ${agentName}`, command: adjustmentPrompt, prompt: adjustmentPrompt })) {
+        setStatus(`Prompt de ajuste de ${agentName} foi enviado para execução.`, "ok");
         return;
       }
-      const variation = `${buildOpinionForAgent(active, "variação solicitada", activeSpeakerIndex)} Quero uma segunda opção antes de executar.`;
-      active.opinion = variation;
       enqueueTask({
-        state: "queued",
-        kindLabel: "variação",
+        state: "terminal",
+        kindLabel: "ajuste",
         agent: agentName,
-        title: `Alternativa pedida para ${agentName}`,
-        text: variation
+        title: `Prompt de ajuste para ${agentName}`,
+        text: adjustmentPrompt,
+        prompt: adjustmentPrompt
       });
-      addMeetingLog({ kindLabel: "variação pedida", agent: agentName, text: variation });
-      showActiveSpeaker();
-      setStatus(`${agentName} reformulou a ideia em outra direção.`, "ok");
+      addMeetingLog({ kindLabel: "prompt de ajuste", agent: agentName, text: adjustmentPrompt });
+      terminalEl.textContent = [
+        "> cheffe-call/adjustment-prompt",
+        `agent: ${agentName}`,
+        `office: ${getAgentOffice(active)}`,
+        adjustmentPrompt
+      ].join("\n");
+      setStatus(`Prompt de ajuste de ${agentName} foi enviado.`, "ok");
       return;
     }
     if (action === "task") {
@@ -1706,10 +1793,14 @@
       .catch((error) => setStatus(error.message, "bad"));
   });
 
+  quickInstructionInput?.addEventListener("focus", () => {
+    quickInstructionInput.select();
+  });
+
   quickPasswordConfirm?.addEventListener("click", async () => {
     const password = String(quickPasswordInput?.value || "").trim();
     if (!password) {
-      setStatus("Digite a senha Full Admin e clique em OK.", "bad");
+      setStatus("Digite a senha Full Admin e clique em Entrar.", "bad");
       setPasswordStatus("Digite a senha primeiro.", "bad");
       quickPasswordInput?.focus();
       return;
@@ -1720,16 +1811,10 @@
     try {
       await validateAdminPassword(password);
       rememberAdminPassword(password);
-      const openPayload = await postCall("/api/cheffe-call/start", {
-        password,
-        instruction: quickInstructionInput?.value || "Cheffe Call aberta. Aguardando ordem do Full Admin."
-      });
-      setPasswordStatus("Senha validada. Reunião aberta.", "ok");
-      if (quickInstructionInput?.value) {
-        activateMeetingResponse(quickInstructionInput.value, openPayload);
-      } else {
-        setStatus("Senha validada. Reunião aberta: escreva a ordem e clique Enviar.", "ok");
-      }
+      setPasswordStatus("Senha validada. Sala liberada.", "ok");
+      setStatus("Cheffe Call liberada. Escreva uma ordem e clique Enviar.", "ok");
+      loadCall().catch((error) => setStatus(error.message, "bad"));
+      quickInstructionInput?.focus();
     } catch (error) {
       cheffeAdminPassword = "";
       try {
@@ -1737,6 +1822,7 @@
       } catch (_storageError) {
         // ignore storage failures
       }
+      openAccessModal(error.message || "Senha recusada.", "bad");
       setPasswordStatus(error.message || "Senha recusada.", "bad");
       setStatus(error.message || "Senha Full Admin recusada.", "bad");
       quickPasswordInput?.focus();
@@ -1853,41 +1939,34 @@
   });
 
   focusCommandDetails?.addEventListener("click", () => {
-    instructionInput?.focus();
-    toggleHudVisibility();
-    document.body.dataset.hud = "visible";
-    syncGameShellState();
+    openCheffeInfoPopup("Log completo da Cheffe Call", buildFullLogText());
   });
 
   quickNextSpeaker?.addEventListener("click", () => {
-    moveToNextSpeaker("atalho command bar");
-  });
-
-  quickOpenDecks?.addEventListener("click", () => {
-    toggleLowerDecksVisibility();
+    if (quickInstructionInput) quickInstructionInput.value = "";
+    if (instructionInput) instructionInput.value = "";
+    if (commandInput) commandInput.value = "";
+    setStatus("Pronto para receber outra ordem direta.", "ok");
+    quickInstructionInput?.focus();
   });
 
   quickRefreshAgents?.addEventListener("click", () => {
     const password = getAdminPassword();
     if (!password) {
-      loadCall().then(() => setStatus("Relatório real atualizado. Para rodar os agentes, digite a senha Full Admin.", "ok")).catch((error) => setStatus(error.message, "bad"));
+      loadCall()
+        .then(() => {
+          openCheffeInfoPopup("Resumo da última ordem", buildSessionSummaryText());
+          setStatus("Resumo atualizado. Para rodar agentes reais, entre com a senha da Cheffe Call.", "ok");
+        })
+        .catch((error) => setStatus(error.message, "bad"));
       return;
     }
-    setStatus("Rodando agentes reais e atualizando a Cheffe Call...");
-    fetch("/api/real-agents/run", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        password,
-        message: instructionInput?.value || "Atualização manual pela Cheffe Call."
+    setStatus("Atualizando resumo da última ordem...");
+    loadCall()
+      .then(() => {
+        openCheffeInfoPopup("Resumo da última ordem", buildSessionSummaryText());
+        setStatus("Resumo da Cheffe Call atualizado.", "ok");
       })
-    })
-      .then(async (response) => {
-        const payload = await response.json();
-        if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
-        return loadCall();
-      })
-      .then(() => setStatus("Agentes reais rodados e relatório atualizado.", "ok"))
       .catch((error) => setStatus(error.message, "bad"));
   });
 
@@ -2089,6 +2168,15 @@
   document.body.dataset.hud = "visible";
   if (cheffeAdminPassword && formEl?.querySelector('[name="password"]')) {
     formEl.querySelector('[name="password"]').value = cheffeAdminPassword;
+  }
+  if (quickPasswordInput && cheffeAdminPassword) {
+    quickPasswordInput.value = cheffeAdminPassword;
+  }
+  if (cheffeAdminPassword) {
+    closeAccessModal();
+    setPasswordStatus("Senha lembrada nesta sessão.", "ok");
+  } else {
+    openAccessModal();
   }
   formEl?.querySelector('[name="password"]')?.addEventListener("input", () => updateRealFlow());
   syncGameShellState();

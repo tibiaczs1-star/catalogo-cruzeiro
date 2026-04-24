@@ -280,6 +280,17 @@ legacyOfflineStorageKeys.forEach((storageKey) => {
 });
 const initialStaticNews = Array.isArray(window.NEWS_DATA) ? [...window.NEWS_DATA] : [];
 const homepageStaticPreviewBySlug = {
+  "pixel-art-nao-e-nostalgia-e-interface": {
+    slug: "pixel-art-nao-e-nostalgia-e-interface",
+    title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
+    category: "Games e arte",
+    sourceName: "Cheffe Call - agentes de Arte e Game Design",
+    imageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    feedImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    sourceImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
+    imageFocus: "center 48%",
+    heroFeatured: true
+  },
   "michael-jackson-filme-cine-romeu-cruzeiro-do-sul": {
     slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     title: "Filme de Michael Jackson entra no radar com peso global e chance de movimentar o Cine Romeu",
@@ -3224,6 +3235,7 @@ const heroTourismFocusPositions = [
   "center 34%"
 ];
 const heroDailyThemeOrder = [
+  "games",
   "politica",
   "prefeitura",
   "policia",
@@ -3616,6 +3628,27 @@ const buildHeroTourismDailyPool = () => {
 
   const merged = [];
   const seenKeys = new Set();
+  const featuredPool = (Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => article.heroFeatured || article.featuredHero)
+    .map((article) => {
+      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+      return {
+        title: article.category || "Destaque autoral",
+        note: truncateCopy(article.sourceName || "Editorial Catalogo Cruzeiro do Sul", 46),
+        proxyUrl: imageUrl,
+        fallbackUrl: imageUrl,
+        focusPosition: getHeroDailyArticleFocus(article),
+        hasPeopleScene: false,
+        articleTitle: article.title || "Matéria autoral em destaque",
+        articleCategory: article.category || "Destaque autoral",
+        articleSummary: truncateCopy(article.lede || article.summary || "Artigo autoral em destaque.", 168),
+        articleHref: buildHeroArticleHref(article),
+        themeKey: getHeroAreaKey(article),
+        sourceName: article.sourceName || "Editorial Catalogo Cruzeiro do Sul"
+      };
+    })
+    .filter((item) => item.proxyUrl && item.articleHref);
   const runtimePool = buildDailyOrderedHeroItems(buildHeroTourismRuntimePool(), `${dayKey}:runtime`);
 
   const pushUniquePhoto = (photo = {}) => {
@@ -3633,6 +3666,7 @@ const buildHeroTourismDailyPool = () => {
     return true;
   };
 
+  featuredPool.forEach((photo) => pushUniquePhoto(photo));
   runtimePool.forEach((photo) => pushUniquePhoto(photo));
   if (merged.length < heroTourismDailyTarget) {
     const fallbackPool = buildHeroTourismFallbackPool();

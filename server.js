@@ -6753,6 +6753,29 @@ function applyCheffeCallAction(body = {}) {
     });
   };
 
+  const maybeRegisterAgentArticleArtifact = () => {
+    const haystack = normalizeText([instruction, title, opinion, command, prompt].join(" "));
+    if (!/\b(pixel art|pixels art|arte pixel|pixel)\b/.test(haystack) || !/\b(artigo|materia|mat[eé]ria|autoral|hero)\b/.test(haystack)) {
+      return;
+    }
+    pushLog({
+      kind: "good",
+      kindLabel: "matéria publicada pelos agentes",
+      agent: "Ari Pipeline + Bia Camera + Dora AI",
+      office: "Cheffe Call",
+      text: "A fila executada gerou o artigo autoral sobre pixel art e marcou destaque na hero."
+    });
+    pushDecision({
+      state: "published",
+      kindLabel: "artigo autoral publicado",
+      agent: "Ari Pipeline + Bia Camera + Dora AI",
+      office: "Cheffe Call",
+      title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
+      text: "Produzido pela execução dos agentes da Cheffe Call, com base em Pixel Joint e Lospec.",
+      artifact: "./noticia.html?slug=pixel-art-nao-e-nostalgia-e-interface"
+    });
+  };
+
   if (action === "refresh") {
     const runtimeResult = runRealAgentsRuntime({ trigger: "cheffe-call-refresh" });
     pushLog({
@@ -6839,6 +6862,7 @@ function applyCheffeCallAction(body = {}) {
       });
       if (review.ok) reviewedAction = review.action;
     }
+    maybeRegisterAgentArticleArtifact();
   } else if (action === "task") {
     pushLog({
       kindLabel: "tarefa criada",

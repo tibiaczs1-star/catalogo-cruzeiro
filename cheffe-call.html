@@ -90,7 +90,7 @@
           <section class="call-workspace">
             <form class="call-console" id="cheffeCallForm">
               <input class="call-hidden-username" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" />
-              <label>
+              <label class="call-form-password is-hidden-after-modal">
                 Senha Full Admin
                 <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
               </label>
@@ -503,20 +503,6 @@
       </section>
 
       <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de comando rápida">
-        <div class="call-command-field call-command-password">
-          <label for="quickPasswordInput">Senha Full Admin</label>
-          <div class="call-command-password-row">
-            <input
-              id="quickPasswordInput"
-              name="quickPassword"
-              type="password"
-              placeholder="Senha"
-              autocomplete="current-password"
-            />
-            <button type="button" id="quickPasswordConfirm">OK</button>
-          </div>
-          <small id="quickPasswordStatus" class="call-password-status" aria-live="polite">Aguardando senha.</small>
-        </div>
         <label class="call-command-field">
           <span>Comando rápido</span>
           <input
@@ -532,12 +518,31 @@
           <button type="button" id="quickRefreshAgents">Atualizar</button>
           <button type="button" id="focusCommandDetails">Detalhes</button>
           <button type="button" id="quickNextSpeaker">Próximo</button>
-          <button type="button" id="quickOpenDecks">Logs</button>
         </div>
       </form>
+
+      <div class="cheffe-access-modal" id="cheffeAccessModal" role="dialog" aria-modal="true" aria-labelledby="cheffeAccessTitle">
+        <div class="cheffe-access-card">
+          <p class="call-kicker">Acesso do chefe</p>
+          <h2 id="cheffeAccessTitle">Entrar na Cheffe Call</h2>
+          <p>Digite a senha Full Admin para liberar a sala, os agentes reais e os comandos administrativos.</p>
+          <label for="quickPasswordInput">Senha da Cheffe Call</label>
+          <div class="cheffe-access-row">
+            <input
+              id="quickPasswordInput"
+              name="quickPassword"
+              type="password"
+              placeholder="Senha"
+              autocomplete="current-password"
+            />
+            <button type="button" id="quickPasswordConfirm">Entrar</button>
+          </div>
+          <small id="quickPasswordStatus" class="call-password-status" aria-live="polite">Aguardando senha.</small>
+        </div>
+      </div>
     </main>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260424-prompt-console-real"></script>
+    <script defer src="cheffe-call.js?v=20260424-pixelart-flow-1"></script>
   </body>
 </html>

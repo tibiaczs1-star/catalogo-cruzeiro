@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Banner premium real do Catalogo Cruzeiro do Sul</title>
+  <desc id="desc">Banner horizontal de divulgacao usando foto real de Cruzeiro do Sul, Acre.</desc>
+  <defs>
+    <linearGradient id="coverWash" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#06111f" stop-opacity="0.98"/>
+      <stop offset="0.48" stop-color="#10233C" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#10233C" stop-opacity="0.2"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 800 30px/1.1 Arial, Helvetica, sans-serif; letter-spacing: 6px; text-transform: uppercase; }
+      .headline { font: 900 118px/0.88 Arial, Helvetica, sans-serif; letter-spacing: -2px; }
+      .body { font: 650 38px/1.24 Arial, Helvetica, sans-serif; }
+      .seal { font: 850 30px/1.1 Arial, Helvetica, sans-serif; letter-spacing: 1px; text-transform: uppercase; }
+      .brand { font: 900 62px/0.98 Arial, Helvetica, sans-serif; letter-spacing: 7px; text-transform: uppercase; }
+      .caption { font: 700 22px/1.25 Arial, Helvetica, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+    </style>
+  </defs>
+  <rect width="1920" height="1080" fill="#10233C"/>
+  <image href="../../home-cache/buzz-cruzeiro-04.jpg" x="0" y="-170" width="1920" height="1420" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1920" height="1080" fill="url(#coverWash)"/>
+  <rect x="0" y="720" width="1920" height="360" fill="#06111f" opacity="0.72"/>
+
+  <g transform="translate(78 70)">
+    <image href="../../logo-czs.svg" x="0" y="-8" width="64" height="64"/>
+    <text x="86" y="30" fill="#F4ECDF" class="kicker">Cruzeiro do Sul • Acre • Brasil</text>
+  </g>
+  <text x="78" y="220" fill="#F4ECDF" class="headline">Tá chegando</text>
+  <text x="78" y="330" fill="#E0B45D" class="headline">o novo.</text>
+  <rect x="78" y="374" width="226" height="8" fill="#E0B45D"/>
+  <text x="78" y="458" fill="#FFFFFF" class="body">Informação, entretenimento e caminhos de Cruzeiro do Sul,</text>
+  <text x="78" y="506" fill="#E0B45D" class="body">24 horas por dia.</text>
+
+  <g opacity="0.86">
+    <path d="M760 604 C942 486 1086 616 1258 522 C1438 424 1588 448 1840 310" fill="none" stroke="#E0B45D" stroke-width="5" stroke-linecap="round"/>
+    <path d="M760 680 C966 554 1128 692 1322 584 C1504 482 1608 502 1846 392" fill="none" stroke="#4A90E2" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <g transform="translate(78 788)">
+    <image href="../../favicon.svg" x="0" y="0" width="126" height="126"/>
+    <text x="160" y="44" fill="#E0B45D" class="caption">Catálogo</text>
+    <text x="160" y="108" fill="#F4ECDF" class="brand">Cruzeiro do Sul</text>
+    <text x="160" y="152" fill="#D7E3F3" class="caption">O portal da nossa cidade</text>
+  </g>
+  <g transform="translate(1190 825)">
+    <rect width="642" height="92" rx="46" fill="#F4ECDF" opacity="0.96"/>
+    <text x="38" y="59" fill="#10233C" class="seal">Sem poluição. Sem ideologia. Só caminhos.</text>
+  </g>
+  <text x="78" y="1030" fill="#F4ECDF" opacity="0.74" class="caption">Foto real: Cruzeiro do Sul, AC • Catedral Nossa Senhora da Glória</text>
+</svg>

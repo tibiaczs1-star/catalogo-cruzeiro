@@ -1,7 +1,128 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T02:19:12.125Z",
+  "lastUpdatedAt": "2026-04-24T04:57:07.685Z",
   "assets": [
+    {
+      "id": "player-8dir-walk-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/rpg/player-8dir-walk-v1.png",
+      "source": "workspace-generated",
+      "note": "Spritesheet inicial do player PubPaid 2.0: 8 direcoes x 3 frames, frame 64x116.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-player-8dir-rpg-walk"
+      ],
+      "createdAt": "2026-04-24T04:57:07.685Z"
+    },
+    {
+      "id": "street-bus-man-bag-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/civilians/street-bus-man-bag-v1.png",
+      "source": "workspace-generated",
+      "note": "Sprite pixel art exclusivo da rua PubPaid 2.0; nao e asset de bar.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-civis-rua-pixel-art"
+      ],
+      "createdAt": "2026-04-24T04:54:21.005Z"
+    },
+    {
+      "id": "street-old-cane-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/civilians/street-old-cane-v1.png",
+      "source": "workspace-generated",
+      "note": "Sprite pixel art exclusivo da rua PubPaid 2.0; nao e asset de bar.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-civis-rua-pixel-art"
+      ],
+      "createdAt": "2026-04-24T04:54:21.005Z"
+    },
+    {
+      "id": "street-hooded-boy-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/civilians/street-hooded-boy-v1.png",
+      "source": "workspace-generated",
+      "note": "Sprite pixel art exclusivo da rua PubPaid 2.0; nao e asset de bar.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-civis-rua-pixel-art"
+      ],
+      "createdAt": "2026-04-24T04:54:21.005Z"
+    },
+    {
+      "id": "street-bus-lady-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/civilians/street-bus-lady-v1.png",
+      "source": "workspace-generated",
+      "note": "Sprite pixel art exclusivo da rua PubPaid 2.0; nao e asset de bar.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-civis-rua-pixel-art"
+      ],
+      "createdAt": "2026-04-24T04:54:21.005Z"
+    },
+    {
+      "id": "street-drunk-floor-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/civilians/street-drunk-floor-v1.png",
+      "source": "workspace-generated",
+      "note": "Sprite pixel art exclusivo da rua PubPaid 2.0; nao e asset de bar.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-civis-rua-pixel-art"
+      ],
+      "createdAt": "2026-04-24T04:54:21.005Z"
+    },
+    {
+      "id": "street-homeless-sitting-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/civilians/street-homeless-sitting-v1.png",
+      "source": "workspace-generated",
+      "note": "Sprite pixel art exclusivo da rua PubPaid 2.0; nao e asset de bar.",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-civis-rua-pixel-art"
+      ],
+      "createdAt": "2026-04-24T04:54:21.005Z"
+    },
+    {
+      "id": "pubpaid-street-sign-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/pubpaid-street-sign-v1.png",
+      "source": "workspace-generated",
+      "note": "Placa neon de rua para reforcar identidade visual PubPaid 2.0",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-identidade-rua-carros"
+      ],
+      "createdAt": "2026-04-24T04:39:24.767Z"
+    },
+    {
+      "id": "pubpaid-food-cart-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/pubpaid-food-cart-v1.png",
+      "source": "workspace-generated",
+      "note": "Carrinho de comida/rua para preencher calcada PubPaid 2.0",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-identidade-rua-carros"
+      ],
+      "createdAt": "2026-04-24T04:39:24.767Z"
+    },
+    {
+      "id": "pubpaid-moto-neon-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/pubpaid-moto-neon-v1.png",
+      "source": "workspace-generated",
+      "note": "Moto lateral em pixel art para trafego da rua PubPaid 2.0",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-identidade-rua-carros"
+      ],
+      "createdAt": "2026-04-24T04:39:24.767Z"
+    },
+    {
+      "id": "pubpaid-taxi-neon-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/street/pubpaid-taxi-neon-v1.png",
+      "source": "workspace-generated",
+      "note": "Taxi lateral em pixel art para trafego da rua PubPaid 2.0",
+      "linkedOrderIds": [
+        "2026-04-24-pubpaid-identidade-rua-carros"
+      ],
+      "createdAt": "2026-04-24T04:39:24.767Z"
+    },
     {
       "id": "recovered-chat-assets",
       "kind": "directory",
@@ -711,6 +832,69 @@
       "note": "Banner horizontal 1920x1080 da campanha Ta chegando o novo do Catalogo Cruzeiro do Sul",
       "linkedOrderIds": [],
       "createdAt": "2026-04-24T02:19:12.125Z"
+    },
+    {
+      "id": "catalogo-premium-feed-1080x1350-png",
+      "kind": "image",
+      "path": "assets/social/premium/catalogo-premium-feed-1080x1350.png",
+      "source": "workspace",
+      "note": "Arte premium gerada para feed Instagram 1080x1350 da campanha Ta chegando o novo, com Catedral Nossa Senhora da Gloria, Rio Jurua e identidade CZS",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:38:54.738Z"
+    },
+    {
+      "id": "catalogo-premium-story-1080x1920-png",
+      "kind": "image",
+      "path": "assets/social/premium/catalogo-premium-story-1080x1920.png",
+      "source": "workspace",
+      "note": "Arte premium gerada para story/reels 1080x1920 da campanha Ta chegando o novo, com referencias reais de Cruzeiro do Sul Acre",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:38:54.744Z"
+    },
+    {
+      "id": "catalogo-premium-square-1080x1080-png",
+      "kind": "image",
+      "path": "assets/social/premium/catalogo-premium-square-1080x1080.png",
+      "source": "workspace",
+      "note": "Arte premium gerada para post quadrado 1080x1080 da campanha Ta chegando o novo",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:38:54.787Z"
+    },
+    {
+      "id": "catalogo-premium-cover-1920x1080-png",
+      "kind": "image",
+      "path": "assets/social/premium/catalogo-premium-cover-1920x1080.png",
+      "source": "workspace",
+      "note": "Banner premium horizontal 1920x1080 da campanha Ta chegando o novo para capa/site/outdoor digital",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T02:38:54.840Z"
+    },
+    {
+      "id": "catalogo-redes-feed-real-premium-1080x1350-png",
+      "kind": "image",
+      "path": "assets/social/real-czs/catalogo-redes-feed-real-premium-1080x1350.png",
+      "source": "workspace",
+      "note": "PNG final para redes sociais usando foto real de Cruzeiro do Sul Acre, formato feed 1080x1350",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T03:00:54.258Z"
+    },
+    {
+      "id": "catalogo-redes-story-real-premium-1080x1920-png",
+      "kind": "image",
+      "path": "assets/social/real-czs/catalogo-redes-story-real-premium-1080x1920.png",
+      "source": "workspace",
+      "note": "PNG final para redes sociais usando foto real de Cruzeiro do Sul Acre, formato story 1080x1920",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T03:00:54.259Z"
+    },
+    {
+      "id": "catalogo-redes-banner-real-premium-1920x1080-png",
+      "kind": "image",
+      "path": "assets/social/real-czs/catalogo-redes-banner-real-premium-1920x1080.png",
+      "source": "workspace",
+      "note": "PNG final para redes sociais usando foto real de Cruzeiro do Sul Acre, formato banner 1920x1080",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-24T03:00:54.497Z"
     }
   ]
 }

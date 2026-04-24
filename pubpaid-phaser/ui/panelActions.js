@@ -1,5 +1,4 @@
 import { TABLE_COPY } from "../config/gameConfig.js";
-import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { gameState, updateGameState, updatePanel } from "../core/gameState.js";
 import { joinPubpaidPvpQueue, leavePubpaidPvpQueue } from "../services/accountService.js";
 import { fetchPvpState, moveCheckers, throwDarts } from "../services/pvpService.js";
@@ -346,8 +345,7 @@ export function runPanelAction(actionId) {
     updateGameState({
       testBalance: 100,
       objective: "Escolher uma mesa para testar",
-      nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Bartender: 100 créditos de teste recarregados."
+            prompt: "Bartender: 100 créditos de teste recarregados."
     });
     return;
   }
@@ -360,8 +358,7 @@ export function runPanelAction(actionId) {
       selectedTable: gameId,
       lobbyPhase: "selecting",
       objective: "Abrir lobby do jogo",
-      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: `${gameId === "darts" ? "Dardos" : "Dama"} escolhido. Abrindo lobby separado.`
+            prompt: `${gameId === "darts" ? "Dardos" : "Dama"} escolhido. Abrindo lobby separado.`
     });
     window.pubpaidPhaserGame?.scene?.stop?.("interior-scene");
     window.pubpaidPhaserGame?.scene?.start?.("game-lobby-scene", { gameId });
@@ -373,8 +370,7 @@ export function runPanelAction(actionId) {
     updateGameState({
       focus: "balcão do bartender",
       objective: "Ir para Dardos",
-      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: "Bartender: vá de Dardos primeiro. É a melhor leitura de ritmo do núcleo."
+            prompt: "Bartender: vá de Dardos primeiro. É a melhor leitura de ritmo do núcleo."
     });
     return;
   }
@@ -383,8 +379,7 @@ export function runPanelAction(actionId) {
     updateGameState({
       stageEventActive: !gameState.stageEventActive,
       objective: !gameState.stageEventActive ? "Explorar o salão com evento ativo" : "Escolher outro ponto ativo",
-      nerdAgent: formatNerdAgent(NERD_TEAM.sprite),
-      prompt: !gameState.stageEventActive
+            prompt: !gameState.stageEventActive
         ? "Evento do palco ativado. O salão ganhou clima de noite grande."
         : "Evento do palco encerrado. O salão voltou ao modo base."
     });
@@ -396,8 +391,7 @@ export function runPanelAction(actionId) {
     updateGameState({
       loungeQueue: "casual",
       objective: "Aguardar mesa casual",
-      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: "Fila casual aberta na mesa oeste. Dama virou a mesa sugerida."
+            prompt: "Fila casual aberta na mesa oeste. Dama virou a mesa sugerida."
     });
     return;
   }
@@ -407,8 +401,7 @@ export function runPanelAction(actionId) {
     updateGameState({
       loungeQueue: "premium",
       objective: "Aguardar mesa premium",
-      nerdAgent: formatNerdAgent(NERD_TEAM.qa),
-      prompt: "Fila premium aberta na mesa leste. Poker virou a mesa social do momento."
+            prompt: "Fila premium aberta na mesa leste. Poker virou a mesa social do momento."
     });
     return;
   }
@@ -418,15 +411,13 @@ export function runPanelAction(actionId) {
     setSelectedTable(gameId);
     updateGameState({
       objective: "Travando escrow PvP",
-      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: `Abrindo fila real de ${gameId === "darts" ? "Dardos" : "Dama"} com 10 créditos.`
+            prompt: `Abrindo fila real de ${gameId === "darts" ? "Dardos" : "Dama"} com 10 créditos.`
     });
     joinPubpaidPvpQueue(gameId, 10).then((payload) => {
       if (!payload?.ok) {
         updateGameState({
           objective: "Depositar antes do PvP",
-          nerdAgent: formatNerdAgent(NERD_TEAM.qa),
-          prompt: payload?.error || "Saldo real indisponivel para escrow."
+                    prompt: payload?.error || "Saldo real indisponivel para escrow."
         });
         return;
       }

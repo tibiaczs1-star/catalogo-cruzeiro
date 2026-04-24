@@ -7,7 +7,14 @@ const TEXTURE_KEYS = {
   singerLobby: "ppg-singer-lobby-sprite",
   singer: "ppg-singer-sprite",
   guestA: "ppg-guest-a-sprite",
-  guestB: "ppg-guest-b-sprite"
+  guestB: "ppg-guest-b-sprite",
+  guestC: "ppg-guest-c-sprite",
+  guestD: "ppg-guest-d-sprite",
+  guestE: "ppg-guest-e-sprite",
+  guestSeatedBlue: "ppg-guest-seated-blue-sprite",
+  bouncer: "ppg-bouncer-wide-sprite",
+  womanRed: "ppg-woman-red-sprite",
+  jacketShort: "ppg-guest-jacket-short-sprite"
 };
 
 const IDLE_FRAME_COUNT = 4;
@@ -330,6 +337,71 @@ export function addIdleSpriteActor(scene, key, x, y, scale = 1, options = {}) {
     });
   }
   return sprite;
+}
+
+export function addBitmapWalkCycle(scene, sprite, shadow, options = {}) {
+  const stepHeight = options.stepHeight || 5;
+  const duration = options.duration || 360;
+  const delay = options.delay || 0;
+  const baseY = sprite.y;
+  const baseScaleX = sprite.scaleX;
+  const baseScaleY = sprite.scaleY;
+
+  scene.tweens.add({
+    targets: sprite,
+    y: baseY - stepHeight,
+    scaleX: baseScaleX * 0.985,
+    scaleY: baseScaleY * 1.018,
+    duration,
+    delay,
+    yoyo: true,
+    repeat: -1,
+    ease: "Sine.easeInOut"
+  });
+
+  if (shadow) {
+    const baseShadowScaleX = shadow.scaleX || 1;
+    const baseShadowAlpha = shadow.alpha;
+    scene.tweens.add({
+      targets: shadow,
+      scaleX: baseShadowScaleX * 0.84,
+      alpha: Math.max(0.08, baseShadowAlpha * 0.72),
+      duration,
+      delay,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+  }
+}
+
+export function updateContainerWalkPose(scene, container, moving, options = {}) {
+  const sprite = container?.ppgSprite;
+  const shadow = container?.ppgShadow;
+  if (!sprite) return;
+
+  if (!container.ppgWalkPose) {
+    container.ppgWalkPose = {
+      baseY: sprite.y,
+      baseScaleX: sprite.scaleX,
+      baseScaleY: sprite.scaleY,
+      baseShadowScaleX: shadow?.scaleX || 1,
+      baseShadowAlpha: shadow?.alpha ?? 0.2
+    };
+  }
+
+  const pose = container.ppgWalkPose;
+  const intensity = moving ? 1 : 0.22;
+  const speed = options.speed || 115;
+  const phase = Math.sin(scene.time.now / speed);
+  sprite.y = pose.baseY - Math.max(1, (options.stepHeight || 5) * intensity) * Math.abs(phase);
+  sprite.scaleX = pose.baseScaleX * (1 + 0.012 * intensity * phase);
+  sprite.scaleY = pose.baseScaleY * (1 + 0.018 * intensity * Math.abs(phase));
+
+  if (shadow) {
+    shadow.scaleX = pose.baseShadowScaleX * (1 - 0.1 * intensity * Math.abs(phase));
+    shadow.alpha = pose.baseShadowAlpha * (1 - 0.22 * intensity * Math.abs(phase));
+  }
 }
 
 export { TEXTURE_KEYS };

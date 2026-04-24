@@ -1,92 +1,27 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "../config/gameConfig.js";
-import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { updateGameState } from "../core/gameState.js";
 
-const INTRO_FRAMES = [
-  {
-    key: "street-bg",
-    label: "rua molhada",
-    hold: 520,
-    fromScale: 1.18,
-    toScale: 1.08,
-    fromX: 688,
-    toX: 640,
-    flash: 0.03
-  },
-  {
-    key: "street-bg",
-    label: "neon chamando",
-    hold: 440,
-    fromScale: 1.12,
-    toScale: 1.18,
-    fromX: 572,
-    toX: 520,
-    flash: 0.08
-  },
-  {
-    key: "street-bg",
-    label: "carros passando",
-    hold: 360,
-    fromScale: 1.22,
-    toScale: 1.16,
-    fromX: 740,
-    toX: 702,
-    flash: 0.1
-  },
-  {
-    key: "intro-frame-13",
-    label: "porta acendendo",
-    hold: 420,
-    fromScale: 1.16,
-    toScale: 1.04,
-    fromX: 624,
-    toX: 640,
-    flash: 0.22
-  },
-  {
-    key: "intro-frame-16",
-    label: "atravessando a entrada",
-    hold: 360,
-    fromScale: 1.1,
-    toScale: 1.24,
+const INTRO_FRAMES = Array.from({ length: 16 }, (_item, index) => {
+  const frame = index + 1;
+  return {
+    key: `intro-frame-${String(frame).padStart(2, "0")}`,
+    label: frame < 5 ? "chegada" : frame < 10 ? "toque no celular" : frame < 15 ? "neon acendendo" : "porta pub paid",
+    hold: frame === 16 ? 980 : 360,
+    fromScale: frame < 7 ? 1.08 : 1.04,
+    toScale: frame === 16 ? 1.02 : 1.12,
     fromX: 640,
-    toX: 640,
-    flash: 0.34
-  },
-  {
-    key: "interior-bg",
-    label: "bar cheio",
-    hold: 560,
-    fromScale: 1.16,
-    toScale: 1.04,
-    fromX: 676,
-    toX: 640,
-    flash: 0.18
-  },
-  {
-    key: "game-lobby-bg",
-    label: "mesas acordando",
-    hold: 560,
-    fromScale: 1.14,
-    toScale: 1.03,
-    fromX: 610,
-    toX: 640,
-    flash: 0.12
-  },
-  {
-    key: "game-lobby-bg",
-    label: "enter game",
-    hold: 820,
-    fromScale: 1.04,
-    toScale: 1,
-    fromX: 640,
-    toX: 640,
-    flash: 0.16,
-    final: true
-  }
-];
+    toX: frame % 2 === 0 ? 632 : 648,
+    flash: frame > 11 ? 0.18 : 0.06,
+    final: frame === 16
+  };
+});
 
 const INTRO_TOTAL = INTRO_FRAMES.length;
+const FINAL_ENTER_POINT = {
+  x: 672,
+  y: 548,
+  radius: 18
+};
 
 export class IntroScene extends Phaser.Scene {
   constructor() {
@@ -99,13 +34,14 @@ export class IntroScene extends Phaser.Scene {
     this.caption = null;
     this.progressMarks = [];
     this.finalPulse = null;
+    this.finalEnterPoint = null;
     this.sequenceDone = false;
   }
 
   create() {
     this.buildStageLayers();
     this.input.keyboard.on("keydown-ENTER", () => this.skipOrContinue());
-    this.input.on("pointerdown", () => this.skipOrContinue());
+    this.input.on("pointerdown", (pointer) => this.handlePointerDown(pointer));
     this.scale.on("resize", this.handleResize, this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.scale.off("resize", this.handleResize, this);
@@ -116,10 +52,9 @@ export class IntroScene extends Phaser.Scene {
 
     updateGameState({
       currentScene: "intro",
-      focus: "intro cinematica PubPaid",
-      objective: "Assistir a abertura cinematica",
-      nerdAgent: formatNerdAgent(NERD_TEAM.sprite),
-      prompt: "Abertura cinematica em pixel art: rua, neon, porta, salao cheio e entrada direta."
+      focus: "intro PubPaid",
+      objective: "Assistir a abertura",
+      prompt: "Abertura antiga restaurada como base: toque, neon e porta PUB PAID."
     });
   }
 
@@ -292,41 +227,28 @@ export class IntroScene extends Phaser.Scene {
       });
     }
 
-    if (frame.final) {
-      const plaque = this.add.rectangle(GAME_WIDTH / 2, 560, 360, 78, 0x060912, 0.78)
-        .setStrokeStyle(3, 0xffd06d, 0.58);
-      const enter = this.add.text(GAME_WIDTH / 2, 548, "ENTER GAME", {
-        fontFamily: "Georgia, Times New Roman, serif",
-        fontSize: "34px",
-        fontStyle: "bold",
-        color: "#fff0cf",
-        stroke: "#120904",
-        strokeThickness: 5
-      }).setOrigin(0.5).setLetterSpacing(2);
-      const hint = this.add.text(GAME_WIDTH / 2, 586, "clique ou aperte enter", {
-        fontFamily: "Courier New, Lucida Console, monospace",
-        fontSize: "11px",
-        color: "#9fb0ca"
-      }).setOrigin(0.5).setLetterSpacing(2);
-      this.cinematicOverlay.add([plaque, enter, hint]);
-    }
   }
 
   freezeFinalFrame() {
     if (this.sequenceDone) return;
     this.sequenceDone = true;
-    this.caption.setText("PUBPAID 2.0 - ENTER GAME");
+    this.caption.setText("PUBPAID 2.0 - PORTA");
     this.currentImage
       .setTexture(INTRO_FRAMES[INTRO_TOTAL - 1].key)
       .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
       .setPosition(GAME_WIDTH / 2, GAME_HEIGHT / 2)
       .setAlpha(1);
     this.drawCinematicOverlays(INTRO_TOTAL - 1, INTRO_FRAMES[INTRO_TOTAL - 1]);
-    this.finalPulse = this.add.rectangle(GAME_WIDTH / 2, 560, 420, 88, 0xffd06d, 0)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
+    this.finalPulse = this.add.circle(FINAL_ENTER_POINT.x, FINAL_ENTER_POINT.y, 12, 0xffd06d, 0)
+      .setBlendMode(Phaser.BlendModes.SCREEN)
+      .setDepth(5);
+    this.finalEnterPoint = this.add.circle(FINAL_ENTER_POINT.x, FINAL_ENTER_POINT.y, 4, 0xfff0cf, 0.9)
+      .setStrokeStyle(2, 0xffd06d, 0.92)
+      .setDepth(6);
     this.tweens.add({
       targets: this.finalPulse,
-      alpha: { from: 0.04, to: 0.22 },
+      alpha: { from: 0.08, to: 0.24 },
+      scale: { from: 0.9, to: 1.5 },
       duration: 880,
       yoyo: true,
       repeat: -1,
@@ -336,10 +258,20 @@ export class IntroScene extends Phaser.Scene {
     updateGameState({
       currentScene: "intro",
       focus: "frame final congelado",
-      objective: "Apertar Enter ou clicar no letreiro",
-      nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Frame final congelado. Clique no Enter Game da imagem ou aperte Enter para entrar direto."
+      objective: "Entrar pela porta da imagem",
+      prompt: "Frame final congelado. Clique no ponto da porta ou aperte Enter para entrar."
     });
+  }
+
+  handlePointerDown(pointer) {
+    if (!this.sequenceDone) {
+      this.skipOrContinue();
+      return;
+    }
+    const distance = Phaser.Math.Distance.Between(pointer.x, pointer.y, FINAL_ENTER_POINT.x, FINAL_ENTER_POINT.y);
+    if (distance <= FINAL_ENTER_POINT.radius) {
+      this.skipOrContinue();
+    }
   }
 
   skipOrContinue() {
