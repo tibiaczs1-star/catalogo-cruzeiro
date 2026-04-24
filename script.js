@@ -6327,6 +6327,166 @@ const truncateCopy = (value, maxLength = 140) => {
   return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}...`;
 };
 
+const entertainmentFilmPattern =
+  /\b(cinema|filme|cine|cinebiografia|bilheteria|michael jackson|anima[cç][aã]o|movie|film)\b/;
+
+const entertainmentStagePattern =
+  /\b(teatro|palco|pe[cç]a|dramaturgia|dan[cç]a|festival|agenda cultural|programa[cç][aã]o|apresenta[cç][aã]o|oficina|parecerista|quadrilha|junin)\b/;
+
+const entertainmentHeavyPattern =
+  /\b(crime|homic[ií]dio|pris[aã]o|assalto|roubo|furto|morte|viol[eê]ncia|estupro|hospital|doen[cç]a|alerta|enchente|alag)\b/;
+
+const entertainmentOffTopicPattern =
+  /\b(reality|podcast|[aá]lbum|rapper|hip hop|macaxeira|agricultura|jur[ií]dico|convic[cç][aã]o|tribunal|comissariado|embarque|menores|ufac|professor|processo seletivo|sal[aá]rios?|governo|governadora|cnh|certifica[cç][aã]o|seguran[cç]a no tr[aâ]nsito|assembleia|cooper|licen[cç]a)\b/;
+
+const getEntertainmentScore = (article = {}, mode = "film") => {
+  const normalized = normalizeRuntimeArticle(article);
+  const haystack = normalizeText(
+    [
+      normalized.title,
+      normalized.sourceLabel,
+      normalized.summary,
+      normalized.lede,
+      normalized.category,
+      normalized.categoryKey,
+      normalized.sourceName,
+      normalized.topic,
+      normalized.topicGroup
+    ].join(" ")
+  );
+  const pattern = mode === "stage" ? entertainmentStagePattern : entertainmentFilmPattern;
+  const hasFilmCore = /\b(cinema|filme|cinebiografia|bilheteria|michael jackson|movie|film)\b/.test(haystack);
+  const hasOffTopic = entertainmentOffTopicPattern.test(haystack);
+  if (mode === "film" && !hasFilmCore) {
+    return -20;
+  }
+  if (mode === "stage" && hasOffTopic) {
+    return -20;
+  }
+  const hasDirectMatch = pattern.test(haystack);
+  let score = hasDirectMatch ? 18 : -12;
+
+  if ((normalized.categoryKey || normalizeText(normalized.category)) === "cultura") score += 5;
+  if (/\b(cruzeiro do sul|jurua|juru[aá]|acre|rio branco|cine romeu|teatro dos n[aá]uas)\b/.test(haystack)) {
+    score += 4;
+  }
+  if (/\b(global|variety|playbill|broadway|deadline|g1|agencia brasil)\b/.test(haystack)) score += 2;
+  if (entertainmentHeavyPattern.test(haystack)) score -= 12;
+  if (hasOffTopic) score -= 40;
+  if (!articleHasUsableImageCandidate(normalized)) score -= 2;
+
+  return score;
+};
+
+const pickEntertainmentArticles = (items = [], mode = "film", count = 3, usedKeys = new Set()) => {
+  const ranked = sortRadarArticles(dedupeNewsItems(items))
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => article.title && getEntertainmentScore(article, mode) >= 10)
+    .sort((left, right) => {
+      const scoreDiff = getEntertainmentScore(right, mode) - getEntertainmentScore(left, mode);
+      if (scoreDiff !== 0) return scoreDiff;
+      return getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
+    });
+  const selected = [];
+  const imageKeys = new Set();
+
+  for (const article of ranked) {
+    if (selected.length >= count) break;
+    const articleKey = getArticleUsageKey(article);
+    const imageKey = getArticleImageKey(article);
+    if (!articleKey || usedKeys.has(articleKey)) continue;
+    if (imageKey && imageKeys.has(imageKey)) continue;
+    usedKeys.add(articleKey);
+    if (imageKey) imageKeys.add(imageKey);
+    selected.push(article);
+  }
+
+  return selected;
+};
+
+const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
+  if (!card || !article) return;
+  const normalized = normalizeRuntimeArticle(article);
+  const titleNode = card.querySelector("h4");
+  const infoNode = card.querySelector(mode === "stage" ? ".theater-info" : ".movie-info");
+  const descNode = card.querySelector(mode === "stage" ? ".theater-desc" : ".movie-desc");
+  const statusNode = card.querySelector(mode === "stage" ? ".dates" : ".rating");
+  const photoNode = card.querySelector(".ent-photo");
+  const href = buildArticleHref(normalized);
+  const sourceLabel = [normalized.sourceName, formatCompactDisplayDate(normalized.publishedAt || normalized.date)]
+    .filter(Boolean)
+    .join(" • ");
+
+  if (titleNode) titleNode.textContent = truncateCopy(normalized.title, mode === "stage" ? 86 : 70);
+  if (infoNode) {
+    infoNode.textContent =
+      mode === "stage"
+        ? truncateCopy(sourceLabel || "Agenda cultural monitorada", 58)
+        : truncateCopy(sourceLabel || "Cinema em destaque", 58);
+  }
+  if (descNode) {
+    descNode.textContent = truncateCopy(
+      normalized.summary || normalized.lede || "Atualização cultural em acompanhamento.",
+      mode === "stage" ? 155 : 128
+    );
+  }
+  if (statusNode) {
+    statusNode.textContent = index === 0 ? "Destaque atualizado" : "Ler matéria";
+  }
+  if (mode === "stage") {
+    const venueNode = card.querySelector(".venue");
+    const pills = [...card.querySelectorAll(".theater-pill")];
+    if (venueNode) venueNode.textContent = `Fonte: ${normalized.sourceName || "radar cultural"}`;
+    ["Cultura", normalized.category || "Agenda", normalized.topicGroup || "Palco"].forEach((label, pillIndex) => {
+      if (pills[pillIndex]) pills[pillIndex].textContent = truncateCopy(label, 18);
+    });
+  }
+  if (photoNode) {
+    const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(normalized, "card"));
+    if (imageUrl) {
+      photoNode.style.setProperty("--ent-photo", `url("${imageUrl}")`);
+      const focus = normalized.imageFocus || "center center";
+      photoNode.style.backgroundPosition = focus;
+    }
+  }
+
+  card.dataset.articleHref = href;
+  card.setAttribute("role", "link");
+  card.tabIndex = 0;
+  if (card.dataset.entertainmentBound !== "true") {
+    card.dataset.entertainmentBound = "true";
+    card.addEventListener("click", (event) => {
+      if (event.target.closest("a, button")) return;
+      const targetHref = card.dataset.articleHref;
+      if (targetHref) window.location.href = targetHref;
+    });
+    card.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      const targetHref = card.dataset.articleHref;
+      if (targetHref) window.location.href = targetHref;
+    });
+  }
+};
+
+const hydrateEntertainmentSection = (items = []) => {
+  const shell = document.querySelector("#entretenimento");
+  if (!shell) return;
+
+  const usedKeys = buildReservedArticleKeys(["hero", "social", "cadernos"]);
+  const filmCards = [...shell.querySelectorAll(".movie-card")];
+  const stageCards = [...shell.querySelectorAll(".theater-card")];
+  const filmArticles = pickEntertainmentArticles(items, "film", filmCards.length, usedKeys);
+  const stageArticles = pickEntertainmentArticles(items, "stage", stageCards.length, usedKeys);
+
+  filmCards.forEach((card, index) => {
+    if (filmArticles[index]) applyEntertainmentArticle(card, filmArticles[index], "film", index);
+  });
+  stageCards.forEach((card, index) => {
+    if (stageArticles[index]) applyEntertainmentArticle(card, stageArticles[index], "stage", index);
+  });
+};
+
 const socialSurfaceBaseScores = {
   "festas & social": 10,
   social: 10,
@@ -6631,6 +6791,7 @@ const hydrateStaticMediaSurfaces = () => {
     hydrateStaticThumbs(window.NEWS_MAP);
     hydrateSocialCards(window.NEWS_DATA || []);
     hydrateCadernoCards(window.NEWS_DATA || []);
+    hydrateEntertainmentSection(window.NEWS_DATA || []);
   }
 
 };

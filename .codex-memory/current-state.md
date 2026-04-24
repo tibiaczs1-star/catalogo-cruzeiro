@@ -1,14 +1,14 @@
 # Current State
 
-Updated: 2026-04-24T16:39:00.000Z
+Updated: 2026-04-24T18:21:00.000Z
 
 ## Active Goal
 
-- Re Rodada do Dia Geral - sincronizacao online-first das noticias
+- Re Rodada do Dia Geral - atualizar, sincronizar, auditar e subir
 
 ## Summary
 
-Executada rodada online-first: o estado do Render foi lido antes da revisao local, a base de noticias foi sincronizada em `data/runtime-news.json` e `news-data.js`, imagens ausentes/genericas/repetidas na mesma divisao receberam fallbacks editoriais locais, e a auditoria final ficou limpa.
+Executada nova rodada diária com o sistema online-first: o estado do Render foi lido antes da revisão local, a base foi sincronizada, entretenimento foi atualizado para puxar matérias reais de cinema/teatro/cultura, e as auditorias finais ficaram limpas.
 
 Validacoes finais da rodada:
 - `npm run review:team`: 0 achados.
@@ -17,8 +17,9 @@ Validacoes finais da rodada:
 
 ## Next
 
-- Subir somente os arquivos da Re Rodada, sem incluir os arquivos PubPaid 2.0 que continuam em WIP local.
-- Depois do deploy no Render, reler o online e confirmar que o mesmo estado limpo chegou em producao.
+- Subir somente os arquivos da Re Rodada diária e da atualização de entretenimento.
+- Depois do deploy no Render, reler o online e confirmar que o estado limpo chegou em produção.
+- Manter PubPaid 2.0 WIP local fora do pacote.
 
 ## Files In Focus
 
@@ -27,3 +28,5 @@ Validacoes finais da rodada:
 - data/runtime-news.json
 - news-data.js
 - assets/news-fallbacks/
+- index.html
+- script.js

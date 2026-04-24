@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "startedAt": "2026-04-24T16:32:48.227Z",
-  "finishedAt": "2026-04-24T16:32:48.245Z",
+  "startedAt": "2026-04-24T18:18:34.036Z",
+  "finishedAt": "2026-04-24T18:18:34.166Z",
   "source": "Re Rodada do Dia Geral",
   "onlineAuditBefore": {
     "total": 120,
@@ -16,7 +16,7 @@
   "repairedImages": 10,
   "rule": "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo.",
   "finalValidation": {
-    "checkedAt": "2026-04-24T16:39:00.000Z",
+    "checkedAt": "2026-04-24T18:20:41.623Z",
     "reviewTeamIssues": 0,
     "newsImageAudit": {
       "total": 120,
@@ -29,6 +29,7 @@
     },
     "sameDivisionDuplicates": 0,
     "missingImages": 0,
+    "entertainmentUpdated": true,
     "pubPaidExcludedFromPackage": true
   }
 }

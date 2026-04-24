@@ -56,8 +56,8 @@
     "at": 1776853293622
   },
   "https://www.animenewsnetwork.com/": {
-    "url": "https://www.animenewsnetwork.com/images/cms/news.9/236695/ribbonhero.jpg",
-    "at": 1776989332055
+    "url": "",
+    "at": 1777053419622
   },
   "https://jurua24horas.com/2026/04/justica-do-acre-registra-463-processos-de-crime-organizado-pendentes-em-um-ano/": {
     "url": "https://jurua24horas.com/wp-content/uploads/2026/04/IMG_6469-1024x683.webp",
@@ -381,15 +381,15 @@
   },
   "https://blog.youtube/news-and-events/youtube-creator-partnerships-newfronts-2026/": {
     "url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/MoYT25_FeaturedGroupAnnouncemen.max-290x290.format-webp_zEJWMRQ.webp",
-    "at": 1776979285825
+    "at": 1777053412662
   },
   "https://www.cartoonbrew.com/feature-film/coyote-vs-acme-trailer-260235.html": {
     "url": "https://www.cartoonbrew.com/wp-content/uploads/2026/04/Coyote-vs-Acme.jpg",
-    "at": 1776979286423
+    "at": 1777053413875
   },
   "https://blog.youtube/creator-and-artist-stories/jorge-ramos-independent-journalism-youtube/": {
-    "url": "https://blog.youtube/static/blog_youtube/images/youtube_social_1200x630.png?version=pr20260415-1638",
-    "at": 1776979287513
+    "url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/jorgeramos.max-70x70.format-webp.webp",
+    "at": 1777053412053
   },
   "https://thetoyinsider.com/green-toys-for-earth-day-on-necn/": {
     "url": "https://thetoyinsider.com/wp-content/uploads/2026/04/ThamesandKosmos_DustytheRobotVacuumCleaner.jpg",
@@ -409,7 +409,7 @@
   },
   "https://www.adrenaline.com.br/reviews/review-pragmata/": {
     "url": "https://www.adrenaline.com.br/wp-content/uploads/2026/03/review-tales-of-berseria-remastered-e-um-otimo-jrpg-mas-com-relancamento-que-nao-se-justifica-cover-327x204.jpg%20992w,%20https://www.adrenaline.com.br/wp-content/uploads/2026/03/review-tales-of-berseria-remastered-e-um-otimo-jrpg-mas-com-relancamento-que-nao-se-justifica-cover-912x569.jpg%201200w",
-    "at": 1776989315222
+    "at": 1777053413094
   },
   "https://jurua24horas.com/2026/04/fim-da-escala-6x1-avanca-e-zezinho-barbary-defende-mudanca-com-responsabilidade-para-o-acre/": {
     "url": "https://jurua24horas.com/wp-content/uploads/2026/04/imagem_2026-04-23_150940687.png",
@@ -602,5 +602,29 @@
   "https://juruacomunicacao.com.br/acre-registra-um-dos-menores-indices-de-adeptos-de-umbanda-e-candomble/": {
     "url": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/75-2.png?fit=1200%2C708&#038;ssl=1",
     "at": 1777047607624
+  },
+  "https://www.animenewsnetwork.com/news/2026-04-24/disgaea-mayhem-spinoff-game-trailer-reveals-july-23-release-in-west/.236764": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gI7/youtube/anWzJfUa8cg.jpg",
+    "at": 1777053413282
+  },
+  "https://www.animenewsnetwork.com/review/iczer-girl-iczelion-anime/.236101": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gUN/cms/review.2/236101/iczer-girl-iczelion.jpg",
+    "at": 1777053413379
+  },
+  "https://www.animenewsnetwork.com/news/2026-04-24/k-manga-adds-dig-it-volleyball-manga/.236766": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gHI/cms/news.9/236766/dig-it.jpg",
+    "at": 1777053413637
+  },
+  "https://thetoyinsider.com/hess-toy-truck-2026-monster-truck-news/": {
+    "url": "https://thetoyinsider.com/wp-content/uploads/2026/04/Hess-Toy-Truck_My-Plush-Monster-TruckFeatured.jpeg",
+    "at": 1777053414730
+  },
+  "https://thetoyinsider.com/my-first-picnic-basket-review/": {
+    "url": "https://thetoyinsider.com/wp-content/uploads/2026/04/Hess-Toy-Truck_My-Plush-Monster-TruckFeatured.jpeg",
+    "at": 1777053415692
+  },
+  "https://www.animenewsnetwork.com/news/2026-04-24/final-fantasy-xiv-mmorpg-unveils-new-evercold-expansion-for-january-2027/.236769": {
+    "url": "https://www.animenewsnetwork.com/thumbnails/crop600x315gQB/youtube/Dk3rfUC80DE.jpg",
+    "at": 1777054015309
   }
 }

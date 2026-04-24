@@ -1,7 +1,54 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T16:39:00.000Z",
+  "lastUpdatedAt": "2026-04-24T18:21:00.000Z",
   "orders": [
+    {
+      "id": "2026-04-24-re-rodada-diaria-subir-entretimento-e-sync",
+      "createdAt": "2026-04-24T18:21:00.000Z",
+      "updatedAt": "2026-04-24T18:21:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "suba tudo fazendo o sistema nosso diario de sincronizar e atualizar, e checar bugs e fotos e etc",
+      "summary": "Executar rodada diaria online-first, atualizar entretenimento, sincronizar noticias, auditar bugs/fotos e preparar subida para origin e Render.",
+      "normalizedTasks": [
+        "rodar re-rodada-dia-geral online-first",
+        "atualizar secao Entretenimento com dados reais do radar cultural",
+        "auditar fotos e foco manual",
+        "rodar review team e corrigir achados editoriais",
+        "preparar commit sem PubPaid WIP nem logs de visita/heartbeat",
+        "subir origin e Render e recapturar online"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-image-focus-audit.json",
+        "data/re-rodada-dia-geral-report.json",
+        "data/topic-feed-buzz.json",
+        "data/topic-feed-economy.json",
+        "data/topic-feed-games.json",
+        "data/topic-feed-politics.json",
+        "data/image-preview-cache.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "re-rodada-do-dia",
+        "deploy",
+        "noticias",
+        "entretenimento",
+        "auditoria-fotos",
+        "render"
+      ],
+      "nextSteps": [
+        "recapturar online apos deploy",
+        "manter PubPaid fora da rodada ate ordem explicita"
+      ],
+      "notes": "Validacoes locais: review:team 0 achados; audit:news-images 120/120 ok; 0 imagens faltantes; 0 duplicatas por divisao."
+    },
     {
       "id": "2026-04-24-re-rodada-do-dia-geral-online-first",
       "createdAt": "2026-04-24T16:39:00.000Z",
