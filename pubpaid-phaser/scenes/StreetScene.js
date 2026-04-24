@@ -1,14 +1,24 @@
 import { GAME_HEIGHT, GAME_WIDTH, STREET_BOUNDS } from "../config/gameConfig.js";
-import { ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { addIdleSpriteActor, ensureCoreSprites, PUBPAID_WORLD_SCALE, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
+import { openPanel } from "../ui/panelActions.js";
 import { updateGameState } from "../core/gameState.js";
-import {
-  getInteractionAt,
-  getInteractionById,
-  getNearestInteraction,
-  isWalkable
-} from "../systems/mapQuerySystem.js";
 
-const PUB_DOOR = getInteractionById("street", "street_pub_door");
+const TERMINAL_PANEL = {
+  kicker: "terminal",
+  title: "Missões locais",
+  body: "Terminal pronto para receber missões, contratos rápidos e chamadas de carteira. Por enquanto ele marca o ponto principal no mapa da rua.",
+  chips: ["missoes", "atalho rapido", "carteira em seguida"],
+  actions: [{ id: "close-panel", label: "Fechar", primary: true }]
+};
+
+const GOOGLE_PANEL = {
+  kicker: "google port",
+  title: "Login em espera",
+  body: "Google Port está parado para os experimentos locais. Quando o modo real estiver ativo, este ponto abre a conexão da conta.",
+  chips: ["google", "modo local", "sem bloqueio"],
+  actions: [{ id: "close-panel", label: "Fechar", primary: true }]
+};
 
 export class StreetScene extends Phaser.Scene {
   constructor() {
@@ -34,13 +44,7 @@ export class StreetScene extends Phaser.Scene {
     this.transitionLabel = null;
     this.pedestrians = [];
     this.vehicles = [];
-    this.steamPuffs = [];
-    this.identityGlows = [];
     this.streetSfxTimer = null;
-    this.cityWindows = [];
-    this.streetSetpieces = [];
-    this.livingStreetLights = [];
-    this.roadLightStreaks = [];
   }
 
   create() {
@@ -48,8 +52,8 @@ export class StreetScene extends Phaser.Scene {
     this.game.events.emit("pubpaid:music-zone", "street");
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "street-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientStreetFx();
-    this.buildTrafficFx();
     this.buildStreetLife();
+    this.googlePortSign = this.buildGooglePortSign(1056, 512);
     this.transitionVeil = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x04060d, 0)
       .setDepth(20)
       .setScrollFactor(0);
@@ -63,15 +67,23 @@ export class StreetScene extends Phaser.Scene {
     }).setOrigin(0.5).setLetterSpacing(4).setDepth(21).setScrollFactor(0).setAlpha(0);
     this.doorHotspot = this.buildHotspot({
       id: "door",
-      x: PUB_DOOR.x,
-      y: PUB_DOOR.y,
-      width: PUB_DOOR.width,
-      height: PUB_DOOR.height,
+      x: 300,
+      y: 486,
+      width: 118,
+      height: 178,
       color: 0xffd06d,
-      label: "PORTA",
-      visible: false
+      label: "ENTRADA"
     });
-    this.hotspots = [this.doorHotspot];
+    this.terminalHotspot = this.buildHotspot({
+      id: "terminal",
+      x: 108,
+      y: 446,
+      width: 106,
+      height: 132,
+      color: 0x50efff,
+      label: "TERMINAL"
+    });
+    this.hotspots = [this.doorHotspot, this.terminalHotspot, this.googlePortSign];
 
     this.player = this.buildPlayer(176, 560);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -88,15 +100,6 @@ export class StreetScene extends Phaser.Scene {
 
     this.input.on("pointerdown", (pointer) => {
       const worldPoint = pointer.positionToCamera(this.cameras.main);
-      if (this.isPointOnDoor(worldPoint.x, worldPoint.y)) {
-        this.enterInterior();
-        updateGameState({
-          focus: "entrada",
-          objective: "Entrar no salão",
-          prompt: "Porta acionada. Entrando no salão."
-        });
-        return;
-      }
       const hit = this.findHotspotAt(worldPoint.x, worldPoint.y);
       if (hit) {
         this.handleHotspot(hit);
@@ -111,7 +114,8 @@ export class StreetScene extends Phaser.Scene {
         currentScene: "street",
         focus: "rua principal",
         objective: "Aproximar da porta principal",
-        prompt: "Destino marcado. A rua ganhou luz, chuva e reflexos vivos; siga para a porta principal."
+        nerdAgent: formatNerdAgent(NERD_TEAM.physics),
+        prompt: "Destino marcado. Caminhe até a porta principal; a rua agora usa figurantes bitmap em escala controlada."
       });
     });
 
@@ -127,7 +131,8 @@ export class StreetScene extends Phaser.Scene {
       currentScene: "street",
       focus: "porta principal",
       objective: "Entrar no PubPaid pela porta principal",
-      prompt: "Mapa externo carregado: porta, rua e ponto de onibus identificados. Clique na porta do PubPaid para entrar no bar."
+      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+      prompt: "Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão."
     });
   }
 
@@ -188,159 +193,61 @@ export class StreetScene extends Phaser.Scene {
       { x: 548, y: 598, width: 112, height: 10, color: 0x50efff, alpha: 0.2, speed: 0.012 },
       { x: 646, y: 612, width: 124, height: 12, color: 0xff4fb8, alpha: 0.18, speed: 0.016 },
       { x: 770, y: 604, width: 136, height: 11, color: 0xffd06d, alpha: 0.16, speed: 0.014 },
-      { x: 1002, y: 632, width: 96, height: 9, color: 0x50efff, alpha: 0.14, speed: 0.011 },
-      { x: 710, y: 650, width: 220, height: 12, color: 0xffcf4a, alpha: 0.12, speed: 0.01 },
-      { x: 360, y: 674, width: 156, height: 10, color: 0xff4fb8, alpha: 0.12, speed: 0.013 }
+      { x: 1002, y: 632, width: 96, height: 9, color: 0x50efff, alpha: 0.14, speed: 0.011 }
     ];
     reflectionLayer.ppgReflectionLayer = true;
     this.reflectionBands.graphics = reflectionLayer;
-
-    const doorGold = this.add.ellipse(674, 520, 168, 70, 0xffcf4a, 0.11)
-      .setBlendMode(Phaser.BlendModes.SCREEN)
-      .setDepth(1.34);
-    const brandPink = this.add.rectangle(674, 306, 312, 70, 0xff4fb8, 0.08)
-      .setBlendMode(Phaser.BlendModes.SCREEN)
-      .setDepth(1.33);
-    const brandCyan = this.add.rectangle(712, 260, 234, 54, 0x50efff, 0.06)
-      .setBlendMode(Phaser.BlendModes.SCREEN)
-      .setDepth(1.32);
-    this.identityGlows.push(doorGold, brandPink, brandCyan);
-    this.tweens.add({
-      targets: this.identityGlows,
-      alpha: { from: 0.035, to: 0.16 },
-      duration: 1250,
-      yoyo: true,
-      repeat: -1,
-      ease: "Sine.easeInOut"
-    });
-
-    const puffOrigins = [
-      { x: 292, y: 579, delay: 0 },
-      { x: 1016, y: 586, delay: 520 },
-      { x: 840, y: 602, delay: 1040 }
-    ];
-    puffOrigins.forEach((origin) => {
-      const puff = this.add.ellipse(origin.x, origin.y, 34, 14, 0xd8f3ff, 0.08)
-        .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setDepth(1.55);
-      this.steamPuffs.push(puff);
-      this.tweens.add({
-        targets: puff,
-        y: origin.y - 38,
-        x: origin.x + 10,
-        scaleX: 1.8,
-        scaleY: 1.35,
-        alpha: { from: 0.11, to: 0 },
-        duration: 2100,
-        delay: origin.delay,
-        repeat: -1,
-        repeatDelay: 520,
-        ease: "Sine.easeOut",
-        onRepeat: () => {
-          puff.setPosition(origin.x, origin.y);
-          puff.setScale(1);
-        }
-      });
-    });
-
-    const cityWindowLayout = [
-      [102, 78, 14, 8, 0xffc768], [126, 92, 12, 8, 0xff67d4], [152, 70, 10, 7, 0x64e5ff],
-      [230, 84, 12, 8, 0xffc768], [256, 74, 10, 6, 0x64e5ff], [286, 100, 14, 8, 0xff67d4],
-      [840, 66, 14, 8, 0xffc768], [866, 78, 11, 8, 0x64e5ff], [888, 92, 10, 7, 0xff67d4],
-      [1008, 78, 13, 8, 0x64e5ff], [1036, 90, 11, 7, 0xffc768], [1064, 74, 10, 7, 0xff67d4]
-    ];
-    cityWindowLayout.forEach(([x, y, width, height, color], index) => {
-      const light = this.add.rectangle(x, y, width, height, color, 0.22)
-        .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setDepth(0.95);
-      this.cityWindows.push(light);
-      this.tweens.add({
-        targets: light,
-        alpha: { from: 0.08, to: 0.42 },
-        duration: 1100 + index * 80,
-        delay: index * 90,
-        yoyo: true,
-        repeat: -1,
-        ease: "Sine.easeInOut"
-      });
-    });
-
-    const alleyGlow = this.add.rectangle(320, 330, 72, 188, 0x2ae4db, 0.08)
-      .setBlendMode(Phaser.BlendModes.SCREEN)
-      .setDepth(1.18);
-    const alleyShadow = this.add.rectangle(324, 336, 92, 210, 0x04111c, 0.22)
-      .setDepth(1.17);
-    this.tweens.add({
-      targets: alleyGlow,
-      alpha: { from: 0.04, to: 0.16 },
-      duration: 1500,
-      yoyo: true,
-      repeat: -1,
-      ease: "Sine.easeInOut"
-    });
-    this.identityGlows.push(alleyGlow, alleyShadow);
-  }
-
-  buildTrafficFx() {
-    this.vehicles = [];
-    const roadLanes = [
-      { x: -160, y: 586, width: 132, color: 0x50efff, delay: 0, duration: 5200 },
-      { x: GAME_WIDTH + 180, y: 646, width: 176, color: 0xff4fb8, delay: 1600, duration: 6200 },
-      { x: -220, y: 620, width: 108, color: 0xffd06d, delay: 3200, duration: 5600 }
-    ];
-    roadLanes.forEach((lane, index) => {
-      const streak = this.add.rectangle(lane.x, lane.y, lane.width, 4, lane.color, 0.16)
-        .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setDepth(1.5);
-      const reflection = this.add.rectangle(lane.x, lane.y + 22, lane.width * 1.22, 7, lane.color, 0.08)
-        .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setDepth(1.12);
-      this.roadLightStreaks.push(streak, reflection);
-      this.tweens.add({
-        targets: [streak, reflection],
-        x: index === 1 ? -220 : GAME_WIDTH + 220,
-        alpha: { from: 0, to: 0.22 },
-        duration: lane.duration,
-        delay: lane.delay,
-        repeat: -1,
-        repeatDelay: 1200,
-        ease: "Sine.easeInOut",
-        yoyo: false,
-        onRepeat: () => {
-          streak.setX(lane.x);
-          reflection.setX(lane.x);
-        }
-      });
-    });
   }
 
   buildStreetLife() {
-    this.pedestrians = [];
-    this.streetSetpieces = [];
-    const livingLights = [
-      { x: 988, y: 386, width: 64, height: 86, color: 0x64e5ff, alpha: 0.08, delay: 0 },
-      { x: 1084, y: 360, width: 78, height: 112, color: 0xffd06d, alpha: 0.06, delay: 320 },
-      { x: 204, y: 222, width: 132, height: 88, color: 0x50efff, alpha: 0.08, delay: 640 },
-      { x: 444, y: 370, width: 92, height: 54, color: 0xff4fb8, alpha: 0.05, delay: 960 }
+    const people = [
+      { key: TEXTURE_KEYS.guestA, x: 94, y: 558, toX: 216, delay: 180, scale: 0.072, shadow: 50 },
+      { key: TEXTURE_KEYS.guestA, x: 918, y: 558, toX: 812, delay: 620, scale: 0.066, shadow: 46 },
+      { key: TEXTURE_KEYS.guestA, x: 682, y: 500, toX: 752, delay: 1200, scale: 0.052, shadow: 38 },
+      { key: TEXTURE_KEYS.guestA, x: 1138, y: 578, toX: 1042, delay: 880, scale: 0.06, shadow: 42 }
     ];
-    livingLights.forEach((light) => {
-      const glow = this.add.rectangle(light.x, light.y, light.width, light.height, light.color, light.alpha)
-        .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setDepth(1.36);
-      this.livingStreetLights.push(glow);
+
+    people.forEach((person, index) => {
+      const sprite = addIdleSpriteActor(this, person.key, person.x, person.y, person.scale, {
+        frameDuration: 260,
+        delay: person.delay,
+        staticBitmap: true
+      });
+      sprite.setDepth(person.y > 540 ? 2.25 : 1.62);
+      sprite.setAlpha(0.88);
+      sprite.setFlipX(person.toX < person.x);
+      const shadow = this.add.ellipse(person.x, person.y + 2, person.shadow, person.shadow * 0.2, 0x000000, 0.22)
+        .setDepth(sprite.depth - 0.02)
+        .setBlendMode(Phaser.BlendModes.MULTIPLY);
+      this.pedestrians.push({ sprite, shadow });
       this.tweens.add({
-        targets: glow,
-        alpha: { from: light.alpha * 0.35, to: light.alpha * 1.7 },
-        duration: 1200 + light.delay,
-        delay: light.delay,
+        targets: [sprite, shadow],
+        x: person.toX,
+        duration: 4200 + index * 540,
+        delay: person.delay,
         yoyo: true,
         repeat: -1,
-        ease: "Sine.easeInOut"
+        ease: "Sine.easeInOut",
+        onYoyo: () => sprite.setFlipX(!sprite.flipX),
+        onRepeat: () => sprite.setFlipX(!sprite.flipX)
       });
     });
+
+    const scaleNote = this.add.text(18, 704, `escala adulta: player ~${PUBPAID_WORLD_SCALE.adultForegroundPx}px / porta ~${PUBPAID_WORLD_SCALE.doorHeightPx}px`, {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "9px",
+      color: "#8fa0ba",
+      stroke: "#02050d",
+      strokeThickness: 2
+    }).setAlpha(0.36).setDepth(4).setScrollFactor(0);
+    this.time.delayedCall(1800, () => {
+      this.tweens.add({ targets: scaleNote, alpha: 0, duration: 900, ease: "Sine.easeOut" });
+    });
+
+    this.streetSfxTimer = null;
   }
 
-  buildHotspot({ id, x, y, width, height, color, label, visible = true }) {
+  buildHotspot({ id, x, y, width, height, color, label }) {
     const container = this.add.container(x, y).setDepth(2);
     const glow = this.add.rectangle(0, 0, width + 10, height + 10, color, 0.06)
       .setBlendMode(Phaser.BlendModes.SCREEN);
@@ -359,9 +266,9 @@ export class StreetScene extends Phaser.Scene {
     const pulse = this.add.rectangle(0, 0, width - 14, height - 14, color, 0.02)
       .setBlendMode(Phaser.BlendModes.SCREEN);
     const doorReadyGlow = id === "door"
-      ? this.add.ellipse(0, height / 2 - 4, width + 54, 30, color, 0.04)
+      ? this.add.ellipse(0, height / 2 - 4, width + 32, 28, color, 0.02)
         .setBlendMode(Phaser.BlendModes.SCREEN)
-        .setAlpha(0.08)
+        .setAlpha(0.03)
       : null;
 
     container.add([softGlow, glow, pulse, outline, text]);
@@ -369,15 +276,8 @@ export class StreetScene extends Phaser.Scene {
       this.doorReadyGlow = doorReadyGlow;
       container.addAt(doorReadyGlow, 0);
     }
-    if (!visible) {
-      glow.setAlpha(0);
-      softGlow.setAlpha(0);
-      pulse.setAlpha(0);
-      outline.setAlpha(0);
-      text.setAlpha(0);
-    }
     container.setSize(width, height);
-    container.ppgHotspot = { id, x, y, width, height, glow, softGlow, pulse, outline, text, color, visible };
+    container.ppgHotspot = { id, x, y, width, height, glow, softGlow, pulse, outline, text, color };
     container.setInteractive(new Phaser.Geom.Rectangle(-width / 2, -height / 2, width, height), Phaser.Geom.Rectangle.Contains);
     container.on("pointerover", () => this.setActiveHotspot(container));
     container.on("pointerout", () => {
@@ -408,11 +308,100 @@ export class StreetScene extends Phaser.Scene {
     ], true);
   }
 
-  findHotspotAt(x, y) {
-    const interaction = getInteractionAt("street", x, y);
-    if (interaction?.id === "street_pub_door") {
-      return this.doorHotspot;
+  buildGooglePortSign(x, y) {
+    const sign = this.add.container(x, y).setDepth(3);
+    const glow = this.add.rectangle(0, 0, 302, 92, 0x50efff, 0.07)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const glowAura = this.add.ellipse(0, 0, 352, 126, 0x50efff, 0.035)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const magentaAura = this.add.ellipse(10, -8, 286, 88, 0xff4fb8, 0.022)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const plaque = this.add.graphics();
+    plaque.fillStyle(0x080b14, 0.88);
+    plaque.fillPoints([
+      new Phaser.Geom.Point(-136, -30),
+      new Phaser.Geom.Point(136, -30),
+      new Phaser.Geom.Point(152, -10),
+      new Phaser.Geom.Point(152, 26),
+      new Phaser.Geom.Point(136, 36),
+      new Phaser.Geom.Point(-136, 36),
+      new Phaser.Geom.Point(-152, 26),
+      new Phaser.Geom.Point(-152, -10)
+    ], true);
+    plaque.lineStyle(4, 0xbda37e, 0.52);
+    plaque.strokePoints([
+      new Phaser.Geom.Point(-136, -30),
+      new Phaser.Geom.Point(136, -30),
+      new Phaser.Geom.Point(152, -10),
+      new Phaser.Geom.Point(152, 26),
+      new Phaser.Geom.Point(136, 36),
+      new Phaser.Geom.Point(-136, 36),
+      new Phaser.Geom.Point(-152, 26),
+      new Phaser.Geom.Point(-152, -10)
+    ], true);
+    plaque.lineStyle(1, 0x50efff, 0.16);
+    for (let row = -22; row <= 24; row += 8) {
+      plaque.lineBetween(-124, row, 124, row);
     }
+    plaque.fillStyle(0x50efff, 0.08);
+    plaque.fillRoundedRect(-120, -10, 22, 32, 2);
+    plaque.fillRoundedRect(98, -10, 22, 32, 2);
+
+    const kicker = this.add.text(0, -48, "GOOGLE PORT", {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "14px",
+      fontStyle: "bold",
+      color: "#7feeff"
+    }).setOrigin(0.5).setLetterSpacing(4).setAlpha(0.92);
+    const label = this.add.text(0, 2, "ENTRAR COM GOOGLE", {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "20px",
+      fontStyle: "bold",
+      color: "#fff3da",
+      stroke: "#03050b",
+      strokeThickness: 5
+    }).setOrigin(0.5).setLetterSpacing(2);
+    const status = this.add.text(0, 48, "EM ESPERA. TESTES LOCAIS LIBERADOS.", {
+      fontFamily: "Courier New, Lucida Console, monospace",
+      fontSize: "10px",
+      color: "#aab7d0"
+    }).setOrigin(0.5).setLetterSpacing(2);
+    const spark = this.add.graphics().setBlendMode(Phaser.BlendModes.SCREEN);
+    spark.fillStyle(0x50efff, 0.32);
+    spark.fillRect(-62, -6, 10, 2);
+    spark.fillRect(-58, -10, 2, 10);
+    spark.fillStyle(0xffd06d, 0.24);
+    spark.fillRect(54, -3, 8, 2);
+    spark.fillRect(57, -6, 2, 8);
+
+    sign.add([glowAura, magentaAura, glow, plaque, spark, kicker, label, status]);
+    sign.setSize(296, 92);
+    sign.ppgHotspot = { id: "google", x, y, width: 296, height: 92, glow, softGlow: glowAura, pulse: spark, label, status, color: 0x50efff };
+    sign.setInteractive(new Phaser.Geom.Rectangle(-148, -46, 296, 92), Phaser.Geom.Rectangle.Contains);
+    sign.on("pointerdown", (_pointer, _localX, _localY, event) => {
+      event?.stopPropagation?.();
+      this.handleHotspot(sign);
+    });
+    this.tweens.add({
+      targets: glow,
+      alpha: { from: 0.04, to: 0.16 },
+      duration: 1100,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+    this.tweens.add({
+      targets: [glowAura, magentaAura, spark],
+      alpha: { from: 0.02, to: 0.12 },
+      duration: 1600,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+    return sign;
+  }
+
+  findHotspotAt(x, y) {
     return this.hotspots.find((hotspot) => {
       const data = hotspot.ppgHotspot;
       if (!data) return false;
@@ -425,16 +414,11 @@ export class StreetScene extends Phaser.Scene {
     });
   }
 
-  isPointOnDoor(x, y) {
-    return getInteractionAt("street", x, y)?.id === "street_pub_door";
-  }
-
   setActiveHotspot(hotspot) {
     this.activeHotspot = hotspot;
     this.hotspots.forEach((item) => {
       const data = item.ppgHotspot;
       if (!data?.glow) return;
-      if (!data.visible) return;
       data.glow.setAlpha(item === hotspot ? 0.22 : 0.08);
       data.softGlow?.setAlpha(item === hotspot ? 0.12 : 0.03);
       data.pulse?.setAlpha(item === hotspot ? 0.22 : 0.04);
@@ -448,28 +432,48 @@ export class StreetScene extends Phaser.Scene {
     if (this.isTransitioning) return;
     const id = hotspot.ppgHotspot?.id;
     if (id === "door") {
-      this.enterInterior();
+      this.targetPoint = new Phaser.Math.Vector2(300, 526);
+      this.targetMarker.setPosition(300, 526).setVisible(true);
       updateGameState({
         focus: "entrada",
         objective: "Entrar no salão",
-        prompt: "Porta acionada. Entrando no salão."
+        nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+        prompt: "Entrada marcada. Chegue perto e aperte Enter para atravessar."
       });
       return;
     }
 
+    if (id === "terminal") {
+      openPanel(TERMINAL_PANEL);
+      updateGameState({
+        focus: "terminal de missoes",
+        objective: "Preparar missões locais",
+        nerdAgent: formatNerdAgent(NERD_TEAM.hud),
+        prompt: "Terminal local aberto. A camada de missões entra aqui."
+      });
+      return;
+    }
+
+    if (id === "google") {
+      openPanel(GOOGLE_PANEL);
+      this.game.events.emit("pubpaid:google-port-click");
+      updateGameState({
+        focus: "google port",
+        objective: "Google em espera para experimento local",
+        nerdAgent: formatNerdAgent(NERD_TEAM.hud),
+        prompt: "Google Port parado. Testes locais continuam liberados."
+      });
+    }
   }
 
   buildPlayer(x, y) {
     const player = this.add.container(x, y).setDepth(2.42);
-    const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0)
+    const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
     const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
       .setOrigin(0.5, 1)
-      .setScale(0.083)
-      .setAlpha(0);
+      .setScale(0.083);
     player.add([shadow, sprite]);
-    player.ppgSprite = sprite;
-    player.ppgShadow = shadow;
     return player;
   }
 
@@ -479,32 +483,11 @@ export class StreetScene extends Phaser.Scene {
   }
 
   nudgePlayer(dx, dy) {
-    const nextX = Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
-    const nextY = Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
-    this.targetPoint = new Phaser.Math.Vector2(nextX, nextY);
+    this.targetPoint = new Phaser.Math.Vector2(
+      Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX),
+      Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY)
+    );
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
-  }
-
-  tryMovePlayer(dx, dy) {
-    const tryX = Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
-    const tryY = Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
-    if (isWalkable("street", tryX, tryY)) {
-      this.player.x = tryX;
-      this.player.y = tryY;
-      return true;
-    }
-
-    const axisX = Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
-    if (isWalkable("street", axisX, this.player.y)) {
-      this.player.x = axisX;
-      return true;
-    }
-    const axisY = Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
-    if (isWalkable("street", this.player.x, axisY)) {
-      this.player.y = axisY;
-      return true;
-    }
-    return false;
   }
 
   tryDoorInteraction() {
@@ -512,29 +495,34 @@ export class StreetScene extends Phaser.Scene {
     if (this.isTransitioning || now < this.interactionCooldown) return;
     this.interactionCooldown = now + 250;
 
-    const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, PUB_DOOR.entryX, PUB_DOOR.entryY);
-    if (distance < PUB_DOOR.radius) {
+    const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486);
+    if (distance < 74) {
       this.enterInterior();
       return;
     }
     updateGameState({
       focus: "calçada",
       objective: "Chegar mais perto da entrada",
+      nerdAgent: formatNerdAgent(NERD_TEAM.physics),
       prompt: "Chegue mais perto da porta para entrar no salão definitivo em Phaser."
     });
   }
 
   tryNearestHotspot() {
     if (this.isTransitioning) return;
-    const nearestInteraction = getNearestInteraction("street", this.player.x, this.player.y);
-    const nearest = nearestInteraction
-      ? {
-        hotspot: nearestInteraction.point.id === "street_pub_door" ? this.doorHotspot : null,
-        distance: nearestInteraction.distance
-      }
-      : null;
+    const nearest = this.hotspots
+      .map((hotspot) => ({
+        hotspot,
+        distance: Phaser.Math.Distance.Between(
+          this.player.x,
+          this.player.y,
+          hotspot.ppgHotspot.x,
+          hotspot.ppgHotspot.y
+        )
+      }))
+      .sort((a, b) => a.distance - b.distance)[0];
     if (nearest && nearest.distance < 110) {
-      if (nearest.hotspot) this.handleHotspot(nearest.hotspot);
+      this.handleHotspot(nearest.hotspot);
     }
   }
 
@@ -542,9 +530,6 @@ export class StreetScene extends Phaser.Scene {
     if (this.isTransitioning) {
       return;
     }
-    let playerMoving = false;
-    let moveDx = 0;
-    let moveDy = 0;
     const keyboardVector = new Phaser.Math.Vector2(0, 0);
     if (this.cursors.left.isDown) keyboardVector.x -= 1;
     if (this.cursors.right.isDown) keyboardVector.x += 1;
@@ -553,9 +538,8 @@ export class StreetScene extends Phaser.Scene {
 
     if (keyboardVector.lengthSq() > 0) {
       keyboardVector.normalize().scale(2.6);
-      moveDx = keyboardVector.x;
-      moveDy = keyboardVector.y;
-      playerMoving = this.tryMovePlayer(moveDx, moveDy);
+      this.player.x = Phaser.Math.Clamp(this.player.x + keyboardVector.x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
+      this.player.y = Phaser.Math.Clamp(this.player.y + keyboardVector.y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
     } else if (this.targetPoint) {
@@ -568,14 +552,12 @@ export class StreetScene extends Phaser.Scene {
         this.targetMarker.setVisible(false);
       } else {
         const speed = 2.8;
-        moveDx = (dx / distance) * speed;
-        moveDy = (dy / distance) * speed;
-        playerMoving = this.tryMovePlayer(moveDx, moveDy);
+        this.player.x += (dx / distance) * speed;
+        this.player.y += (dy / distance) * speed;
       }
     }
-    this.updatePlayerBitmapPose(playerMoving, moveDx, moveDy);
 
-    const nearDoor = Phaser.Math.Distance.Between(this.player.x, this.player.y, PUB_DOOR.entryX, PUB_DOOR.entryY) < PUB_DOOR.radius;
+    const nearDoor = Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486) < 74;
     const nearestHotspot = this.hotspots
       .map((hotspot) => ({
         hotspot,
@@ -596,6 +578,7 @@ export class StreetScene extends Phaser.Scene {
       currentScene: "street",
       focus: nearDoor ? "porta principal" : "rua viva",
       objective: nearDoor ? "Apertar Enter para entrar" : "Entrar no PubPaid pela porta principal",
+      nerdAgent: formatNerdAgent(nearDoor ? NERD_TEAM.engine : NERD_TEAM.physics),
       prompt: nearDoor
         ? "Porta encontrada. Aperte Enter para entrar no salão em Phaser."
         : nearestHotspot?.distance < 120
@@ -633,22 +616,6 @@ export class StreetScene extends Phaser.Scene {
         );
       });
     }
-
-  }
-
-  updatePlayerBitmapPose(moving, dx, dy) {
-    const sprite = this.player?.ppgSprite;
-    if (!sprite) return;
-    if (Math.abs(dx) > 0.05) {
-      sprite.setFlipX(dx < 0);
-    }
-
-    const shadow = this.player.ppgShadow;
-    if (shadow) {
-      const pulse = moving ? Math.abs(Math.sin(this.time.now / 120)) : 0.12;
-      shadow.scaleX = 1 - pulse * 0.08;
-      shadow.alpha = 0.2 - pulse * 0.04;
-    }
   }
 
   enterInterior() {
@@ -681,6 +648,7 @@ export class StreetScene extends Phaser.Scene {
       currentScene: "street",
       focus: "portal principal",
       objective: "Transicao para o salao",
+      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
       prompt: "Entrando no salao do PubPaid..."
     });
   }

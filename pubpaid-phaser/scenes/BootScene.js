@@ -34,28 +34,6 @@ export class BootScene extends Phaser.Scene {
     this.load.image("ppg-singer-sprite", "./assets/pubpaid/sprites/singer-stage-tight-v1.png");
     this.load.image("ppg-guest-a-sprite", "./assets/pubpaid/sprites/adult-standing-tight-v1.png");
     this.load.image("ppg-guest-b-sprite", "./assets/pubpaid/sprites/guest-seated-tight-v1.png");
-    this.load.image("ppg-guest-c-sprite", "./assets/pubpaid/sprites/adult-standing-burgundy-tight-v1.png");
-    this.load.image("ppg-guest-d-sprite", "./assets/pubpaid/sprites/adult-standing-teal-tight-v1.png");
-    this.load.image("ppg-guest-e-sprite", "./assets/pubpaid/sprites/adult-standing-gold-tight-v1.png");
-    this.load.image("ppg-guest-seated-blue-sprite", "./assets/pubpaid/sprites/guest-seated-blue-tight-v1.png");
-    this.load.image("ppg-bouncer-wide-sprite", "./assets/pubpaid/sprites/bouncer-wide-tight-v1.png");
-    this.load.image("ppg-woman-red-sprite", "./assets/pubpaid/sprites/woman-red-stage-tight-v1.png");
-    this.load.image("ppg-guest-jacket-short-sprite", "./assets/pubpaid/sprites/guest-jacket-short-tight-v1.png");
-    this.load.image("ppg-street-taxi-neon", "./assets/pubpaid/street/pubpaid-taxi-neon-v1.png");
-    this.load.image("ppg-street-moto-neon", "./assets/pubpaid/street/pubpaid-moto-neon-v1.png");
-    this.load.image("ppg-street-food-cart", "./assets/pubpaid/street/pubpaid-food-cart-v1.png");
-    this.load.image("ppg-street-sign", "./assets/pubpaid/street/pubpaid-street-sign-v1.png");
-    this.load.image("ppg-street-homeless-sitting", "./assets/pubpaid/street/civilians/street-homeless-sitting-v1.png");
-    this.load.image("ppg-street-drunk-floor", "./assets/pubpaid/street/civilians/street-drunk-floor-v1.png");
-    this.load.image("ppg-street-bus-lady", "./assets/pubpaid/street/civilians/street-bus-lady-v1.png");
-    this.load.image("ppg-street-hooded-boy", "./assets/pubpaid/street/civilians/street-hooded-boy-v1.png");
-    this.load.image("ppg-street-old-cane", "./assets/pubpaid/street/civilians/street-old-cane-v1.png");
-    this.load.image("ppg-street-bus-man-bag", "./assets/pubpaid/street/civilians/street-bus-man-bag-v1.png");
-    this.load.image("ppg-street-umbrella-woman", "./assets/pubpaid/street/setpieces/street-bus-umbrella-woman-v1.png");
-    this.load.image("ppg-street-car-compact", "./assets/pubpaid/street/setpieces/street-car-compact-v1.png");
-    this.load.image("ppg-street-cat-groom", "./assets/pubpaid/street/setpieces/street-cat-groom-v1.png");
-    this.load.image("ppg-street-dog-side", "./assets/pubpaid/street/setpieces/street-dog-side-v1.png");
-    this.load.image("ppg-street-homeless-sleeping", "./assets/pubpaid/street/setpieces/street-homeless-sleeping-v1.png");
   }
 
   create() {

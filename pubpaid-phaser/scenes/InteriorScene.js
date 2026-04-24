@@ -1,6 +1,6 @@
 import { GAME_HEIGHT, GAME_WIDTH, INTERIOR_BOUNDS } from "../config/gameConfig.js";
-import { INTERIOR_SCENE_MAP, isPointWalkable } from "../config/sceneMap.js";
-import { addBitmapWalkCycle, addIdleSpriteActor, ensureCoreSprites, TEXTURE_KEYS, updateContainerWalkPose } from "../core/spriteFactory.js";
+import { addIdleSpriteActor, ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { closePanel, openPanel } from "../ui/panelActions.js";
 import { gameState, updateGameState } from "../core/gameState.js";
 
@@ -9,14 +9,14 @@ const INTERIOR_PANELS = {
     kicker: "garçom",
     title: "Garçom dos jogos",
     body: "Ele abre o lobby próprio. Na próxima tela você escolhe o jogo, acha oponente, define aposta e confirma a partida.",
-    chips: ["hub", "lobby separado", "garçom"],
+    chips: ["hub", "lobby separado", "garçom", NERD_TEAM.hud.name],
     actions: [{ id: "close-panel", label: "Fechar" }]
   },
   stage: {
     kicker: "palco",
     title: "Cantora ao vivo",
     body: "O palco agora é um nó de evento do salão. Ele pode ativar clima de noite, buff visual e chamadas para mesas ou torneios.",
-    chips: ["evento", "buff visual", "crowd mood"],
+    chips: ["evento", "buff visual", "crowd mood", NERD_TEAM.sprite.name],
     actions: [{ id: "toggle-stage-event", label: "Ativar evento", primary: true }]
   }
 };
@@ -75,7 +75,12 @@ export class InteriorScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "interior-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientFx();
 
-    this.actors = [];
+    this.actors = [
+      this.addActor(TEXTURE_KEYS.waiterHero, 306, 456, 0.075, 2400, 0xfff0c0),
+      this.addActor(TEXTURE_KEYS.singer, 1056, 322, 0.078, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.32, alpha: 0.92 }),
+      this.addActor(TEXTURE_KEYS.guestB, 874, 528, 0.06, 2600, 0x50efff, { staticBitmap: true, depth: 2.18, alpha: 0.82 }),
+      this.addActor(TEXTURE_KEYS.guestA, 1112, 530, 0.062, 2800, 0xffd06d, { staticBitmap: true, depth: 2.2, alpha: 0.82 })
+    ];
 
     this.player = this.buildPlayer(640, 608);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -95,9 +100,9 @@ export class InteriorScene extends Phaser.Scene {
       .setDepth(1.4);
 
     this.zones = [
-      { id: "waiter", x: 306, y: 438, radius: 72, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", mapRef: "interior_waiter_hub" },
-      { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco", mapRef: "interior_stage_trigger" },
-      { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua", mapRef: "interior_exit_to_street" }
+      { id: "waiter", x: 306, y: 438, radius: 72, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom" },
+      { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco" },
+      { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua" }
     ];
     this.zoneHotspots = this.zones.map((zone) => this.buildZoneHotspot(zone));
 
@@ -126,7 +131,8 @@ export class InteriorScene extends Phaser.Scene {
         currentScene: "interior",
         focus: "salão",
         objective: "Explorar pontos ativos do salão",
-                prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir o lobby."
+        nerdAgent: formatNerdAgent(NERD_TEAM.physics),
+        prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir o lobby."
       });
     });
 
@@ -134,7 +140,8 @@ export class InteriorScene extends Phaser.Scene {
       currentScene: "interior",
       focus: "salão",
       objective: "Falar com o garçom para escolher jogo",
-      prompt: `Mapa interno carregado: balcao, arcade, palco e saida identificados. Interacoes: ${INTERIOR_SCENE_MAP.interactionPoints.length} pontos ativos.`
+      nerdAgent: formatNerdAgent(NERD_TEAM.hud),
+      prompt: "Salão definitivo carregado. O garçom no centro abre o lobby; os jogos acontecem fora do bar, em tela própria."
     });
   }
 
@@ -1301,15 +1308,12 @@ export class InteriorScene extends Phaser.Scene {
 
   buildPlayer(x, y) {
     const player = this.add.container(x, y).setDepth(2.55);
-    const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0)
+    const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
     const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
       .setOrigin(0.5, 1)
-      .setScale(0.083)
-      .setAlpha(0);
+      .setScale(0.083);
     player.add([shadow, sprite]);
-    player.ppgSprite = sprite;
-    player.ppgShadow = shadow;
     return player;
   }
 
@@ -1324,11 +1328,6 @@ export class InteriorScene extends Phaser.Scene {
     });
     actor.setDepth(options.depth || 2.45);
     if (options.alpha) actor.setAlpha(options.alpha);
-    addBitmapWalkCycle(this, actor, glow, {
-      stepHeight: options.stepHeight || 4,
-      duration: Math.max(420, pulseDuration * 0.22),
-      delay: Math.floor((x * 3 + y) % 260)
-    });
     this.tweens.add({
       targets: glow,
       alpha: { from: 0.04, to: 0.14 },
@@ -1351,7 +1350,8 @@ export class InteriorScene extends Phaser.Scene {
       currentScene: "interior",
       focus: this.getZoneLabel(zone.id),
       objective: zone.id === "exit" ? "Voltar para a rua" : zone.objective,
-            prompt:
+      nerdAgent: formatNerdAgent(zone.id === "stage" ? NERD_TEAM.sprite : zone.id === "exit" ? NERD_TEAM.engine : NERD_TEAM.physics),
+      prompt:
         zone.id === "exit"
           ? "Saída marcada. Chegue perto e aperte Enter."
           : `${zone.label} marcado. Chegue perto e aperte Enter.`
@@ -1359,32 +1359,11 @@ export class InteriorScene extends Phaser.Scene {
   }
 
   nudgePlayer(dx, dy) {
-    const nextX = Phaser.Math.Clamp(this.player.x + dx, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX);
-    const nextY = Phaser.Math.Clamp(this.player.y + dy, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY);
-    this.targetPoint = new Phaser.Math.Vector2(nextX, nextY);
+    this.targetPoint = new Phaser.Math.Vector2(
+      Phaser.Math.Clamp(this.player.x + dx, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
+      Phaser.Math.Clamp(this.player.y + dy, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
+    );
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
-  }
-
-  tryMovePlayer(dx, dy) {
-    const tryX = Phaser.Math.Clamp(this.player.x + dx, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX);
-    const tryY = Phaser.Math.Clamp(this.player.y + dy, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY);
-    if (isPointWalkable(INTERIOR_SCENE_MAP, tryX, tryY)) {
-      this.player.x = tryX;
-      this.player.y = tryY;
-      return true;
-    }
-
-    const axisX = Phaser.Math.Clamp(this.player.x + dx, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX);
-    if (isPointWalkable(INTERIOR_SCENE_MAP, axisX, this.player.y)) {
-      this.player.x = axisX;
-      return true;
-    }
-    const axisY = Phaser.Math.Clamp(this.player.y + dy, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY);
-    if (isPointWalkable(INTERIOR_SCENE_MAP, this.player.x, axisY)) {
-      this.player.y = axisY;
-      return true;
-    }
-    return false;
   }
 
   getNearestZone() {
@@ -1448,7 +1427,8 @@ export class InteriorScene extends Phaser.Scene {
         lobbyPhase: "selecting",
         objective: "Escolher jogo no lobby",
         focus: "lobby dos jogos",
-                prompt: "Garçom abriu o lobby separado. Escolha o jogo na próxima tela."
+        nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+        prompt: "Garçom abriu o lobby separado. Escolha o jogo na próxima tela."
       });
       this.scene.start("game-lobby-scene", { gameId: "" });
       return;
@@ -1458,7 +1438,7 @@ export class InteriorScene extends Phaser.Scene {
     updateGameState({
       focus: this.getZoneLabel(zone.id),
       objective: "Escolher ação no painel",
-      systemStatus: zone.id === "stage" ? "Palco ativo" : "Painel aberto"
+      nerdAgent: formatNerdAgent(zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud)
     });
   }
 
@@ -1467,7 +1447,6 @@ export class InteriorScene extends Phaser.Scene {
       return;
     }
 
-    let playerMoving = false;
     const keyboardVector = new Phaser.Math.Vector2(0, 0);
     if (this.cursors.left.isDown) keyboardVector.x -= 1;
     if (this.cursors.right.isDown) keyboardVector.x += 1;
@@ -1476,10 +1455,10 @@ export class InteriorScene extends Phaser.Scene {
 
     if (keyboardVector.lengthSq() > 0) {
       keyboardVector.normalize().scale(2.6);
-      this.player.ppgSprite?.setFlipX(keyboardVector.x < 0);
+      this.player.x = Phaser.Math.Clamp(this.player.x + keyboardVector.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX);
+      this.player.y = Phaser.Math.Clamp(this.player.y + keyboardVector.y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
-      playerMoving = this.tryMovePlayer(keyboardVector.x, keyboardVector.y);
     } else if (this.targetPoint) {
       const dx = this.targetPoint.x - this.player.x;
       const dy = this.targetPoint.y - this.player.y;
@@ -1490,13 +1469,10 @@ export class InteriorScene extends Phaser.Scene {
         this.targetMarker.setVisible(false);
       } else {
         const speed = 2.8;
-        const moveX = (dx / distance) * speed;
-        const moveY = (dy / distance) * speed;
-        playerMoving = this.tryMovePlayer(moveX, moveY);
-        this.player.ppgSprite?.setFlipX(dx < 0);
+        this.player.x += (dx / distance) * speed;
+        this.player.y += (dy / distance) * speed;
       }
     }
-    updateContainerWalkPose(this, this.player, playerMoving, { stepHeight: 5, speed: 110 });
 
     const zone = this.getNearestZone();
     this.setActiveZone(zone?.id || null);
@@ -1589,7 +1565,8 @@ export class InteriorScene extends Phaser.Scene {
             ? "Apertar Enter para abrir o lobby"
             : "Apertar Enter para interagir"
         : "Falar com o garçom no centro",
-            prompt: zone
+      nerdAgent: formatNerdAgent(zone ? zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud : NERD_TEAM.physics),
+      prompt: zone
         ? zone.id === "exit"
           ? "Saída localizada. Aperte Enter para voltar para a rua."
           : zone.id === "waiter"
@@ -1630,7 +1607,8 @@ export class InteriorScene extends Phaser.Scene {
       currentScene: "interior",
       focus: "saida para rua",
       objective: "Transicao para a rua",
-            prompt: "Voltando para a rua..."
+      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+      prompt: "Voltando para a rua..."
     });
   }
 }

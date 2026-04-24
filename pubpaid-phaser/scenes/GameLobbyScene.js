@@ -453,6 +453,16 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   drawLobbyWaiter(x, y, message) {
+    if (this.textures.exists(TEXTURE_KEYS.waiterLobby)) {
+      this.waiterSprite = this.add.image(x, y, TEXTURE_KEYS.waiterLobby)
+        .setOrigin(0.5, 1)
+        .setScale(0.16)
+        .setDepth(2.2);
+      this.tableLayer.add(this.waiterSprite);
+      this.startWaiterTalking();
+    } else {
+      return;
+    }
     this.tableLayer.add(this.add.text(x, y - 214, message, {
       fontFamily: "Georgia, Times New Roman, serif",
       fontSize: "14px",
