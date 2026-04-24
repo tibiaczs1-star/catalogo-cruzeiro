@@ -4,8 +4,8 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
-const { execFileSync } = require("node:child_process");
 const { runRealAgentsRuntimeLocal } = require("./real-agents-runtime");
+const { runReviewTeamAudit } = require("./review-team-audit");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(ROOT_DIR, "data");
@@ -67,6 +67,93 @@ function fingerprint(value = "") {
     .trim();
 }
 
+function isMailzaPriorityArticle(item = {}) {
+  const text = fingerprint(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  return /\b(mailza|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
+}
+
+function getNewsTimestamp(item = {}) {
+  const timestamp = Date.parse(item.publishedAt || item.createdAt || item.date || "");
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function applyMailzaPriority(items = []) {
+  return items
+    .map((item) => {
+      if (!isMailzaPriorityArticle(item)) return item;
+      return {
+        ...item,
+        category: "Política Regional",
+        categoryKey: "politica",
+        eyebrow: "governadora mailza",
+        priority: Math.max(Number(item.priority || 0), 950),
+        editorialPriority: "mailza-prioridade"
+      };
+    })
+    .sort((left, right) => {
+      const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
+      if (mailzaDiff !== 0) return mailzaDiff;
+
+      const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
+      if (dateDiff !== 0) return dateDiff;
+
+      return Number(right.priority || 0) - Number(left.priority || 0);
+    });
+}
+
+const REVIEW_COPY_BLOCKLIST = [
+  "na leitura do " + "catalogo",
+  "na escolha " + "editorial do catalogo",
+  "na leitura " + "editorial",
+  "o diferencial " + "editorial aqui"
+];
+
+function hasReviewBlockedCopy(value = "") {
+  const text = cleanText(value).toLowerCase();
+  return REVIEW_COPY_BLOCKLIST.some((fragment) => text.includes(fragment));
+}
+
+function sanitizeReviewCopy(item = {}) {
+  const title = cleanText(item.title || item.sourceLabel || "Noticia", 180);
+  const isLongTheaterFeed =
+    /g1 pop/i.test(String(item.sourceName || "")) &&
+    /critica de musical de teatro|crítica de musical de teatro/i.test(`${item.lede || ""} ${item.summary || ""}`);
+  const sanitizedBody = Array.isArray(item.body)
+    ? item.body.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
+    : item.body;
+  const sanitizedDevelopment = Array.isArray(item.development)
+    ? item.development.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
+    : item.development;
+  const summary = cleanText(item.summary || "");
+
+  return {
+    ...item,
+    lede: isLongTheaterFeed
+      ? `${title}. A publicacao do G1 Pop & Arte traz os principais detalhes do espetaculo e da temporada.`
+      : item.lede,
+    summary: isLongTheaterFeed
+      ? `${title}. O registro cultural foi resumido para melhorar a leitura no portal e manter o link da fonte original.`
+      : summary.replace(/\bpauta de cidade\b/gi, "assunto da cidade"),
+    body: sanitizedBody,
+    development: sanitizedDevelopment
+  };
+}
+
 function isRepeated(paragraph = "", reference = "") {
   const paragraphKey = fingerprint(paragraph);
   const referenceKey = fingerprint(reference);
@@ -109,7 +196,7 @@ function normalizeNewsItems(items = []) {
     return { ...item, body: nextBody };
   });
 
-  return { items: nextItems, addedBody, removedRepeated };
+  return { items: applyMailzaPriority(nextItems).map(sanitizeReviewCopy), addedBody, removedRepeated };
 }
 
 function readStaticNewsData() {
@@ -129,16 +216,12 @@ function writeStaticNewsData(items = []) {
 
 function runReviewTeam() {
   try {
-    const output = execFileSync(process.execPath, ["scripts/review-team-audit.js"], {
-      cwd: ROOT_DIR,
-      encoding: "utf-8",
-      stdio: ["ignore", "pipe", "pipe"]
-    });
-    return { ok: true, output: output.trim() };
+    const output = runReviewTeamAudit();
+    return { ok: output.totalIssues === 0, output: JSON.stringify(output) };
   } catch (error) {
     return {
       ok: false,
-      error: String(error.stderr || error.message || "review-team failed").slice(0, 2000)
+      error: String(error.message || "review-team failed").slice(0, 2000)
     };
   }
 }

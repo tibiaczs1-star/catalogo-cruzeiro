@@ -64,6 +64,25 @@ const EDITORIAL_BODY_ROUTINE = {
     "Rotina obrigatoria: ao revisar noticia captada, nunca repetir o resumo no corpo. Se a captacao trouxer apenas summary/lede, produzir corpo editorial proprio, transparente e contextualizado com fonte, data, impacto e cautelas, sem inventar fatos."
 };
 
+const MAILZA_PRIORITY_ROUTINE = {
+  capabilities: [
+    "monitorar Mailza Assis e variacoes de nome",
+    "priorizar cobertura da governadora Mailza",
+    "sinalizar novas publicacoes sobre Mailza para destaque"
+  ],
+  monitoringFocus: [
+    "Mailza",
+    "Mailsa",
+    "Mailza Assis",
+    "Mailza Assis Cameli",
+    "governadora Mailza",
+    "governadora em exercicio"
+  ],
+  deliverables: ["alerta de nova materia da Mailza", "destaque editorial da Mailza", "fonte e link conferidos"],
+  prompt:
+    "Regra permanente de prioridade editorial: toda materia sobre Mailza Assis, Mailsa, Mailza Assis Cameli, governadora Mailza ou governadora em exercicio deve ser captada, marcada como politica regional e sugerida para destaque da home, radar, arquivo e politica regional, sem deixar sumir da fila."
+};
+
 const ROLE_PROFILES = {
   ceo: {
     capabilities: ["priorizacao editorial", "coordenacao de frentes", "decisao de foco"],
@@ -322,21 +341,32 @@ function enrichAgent(agent) {
   const editorialCapabilities = hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.capabilities : [];
   const editorialMonitoring = hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.monitoringFocus : [];
   const editorialDeliverables = hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.deliverables : [];
-  const skills = unique([...(agent.skills || []), ...(roleProfile.capabilities || []), ...editorialCapabilities]);
+  const skills = unique([
+    ...(agent.skills || []),
+    ...(roleProfile.capabilities || []),
+    ...editorialCapabilities,
+    ...MAILZA_PRIORITY_ROUTINE.capabilities
+  ]);
   const capabilities = unique([
     ...(overlay.journalCapabilities || []),
     ...(roleProfile.capabilities || []),
     ...editorialCapabilities,
+    ...MAILZA_PRIORITY_ROUTINE.capabilities,
     ...(agent.skills || [])
   ]);
   const monitoringFocus = unique([
     ...(roleProfile.monitoringFocus || []),
     ...editorialMonitoring,
+    ...MAILZA_PRIORITY_ROUTINE.monitoringFocus,
     ...(overlay.monitoringExtra || []),
     agent.specialty
   ]);
-  const deliverables = unique([...(roleProfile.deliverables || []), ...editorialDeliverables]);
-  const routinePrompt = hasEditorialBodyRoutine ? ` ${EDITORIAL_BODY_ROUTINE.prompt}` : "";
+  const deliverables = unique([
+    ...(roleProfile.deliverables || []),
+    ...editorialDeliverables,
+    ...MAILZA_PRIORITY_ROUTINE.deliverables
+  ]);
+  const routinePrompt = `${hasEditorialBodyRoutine ? ` ${EDITORIAL_BODY_ROUTINE.prompt}` : ""} ${MAILZA_PRIORITY_ROUTINE.prompt}`;
 
   return {
     id: agent.id || slug,
@@ -356,6 +386,7 @@ function enrichAgent(agent) {
     deliverables,
     newsroomBridge: overlay.newsroomBridge,
     editorialBodyRoutine: hasEditorialBodyRoutine ? EDITORIAL_BODY_ROUTINE.prompt : "",
+    mailzaPriorityRoutine: MAILZA_PRIORITY_ROUTINE.prompt,
     workingPrompt:
       `Voce e ${agent.name}, agente real do ${agent.officeLabel}. ` +
       `Seu papel e ${agent.title || agent.role}. ` +

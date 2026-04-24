@@ -1446,7 +1446,7 @@ const setupSplashExperience = () => {
       ? performance.now()
       : Date.now();
   const elapsed = currentTime - splashBootStartedAt;
-  const minimumDuration = splashMotionQuery.matches ? 100 : 5000;
+  const minimumDuration = splashMotionQuery.matches ? 100 : hasSeenSplash ? 450 : 2600;
   const remaining = Math.max(100, minimumDuration - elapsed);
 
   window.setTimeout(releaseSplash, remaining);
@@ -2837,6 +2837,30 @@ const getRadarRelevanceScore = (article = {}) =>
     normalizeRuntimeArticle(article).categoryKey || normalizeText(article.category)
   ] || 0;
 
+const isMailzaPriorityArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const text = normalizeText(
+    [
+      normalizedArticle.title,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.description,
+      normalizedArticle.category,
+      normalizedArticle.categoryKey,
+      normalizedArticle.eyebrow,
+      normalizedArticle.sourceName,
+      normalizedArticle.sourceLabel,
+      normalizedArticle.sourceUrl,
+      Array.isArray(normalizedArticle.body) ? normalizedArticle.body.join(" ") : normalizedArticle.body
+    ].join(" ")
+  );
+
+  return /\b(mailza|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
+};
+
+const getMailzaPriorityScore = (article = {}) =>
+  isMailzaPriorityArticle(article) ? 1000000000000 + Number(article.priority || 0) : 0;
+
 const articleCategoryGroups = {
   cotidiano: ["cotidiano"],
   prefeitura: ["prefeitura", "politica", "utilidade publica", "gestao publica"],
@@ -2869,6 +2893,11 @@ const articleMatchesCategoryFilter = (article = {}, filter = "") => {
 
 const sortRadarArticles = (articles = []) =>
   [...articles].sort((left, right) => {
+    const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);
+    if (mailzaDiff !== 0) {
+      return mailzaDiff;
+    }
+
     const dateDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
     if (dateDiff !== 0) {
       return dateDiff;

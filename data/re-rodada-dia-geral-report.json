@@ -1,35 +1,21 @@
 {
   "ok": true,
-  "startedAt": "2026-04-24T18:18:34.036Z",
-  "finishedAt": "2026-04-24T18:18:34.166Z",
+  "startedAt": "2026-04-24T22:54:15.826Z",
+  "finishedAt": "2026-04-24T22:54:17.006Z",
   "source": "Re Rodada do Dia Geral",
+  "cachedFallback": false,
+  "cachedFallbackReason": "",
   "onlineAuditBefore": {
     "total": 120,
-    "missing": 8,
-    "sameDivisionDuplicates": 3
+    "missing": 0,
+    "sameDivisionDuplicates": 0
   },
   "localAuditAfterSync": {
     "total": 120,
     "missing": 0,
     "sameDivisionDuplicates": 0
   },
-  "repairedImages": 10,
-  "rule": "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo.",
-  "finalValidation": {
-    "checkedAt": "2026-04-24T18:20:41.623Z",
-    "reviewTeamIssues": 0,
-    "newsImageAudit": {
-      "total": 120,
-      "ok": 120,
-      "review": 0,
-      "warning": 0,
-      "error": 0,
-      "manualFocus": 57,
-      "new": 0
-    },
-    "sameDivisionDuplicates": 0,
-    "missingImages": 0,
-    "entertainmentUpdated": true,
-    "pubPaidExcludedFromPackage": true
-  }
+  "repairedImages": 0,
+  "mailzaPriorityItems": 8,
+  "rule": "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
 }

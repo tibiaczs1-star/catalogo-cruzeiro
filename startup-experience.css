@@ -11050,3 +11050,138 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
     grid-template-columns: 1fr;
   }
 }
+
+/* 2026-04-24: encaixe do popup em telas wide e super wide. */
+@media (min-width: 1500px) {
+  .catalogo-welcome {
+    overflow-x: hidden;
+    padding: clamp(10px, 1.6vh, 18px) clamp(16px, 2vw, 32px);
+  }
+
+  .catalogo-welcome-shell {
+    width: min(1360px, calc(100vw - 64px)) !important;
+    justify-content: center;
+  }
+
+  .catalogo-welcome-card {
+    width: min(1260px, calc(100vw - 88px)) !important;
+    grid-template-columns: minmax(500px, 1.16fr) minmax(350px, 0.84fr) !important;
+    max-height: calc(100svh - 24px) !important;
+  }
+
+  .catalogo-welcome-visual,
+  .catalogo-welcome-copy {
+    min-height: calc(100svh - 24px) !important;
+    max-height: calc(100svh - 24px) !important;
+  }
+
+  .catalogo-welcome-shell .catalogo-director-stage {
+    right: 0.4rem !important;
+    top: clamp(19rem, 43vh, 24rem) !important;
+    transform: scale(-0.54, 0.54) !important;
+  }
+
+  .catalogo-welcome-shell .catalogo-director-stage .catalogo-pixel-director {
+    --catalogo-beam-length: min(980px, 70vw);
+  }
+}
+
+@media (min-width: 1500px) and (max-height: 820px) {
+  .catalogo-welcome-card {
+    width: min(1180px, calc(100vw - 96px)) !important;
+    grid-template-columns: minmax(460px, 1.05fr) minmax(340px, 0.95fr) !important;
+    border-radius: 24px !important;
+  }
+
+  .catalogo-welcome-visual {
+    padding: 0.92rem 0.95rem 0.72rem !important;
+  }
+
+  .catalogo-welcome-copy {
+    gap: 0.7rem !important;
+    padding: 0.9rem 1rem 0.96rem !important;
+    scrollbar-gutter: stable both-edges;
+  }
+
+  .catalogo-welcome-kicker {
+    font-size: 0.68rem !important;
+  }
+
+  .catalogo-welcome-copy h2 {
+    max-width: 11ch;
+    font-size: clamp(1.55rem, 1.9vw, 2.12rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .catalogo-welcome-lead,
+  .catalogo-consent-intro p,
+  .catalogo-consent-focus p,
+  .catalogo-term-item span,
+  .catalogo-terms-check span,
+  .catalogo-welcome-note {
+    font-size: 0.84rem !important;
+    line-height: 1.38 !important;
+  }
+
+  .catalogo-terms-summary {
+    gap: 0.44rem !important;
+  }
+
+  .catalogo-summary-card {
+    padding: 0.58rem 0.62rem !important;
+    border-radius: 14px !important;
+  }
+
+  .catalogo-summary-card strong {
+    margin-bottom: 0 !important;
+    font-size: 0.64rem !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .catalogo-summary-card p {
+    display: none;
+  }
+
+  .catalogo-consent-intro,
+  .catalogo-consent-focus,
+  .catalogo-term-item,
+  .catalogo-terms-check {
+    padding: 0.58rem 0.68rem !important;
+    border-radius: 15px !important;
+  }
+
+  .catalogo-terms-list {
+    gap: 0.46rem !important;
+  }
+
+  .catalogo-welcome:not(.is-cookie-only) .catalogo-welcome-actions {
+    position: sticky;
+    bottom: -1px;
+    z-index: 5;
+    gap: 0.52rem !important;
+    padding-top: 0.42rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(246, 250, 255, 0.98) 38%);
+  }
+
+  .catalogo-btn {
+    min-height: 42px !important;
+    padding: 0.64rem 0.98rem !important;
+    font-size: 0.84rem !important;
+  }
+
+  .catalogo-stage-chip {
+    padding: 0.34rem 0.7rem !important;
+    font-size: 0.62rem !important;
+  }
+
+  .catalogo-prophecy-panel {
+    transform: scale(0.88);
+    transform-origin: top left;
+  }
+
+  .catalogo-welcome-shell .catalogo-director-stage {
+    right: 0.25rem !important;
+    top: clamp(15.2rem, 38vh, 19rem) !important;
+    transform: scale(-0.46, 0.46) !important;
+  }
+}

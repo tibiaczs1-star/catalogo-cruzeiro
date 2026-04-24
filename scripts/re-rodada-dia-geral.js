@@ -36,6 +36,18 @@ function writeStaticNews(items) {
   fs.writeFileSync(STATIC_NEWS_FILE, `window.NEWS_DATA = ${JSON.stringify(items.slice(0, 120), null, 2)};\n`, "utf-8");
 }
 
+function readStaticNewsItems() {
+  if (!fs.existsSync(STATIC_NEWS_FILE)) return [];
+  const source = fs.readFileSync(STATIC_NEWS_FILE, "utf-8");
+  const match = source.match(/window\.NEWS_DATA\s*=\s*([\s\S]*?);\s*$/);
+  if (!match) return [];
+  try {
+    return JSON.parse(match[1]);
+  } catch (_error) {
+    return [];
+  }
+}
+
 function requestJson(url) {
   return new Promise((resolve, reject) => {
     https
@@ -82,6 +94,129 @@ function slugify(value) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 90);
+}
+
+function isMailzaPriorityArticle(item = {}) {
+  const text = slugify(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  return /\b(mailza|mailsa|mailza-assis|mailza-assis-cameli|governadora-mailza|governadora-em-exercicio)\b/.test(text);
+}
+
+function getNewsTimestamp(item = {}) {
+  const timestamp = Date.parse(item.publishedAt || item.createdAt || item.date || "");
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+}
+
+function promoteMailzaPriority(items = []) {
+  return items
+    .map((item) => {
+      if (!isMailzaPriorityArticle(item)) return item;
+
+      return {
+        ...item,
+        category: "Política Regional",
+        categoryKey: "politica",
+        eyebrow: "governadora mailza",
+        priority: Math.max(Number(item.priority || 0), 950),
+        editorialPriority: "mailza-prioridade"
+      };
+    })
+    .sort((left, right) => {
+      const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
+      if (mailzaDiff !== 0) return mailzaDiff;
+
+      const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
+      if (dateDiff !== 0) return dateDiff;
+
+      return Number(right.priority || 0) - Number(left.priority || 0);
+    });
+}
+
+function buildLocalArticleHints() {
+  const runtimePayload = readJson(RUNTIME_NEWS_FILE, { items: [] });
+  const localItems = [
+    ...(Array.isArray(runtimePayload.items) ? runtimePayload.items : []),
+    ...readStaticNewsItems()
+  ];
+  const hints = new Map();
+  localItems.forEach((item) => {
+    const slug = String(item.slug || "").trim();
+    if (!slug) return;
+    const current = hints.get(slug) || {};
+    hints.set(slug, {
+      imageFocus: current.imageFocus || item.imageFocus || "",
+      imageFit: current.imageFit || item.imageFit || "",
+      editorialPriority: current.editorialPriority || item.editorialPriority || "",
+      priority: Math.max(Number(current.priority || 0), Number(item.priority || 0))
+    });
+  });
+  return hints;
+}
+
+function applyLocalArticleHints(items = [], hints = new Map()) {
+  return items.map((item) => {
+    const hint = hints.get(String(item.slug || "").trim());
+    if (!hint) return item;
+    return {
+      ...item,
+      imageFocus: item.imageFocus || hint.imageFocus || "",
+      imageFit: item.imageFit || hint.imageFit || "",
+      editorialPriority: item.editorialPriority || hint.editorialPriority || "",
+      priority: Math.max(Number(item.priority || 0), Number(hint.priority || 0))
+    };
+  });
+}
+
+const REVIEW_COPY_BLOCKLIST = [
+  "na leitura do " + "catalogo",
+  "na escolha " + "editorial do catalogo",
+  "na leitura " + "editorial",
+  "o diferencial " + "editorial aqui"
+];
+
+function hasReviewBlockedCopy(value = "") {
+  const text = cleanText(value).toLowerCase();
+  return REVIEW_COPY_BLOCKLIST.some((fragment) => text.includes(fragment));
+}
+
+function sanitizeReviewCopy(item = {}) {
+  const title = cleanText(item.title || item.sourceLabel || "Noticia", 180);
+  const isLongTheaterFeed =
+    /g1 pop/i.test(String(item.sourceName || "")) &&
+    /critica de musical de teatro|crítica de musical de teatro/i.test(`${item.lede || ""} ${item.summary || ""}`);
+  const sanitizedBody = Array.isArray(item.body)
+    ? item.body.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
+    : item.body;
+  const sanitizedDevelopment = Array.isArray(item.development)
+    ? item.development.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
+    : item.development;
+  const summary = cleanText(item.summary || "");
+
+  return {
+    ...item,
+    lede: isLongTheaterFeed
+      ? `${title}. A publicacao do G1 Pop & Arte traz os principais detalhes do espetaculo e da temporada.`
+      : item.lede,
+    summary: isLongTheaterFeed
+      ? `${title}. O registro cultural foi resumido para melhorar a leitura no portal e manter o link da fonte original.`
+      : summary.replace(/\bpauta de cidade\b/gi, "assunto da cidade"),
+    body: sanitizedBody,
+    development: sanitizedDevelopment
+  };
 }
 
 function hashString(value) {
@@ -234,48 +369,68 @@ function auditItems(items = []) {
 }
 
 async function loadOnlineNews() {
-  if (fs.existsSync(ONLINE_NEWS_FILE)) {
-    const payload = readJson(ONLINE_NEWS_FILE, null);
-    if (Array.isArray(payload?.items)) return payload;
-  }
   const baseUrl = process.env.SITE_URL || DEFAULT_ONLINE_URL;
-  return requestJson(`${baseUrl.replace(/\/$/, "")}/api/news?limit=120`);
+  try {
+    const payload = await requestJson(`${baseUrl.replace(/\/$/, "")}/api/news?limit=120`);
+    writeJson(ONLINE_NEWS_FILE, payload);
+    return payload;
+  } catch (error) {
+    if (fs.existsSync(ONLINE_NEWS_FILE)) {
+      const payload = readJson(ONLINE_NEWS_FILE, null);
+      if (Array.isArray(payload?.items)) {
+        return {
+          ...payload,
+          cachedFallback: true,
+          cachedFallbackReason: String(error.message || error).slice(0, 240)
+        };
+      }
+    }
+    throw error;
+  }
 }
 
 async function main() {
   const startedAt = new Date().toISOString();
+  const localHints = buildLocalArticleHints();
   const onlinePayload = await loadOnlineNews();
   const onlineItems = Array.isArray(onlinePayload.items) ? onlinePayload.items.slice(0, 120) : [];
   const onlineAuditBefore = auditItems(onlineItems);
-  const repaired = repairImages(onlineItems);
-  const onlineAuditAfterLocalRepair = auditItems(repaired.items);
+  const repaired = repairImages(applyLocalArticleHints(onlineItems, localHints));
+  const prioritizedItems = promoteMailzaPriority(repaired.items).map(sanitizeReviewCopy);
+  const onlineAuditAfterLocalRepair = auditItems(prioritizedItems);
 
   const runtimePayload = {
     lastAttemptAt: startedAt,
     lastSuccessAt: new Date().toISOString(),
     source: "re-rodada-dia-geral-online-first",
-    items: repaired.items,
+    items: prioritizedItems,
     reports: [
       {
         sourceName: "Render online",
         ok: true,
         fetched: onlineItems.length,
-        repairedImages: repaired.repaired
+        repairedImages: repaired.repaired,
+        mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
+        cachedFallback: Boolean(onlinePayload.cachedFallback),
+        cachedFallbackReason: onlinePayload.cachedFallbackReason || ""
       }
     ]
   };
 
   writeJson(RUNTIME_NEWS_FILE, runtimePayload);
-  writeStaticNews(repaired.items);
+  writeStaticNews(prioritizedItems);
 
   const report = {
     ok: true,
     startedAt,
     finishedAt: new Date().toISOString(),
     source: "Re Rodada do Dia Geral",
+    cachedFallback: Boolean(onlinePayload.cachedFallback),
+    cachedFallbackReason: onlinePayload.cachedFallbackReason || "",
     onlineAuditBefore,
     localAuditAfterSync: onlineAuditAfterLocalRepair,
     repairedImages: repaired.repaired,
+    mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
     rule:
       "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
   };

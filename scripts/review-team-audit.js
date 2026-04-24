@@ -441,7 +441,7 @@ function buildMarkdownReport(report) {
   return `${lines.join("\n")}\n`;
 }
 
-function main() {
+function runReviewTeamAudit() {
   const files = walkFiles(ROOT_DIR);
   const globalHtmlIds = collectGlobalHtmlIds(files);
   const issues = [];
@@ -482,18 +482,18 @@ function main() {
   fs.writeFileSync(REPORT_JSON_FILE, `${JSON.stringify(report, null, 2)}\n`, "utf-8");
   fs.writeFileSync(REPORT_MD_FILE, buildMarkdownReport(report), "utf-8");
 
-  console.log(
-    JSON.stringify(
-      {
-        reportJson: normalizePath(REPORT_JSON_FILE),
-        reportMd: normalizePath(REPORT_MD_FILE),
-        filesAudited: report.summary.filesAudited,
-        totalIssues: report.summary.totalIssues
-      },
-      null,
-      2
-    )
-  );
+  return {
+    reportJson: normalizePath(REPORT_JSON_FILE),
+    reportMd: normalizePath(REPORT_MD_FILE),
+    filesAudited: report.summary.filesAudited,
+    totalIssues: report.summary.totalIssues
+  };
 }
 
-main();
+if (require.main === module) {
+  console.log(JSON.stringify(runReviewTeamAudit(), null, 2));
+}
+
+module.exports = {
+  runReviewTeamAudit
+};

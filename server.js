@@ -4995,14 +4995,36 @@ function normalizeEditorialBody(item = {}) {
   return uniqueBody.length ? uniqueBody : buildFallbackEditorialBody(item);
 }
 
+function isMailzaPriorityArticle(item = {}) {
+  const text = normalizeText(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.location,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  return /\b(mailza|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
+}
+
 function normalizeArticleRecord(item) {
   const title = String(item.title || "Atualizacao");
-  const categoryKey = normalizeNewsCategoryKey(item.category, {
+  const isMailzaPriority = isMailzaPriorityArticle(item);
+  const normalizedCategoryKey = normalizeNewsCategoryKey(item.category, {
     defaultCategory: item.defaultCategory,
     title,
     summary: item.summary || item.lede || item.description,
     sourceName: item.sourceName || item.source || item.sourceLabel
   });
+  const categoryKey = isMailzaPriority ? "politica" : normalizedCategoryKey;
   const category = formatCategoryLabel(categoryKey);
   const sourceName = item.sourceName || item.source || item.sourceLabel || "Fonte local";
   const sourceUrl = item.sourceUrl || item.url || item.link || "#";
@@ -5013,7 +5035,7 @@ function normalizeArticleRecord(item) {
     id: item.id || slug || sourceUrl || title,
     slug,
     title,
-    eyebrow: item.eyebrow || categoryKey || "geral",
+    eyebrow: isMailzaPriority ? "governadora mailza" : item.eyebrow || categoryKey || "geral",
     date: item.date || formatDisplayDate(publishedAt),
     publishedAt,
     category,
@@ -5041,7 +5063,8 @@ function normalizeArticleRecord(item) {
     imageFocus: item.imageFocus || "",
     imageFit: item.imageFit || "",
     media: item.media || null,
-    priority: Number(item.priority || 0)
+    priority: Math.max(Number(item.priority || 0), isMailzaPriority ? 950 : 0),
+    editorialPriority: isMailzaPriority ? "mailza-prioridade" : item.editorialPriority || ""
   };
 }
 
@@ -5072,6 +5095,8 @@ function getEditorialFocusScore(item = {}) {
       item.sourceUrl
     ].join(" ")
   );
+  if (isMailzaPriorityArticle(item)) return 900;
+
   const isAcre = /\b(acre|rio branco|sena madureira|feijo|feij[oó]|xapuri|brasileia|epitaciolandia|assis brasil|placido de castro)\b/.test(
     text
   );

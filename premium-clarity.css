@@ -950,3 +950,31 @@ body.editorial-home #social .social-card.social-human .news-source {
 body.editorial-home #social .social-card.social-agenda .news-source {
   color: rgba(81, 98, 151, 0.84) !important;
 }
+
+/* 2026-04-24: trava de leitura para monitores wide screen. */
+@media (min-width: 1500px) {
+  :root {
+    --content-width: min(calc(100vw - 1rem), 1480px) !important;
+  }
+
+  body.editorial-home .page-shell {
+    width: var(--content-width) !important;
+    max-width: 1480px !important;
+    padding-inline: 0 !important;
+  }
+
+  body.editorial-home .main-layout {
+    grid-template-columns: 250px minmax(0, 1fr) 420px !important;
+    gap: 1.05rem !important;
+  }
+
+  body.editorial-home .top-construction-yard {
+    grid-template-columns: minmax(300px, 0.44fr) minmax(520px, 1fr);
+  }
+
+  body.editorial-home .ticker-chip {
+    flex-basis: clamp(15rem, 20vw, 21rem) !important;
+    width: clamp(15rem, 20vw, 21rem) !important;
+    min-width: clamp(15rem, 20vw, 21rem) !important;
+  }
+}

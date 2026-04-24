@@ -18,14 +18,20 @@
   const THANKS_SCREEN_MS = 5200;
   const THANKS_SCREEN_MS_COMPACT = 4600;
   const THANKS_SCREEN_MS_PHONE = 3800;
-  const FOUNDER_PRELUDE_MS = 5600;
-  const FOUNDER_PRELUDE_MS_COMPACT = 5200;
-  const FOUNDER_PRELUDE_MS_PHONE = 5000;
+  const FOUNDER_PRELUDE_MS = 4300;
+  const FOUNDER_PRELUDE_MS_COMPACT = 3900;
+  const FOUNDER_PRELUDE_MS_PHONE = 3400;
   const RETURNING_LOADER_MS = 980;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.png";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.png";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
   const FOUNDERS_RECOMMENCER_LOGO_SRC = "./assets/founders-recommencer-logo.png";
+  const FOUNDER_BANNER_ASSETS = [
+    FOUNDERS_CAFE_IMAGE_SRC,
+    FOUNDERS_GRUPO_AS_LOGO_SRC,
+    FOUNDERS_GEANE_LOGO_SRC,
+    FOUNDERS_RECOMMENCER_LOGO_SRC
+  ];
   const FOUNDERS_OPENING_STEPS = [
     "ativando palco luminoso dos fundadores",
     "calibrando logos em camadas 3D",
@@ -158,6 +164,39 @@
 
   function removeLegacyConsentBanner() {
     document.getElementById(CONSENT_BANNER_ID)?.remove();
+  }
+
+  function preloadImage(src) {
+    return new Promise((resolve) => {
+      if (!src) {
+        resolve(false);
+        return;
+      }
+
+      const image = new Image();
+      image.decoding = "async";
+      image.loading = "eager";
+      image.onload = () => {
+        if (typeof image.decode === "function") {
+          image.decode().then(() => resolve(true)).catch(() => resolve(true));
+          return;
+        }
+        resolve(true);
+      };
+      image.onerror = () => resolve(false);
+      image.src = src;
+    });
+  }
+
+  let founderAssetsPromise = null;
+
+  function preloadFounderBannerAssets() {
+    if (founderAssetsPromise) {
+      return founderAssetsPromise;
+    }
+
+    founderAssetsPromise = Promise.all(FOUNDER_BANNER_ASSETS.map((src) => preloadImage(src)));
+    return founderAssetsPromise;
   }
 
   function dispatchIntroFinished() {
@@ -504,6 +543,7 @@
               alt="Pacote do Cafe Cruzeiro em destaque no palco dos fundadores"
               decoding="async"
               loading="eager"
+              fetchpriority="high"
             />
             <div class="catalogo-founder-stage-applause" aria-hidden="true">
               <span>aplausos</span>
@@ -533,6 +573,7 @@
                     alt="Logo do Grupo A.S"
                     loading="eager"
                     decoding="async"
+                    fetchpriority="high"
                   />
                 </div>
               </article>
@@ -545,6 +586,7 @@
                     alt="Logo da Dra. Geane Campo"
                     loading="eager"
                     decoding="async"
+                    fetchpriority="high"
                   />
                 </div>
               </article>
@@ -557,6 +599,7 @@
                     alt="Logo da Recommencer"
                     loading="eager"
                     decoding="async"
+                    fetchpriority="high"
                   />
                 </div>
               </article>
@@ -693,10 +736,10 @@
           <small>Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer</small>
         </div>
         <div class="catalogo-founder-prelude-logos">
-          <figure class="logo-card cafe"><img src="${FOUNDERS_CAFE_IMAGE_SRC}" alt="Cafe Cruzeiro" loading="eager" decoding="async" /></figure>
-          <figure class="logo-card grupo"><img src="${FOUNDERS_GRUPO_AS_LOGO_SRC}" alt="Grupo A.S" loading="eager" decoding="async" /></figure>
-          <figure class="logo-card geane"><img src="${FOUNDERS_GEANE_LOGO_SRC}" alt="Dra. Geane Campo" loading="eager" decoding="async" /></figure>
-          <figure class="logo-card recommencer"><img src="${FOUNDERS_RECOMMENCER_LOGO_SRC}" alt="Recommencer" loading="eager" decoding="async" /></figure>
+          <figure class="logo-card cafe"><img src="${FOUNDERS_CAFE_IMAGE_SRC}" alt="Cafe Cruzeiro" loading="eager" decoding="async" fetchpriority="high" /></figure>
+          <figure class="logo-card grupo"><img src="${FOUNDERS_GRUPO_AS_LOGO_SRC}" alt="Grupo A.S" loading="eager" decoding="async" fetchpriority="high" /></figure>
+          <figure class="logo-card geane"><img src="${FOUNDERS_GEANE_LOGO_SRC}" alt="Dra. Geane Campo" loading="eager" decoding="async" fetchpriority="high" /></figure>
+          <figure class="logo-card recommencer"><img src="${FOUNDERS_RECOMMENCER_LOGO_SRC}" alt="Recommencer" loading="eager" decoding="async" fetchpriority="high" /></figure>
         </div>
         <div class="catalogo-founder-prelude-stage" aria-live="polite">
           <div class="catalogo-founder-prelude-stage-head">
@@ -713,9 +756,11 @@
     return prelude;
   }
 
-  function showFounderPreludeThen(callback) {
+  async function showFounderPreludeThen(callback) {
     rememberFounderPreludeInThisSession();
     rememberFounderPreludeToday();
+    await preloadFounderBannerAssets();
+
     const prelude = createFounderPrelude();
     document.body.appendChild(prelude);
     document.body.classList.add("catalogo-lock-scroll", "founder-prelude-active");
@@ -1204,6 +1249,7 @@
 
   ready(() => {
     clearStaleWelcomeArtifacts();
+    preloadFounderBannerAssets();
 
     window.addEventListener("pageshow", () => {
       clearStaleWelcomeArtifacts();

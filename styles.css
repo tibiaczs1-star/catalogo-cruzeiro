@@ -84,9 +84,9 @@ body::before {
 }
 
 .logo-splash {
-  --splash-scene-duration: 5000ms;
-  --splash-door-duration: 1600ms;
-  --splash-zoom-scale: 1.22;
+  --splash-scene-duration: 2600ms;
+  --splash-door-duration: 900ms;
+  --splash-zoom-scale: 1.16;
   position: fixed;
   inset: 0;
   overflow: hidden;
@@ -102,9 +102,9 @@ body::before {
 }
 
 .logo-splash.is-repeat-visit {
-  --splash-scene-duration: 5000ms;
-  --splash-door-duration: 1600ms;
-  --splash-zoom-scale: 1.11;
+  --splash-scene-duration: 900ms;
+  --splash-door-duration: 520ms;
+  --splash-zoom-scale: 1.06;
 }
 
 .logo-splash::before {

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T21:00:41.407Z",
+  "lastUpdatedAt": "2026-04-24T22:45:06.738Z",
   "orders": [
     {
       "id": "2026-04-24-implementar-fila-cheffe-call-mobile-only",
@@ -5892,6 +5892,143 @@
       "source": "chat",
       "rawRequest": "Prioridade no site: captar fotos da Mailza governadora e corrigir matérias sem foto/repetidas; usuário apontou matéria do Batelão com 5 fotos na fonte e nenhuma no site, pedindo investigar por que batelao.com não funciona.",
       "summary": "Prioridade editorial: corrigir captura de fotos do Batelão/Mailza e evitar matérias sem foto/repetidas",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-pubpaid-2-0-remover-casca-explicativa-e-resgatar-imagens-ontem",
+      "createdAt": "2026-04-24T21:19:53.479Z",
+      "updatedAt": "2026-04-24T21:19:53.479Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "porque vc quier me explicar as coisas, com esse canvas ali ??????? prescisa disso n, o que eu quero e so o jogo, agora resgate as imagens que criadas foram ontem, os exemplos",
+      "summary": "PubPaid 2.0: remover cabecalho/notas explicativas e resgatar imagens criadas ontem",
+      "normalizedTasks": [
+        "remover casca explicativa do pubpaid-v2",
+        "deixar apenas o jogo/canvas",
+        "listar/resgatar imagens criadas em 2026-04-23",
+        "criar galeria local de exemplos"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        ".codex-temp/pubpaid-assets-ontem/index.html"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-gameonly-check-20260424/initial.png",
+        ".codex-temp/pubpaid-assets-ontem/index.html"
+      ],
+      "tags": [
+        "pubpaid-v2",
+        "game-only",
+        "assets",
+        "ui-cleanup"
+      ],
+      "nextSteps": [
+        "usar os assets recuperados no fluxo visual aprovado da PubPaid 2.0"
+      ],
+      "notes": "Removido header explicativo, notas e rodape da pagina oficial. Validacao Playwright hasExplainer=false. Galeria local criada com fundos/personagens/cards de 23/04."
+    },
+    {
+      "id": "2026-04-24-pubpaid-2-0-resgatar-civis-de-rua-e-encaixar-cenario",
+      "createdAt": "2026-04-24T22:13:03.691Z",
+      "updatedAt": "2026-04-24T22:13:03.691Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "civis de rua: mendigo, bêbado no chão, senhora do ponto, garoto de capuz, velho de bengala, homem com mochila esses que agente criou de exemplo ontem pra treina ache eles traga e encaixe no cenario da rua",
+      "summary": "PubPaid 2.0: resgatar/recriar civis de rua e encaixar na StreetScene",
+      "normalizedTasks": [
+        "localizar/recriar os seis civis de rua",
+        "salvar PNGs em assets/pubpaid/street/civilians",
+        "carregar no BootScene",
+        "posicionar na StreetScene",
+        "validar screenshot"
+      ],
+      "filesTouched": [
+        "assets/pubpaid/street/civilians/street-homeless-sitting-v1.png",
+        "assets/pubpaid/street/civilians/street-drunk-floor-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-lady-v1.png",
+        "assets/pubpaid/street/civilians/street-hooded-boy-v1.png",
+        "assets/pubpaid/street/civilians/street-old-cane-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-man-bag-v1.png",
+        "assets/pubpaid/street/civilians/street-civilians-source-sheet-v1.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-v2.html",
+        ".codex-temp/pubpaid-assets-rua/index.html"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-street-civilians-check-20260424-v2/street-civilians.png"
+      ],
+      "tags": [
+        "pubpaid-v2",
+        "street",
+        "civilians",
+        "sprites",
+        "phaser"
+      ],
+      "nextSteps": [
+        "ajustar escala/posicao se o usuario quiser mais discreto ou mais realista"
+      ],
+      "notes": "Busca confirmou que os PNGs originais nao estavam no disco; recriado sheet no estilo dos exemplos e recortado com transparencia. Node checks passaram. Playwright confirmou scene=street com civis visiveis."
+    },
+    {
+      "id": "2026-04-24-corrigir-comportamento-visual-da-home-topo-em-tela-wide-screen-a-partir-da-captu",
+      "createdAt": "2026-04-24T22:25:48.559Z",
+      "updatedAt": "2026-04-24T22:25:48.559Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "olha o que acontece se eu abrir numa tela wide screen",
+      "summary": "Corrigir comportamento visual da home/topo em tela wide screen a partir da captura enviada pelo usuario.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-ajustar-o-popup-inicial-de-bombas-cookies-para-caber-corretamente-em-telas-wide-",
+      "createdAt": "2026-04-24T22:28:22.504Z",
+      "updatedAt": "2026-04-24T22:28:22.504Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "nas telas wide screnn o pop up que tem o bombaio e a seleção de cookiues, tambem nao encaixa na tela, vc vai ter que torna ele encaixado em super wid screen tambem",
+      "summary": "Ajustar o popup inicial de bombas/cookies para caber corretamente em telas wide e super wide.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-ajustar-regra-do-splash-intro-dos-fundadores-para-carregar-mais-rapido-mas-pre-c",
+      "createdAt": "2026-04-24T22:41:19.575Z",
+      "updatedAt": "2026-04-24T22:41:19.575Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "mais uma regra, tem que carregar o splash mais rapido,. fui ver num computador e o intro dos fundadores, nem carregou o ultimo banner antes de sair, ou seja ele tem que carregar os banners antes de entra",
+      "summary": "Ajustar regra do splash/intro dos fundadores para carregar mais rapido, mas pre-carregar todos os banners antes da animacao iniciar e antes de sair.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-24-tornar-mailza-mailza-assis-prioridade-editorial-permanente-captar-tudo-que-sair-",
+      "createdAt": "2026-04-24T22:45:06.738Z",
+      "updatedAt": "2026-04-24T22:45:06.738Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "por ultimo cade as malterias da governadora mailsa sumio tudo, ela tem que ta em destaque, pois eu to tentando apoiar ela, sempre destaque, e capte tudo sobre o que sair pra poder ta maois destacado, inclua na ordem geral dos agentes, faça uma review geral de hoje, sincronize e faça aquele nosso comando diario de oof line e online tudo do mesmo geito e corrigido .... destaques da mailsa e prioridade faça o prompt e execuiilte",
+      "summary": "Tornar Mailza/Mailza Assis prioridade editorial permanente: captar tudo que sair, destacar sempre, sincronizar offline/online, rodar review geral diaria e corrigir sumico das materias.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
