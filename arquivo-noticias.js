@@ -294,6 +294,10 @@
       if (!/^https?:$/i.test(parsed.protocol)) {
         return "";
       }
+      const path = decodeURIComponent(parsed.pathname || "").toLowerCase();
+      if (/\.(?:pdf|docx?|xlsx?|pptx?|zip|rar|7z)(?:$|[?#])/i.test(`${path}${parsed.search || ""}`)) {
+        return "";
+      }
       return parsed.toString();
     } catch (_error) {
       return "";

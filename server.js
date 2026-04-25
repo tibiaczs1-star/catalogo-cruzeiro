@@ -3962,6 +3962,7 @@ function pickLargestSrcsetCandidate(rawSrcset, baseUrl) {
 function shouldIgnoreImageUrl(value) {
   const imageUrl = String(value || "").toLowerCase();
   if (!imageUrl) return true;
+  if (/\.(?:pdf|docx?|xlsx?|pptx?|zip|rar|7z)(?:$|[?#])/i.test(imageUrl)) return true;
   const looksLikeKnownImageRoute =
     /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/i.test(imageUrl) ||
     imageUrl.includes("/wp-content/uploads/") ||

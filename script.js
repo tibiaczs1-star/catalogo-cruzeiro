@@ -516,6 +516,18 @@ const sanitizeImageUrl = (value) => {
   }
 
   const cleaned = raw.replace(/'/g, "%27");
+  try {
+    const parsed = new URL(cleaned, window.location.href);
+    const path = decodeURIComponent(parsed.pathname || "").toLowerCase();
+    if (/\.(?:pdf|docx?|xlsx?|pptx?|zip|rar|7z)(?:$|[?#])/i.test(`${path}${parsed.search || ""}`)) {
+      return "";
+    }
+  } catch (_error) {
+    if (/\.(?:pdf|docx?|xlsx?|pptx?|zip|rar|7z)(?:$|[?#])/i.test(cleaned.toLowerCase())) {
+      return "";
+    }
+  }
+
   const needsProxy = /ac24horas\.com|jurua24horas\.com|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br|static\.wixstatic\.com|agencia\.ac\.gov\.br|www\.amac\.com\.br|ifac\.edu\.br|portalacre\.com\.br/i.test(
     cleaned
   );
