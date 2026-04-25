@@ -11461,7 +11461,74 @@ input[type="range"] {
   :is(h1, h2, h3, p, a, span) {
   word-break: normal;
   overflow-wrap: normal;
-  hyphens: manual;
+  hyphens: none;
+}
+
+:is(
+  .news-card,
+  .archive-card,
+  .live-feed-card,
+  .feed-card,
+  .generated-feed-card,
+  .generated-archive-card,
+  .month-dynamic-card,
+  .social-card,
+  .regional-card,
+  .highlight-card,
+  .feature-card,
+  .trending-card,
+  .business-card,
+  .projection-card
+) :is(h1, h2, h3, h4, p, a, span, strong, small, figcaption, footer),
+:is(
+  .news-thumb,
+  .mini-thumb,
+  .story-thumb,
+  .archive-thumb,
+  .feed-thumb,
+  .photo-card,
+  .image-fallback,
+  .card-image,
+  .card-photo,
+  .auto-image,
+  .generated-image
+)::before,
+:is(
+  .news-thumb,
+  .mini-thumb,
+  .story-thumb,
+  .archive-thumb,
+  .feed-thumb,
+  .photo-card,
+  .image-fallback,
+  .card-image,
+  .card-photo,
+  .auto-image,
+  .generated-image
+)::after {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+  text-wrap: pretty;
+}
+
+:is(
+  .news-card,
+  .archive-card,
+  .live-feed-card,
+  .feed-card,
+  .generated-feed-card,
+  .generated-archive-card,
+  .month-dynamic-card,
+  .social-card,
+  .regional-card,
+  .highlight-card,
+  .feature-card,
+  .trending-card,
+  .business-card,
+  .projection-card
+) :is(h1, h2, h3, h4, p, a, span, strong, small, figcaption, footer) {
+  min-width: 0;
 }
 
 #radar .news-source {
@@ -18693,7 +18760,8 @@ a {
 .insiders-terminal-output .terminal-stream {
   color: rgba(237, 250, 255, 0.94);
   word-break: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: normal;
+  hyphens: none;
 }
 
 .insiders-terminal-output .terminal-stream.is-rendered {

@@ -1,12 +1,13 @@
 # Current State
 
-Updated: 2026-04-25T21:55:00.000Z
+Updated: 2026-04-25T22:10:00.000Z
 
 ## Active Goal
 
 - Fluxo editorial anti-repeticao
 - Responsividade de cards com foto
 - Autocorrecao de textos publicos
+- Bloqueio de quebra de palavras em cards/imagens automaticas
 
 ## Summary
 
@@ -30,3 +31,9 @@ Rodada da Pesquisa Acre 2026 estendida por mais 7 dias sem mexer nos votos atuai
 Arquivos tocados na rodada: `index.html`, `lifestile.html`, `lifestile.js`, `script.js`, `sidebar-data.js`, `sidebar-widgets-recovery.js`, `catalogo-servicos.js`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md` e `.codex-memory/orders.json`.
 
 Validacoes: `node --check script.js`, `node --check lifestile.js`, `node --check sidebar-data.js`, `node --check sidebar-widgets-recovery.js`, `node --check catalogo-servicos.js` e `npm run review:team` com 0 achados.
+
+## Atualizacao 2026-04-25T22:10:00.000Z - Quebra de palavras em imagens automaticas
+
+Usuario apontou que imagens/cards automaticos nao podem quebrar palavra no meio. `styles.css` recebeu regra global para cards gerados, thumbnails, fallbacks e legendas bloquearem `word-break` agressivo, `overflow-wrap: anywhere` e hifenizacao automatica. Tambem removido `overflow-wrap: anywhere` do terminal visual dos insiders.
+
+Validacoes: busca por `overflow-wrap: anywhere`, `word-break: break-all` e `hyphens: auto` sem resultados nos CSS principais; `styles.css` brace-balance 0; `npm run review:team` com 0 achados.

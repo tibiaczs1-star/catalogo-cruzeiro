@@ -1,6 +1,12 @@
 # Handoff
 
-Updated: 2026-04-25T21:55:00.000Z
+Updated: 2026-04-25T22:10:00.000Z
+
+## Atualizacao 2026-04-25T22:10:00.000Z - Quebra de palavras em imagens automaticas
+
+Usuario apontou que imagens/cards automaticos nao podem quebrar palavra no meio. `styles.css` agora reforca `word-break: normal`, `overflow-wrap: normal` e `hyphens: none` para cards gerados, thumbnails, fallbacks, fotos automaticas e legendas/pseudos. O `overflow-wrap: anywhere` do terminal visual dos insiders tambem foi removido.
+
+Validacoes: busca por regras agressivas sem resultados nos CSS principais, `styles.css` brace-balance 0 e `npm run review:team` com 0 achados.
 
 ## Atualizacao 2026-04-25T21:55:00.000Z - Autocorrecao de textos publicos
 

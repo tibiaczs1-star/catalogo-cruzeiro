@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T21:50:24.324Z",
+  "lastUpdatedAt": "2026-04-25T22:04:37.354Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6561,6 +6561,21 @@
       "source": "chat",
       "rawRequest": "ainda nao gostei, aquilo e so pra dizer pra visitar os esritorios vitrtuais",
       "summary": "Simplificar o card para dizer apenas que o visitante pode visitar os escritórios virtuais, sem explicar áreas especiais do portal.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-impedir-que-textos-em-imagens-cards-automaticos-quebrem-palavras-no-meio",
+      "createdAt": "2026-04-25T22:04:37.354Z",
+      "updatedAt": "2026-04-25T22:04:37.354Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "esse tipo de coisa nao pode acontecer, criar imagens automaticas que pulem de uma linha pra outra no meio da palavra",
+      "summary": "Impedir que textos em imagens/cards automaticos quebrem palavras no meio.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
