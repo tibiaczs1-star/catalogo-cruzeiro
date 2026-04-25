@@ -15,7 +15,8 @@
     "memory:ensure": "node scripts/codex-memory.js ensure",
     "memory:status": "node scripts/codex-memory.js status",
     "review:team": "node scripts/review-team-audit.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "sync:online-local": "node scripts/sync-online-local.js"
   },
   "dependencies": {
     "phaser": "^3.90.0",

@@ -168,6 +168,17 @@ const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
 const COMMUNITY_REPORTS_FILE = path.join(DATA_DIR, "community-reports.json");
 const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
 const ACRE_2026_POLL_SETTINGS_FILE = path.join(DATA_DIR, "acre-2026-poll-settings.json");
+const ACRE_2026_POLL_EXTENSION_SETTINGS = {
+  version: 1,
+  mode: "manual-week",
+  baseWeekKey: "2026-W17",
+  activeWeekKey: "2026-W17",
+  activeWeekStartedAt: "2026-04-25T05:00:00.000Z",
+  activeWeekExpiresAt: "2026-05-03T04:59:59.999Z",
+  resetReason: "Extensao administrativa: manter a rodada Acre 2026 aberta por mais 7 dias sem mexer nos votos atuais.",
+  updatedAt: "2026-04-25T18:00:00.000Z",
+  history: []
+};
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
@@ -8267,7 +8278,7 @@ function recordMatchesWeeklyDevice(item = {}, currentWeekKey = "", fingerprints 
 function getAcre2026PollRoundSettings(now = new Date()) {
   const currentDate = now instanceof Date && !Number.isNaN(now.getTime()) ? now : new Date();
   const baseWeekKey = getWeekBucketKey(currentDate.toISOString());
-  const settings = readJson(ACRE_2026_POLL_SETTINGS_FILE, {});
+  const settings = readJson(ACRE_2026_POLL_SETTINGS_FILE, ACRE_2026_POLL_EXTENSION_SETTINGS);
   const activeWeekKey = safeString(settings?.activeWeekKey || "", 24);
   const activeWeekExpiresAt = safeString(settings?.activeWeekExpiresAt || "", 80);
   const expiresAtMs = activeWeekExpiresAt ? new Date(activeWeekExpiresAt).getTime() : 0;

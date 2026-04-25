@@ -1,7 +1,35 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T14:12:00.000Z",
+  "lastUpdatedAt": "2026-04-25T18:09:17.769Z",
   "orders": [
+    {
+      "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
+      "createdAt": "2026-04-25T15:20:00.000Z",
+      "updatedAt": "2026-04-25T15:20:00.000Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "agora coloque nossos personagens na rua, nenhum repetido, 3 e animações para os que vão ficar parados, e pro nosso personagem principal ele tem que ser um sprite de 8 direções que tenha animação de andar respirar e etc, como num rpg",
+      "summary": "Adicionar civis únicos animados na rua PubPaid 2.0 e transformar o player em sprite RPG de 8 direções com caminhada e respiração.",
+      "normalizedTasks": [
+        "carregar seis civis exclusivos na rua sem repetição",
+        "aplicar idles distintos para civis parados",
+        "recriar/usar spritesheet do player 8 direções x 3 frames",
+        "animar caminhada por vetor de movimento e respiração parado",
+        "validar visualmente no navegador local"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-v2.html",
+        "assets/pubpaid/sprites/rpg/player-8dir-walk-v1.png",
+        "assets/pubpaid/street/civilians/street-homeless-sitting-v1.png",
+        "assets/pubpaid/street/civilians/street-drunk-floor-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-lady-v1.png",
+        "assets/pubpaid/street/civilians/street-hooded-boy-v1.png",
+        "assets/pubpaid/street/civilians/street-old-cane-v1.png",
+        "assets/pubpaid/street/civilians/street-bus-man-bag-v1.png"
+      ]
+    },
     {
       "id": "2026-04-24-implementar-fila-cheffe-call-mobile-only",
       "createdAt": "2026-04-24T19:30:00.000Z",
@@ -6074,6 +6102,153 @@
         "resolver/isolar conflitos UU/DU antes de subir"
       ],
       "notes": "Validado via Node REPL: node --check script.js, node --check server.js e styles.css brace-balance=0. Worktree tem conflitos fora desta frente."
+    },
+    {
+      "id": "2026-04-25-lifestile-fashion-24h-implantar",
+      "createdAt": "2026-04-25T14:40:00.000Z",
+      "updatedAt": "2026-04-25T14:45:00.000Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "continue / agora implante / agora faça / agora realize / site de moda com captação, runtime, agentes e feed social pronto para subir",
+      "summary": "Implantar Lifestile como editoria premium exclusivamente de moda, com Fashion 24h, feed de redes sociais, captação filtrada, runtime e produção conferida.",
+      "normalizedTasks": [
+        "blindar Lifestile contra politica/noticia dura e pautas de prefeitura",
+        "criar experiencia editorial premium com fotos, artigos e feed social",
+        "adicionar prompt Super Site Style & Fashion 24h",
+        "validar runtime/agentes/review",
+        "isolar worktree limpo e publicar em origin/main",
+        "conferir producao no Render"
+      ],
+      "filesTouched": [
+        "lifestile.html",
+        "lifestile.css",
+        "lifestile.js",
+        "PROMPT_SUPER_SITE_STYLE_FASHION_24H_2026-04-25.md",
+        "server.js",
+        "esttiles.html",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "lifestile",
+        "moda",
+        "fashion-24h",
+        "deploy",
+        "render",
+        "agentes"
+      ],
+      "nextSteps": [
+        "resolver o rebase conflitado do worktree principal quando a frente Lifestile estiver encerrada"
+      ],
+      "notes": "Commit 657a82f publicado e contido em origin/main. Producao https://catalogo-cruzeiro-web.onrender.com/lifestile.html retornou 200 com Fashion 24h, feed social e HTML sem termos bloqueados."
+    },
+    {
+      "id": "2026-04-25-investigar-em-producao-por-que-a-pesquisa-acre-2026-parou-de-computar-votos-rece",
+      "createdAt": "2026-04-25T17:22:28.846Z",
+      "updatedAt": "2026-04-25T17:22:28.846Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "verifique porque o site https://catalogo-cruzeiro-web.onrender.com/pesquisa-acre-2026.html parou de pegar os votos, acabou de entra votos e nao estao sendo computados",
+      "summary": "Investigar em produção por que a Pesquisa Acre 2026 parou de computar votos recém-enviados.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-resetar-online-a-rodada-semanal-da-pesquisa-acre-2026-por-7-dias-preservando-vot",
+      "createdAt": "2026-04-25T17:29:52.251Z",
+      "updatedAt": "2026-04-25T17:29:52.251Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok agora eu quero que resete online para uma semana de pesquisa mantendo os votos atuais",
+      "summary": "Resetar online a rodada semanal da Pesquisa Acre 2026 por 7 dias, preservando votos atuais no acumulado.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-corrigir-front-para-renderizar-resumos-curtos-nos-cards-noticias-e-bloquear-vaza",
+      "createdAt": "2026-04-25T17:49:22.444Z",
+      "updatedAt": "2026-04-25T17:49:22.444Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "esses textos tao enormes; reunir equipe; front site deve ser feito de resumos, nao artigos completos",
+      "summary": "Corrigir front para renderizar resumos curtos nos cards/noticias e bloquear vazamento de artigos completos na home.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-treinar-equipe-local-para-nunca-deixar-artigos-completos-aparecerem-em-cards-fro",
+      "createdAt": "2026-04-25T17:49:59.974Z",
+      "updatedAt": "2026-04-25T17:49:59.974Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "depois reuna os agentes e treine os responsaveis pra nao deixa mais isso acontecer e pontue como erro",
+      "summary": "Treinar equipe local para nunca deixar artigos completos aparecerem em cards/front e transformar resumo gigante em erro de auditoria.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-corrigir-entendimento-da-regra-apenas-home-cards-chamadas-devem-resumir-noticia-",
+      "createdAt": "2026-04-25T17:55:30.952Z",
+      "updatedAt": "2026-04-25T17:55:30.952Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "pagina home resume; pagina quando entra pra ler tudo continua com estruturas atuais e texto completo",
+      "summary": "Corrigir entendimento da regra: apenas home/cards/chamadas devem resumir; noticia.html/noticia.js continuam completos com corpo, analise e contexto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-sincronizar-online-local-polir-home-front-manter-prioridade-mailza-mailsa-e-subi",
+      "createdAt": "2026-04-25T17:59:11.077Z",
+      "updatedAt": "2026-04-25T17:59:11.077Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "sincronize tudo e suba, deixe lindao e acione prioridade mailsa",
+      "summary": "Sincronizar online-local, polir home/front, manter prioridade Mailza/Mailsa e subir para producao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-reservar-pubpaid-fora-do-commit-deploy-atual-e-subir-apenas-home-sync-editorial-",
+      "createdAt": "2026-04-25T18:09:17.769Z",
+      "updatedAt": "2026-04-25T18:09:17.769Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tirar PubPaid do meio, reservar para nao subir ate eu mandar; subir o que der agora",
+      "summary": "Reservar PubPaid fora do commit/deploy atual e subir apenas home/sync/editorial pronto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

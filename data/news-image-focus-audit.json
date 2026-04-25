@@ -1,505 +1,142 @@
 {
-  "updatedAt": "2026-04-25T12:01:27.854Z",
+  "updatedAt": "2026-04-25T18:04:30.962Z",
   "sourceFile": "news-data.js",
-  "checkedLimit": 80,
-  "offline": false,
-  "total": 80,
+  "checkedLimit": 120,
+  "offline": true,
+  "total": 120,
   "summary": {
-    "ok": 40,
-    "review": 39,
+    "ok": 120,
+    "review": 0,
     "warning": 0,
-    "error": 1,
-    "manualFocus": 0,
-    "newSinceLastAudit": 17,
-    "missingImage": 1,
+    "error": 0,
+    "manualFocus": 91,
+    "newSinceLastAudit": 0,
+    "missingImage": 0,
     "unreachableImage": 0
   },
   "slugs": [
     "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
     "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
-    "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
     "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
     "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
     "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
-    "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
     "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
     "prefeitura-visita-bairros-e-procura-pessoas-em-situacao-de-rua-para-ofertar-servicos-de-assistencia",
     "estado-do-acre-tem-um-dos-menores-precos-da-vaca-gorda-no-pais",
     "governo-aciona-equipes-para-lidar-com-balsa-que-derramou-15-mil-litros-de-diesel-no-rio-tarauaca",
+    "parana-pesquisas-rj-lula-tem-47-3-de-avaliacao-negativa-30-positiva",
+    "parana-pesquisas-no-rj-flavio-tem-39-6-e-lula-36-7-no-1-turno",
+    "parana-pesquisas-no-rj-55-2-desaprovam-e-41-4-aprovam-governo-lula",
+    "parana-pesquisas-no-rj-flavio-tem-47-e-lula-40-5-no-segundo-turno",
     "chuva-interrompe-primeira-noite-do-arraial-ponto-alto-e-bingo-de-r-5-mil-e-transferido-para-sabado",
     "influenciador-pode-fazer-campanha-eleitoral-lei-impoe-limites-e-fiscalizacao-e-desafio-para-o-tse",
     "nikolas-ferreira-e-jair-renan-trocam-provocacoes-em-rede-social-flavio-bolsonaro-pede-pacificacao-na-base",
     "messias-conta-votos-e-adota-tom-conciliador-para-tentar-aprovacao-ao-stf",
-    "eua-e-ira-vao-ao-paquistao-em-meio-a-incertezas-sobre-as-negociacoes",
     "verticalizacao-da-producao-de-cacau-e-consenso-no-chocolat-festival-amazonia",
     "sem-desistencia",
-    "ser-humano",
+    "quais-os-tipos-de-cancer-de-mama-dr-kalil-e-especialistas-explicam",
+    "ucrania-utiliza-soldados-robos-no-lugar-de-humanos-em-guerra-contra-russia",
+    "tontura-nao-e-normal-entenda-os-sinais-do-seu-corpo",
+    "novo-dispositivo-impulsiona-computacao-que-mimetiza-cerebro-humano",
     "taxa-das-blusinhas-receita-dos-correios-com-encomendas-internacionais-cai-de-22-para-8",
     "alcolumbre-e-motta-sinalizam-apoio-a-projeto-sobre-combustiveis-governo-quer-acelerar-votacao",
-    "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
+    "fachin-suspende-decisao-que-barrava-venda-de-bens-do-df-para-socorrer-brb",
+    "alckmin-promete-lealdade-a-lula-durante-congresso-do-pt",
+    "lula-afaga-militancia-mas-cobra-programa-factivel-do-pt-para-2026",
     "colisao-entre-moto-e-caminhonete-deixa-jovem-ferido-na-isaura-parente",
     "nota-publica-sobre-derramamento-de-oleo-no-rio-tarauaca",
     "acao-entre-governo-e-prefeitura-garante-quase-70-ruas-asfaltadas-em-brasileia",
+    "congresso-do-pt-mira-plano-de-reeleicao-de-lula-e-consenso-interno",
     "em-evento-do-pt-lula-diz-que-nao-corre-atras-de-adversarios-e-que-governo-nao-perdera-eleicao-se-fizer-as-coisas-corretas",
+    "junta-nacional-eleitoral-considera-votacao-suplementar-no-peru-inviavel",
+    "pericles-anuncia-nascimento-do-primeiro-neto-minha-vida-ficou-completa",
+    "butantan-abre-inscricoes-para-testes-de-nova-vacina-de-gripe-para-idosos",
     "carmen-lucia-propoe-criacao-de-brigadas-eleitorais-para-candidatas-mulheres-nas-eleicoes-2026",
+    "ex-the-voice-brasil-pede-doacoes-para-custear-tratamento-de-cancer",
+    "stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao",
     "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
     "motorista-de-aplicativo-e-usado-como-refem-em-assalto-a-loja-no-centro-de-cruzeiro-do-sul",
-    "amigos-do-doca-e-amigos-do-dudu-decidem-42-campeonato-de-ferias",
     "milton-hatoum-toma-posse-na-abl",
-    "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
+    "madonna-usa-aplicativo-de-relacionamento-lgbt-para-divulgar-novo-projeto",
     "no-acre-bando-armado-faz-o-limpa-em-loja-e-foge-em-canoa-a-remo",
-    "nao-da-mais-para-esconder-novo-triangulo-amoroso-se-forma-em-coracao-acelerado",
-    "rapper-l7nnon-vence-yoko-ono-na-justica-e-pode-manter-nome-artistico-entenda-o-caso",
+    "virginia-fecha-circo-para-curtir-tarde-com-os-filhos-confira",
+    "influenciador-que-gravou-aulas-da-unb-e-difamou-professor-e-condenado",
+    "ex-bbb-pedro-espindola-desabafa-sobre-saude-mental-sigo-em-progressao",
+    "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado",
     "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-8216-um-chamado-8217",
-    "governo-publica-regras-que-ampliam-credito-para-a-reforma-de-imoveis-teto-passa-de-r-30-mil-para-r-50-mil",
-    "nunes-marques-assume-presidencia-do-tse-dia-12-de-maio",
-    "apos-acordo-com-reitoria-funcionarios-da-usp-encerram-greve",
-    "estaduais-sub-11-e-15-com-mais-uma-rodada-no-lourenco-filho",
+    "grazi-massafera-reflete-sobre-maternidade-ficticia-e-da-vida-real",
     "feira-da-cidadania-do-governo-federal-chega-a-rio-branco-na-quarta-29",
-    "em-manifesto-pt-preve-debate-sobre-reforma-administrativa-e-do-judiciario",
-    "dolar-fecha-abaixo-de-r-5-e-bolsa-cai-com-cautela-global",
-    "justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
-    "funcionarios-e-precatorios-puxaram-gastos-dos-correios-em-2025-despesas-aumentaram-37-enquanto-receitas-cairam-12",
-    "governo-inicia-fiscalizacao-de-transparencia-de-precos-em-aplicativos-de-transporte-e-delivery",
     "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
     "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
     "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-    "pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
     "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
+    "camara-de-rio-branco-cancela-audiencia-do-plano-diretor-e-marca-nova-data",
     "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
-    "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
-    "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
-    "pgr-se-manifesta-a-favor-de-pedido-de-bolsonaro-para-cirurgia-no-ombro",
     "fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima",
-    "ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa",
     "convocacao-final-para-a-copa-tera-museu-do-amanha-como-palco",
     "acriano-que-lutou-na-ucrania-retorna-a-rodrigues-alves-e-surpreende-mae-com-buque-de-rosas",
     "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
     "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
-    "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
-    "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
-    "aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
-    "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
-    "simone-mendes-junta-idolos-sertanejos-dos-anos-1990-na-gravacao-ao-vivo-do-album-audiovisual-minhas-memorias",
+    "apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas",
+    "fim-de-semana-sera-de-calor-intenso-e-risco-de-cheia-nos-rios-acreanos",
+    "elevacao-do-rio-jurua-continua-em-cruzeiro-do-sul",
+    "dois-sao-presos-por-trafico-de-drogas-no-bairro-da-paz-em-rio-branco",
     "familia-que-convivia-com-michael-jackson-acusa-cantor-de-abuso-sexual-entenda-caso",
     "procon-participa-da-operacao-combustivel-zero-em-rio-branco",
+    "licenca-de-operacao-belda-importacao-e-exportacao-ltda",
     "licenca-de-operacao-8211-belda-importacao-e-exportacao-ltda",
+    "educacao-divulga-lista-de-aprovados-para-escuta-do-coro-lirico-veja-nomes",
+    "semifinais-da-2-copa-acre-serao-disputadas-no-tonicao",
     "governo-do-acre-fortalece-parceria-com-cozinha-solidaria-para-ampliar-atendimento-a-familias-em-vulnerabilidade",
-    "impossivel-nao-se-indignar-diz-janja-sobre-aliado-de-trump-que-chamou-brasileiras-de-raca-maldita",
     "idoso-e-encontrado-morto-em-ramal-de-rio-branco",
-    "zanin-manda-soltar-operador-de-esquema-de-venda-de-sentencas-no-stj-por-demora-na-acusacao",
     "chuvas-intensas-causam-alagamentos-e-prejuizos-em-mancio-lima",
-    "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
     "balsa-naufraga-e-derrama-50-mil-litros-de-diesel-no-rio-tarauaca",
-    "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-    "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira"
+    "relatada-por-alan-rick-lei-cria-incentivo-direto-a-reciclagem-no-pais",
+    "deputado-zezinho-barbary-anuncia-entrega-de-viaturas-barcos-motorizados-e-onibus-para-o-vale-do-jurua",
+    "deputado-destaca-uniao-entre-assembleia-legislativa-e-governo-para-fortalecer-seguranca-no-jurua",
+    "licenca-previa-areacre-auto-posto-ltda",
+    "licenca-previa-8211-areacre-auto-posto-ltda",
+    "projeto-vozes-da-floresta-destaca-cultura-indigena-e-fortalece-identidade-cultural-em-cruzeiro-do-sul",
+    "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+    "caminhada-de-conscientizacao-sobre-o-autismo-reune-pais-e-comunidade-em-cruzeiro-do-sul",
+    "governo-exonera-condenado-por-tortura-e-nomeia-esposa-no-lugar-dele-em-secretaria-no-acre",
+    "pre-enem-8216-educaleac-8217-abre-selecao-com-mais-de-200-vagas-presenciais-e-online",
+    "brasil-barra-plataformas-de-previsoes-em-politica-e-esporte-decisao-nao-afeta-bets",
+    "scooby-doo-veja-a-1-imagem-de-fred-daphne-velma-e-salsicha-na-nova-serie",
+    "francis-hime-e-simone-navegam-juntos-pelas-aguas-do-show-embarcacao-atracao-do-rio-nas-tercas-feiras-de-maio",
+    "filme-bolsonaro-memes-reacao-redes",
+    "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
+    "ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia",
+    "licenca-de-instalacao-josias-o-da-silva-ltda",
+    "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+    "tenda-saude-cheia-jurua",
+    "vazante-retorno-familias",
+    "moradores-rotina-cheia",
+    "agua-mineral-familias-cheia",
+    "mais-12-mil-afetados",
+    "eja-czs-superacao",
+    "renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda",
+    "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+    "recebimento-licenca-previa-josias-o-da-silva-epp",
+    "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+    "edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua",
+    "edital-de-convocacao-de-assembleia-geral-ordinaria-ago-8211-coopertransgua",
+    "edital-de-convocacao-de-assembleia-geral-ordinaria-coopeguajara",
+    "edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara",
+    "credenciamento-pareceristas-culturais",
+    "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe",
+    "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+    "edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+    "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+    "edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre",
+    "edital-de-convocacao-8211-associacao-de-cabelereiros-de-cruzeiro-do-sul-8211-acre",
+    "faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul",
+    "saude-25-agosto-ubs",
+    "ifac-auxilio-cheia",
+    "fila-ovos-pascoa",
+    "lucas-dourado-pascoa"
   ],
-  "reviewQueue": [
-    {
-      "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
-      "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
-      "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
-      "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-visita-bairros-e-procura-pessoas-em-situacao-de-rua-para-ofertar-servicos-de-assistencia",
-      "title": "Prefeitura visita bairros e procura pessoas em situação de rua para ofertar serviços de assistência",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/12ce806d-6445-4487-a0a7-6c7aa7bf3187-1200x900.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "nikolas-ferreira-e-jair-renan-trocam-provocacoes-em-rede-social-flavio-bolsonaro-pede-pacificacao-na-base",
-      "title": "Nikolas Ferreira e Jair Renan trocam provocações em rede social; Flávio Bolsonaro pede pacificação na base",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/GuVNxzqJOSBppKA4kvKH8xYpqJI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/z/n/hbN21FRvAu0XhDJQX6tw/montagens-home.png",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "eua-e-ira-vao-ao-paquistao-em-meio-a-incertezas-sobre-as-negociacoes",
-      "title": "EUA e Irã vão ao Paquistão em meio a incertezas sobre as negociações",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/tagreuters.com2025binary_LYNXMPEL5M0LY-BASEIMAGE.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "verticalizacao-da-producao-de-cacau-e-consenso-no-chocolat-festival-amazonia",
-      "title": "Verticalização da produção de cacau é consenso no Chocolat Festival Amazônia",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-19.34.42-1148x1200.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "sem-desistencia",
-      "title": "Sem desistência",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-14.06.31.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "ser-humano",
-      "title": "Ser Humano",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-07.34.20.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "alcolumbre-e-motta-sinalizam-apoio-a-projeto-sobre-combustiveis-governo-quer-acelerar-votacao",
-      "title": "Alcolumbre e Motta sinalizam apoio a projeto sobre combustíveis; governo quer acelerar votação",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/8xXsjVa0xRhh62FKotQj17j8AY0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/j/Y/H4FYwFTmWvHiHU1V8oLQ/fta20250604056.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
-      "title": "Por unanimidade, STF mantém prisão de ex-presidente do BRB",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/paulo_henrique_costa04-1.webp",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "acao-entre-governo-e-prefeitura-garante-quase-70-ruas-asfaltadas-em-brasileia",
-      "title": "Ação entre governo e prefeitura garante quase 70 ruas asfaltadas em Brasileia",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-20.42.03-1-1200x900.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "em-evento-do-pt-lula-diz-que-nao-corre-atras-de-adversarios-e-que-governo-nao-perdera-eleicao-se-fizer-as-coisas-corretas",
-      "title": "Em evento do PT, Lula diz que 'não corre atrás de adversários' e que governo não perderá eleição se fizer ‘as coisas corretas’",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/gLbzQHCij3VNq64A08GftT7aic0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/Y/dAOi9yQcSAHkAJQvZ6YQ/lula.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "carmen-lucia-propoe-criacao-de-brigadas-eleitorais-para-candidatas-mulheres-nas-eleicoes-2026",
-      "title": "Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/CkrSaiaBn2uLM7Oaez1le6Z8KSQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/A/6d7DwqRaKtPM6x27qp9Q/55115739354-630de78a82-o.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
-      "title": "Por unanimidade, STF mantém prisão de ex-presidente do BRB",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687210&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "milton-hatoum-toma-posse-na-abl",
-      "title": "Milton Hatoum toma posse na ABL",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/Sq_PY5lvsG4owQBVgwFmoztmWzg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/f/BB9BkBQwmbVBsWNugDSQ/milton-hatoum.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "no-acre-bando-armado-faz-o-limpa-em-loja-e-foge-em-canoa-a-remo",
-      "title": "No Acre, bando armado “faz o limpa” em loja e foge em canoa a remo",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/IMG_0900.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "rapper-l7nnon-vence-yoko-ono-na-justica-e-pode-manter-nome-artistico-entenda-o-caso",
-      "title": "Rapper L7nnon vence Yoko Ono na Justiça e pode manter nome artístico; entenda o caso",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/WnsQTCoo7-OtYUEFFTHoN88uJAA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/d/mgQV4ORIGnCSyI1sJ9ig/fotos-g1-1920-x-1080-px-6-.png",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "nunes-marques-assume-presidencia-do-tse-dia-12-de-maio",
-      "title": "Nunes Marques assume presidência do TSE dia 12 de maio",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687209&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "apos-acordo-com-reitoria-funcionarios-da-usp-encerram-greve",
-      "title": "Após acordo com reitoria, funcionários da USP encerram greve",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687207&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "estaduais-sub-11-e-15-com-mais-uma-rodada-no-lourenco-filho",
-      "title": "Estaduais Sub-11 e 15 com mais uma rodada no Lourenço Filho",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-18.34.49-1200x900.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "em-manifesto-pt-preve-debate-sobre-reforma-administrativa-e-do-judiciario",
-      "title": "Em manifesto, PT prevê debate sobre reforma administrativa e do Judiciário",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/HA4h0ixuCOcWpOqQIHX26UCiQRc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/l/8/Rz4qRTRZW3Y9YtARTVng/imagem-do-whatsapp-de-2025-07-06-a-s-10.38.59-dcf2ef3f.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
-      "title": "Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687202&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "funcionarios-e-precatorios-puxaram-gastos-dos-correios-em-2025-despesas-aumentaram-37-enquanto-receitas-cairam-12",
-      "title": "Funcionários e precatórios puxaram gastos dos Correios em 2025; despesas aumentaram 37% enquanto receitas caíram 12%",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/Ub61RtzS7autI19rBFGAbeMQA8k=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/3/a/47bLA3SRq0hBSZKmALvg/vlcsnap-2025-11-21-13h36m06s414.png",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "governo-inicia-fiscalizacao-de-transparencia-de-precos-em-aplicativos-de-transporte-e-delivery",
-      "title": "Governo inicia fiscalização de transparência de preços em aplicativos de transporte e delivery",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/XUz9QSSeTgavKkkQb-PUTpvdczY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/7/s/SYYlTYSSa2F1xhGCkMGg/entregador-de-comida-com-caixas-de-comida.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-      "title": "Prefeitura de Cruzeiro do Sul inaugura sede da Regional Educacional Santa Luzia/Campinas",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-16.59.59.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
-      "title": "PGR dá aval para Bolsonaro fazer cirurgia no ombro",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687199&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
-      "title": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-16.57.29.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
-      "title": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-12.09.01-1.jpeg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
-      "title": "Anac estabelece restrições para transporte de power banks em aviões",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687197&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "pgr-se-manifesta-a-favor-de-pedido-de-bolsonaro-para-cirurgia-no-ombro",
-      "title": "PGR se manifesta a favor de pedido de Bolsonaro para cirurgia no ombro",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/46fp6f5WWQKEGzNwfLRvF3e7UII=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/R/v/ezHm5zSIuTpPTlr0YTIw/bolsonaro.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa",
-      "title": "EBC e Unifap inauguram novo canal digital de TV no sul do Amapá",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687196&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "convocacao-final-para-a-copa-tera-museu-do-amanha-como-palco",
-      "title": "Convocação final para a Copa terá Museu do Amanhã como palco",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687195&o=rss",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "acriano-que-lutou-na-ucrania-retorna-a-rodrigues-alves-e-surpreende-mae-com-buque-de-rosas",
-      "title": "Acriano que lutou na Ucrânia retorna a Rodrigues Alves e surpreende mãe com buquê de rosas",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/imagem_2026-04-24_170458970.png",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "simone-mendes-junta-idolos-sertanejos-dos-anos-1990-na-gravacao-ao-vivo-do-album-audiovisual-minhas-memorias",
-      "title": "Simone Mendes junta ídolos sertanejos dos anos 1990 na gravação ao vivo do álbum audiovisual 'Minhas memórias'",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/4cqmBFjxJtSnzcMbuX9sc9TRtRA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/J/nr0ovlSAeF57tyHddMhw/simonemendesmemorias.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "familia-que-convivia-com-michael-jackson-acusa-cantor-de-abuso-sexual-entenda-caso",
-      "title": "Família que convivia com Michael Jackson acusa cantor de abuso sexual; entenda caso",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/oAahJ6VlxdexIIpURY5gSoVsOqk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/8/H/sVcgNlQhAzwpVoaoKNHQ/michael31.211401.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "licenca-de-operacao-8211-belda-importacao-e-exportacao-ltda",
-      "title": "Licença de Operação &#8211; BELDA IMPORTACAO E EXPORTACAO LTDA",
-      "level": "error",
-      "reasons": [
-        "missing-image-url"
-      ],
-      "imageUrl": "",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "impossivel-nao-se-indignar-diz-janja-sobre-aliado-de-trump-que-chamou-brasileiras-de-raca-maldita",
-      "title": "'Impossível não se indignar', diz Janja sobre aliado de Trump que chamou brasileiras de 'raça maldita'",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/QzF-CgRMHiu30Othg_QJ0r1G2K0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/f/H/8brhcmTFeT3g8AWBKiBA/afp-20260421-a8jh2zq-v1-highres-serbiauspoliticsdiplomacy.jpg",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "zanin-manda-soltar-operador-de-esquema-de-venda-de-sentencas-no-stj-por-demora-na-acusacao",
-      "title": "Zanin manda soltar operador de esquema de venda de sentenças no STJ por demora na acusação",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://s2-g1.glbimg.com/r9pZWWKbyzT7heJN_P2CH5HDKzQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/b/X/wyE9XUSdWezeqhrL3L5g/jardes-g1-52-.png",
-      "effectiveFocus": ""
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
-      "title": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ],
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/ada99206-ac0f-4b3c-9076-bcc075e00d29-1.jpg",
-      "effectiveFocus": ""
-    }
-  ],
+  "reviewQueue": [],
   "items": [
     {
       "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
@@ -509,24 +146,26 @@
       "publishedAt": "2026-04-25T10:46:41.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 976,
         "height": 695,
         "ratio": 1.404,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
@@ -536,51 +175,26 @@
       "publishedAt": "2026-04-25T00:03:11.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 683,
         "ratio": 1.499,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-      "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-      "category": "Política Regional",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-04-24T23:17:57.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-11.05.18-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
@@ -590,24 +204,26 @@
       "publishedAt": "2026-04-24T21:57:54.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 682,
         "ratio": 1.501,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
@@ -617,78 +233,26 @@
       "publishedAt": "2026-04-24T21:56:12.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 682,
         "ratio": 1.501,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-      "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-      "category": "Política Regional",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:39:04.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-      "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-      "category": "Política Regional",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:21:13.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
@@ -698,44 +262,20 @@
       "publishedAt": "2026-04-24T19:58:21.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
-      "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-      "category": "Política Regional",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T19:28:41.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -746,20 +286,20 @@
       "publishedAt": "2026-04-24T16:47:11.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -770,25 +310,25 @@
       "publishedAt": "2026-04-25T11:18:41.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/12ce806d-6445-4487-a0a7-6c7aa7bf3187-1200x900.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1200,
         "height": 900,
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -799,9 +339,9 @@
       "publishedAt": "2026-04-25T11:14:33.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/vacas-nelore-pastando.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
@@ -821,9 +361,9 @@
       "publishedAt": "2026-04-25T11:01:52.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-2.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 976,
         "height": 695,
@@ -841,6 +381,102 @@
       "reasons": []
     },
     {
+      "slug": "parana-pesquisas-rj-lula-tem-47-3-de-avaliacao-negativa-30-positiva",
+      "title": "Paraná Pesquisas/RJ: Lula tem 47,3% de avaliação negativa; 30%, positiva",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T11:00:41.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/0d7a6178_0-e1769700347848.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "parana-pesquisas-no-rj-flavio-tem-39-6-e-lula-36-7-no-1-turno",
+      "title": "Paraná Pesquisas: no RJ, Flávio tem 39,6%, e Lula, 36,7% no 1º turno",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T11:00:37.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/02/TN220250104004-e1748874970855.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "parana-pesquisas-no-rj-55-2-desaprovam-e-41-4-aprovam-governo-lula",
+      "title": "Paraná Pesquisas: no RJ, 55,2% desaprovam e 41,4% aprovam governo Lula",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T11:00:34.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/0d7a8575-e1763662538395.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "parana-pesquisas-no-rj-flavio-tem-47-e-lula-40-5-no-segundo-turno",
+      "title": "Paraná Pesquisas: no RJ, Flávio tem 47%, e Lula, 40,5% no segundo turno",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T11:00:19.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/RJ_Abr26-2.pdf",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "chuva-interrompe-primeira-noite-do-arraial-ponto-alto-e-bingo-de-r-5-mil-e-transferido-para-sabado",
       "title": "Chuva interrompe primeira noite do Arraial Ponto Alto e bingo de R$ 5 mil é transferido para sábado",
       "category": "Utilidade Pública",
@@ -848,9 +484,9 @@
       "publishedAt": "2026-04-25T10:50:53.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/Frame-240-2024-04-08T103742.209-jpg.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
@@ -868,21 +504,23 @@
       "category": "Polícia",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-04-25T10:50:24.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/noRTioRTrb5iCWnHBoz-iUJr0oM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/e/r/72yevJQfqccdfExmGmkQ/260417-info-influencers-eleicoes.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "nikolas-ferreira-e-jair-renan-trocam-provocacoes-em-rede-social-flavio-bolsonaro-pede-pacificacao-na-base",
@@ -890,22 +528,22 @@
       "category": "Esporte",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-04-25T10:48:29.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/GuVNxzqJOSBppKA4kvKH8xYpqJI=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/z/n/hbN21FRvAu0XhDJQX6tw/montagens-home.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -916,9 +554,9 @@
       "publishedAt": "2026-04-25T10:28:08.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/54843904687_34822b4f68_o-e1763559043601.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
@@ -931,30 +569,6 @@
       "reasons": []
     },
     {
-      "slug": "eua-e-ira-vao-ao-paquistao-em-meio-a-incertezas-sobre-as-negociacoes",
-      "title": "EUA e Irã vão ao Paquistão em meio a incertezas sobre as negociações",
-      "category": "Política",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-25T10:25:10.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/tagreuters.com2025binary_LYNXMPEL5M0LY-BASEIMAGE.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
       "slug": "verticalizacao-da-producao-de-cacau-e-consenso-no-chocolat-festival-amazonia",
       "title": "Verticalização da produção de cacau é consenso no Chocolat Festival Amazônia",
       "category": "Cultura",
@@ -962,25 +576,25 @@
       "publishedAt": "2026-04-25T10:05:42.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-19.34.42-1148x1200.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1148,
         "height": 1200,
         "ratio": 0.957,
         "orientation": "portrait"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -991,46 +605,114 @@
       "publishedAt": "2026-04-25T10:00:35.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-14.06.31.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "ser-humano",
-      "title": "Ser Humano",
-      "category": "Cotidiano",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-25T10:00:30.000Z",
+      "slug": "quais-os-tipos-de-cancer-de-mama-dr-kalil-e-especialistas-explicam",
+      "title": "Quais os tipos de câncer de mama? Dr. Kalil e especialistas explicam",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T09:00:34.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-23-at-07.34.20.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/10/diu-uso.png?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "ucrania-utiliza-soldados-robos-no-lugar-de-humanos-em-guerra-contra-russia",
+      "title": "Ucrânia utiliza soldados robôs no lugar de humanos em guerra contra Rússia",
+      "category": "Polícia",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T09:00:26.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/2026-04-24T051926Z_1_LOP514424042026RP1_RTRMADP_BASEIMAGE-960X540_UKRAINE-CRISIS-ATTACK-ODESA.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 960,
+        "height": 540,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "tontura-nao-e-normal-entenda-os-sinais-do-seu-corpo",
+      "title": "Tontura não é normal: entenda os sinais do seu corpo",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T09:00:21.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/consulta-cardiologista.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "novo-dispositivo-impulsiona-computacao-que-mimetiza-cerebro-humano",
+      "title": "Novo dispositivo impulsiona computação que mimetiza cérebro humano",
+      "category": "Cotidiano",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T08:00:06.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/anxious-frustrated-entrepreneur-having-headache-work.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
     },
     {
       "slug": "taxa-das-blusinhas-receita-dos-correios-com-encomendas-internacionais-cai-de-22-para-8",
@@ -1038,18 +720,18 @@
       "category": "Prefeitura",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-04-25T05:00:34.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/kaAHyrS647GjRVuGIZ-1pvdYHJk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/m/u/zQPX5oS0iDQ2T5RVnIiw/globo-canal-4-20251218-2000-frame-95020.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": []
@@ -1060,46 +742,94 @@
       "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-04-25T04:59:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/8xXsjVa0xRhh62FKotQj17j8AY0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/j/Y/H4FYwFTmWvHiHU1V8oLQ/fta20250604056.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
-      "title": "Por unanimidade, STF mantém prisão de ex-presidente do BRB",
-      "category": "Polícia",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-25T03:45:14.000Z",
+      "slug": "fachin-suspende-decisao-que-barrava-venda-de-bens-do-df-para-socorrer-brb",
+      "title": "Fachin suspende decisão que barrava venda de bens do DF para socorrer BRB",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T04:57:50.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/paulo_henrique_costa04-1.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/gilmar-mendes.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "alckmin-promete-lealdade-a-lula-durante-congresso-do-pt",
+      "title": "Alckmin promete lealdade a Lula durante congresso do PT",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T02:49:01.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2026binary_LYNXMPEM3M0LG-BASEIMAGE.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "lula-afaga-militancia-mas-cobra-programa-factivel-do-pt-para-2026",
+      "title": "Lula afaga militância, mas cobra programa “factível” do PT para 2026",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T02:39:53.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/lula-2.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
       ]
     },
     {
@@ -1110,9 +840,9 @@
       "publishedAt": "2026-04-25T02:33:56.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-21.20.27-3-1200x675.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1200,
         "height": 675,
@@ -1137,24 +867,26 @@
       "publishedAt": "2026-04-25T02:29:33.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 683,
         "ratio": 1.499,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "acao-entre-governo-e-prefeitura-garante-quase-70-ruas-asfaltadas-em-brasileia",
@@ -1164,25 +896,49 @@
       "publishedAt": "2026-04-25T01:46:55.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-20.42.03-1-1200x900.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1200,
         "height": 900,
         "ratio": 1.333,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "congresso-do-pt-mira-plano-de-reeleicao-de-lula-e-consenso-interno",
+      "title": "Congresso do PT mira plano de reeleição de Lula e consenso interno",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T01:45:29.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXNPEL8L0TU-BASEIMAGE-e1766016727165.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
       ]
     },
     {
@@ -1191,83 +947,35 @@
       "category": "Saúde",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-04-25T01:40:43.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/gLbzQHCij3VNq64A08GftT7aic0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Y/Y/dAOi9yQcSAHkAJQvZ6YQ/lula.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "carmen-lucia-propoe-criacao-de-brigadas-eleitorais-para-candidatas-mulheres-nas-eleicoes-2026",
-      "title": "Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026",
-      "category": "Educação",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-25T01:02:05.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/CkrSaiaBn2uLM7Oaez1le6Z8KSQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/A/6d7DwqRaKtPM6x27qp9Q/55115739354-630de78a82-o.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
-      "title": "Por unanimidade, STF mantém prisão de ex-presidente do BRB",
-      "category": "Polícia",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-25T00:56:00.000Z",
+      "slug": "junta-nacional-eleitoral-considera-votacao-suplementar-no-peru-inviavel",
+      "title": "Junta Nacional Eleitoral considera votação suplementar no Peru “inviável”",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T01:36:10.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687210&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "motorista-de-aplicativo-e-usado-como-refem-em-assalto-a-loja-no-centro-de-cruzeiro-do-sul",
-      "title": "Motorista de aplicativo é usado como refém em assalto a loja no centro de Cruzeiro do Sul",
-      "category": "Polícia",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-25T00:45:51.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-13-at-16.15.38-jpeg.webp",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/webp",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2026binary_LYNXMPEM3J17X-BASEIMAGE.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
@@ -1280,22 +988,157 @@
       "reasons": []
     },
     {
-      "slug": "amigos-do-doca-e-amigos-do-dudu-decidem-42-campeonato-de-ferias",
-      "title": "Amigos do Doca e Amigos do Dudu decidem 42º Campeonato de Férias",
-      "category": "Esporte",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-25T00:38:05.000Z",
+      "slug": "pericles-anuncia-nascimento-do-primeiro-neto-minha-vida-ficou-completa",
+      "title": "Péricles anuncia nascimento do primeiro neto: “Minha vida ficou completa”",
+      "category": "Cultura",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T01:32:05.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-19.33.14-1200x868.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 868,
-        "ratio": 1.382,
-        "orientation": "landscape"
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/sandy-e-namorado-medico-4.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
       },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "butantan-abre-inscricoes-para-testes-de-nova-vacina-de-gripe-para-idosos",
+      "title": "Butantan abre inscrições para testes de nova vacina de gripe para idosos",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T01:14:23.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/09/homem-idoso-medo-queda.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "carmen-lucia-propoe-criacao-de-brigadas-eleitorais-para-candidatas-mulheres-nas-eleicoes-2026",
+      "title": "Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026",
+      "category": "Educação",
+      "sourceName": "G1 Politica",
+      "publishedAt": "2026-04-25T01:02:05.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/CkrSaiaBn2uLM7Oaez1le6Z8KSQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/A/6d7DwqRaKtPM6x27qp9Q/55115739354-630de78a82-o.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "ex-the-voice-brasil-pede-doacoes-para-custear-tratamento-de-cancer",
+      "title": "Ex-“The Voice Brasil” pede doações para custear tratamento de câncer",
+      "category": "Cultura",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T00:58:45.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/12/cancer-de-pulmao_42c2b7.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao",
+      "title": "STF abre inquérito contra deputado federal do AM por corrupção",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T00:58:28.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "por-unanimidade-stf-mantem-prisao-de-ex-presidente-do-brb",
+      "title": "Por unanimidade, STF mantém prisão de ex-presidente do BRB",
+      "category": "Polícia",
+      "sourceName": "Agencia Brasil",
+      "publishedAt": "2026-04-25T00:56:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "motorista-de-aplicativo-e-usado-como-refem-em-assalto-a-loja-no-centro-de-cruzeiro-do-sul",
+      "title": "Motorista de aplicativo é usado como refém em assalto a loja no centro de Cruzeiro do Sul",
+      "category": "Polícia",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-25T00:45:51.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2023/11/WhatsApp-Image-2023-11-13-at-16.15.38-jpeg.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
@@ -1312,45 +1155,47 @@
       "category": "Educação",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-04-25T00:36:26.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/Sq_PY5lvsG4owQBVgwFmoztmWzg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/E/f/BB9BkBQwmbVBsWNugDSQ/milton-hatoum.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": true,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
-      "title": "Anac estabelece restrições para transporte de power banks em aviões",
-      "category": "Cotidiano",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-25T00:36:08.000Z",
+      "slug": "madonna-usa-aplicativo-de-relacionamento-lgbt-para-divulgar-novo-projeto",
+      "title": "Madonna usa aplicativo de relacionamento LGBT para divulgar novo projeto",
+      "category": "Cultura",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T00:33:58.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/powerbank_copiar.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-22-at-18.06.58-e1776892158947.jpeg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": false,
+        "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "no-acre-bando-armado-faz-o-limpa-em-loja-e-foge-em-canoa-a-remo",
@@ -1360,33 +1205,33 @@
       "publishedAt": "2026-04-25T00:32:06.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/IMG_0900.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
-        "hasGroupSignal": true,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "nao-da-mais-para-esconder-novo-triangulo-amoroso-se-forma-em-coracao-acelerado",
-      "title": "Não dá mais para esconder: Novo triângulo amoroso se forma em Coração Acelerado",
-      "category": "Cotidiano",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-25T00:30:20.000Z",
+      "slug": "virginia-fecha-circo-para-curtir-tarde-com-os-filhos-confira",
+      "title": "Virginia fecha circo para curtir tarde com os filhos; confira",
+      "category": "Cultura",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T00:27:47.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/zuzu-elisa-lucinda-coracao-acelerado-1504_fixed_large.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/virginia-2.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
@@ -1399,28 +1244,74 @@
       "reasons": []
     },
     {
-      "slug": "rapper-l7nnon-vence-yoko-ono-na-justica-e-pode-manter-nome-artistico-entenda-o-caso",
-      "title": "Rapper L7nnon vence Yoko Ono na Justiça e pode manter nome artístico; entenda o caso",
-      "category": "Utilidade Pública",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-04-25T00:04:09.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/WnsQTCoo7-OtYUEFFTHoN88uJAA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Z/d/mgQV4ORIGnCSyI1sJ9ig/fotos-g1-1920-x-1080-px-6-.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "slug": "influenciador-que-gravou-aulas-da-unb-e-difamou-professor-e-condenado",
+      "title": "Influenciador que gravou aulas da UnB e difamou professor é condenado",
+      "category": "Educação",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T00:14:16.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "ex-bbb-pedro-espindola-desabafa-sobre-saude-mental-sigo-em-progressao",
+      "title": "Ex-BBB Pedro Espindola desabafa sobre saúde mental: “Sigo em progressão”",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-25T00:06:35.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Pedro-ex-participante-do-BBB-26-apos-apertar-o-botao-de-desistencia-e-importunar-Jordana-.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado",
+      "title": "Campeã do BBB 26, Ana Paula Renault estará no Saia Justa: ‘Um chamado’",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-25T00:00:35.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/globo-bbb-26-ana-paula-ensaio-pos-foto-beatriz-damy_fixed_large.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
+      "level": "ok",
+      "reasons": []
     },
     {
       "slug": "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-8216-um-chamado-8217",
@@ -1429,119 +1320,45 @@
       "sourceName": "ac24horas",
       "publishedAt": "2026-04-25T00:00:35.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/globo-bbb-26-ana-paula-ensaio-pos-foto-beatriz-damy_fixed_large.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "/assets/news-fallbacks/campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-8216-um-chamado-8217.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "governo-publica-regras-que-ampliam-credito-para-a-reforma-de-imoveis-teto-passa-de-r-30-mil-para-r-50-mil",
-      "title": "Governo publica regras que ampliam crédito para a reforma de imóveis; teto passa de R$ 30 mil para R$ 50 mil",
-      "category": "Utilidade Pública",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T23:57:27.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/hP2c37foWCM1Yt7L1jcMSdEspgE=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/n/StTbYZTTmYdFkWykVJWA/54499026205-56c89d4b21-k.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "slug": "grazi-massafera-reflete-sobre-maternidade-ficticia-e-da-vida-real",
+      "title": "Grazi Massafera reflete sobre maternidade fictícia e da vida real",
+      "category": "Cultura",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-04-24T23:49:42.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/arminda_8085b7.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": false,
+        "hasPersonSignal": true,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "nunes-marques-assume-presidencia-do-tse-dia-12-de-maio",
-      "title": "Nunes Marques assume presidência do TSE dia 12 de maio",
-      "category": "Política",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T23:53:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687209&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus",
-        "group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "apos-acordo-com-reitoria-funcionarios-da-usp-encerram-greve",
-      "title": "Após acordo com reitoria, funcionários da USP encerram greve",
-      "category": "Educação",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T23:45:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687207&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "estaduais-sub-11-e-15-com-mais-uma-rodada-no-lourenco-filho",
-      "title": "Estaduais Sub-11 e 15 com mais uma rodada no Lourenço Filho",
-      "category": "Esporte",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-04-24T23:43:35.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-18.34.49-1200x900.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 900,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1552,141 +1369,25 @@
       "publishedAt": "2026-04-24T23:36:27.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/praca-da-juventudes-B-Cidade-nova-ED-10-scaled-1-1200x800.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1200,
         "height": 800,
         "ratio": 1.5,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "em-manifesto-pt-preve-debate-sobre-reforma-administrativa-e-do-judiciario",
-      "title": "Em manifesto, PT prevê debate sobre reforma administrativa e do Judiciário",
-      "category": "Educação",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T23:23:43.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/HA4h0ixuCOcWpOqQIHX26UCiQRc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/l/8/Rz4qRTRZW3Y9YtARTVng/imagem-do-whatsapp-de-2025-07-06-a-s-10.38.59-dcf2ef3f.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "dolar-fecha-abaixo-de-r-5-e-bolsa-cai-com-cautela-global",
-      "title": "Dólar fecha abaixo de R$ 5, e bolsa cai com cautela global",
-      "category": "Negócios",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T23:05:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687205&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
-      "title": "Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze",
-      "category": "Polícia",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T22:53:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687202&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "funcionarios-e-precatorios-puxaram-gastos-dos-correios-em-2025-despesas-aumentaram-37-enquanto-receitas-cairam-12",
-      "title": "Funcionários e precatórios puxaram gastos dos Correios em 2025; despesas aumentaram 37% enquanto receitas caíram 12%",
-      "category": "Polícia",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T22:49:43.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/Ub61RtzS7autI19rBFGAbeMQA8k=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/3/a/47bLA3SRq0hBSZKmALvg/vlcsnap-2025-11-21-13h36m06s414.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "governo-inicia-fiscalizacao-de-transparencia-de-precos-em-aplicativos-de-transporte-e-delivery",
-      "title": "Governo inicia fiscalização de transparência de preços em aplicativos de transporte e delivery",
-      "category": "Utilidade Pública",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T22:39:40.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/XUz9QSSeTgavKkkQb-PUTpvdczY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/7/s/SYYlTYSSa2F1xhGCkMGg/entregador-de-comida-com-caixas-de-comida.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1697,9 +1398,9 @@
       "publishedAt": "2026-04-24T22:39:05.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_2778-1024x576.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 576,
@@ -1724,24 +1425,26 @@
       "publishedAt": "2026-04-24T22:37:47.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-15.49.03-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 683,
         "ratio": 1.499,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
@@ -1751,44 +1454,20 @@
       "publishedAt": "2026-04-24T22:36:19.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-16.59.59.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
-      "title": "PGR dá aval para Bolsonaro fazer cirurgia no ombro",
-      "category": "Polícia",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T22:35:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687199&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1799,87 +1478,34 @@
       "publishedAt": "2026-04-24T22:31:29.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-16.57.29.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
-      "slug": "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
-      "title": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
-      "category": "Saúde",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-04-24T22:23:06.000Z",
+      "slug": "camara-de-rio-branco-cancela-audiencia-do-plano-diretor-e-marca-nova-data",
+      "title": "Câmara de Rio Branco cancela audiência do Plano Diretor e marca nova data",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T22:26:04.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-12.09.01-1.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/03/a60fe7ef-d779-450b-8f70-8a29ab66d4bb.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
-      "title": "Anac estabelece restrições para transporte de power banks em aviões",
-      "category": "Negócios",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T22:18:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687197&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
-      "title": "Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T22:17:26.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_2778-1024x576.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 576,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
@@ -1891,27 +1517,27 @@
       "reasons": []
     },
     {
-      "slug": "pgr-se-manifesta-a-favor-de-pedido-de-bolsonaro-para-cirurgia-no-ombro",
-      "title": "PGR se manifesta a favor de pedido de Bolsonaro para cirurgia no ombro",
-      "category": "Polícia",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T22:12:56.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/46fp6f5WWQKEGzNwfLRvF3e7UII=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/R/v/ezHm5zSIuTpPTlr0YTIw/bolsonaro.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "slug": "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
+      "title": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
+      "category": "Saúde",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:23:06.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-12.09.01-1.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
-        "hasGroupSignal": true,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1922,42 +1548,20 @@
       "publishedAt": "2026-04-24T22:10:23.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-14.49.18-1.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa",
-      "title": "EBC e Unifap inauguram novo canal digital de TV no sul do Amapá",
-      "category": "Cultura",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T22:10:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687196&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1967,21 +1571,21 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-24T22:09:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687195&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
+      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687195&o=rss",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -1992,20 +1596,20 @@
       "publishedAt": "2026-04-24T22:05:24.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/imagem_2026-04-24_170458970.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -2016,9 +1620,9 @@
       "publishedAt": "2026-04-24T22:03:40.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-08.45.33-1-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 682,
@@ -2043,207 +1647,36 @@
       "publishedAt": "2026-04-24T22:01:18.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3770-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 683,
         "ratio": 1.499,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
-      "title": "Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T22:00:46.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-15.49.03-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
-      "title": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população",
-      "category": "Utilidade Pública",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:53:17.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-08.45.33-1-1024x682.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
-      "title": "Aneel define que maio terá bandeira tarifária amarela",
+      "slug": "apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas",
+      "title": "Apostas não financeiras em plataformas de previsões são proibidas",
       "category": "Negócios",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-04-24T21:48:00.000Z",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T21:41:04.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.png?id=1687191&o=rss",
-      "imageStatus": "ok",
-      "imageHttpStatus": 206,
-      "imageContentType": "image/png",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
-      "title": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização",
-      "category": "Saúde",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:47:15.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3770-1024x683.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "simone-mendes-junta-idolos-sertanejos-dos-anos-1990-na-gravacao-ao-vivo-do-album-audiovisual-minhas-memorias",
-      "title": "Simone Mendes junta ídolos sertanejos dos anos 1990 na gravação ao vivo do álbum audiovisual 'Minhas memórias'",
-      "category": "Cultura",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-04-24T21:40:07.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/4cqmBFjxJtSnzcMbuX9sc9TRtRA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/J/nr0ovlSAeF57tyHddMhw/simonemendesmemorias.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "familia-que-convivia-com-michael-jackson-acusa-cantor-de-abuso-sexual-entenda-caso",
-      "title": "Família que convivia com Michael Jackson acusa cantor de abuso sexual; entenda caso",
-      "category": "Cultura",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-04-24T21:08:06.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/oAahJ6VlxdexIIpURY5gSoVsOqk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/8/H/sVcgNlQhAzwpVoaoKNHQ/michael31.211401.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
-      "reasons": [
-        "people-or-group-scene-without-manual-focus"
-      ]
-    },
-    {
-      "slug": "procon-participa-da-operacao-combustivel-zero-em-rio-branco",
-      "title": "Procon participa da Operação Combustível Zero em Rio Branco",
-      "category": "Polícia",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:03:40.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-12.34.20-2-e1777060102442.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "licenca-de-operacao-8211-belda-importacao-e-exportacao-ltda",
-      "title": "Licença de Operação &#8211; BELDA IMPORTACAO E EXPORTACAO LTDA",
-      "category": "Polícia",
-      "sourceName": "Tribuna do Jurua",
-      "publishedAt": "2026-04-24T20:52:14.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "",
-      "imageStatus": "missing",
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/trbr2591.webp",
+      "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
@@ -2254,10 +1687,241 @@
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "error",
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "fim-de-semana-sera-de-calor-intenso-e-risco-de-cheia-nos-rios-acreanos",
+      "title": "Fim de semana será de calor intenso e risco de cheia nos rios acreanos",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T21:18:35.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-25-at-10.31.09-1200x752.webp",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 752,
+        "ratio": 1.596,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "elevacao-do-rio-jurua-continua-em-cruzeiro-do-sul",
+      "title": "Elevação do Rio Juruá continua em Cruzeiro do Sul",
+      "category": "Utilidade Pública",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T21:15:52.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/ece1b88a-a025-470f-92ac-e50e0e07f4fc-1200x675.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "dois-sao-presos-por-trafico-de-drogas-no-bairro-da-paz-em-rio-branco",
+      "title": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T21:13:49.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/b0b33b3e-1945-487f-acb0-8dc9b8ba4dfc-675x1200.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 675,
+        "height": 1200,
+        "ratio": 0.563,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
       "reasons": [
-        "missing-image-url"
+        "manual-focus-present"
       ]
+    },
+    {
+      "slug": "familia-que-convivia-com-michael-jackson-acusa-cantor-de-abuso-sexual-entenda-caso",
+      "title": "Família que convivia com Michael Jackson acusa cantor de abuso sexual; entenda caso",
+      "category": "Cultura",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-04-24T21:08:06.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/oAahJ6VlxdexIIpURY5gSoVsOqk=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/8/H/sVcgNlQhAzwpVoaoKNHQ/michael31.211401.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "procon-participa-da-operacao-combustivel-zero-em-rio-branco",
+      "title": "Procon participa da Operação Combustível Zero em Rio Branco",
+      "category": "Polícia",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-24T21:03:40.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-12.34.20-2-e1777060102442.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "licenca-de-operacao-belda-importacao-e-exportacao-ltda",
+      "title": "Licença de Operação – BELDA IMPORTACAO E EXPORTACAO LTDA",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-04-24T20:52:14.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-belda-importacao-e-exportacao-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-de-operacao-8211-belda-importacao-e-exportacao-ltda",
+      "title": "Licença de Operação &#8211; BELDA IMPORTACAO E EXPORTACAO LTDA",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-04-24T20:52:14.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-8211-belda-importacao-e-exportacao-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "educacao-divulga-lista-de-aprovados-para-escuta-do-coro-lirico-veja-nomes",
+      "title": "Educação divulga lista de aprovados para escuta do Coro Lírico; veja nomes",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T20:51:19.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/FOTO-SEE-2025.1-1536x1023-1.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1536,
+        "height": 1023,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "semifinais-da-2-copa-acre-serao-disputadas-no-tonicao",
+      "title": "Semifinais da 2ª Copa Acre serão disputadas no Tonicão",
+      "category": "Esporte",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-24T20:49:44.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-24-15-43-22-960x1200.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 960,
+        "height": 1200,
+        "ratio": 0.8,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
     },
     {
       "slug": "governo-do-acre-fortalece-parceria-com-cozinha-solidaria-para-ampliar-atendimento-a-familias-em-vulnerabilidade",
@@ -2267,47 +1931,25 @@
       "publishedAt": "2026-04-24T20:47:40.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.52.51-1-1024x576.jpeg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
         "width": 1024,
         "height": 576,
         "ratio": 1.778,
         "orientation": "landscape"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "impossivel-nao-se-indignar-diz-janja-sobre-aliado-de-trump-que-chamou-brasileiras-de-raca-maldita",
-      "title": "'Impossível não se indignar', diz Janja sobre aliado de Trump que chamou brasileiras de 'raça maldita'",
-      "category": "Polícia",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T20:41:19.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/QzF-CgRMHiu30Othg_QJ0r1G2K0=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/f/H/8brhcmTFeT3g8AWBKiBA/afp-20260421-a8jh2zq-v1-highres-serbiauspoliticsdiplomacy.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -2318,42 +1960,20 @@
       "publishedAt": "2026-04-24T20:38:18.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/cp961x813.jpg?fit=961%2C703&#038;ssl=1",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "zanin-manda-soltar-operador-de-esquema-de-venda-de-sentencas-no-stj-por-demora-na-acusacao",
-      "title": "Zanin manda soltar operador de esquema de venda de sentenças no STJ por demora na acusação",
-      "category": "Polícia",
-      "sourceName": "G1 Politica",
-      "publishedAt": "2026-04-24T20:32:22.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://s2-g1.glbimg.com/r9pZWWKbyzT7heJN_P2CH5HDKzQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/b/X/wyE9XUSdWezeqhrL3L5g/jardes-g1-52-.png",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "review",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
       ]
     },
     {
@@ -2364,9 +1984,62 @@
       "publishedAt": "2026-04-24T20:31:18.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/19f17655-a0b7-4fc3-80ed-bfa8d6eddbaa.avif",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "balsa-naufraga-e-derrama-50-mil-litros-de-diesel-no-rio-tarauaca",
+      "title": "Balsa naufraga e derrama 50 mil litros de diesel no Rio Tarauacá",
+      "category": "Negócios",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-04-24T20:21:08.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Balsa-768x599-1.jpeg?fit=768%2C599&#038;ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 768,
+        "height": 599,
+        "ratio": 1.282,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "relatada-por-alan-rick-lei-cria-incentivo-direto-a-reciclagem-no-pais",
+      "title": "Relatada por Alan Rick, lei cria incentivo direto à reciclagem no país",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-04-24T20:06:26.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-15.04.09-scaled.jpeg?fit=1200%2C801&#038;ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
@@ -2379,42 +2052,428 @@
       "reasons": []
     },
     {
-      "slug": "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-      "title": "Prefeitura de Cruzeiro do Sul inaugura sede da Regional Educacional Santa Luzia/Campinas",
-      "category": "Educação",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-04-24T20:24:29.000Z",
+      "slug": "deputado-zezinho-barbary-anuncia-entrega-de-viaturas-barcos-motorizados-e-onibus-para-o-vale-do-jurua",
+      "title": "Deputado Zezinho Barbary anuncia entrega de viaturas, barcos motorizados e ônibus para o Vale do Juruá",
+      "category": "Cotidiano",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-24T20:04:23.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-17.19.55-1.jpeg?resize=300%2C200&#038;ssl=1",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/78ba7e6b-af6f-45b0-b862-1fd94a5fc104.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "deputado-destaca-uniao-entre-assembleia-legislativa-e-governo-para-fortalecer-seguranca-no-jurua",
+      "title": "Deputado destaca união entre Assembleia Legislativa e Governo para fortalecer segurança no Juruá",
+      "category": "Política",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-24T20:01:31.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/59334ea1-6b50-41ed-b6cb-434637fb6050-1.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-previa-areacre-auto-posto-ltda",
+      "title": "Licença Prévia – AREACRE AUTO POSTO LTDA",
+      "category": "Negócios",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-04-24T20:00:55.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-previa-areacre-auto-posto-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-previa-8211-areacre-auto-posto-ltda",
+      "title": "Licença Prévia &#8211; AREACRE AUTO POSTO LTDA",
+      "category": "Negócios",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-04-24T20:00:55.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-previa-8211-areacre-auto-posto-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "projeto-vozes-da-floresta-destaca-cultura-indigena-e-fortalece-identidade-cultural-em-cruzeiro-do-sul",
+      "title": "Projeto “Vozes da Floresta” destaca cultura indígena e fortalece identidade cultural em Cruzeiro do Sul",
+      "category": "Cultura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-24T19:33:44.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/cfc6a342-ec87-4c5a-b998-d1f64b4af3b0.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+      "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
+      "category": "Política",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-24T19:28:41.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "caminhada-de-conscientizacao-sobre-o-autismo-reune-pais-e-comunidade-em-cruzeiro-do-sul",
+      "title": "Caminhada de Conscientização sobre o Autismo reúne pais e comunidade em Cruzeiro do Sul",
+      "category": "Negócios",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-04-24T17:23:13.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Screenshot_20260424-120754_WhatsApp.jpg?fit=720%2C401&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "balsa-naufraga-e-derrama-50-mil-litros-de-diesel-no-rio-tarauaca",
-      "title": "Balsa naufraga e derrama 50 mil litros de diesel no Rio Tarauacá",
-      "category": "Negócios",
+      "slug": "governo-exonera-condenado-por-tortura-e-nomeia-esposa-no-lugar-dele-em-secretaria-no-acre",
+      "title": "Governo exonera condenado por tortura e nomeia esposa no lugar dele em secretaria no Acre",
+      "category": "Polícia",
       "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-04-24T20:21:08.000Z",
+      "publishedAt": "2026-04-24T16:27:55.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Balsa-768x599-1.jpeg?fit=768%2C599&#038;ssl=1",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/62-e1777048025556.png?resize=800%2C490&#038;ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "pre-enem-8216-educaleac-8217-abre-selecao-com-mais-de-200-vagas-presenciais-e-online",
+      "title": "Pré-Enem &#8216;EducAleac&#8217; abre seleção com mais de 200 vagas presenciais e online",
+      "category": "Educação",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-04-24T16:20:46.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i0.wp.com/s2-g1.glbimg.com/sOSVDEPIRuCgJ7_-RmZKuUkmMMc%3D/0x0%3A1600x1200/984x0/smart/filters%3Astrip_icc%28%29/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/a/H/359zr3TBGIZisCkWWmgQ/midia-de-distribuicao-g1-2026-02-26t180548.039.jpg?resize=647%2C485&#038;ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "brasil-barra-plataformas-de-previsoes-em-politica-e-esporte-decisao-nao-afeta-bets",
+      "title": "Brasil barra plataformas de previsões em política e esporte; decisão não afeta bets",
+      "category": "Esporte",
+      "sourceName": "G1 Politica",
+      "publishedAt": "2026-04-24T16:19:11.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/ErY0Vs7WgQ8SppXMArSNofwPk60=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/K/C/dA1j4pQgA3rsGneGXA7g/polymarket.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "scooby-doo-veja-a-1-imagem-de-fred-daphne-velma-e-salsicha-na-nova-serie",
+      "title": "'Scooby-Doo': veja a 1ª imagem de Fred, Daphne, Velma e Salsicha na nova série",
+      "category": "Cultura",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-04-24T14:18:30.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/3enW7j0pAaI6gY4RdwQOQROy2xc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/U/j/YUY4FxTvGsXPp1QCbHJQ/captura-de-tela-2026-04-24-112422.png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "francis-hime-e-simone-navegam-juntos-pelas-aguas-do-show-embarcacao-atracao-do-rio-nas-tercas-feiras-de-maio",
+      "title": "Francis Hime e Simone navegam juntos pelas águas do show 'Embarcação', atração do Rio nas terças-feiras de maio",
+      "category": "Cultura",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-04-23T20:24:49.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/waxnsgKSHHnamhEtg-t4Dqi90nY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/f/O/P5BS8IQEyj76ef155B8A/foto-claudia-brandao-1-.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "filme-bolsonaro-memes-reacao-redes",
+      "title": "Filme sobre Bolsonaro entra no radar com memes, ironias e gente bastante irritada nas redes",
+      "category": "Festas & Social",
+      "sourceName": "Editorial Catalogo Cruzeiro do Sul",
+      "publishedAt": "2026-04-23T09:05:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 22%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
+      "title": "Filme de Michael Jackson vira estreia de peso para 2026 e entra no radar do Cine Romeu",
+      "category": "Cultura",
+      "sourceName": "Editorial Catalogo Cruzeiro do Sul",
+      "publishedAt": "2026-04-23T08:55:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 28%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia",
+      "title": "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'",
+      "category": "Cultura",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-04-23T13:52:30.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/TktUb-cEVSlycDJDh8AOckbAM5E=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/t/Q/to3J2QQ26r4vIcNGMovg/2561-judorotea-l-album-edit-berroinc.-berroinc.cc-priisma-.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-de-instalacao-josias-o-da-silva-ltda",
+      "title": "Licença de Instalação – Josias O. Da Silva Ltda",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-04-20T20:11:06.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-instalacao-josias-o-da-silva-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-de-instalacao-8211-josias-o-da-silva-ltda",
+      "title": "Licença de Instalação &#8211; Josias O. Da Silva Ltda",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-04-20T20:11:06.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-instalacao-8211-josias-o-da-silva-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "tenda-saude-cheia-jurua",
+      "title": "Tenda de atendimento assume a frente da saude apos inundacao de UBSs em Cruzeiro do Sul",
+      "category": "Saúde",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-08T14:15:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": {
-        "width": 768,
-        "height": 599,
-        "ratio": 1.282,
+        "width": 1200,
+        "height": 900,
+        "ratio": 1.333,
         "orientation": "landscape"
       },
       "hasManualFocus": false,
@@ -2428,17 +2487,22 @@
       "reasons": []
     },
     {
-      "slug": "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-      "title": "Prefeitura de Cruzeiro do Sul inaugura sede da Regional Educacional Santa Luzia/Campinas",
-      "category": "Educação",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T20:13:54.000Z",
+      "slug": "vazante-retorno-familias",
+      "title": "Vazante do Rio Jurua segue em Cruzeiro do Sul e rotina comeca a normalizar",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-07T00:00:00-05:00",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/23b01096-b1b8-499a-be4e-a144831ff37b-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 900,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
@@ -2450,27 +2514,595 @@
       "reasons": []
     },
     {
-      "slug": "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
-      "title": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-      "category": "Polícia",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T20:11:20.000Z",
+      "slug": "moradores-rotina-cheia",
+      "title": "Mesmo alagados, bairros tentam manter rotina em Cruzeiro do Sul",
+      "category": "Social",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-04T00:00:00-05:00",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/ada99206-ac0f-4b3c-9076-bcc075e00d29-1.jpg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 983,
+        "ratio": 1.221,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "agua-mineral-familias-cheia",
+      "title": "Agua mineral e suprimentos viram prioridade nos bairros atingidos",
+      "category": "Utilidade Pública",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-03T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "mais-12-mil-afetados",
+      "title": "Abril começa com mais de 12 mil afetados e expansão dos abrigos em Cruzeiro do Sul",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-01T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1220,
+        "height": 813,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "eja-czs-superacao",
+      "title": "Histórias de superação na EJA de Cruzeiro do Sul inspiram novos estudantes",
+      "category": "Educação",
+      "sourceName": "Agência Acre",
+      "publishedAt": "27 mar 2026",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/eja-czs-superacao.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda",
+      "title": "Renovação Licença de Operação – Pioneiro Combustíveis LTDA",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-23T20:55:20.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+      "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-23T20:55:20.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "recebimento-licenca-previa-josias-o-da-silva-epp",
+      "title": "Recebimento Licença Prévia – JOSIAS O DA SILVA EPP",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-18T14:54:19.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/recebimento-licenca-previa-josias-o-da-silva-epp.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "recebimento-licenca-previa-8211-josias-o-da-silva-epp",
+      "title": "Recebimento Licença Prévia &#8211; JOSIAS O DA SILVA EPP",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-18T14:54:19.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/recebimento-licenca-previa-8211-josias-o-da-silva-epp.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua",
+      "title": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-15T17:34:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/04/Edital-de-Convocacao_page-0001-1-724x1024.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 724,
+        "height": 1024,
+        "ratio": 0.707,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-de-assembleia-geral-ordinaria-ago-8211-coopertransgua",
+      "title": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) &#8211; COOPERTRANSGUA",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-15T17:34:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/edital-de-convocacao-de-assembleia-geral-ordinaria-ago-8211-coopertransgua.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-de-assembleia-geral-ordinaria-coopeguajara",
+      "title": "Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-12T20:34:01.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/Coopeguajara-edital.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara",
+      "title": "Edital de Convocação de Assembleia Geral Ordinária &#8211; Coopeguajará",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-12T20:34:01.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/edital-de-convocacao-de-assembleia-geral-ordinaria-8211-coopeguajara.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "credenciamento-pareceristas-culturais",
+      "title": "Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais",
+      "category": "Cultura",
+      "sourceName": "ac24horas",
+      "publishedAt": "12 mar 2026",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/credenciamento-pareceristas-culturais.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe",
+      "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-23T15:02:43.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+      "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-23T15:02:43.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+      "title": "Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-04T21:28:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
+      "title": "Edital de Convocação &#8211; Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-04T21:28:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/edital-de-convocacao-8211-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhad.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre",
+      "title": "Edital de Convocação – Associação de Cabelereiros de Cruzeiro do Sul – Acre",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-02T17:02:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://tribunadojurua.com.br/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-11-at-11.09.29.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "edital-de-convocacao-8211-associacao-de-cabelereiros-de-cruzeiro-do-sul-8211-acre",
+      "title": "Edital de Convocação &#8211; Associação de Cabelereiros de Cruzeiro do Sul &#8211; Acre",
+      "category": "Utilidade Pública",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-02T17:02:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/edital-de-convocacao-8211-associacao-de-cabelereiros-de-cruzeiro-do-sul-8211-acre.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul",
+      "title": "Faccionada ameaça esposa de militar e é presa em Cruzeiro do Sul",
+      "category": "Polícia",
+      "sourceName": "Fonte local",
+      "publishedAt": "data recente",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "saude-25-agosto-ubs",
+      "title": "UBS do 25 de Agosto promove dia de saúde em movimento para idosos",
+      "category": "Saúde",
+      "sourceName": "Juruá Online",
+      "publishedAt": "6 abr 2026",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/saude-25-agosto-ubs.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "ifac-auxilio-cheia",
+      "title": "Ifac anuncia auxílio emergencial para estudantes afetados pela cheia",
+      "category": "Educação",
+      "sourceName": "Juruá Online",
+      "publishedAt": "9 abr 2026",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/ifac-auxilio-cheia.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
-      "level": "review",
+      "level": "ok",
       "reasons": [
-        "people-or-group-scene-without-manual-focus"
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "fila-ovos-pascoa",
+      "title": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
+      "category": "Social",
+      "sourceName": "ac24horas",
+      "publishedAt": "4 abr 2026",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/fila-ovos-pascoa.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "lucas-dourado-pascoa",
+      "title": "Páscoa, boato e reaparição: o caso Lucas Dourado entra no radar das redes acreanas",
+      "category": "Social",
+      "sourceName": "ac24horas",
+      "publishedAt": "5 abr 2026",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/lucas-dourado-pascoa.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
       ]
     }
   ]

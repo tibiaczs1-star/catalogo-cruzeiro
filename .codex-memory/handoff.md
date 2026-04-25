@@ -1,8 +1,8 @@
 # Handoff
 
-Updated: 2026-04-25T14:03:45.542Z
+Updated: 2026-04-25T18:09:18.016Z
 
-Lifestile Acre pronto como editoria exclusivamente de moda.
+Lifestile Acre pronto como editoria exclusivamente de moda e ja destacado como acesso subordinado. Usuario pediu para tirar PubPaid do pacote atual; PubPaid modificada fica reservada e nao deve entrar em commit/deploy ate nova ordem explicita.
 
 Arquivos tocados nesta frente: `lifestile.html`, `lifestile.css`, `lifestile.js`, `package.json`, `scripts/real-agents-runtime.js`, `scripts/review-team-audit.js`, `esttiles-config.js`, `escritorio.js`, `data/topic-feed-fallback.json`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md`.
 
@@ -31,3 +31,11 @@ Bloqueio para subir: há conflitos/estados `UU`/`DU` no worktree fora deste ajus
 ## Atualizacao 2026-04-25T15:00:00.000Z - Botao Lifestile subordinado
 
 Commit `ba46268 Destacar acesso subordinado ao Lifestile` enviado para `origin/main`. Alteracoes: `Lifestile 24h` destacado na nav principal, faixa Editoriais e Esttiles; card de Moda ganhou link de subeditoria; Lifestile ganhou retorno para Esttiles. Verificacao imediata: GitHub remoto aponta para `ba46268`; Render ainda estava servindo HTML antigo logo apos o push, aguardar deploy automatico.
+
+## Atualizacao 2026-04-25T18:09:18.016Z - Sync sem PubPaid
+
+Home/cards/chamadas devem usar resumo curto; `noticia.html`/`noticia.js` continuam completos. `npm run sync:online-local` passou com 120 noticias, 0 achados da equipe, 120 imagens ok/0 review e 6 itens Mailza/Mailsa priorizados. Nao incluir PubPaid em commit/deploy ate nova ordem explicita.
+
+## Atualizacao 2026-04-25T18:15:00.000Z - Pesquisa Acre 2026
+
+O usuario pediu para manter a votacao por mais 7 dias sem mexer nos votos atuais. Foi adicionada configuracao manual da rodada em `data/acre-2026-poll-settings.json` e fallback em `server.js`, mantendo `activeWeekKey=2026-W17` ate `2026-05-03T04:59:59.999Z` (02/05/2026 23:59:59 no Acre). Nao houve alteracao em `acre-2026-poll.json`.

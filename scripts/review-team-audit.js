@@ -50,7 +50,7 @@ const INTERNAL_COPY_PATTERNS = [
   {
     id: "internal-editorial",
     label: "linguagem interna/editorial",
-    regex: /\b(briefing|pauta|interno|para o criador|leitura editorial|monitoramento ativo|painel interno|fechando pauta)\b/i,
+    regex: /\b(briefing|pauta|uso interno|texto interno|recado interno|para o criador|leitura editorial|monitoramento ativo|painel interno|fechando pauta)\b/i,
     ignore: [
       /\bclass=(["'])[^"']*briefing[^"']*\1/i,
       /\blogo-splash-briefing-bubble\b/i
@@ -64,6 +64,10 @@ const INTERNAL_COPY_PATTERNS = [
 ];
 
 const CARD_CLASS_PATTERN = /\b(card|panel|tile|spotlight|feature|story)\b/i;
+const HOME_PREVIEW_FILES = new Set(["index.html", "script.js"]);
+const MAX_HOME_PREVIEW_CHARS = 260;
+const FULL_ARTICLE_LEAK_PATTERNS =
+  /\b(LEIA TAMB[EÉ]M|VEJA TAMB[EÉ]M|ASSISTA|Clique aqui|Veja os v[ií]deos|canal do .* WhatsApp|Reprodu[cç][aã]o\/|Divulga[cç][aã]o\/)\b/i;
 
 function walkFiles(dir, results = []) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -92,7 +96,11 @@ function walkFiles(dir, results = []) {
 }
 
 function readText(filePath) {
-  return fs.readFileSync(filePath, "utf-8");
+  try {
+    return fs.readFileSync(filePath, "utf-8");
+  } catch {
+    return "";
+  }
 }
 
 function normalizePath(filePath) {
@@ -244,6 +252,10 @@ function auditInternalCopy(filePath, source, issues) {
   const lines = source.split(/\r?\n/);
   lines.forEach((lineText, index) => {
     INTERNAL_COPY_PATTERNS.forEach((pattern) => {
+      if (/^\s*"(id|url|link|sourceUrl|sourceImageUrl|feedImageUrl|imageUrl)"\s*:/i.test(lineText)) {
+        return;
+      }
+
       if (Array.isArray(pattern.ignore) && pattern.ignore.some((ignorePattern) => ignorePattern.test(lineText))) {
         return;
       }
@@ -261,6 +273,75 @@ function auditInternalCopy(filePath, source, issues) {
         detail: lineText.trim().slice(0, 220)
       });
     });
+  });
+}
+
+function parseQuotedJsString(literal) {
+  try {
+    return JSON.parse(literal);
+  } catch {
+    return "";
+  }
+}
+
+function auditHomePreviewSummarySafety(filePath, source, issues) {
+  const fileName = path.basename(filePath);
+  if (!HOME_PREVIEW_FILES.has(fileName)) {
+    return;
+  }
+
+  const lines = source.split(/\r?\n/);
+
+  lines.forEach((lineText, index) => {
+    const textContentMatch = lineText.match(
+      /\.textContent\s*=\s*([^;]+);?\s*$/
+    );
+
+    if (textContentMatch) {
+      const expression = textContentMatch[1] || "";
+      const usesRawArticleText =
+        /\b(article|item|normalizedArticle|normalized)\.(summary|lede|description|rawLede)\b/.test(expression);
+      const isProtected =
+        /\b(truncateCopy|buildShortArticleSummary|displaySummary|cleanArticleExcerpt)\b/.test(expression);
+
+      if (usesRawArticleText && !isProtected) {
+        pushIssue(issues, {
+          type: "editorial-review",
+          severity: "high",
+          file: normalizePath(filePath),
+          line: index + 1,
+          label: "Erro: chamada da home usa texto bruto",
+          detail: "Cards da home precisam usar displaySummary/truncateCopy; a pagina de leitura pode manter o corpo completo."
+        });
+      }
+    }
+
+    const literalMatch = lineText.match(
+      /^\s*(?:<p[^>]*>|(?:summary|description|articleSummary|displaySummary)\s*:\s*)("(?:\\.|[^"\\])*"|`(?:\\.|[^`\\])*`)/i
+    );
+
+    if (!literalMatch) {
+      return;
+    }
+
+    const rawLiteral = literalMatch[1];
+    const quotedLiteral = rawLiteral.startsWith("`")
+      ? JSON.stringify(rawLiteral.slice(1, -1))
+      : rawLiteral;
+    const value = stripTags(parseQuotedJsString(quotedLiteral));
+    const isTooLong = value.length > MAX_HOME_PREVIEW_CHARS;
+    const looksLikeFullArticle = FULL_ARTICLE_LEAK_PATTERNS.test(value);
+
+    if (value && (isTooLong || looksLikeFullArticle)) {
+      pushIssue(issues, {
+        type: "editorial-review",
+        severity: "high",
+        file: normalizePath(filePath),
+        line: index + 1,
+        label: "Erro: chamada da home parece artigo completo",
+        detail: `Preview com ${value.length} caracteres; a home deve resumir e puxar interesse para o clique.`
+      });
+    }
   });
 }
 
@@ -450,6 +531,7 @@ function runReviewTeamAudit() {
     const source = readText(filePath);
     auditButtonsAndLinks(filePath, source, issues, globalHtmlIds);
     auditInternalCopy(filePath, source, issues);
+    auditHomePreviewSummarySafety(filePath, source, issues);
     auditCardTitles(filePath, source, issues);
   });
 

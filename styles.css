@@ -17796,6 +17796,28 @@ a {
   color: #5f7186 !important;
 }
 
+.news-card p,
+.archive-card p,
+.live-feed-card p,
+.feed-card p,
+#radar .news-card p,
+.hero-daily-news-card [data-hero-daily-summary],
+[data-hero-topic-summary] {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-height: 1.42 !important;
+}
+
+#radar .news-card p,
+.news-card.generated-feed-card p,
+.archive-card.generated-archive-card p,
+.live-feed-card.generated-feed-card p {
+  max-height: 4.35em;
+  font-size: 0.92rem !important;
+}
+
 .mosaic-hero {
   background: #f7fafc !important;
   border-color: rgba(30, 58, 95, 0.08) !important;
@@ -22871,6 +22893,13 @@ body.anime-hub-page .mini-mecha {
 .global-politics-card p:not(.eyebrow) {
   color: rgba(19, 42, 67, 0.72);
   line-height: 1.62;
+}
+
+.global-politics-card p:not(.eyebrow) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .global-politics-tags,

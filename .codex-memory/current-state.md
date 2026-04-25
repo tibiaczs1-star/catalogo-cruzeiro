@@ -1,24 +1,19 @@
 # Current State
 
-Updated: 2026-04-25T15:00:00.000Z
+Updated: 2026-04-25T18:09:18.016Z
 
 ## Active Goal
 
-- Super Site Style & Fashion 24h
+- Subida sem PubPaid
 
 ## Summary
 
-Criado `PROMPT_SUPER_SITE_STYLE_FASHION_24H_2026-04-25.md` com missão, escopo, bloqueios, agentes, runtime 24h, critérios de capa e comandos.
-
-A página `lifestile.html` ganhou seção `Fashion 24h` com captação ligada: fontes consultadas, itens aprovados, ruídos bloqueados e próxima ronda diária. `lifestile.js` atualiza esses números a partir das fontes/API/fallbacks.
-
-Validação no navegador: JS ok; prompt existe; runtime board exibiu fontes=5, aprovados=28, bloqueados=127; página com 3 destaques, 14 social items, 12 fotos, 24 artigos, 4 cards runtime e hero com foto.
+Lifestile 24h ja esta no remoto como editoria subordinada/visual. PubPaid ficou reservado fora do stage/commit por ordem do usuario. O pacote atual deve subir home/sync/editorial, com resumos curtos na home, leitura completa nas materias e Mailza/Mailsa priorizada.
 
 ## Next
 
-- Se o usuário aprovar o conceito, rodar agentes/review novamente e preparar pacote para subir.
+- Finalizar cherry-pick/push do pacote sem PubPaid; PubPaid so volta ao stage quando o usuario mandar explicitamente.
 
+## Atualizacao 2026-04-25T18:15:00.000Z - Pesquisa Acre 2026
 
-## Atualizacao Lifestile Acessivel
-
-Commit `ba46268 Destacar acesso subordinado ao Lifestile` publicado em `origin/main`. A home agora destaca `Lifestile 24h` na barra principal e na faixa Editoriais; Esttiles mostra Lifestile como subpagina; Lifestile tem link de retorno para Esttiles. Producao ainda podia estar aguardando propagacao do Render logo apos o push.
+Rodada da Pesquisa Acre 2026 estendida por mais 7 dias sem mexer nos votos atuais. A `weekKey` `2026-W17` fica ativa ate `2026-05-03T04:59:59.999Z` (02/05/2026 23:59:59 em America/Rio_Branco). Arquivos tocados: `server.js`, `data/acre-2026-poll-settings.json` e registro em `.codex-memory/orders.json`.

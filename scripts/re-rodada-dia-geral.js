@@ -14,6 +14,7 @@ const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const REPORT_FILE = path.join(DATA_DIR, "re-rodada-dia-geral-report.json");
 const FALLBACK_DIR = path.join(ROOT_DIR, "assets", "news-fallbacks");
 const DEFAULT_ONLINE_URL = "https://catalogo-cruzeiro-web.onrender.com";
+const HOME_PREVIEW_MAX_CHARS = 230;
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -86,6 +87,75 @@ function cleanText(value = "", limit = 0) {
   return limit && text.length > limit ? `${text.slice(0, limit - 1).trim()}...` : text;
 }
 
+function stripPreviewNoise(value = "") {
+  return cleanText(value)
+    .replace(/\b(leia tambem|leia tamb[eé]m|assista tambem|assista tamb[eé]m|clique aqui)\b[\s\S]*$/i, "")
+    .replace(/\b(Jornal Nacional|Reproducao|Reprodução|Foto:|Imagem:)\b.*$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function truncateAtBoundary(value = "", limit = HOME_PREVIEW_MAX_CHARS) {
+  const text = stripPreviewNoise(value);
+  if (!text || text.length <= limit) return text;
+  const slice = text.slice(0, limit + 1);
+  const boundary = Math.max(
+    slice.lastIndexOf(". "),
+    slice.lastIndexOf("; "),
+    slice.lastIndexOf(": "),
+    slice.lastIndexOf(", "),
+    slice.lastIndexOf(" ")
+  );
+  const end = boundary > 90 ? boundary : limit - 1;
+  return `${slice.slice(0, end).trim().replace(/[.,;:]+$/, "")}...`;
+}
+
+function pickPreviewSentences(value = "", limit = HOME_PREVIEW_MAX_CHARS) {
+  const text = stripPreviewNoise(value);
+  if (!text) return "";
+  const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+  let picked = "";
+
+  for (const sentence of sentences) {
+    const candidate = cleanText(`${picked} ${sentence}`);
+    if (candidate.length > limit) break;
+    picked = candidate;
+    if (picked.length >= 120) break;
+  }
+
+  return picked || truncateAtBoundary(text, limit);
+}
+
+function buildHomePreviewSummary(item = {}, title = "") {
+  const bodyText = Array.isArray(item.body) ? item.body.find(Boolean) : item.body;
+  const candidates = [
+    item.summary,
+    item.lede,
+    item.description,
+    item.sourceLabel,
+    bodyText
+  ]
+    .map((candidate) => stripPreviewNoise(candidate))
+    .filter(Boolean);
+  const titleText = stripPreviewNoise(title || item.title || item.sourceLabel || "Noticia");
+  const selected = candidates.find((candidate) => {
+    if (candidate.length < 40) return false;
+    return candidate.toLowerCase() !== titleText.toLowerCase();
+  });
+
+  if (!selected) {
+    return truncateAtBoundary(`${titleText}. Veja os principais pontos e acompanhe os detalhes da fonte original.`);
+  }
+
+  return pickPreviewSentences(selected);
+}
+
+function normalizeHomePreviewField(value = "", fallback = "") {
+  const cleaned = stripPreviewNoise(value).replace(/\bpauta de cidade\b/gi, "assunto da cidade");
+  if (cleaned && cleaned.length <= HOME_PREVIEW_MAX_CHARS) return cleaned;
+  return truncateAtBoundary(fallback || cleaned);
+}
+
 function slugify(value) {
   return String(value || "")
     .normalize("NFD")
@@ -94,6 +164,39 @@ function slugify(value) {
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 90);
+}
+
+function normalizeStoryText(value = "") {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const IMAGE_PEOPLE_PATTERN =
+  /\b(ciclista|atleta|jogador|jogadora|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|vereador|vereadora|delegado|delegada|secretario|secretaria|ministro|ministra|presidente|artista|cantor|cantora|ator|atriz|apresentador|apresentadora|treinador|treinadora|empresario|empresaria|medico|medica|juiz|juiza|professor|professora|estudante|aluno|aluna|familia|mae|pai|crianca|indigena|influenciador|mulher|homem|pessoa|pessoas|morador|moradores|lider|equipe|time|colegio|escola|posse|reuniao|entrevista|mailza|mailsa|lula|nikolas|bolsonaro|jair renan|alcolumbre|motta|fachin|alckmin|carmen lucia|madonna|pericles)\b/i;
+const IMAGE_GROUP_PATTERN =
+  /\b(posse|cerimonia|solenidade|evento|auditorio|reuniao|encontro|coletiva|equipe|time|selecao|colegio|grupo|plateia|assembleia|turma|delegacao|comite|familia|pessoas|moradores|estudantes|professores|policia civil|congresso|entrega|viaturas|jogo|multidao)\b/i;
+
+function inferSafeImageFocus(item = {}) {
+  const currentFocus = String(item.imageFocus || "").trim();
+  if (currentFocus) return currentFocus;
+
+  const storyText = normalizeStoryText([
+    item.title,
+    item.sourceLabel,
+    item.summary,
+    item.lede,
+    item.category,
+    item.sourceName
+  ].join(" "));
+
+  if (IMAGE_GROUP_PATTERN.test(storyText)) return "center 42%";
+  if (IMAGE_PEOPLE_PATTERN.test(storyText)) return "center 38%";
+  return "";
 }
 
 function isMailzaPriorityArticle(item = {}) {
@@ -204,18 +307,20 @@ function sanitizeReviewCopy(item = {}) {
   const sanitizedDevelopment = Array.isArray(item.development)
     ? item.development.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
     : item.development;
+  const previewSummary = buildHomePreviewSummary(item, title);
   const summary = cleanText(item.summary || "");
 
   return {
     ...item,
     lede: isLongTheaterFeed
       ? `${title}. A publicacao do G1 Pop & Arte traz os principais detalhes do espetaculo e da temporada.`
-      : item.lede,
+      : normalizeHomePreviewField(item.lede || item.summary || "", previewSummary),
     summary: isLongTheaterFeed
       ? `${title}. O registro cultural foi resumido para melhorar a leitura no portal e manter o link da fonte original.`
-      : summary.replace(/\bpauta de cidade\b/gi, "assunto da cidade"),
+      : normalizeHomePreviewField(summary, previewSummary),
     body: sanitizedBody,
-    development: sanitizedDevelopment
+    development: sanitizedDevelopment,
+    imageFocus: item.imageFocus || inferSafeImageFocus(item)
   };
 }
 

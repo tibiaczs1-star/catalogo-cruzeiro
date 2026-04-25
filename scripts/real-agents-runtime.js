@@ -250,7 +250,12 @@ function loadOfficeConfig(filePath) {
 }
 
 function loadAllAgents() {
-  return [loadDefaultAgents(), ...OFFICE_CONFIG_FILES.map((filePath) => loadOfficeConfig(filePath))].flat();
+  return [
+    loadDefaultAgents(),
+    ...OFFICE_CONFIG_FILES
+      .filter((filePath) => fs.existsSync(filePath))
+      .map((filePath) => loadOfficeConfig(filePath))
+  ].flat();
 }
 
 function loadNewsItems() {

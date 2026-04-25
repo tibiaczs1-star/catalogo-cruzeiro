@@ -2713,6 +2713,27 @@ const cleanArticleExcerpt = (value = "", fallback = "") => {
   return text || cleanArticleText(fallback || value || "");
 };
 
+const buildShortArticleSummary = (value = "", fallback = "", maxLength = 172) => {
+  const sourceText = cleanArticleExcerpt(value, fallback)
+    .replace(/\b(LEIA TAMB[EÉ]M|ASSISTA|VEJA TAMB[EÉ]M|Clique aqui).*$/i, "")
+    .replace(/\b(Reprodu[cç][aã]o|Divulga[cç][aã]o|Arquivo pessoal|Redes sociais)[/\\\w\s.-]{0,90}/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const fallbackText = cleanArticleText(fallback || "Resumo em atualização.");
+  const text = sourceText || fallbackText;
+  const sentenceMatch = text.match(/^(.{70,220}?[.!?])(\s|$)/);
+  const firstSentence = sentenceMatch ? sentenceMatch[1].trim() : text;
+  const compact = firstSentence.length > 45 ? firstSentence : text;
+
+  if (compact.length <= maxLength) {
+    return compact;
+  }
+
+  const sliced = compact.slice(0, Math.max(0, maxLength - 1));
+  const wordSafe = sliced.replace(/\s+\S*$/, "").trim();
+  return `${wordSafe || sliced.trim()}...`;
+};
+
 const heroUnsafeImageOverrides = {
   "aliado-de-mailza-pastor-reginaldo-e-nomeado-para-cargo-de-adjunto-na-secretaria-de-governo":
     "https://ac24horas.com/wp-content/uploads/2025/12/PALACIO-SERGIO-VALE-e1720103436277-1200x812.webp"
@@ -2746,9 +2767,14 @@ const normalizeRuntimeArticle = (article = {}) => {
     article.sourceName || article.source || article.sourceLabel || "Fonte local"
   );
   const sourceUrl = article.sourceUrl || article.url || article.link || "#";
-  const lede = cleanArticleExcerpt(
+  const rawLede = cleanArticleExcerpt(
     article.lede || article.summary || article.description || "Sem resumo.",
     article.sourceLabel || article.title || "Sem resumo."
+  );
+  const displaySummary = buildShortArticleSummary(
+    rawLede,
+    article.sourceLabel || article.title || "Resumo em atualização.",
+    172
   );
   const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
   const originalImageUrl = String(article.feedImageUrl || article.imageUrl || "");
@@ -2773,7 +2799,9 @@ const normalizeRuntimeArticle = (article = {}) => {
     sourceName,
     sourceUrl,
     sourceLabel: cleanArticleText(article.sourceLabel || title),
-    lede,
+    rawLede,
+    lede: displaySummary,
+    displaySummary,
     date: formatDisplayDate(article.date || article.publishedAt || article.createdAt || ""),
     originalImageUrl,
     originalSourceImageUrl,
@@ -3582,7 +3610,7 @@ const buildHeroTourismRuntimePool = () => {
         hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
         articleTitle: article.title || "Notícia em destaque",
         articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
-        articleSummary: truncateCopy(article.lede || article.summary || "Resumo da notícia em destaque.", 168),
+        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 138),
         articleHref: buildHeroArticleHref(article),
         themeKey: areaKey,
         sourceName: article.sourceName || "Fonte local"
@@ -3649,7 +3677,7 @@ const buildHeroTourismFallbackPool = () => {
         hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
         articleTitle: article.title || "Notícia em destaque",
         articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
-        articleSummary: truncateCopy(article.lede || article.summary || "Resumo da notícia em destaque.", 168),
+        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 138),
         articleHref: buildHeroArticleHref(article),
         themeKey: areaKey,
         sourceName: article.sourceName || "Fonte local"
@@ -3679,7 +3707,7 @@ const buildHeroTourismDailyPool = () => {
         hasPeopleScene: false,
         articleTitle: article.title || "Matéria autoral em destaque",
         articleCategory: article.category || "Destaque autoral",
-        articleSummary: truncateCopy(article.lede || article.summary || "Artigo autoral em destaque.", 168),
+        articleSummary: truncateCopy(article.displaySummary || article.lede || "Artigo autoral em destaque.", 138),
         articleHref: buildHeroArticleHref(article),
         themeKey: getHeroAreaKey(article),
         sourceName: article.sourceName || "Editorial Catalogo Cruzeiro do Sul"
@@ -3799,7 +3827,10 @@ const setHeroTourismMeta = (photo) => {
 
   if (heroDailyNewsSummary) {
     heroDailyNewsSummary.textContent =
-      photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para esta editoria.";
+      truncateCopy(
+        photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para esta editoria.",
+        132
+      );
   }
 };
 
@@ -5973,7 +6004,7 @@ const communityTrendFallbackTopics = [
   },
   {
     title: "Agenda cultural e eventos movimentam stories e grupos",
-    summary: "Shows, encontros e bastidores entram na pauta porque ajudam o leitor a decidir o rolê.",
+    summary: "Shows, encontros e bastidores entram no radar para orientar a programação local.",
     category: "Cultura",
     sourceName: "Trending local",
     hashtags: ["#AgendaCultural", "#ValeDoJurua", "#CruzeiroDoSul"]
@@ -6448,17 +6479,28 @@ const getRecentTopicFallbackArticles = (matcher, limit = 6) =>
 
 const buildTopicUtilityCards = (items = []) =>
   items
-    .map((item) => `
-      <article class="global-politics-card">
-        <p class="eyebrow">${escapeHtml(item.eyebrow || "política")}</p>
-        <h3>${escapeHtml(item.title || "Atualização política")}</h3>
-        <p>${escapeHtml(item.summary || "Use este bloco para seguir para o arquivo político e não desperdiçar espaço com placeholder.")}</p>
-        <footer>
-          <span>${escapeHtml(item.label || "atalho editorial")}</span>
-          <a href="${escapeRuntimeAttribute(item.href || "./arquivo.html")}">${escapeHtml(item.cta || "Abrir agora")}</a>
-        </footer>
-      </article>
-    `)
+    .map((item) => {
+      const normalizedItem = normalizeRuntimeArticle(item || {});
+      const safeSummary = truncateCopy(
+        normalizedItem.displaySummary ||
+          normalizedItem.summary ||
+          item.summary ||
+          "Siga para o arquivo politico e acompanhe os pontos mais importantes.",
+        190
+      );
+
+      return `
+        <article class="global-politics-card">
+          <p class="eyebrow">${escapeHtml(item.eyebrow || normalizedItem.eyebrow || "política")}</p>
+          <h3>${escapeHtml(normalizedItem.title || item.title || "Atualização política")}</h3>
+          <p>${escapeHtml(safeSummary)}</p>
+          <footer>
+            <span>${escapeHtml(item.label || "atalho editorial")}</span>
+            <a href="${escapeRuntimeAttribute(item.href || "./arquivo.html")}">${escapeHtml(item.cta || "Abrir agora")}</a>
+          </footer>
+        </article>
+      `;
+    })
     .join("");
 
 const buildBuzzSidebarItemsFromArticles = (items = []) =>
@@ -7272,7 +7314,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (copyNode) {
-    copyNode.textContent = truncateCopy(normalized.lede, 150);
+    copyNode.textContent = truncateCopy(normalized.displaySummary || normalized.lede, 132);
   }
 
   if (footerSource) {
@@ -7440,13 +7482,13 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (copyNode) {
-      copyNode.textContent = truncateCopy(article.lede, index === 0 ? 88 : 64);
+      copyNode.textContent = truncateCopy(article.displaySummary || article.lede, index === 0 ? 88 : 64);
     }
 
     if (statNode) {
       statNode.textContent =
         index === 0
-          ? truncateCopy(article.summary || article.lede, 84)
+          ? truncateCopy(article.displaySummary || article.lede, 84)
           : truncateCopy(article.sourceLabel || article.title, 68);
     }
 
@@ -9071,7 +9113,10 @@ const buildFeedCard = (article) => {
   source.textContent = `${normalizedArticle.sourceName} • ${normalizedArticle.date}`;
 
   title.textContent = normalizedArticle.title;
-  summary.textContent = normalizedArticle.lede;
+  summary.textContent = truncateCopy(
+    normalizedArticle.displaySummary || normalizedArticle.lede,
+    card.classList.contains("featured") ? 150 : 132
+  );
 
   category.textContent = `Fonte consultada: ${normalizedArticle.sourceName}`;
   link.href = href;

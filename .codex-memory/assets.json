@@ -1,7 +1,29 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T04:57:07.685Z",
+  "lastUpdatedAt": "2026-04-25T18:03:29.686Z",
   "assets": [
+    {
+      "id": "pubpaid-player-8dir-walk-v1-regenerated",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/rpg/player-8dir-walk-v1.png",
+      "source": "workspace-generated",
+      "note": "Spritesheet RPG recriado/aplicado no player PubPaid: 8 direcoes x 3 frames, frame 64x116, caminhada e respiracao no StreetScene.",
+      "linkedOrderIds": [
+        "2026-04-25-pubpaid-rua-rpg-civis-player-8dir"
+      ],
+      "createdAt": "2026-04-25T15:20:00.000Z"
+    },
+    {
+      "id": "pubpaid-street-rpg-qa-final",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-street-rpg-20260425-final/street-rpg.png",
+      "source": "workspace",
+      "note": "Captura de validacao visual da rua com civis unicos e player RPG 8 direcoes.",
+      "linkedOrderIds": [
+        "2026-04-25-pubpaid-rua-rpg-civis-player-8dir"
+      ],
+      "createdAt": "2026-04-25T15:20:00.000Z"
+    },
     {
       "id": "player-8dir-walk-v1",
       "kind": "spritesheet",
@@ -895,6 +917,15 @@
       "note": "PNG final para redes sociais usando foto real de Cruzeiro do Sul Acre, formato banner 1920x1080",
       "linkedOrderIds": [],
       "createdAt": "2026-04-24T03:00:54.497Z"
+    },
+    {
+      "id": "latest-report-md",
+      "kind": "report",
+      "path": ".codex-temp/online-local-sync/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio do sync online-local de 2026-04-25 com home summaries, auditoria de imagens zerada e Mailza/Mailsa priorizada.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-25T18:03:29.686Z"
     }
   ]
 }

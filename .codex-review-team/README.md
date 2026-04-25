@@ -31,6 +31,12 @@ Pegar o que normalmente passa batido em portais vivos:
 
 O auditor ja ignora diretorios de ambiente temporario e headless, alem de nao tratar `loading="lazy"` ou `document.readyState === "loading"` como problema editorial.
 
+## Erro treinado: texto gigante na home
+
+- Home, radar, arquivo, mosaico e cards de chamada devem exibir resumo curto, com a parte que interessa para a pessoa querer clicar.
+- A pagina `noticia.html` e o modulo de leitura podem manter a estrutura completa: corpo, analise, contexto, destaques, fonte e desenvolvimento.
+- A auditoria marca erro alto quando a home usa `summary`, `lede`, `description` ou `rawLede` bruto sem `displaySummary`, `truncateCopy` ou normalizacao equivalente.
+
 ## Saidas do auditor
 
 - `.codex-temp/review-team/latest-report.json`
