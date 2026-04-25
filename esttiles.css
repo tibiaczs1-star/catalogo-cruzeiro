@@ -57,6 +57,12 @@
   border-radius: 14px;
 }
 
+.office-page-fashion .office-nav .office-nav-subpage {
+  background: #f7dcc6;
+  color: #111827;
+  box-shadow: 0 14px 28px rgba(244, 179, 135, 0.18);
+}
+
 .office-page-fashion .office-hero {
   border-radius: 34px;
   background:

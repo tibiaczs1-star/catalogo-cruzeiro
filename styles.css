@@ -2303,6 +2303,20 @@ body.site-loaded .page-shell {
   background: rgba(20, 50, 74, 0.08);
 }
 
+.main-nav .nav-lifestile-link,
+.header-services-strip .editorial-subpage-button {
+  background: #111111;
+  border-color: #111111;
+  color: #fffaf2;
+  box-shadow: 0 14px 34px rgba(17, 17, 17, 0.16);
+}
+
+.main-nav .nav-lifestile-link:hover,
+.header-services-strip .editorial-subpage-button:hover {
+  background: #8f5b39;
+  border-color: #8f5b39;
+}
+
 .solid-button,
 .outline-button,
 .chip-button,
