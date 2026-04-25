@@ -2394,6 +2394,222 @@ function slugifyText(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+const archiveStoryStopwords = new Set([
+  "a",
+  "o",
+  "os",
+  "as",
+  "ao",
+  "aos",
+  "da",
+  "das",
+  "de",
+  "do",
+  "dos",
+  "e",
+  "em",
+  "no",
+  "na",
+  "nos",
+  "nas",
+  "para",
+  "por",
+  "com",
+  "sem",
+  "que",
+  "uma",
+  "um",
+  "sobre",
+  "apos",
+  "após",
+  "acre",
+  "brasil",
+  "governo",
+  "prefeitura"
+]);
+
+const decodeEditorialEntities = (value = "") =>
+  String(value || "")
+    .replace(/&#(\d+);/g, (_match, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_match, code) => String.fromCharCode(parseInt(code, 16)))
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;|&#39;/gi, "'")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&ndash;|&mdash;/gi, "-")
+    .replace(/[“”‘’]/g, "'")
+    .replace(/[–—]/g, "-");
+
+const normalizeArchiveStoryText = (value = "") =>
+  normalizeText(decodeEditorialEntities(value))
+    .replace(/&[a-z0-9#]+;/gi, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const getCanonicalArticleUrl = (article = {}) => {
+  const rawUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+  if (!rawUrl || rawUrl === "#") {
+    return "";
+  }
+
+  try {
+    const parsed = new URL(rawUrl, window.location.href);
+    [...parsed.searchParams.keys()].forEach((key) => {
+      if (/^(utm_|fbclid|gclid|mc_|output|ref|source)$/i.test(key)) {
+        parsed.searchParams.delete(key);
+      }
+    });
+    parsed.hash = "";
+    return parsed.toString().replace(/\/$/, "").toLowerCase();
+  } catch (_error) {
+    return normalizeArchiveStoryText(rawUrl);
+  }
+};
+
+const getArchiveStoryTokens = (article = {}) => {
+  const text = normalizeArchiveStoryText(
+    [
+      article.title,
+      article.sourceLabel,
+      article.summary,
+      article.lede,
+      article.description,
+      article.category,
+      article.sourceName
+    ].join(" ")
+  );
+
+  return text
+    .split(/\s+/)
+    .filter((token) => token.length > 3 && !archiveStoryStopwords.has(token))
+    .slice(0, 9);
+};
+
+const getArchiveStoryCluster = (article = {}) => {
+  const haystack = normalizeArchiveStoryText(
+    [
+      article.title,
+      article.sourceLabel,
+      article.summary,
+      article.lede,
+      article.description,
+      article.category,
+      article.sourceName
+    ].join(" ")
+  );
+
+  if (/\b(parana pesquisas|pesquisas rj|flavio.*lula|lula.*flavio)\b/.test(haystack)) {
+    return "pesquisa-rj-lula-flavio";
+  }
+  if (/\b(mailza|mailsa|governadora mailza|mailza assis)\b/.test(haystack)) {
+    return "mailza-governo";
+  }
+  if (/\b(cheia|enchente|jurua|juru[aá]|alagamento|abrigos?|vazante|familias atingidas)\b/.test(haystack)) {
+    return "cheia-jurua";
+  }
+  if (/\b(derramamento|diesel|oleo|balsa|tarauaca)\b/.test(haystack)) {
+    return "oleo-tarauaca";
+  }
+  if (/\b(edital|licenca|licenca de operacao|assembleia|convocacao)\b/.test(haystack)) {
+    return `edital-${getArchiveStoryTokens(article).slice(0, 3).join("-")}`;
+  }
+
+  return getArchiveStoryTokens(article).slice(0, 5).join("-") || slugifyText(article.title || article.id || "");
+};
+
+const getArchiveImageKey = (article = {}) =>
+  normalizeArchiveStoryText(article.imageUrl || article.feedImageUrl || article.sourceImageUrl || article.originalImageUrl || "")
+    .replace(/\?.*$/, "")
+    .slice(0, 180);
+
+const getArchiveArticleCanonicalKey = (article = {}) => {
+  const canonicalUrl = getCanonicalArticleUrl(article);
+  if (canonicalUrl) {
+    return canonicalUrl;
+  }
+
+  const dateKey = getArticleDateKey(article);
+  return [
+    getArchiveStoryCluster(article),
+    normalizeArchiveStoryText(article.sourceName || article.source || ""),
+    dateKey
+  ]
+    .filter(Boolean)
+    .join("|");
+};
+
+const diversifyArchiveStories = (items = [], desiredCount = 6) => {
+  const limit = Math.max(1, Number(desiredCount || 6));
+  const selected = [];
+  const selectedKeys = new Set();
+  const counts = {
+    source: new Map(),
+    category: new Map(),
+    cluster: new Map(),
+    image: new Map()
+  };
+  const sourceLimit = 2;
+  const categoryLimit = limit <= 6 ? 2 : 3;
+  const clusterLimit = 1;
+  const passes = [
+    { source: sourceLimit, category: categoryLimit, cluster: clusterLimit, image: 1 },
+    { source: sourceLimit + 1, category: categoryLimit + 1, cluster: clusterLimit + 1, image: 2 },
+    { source: Infinity, category: Infinity, cluster: Infinity, image: Infinity }
+  ];
+
+  const canUse = (article, pass) => {
+    const source = normalizeArchiveStoryText(article.sourceName || article.source || "fonte");
+    const category = normalizeArchiveStoryText(article.categoryKey || article.category || "geral");
+    const cluster = getArchiveStoryCluster(article);
+    const image = getArchiveImageKey(article);
+
+    return (
+      (counts.source.get(source) || 0) < pass.source &&
+      (counts.category.get(category) || 0) < pass.category &&
+      (counts.cluster.get(cluster) || 0) < pass.cluster &&
+      (!image || (counts.image.get(image) || 0) < pass.image)
+    );
+  };
+
+  const addArticle = (article) => {
+    const key = getArchiveArticleCanonicalKey(article);
+    if (!key || selectedKeys.has(key)) {
+      return false;
+    }
+
+    selected.push(article);
+    selectedKeys.add(key);
+
+    const source = normalizeArchiveStoryText(article.sourceName || article.source || "fonte");
+    const category = normalizeArchiveStoryText(article.categoryKey || article.category || "geral");
+    const cluster = getArchiveStoryCluster(article);
+    const image = getArchiveImageKey(article);
+    counts.source.set(source, (counts.source.get(source) || 0) + 1);
+    counts.category.set(category, (counts.category.get(category) || 0) + 1);
+    counts.cluster.set(cluster, (counts.cluster.get(cluster) || 0) + 1);
+    if (image) counts.image.set(image, (counts.image.get(image) || 0) + 1);
+    return true;
+  };
+
+  passes.forEach((pass) => {
+    if (selected.length >= limit) {
+      return;
+    }
+
+    items.forEach((article) => {
+      if (selected.length >= limit || !canUse(article, pass)) {
+        return;
+      }
+
+      addArticle(article);
+    });
+  });
+
+  const remaining = items.filter((article) => !selectedKeys.has(getArchiveArticleCanonicalKey(article)));
+  return [...selected, ...remaining];
+};
+
 const getLocalDateKey = (date = new Date()) => {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: localeTimeZone,
@@ -6237,12 +6453,7 @@ const dedupeNewsItems = (items = []) => {
 
   items.forEach((item) => {
     const normalizedItem = normalizeRuntimeArticle(item);
-    const key =
-      normalizedItem.sourceUrl ||
-      normalizedItem.slug ||
-      normalizeText(
-        [normalizedItem.title, normalizedItem.date, normalizedItem.sourceName].join(" ")
-      );
+    const key = getArchiveArticleCanonicalKey(normalizedItem);
 
     if (!mergedMap.has(key)) {
       mergedMap.set(key, normalizedItem);
@@ -9216,7 +9427,8 @@ const getArchiveHighlightItems = () => {
       anchorDate.getDate() + 1
     ).getTime();
 
-    return getSortedLiveFeedArticles(normalizedItems).filter((article) => {
+    return diversifyArchiveStories(
+      getSortedLiveFeedArticles(normalizedItems).filter((article) => {
       const articleDate = getArchiveArticleDate(article);
       if (!articleDate) {
         return false;
@@ -9229,12 +9441,15 @@ const getArchiveHighlightItems = () => {
       ).getTime();
 
       return articleTime >= startTime && articleTime < endTime;
-    });
+      }),
+      18
+    );
   }
 
   const topicPattern = archiveTopicPatterns[currentFilter];
   if (topicPattern) {
-    return getSortedLiveFeedArticles(normalizedItems).filter((article) => {
+    return diversifyArchiveStories(
+      getSortedLiveFeedArticles(normalizedItems).filter((article) => {
       const normalizedArticle = normalizeRuntimeArticle(article);
       const haystack = normalizeText(
         [
@@ -9251,10 +9466,12 @@ const getArchiveHighlightItems = () => {
         (currentFilter === "saude" && articleMatchesCategoryFilter(normalizedArticle, "saude")) ||
         topicPattern.test(haystack)
       );
-    });
+      }),
+      18
+    );
   }
 
-  return getSortedLiveFeedArticles(normalizedItems);
+  return diversifyArchiveStories(getSortedLiveFeedArticles(normalizedItems), 18);
 };
 
 const buildArchiveHighlightCard = (article, index = 0) => {
@@ -9274,7 +9491,10 @@ const renderArchiveHighlights = () => {
   const fallbackItems = getSortedLiveFeedArticles(
     liveFeedState.items.length ? liveFeedState.items : initialStaticNews
   ).map((item) => normalizeRuntimeArticle(item));
-  const visibleItems = (filteredItems.length ? filteredItems : fallbackItems).slice(0, 6);
+  const visibleItems = diversifyArchiveStories(
+    filteredItems.length ? filteredItems : fallbackItems,
+    6
+  ).slice(0, 6);
   const activeLabel = archiveFilterLabels[archiveHighlightState.filter] || "Arquivo";
 
   archiveHighlightButtons.forEach((button) => {
@@ -9513,7 +9733,7 @@ const getFilteredLiveFeedArticles = () => {
     });
 
   if (!normalizedQuery) {
-    return categoryFiltered;
+    return diversifyArchiveStories(categoryFiltered, liveFeedState.visibleItems);
   }
 
   return categoryFiltered

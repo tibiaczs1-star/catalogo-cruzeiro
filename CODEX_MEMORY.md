@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-25 - Fluxo editorial anti-repeticao
+
+- Reuniao geral executada: `npm run agents:run` ativou 181 agentes e `npm run review:team` voltou com 0 achados.
+- Decisao editorial: Home passa a operar por reserva de superficie (`Hero -> Destaques -> Arquivo de Abril/mes -> Noticias do dia`), sem repetir slug, URL, foto, titulo normalizado ou pauta central entre blocos.
+- Prompt operacional criado em `PROMPT_FLUXO_EDITORIAL_RESPONSIVO_2026-04-25.md`.
+- `script.js`, `arquivo-noticias.js` e `server.js` ganharam canonicalizacao/fingerprint editorial e balanceamento por fonte, categoria, imagem e cluster para reduzir repeticao profissionalmente.
+- `styles.css` ganhou regras responsivas para os cards com foto do bloco `Celebridades & Polêmicas do Dia`, evitando cards espremidos em TV, desktop, tablet e mobile.
+- Validacoes: `node --check script.js`, `node --check arquivo-noticias.js`, `node --check server.js`, `styles.css` com `brace-balance=0`, `npm run review:team` com 0 achados e API local `/api/news/archive?limit=18` retornando 9 fontes nos 18 primeiros, no maximo 2 por fonte.
+
 ## Atualizacao rapida 2026-04-25 - Pesquisa Acre 2026
 
 - A rodada atual da Pesquisa Acre 2026 foi estendida por mais 7 dias sem alterar votos: `activeWeekKey` segue `2026-W17` ate `2026-05-03T04:59:59.999Z` (02/05/2026 23:59:59 em America/Rio_Branco).

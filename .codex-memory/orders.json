@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T19:05:40.891Z",
+  "lastUpdatedAt": "2026-04-25T19:54:34.989Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6273,6 +6273,36 @@
       "source": "chat",
       "rawRequest": "tire marcos alexandre da pesquisa, ele nao e candidato a governo e ponha o thor; tem o bocalon tambem; pesquisa ja esta no ar",
       "summary": "Correção urgente da Pesquisa Acre 2026: remover Marcus/Marcos Alexandre das opções novas e incluir Thor Dantas e Tião Bocalom como nomes testados para governo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-corrigir-repeticao-pouco-profissional-nas-noticias-verificadas-do-arquivo-de-abr",
+      "createdAt": "2026-04-25T19:33:38.807Z",
+      "updatedAt": "2026-04-25T19:33:38.807Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Mais notícias verificadas arquivo de abril estão praticamente iguais. Reunir equipe toda, fazer reunião geral, decidir como diversificar e evitar repetição, executar e subir commit da solução.",
+      "summary": "Corrigir repetição pouco profissional nas notícias verificadas do Arquivo de Abril com reunião geral/equipe, regra de diversificação e commit/push.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-formalizar-fluxo-editorial-anti-repeticao-e-regras-responsivas-de-cards-fotos-pa",
+      "createdAt": "2026-04-25T19:54:34.989Z",
+      "updatedAt": "2026-04-25T19:54:34.989Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Criar síntese de prioridades: hero sem repetição, destaques, destaques do mês de abril, notícias do dia fora dos destaques; reunir equipe, criar prompt de fluxo/síntese editorial e regras responsivas para todo tamanho de tela, com fotos bem encaixadas e sem atrapalhar o design existente.",
+      "summary": "Formalizar fluxo editorial anti-repetição e regras responsivas de cards/fotos para hero, destaques, mês e notícias do dia.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

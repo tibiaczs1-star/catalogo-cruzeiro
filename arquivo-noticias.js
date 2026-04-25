@@ -60,6 +60,218 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
+  const archiveStoryStopwords = new Set([
+    "a",
+    "o",
+    "os",
+    "as",
+    "ao",
+    "aos",
+    "da",
+    "das",
+    "de",
+    "do",
+    "dos",
+    "e",
+    "em",
+    "no",
+    "na",
+    "nos",
+    "nas",
+    "para",
+    "por",
+    "com",
+    "sem",
+    "que",
+    "uma",
+    "um",
+    "sobre",
+    "apos",
+    "após",
+    "acre",
+    "brasil",
+    "governo",
+    "prefeitura"
+  ]);
+
+  const decodeEditorialEntities = (value = "") =>
+    String(value || "")
+      .replace(/&#(\d+);/g, (_match, code) => String.fromCharCode(Number(code)))
+      .replace(/&#x([0-9a-f]+);/gi, (_match, code) => String.fromCharCode(parseInt(code, 16)))
+      .replace(/&amp;/gi, "&")
+      .replace(/&quot;/gi, '"')
+      .replace(/&apos;|&#39;/gi, "'")
+      .replace(/&nbsp;/gi, " ")
+      .replace(/&ndash;|&mdash;/gi, "-")
+      .replace(/[“”‘’]/g, "'")
+      .replace(/[–—]/g, "-");
+
+  const normalizeArchiveStoryText = (value = "") =>
+    normalizeText(decodeEditorialEntities(value))
+      .replace(/&[a-z0-9#]+;/gi, " ")
+      .replace(/[^a-z0-9]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const getCanonicalArticleUrl = (article = {}) => {
+    const rawUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+    if (!rawUrl || rawUrl === "#") {
+      return "";
+    }
+
+    try {
+      const parsed = new URL(rawUrl, window.location.href);
+      [...parsed.searchParams.keys()].forEach((key) => {
+        if (/^(utm_|fbclid|gclid|mc_|output|ref|source)$/i.test(key)) {
+          parsed.searchParams.delete(key);
+        }
+      });
+      parsed.hash = "";
+      return parsed.toString().replace(/\/$/, "").toLowerCase();
+    } catch (_error) {
+      return normalizeArchiveStoryText(rawUrl);
+    }
+  };
+
+  const getArchiveStoryTokens = (article = {}) =>
+    normalizeArchiveStoryText(
+      [
+        article.title,
+        article.sourceLabel,
+        article.summary,
+        article.lede,
+        article.description,
+        article.category,
+        article.sourceName
+      ].join(" ")
+    )
+      .split(/\s+/)
+      .filter((token) => token.length > 3 && !archiveStoryStopwords.has(token))
+      .slice(0, 9);
+
+  const getArchiveStoryCluster = (article = {}) => {
+    const haystack = normalizeArchiveStoryText(
+      [
+        article.title,
+        article.sourceLabel,
+        article.summary,
+        article.lede,
+        article.description,
+        article.category,
+        article.sourceName
+      ].join(" ")
+    );
+
+    if (/\b(parana pesquisas|pesquisas rj|flavio.*lula|lula.*flavio)\b/.test(haystack)) {
+      return "pesquisa-rj-lula-flavio";
+    }
+    if (/\b(mailza|mailsa|governadora mailza|mailza assis)\b/.test(haystack)) {
+      return "mailza-governo";
+    }
+    if (/\b(cheia|enchente|jurua|juru[aá]|alagamento|abrigos?|vazante|familias atingidas)\b/.test(haystack)) {
+      return "cheia-jurua";
+    }
+    if (/\b(derramamento|diesel|oleo|balsa|tarauaca)\b/.test(haystack)) {
+      return "oleo-tarauaca";
+    }
+    if (/\b(edital|licenca|licenca de operacao|assembleia|convocacao)\b/.test(haystack)) {
+      return `edital-${getArchiveStoryTokens(article).slice(0, 3).join("-")}`;
+    }
+
+    return getArchiveStoryTokens(article).slice(0, 5).join("-") || slugifyText(article.title || article.id || "");
+  };
+
+  const getArchiveImageKey = (article = {}) =>
+    normalizeArchiveStoryText(article.imageUrl || article.feedImageUrl || article.sourceImageUrl || "")
+      .replace(/\?.*$/, "")
+      .slice(0, 180);
+
+  const getArchiveArticleCanonicalKey = (article = {}) => {
+    const canonicalUrl = getCanonicalArticleUrl(article);
+    if (canonicalUrl) {
+      return canonicalUrl;
+    }
+
+    return [
+      getArchiveStoryCluster(article),
+      normalizeArchiveStoryText(article.sourceName || article.source || ""),
+      article.date || article.publishedAt || article.createdAt || ""
+    ]
+      .filter(Boolean)
+      .join("|");
+  };
+
+  const diversifyArchiveStories = (items = [], desiredCount = pageSize) => {
+    const limit = Math.max(1, Number(desiredCount || pageSize || 6));
+    const selected = [];
+    const selectedKeys = new Set();
+    const counts = {
+      source: new Map(),
+      category: new Map(),
+      cluster: new Map(),
+      image: new Map()
+    };
+    const sourceLimit = 2;
+    const categoryLimit = limit <= 6 ? 2 : 3;
+    const clusterLimit = 1;
+    const passes = [
+      { source: sourceLimit, category: categoryLimit, cluster: clusterLimit, image: 1 },
+      { source: sourceLimit + 1, category: categoryLimit + 1, cluster: clusterLimit + 1, image: 2 },
+      { source: Infinity, category: Infinity, cluster: Infinity, image: Infinity }
+    ];
+
+    const canUse = (article, pass) => {
+      const source = normalizeArchiveStoryText(article.sourceName || article.source || "fonte");
+      const category = normalizeArchiveStoryText(article.category || "geral");
+      const cluster = getArchiveStoryCluster(article);
+      const image = getArchiveImageKey(article);
+
+      return (
+        (counts.source.get(source) || 0) < pass.source &&
+        (counts.category.get(category) || 0) < pass.category &&
+        (counts.cluster.get(cluster) || 0) < pass.cluster &&
+        (!image || (counts.image.get(image) || 0) < pass.image)
+      );
+    };
+
+    const addArticle = (article) => {
+      const key = getArchiveArticleCanonicalKey(article);
+      if (!key || selectedKeys.has(key)) {
+        return false;
+      }
+
+      selected.push(article);
+      selectedKeys.add(key);
+
+      const source = normalizeArchiveStoryText(article.sourceName || article.source || "fonte");
+      const category = normalizeArchiveStoryText(article.category || "geral");
+      const cluster = getArchiveStoryCluster(article);
+      const image = getArchiveImageKey(article);
+      counts.source.set(source, (counts.source.get(source) || 0) + 1);
+      counts.category.set(category, (counts.category.get(category) || 0) + 1);
+      counts.cluster.set(cluster, (counts.cluster.get(cluster) || 0) + 1);
+      if (image) counts.image.set(image, (counts.image.get(image) || 0) + 1);
+      return true;
+    };
+
+    passes.forEach((pass) => {
+      if (selected.length >= limit) {
+        return;
+      }
+
+      items.forEach((article) => {
+        if (selected.length >= limit || !canUse(article, pass)) {
+          return;
+        }
+
+        addArticle(article);
+      });
+    });
+
+    const remaining = items.filter((article) => !selectedKeys.has(getArchiveArticleCanonicalKey(article)));
+    return [...selected, ...remaining];
+  };
+
   const escapeAttribute = (value) =>
     String(value || "")
       .replace(/&/g, "&amp;")
@@ -333,11 +545,7 @@
 
   const getArticleKey = (article) => {
     const normalized = normalizeArticle(article);
-    return (
-      normalized.slug ||
-      normalized.sourceUrl ||
-      normalizeText([normalized.title, normalized.date, normalized.sourceName].join(" "))
-    );
+    return getArchiveArticleCanonicalKey(normalized);
   };
 
   const getSortTimestamp = (article) =>
@@ -792,7 +1000,7 @@
     );
 
     if (!normalizeText(queryValue)) {
-      return categoryFiltered;
+      return diversifyArchiveStories(categoryFiltered, state.visibleItems);
     }
 
     return categoryFiltered
@@ -1027,7 +1235,7 @@
     }
 
     const filtered = getFilteredItems(query);
-    const visibleSlice = filtered.slice(0, state.visibleItems);
+    const visibleSlice = diversifyArchiveStories(filtered, state.visibleItems).slice(0, state.visibleItems);
 
     grid.innerHTML = "";
     updateSummary(filtered, visibleSlice);

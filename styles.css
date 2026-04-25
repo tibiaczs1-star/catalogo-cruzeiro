@@ -20367,7 +20367,7 @@ body.editorial-home #monthly .month-card h3 {
 }
 
 body.editorial-home #monthly .month-grid.is-dynamic-monthly {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(290px, 1fr));
   align-items: stretch;
 }
 
@@ -20428,16 +20428,23 @@ body.editorial-home #monthly .month-photo {
   position: relative;
   z-index: 1;
   display: block;
-  height: clamp(132px, 10vw, 178px);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 174px;
+  max-height: 260px;
   border-radius: 16px;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
   box-shadow:
     inset 0 -72px 90px rgba(8, 24, 43, 0.18),
     0 12px 24px rgba(16, 35, 60, 0.12);
 }
 
 body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(-n + 2) .month-photo {
-  height: clamp(150px, 13vw, 214px);
+  min-height: 190px;
+  max-height: 280px;
 }
 
 body.editorial-home #monthly .month-card h3,
@@ -20574,19 +20581,57 @@ body.editorial-home #monthly .month-dynamic-card:nth-child(6) {
   }
 }
 
+@media (min-width: 1760px) {
+  body.editorial-home #monthly.section-block {
+    max-width: 1680px;
+    margin-inline: auto;
+  }
+
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: repeat(3, minmax(360px, 1fr));
+    gap: 1.25rem;
+  }
+
+  body.editorial-home #monthly .month-photo {
+    min-height: 220px;
+    max-height: 320px;
+  }
+}
+
+@media (min-width: 1181px) and (max-width: 1500px) {
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+  }
+
+  body.editorial-home #monthly .month-photo {
+    min-height: 178px;
+  }
+}
+
 @media (max-width: 1180px) {
   body.editorial-home #monthly .month-grid.is-dynamic-monthly {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
   }
 
   body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card {
     grid-column: span 1 !important;
+  }
+
+  body.editorial-home #monthly .month-photo {
+    min-height: 190px;
   }
 }
 
 @media (max-width: 720px) {
   body.editorial-home #monthly .month-grid.is-dynamic-monthly {
     grid-template-columns: 1fr;
+  }
+
+  body.editorial-home #monthly .month-photo,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(-n + 2) .month-photo {
+    aspect-ratio: 4 / 3;
+    min-height: 0;
+    max-height: none;
   }
 
   body.editorial-home #monthly .month-card-topline {
@@ -20596,6 +20641,70 @@ body.editorial-home #monthly .month-dynamic-card:nth-child(6) {
   body.editorial-home #monthly .month-live-pill {
     min-height: 20px;
     padding-inline: 0.45rem;
+  }
+}
+
+/* 2026-04-25: contrato responsivo para cards com foto.
+   Evita cards espremidos em TVs, desktops com trilhos laterais, tablets e mobile. */
+body.editorial-home #monthly .month-grid,
+body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+  align-items: stretch;
+}
+
+body.editorial-home #monthly .month-card,
+body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card {
+  min-width: 0;
+}
+
+body.editorial-home #monthly .month-photo,
+body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(-n + 2) .month-photo {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 10;
+  background-size: cover;
+  background-position: center;
+}
+
+@media (min-width: 1101px) and (max-width: 1319px) {
+  body.editorial-home #monthly .month-grid,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1320px) and (max-width: 1919px) {
+  body.editorial-home #monthly .month-grid,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1920px) {
+  body.editorial-home #monthly .month-grid,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: repeat(3, minmax(300px, 360px));
+    justify-content: center;
+  }
+}
+
+@media (min-width: 721px) and (max-width: 1100px) {
+  body.editorial-home #monthly .month-grid,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  body.editorial-home #monthly .month-grid,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly {
+    grid-template-columns: 1fr;
+  }
+
+  body.editorial-home #monthly .month-photo,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(-n + 2) .month-photo {
+    aspect-ratio: 4 / 3;
   }
 }
 

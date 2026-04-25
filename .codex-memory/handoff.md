@@ -1,6 +1,16 @@
 # Handoff
 
-Updated: 2026-04-25T18:30:48.236Z
+Updated: 2026-04-25T19:55:00.000Z
+
+## Atualizacao 2026-04-25T19:55:00.000Z - Fluxo editorial e cards responsivos
+
+Usuario definiu duas solucoes combinadas: ordenar conteudo por prioridade editorial e corrigir responsividade dos cards/fotos. Reuniao geral rodada: `npm run agents:run` ativou 181 agentes e `npm run review:team` voltou com 0 achados.
+
+Decisao editorial registrada em `PROMPT_FLUXO_EDITORIAL_RESPONSIVO_2026-04-25.md`: Hero reserva a materia principal; Destaques usam itens fortes que ficaram fora; Arquivo de Abril/mes mostra contexto sem repetir Hero/Destaques; Noticias do dia recebe o restante sem competir com superficies promovidas.
+
+Implementacao: `script.js`, `arquivo-noticias.js` e `server.js` ganharam canonicalizacao de URL/titulo/entidades HTML, cluster editorial e balanceamento por fonte/categoria/imagem/pauta. `styles.css` ganhou regras responsivas para `#monthly`, com proporcao de foto por breakpoint: TV, desktop largo, desktop estreito, tablet e mobile.
+
+Validacoes: `node --check script.js`, `node --check arquivo-noticias.js`, `node --check server.js`, `styles.css` brace-balance 0 e `npm run review:team` com 0 achados. Teste local da API `/api/news/archive?limit=18` mostrou 9 fontes nos 18 primeiros, no maximo 2 por fonte.
 
 Lifestile Acre pronto como editoria exclusivamente de moda e ja destacado como acesso subordinado. Usuario pediu para tirar PubPaid do pacote atual; PubPaid modificada fica reservada e nao deve entrar em commit/deploy ate nova ordem explicita.
 

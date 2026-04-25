@@ -1796,6 +1796,222 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+const ARCHIVE_STORY_STOPWORDS = new Set([
+  "a",
+  "o",
+  "os",
+  "as",
+  "ao",
+  "aos",
+  "da",
+  "das",
+  "de",
+  "do",
+  "dos",
+  "e",
+  "em",
+  "no",
+  "na",
+  "nos",
+  "nas",
+  "para",
+  "por",
+  "com",
+  "sem",
+  "que",
+  "uma",
+  "um",
+  "sobre",
+  "apos",
+  "após",
+  "acre",
+  "brasil",
+  "governo",
+  "prefeitura"
+]);
+
+function decodeEditorialEntities(value = "") {
+  return String(value || "")
+    .replace(/&#(\d+);/g, (_match, code) => String.fromCharCode(Number(code)))
+    .replace(/&#x([0-9a-f]+);/gi, (_match, code) => String.fromCharCode(parseInt(code, 16)))
+    .replace(/&amp;/gi, "&")
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;|&#39;/gi, "'")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&ndash;|&mdash;/gi, "-")
+    .replace(/[“”‘’]/g, "'")
+    .replace(/[–—]/g, "-");
+}
+
+function normalizeArchiveStoryText(value = "") {
+  return normalizeText(decodeEditorialEntities(value))
+    .replace(/&[a-z0-9#]+;/gi, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getCanonicalArticleUrl(item = {}) {
+  const rawUrl = String(item.sourceUrl || item.url || item.link || "").trim();
+  if (!rawUrl || rawUrl === "#") {
+    return "";
+  }
+
+  try {
+    const parsed = new URL(rawUrl);
+    [...parsed.searchParams.keys()].forEach((key) => {
+      if (/^(utm_|fbclid|gclid|mc_|output|ref|source)$/i.test(key)) {
+        parsed.searchParams.delete(key);
+      }
+    });
+    parsed.hash = "";
+    return parsed.toString().replace(/\/$/, "").toLowerCase();
+  } catch (_error) {
+    return normalizeArchiveStoryText(rawUrl);
+  }
+}
+
+function getArchiveStoryTokens(item = {}) {
+  return normalizeArchiveStoryText(
+    [
+      item.title,
+      item.sourceLabel,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.sourceName
+    ].join(" ")
+  )
+    .split(/\s+/)
+    .filter((token) => token.length > 3 && !ARCHIVE_STORY_STOPWORDS.has(token))
+    .slice(0, 9);
+}
+
+function getArchiveStoryCluster(item = {}) {
+  const haystack = normalizeArchiveStoryText(
+    [
+      item.title,
+      item.sourceLabel,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.sourceName
+    ].join(" ")
+  );
+
+  if (/\b(parana pesquisas|pesquisas rj|flavio.*lula|lula.*flavio)\b/.test(haystack)) {
+    return "pesquisa-rj-lula-flavio";
+  }
+  if (/\b(mailza|mailsa|governadora mailza|mailza assis)\b/.test(haystack)) {
+    return "mailza-governo";
+  }
+  if (/\b(cheia|enchente|jurua|juru[aá]|alagamento|abrigos?|vazante|familias atingidas)\b/.test(haystack)) {
+    return "cheia-jurua";
+  }
+  if (/\b(derramamento|diesel|oleo|balsa|tarauaca)\b/.test(haystack)) {
+    return "oleo-tarauaca";
+  }
+  if (/\b(edital|licenca|licenca de operacao|assembleia|convocacao)\b/.test(haystack)) {
+    return `edital-${getArchiveStoryTokens(item).slice(0, 3).join("-")}`;
+  }
+
+  return getArchiveStoryTokens(item).slice(0, 5).join("-") || slugify(item.title || item.id || "");
+}
+
+function getArchiveImageKey(item = {}) {
+  return normalizeArchiveStoryText(item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "")
+    .replace(/\?.*$/, "")
+    .slice(0, 180);
+}
+
+function getArticleCanonicalKey(item = {}) {
+  const canonicalUrl = getCanonicalArticleUrl(item);
+  if (canonicalUrl) {
+    return canonicalUrl;
+  }
+
+  return [
+    getArchiveStoryCluster(item),
+    normalizeArchiveStoryText(item.sourceName || item.source || ""),
+    item.publishedAt || item.date || item.createdAt || ""
+  ]
+    .filter(Boolean)
+    .join("|");
+}
+
+function diversifyArchiveStories(items = [], desiredCount = 30) {
+  const limit = Math.max(1, Number(desiredCount || 30));
+  const selected = [];
+  const selectedKeys = new Set();
+  const counts = {
+    source: new Map(),
+    category: new Map(),
+    cluster: new Map(),
+    image: new Map()
+  };
+  const sourceLimit = 2;
+  const categoryLimit = limit <= 6 ? 2 : 3;
+  const clusterLimit = 1;
+  const passes = [
+    { source: sourceLimit, category: categoryLimit, cluster: clusterLimit, image: 1 },
+    { source: sourceLimit + 1, category: categoryLimit + 1, cluster: clusterLimit + 1, image: 2 },
+    { source: Infinity, category: Infinity, cluster: Infinity, image: Infinity }
+  ];
+
+  const canUse = (item, pass) => {
+    const source = normalizeArchiveStoryText(item.sourceName || item.source || "fonte");
+    const category = normalizeArchiveStoryText(item.categoryKey || item.category || "geral");
+    const cluster = getArchiveStoryCluster(item);
+    const image = getArchiveImageKey(item);
+
+    return (
+      (counts.source.get(source) || 0) < pass.source &&
+      (counts.category.get(category) || 0) < pass.category &&
+      (counts.cluster.get(cluster) || 0) < pass.cluster &&
+      (!image || (counts.image.get(image) || 0) < pass.image)
+    );
+  };
+
+  const addItem = (item) => {
+    const key = getArticleCanonicalKey(item);
+    if (!key || selectedKeys.has(key)) {
+      return false;
+    }
+
+    selected.push(item);
+    selectedKeys.add(key);
+
+    const source = normalizeArchiveStoryText(item.sourceName || item.source || "fonte");
+    const category = normalizeArchiveStoryText(item.categoryKey || item.category || "geral");
+    const cluster = getArchiveStoryCluster(item);
+    const image = getArchiveImageKey(item);
+    counts.source.set(source, (counts.source.get(source) || 0) + 1);
+    counts.category.set(category, (counts.category.get(category) || 0) + 1);
+    counts.cluster.set(cluster, (counts.cluster.get(cluster) || 0) + 1);
+    if (image) counts.image.set(image, (counts.image.get(image) || 0) + 1);
+    return true;
+  };
+
+  passes.forEach((pass) => {
+    if (selected.length >= limit) {
+      return;
+    }
+
+    items.forEach((item) => {
+      if (selected.length >= limit || !canUse(item, pass)) {
+        return;
+      }
+
+      addItem(item);
+    });
+  });
+
+  const remaining = items.filter((item) => !selectedKeys.has(getArticleCanonicalKey(item)));
+  return [...selected, ...remaining];
+}
+
 function isKnownCategoryKey(categoryKey) {
   return Boolean(CATEGORY_LABEL_BY_KEY[categoryKey]);
 }
@@ -5554,7 +5770,7 @@ function getArticleNews(limit = 30) {
   const map = new Map();
 
   items.forEach((item) => {
-    const key = item.slug || item.sourceUrl || item.id || item.title;
+    const key = getArticleCanonicalKey(item) || item.slug || item.id || item.title;
     if (shouldReplaceArticleRecord(map.get(key), item)) {
       map.set(key, item);
     }
@@ -5575,7 +5791,29 @@ function getArticleBySlug(slug) {
 }
 
 function getNewsArchive(limit = 500) {
-  return getArticleNews(Math.max(1, Math.min(1000, limit)));
+  const safeLimit = Math.max(1, Math.min(1000, limit));
+  const items = getRawNewsItems().map(normalizeArticleRecord);
+  const map = new Map();
+
+  items.forEach((item) => {
+    const key = getArticleCanonicalKey(item) || item.slug || item.id || item.title;
+    if (shouldReplaceArticleRecord(map.get(key), item)) {
+      map.set(key, item);
+    }
+  });
+
+  const sorted = Array.from(map.values()).sort((left, right) => {
+    const rightDate = new Date(right.publishedAt || right.date || 0).getTime();
+    const leftDate = new Date(left.publishedAt || left.date || 0).getTime();
+
+    if (rightDate !== leftDate) {
+      return rightDate - leftDate;
+    }
+
+    return Number(right.priority || 0) - Number(left.priority || 0);
+  });
+
+  return repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
 }
 
 function getNewsSuggestions(query = "", limit = 80) {
