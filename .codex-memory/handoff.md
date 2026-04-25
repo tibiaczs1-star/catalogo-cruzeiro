@@ -26,3 +26,8 @@ Comportamento novo: `/api/daily-agent-pulse` entrega resumo público sanitizado 
 Validação: `node --check script.js`, `node --check server.js`, `styles.css` brace-balance 0.
 
 Bloqueio para subir: há conflitos/estados `UU`/`DU` no worktree fora deste ajuste. Resolver/isolar antes de commit/push.
+
+
+## Atualizacao 2026-04-25T15:00:00.000Z - Botao Lifestile subordinado
+
+Commit `ba46268 Destacar acesso subordinado ao Lifestile` enviado para `origin/main`. Alteracoes: `Lifestile 24h` destacado na nav principal, faixa Editoriais e Esttiles; card de Moda ganhou link de subeditoria; Lifestile ganhou retorno para Esttiles. Verificacao imediata: GitHub remoto aponta para `ba46268`; Render ainda estava servindo HTML antigo logo apos o push, aguardar deploy automatico.
