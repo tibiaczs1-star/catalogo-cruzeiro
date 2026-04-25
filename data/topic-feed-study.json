@@ -1,6 +1,6 @@
 {
   "topic": "study",
-  "updatedAt": "2026-04-24T16:14:35.650Z",
+  "updatedAt": "2026-04-25T18:28:36.370Z",
   "items": [
     {
       "id": "https://thepienews.com/new-zealand-hits-study-destination-target-a-decade-early/",
@@ -25,14 +25,15 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "https://thepienews.com/wp-content/uploads/2022/12/pexels-tyler-lastovich-1022479.jpg",
-      "sourceImageUrl": "https://thepienews.com/wp-content/uploads/2022/12/pexels-tyler-lastovich-1022479.jpg",
+      "imageUrl": "https://thepienews.b-cdn.net/wp-content/uploads/2022/12/pexels-tyler-lastovich-1022479.jpg",
+      "sourceImageUrl": "https://thepienews.b-cdn.net/wp-content/uploads/2022/12/pexels-tyler-lastovich-1022479.jpg",
       "feedImageUrl": "",
       "imageCredit": "",
       "imageFocus": "",
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "mundo"
@@ -50,8 +51,8 @@
       "sourceName": "Inside Higher Ed",
       "sourceUrl": "https://www.insidehighered.com/news/quick-takes/2026/04/24/memo-ies-track-lose-289m",
       "sourceLabel": "IES On Track to Lose $289M, Advocacy Group Says",
-      "lede": "IES On Track to Lose $289M, Advocacy Group Says Katherine Knott Fri, 04/24/2026 - 03:00 AM Byline(s) Katherine Knott",
-      "summary": "IES On Track to Lose $289M, Advocacy Group Says Katherine Knott Fri, 04/24/2026 - 03:00 AM Byline(s) Katherine Knott",
+      "lede": "<span>IES On Track to Lose $289M, Advocacy Group Says</span> <div > <img > </div> <span><span>Katherine Knott</span></span> <span><time >Fri, 04/24/2026 - 03:00 AM</time> </span> <div > <div >Byline(s)</div> <div > <div",
+      "summary": "<span>IES On Track to Lose $289M, Advocacy Group Says</span> <div > <img > </div> <span><span>Katherine Knott</span></span> <span><time >Fri, 04/24/2026 - 03:00 AM</time> </span> <div > <div >Byline(s)</div> <div > <div ><a >Katherine Knott</a></div> </div> </",
       "analysis": "",
       "body": [
         "Inside Higher Ed publicou em 24 de abr. de 2026 a base desta noticia sobre IES On Track to Lose $289M, Advocacy Group Says. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -68,6 +69,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "campus"
@@ -85,8 +87,8 @@
       "sourceName": "The Hechinger Report",
       "sourceUrl": "https://hechingerreport.org/kids-attention-spans-teachers-are-trying-to-build-them-back-up/",
       "sourceLabel": "The tricks teachers are trying to fix students’ shortening attention spans",
-      "lede": "Kindergarten students in a classroom at McKinley STEAM Academy on March 12, 2026, in Toledo, Ohio. Teachers are adjusting the education space to accommodate students&#8217; lack of focus with new techniques like meditati",
-      "summary": "Kindergarten students in a classroom at McKinley STEAM Academy on March 12, 2026, in Toledo, Ohio. Teachers are adjusting the education space to accommodate students&#8217; lack of focus with new techniques like meditation and “brain breaks” in the classroom.",
+      "lede": "TOLEDO, Ohio — William Werner’s first-grade class was squirming. Some of his students at McKinley STEAM Academy were still completing reading worksheets one morning last month while others who had long finished were buil",
+      "summary": "TOLEDO, Ohio — William Werner’s first-grade class was squirming. Some of his students at McKinley STEAM Academy were still completing reading worksheets one morning last month while others who had long finished were building pyramids out of red cups, putting t",
       "analysis": "",
       "body": [
         "The Hechinger Report publicou em 24 de abr. de 2026 a base desta noticia sobre The tricks teachers are trying to fix students’ shortening attention spans. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -103,6 +105,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "acesso"
@@ -110,7 +113,7 @@
     {
       "id": "https://www.edsurge.com/news/2026-04-23-districts-relying-more-on-data-to-identify-gifted-students",
       "slug": "districts-relying-more-on-data-to-identify-gifted-students",
-      "title": "Districts Relying More on Data to Identify Gifted Students",
+      "title": "Districts Relying More on Data to Identify Gifted Students ",
       "eyebrow": "educacao",
       "date": "23 de abr. de 2026",
       "publishedAt": "2026-04-23T08:02:00.000Z",
@@ -119,7 +122,7 @@
       "previewClass": "thumb-educacao",
       "sourceName": "EdSurge",
       "sourceUrl": "https://www.edsurge.com/news/2026-04-23-districts-relying-more-on-data-to-identify-gifted-students",
-      "sourceLabel": "Districts Relying More on Data to Identify Gifted Students",
+      "sourceLabel": "Districts Relying More on Data to Identify Gifted Students ",
       "lede": "Schools are finding new, data-driven ways to re-approach gifted and talented programs -- with a focus on inclusivity.",
       "summary": "Schools are finding new, data-driven ways to re-approach gifted and talented programs -- with a focus on inclusivity.",
       "analysis": "",
@@ -138,6 +141,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "edtech"
@@ -165,14 +169,15 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "https://thepienews.com/wp-content/uploads/2026/04/iStock-china-outbound-mobility.jpg",
-      "sourceImageUrl": "https://thepienews.com/wp-content/uploads/2026/04/iStock-china-outbound-mobility.jpg",
+      "imageUrl": "https://thepienews.b-cdn.net/wp-content/uploads/2026/04/iStock-china-outbound-mobility.jpg",
+      "sourceImageUrl": "https://thepienews.b-cdn.net/wp-content/uploads/2026/04/iStock-china-outbound-mobility.jpg",
       "feedImageUrl": "",
       "imageCredit": "",
       "imageFocus": "",
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "mundo"
@@ -190,8 +195,8 @@
       "sourceName": "Inside Higher Ed",
       "sourceUrl": "https://www.insidehighered.com/news/government/student-aid-policy/2026/04/24/ed-official-expands-plans-transfer-loan-portfolio",
       "sourceLabel": "Kent Says Treasury Has ‘Better Talent’ Than ED to Support Student Loans",
-      "lede": "Kent Says Treasury Has ‘Better Talent’ Than ED to Support Student Loans jessica.blake@… Fri, 04/24/2026 - 03:00 AM By shifting oversight of the portfolio, the Trump administration aims to improve loan collection as well",
-      "summary": "Kent Says Treasury Has ‘Better Talent’ Than ED to Support Student Loans jessica.blake@… Fri, 04/24/2026 - 03:00 AM By shifting oversight of the portfolio, the Trump administration aims to improve loan collection as well as prevent borrowers from entering defau",
+      "lede": "<span>Kent Says Treasury Has ‘Better Talent’ Than ED to Support Student Loans</span> <div > <img > </div> <span><span>jessica.blake@…</span></span> <span><time >Fri, 04/24/2026 - 03:00 AM</time> </span> <p>By shifting ov",
+      "summary": "<span>Kent Says Treasury Has ‘Better Talent’ Than ED to Support Student Loans</span> <div > <img > </div> <span><span>jessica.blake@…</span></span> <span><time >Fri, 04/24/2026 - 03:00 AM</time> </span> <p>By shifting oversight of the portfolio, the Trump admi",
       "analysis": "",
       "body": [
         "Inside Higher Ed publicou em 24 de abr. de 2026 a base desta noticia sobre Kent Says Treasury Has ‘Better Talent’ Than ED to Support Student Loans. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -208,6 +213,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "campus"
@@ -243,6 +249,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "acesso"
@@ -278,6 +285,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "edtech"
@@ -313,6 +321,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "mundo"
@@ -330,8 +339,8 @@
       "sourceName": "Inside Higher Ed",
       "sourceUrl": "https://www.insidehighered.com/news/faculty/academic-freedom/2026/04/24/faculty-actually-are-trying-flee-red-states",
       "sourceLabel": "Faculty Actually Are Trying to Flee Red States",
-      "lede": "Faculty Actually Are Trying to Flee Red States Emma Whitford Fri, 04/24/2026 - 03:00 AM Following a year of anecdotes about professors uprooting themselves from Republican-controlled states over academic freedom concerns",
-      "summary": "Faculty Actually Are Trying to Flee Red States Emma Whitford Fri, 04/24/2026 - 03:00 AM Following a year of anecdotes about professors uprooting themselves from Republican-controlled states over academic freedom concerns, a new survey provides evidence that th",
+      "lede": "<span>Faculty Actually Are Trying to Flee Red States</span> <div > <img > </div> <span><span>Emma Whitford</span></span> <span><time >Fri, 04/24/2026 - 03:00 AM</time> </span> <p><span>Following a year of anecdotes about",
+      "summary": "<span>Faculty Actually Are Trying to Flee Red States</span> <div > <img > </div> <span><span>Emma Whitford</span></span> <span><time >Fri, 04/24/2026 - 03:00 AM</time> </span> <p><span>Following a year of anecdotes about professors uprooting themselves from Re",
       "analysis": "",
       "body": [
         "Inside Higher Ed publicou em 24 de abr. de 2026 a base desta noticia sobre Faculty Actually Are Trying to Flee Red States. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -348,6 +357,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "campus"
@@ -365,8 +375,8 @@
       "sourceName": "The Hechinger Report",
       "sourceUrl": "https://hechingerreport.org/proof-points-ies-unspent-funds/",
       "sourceLabel": "As deadline looms, $289 million in federal education research funding may go unspent",
-      "lede": "WASHINGTON, DC &#8211; APRIL 15: White House Office of Management and Budget Director Russell Vought reacts as demonstrators interrupt a House Budget Committee hearing at the U.S. Capitol on April 15, 2026 in Washington,",
-      "summary": "WASHINGTON, DC &#8211; APRIL 15: White House Office of Management and Budget Director Russell Vought reacts as demonstrators interrupt a House Budget Committee hearing at the U.S. Capitol on April 15, 2026 in Washington, DC. Vought is testifying on President T",
+      "lede": "More than a third of the federal government’s education research budget — an estimated $289 million — could go unspent this year, according to an analysis by an advocacy group. The Knowledge Alliance, which represents 20",
+      "summary": "More than a third of the federal government’s education research budget — an estimated $289 million — could go unspent this year, according to an analysis by an advocacy group. The Knowledge Alliance, which represents 20 private research organizations includin",
       "analysis": "",
       "body": [
         "The Hechinger Report publicou em 22 de abr. de 2026 a base desta noticia sobre As deadline looms, $289 million in federal education research funding may go unspent. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -383,6 +393,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "acesso"
@@ -418,6 +429,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
+      "editorialPriority": "",
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "edtech"

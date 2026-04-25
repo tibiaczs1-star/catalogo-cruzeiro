@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T18:09:17.769Z",
+  "lastUpdatedAt": "2026-04-25T19:05:40.891Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6243,6 +6243,36 @@
       "source": "chat",
       "rawRequest": "tirar PubPaid do meio, reservar para nao subir ate eu mandar; subir o que der agora",
       "summary": "Reservar PubPaid fora do commit/deploy atual e subir apenas home/sync/editorial pronto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-corrigir-bloco-celebridades-diario-vazio",
+      "createdAt": "2026-04-25T18:30:40.687Z",
+      "updatedAt": "2026-04-25T18:30:40.687Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuario enviou captura do bloco Celebridades & Polêmicas do Dia vazio e perguntou 'o que aconteceu aqui'. Diagnosticar e corrigir o espaco morto/cards invisiveis.",
+      "summary": "Corrigir bloco Celebridades diário vazio",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-correcao-urgente-da-pesquisa-acre-2026-remover-marcus-marcos-alexandre-das-opcoe",
+      "createdAt": "2026-04-25T19:05:40.891Z",
+      "updatedAt": "2026-04-25T19:05:40.891Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tire marcos alexandre da pesquisa, ele nao e candidato a governo e ponha o thor; tem o bocalon tambem; pesquisa ja esta no ar",
+      "summary": "Correção urgente da Pesquisa Acre 2026: remover Marcus/Marcos Alexandre das opções novas e incluir Thor Dantas e Tião Bocalom como nomes testados para governo.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

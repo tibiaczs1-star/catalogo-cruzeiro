@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T18:03:29.686Z",
+  "lastUpdatedAt": "2026-04-25T18:30:40.710Z",
   "assets": [
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
@@ -926,6 +926,15 @@
       "note": "Relatorio do sync online-local de 2026-04-25 com home summaries, auditoria de imagens zerada e Mailza/Mailsa priorizada.",
       "linkedOrderIds": [],
       "createdAt": "2026-04-25T18:03:29.686Z"
+    },
+    {
+      "id": "monthly-fixed-png",
+      "kind": "image",
+      "path": "output/playwright/monthly-fixed.png",
+      "source": "workspace",
+      "note": "Validacao visual do bloco Celebridades & Polêmicas do Dia apos corrigir reveal dos cards dinamicos",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-25T18:30:40.710Z"
     }
   ]
 }

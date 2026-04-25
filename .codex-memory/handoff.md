@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: 2026-04-25T18:09:18.016Z
+Updated: 2026-04-25T18:30:48.236Z
 
 Lifestile Acre pronto como editoria exclusivamente de moda e ja destacado como acesso subordinado. Usuario pediu para tirar PubPaid do pacote atual; PubPaid modificada fica reservada e nao deve entrar em commit/deploy ate nova ordem explicita.
 
@@ -27,6 +27,11 @@ Validação: `node --check script.js`, `node --check server.js`, `styles.css` br
 
 Bloqueio para subir: há conflitos/estados `UU`/`DU` no worktree fora deste ajuste. Resolver/isolar antes de commit/push.
 
+## Atualização 2026-04-25T18:30:48.236Z - Celebridades vazio corrigido
+
+Corrigido o vazio no bloco `Celebridades & Polêmicas do Dia`: `renderDynamicMonthlyBuzz` agora adiciona `active/is-visible` aos cards criados dinamicamente, e a grade dinamica foi ajustada para 3 colunas desktop.
+
+Validação: `node --check script.js`, `styles.css` brace-balance 0, `npm run review:team` com 0 achados e screenshot `output/playwright/monthly-fixed.png`.
 
 ## Atualizacao 2026-04-25T15:00:00.000Z - Botao Lifestile subordinado
 

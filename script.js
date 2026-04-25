@@ -5991,6 +5991,9 @@ const renderDynamicMonthlyBuzz = async (options = {}) => {
   const { stories, agentPulse } = await pickMonthlyDynamicStories(options);
   monthlyBuzzGrid.classList.add("is-dynamic-monthly");
   monthlyBuzzGrid.innerHTML = stories.map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse)).join("");
+  monthlyBuzzGrid
+    .querySelectorAll(".reveal")
+    .forEach((node) => node.classList.add("active", "is-visible"));
   registerArticleCardLinks(monthlyBuzzGrid);
 };
 

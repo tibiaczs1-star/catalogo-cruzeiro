@@ -20367,7 +20367,7 @@ body.editorial-home #monthly .month-card h3 {
 }
 
 body.editorial-home #monthly .month-grid.is-dynamic-monthly {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
 }
 
@@ -20380,7 +20380,7 @@ body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card 
 
 body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(1),
 body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(2) {
-  grid-column: span 2;
+  grid-column: span 1;
 }
 
 body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(n + 3) {
