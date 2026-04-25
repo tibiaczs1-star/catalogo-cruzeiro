@@ -301,14 +301,16 @@ const ACRE_2026_POLL_OPTIONS = {
   vote2026: [
     "Alan Rick",
     "Mailza Assis",
-    "Marcus Alexandre",
+    "Tiao Bocalom",
+    "Thor Dantas",
     "Ainda nao decidi",
     "Branco/Nulo"
   ],
   secondChoice: [
     "Alan Rick",
     "Mailza Assis",
-    "Marcus Alexandre",
+    "Tiao Bocalom",
+    "Thor Dantas",
     "Ainda nao decidi",
     "Branco/Nulo",
     "Nenhuma segunda opcao"
@@ -317,8 +319,8 @@ const ACRE_2026_POLL_OPTIONS = {
     "Nao rejeito nenhum",
     "Alan Rick",
     "Mailza Assis",
-    "Marcus Alexandre",
     "Tiao Bocalom",
+    "Thor Dantas",
     "Rejeito todos"
   ],
   priorities: [
