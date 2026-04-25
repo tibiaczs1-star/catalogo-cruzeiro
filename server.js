@@ -5120,6 +5120,44 @@ function isBrazilianBuzzItem(item = {}) {
   );
 }
 
+const PUBLIC_PORTUGUESE_TOPIC_GUARD = new Set(["games", "kids", "study", "anime"]);
+const ENGLISH_CARD_LEAK_PATTERN =
+  /\b(the post|appeared first|read more|click here|new games|new toys|monthly games|take home|host live|meet the|whole sick|brand and creator|creator|creators|partnerships|streamer|streamers|showrunner|spin-off|hub|review|study destination|higher ed|public trust|students|teachers|schools|website accessibility|will it help|launching|launches|reveals|unveils|announced|trailer reveals|trailer is|worth the wait|with evangelion|for april|for january|the future of|the age of|the year ahead|the classroom|the entertainment industry)\b|]]>|<img\b/i;
+const PORTUGUESE_CARD_SIGNAL_PATTERN =
+  /\b(o|a|os|as|um|uma|de|do|da|dos|das|para|com|em|no|na|que|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?)\b/i;
+
+function hasEnglishCardLeak(value = "") {
+  const text = cleanShortText(value || "", 500);
+  if (!text) return true;
+  return ENGLISH_CARD_LEAK_PATTERN.test(text);
+}
+
+function isPublicPortugueseTopicItem(item = {}, topic = "") {
+  const normalizedTopic = normalizeText(topic || item.topic || "");
+  if (!PUBLIC_PORTUGUESE_TOPIC_GUARD.has(normalizedTopic)) {
+    return true;
+  }
+
+  const title = cleanShortText(item.title || item.sourceLabel || "", 180);
+  const summary = cleanShortText(item.summary || item.lede || item.description || "", 260);
+  const sourceLabel = cleanShortText(item.sourceLabel || "", 180);
+  const combined = `${title} ${summary} ${sourceLabel}`.trim();
+
+  if (!title || title.length < 4) {
+    return false;
+  }
+
+  if (hasEnglishCardLeak(title) || hasEnglishCardLeak(sourceLabel) || hasEnglishCardLeak(summary)) {
+    return false;
+  }
+
+  return PORTUGUESE_CARD_SIGNAL_PATTERN.test(combined);
+}
+
+function filterPublicTopicFeedItems(items = [], topic = "") {
+  return (Array.isArray(items) ? items : []).filter((item) => isPublicPortugueseTopicItem(item, topic));
+}
+
 async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } = {}) {
   const normalizedTopic = normalizeText(topic);
   const sources = getTopicFeedSources(normalizedTopic);
@@ -5161,9 +5199,12 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
 
   const reports = sourceResults.map((entry) => entry.report);
   const normalizedItems = pickBalancedTopicFeedItems(
-    sourceResults
-      .flatMap((entry) => entry.items)
-      .map((item) => normalizeTopicFeedItem(item, normalizedTopic, item)),
+    filterPublicTopicFeedItems(
+      sourceResults
+        .flatMap((entry) => entry.items)
+        .map((item) => normalizeTopicFeedItem(item, normalizedTopic, item)),
+      normalizedTopic
+    ),
     Math.max(1, Math.min(40, totalLimit))
   );
 
@@ -5171,7 +5212,7 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
     normalizedTopic === "buzz" ? normalizedItems.filter(isBrazilianBuzzItem) : normalizedItems,
     normalizedTopic === "buzz"
       ? buildTopicFeedFallback(normalizedTopic, totalLimit).filter(isBrazilianBuzzItem)
-      : buildTopicFeedFallback(normalizedTopic, totalLimit),
+      : filterPublicTopicFeedItems(buildTopicFeedFallback(normalizedTopic, totalLimit), normalizedTopic),
     totalLimit
   );
   const enrichedItems = repairNewsImagesForDisplay(await enrichNewsItemsWithSourceImages(mergedItems));
@@ -5206,7 +5247,8 @@ async function getTopicFeed(topic, limit = 12) {
   const cachedItems = Array.isArray(cached?.items)
     ? cached.items.map((item) => normalizeTopicFeedItem(item, normalizedTopic, item))
     : [];
-  const scopedCachedItems = normalizedTopic === "buzz" ? cachedItems.filter(isBrazilianBuzzItem) : cachedItems;
+  const publicCachedItems = filterPublicTopicFeedItems(cachedItems, normalizedTopic);
+  const scopedCachedItems = normalizedTopic === "buzz" ? publicCachedItems.filter(isBrazilianBuzzItem) : publicCachedItems;
   const cachedUpdatedAt = cached?.updatedAt ? Date.parse(cached.updatedAt) : 0;
   const cacheIsFresh =
     scopedCachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < TOPIC_FEED_TTL_MS;
@@ -5246,12 +5288,12 @@ async function getTopicFeed(topic, limit = 12) {
     // queda para cache ou fallback abaixo
   }
 
-  if (cachedItems.length) {
+  if (publicCachedItems.length) {
     return {
       ok: true,
       topic: normalizedTopic,
       updatedAt: cached?.updatedAt || null,
-      items: cachedItems.slice(0, safeLimit),
+      items: publicCachedItems.slice(0, safeLimit),
       reports: Array.isArray(cached?.reports) ? cached.reports : [],
       fallbackUsed: Boolean(cached?.fallbackUsed),
       stale: true

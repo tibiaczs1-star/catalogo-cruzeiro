@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T23:31:55.237Z",
+  "lastUpdatedAt": "2026-04-25T23:54:46.836Z",
   "assets": [
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
@@ -957,6 +957,15 @@
         "2026-04-25-limpar-aviso-publico-de-cookies-no-mobile-remover-sobreposicoes-de-cards-fotos-n"
       ],
       "createdAt": "2026-04-25T23:31:55.237Z"
+    },
+    {
+      "id": "mobile-cookie-card-flow-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mobile-cookie-card-flow.png",
+      "source": "workspace",
+      "note": "Captura mobile validando novo fluxo: card de cookies aparece primeiro, botão Aceitar cookies e continuar libera a navegação.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-25T23:54:46.836Z"
     }
   ]
 }

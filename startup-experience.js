@@ -355,8 +355,18 @@
     banner.setAttribute("aria-label", "Consentimento de cookies");
     banner.innerHTML = `
       <span class="cookie-consent-handle" aria-hidden="true"></span>
+      <p class="cookie-consent-kicker">Antes de navegar</p>
+      <h3>Cookies e preferencias</h3>
+      <p>
+        Usamos cookies essenciais e metricas basicas para manter o portal estavel,
+        medir carregamento e melhorar a leitura no celular.
+      </p>
+      <span class="cookie-consent-inline-note">
+        <span class="cookie-consent-inline-dot" aria-hidden="true"></span>
+        Voce continua depois do aceite
+      </span>
       <div class="cookie-consent-actions">
-        <button class="cookie-consent-accept" type="button">Continuar</button>
+        <button class="cookie-consent-accept" type="button">Aceitar cookies e continuar</button>
       </div>
     `;
     return banner;
@@ -372,6 +382,7 @@
 
     const banner = createMobileConsentBanner();
     document.body.appendChild(banner);
+    document.body.classList.add("catalogo-lock-scroll", "mobile-cookie-consent-active");
     releaseFounderPreludeGate();
 
     banner.querySelector(".cookie-consent-accept")?.addEventListener("click", () => {
@@ -381,6 +392,7 @@
       rememberWelcomeAcceptedToday();
       dispatchConsent(true);
       banner.remove();
+      document.body.classList.remove("catalogo-lock-scroll", "mobile-cookie-consent-active");
       dispatchIntroFinished();
       if (typeof callback === "function") callback();
     });

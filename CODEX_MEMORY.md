@@ -1,5 +1,12 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-25 - Fluxo mobile de cookies corrigido
+
+- Corrigido o feedback do usuario sobre o botao `Continuar` nos cookies mobile: o celular agora mostra primeiro um card/bottom sheet de cookies e preferencias, com a pagina ao fundo bloqueada.
+- O botao do card virou `Aceitar cookies e continuar`, deixando claro que primeiro vem o aceite e depois a navegacao.
+- Arquivos tocados: `startup-experience.js`, `styles.css`, `index.html` e memoria local em `.codex-memory/`.
+- Validacoes: `node --check startup-experience.js`, `node --check script.js`, `node --check server.js`, brace-balance 0 em `styles.css`, `startup-experience.css` e `mobile-home-final.css`; Playwright mobile gerou `output/playwright/mobile-cookie-card-flow.png` e confirmou consentimento gravado/liberacao da rolagem apos aceite.
+
 ## Atualizacao rapida 2026-04-25 - Hotfix imagens repetidas no Buzz
 
 - Corrigido feedback visual do bloco de polêmicas/buzz: três matérias diferentes da mesma área estavam exibindo a mesma imagem genérica.

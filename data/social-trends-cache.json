@@ -1,9 +1,190 @@
 {
   "ok": true,
-  "updatedAt": "2026-04-25T21:21:00.000Z",
-  "items": [],
-  "reports": [],
-  "external": false,
-  "stale": true,
-  "note": "Cache limpo: bloco social deve aceitar apenas hashtags e trending topics em portugues/Brasil."
+  "updatedAt": "2026-04-25T23:51:23.077Z",
+  "items": [
+    {
+      "id": "trends24-brazil-brasileiraonoprimevideo",
+      "title": "#brasileirãonoprimevideo",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: #brasileirãonoprimevideo.",
+      "category": "X/Twitter",
+      "sourceName": "Trends24 Brasil",
+      "sourceUrl": "https://trends24.in/brazil/",
+      "publishedAt": "2026-04-25T23:51:21.128Z",
+      "date": "2026-04-25T23:51:21.128Z",
+      "externalSource": true,
+      "socialPlatform": "X/Twitter",
+      "coverageLayer": "brasil",
+      "topicGroup": "twitter-trends",
+      "hashtags": [
+        "#brasileirãonoprimevideo"
+      ]
+    },
+    {
+      "id": "trends24-brazil-lulabrasilfeliz",
+      "title": "#LulaBrasilFeliz",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: #LulaBrasilFeliz.",
+      "category": "X/Twitter",
+      "sourceName": "Trends24 Brasil",
+      "sourceUrl": "https://trends24.in/brazil/",
+      "publishedAt": "2026-04-25T23:51:21.128Z",
+      "date": "2026-04-25T23:51:21.128Z",
+      "externalSource": true,
+      "socialPlatform": "X/Twitter",
+      "coverageLayer": "brasil",
+      "topicGroup": "twitter-trends",
+      "hashtags": [
+        "#LulaBrasilFeliz"
+      ]
+    },
+    {
+      "id": "trends24-brazil-musicainternacionaldoano",
+      "title": "#MusicaInternacionaldoAno",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: #MusicaInternacionaldoAno.",
+      "category": "X/Twitter",
+      "sourceName": "Trends24 Brasil",
+      "sourceUrl": "https://trends24.in/brazil/",
+      "publishedAt": "2026-04-25T23:51:21.128Z",
+      "date": "2026-04-25T23:51:21.128Z",
+      "externalSource": true,
+      "socialPlatform": "X/Twitter",
+      "coverageLayer": "brasil",
+      "topicGroup": "twitter-trends",
+      "hashtags": [
+        "#MusicaInternacionaldoAno"
+      ]
+    },
+    {
+      "id": "best-hashtags-acre-acre",
+      "title": "#acre",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #acre.",
+      "category": "Instagram",
+      "sourceName": "Best Hashtags Acre",
+      "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
+      "publishedAt": "2026-04-25T23:51:23.075Z",
+      "date": "2026-04-25T23:51:23.075Z",
+      "externalSource": true,
+      "socialPlatform": "Instagram",
+      "coverageLayer": "brasil",
+      "topicGroup": "instagram-hashtags",
+      "hashtags": [
+        "#acre"
+      ]
+    },
+    {
+      "id": "best-hashtags-acre-amazonia",
+      "title": "#amazonia",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #amazonia.",
+      "category": "Instagram",
+      "sourceName": "Best Hashtags Acre",
+      "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
+      "publishedAt": "2026-04-25T23:51:23.075Z",
+      "date": "2026-04-25T23:51:23.075Z",
+      "externalSource": true,
+      "socialPlatform": "Instagram",
+      "coverageLayer": "brasil",
+      "topicGroup": "instagram-hashtags",
+      "hashtags": [
+        "#amazonia"
+      ]
+    },
+    {
+      "id": "best-hashtags-acre-czs",
+      "title": "#czs",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #czs.",
+      "category": "Instagram",
+      "sourceName": "Best Hashtags Acre",
+      "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
+      "publishedAt": "2026-04-25T23:51:23.075Z",
+      "date": "2026-04-25T23:51:23.075Z",
+      "externalSource": true,
+      "socialPlatform": "Instagram",
+      "coverageLayer": "brasil",
+      "topicGroup": "instagram-hashtags",
+      "hashtags": [
+        "#czs"
+      ]
+    },
+    {
+      "id": "best-hashtags-brasil-futebol",
+      "title": "#futebol",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #futebol.",
+      "category": "Instagram",
+      "sourceName": "Best Hashtags Brasil",
+      "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
+      "publishedAt": "2026-04-25T23:51:22.696Z",
+      "date": "2026-04-25T23:51:22.696Z",
+      "externalSource": true,
+      "socialPlatform": "Instagram",
+      "coverageLayer": "brasil",
+      "topicGroup": "instagram-hashtags",
+      "hashtags": [
+        "#futebol"
+      ]
+    },
+    {
+      "id": "best-hashtags-brasil-musica",
+      "title": "#musica",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #musica.",
+      "category": "Instagram",
+      "sourceName": "Best Hashtags Brasil",
+      "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
+      "publishedAt": "2026-04-25T23:51:22.696Z",
+      "date": "2026-04-25T23:51:22.696Z",
+      "externalSource": true,
+      "socialPlatform": "Instagram",
+      "coverageLayer": "brasil",
+      "topicGroup": "instagram-hashtags",
+      "hashtags": [
+        "#musica"
+      ]
+    },
+    {
+      "id": "best-hashtags-brasil-saude",
+      "title": "#saude",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #saude.",
+      "category": "Instagram",
+      "sourceName": "Best Hashtags Brasil",
+      "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
+      "publishedAt": "2026-04-25T23:51:22.696Z",
+      "date": "2026-04-25T23:51:22.696Z",
+      "externalSource": true,
+      "socialPlatform": "Instagram",
+      "coverageLayer": "brasil",
+      "topicGroup": "instagram-hashtags",
+      "hashtags": [
+        "#saude"
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "source": "getdaytrends-brazil",
+      "platform": "X/Twitter",
+      "ok": true,
+      "count": 1,
+      "url": "https://getdaytrends.com/brazil/"
+    },
+    {
+      "source": "trends24-brazil",
+      "platform": "X/Twitter",
+      "ok": true,
+      "count": 3,
+      "url": "https://trends24.in/brazil/"
+    },
+    {
+      "source": "best-hashtags-brasil",
+      "platform": "Instagram",
+      "ok": true,
+      "count": 3,
+      "url": "https://best-hashtags.com/hashtag/brasil/"
+    },
+    {
+      "source": "best-hashtags-acre",
+      "platform": "Instagram",
+      "ok": true,
+      "count": 3,
+      "url": "https://best-hashtags.com/hashtag/acre/"
+    }
+  ],
+  "external": true
 }
