@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-25 - Correcoes mobile de cookies, palco e bandeira
+
+- Feedback visual mobile aplicado: o banner de cookies no celular deixou de exibir texto publico/editorial e virou um controle discreto com botao `Continuar`.
+- `startup-experience.js` tambem trocou os botoes antigos de entrada para `Continuar`, reduzindo a carga publica do fluxo.
+- A home mobile nao mostra mais o `hero-office-photo-card` dentro do palco dos agentes, evitando imagem sobre imagem; o balao do palco foi preso no rodape da cena para nao cobrir foto/card.
+- A bandeira do Acre em `pesquisa-acre-2026.css` foi corrigida para amarelo e verde, mantendo a estrela vermelha.
+- Cache-busts atualizados em `index.html` e `pesquisa-acre-2026.html`.
+- Validacoes: `node --check startup-experience.js`, brace-balance 0 em `styles.css`, `mobile-home-final.css` e `pesquisa-acre-2026.css`, `npm run review:team` com 0 achados, captura Playwright da enquete em `output/playwright/mobile-acre-flag-fix-full.png`.
+
 ## Atualizacao rapida 2026-04-25 - Anti-repeticao real entre blocos
 
 - Corrigido o vazamento do fluxo editorial anti-repeticao: a home ainda podia repetir a mesma pauta entre blocos quando a noticia vinha com titulo/URL diferente ou por topic-feed.

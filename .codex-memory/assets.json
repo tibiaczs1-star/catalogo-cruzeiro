@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T18:30:40.710Z",
+  "lastUpdatedAt": "2026-04-25T23:31:55.237Z",
   "assets": [
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
@@ -935,6 +935,28 @@
       "note": "Validacao visual do bloco Celebridades & Polêmicas do Dia apos corrigir reveal dos cards dinamicos",
       "linkedOrderIds": [],
       "createdAt": "2026-04-25T18:30:40.710Z"
+    },
+    {
+      "id": "mobile-acre-flag-fix-full-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mobile-acre-flag-fix-full.png",
+      "source": "playwright",
+      "note": "Captura full-page mobile local validando a bandeira do Acre em amarelo e verde apos ajuste.",
+      "linkedOrderIds": [
+        "2026-04-25-limpar-aviso-publico-de-cookies-no-mobile-remover-sobreposicoes-de-cards-fotos-n"
+      ],
+      "createdAt": "2026-04-25T23:31:55.227Z"
+    },
+    {
+      "id": "feedback-cookies-office-acre-mobile-20260425",
+      "kind": "image-set",
+      "path": "chat-attachments/2026-04-25-cookies-office-acre-mobile",
+      "source": "chat",
+      "note": "Tres capturas mobile enviadas pelo usuario: banner de cookies cobrindo card, card/foto sobrepostos no palco da home e bandeira do Acre com branco no lugar do amarelo.",
+      "linkedOrderIds": [
+        "2026-04-25-limpar-aviso-publico-de-cookies-no-mobile-remover-sobreposicoes-de-cards-fotos-n"
+      ],
+      "createdAt": "2026-04-25T23:31:55.237Z"
     }
   ]
 }

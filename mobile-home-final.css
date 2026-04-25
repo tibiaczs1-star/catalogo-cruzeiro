@@ -1554,10 +1554,21 @@ body.editorial-home .site-footer .footer-bottom-utility-buttons {
     display: none !important;
   }
 
+  body.editorial-home .hero-office-photo-card {
+    display: none !important;
+  }
+
   body.editorial-home .catalogo-agents-bubble {
+    left: 14px !important;
+    right: 14px !important;
+    top: auto !important;
+    bottom: 14px !important;
     background: rgba(7, 33, 66, 0.94) !important;
     color: #f5fbff !important;
     border-color: rgba(183, 223, 255, 0.2) !important;
+    max-width: none !important;
+    width: auto !important;
+    text-align: center !important;
   }
 
   body.editorial-home .mobile-agent-hub {

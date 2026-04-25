@@ -355,15 +355,8 @@
     banner.setAttribute("aria-label", "Consentimento de cookies");
     banner.innerHTML = `
       <span class="cookie-consent-handle" aria-hidden="true"></span>
-      <p class="cookie-consent-kicker">Entrada rápida</p>
-      <h3>Cookies básicos para seguir no mobile</h3>
-      <p>Só o essencial para carregar melhor esta visita. Você aceita uma vez e continua direto.</p>
-      <div class="cookie-consent-inline-note" aria-hidden="true">
-        <span class="cookie-consent-inline-dot"></span>
-        <span>sem popup grande, sem palco de abertura</span>
-      </div>
       <div class="cookie-consent-actions">
-        <button class="cookie-consent-accept" type="button">Aceitar e continuar</button>
+        <button class="cookie-consent-accept" type="button">Continuar</button>
       </div>
     `;
     return banner;
@@ -405,7 +398,7 @@
 
         <div class="catalogo-welcome-actions">
           <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button">
-            Aceitar e continuar
+            Continuar
           </button>
         </div>
       `;
@@ -476,7 +469,7 @@
 
       <div class="catalogo-welcome-actions">
         <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button" disabled>
-          Aceitar e continuar
+          Continuar
         </button>
         <a class="catalogo-btn ghost" href="./legal.html" target="_blank" rel="noopener noreferrer">
           Ver politica

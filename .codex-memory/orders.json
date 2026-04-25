@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T22:04:37.354Z",
+  "lastUpdatedAt": "2026-04-25T23:31:46.034Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6582,6 +6582,43 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-04-25-limpar-aviso-publico-de-cookies-no-mobile-remover-sobreposicoes-de-cards-fotos-n",
+      "createdAt": "2026-04-25T23:31:46.034Z",
+      "updatedAt": "2026-04-25T23:31:46.034Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "cokies editado pra editor, sem nada a dizer pro publico; card em cima das imagens fica dificil; imagem em cima de imagem; bandeira do Acre e verde e amarela",
+      "summary": "Limpar aviso publico de cookies no mobile, remover sobreposicoes de cards/fotos na home mobile e corrigir bandeira do Acre para verde e amarela.",
+      "normalizedTasks": [
+        "reduzir banner mobile de cookies a botao discreto",
+        "remover foto-card sobreposta do palco editorial no mobile",
+        "reposicionar balao do palco sem cobrir foto",
+        "corrigir bandeira do Acre para amarelo e verde",
+        "validar sintaxe e review"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        "styles.css",
+        "mobile-home-final.css",
+        "pesquisa-acre-2026.css",
+        "index.html",
+        "pesquisa-acre-2026.html"
+      ],
+      "assetRefs": [
+        "output/playwright/mobile-acre-flag-fix-full.png",
+        "output/playwright/mobile-cookie-office-fix.png"
+      ],
+      "tags": [
+        "mobile",
+        "home",
+        "cookies",
+        "pesquisa-acre-2026",
+        "visual"
+      ],
+      "nextSteps": [],
+      "notes": "Feedback visual enviado por 3 capturas mobile em 2026-04-25 18:05."
     }
   ]
 }
