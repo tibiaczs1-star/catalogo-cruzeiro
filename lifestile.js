@@ -84,55 +84,55 @@
       title: "Como montar um look real no Acre",
       summary: "Calor, chuva, trabalho, faculdade e festa entram juntos na leitura de moda local.",
       category: "moda local",
-      sourceName: "Lifestile Acre"
+      sourceName: "Estilo Acre"
     },
     {
       title: "Beleza de salão também é comportamento",
-      summary: "Make, cabelo, unhas e autocuidado viram serviço quando conectados a agenda e profissionais locais.",
+      summary: "Maquiagem, cabelo, unhas e autocuidado viram serviço quando conectados a agenda e profissionais locais.",
       category: "beleza",
-      sourceName: "Lifestile Acre"
+      sourceName: "Estilo Acre"
     },
     {
-      title: "Creators fashion e vitrines movimentam a imagem pública da cidade",
+      title: "Criadores de moda e vitrines movimentam a imagem pública da cidade",
       summary: "O radar observa sinais públicos de moda e transforma repercussão em tendência com contexto.",
       category: "moda nas redes",
-      sourceName: "Lifestile Acre"
+      sourceName: "Estilo Acre"
     },
     {
       title: "Cinco sinais para saber se uma vitrine local merece matéria",
-      summary: "Coleção, campanha, beleza, styling e presença nas redes indicam quando o comércio vira destaque fashion.",
+      summary: "Coleção, campanha, beleza, produção de estilo e presença nas redes indicam quando o comércio vira destaque de moda.",
       category: "vitrine",
-      sourceName: "Lifestile Acre"
+      sourceName: "Estilo Acre"
     },
     {
       title: "O guia do look de formatura, show e evento no Acre",
       summary: "A página acompanha vestidos, sandálias, cabelo, maquiagem e acessórios quando aparecem em eventos públicos.",
-      category: "eventos fashion",
-      sourceName: "Lifestile Acre"
+      category: "eventos de moda",
+      sourceName: "Estilo Acre"
     },
     {
-      title: "Beleza acreana: cabelo, make e unha como guia de serviço",
+      title: "Beleza acreana: cabelo, maquiagem e unha como guia de serviço",
       summary: "Salões, profissionais e tendências entram com leitura útil para quem quer referência local.",
       category: "beleza",
-      sourceName: "Lifestile Acre"
+      sourceName: "Estilo Acre"
     },
     {
-      title: "Street style em Cruzeiro do Sul: como captar sem forçar",
+      title: "Moda de rua em Cruzeiro do Sul: como captar sem forçar",
       summary: "O foco é roupa possível, presença na cidade, clima e combinação com a rotina real.",
-      category: "street style",
-      sourceName: "Lifestile Acre"
+      category: "moda de rua",
+      sourceName: "Estilo Acre"
     },
     {
       title: "Acessórios que ajudam a contar a moda local",
       summary: "Bolsa, óculos, sandália, bijuteria e cabelo contam tanto quanto a roupa principal.",
       category: "acessórios",
-      sourceName: "Lifestile Acre"
+      sourceName: "Estilo Acre"
     },
     {
-      title: "Como transformar reels de moda em tendência local",
+      title: "Como transformar vídeos curtos de moda em tendência local",
       summary: "O radar procura repetição, estética, serviço, marca local e conversa pública antes de publicar.",
-      category: "redes fashion",
-      sourceName: "Lifestile Acre"
+      category: "moda nas redes",
+      sourceName: "Estilo Acre"
     }
   ];
 
@@ -159,7 +159,7 @@
     ].join(" ");
     const titleText = String(item?.title || "");
     const directText = [item?.title, item?.summary, item?.lede, item?.category, item?.categoryKey].join(" ");
-    const isSeed = String(item?.id || "").startsWith("fashion-seed-") || item?.sourceName === "Lifestile Acre";
+    const isSeed = String(item?.id || "").startsWith("fashion-seed-") || item?.sourceName === "Estilo Acre";
     return (isSeed || directFashionWords.test(titleText)) && !forbiddenNewsWords.test(haystack) && !forbiddenLifestyleNoise.test(directText);
   };
 
@@ -227,7 +227,7 @@
       art.style.setProperty("--hero-image", lead.seedImage);
     }
     if (title) title.textContent = lead?.title || "O Acre agora tem uma editoria de moda de verdade.";
-    if (summary) summary.textContent = truncate(lead?.summary || lead?.lede || "Moda, beleza, vitrines, creators fashion e novidades públicas entram em leitura local.", 220);
+    if (summary) summary.textContent = truncate(lead?.summary || lead?.lede || "Moda, beleza, vitrines, criadores e novidades públicas entram em leitura local.", 220);
     if (action) {
       const href = hrefOf(lead);
       action.href = href;
@@ -293,8 +293,8 @@
           <div class="article-card-content">
             <em>${escapeHtml(categoryLabel(item))}</em>
             <h3>${escapeHtml(truncate(item.title, 92))}</h3>
-            <p>${escapeHtml(truncate(item.summary || item.lede || "Artigo em curadoria pelo Lifestile Acre.", 134))}</p>
-            <footer>${escapeHtml(truncate(item.sourceName || "Lifestile Acre", 42))}</footer>
+            <p>${escapeHtml(truncate(item.summary || item.lede || "Artigo em curadoria pelo Estilo Acre.", 134))}</p>
+            <footer>${escapeHtml(truncate(item.sourceName || "Estilo Acre", 42))}</footer>
           </div>
         </a>
       `;
@@ -308,7 +308,7 @@
       .slice(0, 8)
       .map((item) => ({
         title: item.title,
-        summary: item.summary || item.lede || "Sinal fashion do feed editorial do portal.",
+        summary: item.summary || item.lede || "Sinal de moda do radar editorial do portal.",
         sourceName: item.sourceName || "Portal",
         sourceUrl: hrefOf(item),
         socialPlatform: "Moda no portal",
@@ -318,7 +318,7 @@
       id: `fashion-social-seed-${index}`,
       title: item.title,
       summary: item.summary,
-      sourceName: "Lifestile Acre",
+      sourceName: "Estilo Acre",
       sourceUrl: item.sourceUrl,
       socialPlatform: ["Instagram", "TikTok", "Vitrine", "Beleza"][index % 4],
       publishedAt: new Date(Date.now() - index * 45 * 60 * 1000).toISOString()
@@ -326,7 +326,7 @@
     const merged = mergeUnique(articleSignals, fallbackSocial).slice(0, 14);
     if (socialUpdated) {
       const latest = merged.find((item) => item.publishedAt || item.date);
-      socialUpdated.textContent = latest ? `atualizado ${formatDate(latest.publishedAt || latest.date)}` : "feed social ativo";
+      socialUpdated.textContent = latest ? `atualizado ${formatDate(latest.publishedAt || latest.date)}` : "radar social ativo";
     }
     socialFeed.innerHTML = merged.map((item, index) => {
       const href = item.sourceUrl || item.url || "#";

@@ -290,8 +290,8 @@ const homepageStaticPreviewBySlug = {
   "pixel-art-nao-e-nostalgia-e-interface": {
     slug: "pixel-art-nao-e-nostalgia-e-interface",
     title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
-    category: "Games e arte",
-    sourceName: "Cheffe Call - agentes de Arte e Game Design",
+    category: "Jogos e arte",
+    sourceName: "Cheffe Call - agentes de arte e design de jogos",
     imageUrl: "./assets/home-cache/pixel-art-editorial.svg",
     feedImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
     sourceImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
@@ -302,7 +302,7 @@ const homepageStaticPreviewBySlug = {
     slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     title: "Filme de Michael Jackson entra no radar com peso global e chance de movimentar o Cine Romeu",
     category: "Cinema em destaque",
-    sourceName: "Editorial Catalogo Cruzeiro do Sul",
+    sourceName: "Editorial Catálogo Cruzeiro do Sul",
     imageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
     feedImageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
     sourceImageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
@@ -310,9 +310,9 @@ const homepageStaticPreviewBySlug = {
   },
   "filme-bolsonaro-memes-reacao-redes": {
     slug: "filme-bolsonaro-memes-reacao-redes",
-    title: "Filme sobre Bolsonaro ja chega cercado por memes, ironias e uma boa dose de gente irritada",
-    category: "Memes e politica pop",
-    sourceName: "Editorial Catalogo Cruzeiro do Sul",
+    title: "Filme sobre Bolsonaro já chega cercado por memes, ironias e uma boa dose de gente irritada",
+    category: "Memes e política pop",
+    sourceName: "Editorial Catálogo Cruzeiro do Sul",
     imageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
     feedImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
     sourceImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
@@ -2350,8 +2350,8 @@ if (guideTip && !performanceLiteMode) {
 const mediaDefaults = {
   badge: "",
   label: "",
-  note: "Cobertura direta do Catalogo Cruzeiro do Sul",
-  creditLabel: "Politica visual do Catalogo",
+  note: "Cobertura direta do Catálogo Cruzeiro do Sul",
+  creditLabel: "Política visual do Catálogo",
   creditUrl: "./index.html#desmonte"
 };
 
@@ -3240,6 +3240,10 @@ const newsSurfaceReservations = {
   popular: new Set()
 };
 
+const newsSurfaceImageReservations = Object.fromEntries(
+  Object.keys(newsSurfaceReservations).map((surfaceName) => [surfaceName, new Set()])
+);
+
 const getArticleUsageKey = (article = {}) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
   const dateKey = getArticleDateKey(normalizedArticle);
@@ -3259,6 +3263,11 @@ const reserveSurfaceArticles = (surfaceName = "", articles = []) => {
       .map((article) => getArticleUsageKey(article))
       .filter(Boolean)
   );
+  newsSurfaceImageReservations[surfaceName] = new Set(
+    (Array.isArray(articles) ? articles : [])
+      .map((article) => getArticleImageKey(article))
+      .filter(Boolean)
+  );
 };
 
 const buildReservedArticleKeys = (excludedSurfaces = []) => {
@@ -3266,6 +3275,21 @@ const buildReservedArticleKeys = (excludedSurfaces = []) => {
   const reserved = new Set();
 
   Object.entries(newsSurfaceReservations).forEach(([surfaceName, surfaceKeys]) => {
+    if (excluded.has(surfaceName) || !(surfaceKeys instanceof Set)) {
+      return;
+    }
+
+    surfaceKeys.forEach((key) => reserved.add(key));
+  });
+
+  return reserved;
+};
+
+const buildReservedArticleImageKeys = (excludedSurfaces = []) => {
+  const excluded = new Set(excludedSurfaces);
+  const reserved = new Set();
+
+  Object.entries(newsSurfaceImageReservations).forEach(([surfaceName, surfaceKeys]) => {
     if (excluded.has(surfaceName) || !(surfaceKeys instanceof Set)) {
       return;
     }
@@ -3586,13 +3610,13 @@ const heroDailyAreaLabels = {
   social: "Social",
   cotidiano: "Cotidiano",
   comunidade: "Comunidade",
-  servicos: "Servicos",
+  servicos: "Serviços",
   entretenimento: "Entretenimento",
-  games: "Games",
+  games: "Jogos",
   infantil: "Infantil",
   estudantes: "Estudantil",
   acre: "Acre",
-  trending: "Trending"
+  trending: "Tendências"
 };
 
 const ensureMobileHomeLeadLayout = () => {
@@ -3963,7 +3987,7 @@ const buildHeroTourismDailyPool = () => {
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
       return {
         title: article.category || "Destaque autoral",
-        note: truncateCopy(article.sourceName || "Editorial Catalogo Cruzeiro do Sul", 46),
+        note: truncateCopy(article.sourceName || "Editorial Catálogo Cruzeiro do Sul", 46),
         proxyUrl: imageUrl,
         fallbackUrl: imageUrl,
         focusPosition: getHeroDailyArticleFocus(article),
@@ -3973,7 +3997,7 @@ const buildHeroTourismDailyPool = () => {
         articleSummary: truncateCopy(article.displaySummary || article.lede || "Artigo autoral em destaque.", 138),
         articleHref: buildHeroArticleHref(article),
         themeKey: getHeroAreaKey(article),
-        sourceName: article.sourceName || "Editorial Catalogo Cruzeiro do Sul"
+        sourceName: article.sourceName || "Editorial Catálogo Cruzeiro do Sul"
       };
     })
     .filter((item) => item.proxyUrl && item.articleHref);
@@ -5494,11 +5518,11 @@ const trendingControversyBuzzPool = [
     comments: "2.1K"
   },
   {
-    badge: "Influencers",
+    badge: "Criadores",
     tone: "viral",
     image: "./assets/home-cache/buzz-cruzeiro-01.jpg",
     title: "Criadores locais puxam agenda de fim de semana",
-    summary: "Stories, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
+    summary: "Histórias, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
     likes: "7.4K",
     comments: "980"
   },
@@ -5592,7 +5616,7 @@ const getBuzzNetworkContexts = () => {
     {
       network: "Instagram",
       summary: "Repercussao visual, story e postagem curta.",
-      signals: ["imagem forte", "comentarios", "compartilhamento"],
+      signals: ["imagem forte", "comentários", "compartilhamento"],
       engagement: 92,
       velocity: 88,
       trust: 76,
@@ -5636,8 +5660,8 @@ const getBuzzNetworkContexts = () => {
     },
     {
       network: "X/Twitter",
-      summary: "Termometro de debate e comentario rapido.",
-      signals: ["tempo real", "debate", "ruido alto"],
+      summary: "Termômetro de debate e comentário rápido.",
+      signals: ["tempo real", "debate", "ruído alto"],
       engagement: 68,
       velocity: 88,
       trust: 55,
@@ -5825,7 +5849,7 @@ const resolveBuzzNetworkContext = (article = {}, index = 0) => {
   return contexts[index % Math.max(contexts.length, 1)] || {
     network: "Rede social",
     summary: "Repercussao em plataformas sociais.",
-    signals: ["debate", "comentarios", "compartilhamento"],
+    signals: ["debate", "comentários", "compartilhamento"],
     relevance: 70
   };
 };
@@ -5837,7 +5861,7 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) =>
   const seed = getDailyIndexSeed(`${article.title || "buzz"}:${index}`);
   const baseMeter = 52 + (seed % 23);
   const networkName = networkContext.network || "rede";
-  const primarySignal = Array.isArray(networkContext.signals) ? networkContext.signals[0] || "comentarios" : "comentarios";
+  const primarySignal = Array.isArray(networkContext.signals) ? networkContext.signals[0] || "comentários" : "comentários";
 
   if (/\b(layoff|demiss|corte|job|staff)\b/.test(haystack)) {
     return {
@@ -5925,7 +5949,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
     190
   );
   const networkLabel = `${networkContext.network || "Rede"} • polemica ${index + 1}`;
-  const signalLine = `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentarios"}`;
+  const signalLine = `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentários"}`;
   const debateLine = `debate: ${pulse.debateAxis}`;
 
   return `
@@ -5989,6 +6013,7 @@ const renderDailyTrendingBuzz = async (options = {}) => {
 
   const liveBuzzItems = await fetchTopicFeedCached("buzz", 12, options);
   const reservedKeys = buildReservedArticleKeys(["dailyBuzz"]);
+  const reservedImages = buildReservedArticleImageKeys(["dailyBuzz"]);
   const liveCases = dedupeNewsItems(liveBuzzItems)
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isBrazilBuzzArticle)
@@ -6003,11 +6028,15 @@ const renderDailyTrendingBuzz = async (options = {}) => {
     })
     .filter((item) => {
       const key = getArticleUsageKey(item);
-      if (!key || reservedKeys.has(key)) {
+      const imageKey = getArticleImageKey(item);
+      if (!key || reservedKeys.has(key) || (imageKey && reservedImages.has(imageKey))) {
         return false;
       }
 
       reservedKeys.add(key);
+      if (imageKey) {
+        reservedImages.add(imageKey);
+      }
       return true;
     })
     .slice(0, 6);
@@ -6240,7 +6269,7 @@ const pickMonthlyDynamicStories = async (options = {}) => {
 
   const selected = [];
   const usedKeys = buildReservedArticleKeys(["monthly"]);
-  const usedImages = new Set();
+  const usedImages = buildReservedArticleImageKeys(["monthly"]);
 
   for (const { article } of candidates) {
     if (selected.length >= 6) break;
@@ -6291,14 +6320,14 @@ const communityTrendFallbackTopics = [
     title: "Agenda cultural e eventos movimentam stories e grupos",
     summary: "Shows, encontros e bastidores entram no radar para orientar a programação local.",
     category: "Cultura",
-    sourceName: "Trending local",
+    sourceName: "Tendência local",
     hashtags: ["#AgendaCultural", "#ValeDoJurua", "#CruzeiroDoSul"]
   },
   {
     title: "Humor local transforma reclamação em cobrança pública",
     summary: "Memes, prints e vídeos curtos aumentam o alcance de assuntos que precisam de contexto.",
     category: "Buzz",
-    sourceName: "Timeline",
+    sourceName: "Redes sociais",
     hashtags: ["#BuzzLocal", "#MemeDoDia", "#Acre"]
   },
   {
@@ -6496,7 +6525,7 @@ const renderCommunityTrendCard = async (options = {}) => {
   }).format(new Date());
 
   if (communityTrendTitle) {
-    communityTrendTitle.textContent = truncateCopy(mainTopic.title || "Trending topics em atualização", 64);
+    communityTrendTitle.textContent = truncateCopy(mainTopic.title || "Assuntos em atualização", 64);
   }
 
   if (communityTrendSummary) {
@@ -6569,7 +6598,13 @@ const cadernoCategoryPriority = {
   "utilidade publica": ["servicos", "cotidiano", "saude", "prefeitura"]
 };
 
-const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2, usedKeys = new Set()) => {
+const pickCadernoArticlesByPriority = (
+  items = [],
+  priorities = [],
+  count = 2,
+  usedKeys = new Set(),
+  usedImages = buildReservedArticleImageKeys(["cadernos"])
+) => {
   const normalizedItems = dedupeNewsItems(items).map((item) => normalizeRuntimeArticle(item));
   const selected = [];
   const seen = new Set();
@@ -6587,8 +6622,16 @@ const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2, u
       return;
     }
 
+    const imageKey = getArticleImageKey(item);
+    if (imageKey && usedImages.has(imageKey)) {
+      return;
+    }
+
     seen.add(key);
     usedKeys.add(key);
+    if (imageKey) {
+      usedImages.add(imageKey);
+    }
     selected.push(item);
   };
 
@@ -6857,17 +6900,17 @@ const buildDynamicMarketPayload = (articles = [], fallbackMarket = {}) => {
       {
         label: "Atualizado",
         value: latestDateLabel,
-        note: "manchetes reais puxadas do feed"
+        note: "últimas manchetes"
       },
       {
         label: "Fontes",
         value: `${Math.max(1, sourceCount)}`,
-        note: "origens acompanhadas nesta rodada"
+        note: "origens acompanhadas"
       },
       {
         label: "Recorte",
-        value: "sem numero fake",
-        note: "contexto vivo em vez de cotação inventada"
+        value: "panorama",
+        note: "economia e serviços"
       }
     ],
     moves: selected.slice(0, 3).map((article, index) => ({
@@ -6882,9 +6925,8 @@ const buildDynamicMarketPayload = (articles = [], fallbackMarket = {}) => {
       sourceName: article.sourceName || "Fonte ativa",
       url: buildArticleHref(article)
     })),
-    opinionTitle: "Leitura financeira do Catalogo",
-    opinionText:
-      "Este painel agora tenta captar economia nova do feed ativo antes de cair no fallback local. A ideia é mostrar novidade real, não quadro parado.",
+    opinionTitle: "",
+    opinionText: "",
     pocketTips: selected.slice(0, 2).map((article) => ({
       tag: normalizeText(article.category || "economia") || "economia",
       dateLabel:
@@ -6981,6 +7023,7 @@ const hydrateCadernoCards = async (items = []) => {
 
   const normalizedItems = dedupeNewsItems(items);
   const usedKeys = buildReservedArticleKeys(["cadernos"]);
+  const usedImages = buildReservedArticleImageKeys(["cadernos"]);
   const appliedArticles = [];
   const cardTasks = cadernoCards.map(async (card) => {
     const kicker = normalizeText(card.querySelector(".card-kicker")?.textContent || "");
@@ -6995,7 +7038,8 @@ const hydrateCadernoCards = async (items = []) => {
         normalizedItems,
         cadernoCategoryPriority[kicker],
         stories.length,
-        usedKeys
+        usedKeys,
+        usedImages
       );
 
       stories.forEach((storyNode, index) => {
@@ -7022,14 +7066,21 @@ const hydrateCadernoCards = async (items = []) => {
       stories.forEach((storyNode, index) => {
         const article = filteredItems[index] || topicItems[index];
         const articleKey = getArticleUsageKey(article);
-        if (articleKey && usedKeys.has(articleKey)) {
+        const imageKey = getArticleImageKey(article);
+        if (
+          (articleKey && usedKeys.has(articleKey)) ||
+          (imageKey && usedImages.has(imageKey))
+        ) {
           return;
         }
 
         if (articleKey) {
           usedKeys.add(articleKey);
-          appliedArticles.push(article);
         }
+        if (imageKey) {
+          usedImages.add(imageKey);
+        }
+        appliedArticles.push(article);
 
         applyCadernoStoryArticle(storyNode, article, {
           preserveHref: true
@@ -7515,7 +7566,12 @@ const getSocialSurfaceScore = (article = {}) => {
   return score;
 };
 
-const pickSocialFallbackArticles = (items = [], count = 0, usedKeys = new Set()) => {
+const pickSocialFallbackArticles = (
+  items = [],
+  count = 0,
+  usedKeys = new Set(),
+  usedImages = buildReservedArticleImageKeys(["social"])
+) => {
   if (count <= 0) {
     return [];
   }
@@ -7534,7 +7590,6 @@ const pickSocialFallbackArticles = (items = [], count = 0, usedKeys = new Set())
     return getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
   });
   const selected = [];
-  const usedImages = new Set();
   const categoryCounts = new Map();
 
   const tryPushSocialArticle = (
@@ -7675,6 +7730,7 @@ const hydrateSocialCards = (items = []) => {
   const missingCards = [];
   const appliedArticles = [];
   const usedKeys = buildReservedArticleKeys(["social"]);
+  const usedImages = buildReservedArticleImageKeys(["social"]);
   const pinnedSocialSlugs = new Set([
     "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     "filme-bolsonaro-memes-reacao-redes"
@@ -7685,13 +7741,22 @@ const hydrateSocialCards = (items = []) => {
     const slugFromHref = getSlugFromLink(linkNode);
     const article = getHomepageHydrationArticle(slugFromHref);
     const articleKey = getArticleUsageKey(article);
+    const imageKey = getArticleImageKey(article);
 
     if (slugFromHref && pinnedSocialSlugs.has(slugFromHref)) {
+      if ((articleKey && usedKeys.has(articleKey)) || (imageKey && usedImages.has(imageKey))) {
+        missingCards.push(card);
+        return;
+      }
+
       const hasUsableImage = articleHasUsableImageCandidate(article);
       card.classList.toggle("card-without-photo", !hasUsableImage);
       if (articleKey) {
         usedKeys.add(articleKey);
         appliedArticles.push(article);
+      }
+      if (imageKey) {
+        usedImages.add(imageKey);
       }
       if (linkNode) {
         applyThumbImage(linkNode, article);
@@ -7699,7 +7764,7 @@ const hydrateSocialCards = (items = []) => {
       return;
     }
 
-    if (article && articleKey && !usedKeys.has(articleKey)) {
+    if (article && articleKey && !usedKeys.has(articleKey) && (!imageKey || !usedImages.has(imageKey))) {
       const hasUsableImage = articleHasUsableImageCandidate(article);
       if (!hasUsableImage) {
         missingCards.push(card);
@@ -7708,6 +7773,9 @@ const hydrateSocialCards = (items = []) => {
 
       card.classList.toggle("card-without-photo", false);
       usedKeys.add(articleKey);
+      if (imageKey) {
+        usedImages.add(imageKey);
+      }
       appliedArticles.push(article);
       if (linkNode) {
         applyThumbImage(linkNode, article);
@@ -7725,7 +7793,8 @@ const hydrateSocialCards = (items = []) => {
   const fallbackArticles = pickSocialFallbackArticles(
     items,
     missingCards.length,
-    usedKeys
+    usedKeys,
+    usedImages
   );
 
   missingCards.forEach((card, index) => {
@@ -8582,7 +8651,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
               </div>
             </div>
             <p class="election-heat-card-meta">
-              ${commentCount ? `${commentCount} comentario(s) local(is)` : "Ainda sem comentario qualitativo"}${item.topCity ? ` • cidade mais citada: ${escapeHtml(item.topCity)}` : ""}.
+              ${commentCount ? `${commentCount} comentário(s) local(is)` : "Ainda sem comentário qualitativo"}${item.topCity ? ` • cidade mais citada: ${escapeHtml(item.topCity)}` : ""}.
             </p>
           </article>
         `;
@@ -9093,7 +9162,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
     const summary =
       candidate.historySummary ||
       candidate.summary ||
-      "Nome monitorado na cobertura politica do Catalogo CZS.";
+      "Nome monitorado na cobertura política do Catálogo CZS.";
     const currentPosition = String(candidate.currentPosition || "").trim();
     const politicalPosition = String(
       candidate.politicalPositionShort || candidate.politicalPosition || ""
@@ -9294,7 +9363,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
   }
 
 const buildAgentWhatsappUrl = ({ name = "", email = "", subject = "", message = "" }) => {
-  const lines = ["Olá, segue uma mensagem enviada pelo Catalogo Cruzeiro do Sul.", ""];
+  const lines = ["Olá, segue uma mensagem enviada pelo Catálogo Cruzeiro do Sul.", ""];
 
   if (name) {
     lines.push(`Nome: ${name}`);
@@ -9382,7 +9451,7 @@ const attachAgentMailFlow = () => {
     const name = String(agentMailNameInput?.value || "").trim();
     const email = String(agentMailEmailInput?.value || "").trim();
     const subject =
-      String(agentMailSubjectInput?.value || "").trim() || "Contato pelo Catalogo Cruzeiro do Sul";
+      String(agentMailSubjectInput?.value || "").trim() || "Contato pelo Catálogo Cruzeiro do Sul";
     const message = String(agentMailMessageInput?.value || "").trim();
 
     if (message.length < 5) {
@@ -9609,6 +9678,7 @@ const renderArchiveHighlights = () => {
   }
 
   const reservedKeys = buildReservedArticleKeys(["archive", "live"]);
+  const reservedImages = buildReservedArticleImageKeys(["archive", "live"]);
   const filteredItems = getArchiveHighlightItems();
   const fallbackItems = getSortedLiveFeedArticles(
     liveFeedState.items.length ? liveFeedState.items : initialStaticNews
@@ -9616,7 +9686,8 @@ const renderArchiveHighlights = () => {
   const visibleItems = diversifyArchiveStories(
     (filteredItems.length ? filteredItems : fallbackItems).filter((article) => {
       const key = getArticleUsageKey(article);
-      return key && !reservedKeys.has(key);
+      const imageKey = getArticleImageKey(article);
+      return key && !reservedKeys.has(key) && (!imageKey || !reservedImages.has(imageKey));
     }),
     6
   ).slice(0, 6);
@@ -9847,6 +9918,7 @@ const getFilteredLiveFeedArticles = () => {
   const sortedArticles = getSortedLiveFeedArticles(liveFeedState.items);
   const shouldExcludePromotedSurfaces = !normalizedQuery && !liveFeedState.activeCategory;
   const reservedKeys = shouldExcludePromotedSurfaces ? buildReservedArticleKeys(["live"]) : new Set();
+  const reservedImages = shouldExcludePromotedSurfaces ? buildReservedArticleImageKeys(["live"]) : new Set();
   const categoryFiltered = sortedArticles
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => {
@@ -9859,7 +9931,8 @@ const getFilteredLiveFeedArticles = () => {
 
       if (shouldExcludePromotedSurfaces) {
         const key = getArticleUsageKey(article);
-        if (!key || reservedKeys.has(key)) {
+        const imageKey = getArticleImageKey(article);
+        if (!key || reservedKeys.has(key) || (imageKey && reservedImages.has(imageKey))) {
           return false;
         }
       }
@@ -10568,10 +10641,14 @@ const buildMarketMarkup = (market) => `
       )
       .join("")}
   </div>
-  <div class="market-opinion">
-    <p class="widget-kicker">${market.opinionTitle}</p>
-    <p>${market.opinionText}</p>
-  </div>
+  ${
+    market.opinionTitle || market.opinionText
+      ? `<div class="market-opinion">
+          ${market.opinionTitle ? `<p class="widget-kicker">${market.opinionTitle}</p>` : ""}
+          ${market.opinionText ? `<p>${market.opinionText}</p>` : ""}
+        </div>`
+      : ""
+  }
   <div class="sidebar-list compact-list">
     ${buildAgendaMarkup(market.pocketTips)}
   </div>
@@ -10611,9 +10688,9 @@ const renderSidebarWidgets = (options = {}) => {
 
   nowPanel.innerHTML = `
     <div class="rail-intro">
-      <p class="rail-kicker">terceira coluna</p>
+      <p class="rail-kicker">painel lateral</p>
       <h3>Painel Local</h3>
-      <p>Relógio, clima, feriados, agenda, buzz da rede e espaço comercial no mesmo trilho.</p>
+      <p>Relógio, clima, feriados, agenda, movimento da rede e oportunidades para marcas locais.</p>
     </div>
     <div class="sidebar-heading">
       <div>
@@ -10766,9 +10843,9 @@ const renderSidebarWidgets = (options = {}) => {
         <div class="sidebar-heading">
           <div>
             <p class="widget-title">Rede, Festas & Fofoca</p>
-            <span class="widget-source">captando novidade real do feed</span>
+            <span class="widget-source">atualizações recentes</span>
           </div>
-          <span class="widget-link passive-link">forçando busca por coisa nova</span>
+          <span class="widget-link passive-link">ver destaques</span>
         </div>
         <div class="sidebar-photo-list">
           ${buildStoryMarkup(liveBuzzItems, "buzz")}
@@ -10781,10 +10858,10 @@ const renderSidebarWidgets = (options = {}) => {
     popularPanel.innerHTML = `
     <div class="sidebar-heading">
       <div>
-        <p class="widget-title">Mais Vistos do Catalogo</p>
-        <span class="widget-source">puxado da cobertura ativa</span>
+        <p class="widget-title">Mais vistos do Catálogo</p>
+        <span class="widget-source">destaques recentes</span>
       </div>
-      <span class="widget-link passive-link">atalhos rapidos</span>
+      <span class="widget-link passive-link">atalhos rápidos</span>
     </div>
     <div class="sidebar-photo-list compact">
       ${buildStoryMarkup(sidebarData.popular, "popular")}
@@ -10795,10 +10872,10 @@ const renderSidebarWidgets = (options = {}) => {
   if (commercialPanel) {
     commercialPanel.innerHTML = `
     <p class="card-kicker">publicidade local</p>
-    <h3>Banner premium, publieditorial e agenda paga</h3>
+    <h3>Sua marca em destaque na cobertura local</h3>
     <p>
-      A terceira coluna agora aguenta divulgacao de evento, festa, curso, clinica,
-      loja, campanha e servico com chamada forte e boa permanencia em tela.
+      Divulgue eventos, cursos, clínicas, lojas, campanhas e serviços em um espaço
+      visível, com chamada forte e presença constante ao lado das notícias.
     </p>
     <div class="side-pill-row">
       <span class="rail-pill">300 x 600</span>
@@ -10811,22 +10888,22 @@ const renderSidebarWidgets = (options = {}) => {
 
   if (adsPanel) {
     adsPanel.innerHTML = `
-    <p class="card-kicker">ads e divulgacao</p>
-    <h3>Espacos prontos para vender</h3>
+    <p class="card-kicker">anúncios e divulgação</p>
+    <h3>Espaços prontos para vender</h3>
     <div class="sidebar-ad-grid">
       <a class="ad-slot tall" href="#monetizacao">
         <span>300 x 600</span>
-        <strong>Banner vertical premium</strong>
+        <strong>Anúncio vertical premium</strong>
         <small>campanha fixa ao lado da leitura</small>
       </a>
       <a class="ad-slot" href="#monetizacao">
         <span>agenda patrocinada</span>
-        <strong>Evento com data, local e CTA</strong>
-        <small>festa, show, encontro ou promocao</small>
+        <strong>Evento com data, local e chamada</strong>
+        <small>festa, show, encontro ou promoção</small>
       </a>
       <a class="ad-slot" href="#monetizacao">
         <span>vitrine local</span>
-        <strong>Guia rapido de marcas e servicos</strong>
+        <strong>Guia rápido de marcas e serviços</strong>
         <small>entrada enxuta com selo parceiro</small>
       </a>
     </div>
@@ -10905,7 +10982,7 @@ const hydrateCommentsFromApi = async () => {
       renderCommentsFeed(comments.slice(0, 8));
     }
   } catch (error) {
-    // Mantem os comentarios estaticos quando a API nao estiver ligada.
+    // Mantém os comentários estáticos quando a API não estiver ligada.
   }
 };
 
@@ -10955,7 +11032,7 @@ const attachCommentSubmission = () => {
     }
 
     publishCommentButton.disabled = true;
-    setFeedbackState(commentFeedback, "Enviando comentario...", "");
+    setFeedbackState(commentFeedback, "Enviando comentário...", "");
 
     try {
       const analyticsContext = getAnalyticsContext();
@@ -11001,7 +11078,7 @@ const attachCommentSubmission = () => {
       charCount.textContent = "0 / 180";
       setFeedbackState(
         commentFeedback,
-        "Servidor offline. Seu comentario apareceu so nesta tela por enquanto.",
+        "Servidor sem conexão. Seu comentário apareceu só nesta tela por enquanto.",
         "is-error"
       );
     } finally {
@@ -11124,7 +11201,7 @@ const syncSupporterPaymentCard = async (forceNewTxid = false) => {
     const params = new URLSearchParams({
       amount: String(founderAmount),
       txid: supporterPaymentState.txid,
-      description: "Apoio Fundador Catalogo"
+      description: "Apoio Fundador Catálogo"
     });
     const payload = await requestApiJson(`/api/subscriptions/pix?${params.toString()}`, { method: "GET" });
     const resolvedAmount = Number(payload.amount || founderAmount);
@@ -11202,7 +11279,7 @@ const toggleFounderAmountField = () => {
 const buildFounderCard = (founder = {}) => {
   const card = document.createElement("article");
   const amount = Number(founder.amount || 0);
-  const safeName = String(founder.name || "Fundador do Catalogo").trim() || "Fundador do Catalogo";
+  const safeName = String(founder.name || "Fundador do Catálogo").trim() || "Fundador do Catálogo";
   const joinedAt = founder.createdAt
     ? new Date(founder.createdAt).toLocaleDateString("pt-BR", {
         day: "2-digit",
@@ -11215,7 +11292,7 @@ const buildFounderCard = (founder = {}) => {
   card.className = "founder-card";
   card.innerHTML = `
     <strong>? ${escapeHtml(safeName)}</strong>
-    <p>Fundador do Catalogo CZS com apoio simbólico${amount ? ` de R$ ${amount}` : ""}.</p>
+    <p>Fundador do Catálogo CZS com apoio simbólico${amount ? ` de R$ ${amount}` : ""}.</p>
     <span>entrou em ${escapeHtml(joinedAt)}</span>
   `;
   return card;
@@ -11232,8 +11309,8 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
   if (!founders.length) {
     foundersList.innerHTML = `
       <article class="founder-card is-empty">
-        <strong>? Seu nome pode abrir esta lista</strong>
-        <p>Os primeiros apoiadores aparecem aqui como fundadores do portal.</p>
+        <strong>Quem fortalece este jornal</strong>
+        <p>Marcas, profissionais e leitores que apoiam a cobertura local ganham presença neste espaço.</p>
       </article>
     `;
     return;

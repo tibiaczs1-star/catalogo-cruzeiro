@@ -240,29 +240,29 @@
     el.innerHTML = `
       <div class="svc-ads-head">
         <div>
-          <span>espacos de propaganda</span>
-          <strong>Banners prontos para vender neste modulo</strong>
+          <span>espaços de propaganda</span>
+          <strong>Anúncios prontos para vender neste módulo</strong>
         </div>
-        <a class="svc-btn" href="./index.html#monetizacao">Reservar anuncio</a>
+        <a class="svc-btn" href="./index.html#monetizacao">Reservar anúncio</a>
       </div>
 
       <div class="svc-ads-grid">
         <a class="svc-ad-slot svc-ad-slot-wide" href="./index.html#monetizacao">
-          <span>banner principal 728 x 90</span>
-          <strong>${moduleTitle} com chamada premium no topo desta area</strong>
-          <small>Espaco para marca, servico, clinica, loja, agenda ou campanha local com clique direto.</small>
+          <span>anúncio principal 728 x 90</span>
+          <strong>${moduleTitle} com chamada premium no topo desta área</strong>
+          <small>Espaço para marca, serviço, clínica, loja, agenda ou campanha local com clique direto.</small>
         </a>
 
         <a class="svc-ad-slot" href="./index.html#monetizacao">
           <span>vitrine local</span>
-          <strong>Card patrocinado dentro de ${moduleLabel}</strong>
-          <small>Formato enxuto para telefone, WhatsApp, bairro, oferta e CTA.</small>
+          <strong>Chamada patrocinada dentro de ${moduleLabel}</strong>
+          <small>Formato enxuto para telefone, WhatsApp, bairro, oferta e chamada.</small>
         </a>
 
         <a class="svc-ad-slot" href="./index.html#monetizacao">
           <span>destaque de bairro</span>
-          <strong>Anuncio rapido para publico da regiao</strong>
-          <small>Bom para eventos, restaurantes, farmacias, servicos e utilidade publica patrocinada.</small>
+          <strong>Anúncio rápido para público da região</strong>
+          <small>Bom para eventos, restaurantes, farmácias, serviços e utilidade pública patrocinada.</small>
         </a>
       </div>
     `;

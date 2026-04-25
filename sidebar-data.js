@@ -261,7 +261,7 @@ window.SIDEBAR_DATA = {
         label: "FPE e caixa estadual",
         title: "repasse federal reforca folego do Acre em abril",
         summary:
-          "A primeira parcela do FPE ajuda a ler o caixa do estado e a capacidade de manter servicos, obras e folha no começo do mes.",
+          "A primeira parcela do FPE ajuda a ler o caixa do estado e a capacidade de manter serviços, obras e folha no começo do mês.",
         sourceName: "ac24horas",
         url: "https://ac24horas.com/2026/04/13/acre-recebe-mais-de-r-221-milhoes-do-fpe-na-primeira-parcela-de-abril/"
       },
@@ -271,28 +271,27 @@ window.SIDEBAR_DATA = {
         label: "cesta basica",
         title: "preco de mercado no Jurua pede olho de consumidor",
         summary:
-          "A pesquisa da Seplan em Cruzeiro do Sul funciona como guia rapido para comparar compras e perceber pressao sobre renda familiar.",
+          "A pesquisa da Seplan em Cruzeiro do Sul funciona como guia rápido para comparar compras e perceber pressão sobre renda familiar.",
         sourceName: "Agencia Acre",
         url: "https://agencia.ac.gov.br/seplan-divulga-resultado-da-pesquisa-de-custo-da-cesta-basica-em-cruzeiro-do-sul/"
       }
     ],
-    opinionTitle: "Leitura financeira do Catalogo",
-    opinionText:
-      "Isto e inferencia editorial sobre tendencia, nao recomendacao de compra ou venda. Para bolso curto, hoje o sinal e comparar preco, evitar pressa e tratar recorde de bolsa como contexto, nao ordem de entrada.",
+    opinionTitle: "",
+    opinionText: "",
     pocketTips: [
       {
-        tag: "financas",
+        tag: "finanças",
         dateLabel: "13 abr",
         title: "Bolsa em recorde pede sangue frio antes de comprar",
-        meta: "opiniao editorial do Catalogo em cima do radar do dia",
-        sourceName: "Catalogo Cruzeiro do Sul",
+        meta: "radar econômico do dia",
+        sourceName: "Catálogo Cruzeiro do Sul",
         url: "https://investidor10.com.br/noticias/bolsa-bate-recorde-pelo-3-dia-seguido-e-supera-197-mil-pontos-dolar-vai-a-r-5-119716/"
       },
       {
         tag: "acre",
         dateLabel: "13 abr",
         title: "FPE de abril ajuda a medir folego dos cofres estaduais",
-        meta: "repasse federal vira pista sobre entrega de servicos e obras",
+        meta: "repasse federal vira pista sobre entrega de serviços e obras",
         sourceName: "ac24horas",
         url: "https://ac24horas.com/2026/04/13/acre-recebe-mais-de-r-221-milhoes-do-fpe-na-primeira-parcela-de-abril/"
       }

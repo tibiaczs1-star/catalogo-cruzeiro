@@ -230,10 +230,14 @@
         )
         .join("")}
     </div>
-    <div class="market-opinion">
-      <p class="widget-kicker">${escapeHtml(market.opinionTitle || "Leitura financeira do Catalogo")}</p>
-      <p>${escapeHtml(market.opinionText || "")}</p>
-    </div>
+    ${
+      market.opinionTitle || market.opinionText
+        ? `<div class="market-opinion">
+            ${market.opinionTitle ? `<p class="widget-kicker">${escapeHtml(market.opinionTitle)}</p>` : ""}
+            ${market.opinionText ? `<p>${escapeHtml(market.opinionText)}</p>` : ""}
+          </div>`
+        : ""
+    }
     <div class="sidebar-list compact-list">
       ${buildAgendaMarkup(market.pocketTips || [], newsMap)}
     </div>
@@ -452,10 +456,10 @@
       nodes.popular.innerHTML = `
       <div class="sidebar-heading">
         <div>
-          <p class="widget-title">Mais Vistos do Catalogo</p>
-          <span class="widget-source">puxado da cobertura ativa</span>
+          <p class="widget-title">Mais vistos do Catálogo</p>
+          <span class="widget-source">destaques recentes</span>
         </div>
-        <span class="widget-link passive-link">atalhos rapidos</span>
+        <span class="widget-link passive-link">atalhos rápidos</span>
       </div>
       <div class="sidebar-photo-list compact">
         ${buildStoryMarkup(sidebarData.popular || [], newsMap)}
@@ -466,10 +470,10 @@
     if (nodes.commercial) {
       nodes.commercial.innerHTML = `
       <p class="card-kicker">publicidade local</p>
-      <h3>Banner premium, publieditorial e agenda paga</h3>
+      <h3>Anúncio premium, publieditorial e agenda paga</h3>
       <p>
-        A terceira coluna agora aguenta divulgacao de evento, festa, curso, clinica,
-        loja, campanha e servico com chamada forte e boa permanencia em tela.
+        Divulgue evento, festa, curso, clínica, loja, campanha e serviço
+        com chamada forte e boa permanência em tela.
       </p>
       <div class="side-pill-row">
         <span class="rail-pill">300 x 600</span>
@@ -482,22 +486,22 @@
 
     if (nodes.ads) {
       nodes.ads.innerHTML = `
-      <p class="card-kicker">ads e divulgacao</p>
-      <h3>Espacos prontos para vender</h3>
+      <p class="card-kicker">anúncios e divulgação</p>
+      <h3>Espaços prontos para vender</h3>
       <div class="sidebar-ad-grid">
         <a class="ad-slot tall" href="#monetizacao">
           <span>300 x 600</span>
-          <strong>Banner vertical premium</strong>
+          <strong>Anúncio vertical premium</strong>
           <small>campanha fixa ao lado da leitura</small>
         </a>
         <a class="ad-slot" href="#monetizacao">
           <span>agenda patrocinada</span>
-          <strong>Evento com data, local e CTA</strong>
-          <small>festa, show, encontro ou promocao</small>
+          <strong>Evento com data, local e chamada</strong>
+          <small>festa, show, encontro ou promoção</small>
         </a>
         <a class="ad-slot" href="#monetizacao">
           <span>vitrine local</span>
-          <strong>Guia rapido de marcas e servicos</strong>
+          <strong>Guia rápido de marcas e serviços</strong>
           <small>entrada enxuta com selo parceiro</small>
         </a>
       </div>

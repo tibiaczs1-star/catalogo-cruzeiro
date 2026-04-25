@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T21:23:00.324Z",
+  "lastUpdatedAt": "2026-04-25T21:50:24.324Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6393,6 +6393,174 @@
       "source": "chat",
       "rawRequest": "SO EM PORTUGUES VC TA PUXANDO HASTAGS E TRADTOPICS SEI LA COMO FALA INTERNACIONAIS",
       "summary": "Filtrar hashtags e trending topics para português/Brasil, sem trends internacionais no bloco social",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-corrigir-fluxo-anti-repeticao-entre-superficies-editoriais-da-home",
+      "createdAt": "2026-04-25T21:30:00.000-05:00",
+      "updatedAt": "2026-04-25T21:30:00.000-05:00",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "VOU DEIXA MAIS CLARO O FLUXO Q AGENTE FEZ PRAS NOTICIAS NAO REPETIR, PORQUE AINDA TÃO TUDO SE REPETINDO?",
+      "summary": "Corrigir fluxo anti-repeticao entre Hero, Destaques, Cadernos, Buzz diario, Arquivo e Noticias do dia usando reserva por pauta editorial.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "script.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "noticias",
+        "anti-repeticao",
+        "fluxo-editorial"
+      ],
+      "nextSteps": [],
+      "notes": "A chave de uso agora considera cluster editorial + data e fingerprint de imagem. Blocos dinamicos passam a reservar e respeitar superficies ja ocupadas."
+    },
+    {
+      "id": "2026-04-25-reescrever-a-copy-publica-do-card-de-publicidade-local-para-nao-soar-como-anotac",
+      "createdAt": "2026-04-25T21:40:18.420Z",
+      "updatedAt": "2026-04-25T21:42:00.000Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ageite, parece escrito pra o editor (card de publicidade local da lateral)",
+      "summary": "Reescrever a copy publica do card de publicidade local para nao soar como anotacao interna de editor.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "script.js"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Card de publicidade local agora fala diretamente com anunciante: marca em destaque, divulgacao de eventos/cursos/clinicas/lojas/campanhas/servicos e presenca ao lado das noticias."
+    },
+    {
+      "id": "2026-04-25-fazer-autocorrecao-de-portugues-e-remover-corrigir-palavras-em-ingles-soltas-nos",
+      "createdAt": "2026-04-25T21:41:12.738Z",
+      "updatedAt": "2026-04-25T21:41:12.738Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "passe uma auto correção de portugues e ingles se tiver palavra ingles em todo site",
+      "summary": "Fazer autocorreção de português e remover/corrigir palavras em inglês soltas nos textos visíveis de todo o site.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-ajustar-visualmente-a-divisao-celebridades-polemicas-do-dia-para-ficar-enquadrad",
+      "createdAt": "2026-04-25T21:41:48.022Z",
+      "updatedAt": "2026-04-25T21:41:48.022Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ageite, ta feio, um diferente demais do outro em coparação a divisão de cima, deixe ele enquadrado no design, essa divisão ai",
+      "summary": "Ajustar visualmente a divisão Celebridades & Polêmicas do Dia para ficar enquadrada no design da home e coerente com a divisão acima.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-reescrever-a-chamada-dos-escritorios-na-home-para-soar-publica-e-editorial-nao-c",
+      "createdAt": "2026-04-25T21:44:49.325Z",
+      "updatedAt": "2026-04-25T21:44:49.325Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "repense o texto parece feito pra min mesmo",
+      "summary": "Reescrever a chamada dos escritórios na home para soar pública e editorial, não como texto interno feito para o dono do projeto.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "index.html"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-corrigir-a-divisao-celebridades-polemicas-do-dia-porque-estava-compactada-no-mei",
+      "createdAt": "2026-04-25T21:46:04.638Z",
+      "updatedAt": "2026-04-25T21:46:04.638Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "problema e a diferença entre as divisões, olha uma pequena compactada no meio e as outras maior, faça a divisção compacta volta ao normal",
+      "summary": "Corrigir a divisão Celebridades & Polêmicas do Dia porque estava compactada no meio, diferente das divisões maiores acima; restaurar largura e grid normal.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-reescrever-o-card-de-apoio-fundadores-para-soar-publico-e-comercial-nao-como-ano",
+      "createdAt": "2026-04-25T21:46:07.916Z",
+      "updatedAt": "2026-04-25T21:46:07.916Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "isso aqui tamb em",
+      "summary": "Reescrever o card de apoio/fundadores para soar público e comercial, não como anotação interna do projeto.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "index.html",
+        "script.js"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-reescrever-e-reforcar-contraste-do-card-de-apoio-fundadores-para-o-titulo-ficar-",
+      "createdAt": "2026-04-25T21:46:50.596Z",
+      "updatedAt": "2026-04-25T21:46:50.596Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "esse tambem e ta ilegivel o titulo",
+      "summary": "Reescrever e reforçar contraste do card de apoio/fundadores para o título ficar legível e público.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "styles.css"
+      ],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-reescrever-a-copy-do-card-de-escritorios-areas-especiais-para-linguagem-publica-",
+      "createdAt": "2026-04-25T21:49:36.124Z",
+      "updatedAt": "2026-04-25T21:49:36.124Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "linguagem feita pra editor",
+      "summary": "Reescrever a copy do card de escritórios/áreas especiais para linguagem pública, sem tom de bastidor editorial ou instrução interna.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-simplificar-o-card-para-dizer-apenas-que-o-visitante-pode-visitar-os-escritorios",
+      "createdAt": "2026-04-25T21:50:24.324Z",
+      "updatedAt": "2026-04-25T21:50:24.324Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ainda nao gostei, aquilo e so pra dizer pra visitar os esritorios vitrtuais",
+      "summary": "Simplificar o card para dizer apenas que o visitante pode visitar os escritórios virtuais, sem explicar áreas especiais do portal.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

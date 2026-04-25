@@ -1,6 +1,14 @@
 # Handoff
 
-Updated: 2026-04-25T19:55:00.000Z
+Updated: 2026-04-25T21:55:00.000Z
+
+## Atualizacao 2026-04-25T21:55:00.000Z - Autocorrecao de textos publicos
+
+Autocorrecao aplicada em `index.html`, `lifestile.html`, `lifestile.js`, `script.js`, `sidebar-data.js`, `sidebar-widgets-recovery.js` e `catalogo-servicos.js`. Trocas principais: Catalogo -> Catálogo em textos públicos, Analyses -> Análises, Mokup -> Prévia, Tracer -> Rastreador, Trending & Buzz -> Tendências & Conversas, captions/hashtags/feed/webpage/fashion/creators/street style/CTA/ads substituídos por termos em português quando visíveis ao usuário.
+
+Validacoes: `node --check script.js`, `node --check lifestile.js`, `node --check sidebar-data.js`, `node --check sidebar-widgets-recovery.js`, `node --check catalogo-servicos.js` e `npm run review:team` com 0 achados.
+
+Usuario esclareceu na hora de subir: incluir todas as alteracoes recentes do pacote geral, exceto PubPaid. PubPaid segue reservada fora de commit/deploy ate nova ordem explicita.
 
 ## Atualizacao 2026-04-25T19:55:00.000Z - Fluxo editorial e cards responsivos
 

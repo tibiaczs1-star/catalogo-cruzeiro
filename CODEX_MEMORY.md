@@ -1,5 +1,20 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-25 - Anti-repeticao real entre blocos
+
+- Corrigido o vazamento do fluxo editorial anti-repeticao: a home ainda podia repetir a mesma pauta entre blocos quando a noticia vinha com titulo/URL diferente ou por topic-feed.
+- `script.js` agora usa chave de pauta por `cluster editorial + data` e fingerprint de imagem para reserva de superficies, nao apenas titulo/URL exatos.
+- Novas superficies passaram a participar da reserva: `cadernos`, `monthly`, `dailyBuzz`, `archive` e `live`.
+- `Buzz diario`, `Celebridades & Polêmicas do Dia`, `Arquivo` e `Noticias do dia` agora respeitam o que Hero/Destaques/Cadernos ja consumiram; busca e filtros continuam podendo mostrar a base completa.
+- Validacoes: `node --check script.js` e `npm run review:team` com 0 achados.
+
+## Atualizacao rapida 2026-04-25 - Correção imagens AWN bloqueadas
+
+- Corrigidos os erros de console `net::ERR_BLOCKED_BY_RESPONSE.NotSameOrigin` causados por imagens `awn.com` bloqueadas contra hotlink.
+- `server.js` agora trata imagens da AWN como inseguras para exibição direta, impedindo que previews bloqueados entrem nos feeds e forçando fallback editorial quando necessário.
+- `script.js`, `arquivo-noticias.js` e `news-photo-fix.js` ganharam proteção no cliente para ignorar/substituir URLs AWN antigas que ainda possam vir de cache.
+- Validações: `node --check script.js`, `node --check arquivo-noticias.js`, `node --check news-photo-fix.js`, `node --check server.js`, servidor local em `4100` com home `200`, `/api/topic-feed?topic=kids` e `/api/news/archive` com 0 imagens AWN, e `npm run review:team` com 0 achados.
+
 ## Atualizacao rapida 2026-04-25 - Fluxo editorial anti-repeticao
 
 - Reuniao geral executada: `npm run agents:run` ativou 181 agentes e `npm run review:team` voltou com 0 achados.
