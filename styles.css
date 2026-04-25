@@ -20407,7 +20407,8 @@ body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:
 body.editorial-home #monthly .month-card h3,
 body.editorial-home #monthly .month-card p,
 body.editorial-home #monthly .month-card small,
-body.editorial-home #monthly .month-signal {
+body.editorial-home #monthly .month-signal,
+body.editorial-home #monthly .month-agent-note {
   position: relative;
   z-index: 1;
 }
@@ -20451,6 +20452,34 @@ body.editorial-home #monthly .month-signal b {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--trend-accent, #d0a145), rgba(255, 255, 255, 0.75));
+}
+
+body.editorial-home #monthly .month-agent-note {
+  display: grid;
+  gap: 0.18rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 35, 60, 0.1);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body.editorial-home #monthly .month-agent-note strong,
+body.editorial-home #monthly .month-agent-note span {
+  display: block;
+  color: rgba(22, 38, 61, 0.86);
+  line-height: 1.35;
+}
+
+body.editorial-home #monthly .month-agent-note strong {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.editorial-home #monthly .month-agent-note span {
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 body.editorial-home #monthly .month-celebs {

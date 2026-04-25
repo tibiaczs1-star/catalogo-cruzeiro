@@ -5743,7 +5743,7 @@ const monthlyFallbackStories = [
   },
   {
     title: "Comunidades cobram resposta antes de decisões que mudam a rotina",
-    summary: "O mês segue marcado por pedidos de diálogo, transparência e retorno objetivo ao morador.",
+    summary: "O dia segue marcado por pedidos de diálogo, transparência e retorno objetivo ao morador.",
     imageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
     sourceName: "Comunidade",
     category: "Utilidade Pública",
@@ -5811,6 +5811,10 @@ const getMonthlyTone = (article = {}, index = 0) => {
     [normalized.title, normalized.summary, normalized.lede, normalized.category, normalized.categoryKey, normalized.sourceName, article.monthlyTone].join(" ")
   );
 
+  if (/\b(agents|agente|agentes reais|rodada diaria|rodada diária|monitoramento)\b/.test(haystack)) {
+    return { tag: "Agentes do dia", className: "month-creators", axis: "fila editorial" };
+  }
+
   if (/\b(festa|social|celebridade|modelo|marca|collab|criador|criadora|influenc|reels|story|tiktok|instagram)\b/.test(haystack)) {
     return { tag: "Celebridades da semana", className: "month-celebs", axis: "alcance social" };
   }
@@ -5836,9 +5840,25 @@ const getMonthlyTone = (article = {}, index = 0) => {
   return fallback[index % fallback.length];
 };
 
-const buildMonthlyDynamicCard = (item = {}, index = 0) => {
+const getDailyAgentActionForCard = (agentPulse = null, index = 0) => {
+  const actions = Array.isArray(agentPulse?.actions) ? agentPulse.actions : [];
+  return actions[index % Math.max(actions.length, 1)] || null;
+};
+
+const buildDailyAgentLabel = (agentPulse = null, action = null) => {
+  const totalAgents = Number(agentPulse?.summary?.totalAgents || 181);
+  const runLabel =
+    formatCompactDisplayDate(agentPulse?.runGeneratedAt || agentPulse?.updatedAt || "") ||
+    "hoje";
+  const agentName = action?.agent || "Agente editorial";
+  const officeName = action?.office || "Redação";
+  return `${totalAgents} agentes • ${agentName} / ${officeName} • ${runLabel}`;
+};
+
+const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
   const article = normalizeRuntimeArticle(item);
   const tone = getMonthlyTone(article, index);
+  const agentAction = getDailyAgentActionForCard(agentPulse, index);
   const href = buildArticleHref(article);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
   const imageUrl = getArticleDisplayImageUrl(article) || article.imageUrl || monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl;
@@ -5852,7 +5872,7 @@ const buildMonthlyDynamicCard = (item = {}, index = 0) => {
     <article class="month-card ${escapeHtml(tone.className)} month-dynamic-card reveal ${delayClass}" data-live-score="${score}">
       <div class="month-card-topline">
         <span class="month-tag">${escapeHtml(tone.tag)}</span>
-        <span class="month-live-pill">dinâmico</span>
+        <span class="month-live-pill">diário</span>
       </div>
       <a
         class="month-photo"
@@ -5868,15 +5888,34 @@ const buildMonthlyDynamicCard = (item = {}, index = 0) => {
         <span>${escapeHtml(tone.axis)}</span>
         <i><b style="width:${score}%"></b></i>
       </div>
+      <div class="month-agent-note" aria-label="Leitura dos agentes">
+        <strong>${escapeHtml(buildDailyAgentLabel(agentPulse, agentAction))}</strong>
+        <span>${escapeHtml(truncateCopy(agentAction?.title || "Rodada dos agentes cruzou notícia, rede e prioridade editorial do dia.", 118))}</span>
+      </div>
       <small>${escapeHtml(article.sourceName || "Fonte ativa")} · ${escapeHtml(dateLabel)}</small>
     </article>
   `;
 };
 
 const pickMonthlyDynamicStories = async (options = {}) => {
-  const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+  const [liveBuzzItems, agentPulse] = await Promise.all([
+    fetchTopicFeedCached("buzz", 18, options),
+    fetchDailyAgentPulseCached(options)
+  ]);
+  const agentActions = Array.isArray(agentPulse?.actions)
+    ? agentPulse.actions.map((action) => ({
+        title: action.title,
+        summary: `${action.agent || "Agente"} (${action.office || "Redação"}) marcou este assunto para a rodada diária.`,
+        sourceName: action.office || action.agent || "Agentes reais",
+        category: action.role || "Buzz",
+        sourceUrl: "./real-agents.html",
+        publishedAt: agentPulse.runGeneratedAt || agentPulse.updatedAt || new Date().toISOString(),
+        monthlyTone: "agents"
+      }))
+    : [];
   const candidates = dedupeNewsItems([
     ...liveBuzzItems,
+    ...agentActions,
     ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ])
     .map((item) => normalizeRuntimeArticle(item))
@@ -5907,7 +5946,10 @@ const pickMonthlyDynamicStories = async (options = {}) => {
     pickDailyItems(monthlyFallbackStories, 6 - selected.length, 73).forEach((item) => selected.push(item));
   }
 
-  return selected.slice(0, 6);
+  return {
+    stories: selected.slice(0, 6),
+    agentPulse
+  };
 };
 
 const renderDynamicMonthlyBuzz = async (options = {}) => {
@@ -5915,9 +5957,9 @@ const renderDynamicMonthlyBuzz = async (options = {}) => {
     return;
   }
 
-  const stories = await pickMonthlyDynamicStories(options);
+  const { stories, agentPulse } = await pickMonthlyDynamicStories(options);
   monthlyBuzzGrid.classList.add("is-dynamic-monthly");
-  monthlyBuzzGrid.innerHTML = stories.map(buildMonthlyDynamicCard).join("");
+  monthlyBuzzGrid.innerHTML = stories.map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse)).join("");
   registerArticleCardLinks(monthlyBuzzGrid);
 };
 
@@ -6307,6 +6349,10 @@ const readOfflineStorage = (key) => {
 const topicFeedClientCache = new Map();
 const TOPIC_FEED_CACHE_TTL_MS = 90 * 1000;
 let topicSurfaceRefreshTimerId = 0;
+let dailyAgentPulseCache = {
+  createdAt: 0,
+  promise: null
+};
 
 const fetchTopicFeedCached = async (topic, limit = 4, options = {}) => {
   const normalizedTopic = normalizeText(topic);
@@ -6341,6 +6387,22 @@ const fetchTopicFeedCached = async (topic, limit = 4, options = {}) => {
   }
 
   return topicFeedClientCache.get(cacheKey)?.promise || [];
+};
+
+const fetchDailyAgentPulseCached = async (options = {}) => {
+  const forceRefresh = options.forceRefresh === true;
+  const isFresh =
+    dailyAgentPulseCache.promise &&
+    Date.now() - Number(dailyAgentPulseCache.createdAt || 0) < TOPIC_FEED_CACHE_TTL_MS;
+
+  if (!dailyAgentPulseCache.promise || forceRefresh || !isFresh) {
+    dailyAgentPulseCache = {
+      createdAt: Date.now(),
+      promise: requestApiJson("/api/daily-agent-pulse", { method: "GET" }).catch(() => null)
+    };
+  }
+
+  return dailyAgentPulseCache.promise;
 };
 
 const socialTrendsClientCache = new Map();

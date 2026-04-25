@@ -1,23 +1,19 @@
 # Current State
 
-Updated: 2026-04-25T12:25:00.000Z
+Updated: 2026-04-25T14:21:14.837Z
 
 ## Active Goal
 
-- Card de captacao social na home
+- Super Site Style & Fashion 24h
 
 ## Summary
 
-O espaco morto abaixo do texto de Participacao Comunitaria virou um card 3D compacto no mesmo bloco. O card agora prioriza `/api/social-trends`, que busca trending topics/hashtags externos em listas publicas de X/Twitter e Instagram, e so usa feed local/fallback quando a internet nao responder.
+Criado `PROMPT_SUPER_SITE_STYLE_FASHION_24H_2026-04-25.md` com missão, escopo, bloqueios, agentes, runtime 24h, critérios de capa e comandos.
+
+A página `lifestile.html` ganhou seção `Fashion 24h` com captação ligada: fontes consultadas, itens aprovados, ruídos bloqueados e próxima ronda diária. `lifestile.js` atualiza esses números a partir das fontes/API/fallbacks.
+
+Validação no navegador: JS ok; prompt existe; runtime board exibiu fontes=5, aprovados=28, bloqueados=127; página com 3 destaques, 14 social items, 12 fotos, 24 artigos, 4 cards runtime e hero com foto.
 
 ## Next
 
-- Subir pacote aprovado pelo usuario.
-- Depois do deploy, reiniciar/aguardar Render para o endpoint novo entrar no ar.
-
-## Files In Focus
-
-- index.html
-- styles.css
-- script.js
-- server.js
+- Se o usuário aprovar o conceito, rodar agentes/review novamente e preparar pacote para subir.

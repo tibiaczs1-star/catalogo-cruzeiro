@@ -475,14 +475,14 @@ const STATIC_PAGE_SEO = {
     fileName: "esttiles.html"
   },
   "/lifestile.html": {
-    title: `Lifestile Acre | Super Site Style & Fashion 24h | ${SITE_NAME}`,
+    title: `Lifestile Acre | Moda e estilo de vida | ${SITE_NAME}`,
     description:
-      "Super site fashion do Acre com moda, beleza, vitrines, creators, captação social 24h e checagem diaria de pautas de estilo.",
-    themeColor: "#FFF8EF",
+      "Editorial de moda e estilo de vida com recorte do Acre, street style, beleza, criadores locais, eventos, vitrine e sinais das redes sociais.",
+    themeColor: "#FBF7F0",
     colorScheme: "light",
     ogType: "website",
     schemaType: "CollectionPage",
-    priority: "0.76",
+    priority: "0.72",
     changefreq: "daily",
     fileName: "lifestile.html"
   },
@@ -7079,6 +7079,57 @@ function buildRealAgentsPayload() {
   };
 }
 
+function buildPublicDailyAgentPulse() {
+  const payload = buildRealAgentsPayload();
+  const actions = Array.isArray(payload.executableActions) ? payload.executableActions : [];
+  const queue = Array.isArray(payload.queue) ? payload.queue : [];
+  const officeDashboard = Array.isArray(payload.officeDashboard) ? payload.officeDashboard : [];
+  const history = Array.isArray(payload.autoRun?.history) ? payload.autoRun.history : [];
+
+  const actionItems = actions
+    .concat(queue)
+    .filter((item) => item && (item.title || item.lastIntent || item.intent || item.task))
+    .slice(0, 12)
+    .map((item, index) => ({
+      agent: cleanShortText(item.agent || item.agentName || item.name || `Agente ${index + 1}`, 80),
+      office: cleanShortText(item.office || item.officeLabel || item.officeKey || "Redação", 80),
+      role: cleanShortText(item.role || item.kind || "monitoramento", 60),
+      title: cleanShortText(item.title || item.lastIntent || item.intent || item.task || "Monitorar assunto em alta", 150),
+      status: cleanShortText(item.status || item.outcome || "em leitura", 60),
+      points: Number(item.points || item.score || 0)
+    }));
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    runGeneratedAt: payload.runGeneratedAt || payload.updatedAt || "",
+    summary: {
+      totalAgents: Number(payload.summary?.totalAgents || 0),
+      totalOffices: Number(payload.summary?.totalOffices || 0),
+      newsItems: Number(payload.summary?.newsItems || 0),
+      reviewIssues: Number(payload.summary?.reviewIssues || 0),
+      activeQueue: Number(payload.summary?.activeQueue || actionItems.length || 0),
+      deliveredAgents: Number(payload.summary?.deliveredAgents || 0),
+      averageEnergy: Number(payload.summary?.averageEnergy || 0)
+    },
+    lastRun: history[0]
+      ? {
+          at: cleanShortText(history[0].at || "", 40),
+          trigger: cleanShortText(history[0].trigger || "", 80),
+          newsItems: Number(history[0].newsItems || 0),
+          reviewIssues: Number(history[0].reviewIssues || 0),
+          queueItems: Number(history[0].queueItems || 0)
+        }
+      : null,
+    offices: officeDashboard.slice(0, 6).map((office) => ({
+      label: cleanShortText(office.label || office.office || office.name || "Escritório", 80),
+      status: cleanShortText(office.status || office.mood || "ativo", 80),
+      queue: Number(office.queue || office.queueDepth || office.actions || 0)
+    })),
+    actions: actionItems
+  };
+}
+
 function readRealAgentsRunHistory() {
   const history = readJson(REAL_AGENTS_RUN_HISTORY_FILE, []);
   return Array.isArray(history) ? history.slice(0, 24) : [];
@@ -9798,6 +9849,10 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/office-neural-growth") {
     return sendJson(res, 200, buildNeuralGrowthPayload());
+  }
+
+  if (req.method === "GET" && pathname === "/api/daily-agent-pulse") {
+    return sendJson(res, 200, buildPublicDailyAgentPulse());
   }
 
   if (req.method === "GET" && pathname === "/api/real-agents") {
