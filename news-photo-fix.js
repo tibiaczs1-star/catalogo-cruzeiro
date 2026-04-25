@@ -49,6 +49,8 @@
   ]);
   const imageMetricsCache = new Map();
   let faceDetector = null;
+  const HOTLINK_BLOCKED_IMAGE_HOSTS = ["awn.com"];
+  const SAFE_FALLBACK_PHOTO_URL = "/assets/og-cover.svg";
 
   const normalize = (value) =>
     String(value || "")
@@ -62,8 +64,34 @@
     const rawStyle = String(styleText || "");
     if (!rawStyle) return "";
 
-    const match = rawStyle.match(/--bg-image\s*:\s*url\((['"]?)(.*?)\1\)/i);
+    const match = rawStyle.match(/--(?:bg-image|news-photo)\s*:\s*url\((['"]?)(.*?)\1\)/i);
     return match?.[2] ? String(match[2]).replace(/&amp;/gi, "&").trim() : "";
+  };
+
+  const isHotlinkBlockedImageUrl = (value) => {
+    const raw = String(value || "").trim();
+    if (!raw) {
+      return false;
+    }
+
+    try {
+      const parsed = new URL(raw, window.location.href);
+      const hostname = parsed.hostname.replace(/^www\./i, "").toLowerCase();
+      return HOTLINK_BLOCKED_IMAGE_HOSTS.some(
+        (host) => hostname === host || hostname.endsWith(`.${host}`)
+      );
+    } catch (_error) {
+      return /(^|\/\/)(?:www\.)?awn\.com\b/i.test(raw);
+    }
+  };
+
+  const resolvePaintableImageUrl = (value) => {
+    const raw = String(value || "").trim();
+    if (!raw) {
+      return "";
+    }
+
+    return isHotlinkBlockedImageUrl(raw) ? SAFE_FALLBACK_PHOTO_URL : raw;
   };
 
   const getImageForCard = (card) => {
@@ -77,7 +105,7 @@
       extractImageFromStyle(thumb?.getAttribute("style")) ||
       extractImageFromStyle(card.getAttribute("style"));
 
-    return explicit ? String(explicit) : "";
+    return resolvePaintableImageUrl(explicit);
   };
 
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));

@@ -509,6 +509,25 @@ const getThumbTopic = (thumbNode, article) => {
   return thumbTopicFallbacks[fallbackClass] || "Radar";
 };
 
+const HOTLINK_BLOCKED_IMAGE_HOSTS = ["awn.com"];
+
+const isHotlinkBlockedImageUrl = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(raw, window.location.href);
+    const hostname = parsed.hostname.replace(/^www\./i, "").toLowerCase();
+    return HOTLINK_BLOCKED_IMAGE_HOSTS.some(
+      (host) => hostname === host || hostname.endsWith(`.${host}`)
+    );
+  } catch (_error) {
+    return /(^|\/\/)(?:www\.)?awn\.com\b/i.test(raw);
+  }
+};
+
 const sanitizeImageUrl = (value) => {
   const raw = String(value || "").trim();
   if (!raw) {
@@ -516,6 +535,10 @@ const sanitizeImageUrl = (value) => {
   }
 
   const cleaned = raw.replace(/'/g, "%27");
+  if (isHotlinkBlockedImageUrl(cleaned)) {
+    return "";
+  }
+
   try {
     const parsed = new URL(cleaned, window.location.href);
     const path = decodeURIComponent(parsed.pathname || "").toLowerCase();
@@ -551,7 +574,7 @@ const pushUniqueImageCandidate = (bucket, value) => {
 
 const buildImageLoadCandidates = (value) => {
   const raw = String(value || "").trim();
-  if (!raw) {
+  if (!raw || isHotlinkBlockedImageUrl(raw)) {
     return [];
   }
 
@@ -3208,11 +3231,23 @@ function getArticleImageKey(article = {}, surface = "default") {
 const newsSurfaceReservations = {
   hero: new Set(),
   social: new Set(),
+  cadernos: new Set(),
+  monthly: new Set(),
+  dailyBuzz: new Set(),
+  archive: new Set(),
+  live: new Set(),
   buzz: new Set(),
   popular: new Set()
 };
 
-const getArticleUsageKey = (article = {}) => getRadarArticleKey(normalizeRuntimeArticle(article));
+const getArticleUsageKey = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const dateKey = getArticleDateKey(normalizedArticle);
+  const storyCluster = getArchiveStoryCluster(normalizedArticle);
+  const clusterKey = [storyCluster, dateKey].filter(Boolean).join("::");
+
+  return clusterKey || getRadarArticleKey(normalizedArticle);
+};
 
 const reserveSurfaceArticles = (surfaceName = "", articles = []) => {
   if (!surfaceName) {
@@ -3248,8 +3283,8 @@ const pushUniqueArticle = (
   selectedImages,
   allowDuplicateImages = false
 ) => {
-  const articleKey = getRadarArticleKey(article);
-  if (selectedKeys.has(articleKey)) {
+  const articleKey = getArticleUsageKey(article);
+  if (!articleKey || selectedKeys.has(articleKey)) {
     return false;
   }
 
@@ -3289,7 +3324,7 @@ const pickRadarLeadArticles = (articles = []) => {
 
   if (leadArticles.length < 3) {
     const fallbackArticles = sortRadarArticles(
-      articles.filter((article) => !selectedKeys.has(getRadarArticleKey(article)))
+      articles.filter((article) => !selectedKeys.has(getArticleUsageKey(article)))
     );
     const fallbackArticlesWithImage = fallbackArticles.filter((article) =>
       articleHasUsableImageCandidate(article, "hero")
@@ -5942,12 +5977,18 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
   `;
 };
 
+const rerenderEditorialRemainderSurfaces = () => {
+  renderArchiveHighlights();
+  renderLiveFeed();
+};
+
 const renderDailyTrendingBuzz = async (options = {}) => {
   if (!trendingBuzzGrid) {
     return;
   }
 
   const liveBuzzItems = await fetchTopicFeedCached("buzz", 12, options);
+  const reservedKeys = buildReservedArticleKeys(["dailyBuzz"]);
   const liveCases = dedupeNewsItems(liveBuzzItems)
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isBrazilBuzzArticle)
@@ -5960,6 +6001,15 @@ const renderDailyTrendingBuzz = async (options = {}) => {
 
       return getArticlePublishedTime(right) - getArticlePublishedTime(left);
     })
+    .filter((item) => {
+      const key = getArticleUsageKey(item);
+      if (!key || reservedKeys.has(key)) {
+        return false;
+      }
+
+      reservedKeys.add(key);
+      return true;
+    })
     .slice(0, 6);
 
   const selectedCases =
@@ -5969,7 +6019,9 @@ const renderDailyTrendingBuzz = async (options = {}) => {
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
   trendingBuzzGrid.innerHTML = selectedCases.map(buildDailyInfluencerBuzzCard).join("");
+  reserveSurfaceArticles("dailyBuzz", selectedCases);
   registerArticleCardLinks(trendingBuzzGrid);
+  rerenderEditorialRemainderSurfaces();
 };
 
 const monthlyFallbackStories = [
@@ -6187,7 +6239,7 @@ const pickMonthlyDynamicStories = async (options = {}) => {
     });
 
   const selected = [];
-  const usedKeys = new Set();
+  const usedKeys = buildReservedArticleKeys(["monthly"]);
   const usedImages = new Set();
 
   for (const { article } of candidates) {
@@ -6219,10 +6271,12 @@ const renderDynamicMonthlyBuzz = async (options = {}) => {
   const { stories, agentPulse } = await pickMonthlyDynamicStories(options);
   monthlyBuzzGrid.classList.add("is-dynamic-monthly");
   monthlyBuzzGrid.innerHTML = stories.map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse)).join("");
+  reserveSurfaceArticles("monthly", stories);
   monthlyBuzzGrid
     .querySelectorAll(".reveal")
     .forEach((node) => node.classList.add("active", "is-visible"));
   registerArticleCardLinks(monthlyBuzzGrid);
+  rerenderEditorialRemainderSurfaces();
 };
 
 const communityTrendFallbackTopics = [
@@ -6299,6 +6353,35 @@ const communityTrendStopwords = new Set([
   "o"
 ]);
 
+const communityTrendPortuguesePattern =
+  /\b(brasil|brasileir|acre|jurua|juru[aá]|cruzeiro do sul|czs|rio branco|amazonia|amazônia|cultura|politica|política|servico|serviço|saude|saúde|educacao|educação|cidade|bairro|comunidade|prefeitura|governo|agenda|evento|show|festa|comercio|comércio|negocio|negócio|cotidiano|chuva|rua|obra|transito|trânsito|esporte|futebol|musica|música|noticia|notícia|debate|publico|público|viralizou|repercussao|repercussão|memes?|hoje)\b/i;
+
+const isPortugueseCommunityTrendText = (value = "") => {
+  const raw = String(value || "").trim();
+  if (!raw) return false;
+  if (/[^\u0000-\u024F#_\s\d.,'’$-]/u.test(raw)) return false;
+  if (/^#?[A-Z0-9_]{8,}$/u.test(raw) && !/(BRASIL|ACRE|JURUA|CZS)/u.test(raw)) return false;
+  if (/_/.test(raw) && !/(vale_do_jurua|cruzeiro_do_sul)/i.test(raw)) return false;
+
+  const spaced = raw.replace(/^#/, "").replace(/([a-z])([A-Z])/g, "$1 $2");
+  const normalized = normalizeText(spaced);
+  if (/^(?:\d{1,2}h|\d{1,2}:\d{2})$/i.test(normalized)) return false;
+  return communityTrendPortuguesePattern.test(raw) || communityTrendPortuguesePattern.test(normalized);
+};
+
+const isPortugueseCommunityTrendItem = (item = {}) => {
+  const tags = Array.isArray(item.hashtags) ? item.hashtags : [];
+  return [
+    item.title,
+    item.summary,
+    item.lede,
+    item.category,
+    item.sourceName,
+    item.topicGroup,
+    ...tags
+  ].some(isPortugueseCommunityTrendText);
+};
+
 const normalizeCommunityHashtag = (value = "") => {
   const cleaned = String(value || "")
     .normalize("NFD")
@@ -6322,7 +6405,7 @@ const buildCommunityTrendHashtags = (items = []) => {
     const providedTags = Array.isArray(item.hashtags) ? item.hashtags : [];
     providedTags.forEach((tag) => {
       const safeTag = tag.startsWith("#") ? tag : normalizeCommunityHashtag(tag);
-      if (safeTag) dynamicTags.push(safeTag);
+      if (safeTag && isPortugueseCommunityTrendText(safeTag)) dynamicTags.push(safeTag);
     });
 
     [item.category, item.topicGroup, item.sourceName, item.title]
@@ -6332,7 +6415,7 @@ const buildCommunityTrendHashtags = (items = []) => {
   });
 
   return [...new Set([...fixedTags, ...dynamicTags])]
-    .filter((tag) => tag.length > 1 && tag.length <= 32)
+    .filter((tag) => tag.length > 1 && tag.length <= 32 && isPortugueseCommunityTrendText(tag))
     .slice(0, 12);
 };
 
@@ -6364,7 +6447,7 @@ const getCommunityTrendScore = (article = {}) => {
 };
 
 const pickCommunityTrendTopics = async (options = {}) => {
-  const externalTrendItems = await fetchSocialTrendsCached(24, options);
+  const externalTrendItems = (await fetchSocialTrendsCached(24, options)).filter(isPortugueseCommunityTrendItem);
   const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
   const liveItems = dedupeNewsItems([
     ...liveBuzzItems,
@@ -6486,7 +6569,7 @@ const cadernoCategoryPriority = {
   "utilidade publica": ["servicos", "cotidiano", "saude", "prefeitura"]
 };
 
-const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2) => {
+const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2, usedKeys = new Set()) => {
   const normalizedItems = dedupeNewsItems(items).map((item) => normalizeRuntimeArticle(item));
   const selected = [];
   const seen = new Set();
@@ -6495,8 +6578,8 @@ const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2) =
       return;
     }
 
-    const key = getRadarArticleKey(item);
-    if (seen.has(key)) {
+    const key = getArticleUsageKey(item);
+    if (!key || seen.has(key) || usedKeys.has(key)) {
       return;
     }
 
@@ -6505,6 +6588,7 @@ const pickCadernoArticlesByPriority = (items = [], priorities = [], count = 2) =
     }
 
     seen.add(key);
+    usedKeys.add(key);
     selected.push(item);
   };
 
@@ -6891,10 +6975,13 @@ const applyCadernoStoryArticle = (storyNode, article, { preserveHref = false } =
 
 const hydrateCadernoCards = async (items = []) => {
   if (!cadernoCards.length) {
+    reserveSurfaceArticles("cadernos", []);
     return;
   }
 
   const normalizedItems = dedupeNewsItems(items);
+  const usedKeys = buildReservedArticleKeys(["cadernos"]);
+  const appliedArticles = [];
   const cardTasks = cadernoCards.map(async (card) => {
     const kicker = normalizeText(card.querySelector(".card-kicker")?.textContent || "");
     const stories = [...card.querySelectorAll(".mini-story")];
@@ -6907,11 +6994,15 @@ const hydrateCadernoCards = async (items = []) => {
       const articles = pickCadernoArticlesByPriority(
         normalizedItems,
         cadernoCategoryPriority[kicker],
-        stories.length
+        stories.length,
+        usedKeys
       );
 
       stories.forEach((storyNode, index) => {
-        applyCadernoStoryArticle(storyNode, articles[index]);
+        if (articles[index]) {
+          appliedArticles.push(articles[index]);
+          applyCadernoStoryArticle(storyNode, articles[index]);
+        }
       });
       return;
     }
@@ -6929,7 +7020,18 @@ const hydrateCadernoCards = async (items = []) => {
           : topicItems;
 
       stories.forEach((storyNode, index) => {
-        applyCadernoStoryArticle(storyNode, filteredItems[index] || topicItems[index], {
+        const article = filteredItems[index] || topicItems[index];
+        const articleKey = getArticleUsageKey(article);
+        if (articleKey && usedKeys.has(articleKey)) {
+          return;
+        }
+
+        if (articleKey) {
+          usedKeys.add(articleKey);
+          appliedArticles.push(article);
+        }
+
+        applyCadernoStoryArticle(storyNode, article, {
           preserveHref: true
         });
       });
@@ -6951,6 +7053,8 @@ const hydrateCadernoCards = async (items = []) => {
   });
 
   await Promise.all(cardTasks);
+  reserveSurfaceArticles("cadernos", appliedArticles);
+  rerenderEditorialRemainderSurfaces();
 };
 
 const renderGlobalPoliticsHighlights = async (options = {}) => {
@@ -7585,6 +7689,10 @@ const hydrateSocialCards = (items = []) => {
     if (slugFromHref && pinnedSocialSlugs.has(slugFromHref)) {
       const hasUsableImage = articleHasUsableImageCandidate(article);
       card.classList.toggle("card-without-photo", !hasUsableImage);
+      if (articleKey) {
+        usedKeys.add(articleKey);
+        appliedArticles.push(article);
+      }
       if (linkNode) {
         applyThumbImage(linkNode, article);
       }
@@ -7610,6 +7718,7 @@ const hydrateSocialCards = (items = []) => {
   });
 
   if (!missingCards.length) {
+    reserveSurfaceArticles("social", appliedArticles);
     return;
   }
 
@@ -9499,12 +9608,16 @@ const renderArchiveHighlights = () => {
     return;
   }
 
+  const reservedKeys = buildReservedArticleKeys(["archive", "live"]);
   const filteredItems = getArchiveHighlightItems();
   const fallbackItems = getSortedLiveFeedArticles(
     liveFeedState.items.length ? liveFeedState.items : initialStaticNews
   ).map((item) => normalizeRuntimeArticle(item));
   const visibleItems = diversifyArchiveStories(
-    filteredItems.length ? filteredItems : fallbackItems,
+    (filteredItems.length ? filteredItems : fallbackItems).filter((article) => {
+      const key = getArticleUsageKey(article);
+      return key && !reservedKeys.has(key);
+    }),
     6
   ).slice(0, 6);
   const activeLabel = archiveFilterLabels[archiveHighlightState.filter] || "Arquivo";
@@ -9533,6 +9646,7 @@ const renderArchiveHighlights = () => {
     archiveHighlightSummary.textContent = `Recorte ${activeLabel}: ${total} notícia${total === 1 ? "" : "s"} encontrada${total === 1 ? "" : "s"} no arquivo real.`;
   }
 
+  reserveSurfaceArticles("archive", visibleItems);
   registerInteractivePanels(archiveHighlightGrid);
   registerArticleCardLinks(archiveHighlightGrid);
 };
@@ -9731,6 +9845,8 @@ const getFilteredLiveFeedArticles = () => {
   const query = String(liveFeedQuery?.value || "").trim();
   const normalizedQuery = normalizeText(query);
   const sortedArticles = getSortedLiveFeedArticles(liveFeedState.items);
+  const shouldExcludePromotedSurfaces = !normalizedQuery && !liveFeedState.activeCategory;
+  const reservedKeys = shouldExcludePromotedSurfaces ? buildReservedArticleKeys(["live"]) : new Set();
   const categoryFiltered = sortedArticles
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => {
@@ -9739,6 +9855,13 @@ const getFilteredLiveFeedArticles = () => {
         !articleMatchesCategoryFilter(article, liveFeedState.activeCategory)
       ) {
         return false;
+      }
+
+      if (shouldExcludePromotedSurfaces) {
+        const key = getArticleUsageKey(article);
+        if (!key || reservedKeys.has(key)) {
+          return false;
+        }
       }
 
       return true;
@@ -9863,6 +9986,7 @@ const renderLiveFeed = () => {
     liveFeedGrid.appendChild(buildFeedCard(article));
   });
 
+  reserveSurfaceArticles("live", visibleSlice);
   liveFeedMore.hidden = visibleSlice.length >= filtered.length;
   registerInteractivePanels(liveFeedGrid);
   registerArticleCardLinks(liveFeedGrid);

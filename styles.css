@@ -5373,7 +5373,9 @@ input[type="range"] {
   color: var(--navy);
   font-family: "Outfit", sans-serif;
   font-size: 1rem;
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
 }
 
 .newsletter-payment-actions {
@@ -11408,9 +11410,10 @@ input[type="range"] {
   margin: 0;
   font-size: clamp(1.9rem, 1.35vw, 2.35rem);
   line-height: 1.06;
-  letter-spacing: -0.015em;
+  letter-spacing: 0;
   word-break: normal;
-  hyphens: auto;
+  overflow-wrap: normal;
+  hyphens: manual;
 }
 
 #radar .news-card.radar-top-story h3 {
@@ -11425,11 +11428,19 @@ input[type="range"] {
   font-size: 1.02rem;
   line-height: 1.58;
   word-break: normal;
-  hyphens: auto;
+  overflow-wrap: normal;
+  hyphens: manual;
 }
 
 #radar .news-card.radar-top-story p {
   font-size: 0.98rem;
+}
+
+:is(.news-card, .archive-card, .live-feed-card, .feed-card, .generated-feed-card, .generated-archive-card)
+  :is(h1, h2, h3, p, a, span) {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: manual;
 }
 
 #radar .news-source {
@@ -15441,6 +15452,7 @@ input[type="range"] {
 .community-trend-head,
 .community-trend-hero,
 .community-trend-captions,
+.community-trend-tag-panel,
 .community-trend-tags {
   position: relative;
   z-index: 1;
@@ -15522,10 +15534,27 @@ input[type="range"] {
   text-transform: uppercase;
 }
 
+.community-trend-tag-panel {
+  display: grid;
+  gap: 0.42rem;
+  margin-top: 0.12rem;
+  padding-top: 0.58rem;
+  border-top: 1px solid rgba(210, 232, 255, 0.16);
+}
+
+.community-trend-tag-panel small {
+  color: rgba(232, 242, 255, 0.68);
+  font-size: 0.58rem;
+  font-weight: 950;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .community-trend-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.32rem;
+  align-items: center;
 }
 
 .community-trend-tags span {
@@ -18642,7 +18671,8 @@ a {
 
 .insiders-terminal-output .terminal-stream {
   color: rgba(237, 250, 255, 0.94);
-  word-break: break-word;
+  word-break: normal;
+  overflow-wrap: anywhere;
 }
 
 .insiders-terminal-output .terminal-stream.is-rendered {

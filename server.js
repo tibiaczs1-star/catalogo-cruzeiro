@@ -3959,9 +3959,27 @@ function pickLargestSrcsetCandidate(rawSrcset, baseUrl) {
   return entries[0].url;
 }
 
+const HOTLINK_BLOCKED_IMAGE_HOSTS = ["awn.com"];
+
+function isHotlinkBlockedImageUrl(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return false;
+
+  try {
+    const parsed = new URL(raw, "https://example.com");
+    const hostname = parsed.hostname.toLowerCase().replace(/^www\./, "");
+    return HOTLINK_BLOCKED_IMAGE_HOSTS.some(
+      (host) => hostname === host || hostname.endsWith(`.${host}`)
+    );
+  } catch (_error) {
+    return /(^|\/\/)(?:www\.)?awn\.com\b/i.test(raw);
+  }
+}
+
 function shouldIgnoreImageUrl(value) {
   const imageUrl = String(value || "").toLowerCase();
   if (!imageUrl) return true;
+  if (isHotlinkBlockedImageUrl(imageUrl)) return true;
   if (/\.(?:pdf|docx?|xlsx?|pptx?|zip|rar|7z)(?:$|[?#])/i.test(imageUrl)) return true;
   const looksLikeKnownImageRoute =
     /\.(?:avif|gif|jpe?g|png|svg|webp)(?:[?#].*)?$/i.test(imageUrl) ||
@@ -3998,13 +4016,48 @@ function normalizeComparableImageUrl(value) {
     .toLowerCase();
 }
 
+function wrapSvgTextByWords(value = "", maxChars = 31, maxLines = 3) {
+  const words = cleanShortText(value, 150).split(/\s+/).filter(Boolean);
+  const lines = [];
+
+  words.forEach((word) => {
+    if (!lines.length) {
+      lines.push(word);
+      return;
+    }
+
+    const current = lines[lines.length - 1] || "";
+    const next = current ? `${current} ${word}` : word;
+
+    if (next.length <= maxChars) {
+      lines[lines.length - 1] = next;
+      return;
+    }
+
+    if (lines.length < maxLines) {
+      lines.push(word);
+    }
+  });
+
+  const consumed = lines.join(" ").replace(/\.\.\.$/, "");
+  if (words.join(" ").length > consumed.length && lines.length) {
+    lines[lines.length - 1] = `${lines[lines.length - 1].replace(/\s+\S*$/, "").trim() || lines[lines.length - 1]}...`;
+  }
+
+  return lines.slice(0, maxLines);
+}
+
 function buildNewsFallbackSvg(item = {}, reason = "fallback") {
-  const title = cleanShortText(item.title || item.sourceLabel || "Notícia em revisão", 110);
+  const title = cleanShortText(item.title || item.sourceLabel || "Notícia em revisão", 150);
   const category = cleanShortText(item.category || item.eyebrow || "Notícia", 40).toUpperCase();
   const source = cleanShortText(item.sourceName || "Catálogo", 42);
   const hue = (hashString(`${item.slug || title}|${reason}`) % 280) + 20;
   const accent = `hsl(${hue} 78% 58%)`;
   const accent2 = `hsl(${(hue + 55) % 360} 72% 48%)`;
+  const titleLines = wrapSvgTextByWords(title, 31, 3);
+  const titleMarkup = titleLines
+    .map((line, index) => `<tspan x="126" dy="${index === 0 ? "0" : "70"}">${escapeHtml(line)}</tspan>`)
+    .join("");
   const escapedTitle = escapeHtml(title);
   const escapedCategory = escapeHtml(category);
   const escapedSource = escapeHtml(source);
@@ -4029,9 +4082,7 @@ function buildNewsFallbackSvg(item = {}, reason = "fallback") {
   <circle cx="1038" cy="210" r="52" fill="${accent2}" opacity=".78"/>
   <path d="M126 492h948" stroke="${accent}" stroke-width="12" stroke-linecap="round" opacity=".82"/>
   <text x="126" y="292" fill="#fff8ea" font-family="Georgia, serif" font-size="56" font-weight="700">
-    <tspan x="126" dy="0">${escapedTitle.slice(0, 34)}</tspan>
-    <tspan x="126" dy="70">${escapedTitle.slice(34, 68)}</tspan>
-    <tspan x="126" dy="70">${escapedTitle.slice(68, 102)}</tspan>
+    ${titleMarkup}
   </text>
   <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="25" font-weight="700">${escapedSource} • imagem editorial gerada para evitar repetição</text>
 </svg>
@@ -4045,9 +4096,7 @@ function ensureNewsFallbackImage(item = {}, reason = "fallback") {
   const filePath = path.join(ROOT_DIR, "assets", "news-fallbacks", fileName);
   try {
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
-    if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, buildNewsFallbackSvg(item, reason), "utf-8");
-    }
+    fs.writeFileSync(filePath, buildNewsFallbackSvg(item, reason), "utf-8");
   } catch (_error) {
     return "";
   }
@@ -4058,6 +4107,7 @@ function repairNewsImagesForDisplay(items = []) {
   const seenByDivision = new Map();
   return (Array.isArray(items) ? items : []).map((item) => {
     const currentImage = getArticleImageUrl(item);
+    const sourceUrl = String(item.sourceUrl || item.url || item.link || "").trim();
     const division = getArticleDivisionKey(item);
     const imageKey = normalizeComparableImageUrl(currentImage);
     const duplicateKey = imageKey ? `${division}|${imageKey}` : "";
@@ -4071,6 +4121,18 @@ function repairNewsImagesForDisplay(items = []) {
     if (!isBadImage && !isRepeatedInDivision) return item;
 
     const reason = isBadImage ? "imagem-ausente-ou-generica" : "foto-repetida-na-mesma-divisao";
+    if (sourceUrl) {
+      return {
+        ...item,
+        imageUrl: "",
+        feedImageUrl: "",
+        sourceImageUrl: "",
+        imageCredit: item.imageCredit || "",
+        imageQuality: `${reason}-buscar-na-fonte`,
+        originalImageUrl: currentImage || item.originalImageUrl || ""
+      };
+    }
+
     const fallbackUrl = ensureNewsFallbackImage(item, reason);
     if (!fallbackUrl) return item;
 
@@ -4108,6 +4170,7 @@ function selectBestImageCandidate(candidates = []) {
 
   const ranked = unique
     .map((url) => ({ url, score: getImageCandidateScore(url) }))
+    .filter((entry) => entry.score > -1000)
     .sort((left, right) => right.score - left.score);
 
   return ranked[0]?.url || "";
@@ -4637,13 +4700,6 @@ const SOCIAL_TREND_SOURCES = [
     type: "instagram"
   },
   {
-    id: "best-hashtags-brazil",
-    name: "Best Hashtags Brazil",
-    platform: "Instagram",
-    url: "https://best-hashtags.com/hashtag/brazil/",
-    type: "instagram"
-  },
-  {
     id: "best-hashtags-acre",
     name: "Best Hashtags Acre",
     platform: "Instagram",
@@ -4729,6 +4785,23 @@ function normalizeSocialTrendLabel(value = "") {
   }
 
   return label;
+}
+
+const SOCIAL_TREND_PORTUGUESE_PATTERN =
+  /\b(brasil|brasileir|acre|jurua|juru[aá]|cruzeiro do sul|czs|rio branco|amazonia|amazônia|cultura|politica|política|servico|serviço|saude|saúde|educacao|educação|cidade|bairro|comunidade|prefeitura|governo|agenda|evento|show|festa|comercio|comércio|negocio|negócio|cotidiano|chuva|rua|obra|transito|trânsito|esporte|futebol|musica|música|noticia|notícia|debate|publico|público|viralizou|repercussao|repercussão|memes?|hoje)\b/i;
+
+function isPortugueseBrazilianSocialTrendLabel(value = "") {
+  const label = String(value || "").trim();
+  if (!label) return false;
+  if (/[^\u0000-\u024F#_\s\d.,'’$-]/u.test(label)) return false;
+  if (/^#?[A-Z0-9_]{8,}$/u.test(label) && !/(BRASIL|ACRE|JURUA|CZS)/u.test(label)) return false;
+  if (/_/.test(label) && !/(vale_do_jurua|cruzeiro_do_sul)/i.test(label)) return false;
+
+  const normalized = normalizeText(label.replace(/^#/, "").replace(/([a-z])([A-Z])/g, "$1 $2"));
+  if (SOCIAL_TREND_BLOCKLIST.has(normalized)) return false;
+  if (/^(?:\d{1,2}h|\d{1,2}:\d{2})$/i.test(normalized)) return false;
+
+  return SOCIAL_TREND_PORTUGUESE_PATTERN.test(label) || SOCIAL_TREND_PORTUGUESE_PATTERN.test(normalized);
 }
 
 function trendToHashtag(value = "") {
@@ -4824,7 +4897,7 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
 
     const label = normalizeSocialTrendLabel(rawLabel);
     const key = normalizeText(label);
-    if (!label || !key || seen.has(key)) {
+    if (!label || !key || seen.has(key) || !isPortugueseBrazilianSocialTrendLabel(label)) {
       return;
     }
 
@@ -4884,6 +4957,7 @@ function mergeSocialTrendItems(items = [], limit = 24) {
   const platformPriority = { "X/Twitter": 0, Instagram: 1 };
 
   items
+    .filter((item) => isPortugueseBrazilianSocialTrendLabel(item.title || item.hashtags?.[0] || ""))
     .slice()
     .sort((left, right) => {
       const priorityDiff =
@@ -4940,9 +5014,11 @@ async function getSocialTrends(limit = 24) {
     cachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < SOCIAL_TRENDS_TTL_MS;
 
   if (cacheIsFresh) {
+    const scopedItems = mergeSocialTrendItems(cachedItems, safeLimit);
     return {
       ...cached,
-      items: cachedItems.slice(0, safeLimit),
+      items: scopedItems,
+      total: scopedItems.length,
       stale: false
     };
   }
@@ -4961,9 +5037,11 @@ async function getSocialTrends(limit = 24) {
   }
 
   if (cachedItems.length) {
+    const scopedItems = mergeSocialTrendItems(cachedItems, safeLimit);
     return {
       ...cached,
-      items: cachedItems.slice(0, safeLimit),
+      items: scopedItems,
+      total: scopedItems.length,
       stale: true
     };
   }

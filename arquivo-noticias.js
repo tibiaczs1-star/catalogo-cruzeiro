@@ -279,6 +279,25 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;");
 
+  const HOTLINK_BLOCKED_IMAGE_HOSTS = ["awn.com"];
+
+  const isHotlinkBlockedImageUrl = (value) => {
+    const raw = String(value || "").trim();
+    if (!raw) {
+      return false;
+    }
+
+    try {
+      const parsed = new URL(raw, window.location.href);
+      const hostname = parsed.hostname.replace(/^www\./i, "").toLowerCase();
+      return HOTLINK_BLOCKED_IMAGE_HOSTS.some(
+        (host) => hostname === host || hostname.endsWith(`.${host}`)
+      );
+    } catch (_error) {
+      return /(^|\/\/)(?:www\.)?awn\.com\b/i.test(raw);
+    }
+  };
+
   const sanitizeImageUrl = (value) => {
     const cleanValue = String(value || "")
       .replace(/\\\//g, "/")
@@ -286,6 +305,10 @@
       .trim();
 
     if (!cleanValue) {
+      return "";
+    }
+
+    if (isHotlinkBlockedImageUrl(cleanValue)) {
       return "";
     }
 
