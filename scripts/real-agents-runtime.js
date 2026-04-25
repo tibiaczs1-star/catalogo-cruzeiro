@@ -48,20 +48,23 @@ const EDITORIAL_BODY_ROUTINE = {
   capabilities: [
     "detectar resumo repetido no corpo da materia",
     "criar corpo editorial proprio quando a captacao vier sem texto",
-    "separar titulo, resumo, checagem, corpo editorial e fonte"
+    "separar titulo, resumo, checagem, corpo editorial e fonte",
+    "bloquear materia truncada ou encerrada no meio da frase"
   ],
   monitoringFocus: [
     "materias sem body editorial",
     "duplicacao entre lede/summary e corpo",
-    "fallback editorial honesto sem inventar fatos"
+    "fallback editorial honesto sem inventar fatos",
+    "frases finais penduradas, conectivos soltos e texto sem fechamento logico"
   ],
   deliverables: [
     "corpo editorial sem resumo repetido",
     "alerta de materia sem desenvolvimento",
-    "revisao de hierarquia titulo-resumo-corpo-fonte"
+    "revisao de hierarquia titulo-resumo-corpo-fonte",
+    "bloqueio de publicacao para materia truncada"
   ],
   prompt:
-    "Rotina obrigatoria: ao revisar noticia captada, nunca repetir o resumo no corpo. Se a captacao trouxer apenas summary/lede, produzir corpo editorial proprio, transparente e contextualizado com fonte, data, impacto e cautelas, sem inventar fatos."
+    "Rotina obrigatoria: ao revisar noticia captada, nunca repetir o resumo no corpo. Se a captacao trouxer apenas summary/lede, produzir corpo editorial proprio, transparente e contextualizado com fonte, data, impacto e cautelas, sem inventar fatos. Trava de sentido: nenhum artigo pode ser aprovado se terminar no meio de uma frase, com conectivo/preposicao/artigo solto, sem ponto final logico ou com uma ideia iniciada e nao concluida. Quando detectar final truncado, remover o trecho quebrado e substituir por fechamento editorial honesto informando que a fonte original ainda nao trouxe desenvolvimento suficiente."
 };
 
 const MAILZA_PRIORITY_ROUTINE = {

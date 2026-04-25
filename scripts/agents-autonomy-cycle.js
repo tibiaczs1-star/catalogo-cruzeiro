@@ -139,13 +139,15 @@ function sanitizeReviewCopy(item = {}) {
   const sanitizedDevelopment = Array.isArray(item.development)
     ? item.development.filter((paragraph) => !hasReviewBlockedCopy(paragraph))
     : item.development;
-  const summary = cleanText(item.summary || "");
+  const fallbackSummary = `${title}. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.`;
+  const summary = trimToCompleteSentence(item.summary || item.lede || "", fallbackSummary);
+  const lede = trimToCompleteSentence(item.lede || item.summary || "", summary || fallbackSummary);
 
   return {
     ...item,
     lede: isLongTheaterFeed
       ? `${title}. A publicacao do G1 Pop & Arte traz os principais detalhes do espetaculo e da temporada.`
-      : item.lede,
+      : lede,
     summary: isLongTheaterFeed
       ? `${title}. O registro cultural foi resumido para melhorar a leitura no portal e manter o link da fonte original.`
       : summary.replace(/\bpauta de cidade\b/gi, "assunto da cidade"),
@@ -161,6 +163,75 @@ function isRepeated(paragraph = "", reference = "") {
   if (paragraphKey === referenceKey) return true;
   const shortest = Math.min(paragraphKey.length, referenceKey.length);
   return shortest >= 80 && (paragraphKey.includes(referenceKey) || referenceKey.includes(paragraphKey));
+}
+
+function endsWithCompleteSentence(value = "") {
+  const text = cleanText(value);
+  if (!text) return false;
+  if (/[.!?…]"?$/.test(text)) return true;
+
+  const normalized = fingerprint(text);
+  const words = normalized.split(" ").filter(Boolean);
+  const lastWord = words.at(-1) || "";
+  const danglingWords = new Set([
+    "a",
+    "o",
+    "as",
+    "os",
+    "um",
+    "uma",
+    "uns",
+    "umas",
+    "de",
+    "da",
+    "do",
+    "das",
+    "dos",
+    "em",
+    "no",
+    "na",
+    "nos",
+    "nas",
+    "com",
+    "para",
+    "por",
+    "que",
+    "e",
+    "ou",
+    "sobre",
+    "entre",
+    "durante",
+    "apos",
+    "segundo",
+    "conforme"
+  ]);
+
+  return words.length >= 16 && !danglingWords.has(lastWord);
+}
+
+function removeDanglingTail(paragraphs = []) {
+  const next = [...paragraphs];
+  while (next.length && !endsWithCompleteSentence(next.at(-1))) {
+    next.pop();
+  }
+  return next;
+}
+
+function trimToCompleteSentence(value = "", fallback = "") {
+  const text = cleanText(value)
+    .replace(/\[(?:\.{3}|…|&#8230;)\]$/i, "")
+    .replace(/\((?:\.{3}|…|&#8230;)\)$/i, "")
+    .replace(/(?:\.{3}|…|\[\s*\])$/i, "")
+    .trim();
+
+  if (endsWithCompleteSentence(text)) return text;
+
+  const sentences = [...text.matchAll(/[^.!?…]+[.!?…](?=\s|$)/g)]
+    .map((match) => match[0].trim())
+    .filter(Boolean);
+  if (sentences.length) return sentences.join(" ");
+
+  return cleanText(fallback || text, 220);
 }
 
 function buildFallbackBody(item = {}) {
@@ -180,7 +251,7 @@ function buildFallbackBody(item = {}) {
 function normalizeBody(item = {}) {
   const reference = item.lede || item.summary || item.description || "";
   const body = Array.isArray(item.body) ? item.body.map((line) => cleanText(line)).filter(Boolean) : [];
-  const unique = body.filter((paragraph) => !isRepeated(paragraph, reference));
+  const unique = removeDanglingTail(body.filter((paragraph) => !isRepeated(paragraph, reference)));
   return unique.length ? unique : buildFallbackBody(item);
 }
 

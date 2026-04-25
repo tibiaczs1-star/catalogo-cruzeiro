@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-24T22:45:06.738Z",
+  "lastUpdatedAt": "2026-04-25T12:01:38.531Z",
   "orders": [
     {
       "id": "2026-04-24-implementar-fila-cheffe-call-mobile-only",
@@ -6035,6 +6035,196 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-04-24-pubpaid-mapear-enter-game-na-imagem-do-usuario",
+      "createdAt": "2026-04-24T23:42:44.803Z",
+      "updatedAt": "2026-04-24T23:42:44.803Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ta ai o arquivo de entra no jogo, esse que vai ser o lugar onde vc vai mapear enter pra entra no jogo, ilumine a parte escrita entra no jogo",
+      "summary": "PubPaid 2.0: usar imagem fornecida como tela final Entrar no jogo, iluminar texto e mapear hitbox",
+      "normalizedTasks": [
+        "copiar imagem fonte para assets",
+        "gerar versao com texto Entrar no jogo iluminado",
+        "carregar asset no BootScene",
+        "usar como frame final da IntroScene",
+        "mapear clique na placa central para iniciar o jogo",
+        "validar com Playwright"
+      ],
+      "filesTouched": [
+        "assets/pubpaid/intro/pubpaid-enter-game-screen-source-v1.png",
+        "assets/pubpaid/intro/pubpaid-enter-game-screen-v1.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/IntroScene.js",
+        "pubpaid-v2.html"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/intro/pubpaid-enter-game-screen-v1.png",
+        "output/web-game/pubpaid-enter-screen-map-20260424-v2/enter-screen.png",
+        "output/web-game/pubpaid-enter-screen-map-20260424-v2/after-click.png"
+      ],
+      "tags": [
+        "pubpaid-v2",
+        "intro",
+        "enter-game",
+        "hitbox",
+        "imagegen"
+      ],
+      "nextSteps": [],
+      "notes": "Imagem editada via image_gen; texto ENTRAR NO JOGO iluminado. Hitbox mapeada em IntroScene sobre a placa central. Playwright confirmou click -> street-scene/ui-scene."
+    },
+    {
+      "id": "2026-04-25-corrigir-a-logica-interacao-do-jogo-palavras-da-rosa-mantendo-o-design-bonito-e-",
+      "createdAt": "2026-04-25T00:25:24.951Z",
+      "updatedAt": "2026-04-25T00:25:24.951Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o joguinho de caça palavras da rosa, faça ele, ele ta na mais nao funciona, tipo nao tem como entender como ele funciona, tem que digitar? nao sei, nao sabemos, procure logica ali e vc nao encontra, mais ta bonito então mantenha o design e so acerte a logica",
+      "summary": "Corrigir a lógica/interação do jogo Palavras da Rosa, mantendo o design bonito e deixando claro como jogar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-dinamizar-celebridades-polemicas-home",
+      "createdAt": "2026-04-25T00:27:41.434Z",
+      "updatedAt": "2026-04-25T00:27:41.434Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "ainda e estatico neh? nao ta dinamico, corrija e melhore",
+      "summary": "Tornar o bloco Celebridades & Polemicas dinamico na home, com cards puxados de noticias/feed e visual menos estatico.",
+      "normalizedTasks": [
+        "substituir cards fixos por renderizacao dinamica em script.js",
+        "usar noticias/cache e topic-feed buzz antes de fallback diario",
+        "adicionar selo dinamico e barra de repercussao",
+        "melhorar grid responsivo e hierarquia visual"
+      ],
+      "filesTouched": [
+        "script.js",
+        "styles.css"
+      ],
+      "assetRefs": [
+        "imagem enviada no chat mostrando o bloco mensal estatico"
+      ],
+      "tags": [
+        "home",
+        "monthly",
+        "celebridades",
+        "polemicas",
+        "dinamico"
+      ],
+      "nextSteps": [
+        "conferir visualmente o bloco #monthly no navegador real apos subir servidor local"
+      ],
+      "notes": "Validacoes locais: node --check script.js; styles.css brace-balance=0."
+    },
+    {
+      "id": "2026-04-25-transformar-o-espaco-morto-do-bloco-participacao-comunitaria-em-card-3d-com-capt",
+      "createdAt": "2026-04-25T00:29:40.295Z",
+      "updatedAt": "2026-04-25T00:57:17.271Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "torne esse espaço morto um card, ele deve ser meio que 3d sei la, e tem que conter captção de todas as trendingtopics e hastags mais faladas do dia",
+      "summary": "Transformar o espaço morto do bloco Participação Comunitária em card 3D com captação/caption de trending topics e hashtags mais faladas do dia.",
+      "normalizedTasks": [
+        "inserir card 3D dentro do espaco abaixo do texto",
+        "restaurar grid original copy/form/board",
+        "compactar card e reduzir captions para nao baguncar layout",
+        "validar sintaxe e navegador"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "styles.css"
+      ],
+      "assetRefs": [
+        "community-signal-dead-space-reference-20260425"
+      ],
+      "tags": [
+        "home",
+        "participacao-comunitaria",
+        "trending-topics",
+        "hashtags",
+        "card-3d"
+      ],
+      "nextSteps": [],
+      "notes": "Corrigido apos feedback: card 3D agora fica dentro de .community-signal-copy, abaixo do texto, sem abrir nova area/coluna no grid. Grid principal restaurado para copy/form/board. Validacoes: node --check script.js, brace-balance=0, reload no navegador confirmou card embaixo do texto e formulario/board preservados."
+    },
+    {
+      "id": "2026-04-25-criar-editorial-de-moda-e-estilo-de-vida-com-foco-em-acre-redes-sociais-e-adicio",
+      "createdAt": "2026-04-25T00:31:54.313Z",
+      "updatedAt": "2026-04-25T00:31:54.313Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "crie um editorial de modae  estilo de vida , captando mais do acre e redes sociais do acre. e ponha nos editoriais do site, com botão zinho na barra tambem chamado lifestile,",
+      "summary": "Criar editorial de moda e estilo de vida com foco em Acre/redes sociais e adicionar botão Lifestile na barra de editoriais.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-criar-trava-editorial-contra-materia-truncada-e-rodar-sincronizacao-diaria",
+      "createdAt": "2026-04-25T11:58:21.525Z",
+      "updatedAt": "2026-04-25T11:58:21.525Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "O usuario trouxe exemplo de materia captada terminando no meio da frase ('linha de frente da') e pediu criar prompt para agentes impedirem artigos sem sentido/truncados, alem de rodar a sincronizacao diaria.",
+      "summary": "Criar trava editorial contra materia truncada e rodar sincronizacao diaria",
+      "normalizedTasks": [
+        "prompt-agentes",
+        "trava-editorial",
+        "sincronizacao-diaria"
+      ],
+      "filesTouched": [
+        ".codex-agents/registry.json",
+        "scripts/real-agents-runtime.js",
+        "docs"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "noticias",
+        "agentes",
+        "qualidade-editorial"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-alterar-card-de-captacao-social-para-buscar-trending-topics-externos-da-internet",
+      "createdAt": "2026-04-25T12:01:38.531Z",
+      "updatedAt": "2026-04-25T12:01:38.531Z",
+      "status": "done",
+      "source": "chat",
+      "rawRequest": "do nosso site nao, deve ter uma lsita de tranding topcs do twiter e do instgran na internet e de la que ele deve captra",
+      "summary": "Alterar card de captação social para buscar trending topics externos da internet (X/Twitter e Instagram), não do feed interno do site.",
+      "normalizedTasks": [
+        "criar endpoint /api/social-trends",
+        "priorizar fontes externas X/Twitter e Instagram",
+        "usar feed interno apenas como fallback",
+        "validar rota em servidor temporario"
+      ],
+      "filesTouched": [
+        "server.js",
+        "script.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "participacao-comunitaria",
+        "trending-topics",
+        "twitter",
+        "instagram",
+        "externo"
+      ],
+      "nextSteps": [],
+      "notes": "Fontes externas configuradas: GetDayTrends Brasil, Trends24 Brasil, Best Hashtags Brasil/Brazil/Acre. Endpoint temporario em porta 4127 retornou items externalSource=true do Trends24."
     }
   ]
 }

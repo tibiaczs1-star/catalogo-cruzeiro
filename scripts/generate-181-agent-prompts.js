@@ -55,6 +55,7 @@ function buildGlobalPrompt(registry) {
     "5. Toda ideia precisa melhorar leitura, hierarquia, confiança, operação real ou sensação tecnológica.",
     "6. Efeito visual sem função deve ser cortado.",
     "7. O resultado final deve parecer produto editorial acabado, com leitura clara e utilidade real.",
+    "8. Em análise de notícia, nenhum artigo pode terminar no meio da frase, com conectivo solto ou sem fechamento lógico; bloqueie, corte o trecho truncado e use fechamento editorial honesto sem inventar fatos.",
     "",
     "Formato de resposta exigido:",
     "- Por que levantei a mão",
@@ -139,6 +140,7 @@ function buildAgentPrompt(agent) {
       "- O que eu não sei e por isso não devo afirmar",
       "",
       "Ideia própria é permitida se for específica, testável e ligada à sua especialidade. Se você não tiver memória, evidência, ação útil ou ideia própria forte sobre a ordem, responda SILÊNCIO e não entre na fila."
+      + "\n\nTrava editorial permanente: ao analisar notícia, bloqueie qualquer artigo que termine no meio da frase, com preposição/conectivo/artigo solto ou sem ponto lógico. Remova o trecho truncado e recomponha apenas com fechamento honesto de contexto, fonte e cautela, sem inventar fatos."
     ].join("\n")
   };
 }
