@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T23:31:46.034Z",
+  "lastUpdatedAt": "2026-04-25T23:52:12.584Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6619,6 +6619,83 @@
       ],
       "nextSteps": [],
       "notes": "Feedback visual enviado por 3 capturas mobile em 2026-04-25 18:05."
+    },
+    {
+      "id": "2026-04-25-corrigir-fluxo-mobile-de-cookies-mostrar-card-consentimento-de-cookies-primeiro-",
+      "createdAt": "2026-04-25T23:51:39.822Z",
+      "updatedAt": "2026-04-25T23:51:39.822Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "so continuar como botão pra cookies nao faz sentido; eu aperto continuar depois que o pedido de cookies? nao e o contrario, primeiro o card do cookies depois continua navegação isso no mobile melhore",
+      "summary": "Corrigir fluxo mobile de cookies: mostrar card/consentimento de cookies primeiro e só depois liberar o botão Continuar/navegação.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-25-varrer-e-corrigir-ingles-solto-e-texto-estranho-nos-cards-das-editorias-games-ki",
+      "createdAt": "2026-04-25T23:51:59.733Z",
+      "updatedAt": "2026-04-25T23:51:59.733Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "varrer inglês solto/texto estranho nos cards",
+      "summary": "Varrer e corrigir inglês solto e texto estranho nos cards das editorias games, kids e study.",
+      "normalizedTasks": [
+        "limpar títulos/resumos em inglês",
+        "curar fallbacks em português",
+        "bloquear novos cards com RSS appeared first/título vazio",
+        "validar API e review"
+      ],
+      "filesTouched": [
+        "server.js",
+        "data/topic-feed-fallback.json",
+        "data/topic-feed-games.json",
+        "data/topic-feed-kids.json",
+        "data/topic-feed-study.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "editorial",
+        "cards",
+        "topic-feed",
+        "portugues"
+      ],
+      "nextSteps": [],
+      "notes": "Validações: node --check server.js, node --check script.js, npm run review:team com 0 achados, API local /api/topic-feed para games/kids/study retornando títulos em português."
+    },
+    {
+      "id": "2026-04-25-corrigir-o-bloco-de-polemicas-buzz-para-nao-repetir-a-mesma-imagem-em-materias-d",
+      "createdAt": "2026-04-25T23:52:12.584Z",
+      "updatedAt": "2026-04-25T23:52:12.584Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "3 imagens iguais 3 materia diferentes mesma area",
+      "summary": "Corrigir o bloco de polêmicas/buzz para não repetir a mesma imagem em matérias diferentes e remover HTML cru dos resumos.",
+      "normalizedTasks": [
+        "bloquear ebc.gif da Agencia Brasil como imagem real",
+        "usar fallbacks visuais diferentes por card quando nao houver foto real",
+        "limpar HTML do resumo dos cards de buzz",
+        "atualizar cache-bust do script"
+      ],
+      "filesTouched": [
+        "script.js",
+        "index.html"
+      ],
+      "assetRefs": [
+        "output/playwright/buzz-image-clean-local-consent.png"
+      ],
+      "tags": [
+        "home",
+        "buzz",
+        "imagens",
+        "html",
+        "hotfix"
+      ],
+      "nextSteps": [],
+      "notes": "Feedback enviado por captura mostrando tres cards da mesma area com foto repetida do Porto Cruzeiro e resumo com tags <p><img>."
     }
   ]
 }

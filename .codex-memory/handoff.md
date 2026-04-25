@@ -1,25 +1,25 @@
 # Handoff
 
-Updated: 2026-04-25T23:32:20.228Z
+Updated: 2026-04-25T23:53:03.197Z
 
-Ultima rodada: corrigido feedback visual mobile de 2026-04-25 18:05. Cookies deixaram de falar com o publico no banner mobile e viraram apenas botao Continuar; home mobile remove foto-card sobreposto do palco editorial e fixa balao embaixo; pesquisa-acre-2026 corrigiu bandeira do Acre para amarelo/verde. Validacoes: node --check startup-experience.js, brace-balance 0 nos CSS tocados, npm run review:team com 0 issues e captura Playwright da enquete em output/playwright/mobile-acre-flag-fix-full.png.
+Hotfix em andamento: captura do usuario mostrou 3 cards do bloco polêmicas/buzz com a mesma imagem genérica e HTML cru no resumo. Correção aplicada em script.js: ebc.gif da Agência Brasil vira placeholder rejeitado, cards sem foto real usam fallbacks diferentes por posição, resumo passa por cleanArticleExcerpt. index.html atualiza cache-bust para script.js?v=20260425buzz-image-clean1. Validações locais: node --check script.js e npm run review:team com 0 issues.
 
 ## Next
 
-- Validar no celular real no Render apos deploy.
-- Manter PubPaid fora de commit/deploy ate ordem explicita.
-- Se houver nova captura de card em cima de imagem
-- verificar primeiro mobile-home-final.css e agentes-newsroom-hero.css.
+- Commitar e subir apenas script.js
+- index.html
+- CODEX_MEMORY.md e memoria local desta ordem.
+- Manter alterações antigas de .codex-agents e caches fora do commit.
 
 ## Files In Focus
 
-- startup-experience.js
-- styles.css
-- mobile-home-final.css
+- script.js
 - index.html
-- pesquisa-acre-2026.css
-- pesquisa-acre-2026.html
+- CODEX_MEMORY.md
+- .codex-memory/current-state.md
+- .codex-memory/handoff.md
+- .codex-memory/orders.json
 
 ## Related Orders
 
-- 2026-04-25-limpar-aviso-publico-de-cookies-no-mobile-remover-sobreposicoes-de-cards-fotos-n
+- 2026-04-25-corrigir-o-bloco-de-polemicas-buzz-para-nao-repetir-a-mesma-imagem-em-materias-d

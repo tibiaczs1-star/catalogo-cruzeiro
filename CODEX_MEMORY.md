@@ -1,5 +1,22 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-25 - Hotfix imagens repetidas no Buzz
+
+- Corrigido feedback visual do bloco de polêmicas/buzz: três matérias diferentes da mesma área estavam exibindo a mesma imagem genérica.
+- `script.js` agora trata `https://agenciabrasil.ebc.com.br/ebc.gif?...` como pixel/placeholder, não como foto real de card.
+- Cards do buzz sem foto real passam a usar fallback visual variado por posição, evitando três cards iguais na mesma grade.
+- Resumos do buzz agora passam por `cleanArticleExcerpt`, removendo HTML cru como `<p><img>` antes de renderizar.
+- `index.html` recebeu cache-bust novo para `script.js`.
+- Validacoes: `node --check script.js` e `npm run review:team` com 0 achados.
+
+## Atualizacao rapida 2026-04-25 - Inglês solto em cards
+
+- Feita varredura de inglês solto/texto estranho nos cards das editorias `games`, `kids` e `study`.
+- `data/topic-feed-games.json`, `data/topic-feed-kids.json` e `data/topic-feed-study.json` foram saneados com chamadas curadas em português, removendo títulos vazios, RSS `appeared first`, resumos brutos em inglês e termos soltos como `creators`, `showrunner`, `spin-off`, `review` e `hub`.
+- `data/topic-feed-fallback.json` foi polido para garantir fallback público em português nessas editorias.
+- `server.js` agora filtra automaticamente cards públicos de `games`, `kids`, `study` e `anime` quando chegam com título vazio, copy bruta em inglês ou sinais de RSS não localizado.
+- Validações: `node --check server.js`, `node --check script.js`, varredura estrita dos JSONs com `bad-count 0`, `npm run review:team` com 0 achados e API local `/api/topic-feed` para `games`, `kids` e `study` entregando títulos em português.
+
 ## Atualizacao rapida 2026-04-25 - Correcoes mobile de cookies, palco e bandeira
 
 - Feedback visual mobile aplicado: o banner de cookies no celular deixou de exibir texto publico/editorial e virou um controle discreto com botao `Continuar`.

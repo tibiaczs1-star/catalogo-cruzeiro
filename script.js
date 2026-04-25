@@ -528,6 +528,26 @@ const isHotlinkBlockedImageUrl = (value) => {
   }
 };
 
+const isTrackingPixelImageUrl = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return false;
+  }
+
+  try {
+    const parsed = new URL(raw, window.location.href);
+    const hostname = parsed.hostname.replace(/^www\./i, "").toLowerCase();
+    const pathname = parsed.pathname.toLowerCase();
+    if (hostname === "agenciabrasil.ebc.com.br" && /\/ebc\.gif$/i.test(pathname)) {
+      return true;
+    }
+  } catch (_error) {
+    return /agenciabrasil\.ebc\.com\.br\/ebc\.gif(?:\?|$)/i.test(raw);
+  }
+
+  return false;
+};
+
 const sanitizeImageUrl = (value) => {
   const raw = String(value || "").trim();
   if (!raw) {
@@ -535,7 +555,7 @@ const sanitizeImageUrl = (value) => {
   }
 
   const cleaned = raw.replace(/'/g, "%27");
-  if (isHotlinkBlockedImageUrl(cleaned)) {
+  if (isHotlinkBlockedImageUrl(cleaned) || isTrackingPixelImageUrl(cleaned)) {
     return "";
   }
 
@@ -5928,13 +5948,31 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) =>
   };
 };
 
+const dailyBuzzFallbackImages = [
+  "./assets/home-cache/buzz-cruzeiro-01.jpg",
+  "./assets/home-cache/buzz-cultura-show.jpg",
+  "./assets/home-cache/buzz-via-cruzeiro.jpg",
+  "./assets/home-cache/buzz-cruzeiro-03.jpg",
+  "./assets/home-cache/buzz-model-local.jpg",
+  "./assets/home-cache/ent-theater-stage.jpg"
+];
+
+const getDailyBuzzDisplayImageUrl = (article = {}, index = 0) => {
+  const realImageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article) || article.imageUrl || "");
+  if (realImageUrl) {
+    return realImageUrl;
+  }
+
+  return dailyBuzzFallbackImages[index % dailyBuzzFallbackImages.length];
+};
+
 const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
   const article = normalizeRuntimeArticle(item);
   const href = buildArticleHref(article);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
   const networkContext = resolveBuzzNetworkContext(article, index);
   const pulse = buildBuzzAudiencePulse(article, networkContext, index);
-  const photoUrl = getArticleDisplayImageUrl(article) || article.imageUrl || "./assets/home-cache/buzz-cruzeiro-01.jpg";
+  const photoUrl = getDailyBuzzDisplayImageUrl(article, index);
   const avatarUrl = article.sourceImageUrl || photoUrl;
   const dateLabel =
     formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
@@ -5945,7 +5983,10 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
     .join(" · ");
   const headline = truncateCopy(article.title || "Polemica em repercussao nas redes", 110);
   const summary = truncateCopy(
-    article.summary || article.lede || "O assunto entrou na conversa publica e segue em monitoramento editorial.",
+    cleanArticleExcerpt(
+      article.displaySummary || article.lede || article.summary,
+      "O assunto entrou na conversa publica e segue em monitoramento editorial."
+    ),
     190
   );
   const networkLabel = `${networkContext.network || "Rede"} • polemica ${index + 1}`;

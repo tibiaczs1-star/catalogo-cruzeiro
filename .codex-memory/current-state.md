@@ -1,32 +1,28 @@
 # Current State
 
-Updated: 2026-04-25T23:32:20.189Z
+Updated: 2026-04-25T23:53:03.197Z
 
 ## Active Goal
 
-- Correcoes mobile: cookies, palco de agentes e bandeira do Acre
+- Hotfix Buzz: imagens repetidas e HTML cru
 
 ## Summary
 
-Rodada aplicada apos feedback visual do usuario: banner mobile de cookies reduzido a botao discreto Continuar, sem texto publico editorial; home mobile nao mostra mais o card de foto dentro do palco dos agentes; balao do palco foi preso no rodape da cena no mobile; bandeira do Acre na enquete agora usa amarelo e verde com estrela vermelha.
+Usuario apontou captura com 3 materias diferentes da mesma area usando a mesma imagem e resumo exibindo tags HTML. script.js agora rejeita o pixel genciabrasil.ebc.com.br/ebc.gif como foto real, usa fallback visual variado por posicao nos cards sem foto real e limpa o resumo com cleanArticleExcerpt. index.html recebeu cache-bust novo do script.
 
 ## Next
 
-- Se for subir
-- incluir estes arquivos e manter PubPaid fora do pacote salvo nova ordem.
-- Conferir no celular real apos deploy se o cookie aparece como controle pequeno e se o palco da home nao tem foto/card sobreposto.
-- Se o usuario pedir
-- subir para origin/main e acompanhar Render.
+- Subir o hotfix para origin/main.
+- Apos deploy
+- conferir no bloco de polêmicas/buzz que os cards da Agencia Brasil nao repetem a mesma foto e nao exibem <p><img>.
 
 ## Files In Focus
 
-- startup-experience.js
-- styles.css
-- mobile-home-final.css
+- script.js
 - index.html
-- pesquisa-acre-2026.css
-- pesquisa-acre-2026.html
+- CODEX_MEMORY.md
+- .codex-memory/orders.json
 
 ## Assets In Focus
 
-- output/playwright/mobile-acre-flag-fix-full.png
+- output/playwright/buzz-image-clean-local-consent.png
