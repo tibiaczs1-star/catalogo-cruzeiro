@@ -1,4 +1,4 @@
-﻿const revealNodes = document.querySelectorAll(".reveal");
+const revealNodes = document.querySelectorAll(".reveal");
 const radarFilterButtons = document.querySelectorAll("#radar .chip-button[data-filter]");
 const dayChips = document.querySelectorAll(".day-chip");
 const betButtons = document.querySelectorAll(".bet-option");
@@ -77,6 +77,12 @@ const heroTopicDots = document.querySelector("[data-hero-topic-dots]");
 const communityAgentForm = document.querySelector("#community-agent-form");
 const communityAgentFeedback = document.querySelector("#community-agent-feedback");
 const communityReportList = document.querySelector("#community-report-list");
+const communityTrendCard = document.querySelector("#community-trend-card");
+const communityTrendTitle = document.querySelector("[data-community-trend-title]");
+const communityTrendSummary = document.querySelector("[data-community-trend-summary]");
+const communityTrendCaptions = document.querySelector("[data-community-trend-captions]");
+const communityTrendTags = document.querySelector("[data-community-trend-tags]");
+const communityTrendUpdated = document.querySelector("[data-community-trend-updated]");
 let heroDesktopHighlightItems = [];
 const cadernoCards = [...document.querySelectorAll(".cadernos-grid .caderno-card")];
 const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
@@ -88,6 +94,7 @@ const insidersArmyScene = document.querySelector(
 const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
 const tickerLiveGrid = document.querySelector("#ticker-live-grid");
 const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
+const monthlyBuzzGrid = document.querySelector("#monthly .month-grid");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
 const portalWhatsappNumber = "5568992269296";
@@ -3340,6 +3347,7 @@ const ensureMobileHomeLeadLayout = () => {
         "#politica-global",
         "#entretenimento",
         "#social",
+        "./lifestile.html",
         "#trending",
         "#panorama",
         "#arquivo"
@@ -5616,7 +5624,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
     "agora";
   const sourceMeta = [article.sourceName || networkContext.network || "Fonte ativa", dateLabel]
     .filter(Boolean)
-    .join(" • ");
+    .join(" · ");
   const headline = truncateCopy(article.title || "Polemica em repercussao nas redes", 110);
   const summary = truncateCopy(
     article.summary || article.lede || "O assunto entrou na conversa publica e segue em monitoramento editorial.",
@@ -5703,6 +5711,436 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
   trendingBuzzGrid.innerHTML = selectedCases.map(buildDailyInfluencerBuzzCard).join("");
   registerArticleCardLinks(trendingBuzzGrid);
+};
+
+const monthlyFallbackStories = [
+  {
+    title: "Criadores locais puxam a conversa da semana com vídeos de bastidor",
+    summary: "O recorte cruza posts, eventos e comentários para mostrar quem movimentou a timeline regional.",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
+    sourceName: "Radar social",
+    category: "Festas & Social",
+    sourceUrl: "./index.html#monthly",
+    monthlyTone: "celebs"
+  },
+  {
+    title: "Agenda cultural vira termômetro de reputação para artistas e produtores",
+    summary: "Shows, oficinas e eventos comunitários seguem rendendo cobrança por calendário mais claro.",
+    imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
+    sourceName: "Cultura local",
+    category: "Cultura",
+    sourceUrl: "./index.html#monthly",
+    monthlyTone: "creators"
+  },
+  {
+    title: "Debate urbano continua dividindo leitores entre pressa e planejamento",
+    summary: "Mobilidade, obras e serviços aparecem como os temas que mais geram contraponto público.",
+    imageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+    sourceName: "Radar da cidade",
+    category: "Cotidiano",
+    sourceUrl: "./index.html#monthly",
+    monthlyTone: "civic"
+  },
+  {
+    title: "Comunidades cobram resposta antes de decisões que mudam a rotina",
+    summary: "O mês segue marcado por pedidos de diálogo, transparência e retorno objetivo ao morador.",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    sourceName: "Comunidade",
+    category: "Utilidade Pública",
+    sourceUrl: "./index.html#monthly",
+    monthlyTone: "territory"
+  },
+  {
+    title: "Humor local transforma reclamação em pressão pública organizada",
+    summary: "Memes e vídeos curtos deram alcance a temas de serviço, bairro e comunicação oficial.",
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-03.jpg",
+    sourceName: "Timeline local",
+    category: "Buzz",
+    sourceUrl: "./index.html#monthly",
+    monthlyTone: "pulse"
+  },
+  {
+    title: "Nomes regionais ganham mais espaço em collabs, campanhas e lives",
+    summary: "A vitrine social ficou mais distribuída entre criadores, pequenos negócios e eventos locais.",
+    imageUrl: "./assets/home-cache/buzz-model-local.jpg",
+    sourceName: "Radar de marcas",
+    category: "Social",
+    sourceUrl: "./index.html#monthly",
+    monthlyTone: "brands"
+  }
+];
+
+const monthlyHeavyCrimePattern =
+  /\b(homicidio|homicídio|assassin|estupro|morte|morreu|cadaver|cadáver|facada|tiro|execucao|execução)\b/;
+
+const getMonthlyArticleScore = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const haystack = normalizeText(
+    [
+      normalized.title,
+      normalized.summary,
+      normalized.lede,
+      normalized.category,
+      normalized.categoryKey,
+      normalized.sourceName,
+      normalized.topicGroup,
+      normalized.networkHint
+    ].join(" ")
+  );
+  let score = 12;
+
+  if (!normalized.title || !(normalized.sourceUrl || normalized.slug)) return -100;
+  if (monthlyHeavyCrimePattern.test(haystack)) score -= 36;
+  if (/\b(festa|show|artista|cantor|cantora|cultura|evento|festival|influenc|criador|criadora|modelo|marca|social|viral|meme|reels|story|tiktok|instagram)\b/.test(haystack)) score += 26;
+  if (/\b(polem|debate|critica|cobr|divide|repercuss|opiniao|bastidor|boato|timeline|comentarios|comunidade)\b/.test(haystack)) score += 24;
+  if (/\b(prefeitura|governo|governadora|vereador|deputad|obra|mobilidade|bairro|servico|serviço|educacao|saude)\b/.test(haystack)) score += 10;
+  if (/\b(cruzeiro do sul|jurua|juru[aá]|acre|rio branco)\b/.test(haystack)) score += 12;
+  if (articleHasUsableImageCandidate(normalized)) score += 10;
+
+  const ageDays = getEntertainmentAgeDays(normalized);
+  if (ageDays <= 7) score += 16;
+  else if (ageDays <= 30) score += 9;
+  else if (ageDays > 90) score -= 10;
+
+  return score;
+};
+
+const getMonthlyTone = (article = {}, index = 0) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const haystack = normalizeText(
+    [normalized.title, normalized.summary, normalized.lede, normalized.category, normalized.categoryKey, normalized.sourceName, article.monthlyTone].join(" ")
+  );
+
+  if (/\b(festa|social|celebridade|modelo|marca|collab|criador|criadora|influenc|reels|story|tiktok|instagram)\b/.test(haystack)) {
+    return { tag: "Celebridades da semana", className: "month-celebs", axis: "alcance social" };
+  }
+
+  if (/\b(cultura|show|palco|artista|cantor|cantora|evento|festival|agenda)\b/.test(haystack)) {
+    return { tag: "Criadores em alta", className: "month-creators", axis: "cultura e agenda" };
+  }
+
+  if (/\b(polem|debate|critica|cobr|divide|boato|repercuss|opiniao|timeline)\b/.test(haystack)) {
+    return { tag: "Polêmica em debate", className: "month-civic", axis: "opinião pública" };
+  }
+
+  if (/\b(bairro|comunidade|obra|mobilidade|servico|serviço|risco|transito|trânsito)\b/.test(haystack)) {
+    return { tag: "Comunidade no radar", className: "month-territory", axis: "bairro e gestão" };
+  }
+
+  const fallback = [
+    { tag: "Recorte social", className: "month-celebs", axis: "rede local" },
+    { tag: "Influência local", className: "month-creators", axis: "criadores" },
+    { tag: "Polêmica da semana", className: "month-civic", axis: "debate" },
+    { tag: "Termômetro da cidade", className: "month-territory", axis: "comunidade" }
+  ];
+  return fallback[index % fallback.length];
+};
+
+const buildMonthlyDynamicCard = (item = {}, index = 0) => {
+  const article = normalizeRuntimeArticle(item);
+  const tone = getMonthlyTone(article, index);
+  const href = buildArticleHref(article);
+  const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+  const imageUrl = getArticleDisplayImageUrl(article) || article.imageUrl || monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl;
+  const dateLabel =
+    formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+    formatCompactDisplayDate(new Date().toISOString());
+  const score = Math.max(38, Math.min(96, getMonthlyArticleScore(article) + 32 + (index % 3) * 4));
+  const delayClass = index % 3 === 1 ? "delay-1" : index % 3 === 2 ? "delay-2" : "";
+
+  return `
+    <article class="month-card ${escapeHtml(tone.className)} month-dynamic-card reveal ${delayClass}" data-live-score="${score}">
+      <div class="month-card-topline">
+        <span class="month-tag">${escapeHtml(tone.tag)}</span>
+        <span class="month-live-pill">dinâmico</span>
+      </div>
+      <a
+        class="month-photo"
+        href="${escapeRuntimeAttribute(href)}"${externalAttrs}
+        aria-label="${escapeRuntimeAttribute(article.title || "Abrir recorte")}"
+        style="--month-image:url('${escapeHtml(imageUrl)}')"
+      ></a>
+      <h3>
+        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(truncateCopy(article.title || "Recorte social em atualização", 108))}</a>
+      </h3>
+      <p>${escapeHtml(truncateCopy(article.lede || article.summary || "Tema em acompanhamento no radar editorial.", 142))}</p>
+      <div class="month-signal" aria-label="Força de repercussão">
+        <span>${escapeHtml(tone.axis)}</span>
+        <i><b style="width:${score}%"></b></i>
+      </div>
+      <small>${escapeHtml(article.sourceName || "Fonte ativa")} · ${escapeHtml(dateLabel)}</small>
+    </article>
+  `;
+};
+
+const pickMonthlyDynamicStories = async (options = {}) => {
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+  const candidates = dedupeNewsItems([
+    ...liveBuzzItems,
+    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
+  ])
+    .map((item) => normalizeRuntimeArticle(item))
+    .map((article) => ({ article, score: getMonthlyArticleScore(article) }))
+    .filter((entry) => entry.score >= 12)
+    .sort((left, right) => {
+      const scoreDiff = right.score - left.score;
+      if (scoreDiff !== 0) return scoreDiff;
+      return getArticlePublishedTime(right.article) - getArticlePublishedTime(left.article);
+    });
+
+  const selected = [];
+  const usedKeys = new Set();
+  const usedImages = new Set();
+
+  for (const { article } of candidates) {
+    if (selected.length >= 6) break;
+    const articleKey = getArticleUsageKey(article);
+    const imageKey = getArticleImageKey(article);
+    if (!articleKey || usedKeys.has(articleKey)) continue;
+    if (imageKey && usedImages.has(imageKey)) continue;
+    usedKeys.add(articleKey);
+    if (imageKey) usedImages.add(imageKey);
+    selected.push(article);
+  }
+
+  if (selected.length < 6) {
+    pickDailyItems(monthlyFallbackStories, 6 - selected.length, 73).forEach((item) => selected.push(item));
+  }
+
+  return selected.slice(0, 6);
+};
+
+const renderDynamicMonthlyBuzz = async (options = {}) => {
+  if (!monthlyBuzzGrid) {
+    return;
+  }
+
+  const stories = await pickMonthlyDynamicStories(options);
+  monthlyBuzzGrid.classList.add("is-dynamic-monthly");
+  monthlyBuzzGrid.innerHTML = stories.map(buildMonthlyDynamicCard).join("");
+  registerArticleCardLinks(monthlyBuzzGrid);
+};
+
+const communityTrendFallbackTopics = [
+  {
+    title: "Bairros cobram resposta rápida para serviços do dia",
+    summary: "Relatos de rua, iluminação, drenagem e atendimento público puxam a conversa local.",
+    category: "Comunidade",
+    sourceName: "Radar social",
+    hashtags: ["#Bairros", "#ServicoPublico", "#CZS"]
+  },
+  {
+    title: "Agenda cultural e eventos movimentam stories e grupos",
+    summary: "Shows, encontros e bastidores entram na pauta porque ajudam o leitor a decidir o rolê.",
+    category: "Cultura",
+    sourceName: "Trending local",
+    hashtags: ["#AgendaCultural", "#ValeDoJurua", "#CruzeiroDoSul"]
+  },
+  {
+    title: "Humor local transforma reclamação em cobrança pública",
+    summary: "Memes, prints e vídeos curtos aumentam o alcance de assuntos que precisam de contexto.",
+    category: "Buzz",
+    sourceName: "Timeline",
+    hashtags: ["#BuzzLocal", "#MemeDoDia", "#Acre"]
+  },
+  {
+    title: "Comércio e pequenos negócios entram na conversa",
+    summary: "Produtos, filas, promoções e atendimento aparecem entre os temas mais compartilhados.",
+    category: "Negócios",
+    sourceName: "Radar de marcas",
+    hashtags: ["#ComercioLocal", "#Negocios", "#CZS"]
+  },
+  {
+    title: "Política regional gera debate e pedido de explicação",
+    summary: "Decisões públicas, bastidores e cobranças sobem quando afetam a rotina da cidade.",
+    category: "Política",
+    sourceName: "Debate público",
+    hashtags: ["#PoliticaAcre", "#DebatePublico", "#Jurua"]
+  }
+];
+
+const communityTrendStopwords = new Set([
+  "para",
+  "por",
+  "com",
+  "uma",
+  "um",
+  "dos",
+  "das",
+  "que",
+  "como",
+  "mais",
+  "sobre",
+  "apos",
+  "após",
+  "dia",
+  "tem",
+  "ter",
+  "foi",
+  "sao",
+  "são",
+  "esta",
+  "está",
+  "de",
+  "do",
+  "da",
+  "em",
+  "no",
+  "na",
+  "ao",
+  "as",
+  "os",
+  "e",
+  "a",
+  "o"
+]);
+
+const normalizeCommunityHashtag = (value = "") => {
+  const cleaned = String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9\s]/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((part) => part && !communityTrendStopwords.has(part.toLowerCase()))
+    .slice(0, 3)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join("");
+
+  return cleaned ? `#${cleaned}` : "";
+};
+
+const buildCommunityTrendHashtags = (items = []) => {
+  const fixedTags = ["#CZS", "#ValeDoJurua", "#Acre"];
+  const dynamicTags = [];
+
+  items.forEach((item) => {
+    const providedTags = Array.isArray(item.hashtags) ? item.hashtags : [];
+    providedTags.forEach((tag) => {
+      const safeTag = tag.startsWith("#") ? tag : normalizeCommunityHashtag(tag);
+      if (safeTag) dynamicTags.push(safeTag);
+    });
+
+    [item.category, item.topicGroup, item.sourceName, item.title]
+      .map(normalizeCommunityHashtag)
+      .filter(Boolean)
+      .forEach((tag) => dynamicTags.push(tag));
+  });
+
+  return [...new Set([...fixedTags, ...dynamicTags])]
+    .filter((tag) => tag.length > 1 && tag.length <= 32)
+    .slice(0, 12);
+};
+
+const getCommunityTrendScore = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const haystack = normalizeText(
+    [
+      normalized.title,
+      normalized.summary,
+      normalized.lede,
+      normalized.category,
+      normalized.sourceName,
+      normalized.topicGroup
+    ].join(" ")
+  );
+  let score = 18;
+
+  if (!normalized.title) return -100;
+  if (/\b(trend|viral|buzz|coment|repercuss|polem|debate|hashtag|story|stories|video|meme)\b/.test(haystack)) score += 34;
+  if (/\b(cruzeiro do sul|jurua|juru[aá]|acre|bairro|comunidade|centro)\b/.test(haystack)) score += 22;
+  if (/\b(servico|serviço|agenda|evento|show|cultura|politica|prefeitura|obra|comercio|negocio)\b/.test(haystack)) score += 16;
+
+  const ageHours = Math.max(0, (Date.now() - getArticlePublishedTime(normalized)) / 36e5);
+  if (ageHours <= 24) score += 28;
+  else if (ageHours <= 72) score += 16;
+  else if (ageHours > 168) score -= 12;
+
+  return score;
+};
+
+const pickCommunityTrendTopics = async (options = {}) => {
+  const externalTrendItems = await fetchSocialTrendsCached(24, options);
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+  const liveItems = dedupeNewsItems([
+    ...liveBuzzItems,
+    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
+  ])
+    .map((item) => normalizeRuntimeArticle(item))
+    .map((article) => ({ article, score: getCommunityTrendScore(article) }))
+    .filter((entry) => entry.score >= 22)
+    .sort((left, right) => {
+      const scoreDiff = right.score - left.score;
+      if (scoreDiff !== 0) return scoreDiff;
+      return getArticlePublishedTime(right.article) - getArticlePublishedTime(left.article);
+    })
+    .map((entry) => entry.article);
+
+  const selected = [];
+  const used = new Set();
+  const pushTrend = (item) => {
+    if (selected.length >= 6) return;
+    const normalized = normalizeRuntimeArticle(item);
+    const key = getArticleUsageKey(normalized) || normalizeText(normalized.title);
+    if (!key || used.has(key)) return;
+    used.add(key);
+    selected.push(normalized);
+  };
+
+  externalTrendItems.forEach(pushTrend);
+  liveItems.forEach(pushTrend);
+  pickDailyItems(communityTrendFallbackTopics, communityTrendFallbackTopics.length, 91).forEach(pushTrend);
+
+  return selected;
+};
+
+const renderCommunityTrendCard = async (options = {}) => {
+  if (!communityTrendCard) {
+    return;
+  }
+
+  const topics = await pickCommunityTrendTopics(options);
+  const mainTopic = topics[0] || communityTrendFallbackTopics[0];
+  const hashtags = buildCommunityTrendHashtags(topics);
+  const updatedLabel = new Intl.DateTimeFormat("pt-BR", {
+    timeZone: localeTimeZone,
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(new Date());
+
+  if (communityTrendTitle) {
+    communityTrendTitle.textContent = truncateCopy(mainTopic.title || "Trending topics em atualização", 64);
+  }
+
+  if (communityTrendSummary) {
+    communityTrendSummary.textContent = truncateCopy(
+      mainTopic.summary || mainTopic.lede || "Captação do que está rendendo conversa hoje no radar local.",
+      92
+    );
+  }
+
+  if (communityTrendUpdated) {
+    communityTrendUpdated.textContent = mainTopic.externalSource ? `internet ${updatedLabel}` : `atualizado ${updatedLabel}`;
+  }
+
+  if (communityTrendCaptions) {
+    communityTrendCaptions.innerHTML = topics
+      .slice(0, 3)
+      .map((item, index) => {
+        const label = item.socialPlatform || item.category || item.sourceName || (index === 0 ? "top trend" : "em alta");
+        return `
+          <span>
+            <b>${escapeHtml(truncateCopy(label, 22))}</b>
+            ${escapeHtml(truncateCopy(item.title || "Assunto em alta no dia", 58))}
+          </span>
+        `;
+      })
+      .join("");
+  }
+
+  if (communityTrendTags) {
+    communityTrendTags.innerHTML = hashtags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
+  }
 };
 
 const setFeedbackState = (node, message, tone = "") => {
@@ -5905,6 +6343,34 @@ const fetchTopicFeedCached = async (topic, limit = 4, options = {}) => {
   return topicFeedClientCache.get(cacheKey)?.promise || [];
 };
 
+const socialTrendsClientCache = new Map();
+
+const fetchSocialTrendsCached = async (limit = 24, options = {}) => {
+  const safeLimit = Math.max(1, Number(limit) || 24);
+  const cacheKey = `social-trends:${safeLimit}`;
+  const forceRefresh = options.forceRefresh === true;
+  const cachedEntry = socialTrendsClientCache.get(cacheKey);
+  const isFresh =
+    cachedEntry &&
+    typeof cachedEntry.createdAt === "number" &&
+    Date.now() - cachedEntry.createdAt < TOPIC_FEED_CACHE_TTL_MS;
+
+  if (!cachedEntry || forceRefresh || !isFresh) {
+    socialTrendsClientCache.set(cacheKey, {
+      createdAt: Date.now(),
+      promise: requestApiJson(`/api/social-trends?limit=${safeLimit}`, { method: "GET" })
+        .then((payload) =>
+          Array.isArray(payload?.items)
+            ? payload.items.map((item) => normalizeRuntimeArticle(item))
+            : []
+        )
+        .catch(() => [])
+    });
+  }
+
+  return socialTrendsClientCache.get(cacheKey)?.promise || [];
+};
+
 const getArticlePublishedTime = (article = {}) => {
   const rawValue = article.publishedAt || article.date || article.createdAt || "";
   const timestamp = Date.parse(rawValue);
@@ -5937,7 +6403,7 @@ const buildBuzzSidebarItemsFromArticles = (items = []) =>
   dedupeNewsItems(items)
     .filter((article) => article?.title && (article?.sourceUrl || article?.slug))
     .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
-    .slice(0, 5)
+    .slice(0, 3)
     .map((article, index) => ({
       slug: article.slug || "",
       kicker:
@@ -6028,6 +6494,8 @@ const scheduleTopicSurfaceRefresh = () => {
 
   topicSurfaceRefreshTimerId = window.setInterval(() => {
     void renderDailyTrendingBuzz({ forceRefresh: true });
+    void renderDynamicMonthlyBuzz({ forceRefresh: true });
+    void renderCommunityTrendCard({ forceRefresh: true });
     void renderGlobalPoliticsHighlights({ forceRefresh: true });
     renderRegionalPoliticsHighlights(window.NEWS_DATA || []);
     renderSidebarWidgets({ forceRefresh: true });
@@ -6470,7 +6938,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
   const href = buildArticleHref(normalized);
   const sourceLabel = [normalized.sourceName, formatCompactDisplayDate(normalized.publishedAt || normalized.date)]
     .filter(Boolean)
-    .join(" • ");
+    .join(" · ");
 
   if (titleNode) titleNode.textContent = truncateCopy(normalized.title, mode === "stage" ? 86 : 70);
   if (infoNode) {
@@ -8554,6 +9022,196 @@ const buildFeedCard = (article) => {
   return card;
 };
 
+const archiveHighlightShell = document.querySelector("#arquivo.archive-shell");
+const archiveHighlightGrid = archiveHighlightShell?.querySelector(".archive-grid") || null;
+const archiveHighlightButtons = archiveHighlightShell
+  ? [...archiveHighlightShell.querySelectorAll(".day-chip[data-archive-filter]")]
+  : [];
+const archiveHighlightSummary = archiveHighlightShell?.querySelector(".section-heading > p:last-child") || null;
+const archiveHighlightState = {
+  filter: archiveHighlightButtons.find((button) => button.classList.contains("is-active"))?.dataset.archiveFilter || "today"
+};
+const archivePeriodFilters = {
+  today: 1,
+  "7d": 7,
+  "15d": 15,
+  "30d": 30
+};
+const archiveFilterLabels = {
+  today: "Hoje",
+  "7d": "7 dias",
+  "15d": "15 dias",
+  "30d": "30 dias",
+  cheia: "Cheia",
+  saude: "Saúde"
+};
+const archiveTopicPatterns = {
+  cheia:
+    /\b(cheia|enchente|alag|alagamento|rio|jurua|juruá|cota|vazante|abrigo|desabrig|inund|defesa civil|familias atingidas|famílias atingidas)\b/,
+  saude:
+    /\b(saude|saúde|hospital|ubs|upa|vacina|vacinacao|vacinação|atendimento|medic|consulta|dengue|sus|tenda)\b/
+};
+
+const dateFromLocalKey = (dateKey = "") => {
+  const match = String(dateKey || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day] = match;
+  return new Date(Number(year), Number(month) - 1, Number(day));
+};
+
+const getArchiveArticleDate = (article = {}) => {
+  const dateKey = getArticleDateKey(article);
+  if (dateKey) {
+    return dateFromLocalKey(dateKey);
+  }
+
+  const parsed = new Date(article.publishedAt || article.createdAt || article.date || "");
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
+};
+
+const getArchiveAnchorDate = (items = []) => {
+  const todayKey = getLocalDateKey(new Date());
+  const todayHasItems = items.some((item) => getArticleDateKey(item) === todayKey);
+
+  if (todayHasItems) {
+    return dateFromLocalKey(todayKey);
+  }
+
+  return (
+    getSortedLiveFeedArticles(items)
+      .map((item) => dateFromLocalKey(getArticleDateKey(item)))
+      .find(Boolean) || new Date()
+  );
+};
+
+const getArchiveHighlightItems = () => {
+  const sourceItems = liveFeedState.items.length ? liveFeedState.items : initialStaticNews;
+  const normalizedItems = sourceItems.map((item) => normalizeRuntimeArticle(item));
+  const currentFilter = archiveHighlightState.filter;
+
+  if (archivePeriodFilters[currentFilter]) {
+    const anchorDate = getArchiveAnchorDate(normalizedItems);
+    const periodDays = archivePeriodFilters[currentFilter];
+    const startTime = new Date(
+      anchorDate.getFullYear(),
+      anchorDate.getMonth(),
+      anchorDate.getDate() - periodDays + 1
+    ).getTime();
+    const endTime = new Date(
+      anchorDate.getFullYear(),
+      anchorDate.getMonth(),
+      anchorDate.getDate() + 1
+    ).getTime();
+
+    return getSortedLiveFeedArticles(normalizedItems).filter((article) => {
+      const articleDate = getArchiveArticleDate(article);
+      if (!articleDate) {
+        return false;
+      }
+
+      const articleTime = new Date(
+        articleDate.getFullYear(),
+        articleDate.getMonth(),
+        articleDate.getDate()
+      ).getTime();
+
+      return articleTime >= startTime && articleTime < endTime;
+    });
+  }
+
+  const topicPattern = archiveTopicPatterns[currentFilter];
+  if (topicPattern) {
+    return getSortedLiveFeedArticles(normalizedItems).filter((article) => {
+      const normalizedArticle = normalizeRuntimeArticle(article);
+      const haystack = normalizeText(
+        [
+          normalizedArticle.title,
+          normalizedArticle.lede,
+          normalizedArticle.summary,
+          normalizedArticle.category,
+          normalizedArticle.categoryKey,
+          normalizedArticle.sourceName
+        ].join(" ")
+      );
+
+      return (
+        (currentFilter === "saude" && articleMatchesCategoryFilter(normalizedArticle, "saude")) ||
+        topicPattern.test(haystack)
+      );
+    });
+  }
+
+  return getSortedLiveFeedArticles(normalizedItems);
+};
+
+const buildArchiveHighlightCard = (article, index = 0) => {
+  const card = buildFeedCard(article);
+  card.classList.remove("news-card");
+  card.classList.add("archive-card", "generated-archive-card");
+  card.classList.toggle("tall", index === 1);
+  return card;
+};
+
+const renderArchiveHighlights = () => {
+  if (!archiveHighlightGrid || !archiveHighlightButtons.length) {
+    return;
+  }
+
+  const filteredItems = getArchiveHighlightItems();
+  const fallbackItems = getSortedLiveFeedArticles(
+    liveFeedState.items.length ? liveFeedState.items : initialStaticNews
+  ).map((item) => normalizeRuntimeArticle(item));
+  const visibleItems = (filteredItems.length ? filteredItems : fallbackItems).slice(0, 6);
+  const activeLabel = archiveFilterLabels[archiveHighlightState.filter] || "Arquivo";
+
+  archiveHighlightButtons.forEach((button) => {
+    const isActive = button.dataset.archiveFilter === archiveHighlightState.filter;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+
+  archiveHighlightGrid.innerHTML = "";
+
+  if (!visibleItems.length) {
+    const empty = document.createElement("div");
+    empty.className = "feed-empty";
+    empty.textContent = "Ainda não há notícia suficiente para montar esse recorte.";
+    archiveHighlightGrid.appendChild(empty);
+  } else {
+    visibleItems.forEach((article, index) => {
+      archiveHighlightGrid.appendChild(buildArchiveHighlightCard(article, index));
+    });
+  }
+
+  if (archiveHighlightSummary) {
+    const total = filteredItems.length || visibleItems.length;
+    archiveHighlightSummary.textContent = `Recorte ${activeLabel}: ${total} notícia${total === 1 ? "" : "s"} encontrada${total === 1 ? "" : "s"} no arquivo real.`;
+  }
+
+  registerInteractivePanels(archiveHighlightGrid);
+  registerArticleCardLinks(archiveHighlightGrid);
+};
+
+const bindArchiveHighlightControls = () => {
+  if (!archiveHighlightButtons.length || archiveHighlightShell?.dataset.archiveControlsBound === "true") {
+    return;
+  }
+
+  if (archiveHighlightShell) {
+    archiveHighlightShell.dataset.archiveControlsBound = "true";
+  }
+
+  archiveHighlightButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      archiveHighlightState.filter = button.dataset.archiveFilter || "today";
+      renderArchiveHighlights();
+    });
+  });
+};
+
 const getSortedLiveFeedArticles = (items = []) =>
   [...items].sort((left, right) => {
     const rightDate = Date.parse(right.publishedAt || "") || parseArticleDate(right.date);
@@ -9048,6 +9706,7 @@ const updateLiveFeedItems = (items = [], { resetFilter = true } = {}) => {
   renderLiveFeedFilters();
   renderLiveFeed();
   renderLiveFeedSuggestions();
+  renderArchiveHighlights();
 };
 
 if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
@@ -9083,6 +9742,9 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
   updateLiveFeedItems(window.NEWS_DATA || []);
 }
 
+bindArchiveHighlightControls();
+renderArchiveHighlights();
+
 // Inicializar o radar somente depois que os helpers e normalizadores ja existem.
 renderRadar();
 
@@ -9109,18 +9771,18 @@ const getSidebarWeatherIcon = (condition) => {
   const normalized = normalizeText(condition);
 
   if (normalized.includes("trovoada") || normalized.includes("tempestade")) {
-    return "⛈";
+    return "?";
   }
 
   if (normalized.includes("chuva")) {
-    return "🌧";
+    return "??";
   }
 
   if (normalized.includes("nuv")) {
-    return "☁";
+    return "?";
   }
 
-  return "☀";
+  return "?";
 };
 
 const getLocalTodayIso = () => {
@@ -9752,6 +10414,8 @@ const hydrateDynamicNews = async () => {
     hydrateMosaicHero(merged);
     hydrateStaticMediaSurfaces();
     initializeHeroTourismHero();
+    void renderDynamicMonthlyBuzz();
+    void renderCommunityTrendCard();
     renderRegionalPoliticsHighlights(merged);
     renderSidebarWidgets();
     renderRadar(activeFilter);
@@ -10084,7 +10748,7 @@ const buildFounderCard = (founder = {}) => {
 
   card.className = "founder-card";
   card.innerHTML = `
-    <strong>★ ${escapeHtml(safeName)}</strong>
+    <strong>? ${escapeHtml(safeName)}</strong>
     <p>Fundador do Catalogo CZS com apoio simbólico${amount ? ` de R$ ${amount}` : ""}.</p>
     <span>entrou em ${escapeHtml(joinedAt)}</span>
   `;
@@ -10102,7 +10766,7 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
   if (!founders.length) {
     foundersList.innerHTML = `
       <article class="founder-card is-empty">
-        <strong>★ Seu nome pode abrir esta lista</strong>
+        <strong>? Seu nome pode abrir esta lista</strong>
         <p>Os primeiros apoiadores aparecem aqui como fundadores do portal.</p>
       </article>
     `;
@@ -10290,6 +10954,8 @@ attachCommunitySignalFlow();
 attachSubscriptionSubmission();
 attachAgentMailFlow();
 renderDailyTrendingBuzz();
+renderDynamicMonthlyBuzz();
+renderCommunityTrendCard();
 scheduleTopicSurfaceRefresh();
 initializeLiveTicker();
 scheduleHomeBackgroundHydration();

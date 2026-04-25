@@ -72,6 +72,7 @@ const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-das
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
+const SOCIAL_TRENDS_CACHE_FILE = path.join(DATA_DIR, "social-trends-cache.json");
 const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
 const REAL_AGENTS_RUNTIME_SCRIPT = path.join(ROOT_DIR, "scripts", "real-agents-runtime.js");
@@ -472,6 +473,18 @@ const STATIC_PAGE_SEO = {
     priority: "0.72",
     changefreq: "weekly",
     fileName: "esttiles.html"
+  },
+  "/lifestile.html": {
+    title: `Lifestile Acre | Moda e estilo de vida | ${SITE_NAME}`,
+    description:
+      "Editorial de moda e estilo de vida com recorte do Acre, street style, beleza, criadores locais, eventos, vitrine e sinais das redes sociais.",
+    themeColor: "#FBF7F0",
+    colorScheme: "light",
+    ogType: "website",
+    schemaType: "CollectionPage",
+    priority: "0.72",
+    changefreq: "daily",
+    fileName: "lifestile.html"
   },
   "/sprites-check-change.html": {
     title: `SPRTIS CHECK & CHANGE | ${SITE_NAME}`,
@@ -3645,15 +3658,7 @@ function decodeHtml(value) {
     .replace(/&#39;/gi, "'")
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">")
-    .replace(/&nbsp;/gi, " ")
-    .replace(/&#(\d+);/g, (_match, code) => {
-      const numericCode = Number(code);
-      return Number.isFinite(numericCode) ? String.fromCharCode(numericCode) : "";
-    })
-    .replace(/&#x([0-9a-f]+);/gi, (_match, code) => {
-      const numericCode = Number.parseInt(code, 16);
-      return Number.isFinite(numericCode) ? String.fromCharCode(numericCode) : "";
-    });
+    .replace(/&nbsp;/gi, " ");
 }
 
 function stripHtml(value) {
@@ -3744,18 +3749,8 @@ function shouldIgnoreImageUrl(value) {
   return false;
 }
 
-function isGeneratedNewsFallbackImage(value) {
-  const imageUrl = String(value || "").trim().toLowerCase();
-  return /(?:^|\/)assets\/news-fallbacks\//i.test(imageUrl);
-}
-
-function isUsableNewsImageUrl(value) {
-  return Boolean(value) && !shouldIgnoreImageUrl(value) && !isGeneratedNewsFallbackImage(value);
-}
-
 function getArticleImageUrl(item = {}) {
-  const candidates = [item.imageUrl, item.feedImageUrl, item.sourceImageUrl, item.image].filter(Boolean);
-  return candidates.find(isUsableNewsImageUrl) || candidates[0] || "";
+  return item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "";
 }
 
 function getArticleDivisionKey(item = {}) {
@@ -3833,7 +3828,7 @@ function repairNewsImagesForDisplay(items = []) {
     const division = getArticleDivisionKey(item);
     const imageKey = normalizeComparableImageUrl(currentImage);
     const duplicateKey = imageKey ? `${division}|${imageKey}` : "";
-    const isBadImage = !isUsableNewsImageUrl(currentImage);
+    const isBadImage = !currentImage || shouldIgnoreImageUrl(currentImage);
     const isRepeatedInDivision = duplicateKey && seenByDivision.has(duplicateKey);
 
     if (duplicateKey && !seenByDivision.has(duplicateKey)) {
@@ -3952,12 +3947,10 @@ function pickCanonicalFeedImage(item = {}) {
   const candidates = [
     item.feedImageUrl,
     item.imageUrl,
-    item.sourceImageUrl,
-    item.image,
     extractImageFromMarkup(inlineMarkup, sourceUrl)
   ];
 
-  return candidates.find(isUsableNewsImageUrl) || "";
+  return candidates.find((candidate) => !shouldIgnoreImageUrl(candidate)) || "";
 }
 
 function extractBestSourceImage(html, baseUrl) {
@@ -4383,6 +4376,375 @@ function buildTopicFeedFallback(topic, limit = 12) {
     .slice(0, Math.max(1, Math.min(40, limit)));
 }
 
+const SOCIAL_TRENDS_TTL_MS = Math.max(
+  1000 * 60 * 5,
+  Number(process.env.SOCIAL_TRENDS_TTL_MS || 1000 * 60 * 12)
+);
+
+const SOCIAL_TREND_SOURCES = [
+  {
+    id: "getdaytrends-brazil",
+    name: "GetDayTrends Brasil",
+    platform: "X/Twitter",
+    url: "https://getdaytrends.com/brazil/",
+    type: "twitter"
+  },
+  {
+    id: "trends24-brazil",
+    name: "Trends24 Brasil",
+    platform: "X/Twitter",
+    url: "https://trends24.in/brazil/",
+    type: "twitter"
+  },
+  {
+    id: "best-hashtags-brasil",
+    name: "Best Hashtags Brasil",
+    platform: "Instagram",
+    url: "https://best-hashtags.com/hashtag/brasil/",
+    type: "instagram"
+  },
+  {
+    id: "best-hashtags-brazil",
+    name: "Best Hashtags Brazil",
+    platform: "Instagram",
+    url: "https://best-hashtags.com/hashtag/brazil/",
+    type: "instagram"
+  },
+  {
+    id: "best-hashtags-acre",
+    name: "Best Hashtags Acre",
+    platform: "Instagram",
+    url: "https://best-hashtags.com/hashtag/acre/",
+    type: "instagram"
+  }
+];
+
+const SOCIAL_TREND_BLOCKLIST = new Set([
+  "twitter",
+  "x",
+  "brazil",
+  "brasil",
+  "trends",
+  "trend",
+  "trending",
+  "trending now",
+  "view details",
+  "browse all",
+  "about us",
+  "contact us",
+  "quick links",
+  "copy",
+  "button",
+  "timeline",
+  "tag cloud",
+  "table",
+  "now",
+  "yesterday",
+  "week ago",
+  "month ago",
+  "year ago",
+  "later trends",
+  "earlier trends",
+  "popular hashtags",
+  "related hashtags",
+  "hashtag report",
+  "top hashtags"
+]);
+
+function decodeHtmlEntities(value = "") {
+  return String(value || "")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&#(\d+);/g, (_match, code) => String.fromCharCode(Number(code) || 32));
+}
+
+function stripHtml(value = "") {
+  return decodeHtmlEntities(
+    String(value || "")
+      .replace(/<script[\s\S]*?<\/script>/gi, " ")
+      .replace(/<style[\s\S]*?<\/style>/gi, " ")
+      .replace(/<[^>]+>/g, "\n")
+  ).replace(/\s+/g, " ");
+}
+
+function normalizeSocialTrendLabel(value = "") {
+  const label = decodeHtmlEntities(String(value || ""))
+    .replace(/\s*under\s+\d+k?\s+tweets?.*$/i, "")
+    .replace(/\s*\d+(?:\.\d+)?k?\s+tweets?.*$/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!label || label.length < 2 || label.length > 82) {
+    return "";
+  }
+
+  const normalized = normalizeText(label);
+  if (SOCIAL_TREND_BLOCKLIST.has(normalized)) {
+    return "";
+  }
+
+  if (/^(https?:|www\.|\/)/i.test(label)) {
+    return "";
+  }
+
+  if (/^(utc time|coordinated universal time|tweet|explore|image)$/i.test(label)) {
+    return "";
+  }
+
+  return label;
+}
+
+function trendToHashtag(value = "") {
+  const label = String(value || "").trim();
+  if (label.startsWith("#")) {
+    return label.replace(/[^\p{L}\p{N}_#]/gu, "").slice(0, 40);
+  }
+
+  const compact = label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .trim()
+    .split(/\s+/)
+    .filter((part) => part.length > 1)
+    .slice(0, 4)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join("");
+
+  return compact ? `#${compact}`.slice(0, 40) : "";
+}
+
+async function fetchExternalText(url, timeoutMs = 6500) {
+  const response = await withPromiseTimeout(
+    fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; CatalogoCruzeiroSocialTrends/1.0; +https://catalogocruzeiro.local)",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+      }
+    }),
+    timeoutMs,
+    "social_trends_fetch_timeout"
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return response.text();
+}
+
+function extractTwitterTrendLabels(html = "") {
+  const labels = [];
+  const anchorPattern = /<a\b[^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+
+  while ((match = anchorPattern.exec(html))) {
+    const label = normalizeSocialTrendLabel(stripHtml(match[1]));
+    if (label) {
+      labels.push(label);
+    }
+  }
+
+  const text = stripHtml(html);
+  const rankedPattern = /(?:^|\s)(?:\d{1,2})\s+((?:#[\p{L}\p{N}_]+|[\p{L}\p{N}][\p{L}\p{N}\s'’$.-]{1,70}?))(?:\s+under\s+\d+k?\s+tweets?|\s+\d+(?:\.\d+)?k?\s+tweets?|\s{2,}|$)/giu;
+
+  while ((match = rankedPattern.exec(text))) {
+    const label = normalizeSocialTrendLabel(match[1]);
+    if (label) {
+      labels.push(label);
+    }
+  }
+
+  return labels;
+}
+
+function extractInstagramHashtagLabels(html = "") {
+  const labels = [];
+  const text = stripHtml(html);
+  const hashtagPattern = /#[\p{L}\p{N}_]{2,40}/gu;
+  let match;
+
+  while ((match = hashtagPattern.exec(text))) {
+    const label = normalizeSocialTrendLabel(match[0]);
+    if (label) {
+      labels.push(label.toLowerCase());
+    }
+  }
+
+  return labels;
+}
+
+function buildSocialTrendItems(source, labels = [], maxItems = 12) {
+  const seen = new Set();
+  const now = new Date().toISOString();
+  const items = [];
+
+  labels.forEach((rawLabel, index) => {
+    if (items.length >= maxItems) {
+      return;
+    }
+
+    const label = normalizeSocialTrendLabel(rawLabel);
+    const key = normalizeText(label);
+    if (!label || !key || seen.has(key)) {
+      return;
+    }
+
+    seen.add(key);
+    const hashtag = trendToHashtag(label);
+    items.push({
+      id: `${source.id}-${slugify(label).slice(0, 42) || index}`,
+      title: label,
+      summary:
+        source.type === "instagram"
+          ? `Hashtag pública monitorada em lista externa de Instagram: ${label}.`
+          : `Tendência pública captada em lista externa de X/Twitter Brasil: ${label}.`,
+      category: source.platform,
+      sourceName: source.name,
+      sourceUrl: source.url,
+      publishedAt: now,
+      date: now,
+      externalSource: true,
+      socialPlatform: source.platform,
+      coverageLayer: "brasil",
+      topicGroup: source.type === "instagram" ? "instagram-hashtags" : "twitter-trends",
+      hashtags: hashtag ? [hashtag] : []
+    });
+  });
+
+  return items;
+}
+
+async function fetchSocialTrendSource(source) {
+  try {
+    const html = await fetchExternalText(source.url);
+    const labels =
+      source.type === "instagram" ? extractInstagramHashtagLabels(html) : extractTwitterTrendLabels(html);
+    const items = buildSocialTrendItems(source, labels, source.type === "instagram" ? 10 : 18);
+
+    return {
+      items,
+      report: { source: source.id, platform: source.platform, ok: true, count: items.length, url: source.url }
+    };
+  } catch (error) {
+    return {
+      items: [],
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: false,
+        error: String(error?.message || "falha"),
+        url: source.url
+      }
+    };
+  }
+}
+
+function mergeSocialTrendItems(items = [], limit = 24) {
+  const selected = [];
+  const seen = new Set();
+  const platformPriority = { "X/Twitter": 0, Instagram: 1 };
+
+  items
+    .slice()
+    .sort((left, right) => {
+      const priorityDiff =
+        (platformPriority[left.socialPlatform] ?? 9) - (platformPriority[right.socialPlatform] ?? 9);
+      if (priorityDiff !== 0) {
+        return priorityDiff;
+      }
+      return String(left.title || "").localeCompare(String(right.title || ""), "pt-BR");
+    })
+    .forEach((item) => {
+      if (selected.length >= limit) {
+        return;
+      }
+
+      const key = normalizeText(item.title || item.id || "");
+      if (!key || seen.has(key)) {
+        return;
+      }
+
+      seen.add(key);
+      selected.push(item);
+    });
+
+  return selected;
+}
+
+async function refreshSocialTrends(limit = 24) {
+  const sourceResults = await mapWithConcurrency(SOCIAL_TREND_SOURCES, 3, fetchSocialTrendSource);
+  const items = mergeSocialTrendItems(
+    sourceResults.flatMap((entry) => entry.items),
+    Math.max(1, Math.min(50, limit))
+  );
+  const payload = {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    items,
+    reports: sourceResults.map((entry) => entry.report),
+    external: items.length > 0
+  };
+
+  if (items.length) {
+    writeJson(SOCIAL_TRENDS_CACHE_FILE, payload);
+  }
+
+  return payload;
+}
+
+async function getSocialTrends(limit = 24) {
+  const safeLimit = Math.max(1, Math.min(50, Number(limit) || 24));
+  const cached = readJson(SOCIAL_TRENDS_CACHE_FILE, null);
+  const cachedItems = Array.isArray(cached?.items) ? cached.items : [];
+  const cachedUpdatedAt = cached?.updatedAt ? Date.parse(cached.updatedAt) : 0;
+  const cacheIsFresh =
+    cachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < SOCIAL_TRENDS_TTL_MS;
+
+  if (cacheIsFresh) {
+    return {
+      ...cached,
+      items: cachedItems.slice(0, safeLimit),
+      stale: false
+    };
+  }
+
+  try {
+    const refreshed = await withPromiseTimeout(refreshSocialTrends(Math.max(safeLimit, 24)), 9000, "social_trends_timeout");
+    if (Array.isArray(refreshed.items) && refreshed.items.length) {
+      return {
+        ...refreshed,
+        items: refreshed.items.slice(0, safeLimit),
+        stale: false
+      };
+    }
+  } catch (_error) {
+    // usa cache antigo ou fallback abaixo
+  }
+
+  if (cachedItems.length) {
+    return {
+      ...cached,
+      items: cachedItems.slice(0, safeLimit),
+      stale: true
+    };
+  }
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    items: [],
+    reports: [],
+    external: false,
+    stale: true
+  };
+}
+
 const BUZZ_BRAZILIAN_DOMAINS = [
   "g1.globo.com",
   "globo.com",
@@ -4705,18 +5067,16 @@ async function enrichNewsItemsWithSourceImages(items = []) {
     }
 
     const sourceImageUrl = await fetchPreviewImage(item.sourceUrl).catch(() => "");
-    const bestImageUrl =
-      canonicalFeedImage ||
-      sourceImageUrl ||
-      [item.sourceImageUrl, item.feedImageUrl, item.imageUrl, item.image].find(isUsableNewsImageUrl) ||
-      item.imageUrl ||
-      item.feedImageUrl ||
-      "";
     return {
       ...item,
       feedImageUrl: canonicalFeedImage || item.feedImageUrl || item.imageUrl || "",
       sourceImageUrl: sourceImageUrl || item.sourceImageUrl || "",
-      imageUrl: bestImageUrl
+      imageUrl:
+        canonicalFeedImage ||
+        sourceImageUrl ||
+        item.imageUrl ||
+        item.feedImageUrl ||
+        ""
     };
   });
 }
@@ -4887,7 +5247,7 @@ function normalizeNewsItem(item) {
   const slug = String(item.slug || slugify(title) || item.id || "").trim();
   const imageUrl = resolveSafeArticleRecordImage(
     item,
-    pickPreferredArticleRecordImage(item)
+    item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || ""
   );
   const category = normalizeNewsCategoryLabel(item.category, {
     defaultCategory: item.defaultCategory,
@@ -4936,17 +5296,6 @@ function resolveSafeArticleRecordImage(item, fallback = "") {
   }
 
   return fallback;
-}
-
-function pickPreferredArticleRecordImage(item = {}, fallback = "") {
-  const candidates = [
-    item.sourceImageUrl,
-    item.feedImageUrl,
-    item.imageUrl,
-    item.image,
-    fallback
-  ].filter(Boolean);
-  return candidates.find(isUsableNewsImageUrl) || candidates[0] || "";
 }
 
 function normalizeEditorialFingerprint(value = "") {
@@ -5052,12 +5401,12 @@ function normalizeArticleRecord(item) {
     development: Array.isArray(item.development) ? item.development.filter(Boolean) : [],
     imageUrl: resolveSafeArticleRecordImage(
       item,
-      pickPreferredArticleRecordImage(item)
+      item.feedImageUrl || item.imageUrl || item.sourceImageUrl || item.image || ""
     ),
     sourceImageUrl: item.sourceImageUrl || "",
     feedImageUrl: resolveSafeArticleRecordImage(
       item,
-      pickPreferredArticleRecordImage(item, item.feedImageUrl || item.sourceImageUrl || item.imageUrl || "")
+      item.feedImageUrl || item.imageUrl || item.sourceImageUrl || ""
     ),
     imageCredit: item.imageCredit || "",
     imageFocus: item.imageFocus || "",
@@ -9651,6 +10000,20 @@ async function handleApi(req, res, pathname, searchParams) {
       items: Array.isArray(payload.items) ? payload.items : [],
       reports: Array.isArray(payload.reports) ? payload.reports : [],
       fallbackUsed: Boolean(payload.fallbackUsed),
+      stale: Boolean(payload.stale)
+    });
+  }
+
+  if (req.method === "GET" && pathname === "/api/social-trends") {
+    const limit = Number(searchParams.get("limit") || 24);
+    const payload = await getSocialTrends(limit);
+    return sendJson(res, 200, {
+      ok: true,
+      updatedAt: payload.updatedAt,
+      total: Array.isArray(payload.items) ? payload.items.length : 0,
+      items: Array.isArray(payload.items) ? payload.items : [],
+      reports: Array.isArray(payload.reports) ? payload.reports : [],
+      external: Boolean(payload.external),
       stale: Boolean(payload.stale)
     });
   }

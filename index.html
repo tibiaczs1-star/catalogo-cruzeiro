@@ -243,6 +243,7 @@
               <a href="./escritorio-arte.html">Arte/Game Design</a>
               <a href="./escritorio-ninjas.html">Ninjas</a>
               <a href="./esttiles.html">Esttíles</a>
+              <a href="./lifestile.html">Lifestile</a>
               <a href="./catalogo-servicos.html">Serviços</a>
               <a href="#monetizacao">Anuncie</a>
             </nav>
@@ -285,6 +286,7 @@
             <a class="outline-button" href="#entretenimento">Entretenimento</a>
             <a class="outline-button" href="./games.html">Games</a>
             <a class="outline-button" href="./animes.html">Animes</a>
+            <a class="outline-button" href="./lifestile.html">Lifestile</a>
             <a class="outline-button" href="#acre-destaque">Acre</a>
             <a class="outline-button" href="#trending">Trending</a>
             <a class="outline-button" href="#panorama">Panorama</a>
@@ -686,8 +688,32 @@
               <strong>não checada</strong>. Quando a equipe verifica, o conteúdo sai deste bloco e
               pode virar checagem, serviço ou notícia em área própria.
             </p>
-          </div>
 
+            <article
+              class="community-trend-card"
+              id="community-trend-card"
+              aria-label="Trending topics e hashtags mais faladas do dia"
+            >
+              <div class="community-trend-depth" aria-hidden="true"></div>
+              <div class="community-trend-head">
+                <span>captação social do dia</span>
+                <strong data-community-trend-updated>ao vivo</strong>
+              </div>
+              <div class="community-trend-hero">
+                <p>mais falado agora</p>
+                <h3 data-community-trend-title>Carregando trending topics...</h3>
+                <small data-community-trend-summary>O radar cruza notícias, buzz e sinais públicos para montar captions e hashtags.</small>
+              </div>
+              <div class="community-trend-captions" data-community-trend-captions>
+                <span>Atualizando captions do dia</span>
+              </div>
+              <div class="community-trend-tags" data-community-trend-tags>
+                <span>#CZS</span>
+                <span>#ValedoJurua</span>
+                <span>#Acre</span>
+              </div>
+            </article>
+          </div>
           <div class="community-agent-console">
             <div class="community-agent-illustration" aria-hidden="true">
               <div class="community-mini-office">
@@ -782,6 +808,7 @@
               <a href="#radar">Radar</a>
               <a href="#arquivo">Arquivo</a>
               <a href="#social">Festas & Social</a>
+              <a href="./lifestile.html">Lifestile</a>
               <a href="#politica-regional">Eleições</a>
               <a href="#negocios">Negócios</a>
               <a href="#entretenimento">Entretenimento</a>
@@ -1090,12 +1117,12 @@
           </div>
 
           <div class="archive-controls reveal">
-            <button class="day-chip is-active">Hoje</button>
-            <button class="day-chip">7 dias</button>
-            <button class="day-chip">15 dias</button>
-            <button class="day-chip">30 dias</button>
-            <button class="day-chip">Cheia</button>
-            <button class="day-chip">Saúde</button>
+            <button class="day-chip is-active" type="button" data-archive-filter="today" aria-pressed="true">Hoje</button>
+            <button class="day-chip" type="button" data-archive-filter="7d" aria-pressed="false">7 dias</button>
+            <button class="day-chip" type="button" data-archive-filter="15d" aria-pressed="false">15 dias</button>
+            <button class="day-chip" type="button" data-archive-filter="30d" aria-pressed="false">30 dias</button>
+            <button class="day-chip" type="button" data-archive-filter="cheia" aria-pressed="false">Cheia</button>
+            <button class="day-chip" type="button" data-archive-filter="saude" aria-pressed="false">Saúde</button>
           </div>
 
           <div class="archive-grid">
@@ -1398,6 +1425,27 @@
                 <div>
                   <strong>Equipe combina styling, fotografia, maquiagem, branding e direção criativa</strong>
                   <small>Esttíles • sala de moda</small>
+                </div>
+              </a>
+            </article>
+
+            <article class="caderno-card editorial-lifestile reveal">
+              <header>
+                <p class="card-kicker">lifestile</p>
+                <h3>Moda, estilo de vida e redes sociais do Acre</h3>
+              </header>
+              <a class="mini-story" href="./lifestile.html">
+                <span class="mini-thumb thumb-fashion has-photo" style="--bg-image:url('./assets/home-cache/buzz-model-local.jpg'); background-image:url('./assets/home-cache/buzz-model-local.jpg')"></span>
+                <div>
+                  <strong>Lifestile Acre cruza street style, beleza, creators, eventos e vitrine local</strong>
+                  <small>editorial novo • Acre + redes sociais</small>
+                </div>
+              </a>
+              <a class="mini-story" href="./lifestile.html#redes">
+                <span class="mini-thumb thumb-social has-photo" style="--bg-image:url('./assets/home-cache/buzz-cruzeiro-01.jpg'); background-image:url('./assets/home-cache/buzz-cruzeiro-01.jpg')"></span>
+                <div>
+                  <strong>Radar passa a captar sinais públicos de Instagram, reels, eventos e criadores do Acre</strong>
+                  <small>lifestile • curadoria social</small>
                 </div>
               </a>
             </article>
@@ -3031,6 +3079,7 @@
             <li><a href="#entretenimento">Entretenimento</a></li>
             <li><a href="#trending">Trending & Buzz</a></li>
             <li><a href="#monthly">Celebridades & Polêmicas</a></li>
+            <li><a href="./lifestile.html">Lifestile</a></li>
             <li><a href="#catalogo-telefonico">Catálogo Telefônico</a></li>
             <li><a href="./catalogo-servicos.html">Catálogo de Serviços</a></li>
             <li><a href="./escritorio.html">Escritório dos Agentes</a></li>

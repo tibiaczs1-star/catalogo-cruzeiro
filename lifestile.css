@@ -1,0 +1,356 @@
+:root {
+  color-scheme: light;
+  --ink: #17212b;
+  --muted: #66717e;
+  --paper: #fbf7f0;
+  --line: rgba(23, 33, 43, 0.14);
+  --accent: #b74b6d;
+  --green: #1d7c66;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+}
+
+.lifestile-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem clamp(1rem, 4vw, 3rem);
+  background: rgba(251, 247, 240, 0.88);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+}
+
+.lifestile-brand,
+.lifestile-topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.lifestile-brand {
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.lifestile-brand img {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.lifestile-topbar nav {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.lifestile-topbar nav a,
+.lifestile-actions a,
+.lifestile-closing a {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.84rem;
+  font-weight: 900;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.lifestile-topbar nav a:hover,
+.lifestile-actions a:hover,
+.lifestile-closing a:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183, 75, 109, 0.42);
+  background: rgba(255, 255, 255, 0.62);
+}
+
+.lifestile-hero {
+  min-height: calc(100svh - 4.1rem);
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(320px, 1.12fr);
+  align-items: stretch;
+  border-bottom: 1px solid var(--line);
+}
+
+.lifestile-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+  padding: clamp(2rem, 6vw, 5.5rem);
+}
+
+.lifestile-eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lifestile-hero h1,
+.lifestile-manifest h2,
+.lifestile-section-head h2,
+.lifestile-closing h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 800;
+  line-height: 0.96;
+}
+
+.lifestile-hero h1 {
+  max-width: 8ch;
+  font-size: clamp(4rem, 13vw, 11.2rem);
+}
+
+.lifestile-hero-copy > p:not(.lifestile-eyebrow) {
+  max-width: 40rem;
+  margin: 0;
+  color: #374351;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+  line-height: 1.6;
+}
+
+.lifestile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.lifestile-actions a:first-child,
+.lifestile-closing a {
+  background: var(--ink);
+  color: #fffaf2;
+  border-color: var(--ink);
+}
+
+.lifestile-hero-photo {
+  min-height: 460px;
+  background:
+    linear-gradient(90deg, rgba(251, 247, 240, 0.04), rgba(251, 247, 240, 0.18)),
+    url("./assets/home-cache/buzz-model-local.jpg") center / cover;
+}
+
+.lifestile-manifest,
+.lifestile-radar,
+.lifestile-social,
+.lifestile-closing {
+  padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 5vw, 4rem);
+}
+
+.lifestile-manifest {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: end;
+  border-bottom: 1px solid var(--line);
+}
+
+.lifestile-manifest span {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--green);
+  font-weight: 950;
+}
+
+.lifestile-manifest h2,
+.lifestile-section-head h2,
+.lifestile-closing h2 {
+  font-size: clamp(2.3rem, 7vw, 5.8rem);
+}
+
+.lifestile-manifest p,
+.lifestile-closing p {
+  margin: 0;
+  color: #3f4c58;
+  font-size: clamp(1.05rem, 2vw, 1.42rem);
+  line-height: 1.7;
+}
+
+.lifestile-section-head {
+  display: grid;
+  gap: 0.6rem;
+  max-width: 980px;
+  margin-bottom: 1.6rem;
+}
+
+.lifestile-feed,
+.lifestile-lanes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.lifestile-feed article,
+.lifestile-lanes div {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.58);
+  overflow: hidden;
+}
+
+.lifestile-feed article {
+  position: relative;
+  isolation: isolate;
+}
+
+.lifestile-feed article::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--feed-image, url("./assets/home-cache/buzz-cruzeiro-03.jpg")) center / cover;
+  transform: scale(1.03);
+  transition: transform 420ms ease;
+}
+
+.lifestile-feed article::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(18, 28, 38, 0.82), rgba(18, 28, 38, 0.12));
+}
+
+.lifestile-feed article:hover::before {
+  transform: scale(1.08);
+}
+
+.lifestile-feed span,
+.lifestile-lanes strong {
+  width: fit-content;
+  color: #fffaf2;
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lifestile-feed h3,
+.lifestile-feed p {
+  margin: 0;
+  color: #fffaf2;
+}
+
+.lifestile-feed h3 {
+  font-size: clamp(1.3rem, 2.4vw, 2rem);
+  line-height: 1.05;
+}
+
+.lifestile-feed p {
+  color: rgba(255, 250, 242, 0.82);
+  line-height: 1.5;
+}
+
+.lifestile-lanes div {
+  min-height: 190px;
+  justify-content: space-between;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.74), rgba(242, 232, 218, 0.68));
+}
+
+.lifestile-lanes strong {
+  color: var(--ink);
+  font-size: 1rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.lifestile-lanes p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.lifestile-closing {
+  display: grid;
+  gap: 1.2rem;
+  background:
+    linear-gradient(90deg, rgba(23, 33, 43, 0.84), rgba(23, 33, 43, 0.5)),
+    url("./assets/home-cache/buzz-cultura-show.jpg") center / cover;
+  color: #fffaf2;
+}
+
+.lifestile-closing p {
+  max-width: 860px;
+  color: rgba(255, 250, 242, 0.82);
+}
+
+.lifestile-closing a {
+  width: fit-content;
+  background: #fffaf2;
+  color: var(--ink);
+  border-color: #fffaf2;
+}
+
+@media (max-width: 860px) {
+  .lifestile-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .lifestile-topbar nav {
+    justify-content: flex-start;
+  }
+
+  .lifestile-hero,
+  .lifestile-manifest,
+  .lifestile-feed,
+  .lifestile-lanes {
+    grid-template-columns: 1fr;
+  }
+
+  .lifestile-hero {
+    min-height: auto;
+  }
+
+  .lifestile-hero-photo {
+    min-height: 48svh;
+    order: -1;
+  }
+
+  .lifestile-hero h1 {
+    font-size: clamp(4rem, 22vw, 7rem);
+  }
+}
+
+@media (max-width: 520px) {
+  .lifestile-topbar nav a {
+    flex: 1 1 auto;
+  }
+
+  .lifestile-hero-copy {
+    padding: 1.4rem;
+  }
+
+  .lifestile-manifest,
+  .lifestile-radar,
+  .lifestile-social,
+  .lifestile-closing {
+    padding: 2rem 1rem;
+  }
+}
