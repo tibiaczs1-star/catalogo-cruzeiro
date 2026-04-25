@@ -167,6 +167,7 @@ const VISITS_FILE = path.join(DATA_DIR, "visits.json");
 const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
 const COMMUNITY_REPORTS_FILE = path.join(DATA_DIR, "community-reports.json");
 const ACRE_2026_POLL_FILE = path.join(DATA_DIR, "acre-2026-poll.json");
+const ACRE_2026_POLL_SETTINGS_FILE = path.join(DATA_DIR, "acre-2026-poll-settings.json");
 const SPRITE_CHECK_REVIEWS_FILE = path.join(DATA_DIR, "sprite-check-reviews.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const OFFICE_WORK_FILE = path.join(DATA_DIR, "office-work.json");
@@ -1645,8 +1646,10 @@ function buildStorageHealthPayload({ writeProbe = false } = {}) {
     },
     acre2026Poll: {
       file: ACRE_2026_POLL_FILE,
+      settingsFile: ACRE_2026_POLL_SETTINGS_FILE,
       responses: acrePollResponses,
-      bytes: acrePollFileSize
+      bytes: acrePollFileSize,
+      round: getAcre2026PollRoundSettings()
     },
     checks,
     checkedAt: new Date().toISOString()
@@ -8261,7 +8264,74 @@ function recordMatchesWeeklyDevice(item = {}, currentWeekKey = "", fingerprints 
   return fingerprints.some((fingerprint) => savedFingerprints.includes(fingerprint));
 }
 
-function findAcre2026WeeklyVoteForAuth(authUser = {}, weekKey = getWeekBucketKey(new Date().toISOString())) {
+function getAcre2026PollRoundSettings(now = new Date()) {
+  const currentDate = now instanceof Date && !Number.isNaN(now.getTime()) ? now : new Date();
+  const baseWeekKey = getWeekBucketKey(currentDate.toISOString());
+  const settings = readJson(ACRE_2026_POLL_SETTINGS_FILE, {});
+  const activeWeekKey = safeString(settings?.activeWeekKey || "", 24);
+  const activeWeekExpiresAt = safeString(settings?.activeWeekExpiresAt || "", 80);
+  const expiresAtMs = activeWeekExpiresAt ? new Date(activeWeekExpiresAt).getTime() : 0;
+  const isManualRoundActive =
+    Boolean(activeWeekKey) &&
+    (!activeWeekExpiresAt || (Number.isFinite(expiresAtMs) && expiresAtMs > currentDate.getTime()));
+
+  return {
+    version: 1,
+    mode: safeString(settings?.mode || (isManualRoundActive ? "manual-week" : "iso-week"), 40),
+    baseWeekKey,
+    activeWeekKey,
+    effectiveWeekKey: isManualRoundActive ? activeWeekKey : baseWeekKey,
+    isManualRoundActive,
+    activeWeekStartedAt: safeString(settings?.activeWeekStartedAt || "", 80),
+    activeWeekExpiresAt,
+    resetReason: cleanShortText(settings?.resetReason || "", 240),
+    updatedAt: safeString(settings?.updatedAt || "", 80),
+    history: Array.isArray(settings?.history) ? settings.history.slice(-10) : []
+  };
+}
+
+function getActiveAcre2026PollWeekKey(value = new Date().toISOString()) {
+  const date = new Date(value || Date.now());
+  return getAcre2026PollRoundSettings(date).effectiveWeekKey;
+}
+
+function buildAcre2026PollRoundKey(date = new Date()) {
+  const baseWeekKey = getWeekBucketKey(date.toISOString());
+  const stamp = date.toISOString().replace(/\D/g, "").slice(4, 14);
+  return safeString(`${baseWeekKey}-R${stamp}`, 24);
+}
+
+function resetAcre2026PollRound(reason = "") {
+  const now = new Date();
+  const previous = getAcre2026PollRoundSettings(now);
+  const activeWeekKey = buildAcre2026PollRoundKey(now);
+  const nextSettings = {
+    version: 1,
+    mode: "manual-week",
+    baseWeekKey: previous.baseWeekKey,
+    activeWeekKey,
+    activeWeekStartedAt: now.toISOString(),
+    activeWeekExpiresAt: new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    resetReason: cleanShortText(reason || "Reset administrativo mantendo votos acumulados.", 240),
+    previousWeekKey: previous.effectiveWeekKey,
+    updatedAt: now.toISOString(),
+    history: previous.history
+      .concat({
+        activeWeekKey: previous.activeWeekKey,
+        effectiveWeekKey: previous.effectiveWeekKey,
+        startedAt: previous.activeWeekStartedAt,
+        expiresAt: previous.activeWeekExpiresAt,
+        closedAt: now.toISOString()
+      })
+      .filter((item) => item.activeWeekKey || item.effectiveWeekKey)
+      .slice(-10)
+  };
+
+  writeJson(ACRE_2026_POLL_SETTINGS_FILE, nextSettings);
+  return getAcre2026PollRoundSettings(now);
+}
+
+function findAcre2026WeeklyVoteForAuth(authUser = {}, weekKey = getActiveAcre2026PollWeekKey()) {
   const googleSub = safeString(authUser?.sub || "", 160);
   const googleEmail = safeString(authUser?.email || "", 160);
   if (!googleSub && !googleEmail) return null;
@@ -8278,13 +8348,15 @@ function findAcre2026WeeklyVoteForAuth(authUser = {}, weekKey = getWeekBucketKey
 }
 
 function buildAcre2026PollCurrentUserPayload(authUser = {}) {
-  const weekKey = getWeekBucketKey(new Date().toISOString());
+  const round = getAcre2026PollRoundSettings();
+  const weekKey = round.effectiveWeekKey;
   const existingVote = findAcre2026WeeklyVoteForAuth(authUser, weekKey);
   return {
     ok: true,
     authenticated: Boolean(authUser?.email && authUser?.sub),
     alreadyVoted: Boolean(existingVote),
     weekKey,
+    round,
     user: publicAuthUser(authUser),
     vote: existingVote
       ? {
@@ -8494,6 +8566,7 @@ function buildAcre2026PollPublicPayload() {
   return {
     ok: true,
     updatedAt: items[0]?.createdAt || "",
+    round: getAcre2026PollRoundSettings(),
     summary: buildAcre2026PollSummary(items),
     weekly: buildWeeklyTrendSeries(items, {
       valueField: "voto2026",
@@ -8546,6 +8619,7 @@ function buildAcre2026PollBridgePayload() {
   return {
     ok: true,
     updatedAt: summary.updatedAt || journalItems[0]?.publishedAt || "",
+    round: getAcre2026PollRoundSettings(),
     poll: {
       totalResponses: Number(summary.totalResponses || 0),
       satisfactionAverage: Number(summary.satisfactionAverage || 0),
@@ -8576,6 +8650,7 @@ function buildAcre2026PollAdminPayload() {
   return {
     ok: true,
     updatedAt: items[0]?.createdAt || "",
+    round: getAcre2026PollRoundSettings(),
     summary: buildAcre2026PollSummary(items),
     weekly,
     records: items.map((item) => ({
@@ -10524,11 +10599,13 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/me") {
     const authUser = readCatalogoAuthSession(req);
     if (!authUser?.email || !authUser?.sub) {
+      const round = getAcre2026PollRoundSettings();
       return sendJson(res, 200, {
         ok: true,
         authenticated: false,
         alreadyVoted: false,
-        weekKey: getWeekBucketKey(new Date().toISOString()),
+        weekKey: round.effectiveWeekKey,
+        round,
         user: null,
         vote: null,
         message: "Entre com Google para liberar a participação semanal."
@@ -10549,7 +10626,8 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const body = await parseBody(req);
     const tracking = buildTrackingMeta(req, body);
-    const currentWeekKey = getWeekBucketKey(new Date().toISOString());
+    const currentRound = getAcre2026PollRoundSettings();
+    const currentWeekKey = currentRound.effectiveWeekKey;
     const profissao = cleanShortText(body.profissao || body.profession, 100);
     const localizacao = cleanShortText(body.localizacao || body.location, 120);
     const faixaEtaria = normalizePollChoice(
@@ -10716,6 +10794,7 @@ async function handleApi(req, res, pathname, searchParams) {
         id: mutationResult.item.id,
         createdAt: mutationResult.item.createdAt
       },
+      round: currentRound,
       summary: buildAcre2026PollSummary(sortByDateDesc(mutationResult.records, "createdAt", 5000)),
       message: "Resposta registrada. As parciais da enquete ja foram atualizadas."
     });
@@ -10730,6 +10809,28 @@ async function handleApi(req, res, pathname, searchParams) {
     }
 
     return sendJson(res, 200, buildAcre2026PollAdminPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026/admin/reset-week") {
+    if (!requireAcre2026PollAdmin(req)) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Senha administrativa invalida."
+      });
+    }
+
+    const body = await parseBody(req);
+    const round = resetAcre2026PollRound(body.reason || body.note || "");
+    const records = getAcre2026PollResponses();
+
+    return sendJson(res, 200, {
+      ok: true,
+      reset: true,
+      preservedResponses: Array.isArray(records) ? records.length : 0,
+      round,
+      summary: buildAcre2026PollSummary(sortByDateDesc(records, "createdAt", 5000)),
+      message: "Rodada semanal resetada por 7 dias, mantendo os votos acumulados."
+    });
   }
 
   if (req.method === "POST" && pathname === "/api/pesquisa-acre-2026/admin/force-sync") {
