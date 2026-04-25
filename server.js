@@ -475,14 +475,14 @@ const STATIC_PAGE_SEO = {
     fileName: "esttiles.html"
   },
   "/lifestile.html": {
-    title: `Lifestile Acre | Moda e estilo de vida | ${SITE_NAME}`,
+    title: `Lifestile Acre | Super Site Style & Fashion 24h | ${SITE_NAME}`,
     description:
-      "Editorial de moda e estilo de vida com recorte do Acre, street style, beleza, criadores locais, eventos, vitrine e sinais das redes sociais.",
-    themeColor: "#FBF7F0",
+      "Super site fashion do Acre com moda, beleza, vitrines, creators, captação social 24h e checagem diaria de pautas de estilo.",
+    themeColor: "#FFF8EF",
     colorScheme: "light",
     ogType: "website",
     schemaType: "CollectionPage",
-    priority: "0.72",
+    priority: "0.76",
     changefreq: "daily",
     fileName: "lifestile.html"
   },

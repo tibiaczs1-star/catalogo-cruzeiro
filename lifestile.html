@@ -3,126 +3,199 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lifestile Acre | Moda, estilo de vida e redes sociais</title>
+    <title>Lifestile Acre | Editorial de moda, beleza e tendências</title>
     <meta
       name="description"
-      content="Editorial de moda e estilo de vida com recorte do Acre, street style, beleza, criadores locais, cultura urbana e sinais das redes sociais."
+      content="Editorial de moda do Acre com looks, beleza, vitrines, tendências, creators, redes sociais e checagem diária de pautas fashion."
     />
-    <meta property="og:title" content="Lifestile Acre | Moda e estilo de vida" />
+    <meta property="og:title" content="Lifestile Acre | Editorial de moda e beleza" />
     <meta
       property="og:description"
-      content="Moda, beleza, rotina, eventos e criadores do Acre em uma editoria visual conectada às redes sociais."
+      content="Feed editorial pronto para subir: moda, beleza, tendências, vitrines e redes sociais do Acre em formato revista."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{SITE_URL}}/lifestile.html" />
-    <meta property="og:image" content="{{SITE_URL}}/assets/home-cache/buzz-model-local.jpg" />
+    <meta property="og:image" content="{{SITE_URL}}/assets/og-cover.svg" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Lifestile Acre" />
-    <meta
-      name="twitter:description"
-      content="Moda, estilo de vida, criadores locais e redes sociais do Acre em leitura editorial."
-    />
     <link rel="canonical" href="{{SITE_URL}}/lifestile.html" />
-    <link rel="stylesheet" href="./lifestile.css?v=20260425a" />
+    <link rel="stylesheet" href="./lifestile.css?v=20260425e" />
   </head>
   <body>
-    <header class="lifestile-topbar">
-      <a class="lifestile-brand" href="./index.html?skipIntro=1" aria-label="Voltar para a home">
-        <img src="./assets/logo-czs.svg" alt="" />
-        <span>Catalogo Cruzeiro do Sul</span>
+    <header class="style-top">
+      <div class="style-strip">
+        <span>Lifestile Acre</span>
+        <span>moda</span>
+        <span>beleza</span>
+        <span>redes sociais</span>
+        <span>tendências fashion</span>
+      </div>
+      <a class="style-logo" href="./index.html?skipIntro=1" aria-label="Voltar para a home">
+        <small>Catalogo Cruzeiro do Sul</small>
+        <strong>Lifestile</strong>
       </a>
-      <nav aria-label="Navegação Lifestile">
-        <a href="#radar">Radar</a>
-        <a href="#acre">Acre</a>
-        <a href="#redes">Redes</a>
+      <nav class="style-nav" aria-label="Categorias do Lifestile">
+        <a href="#capa">Capa</a>
+        <a href="#novidades">Moda</a>
+        <a href="#feed-social">Feed social</a>
+        <a href="#artigos">Artigos</a>
+        <a href="#beleza">Beleza</a>
+        <a href="#guia">Vitrines</a>
         <a href="./esttiles.html">Esttíles</a>
-        <a href="./index.html?skipIntro=1#social">Social</a>
       </nav>
     </header>
 
     <main>
-      <section class="lifestile-hero" aria-labelledby="lifestile-title">
-        <div class="lifestile-hero-copy">
-          <p class="lifestile-eyebrow">moda • acre • redes sociais</p>
-          <h1 id="lifestile-title">Lifestile Acre</h1>
+      <section class="hero-magazine" id="capa" data-cover>
+        <div class="hero-art">
+          <div class="hero-art-placeholder" aria-hidden="true">
+            <span class="shape phone"></span>
+            <span class="shape look"></span>
+            <span class="shape tag">Acre style</span>
+          </div>
+        </div>
+        <article class="hero-copy">
+          <p class="style-kicker">moda, beleza e rede local</p>
+          <h1>O Acre agora tem uma editoria de moda de verdade.</h1>
           <p>
-            Um editorial para olhar o Acre pela roupa, pela rua, pela beleza, pelos eventos,
-            pelos criadores e pelo que ganha conversa nas redes.
+            Looks, beleza, passarela possível, creators fashion, vitrines, salões e tendências
+            captadas do portal entram em uma página viva, pronta para virar editoria fixa.
           </p>
-          <div class="lifestile-actions">
-            <a href="#radar">Ver curadoria</a>
-            <a href="./index.html?skipIntro=1#monthly">Celebridades & Polêmicas</a>
+          <div class="hero-actions">
+            <a href="#novidades">Ler novidades</a>
+            <a href="#feed-social">Ver feed social</a>
           </div>
-        </div>
-        <div class="lifestile-hero-photo" aria-hidden="true"></div>
+        </article>
       </section>
 
-      <section class="lifestile-manifest" id="acre" aria-label="Recorte editorial do Acre">
+      <section class="fashion-runtime" id="fashion-24h" aria-labelledby="fashion-runtime-title">
+        <div class="runtime-copy">
+          <p class="style-kicker">fashion 24h</p>
+          <h2 id="fashion-runtime-title">Captação ligada para looks, beleza e vitrines.</h2>
+          <p>
+            A editoria funciona como uma mesa fashion: filtra notícia dura, separa sinais de moda,
+            checa foto e transforma redes públicas em ideias de cobertura.
+          </p>
+        </div>
+        <div class="runtime-board" data-fashion-runtime>
+          <article>
+            <span>fontes</span>
+            <strong data-runtime-sources>0</strong>
+            <small>feeds consultados</small>
+          </article>
+          <article>
+            <span>moda</span>
+            <strong data-runtime-approved>0</strong>
+            <small>itens aprovados</small>
+          </article>
+          <article>
+            <span>bloqueio</span>
+            <strong data-runtime-blocked>0</strong>
+            <small>ruídos cortados</small>
+          </article>
+          <article>
+            <span>próxima ronda</span>
+            <strong data-runtime-next>24h</strong>
+            <small>checagem diária</small>
+          </article>
+        </div>
+        <div class="runtime-lanes" data-runtime-lanes>
+          <span>street style</span>
+          <span>beleza</span>
+          <span>vitrine local</span>
+          <span>creators fashion</span>
+          <span>foto & foco</span>
+          <span>review final</span>
+        </div>
+      </section>
+
+      <section class="latest-board" id="novidades" aria-labelledby="novidades-title">
+        <div class="section-head">
+          <p class="style-kicker">moda em destaque</p>
+          <h2 id="novidades-title">Capa, artigos e chamadas fashion prontas para publicação</h2>
+        </div>
+        <div class="top-story-grid" data-top-grid>
+          <article class="story-card story-seed"><span>moda local</span><strong>Looks, beleza e vitrines do Acre em destaque</strong></article>
+          <article class="story-card story-seed"><span>tendências</span><strong>Novidades fashion selecionadas para hoje</strong></article>
+          <article class="story-card story-seed"><span>redes</span><strong>Creators e eventos no radar visual</strong></article>
+        </div>
+      </section>
+
+      <section class="social-live" id="feed-social" aria-labelledby="feed-social-title">
+        <div class="social-live-copy">
+          <p class="style-kicker">feed fashion de redes ligado</p>
+          <h2 id="feed-social-title">Sinais públicos que podem virar tendência de moda</h2>
+          <p>
+            O painel lê tendências sociais do portal e separa o que combina com moda,
+            beleza, vitrines, creators e presença visual.
+          </p>
+        </div>
+        <div class="social-console">
+          <div class="social-console-head">
+            <span>ao vivo</span>
+            <strong data-social-updated>atualizando sinais...</strong>
+          </div>
+          <div class="social-feed-list" data-social-feed></div>
+        </div>
+      </section>
+
+      <section class="photo-rail-section" aria-label="Galeria de notícias com foto">
+        <div class="section-head">
+          <p class="style-kicker">imagens fashion do dia</p>
+          <h2>Fotos, vitrines e cenas usadas para inspirar a editoria</h2>
+        </div>
+        <div class="photo-rail" data-photo-rail></div>
+      </section>
+
+      <section class="articles-section" id="artigos" aria-labelledby="artigos-title">
+        <div class="section-head">
+          <p class="style-kicker">artigos de moda</p>
+          <h2 id="artigos-title">Uma grade cheia para o Lifestile nascer como revista fashion</h2>
+        </div>
+        <div class="article-grid" data-news-grid></div>
+      </section>
+
+      <section class="style-guides" id="beleza" aria-label="Guias editoriais">
+        <article>
+          <span>beleza</span>
+          <h2>Salão, make, cabelo e autocuidado com contexto local.</h2>
+          <p>Quando houver sinal público forte, a cobertura entra como serviço, tendência e vitrine de profissionais do Acre.</p>
+        </article>
+        <article>
+          <span>moda</span>
+          <h2>Look possível para calor, chuva, trabalho, faculdade e festa.</h2>
+          <p>A editoria favorece roupa real, comércio local, eventos e estilo de rua em vez de moda distante.</p>
+        </article>
+        <article>
+          <span>tendências</span>
+          <h2>Creators, vitrines e eventos entram apenas quando ajudam a ler moda.</h2>
+          <p>O radar organiza o que aparece nas redes e conecta com looks, consumo, beleza e presença visual.</p>
+        </article>
+      </section>
+
+      <section class="local-guide" id="guia" aria-labelledby="guia-title">
+        <div class="section-head">
+          <p class="style-kicker">guia de captação fashion</p>
+          <h2 id="guia-title">Pautas de moda que a equipe deve captar todo dia</h2>
+        </div>
+        <div class="guide-grid">
+          <article><span>01</span><strong>Look da rua</strong><small>centro, campus, festa, feira, evento</small></article>
+          <article><span>02</span><strong>Beleza acreana</strong><small>salões, make, unhas, cabelo, perfume</small></article>
+          <article><span>03</span><strong>Vitrine local</strong><small>lojas, lançamentos, collabs, promoções</small></article>
+          <article><span>04</span><strong>Creators</strong><small>reels, stories, bastidores, agenda pública</small></article>
+          <article><span>05</span><strong>Eventos fashion</strong><small>formatura, show, feira, lançamento, ensaio</small></article>
+        </div>
+      </section>
+
+      <section class="closing-editorial">
+        <p class="style-kicker">editoria de moda pronta para subir</p>
+        <h2>Lifestile agora é uma página fashion com artigos, fotos e captação social.</h2>
         <div>
-          <span>01</span>
-          <h2>Moda que nasce da cidade real.</h2>
+          <a href="./index.html?skipIntro=1">Voltar para a home</a>
+          <a href="./esttiles.html">Abrir Esttíles</a>
         </div>
-        <p>
-          A editoria junta vitrines, feira, eventos, universidade, beleza, música, festa,
-          trabalho criativo e bastidores de quem movimenta a imagem pública no Acre.
-        </p>
-      </section>
-
-      <section class="lifestile-radar" id="radar" aria-labelledby="radar-title">
-        <div class="lifestile-section-head">
-          <p class="lifestile-eyebrow">radar vivo</p>
-          <h2 id="radar-title">Sinais de estilo, cultura e rede</h2>
-        </div>
-        <div class="lifestile-feed" data-lifestile-feed>
-          <article>
-            <span>street style</span>
-            <h3>Looks de rua, clima de evento e presença local entram como pauta.</h3>
-            <p>Carregando recortes do portal...</p>
-          </article>
-          <article>
-            <span>criadores</span>
-            <h3>Reels, stories, fotos públicas e buzz ajudam a medir o que virou conversa.</h3>
-            <p>Atualizando sinais das redes...</p>
-          </article>
-          <article>
-            <span>beleza</span>
-            <h3>Make, cabelo, acessórios e vitrine local ganham leitura editorial.</h3>
-            <p>Organizando a curadoria...</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="lifestile-social" id="redes" aria-labelledby="redes-title">
-        <div class="lifestile-section-head">
-          <p class="lifestile-eyebrow">redes do acre</p>
-          <h2 id="redes-title">O que a equipe passa a captar</h2>
-        </div>
-        <div class="lifestile-lanes">
-          <div>
-            <strong>Creators e influência local</strong>
-            <p>Perfis públicos, eventos, collabs, bastidores, estética de reels e presença nas cidades.</p>
-          </div>
-          <div>
-            <strong>Comércio, beleza e vitrine</strong>
-            <p>Lojas, salões, fotografias de campanha, lançamentos, combos, datas e desejo de compra.</p>
-          </div>
-          <div>
-            <strong>Agenda e comportamento</strong>
-            <p>Festas, cultura, turismo, universidade, gastronomia, treinos, família, rua e comunidade.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="lifestile-closing" aria-label="Entradas relacionadas">
-        <h2>Moda entra junto com vida cotidiana.</h2>
-        <p>
-          O Lifestile conversa com Esttíles, Festas & Social, Trending e Celebridades & Polêmicas
-          para deixar o portal mais atento ao Acre que aparece fora da notícia dura.
-        </p>
-        <a href="./esttiles.html">Abrir Esttíles</a>
       </section>
     </main>
 
-    <script src="./lifestile.js?v=20260425a" defer></script>
+    <script src="./lifestile.js?v=20260425e" defer></script>
   </body>
 </html>
