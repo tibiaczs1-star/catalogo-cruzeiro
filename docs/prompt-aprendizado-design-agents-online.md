@@ -161,3 +161,16 @@ Nao imite uma marca por superficie. Traduza o sistema em decisoes reutilizaveis 
 - Exemplo de arquivo completo: https://getdesign.md/design-md/figma/DESIGN.md
 - Total local analisado nesta execucao: 61 Markdown do repositorio + 69 DESIGN.md completos vinculados pelo catalogo.
 
+
+## Aprendizado continuo com agentes reais
+
+Este prompt agora usa a reuniao assincrona em `REUNIAO_REAL_DESIGN_AGENTS_MD.md` como entrada viva. Quando agentes online devolverem pareceres, incorpore apenas regras verificaveis e transforme opinioes em instrucoes operacionais.
+
+Formato de incorporacao:
+
+- Origem: nome do agente e data.
+- Regra aprendida: uma frase clara.
+- Impacto: qual erro evita ou qual qualidade aumenta.
+- Aplicacao: onde entra no DESIGN.md ou na implementacao.
+
+Regra de honestidade: nunca afirmar que agentes externos participaram antes de receber respostas reais. Antes disso, chame o material de sala, pauta ou protocolo de reuniao online.
