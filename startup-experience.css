@@ -2,6 +2,95 @@ body.catalogo-lock-scroll {
   overflow: hidden !important;
 }
 
+/* 2026-04-25: popup de cookies mais compacto e voltado ao leitor. */
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) {
+  padding: clamp(18px, 4vh, 36px) clamp(18px, 3vw, 42px) !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-shell {
+  width: min(1180px, 100%) !important;
+  justify-content: center !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-card {
+  width: min(1180px, calc(100vw - 52px)) !important;
+  min-height: auto !important;
+  height: auto !important;
+  max-height: calc(100svh - 56px) !important;
+  grid-template-columns: minmax(520px, 1.12fr) minmax(340px, 0.88fr) !important;
+  border-radius: 26px !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-visual,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-copy {
+  min-height: min(720px, calc(100svh - 56px)) !important;
+  height: auto !important;
+  max-height: calc(100svh - 56px) !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-copy {
+  align-content: center !important;
+  gap: 0.78rem !important;
+  padding: clamp(1.15rem, 2.2vw, 1.65rem) !important;
+  overflow-y: auto;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-kicker,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-consent-intro strong,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-consent-focus strong {
+  font-size: 0.68rem !important;
+  letter-spacing: 0.12em !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-copy h2 {
+  max-width: 12ch !important;
+  font-size: clamp(1.9rem, 3.1vw, 2.62rem) !important;
+  line-height: 0.98 !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-lead {
+  max-width: 36ch !important;
+  font-size: 0.96rem !important;
+  line-height: 1.5 !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-consent-intro,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-consent-focus,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-term-item,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-terms-check {
+  padding: 0.72rem 0.82rem !important;
+  border-radius: 16px !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-consent-intro p,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-consent-focus p,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-term-item span,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-terms-check span,
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-note {
+  font-size: 0.88rem !important;
+  line-height: 1.42 !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-terms-list {
+  gap: 0.52rem !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-note {
+  max-width: none !important;
+}
+
+.catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-btn {
+  min-height: 44px !important;
+  padding: 0.68rem 1.05rem !important;
+  font-size: 0.88rem !important;
+}
+
+@media (max-width: 1180px) and (min-width: 761px) {
+  .catalogo-welcome:not(.is-phone):not(.is-cookie-only):not(.is-splash-loader):not(.is-office-loader) .catalogo-welcome-card {
+    grid-template-columns: minmax(460px, 1fr) minmax(320px, 0.9fr) !important;
+  }
+}
+
 body.founder-prelude-pending.founder-prelude-active {
   overflow: hidden !important;
   background: #020611 !important;

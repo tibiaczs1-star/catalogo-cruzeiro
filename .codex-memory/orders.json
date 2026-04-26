@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T23:52:12.584Z",
+  "lastUpdatedAt": "2026-04-26T00:21:43.130Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -1001,16 +1001,24 @@
       "id": "2026-04-17-refinar-o-escritorio-com-cenario-pixel-art-mais-rico-personagens-mais-elaborados",
       "createdAt": "2026-04-17T07:55:14.948Z",
       "updatedAt": "2026-04-17T07:55:14.948Z",
-      "status": "open",
+      "status": "completed",
       "source": "chat",
       "rawRequest": "eu queria algo mais assim como essas fotos no escritorio, com personagens mais bem elaborados em pixels arts, use o agente de pixels art e crie um backgroud bonito , faça seu melhor e use os agentes para fazer o escriotrio",
       "summary": "Refinar o Escritorio com cenário pixel art mais rico, personagens mais elaborados e fundo mais bonito",
       "normalizedTasks": [],
-      "filesTouched": [],
+      "filesTouched": [
+        "premium-clarity.css",
+        "index.html"
+      ],
       "assetRefs": [],
-      "tags": [],
+      "tags": [
+        "home",
+        "legibilidade",
+        "mobile",
+        "css"
+      ],
       "nextSteps": [],
-      "notes": ""
+      "notes": "Camada final em premium-clarity.css impede word-break/hyphen automatico em titulos, resumos, botoes e card text da home; index.html recebeu cache-bust do CSS."
     },
     {
       "id": "2026-04-17-reformular-o-popup-inicial-com-mais-terreno-de-guerra-pixel-art-e-copy-de-cookie",
@@ -6696,6 +6704,51 @@
       ],
       "nextSteps": [],
       "notes": "Feedback enviado por captura mostrando tres cards da mesma area com foto repetida do Porto Cruzeiro e resumo com tags <p><img>."
+    },
+    {
+      "id": "2026-04-26-corrigir-quebras-feias-de-texto-palavras-nos-cards-e-blocos-responsivos-da-home-",
+      "createdAt": "2026-04-26T00:12:12.830Z",
+      "updatedAt": "2026-04-26T00:12:12.830Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vc consegue fazer uma forma que o texto nao fique caindo as palavras no meio da linha ta muito feio isso",
+      "summary": "Corrigir quebras feias de texto/palavras nos cards e blocos responsivos da home, preservando palavras inteiras nas linhas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-compactar-popup-de-cookies-e-reescrever-copy-publica-explicando-atualizacoes-var",
+      "createdAt": "2026-04-26T00:15:26.948Z",
+      "updatedAt": "2026-04-26T00:15:26.948Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok eu quero que fique mais compacto ta muito grande, e que o texto seja mais voltado ao publico, e explique que o site e atualizado muitas vezes por dia, então por isso aceita os termos e etc",
+      "summary": "Compactar popup de cookies e reescrever copy publica explicando atualizacoes varias vezes ao dia como motivo do aceite",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-subir-o-pacote-atual-de-correcoes-da-home-cookies-texto-e-caches-editoriais-mant",
+      "createdAt": "2026-04-26T00:21:43.130Z",
+      "updatedAt": "2026-04-26T00:21:43.130Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "subir",
+      "summary": "Subir o pacote atual de correções da home/cookies/texto e caches editoriais, mantendo PubPaid fora.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

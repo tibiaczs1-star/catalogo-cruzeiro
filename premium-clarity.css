@@ -1142,3 +1142,70 @@ body.editorial-home #social .social-card.social-agenda .news-source {
     scroll-margin-top: 0.75rem !important;
   }
 }
+
+/* 2026-04-26: leitura editorial sem palavras partidas no meio da linha */
+body.editorial-home :is(
+  .hero-newsroom-copy h1,
+  .hero-newsroom-copy p,
+  .mosaic-item h1,
+  .mosaic-item h3,
+  .mosaic-item p,
+  .news-card h3,
+  .news-card p,
+  .archive-card h3,
+  .archive-card p,
+  .live-feed-card h3,
+  .live-feed-card p,
+  .feed-card h3,
+  .feed-card p,
+  .generated-feed-card h3,
+  .generated-feed-card p,
+  .daily-buzz-card h3,
+  .daily-buzz-card p,
+  .catalog-card h3,
+  .catalog-card p,
+  .founders-summary,
+  .startup-cookie-panel h2,
+  .startup-cookie-panel p
+) {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+  line-break: auto !important;
+}
+
+body.editorial-home :is(
+  .hero-newsroom-copy h1,
+  .mosaic-item h1,
+  .mosaic-item h3,
+  .news-card h3,
+  .archive-card h3,
+  .live-feed-card h3,
+  .feed-card h3,
+  .generated-feed-card h3,
+  .daily-buzz-card h3,
+  .catalog-card h3,
+  .startup-cookie-panel h2
+) {
+  text-wrap: pretty !important;
+}
+
+body.editorial-home :is(
+  .hero-newsroom-actions a,
+  .feed-launch-button,
+  .day-chip,
+  .mobile-main-nav-dropdown summary,
+  .header-services-strip a,
+  .startup-cookie-actions button,
+  .agent-mail-actions button
+) {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: none !important;
+}
+
+body.editorial-home :is(.news-source, .ticker-chip, .feed-search input) {
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  hyphens: none !important;
+}

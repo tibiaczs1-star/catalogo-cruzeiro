@@ -1,6 +1,6 @@
 {
   "topic": "study",
-  "updatedAt": "2026-04-25T23:53:54.429Z",
+  "updatedAt": "2026-04-26T00:18:19.567Z",
   "items": [
     {
       "id": "https://thepienews.com/catherine-dalipe-designing-your-life-consulting/",
@@ -361,6 +361,42 @@
       "topic": "study",
       "coverageLayer": "global",
       "topicGroup": "acesso"
+    },
+    {
+      "id": "https://www.edsurge.com/news/2026-04-08-why-the-social-media-addiction-case-isn-t-over-yet",
+      "slug": "why-the-social-media-addiction-case-isn-t-over-yet",
+      "title": "Why the Social Media Addiction Case Isn’t Over Yet",
+      "eyebrow": "festas & social",
+      "date": "8 de abr. de 2026",
+      "publishedAt": "2026-04-08T20:39:22.000Z",
+      "category": "Festas & Social",
+      "categoryKey": "festas & social",
+      "previewClass": "thumb-social",
+      "sourceName": "EdSurge",
+      "sourceUrl": "https://www.edsurge.com/news/2026-04-08-why-the-social-media-addiction-case-isn-t-over-yet",
+      "sourceLabel": "Why the Social Media Addiction Case Isn’t Over Yet",
+      "lede": "INDEFINITE SCROLL: In what legal observers have called social media’s “Big Tobacco Moment,” a jury has found that Meta and Google’s social media app ...",
+      "summary": "INDEFINITE SCROLL: In what legal observers have called social media’s “Big Tobacco Moment,” a jury has found that Meta and Google’s social media app ...",
+      "analysis": "",
+      "body": [
+        "EdSurge publicou em 8 de abr. de 2026 a base desta noticia sobre Why the Social Media Addiction Case Isn’t Over Yet. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+        "Why the Social Media Addiction Case Isn’t Over Yet e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+      ],
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://edsurge.imgix.net/uploads/post/image/16672/shutterstock_2719364499-1775680577.jpg?auto=compress%2Cformat&amp;w=1600&amp;h=800&amp;fit=crop",
+      "sourceImageUrl": "",
+      "feedImageUrl": "https://edsurge.imgix.net/uploads/post/image/16672/shutterstock_2719364499-1775680577.jpg?auto=compress%2Cformat&amp;w=1600&amp;h=800&amp;fit=crop",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "topic": "study",
+      "coverageLayer": "global",
+      "topicGroup": "edtech"
     }
   ],
   "reports": [
@@ -371,8 +407,8 @@
     },
     {
       "source": "edsurge",
-      "ok": false,
-      "error": "timeout"
+      "ok": true,
+      "count": 8
     },
     {
       "source": "hechinger",

@@ -358,12 +358,12 @@
       <p class="cookie-consent-kicker">Antes de navegar</p>
       <h3>Cookies e preferencias</h3>
       <p>
-        Usamos cookies essenciais e metricas basicas para manter o portal estavel,
-        medir carregamento e melhorar a leitura no celular.
+        O site recebe atualizacoes varias vezes por dia. Por isso usamos cookies
+        essenciais e metricas basicas para manter tudo rapido, estavel e facil de ler.
       </p>
       <span class="cookie-consent-inline-note">
         <span class="cookie-consent-inline-dot" aria-hidden="true"></span>
-        Voce continua depois do aceite
+        Ao aceitar, voce continua para o portal
       </span>
       <div class="cookie-consent-actions">
         <button class="cookie-consent-accept" type="button">Aceitar cookies e continuar</button>
@@ -405,7 +405,8 @@
         <p class="catalogo-welcome-kicker">Antes de entrar</p>
         <h2 id="catalogoWelcomeTitle">Cookies e preferências</h2>
         <p class="catalogo-welcome-lead">
-          Usamos só o básico para o portal funcionar melhor e medir o carregamento desta visita.
+          Atualizamos o portal varias vezes por dia. O aceite libera cookies essenciais e
+          metricas basicas para manter a leitura rapida, estavel e melhor a cada visita.
         </p>
 
         <div class="catalogo-welcome-actions">
@@ -420,63 +421,44 @@
       <p class="catalogo-welcome-kicker">Antes de continuar</p>
       <h2 id="catalogoWelcomeTitle">Preferencias de cookies</h2>
       <p class="catalogo-welcome-lead">
-        Cookies essenciais mantem o portal estavel. Ja a medicao basica ajuda a
-        entender leitura, carregamento, desempenho e pontos de melhoria desta visita.
+        O portal muda o dia inteiro: novas noticias, capas e editorias entram varias vezes
+        por dia. Para manter essa atualizacao rapida e estavel, usamos cookies essenciais e
+        metricas basicas de navegacao.
       </p>
 
       <div class="catalogo-consent-intro">
-        <strong>Leitura rapida desta etapa</strong>
+        <strong>Por que pedimos isso</strong>
         <p>
-          Nao e cadastro extra nem tela de venda. Esta entrada so organiza o uso de
-          cookies essenciais e metricas basicas para que o portal rode melhor.
+          Nao e cadastro nem tela de venda. O aceite ajuda o site a carregar melhor,
+          corrigir travamentos e entender quais areas precisam de ajuste.
         </p>
-      </div>
-
-      <div class="catalogo-terms-summary">
-        <article class="catalogo-summary-card">
-          <strong>Base do portal</strong>
-          <p>Segura recursos essenciais, carregamento minimo e continuidade da sessao.</p>
-        </article>
-        <article class="catalogo-summary-card">
-          <strong>Medicao da visita</strong>
-          <p>Mostra onde a leitura flui, onde trava e quais editorias pedem ajuste.</p>
-        </article>
-        <article class="catalogo-summary-card">
-          <strong>Seu controle</strong>
-          <p>A politica continua aberta para consulta antes e depois da entrada no site.</p>
-        </article>
       </div>
 
       <div class="catalogo-terms-list">
         <div class="catalogo-term-item">
-          <strong>O que fica ligado</strong>
-          <span>Cookies essenciais, leitura de desempenho e sinais basicos de navegacao.</span>
+          <strong>O que fica ativo</strong>
+          <span>Cookies essenciais e sinais basicos de desempenho, como carregamento e estabilidade.</span>
         </div>
         <div class="catalogo-term-item">
           <strong>O que isso melhora</strong>
-          <span>Capas, velocidade, carregamento das editorias e estabilidade geral do portal.</span>
-        </div>
-        <div class="catalogo-term-item">
-          <strong>Transparencia</strong>
-          <span>As condicoes acompanham a evolucao do site e permanecem descritas na politica.</span>
+          <span>Velocidade, leitura das noticias, troca de capas e funcionamento das editorias.</span>
         </div>
       </div>
 
       <div class="catalogo-consent-focus" aria-hidden="true">
-        <strong>Concordancia desta visita</strong>
+        <strong>Seu aceite</strong>
         <p>
-          A marcacao abaixo libera a entrada com essas medicoes basicas ativas neste acesso.
+          Marque abaixo para entrar com esses recursos basicos ativos neste acesso.
         </p>
       </div>
 
       <label class="catalogo-terms-check">
         <input type="checkbox" id="catalogoAcceptTerms" />
-        <span>Autorizo o uso de cookies e metricas de navegacao neste acesso.</span>
+        <span>Aceito o uso de cookies essenciais e metricas basicas para melhorar minha visita.</span>
       </label>
 
       <p class="catalogo-welcome-note">
-        Cookies estritamente necessarios podem permanecer ativos para o funcionamento do site.
-        A politica completa continua disponivel em nova aba para revisao.
+        A politica completa continua disponivel para consulta e revisao.
       </p>
 
       <div class="catalogo-welcome-actions">
