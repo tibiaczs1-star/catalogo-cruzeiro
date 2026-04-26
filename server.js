@@ -1726,8 +1726,8 @@ function updateImagePreviewCache(sourceUrl, imageUrl) {
 }
 
 function writeStaticNewsData(items = []) {
-  const safeItems = items.slice(0, 120);
-  const payload = `window.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
+  const safeItems = Array.isArray(items) ? items : [];
+  const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
 
@@ -5774,13 +5774,16 @@ function getRawNewsItems() {
   const runtime = readMergedNewsCollection("runtime-news.json");
   const archive = readMergedNewsCollection("news-archive.json");
   const staticNews = getStaticNewsItems();
-  const homeLinkedFallbacks = parseHomeLinkedArticleFallbacks();
-
-  return []
+  const fileItems = []
     .concat(runtime)
     .concat(archive)
-    .concat(homeLinkedFallbacks)
     .concat(staticNews);
+
+  if (fileItems.length > 0) {
+    return fileItems;
+  }
+
+  return parseHomeLinkedArticleFallbacks();
 }
 
 function getEditorialFocusScore(item = {}) {
@@ -5911,7 +5914,7 @@ function getArticleBySlug(slug) {
   );
 }
 
-function getNewsArchive(limit = 500) {
+function buildNewsArchivePayload(limit = 500) {
   const safeLimit = Math.max(1, Math.min(1000, limit));
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
@@ -5934,7 +5937,18 @@ function getNewsArchive(limit = 500) {
     return Number(right.priority || 0) - Number(left.priority || 0);
   });
 
-  return repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
+  const archiveItems = repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
+
+  return {
+    total: sorted.length,
+    archiveTotal: sorted.length,
+    returned: archiveItems.length,
+    items: archiveItems
+  };
+}
+
+function getNewsArchive(limit = 500) {
+  return buildNewsArchivePayload(limit).items;
 }
 
 function getNewsSuggestions(query = "", limit = 80) {
@@ -10447,13 +10461,19 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 60);
     const items = getArticleNews(Math.max(1, Math.min(500, limit)));
-    return sendJson(res, 200, { ok: true, total: items.length, items });
+    const archiveTotal = buildNewsArchivePayload(1000).archiveTotal;
+    return sendJson(res, 200, {
+      ok: true,
+      total: archiveTotal,
+      archiveTotal,
+      returned: items.length,
+      items
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
     const limit = Number(searchParams.get("limit") || 500);
-    const items = getNewsArchive(limit);
-    return sendJson(res, 200, { ok: true, total: items.length, items });
+    return sendJson(res, 200, { ok: true, ...buildNewsArchivePayload(limit) });
   }
 
   if (req.method === "GET" && pathname === "/api/news/integrity") {

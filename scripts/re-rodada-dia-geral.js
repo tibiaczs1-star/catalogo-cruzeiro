@@ -10,10 +10,12 @@ const DATA_DIR = path.join(ROOT_DIR, "data");
 const TEMP_DIR = path.join(ROOT_DIR, ".codex-temp");
 const ONLINE_NEWS_FILE = path.join(TEMP_DIR, "online-news-before.json");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
+const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const REPORT_FILE = path.join(DATA_DIR, "re-rodada-dia-geral-report.json");
 const FALLBACK_DIR = path.join(ROOT_DIR, "assets", "news-fallbacks");
 const DEFAULT_ONLINE_URL = "https://catalogo-cruzeiro-web.onrender.com";
+const SYNC_FETCH_LIMIT = Math.max(120, Number(process.env.CATALOGO_SYNC_NEWS_LIMIT || 1000));
 const HOME_PREVIEW_MAX_CHARS = 230;
 
 function ensureDir(dirPath) {
@@ -34,7 +36,12 @@ function writeJson(filePath, payload) {
 }
 
 function writeStaticNews(items) {
-  fs.writeFileSync(STATIC_NEWS_FILE, `window.NEWS_DATA = ${JSON.stringify(items.slice(0, 120), null, 2)};\n`, "utf-8");
+  const safeItems = Array.isArray(items) ? items : [];
+  fs.writeFileSync(
+    STATIC_NEWS_FILE,
+    `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`,
+    "utf-8"
+  );
 }
 
 function readStaticNewsItems() {
@@ -47,6 +54,13 @@ function readStaticNewsItems() {
   } catch (_error) {
     return [];
   }
+}
+
+function readNewsArchiveItems() {
+  const payload = readJson(NEWS_ARCHIVE_FILE, []);
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload.items)) return payload.items;
+  return [];
 }
 
 function requestJson(url) {
@@ -224,6 +238,47 @@ function getNewsTimestamp(item = {}) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getArticleArchiveKey(item = {}) {
+  return String(
+    item.slug ||
+      item.id ||
+      item.sourceUrl ||
+      item.url ||
+      item.link ||
+      item.title ||
+      ""
+  ).trim();
+}
+
+function mergeNewsCollections(...collections) {
+  const map = new Map();
+
+  collections.flat().filter(Boolean).forEach((item) => {
+    const key = getArticleArchiveKey(item);
+    if (!key) return;
+    const existing = map.get(key);
+    if (!existing) {
+      map.set(key, item);
+      return;
+    }
+
+    const existingImage = imageOf(existing);
+    const itemImage = imageOf(item);
+    const existingBodyCount = Array.isArray(existing.body) ? existing.body.filter(Boolean).length : 0;
+    const itemBodyCount = Array.isArray(item.body) ? item.body.filter(Boolean).length : 0;
+    const existingScore = (existingImage ? 10 : 0) + existingBodyCount;
+    const itemScore = (itemImage ? 10 : 0) + itemBodyCount;
+
+    map.set(key, itemScore >= existingScore ? { ...existing, ...item } : { ...item, ...existing });
+  });
+
+  return [...map.values()].sort((left, right) => {
+    const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
+    if (dateDiff !== 0) return dateDiff;
+    return Number(right.priority || 0) - Number(left.priority || 0);
+  });
+}
+
 function promoteMailzaPriority(items = []) {
   return items
     .map((item) => {
@@ -286,9 +341,12 @@ function applyLocalArticleHints(items = [], hints = new Map()) {
 
 const REVIEW_COPY_BLOCKLIST = [
   "na leitura do " + "catalogo",
+  "na leitura do " + "catálogo",
   "na escolha " + "editorial do catalogo",
+  "na escolha " + "editorial do catálogo",
   "na leitura " + "editorial",
-  "o diferencial " + "editorial aqui"
+  "o diferencial " + "editorial aqui",
+  "merece vitrine"
 ];
 
 function hasReviewBlockedCopy(value = "") {
@@ -309,15 +367,23 @@ function sanitizeReviewCopy(item = {}) {
     : item.development;
   const previewSummary = buildHomePreviewSummary(item, title);
   const summary = cleanText(item.summary || "");
+  const lede = cleanText(item.lede || item.summary || "");
+  const publicLede = hasReviewBlockedCopy(lede) || /\bpauta\b/i.test(lede)
+    ? previewSummary
+    : lede;
+  const publicSummary = hasReviewBlockedCopy(summary) || /\bpauta\b/i.test(summary)
+    ? previewSummary
+    : summary;
 
   return {
     ...item,
     lede: isLongTheaterFeed
       ? `${title}. A publicacao do G1 Pop & Arte traz os principais detalhes do espetaculo e da temporada.`
-      : normalizeHomePreviewField(item.lede || item.summary || "", previewSummary),
+      : normalizeHomePreviewField(publicLede, previewSummary),
     summary: isLongTheaterFeed
       ? `${title}. O registro cultural foi resumido para melhorar a leitura no portal e manter o link da fonte original.`
-      : normalizeHomePreviewField(summary, previewSummary),
+      : normalizeHomePreviewField(publicSummary, previewSummary),
+    analysis: hasReviewBlockedCopy(item.analysis || "") ? "" : item.analysis,
     body: sanitizedBody,
     development: sanitizedDevelopment,
     imageFocus: item.imageFocus || inferSafeImageFocus(item)
@@ -476,7 +542,7 @@ function auditItems(items = []) {
 async function loadOnlineNews() {
   const baseUrl = process.env.SITE_URL || DEFAULT_ONLINE_URL;
   try {
-    const payload = await requestJson(`${baseUrl.replace(/\/$/, "")}/api/news?limit=120`);
+    const payload = await requestJson(`${baseUrl.replace(/\/$/, "")}/api/news?limit=${SYNC_FETCH_LIMIT}`);
     writeJson(ONLINE_NEWS_FILE, payload);
     return payload;
   } catch (error) {
@@ -498,22 +564,34 @@ async function main() {
   const startedAt = new Date().toISOString();
   const localHints = buildLocalArticleHints();
   const onlinePayload = await loadOnlineNews();
-  const onlineItems = Array.isArray(onlinePayload.items) ? onlinePayload.items.slice(0, 120) : [];
+  const onlineItems = Array.isArray(onlinePayload.items) ? onlinePayload.items : [];
   const onlineAuditBefore = auditItems(onlineItems);
   const repaired = repairImages(applyLocalArticleHints(onlineItems, localHints));
   const prioritizedItems = promoteMailzaPriority(repaired.items).map(sanitizeReviewCopy);
+  const archiveItems = mergeNewsCollections(
+    readNewsArchiveItems(),
+    readStaticNewsItems(),
+    Array.isArray(readJson(RUNTIME_NEWS_FILE, { items: [] }).items)
+      ? readJson(RUNTIME_NEWS_FILE, { items: [] }).items
+      : [],
+    prioritizedItems
+  ).map(sanitizeReviewCopy);
   const onlineAuditAfterLocalRepair = auditItems(prioritizedItems);
+  const archiveAuditAfterSync = auditItems(archiveItems);
 
   const runtimePayload = {
     lastAttemptAt: startedAt,
     lastSuccessAt: new Date().toISOString(),
     source: "re-rodada-dia-geral-online-first",
-    items: prioritizedItems,
+    activeWindowItems: prioritizedItems,
+    items: archiveItems,
     reports: [
       {
         sourceName: "Render online",
         ok: true,
         fetched: onlineItems.length,
+        activeWindowItems: prioritizedItems.length,
+        archiveItems: archiveItems.length,
         repairedImages: repaired.repaired,
         mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
         cachedFallback: Boolean(onlinePayload.cachedFallback),
@@ -523,7 +601,8 @@ async function main() {
   };
 
   writeJson(RUNTIME_NEWS_FILE, runtimePayload);
-  writeStaticNews(prioritizedItems);
+  writeJson(NEWS_ARCHIVE_FILE, archiveItems);
+  writeStaticNews(archiveItems);
 
   const report = {
     ok: true,
@@ -534,6 +613,10 @@ async function main() {
     cachedFallbackReason: onlinePayload.cachedFallbackReason || "",
     onlineAuditBefore,
     localAuditAfterSync: onlineAuditAfterLocalRepair,
+    archiveAuditAfterSync,
+    activeWindowItems: prioritizedItems.length,
+    archiveItems: archiveItems.length,
+    syncFetchLimit: SYNC_FETCH_LIMIT,
     repairedImages: repaired.repaired,
     mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
     rule:

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T01:11:01.609Z",
+  "lastUpdatedAt": "2026-04-26T03:06:53.009Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6835,6 +6835,81 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-04-26-fazer-varredura-final-antes-de-encerrar-conferindo-pendencias-memoria-git-e-revi",
+      "createdAt": "2026-04-26T02:25:40.113Z",
+      "updatedAt": "2026-04-26T02:25:40.113Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos er se faltou algo antes de encerrar",
+      "summary": "Fazer varredura final antes de encerrar, conferindo pendencias, memoria, Git e revisoes.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-rever-novamente-o-estado-final-do-projeto-e-listar-pendencias-reais-antes-de-enc",
+      "createdAt": "2026-04-26T02:40:56.713Z",
+      "updatedAt": "2026-04-26T02:40:56.713Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "verifique e veja o que falta",
+      "summary": "Rever novamente o estado final do projeto e listar pendencias reais antes de encerrar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-regra-permanente-em-toda-sincronizacao-fechamento-informar-ao-usuario-o-tamanho-",
+      "createdAt": "2026-04-26T03:03:25.975Z",
+      "updatedAt": "2026-04-26T03:03:25.975Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "eu sempre quero ser informado do arcevo e das pensencias...",
+      "summary": "Regra permanente: em toda sincronizacao/fechamento, informar ao usuario o tamanho do acervo, a janela ativa sincronizada e as pendencias/fila de aprovacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-ajustar-rotina-para-acervo-persistente-acumulativo-noticias-antigas-nao-devem-se",
+      "createdAt": "2026-04-26T03:06:53.009Z",
+      "updatedAt": "2026-04-26T03:06:53.009Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "o ajuste tem que ser infinitito, eu tenho que ter essas noticias sempre em arquivos",
+      "summary": "Ajustar rotina para acervo persistente/acumulativo: noticias antigas nao devem ser descartadas por limite de janela; sempre informar acervo e pendencias.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-commit-e-exibir-acervo-total-no-site",
+      "createdAt": "2026-04-26T03:18:42.000Z",
+      "updatedAt": "2026-04-26T03:18:42.000Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tente comit e aumentar pra sempre me da o arcevo total principalmente no site",
+      "summary": "Tentar commit do pacote e garantir que o site informe o acervo total, nao apenas a quantidade exibida no recorte.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": ["noticias", "acervo", "commit"],
+      "nextSteps": [],
+      "notes": "Site/API ajustados para expor archiveTotal/returned; acervo atual conferido em 157 noticias persistidas."
     }
   ]
 }

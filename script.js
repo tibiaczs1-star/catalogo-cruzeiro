@@ -371,7 +371,7 @@ const homepageStaticPreviewBySlug = {
   "credenciamento-pareceristas-culturais": {
     slug: "credenciamento-pareceristas-culturais",
     title: "Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais",
-    category: "Cultura em pauta",
+    category: "Cultura e agenda",
     sourceName: "ac24horas",
     imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
     feedImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
@@ -2417,6 +2417,7 @@ const liveFeedState = {
   pageSize: 6,
   visibleItems: 6,
   items: [...initialStaticNews],
+  archiveTotal: Math.max(initialStaticNews.length, Number(window.NEWS_ARCHIVE_TOTAL || 0) || 0),
   activeCategory: ""
 };
 
@@ -6209,7 +6210,7 @@ const getMonthlyTone = (article = {}, index = 0) => {
   }
 
   if (/\b(bairro|comunidade|obra|mobilidade|servico|serviço|risco|transito|trânsito)\b/.test(haystack)) {
-    return { tag: "Comunidade em pauta", className: "month-territory", axis: "bairro e gestão" };
+    return { tag: "Comunidade local", className: "month-territory", axis: "bairro e gestão" };
   }
 
   const fallback = [
@@ -10024,7 +10025,8 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   }
 
   if (liveFeedTotal) {
-    liveFeedTotal.textContent = `Base local: ${totalItems} notícias verificadas`;
+    const archiveTotal = Math.max(totalItems, liveFeedState.archiveTotal || 0);
+    liveFeedTotal.textContent = `Acervo total: ${archiveTotal} notícias em arquivo`;
   }
 
   if (liveFeedUpdated) {
@@ -10280,6 +10282,11 @@ radarFilterButtons.forEach((button) => {
 const updateLiveFeedItems = (items = [], { resetFilter = true } = {}) => {
   const currentCategory = liveFeedState.activeCategory;
   liveFeedState.items = [...items];
+  liveFeedState.archiveTotal = Math.max(
+    liveFeedState.archiveTotal || 0,
+    liveFeedState.items.length,
+    Number(window.NEWS_ARCHIVE_TOTAL || 0) || 0
+  );
   liveFeedState.activeCategory = resetFilter ? "" : currentCategory;
   liveFeedState.visibleItems = liveFeedState.pageSize;
   renderLiveFeedFilters();

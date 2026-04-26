@@ -1,6 +1,6 @@
 {
   "topic": "politics",
-  "updatedAt": "2026-04-26T00:18:25.722Z",
+  "updatedAt": "2026-04-26T01:18:04.616Z",
   "items": [
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/governo-anuncia-bloqueio-de-plataformas-de-mercado-preditivo",
@@ -213,11 +213,11 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "",
+      "imageUrl": "./assets/home-cache/fallback-cotidiano.jpg",
       "sourceImageUrl": "",
-      "feedImageUrl": "",
+      "feedImageUrl": "./assets/home-cache/fallback-cotidiano.jpg",
       "imageCredit": "",
-      "imageFocus": "",
+      "imageFocus": "center 30%",
       "imageFit": "",
       "media": null,
       "priority": 0,

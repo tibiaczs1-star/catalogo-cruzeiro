@@ -9,6 +9,7 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 const REPORT_DIR = path.join(ROOT_DIR, ".codex-temp", "online-local-sync");
 const REPORT_JSON_FILE = path.join(REPORT_DIR, "latest-report.json");
 const REPORT_MD_FILE = path.join(REPORT_DIR, "latest-report.md");
+const NEWS_IMAGE_AUDIT_LIMIT = Math.max(120, Number(process.env.CATALOGO_SYNC_NEWS_LIMIT || 1000));
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -107,7 +108,7 @@ function main() {
       runStep("audit news images", node, [
         "scripts/audit-news-image-focus.js",
         "--offline",
-        "--limit=120",
+        `--limit=${NEWS_IMAGE_AUDIT_LIMIT}`,
         "--strict-new"
       ])
     );

@@ -282,7 +282,12 @@ function readStaticNewsData() {
 }
 
 function writeStaticNewsData(items = []) {
-  fs.writeFileSync(STATIC_NEWS_FILE, `window.NEWS_DATA = ${JSON.stringify(items.slice(0, 120), null, 2)};\n`, "utf-8");
+  const safeItems = Array.isArray(items) ? items : [];
+  fs.writeFileSync(
+    STATIC_NEWS_FILE,
+    `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`,
+    "utf-8"
+  );
 }
 
 function runReviewTeam() {

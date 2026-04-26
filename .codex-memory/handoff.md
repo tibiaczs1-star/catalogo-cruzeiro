@@ -1,12 +1,9 @@
 # Handoff
 
-Updated: 2026-04-26T01:25:00.000Z
+Updated: 2026-04-26T03:18:42.000Z
 
-Além das correções anteriores de moda e da tela premium de fundadores/cookies, foi aplicada uma varredura editorial na home para deixar o texto voltado ao público. index.html, startup-experience.js e script.js tiveram textos visíveis reescritos para trocar bastidores internos por termos de leitor: notícias, assuntos, conferência, atualização diária, fonte e apoio público. Node check passou em startup-experience.js e script.js.
+Regra do usuario implementada: acervo de noticias deve ser acumulativo/infinito em arquivos, nao uma janela descartavel de 120. Foram removidos cortes slice(0,120) nas escritas de news-data.js em server.js, re-rodada-dia-geral.js e agents-autonomy-cycle.js; news-archive.json agora e alimentado pela rotina diaria. O site mostra "Acervo total" no Arquivo Vivo via window.NEWS_ARCHIVE_TOTAL, e /api/news + /api/news/archive separam archiveTotal/returned para nao confundir limite de exibicao com acervo real.
 
 ## Next
 
-- Se for commit/deploy
-- incluir index.html, script.js, startup-experience.js, startup-experience.css, premium-clarity.css e memória local.
-- não misturar data/*.json não relacionados.
-- fazer uma revisão visual da home depois de reload/cache-bust para garantir que os textos novos encaixem nos cards compactos.
+- Sempre reportar Acervo e Pendencias. Estado atual: news-data/runtime/archive com 157 noticias unicas; activeWindowItems 177; imagens 157 ok/0 review/0 error; review-team 0; API local conferida com total 157. Rodar sync:online-local antes de publicar.
