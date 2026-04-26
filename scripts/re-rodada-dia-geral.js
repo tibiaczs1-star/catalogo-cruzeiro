@@ -429,6 +429,7 @@ function comparableImageUrl(value) {
 function isWeakImage(value) {
   const imageUrl = String(value || "").toLowerCase();
   if (!imageUrl) return true;
+  if (imageUrl.includes("/assets/news-fallbacks/")) return true;
   if (/(?:logo|favicon|icon|avatar|emoji|gravatar|pixel|placeholder|spacer|blank)\b/i.test(imageUrl)) {
     return true;
   }
@@ -437,11 +438,58 @@ function isWeakImage(value) {
   return false;
 }
 
+function splitSvgLongWord(word = "", maxChars = 27) {
+  const raw = String(word || "");
+  if (raw.length <= maxChars) return [raw];
+
+  const chunks = [];
+  for (let index = 0; index < raw.length; index += maxChars - 1) {
+    chunks.push(raw.slice(index, index + maxChars - 1));
+  }
+  return chunks;
+}
+
+function wrapSvgTextByWords(value = "", maxChars = 27, maxLines = 3) {
+  const words = cleanText(value, 150)
+    .split(/\s+/)
+    .filter(Boolean)
+    .flatMap((word) => splitSvgLongWord(word, maxChars));
+  const lines = [];
+
+  words.forEach((word) => {
+    if (!lines.length) {
+      lines.push(word);
+      return;
+    }
+
+    const current = lines[lines.length - 1] || "";
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= maxChars) {
+      lines[lines.length - 1] = next;
+      return;
+    }
+
+    if (lines.length < maxLines) {
+      lines.push(word);
+    }
+  });
+
+  const consumed = lines.join(" ").replace(/\.\.\.$/, "");
+  if (words.join(" ").length > consumed.length && lines.length) {
+    lines[lines.length - 1] = `${lines[lines.length - 1].replace(/\s+\S*$/, "").trim() || lines[lines.length - 1]}...`;
+  }
+
+  return lines.slice(0, maxLines);
+}
+
 function buildFallbackSvg(item = {}, reason = "fallback") {
-  const title = cleanText(item.title || item.sourceLabel || "Notícia em revisão", 105);
+  const title = cleanText(item.title || item.sourceLabel || "Notícia em revisão", 150);
   const category = cleanText(item.category || item.eyebrow || "Notícia", 42).toUpperCase();
   const source = cleanText(item.sourceName || "Catálogo", 42);
   const hue = (hashString(`${item.slug || title}|${reason}`) % 280) + 20;
+  const titleMarkup = wrapSvgTextByWords(title, 27, 3)
+    .map((line, index) => `<tspan x="126" dy="${index === 0 ? "0" : "60"}">${escapeHtml(line)}</tspan>`)
+    .join("");
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720">
   <defs>
@@ -456,17 +504,15 @@ function buildFallbackSvg(item = {}, reason = "fallback") {
   <rect width="1200" height="720" fill="url(#bg)"/>
   <rect width="1200" height="720" fill="url(#grid)"/>
   <rect x="86" y="82" width="1028" height="556" rx="28" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
-  <rect x="126" y="126" width="260" height="48" rx="24" fill="hsl(${hue} 78% 58%)"/>
-  <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">${escapeHtml(category)}</text>
+  <rect x="126" y="126" width="244" height="48" rx="24" fill="hsl(${hue} 78% 58%)"/>
+  <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">${escapeHtml(cleanText(category, 20))}</text>
   <circle cx="986" cy="158" r="76" fill="hsl(${hue} 78% 58%)" opacity=".9"/>
   <circle cx="1038" cy="210" r="52" fill="hsl(${(hue + 55) % 360} 72% 48%)" opacity=".78"/>
   <path d="M126 492h948" stroke="hsl(${hue} 78% 58%)" stroke-width="12" stroke-linecap="round" opacity=".82"/>
-  <text x="126" y="292" fill="#fff8ea" font-family="Georgia, serif" font-size="56" font-weight="700">
-    <tspan x="126" dy="0">${escapeHtml(title.slice(0, 34))}</tspan>
-    <tspan x="126" dy="70">${escapeHtml(title.slice(34, 68))}</tspan>
-    <tspan x="126" dy="70">${escapeHtml(title.slice(68, 102))}</tspan>
+  <text x="126" y="282" fill="#fff8ea" font-family="Georgia, serif" font-size="50" font-weight="700">
+    ${titleMarkup}
   </text>
-  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="25" font-weight="700">${escapeHtml(source)} • imagem editorial para evitar repetição</text>
+  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="23" font-weight="700">${escapeHtml(cleanText(`${source} - imagem editorial segura`, 56))}</text>
 </svg>
 `;
 }
@@ -476,9 +522,7 @@ function fallbackImageFor(item = {}, reason = "fallback") {
   const slug = slugify(item.slug || item.title || "noticia");
   const fileName = `${slug || `noticia-${Date.now()}`}.svg`;
   const filePath = path.join(FALLBACK_DIR, fileName);
-  if (!fs.existsSync(filePath)) {
-    fs.writeFileSync(filePath, buildFallbackSvg(item, reason), "utf-8");
-  }
+  fs.writeFileSync(filePath, buildFallbackSvg(item, reason), "utf-8");
   return `/assets/news-fallbacks/${fileName}`;
 }
 
@@ -502,6 +546,21 @@ function repairImages(items = []) {
     const reason = isWeakImage(currentImage)
       ? "imagem-ausente-ou-generica"
       : "foto-repetida-na-mesma-divisao";
+    const sourceUrl = String(item.sourceUrl || item.url || item.link || "").trim();
+    if (sourceUrl && sourceUrl !== "#") {
+      repaired += 1;
+      return {
+        ...item,
+        imageUrl: "",
+        feedImageUrl: "",
+        sourceImageUrl: "",
+        originalImageUrl: isWeakImage(currentImage) ? "" : currentImage || item.originalImageUrl || "",
+        originalFeedImageUrl: isWeakImage(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
+        originalSourceImageUrl: isWeakImage(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || "",
+        imageQuality: `${reason}-buscar-na-fonte`
+      };
+    }
+
     const imageUrl = fallbackImageFor(item, reason);
     repaired += 1;
 

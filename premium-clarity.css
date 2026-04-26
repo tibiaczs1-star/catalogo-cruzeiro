@@ -168,10 +168,16 @@ body.editorial-home .site-footer.footer-tech.footer-mega .footer-mega-stage {
 
   body.editorial-home .site-footer.footer-tech.footer-mega .insiders-logo-squad-crowd {
     display: block !important;
+    grid-row: 3 !important;
     min-height: 420px !important;
     border-radius: 18px !important;
     overflow: hidden !important;
     background-position: center 52% !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-logo-caption {
+    grid-row: 4 !important;
+    justify-self: center !important;
   }
 
   body.editorial-home .site-footer.footer-tech.footer-mega .insiders-crowd-canvas {
@@ -202,6 +208,20 @@ body.editorial-home .site-footer.footer-tech.footer-mega .footer-mega-stage {
 
   body.editorial-home .site-footer.footer-tech.footer-mega .robot-squad .robot-shadow {
     animation: insidersBattleShadow calc(var(--army-step, 1s) * 1.02) linear infinite var(--army-delay, 0s) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-command-stage.is-crowd-march {
+    grid-template-rows: auto minmax(360px, 1fr) auto !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-logo-squad-crowd {
+    grid-row: 2 !important;
+  }
+
+  body.editorial-home .site-footer.footer-tech.footer-mega .insiders-logo-caption {
+    grid-row: 3 !important;
   }
 }
 
@@ -550,13 +570,14 @@ body.editorial-home .founder-banner-card {
 
 body.editorial-home .founder-banner-card-cafe {
   grid-column: span 5;
-  background:
-    radial-gradient(circle at 78% 12%, rgba(255, 255, 255, 0.46), transparent 28%),
-    linear-gradient(155deg, rgba(255, 242, 205, 0.98), rgba(244, 213, 130, 0.96)) !important;
+  border-color: rgba(221, 226, 235, 0.95);
+  background: #fff !important;
 }
 
 body.editorial-home .founder-banner-card-grupoas {
   grid-column: span 2;
+  border-color: rgba(221, 226, 235, 0.95);
+  background: #fff !important;
 }
 
 body.editorial-home .founder-banner-card-light {
@@ -1230,4 +1251,66 @@ body.editorial-home :is(.news-source, .ticker-chip, .feed-search input) {
   word-break: normal !important;
   overflow-wrap: break-word !important;
   hyphens: none !important;
+}
+
+body.editorial-home #trending .trend-photo {
+  min-height: clamp(250px, 17vw, 360px) !important;
+  background-color: #081827 !important;
+  background-image:
+    linear-gradient(180deg, rgba(9, 20, 34, 0.04), rgba(9, 20, 34, 0.7)),
+    var(--trend-image, linear-gradient(135deg, rgba(16, 35, 60, 0.9), rgba(164, 73, 40, 0.85))) !important;
+  background-position: center, center !important;
+  background-size: cover, contain !important;
+  background-repeat: no-repeat !important;
+}
+
+body.editorial-home #trending .opinion-buzz-card .influencer-hero-photo,
+body.editorial-home #trending .daily-buzz-card .influencer-hero-photo {
+  min-height: clamp(270px, 18vw, 390px) !important;
+}
+
+body.editorial-home #monthly .month-photo,
+body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(-n + 2) .month-photo {
+  aspect-ratio: 16 / 11 !important;
+  min-height: clamp(230px, 17vw, 340px) !important;
+  background-color: #243345 !important;
+  background-image:
+    radial-gradient(circle at 18% 16%, rgba(153, 173, 169, 0.46), transparent 34%),
+    radial-gradient(circle at 84% 28%, rgba(71, 104, 96, 0.36), transparent 36%),
+    linear-gradient(135deg, rgba(37, 50, 63, 0.96), rgba(84, 105, 99, 0.74) 48%, rgba(31, 42, 55, 0.96)),
+    var(--month-image) !important;
+  background-position: center !important;
+  background-size: cover, cover, cover, contain !important;
+  background-repeat: no-repeat !important;
+}
+
+body.editorial-home #entretenimento .ent-photo {
+  background-color: #0f2236 !important;
+  background-image: var(--ent-photo) !important;
+  background-position: center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+}
+
+@media (max-width: 760px) {
+  body.editorial-home :is(
+    .news-thumb.has-photo,
+    .news-thumb.has-real-photo,
+    .archive-thumb.has-photo,
+    .archive-thumb.has-real-photo,
+    .live-feed-thumb.has-photo,
+    .live-feed-thumb.has-real-photo,
+    .feed-thumb.has-photo,
+    .feed-thumb.has-real-photo
+  ) {
+    min-height: clamp(250px, 68vw, 360px) !important;
+  }
+
+  body.editorial-home #trending .trend-photo,
+  body.editorial-home #trending .opinion-buzz-card .influencer-hero-photo,
+  body.editorial-home #trending .daily-buzz-card .influencer-hero-photo,
+  body.editorial-home #monthly .month-photo,
+  body.editorial-home #monthly .month-grid.is-dynamic-monthly .month-dynamic-card:nth-child(-n + 2) .month-photo {
+    min-height: clamp(260px, 72vw, 390px) !important;
+  }
 }

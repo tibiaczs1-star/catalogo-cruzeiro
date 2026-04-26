@@ -1,5 +1,21 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-26 - Entenda a Home mais legivel
+
+- Corrigido feedback visual do usuario no bloco `Entenda a Home`: a fonte cinza lavada foi trocada por texto azul-escuro mais forte nos cards claros e branco quente nos cards coloridos.
+- `styles.css` tambem reduziu o aspecto artificial do modulo, com fundo de papel mais quente, cards menos altos/lavados, bordas discretas e pesos de texto mais legiveis.
+- Validacoes: `node --check script.js`, `node --check server.js`, `styles.css brace-balance=0`; captura full-page local via Playwright gerada com a Home servindo em `4100`, mas a captura completa nao ativou todos os reveals inferiores, entao ainda vale conferir visualmente a secao rolada no navegador real.
+
+## Atualizacao rapida 2026-04-26 - Fotos inteiras sem eco visual
+
+- Corrigido feedback dos cards de `Mais Assuntos` com foto inteira: a camada/pseudo-fundo que repetia a mesma imagem foi neutralizada apenas nas mini-thumbs dos cadernos.
+- Ajuste importante apos validacao do usuario: a regra global em `premium-clarity.css` foi removida para nao lavar/estragar os cards superiores da home.
+- `script.js` voltou a usar `cover` como fallback geral das thumbs reais, mas `applyCadernoStoryArticle` envia `imageFit: "contain"` para preservar foto inteira nos cadernos.
+- `styles.css` neutraliza o fundo das mini-thumbs de `Mais Assuntos`; `index.html` recebeu cache-bust novo de `script.js`.
+- A area mensal tambem foi ajustada apos feedback visual: fundos laterais das `month-photo` sairam do branco/azulado lavado para um cinza-verde mais escuro e os `month-card` ganharam gradiente verde/bege mais integrado as fotos.
+- Validações: `node --check script.js`, `node --check server.js`, brace-balance 0 em `premium-clarity.css` e `styles.css`, `npm run review:team` com 0 achados.
+- Observação: a tentativa de captura com Edge headless no sandbox gerou página de conexão recusada, então ainda vale conferir visualmente no navegador real antes de publicar.
+
 ## Atualizacao rapida 2026-04-25 - Fluxo mobile de cookies corrigido
 
 - Corrigido o feedback do usuario sobre o botao `Continuar` nos cookies mobile: o celular agora mostra primeiro um card/bottom sheet de cookies e preferencias, com a pagina ao fundo bloqueada.

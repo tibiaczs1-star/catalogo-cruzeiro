@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-04-26T03:40:59.187Z",
+  "updatedAt": "2026-04-26T03:54:03.195Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 1000,
   "offline": true,
-  "total": 157,
+  "total": 159,
   "summary": {
-    "ok": 157,
+    "ok": 159,
     "review": 0,
     "warning": 0,
     "error": 0,
-    "manualFocus": 116,
-    "newSinceLastAudit": 0,
+    "manualFocus": 118,
+    "newSinceLastAudit": 2,
     "missingImage": 0,
     "unreachableImage": 0
   },
@@ -85,22 +85,25 @@
     "gerluce-e-arrancada-da-presidencia-a-forca-e-expulsa-da-fundacao-em-tres-gracas",
     "dolar-fecha-abaixo-de-r-5-e-bolsa-cai-com-cautela-global",
     "justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
-    "pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
-    "camara-de-rio-branco-cancela-audiencia-do-plano-diretor-e-marca-nova-data",
-    "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
     "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
+    "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
+    "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
+    "pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
+    "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
+    "camara-de-rio-branco-cancela-audiencia-do-plano-diretor-e-marca-nova-data",
+    "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
+    "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
     "fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima",
     "ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa",
     "convocacao-final-para-a-copa-tera-museu-do-amanha-como-palco",
     "acriano-que-lutou-na-ucrania-retorna-a-rodrigues-alves-e-surpreende-mae-com-buque-de-rosas",
-    "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
     "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
-    "aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
     "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
-    "apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas",
     "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "stf-tem-maioria-para-manter-prisao-de-ex-presidente-do-brb",
     "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
+    "apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas",
+    "stf-tem-maioria-para-manter-prisao-de-ex-presidente-do-brb",
     "fim-de-semana-sera-de-calor-intenso-e-risco-de-cheia-nos-rios-acreanos",
     "elevacao-do-rio-jurua-continua-em-cruzeiro-do-sul",
     "dois-sao-presos-por-trafico-de-drogas-no-bairro-da-paz-em-rio-branco",
@@ -114,10 +117,7 @@
     "idoso-e-encontrado-morto-em-ramal-de-rio-branco",
     "chuvas-intensas-causam-alagamentos-e-prejuizos-em-mancio-lima",
     "balsa-naufraga-e-derrama-50-mil-litros-de-diesel-no-rio-tarauaca",
-    "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-    "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
     "alex-jones-has-uncovered-another-massive-conspiracy",
-    "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
     "relatada-por-alan-rick-lei-cria-incentivo-direto-a-reciclagem-no-pais",
     "deputado-zezinho-barbary-anuncia-entrega-de-viaturas-barcos-motorizados-e-onibus-para-o-vale-do-jurua",
     "deputado-destaca-uniao-entre-assembleia-legislativa-e-governo-para-fortalecer-seguranca-no-jurua",
@@ -144,22 +144,24 @@
     "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
     "ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia",
     "licenca-de-instalacao-josias-o-da-silva-ltda",
+    "tenda-saude-cheia-jurua",
+    "vazante-retorno-familias",
+    "moradores-rotina-cheia",
+    "saude-familias-abrigadas",
+    "agua-mineral-familias-cheia",
+    "mais-12-mil-afetados",
     "eja-czs-superacao",
     "aldir-blanc-cultura-czs",
     "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+    "renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda",
     "recebimento-licenca-previa-josias-o-da-silva-epp",
     "edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua",
     "edital-de-convocacao-de-assembleia-geral-ordinaria-coopeguajara",
     "credenciamento-pareceristas-culturais",
     "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+    "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe",
     "edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
     "edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre",
-    "mais-12-mil-afetados",
-    "vazante-retorno-familias",
-    "agua-mineral-familias-cheia",
-    "moradores-rotina-cheia",
-    "saude-familias-abrigadas",
-    "tenda-saude-cheia-jurua",
     "faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul",
     "saude-25-agosto-ubs",
     "ifac-auxilio-cheia",
@@ -1875,6 +1877,88 @@
       ]
     },
     {
+      "slug": "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
+      "title": "Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:39:05.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_2778-1024x576.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 576,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
+      "title": "Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:37:47.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-15.49.03-1024x683.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
+      "title": "Prefeitura de Cruzeiro do Sul inaugura sede da Regional Educacional Santa Luzia/Campinas",
+      "category": "Educação",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:36:19.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-16.59.59.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
       "title": "PGR dá aval para Bolsonaro fazer cirurgia no ombro",
       "category": "Polícia",
@@ -1888,6 +1972,30 @@
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
       "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
+      "title": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
+      "category": "Polícia",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:31:29.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-16.57.29.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
@@ -1921,6 +2029,30 @@
       "reasons": []
     },
     {
+      "slug": "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
+      "title": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
+      "category": "Saúde",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:23:06.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://batelao.com/upload/2026/04/WhatsApp-Image-2026-04-24-at-12.09.01-1.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "anac-estabelece-restricoes-para-transporte-de-power-banks-em-avioes",
       "title": "Anac estabelece restrições para transporte de power banks em aviões",
       "category": "Negócios",
@@ -1938,30 +2070,6 @@
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
-      "title": "Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T22:17:26.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-a.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
       },
       "level": "ok",
       "reasons": [
@@ -2065,19 +2173,53 @@
       ]
     },
     {
-      "slug": "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
-      "title": "Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T22:00:46.000Z",
+      "slug": "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
+      "title": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população",
+      "category": "Utilidade Pública",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:03:40.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunita.svg",
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-08.45.33-1-1024x682.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
-      "dimensionsFromUrl": null,
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
       "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
+      "title": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização",
+      "category": "Saúde",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T22:01:18.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3770-1024x683.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": false,
@@ -2089,21 +2231,55 @@
       ]
     },
     {
-      "slug": "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
-      "title": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população",
-      "category": "Utilidade Pública",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:53:17.000Z",
+      "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+      "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
+      "category": "Política Regional",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T21:57:54.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao.svg",
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
-      "dimensionsFromUrl": null,
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
       "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
+      "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": false,
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+      "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
+      "category": "Política Regional",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T21:56:12.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
@@ -2137,30 +2313,6 @@
       ]
     },
     {
-      "slug": "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
-      "title": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização",
-      "category": "Saúde",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:47:15.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imun.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas",
       "title": "Apostas não financeiras em plataformas de previsões são proibidas",
       "category": "Negócios",
@@ -2183,30 +2335,6 @@
       "reasons": []
     },
     {
-      "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-      "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-      "category": "Política Regional",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:39:04.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "stf-tem-maioria-para-manter-prisao-de-ex-presidente-do-brb",
       "title": "STF tem maioria para manter prisão de ex-presidente do BRB",
       "category": "Polícia",
@@ -2223,30 +2351,6 @@
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-      "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-      "category": "Política Regional",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-24T21:21:13.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-re.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
@@ -2594,54 +2698,6 @@
       ]
     },
     {
-      "slug": "prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
-      "title": "Prefeitura de Cruzeiro do Sul inaugura sede da Regional Educacional Santa Luzia/Campinas",
-      "category": "Educação",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T20:13:54.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/23b01096-b1b8-499a-be4e-a144831ff37b-1.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
-      "title": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-      "category": "Polícia",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T20:11:20.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/ada99206-ac0f-4b3c-9076-bcc075e00d29-1.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "alex-jones-has-uncovered-another-massive-conspiracy",
       "title": "Alex Jones has uncovered another massive conspiracy",
       "category": "Cotidiano",
@@ -2662,30 +2718,6 @@
       },
       "level": "ok",
       "reasons": []
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
-      "title": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
-      "category": "Saúde",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T20:09:10.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/3cdd4eb6-f9b3-4923-86e9-e9b6e17b65e8-1.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
     },
     {
       "slug": "relatada-por-alan-rick-lei-cria-incentivo-direto-a-reciclagem-no-pais",
@@ -3296,6 +3328,176 @@
       ]
     },
     {
+      "slug": "tenda-saude-cheia-jurua",
+      "title": "Tenda de atendimento assume a frente da saude apos inundacao de UBSs em Cruzeiro do Sul",
+      "category": "Saúde",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-08T14:15:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 900,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "vazante-retorno-familias",
+      "title": "Vazante do Rio Jurua segue em Cruzeiro do Sul e rotina comeca a normalizar",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-07T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 900,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "moradores-rotina-cheia",
+      "title": "Mesmo alagados, bairros tentam manter rotina em Cruzeiro do Sul",
+      "category": "Social",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-04T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 983,
+        "ratio": 1.221,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "saude-familias-abrigadas",
+      "title": "Atendimento de saude nos abrigos vira eixo para segurar a crise",
+      "category": "Saúde",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-04T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 900,
+        "ratio": 1.333,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "agua-mineral-familias-cheia",
+      "title": "Agua mineral e suprimentos viram prioridade nos bairros atingidos",
+      "category": "Utilidade Pública",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-03T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mais-12-mil-afetados",
+      "title": "Abril começa com mais de 12 mil afetados e expansão dos abrigos em Cruzeiro do Sul",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-04-01T00:00:00-05:00",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1220,
+        "height": 813,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "eja-czs-superacao",
       "title": "Histórias de superação na EJA de Cruzeiro do Sul inspiram novos estudantes",
       "category": "Educação",
@@ -3351,6 +3553,30 @@
       "publishedAt": "2026-03-23T20:55:20.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda",
+      "title": "Renovação Licença de Operação – Pioneiro Combustíveis LTDA",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-03-23T20:55:20.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -3493,6 +3719,30 @@
       ]
     },
     {
+      "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe",
+      "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE",
+      "category": "Polícia",
+      "sourceName": "Tribuna do Jurua",
+      "publishedAt": "2026-02-23T15:02:43.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-acre",
       "title": "Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
       "category": "Utilidade Pública",
@@ -3537,156 +3787,6 @@
       },
       "level": "ok",
       "reasons": []
-    },
-    {
-      "slug": "mais-12-mil-afetados",
-      "title": "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
-      "category": "Cotidiano",
-      "sourceName": "1 abr",
-      "publishedAt": "impacto inicial",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "vazante-retorno-familias",
-      "title": "A água subiu, os abrigos abriram e a cidade passou a girar em torno da enchente",
-      "category": "Saúde",
-      "sourceName": "4 a 9 abr",
-      "publishedAt": "cheia do Juruá",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 900,
-        "ratio": 1.333,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "agua-mineral-familias-cheia",
-      "title": "Água mineral e apoio logístico viram prioridade nos bairros atingidos",
-      "category": "Utilidade Pública",
-      "sourceName": "3 abr",
-      "publishedAt": "resposta prática",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/agua-mineral-familias-cheia.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "moradores-rotina-cheia",
-      "title": "Mesmo alagados, bairros seguem tentando manter a rotina entre barro e improviso",
-      "category": "Social",
-      "sourceName": "4 abr",
-      "publishedAt": "vida cotidiana",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/moradores-rotina-cheia.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "saude-familias-abrigadas",
-      "title": "Atendimento de saúde dentro dos abrigos vira eixo para segurar a crise",
-      "category": "Saúde",
-      "sourceName": "4 abr",
-      "publishedAt": "assistência",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-scaled.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "tenda-saude-cheia-jurua",
-      "title": "Tenda de atendimento vira linha de frente da saúde após inundação de UBSs",
-      "category": "Saúde",
-      "sourceName": "8 abr",
-      "publishedAt": "saude emergencial",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/c455d8d6-6d93-4efc-91db-eaa7076967c2-1220x813.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1220,
-        "height": 813,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
     },
     {
       "slug": "faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul",

@@ -1,6 +1,6 @@
 (function () {
   const deferredScripts = [
-    "./insiders-crowd-march.js?v=20260423crowdfooter",
+    "./insiders-crowd-march.js?v=20260426pt-caption",
     "./news-photo-fix.js?v=20260415c",
     "./arquivo-noticias.js?v=20260415b",
     "admin-menu.js?v=20260415b",

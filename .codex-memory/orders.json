@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T03:06:53.009Z",
+  "lastUpdatedAt": "2026-04-26T05:46:54.436Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6907,9 +6907,298 @@
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
-      "tags": ["noticias", "acervo", "commit"],
+      "tags": [
+        "noticias",
+        "acervo",
+        "commit"
+      ],
       "nextSteps": [],
       "notes": "Site/API ajustados para expor archiveTotal/returned; acervo atual conferido em 157 noticias persistidas."
+    },
+    {
+      "id": "2026-04-26-criar-esteira-automatica-segura-para-instagram-do-jornal-transformar-noticias-ac",
+      "createdAt": "2026-04-26T03:55:46.804Z",
+      "updatedAt": "2026-04-26T03:55:46.804Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "quero que o jornal cresça no Instagram e que o agente/automacao faça tudo automaticamente em cima do jornal que criamos aqui",
+      "summary": "Criar esteira automática segura para Instagram do jornal: transformar notícias/acervo em legendas, stories, reels, hashtags, calendário e fila de aprovação/agendamento.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-analisar-video-futuro-de-10-minutos-do-usuario-jogando-manualmente-no-bluestacks",
+      "createdAt": "2026-04-26T04:04:25.055Z",
+      "updatedAt": "2026-04-26T04:04:25.055Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Amanha o usuario vai gravar cerca de 10 minutos jogando manualmente no BlueStacks para o Codex aprender tecnicas, rota propria, procura de monstros e itens no mapa, comparando com o bot automatico observado hoje.",
+      "summary": "Analisar video futuro de 10 minutos do usuario jogando manualmente no BlueStacks para aprender estilo, tecnicas, rota, busca de mobs e itens.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-corrigir-cards-de-mais-assuntos-para-subsites-e-priorizar-fotos-originais-das-fo",
+      "createdAt": "2026-04-26T04:19:02.138Z",
+      "updatedAt": "2026-04-26T04:19:02.138Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "primeiro, esses cads deveriam leva pra sub sites e não pros escritorios - segunda cposa essas fotos geradas pra noticiaas sem foto ainda tão cortando texto e saindo da estrutura delas mesmas, de um geito de isso nao acontecer, mais primeiro force as originais a aparecer, elas como eu ja disse 300 x sempre tão em algum lulgar no site de origem",
+      "summary": "Corrigir cards de Mais Assuntos para subsites e priorizar fotos originais das fontes antes de gerar fallback editorial sem overflow.",
+      "normalizedTasks": [
+        "ajustar links dos cards para subsites",
+        "forcar busca/uso de imagem original da fonte",
+        "aceitar imagens 300x",
+        "blindar SVG fallback contra texto cortado"
+      ],
+      "filesTouched": [
+        "index.html",
+        "server.js",
+        "scripts/re-rodada-dia-geral.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "noticias",
+        "imagens",
+        "cadernos"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-corrigir-no-painel-do-jurua-o-contador-de-notas-noticias-rastreadas-para-corresp",
+      "createdAt": "2026-04-26T04:20:09.579Z",
+      "updatedAt": "2026-04-26T04:20:09.579Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "esses numeros nao correspondem ao numero de notas, corrija",
+      "summary": "Corrigir no Painel do Jurua o contador de notas/noticias rastreadas para corresponder ao numero real de notas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-trocar-copy-do-bloco-insiders-no-rodape-para-refletir-valores-humanos-liberdade-",
+      "createdAt": "2026-04-26T04:21:39.786Z",
+      "updatedAt": "2026-04-26T04:21:39.786Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "corrigir texto do rodape Insiders: nao explicar a animacao, mostrar valores humanos de liberdade",
+      "summary": "Trocar copy do bloco Insiders no rodape para refletir valores humanos: liberdade, verdade, voz humana, respeito, coragem e responsabilidade.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-ajustar-cards-da-home-para-priorizar-fotos-inteiras-aumentando-a-area-de-imagem-",
+      "createdAt": "2026-04-26T04:21:59.032Z",
+      "updatedAt": "2026-04-26T04:21:59.032Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "terceiro pra evitar esses cortes feio na foto de prioridade a aumentar a area da foto pra ela aparecer inteiram o mesmo vale pra a divisões todas, sempre com foto inteira",
+      "summary": "Ajustar cards da home para priorizar fotos inteiras, aumentando a area de imagem e evitando cortes feios no bloco de polemicas/celebridades e nas demais divisões.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-corrigir-bloco-mais-assuntos-da-home-para-apontar-a-subsites-e-remover-repeticao",
+      "createdAt": "2026-04-26T04:26:41.395Z",
+      "updatedAt": "2026-04-26T04:26:41.395Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "esse lugar deveria levar para os subsites, e depois deveria nao se repetir como ai na imagem onde moda se repete 3 vezes",
+      "summary": "Corrigir bloco Mais Assuntos da home para apontar a subsites e remover repeticao de Moda/Estilo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-guardar-a-correcao-de-cards-para-subsites-e-imagens-originais-para-o-proximo-com",
+      "createdAt": "2026-04-26T04:37:14.481Z",
+      "updatedAt": "2026-04-26T04:37:14.481Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "guarde pro proximo comit",
+      "summary": "Guardar a correção de cards para subsites e imagens originais para o próximo commit, sem commitar agora.",
+      "normalizedTasks": [
+        "manter arquivos alterados no worktree",
+        "lembrar de incluir no próximo commit"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "server.js",
+        "scripts/re-rodada-dia-geral.js",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "proximo-commit",
+        "guardar",
+        "noticias",
+        "cards"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-corrigir-o-typo-esttiles-estities-na-home-e-fazer-moda-24-horas-apontar-para-o-s",
+      "createdAt": "2026-04-26T04:49:54.968Z",
+      "updatedAt": "2026-04-26T04:49:54.968Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "nao existeestities foi um erro de digitação e moda 24 horas e deveria levar pro website menor de moda",
+      "summary": "Corrigir o typo Esttíles/Estities na home e fazer Moda 24 Horas apontar para o site menor de moda (lifestile.html).",
+      "normalizedTasks": [
+        "remover Esttíles/Estities da superfície pública da home",
+        "fazer Moda 24 Horas apontar para lifestile.html",
+        "ajustar lifestile para não retornar ao nome digitado errado"
+      ],
+      "filesTouched": [
+        "index.html",
+        "lifestile.html",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "moda",
+        "mais-assuntos",
+        "lifestile"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-nao-criar-commit-agora-manter-o-pacote-preparado-e-registrar-na-memoria-para-o-p",
+      "createdAt": "2026-04-26T04:55:11.186Z",
+      "updatedAt": "2026-04-26T04:55:11.186Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ainda nao por enquanto so guarde na memoria pro proximo comit",
+      "summary": "Não criar commit agora; manter o pacote preparado e registrar na memória para o próximo commit.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-forcar-cards-de-games-animes-em-mais-assuntos-a-puxarem-fotos-reais-dos-subsites",
+      "createdAt": "2026-04-26T04:55:27.749Z",
+      "updatedAt": "2026-04-26T04:55:27.749Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "force puxa as fotos dos subsites, ou das fontes originais",
+      "summary": "Forçar cards de Games/Animes em Mais Assuntos a puxarem fotos reais dos subsites/feeds e páginas originais em vez de manter placeholders.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-remover-eco-visual-cover-duplicado-nas-fotos-inteiras-dos-cards",
+      "createdAt": "2026-04-26T05:05:54.927Z",
+      "updatedAt": "2026-04-26T05:05:54.927Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "A validação mostrou que as fotos ficaram inteiras e maiores, mas a camada cover de fundo duplicou pedaços da mesma imagem em alguns cards; limpar para foto inteira com fundo neutro, sem eco visual.",
+      "summary": "Remover eco visual/cover duplicado nas fotos inteiras dos cards",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-restringir-correcao-de-fotos-inteiras-aos-cadernos-e-restaurar-cards-superiores",
+      "createdAt": "2026-04-26T05:18:27.665Z",
+      "updatedAt": "2026-04-26T05:18:27.665Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Você ajeitou embaixo e estragou em cima; corrigir sem quebrar os cards superiores.",
+      "summary": "Restringir correção de fotos inteiras aos cadernos e restaurar cards superiores",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-ajustar-gradiente-da-area-mensal-para-menos-branco-e-mais-tonal-com-as-fotos",
+      "createdAt": "2026-04-26T05:21:08.199Z",
+      "updatedAt": "2026-04-26T05:21:08.199Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Nos cards dessa area mensal, o gradiente dos lados esta muito esbranquicado; deixar mais combinado com as fotos.",
+      "summary": "Ajustar gradiente da area mensal para menos branco e mais tonal com as fotos",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-corrigir-bloco-entenda-a-home-menos-artificial-e-texto-mais-legivel",
+      "createdAt": "2026-04-26T05:23:48.271Z",
+      "updatedAt": "2026-04-26T05:23:48.271Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuario enviou captura do bloco 'Entenda a Home' e pediu corrigir aparência artificial e baixa legibilidade por tom cinza da fonte.",
+      "summary": "Corrigir bloco Entenda a Home: menos artificial e texto mais legível",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-subir-de-uma-vez-as-pendencias-locais-registradas-na-memoria-respeitando-travas-",
+      "createdAt": "2026-04-26T05:46:54.436Z",
+      "updatedAt": "2026-04-26T05:46:54.436Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "PEGUE TUDO DA MEMORIA QUE FALTA SUBIR E SUBA DE UMA VEZ POR TODAS, AMAHA E OUTRO DIA",
+      "summary": "Subir de uma vez as pendencias locais registradas na memoria, respeitando travas operacionais como PubPaid fora de deploy sem autorizacao explicita.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

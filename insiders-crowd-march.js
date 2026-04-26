@@ -7,7 +7,7 @@
   }
 
   const marchChants = [
-    "NOS SOMOS OS INSIDERS",
+    "NÓS SOMOS OS INSIDERS",
     "QUEREMOS LIBERDADE",
     "QUEREMOS VERDADE",
     "VOZ NAS RUAS",
@@ -19,13 +19,13 @@
     "INSIDERS",
     "LIBERDADE",
     "VERDADE",
-    "VOZ PUBLICA",
+    "VOZ PÚBLICA",
     "SEM MEDO",
     "RUA VIVA"
   ];
 
   const leadBanners = [
-    ["NOS SOMOS", "INSIDERS"],
+    ["NÓS SOMOS", "INSIDERS"],
     ["QUEREMOS", "VERDADE"],
     ["QUEREMOS", "LIBERDADE"]
   ];

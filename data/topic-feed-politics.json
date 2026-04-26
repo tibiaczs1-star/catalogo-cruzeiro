@@ -1,6 +1,6 @@
 {
   "topic": "politics",
-  "updatedAt": "2026-04-26T01:18:04.616Z",
+  "updatedAt": "2026-04-26T05:28:56.686Z",
   "items": [
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/governo-anuncia-bloqueio-de-plataformas-de-mercado-preditivo",
@@ -74,7 +74,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687142&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687142&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687142&o=rss",
+      "originalSourceImageUrl": ""
     },
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/lula-vai-sp-para-tirar-excesso-de-pele-na-cabeca-e-tratar-tendinite",
@@ -112,7 +114,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687108&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687108&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687108&o=rss",
+      "originalSourceImageUrl": ""
     },
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/lula-qualidade-do-agro-e-essencial-para-ampliar-exportacoes",
@@ -150,7 +154,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687059&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687059&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687059&o=rss",
+      "originalSourceImageUrl": ""
     },
     {
       "id": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-04/governo-autoriza-nomeacao-de-mil-aprovados-para-concurso-da-pf",
@@ -188,7 +194,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1686970&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1686970&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1686970&o=rss",
+      "originalSourceImageUrl": ""
     },
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/audiencia-publica-debate-pl-de-reparacao-historica-em-sao-paulo",
@@ -213,11 +221,11 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "./assets/home-cache/fallback-cotidiano.jpg",
+      "imageUrl": "",
       "sourceImageUrl": "",
-      "feedImageUrl": "./assets/home-cache/fallback-cotidiano.jpg",
+      "feedImageUrl": "",
       "imageCredit": "",
-      "imageFocus": "center 30%",
+      "imageFocus": "",
       "imageFit": "",
       "media": null,
       "priority": 0,
@@ -226,7 +234,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687252&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687252&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687252&o=rss",
+      "originalSourceImageUrl": ""
     },
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/motta-cria-comissao-para-analisar-pec-da-reducao-da-escala-6x1",
@@ -264,7 +274,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687179&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687179&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687179&o=rss",
+      "originalSourceImageUrl": ""
     },
     {
       "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/ministro-diz-que-pais-nao-quer-apenas-exportar-minerais-criticos",
@@ -302,7 +314,9 @@
       "coverageLayer": "brasil",
       "topicGroup": "nacional",
       "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687155&o=rss"
+      "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687155&o=rss",
+      "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687155&o=rss",
+      "originalSourceImageUrl": ""
     }
   ],
   "reports": [

@@ -844,6 +844,40 @@ const TOPIC_FEED_CONFIG = {
       topicGroup: "creators"
     }
   ],
+  anime: [
+    {
+      id: "anime-news-network",
+      name: "Anime News Network",
+      feedUrl: "https://www.animenewsnetwork.com/all/rss.xml?ann-edition=us",
+      siteUrl: "https://www.animenewsnetwork.com/",
+      defaultCategory: "Anime",
+      topicGroup: "anime"
+    },
+    {
+      id: "animation-magazine",
+      name: "Animation Magazine",
+      feedUrl: "https://www.animationmagazine.net/feed/",
+      siteUrl: "https://www.animationmagazine.net/",
+      defaultCategory: "Animacao",
+      topicGroup: "animation"
+    },
+    {
+      id: "cartoon-brew",
+      name: "Cartoon Brew",
+      feedUrl: "https://www.cartoonbrew.com/feed",
+      siteUrl: "https://www.cartoonbrew.com/",
+      defaultCategory: "Animacao",
+      topicGroup: "animation"
+    },
+    {
+      id: "awn",
+      name: "Animation World Network",
+      feedUrl: "https://www.awn.com/news/rss.xml",
+      siteUrl: "https://www.awn.com/",
+      defaultCategory: "Animacao",
+      topicGroup: "animation"
+    }
+  ],
   buzz: [
     {
       id: "g1-pop-arte",
@@ -3993,6 +4027,7 @@ function shouldIgnoreImageUrl(value) {
   }
   if (
     imageUrl.includes("agenciabrasil.ebc.com.br/ebc.png") ||
+    imageUrl.includes("/assets/news-fallbacks/") ||
     imageUrl.includes("/edital-assinado-")
   ) {
     return true;
@@ -4016,8 +4051,22 @@ function normalizeComparableImageUrl(value) {
     .toLowerCase();
 }
 
-function wrapSvgTextByWords(value = "", maxChars = 31, maxLines = 3) {
-  const words = cleanShortText(value, 150).split(/\s+/).filter(Boolean);
+function splitSvgLongWord(word = "", maxChars = 31) {
+  const raw = String(word || "");
+  if (raw.length <= maxChars) return [raw];
+
+  const chunks = [];
+  for (let index = 0; index < raw.length; index += maxChars - 1) {
+    chunks.push(raw.slice(index, index + maxChars - 1));
+  }
+  return chunks;
+}
+
+function wrapSvgTextByWords(value = "", maxChars = 27, maxLines = 3) {
+  const words = cleanShortText(value, 150)
+    .split(/\s+/)
+    .filter(Boolean)
+    .flatMap((word) => splitSvgLongWord(word, maxChars));
   const lines = [];
 
   words.forEach((word) => {
@@ -4054,13 +4103,13 @@ function buildNewsFallbackSvg(item = {}, reason = "fallback") {
   const hue = (hashString(`${item.slug || title}|${reason}`) % 280) + 20;
   const accent = `hsl(${hue} 78% 58%)`;
   const accent2 = `hsl(${(hue + 55) % 360} 72% 48%)`;
-  const titleLines = wrapSvgTextByWords(title, 31, 3);
+  const titleLines = wrapSvgTextByWords(title, 27, 3);
   const titleMarkup = titleLines
-    .map((line, index) => `<tspan x="126" dy="${index === 0 ? "0" : "70"}">${escapeHtml(line)}</tspan>`)
+    .map((line, index) => `<tspan x="126" dy="${index === 0 ? "0" : "60"}">${escapeHtml(line)}</tspan>`)
     .join("");
   const escapedTitle = escapeHtml(title);
-  const escapedCategory = escapeHtml(category);
-  const escapedSource = escapeHtml(source);
+  const escapedCategory = escapeHtml(cleanShortText(category, 20));
+  const escapedSource = escapeHtml(cleanShortText(`${source} - imagem editorial segura`, 56));
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="${escapedTitle}">
   <defs>
@@ -4076,15 +4125,15 @@ function buildNewsFallbackSvg(item = {}, reason = "fallback") {
   <rect width="1200" height="720" fill="url(#bg)"/>
   <rect width="1200" height="720" fill="url(#grid)"/>
   <rect x="86" y="82" width="1028" height="556" rx="28" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
-  <rect x="126" y="126" width="214" height="48" rx="24" fill="${accent}"/>
+  <rect x="126" y="126" width="244" height="48" rx="24" fill="${accent}"/>
   <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">${escapedCategory}</text>
   <circle cx="986" cy="158" r="76" fill="${accent}" opacity=".9"/>
   <circle cx="1038" cy="210" r="52" fill="${accent2}" opacity=".78"/>
   <path d="M126 492h948" stroke="${accent}" stroke-width="12" stroke-linecap="round" opacity=".82"/>
-  <text x="126" y="292" fill="#fff8ea" font-family="Georgia, serif" font-size="56" font-weight="700">
+  <text x="126" y="282" fill="#fff8ea" font-family="Georgia, serif" font-size="50" font-weight="700">
     ${titleMarkup}
   </text>
-  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="25" font-weight="700">${escapedSource} • imagem editorial gerada para evitar repetição</text>
+  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="23" font-weight="700">${escapedSource}</text>
 </svg>
 `;
 }
@@ -4121,7 +4170,7 @@ function repairNewsImagesForDisplay(items = []) {
     if (!isBadImage && !isRepeatedInDivision) return item;
 
     const reason = isBadImage ? "imagem-ausente-ou-generica" : "foto-repetida-na-mesma-divisao";
-    if (sourceUrl) {
+    if (sourceUrl && sourceUrl !== "#") {
       return {
         ...item,
         imageUrl: "",
@@ -4129,7 +4178,9 @@ function repairNewsImagesForDisplay(items = []) {
         sourceImageUrl: "",
         imageCredit: item.imageCredit || "",
         imageQuality: `${reason}-buscar-na-fonte`,
-        originalImageUrl: currentImage || item.originalImageUrl || ""
+        originalImageUrl: shouldIgnoreImageUrl(currentImage) ? "" : currentImage || item.originalImageUrl || "",
+        originalFeedImageUrl: shouldIgnoreImageUrl(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
+        originalSourceImageUrl: shouldIgnoreImageUrl(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || ""
       };
     }
 
@@ -4158,7 +4209,8 @@ function getImageCandidateScore(value) {
   if (imageUrl.includes("/wp-content/uploads/")) score += 40;
   if (/(?:featured|hero|wp-post-image|attachment)/i.test(imageUrl)) score += 16;
   if (/(?:1200|1024|1536|2048)/.test(imageUrl)) score += 10;
-  if (/[-_](?:\d{3,4})x(?:\d{3,4})\./.test(imageUrl)) score -= 4;
+  if (/(?:^|[-_])300x\d{2,5}|[-_]\d{2,5}x300/.test(imageUrl)) score += 8;
+  if (/[-_](?:\d{3,4})x(?:\d{3,4})\./.test(imageUrl)) score += 2;
   if (/\.avif(?:[?#].*)?$/i.test(imageUrl)) score += 2;
 
   return score;
@@ -4174,6 +4226,14 @@ function selectBestImageCandidate(candidates = []) {
     .sort((left, right) => right.score - left.score);
 
   return ranked[0]?.url || "";
+}
+
+function collectSrcsetCandidateUrls(value = "", baseUrl = "") {
+  return String(value || "")
+    .split(",")
+    .map((part) => part.trim().split(/\s+/)[0])
+    .map((candidate) => resolveFeedAssetUrl(baseUrl, candidate))
+    .filter(Boolean);
 }
 
 function collectImageCandidatesFromMarkup(markup, baseUrl) {
@@ -4206,6 +4266,7 @@ function collectImageCandidatesFromMarkup(markup, baseUrl) {
   });
 
   for (const match of rawMarkup.matchAll(/srcset=["']([^"']+)["']/gi)) {
+    candidates.push(...collectSrcsetCandidateUrls(match[1], baseUrl));
     const resolved = pickLargestSrcsetCandidate(match[1], baseUrl);
     if (resolved) {
       candidates.push(resolved);
@@ -4663,6 +4724,17 @@ function mergeTopicFeedItems(primaryItems = [], fallbackItems = [], limit = 12) 
     [...(primaryItems || []), ...(fallbackItems || [])],
     Math.max(1, Math.min(40, limit))
   );
+}
+
+function sortTopicFeedItemsForDisplay(items = []) {
+  return (Array.isArray(items) ? items : []).slice().sort((left, right) => {
+    const leftHasImage = shouldIgnoreImageUrl(getArticleImageUrl(left)) ? 0 : 1;
+    const rightHasImage = shouldIgnoreImageUrl(getArticleImageUrl(right)) ? 0 : 1;
+    if (leftHasImage !== rightHasImage) {
+      return rightHasImage - leftHasImage;
+    }
+    return sortArticleItems(left, right);
+  });
 }
 
 function buildTopicFeedFallback(topic, limit = 12) {
@@ -5124,7 +5196,7 @@ const PUBLIC_PORTUGUESE_TOPIC_GUARD = new Set(["games", "kids", "study", "anime"
 const ENGLISH_CARD_LEAK_PATTERN =
   /\b(the post|appeared first|read more|click here|new games|new toys|monthly games|take home|host live|meet the|whole sick|brand and creator|creator|creators|partnerships|streamer|streamers|showrunner|spin-off|hub|review|study destination|higher ed|public trust|students|teachers|schools|website accessibility|will it help|launching|launches|reveals|unveils|announced|trailer reveals|trailer is|worth the wait|with evangelion|for april|for january|the future of|the age of|the year ahead|the classroom|the entertainment industry)\b|]]>|<img\b/i;
 const PORTUGUESE_CARD_SIGNAL_PATTERN =
-  /\b(o|a|os|as|um|uma|de|do|da|dos|das|para|com|em|no|na|que|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?)\b/i;
+  /\b(uma?|pela?|pelos?|das?|dos?|para|com|sobre|entre|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?|comunidades?|f[aã]s|lan[cç]amentos?|cultura|publico|p[uú]blico)\b/i;
 
 function hasEnglishCardLeak(value = "") {
   const text = cleanShortText(value || "", 500);
@@ -5215,7 +5287,9 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
       : filterPublicTopicFeedItems(buildTopicFeedFallback(normalizedTopic, totalLimit), normalizedTopic),
     totalLimit
   );
-  const enrichedItems = repairNewsImagesForDisplay(await enrichNewsItemsWithSourceImages(mergedItems));
+  const enrichedItems = sortTopicFeedItemsForDisplay(
+    repairNewsImagesForDisplay(await enrichNewsItemsWithSourceImages(mergedItems))
+  );
 
   const payload = {
     topic: normalizedTopic,
@@ -5229,9 +5303,10 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
   return payload;
 }
 
-async function getTopicFeed(topic, limit = 12) {
+async function getTopicFeed(topic, limit = 12, options = {}) {
   const normalizedTopic = normalizeText(topic);
   const safeLimit = Math.max(1, Math.min(40, Number(limit) || 12));
+  const forceRefresh = options.forceRefresh === true;
 
   if (!getTopicFeedSources(normalizedTopic).length) {
     return {
@@ -5253,7 +5328,7 @@ async function getTopicFeed(topic, limit = 12) {
   const cacheIsFresh =
     scopedCachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < TOPIC_FEED_TTL_MS;
 
-  if (cacheIsFresh) {
+  if (!forceRefresh && cacheIsFresh) {
     return {
       ok: true,
       topic: normalizedTopic,
@@ -5270,7 +5345,7 @@ async function getTopicFeed(topic, limit = 12) {
         limitPerSource: 8,
         totalLimit: Math.max(safeLimit, 12)
       }),
-      9000,
+      forceRefresh ? 14000 : 9000,
       "topic_feed_timeout"
     );
 
@@ -10508,7 +10583,8 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "GET" && pathname === "/api/topic-feed") {
     const topic = searchParams.get("topic") || "";
     const limit = Number(searchParams.get("limit") || 12);
-    const payload = await getTopicFeed(topic, limit);
+    const forceRefresh = /^(1|true|yes|sim)$/i.test(String(searchParams.get("force") || ""));
+    const payload = await getTopicFeed(topic, limit, { forceRefresh });
 
     if (!payload?.ok) {
       return sendJson(res, 404, {

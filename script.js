@@ -583,6 +583,9 @@ const sanitizeImageUrl = (value) => {
   return `https://images.weserv.nl/?url=${encodeURIComponent(withoutProtocol)}`;
 };
 
+const isGeneratedNewsFallbackImageUrl = (value) =>
+  /(?:^|\/)assets\/news-fallbacks\//i.test(String(value || ""));
+
 const pushUniqueImageCandidate = (bucket, value) => {
   const normalized = String(value || "").trim();
   if (!normalized || bucket.includes(normalized)) {
@@ -651,6 +654,7 @@ const getImageFingerprint = (value) => {
 
 const buildOrderedImageSources = (article = {}, surface = "default") => {
   const inlineImageUrl = extractInlineArticleImage(article);
+  const hasSourceToProbe = Boolean(article.sourceUrl || article.url || article.link);
   const sharedValues = [
     article.image,
     article.media?.imageUrl,
@@ -668,7 +672,7 @@ const buildOrderedImageSources = (article = {}, surface = "default") => {
     ...sharedValues,
     article.originalSourceImageUrl,
     article.sourceImageUrl
-  ];
+  ].filter((value) => !(hasSourceToProbe && isGeneratedNewsFallbackImageUrl(value)));
 
   if (surface === "hero") {
     return canonicalValues;
@@ -2151,12 +2155,94 @@ betButtons.forEach((button) => {
   });
 });
 
+const parseProjectionArticleDate = (article = {}) => {
+  const rawValue = String(article.publishedAt || article.createdAt || article.date || "").trim();
+  const parsed = new Date(rawValue);
+
+  if (!Number.isNaN(parsed.getTime())) {
+    return parsed;
+  }
+
+  const monthMap = {
+    jan: 0,
+    janeiro: 0,
+    fev: 1,
+    fevereiro: 1,
+    mar: 2,
+    marco: 2,
+    abr: 3,
+    abril: 3,
+    mai: 4,
+    maio: 4,
+    jun: 5,
+    junho: 5,
+    jul: 6,
+    julho: 6,
+    ago: 7,
+    agosto: 7,
+    set: 8,
+    setembro: 8,
+    out: 9,
+    outubro: 9,
+    nov: 10,
+    novembro: 10,
+    dez: 11,
+    dezembro: 11
+  };
+  const normalized = rawValue
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+  const match = normalized.match(/(\d{1,2})\s*(?:de\s*)?([a-z]{3,9})\.?\s*(?:de\s*)?(\d{4})/);
+
+  if (!match) {
+    return null;
+  }
+
+  const [, day, month, year] = match;
+  const monthIndex = monthMap[month];
+  return Number.isFinite(monthIndex) ? new Date(Number(year), monthIndex, Number(day)) : null;
+};
+
+const getProjectionArticleKey = (article = {}) =>
+  String(
+    article.slug ||
+      article.sourceUrl ||
+      article.url ||
+      article.id ||
+      [article.title, article.publishedAt || article.date].filter(Boolean).join("|")
+  ).trim();
+
+const countProjectionNotes = (days = 31) => {
+  const articles = Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [];
+  const datedArticles = articles
+    .map((article) => ({ article, date: parseProjectionArticleDate(article) }))
+    .filter(({ date }) => date && !Number.isNaN(date.getTime()));
+
+  if (!datedArticles.length) {
+    return articles.length;
+  }
+
+  const latestTime = Math.max(...datedArticles.map(({ date }) => date.getTime()));
+  const cutoff = new Date(latestTime);
+  cutoff.setDate(cutoff.getDate() - (Math.max(1, days) - 1));
+  cutoff.setHours(0, 0, 0, 0);
+
+  return new Set(
+    datedArticles
+      .filter(({ date }) => date.getTime() >= cutoff.getTime() && date.getTime() <= latestTime)
+      .map(({ article }) => getProjectionArticleKey(article))
+      .filter(Boolean)
+  ).size;
+};
+
 const updateProjection = () => {
   const stake = Number(stakeInput.value);
-  const trackedItems = Math.round(18 + ((stake - 7) / (31 - 7)) * (74 - 18));
+  const trackedItems = countProjectionNotes(stake);
+  const noteLabel = trackedItems === 1 ? "nota" : "notas";
 
   stakeValue.textContent = `${stake} dias`;
-  stakeReturn.textContent = `${trackedItems} notas`;
+  stakeReturn.textContent = `${trackedItems} ${noteLabel}`;
 };
 
 if (stakeInput && stakeValue && stakeReturn) {
@@ -3049,9 +3135,14 @@ const normalizeRuntimeArticle = (article = {}) => {
     172
   );
   const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
-  const originalImageUrl = String(article.feedImageUrl || article.imageUrl || "");
-  const originalSourceImageUrl = String(article.sourceImageUrl || "");
-  const originalFeedImageUrl = String(article.feedImageUrl || article.imageUrl || "");
+  const hasSourceToProbe = Boolean(sourceUrl && sourceUrl !== "#");
+  const originalImageUrl = hasSourceToProbe && isGeneratedNewsFallbackImageUrl(article.feedImageUrl || article.imageUrl)
+    ? ""
+    : String(article.feedImageUrl || article.imageUrl || "");
+  const originalSourceImageUrl = hasSourceToProbe && isGeneratedNewsFallbackImageUrl(article.sourceImageUrl)
+    ? ""
+    : String(article.sourceImageUrl || "");
+  const originalFeedImageUrl = originalImageUrl;
   const imageUrl = resolveSafeArticleImageUrl(
     article,
     originalImageUrl ||
@@ -6796,7 +6887,7 @@ const fetchTopicFeedCached = async (topic, limit = 4, options = {}) => {
       {
         createdAt: Date.now(),
         promise: requestApiJson(
-          `/api/topic-feed?topic=${encodeURIComponent(normalizedTopic)}&limit=${safeLimit}`,
+          `/api/topic-feed?topic=${encodeURIComponent(normalizedTopic)}&limit=${safeLimit}${forceRefresh ? "&force=1" : ""}`,
           {
             method: "GET"
           }
@@ -7052,7 +7143,10 @@ const applyCadernoStoryArticle = (storyNode, article, { preserveHref = false } =
     const hasUsableImage = articleHasUsableImageCandidate(article);
     storyNode.classList.toggle("story-without-photo", !hasUsableImage);
     thumbNode.dataset.topic = getThumbTopic(thumbNode, article);
-    applyThumbImage(thumbNode, article);
+    applyThumbImage(thumbNode, {
+      ...article,
+      imageFit: "contain"
+    });
   }
 };
 
@@ -7093,8 +7187,8 @@ const hydrateCadernoCards = async (items = []) => {
     }
 
     if (kicker === "games" || kicker === "animes") {
-      const topic = kicker === "games" ? "games" : "kids";
-      const topicItems = await fetchTopicFeedCached(topic, 6);
+      const topic = kicker === "games" ? "games" : "anime";
+      const topicItems = await fetchTopicFeedCached(topic, 6, { forceRefresh: true });
       const filteredItems =
         kicker === "animes"
           ? topicItems.filter((item) =>
@@ -7103,9 +7197,12 @@ const hydrateCadernoCards = async (items = []) => {
               )
             )
           : topicItems;
+      const displayItems = dedupeNewsItems(filteredItems.length ? filteredItems : topicItems).sort(
+        (left, right) => Number(articleHasUsableImageCandidate(right)) - Number(articleHasUsableImageCandidate(left))
+      );
 
       stories.forEach((storyNode, index) => {
-        const article = filteredItems[index] || topicItems[index];
+        const article = displayItems[index] || topicItems[index];
         const articleKey = getArticleUsageKey(article);
         const imageKey = getArticleImageKey(article);
         if (
