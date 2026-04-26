@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T05:46:54.436Z",
+  "lastUpdatedAt": "2026-04-26T06:02:44.724Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -7199,6 +7199,37 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-04-26-automation-sync-online-local-12h",
+      "createdAt": "2026-04-26T06:02:44.724Z",
+      "updatedAt": "2026-04-26T06:02:44.724Z",
+      "status": "closed",
+      "source": "automation",
+      "rawRequest": "Sincronizar Catalogo Cruzeiro do Sul online → local (npm run sync:online-local), validar HOME/radar/arquivo/mosaicos/cards com resumos curtos e preservar pagina de leitura noticia.* com corpo completo.",
+      "summary": "Sync online/local concluido; relatórios ok; pagina de leitura preservada sem encurtar corpo.",
+      "normalizedTasks": [
+        "Rodar npm run sync:online-local",
+        "Revisar .codex-temp/online-local-sync/latest-report.md",
+        "Revisar .codex-temp/review-team/latest-report.md",
+        "Checar auditoria de imagens (news-image-focus-audit)"
+      ],
+      "filesTouched": [],
+      "assetRefs": [
+        "online-local-sync-latest-report-md-2026-04-26",
+        "review-team-latest-report-md-2026-04-26",
+        "news-image-focus-audit-json-2026-04-26"
+      ],
+      "tags": [
+        "sync",
+        "online-local",
+        "catalogo",
+        "automation"
+      ],
+      "nextSteps": [
+        "Se quiser publicar, revisar diff e commitar/push."
+      ],
+      "notes": "Necessario ajustar scripts/sync-online-local.js para rodar em-process porque child_process.spawnSync retorna EPERM neste sandbox."
     }
   ]
 }

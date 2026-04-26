@@ -619,7 +619,7 @@ async function loadOnlineNews() {
   }
 }
 
-async function main() {
+async function runReRodadaDiaGeral() {
   const startedAt = new Date().toISOString();
   const localHints = buildLocalArticleHints();
   const onlinePayload = await loadOnlineNews();
@@ -682,10 +682,20 @@ async function main() {
       "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
   };
   writeJson(REPORT_FILE, report);
-  console.log(JSON.stringify(report, null, 2));
+  return report;
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (require.main === module) {
+  runReRodadaDiaGeral()
+    .then((report) => {
+      console.log(JSON.stringify(report, null, 2));
+    })
+    .catch((error) => {
+      console.error(error);
+      process.exit(1);
+    });
+}
+
+module.exports = {
+  runReRodadaDiaGeral
+};

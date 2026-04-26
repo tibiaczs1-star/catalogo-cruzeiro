@@ -11,15 +11,13 @@
   <rect width="1200" height="720" fill="url(#bg)"/>
   <rect width="1200" height="720" fill="url(#grid)"/>
   <rect x="86" y="82" width="1028" height="556" rx="28" fill="rgba(255,255,255,.055)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
-  <rect x="126" y="126" width="260" height="48" rx="24" fill="hsl(285 78% 58%)"/>
+  <rect x="126" y="126" width="244" height="48" rx="24" fill="hsl(285 78% 58%)"/>
   <text x="154" y="158" fill="#07111f" font-family="Arial, sans-serif" font-size="24" font-weight="800">COTIDIANO</text>
   <circle cx="986" cy="158" r="76" fill="hsl(285 78% 58%)" opacity=".9"/>
   <circle cx="1038" cy="210" r="52" fill="hsl(340 72% 48%)" opacity=".78"/>
   <path d="M126 492h948" stroke="hsl(285 78% 58%)" stroke-width="12" stroke-linecap="round" opacity=".82"/>
-  <text x="126" y="292" fill="#fff8ea" font-family="Georgia, serif" font-size="56" font-weight="700">
-    <tspan x="126" dy="0">Com o rio abaixo da cota de alerta</tspan>
-    <tspan x="126" dy="70">, famílias iniciam retorno seguro</tspan>
-    <tspan x="126" dy="70"></tspan>
+  <text x="126" y="282" fill="#fff8ea" font-family="Georgia, serif" font-size="50" font-weight="700">
+    <tspan x="126" dy="0">Com o rio abaixo da cota de</tspan><tspan x="126" dy="60">alerta, famílias iniciam</tspan><tspan x="126" dy="60">retorno seguro</tspan>
   </text>
-  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="25" font-weight="700">ac24horas • imagem editorial para evitar repetição</text>
+  <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="23" font-weight="700">ac24horas - imagem editorial segura</text>
 </svg>

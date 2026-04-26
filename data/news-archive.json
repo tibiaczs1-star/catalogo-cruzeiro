@@ -230,7 +230,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/RJ_Abr26-2.pdf"
+    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/RJ_Abr26-2.pdf",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://ac24horas.com/2026/04/25/chuva-interrompe-primeira-noite-do-arraial-ponto-alto-e-bingo-de-r-5-mil-e-transferido-para-sabado/",
@@ -2311,7 +2313,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss"
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
@@ -2449,7 +2453,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss"
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
@@ -2583,7 +2589,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss"
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://batelao.com/fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima/?utm_source=rss&utm_medium=rss&utm_campaign=fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima",
@@ -2890,7 +2898,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss"
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://ac24horas.com/2026/04/24/apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas/",
@@ -3154,7 +3164,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://ac24horas.com/2026/04/24/educacao-divulga-lista-de-aprovados-para-escuta-do-coro-lirico-veja-nomes/",
@@ -3550,7 +3564,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
@@ -4300,7 +4318,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "tenda-saude-cheia-jurua",
@@ -4562,7 +4584,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/eja-czs-superacao.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-aldir-blanc-cultura-czs",
@@ -4604,7 +4628,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/aldir-blanc-cultura-czs.svg"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
@@ -4637,7 +4661,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
@@ -4672,7 +4700,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/recebimento-licenca-previa-josias-o-da-silva-epp/",
@@ -4705,7 +4735,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua/",
@@ -4811,7 +4845,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/credenciamento-pareceristas-culturais.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
@@ -4844,7 +4880,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
@@ -4879,7 +4919,9 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-estadodo-acre/",
@@ -4912,7 +4954,11 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": ""
   },
   {
     "id": "https://tribunadojurua.com.br/geral/edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre/",
@@ -4985,7 +5031,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-saude-25-agosto-ubs",
@@ -5025,7 +5073,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/saude-25-agosto-ubs.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-ifac-auxilio-cheia",
@@ -5066,7 +5116,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/ifac-auxilio-cheia.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-fila-ovos-pascoa",
@@ -5106,7 +5158,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/fila-ovos-pascoa.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-lucas-dourado-pascoa",
@@ -5146,7 +5200,9 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/lucas-dourado-pascoa.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
@@ -5188,7 +5244,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg"
   },
   {
     "id": "home-linked-vazante-retorno-seguro",
@@ -5230,7 +5286,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg"
   },
   {
     "id": "home-linked-ifac-professores-czs",
@@ -5273,7 +5329,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/ifac-professores-czs.svg"
   },
   {
     "id": "home-linked-zequinha-assistencia-cheia",
@@ -5316,7 +5372,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/zequinha-assistencia-cheia.svg"
   },
   {
     "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
@@ -5358,7 +5414,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg"
   },
   {
     "id": "home-linked-victor-macario-viral",
@@ -5400,7 +5456,7 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/victor-macario-viral.svg"
   },
   {
     "id": "home-linked-vazante-jurua-segue",
@@ -5443,6 +5499,6 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/vazante-jurua-segue.svg"
   }
 ]

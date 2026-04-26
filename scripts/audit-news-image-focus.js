@@ -438,8 +438,8 @@ async function mapWithConcurrency(items, concurrency, mapper) {
   return results;
 }
 
-async function run() {
-  const options = parseArgs(process.argv.slice(2));
+async function runAuditNewsImageFocus(argv = process.argv.slice(2)) {
+  const options = parseArgs(argv);
   const previousReport = safeReadJson(REPORT_FILE, {});
   const previousSlugs = new Set(Array.isArray(previousReport.slugs) ? previousReport.slugs : []);
   const focusOverrides = loadFocusOverrides();
@@ -518,12 +518,13 @@ async function run() {
         ? items.filter((item) => item.level !== "ok")
         : [];
 
+  let exitCode = 0;
   if (whatsappItems.length) {
     try {
       await sendWhatsappAuditAlert(whatsappItems, report);
     } catch (error) {
       console.error(`[news-focus-audit] falha ao enviar WhatsApp: ${error.message}`);
-      process.exitCode = 1;
+      exitCode = 1;
     }
   }
 
@@ -532,13 +533,25 @@ async function run() {
     newBlockers.slice(0, 12).forEach((item) => {
       console.error(`[news-focus-audit] novo ${item.level}: ${item.slug} (${item.reasons.join(", ")})`);
     });
-    process.exitCode = 1;
+    exitCode = 1;
   } else if (options.strict && (summary.error > 0 || summary.warning > 0)) {
-    process.exitCode = 1;
+    exitCode = 1;
   }
+
+  return { report, exitCode };
 }
 
-run().catch((error) => {
-  console.error("[news-focus-audit] fatal", error);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  runAuditNewsImageFocus()
+    .then(({ exitCode }) => {
+      process.exitCode = exitCode;
+    })
+    .catch((error) => {
+      console.error("[news-focus-audit] fatal", error);
+      process.exitCode = 1;
+    });
+}
+
+module.exports = {
+  runAuditNewsImageFocus
+};

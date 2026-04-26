@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-25T23:54:46.836Z",
+  "lastUpdatedAt": "2026-04-26T06:02:44.724Z",
   "assets": [
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
@@ -966,6 +966,39 @@
       "note": "Captura mobile validando novo fluxo: card de cookies aparece primeiro, botão Aceitar cookies e continuar libera a navegação.",
       "linkedOrderIds": [],
       "createdAt": "2026-04-25T23:54:46.836Z"
+    },
+    {
+      "id": "online-local-sync-latest-report-md-2026-04-26",
+      "kind": "report",
+      "path": ".codex-temp/online-local-sync/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio do sync online-local (ok) em 2026-04-26.",
+      "linkedOrderIds": [
+        "2026-04-26-automation-sync-online-local-12h"
+      ],
+      "createdAt": "2026-04-26T06:02:44.724Z"
+    },
+    {
+      "id": "review-team-latest-report-md-2026-04-26",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio review-team audit (0 achados) em 2026-04-26.",
+      "linkedOrderIds": [
+        "2026-04-26-automation-sync-online-local-12h"
+      ],
+      "createdAt": "2026-04-26T06:02:44.724Z"
+    },
+    {
+      "id": "news-image-focus-audit-json-2026-04-26",
+      "kind": "report",
+      "path": "data/news-image-focus-audit.json",
+      "source": "workspace",
+      "note": "Auditoria de foco/imagem das noticias (reviewQueue=0) em 2026-04-26.",
+      "linkedOrderIds": [
+        "2026-04-26-automation-sync-online-local-12h"
+      ],
+      "createdAt": "2026-04-26T06:02:44.724Z"
     }
   ]
 }

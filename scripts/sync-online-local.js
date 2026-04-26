@@ -3,7 +3,6 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
-const { spawnSync } = require("node:child_process");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const REPORT_DIR = path.join(ROOT_DIR, ".codex-temp", "online-local-sync");
@@ -20,28 +19,34 @@ function tail(value = "", maxLength = 4000) {
   return text.length > maxLength ? text.slice(-maxLength) : text;
 }
 
-function runStep(name, command, args) {
+async function runStep(name, fn) {
   const startedAt = new Date().toISOString();
-  const result = spawnSync(command, args, {
-    cwd: ROOT_DIR,
-    encoding: "utf-8",
-    env: {
-      ...process.env,
-      CATALOGO_SYNC_SURFACE: "home-front-preview",
-      CATALOGO_DETAIL_PAGES_KEEP_FULL_BODY: "1"
-    }
-  });
+  try {
+    const value = await fn();
+    const exitCode = Number(value?.exitCode || 0) || 0;
 
-  return {
-    name,
-    command: [command, ...args].join(" "),
-    startedAt,
-    finishedAt: new Date().toISOString(),
-    status: result.status === 0 ? "passed" : "failed",
-    exitCode: result.status,
-    stdout: tail(result.stdout),
-    stderr: tail(result.stderr || result.error?.message || "")
-  };
+    return {
+      name,
+      command: "in-process",
+      startedAt,
+      finishedAt: new Date().toISOString(),
+      status: exitCode === 0 ? "passed" : "failed",
+      exitCode,
+      stdout: tail(value ? JSON.stringify(value).slice(0, 4000) : ""),
+      stderr: tail(value?.stderr || "")
+    };
+  } catch (error) {
+    return {
+      name,
+      command: "in-process",
+      startedAt,
+      finishedAt: new Date().toISOString(),
+      status: "failed",
+      exitCode: 1,
+      stdout: "",
+      stderr: tail(error?.stack || error?.message || String(error || ""))
+    };
+  }
 }
 
 function readJson(filePath, fallback = null) {
@@ -92,25 +97,42 @@ function buildMarkdown(report) {
   return `${lines.join("\n")}\n`;
 }
 
-function main() {
+async function main() {
   const startedAt = new Date().toISOString();
-  const node = process.execPath;
   const steps = [];
 
-  steps.push(runStep("sync online news to local", node, ["scripts/re-rodada-dia-geral.js"]));
+  process.env.CATALOGO_SYNC_SURFACE = "home-front-preview";
+  process.env.CATALOGO_DETAIL_PAGES_KEEP_FULL_BODY = "1";
 
-  if (steps.at(-1).status === "passed") {
-    steps.push(enforceReviewTeamGate(runStep("review home/front summaries", node, ["scripts/review-team-audit.js"])));
+  steps.push(
+    await runStep("sync online news to local", async () => {
+      // NOTE: child_process spawn is blocked in the sandbox (EPERM),
+      // so run all steps in-process.
+      const { runReRodadaDiaGeral } = require("./re-rodada-dia-geral.js");
+      return runReRodadaDiaGeral();
+    })
+  );
+
+  if (steps.at(-1)?.status === "passed") {
+    const reviewStep = enforceReviewTeamGate(
+      await runStep("review home/front summaries", async () => {
+        const { runReviewTeamAudit } = require("./review-team-audit.js");
+        return runReviewTeamAudit();
+      })
+    );
+    steps.push(reviewStep);
   }
 
-  if (steps.at(-1).status === "passed") {
+  if (steps.at(-1)?.status === "passed") {
     steps.push(
-      runStep("audit news images", node, [
-        "scripts/audit-news-image-focus.js",
-        "--offline",
-        `--limit=${NEWS_IMAGE_AUDIT_LIMIT}`,
-        "--strict-new"
-      ])
+      await runStep("audit news images", async () => {
+        const { runAuditNewsImageFocus } = require("./audit-news-image-focus.js");
+        return runAuditNewsImageFocus([
+          "--offline",
+          `--limit=${NEWS_IMAGE_AUDIT_LIMIT}`,
+          "--strict-new"
+        ]);
+      })
     );
   }
 
@@ -129,8 +151,34 @@ function main() {
   console.log(JSON.stringify(report, null, 2));
 
   if (!report.ok) {
-    process.exit(1);
+    process.exitCode = 1;
   }
 }
 
-main();
+main().catch((error) => {
+  ensureDir(REPORT_DIR);
+  const report = {
+    ok: false,
+    startedAt: new Date().toISOString(),
+    finishedAt: new Date().toISOString(),
+    rule:
+      "Home/cards/chamadas usam resumo curto; noticia.html e paginas de leitura mantem estrutura completa.",
+    steps: [
+      {
+        name: "sync orchestrator",
+        command: "in-process",
+        startedAt: new Date().toISOString(),
+        finishedAt: new Date().toISOString(),
+        status: "failed",
+        exitCode: 1,
+        stdout: "",
+        stderr: tail(error?.stack || error?.message || String(error || ""))
+      }
+    ]
+  };
+
+  fs.writeFileSync(REPORT_JSON_FILE, `${JSON.stringify(report, null, 2)}\n`, "utf-8");
+  fs.writeFileSync(REPORT_MD_FILE, buildMarkdown(report), "utf-8");
+  console.log(JSON.stringify(report, null, 2));
+  process.exitCode = 1;
+});
