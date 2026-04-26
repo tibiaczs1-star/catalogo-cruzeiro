@@ -1,6 +1,6 @@
 {
-  "lastAttemptAt": "2026-04-26T03:14:51.235Z",
-  "lastSuccessAt": "2026-04-26T03:14:52.609Z",
+  "lastAttemptAt": "2026-04-26T03:39:13.095Z",
+  "lastSuccessAt": "2026-04-26T03:39:15.143Z",
   "source": "re-rodada-dia-geral-online-first",
   "activeWindowItems": [
     {
@@ -500,9 +500,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/RJ_Abr26-2.pdf"
+      "editorialPriority": ""
     },
     {
       "id": "https://ac24horas.com/2026/04/25/chuva-interrompe-primeira-noite-do-arraial-ponto-alto-e-bingo-de-r-5-mil-e-transferido-para-sabado/",
@@ -4992,9 +4990,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
+      "editorialPriority": ""
     },
     {
       "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
@@ -5389,6 +5385,46 @@
       "editorialPriority": ""
     },
     {
+      "id": "home-linked-mais-12-mil-afetados",
+      "slug": "mais-12-mil-afetados",
+      "title": "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
+      "eyebrow": "cotidiano",
+      "date": "impacto inicial",
+      "publishedAt": "impacto inicial",
+      "category": "Cotidiano",
+      "categoryKey": "cotidiano",
+      "previewClass": "thumb-cheia",
+      "sourceName": "1 abr",
+      "sourceUrl": "#",
+      "sourceLabel": "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
+      "lede": "A primeira semana mostra que a cheia escala rápido em Cruzeiro do Sul, com famílias removidas, bairros inundados e acolhimento escolar.",
+      "summary": "A primeira semana mostra que a cheia escala rápido em Cruzeiro do Sul, com famílias removidas, bairros inundados e acolhimento escolar.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em mais-12-mil-afetados.",
+      "body": [
+        "A chamada publicada na capa remete a 1 abr, com recorte principal em cotidiano e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
+        "1 abr • impacto inicial",
+        "Cotidiano"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug mais-12-mil-afetados.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "A imagem veio da propria chamada publicada na home."
+      ],
+      "imageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
+      "sourceImageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
+      "feedImageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
+      "imageCredit": "Imagem usada na chamada da home para 1 abr",
+      "imageFocus": "center 42%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": ""
+    },
+    {
       "id": "home-linked-fila-ovos-pascoa",
       "slug": "fila-ovos-pascoa",
       "title": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
@@ -5429,90 +5465,6 @@
       "editorialPriority": ""
     },
     {
-      "id": "home-linked-mais-12-mil-afetados",
-      "slug": "mais-12-mil-afetados",
-      "title": "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
-      "eyebrow": "cotidiano",
-      "date": "impacto inicial",
-      "publishedAt": "impacto inicial",
-      "category": "Cotidiano",
-      "categoryKey": "cotidiano",
-      "previewClass": "thumb-cheia",
-      "sourceName": "1 abr",
-      "sourceUrl": "#",
-      "sourceLabel": "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
-      "lede": "A primeira semana mostra que a cheia escala rápido em Cruzeiro do Sul, com famílias removidas, bairros inundados e acolhimento escolar.",
-      "summary": "A primeira semana mostra que a cheia escala rápido em Cruzeiro do Sul, com famílias removidas, bairros inundados e acolhimento escolar.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em mais-12-mil-afetados.",
-      "body": [
-        "A chamada publicada na capa remete a 1 abr, com recorte principal em cotidiano e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
-        "1 abr • impacto inicial",
-        "Cotidiano"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug mais-12-mil-afetados.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "A imagem veio da propria chamada publicada na home."
-      ],
-      "imageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
-      "sourceImageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
-      "feedImageUrl": "/assets/news-fallbacks/mais-12-mil-afetados.svg",
-      "imageCredit": "Imagem usada na chamada da home para 1 abr",
-      "imageFocus": "center 42%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg"
-    },
-    {
-      "id": "home-linked-michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
-      "slug": "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
-      "title": "Filme de Michael Jackson ganha peso global e pode movimentar o Cine Romeu",
-      "eyebrow": "cultura",
-      "date": "23 abr 2026",
-      "publishedAt": "23 abr 2026",
-      "category": "Cultura",
-      "categoryKey": "cultura",
-      "previewClass": "thumb-cultura",
-      "sourceName": "Cinema",
-      "sourceUrl": "#",
-      "sourceLabel": "Filme de Michael Jackson ganha peso global e pode movimentar o Cine Romeu",
-      "lede": "Estreia de grande apelo popular pode virar programa de cinema em Cruzeiro do Sul.",
-      "summary": "Estreia de grande apelo popular pode virar programa de cinema em Cruzeiro do Sul.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em michael-jackson-filme-cine-romeu-cruzeiro-do-sul.",
-      "body": [
-        "A chamada publicada na capa remete a Cinema, com recorte principal em cultura e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Filme de Michael Jackson ganha peso global e pode movimentar o Cine Romeu",
-        "Cinema • 23 abr 2026",
-        "Cultura"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug michael-jackson-filme-cine-romeu-cruzeiro-do-sul.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "/assets/news-fallbacks/michael-jackson-filme-cine-romeu-cruzeiro-do-sul.svg",
-      "sourceImageUrl": "/assets/news-fallbacks/michael-jackson-filme-cine-romeu-cruzeiro-do-sul.svg",
-      "feedImageUrl": "/assets/news-fallbacks/michael-jackson-filme-cine-romeu-cruzeiro-do-sul.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 28%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
-    },
-    {
       "id": "home-linked-lucas-dourado-pascoa",
       "slug": "lucas-dourado-pascoa",
       "title": "Páscoa, boato e reaparição: o caso Lucas Dourado entra no radar das redes acreanas",
@@ -5551,90 +5503,6 @@
       "media": null,
       "priority": 0,
       "editorialPriority": ""
-    },
-    {
-      "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-      "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-      "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-      "eyebrow": "saude",
-      "date": "data recente",
-      "publishedAt": "data recente",
-      "category": "Saúde",
-      "categoryKey": "saude",
-      "previewClass": "thumb-saude",
-      "sourceName": "Fonte local",
-      "sourceUrl": "#",
-      "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-      "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-      "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-      "body": [
-        "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Saúde, Governo e Agricultura concentram alterações de comissionados",
-        "Fonte local",
-        "Saude"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-      "sourceImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-      "feedImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 50%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
-    },
-    {
-      "id": "home-linked-vazante-retorno-seguro",
-      "slug": "vazante-retorno-seguro",
-      "title": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
-      "eyebrow": "cotidiano",
-      "date": "10 abr 2026",
-      "publishedAt": "10 abr 2026",
-      "category": "Cotidiano",
-      "categoryKey": "cotidiano",
-      "previewClass": "thumb-cheia",
-      "sourceName": "ac24horas",
-      "sourceUrl": "#",
-      "sourceLabel": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
-      "lede": "A marca de 12,98 metros sinaliza o fim do pico da cheia e o começo da limpeza pesada nos bairros atingidos.",
-      "summary": "A marca de 12,98 metros sinaliza o fim do pico da cheia e o começo da limpeza pesada nos bairros atingidos.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em vazante-retorno-seguro.",
-      "body": [
-        "A chamada publicada na capa remete a ac24horas, com recorte principal em cotidiano e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
-        "ac24horas • 10 abr 2026",
-        "Cotidiano"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug vazante-retorno-seguro.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
-      "sourceImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
-      "feedImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 50%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
     },
     {
       "id": "home-linked-vazante-retorno-familias",
@@ -5714,9 +5582,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg"
+      "editorialPriority": ""
     },
     {
       "id": "home-linked-saude-familias-abrigadas",
@@ -5799,6 +5665,86 @@
       "editorialPriority": ""
     },
     {
+      "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+      "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+      "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+      "eyebrow": "saude",
+      "date": "data recente",
+      "publishedAt": "data recente",
+      "category": "Saúde",
+      "categoryKey": "saude",
+      "previewClass": "thumb-saude",
+      "sourceName": "Fonte local",
+      "sourceUrl": "#",
+      "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+      "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+      "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+      "body": [
+        "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "Saúde, Governo e Agricultura concentram alterações de comissionados",
+        "Fonte local",
+        "Saude"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+      ],
+      "imageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "sourceImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "feedImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      "imageFocus": "center 50%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": ""
+    },
+    {
+      "id": "home-linked-vazante-retorno-seguro",
+      "slug": "vazante-retorno-seguro",
+      "title": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
+      "eyebrow": "cotidiano",
+      "date": "10 abr 2026",
+      "publishedAt": "10 abr 2026",
+      "category": "Cotidiano",
+      "categoryKey": "cotidiano",
+      "previewClass": "thumb-cheia",
+      "sourceName": "ac24horas",
+      "sourceUrl": "#",
+      "sourceLabel": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
+      "lede": "A marca de 12,98 metros sinaliza o fim do pico da cheia e o começo da limpeza pesada nos bairros atingidos.",
+      "summary": "A marca de 12,98 metros sinaliza o fim do pico da cheia e o começo da limpeza pesada nos bairros atingidos.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em vazante-retorno-seguro.",
+      "body": [
+        "A chamada publicada na capa remete a ac24horas, com recorte principal em cotidiano e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
+        "ac24horas • 10 abr 2026",
+        "Cotidiano"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug vazante-retorno-seguro.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+      ],
+      "imageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
+      "sourceImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
+      "feedImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
+      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      "imageFocus": "center 50%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": ""
+    },
+    {
       "id": "home-linked-ifac-professores-czs",
       "slug": "ifac-professores-czs",
       "title": "Campus, escola e permanência estudantil",
@@ -5837,9 +5783,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
+      "editorialPriority": ""
     },
     {
       "id": "home-linked-zequinha-assistencia-cheia",
@@ -5880,93 +5824,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
-    },
-    {
-      "id": "home-linked-filme-bolsonaro-memes-reacao-redes",
-      "slug": "filme-bolsonaro-memes-reacao-redes",
-      "title": "Filme sobre Bolsonaro já chega cercado por memes, ironias e uma boa dose de gente irritada",
-      "eyebrow": "social",
-      "date": "23 abr 2026",
-      "publishedAt": "23 abr 2026",
-      "category": "Social",
-      "categoryKey": "social",
-      "previewClass": "thumb-social",
-      "sourceName": "Redes",
-      "sourceUrl": "#",
-      "sourceLabel": "Filme sobre Bolsonaro já chega cercado por memes, ironias e uma boa dose de gente irritada",
-      "lede": "Repercussão mistura humor de internet, reação política e comentários sobre o teaser.",
-      "summary": "Repercussão mistura humor de internet, reação política e comentários sobre o teaser.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em filme-bolsonaro-memes-reacao-redes.",
-      "body": [
-        "A chamada publicada na capa remete a Redes, com recorte principal em social e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Filme sobre Bolsonaro já chega cercado por memes, ironias e uma boa dose de gente irritada",
-        "Redes • 23 abr 2026",
-        "Social"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug filme-bolsonaro-memes-reacao-redes.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "/assets/news-fallbacks/filme-bolsonaro-memes-reacao-redes.svg",
-      "sourceImageUrl": "/assets/news-fallbacks/filme-bolsonaro-memes-reacao-redes.svg",
-      "feedImageUrl": "/assets/news-fallbacks/filme-bolsonaro-memes-reacao-redes.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 22%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
-    },
-    {
-      "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
-      "slug": "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
-      "title": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
-      "eyebrow": "cultura",
-      "date": "data recente",
-      "publishedAt": "data recente",
-      "category": "Cultura",
-      "categoryKey": "cultura",
-      "previewClass": "thumb-cultura",
-      "sourceName": "Fonte local",
-      "sourceUrl": "#",
-      "sourceLabel": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
-      "lede": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
-      "summary": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
-      "body": [
-        "A chamada publicada na capa remete a Fonte local, com recorte principal em cultura e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
-        "Fonte local",
-        "Cultura"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "sourceImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "feedImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 50%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
+      "editorialPriority": ""
     },
     {
       "id": "home-linked-moradores-rotina-cheia",
@@ -6006,9 +5864,47 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif"
+      "editorialPriority": ""
+    },
+    {
+      "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
+      "slug": "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
+      "title": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+      "eyebrow": "cultura",
+      "date": "data recente",
+      "publishedAt": "data recente",
+      "category": "Cultura",
+      "categoryKey": "cultura",
+      "previewClass": "thumb-cultura",
+      "sourceName": "Fonte local",
+      "sourceUrl": "#",
+      "sourceLabel": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+      "lede": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
+      "summary": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
+      "body": [
+        "A chamada publicada na capa remete a Fonte local, com recorte principal em cultura e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+        "Fonte local",
+        "Cultura"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+      ],
+      "imageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "sourceImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "feedImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      "imageFocus": "center 50%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": ""
     },
     {
       "id": "home-linked-victor-macario-viral",
@@ -6048,9 +5944,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
+      "editorialPriority": ""
     },
     {
       "id": "home-linked-vazante-jurua-segue",
@@ -6091,9 +5985,7 @@
       "imageFit": "",
       "media": null,
       "priority": 0,
-      "editorialPriority": "",
-      "imageQuality": "imagem-ausente-ou-generica",
-      "originalImageUrl": ""
+      "editorialPriority": ""
     }
   ],
   "items": [
@@ -11502,10 +11394,10 @@
     {
       "sourceName": "Render online",
       "ok": true,
-      "fetched": 177,
-      "activeWindowItems": 177,
+      "fetched": 175,
+      "activeWindowItems": 175,
       "archiveItems": 157,
-      "repairedImages": 24,
+      "repairedImages": 10,
       "mailzaPriorityItems": 8,
       "cachedFallback": false,
       "cachedFallbackReason": ""

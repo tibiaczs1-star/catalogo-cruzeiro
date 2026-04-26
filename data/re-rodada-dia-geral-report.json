@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "startedAt": "2026-04-26T03:14:51.235Z",
-  "finishedAt": "2026-04-26T03:14:52.629Z",
+  "startedAt": "2026-04-26T03:39:13.095Z",
+  "finishedAt": "2026-04-26T03:39:15.168Z",
   "source": "Re Rodada do Dia Geral",
   "cachedFallback": false,
   "cachedFallbackReason": "",
   "onlineAuditBefore": {
-    "total": 177,
-    "missing": 24,
-    "sameDivisionDuplicates": 9
+    "total": 175,
+    "missing": 10,
+    "sameDivisionDuplicates": 4
   },
   "localAuditAfterSync": {
-    "total": 177,
+    "total": 175,
     "missing": 0,
     "sameDivisionDuplicates": 0
   },
@@ -20,10 +20,10 @@
     "missing": 0,
     "sameDivisionDuplicates": 0
   },
-  "activeWindowItems": 177,
+  "activeWindowItems": 175,
   "archiveItems": 157,
   "syncFetchLimit": 1000,
-  "repairedImages": 24,
+  "repairedImages": 10,
   "mailzaPriorityItems": 8,
   "rule": "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
 }

@@ -5889,12 +5889,16 @@ function shouldReplaceArticleRecord(existing, candidate) {
   return candidateDate > existingDate;
 }
 
+function getArticleStorageKey(item = {}) {
+  return String(item.slug || item.id || getArticleCanonicalKey(item) || item.title || "").trim();
+}
+
 function getArticleNews(limit = 30) {
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
 
   items.forEach((item) => {
-    const key = getArticleCanonicalKey(item) || item.slug || item.id || item.title;
+    const key = getArticleStorageKey(item);
     if (shouldReplaceArticleRecord(map.get(key), item)) {
       map.set(key, item);
     }
@@ -5920,7 +5924,7 @@ function buildNewsArchivePayload(limit = 500) {
   const map = new Map();
 
   items.forEach((item) => {
-    const key = getArticleCanonicalKey(item) || item.slug || item.id || item.title;
+    const key = getArticleStorageKey(item);
     if (shouldReplaceArticleRecord(map.get(key), item)) {
       map.set(key, item);
     }
