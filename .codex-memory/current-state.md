@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-04-26T00:18:00.000Z
+Updated: 2026-04-26T01:25:00.000Z
 
 ## Active Goal
 
-- Correção de quebra feia de texto na home
+- Textos públicos do jornal revisados
 
 ## Summary
 
-A home ganhou uma camada final de legibilidade em `premium-clarity.css` para impedir palavras partidas no meio da linha em títulos, resumos, botões, cards e painel de cookies; `index.html` recebeu cache-bust `20260426textwrap1`.
+Foi feita uma varredura nos textos visíveis da home, popup e blocos dinâmicos para trocar linguagem de bastidor/editorial por linguagem voltada ao público. Foram removidos ou suavizados termos como agente, fila editorial, curadoria, arquivo lateral, editoria própria, texto mais elaborado e não checado em áreas de participação, arquivo, cadernos, rodada social, política, fundadores e estados gerados por script.
 
 ## Next
 
-- Se for subir, incluir `premium-clarity.css`, `index.html` e memória local.
-- Manter PubPaid fora de commit/deploy salvo ordem explícita.
+- Próximo passo ideal: revisar visualmente no navegador a home após reload para conferir se os textos novos encaixam nos cards compactos.

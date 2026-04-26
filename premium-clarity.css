@@ -686,6 +686,28 @@ body.editorial-home .insiders-command-stage .insiders-logo-caption {
   border-color: rgba(160, 214, 255, 0.14) !important;
 }
 
+/* 2026-04-26: rótulo de moda mais limpo e compacto no bloco de escritórios. */
+body.editorial-home .office-play-actions .office-play-fashion-link {
+  min-height: 38px;
+  padding: 0.54rem 0.86rem;
+  border-radius: 999px;
+  border: 1px solid rgba(238, 211, 224, 0.55);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 252, 0.96), rgba(238, 229, 240, 0.92));
+  color: #4c2d43;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  box-shadow:
+    0 10px 24px rgba(74, 45, 66, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+}
+
+body.editorial-home .office-play-actions .office-play-fashion-link:hover {
+  color: #fffafc;
+  border-color: rgba(120, 70, 102, 0.34);
+  background: linear-gradient(135deg, #6c3f61, #9b6f8b);
+}
+
 @media (max-width: 1100px) {
   body.editorial-home .founders-banner-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));

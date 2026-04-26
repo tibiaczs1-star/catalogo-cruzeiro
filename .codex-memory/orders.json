@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T00:21:43.130Z",
+  "lastUpdatedAt": "2026-04-26T01:11:01.609Z",
   "orders": [
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
@@ -6743,6 +6743,92 @@
       "source": "chat",
       "rawRequest": "subir",
       "summary": "Subir o pacote atual de correções da home/cookies/texto e caches editoriais, mantendo PubPaid fora.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-expandir-o-quadro-de-informacoes-da-populacao-comentarios-para-ocupar-a-altura-d",
+      "createdAt": "2026-04-26T00:24:59.155Z",
+      "updatedAt": "2026-04-26T00:24:59.155Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "abra mais ate embaixo os comentarios, nao prescisa ficar uma area morta",
+      "summary": "Expandir o quadro de informações da população/comentários para ocupar a altura disponível e eliminar área morta abaixo.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "styles.css",
+        "index.html"
+      ],
+      "assetRefs": [
+        "output/playwright/community-board-fullheight-section.png",
+        "output/playwright/community-board-fullheight-fullpage.png"
+      ],
+      "tags": [
+        "home",
+        "participacao-comunitaria",
+        "comentarios",
+        "css"
+      ],
+      "nextSteps": [],
+      "notes": "Quadro community-signal-board passou a preencher a altura disponivel da linha e a lista community-report-list deixou de ter max-height fixo."
+    },
+    {
+      "id": "2026-04-26-recolocar-a-camada-visual-central-do-popup-de-cookies-encaixada-no-tamanho-compa",
+      "createdAt": "2026-04-26T00:34:43.357Z",
+      "updatedAt": "2026-04-26T00:34:43.357Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "adicione a camada que ficava no meio, mais ela tem que encaixar ai, entendeu? no tamanho que ta",
+      "summary": "Recolocar a camada visual central do popup de cookies, encaixada no tamanho compacto atual",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-trocar-efeitos-tech-da-abertura-dos-fundadores-por-design-premium-3d-rotacional-",
+      "createdAt": "2026-04-26T01:03:21.118Z",
+      "updatedAt": "2026-04-26T01:03:21.118Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tem uns efeitos ai que parece propaganda de tecnologia, troque ele por outras coisas legais, use um design premium, 3d dinamico e rotacional, por favor veja o que vc aprendeu sobre design nos estudos de hoje no githun",
+      "summary": "Trocar efeitos tech da abertura dos fundadores por design premium 3D rotacional baseado nos estudos locais de design",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-corrigir-rotulo-moda-esttiles-para-moda-estilo-e-ajustar-estilo-do-botao-de-moda",
+      "createdAt": "2026-04-26T01:07:34.384Z",
+      "updatedAt": "2026-04-26T01:07:34.384Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e corrija esse nome e estilos de moda",
+      "summary": "Corrigir rótulo Moda Esttíles para Moda & Estilo e ajustar estilo do botão de moda",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-26-varrer-todo-o-jornal-por-texto-de-bastidor-editorial-e-reescrever-para-o-publico",
+      "createdAt": "2026-04-26T01:11:01.609Z",
+      "updatedAt": "2026-04-26T01:11:01.609Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "todo texto dali ta voltado pro editor e nao pro publico, assim como outros procure esse tipo de coisa em todo jornal",
+      "summary": "Varrer todo o jornal por texto de bastidor/editorial e reescrever para o público",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

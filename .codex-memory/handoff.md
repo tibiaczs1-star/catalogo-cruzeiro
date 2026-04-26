@@ -1,10 +1,12 @@
 # Handoff
 
-Updated: 2026-04-26T00:18:00.000Z
+Updated: 2026-04-26T01:25:00.000Z
 
-Corrigido feedback do usuário sobre texto quebrando palavras no meio da linha: adicionada camada final em `premium-clarity.css` com `word-break: normal`, `overflow-wrap: normal`, `hyphens: none` e `text-wrap: pretty` para títulos/resumos/botões/cards relevantes da home; `index.html` aponta para `premium-clarity.css?v=20260426textwrap1`. Servidor local em `127.0.0.1:3000` respondeu 200 e o HTML já contém o novo cache-bust.
+Além das correções anteriores de moda e da tela premium de fundadores/cookies, foi aplicada uma varredura editorial na home para deixar o texto voltado ao público. index.html, startup-experience.js e script.js tiveram textos visíveis reescritos para trocar bastidores internos por termos de leitor: notícias, assuntos, conferência, atualização diária, fonte e apoio público. Node check passou em startup-experience.js e script.js.
 
 ## Next
 
-- Validar visualmente no celular real após deploy; se houver algum bloco específico ainda feio, aplicar seletor pontual nele.
-- Manter PubPaid fora de commit/deploy até ordem explícita.
+- Se for commit/deploy
+- incluir index.html, script.js, startup-experience.js, startup-experience.css, premium-clarity.css e memória local.
+- não misturar data/*.json não relacionados.
+- fazer uma revisão visual da home depois de reload/cache-bust para garantir que os textos novos encaixem nos cards compactos.

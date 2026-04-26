@@ -421,7 +421,7 @@
       <p class="catalogo-welcome-kicker">Antes de continuar</p>
       <h2 id="catalogoWelcomeTitle">Preferencias de cookies</h2>
       <p class="catalogo-welcome-lead">
-        O portal muda o dia inteiro: novas noticias, capas e editorias entram varias vezes
+        O portal muda o dia inteiro: novas noticias, capas e paginas entram varias vezes
         por dia. Para manter essa atualizacao rapida e estavel, usamos cookies essenciais e
         metricas basicas de navegacao.
       </p>
@@ -441,7 +441,7 @@
         </div>
         <div class="catalogo-term-item">
           <strong>O que isso melhora</strong>
-          <span>Velocidade, leitura das noticias, troca de capas e funcionamento das editorias.</span>
+          <span>Velocidade, leitura das noticias, troca de capas e funcionamento das paginas.</span>
         </div>
       </div>
 
@@ -693,29 +693,40 @@
         <span class="premium-particle particle-b"></span>
         <span class="premium-particle particle-c"></span>
         <span class="premium-particle particle-d"></span>
+        <span class="founder-premium-floor"></span>
+        <span class="founder-premium-halo halo-a"></span>
+        <span class="founder-premium-halo halo-b"></span>
+        <span class="founder-premium-orb orb-a"></span>
+        <span class="founder-premium-orb orb-b"></span>
+        <span class="founder-premium-orb orb-c"></span>
+        <span class="founder-premium-ribbon ribbon-a"></span>
+        <span class="founder-premium-ribbon ribbon-b"></span>
+        <span class="founder-premium-ribbon ribbon-c"></span>
+        <span class="founder-premium-diamond diamond-a"></span>
+        <span class="founder-premium-diamond diamond-b"></span>
       </div>
       <div class="catalogo-founder-prelude-shell">
         <div class="catalogo-founder-prelude-hud hud-left" aria-hidden="true">
-          <span>FOUNDERS LINK</span>
-          <strong>SYNC 4/4</strong>
-          <small>portal / acesso / identidade / abertura</small>
-          <em>entrada especial dos apoiadores em preparo</em>
+          <span>galeria de honra</span>
+          <strong>4 marcas em cena</strong>
+          <small>apoio local, presença e continuidade</small>
+          <em>abertura especial em andamento</em>
         </div>
         <div class="catalogo-founder-prelude-hud hud-right" aria-hidden="true">
-          <span>ORBITAL DESK</span>
-          <strong>READYING</strong>
-          <small>abertura cinematica em curso</small>
-          <em>luzes e elementos visuais entrando em cena</em>
+          <span>palco premium</span>
+          <strong>luz de estreia</strong>
+          <small>profundidade, volume e movimento</small>
+          <em>fundadores entrando primeiro</em>
         </div>
         <div class="catalogo-founder-prelude-side side-left" aria-hidden="true">
-          <span>OFFICE GRID</span>
-          <strong>Nodes live</strong>
-          <small>portal, marcas, cena e movimento</small>
+          <span>apoio local</span>
+          <strong>Presenca viva</strong>
+          <small>marcas que ajudam a manter o portal de pe</small>
         </div>
         <div class="catalogo-founder-prelude-side side-right" aria-hidden="true">
-          <span>STAR DESK</span>
-          <strong>Motion+Light</strong>
-          <small>luz, orbita, abertura e destaque</small>
+          <span>abertura do portal</span>
+          <strong>Honra em foco</strong>
+          <small>cada apoio ganha primeiro plano antes da leitura</small>
         </div>
         <div class="catalogo-founder-prelude-copy">
           <span>fundadores</span>
@@ -1097,7 +1108,7 @@
             </div>
           </div>
           <div class="catalogo-return-office-copy">
-            <span>Escritório editorial</span>
+            <span>Portal local</span>
             <strong>Reabrindo a home</strong>
             <p data-returning-splash-status>Preparando os destaques do dia</p>
             <small data-returning-splash-date>Montando capa</small>

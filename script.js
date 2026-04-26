@@ -105,7 +105,7 @@ const splashMessages = [
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const tickerPhrasePool = [
-  { label: "Radar", text: "Radar local destaca primeiro o que impacta Cruzeiro do Sul no dia." },
+  { label: "Notícias", text: "As notícias locais mostram primeiro o que impacta Cruzeiro do Sul no dia." },
   { label: "Arquivo", text: "Arquivo do mês ajuda a entender o contexto das notícias mais recentes." },
   { label: "Comunidade", text: "Recados da comunidade entram com leitura rápida e informação útil." },
   { label: "Serviço", text: "Serviço útil aparece com endereço, horário e caminho para resolver." },
@@ -116,7 +116,7 @@ const tickerPhrasePool = [
   { label: "Trânsito", text: "Mudou a rua, mudou a rotina: o letreiro avisa sem rodeio." },
   { label: "Clima", text: "Tempo, cheia e alerta entram cedo quando afetam o dia da população." },
   { label: "Cultura", text: "A cultura local aparece com voz própria e espaço de verdade." },
-  { label: "Social", text: "Festas, bastidores e repercussão social passam aqui com ritmo leve." },
+  { label: "Social", text: "Festas, encontros e repercussão social passam aqui com ritmo leve." },
   { label: "Opinião", text: "Humor e opinião aparecem sem tirar o foco do fato principal." },
   { label: "Fonte", text: "Resumo original com link para a fonte segue firme em cada bloco." },
   { label: "Assunto", text: "Os temas mais quentes entram com contexto, não só com barulho." },
@@ -125,10 +125,10 @@ const tickerPhrasePool = [
   { label: "Comunidade", text: "Pedidos de correção, avisos de evento e mensagens úteis entram no fluxo." },
   { label: "Saúde", text: "Saúde, escola e utilidade pública ficam mais fáceis de achar nesta faixa." },
   { label: "Feira", text: "Feira, comércio e pequenos negócios entram no mapa com clareza." },
-  { label: "Bastidor", text: "A cobertura mostra movimento e atualização sem perder clareza." },
+  { label: "Atualização", text: "A página mostra movimento e atualização sem perder clareza." },
   { label: "Agenda", text: "Show, peça, oficina e evento local aparecem em uma mesma corrida." },
   { label: "Serviço", text: "Telefone, endereço e atalho de serviço ficam mais perto do clique." },
-  { label: "Rede", text: "O que viraliza só sobe com curadoria, contexto e confirmação." },
+  { label: "Rede", text: "O que viraliza aparece com contexto, fonte e cuidado." },
   { label: "Manchete", text: "Cada trilha mistura notícia, serviço e comunidade em equilíbrio." },
   { label: "Cobertura", text: "Cobertura regional passa em camadas para leitura rápida e contexto claro." },
   { label: "Leitor", text: "Quem mora na cidade encontra serviço rápido antes mesmo de abrir a matéria." },
@@ -137,10 +137,10 @@ const tickerPhrasePool = [
   { label: "Mercado", text: "Anúncio, membro e patrocínio convivem sem apagar a informação." },
   { label: "Cultura", text: "Cinema, teatro e agenda criativa ganham mais presença no topo." },
   { label: "Tempo real", text: "As frases trocam ao longo do dia para acompanhar o que está acontecendo agora." },
-  { label: "Curadoria", text: "Curadoria regional mantém o foco no que realmente importa por aqui." },
+  { label: "Seleção", text: "A seleção regional mantém o foco no que realmente importa por aqui." },
   { label: "Destaque", text: "O topo vira uma grade viva para mostrar o que mexe com a cidade." },
   { label: "Vale do Juruá", text: "O Vale do Juruá aparece como território vivo, com contexto e proximidade." },
-  { label: "Redação", text: "A entrada do site reúne atualização contínua, leitura rápida e contexto local." }
+  { label: "Portal", text: "A entrada do site reúne atualização contínua, leitura rápida e contexto local." }
 ];
 const tickerRuntime = {
   timerIds: []
@@ -170,12 +170,12 @@ const heroOfficeBubblePool = [
   "Atualizando destaques da cidade",
   "Resumo local em revisão",
   "Acompanhando ruas, redes e agenda",
-  "Novas informações entrando no radar",
+  "Novas informações chegando",
   "Edição do dia em atualização"
 ];
 const heroOfficeStatusGroups = [
   ["Cobertura local", "Fontes verificadas", "Atualização contínua"],
-  ["Radar do Juruá", "Serviço em destaque", "Leitura rápida"],
+  ["Notícias do Juruá", "Serviço em destaque", "Leitura rápida"],
   ["Agenda da cidade", "Contexto local", "Publicação no ar"],
   ["Movimento da região", "Apuração ativa", "Destaques confirmados"]
 ];
@@ -291,7 +291,7 @@ const homepageStaticPreviewBySlug = {
     slug: "pixel-art-nao-e-nostalgia-e-interface",
     title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
     category: "Jogos e arte",
-    sourceName: "Cheffe Call - agentes de arte e design de jogos",
+    sourceName: "Cheffe Call - arte e design de jogos",
     imageUrl: "./assets/home-cache/pixel-art-editorial.svg",
     feedImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
     sourceImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
@@ -300,9 +300,9 @@ const homepageStaticPreviewBySlug = {
   },
   "michael-jackson-filme-cine-romeu-cruzeiro-do-sul": {
     slug: "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
-    title: "Filme de Michael Jackson entra no radar com peso global e chance de movimentar o Cine Romeu",
+    title: "Filme de Michael Jackson ganha peso global e pode movimentar o Cine Romeu",
     category: "Cinema em destaque",
-    sourceName: "Editorial Catálogo Cruzeiro do Sul",
+    sourceName: "Catálogo Cruzeiro do Sul",
     imageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
     feedImageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
     sourceImageUrl: "https://i.ytimg.com/vi/lIMj2ZRpo1M/maxresdefault.jpg",
@@ -312,7 +312,7 @@ const homepageStaticPreviewBySlug = {
     slug: "filme-bolsonaro-memes-reacao-redes",
     title: "Filme sobre Bolsonaro já chega cercado por memes, ironias e uma boa dose de gente irritada",
     category: "Memes e política pop",
-    sourceName: "Editorial Catálogo Cruzeiro do Sul",
+    sourceName: "Catálogo Cruzeiro do Sul",
     imageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
     feedImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
     sourceImageUrl: "https://img.band.com.br/image/2026/04/08/dark-horse-e-o-novo-filme-sobre-jair-bolsonaro-91750.jpg",
@@ -350,7 +350,7 @@ const homepageStaticPreviewBySlug = {
   },
   "lucas-dourado-pascoa": {
     slug: "lucas-dourado-pascoa",
-    title: "Pascoa, boato e reaparicao: o caso Lucas Dourado entra no radar das redes acreanas",
+    title: "Pascoa, boato e reaparicao: o caso Lucas Dourado ganha força nas redes acreanas",
     category: "Buzz publico",
     sourceName: "ac24horas",
     imageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
@@ -371,7 +371,7 @@ const homepageStaticPreviewBySlug = {
   "credenciamento-pareceristas-culturais": {
     slug: "credenciamento-pareceristas-culturais",
     title: "Cruzeiro do Sul abre credenciamento de pareceristas para projetos culturais",
-    category: "Cultura no radar",
+    category: "Cultura em pauta",
     sourceName: "ac24horas",
     imageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
     feedImageUrl: "./assets/home-cache/buzz-cultura-show.jpg",
@@ -1794,15 +1794,15 @@ const radarGuideThemes = {
   },
   prefeitura: {
     label: "Prefeitura",
-    text: "O radar marca entregas, obras, decretos e movimentos oficiais da gestão."
+    text: "Aqui aparecem entregas, obras, decretos e movimentos oficiais da gestão."
   },
   politica: {
     label: "Política",
-    text: "Esta camada reúne decisões, movimentos institucionais e disputas que ajudam a entender o cenário político local."
+    text: "Este recorte reúne decisões, movimentos institucionais e disputas que ajudam a entender o cenário político local."
   },
   policia: {
     label: "Polícia",
-    text: "A mira sobe para segurança, operações e ocorrências que pedem atenção imediata."
+    text: "Segurança, operações e ocorrências aparecem aqui quando pedem atenção imediata."
   },
   saude: {
     label: "Saúde",
@@ -1818,11 +1818,11 @@ const radarGuideThemes = {
   },
   cultura: {
     label: "Cultura",
-    text: "A lanterna vira para agenda criativa, festivais, cinema, arte e o que mexe com o circuito cultural."
+    text: "Agenda criativa, festivais, cinema, arte e circuito cultural aparecem em um só recorte."
   },
   esporte: {
     label: "Esporte",
-    text: "A mira entra no gramado e nas quadras para destacar jogos, atletas, campeonatos e bastidores esportivos."
+    text: "Jogos, atletas, campeonatos e histórias esportivas entram no mesmo acompanhamento."
   }
 };
 
@@ -2114,9 +2114,9 @@ const renderRadar = (filter = "todos") => {
     const emptyState = document.createElement("article");
     emptyState.className = "news-card radar-empty-state reveal active";
     emptyState.innerHTML = `
-      <span class="news-source">Radar CZS</span>
+      <span class="news-source">Resumo CZS</span>
       <h3>Sem destaque encontrado para este tema agora.</h3>
-      <p>Troque o chip acima para abrir outro módulo do radar local.</p>
+      <p>Escolha outro filtro acima para ver mais notícias.</p>
     `;
     radarGrid.appendChild(emptyState);
   }
@@ -2215,7 +2215,7 @@ const buildCommunityReportCard = (report = {}) => {
   const footer = document.createElement("small");
 
   article.className = "community-report-card";
-  badge.textContent = "não checado";
+  badge.textContent = "a confirmar";
   title.textContent = report.neighborhood || "Bairro não informado";
   message.textContent = report.message || "";
   footer.textContent = `${report.name || "Morador local"} • participação comunitária voluntária`;
@@ -2232,7 +2232,7 @@ const renderCommunityReports = (items = []) => {
   if (!items.length) {
     const empty = document.createElement("p");
     empty.className = "community-report-empty";
-    empty.textContent = "Ainda não há relatos comunitários aguardando checagem neste bloco.";
+    empty.textContent = "Ainda não há relatos comunitários aguardando conferência neste bloco.";
     communityReportList.appendChild(empty);
     return;
   }
@@ -2279,11 +2279,11 @@ const submitCommunityReport = async (event) => {
   const submitButton = communityAgentForm.querySelector('button[type="submit"]');
   const message = String(formData.get("message") || "").trim();
   if (message.length < 12) {
-    communityAgentFeedback.textContent = "Conte um pouco mais para a equipe entender o que precisa verificar.";
+    communityAgentFeedback.textContent = "Conte um pouco mais para entendermos o que precisa ser conferido.";
     return;
   }
 
-  communityAgentFeedback.textContent = "Agente recebendo o relato como não checado...";
+  communityAgentFeedback.textContent = "Recebendo o relato para conferência...";
   if (submitButton) {
     submitButton.disabled = true;
     submitButton.textContent = "Enviando...";
@@ -2308,7 +2308,7 @@ const submitCommunityReport = async (event) => {
     });
 
     communityAgentFeedback.textContent =
-      "Relato registrado como não checado. Ele entrou na fila dos agentes para verificação.";
+      "Relato recebido. Vamos conferir as informações antes de publicar qualquer atualização.";
     communityAgentForm.reset();
     const refreshedItems = await loadCommunityReports();
     if (!Array.isArray(refreshedItems) || !refreshedItems.length) {
@@ -2320,7 +2320,7 @@ const submitCommunityReport = async (event) => {
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
-      submitButton.textContent = "Enviar relato não checado";
+      submitButton.textContent = "Enviar relato para conferência";
     }
   }
 };
@@ -3670,7 +3670,7 @@ const ensureMobileHomeLeadLayout = () => {
       const dropdown = document.createElement("details");
       dropdown.className = "mobile-main-nav-dropdown";
       dropdown.setAttribute("aria-label", "Menu principal do portal");
-      dropdown.innerHTML = `<summary>Editoriais</summary><div class="mobile-main-nav-links"></div>`;
+      dropdown.innerHTML = `<summary>Áreas</summary><div class="mobile-main-nav-links"></div>`;
       mobileHomeDomState.menuDropdown = dropdown;
     }
 
@@ -4007,7 +4007,7 @@ const buildHeroTourismDailyPool = () => {
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
       return {
         title: article.category || "Destaque autoral",
-        note: truncateCopy(article.sourceName || "Editorial Catálogo Cruzeiro do Sul", 46),
+        note: truncateCopy(article.sourceName || "Catálogo Cruzeiro do Sul", 46),
         proxyUrl: imageUrl,
         fallbackUrl: imageUrl,
         focusPosition: getHeroDailyArticleFocus(article),
@@ -4017,7 +4017,7 @@ const buildHeroTourismDailyPool = () => {
         articleSummary: truncateCopy(article.displaySummary || article.lede || "Artigo autoral em destaque.", 138),
         articleHref: buildHeroArticleHref(article),
         themeKey: getHeroAreaKey(article),
-        sourceName: article.sourceName || "Editorial Catálogo Cruzeiro do Sul"
+        sourceName: article.sourceName || "Catálogo Cruzeiro do Sul"
       };
     })
     .filter((item) => item.proxyUrl && item.articleHref);
@@ -4135,7 +4135,7 @@ const setHeroTourismMeta = (photo) => {
   if (heroDailyNewsSummary) {
     heroDailyNewsSummary.textContent =
       truncateCopy(
-        photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para esta editoria.",
+        photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para este assunto.",
         132
       );
   }
@@ -4177,7 +4177,7 @@ const renderHeroDesktopHighlights = (items = []) => {
 
     if (summaryNode) {
       summaryNode.textContent = truncateCopy(
-        item.articleSummary || item.note || "Resumo curto do destaque mais importante desta editoria.",
+        item.articleSummary || item.note || "Resumo curto do destaque mais importante deste assunto.",
         120
       );
     }
@@ -5417,7 +5417,7 @@ const trendingInfluencerBuzzPool = [
   },
   {
     name: "Nando do Centro",
-    handle: "@nandocentro • bastidores da cidade",
+    handle: "@nandocentro • conversa da cidade",
     image: "./assets/home-cache/trend-nando-centro.jpg",
     avatar: "./assets/home-cache/trend-nando-centro.jpg",
     kicker: "o vídeo que virou debate",
@@ -5542,7 +5542,7 @@ const trendingControversyBuzzPool = [
     tone: "viral",
     image: "./assets/home-cache/buzz-cruzeiro-01.jpg",
     title: "Criadores locais puxam agenda de fim de semana",
-    summary: "Histórias, vídeos curtos e bastidores de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
+    summary: "Histórias, vídeos curtos e cenas de eventos estão guiando a escolha do público antes dos anúncios oficiais.",
     likes: "7.4K",
     comments: "980"
   },
@@ -5565,7 +5565,7 @@ const trendingControversyBuzzPool = [
     comments: "740"
   },
   {
-    badge: "Bastidor",
+    badge: "Por dentro",
     tone: "hot",
     image: "./assets/home-cache/buzz-cruzeiro-03.jpg",
     title: "Comunicação oficial demora e meme ocupa espaço",
@@ -5577,7 +5577,7 @@ const trendingControversyBuzzPool = [
     badge: "Destaque",
     tone: "trending",
     image: "./assets/home-cache/buzz-model-local.jpg",
-    title: "Nome local entra no radar de marcas",
+    title: "Nome local ganha atenção de marcas",
     summary: "Jovens criadores e modelos da região aparecem mais em campanhas, vídeos e collabs comerciais.",
     likes: "11.4K",
     comments: "1.8K"
@@ -5653,7 +5653,7 @@ const getBuzzNetworkContexts = () => {
     },
     {
       network: "YouTube",
-      summary: "Contexto maior, opiniao longa e video de bastidor.",
+      summary: "Contexto maior, opinião longa e vídeo de apoio.",
       signals: ["contexto", "opiniao", "retencao"],
       engagement: 81,
       velocity: 68,
@@ -5985,7 +5985,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
   const summary = truncateCopy(
     cleanArticleExcerpt(
       article.displaySummary || article.lede || article.summary,
-      "O assunto entrou na conversa publica e segue em monitoramento editorial."
+      "O assunto entrou na conversa pública e segue em acompanhamento."
     ),
     190
   );
@@ -6096,7 +6096,7 @@ const renderDailyTrendingBuzz = async (options = {}) => {
 
 const monthlyFallbackStories = [
   {
-    title: "Criadores locais puxam a conversa da semana com vídeos de bastidor",
+    title: "Criadores locais puxam a conversa da semana com vídeos de eventos",
     summary: "O recorte cruza posts, eventos e comentários para mostrar quem movimentou a timeline regional.",
     imageUrl: "./assets/home-cache/buzz-cruzeiro-01.jpg",
     sourceName: "Radar social",
@@ -6193,7 +6193,7 @@ const getMonthlyTone = (article = {}, index = 0) => {
   );
 
   if (/\b(agents|agente|agentes reais|rodada diaria|rodada diária|monitoramento)\b/.test(haystack)) {
-    return { tag: "Agentes do dia", className: "month-creators", axis: "fila editorial" };
+    return { tag: "Assuntos do dia", className: "month-creators", axis: "em acompanhamento" };
   }
 
   if (/\b(festa|social|celebridade|modelo|marca|collab|criador|criadora|influenc|reels|story|tiktok|instagram)\b/.test(haystack)) {
@@ -6209,7 +6209,7 @@ const getMonthlyTone = (article = {}, index = 0) => {
   }
 
   if (/\b(bairro|comunidade|obra|mobilidade|servico|serviço|risco|transito|trânsito)\b/.test(haystack)) {
-    return { tag: "Comunidade no radar", className: "month-territory", axis: "bairro e gestão" };
+    return { tag: "Comunidade em pauta", className: "month-territory", axis: "bairro e gestão" };
   }
 
   const fallback = [
@@ -6227,13 +6227,12 @@ const getDailyAgentActionForCard = (agentPulse = null, index = 0) => {
 };
 
 const buildDailyAgentLabel = (agentPulse = null, action = null) => {
-  const totalAgents = Number(agentPulse?.summary?.totalAgents || 181);
   const runLabel =
     formatCompactDisplayDate(agentPulse?.runGeneratedAt || agentPulse?.updatedAt || "") ||
     "hoje";
-  const agentName = action?.agent || "Agente editorial";
-  const officeName = action?.office || "Redação";
-  return `${totalAgents} agentes • ${agentName} / ${officeName} • ${runLabel}`;
+  const topicName = action?.title || action?.agent || "Leitura local";
+  const officeName = action?.office || "Portal";
+  return `${truncateCopy(topicName, 34)} • ${officeName} • ${runLabel}`;
 };
 
 const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
@@ -6264,14 +6263,14 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
       <h3>
         <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(truncateCopy(article.title || "Recorte social em atualização", 108))}</a>
       </h3>
-      <p>${escapeHtml(truncateCopy(article.lede || article.summary || "Tema em acompanhamento no radar editorial.", 142))}</p>
+      <p>${escapeHtml(truncateCopy(article.lede || article.summary || "Tema em acompanhamento no portal.", 142))}</p>
       <div class="month-signal" aria-label="Força de repercussão">
         <span>${escapeHtml(tone.axis)}</span>
         <i><b style="width:${score}%"></b></i>
       </div>
-      <div class="month-agent-note" aria-label="Leitura dos agentes">
+      <div class="month-agent-note" aria-label="Leitura do dia">
         <strong>${escapeHtml(buildDailyAgentLabel(agentPulse, agentAction))}</strong>
-        <span>${escapeHtml(truncateCopy(agentAction?.title || "Rodada dos agentes cruzou notícia, rede e prioridade editorial do dia.", 118))}</span>
+        <span>${escapeHtml(truncateCopy(agentAction?.title || "Resumo do dia reuniu notícia, redes e temas em debate.", 118))}</span>
       </div>
       <small>${escapeHtml(article.sourceName || "Fonte ativa")} · ${escapeHtml(dateLabel)}</small>
     </article>
@@ -6286,8 +6285,8 @@ const pickMonthlyDynamicStories = async (options = {}) => {
   const agentActions = Array.isArray(agentPulse?.actions)
     ? agentPulse.actions.map((action) => ({
         title: action.title,
-        summary: `${action.agent || "Agente"} (${action.office || "Redação"}) marcou este assunto para a rodada diária.`,
-        sourceName: action.office || action.agent || "Agentes reais",
+      summary: `${action.office || "Portal"} destacou este assunto para a leitura diária.`,
+      sourceName: action.office || "Portal local",
         category: action.role || "Buzz",
         sourceUrl: "./real-agents.html",
         publishedAt: agentPulse.runGeneratedAt || agentPulse.updatedAt || new Date().toISOString(),
@@ -6359,7 +6358,7 @@ const communityTrendFallbackTopics = [
   },
   {
     title: "Agenda cultural e eventos movimentam stories e grupos",
-    summary: "Shows, encontros e bastidores entram no radar para orientar a programação local.",
+    summary: "Shows, encontros e cenas da cidade ajudam o leitor a escolher a programação local.",
     category: "Cultura",
     sourceName: "Tendência local",
     hashtags: ["#AgendaCultural", "#ValeDoJurua", "#CruzeiroDoSul"]
@@ -6380,7 +6379,7 @@ const communityTrendFallbackTopics = [
   },
   {
     title: "Política regional gera debate e pedido de explicação",
-    summary: "Decisões públicas, bastidores e cobranças sobem quando afetam a rotina da cidade.",
+    summary: "Decisões públicas, cobranças e explicações ganham força quando afetam a rotina da cidade.",
     category: "Política",
     sourceName: "Debate público",
     hashtags: ["#PoliticaAcre", "#DebatePublico", "#Jurua"]
@@ -6571,7 +6570,7 @@ const renderCommunityTrendCard = async (options = {}) => {
 
   if (communityTrendSummary) {
     communityTrendSummary.textContent = truncateCopy(
-      mainTopic.summary || mainTopic.lede || "Captação do que está rendendo conversa hoje no radar local.",
+      mainTopic.summary || mainTopic.lede || "Assuntos que estão rendendo conversa hoje.",
       92
     );
   }
@@ -6889,7 +6888,7 @@ const buildTopicUtilityCards = (items = []) =>
           <h3>${escapeHtml(normalizedItem.title || item.title || "Atualização política")}</h3>
           <p>${escapeHtml(safeSummary)}</p>
           <footer>
-            <span>${escapeHtml(item.label || "atalho editorial")}</span>
+            <span>${escapeHtml(item.label || "atalho de leitura")}</span>
             <a href="${escapeRuntimeAttribute(item.href || "./arquivo.html")}">${escapeHtml(item.cta || "Abrir agora")}</a>
           </footer>
         </article>
@@ -7171,18 +7170,18 @@ const renderGlobalPoliticsHighlights = async (options = {}) => {
       {
         eyebrow: "política nacional",
         title: "Abrir arquivo político completo",
-        summary: "Quando o feed não entregar manchetes novas agora, este atalho leva para o arquivo e evita card morto.",
-        label: "utilidade editorial",
+        summary: "Quando não houver manchetes novas agora, este atalho leva você ao arquivo completo.",
+        label: "guia rápido",
         href: "./arquivo.html",
         cta: "Ver arquivo"
       },
       {
         eyebrow: "contexto",
-        title: "Voltar ao radar principal da home",
-        summary: "Use o radar principal para encontrar a notícia política mais recente já incorporada na edição local.",
+        title: "Voltar às notícias principais",
+        summary: "Use a página principal para encontrar a notícia política mais recente.",
         label: "atalho útil",
         href: "#radar",
-        cta: "Abrir radar"
+        cta: "Ver notícias"
       },
       {
         eyebrow: "busca",
@@ -7308,7 +7307,7 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
             <h3>${escapeHtml(scope.fallbackTitle)}</h3>
             <p>Sem manchete perfeita nesta camada agora, use este bloco como atalho útil para continuar a leitura política sem espaço morto.</p>
             <footer>
-              <span>utilidade editorial</span>
+              <span>guia rápido</span>
               <a href="${escapeRuntimeAttribute(scope.key === "brasil" ? "#politica-global" : "./arquivo.html")}">${scope.key === "brasil" ? "Ver contexto" : "Abrir arquivo"}</a>
             </footer>
           </article>
@@ -7485,7 +7484,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
   if (mode === "stage") {
     const venueNode = card.querySelector(".venue");
     const pills = [...card.querySelectorAll(".theater-pill")];
-    if (venueNode) venueNode.textContent = `Fonte: ${normalized.sourceName || "radar cultural"}`;
+    if (venueNode) venueNode.textContent = `Fonte: ${normalized.sourceName || "agenda cultural"}`;
     ["Cultura", normalized.category || "Agenda", normalized.topicGroup || "Palco"].forEach((label, pillIndex) => {
       if (pills[pillIndex]) pills[pillIndex].textContent = truncateCopy(label, 18);
     });
@@ -7915,7 +7914,7 @@ const hydrateMosaicHero = (items = []) => {
     card.dataset.mosaicLayout = inferMosaicLayoutMode(article, card);
 
     if (tag) {
-      tag.textContent = index === 0 ? "Destaque do radar" : truncateCopy(article.category, 22);
+      tag.textContent = index === 0 ? "Destaque do dia" : truncateCopy(article.category, 22);
     }
 
     if (source) {
@@ -9237,7 +9236,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       ${currentPosition ? `<p class="candidate-status">${escapeHtml(currentPosition)}</p>` : ""}
       <div class="candidate-meta-chips">
         ${politicalPosition ? `<span>${escapeHtml(politicalPosition)}</span>` : ""}
-        ${scoreTotal ? `<span>Pontuação editorial ${escapeHtml(String(scoreTotal))}</span>` : ""}
+        ${scoreTotal ? `<span>Pontuação ${escapeHtml(String(scoreTotal))}</span>` : ""}
       </div>
       <div class="candidate-propostas">
         <h4>Realizações e focos</h4>
@@ -10072,7 +10071,7 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
     return;
   }
 
-  liveFeedStatus.textContent = `Arquivo vivo com ${filtered.length} notícias verificadas. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e editorias.`;
+  liveFeedStatus.textContent = `Arquivo vivo com ${filtered.length} notícias. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
 };
 
 const renderLiveFeed = () => {
@@ -10481,14 +10480,14 @@ const getNextHolidayText = (holidayGroups = []) => {
     .sort((left, right) => left.isoDate.localeCompare(right.isoDate))[0];
 
   if (!upcoming) {
-    return "Sem feriado futuro cadastrado no radar local.";
+    return "Sem feriado futuro cadastrado no momento.";
   }
 
   const holidayMs = Date.parse(`${upcoming.isoDate}T12:00:00Z`);
   const diffDays = Math.round((holidayMs - todayMs) / 86400000);
   const plural = diffDays === 1 ? "" : "s";
 
-  return `Proximo feriado no radar: ${upcoming.name} em ${diffDays} dia${plural}.`;
+  return `Próximo feriado: ${upcoming.name} em ${diffDays} dia${plural}.`;
 };
 
 const buildHolidayMarkup = (holidays) =>
@@ -10771,7 +10770,7 @@ const renderSidebarWidgets = (options = {}) => {
     holidaysPanel.innerHTML = `
     <div class="sidebar-heading">
       <div>
-        <p class="widget-title">Feriados no Radar</p>
+        <p class="widget-title">Próximos feriados</p>
         <span class="widget-source">nacional + Acre + municipio</span>
       </div>
       <a class="widget-link" href="${sidebarData.holidays.sourceUrl}" target="_blank" rel="noreferrer">fonte oficial</a>
@@ -10796,7 +10795,7 @@ const renderSidebarWidgets = (options = {}) => {
   if (nationalPanel) {
     nationalPanel.innerHTML = buildListPanelMarkup({
       title: "Nacional do Dia",
-      source: "servico, consumo e custo de vida no radar",
+      source: "serviço, consumo e custo de vida",
       items: sidebarData.national,
       actionLabel: "economia",
       actionUrl: "https://agenciabrasil.ebc.com.br/economia"
@@ -10854,7 +10853,7 @@ const renderSidebarWidgets = (options = {}) => {
   if (famousPanel) {
     famousPanel.innerHTML = buildListPanelMarkup({
       title: "Famosos",
-      source: "pop, relacionamento e bastidor",
+      source: "pop, relacionamento e conversa pública",
       items: sidebarData.famous,
       actionLabel: "gshow",
       actionUrl: "https://gshow.globo.com/cultura-pop/famosos/"
@@ -11351,7 +11350,7 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
     foundersList.innerHTML = `
       <article class="founder-card is-empty">
         <strong>Quem fortalece este jornal</strong>
-        <p>Marcas, profissionais e leitores que apoiam a cobertura local ganham presença neste espaço.</p>
+        <p>Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público.</p>
       </article>
     `;
     return;
