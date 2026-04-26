@@ -1,6 +1,6 @@
 {
-  "trigger": "auto-inicializacao",
-  "checkedAt": "2026-04-26T05:39:48.251Z",
+  "trigger": "auto-30-minutos",
+  "checkedAt": "2026-04-26T11:47:53.579Z",
   "totalHomeLinked": 23,
   "missingCount": 0,
   "missing": [],
