@@ -69,7 +69,8 @@
       "summary": "O anuncio oficial confirmou a estreia televisiva de especial de palco de Bluey em 16 de marco e a chegada dos episodios curtos ao Disney+ em 20 de maio.",
       "publishedAt": "2026-03-12T12:00:00.000Z",
       "category": "Cartoons",
-      "topicGroup": "animation"
+      "topicGroup": "animation",
+      "sourceLabel": "Mais Bluey chega ao Disney+ com especial de palco e leva de episodios curtos"
     },
     {
       "sourceName": "YouTube Blog",
@@ -88,7 +89,8 @@
       "summary": "A nova serie animada foi lancada no YouTube com foco em imaginacao, fantasia, criatividade e autoexpressao para o publico pequeno.",
       "publishedAt": "2026-04-09T12:00:00.000Z",
       "category": "Cartoons",
-      "topicGroup": "animation"
+      "topicGroup": "animation",
+      "sourceLabel": "Moonbug estreia Emmie's Wonder Wardrobe, série derivada pre-escolar de Little Angel"
     },
     {
       "sourceName": "Animation World Network",
@@ -97,7 +99,8 @@
       "summary": "A mudanca criativa em Peppa Pig virou pauta internacional e ajuda a acompanhar como as grandes series infantis estao se renovando.",
       "publishedAt": "2026-04-03T12:00:00.000Z",
       "category": "Cartoons",
-      "topicGroup": "animation"
+      "topicGroup": "animation",
+      "sourceLabel": "Peppa Pig entra em nova fase com Adam Redfern como responsável criativo"
     },
     {
       "sourceName": "YouTube Blog",
@@ -106,7 +109,8 @@
       "summary": "O canal oficial destacou como canais e criadores seguem puxando novidades, licenciamento e entretenimento digital para familias e criancas.",
       "publishedAt": "2026-03-23T12:00:00.000Z",
       "category": "Creators",
-      "topicGroup": "creators"
+      "topicGroup": "creators",
+      "sourceLabel": "YouTube reforca parceria entre marcas e criadores em 2026"
     },
     {
       "sourceName": "Anime News Network",
@@ -127,7 +131,8 @@
       "summary": "O calendario de estreias segue como guia rapido para saber o que voltou, o que estreou e o que merece contexto antes de viralizar na comunidade de fãs.",
       "publishedAt": "2026-04-13T12:00:00.000Z",
       "category": "Anime",
-      "topicGroup": "premieres"
+      "topicGroup": "premieres",
+      "sourceLabel": "Calendario de exibição simultânea ajuda a acompanhar a semana dos animes"
     },
     {
       "sourceName": "Anime News Network",
@@ -136,7 +141,8 @@
       "summary": "A fonte ajuda a separar anuncio oficial, rumor e movimentacao de mercado para transformar anime em editoria organizada.",
       "publishedAt": "2026-04-12T12:00:00.000Z",
       "category": "Anime",
-      "topicGroup": "industry"
+      "topicGroup": "industry",
+      "sourceLabel": "Anime News Network monitora trailers, industria e temporadas globais"
     },
     {
       "sourceName": "YouTube Blog",
@@ -145,7 +151,8 @@
       "summary": "A conversa de anime tambem passa por animacao pela internet, fanart, dublagem, canais de análise e comunidades que descobrem obras fora da TV tradicional.",
       "publishedAt": "2026-04-09T12:00:00.000Z",
       "category": "Creators",
-      "topicGroup": "community"
+      "topicGroup": "community",
+      "sourceLabel": "Animacao independente mostra a forca de comunidades, criadores e comunidades de fãs"
     },
     {
       "sourceName": "PlayStation Blog",
@@ -154,7 +161,8 @@
       "summary": "Quando franquias de anime entram em servicos de jogos, a editoria cruza lancamento, comunidade de fãs, acessibilidade e descoberta para novos publicos.",
       "publishedAt": "2026-04-01T12:00:00.000Z",
       "category": "Games",
-      "topicGroup": "games"
+      "topicGroup": "games",
+      "sourceLabel": "Sword Art pela internet no PS Plus reforca a ponte entre anime e games"
     }
   ],
   "games": [
@@ -165,7 +173,8 @@
       "summary": "O site da Nintendo confirma mundo conectado, corridas pela internet com ate 24 pilotos, campeonatos, prova eliminatoria e modo livre.",
       "publishedAt": "2026-04-15T12:00:00.000Z",
       "category": "Games",
-      "topicGroup": "premieres"
+      "topicGroup": "premieres",
+      "sourceLabel": "Mario Kart World chega como vitrine do Nintendo Switch 2"
     },
     {
       "sourceName": "Xbox Wire",

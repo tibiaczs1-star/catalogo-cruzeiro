@@ -1,6 +1,6 @@
 {
   "topic": "anime",
-  "updatedAt": "2026-04-26T23:27:52.177Z",
+  "updatedAt": "2026-04-27T13:55:17.188Z",
   "items": [
     {
       "id": "animacao-independente-mostra-a-forca-de-comunidades-criadores-e-comunidades-de-fas",
@@ -108,11 +108,7 @@
       "editorialPriority": "",
       "topic": "anime",
       "coverageLayer": "global",
-      "topicGroup": "games",
-      "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
-      "originalImageUrl": "",
-      "originalFeedImageUrl": "",
-      "originalSourceImageUrl": ""
+      "topicGroup": "games"
     },
     {
       "id": "anime-news-network-monitora-trailers-industria-e-temporadas-globais",
@@ -148,11 +144,7 @@
       "editorialPriority": "",
       "topic": "anime",
       "coverageLayer": "global",
-      "topicGroup": "industry",
-      "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
-      "originalImageUrl": "",
-      "originalFeedImageUrl": "",
-      "originalSourceImageUrl": ""
+      "topicGroup": "industry"
     }
   ],
   "reports": [

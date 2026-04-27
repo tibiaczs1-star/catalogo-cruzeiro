@@ -1,14 +1,14 @@
 {
   "ok": true,
-  "startedAt": "2026-04-27T12:06:44.153Z",
-  "finishedAt": "2026-04-27T12:06:46.307Z",
+  "startedAt": "2026-04-27T17:56:47.034Z",
+  "finishedAt": "2026-04-27T17:56:49.549Z",
   "source": "Re Rodada do Dia Geral",
   "cachedFallback": false,
   "cachedFallbackReason": "",
   "onlineAuditBefore": {
     "total": 360,
     "missing": 0,
-    "sameDivisionDuplicates": 8
+    "sameDivisionDuplicates": 4
   },
   "localAuditAfterSync": {
     "total": 360,
@@ -16,12 +16,12 @@
     "sameDivisionDuplicates": 0
   },
   "archiveAuditAfterSync": {
-    "total": 360,
+    "total": 443,
     "missing": 0,
-    "sameDivisionDuplicates": 0
+    "sameDivisionDuplicates": 2
   },
   "activeWindowItems": 360,
-  "archiveItems": 360,
+  "archiveItems": 443,
   "syncFetchLimit": 1000,
   "repairedImages": 54,
   "activeWindowRepairedImages": 54,

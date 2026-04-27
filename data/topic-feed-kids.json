@@ -1,6 +1,6 @@
 {
   "topic": "kids",
-  "updatedAt": "2026-04-26T23:24:27.382Z",
+  "updatedAt": "2026-04-27T15:23:12.606Z",
   "items": [
     {
       "id": "relatorio-do-youtube-mostra-como-animadores-pela-internet-mudam-o-entretenimento",
@@ -144,11 +144,7 @@
       "editorialPriority": "",
       "topic": "kids",
       "coverageLayer": "global",
-      "topicGroup": "animation",
-      "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
-      "originalImageUrl": "",
-      "originalFeedImageUrl": "",
-      "originalSourceImageUrl": ""
+      "topicGroup": "animation"
     },
     {
       "id": "radar-infantil-acompanha-estreias-animacoes-e-videos-de-anuncio-da-temporada",
@@ -184,11 +180,7 @@
       "editorialPriority": "",
       "topic": "kids",
       "coverageLayer": "global",
-      "topicGroup": "anime",
-      "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
-      "originalImageUrl": "",
-      "originalFeedImageUrl": "",
-      "originalSourceImageUrl": ""
+      "topicGroup": "anime"
     },
     {
       "id": "peppa-pig-entra-em-nova-fase-com-adam-redfern-como-responsavel-criativo",
@@ -224,11 +216,7 @@
       "editorialPriority": "",
       "topic": "kids",
       "coverageLayer": "global",
-      "topicGroup": "animation",
-      "imageQuality": "imagem-ausente-ou-generica-buscar-na-fonte",
-      "originalImageUrl": "",
-      "originalFeedImageUrl": "",
-      "originalSourceImageUrl": ""
+      "topicGroup": "animation"
     }
   ],
   "reports": [
