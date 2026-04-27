@@ -1,12 +1,13 @@
 # Handoff
 
-Updated: 2026-04-27T03:57:41.341Z
+Updated: 2026-04-27T05:00:28.399Z
 
-PR #2 e PR #3 foram mergeados. A etapa final encontrou uma pendencia real na API online: o servidor tratava `/assets/news-fallbacks/` como imagem fraca e zerava `imageUrl` quando havia `sourceUrl`.
+O usuario proibiu texto publico em ingles apos enviar captura de uma noticia de Cultura com resumo em ingles. A rodada corrigiu o item do Google e outros vazamentos de The Verge encontrados em `news-data.js`, `data/news-archive.json`, `data/runtime-news.json` e `data/topic-feed-tech.json`.
 
-`server.js` foi corrigido para aceitar fallback local seguro e manter imagem na resposta da API. Validacao local: 360/360 noticias com imagem em `/api/news?limit=400`.
+Foi criada trava permanente no `scripts/review-team-audit.js`: `language-review` percorre campos publicos como title, sourceLabel, lede, summary, body, highlights e development em arquivos publicos de noticia. A regra permite nomes proprios de marcas/fontes, mas bloqueia frases publicas em ingles copiadas da fonte.
+
+Agentes informados em `AGENTS.md` e `.codex-review-team/README.md`. Validado com `node --check scripts/review-team-audit.js` e `node scripts/review-team-audit.js` retornando `totalIssues: 0`.
 
 ## Next
 
-- Publicar/mergear hotfix de `server.js`.
-- Conferir Render online apos deploy: Home 200 e `/api/news?limit=400` com missingCount=0.
+- Commitar e publicar esta rodada quando o git remoto estiver disponivel.

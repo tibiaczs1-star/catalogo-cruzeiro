@@ -999,6 +999,17 @@
         "2026-04-26-automation-sync-online-local-12h"
       ],
       "createdAt": "2026-04-26T06:02:44.724Z"
+    },
+    {
+      "id": "feedback-google-card-ingles-publico-20260427",
+      "kind": "screenshot",
+      "path": "chat-attachments/2026-04-27-google-card-ingles-publico.png",
+      "source": "chat",
+      "note": "Captura enviada pelo usuario mostrando card/noticia de Cultura com resumo em ingles sobre novo visual dos icones do Google.",
+      "linkedOrderIds": [
+        "2026-04-27-bloquear-ingles-publico-noticias"
+      ],
+      "createdAt": "2026-04-27T05:00:28.399Z"
     }
   ]
 }

@@ -1,17 +1,19 @@
 # Current State
 
-Updated: 2026-04-27T03:57:41.341Z
+Updated: 2026-04-27T05:00:28.399Z
 
 ## Active Goal
 
-- PRs mergeados e hotfix de imagens da API em andamento
+- Bloquear vazamento de texto publico em ingles nas noticias
 
 ## Summary
 
-Os PRs #2 e #3 foram marcados como prontos e mergeados em `main`. A verificacao online confirmou a Home nova no ar, mas revelou que `/api/news` ainda limpava URLs `/assets/news-fallbacks/` em alguns itens. O `server.js` foi corrigido para aceitar fallbacks locais seguros e gerar fallback em vez de zerar `imageUrl`.
+A captura do usuario mostrou uma noticia de Cultura com resumo em ingles sobre icones do Google. A rodada corrigiu esse item e outros vazamentos encontrados em espelhos publicos de noticias: `data/news-archive.json`, `data/runtime-news.json`, `news-data.js` e `data/topic-feed-tech.json`.
 
-Validacao local do hotfix: `node --check server.js`; servidor local em `4117` com `/api/news?limit=400` retornando 360/360 itens com imagem e missingCount=0.
+A equipe local foi informada em `AGENTS.md` e `.codex-review-team/README.md`. O auditor `scripts/review-team-audit.js` agora inclui a rotina `language-review`, que verifica campos publicos de noticia e marca erro alto quando encontra prosa em ingles.
+
+Validacao atual: `node --check scripts/review-team-audit.js` ok; `node scripts/review-team-audit.js` retornou `totalIssues: 0`; varredura final nao encontrou as frases em ingles corrigidas.
 
 ## Next
 
-- Subir e mergear o hotfix pequeno de `server.js`, depois revalidar `/api/news` no Render.
+- Preparar commit/push da rodada de idioma se o remoto estiver acessivel.

@@ -37,6 +37,13 @@ O auditor ja ignora diretorios de ambiente temporario e headless, alem de nao tr
 - A pagina `noticia.html` e o modulo de leitura podem manter a estrutura completa: corpo, analise, contexto, destaques, fonte e desenvolvimento.
 - A auditoria marca erro alto quando a home usa `summary`, `lede`, `description` ou `rawLede` bruto sem `displaySummary`, `truncateCopy` ou normalizacao equivalente.
 
+## Erro treinado: texto publico em ingles
+
+- Nenhum titulo, chamada, resumo, lede, destaque ou corpo publico de noticia deve sair em ingles.
+- Nomes proprios de fontes e marcas podem permanecer como foram publicados, por exemplo `The Verge`, `Google` ou `Microsoft`.
+- Quando a fonte trouxer resumo em ingles, o agente deve reescrever a informacao em portugues antes de publicar ou sincronizar os dados.
+- O comando `npm run review:team` agora inclui a checagem `language-review` e deve ser usado como trava antes de commit, PR, merge ou deploy editorial.
+
 ## Saidas do auditor
 
 - `.codex-temp/review-team/latest-report.json`
