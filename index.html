@@ -70,7 +70,7 @@
   <link rel="stylesheet" href="sala-redacao-real.css?v=20260414q" />
   <link rel="stylesheet" href="photo-layout-fix.css?v=20260411ab" />
   <link rel="stylesheet" href="agentes-newsroom-hero.css?v=20260420hero-visiblefix" />
-  <link rel="stylesheet" href="startup-experience.css?v=20260425mobile-cookie-card1" />
+  <link rel="stylesheet" href="startup-experience.css?v=20260427-popup-illustration-console1" />
   <link rel="stylesheet" href="./insiders-crowd-march.css?v=20260426caption-outside" />
   <link rel="stylesheet" href="pro-design.css?v=20260420hero-visiblefix" />
   <link rel="stylesheet" href="news-photo-fix.css?v=20260415a" />
@@ -678,12 +678,12 @@
           aria-labelledby="community-signal-title"
         >
           <div class="community-signal-copy">
-            <p class="community-signal-kicker">participação comunitária voluntária</p>
-            <h2 id="community-signal-title">Conte o que aconteceu no seu bairro.</h2>
+            <p class="community-signal-kicker">chat de informações da cidade</p>
+            <h2 id="community-signal-title">Conversa da cidade.</h2>
             <p>
-              Relatos enviados pela população aparecem aqui como aviso comunitário
-              <strong>ainda não confirmado</strong>. Quando a informação é conferida, ela pode
-              virar serviço, alerta ou notícia para ajudar outros moradores.
+              Envie um aviso, opinião ou informação rápida do seu bairro. As mensagens
+              aparecem como relatos da população e algumas podem ser conferidas antes de
+              ganhar destaque.
             </p>
 
             <article
@@ -744,8 +744,8 @@
                 <span class="community-alert-mark">!</span>
                 <div class="community-message-card">
                   <small>bairro</small>
-                  <strong>tem algo acontecendo aqui</strong>
-                  <span>enviando relato...</span>
+                  <strong>alguém comentou por aqui</strong>
+                  <span>mensagem chegando...</span>
                 </div>
                 <div class="community-phone-person">
                   <span class="person-head"></span>
@@ -763,16 +763,16 @@
 
             <form class="community-agent-form" id="community-agent-form">
               <label>
-                Bairro ou local
+                De onde vem essa informação?
                 <input name="neighborhood" maxlength="90" placeholder="Ex: Miritizal, Centro, Boca da Alemanha" />
               </label>
               <label>
-                O que precisa ser conferido?
+                O que você quer contar para a população?
                 <textarea
                   name="message"
                   rows="4"
                   maxlength="900"
-                  placeholder="Ex: olha, isso aconteceu no bairro e seria bom verificar..."
+                  placeholder="Ex: tem um aviso, comentário ou informação rápida que o pessoal precisa saber..."
                   required
                 ></textarea>
               </label>
@@ -786,17 +786,17 @@
                   <input name="contact" maxlength="100" placeholder="Opcional, não aparece no card" />
                 </label>
               </div>
-              <button type="submit">Enviar relato para conferência</button>
+              <button type="submit">Enviar mensagem</button>
               <p class="community-agent-feedback" id="community-agent-feedback" role="status">
-                Recebemos seu relato e conferimos antes de publicar qualquer atualização.
+                As mensagens entram como informação da população e podem passar por conferência.
               </p>
             </form>
           </div>
 
-          <div class="community-signal-board" aria-label="Relatos comunitários ainda não confirmados">
+          <div class="community-signal-board" aria-label="Mensagens recentes da população">
             <div class="community-signal-board-head">
-              <span>informações da população</span>
-              <strong>Aguardando conferência</strong>
+              <span>mensagens da população</span>
+              <strong>Chat comunitário</strong>
             </div>
             <div class="community-report-list" id="community-report-list"></div>
           </div>
@@ -3222,8 +3222,8 @@
     <script defer src="./sidebar-widgets-recovery.js?v=20260423a"></script>
   <script defer src="runtime-config.js?v=20260415d"></script>
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
-    <script defer src="./startup-experience.js?v=20260425mobile-cookie-card1"></script>
-  <script defer src="./script.js?v=20260426-cadernos-staticos1"></script>
+    <script defer src="./startup-experience.js?v=20260427-popup-headline1"></script>
+  <script defer src="./script.js?v=20260427-console-cleanup1"></script>
     <script defer src="deferred-home-boot.js?v=20260424startup-office-loader"></script>
 </body>
 </html>

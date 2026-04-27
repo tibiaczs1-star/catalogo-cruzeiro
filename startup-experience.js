@@ -820,7 +820,7 @@
 
     return `
         <div class="${visualClass}" aria-hidden="true">
-        <div class="catalogo-stage-chip">Preferencias e cookies</div>
+        <div class="catalogo-stage-chip">MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS</div>
 
         <div class="catalogo-cosmos">
           <span class="catalogo-sky-glow glow-a"></span>
@@ -903,8 +903,8 @@
         </div>
 
         <div class="catalogo-prophecy-panel" aria-hidden="true">
-          <span class="catalogo-prophecy-kicker">Terminal de previsao alegorica</span>
-          <strong class="catalogo-prophecy-title">Codigo, caos e manchete montando a cena</strong>
+          <span class="catalogo-prophecy-kicker">Ilustracao alegorica do portal</span>
+          <strong class="catalogo-prophecy-title">Tecnologia transforma barulho em manchete</strong>
           <div class="catalogo-prophecy-console">
             <span class="catalogo-prophecy-console-line">> pintar linha 01 :: binario bruto</span>
             <span class="catalogo-prophecy-console-line">> converter :: ASCII :: probabilidade</span>
@@ -1017,8 +1017,8 @@
         </div>
 
         <div class="catalogo-visual-copy">
-          <strong>Preferencias de navegacao</strong>
-          <span>Seu aceite permite usar cookies e metricas para entender a navegacao e melhorar o portal.</span>
+          <strong>O que essa cena mostra</strong>
+          <span>Uma ilustracao ficticia da IA organizando memes, alertas e noticias antes da entrada no portal.</span>
         </div>
       </div>
     `;
@@ -1042,7 +1042,7 @@
         <div class="catalogo-welcome-copy">
           <div class="catalogo-compact-banner" aria-hidden="true">
             <span class="catalogo-compact-dot"></span>
-            <strong>Preferencias e cookies</strong>
+            <strong>MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS</strong>
           </div>
           ${buildWelcomeCopyMarkup({ phone })}
         </div>

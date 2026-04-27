@@ -1,5 +1,20 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-27 - Popup explicado e console limpo
+
+- Corrigido feedback do usuario no popup de cookies: o primeiro texto agora explica a ilustracao (`Ilustracao: IA lendo o caos do dia`) e a faixa lateral descreve que a cena e uma ilustracao ficticia da IA organizando memes, alertas e noticias.
+- Reduzido o barulho de console da home: `requestApiJson` virou funcao hoistada, candidatos de imagem ignoram pixel `ebc.gif`, a amostragem de cor nao tenta ler canvas de imagem remota sem CORS e `/api/preview-image` retorna `200` com `imageUrl` vazio quando nao encontra imagem.
+- O feed `data/topic-feed-tech.json` foi saneado para portugues depois que `npm run review:team` apontou 18 vazamentos de ingles.
+- Validacoes: `node --check startup-experience.js`, `node --check script.js`, `node --check server.js`, brace-balance 0 em CSS, Playwright local em `http://127.0.0.1:4116/?skipIntro=1#participacao-comunitaria` sem linha de console errors e `npm run review:team` com `totalIssues=0`.
+
+## Atualizacao rapida 2026-04-27 - Participacao comunitaria como chat
+
+- Executado pedido do usuario para mudar a area `#participacao-comunitaria` da home: saiu o tom de envio formal de noticia e entrou o conceito de chat/mural de informacoes da populacao.
+- `index.html` agora apresenta `Conversa da cidade`, campos com linguagem de mensagem comunitaria e board `Chat comunitario`.
+- `script.js` renderiza cards como mensagens em conferencia, com nome/bairro/tempo e feedback de envio mais conversado.
+- `styles.css` ganhou visual de bolhas/cards de mensagem no feed da direita; `server.js` atualizou labels e respostas da API para `Mensagem comunitaria`.
+- Validacoes: `node --check script.js`, `node --check server.js`, brace-balance 0 em `styles.css`; Playwright local em `http://127.0.0.1:4114/#participacao-comunitaria` confirmou textos novos renderizados. Console ainda mostra erros antigos fora desta frente (`requestApiJson` antes da inicializacao e CORS de imagens externas).
+
 ## Atualizacao rapida 2026-04-26 - Hotfix API fallbacks de noticia
 
 - PR #2 e PR #3 foram mergeados em `main`.
@@ -459,3 +474,4 @@ Leitura atual dessas validacoes:
 - Reserva PubPaid em 2026-04-25: por ordem do usuario, qualquer ajuste local da PubPaid deve ficar fora de commit/deploy ate nova autorizacao explicita.
 - Trava de idioma publico criada em 2026-04-27: corrigidos vazamentos de texto em ingles em `news-data.js`, `data/news-archive.json`, `data/runtime-news.json` e `data/topic-feed-tech.json`; `scripts/review-team-audit.js` ganhou `language-review`; `AGENTS.md` e `.codex-review-team/README.md` avisam que titulos, chamadas, ledes, resumos, destaques e corpo publico de noticia devem sair em portugues. Validado com `node --check scripts/review-team-audit.js` e `node scripts/review-team-audit.js` (totalIssues=0). Commit `26a4dc9` foi mergeado no PR #5 em `origin/main` (`8117d4d`).
 - Rodada de segunda em 2026-04-27: `npm run sync:online-local` passou com 360 noticias no acervo/janela ativa, 0 imagens ausentes, 0 duplicatas locais por divisao, `sanitize public language` integrado e `review:team` totalIssues=0; `npm run audit:news-images -- --offline --limit=1000 --strict-new` retornou 360/360 ok; `npm run agents:cycle` rodou 181 agentes/5 escritorios com 360 noticias. Novo `scripts/sanitize-public-language.js` fica chamado por `scripts/sync-online-local.js` para sanear idioma publico antes do review. PubPaid seguiu fora do pacote sem autorizacao explicita. Commit `e325d52` foi mergeado no PR #7 em `origin/main` (`cf33a01`).
+- Nova fase PubPaid em 2026-04-27: criado `PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md` para iniciar novas conversas/rodadas como instrutor de testes, auditor de ruido, condutor de reuniao e organizador de objetivos antes de criar novas funcionalidades. O prompt fixa `pubpaid-v2.html` + `pubpaid-phaser/` como frente oficial, preserva a trava de deploy PubPaid sem autorizacao explicita e exige fila P0/P1/P2 com evidencias.

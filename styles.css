@@ -15514,7 +15514,7 @@ input[type="range"] {
   }
 }
 
-/* Participacao comunitaria: cena de morador enviando relato para a redacao */
+/* Participacao comunitaria: chat de informacoes enviadas pela populacao */
 .community-signal-section {
   display: grid;
   grid-template-columns: minmax(220px, 0.58fr) minmax(0, 1.65fr) minmax(210px, 0.48fr);
@@ -16186,7 +16186,7 @@ input[type="range"] {
 }
 
 .community-report-list:empty::before {
-  content: "Os relatos enviados pela população aparecem aqui para aguardar checagem.";
+  content: "As mensagens da população aparecem aqui como avisos, opiniões e informações rápidas.";
   display: grid;
   place-items: center;
   min-height: 180px;
@@ -16198,6 +16198,78 @@ input[type="range"] {
   line-height: 1.4;
   text-align: center;
   background: rgba(255, 248, 234, 0.52);
+}
+
+.community-report-card,
+.community-report-empty {
+  position: relative;
+  display: grid;
+  gap: 0.42rem;
+  padding: 0.72rem 0.82rem 0.78rem;
+  border: 1px solid rgba(229, 197, 197, 0.7);
+  border-radius: 14px;
+  background: #fff7f7;
+  color: #172033;
+  box-shadow: 0 12px 22px rgba(3, 14, 28, 0.12);
+}
+
+.community-report-card::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 1rem;
+  width: 12px;
+  height: 12px;
+  background: #fff7f7;
+  border-left: 1px solid rgba(229, 197, 197, 0.7);
+  border-bottom: 1px solid rgba(229, 197, 197, 0.7);
+  transform: rotate(45deg);
+}
+
+.community-report-card header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.48rem;
+}
+
+.community-report-card header span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.18rem;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: #b4232d;
+  color: #fff7f7;
+  font-size: 0.58rem;
+  font-weight: 950;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.community-report-card header strong {
+  min-width: 0;
+  color: #172033;
+  font-size: 0.82rem;
+  font-weight: 950;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.community-report-card p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.88rem;
+  line-height: 1.42;
+}
+
+.community-report-card small,
+.community-report-card time {
+  color: #677083;
+  font-size: 0.68rem;
+  line-height: 1.25;
 }
 
 @keyframes communityAlertPulse {

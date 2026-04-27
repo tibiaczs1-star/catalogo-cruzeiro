@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T13:17:04.461Z",
+  "lastUpdatedAt": "2026-04-27T14:13:19.768Z",
   "orders": [
     {
       "id": "2026-04-26-hotfix-api-fallback-news-images",
@@ -7445,6 +7445,86 @@
         "Aguardar o Render propagar o deploy do main e, se necessario, conferir online apos alguns minutos."
       ],
       "notes": "Sincronizacao integrada retornou 360 noticias ativas/acervo, 0 imagens ausentes, 0 duplicatas locais por divisao, language sanitizer ok, review-team totalIssues=0 e agents:cycle ok com 181 agentes/5 escritorios. Commit e325d52 entrou no PR #7 e foi mergeado em origin/main no merge commit cf33a01."
+    },
+    {
+      "id": "2026-04-27-criar-prompt-mestre-para-a-nova-fase-pubpaid-2-0-como-instrutor-de-testes-audito",
+      "createdAt": "2026-04-27T13:37:02.578Z",
+      "updatedAt": "2026-04-27T13:37:02.578Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "verifique agora toda a pasta local e sua propria memoria; iniciar novas conversas e rodadas como instrutor de testes do sistema; comecar a cuidar do PaidPub/PubPaid; montar o prompt primeiro",
+      "summary": "Criar prompt mestre para a nova fase PubPaid 2.0 como instrutor de testes, auditor de ruido, condutor de reuniao e organizador de objetivos",
+      "normalizedTasks": [
+        "ler memoria local",
+        "criar prompt mestre PubPaid",
+        "incluir rotina de ruido",
+        "incluir reuniao de agentes",
+        "incluir validacao minima PubPaid",
+        "incluir trava de portugues publico"
+      ],
+      "filesTouched": [
+        "PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "prompt",
+        "instrutor-testes",
+        "reuniao",
+        "memoria",
+        "ruido"
+      ],
+      "nextSteps": [
+        "executar varredura geral da pasta local e memoria",
+        "rodar reuniao orientada por objetivos",
+        "produzir fila P0/P1/P2 para PubPaid"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-transformar-participacao-comunitaria-em-chat-mural-de-informacoes-da-populacao",
+      "createdAt": "2026-04-27T13:47:00.704Z",
+      "updatedAt": "2026-04-27T13:47:00.704Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Executar prompt para mudar a area Participacao Comunitaria Voluntaria da home para funcionar mais como bate-papo/chat de informacoes da populacao, com opinioes, avisos pequenos e informacoes locais em vez de envio formal de noticias.",
+      "summary": "Transformar participacao comunitaria em chat/mural de informacoes da populacao",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-ajustar-copy-inicial-do-popup-e-reduzir-erros-de-console",
+      "createdAt": "2026-04-27T13:59:59.747Z",
+      "updatedAt": "2026-04-27T13:59:59.747Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Corrigir o popup: o primeiro texto deve explicar o que e a ilustracao. Reduzir/zerar erros no console porque o projeto e avaliado.",
+      "summary": "Ajustar copy inicial do popup e reduzir erros de console",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-trocar-selo-do-popup-para-manchete-editorial-sobre-mundo-em-guerra-e-escolhas-pe",
+      "createdAt": "2026-04-27T14:13:19.768Z",
+      "updatedAt": "2026-04-27T14:13:19.768Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Substituir o texto do selo no topo por manchete curta e ironica alinhada a ilustracao, sem repetir cookies; usar MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS.",
+      "summary": "Trocar selo do popup para manchete editorial sobre mundo em guerra e escolhas pequenas, sem redundancia de cookies.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

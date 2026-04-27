@@ -4028,6 +4028,7 @@ function shouldIgnoreImageUrl(value) {
   }
   if (
     imageUrl.includes("agenciabrasil.ebc.com.br/ebc.png") ||
+    imageUrl.includes("agenciabrasil.ebc.com.br/ebc.gif") ||
     imageUrl.includes("/edital-assinado-")
   ) {
     return true;
@@ -7357,13 +7358,13 @@ function normalizeCommunityReport(item = {}) {
     name: cleanShortText(item.name || "Morador local", 80),
     neighborhood: cleanShortText(item.neighborhood || item.bairro || "Bairro nao informado", 90),
     city: cleanShortText(item.city || "Cruzeiro do Sul - AC", 90),
-    topic: cleanShortText(item.topic || "Relato comunitario", 100),
+    topic: cleanShortText(item.topic || "Mensagem comunitaria", 100),
     message: cleanShortText(item.message || item.details || item.text, 900),
     contact: cleanShortText(item.contact || item.phone || item.whatsapp || "", 100),
     status: cleanShortText(item.status || "nao-checado", 40),
     verificationStatus: cleanShortText(item.verificationStatus || "nao-checado", 40),
     publicNote:
-      "Participacao comunitaria voluntaria. Informacao recebida da populacao, ainda nao checada pela equipe.",
+      "Informacao enviada pela populacao. Pode conter aviso, opiniao ou relato local ainda nao checado.",
     createdAt: cleanShortText(item.createdAt || new Date().toISOString(), 60)
   };
 }
@@ -7381,9 +7382,9 @@ function getCommunityReportsPayload(limit = 8) {
   return {
     ok: true,
     updatedAt: new Date().toISOString(),
-    label: "Participacao comunitaria voluntaria",
+    label: "Chat de informacoes da populacao",
     verificationRule:
-      "Este bloco mostra apenas relatos ainda nao checados. Informacoes verificadas devem sair daqui e virar checagem, servico ou noticia em area propria.",
+      "Este bloco mostra mensagens da populacao. Informacoes relevantes podem ser conferidas antes de virar servico, alerta ou noticia em area propria.",
     total: publicItems.length,
     items: publicItems
   };
@@ -7393,13 +7394,13 @@ function recordCommunityReport(body = {}, req = null) {
   const tracking = req ? buildTrackingMeta(req, body) : {};
   const message = cleanShortText(body.message || body.details || body.text, 900);
   const neighborhood = cleanShortText(body.neighborhood || body.bairro, 90);
-  const topic = cleanShortText(body.topic || body.subject || "Relato comunitario", 100);
+  const topic = cleanShortText(body.topic || body.subject || "Mensagem comunitaria", 100);
 
   if (!message || message.length < 12) {
     return {
       ok: false,
       status: 400,
-      error: "Escreva um relato com um pouco mais de contexto para a equipe avaliar."
+      error: "Escreva uma mensagem com um pouco mais de contexto para ajudar outros moradores."
     };
   }
 
@@ -7429,10 +7430,10 @@ function recordCommunityReport(body = {}, req = null) {
     from: "Comunidade",
     to: "Codex CEO + Revisor Bento + Sofia Fontes",
     priority: "normal",
-    message: `Relato comunitario nao checado recebido: ${report.topic} em ${report.neighborhood}. ${report.message}`,
+    message: `Mensagem comunitaria recebida: ${report.topic} em ${report.neighborhood}. ${report.message}`,
     ceoReply:
-      "Recebido. O relato fica publico como nao checado e entra na fila para verificacao antes de virar noticia.",
-    status: "relato-comunitario-nao-checado",
+      "Recebido. A mensagem fica como informacao da populacao e pode entrar na fila de verificacao antes de virar noticia.",
+    status: "mensagem-comunitaria-recebida",
     hierarchy: "Comunidade -> Avatar comunitario -> Codex CEO -> agentes de verificacao",
     createdAt: report.createdAt
   });
@@ -7442,7 +7443,7 @@ function recordCommunityReport(body = {}, req = null) {
     status: 201,
     item: report,
     message:
-      "Relato recebido. Ele fica marcado como nao checado e pode aparecer na area de participacao comunitaria voluntaria."
+      "Mensagem recebida. Ela pode aparecer no chat de informacoes da populacao."
   };
 }
 
@@ -11340,7 +11341,7 @@ async function handleApi(req, res, pathname, searchParams) {
     const targetUrl = searchParams.get("url") || "";
     const imageUrl = await fetchPreviewImage(targetUrl);
     if (!imageUrl) {
-      return sendJson(res, 404, { ok: false, message: "Imagem nao encontrada." });
+      return sendJson(res, 200, { ok: false, imageUrl: "", message: "Imagem nao encontrada." });
     }
     return sendJson(res, 200, { ok: true, imageUrl });
   }

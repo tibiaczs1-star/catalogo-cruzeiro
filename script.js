@@ -597,7 +597,7 @@ const pushUniqueImageCandidate = (bucket, value) => {
 
 const buildImageLoadCandidates = (value) => {
   const raw = String(value || "").trim();
-  if (!raw || isHotlinkBlockedImageUrl(raw)) {
+  if (!raw || isHotlinkBlockedImageUrl(raw) || isTrackingPixelImageUrl(raw)) {
     return [];
   }
 
@@ -605,8 +605,16 @@ const buildImageLoadCandidates = (value) => {
   const proxiedUrl = sanitizeImageUrl(directUrl);
   const candidates = [];
 
+  if (!proxiedUrl) {
+    return candidates;
+  }
+
+  if (proxiedUrl !== directUrl) {
+    pushUniqueImageCandidate(candidates, proxiedUrl);
+    return candidates;
+  }
+
   pushUniqueImageCandidate(candidates, directUrl);
-  pushUniqueImageCandidate(candidates, proxiedUrl);
 
   return candidates;
 };
@@ -897,11 +905,29 @@ const buildFallbackThumbLighting = (article = {}, url = "") => {
   };
 };
 
+const canSampleImagePixels = (value = "") => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return false;
+  }
+
+  if (/^(?:data:|blob:)/i.test(raw)) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(raw, window.location.href);
+    return parsed.origin === window.location.origin;
+  } catch (_error) {
+    return !/^https?:\/\//i.test(raw);
+  }
+};
+
 const extractThumbLighting = (url, article = {}) => {
   const cacheKey = String(url || "").trim();
   const fallback = buildFallbackThumbLighting(article, cacheKey);
 
-  if (!cacheKey) {
+  if (!cacheKey || !canSampleImagePixels(cacheKey)) {
     return Promise.resolve(fallback);
   }
 
@@ -2296,6 +2322,22 @@ const getAnalyticsContext = () => {
   }
 };
 
+const formatCommunityMessageTime = (value) => {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "agora";
+  }
+
+  const diffMinutes = Math.max(0, Math.round((Date.now() - date.getTime()) / 60000));
+  if (diffMinutes < 2) return "agora";
+  if (diffMinutes < 60) return `${diffMinutes} min`;
+
+  const diffHours = Math.round(diffMinutes / 60);
+  if (diffHours < 24) return `${diffHours} h`;
+
+  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+};
+
 const buildCommunityReportCard = (report = {}) => {
   const article = document.createElement("article");
   const header = document.createElement("header");
@@ -2303,14 +2345,22 @@ const buildCommunityReportCard = (report = {}) => {
   const title = document.createElement("strong");
   const message = document.createElement("p");
   const footer = document.createElement("small");
+  const time = document.createElement("time");
 
   article.className = "community-report-card";
-  badge.textContent = "a confirmar";
+  badge.textContent = "em conferência";
   title.textContent = report.neighborhood || "Bairro não informado";
   message.textContent = report.message || "";
-  footer.textContent = `${report.name || "Morador local"} • participação comunitária voluntária`;
+  footer.textContent = `${report.name || "Morador local"} • informação da população`;
+  if (report.createdAt) {
+    time.dateTime = report.createdAt;
+    time.textContent = formatCommunityMessageTime(report.createdAt);
+  } else {
+    time.textContent = "agora";
+  }
 
   header.append(badge, title);
+  footer.append(" • ", time);
   article.append(header, message, footer);
   return article;
 };
@@ -2322,7 +2372,7 @@ const renderCommunityReports = (items = []) => {
   if (!items.length) {
     const empty = document.createElement("p");
     empty.className = "community-report-empty";
-    empty.textContent = "Ainda não há relatos comunitários aguardando conferência neste bloco.";
+    empty.textContent = "As próximas mensagens da população aparecem aqui como avisos, opiniões e informações rápidas.";
     communityReportList.appendChild(empty);
     return;
   }
@@ -2369,11 +2419,11 @@ const submitCommunityReport = async (event) => {
   const submitButton = communityAgentForm.querySelector('button[type="submit"]');
   const message = String(formData.get("message") || "").trim();
   if (message.length < 12) {
-    communityAgentFeedback.textContent = "Conte um pouco mais para entendermos o que precisa ser conferido.";
+    communityAgentFeedback.textContent = "Conte um pouco mais para a mensagem ajudar outros moradores.";
     return;
   }
 
-  communityAgentFeedback.textContent = "Recebendo o relato para conferência...";
+  communityAgentFeedback.textContent = "Enviando sua mensagem para o chat comunitário...";
   if (submitButton) {
     submitButton.disabled = true;
     submitButton.textContent = "Enviando...";
@@ -2385,7 +2435,7 @@ const submitCommunityReport = async (event) => {
     contact: String(formData.get("contact") || "").trim(),
     neighborhood: String(formData.get("neighborhood") || "").trim(),
     message,
-    topic: "Relato comunitário",
+    topic: "Mensagem comunitária",
     sourcePage: window.location.pathname,
     visitorId: analyticsContext.visitorId,
     sessionId: analyticsContext.sessionId
@@ -2398,7 +2448,7 @@ const submitCommunityReport = async (event) => {
     });
 
     communityAgentFeedback.textContent =
-      "Relato recebido. Vamos conferir as informações antes de publicar qualquer atualização.";
+      "Mensagem recebida. Ela entra como informação da população e pode passar por conferência.";
     communityAgentForm.reset();
     const refreshedItems = await loadCommunityReports();
     if (!Array.isArray(refreshedItems) || !refreshedItems.length) {
@@ -2410,7 +2460,7 @@ const submitCommunityReport = async (event) => {
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
-      submitButton.textContent = "Enviar relato para conferência";
+      submitButton.textContent = "Enviar mensagem";
     }
   }
 };
@@ -3584,7 +3634,7 @@ const rememberApiBase = (base = "") => {
   }
 };
 
-const requestApiJson = async (path, options = {}) => {
+async function requestApiJson(path, options = {}) {
   const nextHeaders = { ...(options.headers || {}) };
 
   if (options.body && !nextHeaders["Content-Type"]) {
@@ -3652,7 +3702,7 @@ const requestApiJson = async (path, options = {}) => {
   }
 
   throw lastError || new Error(`Falha em ${path}`);
-};
+}
 
 const copyTextToClipboard = async (value = "") => {
   const text = String(value || "").trim();
