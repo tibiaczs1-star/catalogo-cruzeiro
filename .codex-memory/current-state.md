@@ -1,17 +1,15 @@
 # Current State
 
-Updated: 2026-04-26T05:47:21.794Z
+Updated: 2026-04-26T23:36:23.955Z
 
 ## Active Goal
 
-- Subida final das pendencias locais
+- Home / Mais Assuntos corrigido
 
 ## Summary
 
-Ordem do usuario: pegar tudo da memoria que faltava subir e enviar. Checks locais passaram: node --check em JS principais e npm run review:team totalIssues 0.
+O bloco Mais Assuntos foi transformado em vitrine estatica de 14 cadernos/subsites reais, com links e imagens locais unicas. Foram removidas as peliculas brancas/translucidas das miniaturas e o brilho branco decorativo dos cards. O hidratador de noticias agora ignora cards marcados como data-caderno-static para nao trocar por feed repetido, sem foto ou texto cru.
 
 ## Next
 
-- Commitar
-- enviar para origin/main e render-target/main
-- depois confirmar status limpo e remotos atualizados.
+- Se o usuario aprovar o visual, subir as alteracoes. Pendencias do review team ficaram em news-data.js e nao pertencem ao bloco corrigido.
