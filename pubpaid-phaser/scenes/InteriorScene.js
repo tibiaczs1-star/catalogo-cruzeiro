@@ -8,8 +8,8 @@ const INTERIOR_PANELS = {
   waiter: {
     kicker: "garçom",
     title: "Garçom dos jogos",
-    body: "Ele abre o lobby próprio. Na próxima tela você escolhe o jogo, acha oponente, define aposta e confirma a partida.",
-    chips: ["hub", "lobby separado", "garçom", NERD_TEAM.hud.name],
+    body: "Ele abre o saguão próprio. Na próxima tela você escolhe o jogo, acha oponente, define aposta e confirma a partida.",
+    chips: ["hub", "saguão separado", "garçom", NERD_TEAM.hud.name],
     actions: [{ id: "close-panel", label: "Fechar" }]
   },
   stage: {
@@ -132,7 +132,7 @@ export class InteriorScene extends Phaser.Scene {
         focus: "salão",
         objective: "Explorar pontos ativos do salão",
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
-        prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir o lobby."
+        prompt: "Destino marcado. Aproxime-se do garçom e aperte a tecla Entrar para abrir o saguão de mesas."
       });
     });
 
@@ -141,7 +141,7 @@ export class InteriorScene extends Phaser.Scene {
       focus: "salão",
       objective: "Falar com o garçom para escolher jogo",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Salão definitivo carregado. O garçom no centro abre o lobby; os jogos acontecem fora do bar, em tela própria."
+      prompt: "Salão definitivo carregado. O garçom no centro abre o saguão de mesas; os jogos acontecem fora do bar, em tela própria."
     });
   }
 
@@ -1270,7 +1270,7 @@ export class InteriorScene extends Phaser.Scene {
       stroke: "#04060b",
       strokeThickness: 4
     }).setOrigin(0.5).setLetterSpacing(3).setAlpha(0.9);
-    const chip = this.add.text(0, zone.radius * 0.62, "ENTER", {
+    const chip = this.add.text(0, zone.radius * 0.62, "ENTRAR", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "10px",
       fontStyle: "bold",
@@ -1353,8 +1353,8 @@ export class InteriorScene extends Phaser.Scene {
       nerdAgent: formatNerdAgent(zone.id === "stage" ? NERD_TEAM.sprite : zone.id === "exit" ? NERD_TEAM.engine : NERD_TEAM.physics),
       prompt:
         zone.id === "exit"
-          ? "Saída marcada. Chegue perto e aperte Enter."
-          : `${zone.label} marcado. Chegue perto e aperte Enter.`
+        ? "Saída marcada. Chegue perto e aperte a tecla Entrar."
+        : `${zone.label} marcado. Chegue perto e aperte a tecla Entrar.`
     });
   }
 
@@ -1425,10 +1425,10 @@ export class InteriorScene extends Phaser.Scene {
         currentScene: "game-lobby",
         activeGameId: "",
         lobbyPhase: "selecting",
-        objective: "Escolher jogo no lobby",
-        focus: "lobby dos jogos",
+        objective: "Escolher jogo no saguão",
+        focus: "saguão dos jogos",
         nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-        prompt: "Garçom abriu o lobby separado. Escolha o jogo na próxima tela."
+        prompt: "Garçom abriu o saguão separado. Escolha o jogo na próxima tela."
       });
       this.scene.start("game-lobby-scene", { gameId: "" });
       return;
@@ -1562,16 +1562,16 @@ export class InteriorScene extends Phaser.Scene {
         ? zone.id === "exit"
           ? "Voltar para a rua"
           : zone.id === "waiter"
-            ? "Apertar Enter para abrir o lobby"
-            : "Apertar Enter para interagir"
+        ? "Apertar a tecla Entrar para abrir o saguão"
+          : "Apertar a tecla Entrar para interagir"
         : "Falar com o garçom no centro",
       nerdAgent: formatNerdAgent(zone ? zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud : NERD_TEAM.physics),
       prompt: zone
         ? zone.id === "exit"
-          ? "Saída localizada. Aperte Enter para voltar para a rua."
+          ? "Saída localizada. Aperte a tecla Entrar para voltar para a rua."
           : zone.id === "waiter"
-            ? "Garçom localizado. Aperte Enter para abrir o lobby de jogos."
-            : `${zone.label} ativo. Aperte Enter para interagir.`
+        ? "Garçom localizado. Aperte a tecla Entrar para abrir o saguão de jogos."
+            : `${zone.label} ativo. Aperte a tecla Entrar para interagir.`
         : "Explore o salão. O garçom no centro abre todos os jogos."
     });
   }

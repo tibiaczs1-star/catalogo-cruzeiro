@@ -7,7 +7,7 @@ export const NERD_TEAM = {
   avatar: {
     name: "Gabi Avatar",
     focus: "avatar, acessórios e silhueta",
-    task: "separar corpo, roupa e loadout para evolução visual"
+    task: "separar corpo, roupa e equipamento para evolução visual"
   },
   physics: {
     name: "Otto Physics",
@@ -16,17 +16,17 @@ export const NERD_TEAM = {
   },
   hud: {
     name: "Beto HUD",
-    focus: "HUD, prompts e leitura rápida",
+    focus: "HUD, orientações e leitura rápida",
     task: "fazer objetivo, saldo e ações aparecerem sem poluir a tela"
   },
   qa: {
     name: "Tami QA",
-    focus: "playtest e atritos",
-    task: "validar clique, Enter, troca de cena, painel e responsividade"
+    focus: "teste de jogo e atritos",
+    task: "validar clique, tecla Entrar, troca de cena, painel e responsividade"
   },
   engine: {
     name: "Zed Engine",
-    focus: "estado, scenes e estabilidade",
+    focus: "estado, cenas e estabilidade",
     task: "manter a migração modular sem voltar ao monolito"
   }
 };

@@ -44,7 +44,7 @@
           <p class="ppg-kicker">pubpaid 2.0 oficial</p>
           <h1>A abertura agora é uma sequência bitmap dentro do jogo.</h1>
           <p>
-            Seis frames montam a chegada, o celular, o toque, o neon e o frame final congelado.
+            Seis quadros montam a chegada, o celular, o toque, o neon e o quadro final congelado.
             Depois entram termos, Google e a rua em tela cheia.
           </p>
         </div>
@@ -61,7 +61,7 @@
           <div id="pubpaid-phaser-root" class="ppg-game" aria-label="Jogo PubPaid 2.0 em Phaser"></div>
           <div class="ppg-orientation-gate" data-orientation-gate hidden>
             <section class="ppg-orientation-card" aria-label="Orientação recomendada para o PubPaid 2.0">
-              <p class="ppg-kicker">mobile mode</p>
+              <p class="ppg-kicker">modo celular</p>
               <h2>Mude para horizontal.</h2>
               <p>O PubPaid 2 foi preparado para jogar com o celular deitado.</p>
               <span data-orientation-status>Gire o aparelho para continuar.</span>
@@ -80,45 +80,45 @@
               <button class="ppg-button primary" type="button" data-start-experience>
                 Ativar e começar
               </button>
-              <span data-permission-status>Som 16-bit + fullscreen</span>
+              <span data-permission-status>Som 16-bit + tela cheia</span>
             </section>
           </div>
           <div class="ppg-splash" data-splash-screen aria-live="polite" hidden>
             <section class="ppg-splash-card ppg-splash-step is-active" data-splash-step="terms" hidden>
-              <p class="ppg-kicker">system ready</p>
-              <h2>Enter game</h2>
+              <p class="ppg-kicker">sistema pronto</p>
+              <h2>Entrar no jogo</h2>
               <label class="ppg-terms-check">
                 <input type="checkbox" data-terms-checkbox />
                 <span>
-                  Continuar inicia a run no PubPaid 2.0.
+                  Continuar inicia a rodada no PubPaid 2.0.
                 </span>
               </label>
               <p class="ppg-splash-note">
                 toque para entrar
               </p>
               <div class="ppg-splash-actions">
-                <button class="ppg-button primary" type="button" data-accept-terms>Enter game</button>
+                <button class="ppg-button primary" type="button" data-accept-terms>Entrar no jogo</button>
               </div>
             </section>
 
             <section class="ppg-splash-card ppg-splash-step" data-splash-step="auth" hidden data-google-auth-card>
-              <p class="ppg-kicker">access port</p>
-              <h2 data-auth-title>Access ready</h2>
+              <p class="ppg-kicker">acesso</p>
+              <h2 data-auth-title>Acesso pronto</h2>
               <p data-google-auth-status>Escolha como entrar.</p>
               <p class="ppg-splash-note" data-google-auth-email>
-                login gate
+                entrada por conta
               </p>
               <div class="ppg-google-stack ppg-google-stack--fit">
                 <div class="ppg-google-slot" data-google-auth-button></div>
                 <button class="ppg-button" type="button" data-google-auth-logout hidden>Sair do Google</button>
-                <button class="ppg-button primary" type="button" data-open-game disabled>Enter game</button>
+                <button class="ppg-button primary" type="button" data-open-game disabled>Entrar no jogo</button>
               </div>
             </section>
           </div>
           <div class="ppg-hud" data-game-hud>
             <article class="ppg-hud-debug">
               <span>scene</span>
-              <strong data-game-scene>street</strong>
+              <strong data-game-scene>rua</strong>
             </article>
             <article class="ppg-hud-debug">
               <span>focus</span>
@@ -180,7 +180,7 @@
 
             <aside class="ppg-dom-lobby" data-dom-lobby hidden>
               <header>
-                <span class="ppg-kicker">lobby</span>
+                <span class="ppg-kicker">mesas</span>
                 <h2>Escolha a mesa</h2>
               </header>
               <div class="ppg-dom-game-cards">
@@ -208,7 +208,7 @@
               <div class="ppg-dom-actions">
                 <button type="button" class="primary" data-dom-darts-throw>Arremessar</button>
                 <button type="button" data-dom-game-reset="darts">Revanche</button>
-                <button type="button" data-dom-open-lobby>Lobby</button>
+                <button type="button" data-dom-open-lobby>Mesas</button>
               </div>
             </aside>
 
@@ -224,7 +224,7 @@
               </div>
               <div class="ppg-dom-actions">
                 <button type="button" data-dom-game-reset="checkers">Reiniciar</button>
-                <button type="button" data-dom-open-lobby>Lobby</button>
+                <button type="button" data-dom-open-lobby>Mesas</button>
               </div>
             </aside>
 
@@ -234,7 +234,7 @@
               <p data-dom-result-body></p>
               <div class="ppg-dom-actions">
                 <button type="button" class="primary" data-dom-result-again>Jogar de novo</button>
-                <button type="button" data-dom-open-lobby>Lobby</button>
+                <button type="button" data-dom-open-lobby>Mesas</button>
                 <button type="button" data-dom-return-salon>Salão</button>
               </div>
             </aside>
@@ -251,12 +251,12 @@
         <article>
           <span class="ppg-kicker">próxima camada</span>
           <h2>Serviços e PvP</h2>
-          <p data-game-account-label>Rua e salão já estão organizados em scenes separadas. O próximo salto é ligar tudo à carteira e ao matchmaking real.</p>
+          <p data-game-account-label>Rua e salão já estão organizados em cenas separadas. O próximo salto é ligar tudo à carteira e ao pareamento real.</p>
         </article>
         <article>
           <span class="ppg-kicker">ordem técnica</span>
           <h2>Base certa</h2>
-          <p>Sprites, HUD, input, estado, cenas e overlays agora ficam na mesma linha oficial. O laboratório antigo deixa de guiar a evolução do produto.</p>
+          <p>Sprites, HUD, controles, estado, cenas e camadas agora ficam na mesma linha oficial. O laboratório antigo deixa de guiar a evolução do produto.</p>
         </article>
       </section>
 

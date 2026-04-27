@@ -50,7 +50,7 @@ function getRivalLabel(match, seat) {
 
 function formatMatchBody(match, seat, state) {
   if (!match) {
-    return "Entre em uma fila real para abrir a mesa. O saldo fica travado no escrow ate a partida terminar ou a fila ser cancelada.";
+    return "Entre em uma fila real para abrir a mesa. O saldo fica em garantia ate a partida terminar ou a fila ser cancelada.";
   }
   const stake = Number(match.stake || 0);
   const pot = stake * 2;
@@ -112,7 +112,7 @@ function openPvpPanel(payload = {}) {
   } else if (state === "active" && match) {
     actions.push({ id: "refresh-pvp", label: "Atualizar mesa" });
     if (match.turn === seat && isDarts) {
-      actions.push({ id: "pvp-darts-50-50", label: "Mira bull", primary: true });
+      actions.push({ id: "pvp-darts-50-50", label: "Mira central", primary: true });
       actions.push({ id: "pvp-darts-50-18", label: "Triplo 20" });
       actions.push({ id: "pvp-darts-78-34", label: "Lateral direita" });
       actions.push({ id: "pvp-darts-30-62", label: "Baixo esquerdo" });
@@ -143,7 +143,7 @@ function openPvpPanel(payload = {}) {
     title: isCheckers ? "Dama PvP" : "Dardos PvP",
     body:
       state === "waiting"
-        ? `Fila aberta para ${isCheckers ? "Dama" : "Dardos"} com ${queue?.stake || 10} creditos travados no escrow. Aguardando rival.`
+        ? `Fila aberta para ${isCheckers ? "Dama" : "Dardos"} com ${queue?.stake || 10} créditos em garantia. Aguardando rival.`
         : formatMatchBody(match, seat, state),
     chips: [
       `estado: ${state}`,
@@ -361,7 +361,7 @@ export function runPanelAction(actionId) {
       lobbyPhase: "selecting",
       objective: "Abrir lobby do jogo",
       nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: `${gameId === "darts" ? "Dardos" : "Dama"} escolhido. Abrindo lobby separado.`
+      prompt: `${gameId === "darts" ? "Dardos" : "Dama"} escolhido. Abrindo saguão separado.`
     });
     window.pubpaidPhaserGame?.scene?.stop?.("interior-scene");
     window.pubpaidPhaserGame?.scene?.start?.("game-lobby-scene", { gameId });
@@ -417,7 +417,7 @@ export function runPanelAction(actionId) {
     const gameId = actionId === "join-checkers-pvp" ? "checkers" : "darts";
     setSelectedTable(gameId);
     updateGameState({
-      objective: "Travando escrow PvP",
+      objective: "Travando saldo PvP",
       nerdAgent: formatNerdAgent(NERD_TEAM.engine),
       prompt: `Abrindo fila real de ${gameId === "darts" ? "Dardos" : "Dama"} com 10 créditos.`
     });
@@ -426,7 +426,7 @@ export function runPanelAction(actionId) {
         updateGameState({
           objective: "Depositar antes do PvP",
           nerdAgent: formatNerdAgent(NERD_TEAM.qa),
-          prompt: payload?.error || "Saldo real indisponivel para escrow."
+          prompt: payload?.error || "Saldo real indisponível para a garantia."
         });
         return;
       }

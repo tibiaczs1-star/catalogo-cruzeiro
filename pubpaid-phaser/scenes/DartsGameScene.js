@@ -10,7 +10,7 @@ const TARGET = {
 const SECTOR_ORDER = [20, 1, 18, 4, 13, 6, 10, 15, 2, 17, 3, 19, 7, 16, 8, 11, 14, 9, 12, 5];
 
 const OBJECTIVES = [
-  { label: "Bullseye", sector: null, ring: "bull" },
+  { label: "Centro exato", sector: null, ring: "bull" },
   { label: "Bull externo", sector: null, ring: "outerBull" },
   { label: "Triplo 20", sector: 20, ring: "triple" },
   { label: "Triplo 19", sector: 19, ring: "triple" },
@@ -113,8 +113,8 @@ export class DartsGameScene extends Phaser.Scene {
       .setWordWrapWidth(370);
     this.hud.last = this.add.text(102, 430, "", this.textStyle(13, "#d5dff2"))
       .setWordWrapWidth(360);
-    this.makeButton(208, 626, 210, 44, "VOLTAR LOBBY", () => this.backToLobby(), false);
-    this.makeButton(454, 626, 190, 44, "SAIR SALAO", () => this.backToSalon(), false);
+    this.makeButton(208, 626, 210, 44, "VOLTAR ÀS MESAS", () => this.backToLobby(), false);
+    this.makeButton(454, 626, 190, 44, "SAIR DO SALÃO", () => this.backToSalon(), false);
     this.updateHud();
   }
 
@@ -138,6 +138,7 @@ export class DartsGameScene extends Phaser.Scene {
 
   bindAim() {
     this.input.on("pointerdown", (pointer) => {
+      if (this.isDomUiPointer(pointer)) return;
       if (this.phase !== "aim") return;
       if (pointer.worldX < 640) return;
       if (this.lockStage === "angle") {
@@ -202,14 +203,10 @@ export class DartsGameScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(9);
     this.makeButton(742, 458, 180, 38, "JOGAR DE NOVO", () => this.restartMatch(), true);
-    this.makeButton(940, 458, 160, 38, "VOLTAR LOBBY", () => this.backToLobby(), false);
-    this.makeButton(850, 506, 160, 34, "SAIR SALAO", () => this.backToSalon(), false);
+    this.makeButton(940, 458, 160, 38, "VOLTAR ÀS MESAS", () => this.backToLobby(), false);
+    this.makeButton(850, 506, 160, 34, "SAIR DO SALÃO", () => this.backToSalon(), false);
     this.updateHud(`Partida fechada: ${headline.toLowerCase()} por ${this.playerScore} x ${this.aiScore}.`);
     this.syncState(`Partida fechada: ${headline}.`);
-    this.game.events.emit("pubpaid:darts-result", {
-      result,
-      body: `${headline}: ${this.playerScore} x ${this.aiScore}.`
-    });
   }
 
   restartMatch() {
@@ -225,7 +222,7 @@ export class DartsGameScene extends Phaser.Scene {
       label = "fora";
     } else if (distance <= TARGET.radius * 0.06) {
       score = 50;
-      label = "bullseye";
+      label = "centro exato";
     } else if (distance <= TARGET.radius * 0.12) {
       score = 25;
       label = "bull externo";
@@ -323,9 +320,17 @@ export class DartsGameScene extends Phaser.Scene {
     container.add([bg, text]);
     container.setSize(width, height);
     container.setInteractive(new Phaser.Geom.Rectangle(-width / 2, -height / 2, width, height), Phaser.Geom.Rectangle.Contains);
-    container.on("pointerdown", onClick);
+    container.on("pointerdown", (pointer) => {
+      if (this.isDomUiPointer(pointer)) return;
+      onClick();
+    });
     this.buttons.push(container);
     return container;
+  }
+
+  isDomUiPointer(pointer) {
+    const target = pointer?.event?.target;
+    return Boolean(target?.closest?.("[data-dom-game-ui]"));
   }
 
   backToLobby() {

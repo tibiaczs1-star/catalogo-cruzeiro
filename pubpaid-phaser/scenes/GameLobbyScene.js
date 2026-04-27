@@ -7,13 +7,13 @@ const GAME_META = {
     title: "Dardos",
     accent: 0xffd06d,
     alt: 0x50efff,
-    description: "Mira rápida, rounds curtos e placar auditável.",
+    description: "Mira rápida, rodadas curtas e placar auditável.",
     badge: "PRECISÃO",
     strap: "Foco, pressão e impacto",
     panelA: 0x1a0f12,
     panelB: 0x0a111b,
     chip: 0x2d78ff,
-    ai: ["Rafa Mira Fina", "Nina Triplo 20", "Beto Bullseye"]
+    ai: ["Rafa Mira Fina", "Nina Triplo 20", "Beto Mira Certa"]
   },
   checkers: {
     title: "Dama",
@@ -30,7 +30,7 @@ const GAME_META = {
 };
 
 const LOBBY_META = {
-  title: "Lobby",
+  title: "Mesas",
   accent: 0xffd06d,
   alt: 0x50efff,
   description: "Escolha um jogo para abrir aposta, oponente e confirmação."
@@ -109,7 +109,7 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   buildFrame() {
-    this.titleText = this.add.text(GAME_WIDTH / 2, 82, this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "ESCOLHA SEU SUB GAME", {
+    this.titleText = this.add.text(GAME_WIDTH / 2, 82, this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "ESCOLHA SEU JOGO", {
       fontFamily: "Georgia, Times New Roman, serif",
       fontSize: this.gameId ? "24px" : "32px",
       fontStyle: "bold",
@@ -153,7 +153,10 @@ export class GameLobbyScene extends Phaser.Scene {
     container.add([bg, text]);
     container.setSize(width, height);
     container.setInteractive(new Phaser.Geom.Rectangle(-width / 2, -height / 2, width, height), Phaser.Geom.Rectangle.Contains);
-    container.on("pointerdown", onClick);
+    container.on("pointerdown", (pointer) => {
+      if (this.isDomUiPointer(pointer)) return;
+      onClick();
+    });
     this.buttons.push({ container, bg, text });
     return container;
   }
@@ -231,7 +234,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.clearSceneUi();
     this.drawGlassPanel(92, 144, 650, 472, this.meta.alt);
     this.tableLayer.add(this.add.text(110, 168, "OPONENTE ENCONTRADO", this.textStyle(30, "#fff6dc")).setLetterSpacing(3));
-    this.tableLayer.add(this.add.text(112, 224, `${this.opponent.name} / ${this.opponent.style} / rating ${this.opponent.rating}`, this.textStyle(15, "#d5dff2")));
+    this.tableLayer.add(this.add.text(112, 224, `${this.opponent.name} / ${this.opponent.style} / nível ${this.opponent.rating}`, this.textStyle(15, "#d5dff2")));
     this.tableLayer.add(this.add.text(112, 270, `Aposta: ${this.stake} créditos`, this.textStyle(18, "#ffd06d")));
     this.drawOpponentCard(270, 402);
     this.drawGamePreview(840, 378);
@@ -289,7 +292,7 @@ export class GameLobbyScene extends Phaser.Scene {
     } else {
       this.drawCheckersMatch();
     }
-    this.makeButton(218, 626, 220, 46, "VOLTAR AO LOBBY", () => this.renderMatched(), false);
+    this.makeButton(218, 626, 220, 46, "VOLTAR ÀS MESAS", () => this.renderMatched(), false);
     this.makeButton(486, 626, 220, 46, "SAIR PRO SALÃO", () => this.backToSalon(), true);
   }
 
@@ -318,13 +321,13 @@ export class GameLobbyScene extends Phaser.Scene {
     this.tableLayer.add(this.add.rectangle(x - 82, y + 36, 62, 58, this.meta.alt, 0.82).setStrokeStyle(3, 0x07101c, 0.7));
     this.tableLayer.add(this.add.text(x - 18, y - 50, this.opponent.name, this.textStyle(18, "#fff6dc")));
     this.tableLayer.add(this.add.text(x - 18, y - 14, this.opponent.style, this.textStyle(12, "#d5dff2")));
-    this.tableLayer.add(this.add.text(x - 18, y + 22, `rating ${this.opponent.rating}`, this.textStyle(12, "#ffd06d")));
+    this.tableLayer.add(this.add.text(x - 18, y + 22, `nível ${this.opponent.rating}`, this.textStyle(12, "#ffd06d")));
   }
 
   drawDartsMatch() {
     this.drawDartsTarget(848, 374, 126);
     this.tableLayer.add(this.add.text(118, 310, "Tela própria dos Dardos", this.textStyle(20, "#ffd06d")));
-    this.tableLayer.add(this.add.text(118, 350, "Aqui entram mira, rounds, IA e liquidação da partida.", this.textStyle(14, "#d5dff2")));
+    this.tableLayer.add(this.add.text(118, 350, "Aqui entram mira, rodadas, IA e liquidação da partida.", this.textStyle(14, "#d5dff2")));
   }
 
   drawCheckersMatch() {
@@ -352,7 +355,7 @@ export class GameLobbyScene extends Phaser.Scene {
       objective: this.gameId ? `Configurar ${this.meta.title}` : "Escolher jogo",
       prompt: this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta e busque um oponente.` : "Escolha um jogo no catálogo."
     });
-    this.titleText?.setText(this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "ESCOLHA SEU SUB GAME");
+    this.titleText?.setText(this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "ESCOLHA SEU JOGO");
     this.titleText?.setFontSize(this.gameId ? "24px" : "32px");
     this.titleText?.setColor(this.gameId ? "#fff6dc" : "#ffcf76");
     this.titleText?.setStroke("#160804", this.gameId ? 5 : 8);
@@ -416,7 +419,10 @@ export class GameLobbyScene extends Phaser.Scene {
     container.add([glow, shadow, image, selectedRing, title]);
     container.setSize(302, 226);
     container.setInteractive(new Phaser.Geom.Rectangle(-151, -113, 302, 226), Phaser.Geom.Rectangle.Contains);
-    container.on("pointerdown", () => this.selectGame(gameId));
+    container.on("pointerdown", (pointer) => {
+      if (this.isDomUiPointer(pointer)) return;
+      this.selectGame(gameId);
+    });
     container.on("pointerover", () => {
       this.tweens.add({
         targets: container,
@@ -484,6 +490,11 @@ export class GameLobbyScene extends Phaser.Scene {
         this.waiterSprite?.setTexture(speaking ? TEXTURE_KEYS.waiterLobbySpeaking : TEXTURE_KEYS.waiterLobby);
       }
     });
+  }
+
+  isDomUiPointer(pointer) {
+    const target = pointer?.event?.target;
+    return Boolean(target?.closest?.("[data-dom-game-ui]"));
   }
 
   drawMatchBackdrop() {

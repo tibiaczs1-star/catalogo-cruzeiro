@@ -64,8 +64,8 @@ export async function joinPubpaidPvpQueue(gameId = "darts", stake = 10) {
             : "Escolher mesa PvP",
       prompt:
         payload.state === "active"
-          ? `Mesa ${payload.gameId} pareada. Seu assento: ${payload.seat || "jogador"}. Escrow travado.`
-          : "Fila PvP aberta. O escrow ficou travado ate parear ou sair."
+          ? `Mesa ${payload.gameId} pareada. Seu assento: ${payload.seat || "jogador"}. Saldo travado.`
+          : "Fila PvP aberta. O saldo ficou travado ate parear ou sair."
     });
     await syncPubpaidAccount();
     return payload;
@@ -100,7 +100,7 @@ export async function leavePubpaidPvpQueue(gameId = "darts") {
       pvpMatch: payload?.match || null,
       pvpQueue: payload?.queue || null,
       objective: payload.state === "abandoned" ? "Reconectar antes do prazo" : "Escolher mesa PvP",
-      prompt: payload.state === "idle" ? "Fila PvP cancelada. Escrow liberado." : "Estado PvP atualizado."
+      prompt: payload.state === "idle" ? "Fila PvP cancelada. Saldo liberado." : "Estado PvP atualizado."
     });
     await syncPubpaidAccount();
     return payload;

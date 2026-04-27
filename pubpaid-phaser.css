@@ -112,6 +112,13 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.4), inset 0 0 0 2px rgba(255, 255, 255, 0.03);
 }
 
+.ppg-dom-lobby[hidden],
+.ppg-dom-darts[hidden],
+.ppg-dom-checkers[hidden],
+.ppg-dom-result[hidden] {
+  display: none;
+}
+
 .ppg-dom-lobby {
   left: 50%;
   right: auto;

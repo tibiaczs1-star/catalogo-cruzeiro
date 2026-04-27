@@ -70,7 +70,7 @@ function renderDartsView(view) {
   return `
     <div class="ppg-darts-view" aria-label="Mesa de Dardos">
       <div class="ppg-darts-cabinet">
-        <div class="ppg-darts-marquee">DARTS</div>
+        <div class="ppg-darts-marquee">DARDOS</div>
         <button class="ppg-darts-board${view.canPlay ? " is-aimable" : ""}" type="button" data-darts-aim-board ${view.canPlay ? "" : "disabled"}>
           <span class="ring r1"></span>
           <span class="ring r2"></span>
@@ -161,7 +161,7 @@ function renderPanelView(view) {
           <span></span><span></span><span></span>
         </div>
         <div class="ppg-match-stats">
-          <span>escrow travado</span>
+          <span>valor travado</span>
           <strong>${view.stake || 10} créditos</strong>
           <small>${view.label || "aguardando rival"}</small>
         </div>
@@ -229,7 +229,7 @@ export function bindOverlay() {
       refs.accountLabel.textContent =
         state.realBalance > 0
           ? `Carteira: ${state.availableBalance} disponível, ${state.lockedMatchBalance} em mesa e ${state.lockedWithdrawalBalance} em saque.`
-          : "Rua e salão já estão organizados em scenes separadas. O próximo salto é ligar tudo à carteira e ao matchmaking real.";
+          : "Rua e salão já estão organizados em cenas separadas. O próximo salto é ligar tudo à carteira e ao pareamento real.";
     }
     if (refs.panel) refs.panel.hidden = !state.panel.open;
     if (refs.panelKicker) refs.panelKicker.textContent = state.panel.kicker;

@@ -16,7 +16,7 @@ export const INTERIOR_BOUNDS = {
 };
 
 export const TABLE_COPY = {
-  darts: "Dardos abre a vitrine do núcleo por ser rápido, auditável e bom para leitura de input.",
+  darts: "Dardos abre a vitrine do núcleo por ser rápido, auditável e bom para leitura dos controles.",
   checkers: "Dama continua como a mesa mais limpa para estado autoritativo e turnos claros.",
   poker: "Poker fica como mesa premium social e depois absorve draw/showdown autoritativo.",
   truco: "Truco entra depois, quando a base de cenas, serviços e logs estiver estável."

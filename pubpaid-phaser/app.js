@@ -273,24 +273,24 @@ async function syncAuthUi() {
   refs.googleLogout?.toggleAttribute("hidden", localDemoAccess || !signedIn);
   if (refs.openGame) {
     refs.openGame.disabled = !((signedIn || localDemoAccess) && hasAcceptedTerms());
-    refs.openGame.textContent = localDemoAccess ? "Enter game" : "Google gate";
+    refs.openGame.textContent = localDemoAccess ? "Entrar no jogo" : "Entrar com Google";
   }
   if (refs.authTitle) {
-    refs.authTitle.textContent = localDemoAccess ? "Local run ready." : "Google gate.";
+    refs.authTitle.textContent = localDemoAccess ? "Rodada local pronta." : "Entrar com Google.";
   }
   if (localDemoAccess) {
     if (refs.authStatus) {
-      refs.authStatus.textContent = "Local access ready.";
+      refs.authStatus.textContent = "Acesso local pronto.";
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = "Entre direto e continue a run.";
+      refs.authEmail.textContent = "Entre direto e continue a rodada.";
     }
   } else {
     if (refs.authStatus) {
       refs.authStatus.textContent = signedIn ? "Conta conectada." : "Entre com Google para abrir o portao.";
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = signedIn ? "Google sync ready." : "Google login";
+      refs.authEmail.textContent = signedIn ? "Conta Google sincronizada." : "Login Google";
     }
   }
   if (signedIn) {

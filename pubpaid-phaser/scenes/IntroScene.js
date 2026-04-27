@@ -75,7 +75,7 @@ const INTRO_FRAMES = [
   },
   {
     key: "game-lobby-bg",
-    label: "enter game",
+    label: "entrar no jogo",
     hold: 820,
     fromScale: 1.04,
     toScale: 1,
@@ -295,7 +295,7 @@ export class IntroScene extends Phaser.Scene {
     if (frame.final) {
       const plaque = this.add.rectangle(GAME_WIDTH / 2, 560, 360, 78, 0x060912, 0.78)
         .setStrokeStyle(3, 0xffd06d, 0.58);
-      const enter = this.add.text(GAME_WIDTH / 2, 548, "ENTER GAME", {
+      const enter = this.add.text(GAME_WIDTH / 2, 548, "ENTRAR NO JOGO", {
         fontFamily: "Georgia, Times New Roman, serif",
         fontSize: "34px",
         fontStyle: "bold",
@@ -303,7 +303,7 @@ export class IntroScene extends Phaser.Scene {
         stroke: "#120904",
         strokeThickness: 5
       }).setOrigin(0.5).setLetterSpacing(2);
-      const hint = this.add.text(GAME_WIDTH / 2, 586, "clique ou aperte enter", {
+      const hint = this.add.text(GAME_WIDTH / 2, 586, "clique ou use a tecla Entrar", {
         fontFamily: "Courier New, Lucida Console, monospace",
         fontSize: "11px",
         color: "#9fb0ca"
@@ -315,7 +315,7 @@ export class IntroScene extends Phaser.Scene {
   freezeFinalFrame() {
     if (this.sequenceDone) return;
     this.sequenceDone = true;
-    this.caption.setText("PUBPAID 2.0 - ENTER GAME");
+    this.caption.setText("PUBPAID 2.0 - ENTRAR NO JOGO");
     this.currentImage
       .setTexture(INTRO_FRAMES[INTRO_TOTAL - 1].key)
       .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
@@ -336,9 +336,9 @@ export class IntroScene extends Phaser.Scene {
     updateGameState({
       currentScene: "intro",
       focus: "frame final congelado",
-      objective: "Apertar Enter ou clicar no letreiro",
+      objective: "Apertar a tecla Entrar ou clicar no letreiro",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Frame final congelado. Clique no Enter Game da imagem ou aperte Enter para entrar direto."
+      prompt: "Frame final congelado. Clique em Entrar no jogo ou aperte a tecla Entrar para seguir."
     });
   }
 

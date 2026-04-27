@@ -153,13 +153,25 @@ export function bindDomGameInterface(game) {
     refs.root.classList.toggle("is-playing", name === "darts" || name === "checkers");
   };
 
+  const sceneLabel = (scene) => {
+    const labels = {
+      "game-lobby": "mesas",
+      "darts-game": "dardos",
+      "checkers-game": "dama",
+      "game-match": "partida",
+      street: "rua",
+      interior: "salão"
+    };
+    return labels[scene] || scene || "jogo";
+  };
+
   const showLobby = () => {
     local.selectedGame = gameState.activeGameId || local.selectedGame || "darts";
     setPanel("lobby");
     updateGameState({
       lobbyPhase: "selecting",
       objective: "Escolher Dardos ou Dama",
-      prompt: "Lobby DOM aberto. Escolha uma mesa para jogar localmente."
+      prompt: "Saguão de mesas aberto. Escolha uma mesa para jogar localmente."
     });
   };
 
@@ -345,7 +357,7 @@ export function bindDomGameInterface(game) {
   });
 
   subscribeGameState((state) => {
-    refs.scene.textContent = state.currentScene || "jogo";
+    refs.scene.textContent = sceneLabel(state.currentScene);
     refs.objective.textContent = state.objective || "PubPaid";
     const shouldShow =
       state.currentScene === "game-lobby" ||

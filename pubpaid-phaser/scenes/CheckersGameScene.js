@@ -76,7 +76,7 @@ export class CheckersGameScene extends Phaser.Scene {
       .setWordWrapWidth(370);
     this.hud.tip = this.add.text(102, 408, "Peça vermelha sobe. Captura acontece ao pular uma peça escura.", this.textStyle(12, "#d5dff2"))
       .setWordWrapWidth(360);
-    this.makeButton(208, 626, 210, 44, "VOLTAR LOBBY", () => this.backToLobby(), false);
+    this.makeButton(208, 626, 210, 44, "VOLTAR ÀS MESAS", () => this.backToLobby(), false);
     this.makeButton(454, 626, 190, 44, "SAIR SALÃO", () => this.backToSalon(), false);
     this.updateHud();
   }
@@ -96,7 +96,10 @@ export class CheckersGameScene extends Phaser.Scene {
           .setDisplaySize(BOARD.tile, BOARD.tile)
           .setOrigin(0.5);
         tile.setInteractive();
-        tile.on("pointerdown", () => this.handleCell(row, col));
+        tile.on("pointerdown", (pointer) => {
+          if (this.isDomUiPointer(pointer)) return;
+          this.handleCell(row, col);
+        });
         this.boardLayer.add(tile);
         if (selected || targetMove) {
           this.boardLayer.add(this.add.rectangle(x + BOARD.tile / 2, y + BOARD.tile / 2, BOARD.tile - 4, BOARD.tile - 4, targetMove ? 0x8ef0a3 : 0xffd06d, targetMove ? 0.14 : 0.1)
@@ -361,9 +364,17 @@ export class CheckersGameScene extends Phaser.Scene {
     container.add([bg, text]);
     container.setSize(width, height);
     container.setInteractive(new Phaser.Geom.Rectangle(-width / 2, -height / 2, width, height), Phaser.Geom.Rectangle.Contains);
-    container.on("pointerdown", onClick);
+    container.on("pointerdown", (pointer) => {
+      if (this.isDomUiPointer(pointer)) return;
+      onClick();
+    });
     this.buttons.push(container);
     return container;
+  }
+
+  isDomUiPointer(pointer) {
+    const target = pointer?.event?.target;
+    return Boolean(target?.closest?.("[data-dom-game-ui]"));
   }
 
   isInside(row, col) {

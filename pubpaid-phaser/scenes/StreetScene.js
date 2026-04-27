@@ -13,9 +13,9 @@ const TERMINAL_PANEL = {
 };
 
 const GOOGLE_PANEL = {
-  kicker: "google port",
+  kicker: "acesso google",
   title: "Login em espera",
-  body: "Google Port está parado para os experimentos locais. Quando o modo real estiver ativo, este ponto abre a conexão da conta.",
+  body: "Acesso Google está parado para os experimentos locais. Quando o modo real estiver ativo, este ponto abre a conexão da conta.",
   chips: ["google", "modo local", "sem bloqueio"],
   actions: [{ id: "close-panel", label: "Fechar", primary: true }]
 };
@@ -347,7 +347,7 @@ export class StreetScene extends Phaser.Scene {
     plaque.fillRoundedRect(-120, -10, 22, 32, 2);
     plaque.fillRoundedRect(98, -10, 22, 32, 2);
 
-    const kicker = this.add.text(0, -48, "GOOGLE PORT", {
+    const kicker = this.add.text(0, -48, "ACESSO GOOGLE", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "14px",
       fontStyle: "bold",
@@ -438,7 +438,7 @@ export class StreetScene extends Phaser.Scene {
         focus: "entrada",
         objective: "Entrar no salão",
         nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-        prompt: "Entrada marcada. Chegue perto e aperte Enter para atravessar."
+        prompt: "Entrada marcada. Chegue perto e aperte a tecla Entrar para atravessar."
       });
       return;
     }
@@ -458,10 +458,10 @@ export class StreetScene extends Phaser.Scene {
       openPanel(GOOGLE_PANEL);
       this.game.events.emit("pubpaid:google-port-click");
       updateGameState({
-        focus: "google port",
+        focus: "acesso google",
         objective: "Google em espera para experimento local",
         nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-        prompt: "Google Port parado. Testes locais continuam liberados."
+        prompt: "Acesso Google parado. Testes locais continuam liberados."
       });
     }
   }
@@ -488,6 +488,14 @@ export class StreetScene extends Phaser.Scene {
       Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY)
     );
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
+  }
+
+  tintPlayer(color) {
+    this.player?.each?.((child) => child.setTint?.(color));
+  }
+
+  clearPlayerTint() {
+    this.player?.each?.((child) => child.clearTint?.());
   }
 
   tryDoorInteraction() {
@@ -577,10 +585,10 @@ export class StreetScene extends Phaser.Scene {
     updateGameState({
       currentScene: "street",
       focus: nearDoor ? "porta principal" : "rua viva",
-      objective: nearDoor ? "Apertar Enter para entrar" : "Entrar no PubPaid pela porta principal",
+      objective: nearDoor ? "Apertar a tecla Entrar" : "Entrar no PubPaid pela porta principal",
       nerdAgent: formatNerdAgent(nearDoor ? NERD_TEAM.engine : NERD_TEAM.physics),
       prompt: nearDoor
-        ? "Porta encontrada. Aperte Enter para entrar no salão em Phaser."
+        ? "Porta encontrada. Aperte a tecla Entrar para entrar no salão em Phaser."
         : nearestHotspot?.distance < 120
           ? "Ponto ativo perto. Aperte E ou clique para interagir."
           : "Rua viva carregada no núcleo definitivo. Explore ou siga para a porta."
@@ -624,7 +632,7 @@ export class StreetScene extends Phaser.Scene {
     this.targetPoint = null;
     this.targetMarker?.setVisible(false);
     this.input.enabled = false;
-    this.player.setTint(0xffe0ae);
+    this.tintPlayer(0xffe0ae);
     this.transitionLabel?.setAlpha(1);
     this.tweens.add({
       targets: [this.transitionVeil, this.transitionLabel],
@@ -640,7 +648,7 @@ export class StreetScene extends Phaser.Scene {
       ease: "Sine.easeInOut"
     });
     this.cameras.main.once("camerafadeoutcomplete", () => {
-      this.player.clearTint();
+      this.clearPlayerTint();
       this.scene.start("interior-scene");
     });
     this.cameras.main.fadeOut(460, 8, 12, 20);
