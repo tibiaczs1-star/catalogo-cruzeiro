@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T12:08:54.217Z",
+  "lastUpdatedAt": "2026-04-27T13:17:04.461Z",
   "orders": [
     {
       "id": "2026-04-26-hotfix-api-fallback-news-images",
@@ -7394,8 +7394,8 @@
     {
       "id": "2026-04-27-segunda-sync-reuniao-subir-correcoes",
       "createdAt": "2026-04-27T12:08:54.217Z",
-      "updatedAt": "2026-04-27T12:08:54.217Z",
-      "status": "in_progress",
+      "updatedAt": "2026-04-27T13:17:04.461Z",
+      "status": "closed",
       "source": "chat",
       "rawRequest": "suba todas as correções tome decizão atueletudo sicnronmize e gfaça as rotinas de reunioes e vamos deixa tudo liondo nessa segunda lina",
       "summary": "Rodada de segunda: sincronizar online-local, rodar saneamento de idioma, review team, auditoria de imagens, ciclo/reuniao dos agentes e subir todas as correcoes relevantes sem incluir PubPaid.",
@@ -7442,9 +7442,9 @@
         "deploy"
       ],
       "nextSteps": [
-        "Criar branch limpo em origin/main, commitar pacote final e publicar."
+        "Aguardar o Render propagar o deploy do main e, se necessario, conferir online apos alguns minutos."
       ],
-      "notes": "Sincronizacao integrada retornou 360 noticias ativas/acervo, 0 imagens ausentes, 0 duplicatas locais por divisao, language sanitizer ok, review-team totalIssues=0 e agents:cycle ok com 181 agentes/5 escritorios."
+      "notes": "Sincronizacao integrada retornou 360 noticias ativas/acervo, 0 imagens ausentes, 0 duplicatas locais por divisao, language sanitizer ok, review-team totalIssues=0 e agents:cycle ok com 181 agentes/5 escritorios. Commit e325d52 entrou no PR #7 e foi mergeado em origin/main no merge commit cf33a01."
     }
   ]
 }
