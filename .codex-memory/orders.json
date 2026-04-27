@@ -7351,7 +7351,7 @@
     {
       "id": "2026-04-27-bloquear-ingles-publico-noticias",
       "createdAt": "2026-04-27T05:00:28.399Z",
-      "updatedAt": "2026-04-27T05:00:28.399Z",
+      "updatedAt": "2026-04-27T09:37:01.475Z",
       "status": "closed",
       "source": "chat",
       "rawRequest": "Usuario apontou print com resumo de noticia em ingles e pediu: \"em ingles nao, nao permita que isso se repita informe os agentes e crie uma rotina de evitar isso\"; depois confirmou: \"ok entao faça\".",
@@ -7387,9 +7387,9 @@
         "portugues"
       ],
       "nextSteps": [
-        "Commitar e publicar a rodada se o git remoto estiver acessivel nesta sessao."
+        "Aguardar/validar deploy do Render se necessario."
       ],
-      "notes": "Foram corrigidos os espelhos news-data.js, data/news-archive.json, data/runtime-news.json e data/topic-feed-tech.json. A nova rotina bloqueia frases publicas em ingles em title/sourceLabel/lede/summary/body/highlights/development."
+      "notes": "Foram corrigidos os espelhos news-data.js, data/news-archive.json, data/runtime-news.json e data/topic-feed-tech.json. A nova rotina bloqueia frases publicas em ingles em title/sourceLabel/lede/summary/body/highlights/development. Commit 26a4dc9 enviado no PR #5 e mergeado em origin/main no merge commit 8117d4d."
     }
   ]
 }
