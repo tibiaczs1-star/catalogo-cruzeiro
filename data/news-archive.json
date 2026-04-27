@@ -884,15 +884,19 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
-    "imageCredit": "",
+    "imageUrl": "/assets/news-fallbacks/fluminense-derrota-mixto-mt-por-2-a-0-com-gols-de-keke-e-dede.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/fluminense-derrota-mixto-mt-por-2-a-0-com-gols-de-keke-e-dede.svg",
+    "feedImageUrl": "/assets/news-fallbacks/fluminense-derrota-mixto-mt-por-2-a-0-com-gols-de-keke-e-dede.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/gremio/nunca-esqueceremos-gremio-agradece-coritiba-por-apoio-durante-enchentes/",
@@ -1356,8 +1360,8 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/rwenault-3-e1777219404413.png?w=200",
-    "originalFeedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/rwenault-3-e1777219404413.png?w=200",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": ""
   },
   {
@@ -1449,15 +1453,19 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
-    "imageCredit": "",
+    "imageUrl": "/assets/news-fallbacks/alckmin-anuncia-r-10-bilhoes-para-modernizacao-de-maquinas-agricolas.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/alckmin-anuncia-r-10-bilhoes-para-modernizacao-de-maquinas-agricolas.svg",
+    "feedImageUrl": "/assets/news-fallbacks/alckmin-anuncia-r-10-bilhoes-para-modernizacao-de-maquinas-agricolas.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-04/hiperglobalizacao-esta-em-crise-diz-economista-eduardo-giannetti",
@@ -1525,8 +1533,8 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687345&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687345&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": ""
   },
   {
@@ -1628,8 +1636,8 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687347&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687347&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": ""
   },
   {
@@ -1962,8 +1970,8 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687340&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687340&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": ""
   },
   {
@@ -2065,8 +2073,8 @@
     "priority": 0,
     "editorialPriority": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687329&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687329&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": ""
   },
   {
@@ -2153,7 +2161,7 @@
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      " e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -2219,7 +2227,7 @@
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      " e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -2685,7 +2693,7 @@
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      " e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -2751,7 +2759,7 @@
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      " e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -2784,7 +2792,7 @@
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      " e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -2954,15 +2962,19 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
-    "imageCredit": "",
+    "imageUrl": "/assets/news-fallbacks/ambiente-digital-e-barreira-para-terceira-via-crescer-diz-ceo-da-ap-exata.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/ambiente-digital-e-barreira-para-terceira-via-crescer-diz-ceo-da-ap-exata.svg",
+    "feedImageUrl": "/assets/news-fallbacks/ambiente-digital-e-barreira-para-terceira-via-crescer-diz-ceo-da-ap-exata.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+    "originalFeedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/sao-bernardo-x-goias-horario-e-onde-assistir-ao-jogo-da-serie-b/",
@@ -4782,15 +4794,19 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
-    "imageCredit": "",
+    "imageUrl": "/assets/news-fallbacks/cientistas-criam-painel-para-orientar-transicao-energetica-global.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/cientistas-criam-painel-para-orientar-transicao-energetica-global.svg",
+    "feedImageUrl": "/assets/news-fallbacks/cientistas-criam-painel-para-orientar-transicao-energetica-global.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/25/governo-do-acre-apura-danos-apos-balsa-derramar-15-mil-litros-de-diesel-no-rio-tarauaca/",
@@ -4852,7 +4868,7 @@
     "sourceImageUrl": "",
     "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/20250325_NSF_HQ_0162.jpg?quality=90&#038;strip=all&#038;crop=0,0,100,100",
     "imageCredit": "",
-    "imageFocus": "",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
@@ -5223,15 +5239,19 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
-    "imageCredit": "",
+    "imageUrl": "/assets/news-fallbacks/samba-da-gamboa-recebe-o-cantor-e-compositor-dudu-nobre-neste-domingo.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/samba-da-gamboa-recebe-o-cantor-e-compositor-dudu-nobre-neste-domingo.svg",
+    "feedImageUrl": "/assets/news-fallbacks/samba-da-gamboa-recebe-o-cantor-e-compositor-dudu-nobre-neste-domingo.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agencia.ac.gov.br/opera-acre-avanca-na-reducao-de-filas-com-novos-mutiroes-cirurgicos-realizados-neste-fim-de-semana/",
@@ -5293,15 +5313,19 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
-    "imageCredit": "",
+    "imageUrl": "/assets/news-fallbacks/vacinacao-nas-escolas-segue-ate-dia-30-e-meta-e-imunizar-27-milhoes.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/vacinacao-nas-escolas-segue-ate-dia-30-e-meta-e-imunizar-27-milhoes.svg",
+    "feedImageUrl": "/assets/news-fallbacks/vacinacao-nas-escolas-segue-ate-dia-30-e-meta-e-imunizar-27-milhoes.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": ""
+    "editorialPriority": "",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agencia.ac.gov.br/seguranca-publica-reforca-combate-a-precos-abusivos-de-combustiveis-no-acre-e-amplia-fiscalizacao-no-interior/",
@@ -6000,7 +6024,7 @@
     "sourceImageUrl": "",
     "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/assets_2026_01_1769113739_05_MakeItUnique.png?quality=90&#038;strip=all&#038;crop=0,0,100,100",
     "imageCredit": "",
-    "imageFocus": "",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
@@ -7386,10 +7410,10 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "/assets/news-fallbacks/stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao.svg",
-    "feedImageUrl": "/assets/news-fallbacks/stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+    "imageCredit": "",
     "imageFocus": "center 50%",
     "imageFit": "",
     "media": null,
@@ -7465,9 +7489,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -8096,9 +8120,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687209&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687209&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -8166,9 +8190,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687207&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687207&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -8401,9 +8425,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -8541,9 +8565,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -8677,9 +8701,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -8738,10 +8762,10 @@
     ],
     "highlights": [],
     "development": [],
-    "imageUrl": "/assets/news-fallbacks/ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa.svg",
-    "feedImageUrl": "/assets/news-fallbacks/ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687196&o=rss",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687196&o=rss",
+    "imageCredit": "",
     "imageFocus": "center 50%",
     "imageFit": "",
     "media": null,
@@ -8990,9 +9014,9 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
+    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
+    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
     "originalSourceImageUrl": ""
   },
   {
@@ -9398,7 +9422,7 @@
   {
     "id": "https://www.theverge.com/tech/918572/microsoft-windows-updates-pause-35-days",
     "slug": "microsoft-will-let-you-pause-windows-updates-indefinitely-35-days-at-a-time",
-    "title": "Microsoft deve facilitar pausa nas atualizações do Windows",
+    "title": "Microsoft will let you pause Windows Updates indefinitely, 35 days at a time",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T20:45:58.000Z",
@@ -9407,14 +9431,14 @@
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918572/microsoft-windows-updates-pause-35-days",
-    "sourceLabel": "Microsoft deve facilitar pausa nas atualizações do Windows",
-    "lede": "Usuários do Windows devem ganhar mais controle para pausar atualizações automáticas, evitando interrupções durante jogos ou trabalho.",
-    "summary": "Usuários do Windows devem ganhar mais controle para pausar atualizações automáticas, evitando interrupções durante jogos ou trabalho.",
+    "sourceLabel": "Microsoft will let you pause Windows Updates indefinitely, 35 days at a time",
+    "lede": "Usuários do Windows não devem mais ser forçados a instalar atualizações automáticas no meio do uso.",
+    "summary": "Usuários do Windows não devem mais ser forçados a instalar atualizações automáticas no meio do uso.",
     "analysis": "",
     "body": [
-      "A reportagem original da The Verge indica que a Microsoft prepara uma opção mais flexível para pausar atualizações do Windows.",
-      "A mudança pode reduzir interrupções em momentos de uso intenso, como partidas, reuniões e rotinas de trabalho.",
-      "O portal mantém a referência à fonte original e apresenta o essencial em português, com título e resumo revisados."
+      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre Microsoft will let you pause Windows Updates indefinitely, 35 days at a time. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Microsoft will let you pause Windows Updates indefinitely, 35 days at a time e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
     "development": [],
@@ -10066,7 +10090,7 @@
   {
     "id": "https://www.theverge.com/tech/918301/samsung-south-korea-union-protests",
     "slug": "the-ram-shortage-could-get-even-worse-if-samsung-labor-protests-cut-production",
-    "title": "Protestos na Samsung podem pressionar oferta de memória RAM",
+    "title": "Escassez de RAM pode piorar com protestos na Samsung",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T17:11:33.000Z",
@@ -10075,14 +10099,14 @@
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918301/samsung-south-korea-union-protests",
-    "sourceLabel": "Protestos na Samsung podem pressionar oferta de memória RAM",
-    "lede": "A escassez de memória RAM, já pressionada pela demanda de data centers de IA, pode piorar se protestos trabalhistas afetarem a produção da Samsung.",
-    "summary": "A escassez de memória RAM, já pressionada pela demanda de data centers de IA, pode piorar se protestos trabalhistas afetarem a produção da Samsung.",
+    "sourceLabel": "A escassez de RAM pode piorar se protestos na Samsung afetarem a produção.",
+    "lede": "A escassez de RAM, pressionada pela demanda de IA, pode piorar se protestos na Samsung afetarem a produção.",
+    "summary": "A escassez de RAM, pressionada pela demanda de IA, pode piorar se protestos na Samsung afetarem a produção.",
     "analysis": "",
     "body": [
-      "A reportagem original da The Verge relaciona a alta demanda de infraestrutura de IA à pressão sobre preços de memória RAM.",
-      "O risco adicional vem de protestos trabalhistas na Samsung, que podem afetar a produção caso avancem sobre unidades estratégicas.",
-      "O portal mantém a referência à fonte original e apresenta o essencial em português para leitura pública."
+      "A escassez de RAM pode piorar se protestos na Samsung afetarem a produção.",
+      "A escassez de RAM pode piorar se protestos na Samsung afetarem a produção.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
     "development": [],
@@ -10099,7 +10123,7 @@
   {
     "id": "https://www.theverge.com/ai-artificial-intelligence/917996/project-maven-military-ai-katrina-manson",
     "slug": "how-project-maven-taught-the-military-to-love-ai",
-    "title": "Projeto Maven mostra avanço da inteligência artificial no uso militar",
+    "title": "How Project Maven taught the military to love AI",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T17:00:00.000Z",
@@ -10108,14 +10132,14 @@
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/917996/project-maven-military-ai-katrina-manson",
-    "sourceLabel": "Projeto Maven mostra avanço da inteligência artificial no uso militar",
-    "lede": "Reportagem da The Verge revisita o Projeto Maven e mostra como ferramentas de inteligência artificial passaram a ganhar espaço em operações militares.",
-    "summary": "Reportagem da The Verge revisita o Projeto Maven e mostra como ferramentas de inteligência artificial passaram a ganhar espaço em operações militares.",
+    "sourceLabel": "How Project Maven taught the military to love AI",
+    "lede": "Nas primeiras 24 horas do ataque ao Irã, os EUA disseram ter atingido mais de 1.000 alvos, em escala maior que a ofensiva no Iraque.",
+    "summary": "Nas primeiras 24 horas do ataque ao Irã, os EUA disseram ter atingido mais de 1.000 alvos, em escala maior que a ofensiva no Iraque.",
     "analysis": "",
     "body": [
-      "A reportagem original da The Verge aborda o Projeto Maven e a adoção de ferramentas de inteligência artificial em ambientes militares.",
-      "O tema exige leitura cuidadosa porque envolve tecnologia, defesa e decisões de alto impacto fora do uso cotidiano de IA.",
-      "O portal mantém a referência à fonte original e apresenta o essencial em português, sem reproduzir o texto em inglês."
+      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre How Project Maven taught the military to love AI. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "How Project Maven taught the military to love AI e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
     "development": [],
@@ -10576,7 +10600,7 @@
     "analysis": "",
     "body": [
       "G1 Pop & Arte publicou em 23 de abr. de 2026 a base desta noticia sobre 'Meu coração está transbordando de alegria': Giovanna Roque comemora liberdade de namorado, MC Ryan. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "'Meu coração está transbordando de alegria': Giovanna Roque comemora liberdade de namorado, MC Ryan e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Meu coração está transbordando de alegria': Giovanna Roque comemora liberdade de namorado, MC Ryan e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],

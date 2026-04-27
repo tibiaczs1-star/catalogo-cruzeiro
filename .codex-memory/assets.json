@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T06:02:44.724Z",
+  "lastUpdatedAt": "2026-04-27T12:08:54.217Z",
   "assets": [
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
@@ -1010,6 +1010,61 @@
         "2026-04-27-bloquear-ingles-publico-noticias"
       ],
       "createdAt": "2026-04-27T05:00:28.399Z"
+    },
+    {
+      "id": "online-local-sync-latest-report-md-2026-04-27-segunda",
+      "kind": "report",
+      "path": ".codex-temp/online-local-sync/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio da sincronizacao online-local de segunda: sync, sanitize public language, review team e auditoria de imagens passaram.",
+      "linkedOrderIds": [
+        "2026-04-27-segunda-sync-reuniao-subir-correcoes"
+      ],
+      "createdAt": "2026-04-27T12:08:54.217Z"
+    },
+    {
+      "id": "review-team-latest-report-md-2026-04-27-segunda",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio review-team da rodada de segunda com totalIssues=0 e idioma publico=0.",
+      "linkedOrderIds": [
+        "2026-04-27-segunda-sync-reuniao-subir-correcoes"
+      ],
+      "createdAt": "2026-04-27T12:08:54.217Z"
+    },
+    {
+      "id": "news-image-focus-audit-json-2026-04-27-segunda",
+      "kind": "report",
+      "path": "data/news-image-focus-audit.json",
+      "source": "workspace",
+      "note": "Auditoria de imagens apos sync: 360/360 ok, review=0, warning=0, error=0.",
+      "linkedOrderIds": [
+        "2026-04-27-segunda-sync-reuniao-subir-correcoes"
+      ],
+      "createdAt": "2026-04-27T12:08:54.217Z"
+    },
+    {
+      "id": "agents-autonomy-report-json-2026-04-27-segunda",
+      "kind": "report",
+      "path": "data/agents-autonomy-report.json",
+      "source": "workspace",
+      "note": "Relatorio do agents:cycle de segunda: 181 agentes, 5 escritorios, 360 noticias e review integrado zerado.",
+      "linkedOrderIds": [
+        "2026-04-27-segunda-sync-reuniao-subir-correcoes"
+      ],
+      "createdAt": "2026-04-27T12:08:54.217Z"
+    },
+    {
+      "id": "real-agents-actions-json-2026-04-27-segunda",
+      "kind": "report",
+      "path": "data/real-agents-actions.json",
+      "source": "workspace",
+      "note": "Acoes geradas pela reuniao/ciclo dos agentes na rodada de segunda.",
+      "linkedOrderIds": [
+        "2026-04-27-segunda-sync-reuniao-subir-correcoes"
+      ],
+      "createdAt": "2026-04-27T12:08:54.217Z"
     }
   ]
 }

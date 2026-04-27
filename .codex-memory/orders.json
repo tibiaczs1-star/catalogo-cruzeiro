@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T03:57:41.341Z",
+  "lastUpdatedAt": "2026-04-27T12:08:54.217Z",
   "orders": [
     {
       "id": "2026-04-26-hotfix-api-fallback-news-images",
@@ -7390,6 +7390,61 @@
         "Aguardar/validar deploy do Render se necessario."
       ],
       "notes": "Foram corrigidos os espelhos news-data.js, data/news-archive.json, data/runtime-news.json e data/topic-feed-tech.json. A nova rotina bloqueia frases publicas em ingles em title/sourceLabel/lede/summary/body/highlights/development. Commit 26a4dc9 enviado no PR #5 e mergeado em origin/main no merge commit 8117d4d."
+    },
+    {
+      "id": "2026-04-27-segunda-sync-reuniao-subir-correcoes",
+      "createdAt": "2026-04-27T12:08:54.217Z",
+      "updatedAt": "2026-04-27T12:08:54.217Z",
+      "status": "in_progress",
+      "source": "chat",
+      "rawRequest": "suba todas as correções tome decizão atueletudo sicnronmize e gfaça as rotinas de reunioes e vamos deixa tudo liondo nessa segunda lina",
+      "summary": "Rodada de segunda: sincronizar online-local, rodar saneamento de idioma, review team, auditoria de imagens, ciclo/reuniao dos agentes e subir todas as correcoes relevantes sem incluir PubPaid.",
+      "normalizedTasks": [
+        "Sincronizar online-local contra Render",
+        "Rodar saneamento automatico de idioma publico",
+        "Rodar review team e auditoria de imagens",
+        "Rodar ciclo/reuniao dos 181 agentes",
+        "Decidir pacote de commit sem PubPaid e sem ruido de linha",
+        "Subir PR e mergear no main"
+      ],
+      "filesTouched": [
+        "scripts/sync-online-local.js",
+        "scripts/sanitize-public-language.js",
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "data/news-image-focus-audit.json",
+        "data/re-rodada-dia-geral-report.json",
+        "data/agents-autonomy-report.json",
+        "data/office-orders.json",
+        "data/real-agents-actions.json",
+        ".codex-agents/registry.json",
+        "assets/news-fallbacks/",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "online-local-sync-latest-report-md-2026-04-27-segunda",
+        "review-team-latest-report-md-2026-04-27-segunda",
+        "news-image-focus-audit-json-2026-04-27-segunda",
+        "agents-autonomy-report-json-2026-04-27-segunda",
+        "real-agents-actions-json-2026-04-27-segunda"
+      ],
+      "tags": [
+        "segunda",
+        "sync-online-local",
+        "reuniao-agentes",
+        "noticias",
+        "review-team",
+        "deploy"
+      ],
+      "nextSteps": [
+        "Criar branch limpo em origin/main, commitar pacote final e publicar."
+      ],
+      "notes": "Sincronizacao integrada retornou 360 noticias ativas/acervo, 0 imagens ausentes, 0 duplicatas locais por divisao, language sanitizer ok, review-team totalIssues=0 e agents:cycle ok com 181 agentes/5 escritorios."
     }
   ]
 }

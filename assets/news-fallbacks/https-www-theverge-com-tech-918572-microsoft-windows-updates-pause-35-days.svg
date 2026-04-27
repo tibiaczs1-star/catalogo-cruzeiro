@@ -17,7 +17,7 @@
   <circle cx="1038" cy="210" r="52" fill="hsl(334 72% 48%)" opacity=".78"/>
   <path d="M126 492h948" stroke="hsl(279 78% 58%)" stroke-width="12" stroke-linecap="round" opacity=".82"/>
   <text x="126" y="282" fill="#fff8ea" font-family="Georgia, serif" font-size="50" font-weight="700">
-    
+    <tspan x="126" dy="0">Microsoft deve facilitar</tspan><tspan x="126" dy="60">pausa nas atualizações do</tspan><tspan x="126" dy="60">Windows</tspan>
   </text>
   <text x="126" y="574" fill="rgba(255,248,234,.72)" font-family="Arial, sans-serif" font-size="23" font-weight="700">The Verge - imagem editorial segura</text>
 </svg>

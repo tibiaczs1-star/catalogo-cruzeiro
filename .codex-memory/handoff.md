@@ -1,13 +1,13 @@
 # Handoff
 
-Updated: 2026-04-27T09:37:01.475Z
+Updated: 2026-04-27T12:08:54.217Z
 
-O usuario proibiu texto publico em ingles apos enviar captura de uma noticia de Cultura com resumo em ingles. A rodada corrigiu o item do Google e outros vazamentos de The Verge encontrados em `news-data.js`, `data/news-archive.json`, `data/runtime-news.json` e `data/topic-feed-tech.json`.
+Rodada de segunda em andamento por ordem do usuario: subir todas as correcoes, decidir, atualizar/sincronizar e rodar reunioes.
 
-Foi criada trava permanente no `scripts/review-team-audit.js`: `language-review` percorre campos publicos como title, sourceLabel, lede, summary, body, highlights e development em arquivos publicos de noticia. A regra permite nomes proprios de marcas/fontes, mas bloqueia frases publicas em ingles copiadas da fonte.
+Validado localmente: `npm run sync:online-local` ok; etapa `sanitize public language` integrada; `npm run review:team`/review integrado com `totalIssues=0`; `npm run audit:news-images -- --offline --limit=1000 --strict-new` com 360/360 ok; `npm run agents:cycle` ok com 181 agentes e 5 escritorios.
 
-Agentes informados em `AGENTS.md` e `.codex-review-team/README.md`. Validado com `node --check scripts/review-team-audit.js` e `node scripts/review-team-audit.js` retornando `totalIssues: 0`. Commit `26a4dc9` entrou no PR #5, que foi mergeado em `origin/main` no merge commit `8117d4d`.
+Pacote escolhido: noticias/dados/fallbacks/relatorios de reuniao + rotina nova `scripts/sanitize-public-language.js` chamada por `scripts/sync-online-local.js`. PubPaid permanece fora do commit/deploy por trava anterior.
 
 ## Next
 
-- Se a pergunta for sobre producao, conferir o deploy do Render; no repositorio remoto, a trava ja esta no `main`.
+- Fazer branch limpo de `origin/main`, commit, push, PR e merge.
