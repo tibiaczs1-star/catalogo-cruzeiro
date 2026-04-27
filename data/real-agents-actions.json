@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-27T12:06:55.109Z",
+  "updatedAt": "2026-04-27T15:38:19.043Z",
   "actions": [
     {
       "id": "act-esttiles-fashion-ecommerce-1",
@@ -10,11 +10,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/01-esttiles-fashion-ecommerce.md",
-      "createdAt": "2026-04-27T12:06:55.086Z"
+      "createdAt": "2026-04-27T15:38:19.019Z"
     },
     {
       "id": "act-esttiles-fashion-cms-fashion-2",
@@ -24,11 +24,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/02-esttiles-fashion-cms-fashion.md",
-      "createdAt": "2026-04-27T12:06:55.087Z"
+      "createdAt": "2026-04-27T15:38:19.020Z"
     },
     {
       "id": "act-esttiles-fashion-data-fashion-3",
@@ -38,11 +38,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/03-esttiles-fashion-data-fashion.md",
-      "createdAt": "2026-04-27T12:06:55.087Z"
+      "createdAt": "2026-04-27T15:38:19.020Z"
     },
     {
       "id": "act-esttiles-fashion-photo-pipeline-4",
@@ -52,11 +52,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/04-esttiles-fashion-photo-pipeline.md",
-      "createdAt": "2026-04-27T12:06:55.088Z"
+      "createdAt": "2026-04-27T15:38:19.021Z"
     },
     {
       "id": "act-esttiles-fashion-calendar-fashion-5",
@@ -66,11 +66,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/05-esttiles-fashion-calendar-fashion.md",
-      "createdAt": "2026-04-27T12:06:55.088Z"
+      "createdAt": "2026-04-27T15:38:19.021Z"
     },
     {
       "id": "act-esttiles-fashion-trend-ai-6",
@@ -80,11 +80,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/06-esttiles-fashion-trend-ai.md",
-      "createdAt": "2026-04-27T12:06:55.089Z"
+      "createdAt": "2026-04-27T15:38:19.022Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-deploy-7",
@@ -94,11 +94,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 894,
+      "points": 914,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/07-esttiles-fashion-fashion-deploy.md",
-      "createdAt": "2026-04-27T12:06:55.089Z"
+      "createdAt": "2026-04-27T15:38:19.022Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-lead-8",
@@ -108,11 +108,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 888,
+      "points": 907,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/08-esttiles-fashion-fashion-lead.md",
-      "createdAt": "2026-04-27T12:06:55.089Z"
+      "createdAt": "2026-04-27T15:38:19.023Z"
     },
     {
       "id": "act-editorial-hq-dev-automacao-9",
@@ -122,11 +122,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/09-editorial-hq-dev-automacao.md",
-      "createdAt": "2026-04-27T12:06:55.090Z"
+      "createdAt": "2026-04-27T15:38:19.023Z"
     },
     {
       "id": "act-editorial-hq-otto-physics-10",
@@ -136,11 +136,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/10-editorial-hq-otto-physics.md",
-      "createdAt": "2026-04-27T12:06:55.090Z"
+      "createdAt": "2026-04-27T15:38:19.023Z"
     },
     {
       "id": "act-nerd-studio-zed-engine-11",
@@ -150,11 +150,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/11-nerd-studio-zed-engine.md",
-      "createdAt": "2026-04-27T12:06:55.091Z"
+      "createdAt": "2026-04-27T15:38:19.024Z"
     },
     {
       "id": "act-arte-game-design-collision-12",
@@ -164,11 +164,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/12-arte-game-design-collision.md",
-      "createdAt": "2026-04-27T12:06:55.091Z"
+      "createdAt": "2026-04-27T15:38:19.024Z"
     },
     {
       "id": "act-arte-game-design-physics-13",
@@ -178,11 +178,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/13-arte-game-design-physics.md",
-      "createdAt": "2026-04-27T12:06:55.092Z"
+      "createdAt": "2026-04-27T15:38:19.025Z"
     },
     {
       "id": "act-arte-game-design-controls-14",
@@ -192,11 +192,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/14-arte-game-design-controls.md",
-      "createdAt": "2026-04-27T12:06:55.092Z"
+      "createdAt": "2026-04-27T15:38:19.025Z"
     },
     {
       "id": "act-arte-game-design-engine-arch-15",
@@ -206,11 +206,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/15-arte-game-design-engine-arch.md",
-      "createdAt": "2026-04-27T12:06:55.092Z"
+      "createdAt": "2026-04-27T15:38:19.025Z"
     },
     {
       "id": "act-arte-game-design-npc-ai-16",
@@ -220,11 +220,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/16-arte-game-design-npc-ai.md",
-      "createdAt": "2026-04-27T12:06:55.093Z"
+      "createdAt": "2026-04-27T15:38:19.026Z"
     },
     {
       "id": "act-arte-game-design-pool-physics-17",
@@ -234,11 +234,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/17-arte-game-design-pool-physics.md",
-      "createdAt": "2026-04-27T12:06:55.093Z"
+      "createdAt": "2026-04-27T15:38:19.026Z"
     },
     {
       "id": "act-arte-game-design-spritesheet-export-18",
@@ -248,11 +248,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/18-arte-game-design-spritesheet-export.md",
-      "createdAt": "2026-04-27T12:06:55.094Z"
+      "createdAt": "2026-04-27T15:38:19.027Z"
     },
     {
       "id": "act-arte-game-design-optimizer-19",
@@ -262,11 +262,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/19-arte-game-design-optimizer.md",
-      "createdAt": "2026-04-27T12:06:55.094Z"
+      "createdAt": "2026-04-27T15:38:19.027Z"
     },
     {
       "id": "act-arte-game-design-deploy-games-20",
@@ -276,11 +276,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 882,
+      "points": 901,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/20-arte-game-design-deploy-games.md",
-      "createdAt": "2026-04-27T12:06:55.094Z"
+      "createdAt": "2026-04-27T15:38:19.028Z"
     },
     {
       "id": "act-nerd-studio-otto-physics-21",
@@ -290,11 +290,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 876,
+      "points": 895,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/21-nerd-studio-otto-physics.md",
-      "createdAt": "2026-04-27T12:06:55.095Z"
+      "createdAt": "2026-04-27T15:38:19.028Z"
     },
     {
       "id": "act-arte-game-design-camera-22",
@@ -304,11 +304,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 876,
+      "points": 895,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/22-arte-game-design-camera.md",
-      "createdAt": "2026-04-27T12:06:55.095Z"
+      "createdAt": "2026-04-27T15:38:19.029Z"
     },
     {
       "id": "act-arte-game-design-state-machine-23",
@@ -318,11 +318,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 876,
+      "points": 895,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/23-arte-game-design-state-machine.md",
-      "createdAt": "2026-04-27T12:06:55.096Z"
+      "createdAt": "2026-04-27T15:38:19.030Z"
     },
     {
       "id": "act-arte-game-design-map-tools-24",
@@ -332,11 +332,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 876,
+      "points": 895,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 360 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 120 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/24-arte-game-design-map-tools.md",
-      "createdAt": "2026-04-27T12:06:55.096Z"
+      "createdAt": "2026-04-27T15:38:19.030Z"
     },
     {
       "id": "act-editorial-hq-ceo-codex-25",
@@ -346,11 +346,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/25-editorial-hq-ceo-codex.md",
-      "createdAt": "2026-04-27T12:06:55.097Z"
+      "createdAt": "2026-04-27T15:38:19.031Z"
     },
     {
       "id": "act-editorial-hq-editor-chefe-26",
@@ -360,11 +360,11 @@
       "role": "editor",
       "kind": "ajuste-editorial",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "revisar a hierarquia de capa com prioridade para Comboio off-road reúne dezenas de aventureiros e percorre ramais da zona rural de Cruzeiro do Sul",
+      "title": "revisar a hierarquia de capa com prioridade para Ideias de presentes tecnológicos para o Dia das Mães em 2026",
       "artifact": ".codex-temp/real-agents/artifacts/26-editorial-hq-editor-chefe.md",
-      "createdAt": "2026-04-27T12:06:55.097Z"
+      "createdAt": "2026-04-27T15:38:19.032Z"
     },
     {
       "id": "act-nerd-studio-codex-nerd-27",
@@ -374,11 +374,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/27-nerd-studio-codex-nerd.md",
-      "createdAt": "2026-04-27T12:06:55.098Z"
+      "createdAt": "2026-04-27T15:38:19.032Z"
     },
     {
       "id": "act-ninja-vault-ninja-chief-28",
@@ -388,11 +388,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/28-ninja-vault-ninja-chief.md",
-      "createdAt": "2026-04-27T12:06:55.098Z"
+      "createdAt": "2026-04-27T15:38:19.033Z"
     },
     {
       "id": "act-ninja-vault-ninja-ops-29",
@@ -402,11 +402,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/29-ninja-vault-ninja-ops.md",
-      "createdAt": "2026-04-27T12:06:55.099Z"
+      "createdAt": "2026-04-27T15:38:19.033Z"
     },
     {
       "id": "act-ninja-vault-ninja-scope-30",
@@ -416,11 +416,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/30-ninja-vault-ninja-scope.md",
-      "createdAt": "2026-04-27T12:06:55.099Z"
+      "createdAt": "2026-04-27T15:38:19.034Z"
     },
     {
       "id": "act-ninja-vault-ninja-rights-31",
@@ -430,11 +430,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/31-ninja-vault-ninja-rights.md",
-      "createdAt": "2026-04-27T12:06:55.100Z"
+      "createdAt": "2026-04-27T15:38:19.035Z"
     },
     {
       "id": "act-ninja-vault-ninja-archive-32",
@@ -444,11 +444,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/32-ninja-vault-ninja-archive.md",
-      "createdAt": "2026-04-27T12:06:55.100Z"
+      "createdAt": "2026-04-27T15:38:19.035Z"
     },
     {
       "id": "act-arte-game-design-arte-lead-33",
@@ -458,11 +458,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Esporte, Polícia",
+      "title": "redistribuir foco entre Cotidiano, Polícia, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/33-arte-game-design-arte-lead.md",
-      "createdAt": "2026-04-27T12:06:55.101Z"
+      "createdAt": "2026-04-27T15:38:19.036Z"
     },
     {
       "id": "act-esttiles-fashion-trend-lead-34",
@@ -472,11 +472,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Comboio off-road reúne dezenas de aventureiros e percorre ramais da zona rural de Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Ideias de presentes tecnológicos para o Dia das Mães em 2026",
       "artifact": ".codex-temp/real-agents/artifacts/34-esttiles-fashion-trend-lead.md",
-      "createdAt": "2026-04-27T12:06:55.101Z"
+      "createdAt": "2026-04-27T15:38:19.036Z"
     },
     {
       "id": "act-esttiles-fashion-street-style-35",
@@ -486,11 +486,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Comboio off-road reúne dezenas de aventureiros e percorre ramais da zona rural de Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Ideias de presentes tecnológicos para o Dia das Mães em 2026",
       "artifact": ".codex-temp/real-agents/artifacts/35-esttiles-fashion-street-style.md",
-      "createdAt": "2026-04-27T12:06:55.102Z"
+      "createdAt": "2026-04-27T15:38:19.037Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-reporter-36",
@@ -500,11 +500,11 @@
       "role": "copy",
       "kind": "copy-sugerida",
       "status": "aguardando-aprovacao",
-      "points": 875,
+      "points": 894,
       "outcome": "success",
-      "title": "reescrever titulo, apoio e gancho de clique para Comboio off-road reúne dezenas de aventureiros e percorre ramais da zona rural de Cruzeiro do Sul",
+      "title": "reescrever titulo, apoio e gancho de clique para Ideias de presentes tecnológicos para o Dia das Mães em 2026",
       "artifact": ".codex-temp/real-agents/artifacts/36-esttiles-fashion-fashion-reporter.md",
-      "createdAt": "2026-04-27T12:06:55.102Z"
+      "createdAt": "2026-04-27T15:38:19.037Z"
     }
   ]
 }

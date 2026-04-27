@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T14:13:19.768Z",
+  "lastUpdatedAt": "2026-04-27T17:56:41.116Z",
   "orders": [
     {
       "id": "2026-04-26-hotfix-api-fallback-news-images",
@@ -7519,6 +7519,81 @@
       "source": "chat",
       "rawRequest": "Substituir o texto do selo no topo por manchete curta e ironica alinhada a ilustracao, sem repetir cookies; usar MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS.",
       "summary": "Trocar selo do popup para manchete editorial sobre mundo em guerra e escolhas pequenas, sem redundancia de cookies.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-executar-rodada-pubpaid-2-0-como-instrutor-de-testes-com-varredura-de-memoria-wo",
+      "createdAt": "2026-04-27T14:43:34.200Z",
+      "updatedAt": "2026-04-27T10:39:39.1410409-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Executar o prompt mestre: trabalhar como instrutor de testes/auditor/organizador de objetivos para PubPaid/PaidPub, ler memoria, verificar pasta local, separar ruido, rodar reuniao e transformar em objetivos testaveis antes de criar correcoes.",
+      "summary": "Executar rodada PubPaid 2.0 como instrutor de testes, com varredura de memoria/workspace, reuniao, validacao minima e fila objetiva P0/P1/P2",
+      "normalizedTasks": [
+        "ler memoria obrigatoria",
+        "verificar status local",
+        "separar ruido de mudanca real",
+        "rodar review team",
+        "rodar ciclo de agentes",
+        "validar sintaxe PubPaid",
+        "validar fluxo PubPaid quando possivel",
+        "montar fila P0 P1 P2"
+      ],
+      "filesTouched": [
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        "PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md",
+        "pubpaid-v2.html",
+        "pubpaid-phaser/",
+        "pubpaid-phaser.css",
+        "assets/pubpaid/",
+        "RELATORIO_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md",
+        "server.js",
+        "scripts/review-team-audit.js",
+        "scripts/sanitize-public-language.js",
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/assets.json",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "relatorio-pubpaid-instrutor-testes-2026-04-27-md",
+        "playtest-report-json",
+        "pixel-report-json",
+        ".codex-temp/review-team/latest-report.json",
+        "data/agents-autonomy-report.json"
+      ],
+      "tags": [
+        "pubpaid",
+        "instrutor-testes",
+        "reuniao",
+        "qa",
+        "ruido",
+        "objetivos"
+      ],
+      "nextSteps": [
+        "classificar status local",
+        "rodar rotinas",
+        "validar PubPaid",
+        "registrar relatorio"
+      ],
+      "notes": "Rodada concluida: prompt criado, relatorio/ata criado, PubPaid corrigida e validada sem deploy, trava anti-ingles reforcada, agents:cycle ok com 181 agentes/5 escritorios, review:team totalIssues=0 e smoke anti-ingles sem hits."
+    },
+    {
+      "id": "2026-04-27-rodada-geral-pedida-pelo-usuario-sincronizar-atualizar-buscar-noticias-validar-o",
+      "createdAt": "2026-04-27T17:56:41.116Z",
+      "updatedAt": "2026-04-27T17:56:41.116Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "sincronizar , atualziar, buscar noticias, fazer comits, tudo agora, o jornal ja esta bem, graças a deus, esta bem visualmente",
+      "summary": "Rodada geral pedida pelo usuário: sincronizar, atualizar/buscar notícias, validar o jornal sem mexer no visual aprovado e fazer commits.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

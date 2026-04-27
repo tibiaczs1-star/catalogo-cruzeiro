@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T12:08:54.217Z",
+  "lastUpdatedAt": "2026-04-27T15:40:36.094Z",
   "assets": [
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
@@ -1065,6 +1065,44 @@
         "2026-04-27-segunda-sync-reuniao-subir-correcoes"
       ],
       "createdAt": "2026-04-27T12:08:54.217Z"
+    },
+    {
+      "id": "prompt-pubpaid-instrutor-testes-2026-04-27",
+      "kind": "prompt",
+      "path": "PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md",
+      "source": "workspace",
+      "note": "Prompt mestre para abrir novas conversas/rodadas PubPaid 2.0 no modo instrutor de testes, reuniao, ruido e objetivos.",
+      "linkedOrderIds": [
+        "2026-04-27-criar-prompt-mestre-para-a-nova-fase-pubpaid-2-0-como-instrutor-de-testes-audito"
+      ],
+      "createdAt": "2026-04-27T13:37:08.612Z"
+    },
+    {
+      "id": "relatorio-pubpaid-instrutor-testes-2026-04-27-md",
+      "kind": "report",
+      "path": "RELATORIO_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md",
+      "source": "workspace",
+      "note": "Ata da rodada PubPaid 2.0 como instrutor de testes, com objetivos testaveis, evidencias e ruido restante.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T15:40:21.036Z"
+    },
+    {
+      "id": "playtest-report-json",
+      "kind": "report",
+      "path": ".codex-temp/pubpaid-playtest/playtest-report.json",
+      "source": "workspace",
+      "note": "Relatorio Playwright da validacao PubPaid 2.0: fluxo intro/rua/salao/mesas/Dardos/Dama, sem erros de pagina.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T15:40:26.417Z"
+    },
+    {
+      "id": "pixel-report-json",
+      "kind": "report",
+      "path": ".codex-temp/pubpaid-playtest/pixel-report.json",
+      "source": "workspace",
+      "note": "Relatorio de pixels das capturas PubPaid: screenshots nao vazias e sem falhas listadas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T15:40:36.094Z"
     }
   ]
 }

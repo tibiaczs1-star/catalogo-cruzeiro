@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-27 - PubPaid como instrutor de testes
+
+- Rodada PubPaid 2.0 executada no modo instrutor de testes/auditor: memoria lida, prompt mestre criado, ruido local separado, reuniao de agentes rodada e objetivos testaveis registrados em `RELATORIO_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md`.
+- Frente oficial confirmada: `pubpaid-v2.html`, `pubpaid-phaser/`, `pubpaid-phaser.css` e `assets/pubpaid/`; `pubpaid.html` continua historica/demo e PubPaid segue sem deploy/commit ate autorizacao clara.
+- Correcoes PubPaid validadas: textos publicos em portugues, `setTint` seguro no player container, paineis DOM respeitando `[hidden]`, clique DOM/Phaser isolado e resultado de Dardos sem modal duplicado.
+- Trava anti-ingles reforcada tambem para noticias: `scripts/review-team-audit.js`, `scripts/sanitize-public-language.js` e `server.js` agora bloqueiam/saneiam fonte internacional sem sinal claro de portugues; dados atuais foram saneados em `news-data.js`, `data/runtime-news.json`, `data/news-archive.json` e topic-feeds afetados.
+- Validacoes finais: `npm run agents:cycle` ok com 181 agentes/5 escritorios, `npm run review:team` com `totalIssues=0`, smoke anti-ingles `englishLeakSmokeHits=[]`, `node --check` em `server.js`, scripts de idioma e JS principais da PubPaid, JSON de memoria/dados ok.
+
 ## Atualizacao rapida 2026-04-27 - Popup explicado e console limpo
 
 - Corrigido feedback do usuario no popup de cookies: o primeiro texto agora explica a ilustracao (`Ilustracao: IA lendo o caos do dia`) e a faixa lateral descreve que a cena e uma ilustracao ficticia da IA organizando memes, alertas e noticias.
