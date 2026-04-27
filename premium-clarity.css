@@ -1314,3 +1314,35 @@ body.editorial-home #entretenimento .ent-photo {
     min-height: clamp(260px, 72vw, 390px) !important;
   }
 }
+
+/* 2026-04-26: tira as peliculas brancas do bloco Mais Assuntos. */
+body.editorial-home .cadernos-shell::after,
+body.editorial-home .cadernos-shell .caderno-card::after,
+body.editorial-home .cadernos-shell .mini-thumb.has-photo::before,
+body.editorial-home .cadernos-shell .mini-thumb.has-real-photo::before,
+body.editorial-home .cadernos-shell .mini-thumb.has-photo::after,
+body.editorial-home .cadernos-shell .mini-thumb.has-real-photo::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
+}
+
+body.editorial-home .cadernos-shell .mini-thumb.has-photo,
+body.editorial-home .cadernos-shell .mini-thumb.has-real-photo {
+  background-color: #142a43 !important;
+  background-image: var(--news-photo, var(--bg-image)) !important;
+  background-position: var(--bg-position, center) !important;
+  background-size: var(--bg-size, cover) !important;
+  background-repeat: no-repeat !important;
+  filter: saturate(1.08) contrast(1.04) !important;
+  box-shadow:
+    0 14px 28px rgba(14, 30, 50, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+body.editorial-home .cadernos-shell .mini-thumb.has-photo[style*="contain"],
+body.editorial-home .cadernos-shell .mini-thumb.has-real-photo[style*="contain"] {
+  background-size: contain !important;
+}

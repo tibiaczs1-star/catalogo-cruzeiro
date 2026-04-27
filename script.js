@@ -1388,6 +1388,10 @@ const applyMosaicImage = (panelNode, article) => {
 
 const hydrateStaticThumbs = (newsMap = {}) => {
   thumbNodes.forEach((thumbNode) => {
+    if (thumbNode.closest(".caderno-card[data-caderno-static='true']")) {
+      return;
+    }
+
     const slug = getSlugFromThumbNode(thumbNode);
     const article = newsMap?.[slug];
     thumbNode.dataset.topic = getThumbTopic(thumbNode, article);
@@ -7165,6 +7169,21 @@ const hydrateCadernoCards = async (items = []) => {
     const stories = [...card.querySelectorAll(".mini-story")];
 
     if (!stories.length) {
+      return;
+    }
+
+    if (card.dataset.cadernoStatic === "true") {
+      stories.forEach((storyNode) => {
+        const thumbNode = storyNode.querySelector(".mini-thumb");
+        const hasInlinePhoto =
+          thumbNode &&
+          /url\(/i.test(
+            `${thumbNode.style.getPropertyValue("--bg-image")} ${thumbNode.style.getPropertyValue("--news-photo")} ${thumbNode.style.backgroundImage || ""}`
+          );
+        storyNode.classList.toggle("story-without-photo", !hasInlinePhoto);
+        thumbNode?.classList.toggle("has-photo", Boolean(hasInlinePhoto));
+        thumbNode?.classList.toggle("has-real-photo", Boolean(hasInlinePhoto));
+      });
       return;
     }
 

@@ -1,7 +1,41 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T06:02:44.724Z",
+  "lastUpdatedAt": "2026-04-26T23:36:23.955Z",
   "orders": [
+    {
+      "id": "2026-04-26-remover-coberturas-brancas-home",
+      "createdAt": "2026-04-26T23:23:10.166Z",
+      "updatedAt": "2026-04-26T23:36:23.955Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "analise porque ta tudo esquisito e tire essas coberturas brncas transparentes feias",
+      "summary": "Remover overlays brancos do bloco Mais Assuntos e transformar os cards em vitrine estatica de subsites/cadernos reais, com fotos locais unicas e sem linguagem de editor.",
+      "normalizedTasks": [
+        "remover peliculas brancas e brilhos artificiais do bloco Mais Assuntos",
+        "trocar rotulos subsite por editorias reais",
+        "completar a grade com 14 cadernos/subsites",
+        "garantir links e imagens sem repeticao",
+        "impedir hidratador de noticias de apagar fotos ou substituir cards estaticos"
+      ],
+      "tags": [
+        "home",
+        "visual",
+        "css",
+        "overlays",
+        "cards"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "premium-clarity.css",
+        ".codex-memory/orders.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "output/playwright/cadernos-final-2.png"
+      ]
+    },
     {
       "id": "2026-04-25-pubpaid-rua-rpg-civis-player-8dir",
       "createdAt": "2026-04-25T15:20:00.000Z",
