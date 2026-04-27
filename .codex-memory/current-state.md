@@ -1,19 +1,19 @@
 # Current State
 
-Updated: 2026-04-27T09:37:01.475Z
+Updated: 2026-04-27T12:08:54.217Z
 
 ## Active Goal
 
-- Trava de idioma publico em noticias concluida e mergeada
+- Rodada de segunda para sincronizar, revisar, reunir agentes e subir correcoes
 
 ## Summary
 
-A captura do usuario mostrou uma noticia de Cultura com resumo em ingles sobre icones do Google. A rodada corrigiu esse item e outros vazamentos encontrados em espelhos publicos de noticias: `data/news-archive.json`, `data/runtime-news.json`, `news-data.js` e `data/topic-feed-tech.json`.
+A ordem atual foi executar a rodada completa: tomar decisao, atualizar tudo, sincronizar e rodar rotinas de reuniao. A PubPaid continua fora do pacote por trava anterior sem autorizacao explicita.
 
-A equipe local foi informada em `AGENTS.md` e `.codex-review-team/README.md`. O auditor `scripts/review-team-audit.js` agora inclui a rotina `language-review`, que verifica campos publicos de noticia e marca erro alto quando encontra prosa em ingles.
+Executado: `npm run sync:online-local` com 360 noticias ativas/acervo, 0 imagens ausentes, 0 duplicatas locais por divisao, saneamento de idioma publico integrado e auditoria de imagens 360/360 ok. Executado tambem `npm run agents:cycle`: 181 agentes, 5 escritorios, 360 noticias e review-team integrado com `totalIssues=0`.
 
-Validacao: `node --check scripts/review-team-audit.js` ok; `node scripts/review-team-audit.js` retornou `totalIssues: 0`; varredura final nao encontrou as frases em ingles corrigidas. Commit `26a4dc9` foi enviado no PR #5, mergeado em `origin/main` no merge commit `8117d4d`.
+Decisao de pacote: incluir dados sincronizados, fallbacks de noticias, relatorios/estado da reuniao, `scripts/sync-online-local.js` e o novo `scripts/sanitize-public-language.js`. Nao incluir PubPaid nem arquivos de agentes que aparecem apenas por normalizacao de linha sem diff real.
 
 ## Next
 
-- Aguardar/validar deploy do Render se necessario. Nao ha pendencia da trava de idioma no GitHub.
+- Criar branch limpo a partir de `origin/main`, commitar, subir PR e mergear.

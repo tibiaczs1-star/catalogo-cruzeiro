@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27T03:45:00.390Z",
+  "updatedAt": "2026-04-27T12:10:50.448Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 1000,
   "offline": true,
@@ -9,12 +9,19 @@
     "review": 0,
     "warning": 0,
     "error": 0,
-    "manualFocus": 272,
+    "manualFocus": 274,
     "newSinceLastAudit": 0,
     "missingImage": 0,
     "unreachableImage": 0
   },
   "slugs": [
+    "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
+    "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
+    "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
+    "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+    "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
     "galvez-vence-o-humaita-e-se-mantem-dentro-do-g4-no-grupo-a2",
     "cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2",
     "joao-fonseca-perde-a-cabeca-e-e-eliminado-por-jodar-no-madrid-open",
@@ -179,7 +186,6 @@
     "ossada-humana-e-encontrada-na-br-364-e-levada-ao-iml-de-cruzeiro-do-sul",
     "governo-aciona-equipes-para-lidar-com-balsa-que-derramou-15-mil-litros-de-diesel-no-rio-tarauaca",
     "vitima-de-queimadura-em-procedimento-estetico-acusa-omissao-da-policia-no-ac",
-    "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
     "https://www.theverge.com/science/918753/researchers-talking-less",
     "https://www.theverge.com/gadgets/918410/sharge-icemag-3-qi2-usb-c-wireless-power-bank-battery-deal-sale",
     "motorista-de-aplicativo-e-usado-como-refem-em-assalto-a-loja-no-centro-de-cruzeiro-do-sul",
@@ -251,7 +257,6 @@
     "influenciador-que-gravou-aulas-da-unb-e-difamou-professor-e-condenado",
     "ex-bbb-pedro-espindola-desabafa-sobre-saude-mental-sigo-em-progressao",
     "rapper-l7nnon-vence-yoko-ono-na-justica-e-pode-manter-nome-artistico-entenda-o-caso",
-    "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
     "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado",
     "homem-e-levado-por-segurancas-apos-ferir-outro-na-estacao-sacoma",
     "derivativos-entenda-diferenca-entre-operacoes-permitidas-e-proibidas",
@@ -280,8 +285,6 @@
     "acriano-que-lutou-na-ucrania-retorna-a-rodrigues-alves-e-surpreende-mae-com-buque-de-rosas",
     "chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
     "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
-    "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
     "aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
     "apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas",
     "simone-mendes-junta-idolos-sertanejos-dos-anos-1990-na-gravacao-ao-vivo-do-album-audiovisual-minhas-memorias",
@@ -306,10 +309,8 @@
     "deputado-zezinho-barbary-anuncia-entrega-de-viaturas-barcos-motorizados-e-onibus-para-o-vale-do-jurua",
     "deputado-destaca-uniao-entre-assembleia-legislativa-e-governo-para-fortalecer-seguranca-no-jurua",
     "licenca-previa-areacre-auto-posto-ltda",
-    "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
     "the-person-who-allegedly-leaked-paramount-s-new-avatar-movie-has-been-arrested",
     "projeto-vozes-da-floresta-destaca-cultura-indigena-e-fortalece-identidade-cultural-em-cruzeiro-do-sul",
-    "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
     "filho-de-rob-reiner-publica-carta-sobre-morte-dos-pais-e-julgamento-do-irmao-e-quase-impossivel-de-processar",
     "youtube-lanca-ferramenta-de-deteccao-de-deepfakes-para-celebridades-de-hollywood",
     "bmw-is-one-step-closer-to-selling-you-a-color-changing-car",
@@ -317,7 +318,6 @@
     "caminhada-de-conscientizacao-sobre-o-autismo-reune-pais-e-comunidade-em-cruzeiro-do-sul",
     "the-ram-shortage-could-get-even-worse-if-samsung-labor-protests-cut-production",
     "how-project-maven-taught-the-military-to-love-ai",
-    "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
     "xreal-s-best-ar-glasses-are-599-for-good-now",
     "governo-exonera-condenado-por-tortura-e-nomeia-esposa-no-lugar-dele-em-secretaria-no-acre",
     "pre-enem-8216-educaleac-8217-abre-selecao-com-mais-de-200-vagas-presenciais-e-online",
@@ -378,6 +378,194 @@
   ],
   "reviewQueue": [],
   "items": [
+    {
+      "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
+      "title": "Mailza define linha de frente da sua campanha ao governo",
+      "category": "Política Regional",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-04-25T15:06:34.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 976,
+        "height": 695,
+        "ratio": 1.404,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
+      "title": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
+      "category": "Política Regional",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-04-25T00:03:11.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 683,
+        "ratio": 1.499,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+      "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
+      "category": "Política Regional",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T21:57:54.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+      "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
+      "category": "Política Regional",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-04-24T21:56:12.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
+      "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
+      "category": "Política Regional",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-24T19:58:21.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+      "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
+      "category": "Política Regional",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-04-24T19:28:41.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
+      "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
+      "category": "Política Regional",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-04-24T16:47:11.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
     {
       "slug": "galvez-vence-o-humaita-e-se-mantem-dentro-do-g4-no-grupo-a2",
       "title": "Galvez vence o Humaitá e se mantém dentro do G4 no grupo A2",
@@ -1033,7 +1221,7 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-26T21:18:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
+      "imageUrl": "/assets/news-fallbacks/fluminense-derrota-mixto-mt-por-2-a-0-com-gols-de-keke-e-dede.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -1272,7 +1460,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
@@ -1459,7 +1647,7 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-26T20:06:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
+      "imageUrl": "/assets/news-fallbacks/alckmin-anuncia-r-10-bilhoes-para-modernizacao-de-maquinas-agricolas.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -1664,7 +1852,7 @@
     },
     {
       "slug": "https://www.theverge.com/tech/918852/googles-new-gradient-icon-design-is-coming-to-more-apps",
-      "title": "",
+      "title": "Google prepara novo visual para ícones de aplicativos",
       "category": "Cultura",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-26T18:34:26.000Z",
@@ -2427,7 +2615,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
@@ -2583,7 +2771,7 @@
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-04-26T07:00:43.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+      "imageUrl": "/assets/news-fallbacks/ambiente-digital-e-barreira-para-terceira-via-crescer-diz-ceo-da-ap-exata.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -3732,8 +3920,8 @@
       "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -3840,7 +4028,7 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -3864,7 +4052,7 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -3893,7 +4081,7 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -3931,7 +4119,7 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-25T20:30:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
+      "imageUrl": "/assets/news-fallbacks/cientistas-criam-painel-para-orientar-transicao-energetica-global.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -3972,7 +4160,7 @@
     },
     {
       "slug": "https://www.theverge.com/science/918769/trump-fires-the-entire-national-science-board",
-      "title": "",
+      "title": "Governo Trump demite integrantes do conselho nacional de ciência dos EUA",
       "category": "Cotidiano",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-25T19:20:15.000Z",
@@ -3982,15 +4170,17 @@
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "campanha-em-escolas-do-df-alerta-para-prevencao-de-desastre-climatico",
@@ -4100,7 +4290,7 @@
     },
     {
       "slug": "https://www.theverge.com/tech/918765/an-influx-of-used-evs-could-drive-down-prices",
-      "title": "",
+      "title": "Veículos elétricos usados podem puxar preços para baixo",
       "category": "Cotidiano",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-25T18:25:23.000Z",
@@ -4115,7 +4305,7 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": false
+        "hasLandscapeSignal": true
       },
       "level": "ok",
       "reasons": []
@@ -4248,7 +4438,7 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-25T17:00:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
+      "imageUrl": "/assets/news-fallbacks/samba-da-gamboa-recebe-o-cantor-e-compositor-dudu-nobre-neste-domingo.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -4301,7 +4491,7 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-25T16:07:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
+      "imageUrl": "/assets/news-fallbacks/vacinacao-nas-escolas-segue-ate-dia-30-e-meta-e-imunizar-27-milhoes.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -4338,9 +4528,9 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -4478,37 +4668,8 @@
       ]
     },
     {
-      "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
-      "title": "Mailza define linha de frente da sua campanha ao governo",
-      "category": "Política Regional",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-04-25T15:06:34.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 976,
-        "height": 695,
-        "ratio": 1.404,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "https://www.theverge.com/science/918753/researchers-talking-less",
-      "title": "",
+      "title": "Estudo aponta queda nas conversas presenciais",
       "category": "Cotidiano",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-25T15:03:53.000Z",
@@ -4646,7 +4807,7 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -4673,7 +4834,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
@@ -4821,7 +4982,7 @@
     },
     {
       "slug": "https://www.theverge.com/games/918200/kiln-review-double-fine-xbox-ps5-steam",
-      "title": "",
+      "title": "Novo jogo da Double Fine chama atenção após fase de incerteza",
       "category": "Cotidiano",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-25T13:00:00.000Z",
@@ -4831,15 +4992,17 @@
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "https://www.theverge.com/entertainment/918313/director-sho-miyake-interview",
@@ -5607,8 +5770,8 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
@@ -5677,7 +5840,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
@@ -5833,7 +5996,7 @@
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-04-25T00:58:28.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao.svg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -6010,7 +6173,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
@@ -6103,7 +6266,7 @@
       "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
-        "hasGroupSignal": true,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
@@ -6174,7 +6337,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
@@ -6201,35 +6364,6 @@
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
-      "title": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
-      "category": "Política Regional",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-04-25T00:03:11.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 683,
-        "ratio": 1.499,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
       },
       "level": "ok",
       "reasons": [
@@ -6667,9 +6801,9 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 50%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -6691,7 +6825,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
@@ -6737,7 +6871,7 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
@@ -6801,7 +6935,7 @@
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-04-24T22:10:00.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/ebc-e-unifap-inauguram-novo-canal-digital-de-tv-no-sul-do-amapa.svg",
+      "imageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687196&o=rss",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -6888,7 +7022,7 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": []
@@ -6913,67 +7047,9 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-      "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-      "category": "Política Regional",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-04-24T21:57:54.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-      "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-      "category": "Política Regional",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-04-24T21:56:12.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -7303,9 +7379,9 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -7338,7 +7414,7 @@
     },
     {
       "slug": "https://www.theverge.com/tech/918572/microsoft-windows-updates-pause-35-days",
-      "title": "",
+      "title": "Microsoft deve facilitar pausa nas atualizações do Windows",
       "category": "Cotidiano",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-24T20:45:58.000Z",
@@ -7578,30 +7654,6 @@
       ]
     },
     {
-      "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
-      "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
-      "category": "Política Regional",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T19:58:21.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "the-person-who-allegedly-leaked-paramount-s-new-avatar-movie-has-been-arrested",
       "title": "The person who allegedly leaked Paramount’s new Avatar movie has been arrested",
       "category": "Cotidiano",
@@ -7641,30 +7693,6 @@
         "hasPersonSignal": true,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
-      "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-      "category": "Política",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-04-24T19:28:41.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
       },
       "level": "ok",
       "reasons": [
@@ -7791,7 +7819,7 @@
     },
     {
       "slug": "the-ram-shortage-could-get-even-worse-if-samsung-labor-protests-cut-production",
-      "title": "The RAM shortage could get even worse if Samsung labor protests cut production",
+      "title": "Escassez de RAM pode piorar com protestos na Samsung",
       "category": "Cotidiano",
       "sourceName": "The Verge",
       "publishedAt": "2026-04-24T17:11:33.000Z",
@@ -7832,30 +7860,6 @@
       },
       "level": "ok",
       "reasons": []
-    },
-    {
-      "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
-      "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-      "category": "Política Regional",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-04-24T16:47:11.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
     },
     {
       "slug": "xreal-s-best-ar-glasses-are-599-for-good-now",
@@ -8274,9 +8278,9 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 42%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": true,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [

@@ -114,6 +114,15 @@ async function main() {
   );
 
   if (steps.at(-1)?.status === "passed") {
+    steps.push(
+      await runStep("sanitize public language", async () => {
+        const { runSanitizePublicLanguage } = require("./sanitize-public-language.js");
+        return runSanitizePublicLanguage();
+      })
+    );
+  }
+
+  if (steps.at(-1)?.status === "passed") {
     const reviewStep = enforceReviewTeamGate(
       await runStep("review home/front summaries", async () => {
         const { runReviewTeamAudit } = require("./review-team-audit.js");
