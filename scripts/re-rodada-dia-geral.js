@@ -548,16 +548,19 @@ function repairImages(items = []) {
       : "foto-repetida-na-mesma-divisao";
     const sourceUrl = String(item.sourceUrl || item.url || item.link || "").trim();
     if (sourceUrl && sourceUrl !== "#") {
+      const imageUrl = fallbackImageFor(item, reason);
       repaired += 1;
       return {
         ...item,
-        imageUrl: "",
-        feedImageUrl: "",
-        sourceImageUrl: "",
+        imageUrl,
+        feedImageUrl: imageUrl,
+        sourceImageUrl: imageUrl,
         originalImageUrl: isWeakImage(currentImage) ? "" : currentImage || item.originalImageUrl || "",
         originalFeedImageUrl: isWeakImage(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
         originalSourceImageUrl: isWeakImage(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || "",
-        imageQuality: `${reason}-buscar-na-fonte`
+        imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
+        imageFocus: item.imageFocus || "center 50%",
+        imageQuality: `${reason}-fallback-e-buscar-na-fonte`
       };
     }
 
@@ -573,6 +576,32 @@ function repairImages(items = []) {
       imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
       imageFocus: item.imageFocus || "center 50%",
       imageQuality: reason
+    };
+  });
+
+  return { items: nextItems, repaired };
+}
+
+function repairMissingImages(items = []) {
+  let repaired = 0;
+
+  const nextItems = items.map((item) => {
+    if (imageOf(item)) return item;
+
+    const imageUrl = fallbackImageFor(item, "imagem-ausente-ou-generica");
+    repaired += 1;
+
+    return {
+      ...item,
+      imageUrl,
+      feedImageUrl: imageUrl,
+      sourceImageUrl: imageUrl,
+      originalImageUrl: item.originalImageUrl || "",
+      originalFeedImageUrl: item.originalFeedImageUrl || "",
+      originalSourceImageUrl: item.originalSourceImageUrl || "",
+      imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      imageFocus: item.imageFocus || "center 50%",
+      imageQuality: "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
     };
   });
 
@@ -627,7 +656,7 @@ async function runReRodadaDiaGeral() {
   const onlineAuditBefore = auditItems(onlineItems);
   const repaired = repairImages(applyLocalArticleHints(onlineItems, localHints));
   const prioritizedItems = promoteMailzaPriority(repaired.items).map(sanitizeReviewCopy);
-  const archiveItems = mergeNewsCollections(
+  const mergedArchiveItems = mergeNewsCollections(
     readNewsArchiveItems(),
     readStaticNewsItems(),
     Array.isArray(readJson(RUNTIME_NEWS_FILE, { items: [] }).items)
@@ -635,6 +664,8 @@ async function runReRodadaDiaGeral() {
       : [],
     prioritizedItems
   ).map(sanitizeReviewCopy);
+  const archiveMissingRepair = repairMissingImages(mergedArchiveItems);
+  const archiveItems = archiveMissingRepair.items;
   const onlineAuditAfterLocalRepair = auditItems(prioritizedItems);
   const archiveAuditAfterSync = auditItems(archiveItems);
 
@@ -651,7 +682,8 @@ async function runReRodadaDiaGeral() {
         fetched: onlineItems.length,
         activeWindowItems: prioritizedItems.length,
         archiveItems: archiveItems.length,
-        repairedImages: repaired.repaired,
+        repairedImages: repaired.repaired + archiveMissingRepair.repaired,
+        archiveRepairedImages: archiveMissingRepair.repaired,
         mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
         cachedFallback: Boolean(onlinePayload.cachedFallback),
         cachedFallbackReason: onlinePayload.cachedFallbackReason || ""
@@ -676,7 +708,9 @@ async function runReRodadaDiaGeral() {
     activeWindowItems: prioritizedItems.length,
     archiveItems: archiveItems.length,
     syncFetchLimit: SYNC_FETCH_LIMIT,
-    repairedImages: repaired.repaired,
+    repairedImages: repaired.repaired + archiveMissingRepair.repaired,
+    activeWindowRepairedImages: repaired.repaired,
+    archiveRepairedImages: archiveMissingRepair.repaired,
     mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
     rule:
       "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
