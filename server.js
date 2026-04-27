@@ -4013,6 +4013,7 @@ function isHotlinkBlockedImageUrl(value) {
 function shouldIgnoreImageUrl(value) {
   const imageUrl = String(value || "").toLowerCase();
   if (!imageUrl) return true;
+  if (imageUrl.includes("/assets/news-fallbacks/")) return false;
   if (isHotlinkBlockedImageUrl(imageUrl)) return true;
   if (/\.(?:pdf|docx?|xlsx?|pptx?|zip|rar|7z)(?:$|[?#])/i.test(imageUrl)) return true;
   const looksLikeKnownImageRoute =
@@ -4027,7 +4028,6 @@ function shouldIgnoreImageUrl(value) {
   }
   if (
     imageUrl.includes("agenciabrasil.ebc.com.br/ebc.png") ||
-    imageUrl.includes("/assets/news-fallbacks/") ||
     imageUrl.includes("/edital-assinado-")
   ) {
     return true;
@@ -4170,20 +4170,6 @@ function repairNewsImagesForDisplay(items = []) {
     if (!isBadImage && !isRepeatedInDivision) return item;
 
     const reason = isBadImage ? "imagem-ausente-ou-generica" : "foto-repetida-na-mesma-divisao";
-    if (sourceUrl && sourceUrl !== "#") {
-      return {
-        ...item,
-        imageUrl: "",
-        feedImageUrl: "",
-        sourceImageUrl: "",
-        imageCredit: item.imageCredit || "",
-        imageQuality: `${reason}-buscar-na-fonte`,
-        originalImageUrl: shouldIgnoreImageUrl(currentImage) ? "" : currentImage || item.originalImageUrl || "",
-        originalFeedImageUrl: shouldIgnoreImageUrl(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
-        originalSourceImageUrl: shouldIgnoreImageUrl(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || ""
-      };
-    }
-
     const fallbackUrl = ensureNewsFallbackImage(item, reason);
     if (!fallbackUrl) return item;
 
@@ -4194,8 +4180,10 @@ function repairNewsImagesForDisplay(items = []) {
       sourceImageUrl: fallbackUrl,
       imageCredit: item.imageCredit || "Arte editorial automática do Catálogo Cruzeiro do Sul",
       imageFocus: item.imageFocus || "center 50%",
-      imageQuality: reason,
-      originalImageUrl: currentImage || item.originalImageUrl || ""
+      imageQuality: `${reason}-fallback-e-buscar-na-fonte`,
+      originalImageUrl: shouldIgnoreImageUrl(currentImage) ? "" : currentImage || item.originalImageUrl || "",
+      originalFeedImageUrl: shouldIgnoreImageUrl(item.feedImageUrl) ? "" : item.originalFeedImageUrl || item.feedImageUrl || "",
+      originalSourceImageUrl: shouldIgnoreImageUrl(item.sourceImageUrl) ? "" : item.originalSourceImageUrl || item.sourceImageUrl || ""
     };
   });
 }

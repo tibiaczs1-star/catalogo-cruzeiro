@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-26 - Hotfix API fallbacks de noticia
+
+- PR #2 e PR #3 foram mergeados em `main`.
+- Verificacao online confirmou a Home nova, mas mostrou que `/api/news` ainda zerava algumas imagens fallback.
+- Causa: `server.js` considerava `/assets/news-fallbacks/` como imagem fraca e limpava `imageUrl` quando havia `sourceUrl`.
+- Corrigido para aceitar fallback local seguro e gerar fallback no display em vez de retornar imagem vazia.
+- Validacao local: `node --check server.js` e API local com 360/360 noticias com imagem, missingCount=0.
+
 ## Atualizacao rapida 2026-04-26 - Rodada editorial/dados separada
 
 - Os arquivos de dados/cache que sobraram fora do PR da Home foram tratados em rodada propria, sem misturar com o ajuste visual dos cadernos.
