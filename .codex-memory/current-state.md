@@ -1,17 +1,17 @@
 # Current State
 
-Updated: 2026-04-27T03:45:36.879Z
+Updated: 2026-04-27T03:57:41.341Z
 
 ## Active Goal
 
-- Rodada editorial/dados separada resolvida
+- PRs mergeados e hotfix de imagens da API em andamento
 
 ## Summary
 
-Os arquivos de dados/cache que sobraram fora do PR da Home foram tratados em rodada propria. O sync online-local foi executado; a primeira passagem revelou 5 noticias novas sem imagem no arquivo completo. A causa era o merge do arquivo/archive depois do reparo da janela ativa. O script `scripts/re-rodada-dia-geral.js` agora repara imagens ausentes tambem apos o merge completo, gerando fallbacks locais em `assets/news-fallbacks/`.
+Os PRs #2 e #3 foram marcados como prontos e mergeados em `main`. A verificacao online confirmou a Home nova no ar, mas revelou que `/api/news` ainda limpava URLs `/assets/news-fallbacks/` em alguns itens. O `server.js` foi corrigido para aceitar fallbacks locais seguros e gerar fallback em vez de zerar `imageUrl`.
 
-Validacao final: sync passou, review team com 0 achados em 135 arquivos, auditoria de imagens com 360/360 ok, 0 erros e 0 imagens ausentes.
+Validacao local do hotfix: `node --check server.js`; servidor local em `4117` com `/api/news?limit=400` retornando 360/360 itens com imagem e missingCount=0.
 
 ## Next
 
-- Criar commit/branch limpa da rodada editorial separada e publicar sem misturar com o PR visual da Home.
+- Subir e mergear o hotfix pequeno de `server.js`, depois revalidar `/api/news` no Render.

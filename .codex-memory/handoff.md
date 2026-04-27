@@ -1,12 +1,12 @@
 # Handoff
 
-Updated: 2026-04-27T03:45:36.879Z
+Updated: 2026-04-27T03:57:41.341Z
 
-Rodada separada de dados/noticias concluida. O pacote visual da Home continua isolado no PR #2; esta rodada trata apenas sincronizacao editorial, caches, arquivo de noticias e o fix no sincronizador.
+PR #2 e PR #3 foram mergeados. A etapa final encontrou uma pendencia real na API online: o servidor tratava `/assets/news-fallbacks/` como imagem fraca e zerava `imageUrl` quando havia `sourceUrl`.
 
-Foi corrigido o problema que deixava 5 noticias novas sem imagem depois do merge do arquivo completo: `repairMissingImages` foi adicionado em `scripts/re-rodada-dia-geral.js` e a rodada final passou com `news-focus-audit total=360 ok=360 error=0 missingImage=0`.
+`server.js` foi corrigido para aceitar fallback local seguro e manter imagem na resposta da API. Validacao local: 360/360 noticias com imagem em `/api/news?limit=400`.
 
 ## Next
 
-- Publicar a branch/PR separado da rodada editorial.
-- Nao juntar este pacote ao PR da Home, porque o escopo e de dados/noticias.
+- Publicar/mergear hotfix de `server.js`.
+- Conferir Render online apos deploy: Home 200 e `/api/news?limit=400` com missingCount=0.

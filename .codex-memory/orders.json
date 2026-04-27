@@ -1,7 +1,38 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T03:45:36.879Z",
+  "lastUpdatedAt": "2026-04-27T03:57:41.341Z",
   "orders": [
+    {
+      "id": "2026-04-26-hotfix-api-fallback-news-images",
+      "createdAt": "2026-04-27T03:57:41.341Z",
+      "updatedAt": "2026-04-27T03:57:41.341Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "considere e faça",
+      "summary": "Hotfix pós-merge: a Home estava no ar, mas a API /api/news ainda zerava fallbacks locais de imagem. server.js foi ajustado para aceitar /assets/news-fallbacks e retornar fallback em vez de limpar imageUrl.",
+      "normalizedTasks": [
+        "mergear PRs aprovados",
+        "verificar site online apos deploy",
+        "corrigir API que limpava fallbacks locais de noticias",
+        "validar /api/news local com 360/360 imagens"
+      ],
+      "tags": [
+        "hotfix",
+        "api-news",
+        "server",
+        "fallback-images",
+        "deploy"
+      ],
+      "filesTouched": [
+        "server.js",
+        ".codex-memory/orders.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [],
+      "notes": "Validação local pós-hotfix: node --check server.js; servidor local em 4117 /api/news?limit=400 retornou total=360, returned=360, missingCount=0."
+    },
     {
       "id": "2026-04-26-rodada-propria-sync-editorial-dados",
       "createdAt": "2026-04-27T03:45:36.879Z",
