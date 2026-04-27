@@ -39,7 +39,7 @@
       href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./escritorio.css?v=20260422theater" />
+    <link rel="stylesheet" href="./escritorio.css?v=20260427officeflow" />
   </head>
   <body class="office-page">
     <div class="office-shell">
@@ -345,33 +345,6 @@
                     <div class="office-theater-awards" data-theater-awards aria-label="Premiações dos agentes"></div>
                   </section>
                 </div>
-              </div>
-
-              <aside
-                class="office-terminal-panel"
-                id="terminal"
-                data-office-terminal-panel
-                aria-label="Terminal com o código da equipe rodando 24 horas"
-              >
-                <div class="office-terminal-head">
-                  <span>TERMINAL</span>
-                  <strong>RUN_24H</strong>
-                </div>
-                <div class="office-terminal-avatar" data-terminal-avatar aria-hidden="true"></div>
-                <pre class="office-terminal-output"><code data-terminal-output>&gt; boot office/run-24h
-status: equipe online
-fluxo: codigo, conteudo, revisao e deploy em andamento
-acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
-                <form class="office-terminal-command" data-terminal-command-form>
-                  <label for="terminalCommandInput">Pergunta paga aos agentes</label>
-                  <textarea
-                    id="terminalCommandInput"
-                    data-terminal-command-input
-                    rows="5"
-                    placeholder="Pergunte algo divertido, interativo ou curioso para o agente ativo..."
-                  ></textarea>
-                  <button class="office-button primary" type="submit">Interagir por R$ 20</button>
-                </form>
                 <div class="office-paid-menu" aria-label="Opções pagas do escritório">
                   <article>
                     <span>R$ 20</span>
@@ -411,6 +384,33 @@ acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
                     </div>
                   </div>
                 </section>
+              </div>
+
+              <aside
+                class="office-terminal-panel"
+                id="terminal"
+                data-office-terminal-panel
+                aria-label="Terminal com o código da equipe rodando 24 horas"
+              >
+                <div class="office-terminal-head">
+                  <span>TERMINAL</span>
+                  <strong>RUN_24H</strong>
+                </div>
+                <div class="office-terminal-avatar" data-terminal-avatar aria-hidden="true"></div>
+                <pre class="office-terminal-output"><code data-terminal-output>&gt; boot office/run-24h
+status: equipe online
+fluxo: codigo, conteudo, revisao e deploy em andamento
+acao: passe o mouse em um agente para ver o que esta rodando agora</code></pre>
+                <form class="office-terminal-command" data-terminal-command-form>
+                  <label for="terminalCommandInput">Pergunta paga aos agentes</label>
+                  <textarea
+                    id="terminalCommandInput"
+                    data-terminal-command-input
+                    rows="5"
+                    placeholder="Pergunte algo divertido, interativo ou curioso para o agente ativo..."
+                  ></textarea>
+                  <button class="office-button primary" type="submit">Interagir por R$ 20</button>
+                </form>
                 <div class="office-live-panel" aria-live="polite">
                   <span>rodando 24h</span>
                   <strong data-office-feed>Codigo, conteudo, revisao e atendimento funcionando sem parar no escritorio.</strong>

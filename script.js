@@ -5021,7 +5021,7 @@ const initializeInsidersHeroScene = () => {
     return;
   }
 
-  insidersTypedNodes.forEach((node, index) => {
+  const startTypedNode = (node, index) => {
     if (!node || node.dataset.typedReady === "true") {
       return;
     }
@@ -5034,6 +5034,47 @@ const initializeInsidersHeroScene = () => {
     node.dataset.typedReady = "true";
     node.setAttribute("aria-label", fullText);
     typeInsidersLine(node, fullText, 220 + index * 320, node.closest(".construction-showcase") ? 11 : 13);
+  };
+
+  if (splashMotionQuery.matches || !("IntersectionObserver" in window)) {
+    insidersTypedNodes.forEach(startTypedNode);
+
+    if (heroInsidersShell) {
+      window.requestAnimationFrame(() => {
+        heroInsidersShell.classList.add("is-ready");
+      });
+    }
+
+    return;
+  }
+
+  const typedObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const node = entry.target.querySelector?.("[data-insiders-typed]") || entry.target;
+        typedObserver.unobserve(entry.target);
+        startTypedNode(node, insidersTypedNodes.indexOf(node));
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+  );
+
+  insidersTypedNodes.forEach((node, index) => {
+    if (!node) {
+      return;
+    }
+
+    const gate = node.closest(".site-footer") ? node.closest(".insiders-command-copy") || node : node;
+    if (!gate) {
+      startTypedNode(node, index);
+      return;
+    }
+
+    typedObserver.observe(gate);
   });
 
   if (heroInsidersShell) {

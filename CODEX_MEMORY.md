@@ -1,5 +1,30 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-27 - PubPaid Google e escolha de personagem
+
+- PubPaid 2 continua somente local, sem deploy/push/commit/envio. Endereco de teste combinado com o usuario: `http://127.0.0.1:3000/pubpaid-v2.html`.
+- Fluxo inicial alterado: a primeira tela mostra `Entrar no jogo`; depois o topo sai e entra o pedido Google. Em servidor local sem Google configurado, o botao vira `Continuar teste local`.
+- Depois do Google/teste local, a frente do bar abre ainda travada e mostra selecao entre `Homem` e `Mulher`; ao escolher, o controle e liberado.
+- Criada protagonista mulher provisoria em tres sheets transparentes: `protagonist-female-walk-8dir-3f.png`, `protagonist-female-idle-breathe-8dir-3f.png` e `protagonist-female-idle-phone-8dir-3f.png`, todos 8 direcoes x 3 frames, frame `64x128`.
+- `BootScene.js`, `StreetScene.js` e `InteriorScene.js` agora escolhem os sheets pelo `gameState.selectedCharacter`; `app.js` gerencia auth/splash/selecao e salva a escolha em `localStorage`.
+- Validacoes locais: `node --check` em `app.js`, `gameState.js`, `BootScene.js`, `StreetScene.js` e `InteriorScene.js`; Playwright em `http://127.0.0.1:3000/pubpaid-v2.html` gerou capturas `output/web-game/pubpaid-character-flow/00-initial.png` ate `04-street-female-walk-right.png`, sem `console-errors.json`.
+
+## Atualizacao rapida 2026-04-27 - Layout dos escritorios sem coluna morta
+
+- Feedback do usuario aplicado nos escritorios de agentes: a divisao de Pix/ambiente saiu de baixo do terminal e foi reposicionada logo abaixo do ambiente/mapa do escritorio em `escritorio.html`.
+- `escritorio.css` passou a tratar o mapa como area principal e o terminal como bloco compacto abaixo, compartilhado por `escritorio.html`, `escritorio-nerd.html`, `escritorio-arte.html`, `escritorio-ninjas.html` e `esttiles.html`.
+- Cache-bust do CSS atualizado nessas paginas para `20260427officeflow`.
+- Validacoes: `node --check escritorio.js`, brace-balance 0 em `escritorio.css` e captura visual estatica em `output/playwright/office-layout-desktop.png`. O `server.js` principal nao subiu porque falta `./scripts/home-linked-article-fallbacks`, entao a captura usou servidor estatico temporario.
+
+## Atualizacao rapida 2026-04-27 - PubPaid protagonista local V1
+
+- PubPaid 2 segue local, sem deploy/push/commit. Usuario pediu limpar a cena e focar apenas no novo protagonista.
+- Prompt mestre salvo em `PROMPT_PUBPAID_PROTAGONISTA_SPRITES_2026-04-27.md`, usando a primeira referencia como estilo adulto/fashion pixel art e a segunda como logica de spritesheet.
+- Criados tres sheets transparentes em `assets/pubpaid/sprites/protagonist/`: `protagonist-walk-8dir-3f.png`, `protagonist-idle-breathe-8dir-3f.png` e `protagonist-idle-phone-8dir-3f.png`, todos 8 direcoes x 3 frames, frame `64x128`.
+- `BootScene.js`, `StreetScene.js` e `InteriorScene.js` foram integrados ao novo contrato `frame = directionRow * 3 + frameIndex`; a rua ficou limpa, sem civis, placa Google grande ou molduras extras.
+- Corrigido o tempo de idle: primeiro respira, depois de aproximadamente 2800ms parado troca para celular. `app.js` tambem parou de chamar `/api/pubpaid/account` no modo teste local sem login, evitando 401 no console.
+- Validacoes locais: `node --check` nos modulos PubPaid tocados, `python -m py_compile` no gerador e Playwright em `http://127.0.0.1:3000/pubpaid-v2.html`. Captura de revisao: `output/web-game/pubpaid-protagonist-focused-phone-v2/protagonist-focused-contact.png`.
+
 ## Atualizacao rapida 2026-04-27 - PubPaid como instrutor de testes
 
 - Rodada PubPaid 2.0 executada no modo instrutor de testes/auditor: memoria lida, prompt mestre criado, ruido local separado, reuniao de agentes rodada e objetivos testaveis registrados em `RELATORIO_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md`.

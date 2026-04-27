@@ -1,17 +1,16 @@
 # Handoff
 
-Updated: 2026-04-27T10:39:39.1410409-05:00
+Updated: 2026-04-27T21:25:00.000Z
 
-Rodada PubPaid 2.0 concluida como instrutor de testes/auditor. O prompt mestre esta em `PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md` e a ata objetiva em `RELATORIO_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md`.
+PubPaid 2.0 retomado localmente. Sempre entregar o endereco ao usuario: `http://127.0.0.1:3000/pubpaid-v2.html`.
 
-O que foi feito:
+Fluxo atual: primeira tela com `Entrar no jogo`; apos clique, some o topo e aparece o pedido Google. Em ambiente local sem config Google, aparece `Continuar teste local`. Depois disso abre a frente do bar ainda travada com selecao `Homem`/`Mulher`; escolher um personagem libera o controle e salva em `pubpaid_v2_selected_character`.
 
-- PubPaid oficial (`pubpaid-v2.html`, `pubpaid-phaser/`, `pubpaid-phaser.css`) ficou em portugues publico e com correcoes de fluxo/DOM/click/resultados.
-- `server.js`, `scripts/sanitize-public-language.js` e `scripts/review-team-audit.js` foram reforcados contra vazamento de ingles em noticias.
-- Dados atuais de noticias foram saneados em `news-data.js`, `data/runtime-news.json`, `data/news-archive.json` e topic-feeds afetados.
-- `npm run agents:cycle` e `npm run review:team` finalizaram com review zerado.
+Arquivos principais tocados: `pubpaid-v2.html`, `pubpaid-phaser.css`, `pubpaid-phaser/app.js`, `pubpaid-phaser/core/gameState.js`, `pubpaid-phaser/scenes/BootScene.js`, `StreetScene.js`, `InteriorScene.js`, mais os sheets da mulher em `assets/pubpaid/sprites/protagonist/`.
 
-Proximo passo seguro:
+Validado com `node --check` nos arquivos JS principais e Playwright em `output/web-game/pubpaid-character-flow/`, sem console errors.
 
-- Nao commitar tudo junto. Separar pacote PubPaid/testes do pacote idioma/noticias/rotina e dos arquivos gerados por cache/agentes.
-- PubPaid continua sem deploy ate autorizacao explicita.
+## Next
+
+- Usuario deve avaliar no navegador local.
+- A protagonista mulher ainda e prototipo runtime; se o usuario gostar do caminho, proxima passada deve dar acabamento de arte 32-bit/pixel 2D antes de integrar como final.
