@@ -7347,6 +7347,49 @@
         "Se quiser publicar, revisar diff e commitar/push."
       ],
       "notes": "Necessario ajustar scripts/sync-online-local.js para rodar em-process porque child_process.spawnSync retorna EPERM neste sandbox."
+    },
+    {
+      "id": "2026-04-27-bloquear-ingles-publico-noticias",
+      "createdAt": "2026-04-27T05:00:28.399Z",
+      "updatedAt": "2026-04-27T05:00:28.399Z",
+      "status": "closed",
+      "source": "chat",
+      "rawRequest": "Usuario apontou print com resumo de noticia em ingles e pediu: \"em ingles nao, nao permita que isso se repita informe os agentes e crie uma rotina de evitar isso\"; depois confirmou: \"ok entao faça\".",
+      "summary": "Corrigir vazamentos de texto publico em ingles nas noticias e criar trava permanente no review team.",
+      "normalizedTasks": [
+        "Reescrever em portugues as noticias com lede, summary ou titulo em ingles",
+        "Adicionar auditoria language-review ao scripts/review-team-audit.js",
+        "Informar agentes locais via AGENTS.md e .codex-review-team/README.md",
+        "Validar review team com totalIssues=0"
+      ],
+      "filesTouched": [
+        "AGENTS.md",
+        ".codex-review-team/README.md",
+        "scripts/review-team-audit.js",
+        "data/news-archive.json",
+        "data/runtime-news.json",
+        "data/topic-feed-tech.json",
+        "news-data.js",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "feedback-google-card-ingles-publico-20260427"
+      ],
+      "tags": [
+        "idioma",
+        "editorial",
+        "review-team",
+        "noticias",
+        "portugues"
+      ],
+      "nextSteps": [
+        "Commitar e publicar a rodada se o git remoto estiver acessivel nesta sessao."
+      ],
+      "notes": "Foram corrigidos os espelhos news-data.js, data/news-archive.json, data/runtime-news.json e data/topic-feed-tech.json. A nova rotina bloqueia frases publicas em ingles em title/sourceLabel/lede/summary/body/highlights/development."
     }
   ]
 }

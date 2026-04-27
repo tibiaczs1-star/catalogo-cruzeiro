@@ -149,4 +149,6 @@ Se precisar criar mais agentes personalizados:
 - A equipe fixa vive em `.codex-review-team/agents/`.
 - O auditor principal fica em `scripts/review-team-audit.js` e gera `.codex-temp/review-team/latest-report.md` e `.codex-temp/review-team/latest-report.json`.
 - O foco da equipe é achar vazamentos editoriais, cards sem hierarquia, CTAs confusos, links quebrados, acessibilidade básica e cobertura fraca de fontes.
+- Textos públicos de notícia precisam sair em português; títulos, chamadas, ledes, resumos, destaques e corpo não devem manter frases em inglês copiadas da fonte.
+- O `npm run review:team` inclui a trava `language-review` para bloquear vazamento de texto público em inglês antes de commit, PR, merge ou deploy.
 - Use esse fluxo antes de revisão manual com o usuário para chegar com os problemas já triados.
