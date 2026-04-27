@@ -4579,7 +4579,9 @@ async function refreshRssRuntime(limitPerSource = 30) {
   });
 
   const enrichedItems = repairNewsImagesForDisplay(
-    (await enrichNewsItemsWithSourceImages(deduped)).map(normalizeArticleRecord)
+    (await enrichNewsItemsWithSourceImages(deduped))
+      .map(normalizeArticleRecord)
+      .map(sanitizePublicPortugueseRuntimeItem)
   );
 
   const payload = {
@@ -5186,11 +5188,93 @@ const ENGLISH_CARD_LEAK_PATTERN =
   /\b(the post|appeared first|read more|click here|new games|new toys|monthly games|take home|host live|meet the|whole sick|brand and creator|creator|creators|partnerships|streamer|streamers|showrunner|spin-off|hub|review|study destination|higher ed|public trust|students|teachers|schools|website accessibility|will it help|launching|launches|reveals|unveils|announced|trailer reveals|trailer is|worth the wait|with evangelion|for april|for january|the future of|the age of|the year ahead|the classroom|the entertainment industry)\b|]]>|<img\b/i;
 const PORTUGUESE_CARD_SIGNAL_PATTERN =
   /\b(uma?|pela?|pelos?|das?|dos?|para|com|sobre|entre|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?|comunidades?|f[aã]s|lan[cç]amentos?|cultura|publico|p[uú]blico)\b/i;
+const PUBLIC_NEWS_ENGLISH_MARKER_PATTERN =
+  /\b(?:whether|it's|according to|today|started|rolling|coming|expected|available|company|people|users|feature|features|released|announced|podcast|fitness|playlist|dummy unit|foldable|touchscreen|gaming|mouse|smart lighting|mother's day|who's asking|the auto design world|google started|microsoft will let|alex jones has uncovered|xreal’s best|xreal's best|360-degree cameras have|cybercab goes into production|skylight’s color-coded|skylight's color-coded|acclaimed japanese director)\b/i;
+const PUBLIC_NEWS_KNOWN_URL_TITLES = new Map([
+  ["best-mothers-day-gift-ideas-2026-mom-tech-gadgets", "Ideias de presentes tecnológicos para o Dia das Mães em 2026"],
+  ["canva-magic-layers-ai-replacing-palestine", "Canva corrige falha de IA em camadas mágicas"],
+  ["ul-testing-fire-safety-ai-standards-jennifer-scanlon", "UL fala sobre testes de segurança, fogo e padrões para IA"],
+  ["amazon-wondery-oprah-podcast-show", "Podcast de Oprah Winfrey ganha distribuição pela Amazon"],
+  ["govee-ceiling-light-ultra-led-pricing-availability", "Govee apresenta luminária de teto multicolorida"],
+  ["spotify-peloton-guided-workouts", "Spotify amplia conteúdos de treino e bem-estar"],
+  ["samsung-galaxy-z-fold-8-wide-dummy-leak", "Vazamento mostra possível Galaxy Z Fold largo"],
+  ["gm-ai-car-design-nissan-neural-concept", "Montadoras testam IA no desenho de novos carros"],
+  ["turtle-beach-mc7-gaming-mouse-touchscreen-command-series", "Mouse gamer da Turtle Beach aposta em tela sensível ao toque"],
+  ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"]
+]);
 
 function hasEnglishCardLeak(value = "") {
   const text = cleanShortText(value || "", 500);
   if (!text) return true;
   return ENGLISH_CARD_LEAK_PATTERN.test(text);
+}
+
+function publicNewsTextLooksEnglish(value = "") {
+  const text = cleanShortText(value || "", 900);
+  if (!text) return false;
+  return hasEnglishCardLeak(text) || PUBLIC_NEWS_ENGLISH_MARKER_PATTERN.test(text);
+}
+
+function hasPortugueseRuntimeSignal(value = "") {
+  const text = cleanShortText(value || "", 900);
+  if (!text) return false;
+  return PORTUGUESE_CARD_SIGNAL_PATTERN.test(text) || /[áàâãéêíóôõúç]/i.test(text);
+}
+
+function isEnglishRuntimeSource(item = {}) {
+  const sourceText = [item.sourceName, item.source, item.sourceDomain, item.sourceUrl, item.url, item.id, item.slug]
+    .map((value) => String(value || "").toLowerCase())
+    .join(" ");
+  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com)\b/.test(sourceText);
+}
+
+function inferPublicRuntimeTitle(item = {}) {
+  const candidates = [item.sourceUrl, item.url, item.id, item.slug].map((value) => String(value || ""));
+  for (const candidate of candidates) {
+    const known = [...PUBLIC_NEWS_KNOWN_URL_TITLES.entries()].find(([needle]) => candidate.includes(needle));
+    if (known) return known[1];
+  }
+
+  const sourceName = cleanShortText(item.sourceName || item.source || item.sourceDomain || "fonte externa", 90);
+  return `Atualização internacional de ${sourceName}`;
+}
+
+function buildPortugueseRuntimeFallback(item = {}) {
+  const sourceName = cleanShortText(item.sourceName || item.source || item.sourceDomain || "Fonte externa", 90);
+  const title = cleanShortText(item.title || item.sourceLabel || "tema internacional", 180);
+  return `${sourceName} publicou uma atualização sobre ${title}. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.`;
+}
+
+function sanitizePublicPortugueseRuntimeItem(item = {}) {
+  if (!item || typeof item !== "object") return item;
+
+  const next = { ...item };
+  if (!cleanShortText(next.title || "", 180)) {
+    next.title = inferPublicRuntimeTitle(next);
+  }
+  if (!cleanShortText(next.sourceLabel || "", 180)) {
+    next.sourceLabel = next.title;
+  }
+
+  const fallback = buildPortugueseRuntimeFallback(next);
+  const strictEnglishSource = isEnglishRuntimeSource(next);
+  if (publicNewsTextLooksEnglish(next.lede || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.lede || ""))) {
+    next.lede = fallback;
+  }
+  if (publicNewsTextLooksEnglish(next.summary || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.summary || ""))) {
+    next.summary = fallback;
+  }
+  if (publicNewsTextLooksEnglish(next.description || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.description || ""))) {
+    next.description = fallback;
+  }
+  if (
+    publicNewsTextLooksEnglish(next.displaySummary || "") ||
+    (strictEnglishSource && !hasPortugueseRuntimeSignal(next.displaySummary || ""))
+  ) {
+    next.displaySummary = fallback;
+  }
+
+  return next;
 }
 
 function isPublicPortugueseTopicItem(item = {}, topic = "") {

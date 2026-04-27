@@ -43,6 +43,28 @@ const PUBLIC_LANGUAGE_PATTERNS = [
   /\baccording to\b/i
 ];
 
+const ENGLISH_PUBLIC_MARKER_PATTERN =
+  /\b(?:the|and|that|with|from|this|will|would|could|should|their|there|these|those|about|after|before|because|during|while|into|over|under|more|most|new|now|look|coming|started|rolling|design|apps|users|people|company|whether|it's|its|is|are|was|were|been|being|have|has|had|can|may|might|must|your|you|they|them|his|her|our|out|up|down|when|where|why|how|who|what|which|if|then|than|as|at|by|for|of|on|off|in|to|or|not|one|first|last|latest|today|according|reports|reportedly|expected|available|feature|features|released|announced|video|podcast|phone|camera|smart|gaming|mouse|touchscreen)\b/g;
+const PORTUGUESE_PUBLIC_MARKER_PATTERN =
+  /\b(?:que|com|para|por|uma|um|das|dos|nas|nos|ao|aos|pela|pelo|mais|sobre|como|quando|porque|tambem|também|empresa|aplicativos|visual|icone|ícone|noticia|notícia|fonte|resumo|atualizacao|atualização|publicou|redacao|redação|internacional|brasil|acre)\b/g;
+
+const KNOWN_SOURCE_URL_TITLES = new Map([
+  ["best-mothers-day-gift-ideas-2026-mom-tech-gadgets", "Ideias de presentes tecnológicos para o Dia das Mães em 2026"],
+  ["canva-magic-layers-ai-replacing-palestine", "Canva corrige falha de IA em camadas mágicas"],
+  ["ul-testing-fire-safety-ai-standards-jennifer-scanlon", "UL fala sobre testes de segurança, fogo e padrões para IA"],
+  ["amazon-wondery-oprah-podcast-show", "Podcast de Oprah Winfrey ganha distribuição pela Amazon"],
+  ["govee-ceiling-light-ultra-led-pricing-availability", "Govee apresenta luminária de teto multicolorida"],
+  ["spotify-peloton-guided-workouts", "Spotify amplia conteúdos de treino e bem-estar"],
+  ["samsung-galaxy-z-fold-8-wide-dummy-leak", "Vazamento mostra possível Galaxy Z Fold largo"],
+  ["gm-ai-car-design-nissan-neural-concept", "Montadoras testam IA no desenho de novos carros"],
+  ["turtle-beach-mc7-gaming-mouse-touchscreen-command-series", "Mouse gamer da Turtle Beach aposta em tela sensível ao toque"],
+  ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"],
+  ["microsoft-windows-update-pause-indefinitely", "Microsoft deve facilitar pausa nas atualizações do Windows"],
+  ["how-project-maven-taught-the-military-to-love-ai", "Como o Project Maven aproximou os militares da IA"]
+]);
+const ENGLISH_SOURCE_FRAGMENT_PATTERN =
+  /\b(?:Microsoft will let|Alex Jones has uncovered|Xreal’s best|Xreal's best|360-degree cameras have|Cybercab goes into production|Skylight’s color-coded|Skylight's color-coded|Acclaimed Japanese director)\b/i;
+
 function readText(filePath) {
   return fs.readFileSync(filePath, "utf-8");
 }
@@ -81,26 +103,21 @@ function publicTextLooksEnglish(value) {
     return true;
   }
 
-  if (text.length < 45) {
-    return false;
-  }
-
   const lowerText = text.toLowerCase();
   const words = lowerText.match(/[a-záàâãéêíóôõúç]+/gi) || [];
-  if (words.length < 10) {
+  if (words.length < 5) {
     return false;
   }
 
-  const englishMarkers =
-    lowerText.match(
-      /\b(the|and|that|with|from|this|will|would|could|should|their|there|these|those|about|after|before|because|during|while|into|over|under|more|most|new|now|look|coming|started|rolling|design|apps|users|people|company)\b/g
-    ) || [];
-  const portugueseMarkers =
-    lowerText.match(
-      /\b(que|com|para|por|uma|um|das|dos|nas|nos|ao|aos|pela|pelo|mais|sobre|como|quando|porque|tambem|também|empresa|aplicativos|visual|icone|ícone)\b/g
-    ) || [];
+  const englishMarkers = lowerText.match(ENGLISH_PUBLIC_MARKER_PATTERN) || [];
+  const portugueseMarkers = lowerText.match(PORTUGUESE_PUBLIC_MARKER_PATTERN) || [];
+  const hasPortugueseSignal = portugueseMarkers.length > 0 || /[áàâãéêíóôõúç]/i.test(text);
 
-  return englishMarkers.length >= 7 && englishMarkers.length >= portugueseMarkers.length * 2;
+  if (words.length >= 5 && englishMarkers.length >= 4 && !hasPortugueseSignal) {
+    return true;
+  }
+
+  return englishMarkers.length >= 7 && englishMarkers.length >= Math.max(1, portugueseMarkers.length * 2);
 }
 
 function deriveSourceName(item = {}) {
@@ -187,12 +204,89 @@ function fallbackPortuguese(kind, item) {
   if (kind === "title") return `Notícia internacional${sourceHint}`.trim();
   if (kind === "sourceLabel") return sourceName || "Fonte externa";
   if (kind === "lede" || kind === "summary" || kind === "description" || kind === "displaySummary") {
-    return `Notícia internacional${sourceHint}: resumo curto em atualização; veja os detalhes na página de leitura.`.trim();
+    const title = String(item?.title || item?.sourceLabel || "tema internacional").trim();
+    return `${sourceName || "Fonte externa"} publicou uma atualização sobre ${title}. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.`.trim();
   }
   if (kind === "body") {
     return `Notícia internacional${sourceHint}. O portal apresenta o essencial e mantém o acesso direto para a fonte completa.`.trim();
   }
   return `Notícia internacional${sourceHint}.`.trim();
+}
+
+function hasPortuguesePublicSignal(value = "") {
+  const text = normalizePublicText(value);
+  if (!text) return false;
+  PORTUGUESE_PUBLIC_MARKER_PATTERN.lastIndex = 0;
+  return PORTUGUESE_PUBLIC_MARKER_PATTERN.test(text.toLowerCase()) || /[áàâãéêíóôõúç]/i.test(text);
+}
+
+function isEnglishSourceItem(item = {}) {
+  const sourceText = [item.sourceName, item.source, item.sourceDomain, item.sourceUrl, item.url, item.id, item.slug]
+    .map((value) => String(value || "").toLowerCase())
+    .join(" ");
+  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com)\b/.test(sourceText);
+}
+
+function inferPublicTitle(item) {
+  const candidates = [item?.sourceUrl, item?.url, item?.id, item?.slug].map((value) => String(value || ""));
+  for (const candidate of candidates) {
+    const known = [...KNOWN_SOURCE_URL_TITLES.entries()].find(([needle]) => candidate.includes(needle));
+    if (known) return known[1];
+  }
+  const sourceName = deriveSourceName(item);
+  return sourceName ? `Atualização internacional de ${sourceName}` : "Atualização internacional";
+}
+
+function ensurePublicLabels(item) {
+  if (!item || typeof item !== "object") return;
+  const title = String(item.title || "").trim();
+  const sourceLabel = String(item.sourceLabel || "").trim();
+
+  if (!title || (isEnglishSourceItem(item) && (!hasPortuguesePublicSignal(title) || publicTextLooksEnglish(title)))) {
+    item.title = inferPublicTitle(item);
+  }
+
+  if (!sourceLabel || (isEnglishSourceItem(item) && (!hasPortuguesePublicSignal(sourceLabel) || publicTextLooksEnglish(sourceLabel)))) {
+    item.sourceLabel = item.title || inferPublicTitle(item);
+  }
+}
+
+function sanitizeEnglishSourceFields(item) {
+  if (!isEnglishSourceItem(item)) return;
+
+  ["lede", "summary", "description", "displaySummary"].forEach((key) => {
+    const value = item[key];
+    if (typeof value !== "string") return;
+    if (
+      value.trim() &&
+      hasPortuguesePublicSignal(value) &&
+      !publicTextLooksEnglish(value) &&
+      !ENGLISH_SOURCE_FRAGMENT_PATTERN.test(value)
+    ) {
+      return;
+    }
+    item[key] = fallbackPortuguese(key, item);
+  });
+
+  if (Array.isArray(item.body)) {
+    item.body = item.body.map((entry) => {
+      if (typeof entry !== "string") return entry;
+      if (
+        entry.trim() &&
+        hasPortuguesePublicSignal(entry) &&
+        !publicTextLooksEnglish(entry) &&
+        !ENGLISH_SOURCE_FRAGMENT_PATTERN.test(entry)
+      ) {
+        return entry;
+      }
+      return fallbackPortuguese("body", item);
+    });
+  } else if (
+    typeof item.body === "string" &&
+    (!hasPortuguesePublicSignal(item.body) || publicTextLooksEnglish(item.body) || ENGLISH_SOURCE_FRAGMENT_PATTERN.test(item.body))
+  ) {
+    item.body = fallbackPortuguese("body", item);
+  }
 }
 
 function sanitizeText(value, kind, item) {
@@ -239,6 +333,9 @@ function sanitizeBodyValue(value, item) {
 
 function sanitizePublicFields(item) {
   if (!item || typeof item !== "object") return item;
+
+  ensurePublicLabels(item);
+  sanitizeEnglishSourceFields(item);
 
   Object.entries(item).forEach(([key, value]) => {
     if (!PUBLIC_NEWS_TEXT_FIELDS.has(key)) return;
