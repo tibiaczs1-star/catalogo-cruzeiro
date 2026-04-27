@@ -1,10 +1,12 @@
 # Handoff
 
-Updated: 2026-04-26T23:36:23.955Z
+Updated: 2026-04-27T03:45:36.879Z
 
-Corrigido feedback visual da Home no bloco Mais Assuntos: sem tarja SUBSITE, sem texto de editor, sem miniatura lavada por overlay branco, e com 14 cadernos/subsites estaticos apontando para paginas reais.
+Rodada separada de dados/noticias concluida. O pacote visual da Home continua isolado no PR #2; esta rodada trata apenas sincronizacao editorial, caches, arquivo de noticias e o fix no sincronizador.
+
+Foi corrigido o problema que deixava 5 noticias novas sem imagem depois do merge do arquivo completo: `repairMissingImages` foi adicionado em `scripts/re-rodada-dia-geral.js` e a rodada final passou com `news-focus-audit total=360 ok=360 error=0 missingImage=0`.
 
 ## Next
 
-- Conferir no navegador real se o usuario gostou da nova grade.
-- Review team ainda aponta 8 textos problematicos em news-data.js; sao dados editoriais fora desta rodada.
+- Publicar a branch/PR separado da rodada editorial.
+- Nao juntar este pacote ao PR da Home, porque o escopo e de dados/noticias.

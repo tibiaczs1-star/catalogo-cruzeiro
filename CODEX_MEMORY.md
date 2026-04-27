@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-26 - Rodada editorial/dados separada
+
+- Os arquivos de dados/cache que sobraram fora do PR da Home foram tratados em rodada propria, sem misturar com o ajuste visual dos cadernos.
+- `scripts/sync-online-local.js` rodou o fluxo completo: sincronizacao online-local, review team e auditoria de imagens.
+- A primeira passagem revelou 5 noticias novas sem imagem no arquivo completo; a causa era o merge do archive apos o reparo da janela ativa.
+- `scripts/re-rodada-dia-geral.js` ganhou reparo de imagens ausentes apos o merge completo e gerou 5 fallbacks locais em `assets/news-fallbacks/`.
+- Validacao final: sync passou, review team com 0 achados em 135 arquivos, news-focus-audit com 360/360 ok, 0 erros e 0 imagens ausentes.
+
 ## Atualizacao rapida 2026-04-26 - Entenda a Home mais legivel
 
 - Corrigido feedback visual do usuario no bloco `Entenda a Home`: a fonte cinza lavada foi trocada por texto azul-escuro mais forte nos cards claros e branco quente nos cards coloridos.

@@ -1,15 +1,17 @@
 # Current State
 
-Updated: 2026-04-26T23:36:23.955Z
+Updated: 2026-04-27T03:45:36.879Z
 
 ## Active Goal
 
-- Home / Mais Assuntos corrigido
+- Rodada editorial/dados separada resolvida
 
 ## Summary
 
-O bloco Mais Assuntos foi transformado em vitrine estatica de 14 cadernos/subsites reais, com links e imagens locais unicas. Foram removidas as peliculas brancas/translucidas das miniaturas e o brilho branco decorativo dos cards. O hidratador de noticias agora ignora cards marcados como data-caderno-static para nao trocar por feed repetido, sem foto ou texto cru.
+Os arquivos de dados/cache que sobraram fora do PR da Home foram tratados em rodada propria. O sync online-local foi executado; a primeira passagem revelou 5 noticias novas sem imagem no arquivo completo. A causa era o merge do arquivo/archive depois do reparo da janela ativa. O script `scripts/re-rodada-dia-geral.js` agora repara imagens ausentes tambem apos o merge completo, gerando fallbacks locais em `assets/news-fallbacks/`.
+
+Validacao final: sync passou, review team com 0 achados em 135 arquivos, auditoria de imagens com 360/360 ok, 0 erros e 0 imagens ausentes.
 
 ## Next
 
-- Se o usuario aprovar o visual, subir as alteracoes. Pendencias do review team ficaram em news-data.js e nao pertencem ao bloco corrigido.
+- Criar commit/branch limpa da rodada editorial separada e publicar sem misturar com o PR visual da Home.

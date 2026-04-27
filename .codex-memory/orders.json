@@ -1,7 +1,59 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-26T23:36:23.955Z",
+  "lastUpdatedAt": "2026-04-27T03:45:36.879Z",
   "orders": [
+    {
+      "id": "2026-04-26-rodada-propria-sync-editorial-dados",
+      "createdAt": "2026-04-27T03:45:36.879Z",
+      "updatedAt": "2026-04-27T03:45:36.879Z",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "entao faça a rodada propria e resolva a situação",
+      "summary": "Resolver os arquivos de dados/cache que sobraram fora do PR da Home em uma rodada editorial propria, com sincronizacao online-local, correcao do gate de imagens e validacoes completas.",
+      "normalizedTasks": [
+        "separar a rodada de dados do ajuste visual da Home",
+        "rodar sync online-local do projeto",
+        "corrigir cinco noticias novas sem imagem apos merge do arquivo completo",
+        "gerar fallbacks editoriais locais para as noticias sem foto",
+        "validar review team e auditoria de imagens antes de commitar/subir"
+      ],
+      "tags": [
+        "sync-online-local",
+        "noticias",
+        "dados",
+        "cache",
+        "auditoria-fotos",
+        "review-team"
+      ],
+      "filesTouched": [
+        "scripts/re-rodada-dia-geral.js",
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "data/news-image-focus-audit.json",
+        "data/re-rodada-dia-geral-report.json",
+        "data/article-integrity-report.json",
+        "data/image-preview-cache.json",
+        "data/social-trends-cache.json",
+        "data/topic-feed-anime.json",
+        "data/topic-feed-buzz.json",
+        "data/topic-feed-economy.json",
+        "data/topic-feed-kids.json",
+        "data/topic-feed-politics.json",
+        "data/topic-feed-study.json",
+        "assets/news-fallbacks/de-castigo-diz-ana-paula-apos-passeio-de-juliano-e-milena-com-carrinho.svg",
+        "assets/news-fallbacks/selecao-de-rugbi-em-cadeira-de-rodas-conquista-torneio-internacional.svg",
+        "assets/news-fallbacks/anp-aprova-estudos-sobre-bloco-no-pre-sal-da-bacia-de-santos.svg",
+        "assets/news-fallbacks/queniano-se-torna-primeiro-atleta-a-correr-maratona-abaixo-de-2-horas.svg",
+        "assets/news-fallbacks/brasil-vence-grand-prix-de-atletismo-paralimpico-de-rabat.svg"
+      ],
+      "assetRefs": [
+        ".codex-temp/online-local-sync/latest-report.json",
+        ".codex-temp/review-team/latest-report.json",
+        "data/news-image-focus-audit.json"
+      ],
+      "notes": "Rodada final: sync online news to local passou; review team auditou 135 arquivos com 0 achados; news-focus-audit total=360 ok=360 review=0 warning=0 error=0 missingImage=0. O script scripts/re-rodada-dia-geral.js passou a reparar imagens ausentes tambem apos o merge do arquivo completo."
+    },
     {
       "id": "2026-04-26-remover-coberturas-brancas-home",
       "createdAt": "2026-04-26T23:23:10.166Z",
