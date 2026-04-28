@@ -1,7 +1,43 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T18:39:36.994Z",
+  "lastUpdatedAt": "2026-04-28T14:05:00-05:00",
   "orders": [
+    {
+      "id": "2026-04-28-sync-online-local-home-updates",
+      "createdAt": "2026-04-28T14:05:00-05:00",
+      "updatedAt": "2026-04-28T14:05:00-05:00",
+      "status": "completed-deploy-ready",
+      "source": "chat",
+      "rawRequest": "OK AGORA ATUALIZE DIREITO E SINCRONIZA",
+      "summary": "Rodar a rotina online-local em arvore limpa, sincronizar noticias/agentes/revisoes e preparar deploy sem misturar PubPaid local-only.",
+      "normalizedTasks": [
+        "rodar npm run sync:online-local na arvore limpa baseada em origin/main",
+        "promover o gerador de PDF exigido pela rotina",
+        "sincronizar dados reais de noticias, auditoria de imagens, agentes e escritorio",
+        "validar sintaxe dos scripts principais",
+        "commitar e enviar main sem incluir PubPaid local-only"
+      ],
+      "tags": [
+        "sync",
+        "deploy",
+        "home",
+        "noticias",
+        "agentes"
+      ],
+      "filesTouched": [
+        ".codex-agents/registry.json",
+        "data/news-image-focus-audit.json",
+        "data/office-orders.json",
+        "data/re-rodada-dia-geral-report.json",
+        "data/real-agents-actions.json",
+        "data/runtime-news.json",
+        "scripts/write-online-local-sync-pdf.js"
+      ],
+      "assetRefs": [
+        "online-local-sync-report-20260428"
+      ],
+      "notes": "Sync passou com ok=true: 360 noticias, 0 missing, 54 imagens reparadas, review-team totalIssues=0, auditoria de imagens 360/360 ok e runtime com 181 agentes/5 escritorios. PubPaid permanece fora do deploy."
+    },
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
       "createdAt": "2026-04-28T15:01:55.754Z",

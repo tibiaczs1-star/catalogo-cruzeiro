@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T18:46:06.530Z",
+  "lastUpdatedAt": "2026-04-28T14:05:00-05:00",
   "assets": [
+    {
+      "id": "online-local-sync-report-20260428",
+      "kind": "report-set",
+      "path": ".codex-temp/online-local-sync/",
+      "source": "workspace-generated",
+      "note": "Relatorios latest do sync online-local: JSON, Markdown e PDF gerados apos rotina com ok=true, review-team zerado e auditoria de imagens 360/360 ok.",
+      "linkedOrderIds": [
+        "2026-04-28-sync-online-local-home-updates"
+      ],
+      "createdAt": "2026-04-28T14:05:00-05:00"
+    },
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
       "kind": "image-set",

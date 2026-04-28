@@ -1,16 +1,17 @@
 # Current State
 
-Updated: 2026-04-28T18:46:06.519Z
+Updated: 2026-04-28T14:05:00-05:00
 
 ## Active Goal
 
-- PubPaid 2.0 - trafego pixel art V3 em avaliacao
+- Sincronizar o jornal automatico com as atualizacoes recentes da home e da rotina online-local.
 
 ## Summary
 
-Usuario rejeitou V2 por nao parecer pixel art. Gerado V3 pixel-a-pixel por matrizes 96x48 ampliadas nearest-neighbor, sem canvas/shape drawing no HTML, com 10 veiculos, 5 frames e motos com piloto integrado. Demo atualizada em pubpaid-traffic-sprites-demo.html.
+`npm run sync:online-local` foi rodado na arvore limpa `.codex-temp/deploy-home-sync`, baseada em `origin/main`, para evitar misturar o pacote local do PubPaid. A rotina terminou com `ok: true`: 360 noticias, 0 missing, 54 imagens reparadas, `review-team totalIssues=0`, auditoria de imagens `360/360 ok` e runtime com 181 agentes/5 escritorios. O gerador `scripts/write-online-local-sync-pdf.js` foi promovido porque a rotina dependia dele para fechar o PDF.
 
 ## Next
 
-- Usuario avaliar a V3 no navegador. Se aprovar
-- integrar no BootScene/StreetScene trocando atlas/manifest e ajustando TRAFFIC_FRAMES para 5.
+- Commitar e enviar para `main` apenas os arquivos reais da sincronizacao.
+- Verificar producao apos o deploy com cache-bust na home.
+- PubPaid continua local-only e nao deve entrar em deploy sem ordem explicita do usuario.

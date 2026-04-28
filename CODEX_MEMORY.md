@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-28 - Sync online-local completo
+
+- Usuario pediu atualizar direito e sincronizar todas as pendencias recentes da home/jornal automatico.
+- A sincronizacao foi rodada a partir da arvore limpa `.codex-temp/deploy-home-sync`, baseada em `origin/main`, para nao misturar as mudancas locais do PubPaid.
+- `npm run sync:online-local` terminou com `ok: true`: 360 noticias ativas/arquivo, 0 missing, 54 imagens reparadas, 10 slugs atualizados, `review-team totalIssues=0`, auditoria de imagens `360/360 ok` e runtime de agentes com 181 agentes/5 escritorios.
+- A rotina falhava porque `scripts/write-online-local-sync-pdf.js` era chamado mas nao estava no `main`; o script foi promovido para o deploy para preservar a geracao de `.codex-temp/online-local-sync/latest-report.pdf`.
+- Mudancas sincronizadas no pacote de deploy: `.codex-agents/registry.json`, `data/runtime-news.json`, `data/office-orders.json`, `data/real-agents-actions.json`, `data/re-rodada-dia-geral-report.json`, `data/news-image-focus-audit.json` e o gerador de PDF do sync.
+- PubPaid permanece local-only e fora deste deploy ate ordem explicita do usuario.
+
 ## Atualizacao rapida 2026-04-28 - Mais Assuntos Festa & Social continuo
 
 - Usuario apontou que o bloco `Festa & Social Agora` em `Mais Assuntos` parecia um card dentro de outro card e nao dava continuidade visual a div.
