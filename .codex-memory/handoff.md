@@ -1,16 +1,23 @@
 # Handoff
 
-Updated: 2026-04-27T21:25:00.000Z
+Updated: 2026-04-28T18:00:27.360Z
 
-PubPaid 2.0 retomado localmente. Sempre entregar o endereco ao usuario: `http://127.0.0.1:3000/pubpaid-v2.html`.
-
-Fluxo atual: primeira tela com `Entrar no jogo`; apos clique, some o topo e aparece o pedido Google. Em ambiente local sem config Google, aparece `Continuar teste local`. Depois disso abre a frente do bar ainda travada com selecao `Homem`/`Mulher`; escolher um personagem libera o controle e salva em `pubpaid_v2_selected_character`.
-
-Arquivos principais tocados: `pubpaid-v2.html`, `pubpaid-phaser.css`, `pubpaid-phaser/app.js`, `pubpaid-phaser/core/gameState.js`, `pubpaid-phaser/scenes/BootScene.js`, `StreetScene.js`, `InteriorScene.js`, mais os sheets da mulher em `assets/pubpaid/sprites/protagonist/`.
-
-Validado com `node --check` nos arquivos JS principais e Playwright em `output/web-game/pubpaid-character-flow/`, sem console errors.
+Rodada do mosaico regional concluída localmente. O usuário rejeitou a primeira versão por feiura; a versão atual transforma Edição visual em Capa Especial do Juruá, com capa principal fotográfica, laterais legíveis e lógica regional: Juruá/Cruzeiro do Sul/Vale do Juruá primeiro, Acre geral como fallback. Foram corrigidos guards de artigos nulos em imagens/social cards e vazamentos editoriais apontados pela review team.
 
 ## Next
 
-- Usuario deve avaliar no navegador local.
-- A protagonista mulher ainda e prototipo runtime; se o usuario gostar do caminho, proxima passada deve dar acabamento de arte 32-bit/pixel 2D antes de integrar como final.
+- Antes de deploy/commit
+- revisar git diff para separar qualquer ruído de dados/servidor e manter PubPaid fora do pacote
+- Capturas finais estão em output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v4.png e output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v4.png
+
+## Files In Focus
+
+- index.html
+- script.js
+- premium-clarity.css
+- data/topic-feed-kids.json
+- news-data.js
+
+## Related Orders
+
+- 2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback

@@ -1,7 +1,228 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T15:40:36.094Z",
+  "lastUpdatedAt": "2026-04-28T18:27:16.157Z",
   "assets": [
+    {
+      "id": "pubpaid-traffic-policy-validation-20260428",
+      "kind": "image-set",
+      "path": "output/web-game/pubpaid-traffic-check/",
+      "source": "workspace",
+      "note": "Validacao Playwright da politica de colisao: calçada nao bloqueia trafego; faixa com risco real freia sem re e suprime spawn da direcao bloqueada.",
+      "linkedOrderIds": [
+        "2026-04-28-pubpaid-traffic-lanes-drivers-static-collision"
+      ],
+      "createdAt": "2026-04-28T14:09:23.694Z"
+    },
+    {
+      "id": "catalogo-publica-validation-20260428",
+      "kind": "image",
+      "path": "output/playwright/catalogo-publica-20260428.png",
+      "source": "workspace",
+      "note": "Captura Playwright do catálogo com módulos Prefeitura de Cruzeiro do Sul e Governo do Estado.",
+      "linkedOrderIds": [
+        "2026-04-28-home-mosaico-9-cards-hero-link-catalogo-publica"
+      ],
+      "createdAt": "2026-04-28T13:34:42.172Z"
+    },
+    {
+      "id": "home-mosaic-publica-validation-20260428",
+      "kind": "image",
+      "path": "output/playwright/home-mosaic-publica-20260428.png",
+      "source": "workspace",
+      "note": "Captura Playwright da home após ampliar edição visual para 9 cards e adicionar Ler tudo no destaque do hero.",
+      "linkedOrderIds": [
+        "2026-04-28-home-mosaico-9-cards-hero-link-catalogo-publica"
+      ],
+      "createdAt": "2026-04-28T13:34:42.172Z"
+    },
+    {
+      "id": "pubpaid-traffic-vehicles-4f-clean-drivers-v3-20260428",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png",
+      "source": "workspace-generated",
+      "note": "Spritesheet runtime de carros e motos 32-bit; motos incluem pilotos integrados no proprio PNG, recorte limpo sem base branca/cinza e rodas animadas por frames. Rodada atual reforcou corpo/capacete/pernas dos pilotos e manteve tudo sem overlay/canvas runtime.",
+      "linkedOrderIds": [
+        "2026-04-28-pubpaid-traffic-lanes-drivers-static-collision"
+      ],
+      "createdAt": "2026-04-28T03:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-traffic-sidewalk-clean-validation-20260428",
+      "kind": "image-set",
+      "path": "output/web-game/pubpaid-traffic-check/",
+      "source": "workspace",
+      "note": "Capturas Playwright das duas faixas com player preso na calcada, porta livre e sprites sem base branca. O report confirmou doorStaticBlocked=false, roadTarget.y=572 e directTrafficCollision=true.",
+      "linkedOrderIds": [
+        "2026-04-28-pubpaid-traffic-lanes-drivers-static-collision"
+      ],
+      "createdAt": "2026-04-28T03:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-32bit-approval-preview-20260427",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-approval-preview.png",
+      "source": "workspace-generated",
+      "note": "Preview de aprovacao da protagonista feminina 32-bit: 8 direcoes x 4 frames, jaquetinha, blusa branca, mini saia, tenis, cabelo encaracolado e pele morena.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-female-32bit-approval-sheet"
+      ],
+      "createdAt": "2026-04-27T22:05:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-32bit-walk-8dir-4f-20260427",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-walk-8dir-4f.png",
+      "source": "workspace-generated",
+      "note": "Sheet transparente de caminhada da protagonista feminina 32-bit, frame 96x144, 8 direcoes x 4 frames.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-female-32bit-approval-sheet"
+      ],
+      "createdAt": "2026-04-27T22:05:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-protagonist-quiet-preview-20260427",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-prototype-preview.png",
+      "source": "workspace-generated",
+      "note": "Preview da protagonista mulher apos passe discreto: mesmo estilo do protagonista, paleta azul escura/castanha, feminina sem ser estridente.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-female-protagonist-quiet-style-pass"
+      ],
+      "createdAt": "2026-04-27T21:40:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-protagonist-walk-8dir-3f-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-walk-8dir-3f.png",
+      "source": "workspace-generated",
+      "note": "Protagonista mulher: caminhada em 8 direcoes x 3 frames, frame 64x128. Passe discreto aplicado para combinar com o protagonista.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-google-character-flow-female-protagonist",
+        "2026-04-27-pubpaid-female-protagonist-quiet-style-pass"
+      ],
+      "createdAt": "2026-04-27T21:25:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-protagonist-idle-breathe-8dir-3f-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-idle-breathe-8dir-3f.png",
+      "source": "workspace-generated",
+      "note": "Idle respirando da protagonista mulher provisoria: 8 direcoes x 3 frames.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-google-character-flow-female-protagonist"
+      ],
+      "createdAt": "2026-04-27T21:25:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-protagonist-idle-phone-8dir-3f-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-idle-phone-8dir-3f.png",
+      "source": "workspace-generated",
+      "note": "Idle puxando/mexendo no celular da protagonista mulher provisoria: 8 direcoes x 3 frames.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-google-character-flow-female-protagonist"
+      ],
+      "createdAt": "2026-04-27T21:25:00.000Z"
+    },
+    {
+      "id": "pubpaid-female-protagonist-prototype-preview-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-female-prototype-preview.png",
+      "source": "workspace-generated",
+      "note": "Preview local dos tres sheets da protagonista mulher provisoria para revisao antes de arte final.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-google-character-flow-female-protagonist"
+      ],
+      "createdAt": "2026-04-27T21:25:00.000Z"
+    },
+    {
+      "id": "pubpaid-character-flow-validation-20260427",
+      "kind": "image-set",
+      "path": "output/web-game/pubpaid-character-flow/",
+      "source": "workspace",
+      "note": "Capturas Playwright do fluxo: tela inicial, Google/teste local, selecao Homem/Mulher, rua com mulher e movimento para direita.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-google-character-flow-female-protagonist"
+      ],
+      "createdAt": "2026-04-27T21:25:00.000Z"
+    },
+    {
+      "id": "pubpaid-protagonist-beauty-prototype-32bit-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-beauty-prototype-32bit-v1.png",
+      "source": "workspace-generated",
+      "note": "PNG transparente de aprovacao do protagonista antes de integrar no jogo: frente, 3/4, lado e costas em pixel art mais detalhado estilo 32-bit.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T20:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-protagonist-beauty-prototype-32bit-v1-preview",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-beauty-prototype-32bit-v1-preview.png",
+      "source": "workspace-generated",
+      "note": "Preview em fundo escuro do modelo de aprovacao do protagonista. Nao integrado ao runtime.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T20:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-protagonist-walk-8dir-3f-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-walk-8dir-3f.png",
+      "source": "workspace-generated",
+      "note": "Novo protagonista local: caminhada em 8 direcoes x 3 frames, frame 64x128. Linhas sul, sudeste, leste, nordeste, norte, noroeste, oeste, sudoeste.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T19:56:45.599Z"
+    },
+    {
+      "id": "pubpaid-protagonist-idle-breathe-8dir-3f-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-idle-breathe-8dir-3f.png",
+      "source": "workspace-generated",
+      "note": "Idle respirando do protagonista: 8 direcoes x 3 frames, usado antes do idle celular.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T19:56:45.599Z"
+    },
+    {
+      "id": "pubpaid-protagonist-idle-phone-8dir-3f-v1",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-idle-phone-8dir-3f.png",
+      "source": "workspace-generated",
+      "note": "Idle do protagonista mexendo no celular: 8 direcoes x 3 frames, acionado apos aproximadamente 2800ms parado.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T19:56:45.599Z"
+    },
+    {
+      "id": "pubpaid-protagonist-final-3sheet-preview-v1",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-final-3sheet-preview.png",
+      "source": "workspace-generated",
+      "note": "Preview local dos tres sheets do protagonista lado a lado para revisao de arte.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T19:56:45.599Z"
+    },
+    {
+      "id": "pubpaid-protagonist-focused-phone-v2-review",
+      "kind": "image",
+      "path": "output/web-game/pubpaid-protagonist-focused-phone-v2/protagonist-focused-contact.png",
+      "source": "workspace",
+      "note": "Contato visual da rua limpa com protagonista em idle breathe, walk leste/oeste/norte/sul e idle phone.",
+      "linkedOrderIds": [
+        "2026-04-27-pubpaid-protagonista-final-8dir-3sheets"
+      ],
+      "createdAt": "2026-04-27T19:56:45.599Z"
+    },
     {
       "id": "pubpaid-player-8dir-walk-v1-regenerated",
       "kind": "spritesheet",
@@ -921,11 +1142,11 @@
     {
       "id": "latest-report-md",
       "kind": "report",
-      "path": ".codex-temp/online-local-sync/latest-report.md",
+      "path": ".codex-temp/review-team/latest-report.md",
       "source": "workspace",
-      "note": "Relatorio do sync online-local de 2026-04-25 com home summaries, auditoria de imagens zerada e Mailza/Mailsa priorizada.",
+      "note": "Review team apos ajuste do mosaico regional e traducao do cache kids; totalIssues=0.",
       "linkedOrderIds": [],
-      "createdAt": "2026-04-25T18:03:29.686Z"
+      "createdAt": "2026-04-28T16:00:49.843Z"
     },
     {
       "id": "monthly-fixed-png",
@@ -1103,6 +1324,329 @@
       "note": "Relatorio de pixels das capturas PubPaid: screenshots nao vazias e sem falhas listadas.",
       "linkedOrderIds": [],
       "createdAt": "2026-04-27T15:40:36.094Z"
+    },
+    {
+      "id": "protagonist-8dir-walk-v1-png",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-8dir-walk-v1.png",
+      "source": "workspace",
+      "note": "PubPaid 2 protagonista local: spritesheet animatic 8 direcoes x 4 frames, 64x128, base para retomar design de arte e movimento sem publicar.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T18:28:16.633Z"
+    },
+    {
+      "id": "protagonist-8dir-walk-v1-preview-png",
+      "kind": "image",
+      "path": "assets/pubpaid/sprites/protagonist/protagonist-8dir-walk-v1-preview.png",
+      "source": "workspace",
+      "note": "Preview/prancha do spritesheet animatic do protagonista PubPaid 2.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T18:28:16.697Z"
+    },
+    {
+      "id": "shot-2-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-street-civilians-v1-paintover/shot-2.png",
+      "source": "workspace",
+      "note": "Validacao local da rua PubPaid 2 com civis V1 paintover integrados e sem clones evidentes.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T18:35:35.807Z"
+    },
+    {
+      "id": "street-civilians",
+      "kind": "directory",
+      "path": "assets/pubpaid/sprites/street-civilians",
+      "source": "workspace",
+      "note": "Pacote local V1 de civis unicos da rua PubPaid 2: seis spritesheets idle 4 frames, usados para substituir clones no StreetScene.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T18:35:35.837Z"
+    },
+    {
+      "id": "prompt-pubpaid-protagonista-sprites-2026-04-27-md",
+      "kind": "prompt",
+      "path": "PROMPT_PUBPAID_PROTAGONISTA_SPRITES_2026-04-27.md",
+      "source": "workspace",
+      "note": "Prompt mestre do novo protagonista PubPaid 2: baseado no existente, 8 direcoes, 3 frames de movimento, idle respirando e idle mexendo no celular.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T18:47:34.023Z"
+    },
+    {
+      "id": "shot-1-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-street-clean-protagonist-prompt/shot-1.png",
+      "source": "workspace",
+      "note": "Rua PubPaid limpa para revisao do protagonista: sem civis, sem placa Google gigante, sem molduras de hotspot.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T18:47:34.046Z"
+    },
+    {
+      "id": "pubpaid-character-turnaround-flow-report-2026-04-27",
+      "kind": "report",
+      "path": "output/web-game/pubpaid-turnaround-flow/report.json",
+      "source": "workspace",
+      "note": "Relatorio Playwright do fluxo PubPaid: selecao com strips de 4 vistas, Homem/Mulher no mapa e caminhada para direita, sem erros.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T22:16:55.808Z"
+    },
+    {
+      "id": "pubpaid-character-turnaround-screenshot-2026-04-27",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-turnaround-flow/01-character-select-turnaround.png",
+      "source": "workspace",
+      "note": "Captura da escolha de personagem com Homem e Mulher girando em 4 vistas a partir dos strips novos.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T22:17:52.074Z"
+    },
+    {
+      "id": "pubpaid-generated-character-sheets-2026-04-27",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/sprites/protagonist",
+      "source": "workspace",
+      "note": "Pacote PubPaid gerado de alta qualidade para Homem/Mulher: sources, turnaround 4f e sheets jogaveis 8 direcoes x 4 frames.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T22:18:35.692Z"
+    },
+    {
+      "id": "13-mobile-wallet-open-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-wallet-flow-check/13-mobile-wallet-open.png",
+      "source": "workspace",
+      "note": "Captura mobile landscape da carteira PubPaid 2 aberta apos botao Carteira/celular; HUD e controles ficam escondidos para nao cobrir a interface.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T23:52:44.574Z"
+    },
+    {
+      "id": "10-mobile-controls-png",
+      "kind": "screenshot",
+      "path": "output/web-game/pubpaid-wallet-flow-check/10-mobile-controls.png",
+      "source": "workspace",
+      "note": "Captura mobile landscape dos controles pixel art em tela: direcional, Porta, Carteira e Config.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T23:52:44.731Z"
+    },
+    {
+      "id": "report-json",
+      "kind": "report",
+      "path": "output/web-game/pubpaid-wallet-flow-check/report.json",
+      "source": "workspace",
+      "note": "Relatorio Playwright do fluxo: intro restaurada, selecao, idle breathing, phone-pull hold, WalletScene, controles mobile e config, sem erros.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-27T23:52:44.780Z"
+    },
+    {
+      "id": "home-mosaic-12-foto-total-validation-20260428",
+      "kind": "image",
+      "path": "output/playwright/home-mosaic-12-foto-total-20260428.png",
+      "source": "workspace",
+      "note": "Captura Playwright da home com edicao visual em 12 cards, foto inteira/contain e Mailza como primeira prioridade.",
+      "linkedOrderIds": [
+        "2026-04-28-home-edicao-visual-com-12-cards-foto-total-e-prioridade-mailza"
+      ],
+      "createdAt": "2026-04-28T14:08:59.144Z"
+    },
+    {
+      "id": "online-local-sync-final-md-2026-04-28",
+      "kind": "report",
+      "path": ".codex-temp/online-local-sync/latest-report.md",
+      "source": "workspace",
+      "note": "Relatorio final do sync online-local de encerramento em 2026-04-28: sync, sanitize, review, auditoria de imagens, runtime dos agentes e PDF passaram.",
+      "linkedOrderIds": [
+        "2026-04-28-encerramento-do-dia-sincronizacao-online-local-reuniao-agentes-atualizados-e-lem"
+      ],
+      "createdAt": "2026-04-28T14:32:44.323Z"
+    },
+    {
+      "id": "online-local-sync-final-pdf-2026-04-28",
+      "kind": "report",
+      "path": ".codex-temp/online-local-sync/latest-report.pdf",
+      "source": "workspace",
+      "note": "PDF do relatorio final do sync online-local de encerramento em 2026-04-28.",
+      "linkedOrderIds": [
+        "2026-04-28-encerramento-do-dia-sincronizacao-online-local-reuniao-agentes-atualizados-e-lem"
+      ],
+      "createdAt": "2026-04-28T14:32:44.364Z"
+    },
+    {
+      "id": "review-team-final-zero-2026-04-28",
+      "kind": "report",
+      "path": ".codex-temp/review-team/latest-report.md",
+      "source": "workspace",
+      "note": "Review team final do encerramento de 2026-04-28 com totalIssues=0.",
+      "linkedOrderIds": [
+        "2026-04-28-encerramento-do-dia-sincronizacao-online-local-reuniao-agentes-atualizados-e-lem"
+      ],
+      "createdAt": "2026-04-28T14:32:44.492Z"
+    },
+    {
+      "id": "real-agents-runtime-final-2026-04-28",
+      "kind": "report",
+      "path": ".codex-temp/real-agents/latest-run.md",
+      "source": "workspace",
+      "note": "Relatorio da reuniao/runtime dos agentes no encerramento de 2026-04-28: 181 agentes, 5 escritorios, 360 noticias.",
+      "linkedOrderIds": [
+        "2026-04-28-encerramento-do-dia-sincronizacao-online-local-reuniao-agentes-atualizados-e-lem"
+      ],
+      "createdAt": "2026-04-28T14:32:44.518Z"
+    },
+    {
+      "id": "2026-04-28-pubpaid-card-copy-editorial-png",
+      "kind": "screenshot",
+      "path": "chat-attachments/2026-04-28-pubpaid-card-copy-editorial.png",
+      "source": "workspace",
+      "note": "Captura enviada pelo usuario mostrando card de entrada PubPaid com texto publico em tom de anotacao de editor: 'Em vez de um botao seco...'",
+      "linkedOrderIds": [
+        "2026-04-28-corrigir-copy-publica-do-card-de-entrada-pubpaid-remover-texto-com-tom-de-anotac"
+      ],
+      "createdAt": "2026-04-28T15:00:58.104Z"
+    },
+    {
+      "id": "latest-user-image",
+      "kind": "image",
+      "path": "chat://latest-user-image",
+      "source": "workspace",
+      "note": "Captura enviada pelo usuario mostrando o rodape da noticia com texto cortado na lateral",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T15:01:43.737Z"
+    },
+    {
+      "id": "noticia-footer-mobile-fix-20260428-v2-png",
+      "kind": "image",
+      "path": "output/playwright/noticia-footer-mobile-fix-20260428-v2.png",
+      "source": "workspace",
+      "note": "Validacao Playwright em 740px do rodape de noticia corrigido em coluna unica",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T15:12:06.041Z"
+    },
+    {
+      "id": "crossword-card-only-20260428-png",
+      "kind": "image",
+      "path": "output/playwright/crossword-card-only-20260428.png",
+      "source": "workspace",
+      "note": "Captura de validacao do ajuste de sobreposicao no card Palavras da Rosa",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T15:25:02.574Z"
+    },
+    {
+      "id": "monthly-photos-clean-20260428-no-consent-png",
+      "kind": "screenshot",
+      "path": "output/playwright/monthly-photos-clean-20260428-no-consent.png",
+      "source": "workspace",
+      "note": "Validação visual da home após remover o esbranquiçado/gradientes sobre as fotos do bloco Celebridades & Polêmicas do Dia.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T15:58:16.436Z"
+    },
+    {
+      "id": "mosaico-jurua-desktop-clean-20260428-png",
+      "kind": "image",
+      "path": "output/playwright/mosaico-jurua-desktop-clean-20260428.png",
+      "source": "workspace",
+      "note": "Captura desktop do mosaico visual apos recorte regional Juruá/Cruzeiro/Vale do Juruá e redesign dos cards.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T15:59:41.329Z"
+    },
+    {
+      "id": "mosaico-jurua-mobile-20260428-v3-png",
+      "kind": "image",
+      "path": "output/playwright/mosaico-jurua-mobile-20260428-v3.png",
+      "source": "workspace",
+      "note": "Captura mobile do mosaico visual regional com cards empilhados e fotos inteiras.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T15:59:41.347Z"
+    },
+    {
+      "id": "home-cadernos-social-wide-fix-20260428-v2-png",
+      "kind": "image",
+      "path": "output/playwright/home-cadernos-social-wide-fix-20260428-v2.png",
+      "source": "workspace",
+      "note": "Validação desktop do bloco Festa & Social Agora como faixa aberta contínua, sem card roxo interno.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T16:01:34.191Z"
+    },
+    {
+      "id": "home-cadernos-social-wide-mobile-20260428-png",
+      "kind": "image",
+      "path": "output/playwright/home-cadernos-social-wide-mobile-20260428.png",
+      "source": "workspace",
+      "note": "Validação mobile do bloco Festa & Social Agora sem overflow após ajuste de continuidade.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T16:01:34.213Z"
+    },
+    {
+      "id": "mosaico-jurua-capa-especial-desktop-20260428-v4-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v4.png",
+      "source": "workspace",
+      "note": "Captura desktop final do mosaico Capa Especial do Jurua: 12 itens regionais, 0 imagens faltando e cards laterais com manchetes.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:00:27.221Z"
+    },
+    {
+      "id": "mosaico-jurua-capa-especial-mobile-20260428-v4-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v4.png",
+      "source": "workspace",
+      "note": "Captura mobile final do mosaico Capa Especial do Jurua: cards compactos com miniatura, editoria, fonte e chamada.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:00:27.229Z"
+    },
+    {
+      "id": "mosaico-jurua-capa-especial-mobile-20260428-v6-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v6.png",
+      "source": "workspace",
+      "note": "Captura mobile final após pedido do usuário: 13 chamadas e área de foto maior nos cards compactos.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:11:12.960Z"
+    },
+    {
+      "id": "mosaico-jurua-capa-especial-desktop-20260428-v6-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v6.png",
+      "source": "workspace",
+      "note": "Captura desktop final após pedido do usuário: mosaico com 13 chamadas regionais e fotos laterais mais encorpadas.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:11:13.091Z"
+    },
+    {
+      "id": "mosaico-jurua-fotos-inteiras-mobile-20260428-v7-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v7.png",
+      "source": "workspace",
+      "note": "Mosaico com fotos em modo contain para evitar cortes: imagens inteiras nos cards mobile.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:18:19.425Z"
+    },
+    {
+      "id": "mosaico-jurua-fotos-inteiras-desktop-20260428-v7-png",
+      "kind": "screenshot",
+      "path": "output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v7.png",
+      "source": "workspace",
+      "note": "Mosaico com fotos em modo contain para evitar cortes: imagens inteiras nos cards desktop.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:18:19.592Z"
+    },
+    {
+      "id": "home-footer-aviso-automatico-20260428-png",
+      "kind": "screenshot",
+      "path": "output/playwright/home-footer-aviso-automatico-20260428.png",
+      "source": "workspace",
+      "note": "Captura do rodapé da home com aviso de transparência sobre rotinas automáticas do portal.",
+      "linkedOrderIds": [
+        "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
+      ],
+      "createdAt": "2026-04-28T18:27:16.157Z"
     }
   ]
 }

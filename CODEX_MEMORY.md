@@ -1,5 +1,174 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-28 - Mais Assuntos Festa & Social continuo
+
+- Usuario apontou que o bloco `Festa & Social Agora` em `Mais Assuntos` parecia um card dentro de outro card e nao dava continuidade visual a div.
+- `styles.css`: `.caderno-social-wide` deixou de ser card roxo largo, perdeu sombra/borda arredondada/pseudo-elementos, virou faixa aberta de largura total do grid e os `mini-story` internos passaram a ser chamadas transparentes com divisorias leves.
+- `index.html`: cache-bust de `styles.css` atualizado para `20260428cadernosflow1`.
+- Validacoes: brace-balance de `styles.css`, `node --check script.js`, `node --check server.js`, Playwright desktop e mobile sem overflow; `npm run review:team` com `totalIssues=0`.
+- Capturas: `output/playwright/home-cadernos-social-wide-fix-20260428-v2.png` e `output/playwright/home-cadernos-social-wide-mobile-20260428.png`.
+
+## Atualizacao rapida 2026-04-28 - Mosaico visual focado no Jurua
+
+- Usuario pediu que a area `Edicao visual` ficasse mais bonita e mostrasse somente noticias do Jurua, Cruzeiro do Sul e Vale do Jurua; se faltasse, completar com noticias do Acre em geral.
+- `script.js`: `pickRadarLeadArticles` agora trabalha em camadas regionais: prioriza Cruzeiro do Sul/Vale do Jurua/municipios do Jurua, depois usa Acre geral/governo como fallback; noticias nacionais sem sinal regional nao entram no mosaico.
+- `premium-clarity.css`: mosaico redesenhado com destaque principal horizontal, grade responsiva de 2 colunas, foto inteira em area propria e bloco de leitura escuro sem o retangulo vazio anterior.
+- `index.html`: cache-bust de `script.js` e `premium-clarity.css` atualizado para `20260428-monthly-photo-clean1-mosaico-jurua1`.
+- `data/topic-feed-kids.json`: traduzido lede/summary em ingles apontado pela trava `language-review`.
+- Validacoes: `node --check script.js`, brace-balance `premium-clarity.css` 252/252, Playwright desktop/mobile com 12 cards, `nonRegionalSignals=0` e `missingImages=0`, e `npm run review:team` com `totalIssues=0`.
+- Capturas: `output/playwright/mosaico-jurua-desktop-clean-20260428.png` e `output/playwright/mosaico-jurua-mobile-20260428-v3.png`.
+
+## Atualizacao rapida 2026-04-28 - Fotos limpas em Celebridades
+
+- Usuario pediu para tirar o esbranquicado das fotos no bloco `Celebridades & Polêmicas do Dia`.
+- `premium-clarity.css`: as fotos de `#monthly .month-photo` deixaram de receber tres camadas de gradiente por cima da imagem real; agora usam apenas `var(--month-image)`, `contain`, fundo escuro neutro e leve ajuste de saturacao/contraste.
+- `index.html`: cache-bust de `premium-clarity.css` atualizado para `20260428-monthly-photo-clean1`.
+- Validacoes: brace-balance em `premium-clarity.css` e `styles.css`; Playwright local em `http://127.0.0.1:4132/?skipIntro=1` confirmou `hasGradientLayer=false`, `background-size=contain` e gerou `output/playwright/monthly-photos-clean-20260428-no-consent.png`.
+
+## Atualizacao rapida 2026-04-28 - Fluxo Prefeitura, Politica e Acre / Governo
+
+- Usuario pediu que `Prefeitura` e `Politica` entrem antes de `Tudo` e `Cotidiano`, com divisoes proprias, e que `Prefeitura` priorize prefeituras do Vale do Jurua com Cruzeiro do Sul primeiro; depois vem `Acre / Governo` para noticias principais do Acre e utilidade do Governo do Estado.
+- `index.html`: chips do Resumo CZS e quadro `ASSUNTOS DO DIA` reordenados para `Prefeitura`, `Politica`, `Acre / Governo`, `Tudo`, `Cotidiano`, mantendo o restante na sequencia.
+- `script.js`: textos-guia atualizados; `Politica`, `Prefeitura` e `Acre / Governo` deixaram de se engolir por grupo; ranking do radar agora prioriza Prefeitura/Cruzeiro do Sul, depois Vale do Jurua, Politica, Acre/Governo e Acre geral antes do restante.
+- `server.js` e `script.js`: inferencia de categoria agora reconhece Prefeitura do Jurua antes de cair em Acre/Governo ou utilidade publica, preservando a divisao municipal.
+- `arquivo-noticias.js`: filtros do arquivo seguem a mesma ordem e Politica fica independente de Acre/Governo.
+- `data/topic-feed-kids.json`: saneado um cache publico com lede/summary em ingles que travava a auditoria.
+- Validacoes: `node --check script.js`, `node --check server.js`, `node --check arquivo-noticias.js`, parse JSON de `data/topic-feed-kids.json` e `npm run review:team` com `totalIssues=0`.
+
+## Atualizacao rapida 2026-04-28 - Acre / Governo e previa admin total
+
+- Usuario pediu que a previa so abra com senha admin total e que `Governo do Estado` vire uma divisao `Acre / Governo`, com noticias gerais do Acre mais governo estadual.
+- `server.js`: `/api/preview-image` agora exige senha admin total; sem senha retorna 401 com mensagem de senha obrigatoria.
+- `index.html`, `script.js`, `arquivo-noticias.js` e `catalogo-servicos-data.js`: rotulo alterado para `Acre / Governo`; filtro usa `data-filter="acre-governo"` e aceita legado `governo-estado`.
+- O filtro `Acre / Governo` foi ampliado para captar sinais explicitos de Acre, Rio Branco, Jurua, municipios acreanos, Governo do Acre, Aleac, secretarias e fontes estaduais, mantendo `Prefeitura` como divisao separada.
+- Validacoes: `node --check server.js`, `node --check script.js`, `node --check arquivo-noticias.js`, `node --check catalogo-servicos-data.js`, `npm run review:team` com `totalIssues=0`, smoke local em `127.0.0.1:4124` com home 200, API news 200 e preview sem senha 401.
+
+## Atualizacao rapida 2026-04-28 - Rodape da noticia sem corte
+
+- Usuario enviou captura do rodape da pagina de noticia com o titulo `Leitura com foto no topo...` cortado/estourando lateralmente.
+- Causa encontrada: uma regra tardia mantinha `.rich-footer` em 3 colunas com `!important`, sobrescrevendo a quebra responsiva e espremendo o texto em larguras estreitas.
+- `modern-launch.css` agora força `.detail-footer/.rich-footer` da pagina de noticia para uma coluna ate 980px, garante `min-width: 0` nos blocos internos e reduz o titulo no breakpoint de 720px.
+- `noticia.html` recebeu cache-bust `20260428footerflow` para puxar o CSS corrigido.
+- Validado com brace-balance dos CSS principais e Playwright em 740px e 390px. Capturas: `output/playwright/noticia-footer-mobile-fix-20260428-v2.png` e `output/playwright/noticia-footer-phone-fix-20260428.png`.
+
+## Atualizacao rapida 2026-04-28 - Encerramento diario e lembrete Cheffe Call
+
+- Usuario aprovou a home e pediu sincronizar tudo como na rotina diaria, atualizar a reuniao e encerrar o dia.
+- Home/mosaico de 12 cards ja foi publicada no `origin/main` pelo commit `b2b8609` (`Ajusta mosaico visual e utilidade publica`).
+- `npm run sync:online-local` rodou no encerramento e terminou ok: 360 noticias sincronizadas, `sanitize public language` ok, `review-team totalIssues=0`, auditoria de imagens `360/360 ok`, runtime/reuniao dos agentes com 181 agentes e 5 escritorios, e PDF gerado em `.codex-temp/online-local-sync/latest-report.pdf`.
+- A primeira passada do sync parou em 2 avisos antigos de copy no PubPaid (`teste local`); `pubpaid-phaser/app.js` recebeu ajuste textual para linguagem de visualizacao, e a segunda passada zerou a review.
+- Relatorios da reuniao/sync: `.codex-temp/online-local-sync/latest-report.md`, `.codex-temp/online-local-sync/latest-report.pdf`, `.codex-temp/real-agents/latest-run.md` e `.codex-temp/review-team/latest-report.md`.
+- Lembrete criado para 2026-04-29 as 09:00 no horario do Acre: comecar a rotina de organizar a Cheffe Call.
+- PubPaid segue com varias mudancas locais e sem deploy dedicado; nao publicar PubPaid sem ordem explicita do usuario.
+
+## Atualizacao rapida 2026-04-28 - PubPaid politica de colisao de veiculos
+
+- Usuario corrigiu a regra: na calçada nao existe risco de colisao com veiculo, mesmo se a silhueta visual ficar perto da rua.
+- `StreetScene.js`: a parada preventiva dos veiculos agora usa uma caixa de perigo de faixa, baseada na posicao baixa do personagem; se o player esta na calçada (`y <= 578`), o trafego nao freia nem bloqueia spawn.
+- As faixas foram reposicionadas mais para baixo (`coming y=662`, `going y=716`) para os veiculos nao parecerem subir na calçada/por baixo do protagonista.
+- Mantida a seguranca real: se um caso forçado coloca o player dentro da faixa, o veiculo para antes, nao da re se ja estiver colado e bloqueia novos spawns naquela direcao para nao empilhar.
+- `scripts/pubpaid-build-traffic-spritesheet.py`: pilotos das motos continuam integrados no proprio spritesheet, com corpo/capacete/jaqueta/pernas redesenhados frame a frame; `BootScene.js` usa cache-bust `20260428traffic5`.
+- Validado com `node --check`, `py_compile` e Playwright em `output/web-game/pubpaid-traffic-check/`: `sidewalkNoStop=true`, `sidewalkLaneBlocked=false`, `sidewalkTrafficCollision=false`, `directTrafficCollision=true`, `hazardStoppedBeforePlayer=true`, `didNotReverse=true` e `spawnSuppressedOrOtherLane=true`.
+
+## Atualizacao rapida 2026-04-28 - Home mosaico 12 cards foto total e Mailza prioridade
+
+- Usuario pediu a `Edição visual` com 12 cards para nao sobrar item sozinho, divisao ajustada para ver a foto inteira como regra total e prioridade maior para Mailza/Maisa.
+- `index.html` agora anuncia doze destaques e mantem 12 cards estaticos de fallback; `script.js` seleciona ate 12 materias para o mosaico dinamico.
+- A selecao dinamica puxa materias Mailza/Maisa com imagem antes das demais, depois completa com materias do dia e fallback.
+- `styles.css` mudou o mosaico para grade par de 2 colunas, com cards em proporcao uniforme e imagens em `contain`; `script.js` tambem pinta as imagens do mosaico com `contain` e foco central.
+- Validacoes: `node --check script.js`, contagem CSS 3344/3344, Playwright em `http://127.0.0.1:3000/?skipIntro=1` com 12 cards, grid 2 colunas, lead de Mailza e sem erros de console. Captura: `output/playwright/home-mosaic-12-foto-total-20260428.png`.
+- `npm run review:team` rodou; os avisos restantes ficaram fora desta frente: 4 textos editoriais em `news-data.js` e 2 avisos antigos do PubPaid.
+
+## Atualizacao rapida 2026-04-28 - Home mosaico 9 cards e catalogo publico
+
+- Usuario pediu que a area `Edição visual` deixasse de ter apenas 3 materias e passasse a ter pelo menos 9; os destaques do hero podem se repetir ali, somente nessa area.
+- `index.html` agora tem 9 cards no mosaico visual e o destaque principal mostra `Ler tudo`.
+- `script.js` passou a selecionar ate 9 materias para o mosaico e tambem atualiza o link do destaque do hero (`data-hero-tourism-meta-link`) para a materia real.
+- Os filtros do Resumo CZS ganharam `Governo do Estado` logo apos `Prefeitura`; `script.js` separa a categoria `governo-estado` de `prefeitura`.
+- `catalogo-servicos-data.js` ganhou modulos separados para `Prefeitura de Cruzeiro do Sul` e `Governo do Estado`, com links oficiais de utilidade publica; `catalogo-servicos.html` recebeu cache-bust.
+- Validacoes: `node --check script.js`, `node --check catalogo-servicos-data.js`, `node --check catalogo-servicos.js`, `npm run review:team` (2 avisos antigos do PubPaid, fora desta frente) e Playwright sem erros de console. Capturas: `output/playwright/home-mosaic-publica-20260428.png` e `output/playwright/catalogo-publica-20260428.png`.
+
+## Atualizacao rapida 2026-04-28 - Prefeitura restrita ao Jurua
+
+- Usuario apontou que uma materia da Anitta/G1 Pop & Arte nao tinha relacao com Prefeitura e pediu delimitar esse tipo de captacao somente para Prefeitura de Cruzeiro do Sul, Acre e Vale do Jurua.
+- `server.js` e `script.js` agora so classificam como `Prefeitura` quando ha sinal municipal explicito combinado com Cruzeiro do Sul/Vale do Jurua; `governo` deixou de mapear automaticamente para Prefeitura.
+- Caches locais `news-data.js`, `data/runtime-news.json` e `data/news-archive.json` foram corrigidos: a materia da Anitta saiu de Prefeitura e entrou como `Cultura`.
+- Validacoes: `node --check server.js`, `node --check script.js`, `node --check news-data.js`, parse JSON dos caches e auditoria local confirmando `badPrefeitura=0`.
+
+## Atualizacao rapida 2026-04-28 - PubPaid escala maior e rodas/pilotos no sprite
+
+- Usuario pediu proporcoes maiores para carros/motos, rodas sem corte e animacao de roda desenhada no proprio spritesheet, nao por overlay/efeito runtime.
+- `StreetScene.js`: escalas dos veiculos aumentadas para combinar melhor com o protagonista; removidos `headGlow`, `tailGlow`, `shadow` e qualquer desenho extra no container do trafego. Agora o container renderiza somente o sprite da folha.
+- `scripts/pubpaid-build-traffic-spritesheet.py`: rodas passaram a receber spokes/arcos por frame dentro do PNG, usando centros por modelo; pilotos das motos foram redesenhados menores, com postura lateral, joelho dobrado, maos no guidao, jaqueta/capacete escuros e tons diferentes por moto.
+- `BootScene.js`: cache-bust do trafego subiu para `20260428traffic4`.
+- Validado localmente com `node --check`, `py_compile` e Playwright em `output/web-game/pubpaid-traffic-check/`; captura `02b-door-sidewalk-clear.png` mostra veiculos maiores e trafego ainda parando antes do player.
+
+## Atualizacao rapida 2026-04-28 - PubPaid trafego freia antes do player
+
+- Usuario apontou que carros/motos ainda atravessavam o sprite do protagonista quando ele ficava perto da guia da calcada.
+- `StreetScene.js` ganhou caixa de seguranca visual para veiculos (`getTrafficAvoidanceBox`) e para o player (`getPlayerVehicleBlockBox`).
+- O movimento do trafego agora passa por `getTrafficNextX`: se a proxima posicao encostar no espaco do protagonista, o carro/moto para alguns pixels antes, em vez de atravessar o sprite.
+- Validado com Playwright em `output/web-game/pubpaid-traffic-check/`: `vehicleStopProbe.avoidedOverlap=true`, `vehicleStopProbe.stoppedBeforePlayer=true` e `blocked=true`.
+
+## Atualizacao rapida 2026-04-28 - PubPaid calçada e sprites de trafego limpos
+
+- Feedback fino do usuario aplicado: o protagonista agora fica limitado a uma faixa caminhavel de calcada (`y 512..572`) e o clique na rua e clampado para a calcada, sem entrar no asfalto.
+- A colisao da porta foi recuada: `doorStaticBlocked=false` na validacao, entao o player consegue ficar em frente a porta e apertar `E`.
+- Removida a barra/reflexo branco que aparecia embaixo dos veiculos no runtime; `StreetScene.js` nao cria mais `neonUnderline` artificial nos containers de trafego.
+- `scripts/pubpaid-build-traffic-spritesheet.py` limpou restos cinza/brancos do recorte, redesenhou pilotos integrados nas motos com jaqueta/capacete escuros e trocou os riscos errados das rodas por arcos pequenos dentro da propria roda.
+- Cache-bust do trafego subiu para `20260428traffic3`. Validacao Playwright em `output/web-game/pubpaid-traffic-check/` confirmou `doorStaticBlocked=false`, `roadTarget.y=572`, `movedTowardRoad=true` e captura com moto sem base branca.
+
+## Atualizacao rapida 2026-04-28 - PubPaid faixas, motos com piloto e colisoes de mapa
+
+- Corrigido feedback do usuario na rua: a calcada deixou de receber trafego; agora existem duas faixas reais, a de cima vindo para a direita (`>>>>>>>>`) e a de baixo indo para a esquerda (`<<<<<<<<`).
+- `StreetScene.js` passou a spawnar veiculos por faixa, invertendo o sprite quando a direcao e para a direita, e aumentou a colisao usando hitbox escalada pelo tamanho visual.
+- Adicionadas colisoes fixas para predio arcade, predio principal, porta do bar, parada de onibus e esquina; o restante ficou como fundo iluminado por novos glows neon.
+- `scripts/pubpaid-build-traffic-spritesheet.py` agora desenha pilotos nas motos antes de gerar `assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png`; cache-bust do asset subiu para `20260428traffic2`.
+- Validado localmente em `http://127.0.0.1:3000/pubpaid-v2.html`: `node --check`, `py_compile` e Playwright em `output/web-game/pubpaid-traffic-check/`; o report confirmou `directTrafficCollision=true`, `directStaticCollision=true` e `blocked=true`.
+
+## Atualizacao rapida 2026-04-27 - PubPaid carteira mobile pixel art
+
+- Usuario pediu mudar o idle/carteira: parado por 3s o personagem fica respirando; Enter faz animacao de puxar celular com hold no ultimo sprite por cerca de 2s, depois abre a carteira.
+- `app.js` voltou a iniciar a intro cinematica no botao inicial antes do login/teste local, restaurando a abertura cortada.
+- Criada `pubpaid-phaser/scenes/WalletScene.js`: menu carteira em Phaser com entrada cinematografica puxada do celular e interface 2D pixel art de saldo.
+- `StreetScene.js` e `InteriorScene.js`: Enter abre carteira; E ficou para porta/interacao; o idle de celular nao dispara mais sozinho.
+- `pubpaid-v2.html` e `pubpaid-phaser.css`: controles mobile na tela com direcional e botoes pixel art `Porta`, `Carteira` e `Config`; Config abre painel de som/voltar; HUD mobile compactada e overlays escondidos durante a carteira.
+- Validado localmente em `http://127.0.0.1:3000/pubpaid-v2.html`: `node --check` nos JS tocados, CSS brace-balance 434/434, Playwright custom em `output/web-game/pubpaid-wallet-flow-check/` e cliente padrao em `output/web-game/pubpaid-mobile-wallet-client/`, sem erros. PubPaid segue apenas local, sem commit/push/deploy.
+
+## Atualizacao rapida 2026-04-28 - PubPaid trafego lateral com colisao
+
+- Usuario aprovou uma folha nova de carros e motos 32-bit em vista lateral esquerda para usar na rua do PubPaid.
+- Criado pipeline `scripts/pubpaid-build-traffic-spritesheet.py` que recorta a folha aprovada, limpa o fundo e gera `assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png`, preview JPG e metadata JSON.
+- `BootScene.js` passou a carregar `ppg-traffic-vehicles-sheet`; `StreetScene.js` passou a spawnar trafego da direita para a esquerda com carros e motos em estilo 2D pixel art premium.
+- O trafego agora tem glow de farol/lanterna, reflexo neon leve e som sintetico dedicado em `pubpaid-phaser/audio/trafficNoise.js`.
+- Colisao runtime ativada: o protagonista nao atravessa mais carro ou moto quando tenta cortar a rua.
+- Validado localmente em `http://127.0.0.1:3000/pubpaid-v2.html`: `node --check`, `py_compile` e Playwright em `output/web-game/pubpaid-traffic-check/`, com sprites visiveis e bloqueio de colisao confirmado.
+
+## Atualizacao rapida 2026-04-27 - PubPaid selecao girando e personagem no mapa
+
+- Usuario pediu que a escolha de personagem mostre Homem e Mulher girando no proprio eixo em 4 vistas, e que depois a selecao leve ao mapa o spritesheet completo correspondente.
+- Promovidos para o workspace os sources gerados de alta qualidade: `protagonist-male-generated-sheet-source-v1.png` e `protagonist-female-generated-sheet-source-v1.png`.
+- Criado `scripts/pubpaid-extract-generated-character-sheets.py` para extrair strips de selecao e sheets transparentes 96x144, 8 direcoes x 4 frames, para walk/idle/celular.
+- `pubpaid-v2.html` e `pubpaid-phaser.css` agora usam `protagonist-male-turnaround-4f.png` e `protagonist-female-turnaround-4f.png` nos cards da escolha, animados via CSS.
+- `BootScene.js`, `StreetScene.js` e `InteriorScene.js` agora carregam os sheets gerados para Homem/Mulher e suportam rig por personagem com `frames=4` e escala propria.
+- Validacao local em `http://127.0.0.1:3000/pubpaid-v2.html`: Playwright gerou `output/web-game/pubpaid-turnaround-flow/01-character-select-turnaround.png`, `02b-male-walk-right.png`, `03b-female-walk-right.png` e `report.json`, sem erros.
+- PubPaid continua apenas local, sem commit/push/deploy.
+
+## Atualizacao rapida 2026-04-27 - PubPaid feminina 32-bit aprovação
+
+- Usuario esclareceu que queria a protagonista feminina em estilo 32-bit como o protagonista aprovado da referencia, nao boneca simples: 8 direcoes, 4 frames por direcao, visual adulto/feminino com jaquetinha curta, blusa branca, mini saia, tenis, cabelo encaracolado e pele morena.
+- Criado prototipo de aprovacao em `scripts/pubpaid-generate-female-32bit-approval-sheets.py`, sem integrar como final ao jogo.
+- Gerados sheets transparentes 96x144 por frame: `protagonist-female-32bit-walk-8dir-4f.png`, `protagonist-female-32bit-idle-breathe-8dir-4f.png`, `protagonist-female-32bit-idle-phone-8dir-4f.png`, mais preview `protagonist-female-32bit-approval-preview.png`.
+- Como os GIFs nao apareceram no chat do usuario, criada pagina local `pubpaid-female-32bit-preview.html` para revisar o personagem em movimento pelo navegador.
+- Validacao local: `python -m py_compile scripts/pubpaid-generate-female-32bit-approval-sheets.py` e geracao dos PNGs. Proxima etapa e o usuario aprovar/reprovar o preview antes de adaptar contrato no Phaser.
+
+## Atualizacao rapida 2026-04-27 - PubPaid protagonista mulher discreta
+
+- Usuario aprovou o fluxo de escolha e pediu a protagonista mulher no mesmo modelo/estilo do protagonista, feminina mas sem ficar estridente.
+- Regerados os tres sheets femininos em `assets/pubpaid/sprites/protagonist/` mantendo contrato `64x128`, 8 direcoes x 3 frames: mesma familia visual do protagonista, jaqueta azul escura, calca escura, cabelo castanho mais longo, camisa clara discreta e celular com brilho reduzido.
+- `BootScene.js` e `pubpaid-v2.html` receberam cache-bust `20260427femalequiet1` para o navegador puxar a arte nova.
+- Validacoes: `python -m py_compile scripts/pubpaid-generate-female-protagonist-prototype-sheets.py`, `node --check` em Boot/app/Street/Interior e Playwright local em `http://127.0.0.1:3000/pubpaid-v2.html`, sem `console-errors.json`.
+
 ## Atualizacao rapida 2026-04-27 - PubPaid Google e escolha de personagem
 
 - PubPaid 2 continua somente local, sem deploy/push/commit/envio. Endereco de teste combinado com o usuario: `http://127.0.0.1:3000/pubpaid-v2.html`.
@@ -508,3 +677,7 @@ Leitura atual dessas validacoes:
 - Trava de idioma publico criada em 2026-04-27: corrigidos vazamentos de texto em ingles em `news-data.js`, `data/news-archive.json`, `data/runtime-news.json` e `data/topic-feed-tech.json`; `scripts/review-team-audit.js` ganhou `language-review`; `AGENTS.md` e `.codex-review-team/README.md` avisam que titulos, chamadas, ledes, resumos, destaques e corpo publico de noticia devem sair em portugues. Validado com `node --check scripts/review-team-audit.js` e `node scripts/review-team-audit.js` (totalIssues=0). Commit `26a4dc9` foi mergeado no PR #5 em `origin/main` (`8117d4d`).
 - Rodada de segunda em 2026-04-27: `npm run sync:online-local` passou com 360 noticias no acervo/janela ativa, 0 imagens ausentes, 0 duplicatas locais por divisao, `sanitize public language` integrado e `review:team` totalIssues=0; `npm run audit:news-images -- --offline --limit=1000 --strict-new` retornou 360/360 ok; `npm run agents:cycle` rodou 181 agentes/5 escritorios com 360 noticias. Novo `scripts/sanitize-public-language.js` fica chamado por `scripts/sync-online-local.js` para sanear idioma publico antes do review. PubPaid seguiu fora do pacote sem autorizacao explicita. Commit `e325d52` foi mergeado no PR #7 em `origin/main` (`cf33a01`).
 - Nova fase PubPaid em 2026-04-27: criado `PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md` para iniciar novas conversas/rodadas como instrutor de testes, auditor de ruido, condutor de reuniao e organizador de objetivos antes de criar novas funcionalidades. O prompt fixa `pubpaid-v2.html` + `pubpaid-phaser/` como frente oficial, preserva a trava de deploy PubPaid sem autorizacao explicita e exige fila P0/P1/P2 com evidencias.
+- Mosaico regional da home em 2026-04-28: apos feedback do usuario de que a primeira versao ficou feia, `Edição visual` foi refeita como Capa Especial do Jurua em `premium-clarity.css`, com capa principal fotografica, cards laterais claros e mobile em miniatura + manchete. `script.js` agora separa escopo editorial e fonte, prioriza Juruá/Cruzeiro do Sul/Vale do Juruá e so completa com Acre geral/governo quando faltar, evitando puxar noticia nacional so por fonte local. Tambem foram corrigidos guards de artigo nulo na hidratacao de imagens/social cards. Validacoes: `node --check script.js`, `node --check news-data.js`, parse de `data/topic-feed-kids.json`, CSS braces 308/308, `npm run review:team` totalIssues=0 e Playwright com 12 itens, 0 imagens faltando e errors=[]; capturas finais em `output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v4.png` e `output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v4.png`.
+- Refinamento do mosaico regional em 2026-04-28: a pedido do usuario, a Capa Especial passou de 12 para 13 destaques, o texto de apoio virou "Treze destaques" e a area de foto dos cards foi aumentada (`premium-clarity.css`) para melhorar enquadramento. `script.js` foi reforçado para bloquear assuntos nacionais/remotos sem sinal explicito de Acre/Juruá; validação final Playwright retornou `count=13`, `missingImages=0`, `errors=[]`, e a lista dos 13 titulos ficou regional. Capturas: `output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v6.png` e `output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v6.png`.
+- Aviso de transparencia na home em 2026-04-28: rodape recebeu `footer-automation-notice` explicando que a pagina inicial usa rotinas automaticas e pode ter falhas de programacao/layout/ordenacao, sem alterar o compromisso editorial com a noticia. Cache CSS atualizado para `mosaico-capa5`. Validacoes: CSS braces 312/312, `node --check script.js`, `npm run review:team` totalIssues=0 e captura `output/playwright/home-footer-aviso-automatico-20260428.png`.
+

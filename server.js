@@ -232,6 +232,7 @@ const PREVIEW_CLASS_BY_CATEGORY = {
   policia: "thumb-policia",
   educacao: "thumb-educacao",
   prefeitura: "thumb-politica",
+  "acre-governo": "thumb-politica",
   politica: "thumb-politica",
   esporte: "thumb-cultura",
   "utilidade publica": "thumb-alerta",
@@ -242,6 +243,7 @@ const PREVIEW_CLASS_BY_CATEGORY = {
 const CATEGORY_LABEL_BY_KEY = {
   cotidiano: "Cotidiano",
   prefeitura: "Prefeitura",
+  "acre-governo": "Acre / Governo",
   politica: "Política",
   policia: "Polícia",
   saude: "Saúde",
@@ -265,7 +267,12 @@ const CATEGORY_ALIAS_MAP = {
   variedades: "cultura",
   esporte: "esporte",
   "destaques esporte": "esporte",
-  governo: "politica",
+  governo: "acre-governo",
+  "governo do estado": "acre-governo",
+  "governo do acre": "acre-governo",
+  "acre / governo": "acre-governo",
+  "acre-governo": "acre-governo",
+  estado: "acre-governo",
   prefeitura: "prefeitura",
   editais: "utilidade publica",
   detran: "utilidade publica",
@@ -275,7 +282,7 @@ const CATEGORY_ALIAS_MAP = {
   newsletter: "",
   nacional: "",
   geral: "",
-  acre: "",
+  acre: "acre-governo",
   "acre 03": "",
   "destaque 1": "",
   "extra total": ""
@@ -2072,6 +2079,15 @@ function isJuruaPrefeituraScope(rawText = "") {
   return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
 }
 
+function isAcreGovernmentScope(rawText = "") {
+  const haystack = normalizeText(rawText);
+  if (!haystack) return false;
+
+  return /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|secretaria estadual|detran|sesacre|seinfra|sejusp|aleac|assembleia legislativa|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
+    haystack
+  );
+}
+
 function inferCategoryKeyFromContent(rawText) {
   const haystack = normalizeText(rawText);
   if (!haystack) return "";
@@ -2109,14 +2125,6 @@ function inferCategoryKeyFromContent(rawText) {
   }
 
   if (
-    /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
-      haystack
-    )
-  ) {
-    return "utilidade publica";
-  }
-
-  if (
     /\b(aleac|camara|deputad|senador|ministro|presidente|ex-presidente|bolsonaro|lula|stj|stf|eleicao|eleitoral|parlamento|congresso|senado|monopolio aereo)\b/.test(
       haystack
     )
@@ -2126,6 +2134,20 @@ function inferCategoryKeyFromContent(rawText) {
 
   if (isJuruaPrefeituraScope(haystack)) {
     return "prefeitura";
+  }
+
+  if (
+    isAcreGovernmentScope(haystack)
+  ) {
+    return "acre-governo";
+  }
+
+  if (
+    /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
+      haystack
+    )
+  ) {
+    return "utilidade publica";
   }
 
   if (
@@ -6741,6 +6763,15 @@ function requireSpriteCheckAccess(req, body = {}) {
 function requireFullAdminOrderAccess(req, body = {}) {
   const authValue = getAuthValue(req, body);
   return hasFullAdminPassword(authValue) || requireAdmin(req);
+}
+
+function requireFullAdminPasswordAccess(req, body = {}) {
+  const authValue = getAuthValue(req, body, ["password", "adminPassword", "fullAdminPassword", "token"]);
+  const basic = parseBasicAuth(req);
+  return (
+    hasFullAdminPassword(authValue) ||
+    (basic?.user === SUPER_ADMIN_USER && hasFullAdminPassword(basic?.password))
+  );
 }
 
 function readOfficeWorkStore() {
@@ -11446,6 +11477,13 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/preview-image") {
+    if (!requireFullAdminPasswordAccess(req)) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Senha admin total obrigatoria para abrir previa."
+      });
+    }
+
     const targetUrl = searchParams.get("url") || "";
     const imageUrl = await fetchPreviewImage(targetUrl);
     if (!imageUrl) {

@@ -8,6 +8,7 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 const REPORT_DIR = path.join(ROOT_DIR, ".codex-temp", "online-local-sync");
 const REPORT_JSON_FILE = path.join(REPORT_DIR, "latest-report.json");
 const REPORT_MD_FILE = path.join(REPORT_DIR, "latest-report.md");
+const REPORT_PDF_FILE = path.join(REPORT_DIR, "latest-report.pdf");
 const NEWS_IMAGE_AUDIT_LIMIT = Math.max(120, Number(process.env.CATALOGO_SYNC_NEWS_LIMIT || 1000));
 
 function ensureDir(dirPath) {
@@ -97,6 +98,15 @@ function buildMarkdown(report) {
   return `${lines.join("\n")}\n`;
 }
 
+function safeSlug(value) {
+  return String(value || "")
+    .trim()
+    .replace(/[:.]/g, "-")
+    .replace(/[^\w-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 async function main() {
   const startedAt = new Date().toISOString();
   const steps = [];
@@ -145,6 +155,25 @@ async function main() {
     );
   }
 
+  if (steps.at(-1)?.status === "passed") {
+    steps.push(
+      await runStep("real agents runtime", async () => {
+        const { runRealAgentsRuntimeLocal } = require("./real-agents-runtime.js");
+        return runRealAgentsRuntimeLocal();
+      })
+    );
+  }
+
+  if (steps.at(-1)?.status === "passed") {
+    steps.push(
+      await runStep("write pdf report", async () => {
+        const { writeOnlineLocalSyncPdf } = require("./write-online-local-sync-pdf.js");
+        const result = await writeOnlineLocalSyncPdf({ rootDir: ROOT_DIR, outFile: REPORT_PDF_FILE });
+        return { ...result, exitCode: result?.ok ? 0 : 1 };
+      })
+    );
+  }
+
   const report = {
     ok: steps.every((step) => step.status === "passed"),
     startedAt,
@@ -157,6 +186,19 @@ async function main() {
   ensureDir(REPORT_DIR);
   fs.writeFileSync(REPORT_JSON_FILE, `${JSON.stringify(report, null, 2)}\n`, "utf-8");
   fs.writeFileSync(REPORT_MD_FILE, buildMarkdown(report), "utf-8");
+
+  // Keep a timestamped copy for auditing.
+  try {
+    const runDir = path.join(REPORT_DIR, "runs", safeSlug(startedAt || new Date().toISOString()));
+    ensureDir(runDir);
+    fs.copyFileSync(REPORT_JSON_FILE, path.join(runDir, "report.json"));
+    fs.copyFileSync(REPORT_MD_FILE, path.join(runDir, "report.md"));
+    if (fs.existsSync(REPORT_PDF_FILE)) {
+      fs.copyFileSync(REPORT_PDF_FILE, path.join(runDir, "report.pdf"));
+    }
+  } catch {
+    // Non-blocking.
+  }
   console.log(JSON.stringify(report, null, 2));
 
   if (!report.ok) {

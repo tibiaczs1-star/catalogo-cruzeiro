@@ -1,12 +1,19 @@
 {
   "ok": true,
-  "startedAt": "2026-04-27T17:56:47.034Z",
-  "finishedAt": "2026-04-27T17:56:49.549Z",
+  "startedAt": "2026-04-28T18:28:14.894Z",
+  "finishedAt": "2026-04-28T18:28:18.197Z",
   "source": "Re Rodada do Dia Geral",
   "cachedFallback": false,
   "cachedFallbackReason": "",
+  "cachedArchiveFallback": false,
+  "cachedArchiveFallbackReason": "",
   "onlineAuditBefore": {
     "total": 360,
+    "missing": 0,
+    "sameDivisionDuplicates": 4
+  },
+  "onlineArchiveAuditBefore": {
+    "total": 356,
     "missing": 0,
     "sameDivisionDuplicates": 4
   },
@@ -16,16 +23,47 @@
     "sameDivisionDuplicates": 0
   },
   "archiveAuditAfterSync": {
-    "total": 443,
+    "total": 360,
     "missing": 0,
-    "sameDivisionDuplicates": 2
+    "sameDivisionDuplicates": 0
   },
   "activeWindowItems": 360,
-  "archiveItems": 443,
+  "archiveItems": 360,
   "syncFetchLimit": 1000,
   "repairedImages": 54,
   "activeWindowRepairedImages": 54,
   "archiveRepairedImages": 0,
   "mailzaPriorityItems": 6,
+  "delta": {
+    "added": 0,
+    "removed": 0,
+    "updated": 22,
+    "addedSlugs": [],
+    "removedSlugs": [],
+    "updatedSlugs": [
+      "https://www.theverge.com/policy/918843/trump-whcd-attack-white-house-ballroom",
+      "https://www.theverge.com/entertainment/918826/tomora-come-closer-review-90s-dance-music",
+      "https://www.theverge.com/gadgets/918544/skylight-15-inch-smart-calendar-2-mothers-day-deal-2026-sale",
+      "https://www.theverge.com/tech/918797/switched-to-linux-dont-miss-windows",
+      "https://www.theverge.com/column/918079/david-zaslav-warner-bros-discovery-coyote-v-acme-batgirl-tax-writeoffs",
+      "https://www.theverge.com/gadgets/918410/sharge-icemag-3-qi2-usb-c-wireless-power-bank-battery-deal-sale",
+      "https://www.theverge.com/gadgets/913854/govee-uplighter-floor-lamps-caregiving-parkinsons-disease",
+      "https://www.theverge.com/entertainment/918313/director-sho-miyake-interview",
+      "https://www.theverge.com/tech/918695/framework-laptop-stranger-things-installer",
+      "https://www.theverge.com/gadgets/917340/us-worst-smartphones-china-batteries-cameras-apple-iphone-john-ternus",
+      "instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
+      "governo-do-acre-divulga-resultado-da-1-fase-do-processo-seletivo-para-brigadistas-comunitarios",
+      "microsoft-will-let-you-pause-windows-updates-indefinitely-35-days-at-a-time",
+      "alex-jones-has-uncovered-another-massive-conspiracy",
+      "the-person-who-allegedly-leaked-paramount-s-new-avatar-movie-has-been-arrested",
+      "bmw-is-one-step-closer-to-selling-you-a-color-changing-car",
+      "google-s-handsome-pixel-watch-4-is-on-sale-for-40-off-in-both-size-configurations",
+      "the-ram-shortage-could-get-even-worse-if-samsung-labor-protests-cut-production",
+      "how-project-maven-taught-the-military-to-love-ai",
+      "xreal-s-best-ar-glasses-are-599-for-good-now",
+      "360-degree-cameras-have-a-new-superpower",
+      "tesla-s-cybercab-goes-into-production-so-why-is-musk-tapping-the-brakes"
+    ]
+  },
   "rule": "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
 }

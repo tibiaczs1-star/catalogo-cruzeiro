@@ -662,6 +662,7 @@ const getImageFingerprint = (value) => {
 };
 
 const buildOrderedImageSources = (article = {}, surface = "default") => {
+  article = article || {};
   const inlineImageUrl = extractInlineArticleImage(article);
   const hasSourceToProbe = Boolean(article.sourceUrl || article.url || article.link);
   const sharedValues = [
@@ -775,6 +776,7 @@ const extractImageUrlFromText = (value) => {
 };
 
 const extractInlineArticleImage = (article = {}) => {
+  article = article || {};
   const candidates = [
     article.imageUrl,
     article.image,
@@ -1150,6 +1152,7 @@ const mosaicImageFocusOverridesBySlug = {
 };
 
 const resolveArticleImageFocus = (article = {}, fallback = "center") => {
+  article = article || {};
   const manualFocus = String(article.imageFocus || "").trim();
   if (manualFocus) {
     return manualFocus;
@@ -1830,15 +1833,15 @@ const radarGuideThemes = {
   },
   prefeitura: {
     label: "Prefeitura",
-    text: "Aqui aparecem serviços, obras, decretos e movimentos oficiais da Prefeitura de Cruzeiro do Sul."
+    text: "Divisão própria para prefeituras do Vale do Juruá, com Cruzeiro do Sul sempre no primeiro plano."
   },
-  "governo-estado": {
-    label: "Governo do Estado",
-    text: "Este recorte separa anúncios, serviços e decisões do Governo do Acre, direto das fontes estaduais quando disponíveis."
+  "acre-governo": {
+    label: "Acre / Governo",
+    text: "Divisão própria para notícias principais do Acre e utilidade pública do Governo do Estado, sem misturar Prefeitura."
   },
   politica: {
     label: "Política",
-    text: "Este recorte reúne decisões, movimentos institucionais e disputas que ajudam a entender o cenário político local."
+    text: "Divisão própria para decisões, movimentos institucionais e disputas que ajudam a entender o cenário político."
   },
   policia: {
     label: "Polícia",
@@ -2836,7 +2839,7 @@ const previewClassByCategory = {
   policia: "thumb-policia",
   educacao: "thumb-educacao",
   prefeitura: "thumb-politica",
-  "governo-estado": "thumb-politica",
+  "acre-governo": "thumb-politica",
   politica: "thumb-politica",
   esporte: "thumb-cultura",
   "utilidade publica": "thumb-alerta",
@@ -2848,7 +2851,7 @@ const previewClassByCategory = {
 const categoryLabelByKey = {
   cotidiano: "Cotidiano",
   prefeitura: "Prefeitura",
-  "governo-estado": "Governo do Estado",
+  "acre-governo": "Acre / Governo",
   politica: "Política",
   policia: "Polícia",
   saude: "Saúde",
@@ -2873,9 +2876,12 @@ const categoryAliasMap = {
   variedades: "cultura",
   esporte: "esporte",
   "destaques esporte": "esporte",
-  governo: "governo-estado",
-  "governo do estado": "governo-estado",
-  estado: "governo-estado",
+  governo: "acre-governo",
+  "governo do estado": "acre-governo",
+  "governo do acre": "acre-governo",
+  "acre / governo": "acre-governo",
+  "acre-governo": "acre-governo",
+  estado: "acre-governo",
   prefeitura: "prefeitura",
   editais: "utilidade publica",
   detran: "utilidade publica",
@@ -2885,7 +2891,7 @@ const categoryAliasMap = {
   newsletter: "",
   nacional: "",
   geral: "",
-  acre: "",
+  acre: "acre-governo",
   "acre 03": "",
   "destaque 1": "",
   "extra total": ""
@@ -2903,12 +2909,12 @@ const genericCategoryKeys = new Set([
 ]);
 
 const radarCategoryRelevance = {
+  prefeitura: 9,
+  politica: 8,
+  "acre-governo": 7,
   cotidiano: 6,
   saude: 5,
   "utilidade publica": 5,
-  prefeitura: 4,
-  "governo-estado": 4,
-  politica: 4,
   policia: 4,
   educacao: 4,
   esporte: 4,
@@ -2941,6 +2947,120 @@ const isJuruaPrefeituraScope = (rawText = "") => {
     /\b(prefeitura (municipal )?de cruzeiro do sul|cruzeirodosul\.ac\.gov\.br|prefeitura-czs)\b/.test(haystack);
 
   return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
+};
+
+const getPrefeituraJuruaPriorityScore = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack || !isJuruaPrefeituraScope(haystack)) {
+    return 0;
+  }
+
+  if (/\b(prefeitura (municipal )?de cruzeiro do sul|cruzeirodosul\.ac\.gov\.br|prefeitura-czs|cruzeiro do sul|cruzeiro-do-sul|czs)\b/.test(haystack)) {
+    return 400;
+  }
+
+  if (/\b(vale do jurua|vale-do-jurua|jurua|juru[aá])\b/.test(haystack)) {
+    return 320;
+  }
+
+  return 280;
+};
+
+const isAcreGovernmentScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  return /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|secretaria estadual|detran|sesacre|seinfra|sejusp|aleac|assembleia legislativa|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
+    haystack
+  );
+};
+
+const isAcreGeneralScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  return /\b(acre|rio branco|cruzeiro do sul|vale do jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá]|sena madureira|brasileia|xapuri|agencia acre|agencia\.ac\.gov\.br)\b/.test(
+    haystack
+  );
+};
+
+const isJuruaRegionalScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  return /\b(cruzeiro do sul|cruzeiro-do-sul|czs|vale do jurua|vale do juru[aá]|vale-do-jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá]|jurua24horas|juruaemtempo|juruacomunicacao|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br)\b/.test(
+    haystack
+  );
+};
+
+const getRegionalEditorialScopeText = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  return [
+    normalizedArticle.title,
+    normalizedArticle.summary,
+    normalizedArticle.lede,
+    normalizedArticle.description,
+    normalizedArticle.category,
+    normalizedArticle.categoryKey,
+    normalizedArticle.eyebrow,
+    Array.isArray(normalizedArticle.body) ? normalizedArticle.body.join(" ") : normalizedArticle.body
+  ].join(" ");
+};
+
+const getRegionalSourceScopeText = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  return [
+    normalizedArticle.sourceName,
+    normalizedArticle.sourceLabel,
+    normalizedArticle.sourceUrl
+  ].join(" ");
+};
+
+const getRegionalScopeText = (article = {}) =>
+  [getRegionalEditorialScopeText(article), getRegionalSourceScopeText(article)].join(" ");
+
+const isRemoteNationalMosaicScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  return /\b(eua|estados unidos|trump|biden|reino unido|rei charles|china|russia|rússia|ucrania|ucrânia|europa|oriente medio|oriente médio|israel|ira|irã|washington|nova york|londres|paris|argentina|peru|brasilia|brasília|governo federal|stf|senado federal|camara dos deputados|câmara dos deputados|congresso nacional|palmeiras|flamengo|corinthians|nba|champions|bbb|celebridade)\b/.test(
+    haystack
+  );
+};
+
+const getMosaicRegionalScope = (article = {}) => {
+  const editorialScopeText = getRegionalEditorialScopeText(article);
+  const sourceScopeText = getRegionalSourceScopeText(article);
+  const hasJuruaEditorialSignal = isJuruaRegionalScope(editorialScopeText);
+  const hasAcreEditorialSignal =
+    isAcreGeneralScope(editorialScopeText) || isAcreGovernmentScope(editorialScopeText);
+  const hasRemoteSignal = isRemoteNationalMosaicScope(editorialScopeText);
+
+  if (hasJuruaEditorialSignal) {
+    return "jurua";
+  }
+
+  if (hasRemoteSignal && !isAcreGeneralScope(editorialScopeText)) {
+    return "";
+  }
+
+  if (hasAcreEditorialSignal) {
+    return "acre";
+  }
+
+  if (isJuruaRegionalScope(sourceScopeText) && !/\b(brasil|brasileir|mundo|eua|china|europa|sao paulo|são paulo|rio de janeiro|celebridade|bbb|serie a|champions|nba|tenis|tênis)\b/.test(normalizeText(editorialScopeText))) {
+    return "jurua";
+  }
+
+  return "";
 };
 
 const inferCategoryKeyFromContent = (rawText = "") => {
@@ -2983,14 +3103,6 @@ const inferCategoryKeyFromContent = (rawText = "") => {
   }
 
   if (
-    /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
-      haystack
-    )
-  ) {
-    return "utilidade publica";
-  }
-
-  if (
     /\b(aleac|camara|deputad|senador|ministro|stj|stf|eleicao|eleitoral|parlamento|monopolio aereo)\b/.test(
       haystack
     )
@@ -2998,16 +3110,22 @@ const inferCategoryKeyFromContent = (rawText = "") => {
     return "politica";
   }
 
+  if (isJuruaPrefeituraScope(haystack)) {
+    return "prefeitura";
+  }
+
   if (
-    /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|detran|sesacre|seinfra|sejusp|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
+    isAcreGovernmentScope(haystack)
+  ) {
+    return "acre-governo";
+  }
+
+  if (
+    /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
       haystack
     )
   ) {
-    return "governo-estado";
-  }
-
-  if (isJuruaPrefeituraScope(haystack)) {
-    return "prefeitura";
+    return "utilidade publica";
   }
 
   if (/\b(negocio|economia|comercio|empresa|empreendedor|mercado|feira)\b/.test(haystack)) {
@@ -3208,6 +3326,7 @@ function resolveSafeArticleImageUrl(article = {}, fallback = "") {
 }
 
 const normalizeRuntimeArticle = (article = {}) => {
+  article = article || {};
   const title = cleanArticleText(article.title || "Atualizacao");
   const categoryKey = normalizeNewsCategoryKey(article.category, {
     defaultCategory: article.defaultCategory,
@@ -3330,6 +3449,31 @@ const getRadarRelevanceScore = (article = {}) =>
     normalizeRuntimeArticle(article).categoryKey || normalizeText(article.category)
   ] || 0;
 
+const getEditorialFlowPriorityScore = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const scopeText = getRegionalScopeText(normalizedArticle);
+  const categoryKey = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+  const prefeituraScore = getPrefeituraJuruaPriorityScore(scopeText);
+
+  if (prefeituraScore) {
+    return 10000 + prefeituraScore;
+  }
+
+  if (categoryKey === "politica") {
+    return 9000;
+  }
+
+  if (categoryKey === "acre-governo" || isAcreGovernmentScope(scopeText)) {
+    return 8200;
+  }
+
+  if (isAcreGeneralScope(scopeText) && categoryKey !== "prefeitura") {
+    return 7600;
+  }
+
+  return 0;
+};
+
 const isMailzaPriorityArticle = (article = {}) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
   const text = normalizeText(
@@ -3356,9 +3500,10 @@ const getMailzaPriorityScore = (article = {}) =>
 
 const articleCategoryGroups = {
   cotidiano: ["cotidiano"],
-  prefeitura: ["prefeitura", "utilidade publica", "gestao publica"],
-  "governo-estado": ["governo-estado", "utilidade publica", "gestao publica"],
-  politica: ["politica", "prefeitura", "governo-estado", "utilidade publica", "gestao publica"],
+  prefeitura: ["prefeitura"],
+  "acre-governo": ["acre-governo"],
+  "governo-estado": ["acre-governo"],
+  politica: ["politica"],
   policia: ["policia", "seguranca"],
   saude: ["saude"],
   educacao: ["educacao"],
@@ -3382,6 +3527,29 @@ const articleMatchesCategoryFilter = (article = {}, filter = "") => {
 
   const normalizedArticle = normalizeRuntimeArticle(article);
   const categoryKey = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+  if (normalizedFilter === "prefeitura") {
+    return categoryKey === "prefeitura" || isJuruaPrefeituraScope(getRegionalScopeText(normalizedArticle));
+  }
+
+  if (normalizedFilter === "acre-governo" || normalizedFilter === "governo-estado") {
+    const scopeText = [
+      normalizedArticle.title,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.description,
+      normalizedArticle.category,
+      normalizedArticle.categoryKey,
+      normalizedArticle.eyebrow,
+      normalizedArticle.sourceLabel,
+      normalizedArticle.sourceUrl
+    ].join(" ");
+    return (
+      categoryKey === "acre-governo" ||
+      isAcreGovernmentScope(scopeText) ||
+      (isAcreGeneralScope(scopeText) && categoryKey !== "prefeitura")
+    );
+  }
+
   return getArticleCategoryGroup(normalizedFilter).includes(categoryKey);
 };
 
@@ -3390,6 +3558,12 @@ const sortRadarArticles = (articles = []) =>
     const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);
     if (mailzaDiff !== 0) {
       return mailzaDiff;
+    }
+
+    const editorialFlowDiff =
+      getEditorialFlowPriorityScore(right) - getEditorialFlowPriorityScore(left);
+    if (editorialFlowDiff !== 0) {
+      return editorialFlowDiff;
     }
 
     const dateDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
@@ -3533,14 +3707,53 @@ const pushUniqueArticle = (
   return true;
 };
 
+const sortMosaicRegionalArticles = (articles = []) =>
+  sortRadarArticles(articles).sort((left, right) => {
+    const scopeRank = { jurua: 2, acre: 1 };
+    const scopeDiff =
+      (scopeRank[getMosaicRegionalScope(right)] || 0) -
+      (scopeRank[getMosaicRegionalScope(left)] || 0);
+    if (scopeDiff !== 0) {
+      return scopeDiff;
+    }
+
+    return 0;
+  });
+
+const addMosaicRegionalPass = (sourceArticles, leadArticles, selectedKeys, selectedImages, targetCount) => {
+  sourceArticles.some((article) => {
+    if (leadArticles.length >= targetCount) return true;
+    pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
+    return false;
+  });
+};
+
+const isMosaicLowDisplayArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const text = normalizeText(
+    [
+      normalizedArticle.title,
+      normalizedArticle.slug,
+      normalizedArticle.category,
+      normalizedArticle.categoryKey,
+      normalizedArticle.sourceLabel
+    ].join(" ")
+  );
+
+  return /\b(edital|convocacao|convocação|assembleia geral|licenca ambiental|licença ambiental|comunicado|aviso publico|aviso público)\b/.test(text);
+};
+
 const pickRadarLeadArticles = (articles = []) => {
-  const targetCount = 12;
+  const targetCount = 13;
   const todayKey = getLocalDateKey();
   const availableDateKeys = [...new Set(articles.map((article) => getArticleDateKey(article)).filter(Boolean))]
     .sort((left, right) => right.localeCompare(left));
   const referenceDateKey = availableDateKeys.find((dateKey) => dateKey <= todayKey) || availableDateKeys[0] || "";
-  const sameDayArticles = sortRadarArticles(
-    articles.filter((article) => getArticleDateKey(article) === referenceDateKey)
+  const normalizedRegionalArticles = articles
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter((article) => getMosaicRegionalScope(article) && !isMosaicLowDisplayArticle(article));
+  const sameDayArticles = sortMosaicRegionalArticles(
+    normalizedRegionalArticles.filter((article) => getArticleDateKey(article) === referenceDateKey)
   );
   const sameDayArticlesWithImage = sameDayArticles.filter((article) =>
     articleHasUsableImageCandidate(article, "hero")
@@ -3548,28 +3761,59 @@ const pickRadarLeadArticles = (articles = []) => {
   const leadArticles = [];
   const selectedKeys = new Set();
   const selectedImages = new Set();
-  const priorityArticlesWithImage = sortRadarArticles(
-    articles.filter((article) => isMailzaPriorityArticle(article) && articleHasUsableImageCandidate(article, "hero"))
+  const priorityJuruaArticlesWithImage = sortMosaicRegionalArticles(
+    normalizedRegionalArticles.filter(
+      (article) =>
+        getMosaicRegionalScope(article) === "jurua" &&
+        isMailzaPriorityArticle(article) &&
+        articleHasUsableImageCandidate(article, "hero")
+    )
+  );
+  const priorityAcreArticlesWithImage = sortMosaicRegionalArticles(
+    normalizedRegionalArticles.filter(
+      (article) =>
+        getMosaicRegionalScope(article) === "acre" &&
+        isMailzaPriorityArticle(article) &&
+        articleHasUsableImageCandidate(article, "hero")
+    )
+  );
+  const juruaArticlesWithImage = sortMosaicRegionalArticles(
+    normalizedRegionalArticles.filter(
+      (article) => getMosaicRegionalScope(article) === "jurua" && articleHasUsableImageCandidate(article, "hero")
+    )
+  );
+  const acreArticlesWithImage = sortMosaicRegionalArticles(
+    normalizedRegionalArticles.filter(
+      (article) => getMosaicRegionalScope(article) === "acre" && articleHasUsableImageCandidate(article, "hero")
+    )
   );
 
-  priorityArticlesWithImage.some((article) => {
-    if (leadArticles.length >= targetCount) return true;
-    pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
-    return false;
-  });
-
-  sameDayArticlesWithImage.some((article) => {
-    if (leadArticles.length >= targetCount) return true;
-    pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
-    return false;
-  });
+  addMosaicRegionalPass(priorityJuruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    sameDayArticlesWithImage.filter((article) => getMosaicRegionalScope(article) === "jurua"),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
+  addMosaicRegionalPass(juruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(priorityAcreArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    sameDayArticlesWithImage.filter((article) => getMosaicRegionalScope(article) === "acre"),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
+  addMosaicRegionalPass(acreArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
 
   if (leadArticles.length < targetCount) {
-    const fallbackArticles = sortRadarArticles(
-      articles.filter((article) => !selectedKeys.has(getArticleUsageKey(article)))
-    );
-    const fallbackArticlesWithImage = fallbackArticles.filter((article) =>
-      articleHasUsableImageCandidate(article, "hero")
+    const fallbackArticlesWithImage = sortMosaicRegionalArticles(
+      normalizedRegionalArticles.filter(
+        (article) =>
+          !selectedKeys.has(getArticleUsageKey(article)) &&
+          articleHasUsableImageCandidate(article, "hero")
+      )
     );
 
     fallbackArticlesWithImage.some((article) => {
@@ -3594,7 +3838,10 @@ const pickRadarLeadArticles = (articles = []) => {
     }
   }
 
-  return { leadArticles, referenceDateKey };
+  const selectedReferenceDateKey =
+    leadArticles.map((article) => getArticleDateKey(article)).filter(Boolean)[0] || referenceDateKey;
+
+  return { leadArticles, referenceDateKey: selectedReferenceDateKey };
 };
 
 const resolveApiBases = () => {
@@ -3805,8 +4052,9 @@ const heroTourismFocusPositions = [
 ];
 const heroDailyThemeOrder = [
   "games",
-  "politica",
   "prefeitura",
+  "politica",
+  "acre-governo",
   "policia",
   "saude",
   "educacao",
@@ -7494,7 +7742,7 @@ const regionalPoliticsScopes = [
   {
     key: "acre",
     label: "Acre",
-    fallbackTitle: "Governo estadual e Assembleia entram em seguida",
+    fallbackTitle: "Acre / Governo entra em seguida",
     matcher: /acre|rio branco|governador|governadora|mailza|assembleia legislativa|aleac|secretaria de estado|palacio rio branco|palácio rio branco/i
   },
   {
@@ -8038,8 +8286,8 @@ const hydrateSocialCards = (items = []) => {
   const usedKeys = buildReservedArticleKeys(["social"]);
   const usedImages = buildReservedArticleImageKeys(["social"]);
   const pinnedSocialSlugs = new Set([
-    "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
-    "filme-bolsonaro-memes-reacao-redes"
+    "cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2",
+    "wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima"
   ]);
 
   cards.forEach((card) => {
@@ -8096,15 +8344,59 @@ const hydrateSocialCards = (items = []) => {
     return;
   }
 
-  const fallbackArticles = pickSocialFallbackArticles(
-    items,
-    missingCards.length,
-    usedKeys,
-    usedImages
-  );
+  const preferredSocialSlugs = [
+    "ana-castela-ira-se-apresentar-em-rio-branco-pela-primeira-vez",
+    "cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2",
+    "wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima",
+    "evento-gospel-reune-8-igrejas-e-cerca-de-300-fieis-em-senador-guiomard",
+    "brunna-goncalves-mostra-bastidores-de-aniversario-da-cantora-ludmilla-veja",
+    "shakira-pede-que-fas-indiquem-convidados-brasileiros-para-megashow-no-rio",
+    "anitta-garimpa-o-ouro-da-existencia-na-ruptura-espiritual-de-equilibrium-sem-renegar-o-funk-em-album-corajoso",
+    "apos-suspensao-judicial-moradores-se-articulam-para-manter-show-de-evoney-fernandes",
+    "moradores-de-jordao-se-unem-para-bancar-show-de-evoney-fernandes-apos-suspensao-judicial",
+    "cancelamento-de-festa-em-jordao-gera-criticas-de-senador-e-revolta-de-moradores"
+  ];
+  const preferredFallbackArticles = [];
+
+  preferredSocialSlugs.some((slug) => {
+    if (preferredFallbackArticles.length >= missingCards.length) return true;
+    const article = getHomepageHydrationArticle(slug);
+    const articleKey = getArticleUsageKey(article);
+    const imageKey = getArticleImageKey(article);
+
+    if (
+      !article ||
+      !articleKey ||
+      usedKeys.has(articleKey) ||
+      (imageKey && usedImages.has(imageKey)) ||
+      !articleHasUsableImageCandidate(article)
+    ) {
+      return false;
+    }
+
+    usedKeys.add(articleKey);
+    if (imageKey) {
+      usedImages.add(imageKey);
+    }
+    preferredFallbackArticles.push(article);
+    return false;
+  });
+
+  const finalFallbackArticles =
+    preferredFallbackArticles.length >= missingCards.length
+      ? preferredFallbackArticles
+      : [
+          ...preferredFallbackArticles,
+          ...pickSocialFallbackArticles(
+            items,
+            missingCards.length - preferredFallbackArticles.length,
+            usedKeys,
+            usedImages
+          )
+        ];
 
   missingCards.forEach((card, index) => {
-    const article = fallbackArticles[index];
+    const article = finalFallbackArticles[index];
     if (!article) {
       return;
     }
@@ -8153,11 +8445,21 @@ const hydrateMosaicHero = (items = []) => {
 
   const editionNode = hero.querySelector(".mosaic-edition");
   if (editionNode && referenceDateKey) {
-    editionNode.textContent = `Edicao visual • ${formatCompactDisplayDate(`${referenceDateKey}T12:00:00`)}`;
+    editionNode.textContent = `Edição visual • ${formatCompactDisplayDate(`${referenceDateKey}T12:00:00`)}`;
   }
 
   cards.forEach((card, index) => {
-    const article = normalizeRuntimeArticle(leadArticles[index] || leadArticles[0]);
+    const sourceArticle = leadArticles[index];
+    if (!sourceArticle) {
+      card.hidden = true;
+      card.classList.add("is-empty");
+      return;
+    }
+
+    card.hidden = false;
+    card.classList.remove("is-empty");
+
+    const article = normalizeRuntimeArticle(sourceArticle);
     const link = card.querySelector("a");
     const tag = card.querySelector(".mosaic-tag");
     const source = card.querySelector(".mosaic-source");
