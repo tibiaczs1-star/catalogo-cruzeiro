@@ -5949,8 +5949,6 @@ window.NEWS_DATA = [
     "summary": "Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 25 de abr. de 2026 a base desta noticia sobre Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
