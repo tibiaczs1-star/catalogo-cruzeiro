@@ -292,6 +292,10 @@
       return true;
     }
 
+    if (hasStoredConsent()) {
+      return true;
+    }
+
     try {
       if (sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1") {
         return true;
@@ -392,6 +396,7 @@
     if (hasStoredConsent()) {
       releaseFounderPreludeGate();
       if (typeof callback === "function") callback();
+      else dispatchIntroFinished();
       return;
     }
 
