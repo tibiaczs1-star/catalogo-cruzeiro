@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T18:27:16.157Z",
+  "lastUpdatedAt": "2026-04-28T18:46:06.530Z",
   "assets": [
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
@@ -1647,6 +1647,51 @@
         "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback"
       ],
       "createdAt": "2026-04-28T18:27:16.157Z"
+    },
+    {
+      "id": "pubpaid-traffic-vehicles-5f-v2-png",
+      "kind": "image",
+      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-5f-v2.png",
+      "source": "workspace",
+      "note": "Atlas V2 de trafego PubPaid: 10 veiculos, 5 frames por veiculo, carros/motos sem cortes.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T18:37:53.001Z"
+    },
+    {
+      "id": "pubpaid-traffic-sprites-demo-html",
+      "kind": "html",
+      "path": "pubpaid-traffic-sprites-demo.html",
+      "source": "workspace",
+      "note": "Demo de avaliacao dos sprites V2 de carros/motos PubPaid com 5 frames e rodas animadas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T18:37:53.109Z"
+    },
+    {
+      "id": "pubpaid-traffic-vehicles-5f-v2-preview-png",
+      "kind": "image",
+      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-5f-v2-preview.png",
+      "source": "workspace",
+      "note": "Preview sheet dos sprites V2 de trafego PubPaid para avaliacao visual.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T18:37:53.286Z"
+    },
+    {
+      "id": "pubpaid-traffic-vehicles-pixelart-5f-v3-png",
+      "kind": "image",
+      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-pixelart-5f-v3.png",
+      "source": "workspace",
+      "note": "Atlas PubPaid trafego V3 feito pixel-a-pixel em matriz 96x48, 5 frames, sem canvas/forma desenhada.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T18:46:06.311Z"
+    },
+    {
+      "id": "vehicles-v3-pixelart",
+      "kind": "directory",
+      "path": "assets/pubpaid/traffic/vehicles-v3-pixelart",
+      "source": "workspace",
+      "note": "Sheets individuais V3 pixel art para avaliacao: carros e motos com piloto integrado, 5 frames por veiculo.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-28T18:46:06.530Z"
     }
   ]
 }

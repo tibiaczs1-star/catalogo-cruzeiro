@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T18:24:57.444Z",
+  "lastUpdatedAt": "2026-04-28T18:39:36.994Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -8402,6 +8402,36 @@
       "source": "chat",
       "rawRequest": "vamos voltar ao pubpaid 2.0 primeiro me mostre a realidade atual vamos abrir ele no meu navegador, manda o endereço",
       "summary": "Retomar PubPaid 2.0, abrir no navegador e mostrar endereço/estado atual.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-refazer-sprites-de-carros-motos-pubpaid-veiculos-sem-cortes-motoristas-integrado",
+      "createdAt": "2026-04-28T18:30:18.783Z",
+      "updatedAt": "2026-04-28T18:30:18.783Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "as sprites que deveriam montar as rodas e os motoristas estão horriveis, refaça tudo, os carros e motos e ponha motoristas direto nas motos no mesmo estilo artistico... sem separação e faça as rodas serem animadas com 5 sprites ou seja dentro da propria imagem que anima os automoveis, e..... algunsa carros estão cortados, refaça eles sem cortes, ou seja, vc cortou as imagens que eram as sprites, corrija e faça tudo pra min avaliar antes me dando em html , todas essas imagens criadas pra ver animadas, como num pequeno site de demo",
+      "summary": "Refazer sprites de carros/motos PubPaid: veículos sem cortes, motoristas integrados nas motos, rodas animadas em 5 frames dentro das próprias sprite sheets, e criar HTML de demo para avaliação antes de integrar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-feedback-pubpaid-trafego-v2-sprites-gerados-nao-parecem-pixel-art-refazer-como-p",
+      "createdAt": "2026-04-28T18:39:36.994Z",
+      "updatedAt": "2026-04-28T18:39:36.994Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "cara isso nao e pixel art.",
+      "summary": "Feedback PubPaid trafego V2: sprites gerados nao parecem pixel art; refazer como pixel art real com grade nativa pequena, blocos duros e sem formas arredondadas.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

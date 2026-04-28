@@ -1,15 +1,15 @@
 {
   "ok": true,
   "trigger": "once",
-  "startedAt": "2026-04-28T16:32:18.872Z",
-  "finishedAt": "2026-04-28T16:32:19.886Z",
+  "startedAt": "2026-04-27T15:38:18.632Z",
+  "finishedAt": "2026-04-27T15:38:19.459Z",
   "actions": [
     {
       "id": "news-editorial-body",
       "agentGroup": "copy/editor/review/sources",
       "status": "done",
-      "changedRuntimeItems": 1,
-      "changedStaticItems": 1,
+      "changedRuntimeItems": 0,
+      "changedStaticItems": 0,
       "detail": "Garantiu body editorial proprio em noticias captadas e removeu repeticao entre resumo e corpo."
     },
     {
@@ -18,7 +18,7 @@
       "status": "done",
       "totalAgents": 181,
       "totalOffices": 5,
-      "newsItems": 360
+      "newsItems": 120
     },
     {
       "id": "review-team",

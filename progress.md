@@ -1,5 +1,13 @@
 Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com responsividade e estrutura definitiva.
 
+## 2026-04-28 encerramento diario
+
+- Home/mosaico aprovado pelo usuario foi publicado no `origin/main` no commit `b2b8609`.
+- Rotina diaria `npm run sync:online-local` fechou verde: 360 noticias sincronizadas, review team `0` achados, imagens `360/360 ok`, runtime/reuniao com 181 agentes e 5 escritorios.
+- Relatorios finais: `.codex-temp/online-local-sync/latest-report.md`, `.codex-temp/online-local-sync/latest-report.pdf`, `.codex-temp/real-agents/latest-run.md`.
+- Copy publica antiga do PubPaid em `pubpaid-phaser/app.js` foi ajustada para remover linguagem de "teste local"; PubPaid continua com mudancas locais e sem deploy dedicado.
+- Lembrete criado para 2026-04-29 as 09:00: comecar a rotina de organizar a Cheffe Call.
+
 ## 2026-04-21
 
 - Núcleo Phaser definitivo criado em `pubpaid-phaser.html` e módulos `pubpaid-phaser/`.
@@ -215,6 +223,18 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 
 
 2026-04-23 cheffe-call premium theater polish + real office lock validation
+
+## 2026-04-27 protagonista PubPaid 2 limpo
+
+- Usuario reprovou a rua com civis/overlays e pediu foco exclusivo no protagonista, baseado no personagem atual mas com estilo adulto/fashion pixel art e estrutura de spritesheet RPG.
+- Criado `PROMPT_PUBPAID_PROTAGONISTA_SPRITES_2026-04-27.md` com a direcao: 8 direcoes, 3 frames por direcao, walk com pernas alternando, idle respirando e idle celular.
+- Gerados tres sheets transparentes em `assets/pubpaid/sprites/protagonist/`: `protagonist-walk-8dir-3f.png`, `protagonist-idle-breathe-8dir-3f.png` e `protagonist-idle-phone-8dir-3f.png`, todos `64x128` por frame.
+- `BootScene.js` carrega os tres sheets; `StreetScene.js` e `InteriorScene.js` animam por `frame = directionRow * 3 + frameIndex`.
+- A rua ficou limpa para revisao: civis, placa Google grande e molduras extras seguem desativados.
+- Corrigido o idle: o player agora comeca em `idle_breathe` e so troca para `idle_phone` apos cerca de 2800ms parado.
+- `app.js` nao chama mais `/api/pubpaid/account` no modo teste local sem login, removendo o 401 que poluia o console do playtest.
+- Validacoes: `node --check` em `BootScene.js`, `StreetScene.js`, `InteriorScene.js` e `app.js`; `python -m py_compile` no gerador; Playwright local em `http://127.0.0.1:3000/pubpaid-v2.html`.
+- Capturas principais: `assets/pubpaid/sprites/protagonist/protagonist-final-3sheet-preview.png` e `output/web-game/pubpaid-protagonist-focused-phone-v2/protagonist-focused-contact.png`.
 - finalizei spot-c e showline do palco premium
 - validei cheffe-call em http://127.0.0.1:4126/cheffe-call.html e escritório travado em http://127.0.0.1:4126/escritorio.html
 - capturas: output/playwright/cheffe-call-fullscreen-finish-v3.png e output/playwright/escritorio-cheffe-locked-real.png
@@ -237,4 +257,137 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - `cheffe-call.html` recebeu cache-bust `20260424-seat-center`.
 - Validações: `node --check cheffe-call.js`, `node --check cheffe-call-game.js`, `brace-balance=0` em `cheffe-call.css`, `GET /cheffe-call.html` local retornou `200`.
 - Limitação: screenshot automática por `npx @playwright/cli` e Chrome/Edge headless falhou por permissão/elevacão no Windows; validar no navegador real se ainda precisa microajuste de `top` ou `seatScale`.
+
+## 2026-04-27 PubPaid 2 arte/sprites local
+
+- Direcao corrigida pelo usuario: PubPaid 2 e jogo em desenvolvimento local; foco voltou para direcao de arte e criacao de sprites, sem publicar em lugar nenhum.
+- Criado `PUBPAID_ART_DIRECTION_SPRITES_V1.md` como guia curto da rodada de sprites.
+- Criado script `scripts/pubpaid-generate-protagonist-sprite-pack.py`.
+- Gerado pacote local `assets/pubpaid/sprites/protagonist/protagonist-8dir-walk-v1.png` com 8 direcoes x 4 frames, frame 64x128, mais preview.
+- `BootScene.js`, `StreetScene.js` e `InteriorScene.js` passaram a usar o spritesheet do protagonista quando existir.
+- Playtest local em `http://127.0.0.1:3000/pubpaid-v2.html` confirmou entrada na rua e protagonista renderizado; captura em `output/web-game/pubpaid-protagonist-sprite-local/shot-2.png`.
+- Observacao honesta: este pacote e animatic jogavel, nao arte final. As direcoes ainda derivam do seed frontal; proxima rodada deve redesenhar frames reais e criar civis unicos para matar clones.
+
+## 2026-04-27 PubPaid 2 civis de rua V1
+
+- Criado `scripts/pubpaid-generate-street-civilians-pack.py` para gerar seis civis unicos em spritesheets PNG transparentes.
+- Gerado pacote `assets/pubpaid/sprites/street-civilians/` com: senhora do ponto, homem do terminal, jovem de capuz, trabalhador com mochila, figura sentada e seguranca/porteiro.
+- `BootScene.js` carrega os seis spritesheets como `ppg-civilian-*`.
+- `StreetScene.js` deixou de usar quatro clones de `guestA` e passou a posicionar civis com silhuetas distintas, idle de 4 frames e um trabalhador em movimento.
+- Playtest local confirmou a rua com civis novos em `output/web-game/pubpaid-street-civilians-v1-paintover/shot-2.png`.
+- Observacao: os civis V1 ja removem clone visual e seguram escala no fundo real, mas ainda sao base local; a proxima passada deve pintar acabamento final por cima, especialmente acessorios grandes/chapados.
+
+## 2026-04-27 correcao de rumo - protagonista primeiro
+
+- Usuario reprovou visualmente a cena com civis: ficou horrivel e fora da ordem certa.
+- Decisao: limpar a rua e criar primeiro um novo protagonista, sem civis por enquanto.
+- Criado `PROMPT_PUBPAID_PROTAGONISTA_SPRITES_2026-04-27.md` com prompt mestre para protagonista baseado no existente.
+- Requisitos do protagonista: 8 direcoes, 3 frames de movimento por direcao, idle respirando e idle mexendo no celular.
+- `StreetScene.js` agora fica sem civis, sem placa Google gigante e sem molduras de hotspot na rua; a cena serve para revisar fundo + protagonista.
+- `BootScene.js` deixou de carregar os civis V1. Eles ficam como experimento local rejeitado/desativado, nao runtime.
+
+## 2026-04-27 PubPaid Google + selecao homem/mulher
+
+- Usuario pediu protagonista mulher e novo fluxo: primeiro `Entrar no jogo`, depois pedido Google, depois frente do bar e escolha entre homem/mulher.
+- Implementado somente local em `http://127.0.0.1:3000/pubpaid-v2.html`.
+- Criados sheets provisórios da mulher em `assets/pubpaid/sprites/protagonist/`: walk, idle breathe e idle phone, todos 8 direcoes x 3 frames.
+- `app.js` agora controla splash/auth/selecao, salva `pubpaid_v2_selected_character` e libera o jogo so apos escolher personagem.
+- `StreetScene.js` e `InteriorScene.js` trocam os spritesheets pelo personagem selecionado.
+- Validacoes: `node --check` em JS principal e Playwright com capturas `output/web-game/pubpaid-character-flow/00-initial.png` ate `04-street-female-walk-right.png`; sem `console-errors.json`.
+- TODO: a mulher e uma primeira versao runtime, ainda precisa camada de beleza/arte final se o usuario aprovar a direcao.
+
+## 2026-04-27 protagonista mulher discreta
+
+- Usuario pediu a mulher no mesmo modelo/estilo do protagonista, feminina sem ficar estridente.
+- Regerados `protagonist-female-walk-8dir-3f.png`, `protagonist-female-idle-breathe-8dir-3f.png` e `protagonist-female-idle-phone-8dir-3f.png`.
+- Paleta agora acompanha o homem: jaqueta azul escura, calca escura, cabelo castanho, camisa clara e brilho do celular reduzido.
+- Cache-bust aplicado em `BootScene.js` e `pubpaid-v2.html` com `20260427femalequiet1`.
+- Validacoes: py_compile do gerador, node --check em Boot/app/Street/Interior e Playwright no fluxo Homem/Mulher sem console errors.
+
+## 2026-04-27 protagonista feminina 32-bit
+
+- Usuario esclareceu a direcao: personagem feminina propria, 32-bit, 8 direcoes x 4 frames, na linha do protagonista aprovado da referencia.
+- Criado `scripts/pubpaid-generate-female-32bit-approval-sheets.py`.
+- Gerados prototipos transparentes 96x144 por frame: walk, idle breathe e idle phone, mais preview `assets/pubpaid/sprites/protagonist/protagonist-female-32bit-approval-preview.png`.
+- Visual do prototipo: jaquetinha curta azul escura, blusa branca, mini saia, tenis, cabelo encaracolado e pele morena.
+- Nao integrado como final no Phaser ainda; e PNG de aprovacao.
+- Criada pagina `pubpaid-female-32bit-preview.html` para o usuario abrir no navegador e ver os GIFs de caminhada/celular.
+
+## 2026-04-27 PubPaid selecao girando + sheets gerados
+
+- Usuario pediu que a escolha de personagem mostre cada protagonista girando no proprio eixo em 4 vistas, e que depois a selecao jogue no mapa o spritesheet completo de direcoes.
+- Copiados para o workspace os PNGs gerados de alta qualidade: `protagonist-male-generated-sheet-source-v1.png` e `protagonist-female-generated-sheet-source-v1.png`.
+- Criado `scripts/pubpaid-extract-generated-character-sheets.py` para extrair strips de selecao e sheets jogaveis transparentes dos PNGs gerados.
+- Criados `protagonist-male-turnaround-4f.png` e `protagonist-female-turnaround-4f.png`, animados no card de escolha via CSS.
+- Criados e ligados ao Phaser os sheets `protagonist-*-generated-walk-8dir-4f.png`, `protagonist-*-generated-idle-breathe-8dir-4f.png` e `protagonist-*-generated-idle-phone-8dir-4f.png`, todos 96x144, 8 direcoes x 4 frames.
+- `BootScene.js`, `StreetScene.js` e `InteriorScene.js` agora suportam rig por personagem com frame count/escala proprios; homem e mulher usam escala 0.88.
+- Validacoes: `node --check` em app/Boot/Street/Interior, `py_compile` nos scripts de sprite, CSS brace-balance 386/386 e Playwright em `output/web-game/pubpaid-turnaround-flow/` sem erros.
+
+## 2026-04-27 PubPaid carteira mobile pixel art
+
+- Restaurado o fluxo da intro: o botão inicial volta a iniciar a abertura cinematica antes do login/teste local e selecao de personagem.
+- Separado o idle: parado por 3s o protagonista fica respirando; o celular nao entra sozinho.
+- Enter agora abre a carteira: o personagem toca a animacao `idle-phone`, segura o ultimo sprite por cerca de 2s olhando o telefone e so entao abre a WalletScene.
+- `E` ficou como interacao/porta no mapa e no salao.
+- Criada `pubpaid-phaser/scenes/WalletScene.js` com entrada cinematografica puxada do celular e interface 2D pixel art para saldos.
+- Adicionados controles mobile em tela: direcional, `Porta`, `Carteira` e `Config`, todos em estilo pixel art; Config abre painel pequeno de som/voltar.
+- A HUD mobile foi compactada em landscape e escondida enquanto a carteira esta aberta para nao cobrir o menu.
+- Validacoes: `node --check` em app/gameState/Street/Interior/Wallet/Intro/overlay, CSS brace-balance 434/434, Playwright custom em `output/web-game/pubpaid-wallet-flow-check/` e cliente padrão em `output/web-game/pubpaid-mobile-wallet-client/`, sem erros.
+
+## 2026-04-28 PubPaid trafego lateral com colisao
+
+- Folha aprovada de carros e motos foi promovida para asset runtime em `assets/pubpaid/traffic/`.
+- Criado `scripts/pubpaid-build-traffic-spritesheet.py` para recortar a folha aprovada, remover fundo cinza, gerar `pubpaid-traffic-vehicles-4f.png`, preview JPG e metadata JSON.
+- `BootScene.js` agora carrega `ppg-traffic-vehicles-sheet`.
+- `StreetScene.js` ganhou trafego runtime da direita para a esquerda com no maximo 3 veiculos por vez, espacamento maior entre spawns, glow de farol/lanterna, reflexo neon e som sintetico de carro/moto via `pubpaid-phaser/audio/trafficNoise.js`.
+- O protagonista agora colide com o trafego: se tentar atravessar um carro ou moto, o deslocamento e bloqueado e o estado marca bloqueio recente.
+- `render_game_to_text()` expõe `trafficCount` e `trafficBlocked`.
+- Validacoes: `node --check` em `StreetScene.js`, `BootScene.js`, `trafficNoise.js`, `app.js`; `py_compile` no pipeline; Playwright local em `output/web-game/pubpaid-traffic-check/` confirmou sprites visiveis e bloqueio de colisao em runtime.
+
+## 2026-04-28 PubPaid ajuste de faixas, pilotos e mapa fisico
+
+- Corrigido feedback visual: veiculos nao nascem mais na calcada; a primeira faixa roda para a direita (`>>>>>>>>`) em y 622 e a segunda para a esquerda (`<<<<<<<<`) em y 684.
+- `StreetScene.js` agora escolhe a faixa por regra, usa `flipX` nos veiculos que vem para a direita e remove a antiga lane fixa por modelo.
+- Hitboxes de trafego passaram a respeitar a escala visual do sprite e a colisao do personagem cobre melhor corpo/pe.
+- Adicionadas zonas fisicas para arcade, predio principal, porta do bar, parada de onibus e esquina.
+- `scripts/pubpaid-build-traffic-spritesheet.py` desenha pilotos nas motos e caixa na moto delivery antes de gerar o PNG final.
+- `BootScene.js` subiu o cache-bust para `20260428traffic2`.
+- Validacoes: `node --check` em `StreetScene.js`/`BootScene.js`, `py_compile` no gerador e Playwright em `output/web-game/pubpaid-traffic-check/`; `report.json` confirmou `directTrafficCollision=true`, `directStaticCollision=true` e `blocked=true`.
+
+## 2026-04-28 PubPaid calçada jogável e sprites de trafego limpos
+
+- Feedback fino aplicado: o player agora so anda na calcada, com `SIDEWALK_WALK_BOUNDS` em `StreetScene.js` limitando y entre 512 e 572.
+- Cliques no asfalto sao clampados para a calçada; o personagem nao entra nas faixas.
+- A colisao em frente da porta foi recuada; o teste confirmou `doorStaticBlocked=false` e o estado fica em `porta principal` para apertar `E`.
+- Removido o `neonUnderline` artificial que criava uma barra clara/estranha embaixo de carros e motos no runtime.
+- `scripts/pubpaid-build-traffic-spritesheet.py` passou a limpar restos cinza/brancos do recorte, redesenhar pilotos menores com jaqueta/capacete escuros e trocar os riscos errados das rodas por arcos discretos dentro da propria roda.
+- `BootScene.js` subiu o cache-bust para `20260428traffic3`.
+- Validacoes: `node --check` em `StreetScene.js`/`BootScene.js`, `py_compile` no gerador e Playwright em `output/web-game/pubpaid-traffic-check/`; capturas `02b-door-sidewalk-clear.png` e `03-player-near-lane.png` mostram player na calcada e veiculos sem base branca.
+
+## 2026-04-28 PubPaid trafego freia antes do protagonista
+
+- Usuario apontou que, mesmo com o player na calcada, motos/carros ainda atravessavam visualmente o sprite do protagonista.
+- `StreetScene.js` ganhou `getTrafficAvoidanceBox`, `getPlayerVehicleBlockBox` e `getTrafficNextX`.
+- O update do trafego agora calcula a proxima posicao antes de mover; se a caixa visual do veiculo alcanca a caixa do protagonista, o veiculo para com gap de seguranca.
+- Validacao Playwright atualizada em `.codex-temp/pubpaid-traffic-check.mjs`: `vehicleStopProbe.avoidedOverlap=true`, `vehicleStopProbe.stoppedBeforePlayer=true`, `blocked=true`.
+- Captura revisada: `output/web-game/pubpaid-traffic-check/02b-door-sidewalk-clear.png`.
+
+## 2026-04-28 PubPaid escala maior e rodas no spritesheet
+
+- Usuario pediu veiculos maiores, rodas sem corte e animacao de roda desenhada no proprio sprite, sem overlay/canvas/efeito runtime.
+- `StreetScene.js`: escalas de carros e motos aumentadas em `TRAFFIC_VEHICLES`.
+- `StreetScene.js`: removidos os desenhos extras runtime do container de trafego (`headGlow`, `tailGlow`, `shadow` e underline anterior); agora o container renderiza apenas o sprite da folha.
+- `scripts/pubpaid-build-traffic-spritesheet.py`: adicionados layouts de roda por modelo; spokes/arcos mudam por frame dentro do PNG.
+- `scripts/pubpaid-build-traffic-spritesheet.py`: pilotos das motos redesenhados com postura lateral mais coerente, joelho dobrado, maos no guidao, jaqueta/capacete escuros e tons por modelo.
+- `BootScene.js`: cache-bust do trafego atualizado para `20260428traffic4`.
+- Validacoes: `node --check` em `StreetScene.js`/`BootScene.js`, `py_compile` no gerador e Playwright em `output/web-game/pubpaid-traffic-check/`.
+
+## 2026-04-28 PubPaid politica correta de colisao dos veiculos
+
+- Usuario apontou que nao havia risco real de colisao quando o protagonista estava na calçada e pediu rever a politica.
+- `StreetScene.js`: a parada preventiva dos veiculos passou a depender de uma caixa de perigo da faixa. Player na calçada nao bloqueia transito nem pausa spawn.
+- As faixas foram baixadas para `coming y=662` e `going y=716`, evitando que carros/motos pareçam subir na calçada ou ficar embaixo do protagonista.
+- O caso de perigo real foi preservado: player forçado dentro da faixa faz o veiculo parar antes; se ja estiver colado, o veiculo fica no lugar sem dar re; a faixa bloqueada nao gera novo veiculo naquela direcao.
+- `scripts/pubpaid-build-traffic-spritesheet.py`: pilotos integrados das motos foram reforçados no proprio PNG, com tronco/quadril/perna/capacete desenhados nos frames.
+- Validacoes: `node --check`, `python -m py_compile` e Playwright custom em `output/web-game/pubpaid-traffic-check/`; report final confirmou `sidewalkNoStop=true`, `sidewalkLaneBlocked=false`, `sidewalkTrafficCollision=false`, `directTrafficCollision=true`, `hazardStoppedBeforePlayer=true`, `didNotReverse=true` e `spawnSuppressedOrOtherLane=true`.
 
