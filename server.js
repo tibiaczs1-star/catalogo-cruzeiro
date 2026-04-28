@@ -1381,6 +1381,9 @@ const DYNAMIC_ASSET_BASENAMES = new Set([
   "sidebar-data.js",
   "runtime-config.js"
 ]);
+const VERSIONED_STATIC_CACHE_CONTROL = "public, max-age=31536000, immutable";
+const NEWS_API_CACHE_TTL_MS = 30 * 1000;
+const newsApiResponseCache = new Map();
 const NINJAS_OPPORTUNITIES_UPDATED_AT = "2026-04-14";
 const NINJAS_OPPORTUNITIES = [
   {
@@ -5667,11 +5670,19 @@ function getStaticCacheControl(filePath, hasVersionParam = false) {
   const ext = path.extname(filePath).toLowerCase();
   const baseName = path.basename(filePath);
 
-  if (ext === ".html" || ext === ".css" || ext === ".js") {
+  if (hasVersionParam && ext !== ".html") {
+    return VERSIONED_STATIC_CACHE_CONTROL;
+  }
+
+  if (ext === ".html") {
     return "no-store";
   }
 
   if (DYNAMIC_ASSET_BASENAMES.has(baseName)) {
+    return "no-store";
+  }
+
+  if (ext === ".css" || ext === ".js") {
     return "no-store";
   }
 
@@ -5689,10 +5700,6 @@ function getStaticCacheControl(filePath, hasVersionParam = false) {
 
   if (ext === ".webmanifest" || ext === ".xml" || baseName === "robots.txt") {
     return "public, max-age=3600";
-  }
-
-  if (hasVersionParam) {
-    return "no-store";
   }
 
   return "no-store";
@@ -6099,6 +6106,48 @@ function getArticleNews(limit = 30) {
   });
 
   return repairNewsImagesForDisplay(Array.from(map.values()).sort(sortArticleItems).slice(0, limit));
+}
+
+function buildArticleNewsApiPayload(limit = 60) {
+  const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
+  const items = getRawNewsItems().map(normalizeArticleRecord);
+  const map = new Map();
+
+  items.forEach((item) => {
+    const key = getArticleStorageKey(item);
+    if (shouldReplaceArticleRecord(map.get(key), item)) {
+      map.set(key, item);
+    }
+  });
+
+  const sorted = Array.from(map.values()).sort(sortArticleItems);
+  const visibleItems = repairNewsImagesForDisplay(sorted.slice(0, safeLimit));
+
+  return {
+    ok: true,
+    total: sorted.length,
+    archiveTotal: sorted.length,
+    returned: visibleItems.length,
+    items: visibleItems
+  };
+}
+
+function getCachedArticleNewsApiPayload(limit = 60) {
+  const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
+  const key = `limit:${safeLimit}`;
+  const cached = newsApiResponseCache.get(key);
+
+  if (cached && cached.expiresAt > Date.now()) {
+    return cached.payload;
+  }
+
+  const payload = buildArticleNewsApiPayload(safeLimit);
+  newsApiResponseCache.set(key, {
+    expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
+    payload
+  });
+
+  return payload;
 }
 
 function getArticleBySlug(slug) {
@@ -10667,15 +10716,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 60);
-    const items = getArticleNews(Math.max(1, Math.min(500, limit)));
-    const archiveTotal = buildNewsArchivePayload(1000).archiveTotal;
-    return sendJson(res, 200, {
-      ok: true,
-      total: archiveTotal,
-      archiveTotal,
-      returned: items.length,
-      items
-    });
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {

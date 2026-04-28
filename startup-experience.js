@@ -22,10 +22,10 @@
   const FOUNDER_PRELUDE_MS_COMPACT = 3900;
   const FOUNDER_PRELUDE_MS_PHONE = 3400;
   const RETURNING_LOADER_MS = 980;
-  const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.png";
-  const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.png";
-  const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo.png";
-  const FOUNDERS_RECOMMENCER_LOGO_SRC = "./assets/founders-recommencer-logo.png";
+  const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
+  const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
+  const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
+  const FOUNDERS_RECOMMENCER_LOGO_SRC = "./assets/founders-recommencer-logo.svg";
   const FOUNDER_BANNER_ASSETS = [
     FOUNDERS_CAFE_IMAGE_SRC,
     FOUNDERS_GRUPO_AS_LOGO_SRC,
