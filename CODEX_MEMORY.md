@@ -1,5 +1,40 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-28 - Mais Assuntos Festa & Social continuo
+
+- Usuario apontou que o bloco `Festa & Social Agora` em `Mais Assuntos` parecia um card dentro de outro card e nao dava continuidade visual a div.
+- `styles.css`: `.caderno-social-wide` deixou de ser card roxo largo, perdeu sombra/borda arredondada/pseudo-elementos, virou faixa aberta de largura total do grid e os `mini-story` internos passaram a ser chamadas transparentes com divisorias leves.
+- `index.html`: cache-bust de `styles.css` atualizado para `20260428cadernosflow1`.
+- Validacoes: brace-balance de `styles.css`, `node --check script.js`, `node --check server.js`, Playwright desktop e mobile sem overflow; `npm run review:team` com `totalIssues=0`.
+- Capturas: `output/playwright/home-cadernos-social-wide-fix-20260428-v2.png` e `output/playwright/home-cadernos-social-wide-mobile-20260428.png`.
+
+## Atualizacao rapida 2026-04-28 - Mosaico visual focado no Jurua
+
+- Usuario pediu que a area `Edicao visual` ficasse mais bonita e mostrasse somente noticias do Jurua, Cruzeiro do Sul e Vale do Jurua; se faltasse, completar com noticias do Acre em geral.
+- `script.js`: `pickRadarLeadArticles` agora trabalha em camadas regionais: prioriza Cruzeiro do Sul/Vale do Jurua/municipios do Jurua, depois usa Acre geral/governo como fallback; noticias nacionais sem sinal regional nao entram no mosaico.
+- `premium-clarity.css`: mosaico redesenhado com destaque principal horizontal, grade responsiva de 2 colunas, foto inteira em area propria e bloco de leitura escuro sem o retangulo vazio anterior.
+- `index.html`: cache-bust de `script.js` e `premium-clarity.css` atualizado para `20260428-monthly-photo-clean1-mosaico-jurua1`.
+- `data/topic-feed-kids.json`: traduzido lede/summary em ingles apontado pela trava `language-review`.
+- Validacoes: `node --check script.js`, brace-balance `premium-clarity.css` 252/252, Playwright desktop/mobile com 12 cards, `nonRegionalSignals=0` e `missingImages=0`, e `npm run review:team` com `totalIssues=0`.
+- Capturas: `output/playwright/mosaico-jurua-desktop-clean-20260428.png` e `output/playwright/mosaico-jurua-mobile-20260428-v3.png`.
+
+## Atualizacao rapida 2026-04-28 - Fotos limpas em Celebridades
+
+- Usuario pediu para tirar o esbranquicado das fotos no bloco `Celebridades & Polêmicas do Dia`.
+- `premium-clarity.css`: as fotos de `#monthly .month-photo` deixaram de receber tres camadas de gradiente por cima da imagem real; agora usam apenas `var(--month-image)`, `contain`, fundo escuro neutro e leve ajuste de saturacao/contraste.
+- `index.html`: cache-bust de `premium-clarity.css` atualizado para `20260428-monthly-photo-clean1`.
+- Validacoes: brace-balance em `premium-clarity.css` e `styles.css`; Playwright local em `http://127.0.0.1:4132/?skipIntro=1` confirmou `hasGradientLayer=false`, `background-size=contain` e gerou `output/playwright/monthly-photos-clean-20260428-no-consent.png`.
+
+## Atualizacao rapida 2026-04-28 - Fluxo Prefeitura, Politica e Acre / Governo
+
+- Usuario pediu que `Prefeitura` e `Politica` entrem antes de `Tudo` e `Cotidiano`, com divisoes proprias, e que `Prefeitura` priorize prefeituras do Vale do Jurua com Cruzeiro do Sul primeiro; depois vem `Acre / Governo` para noticias principais do Acre e utilidade do Governo do Estado.
+- `index.html`: chips do Resumo CZS e quadro `ASSUNTOS DO DIA` reordenados para `Prefeitura`, `Politica`, `Acre / Governo`, `Tudo`, `Cotidiano`, mantendo o restante na sequencia.
+- `script.js`: textos-guia atualizados; `Politica`, `Prefeitura` e `Acre / Governo` deixaram de se engolir por grupo; ranking do radar agora prioriza Prefeitura/Cruzeiro do Sul, depois Vale do Jurua, Politica, Acre/Governo e Acre geral antes do restante.
+- `server.js` e `script.js`: inferencia de categoria agora reconhece Prefeitura do Jurua antes de cair em Acre/Governo ou utilidade publica, preservando a divisao municipal.
+- `arquivo-noticias.js`: filtros do arquivo seguem a mesma ordem e Politica fica independente de Acre/Governo.
+- `data/topic-feed-kids.json`: saneado um cache publico com lede/summary em ingles que travava a auditoria.
+- Validacoes: `node --check script.js`, `node --check server.js`, `node --check arquivo-noticias.js`, parse JSON de `data/topic-feed-kids.json` e `npm run review:team` com `totalIssues=0`.
+
 ## Atualizacao rapida 2026-04-28 - Acre / Governo e previa admin total
 
 - Usuario pediu que a previa so abra com senha admin total e que `Governo do Estado` vire uma divisao `Acre / Governo`, com noticias gerais do Acre mais governo estadual.
@@ -642,3 +677,6 @@ Leitura atual dessas validacoes:
 - Trava de idioma publico criada em 2026-04-27: corrigidos vazamentos de texto em ingles em `news-data.js`, `data/news-archive.json`, `data/runtime-news.json` e `data/topic-feed-tech.json`; `scripts/review-team-audit.js` ganhou `language-review`; `AGENTS.md` e `.codex-review-team/README.md` avisam que titulos, chamadas, ledes, resumos, destaques e corpo publico de noticia devem sair em portugues. Validado com `node --check scripts/review-team-audit.js` e `node scripts/review-team-audit.js` (totalIssues=0). Commit `26a4dc9` foi mergeado no PR #5 em `origin/main` (`8117d4d`).
 - Rodada de segunda em 2026-04-27: `npm run sync:online-local` passou com 360 noticias no acervo/janela ativa, 0 imagens ausentes, 0 duplicatas locais por divisao, `sanitize public language` integrado e `review:team` totalIssues=0; `npm run audit:news-images -- --offline --limit=1000 --strict-new` retornou 360/360 ok; `npm run agents:cycle` rodou 181 agentes/5 escritorios com 360 noticias. Novo `scripts/sanitize-public-language.js` fica chamado por `scripts/sync-online-local.js` para sanear idioma publico antes do review. PubPaid seguiu fora do pacote sem autorizacao explicita. Commit `e325d52` foi mergeado no PR #7 em `origin/main` (`cf33a01`).
 - Nova fase PubPaid em 2026-04-27: criado `PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md` para iniciar novas conversas/rodadas como instrutor de testes, auditor de ruido, condutor de reuniao e organizador de objetivos antes de criar novas funcionalidades. O prompt fixa `pubpaid-v2.html` + `pubpaid-phaser/` como frente oficial, preserva a trava de deploy PubPaid sem autorizacao explicita e exige fila P0/P1/P2 com evidencias.
+- Mosaico regional da home em 2026-04-28: apos feedback do usuario de que a primeira versao ficou feia, `Edição visual` foi refeita como Capa Especial do Jurua em `premium-clarity.css`, com capa principal fotografica, cards laterais claros e mobile em miniatura + manchete. `script.js` agora separa escopo editorial e fonte, prioriza Juruá/Cruzeiro do Sul/Vale do Juruá e so completa com Acre geral/governo quando faltar, evitando puxar noticia nacional so por fonte local. Tambem foram corrigidos guards de artigo nulo na hidratacao de imagens/social cards. Validacoes: `node --check script.js`, `node --check news-data.js`, parse de `data/topic-feed-kids.json`, CSS braces 308/308, `npm run review:team` totalIssues=0 e Playwright com 12 itens, 0 imagens faltando e errors=[]; capturas finais em `output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v4.png` e `output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v4.png`.
+- Refinamento do mosaico regional em 2026-04-28: a pedido do usuario, a Capa Especial passou de 12 para 13 destaques, o texto de apoio virou "Treze destaques" e a area de foto dos cards foi aumentada (`premium-clarity.css`) para melhorar enquadramento. `script.js` foi reforçado para bloquear assuntos nacionais/remotos sem sinal explicito de Acre/Juruá; validação final Playwright retornou `count=13`, `missingImages=0`, `errors=[]`, e a lista dos 13 titulos ficou regional. Capturas: `output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v6.png` e `output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v6.png`.
+- Aviso de transparencia na home em 2026-04-28: rodape recebeu `footer-automation-notice` explicando que a pagina inicial usa rotinas automaticas e pode ter falhas de programacao/layout/ordenacao, sem alterar o compromisso editorial com a noticia. Cache CSS atualizado para `mosaico-capa5`. Validacoes: CSS braces 312/312, `node --check script.js`, `npm run review:team` totalIssues=0 e captura `output/playwright/home-footer-aviso-automatico-20260428.png`.

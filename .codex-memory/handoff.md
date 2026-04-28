@@ -1,15 +1,23 @@
 # Handoff
 
-Updated: 2026-04-27T13:17:04.461Z
+Updated: 2026-04-28T18:00:27.360Z
 
-Rodada de segunda concluida: o usuario pediu para subir todas as correcoes, decidir, atualizar/sincronizar e rodar reunioes.
-
-Validado localmente: `npm run sync:online-local` ok; etapa `sanitize public language` integrada; `npm run review:team`/review integrado com `totalIssues=0`; `npm run audit:news-images -- --offline --limit=1000 --strict-new` com 360/360 ok; `npm run agents:cycle` ok com 181 agentes e 5 escritorios.
-
-Pacote publicado: noticias/dados/fallbacks/relatorios de reuniao + rotina nova `scripts/sanitize-public-language.js` chamada por `scripts/sync-online-local.js`. PubPaid permaneceu fora do commit/deploy por trava anterior.
-
-Commit `e325d52` foi mergeado no PR #7 em `origin/main` no merge commit `cf33a01`.
+Rodada do mosaico regional concluída localmente. O usuário rejeitou a primeira versão por feiura; a versão atual transforma Edição visual em Capa Especial do Juruá, com capa principal fotográfica, laterais legíveis e lógica regional: Juruá/Cruzeiro do Sul/Vale do Juruá primeiro, Acre geral como fallback. Foram corrigidos guards de artigos nulos em imagens/social cards e vazamentos editoriais apontados pela review team.
 
 ## Next
 
-- Se a pergunta for sobre producao, conferir se o Render ja propagou o deploy de `cf33a01`.
+- Antes de deploy/commit
+- revisar git diff para separar qualquer ruído de dados/servidor e manter PubPaid fora do pacote
+- Capturas finais estão em output/playwright/mosaico-jurua-capa-especial-desktop-20260428-v4.png e output/playwright/mosaico-jurua-capa-especial-mobile-20260428-v4.png
+
+## Files In Focus
+
+- index.html
+- script.js
+- premium-clarity.css
+- data/topic-feed-kids.json
+- news-data.js
+
+## Related Orders
+
+- 2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback

@@ -1,7 +1,255 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-27T13:17:04.461Z",
+  "lastUpdatedAt": "2026-04-28T18:24:57.444Z",
   "orders": [
+    {
+      "id": "2026-04-28-ajuste-copy-agentes-editor",
+      "createdAt": "2026-04-28T15:01:55.754Z",
+      "updatedAt": "2026-04-28T15:01:55.754Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "corrija esse texto feito pra editor",
+      "summary": "Corrigir a copy do painel de agentes ao vivo no contexto de detalhe/editor para ficar publica e editorialmente natural.",
+      "normalizedTasks": [
+        "trocar titulo interno 3 pixels cuidando do radar por frase publica",
+        "remover mencao a padrao das materias e fechamento visual no rodape",
+        "validar sintaxe do JS alterado"
+      ],
+      "tags": [
+        "copy",
+        "editorial",
+        "agentes"
+      ],
+      "filesTouched": [
+        "agentes-newsroom-hero.js"
+      ],
+      "assetRefs": [],
+      "notes": "Copy final: 3 agentes cuidando da edicao / Apuracao, revisao e acabamento visual antes da publicacao."
+    },
+    {
+      "id": "2026-04-28-pubpaid-traffic-lanes-drivers-static-collision",
+      "createdAt": "2026-04-28T03:10:00.000Z",
+      "updatedAt": "2026-04-28T14:09:23.694Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "corrigir carros em cima da rua/calcada, colisoes dos carros pequenos, respeitar duas faixas >>> e <<<, motos com motoristas, colisoes no arcade/predio/porta/parada/esquina e neon no fundo",
+      "summary": "Corrigir o sistema de trafego da rua PubPaid para duas faixas reais, limitar o player a calcada, adicionar pilotos integrados nas motos, limpar sprites e ajustar colisoes de mapa.",
+      "normalizedTasks": [
+        "tirar veiculos da calcada",
+        "separar faixa superior vindo para a direita e faixa inferior indo para a esquerda",
+        "inverter sprites conforme direcao da faixa",
+        "adicionar motoristas nas motos do asset final",
+        "melhorar hitboxes e colisao de carros pequenos/motos",
+        "limitar o player a andar apenas na calcada",
+        "liberar a area em frente a porta para interacao",
+        "remover base branca/underline artificial dos veiculos",
+        "corrigir animacao visual das rodas sem riscos deslocados",
+        "aumentar proporcao dos veiculos em relacao ao protagonista",
+        "fazer rodas animarem por frames dentro do proprio spritesheet",
+        "remover glows/shadows runtime dos containers de trafego",
+        "redesenhar pilotos integrados no estilo pixel art da cena",
+        "adicionar colisoes fixas para arcade, predio principal, porta do bar, parada de onibus e esquina",
+        "reforcar iluminacao neon dos predios de fundo",
+        "validar localmente com Playwright e informar o endereco de teste",
+        "rever politica de colisao para nao tratar player na calcada como risco",
+        "impedir veiculos de dar re quando ja estao perto demais",
+        "pausar spawn apenas quando ha perigo real na faixa",
+        "baixar faixas para evitar sobreposicao visual com a calcada",
+        "validar calçada sem bloqueio e faixa com colisao real"
+      ],
+      "tags": [
+        "pubpaid-2",
+        "traffic",
+        "collision",
+        "pixel-art",
+        "local-only"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "scripts/pubpaid-build-traffic-spritesheet.py",
+        "assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png",
+        "assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f-preview.jpg",
+        "assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.json",
+        ".codex-temp/pubpaid-traffic-check.mjs"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f-preview.jpg",
+        "output/web-game/pubpaid-traffic-check/02-traffic-visible.png",
+        "output/web-game/pubpaid-traffic-check/02b-door-sidewalk-clear.png",
+        "output/web-game/pubpaid-traffic-check/03-player-near-lane.png",
+        "output/web-game/pubpaid-traffic-check/report.json",
+        "output/web-game/pubpaid-traffic-check/04-traffic-not-blocked.png"
+      ],
+      "notes": "Politica revista: player na calcada nao e risco de colisao, entao trafego nao freia nem bloqueia spawn nessa situacao. Faixas baixadas para coming y=662 e going y=716. Caso forçado dentro da faixa ainda para antes, nao da re quando ja esta colado e suprime spawn na direcao bloqueada. Validacao final: sidewalkNoStop=true, sidewalkLaneBlocked=false, sidewalkTrafficCollision=false, directTrafficCollision=true, hazardStoppedBeforePlayer=true, didNotReverse=true, stoppedInPlaceWhenTooClose=true e spawnSuppressedOrOtherLane=true."
+    },
+    {
+      "id": "2026-04-27-pubpaid-female-32bit-approval-sheet",
+      "createdAt": "2026-04-27T22:05:00.000Z",
+      "updatedAt": "2026-04-27T22:05:00.000Z",
+      "status": "approval-needed-local",
+      "source": "chat",
+      "rawRequest": "vc entende que eu ja quero ela 32 bits neh; protagonista feminina com design do protagonista que vc fez, as imagens em 8 direções, a com 4 sprites, 32 bits que eu aprovei",
+      "summary": "Criar um prototipo de aprovacao da protagonista feminina em estilo 32-bit, 8 direcoes x 4 frames, com roupa feminina e cabelo encaracolado moreno.",
+      "normalizedTasks": [
+        "criar protagonista feminina propria em vez de boneca simples",
+        "seguir a linha do protagonista 32-bit aprovado",
+        "usar 8 direcoes e 4 frames por direcao",
+        "usar jaquetinha curta, blusa branca, mini saia, tenis, cabelo encaracolado e pele morena",
+        "gerar preview para aprovacao antes de integrar ao jogo"
+      ],
+      "tags": [
+        "pubpaid-2",
+        "female-protagonist",
+        "32bit",
+        "approval-preview",
+        "local-only"
+      ],
+      "filesTouched": [
+        "scripts/pubpaid-generate-female-32bit-approval-sheets.py",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-walk-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-idle-breathe-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-idle-phone-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-approval-preview.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-selection-preview.png"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-approval-preview.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-32bit-selection-preview.png"
+      ],
+      "notes": "Ainda nao integrado ao runtime; aguarda aprovacao visual do usuario."
+    },
+    {
+      "id": "2026-04-27-pubpaid-female-protagonist-quiet-style-pass",
+      "createdAt": "2026-04-27T21:40:00.000Z",
+      "updatedAt": "2026-04-27T21:40:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "ok seria isso mesmo, agora faça no modelo do protagonista em estilo a protagonista mulher, mesmo estilo, mais eu quero que seja femino mais não tão extridente",
+      "summary": "Refazer a protagonista mulher no mesmo estilo do protagonista atual, mantendo feminilidade sutil e evitando paleta/visual chamativo.",
+      "normalizedTasks": [
+        "aproximar a protagonista mulher do modelo do protagonista homem",
+        "reduzir cores fortes e brilho do celular",
+        "manter silhueta feminina discreta com cabelo castanho mais longo",
+        "regerar os tres sheets femininos walk, idle breathe e idle phone",
+        "forcar cache-bust local e validar no jogo"
+      ],
+      "tags": [
+        "pubpaid-2",
+        "female-protagonist",
+        "sprite-polish",
+        "local-only"
+      ],
+      "filesTouched": [
+        "scripts/pubpaid-generate-female-protagonist-prototype-sheets.py",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-walk-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-idle-breathe-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-idle-phone-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-prototype-preview.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-selection-preview.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-v2.html"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/sprites/protagonist/protagonist-female-prototype-preview.png",
+        "output/web-game/pubpaid-character-flow/02-character-select.png",
+        "output/web-game/pubpaid-character-flow/03-street-female.png",
+        "output/web-game/pubpaid-character-flow/04-street-female-walk-right.png"
+      ],
+      "notes": "Playwright confirmou selecao e rua com selectedCharacter=female; sem console-errors.json. Nada publicado."
+    },
+    {
+      "id": "2026-04-27-pubpaid-google-character-flow-female-protagonist",
+      "createdAt": "2026-04-27T21:25:00.000Z",
+      "updatedAt": "2026-04-27T21:25:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "agora quero uma protagonista mulher, e antes do jogo entra vamos muda o fluxo primeiro ele pede pra entra no google, ali na tela inicial mesmo, entra no jogo, sai o menu de entrar e sobe o pedido google, depois de logar no google, ai mapa da frente do bar, e escolhe entre dois personagens um homen e uma mulher; sempre me manda o endereco que eu abro aqui",
+      "summary": "Criar protagonista mulher provisoria e trocar o fluxo local do PubPaid 2 para botao inicial, Google/teste local, frente do bar e selecao Homem/Mulher antes de liberar o controle.",
+      "normalizedTasks": [
+        "criar spritesheets provisorios da protagonista mulher",
+        "carregar sheets femininos no BootScene",
+        "adicionar estado selectedCharacter e characterSelectOpen",
+        "mudar app.js para fluxo entrar no jogo -> Google -> selecao de personagem -> rua jogavel",
+        "permitir escolher Homem ou Mulher e salvar em localStorage",
+        "fazer StreetScene e InteriorScene usarem os sheets conforme personagem selecionado",
+        "validar localmente e sempre informar o endereco http://127.0.0.1:3000/pubpaid-v2.html"
+      ],
+      "tags": [
+        "pubpaid-2",
+        "google-flow",
+        "character-select",
+        "female-protagonist",
+        "local-only"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "scripts/pubpaid-generate-female-protagonist-prototype-sheets.py",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-walk-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-idle-breathe-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-idle-phone-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-prototype-preview.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-selection-preview.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-male-selection-preview.png"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-character-flow/00-initial.png",
+        "output/web-game/pubpaid-character-flow/01-auth.png",
+        "output/web-game/pubpaid-character-flow/02-character-select.png",
+        "output/web-game/pubpaid-character-flow/03-street-female.png",
+        "output/web-game/pubpaid-character-flow/04-street-female-walk-right.png"
+      ],
+      "notes": "Tudo local. Em dev sem Google configurado, a tela de auth mostra Continuar teste local. Playwright confirmou fluxo inicial, auth, selecao, personagem mulher na rua e movimento para direita sem console-errors.json."
+    },
+    {
+      "id": "2026-04-27-pubpaid-protagonista-final-8dir-3sheets",
+      "createdAt": "2026-04-27T19:56:45.599Z",
+      "updatedAt": "2026-04-27T19:56:45.599Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "PLEASE IMPLEMENT THIS PLAN: Novo Protagonista PubPaid 2.0 com 3 spritesheets transparentes, 8 direcoes x 3 frames, walk, idle breathe, idle phone, e rua limpa sem civis/Google/molduras extras.",
+      "summary": "Implementar localmente o novo protagonista PubPaid 2.0 em spritesheets separados, limpar a rua para revisao do player e validar no navegador local sem publicar.",
+      "normalizedTasks": [
+        "criar prompt mestre do protagonista baseado nas referencias do usuario",
+        "gerar spritesheets transparentes walk, idle breathe e idle phone em 64x128",
+        "carregar os tres sheets no BootScene",
+        "trocar StreetScene e InteriorScene para animar por directionRow * 3 + frameIndex",
+        "manter a rua limpa sem civis, placa Google gigante e molduras extras",
+        "corrigir idle para respirar antes de trocar para celular apos aproximadamente 2800ms parado",
+        "validar localmente com node --check e capturas Playwright"
+      ],
+      "tags": [
+        "pubpaid-2",
+        "protagonista",
+        "spritesheet",
+        "pixel-art",
+        "local-only"
+      ],
+      "filesTouched": [
+        "PROMPT_PUBPAID_PROTAGONISTA_SPRITES_2026-04-27.md",
+        "scripts/pubpaid-generate-protagonist-final-sheets.py",
+        "assets/pubpaid/sprites/protagonist/protagonist-walk-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-idle-breathe-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-idle-phone-8dir-3f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-final-3sheet-preview.png",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/app.js"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/sprites/protagonist/protagonist-final-3sheet-preview.png",
+        "output/web-game/pubpaid-protagonist-focused-phone-v2/protagonist-focused-contact.png",
+        "output/web-game/pubpaid-protagonist-final-v1-rerun/shot-2.png"
+      ],
+      "notes": "Tudo ficou local. Playwright confirmou scene=street, rua limpa, walk nas direcoes leste/oeste/norte/sul, idle_breathe inicial e idle_phone apos espera. app.js deixou de chamar /api/pubpaid/account no modo teste local sem login para evitar 401 no console."
+    },
     {
       "id": "2026-04-26-hotfix-api-fallback-news-images",
       "createdAt": "2026-04-27T03:57:41.341Z",
@@ -7445,6 +7693,721 @@
         "Aguardar o Render propagar o deploy do main e, se necessario, conferir online apos alguns minutos."
       ],
       "notes": "Sincronizacao integrada retornou 360 noticias ativas/acervo, 0 imagens ausentes, 0 duplicatas locais por divisao, language sanitizer ok, review-team totalIssues=0 e agents:cycle ok com 181 agentes/5 escritorios. Commit e325d52 entrou no PR #7 e foi mergeado em origin/main no merge commit cf33a01."
+    },
+    {
+      "id": "2026-04-27-criar-prompt-mestre-para-a-nova-fase-pubpaid-2-0-como-instrutor-de-testes-audito",
+      "createdAt": "2026-04-27T13:37:02.578Z",
+      "updatedAt": "2026-04-27T13:37:02.578Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "verifique agora toda a pasta local e sua propria memoria; iniciar novas conversas e rodadas como instrutor de testes do sistema; comecar a cuidar do PaidPub/PubPaid; montar o prompt primeiro",
+      "summary": "Criar prompt mestre para a nova fase PubPaid 2.0 como instrutor de testes, auditor de ruido, condutor de reuniao e organizador de objetivos",
+      "normalizedTasks": [
+        "ler memoria local",
+        "criar prompt mestre PubPaid",
+        "incluir rotina de ruido",
+        "incluir reuniao de agentes",
+        "incluir validacao minima PubPaid",
+        "incluir trava de portugues publico"
+      ],
+      "filesTouched": [
+        "PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "prompt",
+        "instrutor-testes",
+        "reuniao",
+        "memoria",
+        "ruido"
+      ],
+      "nextSteps": [
+        "executar varredura geral da pasta local e memoria",
+        "rodar reuniao orientada por objetivos",
+        "produzir fila P0/P1/P2 para PubPaid"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-transformar-participacao-comunitaria-em-chat-mural-de-informacoes-da-populacao",
+      "createdAt": "2026-04-27T13:47:00.704Z",
+      "updatedAt": "2026-04-27T13:47:00.704Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Executar prompt para mudar a area Participacao Comunitaria Voluntaria da home para funcionar mais como bate-papo/chat de informacoes da populacao, com opinioes, avisos pequenos e informacoes locais em vez de envio formal de noticias.",
+      "summary": "Transformar participacao comunitaria em chat/mural de informacoes da populacao",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-ajustar-copy-inicial-do-popup-e-reduzir-erros-de-console",
+      "createdAt": "2026-04-27T13:59:59.747Z",
+      "updatedAt": "2026-04-27T13:59:59.747Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Corrigir o popup: o primeiro texto deve explicar o que e a ilustracao. Reduzir/zerar erros no console porque o projeto e avaliado.",
+      "summary": "Ajustar copy inicial do popup e reduzir erros de console",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-trocar-selo-do-popup-para-manchete-editorial-sobre-mundo-em-guerra-e-escolhas-pe",
+      "createdAt": "2026-04-27T14:13:19.768Z",
+      "updatedAt": "2026-04-27T14:13:19.768Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Substituir o texto do selo no topo por manchete curta e ironica alinhada a ilustracao, sem repetir cookies; usar MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS.",
+      "summary": "Trocar selo do popup para manchete editorial sobre mundo em guerra e escolhas pequenas, sem redundancia de cookies.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-executar-rodada-pubpaid-2-0-como-instrutor-de-testes-com-varredura-de-memoria-wo",
+      "createdAt": "2026-04-27T14:43:34.200Z",
+      "updatedAt": "2026-04-27T10:39:39.1410409-05:00",
+      "status": "completed",
+      "source": "chat",
+      "rawRequest": "Executar o prompt mestre: trabalhar como instrutor de testes/auditor/organizador de objetivos para PubPaid/PaidPub, ler memoria, verificar pasta local, separar ruido, rodar reuniao e transformar em objetivos testaveis antes de criar correcoes.",
+      "summary": "Executar rodada PubPaid 2.0 como instrutor de testes, com varredura de memoria/workspace, reuniao, validacao minima e fila objetiva P0/P1/P2",
+      "normalizedTasks": [
+        "ler memoria obrigatoria",
+        "verificar status local",
+        "separar ruido de mudanca real",
+        "rodar review team",
+        "rodar ciclo de agentes",
+        "validar sintaxe PubPaid",
+        "validar fluxo PubPaid quando possivel",
+        "montar fila P0 P1 P2"
+      ],
+      "filesTouched": [
+        "PUBPAID_2_GLOBAL_HANDOFF.md",
+        "PROMPT_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md",
+        "pubpaid-v2.html",
+        "pubpaid-phaser/",
+        "pubpaid-phaser.css",
+        "assets/pubpaid/",
+        "RELATORIO_PUBPAID_INSTRUTOR_TESTES_2026-04-27.md",
+        "server.js",
+        "scripts/review-team-audit.js",
+        "scripts/sanitize-public-language.js",
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/assets.json",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "relatorio-pubpaid-instrutor-testes-2026-04-27-md",
+        "playtest-report-json",
+        "pixel-report-json",
+        ".codex-temp/review-team/latest-report.json",
+        "data/agents-autonomy-report.json"
+      ],
+      "tags": [
+        "pubpaid",
+        "instrutor-testes",
+        "reuniao",
+        "qa",
+        "ruido",
+        "objetivos"
+      ],
+      "nextSteps": [
+        "classificar status local",
+        "rodar rotinas",
+        "validar PubPaid",
+        "registrar relatorio"
+      ],
+      "notes": "Rodada concluida: prompt criado, relatorio/ata criado, PubPaid corrigida e validada sem deploy, trava anti-ingles reforcada, agents:cycle ok com 181 agentes/5 escritorios, review:team totalIssues=0 e smoke anti-ingles sem hits."
+    },
+    {
+      "id": "2026-04-27-rodada-geral-pedida-pelo-usuario-sincronizar-atualizar-buscar-noticias-validar-o",
+      "createdAt": "2026-04-27T17:56:41.116Z",
+      "updatedAt": "2026-04-27T17:56:41.116Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "sincronizar , atualziar, buscar noticias, fazer comits, tudo agora, o jornal ja esta bem, graças a deus, esta bem visualmente",
+      "summary": "Rodada geral pedida pelo usuário: sincronizar, atualizar/buscar notícias, validar o jornal sem mexer no visual aprovado e fazer commits.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-retomar-a-frente-pubpaid-2-0-paidpub-como-foco-atual-lendo-memoria-e-preparando-",
+      "createdAt": "2026-04-27T18:22:40.395Z",
+      "updatedAt": "2026-04-27T18:22:40.395Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos pro paid pub 2?",
+      "summary": "Retomar a frente PubPaid 2.0/PaidPub como foco atual, lendo memoria e preparando validacao local antes de novas mudancas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-trabalhar-na-pubpaid-2-0-apenas-localmente-codificar-e-validar-no-workspace-sem-",
+      "createdAt": "2026-04-27T18:23:27.287Z",
+      "updatedAt": "2026-04-27T18:23:27.287Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e p´ra gente codifica e nao manda pra canto nenhum",
+      "summary": "Trabalhar na PubPaid 2.0 apenas localmente: codificar e validar no workspace, sem commit/push/deploy/PR ate ordem explicita.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-retomar-pubpaid-2-como-jogo-em-desenvolvimento-local-recomecando-parte-a-parte-p",
+      "createdAt": "2026-04-27T18:25:00.635Z",
+      "updatedAt": "2026-04-27T18:25:00.635Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vc nao entendeu paid pub 2 e nosso jogo, esta  em desenvolvimento, vamos desenvoilver ele localmente, e reocmeçar parte a parte do principio de onde paramos que foi, design de art e faer os sprits",
+      "summary": "Retomar PubPaid 2 como jogo em desenvolvimento local, recomecando parte a parte pela direcao de arte e criacao/organizacao dos sprites, sem publicar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-continuar-pubpaid-2-local-pela-proxima-parte-criar-pacote-inicial-de-civis-sprit",
+      "createdAt": "2026-04-27T18:29:23.833Z",
+      "updatedAt": "2026-04-27T18:29:23.833Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "bom faça o proximo passo",
+      "summary": "Continuar PubPaid 2 local pela proxima parte: criar pacote inicial de civis/sprites unicos e integrar no Phaser sem publicar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-corrigir-rumo-da-pubpaid-2-local-limpar-a-rua-ruim-parar-de-criar-civis-agora-e-",
+      "createdAt": "2026-04-27T18:42:57.339Z",
+      "updatedAt": "2026-04-27T18:42:57.339Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "isso ta horrivel, primeiro escreva o prompt, limpe essa cena e vamos criar um novo protagonista so isso por enquanto, ele deve ter  8 direções 3 sprites pra cada direção e deve ter sprite pra animação parado, ele respirando e mexendo no celular, o protagonista deve ser baseado no que ja existe, mais baseise em stand vale para movimentação e animação e todos os jogos de pixels arts, principalmente os mais famosos",
+      "summary": "Corrigir rumo da PubPaid 2 local: limpar a rua ruim, parar de criar civis agora e escrever prompt mestre para novo protagonista baseado no existente, com 8 direcoes, 3 frames de movimento por direcao, idle respirando e idle mexendo no celular.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-implementar-localmente-o-novo-protagonista-pubpaid-2-0-com-3-spritesheets-walk-8",
+      "createdAt": "2026-04-27T18:55:26.348Z",
+      "updatedAt": "2026-04-27T18:55:26.348Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "PLEASE IMPLEMENT THIS PLAN: Novo Protagonista PubPaid 2.0",
+      "summary": "Implementar localmente o novo protagonista PubPaid 2.0 com 3 spritesheets: walk 8dir/3f, idle breathing 8dir/3f e idle phone 8dir/3f, mantendo rua limpa.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-padronizar-layout-dos-escritorios-de-agentes-mapa-ambiente-como-area-principal-o",
+      "createdAt": "2026-04-27T20:45:18.294Z",
+      "updatedAt": "2026-04-27T20:45:18.294Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Mover a divisão de Pix/ambiente para baixo do ambiente do escritório, não abaixo do terminal; manter o layout novo em todos os escritórios de agentes e evitar partes mortas no layout.",
+      "summary": "Padronizar layout dos escritórios de agentes: mapa/ambiente como área principal, opções pagas abaixo do ambiente e terminal compacto embaixo.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-ajustar-animacao-de-letras-do-rodape-insiders-para-disparar-apenas-quando-o-leit",
+      "createdAt": "2026-04-27T20:50:55.395Z",
+      "updatedAt": "2026-04-27T20:50:55.395Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "a animação das letras ali, so podem começar quando tiverem na area de visão do site, ou seja quando oleitor abrir  o point view do rodape, porque? porque ele prescissa ver a animação das letras ali",
+      "summary": "Ajustar animação de letras do rodapé Insiders para disparar apenas quando o leitor chegar ao viewport do rodapé/bloco visível.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-pubpaid-2-tela-de-escolha-deve-mostrar-homem-e-mulher-girando-em-4-vistas-apos-s",
+      "createdAt": "2026-04-27T22:16:06.958Z",
+      "updatedAt": "2026-04-27T22:16:06.958Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora a escolha de personagem usa o primeiro rodando no proprio eixo para a pessoa ver as 4 posicoes; igualmente a segunda; depois usa a terceira imagem/prototipo e a quarta feminina no mapa com todas as direcoes",
+      "summary": "PubPaid 2: tela de escolha deve mostrar Homem e Mulher girando em 4 vistas; apos selecionar, o mapa deve usar o spritesheet completo correspondente de cada personagem.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "scripts/pubpaid-extract-generated-character-sheets.py"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/sprites/protagonist/protagonist-male-turnaround-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-turnaround-4f.png",
+        "output/web-game/pubpaid-turnaround-flow/report.json"
+      ],
+      "tags": [
+        "pubpaid",
+        "sprites",
+        "character-select"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-27-pubpaid-2-idle-respirando-enter-abre-carteira-via-animacao-de-celular-com-hold-n",
+      "createdAt": "2026-04-27T22:36:03.434Z",
+      "updatedAt": "2026-04-27T23:54:02.307Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "PubPaid 2: mudar idle para respirar apos 3 segundos; Enter abre menu carteira em outra cena; restaurar a intro; animacao da carteira deve ser o personagem puxando o celular com 3 sprites, segurando o ultimo sprite mais tempo para dar impressao de puxar o celular; depois de cerca de 2 segundos olhando o telefone entra o menu com efeito 3D cinematografico gamer premium.",
+      "summary": "PubPaid 2: idle respirando, Enter abre carteira via animacao de celular com hold no ultimo frame e menu 3D premium; restaurar intro antes do fluxo.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/scenes/WalletScene.js",
+        "pubpaid-phaser/ui/overlay.js",
+        "progress.md",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-wallet-flow-check/report.json",
+        "output/web-game/pubpaid-wallet-flow-check/10-mobile-controls.png",
+        "output/web-game/pubpaid-wallet-flow-check/13-mobile-wallet-open.png",
+        "output/web-game/pubpaid-mobile-wallet-client/shot-0.png"
+      ],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Implementado e validado localmente; PubPaid segue sem commit/push/deploy."
+    },
+    {
+      "id": "2026-04-27-pubpaid-2-adicionar-controles-mobile-pixel-art-em-tela-botoes-porta-carteira-con",
+      "createdAt": "2026-04-27T23:14:49.640Z",
+      "updatedAt": "2026-04-27T23:54:02.316Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "PubPaid 2: continuar e ajustar a solução mobile; colocar botões em tela estilo pixel art para Porta, Carteira e Configurações; deixar a interface da carteira no mesmo estilo 2D pixel art; revisar controles mobile com direcional e botões.",
+      "summary": "PubPaid 2: adicionar controles mobile pixel art em tela, botões Porta/Carteira/Configurações e carteira 2D pixel art coerente.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/scenes/WalletScene.js",
+        "pubpaid-phaser/ui/overlay.js",
+        "progress.md",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "output/web-game/pubpaid-wallet-flow-check/report.json",
+        "output/web-game/pubpaid-wallet-flow-check/10-mobile-controls.png",
+        "output/web-game/pubpaid-wallet-flow-check/13-mobile-wallet-open.png",
+        "output/web-game/pubpaid-mobile-wallet-client/shot-0.png"
+      ],
+      "tags": [],
+      "nextSteps": [],
+      "notes": "Implementado e validado localmente; PubPaid segue sem commit/push/deploy."
+    },
+    {
+      "id": "2026-04-28-restringir-classificacao-captacao-prefeitura-a-materias-explicitamente-ligadas-a",
+      "createdAt": "2026-04-28T13:06:33.990Z",
+      "updatedAt": "2026-04-28T13:10:38.793Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "o que essa noticia teria haver com prefeitura? delimite esse tipo de captação de prefeitura somente a prefeitura de cruzeiro do sul acre e vale do jurua",
+      "summary": "Restringir classificação/captação Prefeitura a matérias explicitamente ligadas à Prefeitura de Cruzeiro do Sul, Acre ou Vale do Juruá.",
+      "normalizedTasks": [
+        "corrigir classificação indevida Prefeitura em matérias nacionais/pop/cultura",
+        "limitar regra Prefeitura ao recorte local Cruzeiro do Sul Acre Vale do Juruá",
+        "validar que notícia da Anitta não recebe tarja Prefeitura"
+      ],
+      "filesTouched": [
+        "server.js",
+        "script.js",
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "noticias",
+        "prefeitura",
+        "classificacao-editorial",
+        "vale-do-jurua"
+      ],
+      "nextSteps": [],
+      "notes": "Regra Prefeitura agora exige sinal municipal + Cruzeiro do Sul/Vale do Jurua. Anitta/G1 Pop & Arte reclassificada para Cultura. Validados node --check, parse JSON e auditoria badPrefeitura=0."
+    },
+    {
+      "id": "2026-04-28-home-mosaico-9-cards-hero-link-catalogo-publica",
+      "createdAt": "2026-04-28T13:34:42.172Z",
+      "updatedAt": "2026-04-28T13:34:42.172Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "Ajustar edição visual para ter pelo menos 9 matérias incluindo repetição dos destaques do hero; colocar link Ler tudo no destaque do hero; separar Prefeitura e Governo do Estado nos botões; criar divisões oficiais no catálogo para Prefeitura de Cruzeiro do Sul e Governo do Acre.",
+      "summary": "Home ajustada com mosaico visual de 9 cards, destaque do hero com link explícito Ler tudo e catálogo separado para utilidade pública municipal e estadual.",
+      "normalizedTasks": [
+        "ampliar edição visual de 3 para 9 matérias",
+        "permitir repetição dos destaques do hero somente na edição visual",
+        "adicionar link Ler tudo no destaque do hero",
+        "incluir botão Governo do Estado depois de Prefeitura",
+        "separar filtro Governo do Estado de Prefeitura",
+        "criar módulo Prefeitura de Cruzeiro do Sul no catálogo com links oficiais",
+        "criar módulo Governo do Estado no catálogo com links oficiais do Acre",
+        "validar sintaxe, revisão local e Playwright"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "styles.css",
+        "agentes-newsroom-hero.css",
+        "catalogo-servicos-data.js",
+        "catalogo-servicos.html",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        "CODEX_MEMORY.md"
+      ],
+      "assetRefs": [
+        "output/playwright/home-mosaic-publica-20260428.png",
+        "output/playwright/catalogo-publica-20260428.png"
+      ],
+      "tags": [
+        "home",
+        "mosaico-visual",
+        "hero",
+        "catalogo-servicos",
+        "prefeitura",
+        "governo-acre",
+        "utilidade-publica"
+      ],
+      "nextSteps": [],
+      "notes": "Validados node --check em script.js/catalogo-servicos*.js, npm run review:team sem achados nesta frente (2 avisos antigos do PubPaid), Playwright confirmou 9 cards, Ler tudo, href real no hero e módulos Prefeitura/Governo sem erros de console."
+    },
+    {
+      "id": "2026-04-28-home-edicao-visual-com-12-cards-foto-total-e-prioridade-mailza",
+      "createdAt": "2026-04-28T14:08:46.811Z",
+      "updatedAt": "2026-04-28T14:08:46.811Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "12 cards, pra nao ficar um sobrando, e, ageite a divisao pra da pra ver a foto direito como a regra total, que ja usamos pra foto, lembre-se prioridade maior e maisa",
+      "summary": "Home edicao visual com 12 cards, foto total e prioridade Mailza",
+      "normalizedTasks": [
+        "ampliar edicao visual para 12 cards",
+        "fechar grade sem item sobrando",
+        "usar foto inteira nos cards",
+        "puxar Mailza/Maisa como prioridade maior",
+        "validar com Playwright"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "styles.css"
+      ],
+      "assetRefs": [
+        "output/playwright/home-mosaic-12-foto-total-20260428.png"
+      ],
+      "tags": [
+        "home",
+        "mosaico-visual",
+        "foto-total",
+        "mailza",
+        "playwright"
+      ],
+      "nextSteps": [],
+      "notes": "Validado em localhost com 12 cards, grid 2 colunas, leadTitle com Mailza, background-size/object-fit contain e sem erros de console."
+    },
+    {
+      "id": "2026-04-28-encerramento-do-dia-sincronizacao-online-local-reuniao-agentes-atualizados-e-lem",
+      "createdAt": "2026-04-28T14:32:22.335Z",
+      "updatedAt": "2026-04-28T14:32:22.335Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "ok sincronizar tudo agora como todo dia, atualizar reuniao etc e tal, termina por hoje, amanha me lemhbre de começar a rotina de organizar a chefe call",
+      "summary": "Encerramento do dia: sincronizacao online-local, reuniao/agentes atualizados e lembrete Cheffe Call",
+      "normalizedTasks": [
+        "rodar sync online-local diario",
+        "sanear linguagem publica",
+        "rodar review team",
+        "rodar auditoria de imagens",
+        "rodar runtime/reuniao dos agentes",
+        "gerar relatorio PDF",
+        "registrar fechamento",
+        "criar lembrete para Cheffe Call amanha"
+      ],
+      "filesTouched": [
+        ".codex-temp/online-local-sync/latest-report.json",
+        ".codex-temp/online-local-sync/latest-report.md",
+        ".codex-temp/online-local-sync/latest-report.pdf",
+        ".codex-temp/real-agents/latest-run.json",
+        ".codex-temp/real-agents/latest-run.md",
+        "pubpaid-phaser/app.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        "progress.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/online-local-sync/latest-report.md",
+        ".codex-temp/online-local-sync/latest-report.pdf",
+        ".codex-temp/real-agents/latest-run.md",
+        ".codex-temp/review-team/latest-report.md"
+      ],
+      "tags": [
+        "sync-online-local",
+        "encerramento",
+        "reuniao-agentes",
+        "cheffe-call",
+        "lembrete"
+      ],
+      "nextSteps": [],
+      "notes": "Sync final passou: 360 noticias, 360/360 imagens ok, review-team 0 achados, real agents runtime com 181 agentes/5 escritorios. Lembrete criado para 2026-04-29 09:00 America/Rio_Branco, automationId come-ar-rotina-cheffe-call."
+    },
+    {
+      "id": "2026-04-28-corrigir-copy-publica-do-card-de-entrada-pubpaid-remover-texto-com-tom-de-anotac",
+      "createdAt": "2026-04-28T15:00:58.099Z",
+      "updatedAt": "2026-04-28T15:06:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "texto pra editor e nao pra publico",
+      "summary": "Corrigir copy publica do card de entrada PubPaid: remover texto com tom de anotacao editorial e trocar por chamada voltada ao usuario.",
+      "normalizedTasks": [
+        "localizar card publico do PubPaid na home",
+        "remover frase com tom de anotacao editorial",
+        "substituir por chamada voltada ao visitante"
+      ],
+      "filesTouched": [
+        "index.html"
+      ],
+      "assetRefs": [
+        "chat-attachments/2026-04-28-pubpaid-card-copy-editorial.png"
+      ],
+      "tags": [
+        "pubpaid-2",
+        "home",
+        "copy-publica",
+        "local-only"
+      ],
+      "nextSteps": [],
+      "notes": "Paragrafo do card PubPaid na home trocado para convite publico: abrir a porta do PubPaid 2, escolher personagem e entrar em bar de jogos com mesas ativas."
+    },
+    {
+      "id": "2026-04-28-travar-a-previa-com-senha-admin-total-e-transformar-governo-do-estado-em-acre-go",
+      "createdAt": "2026-04-28T15:01:07.930Z",
+      "updatedAt": "2026-04-28T15:29:44.157Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "a previa so pode abrir com senha admin total, quando eu clico em governo do estado não ha uma divisão so captando noticias do estado do Acre em questão politica; mudar para Acre / Governo, noticias gerais do Acre mais governo, nos moldes atuais, com mais noticias para expandir essa area",
+      "summary": "Travar a prévia com senha admin total e transformar Governo do Estado em Acre / Governo, ampliando o recorte para notícias gerais do Acre e governo.",
+      "normalizedTasks": [
+        "proteger /api/preview-image com senha admin total",
+        "renomear Governo do Estado para Acre / Governo na home",
+        "ampliar filtro Acre / Governo para noticias gerais do Acre mais governo estadual",
+        "manter Prefeitura separada no recorte municipal do Jurua",
+        "atualizar arquivo e catalogo para o novo nome",
+        "validar sintaxe, review team e smoke local"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "server.js",
+        "arquivo-noticias.js",
+        "catalogo-servicos-data.js",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [
+        ".codex-temp/review-team/latest-report.md",
+        ".codex-temp/acre-governo-check/server-4124.out.log"
+      ],
+      "tags": [
+        "home",
+        "noticias",
+        "acre-governo",
+        "preview-admin",
+        "seguranca"
+      ],
+      "nextSteps": [],
+      "notes": "Implementado localmente: filtro data-filter acre-governo com label Acre / Governo; agrupamento traz noticia geral do Acre e sinais de governo estadual sem misturar Prefeitura; /api/preview-image passou a exigir senha admin total. Validados node --check em server/script/arquivo/catalogo, npm run review:team totalIssues=0 e smoke local em porta 4124 com preview sem senha retornando 401."
+    },
+    {
+      "id": "2026-04-28-corrigir-estouro-corte-do-titulo-e-textos-do-rodape-da-pagina-de-noticia",
+      "createdAt": "2026-04-28T15:01:43.739Z",
+      "updatedAt": "2026-04-28T15:01:43.739Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "corrija isaso [captura mostra rodape da noticia com titulo 'Leitura com foto no topo...' cortado/estourando na lateral]",
+      "summary": "Corrigir estouro/corte do titulo e textos do rodape da pagina de noticia",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-corrigir-sobreposicao-visual-no-card-palavras-da-rosa-atalhos-da-home",
+      "createdAt": "2026-04-28T15:03:41.319Z",
+      "updatedAt": "2026-04-28T15:03:41.319Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "concerte a sobre posição",
+      "summary": "Corrigir sobreposicao visual no card Palavras da Rosa/atalhos da home",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-melhorar-mosaico-visual-e-priorizar-noticias-do-jurua-cruzeiro-vale-com-fallback",
+      "createdAt": "2026-04-28T15:48:59.012Z",
+      "updatedAt": "2026-04-28T15:48:59.012Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuario pediu melhorar visual da area Edição visual da home e restringir cards a noticias do Jurua, Cruzeiro do Sul e Vale do Jurua; se faltar, completar subindo com noticias do Acre em geral.",
+      "summary": "Melhorar mosaico visual e priorizar notícias do Juruá/Cruzeiro/Vale, com fallback Acre",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-reordenar-fluxo-editorial-da-home-prefeitura-e-politica-antes-de-tudo-cotidiano-",
+      "createdAt": "2026-04-28T15:52:56.017Z",
+      "updatedAt": "2026-04-28T15:52:56.017Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "prerfeitura e politica entram antes do botão tudo e cotidiano, e elas são divisões proprias com prioridade a prefeituras do vale do jurua com prioridade a cruzeiro do sul, depois uma divisão so pra acre e governo do estado do acre, ou seja noticias principais do acre e do governo de utilidade.... por prioridade e destaque crie esse fluxo o resto está certo",
+      "summary": "Reordenar fluxo editorial da home: Prefeitura e Politica antes de Tudo/Cotidiano; Prefeitura como divisao propria priorizando prefeituras do Vale do Jurua e Cruzeiro do Sul; Acre / Governo como divisao propria para noticias principais do Acre e utilidade do Governo do Estado.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-lembrar-na-proxima-atualizacao-de-conferir-o-fluxo-de-cookies-popup-entre-home-e",
+      "createdAt": "2026-04-28T15:54:25.019Z",
+      "updatedAt": "2026-04-28T15:54:25.019Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok, guarde para quando eu for atualizar",
+      "summary": "Lembrar na próxima atualização de conferir o fluxo de cookies/popup entre home e matérias antes de publicar.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-remover-o-aspecto-esbranquicado-lavado-das-fotos-nos-cards-da-home-preservando-l",
+      "createdAt": "2026-04-28T15:54:45.305Z",
+      "updatedAt": "2026-04-28T15:54:45.305Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tire esse esbranquiçado das fotos",
+      "summary": "Remover o aspecto esbranquiçado/lavado das fotos nos cards da home, preservando legibilidade e visual do bloco.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-corrigir-o-bloco-largo-festa-social-agora-no-mais-assuntos-para-deixar-de-parece",
+      "createdAt": "2026-04-28T16:01:34.177Z",
+      "updatedAt": "2026-04-28T16:01:34.177Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "que porra e essa? ta feio demais rapaz, parece um card dentro de um card e nao da continuidade a essa div",
+      "summary": "Corrigir o bloco largo Festa & Social Agora no Mais Assuntos para deixar de parecer card dentro de card e dar continuidade visual à seção.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-28-retomar-pubpaid-2-0-abrir-no-navegador-e-mostrar-endereco-estado-atual",
+      "createdAt": "2026-04-28T18:24:57.444Z",
+      "updatedAt": "2026-04-28T18:24:57.444Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos voltar ao pubpaid 2.0 primeiro me mostre a realidade atual vamos abrir ele no meu navegador, manda o endereço",
+      "summary": "Retomar PubPaid 2.0, abrir no navegador e mostrar endereço/estado atual.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

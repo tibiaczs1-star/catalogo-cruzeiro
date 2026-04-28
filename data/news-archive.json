@@ -39,8 +39,8 @@
     "eyebrow": "prefeitura",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T23:04:09.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/26/cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2/",
@@ -600,8 +600,8 @@
     "eyebrow": "prefeitura",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T21:58:16.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/26/anitta-garimpa-o-ouro-da-existencia-na-ruptura-espiritual-de-equilibrium-sem-renegar-o-funk-em-album-corajoso.ghtml",
@@ -723,11 +723,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/corinthians-vasco.jpg?w=200",
-    "originalFeedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/corinthians-vasco.jpg?w=200",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://www.cnnbrasil.com.br/economia/negocios/btg-pactual-confirma-acesso-indevido-a-dados-de-contas-internacionais/",
@@ -1359,10 +1355,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/26/jovem-e-morto-com-tiro-na-cabeca-apos-confusao-em-bares-de-rio-branco/",
@@ -1532,10 +1528,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/26/wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima/",
@@ -1635,10 +1631,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/26/lutador-acreano-celebra-conquista-de-duplo-cinturao-com-video-no-rj/",
@@ -1969,10 +1965,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-04/movimento-escoteiro-reune-mais-de-4-mil-pessoas-em-evento-no-rio",
@@ -2072,10 +2068,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://juruacomunicacao.com.br/maratona-de-londres-2026-sabastian-sawe-faz-melhor-tempo-da-historia/",
@@ -2669,11 +2665,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-03-07-at-21.56.48-4-1024x683.avif",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-03-07-at-21.56.48-4-1024x683.avif",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://www.theverge.com/gadgets/918544/skylight-15-inch-smart-calendar-2-mothers-day-deal-2026-sale",
@@ -2715,8 +2707,8 @@
     "eyebrow": "prefeitura",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T14:00:55.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/26/marina-lima-valida-assinatura-moderna-da-obra-autoral-entre-perdas-e-ganhos-no-show-dos-70-anos.ghtml",
@@ -3107,10 +3099,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/usina-de-chernobyl-continua-ameacada-mesmo-apos-40-anos-do-desastre-nuclear/",
@@ -3309,10 +3301,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/atirador-em-jantar-pode-ser-hospede-de-hotel-diz-policia-de-washington/",
@@ -3378,9 +3370,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Bahia-X-Santos-Campeonato-Brasileiro-e1777158322245.jpg?w=200"
+    "editorialPriority": ""
   },
   {
     "id": "https://ac24horas.com/2026/04/25/arroyo-decide-e-cruzeiro-vence-remo-fora-de-casa-no-brasileirao/",
@@ -3645,10 +3635,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/outros-esportes/luana-silva-perde-na-ultima-onda-e-fica-com-segundo-lugar-em-margaret-river/",
@@ -3682,10 +3672,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/trump-homem-realizou-ataque-e-estava-com-varias-armas/",
@@ -3785,10 +3775,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/campeonato-brasileiro-veja-os-resultados-dos-jogos-deste-sabado-25/",
@@ -3855,10 +3845,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/trump-retirado-de-jantar-apos-tiros-veja-o-que-sabemos-do-ocorrido/",
@@ -4551,11 +4541,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/6fd9a83c-a6b4-4b3f-b609-0ae18ee187cb-768x1024.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/6fd9a83c-a6b4-4b3f-b609-0ae18ee187cb-768x1024.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agencia.ac.gov.br/governo-monta-forca-tarefa-e-usa-barreiras-de-contencao-para-tentar-conter-avanco-de-oleo-no-rio-tarauaca/",
@@ -4588,11 +4574,7 @@
     "imageFit": "",
     "media": null,
     "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/foto-rio-3-576x1024.jpg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/foto-rio-3-576x1024.jpg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://ac24horas.com/2026/04/25/incendio-atinge-hotel-abandonado-em-rio-branco/",
@@ -4659,10 +4641,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-04/palestinos-vao-urnas-em-eleicoes-municipais",
@@ -4728,11 +4710,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3801-1024x683.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3801-1024x683.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/audiencia-publica-debate-pl-de-reparacao-historica-em-sao-paulo",
@@ -4766,10 +4744,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-04/cientistas-criam-painel-para-orientar-transicao-energetica-global",
@@ -4906,10 +4884,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/brasil-lidera-quadro-de-medalhas-de-gp-de-atletismo-paralimpico",
@@ -4943,10 +4921,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://jurua24horas.com/2026/04/maior-enchente-da-historia-atinge-18-aldeias-na-terra-indigena-rio-gregorio/",
@@ -5177,11 +5155,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/d1714b4a-089e-4d1d-ac92-ceeab3783015-1024x887.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/d1714b4a-089e-4d1d-ac92-ceeab3783015-1024x887.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/alice-puxa-a-rede-da-familia-caymmi-ao-dar-voz-ao-canto-de-oba-no-album-em-que-recria-a-obra-do-avo-dorival.ghtml",
@@ -5190,8 +5164,8 @@
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T17:18:36.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/alice-puxa-a-rede-da-familia-caymmi-ao-dar-voz-ao-canto-de-oba-no-album-em-que-recria-a-obra-do-avo-dorival.ghtml",
@@ -5284,11 +5258,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-25-at-10.35.55-1024x682.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-25-at-10.35.55-1024x682.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/saude/noticia/2026-04/vacinacao-nas-escolas-segue-ate-dia-30-e-meta-e-imunizar-27-milhoes",
@@ -5358,11 +5328,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-14.39.32-1024x768.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-14.39.32-1024x768.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://juruacomunicacao.com.br/ifac-abre-40-vagas-para-curso-superior-em-sena-madureira/",
@@ -5725,9 +5691,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Introduzir-na-materia.jpg-1024x683.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/aline-paes-e-pedro-franco-brincam-a-serio-no-ritmo-dos-afrosambas-em-show-que-festeja-os-60-anos-do-disco-de-1966.ghtml",
@@ -5736,8 +5700,8 @@
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T14:15:44.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/aline-paes-e-pedro-franco-brincam-a-serio-no-ritmo-dos-afrosambas-em-show-que-festeja-os-60-anos-do-disco-de-1966.ghtml",
@@ -5793,9 +5757,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-19.11.14-1-1024x952.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://jurua24horas.com/2026/04/vale-do-jurua-entra-em-alerta-de-perigo-para-chuvas-intensas-neste-sabado/",
@@ -5861,9 +5823,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-18.05.33-1-1024x768.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://www.theverge.com/gadgets/913854/govee-uplighter-floor-lamps-caregiving-parkinsons-disease",
@@ -6293,10 +6253,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.theverge.com/gadgets/917340/us-worst-smartphones-china-batteries-cameras-apple-iphone-john-ternus",
@@ -6503,8 +6463,8 @@
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T10:00:35.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/25/sem-desistencia/",
@@ -6701,8 +6661,8 @@
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T05:00:34.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/noticia/2026/04/25/taxa-das-blusinhas-receita-dos-correios-com-encomendas-internacionais-cai-de-22percent-para-8percent.ghtml",
@@ -7418,11 +7378,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/veja-video-tubarao-baleia-e-flagrado-rompendo-rede-em-arraial-do-cabo-rj/",
@@ -7489,10 +7445,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/ciencia/hubble-faz-36-anos-de-orbita-veja-imagens-impressionantes-capturadas/",
@@ -8029,8 +7985,8 @@
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T23:54:28.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-politica",
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/mercado/derivativos-entenda-diferenca-entre-operacoes-permitidas-e-proibidas/",
@@ -8120,10 +8076,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687209&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687209&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/entretenimento/grazi-massafera-reflete-sobre-maternidade-ficticia-e-da-vida-real/",
@@ -8190,10 +8146,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687207&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687207&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/agro/brasil-adere-a-programa-da-ocde-e-amplia-presenca-em-pesquisa-agropecuaria/",
@@ -8301,8 +8257,8 @@
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T23:36:27.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/feira-da-cidadania-do-governo-federal-chega-a-rio-branco-na-quarta-29/",
@@ -8425,10 +8381,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
@@ -8437,8 +8393,8 @@
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T22:39:05.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
     "previewClass": "thumb-politica",
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
@@ -8461,9 +8417,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_2778-1024x576.jpg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios",
@@ -8472,8 +8426,8 @@
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T22:37:47.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
     "previewClass": "thumb-politica",
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios",
@@ -8496,9 +8450,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-15.49.03-1024x683.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
@@ -8565,10 +8517,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
@@ -8701,10 +8653,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima/?utm_source=rss&utm_medium=rss&utm_campaign=fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima",
@@ -8770,11 +8722,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/convocacao-final-para-copa-tera-museu-do-amanha-como-palco",
@@ -8873,9 +8821,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-08.45.33-1-1024x682.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao/?utm_source=rss&utm_medium=rss&utm_campaign=saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
@@ -8908,9 +8854,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3770-1024x683.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
@@ -8943,9 +8887,7 @@
     "imageFit": "",
     "media": null,
     "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg"
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
@@ -8978,9 +8920,7 @@
     "imageFit": "",
     "media": null,
     "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg"
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
@@ -9014,10 +8954,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/24/apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas/",
@@ -9315,10 +9255,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/24/educacao-divulga-lista-de-aprovados-para-escuta-do-coro-lirico-veja-nomes/",
@@ -9484,10 +9424,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://juruacomunicacao.com.br/idoso-e-encontrado-morto-em-ramal-de-rio-branco/",
@@ -9628,8 +9568,8 @@
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T20:08:50.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/24/simone-seu-jorge-silva-ze-ibarra-e-zelia-duncan-cantam-henri-salvador-em-album-agendado-para-fim-de-junho.ghtml",
@@ -9785,10 +9725,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
@@ -10722,9 +10662,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
@@ -10767,9 +10705,7 @@
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/23/ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia.ghtml",
@@ -11100,10 +11036,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "tenda-saude-cheia-jurua",
@@ -11113,14 +11049,11 @@
     "date": "8 de abril de 2026",
     "publishedAt": "2026-04-08T14:15:00-05:00",
     "category": "Saúde",
+    "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/08/cruzeiro-do-sul-realiza-atendimento-em-tenda-montada-apos-inundacao-de-unidades-de-saude-durante-cheia-do-rio-jurua/",
     "sourceLabel": "Cruzeiro do Sul realiza atendimento em tenda montada apos inundacao de unidades de saude durante cheia do Rio Jurua",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
-    "imageCredit": "Credito: ac24horas",
     "lede": "A cheia atingiu unidades de saude e obrigou a prefeitura a montar uma estrutura temporaria para manter consultas, vacinacao e exames.",
     "summary": "A cheia atingiu unidades de saude e obrigou a prefeitura a montar uma estrutura temporaria para manter consultas, vacinacao e exames.",
     "analysis": "O arquivo registra a transicao da emergencia hidrica para uma resposta sanitaria mais organizada no territorio.",
@@ -11133,8 +11066,11 @@
       "Atendimento mantido",
       "Resposta emergencial"
     ],
-    "categoryKey": "saude",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+    "imageCredit": "Credito: ac24horas",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
@@ -11149,14 +11085,11 @@
     "date": "7 de abril de 2026",
     "publishedAt": "2026-04-07T00:00:00-05:00",
     "category": "Cotidiano",
+    "categoryKey": "cotidiano",
     "previewClass": "thumb-cheia",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/07/vazante-do-rio-jurua-segue-em-cruzeiro-do-sul/",
     "sourceLabel": "Vazante do rio Jurua segue em Cruzeiro do Sul",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "A reducao do nivel do rio mantem o processo de retorno gradual e limpeza dos bairros.",
     "summary": "A reducao do nivel do rio mantem o processo de retorno gradual e limpeza dos bairros.",
     "analysis": "A volta exige apoio logistico e vigilancia sanitaria para evitar novos riscos.",
@@ -11169,8 +11102,11 @@
       "Limpeza pesada",
       "Monitoramento da Defesa Civil"
     ],
-    "categoryKey": "cotidiano",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
@@ -11185,14 +11121,11 @@
     "date": "4 de abril de 2026",
     "publishedAt": "2026-04-04T00:00:00-05:00",
     "category": "Social",
+    "categoryKey": "social",
     "previewClass": "thumb-social",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/04/em-bairros-alagados-moradores-mantem-rotina-apesar-da-cheia-do-jurua/",
     "sourceLabel": "Moradores mantem rotina apesar da cheia do Jurua",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "Moradores convivem com agua nas ruas e improvisam solucoes para seguir trabalhando.",
     "summary": "Moradores convivem com agua nas ruas e improvisam solucoes para seguir trabalhando.",
     "analysis": "A leitura humana da cheia mostra impacto que numeros nao revelam.",
@@ -11205,15 +11138,16 @@
       "Bairros alagados",
       "Resiliencia local"
     ],
-    "categoryKey": "social",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif"
+    "editorialPriority": ""
   },
   {
     "id": "saude-familias-abrigadas",
@@ -11223,14 +11157,11 @@
     "date": "4 de abril de 2026",
     "publishedAt": "2026-04-04T00:00:00-05:00",
     "category": "Saúde",
+    "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/04/saude-chega-a-familias-abrigadas-por-enchente-em-cruzeiro-do-sul/",
     "sourceLabel": "Saude chega a familias abrigadas por enchente",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "Equipes medicas e de enfermagem atendem familias deslocadas para evitar agravamento de doencas.",
     "summary": "Equipes medicas e de enfermagem atendem familias deslocadas para evitar agravamento de doencas.",
     "analysis": "A prevencao dentro dos abrigos ajuda a reduzir pressao no Hospital do Jurua.",
@@ -11243,8 +11174,11 @@
       "Prevencao",
       "Monitoramento diario"
     ],
-    "categoryKey": "saude",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
@@ -11259,14 +11193,11 @@
     "date": "3 de abril de 2026",
     "publishedAt": "2026-04-03T00:00:00-05:00",
     "category": "Utilidade Pública",
+    "categoryKey": "utilidade publica",
     "previewClass": "thumb-servico",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/03/prefeitura-distribui-mais-de-2-mil-galoes-de-agua-mineral-para-familias-atingidas-pela-cheia-do-rio-jurua/",
     "sourceLabel": "Prefeitura distribui mais de 2 mil galoes de agua mineral",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "Distribuicao de agua tratada e cestas basicas ganha prioridade nos bairros mais criticos.",
     "summary": "Distribuicao de agua tratada e cestas basicas ganha prioridade nos bairros mais criticos.",
     "analysis": "O Catalogo acompanha a logistica de suprimentos como indicador de resposta rapida.",
@@ -11279,15 +11210,16 @@
       "Cestas basicas",
       "Operacao emergencial"
     ],
-    "categoryKey": "utilidade publica",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "mais-12-mil-afetados",
@@ -11297,12 +11229,11 @@
     "date": "1 de abril de 2026",
     "publishedAt": "2026-04-01T00:00:00-05:00",
     "category": "Cotidiano",
+    "categoryKey": "cotidiano",
     "previewClass": "thumb-cheia",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/01/mais-de-12-mil-pessoas-sao-afetadas-pela-cheia-do-rio-jurua-e-cruzeiro-do-sul-abre-2-abrigo/",
     "sourceLabel": "Mais de 12 mil pessoas sao afetadas pela cheia do Rio Jurua",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "O inicio do mes consolidou a enchente como principal assunto da cidade, com ampliacao dos abrigos.",
     "summary": "O inicio do mes consolidou a enchente como principal assunto da cidade, com ampliacao dos abrigos.",
     "analysis": "O Catalogo destaca o impacto imediato da cheia na rotina urbana e nos servicos publicos.",
@@ -11315,17 +11246,16 @@
       "Abertura de novos abrigos",
       "Rotina reorganizada"
     ],
-    "categoryKey": "cotidiano",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
     "sourceImageUrl": "",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "home-linked-eja-czs-superacao",
@@ -11408,45 +11338,8 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/aldir-blanc-cultura-czs.svg"
-  },
-  {
-    "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
-    "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
-    "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
-    "eyebrow": "policia",
-    "date": "23 de mar. de 2026",
-    "publishedAt": "2026-03-23T20:55:20.000Z",
-    "category": "Polícia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Tribuna do Jurua",
-    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
-    "sourceLabel": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
-    "lede": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "analysis": "",
-    "body": [
-      "Tribuna do Jurua publicou em 23 de mar. de 2026 a base desta noticia sobre Renovação Licença de Operação – Pioneiro Combustíveis LTDA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Renovação Licença de Operação – Pioneiro Combustíveis LTDA e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
-    "feedImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/aldir-blanc-cultura-czs.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
@@ -11480,10 +11373,47 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
+    "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+    "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+    "eyebrow": "policia",
+    "date": "23 de mar. de 2026",
+    "publishedAt": "2026-03-23T20:55:20.000Z",
+    "category": "Polícia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Tribuna do Jurua",
+    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
+    "sourceLabel": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+    "lede": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "body": [
+      "Tribuna do Jurua publicou em 23 de mar. de 2026 a base desta noticia sobre Renovação Licença de Operação – Pioneiro Combustíveis LTDA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Renovação Licença de Operação – Pioneiro Combustíveis LTDA e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+    "feedImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/recebimento-licenca-previa-josias-o-da-silva-epp/",
@@ -11517,10 +11447,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua/",
@@ -11632,43 +11562,6 @@
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
-    "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
-    "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
-    "eyebrow": "policia",
-    "date": "23 de fev. de 2026",
-    "publishedAt": "2026-02-23T15:02:43.000Z",
-    "category": "Polícia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Tribuna do Jurua",
-    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
-    "sourceLabel": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
-    "lede": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "analysis": "",
-    "body": [
-      "Tribuna do Jurua publicou em 23 de fev. de 2026 a base desta noticia sobre Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
-    "feedImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
-  },
-  {
-    "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
     "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe",
     "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE",
     "eyebrow": "policia",
@@ -11699,10 +11592,47 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
+    "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+    "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+    "eyebrow": "policia",
+    "date": "23 de fev. de 2026",
+    "publishedAt": "2026-02-23T15:02:43.000Z",
+    "category": "Polícia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Tribuna do Jurua",
+    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
+    "sourceLabel": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+    "lede": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "body": [
+      "Tribuna do Jurua publicou em 23 de fev. de 2026 a base desta noticia sobre Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+    "feedImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-estadodo-acre/",
@@ -11736,10 +11666,10 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/geral/edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre/",
@@ -11814,6 +11744,48 @@
     "priority": 0,
     "editorialPriority": "",
     "originalImageUrl": "/assets/news-fallbacks/faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
+  },
+  {
+    "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+    "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+    "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+    "eyebrow": "saude",
+    "date": "data recente",
+    "publishedAt": "data recente",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "Fonte local",
+    "sourceUrl": "#",
+    "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+    "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+    "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+    "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+    "body": [
+      "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
+      "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+    ],
+    "highlights": [
+      "Saúde, Governo e Agricultura concentram alterações de comissionados",
+      "Fonte local",
+      "Saude"
+    ],
+    "development": [
+      "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+      "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+      "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+    ],
+    "imageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+    "feedImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
     "imageQuality": "imagem-ausente-ou-generica"
   },
   {
@@ -11986,48 +11958,6 @@
     "imageQuality": "imagem-ausente-ou-generica"
   },
   {
-    "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-    "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-    "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-    "eyebrow": "saude",
-    "date": "data recente",
-    "publishedAt": "data recente",
-    "category": "Saúde",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "Fonte local",
-    "sourceUrl": "#",
-    "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-    "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-    "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-    "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-    "body": [
-      "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
-      "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-    ],
-    "highlights": [
-      "Saúde, Governo e Agricultura concentram alterações de comissionados",
-      "Fonte local",
-      "Saude"
-    ],
-    "development": [
-      "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-      "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-      "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-    ],
-    "imageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-    "feedImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg"
-  },
-  {
     "id": "home-linked-vazante-retorno-seguro",
     "slug": "vazante-retorno-seguro",
     "title": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
@@ -12066,8 +11996,8 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg"
+    "originalImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-ifac-professores-czs",
@@ -12109,8 +12039,8 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/ifac-professores-czs.svg"
+    "originalImageUrl": "/assets/news-fallbacks/ifac-professores-czs.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-zequinha-assistencia-cheia",
@@ -12152,8 +12082,8 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/zequinha-assistencia-cheia.svg"
+    "originalImageUrl": "/assets/news-fallbacks/zequinha-assistencia-cheia.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
@@ -12194,8 +12124,8 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg"
+    "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-victor-macario-viral",
@@ -12236,8 +12166,8 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/victor-macario-viral.svg"
+    "originalImageUrl": "/assets/news-fallbacks/victor-macario-viral.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-vazante-jurua-segue",
@@ -12279,7 +12209,7 @@
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/vazante-jurua-segue.svg"
+    "originalImageUrl": "/assets/news-fallbacks/vazante-jurua-segue.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   }
 ]

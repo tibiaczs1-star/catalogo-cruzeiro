@@ -2125,6 +2125,18 @@ function inferCategoryKeyFromContent(rawText) {
   }
 
   if (
+    /\b(aleac|camara|deputad|senador|ministro|presidente|ex-presidente|bolsonaro|lula|stj|stf|eleicao|eleitoral|parlamento|congresso|senado|monopolio aereo)\b/.test(
+      haystack
+    )
+  ) {
+    return "politica";
+  }
+
+  if (isJuruaPrefeituraScope(haystack)) {
+    return "prefeitura";
+  }
+
+  if (
     isAcreGovernmentScope(haystack)
   ) {
     return "acre-governo";
@@ -2136,18 +2148,6 @@ function inferCategoryKeyFromContent(rawText) {
     )
   ) {
     return "utilidade publica";
-  }
-
-  if (
-    /\b(aleac|camara|deputad|senador|ministro|presidente|ex-presidente|bolsonaro|lula|stj|stf|eleicao|eleitoral|parlamento|congresso|senado|monopolio aereo)\b/.test(
-      haystack
-    )
-  ) {
-    return "politica";
-  }
-
-  if (isJuruaPrefeituraScope(haystack)) {
-    return "prefeitura";
   }
 
   if (

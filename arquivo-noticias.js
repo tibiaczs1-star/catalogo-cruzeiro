@@ -7,8 +7,8 @@
   const categoryAliases = {
     cotidiano: ["cotidiano"],
     prefeitura: ["prefeitura"],
-    "acre-governo": ["acre-governo", "governo do estado", "governo do acre", "acre", "utilidade publica", "gestao publica"],
-    politica: ["politica", "acre-governo", "governo do estado", "utilidade publica", "gestao publica"],
+    "acre-governo": ["acre-governo", "governo do estado", "governo do acre", "acre"],
+    politica: ["politica"],
     policia: ["policia", "seguranca"],
     saude: ["saude"],
     educacao: ["educacao"]
@@ -150,16 +150,16 @@
       return "Cultura";
     }
 
+    if (/\b(governo|aleac|camara|deputad|senador|eleicao|stf|stj)\b/.test(haystack)) {
+      return "Política";
+    }
+
     if (
       /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|secretaria estadual|acre|rio branco|aleac|assembleia legislativa|agencia ac gov br|acre gov br)\b/.test(
         haystack
       )
     ) {
       return "Acre / Governo";
-    }
-
-    if (/\b(governo|aleac|camara|deputad|senador|eleicao|stf|stj)\b/.test(haystack)) {
-      return "Política";
     }
 
     return "Cotidiano";
@@ -1249,10 +1249,11 @@
     }
 
     const options = [
+      ["prefeitura", "Prefeitura"],
+      ["politica", "Política"],
+      ["acre-governo", "Acre / Governo"],
       ["", "Tudo"],
       ["cotidiano", "Cotidiano"],
-      ["prefeitura", "Prefeitura"],
-      ["acre-governo", "Acre / Governo"],
       ["policia", "Polícia"],
       ["saude", "Saúde"],
       ["educacao", "Educação"]

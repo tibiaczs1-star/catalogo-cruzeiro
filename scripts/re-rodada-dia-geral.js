@@ -9,6 +9,7 @@ const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(ROOT_DIR, "data");
 const TEMP_DIR = path.join(ROOT_DIR, ".codex-temp");
 const ONLINE_NEWS_FILE = path.join(TEMP_DIR, "online-news-before.json");
+const ONLINE_NEWS_ARCHIVE_FILE = path.join(TEMP_DIR, "online-news-archive-before.json");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
@@ -82,6 +83,27 @@ function requestJson(url) {
           } catch (error) {
             reject(error);
           }
+        });
+      })
+      .on("error", reject);
+  });
+}
+
+function requestText(url) {
+  return new Promise((resolve, reject) => {
+    https
+      .get(url, { headers: { "user-agent": "catalogo-re-rodada-dia-geral" } }, (response) => {
+        let raw = "";
+        response.setEncoding("utf-8");
+        response.on("data", (chunk) => {
+          raw += chunk;
+        });
+        response.on("end", () => {
+          if (response.statusCode < 200 || response.statusCode >= 300) {
+            reject(new Error(`HTTP ${response.statusCode} em ${url}`));
+            return;
+          }
+          resolve(raw);
         });
       })
       .on("error", reject);
@@ -648,26 +670,69 @@ async function loadOnlineNews() {
   }
 }
 
+async function loadOnlineNewsArchive() {
+  const baseUrl = process.env.SITE_URL || DEFAULT_ONLINE_URL;
+  const url = `${baseUrl.replace(/\/$/, "")}/api/news/archive?limit=1000`;
+  try {
+    const payload = await requestJson(url);
+    writeJson(ONLINE_NEWS_ARCHIVE_FILE, payload);
+    return payload;
+  } catch (error) {
+    if (fs.existsSync(ONLINE_NEWS_ARCHIVE_FILE)) {
+      const payload = readJson(ONLINE_NEWS_ARCHIVE_FILE, null);
+      if (Array.isArray(payload?.items)) {
+        return {
+          ...payload,
+          cachedFallback: true,
+          cachedFallbackReason: String(error.message || error).slice(0, 240)
+        };
+      }
+    }
+    throw error;
+  }
+}
+
 async function runReRodadaDiaGeral() {
   const startedAt = new Date().toISOString();
   const localHints = buildLocalArticleHints();
   const onlinePayload = await loadOnlineNews();
+  const onlineArchivePayload = await loadOnlineNewsArchive();
   const onlineItems = Array.isArray(onlinePayload.items) ? onlinePayload.items : [];
+  const onlineArchiveItems = Array.isArray(onlineArchivePayload.items) ? onlineArchivePayload.items : [];
   const onlineAuditBefore = auditItems(onlineItems);
   const repaired = repairImages(applyLocalArticleHints(onlineItems, localHints));
   const prioritizedItems = promoteMailzaPriority(repaired.items).map(sanitizeReviewCopy);
-  const mergedArchiveItems = mergeNewsCollections(
-    readNewsArchiveItems(),
-    readStaticNewsItems(),
-    Array.isArray(readJson(RUNTIME_NEWS_FILE, { items: [] }).items)
-      ? readJson(RUNTIME_NEWS_FILE, { items: [] }).items
-      : [],
-    prioritizedItems
-  ).map(sanitizeReviewCopy);
-  const archiveMissingRepair = repairMissingImages(mergedArchiveItems);
+  const previousArchiveItems = readNewsArchiveItems();
+  const previousArchiveDigest = new Map(
+    previousArchiveItems.map((item) => [String(item.slug || item.id || item.title || ""), hashString(JSON.stringify(item || {}))])
+  );
+
+  const combinedOnlineArchive = mergeNewsCollections(onlineArchiveItems, prioritizedItems).map(sanitizeReviewCopy);
+  const archiveMissingRepair = repairMissingImages(combinedOnlineArchive);
   const archiveItems = archiveMissingRepair.items;
   const onlineAuditAfterLocalRepair = auditItems(prioritizedItems);
   const archiveAuditAfterSync = auditItems(archiveItems);
+
+  const nextArchiveDigest = new Map(
+    archiveItems.map((item) => [String(item.slug || item.id || item.title || ""), hashString(JSON.stringify(item || {}))])
+  );
+  const added = [];
+  const removed = [];
+  const updated = [];
+
+  nextArchiveDigest.forEach((digest, key) => {
+    if (!previousArchiveDigest.has(key)) {
+      added.push(key);
+      return;
+    }
+    if (previousArchiveDigest.get(key) !== digest) {
+      updated.push(key);
+    }
+  });
+
+  previousArchiveDigest.forEach((_digest, key) => {
+    if (!nextArchiveDigest.has(key)) removed.push(key);
+  });
 
   const runtimePayload = {
     lastAttemptAt: startedAt,
@@ -680,6 +745,9 @@ async function runReRodadaDiaGeral() {
         sourceName: "Render online",
         ok: true,
         fetched: onlineItems.length,
+        fetchedArchive: onlineArchiveItems.length,
+        onlineArchiveTotal: Number(onlineArchivePayload?.archiveTotal || onlineArchivePayload?.total || onlineArchiveItems.length || 0),
+        onlineArchiveReturned: Number(onlineArchivePayload?.returned || onlineArchiveItems.length || 0),
         activeWindowItems: prioritizedItems.length,
         archiveItems: archiveItems.length,
         repairedImages: repaired.repaired + archiveMissingRepair.repaired,
@@ -702,7 +770,10 @@ async function runReRodadaDiaGeral() {
     source: "Re Rodada do Dia Geral",
     cachedFallback: Boolean(onlinePayload.cachedFallback),
     cachedFallbackReason: onlinePayload.cachedFallbackReason || "",
+    cachedArchiveFallback: Boolean(onlineArchivePayload?.cachedFallback),
+    cachedArchiveFallbackReason: onlineArchivePayload?.cachedFallbackReason || "",
     onlineAuditBefore,
+    onlineArchiveAuditBefore: auditItems(onlineArchiveItems),
     localAuditAfterSync: onlineAuditAfterLocalRepair,
     archiveAuditAfterSync,
     activeWindowItems: prioritizedItems.length,
@@ -712,6 +783,14 @@ async function runReRodadaDiaGeral() {
     activeWindowRepairedImages: repaired.repaired,
     archiveRepairedImages: archiveMissingRepair.repaired,
     mailzaPriorityItems: prioritizedItems.filter(isMailzaPriorityArticle).length,
+    delta: {
+      added: added.length,
+      removed: removed.length,
+      updated: updated.length,
+      addedSlugs: added,
+      removedSlugs: removed,
+      updatedSlugs: updated
+    },
     rule:
       "Toda reunião grande/deploy começa lendo o online, sincroniza local, revisa offline, sobe e audita online de novo."
   };

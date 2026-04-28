@@ -1,241 +1,6 @@
 window.NEWS_ARCHIVE_TOTAL = 360;
 window.NEWS_DATA = [
   {
-    "id": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
-    "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
-    "title": "Mailza define linha de frente da sua campanha ao governo",
-    "eyebrow": "governadora mailza",
-    "date": "25 de abr. de 2026",
-    "publishedAt": "2026-04-25T15:06:34.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
-    "sourceLabel": "Mailza define linha de frente da sua campanha ao governo",
-    "lede": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
-    "summary": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
-    "analysis": "",
-    "body": [
-      "Jurua Comunicacao publicou em 25 de abr. de 2026 a base desta noticia sobre Mailza define linha de frente da sua campanha ao governo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Mailza define linha de frente da sua campanha ao governo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-    "sourceImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-    "feedImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade"
-  },
-  {
-    "id": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
-    "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
-    "title": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-25T00:03:11.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
-    "sourceLabel": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
-    "lede": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes.",
-    "summary": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes",
-    "analysis": "",
-    "body": [
-      "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade"
-  },
-  {
-    "id": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T21:57:54.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "sourceLabel": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-    "lede": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
-    "summary": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg"
-  },
-  {
-    "id": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T21:56:12.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "sourceLabel": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-    "lede": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza",
-    "summary": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg"
-  },
-  {
-    "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
-    "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
-    "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T19:58:21.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
-    "sourceLabel": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
-    "lede": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
-    "summary": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
-    "analysis": "",
-    "body": [
-      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade"
-  },
-  {
-    "id": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
-    "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
-    "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T19:28:41.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
-    "sourceLabel": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-    "lede": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
-    "summary": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
-    "analysis": "",
-    "body": [
-      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade"
-  },
-  {
-    "id": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
-    "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
-    "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T16:47:11.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
-    "sourceLabel": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-    "lede": "Em mais um dia de agendas em Cruzeiro do Sul, a governadora Mailza Assis concedeu, na manhã desta sexta-feira, 24, entrevista à plataforma Juruá Comunicação, conduzida pelo jornalista Alexandre Gomes, e avaliou o início de sua",
-    "summary": "Em mais um dia de agendas em Cruzeiro do Sul, a governadora Mailza Assis concedeu, na manhã desta sexta-feira, 24, entrevista à plataforma Juruá Comunicação, conduzida pelo jornalista Alexandre Gomes, e avaliou o início de sua",
-    "analysis": "",
-    "body": [
-      "Jurua Comunicacao publicou em 24 de abr. de 2026 a base desta noticia sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade"
-  },
-  {
     "id": "https://ac24horas.com/2026/04/26/galvez-vence-o-humaita-e-se-mantem-dentro-do-g4-no-grupo-a2/",
     "slug": "galvez-vence-o-humaita-e-se-mantem-dentro-do-g4-no-grupo-a2",
     "title": "Galvez vence o Humaitá e se mantém dentro do G4 no grupo A2",
@@ -275,8 +40,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T23:04:09.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/26/cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2/",
@@ -809,8 +574,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/homem-olheiro-do-trafico-de-drogas-e-preso-na-praia-da-macumba-no-rio/",
     "sourceLabel": "Membro do CV, “olheiro” do tráfico é preso na Praia da Macumba, no Rio",
-    "lede": "Membro do CV, “olheiro” do tráfico é preso na Praia da Macumba, no Rio. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Membro do CV, “olheiro” do tráfico é preso na Praia da Macumba, no Rio. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Um homem, apontado como membro do CV (Comando Vermelho) e “olheiro” do tráfico de drogas da Região dos Lagos, foi preso no último sábado (25) na Praia da Macumba , no bairro Recreio dos Bandeirantes, Zona Oeste do Rio de...",
+    "summary": "Um homem, apontado como membro do CV (Comando Vermelho) e “olheiro” do tráfico de drogas da Região dos Lagos, foi preso no último sábado (25) na Praia da Macumba , no bairro Recreio dos Bandeirantes, Zona Oeste do Rio de...",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 26 de abr. de 2026 a base desta noticia sobre Membro do CV, “olheiro” do tráfico é preso na Praia da Macumba, no Rio. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -836,8 +601,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T21:58:16.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/26/anitta-garimpa-o-ouro-da-existencia-na-ruptura-espiritual-de-equilibrium-sem-renegar-o-funk-em-album-corajoso.ghtml",
@@ -959,11 +724,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/corinthians-vasco.jpg?w=200",
-    "originalFeedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/corinthians-vasco.jpg?w=200",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://www.cnnbrasil.com.br/economia/negocios/btg-pactual-confirma-acesso-indevido-a-dados-de-contas-internacionais/",
@@ -1129,10 +890,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687351&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/gremio/nunca-esqueceremos-gremio-agradece-coritiba-por-apoio-durante-enchentes/",
@@ -1411,8 +1172,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/e-pouco-provavel-que-trump-reacenda-discurso-armamentista-diz-especialista/",
     "sourceLabel": "É pouco provável que Trump reacenda discurso armamentista, diz especialista",
-    "lede": "É pouco provável que Trump reacenda discurso armamentista, diz especialista. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "É pouco provável que Trump reacenda discurso armamentista, diz especialista. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "O ataque armado ocorrido durante o Jantar dos Correspondentes da Casa Branca, no último sábado (25), dificilmente levará o presidente dos EUA, Donald Trump, a repensar sua posição favorável ao porte de armas no país, segundo...",
+    "summary": "O ataque armado ocorrido durante o Jantar dos Correspondentes da Casa Branca, no último sábado (25), dificilmente levará o presidente dos EUA, Donald Trump, a repensar sua posição favorável ao porte de armas no país, segundo...",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 26 de abr. de 2026 a base desta noticia sobre É pouco provável que Trump reacenda discurso armamentista, diz especialista. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -1595,10 +1356,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/26/jovem-e-morto-com-tiro-na-cabeca-apos-confusao-em-bares-de-rio-branco/",
@@ -1698,10 +1459,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687349&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-04/hiperglobalizacao-esta-em-crise-diz-economista-eduardo-giannetti",
@@ -1768,10 +1529,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/26/wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima/",
@@ -1871,10 +1632,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/26/lutador-acreano-celebra-conquista-de-duplo-cinturao-com-video-no-rj/",
@@ -2021,8 +1782,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/inhotim-celebra-20-anos-com-inauguracao-de-tres-novas-obras",
     "sourceLabel": "Inhotim celebra 20 anos com inauguração de três novas obras ",
-    "lede": "Inhotim celebra 20 anos com inauguração de três novas obras. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Inhotim celebra 20 anos com inauguração de três novas obras. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "O Instituto Inhotim, em Brumadinho, Minas Gerais, abriu neste sábado (25) as comemorações dos seus 20 anos com a inauguração de três obras: Contraplano , de Lais Myrrha, Dupla Cura , de Dalton Paula, e Tororama , de Davi de...",
+    "summary": "O Instituto Inhotim, em Brumadinho, Minas Gerais, abriu neste sábado (25) as comemorações dos seus 20 anos com a inauguração de três obras: Contraplano , de Lais Myrrha, Dupla Cura , de Dalton Paula, e Tororama , de Davi de...",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 26 de abr. de 2026 a base desta noticia sobre Inhotim celebra 20 anos com inauguração de três novas obras. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -2205,10 +1966,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/educacao/noticia/2026-04/movimento-escoteiro-reune-mais-de-4-mil-pessoas-em-evento-no-rio",
@@ -2308,10 +2069,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://juruacomunicacao.com.br/maratona-de-londres-2026-sabastian-sawe-faz-melhor-tempo-da-historia/",
@@ -2359,8 +2120,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/canetas-emagrecedoras-entenda-quando-o-uso-pode-fazer-mal-a-saude/",
     "sourceLabel": "Canetas emagrecedoras: entenda quando o uso pode fazer mal à saúde",
-    "lede": "Canetas emagrecedoras: entenda quando o uso pode fazer mal à saúde. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Canetas emagrecedoras: entenda quando o uso pode fazer mal à saúde. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "A diretoria-colegiada da Agência Nacional de Vigilância Sanitária (Anvisa) discute esta semana uma proposta de instrução normativa sobre procedimentos e requisitos técnicos relacionados a medicamentos da classe dos agonistas do...",
+    "summary": "A diretoria-colegiada da Agência Nacional de Vigilância Sanitária (Anvisa) discute esta semana uma proposta de instrução normativa sobre procedimentos e requisitos técnicos relacionados a medicamentos da classe dos agonistas do...",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 26 de abr. de 2026 a base desta noticia sobre Canetas emagrecedoras: entenda quando o uso pode fazer mal à saúde. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -2382,7 +2143,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/policy/918843/trump-whcd-attack-white-house-ballroom",
     "slug": "https://www.theverge.com/policy/918843/trump-whcd-attack-white-house-ballroom",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T16:18:02.000Z",
@@ -2391,9 +2152,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/policy/918843/trump-whcd-attack-white-house-ballroom",
-    "sourceLabel": " ",
-    "lede": "President Donald Trump speaks during a press conference while flanked by FBI Director Kash Patel and Secretary of Homeland Security Markwayne Mullin at the White House on April 25, 2026.",
-    "summary": "President Donald Trump speaks during a press conference while flanked by FBI Director Kash Patel and Secretary of Homeland Security Markwayne Mullin at the White House on April 25, 2026.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -2448,7 +2209,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/entertainment/918826/tomora-come-closer-review-90s-dance-music",
     "slug": "https://www.theverge.com/entertainment/918826/tomora-come-closer-review-90s-dance-music",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T16:00:00.000Z",
@@ -2457,9 +2218,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/entertainment/918826/tomora-come-closer-review-90s-dance-music",
-    "sourceLabel": " ",
-    "lede": "Before Coachella, Tomora wasn't on my radar at all. It's actually only by chance that I stumbled upon them - I opened the wrong stream because my TV was lagging like a MFer.",
-    "summary": "Before Coachella, Tomora wasn't on my radar at all. It's actually only by chance that I stumbled upon them - I opened the wrong stream because my TV was lagging like a MFer.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -2821,8 +2582,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/domingo-deve-ser-quente-e-abafado-com-chuvas-pontuais-no-acre/",
     "sourceLabel": "Domingo deve ser quente e abafado, com chuvas pontuais no Acre",
-    "lede": "Domingo deve ser quente e abafado, com chuvas pontuais no Acre. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Domingo deve ser quente e abafado, com chuvas pontuais no Acre. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Neste domingo (26), o tempo quente e abafado, com sol, nuvens e chuvas pontuais e passageiras, que, em algumas áreas, podem ser fortes, vai predominar no Acre, no Amazonas, em Rondônia, em Mato Grosso, na Bolívia (planícies) e...",
+    "summary": "Neste domingo (26), o tempo quente e abafado, com sol, nuvens e chuvas pontuais e passageiras, que, em algumas áreas, podem ser fortes, vai predominar no Acre, no Amazonas, em Rondônia, em Mato Grosso, na Bolívia (planícies) e...",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 26 de abr. de 2026 a base desta noticia sobre Domingo deve ser quente e abafado, com chuvas pontuais no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -2905,16 +2666,12 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-03-07-at-21.56.48-4-1024x683.avif",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-03-07-at-21.56.48-4-1024x683.avif",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://www.theverge.com/gadgets/918544/skylight-15-inch-smart-calendar-2-mothers-day-deal-2026-sale",
     "slug": "https://www.theverge.com/gadgets/918544/skylight-15-inch-smart-calendar-2-mothers-day-deal-2026-sale",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T14:05:03.000Z",
@@ -2923,9 +2680,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/918544/skylight-15-inch-smart-calendar-2-mothers-day-deal-2026-sale",
-    "sourceLabel": " ",
-    "lede": "Skylight’s color-coded smart calendar supports two-way syncing with Google Calendar, Microsoft Outlook, and Apple’s iCloud calendar, among others.",
-    "summary": "Skylight’s color-coded smart calendar supports two-way syncing with Google Calendar, Microsoft Outlook, and Apple’s iCloud calendar, among others.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -2951,8 +2708,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T14:00:55.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/26/marina-lima-valida-assinatura-moderna-da-obra-autoral-entre-perdas-e-ganhos-no-show-dos-70-anos.ghtml",
@@ -2980,7 +2737,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/tech/918797/switched-to-linux-dont-miss-windows",
     "slug": "https://www.theverge.com/tech/918797/switched-to-linux-dont-miss-windows",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T13:00:00.000Z",
@@ -2989,9 +2746,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918797/switched-to-linux-dont-miss-windows",
-    "sourceLabel": " ",
-    "lede": "Some relevant reading. In January I finally made good on my threat/promise to install Linux on my desktop .",
-    "summary": "Some relevant reading. In January I finally made good on my threat/promise to install Linux on my desktop .",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -3013,7 +2770,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/column/918079/david-zaslav-warner-bros-discovery-coyote-v-acme-batgirl-tax-writeoffs",
     "slug": "https://www.theverge.com/column/918079/david-zaslav-warner-bros-discovery-coyote-v-acme-batgirl-tax-writeoffs",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "26 de abr. de 2026",
     "publishedAt": "2026-04-26T12:00:00.000Z",
@@ -3022,9 +2779,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/column/918079/david-zaslav-warner-bros-discovery-coyote-v-acme-batgirl-tax-writeoffs",
-    "sourceLabel": " ",
-    "lede": "This is The Stepback , a weekly newsletter breaking down one essential story from the tech world. For more on Hollywood trends and streaming culture, follow Charles Pulliam-Moore .",
-    "summary": "This is The Stepback , a weekly newsletter breaking down one essential story from the tech world. For more on Hollywood trends and streaming culture, follow Charles Pulliam-Moore .",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 26 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -3207,10 +2964,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
-    "originalFeedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/sao-bernardo-x-goias-horario-e-onde-assistir-ao-jogo-da-serie-b/",
@@ -3343,10 +3100,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/usina-de-chernobyl-continua-ameacada-mesmo-apos-40-anos-do-desastre-nuclear/",
@@ -3545,10 +3302,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/atirador-em-jantar-pode-ser-hospede-de-hotel-diz-policia-de-washington/",
@@ -3614,9 +3371,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Bahia-X-Santos-Campeonato-Brasileiro-e1777158322245.jpg?w=200"
+    "editorialPriority": ""
   },
   {
     "id": "https://ac24horas.com/2026/04/25/arroyo-decide-e-cruzeiro-vence-remo-fora-de-casa-no-brasileirao/",
@@ -3881,10 +3636,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/outros-esportes/luana-silva-perde-na-ultima-onda-e-fica-com-segundo-lugar-em-margaret-river/",
@@ -3918,10 +3673,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/trump-homem-realizou-ataque-e-estava-com-varias-armas/",
@@ -4002,8 +3757,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/atirador-em-jantar-de-trump-e-homem-de-30-anos-da-california-dizem-fontes/",
     "sourceLabel": "Atirador em jantar de Trump é homem de 31 anos da Califórnia, dizem fontes",
-    "lede": "Atirador em jantar de Trump é homem de 31 anos da Califórnia, dizem fontes. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Atirador em jantar de Trump é homem de 31 anos da Califórnia, dizem fontes. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "As autoridades identificaram o suspeito do tiroteio em um jantar de Donald Trump com jornalistas como um homem chamado Cole Tomas Allen , que tem 31 anos e é morador da Califórnia, segundo várias fontes policiais a par das...",
+    "summary": "As autoridades identificaram o suspeito do tiroteio em um jantar de Donald Trump com jornalistas como um homem chamado Cole Tomas Allen , que tem 31 anos e é morador da Califórnia, segundo várias fontes policiais a par das...",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Atirador em jantar de Trump é homem de 31 anos da Califórnia, dizem fontes. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -4021,10 +3776,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/brasileirao/campeonato-brasileiro-veja-os-resultados-dos-jogos-deste-sabado-25/",
@@ -4091,10 +3846,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/internacional/trump-retirado-de-jantar-apos-tiros-veja-o-que-sabemos-do-ocorrido/",
@@ -4736,8 +4491,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/25/no-acre-tre-registra-baixa-procura-em-mutirao-e-alerta-para-prazo-eleitoral/",
     "sourceLabel": "No Acre, TRE registra baixa procura em mutirão e alerta para prazo eleitoral",
-    "lede": "No Acre, TRE registra baixa procura em mutirão e alerta para prazo eleitoral. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "No Acre, TRE registra baixa procura em mutirão e alerta para prazo eleitoral. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "O Tribunal Regional Eleitoral do Acre (TRE-AC) realizou, neste sábado (25), mais uma edição do Mutirão de Atendimento ao Eleitor no auditório do Detran Acre, antiga FAAO, em Rio Branco, e contabilizou movimento abaixo da...",
+    "summary": "O Tribunal Regional Eleitoral do Acre (TRE-AC) realizou, neste sábado (25), mais uma edição do Mutirão de Atendimento ao Eleitor no auditório do Detran Acre, antiga FAAO, em Rio Branco, e contabilizou movimento abaixo da...",
     "analysis": "",
     "body": [
       "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre No Acre, TRE registra baixa procura em mutirão e alerta para prazo eleitoral. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -4787,11 +4542,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/6fd9a83c-a6b4-4b3f-b609-0ae18ee187cb-768x1024.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/6fd9a83c-a6b4-4b3f-b609-0ae18ee187cb-768x1024.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agencia.ac.gov.br/governo-monta-forca-tarefa-e-usa-barreiras-de-contencao-para-tentar-conter-avanco-de-oleo-no-rio-tarauaca/",
@@ -4824,11 +4575,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/foto-rio-3-576x1024.jpg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/foto-rio-3-576x1024.jpg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://ac24horas.com/2026/04/25/incendio-atinge-hotel-abandonado-em-rio-branco/",
@@ -4876,8 +4623,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/flamengo-derrota-vitoria-e-fica-perto-de-lideres-no-br-feminino",
     "sourceLabel": "Flamengo derrota Vitória e fica perto de líderes no BR Feminino",
-    "lede": "Flamengo derrota Vitória e fica perto de líderes no BR Feminino. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Flamengo derrota Vitória e fica perto de líderes no BR Feminino. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Em partida transmitida ao vivo pela TV Brasil , o Flamengo derrotou o Vitória pelo placar de 3 a 1, na tarde deste sábado (25) no estádio Luso-Brasileiro, no Rio de Janeiro, em partida válida pela 8ª rodada da Série A1 do...",
+    "summary": "Em partida transmitida ao vivo pela TV Brasil , o Flamengo derrotou o Vitória pelo placar de 3 a 1, na tarde deste sábado (25) no estádio Luso-Brasileiro, no Rio de Janeiro, em partida válida pela 8ª rodada da Série A1 do...",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Flamengo derrota Vitória e fica perto de líderes no BR Feminino. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -4895,10 +4642,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-04/palestinos-vao-urnas-em-eleicoes-municipais",
@@ -4913,8 +4660,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-04/palestinos-vao-urnas-em-eleicoes-municipais",
     "sourceLabel": "Palestinos vão às urnas em eleições municipais",
-    "lede": "Palestinos vão às urnas em eleições municipais. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Palestinos vão às urnas em eleições municipais. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Neste sábado (25), os palestinos votaram em eleições locais que, pela primeira vez em duas décadas, incluíram Gaza e servem como um indicador do clima político , enquanto o governo de Israel busca destruir qualquer futuro para...",
+    "summary": "Neste sábado (25), os palestinos votaram em eleições locais que, pela primeira vez em duas décadas, incluíram Gaza e servem como um indicador do clima político , enquanto o governo de Israel busca destruir qualquer futuro para...",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Palestinos vão às urnas em eleições municipais. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -4946,8 +4693,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/saude-do-acre-investe-na-formacao-de-equipes-para-fortalecer-a-rede-de-doacao-de-orgaos/",
     "sourceLabel": "Saúde do Acre investe na formação de equipes para fortalecer a rede de doação de órgãos",
-    "lede": "Saúde do Acre investe na formação de equipes para fortalecer a rede de doação de órgãos. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Saúde do Acre investe na formação de equipes para fortalecer a rede de doação de órgãos. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Com o objetivo de salvar mais vidas e otimizar o atendimento na rede pública, o governo do Acre, por meio da Central Estadual de Transplantes (CET/AC), iniciou nesta sexta-feira, 24, um ciclo de capacitações voltado para...",
+    "summary": "Com o objetivo de salvar mais vidas e otimizar o atendimento na rede pública, o governo do Acre, por meio da Central Estadual de Transplantes (CET/AC), iniciou nesta sexta-feira, 24, um ciclo de capacitações voltado para...",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 25 de abr. de 2026 a base desta noticia sobre Saúde do Acre investe na formação de equipes para fortalecer a rede de doação de órgãos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -4964,11 +4711,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3801-1024x683.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3801-1024x683.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/audiencia-publica-debate-pl-de-reparacao-historica-em-sao-paulo",
@@ -5002,10 +4745,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-04/cientistas-criam-painel-para-orientar-transicao-energetica-global",
@@ -5039,10 +4782,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687251&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/25/governo-do-acre-apura-danos-apos-balsa-derramar-15-mil-litros-de-diesel-no-rio-tarauaca/",
@@ -5142,10 +4885,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/brasil-lidera-quadro-de-medalhas-de-gp-de-atletismo-paralimpico",
@@ -5179,10 +4922,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://jurua24horas.com/2026/04/maior-enchente-da-historia-atinge-18-aldeias-na-terra-indigena-rio-gregorio/",
@@ -5413,11 +5156,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/d1714b4a-089e-4d1d-ac92-ceeab3783015-1024x887.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/d1714b4a-089e-4d1d-ac92-ceeab3783015-1024x887.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/alice-puxa-a-rede-da-familia-caymmi-ao-dar-voz-ao-canto-de-oba-no-album-em-que-recria-a-obra-do-avo-dorival.ghtml",
@@ -5426,8 +5165,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T17:18:36.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/alice-puxa-a-rede-da-familia-caymmi-ao-dar-voz-ao-canto-de-oba-no-album-em-que-recria-a-obra-do-avo-dorival.ghtml",
@@ -5484,10 +5223,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687194&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agencia.ac.gov.br/opera-acre-avanca-na-reducao-de-filas-com-novos-mutiroes-cirurgicos-realizados-neste-fim-de-semana/",
@@ -5520,11 +5259,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-25-at-10.35.55-1024x682.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-25-at-10.35.55-1024x682.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/saude/noticia/2026-04/vacinacao-nas-escolas-segue-ate-dia-30-e-meta-e-imunizar-27-milhoes",
@@ -5558,10 +5293,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
-    "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687213&o=rss",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://agencia.ac.gov.br/seguranca-publica-reforca-combate-a-precos-abusivos-de-combustiveis-no-acre-e-amplia-fiscalizacao-no-interior/",
@@ -5594,11 +5329,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-14.39.32-1024x768.jpeg",
-    "originalFeedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-14.39.32-1024x768.jpeg",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://juruacomunicacao.com.br/ifac-abre-40-vagas-para-curso-superior-em-sena-madureira/",
@@ -5766,6 +5497,39 @@ window.NEWS_DATA = [
     "editorialPriority": ""
   },
   {
+    "id": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
+    "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
+    "title": "Mailza define linha de frente da sua campanha ao governo",
+    "eyebrow": "governadora mailza",
+    "date": "25 de abr. de 2026",
+    "publishedAt": "2026-04-25T15:06:34.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
+    "sourceLabel": "Mailza define linha de frente da sua campanha ao governo",
+    "lede": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
+    "summary": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
+    "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 25 de abr. de 2026 a base desta noticia sobre Mailza define linha de frente da sua campanha ao governo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Mailza define linha de frente da sua campanha ao governo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+    "sourceImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+    "feedImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
+  },
+  {
     "id": "https://www.theverge.com/science/918753/researchers-talking-less",
     "slug": "https://www.theverge.com/science/918753/researchers-talking-less",
     "title": "Estudo aponta queda nas conversas presenciais",
@@ -5801,7 +5565,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/gadgets/918410/sharge-icemag-3-qi2-usb-c-wireless-power-bank-battery-deal-sale",
     "slug": "https://www.theverge.com/gadgets/918410/sharge-icemag-3-qi2-usb-c-wireless-power-bank-battery-deal-sale",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T15:00:00.000Z",
@@ -5810,9 +5574,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/918410/sharge-icemag-3-qi2-usb-c-wireless-power-bank-battery-deal-sale",
-    "sourceLabel": " ",
-    "lede": "The Icemag 3’s kickstand allows you to prop up your phone as it recharges. | Image: Cameron Faulkner / The Verge I’ve been testing compact, magnetic Qi2 power banks that can snap onto your phone for an upcoming buying guide.",
-    "summary": "The Icemag 3’s kickstand allows you to prop up your phone as it recharges. | Image: Cameron Faulkner / The Verge I’ve been testing compact, magnetic Qi2 power banks that can snap onto your phone for an upcoming buying guide.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 25 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -5928,9 +5692,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Introduzir-na-materia.jpg-1024x683.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/aline-paes-e-pedro-franco-brincam-a-serio-no-ritmo-dos-afrosambas-em-show-que-festeja-os-60-anos-do-disco-de-1966.ghtml",
@@ -5939,16 +5701,18 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T14:15:44.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/aline-paes-e-pedro-franco-brincam-a-serio-no-ritmo-dos-afrosambas-em-show-que-festeja-os-60-anos-do-disco-de-1966.ghtml",
     "sourceLabel": "Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966",
-    "lede": "Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966.",
-    "summary": "Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966.",
+    "lede": "]]> ♫ CRÍTICA DE SHOW Título: 60 anos de Afro samba Artistas: Aline Paes e Pedro Franco Data e local: 24 de abril de 2026 no Acaso Cultural (Rio de Janeiro, RJ) Cotação: ★ ★ ★ ★ 1/2 Aline Paes e Pedro Franco abordam o...",
+    "summary": "]]> ♫ CRÍTICA DE SHOW Título: 60 anos de Afro samba Artistas: Aline Paes e Pedro Franco Data e local: 24 de abril de 2026 no Acaso Cultural (Rio de Janeiro, RJ) Cotação: ★ ★ ★ ★ 1/2 Aline Paes e Pedro Franco abordam o...",
     "analysis": "",
     "body": [
+      "G1 Pop & Arte publicou em 25 de abr. de 2026 a base desta noticia sobre Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Aline Paes e Pedro Franco brincam a sério no ritmo dos afrosambas em show que festeja os 60 anos do disco de 1966 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -5976,8 +5740,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/governo-acompanha-avanco-das-obras-do-hospital-geral-de-feijo/",
     "sourceLabel": "Governo acompanha avanço das obras do Hospital Geral de Feijó",
-    "lede": "Governo acompanha avanço das obras do Hospital Geral de Feijó. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Governo acompanha avanço das obras do Hospital Geral de Feijó. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Com o objetivo de acompanhar de perto o andamento das obras e reforçar o compromisso do governo do Estado com a qualificação da rede pública de saúde no interior, o secretário de Estado de Saúde, José Bestene, e o secretário de...",
+    "summary": "Com o objetivo de acompanhar de perto o andamento das obras e reforçar o compromisso do governo do Estado com a qualificação da rede pública de saúde no interior, o secretário de Estado de Saúde, José Bestene, e o secretário de...",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 25 de abr. de 2026 a base desta noticia sobre Governo acompanha avanço das obras do Hospital Geral de Feijó. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -5994,9 +5758,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-19.11.14-1-1024x952.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://jurua24horas.com/2026/04/vale-do-jurua-entra-em-alerta-de-perigo-para-chuvas-intensas-neste-sabado/",
@@ -6062,14 +5824,12 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-buscar-na-fonte",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-18.05.33-1-1024x768.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://www.theverge.com/gadgets/913854/govee-uplighter-floor-lamps-caregiving-parkinsons-disease",
     "slug": "https://www.theverge.com/gadgets/913854/govee-uplighter-floor-lamps-caregiving-parkinsons-disease",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T13:30:00.000Z",
@@ -6078,9 +5838,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/913854/govee-uplighter-floor-lamps-caregiving-parkinsons-disease",
-    "sourceLabel": " ",
-    "lede": "I knew things were not quite right when I had to throw a towel over a broken Ikea lamp to block out its light. How did I get here?",
-    "summary": "I knew things were not quite right when I had to throw a towel over a broken Ikea lamp to block out its light. How did I get here?",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 25 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -6234,7 +5994,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/entertainment/918313/director-sho-miyake-interview",
     "slug": "https://www.theverge.com/entertainment/918313/director-sho-miyake-interview",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T12:00:00.000Z",
@@ -6243,9 +6003,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/entertainment/918313/director-sho-miyake-interview",
-    "sourceLabel": " ",
-    "lede": "Acclaimed Japanese director Sho Miyake has arrived in the States.",
-    "summary": "Acclaimed Japanese director Sho Miyake has arrived in the States.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 25 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -6267,7 +6027,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/tech/918695/framework-laptop-stranger-things-installer",
     "slug": "https://www.theverge.com/tech/918695/framework-laptop-stranger-things-installer",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T12:00:00.000Z",
@@ -6276,9 +6036,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918695/framework-laptop-stranger-things-installer",
-    "sourceLabel": " ",
-    "lede": "Hi, friends! Welcome to Installer No. 125, your guide to the best and Verge -iest stuff in the world.",
-    "summary": "Hi, friends! Welcome to Installer No. 125, your guide to the best and Verge -iest stuff in the world.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 25 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -6494,15 +6254,15 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.theverge.com/gadgets/917340/us-worst-smartphones-china-batteries-cameras-apple-iphone-john-ternus",
     "slug": "https://www.theverge.com/gadgets/917340/us-worst-smartphones-china-batteries-cameras-apple-iphone-john-ternus",
-    "title": " ",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T11:00:00.000Z",
@@ -6511,9 +6271,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/917340/us-worst-smartphones-china-batteries-cameras-apple-iphone-john-ternus",
-    "sourceLabel": " ",
-    "lede": "Apple and Samsung dominate the US phone market, and they've done so for years.",
-    "summary": "Apple and Samsung dominate the US phone market, and they've done so for years.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 25 de abr. de 2026 a base desta noticia sobre . Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -6644,8 +6404,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/25/messias-conta-votos-e-adota-tom-conciliador-para-tentar-aprovacao-ao-stf/",
     "sourceLabel": "Messias conta votos e adota tom conciliador para tentar aprovação ao STF",
-    "lede": "Messias conta votos e adota tom conciliador para tentar aprovação ao STF. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Messias conta votos e adota tom conciliador para tentar aprovação ao STF. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "O advogado-geral da União, Jorge Messias • 09/10/2025 &#8211; Daniel Estevão/AscomAGU \" O advogado-geral da União, Jorge Messias, entra na reta final da articulação política para sua sabatina no Senado, etapa decisiva no...",
+    "summary": "O advogado-geral da União, Jorge Messias • 09/10/2025 &#8211; Daniel Estevão/AscomAGU \" O advogado-geral da União, Jorge Messias, entra na reta final da articulação política para sua sabatina no Senado, etapa decisiva no...",
     "analysis": "",
     "body": [
       "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre Messias conta votos e adota tom conciliador para tentar aprovação ao STF. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -6677,8 +6437,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24agro.com/2026/04/25/verticalizacao-da-producao-de-cacau-e-consenso-no-chocolat-festival-amazonia/",
     "sourceLabel": "Verticalização da produção de cacau é consenso no Chocolat Festival Amazônia",
-    "lede": "Verticalização da produção de cacau é consenso no Chocolat Festival Amazônia. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Verticalização da produção de cacau é consenso no Chocolat Festival Amazônia. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Pará e Rondônia já apresentam ao Acre um roteiro do que pode ser aplicado na cadeia produtiva acreana Entre os 300 produtores de cacau presentes na 10ª edição do Chocolat Festival Amazônia, realizado em Belém, há um consenso: a...",
+    "summary": "Pará e Rondônia já apresentam ao Acre um roteiro do que pode ser aplicado na cadeia produtiva acreana Entre os 300 produtores de cacau presentes na 10ª edição do Chocolat Festival Amazônia, realizado em Belém, há um consenso: a...",
     "analysis": "",
     "body": [
       "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre Verticalização da produção de cacau é consenso no Chocolat Festival Amazônia. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -6704,8 +6464,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T10:00:35.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cotidiano",
+    "categoryKey": "cotidiano",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/25/sem-desistencia/",
@@ -6902,8 +6662,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "25 de abr. de 2026",
     "publishedAt": "2026-04-25T05:00:34.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/noticia/2026/04/25/taxa-das-blusinhas-receita-dos-correios-com-encomendas-internacionais-cai-de-22percent-para-8percent.ghtml",
@@ -7139,8 +6899,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/nota-publica-sobre-derramamento-de-oleo-no-rio-tatauaca/",
     "sourceLabel": "Nota pública sobre derramamento de óleo no Rio Tarauacá",
-    "lede": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro",
-    "summary": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro",
+    "lede": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro...",
+    "summary": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro...",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Nota pública sobre derramamento de óleo no Rio Tarauacá. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -7615,15 +7375,11 @@ window.NEWS_DATA = [
     "sourceImageUrl": "",
     "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/Nikolas-Ferreira.jpeg?w=200",
     "imageCredit": "",
-    "imageFocus": "center 50%",
+    "imageFocus": "center 38%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/veja-video-tubarao-baleia-e-flagrado-rompendo-rede-em-arraial-do-cabo-rj/",
@@ -7690,10 +7446,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687210&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/ciencia/hubble-faz-36-anos-de-orbita-veja-imagens-impressionantes-capturadas/",
@@ -7906,8 +7662,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/nao-da-mais-para-esconder-novo-triangulo-amoroso-se-forma-em-coracao-acelerado/",
     "sourceLabel": "Não dá mais para esconder: Novo triângulo amoroso se forma em Coração Acelerado",
-    "lede": "Não dá mais para esconder: Novo triângulo amoroso se forma em Coração Acelerado. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Não dá mais para esconder: Novo triângulo amoroso se forma em Coração Acelerado. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Zuzu (Elisa Lucinda) em cena de Coração Acelerado; ela terá dois pretendentes na novela –",
+    "summary": "Zuzu (Elisa Lucinda) em cena de Coração Acelerado; ela terá dois pretendentes na novela –",
     "analysis": "",
     "body": [
       "ac24horas publicou em 24 de abr. de 2026 a base desta noticia sobre Não dá mais para esconder: Novo triângulo amoroso se forma em Coração Acelerado. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8125,6 +7881,39 @@ window.NEWS_DATA = [
     "editorialPriority": ""
   },
   {
+    "id": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
+    "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
+    "title": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-25T00:03:11.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
+    "sourceLabel": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
+    "lede": "Com foco no desenvolvimento rural e na promoção da segurança alimentar, a governadora Mailza Assis lançou o Programa Estadual de Aquisição de Alimentos (PEAA) em Tarauacá, na tarde desta sexta-feira, 24, consolidando uma...",
+    "summary": "Com foco no desenvolvimento rural e na promoção da segurança alimentar, a governadora Mailza Assis lançou o Programa Estadual de Aquisição de Alimentos (PEAA) em Tarauacá, na tarde desta sexta-feira, 24, consolidando uma...",
+    "analysis": "",
+    "body": [
+      "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
+  },
+  {
     "id": "https://ac24horas.com/2026/04/24/campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado/",
     "slug": "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado",
     "title": "Campeã do BBB 26, Ana Paula Renault estará no Saia Justa: ‘Um chamado’",
@@ -8197,8 +7986,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T23:54:28.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-politica",
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/mercado/derivativos-entenda-diferenca-entre-operacoes-permitidas-e-proibidas/",
@@ -8288,10 +8077,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687209&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687209&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/entretenimento/grazi-massafera-reflete-sobre-maternidade-ficticia-e-da-vida-real/",
@@ -8358,10 +8147,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687207&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687207&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/agro/brasil-adere-a-programa-da-ocde-e-amplia-presenca-em-pesquisa-agropecuaria/",
@@ -8469,8 +8258,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T23:36:27.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Negócios",
+    "categoryKey": "negocios",
     "previewClass": "thumb-politica",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/feira-da-cidadania-do-governo-federal-chega-a-rio-branco-na-quarta-29/",
@@ -8574,8 +8363,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
     "sourceLabel": "Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze",
-    "lede": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema",
-    "summary": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema",
+    "lede": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema...",
+    "summary": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema...",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8593,10 +8382,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687202&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
@@ -8605,14 +8394,14 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T22:39:05.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
     "previewClass": "thumb-politica",
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
     "sourceLabel": "Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre",
-    "lede": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última",
-    "summary": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última",
+    "lede": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última...",
+    "summary": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8629,9 +8418,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_2778-1024x576.jpg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios",
@@ -8640,14 +8427,14 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T22:37:47.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
     "previewClass": "thumb-politica",
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios",
     "sourceLabel": "Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários",
-    "lede": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas",
-    "summary": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas",
+    "lede": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas...",
+    "summary": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8664,9 +8451,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-15.49.03-1024x683.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-inaugura-sede-da-regional-educacional-santa-luzia-campinas",
@@ -8714,8 +8499,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
     "sourceLabel": "PGR dá aval para Bolsonaro fazer cirurgia no ombro",
-    "lede": "PGR dá aval para Bolsonaro fazer cirurgia no ombro. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "PGR dá aval para Bolsonaro fazer cirurgia no ombro. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "O procurador-geral da República, Paulo Gonet, enviou nesta sexta-feira (24) ao Supremo Tribunal Federal (STF) parecer favorável ao pedido do ex-presidente Jair Bolsonaro para deixar a prisão domiciliar e fazer uma cirurgia no...",
+    "summary": "O procurador-geral da República, Paulo Gonet, enviou nesta sexta-feira (24) ao Supremo Tribunal Federal (STF) parecer favorável ao pedido do ex-presidente Jair Bolsonaro para deixar a prisão domiciliar e fazer uma cirurgia no...",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre PGR dá aval para Bolsonaro fazer cirurgia no ombro. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8733,10 +8518,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687199&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
@@ -8751,8 +8536,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
     "sourceLabel": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-    "lede": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes.",
-    "summary": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes",
+    "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Obras, Desenvolvimento Humano e Habitação segue nesta sexta-feira, 24, com a operação tapa-buracos no Bairro Aeroporto Velho, sendo aplicada 20 toneladas no...",
+    "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Obras, Desenvolvimento Humano e Habitação segue nesta sexta-feira, 24, com a operação tapa-buracos no Bairro Aeroporto Velho, sendo aplicada 20 toneladas no...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8817,8 +8602,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
     "sourceLabel": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
-    "lede": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Saúde, realizará neste sábado, 25, e domingo, 26, uma ação de atendimento itinerante nas comunidades Morada Nova e São Raimundo, localizadas na região do...",
+    "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Saúde, realizará neste sábado, 25, e domingo, 26, uma ação de atendimento itinerante nas comunidades Morada Nova e São Raimundo, localizadas na região do...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -8869,10 +8654,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687197&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://batelao.com/fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima/?utm_source=rss&utm_medium=rss&utm_campaign=fortes-chuvas-causam-prejuizos-e-mobilizam-forca-tarefa-da-prefeitura-em-mancio-lima",
@@ -8934,15 +8719,11 @@ window.NEWS_DATA = [
     "sourceImageUrl": "",
     "feedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687196&o=rss",
     "imageCredit": "",
-    "imageFocus": "center 50%",
+    "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/convocacao-final-para-copa-tera-museu-do-amanha-como-palco",
@@ -9023,8 +8804,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao/?utm_source=rss&utm_medium=rss&utm_campaign=chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
     "sourceLabel": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população",
-    "lede": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Por Miguel França O governo do Acre, por meio da Defesa Civil Estadual, alerta, nesta sexta-feira, 24, para a continuidade de chuvas intensas nos próximos dias, com previsão de acumulados significativos, principalmente nas...",
+    "summary": "Por Miguel França O governo do Acre, por meio da Defesa Civil Estadual, alerta, nesta sexta-feira, 24, para a continuidade de chuvas intensas nos próximos dias, com previsão de acumulados significativos, principalmente nas...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9041,9 +8822,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-08.45.33-1-1024x682.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "https://batelao.com/saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao/?utm_source=rss&utm_medium=rss&utm_campaign=saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
@@ -9058,8 +8837,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao/?utm_source=rss&utm_medium=rss&utm_campaign=saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
     "sourceLabel": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização",
-    "lede": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Por Abigail Sunamita Com o objetivo de ampliar o acesso a imunobiológicos especiais em todo o estado, a Secretaria de Estado de Saúde do Acre (Sesacre) realizou, nesta sexta-feira, 24 de abril de 2026, o lançamento oficial do...",
+    "summary": "Por Abigail Sunamita Com o objetivo de ampliar o acesso a imunobiológicos especiais em todo o estado, a Secretaria de Estado de Saúde do Acre (Sesacre) realizou, nesta sexta-feira, 24 de abril de 2026, o lançamento oficial do...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9076,9 +8855,73 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/IMG_3770-1024x683.jpeg"
+    "editorialPriority": ""
+  },
+  {
+    "id": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T21:57:54.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "sourceLabel": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
+    "lede": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
+    "summary": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
+  },
+  {
+    "id": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T21:56:12.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "sourceLabel": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
+    "lede": "Por James Rodrigues Reafirmando o compromisso do governo com a segurança no estado, a governadora Mailza Assis, entregou nesta sexta-feira, 24, três viaturas, além de barco e equipamentos operacionais à Polícia Civil de...",
+    "summary": "Por James Rodrigues Reafirmando o compromisso do governo com a segurança no estado, a governadora Mailza Assis, entregou nesta sexta-feira, 24, três viaturas, além de barco e equipamentos operacionais à Polícia Civil de...",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/aneel-define-que-maio-tera-bandeira-tarifaria-amarela",
@@ -9112,10 +8955,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte",
     "originalImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
     "originalFeedImageUrl": "https://agenciabrasil.ebc.com.br/ebc.gif?id=1687191&o=rss",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/24/apostas-nao-financeiras-em-plataformas-de-previsoes-sao-proibidas/",
@@ -9196,8 +9039,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/stf-tem-maioria-para-manter-prisao-de-ex-presidente-do-brb/",
     "sourceLabel": "STF tem maioria para manter prisão de ex-presidente do BRB",
-    "lede": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente",
-    "summary": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente",
+    "lede": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente...",
+    "summary": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente...",
     "analysis": "",
     "body": [
       "ac24horas publicou em 24 de abr. de 2026 a base desta noticia sobre STF tem maioria para manter prisão de ex-presidente do BRB. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9295,8 +9138,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/dois-sao-presos-por-trafico-de-drogas-no-bairro-da-paz-em-rio-branco/",
     "sourceLabel": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco",
-    "lede": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "A Polícia Civil do Acre (PCAC), por meio de investigadores da Delegacia de Repressão ao Narcotráfico (Denarc), apreendeu no início da desta sexta-feira, 24, cerca de 26 trouxinhas de maconha e um invólucro de cocaína durante...",
+    "summary": "A Polícia Civil do Acre (PCAC), por meio de investigadores da Delegacia de Repressão ao Narcotráfico (Denarc), apreendeu no início da desta sexta-feira, 24, cerca de 26 trouxinhas de maconha e um invólucro de cocaína durante...",
     "analysis": "",
     "body": [
       "ac24horas publicou em 24 de abr. de 2026 a base desta noticia sobre Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9361,8 +9204,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/procon-participa-da-operacao-combustivel-zero-em-rio-branco/",
     "sourceLabel": "Procon participa da Operação Combustível Zero em Rio Branco",
-    "lede": "Procon participa da Operação Combustível Zero em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Procon participa da Operação Combustível Zero em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "Em ato conjunto realizado a convite do Ministério Público do Estado do Acre (MPAC), o governo do Acre, por meio do Instituto de Proteção e Defesa do Consumidor do Acre (Procon), participou, na última quinta-feira, 23, da...",
+    "summary": "Em ato conjunto realizado a convite do Ministério Público do Estado do Acre (MPAC), o governo do Acre, por meio do Instituto de Proteção e Defesa do Consumidor do Acre (Procon), participou, na última quinta-feira, 23, da...",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Procon participa da Operação Combustível Zero em Rio Branco. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9413,10 +9256,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://ac24horas.com/2026/04/24/educacao-divulga-lista-de-aprovados-para-escuta-do-coro-lirico-veja-nomes/",
@@ -9497,8 +9340,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/governo-do-acre-fortalece-parceria-com-cozinha-solidaria-para-ampliar-atendimento-a-familias-em-vulnerabilidade/",
     "sourceLabel": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade",
-    "lede": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t",
-    "summary": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t",
+    "lede": "A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) realizou, nesta sexta-feira, 24, uma visita institucional à Cozinha Solidária Marielle Franco, em Rio Branco, com o objetivo de fortalecer o termo de...",
+    "summary": "A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) realizou, nesta sexta-feira, 24, uma visita institucional à Cozinha Solidária Marielle Franco, em Rio Branco, com o objetivo de fortalecer o termo de...",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9520,7 +9363,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/tech/918572/microsoft-windows-updates-pause-35-days",
     "slug": "microsoft-will-let-you-pause-windows-updates-indefinitely-35-days-at-a-time",
-    "title": "Microsoft will let you pause Windows Updates indefinitely, 35 days at a time",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T20:45:58.000Z",
@@ -9529,13 +9372,13 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918572/microsoft-windows-updates-pause-35-days",
-    "sourceLabel": "Microsoft will let you pause Windows Updates indefinitely, 35 days at a time",
-    "lede": "Usuários do Windows não devem mais ser forçados a instalar atualizações automáticas no meio do uso.",
-    "summary": "Usuários do Windows não devem mais ser forçados a instalar atualizações automáticas no meio do uso.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
-      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre Microsoft will let you pause Windows Updates indefinitely, 35 days at a time. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Microsoft will let you pause Windows Updates indefinitely, 35 days at a time e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -9582,10 +9425,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://juruacomunicacao.com.br/idoso-e-encontrado-morto-em-ramal-de-rio-branco/",
@@ -9689,7 +9532,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/news/918527/alex-jones-infowars-takeover-the-onion-tim-heidecker",
     "slug": "alex-jones-has-uncovered-another-massive-conspiracy",
-    "title": "Alex Jones has uncovered another massive conspiracy",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T20:10:00.000Z",
@@ -9698,13 +9541,13 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/news/918527/alex-jones-infowars-takeover-the-onion-tim-heidecker",
-    "sourceLabel": "Alex Jones has uncovered another massive conspiracy",
-    "lede": "Alex Jones may soon lose Infowars, the digital perch that he's used for decades to traffic in conspiracy theories, to The Onion, the satirical newspaper.",
-    "summary": "Alex Jones may soon lose Infowars, the digital perch that he's used for decades to traffic in conspiracy theories, to The Onion, the satirical newspaper.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
-      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre Alex Jones has uncovered another massive conspiracy. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Alex Jones has uncovered another massive conspiracy e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -9726,8 +9569,8 @@ window.NEWS_DATA = [
     "eyebrow": "prefeitura",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T20:08:50.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
+    "category": "Cultura",
+    "categoryKey": "cultura",
     "previewClass": "thumb-politica",
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/24/simone-seu-jorge-silva-ze-ibarra-e-zelia-duncan-cantam-henri-salvador-em-album-agendado-para-fim-de-junho.ghtml",
@@ -9883,15 +9726,48 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
+    "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
+    "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T19:58:21.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
+    "sourceLabel": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
+    "lede": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
+    "summary": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
+    "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://www.theverge.com/entertainment/918250/avatar-aang-the-last-airbender-leaks-arrest-paramount-plus",
     "slug": "the-person-who-allegedly-leaked-paramount-s-new-avatar-movie-has-been-arrested",
-    "title": "The person who allegedly leaked Paramount’s new Avatar movie has been arrested",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T19:45:01.000Z",
@@ -9900,9 +9776,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/entertainment/918250/avatar-aang-the-last-airbender-leaks-arrest-paramount-plus",
-    "sourceLabel": "The person who allegedly leaked Paramount’s new Avatar movie has been arrested",
-    "lede": "Following Paramount Skydance's move to launch an investigation into how its upcoming Avatar Aang: The Last Airbender animated feature leaked onto the internet, a suspect has been taken into custody by police.",
-    "summary": "Following Paramount Skydance's move to launch an investigation into how its upcoming Avatar Aang: The Last Airbender animated feature leaked onto the internet, a suspect has been taken into custody by police.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre The person who allegedly leaked Paramount’s new Avatar movie has been arrested. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -9953,6 +9829,39 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": ""
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
+    "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+    "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T19:28:41.000Z",
+    "category": "Política",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
+    "sourceLabel": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
+    "lede": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
+    "summary": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
+    "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
   },
   {
     "id": "https://g1.globo.com/pop-arte/cinema/noticia/2026/04/24/filho-de-rob-reiner-publica-carta-sobre-morte-dos-pais-e-julgamento-do-irmao-e-quase-impossivel-de-processar.ghtml",
@@ -10023,7 +9932,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/tech/918216/bmw-ix3-flow-edition-concept-car-2026-beijing-auto-show-e-ink-color-changing",
     "slug": "bmw-is-one-step-closer-to-selling-you-a-color-changing-car",
-    "title": "BMW is one step closer to selling you a color-changing car",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T17:31:44.000Z",
@@ -10032,9 +9941,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918216/bmw-ix3-flow-edition-concept-car-2026-beijing-auto-show-e-ink-color-changing",
-    "sourceLabel": "BMW is one step closer to selling you a color-changing car",
-    "lede": "At CES 2022, BMW debuted its BMW iX Flow concept car that could dynamically change its appearance using the same grayscale E Ink panels found in e-readers like the Kindle.",
-    "summary": "At CES 2022, BMW debuted its BMW iX Flow concept car that could dynamically change its appearance using the same grayscale E Ink panels found in e-readers like the Kindle.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre BMW is one step closer to selling you a color-changing car. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -10056,7 +9965,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/gadgets/917924/google-pixel-watch-4-apple-airpods-deal-sale",
     "slug": "google-s-handsome-pixel-watch-4-is-on-sale-for-40-off-in-both-size-configurations",
-    "title": "Google’s handsome Pixel Watch 4 is on sale for $40 off in both size configurations",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T17:25:49.000Z",
@@ -10065,9 +9974,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/917924/google-pixel-watch-4-apple-airpods-deal-sale",
-    "sourceLabel": "Google’s handsome Pixel Watch 4 is on sale for $40 off in both size configurations",
-    "lede": "Spring has sprung, as they say, and to mark the occasion, Google is running a spring-centric promo until Sunday, April 26th.",
-    "summary": "Spring has sprung, as they say, and to mark the occasion, Google is running a spring-centric promo until Sunday, April 26th.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre Google’s handsome Pixel Watch 4 is on sale for $40 off in both size configurations. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -10122,7 +10031,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/tech/918301/samsung-south-korea-union-protests",
     "slug": "the-ram-shortage-could-get-even-worse-if-samsung-labor-protests-cut-production",
-    "title": "Escassez de RAM pode piorar com protestos na Samsung",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T17:11:33.000Z",
@@ -10131,13 +10040,13 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/918301/samsung-south-korea-union-protests",
-    "sourceLabel": "A escassez de RAM pode piorar se protestos na Samsung afetarem a produção.",
-    "lede": "A escassez de RAM, pressionada pela demanda de IA, pode piorar se protestos na Samsung afetarem a produção.",
-    "summary": "A escassez de RAM, pressionada pela demanda de IA, pode piorar se protestos na Samsung afetarem a produção.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
-      "A escassez de RAM pode piorar se protestos na Samsung afetarem a produção.",
-      "A escassez de RAM pode piorar se protestos na Samsung afetarem a produção.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -10155,7 +10064,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/ai-artificial-intelligence/917996/project-maven-military-ai-katrina-manson",
     "slug": "how-project-maven-taught-the-military-to-love-ai",
-    "title": "How Project Maven taught the military to love AI",
+    "title": "Como o Project Maven aproximou os militares da IA",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T17:00:00.000Z",
@@ -10164,9 +10073,9 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/917996/project-maven-military-ai-katrina-manson",
-    "sourceLabel": "How Project Maven taught the military to love AI",
-    "lede": "Nas primeiras 24 horas do ataque ao Irã, os EUA disseram ter atingido mais de 1.000 alvos, em escala maior que a ofensiva no Iraque.",
-    "summary": "Nas primeiras 24 horas do ataque ao Irã, os EUA disseram ter atingido mais de 1.000 alvos, em escala maior que a ofensiva no Iraque.",
+    "sourceLabel": "Como o Project Maven aproximou os militares da IA",
+    "lede": "The Verge publicou uma atualização sobre Como o Project Maven aproximou os militares da IA. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Como o Project Maven aproximou os militares da IA. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
       "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre How Project Maven taught the military to love AI. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -10186,9 +10095,42 @@ window.NEWS_DATA = [
     "editorialPriority": ""
   },
   {
+    "id": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
+    "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
+    "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T16:47:11.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
+    "sourceLabel": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
+    "lede": "Em mais um dia de agendas em Cruzeiro do Sul, a governadora Mailza Assis concedeu, na manhã desta sexta-feira, 24, entrevista à plataforma Juruá Comunicação, conduzida pelo jornalista Alexandre Gomes, e avaliou o início de sua",
+    "summary": "Em mais um dia de agendas em Cruzeiro do Sul, a governadora Mailza Assis concedeu, na manhã desta sexta-feira, 24, entrevista à plataforma Juruá Comunicação, conduzida pelo jornalista Alexandre Gomes, e avaliou o início de sua",
+    "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 24 de abr. de 2026 a base desta noticia sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade"
+  },
+  {
     "id": "https://www.theverge.com/gadgets/918169/xreal-one-pro-ar-glasses-price-cut-deal-sale",
     "slug": "xreal-s-best-ar-glasses-are-599-for-good-now",
-    "title": "Xreal’s best AR glasses are $599 for good now",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T16:33:30.000Z",
@@ -10197,13 +10139,13 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/918169/xreal-one-pro-ar-glasses-price-cut-deal-sale",
-    "sourceLabel": "Xreal’s best AR glasses are $599 for good now",
-    "lede": "The Xreal One Pro are the company’s best AR glasses, touting thin optics that keep out reflections so you can enjoy a crisp, contrast-rich image of whatever content you’re watching.",
-    "summary": "The Xreal One Pro are the company’s best AR glasses, touting thin optics that keep out reflections so you can enjoy a crisp, contrast-rich image of whatever content you’re watching.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
-      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre Xreal’s best AR glasses are $599 for good now. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Xreal’s best AR glasses are $599 for good now e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -10320,7 +10262,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/tech/914730/splatica-gaussian-splats-insta360-antigravity",
     "slug": "360-degree-cameras-have-a-new-superpower",
-    "title": "360-degree cameras have a new superpower",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T15:30:00.000Z",
@@ -10329,13 +10271,13 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/914730/splatica-gaussian-splats-insta360-antigravity",
-    "sourceLabel": "360-degree cameras have a new superpower",
-    "lede": "Imagine Google Street View, except you can walk around like it's a video game. Now imagine you don't need to wait for Google to come film because it's completely DIY.",
-    "summary": "Imagine Google Street View, except you can walk around like it's a video game. Now imagine you don't need to wait for Google to come film because it's completely DIY.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
-      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre 360-degree cameras have a new superpower. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "360-degree cameras have a new superpower e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -10353,7 +10295,7 @@ window.NEWS_DATA = [
   {
     "id": "https://www.theverge.com/transportation/918106/tesla-cybercab-production-robotaxi-elon-musk-earnings",
     "slug": "tesla-s-cybercab-goes-into-production-so-why-is-musk-tapping-the-brakes",
-    "title": "Tesla’s Cybercab goes into production — so why is Musk tapping the brakes?",
+    "title": "Atualização internacional de The Verge",
     "eyebrow": "cotidiano",
     "date": "24 de abr. de 2026",
     "publishedAt": "2026-04-24T15:17:27.000Z",
@@ -10362,13 +10304,13 @@ window.NEWS_DATA = [
     "previewClass": "thumb-cheia",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/transportation/918106/tesla-cybercab-production-robotaxi-elon-musk-earnings",
-    "sourceLabel": "Tesla’s Cybercab goes into production — so why is Musk tapping the brakes?",
-    "lede": "Tesla's Cybercab is now in production at the company's Gigafactory in Austin, Texas, but Elon Musk is sounding unusually cautious about the rollout.",
-    "summary": "Tesla's Cybercab is now in production at the company's Gigafactory in Austin, Texas, but Elon Musk is sounding unusually cautious about the rollout.",
+    "sourceLabel": "Atualização internacional de The Verge",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "body": [
-      "The Verge publicou em 24 de abr. de 2026 a base desta noticia sobre Tesla’s Cybercab goes into production — so why is Musk tapping the brakes?. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Tesla’s Cybercab goes into production — so why is Musk tapping the brakes? e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
+      "Notícia internacional (fonte: The Verge). O portal apresenta o essencial e mantém o acesso direto para a fonte completa.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -10561,8 +10503,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/04/23/cantor-dv4d-acusado-de-homicidio-guardava-pornografia-infantil-no-celular-diz-tv.ghtml",
     "sourceLabel": "Cantor D4vd, acusado de homicídio, guardava pornografia infantil no celular, diz TV",
-    "lede": "Cantor D4vd, acusado de homicídio, guardava pornografia infantil no celular, diz TV. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Cantor D4vd, acusado de homicídio, guardava pornografia infantil no celular, diz TV. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "lede": "]]> Cantor D4vd em área restrita a artistas no festival de música Coachella, em 18 de abril de 2025 AP Photo O cantor D4vd, acusado de matar a jovem Celeste Rivas Hernandez, de 14 anos, tinha uma grande quantidade de...",
+    "summary": "]]> Cantor D4vd em área restrita a artistas no festival de música Coachella, em 18 de abril de 2025 AP Photo O cantor D4vd, acusado de matar a jovem Celeste Rivas Hernandez, de 14 anos, tinha uma grande quantidade de...",
     "analysis": "",
     "body": [
       "G1 Pop & Arte publicou em 23 de abr. de 2026 a base desta noticia sobre Cantor D4vd, acusado de homicídio, guardava pornografia infantil no celular, diz TV. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -10721,9 +10663,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
@@ -10766,9 +10706,7 @@ window.NEWS_DATA = [
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": ""
+    "editorialPriority": ""
   },
   {
     "id": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/23/ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia.ghtml",
@@ -11099,10 +11037,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "tenda-saude-cheia-jurua",
@@ -11112,14 +11050,11 @@ window.NEWS_DATA = [
     "date": "8 de abril de 2026",
     "publishedAt": "2026-04-08T14:15:00-05:00",
     "category": "Saúde",
+    "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/08/cruzeiro-do-sul-realiza-atendimento-em-tenda-montada-apos-inundacao-de-unidades-de-saude-durante-cheia-do-rio-jurua/",
     "sourceLabel": "Cruzeiro do Sul realiza atendimento em tenda montada apos inundacao de unidades de saude durante cheia do Rio Jurua",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
-    "imageCredit": "Credito: ac24horas",
     "lede": "A cheia atingiu unidades de saude e obrigou a prefeitura a montar uma estrutura temporaria para manter consultas, vacinacao e exames.",
     "summary": "A cheia atingiu unidades de saude e obrigou a prefeitura a montar uma estrutura temporaria para manter consultas, vacinacao e exames.",
     "analysis": "O arquivo registra a transicao da emergencia hidrica para uma resposta sanitaria mais organizada no territorio.",
@@ -11132,8 +11067,11 @@ window.NEWS_DATA = [
       "Atendimento mantido",
       "Resposta emergencial"
     ],
-    "categoryKey": "saude",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/475a76bf-6f34-49d1-a5ff-9b780c4e7989-1200x900.avif",
+    "imageCredit": "Credito: ac24horas",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
@@ -11148,14 +11086,11 @@ window.NEWS_DATA = [
     "date": "7 de abril de 2026",
     "publishedAt": "2026-04-07T00:00:00-05:00",
     "category": "Cotidiano",
+    "categoryKey": "cotidiano",
     "previewClass": "thumb-cheia",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/07/vazante-do-rio-jurua-segue-em-cruzeiro-do-sul/",
     "sourceLabel": "Vazante do rio Jurua segue em Cruzeiro do Sul",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "A reducao do nivel do rio mantem o processo de retorno gradual e limpeza dos bairros.",
     "summary": "A reducao do nivel do rio mantem o processo de retorno gradual e limpeza dos bairros.",
     "analysis": "A volta exige apoio logistico e vigilancia sanitaria para evitar novos riscos.",
@@ -11168,8 +11103,11 @@ window.NEWS_DATA = [
       "Limpeza pesada",
       "Monitoramento da Defesa Civil"
     ],
-    "categoryKey": "cotidiano",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/f8a2b97e-0c70-4dd1-80ba-f49d722f13de-1200x900.jpeg",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
@@ -11184,14 +11122,11 @@ window.NEWS_DATA = [
     "date": "4 de abril de 2026",
     "publishedAt": "2026-04-04T00:00:00-05:00",
     "category": "Social",
+    "categoryKey": "social",
     "previewClass": "thumb-social",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/04/em-bairros-alagados-moradores-mantem-rotina-apesar-da-cheia-do-jurua/",
     "sourceLabel": "Moradores mantem rotina apesar da cheia do Jurua",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "Moradores convivem com agua nas ruas e improvisam solucoes para seguir trabalhando.",
     "summary": "Moradores convivem com agua nas ruas e improvisam solucoes para seguir trabalhando.",
     "analysis": "A leitura humana da cheia mostra impacto que numeros nao revelam.",
@@ -11204,15 +11139,16 @@ window.NEWS_DATA = [
       "Bairros alagados",
       "Resiliencia local"
     ],
-    "categoryKey": "social",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/88ced993-2634-4455-923a-72ab65fcf792-1200x983.avif"
+    "editorialPriority": ""
   },
   {
     "id": "saude-familias-abrigadas",
@@ -11222,14 +11158,11 @@ window.NEWS_DATA = [
     "date": "4 de abril de 2026",
     "publishedAt": "2026-04-04T00:00:00-05:00",
     "category": "Saúde",
+    "categoryKey": "saude",
     "previewClass": "thumb-saude",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/04/saude-chega-a-familias-abrigadas-por-enchente-em-cruzeiro-do-sul/",
     "sourceLabel": "Saude chega a familias abrigadas por enchente",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "Equipes medicas e de enfermagem atendem familias deslocadas para evitar agravamento de doencas.",
     "summary": "Equipes medicas e de enfermagem atendem familias deslocadas para evitar agravamento de doencas.",
     "analysis": "A prevencao dentro dos abrigos ajuda a reduzir pressao no Hospital do Jurua.",
@@ -11242,8 +11175,11 @@ window.NEWS_DATA = [
       "Prevencao",
       "Monitoramento diario"
     ],
-    "categoryKey": "saude",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/233e1da1-dd58-4804-93ea-f17875b2734a-1200x900.avif",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
@@ -11258,14 +11194,11 @@ window.NEWS_DATA = [
     "date": "3 de abril de 2026",
     "publishedAt": "2026-04-03T00:00:00-05:00",
     "category": "Utilidade Pública",
+    "categoryKey": "utilidade publica",
     "previewClass": "thumb-servico",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/03/prefeitura-distribui-mais-de-2-mil-galoes-de-agua-mineral-para-familias-atingidas-pela-cheia-do-rio-jurua/",
     "sourceLabel": "Prefeitura distribui mais de 2 mil galoes de agua mineral",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "Distribuicao de agua tratada e cestas basicas ganha prioridade nos bairros mais criticos.",
     "summary": "Distribuicao de agua tratada e cestas basicas ganha prioridade nos bairros mais criticos.",
     "analysis": "O Catalogo acompanha a logistica de suprimentos como indicador de resposta rapida.",
@@ -11278,15 +11211,16 @@ window.NEWS_DATA = [
       "Cestas basicas",
       "Operacao emergencial"
     ],
-    "categoryKey": "utilidade publica",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/021890ad-3fd5-4feb-9eab-f0f2f7176f41-1200x675.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "mais-12-mil-afetados",
@@ -11296,12 +11230,11 @@ window.NEWS_DATA = [
     "date": "1 de abril de 2026",
     "publishedAt": "2026-04-01T00:00:00-05:00",
     "category": "Cotidiano",
+    "categoryKey": "cotidiano",
     "previewClass": "thumb-cheia",
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/01/mais-de-12-mil-pessoas-sao-afetadas-pela-cheia-do-rio-jurua-e-cruzeiro-do-sul-abre-2-abrigo/",
     "sourceLabel": "Mais de 12 mil pessoas sao afetadas pela cheia do Rio Jurua",
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
-    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "lede": "O inicio do mes consolidou a enchente como principal assunto da cidade, com ampliacao dos abrigos.",
     "summary": "O inicio do mes consolidou a enchente como principal assunto da cidade, com ampliacao dos abrigos.",
     "analysis": "O Catalogo destaca o impacto imediato da cheia na rotina urbana e nos servicos publicos.",
@@ -11314,17 +11247,16 @@ window.NEWS_DATA = [
       "Abertura de novos abrigos",
       "Rotina reorganizada"
     ],
-    "categoryKey": "cotidiano",
     "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
     "sourceImageUrl": "",
     "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg",
+    "imageCredit": "Credito: ac24horas | Foto: Defesa Civil",
     "imageFocus": "center 42%",
     "imageFit": "",
     "media": null,
     "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/42a2e873-7f5f-4c76-aa19-9557ae81a55d-1220x813.jpeg"
+    "editorialPriority": ""
   },
   {
     "id": "home-linked-eja-czs-superacao",
@@ -11407,45 +11339,8 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/aldir-blanc-cultura-czs.svg"
-  },
-  {
-    "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
-    "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
-    "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
-    "eyebrow": "policia",
-    "date": "23 de mar. de 2026",
-    "publishedAt": "2026-03-23T20:55:20.000Z",
-    "category": "Polícia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Tribuna do Jurua",
-    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
-    "sourceLabel": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
-    "lede": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "analysis": "",
-    "body": [
-      "Tribuna do Jurua publicou em 23 de mar. de 2026 a base desta noticia sobre Renovação Licença de Operação – Pioneiro Combustíveis LTDA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Renovação Licença de Operação – Pioneiro Combustíveis LTDA e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
-    "feedImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalImageUrl": "/assets/news-fallbacks/aldir-blanc-cultura-czs.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
@@ -11479,10 +11374,47 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
+    "slug": "renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda",
+    "title": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+    "eyebrow": "policia",
+    "date": "23 de mar. de 2026",
+    "publishedAt": "2026-03-23T20:55:20.000Z",
+    "category": "Polícia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Tribuna do Jurua",
+    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/renovacao-licenca-de-operacao-pioneiro-combustiveis-ltda/",
+    "sourceLabel": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA",
+    "lede": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Renovação Licença de Operação &#8211; Pioneiro Combustíveis LTDA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "body": [
+      "Tribuna do Jurua publicou em 23 de mar. de 2026 a base desta noticia sobre Renovação Licença de Operação – Pioneiro Combustíveis LTDA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Renovação Licença de Operação – Pioneiro Combustíveis LTDA e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+    "feedImageUrl": "/assets/news-fallbacks/renovacao-licenca-de-operacao-8211-pioneiro-combustiveis-ltda.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/recebimento-licenca-previa-josias-o-da-silva-epp/",
@@ -11516,10 +11448,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua/",
@@ -11631,43 +11563,6 @@ window.NEWS_DATA = [
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
-    "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
-    "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
-    "eyebrow": "policia",
-    "date": "23 de fev. de 2026",
-    "publishedAt": "2026-02-23T15:02:43.000Z",
-    "category": "Polícia",
-    "categoryKey": "policia",
-    "previewClass": "thumb-policia",
-    "sourceName": "Tribuna do Jurua",
-    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
-    "sourceLabel": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
-    "lede": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "analysis": "",
-    "body": [
-      "Tribuna do Jurua publicou em 23 de fev. de 2026 a base desta noticia sobre Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
-    "feedImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
-  },
-  {
-    "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
     "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe",
     "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE",
     "eyebrow": "policia",
@@ -11698,10 +11593,47 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
+    "slug": "licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe",
+    "title": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+    "eyebrow": "policia",
+    "date": "23 de fev. de 2026",
+    "publishedAt": "2026-02-23T15:02:43.000Z",
+    "category": "Polícia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "Tribuna do Jurua",
+    "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-spe-3/",
+    "sourceLabel": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE",
+    "lede": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA &#8211; SPE. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "body": [
+      "Tribuna do Jurua publicou em 23 de fev. de 2026 a base desta noticia sobre Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Licença de Operação- RIO MOA EMPREENDIMENTOS IMOBILIARIOS LTDA – SPE e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+    "feedImageUrl": "/assets/news-fallbacks/licenca-de-operacao-rio-moa-empreendimentos-imobiliarios-ltda-8211-spe.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-estadodo-acre/",
@@ -11735,10 +11667,10 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte",
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
-    "originalSourceImageUrl": ""
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://tribunadojurua.com.br/geral/edital-de-convocacao-associacao-de-cabelereiros-de-cruzeiro-do-sul-acre/",
@@ -11813,6 +11745,48 @@ window.NEWS_DATA = [
     "priority": 0,
     "editorialPriority": "",
     "originalImageUrl": "/assets/news-fallbacks/faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
+  },
+  {
+    "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+    "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+    "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+    "eyebrow": "saude",
+    "date": "data recente",
+    "publishedAt": "data recente",
+    "category": "Saúde",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "Fonte local",
+    "sourceUrl": "#",
+    "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+    "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+    "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+    "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+    "body": [
+      "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
+      "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+    ],
+    "highlights": [
+      "Saúde, Governo e Agricultura concentram alterações de comissionados",
+      "Fonte local",
+      "Saude"
+    ],
+    "development": [
+      "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+      "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+      "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+    ],
+    "imageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+    "sourceImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+    "feedImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
     "imageQuality": "imagem-ausente-ou-generica"
   },
   {
@@ -11985,48 +11959,6 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica"
   },
   {
-    "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-    "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-    "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-    "eyebrow": "saude",
-    "date": "data recente",
-    "publishedAt": "data recente",
-    "category": "Saúde",
-    "categoryKey": "saude",
-    "previewClass": "thumb-saude",
-    "sourceName": "Fonte local",
-    "sourceUrl": "#",
-    "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-    "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-    "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-    "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-    "body": [
-      "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
-      "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-    ],
-    "highlights": [
-      "Saúde, Governo e Agricultura concentram alterações de comissionados",
-      "Fonte local",
-      "Saude"
-    ],
-    "development": [
-      "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-      "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-      "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-    ],
-    "imageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-    "sourceImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-    "feedImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg"
-  },
-  {
     "id": "home-linked-vazante-retorno-seguro",
     "slug": "vazante-retorno-seguro",
     "title": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
@@ -12065,8 +11997,8 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg"
+    "originalImageUrl": "/assets/news-fallbacks/vazante-retorno-seguro.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-ifac-professores-czs",
@@ -12108,8 +12040,8 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/ifac-professores-czs.svg"
+    "originalImageUrl": "/assets/news-fallbacks/ifac-professores-czs.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-zequinha-assistencia-cheia",
@@ -12151,8 +12083,8 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/zequinha-assistencia-cheia.svg"
+    "originalImageUrl": "/assets/news-fallbacks/zequinha-assistencia-cheia.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
@@ -12193,8 +12125,8 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg"
+    "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-victor-macario-viral",
@@ -12235,8 +12167,8 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/victor-macario-viral.svg"
+    "originalImageUrl": "/assets/news-fallbacks/victor-macario-viral.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   },
   {
     "id": "home-linked-vazante-jurua-segue",
@@ -12278,7 +12210,7 @@ window.NEWS_DATA = [
     "media": null,
     "priority": 0,
     "editorialPriority": "",
-    "imageQuality": "imagem-ausente-ou-generica",
-    "originalImageUrl": "/assets/news-fallbacks/vazante-jurua-segue.svg"
+    "originalImageUrl": "/assets/news-fallbacks/vazante-jurua-segue.svg",
+    "imageQuality": "imagem-ausente-ou-generica"
   }
 ];
