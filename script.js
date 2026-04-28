@@ -810,7 +810,6 @@ const isIllustrativeImage = (article) => {
 };
 
 const articleImageResolveCache = new Map();
-const sourcePreviewImageResolveCache = new Map();
 
 const resolveSourcePreviewImage = async (article = {}) => {
   const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
@@ -819,18 +818,8 @@ const resolveSourcePreviewImage = async (article = {}) => {
     return "";
   }
 
-  if (!sourcePreviewImageResolveCache.has(sourceUrl)) {
-    sourcePreviewImageResolveCache.set(
-      sourceUrl,
-      requestApiJson(`/api/preview-image?url=${encodeURIComponent(sourceUrl)}`, {
-        method: "GET"
-      })
-        .then((payload) => sanitizeImageUrl(payload?.imageUrl || ""))
-        .catch(() => "")
-    );
-  }
-
-  return sourcePreviewImageResolveCache.get(sourceUrl) || "";
+  // /api/preview-image is protected for admin previews; public home cards must not call it.
+  return "";
 };
 
 const resolveArticleImage = async (article, surface = "default") => {
@@ -9705,8 +9694,6 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       .join("")
       .toUpperCase() || "?";
 
-  const candidatePhotoResolveCache = new Map();
-
   const resolveCandidatePhoto = async (candidate = {}) => {
     const directCandidates = [];
     [candidate.imageUrl, candidate.photoUrl, candidate.avatarUrl].forEach((value) => {
@@ -9727,20 +9714,8 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       return "";
     }
 
-    if (!candidatePhotoResolveCache.has(sourceUrl)) {
-      candidatePhotoResolveCache.set(
-        sourceUrl,
-        requestApiJson(`/api/preview-image?url=${encodeURIComponent(sourceUrl)}`, {
-          method: "GET"
-        })
-          .then((payload) =>
-            preloadFirstAvailableImage(buildImageLoadCandidates(payload?.imageUrl || ""))
-          )
-          .catch(() => "")
-      );
-    }
-
-    return candidatePhotoResolveCache.get(sourceUrl) || "";
+    // /api/preview-image requires admin access; avoid public 401 noise on the live site.
+    return "";
   };
 
   const applyCandidatePhoto = (avatarNode, candidate = {}) => {
