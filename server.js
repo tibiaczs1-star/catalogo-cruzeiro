@@ -232,6 +232,7 @@ const PREVIEW_CLASS_BY_CATEGORY = {
   policia: "thumb-policia",
   educacao: "thumb-educacao",
   prefeitura: "thumb-politica",
+  "acre-governo": "thumb-politica",
   politica: "thumb-politica",
   esporte: "thumb-cultura",
   "utilidade publica": "thumb-alerta",
@@ -242,6 +243,7 @@ const PREVIEW_CLASS_BY_CATEGORY = {
 const CATEGORY_LABEL_BY_KEY = {
   cotidiano: "Cotidiano",
   prefeitura: "Prefeitura",
+  "acre-governo": "Acre / Governo",
   politica: "Política",
   policia: "Polícia",
   saude: "Saúde",
@@ -265,7 +267,12 @@ const CATEGORY_ALIAS_MAP = {
   variedades: "cultura",
   esporte: "esporte",
   "destaques esporte": "esporte",
-  governo: "politica",
+  governo: "acre-governo",
+  "governo do estado": "acre-governo",
+  "governo do acre": "acre-governo",
+  "acre / governo": "acre-governo",
+  "acre-governo": "acre-governo",
+  estado: "acre-governo",
   prefeitura: "prefeitura",
   editais: "utilidade publica",
   detran: "utilidade publica",
@@ -275,7 +282,7 @@ const CATEGORY_ALIAS_MAP = {
   newsletter: "",
   nacional: "",
   geral: "",
-  acre: "",
+  acre: "acre-governo",
   "acre 03": "",
   "destaque 1": "",
   "extra total": ""
@@ -2072,6 +2079,15 @@ function isJuruaPrefeituraScope(rawText = "") {
   return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
 }
 
+function isAcreGovernmentScope(rawText = "") {
+  const haystack = normalizeText(rawText);
+  if (!haystack) return false;
+
+  return /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|secretaria estadual|detran|sesacre|seinfra|sejusp|aleac|assembleia legislativa|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
+    haystack
+  );
+}
+
 function inferCategoryKeyFromContent(rawText) {
   const haystack = normalizeText(rawText);
   if (!haystack) return "";
@@ -2106,6 +2122,12 @@ function inferCategoryKeyFromContent(rawText) {
     )
   ) {
     return "esporte";
+  }
+
+  if (
+    isAcreGovernmentScope(haystack)
+  ) {
+    return "acre-governo";
   }
 
   if (
@@ -4048,6 +4070,7 @@ function shouldIgnoreImageUrl(value) {
   }
   if (
     imageUrl.includes("agenciabrasil.ebc.com.br/ebc.png") ||
+    imageUrl.includes("agenciabrasil.ebc.com.br/ebc.gif") ||
     imageUrl.includes("/edital-assinado-")
   ) {
     return true;
@@ -4598,7 +4621,9 @@ async function refreshRssRuntime(limitPerSource = 30) {
   });
 
   const enrichedItems = repairNewsImagesForDisplay(
-    (await enrichNewsItemsWithSourceImages(deduped)).map(normalizeArticleRecord)
+    (await enrichNewsItemsWithSourceImages(deduped))
+      .map(normalizeArticleRecord)
+      .map(sanitizePublicPortugueseRuntimeItem)
   );
 
   const payload = {
@@ -5205,11 +5230,93 @@ const ENGLISH_CARD_LEAK_PATTERN =
   /\b(the post|appeared first|read more|click here|new games|new toys|monthly games|take home|host live|meet the|whole sick|brand and creator|creator|creators|partnerships|streamer|streamers|showrunner|spin-off|hub|review|study destination|higher ed|public trust|students|teachers|schools|website accessibility|will it help|launching|launches|reveals|unveils|announced|trailer reveals|trailer is|worth the wait|with evangelion|for april|for january|the future of|the age of|the year ahead|the classroom|the entertainment industry)\b|]]>|<img\b/i;
 const PORTUGUESE_CARD_SIGNAL_PATTERN =
   /\b(uma?|pela?|pelos?|das?|dos?|para|com|sobre|entre|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?|comunidades?|f[aã]s|lan[cç]amentos?|cultura|publico|p[uú]blico)\b/i;
+const PUBLIC_NEWS_ENGLISH_MARKER_PATTERN =
+  /\b(?:whether|it's|according to|today|started|rolling|coming|expected|available|company|people|users|feature|features|released|announced|podcast|fitness|playlist|dummy unit|foldable|touchscreen|gaming|mouse|smart lighting|mother's day|who's asking|the auto design world|google started|microsoft will let|alex jones has uncovered|xreal’s best|xreal's best|360-degree cameras have|cybercab goes into production|skylight’s color-coded|skylight's color-coded|acclaimed japanese director)\b/i;
+const PUBLIC_NEWS_KNOWN_URL_TITLES = new Map([
+  ["best-mothers-day-gift-ideas-2026-mom-tech-gadgets", "Ideias de presentes tecnológicos para o Dia das Mães em 2026"],
+  ["canva-magic-layers-ai-replacing-palestine", "Canva corrige falha de IA em camadas mágicas"],
+  ["ul-testing-fire-safety-ai-standards-jennifer-scanlon", "UL fala sobre testes de segurança, fogo e padrões para IA"],
+  ["amazon-wondery-oprah-podcast-show", "Podcast de Oprah Winfrey ganha distribuição pela Amazon"],
+  ["govee-ceiling-light-ultra-led-pricing-availability", "Govee apresenta luminária de teto multicolorida"],
+  ["spotify-peloton-guided-workouts", "Spotify amplia conteúdos de treino e bem-estar"],
+  ["samsung-galaxy-z-fold-8-wide-dummy-leak", "Vazamento mostra possível Galaxy Z Fold largo"],
+  ["gm-ai-car-design-nissan-neural-concept", "Montadoras testam IA no desenho de novos carros"],
+  ["turtle-beach-mc7-gaming-mouse-touchscreen-command-series", "Mouse gamer da Turtle Beach aposta em tela sensível ao toque"],
+  ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"]
+]);
 
 function hasEnglishCardLeak(value = "") {
   const text = cleanShortText(value || "", 500);
   if (!text) return true;
   return ENGLISH_CARD_LEAK_PATTERN.test(text);
+}
+
+function publicNewsTextLooksEnglish(value = "") {
+  const text = cleanShortText(value || "", 900);
+  if (!text) return false;
+  return hasEnglishCardLeak(text) || PUBLIC_NEWS_ENGLISH_MARKER_PATTERN.test(text);
+}
+
+function hasPortugueseRuntimeSignal(value = "") {
+  const text = cleanShortText(value || "", 900);
+  if (!text) return false;
+  return PORTUGUESE_CARD_SIGNAL_PATTERN.test(text) || /[áàâãéêíóôõúç]/i.test(text);
+}
+
+function isEnglishRuntimeSource(item = {}) {
+  const sourceText = [item.sourceName, item.source, item.sourceDomain, item.sourceUrl, item.url, item.id, item.slug]
+    .map((value) => String(value || "").toLowerCase())
+    .join(" ");
+  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com)\b/.test(sourceText);
+}
+
+function inferPublicRuntimeTitle(item = {}) {
+  const candidates = [item.sourceUrl, item.url, item.id, item.slug].map((value) => String(value || ""));
+  for (const candidate of candidates) {
+    const known = [...PUBLIC_NEWS_KNOWN_URL_TITLES.entries()].find(([needle]) => candidate.includes(needle));
+    if (known) return known[1];
+  }
+
+  const sourceName = cleanShortText(item.sourceName || item.source || item.sourceDomain || "fonte externa", 90);
+  return `Atualização internacional de ${sourceName}`;
+}
+
+function buildPortugueseRuntimeFallback(item = {}) {
+  const sourceName = cleanShortText(item.sourceName || item.source || item.sourceDomain || "Fonte externa", 90);
+  const title = cleanShortText(item.title || item.sourceLabel || "tema internacional", 180);
+  return `${sourceName} publicou uma atualização sobre ${title}. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.`;
+}
+
+function sanitizePublicPortugueseRuntimeItem(item = {}) {
+  if (!item || typeof item !== "object") return item;
+
+  const next = { ...item };
+  if (!cleanShortText(next.title || "", 180)) {
+    next.title = inferPublicRuntimeTitle(next);
+  }
+  if (!cleanShortText(next.sourceLabel || "", 180)) {
+    next.sourceLabel = next.title;
+  }
+
+  const fallback = buildPortugueseRuntimeFallback(next);
+  const strictEnglishSource = isEnglishRuntimeSource(next);
+  if (publicNewsTextLooksEnglish(next.lede || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.lede || ""))) {
+    next.lede = fallback;
+  }
+  if (publicNewsTextLooksEnglish(next.summary || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.summary || ""))) {
+    next.summary = fallback;
+  }
+  if (publicNewsTextLooksEnglish(next.description || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.description || ""))) {
+    next.description = fallback;
+  }
+  if (
+    publicNewsTextLooksEnglish(next.displaySummary || "") ||
+    (strictEnglishSource && !hasPortugueseRuntimeSignal(next.displaySummary || ""))
+  ) {
+    next.displaySummary = fallback;
+  }
+
+  return next;
 }
 
 function isPublicPortugueseTopicItem(item = {}, topic = "") {
@@ -6658,6 +6765,15 @@ function requireFullAdminOrderAccess(req, body = {}) {
   return hasFullAdminPassword(authValue) || requireAdmin(req);
 }
 
+function requireFullAdminPasswordAccess(req, body = {}) {
+  const authValue = getAuthValue(req, body, ["password", "adminPassword", "fullAdminPassword", "token"]);
+  const basic = parseBasicAuth(req);
+  return (
+    hasFullAdminPassword(authValue) ||
+    (basic?.user === SUPER_ADMIN_USER && hasFullAdminPassword(basic?.password))
+  );
+}
+
 function readOfficeWorkStore() {
   const store = readJson(OFFICE_WORK_FILE, { version: 1, updatedAt: "", offices: {}, actions: [], supportRequests: [] });
   return {
@@ -7381,13 +7497,13 @@ function normalizeCommunityReport(item = {}) {
     name: cleanShortText(item.name || "Morador local", 80),
     neighborhood: cleanShortText(item.neighborhood || item.bairro || "Bairro nao informado", 90),
     city: cleanShortText(item.city || "Cruzeiro do Sul - AC", 90),
-    topic: cleanShortText(item.topic || "Relato comunitario", 100),
+    topic: cleanShortText(item.topic || "Mensagem comunitaria", 100),
     message: cleanShortText(item.message || item.details || item.text, 900),
     contact: cleanShortText(item.contact || item.phone || item.whatsapp || "", 100),
     status: cleanShortText(item.status || "nao-checado", 40),
     verificationStatus: cleanShortText(item.verificationStatus || "nao-checado", 40),
     publicNote:
-      "Participacao comunitaria voluntaria. Informacao recebida da populacao, ainda nao checada pela equipe.",
+      "Informacao enviada pela populacao. Pode conter aviso, opiniao ou relato local ainda nao checado.",
     createdAt: cleanShortText(item.createdAt || new Date().toISOString(), 60)
   };
 }
@@ -7405,9 +7521,9 @@ function getCommunityReportsPayload(limit = 8) {
   return {
     ok: true,
     updatedAt: new Date().toISOString(),
-    label: "Participacao comunitaria voluntaria",
+    label: "Chat de informacoes da populacao",
     verificationRule:
-      "Este bloco mostra apenas relatos ainda nao checados. Informacoes verificadas devem sair daqui e virar checagem, servico ou noticia em area propria.",
+      "Este bloco mostra mensagens da populacao. Informacoes relevantes podem ser conferidas antes de virar servico, alerta ou noticia em area propria.",
     total: publicItems.length,
     items: publicItems
   };
@@ -7417,13 +7533,13 @@ function recordCommunityReport(body = {}, req = null) {
   const tracking = req ? buildTrackingMeta(req, body) : {};
   const message = cleanShortText(body.message || body.details || body.text, 900);
   const neighborhood = cleanShortText(body.neighborhood || body.bairro, 90);
-  const topic = cleanShortText(body.topic || body.subject || "Relato comunitario", 100);
+  const topic = cleanShortText(body.topic || body.subject || "Mensagem comunitaria", 100);
 
   if (!message || message.length < 12) {
     return {
       ok: false,
       status: 400,
-      error: "Escreva um relato com um pouco mais de contexto para a equipe avaliar."
+      error: "Escreva uma mensagem com um pouco mais de contexto para ajudar outros moradores."
     };
   }
 
@@ -7453,10 +7569,10 @@ function recordCommunityReport(body = {}, req = null) {
     from: "Comunidade",
     to: "Codex CEO + Revisor Bento + Sofia Fontes",
     priority: "normal",
-    message: `Relato comunitario nao checado recebido: ${report.topic} em ${report.neighborhood}. ${report.message}`,
+    message: `Mensagem comunitaria recebida: ${report.topic} em ${report.neighborhood}. ${report.message}`,
     ceoReply:
-      "Recebido. O relato fica publico como nao checado e entra na fila para verificacao antes de virar noticia.",
-    status: "relato-comunitario-nao-checado",
+      "Recebido. A mensagem fica como informacao da populacao e pode entrar na fila de verificacao antes de virar noticia.",
+    status: "mensagem-comunitaria-recebida",
     hierarchy: "Comunidade -> Avatar comunitario -> Codex CEO -> agentes de verificacao",
     createdAt: report.createdAt
   });
@@ -7466,7 +7582,7 @@ function recordCommunityReport(body = {}, req = null) {
     status: 201,
     item: report,
     message:
-      "Relato recebido. Ele fica marcado como nao checado e pode aparecer na area de participacao comunitaria voluntaria."
+      "Mensagem recebida. Ela pode aparecer no chat de informacoes da populacao."
   };
 }
 
@@ -11361,10 +11477,17 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/preview-image") {
+    if (!requireFullAdminPasswordAccess(req)) {
+      return sendJson(res, 401, {
+        ok: false,
+        error: "Senha admin total obrigatoria para abrir previa."
+      });
+    }
+
     const targetUrl = searchParams.get("url") || "";
     const imageUrl = await fetchPreviewImage(targetUrl);
     if (!imageUrl) {
-      return sendJson(res, 404, { ok: false, message: "Imagem nao encontrada." });
+      return sendJson(res, 200, { ok: false, imageUrl: "", message: "Imagem nao encontrada." });
     }
     return sendJson(res, 200, { ok: true, imageUrl });
   }

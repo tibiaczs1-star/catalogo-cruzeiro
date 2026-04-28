@@ -339,16 +339,16 @@ window.CATALOGO_SERVICOS_DATA = {
     },
     {
       id: "governo-acre",
-      title: "Governo do Estado",
-      subtitle: "Utilidade pública estadual direto dos sites oficiais do Acre",
+      title: "Acre / Governo",
+      subtitle: "Notícias gerais do Acre e utilidade pública estadual em fontes oficiais",
       photoUrl:
         "https://agencia.ac.gov.br/wp-content/uploads/2024/01/palacio-rio-branco-foto-marcos-vicente.jpg",
       featured: {
         eyebrow: "fonte estadual oficial",
-        title: "Serviços e notícias do Governo do Acre",
+        title: "Acre em foco: serviços e notícias do Governo do Acre",
         description:
-          "Divisão própria para utilidade pública estadual: portal do Governo do Acre, agência oficial, Diário Oficial e serviços estaduais de atendimento.",
-        chips: ["Acre", "Estado", "serviço público"],
+          "Divisão própria para acompanhar o Acre: notícias gerais do estado, portal do Governo do Acre, agência oficial, Diário Oficial e serviços estaduais de atendimento.",
+        chips: ["Acre", "Governo", "serviço público"],
         bullets: [
           "Notícias e anúncios do Governo do Acre em fonte oficial",
           "Diário Oficial para atos, editais e portarias",

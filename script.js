@@ -598,7 +598,7 @@ const pushUniqueImageCandidate = (bucket, value) => {
 
 const buildImageLoadCandidates = (value) => {
   const raw = String(value || "").trim();
-  if (!raw || isHotlinkBlockedImageUrl(raw)) {
+  if (!raw || isHotlinkBlockedImageUrl(raw) || isTrackingPixelImageUrl(raw)) {
     return [];
   }
 
@@ -606,8 +606,16 @@ const buildImageLoadCandidates = (value) => {
   const proxiedUrl = sanitizeImageUrl(directUrl);
   const candidates = [];
 
+  if (!proxiedUrl) {
+    return candidates;
+  }
+
+  if (proxiedUrl !== directUrl) {
+    pushUniqueImageCandidate(candidates, proxiedUrl);
+    return candidates;
+  }
+
   pushUniqueImageCandidate(candidates, directUrl);
-  pushUniqueImageCandidate(candidates, proxiedUrl);
 
   return candidates;
 };
@@ -898,11 +906,29 @@ const buildFallbackThumbLighting = (article = {}, url = "") => {
   };
 };
 
+const canSampleImagePixels = (value = "") => {
+  const raw = String(value || "").trim();
+  if (!raw) {
+    return false;
+  }
+
+  if (/^(?:data:|blob:)/i.test(raw)) {
+    return true;
+  }
+
+  try {
+    const parsed = new URL(raw, window.location.href);
+    return parsed.origin === window.location.origin;
+  } catch (_error) {
+    return !/^https?:\/\//i.test(raw);
+  }
+};
+
 const extractThumbLighting = (url, article = {}) => {
   const cacheKey = String(url || "").trim();
   const fallback = buildFallbackThumbLighting(article, cacheKey);
 
-  if (!cacheKey) {
+  if (!cacheKey || !canSampleImagePixels(cacheKey)) {
     return Promise.resolve(fallback);
   }
 
@@ -1806,9 +1832,9 @@ const radarGuideThemes = {
     label: "Prefeitura",
     text: "Aqui aparecem serviços, obras, decretos e movimentos oficiais da Prefeitura de Cruzeiro do Sul."
   },
-  "governo-estado": {
-    label: "Governo do Estado",
-    text: "Este recorte separa anúncios, serviços e decisões do Governo do Acre, direto das fontes estaduais quando disponíveis."
+  "acre-governo": {
+    label: "Acre / Governo",
+    text: "Este recorte junta notícias gerais do Acre com atos, serviços e decisões do Governo do Estado, mantendo a Prefeitura em uma divisão própria."
   },
   politica: {
     label: "Política",
@@ -2302,6 +2328,22 @@ const getAnalyticsContext = () => {
   }
 };
 
+const formatCommunityMessageTime = (value) => {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) {
+    return "agora";
+  }
+
+  const diffMinutes = Math.max(0, Math.round((Date.now() - date.getTime()) / 60000));
+  if (diffMinutes < 2) return "agora";
+  if (diffMinutes < 60) return `${diffMinutes} min`;
+
+  const diffHours = Math.round(diffMinutes / 60);
+  if (diffHours < 24) return `${diffHours} h`;
+
+  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+};
+
 const buildCommunityReportCard = (report = {}) => {
   const article = document.createElement("article");
   const header = document.createElement("header");
@@ -2309,14 +2351,22 @@ const buildCommunityReportCard = (report = {}) => {
   const title = document.createElement("strong");
   const message = document.createElement("p");
   const footer = document.createElement("small");
+  const time = document.createElement("time");
 
   article.className = "community-report-card";
-  badge.textContent = "a confirmar";
+  badge.textContent = "em conferência";
   title.textContent = report.neighborhood || "Bairro não informado";
   message.textContent = report.message || "";
-  footer.textContent = `${report.name || "Morador local"} • participação comunitária voluntária`;
+  footer.textContent = `${report.name || "Morador local"} • informação da população`;
+  if (report.createdAt) {
+    time.dateTime = report.createdAt;
+    time.textContent = formatCommunityMessageTime(report.createdAt);
+  } else {
+    time.textContent = "agora";
+  }
 
   header.append(badge, title);
+  footer.append(" • ", time);
   article.append(header, message, footer);
   return article;
 };
@@ -2328,7 +2378,7 @@ const renderCommunityReports = (items = []) => {
   if (!items.length) {
     const empty = document.createElement("p");
     empty.className = "community-report-empty";
-    empty.textContent = "Ainda não há relatos comunitários aguardando conferência neste bloco.";
+    empty.textContent = "As próximas mensagens da população aparecem aqui como avisos, opiniões e informações rápidas.";
     communityReportList.appendChild(empty);
     return;
   }
@@ -2375,11 +2425,11 @@ const submitCommunityReport = async (event) => {
   const submitButton = communityAgentForm.querySelector('button[type="submit"]');
   const message = String(formData.get("message") || "").trim();
   if (message.length < 12) {
-    communityAgentFeedback.textContent = "Conte um pouco mais para entendermos o que precisa ser conferido.";
+    communityAgentFeedback.textContent = "Conte um pouco mais para a mensagem ajudar outros moradores.";
     return;
   }
 
-  communityAgentFeedback.textContent = "Recebendo o relato para conferência...";
+  communityAgentFeedback.textContent = "Enviando sua mensagem para o chat comunitário...";
   if (submitButton) {
     submitButton.disabled = true;
     submitButton.textContent = "Enviando...";
@@ -2391,7 +2441,7 @@ const submitCommunityReport = async (event) => {
     contact: String(formData.get("contact") || "").trim(),
     neighborhood: String(formData.get("neighborhood") || "").trim(),
     message,
-    topic: "Relato comunitário",
+    topic: "Mensagem comunitária",
     sourcePage: window.location.pathname,
     visitorId: analyticsContext.visitorId,
     sessionId: analyticsContext.sessionId
@@ -2404,7 +2454,7 @@ const submitCommunityReport = async (event) => {
     });
 
     communityAgentFeedback.textContent =
-      "Relato recebido. Vamos conferir as informações antes de publicar qualquer atualização.";
+      "Mensagem recebida. Ela entra como informação da população e pode passar por conferência.";
     communityAgentForm.reset();
     const refreshedItems = await loadCommunityReports();
     if (!Array.isArray(refreshedItems) || !refreshedItems.length) {
@@ -2416,7 +2466,7 @@ const submitCommunityReport = async (event) => {
   } finally {
     if (submitButton) {
       submitButton.disabled = false;
-      submitButton.textContent = "Enviar relato para conferência";
+      submitButton.textContent = "Enviar mensagem";
     }
   }
 };
@@ -2786,7 +2836,7 @@ const previewClassByCategory = {
   policia: "thumb-policia",
   educacao: "thumb-educacao",
   prefeitura: "thumb-politica",
-  "governo-estado": "thumb-politica",
+  "acre-governo": "thumb-politica",
   politica: "thumb-politica",
   esporte: "thumb-cultura",
   "utilidade publica": "thumb-alerta",
@@ -2798,7 +2848,7 @@ const previewClassByCategory = {
 const categoryLabelByKey = {
   cotidiano: "Cotidiano",
   prefeitura: "Prefeitura",
-  "governo-estado": "Governo do Estado",
+  "acre-governo": "Acre / Governo",
   politica: "Política",
   policia: "Polícia",
   saude: "Saúde",
@@ -2823,9 +2873,12 @@ const categoryAliasMap = {
   variedades: "cultura",
   esporte: "esporte",
   "destaques esporte": "esporte",
-  governo: "governo-estado",
-  "governo do estado": "governo-estado",
-  estado: "governo-estado",
+  governo: "acre-governo",
+  "governo do estado": "acre-governo",
+  "governo do acre": "acre-governo",
+  "acre / governo": "acre-governo",
+  "acre-governo": "acre-governo",
+  estado: "acre-governo",
   prefeitura: "prefeitura",
   editais: "utilidade publica",
   detran: "utilidade publica",
@@ -2835,7 +2888,7 @@ const categoryAliasMap = {
   newsletter: "",
   nacional: "",
   geral: "",
-  acre: "",
+  acre: "acre-governo",
   "acre 03": "",
   "destaque 1": "",
   "extra total": ""
@@ -2857,7 +2910,7 @@ const radarCategoryRelevance = {
   saude: 5,
   "utilidade publica": 5,
   prefeitura: 4,
-  "governo-estado": 4,
+  "acre-governo": 4,
   politica: 4,
   policia: 4,
   educacao: 4,
@@ -2891,6 +2944,28 @@ const isJuruaPrefeituraScope = (rawText = "") => {
     /\b(prefeitura (municipal )?de cruzeiro do sul|cruzeirodosul\.ac\.gov\.br|prefeitura-czs)\b/.test(haystack);
 
   return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
+};
+
+const isAcreGovernmentScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  return /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|secretaria estadual|detran|sesacre|seinfra|sejusp|aleac|assembleia legislativa|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
+    haystack
+  );
+};
+
+const isAcreGeneralScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  return /\b(acre|rio branco|cruzeiro do sul|vale do jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá]|sena madureira|brasileia|xapuri|agencia acre|agencia\.ac\.gov\.br)\b/.test(
+    haystack
+  );
 };
 
 const inferCategoryKeyFromContent = (rawText = "") => {
@@ -2933,6 +3008,12 @@ const inferCategoryKeyFromContent = (rawText = "") => {
   }
 
   if (
+    isAcreGovernmentScope(haystack)
+  ) {
+    return "acre-governo";
+  }
+
+  if (
     /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
       haystack
     )
@@ -2946,14 +3027,6 @@ const inferCategoryKeyFromContent = (rawText = "") => {
     )
   ) {
     return "politica";
-  }
-
-  if (
-    /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|detran|sesacre|seinfra|sejusp|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
-      haystack
-    )
-  ) {
-    return "governo-estado";
   }
 
   if (isJuruaPrefeituraScope(haystack)) {
@@ -3307,8 +3380,9 @@ const getMailzaPriorityScore = (article = {}) =>
 const articleCategoryGroups = {
   cotidiano: ["cotidiano"],
   prefeitura: ["prefeitura", "utilidade publica", "gestao publica"],
-  "governo-estado": ["governo-estado", "utilidade publica", "gestao publica"],
-  politica: ["politica", "prefeitura", "governo-estado", "utilidade publica", "gestao publica"],
+  "acre-governo": ["acre-governo", "utilidade publica", "gestao publica"],
+  "governo-estado": ["acre-governo", "utilidade publica", "gestao publica"],
+  politica: ["politica", "prefeitura", "acre-governo", "utilidade publica", "gestao publica"],
   policia: ["policia", "seguranca"],
   saude: ["saude"],
   educacao: ["educacao"],
@@ -3332,6 +3406,25 @@ const articleMatchesCategoryFilter = (article = {}, filter = "") => {
 
   const normalizedArticle = normalizeRuntimeArticle(article);
   const categoryKey = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+  if (normalizedFilter === "acre-governo" || normalizedFilter === "governo-estado") {
+    const scopeText = [
+      normalizedArticle.title,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.description,
+      normalizedArticle.category,
+      normalizedArticle.categoryKey,
+      normalizedArticle.eyebrow,
+      normalizedArticle.sourceLabel,
+      normalizedArticle.sourceUrl
+    ].join(" ");
+    return (
+      categoryKey === "acre-governo" ||
+      isAcreGovernmentScope(scopeText) ||
+      (isAcreGeneralScope(scopeText) && categoryKey !== "prefeitura")
+    );
+  }
+
   return getArticleCategoryGroup(normalizedFilter).includes(categoryKey);
 };
 
@@ -3636,7 +3729,7 @@ const rememberApiBase = (base = "") => {
   }
 };
 
-const requestApiJson = async (path, options = {}) => {
+async function requestApiJson(path, options = {}) {
   const nextHeaders = { ...(options.headers || {}) };
 
   if (options.body && !nextHeaders["Content-Type"]) {
@@ -3704,7 +3797,7 @@ const requestApiJson = async (path, options = {}) => {
   }
 
   throw lastError || new Error(`Falha em ${path}`);
-};
+}
 
 const copyTextToClipboard = async (value = "") => {
   const text = String(value || "").trim();
@@ -5029,7 +5122,7 @@ const initializeInsidersHeroScene = () => {
     return;
   }
 
-  insidersTypedNodes.forEach((node, index) => {
+  const startTypedNode = (node, index) => {
     if (!node || node.dataset.typedReady === "true") {
       return;
     }
@@ -5042,6 +5135,47 @@ const initializeInsidersHeroScene = () => {
     node.dataset.typedReady = "true";
     node.setAttribute("aria-label", fullText);
     typeInsidersLine(node, fullText, 220 + index * 320, node.closest(".construction-showcase") ? 11 : 13);
+  };
+
+  if (splashMotionQuery.matches || !("IntersectionObserver" in window)) {
+    insidersTypedNodes.forEach(startTypedNode);
+
+    if (heroInsidersShell) {
+      window.requestAnimationFrame(() => {
+        heroInsidersShell.classList.add("is-ready");
+      });
+    }
+
+    return;
+  }
+
+  const typedObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        const node = entry.target.querySelector?.("[data-insiders-typed]") || entry.target;
+        typedObserver.unobserve(entry.target);
+        startTypedNode(node, insidersTypedNodes.indexOf(node));
+      });
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+  );
+
+  insidersTypedNodes.forEach((node, index) => {
+    if (!node) {
+      return;
+    }
+
+    const gate = node.closest(".site-footer") ? node.closest(".insiders-command-copy") || node : node;
+    if (!gate) {
+      startTypedNode(node, index);
+      return;
+    }
+
+    typedObserver.observe(gate);
   });
 
   if (heroInsidersShell) {
@@ -7403,7 +7537,7 @@ const regionalPoliticsScopes = [
   {
     key: "acre",
     label: "Acre",
-    fallbackTitle: "Governo estadual e Assembleia entram em seguida",
+    fallbackTitle: "Acre / Governo entra em seguida",
     matcher: /acre|rio branco|governador|governadora|mailza|assembleia legislativa|aleac|secretaria de estado|palacio rio branco|palácio rio branco/i
   },
   {
@@ -7947,8 +8081,8 @@ const hydrateSocialCards = (items = []) => {
   const usedKeys = buildReservedArticleKeys(["social"]);
   const usedImages = buildReservedArticleImageKeys(["social"]);
   const pinnedSocialSlugs = new Set([
-    "michael-jackson-filme-cine-romeu-cruzeiro-do-sul",
-    "filme-bolsonaro-memes-reacao-redes"
+    "cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2",
+    "wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima"
   ]);
 
   cards.forEach((card) => {
@@ -8005,15 +8139,59 @@ const hydrateSocialCards = (items = []) => {
     return;
   }
 
-  const fallbackArticles = pickSocialFallbackArticles(
-    items,
-    missingCards.length,
-    usedKeys,
-    usedImages
-  );
+  const preferredSocialSlugs = [
+    "ana-castela-ira-se-apresentar-em-rio-branco-pela-primeira-vez",
+    "cantor-loubet-fara-show-em-epitaciolandia-no-proximo-sabado-2",
+    "wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima",
+    "evento-gospel-reune-8-igrejas-e-cerca-de-300-fieis-em-senador-guiomard",
+    "brunna-goncalves-mostra-bastidores-de-aniversario-da-cantora-ludmilla-veja",
+    "shakira-pede-que-fas-indiquem-convidados-brasileiros-para-megashow-no-rio",
+    "anitta-garimpa-o-ouro-da-existencia-na-ruptura-espiritual-de-equilibrium-sem-renegar-o-funk-em-album-corajoso",
+    "apos-suspensao-judicial-moradores-se-articulam-para-manter-show-de-evoney-fernandes",
+    "moradores-de-jordao-se-unem-para-bancar-show-de-evoney-fernandes-apos-suspensao-judicial",
+    "cancelamento-de-festa-em-jordao-gera-criticas-de-senador-e-revolta-de-moradores"
+  ];
+  const preferredFallbackArticles = [];
+
+  preferredSocialSlugs.some((slug) => {
+    if (preferredFallbackArticles.length >= missingCards.length) return true;
+    const article = getHomepageHydrationArticle(slug);
+    const articleKey = getArticleUsageKey(article);
+    const imageKey = getArticleImageKey(article);
+
+    if (
+      !article ||
+      !articleKey ||
+      usedKeys.has(articleKey) ||
+      (imageKey && usedImages.has(imageKey)) ||
+      !articleHasUsableImageCandidate(article)
+    ) {
+      return false;
+    }
+
+    usedKeys.add(articleKey);
+    if (imageKey) {
+      usedImages.add(imageKey);
+    }
+    preferredFallbackArticles.push(article);
+    return false;
+  });
+
+  const finalFallbackArticles =
+    preferredFallbackArticles.length >= missingCards.length
+      ? preferredFallbackArticles
+      : [
+          ...preferredFallbackArticles,
+          ...pickSocialFallbackArticles(
+            items,
+            missingCards.length - preferredFallbackArticles.length,
+            usedKeys,
+            usedImages
+          )
+        ];
 
   missingCards.forEach((card, index) => {
-    const article = fallbackArticles[index];
+    const article = finalFallbackArticles[index];
     if (!article) {
       return;
     }
