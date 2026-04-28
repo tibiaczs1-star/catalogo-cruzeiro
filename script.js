@@ -2968,67 +2968,6 @@ const isAcreGeneralScope = (rawText = "") => {
   );
 };
 
-const inferCategoryKeyFromContent = (rawText = "") => {
-  const haystack = normalizeText(rawText);
-
-  if (!haystack) {
-    return "";
-  }
-
-  if (
-    /\b(policia|policial|preso|prende|prisao|trafico|crime|assalto|roubo|furto|homicidio|estupr|foragido|delegacia|delegado|operacao)\b/.test(
-      haystack
-    )
-  ) {
-    return "policia";
-  }
-
-  if (
-    /\b(saude|hospital|ubs|upa|medic|vacina|vacinacao|dengue|cirurg|sus|atendimento|doenca|doula)\b/.test(
-      haystack
-    )
-  ) {
-    return "saude";
-  }
-
-  if (
-    /\b(educacao|escola|colegio|ifac|ufac|universidade|estudante|enem|vestibular|aula|ensino|professor)\b/.test(
-      haystack
-    )
-  ) {
-    return "educacao";
-  }
-
-  if (
-    /\b(esporte|futebol|basquete|campeonato|atleta|jogo|serie d|tourao|humaita|galvez)\b/.test(
-      haystack
-    )
-  ) {
-    return "esporte";
-  }
-
-  if (
-    isAcreGovernmentScope(haystack)
-  ) {
-    return "acre-governo";
-  }
-
-  if (
-    /\b(utilidade|servico|alerta|defesa civil|alag|chuva|temporal|transito|detran|edital|inscric|prazo|abastecimento|limpeza|coleta|ponto facultativo|pagamento|abrigo|rodovia|estrada)\b/.test(
-      haystack
-    )
-  ) {
-    return "utilidade publica";
-  }
-
-  if (
-    /\b(aleac|camara|deputad|senador|ministro|stj|stf|eleicao|eleitoral|parlamento|monopolio aereo)\b/.test(
-      haystack
-    )
-  ) {
-    return "politica";
-  }
-
   if (isJuruaPrefeituraScope(haystack)) {
     return "prefeitura";
   }
