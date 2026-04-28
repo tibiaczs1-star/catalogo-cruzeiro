@@ -20196,96 +20196,9 @@ body.editorial-home .cadernos-shell .caderno-card.editorial-service .card-kicker
   color: rgba(150, 103, 27, 0.82) !important;
 }
 
-/* 2026-04-28: faixa aberta para continuar a linha de Festa & Social no Mais Assuntos */
+/* 2026-04-28: manter Mais Assuntos como pilha de cards, sem faixa larga no rodape */
 body.editorial-home .cadernos-shell .cadernos-grid {
   grid-auto-flow: dense;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide {
-  grid-column: 1 / -1;
-  grid-template-columns: minmax(220px, 0.62fr) minmax(0, 3fr);
-  align-items: start;
-  align-content: start;
-  min-height: auto;
-  padding: 0.25rem 0 0.25rem 1.3rem;
-  border: 0 !important;
-  border-left: 1px solid rgba(111, 65, 155, 0.18) !important;
-  border-radius: 0;
-  background:
-    linear-gradient(90deg, rgba(143, 87, 201, 0.08), transparent 18%),
-    transparent !important;
-  box-shadow: none !important;
-  overflow: visible;
-  transform: none !important;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide::before,
-body.editorial-home .cadernos-shell .caderno-social-wide::after {
-  display: none !important;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide header {
-  margin: 0;
-  padding: 0.25rem 1.35rem 0 0;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide .caderno-social-wide-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  min-width: 0;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide .mini-story {
-  min-height: auto;
-  grid-template-columns: 78px minmax(0, 1fr);
-  align-items: start;
-  padding: 0.18rem 1rem;
-  border-top: 0 !important;
-  border-left: 1px solid rgba(80, 44, 118, 0.12) !important;
-  border-radius: 0;
-  background: transparent;
-  transform: none;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide .mini-story:first-of-type {
-  border-left: 0 !important;
-  padding-left: 0;
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide .mini-story:hover {
-  transform: translateY(-2px);
-}
-
-body.editorial-home .cadernos-shell .caderno-social-wide .mini-thumb {
-  width: 72px;
-  min-width: 72px;
-  min-height: 64px;
-  border-radius: 10px;
-}
-
-@media (max-width: 1180px) {
-  body.editorial-home .cadernos-shell .caderno-social-wide {
-    grid-column: 1 / -1;
-    grid-template-columns: 1fr;
-    padding: 1rem 0 0;
-    border-left: 0 !important;
-    border-top: 1px solid rgba(111, 65, 155, 0.16) !important;
-  }
-
-  body.editorial-home .cadernos-shell .caderno-social-wide header {
-    padding-right: 0;
-  }
-
-  body.editorial-home .cadernos-shell .caderno-social-wide .caderno-social-wide-grid {
-    grid-template-columns: 1fr;
-  }
-
-  body.editorial-home .cadernos-shell .caderno-social-wide .mini-story {
-    padding: 0.78rem 0;
-    border-left: 0 !important;
-    border-top: 1px solid rgba(80, 44, 118, 0.12) !important;
-  }
 }
 
 /* 2026-04-22: assinatura premium para Festas & Social */
