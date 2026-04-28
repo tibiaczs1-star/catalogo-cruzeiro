@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T14:05:00-05:00",
+  "lastUpdatedAt": "2026-04-28T14:12:00-05:00",
   "orders": [
     {
       "id": "2026-04-28-sync-online-local-home-updates",
       "createdAt": "2026-04-28T14:05:00-05:00",
-      "updatedAt": "2026-04-28T14:05:00-05:00",
+      "updatedAt": "2026-04-28T14:12:00-05:00",
       "status": "completed-deploy-ready",
       "source": "chat",
       "rawRequest": "OK AGORA ATUALIZE DIREITO E SINCRONIZA",
@@ -31,12 +31,17 @@
         "data/re-rodada-dia-geral-report.json",
         "data/real-agents-actions.json",
         "data/runtime-news.json",
-        "scripts/write-online-local-sync-pdf.js"
+        "scripts/write-online-local-sync-pdf.js",
+        "data/article-integrity-report.json",
+        "data/image-preview-cache.json",
+        "data/social-trends-cache.json",
+        "data/topic-feed-buzz.json",
+        "data/topic-feed-economy.json"
       ],
       "assetRefs": [
         "online-local-sync-report-20260428"
       ],
-      "notes": "Sync passou com ok=true: 360 noticias, 0 missing, 54 imagens reparadas, review-team totalIssues=0, auditoria de imagens 360/360 ok e runtime com 181 agentes/5 escritorios. PubPaid permanece fora do deploy."
+      "notes": "Sync passou com ok=true: 360 noticias, 0 missing, 54 imagens reparadas, review-team totalIssues=0, auditoria de imagens 360/360 ok e runtime com 181 agentes/5 escritorios. PubPaid permanece fora do deploy. Segunda conferencia promoveu caches publicos mais novos: article-integrity, image-preview, social-trends, topic-feed-buzz e topic-feed-economy; runtime-news e office-orders locais estavam mais antigos que main e foram preservados no main."
     },
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",

@@ -7,6 +7,7 @@
 - `npm run sync:online-local` terminou com `ok: true`: 360 noticias ativas/arquivo, 0 missing, 54 imagens reparadas, 10 slugs atualizados, `review-team totalIssues=0`, auditoria de imagens `360/360 ok` e runtime de agentes com 181 agentes/5 escritorios.
 - A rotina falhava porque `scripts/write-online-local-sync-pdf.js` era chamado mas nao estava no `main`; o script foi promovido para o deploy para preservar a geracao de `.codex-temp/online-local-sync/latest-report.pdf`.
 - Mudancas sincronizadas no pacote de deploy: `.codex-agents/registry.json`, `data/runtime-news.json`, `data/office-orders.json`, `data/real-agents-actions.json`, `data/re-rodada-dia-geral-report.json`, `data/news-image-focus-audit.json` e o gerador de PDF do sync.
+- Segunda conferencia na worktree principal achou caches publicos mais novos ainda aguardando: `data/article-integrity-report.json`, `data/image-preview-cache.json`, `data/social-trends-cache.json`, `data/topic-feed-buzz.json` e `data/topic-feed-economy.json`; esses foram promovidos. `data/runtime-news.json` e `data/office-orders.json` da principal estavam mais antigos que o `main` e nao foram sobrescritos.
 - PubPaid permanece local-only e fora deste deploy ate ordem explicita do usuario.
 
 ## Atualizacao rapida 2026-04-28 - Mais Assuntos Festa & Social continuo

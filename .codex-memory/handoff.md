@@ -1,6 +1,6 @@
 # Handoff
 
-Updated: 2026-04-28T14:05:00-05:00
+Updated: 2026-04-28T14:12:00-05:00
 
 Rodada atual: usuario pediu sincronizar direito todas as atualizacoes recentes. Use a arvore limpa `.codex-temp/deploy-home-sync` para deploy. Nao use a worktree principal suja para publicar, pois ela tem PubPaid local-only e outras pendencias.
 
@@ -8,9 +8,11 @@ Rodada atual: usuario pediu sincronizar direito todas as atualizacoes recentes. 
 
 O arquivo `scripts/write-online-local-sync-pdf.js` precisa acompanhar o commit porque a rotina chama esse modulo no fechamento; sem ele o sync falha no passo de PDF.
 
+Depois do push inicial, a worktree principal foi comparada contra `origin/main`. Pendencias reais mais novas e publicas: `data/article-integrity-report.json`, `data/image-preview-cache.json`, `data/social-trends-cache.json`, `data/topic-feed-buzz.json` e `data/topic-feed-economy.json`. Arquivos encontrados mas nao promovidos: `data/runtime-news.json` e `data/office-orders.json`, porque a worktree principal tinha versoes mais antigas que o `main`; PubPaid inteiro segue local-only.
+
 ## Next
 
-- Stage exato: `.codex-agents/registry.json`, `data/news-image-focus-audit.json`, `data/office-orders.json`, `data/re-rodada-dia-geral-report.json`, `data/real-agents-actions.json`, `data/runtime-news.json`, `scripts/write-online-local-sync-pdf.js`, `CODEX_MEMORY.md`, `.codex-memory/current-state.md` e `.codex-memory/handoff.md`.
+- Stage exato da segunda leva: `data/article-integrity-report.json`, `data/image-preview-cache.json`, `data/social-trends-cache.json`, `data/topic-feed-buzz.json`, `data/topic-feed-economy.json`, `CODEX_MEMORY.md`, `.codex-memory/current-state.md` e `.codex-memory/handoff.md`.
 - Commitar e enviar `HEAD:main`.
 - Verificar producao com a home, o aviso de rodape e os cache-busts recentes.
 - PubPaid segue local-only ate nova autorizacao explicita.
