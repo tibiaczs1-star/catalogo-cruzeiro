@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-28 - Fundadores mobile em rotacao
+
+- Usuario pediu mexer somente no mobile no bloco `Fundadores`, porque a copy parecia editorial e os cards exigiam arrastar.
+- `index.html`: apenas cache-bust de `premium-clarity.css` e `script.js`; texto/estrutura desktop do bloco foram preservados.
+- `premium-clarity.css`: dentro de `@media (max-width: 760px)`, a faixa de fundadores deixa de ser trilho arrastavel e vira um destaque unico com transicao; o aviso `arraste os apoiadores` passa para `destaques automáticos`.
+- `script.js`: `initializeMobileFoundersSpotlight` troca a copy e alterna os apoiadores apenas quando `matchMedia("(max-width: 760px)")` esta ativo; ao sair do mobile, restaura textos/cards originais.
+- Validacoes: `node --check script.js`, brace-balance em CSS, checagem estatica confirmando desktop preservado e `npm run review:team` com `totalIssues=0`.
+
 ## Atualizacao rapida 2026-04-28 - Sync online-local completo
 
 - Usuario pediu atualizar direito e sincronizar todas as pendencias recentes da home/jornal automatico.

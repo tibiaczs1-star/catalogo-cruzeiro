@@ -11918,13 +11918,16 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
   }
 
   const founders = (Array.isArray(items) ? items : []).filter((item) => item?.name);
-  foundersCount.textContent = `${totalFounders} ${totalFounders === 1 ? "fundador" : "fundadores"} até agora`;
+  const mobileSpotlight = document.querySelector("#founders")?.classList.contains("is-founders-mobile-spotlight");
+  foundersCount.textContent = mobileSpotlight
+    ? `${totalFounders} ${totalFounders === 1 ? "apoiador confirmado" : "apoiadores confirmados"}`
+    : `${totalFounders} ${totalFounders === 1 ? "fundador" : "fundadores"} até agora`;
 
   if (!founders.length) {
     foundersList.innerHTML = `
       <article class="founder-card is-empty">
-        <strong>Quem fortalece este jornal</strong>
-        <p>Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público.</p>
+        <strong>${mobileSpotlight ? "Espaço dos apoiadores" : "Quem fortalece este jornal"}</strong>
+        <p>${mobileSpotlight ? "Quem ajuda o portal aparece aqui depois da confirmação do apoio." : "Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público."}</p>
       </article>
     `;
     return;
@@ -11943,6 +11946,150 @@ const hydrateFoundersWallFromApi = async () => {
   } catch (_error) {
     // Mantem o mural estatico quando a API nao estiver ligada.
   }
+};
+
+const initializeMobileFoundersSpotlight = () => {
+  const root = document.querySelector("#founders");
+  const cards = root ? [...root.querySelectorAll(".founder-banner-card")] : [];
+
+  if (!root || !cards.length || typeof window.matchMedia !== "function") {
+    return;
+  }
+
+  const mediaQuery = window.matchMedia("(max-width: 760px)");
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const eyebrow = root.querySelector(".section-heading .eyebrow");
+  const title = root.querySelector(".section-heading h2");
+  const intro = root.querySelector(".section-heading > p");
+  const summary = root.querySelector(".founders-summary span");
+  const emptyTitle = root.querySelector(".founder-card.is-empty strong");
+  const emptyText = root.querySelector(".founder-card.is-empty p");
+  let activeIndex = 0;
+  let rotationTimer = 0;
+
+  const mobileItems = [
+    {
+      label: "Apoio local",
+      title: "Cafe Cruzeiro",
+      text: "Marca local em destaque entre quem ajuda o portal a continuar no ar."
+    },
+    {
+      label: "Apoio confirmado",
+      title: "Grupo A.S",
+      text: "Marca parceira na vitrine de apoio ao jornal local."
+    },
+    {
+      label: "Apoio local",
+      title: "Dra. Geane Campo",
+      text: "Presença profissional entre os nomes que fortalecem o portal."
+    },
+    {
+      label: "Apoio confirmado",
+      title: "Recommencer",
+      text: "Parceira confirmada entre quem mantém a leitura local ativa."
+    }
+  ];
+
+  const rememberText = (node) => {
+    if (node && !node.dataset.mobileFounderOriginalText) {
+      node.dataset.mobileFounderOriginalText = node.textContent || "";
+    }
+  };
+
+  const setMobileText = (node, value) => {
+    if (!node) return;
+    rememberText(node);
+    node.textContent = value;
+  };
+
+  const restoreText = (node) => {
+    if (node?.dataset.mobileFounderOriginalText !== undefined) {
+      node.textContent = node.dataset.mobileFounderOriginalText;
+    }
+  };
+
+  const ensureMobileCopy = (card, item) => {
+    const label = card.querySelector("span");
+    let copy = card.querySelector(".founder-banner-copy");
+
+    setMobileText(label, item.label);
+
+    if (!copy) {
+      copy = document.createElement("div");
+      copy.className = "founder-banner-copy founder-mobile-copy";
+      copy.innerHTML = "<strong></strong><p></p>";
+      card.appendChild(copy);
+    } else if (!copy.dataset.mobileFounderOriginalHtml) {
+      copy.dataset.mobileFounderOriginalHtml = copy.innerHTML;
+    }
+
+    const name = copy.querySelector("strong") || document.createElement("strong");
+    const text = copy.querySelector("p") || document.createElement("p");
+    name.textContent = item.title;
+    text.textContent = item.text;
+    if (!name.parentElement) copy.appendChild(name);
+    if (!text.parentElement) copy.appendChild(text);
+  };
+
+  const restoreCard = (card) => {
+    card.classList.remove("is-founder-mobile-active");
+    restoreText(card.querySelector("span"));
+    const copy = card.querySelector(".founder-banner-copy");
+    if (copy?.classList.contains("founder-mobile-copy")) {
+      copy.remove();
+    } else if (copy?.dataset.mobileFounderOriginalHtml) {
+      copy.innerHTML = copy.dataset.mobileFounderOriginalHtml;
+    }
+  };
+
+  const activateCard = (index) => {
+    activeIndex = (index + cards.length) % cards.length;
+    cards.forEach((card, cardIndex) => {
+      card.classList.toggle("is-founder-mobile-active", cardIndex === activeIndex);
+    });
+  };
+
+  const stopRotation = () => {
+    if (rotationTimer) {
+      window.clearInterval(rotationTimer);
+      rotationTimer = 0;
+    }
+  };
+
+  const applyMode = () => {
+    stopRotation();
+
+    if (!mediaQuery.matches) {
+      root.classList.remove("is-founders-mobile-spotlight");
+      [eyebrow, title, intro, foundersCount, summary, emptyTitle, emptyText].forEach(restoreText);
+      cards.forEach(restoreCard);
+      return;
+    }
+
+    root.classList.add("is-founders-mobile-spotlight");
+    setMobileText(eyebrow, "apoio local");
+    setMobileText(title, "Quem apoia o portal");
+    setMobileText(intro, "Apoiadores confirmados aparecem aqui e ajudam este jornal a continuar no ar.");
+    setMobileText(foundersCount, "0 apoiadores confirmados");
+    setMobileText(summary, "apoie com qualquer valor a partir de R$ 1");
+    setMobileText(emptyTitle, "Espaço dos apoiadores");
+    setMobileText(emptyText, "Quem ajuda o portal aparece aqui depois da confirmação do apoio.");
+
+    cards.forEach((card, cardIndex) => {
+      ensureMobileCopy(card, mobileItems[cardIndex] || mobileItems[0]);
+    });
+    activateCard(activeIndex);
+
+    if (!reducedMotionQuery.matches && cards.length > 1) {
+      rotationTimer = window.setInterval(() => {
+        activateCard(activeIndex + 1);
+      }, 4200);
+    }
+  };
+
+  applyMode();
+  mediaQuery.addEventListener?.("change", applyMode);
+  reducedMotionQuery.addEventListener?.("change", applyMode);
 };
 
 const attachSubscriptionSubmission = () => {
@@ -12117,3 +12264,4 @@ scheduleTopicSurfaceRefresh();
 initializeLiveTicker();
 scheduleHomeBackgroundHydration();
 hydrateFoundersWallFromApi();
+initializeMobileFoundersSpotlight();

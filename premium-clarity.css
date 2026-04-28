@@ -2007,3 +2007,158 @@ body.editorial-home .footer-automation-notice a {
   text-decoration: none !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.42) !important;
 }
+
+/* 2026-04-28: ajuste somente mobile da vitrine de apoiadores. */
+body.editorial-home #founders .founder-mobile-copy {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  body.editorial-home #founders .section-heading.compact {
+    gap: 0.72rem !important;
+  }
+
+  body.editorial-home #founders .section-heading.compact .eyebrow {
+    color: #6e7480 !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  body.editorial-home #founders .section-heading.compact h2 {
+    max-width: 12ch !important;
+    font-size: clamp(1.62rem, 8vw, 2.28rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  body.editorial-home #founders .section-heading.compact > p {
+    color: #52677f !important;
+    font-size: 1rem !important;
+    line-height: 1.42 !important;
+  }
+
+  body.editorial-home #founders .founders-summary {
+    margin: 0.9rem 0 1.05rem !important;
+    border-radius: 20px !important;
+  }
+
+  body.editorial-home #founders .founders-summary strong {
+    font-size: 1.08rem !important;
+    line-height: 1.12 !important;
+  }
+
+  body.editorial-home #founders .founders-summary span {
+    color: #586d85 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.28 !important;
+  }
+
+  body.editorial-home #founders .founders-summary::after {
+    content: "destaques automáticos" !important;
+  }
+
+  body.editorial-home #founders .founders-banner-strip {
+    position: relative !important;
+    display: block !important;
+    min-height: 286px !important;
+    margin: 0 0 1.05rem !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    scroll-snap-type: none !important;
+    overscroll-behavior: auto !important;
+    -webkit-overflow-scrolling: auto !important;
+  }
+
+  body.editorial-home #founders .founder-banner-card {
+    position: absolute !important;
+    inset: 0 !important;
+    display: grid !important;
+    grid-template-rows: auto minmax(92px, 1fr) auto !important;
+    align-content: stretch !important;
+    min-height: 286px !important;
+    padding: 1.05rem 1.08rem !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateX(18px) scale(0.985) !important;
+    transition:
+      opacity 520ms ease,
+      transform 520ms ease !important;
+  }
+
+  body.editorial-home #founders .founder-banner-card.is-founder-mobile-active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(0) scale(1) !important;
+  }
+
+  body.editorial-home #founders .founder-banner-card span {
+    margin: 0 0 0.5rem !important;
+    color: #9a682d !important;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.14em !important;
+  }
+
+  body.editorial-home #founders .founder-banner-card img {
+    align-self: center !important;
+    justify-self: center !important;
+    width: min(210px, 86%) !important;
+    max-height: 104px !important;
+    object-fit: contain !important;
+  }
+
+  body.editorial-home #founders .founder-banner-cafe-photo {
+    width: min(142px, 62%) !important;
+    max-height: 118px !important;
+  }
+
+  body.editorial-home #founders .founder-banner-copy,
+  body.editorial-home #founders .founder-mobile-copy {
+    display: grid !important;
+    align-content: end !important;
+    gap: 0.4rem !important;
+    min-height: 0 !important;
+  }
+
+  body.editorial-home #founders .founder-banner-copy strong {
+    color: #183b68 !important;
+    font-size: clamp(1.34rem, 7vw, 1.74rem) !important;
+    line-height: 1 !important;
+  }
+
+  body.editorial-home #founders .founder-banner-copy p {
+    max-width: 24ch !important;
+    color: #586b83 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.38 !important;
+  }
+
+  body.editorial-home #founders .founders-grid {
+    margin-top: 0 !important;
+  }
+
+  body.editorial-home #founders .founder-card.is-empty strong {
+    color: #966520 !important;
+  }
+
+  body.editorial-home #founders .founder-card.is-empty p {
+    font-size: 0.92rem !important;
+    font-weight: 650 !important;
+  }
+
+  body.editorial-home #founders .founders-banner-strip::after {
+    content: "";
+    position: absolute;
+    right: 0.9rem;
+    bottom: 0.9rem;
+    width: 42px;
+    height: 4px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #d9a24b, #5f94d9);
+    opacity: 0.72;
+    z-index: 4;
+  }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  body.editorial-home #founders .founder-banner-card {
+    transition: none !important;
+  }
+}

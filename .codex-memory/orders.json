@@ -1,7 +1,37 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T14:12:00-05:00",
+  "lastUpdatedAt": "2026-04-28T14:42:00-05:00",
   "orders": [
+    {
+      "id": "2026-04-28-founders-mobile-rotator",
+      "createdAt": "2026-04-28T14:42:00-05:00",
+      "updatedAt": "2026-04-28T14:42:00-05:00",
+      "status": "completed-deploy-ready",
+      "source": "chat",
+      "rawRequest": "vc vai mexer so no mobile",
+      "summary": "Corrigir apenas no mobile o bloco de fundadores/apoiadores, trocando a linguagem editorial por copy publica e fazendo os apoiadores alternarem automaticamente sem trilho arrastavel.",
+      "normalizedTasks": [
+        "preservar texto e estrutura desktop do bloco fundadores",
+        "aplicar copy mobile para apoiadores via matchMedia max-width 760px",
+        "trocar o trilho arrastavel por destaque rotativo automatico no mobile",
+        "manter restauracao de textos e cards ao sair do breakpoint mobile",
+        "validar sintaxe, CSS e review-team"
+      ],
+      "tags": [
+        "home",
+        "mobile",
+        "founders",
+        "apoiadores",
+        "frontend"
+      ],
+      "filesTouched": [
+        "index.html",
+        "premium-clarity.css",
+        "script.js"
+      ],
+      "assetRefs": [],
+      "notes": "Desktop preservado: index.html mudou apenas cache-bust. Mobile usa CSS em @media max-width 760px e JS gated por matchMedia. npm run review:team totalIssues=0."
+    },
     {
       "id": "2026-04-28-sync-online-local-home-updates",
       "createdAt": "2026-04-28T14:05:00-05:00",
