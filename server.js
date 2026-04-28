@@ -265,7 +265,7 @@ const CATEGORY_ALIAS_MAP = {
   variedades: "cultura",
   esporte: "esporte",
   "destaques esporte": "esporte",
-  governo: "prefeitura",
+  governo: "politica",
   prefeitura: "prefeitura",
   editais: "utilidade publica",
   detran: "utilidade publica",
@@ -2054,6 +2054,24 @@ function formatCategoryLabel(categoryKey) {
   return CATEGORY_LABEL_BY_KEY[categoryKey] || CATEGORY_LABEL_BY_KEY.cotidiano;
 }
 
+function isJuruaPrefeituraScope(rawText = "") {
+  const haystack = normalizeText(rawText);
+  if (!haystack) return false;
+
+  const hasMunicipalSignal =
+    /\b(prefeitura|prefeito|prefeita|secretaria municipal|secretario municipal|secretaria de|municipio|municipal|gestao municipal|obras municipais|sedetur|semed|saurb|semtrans)\b/.test(
+      haystack
+    );
+  const hasJuruaSignal =
+    /\b(cruzeiro do sul|cruzeiro-do-sul|czs|vale do jurua|vale-do-jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá])\b/.test(
+      haystack
+    );
+  const hasExplicitCzsPrefeitura =
+    /\b(prefeitura (municipal )?de cruzeiro do sul|cruzeirodosul\.ac\.gov\.br|prefeitura-czs)\b/.test(haystack);
+
+  return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
+}
+
 function inferCategoryKeyFromContent(rawText) {
   const haystack = normalizeText(rawText);
   if (!haystack) return "";
@@ -2106,11 +2124,7 @@ function inferCategoryKeyFromContent(rawText) {
     return "politica";
   }
 
-  if (
-    /\b(prefeitura|governo|governador|governadora|prefeito|prefeita|secretaria|secretario|gestao|obras?)\b/.test(
-      haystack
-    )
-  ) {
+  if (isJuruaPrefeituraScope(haystack)) {
     return "prefeitura";
   }
 
@@ -2139,21 +2153,27 @@ function inferCategoryKeyFromContent(rawText) {
 
 function normalizeNewsCategoryKey(rawCategory = "", context = {}) {
   const rawKey = normalizeText(rawCategory);
+  const contextText = [context.title, context.summary, context.sourceName, context.sourceLabel, context.sourceUrl].join(" ");
+  const fullText = [rawCategory, contextText].join(" ");
   const mappedKey = Object.prototype.hasOwnProperty.call(CATEGORY_ALIAS_MAP, rawKey)
     ? CATEGORY_ALIAS_MAP[rawKey]
     : "";
 
   if (mappedKey) {
+    if (mappedKey === "prefeitura" && !isJuruaPrefeituraScope(fullText)) {
+      return inferCategoryKeyFromContent(contextText) || "cotidiano";
+    }
     return mappedKey;
   }
 
   if (rawKey && !GENERIC_CATEGORY_KEYS.has(rawKey) && isKnownCategoryKey(rawKey)) {
+    if (rawKey === "prefeitura" && !isJuruaPrefeituraScope(fullText)) {
+      return inferCategoryKeyFromContent(contextText) || "cotidiano";
+    }
     return rawKey;
   }
 
-  const inferredKey = inferCategoryKeyFromContent(
-    [rawCategory, context.title, context.summary, context.sourceName, context.sourceLabel].join(" ")
-  );
+  const inferredKey = inferCategoryKeyFromContent(fullText);
   if (inferredKey) {
     return inferredKey;
   }
@@ -5669,7 +5689,9 @@ function normalizeNewsItem(item) {
     defaultCategory: item.defaultCategory,
     title,
     summary: item.summary || item.lede || item.description,
-    sourceName
+    sourceName,
+    sourceLabel: item.sourceLabel || title,
+    sourceUrl
   });
 
   return {
@@ -5787,7 +5809,9 @@ function normalizeArticleRecord(item) {
     defaultCategory: item.defaultCategory,
     title,
     summary: item.summary || item.lede || item.description,
-    sourceName: item.sourceName || item.source || item.sourceLabel
+    sourceName: item.sourceName || item.source || item.sourceLabel,
+    sourceLabel: item.sourceLabel || title,
+    sourceUrl: item.sourceUrl || item.url || item.link
   });
   const categoryKey = isMailzaPriority ? "politica" : normalizedCategoryKey;
   const category = formatCategoryLabel(categoryKey);
