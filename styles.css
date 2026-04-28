@@ -2584,7 +2584,7 @@ body.site-loaded .page-shell {
 .mosaic-hero {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(300px, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2rem;
   margin-top: 1.1rem;
   padding: 1.15rem;
@@ -2644,7 +2644,7 @@ body.site-loaded .page-shell {
   box-shadow:
     0 28px 60px rgba(16, 35, 60, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.28);
-  background-size: cover;
+  background-size: contain;
   background-position: center 25%;
   isolation: isolate;
   transform: translateZ(0);
@@ -2679,23 +2679,24 @@ body.site-loaded .page-shell {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: var(--bg-position, center 35%);
   z-index: 0;
 }
 
 .mosaic-item.main {
-  min-height: 720px;
+  min-height: 260px;
 }
 
 .mosaic-item.side {
-  min-height: 344px;
+  min-height: 260px;
 }
 
 .mosaic-item.has-photo {
   background-image: var(--bg-image);
   background-position: var(--bg-position, center 35%);
-  background-size: cover;
+  background-size: var(--bg-size, contain);
+  background-repeat: no-repeat;
 }
 
 .mosaic-item[data-mosaic-layout="group-safe"]::before {
@@ -2713,13 +2714,13 @@ body.site-loaded .page-shell {
 }
 
 .mosaic-item.main[data-mosaic-layout="group-safe"] .mosaic-copy {
-  max-width: min(28rem, 42%);
+  max-width: min(25rem, 82%);
   padding: 0.72rem 0.9rem 0.82rem;
   background: linear-gradient(180deg, rgba(6, 16, 29, 0.56), rgba(6, 16, 29, 0.86));
 }
 
 .mosaic-item.main[data-mosaic-layout="portrait-safe"] .mosaic-copy {
-  max-width: min(32rem, 44%);
+  max-width: min(25rem, 82%);
   background: linear-gradient(180deg, rgba(6, 16, 29, 0.6), rgba(6, 16, 29, 0.88));
 }
 
@@ -2821,7 +2822,7 @@ body.site-loaded .page-shell {
 }
 
 .mosaic-item.main .mosaic-copy {
-  max-width: min(38rem, 52%);
+  max-width: min(25rem, 82%);
   padding: 0.72rem 0.82rem 0.78rem;
   background: linear-gradient(180deg, rgba(6, 16, 29, 0.68), rgba(6, 16, 29, 0.86));
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -2832,7 +2833,7 @@ body.site-loaded .page-shell {
 }
 
 .mosaic-copy.compact {
-  max-width: min(25rem, 62%);
+  max-width: min(25rem, 82%);
   gap: 0.56rem;
   padding: 0.62rem 0.74rem 0.68rem;
   background: linear-gradient(180deg, rgba(6, 16, 29, 0.66), rgba(6, 16, 29, 0.84));
@@ -2847,7 +2848,7 @@ body.site-loaded .page-shell {
   margin: 0;
   color: #fdf8f1;
   font-family: "Outfit", sans-serif;
-  font-size: clamp(1.55rem, 2.45vw, 2.3rem);
+  font-size: clamp(1rem, 1.15vw, 1.28rem);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.04em;
@@ -2855,14 +2856,12 @@ body.site-loaded .page-shell {
   text-shadow: 0 12px 26px rgba(0, 0, 0, 0.38);
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   overflow: hidden;
 }
 
 .mosaic-side {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 1.2rem;
+  display: contents;
 }
 
 .mosaic-item p,
@@ -2873,7 +2872,7 @@ body.site-loaded .page-shell {
 .mosaic-item.side h3 {
   color: #fdf8f1;
   font-family: "Outfit", sans-serif;
-  font-size: clamp(1rem, 1.15vw, 1.28rem);
+  font-size: clamp(0.92rem, 1vw, 1.08rem);
   font-weight: 800;
   line-height: 1.08;
   letter-spacing: -0.03em;
@@ -2889,7 +2888,7 @@ body.site-loaded .page-shell {
   max-width: 34rem;
   color: rgba(250, 246, 239, 0.94);
   font-family: "Sora", sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   line-height: 1.5;
   text-shadow: 0 3px 10px rgba(0, 0, 0, 0.28);
   display: -webkit-box;
@@ -2975,16 +2974,15 @@ body.site-loaded .page-shell {
   }
 
   .mosaic-item.main {
-    min-height: 668px;
+    min-height: 260px;
   }
 
   .mosaic-item.side {
-    min-height: 308px;
+    min-height: 240px;
   }
 
   .mosaic-side {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: none;
+    display: contents;
   }
 }
 
@@ -3004,7 +3002,7 @@ body.site-loaded .page-shell {
   }
 
   .mosaic-item.side {
-    min-height: 308px;
+    min-height: 260px;
   }
 
   .mosaic-side {

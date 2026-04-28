@@ -6,8 +6,8 @@
   const localeTimeZone = "America/Rio_Branco";
   const categoryAliases = {
     cotidiano: ["cotidiano"],
-    prefeitura: ["prefeitura", "politica", "utilidade publica", "gestao publica"],
-    politica: ["politica", "prefeitura", "utilidade publica", "gestao publica"],
+    prefeitura: ["prefeitura"],
+    politica: ["politica", "governo do estado", "utilidade publica", "gestao publica"],
     policia: ["policia", "seguranca"],
     saude: ["saude"],
     educacao: ["educacao"]
@@ -112,6 +112,67 @@
       .replace(/[^a-z0-9]+/g, " ")
       .replace(/\s+/g, " ")
       .trim();
+
+  const isJuruaPrefeituraScope = (value = "") => {
+    const haystack = normalizeArchiveStoryText(value);
+    if (!haystack) return false;
+
+    const hasMunicipalSignal =
+      /\b(prefeitura|prefeito|prefeita|secretaria municipal|secretario municipal|secretaria de|municipio|municipal|gestao municipal|obras municipais|sedetur|semed|saurb|semtrans)\b/.test(
+        haystack
+      );
+    const hasJuruaSignal =
+      /\b(cruzeiro do sul|czs|vale do jurua|jurua|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca)\b/.test(
+        haystack
+      );
+    const hasExplicitCzsPrefeitura =
+      /\b(prefeitura (municipal )?de cruzeiro do sul|cruzeirodosul ac gov br|prefeitura czs)\b/.test(haystack);
+
+    return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
+  };
+
+  const inferArchiveCategory = (article = {}) => {
+    const haystack = normalizeArchiveStoryText(
+      [
+        article.title,
+        article.lede,
+        article.summary,
+        article.description,
+        article.sourceName,
+        article.sourceLabel,
+        article.sourceUrl
+      ].join(" ")
+    );
+
+    if (/\b(cultura|cinema|filme|show|festival|musica|arte|artista|entretenimento|anitta|album|funk|pop)\b/.test(haystack)) {
+      return "Cultura";
+    }
+
+    if (/\b(governo|governador|governadora|aleac|camara|deputad|senador|eleicao|stf|stj)\b/.test(haystack)) {
+      return "Política";
+    }
+
+    return "Cotidiano";
+  };
+
+  const normalizeArchiveCategory = (article = {}) => {
+    const category = String(article.category || "Geral").trim() || "Geral";
+    if (normalizeText(category) !== "prefeitura") {
+      return category;
+    }
+
+    const scopeText = [
+      article.title,
+      article.lede,
+      article.summary,
+      article.description,
+      article.sourceName,
+      article.sourceLabel,
+      article.sourceUrl
+    ].join(" ");
+
+    return isJuruaPrefeituraScope(scopeText) ? category : inferArchiveCategory(article);
+  };
 
   const getCanonicalArticleUrl = (article = {}) => {
     const rawUrl = String(article.sourceUrl || article.url || article.link || "").trim();
@@ -542,7 +603,7 @@
 
   const normalizeArticle = (article = {}) => {
     const title = String(article.title || article.sourceLabel || "Atualizacao");
-    const category = String(article.category || "Geral");
+    const category = normalizeArchiveCategory(article);
     const sourceName = article.sourceName || article.source || article.sourceLabel || "Fonte local";
     const sourceUrl = article.sourceUrl || article.url || article.link || "#";
     const lede = article.lede || article.summary || article.description || "Sem resumo.";

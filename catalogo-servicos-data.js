@@ -281,6 +281,125 @@ window.CATALOGO_SERVICOS_DATA = {
       ]
     },
     {
+      id: "prefeitura-czs",
+      title: "Prefeitura de Cruzeiro do Sul",
+      subtitle: "Utilidade pública municipal direto do site oficial da Prefeitura",
+      photoUrl:
+        "https://www.cruzeirodosul.ac.gov.br/themes/prefeitura-czs/assets/img/cidade.jpg",
+      featured: {
+        eyebrow: "fonte municipal oficial",
+        title: "Serviços e avisos da Prefeitura de Cruzeiro do Sul",
+        description:
+          "Divisão separada para links oficiais da Prefeitura de Cruzeiro do Sul - Acre. Use para consultar notícias, serviços ao cidadão, transparência e atendimento municipal.",
+        chips: ["Cruzeiro do Sul - AC", "site oficial", "utilidade pública"],
+        bullets: [
+          "Notícias e comunicados publicados pela Prefeitura",
+          "Serviço de informação ao cidadão, ouvidoria e transparência",
+          "Atendimento municipal sem misturar com arquivo geral de notícias"
+        ],
+        miniCards: [
+          { title: "Prefeitura", text: "cruzeirodosul.ac.gov.br" },
+          { title: "Ouvidoria", text: "canal de atendimento" },
+          { title: "Transparência", text: "consulta pública" }
+        ],
+        accent: "czs"
+      },
+      items: [
+        {
+          name: "Site oficial da Prefeitura",
+          description: "Página principal da Prefeitura de Cruzeiro do Sul - Acre.",
+          website: "https://www.cruzeirodosul.ac.gov.br/",
+          status: "destaque",
+          source: "https://www.cruzeirodosul.ac.gov.br/"
+        },
+        {
+          name: "Notícias da Prefeitura",
+          description: "Comunicados, ações e avisos publicados pela gestão municipal.",
+          website: "https://www.cruzeirodosul.ac.gov.br/",
+          status: "online",
+          source: "https://www.cruzeirodosul.ac.gov.br/"
+        },
+        {
+          name: "SIC, Fale Conosco e Ouvidoria",
+          description: "Atendimento ao cidadão informado no site oficial da Prefeitura.",
+          phone: "(68) 99213-8219",
+          whatsapp: "(68) 99213-8219",
+          website: "https://www.cruzeirodosul.ac.gov.br/",
+          status: "online",
+          source: "https://www.cruzeirodosul.ac.gov.br/"
+        },
+        {
+          name: "Portal da Transparência Municipal",
+          description: "Acesso a informações públicas, orçamento, licitações e prestação de contas.",
+          website: "https://www.cruzeirodosul.ac.gov.br/",
+          status: "online",
+          source: "https://www.cruzeirodosul.ac.gov.br/"
+        }
+      ]
+    },
+    {
+      id: "governo-acre",
+      title: "Governo do Estado",
+      subtitle: "Utilidade pública estadual direto dos sites oficiais do Acre",
+      photoUrl:
+        "https://agencia.ac.gov.br/wp-content/uploads/2024/01/palacio-rio-branco-foto-marcos-vicente.jpg",
+      featured: {
+        eyebrow: "fonte estadual oficial",
+        title: "Serviços e notícias do Governo do Acre",
+        description:
+          "Divisão própria para utilidade pública estadual: portal do Governo do Acre, agência oficial, Diário Oficial e serviços estaduais de atendimento.",
+        chips: ["Acre", "Estado", "serviço público"],
+        bullets: [
+          "Notícias e anúncios do Governo do Acre em fonte oficial",
+          "Diário Oficial para atos, editais e portarias",
+          "Serviços estaduais que afetam Cruzeiro do Sul e o Vale do Juruá"
+        ],
+        miniCards: [
+          { title: "Portal AC", text: "ac.gov.br" },
+          { title: "Agência", text: "agencia.ac.gov.br" },
+          { title: "DOE", text: "diario.ac.gov.br" }
+        ],
+        accent: "ac"
+      },
+      items: [
+        {
+          name: "Portal do Governo do Acre",
+          description: "Site oficial do Governo do Estado do Acre.",
+          website: "https://www.ac.gov.br/",
+          status: "destaque",
+          source: "https://www.ac.gov.br/"
+        },
+        {
+          name: "Agência de Notícias do Acre",
+          description: "Notícias oficiais, comunicados e campanhas estaduais.",
+          website: "https://agencia.ac.gov.br/",
+          status: "online",
+          source: "https://agencia.ac.gov.br/"
+        },
+        {
+          name: "Diário Oficial do Estado",
+          description: "Publicação oficial de decretos, portarias, editais e atos do Estado.",
+          website: "https://diario.ac.gov.br/",
+          status: "online",
+          source: "https://diario.ac.gov.br/"
+        },
+        {
+          name: "DETRAN Acre",
+          description: "CNH, veículos, multas, educação no trânsito e serviços estaduais.",
+          website: "https://www.detran.ac.gov.br/",
+          status: "online",
+          source: "https://www.detran.ac.gov.br/"
+        },
+        {
+          name: "OCA Acre",
+          description: "Central de serviços públicos do Estado.",
+          website: "https://www.ac.gov.br/oca",
+          status: "online",
+          source: "https://www.ac.gov.br/oca"
+        }
+      ]
+    },
+    {
       id: "ninjas-cruzeiro",
       title: "Ninjas Cruzeiro",
       subtitle: "Corre local, apoio rápido, entrega e socorro urbano",

@@ -61,6 +61,7 @@ const heroTourismSlides = [...document.querySelectorAll("[data-hero-tourism-slid
 const heroTourismKicker = document.querySelector("[data-hero-tourism-kicker]");
 const heroTourismTitle = document.querySelector("[data-hero-tourism-title]");
 const heroTourismNote = document.querySelector("[data-hero-tourism-note]");
+const heroTourismMetaLink = document.querySelector("[data-hero-tourism-meta-link]");
 const heroDailyNewsCard = document.querySelector("[data-hero-daily-link]");
 const heroDailyNewsCategory = document.querySelector("[data-hero-daily-category]");
 const heroDailyNewsTitle = document.querySelector("[data-hero-daily-title]");
@@ -1402,9 +1403,10 @@ const applyMosaicImage = (panelNode, article) => {
   resolveArticleImage(article, "hero").then((safeUrl) => {
     if (!safeUrl || panelNode.dataset.mosaicImageRequest !== requestId) return;
     const layoutMode = inferMosaicLayoutMode(article, panelNode);
-    const imageFit = layoutMode === "portrait-safe" ? "contain" : "cover";
+    const imageFit = "contain";
     panelNode.dataset.mosaicLayout = layoutMode;
-    paintSurfaceImage(panelNode, safeUrl, inferMosaicImageFocus(article, panelNode), imageFit);
+    panelNode.dataset.imageFit = imageFit;
+    paintSurfaceImage(panelNode, safeUrl, "center", imageFit);
     panelNode.dataset.imageUrl = safeUrl;
     panelNode.dataset.sourceImage = safeUrl;
     panelNode.style.setProperty("--news-photo", `url('${safeUrl}')`);
@@ -1828,7 +1830,11 @@ const radarGuideThemes = {
   },
   prefeitura: {
     label: "Prefeitura",
-    text: "Aqui aparecem entregas, obras, decretos e movimentos oficiais da gestão."
+    text: "Aqui aparecem serviços, obras, decretos e movimentos oficiais da Prefeitura de Cruzeiro do Sul."
+  },
+  "governo-estado": {
+    label: "Governo do Estado",
+    text: "Este recorte separa anúncios, serviços e decisões do Governo do Acre, direto das fontes estaduais quando disponíveis."
   },
   politica: {
     label: "Política",
@@ -2830,6 +2836,7 @@ const previewClassByCategory = {
   policia: "thumb-policia",
   educacao: "thumb-educacao",
   prefeitura: "thumb-politica",
+  "governo-estado": "thumb-politica",
   politica: "thumb-politica",
   esporte: "thumb-cultura",
   "utilidade publica": "thumb-alerta",
@@ -2841,6 +2848,7 @@ const previewClassByCategory = {
 const categoryLabelByKey = {
   cotidiano: "Cotidiano",
   prefeitura: "Prefeitura",
+  "governo-estado": "Governo do Estado",
   politica: "Política",
   policia: "Polícia",
   saude: "Saúde",
@@ -2865,7 +2873,9 @@ const categoryAliasMap = {
   variedades: "cultura",
   esporte: "esporte",
   "destaques esporte": "esporte",
-  governo: "prefeitura",
+  governo: "governo-estado",
+  "governo do estado": "governo-estado",
+  estado: "governo-estado",
   prefeitura: "prefeitura",
   editais: "utilidade publica",
   detran: "utilidade publica",
@@ -2897,6 +2907,7 @@ const radarCategoryRelevance = {
   saude: 5,
   "utilidade publica": 5,
   prefeitura: 4,
+  "governo-estado": 4,
   politica: 4,
   policia: 4,
   educacao: 4,
@@ -2911,6 +2922,26 @@ const isKnownCategoryKey = (categoryKey = "") => Boolean(categoryLabelByKey[cate
 
 const formatCategoryLabel = (categoryKey = "") =>
   categoryLabelByKey[categoryKey] || categoryLabelByKey.cotidiano;
+
+const isJuruaPrefeituraScope = (rawText = "") => {
+  const haystack = normalizeText(rawText);
+  if (!haystack) {
+    return false;
+  }
+
+  const hasMunicipalSignal =
+    /\b(prefeitura|prefeito|prefeita|secretaria municipal|secretario municipal|secretaria de|municipio|municipal|gestao municipal|obras municipais|sedetur|semed|saurb|semtrans)\b/.test(
+      haystack
+    );
+  const hasJuruaSignal =
+    /\b(cruzeiro do sul|cruzeiro-do-sul|czs|vale do jurua|vale-do-jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá])\b/.test(
+      haystack
+    );
+  const hasExplicitCzsPrefeitura =
+    /\b(prefeitura (municipal )?de cruzeiro do sul|cruzeirodosul\.ac\.gov\.br|prefeitura-czs)\b/.test(haystack);
+
+  return hasExplicitCzsPrefeitura || (hasMunicipalSignal && hasJuruaSignal);
+};
 
 const inferCategoryKeyFromContent = (rawText = "") => {
   const haystack = normalizeText(rawText);
@@ -2968,10 +2999,14 @@ const inferCategoryKeyFromContent = (rawText = "") => {
   }
 
   if (
-    /\b(prefeitura|governo|governador|governadora|prefeito|prefeita|secretaria|secretario|gestao|obras?)\b/.test(
+    /\b(governo do acre|governo estadual|governador|governadora|estado do acre|secretaria de estado|detran|sesacre|seinfra|sejusp|acre\.gov\.br|agencia\.ac\.gov\.br)\b/.test(
       haystack
     )
   ) {
+    return "governo-estado";
+  }
+
+  if (isJuruaPrefeituraScope(haystack)) {
     return "prefeitura";
   }
 
@@ -2996,21 +3031,27 @@ const inferCategoryKeyFromContent = (rawText = "") => {
 
 const normalizeNewsCategoryKey = (rawCategory = "", context = {}) => {
   const rawKey = normalizeText(rawCategory);
+  const contextText = [context.title, context.summary, context.sourceName, context.sourceLabel, context.sourceUrl].join(" ");
+  const fullText = [rawCategory, contextText].join(" ");
   const mappedKey = Object.prototype.hasOwnProperty.call(categoryAliasMap, rawKey)
     ? categoryAliasMap[rawKey]
     : "";
 
   if (mappedKey) {
+    if (mappedKey === "prefeitura" && !isJuruaPrefeituraScope(fullText)) {
+      return inferCategoryKeyFromContent(contextText) || "cotidiano";
+    }
     return mappedKey;
   }
 
   if (rawKey && !genericCategoryKeys.has(rawKey) && isKnownCategoryKey(rawKey)) {
+    if (rawKey === "prefeitura" && !isJuruaPrefeituraScope(fullText)) {
+      return inferCategoryKeyFromContent(contextText) || "cotidiano";
+    }
     return rawKey;
   }
 
-  const inferredKey = inferCategoryKeyFromContent(
-    [rawCategory, context.title, context.summary, context.sourceName, context.sourceLabel].join(" ")
-  );
+  const inferredKey = inferCategoryKeyFromContent(fullText);
   if (inferredKey) {
     return inferredKey;
   }
@@ -3307,7 +3348,7 @@ const isMailzaPriorityArticle = (article = {}) => {
     ].join(" ")
   );
 
-  return /\b(mailza|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
+  return /\b(mailza|maisa|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(text);
 };
 
 const getMailzaPriorityScore = (article = {}) =>
@@ -3315,8 +3356,9 @@ const getMailzaPriorityScore = (article = {}) =>
 
 const articleCategoryGroups = {
   cotidiano: ["cotidiano"],
-  prefeitura: ["prefeitura", "politica", "utilidade publica", "gestao publica"],
-  politica: ["politica", "prefeitura", "utilidade publica", "gestao publica"],
+  prefeitura: ["prefeitura", "utilidade publica", "gestao publica"],
+  "governo-estado": ["governo-estado", "utilidade publica", "gestao publica"],
+  politica: ["politica", "prefeitura", "governo-estado", "utilidade publica", "gestao publica"],
   policia: ["policia", "seguranca"],
   saude: ["saude"],
   educacao: ["educacao"],
@@ -3492,6 +3534,7 @@ const pushUniqueArticle = (
 };
 
 const pickRadarLeadArticles = (articles = []) => {
+  const targetCount = 12;
   const todayKey = getLocalDateKey();
   const availableDateKeys = [...new Set(articles.map((article) => getArticleDateKey(article)).filter(Boolean))]
     .sort((left, right) => right.localeCompare(left));
@@ -3505,14 +3548,23 @@ const pickRadarLeadArticles = (articles = []) => {
   const leadArticles = [];
   const selectedKeys = new Set();
   const selectedImages = new Set();
+  const priorityArticlesWithImage = sortRadarArticles(
+    articles.filter((article) => isMailzaPriorityArticle(article) && articleHasUsableImageCandidate(article, "hero"))
+  );
 
-  sameDayArticlesWithImage.some((article) => {
-    if (leadArticles.length >= 3) return true;
+  priorityArticlesWithImage.some((article) => {
+    if (leadArticles.length >= targetCount) return true;
     pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
     return false;
   });
 
-  if (leadArticles.length < 3) {
+  sameDayArticlesWithImage.some((article) => {
+    if (leadArticles.length >= targetCount) return true;
+    pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
+    return false;
+  });
+
+  if (leadArticles.length < targetCount) {
     const fallbackArticles = sortRadarArticles(
       articles.filter((article) => !selectedKeys.has(getArticleUsageKey(article)))
     );
@@ -3522,20 +3574,20 @@ const pickRadarLeadArticles = (articles = []) => {
 
     fallbackArticlesWithImage.some((article) => {
       pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages);
-      return leadArticles.length >= 3;
+      return leadArticles.length >= targetCount;
     });
 
-    if (leadArticles.length < 3) {
+    if (leadArticles.length < targetCount) {
       sameDayArticlesWithImage.some((article) => {
-        if (leadArticles.length >= 3) return true;
+        if (leadArticles.length >= targetCount) return true;
         pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages, true);
         return false;
       });
     }
 
-    if (leadArticles.length < 3) {
+    if (leadArticles.length < targetCount) {
       fallbackArticlesWithImage.some((article) => {
-        if (leadArticles.length >= 3) return true;
+        if (leadArticles.length >= targetCount) return true;
         pushUniqueArticle(article, leadArticles, selectedKeys, selectedImages, true);
         return false;
       });
@@ -4268,6 +4320,12 @@ const setHeroTourismMeta = (photo) => {
 
   if (heroDailyNewsCard) {
     heroDailyNewsCard.href = photo.articleHref || "#radar";
+  }
+
+  if (heroTourismMetaLink) {
+    const href = photo.articleHref || "#radar";
+    heroTourismMetaLink.href = href;
+    applyArticleLinkAttrs(heroTourismMetaLink, href);
   }
 
   if (heroDailyNewsCategory) {
@@ -8145,7 +8203,7 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (actionNode) {
-      actionNode.textContent = index === 0 ? "Abrir materia" : "Ler cobertura";
+      actionNode.textContent = index === 0 ? "Ler tudo" : "Ler cobertura";
     }
 
     applyMosaicImage(card, article);
