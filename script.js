@@ -3008,8 +3008,7 @@ const getRegionalEditorialScopeText = (article = {}) => {
     normalizedArticle.description,
     normalizedArticle.category,
     normalizedArticle.categoryKey,
-    normalizedArticle.eyebrow,
-    Array.isArray(normalizedArticle.body) ? normalizedArticle.body.join(" ") : normalizedArticle.body
+    normalizedArticle.eyebrow
   ].join(" ");
 };
 
@@ -3031,7 +3030,7 @@ const isRemoteNationalMosaicScope = (rawText = "") => {
     return false;
   }
 
-  return /\b(eua|estados unidos|trump|biden|reino unido|rei charles|china|russia|rússia|ucrania|ucrânia|europa|oriente medio|oriente médio|israel|ira|irã|washington|nova york|londres|paris|argentina|peru|brasilia|brasília|governo federal|stf|senado federal|camara dos deputados|câmara dos deputados|congresso nacional|palmeiras|flamengo|corinthians|nba|champions|bbb|celebridade)\b/.test(
+  return /\b(eua|estados unidos|trump|biden|reino unido|rei charles|china|russia|rússia|ucrania|ucrânia|europa|oriente medio|oriente médio|israel|ira|irã|washington|nova york|londres|paris|madrid|argentina|peru|brasilia|brasília|governo federal|stf|senado federal|camara dos deputados|câmara dos deputados|congresso nacional|sao paulo|são paulo|sp|palmeiras|flamengo|corinthians|nba|champions|bbb|celebridade)\b/.test(
     haystack
   );
 };
@@ -3053,6 +3052,10 @@ const getMosaicRegionalScope = (article = {}) => {
   }
 
   if (hasAcreEditorialSignal) {
+    return "acre";
+  }
+
+  if ((isAcreGeneralScope(sourceScopeText) || isAcreGovernmentScope(sourceScopeText)) && !hasRemoteSignal) {
     return "acre";
   }
 
@@ -3752,8 +3755,10 @@ const pickRadarLeadArticles = (articles = []) => {
   const normalizedRegionalArticles = articles
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => getMosaicRegionalScope(article) && !isMosaicLowDisplayArticle(article));
+  const sameDayArticle = (article) => getArticleDateKey(article) === referenceDateKey;
+  const olderArticle = (article) => !sameDayArticle(article);
   const sameDayArticles = sortMosaicRegionalArticles(
-    normalizedRegionalArticles.filter((article) => getArticleDateKey(article) === referenceDateKey)
+    normalizedRegionalArticles.filter(sameDayArticle)
   );
   const sameDayArticlesWithImage = sameDayArticles.filter((article) =>
     articleHasUsableImageCandidate(article, "hero")
@@ -3779,16 +3784,30 @@ const pickRadarLeadArticles = (articles = []) => {
   );
   const juruaArticlesWithImage = sortMosaicRegionalArticles(
     normalizedRegionalArticles.filter(
-      (article) => getMosaicRegionalScope(article) === "jurua" && articleHasUsableImageCandidate(article, "hero")
+      (article) =>
+        olderArticle(article) &&
+        getMosaicRegionalScope(article) === "jurua" &&
+        articleHasUsableImageCandidate(article, "hero")
     )
   );
   const acreArticlesWithImage = sortMosaicRegionalArticles(
     normalizedRegionalArticles.filter(
-      (article) => getMosaicRegionalScope(article) === "acre" && articleHasUsableImageCandidate(article, "hero")
+      (article) =>
+        olderArticle(article) &&
+        getMosaicRegionalScope(article) === "acre" &&
+        articleHasUsableImageCandidate(article, "hero")
     )
   );
 
-  addMosaicRegionalPass(priorityJuruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    sameDayArticlesWithImage.filter(
+      (article) => getMosaicRegionalScope(article) === "jurua" && isMailzaPriorityArticle(article)
+    ),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
   addMosaicRegionalPass(
     sameDayArticlesWithImage.filter((article) => getMosaicRegionalScope(article) === "jurua"),
     leadArticles,
@@ -3796,10 +3815,33 @@ const pickRadarLeadArticles = (articles = []) => {
     selectedImages,
     targetCount
   );
-  addMosaicRegionalPass(juruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
-  addMosaicRegionalPass(priorityAcreArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    sameDayArticlesWithImage.filter(
+      (article) => getMosaicRegionalScope(article) === "acre" && isMailzaPriorityArticle(article)
+    ),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
   addMosaicRegionalPass(
     sameDayArticlesWithImage.filter((article) => getMosaicRegionalScope(article) === "acre"),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
+  addMosaicRegionalPass(sameDayArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    priorityJuruaArticlesWithImage.filter(olderArticle),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
+  addMosaicRegionalPass(juruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    priorityAcreArticlesWithImage.filter(olderArticle),
     leadArticles,
     selectedKeys,
     selectedImages,
