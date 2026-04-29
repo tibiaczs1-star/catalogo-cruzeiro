@@ -3,8 +3,8 @@
 (() => {
   const MODAL_ID = "catalogoPremiumTerms";
   const CONSENT_BANNER_ID = "catalogo-cookie-consent";
-  const READY_FALLBACK_MS = 6800;
-  const OPEN_DELAY_MS = 260;
+  const READY_FALLBACK_MS = 2800;
+  const OPEN_DELAY_MS = 120;
   const CONSENT_KEY = "catalogo_lgpd_consent_v1";
   const CONSENT_COOKIE = "catalogo_tracking_consent";
   const COOKIE_MAX_AGE_DAYS = 180;
@@ -15,13 +15,13 @@
   const FOUNDER_PRELUDE_SESSION_KEY = "catalogo_founder_prelude_seen_session_v1";
   const FOUNDER_PRELUDE_DAILY_KEY = "catalogo_founder_prelude_seen_day_v1";
   const FOUNDER_PRELUDE_DAILY_COOKIE = "catalogo_founder_prelude_seen_day_v1";
-  const THANKS_SCREEN_MS = 5200;
-  const THANKS_SCREEN_MS_COMPACT = 4600;
-  const THANKS_SCREEN_MS_PHONE = 3800;
-  const FOUNDER_PRELUDE_MS = 4300;
-  const FOUNDER_PRELUDE_MS_COMPACT = 3900;
-  const FOUNDER_PRELUDE_MS_PHONE = 3400;
-  const RETURNING_LOADER_MS = 980;
+  const THANKS_SCREEN_MS = 2200;
+  const THANKS_SCREEN_MS_COMPACT = 1900;
+  const THANKS_SCREEN_MS_PHONE = 1700;
+  const FOUNDER_PRELUDE_MS = 1200;
+  const FOUNDER_PRELUDE_MS_COMPACT = 1000;
+  const FOUNDER_PRELUDE_MS_PHONE = 900;
+  const RETURNING_LOADER_MS = 160;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -1267,7 +1267,6 @@
 
   ready(() => {
     clearStaleWelcomeArtifacts();
-    preloadFounderBannerAssets();
 
     window.addEventListener("pageshow", () => {
       clearStaleWelcomeArtifacts();
@@ -1275,9 +1274,11 @@
 
     resetConsentForNewBrowserSession();
     const phoneFlow = shouldUsePhoneWelcome();
+    const fastEditorialHome = document.body.classList.contains("editorial-home");
 
     const continueAfterFounderPrelude = (options = {}) => {
-      const shouldShowReturningLoader = options.afterFounderPrelude === true || !phoneFlow;
+      const shouldShowReturningLoader =
+        !fastEditorialHome && (options.afterFounderPrelude === true || !phoneFlow);
 
       if (shouldSkipWelcomeModal()) {
         removeLegacyConsentBanner();
@@ -1303,6 +1304,7 @@
 
       whenSiteReady(() => {
         runWhenBrowserIsIdle(() => {
+          preloadFounderBannerAssets();
           removeLegacyConsentBanner();
           const oldModal = document.getElementById(MODAL_ID);
           if (oldModal) {
@@ -1362,7 +1364,12 @@
       });
     };
 
-    if (hasSeenFounderPreludeToday() || hasSeenFounderPreludeInThisSession()) {
+    if (
+      fastEditorialHome ||
+      isSkipIntroNavigation() ||
+      hasSeenFounderPreludeToday() ||
+      hasSeenFounderPreludeInThisSession()
+    ) {
       releaseFounderPreludeGate();
       continueAfterFounderPrelude();
       return;

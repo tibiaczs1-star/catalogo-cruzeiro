@@ -1161,8 +1161,12 @@ body::before {
   animation-delay: 0.36s;
 }
 
-.editorial-home:not(.site-loaded) {
+.editorial-home.founder-prelude-active:not(.site-loaded) {
   overflow: hidden;
+}
+
+body.editorial-home .logo-splash {
+  display: none !important;
 }
 
 body.site-loaded .logo-splash {
@@ -1206,6 +1210,13 @@ button {
 body.site-loaded .page-shell {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+body.editorial-home .page-shell {
+  opacity: 1;
+  transform: none;
+  transition: opacity 260ms ease, transform 260ms ease;
+  transition-delay: 0s;
 }
 
 @keyframes splashOrbit {

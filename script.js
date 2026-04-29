@@ -1549,7 +1549,7 @@ const setupSplashExperience = () => {
       ? performance.now()
       : Date.now();
   const elapsed = currentTime - splashBootStartedAt;
-  const minimumDuration = splashMotionQuery.matches ? 100 : hasSeenSplash ? 450 : 2600;
+  const minimumDuration = splashMotionQuery.matches ? 100 : hasSeenSplash ? 180 : 750;
   const remaining = Math.max(100, minimumDuration - elapsed);
 
   window.setTimeout(releaseSplash, remaining);

@@ -1382,6 +1382,9 @@ const DYNAMIC_ASSET_BASENAMES = new Set([
   "runtime-config.js"
 ]);
 const VERSIONED_STATIC_CACHE_CONTROL = "public, max-age=31536000, immutable";
+const PUBLIC_HTML_CACHE_CONTROL = "public, max-age=45, stale-while-revalidate=180";
+const PUBLIC_NEWS_API_CACHE_CONTROL = "public, max-age=30, stale-while-revalidate=120";
+const PUBLIC_LIVE_FEED_CACHE_CONTROL = "public, max-age=60, stale-while-revalidate=300";
 const NEWS_API_CACHE_TTL_MS = 30 * 1000;
 const newsApiResponseCache = new Map();
 const NINJAS_OPPORTUNITIES_UPDATED_AT = "2026-04-14";
@@ -3836,14 +3839,24 @@ function isPendingFounderSubscription(item = {}) {
   return paymentStatus === "pendente-manual" || paymentStatus === "aguardando-confirmacao-pix";
 }
 
-function sendJson(res, status, payload) {
-  const body = JSON.stringify(payload);
-  res.writeHead(status, {
+function sendJson(res, status, payload, options = {}) {
+  const mimeType = "application/json; charset=utf-8";
+  const body = Buffer.from(JSON.stringify(payload), "utf-8");
+  const { buffer: finalBuffer, encoding } = maybeCompressBuffer(options.req, mimeType, body);
+  const cacheControl = options.cacheControl || "no-store";
+  const headers = {
     "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": "no-store",
-    "Content-Length": Buffer.byteLength(body),
-  });
-  res.end(body);
+    "Cache-Control": cacheControl,
+    "Content-Length": finalBuffer.length,
+  };
+
+  if (encoding) {
+    headers["Content-Encoding"] = encoding;
+    headers.Vary = "Accept-Encoding";
+  }
+
+  res.writeHead(status, headers);
+  res.end(finalBuffer);
 }
 
 function applyApiCors(req, res) {
@@ -5772,7 +5785,7 @@ function getStaticCacheControl(filePath, hasVersionParam = false) {
   }
 
   if (ext === ".html") {
-    return "no-store";
+    return PUBLIC_HTML_CACHE_CONTROL;
   }
 
   if (DYNAMIC_ASSET_BASENAMES.has(baseName)) {
@@ -10903,7 +10916,10 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 60);
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit), {
+      req,
+      cacheControl: PUBLIC_NEWS_API_CACHE_CONTROL
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
@@ -10950,30 +10966,46 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    return sendJson(res, 200, {
-      ok: true,
-      topic: payload.topic,
-      updatedAt: payload.updatedAt,
-      total: Array.isArray(payload.items) ? payload.items.length : 0,
-      items: Array.isArray(payload.items) ? payload.items : [],
-      reports: Array.isArray(payload.reports) ? payload.reports : [],
-      fallbackUsed: Boolean(payload.fallbackUsed),
-      stale: Boolean(payload.stale)
-    });
+    return sendJson(
+      res,
+      200,
+      {
+        ok: true,
+        topic: payload.topic,
+        updatedAt: payload.updatedAt,
+        total: Array.isArray(payload.items) ? payload.items.length : 0,
+        items: Array.isArray(payload.items) ? payload.items : [],
+        reports: Array.isArray(payload.reports) ? payload.reports : [],
+        fallbackUsed: Boolean(payload.fallbackUsed),
+        stale: Boolean(payload.stale)
+      },
+      {
+        req,
+        cacheControl: forceRefresh ? "no-store" : PUBLIC_LIVE_FEED_CACHE_CONTROL
+      }
+    );
   }
 
   if (req.method === "GET" && pathname === "/api/social-trends") {
     const limit = Number(searchParams.get("limit") || 24);
     const payload = await getSocialTrends(limit);
-    return sendJson(res, 200, {
-      ok: true,
-      updatedAt: payload.updatedAt,
-      total: Array.isArray(payload.items) ? payload.items.length : 0,
-      items: Array.isArray(payload.items) ? payload.items : [],
-      reports: Array.isArray(payload.reports) ? payload.reports : [],
-      external: Boolean(payload.external),
-      stale: Boolean(payload.stale)
-    });
+    return sendJson(
+      res,
+      200,
+      {
+        ok: true,
+        updatedAt: payload.updatedAt,
+        total: Array.isArray(payload.items) ? payload.items.length : 0,
+        items: Array.isArray(payload.items) ? payload.items : [],
+        reports: Array.isArray(payload.reports) ? payload.reports : [],
+        external: Boolean(payload.external),
+        stale: Boolean(payload.stale)
+      },
+      {
+        req,
+        cacheControl: PUBLIC_LIVE_FEED_CACHE_CONTROL
+      }
+    );
   }
 
   if (req.method === "GET" && pathname === "/api/news/suggestions") {
