@@ -26,6 +26,8 @@ const radarGuideLaser = radarGuide?.querySelector(".radar-guide-laser");
 const radarGuideLaserDot = radarGuide?.querySelector(".radar-guide-laser-dot");
 const radarGuideLantern = radarGuide?.querySelector(".radar-guide-lantern");
 const radarGuideFrontArm = radarGuide?.querySelector(".radar-guide-arm.arm-front");
+const radarFlowFocus = radarGuide?.querySelector("[data-radar-flow-focus]");
+const radarFlowLead = radarGuide?.querySelector("[data-radar-flow-lead]");
 const thumbNodes = document.querySelectorAll(".news-thumb, .mini-thumb");
 const subscriptionForm = document.querySelector("#subscription-form");
 const subscriptionNameInput = document.querySelector("#subscription-name");
@@ -810,6 +812,7 @@ const isIllustrativeImage = (article) => {
 };
 
 const articleImageResolveCache = new Map();
+const sourcePreviewImageResolveCache = new Map();
 
 const resolveSourcePreviewImage = async (article = {}) => {
   const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
@@ -818,8 +821,18 @@ const resolveSourcePreviewImage = async (article = {}) => {
     return "";
   }
 
-  // /api/preview-image is protected for admin previews; public home cards must not call it.
-  return "";
+  if (!sourcePreviewImageResolveCache.has(sourceUrl)) {
+    sourcePreviewImageResolveCache.set(
+      sourceUrl,
+      requestApiJson(`/api/preview-image?url=${encodeURIComponent(sourceUrl)}`, {
+        method: "GET"
+      })
+        .then((payload) => sanitizeImageUrl(payload?.imageUrl || ""))
+        .catch(() => "")
+    );
+  }
+
+  return sourcePreviewImageResolveCache.get(sourceUrl) || "";
 };
 
 const resolveArticleImage = async (article, surface = "default") => {
@@ -2054,6 +2067,14 @@ const updateRadarGuide = (filter = "todos", spotlightArticles = []) => {
     radarGuideText.textContent = `${theme.text}${leadTitle}`;
   }
 
+  if (radarFlowFocus) {
+    radarFlowFocus.textContent = theme.label;
+  }
+
+  if (radarFlowLead) {
+    radarFlowLead.textContent = spotlightArticles[0]?.title || "Resumo local em preparação";
+  }
+
   radarGuideScanIndex = 0;
   radarGuideScanTopic = null;
   radarGuideManualFocusUntil = Date.now() + RADAR_GUIDE_MANUAL_LOCK_MS;
@@ -2717,17 +2738,56 @@ const getArchiveImageKey = (article = {}) =>
     .replace(/\?.*$/, "")
     .slice(0, 180);
 
+const isGenericArchiveStoryTitle = (article = {}) => {
+  const title = normalizeArchiveStoryText(article.title || article.sourceLabel || "");
+  const source = normalizeArchiveStoryText(article.sourceName || article.source || "");
+
+  if (!title) {
+    return true;
+  }
+
+  if (/^atualizacao( internacional| nacional| regional| local)? de /.test(title)) {
+    return true;
+  }
+
+  if (/^(atualizacao|noticia em atualizacao|resumo em atualizacao|sem titulo|sem resumo)$/.test(title)) {
+    return true;
+  }
+
+  return Boolean(source && title.includes(source) && /\batualizacao\b/.test(title) && title.split(/\s+/).length <= 6);
+};
+
+const getArchiveArticleStoryKey = (article = {}) => {
+  const dateKey =
+    getArticleDateKey(article) ||
+    normalizeArchiveStoryText(article.publishedAt || article.date || article.createdAt || "").slice(0, 48);
+  const titleKey = slugifyText(article.title || article.sourceLabel || "");
+  const slugKey = slugifyText(article.slug || "");
+  const clusterKey = getArchiveStoryCluster(article);
+  const storyKey = (isGenericArchiveStoryTitle(article) ? "" : titleKey) || slugKey || clusterKey;
+
+  if (storyKey && dateKey) {
+    return `story|${storyKey}|${dateKey}`;
+  }
+
+  return storyKey || "";
+};
+
 const getArchiveArticleCanonicalKey = (article = {}) => {
+  const storyKey = getArchiveArticleStoryKey(article);
+  if (storyKey) {
+    return storyKey;
+  }
+
   const canonicalUrl = getCanonicalArticleUrl(article);
   if (canonicalUrl) {
     return canonicalUrl;
   }
 
-  const dateKey = getArticleDateKey(article);
   return [
     getArchiveStoryCluster(article),
     normalizeArchiveStoryText(article.sourceName || article.source || ""),
-    dateKey
+    normalizeArchiveStoryText(article.publishedAt || article.date || article.createdAt || "")
   ]
     .filter(Boolean)
     .join("|");
@@ -2997,8 +3057,7 @@ const getRegionalEditorialScopeText = (article = {}) => {
     normalizedArticle.description,
     normalizedArticle.category,
     normalizedArticle.categoryKey,
-    normalizedArticle.eyebrow,
-    Array.isArray(normalizedArticle.body) ? normalizedArticle.body.join(" ") : normalizedArticle.body
+    normalizedArticle.eyebrow
   ].join(" ");
 };
 
@@ -3020,7 +3079,7 @@ const isRemoteNationalMosaicScope = (rawText = "") => {
     return false;
   }
 
-  return /\b(eua|estados unidos|trump|biden|reino unido|rei charles|china|russia|rússia|ucrania|ucrânia|europa|oriente medio|oriente médio|israel|ira|irã|washington|nova york|londres|paris|argentina|peru|brasilia|brasília|governo federal|stf|senado federal|camara dos deputados|câmara dos deputados|congresso nacional|palmeiras|flamengo|corinthians|nba|champions|bbb|celebridade)\b/.test(
+  return /\b(eua|estados unidos|trump|biden|reino unido|rei charles|china|russia|rússia|ucrania|ucrânia|europa|oriente medio|oriente médio|israel|ira|irã|washington|nova york|londres|paris|madrid|argentina|peru|brasilia|brasília|governo federal|stf|senado federal|camara dos deputados|câmara dos deputados|congresso nacional|sao paulo|são paulo|sp|palmeiras|flamengo|corinthians|nba|champions|bbb|celebridade)\b/.test(
     haystack
   );
 };
@@ -3042,6 +3101,10 @@ const getMosaicRegionalScope = (article = {}) => {
   }
 
   if (hasAcreEditorialSignal) {
+    return "acre";
+  }
+
+  if ((isAcreGeneralScope(sourceScopeText) || isAcreGovernmentScope(sourceScopeText)) && !hasRemoteSignal) {
     return "acre";
   }
 
@@ -3741,8 +3804,10 @@ const pickRadarLeadArticles = (articles = []) => {
   const normalizedRegionalArticles = articles
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => getMosaicRegionalScope(article) && !isMosaicLowDisplayArticle(article));
+  const sameDayArticle = (article) => getArticleDateKey(article) === referenceDateKey;
+  const olderArticle = (article) => !sameDayArticle(article);
   const sameDayArticles = sortMosaicRegionalArticles(
-    normalizedRegionalArticles.filter((article) => getArticleDateKey(article) === referenceDateKey)
+    normalizedRegionalArticles.filter(sameDayArticle)
   );
   const sameDayArticlesWithImage = sameDayArticles.filter((article) =>
     articleHasUsableImageCandidate(article, "hero")
@@ -3768,16 +3833,30 @@ const pickRadarLeadArticles = (articles = []) => {
   );
   const juruaArticlesWithImage = sortMosaicRegionalArticles(
     normalizedRegionalArticles.filter(
-      (article) => getMosaicRegionalScope(article) === "jurua" && articleHasUsableImageCandidate(article, "hero")
+      (article) =>
+        olderArticle(article) &&
+        getMosaicRegionalScope(article) === "jurua" &&
+        articleHasUsableImageCandidate(article, "hero")
     )
   );
   const acreArticlesWithImage = sortMosaicRegionalArticles(
     normalizedRegionalArticles.filter(
-      (article) => getMosaicRegionalScope(article) === "acre" && articleHasUsableImageCandidate(article, "hero")
+      (article) =>
+        olderArticle(article) &&
+        getMosaicRegionalScope(article) === "acre" &&
+        articleHasUsableImageCandidate(article, "hero")
     )
   );
 
-  addMosaicRegionalPass(priorityJuruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    sameDayArticlesWithImage.filter(
+      (article) => getMosaicRegionalScope(article) === "jurua" && isMailzaPriorityArticle(article)
+    ),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
   addMosaicRegionalPass(
     sameDayArticlesWithImage.filter((article) => getMosaicRegionalScope(article) === "jurua"),
     leadArticles,
@@ -3785,10 +3864,33 @@ const pickRadarLeadArticles = (articles = []) => {
     selectedImages,
     targetCount
   );
-  addMosaicRegionalPass(juruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
-  addMosaicRegionalPass(priorityAcreArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    sameDayArticlesWithImage.filter(
+      (article) => getMosaicRegionalScope(article) === "acre" && isMailzaPriorityArticle(article)
+    ),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
   addMosaicRegionalPass(
     sameDayArticlesWithImage.filter((article) => getMosaicRegionalScope(article) === "acre"),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
+  addMosaicRegionalPass(sameDayArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    priorityJuruaArticlesWithImage.filter(olderArticle),
+    leadArticles,
+    selectedKeys,
+    selectedImages,
+    targetCount
+  );
+  addMosaicRegionalPass(juruaArticlesWithImage, leadArticles, selectedKeys, selectedImages, targetCount);
+  addMosaicRegionalPass(
+    priorityAcreArticlesWithImage.filter(olderArticle),
     leadArticles,
     selectedKeys,
     selectedImages,
@@ -7094,6 +7196,128 @@ const setFeedbackState = (node, message, tone = "") => {
   }
 };
 
+const getArticleSourceEntries = (article = {}) => {
+  const entries = [];
+  const pushEntry = (entry = {}) => {
+    const name = cleanArticleText(entry.name || entry.sourceName || entry.source || entry.label || "");
+    const url = String(entry.url || entry.sourceUrl || entry.href || "").trim();
+    const key = normalizeText(url || name);
+
+    if (!key || entries.some((item) => normalizeText(item.url || item.name) === key)) {
+      return;
+    }
+
+    entries.push({ name: name || "Fonte local", url });
+  };
+
+  [article.crossSources, article.alternateSources, article.sources].forEach((collection) => {
+    if (!Array.isArray(collection)) {
+      return;
+    }
+
+    collection.forEach((entry) => {
+      if (typeof entry === "string") {
+        pushEntry({ name: entry });
+        return;
+      }
+
+      pushEntry(entry);
+    });
+  });
+
+  pushEntry({
+    name: article.sourceName || article.source || article.sourceLabel,
+    url: article.sourceUrl || article.url || article.link
+  });
+
+  return entries;
+};
+
+const getRuntimeArticleQualityScore = (article = {}) => {
+  const imageUrl = String(article.imageUrl || article.feedImageUrl || article.sourceImageUrl || "").trim();
+  const lede = String(article.lede || article.summary || article.description || "").trim();
+  const bodyCount = Array.isArray(article.body) ? article.body.filter(Boolean).length : 0;
+  const highlightsCount = Array.isArray(article.highlights) ? article.highlights.filter(Boolean).length : 0;
+  const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+  let score = 0;
+
+  if (String(article.title || "").trim()) score += 10;
+  if (lede) score += Math.min(20, Math.ceil(lede.length / 60));
+  if (imageUrl && !isGeneratedNewsFallbackImageUrl(imageUrl)) score += 30;
+  if (sourceUrl && sourceUrl !== "#") score += 6;
+  score += Math.min(24, bodyCount * 4);
+  score += Math.min(12, highlightsCount * 2);
+
+  if (/bloqueou o resumo importado|sem resumo|resumo em atualizacao/i.test(lede)) {
+    score -= 12;
+  }
+
+  return score;
+};
+
+const mergeCrossedNewsItem = (existing = {}, candidate = {}) => {
+  const candidateScore = getRuntimeArticleQualityScore(candidate);
+  const existingScore = getRuntimeArticleQualityScore(existing);
+  const candidateTime = getArticleSortTimestamp(candidate);
+  const existingTime = getArticleSortTimestamp(existing);
+  const candidateWins =
+    candidateScore > existingScore || (candidateScore === existingScore && candidateTime > existingTime);
+  const preferred = candidateWins ? candidate : existing;
+  const secondary = candidateWins ? existing : candidate;
+  const crossSources = getArticleSourceEntries(preferred);
+
+  getArticleSourceEntries(secondary).forEach((source) => {
+    const key = normalizeText(source.url || source.name);
+    if (key && !crossSources.some((entry) => normalizeText(entry.url || entry.name) === key)) {
+      crossSources.push(source);
+    }
+  });
+
+  const alternateSlugs = [
+    preferred.slug,
+    secondary.slug,
+    ...(Array.isArray(preferred.alternateSlugs) ? preferred.alternateSlugs : []),
+    ...(Array.isArray(secondary.alternateSlugs) ? secondary.alternateSlugs : [])
+  ]
+    .map((value) => String(value || "").trim())
+    .filter(Boolean)
+    .filter((value, index, list) => list.indexOf(value) === index);
+
+  return {
+    ...preferred,
+    crossSources,
+    alternateSources: crossSources,
+    sourceCount: crossSources.length,
+    alternateSlugs
+  };
+};
+
+const formatCrossedSourceName = (article = {}) => {
+  const sources = getArticleSourceEntries(article);
+
+  if (sources.length > 1) {
+    const extraCount = sources.length - 1;
+    return `${sources[0].name} + ${extraCount} fonte${extraCount === 1 ? "" : "s"}`;
+  }
+
+  return sources[0]?.name || article.sourceName || "Fonte local";
+};
+
+const formatCrossedSourceMeta = (article = {}) => {
+  const sourceName = formatCrossedSourceName(article);
+  const date = article.date || formatDisplayDate(article.publishedAt || article.createdAt || "");
+  return date && date !== "Sem data" ? `${sourceName} • ${date}` : sourceName;
+};
+
+const formatCrossedSourceFooter = (article = {}) => {
+  const sources = getArticleSourceEntries(article);
+  if (sources.length > 1) {
+    return `Notícia cruzada em ${sources.length} fontes`;
+  }
+
+  return `Fonte consultada: ${sources[0]?.name || article.sourceName || "Fonte local"}`;
+};
+
 const dedupeNewsItems = (items = []) => {
   const mergedMap = new Map();
 
@@ -7101,7 +7325,9 @@ const dedupeNewsItems = (items = []) => {
     const normalizedItem = normalizeRuntimeArticle(item);
     const key = getArchiveArticleCanonicalKey(normalizedItem);
 
-    if (!mergedMap.has(key)) {
+    if (mergedMap.has(key)) {
+      mergedMap.set(key, mergeCrossedNewsItem(mergedMap.get(key), normalizedItem));
+    } else {
       mergedMap.set(key, normalizedItem);
     }
   });
@@ -7839,7 +8065,19 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
 const syncNewsDataset = (runtimeItems = []) => {
   const merged = dedupeNewsItems([...(runtimeItems || []), ...initialStaticNews]);
   window.NEWS_DATA = merged;
-  window.NEWS_MAP = Object.fromEntries(merged.map((item) => [item.slug, item]));
+  window.NEWS_MAP = merged.reduce((map, item) => {
+    if (item.slug) {
+      map[item.slug] = item;
+    }
+
+    (Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []).forEach((slug) => {
+      if (slug) {
+        map[slug] = item;
+      }
+    });
+
+    return map;
+  }, {});
   persistOfflineNewsCache(merged);
   return merged;
 };
@@ -8234,7 +8472,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (sourceNode) {
-    sourceNode.textContent = `${normalized.sourceName} • ${normalized.date}`;
+    sourceNode.textContent = formatCrossedSourceMeta(normalized);
   }
 
   if (titleNode) {
@@ -8246,7 +8484,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (footerSource) {
-    footerSource.textContent = `Fonte consultada: ${normalized.sourceName}`;
+    footerSource.textContent = formatCrossedSourceFooter(normalized);
   }
 
   if (footerLink) {
@@ -9694,6 +9932,8 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       .join("")
       .toUpperCase() || "?";
 
+  const candidatePhotoResolveCache = new Map();
+
   const resolveCandidatePhoto = async (candidate = {}) => {
     const directCandidates = [];
     [candidate.imageUrl, candidate.photoUrl, candidate.avatarUrl].forEach((value) => {
@@ -9714,8 +9954,20 @@ if (window.ELECTIONS_DATA?.offices?.length) {
       return "";
     }
 
-    // /api/preview-image requires admin access; avoid public 401 noise on the live site.
-    return "";
+    if (!candidatePhotoResolveCache.has(sourceUrl)) {
+      candidatePhotoResolveCache.set(
+        sourceUrl,
+        requestApiJson(`/api/preview-image?url=${encodeURIComponent(sourceUrl)}`, {
+          method: "GET"
+        })
+          .then((payload) =>
+            preloadFirstAvailableImage(buildImageLoadCandidates(payload?.imageUrl || ""))
+          )
+          .catch(() => "")
+      );
+    }
+
+    return candidatePhotoResolveCache.get(sourceUrl) || "";
   };
 
   const applyCandidatePhoto = (avatarNode, candidate = {}) => {
@@ -10097,7 +10349,7 @@ const buildFeedCard = (article) => {
   thumb.append(chip);
 
   source.className = "news-source";
-  source.textContent = `${normalizedArticle.sourceName} • ${normalizedArticle.date}`;
+  source.textContent = formatCrossedSourceMeta(normalizedArticle);
 
   title.textContent = normalizedArticle.title;
   summary.textContent = truncateCopy(
@@ -10105,7 +10357,7 @@ const buildFeedCard = (article) => {
     card.classList.contains("featured") ? 150 : 132
   );
 
-  category.textContent = `Fonte consultada: ${normalizedArticle.sourceName}`;
+  category.textContent = formatCrossedSourceFooter(normalizedArticle);
   link.href = href;
   link.textContent = "ler análise";
   applyArticleLinkAttrs(link, href);
@@ -11893,16 +12145,13 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
   }
 
   const founders = (Array.isArray(items) ? items : []).filter((item) => item?.name);
-  const mobileSpotlight = document.querySelector("#founders")?.classList.contains("is-founders-mobile-spotlight");
-  foundersCount.textContent = mobileSpotlight
-    ? `${totalFounders} ${totalFounders === 1 ? "apoiador confirmado" : "apoiadores confirmados"}`
-    : `${totalFounders} ${totalFounders === 1 ? "fundador" : "fundadores"} até agora`;
+  foundersCount.textContent = `${totalFounders} ${totalFounders === 1 ? "fundador" : "fundadores"} até agora`;
 
   if (!founders.length) {
     foundersList.innerHTML = `
       <article class="founder-card is-empty">
-        <strong>${mobileSpotlight ? "Espaço dos apoiadores" : "Quem fortalece este jornal"}</strong>
-        <p>${mobileSpotlight ? "Quem ajuda o portal aparece aqui depois da confirmação do apoio." : "Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público."}</p>
+        <strong>Quem fortalece este jornal</strong>
+        <p>Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público.</p>
       </article>
     `;
     return;
@@ -11921,150 +12170,6 @@ const hydrateFoundersWallFromApi = async () => {
   } catch (_error) {
     // Mantem o mural estatico quando a API nao estiver ligada.
   }
-};
-
-const initializeMobileFoundersSpotlight = () => {
-  const root = document.querySelector("#founders");
-  const cards = root ? [...root.querySelectorAll(".founder-banner-card")] : [];
-
-  if (!root || !cards.length || typeof window.matchMedia !== "function") {
-    return;
-  }
-
-  const mediaQuery = window.matchMedia("(max-width: 760px)");
-  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const eyebrow = root.querySelector(".section-heading .eyebrow");
-  const title = root.querySelector(".section-heading h2");
-  const intro = root.querySelector(".section-heading > p");
-  const summary = root.querySelector(".founders-summary span");
-  const emptyTitle = root.querySelector(".founder-card.is-empty strong");
-  const emptyText = root.querySelector(".founder-card.is-empty p");
-  let activeIndex = 0;
-  let rotationTimer = 0;
-
-  const mobileItems = [
-    {
-      label: "Apoio local",
-      title: "Cafe Cruzeiro",
-      text: "Marca local em destaque entre quem ajuda o portal a continuar no ar."
-    },
-    {
-      label: "Apoio confirmado",
-      title: "Grupo A.S",
-      text: "Marca parceira na vitrine de apoio ao jornal local."
-    },
-    {
-      label: "Apoio local",
-      title: "Dra. Geane Campo",
-      text: "Presença profissional entre os nomes que fortalecem o portal."
-    },
-    {
-      label: "Apoio confirmado",
-      title: "Recommencer",
-      text: "Parceira confirmada entre quem mantém a leitura local ativa."
-    }
-  ];
-
-  const rememberText = (node) => {
-    if (node && !node.dataset.mobileFounderOriginalText) {
-      node.dataset.mobileFounderOriginalText = node.textContent || "";
-    }
-  };
-
-  const setMobileText = (node, value) => {
-    if (!node) return;
-    rememberText(node);
-    node.textContent = value;
-  };
-
-  const restoreText = (node) => {
-    if (node?.dataset.mobileFounderOriginalText !== undefined) {
-      node.textContent = node.dataset.mobileFounderOriginalText;
-    }
-  };
-
-  const ensureMobileCopy = (card, item) => {
-    const label = card.querySelector("span");
-    let copy = card.querySelector(".founder-banner-copy");
-
-    setMobileText(label, item.label);
-
-    if (!copy) {
-      copy = document.createElement("div");
-      copy.className = "founder-banner-copy founder-mobile-copy";
-      copy.innerHTML = "<strong></strong><p></p>";
-      card.appendChild(copy);
-    } else if (!copy.dataset.mobileFounderOriginalHtml) {
-      copy.dataset.mobileFounderOriginalHtml = copy.innerHTML;
-    }
-
-    const name = copy.querySelector("strong") || document.createElement("strong");
-    const text = copy.querySelector("p") || document.createElement("p");
-    name.textContent = item.title;
-    text.textContent = item.text;
-    if (!name.parentElement) copy.appendChild(name);
-    if (!text.parentElement) copy.appendChild(text);
-  };
-
-  const restoreCard = (card) => {
-    card.classList.remove("is-founder-mobile-active");
-    restoreText(card.querySelector("span"));
-    const copy = card.querySelector(".founder-banner-copy");
-    if (copy?.classList.contains("founder-mobile-copy")) {
-      copy.remove();
-    } else if (copy?.dataset.mobileFounderOriginalHtml) {
-      copy.innerHTML = copy.dataset.mobileFounderOriginalHtml;
-    }
-  };
-
-  const activateCard = (index) => {
-    activeIndex = (index + cards.length) % cards.length;
-    cards.forEach((card, cardIndex) => {
-      card.classList.toggle("is-founder-mobile-active", cardIndex === activeIndex);
-    });
-  };
-
-  const stopRotation = () => {
-    if (rotationTimer) {
-      window.clearInterval(rotationTimer);
-      rotationTimer = 0;
-    }
-  };
-
-  const applyMode = () => {
-    stopRotation();
-
-    if (!mediaQuery.matches) {
-      root.classList.remove("is-founders-mobile-spotlight");
-      [eyebrow, title, intro, foundersCount, summary, emptyTitle, emptyText].forEach(restoreText);
-      cards.forEach(restoreCard);
-      return;
-    }
-
-    root.classList.add("is-founders-mobile-spotlight");
-    setMobileText(eyebrow, "apoio local");
-    setMobileText(title, "Quem apoia o portal");
-    setMobileText(intro, "Apoiadores confirmados aparecem aqui e ajudam este jornal a continuar no ar.");
-    setMobileText(foundersCount, "0 apoiadores confirmados");
-    setMobileText(summary, "apoie com qualquer valor a partir de R$ 1");
-    setMobileText(emptyTitle, "Espaço dos apoiadores");
-    setMobileText(emptyText, "Quem ajuda o portal aparece aqui depois da confirmação do apoio.");
-
-    cards.forEach((card, cardIndex) => {
-      ensureMobileCopy(card, mobileItems[cardIndex] || mobileItems[0]);
-    });
-    activateCard(activeIndex);
-
-    if (!reducedMotionQuery.matches && cards.length > 1) {
-      rotationTimer = window.setInterval(() => {
-        activateCard(activeIndex + 1);
-      }, 4200);
-    }
-  };
-
-  applyMode();
-  mediaQuery.addEventListener?.("change", applyMode);
-  reducedMotionQuery.addEventListener?.("change", applyMode);
 };
 
 const attachSubscriptionSubmission = () => {
@@ -12239,4 +12344,3 @@ scheduleTopicSurfaceRefresh();
 initializeLiveTicker();
 scheduleHomeBackgroundHydration();
 hydrateFoundersWallFromApi();
-initializeMobileFoundersSpotlight();

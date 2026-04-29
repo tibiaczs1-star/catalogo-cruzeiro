@@ -33,10 +33,10 @@
     FOUNDERS_RECOMMENCER_LOGO_SRC
   ];
   const FOUNDERS_OPENING_STEPS = [
-    "ativando palco luminoso dos fundadores",
-    "calibrando logos em camadas 3D",
-    "sincronizando energia do portal",
-    "liberando a edição principal"
+    "marcas apoiadoras em destaque",
+    "visual do portal em camadas",
+    "abertura mais leve e dinâmica",
+    "experiência principal pronta"
   ];
   const LEGACY_WELCOME_ACCEPT_KEYS = [
     "catalogo_terms_welcome_accepted_v1",
@@ -541,13 +541,13 @@
         <div class="catalogo-founder-thanks-layout">
           <div class="catalogo-founder-thanks-media catalogo-founder-reveal reveal-2">
             <div class="catalogo-founder-stage-label">
-              <span>Fundador em cena</span>
+              <span>Apoio que impulsiona</span>
               <strong>Cafe Cruzeiro</strong>
             </div>
             <img
               class="catalogo-founder-thanks-image"
               src="${FOUNDERS_CAFE_IMAGE_SRC}"
-              alt="Pacote do Cafe Cruzeiro em destaque no palco dos fundadores"
+              alt="Pacote do Cafe Cruzeiro em destaque na abertura do portal"
               decoding="async"
               loading="eager"
               fetchpriority="high"
@@ -561,14 +561,14 @@
           </div>
 
           <div class="catalogo-founder-thanks-copy">
-            <p class="catalogo-founder-thanks-kicker catalogo-founder-reveal reveal-1">Socios fundadores</p>
-            <span class="catalogo-founder-thanks-seal catalogo-founder-reveal reveal-2">Homenagem de abertura</span>
+            <p class="catalogo-founder-thanks-kicker catalogo-founder-reveal reveal-1">Apoiadores fundadores</p>
+            <span class="catalogo-founder-thanks-seal catalogo-founder-reveal reveal-2">Tecnologia com apoio local</span>
             <div class="catalogo-founder-banner-rail catalogo-founder-reveal reveal-3">
               <article class="catalogo-founder-banner-card catalogo-founder-banner-card-cafe">
-                <span>Fundador em cena</span>
+                <span>Apoio que impulsiona</span>
                 <div class="catalogo-founder-thanks-logo-wrap catalogo-founder-thanks-copy-card">
                   <strong>Cafe Cruzeiro</strong>
-                  <small>imagem de abertura e palco do portal</small>
+                  <small>presença visual na abertura do portal</small>
                 </div>
               </article>
               <article class="catalogo-founder-banner-card catalogo-founder-banner-card-grupoas">
@@ -611,11 +611,11 @@
                 </div>
               </article>
             </div>
-            <strong class="catalogo-founder-reveal reveal-4">Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer em destaque no palco de abertura.</strong>
-            <span class="catalogo-founder-reveal reveal-5">Obrigado por manter este portal vivo. As noticias estao entrando no ar.</span>
+            <strong class="catalogo-founder-reveal reveal-4">Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer ajudam a abrir uma experiência mais viva para o Juruá.</strong>
+            <span class="catalogo-founder-reveal reveal-5">Apoio local, carregamento visual e tecnologia trabalhando para aproximar a cidade da informação.</span>
             <div class="catalogo-founder-opening catalogo-founder-reveal reveal-5" aria-live="polite">
               <div class="catalogo-founder-opening-head">
-                <strong>Abrindo edicao atual</strong>
+                <strong>Experiência do portal</strong>
                 <span data-founder-opening-percent>0%</span>
               </div>
               <div class="catalogo-founder-opening-bar">
@@ -727,16 +727,16 @@
       </div>
       <div class="catalogo-founder-prelude-shell">
         <div class="catalogo-founder-prelude-hud hud-left" aria-hidden="true">
-          <span>galeria de honra</span>
-          <strong>4 marcas em cena</strong>
+          <span>apoio que impulsiona</span>
+          <strong>Tecnologia com marcas locais</strong>
           <small>apoio local, presença e continuidade</small>
-          <em>abertura especial em andamento</em>
+          <em>abertura visual do portal</em>
         </div>
         <div class="catalogo-founder-prelude-hud hud-right" aria-hidden="true">
-          <span>palco premium</span>
-          <strong>luz de estreia</strong>
+          <span>experiência imersiva</span>
+          <strong>Interface em movimento</strong>
           <small>profundidade, volume e movimento</small>
-          <em>fundadores entrando primeiro</em>
+          <em>marcas carregadas com prioridade</em>
         </div>
         <div class="catalogo-founder-prelude-side side-left" aria-hidden="true">
           <span>apoio local</span>
@@ -745,12 +745,12 @@
         </div>
         <div class="catalogo-founder-prelude-side side-right" aria-hidden="true">
           <span>abertura do portal</span>
-          <strong>Honra em foco</strong>
-          <small>cada apoio ganha primeiro plano antes da leitura</small>
+          <strong>Presença inteligente</strong>
+          <small>o apoio local aparece com destaque antes da leitura</small>
         </div>
         <div class="catalogo-founder-prelude-copy">
-          <span>fundadores</span>
-          <strong>Quem sustenta o portal entra primeiro em cena</strong>
+          <span>apoiadores fundadores</span>
+          <strong>Marcas locais ajudam a acender a tecnologia do portal</strong>
           <small>Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer</small>
         </div>
         <div class="catalogo-founder-prelude-logos">
@@ -761,13 +761,13 @@
         </div>
         <div class="catalogo-founder-prelude-stage" aria-live="polite">
           <div class="catalogo-founder-prelude-stage-head">
-            <strong>Preparando portal e popup</strong>
+            <strong>Abertura visual do portal</strong>
             <span data-founder-prelude-percent>0%</span>
           </div>
           <div class="catalogo-founder-prelude-stage-bar">
             <span data-founder-prelude-bar></span>
           </div>
-          <p data-founder-prelude-text>energizando a abertura dos fundadores</p>
+          <p data-founder-prelude-text>marcas apoiadoras em destaque</p>
         </div>
       </div>
     `;
@@ -797,10 +797,10 @@
     const barNode = prelude.querySelector("[data-founder-prelude-bar]");
     const textNode = prelude.querySelector("[data-founder-prelude-text]");
     const steps = [
-      "energizando a abertura dos fundadores",
-      "montando estrelas e logos em cena",
-      "preparando a entrada principal do portal",
-      "liberando a home principal"
+      "marcas apoiadoras em destaque",
+      "recursos visuais em sintonia",
+      "entrada principal preparada",
+      "home principal pronta"
     ];
     let stepIndex = 0;
     const startedAt = Date.now();
@@ -1037,8 +1037,8 @@
         </div>
 
         <div class="catalogo-visual-copy">
-          <strong>O que essa cena mostra</strong>
-          <span>Uma ilustracao ficticia da IA organizando memes, alertas e noticias antes da entrada no portal.</span>
+          <strong>Tecnologia em movimento</strong>
+          <span>IA, curadoria local e recursos visuais trabalham juntos para deixar a entrada no portal mais clara e viva.</span>
         </div>
       </div>
     `;

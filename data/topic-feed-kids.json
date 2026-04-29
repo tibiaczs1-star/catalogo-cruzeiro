@@ -1,6 +1,6 @@
 {
   "topic": "kids",
-  "updatedAt": "2026-04-28T16:03:50.209Z",
+  "updatedAt": "2026-04-29T01:11:00.153Z",
   "items": [
     {
       "id": "relatorio-do-youtube-mostra-como-animadores-pela-internet-mudam-o-entretenimento",
@@ -109,42 +109,6 @@
       "topic": "kids",
       "coverageLayer": "global",
       "topicGroup": "animation"
-    },
-    {
-      "id": "https://www.animenewsnetwork.com/review/rooster-fighter/episode-7/.236866",
-      "slug": "rooster-fighter-episode-7",
-      "title": "Rooster Fighter ‒ Episode 7",
-      "eyebrow": "cotidiano",
-      "date": "28 de abr. de 2026",
-      "publishedAt": "2026-04-28T13:30:00.000Z",
-      "category": "Cotidiano",
-      "categoryKey": "cotidiano",
-      "previewClass": "thumb-cheia",
-      "sourceName": "Anime News Network",
-      "sourceUrl": "https://www.animenewsnetwork.com/review/rooster-fighter/episode-7/.236866",
-      "sourceLabel": "Rooster Fighter ‒ Episode 7",
-      "lede": "A crítica descreve o episódio como uma comédia absurda, com humor exagerado e situações fora do comum.",
-      "summary": "A crítica descreve o episódio como uma comédia absurda, com humor exagerado e situações fora do comum.",
-      "analysis": "",
-      "body": [
-        "Anime News Network publicou em 28 de abr. de 2026 a base desta noticia sobre Rooster Fighter ‒ Episode 7. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-        "Rooster Fighter ‒ Episode 7 e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-      ],
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://www.animenewsnetwork.com/thumbnails/crop600x315gQ8/cms/episode-review.5/236866/rf07.jpg",
-      "sourceImageUrl": "https://www.animenewsnetwork.com/thumbnails/crop600x315gQ8/cms/episode-review.5/236866/rf07.jpg",
-      "feedImageUrl": "",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "topic": "kids",
-      "coverageLayer": "global",
-      "topicGroup": "anime"
     },
     {
       "id": "moonbug-estreia-emmie-s-wonder-wardrobe-serie-derivada-pre-escolar-de-little-angel",
@@ -292,5 +256,5 @@
       "count": 8
     }
   ],
-  "fallbackUsed": false
+  "fallbackUsed": true
 }

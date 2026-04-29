@@ -1874,6 +1874,33 @@ const ARCHIVE_STORY_STOPWORDS = new Set([
   "prefeitura"
 ]);
 
+const DISPLAY_MONTH_INDEX = {
+  janeiro: 0,
+  jan: 0,
+  fevereiro: 1,
+  fev: 1,
+  marco: 2,
+  mar: 2,
+  abril: 3,
+  abr: 3,
+  maio: 4,
+  mai: 4,
+  junho: 5,
+  jun: 5,
+  julho: 6,
+  jul: 6,
+  agosto: 7,
+  ago: 7,
+  setembro: 8,
+  set: 8,
+  outubro: 9,
+  out: 9,
+  novembro: 10,
+  nov: 10,
+  dezembro: 11,
+  dez: 11
+};
+
 function decodeEditorialEntities(value = "") {
   return String(value || "")
     .replace(/&#(\d+);/g, (_match, code) => String.fromCharCode(Number(code)))
@@ -1970,7 +1997,77 @@ function getArchiveImageKey(item = {}) {
     .slice(0, 180);
 }
 
+function getArticleDateKey(item = {}) {
+  const rawValue = item.publishedAt || item.date || item.createdAt || "";
+
+  if (!rawValue) {
+    return "";
+  }
+
+  if (typeof rawValue === "string") {
+    const isoMatch = rawValue.match(/^(\d{4}-\d{2}-\d{2})/);
+    if (isoMatch) {
+      return isoMatch[1];
+    }
+
+    const normalized = normalizeText(rawValue).replace("º", "").replace(/\./g, "");
+    const longDateMatch = normalized.match(/(\d{1,2}) de ([a-z]+) de (\d{4})/);
+
+    if (longDateMatch) {
+      const [, day, month, year] = longDateMatch;
+      const monthNumber = String((DISPLAY_MONTH_INDEX[month] ?? 0) + 1).padStart(2, "0");
+      const dayNumber = String(Number(day)).padStart(2, "0");
+      return `${year}-${monthNumber}-${dayNumber}`;
+    }
+  }
+
+  const parsed = new Date(rawValue);
+  if (Number.isNaN(parsed.getTime())) {
+    return normalizeArchiveStoryText(rawValue).slice(0, 48);
+  }
+
+  return parsed.toISOString().slice(0, 10);
+}
+
+function isGenericArticleStoryTitle(item = {}) {
+  const title = normalizeArchiveStoryText(item.title || item.sourceLabel || "");
+  const source = normalizeArchiveStoryText(item.sourceName || item.source || "");
+
+  if (!title) {
+    return true;
+  }
+
+  if (/^atualizacao( internacional| nacional| regional| local)? de /.test(title)) {
+    return true;
+  }
+
+  if (/^(atualizacao|noticia em atualizacao|resumo em atualizacao|sem titulo|sem resumo)$/.test(title)) {
+    return true;
+  }
+
+  return Boolean(source && title.includes(source) && /\batualizacao\b/.test(title) && title.split(/\s+/).length <= 6);
+}
+
+function getArticleStoryKey(item = {}) {
+  const dateKey = getArticleDateKey(item);
+  const titleKey = slugify(item.title || item.sourceLabel || "");
+  const slugKey = slugify(item.slug || "");
+  const clusterKey = getArchiveStoryCluster(item);
+  const storyKey = (isGenericArticleStoryTitle(item) ? "" : titleKey) || slugKey || clusterKey;
+
+  if (storyKey && dateKey) {
+    return `story|${storyKey}|${dateKey}`;
+  }
+
+  return storyKey || "";
+}
+
 function getArticleCanonicalKey(item = {}) {
+  const storyKey = getArticleStoryKey(item);
+  if (storyKey) {
+    return storyKey;
+  }
+
   const canonicalUrl = getCanonicalArticleUrl(item);
   if (canonicalUrl) {
     return canonicalUrl;
@@ -1979,7 +2076,7 @@ function getArticleCanonicalKey(item = {}) {
   return [
     getArchiveStoryCluster(item),
     normalizeArchiveStoryText(item.sourceName || item.source || ""),
-    item.publishedAt || item.date || item.createdAt || ""
+    normalizeArchiveStoryText(item.publishedAt || item.date || item.createdAt || "")
   ]
     .filter(Boolean)
     .join("|");
@@ -6090,8 +6187,90 @@ function shouldReplaceArticleRecord(existing, candidate) {
   return candidateDate > existingDate;
 }
 
+function getArticleSourceEntries(item = {}) {
+  const entries = [];
+  const pushEntry = (entry = {}) => {
+    const name = cleanShortText(entry.name || entry.sourceName || entry.source || entry.label || "", 120);
+    const url = String(entry.url || entry.sourceUrl || entry.href || "").trim();
+    const key = normalizeText(url || name);
+
+    if (!key || entries.some((source) => normalizeText(source.url || source.name) === key)) {
+      return;
+    }
+
+    entries.push({ name: name || "Fonte local", url });
+  };
+
+  [item.crossSources, item.alternateSources, item.sources].forEach((collection) => {
+    if (!Array.isArray(collection)) {
+      return;
+    }
+
+    collection.forEach((entry) => {
+      if (typeof entry === "string") {
+        pushEntry({ name: entry });
+        return;
+      }
+
+      pushEntry(entry);
+    });
+  });
+
+  pushEntry({
+    name: item.sourceName || item.source || item.sourceLabel,
+    url: item.sourceUrl || item.url || item.link
+  });
+
+  return entries;
+}
+
+function mergeCrossedArticleRecord(preferred = {}, secondary = {}) {
+  const crossSources = getArticleSourceEntries(preferred);
+
+  getArticleSourceEntries(secondary).forEach((source) => {
+    const key = normalizeText(source.url || source.name);
+    if (key && !crossSources.some((entry) => normalizeText(entry.url || entry.name) === key)) {
+      crossSources.push(source);
+    }
+  });
+
+  const alternateSlugs = [
+    preferred.slug,
+    secondary.slug,
+    ...(Array.isArray(preferred.alternateSlugs) ? preferred.alternateSlugs : []),
+    ...(Array.isArray(secondary.alternateSlugs) ? secondary.alternateSlugs : [])
+  ]
+    .map((value) => String(value || "").trim())
+    .filter(Boolean)
+    .filter((value, index, list) => list.indexOf(value) === index);
+
+  return {
+    ...preferred,
+    crossSources,
+    alternateSources: crossSources,
+    sourceCount: crossSources.length,
+    alternateSlugs
+  };
+}
+
+function upsertCrossedArticleRecord(map, key, item) {
+  const existing = map.get(key);
+
+  if (!existing) {
+    map.set(key, item);
+    return;
+  }
+
+  if (shouldReplaceArticleRecord(existing, item)) {
+    map.set(key, mergeCrossedArticleRecord(item, existing));
+    return;
+  }
+
+  map.set(key, mergeCrossedArticleRecord(existing, item));
+}
+
 function getArticleStorageKey(item = {}) {
-  return String(item.slug || item.id || getArticleCanonicalKey(item) || item.title || "").trim();
+  return String(getArticleCanonicalKey(item) || item.slug || item.id || item.title || "").trim();
 }
 
 function getArticleNews(limit = 30) {
@@ -6100,8 +6279,8 @@ function getArticleNews(limit = 30) {
 
   items.forEach((item) => {
     const key = getArticleStorageKey(item);
-    if (shouldReplaceArticleRecord(map.get(key), item)) {
-      map.set(key, item);
+    if (key) {
+      upsertCrossedArticleRecord(map, key, item);
     }
   });
 
@@ -6115,8 +6294,8 @@ function buildArticleNewsApiPayload(limit = 60) {
 
   items.forEach((item) => {
     const key = getArticleStorageKey(item);
-    if (shouldReplaceArticleRecord(map.get(key), item)) {
-      map.set(key, item);
+    if (key) {
+      upsertCrossedArticleRecord(map, key, item);
     }
   });
 
@@ -6157,7 +6336,15 @@ function getArticleBySlug(slug) {
 
   const targetSlug = normalizeLookupSlug(slug);
   return (
-    getArticleNews(500).find((item) => normalizeLookupSlug(item.slug) === targetSlug) || null
+    getArticleNews(1000).find((item) => {
+      if (normalizeLookupSlug(item.slug) === targetSlug) {
+        return true;
+      }
+
+      return (Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []).some(
+        (alternateSlug) => normalizeLookupSlug(alternateSlug) === targetSlug
+      );
+    }) || null
   );
 }
 
@@ -6168,8 +6355,8 @@ function buildNewsArchivePayload(limit = 500) {
 
   items.forEach((item) => {
     const key = getArticleStorageKey(item);
-    if (shouldReplaceArticleRecord(map.get(key), item)) {
-      map.set(key, item);
+    if (key) {
+      upsertCrossedArticleRecord(map, key, item);
     }
   });
 

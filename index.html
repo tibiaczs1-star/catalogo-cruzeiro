@@ -1140,7 +1140,6 @@
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="prefeitura">Prefeitura</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="politica">Política</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="acre-governo">Acre / Governo</button>
-                <button class="chip-button is-active" type="button" role="tab" aria-selected="true" data-filter="todos">Tudo</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="cotidiano">Cotidiano</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="policia">Polícia</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="saude">Saúde</button>
@@ -1148,6 +1147,7 @@
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="negocios">Negócios</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="cultura">Cultura</button>
                 <button class="chip-button" type="button" role="tab" aria-selected="false" data-filter="esporte">Esporte</button>
+                <button class="chip-button is-active" type="button" role="tab" aria-selected="true" data-filter="todos">Tudo</button>
               </div>
             </div>
 
@@ -1213,13 +1213,35 @@
 
                 <div class="radar-guide-scene">
                   <div class="radar-office-backdrop" aria-hidden="true"></div>
+                  <div class="radar-flow-intake" aria-hidden="true">
+                    <span>Fontes</span>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </div>
+                  <div class="radar-flow-stage" aria-hidden="true">
+                    <span class="radar-flow-card card-a"></span>
+                    <span class="radar-flow-card card-b"></span>
+                    <span class="radar-flow-card card-c"></span>
+                    <span class="radar-flow-lane"></span>
+                  </div>
+                  <div class="radar-flow-stack" aria-hidden="true">
+                    <small>Em destaque</small>
+                    <strong data-radar-flow-focus>Tudo</strong>
+                    <span data-radar-flow-lead>Resumo local em preparação</span>
+                    <i class="radar-flow-check">ok</i>
+                  </div>
+                  <div class="radar-publish-ticket" aria-hidden="true">
+                    <span>Resumo</span>
+                    <i></i>
+                    <i></i>
+                  </div>
                   <div class="radar-office-window" aria-hidden="true"></div>
                   <div class="radar-office-topic-board" aria-hidden="true">
                     <strong>ASSUNTOS DO DIA</strong>
                     <span class="radar-office-topic" data-filter="prefeitura">Prefeitura</span>
                     <span class="radar-office-topic" data-filter="politica">Política</span>
                     <span class="radar-office-topic" data-filter="acre-governo">Acre / Governo</span>
-                    <span class="radar-office-topic is-active" data-filter="todos">Tudo</span>
                     <span class="radar-office-topic" data-filter="cotidiano">Cotidiano</span>
                     <span class="radar-office-topic" data-filter="policia">Polícia</span>
                     <span class="radar-office-topic" data-filter="saude">Saúde</span>
@@ -1227,6 +1249,7 @@
                     <span class="radar-office-topic" data-filter="negocios">Negócios</span>
                     <span class="radar-office-topic" data-filter="cultura">Cultura</span>
                     <span class="radar-office-topic" data-filter="esporte">Esporte</span>
+                    <span class="radar-office-topic is-active" data-filter="todos">Tudo</span>
                   </div>
                   <div class="radar-guide-laser"></div>
                   <div class="radar-guide-laser-dot" data-target="Tudo"></div>
@@ -3031,7 +3054,7 @@
           </div>
           <div class="founders-banner-strip" aria-label="Fundadores em destaque">
             <article class="founder-banner-card founder-banner-card-cafe">
-              <span>Fundador em cena</span>
+              <span>Apoio que impulsiona</span>
               <img
                 class="founder-banner-cafe-photo"
                 src="./assets/founders-cafe-pack-static.jpg"
@@ -3041,7 +3064,7 @@
               />
               <div class="founder-banner-copy">
                 <strong>Cafe Cruzeiro</strong>
-                <p>Parceiro de abertura e presenca em destaque no palco dos fundadores.</p>
+                <p>Parceiro de abertura com presenca visual na experiencia do portal.</p>
               </div>
             </article>
             <article class="founder-banner-card founder-banner-card-grupoas">
@@ -3417,8 +3440,8 @@
     <script defer src="./sidebar-widgets-recovery.js?v=20260423a"></script>
   <script defer src="runtime-config.js?v=20260415d"></script>
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
-    <script defer src="./startup-experience.js?v=20260428consent1"></script>
-  <script defer src="./script.js?v=20260428-founders-rotator1"></script>
+    <script defer src="./startup-experience.js?v=20260429founders-public-tech1"></script>
+  <script defer src="./script.js?v=20260429-news-cross1"></script>
     <script defer src="deferred-home-boot.js?v=20260424startup-office-loader"></script>
 </body>
 </html>
