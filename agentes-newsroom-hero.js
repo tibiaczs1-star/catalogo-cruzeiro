@@ -83,11 +83,11 @@
       const heading = dock.querySelector(".catalogo-agents-head strong");
       const description = dock.querySelector(".catalogo-agents-head span");
       if (heading) {
-        heading.textContent = "3 pixels cuidando do radar";
+        heading.textContent = "3 agentes cuidando da edicao";
       }
       if (description) {
         description.textContent =
-          "Padrao das materias: apuracao, revisao e fechamento visual no rodape.";
+          "Apuracao, revisao e acabamento visual antes da publicacao.";
       }
     }
 

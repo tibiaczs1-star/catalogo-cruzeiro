@@ -3,7 +3,7 @@
 - Office: Escritorio Principal
 - Role: pixel
 - Title: Especialista em pixel art e animação
-- Specialty: sprites, animação 16-bit, cenas vivas e personagens temáticos
+- Specialty: sprites, animação 16-bit/32-bit, hi-bit moderno, cenas vivas e personagens temáticos
 - Source: escritorio.js
 
 ## Capabilities
@@ -36,7 +36,7 @@
 - home
 - destaques
 - fluxo de leitura
-- sprites, animação 16-bit, cenas vivas e personagens temáticos
+- sprites, animação 16-bit/32-bit, hi-bit moderno, cenas vivas e personagens temáticos
 
 ## Deliverables
 

@@ -471,44 +471,7 @@
   }
 
   function mountConsentBanner() {
-    if (isHomePage() || getConsentState() || document.getElementById(CONSENT_BANNER_ID) || !document.body) {
-      return;
-    }
-
-    const banner = document.createElement("aside");
-    banner.id = CONSENT_BANNER_ID;
-    banner.className = "cookie-consent-banner";
-    banner.innerHTML = `
-      <p class="cookie-consent-kicker">Cookies e metricas</p>
-      <h3>Permitir cookies analiticos</h3>
-      <p>
-        Usamos cookies e medicao propria para entender acessos, cliques, votacoes,
-        tempo de navegacao e desempenho do portal. Voce pode aceitar ou recusar.
-      </p>
-      <div class="cookie-consent-actions">
-        <button type="button" class="cookie-consent-accept">Aceitar</button>
-        <button type="button" class="cookie-consent-reject">Recusar</button>
-      </div>
-    `;
-
-    banner
-      .querySelector(".cookie-consent-accept")
-      ?.addEventListener("click", () => {
-        setConsentState("accepted", "banner");
-        removeConsentBanner();
-      });
-
-    banner
-      .querySelector(".cookie-consent-reject")
-      ?.addEventListener("click", () => {
-        setConsentState("rejected", "banner");
-        setQueue([]);
-        stopHeartbeat();
-        resetTrackingIds();
-        removeConsentBanner();
-      });
-
-    document.body.appendChild(banner);
+    removeConsentBanner();
   }
 
   function activateTracking(options = {}) {

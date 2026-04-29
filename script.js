@@ -26,6 +26,8 @@ const radarGuideLaser = radarGuide?.querySelector(".radar-guide-laser");
 const radarGuideLaserDot = radarGuide?.querySelector(".radar-guide-laser-dot");
 const radarGuideLantern = radarGuide?.querySelector(".radar-guide-lantern");
 const radarGuideFrontArm = radarGuide?.querySelector(".radar-guide-arm.arm-front");
+const radarFlowFocus = radarGuide?.querySelector("[data-radar-flow-focus]");
+const radarFlowLead = radarGuide?.querySelector("[data-radar-flow-lead]");
 const thumbNodes = document.querySelectorAll(".news-thumb, .mini-thumb");
 const subscriptionForm = document.querySelector("#subscription-form");
 const subscriptionNameInput = document.querySelector("#subscription-name");
@@ -2065,6 +2067,14 @@ const updateRadarGuide = (filter = "todos", spotlightArticles = []) => {
     radarGuideText.textContent = `${theme.text}${leadTitle}`;
   }
 
+  if (radarFlowFocus) {
+    radarFlowFocus.textContent = theme.label;
+  }
+
+  if (radarFlowLead) {
+    radarFlowLead.textContent = spotlightArticles[0]?.title || "Resumo local em preparação";
+  }
+
   radarGuideScanIndex = 0;
   radarGuideScanTopic = null;
   radarGuideManualFocusUntil = Date.now() + RADAR_GUIDE_MANUAL_LOCK_MS;
@@ -2728,17 +2738,37 @@ const getArchiveImageKey = (article = {}) =>
     .replace(/\?.*$/, "")
     .slice(0, 180);
 
+const getArchiveArticleStoryKey = (article = {}) => {
+  const dateKey =
+    getArticleDateKey(article) ||
+    normalizeArchiveStoryText(article.publishedAt || article.date || article.createdAt || "").slice(0, 48);
+  const titleKey = slugifyText(article.title || article.sourceLabel || "");
+  const slugKey = slugifyText(article.slug || "");
+  const clusterKey = getArchiveStoryCluster(article);
+  const storyKey = titleKey || slugKey || clusterKey;
+
+  if (storyKey && dateKey) {
+    return `story|${storyKey}|${dateKey}`;
+  }
+
+  return storyKey || "";
+};
+
 const getArchiveArticleCanonicalKey = (article = {}) => {
+  const storyKey = getArchiveArticleStoryKey(article);
+  if (storyKey) {
+    return storyKey;
+  }
+
   const canonicalUrl = getCanonicalArticleUrl(article);
   if (canonicalUrl) {
     return canonicalUrl;
   }
 
-  const dateKey = getArticleDateKey(article);
   return [
     getArchiveStoryCluster(article),
     normalizeArchiveStoryText(article.sourceName || article.source || ""),
-    dateKey
+    normalizeArchiveStoryText(article.publishedAt || article.date || article.createdAt || "")
   ]
     .filter(Boolean)
     .join("|");
@@ -7147,6 +7177,128 @@ const setFeedbackState = (node, message, tone = "") => {
   }
 };
 
+const getArticleSourceEntries = (article = {}) => {
+  const entries = [];
+  const pushEntry = (entry = {}) => {
+    const name = cleanArticleText(entry.name || entry.sourceName || entry.source || entry.label || "");
+    const url = String(entry.url || entry.sourceUrl || entry.href || "").trim();
+    const key = normalizeText(url || name);
+
+    if (!key || entries.some((item) => normalizeText(item.url || item.name) === key)) {
+      return;
+    }
+
+    entries.push({ name: name || "Fonte local", url });
+  };
+
+  [article.crossSources, article.alternateSources, article.sources].forEach((collection) => {
+    if (!Array.isArray(collection)) {
+      return;
+    }
+
+    collection.forEach((entry) => {
+      if (typeof entry === "string") {
+        pushEntry({ name: entry });
+        return;
+      }
+
+      pushEntry(entry);
+    });
+  });
+
+  pushEntry({
+    name: article.sourceName || article.source || article.sourceLabel,
+    url: article.sourceUrl || article.url || article.link
+  });
+
+  return entries;
+};
+
+const getRuntimeArticleQualityScore = (article = {}) => {
+  const imageUrl = String(article.imageUrl || article.feedImageUrl || article.sourceImageUrl || "").trim();
+  const lede = String(article.lede || article.summary || article.description || "").trim();
+  const bodyCount = Array.isArray(article.body) ? article.body.filter(Boolean).length : 0;
+  const highlightsCount = Array.isArray(article.highlights) ? article.highlights.filter(Boolean).length : 0;
+  const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+  let score = 0;
+
+  if (String(article.title || "").trim()) score += 10;
+  if (lede) score += Math.min(20, Math.ceil(lede.length / 60));
+  if (imageUrl && !isGeneratedNewsFallbackImageUrl(imageUrl)) score += 30;
+  if (sourceUrl && sourceUrl !== "#") score += 6;
+  score += Math.min(24, bodyCount * 4);
+  score += Math.min(12, highlightsCount * 2);
+
+  if (/bloqueou o resumo importado|sem resumo|resumo em atualizacao/i.test(lede)) {
+    score -= 12;
+  }
+
+  return score;
+};
+
+const mergeCrossedNewsItem = (existing = {}, candidate = {}) => {
+  const candidateScore = getRuntimeArticleQualityScore(candidate);
+  const existingScore = getRuntimeArticleQualityScore(existing);
+  const candidateTime = getArticleSortTimestamp(candidate);
+  const existingTime = getArticleSortTimestamp(existing);
+  const candidateWins =
+    candidateScore > existingScore || (candidateScore === existingScore && candidateTime > existingTime);
+  const preferred = candidateWins ? candidate : existing;
+  const secondary = candidateWins ? existing : candidate;
+  const crossSources = getArticleSourceEntries(preferred);
+
+  getArticleSourceEntries(secondary).forEach((source) => {
+    const key = normalizeText(source.url || source.name);
+    if (key && !crossSources.some((entry) => normalizeText(entry.url || entry.name) === key)) {
+      crossSources.push(source);
+    }
+  });
+
+  const alternateSlugs = [
+    preferred.slug,
+    secondary.slug,
+    ...(Array.isArray(preferred.alternateSlugs) ? preferred.alternateSlugs : []),
+    ...(Array.isArray(secondary.alternateSlugs) ? secondary.alternateSlugs : [])
+  ]
+    .map((value) => String(value || "").trim())
+    .filter(Boolean)
+    .filter((value, index, list) => list.indexOf(value) === index);
+
+  return {
+    ...preferred,
+    crossSources,
+    alternateSources: crossSources,
+    sourceCount: crossSources.length,
+    alternateSlugs
+  };
+};
+
+const formatCrossedSourceName = (article = {}) => {
+  const sources = getArticleSourceEntries(article);
+
+  if (sources.length > 1) {
+    const extraCount = sources.length - 1;
+    return `${sources[0].name} + ${extraCount} fonte${extraCount === 1 ? "" : "s"}`;
+  }
+
+  return sources[0]?.name || article.sourceName || "Fonte local";
+};
+
+const formatCrossedSourceMeta = (article = {}) => {
+  const sourceName = formatCrossedSourceName(article);
+  const date = article.date || formatDisplayDate(article.publishedAt || article.createdAt || "");
+  return date && date !== "Sem data" ? `${sourceName} • ${date}` : sourceName;
+};
+
+const formatCrossedSourceFooter = (article = {}) => {
+  const sources = getArticleSourceEntries(article);
+  if (sources.length > 1) {
+    return `Notícia cruzada em ${sources.length} fontes`;
+  }
+
+  return `Fonte consultada: ${sources[0]?.name || article.sourceName || "Fonte local"}`;
+};
+
 const dedupeNewsItems = (items = []) => {
   const mergedMap = new Map();
 
@@ -7154,7 +7306,9 @@ const dedupeNewsItems = (items = []) => {
     const normalizedItem = normalizeRuntimeArticle(item);
     const key = getArchiveArticleCanonicalKey(normalizedItem);
 
-    if (!mergedMap.has(key)) {
+    if (mergedMap.has(key)) {
+      mergedMap.set(key, mergeCrossedNewsItem(mergedMap.get(key), normalizedItem));
+    } else {
       mergedMap.set(key, normalizedItem);
     }
   });
@@ -7892,7 +8046,19 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
 const syncNewsDataset = (runtimeItems = []) => {
   const merged = dedupeNewsItems([...(runtimeItems || []), ...initialStaticNews]);
   window.NEWS_DATA = merged;
-  window.NEWS_MAP = Object.fromEntries(merged.map((item) => [item.slug, item]));
+  window.NEWS_MAP = merged.reduce((map, item) => {
+    if (item.slug) {
+      map[item.slug] = item;
+    }
+
+    (Array.isArray(item.alternateSlugs) ? item.alternateSlugs : []).forEach((slug) => {
+      if (slug) {
+        map[slug] = item;
+      }
+    });
+
+    return map;
+  }, {});
   persistOfflineNewsCache(merged);
   return merged;
 };
@@ -8287,7 +8453,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (sourceNode) {
-    sourceNode.textContent = `${normalized.sourceName} • ${normalized.date}`;
+    sourceNode.textContent = formatCrossedSourceMeta(normalized);
   }
 
   if (titleNode) {
@@ -8299,7 +8465,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (footerSource) {
-    footerSource.textContent = `Fonte consultada: ${normalized.sourceName}`;
+    footerSource.textContent = formatCrossedSourceFooter(normalized);
   }
 
   if (footerLink) {
@@ -10164,7 +10330,7 @@ const buildFeedCard = (article) => {
   thumb.append(chip);
 
   source.className = "news-source";
-  source.textContent = `${normalizedArticle.sourceName} • ${normalizedArticle.date}`;
+  source.textContent = formatCrossedSourceMeta(normalizedArticle);
 
   title.textContent = normalizedArticle.title;
   summary.textContent = truncateCopy(
@@ -10172,7 +10338,7 @@ const buildFeedCard = (article) => {
     card.classList.contains("featured") ? 150 : 132
   );
 
-  category.textContent = `Fonte consultada: ${normalizedArticle.sourceName}`;
+  category.textContent = formatCrossedSourceFooter(normalizedArticle);
   link.href = href;
   link.textContent = "ler análise";
   applyArticleLinkAttrs(link, href);

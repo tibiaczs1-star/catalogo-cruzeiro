@@ -22,6 +22,9 @@ node_modules/
 .chrome-headless-codex/
 .codex-temp/
 .playwright-cli/
+__pycache__/
+*.py[cod]
+*.tmp
 output/playwright/
 data/real-agents-memory.json
 data/real-agents-run-history.json

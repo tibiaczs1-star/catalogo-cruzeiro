@@ -257,7 +257,72 @@
       .replace(/\?.*$/, "")
       .slice(0, 180);
 
+  const getArchiveArticleDateKey = (article = {}) => {
+    const rawValue = article.publishedAt || article.date || article.createdAt || "";
+
+    if (!rawValue) {
+      return "";
+    }
+
+    if (typeof rawValue === "string") {
+      const isoMatch = rawValue.match(/^(\d{4}-\d{2}-\d{2})/);
+      if (isoMatch) {
+        return isoMatch[1];
+      }
+
+      const normalized = normalizeText(rawValue).replace("º", "").replace(/\./g, "");
+      const longDateMatch = normalized.match(/(\d{1,2}) de ([a-z]+) de (\d{4})/);
+
+      if (longDateMatch) {
+        const monthAliases = {
+          jan: 0,
+          fev: 1,
+          mar: 2,
+          abr: 3,
+          mai: 4,
+          jun: 5,
+          jul: 6,
+          ago: 7,
+          set: 8,
+          out: 9,
+          nov: 10,
+          dez: 11
+        };
+        const [, day, month, year] = longDateMatch;
+        const monthNumber = String((monthIndex[month] ?? monthAliases[month] ?? 0) + 1).padStart(2, "0");
+        const dayNumber = String(Number(day)).padStart(2, "0");
+        return `${year}-${monthNumber}-${dayNumber}`;
+      }
+    }
+
+    const parsed = new Date(rawValue);
+    if (Number.isNaN(parsed.getTime())) {
+      return normalizeArchiveStoryText(rawValue).slice(0, 48);
+    }
+
+    return parsed.toISOString().slice(0, 10);
+  };
+
+  const getArchiveArticleStoryKey = (article = {}) => {
+    const dateKey = getArchiveArticleDateKey(article);
+    const titleKey = slugifyText(article.title || article.sourceLabel || "");
+    const slugKey = slugifyText(article.slug || "");
+    const clusterKey = getArchiveStoryCluster(article);
+    const storyKey = titleKey || slugKey || clusterKey;
+
+    if (storyKey && dateKey) {
+      return `story|${storyKey}|${dateKey}`;
+    }
+
+    return storyKey || "";
+  };
+
   const getArchiveArticleCanonicalKey = (article = {}) => {
+    const storyKey = getArchiveArticleStoryKey(article);
+    if (storyKey) {
+      return storyKey;
+    }
+
     const canonicalUrl = getCanonicalArticleUrl(article);
     if (canonicalUrl) {
       return canonicalUrl;
@@ -266,7 +331,7 @@
     return [
       getArchiveStoryCluster(article),
       normalizeArchiveStoryText(article.sourceName || article.source || ""),
-      article.date || article.publishedAt || article.createdAt || ""
+      normalizeArchiveStoryText(article.date || article.publishedAt || article.createdAt || "")
     ]
       .filter(Boolean)
       .join("|");
@@ -641,6 +706,127 @@
     };
   };
 
+  const getArticleSourceEntries = (article = {}) => {
+    const entries = [];
+    const pushEntry = (entry = {}) => {
+      const name = String(entry.name || entry.sourceName || entry.source || entry.label || "").trim();
+      const url = String(entry.url || entry.sourceUrl || entry.href || "").trim();
+      const key = normalizeText(url || name);
+
+      if (!key || entries.some((item) => normalizeText(item.url || item.name) === key)) {
+        return;
+      }
+
+      entries.push({ name: name || "Fonte local", url });
+    };
+
+    [article.crossSources, article.alternateSources, article.sources].forEach((collection) => {
+      if (!Array.isArray(collection)) {
+        return;
+      }
+
+      collection.forEach((entry) => {
+        if (typeof entry === "string") {
+          pushEntry({ name: entry });
+          return;
+        }
+
+        pushEntry(entry);
+      });
+    });
+
+    pushEntry({
+      name: article.sourceName || article.source || article.sourceLabel,
+      url: article.sourceUrl || article.url || article.link
+    });
+
+    return entries;
+  };
+
+  const getArticleQualityScore = (article = {}) => {
+    const lede = String(article.lede || article.summary || article.description || "").trim();
+    const imageUrl = String(article.imageUrl || article.feedImageUrl || article.sourceImageUrl || "").trim();
+    const bodyCount = Array.isArray(article.body) ? article.body.filter(Boolean).length : 0;
+    const highlightsCount = Array.isArray(article.highlights) ? article.highlights.filter(Boolean).length : 0;
+    const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
+    let score = 0;
+
+    if (String(article.title || "").trim()) score += 10;
+    if (lede) score += Math.min(20, Math.ceil(lede.length / 60));
+    if (imageUrl) score += 30;
+    if (sourceUrl && sourceUrl !== "#") score += 6;
+    score += Math.min(24, bodyCount * 4);
+    score += Math.min(12, highlightsCount * 2);
+
+    if (/bloqueou o resumo importado|sem resumo|resumo em atualizacao/i.test(lede)) {
+      score -= 12;
+    }
+
+    return score;
+  };
+
+  const mergeCrossedArticle = (existing = {}, candidate = {}) => {
+    const candidateScore = getArticleQualityScore(candidate);
+    const existingScore = getArticleQualityScore(existing);
+    const candidateTime = getSortTimestamp(candidate);
+    const existingTime = getSortTimestamp(existing);
+    const candidateWins =
+      candidateScore > existingScore || (candidateScore === existingScore && candidateTime > existingTime);
+    const preferred = candidateWins ? candidate : existing;
+    const secondary = candidateWins ? existing : candidate;
+    const crossSources = getArticleSourceEntries(preferred);
+
+    getArticleSourceEntries(secondary).forEach((sourceEntry) => {
+      const key = normalizeText(sourceEntry.url || sourceEntry.name);
+      if (key && !crossSources.some((entry) => normalizeText(entry.url || entry.name) === key)) {
+        crossSources.push(sourceEntry);
+      }
+    });
+
+    const alternateSlugs = [
+      preferred.slug,
+      secondary.slug,
+      ...(Array.isArray(preferred.alternateSlugs) ? preferred.alternateSlugs : []),
+      ...(Array.isArray(secondary.alternateSlugs) ? secondary.alternateSlugs : [])
+    ]
+      .map((value) => String(value || "").trim())
+      .filter(Boolean)
+      .filter((value, index, list) => list.indexOf(value) === index);
+
+    return {
+      ...preferred,
+      crossSources,
+      alternateSources: crossSources,
+      sourceCount: crossSources.length,
+      alternateSlugs
+    };
+  };
+
+  const formatCrossedSourceName = (article = {}) => {
+    const sources = getArticleSourceEntries(article);
+
+    if (sources.length > 1) {
+      const extraCount = sources.length - 1;
+      return `${sources[0].name} + ${extraCount} fonte${extraCount === 1 ? "" : "s"}`;
+    }
+
+    return sources[0]?.name || article.sourceName || "Fonte local";
+  };
+
+  const formatCrossedSourceMeta = (article = {}) => {
+    const sourceName = formatCrossedSourceName(article);
+    return article.date && article.date !== "Sem data" ? `${sourceName} • ${article.date}` : sourceName;
+  };
+
+  const formatCrossedSourceFooter = (article = {}) => {
+    const sources = getArticleSourceEntries(article);
+    if (sources.length > 1) {
+      return `Notícia cruzada em ${sources.length} fontes`;
+    }
+
+    return `Fonte consultada: ${sources[0]?.name || article.sourceName || "Fonte local"}`;
+  };
+
   const getArticleKey = (article) => {
     const normalized = normalizeArticle(article);
     return getArchiveArticleCanonicalKey(normalized);
@@ -655,7 +841,14 @@
     items.forEach((item) => {
       const normalized = normalizeArticle(item);
       const key = getArticleKey(normalized);
-      if (key && !map.has(key)) {
+
+      if (!key) {
+        return;
+      }
+
+      if (map.has(key)) {
+        map.set(key, mergeCrossedArticle(map.get(key), normalized));
+      } else {
         map.set(key, normalized);
       }
     });
@@ -881,10 +1074,10 @@
     thumb.appendChild(chip);
 
     source.className = "news-source";
-    source.textContent = `${article.sourceName} • ${article.date}`;
+    source.textContent = formatCrossedSourceMeta(article);
     title.textContent = article.title;
     summary.textContent = article.lede;
-    category.textContent = `Fonte consultada: ${article.sourceName}`;
+    category.textContent = formatCrossedSourceFooter(article);
     link.href = href;
     link.textContent = "ler análise";
 
@@ -925,7 +1118,7 @@
     date.textContent = article.date || "Sem data";
     title.textContent = article.title || "Atualizacao";
     summary.textContent = article.lede || "Sem resumo.";
-    footer.textContent = `${article.sourceName || "Fonte local"}${article.slug ? " • notícia local" : " • link externo"}`;
+    footer.textContent = `${formatCrossedSourceName(article)}${article.slug ? " • notícia local" : " • link externo"}`;
 
     meta.append(category, date);
     link.append(meta, title, summary, footer);
