@@ -20267,6 +20267,80 @@ a {
     linear-gradient(145deg, rgba(14, 34, 53, 0.98), rgba(30, 86, 117, 0.9)) !important;
 }
 
+#entretenimento .movie-card::before,
+#entretenimento .movie-card::after,
+#entretenimento .theater-card::before,
+#entretenimento .theater-card::after {
+  z-index: 0;
+}
+
+#entretenimento .movie-card > *,
+#entretenimento .theater-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+#entretenimento .movie-card,
+#entretenimento .theater-card {
+  cursor: pointer;
+  gap: 1.1rem !important;
+}
+
+#entretenimento .movie-card h4,
+#entretenimento .theater-card h4 {
+  font-size: clamp(1.08rem, 0.52vw + 0.96rem, 1.32rem) !important;
+  line-height: 1.24 !important;
+  letter-spacing: 0 !important;
+}
+
+#entretenimento .movie-card .movie-desc,
+#entretenimento .theater-card .theater-desc {
+  font-size: clamp(0.96rem, 0.22vw + 0.9rem, 1.06rem) !important;
+  line-height: 1.58 !important;
+  max-width: 64ch;
+}
+
+#entretenimento .movie-card .movie-info,
+#entretenimento .theater-card .theater-info {
+  font-size: 0.74rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.08em !important;
+}
+
+#entretenimento .movie-card .rating,
+#entretenimento .theater-card .dates {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: fit-content;
+  min-height: 2.35rem;
+  margin-top: 0.15rem !important;
+  padding: 0.58rem 0.82rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.42) !important;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: #123052 !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  box-shadow: 0 12px 24px rgba(5, 18, 35, 0.14);
+}
+
+#entretenimento .theater-card .dates {
+  border-color: rgba(18, 48, 82, 0.18) !important;
+  background: #123052 !important;
+  color: #ffffff !important;
+}
+
+#entretenimento .movie-card .rating::after,
+#entretenimento .theater-card .dates::after {
+  content: ">";
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .signal-band,
 .archive-shell,
 .live-feed-shell,

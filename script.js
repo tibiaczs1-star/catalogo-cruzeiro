@@ -8206,7 +8206,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
     .filter(Boolean)
     .join(" · ");
 
-  if (titleNode) titleNode.textContent = truncateCopy(normalized.title, mode === "stage" ? 86 : 70);
+  if (titleNode) titleNode.textContent = truncateCopy(normalized.title, mode === "stage" ? 120 : 112);
   if (infoNode) {
     infoNode.textContent =
       mode === "stage"
@@ -8216,11 +8216,11 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
   if (descNode) {
     descNode.textContent = truncateCopy(
       normalized.summary || normalized.lede || "Atualização cultural em acompanhamento.",
-      mode === "stage" ? 155 : 128
+      mode === "stage" ? 210 : 190
     );
   }
   if (statusNode) {
-    statusNode.textContent = index === 0 ? "Destaque atualizado" : "Ler matéria";
+    statusNode.textContent = "Abrir matéria completa";
   }
   if (mode === "stage") {
     const venueNode = card.querySelector(".venue");
@@ -8241,6 +8241,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
 
   card.dataset.articleHref = href;
   card.setAttribute("role", "link");
+  card.setAttribute("aria-label", `Abrir matéria: ${normalized.title}`);
   card.tabIndex = 0;
   if (card.dataset.entertainmentBound !== "true") {
     card.dataset.entertainmentBound = "true";
