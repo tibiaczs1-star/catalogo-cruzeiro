@@ -3336,25 +3336,108 @@ const cleanArticleExcerpt = (value = "", fallback = "") => {
   return text || cleanArticleText(fallback || value || "");
 };
 
-const buildShortArticleSummary = (value = "", fallback = "", maxLength = 172) => {
-  const sourceText = cleanArticleExcerpt(value, fallback)
+const articleSummaryOverridesBySlug = {
+  "tarauaca-mobiliza-apoio-as-familias-afetadas-pela-cheia-do-rio-gregorio":
+    "Tarauacá mobiliza ações emergenciais para atender famílias afetadas pela cheia repentina do rio Gregório.",
+  "corrida-solidaria-marca-inicio-das-comemoracoes-pelos-49-anos-da-pge":
+    "A corrida da PGE abriu as comemorações de 49 anos do órgão com saúde, integração e solidariedade.",
+  "quando-o-proteger-se-torna-cuidar":
+    "A matéria discute uma segurança pública voltada também a cuidado, prevenção e atendimento das pessoas.",
+  "wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima":
+    "Wanderley Andrade foi confirmado na Cavalgada Hermecílio Barreto, dentro da agenda de aniversário de Mâncio Lima."
+};
+
+const incompleteSummaryTailPattern =
+  /\b(a|o|as|os|um|uma|uns|umas|de|da|do|das|dos|em|no|na|nos|nas|por|pela|pelo|pelas|pelos|para|com|sem|entre|sobre|que|e|ou|ao|aos|à|às)\s*$/i;
+
+const genericArticleSummaryPattern =
+  /^(para o leitor local|a partir dele|a materia deve ser lida|a matéria deve ser lida|tema em acompanhamento|resumo em atualiza[cç][aã]o|atualiza[cç][aã]o cultural em acompanhamento)/i;
+
+const normalizeSummaryCandidate = (value = "") =>
+  cleanArticleExcerpt(value)
+    .replace(/\s*\[\s*\.{3}\s*\]\s*$/g, "")
+    .replace(/\s*(?:\.{3}|…)\s*$/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const isIncompleteArticleSummary = (value = "") => {
+  const text = cleanArticleText(value);
+  if (!text) return true;
+  if (/(?:\.{3}|…)\s*$/.test(text)) return true;
+  if (genericArticleSummaryPattern.test(text)) return true;
+
+  const stripped = text.replace(/[.!?]+$/g, "").trim();
+  if (incompleteSummaryTailPattern.test(stripped)) return true;
+
+  return !/[.!?]$/.test(text) && text.length > 90;
+};
+
+const ensureSentencePunctuation = (value = "") => {
+  const text = normalizeSummaryCandidate(value);
+  if (!text) return "";
+  return /[.!?]$/.test(text) ? text : `${text}.`;
+};
+
+const trimSentenceWithoutEllipsis = (value = "", maxLength = 160) => {
+  const text = normalizeSummaryCandidate(value);
+  if (!text) return "";
+  if (text.length <= maxLength) return ensureSentencePunctuation(text);
+
+  const sliced = text.slice(0, Math.max(0, maxLength - 1)).replace(/\s+\S*$/, "").trim();
+  if (!sliced || incompleteSummaryTailPattern.test(sliced)) return "";
+  return ensureSentencePunctuation(sliced);
+};
+
+const getCompleteArticleSentence = (value = "", maxLength = 172) => {
+  const text = cleanArticleExcerpt(value)
     .replace(/\b(LEIA TAMB[EÉ]M|ASSISTA|VEJA TAMB[EÉ]M|Clique aqui).*$/i, "")
     .replace(/\b(Reprodu[cç][aã]o|Divulga[cç][aã]o|Arquivo pessoal|Redes sociais)[/\\\w\s.-]{0,90}/gi, " ")
     .replace(/\s+/g, " ")
     .trim();
-  const fallbackText = cleanArticleText(fallback || "Resumo em atualização.");
-  const text = sourceText || fallbackText;
-  const sentenceMatch = text.match(/^(.{70,220}?[.!?])(\s|$)/);
-  const firstSentence = sentenceMatch ? sentenceMatch[1].trim() : text;
-  const compact = firstSentence.length > 45 ? firstSentence : text;
 
-  if (compact.length <= maxLength) {
-    return compact;
+  if (!text || /(?:\.{3}|…)\s*$/.test(text) || genericArticleSummaryPattern.test(text)) {
+    return "";
   }
 
-  const sliced = compact.slice(0, Math.max(0, maxLength - 1));
-  const wordSafe = sliced.replace(/\s+\S*$/, "").trim();
-  return `${wordSafe || sliced.trim()}...`;
+  const sentenceMatches = text.match(/[^.!?]+[.!?]+/g) || [];
+  const completeSentence = sentenceMatches
+    .map((sentence) => sentence.replace(/\s+/g, " ").trim())
+    .find((sentence) => sentence.length >= 42 && sentence.length <= maxLength && !isIncompleteArticleSummary(sentence));
+
+  if (completeSentence) {
+    return completeSentence;
+  }
+
+  if (text.length <= maxLength && !isIncompleteArticleSummary(text)) {
+    return ensureSentencePunctuation(text);
+  }
+
+  return "";
+};
+
+const buildShortArticleSummary = (value = "", fallback = "", maxLength = 172) => {
+  const sourceText = getCompleteArticleSentence(value, maxLength);
+  const fallbackText = cleanArticleText(fallback || "Resumo em atualização.");
+  return (
+    sourceText ||
+    getCompleteArticleSentence(fallbackText, maxLength) ||
+    trimSentenceWithoutEllipsis(fallbackText, maxLength) ||
+    "Resumo em atualização."
+  );
+};
+
+const buildEditorialArticleSummary = (article = {}, maxLength = 172) => {
+  const normalizedSlug = String(article.slug || slugifyText(article.title || article.sourceLabel || "") || "").trim();
+  const override = articleSummaryOverridesBySlug[normalizedSlug];
+  if (override) {
+    return trimSentenceWithoutEllipsis(override, maxLength) || override;
+  }
+
+  return buildShortArticleSummary(
+    article.rawLede || article.lede || article.summary || article.description,
+    article.sourceLabel || article.title || "Resumo em atualização.",
+    maxLength
+  );
 };
 
 const heroUnsafeImageOverrides = {
@@ -3395,12 +3478,13 @@ const normalizeRuntimeArticle = (article = {}) => {
     article.lede || article.summary || article.description || "Sem resumo.",
     article.sourceLabel || article.title || "Sem resumo."
   );
+  const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
   const displaySummary = buildShortArticleSummary(
     rawLede,
     article.sourceLabel || article.title || "Resumo em atualização.",
     172
   );
-  const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
+  const editorialSummary = articleSummaryOverridesBySlug[slug] || displaySummary;
   const hasSourceToProbe = Boolean(sourceUrl && sourceUrl !== "#");
   const originalImageUrl = hasSourceToProbe && isGeneratedNewsFallbackImageUrl(article.feedImageUrl || article.imageUrl)
     ? ""
@@ -3429,8 +3513,8 @@ const normalizeRuntimeArticle = (article = {}) => {
     sourceUrl,
     sourceLabel: cleanArticleText(article.sourceLabel || title),
     rawLede,
-    lede: displaySummary,
-    displaySummary,
+    lede: editorialSummary,
+    displaySummary: editorialSummary,
     date: formatDisplayDate(article.date || article.publishedAt || article.createdAt || ""),
     originalImageUrl,
     originalSourceImageUrl,
@@ -4454,7 +4538,7 @@ const buildHeroTourismRuntimePool = () => {
         hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
         articleTitle: article.title || "Notícia em destaque",
         articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 138),
+        articleSummary: buildEditorialArticleSummary(article, 152),
         articleHref: buildHeroArticleHref(article),
         themeKey: areaKey,
         sourceName: article.sourceName || "Fonte local"
@@ -4521,7 +4605,7 @@ const buildHeroTourismFallbackPool = () => {
         hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
         articleTitle: article.title || "Notícia em destaque",
         articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 138),
+        articleSummary: buildEditorialArticleSummary(article, 152),
         articleHref: buildHeroArticleHref(article),
         themeKey: areaKey,
         sourceName: article.sourceName || "Fonte local"
@@ -4551,7 +4635,7 @@ const buildHeroTourismDailyPool = () => {
         hasPeopleScene: false,
         articleTitle: article.title || "Matéria autoral em destaque",
         articleCategory: article.category || "Destaque autoral",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Artigo autoral em destaque.", 138),
+        articleSummary: buildEditorialArticleSummary(article, 152),
         articleHref: buildHeroArticleHref(article),
         themeKey: getHeroAreaKey(article),
         sourceName: article.sourceName || "Catálogo Cruzeiro do Sul"
@@ -4650,11 +4734,10 @@ const setHeroTourismMeta = (photo) => {
   }
 
   if (heroTourismNote) {
-    heroTourismNote.textContent =
-      truncateCopy(
-        photo.articleSummary || photo.note || photo.sourceName || "Resumo da notícia principal da área selecionada.",
-        180
-      );
+    heroTourismNote.textContent = trimSentenceWithoutEllipsis(
+      photo.articleSummary || photo.note || photo.sourceName || "Resumo da notícia principal da área selecionada.",
+      180
+    );
   }
 
   if (heroDailyNewsCard) {
@@ -4676,11 +4759,10 @@ const setHeroTourismMeta = (photo) => {
   }
 
   if (heroDailyNewsSummary) {
-    heroDailyNewsSummary.textContent =
-      truncateCopy(
-        photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para este assunto.",
-        132
-      );
+    heroDailyNewsSummary.textContent = trimSentenceWithoutEllipsis(
+      photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para este assunto.",
+      132
+    );
   }
 };
 
@@ -4719,7 +4801,7 @@ const renderHeroDesktopHighlights = (items = []) => {
     }
 
     if (summaryNode) {
-      summaryNode.textContent = truncateCopy(
+      summaryNode.textContent = trimSentenceWithoutEllipsis(
         item.articleSummary || item.note || "Resumo curto do destaque mais importante deste assunto.",
         120
       );
@@ -6566,13 +6648,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
     .filter(Boolean)
     .join(" · ");
   const headline = truncateCopy(article.title || "Polemica em repercussao nas redes", 110);
-  const summary = truncateCopy(
-    cleanArticleExcerpt(
-      article.displaySummary || article.lede || article.summary,
-      "O assunto entrou na conversa pública e segue em acompanhamento."
-    ),
-    190
-  );
+  const summary = buildEditorialArticleSummary(article, 190);
   const networkLabel = `${networkContext.network || "Rede"} • polemica ${index + 1}`;
   const signalLine = `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentários"}`;
   const debateLine = `debate: ${pulse.debateAxis}`;
@@ -6845,9 +6921,9 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
         style="--month-image:url('${escapeHtml(imageUrl)}')"
       ></a>
       <h3>
-        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(truncateCopy(article.title || "Recorte social em atualização", 108))}</a>
+        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(article.title || "Recorte social em atualização")}</a>
       </h3>
-      <p>${escapeHtml(truncateCopy(article.lede || article.summary || "Tema em acompanhamento no portal.", 142))}</p>
+        <p>${escapeHtml(buildEditorialArticleSummary(article, 168))}</p>
       <div class="month-signal" aria-label="Força de repercussão">
         <span>${escapeHtml(tone.axis)}</span>
         <i><b style="width:${score}%"></b></i>
@@ -7926,15 +8002,16 @@ const renderGlobalPoliticsHighlights = async (options = {}) => {
 
   grid.innerHTML = finalItems
     .map((item) => {
-      const href = item.slug
-        ? `./noticia.html?slug=${encodeURIComponent(item.slug)}`
-        : item.sourceUrl || item.url || "#";
-      const source = formatMosaicSourceLabel(item);
+      const article = normalizeRuntimeArticle(item);
+      const href = article.slug
+        ? `./noticia.html?slug=${encodeURIComponent(article.slug)}`
+        : article.sourceUrl || article.url || "#";
+      const source = formatMosaicSourceLabel(article);
       return `
         <article class="global-politics-card">
-          <p class="eyebrow">${escapeHtml(item.category || item.eyebrow || "política")}</p>
-          <h3>${escapeHtml(truncateCopy(item.title || "Destaque de política", 120))}</h3>
-          <p>${escapeHtml(truncateCopy(item.summary || item.lede || "Atualização de política em acompanhamento.", 190))}</p>
+          <p class="eyebrow">${escapeHtml(article.category || item.eyebrow || "política")}</p>
+          <h3>${escapeHtml(truncateCopy(article.title || "Destaque de política", 120))}</h3>
+          <p>${escapeHtml(buildEditorialArticleSummary(article, 190))}</p>
           <footer>
             <span>${escapeHtml(source)}</span>
             <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
@@ -8049,7 +8126,7 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
           <article class="global-politics-card" data-scope="${escapeRuntimeAttribute(scope.key)}">
           <p class="eyebrow">${escapeHtml(scope.label)}</p>
           <h3>${escapeHtml(truncateCopy(article.title || scope.fallbackTitle, 120))}</h3>
-          <p>${escapeHtml(truncateCopy(article.summary || article.lede || "Atualização política em acompanhamento.", 190))}</p>
+          <p>${escapeHtml(buildEditorialArticleSummary(article, 190))}</p>
           <footer>
             <span>${escapeHtml(source)}</span>
             <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
@@ -8214,10 +8291,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
         : truncateCopy(sourceLabel || "Cinema em destaque", 58);
   }
   if (descNode) {
-    descNode.textContent = truncateCopy(
-      normalized.summary || normalized.lede || "Atualização cultural em acompanhamento.",
-      mode === "stage" ? 210 : 190
-    );
+    descNode.textContent = buildEditorialArticleSummary(normalized, mode === "stage" ? 210 : 190);
   }
   if (statusNode) {
     statusNode.textContent = "Abrir matéria completa";
@@ -8481,7 +8555,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (copyNode) {
-    copyNode.textContent = truncateCopy(normalized.displaySummary || normalized.lede, 132);
+    copyNode.textContent = buildEditorialArticleSummary(normalized, 142);
   }
 
   if (footerSource) {
@@ -8722,14 +8796,14 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (copyNode) {
-      copyNode.textContent = truncateCopy(article.displaySummary || article.lede, index === 0 ? 88 : 64);
+      copyNode.textContent = buildEditorialArticleSummary(article, index === 0 ? 150 : 130);
     }
 
     if (statNode) {
       statNode.textContent =
         index === 0
-          ? truncateCopy(article.displaySummary || article.lede, 84)
-          : truncateCopy(article.sourceLabel || article.title, 68);
+          ? buildEditorialArticleSummary(article, 140)
+          : trimSentenceWithoutEllipsis(article.sourceLabel || article.title, 96);
     }
 
     if (actionNode) {
