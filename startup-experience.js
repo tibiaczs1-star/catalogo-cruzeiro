@@ -15,13 +15,14 @@
   const FOUNDER_PRELUDE_SESSION_KEY = "catalogo_founder_prelude_seen_session_v1";
   const FOUNDER_PRELUDE_DAILY_KEY = "catalogo_founder_prelude_seen_day_v1";
   const FOUNDER_PRELUDE_DAILY_COOKIE = "catalogo_founder_prelude_seen_day_v1";
+  const INITIAL_HOME_LOADER_SESSION_KEY = "catalogo_initial_home_loader_seen_session_v1";
   const THANKS_SCREEN_MS = 2200;
   const THANKS_SCREEN_MS_COMPACT = 1900;
   const THANKS_SCREEN_MS_PHONE = 1700;
   const FOUNDER_PRELUDE_MS = 1200;
   const FOUNDER_PRELUDE_MS_COMPACT = 1000;
   const FOUNDER_PRELUDE_MS_PHONE = 900;
-  const RETURNING_LOADER_MS = 160;
+  const RETURNING_LOADER_MS = 480;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -265,6 +266,31 @@
   function hasSeenFounderPreludeInThisSession() {
     try {
       return sessionStorage.getItem(FOUNDER_PRELUDE_SESSION_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function rememberInitialHomeLoaderInThisSession() {
+    try {
+      sessionStorage.setItem(INITIAL_HOME_LOADER_SESSION_KEY, "1");
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+
+  function hasSeenInitialHomeLoaderInThisSession() {
+    try {
+      return sessionStorage.getItem(INITIAL_HOME_LOADER_SESSION_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function isBackForwardNavigation() {
+    try {
+      const navigationEntry = performance.getEntriesByType("navigation")?.[0];
+      return navigationEntry?.type === "back_forward";
     } catch (_error) {
       return false;
     }
@@ -1159,6 +1185,41 @@
     return modal;
   }
 
+  function createInitialHomeLoaderModal() {
+    const modal = document.createElement("section");
+    modal.id = `${MODAL_ID}InitialLoader`;
+    modal.className = "catalogo-welcome is-home-opening-loader is-compact";
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML = `
+      <article
+        class="catalogo-welcome-card"
+        role="status"
+        aria-live="polite"
+        aria-label="Abertura da pagina inicial"
+      >
+        ${buildWelcomeVisualMarkup({ compact: true, phone: false })}
+        <div class="catalogo-welcome-copy">
+          <p class="catalogo-welcome-kicker">Abertura do portal</p>
+          <h2 id="catalogoInitialLoaderTitle">Abrindo o portal</h2>
+          <p class="catalogo-welcome-lead">
+            Preparando noticias, fotos e agenda para liberar a leitura sem travar a navegacao.
+          </p>
+          <div class="catalogo-founder-opening" aria-live="polite">
+            <div class="catalogo-founder-opening-head">
+              <strong>Experiencia do portal</strong>
+              <span>100%</span>
+            </div>
+            <div class="catalogo-founder-opening-bar">
+              <span style="width: 100%"></span>
+            </div>
+            <p>home principal pronta</p>
+          </div>
+        </div>
+      </article>
+    `;
+    return modal;
+  }
+
   function openWelcomeModal(modal) {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
@@ -1188,7 +1249,9 @@
 
   function clearStaleWelcomeArtifacts() {
     document
-      .querySelectorAll(".catalogo-welcome.is-splash-loader.is-leaving, .catalogo-welcome.is-splash-loader")
+      .querySelectorAll(
+        ".catalogo-welcome.is-splash-loader.is-leaving, .catalogo-welcome.is-splash-loader, .catalogo-welcome.is-home-opening-loader.is-leaving"
+      )
       .forEach((node) => {
         node.remove();
       });
@@ -1225,6 +1288,35 @@
           callback();
         }
       }, RETURNING_LOADER_MS);
+    });
+  }
+
+  function showInitialHomeLoaderThen(callback) {
+    if (isSkipIntroNavigation()) {
+      clearStaleWelcomeArtifacts();
+      releaseFounderPreludeGate();
+      if (typeof callback === "function") {
+        callback();
+      }
+      return;
+    }
+
+    rememberInitialHomeLoaderInThisSession();
+    const loader = createInitialHomeLoaderModal();
+    document.body.appendChild(loader);
+
+    window.setTimeout(() => {
+      releaseFounderPreludeGate();
+      openWelcomeModal(loader);
+    }, 30);
+
+    whenSiteReady(() => {
+      window.setTimeout(() => {
+        closeWelcomeModalImmediately(loader);
+        if (typeof callback === "function") {
+          callback();
+        }
+      }, 240);
     });
   }
 
@@ -1268,17 +1360,56 @@
   ready(() => {
     clearStaleWelcomeArtifacts();
 
-    window.addEventListener("pageshow", () => {
-      clearStaleWelcomeArtifacts();
-    });
-
     resetConsentForNewBrowserSession();
     const phoneFlow = shouldUsePhoneWelcome();
     const fastEditorialHome = document.body.classList.contains("editorial-home");
 
+    window.addEventListener("pageshow", (event) => {
+      clearStaleWelcomeArtifacts();
+
+      if (event.persisted && fastEditorialHome && !phoneFlow && !isSkipIntroNavigation()) {
+        showReturningLoaderThen(() => {
+          dispatchIntroFinished();
+        });
+      }
+    });
+
     const continueAfterFounderPrelude = (options = {}) => {
       const shouldShowReturningLoader =
         !fastEditorialHome && (options.afterFounderPrelude === true || !phoneFlow);
+
+      if (fastEditorialHome && !phoneFlow) {
+        removeLegacyConsentBanner();
+        const oldModal = document.getElementById(MODAL_ID);
+        if (oldModal) {
+          oldModal.remove();
+        }
+
+        if (isBackForwardNavigation()) {
+          showReturningLoaderThen(() => {
+            dispatchIntroFinished();
+          });
+          return;
+        }
+
+        if (shouldSkipWelcomeModal()) {
+          releaseFounderPreludeGate();
+          dispatchIntroFinished();
+          return;
+        }
+
+        if (hasSeenInitialHomeLoaderInThisSession()) {
+          showReturningLoaderThen(() => {
+            dispatchIntroFinished();
+          });
+          return;
+        }
+
+        showInitialHomeLoaderThen(() => {
+          dispatchIntroFinished();
+        });
+        return;
+      }
 
       if (shouldSkipWelcomeModal()) {
         removeLegacyConsentBanner();
