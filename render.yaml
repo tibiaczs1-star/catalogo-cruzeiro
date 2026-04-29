@@ -21,6 +21,10 @@ services:
         value: https://catalogo-cruzeiro-web.onrender.com
       - key: DATA_DIR
         value: /opt/render/project/src/render-data
+      - key: REAL_AGENTS_AUTO_RUN_DISABLED
+        value: "false"
+      - key: REAL_AGENTS_AUTO_RUN_INTERVAL_MS
+        value: "300000"
       - key: ADMIN_TOKEN
         sync: false
       - key: SUPER_ADMIN_USER
