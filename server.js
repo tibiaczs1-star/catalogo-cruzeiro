@@ -4265,7 +4265,7 @@ function buildNewsFallbackSvg(item = {}, reason = "fallback") {
 function ensureNewsFallbackImage(item = {}, reason = "fallback") {
   const slug = slugify(item.slug || item.title || createRecordId("noticia"));
   const fileName = `${slug || createRecordId("noticia")}.svg`;
-  const relativeUrl = `/assets/news-fallbacks/${fileName}`;
+  const relativeUrl = `./assets/news-fallbacks/${fileName}`;
   const filePath = path.join(ROOT_DIR, "assets", "news-fallbacks", fileName);
   try {
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -7898,6 +7898,15 @@ function buildPublicDailyAgentPulse() {
   const queue = Array.isArray(payload.queue) ? payload.queue : [];
   const officeDashboard = Array.isArray(payload.officeDashboard) ? payload.officeDashboard : [];
   const history = Array.isArray(payload.autoRun?.history) ? payload.autoRun.history : [];
+  const timelineBySlug = new Map();
+  const timelineByName = new Map();
+
+  (Array.isArray(payload.agentTimelines) ? payload.agentTimelines : []).forEach((timeline) => {
+    const slug = String(timeline?.slug || "").trim();
+    const name = String(timeline?.name || "").trim();
+    if (slug) timelineBySlug.set(slug, timeline);
+    if (name) timelineByName.set(name, timeline);
+  });
 
   const actionItems = actions
     .concat(queue)
@@ -7911,6 +7920,31 @@ function buildPublicDailyAgentPulse() {
       status: cleanShortText(item.status || item.outcome || "em leitura", 60),
       points: Number(item.points || item.score || 0)
     }));
+  const readerItems = (Array.isArray(payload.agents) ? payload.agents : [])
+    .map((agent, index) => {
+      const timeline =
+        timelineBySlug.get(String(agent?.slug || "").trim()) ||
+        timelineByName.get(String(agent?.name || "").trim()) ||
+        null;
+      const events = Array.isArray(timeline?.events) ? timeline.events : [];
+      const memoryEvent = events.find((event) => event?.type === "memoria") || events[0] || null;
+
+      return {
+        name: cleanShortText(agent?.name || `Agente ${index + 1}`, 80),
+        office: cleanShortText(agent?.officeLabel || agent?.officeKey || timeline?.office || "Redação", 80),
+        role: cleanShortText(agent?.role || timeline?.role || "leitura", 60),
+        specialty: cleanShortText(agent?.specialty || agent?.title || "", 160),
+        focus: Array.isArray(agent?.monitoringFocus)
+          ? agent.monitoringFocus.slice(0, 4).map((focus) => cleanShortText(focus, 80)).filter(Boolean)
+          : [],
+        bridge: cleanShortText(agent?.newsroomBridge || "", 160),
+        lastSignal: cleanShortText(memoryEvent?.status || memoryEvent?.title || "", 180),
+        level: Number(timeline?.level || 0),
+        rank: cleanShortText(timeline?.rank || "", 40)
+      };
+    })
+    .filter((agent) => agent.name)
+    .slice(0, 120);
 
   return {
     ok: true,
@@ -7939,6 +7973,7 @@ function buildPublicDailyAgentPulse() {
       status: cleanShortText(office.status || office.mood || "ativo", 80),
       queue: Number(office.queue || office.queueDepth || office.actions || 0)
     })),
+    readers: readerItems,
     actions: actionItems
   };
 }

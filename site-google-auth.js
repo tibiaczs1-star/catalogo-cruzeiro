@@ -8,6 +8,7 @@
     scriptPromise: null
   };
   const FORCE_REAUTH_KEY = "catalogo_google_force_reauth_v1";
+  const isLocalFileProtocol = window.location.protocol === "file:";
 
   function $(selector, root = document) {
     return root.querySelector(selector);
@@ -18,6 +19,10 @@
   }
 
   async function requestJson(url, options = {}) {
+    if (isLocalFileProtocol && /^\/api\//.test(String(url || ""))) {
+      throw new Error("API local indisponivel quando a pagina abre por file://.");
+    }
+
     const response = await fetch(url, {
       credentials: "same-origin",
       headers: {
@@ -236,6 +241,15 @@
   }
 
   async function refresh() {
+    if (isLocalFileProtocol) {
+      state.enabled = false;
+      state.user = null;
+      state.ready = true;
+      syncDom();
+      emitAuthChange();
+      return;
+    }
+
     try {
       const config = await requestJson("/api/auth/config", { method: "GET" });
       state.enabled = Boolean(config.enabled && config.clientId);

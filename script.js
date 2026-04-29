@@ -103,6 +103,7 @@ const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
 const monthlyBuzzGrid = document.querySelector("#monthly .month-grid");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
+const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
   "Abrindo os destaques de Cruzeiro do Sul",
@@ -110,6 +111,10 @@ const splashMessages = [
   "Atualizando a edição com foco no Vale do Juruá"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+const tickerDesktopStaticMedia =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(min-width: 821px)")
+    : null;
 const tickerPhrasePool = [
   { label: "Notícias", text: "As notícias locais mostram primeiro o que impacta Cruzeiro do Sul no dia." },
   { label: "Arquivo", text: "Arquivo do mês ajuda a entender o contexto das notícias mais recentes." },
@@ -217,8 +222,11 @@ const clearLiveTickerRuntime = () => {
 
 const buildLiveTickerPhrasePool = (items = []) => {
   const seenKeys = new Set();
+  const seenLabels = new Set();
+  const firstByLabel = [];
+  const repeatedLabels = [];
 
-  return (Array.isArray(items) ? items : [])
+  (Array.isArray(items) ? items : [])
     .map((item) => normalizeRuntimeArticle(item))
     .filter((article) => {
       const key = article.slug || article.sourceUrl || article.id || article.title;
@@ -230,16 +238,56 @@ const buildLiveTickerPhrasePool = (items = []) => {
       seenKeys.add(key);
       return true;
     })
-    .slice(0, 18)
+    .slice(0, 80)
     .map((article) => ({
       label: truncateCopy(article.category || article.sourceName || "Agora", 20),
       text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 84)
-    }));
+    }))
+    .forEach((phrase) => {
+      const labelKey = normalizeText(phrase.label || "agora") || "agora";
+
+      if (!seenLabels.has(labelKey)) {
+        seenLabels.add(labelKey);
+        firstByLabel.push(phrase);
+        return;
+      }
+
+      repeatedLabels.push(phrase);
+    });
+
+  return [...firstByLabel, ...repeatedLabels].slice(0, 18);
+};
+
+const ensureTickerPhraseDiversity = (phrases = []) => {
+  const normalized = (Array.isArray(phrases) ? phrases : []).filter((phrase) => phrase?.label && phrase?.text);
+  const firstUnique = [];
+  const remaining = [];
+  const firstLabels = new Set();
+
+  normalized.forEach((phrase) => {
+    const labelKey = normalizeText(phrase.label || "agora") || "agora";
+    if (firstUnique.length < 4 && !firstLabels.has(labelKey)) {
+      firstLabels.add(labelKey);
+      firstUnique.push(phrase);
+      return;
+    }
+
+    remaining.push(phrase);
+  });
+
+  if (firstLabels.size >= 4) {
+    return [...firstUnique, ...remaining];
+  }
+
+  const supplement = tickerPhrasePool.filter((phrase) => !firstLabels.has(normalizeText(phrase.label))).slice(0, 4);
+  return [...firstUnique, ...supplement, ...remaining];
 };
 
 const getTickerPhrasePool = () => {
   const livePhrases = buildLiveTickerPhrasePool(window.NEWS_DATA || []);
-  return livePhrases.length >= 6 ? livePhrases : [...livePhrases, ...tickerPhrasePool];
+  return ensureTickerPhraseDiversity(
+    livePhrases.length >= 6 ? livePhrases : [...livePhrases, ...tickerPhrasePool]
+  );
 };
 const splashStorageKey = "catalogo_splash_seen_v1";
 const skipHomeIntroKey = "catalogo_skip_home_intro_once";
@@ -560,8 +608,17 @@ const isTrackingPixelImageUrl = (value) => {
   return false;
 };
 
-const sanitizeImageUrl = (value) => {
+const normalizeLocalRuntimeAssetUrl = (value) => {
   const raw = String(value || "").trim();
+  if (isLocalFileProtocol && /^\/(?:assets|data)\//i.test(raw)) {
+    return `.${raw}`;
+  }
+
+  return raw;
+};
+
+const sanitizeImageUrl = (value) => {
+  const raw = normalizeLocalRuntimeAssetUrl(value);
   if (!raw) {
     return "";
   }
@@ -608,7 +665,7 @@ const pushUniqueImageCandidate = (bucket, value) => {
 };
 
 const buildImageLoadCandidates = (value) => {
-  const raw = String(value || "").trim();
+  const raw = normalizeLocalRuntimeAssetUrl(value);
   if (!raw || isHotlinkBlockedImageUrl(raw) || isTrackingPixelImageUrl(raw)) {
     return [];
   }
@@ -823,10 +880,20 @@ const isIllustrativeImage = (article) => {
 const articleImageResolveCache = new Map();
 const sourcePreviewImageResolveCache = new Map();
 
+const canRequestProtectedPreviewImage = () =>
+  Boolean(
+    window.CATALOGO_ENABLE_PROTECTED_PREVIEWS === true ||
+      document.body?.dataset?.allowProtectedPreviewImages === "true"
+  );
+
 const resolveSourcePreviewImage = async (article = {}) => {
   const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
 
   if (!sourceUrl) {
+    return "";
+  }
+
+  if (!canRequestProtectedPreviewImage()) {
     return "";
   }
 
@@ -1472,6 +1539,18 @@ const formatSplashStamp = () => {
 const setupSplashExperience = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
 
+  if (document.body.classList.contains("editorial-home") && !mobileIntroMedia?.matches) {
+    try {
+      sessionStorage.setItem(splashStorageKey, "1");
+      sessionStorage.removeItem(skipHomeIntroKey);
+    } catch (_error) {
+      // ignore session storage failures
+    }
+
+    document.body.classList.add("site-loaded");
+    return;
+  }
+
   if (mobileIntroMedia?.matches) {
     document.body.classList.add("mobile-simple-shell");
     window.setTimeout(() => {
@@ -1625,29 +1704,7 @@ const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
 
   chip.classList.remove("is-typing");
 
-  if (!type || splashMotionQuery.matches) {
-    textNode.textContent = nextText;
-    return;
-  }
-
-  textNode.textContent = "";
-  chip.classList.add("is-typing");
-
-  let charIndex = 0;
-  const typingSpeed = Math.max(18, Math.min(34, Math.floor(960 / Math.max(nextText.length, 1))));
-
-  chip._typingInterval = window.setInterval(() => {
-    charIndex += 1;
-    textNode.textContent = nextText.slice(0, charIndex);
-
-    if (charIndex >= nextText.length) {
-      window.clearInterval(chip._typingInterval);
-      chip._typingInterval = 0;
-      chip._typingDoneTimer = window.setTimeout(() => {
-        chip.classList.remove("is-typing");
-      }, 520);
-    }
-  }, typingSpeed);
+  textNode.textContent = nextText;
 };
 
 const initializeLiveTicker = () => {
@@ -1664,7 +1721,8 @@ const initializeLiveTicker = () => {
     return;
   }
 
-  const phrasesPerLane = 10;
+  const isDesktopStaticTicker = tickerDesktopStaticMedia?.matches === true;
+  const phrasesPerLane = isDesktopStaticTicker ? 4 : 10;
   let phraseCursor = 0;
   const nextPhrase = () => {
     const phrase = activeTickerPhrasePool[phraseCursor % activeTickerPhrasePool.length];
@@ -3429,6 +3487,7 @@ const normalizeRuntimeArticle = (article = {}) => {
     article.sourceLabel || article.title || "Resumo em atualização.",
     172
   );
+  const summary = cleanArticleExcerpt(article.summary || article.lede || article.description || rawLede, rawLede);
   const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
   const hasSourceToProbe = Boolean(sourceUrl && sourceUrl !== "#");
   const originalImageUrl = hasSourceToProbe && isGeneratedNewsFallbackImageUrl(article.feedImageUrl || article.imageUrl)
@@ -3458,6 +3517,7 @@ const normalizeRuntimeArticle = (article = {}) => {
     sourceUrl,
     sourceLabel: cleanArticleText(article.sourceLabel || title),
     rawLede,
+    summary,
     lede: displaySummary,
     displaySummary,
     date: formatDisplayDate(article.date || article.publishedAt || article.createdAt || ""),
@@ -6734,7 +6794,385 @@ const clampBuzzPercent = (value, min = 0, max = 100) =>
 const pickBuzzCopy = (items = [], seed = 0, offset = 0) =>
   items[(Math.abs(seed) + offset) % Math.max(items.length, 1)] || "";
 
-const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) => {
+const buzzAgentFallbackReaders = [
+  {
+    name: "Editora Ari",
+    office: "Escritório Principal",
+    role: "editor",
+    specialty: "hierarquia de notícias, capa, manchetes e ritmo editorial"
+  },
+  {
+    name: "Malu Cultura",
+    office: "Escritório Principal",
+    role: "editor",
+    specialty: "agenda cultural, personagens, serviço e impacto para o leitor"
+  },
+  {
+    name: "Paula Manchete",
+    office: "Escritório Principal",
+    role: "editor",
+    specialty: "abertura de matéria, ângulo público e peso da manchete"
+  },
+  {
+    name: "Revisor Bento",
+    office: "Escritório Principal",
+    role: "review",
+    specialty: "erros editoriais, botões, acessibilidade e clareza"
+  },
+  {
+    name: "Bruno Mesa",
+    office: "Escritório Principal",
+    role: "review",
+    specialty: "contraponto, dúvida do leitor e excesso de certeza"
+  },
+  {
+    name: "Lia Copy",
+    office: "Escritório Principal",
+    role: "copy",
+    specialty: "títulos, chamadas, microcopy e tom humano"
+  },
+  {
+    name: "Nina Texto",
+    office: "Escritório Principal",
+    role: "copy",
+    specialty: "texto institucional, apresentação pública, clareza e edição de linguagem"
+  },
+  {
+    name: "Paulo Lede",
+    office: "Escritório Principal",
+    role: "copy",
+    specialty: "ledes curtos, precisão de promessa e ritmo de leitura"
+  },
+  {
+    name: "Sofia Fontes",
+    office: "Escritório Principal",
+    role: "sources",
+    specialty: "fontes confiáveis, origem da informação e cobertura externa"
+  },
+  {
+    name: "Caio Fontes",
+    office: "Escritório Principal",
+    role: "sources",
+    specialty: "checagem cruzada, datas, documentos e links de origem"
+  },
+  {
+    name: "Téo Buzz",
+    office: "Escritório Principal",
+    role: "social",
+    specialty: "redes sociais, buzz local, creators e pedidos da comunidade"
+  },
+  {
+    name: "Rafa Redes",
+    office: "Escritório Principal",
+    role: "social",
+    specialty: "temperatura de comentários, ironia, apoio e cobrança pública"
+  },
+  {
+    name: "Dara Design",
+    office: "Escritório Principal",
+    role: "design",
+    specialty: "layout, contraste, responsivo, identidade visual e experiência"
+  },
+  {
+    name: "Joana UX",
+    office: "Escritório Principal",
+    role: "design",
+    specialty: "escaneabilidade, densidade visual e leitura em card"
+  },
+  {
+    name: "Vera Vendas",
+    office: "Escritório Principal",
+    role: "sales",
+    specialty: "vendas locais, anúncios, vitrine, Pix e confiança"
+  },
+  {
+    name: "Nico Study",
+    office: "Escritório Principal",
+    role: "sources",
+    specialty: "educação, campus, carreira, IA e fontes globais"
+  },
+  {
+    name: "Tami QA",
+    office: "Escritório Nerd",
+    role: "review",
+    specialty: "playtest, revisão de atritos, clareza de botões e consistência"
+  },
+  {
+    name: "Beto HUD",
+    office: "Escritório Nerd",
+    role: "design",
+    specialty: "HUD, painéis, microcopy de ação e clareza de informação"
+  },
+  {
+    name: "Codex CEO",
+    office: "Escritório Principal",
+    role: "ceo",
+    specialty: "organização da equipe, prioridades do portal e visão de conjunto"
+  }
+];
+
+const normalizeBuzzAgentReader = (agent = {}, index = 0) => {
+  const name = String(agent.name || agent.agent || agent.agentName || "").trim();
+  if (!name) {
+    return null;
+  }
+
+  const focus = Array.isArray(agent.focus)
+    ? agent.focus
+    : Array.isArray(agent.monitoringFocus)
+      ? agent.monitoringFocus
+      : [];
+
+  return {
+    key: String(agent.slug || agent.id || `${name}:${agent.role || ""}:${index}`).trim(),
+    name,
+    office: String(agent.office || agent.officeLabel || agent.officeKey || "Redação").trim(),
+    role: String(agent.role || "leitura").trim(),
+    specialty: String(agent.specialty || agent.title || "").trim(),
+    focus: focus.map((item) => String(item || "").trim()).filter(Boolean).slice(0, 4),
+    lastSignal: String(agent.lastSignal || agent.status || "").trim()
+  };
+};
+
+const buildBuzzAgentReaderPool = (agentPulse = null) => {
+  const readers = Array.isArray(agentPulse?.readers) ? agentPulse.readers : [];
+  const actionReaders = Array.isArray(agentPulse?.actions)
+    ? agentPulse.actions.map((action) => ({
+        name: action.agent,
+        office: action.office,
+        role: action.role,
+        specialty: action.title,
+        lastSignal: action.status
+      }))
+    : [];
+  const seen = new Set();
+
+  return [...readers, ...actionReaders, ...buzzAgentFallbackReaders]
+    .map((agent, index) => normalizeBuzzAgentReader(agent, index))
+    .filter((agent) => {
+      if (!agent) {
+        return false;
+      }
+
+      const key = normalizeText(agent.key || agent.name);
+      if (!key || seen.has(key)) {
+        return false;
+      }
+
+      seen.add(key);
+      return true;
+    });
+};
+
+const inferBuzzOpinionTheme = (haystack = "") => {
+  if (/\b(show|cantor|cantora|ator|atriz|musica|cultura|teatro|palco|festival|agenda cultural)\b/.test(haystack)) {
+    return "culture";
+  }
+  if (/\b(futebol|jogo|gol|campeonato|serie d|time|atleta|esporte)\b/.test(haystack)) {
+    return "sport";
+  }
+  if (/\b(prefeitura|governo|governador|governadora|deputado|senador|politica|politico|gestao)\b/.test(haystack)) {
+    return "politics";
+  }
+  if (/\b(tempo|cheia|ubs|hospital|posto|edital|calendario|servico|serviço|bairro|morador)\b/.test(haystack)) {
+    return "service";
+  }
+  if (/\b(preco|preço|oferta|produto|compra|venda|loja|mercado|negocio|negócio)\b/.test(haystack)) {
+    return "commerce";
+  }
+  if (/\b(crianca|criança|adolescente|familia|família|escola|educacao|educação)\b/.test(haystack)) {
+    return "family";
+  }
+  return "default";
+};
+
+const buzzOpinionThemeDetails = {
+  culture: {
+    roles: ["editor", "social", "copy", "review", "sources", "design"],
+    axis: "experiência x contexto cultural",
+    mood: "curiosidade cultural, leitura em aberto",
+    climate: "curiosidade cultural com cautela",
+    context: "experiência, agenda cultural e valor para quem não acompanhou o assunto",
+    route: "entrar pelo clima do evento, separar crítica de agenda e explicar por que importa fora do círculo de fãs"
+  },
+  sport: {
+    roles: ["social", "editor", "sources", "copy", "review", "ceo"],
+    axis: "torcida x tabela x consequência",
+    mood: "torcida ligada, cobrança por contexto",
+    climate: "empolgação com cobrança de consequência",
+    context: "resultado, tabela, personagem e impacto para a próxima rodada",
+    route: "mostrar o placar sem perder o que muda na competição e no humor da torcida"
+  },
+  politics: {
+    roles: ["sources", "editor", "review", "copy", "social", "ceo"],
+    axis: "fala oficial x prova pública",
+    mood: "atenção alta, tolerância baixa para frase pronta",
+    climate: "interesse alto com desconfiança de promessa",
+    context: "autoridade, decisão, documento e efeito prático para a população",
+    route: "cruzar fala, fonte e impacto antes de deixar a opinião subir o tom"
+  },
+  service: {
+    roles: ["sources", "social", "editor", "review", "copy", "design"],
+    axis: "utilidade x prazo x responsável",
+    mood: "interesse prático, cobrança por resposta",
+    climate: "urgência prática com pedido de confirmação",
+    context: "prazo, endereço, responsável e rotina de quem precisa do serviço",
+    route: "transformar repercussão em orientação clara para o leitor resolver algo"
+  },
+  commerce: {
+    roles: ["sales", "social", "copy", "review", "sources", "design"],
+    axis: "valor real x hype",
+    mood: "interesse com comparação",
+    climate: "curiosidade de compra com pé no freio",
+    context: "preço, benefício, risco de propaganda e experiência de quem já testou",
+    route: "separar utilidade de empolgação comercial e explicar limite da oferta"
+  },
+  family: {
+    roles: ["review", "sources", "copy", "editor", "social", "design"],
+    axis: "proteção x autonomia",
+    mood: "tema sensível, leitura cuidadosa",
+    climate: "preocupação legítima sem solução mágica",
+    context: "segurança, rotina das famílias, evidência e linguagem responsável",
+    route: "reconhecer o medo real sem vender controle simples para problema complexo"
+  },
+  default: {
+    roles: ["editor", "sources", "social", "copy", "review", "design"],
+    axis: "interesse x dúvida x consequência",
+    mood: "atenção moderada, leitura em disputa",
+    climate: "interesse com dúvida organizada",
+    context: "fonte, reação pública, utilidade e o que muda para o leitor",
+    route: "dar clima sem fingir certeza: explicar o que importa, para quem muda algo e o que falta checar"
+  }
+};
+
+const resolveBuzzAgentRoleKey = (role = "") => {
+  const roleKey = normalizeText(role);
+  if (/source|fonte/.test(roleKey)) return "sources";
+  if (/review|revis/.test(roleKey)) return "review";
+  if (/copy|texto/.test(roleKey)) return "copy";
+  if (/social|buzz|rede/.test(roleKey)) return "social";
+  if (/design|hud|visual/.test(roleKey)) return "design";
+  if (/sales|venda|comercial/.test(roleKey)) return "sales";
+  if (/editor/.test(roleKey)) return "editor";
+  if (/ceo|lead|coord/.test(roleKey)) return "ceo";
+  return roleKey || "leitura";
+};
+
+const pickBuzzAgentReaders = (agentPulse = null, theme = "default", seed = 0) => {
+  const pool = buildBuzzAgentReaderPool(agentPulse);
+  const detail = buzzOpinionThemeDetails[theme] || buzzOpinionThemeDetails.default;
+  const selected = [];
+  const usedKeys = new Set();
+  const addAgent = (agent) => {
+    if (!agent) {
+      return false;
+    }
+
+    const key = normalizeText(agent.key || agent.name);
+    if (!key || usedKeys.has(key)) {
+      return false;
+    }
+
+    usedKeys.add(key);
+    selected.push(agent);
+    return true;
+  };
+
+  detail.roles.forEach((role, roleIndex) => {
+    const matches = pool.filter((agent) => resolveBuzzAgentRoleKey(agent.role) === role);
+    const candidate = matches[(Math.abs(seed) + roleIndex * 7) % Math.max(matches.length, 1)];
+    addAgent(candidate);
+  });
+
+  pool.forEach((agent, poolIndex) => {
+    if (selected.length >= 4) {
+      return;
+    }
+
+    const candidate = pool[(Math.abs(seed) + poolIndex * 5) % pool.length];
+    addAgent(candidate);
+  });
+
+  return selected.slice(0, 4);
+};
+
+const buildBuzzAgentVoice = (agent = {}, detail = buzzOpinionThemeDetails.default, context = {}) => {
+  const role = resolveBuzzAgentRoleKey(agent.role);
+  const networkName = context.networkName || "rede";
+  const sourceName = context.sourceName || "fonte original";
+  const roleLabels = {
+    editor: "ângulo editorial",
+    sources: "checagem de fonte",
+    social: "clima de rede",
+    copy: "tom da chamada",
+    review: "cautela editorial",
+    design: "leitura visual",
+    sales: "valor percebido",
+    ceo: "prioridade da rodada"
+  };
+  const label = roleLabels[role] || "leitura de agente";
+  const texts = {
+    editor: `${agent.name} puxa a hierarquia: abrir por ${detail.context} e mostrar o que muda na leitura do público.`,
+    sources: `${agent.name} pede lastro: fonte, data e confirmação antes de transformar reação em certeza.`,
+    social: `${agent.name} mede ${networkName}: ${detail.climate}; há conversa viva, mas apoio, ironia e cobrança precisam ficar separados.`,
+    copy: `${agent.name} segura o tom: chamada com energia, sem vender conclusão maior que o fato.`,
+    review: `${agent.name} corta excesso: opinião só entra depois de contexto, fonte e pergunta respondida.`,
+    design: `${agent.name} olha a tela: clima dos agentes precisa aparecer sem virar bloco pesado nem repetir a mesma frase.`,
+    sales: `${agent.name} pergunta valor: o leitor precisa sair sabendo o que ganha, perde ou decide.`,
+    ceo: `${agent.name} organiza prioridade: se ${sourceName} é ponto de partida, a equipe cruza fonte, rede e serviço antes do destaque.`
+  };
+
+  return {
+    label,
+    text: truncateCopy(texts[role] || `${agent.name} acrescenta uma leitura própria antes da avaliação final.`, 172)
+  };
+};
+
+const buildBuzzAgentOpinion = ({
+  article = {},
+  networkContext = {},
+  profile = {},
+  seed = 0,
+  index = 0,
+  voiceWeights = [],
+  agentPulse = null,
+  subject = ""
+} = {}) => {
+  const haystack = normalizeText(
+    [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
+  );
+  const theme = inferBuzzOpinionTheme(haystack);
+  const detail = buzzOpinionThemeDetails[theme] || buzzOpinionThemeDetails.default;
+  const agents = pickBuzzAgentReaders(agentPulse, theme, seed + index * 13);
+
+  if (!agents.length) {
+    return null;
+  }
+
+  const sourceName = article.sourceName || article.sourceTitle || "fonte original";
+  const networkName = networkContext.network || "rede";
+  const voiceAgents = agents.slice(0, 3);
+  const voices = voiceAgents.map((agent, voiceIndex) => {
+    const voice = buildBuzzAgentVoice(agent, detail, { networkName, sourceName });
+    return {
+      ...voice,
+      weight: voiceWeights[voiceIndex] || 42
+    };
+  });
+  const visibleNames = voiceAgents.map((agent) => agent.name).join(", ");
+  const supportAgent = agents[3]?.name ? ` ${agents[3].name} fica no apoio de leitura.` : "";
+
+  return {
+    captureLabel: `${voiceAgents.length} leituras do time real`,
+    debateAxis: detail.axis || profile.debateAxis,
+    publicMood: detail.mood || profile.publicMood,
+    voices,
+    agentContext: `${visibleNames} leem "${subject}" por ${detail.context}.${supportAgent}`,
+    agentEvaluation: `Clima dos agentes: ${detail.climate}; ${detail.route}.`
+  };
+};
+
+const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, agentPulse = null) => {
   const haystack = normalizeText(
     [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
   );
@@ -6878,7 +7316,7 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) =>
   const concernWeight = clampBuzzPercent(92 - satisfaction + (((seed >> 1) % 11) - 5), 18, 78);
   const questionWeight = clampBuzzPercent(38 + ((seed >> 2) % 23), 18, 66);
   const voiceWeights = [supportWeight, concernWeight, questionWeight];
-  const voices = profile.voices.map(([label, text], voiceIndex) => ({
+  const fallbackVoices = profile.voices.map(([label, text], voiceIndex) => ({
     label,
     text,
     weight: voiceWeights[voiceIndex] || questionWeight
@@ -6892,19 +7330,29 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) =>
     seed,
     index
   );
+  const agentOpinion = buildBuzzAgentOpinion({
+    article,
+    networkContext,
+    profile,
+    seed,
+    index,
+    voiceWeights,
+    agentPulse,
+    subject
+  });
 
   return {
     meter: satisfaction,
     satisfaction,
     kicker: profile.kicker,
-    debateAxis: profile.debateAxis,
-    publicMood: profile.publicMood,
-    captureLabel: profile.captureLabel,
+    debateAxis: agentOpinion?.debateAxis || profile.debateAxis,
+    publicMood: agentOpinion?.publicMood || profile.publicMood,
+    captureLabel: agentOpinion?.captureLabel || profile.captureLabel,
     signalLabel: primarySignal,
     sourceContext,
-    agentContext: profile.context,
-    agentEvaluation: profile.evaluation,
-    voices
+    agentContext: agentOpinion?.agentContext || profile.context,
+    agentEvaluation: agentOpinion?.agentEvaluation || profile.evaluation,
+    voices: agentOpinion?.voices || fallbackVoices
   };
 };
 
@@ -6926,14 +7374,14 @@ const getDailyBuzzDisplayImageUrl = (article = {}, index = 0) => {
   return dailyBuzzFallbackImages[index % dailyBuzzFallbackImages.length];
 };
 
-const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
+const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) => {
   const article = normalizeRuntimeArticle(item);
   const href = buildArticleHref(article);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
   const networkContext = resolveBuzzNetworkContext(article, index);
-  const pulse = buildBuzzAudiencePulse(article, networkContext, index);
+  const pulse = buildBuzzAudiencePulse(article, networkContext, index, agentPulse);
   const photoUrl = getDailyBuzzDisplayImageUrl(article, index);
-  const avatarUrl = article.sourceImageUrl || photoUrl;
+  const avatarUrl = sanitizeImageUrl(article.sourceImageUrl) || photoUrl;
   const dateLabel =
     formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
     article.date ||
@@ -7008,7 +7456,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
           ${voiceMarkup}
         </div>
         <div class="buzz-agent-evaluation">
-          <span>contexto e avaliação dos agentes</span>
+          <span>clima e avaliação dos agentes</span>
           <p>${escapeHtml(pulse.agentContext || "Contexto editorial reunido antes da escrita autoral.")}</p>
           <strong>${escapeHtml(pulse.agentEvaluation || "Avaliação dos agentes em revisão.")}</strong>
         </div>
@@ -7041,7 +7489,10 @@ const renderDailyTrendingBuzz = async (options = {}) => {
     return;
   }
 
-  const liveBuzzItems = await fetchTopicFeedCached("buzz", 12, options);
+  const [liveBuzzItems, agentPulse] = await Promise.all([
+    fetchTopicFeedCached("buzz", 12, options),
+    fetchDailyAgentPulseCached(options)
+  ]);
   const reservedKeys = buildReservedArticleKeys(["dailyBuzz"]);
   const reservedImages = buildReservedArticleImageKeys(["dailyBuzz"]);
   const liveCases = dedupeNewsItems(liveBuzzItems)
@@ -7077,7 +7528,9 @@ const renderDailyTrendingBuzz = async (options = {}) => {
       : [...liveCases, ...pickDailyItems(getBuzzFallbackItems(), 6 - liveCases.length, 31)].slice(0, 6);
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
-  trendingBuzzGrid.innerHTML = selectedCases.map(buildDailyInfluencerBuzzCard).join("");
+  trendingBuzzGrid.innerHTML = selectedCases
+    .map((item, itemIndex) => buildDailyInfluencerBuzzCard(item, itemIndex, agentPulse))
+    .join("");
   reserveSurfaceArticles("dailyBuzz", selectedCases);
   registerArticleCardLinks(trendingBuzzGrid);
   rerenderEditorialRemainderSurfaces();
@@ -7231,7 +7684,11 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
   const shouldShowInternalAgentNote = !isMobileHomeViewport();
   const href = buildArticleHref(article);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
-  const imageUrl = getArticleDisplayImageUrl(article) || article.imageUrl || monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl;
+  const imageUrl = sanitizeImageUrl(
+    getArticleDisplayImageUrl(article) ||
+      article.imageUrl ||
+      monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl
+  );
   const dateLabel =
     formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
     formatCompactDisplayDate(new Date().toISOString());
@@ -7253,7 +7710,7 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
       <h3>
         <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(truncateCopy(article.title || "Recorte social em atualização", 108))}</a>
       </h3>
-      <p>${escapeHtml(truncateCopy(article.lede || article.summary || "Tema em acompanhamento no portal.", 142))}</p>
+      <p>${escapeHtml(truncateCopy(cleanArticleExcerpt(article.lede || article.summary, "Tema em acompanhamento no portal."), 142))}</p>
       <div class="month-signal" aria-label="Força de repercussão">
         <span>${escapeHtml(tone.axis)}</span>
         <i><b style="width:${score}%"></b></i>
@@ -8073,7 +8530,7 @@ const buildDynamicMarketPayload = (articles = [], fallbackMarket = {}) => {
       label: article.category || "Economia",
       title: truncateCopy(article.title || "Atualização econômica", 88),
       summary: truncateCopy(
-        article.summary || article.lede || "Leitura econômica em acompanhamento.",
+        cleanArticleExcerpt(article.summary || article.lede, "Leitura econômica em acompanhamento."),
         180
       ),
       sourceName: article.sourceName || "Fonte ativa",
@@ -8455,7 +8912,7 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
           <article class="global-politics-card" data-scope="${escapeRuntimeAttribute(scope.key)}">
           <p class="eyebrow">${escapeHtml(scope.label)}</p>
           <h3>${escapeHtml(truncateCopy(article.title || scope.fallbackTitle, 120))}</h3>
-          <p>${escapeHtml(truncateCopy(article.summary || article.lede || "Atualização política em acompanhamento.", 190))}</p>
+          <p>${escapeHtml(truncateCopy(cleanArticleExcerpt(article.summary || article.lede, "Atualização política em acompanhamento."), 190))}</p>
           <footer>
             <span>${escapeHtml(source)}</span>
             <a href="${escapeRuntimeAttribute(href)}">Ler destaque</a>
@@ -9124,7 +9581,10 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (copyNode) {
-      copyNode.textContent = truncateCopy(article.displaySummary || article.lede, index === 0 ? 88 : 64);
+      copyNode.textContent = truncateCopy(
+        cleanArticleExcerpt(article.displaySummary || article.lede, "Resumo em atualização."),
+        index === 0 ? 88 : 64
+      );
     }
 
     if (statNode) {
@@ -10418,6 +10878,10 @@ if (window.ELECTIONS_DATA?.offices?.length) {
 
     const sourceUrl = String(candidate.sourceUrl || candidate.imageSourceUrl || "").trim();
     if (!sourceUrl || sourceUrl === "#") {
+      return "";
+    }
+
+    if (!canRequestProtectedPreviewImage()) {
       return "";
     }
 
@@ -11861,7 +12325,7 @@ const buildStoryMarkup = (items, surfaceName = "") =>
           selectedArticles.push(article);
         }
         const href = buildArticleHref(article);
-        const photoUrl = getArticleDisplayImageUrl(article);
+        const photoUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article) || article.imageUrl || "");
         const photoStyle = photoUrl
           ? ` style="--story-photo:url('${photoUrl}')"`
           : "";

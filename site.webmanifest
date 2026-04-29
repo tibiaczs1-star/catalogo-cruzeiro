@@ -2,18 +2,18 @@
   "name": "Catalogo Cruzeiro do Sul",
   "short_name": "Catalogo CZS",
   "description": "Jornal agregador local de Cruzeiro do Sul e Vale do Juruá.",
-  "start_url": "/",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#FFFFFF",
   "theme_color": "#1E3A5F",
   "icons": [
     {
-      "src": "/assets/icon-192.png",
+      "src": "./assets/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/assets/icon-512.png",
+      "src": "./assets/favicon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
