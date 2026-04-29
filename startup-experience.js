@@ -3,25 +3,31 @@
 (() => {
   const MODAL_ID = "catalogoPremiumTerms";
   const CONSENT_BANNER_ID = "catalogo-cookie-consent";
-  const READY_FALLBACK_MS = 6800;
-  const OPEN_DELAY_MS = 260;
+  const READY_FALLBACK_MS = 8000;
+  const OPEN_DELAY_MS = 140;
   const CONSENT_KEY = "catalogo_lgpd_consent_v1";
   const CONSENT_COOKIE = "catalogo_tracking_consent";
   const COOKIE_MAX_AGE_DAYS = 180;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
   const WELCOME_SESSION_COOKIE = "catalogo_terms_welcome_session_v1";
-  const WELCOME_DAILY_KEY = "catalogo_terms_welcome_seen_day_v1";
-  const WELCOME_DAILY_COOKIE = "catalogo_terms_welcome_seen_day_v1";
+  const WELCOME_WEEKLY_KEY = "catalogo_terms_welcome_seen_week_v1";
+  const WELCOME_WEEKLY_COOKIE = "catalogo_terms_welcome_seen_week_v1";
   const FOUNDER_PRELUDE_SESSION_KEY = "catalogo_founder_prelude_seen_session_v1";
-  const FOUNDER_PRELUDE_DAILY_KEY = "catalogo_founder_prelude_seen_day_v1";
-  const FOUNDER_PRELUDE_DAILY_COOKIE = "catalogo_founder_prelude_seen_day_v1";
-  const THANKS_SCREEN_MS = 5200;
-  const THANKS_SCREEN_MS_COMPACT = 4600;
-  const THANKS_SCREEN_MS_PHONE = 3800;
-  const FOUNDER_PRELUDE_MS = 4300;
-  const FOUNDER_PRELUDE_MS_COMPACT = 3900;
-  const FOUNDER_PRELUDE_MS_PHONE = 3400;
-  const RETURNING_LOADER_MS = 980;
+  const FOUNDER_PRELUDE_WEEKLY_KEY = "catalogo_founder_prelude_seen_week_v1";
+  const FOUNDER_PRELUDE_WEEKLY_COOKIE = "catalogo_founder_prelude_seen_week_v1";
+  const INITIAL_HOME_LOADER_SESSION_KEY = "catalogo_initial_home_loader_seen_session_v1";
+  const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
+  const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
+  const INITIAL_HOME_LOADER_MIN_MS = 2000;
+  const ACTION_LOADER_MIN_MS = 850;
+  const ACTION_LOADER_MAX_MS = 2600;
+  const THANKS_SCREEN_MS = 2600;
+  const THANKS_SCREEN_MS_COMPACT = 2200;
+  const THANKS_SCREEN_MS_PHONE = 1800;
+  const FOUNDER_PRELUDE_MS = 3000;
+  const FOUNDER_PRELUDE_MS_COMPACT = 3000;
+  const FOUNDER_PRELUDE_MS_PHONE = 3000;
+  const RETURNING_LOADER_MS = 950;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -111,38 +117,39 @@
     setCookie(WELCOME_SESSION_COOKIE, "1");
   }
 
-  function getTodayKey() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
+  function getWeekKey() {
+    const date = new Date();
+    date.setHours(0, 0, 0, 0);
+    date.setDate(date.getDate() + 4 - (date.getDay() || 7));
+    const yearStart = new Date(date.getFullYear(), 0, 1);
+    const week = Math.ceil(((date - yearStart) / 86400000 + 1) / 7);
+    return `${date.getFullYear()}-W${String(week).padStart(2, "0")}`;
   }
 
-  function rememberWelcomeAcceptedToday() {
-    const todayKey = getTodayKey();
+  function rememberWelcomeAcceptedThisWeek() {
+    const weekKey = getWeekKey();
 
     try {
-      localStorage.setItem(WELCOME_DAILY_KEY, todayKey);
+      localStorage.setItem(WELCOME_WEEKLY_KEY, weekKey);
     } catch (_error) {
       // ignore storage failures
     }
 
-    setCookie(WELCOME_DAILY_COOKIE, todayKey, { days: COOKIE_MAX_AGE_DAYS });
+    setCookie(WELCOME_WEEKLY_COOKIE, weekKey, { days: WEEKLY_MARKER_MAX_AGE_DAYS });
   }
 
-  function hasAcceptedWelcomeToday() {
-    const todayKey = getTodayKey();
+  function hasAcceptedWelcomeThisWeek() {
+    const weekKey = getWeekKey();
 
     try {
-      if (localStorage.getItem(WELCOME_DAILY_KEY) === todayKey) {
+      if (localStorage.getItem(WELCOME_WEEKLY_KEY) === weekKey) {
         return true;
       }
     } catch (_error) {
       // ignore storage failures
     }
 
-    return getCookie(WELCOME_DAILY_COOKIE) === todayKey;
+    return getCookie(WELCOME_WEEKLY_COOKIE) === weekKey;
   }
 
   function hasAcceptedWelcomeInThisBrowserSession() {
@@ -150,11 +157,7 @@
   }
 
   function resetConsentForNewBrowserSession() {
-    if (hasAcceptedWelcomeToday()) {
-      return;
-    }
-
-    if (hasAcceptedWelcomeInThisBrowserSession()) {
+    if (hasAcceptedWelcomeThisWeek()) {
       return;
     }
 
@@ -236,35 +239,70 @@
     }
   }
 
-  function rememberFounderPreludeToday() {
-    const todayKey = getTodayKey();
+  function rememberFounderPreludeThisWeek() {
+    const weekKey = getWeekKey();
 
     try {
-      localStorage.setItem(FOUNDER_PRELUDE_DAILY_KEY, todayKey);
+      localStorage.setItem(FOUNDER_PRELUDE_WEEKLY_KEY, weekKey);
     } catch (_error) {
       // ignore storage failures
     }
 
-    setCookie(FOUNDER_PRELUDE_DAILY_COOKIE, todayKey, { days: COOKIE_MAX_AGE_DAYS });
+    setCookie(FOUNDER_PRELUDE_WEEKLY_COOKIE, weekKey, { days: WEEKLY_MARKER_MAX_AGE_DAYS });
   }
 
-  function hasSeenFounderPreludeToday() {
-    const todayKey = getTodayKey();
+  function hasSeenFounderPreludeThisWeek() {
+    const weekKey = getWeekKey();
 
     try {
-      if (localStorage.getItem(FOUNDER_PRELUDE_DAILY_KEY) === todayKey) {
+      if (localStorage.getItem(FOUNDER_PRELUDE_WEEKLY_KEY) === weekKey) {
         return true;
       }
     } catch (_error) {
       // ignore storage failures
     }
 
-    return getCookie(FOUNDER_PRELUDE_DAILY_COOKIE) === todayKey;
+    return getCookie(FOUNDER_PRELUDE_WEEKLY_COOKIE) === weekKey;
   }
 
   function hasSeenFounderPreludeInThisSession() {
     try {
       return sessionStorage.getItem(FOUNDER_PRELUDE_SESSION_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function rememberInitialHomeLoaderInThisSession() {
+    try {
+      sessionStorage.setItem(INITIAL_HOME_LOADER_SESSION_KEY, "1");
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+
+  function isBackForwardNavigation() {
+    try {
+      const navigationEntry = performance.getEntriesByType("navigation")?.[0];
+      return navigationEntry?.type === "back_forward";
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function consumePageActionLoaderFlag() {
+    try {
+      const hasFlag = sessionStorage.getItem(PAGE_ACTION_LOADER_KEY) === "1";
+      sessionStorage.removeItem(PAGE_ACTION_LOADER_KEY);
+      return hasFlag;
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function cameFromArticlePage() {
+    try {
+      return /\/noticia\.html(?:\?|$)/i.test(new URL(document.referrer).pathname + new URL(document.referrer).search);
     } catch (_error) {
       return false;
     }
@@ -284,20 +322,16 @@
       // ignore URL parsing failures
     }
 
-    if (hasAcceptedWelcomeInThisBrowserSession()) {
+    if (hasAcceptedWelcomeThisWeek()) {
       return true;
     }
 
-    if (hasAcceptedWelcomeToday()) {
-      return true;
-    }
-
-    if (hasStoredConsent()) {
+    if (hasStoredConsent() && hasAcceptedWelcomeThisWeek()) {
       return true;
     }
 
     try {
-      if (sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1") {
+      if (sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1" && hasAcceptedWelcomeThisWeek()) {
         return true;
       }
     } catch (_error) {
@@ -409,7 +443,7 @@
       persistConsentState("accepted");
       rememberWelcomeAcceptedThisSession();
       rememberWelcomeAcceptedThisBrowserSession();
-      rememberWelcomeAcceptedToday();
+      rememberWelcomeAcceptedThisWeek();
       dispatchConsent(true);
       banner.remove();
       document.body.classList.remove("catalogo-lock-scroll", "mobile-cookie-consent-active");
@@ -776,7 +810,7 @@
 
   async function showFounderPreludeThen(callback) {
     rememberFounderPreludeInThisSession();
-    rememberFounderPreludeToday();
+    rememberFounderPreludeThisWeek();
     await preloadFounderBannerAssets();
 
     const prelude = createFounderPrelude();
@@ -1073,90 +1107,185 @@
   }
 
   function createReturningLoaderModal(options = {}) {
-    const modal = document.createElement("section");
-    modal.id = `${MODAL_ID}ReturningLoader`;
-    modal.className = "catalogo-welcome is-splash-loader is-office-loader";
-    modal.setAttribute("aria-hidden", "true");
+    const label = options.label || "Preparando pagina";
+    const loader = document.createElement("div");
+    loader.id = `${MODAL_ID}ReturningLoader`;
+    loader.className = "catalogo-top-return-loader";
+    loader.setAttribute("role", "status");
+    loader.setAttribute("aria-live", "polite");
+    loader.setAttribute("aria-label", label);
+    loader.innerHTML = `
+      <span class="catalogo-top-return-loader-track" aria-hidden="true"><i></i></span>
+      <span class="catalogo-top-return-loader-row">
+        <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
+        <strong data-top-loader-percent>0%</strong>
+      </span>
+    `;
+    return loader;
+  }
 
+  function createInitialHomeLoaderModal() {
+    const modal = document.createElement("section");
+    modal.id = `${MODAL_ID}InitialLoader`;
+    modal.className = "catalogo-welcome is-home-opening-loader is-compact";
+    modal.setAttribute("aria-hidden", "true");
     modal.innerHTML = `
       <article
         class="catalogo-welcome-card"
         role="status"
         aria-live="polite"
-        aria-label="Preparando a abertura do portal"
+        aria-label="Abertura da pagina inicial"
       >
-        <div class="catalogo-return-office-loader">
-          <div class="catalogo-return-office-scene" aria-hidden="true">
-            <div class="return-office-window"></div>
-            <div class="return-office-board">
-              <span>NEWS</span>
-              <i></i>
-              <i></i>
-              <i></i>
+        ${buildWelcomeVisualMarkup({ compact: true, phone: false })}
+        <div class="catalogo-welcome-copy">
+          <p class="catalogo-welcome-kicker">Abertura do portal</p>
+          <h2 id="catalogoInitialLoaderTitle">Abrindo o portal</h2>
+          <p class="catalogo-welcome-lead">
+            Preparando noticias, fotos e agenda para liberar a leitura sem travar a navegacao.
+          </p>
+          <div class="catalogo-founder-opening" aria-live="polite">
+            <div class="catalogo-founder-opening-head">
+              <strong>Experiencia do portal</strong>
+              <span data-initial-loader-percent>0%</span>
             </div>
-            <div class="return-office-desk desk-left">
-              <span class="screen"></span>
-              <span class="keyboard"></span>
+            <div class="catalogo-founder-opening-bar">
+              <span data-initial-loader-bar style="width: 0%"></span>
             </div>
-            <div class="return-office-desk desk-right">
-              <span class="screen"></span>
-              <span class="keyboard"></span>
-            </div>
-            <div class="return-office-avatar avatar-editor">
-              <span class="head"></span>
-              <span class="body"></span>
-              <span class="arm arm-left"></span>
-              <span class="arm arm-right"></span>
-            </div>
-            <div class="return-office-avatar avatar-reporter">
-              <span class="head"></span>
-              <span class="body"></span>
-              <span class="arm arm-left"></span>
-              <span class="arm arm-right"></span>
-            </div>
-            <div class="return-office-avatar avatar-runner">
-              <span class="head"></span>
-              <span class="body"></span>
-              <span class="arm arm-left"></span>
-              <span class="arm arm-right"></span>
-              <span class="paper"></span>
-            </div>
-            <div class="return-office-papers">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-          <div class="catalogo-return-office-copy">
-            <span>Portal local</span>
-            <strong>Reabrindo a home</strong>
-            <p data-returning-splash-status>Preparando os destaques do dia</p>
-            <small data-returning-splash-date>Montando capa</small>
-            <div class="catalogo-return-office-bar" aria-hidden="true"><i></i></div>
+            <p data-initial-loader-status>preparando estrutura da home</p>
           </div>
         </div>
       </article>
     `;
-
-    const splashDate = modal.querySelector("[data-returning-splash-date]");
-    if (splashDate) {
-      splashDate.textContent = new Intl.DateTimeFormat("pt-BR", {
-        weekday: "short",
-        day: "2-digit",
-        month: "long",
-        hour: "2-digit",
-        minute: "2-digit"
-      })
-        .format(new Date())
-        .replace(/\.$/, "");
-    }
-
-    const splashStatus = modal.querySelector("[data-returning-splash-status]");
-    if (splashStatus) {
-      splashStatus.textContent = "Preparando os destaques do dia";
-    }
-
     return modal;
+  }
+
+  function delay(ms) {
+    return new Promise((resolve) => window.setTimeout(resolve, ms));
+  }
+
+  function waitForDocumentComplete(timeoutMs = READY_FALLBACK_MS) {
+    if (document.readyState === "complete") {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      const timer = window.setTimeout(resolve, timeoutMs);
+      window.addEventListener(
+        "load",
+        () => {
+          window.clearTimeout(timer);
+          resolve();
+        },
+        { once: true }
+      );
+    });
+  }
+
+  function waitForFontsReady(timeoutMs = 1600) {
+    const fontsReady = document.fonts?.ready;
+    if (!fontsReady || typeof fontsReady.then !== "function") {
+      return Promise.resolve();
+    }
+
+    return Promise.race([fontsReady.catch(() => undefined), delay(timeoutMs)]);
+  }
+
+  function waitForHomeReady(timeoutMs = READY_FALLBACK_MS) {
+    return Promise.race([
+      Promise.all([
+        new Promise((resolve) => whenSiteReady(resolve)),
+        waitForDocumentComplete(timeoutMs),
+        waitForFontsReady()
+      ]),
+      delay(timeoutMs)
+    ]);
+  }
+
+  function updateInitialLoaderProgress(loader, progress, status = "") {
+    const safeProgress = Math.max(0, Math.min(100, Math.round(progress)));
+    const percentNode = loader.querySelector("[data-initial-loader-percent]");
+    const barNode = loader.querySelector("[data-initial-loader-bar]");
+    const statusNode = loader.querySelector("[data-initial-loader-status]");
+
+    if (percentNode) percentNode.textContent = `${safeProgress}%`;
+    if (barNode) barNode.style.width = `${safeProgress}%`;
+    if (statusNode && status) statusNode.textContent = status;
+  }
+
+  function updateTopLoaderProgress(loader, progress, label = "") {
+    const safeProgress = Math.max(0, Math.min(100, Math.round(progress)));
+    const percentNode = loader.querySelector("[data-top-loader-percent]");
+    const textNode = loader.querySelector("[data-top-loader-text]");
+    const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
+
+    if (percentNode) percentNode.textContent = `${safeProgress}%`;
+    if (textNode && label) textNode.textContent = label;
+    if (barNode) barNode.style.width = `${Math.max(14, safeProgress)}%`;
+  }
+
+  async function runProgressUntilReady(loader, options = {}) {
+    const minDuration = options.minDuration || INITIAL_HOME_LOADER_MIN_MS;
+    const maxDuration = options.maxDuration || READY_FALLBACK_MS;
+    const update = typeof options.update === "function" ? options.update : () => {};
+    const statuses = Array.isArray(options.statuses) && options.statuses.length
+      ? options.statuses
+      : ["preparando estrutura", "montando noticias", "preparando imagens", "home pronta"];
+    const startedAt = Date.now();
+    let currentProgress = 0;
+    let statusIndex = 0;
+    let ready = false;
+
+    waitForHomeReady(maxDuration).then(() => {
+      ready = true;
+    });
+
+    return new Promise((resolve) => {
+      const timer = window.setInterval(() => {
+        const elapsed = Date.now() - startedAt;
+        const timeCap = ready ? 100 : 94;
+        const timeProgress = Math.min(timeCap, Math.round((elapsed / minDuration) * 82) + 8);
+        currentProgress = Math.max(currentProgress, timeProgress);
+        statusIndex = Math.min(
+          statuses.length - 1,
+          Math.floor((currentProgress / 100) * statuses.length)
+        );
+        update(currentProgress, statuses[statusIndex]);
+
+        if (ready && elapsed >= minDuration) {
+          window.clearInterval(timer);
+          update(100, statuses[statuses.length - 1]);
+          window.setTimeout(resolve, 180);
+        }
+      }, 90);
+
+      window.setTimeout(() => {
+        ready = true;
+      }, maxDuration);
+    });
+  }
+
+  function prefetchNavigationTarget(href = "") {
+    const normalizedHref = String(href || "").trim();
+    if (!normalizedHref || normalizedHref.startsWith("#") || /^https?:\/\//i.test(normalizedHref)) {
+      return Promise.resolve();
+    }
+
+    try {
+      const targetUrl = new URL(normalizedHref, window.location.href);
+      if (targetUrl.origin !== window.location.origin) {
+        return Promise.resolve();
+      }
+
+      return Promise.race([
+        fetch(targetUrl.href, {
+          cache: "force-cache",
+          credentials: "same-origin"
+        }).then(() => undefined).catch(() => undefined),
+        delay(ACTION_LOADER_MAX_MS)
+      ]);
+    } catch (_error) {
+      return Promise.resolve();
+    }
   }
 
   function openWelcomeModal(modal) {
@@ -1165,30 +1294,37 @@
     document.body.classList.add("catalogo-lock-scroll");
   }
 
-  function closeWelcomeModal(modal) {
+  function closeWelcomeModal(modal, callback) {
     if (!modal || modal.classList.contains("is-leaving")) {
       return;
     }
-    closeWelcomeModalImmediately(modal);
+    closeWelcomeModalImmediately(modal, callback);
   }
 
-  function closeWelcomeModalImmediately(modal) {
+  function closeWelcomeModalImmediately(modal, callback) {
     if (!modal) return;
     if (typeof modal.__stopFounderOpening === "function") {
       modal.__stopFounderOpening();
     }
+    modal.classList.remove("is-open");
     modal.classList.add("is-leaving");
     modal.setAttribute("aria-hidden", "true");
+    modal.style.pointerEvents = "none";
     document.body.classList.remove("catalogo-lock-scroll");
     window.setTimeout(() => {
       modal.remove();
       dispatchIntroFinished();
+      if (typeof callback === "function") {
+        callback();
+      }
     }, 280);
   }
 
   function clearStaleWelcomeArtifacts() {
     document
-      .querySelectorAll(".catalogo-welcome.is-splash-loader.is-leaving, .catalogo-welcome.is-splash-loader")
+      .querySelectorAll(
+        ".catalogo-welcome.is-splash-loader.is-leaving, .catalogo-welcome.is-splash-loader, .catalogo-welcome.is-home-opening-loader.is-leaving, .catalogo-top-return-loader"
+      )
       .forEach((node) => {
         node.remove();
       });
@@ -1199,32 +1335,112 @@
   }
 
   function showReturningLoaderThen(callback) {
-    if (isSkipIntroNavigation()) {
-      clearStaleWelcomeArtifacts();
-      releaseFounderPreludeGate();
-      if (typeof callback === "function") {
-        callback();
-      }
-      return;
-    }
-
     const loader = createReturningLoaderModal({
-      phone: shouldUsePhoneWelcome()
+      label: "Preparando retorno"
     });
-
-    document.body.appendChild(loader);
-    window.setTimeout(() => {
-      releaseFounderPreludeGate();
-      openWelcomeModal(loader);
-    }, 40);
-
-    whenSiteReady(() => {
+    let finished = false;
+    const finish = () => {
+      if (finished) {
+        return;
+      }
+      finished = true;
+      loader.classList.add("is-leaving");
       window.setTimeout(() => {
-        closeWelcomeModalImmediately(loader);
+        loader.remove();
         if (typeof callback === "function") {
           callback();
         }
-      }, RETURNING_LOADER_MS);
+      }, 180);
+    };
+
+    document.body.appendChild(loader);
+    window.requestAnimationFrame(() => {
+      releaseFounderPreludeGate();
+      loader.classList.add("is-visible");
+      updateTopLoaderProgress(loader, 8, "Preparando retorno");
+    });
+
+    runProgressUntilReady(loader, {
+      minDuration: RETURNING_LOADER_MS,
+      maxDuration: READY_FALLBACK_MS,
+      statuses: ["retomando pagina", "atualizando capa", "conferindo noticias", "home pronta"],
+      update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
+    }).then(finish);
+  }
+
+  function showInitialHomeLoaderThen(callback) {
+    rememberInitialHomeLoaderInThisSession();
+    const loader = createInitialHomeLoaderModal();
+    document.body.classList.add("home-ready-gate-active");
+    document.body.appendChild(loader);
+
+    window.setTimeout(() => {
+      releaseFounderPreludeGate();
+      openWelcomeModal(loader);
+      updateInitialLoaderProgress(loader, 4, "iniciando preparacao da home");
+    }, 30);
+
+    runProgressUntilReady(loader, {
+      minDuration: INITIAL_HOME_LOADER_MIN_MS,
+      maxDuration: READY_FALLBACK_MS,
+      statuses: [
+        "preparando estrutura da home",
+        "montando noticias e fotos",
+        "preparando agenda e servicos",
+        "home principal pronta"
+      ],
+      update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
+    }).then(() => {
+      closeWelcomeModalImmediately(loader);
+      window.setTimeout(() => {
+        document.body.classList.remove("home-ready-gate-active");
+        if (typeof callback === "function") {
+          callback();
+        }
+      }, 300);
+    });
+  }
+
+  function showNavigationActionLoader(options = {}) {
+    const href = options.href || "";
+    const label = options.label || "Abrindo materia";
+    const loader = createReturningLoaderModal({ label });
+    let finished = false;
+
+    const finish = () => {
+      if (finished) {
+        return;
+      }
+      finished = true;
+      updateTopLoaderProgress(loader, 100, "abrindo pagina");
+      loader.classList.add("is-leaving");
+      window.setTimeout(() => {
+        loader.remove();
+      }, 180);
+    };
+
+    try {
+      sessionStorage.setItem(PAGE_ACTION_LOADER_KEY, "1");
+    } catch (_error) {
+      // ignore storage failures
+    }
+
+    document.body.appendChild(loader);
+    window.requestAnimationFrame(() => {
+      loader.classList.add("is-visible", "is-action-loader");
+      updateTopLoaderProgress(loader, 6, label);
+    });
+
+    return Promise.all([
+      prefetchNavigationTarget(href),
+      runProgressUntilReady(loader, {
+        minDuration: ACTION_LOADER_MIN_MS,
+        maxDuration: ACTION_LOADER_MAX_MS,
+        statuses: ["preparando materia", "baixando pagina", "conferindo conteudo", "abrindo pagina"],
+        update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
+      })
+    ]).finally(() => {
+      finish();
     });
   }
 
@@ -1265,19 +1481,140 @@
     window.setTimeout(release, READY_FALLBACK_MS);
   }
 
+  function openWelcomeConsentModal(options = {}) {
+    const afterAccept = typeof options.afterAccept === "function" ? options.afterAccept : null;
+    whenSiteReady(() => {
+      runWhenBrowserIsIdle(() => {
+        preloadFounderBannerAssets();
+        removeLegacyConsentBanner();
+        const oldModal = document.getElementById(MODAL_ID);
+        if (oldModal) {
+          oldModal.remove();
+        }
+
+        const modal = createWelcomeModal({
+          compact: shouldUseCompactWelcome(),
+          phone: shouldUsePhoneWelcome()
+        });
+        document.body.appendChild(modal);
+
+        const checkbox = modal.querySelector("#catalogoAcceptTerms");
+        const acceptButton = modal.querySelector("#catalogoAcceptButton");
+        const requiresCheckbox = Boolean(checkbox);
+
+        if (!acceptButton) {
+          releaseFounderPreludeGate();
+          closeWelcomeModalImmediately(modal, afterAccept);
+          return;
+        }
+
+        if (checkbox) {
+          checkbox.addEventListener("change", () => {
+            acceptButton.disabled = !checkbox.checked;
+          });
+        }
+
+        acceptButton.addEventListener("click", () => {
+          if (requiresCheckbox && !checkbox.checked) {
+            return;
+          }
+
+          clearStoredConsent();
+          persistConsentState("accepted");
+          rememberWelcomeAcceptedThisSession();
+          rememberWelcomeAcceptedThisBrowserSession();
+          rememberWelcomeAcceptedThisWeek();
+          dispatchConsent(true);
+          closeWelcomeModal(modal, afterAccept);
+        });
+
+        window.setTimeout(() => {
+          releaseFounderPreludeGate();
+          openWelcomeModal(modal);
+        }, OPEN_DELAY_MS);
+      });
+    });
+  }
+
+  window.CatalogoPageLoader = {
+    showForNavigation: showNavigationActionLoader
+  };
+
   ready(() => {
     clearStaleWelcomeArtifacts();
-    preloadFounderBannerAssets();
-
-    window.addEventListener("pageshow", () => {
-      clearStaleWelcomeArtifacts();
-    });
-
     resetConsentForNewBrowserSession();
     const phoneFlow = shouldUsePhoneWelcome();
+    const fastEditorialHome = document.body.classList.contains("editorial-home");
+    const actionLoaderRequested =
+      isBackForwardNavigation() ||
+      isSkipIntroNavigation() ||
+      cameFromArticlePage() ||
+      consumePageActionLoaderFlag();
+    let handledPersistedPageShow = false;
+
+    window.addEventListener("pageshow", (event) => {
+      if (!event.persisted) {
+        return;
+      }
+      clearStaleWelcomeArtifacts();
+      if (handledPersistedPageShow || phoneFlow || !fastEditorialHome) {
+        return;
+      }
+      handledPersistedPageShow = true;
+      showReturningLoaderThen(() => {
+        dispatchIntroFinished();
+      });
+    });
 
     const continueAfterFounderPrelude = (options = {}) => {
       const shouldShowReturningLoader = options.afterFounderPrelude === true || !phoneFlow;
+      const finishLoaded = () => {
+        releaseFounderPreludeGate();
+        dispatchIntroFinished();
+      };
+      const showInitialLoaderAfterConsent = () => {
+        showInitialHomeLoaderThen(finishLoaded);
+      };
+
+      const finishOrOpenWelcome = () => {
+        if (shouldSkipWelcomeModal()) {
+          removeLegacyConsentBanner();
+          const oldModal = document.getElementById(MODAL_ID);
+          if (oldModal) {
+            oldModal.remove();
+          }
+          releaseFounderPreludeGate();
+          dispatchIntroFinished();
+          return;
+        }
+
+        if (phoneFlow) {
+          releaseFounderPreludeGate();
+          showMobileConsentBanner(showInitialLoaderAfterConsent);
+          return;
+        }
+
+        openWelcomeConsentModal({
+          afterAccept: showInitialLoaderAfterConsent
+        });
+      };
+
+      if (fastEditorialHome && !phoneFlow) {
+        if (!shouldSkipWelcomeModal()) {
+          openWelcomeConsentModal({
+            afterAccept: showInitialLoaderAfterConsent
+          });
+          return;
+        }
+
+        if (actionLoaderRequested) {
+          showReturningLoaderThen(finishOrOpenWelcome);
+          return;
+        }
+
+        finishLoaded();
+        return;
+      }
 
       if (shouldSkipWelcomeModal()) {
         removeLegacyConsentBanner();
@@ -1297,78 +1634,28 @@
       }
 
       if (phoneFlow) {
+        releaseFounderPreludeGate();
         showMobileConsentBanner();
         return;
       }
 
-      whenSiteReady(() => {
-        runWhenBrowserIsIdle(() => {
-          removeLegacyConsentBanner();
-          const oldModal = document.getElementById(MODAL_ID);
-          if (oldModal) {
-            oldModal.remove();
-          }
+      if (shouldShowReturningLoader) {
+        showReturningLoaderThen(openWelcomeConsentModal);
+        return;
+      }
 
-          const modal = createWelcomeModal({
-            compact: shouldUseCompactWelcome(),
-            phone: shouldUsePhoneWelcome()
-          });
-          document.body.appendChild(modal);
-
-          const checkbox = modal.querySelector("#catalogoAcceptTerms");
-          const acceptButton = modal.querySelector("#catalogoAcceptButton");
-          const requiresCheckbox = Boolean(checkbox);
-
-          if (!acceptButton) {
-            releaseFounderPreludeGate();
-            closeWelcomeModalImmediately(modal);
-            return;
-          }
-
-          if (checkbox) {
-            checkbox.addEventListener("change", () => {
-              acceptButton.disabled = !checkbox.checked;
-            });
-          }
-
-          acceptButton.addEventListener("click", () => {
-            if (requiresCheckbox && !checkbox.checked) {
-              return;
-            }
-
-            clearStoredConsent();
-            persistConsentState("accepted");
-            rememberWelcomeAcceptedThisSession();
-            rememberWelcomeAcceptedThisBrowserSession();
-            rememberWelcomeAcceptedToday();
-            dispatchConsent(true);
-            closeWelcomeModal(modal);
-          });
-
-          const openModal = () => {
-            window.setTimeout(() => {
-              releaseFounderPreludeGate();
-              openWelcomeModal(modal);
-            }, OPEN_DELAY_MS);
-          };
-
-          if (shouldShowReturningLoader) {
-            showReturningLoaderThen(openModal);
-            return;
-          }
-
-          openModal();
-        });
-      });
+      openWelcomeConsentModal();
     };
 
-    if (hasSeenFounderPreludeToday() || hasSeenFounderPreludeInThisSession()) {
+    if (actionLoaderRequested || hasSeenFounderPreludeThisWeek() || hasSeenFounderPreludeInThisSession()) {
       releaseFounderPreludeGate();
       continueAfterFounderPrelude();
       return;
     }
 
     if (phoneFlow) {
+      rememberFounderPreludeInThisSession();
+      rememberFounderPreludeThisWeek();
       releaseFounderPreludeGate();
       continueAfterFounderPrelude();
       return;

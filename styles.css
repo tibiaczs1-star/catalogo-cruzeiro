@@ -1161,7 +1161,7 @@ body::before {
   animation-delay: 0.36s;
 }
 
-.editorial-home:not(.site-loaded) {
+.editorial-home.founder-prelude-active:not(.site-loaded) {
   overflow: hidden;
 }
 
@@ -1206,6 +1206,13 @@ button {
 body.site-loaded .page-shell {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+body.editorial-home .page-shell {
+  opacity: 1;
+  transform: none;
+  transition: opacity 260ms ease, transform 260ms ease;
+  transition-delay: 0s;
 }
 
 @keyframes splashOrbit {
@@ -7849,7 +7856,7 @@ input[type="range"] {
 }
 
 .trending-grid.is-opinion-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .trending-card {
@@ -8103,6 +8110,141 @@ input[type="range"] {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, #ff6b6b, #e0b45d);
+}
+
+.buzz-public-capture {
+  --capture-ink: var(--navy);
+  --capture-muted: rgba(43, 64, 91, 0.86);
+  --capture-line: rgba(16, 35, 60, 0.12);
+  --capture-panel: rgba(255, 255, 255, 0.54);
+  display: grid;
+  gap: 0.72rem;
+}
+
+.buzz-capture-head,
+.buzz-satisfaction-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.buzz-public-capture .buzz-capture-head span,
+.buzz-public-capture .buzz-satisfaction-head span,
+.buzz-public-capture .buzz-agent-evaluation span {
+  margin: 0;
+}
+
+.buzz-capture-head strong,
+.buzz-satisfaction-head strong {
+  color: var(--capture-ink);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: right;
+}
+
+.buzz-source-context {
+  margin-top: 0 !important;
+  color: var(--capture-muted) !important;
+  font-size: 0.78rem !important;
+}
+
+.buzz-voice-list {
+  display: grid;
+  gap: 0.52rem;
+}
+
+.buzz-voice {
+  position: relative;
+  display: grid;
+  gap: 0.28rem;
+  overflow: hidden;
+  padding: 0.58rem 0.62rem 0.68rem;
+  border: 1px solid var(--capture-line);
+  border-radius: 14px;
+  background: var(--capture-panel);
+}
+
+.buzz-voice em {
+  color: var(--capture-ink);
+  font-size: 0.68rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.buzz-voice p {
+  position: relative;
+  z-index: 1;
+  margin: 0 !important;
+  color: var(--capture-muted) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.38 !important;
+}
+
+.buzz-voice i {
+  position: absolute;
+  left: 0.62rem;
+  right: 0.62rem;
+  bottom: 0.38rem;
+  display: block;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(16, 35, 60, 0.1);
+}
+
+.buzz-voice i::before {
+  content: "";
+  display: block;
+  width: var(--voice-weight, 44%);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #5aa9e6, #e0b45d);
+}
+
+.buzz-agent-evaluation {
+  display: grid;
+  gap: 0.38rem;
+  padding: 0.72rem;
+  border: 1px solid var(--capture-line);
+  border-left: 4px solid #5aa9e6;
+  border-radius: 16px;
+  background: var(--capture-panel);
+}
+
+.buzz-agent-evaluation p,
+.buzz-agent-evaluation strong {
+  margin: 0 !important;
+  color: var(--capture-muted) !important;
+  font-size: 0.78rem !important;
+  line-height: 1.42 !important;
+}
+
+.buzz-agent-evaluation strong {
+  color: var(--capture-ink) !important;
+  font-weight: 850;
+}
+
+.buzz-satisfaction-panel {
+  display: grid;
+  gap: 0.42rem;
+}
+
+.buzz-satisfaction-head strong {
+  min-width: 3.4rem;
+  color: var(--capture-ink);
+  font-size: 1.16rem;
+}
+
+.public-satisfaction-meter {
+  height: 14px;
+}
+
+.public-satisfaction-meter i {
+  background: linear-gradient(90deg, #df665d 0%, #e0b45d 48%, #58c784 100%);
 }
 
 .trend-badge {
@@ -20267,6 +20409,80 @@ a {
     linear-gradient(145deg, rgba(14, 34, 53, 0.98), rgba(30, 86, 117, 0.9)) !important;
 }
 
+#entretenimento .movie-card::before,
+#entretenimento .movie-card::after,
+#entretenimento .theater-card::before,
+#entretenimento .theater-card::after {
+  z-index: 0;
+}
+
+#entretenimento .movie-card > *,
+#entretenimento .theater-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+#entretenimento .movie-card,
+#entretenimento .theater-card {
+  cursor: pointer;
+  gap: 1.1rem !important;
+}
+
+#entretenimento .movie-card h4,
+#entretenimento .theater-card h4 {
+  font-size: clamp(1.08rem, 0.52vw + 0.96rem, 1.32rem) !important;
+  line-height: 1.24 !important;
+  letter-spacing: 0 !important;
+}
+
+#entretenimento .movie-card .movie-desc,
+#entretenimento .theater-card .theater-desc {
+  font-size: clamp(0.96rem, 0.22vw + 0.9rem, 1.06rem) !important;
+  line-height: 1.58 !important;
+  max-width: 64ch;
+}
+
+#entretenimento .movie-card .movie-info,
+#entretenimento .theater-card .theater-info {
+  font-size: 0.74rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0.08em !important;
+}
+
+#entretenimento .movie-card .rating,
+#entretenimento .theater-card .dates {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: fit-content;
+  min-height: 2.35rem;
+  margin-top: 0.15rem !important;
+  padding: 0.58rem 0.82rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.42) !important;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94) !important;
+  color: #123052 !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  box-shadow: 0 12px 24px rgba(5, 18, 35, 0.14);
+}
+
+#entretenimento .theater-card .dates {
+  border-color: rgba(18, 48, 82, 0.18) !important;
+  background: #123052 !important;
+  color: #ffffff !important;
+}
+
+#entretenimento .movie-card .rating::after,
+#entretenimento .theater-card .dates::after {
+  content: ">";
+  font-size: 1rem;
+  line-height: 1;
+}
+
 .signal-band,
 .archive-shell,
 .live-feed-shell,
@@ -21049,7 +21265,7 @@ body.editorial-home #trending .trending-card.main .buzz-reaction-box {
 }
 
 body.editorial-home #trending .trending-grid.is-opinion-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 body.editorial-home #trending .opinion-buzz-card {
@@ -21085,6 +21301,30 @@ body.editorial-home #trending .opinion-buzz-card .buzz-inline-meta span,
 body.editorial-home #trending .opinion-buzz-card .buzz-reaction-box {
   background: rgba(255, 255, 255, 0.08) !important;
   border-color: rgba(255, 194, 135, 0.14) !important;
+}
+
+body.editorial-home #trending .opinion-buzz-card .buzz-public-capture {
+  --capture-ink: #f6fbff;
+  --capture-muted: rgba(229, 240, 255, 0.9);
+  --capture-line: rgba(255, 194, 135, 0.18);
+  --capture-panel: rgba(255, 255, 255, 0.08);
+}
+
+body.editorial-home #trending .opinion-buzz-card .buzz-capture-head strong,
+body.editorial-home #trending .opinion-buzz-card .buzz-satisfaction-head strong,
+body.editorial-home #trending .opinion-buzz-card .buzz-voice em,
+body.editorial-home #trending .opinion-buzz-card .buzz-agent-evaluation strong {
+  color: #f6fbff !important;
+}
+
+body.editorial-home #trending .opinion-buzz-card .buzz-source-context,
+body.editorial-home #trending .opinion-buzz-card .buzz-voice p,
+body.editorial-home #trending .opinion-buzz-card .buzz-agent-evaluation p {
+  color: rgba(229, 240, 255, 0.9) !important;
+}
+
+body.editorial-home #trending .opinion-buzz-card .buzz-voice i {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 body.editorial-home #trending .trend-community {

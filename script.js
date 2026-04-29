@@ -75,6 +75,9 @@ const heroOfficeFeedItems = [...document.querySelectorAll("[data-hero-office-ite
 const heroOfficePhoto = document.querySelector("[data-hero-office-photo]");
 const heroOfficePhotoCategory = document.querySelector("[data-hero-office-photo-category]");
 const heroOfficePhotoTitle = document.querySelector("[data-hero-office-photo-title]");
+const heroOfficeTvFrame = document.querySelector("[data-hero-office-tv-frame]");
+const heroOfficeTvCanvas = document.querySelector("[data-hero-office-tv]");
+const heroOfficeTvCaption = document.querySelector("[data-hero-office-tv-caption]");
 const heroTopicTrack = document.querySelector("[data-hero-topic-track]");
 const heroTopicDots = document.querySelector("[data-hero-topic-dots]");
 const communityAgentForm = document.querySelector("#community-agent-form");
@@ -164,6 +167,11 @@ const heroTourismRotation = {
   statusTimerId: 0,
   topicTimerId: 0
 };
+let heroOfficeTvSourceItems = [];
+let heroOfficeTvItems = [];
+let heroOfficeTvCursor = 0;
+let heroOfficeTvTimerId = 0;
+let heroOfficeTvPaintToken = 0;
 const heroDesktopBackdropMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 1041px)")
@@ -196,6 +204,7 @@ const mobileHomeDomState = {
   movedNodes: [],
   placeHolders: new Map()
 };
+const isMobileHomeViewport = () => Boolean(mobileHomeLeadMedia?.matches);
 let lastArchiveBrowserOpenAt = 0;
 
 const clearLiveTickerRuntime = () => {
@@ -1549,7 +1558,7 @@ const setupSplashExperience = () => {
       ? performance.now()
       : Date.now();
   const elapsed = currentTime - splashBootStartedAt;
-  const minimumDuration = splashMotionQuery.matches ? 100 : hasSeenSplash ? 450 : 2600;
+  const minimumDuration = splashMotionQuery.matches ? 100 : hasSeenSplash ? 220 : 1100;
   const remaining = Math.max(100, minimumDuration - elapsed);
 
   window.setTimeout(releaseSplash, remaining);
@@ -3286,6 +3295,7 @@ const decodeBasicEntities = (value = "") =>
 
 const cleanArticleText = (value = "") =>
   decodeBasicEntities(value)
+    .replace(/<!\[CDATA\[|\]\]>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -3317,6 +3327,47 @@ const cleanArticleExcerpt = (value = "", fallback = "") => {
   return text || cleanArticleText(fallback || value || "");
 };
 
+const truncateCopyAtWord = (value, maxLength = 140, options = {}) => {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  const limit = Number.isFinite(maxLength) ? Math.max(0, Math.floor(maxLength)) : 140;
+  const suffix = typeof options.suffix === "string" ? options.suffix : "...";
+
+  if (!text || !limit || text.length <= limit) {
+    return text;
+  }
+
+  const suffixLength = suffix.length;
+  const available = Math.max(1, limit - suffixLength);
+  const minSentenceLength = Math.min(
+    available,
+    Math.max(24, options.minSentenceLength || Math.floor(limit * 0.42))
+  );
+  const sentenceWindow = text.slice(0, limit + 1);
+  const sentenceMatch = sentenceWindow.match(/^(.+?[.!?])(?:\s|$)/);
+
+  if (
+    sentenceMatch &&
+    sentenceMatch[1].length >= minSentenceLength &&
+    sentenceMatch[1].length <= limit
+  ) {
+    return sentenceMatch[1].trim();
+  }
+
+  const sliced = text.slice(0, available).trimEnd();
+  const wordSafe = /\s/.test(sliced) ? sliced.replace(/\s+\S*$/, "").trim() : "";
+  const cleanWordSafe = wordSafe.replace(/[.,;:!?-]+$/, "").trim();
+  const minWordSafeLength = Math.min(
+    available,
+    Math.max(6, options.minWordSafeLength || Math.floor(limit * 0.32))
+  );
+
+  if (cleanWordSafe.length >= minWordSafeLength) {
+    return `${cleanWordSafe}${suffix}`;
+  }
+
+  return text;
+};
+
 const buildShortArticleSummary = (value = "", fallback = "", maxLength = 172) => {
   const sourceText = cleanArticleExcerpt(value, fallback)
     .replace(/\b(LEIA TAMB[EÉ]M|ASSISTA|VEJA TAMB[EÉ]M|Clique aqui).*$/i, "")
@@ -3329,13 +3380,10 @@ const buildShortArticleSummary = (value = "", fallback = "", maxLength = 172) =>
   const firstSentence = sentenceMatch ? sentenceMatch[1].trim() : text;
   const compact = firstSentence.length > 45 ? firstSentence : text;
 
-  if (compact.length <= maxLength) {
-    return compact;
-  }
-
-  const sliced = compact.slice(0, Math.max(0, maxLength - 1));
-  const wordSafe = sliced.replace(/\s+\S*$/, "").trim();
-  return `${wordSafe || sliced.trim()}...`;
+  return truncateCopyAtWord(compact, maxLength, {
+    minSentenceLength: 52,
+    minWordSafeLength: 18
+  });
 };
 
 const heroUnsafeImageOverrides = {
@@ -4188,7 +4236,7 @@ const ensureMobileHomeLeadLayout = () => {
       const dropdown = document.createElement("details");
       dropdown.className = "mobile-main-nav-dropdown";
       dropdown.setAttribute("aria-label", "Menu principal do portal");
-      dropdown.innerHTML = `<summary>Áreas</summary><div class="mobile-main-nav-links"></div>`;
+      dropdown.innerHTML = `<summary><span>Áreas</span><small>toque para abrir</small><i aria-hidden="true"></i></summary><div class="mobile-main-nav-links"></div>`;
       mobileHomeDomState.menuDropdown = dropdown;
     }
 
@@ -4732,12 +4780,253 @@ const shouldUseLiteHomeRuntime = () => {
   return narrowViewport || reducedMotion || saveData || slowConnection;
 };
 
+const stopHeroOfficeTv = () => {
+  if (heroOfficeTvTimerId) {
+    window.clearInterval(heroOfficeTvTimerId);
+    heroOfficeTvTimerId = 0;
+  }
+};
+
+const shouldAnimateHeroOfficeTv = () => {
+  const reducedMotion =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  return !reducedMotion && !connection?.saveData && heroOfficeTvItems.length > 1;
+};
+
+const getHeroOfficeTvCanvasMetrics = () => {
+  if (!heroOfficeTvCanvas) {
+    return null;
+  }
+
+  const rect = heroOfficeTvCanvas.getBoundingClientRect();
+  const width = Math.max(160, Math.round(rect.width || 320));
+  const height = Math.max(94, Math.round(rect.height || 190));
+  const dpr = Math.min(Math.max(window.devicePixelRatio || 1, 1), 2);
+  const pixelWidth = Math.round(width * dpr);
+  const pixelHeight = Math.round(height * dpr);
+
+  if (heroOfficeTvCanvas.width !== pixelWidth || heroOfficeTvCanvas.height !== pixelHeight) {
+    heroOfficeTvCanvas.width = pixelWidth;
+    heroOfficeTvCanvas.height = pixelHeight;
+  }
+
+  const context = heroOfficeTvCanvas.getContext("2d");
+  if (!context) {
+    return null;
+  }
+
+  context.setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { context, width, height };
+};
+
+const wrapHeroOfficeTvText = (context, text = "", maxWidth = 220, maxLines = 2) => {
+  const words = String(text || "").split(/\s+/).filter(Boolean);
+  const lines = [];
+  let currentLine = "";
+
+  words.forEach((word) => {
+    const testLine = currentLine ? `${currentLine} ${word}` : word;
+    if (context.measureText(testLine).width <= maxWidth || !currentLine) {
+      currentLine = testLine;
+      return;
+    }
+
+    lines.push(currentLine);
+    currentLine = word;
+  });
+
+  if (currentLine) {
+    lines.push(currentLine);
+  }
+
+  if (lines.length > maxLines) {
+    const trimmed = lines.slice(0, maxLines);
+    let lastLine = trimmed[trimmed.length - 1] || "";
+    while (lastLine.length > 4 && context.measureText(`${lastLine}...`).width > maxWidth) {
+      lastLine = lastLine.slice(0, -1).trim();
+    }
+    trimmed[trimmed.length - 1] = `${lastLine.replace(/[.,;:!?-]+$/g, "")}...`;
+    return trimmed;
+  }
+
+  return lines;
+};
+
+const drawHeroOfficeTvItem = (item = {}, image = null, index = 0) => {
+  const metrics = getHeroOfficeTvCanvasMetrics();
+  if (!metrics) {
+    return;
+  }
+
+  const { context, width, height } = metrics;
+  context.clearRect(0, 0, width, height);
+
+  const background = context.createLinearGradient(0, 0, width, height);
+  background.addColorStop(0, "#123b68");
+  background.addColorStop(0.55, "#0c2748");
+  background.addColorStop(1, "#071a32");
+  context.fillStyle = background;
+  context.fillRect(0, 0, width, height);
+
+  if (image?.naturalWidth && image?.naturalHeight) {
+    const imageRatio = image.naturalWidth / image.naturalHeight;
+    const canvasRatio = width / height;
+    let sx = 0;
+    let sy = 0;
+    let sw = image.naturalWidth;
+    let sh = image.naturalHeight;
+
+    if (imageRatio > canvasRatio) {
+      sw = image.naturalHeight * canvasRatio;
+      sx = (image.naturalWidth - sw) / 2;
+    } else {
+      sh = image.naturalWidth / canvasRatio;
+      sy = (image.naturalHeight - sh) / 2;
+    }
+
+    context.drawImage(image, sx, sy, sw, sh, 0, 0, width, height);
+  } else {
+    context.fillStyle = "rgba(94, 185, 255, 0.18)";
+    for (let line = -height; line < width; line += 18) {
+      context.fillRect(line, 0, 5, height);
+    }
+  }
+
+  const shade = context.createLinearGradient(0, 0, 0, height);
+  shade.addColorStop(0, "rgba(4, 12, 24, 0.06)");
+  shade.addColorStop(0.52, "rgba(4, 12, 24, 0.34)");
+  shade.addColorStop(1, "rgba(4, 12, 24, 0.9)");
+  context.fillStyle = shade;
+  context.fillRect(0, 0, width, height);
+
+  context.fillStyle = "rgba(186, 224, 255, 0.16)";
+  for (let y = 0; y < height; y += 4) {
+    context.fillRect(0, y, width, 1);
+  }
+
+  const pad = Math.max(12, width * 0.07);
+  const category = truncateCopy(item.category || "Destaque captado", 24).toUpperCase();
+  const title = truncateCopy(item.title || "Atualização local em destaque", 82);
+
+  context.fillStyle = "rgba(238, 248, 255, 0.92)";
+  context.font = "800 10px Arial, sans-serif";
+  context.letterSpacing = "1px";
+  context.fillText("TV DESTAQUES", pad, pad + 3);
+
+  context.fillStyle = "#9ee2ff";
+  context.font = "900 9px Arial, sans-serif";
+  context.fillText(category, pad, height - 58);
+
+  context.fillStyle = "#ffffff";
+  context.font = "900 15px Arial, sans-serif";
+  wrapHeroOfficeTvText(context, title, width - pad * 2, 2).forEach((line, lineIndex) => {
+    context.fillText(line, pad, height - 34 + lineIndex * 17);
+  });
+
+  const total = Math.max(heroOfficeTvItems.length, 1);
+  const dotStart = width - pad - total * 10;
+  for (let dotIndex = 0; dotIndex < total; dotIndex += 1) {
+    context.beginPath();
+    context.arc(dotStart + dotIndex * 10, pad, 2.5, 0, Math.PI * 2);
+    context.fillStyle = dotIndex === index ? "#6cf29a" : "rgba(238, 248, 255, 0.38)";
+    context.fill();
+  }
+};
+
+const paintHeroOfficeTvItem = (index = 0) => {
+  if (!heroOfficeTvCanvas || !heroOfficeTvItems.length || !isMobileHomeViewport()) {
+    return;
+  }
+
+  const safeIndex = ((index % heroOfficeTvItems.length) + heroOfficeTvItems.length) % heroOfficeTvItems.length;
+  const item = heroOfficeTvItems[safeIndex];
+  heroOfficeTvCursor = safeIndex;
+  heroOfficeTvPaintToken += 1;
+  const paintToken = heroOfficeTvPaintToken;
+
+  if (heroOfficeTvCaption) {
+    heroOfficeTvCaption.textContent = truncateCopy(item.title || "Destaques captados", 42);
+  }
+
+  if (!item.imageUrl) {
+    drawHeroOfficeTvItem(item, null, safeIndex);
+    return;
+  }
+
+  const image = new Image();
+  image.decoding = "async";
+  image.onload = () => {
+    if (paintToken === heroOfficeTvPaintToken) {
+      drawHeroOfficeTvItem(item, image, safeIndex);
+    }
+  };
+  image.onerror = () => {
+    if (paintToken === heroOfficeTvPaintToken) {
+      drawHeroOfficeTvItem(item, null, safeIndex);
+    }
+  };
+  image.src = item.imageUrl;
+};
+
+const renderHeroOfficeTv = (items = []) => {
+  heroOfficeTvSourceItems = Array.isArray(items) ? items.filter(Boolean) : [];
+
+  if (!heroOfficeTvCanvas || !heroOfficeTvFrame) {
+    return;
+  }
+
+  stopHeroOfficeTv();
+  const mobileActive = isMobileHomeViewport();
+  heroOfficeTvFrame.hidden = !mobileActive;
+
+  if (!mobileActive) {
+    return;
+  }
+
+  heroOfficeTvItems = heroOfficeTvSourceItems
+    .map((item) => normalizeRuntimeArticle(item))
+    .map((article) => ({
+      title: article.articleTitle || article.title || "Atualização local em destaque",
+      category: article.articleCategory || article.category || article.topicGroup || "Destaques",
+      imageUrl: sanitizeImageUrl(
+        getArticleDisplayImageUrl(article, "hero") ||
+          article.proxyUrl ||
+          article.fallbackUrl ||
+          article.imageUrl ||
+          ""
+      )
+    }))
+    .filter((item) => item.title || item.imageUrl)
+    .slice(0, 4);
+
+  if (!heroOfficeTvItems.length) {
+    heroOfficeTvItems = [
+      {
+        title: "Destaques captados ao vivo",
+        category: "Cobertura local",
+        imageUrl: ""
+      }
+    ];
+  }
+
+  window.requestAnimationFrame(() => paintHeroOfficeTvItem(0));
+
+  if (shouldAnimateHeroOfficeTv()) {
+    heroOfficeTvTimerId = window.setInterval(() => {
+      paintHeroOfficeTvItem(heroOfficeTvCursor + 1);
+    }, 3200);
+  }
+};
+
 const renderHeroOfficeFeed = (items = []) => {
   if (!heroOfficeFeedItems.length) {
     return;
   }
 
   const safeItems = Array.isArray(items) ? items.filter(Boolean).slice(0, heroOfficeFeedItems.length) : [];
+  renderHeroOfficeTv(items);
 
   heroOfficeFeedItems.forEach((card, index) => {
     const item = safeItems[index];
@@ -6439,77 +6728,183 @@ const resolveBuzzNetworkContext = (article = {}, index = 0) => {
   };
 };
 
+const clampBuzzPercent = (value, min = 0, max = 100) =>
+  Math.max(min, Math.min(max, Math.round(Number(value) || 0)));
+
+const pickBuzzCopy = (items = [], seed = 0, offset = 0) =>
+  items[(Math.abs(seed) + offset) % Math.max(items.length, 1)] || "";
+
 const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0) => {
   const haystack = normalizeText(
     [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
   );
   const seed = getDailyIndexSeed(`${article.title || "buzz"}:${index}`);
-  const baseMeter = 52 + (seed % 23);
+  const trustSignal = Number(networkContext.trust || networkContext.relevance || 64);
+  const utilitySignal = Number(networkContext.utility || 64);
   const networkName = networkContext.network || "rede";
   const primarySignal = Array.isArray(networkContext.signals) ? networkContext.signals[0] || "comentários" : "comentários";
+  const sourceName = article.sourceName || article.sourceTitle || "fonte original";
+  const subject = truncateCopy(article.title || article.topicGroup || "o caso em debate", 64);
+  const profiles = {
+    employment: {
+      base: 36,
+      kicker: `escuta crítica em ${networkName.toLowerCase()}`,
+      debateAxis: "impacto real x discurso oficial",
+      publicMood: "satisfação baixa, cobrança alta",
+      captureLabel: "três grupos de fala em tensão",
+      context: `Contexto para os agentes: separar anúncio, consequência prática e cobrança de dados antes de opinar sobre "${subject}".`,
+      evaluation:
+        "Avaliação dos agentes: o texto precisa começar pelo impacto humano, checar números e evitar tratar decisão empresarial como espetáculo.",
+      voices: [
+        ["preocupação", "Leitores cobram efeito concreto: emprego, renda e continuidade do serviço vêm antes do discurso bonito."],
+        ["defesa", "Uma parte aceita mudança se houver plano claro, prazo e explicação sem frase pronta."],
+        ["cobrança", "A pergunta que ficou é simples: quem perde, quem ganha e qual dado confirma a promessa?"]
+      ]
+    },
+    strategy: {
+      base: 52,
+      kicker: `percepção dividida em ${networkName.toLowerCase()}`,
+      debateAxis: "expectativa x prova prática",
+      publicMood: "satisfação moderada, confiança em teste",
+      captureLabel: "apoio, dúvida e cobrança mapeados",
+      context: `Contexto para os agentes: explicar o que muda para o público e onde ainda falta evidência sobre "${subject}".`,
+      evaluation:
+        "Avaliação dos agentes: há espaço para leitura autoral, mas a conclusão deve pesar promessa, histórico e benefício real para o leitor.",
+      voices: [
+        ["apoio", "Parte do público vê chance de renovação se a mudança vier acompanhada de entrega visível."],
+        ["dúvida", "Outra parte segura o entusiasmo porque já viu anúncio grande sem resultado prático."],
+        ["cobrança", "O ponto comum é pedido por exemplo, prazo e comparação com o que existia antes."]
+      ]
+    },
+    journalism: {
+      base: 60,
+      kicker: `escuta comentada em ${networkName.toLowerCase()}`,
+      debateAxis: "formato x credibilidade",
+      publicMood: "satisfação cautelosa",
+      captureLabel: "preferências de leitura cruzadas",
+      context: `Contexto para os agentes: cruzar reação de formato, pedido de apuração e utilidade para quem acompanha "${subject}".`,
+      evaluation:
+        "Avaliação dos agentes: a opinião autoral deve defender clareza, fonte aberta e ritmo humano, sem transformar formato em fetiche.",
+      voices: [
+        ["apoio", "Há leitores que gostam de formato mais direto quando ele ajuda a entender rápido."],
+        ["critério", "Outro grupo pede fonte, contexto e apuração para não virar só embalagem de rede."],
+        ["hábito", "Também aparece gente que prefere texto e resumo bem editado antes de vídeo longo."]
+      ]
+    },
+    family: {
+      base: 54,
+      kicker: `tema sensível em ${networkName.toLowerCase()}`,
+      debateAxis: "proteção x autonomia",
+      publicMood: "satisfação dividida",
+      captureLabel: "famílias, usuários e críticos separados",
+      context: `Contexto para os agentes: tratar proteção, excesso de controle e rotina real das famílias no mesmo quadro sobre "${subject}".`,
+      evaluation:
+        "Avaliação dos agentes: a análise precisa reconhecer o medo legítimo sem vender controle como solução mágica.",
+      voices: [
+        ["famílias", "Pais e responsáveis querem menos exposição e mais ferramenta compreensível."],
+        ["autonomia", "Usuários lembram que controle sem conversa pode só deslocar o problema."],
+        ["equilíbrio", "A síntese pede educação digital, regra clara e transparência da plataforma."]
+      ]
+    },
+    service: {
+      base: 66,
+      kicker: `serviço observado em ${networkName.toLowerCase()}`,
+      debateAxis: "utilidade x prazo",
+      publicMood: "satisfação útil, cobrança por resposta",
+      captureLabel: "moradores, usuários e cobrança reunidos",
+      context: `Contexto para os agentes: priorizar endereço, prazo, impacto no bairro e confirmação oficial antes de opinar sobre "${subject}".`,
+      evaluation:
+        "Avaliação dos agentes: o caso ganha força quando vira serviço autoral, com orientação clara e pergunta objetiva ao responsável.",
+      voices: [
+        ["uso prático", "Quem depende do serviço valoriza informação simples: onde, quando e o que muda."],
+        ["cobrança", "A parte crítica quer prazo, responsável e retorno público, não só aviso genérico."],
+        ["experiência", "Moradores ajudam a completar o quadro quando contam como aquilo aparece na rotina."]
+      ]
+    },
+    commerce: {
+      base: 57,
+      kicker: `interesse com ressalva em ${networkName.toLowerCase()}`,
+      debateAxis: "oportunidade x exagero",
+      publicMood: "satisfação instável",
+      captureLabel: "interesse, comparação e desconfiança",
+      context: `Contexto para os agentes: separar desejo de compra, comparação de preço e risco de hype em torno de "${subject}".`,
+      evaluation:
+        "Avaliação dos agentes: o texto autoral deve apontar valor real, limite da oferta e cuidado com propaganda disfarçada.",
+      voices: [
+        ["interesse", "Uma parte entra pelo benefício imediato e quer saber se vale a pena agora."],
+        ["comparação", "Outra parte compara preço, histórico e experiência de quem já testou."],
+        ["desconfiança", "O ruído aparece quando a conversa parece empurrada por hype, não por utilidade."]
+      ]
+    },
+    default: {
+      base: 56,
+      kicker: `escuta pública em ${networkName.toLowerCase()}`,
+      debateAxis: "apoio x dúvida x cobrança",
+      publicMood: "satisfação moderada, leitura aberta",
+      captureLabel: "opiniões captadas em três camadas",
+      context: `Contexto para os agentes: ler "${subject}" por utilidade, incômodo e dúvida antes de escrever uma avaliação autoral.`,
+      evaluation:
+        "Avaliação dos agentes: o caso ainda pede contexto; o melhor caminho é explicar por que importa, para quem muda algo e o que falta confirmar.",
+      voices: [
+        ["apoio", "Um grupo vê valor no tema porque ele toca rotina, consumo ou informação útil."],
+        ["cautela", "Outro grupo evita conclusão rápida e pede dado melhor antes de aderir ao clima da rede."],
+        ["pergunta", "A dúvida recorrente é o que muda de fato para o leitor quando a repercussão passa."]
+      ]
+    }
+  };
+
+  let profile = profiles.default;
 
   if (/\b(layoff|demiss|corte|job|staff)\b/.test(haystack)) {
-    return {
-      meter: 74,
-      kicker: `polemica forte em ${networkName.toLowerCase()}`,
-      debateAxis: "emprego x estrategia",
-      publicMood: "predominou preocupacao publica",
-      reaction: `A leitura do publico puxou mais para critica e apreensao, com debate sobre impacto real por tras do anuncio que explodiu em ${networkName}.`,
-      signalLabel: primarySignal
-    };
+    profile = profiles.employment;
+  } else if (/\b(reevaluat|reavali|future|memo|strategy|xbox|mudanca|estrategia)\b/.test(haystack)) {
+    profile = profiles.strategy;
+  } else if (/\b(journalism|jornalismo|video-first|independent|credibil|news|noticia|apuracao)\b/.test(haystack)) {
+    profile = profiles.journalism;
+  } else if (/\b(parental|famil|healthy digital habits|shorts|crianca|adolescente)\b/.test(haystack)) {
+    profile = profiles.family;
+  } else if (/\b(tempo|cheia|leilao|edital|posto|calendario|fiscalizacao|ubs|hospital|educacao|servico|serviço|agenda)\b/.test(haystack)) {
+    profile = profiles.service;
+  } else if (/\b(sale|deal|promo|desconto|produto|speaker|oferta|compra|preco|preço)\b/.test(haystack)) {
+    profile = profiles.commerce;
   }
 
-  if (/\b(reevaluat|reavali|future|memo|strategy|xbox)\b/.test(haystack)) {
-    return {
-      meter: 66,
-      kicker: `debate quente em ${networkName.toLowerCase()}`,
-      debateAxis: "expectativa x desconfianca",
-      publicMood: "o publico ficou dividido",
-      reaction: "A conversa do publico ficou entre curiosidade e desconfianca, com uma ala animada com mudanca e outra cobrando prova pratica antes do hype.",
-      signalLabel: primarySignal
-    };
-  }
-
-  if (/\b(journalism|video-first|independent|credibil|news)\b/.test(haystack)) {
-    return {
-      meter: 61,
-      kicker: `assunto em alta em ${networkName.toLowerCase()}`,
-      debateAxis: "credibilidade x formato",
-      publicMood: "predominou apoio com cobranca",
-      reaction: "A opiniao do publico inclinou para apoio ao formato, mas com cobranca por mais clareza, apuracao e consistencia na conversa social.",
-      signalLabel: primarySignal
-    };
-  }
-
-  if (/\b(parental|famil|healthy digital habits|shorts)\b/.test(haystack)) {
-    return {
-      meter: 58,
-      kicker: `tema sensivel em ${networkName.toLowerCase()}`,
-      debateAxis: "protecao x liberdade de uso",
-      publicMood: "predominou cautela",
-      reaction: "A reacao publica foi mais cautelosa, com apoio a protecao das familias, mas tambem cobranca para nao virar controle excessivo.",
-      signalLabel: primarySignal
-    };
-  }
-
-  if (/\b(sale|deal|promo|desconto|produto|speaker)\b/.test(haystack)) {
-    return {
-      meter: 55,
-      kicker: `caso quente em ${networkName.toLowerCase()}`,
-      debateAxis: "oportunidade x exagero",
-      publicMood: "predominou curiosidade",
-      reaction: "O publico reagiu mais no eixo da curiosidade e da disputa por oportunidade, com parte da conversa tratando o caso como hype acelerado em rede.",
-      signalLabel: primarySignal
-    };
-  }
+  const satisfaction = clampBuzzPercent(
+    profile.base + ((seed % 13) - 6) + (trustSignal - 64) * 0.1 + (utilitySignal - 64) * 0.08,
+    24,
+    84
+  );
+  const supportWeight = clampBuzzPercent(satisfaction + ((seed % 9) - 4), 22, 84);
+  const concernWeight = clampBuzzPercent(92 - satisfaction + (((seed >> 1) % 11) - 5), 18, 78);
+  const questionWeight = clampBuzzPercent(38 + ((seed >> 2) % 23), 18, 66);
+  const voiceWeights = [supportWeight, concernWeight, questionWeight];
+  const voices = profile.voices.map(([label, text], voiceIndex) => ({
+    label,
+    text,
+    weight: voiceWeights[voiceIndex] || questionWeight
+  }));
+  const sourceContext = pickBuzzCopy(
+    [
+      `${networkName} trouxe ${primarySignal}; ${sourceName} dá o ponto de partida da notícia.`,
+      `${sourceName} aparece como referência inicial, enquanto ${networkName} mostra a temperatura da conversa.`,
+      `Os sinais vieram de ${primarySignal} e foram separados antes da avaliação editorial.`
+    ],
+    seed,
+    index
+  );
 
   return {
-    meter: baseMeter,
-    kicker: `tema em repercussao em ${networkName.toLowerCase()}`,
-    debateAxis: "hype x leitura critica",
-    publicMood: "debate publico em andamento",
-    reaction: `A opiniao do publico ficou espalhada entre apoio, critica e cautela, com ${networkName} funcionando como termometro principal da conversa.`,
-    signalLabel: primarySignal
+    meter: satisfaction,
+    satisfaction,
+    kicker: profile.kicker,
+    debateAxis: profile.debateAxis,
+    publicMood: profile.publicMood,
+    captureLabel: profile.captureLabel,
+    signalLabel: primarySignal,
+    sourceContext,
+    agentContext: profile.context,
+    agentEvaluation: profile.evaluation,
+    voices
   };
 };
 
@@ -6554,9 +6949,21 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
     ),
     190
   );
-  const networkLabel = `${networkContext.network || "Rede"} • polemica ${index + 1}`;
+  const networkLabel = `${networkContext.network || "Rede"} • escuta ${index + 1}`;
   const signalLine = `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentários"}`;
   const debateLine = `debate: ${pulse.debateAxis}`;
+  const satisfactionPercent = clampBuzzPercent(pulse.satisfaction || pulse.meter || 50, 0, 100);
+  const voiceMarkup = (Array.isArray(pulse.voices) ? pulse.voices : [])
+    .map(
+      (voice) => `
+        <div class="buzz-voice" style="--voice-weight:${clampBuzzPercent(voice.weight || 42, 0, 100)}%">
+          <em>${escapeHtml(voice.label || "voz")}</em>
+          <p>${escapeHtml(voice.text || "")}</p>
+          <i aria-hidden="true"></i>
+        </div>
+      `
+    )
+    .join("");
 
   return `
     <article class="trending-card influencer-buzz-card daily-buzz-card opinion-buzz-card reveal ${
@@ -6591,12 +6998,29 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0) => {
         <span>${escapeHtml(debateLine)}</span>
       </div>
 
-      <div class="buzz-reaction-box" aria-label="Opiniao do publico sobre o tema">
-        <span>opiniao do publico</span>
-        <div class="reaction-meter">
-          <i style="width: ${Math.max(12, Math.min(100, Number(pulse.meter || 50)))}%"></i>
+      <div class="buzz-reaction-box buzz-public-capture" aria-label="Captação pública e avaliação dos agentes">
+        <div class="buzz-capture-head">
+          <span>captação pública diversa</span>
+          <strong>${escapeHtml(pulse.captureLabel || "vozes separadas")}</strong>
         </div>
-        <p>${escapeHtml(pulse.reaction)}</p>
+        <p class="buzz-source-context">${escapeHtml(pulse.sourceContext || "Sinais públicos separados antes da avaliação.")}</p>
+        <div class="buzz-voice-list" aria-label="Vozes captadas sobre o tema">
+          ${voiceMarkup}
+        </div>
+        <div class="buzz-agent-evaluation">
+          <span>contexto e avaliação dos agentes</span>
+          <p>${escapeHtml(pulse.agentContext || "Contexto editorial reunido antes da escrita autoral.")}</p>
+          <strong>${escapeHtml(pulse.agentEvaluation || "Avaliação dos agentes em revisão.")}</strong>
+        </div>
+        <div class="buzz-satisfaction-panel" aria-label="Nível de satisfação pública: ${satisfactionPercent}%">
+          <div class="buzz-satisfaction-head">
+            <span>satisfação pública</span>
+            <strong>${satisfactionPercent}%</strong>
+          </div>
+          <div class="reaction-meter public-satisfaction-meter">
+            <i style="width: ${satisfactionPercent}%"></i>
+          </div>
+        </div>
       </div>
 
       <div class="engagement buzz-opinion-footer">
@@ -6804,6 +7228,7 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
   const article = normalizeRuntimeArticle(item);
   const tone = getMonthlyTone(article, index);
   const agentAction = getDailyAgentActionForCard(agentPulse, index);
+  const shouldShowInternalAgentNote = !isMobileHomeViewport();
   const href = buildArticleHref(article);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
   const imageUrl = getArticleDisplayImageUrl(article) || article.imageUrl || monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl;
@@ -6833,10 +7258,10 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
         <span>${escapeHtml(tone.axis)}</span>
         <i><b style="width:${score}%"></b></i>
       </div>
-      <div class="month-agent-note" aria-label="Leitura do dia">
+      ${shouldShowInternalAgentNote ? `<div class="month-agent-note" aria-label="Leitura do dia">
         <strong>${escapeHtml(buildDailyAgentLabel(agentPulse, agentAction))}</strong>
         <span>${escapeHtml(truncateCopy(agentAction?.title || "Resumo do dia reuniu notícia, redes e temas em debate.", 118))}</span>
-      </div>
+      </div>` : ""}
       <small>${escapeHtml(article.sourceName || "Fonte ativa")} · ${escapeHtml(dateLabel)}</small>
     </article>
   `;
@@ -6847,7 +7272,7 @@ const pickMonthlyDynamicStories = async (options = {}) => {
     fetchTopicFeedCached("buzz", 18, options),
     fetchDailyAgentPulseCached(options)
   ]);
-  const agentActions = Array.isArray(agentPulse?.actions)
+  const agentActions = !isMobileHomeViewport() && Array.isArray(agentPulse?.actions)
     ? agentPulse.actions.map((action) => ({
         title: action.title,
       summary: `${action.office || "Portal"} destacou este assunto para a leitura diária.`,
@@ -8064,11 +8489,7 @@ const syncNewsDataset = (runtimeItems = []) => {
 };
 
 const truncateCopy = (value, maxLength = 140) => {
-  const text = String(value || "").replace(/\s+/g, " ").trim();
-  if (text.length <= maxLength) {
-    return text;
-  }
-  return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}...`;
+  return truncateCopyAtWord(value, maxLength);
 };
 
 const entertainmentFilmPattern =
@@ -8187,7 +8608,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
     .filter(Boolean)
     .join(" · ");
 
-  if (titleNode) titleNode.textContent = truncateCopy(normalized.title, mode === "stage" ? 86 : 70);
+  if (titleNode) titleNode.textContent = truncateCopy(normalized.title, mode === "stage" ? 120 : 112);
   if (infoNode) {
     infoNode.textContent =
       mode === "stage"
@@ -8197,11 +8618,11 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
   if (descNode) {
     descNode.textContent = truncateCopy(
       normalized.summary || normalized.lede || "Atualização cultural em acompanhamento.",
-      mode === "stage" ? 155 : 128
+      mode === "stage" ? 210 : 190
     );
   }
   if (statusNode) {
-    statusNode.textContent = index === 0 ? "Destaque atualizado" : "Ler matéria";
+    statusNode.textContent = "Abrir matéria completa";
   }
   if (mode === "stage") {
     const venueNode = card.querySelector(".venue");
@@ -8222,6 +8643,7 @@ const applyEntertainmentArticle = (card, article, mode = "film", index = 0) => {
 
   card.dataset.articleHref = href;
   card.setAttribute("role", "link");
+  card.setAttribute("aria-label", `Abrir matéria: ${normalized.title}`);
   card.tabIndex = 0;
   if (card.dataset.entertainmentBound !== "true") {
     card.dataset.entertainmentBound = "true";
@@ -8769,6 +9191,7 @@ initializeInsidersHeroScene();
 if (mobileHomeLeadMedia) {
   const handleMobileHomeLeadChange = () => {
     ensureMobileHomeLeadLayout();
+    renderHeroOfficeTv(heroOfficeTvSourceItems);
   };
 
   if (typeof mobileHomeLeadMedia.addEventListener === "function") {
@@ -8886,6 +9309,64 @@ const initializeMobilePagePrefetch = () => {
 
 initializeMobilePagePrefetch();
 
+const isInternalArticleLink = (link) => {
+  const href = link?.getAttribute?.("href") || "";
+  if (!href || !/noticia\.html\?slug=/i.test(href)) {
+    return false;
+  }
+
+  try {
+    const targetUrl = new URL(href, window.location.href);
+    return targetUrl.origin === window.location.origin && /\/noticia\.html$/i.test(targetUrl.pathname);
+  } catch (_error) {
+    return false;
+  }
+};
+
+const shouldHandleArticleNavigationClick = (event, link) => {
+  if (!link || event.defaultPrevented || event.button !== 0) {
+    return false;
+  }
+
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+    return false;
+  }
+
+  const target = String(link.getAttribute("target") || "").trim();
+  return !target || target === "_self";
+};
+
+const navigateWithArticleLoader = (href) => {
+  let navigated = false;
+  const navigate = () => {
+    if (navigated) {
+      return;
+    }
+    navigated = true;
+    window.location.href = href;
+  };
+
+  try {
+    sessionStorage.setItem("catalogo_page_action_loader_pending_v1", "1");
+  } catch (_error) {
+    // ignore storage failures
+  }
+
+  const loaderPromise = window.CatalogoPageLoader?.showForNavigation
+    ? window.CatalogoPageLoader.showForNavigation({
+        href,
+        label: "Abrindo materia"
+      })
+    : Promise.resolve();
+
+  Promise.race([
+    Promise.resolve(loaderPromise),
+    new Promise((resolve) => window.setTimeout(resolve, 3200))
+  ])
+    .catch(() => undefined)
+    .then(navigate);
+};
+
 document.addEventListener("click", (event) => {
   const link = event.target instanceof Element ? event.target.closest('a[href*="noticia.html?slug="]') : null;
   if (!link) {
@@ -8899,6 +9380,11 @@ document.addEventListener("click", (event) => {
 
   if (article) {
     persistOfflineArticle(article);
+  }
+
+  if (isInternalArticleLink(link) && shouldHandleArticleNavigationClick(event, link)) {
+    event.preventDefault();
+    navigateWithArticleLoader(new URL(href, window.location.href).href);
   }
 });
 
@@ -12126,7 +12612,8 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
   }
 
   const founders = (Array.isArray(items) ? items : []).filter((item) => item?.name);
-  foundersCount.textContent = `${totalFounders} ${totalFounders === 1 ? "fundador" : "fundadores"} até agora`;
+  const confirmedFounders = Math.max(4, Number(totalFounders || founders.length || 4));
+  foundersCount.textContent = `${confirmedFounders} ${confirmedFounders === 1 ? "fundador confirmado" : "fundadores confirmados"}`;
 
   if (!founders.length) {
     foundersList.innerHTML = `
