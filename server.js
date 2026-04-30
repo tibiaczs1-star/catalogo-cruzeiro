@@ -5157,6 +5157,72 @@ function getFacebookPostEngagement(post = {}) {
   );
 }
 
+function classifyFacebookCommentOpinion(value = "") {
+  const text = normalizeText(value);
+  if (!text) {
+    return "neutral";
+  }
+
+  const negativePattern =
+    /\b(absurdo|absurda|vergonha|ridiculo|ridícula|ridiculo|ridicula|horrivel|horrível|péssimo|pessimo|lixo|errado|mentira|palhacada|palhaçada|contra|nao concordo|não concordo|revolt|critica|critico|criticao|criticaõ|buraco|fracasso)\b/;
+  const positivePattern =
+    /\b(apoio|concordo|boa|bom|otimo|ótimo|parabens|parabéns|importante|certo|acertou|arrasou|amei|gostei|justo|necessario|necessário|merecido|show)\b/;
+
+  if (negativePattern.test(text) && !positivePattern.test(text)) {
+    return "negative";
+  }
+
+  if (positivePattern.test(text) && !negativePattern.test(text)) {
+    return "positive";
+  }
+
+  return "neutral";
+}
+
+function getFacebookPostOpinionStats(post = {}) {
+  const comments = Array.isArray(post.comments?.data) ? post.comments.data : [];
+  const stats = {
+    sampledComments: 0,
+    positiveCount: 0,
+    neutralCount: 0,
+    negativeCount: 0,
+    dominantLabel: "sem leitura suficiente"
+  };
+
+  comments.forEach((comment) => {
+    const message = stripHtml(comment?.message || "");
+    if (!message) {
+      return;
+    }
+
+    stats.sampledComments += 1;
+    const bucket = classifyFacebookCommentOpinion(message);
+    if (bucket === "positive") {
+      stats.positiveCount += 1;
+      return;
+    }
+    if (bucket === "negative") {
+      stats.negativeCount += 1;
+      return;
+    }
+    stats.neutralCount += 1;
+  });
+
+  if (!stats.sampledComments) {
+    return stats;
+  }
+
+  if (stats.positiveCount > stats.negativeCount && stats.positiveCount > stats.neutralCount) {
+    stats.dominantLabel = "apoio maior";
+  } else if (stats.negativeCount > stats.positiveCount && stats.negativeCount > stats.neutralCount) {
+    stats.dominantLabel = "rejeição maior";
+  } else {
+    stats.dominantLabel = "leitura dividida";
+  }
+
+  return stats;
+}
+
 function extractFacebookPostTitle(post = {}) {
   const text = stripHtml(post.message || post.story || "");
   const firstLine = text
@@ -5192,11 +5258,15 @@ function buildFacebookTrendItems(source, posts = [], maxItems = 12) {
       const fallbackHashtag = trendToHashtag(title);
       const division = inferSocialTrendDivision(`${title} ${rawText}`);
       const engagement = getFacebookPostEngagement(post);
+      const opinionStats = getFacebookPostOpinionStats(post);
+      const opinionSummary = opinionStats.sampledComments
+        ? `Comentários lidos: ${opinionStats.sampledComments}. Apoio: ${opinionStats.positiveCount}. Cautela: ${opinionStats.neutralCount}. Rejeição: ${opinionStats.negativeCount}.`
+        : "Sem amostra pública suficiente de comentários para medir aprovação.";
 
       items.push({
         id: `${source.id}-${slugify(title).slice(0, 42) || post.id || index}`,
         title,
-        summary: `Post público monitorado no Facebook. Interações públicas ponderadas: ${engagement}. Divisão sugerida: ${division}.`,
+        summary: `Post público monitorado no Facebook. Interações públicas ponderadas: ${engagement}. ${opinionSummary} Divisão sugerida: ${division}.`,
         category: division,
         sourceName: source.name,
         sourceUrl: post.permalink_url || source.url,
@@ -5208,7 +5278,8 @@ function buildFacebookTrendItems(source, posts = [], maxItems = 12) {
         importanceDivision: division,
         topicGroup: "facebook-public",
         hashtags: hashtags.length ? hashtags : fallbackHashtag ? [fallbackHashtag] : [],
-        facebookEngagement: engagement
+        facebookEngagement: engagement,
+        opinionStats
       });
     });
 
@@ -5236,7 +5307,7 @@ async function fetchFacebookTrendSource(source) {
     const pageResults = await mapWithConcurrency(pageIds, 2, async (pageId) => {
       const params = new URLSearchParams({
         fields:
-          "message,story,permalink_url,created_time,shares,comments.summary(true).limit(0),reactions.summary(true).limit(0)",
+          "message,story,permalink_url,created_time,shares,comments.summary(true).limit(25){message},reactions.summary(true).limit(0)",
         limit: "12",
         access_token: token
       });
