@@ -1756,6 +1756,27 @@ body.editorial-home .mosaic-item.side::before {
   filter: saturate(1.05) contrast(1.03) !important;
 }
 
+body.editorial-home .mosaic-item.side:not(.has-photo)::before,
+body.editorial-home .mosaic-item.side.card-without-photo::before {
+  display: none !important;
+}
+
+body.editorial-home .mosaic-item.side:not(.has-photo),
+body.editorial-home .mosaic-item.side.card-without-photo {
+  min-height: 0 !important;
+  background:
+    radial-gradient(circle at top right, rgba(142, 193, 232, 0.22), transparent 28%),
+    linear-gradient(180deg, #fffdf8 0%, #f5f8fb 100%) !important;
+}
+
+body.editorial-home .mosaic-item.side:not(.has-photo) .mosaic-shell,
+body.editorial-home .mosaic-item.side.card-without-photo .mosaic-shell,
+body.editorial-home .mosaic-item.side:not(.has-photo) .mosaic-shell.compact,
+body.editorial-home .mosaic-item.side.card-without-photo .mosaic-shell.compact {
+  padding-top: 1.05rem !important;
+  min-height: 100% !important;
+}
+
 body.editorial-home .mosaic-item.side > a {
   display: flex !important;
   flex-direction: column !important;

@@ -1481,6 +1481,7 @@ const applyMosaicImage = (panelNode, article) => {
   const requestId = String(++mosaicImageRequestSequence);
   panelNode.dataset.mosaicImageRequest = requestId;
   clearSurfaceImage(panelNode);
+  panelNode.classList.add("card-without-photo");
 
   resolveArticleImage(article, "hero").then((safeUrl) => {
     if (!safeUrl || panelNode.dataset.mosaicImageRequest !== requestId) return;
@@ -1492,6 +1493,7 @@ const applyMosaicImage = (panelNode, article) => {
     panelNode.dataset.imageUrl = safeUrl;
     panelNode.dataset.sourceImage = safeUrl;
     panelNode.style.setProperty("--news-photo", `url('${safeUrl}')`);
+    panelNode.classList.remove("card-without-photo");
     panelNode.classList.add("has-photo", "has-real-photo");
   });
 };
