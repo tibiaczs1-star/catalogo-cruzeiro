@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-30T02:05:49.658Z",
+  "lastUpdatedAt": "2026-04-30T03:22:22.813Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -8785,6 +8785,47 @@
         "Conferir visualmente no navegador real e subir/deployar se aprovado."
       ],
       "notes": "Playwright final: duplicatas 0, stale 26/04 0 nas areas auditadas; review:team totalIssues=0."
+    },
+    {
+      "id": "2026-04-30-corrigir-tendencias-conversas-com-sinais-sociais-reais-facebook-publico-configur",
+      "createdAt": "2026-04-30T03:14:13.863Z",
+      "updatedAt": "2026-04-30T03:14:13.863Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "inclua captacao das noticias mais quentes do Facebook, corrija Tendencias & Conversas para nao fingir escuta social, remova tarefas internas dos cards publicos e explique se a IA parecia offline/doida",
+      "summary": "Corrigir Tendencias & Conversas com sinais sociais reais, Facebook publico configuravel e fallback honesto",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "social",
+        "facebook",
+        "tendencias"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-30-rodada-completa-de-publicacao-sync-reuniao-geral-dos-agentes-revisao-de-fluxo-si",
+      "createdAt": "2026-04-30T03:22:22.813Z",
+      "updatedAt": "2026-04-30T03:22:22.813Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "suba a pagina, sincronize tudo e atualize; de ordem aos agentes para reunião geral, estudar jornais/fontes, dar ideias sobre fluxo e o que nao faz sentido ou falta no website; atualizar subsites antes do commit; mandar tudo para o ar; criar prompts claros; retornar relatorio resumido aqui",
+      "summary": "Rodada completa de publicação: sync, reunião geral dos agentes, revisão de fluxo/site/subsites, prompts, commit e deploy",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "deploy",
+        "sync",
+        "agentes",
+        "subsites",
+        "home"
+      ],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

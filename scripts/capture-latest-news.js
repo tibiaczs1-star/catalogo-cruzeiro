@@ -65,6 +65,7 @@ function writeStaticNews(items = []) {
 function decodeEntities(value = "") {
   return String(value || "")
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/gi, "$1")
+    .replace(/<!\[CDATA\[|\]\]>/gi, " ")
     .replace(/&#(\d+);/g, (_match, code) => String.fromCharCode(Number(code) || 32))
     .replace(/&#x([0-9a-f]+);/gi, (_match, code) => String.fromCharCode(parseInt(code, 16) || 32))
     .replace(/&nbsp;|&#160;/gi, " ")
@@ -74,6 +75,21 @@ function decodeEntities(value = "") {
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">")
     .replace(/&hellip;|&#8230;/gi, "...");
+}
+
+function truncateTextAtBoundary(value = "", limit = 0) {
+  const text = String(value || "").trim();
+  if (!limit || text.length <= limit) return text;
+
+  const candidate = text.slice(0, Math.max(1, limit - 1)).trim();
+  const sentenceEnd = Math.max(candidate.lastIndexOf("."), candidate.lastIndexOf("!"), candidate.lastIndexOf("?"));
+  if (sentenceEnd >= Math.min(80, Math.floor(limit * 0.45))) {
+    return candidate.slice(0, sentenceEnd + 1).trim();
+  }
+
+  const wordEnd = candidate.lastIndexOf(" ");
+  const safeCut = wordEnd >= Math.floor(limit * 0.5) ? candidate.slice(0, wordEnd) : candidate;
+  return `${safeCut.replace(/[,:;(-]+$/g, "").trim()}...`;
 }
 
 function cleanText(value = "", limit = 0) {
@@ -88,7 +104,7 @@ function cleanText(value = "", limit = 0) {
     .replace(/\s*\/?>\s*/g, " ")
     .replace(/\s+/g, " ")
     .trim();
-  return limit && text.length > limit ? `${text.slice(0, limit - 1).trim()}...` : text;
+  return truncateTextAtBoundary(text, limit);
 }
 
 function normalizeText(value = "") {
@@ -305,7 +321,7 @@ function buildBody(item = {}) {
 }
 
 function hasFeedMarkupNoise(value = "") {
-  return /\bdata-[a-z0-9_-]+=|<\/?\w|\b(?:src|srcset|sizes|decoding)=|\/?>/i.test(String(value || ""));
+  return /\]\]>|\bdata-[a-z0-9_-]+=|<\/?\w|\b(?:src|srcset|sizes|decoding)=|\/?>/i.test(String(value || ""));
 }
 
 function fallbackSummaryFor(item = {}) {

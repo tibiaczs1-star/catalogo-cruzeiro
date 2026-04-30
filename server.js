@@ -4907,6 +4907,13 @@ const SOCIAL_TREND_SOURCES = [
     platform: "Instagram",
     url: "https://best-hashtags.com/hashtag/acre/",
     type: "instagram"
+  },
+  {
+    id: "facebook-public-pages",
+    name: "Facebook público monitorado",
+    platform: "Facebook",
+    url: "https://developers.facebook.com/docs/graph-api/reference/page/posts/",
+    type: "facebook"
   }
 ];
 
@@ -5026,6 +5033,29 @@ function trendToHashtag(value = "") {
   return compact ? `#${compact}`.slice(0, 40) : "";
 }
 
+function inferSocialTrendDivision(value = "") {
+  const text = normalizeText(value);
+  if (/\b(prefeitura|vereador|camara|câmara|governo|governador|governadora|aleac|politica|política|senado|deputad|eleicao|eleição)\b/.test(text)) {
+    return "Política";
+  }
+  if (/\b(saude|saúde|hospital|ubs|educacao|educação|escola|enem|concurso|edital|transito|trânsito|obra|rua|bairro|chuva|alerta|servico|serviço|calendario|calendário)\b/.test(text)) {
+    return "Utilidade Pública";
+  }
+  if (/\b(cultura|show|musica|música|livro|leitura|teatro|festival|festa|evento|artista|cinema)\b/.test(text)) {
+    return "Cultura";
+  }
+  if (/\b(comercio|comércio|economia|preco|preço|pix|negocio|negócio|empreendedor|venda|mercado)\b/.test(text)) {
+    return "Economia";
+  }
+  if (/\b(esporte|futebol|jogo|time|campeonato|atleta|final)\b/.test(text)) {
+    return "Esporte";
+  }
+  if (/\b(acre|jurua|juru[aá]|cruzeiro do sul|czs|rio branco|amazonia|amazônia)\b/.test(text)) {
+    return "Acre / Governo";
+  }
+  return "Cotidiano";
+}
+
 async function fetchExternalText(url, timeoutMs = 6500) {
   const response = await withPromiseTimeout(
     fetch(url, {
@@ -5087,6 +5117,162 @@ function extractInstagramHashtagLabels(html = "") {
   return labels;
 }
 
+function getFacebookGraphConfig() {
+  const token = String(
+    process.env.FACEBOOK_GRAPH_ACCESS_TOKEN || process.env.FACEBOOK_ACCESS_TOKEN || ""
+  ).trim();
+  const pageIds = String(process.env.FACEBOOK_PUBLIC_PAGE_IDS || process.env.FACEBOOK_PAGE_IDS || "")
+    .split(/[,\s;]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  return { token, pageIds };
+}
+
+async function fetchExternalJson(url, timeoutMs = 7500) {
+  const response = await withPromiseTimeout(
+    fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; CatalogoCruzeiroSocialTrends/1.0; +https://catalogocruzeiro.local)",
+        Accept: "application/json,text/plain,*/*"
+      }
+    }),
+    timeoutMs,
+    "social_trends_json_timeout"
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function getFacebookPostEngagement(post = {}) {
+  return (
+    Number(post.shares?.count || 0) * 3 +
+    Number(post.comments?.summary?.total_count || 0) * 2 +
+    Number(post.reactions?.summary?.total_count || 0)
+  );
+}
+
+function extractFacebookPostTitle(post = {}) {
+  const text = stripHtml(post.message || post.story || "");
+  const firstLine = text
+    .split(/\n|(?<=[.!?])\s+/u)
+    .map((item) => item.trim())
+    .find((item) => item.length >= 8);
+
+  return normalizeSocialTrendLabel(cleanShortText(firstLine || text, 82));
+}
+
+function buildFacebookTrendItems(source, posts = [], maxItems = 12) {
+  const now = new Date().toISOString();
+  const seen = new Set();
+  const items = [];
+
+  posts
+    .slice()
+    .sort((left, right) => getFacebookPostEngagement(right) - getFacebookPostEngagement(left))
+    .forEach((post, index) => {
+      if (items.length >= maxItems) {
+        return;
+      }
+
+      const title = extractFacebookPostTitle(post);
+      const key = normalizeText(title);
+      if (!title || !key || seen.has(key) || !isPortugueseBrazilianSocialTrendLabel(title)) {
+        return;
+      }
+
+      seen.add(key);
+      const rawText = stripHtml([post.message, post.story].filter(Boolean).join(" "));
+      const hashtags = [...new Set((rawText.match(/#[\p{L}\p{N}_]{2,40}/gu) || []).slice(0, 4))];
+      const fallbackHashtag = trendToHashtag(title);
+      const division = inferSocialTrendDivision(`${title} ${rawText}`);
+      const engagement = getFacebookPostEngagement(post);
+
+      items.push({
+        id: `${source.id}-${slugify(title).slice(0, 42) || post.id || index}`,
+        title,
+        summary: `Post público monitorado no Facebook. Interações públicas ponderadas: ${engagement}. Divisão sugerida: ${division}.`,
+        category: division,
+        sourceName: source.name,
+        sourceUrl: post.permalink_url || source.url,
+        publishedAt: post.created_time || now,
+        date: post.created_time || now,
+        externalSource: true,
+        socialPlatform: "Facebook",
+        coverageLayer: "brasil",
+        importanceDivision: division,
+        topicGroup: "facebook-public",
+        hashtags: hashtags.length ? hashtags : fallbackHashtag ? [fallbackHashtag] : [],
+        facebookEngagement: engagement
+      });
+    });
+
+  return items;
+}
+
+async function fetchFacebookTrendSource(source) {
+  const { token, pageIds } = getFacebookGraphConfig();
+
+  if (!token || !pageIds.length) {
+    return {
+      items: [],
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: false,
+        error: "facebook_graph_config_missing",
+        hint: "Configure FACEBOOK_GRAPH_ACCESS_TOKEN e FACEBOOK_PUBLIC_PAGE_IDS para captar páginas públicas.",
+        url: source.url
+      }
+    };
+  }
+
+  try {
+    const pageResults = await mapWithConcurrency(pageIds, 2, async (pageId) => {
+      const params = new URLSearchParams({
+        fields:
+          "message,story,permalink_url,created_time,shares,comments.summary(true).limit(0),reactions.summary(true).limit(0)",
+        limit: "12",
+        access_token: token
+      });
+      const url = `https://graph.facebook.com/v19.0/${encodeURIComponent(pageId)}/posts?${params.toString()}`;
+      const payload = await fetchExternalJson(url);
+      return Array.isArray(payload?.data) ? payload.data : [];
+    });
+    const posts = pageResults.flat();
+    const items = buildFacebookTrendItems(source, posts, 14);
+
+    return {
+      items,
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: true,
+        count: items.length,
+        pages: pageIds.length,
+        mode: "graph-api-public-pages",
+        url: source.url
+      }
+    };
+  } catch (error) {
+    return {
+      items: [],
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: false,
+        error: String(error?.message || "falha"),
+        url: source.url
+      }
+    };
+  }
+}
+
 function buildSocialTrendItems(source, labels = [], maxItems = 12) {
   const seen = new Set();
   const now = new Date().toISOString();
@@ -5105,14 +5291,16 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
 
     seen.add(key);
     const hashtag = trendToHashtag(label);
+    const division = inferSocialTrendDivision(label);
+    const platformCopy =
+      source.type === "instagram"
+        ? "Hashtag pública monitorada em lista externa de Instagram"
+        : "Tendência pública captada em lista externa de X/Twitter Brasil";
     items.push({
       id: `${source.id}-${slugify(label).slice(0, 42) || index}`,
       title: label,
-      summary:
-        source.type === "instagram"
-          ? `Hashtag pública monitorada em lista externa de Instagram: ${label}.`
-          : `Tendência pública captada em lista externa de X/Twitter Brasil: ${label}.`,
-      category: source.platform,
+      summary: `${platformCopy}: ${label}. Divisão sugerida: ${division}.`,
+      category: division,
       sourceName: source.name,
       sourceUrl: source.url,
       publishedAt: now,
@@ -5120,6 +5308,7 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
       externalSource: true,
       socialPlatform: source.platform,
       coverageLayer: "brasil",
+      importanceDivision: division,
       topicGroup: source.type === "instagram" ? "instagram-hashtags" : "twitter-trends",
       hashtags: hashtag ? [hashtag] : []
     });
@@ -5129,6 +5318,10 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
 }
 
 async function fetchSocialTrendSource(source) {
+  if (source.type === "facebook") {
+    return fetchFacebookTrendSource(source);
+  }
+
   try {
     const html = await fetchExternalText(source.url);
     const labels =
@@ -5156,7 +5349,7 @@ async function fetchSocialTrendSource(source) {
 function mergeSocialTrendItems(items = [], limit = 24) {
   const selected = [];
   const seen = new Set();
-  const platformPriority = { "X/Twitter": 0, Instagram: 1 };
+  const platformPriority = { Facebook: 0, "X/Twitter": 1, Instagram: 2 };
 
   items
     .filter((item) => isPortugueseBrazilianSocialTrendLabel(item.title || item.hashtags?.[0] || ""))

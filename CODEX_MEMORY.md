@@ -1,5 +1,35 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-30 - Sync geral, reuniao dos agentes e subsites
+
+- Usuario pediu a rodada completa: subir pagina, sincronizar tudo, atualizar subsites, ordenar reuniao geral dos agentes, estudar fontes/jornais, organizar prompts claros, commit/deploy e relatorio resumido.
+- Criado `PROMPT_REUNIAO_GERAL_FLUXO_SITE_SUBSITES_2026-04-30.md` e registrada ordem em `data/office-orders.json` para 181 agentes/5 escritorios avaliarem fluxo da home, fontes, subsites, lacunas e itens fora do deploy.
+- `npm run sync:online-local` passou com `ok=true`: 554 noticias ativas/acervo, 202 itens de captacao direta, duplicatas locais 0, saneamento de idioma publico ok, `review:team totalIssues=0`, auditoria de imagens 554/554 ok e relatorio PDF em `.codex-temp/online-local-sync/latest-report.pdf`.
+- Home e subsites checados em servidor local: `/`, `arquivo.html`, `esttiles.html`, `lifestile.html`, `infantil.html`, `estudantes.html`, `games.html`, `animes.html`, `catalogo-servicos.html`, `/api/news`, `/api/social-trends` e `/api/daily-agent-pulse` responderam 200.
+- Corrigida a Capa Especial/mosaico para completar com noticias do dia antes de voltar a lotes antigos; Playwright final retornou `hasRotinas=false`, `hasFakeEscuta=false` e `stale26Matches=[]`.
+- Fontes externas conferidas na rodada apontaram prioridades editoriais: cheia do Jurua/Cruzeiro do Sul como servico local forte, rejeicao de Jorge Messias no Senado como politica nacional quente, PNLL 2026-2036 como pauta de cultura/educacao e TV publica/TV 3.0 como utilidade/tecnologia publica.
+- Facebook real ficou implementado como captacao configuravel por `FACEBOOK_GRAPH_ACCESS_TOKEN` + `FACEBOOK_PUBLIC_PAGE_IDS`; sem essas variaveis, o site deve declarar `facebook_graph_config_missing` e degradar para radar editorial, sem fingir opiniao/tendencia.
+- PubPaid continuou fora do pacote publico por regra permanente: sem commit/deploy de PubPaid sem ordem explicita.
+
+## Atualizacao rapida 2026-04-30 - Tendencias sociais honestas e Facebook
+
+- Usuario apontou que `Tendencias & Conversas` mostrava noticias comuns como se fossem escuta de Instagram/TikTok, e que cards de outra area vazavam tarefa interna dos agentes (`identificar rotinas manuais...`) como noticia publica.
+- Diagnostico: `script.js` escolhia noticia do feed `buzz` e, sem prova social, rotacionava contextos de Instagram/TikTok/Facebook; `pickMonthlyDynamicStories` tambem injetava `agentPulse.actions` nos cards publicos.
+- Criado `PROMPT_CAPTACAO_SOCIAL_FACEBOOK_TENDENCIAS_2026-04-30.md` com regra de ouro: online nao significa certo; sem prova social o card deve degradar para sinal nao confirmado/radar, nunca fingir tendencia.
+- `script.js`: `renderDailyTrendingBuzz` passa a priorizar `/api/social-trends`; `resolveBuzzNetworkContext` so rotula rede quando ha `externalSource/socialPlatform/topicGroup` social; caso contrario usa contexto neutro. Textos publicos passam a dizer quando o sinal social nao foi confirmado. `pickMonthlyDynamicStories` removeu tarefas internas dos agentes e aceita tendencias externas no pool.
+- `server.js`: `/api/social-trends` ganhou fonte `facebook-public-pages` configuravel por `FACEBOOK_GRAPH_ACCESS_TOKEN` + `FACEBOOK_PUBLIC_PAGE_IDS`; sem configuracao, reporta `facebook_graph_config_missing` em vez de inventar posts. Tendencias agora recebem divisao sugerida (`Politica`, `Utilidade Publica`, `Cultura`, `Economia`, `Esporte`, `Acre / Governo`, `Cotidiano`).
+- `index.html`: cache-bust de `script.js` atualizado para `20260430-social-truth-facebook1`.
+- Validacoes: `node --check script.js`, `node --check server.js`, endpoint temporario em `127.0.0.1:4141/api/social-trends` incluindo relatorio Facebook offline/config faltando e divisoes sugeridas, Playwright DOM na home com `hasRotinas=false` e `hasFakeTemp=false`, captura `output/playwright/home-social-truth-facebook-20260430.png`, e `npm run review:team` com `totalIssues=0`.
+- Observacao: o servidor local que ja estava rodando em `3000` precisa ser reiniciado para carregar o `server.js` novo; nao houve push.
+
+## Atualizacao rapida 2026-04-30 - Home sem lote velho nas outras areas
+
+- Usuario apontou que, em compensacao, outras areas alem da hero ainda pareciam presas em lote antigo; a rodada anterior tinha criado o commit `981edfc` com supervisao editorial por data/regiao/divisao, mas ficou uma repeticao residual entre a hero superior e a Capa Especial.
+- `script.js`: criada reserva separada `topHero`; a Capa Especial/mosaico agora consulta reservas existentes antes de escolher seus 13 itens, evitando repetir a materia da hero superior.
+- `index.html`: cache-bust de `script.js` atualizado para `20260430-editorial-supervisor3`.
+- Validacoes finais: `node --check script.js`, Playwright renderizado em `output/playwright/home-live-dom-supervisor-20260430-v3.png` com 79 cards auditados, `stale26=0`, `visibleTextHas26=false` e `duplicateCount=0`; `npm run review:team` com `totalIssues=0`.
+- Observacao: segue sem push; o daemon continua podendo sujar caches/runtime apos as validacoes.
+
 ## Atualizacao rapida 2026-04-29 - Captacao diaria reativada na home
 
 - Usuario apontou que a hero/destaques ainda estavam presos em 26/04 no dia 29/04 e que os agentes nao estavam procurando noticias novas.

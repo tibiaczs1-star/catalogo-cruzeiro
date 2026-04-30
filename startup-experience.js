@@ -1561,18 +1561,23 @@
         return;
       }
       handledPersistedPageShow = true;
-      showReturningLoaderThen(() => {
-        dispatchIntroFinished();
-      });
+      releaseFounderPreludeGate();
+      dispatchIntroFinished();
     });
 
     const continueAfterFounderPrelude = (options = {}) => {
-      const shouldShowReturningLoader = options.afterFounderPrelude === true || !phoneFlow;
+      const shouldShowReturningLoader =
+        !fastEditorialHome && (options.afterFounderPrelude === true || !phoneFlow);
       const finishLoaded = () => {
         releaseFounderPreludeGate();
         dispatchIntroFinished();
       };
       const showInitialLoaderAfterConsent = () => {
+        if (fastEditorialHome && !phoneFlow) {
+          finishLoaded();
+          return;
+        }
+
         showInitialHomeLoaderThen(finishLoaded);
       };
 
@@ -1608,7 +1613,7 @@
         }
 
         if (actionLoaderRequested) {
-          showReturningLoaderThen(finishOrOpenWelcome);
+          finishOrOpenWelcome();
           return;
         }
 
@@ -1646,6 +1651,12 @@
 
       openWelcomeConsentModal();
     };
+
+    if (fastEditorialHome && !phoneFlow) {
+      releaseFounderPreludeGate();
+      continueAfterFounderPrelude();
+      return;
+    }
 
     if (actionLoaderRequested || hasSeenFounderPreludeThisWeek() || hasSeenFounderPreludeInThisSession()) {
       releaseFounderPreludeGate();

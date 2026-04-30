@@ -268,7 +268,16 @@ body.editorial-home .site-footer .footer-bottom-utility-buttons {
   }
 
   body.editorial-home .brand {
+    align-items: flex-start !important;
     gap: 0.62rem !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  body.editorial-home .brand > div {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
   }
 
   body.editorial-home .brand img {
@@ -284,6 +293,9 @@ body.editorial-home .site-footer .footer-bottom-utility-buttons {
   body.editorial-home .brand strong {
     font-size: clamp(1.5rem, 7vw, 1.96rem) !important;
     line-height: 0.98 !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    word-break: normal !important;
   }
 
   body.editorial-home .main-nav {
@@ -1786,16 +1798,19 @@ body.editorial-home .site-footer .footer-bottom-utility-buttons {
 
   body.editorial-home .hero-office-tv-caption {
     position: absolute;
-    left: 8px;
-    right: 8px;
-    bottom: -28px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
     z-index: 3;
     display: block;
     overflow: hidden;
+    padding: 0.16rem 0.22rem;
+    border-radius: 7px;
+    background: rgba(5, 14, 27, 0.72);
     color: rgba(238, 248, 255, 0.9);
-    font-size: 0.5rem;
+    font-size: 0.46rem;
     font-weight: 900;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     line-height: 1.15;
     text-align: center;
     text-overflow: ellipsis;

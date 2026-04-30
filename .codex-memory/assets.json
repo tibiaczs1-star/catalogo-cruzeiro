@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-30T02:05:50.051Z",
+  "lastUpdatedAt": "2026-04-30T11:48:09.881Z",
   "assets": [
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
@@ -1748,12 +1748,14 @@
     },
     {
       "id": "latest-report-pdf",
-      "kind": "document",
+      "kind": "report",
       "path": ".codex-temp/online-local-sync/latest-report.pdf",
       "source": "workspace",
-      "note": "Relatorio PDF da reuniao geral online-local de 2026-04-29; sync ok, review 0, auditoria de imagens 360/360 e runtime dos agentes 181/181 ativos.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-04-29T21:44:32.793Z"
+      "note": "Relatorio PDF da sincronizacao online-local da rodada geral de 2026-04-30: 554 noticias, review 0 e auditoria de imagens ok.",
+      "linkedOrderIds": [
+        "2026-04-30-rodada-completa-de-publicacao-sync-reuniao-geral-dos-agentes-revisao-de-fluxo-si"
+      ],
+      "createdAt": "2026-04-30T11:48:09.881Z"
     },
     {
       "id": "pubpaid-traffic-preview-runtime-wheelrider-v2-20260429",
@@ -1867,6 +1869,26 @@
         "2026-04-30-supervisionar-todas-as-areas-da-home-por-data-regiao-divisao-e-sem-repeticao"
       ],
       "createdAt": "2026-04-30T02:23:26.620Z"
+    },
+    {
+      "id": "home-live-dom-supervisor-20260430-v3-png",
+      "kind": "screenshot",
+      "path": "output/playwright/home-live-dom-supervisor-20260430-v3.png",
+      "source": "workspace",
+      "note": "Validação renderizada da home após reserva separada da hero superior: 79 cards auditados, stale26=0 e duplicatas=0 entre hero/mosaico/grades.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-30T02:52:07.208Z"
+    },
+    {
+      "id": "home-social-truth-facebook-20260430-png",
+      "kind": "image",
+      "path": "output/playwright/home-social-truth-facebook-20260430.png",
+      "source": "workspace",
+      "note": "Validação visual da home após correção de Tendências & Conversas: sem tarefa interna e com sinais sociais reais priorizados.",
+      "linkedOrderIds": [
+        "2026-04-30-corrigir-tendencias-conversas-com-sinais-sociais-reais-facebook-publico-configur"
+      ],
+      "createdAt": "2026-04-30T03:14:20.025Z"
     }
   ]
 }

@@ -108,6 +108,26 @@
       .replace(/[“”‘’]/g, "'")
       .replace(/[–—]/g, "-");
 
+  const cleanArchiveArticleText = (value = "") =>
+    decodeEditorialEntities(value)
+      .replace(/<!\[CDATA\[|\]\]>/gi, " ")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const cleanArchiveArticleExcerpt = (value = "", fallback = "") => {
+    const text = cleanArchiveArticleText(value || fallback || "")
+      .replace(/\s*["']?\s*data-medium-file=["'][^"']*["']/gi, " ")
+      .replace(/\s*data-large-file=["'][^"']*["']/gi, " ")
+      .replace(/\s*data-orig-file=["'][^"']*["']/gi, " ")
+      .replace(/\s*srcset=["'][^"']*["']/gi, " ")
+      .replace(/\s*src=["'][^"']*["']/gi, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    return text || cleanArchiveArticleText(fallback || value || "Sem resumo.");
+  };
+
   const normalizeArchiveStoryText = (value = "") =>
     normalizeText(decodeEditorialEntities(value))
       .replace(/&[a-z0-9#]+;/gi, " ")
@@ -677,11 +697,16 @@
   };
 
   const normalizeArticle = (article = {}) => {
-    const title = String(article.title || article.sourceLabel || "Atualizacao");
+    const title = cleanArchiveArticleText(article.title || article.sourceLabel || "Atualizacao");
     const category = normalizeArchiveCategory(article);
-    const sourceName = article.sourceName || article.source || article.sourceLabel || "Fonte local";
+    const sourceName = cleanArchiveArticleText(
+      article.sourceName || article.source || article.sourceLabel || "Fonte local"
+    );
     const sourceUrl = article.sourceUrl || article.url || article.link || "#";
-    const lede = article.lede || article.summary || article.description || "Sem resumo.";
+    const lede = cleanArchiveArticleExcerpt(
+      article.lede || article.summary || article.description,
+      article.sourceLabel || article.title || "Sem resumo."
+    );
     const slug = String(article.slug || slugifyText(title) || article.id || "").trim();
     const imageUrl = sanitizeImageUrl(
       article.sourceImageUrl || article.imageUrl || extractInlineArticleImage(article)
@@ -697,7 +722,7 @@
         article.previewClass || previewClassByCategory[normalizeText(category)] || "thumb-servico",
       sourceName,
       sourceUrl,
-      sourceLabel: article.sourceLabel || title,
+      sourceLabel: cleanArchiveArticleText(article.sourceLabel || title),
       lede,
       date: formatDisplayDate(article.date || article.publishedAt || article.createdAt || ""),
       publishedAt: article.publishedAt || article.createdAt || article.date || "",
