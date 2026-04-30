@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-29T22:24:51.387Z",
+  "lastUpdatedAt": "2026-04-30T02:05:49.658Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -8741,6 +8741,50 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-04-30-redesenhar-o-transito-pubpaid-do-zero-sem-reutilizar-pacote-defeituoso-com-veicu",
+      "createdAt": "2026-04-30T02:05:49.658Z",
+      "updatedAt": "2026-04-30T02:05:49.658Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "redesenha tudo, nada de reusar o que deu defeito; roda em 3 sprites por carro funcionando da direita para esquerda e só; usar prompt anterior, contornos e corrigir tudo",
+      "summary": "Redesenhar o trânsito PubPaid do zero, sem reutilizar pacote defeituoso, com veículos left-only, 3 frames por veículo, rodas com centro fixo, contornos fortes, alpha externo apenas e integração local para avaliação.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-30-supervisionar-todas-as-areas-da-home-por-data-regiao-divisao-e-sem-repeticao",
+      "createdAt": "2026-04-30T02:23:26.620Z",
+      "updatedAt": "2026-04-30T02:23:26.620Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora que vc entendeu que uma area deu defeito supervicione todas as outras sempre por data, o que se trata a divisão, priorizar cruzeiro - vale do jurua - depois acre ... depois o resto sempre.... em qualquer tipo de assunto, em todas as areas, sem reptções, ou seja trate areas individualmente com prioridade mais evite repetir algo em outra area a nao ser que seja assunto dubio... faça um prompt e um fluxo pra seguir pra podermos finalmente descansar",
+      "summary": "Criar e aplicar prompt/fluxo de supervisao editorial para todas as areas dinamicas da home: data primeiro, depois Cruzeiro do Sul, Vale do Jurua, Acre e resto; cada area respeita sua divisao, usa reserva de artigos e evita repeticao salvo assunto dubio.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "PROMPT_SUPERVISAO_EDITORIAL_DATA_REGIAO_2026-04-29.md",
+        "script.js",
+        "server.js",
+        "scripts/capture-latest-news.js",
+        "scripts/re-rodada-dia-geral.js"
+      ],
+      "assetRefs": [
+        "home-editorial-supervisor-final-check-20260429"
+      ],
+      "tags": [
+        "home",
+        "noticias",
+        "supervisao-editorial"
+      ],
+      "nextSteps": [
+        "Conferir visualmente no navegador real e subir/deployar se aprovado."
+      ],
+      "notes": "Playwright final: duplicatas 0, stale 26/04 0 nas areas auditadas; review:team totalIssues=0."
     }
   ]
 }

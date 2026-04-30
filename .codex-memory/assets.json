@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-29T22:38:12.743Z",
+  "lastUpdatedAt": "2026-04-30T02:05:50.051Z",
   "assets": [
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
@@ -1838,6 +1838,35 @@
       "note": "Validacao Playwright da home apos reativar captacao: NEWS_DATA com noticias de 29/04, hero/card diario sem repeticao visivel e console limpo.",
       "linkedOrderIds": [],
       "createdAt": "2026-04-29T22:38:12.743Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-redraw-left-3f-v2-lowered-20260429-png",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-redraw-left-3f-v2-lowered-20260429.png",
+      "source": "workspace",
+      "note": "Bancada HTML do trânsito PubPaid com o pacote Novo redesenho 3f selecionado, direção direita para esquerda.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-30T02:05:50.003Z"
+    },
+    {
+      "id": "pubpaid-traffic-redraw-left-3f-v1-png",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/traffic/pubpaid-traffic-redraw-left-3f-v1.png",
+      "source": "workspace",
+      "note": "Novo spritesheet PubPaid redesenhado do zero: direção direita para esquerda apenas, 10 veículos, 3 frames por veículo, rodas com centro fixo, alpha interno zerado.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-30T02:05:50.051Z"
+    },
+    {
+      "id": "home-editorial-supervisor-final-check-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/home-editorial-supervisor-20260429-final-check.png",
+      "source": "workspace",
+      "note": "Validacao Playwright final da home apos fluxo de supervisao editorial por data/regiao/divisao: duplicatas 0 e nenhum card 26/04 nas areas auditadas.",
+      "linkedOrderIds": [
+        "2026-04-30-supervisionar-todas-as-areas-da-home-por-data-regiao-divisao-e-sem-repeticao"
+      ],
+      "createdAt": "2026-04-30T02:23:26.620Z"
     }
   ]
 }

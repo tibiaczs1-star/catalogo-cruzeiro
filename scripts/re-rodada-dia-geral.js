@@ -261,6 +261,30 @@ function getNewsTimestamp(item = {}) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getRegionalPriorityScore(item = {}) {
+  const text = slugify(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  if (/\b(cruzeiro-do-sul|cruzeirodosul|czs)\b/.test(text)) return 5000;
+  if (/\b(vale-do-jurua|jurua|juru-a|mancio-lima|rodrigues-alves|porto-walter|marechal-thaumaturgo|tarauaca|jurua24horas|juruaemtempo|juruacomunicacao|tribunadojurua|portaldojurua)\b/.test(text)) return 4200;
+  if (/\b(acre|rio-branco|sena-madureira|feijo|xapuri|brasileia|epitaciolandia|assis-brasil|placido-de-castro|agencia-acre|acre-gov|ac24horas|contilnet|acrenews)\b/.test(text)) return 3200;
+  if (/\b(brasil|brasilia|governo-federal|stf|senado|congresso|agencia-brasil|g1|cnn-brasil)\b/.test(text)) return 900;
+  return 0;
+}
+
 function getArticleArchiveKey(item = {}) {
   return String(
     item.slug ||
@@ -298,6 +322,8 @@ function mergeNewsCollections(...collections) {
   return [...map.values()].sort((left, right) => {
     const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
     if (dateDiff !== 0) return dateDiff;
+    const regionalDiff = getRegionalPriorityScore(right) - getRegionalPriorityScore(left);
+    if (regionalDiff !== 0) return regionalDiff;
     return Number(right.priority || 0) - Number(left.priority || 0);
   });
 }
@@ -319,6 +345,9 @@ function promoteMailzaPriority(items = []) {
     .sort((left, right) => {
       const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
       if (dateDiff !== 0) return dateDiff;
+
+      const regionalDiff = getRegionalPriorityScore(right) - getRegionalPriorityScore(left);
+      if (regionalDiff !== 0) return regionalDiff;
 
       const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
       if (mailzaDiff !== 0) return mailzaDiff;

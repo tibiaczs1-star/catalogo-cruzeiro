@@ -441,6 +441,44 @@ function getTimestamp(item = {}) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getRegionalPriorityScore(item = {}) {
+  const haystack = normalizeText(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  if (/\b(cruzeiro do sul|cruzeiro-do-sul|cruzeirodosul|czs)\b/.test(haystack)) return 5000;
+  if (
+    /\b(vale do jurua|vale do juru[aá]|vale-do-jurua|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá]|jurua24horas|juruaemtempo|juruacomunicacao|tribunadojurua|portaldojurua)\b/.test(
+      haystack
+    )
+  ) {
+    return 4200;
+  }
+  if (
+    /\b(acre|rio branco|sena madureira|feijo|feij[oó]|xapuri|brasileia|brasil[eé]ia|epitaciolandia|epitaciol[aâ]ndia|assis brasil|placido de castro|pl[aá]cido de castro|agencia acre|agencia\.ac|acre\.gov|ac24horas|contilnet|acrenews)\b/.test(
+      haystack
+    )
+  ) {
+    return 3200;
+  }
+  if (/\b(brasil|brasilia|bras[ií]lia|stf|senado|congresso|governo federal|agencia brasil|g1|cnn brasil)\b/.test(haystack)) {
+    return 900;
+  }
+  return 0;
+}
+
 function dedupeKey(item = {}) {
   const titleKey = normalizeText(item.title || item.sourceLabel || "")
     .replace(/\bpra\b/g, "para")
@@ -479,6 +517,8 @@ function mergeNewsItems(...collections) {
   return [...map.values()].sort((left, right) => {
     const dateDiff = getTimestamp(right) - getTimestamp(left);
     if (dateDiff !== 0) return dateDiff;
+    const regionalDiff = getRegionalPriorityScore(right) - getRegionalPriorityScore(left);
+    if (regionalDiff !== 0) return regionalDiff;
     return Number(right.priority || 0) - Number(left.priority || 0);
   });
 }

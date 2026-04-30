@@ -4804,6 +4804,11 @@ function pickBalancedTopicFeedItems(items = [], limit = 12) {
     buckets.set(
       key,
       bucket.sort((left, right) => {
+        const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+        if (dateDiff !== 0) {
+          return dateDiff;
+        }
+
         const leftPriority = COVERAGE_LAYER_PRIORITY[String(left.coverageLayer || "global")] ?? 99;
         const rightPriority = COVERAGE_LAYER_PRIORITY[String(right.coverageLayer || "global")] ?? 99;
         if (leftPriority !== rightPriority) {
@@ -4842,6 +4847,17 @@ function mergeTopicFeedItems(primaryItems = [], fallbackItems = [], limit = 12) 
 
 function sortTopicFeedItemsForDisplay(items = []) {
   return (Array.isArray(items) ? items : []).slice().sort((left, right) => {
+    const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+    if (dateDiff !== 0) {
+      return dateDiff;
+    }
+
+    const leftLayer = COVERAGE_LAYER_PRIORITY[String(left.coverageLayer || "global")] ?? 99;
+    const rightLayer = COVERAGE_LAYER_PRIORITY[String(right.coverageLayer || "global")] ?? 99;
+    if (leftLayer !== rightLayer) {
+      return leftLayer - rightLayer;
+    }
+
     const leftHasImage = shouldIgnoreImageUrl(getArticleImageUrl(left)) ? 0 : 1;
     const rightHasImage = shouldIgnoreImageUrl(getArticleImageUrl(right)) ? 0 : 1;
     if (leftHasImage !== rightHasImage) {
@@ -6124,6 +6140,8 @@ function getEditorialFocusScore(item = {}) {
   const isAcre = /\b(acre|rio branco|sena madureira|feijo|feij[oó]|xapuri|brasileia|epitaciolandia|assis brasil|placido de castro)\b/.test(
     text
   );
+  const isCruzeiro =
+    /\b(cruzeiro do sul|cruzeiro-do-sul|cruzeirodosul|czs)\b/.test(text);
   const isValeJurua =
     /\b(cruzeiro do sul|jurua|juru[aá]|mancio lima|m[âa]ncio lima|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá])\b/.test(
       text
@@ -6137,6 +6155,7 @@ function getEditorialFocusScore(item = {}) {
       text
     );
 
+  if (isCruzeiro) return 380 + (isImportant ? 50 : 0);
   if (isValeJurua) return 300 + (isImportant ? 40 : 0);
   if (isAcre) return 220 + (isImportant ? 35 : 0);
   if (isImportant) return 80;

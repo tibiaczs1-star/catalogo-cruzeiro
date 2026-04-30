@@ -1,8 +1,155 @@
 {
-  "lastAttemptAt": "2026-04-30T01:52:58.363Z",
-  "lastSuccessAt": "2026-04-30T01:52:59.963Z",
+  "lastAttemptAt": "2026-04-30T02:21:10.346Z",
+  "lastSuccessAt": "2026-04-30T02:21:11.611Z",
   "source": "rss-direct-agents-capture",
   "activeWindowItems": [
+    {
+      "id": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/",
+      "slug": "a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo",
+      "title": "À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo",
+      "eyebrow": "Nacional",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T02:12:55.000Z",
+      "category": "Nacional",
+      "categoryKey": "internacional nacional a cnn assessor de netanyahu acusa hezbollah de violar cessar fogo ophir falk afirmou que o grupo armado busca atacar civis e disse que israel esta revidando com muita forca",
+      "previewClass": "thumb-cotidiano",
+      "sourceName": "CNN Brasil",
+      "sourceUrl": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/",
+      "sourceLabel": "À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo",
+      "lede": "Ophir Falk afirmou que o grupo armado busca atacar civis e disse que Israel está \"revidando com muita força\"",
+      "summary": "Ophir Falk afirmou que o grupo armado busca atacar civis e disse que Israel está \"revidando com muita força\"",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/2025-08-06T112405Z_1_LYNXMPEL750LY_RTROPTP_4_ISRAEL-ARMY-MILITARY-CHIEF-e1754492946331.jpg?w=200",
+      "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/2025-08-06T112405Z_1_LYNXMPEL750LY_RTROPTP_4_ISRAEL-ARMY-MILITARY-CHIEF-e1754492946331.jpg?w=200",
+      "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/2025-08-06T112405Z_1_LYNXMPEL750LY_RTROPTP_4_ISRAEL-ARMY-MILITARY-CHIEF-e1754492946331.jpg?w=200",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo"
+      ],
+      "body": [
+        "CNN Brasil publicou em 29 de abr de 2026 a base desta noticia sobre À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo.",
+        "À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
+    {
+      "id": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/",
+      "slug": "apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre",
+      "title": "Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre",
+      "eyebrow": "Politica",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T02:10:30.000Z",
+      "category": "Politica",
+      "categoryKey": "politica",
+      "previewClass": "thumb-politica",
+      "sourceName": "CNN Brasil",
+      "sourceUrl": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/",
+      "sourceLabel": "Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre",
+      "lede": "Exonerações de cargos na Esplanada podem começar a sair no DOU; movimento é tratado como resposta a “traidores”",
+      "summary": "Exonerações de cargos na Esplanada podem começar a sair no DOU; movimento é tratado como resposta a “traidores”",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Lula-e-Messias.webp?w=200",
+      "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Lula-e-Messias.webp?w=200",
+      "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Lula-e-Messias.webp?w=200",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre"
+      ],
+      "body": [
+        "CNN Brasil publicou em 29 de abr de 2026 a base desta noticia sobre Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre.",
+        "Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
+    {
+      "id": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/",
+      "slug": "de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26",
+      "title": "De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26",
+      "eyebrow": "Cultura",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T02:00:05.000Z",
+      "category": "Cultura",
+      "categoryKey": "cultura",
+      "previewClass": "thumb-cultura",
+      "sourceName": "ac24horas",
+      "sourceUrl": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/",
+      "sourceLabel": "De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26",
+      "lede": "Samira cobrirá o show de Shakira no Multishow; web aposta em Milena para a volta da TV Globinho – Reprodução \" Mais de uma semana após a final, o BBB 26 continua dando motivos para a Globo comemorar. Por conta do grande sucesso da edição, o interesse em torno",
+      "summary": "Samira cobrirá o show de Shakira no Multishow; web aposta em Milena para a volta da TV Globinho – Reprodução \" Mais de uma semana após a final, o BBB 26 continua dando motivos para a Globo comemorar. Por conta do grande sucesso da edição, o interesse em torno",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/samira-milena-divulgacao_fixed_large.jpg",
+      "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/samira-milena-divulgacao_fixed_large.jpg",
+      "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/samira-milena-divulgacao_fixed_large.jpg",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "ac24horas",
+          "url": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "ac24horas",
+          "url": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26"
+      ],
+      "body": [
+        "ac24horas publicou em 29 de abr de 2026 a base desta noticia sobre De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26.",
+        "De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
     {
       "id": "https://www.cnnbrasil.com.br/entretenimento/billie-eilish-posta-video-na-premiere-de-seu-novo-filme-concerto-confira/",
       "slug": "billie-eilish-posta-video-na-premiere-de-seu-novo-filme-concerto-confira",
@@ -1960,6 +2107,55 @@
       "body": [
         "CNN Brasil publicou em 29 de abr de 2026 a base desta noticia sobre EUA negarão vistos a quem temer perseguição nos países de origem.",
         "EUA negarão vistos a quem temer perseguição nos países de origem e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
+    {
+      "id": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman",
+      "slug": "elon-musk-s-worst-enemy-in-court-is-elon-musk",
+      "title": "Atualização internacional de The Verge - 19:01",
+      "eyebrow": "Educacao",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T00:01:24.000Z",
+      "category": "Educacao",
+      "categoryKey": "educacao",
+      "previewClass": "thumb-educacao",
+      "sourceName": "The Verge",
+      "sourceUrl": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman",
+      "sourceLabel": "Atualização internacional de The Verge - 19:01",
+      "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 19:01. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+      "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 19:01. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/STK022_ELON_MUSK_CVIRGINIA4_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/STK022_ELON_MUSK_CVIRGINIA4_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/STK022_ELON_MUSK_CVIRGINIA4_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "elon-musk-s-worst-enemy-in-court-is-elon-musk"
+      ],
+      "body": [
+        "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre Elon Musk’s worst enemy in court is Elon Musk.",
+        "Elon Musk’s worst enemy in court is Elon Musk e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
         "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
       ]
     },
@@ -12838,55 +13034,6 @@
       "body": [
         "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre The Moto Razr and Razr Plus are victims of shrinkflation.",
         "The Moto Razr and Razr Plus are victims of shrinkflation e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-      ]
-    },
-    {
-      "id": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe",
-      "slug": "google-photos-launches-an-ai-try-on-feature-for-clothes-you-already-have",
-      "title": "Atualização internacional de The Verge - 11:00",
-      "eyebrow": "Novidades",
-      "date": "29 de abr de 2026",
-      "publishedAt": "2026-04-29T16:00:00.000Z",
-      "category": "Novidades",
-      "categoryKey": "novidades google photos launches an ai try on feature for clothes you already have google photos is launching a new ai powered feature you can use to virtually try on clothes you already have using the photos in your gallery google will create a virtual wardrobe allowing you to mix and match outfits save the looks you like and share",
-      "previewClass": "thumb-cotidiano",
-      "sourceName": "The Verge",
-      "sourceUrl": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe",
-      "sourceLabel": "Atualização internacional de The Verge - 11:00",
-      "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 11:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-      "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 11:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/wardrobe-try-on.png?quality=90&strip=all&crop=0,0,100,100",
-      "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/wardrobe-try-on.png?quality=90&strip=all&crop=0,0,100,100",
-      "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/wardrobe-try-on.png?quality=90&strip=all&crop=0,0,100,100",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "The Verge",
-          "url": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "The Verge",
-          "url": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "google-photos-launches-an-ai-try-on-feature-for-clothes-you-already-have"
-      ],
-      "body": [
-        "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre Google Photos launches an AI try-on feature for clothes you already have.",
-        "Google Photos launches an AI try-on feature for clothes you already have e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
         "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
       ]
     },
@@ -20491,153 +20638,6 @@
       "alternateSlugs": [
         "agente-secreto-e-baleado-durante-jantar-em-que-trump-foi-retirado"
       ]
-    },
-    {
-      "id": "https://ac24horas.com/2026/04/25/mega-sena-acumula-e-premio-vai-a-r-115-milhoes-confira-as-dezenas/",
-      "slug": "mega-sena-acumula-e-premio-vai-a-r-115-milhoes-confira-as-dezenas",
-      "title": "Mega-Sena acumula, e prêmio vai a R$ 115 milhões; confira as dezenas",
-      "eyebrow": "negocios",
-      "date": "25 de abr. de 2026",
-      "publishedAt": "2026-04-26T02:10:06.000Z",
-      "category": "Negócios",
-      "categoryKey": "negocios",
-      "previewClass": "thumb-pascoa",
-      "sourceName": "ac24horas",
-      "sourceUrl": "https://ac24horas.com/2026/04/25/mega-sena-acumula-e-premio-vai-a-r-115-milhoes-confira-as-dezenas/",
-      "sourceLabel": "Mega-Sena acumula, e prêmio vai a R$ 115 milhões; confira as dezenas",
-      "lede": "Ninguém acertou as seis dezenas sorteadas hoje no concurso 3000 da Mega-Sena. O que aconteceu Os números sorteados foram 22-23-36-40-52-60.",
-      "summary": "Ninguém acertou as seis dezenas sorteadas hoje no concurso 3000 da Mega-Sena. O que aconteceu Os números sorteados foram 22-23-36-40-52-60.",
-      "analysis": "",
-      "body": [
-        "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre Mega-Sena acumula, e prêmio vai a R$ 115 milhões; confira as dezenas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-        "Mega-Sena acumula, e prêmio vai a R$ 115 milhões; confira as dezenas e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-      ],
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/mega-sena-loterias-1692493850819_v2_900x506.jpg.webp",
-      "sourceImageUrl": "",
-      "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/mega-sena-loterias-1692493850819_v2_900x506.jpg.webp",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "ac24horas",
-          "url": "https://ac24horas.com/2026/04/25/mega-sena-acumula-e-premio-vai-a-r-115-milhoes-confira-as-dezenas/"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "ac24horas",
-          "url": "https://ac24horas.com/2026/04/25/mega-sena-acumula-e-premio-vai-a-r-115-milhoes-confira-as-dezenas/"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "mega-sena-acumula-e-premio-vai-a-r-115-milhoes-confira-as-dezenas"
-      ]
-    },
-    {
-      "id": "https://www.cnnbrasil.com.br/internacional/trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto/",
-      "slug": "trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto",
-      "title": "Trump está em local seguro após ser retirado de jantar por Serviço Secreto",
-      "eyebrow": "utilidade publica",
-      "date": "25 de abr. de 2026",
-      "publishedAt": "2026-04-26T01:35:52.000Z",
-      "category": "Utilidade Pública",
-      "categoryKey": "utilidade publica",
-      "previewClass": "thumb-alerta",
-      "sourceName": "CNN Brasil",
-      "sourceUrl": "https://www.cnnbrasil.com.br/internacional/trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto/",
-      "sourceLabel": "Trump está em local seguro após ser retirado de jantar por Serviço Secreto",
-      "lede": "O Presidente dos Estados Unidos Donald Trump foi levado a um local seguro após ser retirado às pressas pelo Serviço Secreto dos Estados Unidos durante o Jantar dos Correspondentes da Casa Branca, em Washington, na noite deste",
-      "summary": "O Presidente dos Estados Unidos Donald Trump foi levado a um local seguro após ser retirado às pressas pelo Serviço Secreto dos Estados Unidos durante o Jantar dos Correspondentes da Casa Branca, em Washington, na noite deste",
-      "analysis": "",
-      "body": [
-        "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Trump está em local seguro após ser retirado de jantar por Serviço Secreto. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-        "Trump está em local seguro após ser retirado de jantar por Serviço Secreto e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-      ],
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXNPEL9815A-BASEIMAGE.jpg?w=200",
-      "sourceImageUrl": "",
-      "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportWorldNews/tagreuters.com2025binary_LYNXNPEL9815A-BASEIMAGE.jpg?w=200",
-      "imageCredit": "",
-      "imageFocus": "center 42%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "CNN Brasil",
-          "url": "https://www.cnnbrasil.com.br/internacional/trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto/"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "CNN Brasil",
-          "url": "https://www.cnnbrasil.com.br/internacional/trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto/"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto"
-      ]
-    },
-    {
-      "id": "https://ac24horas.com/2026/04/25/trump-e-retirado-as-pressas-de-jantar-de-correspondentes-da-casa-branca-veja-video/",
-      "slug": "trump-e-retirado-as-pressas-de-jantar-de-correspondentes-da-casa-branca-veja-video",
-      "title": "Trump é retirado às pressas de jantar de correspondentes da Casa Branca. Veja vídeo",
-      "eyebrow": "utilidade publica",
-      "date": "25 de abr. de 2026",
-      "publishedAt": "2026-04-26T01:30:19.000Z",
-      "category": "Utilidade Pública",
-      "categoryKey": "utilidade publica",
-      "previewClass": "thumb-alerta",
-      "sourceName": "ac24horas",
-      "sourceUrl": "https://ac24horas.com/2026/04/25/trump-e-retirado-as-pressas-de-jantar-de-correspondentes-da-casa-branca-veja-video/",
-      "sourceLabel": "Trump é retirado às pressas de jantar de correspondentes da Casa Branca. Veja vídeo",
-      "lede": "O presidente dos Estados Unidos Donald Trump foi retirado às pressas do jantar anual com jornalistas correspondentes da Casa Branca, que acontece na noite deste sábado (25/4).",
-      "summary": "O presidente dos Estados Unidos Donald Trump foi retirado às pressas do jantar anual com jornalistas correspondentes da Casa Branca, que acontece na noite deste sábado (25/4).",
-      "analysis": "",
-      "body": [
-        "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre Trump é retirado às pressas de jantar de correspondentes da Casa Branca. Veja vídeo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-        "Trump é retirado às pressas de jantar de correspondentes da Casa Branca. Veja vídeo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-      ],
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/trump-e-malania-trump-sao-retirados-as-pressas-jantar-dos-correspondentes-casa-branca.webp",
-      "sourceImageUrl": "",
-      "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/trump-e-malania-trump-sao-retirados-as-pressas-jantar-dos-correspondentes-casa-branca.webp",
-      "imageCredit": "",
-      "imageFocus": "center 38%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "ac24horas",
-          "url": "https://ac24horas.com/2026/04/25/trump-e-retirado-as-pressas-de-jantar-de-correspondentes-da-casa-branca-veja-video/"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "ac24horas",
-          "url": "https://ac24horas.com/2026/04/25/trump-e-retirado-as-pressas-de-jantar-de-correspondentes-da-casa-branca-veja-video/"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "trump-e-retirado-as-pressas-de-jantar-de-correspondentes-da-casa-branca-veja-video"
-      ]
     }
   ],
   "items": [
@@ -21096,6 +21096,153 @@
       "sourceCount": 1,
       "alternateSlugs": [
         "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre"
+      ]
+    },
+    {
+      "id": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/",
+      "slug": "a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo",
+      "title": "À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo",
+      "eyebrow": "Nacional",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T02:12:55.000Z",
+      "category": "Nacional",
+      "categoryKey": "internacional nacional a cnn assessor de netanyahu acusa hezbollah de violar cessar fogo ophir falk afirmou que o grupo armado busca atacar civis e disse que israel esta revidando com muita forca",
+      "previewClass": "thumb-cotidiano",
+      "sourceName": "CNN Brasil",
+      "sourceUrl": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/",
+      "sourceLabel": "À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo",
+      "lede": "Ophir Falk afirmou que o grupo armado busca atacar civis e disse que Israel está \"revidando com muita força\"",
+      "summary": "Ophir Falk afirmou que o grupo armado busca atacar civis e disse que Israel está \"revidando com muita força\"",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/2025-08-06T112405Z_1_LYNXMPEL750LY_RTROPTP_4_ISRAEL-ARMY-MILITARY-CHIEF-e1754492946331.jpg?w=200",
+      "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/2025-08-06T112405Z_1_LYNXMPEL750LY_RTROPTP_4_ISRAEL-ARMY-MILITARY-CHIEF-e1754492946331.jpg?w=200",
+      "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/08/2025-08-06T112405Z_1_LYNXMPEL750LY_RTROPTP_4_ISRAEL-ARMY-MILITARY-CHIEF-e1754492946331.jpg?w=200",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/internacional/a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "a-cnn-assessor-de-netanyahu-acusa-hezbollah-de-violar-cessar-fogo"
+      ],
+      "body": [
+        "CNN Brasil publicou em 29 de abr de 2026 a base desta noticia sobre À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo.",
+        "À CNN, assessor de Netanyahu acusa Hezbollah de violar cessar-fogo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
+    {
+      "id": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/",
+      "slug": "apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre",
+      "title": "Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre",
+      "eyebrow": "Politica",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T02:10:30.000Z",
+      "category": "Politica",
+      "categoryKey": "politica",
+      "previewClass": "thumb-politica",
+      "sourceName": "CNN Brasil",
+      "sourceUrl": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/",
+      "sourceLabel": "Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre",
+      "lede": "Exonerações de cargos na Esplanada podem começar a sair no DOU; movimento é tratado como resposta a “traidores”",
+      "summary": "Exonerações de cargos na Esplanada podem começar a sair no DOU; movimento é tratado como resposta a “traidores”",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Lula-e-Messias.webp?w=200",
+      "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Lula-e-Messias.webp?w=200",
+      "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/Lula-e-Messias.webp?w=200",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/politica/apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "apos-derrota-de-messias-governo-avalia-demissoes-de-aliados-de-alcolumbre"
+      ],
+      "body": [
+        "CNN Brasil publicou em 29 de abr de 2026 a base desta noticia sobre Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre.",
+        "Após derrota de Messias, governo avalia demissões de aliados de Alcolumbre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
+    {
+      "id": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/",
+      "slug": "de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26",
+      "title": "De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26",
+      "eyebrow": "Cultura",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T02:00:05.000Z",
+      "category": "Cultura",
+      "categoryKey": "cultura",
+      "previewClass": "thumb-cultura",
+      "sourceName": "ac24horas",
+      "sourceUrl": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/",
+      "sourceLabel": "De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26",
+      "lede": "Samira cobrirá o show de Shakira no Multishow; web aposta em Milena para a volta da TV Globinho – Reprodução \" Mais de uma semana após a final, o BBB 26 continua dando motivos para a Globo comemorar. Por conta do grande sucesso da edição, o interesse em torno",
+      "summary": "Samira cobrirá o show de Shakira no Multishow; web aposta em Milena para a volta da TV Globinho – Reprodução \" Mais de uma semana após a final, o BBB 26 continua dando motivos para a Globo comemorar. Por conta do grande sucesso da edição, o interesse em torno",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/samira-milena-divulgacao_fixed_large.jpg",
+      "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/samira-milena-divulgacao_fixed_large.jpg",
+      "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/samira-milena-divulgacao_fixed_large.jpg",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "ac24horas",
+          "url": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "ac24horas",
+          "url": "https://ac24horas.com/2026/04/29/de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26/"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "de-novelas-verticais-a-volta-da-tv-globinho-como-a-globo-pode-aproveitar-os-ex-bbb-26"
+      ],
+      "body": [
+        "ac24horas publicou em 29 de abr de 2026 a base desta noticia sobre De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26.",
+        "De novelas verticais à volta da TV Globinho: Como a Globo pode aproveitar os ex-BBB 26 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
       ]
     },
     {
@@ -23006,6 +23153,55 @@
       "body": [
         "CNN Brasil publicou em 29 de abr de 2026 a base desta noticia sobre EUA negarão vistos a quem temer perseguição nos países de origem.",
         "EUA negarão vistos a quem temer perseguição nos países de origem e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+      ]
+    },
+    {
+      "id": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman",
+      "slug": "elon-musk-s-worst-enemy-in-court-is-elon-musk",
+      "title": "Atualização internacional de The Verge - 19:01",
+      "eyebrow": "Educacao",
+      "date": "29 de abr de 2026",
+      "publishedAt": "2026-04-30T00:01:24.000Z",
+      "category": "Educacao",
+      "categoryKey": "educacao",
+      "previewClass": "thumb-educacao",
+      "sourceName": "The Verge",
+      "sourceUrl": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman",
+      "sourceLabel": "Atualização internacional de The Verge - 19:01",
+      "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 19:01. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+      "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 19:01. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+      "analysis": "",
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/STK022_ELON_MUSK_CVIRGINIA4_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/STK022_ELON_MUSK_CVIRGINIA4_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/STK022_ELON_MUSK_CVIRGINIA4_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "The Verge",
+          "url": "https://www.theverge.com/tech/921022/elon-musk-cross-openai-altman"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "elon-musk-s-worst-enemy-in-court-is-elon-musk"
+      ],
+      "body": [
+        "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre Elon Musk’s worst enemy in court is Elon Musk.",
+        "Elon Musk’s worst enemy in court is Elon Musk e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
         "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
       ]
     },
@@ -33835,55 +34031,6 @@
       "body": [
         "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre The Moto Razr and Razr Plus are victims of shrinkflation.",
         "The Moto Razr and Razr Plus are victims of shrinkflation e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-        "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-      ]
-    },
-    {
-      "id": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe",
-      "slug": "google-photos-launches-an-ai-try-on-feature-for-clothes-you-already-have",
-      "title": "Atualização internacional de The Verge - 11:00",
-      "eyebrow": "Novidades",
-      "date": "29 de abr de 2026",
-      "publishedAt": "2026-04-29T16:00:00.000Z",
-      "category": "Novidades",
-      "categoryKey": "novidades google photos launches an ai try on feature for clothes you already have google photos is launching a new ai powered feature you can use to virtually try on clothes you already have using the photos in your gallery google will create a virtual wardrobe allowing you to mix and match outfits save the looks you like and share",
-      "previewClass": "thumb-cotidiano",
-      "sourceName": "The Verge",
-      "sourceUrl": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe",
-      "sourceLabel": "Atualização internacional de The Verge - 11:00",
-      "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 11:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-      "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 11:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-      "analysis": "",
-      "highlights": [],
-      "development": [],
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/wardrobe-try-on.png?quality=90&strip=all&crop=0,0,100,100",
-      "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/wardrobe-try-on.png?quality=90&strip=all&crop=0,0,100,100",
-      "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/wardrobe-try-on.png?quality=90&strip=all&crop=0,0,100,100",
-      "imageCredit": "",
-      "imageFocus": "",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "The Verge",
-          "url": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "The Verge",
-          "url": "https://www.theverge.com/tech/920420/google-photos-ai-try-on-wardrobe"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "google-photos-launches-an-ai-try-on-feature-for-clothes-you-already-have"
-      ],
-      "body": [
-        "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre Google Photos launches an AI try-on feature for clothes you already have.",
-        "Google Photos launches an AI try-on feature for clothes you already have e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
         "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
       ]
     },
@@ -53247,6 +53394,64 @@
       "imageQuality": "imagem-ausente-ou-generica"
     },
     {
+      "id": "home-linked-fila-ovos-pascoa",
+      "slug": "fila-ovos-pascoa",
+      "title": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
+      "eyebrow": "social",
+      "date": "4 abr 2026",
+      "publishedAt": "4 abr 2026",
+      "category": "Social",
+      "categoryKey": "social",
+      "previewClass": "thumb-social",
+      "sourceName": "ac24horas",
+      "sourceUrl": "#",
+      "sourceLabel": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
+      "lede": "Promoção, chocolate e presente puxam um retrato mais leve da cidade em abril. É assunto de comportamento, consumo e clima de data sazonal.",
+      "summary": "Promoção, chocolate e presente puxam um retrato mais leve da cidade em abril. É assunto de comportamento, consumo e clima de data sazonal.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em fila-ovos-pascoa.",
+      "body": [
+        "A chamada publicada na capa remete a ac24horas, com recorte principal em social e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
+        "ac24horas • 4 abr 2026",
+        "Social"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug fila-ovos-pascoa.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+      ],
+      "imageUrl": "./assets/news-fallbacks/fila-ovos-pascoa.svg",
+      "sourceImageUrl": "./assets/news-fallbacks/fila-ovos-pascoa.svg",
+      "feedImageUrl": "./assets/news-fallbacks/fila-ovos-pascoa.svg",
+      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      "imageFocus": "center 50%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "ac24horas",
+          "url": "#"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "ac24horas",
+          "url": "#"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "fila-ovos-pascoa"
+      ],
+      "originalImageUrl": "/assets/news-fallbacks/fila-ovos-pascoa.svg",
+      "imageQuality": "imagem-ausente-ou-generica"
+    },
+    {
       "id": "home-linked-saude-25-agosto-ubs",
       "slug": "saude-25-agosto-ubs",
       "title": "UBS do 25 de Agosto promove dia de saúde em movimento para idosos",
@@ -53364,64 +53569,6 @@
       "imageQuality": "imagem-ausente-ou-generica"
     },
     {
-      "id": "home-linked-fila-ovos-pascoa",
-      "slug": "fila-ovos-pascoa",
-      "title": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
-      "eyebrow": "social",
-      "date": "4 abr 2026",
-      "publishedAt": "4 abr 2026",
-      "category": "Social",
-      "categoryKey": "social",
-      "previewClass": "thumb-social",
-      "sourceName": "ac24horas",
-      "sourceUrl": "#",
-      "sourceLabel": "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
-      "lede": "Promoção, chocolate e presente puxam um retrato mais leve da cidade em abril. É assunto de comportamento, consumo e clima de data sazonal.",
-      "summary": "Promoção, chocolate e presente puxam um retrato mais leve da cidade em abril. É assunto de comportamento, consumo e clima de data sazonal.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em fila-ovos-pascoa.",
-      "body": [
-        "A chamada publicada na capa remete a ac24horas, com recorte principal em social e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Fila de ovos de Páscoa vira cena de rua e mostra o apetite do comércio em Cruzeiro do Sul",
-        "ac24horas • 4 abr 2026",
-        "Social"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug fila-ovos-pascoa.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "./assets/news-fallbacks/fila-ovos-pascoa.svg",
-      "sourceImageUrl": "./assets/news-fallbacks/fila-ovos-pascoa.svg",
-      "feedImageUrl": "./assets/news-fallbacks/fila-ovos-pascoa.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 50%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "ac24horas",
-          "url": "#"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "ac24horas",
-          "url": "#"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "fila-ovos-pascoa"
-      ],
-      "originalImageUrl": "/assets/news-fallbacks/fila-ovos-pascoa.svg",
-      "imageQuality": "imagem-ausente-ou-generica"
-    },
-    {
       "id": "home-linked-lucas-dourado-pascoa",
       "slug": "lucas-dourado-pascoa",
       "title": "Páscoa, boato e reaparição: o caso Lucas Dourado entra no radar das redes acreanas",
@@ -53477,64 +53624,6 @@
         "lucas-dourado-pascoa"
       ],
       "originalImageUrl": "/assets/news-fallbacks/lucas-dourado-pascoa.svg",
-      "imageQuality": "imagem-ausente-ou-generica"
-    },
-    {
-      "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-      "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
-      "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-      "eyebrow": "saude",
-      "date": "data recente",
-      "publishedAt": "data recente",
-      "category": "Saúde",
-      "categoryKey": "saude",
-      "previewClass": "thumb-saude",
-      "sourceName": "Fonte local",
-      "sourceUrl": "#",
-      "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
-      "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-      "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-      "body": [
-        "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Saúde, Governo e Agricultura concentram alterações de comissionados",
-        "Fonte local",
-        "Saude"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "./assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-      "sourceImageUrl": "./assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-      "feedImageUrl": "./assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 50%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "Fonte local",
-          "url": "#"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "Fonte local",
-          "url": "#"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados"
-      ],
-      "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
       "imageQuality": "imagem-ausente-ou-generica"
     },
     {
@@ -53714,64 +53803,6 @@
       "imageQuality": "imagem-ausente-ou-generica"
     },
     {
-      "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
-      "slug": "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
-      "title": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
-      "eyebrow": "cultura",
-      "date": "data recente",
-      "publishedAt": "data recente",
-      "category": "Cultura",
-      "categoryKey": "cultura",
-      "previewClass": "thumb-cultura",
-      "sourceName": "Fonte local",
-      "sourceUrl": "#",
-      "sourceLabel": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
-      "lede": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
-      "summary": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
-      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
-      "body": [
-        "A chamada publicada na capa remete a Fonte local, com recorte principal em cultura e leitura voltada ao que isso muda para o publico do portal.",
-        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
-      ],
-      "highlights": [
-        "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
-        "Fonte local",
-        "Cultura"
-      ],
-      "development": [
-        "Fallback montado a partir da chamada da home para o slug grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
-        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
-        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
-      ],
-      "imageUrl": "./assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "sourceImageUrl": "./assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "feedImageUrl": "./assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-      "imageFocus": "center 50%",
-      "imageFit": "",
-      "media": null,
-      "priority": 0,
-      "editorialPriority": "",
-      "crossSources": [
-        {
-          "name": "Fonte local",
-          "url": "#"
-        }
-      ],
-      "alternateSources": [
-        {
-          "name": "Fonte local",
-          "url": "#"
-        }
-      ],
-      "sourceCount": 1,
-      "alternateSlugs": [
-        "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato"
-      ],
-      "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
-      "imageQuality": "imagem-ausente-ou-generica"
-    },
-    {
       "id": "home-linked-victor-macario-viral",
       "slug": "victor-macario-viral",
       "title": "Vídeo bem editado, rosto conhecido e assunto local: a fórmula do viral acreano da semana",
@@ -53887,6 +53918,122 @@
       ],
       "originalImageUrl": "/assets/news-fallbacks/vazante-jurua-segue.svg",
       "imageQuality": "imagem-ausente-ou-generica"
+    },
+    {
+      "id": "home-linked-saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+      "slug": "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados",
+      "title": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+      "eyebrow": "saude",
+      "date": "data recente",
+      "publishedAt": "data recente",
+      "category": "Saúde",
+      "categoryKey": "saude",
+      "previewClass": "thumb-saude",
+      "sourceName": "Fonte local",
+      "sourceUrl": "#",
+      "sourceLabel": "Saúde, Governo e Agricultura concentram alterações de comissionados",
+      "lede": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+      "summary": "Rodada de decretos mostra rearranjo em áreas sensíveis da estrutura estadual.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+      "body": [
+        "A chamada publicada na capa remete a Fonte local, com recorte principal em saude e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "Saúde, Governo e Agricultura concentram alterações de comissionados",
+        "Fonte local",
+        "Saude"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+      ],
+      "imageUrl": "./assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "sourceImageUrl": "./assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "feedImageUrl": "./assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      "imageFocus": "center 50%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "Fonte local",
+          "url": "#"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "Fonte local",
+          "url": "#"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "saude-governo-e-agricultura-concentram-alteracoes-de-comissionados"
+      ],
+      "originalImageUrl": "/assets/news-fallbacks/saude-governo-e-agricultura-concentram-alteracoes-de-comissionados.svg",
+      "imageQuality": "imagem-ausente-ou-generica"
+    },
+    {
+      "id": "home-linked-grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
+      "slug": "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
+      "title": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+      "eyebrow": "cultura",
+      "date": "data recente",
+      "publishedAt": "data recente",
+      "category": "Cultura",
+      "categoryKey": "cultura",
+      "previewClass": "thumb-cultura",
+      "sourceName": "Fonte local",
+      "sourceUrl": "#",
+      "sourceLabel": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+      "lede": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
+      "summary": "Notas públicas reacendem a discussão sobre espaço, participação e representação na agenda cultural acreana.",
+      "analysis": "A chamada da home indica um assunto considerado relevante pelo portal e foi convertida em fallback legivel para impedir erro de abertura em grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
+      "body": [
+        "A chamada publicada na capa remete a Fonte local, com recorte principal em cultura e leitura voltada ao que isso muda para o publico do portal.",
+        "Esta materia foi reconstruida automaticamente a partir da chamada editorial da home para evitar quebra de leitura enquanto a ficha completa e sincronizada na base principal."
+      ],
+      "highlights": [
+        "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+        "Fonte local",
+        "Cultura"
+      ],
+      "development": [
+        "Fallback montado a partir da chamada da home para o slug grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato.",
+        "A recomendacao editorial e sincronizar depois a ficha completa com fonte, data, imagem e corpo integral.",
+        "Sem imagem fixa na chamada; a pagina pode seguir sem foto ate a fonte completa ser vinculada."
+      ],
+      "imageUrl": "./assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "sourceImageUrl": "./assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "feedImageUrl": "./assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+      "imageFocus": "center 50%",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "crossSources": [
+        {
+          "name": "Fonte local",
+          "url": "#"
+        }
+      ],
+      "alternateSources": [
+        {
+          "name": "Fonte local",
+          "url": "#"
+        }
+      ],
+      "sourceCount": 1,
+      "alternateSlugs": [
+        "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato"
+      ],
+      "originalImageUrl": "/assets/news-fallbacks/grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-dona.svg",
+      "imageQuality": "imagem-ausente-ou-generica"
     }
   ],
   "reports": [
@@ -53973,5 +54120,5 @@
       "count": 10
     }
   ],
-  "lastAutonomyFixAt": "2026-04-30T01:52:58.363Z"
+  "lastAutonomyFixAt": "2026-04-30T02:21:10.346Z"
 }
