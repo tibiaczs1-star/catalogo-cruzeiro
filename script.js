@@ -10383,7 +10383,9 @@ const hydrateSocialCards = (items = []) => {
   reserveSurfaceArticles("social", appliedArticles);
 };
 
-const hydrateStaticMediaSurfaces = async () => {
+const hydrateStaticMediaSurfaces = async (options = {}) => {
+  const deferCadernos = options.deferCadernos === true;
+
   if (thumbNodes.length > 0 && window.NEWS_MAP) {
     thumbNodes.forEach((node) => {
       const slugFromHref = getSlugFromLink(node.closest("a") || node);
@@ -10395,9 +10397,26 @@ const hydrateStaticMediaSurfaces = async () => {
   if (window.NEWS_MAP) {
     hydrateStaticThumbs(window.NEWS_MAP);
     hydrateSocialCards(window.NEWS_DATA || []);
-    await hydrateCadernoCards(window.NEWS_DATA || []);
-    hydrateEntertainmentSection(window.NEWS_DATA || []);
-    renderAcreRegionalHighlights(window.NEWS_DATA || []);
+
+    const hydrateSecondarySurfaces = () => {
+      hydrateEntertainmentSection(window.NEWS_DATA || []);
+      renderAcreRegionalHighlights(window.NEWS_DATA || []);
+    };
+
+    if (deferCadernos) {
+      window.setTimeout(hydrateSecondarySurfaces, 0);
+    } else {
+      hydrateSecondarySurfaces();
+    }
+
+    const hydrateCadernos = () => hydrateCadernoCards(window.NEWS_DATA || []);
+    if (deferCadernos) {
+      window.setTimeout(() => {
+        void hydrateCadernos().catch(() => {});
+      }, 180);
+    } else {
+      await hydrateCadernos();
+    }
   }
 
 };
@@ -10605,7 +10624,7 @@ const initialMergedNews = syncNewsDataset(initialStaticNews);
 ensureMobileHomeLeadLayout();
 reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(getHeroTourismDailyPool()));
 hydrateMosaicHero(initialMergedNews);
-void hydrateStaticMediaSurfaces();
+void hydrateStaticMediaSurfaces({ deferCadernos: true });
 initializeHeroTourismHero();
 if (heroDesktopBackdropMedia) {
   const handleHeroShellModeChange = () => {
@@ -13706,19 +13725,22 @@ const hydrateDynamicNews = async () => {
       "todos";
     hydrateMosaicHero(merged);
     renderWhatMattersNow(merged);
-    await hydrateStaticMediaSurfaces();
+    void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
     initializeHeroTourismHero();
-    await Promise.all([
-      renderDailyTrendingBuzz({ forceRefresh: true }),
-      renderDynamicMonthlyBuzz(),
-      renderCommunityTrendCard()
-    ]);
     renderRegionalPoliticsHighlights(merged);
-    await renderGlobalPoliticsHighlights({ forceRefresh: true });
     renderSidebarWidgets();
     renderRadar(activeFilter);
     updateLiveFeedItems(merged, { resetFilter: false });
     initializeLiveTicker();
+
+    window.setTimeout(() => {
+      void Promise.allSettled([
+        renderDailyTrendingBuzz(),
+        renderDynamicMonthlyBuzz(),
+        renderCommunityTrendCard(),
+        renderGlobalPoliticsHighlights()
+      ]);
+    }, 120);
   } catch (error) {
     // Mantem o fallback estatico quando a API nao estiver ligada.
   }
@@ -13741,28 +13763,38 @@ const hydrateCommentsFromApi = async () => {
   }
 };
 
-const scheduleHomeBackgroundHydration = () => {
-  const run = () => {
-    const execute = () => {
-      hydrateDynamicNews();
-      hydrateCommentsFromApi();
-      window.setInterval(hydrateDynamicNews, 300000);
-    };
+let homeBackgroundHydrationStarted = false;
+let homeBackgroundHydrationIntervalId = null;
 
-    if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(execute, { timeout: 1800 });
+const scheduleHomeBackgroundHydration = () => {
+  const execute = () => {
+    if (homeBackgroundHydrationStarted) {
       return;
     }
 
-    window.setTimeout(execute, 300);
+    homeBackgroundHydrationStarted = true;
+    void hydrateDynamicNews();
+    window.setTimeout(() => {
+      void hydrateCommentsFromApi();
+    }, 900);
+
+    if (!homeBackgroundHydrationIntervalId) {
+      homeBackgroundHydrationIntervalId = window.setInterval(() => {
+        void hydrateDynamicNews();
+      }, 300000);
+    }
   };
 
-  if (document.readyState === "complete") {
-    run();
+  const runSoon = () => {
+    execute();
+  };
+
+  if (document.readyState === "interactive" || document.readyState === "complete") {
+    runSoon();
     return;
   }
 
-  window.addEventListener("load", run, { once: true });
+  document.addEventListener("DOMContentLoaded", runSoon, { once: true });
 };
 
 const attachCommentSubmission = () => {
@@ -14252,11 +14284,15 @@ attachCommentSubmission();
 attachCommunitySignalFlow();
 attachSubscriptionSubmission();
 attachAgentMailFlow();
-renderDailyTrendingBuzz();
+scheduleHomeBackgroundHydration();
 renderWhatMattersNow(window.NEWS_DATA || []);
-renderDynamicMonthlyBuzz();
-renderCommunityTrendCard();
+window.setTimeout(() => {
+  void renderDailyTrendingBuzz();
+  void renderDynamicMonthlyBuzz();
+  void renderCommunityTrendCard();
+}, 320);
 scheduleTopicSurfaceRefresh();
 initializeLiveTicker();
-scheduleHomeBackgroundHydration();
-hydrateFoundersWallFromApi();
+window.setTimeout(() => {
+  void hydrateFoundersWallFromApi();
+}, 1600);
