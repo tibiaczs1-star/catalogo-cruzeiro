@@ -6835,6 +6835,41 @@ const getBuzzNetworkContexts = () => {
 };
 
 const getBuzzSocialEvidence = (article = {}) => {
+  const embeddedEvidence = article.socialEvidence || article.socialSignal || null;
+  if (embeddedEvidence) {
+    const embeddedNetworkText = normalizeText(
+      embeddedEvidence.network || embeddedEvidence.socialPlatform || embeddedEvidence.platform || ""
+    );
+    let embeddedNetwork = "";
+    if (/\b(facebook|fb\.com)\b/.test(embeddedNetworkText)) {
+      embeddedNetwork = "Facebook";
+    } else if (/\b(instagram|reels?|stories?)\b/.test(embeddedNetworkText)) {
+      embeddedNetwork = "Instagram";
+    } else if (/\b(tiktok)\b/.test(embeddedNetworkText)) {
+      embeddedNetwork = "TikTok";
+    } else if (/\b(youtube|shorts?)\b/.test(embeddedNetworkText)) {
+      embeddedNetwork = "YouTube";
+    } else if (/\b(x\/twitter|twitter|x\.com|getdaytrends|trends24)\b/.test(embeddedNetworkText)) {
+      embeddedNetwork = "X/Twitter";
+    }
+
+    const evidenceKind = embeddedEvidence.evidenceKind === "public-post" ? "public-post" : "trend-signal";
+    return {
+      hasSocialEvidence: evidenceKind === "public-post",
+      hasTrendSignal: true,
+      evidenceKind,
+      network: embeddedNetwork || embeddedEvidence.network || "Rede social",
+      signals:
+        evidenceKind === "public-post"
+          ? ["post público", "comentários", "engajamento"]
+          : ["assunto citado", "circulação pública", "sinal em checagem"],
+      engagement: Number(embeddedEvidence.engagement || 0),
+      sourceName: embeddedEvidence.sourceName || "",
+      sourceUrl: embeddedEvidence.sourceUrl || "",
+      title: embeddedEvidence.title || ""
+    };
+  }
+
   const platformText = normalizeText(article.socialPlatform || article.platform || article.network || "");
   const topicText = normalizeText(article.topicGroup || article.topic || article.networkHint || "");
   const sourceText = normalizeText(article.sourceName || article.sourceTitle || article.source || "");
@@ -6876,10 +6911,19 @@ const getBuzzSocialEvidence = (article = {}) => {
     "X/Twitter": ["tempo real", "debate", "volume público"]
   };
 
+  const evidenceKind = /\b(facebook-public|facebook-pages|facebook-posts)\b/.test(topicText)
+    ? "public-post"
+    : "trend-signal";
+
   return {
-    hasSocialEvidence: true,
+    hasSocialEvidence: evidenceKind === "public-post",
+    hasTrendSignal: true,
+    evidenceKind,
     network,
-    signals: socialSignals[network] || ["sinal público", "comentários", "compartilhamento"]
+    signals:
+      evidenceKind === "public-post"
+        ? socialSignals[network] || ["sinal público", "comentários", "compartilhamento"]
+        : ["assunto citado", "circulação pública", "sinal em checagem"]
   };
 };
 
@@ -6894,6 +6938,218 @@ const getNeutralBuzzNetworkContext = () => ({
   relevance: 58,
   hasSocialEvidence: false
 });
+
+const socialSignalMatchStopwords = new Set([
+  "a",
+  "ao",
+  "as",
+  "com",
+  "da",
+  "das",
+  "de",
+  "do",
+  "dos",
+  "e",
+  "educacao",
+  "em",
+  "hoje",
+  "instagram",
+  "facebook",
+  "local",
+  "na",
+  "nas",
+  "no",
+  "nos",
+  "o",
+  "os",
+  "para",
+  "por",
+  "publica",
+  "publico",
+  "rede",
+  "social",
+  "tema",
+  "trends",
+  "trend",
+  "twitter",
+  "x",
+  "acre",
+  "brasil"
+]);
+
+const isExternalTrendSignalArticle = (article = {}) => {
+  const topicText = normalizeText(article.topicGroup || article.topic || article.networkHint || "");
+  return (
+    article.externalSource === true &&
+    /\b(twitter-trends|instagram-hashtags|facebook-public|facebook-pages|facebook-posts)\b/.test(topicText)
+  );
+};
+
+const extractSocialSignalTerms = (item = {}) => {
+  const rawParts = [
+    item.title,
+    ...(Array.isArray(item.hashtags) ? item.hashtags : [])
+  ]
+    .filter(Boolean)
+    .map((part) =>
+      normalizeText(
+        String(part || "")
+          .replace(/^#/, "")
+          .replace(/([a-z])([A-Z])/g, "$1 $2")
+      )
+    )
+    .join(" ")
+    .split(/\s+/)
+    .map((part) => part.trim())
+    .filter((part) => part.length >= 3 && !socialSignalMatchStopwords.has(part));
+
+  return [...new Set(rawParts)].slice(0, 8);
+};
+
+const getSocialSignalArticleMatchScore = (signalItem = {}, article = {}, options = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  if (!normalizedArticle.title || isExternalTrendSignalArticle(normalizedArticle)) {
+    return -1;
+  }
+
+  const articleText = normalizeText(
+    [
+      normalizedArticle.title,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.category,
+      normalizedArticle.sourceName
+    ].join(" ")
+  );
+  const signalTerms = extractSocialSignalTerms(signalItem);
+  if (!signalTerms.length) {
+    return -1;
+  }
+
+  let hits = 0;
+  let strongHits = 0;
+  let score = 0;
+
+  signalTerms.forEach((term) => {
+    if (!articleText.includes(term)) {
+      return;
+    }
+    hits += 1;
+    score += term.length >= 8 ? 18 : term.length >= 6 ? 14 : 9;
+    if (term.length >= 6 && !/^(educacao|cultura|politica|economia|esporte)$/.test(term)) {
+      strongHits += 1;
+    }
+  });
+
+  if (!hits || (strongHits === 0 && hits < 2)) {
+    return -1;
+  }
+
+  const divisionText = normalizeText(signalItem.importanceDivision || signalItem.category || "");
+  if (divisionText && articleText.includes(divisionText)) {
+    score += 8;
+  }
+
+  if (/\b(cruzeiro do sul|jurua|juru[aá]|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauacá|rio branco)\b/.test(articleText)) {
+    score += 10;
+  }
+
+  if (options.strictLocal === true && !/\b(cruzeiro do sul|jurua|juru[aá]|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo)\b/.test(articleText)) {
+    score -= 14;
+  }
+
+  const engagement = Number(signalItem.facebookEngagement || 0);
+  if (engagement > 0) {
+    score += Math.min(24, Math.round(Math.log10(engagement + 1) * 10));
+  }
+
+  const ageHours = Math.max(0, (Date.now() - getArticlePublishedTime(normalizedArticle)) / 36e5);
+  if (ageHours <= 24) score += 10;
+  else if (ageHours <= 72) score += 6;
+  else if (ageHours > 168) score -= 10;
+
+  return score;
+};
+
+const attachSocialSignalToArticle = (article = {}, signalItem = {}, matchScore = 0) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  return {
+    ...normalizedArticle,
+    socialEvidence: {
+      title: signalItem.title || "",
+      summary: signalItem.summary || "",
+      network: signalItem.socialPlatform || signalItem.platform || "",
+      sourceName: signalItem.sourceName || "",
+      sourceUrl: signalItem.sourceUrl || signalItem.url || "",
+      topicGroup: signalItem.topicGroup || "",
+      hashtags: Array.isArray(signalItem.hashtags) ? signalItem.hashtags.slice(0, 4) : [],
+      publishedAt: signalItem.publishedAt || signalItem.date || "",
+      evidenceKind: /facebook-public|facebook-pages|facebook-posts/.test(normalizeText(signalItem.topicGroup || ""))
+        ? "public-post"
+        : "trend-signal",
+      engagement: Number(signalItem.facebookEngagement || 0),
+      matchScore
+    }
+  };
+};
+
+const buildSocialSignalLinkedArticles = (signalItems = [], articlePool = [], options = {}) => {
+  const safeLimit = Math.max(1, Math.min(12, Number(options.limit) || 6));
+  const minScore = Number(options.minScore || 28);
+  const candidates = dedupeNewsItems(articlePool)
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => {
+      const key = getArticleUsageKey(article);
+      return (
+        key &&
+        article.title &&
+        (article.sourceUrl || article.slug) &&
+        !isExternalTrendSignalArticle(article) &&
+        shouldUseNationalPoliticsInHotSurface(article)
+      );
+    });
+
+  const bestByArticleKey = new Map();
+
+  signalItems.forEach((signalItem) => {
+    let bestMatch = null;
+
+    candidates.forEach((article) => {
+      const score = getSocialSignalArticleMatchScore(signalItem, article, options);
+      if (score < minScore) {
+        return;
+      }
+
+      if (!bestMatch || score > bestMatch.score) {
+        bestMatch = { article, score };
+      }
+    });
+
+    if (!bestMatch) {
+      return;
+    }
+
+    const articleKey = getArticleUsageKey(bestMatch.article);
+    const enrichedArticle = attachSocialSignalToArticle(bestMatch.article, signalItem, bestMatch.score);
+    const previous = bestByArticleKey.get(articleKey);
+    if (!previous || (previous.socialEvidence?.matchScore || 0) < bestMatch.score) {
+      bestByArticleKey.set(articleKey, enrichedArticle);
+    }
+  });
+
+  return [...bestByArticleKey.values()]
+    .sort((left, right) => {
+      const matchDiff = (right.socialEvidence?.matchScore || 0) - (left.socialEvidence?.matchScore || 0);
+      if (matchDiff !== 0) {
+        return matchDiff;
+      }
+      return compareEditorialFlowArticles(left, right, {
+        scoreFn: getBuzzControversyScore,
+        imageBias: true
+      });
+    })
+    .slice(0, safeLimit);
+};
 
 const getBuzzFallbackItems = () => [
   ...trendingInfluencerBuzzPool.map((item) => ({
@@ -7445,6 +7701,56 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
   const sourceName = article.sourceName || article.sourceTitle || "fonte original";
   const subject = truncateCopy(article.title || article.topicGroup || "o caso em debate", 64);
   const hasSocialEvidence = networkContext.hasSocialEvidence === true;
+  const hasTrendSignal = networkContext.hasTrendSignal === true;
+  const evidenceKind = networkContext.evidenceKind || (hasSocialEvidence ? "public-post" : hasTrendSignal ? "trend-signal" : "editorial");
+  const baseSignalStrength = hasSocialEvidence
+    ? clampBuzzPercent(34 + Math.log10(Number(networkContext.engagement || 0) + 1) * 18 + (trustSignal - 60) * 0.16, 24, 92)
+    : hasTrendSignal
+      ? clampBuzzPercent(Number(networkContext.relevance || 58) + (trustSignal - 62) * 0.08, 24, 78)
+      : clampBuzzPercent(Math.max(trustSignal, utilitySignal) - 6, 24, 84);
+
+  if (evidenceKind !== "public-post") {
+    const journalisticVoices = [
+      {
+        label: "fonte",
+        text: `${sourceName} sustenta a notícia-base; o portal trata o link original como ponto de partida da leitura.`,
+        weight: clampBuzzPercent(baseSignalStrength + 14, 28, 86)
+      },
+      {
+        label: hasTrendSignal ? "sinal" : "checagem",
+        text: hasTrendSignal
+          ? `O tema apareceu em ${networkName}, mas isso entra como sinal inicial e não como aprovação pública concluída.`
+          : `Ainda não há leitura pública confiável nas redes; o card fica no radar editorial até surgir evidência verificável.`,
+        weight: clampBuzzPercent(baseSignalStrength, 24, 78)
+      },
+      {
+        label: "próximo passo",
+        text: `Cruzar impacto local, documento, serviço e fala oficial antes de resumir "${subject}" como polêmica consolidada.`,
+        weight: clampBuzzPercent(baseSignalStrength - 8, 20, 72)
+      }
+    ];
+
+    return {
+      meter: baseSignalStrength,
+      satisfaction: baseSignalStrength,
+      meterLabel: hasTrendSignal ? "força do sinal" : "relevância editorial",
+      kicker: hasTrendSignal ? `sinal em circulação em ${networkName.toLowerCase()}` : "radar editorial em checagem",
+      debateAxis: hasTrendSignal ? "circulação x impacto local" : "fonte x impacto local",
+      publicMood: hasTrendSignal ? "tema circulando, sem aprovação medida" : "fonte confirmada, sinal em espera",
+      captureLabel: hasTrendSignal ? "sinal público em checagem" : "fonte em acompanhamento",
+      signalLabel: hasTrendSignal ? `${networkName}: ${primarySignal}` : "fonte confirmada",
+      sourceContext: hasTrendSignal
+        ? `O tema apareceu em listas públicas de ${networkName}; ele só vira caso do portal quando encontra matéria real, data e efeito concreto para o leitor.`
+        : `${sourceName} sustenta a notícia. Sem sinal público verificável, o card não vende tendência nem opinião pronta.`,
+      agentContext:
+        "O que importa: ligar o sinal à notícia publicada, ao território e ao que realmente muda para quem lê.",
+      agentEvaluation: hasTrendSignal
+        ? "Próximo cuidado: não confundir assunto citado na rede com fato confirmado ou termômetro de aprovação."
+        : "Próximo cuidado: seguir na fonte e só subir o tom quando houver evidência pública verificável.",
+      voices: journalisticVoices
+    };
+  }
+
   const profiles = {
     employment: {
       base: 36,
@@ -7637,10 +7943,22 @@ const getDailyBuzzDisplayImageUrl = (article = {}, index = 0) => {
 };
 
 const getPublicSourceStatusBadge = (article = {}, networkContext = {}) => {
-  if (networkContext?.hasSocialEvidence === true || getBuzzSocialEvidence(article).hasSocialEvidence) {
+  const evidence =
+    networkContext && (networkContext.hasSocialEvidence === true || networkContext.hasTrendSignal === true)
+      ? networkContext
+      : getBuzzSocialEvidence(article);
+
+  if (evidence.hasSocialEvidence === true) {
     return {
       label: "sinal social real",
       className: "is-social-real"
+    };
+  }
+
+  if (evidence.hasTrendSignal === true) {
+    return {
+      label: "sinal em checagem",
+      className: "is-editorial-radar"
     };
   }
 
@@ -7673,6 +7991,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
   const networkContext = resolveBuzzNetworkContext(article, index);
   const pulse = buildBuzzAudiencePulse(article, networkContext, index, agentPulse);
   const hasSocialEvidence = networkContext.hasSocialEvidence === true;
+  const hasTrendSignal = networkContext.hasTrendSignal === true;
   const sourceStatus = getPublicSourceStatusBadge(article, networkContext);
   const photoUrl = getDailyBuzzDisplayImageUrl(article, index);
   const avatarUrl = sanitizeImageUrl(article.sourceImageUrl) || photoUrl;
@@ -7697,13 +8016,15 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
   );
   const networkLabel = hasSocialEvidence
     ? `${networkContext.network || "Rede"} • fonte pública`
-    : `radar editorial • caso ${index + 1}`;
-  const signalLine = hasSocialEvidence
+    : hasTrendSignal
+      ? `${networkContext.network || "Rede"} • sinal em checagem`
+      : `radar editorial • caso ${index + 1}`;
+  const signalLine = hasSocialEvidence || hasTrendSignal
     ? `sinal: ${pulse.signalLabel || "registro público"}`
     : `status: ${sourceStatus.label}`;
   const debateLine = `debate: ${pulse.debateAxis}`;
   const satisfactionPercent = clampBuzzPercent(pulse.satisfaction || pulse.meter || 50, 0, 100);
-  const meterLabel = hasSocialEvidence ? "satisfação pública" : "relevância editorial";
+  const meterLabel = pulse.meterLabel || (hasSocialEvidence ? "satisfação pública" : "relevância editorial");
   const voiceMarkup = (Array.isArray(pulse.voices) ? pulse.voices : [])
     .map(
       (voice) => `
@@ -7718,7 +8039,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
 
   return `
     <article class="trending-card influencer-buzz-card daily-buzz-card opinion-buzz-card ${
-      hasSocialEvidence ? "has-social-evidence" : "no-social-evidence"
+      hasSocialEvidence ? "has-social-evidence" : hasTrendSignal ? "has-trend-signal" : "no-social-evidence"
     } reveal ${
       index > 2 ? "delay-2" : index ? "delay-1" : ""
     }">
@@ -7733,7 +8054,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
         <div class="influencer-profile">
           <span class="influencer-avatar" style="--avatar-image:url('${escapeHtml(avatarUrl)}')"></span>
           <div>
-            <strong>${escapeHtml(hasSocialEvidence ? networkContext.network || "Rede social" : article.sourceName || "Radar editorial")}</strong>
+            <strong>${escapeHtml(article.sourceName || (hasSocialEvidence || hasTrendSignal ? networkContext.network || "Rede social" : "Radar editorial"))}</strong>
             <small>${escapeHtml(sourceMeta)}</small>
           </div>
         </div>
@@ -7754,7 +8075,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
 
       <div class="buzz-reaction-box buzz-public-capture" aria-label="Captação pública e contexto">
         <div class="buzz-capture-head">
-          <span>${hasSocialEvidence ? "captação pública diversa" : "radar editorial"}</span>
+          <span>${hasSocialEvidence ? "captação pública diversa" : hasTrendSignal ? "sinal público" : "radar editorial"}</span>
           <strong>${escapeHtml(pulse.captureLabel || "vozes separadas")}</strong>
         </div>
         <p class="buzz-source-context">${escapeHtml(pulse.sourceContext || "Sinais públicos separados antes da avaliação.")}</p>
@@ -7802,13 +8123,16 @@ const renderDailyTrendingBuzz = async (options = {}) => {
     fetchSocialTrendsCached(12, options),
     fetchDailyAgentPulseCached(options)
   ]);
+  const newsroomPool = dedupeNewsItems([
+    ...liveBuzzItems,
+    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
+  ]);
   const reservedKeys = buildReservedArticleKeys(["dailyBuzz"]);
   const reservedImages = buildReservedArticleImageKeys(["dailyBuzz"]);
-  const socialCases = dedupeNewsItems(socialTrendItems)
-    .map((item) => normalizeRuntimeArticle(item))
-    .filter((item) => item.title && (item.sourceUrl || item.slug))
-    .filter(shouldUseNationalPoliticsInHotSurface)
-    .filter((item) => getBuzzSocialEvidence(item).hasSocialEvidence);
+  const socialCases = buildSocialSignalLinkedArticles(socialTrendItems, newsroomPool, {
+    limit: 3,
+    minScore: 30
+  });
   const liveCases = dedupeNewsItems(liveBuzzItems)
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isBrazilBuzzArticle)
@@ -8204,8 +8528,16 @@ const pickMonthlyDynamicStories = async (options = {}) => {
     fetchSocialTrendsCached(12, options),
     fetchDailyAgentPulseCached(options)
   ]);
+  const socialLinkedStories = buildSocialSignalLinkedArticles(
+    socialTrendItems,
+    [...liveBuzzItems, ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])],
+    {
+      limit: 4,
+      minScore: 30
+    }
+  );
   const candidates = dedupeNewsItems([
-    ...socialTrendItems,
+    ...socialLinkedStories,
     ...liveBuzzItems,
     ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ])
@@ -8386,7 +8718,11 @@ const buildCommunityTrendHashtags = (items = []) => {
   const dynamicTags = [];
 
   items.forEach((item) => {
-    const providedTags = Array.isArray(item.hashtags) ? item.hashtags : [];
+    const providedTags = Array.isArray(item.hashtags)
+      ? item.hashtags
+      : Array.isArray(item.socialEvidence?.hashtags)
+        ? item.socialEvidence.hashtags
+        : [];
     providedTags.forEach((tag) => {
       const safeTag = tag.startsWith("#") ? tag : normalizeCommunityHashtag(tag);
       if (safeTag && isPortugueseCommunityTrendText(safeTag)) dynamicTags.push(safeTag);
@@ -8448,6 +8784,11 @@ const pickCommunityTrendTopics = async (options = {}) => {
       return right.score - left.score;
     })
     .map((entry) => entry.article);
+  const linkedTrendItems = buildSocialSignalLinkedArticles(externalTrendItems, liveItems, {
+    limit: 3,
+    minScore: 32,
+    strictLocal: true
+  });
 
   const selected = [];
   const used = new Set();
@@ -8460,7 +8801,7 @@ const pickCommunityTrendTopics = async (options = {}) => {
     selected.push(normalized);
   };
 
-  externalTrendItems.forEach(pushTrend);
+  linkedTrendItems.forEach(pushTrend);
   liveItems.forEach(pushTrend);
   pickDailyItems(communityTrendFallbackTopics, communityTrendFallbackTopics.length, 91).forEach(pushTrend);
 
@@ -8493,18 +8834,24 @@ const renderCommunityTrendCard = async (options = {}) => {
   }
 
   if (communityTrendUpdated) {
-    communityTrendUpdated.textContent = mainTopic.externalSource ? `internet ${updatedLabel}` : `atualizado ${updatedLabel}`;
+    communityTrendUpdated.textContent = mainTopic.socialEvidence ? `sinal ${updatedLabel}` : `atualizado ${updatedLabel}`;
   }
 
   if (communityTrendCaptions) {
     communityTrendCaptions.innerHTML = topics
       .slice(0, 3)
       .map((item, index) => {
-        const label = item.socialPlatform || item.category || item.sourceName || (index === 0 ? "top trend" : "em alta");
+        const label =
+          item.socialEvidence?.network ||
+          item.socialPlatform ||
+          item.category ||
+          item.sourceName ||
+          (index === 0 ? "top trend" : "em alta");
+        const captionText = item.socialEvidence?.title || item.title || "Assunto em alta no dia";
         return `
           <span>
             <b>${escapeHtml(truncateCopy(label, 22))}</b>
-            ${escapeHtml(truncateCopy(item.title || "Assunto em alta no dia", 58))}
+            ${escapeHtml(truncateCopy(captionText, 58))}
           </span>
         `;
       })
