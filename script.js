@@ -6879,6 +6879,20 @@ const getSocialOpinionStats = (source = {}) => {
   };
 };
 
+const getBuzzHeatWord = (value = 0) => {
+  const percent = clampBuzzPercent(value, 0, 100);
+  if (percent >= 72) return "quente";
+  if (percent >= 54) return "morno";
+  return "frio";
+};
+
+const getBuzzHeatFeminineWord = (value = 0) => {
+  const word = getBuzzHeatWord(value);
+  if (word === "frio") return "fria";
+  if (word === "morno") return "morna";
+  return word;
+};
+
 const getBuzzSocialEvidence = (article = {}) => {
   const embeddedEvidence = article.socialEvidence || article.socialSignal || null;
   if (embeddedEvidence) {
@@ -6979,8 +6993,8 @@ const getBuzzSocialEvidence = (article = {}) => {
 };
 
 const getNeutralBuzzNetworkContext = () => ({
-  network: "Radar editorial",
-  summary: "Notícia em acompanhamento pelo radar editorial; o card não trata o assunto como tendência sem prova pública.",
+  network: "Fonte monitorada",
+  summary: "Notícia em acompanhamento; o card não trata o assunto como tendência sem prova pública.",
   signals: ["fonte editorial"],
   engagement: 42,
   velocity: 36,
@@ -7640,7 +7654,7 @@ const buzzOpinionThemeDetails = {
     mood: "atenção moderada, leitura em disputa",
     climate: "interesse com dúvida organizada",
     context: "fonte, reação pública, utilidade e o que muda para o leitor",
-    route: "dar clima sem fingir certeza: explicar o que importa, para quem muda algo e o que falta checar"
+    route: "dar clima sem fingir certeza: explicar o que importa, para quem muda algo e qual pergunta ainda está em aberto"
   }
 };
 
@@ -7701,27 +7715,27 @@ const buildBuzzAgentVoice = (agent = {}, detail = buzzOpinionThemeDetails.defaul
   const sourceName = context.sourceName || "fonte original";
   const hasSocialEvidence = context.hasSocialEvidence === true;
   const roleLabels = {
-    editor: "ângulo editorial",
-    sources: "checagem de fonte",
+    editor: "por que importa",
+    sources: "base do caso",
     social: "clima de rede",
-    copy: "tom da chamada",
-    review: "cautela editorial",
-    design: "leitura visual",
-    sales: "valor percebido",
-    ceo: "prioridade da rodada"
+    copy: "tom público",
+    review: "o que não está claro",
+    design: "como aparece",
+    sales: "valor para o leitor",
+    ceo: "linha principal"
   };
   const label = roleLabels[role] || "leitura de agente";
   const texts = {
-    editor: `${agent.name} puxa a hierarquia: abrir por ${detail.context} e mostrar o que muda na leitura do público.`,
-    sources: `${agent.name} pede lastro: fonte, data e confirmação antes de transformar reação em certeza.`,
+    editor: `A conversa importa quando sai do barulho e mostra efeito real: ${detail.context}.`,
+    sources: `A base precisa ficar clara: quem publicou, quando publicou e qual fato sustenta a repercussão.`,
     social: hasSocialEvidence
-      ? `${agent.name} mede ${networkName}: ${detail.climate}; há conversa viva, mas apoio, ironia e cobrança precisam ficar separados.`
-      : `${agent.name} segura o rótulo: vira radar editorial até existir sinal público verificável.`,
-    copy: `${agent.name} segura o tom: chamada com energia, sem vender conclusão maior que o fato.`,
-    review: `${agent.name} corta excesso: opinião só entra depois de contexto, fonte e pergunta respondida.`,
-    design: `${agent.name} olha a tela: clima dos agentes precisa aparecer sem virar bloco pesado nem repetir a mesma frase.`,
-    sales: `${agent.name} pergunta valor: o leitor precisa sair sabendo o que ganha, perde ou decide.`,
-    ceo: `${agent.name} organiza prioridade: se ${sourceName} é ponto de partida, a equipe cruza fonte, rede e serviço antes do destaque.`
+      ? `${networkName} tem conversa viva; apoio, ironia e cobrança precisam aparecer separados.`
+      : `Ainda não há rede aberta suficiente para chamar isso de maioria do público.`,
+    copy: `A chamada pode ter clima, mas não pode vender conclusão maior que o fato publicado.`,
+    review: `O ponto fraco é o que a conversa ainda não respondeu ou ainda não mostrou em público.`,
+    design: `O leitor precisa bater o olho e entender se o caso está quente, morno ou frio.`,
+    sales: `O valor é deixar claro o que muda na rotina, no consumo, na agenda ou na imagem de quem está no centro.`,
+    ceo: `${sourceName} abre a base; a leitura pública só sobe de tom quando a reação aparece com sinal real.`
   };
 
   return {
@@ -7782,6 +7796,11 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
   const primarySignal = Array.isArray(networkContext.signals) ? networkContext.signals[0] || "comentários" : "comentários";
   const sourceName = article.sourceName || article.sourceTitle || "fonte original";
   const subject = truncateCopy(article.title || article.topicGroup || "o caso em debate", 64);
+  const haystack = normalizeText(
+    [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
+  );
+  const theme = inferBuzzOpinionTheme(haystack);
+  const detail = buzzOpinionThemeDetails[theme] || buzzOpinionThemeDetails.default;
   const hasSocialEvidence = networkContext.hasSocialEvidence === true;
   const hasTrendSignal = networkContext.hasTrendSignal === true;
   const evidenceKind = networkContext.evidenceKind || (hasSocialEvidence ? "public-post" : hasTrendSignal ? "trend-signal" : "editorial");
@@ -7792,7 +7811,7 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
     ? clampBuzzPercent(34 + Math.log10(Number(networkContext.engagement || 0) + 1) * 18 + (trustSignal - 60) * 0.16, 24, 92)
     : hasTrendSignal
       ? clampBuzzPercent(Number(networkContext.relevance || 58) + (trustSignal - 62) * 0.08, 24, 78)
-      : clampBuzzPercent(Math.max(trustSignal, utilitySignal) - 6, 24, 84);
+      : clampBuzzPercent(Math.max(trustSignal, utilitySignal) - 22, 24, 52);
   const socialTitle = truncateCopy(
     article.socialEvidence?.title || article.socialSignal?.title || article.title || "assunto nas redes",
     76
@@ -7808,42 +7827,47 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
   if (evidenceKind !== "public-post") {
     const journalisticVoices = [
       {
-        label: "tema",
-        text: `${socialTitle} entrou na conversa e só apareceu aqui porque foi ligado a uma matéria-base real.`,
+        label: "o que estão falando",
+        text: hasTrendSignal
+          ? `${socialTitle} aparece circulando em ${networkName}${hashtagLabel ? ` (${hashtagLabel})` : ""}; por enquanto é sinal de assunto, não maioria medida.`
+          : `${socialTitle} tem fonte confirmada, mas ainda não virou conversa pública forte nas redes abertas.`,
         weight: clampBuzzPercent(baseSignalStrength + 14, 28, 86)
       },
       {
-        label: hasTrendSignal ? "onde pegou" : "base",
+        label: "o que não está claro",
         text: hasTrendSignal
-          ? `O sinal aberto veio de ${networkName}${hashtagLabel ? ` (${hashtagLabel})` : ""}; isso mostra circulação, não maioria medida de opinião.`
-          : `${sourceName} sustenta a notícia. Sem trilha pública aberta suficiente, ela fica como radar e não como polêmica fechada.`,
+          ? `Ainda não dá para dizer se a reação é apoio, crítica, ironia ou só repetição do tema.`
+          : `Ainda falta conversa pública aberta para saber se o público comprou, rejeitou ou apenas observou o caso.`,
         weight: clampBuzzPercent(baseSignalStrength, 24, 78)
       },
       {
-        label: "o que falta",
-        text: `Ainda falta prova pública melhor para dizer se "${subject}" foi aprovado, rejeitado ou só citado sem força real.`,
+        label: "por que importa",
+        text: `Importa porque toca ${detail.context}; sem essa leitura, "${subject}" vira só manchete sem termômetro de rua.`,
         weight: clampBuzzPercent(baseSignalStrength - 8, 20, 72)
       }
     ];
+    const heatWord = getBuzzHeatWord(baseSignalStrength);
 
     return {
       meter: baseSignalStrength,
       satisfaction: baseSignalStrength,
-      meterLabel: hasTrendSignal ? "calor do assunto" : "força editorial",
-      kicker: hasTrendSignal ? `assunto em alta em ${networkName.toLowerCase()}` : "matéria-base em observação",
-      debateAxis: hasTrendSignal ? "assunto em alta x opinião medida" : "fonte x impacto local",
-      publicMood: hasTrendSignal ? "repercussão visível, maioria ainda não medida" : "fonte confirmada, sem conversa pública forte",
-      captureLabel: hasTrendSignal ? "assunto puxado por rede aberta" : "matéria confirmada, sem termômetro público",
-      signalLabel: hasTrendSignal ? `${networkName}: ${primarySignal}` : "fonte confirmada",
+      meterLabel: hasTrendSignal ? "calor do assunto" : "temperatura da conversa",
+      kicker: hasTrendSignal ? `assunto circulando em ${networkName.toLowerCase()}` : "caso em observação",
+      debateAxis: hasTrendSignal ? "falatório x opinião medida" : "fato confirmado x reação pública",
+      publicMood: hasTrendSignal
+        ? `clima ${heatWord}, maioria ainda não medida`
+        : `conversa ${getBuzzHeatFeminineWord(baseSignalStrength)} nas redes por enquanto`,
+      captureLabel: hasTrendSignal ? "sinal público captado" : "sem termômetro das redes ainda",
+      signalLabel: hasTrendSignal ? `${networkName}: ${primarySignal}` : "fonte confirmada, repercussão baixa",
       sourceContext: hasTrendSignal
-        ? `O tema apareceu em listas públicas de ${networkName} e foi amarrado a uma matéria real antes de entrar na home.`
-        : `${sourceName} sustenta a notícia. Sem conversa pública verificável, o card não vende aprovação nem rejeição.`,
+        ? `O tema apareceu em lista pública de ${networkName}; a notícia entra aqui como repercussão em aberto, não como aprovação do público.`
+        : `${sourceName} sustenta a notícia. Nas redes abertas, ainda não apareceu volume suficiente para medir apoio ou rejeição.`,
       agentContext: hasTrendSignal
-        ? "A leitura certa aqui é abrir a notícia ligada ao assunto antes de transformar o burburinho em conclusão."
-        : "O que importa: manter o caso como leitura de notícia até existir base pública aberta suficiente para virar conversa do dia.",
+        ? `O que importa: entender se o assunto só passou pela timeline ou se começa a mexer com ${detail.context}.`
+        : `O que importa: acompanhar se isso ganha conversa real, porque por enquanto a notícia existe, mas o público ainda não entrou no debate.`,
       agentEvaluation: hasTrendSignal
-        ? "Próximo cuidado: diferenciar assunto citado, calor da rede e aprovação real do público."
-        : "Próximo cuidado: seguir na fonte e só subir o tom quando houver conversa pública verificável.",
+        ? `Clima ${heatWord}: tem circulação, mas a maioria ainda não falou alto o bastante para cravar concordância ou rejeição.`
+        : `Clima ${heatWord}: sem termômetro público confiável ainda; vale como acompanhamento, não como polêmica fechada.`,
       voices: journalisticVoices
     };
   }
@@ -7862,6 +7886,7 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
         : negativeCount > positiveCount && negativeCount > neutralCount
           ? "rejeição maior na amostra lida"
           : "amostra dividida ou cautelosa";
+    const heatWord = getBuzzHeatWord(Math.max(approvalPercent, rejectionPercent, cautionPercent));
 
     return {
       meter: approvalPercent,
@@ -7873,11 +7898,11 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       publicMood: dominantMood,
       captureLabel: `${totalCount} comentários públicos lidos`,
       signalLabel: `${networkName}: comentários públicos`,
-      sourceContext: `${sourceName} sustenta a matéria-base; a leitura pública usa uma amostra real de comentários do post aberto.`,
+      sourceContext: `${sourceName} sustenta a informação; o termômetro abaixo vem de comentários públicos lidos no post aberto.`,
       agentContext:
-        "O que importa: ler a maioria da amostra sem soltar a matéria da mão e sem vender vontade absoluta do público.",
+        `O que estão dizendo: a amostra aponta ${dominantMood}, com apoio, cautela e rejeição separados para não misturar torcida com cobrança.`,
       agentEvaluation:
-        "Próximo cuidado: tratar o resultado como fotografia do dia; se a amostra crescer, o termômetro pode mudar.",
+        `Clima ${heatWord}: é fotografia do dia. Se novos comentários entrarem, o termômetro pode virar.`,
       voices: [
         {
           label: "apoio",
@@ -7908,25 +7933,25 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
     publicMood: "conversa real aberta, maioria ainda não lida",
     captureLabel: "post público com interação aberta",
     signalLabel: `${networkName}: ${primarySignal}`,
-    sourceContext: `${sourceName} sustenta a matéria-base e o post é público, mas ainda não há amostra suficiente de comentários para falar em maioria.`,
+    sourceContext: `${sourceName} sustenta a informação e o post é público, mas ainda não há comentários suficientes para falar em maioria.`,
     agentContext:
-      "O que importa: usar o calor como pista de repercussão e não como aprovação pronta do público.",
+      `O que importa: o caso já tem porta de entrada social, mas ainda precisa de comentário público para dizer se virou apoio, crítica ou curiosidade.`,
     agentEvaluation:
-      "Próximo cuidado: ler comentários públicos antes de chamar o caso de apoiado ou rejeitado.",
+      `Clima ${getBuzzHeatWord(baseSignalStrength)}: há movimento, mas o sentido da conversa ainda não está fechado.`,
     voices: [
       {
-        label: "post base",
-        text: `${socialTitle} puxou interação aberta e ficou ligado a uma matéria real antes de entrar na home.`,
+        label: "o que estão falando",
+        text: `${socialTitle} puxou interação aberta e ficou ligado a uma notícia real antes de entrar na home.`,
         weight: clampBuzzPercent(baseSignalStrength + 10, 28, 86)
       },
       {
-        label: "calor",
+        label: "o que não estão dizendo",
         text: `As interações mostram que o assunto pegou em ${networkName}, mas o volume sozinho não diz se a maioria aprovou ou rejeitou.`,
         weight: baseSignalStrength
       },
       {
-        label: "o que falta",
-        text: `Ainda falta leitura suficiente de comentários públicos para medir apoio, rejeição ou divisão real sobre "${subject}".`,
+        label: "por que importa",
+        text: `Sem ler os comentários, "${subject}" ainda é calor de repercussão, não sentença sobre a opinião do público.`,
         weight: clampBuzzPercent(baseSignalStrength - 8, 20, 72)
       }
     ]
@@ -7988,7 +8013,7 @@ const getPublicSourceStatusBadge = (article = {}, networkContext = {}) => {
   }
 
   return {
-    label: "radar editorial",
+    label: "em checagem",
     className: "is-editorial-radar"
   };
 };
@@ -8030,11 +8055,11 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
       : `${networkContext.network || "Rede"} • post público`
     : hasTrendSignal
       ? `${networkContext.network || "Rede"} • assunto em alta`
-      : `radar editorial • caso ${index + 1}`;
+      : `caso em observação • ${index + 1}`;
   const signalLine = hasSocialEvidence || hasTrendSignal
     ? `sinal: ${pulse.signalLabel || "registro público"}`
     : `status: ${sourceStatus.label}`;
-  const debateLine = `debate: ${pulse.debateAxis}`;
+  const debateLine = `pergunta: ${pulse.debateAxis}`;
   const satisfactionPercent = clampBuzzPercent(pulse.satisfaction || pulse.meter || 50, 0, 100);
   const meterLabel = pulse.meterLabel || (hasSocialEvidence ? "satisfação pública" : "relevância editorial");
   const voiceMarkup = (Array.isArray(pulse.voices) ? pulse.voices : [])
@@ -8066,7 +8091,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
         <div class="influencer-profile">
           <span class="influencer-avatar" style="--avatar-image:url('${escapeHtml(avatarUrl)}')"></span>
           <div>
-            <strong>${escapeHtml(article.sourceName || (hasSocialEvidence || hasTrendSignal ? networkContext.network || "Rede social" : "Radar editorial"))}</strong>
+            <strong>${escapeHtml(article.sourceName || (hasSocialEvidence || hasTrendSignal ? networkContext.network || "Rede social" : "Fonte monitorada"))}</strong>
             <small>${escapeHtml(sourceMeta)}</small>
           </div>
         </div>
@@ -8087,7 +8112,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
 
       <div class="buzz-reaction-box buzz-public-capture" aria-label="Captação pública e contexto">
         <div class="buzz-capture-head">
-          <span>${hasSocialEvidence ? (opinionSampleSize > 0 ? "conversa pública" : "post público") : hasTrendSignal ? "assunto em alta" : "radar editorial"}</span>
+          <span>${hasSocialEvidence ? (opinionSampleSize > 0 ? "conversa pública" : "post público") : hasTrendSignal ? "assunto em alta" : "sem maioria medida"}</span>
           <strong>${escapeHtml(pulse.captureLabel || "vozes separadas")}</strong>
         </div>
         <p class="buzz-source-context">${escapeHtml(pulse.sourceContext || "Sinais públicos separados antes da avaliação.")}</p>
@@ -8128,13 +8153,13 @@ const buildDailyBuzzEmptyState = (signalItems = []) => {
 
   return `
     <article class="trending-card influencer-buzz-card opinion-buzz-card buzz-empty-state reveal">
-      <span class="trend-badge hot">em observação</span>
+      <span class="trend-badge hot">monitoramento aberto</span>
       <div class="influencer-buzz-copy">
-        <p class="buzz-kicker">sem maioria pública medida por enquanto</p>
-        <h3>Esta área só sobe quando houver conversa pública real ligada a uma matéria-base.</h3>
+        <p class="buzz-kicker">sem caso quente medido por enquanto</p>
+        <h3>Nenhuma conversa pública juntou notícia-base e opinião suficiente para virar termômetro.</h3>
         <p>
-          Quando entrar post público aberto, comentário suficiente ou assunto com ligação clara à notícia,
-          o card volta com calor de repercussão e, se der para medir, termômetro de aprovação.
+          Assim que entrar post aberto, comentário público ou sinal social ligado a uma matéria real,
+          este bloco mostra o que estão falando, o que não aparece e se o clima está quente ou frio.
         </p>
       </div>
       <div class="buzz-inline-meta" aria-label="Assuntos monitorados agora">
@@ -8187,31 +8212,7 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   });
   const measuredCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind === "public-post");
   const signalCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind !== "public-post");
-  const liveCases = dedupeNewsItems(liveBuzzItems)
-    .map((item) => normalizeRuntimeArticle(item))
-    .filter(isConversationDrivenBuzzArticle)
-    .filter((item) => item.title && (item.sourceUrl || item.slug))
-    .sort((left, right) =>
-      compareEditorialFlowArticles(left, right, {
-        scoreFn: getBuzzControversyScore,
-        imageBias: true
-      })
-    )
-    .filter((item) => {
-      const key = getArticleUsageKey(item);
-      const imageKey = getArticleImageKey(item);
-      if (!key || reservedKeys.has(key) || (imageKey && reservedImages.has(imageKey))) {
-        return false;
-      }
-
-      reservedKeys.add(key);
-      if (imageKey) {
-        reservedImages.add(imageKey);
-      }
-      return true;
-    })
-    .slice(0, 3);
-  const selectedCases = dedupeNewsItems([...measuredCases, ...signalCases, ...liveCases]).slice(0, 6);
+  const selectedCases = dedupeNewsItems([...measuredCases, ...signalCases]).slice(0, 6);
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
   trendingBuzzGrid.innerHTML = selectedCases.length
