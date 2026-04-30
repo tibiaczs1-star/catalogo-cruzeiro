@@ -1,18 +1,7 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T14:05:00-05:00",
+  "lastUpdatedAt": "2026-04-30T11:48:09.881Z",
   "assets": [
-    {
-      "id": "online-local-sync-report-20260428",
-      "kind": "report-set",
-      "path": ".codex-temp/online-local-sync/",
-      "source": "workspace-generated",
-      "note": "Relatorios latest do sync online-local: JSON, Markdown e PDF gerados apos rotina com ok=true, review-team zerado e auditoria de imagens 360/360 ok.",
-      "linkedOrderIds": [
-        "2026-04-28-sync-online-local-home-updates"
-      ],
-      "createdAt": "2026-04-28T14:05:00-05:00"
-    },
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
       "kind": "image-set",
@@ -642,11 +631,9 @@
       "kind": "report",
       "path": ".codex-temp/real-agents/latest-run.md",
       "source": "workspace",
-      "note": "Primeira rodada operacional dos agentes reais do projeto",
-      "linkedOrderIds": [
-        "2026-04-21-listar-todos-os-agentes-subagentes-equipes-locais-prompts-do-copilot-agentes-vis"
-      ],
-      "createdAt": "2026-04-21T20:34:44.876Z"
+      "note": "Relatorio Markdown da reuniao dos agentes: 181 agentes ativos, 5 escritorios, 0 falhas, 0 exhausted, 181 entregas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T21:44:32.972Z"
     },
     {
       "id": "nerd-hud-mobile-fixed-full-png",
@@ -1660,49 +1647,248 @@
       "createdAt": "2026-04-28T18:27:16.157Z"
     },
     {
-      "id": "pubpaid-traffic-vehicles-5f-v2-png",
+      "id": "5cb96b2a-7226-4cfc-ad10-1958bca26ca5-png",
       "kind": "image",
-      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-5f-v2.png",
+      "path": "C:\\Users\\junio\\OneDrive\\Imagens\\5cb96b2a-7226-4cfc-ad10-1958bca26ca5.png",
       "source": "workspace",
-      "note": "Atlas V2 de trafego PubPaid: 10 veiculos, 5 frames por veiculo, carros/motos sem cortes.",
+      "note": "Referencia corporal/pose e passarela enviada pelo usuario para modelo digital fashion; usar como apoio de silhueta, sem sexualizar nem alterar proporcoes.",
       "linkedOrderIds": [],
-      "createdAt": "2026-04-28T18:37:53.001Z"
+      "createdAt": "2026-04-29T17:39:46.229Z"
     },
     {
-      "id": "pubpaid-traffic-sprites-demo-html",
+      "id": "2419a1ea-7bf7-4880-ad31-c79569eceddb-jpeg",
+      "kind": "image",
+      "path": "C:\\Users\\junio\\OneDrive\\Imagens\\2419a1ea-7bf7-4880-ad31-c79569eceddb.jpeg",
+      "source": "workspace",
+      "note": "Referencia de corpo, rosto e postura sentada/selfie enviada pelo usuario; usar para fidelidade de silhueta e acabamento natural do rosto.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T17:39:46.253Z"
+    },
+    {
+      "id": "e-x-t-e-r-n-a-l-i-m-a-g-e-t-o-i-m-a-g-e-681faab6-3df5-4b19-9bc1-7570c4e8b29f-png",
+      "kind": "image",
+      "path": "C:\\Users\\junio\\OneDrive\\Imagens\\-e-x-t-e-r-n-a-l_-i-m-a-g-e_-t-o_-i-m-a-g-e-681faab6-3df5-4b19-9bc1-7570c4e8b29f.png",
+      "source": "workspace",
+      "note": "Referencia corporal frontal enviada pelo usuario para preservar proporcoes reais em novas fotos, com uso editorial discreto.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T17:39:46.273Z"
+    },
+    {
+      "id": "pubpaid-traffic-pixel-triage-validation-20260429",
+      "kind": "image-set",
+      "path": "output/web-game/pubpaid-traffic-check/",
+      "source": "workspace",
+      "note": "Validacao local PubPaid 2.0 em 2026-04-29: triagem do transito pixel art/artistic-playable, calçada livre de colisao, faixa com colisao real, sem re quando veiculo esta perto demais e spawn suprimido/alternado em faixa bloqueada.",
+      "linkedOrderIds": [
+        "2026-04-29-corrigir-rumo-da-retomada-pubpaid-2-0-manter-tudo-local-teste-sem-deploy-subida-"
+      ],
+      "createdAt": "2026-04-29T18:13:34.415Z"
+    },
+    {
+      "id": "desktop-open-chipfix-home-20260429-png",
+      "kind": "screenshot",
+      "path": "output/playwright/desktop-open-chipfix-home-20260429.png",
+      "source": "workspace",
+      "note": "Validação desktop da abertura: faixa Mesa ao vivo com categorias inteiras e sem loader/splash visível.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T18:28:23.129Z"
+    },
+    {
+      "id": "desktop-open-chipfix-radar-20260429-png",
+      "kind": "screenshot",
+      "path": "output/playwright/desktop-open-chipfix-radar-20260429.png",
+      "source": "workspace",
+      "note": "Validação desktop do radar: chips e plaquinhas de categoria sem corte de palavra.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T18:28:23.146Z"
+    },
+    {
+      "id": "home-agents-consolefix-validation-20260429",
+      "kind": "image",
+      "path": ".codex-temp/home-agents-check.png",
+      "source": "workspace",
+      "note": "Captura Playwright da home desktop apos corrigir console file/http, Mesa ao vivo dinamica e bloco de agentes com leituras diversas.",
+      "linkedOrderIds": [
+        "2026-04-29-explicar-e-corrigir-erros-de-console-ao-abrir-a-home-e-refazer-bloco-de-avaliaca"
+      ],
+      "createdAt": "2026-04-29T19:33:37.108Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-html-20260429",
       "kind": "html",
-      "path": "pubpaid-traffic-sprites-demo.html",
+      "path": "pubpaid-traffic-preview.html",
       "source": "workspace",
-      "note": "Demo de avaliacao dos sprites V2 de carros/motos PubPaid com 5 frames e rodas animadas.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-04-28T18:37:53.109Z"
+      "note": "Pagina HTML local para avaliacao em tempo real do transito PubPaid 2.0, com troca entre pacote Atual runtime e Pixel art-pass, controles de escala/velocidade/filtro e link para o jogo real.",
+      "linkedOrderIds": [
+        "2026-04-29-criar-uma-pagina-html-local-de-avaliacao-em-tempo-real-do-transito-pixel-art-do-"
+      ],
+      "createdAt": "2026-04-29T21:14:13.584Z"
     },
     {
-      "id": "pubpaid-traffic-vehicles-5f-v2-preview-png",
+      "id": "pubpaid-traffic-preview-runtime-shot-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-runtime-20260429.png",
+      "source": "workspace",
+      "note": "Captura da pagina de avaliacao mostrando o pacote Atual runtime do transito PubPaid 2.0.",
+      "linkedOrderIds": [
+        "2026-04-29-criar-uma-pagina-html-local-de-avaliacao-em-tempo-real-do-transito-pixel-art-do-"
+      ],
+      "createdAt": "2026-04-29T21:14:13.588Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-pixel-shot-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-pixel-20260429.png",
+      "source": "workspace",
+      "note": "Captura da pagina de avaliacao mostrando o pacote Pixel art-pass do transito PubPaid 2.0.",
+      "linkedOrderIds": [
+        "2026-04-29-criar-uma-pagina-html-local-de-avaliacao-em-tempo-real-do-transito-pixel-art-do-"
+      ],
+      "createdAt": "2026-04-29T21:14:13.630Z"
+    },
+    {
+      "id": "latest-report-pdf",
+      "kind": "report",
+      "path": ".codex-temp/online-local-sync/latest-report.pdf",
+      "source": "workspace",
+      "note": "Relatorio PDF da sincronizacao online-local da rodada geral de 2026-04-30: 554 noticias, review 0 e auditoria de imagens ok.",
+      "linkedOrderIds": [
+        "2026-04-30-rodada-completa-de-publicacao-sync-reuniao-geral-dos-agentes-revisao-de-fluxo-si"
+      ],
+      "createdAt": "2026-04-30T11:48:09.881Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-runtime-wheelrider-v2-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-runtime-wheelrider-v2-20260429.png",
+      "source": "workspace",
+      "note": "Preview local do pacote Atual runtime apos remover giro artificial desalinhado das rodas e reforcar piloto das motos sem deixar capacete gigante.",
+      "linkedOrderIds": [
+        "2026-04-29-corrigir-visual-do-transito-pubpaid-alinhar-efeito-animacao-das-rodas-em-cima-da"
+      ],
+      "createdAt": "2026-04-29T21:45:12.476Z"
+    },
+    {
+      "id": "pubpaid-traffic-check-wheelrider-20260429",
+      "kind": "image-set",
+      "path": "output/web-game/pubpaid-traffic-check/",
+      "source": "workspace",
+      "note": "Triagem PubPaid rerodada apos correcoes visuais de rodas/pilotos: calçada livre, faixa colide, veiculo para antes do player, sem re e spawn suprimido/alternado.",
+      "linkedOrderIds": [
+        "2026-04-29-corrigir-visual-do-transito-pubpaid-alinhar-efeito-animacao-das-rodas-em-cima-da"
+      ],
+      "createdAt": "2026-04-29T21:45:12.596Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-pixel-wheelrider-v2-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-pixel-wheelrider-v2-20260429.png",
+      "source": "workspace",
+      "note": "Preview local do pacote Pixel art-pass apos aumentar contraste do piloto das motos para nao sumir no fundo escuro.",
+      "linkedOrderIds": [
+        "2026-04-29-corrigir-visual-do-transito-pubpaid-alinhar-efeito-animacao-das-rodas-em-cima-da"
+      ],
+      "createdAt": "2026-04-29T21:45:12.642Z"
+    },
+    {
+      "id": "pubpaid-traffic-solidalpha-runtime-preview-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-solidalpha-runtime-20260429.png",
+      "source": "workspace",
+      "note": "Bancada HTML do transito PubPaid apos correção definitiva de transparencias: pacote Atual runtime sem glow/sombra translucida e sheets com semi alpha zerado.",
+      "linkedOrderIds": [
+        "2026-04-29-resolver-definitivamente-transparencias-halos-no-transito-pubpaid-sprites-e-pilo"
+      ],
+      "createdAt": "2026-04-29T22:09:21.198Z"
+    },
+    {
+      "id": "pubpaid-traffic-solidalpha-pixel-preview-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-solidalpha-pixel-20260429.png",
+      "source": "workspace",
+      "note": "Bancada HTML do transito PubPaid apos hard-alpha do Pixel art-pass: zero pixels semi-transparentes e sem sombra gerada dentro do sheet.",
+      "linkedOrderIds": [
+        "2026-04-29-resolver-definitivamente-transparencias-halos-no-transito-pubpaid-sprites-e-pilo"
+      ],
+      "createdAt": "2026-04-29T22:09:21.202Z"
+    },
+    {
+      "id": "pubpaid-traffic-solidalpha-game-check-20260429",
+      "kind": "image-set",
+      "path": "output/web-game/pubpaid-traffic-check/",
+      "source": "workspace",
+      "note": "Triagem do jogo real apos remover overlays translucidos do trafego: mecanica continua passando e captura mostra veiculos sem halo/glow atravessando a carroceria.",
+      "linkedOrderIds": [
+        "2026-04-29-resolver-definitivamente-transparencias-halos-no-transito-pubpaid-sprites-e-pilo"
+      ],
+      "createdAt": "2026-04-29T22:09:21.256Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-solidholes-pixel-20260429-png",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-solidholes-pixel-20260429.png",
+      "source": "workspace",
+      "note": "Bancada HTML do trânsito PubPaid após fechamento de alpha interno: Pixel art-pass com rodas/janelas/pilotos sólidos e sem buracos alpha.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T22:25:23.276Z"
+    },
+    {
+      "id": "home-news-capture-dedup-v2-20260429-png",
+      "kind": "screenshot",
+      "path": "output/playwright/home-news-capture-dedup-v2-20260429.png",
+      "source": "workspace",
+      "note": "Validacao Playwright da home apos reativar captacao: NEWS_DATA com noticias de 29/04, hero/card diario sem repeticao visivel e console limpo.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-29T22:38:12.743Z"
+    },
+    {
+      "id": "pubpaid-traffic-preview-redraw-left-3f-v2-lowered-20260429-png",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-traffic-preview-redraw-left-3f-v2-lowered-20260429.png",
+      "source": "workspace",
+      "note": "Bancada HTML do trânsito PubPaid com o pacote Novo redesenho 3f selecionado, direção direita para esquerda.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-30T02:05:50.003Z"
+    },
+    {
+      "id": "pubpaid-traffic-redraw-left-3f-v1-png",
+      "kind": "spritesheet",
+      "path": "assets/pubpaid/traffic/pubpaid-traffic-redraw-left-3f-v1.png",
+      "source": "workspace",
+      "note": "Novo spritesheet PubPaid redesenhado do zero: direção direita para esquerda apenas, 10 veículos, 3 frames por veículo, rodas com centro fixo, alpha interno zerado.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-30T02:05:50.051Z"
+    },
+    {
+      "id": "home-editorial-supervisor-final-check-20260429",
+      "kind": "screenshot",
+      "path": "output/playwright/home-editorial-supervisor-20260429-final-check.png",
+      "source": "workspace",
+      "note": "Validacao Playwright final da home apos fluxo de supervisao editorial por data/regiao/divisao: duplicatas 0 e nenhum card 26/04 nas areas auditadas.",
+      "linkedOrderIds": [
+        "2026-04-30-supervisionar-todas-as-areas-da-home-por-data-regiao-divisao-e-sem-repeticao"
+      ],
+      "createdAt": "2026-04-30T02:23:26.620Z"
+    },
+    {
+      "id": "home-live-dom-supervisor-20260430-v3-png",
+      "kind": "screenshot",
+      "path": "output/playwright/home-live-dom-supervisor-20260430-v3.png",
+      "source": "workspace",
+      "note": "Validação renderizada da home após reserva separada da hero superior: 79 cards auditados, stale26=0 e duplicatas=0 entre hero/mosaico/grades.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-04-30T02:52:07.208Z"
+    },
+    {
+      "id": "home-social-truth-facebook-20260430-png",
       "kind": "image",
-      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-5f-v2-preview.png",
+      "path": "output/playwright/home-social-truth-facebook-20260430.png",
       "source": "workspace",
-      "note": "Preview sheet dos sprites V2 de trafego PubPaid para avaliacao visual.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-04-28T18:37:53.286Z"
-    },
-    {
-      "id": "pubpaid-traffic-vehicles-pixelart-5f-v3-png",
-      "kind": "image",
-      "path": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-pixelart-5f-v3.png",
-      "source": "workspace",
-      "note": "Atlas PubPaid trafego V3 feito pixel-a-pixel em matriz 96x48, 5 frames, sem canvas/forma desenhada.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-04-28T18:46:06.311Z"
-    },
-    {
-      "id": "vehicles-v3-pixelart",
-      "kind": "directory",
-      "path": "assets/pubpaid/traffic/vehicles-v3-pixelart",
-      "source": "workspace",
-      "note": "Sheets individuais V3 pixel art para avaliacao: carros e motos com piloto integrado, 5 frames por veiculo.",
-      "linkedOrderIds": [],
-      "createdAt": "2026-04-28T18:46:06.530Z"
+      "note": "Validação visual da home após correção de Tendências & Conversas: sem tarefa interna e com sinais sociais reais priorizados.",
+      "linkedOrderIds": [
+        "2026-04-30-corrigir-tendencias-conversas-com-sinais-sociais-reais-facebook-publico-configur"
+      ],
+      "createdAt": "2026-04-30T03:14:20.025Z"
     }
   ]
 }

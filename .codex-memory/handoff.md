@@ -1,16 +1,13 @@
 # Handoff
 
-Updated: 2026-04-28T14:42:00-05:00
+Updated: 2026-04-30T12:20:00-05:00
 
-Rodada atual: usuario pediu corrigir somente no mobile o bloco `Fundadores`, porque a copy parecia editorial e os cards exigiam arrastar. Use a arvore limpa `.codex-temp/deploy-home-sync` para deploy. Nao use a worktree principal suja para publicar, pois ela tem PubPaid local-only e outras pendencias.
+Rodada geral em fechamento. O usuario pediu subir a pagina, sincronizar noticias/subsites, ordenar reuniao geral dos agentes, estudar fontes e publicar. Foram criados os prompts `PROMPT_CAPTACAO_SOCIAL_FACEBOOK_TENDENCIAS_2026-04-30.md` e `PROMPT_REUNIAO_GERAL_FLUXO_SITE_SUBSITES_2026-04-30.md`.
 
-Alteracoes: `index.html` so recebeu cache-bust de `premium-clarity.css` e `script.js`; texto/estrutura desktop do bloco foi preservado. `premium-clarity.css` adiciona regras dentro de `@media (max-width: 760px)` para transformar a faixa em destaque unico, sem scroll horizontal. `script.js` adiciona `initializeMobileFoundersSpotlight`, que muda copy/labels e alterna cards apenas quando `matchMedia("(max-width: 760px)")` esta ativo; ao sair do mobile, restaura os textos/cards originais.
+Principais mudancas: `script.js` usa `/api/social-trends` antes de buzz comum, so rotula Instagram/Facebook/X quando ha evidencia social, removeu tarefas internas dos cards publicos e corrigiu Capa Especial para priorizar noticias do dia antes de lotes antigos. `server.js` ganhou captacao Facebook por Graph API configuravel e classificacao de tendencias por divisao. `arquivo-noticias.js` limpa markup/atributos em cards do arquivo.
 
-Validacoes: `node --check script.js`, brace-balance em `premium-clarity.css`, `styles.css`, `styles-late-overrides.css` e `mobile-home-final.css`, checagem estatica confirmando que a copy original do desktop continua no HTML, e `npm run review:team` com `totalIssues=0`.
+Validacoes feitas: `npm run sync:online-local` ok com 554 noticias e review 0; `npm run review:team` ok; `node --check` nos JS publicos; smoke HTTP em home, subsites e APIs; Playwright final com `hasRotinas=false`, `hasFakeEscuta=false` e `stale26Matches=[]`.
 
-## Next
+PubPaid continua fora de commit/deploy por regra do usuario. Nao incluir `data/heartbeats.json`, `data/visits.json`, `data/image-preview-cache.json`, `progress.md` ou arquivos `pubpaid*` no pacote desta publicacao.
 
-- Stage exato: `index.html`, `premium-clarity.css`, `script.js`, `CODEX_MEMORY.md`, `.codex-memory/current-state.md`, `.codex-memory/handoff.md` e `.codex-memory/orders.json`.
-- Commitar e enviar `HEAD:main`.
-- Verificar producao com a home, o aviso de rodape e os cache-busts recentes.
-- PubPaid segue local-only ate nova autorizacao explicita.
+Proximo passo: commitar o pacote publico e enviar para `render-target HEAD:main`; depois relatar o commit/deploy e lembrar que Facebook real precisa das variaveis `FACEBOOK_GRAPH_ACCESS_TOKEN` e `FACEBOOK_PUBLIC_PAGE_IDS`.

@@ -91,9 +91,38 @@ function stripTags(value = "") {
 
 function normalizePublicText(value) {
   return stripTags(value)
+    .replace(/<!\[CDATA\[|\]\]>/gi, " ")
     .replace(/https?:\/\/\S+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function fallbackIncompletePublicText(kind, item) {
+  const sourceName = deriveSourceName(item) || "Fonte monitorada";
+  const title = String(item?.title || item?.sourceLabel || "a atualizacao").trim();
+  return `${sourceName} publicou uma atualização sobre ${title}. O portal mantém o link da fonte original para acompanhamento completo.`;
+}
+
+function repairIncompletePublicText(value, kind, item) {
+  if (!["lede", "summary", "description", "displaySummary"].includes(kind)) return value;
+  const hasBrokenMarkup = /\]\]>|<!\[CDATA\[/i.test(String(value || ""));
+  if (hasBrokenMarkup) {
+    return fallbackIncompletePublicText(kind, item);
+  }
+
+  const text = normalizePublicText(value);
+  if (text.length < 80 || /[.!?…]$/.test(text)) return value;
+
+  const tail = (text.match(/([\p{L}\p{N}]+)$/u) || [])[1] || "";
+  const connectorTail = /^(?:a|o|e|da|de|do|das|dos|na|no|nas|nos|em|por|para|com|sem)$/i.test(tail);
+  if (tail.length > 2 && !connectorTail) return value;
+
+  const sentenceEnd = Math.max(text.lastIndexOf("."), text.lastIndexOf("!"), text.lastIndexOf("?"));
+  if (sentenceEnd >= 60) {
+    return text.slice(0, sentenceEnd + 1).trim();
+  }
+
+  return fallbackIncompletePublicText(kind, item);
 }
 
 function publicTextLooksEnglish(value) {
@@ -234,7 +263,16 @@ function inferPublicTitle(item) {
     if (known) return known[1];
   }
   const sourceName = deriveSourceName(item);
-  return sourceName ? `Atualização internacional de ${sourceName}` : "Atualização internacional";
+  const timestamp = Date.parse(item?.publishedAt || item?.createdAt || item?.date || "");
+  const timeLabel = Number.isNaN(timestamp)
+    ? String(item?.slug || item?.id || "").slice(0, 8)
+    : new Intl.DateTimeFormat("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "America/Rio_Branco"
+      }).format(new Date(timestamp));
+  const suffix = timeLabel ? ` - ${timeLabel}` : "";
+  return sourceName ? `Atualização internacional de ${sourceName}${suffix}` : `Atualização internacional${suffix}`;
 }
 
 function ensurePublicLabels(item) {
@@ -291,9 +329,10 @@ function sanitizeEnglishSourceFields(item) {
 
 function sanitizeText(value, kind, item) {
   if (typeof value !== "string") return value;
-  const trimmed = value.trim();
+  const repaired = repairIncompletePublicText(value, kind, item);
+  const trimmed = String(repaired || "").trim();
   if (!trimmed) return value;
-  if (!publicTextLooksEnglish(trimmed)) return value;
+  if (!publicTextLooksEnglish(trimmed)) return repaired;
 
   const translated = translateKnownEnglishText(trimmed, kind);
   if (translated) return translated;

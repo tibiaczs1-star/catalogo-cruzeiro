@@ -1,73 +1,56 @@
 {
   "ok": true,
-  "updatedAt": "2026-04-29T00:07:52.428Z",
+  "updatedAt": "2026-04-30T11:47:50.233Z",
   "items": [
     {
-      "id": "getdaytrends-brazil-futebol-2-0",
-      "title": "Futebol 2.0",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Futebol 2.0.",
-      "category": "X/Twitter",
-      "sourceName": "GetDayTrends Brasil",
-      "sourceUrl": "https://getdaytrends.com/brazil/",
-      "publishedAt": "2026-04-29T00:07:52.078Z",
-      "date": "2026-04-29T00:07:52.078Z",
-      "externalSource": true,
-      "socialPlatform": "X/Twitter",
-      "coverageLayer": "brasil",
-      "topicGroup": "twitter-trends",
-      "hashtags": [
-        "#Futebol"
-      ]
-    },
-    {
-      "id": "trends24-brazil-governo-da-censura",
-      "title": "GOVERNO DA CENSURA",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: GOVERNO DA CENSURA.",
+      "id": "trends24-brazil-alex-brasil",
+      "title": "Alex Brasil",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Alex Brasil.",
       "category": "X/Twitter",
       "sourceName": "Trends24 Brasil",
       "sourceUrl": "https://trends24.in/brazil/",
-      "publishedAt": "2026-04-29T00:07:50.505Z",
-      "date": "2026-04-29T00:07:50.505Z",
+      "publishedAt": "2026-04-30T11:47:48.313Z",
+      "date": "2026-04-30T11:47:48.313Z",
       "externalSource": true,
       "socialPlatform": "X/Twitter",
       "coverageLayer": "brasil",
       "topicGroup": "twitter-trends",
       "hashtags": [
-        "#GovernoDaCensura"
+        "#AlexBrasil"
       ]
     },
     {
-      "id": "getdaytrends-brazil-hours-view-details-44-futebol-2-0",
-      "title": "hours View details 44 Futebol 2.0",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: hours View details 44 Futebol 2.0.",
-      "category": "X/Twitter",
-      "sourceName": "GetDayTrends Brasil",
-      "sourceUrl": "https://getdaytrends.com/brazil/",
-      "publishedAt": "2026-04-29T00:07:52.078Z",
-      "date": "2026-04-29T00:07:52.078Z",
-      "externalSource": true,
-      "socialPlatform": "X/Twitter",
-      "coverageLayer": "brasil",
-      "topicGroup": "twitter-trends",
-      "hashtags": [
-        "#HoursViewDetails44"
-      ]
-    },
-    {
-      "id": "trends24-brazil-som-brasil",
-      "title": "Som Brasil",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Som Brasil.",
+      "id": "trends24-brazil-educacao",
+      "title": "Educação",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Educação.",
       "category": "X/Twitter",
       "sourceName": "Trends24 Brasil",
       "sourceUrl": "https://trends24.in/brazil/",
-      "publishedAt": "2026-04-29T00:07:50.505Z",
-      "date": "2026-04-29T00:07:50.505Z",
+      "publishedAt": "2026-04-30T11:47:48.313Z",
+      "date": "2026-04-30T11:47:48.313Z",
       "externalSource": true,
       "socialPlatform": "X/Twitter",
       "coverageLayer": "brasil",
       "topicGroup": "twitter-trends",
       "hashtags": [
-        "#SomBrasil"
+        "#Educacao"
+      ]
+    },
+    {
+      "id": "trends24-brazil-ganha-o-brasil",
+      "title": "Ganha o Brasil",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Ganha o Brasil.",
+      "category": "X/Twitter",
+      "sourceName": "Trends24 Brasil",
+      "sourceUrl": "https://trends24.in/brazil/",
+      "publishedAt": "2026-04-30T11:47:48.313Z",
+      "date": "2026-04-30T11:47:48.313Z",
+      "externalSource": true,
+      "socialPlatform": "X/Twitter",
+      "coverageLayer": "brasil",
+      "topicGroup": "twitter-trends",
+      "hashtags": [
+        "#GanhaBrasil"
       ]
     },
     {
@@ -77,8 +60,8 @@
       "category": "Instagram",
       "sourceName": "Best Hashtags Acre",
       "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-04-29T00:07:52.426Z",
-      "date": "2026-04-29T00:07:52.426Z",
+      "publishedAt": "2026-04-30T11:47:50.232Z",
+      "date": "2026-04-30T11:47:50.232Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
@@ -94,8 +77,8 @@
       "category": "Instagram",
       "sourceName": "Best Hashtags Acre",
       "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-04-29T00:07:52.426Z",
-      "date": "2026-04-29T00:07:52.426Z",
+      "publishedAt": "2026-04-30T11:47:50.232Z",
+      "date": "2026-04-30T11:47:50.232Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
@@ -111,8 +94,8 @@
       "category": "Instagram",
       "sourceName": "Best Hashtags Acre",
       "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-04-29T00:07:52.426Z",
-      "date": "2026-04-29T00:07:52.426Z",
+      "publishedAt": "2026-04-30T11:47:50.232Z",
+      "date": "2026-04-30T11:47:50.232Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
@@ -128,8 +111,8 @@
       "category": "Instagram",
       "sourceName": "Best Hashtags Brasil",
       "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-04-29T00:07:51.676Z",
-      "date": "2026-04-29T00:07:51.676Z",
+      "publishedAt": "2026-04-30T11:47:49.980Z",
+      "date": "2026-04-30T11:47:49.980Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
@@ -145,8 +128,8 @@
       "category": "Instagram",
       "sourceName": "Best Hashtags Brasil",
       "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-04-29T00:07:51.676Z",
-      "date": "2026-04-29T00:07:51.676Z",
+      "publishedAt": "2026-04-30T11:47:49.980Z",
+      "date": "2026-04-30T11:47:49.980Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
@@ -162,8 +145,8 @@
       "category": "Instagram",
       "sourceName": "Best Hashtags Brasil",
       "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-04-29T00:07:51.676Z",
-      "date": "2026-04-29T00:07:51.676Z",
+      "publishedAt": "2026-04-30T11:47:49.980Z",
+      "date": "2026-04-30T11:47:49.980Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
@@ -178,7 +161,7 @@
       "source": "getdaytrends-brazil",
       "platform": "X/Twitter",
       "ok": true,
-      "count": 2,
+      "count": 0,
       "url": "https://getdaytrends.com/brazil/"
     },
     {

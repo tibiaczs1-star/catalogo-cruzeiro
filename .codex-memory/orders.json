@@ -1,78 +1,7 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-28T14:42:00-05:00",
+  "lastUpdatedAt": "2026-04-30T03:22:22.813Z",
   "orders": [
-    {
-      "id": "2026-04-28-founders-mobile-rotator",
-      "createdAt": "2026-04-28T14:42:00-05:00",
-      "updatedAt": "2026-04-28T14:42:00-05:00",
-      "status": "completed-deploy-ready",
-      "source": "chat",
-      "rawRequest": "vc vai mexer so no mobile",
-      "summary": "Corrigir apenas no mobile o bloco de fundadores/apoiadores, trocando a linguagem editorial por copy publica e fazendo os apoiadores alternarem automaticamente sem trilho arrastavel.",
-      "normalizedTasks": [
-        "preservar texto e estrutura desktop do bloco fundadores",
-        "aplicar copy mobile para apoiadores via matchMedia max-width 760px",
-        "trocar o trilho arrastavel por destaque rotativo automatico no mobile",
-        "manter restauracao de textos e cards ao sair do breakpoint mobile",
-        "validar sintaxe, CSS e review-team"
-      ],
-      "tags": [
-        "home",
-        "mobile",
-        "founders",
-        "apoiadores",
-        "frontend"
-      ],
-      "filesTouched": [
-        "index.html",
-        "premium-clarity.css",
-        "script.js"
-      ],
-      "assetRefs": [],
-      "notes": "Desktop preservado: index.html mudou apenas cache-bust. Mobile usa CSS em @media max-width 760px e JS gated por matchMedia. npm run review:team totalIssues=0."
-    },
-    {
-      "id": "2026-04-28-sync-online-local-home-updates",
-      "createdAt": "2026-04-28T14:05:00-05:00",
-      "updatedAt": "2026-04-28T14:12:00-05:00",
-      "status": "completed-deploy-ready",
-      "source": "chat",
-      "rawRequest": "OK AGORA ATUALIZE DIREITO E SINCRONIZA",
-      "summary": "Rodar a rotina online-local em arvore limpa, sincronizar noticias/agentes/revisoes e preparar deploy sem misturar PubPaid local-only.",
-      "normalizedTasks": [
-        "rodar npm run sync:online-local na arvore limpa baseada em origin/main",
-        "promover o gerador de PDF exigido pela rotina",
-        "sincronizar dados reais de noticias, auditoria de imagens, agentes e escritorio",
-        "validar sintaxe dos scripts principais",
-        "commitar e enviar main sem incluir PubPaid local-only"
-      ],
-      "tags": [
-        "sync",
-        "deploy",
-        "home",
-        "noticias",
-        "agentes"
-      ],
-      "filesTouched": [
-        ".codex-agents/registry.json",
-        "data/news-image-focus-audit.json",
-        "data/office-orders.json",
-        "data/re-rodada-dia-geral-report.json",
-        "data/real-agents-actions.json",
-        "data/runtime-news.json",
-        "scripts/write-online-local-sync-pdf.js",
-        "data/article-integrity-report.json",
-        "data/image-preview-cache.json",
-        "data/social-trends-cache.json",
-        "data/topic-feed-buzz.json",
-        "data/topic-feed-economy.json"
-      ],
-      "assetRefs": [
-        "online-local-sync-report-20260428"
-      ],
-      "notes": "Sync passou com ok=true: 360 noticias, 0 missing, 54 imagens reparadas, review-team totalIssues=0, auditoria de imagens 360/360 ok e runtime com 181 agentes/5 escritorios. PubPaid permanece fora do deploy. Segunda conferencia promoveu caches publicos mais novos: article-integrity, image-preview, social-trends, topic-feed-buzz e topic-feed-economy; runtime-news e office-orders locais estavam mais antigos que main e foram preservados no main."
-    },
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
       "createdAt": "2026-04-28T15:01:55.754Z",
@@ -8481,13 +8410,13 @@
       "notes": ""
     },
     {
-      "id": "2026-04-28-refazer-sprites-de-carros-motos-pubpaid-veiculos-sem-cortes-motoristas-integrado",
-      "createdAt": "2026-04-28T18:30:18.783Z",
-      "updatedAt": "2026-04-28T18:30:18.783Z",
+      "id": "2026-04-29-corrigir-a-branch-para-nao-enviar-nada-de-pubpaid-substituir-commit-contaminado-",
+      "createdAt": "2026-04-29T17:17:21.695Z",
+      "updatedAt": "2026-04-29T17:17:21.695Z",
       "status": "open",
       "source": "chat",
-      "rawRequest": "as sprites que deveriam montar as rodas e os motoristas estão horriveis, refaça tudo, os carros e motos e ponha motoristas direto nas motos no mesmo estilo artistico... sem separação e faça as rodas serem animadas com 5 sprites ou seja dentro da propria imagem que anima os automoveis, e..... algunsa carros estão cortados, refaça eles sem cortes, ou seja, vc cortou as imagens que eram as sprites, corrija e faça tudo pra min avaliar antes me dando em html , todas essas imagens criadas pra ver animadas, como num pequeno site de demo",
-      "summary": "Refazer sprites de carros/motos PubPaid: veículos sem cortes, motoristas integrados nas motos, rodas animadas em 5 frames dentro das próprias sprite sheets, e criar HTML de demo para avaliação antes de integrar.",
+      "rawRequest": "nao e pra manda nada do pup paid",
+      "summary": "Corrigir a branch para nao enviar nada de PubPaid; substituir commit contaminado por commit limpo sem caminhos nem texto PubPaid no diff.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
@@ -8496,17 +8425,405 @@
       "notes": ""
     },
     {
-      "id": "2026-04-28-feedback-pubpaid-trafego-v2-sprites-gerados-nao-parecem-pixel-art-refazer-como-p",
-      "createdAt": "2026-04-28T18:39:36.994Z",
-      "updatedAt": "2026-04-28T18:39:36.994Z",
+      "id": "2026-04-29-gerar-nova-rodada-de-fotos-realistas-preservando-identidade-e-corpo-com-base-nas",
+      "createdAt": "2026-04-29T17:39:46.213Z",
+      "updatedAt": "2026-04-29T17:39:46.213Z",
       "status": "open",
       "source": "chat",
-      "rawRequest": "cara isso nao e pixel art.",
-      "summary": "Feedback PubPaid trafego V2: sprites gerados nao parecem pixel art; refazer como pixel art real com grade nativa pequena, blocos duros e sem formas arredondadas.",
+      "rawRequest": "agora vou manda fotos do corpo pra vc registrar , faça o corpo mais parecido e use ambientes sem sem mar, procure ambientes e fotos de cruzeiro do sul acre, use resolução boa e tire as imperfeições do rosto que de pra disfarçar use todas as fotos que fizemos e que mandamos",
+      "summary": "Gerar nova rodada de fotos realistas preservando identidade e corpo com base nas novas referências, sem mar, usando cenários inspirados em Cruzeiro do Sul Acre e retoque natural do rosto.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],
       "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-retomar-pubpaid-2-0-com-foco-em-continuar-sem-travar-validar-fluxo-real-e-corrig",
+      "createdAt": "2026-04-29T17:45:03.953Z",
+      "updatedAt": "2026-04-29T17:45:03.953Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos continuar com o projeto pubpaid 2.0 e tente nao travar por favor dessa vez",
+      "summary": "Retomar PubPaid 2.0 com foco em continuar sem travar, validar fluxo real e corrigir problemas locais.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-corrigir-rodada-de-imagem-porque-o-rosto-mudou-usar-uma-foto-base-como-ancora-e-",
+      "createdAt": "2026-04-29T17:58:10.738Z",
+      "updatedAt": "2026-04-29T17:58:10.738Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vc mudou o rsto e nao pode",
+      "summary": "Corrigir rodada de imagem porque o rosto mudou; usar uma foto base como âncora e preservar exatamente nariz, olhos, boca, mandíbula e expressão.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-corrigir-rumo-da-retomada-pubpaid-2-0-manter-tudo-local-teste-sem-deploy-subida-",
+      "createdAt": "2026-04-29T18:00:05.500Z",
+      "updatedAt": "2026-04-29T18:00:05.500Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "é só pra retomar o projeto, agente nao sobe ele, ele ta em teste e isso é regra global; paramos na triagem do transito em pixel art",
+      "summary": "Corrigir rumo da retomada PubPaid 2.0: manter tudo local/teste, sem deploy/subida, e voltar ao ponto real parado na triagem do trânsito em pixel art.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-corrigir-abertura-desktop-da-home-reduzir-lentidao-confusao-inicial-e-consertar-",
+      "createdAt": "2026-04-29T18:07:25.646Z",
+      "updatedAt": "2026-04-29T18:07:25.646Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ta muito lento a abertura do site, e confusa, e o pop up de carregamento ta errado, vamos sair dessa confusão, estou falando do desktop por enquanto",
+      "summary": "Corrigir abertura desktop da home: reduzir lentidao/confusao inicial e consertar/remover popup de carregamento errado.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-corrigir-chips-abas-da-home-no-desktop-para-nunca-cortar-palavras-como-esporte-p",
+      "createdAt": "2026-04-29T18:09:17.408Z",
+      "updatedAt": "2026-04-29T18:09:17.408Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "aproveite e nao deixe isso acontecer corta a palavra nessa area, tipo sport, polici ... e um erro de iniciante",
+      "summary": "Corrigir chips/abas da home no desktop para nunca cortar palavras como Esporte, Policia e Cotidiano; ajustar junto com a simplificacao da abertura desktop.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-criar-uma-pagina-html-local-de-avaliacao-em-tempo-real-do-transito-pixel-art-do-",
+      "createdAt": "2026-04-29T18:23:07.440Z",
+      "updatedAt": "2026-04-29T18:23:07.440Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "entao me mostre pra min avaliar em tempo real num site html para que eu veja como estao",
+      "summary": "Criar uma pagina HTML local de avaliacao em tempo real do transito pixel art do PubPaid 2.0, sem deploy/subida.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-traffic-preview.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "local",
+        "traffic",
+        "preview"
+      ],
+      "nextSteps": [
+        "Abrir a pagina local para avaliacao visual do usuario."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-corrigir-mesa-ao-vivo-manter-dinamica-rotativa-e-diversificada-sem-congelar-em-e",
+      "createdAt": "2026-04-29T18:33:37.499Z",
+      "updatedAt": "2026-04-29T18:33:37.499Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vc entendeu isso errado, eu so disse pra vc nao deixa as palavras serem cortadas faltando uma ou duas letras, nao pra por esporte em tudo, essa mesa ao vivo temque ser dinamica",
+      "summary": "Corrigir Mesa ao vivo: manter dinamica/rotativa e diversificada, sem congelar em Esporte, mas impedir corte de palavras nas categorias.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-explicar-e-corrigir-erros-de-console-ao-abrir-a-home-e-refazer-bloco-de-avaliaca",
+      "createdAt": "2026-04-29T18:37:28.883Z",
+      "updatedAt": "2026-04-29T18:37:28.883Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "que erros sao esses --- na segunda foto eu pedi pros agentes reais nossos 200 agentes verem as opinioes e darem um clima sobre o topico, em vez disso eles estão repetindo as mesmas coisas sem inteligencia nem diversidade nenhuma.",
+      "summary": "Explicar e corrigir erros de console ao abrir a home, e refazer bloco de avaliação dos agentes para usar opiniões diversas dos agentes reais, com clima/inteligência e sem repetição genérica.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-corrigir-visual-do-transito-pubpaid-alinhar-efeito-animacao-das-rodas-em-cima-da",
+      "createdAt": "2026-04-29T21:27:32.391Z",
+      "updatedAt": "2026-04-29T21:27:32.391Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "AS RODAS ESTÃO COM ALGUMEFEITO MAIS NAO EMCIMA DA RODA, E AS MOTOS, A TRANPÁRENCIA TA FAZENDO O MOTORISTA SUMIR",
+      "summary": "Corrigir visual do transito PubPaid: alinhar efeito/animacao das rodas em cima das rodas e reforcar piloto das motos que some por transparencia/contraste.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "assets/pubpaid/traffic",
+        "scripts/pubpaid-build-traffic-spritesheet.py",
+        "pubpaid-traffic-preview.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "traffic",
+        "visual",
+        "pixel-art"
+      ],
+      "nextSteps": [
+        "Regenerar/validar preview local sem deploy."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-criar-commit-da-rodada-da-home-testavel-em-http-127-0-0-1-3000-skipintro-1-inclu",
+      "createdAt": "2026-04-29T21:32:33.815Z",
+      "updatedAt": "2026-04-29T21:32:33.815Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça o comit",
+      "summary": "Criar commit da rodada da home testavel em http://127.0.0.1:3000/?skipIntro=1, incluindo o backend novo dos readers e os seis arquivos indicados pelo usuario.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-criar-commit-com-o-restante-das-alteracoes-locais-pendentes-apos-o-commit-da-hom",
+      "createdAt": "2026-04-29T21:34:42.145Z",
+      "updatedAt": "2026-04-29T21:34:42.145Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça o comit",
+      "summary": "Criar commit com o restante das alterações locais pendentes após o commit da home/readers, incluindo PubPaid, caches editoriais, agentes e memória estruturada.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-rodar-uma-reuniao-geral-online-local-dos-agentes-para-verificar-se-todos-os-agen",
+      "createdAt": "2026-04-29T21:43:04.855Z",
+      "updatedAt": "2026-04-29T21:43:04.855Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça uma reunião geral online pra ver se todos os nossos agentes estao ativos",
+      "summary": "Rodar uma reunião geral online/local dos agentes para verificar se todos os agentes e escritórios estão ativos e gerar/ler o relatório de status.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-verificar-se-os-agentes-estao-realmente-executando-em-processo-daemon-e-se-ha-ev",
+      "createdAt": "2026-04-29T21:45:48.755Z",
+      "updatedAt": "2026-04-29T21:45:48.755Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "verifique se eles estão realmente rodando e atras de noticias",
+      "summary": "Verificar se os agentes estão realmente executando em processo/daemon e se há evidência de busca ou atualização de notícias online, não apenas relatório gerado sob demanda.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-resolver-definitivamente-transparencias-halos-no-transito-pubpaid-sprites-e-pilo",
+      "createdAt": "2026-04-29T21:54:44.159Z",
+      "updatedAt": "2026-04-29T21:54:44.159Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "resolva de vez esse problema de transparencias",
+      "summary": "Resolver definitivamente transparencias/halos no transito PubPaid: sprites e pilotos opacos, sem glow/sombra semi-transparente atravessando veiculos.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "scripts/build-pubpaid-playable-traffic-sheet.py",
+        "scripts/build-pubpaid-pixel-vehicles-art-pass-v1.js",
+        "assets/pubpaid/traffic"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "pubpaid",
+        "traffic",
+        "visual",
+        "alpha"
+      ],
+      "nextSteps": [
+        "Hard-alpha dos sheets",
+        "remover efeitos translucidos do runtime e validar preview/jogo."
+      ],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-subir-a-rotina-automatica-dos-agentes-para-o-ambiente-online-para-que-a-busca-de",
+      "createdAt": "2026-04-29T21:55:35.049Z",
+      "updatedAt": "2026-04-29T21:55:35.049Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "suba a rotina",
+      "summary": "Subir a rotina automática dos agentes para o ambiente online, para que a busca de notícias e o ciclo dos agentes não dependam apenas do daemon local.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-rodar-captacao-geral-do-site-para-atualizar-hero-e-areas-dinamicas-com-noticias-",
+      "createdAt": "2026-04-29T22:15:16.566Z",
+      "updatedAt": "2026-04-29T22:15:16.566Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "a hero nao ta se atualizando diarimmente, ou seja rode uma captção geral no site pra atualizar as noticias e atualizar toda parte dinamica com coisas novas e de hoje seguindo o fluxo do mais novo ao meais velho se sobra espaço e claro e sem reopetição o fluxo que haviamos conversado",
+      "summary": "Rodar captacao geral do site para atualizar hero e areas dinamicas com noticias de hoje, em ordem do mais novo ao mais velho, sem repeticao e usando fallback so se sobrar espaco.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-reativar-rodar-agentes-de-captacao-de-noticias-porque-a-home-ainda-mostra-destaq",
+      "createdAt": "2026-04-29T22:16:30.342Z",
+      "updatedAt": "2026-04-29T22:16:30.342Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "mande os agentes capta noticias, eles tao parados, porque hoje ja e dia 29 e la ta pra dia 26 os destaques e a maioria das noticias, então n esta avendo procura de noticias novas",
+      "summary": "Reativar/rodar agentes de captação de notícias porque a home ainda mostra destaques de 26/04 em 29/04; atualizar notícias novas e validar hero/destaques com conteúdo do dia.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-29-executar-prompt-premium-do-transito-pubpaid-regenerar-normalizar-sprites-de-veic",
+      "createdAt": "2026-04-29T22:24:51.387Z",
+      "updatedAt": "2026-04-29T22:24:51.387Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "execulte; executar prompt premium de sprites 2D 32-bit de veiculos para PubPaid, com rodas animadas, motorista de moto visivel e sem transparencia interna",
+      "summary": "Executar prompt premium do trânsito PubPaid: regenerar/normalizar sprites de veículos com alpha externo apenas, sem buracos internos em rodas, janelas, carroceria ou piloto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-30-redesenhar-o-transito-pubpaid-do-zero-sem-reutilizar-pacote-defeituoso-com-veicu",
+      "createdAt": "2026-04-30T02:05:49.658Z",
+      "updatedAt": "2026-04-30T02:05:49.658Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "redesenha tudo, nada de reusar o que deu defeito; roda em 3 sprites por carro funcionando da direita para esquerda e só; usar prompt anterior, contornos e corrigir tudo",
+      "summary": "Redesenhar o trânsito PubPaid do zero, sem reutilizar pacote defeituoso, com veículos left-only, 3 frames por veículo, rodas com centro fixo, contornos fortes, alpha externo apenas e integração local para avaliação.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-30-supervisionar-todas-as-areas-da-home-por-data-regiao-divisao-e-sem-repeticao",
+      "createdAt": "2026-04-30T02:23:26.620Z",
+      "updatedAt": "2026-04-30T02:23:26.620Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora que vc entendeu que uma area deu defeito supervicione todas as outras sempre por data, o que se trata a divisão, priorizar cruzeiro - vale do jurua - depois acre ... depois o resto sempre.... em qualquer tipo de assunto, em todas as areas, sem reptções, ou seja trate areas individualmente com prioridade mais evite repetir algo em outra area a nao ser que seja assunto dubio... faça um prompt e um fluxo pra seguir pra podermos finalmente descansar",
+      "summary": "Criar e aplicar prompt/fluxo de supervisao editorial para todas as areas dinamicas da home: data primeiro, depois Cruzeiro do Sul, Vale do Jurua, Acre e resto; cada area respeita sua divisao, usa reserva de artigos e evita repeticao salvo assunto dubio.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "PROMPT_SUPERVISAO_EDITORIAL_DATA_REGIAO_2026-04-29.md",
+        "script.js",
+        "server.js",
+        "scripts/capture-latest-news.js",
+        "scripts/re-rodada-dia-geral.js"
+      ],
+      "assetRefs": [
+        "home-editorial-supervisor-final-check-20260429"
+      ],
+      "tags": [
+        "home",
+        "noticias",
+        "supervisao-editorial"
+      ],
+      "nextSteps": [
+        "Conferir visualmente no navegador real e subir/deployar se aprovado."
+      ],
+      "notes": "Playwright final: duplicatas 0, stale 26/04 0 nas areas auditadas; review:team totalIssues=0."
+    },
+    {
+      "id": "2026-04-30-corrigir-tendencias-conversas-com-sinais-sociais-reais-facebook-publico-configur",
+      "createdAt": "2026-04-30T03:14:13.863Z",
+      "updatedAt": "2026-04-30T03:14:13.863Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "inclua captacao das noticias mais quentes do Facebook, corrija Tendencias & Conversas para nao fingir escuta social, remova tarefas internas dos cards publicos e explique se a IA parecia offline/doida",
+      "summary": "Corrigir Tendencias & Conversas com sinais sociais reais, Facebook publico configuravel e fallback honesto",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "social",
+        "facebook",
+        "tendencias"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-30-rodada-completa-de-publicacao-sync-reuniao-geral-dos-agentes-revisao-de-fluxo-si",
+      "createdAt": "2026-04-30T03:22:22.813Z",
+      "updatedAt": "2026-04-30T03:22:22.813Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "suba a pagina, sincronize tudo e atualize; de ordem aos agentes para reunião geral, estudar jornais/fontes, dar ideias sobre fluxo e o que nao faz sentido ou falta no website; atualizar subsites antes do commit; mandar tudo para o ar; criar prompts claros; retornar relatorio resumido aqui",
+      "summary": "Rodada completa de publicação: sync, reunião geral dos agentes, revisão de fluxo/site/subsites, prompts, commit e deploy",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "deploy",
+        "sync",
+        "agentes",
+        "subsites",
+        "home"
+      ],
       "nextSteps": [],
       "notes": ""
     }

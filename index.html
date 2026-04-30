@@ -28,29 +28,23 @@
     />
     <meta name="twitter:image" content="{{SITE_URL}}/assets/og-cover.svg" />
     <link rel="canonical" href="{{SITE_URL}}/" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
-    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <link rel="manifest" href="./site.webmanifest" />
     <link rel="preload" as="image" href="./assets/logo-czs.svg" type="image/svg+xml" fetchpriority="high" />
-    <link rel="prefetch" as="image" href="./assets/founders-cafe-pack-static.jpg" />
-    <link rel="prefetch" as="image" href="./assets/founders-grupo-as-logo.jpeg" />
-    <link rel="prefetch" as="image" href="./assets/founders-geane-logo-optimized.png" />
-    <link rel="prefetch" as="image" href="./assets/founders-recommencer-logo.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="./assets/founders-cafe-pack-static.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/founders-grupo-as-logo.jpeg" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/founders-geane-logo-optimized.png" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/founders-recommencer-logo.svg" type="image/svg+xml" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@500;600;700;800&family=Sora:wght@400;500;600;700&display=swap"
-      rel="preload"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      rel="stylesheet"
     />
     <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Outfit:wght@500;600;700;800&family=Sora:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
       <style>
         .logo-splash {
           display: none !important;
@@ -66,7 +60,7 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260429-speed-open1" />
+    <link rel="stylesheet" href="./styles.css?v=20260429-public-opinion1" />
   <link rel="stylesheet" href="./styles-late-overrides.css?v=20260422split-a" />
   <link rel="stylesheet" href="admin-menu.css?v=20260411k" />
   <link rel="stylesheet" href="acre-photo-cards.css?v=20260411m" />
@@ -76,15 +70,15 @@
   <link rel="stylesheet" href="sala-redacao-real.css?v=20260414q" />
   <link rel="stylesheet" href="photo-layout-fix.css?v=20260411ab" />
   <link rel="stylesheet" href="agentes-newsroom-hero.css?v=20260428-mosaic-publica1" />
-  <link rel="stylesheet" href="startup-experience.css?v=20260427-popup-illustration-console1" />
+  <link rel="stylesheet" href="startup-experience.css?v=20260429-mobile-founder1" />
   <link rel="stylesheet" href="./insiders-crowd-march.css?v=20260426caption-outside" />
   <link rel="stylesheet" href="pro-design.css?v=20260420hero-visiblefix" />
   <link rel="stylesheet" href="news-photo-fix.css?v=20260415a" />
   <link rel="stylesheet" href="deploy-stability.css?v=20260413a" />
   <link rel="stylesheet" href="./modern-launch.css?v=20260415d" />
-  <link rel="stylesheet" href="./mobile-home-final.css?v=20260429-entertainment-read1" />
+  <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
   <link rel="stylesheet" href="./home-header-blue-restore.css?v=20260422a" />
-  <link rel="stylesheet" href="./premium-clarity.css?v=20260428-founders-rotator1" />
+  <link rel="stylesheet" href="./premium-clarity.css?v=20260430-public-sync1" />
 </head>
   <body class="editorial-home founder-prelude-pending">
     <div class="logo-splash" aria-hidden="true">
@@ -488,6 +482,15 @@
                       <small data-hero-office-photo-category>Cobertura local</small>
                       <strong data-hero-office-photo-title>Atualização do Vale do Juruá</strong>
                     </span>
+                  </div>
+                  <div class="hero-office-tv" data-hero-office-tv-frame aria-label="TV com destaques captados">
+                    <canvas
+                      class="hero-office-tv-canvas"
+                      data-hero-office-tv
+                      width="320"
+                      height="190"
+                    >Destaques captados</canvas>
+                    <span class="hero-office-tv-caption" data-hero-office-tv-caption>Destaques captados</span>
                   </div>
                   <div class="window-row">
                     <i class="pixel-window w1"></i>
@@ -3055,7 +3058,7 @@
             </p>
           </div>
           <div class="founders-summary">
-            <strong id="founders-count">0 fundadores até agora</strong>
+            <strong id="founders-count">4 fundadores confirmados</strong>
             <span>apoie com qualquer valor a partir de R$ 1</span>
           </div>
           <div class="founders-banner-strip" aria-label="Fundadores em destaque">
@@ -3439,15 +3442,15 @@
       </section>
     </div>
 
-    <script defer src="./news-data.js?v=20260424pixelart1"></script>
+    <script defer src="./news-data.js?v=20260429-news-capture3"></script>
     <script defer src="./social-rss-data.js?v=20260413a"></script>
     <script defer src="./social-rss.js?v=20260423a"></script>
     <script defer src="./sidebar-data.js?v=20260413a"></script>
     <script defer src="./sidebar-widgets-recovery.js?v=20260423a"></script>
-  <script defer src="runtime-config.js?v=20260415d"></script>
-    <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
-    <script defer src="./startup-experience.js?v=20260429-loader-flow1"></script>
-  <script defer src="./script.js?v=20260429-speed-open1"></script>
+    <script defer src="runtime-config.js?v=20260415d"></script>
+    <script defer src="./site-google-auth.js?v=20260429-home-sync1"></script>
+    <script defer src="./startup-experience.js?v=20260430-public-sync1"></script>
+    <script defer src="./script.js?v=20260430-social-truth-facebook1"></script>
     <script defer src="deferred-home-boot.js?v=20260424startup-office-loader"></script>
 </body>
 </html>

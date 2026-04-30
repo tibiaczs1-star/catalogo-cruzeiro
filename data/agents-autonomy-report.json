@@ -1,15 +1,34 @@
 {
   "ok": true,
-  "trigger": "once",
-  "startedAt": "2026-04-29T16:19:03.060Z",
-  "finishedAt": "2026-04-29T16:19:04.164Z",
+  "trigger": "daemon",
+  "startedAt": "2026-04-30T11:51:11.425Z",
+  "finishedAt": "2026-04-30T11:51:16.599Z",
   "actions": [
+    {
+      "id": "latest-news-capture",
+      "agentGroup": "fontes/rss/captacao",
+      "status": "done",
+      "capturedItems": 203,
+      "capturedToday": 92,
+      "detail": "Captou 203 itens dos RSS monitorados antes da revisao dos agentes."
+    },
+    {
+      "id": "sanitize-public-language",
+      "agentGroup": "idioma/editorial",
+      "status": "done",
+      "changedFiles": [
+        "data\\runtime-news.json",
+        "data\\news-archive.json",
+        "news-data.js"
+      ],
+      "detail": "Sanitizou textos publicos de fontes externas antes da revisao."
+    },
     {
       "id": "news-editorial-body",
       "agentGroup": "copy/editor/review/sources",
       "status": "done",
-      "changedRuntimeItems": 0,
-      "changedStaticItems": 0,
+      "changedRuntimeItems": 5,
+      "changedStaticItems": 5,
       "detail": "Garantiu body editorial proprio em noticias captadas e removeu repeticao entre resumo e corpo."
     },
     {
@@ -18,13 +37,13 @@
       "status": "done",
       "totalAgents": 181,
       "totalOffices": 5,
-      "newsItems": 360
+      "newsItems": 669
     },
     {
       "id": "review-team",
       "agentGroup": "equipe local de revisao",
       "status": "done",
-      "output": "{\"reportJson\":\".codex-temp/review-team/latest-report.json\",\"reportMd\":\".codex-temp/review-team/latest-report.md\",\"filesAudited\":137,\"totalIssues\":0}"
+      "output": "{\"reportJson\":\".codex-temp/review-team/latest-report.json\",\"reportMd\":\".codex-temp/review-team/latest-report.md\",\"filesAudited\":147,\"totalIssues\":0}"
     }
   ]
 }

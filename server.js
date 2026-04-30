@@ -1382,9 +1382,6 @@ const DYNAMIC_ASSET_BASENAMES = new Set([
   "runtime-config.js"
 ]);
 const VERSIONED_STATIC_CACHE_CONTROL = "public, max-age=31536000, immutable";
-const PUBLIC_HTML_CACHE_CONTROL = "public, max-age=45, stale-while-revalidate=180";
-const PUBLIC_NEWS_API_CACHE_CONTROL = "public, max-age=30, stale-while-revalidate=120";
-const PUBLIC_LIVE_FEED_CACHE_CONTROL = "public, max-age=60, stale-while-revalidate=300";
 const NEWS_API_CACHE_TTL_MS = 30 * 1000;
 const newsApiResponseCache = new Map();
 const NINJAS_OPPORTUNITIES_UPDATED_AT = "2026-04-14";
@@ -2032,31 +2029,12 @@ function getArticleDateKey(item = {}) {
   return parsed.toISOString().slice(0, 10);
 }
 
-function isGenericArticleStoryTitle(item = {}) {
-  const title = normalizeArchiveStoryText(item.title || item.sourceLabel || "");
-  const source = normalizeArchiveStoryText(item.sourceName || item.source || "");
-
-  if (!title) {
-    return true;
-  }
-
-  if (/^atualizacao( internacional| nacional| regional| local)? de /.test(title)) {
-    return true;
-  }
-
-  if (/^(atualizacao|noticia em atualizacao|resumo em atualizacao|sem titulo|sem resumo)$/.test(title)) {
-    return true;
-  }
-
-  return Boolean(source && title.includes(source) && /\batualizacao\b/.test(title) && title.split(/\s+/).length <= 6);
-}
-
 function getArticleStoryKey(item = {}) {
   const dateKey = getArticleDateKey(item);
   const titleKey = slugify(item.title || item.sourceLabel || "");
   const slugKey = slugify(item.slug || "");
   const clusterKey = getArchiveStoryCluster(item);
-  const storyKey = (isGenericArticleStoryTitle(item) ? "" : titleKey) || slugKey || clusterKey;
+  const storyKey = titleKey || slugKey || clusterKey;
 
   if (storyKey && dateKey) {
     return `story|${storyKey}|${dateKey}`;
@@ -3839,24 +3817,14 @@ function isPendingFounderSubscription(item = {}) {
   return paymentStatus === "pendente-manual" || paymentStatus === "aguardando-confirmacao-pix";
 }
 
-function sendJson(res, status, payload, options = {}) {
-  const mimeType = "application/json; charset=utf-8";
-  const body = Buffer.from(JSON.stringify(payload), "utf-8");
-  const { buffer: finalBuffer, encoding } = maybeCompressBuffer(options.req, mimeType, body);
-  const cacheControl = options.cacheControl || "no-store";
-  const headers = {
+function sendJson(res, status, payload) {
+  const body = JSON.stringify(payload);
+  res.writeHead(status, {
     "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": cacheControl,
-    "Content-Length": finalBuffer.length,
-  };
-
-  if (encoding) {
-    headers["Content-Encoding"] = encoding;
-    headers.Vary = "Accept-Encoding";
-  }
-
-  res.writeHead(status, headers);
-  res.end(finalBuffer);
+    "Cache-Control": "no-store",
+    "Content-Length": Buffer.byteLength(body),
+  });
+  res.end(body);
 }
 
 function applyApiCors(req, res) {
@@ -4297,7 +4265,7 @@ function buildNewsFallbackSvg(item = {}, reason = "fallback") {
 function ensureNewsFallbackImage(item = {}, reason = "fallback") {
   const slug = slugify(item.slug || item.title || createRecordId("noticia"));
   const fileName = `${slug || createRecordId("noticia")}.svg`;
-  const relativeUrl = `/assets/news-fallbacks/${fileName}`;
+  const relativeUrl = `./assets/news-fallbacks/${fileName}`;
   const filePath = path.join(ROOT_DIR, "assets", "news-fallbacks", fileName);
   try {
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -4836,6 +4804,11 @@ function pickBalancedTopicFeedItems(items = [], limit = 12) {
     buckets.set(
       key,
       bucket.sort((left, right) => {
+        const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+        if (dateDiff !== 0) {
+          return dateDiff;
+        }
+
         const leftPriority = COVERAGE_LAYER_PRIORITY[String(left.coverageLayer || "global")] ?? 99;
         const rightPriority = COVERAGE_LAYER_PRIORITY[String(right.coverageLayer || "global")] ?? 99;
         if (leftPriority !== rightPriority) {
@@ -4874,6 +4847,17 @@ function mergeTopicFeedItems(primaryItems = [], fallbackItems = [], limit = 12) 
 
 function sortTopicFeedItemsForDisplay(items = []) {
   return (Array.isArray(items) ? items : []).slice().sort((left, right) => {
+    const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+    if (dateDiff !== 0) {
+      return dateDiff;
+    }
+
+    const leftLayer = COVERAGE_LAYER_PRIORITY[String(left.coverageLayer || "global")] ?? 99;
+    const rightLayer = COVERAGE_LAYER_PRIORITY[String(right.coverageLayer || "global")] ?? 99;
+    if (leftLayer !== rightLayer) {
+      return leftLayer - rightLayer;
+    }
+
     const leftHasImage = shouldIgnoreImageUrl(getArticleImageUrl(left)) ? 0 : 1;
     const rightHasImage = shouldIgnoreImageUrl(getArticleImageUrl(right)) ? 0 : 1;
     if (leftHasImage !== rightHasImage) {
@@ -4923,6 +4907,13 @@ const SOCIAL_TREND_SOURCES = [
     platform: "Instagram",
     url: "https://best-hashtags.com/hashtag/acre/",
     type: "instagram"
+  },
+  {
+    id: "facebook-public-pages",
+    name: "Facebook público monitorado",
+    platform: "Facebook",
+    url: "https://developers.facebook.com/docs/graph-api/reference/page/posts/",
+    type: "facebook"
   }
 ];
 
@@ -5042,6 +5033,29 @@ function trendToHashtag(value = "") {
   return compact ? `#${compact}`.slice(0, 40) : "";
 }
 
+function inferSocialTrendDivision(value = "") {
+  const text = normalizeText(value);
+  if (/\b(prefeitura|vereador|camara|câmara|governo|governador|governadora|aleac|politica|política|senado|deputad|eleicao|eleição)\b/.test(text)) {
+    return "Política";
+  }
+  if (/\b(saude|saúde|hospital|ubs|educacao|educação|escola|enem|concurso|edital|transito|trânsito|obra|rua|bairro|chuva|alerta|servico|serviço|calendario|calendário)\b/.test(text)) {
+    return "Utilidade Pública";
+  }
+  if (/\b(cultura|show|musica|música|livro|leitura|teatro|festival|festa|evento|artista|cinema)\b/.test(text)) {
+    return "Cultura";
+  }
+  if (/\b(comercio|comércio|economia|preco|preço|pix|negocio|negócio|empreendedor|venda|mercado)\b/.test(text)) {
+    return "Economia";
+  }
+  if (/\b(esporte|futebol|jogo|time|campeonato|atleta|final)\b/.test(text)) {
+    return "Esporte";
+  }
+  if (/\b(acre|jurua|juru[aá]|cruzeiro do sul|czs|rio branco|amazonia|amazônia)\b/.test(text)) {
+    return "Acre / Governo";
+  }
+  return "Cotidiano";
+}
+
 async function fetchExternalText(url, timeoutMs = 6500) {
   const response = await withPromiseTimeout(
     fetch(url, {
@@ -5103,6 +5117,162 @@ function extractInstagramHashtagLabels(html = "") {
   return labels;
 }
 
+function getFacebookGraphConfig() {
+  const token = String(
+    process.env.FACEBOOK_GRAPH_ACCESS_TOKEN || process.env.FACEBOOK_ACCESS_TOKEN || ""
+  ).trim();
+  const pageIds = String(process.env.FACEBOOK_PUBLIC_PAGE_IDS || process.env.FACEBOOK_PAGE_IDS || "")
+    .split(/[,\s;]+/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+
+  return { token, pageIds };
+}
+
+async function fetchExternalJson(url, timeoutMs = 7500) {
+  const response = await withPromiseTimeout(
+    fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; CatalogoCruzeiroSocialTrends/1.0; +https://catalogocruzeiro.local)",
+        Accept: "application/json,text/plain,*/*"
+      }
+    }),
+    timeoutMs,
+    "social_trends_json_timeout"
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function getFacebookPostEngagement(post = {}) {
+  return (
+    Number(post.shares?.count || 0) * 3 +
+    Number(post.comments?.summary?.total_count || 0) * 2 +
+    Number(post.reactions?.summary?.total_count || 0)
+  );
+}
+
+function extractFacebookPostTitle(post = {}) {
+  const text = stripHtml(post.message || post.story || "");
+  const firstLine = text
+    .split(/\n|(?<=[.!?])\s+/u)
+    .map((item) => item.trim())
+    .find((item) => item.length >= 8);
+
+  return normalizeSocialTrendLabel(cleanShortText(firstLine || text, 82));
+}
+
+function buildFacebookTrendItems(source, posts = [], maxItems = 12) {
+  const now = new Date().toISOString();
+  const seen = new Set();
+  const items = [];
+
+  posts
+    .slice()
+    .sort((left, right) => getFacebookPostEngagement(right) - getFacebookPostEngagement(left))
+    .forEach((post, index) => {
+      if (items.length >= maxItems) {
+        return;
+      }
+
+      const title = extractFacebookPostTitle(post);
+      const key = normalizeText(title);
+      if (!title || !key || seen.has(key) || !isPortugueseBrazilianSocialTrendLabel(title)) {
+        return;
+      }
+
+      seen.add(key);
+      const rawText = stripHtml([post.message, post.story].filter(Boolean).join(" "));
+      const hashtags = [...new Set((rawText.match(/#[\p{L}\p{N}_]{2,40}/gu) || []).slice(0, 4))];
+      const fallbackHashtag = trendToHashtag(title);
+      const division = inferSocialTrendDivision(`${title} ${rawText}`);
+      const engagement = getFacebookPostEngagement(post);
+
+      items.push({
+        id: `${source.id}-${slugify(title).slice(0, 42) || post.id || index}`,
+        title,
+        summary: `Post público monitorado no Facebook. Interações públicas ponderadas: ${engagement}. Divisão sugerida: ${division}.`,
+        category: division,
+        sourceName: source.name,
+        sourceUrl: post.permalink_url || source.url,
+        publishedAt: post.created_time || now,
+        date: post.created_time || now,
+        externalSource: true,
+        socialPlatform: "Facebook",
+        coverageLayer: "brasil",
+        importanceDivision: division,
+        topicGroup: "facebook-public",
+        hashtags: hashtags.length ? hashtags : fallbackHashtag ? [fallbackHashtag] : [],
+        facebookEngagement: engagement
+      });
+    });
+
+  return items;
+}
+
+async function fetchFacebookTrendSource(source) {
+  const { token, pageIds } = getFacebookGraphConfig();
+
+  if (!token || !pageIds.length) {
+    return {
+      items: [],
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: false,
+        error: "facebook_graph_config_missing",
+        hint: "Configure FACEBOOK_GRAPH_ACCESS_TOKEN e FACEBOOK_PUBLIC_PAGE_IDS para captar páginas públicas.",
+        url: source.url
+      }
+    };
+  }
+
+  try {
+    const pageResults = await mapWithConcurrency(pageIds, 2, async (pageId) => {
+      const params = new URLSearchParams({
+        fields:
+          "message,story,permalink_url,created_time,shares,comments.summary(true).limit(0),reactions.summary(true).limit(0)",
+        limit: "12",
+        access_token: token
+      });
+      const url = `https://graph.facebook.com/v19.0/${encodeURIComponent(pageId)}/posts?${params.toString()}`;
+      const payload = await fetchExternalJson(url);
+      return Array.isArray(payload?.data) ? payload.data : [];
+    });
+    const posts = pageResults.flat();
+    const items = buildFacebookTrendItems(source, posts, 14);
+
+    return {
+      items,
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: true,
+        count: items.length,
+        pages: pageIds.length,
+        mode: "graph-api-public-pages",
+        url: source.url
+      }
+    };
+  } catch (error) {
+    return {
+      items: [],
+      report: {
+        source: source.id,
+        platform: source.platform,
+        ok: false,
+        error: String(error?.message || "falha"),
+        url: source.url
+      }
+    };
+  }
+}
+
 function buildSocialTrendItems(source, labels = [], maxItems = 12) {
   const seen = new Set();
   const now = new Date().toISOString();
@@ -5121,14 +5291,16 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
 
     seen.add(key);
     const hashtag = trendToHashtag(label);
+    const division = inferSocialTrendDivision(label);
+    const platformCopy =
+      source.type === "instagram"
+        ? "Hashtag pública monitorada em lista externa de Instagram"
+        : "Tendência pública captada em lista externa de X/Twitter Brasil";
     items.push({
       id: `${source.id}-${slugify(label).slice(0, 42) || index}`,
       title: label,
-      summary:
-        source.type === "instagram"
-          ? `Hashtag pública monitorada em lista externa de Instagram: ${label}.`
-          : `Tendência pública captada em lista externa de X/Twitter Brasil: ${label}.`,
-      category: source.platform,
+      summary: `${platformCopy}: ${label}. Divisão sugerida: ${division}.`,
+      category: division,
       sourceName: source.name,
       sourceUrl: source.url,
       publishedAt: now,
@@ -5136,6 +5308,7 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
       externalSource: true,
       socialPlatform: source.platform,
       coverageLayer: "brasil",
+      importanceDivision: division,
       topicGroup: source.type === "instagram" ? "instagram-hashtags" : "twitter-trends",
       hashtags: hashtag ? [hashtag] : []
     });
@@ -5145,6 +5318,10 @@ function buildSocialTrendItems(source, labels = [], maxItems = 12) {
 }
 
 async function fetchSocialTrendSource(source) {
+  if (source.type === "facebook") {
+    return fetchFacebookTrendSource(source);
+  }
+
   try {
     const html = await fetchExternalText(source.url);
     const labels =
@@ -5172,7 +5349,7 @@ async function fetchSocialTrendSource(source) {
 function mergeSocialTrendItems(items = [], limit = 24) {
   const selected = [];
   const seen = new Set();
-  const platformPriority = { "X/Twitter": 0, Instagram: 1 };
+  const platformPriority = { Facebook: 0, "X/Twitter": 1, Instagram: 2 };
 
   items
     .filter((item) => isPortugueseBrazilianSocialTrendLabel(item.title || item.hashtags?.[0] || ""))
@@ -5785,7 +5962,7 @@ function getStaticCacheControl(filePath, hasVersionParam = false) {
   }
 
   if (ext === ".html") {
-    return PUBLIC_HTML_CACHE_CONTROL;
+    return "no-store";
   }
 
   if (DYNAMIC_ASSET_BASENAMES.has(baseName)) {
@@ -6097,6 +6274,46 @@ function getRawNewsItems() {
   return parseHomeLinkedArticleFallbacks();
 }
 
+function getPublicNewsTimestamp(item = {}) {
+  const direct = Date.parse(item.publishedAt || item.createdAt || item.date || "");
+  if (!Number.isNaN(direct)) return direct;
+
+  const match = String(item.date || "").match(/(\d{1,2})\s+de\s+([a-zç.]+)\s+de\s+(\d{4})/i);
+  if (!match) return 0;
+
+  const monthMap = {
+    jan: 0,
+    janeiro: 0,
+    fev: 1,
+    fevereiro: 1,
+    mar: 2,
+    marco: 2,
+    "março": 2,
+    abr: 3,
+    abril: 3,
+    mai: 4,
+    maio: 4,
+    jun: 5,
+    junho: 5,
+    jul: 6,
+    julho: 6,
+    ago: 7,
+    agosto: 7,
+    set: 8,
+    setembro: 8,
+    out: 9,
+    outubro: 9,
+    nov: 10,
+    novembro: 10,
+    dez: 11,
+    dezembro: 11
+  };
+  const monthKey = normalizeText(match[2]).replace(/\.$/, "");
+  const month = monthMap[monthKey];
+  if (month === undefined) return 0;
+  return new Date(Number(match[3]), month, Number(match[1])).getTime();
+}
+
 function getEditorialFocusScore(item = {}) {
   const text = normalizeText(
     [
@@ -6116,6 +6333,8 @@ function getEditorialFocusScore(item = {}) {
   const isAcre = /\b(acre|rio branco|sena madureira|feijo|feij[oó]|xapuri|brasileia|epitaciolandia|assis brasil|placido de castro)\b/.test(
     text
   );
+  const isCruzeiro =
+    /\b(cruzeiro do sul|cruzeiro-do-sul|cruzeirodosul|czs)\b/.test(text);
   const isValeJurua =
     /\b(cruzeiro do sul|jurua|juru[aá]|mancio lima|m[âa]ncio lima|porto walter|marechal thaumaturgo|tarauaca|tarauac[aá])\b/.test(
       text
@@ -6129,6 +6348,7 @@ function getEditorialFocusScore(item = {}) {
       text
     );
 
+  if (isCruzeiro) return 380 + (isImportant ? 50 : 0);
   if (isValeJurua) return 300 + (isImportant ? 40 : 0);
   if (isAcre) return 220 + (isImportant ? 35 : 0);
   if (isImportant) return 80;
@@ -6137,17 +6357,15 @@ function getEditorialFocusScore(item = {}) {
 }
 
 function sortArticleItems(left, right) {
+  const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+  if (dateDiff !== 0) {
+    return dateDiff;
+  }
+
   const rightFocus = getEditorialFocusScore(right);
   const leftFocus = getEditorialFocusScore(left);
   if (rightFocus !== leftFocus) {
     return rightFocus - leftFocus;
-  }
-
-  const rightDate = new Date(right.publishedAt || right.date || 0).getTime();
-  const leftDate = new Date(left.publishedAt || left.date || 0).getTime();
-
-  if (rightDate !== leftDate) {
-    return rightDate - leftDate;
   }
 
   return Number(right.priority || 0) - Number(left.priority || 0);
@@ -6883,15 +7101,25 @@ function getNews(limit = 30) {
 
   const map = new Map();
   items.forEach((item) => {
-    const key = item.id || item.url || item.title;
+    const titleKey = normalizeText(item.title || item.sourceLabel || "")
+      .replace(/\bpra\b/g, "para")
+      .replace(/\bpro\b/g, "para o")
+      .replace(/\s+/g, " ")
+      .trim();
+    const dayKey = String(item.publishedAt || item.createdAt || item.date || "").slice(0, 10);
+    const key = titleKey ? `${titleKey.slice(0, 120)}::${dayKey}` : item.id || item.url || item.title;
     if (!map.has(key)) map.set(key, item);
   });
 
   return Array.from(map.values())
     .sort((a, b) => {
+      const dateDiff = getPublicNewsTimestamp(b) - getPublicNewsTimestamp(a);
+      if (dateDiff !== 0) return dateDiff;
+
       const focus = getEditorialFocusScore(b) - getEditorialFocusScore(a);
       if (focus !== 0) return focus;
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+
+      return Number(b.priority || 0) - Number(a.priority || 0);
     })
     .slice(0, limit);
 }
@@ -7930,6 +8158,15 @@ function buildPublicDailyAgentPulse() {
   const queue = Array.isArray(payload.queue) ? payload.queue : [];
   const officeDashboard = Array.isArray(payload.officeDashboard) ? payload.officeDashboard : [];
   const history = Array.isArray(payload.autoRun?.history) ? payload.autoRun.history : [];
+  const timelineBySlug = new Map();
+  const timelineByName = new Map();
+
+  (Array.isArray(payload.agentTimelines) ? payload.agentTimelines : []).forEach((timeline) => {
+    const slug = String(timeline?.slug || "").trim();
+    const name = String(timeline?.name || "").trim();
+    if (slug) timelineBySlug.set(slug, timeline);
+    if (name) timelineByName.set(name, timeline);
+  });
 
   const actionItems = actions
     .concat(queue)
@@ -7943,6 +8180,31 @@ function buildPublicDailyAgentPulse() {
       status: cleanShortText(item.status || item.outcome || "em leitura", 60),
       points: Number(item.points || item.score || 0)
     }));
+  const readerItems = (Array.isArray(payload.agents) ? payload.agents : [])
+    .map((agent, index) => {
+      const timeline =
+        timelineBySlug.get(String(agent?.slug || "").trim()) ||
+        timelineByName.get(String(agent?.name || "").trim()) ||
+        null;
+      const events = Array.isArray(timeline?.events) ? timeline.events : [];
+      const memoryEvent = events.find((event) => event?.type === "memoria") || events[0] || null;
+
+      return {
+        name: cleanShortText(agent?.name || `Agente ${index + 1}`, 80),
+        office: cleanShortText(agent?.officeLabel || agent?.officeKey || timeline?.office || "Redação", 80),
+        role: cleanShortText(agent?.role || timeline?.role || "leitura", 60),
+        specialty: cleanShortText(agent?.specialty || agent?.title || "", 160),
+        focus: Array.isArray(agent?.monitoringFocus)
+          ? agent.monitoringFocus.slice(0, 4).map((focus) => cleanShortText(focus, 80)).filter(Boolean)
+          : [],
+        bridge: cleanShortText(agent?.newsroomBridge || "", 160),
+        lastSignal: cleanShortText(memoryEvent?.status || memoryEvent?.title || "", 180),
+        level: Number(timeline?.level || 0),
+        rank: cleanShortText(timeline?.rank || "", 40)
+      };
+    })
+    .filter((agent) => agent.name)
+    .slice(0, 120);
 
   return {
     ok: true,
@@ -7971,6 +8233,7 @@ function buildPublicDailyAgentPulse() {
       status: cleanShortText(office.status || office.mood || "ativo", 80),
       queue: Number(office.queue || office.queueDepth || office.actions || 0)
     })),
+    readers: readerItems,
     actions: actionItems
   };
 }
@@ -10916,10 +11179,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 60);
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit), {
-      req,
-      cacheControl: PUBLIC_NEWS_API_CACHE_CONTROL
-    });
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
@@ -10966,46 +11226,30 @@ async function handleApi(req, res, pathname, searchParams) {
       });
     }
 
-    return sendJson(
-      res,
-      200,
-      {
-        ok: true,
-        topic: payload.topic,
-        updatedAt: payload.updatedAt,
-        total: Array.isArray(payload.items) ? payload.items.length : 0,
-        items: Array.isArray(payload.items) ? payload.items : [],
-        reports: Array.isArray(payload.reports) ? payload.reports : [],
-        fallbackUsed: Boolean(payload.fallbackUsed),
-        stale: Boolean(payload.stale)
-      },
-      {
-        req,
-        cacheControl: forceRefresh ? "no-store" : PUBLIC_LIVE_FEED_CACHE_CONTROL
-      }
-    );
+    return sendJson(res, 200, {
+      ok: true,
+      topic: payload.topic,
+      updatedAt: payload.updatedAt,
+      total: Array.isArray(payload.items) ? payload.items.length : 0,
+      items: Array.isArray(payload.items) ? payload.items : [],
+      reports: Array.isArray(payload.reports) ? payload.reports : [],
+      fallbackUsed: Boolean(payload.fallbackUsed),
+      stale: Boolean(payload.stale)
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/social-trends") {
     const limit = Number(searchParams.get("limit") || 24);
     const payload = await getSocialTrends(limit);
-    return sendJson(
-      res,
-      200,
-      {
-        ok: true,
-        updatedAt: payload.updatedAt,
-        total: Array.isArray(payload.items) ? payload.items.length : 0,
-        items: Array.isArray(payload.items) ? payload.items : [],
-        reports: Array.isArray(payload.reports) ? payload.reports : [],
-        external: Boolean(payload.external),
-        stale: Boolean(payload.stale)
-      },
-      {
-        req,
-        cacheControl: PUBLIC_LIVE_FEED_CACHE_CONTROL
-      }
-    );
+    return sendJson(res, 200, {
+      ok: true,
+      updatedAt: payload.updatedAt,
+      total: Array.isArray(payload.items) ? payload.items.length : 0,
+      items: Array.isArray(payload.items) ? payload.items : [],
+      reports: Array.isArray(payload.reports) ? payload.reports : [],
+      external: Boolean(payload.external),
+      stale: Boolean(payload.stale)
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/news/suggestions") {
