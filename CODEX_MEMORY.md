@@ -1,5 +1,16 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-29 - Captacao diaria reativada na home
+
+- Usuario apontou que a hero/destaques ainda estavam presos em 26/04 no dia 29/04 e que os agentes nao estavam procurando noticias novas.
+- Diagnostico: os RSS das fontes tinham noticias de 29/04, mas o daemon dos agentes so revisava o cache antigo; alem disso, a ordenacao publica colocava prioridade editorial/Mailza antes da data.
+- Criado `scripts/capture-latest-news.js`: capta RSS direto das fontes monitoradas, mescla com acervo sem repeticao, gera fallbacks seguros, limpa ruido de markup, escreve `data/runtime-news.json`, `data/news-archive.json` e `news-data.js`.
+- `scripts/agents-autonomy-cycle.js` agora roda captacao RSS + `sanitize-public-language` antes dos 181 agentes e da review; o daemon foi reiniciado com esse fluxo.
+- `scripts/re-rodada-dia-geral.js` tambem passou a mesclar RSS direto com o online para nao depender de Render velho; Mailza segue prioridade, mas so desempata dentro da data.
+- `server.js` e `script.js` passaram a ordenar o fluxo publico por data primeiro; hero/card diario/carrossel/painel usam fatias diferentes do pool para evitar repeticao, e fallback entra so quando falta espaco.
+- Rodada final: 202 itens captados, 147 de 29/04; `/api/news?limit=20` validado com top em 29/04 e sem duplicatas; `npm run review:team` totalIssues=0; Playwright sem console errors.
+- Captura: `output/playwright/home-news-capture-dedup-v2-20260429.png`.
+
 ## Atualizacao rapida 2026-04-29 - Home desktop abertura limpa e chips sem corte
 
 - Usuario apontou que a abertura desktop da home estava lenta/confusa, com popup de carregamento errado, e que chips/etiquetas estavam cortando palavras como Cotidiano, Esporte e Policia.
@@ -18,6 +29,9 @@
 - Estado visual atual: `BootScene.js` usa `pubpaid-traffic-artistic-vehicles-playable-3f-v1.png` (sheet artistic/playable aprovado); `pubpaid-pixel-vehicles-art-pass-8f-v1.png` continua como avaliacao/nao integrado em `PUBPAID_ASSET_SOURCES.md`.
 - Validado localmente com `node --check`, `python -m py_compile` e Playwright em `output/web-game/pubpaid-traffic-check/`: calçada sem colisao de veiculo, faixa com colisao real, veiculo para antes do player, nao da re quando esta perto demais e spawn fica suprimido/alternado em faixa bloqueada.
 - Criada a bancada local `pubpaid-traffic-preview.html` para avaliacao em tempo real: fundo da rua, duas faixas animadas, troca entre `Atual runtime` e `Pixel art-pass`, controles de velocidade/escala/filtro e link para `pubpaid-v2.html`. Validado em Chromium local sem erros; capturas em `output/playwright/pubpaid-traffic-preview-runtime-20260429.png` e `output/playwright/pubpaid-traffic-preview-pixel-20260429.png`.
+- Feedback do usuario aplicado na bancada: removido o efeito artificial de giro que ficava fora do centro das rodas no pacote atual; pilotos das motos foram reforcados no pacote atual e no `Pixel art-pass` para nao sumirem por contraste/transparencia no fundo escuro. Cache-bust atualizado para `20260429wheelrider1`. Capturas novas: `output/playwright/pubpaid-traffic-preview-runtime-wheelrider-v2-20260429.png` e `output/playwright/pubpaid-traffic-preview-pixel-wheelrider-v2-20260429.png`.
+- Correcao definitiva de transparencia aplicada: `StreetScene.js` nao cria mais beams/farois/sombras translucidos em runtime para veiculos; o trafego renderiza somente o sprite do sheet. `pubpaid-traffic-preview.html` tambem removeu glow/sombra canvas dos veiculos. `pubpaid-pixel-vehicles-art-pass-8f-v1.png` foi regenerado sem sombra alpha, com hard-alpha total. Medicao local: `semi=0` em `pubpaid-traffic-artistic-vehicles-playable-3f-v1.png` e `pubpaid-pixel-vehicles-art-pass-8f-v1.png`. Cache-bust `20260429solidalpha1`.
+- Execucao do prompt premium de veiculos: alem de semi-alpha zerado, o pipeline agora fecha buracos alpha 0 internos em cada frame (rodas, janelas, carroceria e piloto), preservando transparencia somente fora do sprite. `scripts/build-pubpaid-playable-traffic-sheet.py` e `scripts/build-pubpaid-pixel-vehicles-art-pass-v1.js` foram atualizados e as duas folhas regeneradas. Medicao local: `semi=0` e `interior_holes=0` nos dois sheets; cache-bust `20260429solidholes1`. Capturas: `output/playwright/pubpaid-traffic-preview-solidholes-runtime-20260429.png` e `output/playwright/pubpaid-traffic-preview-solidholes-pixel-20260429.png`.
 
 ## Atualizacao rapida 2026-04-28 - Mais Assuntos Festa & Social continuo
 

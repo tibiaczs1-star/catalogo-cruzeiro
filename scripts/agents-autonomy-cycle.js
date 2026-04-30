@@ -4,8 +4,10 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { runCaptureLatestNews } = require("./capture-latest-news");
 const { runRealAgentsRuntimeLocal } = require("./real-agents-runtime");
 const { runReviewTeamAudit } = require("./review-team-audit");
+const { runSanitizePublicLanguage } = require("./sanitize-public-language");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(ROOT_DIR, "data");
@@ -302,8 +304,25 @@ function runReviewTeam() {
   }
 }
 
-function runAutonomyCycle({ trigger = "manual" } = {}) {
+async function runAutonomyCycle({ trigger = "manual" } = {}) {
   const startedAt = new Date().toISOString();
+  let captureReport = null;
+  let captureError = "";
+  let languageReport = null;
+  let languageError = "";
+
+  try {
+    captureReport = await runCaptureLatestNews();
+  } catch (error) {
+    captureError = String(error?.message || error).slice(0, 2000);
+  }
+
+  try {
+    languageReport = await runSanitizePublicLanguage();
+  } catch (error) {
+    languageError = String(error?.message || error).slice(0, 2000);
+  }
+
   const runtimeNews = readJson(RUNTIME_NEWS_FILE, { items: [] });
   const runtimeResult = normalizeNewsItems(Array.isArray(runtimeNews.items) ? runtimeNews.items : []);
   const staticResult = normalizeNewsItems(readStaticNewsData());
@@ -323,6 +342,25 @@ function runAutonomyCycle({ trigger = "manual" } = {}) {
     startedAt,
     finishedAt: new Date().toISOString(),
     actions: [
+      {
+        id: "latest-news-capture",
+        agentGroup: "fontes/rss/captacao",
+        status: captureReport?.ok ? "done" : "failed",
+        capturedItems: Number(captureReport?.capturedItems || 0),
+        capturedToday: Number(captureReport?.capturedToday || 0),
+        detail: captureReport?.ok
+          ? `Captou ${captureReport.capturedItems} itens dos RSS monitorados antes da revisao dos agentes.`
+          : `Falha na captacao antes dos agentes: ${captureError || "sem detalhes"}`
+      },
+      {
+        id: "sanitize-public-language",
+        agentGroup: "idioma/editorial",
+        status: languageReport?.ok ? "done" : "failed",
+        changedFiles: languageReport?.changedFiles || [],
+        detail: languageReport?.ok
+          ? "Sanitizou textos publicos de fontes externas antes da revisao."
+          : `Falha ao sanear idioma publico: ${languageError || (languageReport?.issues || []).join("; ") || "sem detalhes"}`
+      },
       {
         id: "news-editorial-body",
         agentGroup: "copy/editor/review/sources",
@@ -355,19 +393,29 @@ function runAutonomyCycle({ trigger = "manual" } = {}) {
 
 function runDaemon() {
   const intervalMs = Math.max(60 * 1000, Number(process.env.AGENTS_AUTONOMY_INTERVAL_MS || 5 * 60 * 1000));
-  const run = () => {
-    const report = runAutonomyCycle({ trigger: "daemon" });
+  const run = async () => {
+    const report = await runAutonomyCycle({ trigger: "daemon" });
     console.log(`[agents-daemon] ciclo ${report.ok ? "ok" : "falhou"} ${report.finishedAt}`);
   };
-  run();
-  setInterval(run, intervalMs);
+  run().catch((error) => console.error(`[agents-daemon] falha ${String(error?.message || error)}`));
+  setInterval(() => {
+    run().catch((error) => console.error(`[agents-daemon] falha ${String(error?.message || error)}`));
+  }, intervalMs);
 }
 
 if (require.main === module) {
   if (process.argv.includes("--daemon")) {
     runDaemon();
   } else {
-    console.log(JSON.stringify(runAutonomyCycle({ trigger: process.argv.includes("--once") ? "once" : "manual" }), null, 2));
+    runAutonomyCycle({ trigger: process.argv.includes("--once") ? "once" : "manual" })
+      .then((report) => {
+        console.log(JSON.stringify(report, null, 2));
+        if (!report.ok) process.exitCode = 1;
+      })
+      .catch((error) => {
+        console.error(error);
+        process.exitCode = 1;
+      });
   }
 }
 

@@ -1,0 +1,93 @@
+{
+  "ok": true,
+  "startedAt": "2026-04-30T01:52:58.363Z",
+  "finishedAt": "2026-04-30T01:53:00.023Z",
+  "capturedItems": 204,
+  "capturedToday": 109,
+  "activeWindowItems": 420,
+  "archiveItems": 670,
+  "reports": [
+    {
+      "source": "ac24horas",
+      "ok": true,
+      "count": 20
+    },
+    {
+      "source": "agencia-acre",
+      "ok": true,
+      "count": 10
+    },
+    {
+      "source": "agencia-brasil-ultimas",
+      "ok": true,
+      "count": 10
+    },
+    {
+      "source": "batelao",
+      "ok": true,
+      "count": 10
+    },
+    {
+      "source": "cnn-brasil",
+      "ok": true,
+      "count": 30
+    },
+    {
+      "source": "g1-brasil",
+      "ok": true,
+      "count": 30
+    },
+    {
+      "source": "g1-politica",
+      "ok": true,
+      "count": 30
+    },
+    {
+      "source": "g1-pop-arte",
+      "ok": true,
+      "count": 30
+    },
+    {
+      "source": "jurua-24-horas",
+      "ok": true,
+      "count": 10
+    },
+    {
+      "source": "jurua-comunicacao",
+      "ok": true,
+      "count": 10
+    },
+    {
+      "source": "jurua-online",
+      "ok": true,
+      "count": 0
+    },
+    {
+      "source": "portal-do-jurua",
+      "ok": false,
+      "count": 0,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "prefeitura-czs",
+      "ok": false,
+      "count": 0,
+      "error": "HTTP 404"
+    },
+    {
+      "source": "terra-diversao",
+      "ok": true,
+      "count": 0
+    },
+    {
+      "source": "the-verge",
+      "ok": true,
+      "count": 10
+    },
+    {
+      "source": "tribuna-do-jurua",
+      "ok": true,
+      "count": 10
+    }
+  ]
+}

@@ -234,7 +234,16 @@ function inferPublicTitle(item) {
     if (known) return known[1];
   }
   const sourceName = deriveSourceName(item);
-  return sourceName ? `Atualização internacional de ${sourceName}` : "Atualização internacional";
+  const timestamp = Date.parse(item?.publishedAt || item?.createdAt || item?.date || "");
+  const timeLabel = Number.isNaN(timestamp)
+    ? String(item?.slug || item?.id || "").slice(0, 8)
+    : new Intl.DateTimeFormat("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "America/Rio_Branco"
+      }).format(new Date(timestamp));
+  const suffix = timeLabel ? ` - ${timeLabel}` : "";
+  return sourceName ? `Atualização internacional de ${sourceName}${suffix}` : `Atualização internacional${suffix}`;
 }
 
 function ensurePublicLabels(item) {

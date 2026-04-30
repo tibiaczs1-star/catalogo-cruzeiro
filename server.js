@@ -6065,6 +6065,46 @@ function getRawNewsItems() {
   return parseHomeLinkedArticleFallbacks();
 }
 
+function getPublicNewsTimestamp(item = {}) {
+  const direct = Date.parse(item.publishedAt || item.createdAt || item.date || "");
+  if (!Number.isNaN(direct)) return direct;
+
+  const match = String(item.date || "").match(/(\d{1,2})\s+de\s+([a-zç.]+)\s+de\s+(\d{4})/i);
+  if (!match) return 0;
+
+  const monthMap = {
+    jan: 0,
+    janeiro: 0,
+    fev: 1,
+    fevereiro: 1,
+    mar: 2,
+    marco: 2,
+    "março": 2,
+    abr: 3,
+    abril: 3,
+    mai: 4,
+    maio: 4,
+    jun: 5,
+    junho: 5,
+    jul: 6,
+    julho: 6,
+    ago: 7,
+    agosto: 7,
+    set: 8,
+    setembro: 8,
+    out: 9,
+    outubro: 9,
+    nov: 10,
+    novembro: 10,
+    dez: 11,
+    dezembro: 11
+  };
+  const monthKey = normalizeText(match[2]).replace(/\.$/, "");
+  const month = monthMap[monthKey];
+  if (month === undefined) return 0;
+  return new Date(Number(match[3]), month, Number(match[1])).getTime();
+}
+
 function getEditorialFocusScore(item = {}) {
   const text = normalizeText(
     [
@@ -6105,17 +6145,15 @@ function getEditorialFocusScore(item = {}) {
 }
 
 function sortArticleItems(left, right) {
+  const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+  if (dateDiff !== 0) {
+    return dateDiff;
+  }
+
   const rightFocus = getEditorialFocusScore(right);
   const leftFocus = getEditorialFocusScore(left);
   if (rightFocus !== leftFocus) {
     return rightFocus - leftFocus;
-  }
-
-  const rightDate = new Date(right.publishedAt || right.date || 0).getTime();
-  const leftDate = new Date(left.publishedAt || left.date || 0).getTime();
-
-  if (rightDate !== leftDate) {
-    return rightDate - leftDate;
   }
 
   return Number(right.priority || 0) - Number(left.priority || 0);
@@ -6851,15 +6889,25 @@ function getNews(limit = 30) {
 
   const map = new Map();
   items.forEach((item) => {
-    const key = item.id || item.url || item.title;
+    const titleKey = normalizeText(item.title || item.sourceLabel || "")
+      .replace(/\bpra\b/g, "para")
+      .replace(/\bpro\b/g, "para o")
+      .replace(/\s+/g, " ")
+      .trim();
+    const dayKey = String(item.publishedAt || item.createdAt || item.date || "").slice(0, 10);
+    const key = titleKey ? `${titleKey.slice(0, 120)}::${dayKey}` : item.id || item.url || item.title;
     if (!map.has(key)) map.set(key, item);
   });
 
   return Array.from(map.values())
     .sort((a, b) => {
+      const dateDiff = getPublicNewsTimestamp(b) - getPublicNewsTimestamp(a);
+      if (dateDiff !== 0) return dateDiff;
+
       const focus = getEditorialFocusScore(b) - getEditorialFocusScore(a);
       if (focus !== 0) return focus;
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
+
+      return Number(b.priority || 0) - Number(a.priority || 0);
     })
     .slice(0, limit);
 }

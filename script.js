@@ -3696,6 +3696,11 @@ const articleMatchesCategoryFilter = (article = {}, filter = "") => {
 
 const sortRadarArticles = (articles = []) =>
   [...articles].sort((left, right) => {
+    const dateDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
+    if (dateDiff !== 0) {
+      return dateDiff;
+    }
+
     const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);
     if (mailzaDiff !== 0) {
       return mailzaDiff;
@@ -3705,11 +3710,6 @@ const sortRadarArticles = (articles = []) =>
       getEditorialFlowPriorityScore(right) - getEditorialFlowPriorityScore(left);
     if (editorialFlowDiff !== 0) {
       return editorialFlowDiff;
-    }
-
-    const dateDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
-    if (dateDiff !== 0) {
-      return dateDiff;
     }
 
     const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
@@ -4494,7 +4494,6 @@ const getHeroAreaKey = (article = {}) => {
 const buildHeroTourismRuntimePool = () => {
   const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
   const seenImages = new Set();
-  const seenAreas = new Set();
   const todayKey = getHeroTourismDayKey();
   const normalizedArticles = articles
     .map((article) => normalizeRuntimeArticle(article))
@@ -4520,11 +4519,10 @@ const buildHeroTourismRuntimePool = () => {
       const areaKey = getHeroAreaKey(article);
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
       const imageKey = String(imageUrl || "").trim();
-      if (!areaKey || seenAreas.has(areaKey) || !imageKey || seenImages.has(imageKey)) {
+      if (!areaKey || !imageKey || seenImages.has(imageKey)) {
         return false;
       }
 
-      seenAreas.add(areaKey);
       seenImages.add(imageKey);
       return true;
     })
@@ -4549,11 +4547,6 @@ const buildHeroTourismRuntimePool = () => {
         sourceName: article.sourceName || "Fonte local"
       };
     })
-    .sort((left, right) => {
-      const leftIndex = heroDailyThemeOrder.indexOf(left.themeKey);
-      const rightIndex = heroDailyThemeOrder.indexOf(right.themeKey);
-      return (leftIndex === -1 ? 99 : leftIndex) - (rightIndex === -1 ? 99 : rightIndex);
-    })
     .filter((photo) => {
       const imageKey = String(photo?.proxyUrl || "").trim();
       if (!imageKey || seenImages.has(imageKey)) {
@@ -4566,7 +4559,7 @@ const buildHeroTourismRuntimePool = () => {
 
 const buildHeroTourismFallbackPool = () => {
   const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
-  const seenAreas = new Set();
+  const seenKeys = new Set();
   const normalizedArticles = articles
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => {
@@ -4589,10 +4582,11 @@ const buildHeroTourismFallbackPool = () => {
     .filter((article) => {
       const areaKey = getHeroAreaKey(article);
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
-      if (!areaKey || !imageUrl || seenAreas.has(areaKey)) {
+      const storyKey = getRadarArticleKey(article);
+      if (!areaKey || !imageUrl || seenKeys.has(storyKey)) {
         return false;
       }
-      seenAreas.add(areaKey);
+      seenKeys.add(storyKey);
       return true;
     })
     .map((article) => {
@@ -4664,8 +4658,14 @@ const buildHeroTourismDailyPool = () => {
     return true;
   };
 
-  featuredPool.forEach((photo) => pushUniquePhoto(photo));
   runtimePool.forEach((photo) => pushUniquePhoto(photo));
+  if (merged.length < heroTourismDailyTarget) {
+    featuredPool.forEach((photo) => {
+      if (merged.length < heroTourismDailyTarget) {
+        pushUniquePhoto(photo);
+      }
+    });
+  }
   if (merged.length < heroTourismDailyTarget) {
     const fallbackPool = buildHeroTourismFallbackPool();
     fallbackPool.forEach((photo) => {
@@ -4724,10 +4724,44 @@ const getHeroTourismPhoto = (photoIndex = 0) => {
   return dailyPool[poolIndex];
 };
 
+const getHeroStoryKey = (item = {}) =>
+  normalizeText(
+    item.articleHref ||
+      item.articleTitle ||
+      item.title ||
+      item.proxyUrl ||
+      item.fallbackUrl ||
+      ""
+  );
+
+const getNextHeroPoolItem = (currentItem = {}, offset = 1) => {
+  const pool = buildHeroTourismDailyPool();
+  if (pool.length < 2) {
+    return null;
+  }
+
+  const currentKey = getHeroStoryKey(currentItem);
+  const currentIndex = Math.max(
+    pool.findIndex((item) => getHeroStoryKey(item) === currentKey),
+    0
+  );
+
+  for (let step = offset; step < pool.length + offset; step += 1) {
+    const candidate = pool[(currentIndex + step) % pool.length];
+    if (candidate && getHeroStoryKey(candidate) !== currentKey) {
+      return candidate;
+    }
+  }
+
+  return null;
+};
+
 const setHeroTourismMeta = (photo) => {
   if (!photo) {
     return;
   }
+
+  const dailyPhoto = getNextHeroPoolItem(photo, 1) || photo;
 
   if (heroTourismKicker) {
     heroTourismKicker.textContent = photo.articleCategory || photo.title || "Area em destaque";
@@ -4747,7 +4781,7 @@ const setHeroTourismMeta = (photo) => {
   }
 
   if (heroDailyNewsCard) {
-    heroDailyNewsCard.href = photo.articleHref || "#radar";
+    heroDailyNewsCard.href = dailyPhoto.articleHref || "#radar";
   }
 
   if (heroTourismMetaLink) {
@@ -4757,17 +4791,17 @@ const setHeroTourismMeta = (photo) => {
   }
 
   if (heroDailyNewsCategory) {
-    heroDailyNewsCategory.textContent = photo.articleCategory || "Area em destaque";
+    heroDailyNewsCategory.textContent = dailyPhoto.articleCategory || "Area em destaque";
   }
 
   if (heroDailyNewsTitle) {
-    heroDailyNewsTitle.textContent = photo.articleTitle || photo.title || "Notícia em destaque";
+    heroDailyNewsTitle.textContent = dailyPhoto.articleTitle || dailyPhoto.title || "Notícia em destaque";
   }
 
   if (heroDailyNewsSummary) {
     heroDailyNewsSummary.textContent =
       truncateCopy(
-        photo.articleSummary || photo.note || "Resumo da notícia principal selecionada para este assunto.",
+        dailyPhoto.articleSummary || dailyPhoto.note || "Resumo da notícia principal selecionada para este assunto.",
         132
       );
   }
@@ -5085,8 +5119,10 @@ const renderHeroOfficeFeed = (items = []) => {
     return;
   }
 
-  const safeItems = Array.isArray(items) ? items.filter(Boolean).slice(0, heroOfficeFeedItems.length) : [];
-  renderHeroOfficeTv(items);
+  const allItems = Array.isArray(items) ? items.filter(Boolean) : [];
+  const leadItem = allItems[0];
+  const safeItems = allItems.slice(1, heroOfficeFeedItems.length + 1);
+  renderHeroOfficeTv(safeItems.length ? safeItems : allItems);
 
   heroOfficeFeedItems.forEach((card, index) => {
     const item = safeItems[index];
@@ -5116,7 +5152,6 @@ const renderHeroOfficeFeed = (items = []) => {
     }
   });
 
-  const leadItem = safeItems[0];
   if (leadItem && heroOfficePhoto) {
     const imageUrl = leadItem.proxyUrl || leadItem.fallbackUrl || "";
     const safeFocus = normalizeHeroSafeFocusPosition(leadItem.focusPosition, {
@@ -5156,14 +5191,6 @@ const syncHeroDesktopCarousel = (index = 0) => {
   const safeIndex = ((Number(index) % visibleCards.length) + visibleCards.length) % visibleCards.length;
   heroTourismRotation.activeTopicIndex = safeIndex;
   heroTopicTrack.style.transform = `translate3d(-${safeIndex * 100}%, 0, 0)`;
-
-  const activeItem = heroDesktopHighlightItems[safeIndex];
-  if (activeItem) {
-    setHeroTourismMeta(activeItem);
-    if (!shouldUseSolidHeroShell()) {
-      renderHeroTourismBackground(safeIndex);
-    }
-  }
 
   visibleCards.forEach((card, cardIndex) => {
     card.classList.toggle("is-current", cardIndex === safeIndex);
@@ -5346,8 +5373,12 @@ const initializeHeroTourismHero = () => {
   heroTourismRotation.activeTopicIndex = 0;
   heroTourismRotation.statusIndex = 0;
   heroTourismRotation.bubbleIndex = 0;
-  renderHeroDesktopHighlights(dailyPool);
-  renderHeroOfficeFeed(dailyPool);
+  const topicStartIndex = Math.min(2, Math.max(dailyPool.length - 1, 0));
+  const topicItems = dailyPool.slice(topicStartIndex, topicStartIndex + heroTopicCards.length);
+  const officeStartIndex = topicStartIndex + Math.max(topicItems.length, heroTopicCards.length);
+  const officeItems = dailyPool.slice(officeStartIndex);
+  renderHeroDesktopHighlights(topicItems.length ? topicItems : dailyPool.slice(1));
+  renderHeroOfficeFeed(officeItems.length ? officeItems : dailyPool.slice(topicStartIndex + 1));
 
   if (shouldUseSolidHeroShell() || liteRuntime) {
     heroTourismSlides.forEach((slide) => {
