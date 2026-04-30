@@ -1,13 +1,13 @@
 # Handoff
 
-Updated: 2026-04-30T12:20:00-05:00
+Updated: 2026-04-30T13:05:00-05:00
 
-Rodada geral em fechamento. O usuario pediu subir a pagina, sincronizar noticias/subsites, ordenar reuniao geral dos agentes, estudar fontes e publicar. Foram criados os prompts `PROMPT_CAPTACAO_SOCIAL_FACEBOOK_TENDENCIAS_2026-04-30.md` e `PROMPT_REUNIAO_GERAL_FLUXO_SITE_SUBSITES_2026-04-30.md`.
+Rodada atual em andamento. O usuario pediu: selos visiveis de fonte/status, continuidade Home -> Arquivo -> Servicos/Subsites, politica nacional quente so com impacto local claro e bloco `O que importa agora` para cheia/Jurua, eventos e utilidade publica. Reforco expresso: a experiencia publica nao deve usar rotulo de rede indisponivel como produto; quando nao houver prova social real, usar radar editorial.
 
-Principais mudancas: `script.js` usa `/api/social-trends` antes de buzz comum, so rotula Instagram/Facebook/X quando ha evidencia social, removeu tarefas internas dos cards publicos e corrigiu Capa Especial para priorizar noticias do dia antes de lotes antigos. `server.js` ganhou captacao Facebook por Graph API configuravel e classificacao de tendencias por divisao. `arquivo-noticias.js` limpa markup/atributos em cards do arquivo.
+Mudancas ja aplicadas: `index.html` ganhou o bloco `O que importa agora`, rota para arquivo/servicos/subsites e textos de politica nacional por impacto local. `script.js` ganhou helper de selo publico, filtro de politica nacional sem impacto local, render dinamico do bloco novo e ajuste de microcopy em tendencias. `premium-clarity.css` ganhou estilos do bloco e dos selos. `server.js` agora reporta configuracao pendente do Facebook Graph sem transformar isso em selo publico.
 
-Validacoes feitas: `npm run sync:online-local` ok com 554 noticias e review 0; `npm run review:team` ok; `node --check` nos JS publicos; smoke HTTP em home, subsites e APIs; Playwright final com `hasRotinas=false`, `hasFakeEscuta=false` e `stale26Matches=[]`.
+Agentes preparados: criado `PROMPT_SELOS_FLUXO_SOCIAL_REAL_2026-04-30.md`, ordem registrada em `data/office-orders.json`, e ordem estruturada adicionada via `.codex-memory/orders.json`.
 
-PubPaid continua fora de commit/deploy por regra do usuario. Nao incluir `data/heartbeats.json`, `data/visits.json`, `data/image-preview-cache.json`, `progress.md` ou arquivos `pubpaid*` no pacote desta publicacao.
+Validacoes feitas: `node --check` em JS publico e saneador, `npm run review:team` com `totalIssues=0`, smoke local em `127.0.0.1:4148` para home/arquivo/servicos/Esttiles/APIs, e Playwright CLI confirmando 4 cards no `O que importa agora`, selos visiveis, 6 cards de tendencias e ausencia do rotulo proibido.
 
-Proximo passo: commitar o pacote publico e enviar para `render-target HEAD:main`; depois relatar o commit/deploy e lembrar que Facebook real precisa das variaveis `FACEBOOK_GRAPH_ACCESS_TOKEN` e `FACEBOOK_PUBLIC_PAGE_IDS`.
+Proximo passo: commitar/publicar apenas pacote publico limpo, mantendo PubPaid e arquivos de runtime ruidosos fora.

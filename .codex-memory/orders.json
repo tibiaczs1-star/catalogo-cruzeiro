@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-30T03:22:22.813Z",
+  "lastUpdatedAt": "2026-04-30T12:25:00.875Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -8824,6 +8824,21 @@
         "subsites",
         "home"
       ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-04-30-implementar-selos-publicos-bloco-o-que-importa-agora-continuidade-de-fluxo-e-reg",
+      "createdAt": "2026-04-30T12:25:00.875Z",
+      "updatedAt": "2026-04-30T12:25:00.875Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Colocar selo visivel de fonte confirmada/radar editorial; nunca usar rotulo publico de rede indisponivel; dar continuidade Home -> Arquivo -> Servicos/Subsites; tratar politica nacional quente so com impacto local claro; criar bloco O que importa agora para cheia/Jurua, eventos e utilidade publica; preparar IAs para social real online.",
+      "summary": "Implementar selos publicos, bloco O que importa agora, continuidade de fluxo e regra de social real/politica local.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
       "nextSteps": [],
       "notes": ""
     }

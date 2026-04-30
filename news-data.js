@@ -1,4 +1,4 @@
-window.NEWS_ARCHIVE_TOTAL = 669;
+window.NEWS_ARCHIVE_TOTAL = 718;
 window.NEWS_DATA = [
   {
     "id": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/",
@@ -13,8 +13,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/",
     "sourceLabel": "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
-    "lede": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador. “A Mailza tem todo o direito",
-    "summary": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador. “A Mailza tem todo o direito",
+    "lede": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador.",
+    "summary": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -210,7 +210,7 @@ window.NEWS_DATA = [
     "sourceUrl": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
     "sourceLabel": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
     "lede": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes.",
-    "summary": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes",
+    "summary": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural.",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -315,12 +315,10 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
     "sourceLabel": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-    "lede": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza",
-    "summary": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza",
+    "lede": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior.",
+    "summary": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior.",
     "analysis": "",
     "body": [
-      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -470,8 +468,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
     "sourceLabel": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-    "lede": "Em mais um dia de agendas em Cruzeiro do Sul, a governadora Mailza Assis concedeu, na manhã desta sexta-feira, 24, entrevista à plataforma Juruá Comunicação, conduzida pelo jornalista Alexandre Gomes, e avaliou o início de sua",
-    "summary": "Em mais um dia de agendas em Cruzeiro do Sul, a governadora Mailza Assis concedeu, na manhã desta sexta-feira, 24, entrevista à plataforma Juruá Comunicação, conduzida pelo jornalista Alexandre Gomes, e avaliou o início de sua",
+    "lede": "Jurua Comunicacao publicou uma atualização sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua Comunicacao publicou uma atualização sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 24 de abr. de 2026 a base desta noticia sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -504,6 +502,2309 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre"
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares/",
+    "slug": "homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares",
+    "title": "Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:47:53.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares/",
+    "sourceLabel": "Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares",
+    "lede": "Screenshot \" Um homem de 24 anos, conhecido como Natanael, que usa tornozeleira eletrônica, foi preso no Ginásio Jader Machado, em Cruzeiro do Sul, na manhã desta quarta-feira, 29, ao tentar vender drogas para os estudantes que participavam dos Jogos Escolare",
+    "summary": "Screenshot \" Um homem de 24 anos, conhecido como Natanael, que usa tornozeleira eletrônica, foi preso no Ginásio Jader Machado, em Cruzeiro do Sul, na manhã desta quarta-feira, 29, ao tentar vender drogas para os estudantes que participavam dos Jogos Escolare",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_4696.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_4696.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_4696.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares.",
+      "Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/apos-flerte-online-mc-daniel-viaja-para-encontro-com-influencer/",
+    "slug": "apos-flerte-online-mc-daniel-viaja-para-encontro-com-influencer",
+    "title": "Após flerte online, MC Daniel viaja para encontro com influencer",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:46:03.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional apos flerte online mc daniel viaja para encontro com influencer nas redes sociais o cantor disse que cumpriu a promessa ao postar fotos no para com lia mendonca confira",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/apos-flerte-online-mc-daniel-viaja-para-encontro-com-influencer/",
+    "sourceLabel": "Após flerte online, MC Daniel viaja para encontro com influencer",
+    "lede": "Nas redes sociais, o cantor disse que cumpriu a promessa ao postar fotos no Pará com Lia Mendonça; confira",
+    "summary": "Nas redes sociais, o cantor disse que cumpriu a promessa ao postar fotos no Pará com Lia Mendonça; confira",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/mc-daniel-lorena.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/mc-daniel-lorena.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/12/mc-daniel-lorena.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/apos-flerte-online-mc-daniel-viaja-para-encontro-com-influencer/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/apos-flerte-online-mc-daniel-viaja-para-encontro-com-influencer/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "apos-flerte-online-mc-daniel-viaja-para-encontro-com-influencer"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Após flerte online, MC Daniel viaja para encontro com influencer.",
+      "Após flerte online, MC Daniel viaja para encontro com influencer e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/alto-acre-conquista-3o-lugar-na-segunda-etapa-do-circuito-acreano-de-tenis-de-mesa/",
+    "slug": "alto-acre-conquista-3-lugar-na-segunda-etapa-do-circuito-acreano-de-tenis-de-mesa",
+    "title": "Alto Acre conquista 3º lugar na segunda etapa do Circuito Acreano de Tênis de Mesa",
+    "eyebrow": "Acre / Governo",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:45:56.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/alto-acre-conquista-3o-lugar-na-segunda-etapa-do-circuito-acreano-de-tenis-de-mesa/",
+    "sourceLabel": "Alto Acre conquista 3º lugar na segunda etapa do Circuito Acreano de Tênis de Mesa",
+    "lede": "Fotos: Cedida \" A 2ª Etapa do Circuito Estadual Acreano de Tênis de Mesa foi realizada no último dia 26 de abril, no Ginásio da AABB, em Rio Branco, reunindo atletas de diversas regiões em uma competição marcada por alto nível técnico e disputas equilibradas.",
+    "summary": "Fotos: Cedida \" A 2ª Etapa do Circuito Estadual Acreano de Tênis de Mesa foi realizada no último dia 26 de abril, no Ginásio da AABB, em Rio Branco, reunindo atletas de diversas regiões em uma competição marcada por alto nível técnico e disputas equilibradas.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-07.39.02-1200x675.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-07.39.02-1200x675.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-07.39.02-1200x675.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/alto-acre-conquista-3o-lugar-na-segunda-etapa-do-circuito-acreano-de-tenis-de-mesa/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/alto-acre-conquista-3o-lugar-na-segunda-etapa-do-circuito-acreano-de-tenis-de-mesa/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "alto-acre-conquista-3-lugar-na-segunda-etapa-do-circuito-acreano-de-tenis-de-mesa"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Alto Acre conquista 3º lugar na segunda etapa do Circuito Acreano de Tênis de Mesa.",
+      "Alto Acre conquista 3º lugar na segunda etapa do Circuito Acreano de Tênis de Mesa e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/palmeiras/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo/",
+    "slug": "nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo",
+    "title": "“Nunca vi isso na minha vida”, diz Abel sobre Cerro Porteño diminuir campo",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:42:53.000Z",
+    "category": "Nacional",
+    "categoryKey": "palmeiras nacional nunca vi isso na minha vida diz abel sobre cerro porteno diminuir campo tecnico do palmeiras comentou a alteracao nas dimensoes do gramado do estadio la nueva olla apos empate com o clube paraguaio",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/palmeiras/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo/",
+    "sourceLabel": "“Nunca vi isso na minha vida”, diz Abel sobre Cerro Porteño diminuir campo",
+    "lede": "Técnico do Palmeiras comentou a alteração nas dimensões do gramado do estádio La Nueva Olla após empate com o clube paraguaio",
+    "summary": "Técnico do Palmeiras comentou a alteração nas dimensões do gramado do estádio La Nueva Olla após empate com o clube paraguaio",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo.svg",
+    "feedImageUrl": "./assets/news-fallbacks/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/palmeiras/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/palmeiras/nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "nunca-vi-isso-na-minha-vida-diz-abel-sobre-cerro-porteno-diminuir-campo"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre “Nunca vi isso na minha vida”, diz Abel sobre Cerro Porteño diminuir campo.",
+      "“Nunca vi isso na minha vida”, diz Abel sobre Cerro Porteño diminuir campo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/flamengo/lesao-de-arrascaeta-preocupa-imprensa-do-uruguai-para-a-copa-alerta/",
+    "slug": "lesao-de-arrascaeta-preocupa-imprensa-do-uruguai-para-a-copa-alerta",
+    "title": "Lesão de Arrascaeta preocupa imprensa do Uruguai para a Copa: “Alerta”",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:42:38.000Z",
+    "category": "Nacional",
+    "categoryKey": "flamengo nacional lesao de arrascaeta preocupa imprensa do uruguai para a copa alerta meia sofreu fratura na clavicula direita no empate do flamengo com o estudiantes nesta quarta 29",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/flamengo/lesao-de-arrascaeta-preocupa-imprensa-do-uruguai-para-a-copa-alerta/",
+    "sourceLabel": "Lesão de Arrascaeta preocupa imprensa do Uruguai para a Copa: “Alerta”",
+    "lede": "Meia sofreu fratura na clavícula direita no empate do Flamengo com o Estudiantes, nesta quarta (29)",
+    "summary": "Meia sofreu fratura na clavícula direita no empate do Flamengo com o Estudiantes, nesta quarta (29)",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/arrascaeta-lesao-estudiantes-flamengo-e1777511157890.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/arrascaeta-lesao-estudiantes-flamengo-e1777511157890.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/arrascaeta-lesao-estudiantes-flamengo-e1777511157890.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/flamengo/lesao-de-arrascaeta-preocupa-imprensa-do-uruguai-para-a-copa-alerta/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/flamengo/lesao-de-arrascaeta-preocupa-imprensa-do-uruguai-para-a-copa-alerta/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "lesao-de-arrascaeta-preocupa-imprensa-do-uruguai-para-a-copa-alerta"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Lesão de Arrascaeta preocupa imprensa do Uruguai para a Copa: “Alerta”.",
+      "Lesão de Arrascaeta preocupa imprensa do Uruguai para a Copa: “Alerta” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/agro/irani-lucra-r-194-milhoes-no-primeiro-trimestre-queda-de-67/",
+    "slug": "irani-lucra-r-19-4-milhoes-no-primeiro-trimestre-queda-de-67",
+    "title": "Irani lucra R$ 19,4 milhões no primeiro trimestre, queda de 67%",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:41:27.000Z",
+    "category": "Nacional",
+    "categoryKey": "agro nacional irani lucra r 19 4 milhoes no primeiro trimestre queda de 67 faturamento de r 409 milhoes no primeiro trimestre de 2026 representa baixa de 3 1 em relacao ao anterior",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/agro/irani-lucra-r-194-milhoes-no-primeiro-trimestre-queda-de-67/",
+    "sourceLabel": "Irani lucra R$ 19,4 milhões no primeiro trimestre, queda de 67%",
+    "lede": "Faturamento de R$ 409 milhões no primeiro trimestre de 2026 representa baixa de 3,1% em relação ao anterior",
+    "summary": "Faturamento de R$ 409 milhões no primeiro trimestre de 2026 representa baixa de 3,1% em relação ao anterior",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/irani-lucra-r-19-4-milhoes-no-primeiro-trimestre-queda-de-67.svg",
+    "feedImageUrl": "./assets/news-fallbacks/irani-lucra-r-19-4-milhoes-no-primeiro-trimestre-queda-de-67.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/irani-lucra-r-19-4-milhoes-no-primeiro-trimestre-queda-de-67.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/irani-lucra-r-194-milhoes-no-primeiro-trimestre-queda-de-67/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/irani-lucra-r-194-milhoes-no-primeiro-trimestre-queda-de-67/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "irani-lucra-r-19-4-milhoes-no-primeiro-trimestre-queda-de-67"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Irani lucra R$ 19,4 milhões no primeiro trimestre, queda de 67%.",
+      "Irani lucra R$ 19,4 milhões no primeiro trimestre, queda de 67% e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/politica/analise-rejeicao-de-messias-expoe-lula-e-empodera-davi-alcolumbre/",
+    "slug": "analise-rejeicao-de-messias-expoe-lula-e-empodera-davi-alcolumbre",
+    "title": "Análise: Rejeição de Messias expõe Lula e empodera Davi Alcolumbre",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:41:12.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/politica/analise-rejeicao-de-messias-expoe-lula-e-empodera-davi-alcolumbre/",
+    "sourceLabel": "Análise: Rejeição de Messias expõe Lula e empodera Davi Alcolumbre",
+    "lede": "De acordo com análise de Teo Cury ao CNN Novo Dia, placar de 42 votos contra a indicação ao STF é inédito em 132 anos e levanta dúvidas sobre a governabilidade do governo Lula no Senado.",
+    "summary": "De acordo com análise de Teo Cury ao CNN Novo Dia, placar de 42 votos contra a indicação ao STF é inédito em 132 anos e levanta dúvidas sobre a governabilidade do governo Lula no Senado.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-29-at-10.40.38.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-29-at-10.40.38.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-29-at-10.40.38.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/analise-rejeicao-de-messias-expoe-lula-e-empodera-davi-alcolumbre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/politica/analise-rejeicao-de-messias-expoe-lula-e-empodera-davi-alcolumbre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "analise-rejeicao-de-messias-expoe-lula-e-empodera-davi-alcolumbre"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Análise: Rejeição de Messias expõe Lula e empodera Davi Alcolumbre.",
+      "Análise: Rejeição de Messias expõe Lula e empodera Davi Alcolumbre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/macroeconomia/pib-da-zona-do-euro-cresce-01-no-1o-trimestre-ante-os-tres-meses-anteriores/",
+    "slug": "pib-da-zona-do-euro-cresce-0-1-no-1-trimestre-ante-os-meses-anteriores",
+    "title": "PIB da zona do euro cresce 0,1% no 1º trimestre ante os meses anteriores",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:41:02.000Z",
+    "category": "Nacional",
+    "categoryKey": "macroeconomia nacional pib da zona do euro cresce 0 1 no 1 trimestre ante os meses anteriores resultado ficou abaixo da expectativa de analistas que previam alta de 0 3 no periodo",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/pib-da-zona-do-euro-cresce-01-no-1o-trimestre-ante-os-tres-meses-anteriores/",
+    "sourceLabel": "PIB da zona do euro cresce 0,1% no 1º trimestre ante os meses anteriores",
+    "lede": "PIB da zona do euro cresce 0,1% no 1º trimestre ante os meses anteriores. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "PIB da zona do euro cresce 0,1% no 1º trimestre ante os meses anteriores. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL7O0GZ-BASEIMAGE.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL7O0GZ-BASEIMAGE.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXMPEL7O0GZ-BASEIMAGE.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/pib-da-zona-do-euro-cresce-01-no-1o-trimestre-ante-os-tres-meses-anteriores/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/pib-da-zona-do-euro-cresce-01-no-1o-trimestre-ante-os-tres-meses-anteriores/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "pib-da-zona-do-euro-cresce-0-1-no-1-trimestre-ante-os-meses-anteriores"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre PIB da zona do euro cresce 0,1% no 1º trimestre ante os meses anteriores.",
+      "PIB da zona do euro cresce 0,1% no 1º trimestre ante os meses anteriores e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-ingles/mainoo-assina-renova-contrato-com-o-manchester-united-ate-2031/",
+    "slug": "mainoo-assina-renova-contrato-com-o-manchester-united-ate-2031",
+    "title": "Mainoo assina renova contrato com o Manchester United até 2031",
+    "eyebrow": "Esporte",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:40:52.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-ingles/mainoo-assina-renova-contrato-com-o-manchester-united-ate-2031/",
+    "sourceLabel": "Mainoo assina renova contrato com o Manchester United até 2031",
+    "lede": "Mainoo assina renova contrato com o Manchester United até 2031. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Mainoo assina renova contrato com o Manchester United até 2031. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/mohamed-salah-liverpool-premier-league-e1777484152856.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/mohamed-salah-liverpool-premier-league-e1777484152856.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/mohamed-salah-liverpool-premier-league-e1777484152856.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-ingles/mainoo-assina-renova-contrato-com-o-manchester-united-ate-2031/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-ingles/mainoo-assina-renova-contrato-com-o-manchester-united-ate-2031/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mainoo-assina-renova-contrato-com-o-manchester-united-ate-2031"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Mainoo assina renova contrato com o Manchester United até 2031.",
+      "Mainoo assina renova contrato com o Manchester United até 2031 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/defesa-de-stenio-garcia-acusa-filha-e-ex-mulher-de-ocultarem-provas-em-acao/",
+    "slug": "defesa-de-stenio-garcia-acusa-filha-e-ex-mulher-de-ocultarem-provas-em-acao",
+    "title": "Defesa de Stênio Garcia acusa filha e ex-mulher de ocultarem provas em ação",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:40:30.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional defesa de stenio garcia acusa filha e ex mulher de ocultarem provas em acao advogado relata bloqueio a registros de locacao usados na disputa judicial",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/defesa-de-stenio-garcia-acusa-filha-e-ex-mulher-de-ocultarem-provas-em-acao/",
+    "sourceLabel": "Defesa de Stênio Garcia acusa filha e ex-mulher de ocultarem provas em ação",
+    "lede": "Defesa de Stênio Garcia acusa filha e ex-mulher de ocultarem provas em ação. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Defesa de Stênio Garcia acusa filha e ex-mulher de ocultarem provas em ação. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/stenio-garcia.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/stenio-garcia.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/stenio-garcia.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/defesa-de-stenio-garcia-acusa-filha-e-ex-mulher-de-ocultarem-provas-em-acao/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/defesa-de-stenio-garcia-acusa-filha-e-ex-mulher-de-ocultarem-provas-em-acao/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "defesa-de-stenio-garcia-acusa-filha-e-ex-mulher-de-ocultarem-provas-em-acao"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Defesa de Stênio Garcia acusa filha e ex-mulher de ocultarem provas em ação.",
+      "Defesa de Stênio Garcia acusa filha e ex-mulher de ocultarem provas em ação e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/negocios/bnp-paribas-agrada-com-lucro-e-receita-mas-despesas-crescem/",
+    "slug": "bnp-paribas-agrada-com-lucro-e-receita-mas-despesas-crescem",
+    "title": "BNP Paribas agrada com lucro e receita, mas despesas crescem",
+    "eyebrow": "Negocios",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:35:26.000Z",
+    "category": "Negocios",
+    "categoryKey": "negocios",
+    "previewClass": "thumb-negocios",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/negocios/bnp-paribas-agrada-com-lucro-e-receita-mas-despesas-crescem/",
+    "sourceLabel": "BNP Paribas agrada com lucro e receita, mas despesas crescem",
+    "lede": "BNP Paribas agrada com lucro e receita, mas despesas crescem. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "BNP Paribas agrada com lucro e receita, mas despesas crescem. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXNPEL8S0GQ-BASEIMAGE.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXNPEL8S0GQ-BASEIMAGE.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXNPEL8S0GQ-BASEIMAGE.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/negocios/bnp-paribas-agrada-com-lucro-e-receita-mas-despesas-crescem/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/negocios/bnp-paribas-agrada-com-lucro-e-receita-mas-despesas-crescem/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bnp-paribas-agrada-com-lucro-e-receita-mas-despesas-crescem"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre BNP Paribas agrada com lucro e receita, mas despesas crescem.",
+      "BNP Paribas agrada com lucro e receita, mas despesas crescem e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/internacional/brasil-passa-eua-em-ranking-de-liberdade-de-imprensa-pela-1a-vez-diz-rsf/",
+    "slug": "brasil-passa-eua-em-ranking-de-liberdade-de-imprensa-pela-1-vez-diz-rsf",
+    "title": "Brasil passa EUA em ranking de liberdade de imprensa pela 1ª vez, diz RSF",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:34:23.000Z",
+    "category": "Nacional",
+    "categoryKey": "internacional nacional brasil passa eua em ranking de liberdade de imprensa pela 1 vez diz rsf pais alcanca 52 posicao e deixa americanos em 64 em ultrapassagm inedita desde a criacao do levantamento em 2002",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/brasil-passa-eua-em-ranking-de-liberdade-de-imprensa-pela-1a-vez-diz-rsf/",
+    "sourceLabel": "Brasil passa EUA em ranking de liberdade de imprensa pela 1ª vez, diz RSF",
+    "lede": "CNN Brasil publicou uma atualização sobre Brasil passa EUA em ranking de liberdade de imprensa pela 1ª vez, diz RSF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Brasil passa EUA em ranking de liberdade de imprensa pela 1ª vez, diz RSF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Soldados-israelenses-vistos-em-uma-casa-palestina.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Soldados-israelenses-vistos-em-uma-casa-palestina.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Soldados-israelenses-vistos-em-uma-casa-palestina.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/brasil-passa-eua-em-ranking-de-liberdade-de-imprensa-pela-1a-vez-diz-rsf/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/internacional/brasil-passa-eua-em-ranking-de-liberdade-de-imprensa-pela-1a-vez-diz-rsf/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "brasil-passa-eua-em-ranking-de-liberdade-de-imprensa-pela-1-vez-diz-rsf"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Brasil passa EUA em ranking de liberdade de imprensa pela 1ª vez, diz RSF.",
+      "Brasil passa EUA em ranking de liberdade de imprensa pela 1ª vez, diz RSF e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/eleicoes/quaest-rs-disputa-ao-senado-tem-cenarios-indefinidos-manuela-tem-vantagem/",
+    "slug": "quaest-rs-disputa-ao-senado-tem-cenarios-indefinidos-manuela-tem-vantagem",
+    "title": "Quaest RS: disputa ao Senado tem cenários indefinidos; Manuela tem vantagem",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:34:04.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/quaest-rs-disputa-ao-senado-tem-cenarios-indefinidos-manuela-tem-vantagem/",
+    "sourceLabel": "Quaest RS: disputa ao Senado tem cenários indefinidos; Manuela tem vantagem",
+    "lede": "CNN Brasil publicou uma atualização sobre Quaest RS: disputa ao Senado tem cenários indefinidos; Manuela tem vantagem. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Quaest RS: disputa ao Senado tem cenários indefinidos; Manuela tem vantagem. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/09/AGE20220930025.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/09/AGE20220930025.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/09/AGE20220930025.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/eleicoes/quaest-rs-disputa-ao-senado-tem-cenarios-indefinidos-manuela-tem-vantagem/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/eleicoes/quaest-rs-disputa-ao-senado-tem-cenarios-indefinidos-manuela-tem-vantagem/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "quaest-rs-disputa-ao-senado-tem-cenarios-indefinidos-manuela-tem-vantagem"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Quaest RS: disputa ao Senado tem cenários indefinidos; Manuela tem vantagem.",
+      "Quaest RS: disputa ao Senado tem cenários indefinidos; Manuela tem vantagem e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/macroeconomia/divida-do-governo-avanca-para-801-do-pib-em-marco-maior-nivel-desde-2021/",
+    "slug": "divida-do-governo-avanca-para-80-1-do-pib-em-marco-maior-nivel-desde-2021",
+    "title": "Dívida do governo avança para 80,1% do PIB em março, maior nível desde 2021",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:27:57.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/divida-do-governo-avanca-para-801-do-pib-em-marco-maior-nivel-desde-2021/",
+    "sourceLabel": "Dívida do governo avança para 80,1% do PIB em março, maior nível desde 2021",
+    "lede": "Dívida do governo avança para 80,1% do PIB em março, maior nível desde 2021. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Dívida do governo avança para 80,1% do PIB em março, maior nível desde 2021. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/BR_CNN_290426_BOOKING_ALEX_LIMA_frame_38581-e1777505291784.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/BR_CNN_290426_BOOKING_ALEX_LIMA_frame_38581-e1777505291784.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/BR_CNN_290426_BOOKING_ALEX_LIMA_frame_38581-e1777505291784.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/divida-do-governo-avanca-para-801-do-pib-em-marco-maior-nivel-desde-2021/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/divida-do-governo-avanca-para-801-do-pib-em-marco-maior-nivel-desde-2021/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "divida-do-governo-avanca-para-80-1-do-pib-em-marco-maior-nivel-desde-2021"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Dívida do governo avança para 80,1% do PIB em março, maior nível desde 2021.",
+      "Dívida do governo avança para 80,1% do PIB em março, maior nível desde 2021 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul/",
+    "slug": "homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul",
+    "title": "Homem é preso após ameaçar vizinhos e atacar policiais no bairro Giju, em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:27:10.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul/",
+    "sourceLabel": "Homem é preso após ameaçar vizinhos e atacar policiais no bairro Giju, em Cruzeiro do Sul",
+    "lede": "Um homem foi preso após causar danos, ameaçar moradores e resistir à abordagem policial no bairro Giju, em Cruzeiro do Sul.",
+    "summary": "Um homem foi preso após causar danos, ameaçar moradores e resistir à abordagem policial no bairro Giju, em Cruzeiro do Sul.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul.svg",
+    "feedImageUrl": "./assets/news-fallbacks/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "homem-e-preso-apos-ameacar-vizinhos-e-atacar-policiais-no-bairro-giju-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Homem é preso após ameaçar vizinhos e atacar policiais no bairro Giju, em Cruzeiro do Sul.",
+      "Homem é preso após ameaçar vizinhos e atacar policiais no bairro Giju, em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul/",
+    "slug": "homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul",
+    "title": "Homem é preso após ameaçar o próprio pai e confessar furto em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:25:08.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul/",
+    "sourceLabel": "Homem é preso após ameaçar o próprio pai e confessar furto em Cruzeiro do Sul",
+    "lede": "Um homem foi preso após causar transtornos e ameaçar o próprio pai em uma residência localizada no bairro João Alves, em Cruzeiro do Sul.",
+    "summary": "Um homem foi preso após causar transtornos e ameaçar o próprio pai em uma residência localizada no bairro João Alves, em Cruzeiro do Sul.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul.svg",
+    "feedImageUrl": "./assets/news-fallbacks/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "homem-e-preso-apos-ameacar-o-proprio-pai-e-confessar-furto-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Homem é preso após ameaçar o próprio pai e confessar furto em Cruzeiro do Sul.",
+      "Homem é preso após ameaçar o próprio pai e confessar furto em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/homem-ameaca-vizinha-ataca-policiais-e-acaba-preso-em-cruzeiro-do-sul/",
+    "slug": "homem-ameaca-vizinha-ataca-policiais-e-acaba-preso-em-cruzeiro-do-sul",
+    "title": "Homem ameaça vizinha, ataca policiais e acaba preso em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:23:02.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/homem-ameaca-vizinha-ataca-policiais-e-acaba-preso-em-cruzeiro-do-sul/",
+    "sourceLabel": "Homem ameaça vizinha, ataca policiais e acaba preso em Cruzeiro do Sul",
+    "lede": "Foto: reprodução \" Um homem identificado apenas como Vitor, de 26 anos, foi preso pela Polícia Militar nesta quarta-feira, 29, em Cruzeiro do Sul por ameaçar vizinhos com um facão.",
+    "summary": "Foto: reprodução \" Um homem identificado apenas como Vitor, de 26 anos, foi preso pela Polícia Militar nesta quarta-feira, 29, em Cruzeiro do Sul por ameaçar vizinhos com um facão.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/Dois-homens-com-mandado-de-prisao-em-aberto-sao-presos.webp",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/Dois-homens-com-mandado-de-prisao-em-aberto-sao-presos.webp",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/Dois-homens-com-mandado-de-prisao-em-aberto-sao-presos.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/homem-ameaca-vizinha-ataca-policiais-e-acaba-preso-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/homem-ameaca-vizinha-ataca-policiais-e-acaba-preso-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "homem-ameaca-vizinha-ataca-policiais-e-acaba-preso-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Homem ameaça vizinha, ataca policiais e acaba preso em Cruzeiro do Sul.",
+      "Homem ameaça vizinha, ataca policiais e acaba preso em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/alysson-bestene-carismatico-no-trato-e-pragmatico-na-gestao/",
+    "slug": "alysson-bestene-carismatico-no-trato-e-pragmatico-na-gestao",
+    "title": "Alysson Bestene: carismático no trato e pragmático na gestão",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:21:07.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/alysson-bestene-carismatico-no-trato-e-pragmatico-na-gestao/",
+    "sourceLabel": "Alysson Bestene: carismático no trato e pragmático na gestão",
+    "lede": "ac24horas publicou uma atualização sobre Alysson Bestene: carismático no trato e pragmático na gestão. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Alysson Bestene: carismático no trato e pragmático na gestão. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-30-07-16-51-1200x1108.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-30-07-16-51-1200x1108.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-30-07-16-51-1200x1108.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/alysson-bestene-carismatico-no-trato-e-pragmatico-na-gestao/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/alysson-bestene-carismatico-no-trato-e-pragmatico-na-gestao/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "alysson-bestene-carismatico-no-trato-e-pragmatico-na-gestao"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Alysson Bestene: carismático no trato e pragmático na gestão.",
+      "Alysson Bestene: carismático no trato e pragmático na gestão e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/foragido-ha-2-meses-mc-negao-diz-nao-aguentar-mais-fugir-da-policia/",
+    "slug": "foragido-ha-2-meses-mc-negao-diz-nao-aguentar-mais-fugir-da-policia",
+    "title": "Foragido há 2 meses, MC Negão diz não aguentar mais fugir da polícia",
+    "eyebrow": "Policia",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:20:25.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/foragido-ha-2-meses-mc-negao-diz-nao-aguentar-mais-fugir-da-policia/",
+    "sourceLabel": "Foragido há 2 meses, MC Negão diz não aguentar mais fugir da polícia",
+    "lede": "Foragido há 2 meses, MC Negão diz não aguentar mais fugir da polícia. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Foragido há 2 meses, MC Negão diz não aguentar mais fugir da polícia. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/FURTO-SUSPEITA-BICICLETA-6-1.png?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/FURTO-SUSPEITA-BICICLETA-6-1.png?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/FURTO-SUSPEITA-BICICLETA-6-1.png?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/foragido-ha-2-meses-mc-negao-diz-nao-aguentar-mais-fugir-da-policia/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/foragido-ha-2-meses-mc-negao-diz-nao-aguentar-mais-fugir-da-policia/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "foragido-ha-2-meses-mc-negao-diz-nao-aguentar-mais-fugir-da-policia"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Foragido há 2 meses, MC Negão diz não aguentar mais fugir da polícia.",
+      "Foragido há 2 meses, MC Negão diz não aguentar mais fugir da polícia e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/deputado-manoel-moraes-e-vereador-hildegard-ouvem-demandas-da-populacao-na-parte-alta-da-cidade-de-rio-branco/",
+    "slug": "deputado-manoel-moraes-e-vereador-hildegard-ouvem-demandas-da-populacao-na-parte-alta-da-cidade-",
+    "title": "Deputado Manoel Moraes e vereador Hildegard ouvem demandas da população na parte alta da cidade de Rio Branco",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:19:24.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/deputado-manoel-moraes-e-vereador-hildegard-ouvem-demandas-da-populacao-na-parte-alta-da-cidade-de-rio-branco/",
+    "sourceLabel": "Deputado Manoel Moraes e vereador Hildegard ouvem demandas da população na parte alta da cidade de Rio Branco",
+    "lede": "No primeiro dia de posse do mandato, o vereador Hildegard e o deputado estadual Manoel Moraes realizaram uma reunião com moradores da parte alta da cidade para ouvir de perto as principais necessidades da comunidade.",
+    "summary": "No primeiro dia de posse do mandato, o vereador Hildegard e o deputado estadual Manoel Moraes realizaram uma reunião com moradores da parte alta da cidade para ouvir de perto as principais necessidades da comunidade.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-07.13.19-1-1200x800.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-07.13.19-1-1200x800.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-07.13.19-1-1200x800.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/deputado-manoel-moraes-e-vereador-hildegard-ouvem-demandas-da-populacao-na-parte-alta-da-cidade-de-rio-branco/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/deputado-manoel-moraes-e-vereador-hildegard-ouvem-demandas-da-populacao-na-parte-alta-da-cidade-de-rio-branco/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "deputado-manoel-moraes-e-vereador-hildegard-ouvem-demandas-da-populacao-na-parte-alta-da-cidade-"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Deputado Manoel Moraes e vereador Hildegard ouvem demandas da população na parte alta da cidade de Rio Branco.",
+      "Deputado Manoel Moraes e vereador Hildegard ouvem demandas da população na parte alta da cidade de Rio Branco e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/mercado/bolsas-da-asia-fecham-sem-direcao-pressionadas-por-tensoes-entre-eua-e-ira/",
+    "slug": "bolsas-da-asia-fecham-sem-direcao-pressionadas-por-tensoes-entre-eua-e-ira",
+    "title": "Bolsas da Ásia fecham sem direção pressionadas por tensões entre EUA e Irã",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:19:05.000Z",
+    "category": "Nacional",
+    "categoryKey": "mercado nacional bolsas da asia fecham sem direcao pressionadas por tensoes entre eua e ira presidente americano afirma que teera ficara sob bloqueio naval ate que haja um acordo que aborde as preocupacoes dos eua sobre programa nuclear iraniano",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/mercado/bolsas-da-asia-fecham-sem-direcao-pressionadas-por-tensoes-entre-eua-e-ira/",
+    "sourceLabel": "Bolsas da Ásia fecham sem direção pressionadas por tensões entre EUA e Irã",
+    "lede": "CNN Brasil publicou uma atualização sobre Bolsas da Ásia fecham sem direção pressionadas por tensões entre EUA e Irã. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Bolsas da Ásia fecham sem direção pressionadas por tensões entre EUA e Irã. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/uniao-europeia-2.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/uniao-europeia-2.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/uniao-europeia-2.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/mercado/bolsas-da-asia-fecham-sem-direcao-pressionadas-por-tensoes-entre-eua-e-ira/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/mercado/bolsas-da-asia-fecham-sem-direcao-pressionadas-por-tensoes-entre-eua-e-ira/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bolsas-da-asia-fecham-sem-direcao-pressionadas-por-tensoes-entre-eua-e-ira"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Bolsas da Ásia fecham sem direção pressionadas por tensões entre EUA e Irã.",
+      "Bolsas da Ásia fecham sem direção pressionadas por tensões entre EUA e Irã e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul/",
+    "slug": "homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul",
+    "title": "Homem é preso com drogas e armas durante operação policial em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:17:23.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul/",
+    "sourceLabel": "Homem é preso com drogas e armas durante operação policial em Cruzeiro do Sul",
+    "lede": "Um homem de 27 anos foi preso na última quarta-feira (29) no bairro Formoso, em Cruzeiro do Sul, durante uma ação da Polícia Militar. Um segundo suspeito conseguiu fugir.",
+    "summary": "Um homem de 27 anos foi preso na última quarta-feira (29) no bairro Formoso, em Cruzeiro do Sul, durante uma ação da Polícia Militar. Um segundo suspeito conseguiu fugir.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul.svg",
+    "feedImageUrl": "./assets/news-fallbacks/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "homem-e-preso-com-drogas-e-armas-durante-operacao-policial-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Homem é preso com drogas e armas durante operação policial em Cruzeiro do Sul.",
+      "Homem é preso com drogas e armas durante operação policial em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/agro/syngenta-registra-crescimento-de-vendas-e-ebitda-no-1o-trimestre-de-2026/",
+    "slug": "syngenta-registra-crescimento-de-vendas-e-ebitda-no-1-trimestre-de-2026",
+    "title": "Syngenta registra crescimento de vendas e ebitda no 1º trimestre de 2026",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:16:45.000Z",
+    "category": "Nacional",
+    "categoryKey": "agro nacional syngenta registra crescimento de vendas e ebitda no 1 trimestre de 2026 grupo atinge us 6 4 bilhoes em vendas 2 e ebitda de us 1 4 bilhao 5 com margem em expansao",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/agro/syngenta-registra-crescimento-de-vendas-e-ebitda-no-1o-trimestre-de-2026/",
+    "sourceLabel": "Syngenta registra crescimento de vendas e ebitda no 1º trimestre de 2026",
+    "lede": "CNN Brasil publicou uma atualização sobre Syngenta registra crescimento de vendas e ebitda no 1º trimestre de 2026. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Syngenta registra crescimento de vendas e ebitda no 1º trimestre de 2026. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-04-at-16.19.11.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-04-at-16.19.11.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-04-at-16.19.11.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/syngenta-registra-crescimento-de-vendas-e-ebitda-no-1o-trimestre-de-2026/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/agro/syngenta-registra-crescimento-de-vendas-e-ebitda-no-1o-trimestre-de-2026/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "syngenta-registra-crescimento-de-vendas-e-ebitda-no-1-trimestre-de-2026"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Syngenta registra crescimento de vendas e ebitda no 1º trimestre de 2026.",
+      "Syngenta registra crescimento de vendas e ebitda no 1º trimestre de 2026 e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/macroeconomia/bc-setor-publico-tem-deficit-de-r-807-bi-em-marco-pior-para-o-mes/",
+    "slug": "bc-setor-publico-tem-deficit-de-r-80-7-bi-em-marco-pior-para-o-mes",
+    "title": "BC: Setor público tem déficit de R$ 80,7 bi em março, pior para o mês",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:16:01.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/bc-setor-publico-tem-deficit-de-r-807-bi-em-marco-pior-para-o-mes/",
+    "sourceLabel": "BC: Setor público tem déficit de R$ 80,7 bi em março, pior para o mês",
+    "lede": "BC: Setor público tem déficit de R$ 80,7 bi em março, pior para o mês. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "BC: Setor público tem déficit de R$ 80,7 bi em março, pior para o mês. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/BR_CNN_290426_BOOKING_ALEX_LIMA_frame_38581-e1777505291784.jpeg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/BR_CNN_290426_BOOKING_ALEX_LIMA_frame_38581-e1777505291784.jpeg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/BR_CNN_290426_BOOKING_ALEX_LIMA_frame_38581-e1777505291784.jpeg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/bc-setor-publico-tem-deficit-de-r-807-bi-em-marco-pior-para-o-mes/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/bc-setor-publico-tem-deficit-de-r-807-bi-em-marco-pior-para-o-mes/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bc-setor-publico-tem-deficit-de-r-80-7-bi-em-marco-pior-para-o-mes"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre BC: Setor público tem déficit de R$ 80,7 bi em março, pior para o mês.",
+      "BC: Setor público tem déficit de R$ 80,7 bi em março, pior para o mês e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta/",
+    "slug": "tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta",
+    "title": "Tempo segue instável no Vale do Juruá com calor e chuvas rápidas nesta quinta",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:15:38.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta/",
+    "sourceLabel": "Tempo segue instável no Vale do Juruá com calor e chuvas rápidas nesta quinta",
+    "lede": "O tempo continua instável no Acre nesta quinta-feira (30), com predomínio de calor, alta umidade e ocorrência de chuvas rápidas ao longo do dia.",
+    "summary": "O tempo continua instável no Acre nesta quinta-feira (30), com predomínio de calor, alta umidade e ocorrência de chuvas rápidas ao longo do dia.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta.svg",
+    "feedImageUrl": "./assets/news-fallbacks/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "tempo-segue-instavel-no-vale-do-jurua-com-calor-e-chuvas-rapidas-nesta-quinta"
+    ],
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Tempo segue instável no Vale do Juruá com calor e chuvas rápidas nesta quinta.",
+      "Tempo segue instável no Vale do Juruá com calor e chuvas rápidas nesta quinta e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul/",
+    "slug": "hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul",
+    "title": "Hoje: show de Joelma deve reunir multidão em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:14:09.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul/",
+    "sourceLabel": "Hoje: show de Joelma deve reunir multidão em Cruzeiro do Sul",
+    "lede": "A cantora Joelma se apresenta nesta quinta-feira (30) em Cruzeiro do Sul, durante a tradicional Festa do Trabalhador, e a expectativa é de um público gigantesco na Praça Orleir Cameli.",
+    "summary": "A cantora Joelma se apresenta nesta quinta-feira (30) em Cruzeiro do Sul, durante a tradicional Festa do Trabalhador, e a expectativa é de um público gigantesco na Praça Orleir Cameli.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul.svg",
+    "feedImageUrl": "./assets/news-fallbacks/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Hoje: show de Joelma deve reunir multidão em Cruzeiro do Sul.",
+      "Hoje: show de Joelma deve reunir multidão em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agencia.ac.gov.br/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio/",
+    "slug": "acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio",
+    "title": "Acre tem a menor desigualdade salarial do país, aponta relatório",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:11:25.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio/",
+    "sourceLabel": "Acre tem a menor desigualdade salarial do país, aponta relatório",
+    "lede": "Agencia Acre publicou uma atualização sobre Acre tem a menor desigualdade salarial do país, aponta relatório. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Acre publicou uma atualização sobre Acre tem a menor desigualdade salarial do país, aponta relatório. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio.svg",
+    "feedImageUrl": "./assets/news-fallbacks/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "acre-tem-a-menor-desigualdade-salarial-do-pais-aponta-relatorio"
+    ],
+    "body": [
+      "Agencia Acre publicou em 30 de abr de 2026 a base desta noticia sobre Acre tem a menor desigualdade salarial do país, aponta relatório.",
+      "Acre tem a menor desigualdade salarial do país, aponta relatório e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/oposicao-garante-que-nao-ha-clima-para-envio-de-novo-nome-para-stf-antes-das-eleicoes.ghtml",
+    "slug": "oposicao-garante-que-nao-ha-clima-para-envio-de-novo-nome-para-stf-antes-das-eleicoes",
+    "title": "Oposição garante que não há clima para envio de novo nome para STF antes das eleições",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:11:19.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/oposicao-garante-que-nao-ha-clima-para-envio-de-novo-nome-para-stf-antes-das-eleicoes.ghtml",
+    "sourceLabel": "Oposição garante que não há clima para envio de novo nome para STF antes das eleições",
+    "lede": "Logo depois da derrota, a oposição já anunciava: não adianta o presidente Luiz Inácio Lula da Silva (PT) mandar um novo nome para o STF antes das eleições. Será derrotado.",
+    "summary": "Logo depois da derrota, a oposição já anunciava: não adianta o presidente Luiz Inácio Lula da Silva (PT) mandar um novo nome para o STF antes das eleições. Será derrotado.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/-hZPa66BpumD61UcPJ_h7iGtPzw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/L/Z/adcy65SrCCD42jDIVzDA/agf20250520012.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/-hZPa66BpumD61UcPJ_h7iGtPzw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/L/Z/adcy65SrCCD42jDIVzDA/agf20250520012.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/-hZPa66BpumD61UcPJ_h7iGtPzw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/L/Z/adcy65SrCCD42jDIVzDA/agf20250520012.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/oposicao-garante-que-nao-ha-clima-para-envio-de-novo-nome-para-stf-antes-das-eleicoes.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/oposicao-garante-que-nao-ha-clima-para-envio-de-novo-nome-para-stf-antes-das-eleicoes.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "oposicao-garante-que-nao-ha-clima-para-envio-de-novo-nome-para-stf-antes-das-eleicoes"
+    ],
+    "body": [
+      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Oposição garante que não há clima para envio de novo nome para STF antes das eleições.",
+      "Oposição garante que não há clima para envio de novo nome para STF antes das eleições e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/luana-piovani-sobre-haters-voces-criaram-esse-monstro/",
+    "slug": "luana-piovani-sobre-haters-voces-criaram-esse-monstro",
+    "title": "Luana Piovani sobre haters: “Vocês criaram esse monstro”",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:08:32.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional luana piovani sobre haters voces criaram esse monstro nas redes sociais a atriz fez uma reflexao sobre como os ataques de internautas alimenta sua fama",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/luana-piovani-sobre-haters-voces-criaram-esse-monstro/",
+    "sourceLabel": "Luana Piovani sobre haters: “Vocês criaram esse monstro”",
+    "lede": "CNN Brasil publicou uma atualização sobre Luana Piovani sobre haters: “Vocês criaram esse monstro”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Luana Piovani sobre haters: “Vocês criaram esse monstro”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/luana-e-virginia.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/luana-e-virginia.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/luana-e-virginia.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/luana-piovani-sobre-haters-voces-criaram-esse-monstro/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/luana-piovani-sobre-haters-voces-criaram-esse-monstro/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "luana-piovani-sobre-haters-voces-criaram-esse-monstro"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Luana Piovani sobre haters: “Vocês criaram esse monstro”.",
+      "Luana Piovani sobre haters: “Vocês criaram esse monstro” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/eleicoes/quaest-daniel-vilela-lidera-cenarios-de-1o-e-2o-turnos-ao-governo-de-go/",
+    "slug": "quaest-daniel-vilela-lidera-cenarios-de-1-e-2-turnos-ao-governo-de-go",
+    "title": "Quaest: Daniel Vilela lidera cenários de 1º e 2º turnos ao governo de GO",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:05:08.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/quaest-daniel-vilela-lidera-cenarios-de-1o-e-2o-turnos-ao-governo-de-go/",
+    "sourceLabel": "Quaest: Daniel Vilela lidera cenários de 1º e 2º turnos ao governo de GO",
+    "lede": "CNN Brasil publicou uma atualização sobre Quaest: Daniel Vilela lidera cenários de 1º e 2º turnos ao governo de GO. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Quaest: Daniel Vilela lidera cenários de 1º e 2º turnos ao governo de GO. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-29-at-14.55.47-_1_.jpg?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-29-at-14.55.47-_1_.jpg?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/WhatsApp-Image-2026-04-29-at-14.55.47-_1_.jpg?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/eleicoes/quaest-daniel-vilela-lidera-cenarios-de-1o-e-2o-turnos-ao-governo-de-go/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/eleicoes/quaest-daniel-vilela-lidera-cenarios-de-1o-e-2o-turnos-ao-governo-de-go/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "quaest-daniel-vilela-lidera-cenarios-de-1-e-2-turnos-ao-governo-de-go"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Quaest: Daniel Vilela lidera cenários de 1º e 2º turnos ao governo de GO.",
+      "Quaest: Daniel Vilela lidera cenários de 1º e 2º turnos ao governo de GO e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/entretenimento/entenda-briga-envolvendo-mc-paiva-malevola-e-soso-careca/",
+    "slug": "entenda-briga-envolvendo-mc-paiva-malevola-e-soso-careca",
+    "title": "Entenda briga envolvendo MC Paiva, Malévola e Soso Careca",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:05:02.000Z",
+    "category": "Nacional",
+    "categoryKey": "entretenimento nacional entenda briga envolvendo mc paiva malevola e soso careca influenciadora foi tirar satisfacao pessoalmente com casal e funkeiro partiu para cima dela",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/entenda-briga-envolvendo-mc-paiva-malevola-e-soso-careca/",
+    "sourceLabel": "Entenda briga envolvendo MC Paiva, Malévola e Soso Careca",
+    "lede": "Entenda briga envolvendo MC Paiva, Malévola e Soso Careca. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Entenda briga envolvendo MC Paiva, Malévola e Soso Careca. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Maria-Sophia-presente-ze-felipe.webp?w=200",
+    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Maria-Sophia-presente-ze-felipe.webp?w=200",
+    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/Maria-Sophia-presente-ze-felipe.webp?w=200",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/entenda-briga-envolvendo-mc-paiva-malevola-e-soso-careca/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/entretenimento/entenda-briga-envolvendo-mc-paiva-malevola-e-soso-careca/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "entenda-briga-envolvendo-mc-paiva-malevola-e-soso-careca"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Entenda briga envolvendo MC Paiva, Malévola e Soso Careca.",
+      "Entenda briga envolvendo MC Paiva, Malévola e Soso Careca e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/economia/macroeconomia/pnad-desemprego-ibge-30-abril-26/",
+    "slug": "desemprego-sobe-para-6-1-no-trimestre-encerrado-em-marco-diz-ibge",
+    "title": "Desemprego sobe para 6,1% no trimestre encerrado em março, diz IBGE",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:04:09.000Z",
+    "category": "Nacional",
+    "categoryKey": "macroeconomia nacional desemprego sobe para 6 1 no trimestre encerrado em marco diz ibge a taxa de desemprego subiu para 6 1 no trimestre movel encerrado em marco segundo dados da pnad continua pesquisa nacional por amostra de domicilios divulgada pelo ibge instituto brasileiro de geografia e estatistica nesta quinta feira 30 em atuali",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/pnad-desemprego-ibge-30-abril-26/",
+    "sourceLabel": "Desemprego sobe para 6,1% no trimestre encerrado em março, diz IBGE",
+    "lede": "A taxa de desemprego subiu para 6,1% no trimestre móvel encerrado em março, segundo dados da Pnad Contínua (Pesquisa Nacional por Amostra de Domicílios), divulgada pelo IBGE (Instituto Brasileiro de Geografia e Estatística) nesta quinta-feira (30).",
+    "summary": "A taxa de desemprego subiu para 6,1% no trimestre móvel encerrado em março, segundo dados da Pnad Contínua (Pesquisa Nacional por Amostra de Domicílios), divulgada pelo IBGE (Instituto Brasileiro de Geografia e Estatística) nesta quinta-feira (30).",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/desemprego-sobe-para-6-1-no-trimestre-encerrado-em-marco-diz-ibge.svg",
+    "feedImageUrl": "./assets/news-fallbacks/desemprego-sobe-para-6-1-no-trimestre-encerrado-em-marco-diz-ibge.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/desemprego-sobe-para-6-1-no-trimestre-encerrado-em-marco-diz-ibge.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/pnad-desemprego-ibge-30-abril-26/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/economia/macroeconomia/pnad-desemprego-ibge-30-abril-26/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "desemprego-sobe-para-6-1-no-trimestre-encerrado-em-marco-diz-ibge"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Desemprego sobe para 6,1% no trimestre encerrado em março, diz IBGE.",
+      "Desemprego sobe para 6,1% no trimestre encerrado em março, diz IBGE e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/policia-militar-prende-homem-com-armas-e-drogas-em-cruzeiro-do-sul/",
+    "slug": "policia-militar-prende-homem-com-armas-e-drogas-em-cruzeiro-do-sul",
+    "title": "Policia Militar prende homem com armas e drogas em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:04:05.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/policia-militar-prende-homem-com-armas-e-drogas-em-cruzeiro-do-sul/",
+    "sourceLabel": "Policia Militar prende homem com armas e drogas em Cruzeiro do Sul",
+    "lede": "Em Cruzeiro do Sul nesta quarta-feira, 29, um homem identificado por Franklin, 27 anos foi preso com drogas e duas armas no bairro Formoso. Um comparsa dele, de nome Maicon,conseguiu fugir.",
+    "summary": "Em Cruzeiro do Sul nesta quarta-feira, 29, um homem identificado por Franklin, 27 anos foi preso com drogas e duas armas no bairro Formoso. Um comparsa dele, de nome Maicon,conseguiu fugir.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/976x695_IMAGEM-DESTACADA-2026-03-03T070520.790.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/976x695_IMAGEM-DESTACADA-2026-03-03T070520.790.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/03/976x695_IMAGEM-DESTACADA-2026-03-03T070520.790.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/policia-militar-prende-homem-com-armas-e-drogas-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/policia-militar-prende-homem-com-armas-e-drogas-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "policia-militar-prende-homem-com-armas-e-drogas-em-cruzeiro-do-sul"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Policia Militar prende homem com armas e drogas em Cruzeiro do Sul.",
+      "Policia Militar prende homem com armas e drogas em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/federacao-de-teatro-leva-teatro-encontros-e-emocao-para-rio-branco/",
+    "slug": "federacao-de-teatro-leva-teatro-encontros-e-emocao-para-rio-branco",
+    "title": "Federação de Teatro leva teatro, encontros e emoção para Rio Branco",
+    "eyebrow": "Cultura",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:02:20.000Z",
+    "category": "Cultura",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cultura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/federacao-de-teatro-leva-teatro-encontros-e-emocao-para-rio-branco/",
+    "sourceLabel": "Federação de Teatro leva teatro, encontros e emoção para Rio Branco",
+    "lede": "Screenshot \" Rio Branco se prepara para viver dias de arte e conexão com a chegada do Fetac em Cena 2026 – Mostra Rio Branco, que promete ocupar a cidade com apresentações teatrais, trocas culturais e muita emoção.",
+    "summary": "Screenshot \" Rio Branco se prepara para viver dias de arte e conexão com a chegada do Fetac em Cena 2026 – Mostra Rio Branco, que promete ocupar a cidade com apresentações teatrais, trocas culturais e muita emoção.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6796-959x1200.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6796-959x1200.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6796-959x1200.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/federacao-de-teatro-leva-teatro-encontros-e-emocao-para-rio-branco/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/federacao-de-teatro-leva-teatro-encontros-e-emocao-para-rio-branco/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "federacao-de-teatro-leva-teatro-encontros-e-emocao-para-rio-branco"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Federação de Teatro leva teatro, encontros e emoção para Rio Branco.",
+      "Federação de Teatro leva teatro, encontros e emoção para Rio Branco e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/receita-paga-lote-da-malha-fina-do-imposto-de-renda",
+    "slug": "receita-paga-lote-da-malha-fina-do-imposto-de-renda-nesta-quinta-feira",
+    "title": "Receita paga lote da malha fina do Imposto de Renda nesta quinta-feira",
+    "eyebrow": "Negocios",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:02:00.000Z",
+    "category": "Negocios",
+    "categoryKey": "negocios",
+    "previewClass": "thumb-negocios",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/receita-paga-lote-da-malha-fina-do-imposto-de-renda",
+    "sourceLabel": "Receita paga lote da malha fina do Imposto de Renda nesta quinta-feira",
+    "lede": "Cerca de 415 mil contribuintes que caíram na malha fina e regularizaram as pendências com o Fisco vão acertar as contas com o Leão.",
+    "summary": "Cerca de 415 mil contribuintes que caíram na malha fina e regularizaram as pendências com o Fisco vão acertar as contas com o Leão.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "feedImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "sourceImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/receita-paga-lote-da-malha-fina-do-imposto-de-renda"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/receita-paga-lote-da-malha-fina-do-imposto-de-renda"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "receita-paga-lote-da-malha-fina-do-imposto-de-renda-nesta-quinta-feira"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Receita paga lote da malha fina do Imposto de Renda nesta quinta-feira.",
+      "Receita paga lote da malha fina do Imposto de Renda nesta quinta-feira e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/manaus-esta-entre-capitais-com-pior-cobertura-de-pre-escola-no-brasil-aponta-estudo/",
+    "slug": "manaus-esta-entre-capitais-com-pior-cobertura-de-pre-escola-no-brasil-aponta-estudo",
+    "title": "Manaus está entre capitais com pior cobertura de pré-escola no Brasil, aponta estudo",
+    "eyebrow": "Educacao",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:01:20.000Z",
+    "category": "Educacao",
+    "categoryKey": "educacao",
+    "previewClass": "thumb-educacao",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/manaus-esta-entre-capitais-com-pior-cobertura-de-pre-escola-no-brasil-aponta-estudo/",
+    "sourceLabel": "Manaus está entre capitais com pior cobertura de pré-escola no Brasil, aponta estudo",
+    "lede": "Manaus está entre as capitais brasileiras com pior cobertura de pré-escola, segundo levantamento da Interdisciplinaridade e Evidências no Debate Educacional (Iede).",
+    "summary": "Manaus está entre as capitais brasileiras com pior cobertura de pré-escola, segundo levantamento da Interdisciplinaridade e Evidências no Debate Educacional (Iede).",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6800.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6800.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6800.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/manaus-esta-entre-capitais-com-pior-cobertura-de-pre-escola-no-brasil-aponta-estudo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/manaus-esta-entre-capitais-com-pior-cobertura-de-pre-escola-no-brasil-aponta-estudo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "manaus-esta-entre-capitais-com-pior-cobertura-de-pre-escola-no-brasil-aponta-estudo"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Manaus está entre capitais com pior cobertura de pré-escola no Brasil, aponta estudo.",
+      "Manaus está entre capitais com pior cobertura de pré-escola no Brasil, aponta estudo e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/governador-em-exercicio-do-rio-troca-comando-de-secretarias",
+    "slug": "governador-em-exercicio-do-rio-troca-comando-de-secretarias",
+    "title": "Governador em exercício do Rio troca comando de secretarias",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:00:00.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/governador-em-exercicio-do-rio-troca-comando-de-secretarias",
+    "sourceLabel": "Governador em exercício do Rio troca comando de secretarias",
+    "lede": "O governador em exercício do Rio, Ricardo Couto, nomeou três novos secretários para as pastas da Fazenda, Planejamento e Gestão e a Procuradoria-Geral do Estado.",
+    "summary": "O governador em exercício do Rio, Ricardo Couto, nomeou três novos secretários para as pastas da Fazenda, Planejamento e Gestão e a Procuradoria-Geral do Estado.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "feedImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "sourceImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/governador-em-exercicio-do-rio-troca-comando-de-secretarias"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/politica/noticia/2026-04/governador-em-exercicio-do-rio-troca-comando-de-secretarias"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governador-em-exercicio-do-rio-troca-comando-de-secretarias"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Governador em exercício do Rio troca comando de secretarias.",
+      "Governador em exercício do Rio troca comando de secretarias e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.theverge.com/news/920999/instagram-says-it-doesnt-want-your-tweet-round-ups",
+    "slug": "instagram-says-it-doesn-t-want-your-tweet-round-ups",
+    "title": "Atualização internacional de The Verge - 07:00",
+    "eyebrow": "Novidades",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:00:00.000Z",
+    "category": "Novidades",
+    "categoryKey": "novidades instagram says it doesn t want your tweet round ups the internet is full of copycat stolen reposted and low effort content and meta at least publicly has said it is working to cut off some of the reach beginning in 2024 the company has made incremental announcements saying it would begin limiting uno",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/news/920999/instagram-says-it-doesnt-want-your-tweet-round-ups",
+    "sourceLabel": "Atualização internacional de The Verge - 07:00",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 07:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 07:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/acastro_STK070__02.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/acastro_STK070__02.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/acastro_STK070__02.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/news/920999/instagram-says-it-doesnt-want-your-tweet-round-ups"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/news/920999/instagram-says-it-doesnt-want-your-tweet-round-ups"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "instagram-says-it-doesn-t-want-your-tweet-round-ups"
+    ],
+    "body": [
+      "The Verge publicou em 30 de abr de 2026 a base desta noticia sobre Instagram says it doesn’t want your tweet round ups.",
+      "Instagram says it doesn’t want your tweet round ups e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction",
+    "slug": "is-this-de-extinction-project-actually-onto-something",
+    "title": "Atualização internacional de The Verge - 07:00",
+    "eyebrow": "Novidades",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:00:00.000Z",
+    "category": "Novidades",
+    "categoryKey": "novidades is this de extinction project actually onto something dallas based genetics and biotech startup colossal has raised hundreds of millions of dollars from venture capitalists the cia and peter thiel among others its buzzy de extinction projects aim to bring back lost animals like the woolly mammoth the ta",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction",
+    "sourceLabel": "Atualização internacional de The Verge - 07:00",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 07:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 07:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268465_Colossal_is_back_bringing_back_bluebuck_antelope_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268465_Colossal_is_back_bringing_back_bluebuck_antelope_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268465_Colossal_is_back_bringing_back_bluebuck_antelope_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "is-this-de-extinction-project-actually-onto-something"
+    ],
+    "body": [
+      "The Verge publicou em 30 de abr de 2026 a base desta noticia sobre Is this ‘de-extinction’ project actually onto something?.",
+      "Is this ‘de-extinction’ project actually onto something? e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction",
+    "slug": "is-this-de-extinction-project-actually-onto-something",
+    "title": "Atualização internacional de The Verge - 07:00",
+    "eyebrow": "Novidades",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T12:00:00.000Z",
+    "category": "Novidades",
+    "categoryKey": "cultura",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction",
+    "sourceLabel": "Atualização internacional de The Verge - 07:00",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 07:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 07:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268465_Colossal_is_back_bringing_back_bluebuck_antelope_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268465_Colossal_is_back_bringing_back_bluebuck_antelope_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268465_Colossal_is_back_bringing_back_bluebuck_antelope_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "The Verge",
+        "url": "https://www.theverge.com/science/921088/colossal-de-extinction-antelope-reproduction"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "is-this-de-extinction-project-actually-onto-something"
+    ],
+    "body": [
+      "The Verge publicou em 30 de abr de 2026 a base desta noticia sobre Is this ‘de-extinction’ project actually onto something?.",
+      "Is this ‘de-extinction’ project actually onto something? e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/mpf-processa-uniao-hospital-e-medicos-por-pesquisa-irregular-com-200-mortes-durante-a-pandemia-no-am/",
+    "slug": "mpf-processa-uniao-hospital-e-medicos-por-pesquisa-irregular-com-200-mortes-durante-a-pandemia-n",
+    "title": "MPF processa União, hospital e médicos por pesquisa irregular com 200 mortes durante a pandemia no AM",
+    "eyebrow": "Saude",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:59:54.000Z",
+    "category": "Saude",
+    "categoryKey": "saude",
+    "previewClass": "thumb-saude",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/mpf-processa-uniao-hospital-e-medicos-por-pesquisa-irregular-com-200-mortes-durante-a-pandemia-no-am/",
+    "sourceLabel": "MPF processa União, hospital e médicos por pesquisa irregular com 200 mortes durante a pandemia no AM",
+    "lede": "O Ministério Público Federal (MPF) ajuizou uma ação civil pública contra a União, a rede de hospitais Samel e dois médicos por irregularidades em uma pesquisa com o medicamento proxalutamida durante a pandemia de Covid-19 no Amazonas.",
+    "summary": "O Ministério Público Federal (MPF) ajuizou uma ação civil pública contra a União, a rede de hospitais Samel e dois médicos por irregularidades em uma pesquisa com o medicamento proxalutamida durante a pandemia de Covid-19 no Amazonas.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6799.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6799.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6799.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/mpf-processa-uniao-hospital-e-medicos-por-pesquisa-irregular-com-200-mortes-durante-a-pandemia-no-am/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/mpf-processa-uniao-hospital-e-medicos-por-pesquisa-irregular-com-200-mortes-durante-a-pandemia-no-am/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mpf-processa-uniao-hospital-e-medicos-por-pesquisa-irregular-com-200-mortes-durante-a-pandemia-n"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre MPF processa União, hospital e médicos por pesquisa irregular com 200 mortes durante a pandemia no AM.",
+      "MPF processa União, hospital e médicos por pesquisa irregular com 200 mortes durante a pandemia no AM e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil/",
+    "slug": "acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil",
+    "title": "Acre se destaca em estudo global por ajudar a reduzir perda de florestas no Brasil",
+    "eyebrow": "Acre / Governo",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:59:34.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil/",
+    "sourceLabel": "Acre se destaca em estudo global por ajudar a reduzir perda de florestas no Brasil",
+    "lede": "Um estudo global recente colocou o Acre em evidência no cenário ambiental, apontando o estado como um dos que mais contribuíram para a redução da perda de florestas no Brasil.",
+    "summary": "Um estudo global recente colocou o Acre em evidência no cenário ambiental, apontando o estado como um dos que mais contribuíram para a redução da perda de florestas no Brasil.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil.svg",
+    "feedImageUrl": "./assets/news-fallbacks/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "acre-se-destaca-em-estudo-global-por-ajudar-a-reduzir-perda-de-florestas-no-brasil"
+    ],
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Acre se destaca em estudo global por ajudar a reduzir perda de florestas no Brasil.",
+      "Acre se destaca em estudo global por ajudar a reduzir perda de florestas no Brasil e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/deputada-janad-valcari-e-abordada-pela-pf-apos-saque-em-banco-em-palmas/",
+    "slug": "deputada-janad-valcari-e-abordada-pela-pf-apos-saque-em-banco-em-palmas",
+    "title": "Deputada Janad Valcari é abordada pela PF após saque em banco em Palmas",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:58:49.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/deputada-janad-valcari-e-abordada-pela-pf-apos-saque-em-banco-em-palmas/",
+    "sourceLabel": "Deputada Janad Valcari é abordada pela PF após saque em banco em Palmas",
+    "lede": "A deputada estadual Janad Valcari (PP) foi abordada por agentes da Polícia Federal na manhã desta quarta-feira (29), na saída de uma agência bancária em Palmas, logo após realizar um saque no valor de R$ 500 mil.",
+    "summary": "A deputada estadual Janad Valcari (PP) foi abordada por agentes da Polícia Federal na manhã desta quarta-feira (29), na saída de uma agência bancária em Palmas, logo após realizar um saque no valor de R$ 500 mil.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6798.webp",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6798.webp",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6798.webp",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/deputada-janad-valcari-e-abordada-pela-pf-apos-saque-em-banco-em-palmas/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/deputada-janad-valcari-e-abordada-pela-pf-apos-saque-em-banco-em-palmas/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "deputada-janad-valcari-e-abordada-pela-pf-apos-saque-em-banco-em-palmas"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Deputada Janad Valcari é abordada pela PF após saque em banco em Palmas.",
+      "Deputada Janad Valcari é abordada pela PF após saque em banco em Palmas e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/justica-determina-demarcacao-de-terra-indigena-em-roraima-em-ate-cinco-anos/",
+    "slug": "justica-determina-demarcacao-de-terra-indigena-em-roraima-em-ate-cinco-anos",
+    "title": "Justiça determina demarcação de terra indígena em Roraima em até cinco anos",
+    "eyebrow": "Cotidiano",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:58:01.000Z",
+    "category": "Cotidiano",
+    "categoryKey": "regiao norte cotidiano justica determina demarcacao de terra indigena em roraima em ate cinco anos o tribunal regional federal da 1 regiao trf1 decidiu que a uniao e a fundacao nacional dos povos indigenas funai devem concluir no prazo maximo de cinco anos o processo de demarcacao da comunidade indigena anzol situada na zona rural de boa vista rr",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/justica-determina-demarcacao-de-terra-indigena-em-roraima-em-ate-cinco-anos/",
+    "sourceLabel": "Justiça determina demarcação de terra indígena em Roraima em até cinco anos",
+    "lede": "ac24horas publicou uma atualização sobre Justiça determina demarcação de terra indígena em Roraima em até cinco anos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Justiça determina demarcação de terra indígena em Roraima em até cinco anos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6797.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6797.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/IMG_6797.jpeg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/justica-determina-demarcacao-de-terra-indigena-em-roraima-em-ate-cinco-anos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/justica-determina-demarcacao-de-terra-indigena-em-roraima-em-ate-cinco-anos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "justica-determina-demarcacao-de-terra-indigena-em-roraima-em-ate-cinco-anos"
+    ],
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Justiça determina demarcação de terra indígena em Roraima em até cinco anos.",
+      "Justiça determina demarcação de terra indígena em Roraima em até cinco anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/04/30/aliados-do-governo-querem-mulher-no-stf-para-emparedar-alcolumbre-e-oposicao.ghtml",
+    "slug": "aliados-do-governo-querem-mulher-no-stf-para-emparedar-alcolumbre-e-oposicao",
+    "title": "Aliados do governo querem mulher no STF para emparedar Alcolumbre e oposição",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:52:33.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/04/30/aliados-do-governo-querem-mulher-no-stf-para-emparedar-alcolumbre-e-oposicao.ghtml",
+    "sourceLabel": "Aliados do governo querem mulher no STF para emparedar Alcolumbre e oposição",
+    "lede": "Aliados do governo Lula discutem nos bastidores dois caminhos após a derrota recente no Senado: buscar composição para garantir a aprovação de projetos ou partir para o enfrentamento direto com o Congresso.",
+    "summary": "Aliados do governo Lula discutem nos bastidores dois caminhos após a derrota recente no Senado: buscar composição para garantir a aprovação de projetos ou partir para o enfrentamento direto com o Congresso.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/FrA2Dkr1ekqkIqN2riiJ-afVIBQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/B/h/YGBABxT9iPE7MASe9dvw/fotojet-2025-11-24t091307.336.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/FrA2Dkr1ekqkIqN2riiJ-afVIBQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/B/h/YGBABxT9iPE7MASe9dvw/fotojet-2025-11-24t091307.336.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/FrA2Dkr1ekqkIqN2riiJ-afVIBQ=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/B/h/YGBABxT9iPE7MASe9dvw/fotojet-2025-11-24t091307.336.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/04/30/aliados-do-governo-querem-mulher-no-stf-para-emparedar-alcolumbre-e-oposicao.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/julia-duailibi/post/2026/04/30/aliados-do-governo-querem-mulher-no-stf-para-emparedar-alcolumbre-e-oposicao.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "aliados-do-governo-querem-mulher-no-stf-para-emparedar-alcolumbre-e-oposicao"
+    ],
+    "body": [
+      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Aliados do governo querem mulher no STF para emparedar Alcolumbre e oposição.",
+      "Aliados do governo querem mulher no STF para emparedar Alcolumbre e oposição e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos/",
+    "slug": "motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos",
+    "title": "Motoboy que “aterroriza pedestres” é alvo de operação no Rio; veja vídeos",
+    "eyebrow": "Policia",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:51:59.000Z",
+    "category": "Policia",
+    "categoryKey": "policia",
+    "previewClass": "thumb-policia",
+    "sourceName": "CNN Brasil",
+    "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos/",
+    "sourceLabel": "Motoboy que “aterroriza pedestres” é alvo de operação no Rio; veja vídeos",
+    "lede": "CNN Brasil publicou uma atualização sobre Motoboy que “aterroriza pedestres” é alvo de operação no Rio; veja vídeos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Motoboy que “aterroriza pedestres” é alvo de operação no Rio; veja vídeos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos.svg",
+    "feedImageUrl": "./assets/news-fallbacks/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "CNN Brasil",
+        "url": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "motoboy-que-aterroriza-pedestres-e-alvo-de-operacao-no-rio-veja-videos"
+    ],
+    "body": [
+      "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Motoboy que “aterroriza pedestres” é alvo de operação no Rio; veja vídeos.",
+      "Motoboy que “aterroriza pedestres” é alvo de operação no Rio; veja vídeos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/reacao-a-derrota-de-messias-no-congresso-divide-o-governo-lula.ghtml",
+    "slug": "reacao-a-derrota-de-messias-no-congresso-divide-governo-lula",
+    "title": "Reação a derrota de Messias no Congresso divide governo Lula",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:50:47.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/reacao-a-derrota-de-messias-no-congresso-divide-o-governo-lula.ghtml",
+    "sourceLabel": "Reação a derrota de Messias no Congresso divide governo Lula",
+    "lede": "Depois da derrota histórica na indicação de Jorge Messias para o STF, uma ala do governo Lula defende retaliação, com a retirada de cargos do presidente do Senado, Davi Alcolumbre.",
+    "summary": "Depois da derrota histórica na indicação de Jorge Messias para o STF, uma ala do governo Lula defende retaliação, com a retirada de cargos do presidente do Senado, Davi Alcolumbre.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/reacao-a-derrota-de-messias-no-congresso-divide-governo-lula.svg",
+    "feedImageUrl": "./assets/news-fallbacks/reacao-a-derrota-de-messias-no-congresso-divide-governo-lula.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/reacao-a-derrota-de-messias-no-congresso-divide-governo-lula.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/reacao-a-derrota-de-messias-no-congresso-divide-o-governo-lula.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/reacao-a-derrota-de-messias-no-congresso-divide-o-governo-lula.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "reacao-a-derrota-de-messias-no-congresso-divide-governo-lula"
+    ],
+    "body": [
+      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Reação a derrota de Messias no Congresso divide governo Lula.",
+      "Reação a derrota de Messias no Congresso divide governo Lula e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -568,8 +2869,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/esportes/outros-esportes/atleta-de-16-anos-bate-recorde-mundial-de-escalada-veja-video/",
     "sourceLabel": "Atleta de 16 anos bate recorde mundial de escalada; veja vídeo",
-    "lede": "Zhao Yicheng fez a prova em 4,58s e superou a marca do norte-americano Sam Watson",
-    "summary": "Zhao Yicheng fez a prova em 4,58s e superou a marca do norte-americano Sam Watson",
+    "lede": "CNN Brasil publicou uma atualização sobre Atleta de 16 anos bate recorde mundial de escalada; veja vídeo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Atleta de 16 anos bate recorde mundial de escalada; veja vídeo. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -666,8 +2967,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/agro/klabin-conclui-captacao-de-r-175-bilhao-com-emissao-de-cpr-fs/",
     "sourceLabel": "Klabin conclui captação de R$ 1,75 bilhão com emissão de CPR-Fs",
-    "lede": "Recursos da segunda emissão de CPR-Fs serão direcionados a atividades ligadas ao setor de silvicultura e reflorestamento",
-    "summary": "Recursos da segunda emissão de CPR-Fs serão direcionados a atividades ligadas ao setor de silvicultura e reflorestamento",
+    "lede": "CNN Brasil publicou uma atualização sobre Klabin conclui captação de R$ 1,75 bilhão com emissão de CPR-Fs. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Klabin conclui captação de R$ 1,75 bilhão com emissão de CPR-Fs. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -715,8 +3016,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/nacional/brasil/frente-fria-muda-tempo-no-feriado-e-atinge-centro-sul-do-brasil/",
     "sourceLabel": "Frente fria muda tempo no feriado e atinge Centro-Sul do Brasil",
-    "lede": "Após calor inicial, temporais e queda de temperatura são esperados em diversas regiões do país no fim de semana prolongado",
-    "summary": "Após calor inicial, temporais e queda de temperatura são esperados em diversas regiões do país no fim de semana prolongado",
+    "lede": "CNN Brasil publicou uma atualização sobre Frente fria muda tempo no feriado e atinge Centro-Sul do Brasil. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Frente fria muda tempo no feriado e atinge Centro-Sul do Brasil. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -857,7 +3158,7 @@ window.NEWS_DATA = [
     "date": "30 de abr de 2026",
     "publishedAt": "2026-04-30T11:38:26.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades meta lost 20 million users last quarter meta is planning to pump billions more into ai investments this year despite noting that millions of users have seemingly started to abandon its platforms in an earning call on wednesday meta reported that figures for family daily active people the ter",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/921089/meta-earnings-q1-2026-user-decline-ai-investments",
@@ -911,8 +3212,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/bc-decreta-liquidacao-extrajudicial-da-frente-corretora-de-cambio/",
     "sourceLabel": "BC decreta liquidação extrajudicial da Frente Corretora de Câmbio",
-    "lede": "Decisão foi motivada pelo comprometimento da situação econômico-financeira da corretora, bem como por graves violações às normas legais",
-    "summary": "Decisão foi motivada pelo comprometimento da situação econômico-financeira da corretora, bem como por graves violações às normas legais",
+    "lede": "CNN Brasil publicou uma atualização sobre BC decreta liquidação extrajudicial da Frente Corretora de Câmbio. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre BC decreta liquidação extrajudicial da Frente Corretora de Câmbio. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -960,8 +3261,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/blog/ana-flor/post/2026/04/30/lula-sinaliza-a-aliados-que-nao-vai-abrir-mao-de-nova-indicacao-para-o-stf-apos-derrota-de-messias.ghtml",
     "sourceLabel": "Lula sinaliza a aliados que não vai abrir mão de nova indicação para o STF após derrota de Messias",
-    "lede": "O presidente Luiz Inácio Lula da Silva (PT) sinalizou, em conversa com aliados na noite dessa quarta-feira (29), que deve escolher um novo nome e não pretende deixar para o próximo governo a prerrogativa de indicar um novo ministro para o Supremo Tribunal Fed",
-    "summary": "O presidente Luiz Inácio Lula da Silva (PT) sinalizou, em conversa com aliados na noite dessa quarta-feira (29), que deve escolher um novo nome e não pretende deixar para o próximo governo a prerrogativa de indicar um novo ministro para o Supremo Tribunal Fed",
+    "lede": "G1 Politica publicou uma atualização sobre Lula sinaliza a aliados que não vai abrir mão de nova indicação para o STF após derrota de Messias. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Lula sinaliza a aliados que não vai abrir mão de nova indicação para o STF após derrota de Messias. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -993,6 +3294,104 @@ window.NEWS_DATA = [
     "body": [
       "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Lula sinaliza a aliados que não vai abrir mão de nova indicação para o STF após derrota de Messias.",
       "Lula sinaliza a aliados que não vai abrir mão de nova indicação para o STF após derrota de Messias e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml",
+    "slug": "deficit-de-r-80-7-bilhoes-das-contas-publicas-em-marco-leva-divida-a-80-do-pib-maior-nivel-em-qu",
+    "title": "Déficit de R$ 80,7 bilhões das contas públicas em março leva dívida a 80% do PIB, maior nível em quase 5 anos",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:34:47.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml",
+    "sourceLabel": "Déficit de R$ 80,7 bilhões das contas públicas em março leva dívida a 80% do PIB, maior nível em quase 5 anos",
+    "lede": "As contas do setor público consolidado apresentaram um déficit primário de R$ 80,7 bilhões em março, informou o Banco Central (BC) nesta quinta-feira (30).",
+    "summary": "As contas do setor público consolidado apresentaram um déficit primário de R$ 80,7 bilhões em março, informou o Banco Central (BC) nesta quinta-feira (30).",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/deficit-de-r-80-7-bilhoes-das-contas-publicas-em-marco-leva-divida-a-80-do-pib-maior-nivel-em-qu.svg",
+    "feedImageUrl": "./assets/news-fallbacks/deficit-de-r-80-7-bilhoes-das-contas-publicas-em-marco-leva-divida-a-80-do-pib-maior-nivel-em-qu.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/deficit-de-r-80-7-bilhoes-das-contas-publicas-em-marco-leva-divida-a-80-do-pib-maior-nivel-em-qu.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "deficit-de-r-80-7-bilhoes-das-contas-publicas-em-marco-leva-divida-a-80-do-pib-maior-nivel-em-qu"
+    ],
+    "body": [
+      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Déficit de R$ 80,7 bilhões das contas públicas em março leva dívida a 80% do PIB, maior nível em quase 5 anos.",
+      "Déficit de R$ 80,7 bilhões das contas públicas em março leva dívida a 80% do PIB, maior nível em quase 5 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml",
+    "slug": "contas-publicas-tem-deficit-de-r-80-7-bilhoes-em-marco-divida-sobe-para-80-do-pib-no-maior-nivel",
+    "title": "Contas públicas têm déficit de R$ 80,7 bilhões em março; dívida sobe para 80% do PIB no maior nível em quase 5 anos",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:34:47.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml",
+    "sourceLabel": "Contas públicas têm déficit de R$ 80,7 bilhões em março; dívida sobe para 80% do PIB no maior nível em quase 5 anos",
+    "lede": "As contas do setor público consolidado apresentaram um déficit primário de R$ 80,7 bilhões em março, informou o Banco Central (BC) nesta quinta-feira (30).",
+    "summary": "As contas do setor público consolidado apresentaram um déficit primário de R$ 80,7 bilhões em março, informou o Banco Central (BC) nesta quinta-feira (30).",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/contas-publicas-tem-deficit-de-r-80-7-bilhoes-em-marco-divida-sobe-para-80-do-pib-no-maior-nivel.svg",
+    "feedImageUrl": "./assets/news-fallbacks/contas-publicas-tem-deficit-de-r-80-7-bilhoes-em-marco-divida-sobe-para-80-do-pib-no-maior-nivel.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/contas-publicas-tem-deficit-de-r-80-7-bilhoes-em-marco-divida-sobe-para-80-do-pib-no-maior-nivel.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/economia/noticia/2026/04/30/contas-publicas-tem-deficit-de-r-807-bilhoes-em-marco-divida-sobe-para-80percent-do-pib.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "contas-publicas-tem-deficit-de-r-80-7-bilhoes-em-marco-divida-sobe-para-80-do-pib-no-maior-nivel"
+    ],
+    "body": [
+      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Contas públicas têm déficit de R$ 80,7 bilhões em março; dívida sobe para 80% do PIB no maior nível em quase 5 anos.",
+      "Contas públicas têm déficit de R$ 80,7 bilhões em março; dívida sobe para 80% do PIB no maior nível em quase 5 anos e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -1091,6 +3490,55 @@ window.NEWS_DATA = [
     "body": [
       "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Operação prende liderança ligada a roubo de veículos no Rio.",
       "Operação prende liderança ligada a roubo de veículos no Rio e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-04/operacao-contencao-defensoria-do-rio-quer-acesso-cameras-e-pericias",
+    "slug": "operacao-contencao-defensoria-do-rio-quer-acesso-a-cameras-e-pericias",
+    "title": "Operação Contenção: Defensoria do Rio quer acesso a câmeras e perícias",
+    "eyebrow": "Nacional",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:33:00.000Z",
+    "category": "Nacional",
+    "categoryKey": "direitos humanos nacional operacao contencao defensoria do rio quer acesso a cameras e pericias a defensoria publica do estado do rio de janeiro dprj apos seis meses da operacao contencao ainda nao teve acesso as imagens das cameras corporais dos militares e aos laudos periciais do dia do ocorrido desde o inicio da operacao considerada a mais le",
+    "previewClass": "thumb-cotidiano",
+    "sourceName": "Agencia Brasil",
+    "sourceUrl": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-04/operacao-contencao-defensoria-do-rio-quer-acesso-cameras-e-pericias",
+    "sourceLabel": "Operação Contenção: Defensoria do Rio quer acesso a câmeras e perícias",
+    "lede": "A Defensoria Pública do Estado do Rio de Janeiro (DPRJ) , após seis meses da Operação Contenção , ainda não teve acesso às imagens das câmeras corporais dos militares e aos laudos periciais do dia do ocorrido.",
+    "summary": "A Defensoria Pública do Estado do Rio de Janeiro (DPRJ) , após seis meses da Operação Contenção , ainda não teve acesso às imagens das câmeras corporais dos militares e aos laudos periciais do dia do ocorrido.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "feedImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "sourceImageUrl": "https://cdn.jsdelivr.net/gh/sergiosdlima/assets-ebc@1.0.0/abr/assets/images/logo-agenciabrasil.svg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-04/operacao-contencao-defensoria-do-rio-quer-acesso-cameras-e-pericias"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Brasil",
+        "url": "https://agenciabrasil.ebc.com.br/direitos-humanos/noticia/2026-04/operacao-contencao-defensoria-do-rio-quer-acesso-cameras-e-pericias"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "operacao-contencao-defensoria-do-rio-quer-acesso-a-cameras-e-pericias"
+    ],
+    "body": [
+      "Agencia Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Operação Contenção: Defensoria do Rio quer acesso a câmeras e perícias.",
+      "Operação Contenção: Defensoria do Rio quer acesso a câmeras e perícias e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -1205,8 +3653,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/rio-acre-registra-1037-metros-em-rio-branco-nesta-quinta-feira-aponta-defesa-civil/",
     "sourceLabel": "Rio Acre registra 10,37 metros em Rio Branco nesta quinta-feira, aponta Defesa Civil",
-    "lede": "Foto: Sérgio Vale \" O Boletim da Defesa Civil Municipal de Rio Branco divulgado nesta quinta-feira (30) aponta que o nível do Rio Acre apresentou nova redução nas últimas horas. Às 5h54, o manancial marcou 10,37 metros, registrando tendência de queda. De acor",
-    "summary": "Foto: Sérgio Vale \" O Boletim da Defesa Civil Municipal de Rio Branco divulgado nesta quinta-feira (30) aponta que o nível do Rio Acre apresentou nova redução nas últimas horas. Às 5h54, o manancial marcou 10,37 metros, registrando tendência de queda. De acor",
+    "lede": "Foto: Sérgio Vale \" O Boletim da Defesa Civil Municipal de Rio Branco divulgado nesta quinta-feira (30) aponta que o nível do Rio Acre apresentou nova redução nas últimas horas. Às 5h54, o manancial marcou 10,37 metros, registrando tendência de queda.",
+    "summary": "Foto: Sérgio Vale \" O Boletim da Defesa Civil Municipal de Rio Branco divulgado nesta quinta-feira (30) aponta que o nível do Rio Acre apresentou nova redução nas últimas horas. Às 5h54, o manancial marcou 10,37 metros, registrando tendência de queda.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1254,8 +3702,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/tv-e-series/noticia/2026/04/30/territorios-sob-o-dominio-do-crime-100o-documentario-do-globoplay-mostra-avanco-das-faccoes-criminosas-no-brasil.ghtml",
     "sourceLabel": "Territórios - Sob o Domínio do Crime: 100º documentário do Globoplay mostra avanço das facções criminosas no Brasil",
-    "lede": "Globoplay lança série documental sobre a expansão do crime organizado O documentário “Territórios - Sob o Domínio do Crime”, produção do Globoplay que retrata a expansão de facções criminosas no Brasil, estreia nesta quinta-feira (30). A série é o 100º docume",
-    "summary": "Globoplay lança série documental sobre a expansão do crime organizado O documentário “Territórios - Sob o Domínio do Crime”, produção do Globoplay que retrata a expansão de facções criminosas no Brasil, estreia nesta quinta-feira (30). A série é o 100º docume",
+    "lede": "Globoplay lança série documental sobre a expansão do crime organizado O documentário “Territórios - Sob o Domínio do Crime”, produção do Globoplay que retrata a expansão de facções criminosas no Brasil, estreia nesta quinta-feira (30).",
+    "summary": "Globoplay lança série documental sobre a expansão do crime organizado O documentário “Territórios - Sob o Domínio do Crime”, produção do Globoplay que retrata a expansão de facções criminosas no Brasil, estreia nesta quinta-feira (30).",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1303,8 +3751,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/chefe-da-aie-diz-que-mundo-enfrenta-maior-crise-energetica-da-historia/",
     "sourceLabel": "Chefe da AIE diz que mundo enfrenta maior crise energética da história",
-    "lede": "Petróleo acima de US$ 120 preocupa setor energético e traz grande desafio econômico, de acordo com Fatih Birol",
-    "summary": "Petróleo acima de US$ 120 preocupa setor energético e traz grande desafio econômico, de acordo com Fatih Birol",
+    "lede": "CNN Brasil publicou uma atualização sobre Chefe da AIE diz que mundo enfrenta maior crise energética da história. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Chefe da AIE diz que mundo enfrenta maior crise energética da história. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1352,8 +3800,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/e-hoje-show-de-joelma-deve-atrair-40-mil-pessoas-em-cruzeiro-do-sul/",
     "sourceLabel": "É hoje: show de Joelma deve atrair 40 mil pessoas em Cruzeiro do Sul",
-    "lede": "Será nesta quinta-feira, 30, a partir das 23 horas o show da cantora Joelma em Cruzeiro do Sul na Festa do Trabalhador. Antes dela, as 21 horas, artistas locais subirão ao palco na Praça Orleir Cameli no Centro. Cerca de 40 mil pessoas são esperadas. Ao chega",
-    "summary": "Será nesta quinta-feira, 30, a partir das 23 horas o show da cantora Joelma em Cruzeiro do Sul na Festa do Trabalhador. Antes dela, as 21 horas, artistas locais subirão ao palco na Praça Orleir Cameli no Centro. Cerca de 40 mil pessoas são esperadas. Ao chega",
+    "lede": "Será nesta quinta-feira, 30, a partir das 23 horas o show da cantora Joelma em Cruzeiro do Sul na Festa do Trabalhador. Antes dela, as 21 horas, artistas locais subirão ao palco na Praça Orleir Cameli no Centro. Cerca de 40 mil pessoas são esperadas.",
+    "summary": "Será nesta quinta-feira, 30, a partir das 23 horas o show da cantora Joelma em Cruzeiro do Sul na Festa do Trabalhador. Antes dela, as 21 horas, artistas locais subirão ao palco na Praça Orleir Cameli no Centro. Cerca de 40 mil pessoas são esperadas.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1401,8 +3849,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/estrangeiros-nao-tem-lugar-no-golfo-persico-diz-lider-supremo-do-ira/",
     "sourceLabel": "“Estrangeiros não têm lugar no Golfo Pérsico”, diz líder supremo do Irã",
-    "lede": "Mojtaba Khamenei alerta sobre a presença de atores externos na região, em meio a crescente tensão com os Estados Unidos",
-    "summary": "Mojtaba Khamenei alerta sobre a presença de atores externos na região, em meio a crescente tensão com os Estados Unidos",
+    "lede": "CNN Brasil publicou uma atualização sobre “Estrangeiros não têm lugar no Golfo Pérsico”, diz líder supremo do Irã. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre “Estrangeiros não têm lugar no Golfo Pérsico”, diz líder supremo do Irã. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1548,8 +3996,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/michael-jackson-sera-treinador-de-time-da-premier-league-entenda/",
     "sourceLabel": "Michael Jackson será treinador de time da Premier League; entenda",
-    "lede": "Equipe foi rebaixada à Championship, segunda divisão do futebol inglês, pela terceira vez em cinco temporadas",
-    "summary": "Equipe foi rebaixada à Championship, segunda divisão do futebol inglês, pela terceira vez em cinco temporadas",
+    "lede": "CNN Brasil publicou uma atualização sobre Michael Jackson será treinador de time da Premier League; entenda. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Michael Jackson será treinador de time da Premier League; entenda. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1597,8 +4045,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/radio-mec-transmite-especial-para-celebrar-dia-internacional-do-jazz",
     "sourceLabel": "Rádio MEC transmite especial para celebrar Dia Internacional do Jazz",
-    "lede": "A Rádio MEC apresenta, nesta quinta-feira (30), às 21h, uma edição especial do Jazz Livre dedicada ao Dia Internacional do Jazz. A data, celebrada pela Unesco desde 2012, destaca o gênero como um instrumento de liberdade, criatividade e diálogo entre culturas",
-    "summary": "A Rádio MEC apresenta, nesta quinta-feira (30), às 21h, uma edição especial do Jazz Livre dedicada ao Dia Internacional do Jazz. A data, celebrada pela Unesco desde 2012, destaca o gênero como um instrumento de liberdade, criatividade e diálogo entre culturas",
+    "lede": "A Rádio MEC apresenta, nesta quinta-feira (30), às 21h, uma edição especial do Jazz Livre dedicada ao Dia Internacional do Jazz.",
+    "summary": "A Rádio MEC apresenta, nesta quinta-feira (30), às 21h, uma edição especial do Jazz Livre dedicada ao Dia Internacional do Jazz.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1739,7 +4187,7 @@ window.NEWS_DATA = [
     "date": "30 de abr de 2026",
     "publishedAt": "2026-04-30T11:09:01.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades openai s new security model is for critical cyber defenders only openai is preparing to launch a new frontier cybersecurity model gpt 5 5 cyber ceo sam altman said the model will not be available to the general public but will be first rolled out to a select group of trusted cyber defenders in order for institutions t",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/921073/openai-sam-altman-new-cybersecurity-model-gpt-5-5-cyber",
@@ -1793,8 +4241,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/go/goias/eleicoes/2026/noticia/2026/04/30/quaest-84percent-aprovam-e-11percent-desaprovam-governo-de-ronaldo-caiado-em-goias.ghtml",
     "sourceLabel": "Quaest: 84% aprovam e 11% desaprovam governo de Ronaldo Caiado em Goiás",
-    "lede": "Ronaldo Caiado em entrevista em Goiânia Reprodução/Youtube CBN Goiânia O governo de Ronaldo Caiado é aprovado por 84% dos eleitores em Goiás, segundo pesquisa Quaest, divulgada nesta quinta-feira (30). Conforme o levantamento, 11% dos entrevistados desaprovam",
-    "summary": "Ronaldo Caiado em entrevista em Goiânia Reprodução/Youtube CBN Goiânia O governo de Ronaldo Caiado é aprovado por 84% dos eleitores em Goiás, segundo pesquisa Quaest, divulgada nesta quinta-feira (30). Conforme o levantamento, 11% dos entrevistados desaprovam",
+    "lede": "Ronaldo Caiado em entrevista em Goiânia Reprodução/Youtube CBN Goiânia O governo de Ronaldo Caiado é aprovado por 84% dos eleitores em Goiás, segundo pesquisa Quaest, divulgada nesta quinta-feira (30).",
+    "summary": "Ronaldo Caiado em entrevista em Goiânia Reprodução/Youtube CBN Goiânia O governo de Ronaldo Caiado é aprovado por 84% dos eleitores em Goiás, segundo pesquisa Quaest, divulgada nesta quinta-feira (30).",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1842,8 +4290,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/mojtaba-khamenei-diz-que-nova-gestao-de-ormuz-trara-calma-para-a-regiao/",
     "sourceLabel": "Mojtaba Khamenei diz que nova gestão de Ormuz “trará calma” para a região",
-    "lede": "Líder supremo do Irã diz que país entra em nova fase após guerra contra EUA e Israel e que Teerã eliminará abusos inimigos em vias navegáveis",
-    "summary": "Líder supremo do Irã diz que país entra em nova fase após guerra contra EUA e Israel e que Teerã eliminará abusos inimigos em vias navegáveis",
+    "lede": "CNN Brasil publicou uma atualização sobre Mojtaba Khamenei diz que nova gestão de Ormuz “trará calma” para a região. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Mojtaba Khamenei diz que nova gestão de Ormuz “trará calma” para a região. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1891,8 +4339,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/quaest-71-avaliam-que-caiado-merece-eleger-sucessor-ao-governo-de-goias/",
     "sourceLabel": "Quaest: 71% avaliam que Caiado merece eleger sucessor ao governo de Goiás",
-    "lede": "Pesquisa ouviu 1.104 eleitores, entre os dias 24 e 28 de abril; margem de erro é de três pontos percentuais, para mais ou para menos",
-    "summary": "Pesquisa ouviu 1.104 eleitores, entre os dias 24 e 28 de abril; margem de erro é de três pontos percentuais, para mais ou para menos",
+    "lede": "CNN Brasil publicou uma atualização sobre Quaest: 71% avaliam que Caiado merece eleger sucessor ao governo de Goiás. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Quaest: 71% avaliam que Caiado merece eleger sucessor ao governo de Goiás. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1989,8 +4437,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/quaest-sem-camilo-ciro-gomes-lidera-cenarios-de-1o-e-2o-turno-no-ce/",
     "sourceLabel": "Quaest: sem Camilo, Ciro Gomes lidera cenários de 1º e 2º turno no CE",
-    "lede": "Pesquisa entrevistou 1.002 eleitores, entre os dias 24 e 28 de abril; margem de erro é de 3 pontos percentuais, para mais ou para menos",
-    "summary": "Pesquisa entrevistou 1.002 eleitores, entre os dias 24 e 28 de abril; margem de erro é de 3 pontos percentuais, para mais ou para menos",
+    "lede": "CNN Brasil publicou uma atualização sobre Quaest: sem Camilo, Ciro Gomes lidera cenários de 1º e 2º turno no CE. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Quaest: sem Camilo, Ciro Gomes lidera cenários de 1º e 2º turno no CE. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2087,8 +4535,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/quaest-no-rs-juliana-empata-com-zucco-no-1o-turno-e-lidera-2o/",
     "sourceLabel": "Quaest: no RS, Juliana empata com Zucco no 1º turno e lidera 2º",
-    "lede": "Pesquisa ouviu 1.104 eleitores do estado de São Paulo, entre os dias 23 e 27 de abril; margem de erro é de 3 pontos percentuais, para mais ou para menos",
-    "summary": "Pesquisa ouviu 1.104 eleitores do estado de São Paulo, entre os dias 23 e 27 de abril; margem de erro é de 3 pontos percentuais, para mais ou para menos",
+    "lede": "CNN Brasil publicou uma atualização sobre Quaest: no RS, Juliana empata com Zucco no 1º turno e lidera 2º. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Quaest: no RS, Juliana empata com Zucco no 1º turno e lidera 2º. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2120,6 +4568,55 @@ window.NEWS_DATA = [
     "body": [
       "CNN Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Quaest: no RS, Juliana empata com Zucco no 1º turno e lidera 2º.",
       "Quaest: no RS, Juliana empata com Zucco no 1º turno e lidera 2º e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://g1.globo.com/ce/ceara/eleicoes/2026/noticia/2026/04/30/quaest-senado-ce.ghtml",
+    "slug": "quaest-no-ce-veja-os-numeros-para-a-disputa-no-senado",
+    "title": "Quaest no CE: veja os números para a disputa no Senado",
+    "eyebrow": "Politica",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T11:00:19.000Z",
+    "category": "Politica",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "G1 Politica",
+    "sourceUrl": "https://g1.globo.com/ce/ceara/eleicoes/2026/noticia/2026/04/30/quaest-senado-ce.ghtml",
+    "sourceLabel": "Quaest no CE: veja os números para a disputa no Senado",
+    "lede": "Câmara e Senado: fachada do prédio do Congresso Nacional na Esplanada dos Ministérios no dia 4 de julho de 2017 Edilson Rodrigues/Agência Senado Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo Senado no Ceará.",
+    "summary": "Câmara e Senado: fachada do prédio do Congresso Nacional na Esplanada dos Ministérios no dia 4 de julho de 2017 Edilson Rodrigues/Agência Senado Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo Senado no Ceará.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/BH7ORciUtb8MzGkAoKQtWzcCfUA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/0/r/eaos1LTaeBgzpDZ0orxA/35685238476-ac5825152a-k.jpg",
+    "feedImageUrl": "https://s2-g1.glbimg.com/BH7ORciUtb8MzGkAoKQtWzcCfUA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/0/r/eaos1LTaeBgzpDZ0orxA/35685238476-ac5825152a-k.jpg",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/BH7ORciUtb8MzGkAoKQtWzcCfUA=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/0/r/eaos1LTaeBgzpDZ0orxA/35685238476-ac5825152a-k.jpg",
+    "imageCredit": "",
+    "imageFocus": "",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/ce/ceara/eleicoes/2026/noticia/2026/04/30/quaest-senado-ce.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Politica",
+        "url": "https://g1.globo.com/ce/ceara/eleicoes/2026/noticia/2026/04/30/quaest-senado-ce.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "quaest-no-ce-veja-os-numeros-para-a-disputa-no-senado"
+    ],
+    "body": [
+      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Quaest no CE: veja os números para a disputa no Senado.",
+      "Quaest no CE: veja os números para a disputa no Senado e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -2185,8 +4682,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/rs/rio-grande-do-sul/eleicoes/2026/noticia/2026/04/30/quaest-governo-do-rs.ghtml",
     "sourceLabel": "Quaest: Juliana Brizola e Luciano Zucco têm empate técnico na disputa para o governo do RS no 1º turno",
-    "lede": "Juliana Brizola (PDT) e Luciano Zucco (PL) Gustavo Chagas/g1 e Celso Bender/Agência ALRS Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo governo do Rio Grande do Sul. Foram incluídos 5 pré-candidatos. Veja os números: Juliana",
-    "summary": "Juliana Brizola (PDT) e Luciano Zucco (PL) Gustavo Chagas/g1 e Celso Bender/Agência ALRS Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo governo do Rio Grande do Sul. Foram incluídos 5 pré-candidatos. Veja os números: Juliana",
+    "lede": "Juliana Brizola (PDT) e Luciano Zucco (PL) Gustavo Chagas/g1 e Celso Bender/Agência ALRS Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo governo do Rio Grande do Sul. Foram incluídos 5 pré-candidatos.",
+    "summary": "Juliana Brizola (PDT) e Luciano Zucco (PL) Gustavo Chagas/g1 e Celso Bender/Agência ALRS Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo governo do Rio Grande do Sul. Foram incluídos 5 pré-candidatos.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2234,8 +4731,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/rs/rio-grande-do-sul/eleicoes/2026/noticia/2026/04/30/quaest-senado-rs.ghtml",
     "sourceLabel": "Quaest no RS: veja os números para a disputa no Senado",
-    "lede": "Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo Senado no Rio Grande do Sul. Manuela D'Ávila (PSOL), Germano Rigotto (MDB), Marcel Van Hattem (Novo) e Paulo Pimenta (PT) lideram os cenários, com empate técnico Neste ano, cada",
-    "summary": "Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo Senado no Rio Grande do Sul. Manuela D'Ávila (PSOL), Germano Rigotto (MDB), Marcel Van Hattem (Novo) e Paulo Pimenta (PT) lideram os cenários, com empate técnico Neste ano, cada",
+    "lede": "Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo Senado no Rio Grande do Sul.",
+    "summary": "Pesquisa Quaest divulgada nesta quinta-feira (30) mostra como está a disputa pelo Senado no Rio Grande do Sul.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2376,7 +4873,7 @@ window.NEWS_DATA = [
     "date": "30 de abr de 2026",
     "publishedAt": "2026-04-30T11:00:00.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades dji s osmo pocket 4 is a better camera in every respect first they came for the drones and now the vlogging cameras dji s osmo pocket 4 is the first of its compact steadicams not to launch in the us following a string of dji drones also missing the us market the good news for american buyers is that the pocket",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/920547/dji-osmo-pocket-4-review",
@@ -2528,8 +5025,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/tv-brasil-exibe-documentario-e-curta-ineditos-na-noite-desta-quinta",
     "sourceLabel": "TV Brasil exibe documentário e curta inéditos na noite desta quinta",
-    "lede": "A TV Brasil apresenta duas atrações inéditas na sessão noturna de filmes nesta quinta (30), a partir das 21h. Na véspera do Dia da Literatura Brasileira, a emissora pública estreia o documentário Galáxias (2014), com histórias de bibliotecas comunitárias cria",
-    "summary": "A TV Brasil apresenta duas atrações inéditas na sessão noturna de filmes nesta quinta (30), a partir das 21h. Na véspera do Dia da Literatura Brasileira, a emissora pública estreia o documentário Galáxias (2014), com histórias de bibliotecas comunitárias cria",
+    "lede": "A TV Brasil apresenta duas atrações inéditas na sessão noturna de filmes nesta quinta (30), a partir das 21h.",
+    "summary": "A TV Brasil apresenta duas atrações inéditas na sessão noturna de filmes nesta quinta (30), a partir das 21h.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2675,8 +5172,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/cultura/noticia/2026-04/festival-internacional-de-cinema-no-df-e-tela-de-novos-talentos",
     "sourceLabel": "Festival internacional de cinema no DF é tela para novos talentos",
-    "lede": "Quando subiu ao palco do Cine Brasília para ser homenageada no Brasília International Film Festival (BIFF) na noite dessa quarta (29), diferentes filmes passaram pela cabeça da cineasta Cibele Amaral. A nona edição da mostra segue até dia 3 de maio. O acesso",
-    "summary": "Quando subiu ao palco do Cine Brasília para ser homenageada no Brasília International Film Festival (BIFF) na noite dessa quarta (29), diferentes filmes passaram pela cabeça da cineasta Cibele Amaral. A nona edição da mostra segue até dia 3 de maio. O acesso",
+    "lede": "Quando subiu ao palco do Cine Brasília para ser homenageada no Brasília International Film Festival (BIFF) na noite dessa quarta (29), diferentes filmes passaram pela cabeça da cineasta Cibele Amaral. A nona edição da mostra segue até dia 3 de maio.",
+    "summary": "Quando subiu ao palco do Cine Brasília para ser homenageada no Brasília International Film Festival (BIFF) na noite dessa quarta (29), diferentes filmes passaram pela cabeça da cineasta Cibele Amaral. A nona edição da mostra segue até dia 3 de maio.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2724,8 +5221,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/ira-comemora-dia-do-golfo-persico-em-meio-a-tensao-no-estreito-de-ormuz/",
     "sourceLabel": "Irã comemora “Dia do Golfo Pérsico” em meio a tensão no Estreito de Ormuz",
-    "lede": "Evento anual destaca vitória contra Portugal e ganha peso estratégico enquanto EUA avaliam estender bloqueio de portos",
-    "summary": "Evento anual destaca vitória contra Portugal e ganha peso estratégico enquanto EUA avaliam estender bloqueio de portos",
+    "lede": "CNN Brasil publicou uma atualização sobre Irã comemora “Dia do Golfo Pérsico” em meio a tensão no Estreito de Ormuz. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Irã comemora “Dia do Golfo Pérsico” em meio a tensão no Estreito de Ormuz. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2822,8 +5319,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/caixa-conclui-pagamento-da-parcela-de-abril-do-bolsa-familia-2/",
     "sourceLabel": "Caixa conclui pagamento da parcela de abril do Bolsa Família",
-    "lede": "Foto: Lyon Santos/ MDS \" A Caixa Econômica Federal conclui o pagamento da parcela de abril do Bolsa Família. Recebem nesta quinta-feira (29) os beneficiários com Número de Inscrição Social (NIS) de final 0. O valor mínimo corresponde a R$ 600, mas com o novo",
-    "summary": "Foto: Lyon Santos/ MDS \" A Caixa Econômica Federal conclui o pagamento da parcela de abril do Bolsa Família. Recebem nesta quinta-feira (29) os beneficiários com Número de Inscrição Social (NIS) de final 0. O valor mínimo corresponde a R$ 600, mas com o novo",
+    "lede": "Foto: Lyon Santos/ MDS \" A Caixa Econômica Federal conclui o pagamento da parcela de abril do Bolsa Família. Recebem nesta quinta-feira (29) os beneficiários com Número de Inscrição Social (NIS) de final 0.",
+    "summary": "Foto: Lyon Santos/ MDS \" A Caixa Econômica Federal conclui o pagamento da parcela de abril do Bolsa Família. Recebem nesta quinta-feira (29) os beneficiários com Número de Inscrição Social (NIS) de final 0.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2871,8 +5368,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/infra/caducidade-e-regulacao-em-concessoes-o-caso-enel-sp/",
     "sourceLabel": "Caducidade e regulação em concessões: o caso Enel SP",
-    "lede": "A reação da Aneel ao caso Enel SP expõe os desafios regulatórios de contratos de concessão de longa duração",
-    "summary": "A reação da Aneel ao caso Enel SP expõe os desafios regulatórios de contratos de concessão de longa duração",
+    "lede": "CNN Brasil publicou uma atualização sobre Caducidade e regulação em concessões: o caso Enel SP. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Caducidade e regulação em concessões: o caso Enel SP. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3067,8 +5564,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24agro.com/2026/04/30/mapa-confirma-recebimento-de-plano-para-reabilitar-sisbi-poa-no-acre/",
     "sourceLabel": "Mapa confirma recebimento de plano para reabilitar SISBI-POA no Acre",
-    "lede": "Em fevereiro deste ano, o Estado do Acre teve a adesão de novas plantas industriais suspensas por parte de uma auditoria do Mapa. Com a inclusão de novos servidores ao quadro efetivo, o Idaf cumpre o que estabelece a legislação O superintendente do Ministério",
-    "summary": "Em fevereiro deste ano, o Estado do Acre teve a adesão de novas plantas industriais suspensas por parte de uma auditoria do Mapa. Com a inclusão de novos servidores ao quadro efetivo, o Idaf cumpre o que estabelece a legislação O superintendente do Ministério",
+    "lede": "Em fevereiro deste ano, o Estado do Acre teve a adesão de novas plantas industriais suspensas por parte de uma auditoria do Mapa.",
+    "summary": "Em fevereiro deste ano, o Estado do Acre teve a adesão de novas plantas industriais suspensas por parte de uma auditoria do Mapa.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3312,8 +5809,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/pato-manco/",
     "sourceLabel": "Pato manco",
-    "lede": "Falta pouco para o presidente dos EUA, Donald Trump se transformar num “Lame Duck”. Denomina-se de “Pato Manco”, em inglês, “Lame Duck” os presidentes dos EUA que, no curso de seus mandatos acabem perdendo seus apoios nas suas duas principais casas parlamenta",
-    "summary": "Falta pouco para o presidente dos EUA, Donald Trump se transformar num “Lame Duck”. Denomina-se de “Pato Manco”, em inglês, “Lame Duck” os presidentes dos EUA que, no curso de seus mandatos acabem perdendo seus apoios nas suas duas principais casas parlamenta",
+    "lede": "Falta pouco para o presidente dos EUA, Donald Trump se transformar num “Lame Duck”.",
+    "summary": "Falta pouco para o presidente dos EUA, Donald Trump se transformar num “Lame Duck”.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3557,8 +6054,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/rj/rio-de-janeiro/todo-mundo-no-rio/noticia/2026/04/30/shakira-antes-de-copacabana-estrela-ja-fez-show-a-r-5-em-uberlandia-e-foi-jurada-da-banheira-do-gugu.ghtml",
     "sourceLabel": "Shakira antes de Copacabana: estrela já fez show a R$ 5 em Uberlândia e foi jurada da Banheira do Gugu",
-    "lede": "Shakira em performance no Grammy, a premiação mais importante da música, em Los Angeles, em 2025 Kevin Winter/Getty Images for The Recording Academy Embora seu próximo show no Brasil, no próximo sábado (02/04), seja gratuito, Shakira hoje cobra até mil reais",
-    "summary": "Shakira em performance no Grammy, a premiação mais importante da música, em Los Angeles, em 2025 Kevin Winter/Getty Images for The Recording Academy Embora seu próximo show no Brasil, no próximo sábado (02/04), seja gratuito, Shakira hoje cobra até mil reais",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Shakira antes de Copacabana: estrela já fez show a R$ 5 em Uberlândia e foi jurada da Banheira do Gugu. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Shakira antes de Copacabana: estrela já fez show a R$ 5 em Uberlândia e foi jurada da Banheira do Gugu. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3704,8 +6201,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/esportes/olimpiadas/sonho-da-aposentadoria-a-1a-vitoria-nicholas-projeta-caminho-ate-la2028/",
     "sourceLabel": "“Sonho”: Da aposentadoria à 1ª vitória, Nicholas projeta caminho até LA2028",
-    "lede": "Nadador foi campeão na primeira prova que disputou desde que retomou sua carreira profissional, aos 46 anos",
-    "summary": "Nadador foi campeão na primeira prova que disputou desde que retomou sua carreira profissional, aos 46 anos",
+    "lede": "CNN Brasil publicou uma atualização sobre “Sonho”: Da aposentadoria à 1ª vitória, Nicholas projeta caminho até LA2028. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre “Sonho”: Da aposentadoria à 1ª vitória, Nicholas projeta caminho até LA2028. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3753,8 +6250,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/entenda-como-trafego-maritimo-em-ormuz-diminuiu-drasticamente/",
     "sourceLabel": "Entenda como tráfego marítimo em Ormuz diminuiu drasticamente",
-    "lede": "Apenas 154 embarcações cruzaram o estreito em março contra média de 3 mil, impactando cadeias globais",
-    "summary": "Apenas 154 embarcações cruzaram o estreito em março contra média de 3 mil, impactando cadeias globais",
+    "lede": "CNN Brasil publicou uma atualização sobre Entenda como tráfego marítimo em Ormuz diminuiu drasticamente. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Entenda como tráfego marítimo em Ormuz diminuiu drasticamente. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3802,8 +6299,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/30/david-allan-coe-morre.ghtml",
     "sourceLabel": "David Allan Coe, que escreveu 'Take This Job and Shove It' e outros sucessos da música country, morre aos 86 anos",
-    "lede": "Foto de arquivo: David Allan Coe, usando tranças ao estilo de Willie Nelson, se apresenta no Willie Nelson July 4th Picnic, em 4 de julho de 1983, no Atlanta International Raceway em Hampton, Geórgia. AP Photo/Rudolph Faircloth, Arquivo David Allan Coe, canto",
-    "summary": "Foto de arquivo: David Allan Coe, usando tranças ao estilo de Willie Nelson, se apresenta no Willie Nelson July 4th Picnic, em 4 de julho de 1983, no Atlanta International Raceway em Hampton, Geórgia. AP Photo/Rudolph Faircloth, Arquivo David Allan Coe, canto",
+    "lede": "Foto de arquivo: David Allan Coe, usando tranças ao estilo de Willie Nelson, se apresenta no Willie Nelson July 4th Picnic, em 4 de julho de 1983, no Atlanta International Raceway em Hampton, Geórgia.",
+    "summary": "Foto de arquivo: David Allan Coe, usando tranças ao estilo de Willie Nelson, se apresenta no Willie Nelson July 4th Picnic, em 4 de julho de 1983, no Atlanta International Raceway em Hampton, Geórgia.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3851,8 +6348,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/auto/chevrolet-revela-s10-trail-boss-e-trailblazer-midnight-com-foco-off-road/",
     "sourceLabel": "Chevrolet revela S10 Trail Boss e Trailblazer Midnight com foco off-road",
-    "lede": "Novas versões trazem suspensão elevada, pneus all-terrain e ajustes estruturais para desempenho fora de estrada",
-    "summary": "Novas versões trazem suspensão elevada, pneus all-terrain e ajustes estruturais para desempenho fora de estrada",
+    "lede": "CNN Brasil publicou uma atualização sobre Chevrolet revela S10 Trail Boss e Trailblazer Midnight com foco off-road. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Chevrolet revela S10 Trail Boss e Trailblazer Midnight com foco off-road. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3998,8 +6495,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/pl-da-dosimetria-o-que-muda-se-o-veto-do-presidente-for-derrubado/",
     "sourceLabel": "PL da Dosimetria: o que muda se o veto do presidente for derrubado",
-    "lede": "Congresso decide nesta quinta-feira (30) projeto de lei que foi vetado por Lula; efeitos vão além dos atos golpistas e alcançam crimes como homicídio qualificado e tráfico de drogas",
-    "summary": "Congresso decide nesta quinta-feira (30) projeto de lei que foi vetado por Lula; efeitos vão além dos atos golpistas e alcançam crimes como homicídio qualificado e tráfico de drogas",
+    "lede": "CNN Brasil publicou uma atualização sobre PL da Dosimetria: o que muda se o veto do presidente for derrubado. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre PL da Dosimetria: o que muda se o veto do presidente for derrubado. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4047,8 +6544,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/tecnologia/celula-de-combustivel-chinesa-nao-queima-o-carvao-nem-emite-co%e2%82%82/",
     "sourceLabel": "Célula de combustível chinesa não queima o carvão nem emite CO₂",
-    "lede": "Grupo chinês desenvolve célula que transforma carvão em eletricidade por oxidação eletroquímica, sem combustão e sem lançar CO₂ na atmosfera",
-    "summary": "Grupo chinês desenvolve célula que transforma carvão em eletricidade por oxidação eletroquímica, sem combustão e sem lançar CO₂ na atmosfera",
+    "lede": "CNN Brasil publicou uma atualização sobre Célula de combustível chinesa não queima o carvão nem emite CO₂. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Célula de combustível chinesa não queima o carvão nem emite CO₂. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4145,8 +6642,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/saude/o-intestino-e-um-segundo-cerebro-diz-medica-de-harvard/",
     "sourceLabel": "O intestino é um segundo cérebro, diz médica de Harvard",
-    "lede": "Médica de Harvard defende que o intestino deve ser tratado como um cérebro — e que ignorá-lo tem consequências para o humor, a imunidade e a saúde",
-    "summary": "Médica de Harvard defende que o intestino deve ser tratado como um cérebro — e que ignorá-lo tem consequências para o humor, a imunidade e a saúde",
+    "lede": "CNN Brasil publicou uma atualização sobre O intestino é um segundo cérebro, diz médica de Harvard. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre O intestino é um segundo cérebro, diz médica de Harvard. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4194,8 +6691,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/branded-content/economia/negocios/condominio-clube-amplia-acesso-a-moradia-na-zona-sul-de-porto-alegre/",
     "sourceLabel": "Condomínio-clube amplia acesso a moradia na zona sul de Porto Alegre",
-    "lede": "Empreendimento com subsídios de até R$ 75 mil pelo programa Minha Casa, Minha Vida reforça expansão habitacional na Restinga",
-    "summary": "Empreendimento com subsídios de até R$ 75 mil pelo programa Minha Casa, Minha Vida reforça expansão habitacional na Restinga",
+    "lede": "CNN Brasil publicou uma atualização sobre Condomínio-clube amplia acesso a moradia na zona sul de Porto Alegre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Condomínio-clube amplia acesso a moradia na zona sul de Porto Alegre. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4243,8 +6740,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/rejeicao-de-messias-e-derrota-do-governo-e-recado-ao-stf-diz-especialista/",
     "sourceLabel": "Rejeição de Messias é derrota do governo e recado ao STF, diz especialista",
-    "lede": "Felipe Recondo avalia que a rejeição da indicação de Jorge Messias ao STF representa uma derrota do governo Lula e um recado ao Supremo",
-    "summary": "Felipe Recondo avalia que a rejeição da indicação de Jorge Messias ao STF representa uma derrota do governo Lula e um recado ao Supremo",
+    "lede": "CNN Brasil publicou uma atualização sobre Rejeição de Messias é derrota do governo e recado ao STF, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Rejeição de Messias é derrota do governo e recado ao STF, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4292,8 +6789,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/ira-nao-tolerara-a-extensao-do-bloqueio-naval-afirma-conselheiro-militar/",
     "sourceLabel": "Irã “não tolerará” a extensão do bloqueio naval, afirma conselheiro militar",
-    "lede": "Assessor do líder supremo iraniano adverte que país responderá se sanções navais dos Estados Unidos continuarem",
-    "summary": "Assessor do líder supremo iraniano adverte que país responderá se sanções navais dos Estados Unidos continuarem",
+    "lede": "CNN Brasil publicou uma atualização sobre Irã “não tolerará” a extensão do bloqueio naval, afirma conselheiro militar. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Irã “não tolerará” a extensão do bloqueio naval, afirma conselheiro militar. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4390,8 +6887,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/analise-com-rejeicao-de-messias-alcolumbre-redesenha-propria-sucessao/",
     "sourceLabel": "Análise: Com rejeição de Messias, Alcolumbre redesenha própria sucessão",
-    "lede": "Segundo o diretor de Jornalismo da CNN em Brasília, Daniel Rittner, com derrota da indicação ao STF, Alcolumbre se redesenha no tabuleiro político e se projeta como interlocutor da direita e da oposição",
-    "summary": "Segundo o diretor de Jornalismo da CNN em Brasília, Daniel Rittner, com derrota da indicação ao STF, Alcolumbre se redesenha no tabuleiro político e se projeta como interlocutor da direita e da oposição",
+    "lede": "CNN Brasil publicou uma atualização sobre Análise: Com rejeição de Messias, Alcolumbre redesenha própria sucessão. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Análise: Com rejeição de Messias, Alcolumbre redesenha própria sucessão. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4439,8 +6936,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/governistas-nao-detectaram-acoes-discretas-e-sem-vazamentos-contra-messias/",
     "sourceLabel": "Governistas não detectaram ações discretas e sem vazamentos contra Messias",
-    "lede": "Analista Pedro Venceslau aponta, no CNN Prime Time, caos na articulação política e diz que governistas ficaram \"absolutamente no escuro\" sobre movimentação contrária à indicação",
-    "summary": "Analista Pedro Venceslau aponta, no CNN Prime Time, caos na articulação política e diz que governistas ficaram \"absolutamente no escuro\" sobre movimentação contrária à indicação",
+    "lede": "CNN Brasil publicou uma atualização sobre Governistas não detectaram ações discretas e sem vazamentos contra Messias. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Governistas não detectaram ações discretas e sem vazamentos contra Messias. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4488,8 +6985,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/bc-transmitiu-cautela-e-dureza-via-projecoes-apontam-analistas/",
     "sourceLabel": "BC transmitiu cautela e dureza via projeções, apontam analistas",
-    "lede": "Analistas apontam que, apesar do corte de 0,25 ponto na Selic, autoridade monetária comunicou desconfortos com cenário",
-    "summary": "Analistas apontam que, apesar do corte de 0,25 ponto na Selic, autoridade monetária comunicou desconfortos com cenário",
+    "lede": "CNN Brasil publicou uma atualização sobre BC transmitiu cautela e dureza via projeções, apontam analistas. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre BC transmitiu cautela e dureza via projeções, apontam analistas. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4537,8 +7034,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/um-dia-apos-messias-queda-do-veto-da-dosimetria-e-dada-como-certa/",
     "sourceLabel": "Congresso tende a derrubar veto à dosimetria e impor nova derrota a Lula",
-    "lede": "Texto beneficia condenados por atos do 8 de janeiro; após rejeição a Messias, Gleisi fala em “acordão” contra governo",
-    "summary": "Texto beneficia condenados por atos do 8 de janeiro; após rejeição a Messias, Gleisi fala em “acordão” contra governo",
+    "lede": "CNN Brasil publicou uma atualização sobre Congresso tende a derrubar veto à dosimetria e impor nova derrota a Lula. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Congresso tende a derrubar veto à dosimetria e impor nova derrota a Lula. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4635,8 +7132,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/30/shakira-pede-sugestoes-e-g1-lista-as-possiveis-participacoes-no-show-do-rio.ghtml",
     "sourceLabel": "Shakira pede sugestões e g1 lista as possíveis participações no show do Rio",
-    "lede": "Shakira pede sugestões e g1 lista as possíveis participações no show do Rio Instagram/Reprodução/ Divulgação/Live Nation Faltando pouco para o megashow gratuito em Copacabana, Shakira aumentou a expectativa dos fãs ao abrir uma caixinha de perguntas nas redes",
-    "summary": "Shakira pede sugestões e g1 lista as possíveis participações no show do Rio Instagram/Reprodução/ Divulgação/Live Nation Faltando pouco para o megashow gratuito em Copacabana, Shakira aumentou a expectativa dos fãs ao abrir uma caixinha de perguntas nas redes",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Shakira pede sugestões e g1 lista as possíveis participações no show do Rio. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Shakira pede sugestões e g1 lista as possíveis participações no show do Rio. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4684,8 +7181,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/30/shakira-a-discografia-g1-coloca-os-10-albuns-da-cantora-na-ordem-do-pior-ao-melhor.ghtml",
     "sourceLabel": "Shakira, a discografia: g1 coloca os 10 álbuns da cantora na ordem (do pior ao melhor)",
-    "lede": "Shakira, a discografia: g1 coloca os 10 álbuns da cantora na ordem (do pior ao melhor) Em mais de 35 anos de carreira, Shakira lançou 10 álbuns oficiais de estúdio e vendeu mais de 80 milhões de discos em todo o mundo. Assim como Madonna e Lady Gaga, Shakira",
-    "summary": "Shakira, a discografia: g1 coloca os 10 álbuns da cantora na ordem (do pior ao melhor) Em mais de 35 anos de carreira, Shakira lançou 10 álbuns oficiais de estúdio e vendeu mais de 80 milhões de discos em todo o mundo. Assim como Madonna e Lady Gaga, Shakira",
+    "lede": "Shakira, a discografia: g1 coloca os 10 álbuns da cantora na ordem (do pior ao melhor) Em mais de 35 anos de carreira, Shakira lançou 10 álbuns oficiais de estúdio e vendeu mais de 80 milhões de discos em todo o mundo.",
+    "summary": "Shakira, a discografia: g1 coloca os 10 álbuns da cantora na ordem (do pior ao melhor) Em mais de 35 anos de carreira, Shakira lançou 10 álbuns oficiais de estúdio e vendeu mais de 80 milhões de discos em todo o mundo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4733,8 +7230,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/cinema/noticia/2026/04/30/o-diabo-veste-prada-2-nao-tem-o-corte-perfeito-do-primeiro-mas-ainda-veste-bem-g1-ja-viu.ghtml",
     "sourceLabel": "'O Diabo Veste Prada 2' não tem o corte perfeito do primeiro, mas ainda veste bem; g1 já viu",
-    "lede": "'O Diabo Veste Prada 2' prova que uma boa comédia não sai de moda No fim de \"O Diabo Veste Prada\" (2006), Emily (Emily Blunt) se dirige à substituta de Andy (Anne Hathaway) e diz: \"Você tem grandes sapatos para preencher. Espero que você saiba disso\". A mensa",
-    "summary": "'O Diabo Veste Prada 2' prova que uma boa comédia não sai de moda No fim de \"O Diabo Veste Prada\" (2006), Emily (Emily Blunt) se dirige à substituta de Andy (Anne Hathaway) e diz: \"Você tem grandes sapatos para preencher. Espero que você saiba disso\". A mensa",
+    "lede": "'O Diabo Veste Prada 2' prova que uma boa comédia não sai de moda No fim de \"O Diabo Veste Prada\" (2006), Emily (Emily Blunt) se dirige à substituta de Andy (Anne Hathaway) e diz: \"Você tem grandes sapatos para preencher. Espero que você saiba disso\".",
+    "summary": "'O Diabo Veste Prada 2' prova que uma boa comédia não sai de moda No fim de \"O Diabo Veste Prada\" (2006), Emily (Emily Blunt) se dirige à substituta de Andy (Anne Hathaway) e diz: \"Você tem grandes sapatos para preencher. Espero que você saiba disso\".",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5076,8 +7573,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/sulamericana/red-bull-bragantino-x-river-plate-horario-e-onde-assistir-a-sul-americana/",
     "sourceLabel": "Red Bull Bragantino x River Plate: horário e onde assistir à Sul-Americana",
-    "lede": "Equipes se enfrentam nesta quinta-feira (30), às 21h30 (de Brasília), no Estádio Cícero de Souza Marques",
-    "summary": "Equipes se enfrentam nesta quinta-feira (30), às 21h30 (de Brasília), no Estádio Cícero de Souza Marques",
+    "lede": "CNN Brasil publicou uma atualização sobre Red Bull Bragantino x River Plate: horário e onde assistir à Sul-Americana. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Red Bull Bragantino x River Plate: horário e onde assistir à Sul-Americana. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5272,8 +7769,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/setor-produtivo-alerta-que-taxa-de-juros-segue-restritiva-e-agrava-economia/",
     "sourceLabel": "Setor produtivo alerta que taxa de juros segue restritiva e agrava economia",
-    "lede": "Entidades apontam preocupações para investimentos e geração de emprego e renda; FecomercioSP destaca papel das contas públicas no cenário",
-    "summary": "Entidades apontam preocupações para investimentos e geração de emprego e renda; FecomercioSP destaca papel das contas públicas no cenário",
+    "lede": "CNN Brasil publicou uma atualização sobre Setor produtivo alerta que taxa de juros segue restritiva e agrava economia. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Setor produtivo alerta que taxa de juros segue restritiva e agrava economia. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5321,8 +7818,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/cnn-money/precos-do-petroleo-disparam-para-o-nivel-mais-alto-desde-2022/",
     "sourceLabel": "Preços do petróleo disparam para o nível mais alto desde 2022",
-    "lede": "Cotação global da commodity sobe mais de 12% enquanto Washington avalia estender bloqueio naval a Teerã",
-    "summary": "Cotação global da commodity sobe mais de 12% enquanto Washington avalia estender bloqueio naval a Teerã",
+    "lede": "CNN Brasil publicou uma atualização sobre Preços do petróleo disparam para o nível mais alto desde 2022. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Preços do petróleo disparam para o nível mais alto desde 2022. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5370,8 +7867,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/ciencia/nasa-testa-novo-propulsor-de-alta-potencia-para-missoes-a-marte/",
     "sourceLabel": "Nasa testa novo propulsor de alta potência para missões a Marte",
-    "lede": "Tecnologia de magnetoplasmadinâmico movido a lítio metálico promete reduzir massa de lançamento e levar astronautas a Marte",
-    "summary": "Tecnologia de magnetoplasmadinâmico movido a lítio metálico promete reduzir massa de lançamento e levar astronautas a Marte",
+    "lede": "CNN Brasil publicou uma atualização sobre Nasa testa novo propulsor de alta potência para missões a Marte. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Nasa testa novo propulsor de alta potência para missões a Marte. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5419,8 +7916,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/infalibilidade-de-lula-cai-por-terra-com-messias-barrado-diz-especialista/",
     "sourceLabel": "Infalibilidade de Lula cai por terra com Messias barrado, diz especialista",
-    "lede": "Especialista afirma que derrota do governo no Congresso marca divisor de águas na trajetória política do presidente",
-    "summary": "Especialista afirma que derrota do governo no Congresso marca divisor de águas na trajetória política do presidente",
+    "lede": "CNN Brasil publicou uma atualização sobre Infalibilidade de Lula cai por terra com Messias barrado, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Infalibilidade de Lula cai por terra com Messias barrado, diz especialista. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5517,8 +8014,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/derrota-de-messias-impoe-dilema-a-lula-sobre-nova-indicacao/",
     "sourceLabel": "Derrota de Messias impõe dilema a Lula sobre nova indicação",
-    "lede": "Planalto precisa decidir se faz nova indicação ou deixa vaga aberta até 2027; Alcolumbre sinalizou que seguraria nova votação para depois das eleições",
-    "summary": "Planalto precisa decidir se faz nova indicação ou deixa vaga aberta até 2027; Alcolumbre sinalizou que seguraria nova votação para depois das eleições",
+    "lede": "CNN Brasil publicou uma atualização sobre Derrota de Messias impõe dilema a Lula sobre nova indicação. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Derrota de Messias impõe dilema a Lula sobre nova indicação. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5664,8 +8161,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/educacao/enem-prazo-para-isencao-e-justificativa-de-ausencia-termina-nesta-quinta/",
     "sourceLabel": "Enem: prazo para isenção e justificativa de ausência termina nesta quinta",
-    "lede": "Estudantes têm até o fim do dia para pedir gratuidade na Página do Participante; benefício não garante inscrição automática",
-    "summary": "Estudantes têm até o fim do dia para pedir gratuidade na Página do Participante; benefício não garante inscrição automática",
+    "lede": "CNN Brasil publicou uma atualização sobre Enem: prazo para isenção e justificativa de ausência termina nesta quinta. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Enem: prazo para isenção e justificativa de ausência termina nesta quinta. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5762,8 +8259,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/ministro-do-petroleo-do-ira-pede-a-populacao-que-reduza-consumo/",
     "sourceLabel": "Ministro do Petróleo do Irã pede à população que reduza consumo",
-    "lede": "Autoridade minimiza impacto de bloqueio naval dos EUA, mas enfatiza que economia e conservação são um dever religioso e princípio geral",
-    "summary": "Autoridade minimiza impacto de bloqueio naval dos EUA, mas enfatiza que economia e conservação são um dever religioso e princípio geral",
+    "lede": "CNN Brasil publicou uma atualização sobre Ministro do Petróleo do Irã pede à população que reduza consumo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Ministro do Petróleo do Irã pede à população que reduza consumo. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5811,8 +8308,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/politico/noticia/2026/04/30/congresso-analisa-veto-de-pl-da-dosimetria-em-meio-a-crise-com-governo.ghtml",
     "sourceLabel": "Congresso analisa veto de PL da Dosimetria em meio à crise com governo",
-    "lede": "Segundo a PGR, acusados e condenados por trama golpista tiveram responsabilidade pelos atos do 8 de janeiro de 2023 Reuters via BBC O Congresso vota, nesta quinta-feira (30), um veto (rejeição) do presidente Lula (PT) ao projeto que reduz penas de condenados",
-    "summary": "Segundo a PGR, acusados e condenados por trama golpista tiveram responsabilidade pelos atos do 8 de janeiro de 2023 Reuters via BBC O Congresso vota, nesta quinta-feira (30), um veto (rejeição) do presidente Lula (PT) ao projeto que reduz penas de condenados",
+    "lede": "G1 Politica publicou uma atualização sobre Congresso analisa veto de PL da Dosimetria em meio à crise com governo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Congresso analisa veto de PL da Dosimetria em meio à crise com governo. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5860,8 +8357,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/30/pf-analisa-proposta-de-delacao-de-ex-procurador-do-inss-que-inclui-supostas-fraudes-do-master-em-consignados.ghtml",
     "sourceLabel": "PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados",
-    "lede": "PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o tex",
-    "summary": "PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o tex",
+    "lede": "PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados.",
+    "summary": "PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5891,8 +8388,6 @@ window.NEWS_DATA = [
       "pf-analisa-proposta-de-delacao-de-ex-procurador-do-inss-que-inclui-supostas-fraudes-do-master-em"
     ],
     "body": [
-      "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados.",
-      "PF analisa proposta de delação de ex-procurador do INSS, que inclui supostas fraudes do Master em consignados e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -5958,8 +8453,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/analise-ww-crise-stf-congresso-governo-lula-messias/",
     "sourceLabel": "Análise: Messias desponta como boi de piranha da crise do STF",
-    "lede": "Indicação que começou com mal-estar por pressa de Alcolumbre para sabatina e falta de mensagem oficial do Palácio do Planalto termina em fato inédito da Nova República",
-    "summary": "Indicação que começou com mal-estar por pressa de Alcolumbre para sabatina e falta de mensagem oficial do Palácio do Planalto termina em fato inédito da Nova República",
+    "lede": "CNN Brasil publicou uma atualização sobre Análise: Messias desponta como boi de piranha da crise do STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Análise: Messias desponta como boi de piranha da crise do STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6252,8 +8747,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/libertadores-flamengo-segura-empate-com-estudiantes-na-argentina",
     "sourceLabel": "Libertadores: Flamengo segura empate com Estudiantes na Argentina",
-    "lede": "O Flamengo conseguiu segurar um empate de 1 a 1 com o Estudiantes (Argentina), na noite desta quarta-feira (29) no estádio Jorge Luis Hirschi, em La Plata, em partida válida pelo Grupo A da Copa Libertadores. O confronto contou com transmissão ao vivo da Rádi",
-    "summary": "O Flamengo conseguiu segurar um empate de 1 a 1 com o Estudiantes (Argentina), na noite desta quarta-feira (29) no estádio Jorge Luis Hirschi, em La Plata, em partida válida pelo Grupo A da Copa Libertadores. O confronto contou com transmissão ao vivo da Rádi",
+    "lede": "O Flamengo conseguiu segurar um empate de 1 a 1 com o Estudiantes (Argentina), na noite desta quarta-feira (29) no estádio Jorge Luis Hirschi, em La Plata, em partida válida pelo Grupo A da Copa Libertadores.",
+    "summary": "O Flamengo conseguiu segurar um empate de 1 a 1 com o Estudiantes (Argentina), na noite desta quarta-feira (29) no estádio Jorge Luis Hirschi, em La Plata, em partida válida pelo Grupo A da Copa Libertadores.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6497,8 +8992,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/30/condenado-por-corrupcao-e-envolvido-na-farra-dos-guardanapos-estava-em-voo-que-veio-do-caribe-com-motta-e-ciro-nogueira.ghtml",
     "sourceLabel": "Condenado por corrupção e envolvido na 'farra dos guardanapos' estava em voo que veio do Caribe com Motta e Ciro Nogueira",
-    "lede": "Um empresário condenado pela antiga Lava Jato do Rio de Janeiro era um dos passageiros do voo particular que trouxe o presidente da Câmara, Hugo Motta (Republicanos-PB), e o senador Ciro Nogueira (PP-PI) da ilha de São Martinho",
-    "summary": "Um empresário condenado pela antiga Lava Jato do Rio de Janeiro era um dos passageiros do voo particular que trouxe o presidente da Câmara, Hugo Motta (Republicanos-PB), e o senador Ciro Nogueira (PP-PI) da ilha de São Martinho",
+    "lede": "G1 Politica publicou uma atualização sobre Condenado por corrupção e envolvido na 'farra dos guardanapos' estava em voo que veio do Caribe com Motta e Ciro Nogueira. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Condenado por corrupção e envolvido na 'farra dos guardanapos' estava em voo que veio do Caribe com Motta e Ciro Nogueira. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6546,8 +9041,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/04/30/quaest-na-ba-47percent-querem-governador-aliado-de-lula-32percent-independente-e-16percent-de-bolsonaro.ghtml",
     "sourceLabel": "Quaest na BA: 47% querem governador aliado de Lula; 32%, independente; e 16%, de Bolsonaro",
-    "lede": "Lula e Jair Bolsonaro em imagens de arquivo Ton Molina/FotoArena/Estadão Conteúdo; Reuters/Adriano Machado A pesquisa Quaest, divulgada na terça-feira (28), avaliou o impacto das alianças políticas nas eleições para o governo",
-    "summary": "Lula e Jair Bolsonaro em imagens de arquivo Ton Molina/FotoArena/Estadão Conteúdo; Reuters/Adriano Machado A pesquisa Quaest, divulgada na terça-feira (28), avaliou o impacto das alianças políticas nas eleições para o governo",
+    "lede": "G1 Politica publicou uma atualização sobre Quaest na BA: 47% querem governador aliado de Lula; 32%, independente; e 16%, de Bolsonaro. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Quaest na BA: 47% querem governador aliado de Lula; 32%, independente; e 16%, de Bolsonaro. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6644,8 +9139,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/04/30/numero-de-votos-contra-messias-surpreendeu-governo-oposicao-fala-em-recado-ao-planalto-e-ao-stf.ghtml",
     "sourceLabel": "Número de votos contra Messias surpreendeu governo; oposição fala em recado ao Planalto e ao STF",
-    "lede": "Alcolumbre bate na mesa e fala com líder do governo após finalizar sessão Durante o processo de votação da indicação de Jorge Messias ao Supremo Tribunal Federal (STF) no plenário do Senado Federal, o clima entre os governistas",
-    "summary": "Alcolumbre bate na mesa e fala com líder do governo após finalizar sessão Durante o processo de votação da indicação de Jorge Messias ao Supremo Tribunal Federal (STF) no plenário do Senado Federal, o clima entre os governistas",
+    "lede": "G1 Politica publicou uma atualização sobre Número de votos contra Messias surpreendeu governo; oposição fala em recado ao Planalto e ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Número de votos contra Messias surpreendeu governo; oposição fala em recado ao Planalto e ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -7383,8 +9878,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/29/parte-do-nosso-time-sentou-a-bunda-na-cadeira-diz-boulos-ao-criticar-militancia-no-acre/",
     "sourceLabel": "“Parte do nosso time sentou a bunda na cadeira”, diz Boulos ao criticar militância",
-    "lede": "Foto: Whidy Melo/ac24horas \" O ministro-chefe da Secretaria-Geral da Presidência, Guilherme Boulos, fez um duro alerta a militantes e lideranças da esquerda durante sua última agenda em Rio Branco, nesta quarta-feira (29), ao cobrar mais presença nos territór",
-    "summary": "Foto: Whidy Melo/ac24horas \" O ministro-chefe da Secretaria-Geral da Presidência, Guilherme Boulos, fez um duro alerta a militantes e lideranças da esquerda durante sua última agenda em Rio Branco, nesta quarta-feira (29), ao cobrar mais presença nos territór",
+    "lede": "ac24horas publicou uma atualização sobre “Parte do nosso time sentou a bunda na cadeira”, diz Boulos ao criticar militância. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre “Parte do nosso time sentou a bunda na cadeira”, diz Boulos ao criticar militância. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -8567,8 +11062,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/alcolumbre-confirma-fala-antes-da-votacao-dei-a-opiniao/",
     "sourceLabel": "Alcolumbre confirma fala antes da votação: “dei a opinião”",
-    "lede": "Presidente do Senado disse a Jaques Wagner (PT-BA) que Messias \"perderia por oito\" antes da abertura do placar",
-    "summary": "Presidente do Senado disse a Jaques Wagner (PT-BA) que Messias \"perderia por oito\" antes da abertura do placar",
+    "lede": "CNN Brasil publicou uma atualização sobre Alcolumbre confirma fala antes da votação: “dei a opinião”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Alcolumbre confirma fala antes da votação: “dei a opinião”. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -8665,8 +11160,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/opep-deve-aprovar-novo-aumento-na-producao-de-petroleo-apos-saida-dos-eau/",
     "sourceLabel": "Opep+ deve aprovar novo aumento na produção de petróleo após saída dos EAU",
-    "lede": "Grupo avalia elevar metas de produção com ajuste na participação, enquanto guerra no Oriente Médio e bloqueio do Estreito de Ormuz limitam capacidade real de oferta",
-    "summary": "Grupo avalia elevar metas de produção com ajuste na participação, enquanto guerra no Oriente Médio e bloqueio do Estreito de Ormuz limitam capacidade real de oferta",
+    "lede": "CNN Brasil publicou uma atualização sobre Opep+ deve aprovar novo aumento na produção de petróleo após saída dos EAU. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Opep+ deve aprovar novo aumento na produção de petróleo após saída dos EAU. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -8714,8 +11209,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/libertadores-da-america/mirassol-vence-always-ready-em-casa-pela-libertadores-com-brilho-de-alesson/",
     "sourceLabel": "Mirassol vence Always Ready em casa pela Libertadores com brilho de Alesson",
-    "lede": "Time do interior de São Paulo superou a expulsão de João Victor e assegurou placar para pontuar mais uma vez no \"Maião\" pelo torneio continental",
-    "summary": "Time do interior de São Paulo superou a expulsão de João Victor e assegurou placar para pontuar mais uma vez no \"Maião\" pelo torneio continental",
+    "lede": "CNN Brasil publicou uma atualização sobre Mirassol vence Always Ready em casa pela Libertadores com brilho de Alesson. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Mirassol vence Always Ready em casa pela Libertadores com brilho de Alesson. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -9047,8 +11542,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/29/messias-se-encontra-com-lula-apos-ter-nome-rejeitado-no-senado.ghtml",
     "sourceLabel": "Messias se encontra com Lula após ter nome rejeitado no Senado",
-    "lede": "Lula se reúne com Messias após derrota no Senado O advogado-geral da União, Jorge Messias, se encontrou com o presidente Luiz Inácio Lula da Silva (PT) após ter indicação ao Supremo Tribunal Federal (STF) rejeitada pelo",
-    "summary": "Lula se reúne com Messias após derrota no Senado O advogado-geral da União, Jorge Messias, se encontrou com o presidente Luiz Inácio Lula da Silva (PT) após ter indicação ao Supremo Tribunal Federal (STF) rejeitada pelo",
+    "lede": "G1 Politica publicou uma atualização sobre Messias se encontra com Lula após ter nome rejeitado no Senado. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Messias se encontra com Lula após ter nome rejeitado no Senado. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -9447,8 +11942,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/29/ele-vai-perder-por-oito-disse-alcolumbre-segundos-antes-de-anunciar-rejeicao-de-messias-ao-stf.ghtml",
     "sourceLabel": "VÍDEO: 'Acho que ele vai perder por oito', disse Alcolumbre a líder de Lula antes de anunciar rejeição de Messias ao STF",
-    "lede": "'Acho que ele vai perder por oito', disse Alcolumbre antes do resultado sobre Messias O presidente do Senado Federal, Davi Alcolumbre (União-AP), fez uma previsão do resultado da votação que rejeitou o advogado-geral da União",
-    "summary": "'Acho que ele vai perder por oito', disse Alcolumbre antes do resultado sobre Messias O presidente do Senado Federal, Davi Alcolumbre (União-AP), fez uma previsão do resultado da votação que rejeitou o advogado-geral da União",
+    "lede": "G1 Politica publicou uma atualização sobre VÍDEO: 'Acho que ele vai perder por oito', disse Alcolumbre a líder de Lula antes de anunciar rejeição de Messias ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre VÍDEO: 'Acho que ele vai perder por oito', disse Alcolumbre a líder de Lula antes de anunciar rejeição de Messias ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -9806,8 +12301,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/29/colunistas-avaliam-derrota-historica-do-governo-lula-na-rejeicao-de-messias-para-o-stf.ghtml",
     "sourceLabel": "Colunistas avaliam derrota histórica do governo Lula na rejeição de Messias para o STF",
-    "lede": "A rejeição do nome de Jorge Messias para o Supremo Tribunal Federal pelo Senado foi interpretada como a maior crise política do terceiro mandato do presidente Luiz Inácio Lula da Silva — e uma das mais graves de toda a sua",
-    "summary": "A rejeição do nome de Jorge Messias para o Supremo Tribunal Federal pelo Senado foi interpretada como a maior crise política do terceiro mandato do presidente Luiz Inácio Lula da Silva — e uma das mais graves de toda a sua",
+    "lede": "G1 Politica publicou uma atualização sobre Colunistas avaliam derrota histórica do governo Lula na rejeição de Messias para o STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Colunistas avaliam derrota histórica do governo Lula na rejeição de Messias para o STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10063,8 +12558,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/blog/ana-flor/post/2026/04/29/video-apos-derrota-messias-recebe-cumprimentos-na-lideranca-do-governo-no-senado.ghtml",
     "sourceLabel": "VÍDEO: Após derrota, Messias recebe cumprimentos na liderança do governo no Senado",
-    "lede": "Após derrota, Messias recebe cumprimentos na liderança do governo no Senado Após o Plenário do Senado rejeitar a indicação do advogado-geral da União, Jorge Messias, para uma cadeira no Supremo Tribunal Federal (STF), Messias",
-    "summary": "Após derrota, Messias recebe cumprimentos na liderança do governo no Senado Após o Plenário do Senado rejeitar a indicação do advogado-geral da União, Jorge Messias, para uma cadeira no Supremo Tribunal Federal (STF), Messias",
+    "lede": "G1 Politica publicou uma atualização sobre VÍDEO: Após derrota, Messias recebe cumprimentos na liderança do governo no Senado. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre VÍDEO: Após derrota, Messias recebe cumprimentos na liderança do governo no Senado. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10218,8 +12713,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/29/video-mostra-comemoracao-da-oposicao-no-senado-apos-rejeicao-de-jorge-messias-para-o-stf.ghtml",
     "sourceLabel": "VÍDEO mostra comemoração da oposição no Senado após rejeição de Jorge Messias para o STF",
-    "lede": "Veja a reação do plenário do Senado após rejeição de Jorge Messias para o STF O Plenário do Senado Federal rejeitou nesta quarta-feira (29) a indicação do advogado-geral da União, Jorge Messias, para ocupar o cargo de ministro",
-    "summary": "Veja a reação do plenário do Senado após rejeição de Jorge Messias para o STF O Plenário do Senado Federal rejeitou nesta quarta-feira (29) a indicação do advogado-geral da União, Jorge Messias, para ocupar o cargo de ministro",
+    "lede": "G1 Politica publicou uma atualização sobre VÍDEO mostra comemoração da oposição no Senado após rejeição de Jorge Messias para o STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre VÍDEO mostra comemoração da oposição no Senado após rejeição de Jorge Messias para o STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10316,8 +12811,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/29/messias-e-rejeitado-pelo-senado-com-42-votos-contra-a-indicacao-relembre-outros-placares.ghtml",
     "sourceLabel": "Messias é rejeitado pelo Senado com 42 votos contra a indicação; relembre outros placares",
-    "lede": "Lula formaliza indicação de Jorge Messias para vaga no STF O ministro da Advocacia-Geral da União (AGU), Jorge Messias, foi sabatinado nesta quarta-feira (29) no Senado e sofreu a primeira derrota de um indicado para ministro",
-    "summary": "Lula formaliza indicação de Jorge Messias para vaga no STF O ministro da Advocacia-Geral da União (AGU), Jorge Messias, foi sabatinado nesta quarta-feira (29) no Senado e sofreu a primeira derrota de um indicado para ministro",
+    "lede": "G1 Politica publicou uma atualização sobre Messias é rejeitado pelo Senado com 42 votos contra a indicação; relembre outros placares. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Messias é rejeitado pelo Senado com 42 votos contra a indicação; relembre outros placares. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10418,8 +12913,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/29/em-derrota-para-o-governo-senado-rejeita-messias-para-vaga-ao-stf/",
     "sourceLabel": "Em derrota para o governo, Senado rejeita Messias para vaga ao STF",
-    "lede": "Indicado de Lula ao Supremo, o advogado-geral da União Jorge Messias durante sabatina na CCJ do Senado • Andressa Anholete/Agência Senad \" O Senado rejeitou a indicação de Jorge Messias ao STF (Supremo Tribunal Federal) nesta",
-    "summary": "Indicado de Lula ao Supremo, o advogado-geral da União Jorge Messias durante sabatina na CCJ do Senado • Andressa Anholete/Agência Senad \" O Senado rejeitou a indicação de Jorge Messias ao STF (Supremo Tribunal Federal) nesta",
+    "lede": "ac24horas publicou uma atualização sobre Em derrota para o governo, Senado rejeita Messias para vaga ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Em derrota para o governo, Senado rejeita Messias para vaga ao STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10516,8 +13011,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/29/xand-aviao-grava-album-audiovisual-em-show-em-fortaleza-para-circuito-junino.ghtml",
     "sourceLabel": "Xand Avião grava álbum audiovisual em show em Fortaleza para circuito junino",
-    "lede": "Xand Avião grava o álbum ao vivo 'Meu São João' em show apresentado em Fortaleza (CE) na noite de ontem, 28 de abril Divulgação ♫ NOTÍCIA ♬ De olho no rentável circuito nordestino das festas juninas, o cantor Xand Avião gravou",
-    "summary": "Xand Avião grava o álbum ao vivo 'Meu São João' em show apresentado em Fortaleza (CE) na noite de ontem, 28 de abril Divulgação ♫ NOTÍCIA ♬ De olho no rentável circuito nordestino das festas juninas, o cantor Xand Avião gravou",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Xand Avião grava álbum audiovisual em show em Fortaleza para circuito junino. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Xand Avião grava álbum audiovisual em show em Fortaleza para circuito junino. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10614,8 +13109,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/29/senado-rejeita-indicacao-de-jorge-messias-para-o-stf.ghtml",
     "sourceLabel": "Em derrota histórica, Senado rejeita indicação de Jorge Messias para o STF",
-    "lede": "Senado rejeita indicação de Jorge Messias para o STF O Plenário do Senado Federal rejeitou nesta quarta-feira (29) a indicação do advogado-geral da União, Jorge Messias, para ocupar o cargo de ministro do Supremo Tribunal",
-    "summary": "Senado rejeita indicação de Jorge Messias para o STF O Plenário do Senado Federal rejeitou nesta quarta-feira (29) a indicação do advogado-geral da União, Jorge Messias, para ocupar o cargo de ministro do Supremo Tribunal",
+    "lede": "G1 Politica publicou uma atualização sobre Em derrota histórica, Senado rejeita indicação de Jorge Messias para o STF. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Em derrota histórica, Senado rejeita indicação de Jorge Messias para o STF. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -10960,7 +13455,7 @@ window.NEWS_DATA = [
     "date": "29 de abr de 2026",
     "publishedAt": "2026-04-29T22:00:00.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades grindr yes grindr won the whcd party circuit hello and welcome to regulator a newsletter for verge subscribers about technology politics and technology learning how to politick if you re not a subscriber but would like to support our work please subscribe here i promise that your money will not go",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/column/920845/grindr-whcd-party-2026",
@@ -11576,7 +14071,7 @@ window.NEWS_DATA = [
     "date": "29 de abr de 2026",
     "publishedAt": "2026-04-29T21:19:39.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades splatoon raiders preorders for the switch 2 are nearly 20 percent off nintendo recently announced a new pricing policy which knocks 10 off the cost of digital versions of future first party titles exclusive to the nintendo switch 2 splatoon raiders for instance is available for preorder ahead of its july 23rd release for",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/gadgets/920848/splatoon-raiders-physical-edition-preorder-switch-2-walmart-deal-sale",
@@ -11630,8 +14125,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/noticia/2026/04/29/tcu-manda-inss-suspender-concessao-de-novos-emprestimos-pessoais-consignados-ate-ajustes-internos.ghtml",
     "sourceLabel": "TCU manda INSS suspender concessão de novos empréstimos pessoais consignados até ajustes internos",
-    "lede": "O Tribunal de Contas da União (TCU) determinou, nesta quarta-feira (29), que o Instituto Nacional do Seguro Social (INSS) suspenda imediatamente concessão de novos empréstimos pessoais consignados até que as travas de segurança",
-    "summary": "O Tribunal de Contas da União (TCU) determinou, nesta quarta-feira (29), que o Instituto Nacional do Seguro Social (INSS) suspenda imediatamente concessão de novos empréstimos pessoais consignados até que as travas de segurança",
+    "lede": "G1 Politica publicou uma atualização sobre TCU manda INSS suspender concessão de novos empréstimos pessoais consignados até ajustes internos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre TCU manda INSS suspender concessão de novos empréstimos pessoais consignados até ajustes internos. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -12359,56 +14854,7 @@ window.NEWS_DATA = [
     "date": "29 de abr de 2026",
     "publishedAt": "2026-04-29T20:43:37.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades microsoft reports sinking xbox revenue as its cloud business climbs microsoft s xbox hardware revenue continues to tumble with the company revealing a 33 percent decline as part of its earnings report released on wednesday even though the rest of microsoft s consumer focused division took a dip the company s cloud and prod",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/tech/920785/microsoft-xbox-revenue-q3-2026-earnings",
-    "sourceLabel": "Atualização internacional de The Verge - 15:43",
-    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 15:43. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 15:43. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/01/STK095_MICROSOFT_CVirginia_B.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/01/STK095_MICROSOFT_CVirginia_B.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/01/STK095_MICROSOFT_CVirginia_B.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/tech/920785/microsoft-xbox-revenue-q3-2026-earnings"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/tech/920785/microsoft-xbox-revenue-q3-2026-earnings"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "microsoft-reports-sinking-xbox-revenue-as-its-cloud-business-climbs"
-    ],
-    "body": [
-      "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre Microsoft reports sinking Xbox revenue as its cloud business climbs.",
-      "Microsoft reports sinking Xbox revenue as its cloud business climbs e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://www.theverge.com/tech/920785/microsoft-xbox-revenue-q3-2026-earnings",
-    "slug": "microsoft-reports-sinking-xbox-revenue-as-its-cloud-business-climbs",
-    "title": "Atualização internacional de The Verge - 15:43",
-    "eyebrow": "Novidades",
-    "date": "29 de abr de 2026",
-    "publishedAt": "2026-04-29T20:43:37.000Z",
-    "category": "Novidades",
-    "categoryKey": "novidades microsoft reports sinking xbox revenue as its cloud business climbs microsoft s xbox hardware revenue continues to tumble with the company revealing a 33 percent decline as part of its earnings report released on wednesday even though the rest of microsoft s consumer focused division took a dip the company s cloud and prod",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/920785/microsoft-xbox-revenue-q3-2026-earnings",
@@ -12501,55 +14947,6 @@ window.NEWS_DATA = [
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://www.theverge.com/tech/920815/google-alphabet-q1-2026-earnings-sundar-pichai",
-    "slug": "google-search-queries-hit-an-all-time-high-last-quarter",
-    "title": "Atualização internacional de The Verge - 15:28",
-    "eyebrow": "Esporte",
-    "date": "29 de abr de 2026",
-    "publishedAt": "2026-04-29T20:28:11.000Z",
-    "category": "Esporte",
-    "categoryKey": "esporte",
-    "previewClass": "thumb-esporte",
-    "sourceName": "The Verge",
-    "sourceUrl": "https://www.theverge.com/tech/920815/google-alphabet-q1-2026-earnings-sundar-pichai",
-    "sourceLabel": "Atualização internacional de The Verge - 15:28",
-    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 15:28. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 15:28. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23951561/VRG_Illo_STK179_L_Normand_SundarPichai_Neutral.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23951561/VRG_Illo_STK179_L_Normand_SundarPichai_Neutral.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23951561/VRG_Illo_STK179_L_Normand_SundarPichai_Neutral.jpg?quality=90&strip=all&crop=0,0,100,100",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/tech/920815/google-alphabet-q1-2026-earnings-sundar-pichai"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "The Verge",
-        "url": "https://www.theverge.com/tech/920815/google-alphabet-q1-2026-earnings-sundar-pichai"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "google-search-queries-hit-an-all-time-high-last-quarter"
-    ],
-    "body": [
-      "The Verge publicou em 29 de abr de 2026 a base desta noticia sobre Google Search queries hit an ‘all time high’ last quarter.",
-      "Google Search queries hit an ‘all time high’ last quarter e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
   },
   {
     "id": "https://www.theverge.com/tech/920815/google-alphabet-q1-2026-earnings-sundar-pichai",
@@ -12915,8 +15312,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/04/29/globopop-ganha-festa-de-lancamento-com-creators-e-celebridades-em-sp.ghtml",
     "sourceLabel": "GloboPop ganha festa de lançamento com creators e celebridades em SP",
-    "lede": "Os ex-BBBs Jordana, Maxiane, Cowboy Marciele e Gabi durante lançamento do GloboPop, em São Paulo Globo/ Bob Paulino O GloboPop, app de curadoria de conteúdo da Globo, ganhou uma festa de lançamento em São Paulo nesta",
-    "summary": "Os ex-BBBs Jordana, Maxiane, Cowboy Marciele e Gabi durante lançamento do GloboPop, em São Paulo Globo/ Bob Paulino O GloboPop, app de curadoria de conteúdo da Globo, ganhou uma festa de lançamento em São Paulo nesta",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre GloboPop ganha festa de lançamento com creators e celebridades em SP. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre GloboPop ganha festa de lançamento com creators e celebridades em SP. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -13012,7 +15409,7 @@ window.NEWS_DATA = [
     "date": "29 de abr de 2026",
     "publishedAt": "2026-04-29T18:03:05.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades all the evidence unveiled so far in musk v altman the musk v altman trial is underway and that means exhibits or the evidence to be presented in court are being revealed piece by piece so far email exchanges photos and corporate documents are circulating from the earliest days of openai and from be",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/920775/evidence-exhibits-elon-musk-sam-altman-openai-trial",
@@ -13208,7 +15605,7 @@ window.NEWS_DATA = [
     "date": "29 de abr de 2026",
     "publishedAt": "2026-04-29T17:32:02.000Z",
     "category": "Novidades",
-    "categoryKey": "novidades ubuntu s ai plans have linux users looking for a kill switch canonical s plan to add ai features to ubuntu has some users asking for a version of ubuntu that does not include these features while others say they ll stick with older versions of the linux distro or even switch to a different one after canonical s ann",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
     "sourceName": "The Verge",
     "sourceUrl": "https://www.theverge.com/tech/920723/linux-ubuntu-ai-features-ai-kill-switch",
@@ -13491,8 +15888,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/29/gabriel-leone-se-prova-cantor-sagaz-sem-jogo-de-cena-ao-estrear-show-situado-na-sala-escura-do-sentimento.ghtml",
     "sourceLabel": "Gabriel Leone se prova cantor sagaz, sem jogo de cena, ao estrear show situado na 'sala escura do sentimento'",
-    "lede": "Gabriel Leone estreia o show 'Minhas lágrimas' no Manouche, na cidade natal do Rio de Janeiro (RJ), na noite de ontem, 28 de abril Rodrigo Goffredo ♫ CRÍTICA DE SHOW Título: Minhas lágrimas Artista: Gabriel Leone Data e local",
-    "summary": "Gabriel Leone estreia o show 'Minhas lágrimas' no Manouche, na cidade natal do Rio de Janeiro (RJ), na noite de ontem, 28 de abril Rodrigo Goffredo ♫ CRÍTICA DE SHOW Título: Minhas lágrimas Artista: Gabriel Leone Data e local",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Gabriel Leone se prova cantor sagaz, sem jogo de cena, ao estrear show situado na 'sala escura do sentimento'. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Gabriel Leone se prova cantor sagaz, sem jogo de cena, ao estrear show situado na 'sala escura do sentimento'. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -13540,8 +15937,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/29/premio-princesa-de-asturias-premia-a-madrinha-do-punk-patti-smith.ghtml",
     "sourceLabel": "Prêmio Princesa de Astúrias premia a 'madrinha do punk' Patti Smith",
-    "lede": "Patti Smith e sua banda se apresentam no Popload Festival 2019 Fábio Tito/G1 A cantora americana Patti Smith, conhecida como a \"madrinha do punk\" por levar densidade intelectual a esse gênero visceral, foi premiada nesta",
-    "summary": "Patti Smith e sua banda se apresentam no Popload Festival 2019 Fábio Tito/G1 A cantora americana Patti Smith, conhecida como a \"madrinha do punk\" por levar densidade intelectual a esse gênero visceral, foi premiada nesta",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Prêmio Princesa de Astúrias premia a 'madrinha do punk' Patti Smith. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Prêmio Princesa de Astúrias premia a 'madrinha do punk' Patti Smith. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -13687,8 +16084,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/29/zelia-duncan-alinha-parcerias-com-na-ozzetti-alberto-continentino-lenine-e-pedro-luis-no-album-agudo-grave.ghtml",
     "sourceLabel": "Zélia Duncan alinha parcerias com Ná Ozzetti, Alberto Continentino, Lenine e Pedro Luís no álbum 'Agudo grave'",
-    "lede": "Zélia Duincan lança na quinta-feira, 30 de abril, o single 'Agudo grave', amostra inicial do primeiro álbum da artista em cinco anos Mauro Restiffe / Divulgação ♫ NOTÍCIA ♬ Zélia Duncan lança o álbum “Agudo grave” em 14 de maio",
-    "summary": "Zélia Duincan lança na quinta-feira, 30 de abril, o single 'Agudo grave', amostra inicial do primeiro álbum da artista em cinco anos Mauro Restiffe / Divulgação ♫ NOTÍCIA ♬ Zélia Duncan lança o álbum “Agudo grave” em 14 de maio",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Zélia Duncan alinha parcerias com Ná Ozzetti, Alberto Continentino, Lenine e Pedro Luís no álbum 'Agudo grave'. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Zélia Duncan alinha parcerias com Ná Ozzetti, Alberto Continentino, Lenine e Pedro Luís no álbum 'Agudo grave'. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -13983,8 +16380,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/28/quarteto-enredado-entrelaca-ivan-lins-heitor-villa-lobos-e-tonico-and-tinoco-no-repertorio-do-album-fantasia-sertaneja.ghtml",
     "sourceLabel": "Quarteto Enredado entrelaça Ivan Lins, Heitor Villa-Lobos e Tonico & Tinoco no repertório do álbum 'Fantasia sertaneja'",
-    "lede": "Quarteto Enredado lança o álbum 'Fantasia sertaneja' em 8 de maio Paco Sabino / Divulgação ♫ NOTÍCIA ♬ Folia de reis composta por Ivan Lins com Vitor Martins e apresentada por Ivan no álbum “Nos dias de hoje” (1978), “Bandeira",
-    "summary": "Quarteto Enredado lança o álbum 'Fantasia sertaneja' em 8 de maio Paco Sabino / Divulgação ♫ NOTÍCIA ♬ Folia de reis composta por Ivan Lins com Vitor Martins e apresentada por Ivan no álbum “Nos dias de hoje” (1978), “Bandeira",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Quarteto Enredado entrelaça Ivan Lins, Heitor Villa-Lobos e Tonico & Tinoco no repertório do álbum 'Fantasia sertaneja'. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Quarteto Enredado entrelaça Ivan Lins, Heitor Villa-Lobos e Tonico & Tinoco no repertório do álbum 'Fantasia sertaneja'. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -14226,8 +16623,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/28/quem-sao-os-30-maiores-compositores-americanos-vivos-segundo-o-new-york-times.ghtml",
     "sourceLabel": "Quem são os 30 maiores compositores americanos vivos, segundo o New York Times?",
-    "lede": "Taylor Swift no Grammy 2025 Jordan Strauss/Invision/AP Jay-Z, Stevie Wonder, Taylor Swift, Lionel Richie, Bad Bunny, Bruce Springsteen… Os nomes de artistas de diferentes eras e gêneros musicais aparecem reunidos em uma lista",
-    "summary": "Taylor Swift no Grammy 2025 Jordan Strauss/Invision/AP Jay-Z, Stevie Wonder, Taylor Swift, Lionel Richie, Bad Bunny, Bruce Springsteen… Os nomes de artistas de diferentes eras e gêneros musicais aparecem reunidos em uma lista",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Quem são os 30 maiores compositores americanos vivos, segundo o New York Times?. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Quem são os 30 maiores compositores americanos vivos, segundo o New York Times?. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -14275,8 +16672,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/28/austriaco-se-declara-culpado-por-ataque-frustrado-a-show-de-taylor-swift-em-viena.ghtml",
     "sourceLabel": "Austríaco se declara culpado por ataque frustrado a show de Taylor Swift em Viena",
-    "lede": "Um dos dois suspeitos de planejar ataque a show de Taylor Swift em Viena cobre o rosto em tribunal 28 de abril de 2026 REUTERS/Leonhard Foeger Um jovem de 21 anos acusado de planejar um ataque a um show de Taylor Swift em Viena",
-    "summary": "Um dos dois suspeitos de planejar ataque a show de Taylor Swift em Viena cobre o rosto em tribunal 28 de abril de 2026 REUTERS/Leonhard Foeger Um jovem de 21 anos acusado de planejar um ataque a um show de Taylor Swift em Viena",
+    "lede": "G1 Pop & Arte publicou uma atualização sobre Austríaco se declara culpado por ataque frustrado a show de Taylor Swift em Viena. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Pop & Arte publicou uma atualização sobre Austríaco se declara culpado por ataque frustrado a show de Taylor Swift em Viena. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -14325,7 +16722,7 @@ window.NEWS_DATA = [
     "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/04/28/entenda-a-polemica-entre-virginia-fonseca-e-luana-piovani-apos-declaracao-da-atriz-a-maldicao-vai-colar-em-voce.ghtml",
     "sourceLabel": "Entenda a polêmica entre Virginia Fonseca e Luana Piovani após declaração da atriz: 'A maldição vai colar em você'",
     "lede": "Entenda a polêmica entre Virginia Fonseca e Luana Piovani após declaração da atriz: 'A maldição vai colar em você'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar.",
-    "summary": "Entenda a polêmica entre Virginia Fonseca e Luana Piovani após declaração da atriz: 'A maldição vai colar em você'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar",
+    "summary": "Entenda a polêmica entre Virginia Fonseca e Luana Piovani após declaração da atriz: 'A maldição vai colar em você'.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -15941,8 +18338,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/esportes/noticia/2026-04/fluminense-derrota-mixto-mt-por-2-0-com-gols-de-keke-e-dede",
     "sourceLabel": "Fluminense derrota Mixto-MT por 2 a 0 com gols de Keké e Dedé",
-    "lede": "Com gols da lateral Keké e da atacante Dedé, o Fluminense derrotou o Mixto-MT por 2 a 0, na noite deste domingo (26) no estádio Dutrinha, em Cuiabá, e chegou aos 14 pontos para assumir a 6ª colocação da Série A1 do Campeonato",
-    "summary": "Com gols da lateral Keké e da atacante Dedé, o Fluminense derrotou o Mixto-MT por 2 a 0, na noite deste domingo (26) no estádio Dutrinha, em Cuiabá, e chegou aos 14 pontos para assumir a 6ª colocação da Série A1 do Campeonato",
+    "lede": "Agencia Brasil publicou uma atualização sobre Fluminense derrota Mixto-MT por 2 a 0 com gols de Keké e Dedé. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Brasil publicou uma atualização sobre Fluminense derrota Mixto-MT por 2 a 0 com gols de Keké e Dedé. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 26 de abr. de 2026 a base desta noticia sobre Fluminense derrota Mixto-MT por 2 a 0 com gols de Keké e Dedé. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -17088,8 +19485,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/26/lutador-acreano-celebra-conquista-de-duplo-cinturao-com-video-no-rj/",
     "sourceLabel": "Lutador acreano celebra conquista de duplo cinturão com vídeo no RJ",
-    "lede": "O lutador acreano Wendel Almeida, conhecido nas redes sociais como “O Índio Acreano”, celebrou a conquista do duplo cinturão do Shooto Brasil, maior evento de MMA da América Latina, com uma visita à Rocinha, favela localizada",
-    "summary": "O lutador acreano Wendel Almeida, conhecido nas redes sociais como “O Índio Acreano”, celebrou a conquista do duplo cinturão do Shooto Brasil, maior evento de MMA da América Latina, com uma visita à Rocinha, favela localizada",
+    "lede": "ac24horas publicou uma atualização sobre Lutador acreano celebra conquista de duplo cinturão com vídeo no RJ. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Lutador acreano celebra conquista de duplo cinturão com vídeo no RJ. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 26 de abr. de 2026 a base desta noticia sobre Lutador acreano celebra conquista de duplo cinturão com vídeo no RJ. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -17333,8 +19730,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/26/corrida-solidaria-marca-inicio-das-comemoracoes-pelos-49-anos-da-pge-no-acre/",
     "sourceLabel": "Corrida solidária marca início das comemorações pelos 49 anos da PGE",
-    "lede": "A Procuradoria-Geral do Estado do Acre (PGE/AC), em parceria com a Associação Longão Elite, realizou, neste domingo, 26, a 3ª edição da sua corrida institucional, consolidando uma iniciativa que une promoção à saúde, integração",
-    "summary": "A Procuradoria-Geral do Estado do Acre (PGE/AC), em parceria com a Associação Longão Elite, realizou, neste domingo, 26, a 3ª edição da sua corrida institucional, consolidando uma iniciativa que une promoção à saúde, integração",
+    "lede": "ac24horas publicou uma atualização sobre Corrida solidária marca início das comemorações pelos 49 anos da PGE. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Corrida solidária marca início das comemorações pelos 49 anos da PGE. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 26 de abr. de 2026 a base desta noticia sobre Corrida solidária marca início das comemorações pelos 49 anos da PGE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -17480,8 +19877,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/26/cheias-atingem-18-aldeias-indigenas-no-ac-e-governo-monta-forca-tarefa/",
     "sourceLabel": "Cheias atingem 18 aldeias indígenas no AC e governo monta força-tarefa",
-    "lede": "O governo do Acre mobilizou uma força-tarefa no sábado (25) para atender comunidades ribeirinhas e povos indígenas afetados pelo transbordamento de rios no Vale do Juruá e em Tarauacá, provocado pelo volume intenso de chuvas",
-    "summary": "O governo do Acre mobilizou uma força-tarefa no sábado (25) para atender comunidades ribeirinhas e povos indígenas afetados pelo transbordamento de rios no Vale do Juruá e em Tarauacá, provocado pelo volume intenso de chuvas",
+    "lede": "ac24horas publicou uma atualização sobre Cheias atingem 18 aldeias indígenas no AC e governo monta força-tarefa. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Cheias atingem 18 aldeias indígenas no AC e governo monta força-tarefa. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 26 de abr. de 2026 a base desta noticia sobre Cheias atingem 18 aldeias indígenas no AC e governo monta força-tarefa. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -17929,8 +20326,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/corrida-solidaria-marca-inicio-das-comemoracoes-pelos-49-anos-da-procuradoria-geral-do-estado/",
     "sourceLabel": "Corrida solidária marca início das comemorações pelos 49 anos da Procuradoria-Geral do Estado",
-    "lede": "A Procuradoria-Geral do Estado do Acre (PGE/AC), em parceria com a Associação Longão Elite, realizou, neste domingo, 26, a 3ª edição da sua corrida institucional, consolidando uma iniciativa que une promoção à saúde, integração",
-    "summary": "A Procuradoria-Geral do Estado do Acre (PGE/AC), em parceria com a Associação Longão Elite, realizou, neste domingo, 26, a 3ª edição da sua corrida institucional, consolidando uma iniciativa que une promoção à saúde, integração",
+    "lede": "Agencia Acre publicou uma atualização sobre Corrida solidária marca início das comemorações pelos 49 anos da Procuradoria-Geral do Estado. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Acre publicou uma atualização sobre Corrida solidária marca início das comemorações pelos 49 anos da Procuradoria-Geral do Estado. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 26 de abr. de 2026 a base desta noticia sobre Corrida solidária marca início das comemorações pelos 49 anos da Procuradoria-Geral do Estado. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -18027,8 +20424,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/apos-suspensao-judicial-moradores-se-articulam-para-manter-show-de-evoney-fernandes/",
     "sourceLabel": "Após suspensão judicial, moradores se articulam para manter show de Evoney Fernandes",
-    "lede": "Moradores do município de Jordão, no interior do Acre, se mobilizam para viabilizar com recursos próprios a realização do show do cantor Evoney Fernandes no aniversário da cidade, após decisão judicial que suspendeu o contrato",
-    "summary": "Moradores do município de Jordão, no interior do Acre, se mobilizam para viabilizar com recursos próprios a realização do show do cantor Evoney Fernandes no aniversário da cidade, após decisão judicial que suspendeu o contrato",
+    "lede": "Jurua Comunicacao publicou uma atualização sobre Após suspensão judicial, moradores se articulam para manter show de Evoney Fernandes. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua Comunicacao publicou uma atualização sobre Após suspensão judicial, moradores se articulam para manter show de Evoney Fernandes. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 26 de abr. de 2026 a base desta noticia sobre Após suspensão judicial, moradores se articulam para manter show de Evoney Fernandes. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -18125,8 +20522,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/tarauaca-mobiliza-apoio-as-familias-afetadas-pela-cheia-do-rio-gregorio/",
     "sourceLabel": "Tarauacá mobiliza apoio às famílias afetadas pela cheia do rio Gregório",
-    "lede": "O prefeito de Tarauacá, Rodrigo Damasceno, acompanha de perto a situação provocada pela cheia repentina dos rios na região e já mobiliza ações emergenciais para atender as famílias afetadas, tanto na zona rural quanto na área",
-    "summary": "O prefeito de Tarauacá, Rodrigo Damasceno, acompanha de perto a situação provocada pela cheia repentina dos rios na região e já mobiliza ações emergenciais para atender as famílias afetadas, tanto na zona rural quanto na área",
+    "lede": "Jurua Comunicacao publicou uma atualização sobre Tarauacá mobiliza apoio às famílias afetadas pela cheia do rio Gregório. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua Comunicacao publicou uma atualização sobre Tarauacá mobiliza apoio às famílias afetadas pela cheia do rio Gregório. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 26 de abr. de 2026 a base desta noticia sobre Tarauacá mobiliza apoio às famílias afetadas pela cheia do rio Gregório. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -18615,8 +21012,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/negocios/microsoft-oferece-aposentadoria-voluntaria-em-meio-a-investimentos-em-ia/",
     "sourceLabel": "Microsoft oferece aposentadoria voluntária em meio a investimentos em IA",
-    "lede": "A Microsoft está oferecendo a cerca de 7% de sua força de trabalho nos Estados Unidos a opção de aposentadoria antecipada , em mais uma tentativa de uma grande empresa de tecnologia reduzir seu quadro de funcionários enquanto",
-    "summary": "A Microsoft está oferecendo a cerca de 7% de sua força de trabalho nos Estados Unidos a opção de aposentadoria antecipada , em mais uma tentativa de uma grande empresa de tecnologia reduzir seu quadro de funcionários enquanto",
+    "lede": "CNN Brasil publicou uma atualização sobre Microsoft oferece aposentadoria voluntária em meio a investimentos em IA. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Microsoft oferece aposentadoria voluntária em meio a investimentos em IA. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 26 de abr. de 2026 a base desta noticia sobre Microsoft oferece aposentadoria voluntária em meio a investimentos em IA. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -18762,8 +21159,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/especialistas-veem-riscos-com-uso-de-receita-para-baratear-combustiveis/",
     "sourceLabel": "Especialistas veem riscos com uso de receita para baratear combustíveis",
-    "lede": "Em mais uma cartada contra a pressão gerada pela guerra no preço dos combustíveis, o governo federal anunciou que irá utilizar as receitas extras geradas pela alta do petróleo para reduzir tributos aplicados ao diesel, gasolina",
-    "summary": "Em mais uma cartada contra a pressão gerada pela guerra no preço dos combustíveis, o governo federal anunciou que irá utilizar as receitas extras geradas pela alta do petróleo para reduzir tributos aplicados ao diesel, gasolina",
+    "lede": "CNN Brasil publicou uma atualização sobre Especialistas veem riscos com uso de receita para baratear combustíveis. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Especialistas veem riscos com uso de receita para baratear combustíveis. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 26 de abr. de 2026 a base desta noticia sobre Especialistas veem riscos com uso de receita para baratear combustíveis. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -19362,8 +21759,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/atirador-em-jantar-pode-ser-hospede-de-hotel-diz-policia-de-washington/",
     "sourceLabel": "Atirador em jantar pode ser hóspede de hotel, diz polícia de Washington",
-    "lede": "O chefe da polícia de Washington afirmou, na madrugada deste domingo (26), que acredita-se que o atirador que invadiu o jantar de correspondentes da Casa Branca, em Washington , na madrugada de sábado (25), era hóspede do hotel",
-    "summary": "O chefe da polícia de Washington afirmou, na madrugada deste domingo (26), que acredita-se que o atirador que invadiu o jantar de correspondentes da Casa Branca, em Washington , na madrugada de sábado (25), era hóspede do hotel",
+    "lede": "CNN Brasil publicou uma atualização sobre Atirador em jantar pode ser hóspede de hotel, diz polícia de Washington. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Atirador em jantar pode ser hóspede de hotel, diz polícia de Washington. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Atirador em jantar pode ser hóspede de hotel, diz polícia de Washington. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -19754,8 +22151,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/trump-peco-que-resolvamos-nossas-diferencas-em-paz/",
     "sourceLabel": "Trump: Peço que resolvamos nossas diferenças em paz",
-    "lede": "Durante pronunciamento após um tiroteio em um jantar de Donald Trump, presidente dos Estados Unidos, com repórteres correspondentes da Casa Branca, o republicano clamou que os americanos trabalhem para resolver suas diferenças",
-    "summary": "Durante pronunciamento após um tiroteio em um jantar de Donald Trump, presidente dos Estados Unidos, com repórteres correspondentes da Casa Branca, o republicano clamou que os americanos trabalhem para resolver suas diferenças",
+    "lede": "CNN Brasil publicou uma atualização sobre Trump: Peço que resolvamos nossas diferenças em paz. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Trump: Peço que resolvamos nossas diferenças em paz. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Trump: Peço que resolvamos nossas diferenças em paz. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -19803,8 +22200,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/trump-divulga-momento-do-ataque-e-imagem-do-atirador-detido/",
     "sourceLabel": "Trump divulga momento do ataque e imagem do atirador detido",
-    "lede": "O presidente dos Estados Unidos, Donald Trump, divulgou imagens que mostram a resposta do Serviço Secreto à ação do atirador de 30 anos que invadiu um jantar de correspondentes da Casa Branca , em Washington, na noite deste",
-    "summary": "O presidente dos Estados Unidos, Donald Trump, divulgou imagens que mostram a resposta do Serviço Secreto à ação do atirador de 30 anos que invadiu um jantar de correspondentes da Casa Branca , em Washington, na noite deste",
+    "lede": "CNN Brasil publicou uma atualização sobre Trump divulga momento do ataque e imagem do atirador detido. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Trump divulga momento do ataque e imagem do atirador detido. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Trump divulga momento do ataque e imagem do atirador detido. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -20309,8 +22706,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/trump-esta-em-local-seguro-apos-ser-retirado-de-jantar-por-servico-secreto/",
     "sourceLabel": "Trump está em local seguro após ser retirado de jantar por Serviço Secreto",
-    "lede": "O Presidente dos Estados Unidos Donald Trump foi levado a um local seguro após ser retirado às pressas pelo Serviço Secreto dos Estados Unidos durante o Jantar dos Correspondentes da Casa Branca, em Washington, na noite deste",
-    "summary": "O Presidente dos Estados Unidos Donald Trump foi levado a um local seguro após ser retirado às pressas pelo Serviço Secreto dos Estados Unidos durante o Jantar dos Correspondentes da Casa Branca, em Washington, na noite deste",
+    "lede": "CNN Brasil publicou uma atualização sobre Trump está em local seguro após ser retirado de jantar por Serviço Secreto. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Trump está em local seguro após ser retirado de jantar por Serviço Secreto. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Trump está em local seguro após ser retirado de jantar por Serviço Secreto. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -20407,12 +22804,10 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/25/associar-l7nnon-a-john-lennon-para-tentar-alterar-o-nome-artistico-do-rapper-e-acao-que-carece-de-sensatez.ghtml",
     "sourceLabel": "Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez...",
-    "lede": "Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez.... A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o tex",
-    "summary": "Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez.... A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o tex",
+    "lede": "Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez.",
+    "summary": "Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 25 de abr. de 2026 a base desta noticia sobre Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez.... Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Associar L7nnon a John Lennon para tentar alterar o nome artístico do rapper é ação que carece de sensatez... e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -20505,8 +22900,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/25/amigos-do-dudu-vence-amigos-do-doca-e-conquista-o-titulo-42o-campeonato-de-ferias/",
     "sourceLabel": "Amigos do Dudu vence Amigos do Doca e conquista o título 42º Campeonato de Férias",
-    "lede": "O time dos Amigos do Dudu venceu os Amigos do Doca por 3 a 0, nas penalidades, após um empate por 0 a 0 no tempo normal neste sábado, 25, no campo do Calafate, e conquistou o título da 42ª segunda edição do Campeonato de Férias",
-    "summary": "O time dos Amigos do Dudu venceu os Amigos do Doca por 3 a 0, nas penalidades, após um empate por 0 a 0 no tempo normal neste sábado, 25, no campo do Calafate, e conquistou o título da 42ª segunda edição do Campeonato de Férias",
+    "lede": "ac24horas publicou uma atualização sobre Amigos do Dudu vence Amigos do Doca e conquista o título 42º Campeonato de Férias. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Amigos do Dudu vence Amigos do Doca e conquista o título 42º Campeonato de Férias. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre Amigos do Dudu vence Amigos do Doca e conquista o título 42º Campeonato de Férias. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -21493,8 +23888,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/meio-ambiente/noticia/2026-04/cientistas-criam-painel-para-orientar-transicao-energetica-global",
     "sourceLabel": "Cientistas criam painel para orientar transição energética global",
-    "lede": "Um grupo de cientistas de diferentes áreas – como clima, economia e tecnologia – anunciou a criação do Painel Científico para a Transição Energética Global (SPGET) neste sábado (25), durante a Primeira Conferência Internacional",
-    "summary": "Um grupo de cientistas de diferentes áreas – como clima, economia e tecnologia – anunciou a criação do Painel Científico para a Transição Energética Global (SPGET) neste sábado (25), durante a Primeira Conferência Internacional",
+    "lede": "Agencia Brasil publicou uma atualização sobre Cientistas criam painel para orientar transição energética global. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Brasil publicou uma atualização sobre Cientistas criam painel para orientar transição energética global. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Cientistas criam painel para orientar transição energética global. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -22195,8 +24590,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/opera-acre-avanca-na-reducao-de-filas-com-novos-mutiroes-cirurgicos-realizados-neste-fim-de-semana/",
     "sourceLabel": "Opera Acre avança na redução de filas com novos mutirões cirúrgicos realizados neste fim de semana",
-    "lede": "Com foco na ampliação do acesso à saúde e na redução do tempo de espera por procedimentos, o governo do Acre, por meio da Secretaria de Estado de Saúde (Sesacre) e do Complexo Regulador/Central de Cirurgias, intensifica neste",
-    "summary": "Com foco na ampliação do acesso à saúde e na redução do tempo de espera por procedimentos, o governo do Acre, por meio da Secretaria de Estado de Saúde (Sesacre) e do Complexo Regulador/Central de Cirurgias, intensifica neste",
+    "lede": "Agencia Acre publicou uma atualização sobre Opera Acre avança na redução de filas com novos mutirões cirúrgicos realizados neste fim de semana. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Acre publicou uma atualização sobre Opera Acre avança na redução de filas com novos mutirões cirúrgicos realizados neste fim de semana. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 25 de abr. de 2026 a base desta noticia sobre Opera Acre avança na redução de filas com novos mutirões cirúrgicos realizados neste fim de semana. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -22297,12 +24692,10 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/seguranca-publica-reforca-combate-a-precos-abusivos-de-combustiveis-no-acre-e-amplia-fiscalizacao-no-interior/",
     "sourceLabel": "Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior",
-    "lede": "Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o tex",
-    "summary": "Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o tex",
+    "lede": "Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior.",
+    "summary": "Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior.",
     "analysis": "",
     "body": [
-      "Agencia Acre publicou em 25 de abr. de 2026 a base desta noticia sobre Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Segurança Pública reforça combate a preços abusivos de combustíveis no Acre e amplia fiscalização no interior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -22542,8 +24935,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/vitima-de-queimadura-em-procedimento-estetico-acusa-omissao-da-policia-no-ac/",
     "sourceLabel": "Vítima de queimadura em procedimento estético acusa omissão da polícia no AC",
-    "lede": "A maquiadora Vanessa Holanda, que ficou com queimaduras graves no seio após um procedimento estético em Cruzeiro do Sul, procurou a reportagem nesta quinta-feira (23) para denunciar o que classifica como descaso da Delegacia",
-    "summary": "A maquiadora Vanessa Holanda, que ficou com queimaduras graves no seio após um procedimento estético em Cruzeiro do Sul, procurou a reportagem nesta quinta-feira (23) para denunciar o que classifica como descaso da Delegacia",
+    "lede": "Jurua Comunicacao publicou uma atualização sobre Vítima de queimadura em procedimento estético acusa omissão da polícia no AC. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua Comunicacao publicou uma atualização sobre Vítima de queimadura em procedimento estético acusa omissão da polícia no AC. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 25 de abr. de 2026 a base desta noticia sobre Vítima de queimadura em procedimento estético acusa omissão da polícia no AC. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -22883,8 +25276,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/acao-itinerante-do-idaf-beneficia-produtores-rurais-e-amplia-servicos-em-porto-acre/",
     "sourceLabel": "Ação itinerante do Idaf beneficia produtores rurais e amplia serviços em Porto Acre",
-    "lede": "A ação itinerante promovida pelo governo do Estado, por meio do Instituto de Defesa Agropecuária e Florestal do Acre (Idaf), levou, nesta sexta-feira, 24, atendimento direto aos produtores rurais no município de Porto Acre",
-    "summary": "A ação itinerante promovida pelo governo do Estado, por meio do Instituto de Defesa Agropecuária e Florestal do Acre (Idaf), levou, nesta sexta-feira, 24, atendimento direto aos produtores rurais no município de Porto Acre",
+    "lede": "Agencia Acre publicou uma atualização sobre Ação itinerante do Idaf beneficia produtores rurais e amplia serviços em Porto Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Acre publicou uma atualização sobre Ação itinerante do Idaf beneficia produtores rurais e amplia serviços em Porto Acre. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 25 de abr. de 2026 a base desta noticia sobre Ação itinerante do Idaf beneficia produtores rurais e amplia serviços em Porto Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23128,8 +25521,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/25/prefeitura-visita-bairros-e-procura-pessoas-em-situacao-de-rua-para-ofertar-servicos-de-assistencia/",
     "sourceLabel": "Prefeitura visita bairros e procura pessoas em situação de rua para ofertar serviços de assistência",
-    "lede": "Equipes da Secretaria Municipal de Assistência Social e Direitos Humanos (SASDH) realizaram, nesta sexta-feira (25), ações de busca ativa à população em situação de rua nos bairros 6 de Agosto, Triângulo Novo e Centro de Rio",
-    "summary": "Equipes da Secretaria Municipal de Assistência Social e Direitos Humanos (SASDH) realizaram, nesta sexta-feira (25), ações de busca ativa à população em situação de rua nos bairros 6 de Agosto, Triângulo Novo e Centro de Rio",
+    "lede": "ac24horas publicou uma atualização sobre Prefeitura visita bairros e procura pessoas em situação de rua para ofertar serviços de assistência. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Prefeitura visita bairros e procura pessoas em situação de rua para ofertar serviços de assistência. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 25 de abr. de 2026 a base desta noticia sobre Prefeitura visita bairros e procura pessoas em situação de rua para ofertar serviços de assistência. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23226,8 +25619,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/parana-pesquisas-avaliacao-negativa-de-lula-e-de-473-positiva-30/",
     "sourceLabel": "Paraná Pesquisas/RJ: Lula tem 47,3% de avaliação negativa; 30%, positiva",
-    "lede": "Porcentagem de eleitores fluminenses que avaliam o governo como \"regular\" é de 21,4%; levantamento ouviu 1.680 eleitores fluminenses, em 63 municípios, entre 21 e 23 de abril",
-    "summary": "Porcentagem de eleitores fluminenses que avaliam o governo como \"regular\" é de 21,4%; levantamento ouviu 1.680 eleitores fluminenses, em 63 municípios, entre 21 e 23 de abril",
+    "lede": "Porcentagem de eleitores fluminenses que avaliam o governo como \"regular\" é de 21,4%; levantamento ouviu 1.",
+    "summary": "Porcentagem de eleitores fluminenses que avaliam o governo como \"regular\" é de 21,4%; levantamento ouviu 1.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Paraná Pesquisas/RJ: Lula tem 47,3% de avaliação negativa; 30%, positiva. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23275,8 +25668,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/parana-pesquisas-no-rj-flavio-tem-396-e-lula-367-no-1o-turno/",
     "sourceLabel": "Paraná Pesquisas: no RJ, Flávio tem 39,6%, e Lula, 36,7% no 1º turno",
-    "lede": "Levantamento ouviu 1.680 eleitores fluminenses, em 63 municípios, entre 21 e 23 de abril; margem de erro é de 2,4% para mais ou para menos",
-    "summary": "Levantamento ouviu 1.680 eleitores fluminenses, em 63 municípios, entre 21 e 23 de abril; margem de erro é de 2,4% para mais ou para menos",
+    "lede": "CNN Brasil publicou uma atualização sobre Paraná Pesquisas: no RJ, Flávio tem 39,6%, e Lula, 36,7% no 1º turno. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Paraná Pesquisas: no RJ, Flávio tem 39,6%, e Lula, 36,7% no 1º turno. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Paraná Pesquisas: no RJ, Flávio tem 39,6%, e Lula, 36,7% no 1º turno. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23524,8 +25917,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/04/25/influenciadores-campanha-eleitoral-2026.ghtml",
     "sourceLabel": "Influenciador pode fazer campanha eleitoral? Lei impõe limites, e fiscalização é desafio para o TSE",
-    "lede": "Influenciadores, propaganda disfarçada e mensagens sob medida: os desafios da eleição Influenciadores digitais viraram peça central do marketing nas redes sociais, mas a atuação deles em campanhas eleitorais tem limites",
-    "summary": "Influenciadores, propaganda disfarçada e mensagens sob medida: os desafios da eleição Influenciadores digitais viraram peça central do marketing nas redes sociais, mas a atuação deles em campanhas eleitorais tem limites",
+    "lede": "G1 Politica publicou uma atualização sobre Influenciador pode fazer campanha eleitoral? Lei impõe limites, e fiscalização é desafio para o TSE. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Influenciador pode fazer campanha eleitoral? Lei impõe limites, e fiscalização é desafio para o TSE. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 25 de abr. de 2026 a base desta noticia sobre Influenciador pode fazer campanha eleitoral? Lei impõe limites, e fiscalização é desafio para o TSE. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23573,8 +25966,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/25/nikolas-ferreira-jair-renan-provocacoes-rede-social-flavio-bolsonaro-pacificacao.ghtml",
     "sourceLabel": "Nikolas Ferreira e Jair Renan trocam provocações em rede social; Flávio Bolsonaro pede pacificação na base",
-    "lede": "O deputado federal Nikolas Ferreira (PL) e o vereador Jair Renan (PL) Zeca Ribeiro/Câmara dos Deputados e Gabriela Biló/Agência Estado O deputado federal Nikolas Ferreira (PL-MG) voltou a entrar em embate público com a família",
-    "summary": "O deputado federal Nikolas Ferreira (PL) e o vereador Jair Renan (PL) Zeca Ribeiro/Câmara dos Deputados e Gabriela Biló/Agência Estado O deputado federal Nikolas Ferreira (PL-MG) voltou a entrar em embate público com a família",
+    "lede": "G1 Politica publicou uma atualização sobre Nikolas Ferreira e Jair Renan trocam provocações em rede social; Flávio Bolsonaro pede pacificação na base. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Nikolas Ferreira e Jair Renan trocam provocações em rede social; Flávio Bolsonaro pede pacificação na base. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 25 de abr. de 2026 a base desta noticia sobre Nikolas Ferreira e Jair Renan trocam provocações em rede social; Flávio Bolsonaro pede pacificação na base. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23769,8 +26162,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/saude/quais-os-tipos-de-cancer-de-mama-dr-kalil-e-especialistas-explicam/",
     "sourceLabel": "Quais os tipos de câncer de mama? Dr. Kalil e especialistas explicam",
-    "lede": "Especialistas explicam que o câncer de mama não é uma doença única, mas um conjunto de tipos com comportamentos distintos e abordagens terapêuticas personalizadas",
-    "summary": "Especialistas explicam que o câncer de mama não é uma doença única, mas um conjunto de tipos com comportamentos distintos e abordagens terapêuticas personalizadas",
+    "lede": "CNN Brasil publicou uma atualização sobre Quais os tipos de câncer de mama? Dr. Kalil e especialistas explicam. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Quais os tipos de câncer de mama? Dr. Kalil e especialistas explicam. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Quais os tipos de câncer de mama? Dr. Kalil e especialistas explicam. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23818,8 +26211,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/ucrania-utiliza-soldados-robos-no-lugar-de-humanos-em-guerra-contra-russia/",
     "sourceLabel": "Ucrânia utiliza soldados robôs no lugar de humanos em guerra contra Rússia",
-    "lede": "Operação inédita de captura de inimigos por sistemas robóticos e drones terrestres destaca nova era do combate para Kiev",
-    "summary": "Operação inédita de captura de inimigos por sistemas robóticos e drones terrestres destaca nova era do combate para Kiev",
+    "lede": "CNN Brasil publicou uma atualização sobre Ucrânia utiliza soldados robôs no lugar de humanos em guerra contra Rússia. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Ucrânia utiliza soldados robôs no lugar de humanos em guerra contra Rússia. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Ucrânia utiliza soldados robôs no lugar de humanos em guerra contra Rússia. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23867,8 +26260,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/saude/tontura-nao-e-normal-entenda-os-sinais-do-seu-corpo/",
     "sourceLabel": "Tontura não é normal: entenda os sinais do seu corpo",
-    "lede": "Em vídeo, especialista explica que a sensação de vertigem e de desequilíbrio pode ter causas diversas",
-    "summary": "Em vídeo, especialista explica que a sensação de vertigem e de desequilíbrio pode ter causas diversas",
+    "lede": "CNN Brasil publicou uma atualização sobre Tontura não é normal: entenda os sinais do seu corpo. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Tontura não é normal: entenda os sinais do seu corpo. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Tontura não é normal: entenda os sinais do seu corpo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -23916,8 +26309,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/tecnologia/novo-dispositivo-impulsiona-computacao-que-mimetiza-cerebro-humano/",
     "sourceLabel": "Novo dispositivo impulsiona computação que mimetiza cérebro humano",
-    "lede": "Em sistemas inspirados em redes de neurônios e sinapses, estrutura baseada em óxidos reúne processamento e memória em um único componente, com potencial para reduzir o consumo de energia e aumentar a eficiência",
-    "summary": "Em sistemas inspirados em redes de neurônios e sinapses, estrutura baseada em óxidos reúne processamento e memória em um único componente, com potencial para reduzir o consumo de energia e aumentar a eficiência",
+    "lede": "CNN Brasil publicou uma atualização sobre Novo dispositivo impulsiona computação que mimetiza cérebro humano. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Novo dispositivo impulsiona computação que mimetiza cérebro humano. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 25 de abr. de 2026 a base desta noticia sobre Novo dispositivo impulsiona computação que mimetiza cérebro humano. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24063,8 +26456,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/25/alcolumbre-e-motta-sinalizam-apoio-a-projeto-sobre-combustiveis-governo-quer-acelerar-votacao.ghtml",
     "sourceLabel": "Alcolumbre e Motta sinalizam apoio a projeto sobre combustíveis; governo quer acelerar votação",
-    "lede": "Os presidentes da Câmara dos Deputados, Hugo Motta (Republicanos-PB), e do Senado, Davi Alcolumbre (União-AP), se mostraram favoráveis à proposta do governo do presidente Luiz Inácio Lula da Silva (PT) que prevê a redução",
-    "summary": "Os presidentes da Câmara dos Deputados, Hugo Motta (Republicanos-PB), e do Senado, Davi Alcolumbre (União-AP), se mostraram favoráveis à proposta do governo do presidente Luiz Inácio Lula da Silva (PT) que prevê a redução",
+    "lede": "G1 Politica publicou uma atualização sobre Alcolumbre e Motta sinalizam apoio a projeto sobre combustíveis; governo quer acelerar votação. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Alcolumbre e Motta sinalizam apoio a projeto sobre combustíveis; governo quer acelerar votação. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 24 de abr. de 2026 a base desta noticia sobre Alcolumbre e Motta sinalizam apoio a projeto sobre combustíveis; governo quer acelerar votação. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24112,8 +26505,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/fachin-suspende-decisao-que-barrava-venda-de-bens-do-df-para-socorrer-brb/",
     "sourceLabel": "Fachin suspende decisão que barrava venda de bens do DF para socorrer BRB",
-    "lede": "Decisão do presidente do STF será submetida ao plenário virtual entre 8 e 15 de maio",
-    "summary": "Decisão do presidente do STF será submetida ao plenário virtual entre 8 e 15 de maio",
+    "lede": "CNN Brasil publicou uma atualização sobre Fachin suspende decisão que barrava venda de bens do DF para socorrer BRB. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Fachin suspende decisão que barrava venda de bens do DF para socorrer BRB. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Fachin suspende decisão que barrava venda de bens do DF para socorrer BRB. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24210,8 +26603,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/eleicoes/alckmin-promete-lealdade-a-lula-durante-congresso-do-pt/",
     "sourceLabel": "Alckmin promete lealdade a Lula durante congresso do PT",
-    "lede": "Vice-presidente diz que \"sempre foi bem recebido\" por legenda da qual já foi adversário histórico",
-    "summary": "Vice-presidente diz que \"sempre foi bem recebido\" por legenda da qual já foi adversário histórico",
+    "lede": "CNN Brasil publicou uma atualização sobre Alckmin promete lealdade a Lula durante congresso do PT. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Alckmin promete lealdade a Lula durante congresso do PT. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Alckmin promete lealdade a Lula durante congresso do PT. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24357,8 +26750,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/nota-publica-sobre-derramamento-de-oleo-no-rio-tatauaca/",
     "sourceLabel": "Nota pública sobre derramamento de óleo no Rio Tarauacá",
-    "lede": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro",
-    "summary": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro",
+    "lede": "Agencia Acre publicou uma atualização sobre Nota pública sobre derramamento de óleo no Rio Tarauacá. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Acre publicou uma atualização sobre Nota pública sobre derramamento de óleo no Rio Tarauacá. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Nota pública sobre derramamento de óleo no Rio Tarauacá. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24406,8 +26799,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/ciencia/lua-cheia-das-flores-ocorrera-em-1o-de-maio-entenda-significado/",
     "sourceLabel": "“Lua Cheia das Flores” ocorrerá em 1º de maio; entenda significado",
-    "lede": "Nome tem origem nas tradições dos povos originários americanos Comanche; fenômeno simboliza o auge da primavera no Hemisfério Norte",
-    "summary": "Nome tem origem nas tradições dos povos originários americanos Comanche; fenômeno simboliza o auge da primavera no Hemisfério Norte",
+    "lede": "CNN Brasil publicou uma atualização sobre “Lua Cheia das Flores” ocorrerá em 1º de maio; entenda significado. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre “Lua Cheia das Flores” ocorrerá em 1º de maio; entenda significado. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre “Lua Cheia das Flores” ocorrerá em 1º de maio; entenda significado. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24455,8 +26848,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/eua-interceptam-nova-embarcacao-de-bandeira-iraniana-diz-exercito/",
     "sourceLabel": "EUA interceptam nova embarcação de bandeira iraniana, diz Exército",
-    "lede": "Comando Central dos EUA publicou uma imagem do destróier USS Rafael Peralta abordando um navio que tentava navegar até um porto do Irã",
-    "summary": "Comando Central dos EUA publicou uma imagem do destróier USS Rafael Peralta abordando um navio que tentava navegar até um porto do Irã",
+    "lede": "CNN Brasil publicou uma atualização sobre EUA interceptam nova embarcação de bandeira iraniana, diz Exército. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre EUA interceptam nova embarcação de bandeira iraniana, diz Exército. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre EUA interceptam nova embarcação de bandeira iraniana, diz Exército. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24602,8 +26995,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/24/em-evento-do-pt-lula-diz-nao-precisa-correr-atras-de-adversarios-e-que-governo-nao-perdera-eleicao-se-fizer-as-coisas-corretas.ghtml",
     "sourceLabel": "Em evento do PT, Lula diz que 'não corre atrás de adversários' e que governo não perderá eleição se fizer ‘as coisas corretas’",
-    "lede": "O presidente Luiz Inácio Lula da Silva (PT) disse nesta sexta-feira (24) que o partido que está no comando do governo \"não corre atrás do adversário\" e que acredita que não perderá a eleição caso o governo faça \"as coisas",
-    "summary": "O presidente Luiz Inácio Lula da Silva (PT) disse nesta sexta-feira (24) que o partido que está no comando do governo \"não corre atrás do adversário\" e que acredita que não perderá a eleição caso o governo faça \"as coisas",
+    "lede": "G1 Politica publicou uma atualização sobre Em evento do PT, Lula diz que 'não corre atrás de adversários' e que governo não perderá eleição se fizer ‘as coisas corretas’. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Em evento do PT, Lula diz que 'não corre atrás de adversários' e que governo não perderá eleição se fizer ‘as coisas corretas’. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 24 de abr. de 2026 a base desta noticia sobre Em evento do PT, Lula diz que 'não corre atrás de adversários' e que governo não perderá eleição se fizer ‘as coisas corretas’. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24651,8 +27044,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/autoridade-considera-realizacao-de-votacao-suplementar-no-peru-inviavel/",
     "sourceLabel": "Junta Nacional Eleitoral considera votação suplementar no Peru “inviável”",
-    "lede": "País tem eleição presidencial marcada por desorganização e disputa acirrada entre candidatos; resultados estão previstos para maio",
-    "summary": "País tem eleição presidencial marcada por desorganização e disputa acirrada entre candidatos; resultados estão previstos para maio",
+    "lede": "CNN Brasil publicou uma atualização sobre Junta Nacional Eleitoral considera votação suplementar no Peru “inviável”. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Junta Nacional Eleitoral considera votação suplementar no Peru “inviável”. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Junta Nacional Eleitoral considera votação suplementar no Peru “inviável”. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24749,8 +27142,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/auto/exeed-chega-ao-brasil-em-2026-e-chery-quer-ser-nova-stellantis/",
     "sourceLabel": "Exeed chega ao Brasil em 2026 e Chery quer ser nova Stellantis",
-    "lede": "Marca de luxo da Chery será mais uma do grupo, que já atua com a própria Chery, Jetour, Omoda, Jaecoo e Lepas",
-    "summary": "Marca de luxo da Chery será mais uma do grupo, que já atua com a própria Chery, Jetour, Omoda, Jaecoo e Lepas",
+    "lede": "CNN Brasil publicou uma atualização sobre Exeed chega ao Brasil em 2026 e Chery quer ser nova Stellantis. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Exeed chega ao Brasil em 2026 e Chery quer ser nova Stellantis. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Exeed chega ao Brasil em 2026 e Chery quer ser nova Stellantis. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24798,8 +27191,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/saude/butantan-abre-inscricoes-para-testes-de-nova-vacina-de-gripe-para-idosos/",
     "sourceLabel": "Butantan abre inscrições para testes de nova vacina de gripe para idosos",
-    "lede": "Objetivo é aumentar a proteção contra a gripe em idosos; segundo o Butantan, novo imunizante possui componente que potencializa a produção de anticorpos",
-    "summary": "Objetivo é aumentar a proteção contra a gripe em idosos; segundo o Butantan, novo imunizante possui componente que potencializa a produção de anticorpos",
+    "lede": "CNN Brasil publicou uma atualização sobre Butantan abre inscrições para testes de nova vacina de gripe para idosos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Butantan abre inscrições para testes de nova vacina de gripe para idosos. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Butantan abre inscrições para testes de nova vacina de gripe para idosos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24896,8 +27289,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/gilmar-segue-mendonca-e-mantem-prisao-preventiva-de-ex-presidente-do-brb/",
     "sourceLabel": "Gilmar segue Mendonça e mantém prisão preventiva de ex-presidente do BRB",
-    "lede": "Ministro referendou preventiva de Paulo Henrique Costa; no entanto, divergiu para conceder domiciliar ao advogado Daniel Monteiro, acusado de ser um dos operadores do esquema",
-    "summary": "Ministro referendou preventiva de Paulo Henrique Costa; no entanto, divergiu para conceder domiciliar ao advogado Daniel Monteiro, acusado de ser um dos operadores do esquema",
+    "lede": "CNN Brasil publicou uma atualização sobre Gilmar segue Mendonça e mantém prisão preventiva de ex-presidente do BRB. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Gilmar segue Mendonça e mantém prisão preventiva de ex-presidente do BRB. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Gilmar segue Mendonça e mantém prisão preventiva de ex-presidente do BRB. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -24945,8 +27338,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/rs/rio-grande-do-sul/noticia/2026/04/24/carmen-lucia-propoe-criacao-de-brigadas-eleitorais-para-candidatas-mulheres-nas-eleicoes-2026.ghtml",
     "sourceLabel": "Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026",
-    "lede": "Cármen Lúcia durante julgamento dos acusados de mandar matar Marielle Franco Rosinei Coutinho/STF A ministra Cármen Lúcia, do Supremo Tribunal Federal (STF), foi a palestrante da aula magna da Universidade Federal do Rio Grande",
-    "summary": "Cármen Lúcia durante julgamento dos acusados de mandar matar Marielle Franco Rosinei Coutinho/STF A ministra Cármen Lúcia, do Supremo Tribunal Federal (STF), foi a palestrante da aula magna da Universidade Federal do Rio Grande",
+    "lede": "G1 Politica publicou uma atualização sobre Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 24 de abr. de 2026 a base desta noticia sobre Cármen Lúcia propõe criação de ‘brigadas eleitorais para candidatas mulheres’ nas eleições 2026. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25043,8 +27436,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/politica/stf-abre-inquerito-contra-deputado-federal-do-am-por-corrupcao/",
     "sourceLabel": "STF abre inquérito contra deputado federal do AM por corrupção",
-    "lede": "Adail Filho (MDB) é investigado também lavagem de dinheiro; Adail Pinheiro, pai do parlamentar e prefeito de Coari, também estaria envolvido no esquema",
-    "summary": "Adail Filho (MDB) é investigado também lavagem de dinheiro; Adail Pinheiro, pai do parlamentar e prefeito de Coari, também estaria envolvido no esquema",
+    "lede": "CNN Brasil publicou uma atualização sobre STF abre inquérito contra deputado federal do AM por corrupção. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre STF abre inquérito contra deputado federal do AM por corrupção. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre STF abre inquérito contra deputado federal do AM por corrupção. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25092,8 +27485,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/rj/veja-video-tubarao-baleia-e-flagrado-rompendo-rede-em-arraial-do-cabo-rj/",
     "sourceLabel": "Veja vídeo: tubarão-baleia é flagrado rompendo rede em Arraial do Cabo (RJ)",
-    "lede": "“Foi uma das cenas mais lindas que eu já filmei na minha vida”, diz fotógrafo que fez o registro",
-    "summary": "“Foi uma das cenas mais lindas que eu já filmei na minha vida”, diz fotógrafo que fez o registro",
+    "lede": "CNN Brasil publicou uma atualização sobre Veja vídeo: tubarão-baleia é flagrado rompendo rede em Arraial do Cabo (RJ). O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Veja vídeo: tubarão-baleia é flagrado rompendo rede em Arraial do Cabo (RJ). O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Veja vídeo: tubarão-baleia é flagrado rompendo rede em Arraial do Cabo (RJ). Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25202,8 +27595,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/ciencia/hubble-faz-36-anos-de-orbita-veja-imagens-impressionantes-capturadas/",
     "sourceLabel": "Hubble faz 36 anos de órbita; veja imagens impressionantes capturadas",
-    "lede": "O telescópio da Nasa, apelidado de \"o telescópio do povo\", reescreveu a astronomia com suas poderosas observações do universo",
-    "summary": "O telescópio da Nasa, apelidado de \"o telescópio do povo\", reescreveu a astronomia com suas poderosas observações do universo",
+    "lede": "CNN Brasil publicou uma atualização sobre Hubble faz 36 anos de órbita; veja imagens impressionantes capturadas. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Hubble faz 36 anos de órbita; veja imagens impressionantes capturadas. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Hubble faz 36 anos de órbita; veja imagens impressionantes capturadas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25700,8 +28093,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/negocios/setor-financeiro-debate-competitividade-e-alocacao-de-capital-em-evento/",
     "sourceLabel": "Setor financeiro debate competitividade e alocação de capital em evento",
-    "lede": "Foco das discussões será direcionamento de recursos e critérios que orientam decisões em cenário de maior pressão por eficiência, adaptação regulatória e capacidade de execução",
-    "summary": "Foco das discussões será direcionamento de recursos e critérios que orientam decisões em cenário de maior pressão por eficiência, adaptação regulatória e capacidade de execução",
+    "lede": "CNN Brasil publicou uma atualização sobre Setor financeiro debate competitividade e alocação de capital em evento. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Setor financeiro debate competitividade e alocação de capital em evento. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Setor financeiro debate competitividade e alocação de capital em evento. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25749,8 +28142,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/nacional/centro-oeste/df/influenciador-que-gravou-aulas-da-unb-e-difamou-professor-e-condenado/",
     "sourceLabel": "Influenciador que gravou aulas da UnB e difamou professor é condenado",
-    "lede": "Wilker Leão foi sentenciado por injúria e difamação; pena é de um ano e 11 meses e 10 dias",
-    "summary": "Wilker Leão foi sentenciado por injúria e difamação; pena é de um ano e 11 meses e 10 dias",
+    "lede": "CNN Brasil publicou uma atualização sobre Influenciador que gravou aulas da UnB e difamou professor é condenado. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Influenciador que gravou aulas da UnB e difamou professor é condenado. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Influenciador que gravou aulas da UnB e difamou professor é condenado. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25945,8 +28338,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/nacional/sudeste/sp/homem-e-levado-por-segurancas-apos-ferir-outro-na-estacao-sacoma/",
     "sourceLabel": "Homem é levado por seguranças após ferir outro na estação Sacomã",
-    "lede": "Ocorrência na linha verde do metrô de São Paulo envolveu discussão em vagão e uso de objeto pontiagudo",
-    "summary": "Ocorrência na linha verde do metrô de São Paulo envolveu discussão em vagão e uso de objeto pontiagudo",
+    "lede": "CNN Brasil publicou uma atualização sobre Homem é levado por seguranças após ferir outro na estação Sacomã. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Homem é levado por seguranças após ferir outro na estação Sacomã. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Homem é levado por seguranças após ferir outro na estação Sacomã. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -25994,8 +28387,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/mercado/derivativos-entenda-diferenca-entre-operacoes-permitidas-e-proibidas/",
     "sourceLabel": "Derivativos: Entenda diferença entre operações permitidas e proibidas",
-    "lede": "Governo barrou oferta e negociação dos chamados mercados preditivos no Brasil; resolução do CMN dispõe sobre organização e funcionamento do mercado de derivativos no país",
-    "summary": "Governo barrou oferta e negociação dos chamados mercados preditivos no Brasil; resolução do CMN dispõe sobre organização e funcionamento do mercado de derivativos no país",
+    "lede": "CNN Brasil publicou uma atualização sobre Derivativos: Entenda diferença entre operações permitidas e proibidas. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Derivativos: Entenda diferença entre operações permitidas e proibidas. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Derivativos: Entenda diferença entre operações permitidas e proibidas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26043,8 +28436,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/argentina-pede-a-retomada-das-negociacoes-sobre-as-ilhas-malvinas/",
     "sourceLabel": "Argentina pede a retomada das negociações sobre as Ilhas Malvinas",
-    "lede": "Debate ressurgiu após um e-mail interno do Pentágono sugerir a revisão da posição dos EUA sobre o arquipélogo",
-    "summary": "Debate ressurgiu após um e-mail interno do Pentágono sugerir a revisão da posição dos EUA sobre o arquipélogo",
+    "lede": "CNN Brasil publicou uma atualização sobre Argentina pede a retomada das negociações sobre as Ilhas Malvinas. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Argentina pede a retomada das negociações sobre as Ilhas Malvinas. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Argentina pede a retomada das negociações sobre as Ilhas Malvinas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26145,8 +28538,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/entretenimento/grazi-massafera-reflete-sobre-maternidade-ficticia-e-da-vida-real/",
     "sourceLabel": "Grazi Massafera reflete sobre maternidade fictícia e da vida real",
-    "lede": "Enquanto Arminda, de \"Três Graças\", se afasta da maternidade na ficção, a atriz prioriza a conexão diária e a presença com a filha Sofia",
-    "summary": "Enquanto Arminda, de \"Três Graças\", se afasta da maternidade na ficção, a atriz prioriza a conexão diária e a presença com a filha Sofia",
+    "lede": "CNN Brasil publicou uma atualização sobre Grazi Massafera reflete sobre maternidade fictícia e da vida real. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Grazi Massafera reflete sobre maternidade fictícia e da vida real. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Grazi Massafera reflete sobre maternidade fictícia e da vida real. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26247,8 +28640,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/agro/brasil-adere-a-programa-da-ocde-e-amplia-presenca-em-pesquisa-agropecuaria/",
     "sourceLabel": "Brasil adere a programa da OCDE e amplia presença em pesquisa agropecuária",
-    "lede": "A adesão ao programa é vista como um passo estratégico para ampliar a inserção do Brasil nas discussões globais sobre agricultura sustentável",
-    "summary": "A adesão ao programa é vista como um passo estratégico para ampliar a inserção do Brasil nas discussões globais sobre agricultura sustentável",
+    "lede": "CNN Brasil publicou uma atualização sobre Brasil adere a programa da OCDE e amplia presença em pesquisa agropecuária. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "CNN Brasil publicou uma atualização sobre Brasil adere a programa da OCDE e amplia presença em pesquisa agropecuária. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "CNN Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Brasil adere a programa da OCDE e amplia presença em pesquisa agropecuária. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26541,8 +28934,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
     "sourceLabel": "Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze",
-    "lede": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema",
-    "summary": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema",
+    "lede": "Agencia Brasil publicou uma atualização sobre Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Agencia Brasil publicou uma atualização sobre Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26594,8 +28987,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
     "sourceLabel": "Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre",
-    "lede": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última",
-    "summary": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última",
+    "lede": "Batelao publicou uma atualização sobre Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Batelao publicou uma atualização sobre Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26651,8 +29044,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios",
     "sourceLabel": "Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários",
-    "lede": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas",
-    "summary": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas",
+    "lede": "Batelao publicou uma atualização sobre Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Batelao publicou uma atualização sobre Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -26819,7 +29212,7 @@ window.NEWS_DATA = [
     "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
     "sourceLabel": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
     "lede": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes.",
-    "summary": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes",
+    "summary": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira.",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -27181,8 +29574,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua 24 Horas",
     "sourceUrl": "https://jurua24horas.com/2026/04/acriano-que-lutou-na-ucrania-retorna-a-rodrigues-alves-e-surpreende-mae-com-buque-de-rosas/",
     "sourceLabel": "Acriano que lutou na Ucrânia retorna a Rodrigues Alves e surpreende mãe com buquê de rosas",
-    "lede": "Jair Santana passou seis meses no front e volta ao Brasil como sargento do Exército Ucraniano",
-    "summary": "Jair Santana passou seis meses no front e volta ao Brasil como sargento do Exército Ucraniano",
+    "lede": "Jurua 24 Horas publicou uma atualização sobre Acriano que lutou na Ucrânia retorna a Rodrigues Alves e surpreende mãe com buquê de rosas. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua 24 Horas publicou uma atualização sobre Acriano que lutou na Ucrânia retorna a Rodrigues Alves e surpreende mãe com buquê de rosas. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Acriano que lutou na Ucrânia retorna a Rodrigues Alves e surpreende mãe com buquê de rosas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -27458,8 +29851,6 @@ window.NEWS_DATA = [
     "summary": "Simone Mendes junta ídolos sertanejos dos anos 1990 na gravação ao vivo do álbum audiovisual 'Minhas memórias'.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 24 de abr. de 2026 a base desta noticia sobre Simone Mendes junta ídolos sertanejos dos anos 1990 na gravação ao vivo do álbum audiovisual 'Minhas memórias'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Simone Mendes junta ídolos sertanejos dos anos 1990 na gravação ao vivo do álbum audiovisual 'Minhas memórias' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -27503,8 +29894,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/stf-tem-maioria-para-manter-prisao-de-ex-presidente-do-brb/",
     "sourceLabel": "STF tem maioria para manter prisão de ex-presidente do BRB",
-    "lede": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente",
-    "summary": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente",
+    "lede": "ac24horas publicou uma atualização sobre STF tem maioria para manter prisão de ex-presidente do BRB. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre STF tem maioria para manter prisão de ex-presidente do BRB. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 24 de abr. de 2026 a base desta noticia sobre STF tem maioria para manter prisão de ex-presidente do BRB. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -27952,8 +30343,6 @@ window.NEWS_DATA = [
     "summary": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade.",
     "analysis": "",
     "body": [
-      "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -28491,8 +30880,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-previa-areacre-auto-posto-ltda/",
     "sourceLabel": "Licença Prévia – AREACRE AUTO POSTO LTDA",
-    "lede": "AREACRE AUTO POSTO LTDA AREACRE AUTO POSTO Torna público que recebeu do INSTITUTO DE MEIO AMBIENTE DO ACRE-IMAC, a LICENÇA PRÉVIA Nº 000347/2026, válida até 22/04/2029, para atividade de COMERCIO VAREJISTA DE COMBUSTIVEIS",
-    "summary": "AREACRE AUTO POSTO LTDA AREACRE AUTO POSTO Torna público que recebeu do INSTITUTO DE MEIO AMBIENTE DO ACRE-IMAC, a LICENÇA PRÉVIA Nº 000347/2026, válida até 22/04/2029, para atividade de COMERCIO VAREJISTA DE COMBUSTIVEIS",
+    "lede": "Tribuna do Jurua publicou uma atualização sobre Licença Prévia – AREACRE AUTO POSTO LTDA. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Tribuna do Jurua publicou uma atualização sobre Licença Prévia – AREACRE AUTO POSTO LTDA. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -29034,8 +31423,8 @@ window.NEWS_DATA = [
     "sourceName": "Jurua Comunicacao",
     "sourceUrl": "https://juruacomunicacao.com.br/governo-exonera-condenado-por-tortura-e-nomeia-esposa-no-lugar-dele-em-secretaria-no-acre/",
     "sourceLabel": "Governo exonera condenado por tortura e nomeia esposa no lugar dele em secretaria no Acre",
-    "lede": "O ex-vereador e ex-candidato a prefeito de Acrelândia, Ariston de Souza Jardim, de 43 anos, condenado pelo crime de tortura, foi exonerado nesta sexta-feira (24), um dia após ter sido nomeado a um cargo na Secretaria de Estado",
-    "summary": "O ex-vereador e ex-candidato a prefeito de Acrelândia, Ariston de Souza Jardim, de 43 anos, condenado pelo crime de tortura, foi exonerado nesta sexta-feira (24), um dia após ter sido nomeado a um cargo na Secretaria de Estado",
+    "lede": "Jurua Comunicacao publicou uma atualização sobre Governo exonera condenado por tortura e nomeia esposa no lugar dele em secretaria no Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua Comunicacao publicou uma atualização sobre Governo exonera condenado por tortura e nomeia esposa no lugar dele em secretaria no Acre. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "Jurua Comunicacao publicou em 24 de abr. de 2026 a base desta noticia sobre Governo exonera condenado por tortura e nomeia esposa no lugar dele em secretaria no Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -29132,8 +31521,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/noticia/2026/04/24/bc-barra-no-brasil-mercados-preditivos-sobre-eleicoes-esportes-e-reality-shows.ghtml",
     "sourceLabel": "Brasil barra plataformas de previsões em política e esporte; decisão não afeta bets",
-    "lede": "Celular mostra ofertas de especulação sobre esportes na Polymarket AP Photo/Jenny Kane O Banco Central do Brasil tornou pública nesta sexta-feira (24) uma nova resolução do Conselho Monetário Nacional (CMN) que proíbe a oferta",
-    "summary": "Celular mostra ofertas de especulação sobre esportes na Polymarket AP Photo/Jenny Kane O Banco Central do Brasil tornou pública nesta sexta-feira (24) uma nova resolução do Conselho Monetário Nacional (CMN) que proíbe a oferta",
+    "lede": "G1 Politica publicou uma atualização sobre Brasil barra plataformas de previsões em política e esporte; decisão não afeta bets. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Politica publicou uma atualização sobre Brasil barra plataformas de previsões em política e esporte; decisão não afeta bets. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 24 de abr. de 2026 a base desta noticia sobre Brasil barra plataformas de previsões em política e esporte; decisão não afeta bets. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -29479,8 +31868,6 @@ window.NEWS_DATA = [
     "summary": "Francis Hime e Simone navegam juntos pelas águas do show 'Embarcação', atração do Rio nas terças-feiras de maio.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 23 de abr. de 2026 a base desta noticia sobre Francis Hime e Simone navegam juntos pelas águas do show 'Embarcação', atração do Rio nas terças-feiras de maio. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Francis Hime e Simone navegam juntos pelas águas do show 'Embarcação', atração do Rio nas terças-feiras de maio e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -29721,7 +32108,7 @@ window.NEWS_DATA = [
     "sourceUrl": "https://www.exibidor.com.br/filme/17429/a-colis%C3%A3o-dos-destinos.html",
     "sourceLabel": "Artigo autoral do Catalogo com base em Exibidor, VEJA e repercussao publica do teaser de Dark Horse",
     "lede": "A Colisão dos Destinos tem estreia prevista para 14 de maio de 2026, enquanto Dark Horse segue cercado por repercussão online, e o tema já nasceu com um ingrediente inevitável: meme em alta voltagem.",
-    "summary": "Entre documentário, cinebiografia heroica e muito barulho em rede, o universo audiovisual ligado a Bolsonaro já está produzindo uma reação curiosa: apoiadores tentam vender épico, enquanto críticos transformam trailer, inglês",
+    "summary": "Editorial Catalogo Cruzeiro do Sul publicou uma atualização sobre Filme sobre Bolsonaro entra no radar com memes, ironias e gente bastante irritada nas redes. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "A leitura autoral aqui é assumidamente leve: a internet brasileira não costuma desperdiçar uma oportunidade dessas. Quando o teaser vira piada por erros em inglês e ainda aparece cercado de controvérsia sobre trilha e tom grandioso, a narrativa escapa do controle da campanha e cai no território em que a web trabalha melhor: deboche, comparação e comentário atravessado.",
     "body": [
       "O documentário A Colisão dos Destinos aparece na base do mercado exibidor com estreia prevista para 14 de maio de 2026. A proposta é narrar a trajetória de Jair Bolsonaro com depoimentos de familiares, aliados e nomes próximos do campo político bolsonarista.",
@@ -29838,12 +32225,10 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/23/ju-dorotea-lanca-o-primeiro-album-oh-nois-aqui-para-reforcar-o-time-feminino-do-hip-hop-com-grito-de-resistencia.ghtml",
     "sourceLabel": "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'",
-    "lede": "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampl",
-    "summary": "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampl",
+    "lede": "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'.",
+    "summary": "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 23 de abr. de 2026 a base desta noticia sobre Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Ju Dorotea lança o primeiro álbum, 'Oh nóis aqui', para reforçar o time feminino do hip hop com 'grito de resistência' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -30230,12 +32615,10 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/22/juliana-linhares-ecoa-o-canto-torto-de-belchior-no-segundo-album-solo-veja-a-capa-do-disco-ate-cansar-o-cansaco.ghtml",
     "sourceLabel": "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'",
-    "lede": "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampli",
-    "summary": "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampli",
+    "lede": "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'.",
+    "summary": "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 22 de abr. de 2026 a base desta noticia sobre Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço'. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Juliana Linhares ecoa o 'canto torto' de Belchior no segundo álbum solo – veja a capa do disco 'Até cansar o cansaço' e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
       "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
     ],
     "highlights": [],
@@ -30279,8 +32662,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-instalacao-josias-o-da-silva-ltda/",
     "sourceLabel": "Licença de Instalação – Josias O. Da Silva Ltda",
-    "lede": "Torna público que requereu ao Instituto de Meio Ambiente do Acre – IMAC, a Licença Instalação – LI, para a atividade de Posto de Abastecimento – PA, localizada a Estrada do Aeroporto,nº2981, Nossa Senhora das Graças na cidade",
-    "summary": "Torna público que requereu ao Instituto de Meio Ambiente do Acre – IMAC, a Licença Instalação – LI, para a atividade de Posto de Abastecimento – PA, localizada a Estrada do Aeroporto,nº2981, Nossa Senhora das Graças na cidade",
+    "lede": "Tribuna do Jurua publicou uma atualização sobre Licença de Instalação – Josias O. Da Silva Ltda. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Tribuna do Jurua publicou uma atualização sobre Licença de Instalação – Josias O. Da Silva Ltda. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31075,8 +33458,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-estadodo-acre/",
     "sourceLabel": "Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
-    "lede": "Convidamos as pessoas interessadas para a Assembleia de Fundação do Sindicato dos Trabalhadores em Transporte Aquaviários do Estado do Acre a comparecerem no dia 28 de Fevereiro de 2026, 07:30 (sete horas e 30 minutos), à Rua",
-    "summary": "Convidamos as pessoas interessadas para a Assembleia de Fundação do Sindicato dos Trabalhadores em Transporte Aquaviários do Estado do Acre a comparecerem no dia 28 de Fevereiro de 2026, 07:30 (sete horas e 30 minutos), à Rua",
+    "lede": "Tribuna do Jurua publicou uma atualização sobre Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Tribuna do Jurua publicou uma atualização sobre Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31324,8 +33707,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2022/05/06/jacare-de-2-metros-e-resgatado-dentro-do-campus-do-ifap-em-macapa-e-o-2o-animal-em-17-dias.ghtml",
     "sourceLabel": "Jacaré de 2 metros é resgatado dentro do campus do Ifap em Macapá; é o 2º animal em 17 dias",
-    "lede": "Jacaré foi imobilizado com cordas para ser entregue ao Ibama CBM/Divulgação Militares do Corpo de Bombeiros fizeram o resgate de um jacaré com quase dois metros encontrado na área externa do campus Macapá do Instituto Federal",
-    "summary": "Jacaré foi imobilizado com cordas para ser entregue ao Ibama CBM/Divulgação Militares do Corpo de Bombeiros fizeram o resgate de um jacaré com quase dois metros encontrado na área externa do campus Macapá do Instituto Federal",
+    "lede": "G1 Brasil publicou uma atualização sobre Jacaré de 2 metros é resgatado dentro do campus do Ifap em Macapá; é o 2º animal em 17 dias. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Jacaré de 2 metros é resgatado dentro do campus do Ifap em Macapá; é o 2º animal em 17 dias. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31569,8 +33952,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/08/17/michele-maycoth-interpreta-sucessos-de-maria-gadu-em-noite-romantica-no-ap.ghtml",
     "sourceLabel": "Michele Maycoth interpreta sucessos de Maria Gadú em noite romântica no AP",
-    "lede": "Apresentação está marcada para o dia 1º de setembro, em um espaço cultural em Macapá Michele Maycoth/Arquivo Pessoal Interpretando sucessos de Maria Gadú, uma das relevações da MPB, a cantora amapaense Michele Maycoth prepara",
-    "summary": "Apresentação está marcada para o dia 1º de setembro, em um espaço cultural em Macapá Michele Maycoth/Arquivo Pessoal Interpretando sucessos de Maria Gadú, uma das relevações da MPB, a cantora amapaense Michele Maycoth prepara",
+    "lede": "G1 Brasil publicou uma atualização sobre Michele Maycoth interpreta sucessos de Maria Gadú em noite romântica no AP. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Michele Maycoth interpreta sucessos de Maria Gadú em noite romântica no AP. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31618,8 +34001,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/08/08/exposicao-minha-aldeia-reune-fotografias-inspiradas-no-cotidiano-amapaense.ghtml",
     "sourceLabel": "Exposição 'Minha Aldeia' reúne fotografias inspiradas no cotidiano amapaense",
-    "lede": "Mostra 'Minha Aldeia' busca evidenciar as belezas escondidas na simplicidade da vida no Amapá Floriano Lima/Divulgação Com fotos de paisagens, cartões-postais e até mesmo de trabalhadores à beira do Rio Amazonas, o fotógrafo",
-    "summary": "Mostra 'Minha Aldeia' busca evidenciar as belezas escondidas na simplicidade da vida no Amapá Floriano Lima/Divulgação Com fotos de paisagens, cartões-postais e até mesmo de trabalhadores à beira do Rio Amazonas, o fotógrafo",
+    "lede": "G1 Brasil publicou uma atualização sobre Exposição 'Minha Aldeia' reúne fotografias inspiradas no cotidiano amapaense. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Exposição 'Minha Aldeia' reúne fotografias inspiradas no cotidiano amapaense. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31667,8 +34050,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/08/05/peca-de-teatral-amapaense-vai-narrar-acontecimentos-19-anos-depois-o-ultimo-livro-de-harry-potter.ghtml",
     "sourceLabel": "Peça teatral amapaense vai narrar acontecimentos 19 anos depois do último livro de Harry Potter",
-    "lede": "Peça teatral 'Harry Potter e o Herdeiro Amaldiçoado' será nos dias 16 e 17 de agosto, em Macapá Google Inspirada na peça londrina que contou os acontecimentos 19 anos depois de \"Harry Potter e as Relíquias da Morte\", um grupo",
-    "summary": "Peça teatral 'Harry Potter e o Herdeiro Amaldiçoado' será nos dias 16 e 17 de agosto, em Macapá Google Inspirada na peça londrina que contou os acontecimentos 19 anos depois de \"Harry Potter e as Relíquias da Morte\", um grupo",
+    "lede": "G1 Brasil publicou uma atualização sobre Peça teatral amapaense vai narrar acontecimentos 19 anos depois do último livro de Harry Potter. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Peça teatral amapaense vai narrar acontecimentos 19 anos depois do último livro de Harry Potter. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31765,8 +34148,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/29/show-de-humor-em-macapa-leva-historias-de-ribeirinhos-da-amazonia-para-o-teatro.ghtml",
     "sourceLabel": "Show de humor em Macapá leva histórias de ribeirinhos da Amazônia para o teatro",
-    "lede": "Epaminondas Gustavo (com a bandeira) e Adilson Alcântara no show 'Agora é que são Eles’ Divulgação Histórias engraçadas de ribeirinhos que vivem no interior do Pará inspiraram o repertório de “Agora é que são Eles”, novo show",
-    "summary": "Epaminondas Gustavo (com a bandeira) e Adilson Alcântara no show 'Agora é que são Eles’ Divulgação Histórias engraçadas de ribeirinhos que vivem no interior do Pará inspiraram o repertório de “Agora é que são Eles”, novo show",
+    "lede": "G1 Brasil publicou uma atualização sobre Show de humor em Macapá leva histórias de ribeirinhos da Amazônia para o teatro. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Show de humor em Macapá leva histórias de ribeirinhos da Amazônia para o teatro. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -31845,8 +34228,6 @@ window.NEWS_DATA = [
       "sem-dinheiro-venezuelanos-acampam-as-margens-de-rodovia-na-fronteira-do-brasil-aqui-pelo-menos-t"
     ],
     "body": [
-      "G1 Brasil publicou em 26 de jul de 2018 a base desta noticia sobre Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'.",
-      "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida' e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -32009,8 +34390,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml",
     "sourceLabel": "Com surto na região Norte, campanha contra o sarampo no AP começa em agosto",
-    "lede": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era",
-    "summary": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era",
+    "lede": "G1 Brasil publicou uma atualização sobre Com surto na região Norte, campanha contra o sarampo no AP começa em agosto. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Com surto na região Norte, campanha contra o sarampo no AP começa em agosto. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -32160,8 +34541,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/comissariado-do-ap-fiscaliza-embarque-de-menores-para-o-festival-do-camarao-no-pa.ghtml",
     "sourceLabel": "Comissariado do AP fiscaliza embarque de menores para o Festival do Camarão no PA",
-    "lede": "Festival do Camarão provoca aumento de fluxo de passageiros com destino ao Afuá Jorge Abreu/G1 Com o aumento de embarques nos portos de Macapá, o Comissariado da Infância e Juventude intensifica a fiscalização para evitar",
-    "summary": "Festival do Camarão provoca aumento de fluxo de passageiros com destino ao Afuá Jorge Abreu/G1 Com o aumento de embarques nos portos de Macapá, o Comissariado da Infância e Juventude intensifica a fiscalização para evitar",
+    "lede": "G1 Brasil publicou uma atualização sobre Comissariado do AP fiscaliza embarque de menores para o Festival do Camarão no PA. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Comissariado do AP fiscaliza embarque de menores para o Festival do Camarão no PA. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -32405,8 +34786,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/mg/zona-da-mata/noticia/2018/07/23/ingressos-para-campanha-de-popularizacao-teatro-e-danca-de-juiz-de-fora-comecam-a-ser-vendidos.ghtml",
     "sourceLabel": "Ingressos para Campanha de Popularização Teatro e Dança de Juiz de Fora começam a ser vendidos",
-    "lede": "Ingressos para a 17ª Campanha de Popularização do Teatro & Dança podem ser adquiridos no trailer da Apac em Juiz de Fora",
-    "summary": "Ingressos para a 17ª Campanha de Popularização do Teatro & Dança podem ser adquiridos no trailer da Apac em Juiz de Fora",
+    "lede": "G1 Brasil publicou uma atualização sobre Ingressos para Campanha de Popularização Teatro e Dança de Juiz de Fora começam a ser vendidos. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Ingressos para Campanha de Popularização Teatro e Dança de Juiz de Fora começam a ser vendidos. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -32556,8 +34937,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/mulher-presa-com-droga-na-vagina-em-macapa-e-solta-apos-audiencia-de-custodia.ghtml",
     "sourceLabel": "Mulher presa com droga na vagina em Macapá é solta após audiência de custódia",
-    "lede": "Porções de maconha estavam enroladas em fermento Iapen/Divulgação Vai responder em liberdade pelo crime de tráfico de drogas, a mulher de 45 anos que foi presa na tarde de domingo (22) com porções de maconha escondidas dentro",
-    "summary": "Porções de maconha estavam enroladas em fermento Iapen/Divulgação Vai responder em liberdade pelo crime de tráfico de drogas, a mulher de 45 anos que foi presa na tarde de domingo (22) com porções de maconha escondidas dentro",
+    "lede": "G1 Brasil publicou uma atualização sobre Mulher presa com droga na vagina em Macapá é solta após audiência de custódia. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "G1 Brasil publicou uma atualização sobre Mulher presa com droga na vagina em Macapá é solta após audiência de custódia. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
     "highlights": [],
     "development": [],
