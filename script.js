@@ -2161,10 +2161,11 @@ const getRadarSpotlightArticles = (filter = "todos") => {
   const allArticles = sortRadarArticles([...(window.NEWS_DATA || [])]);
   const normalizedFilter = normalizeText(filter);
   const reservedKeys = buildReservedArticleKeys(["radar"]);
+  const localArticles = allArticles.filter((article) => isRadarLocalSummaryArticle(article));
   const filteredArticles =
     normalizedFilter === "todos"
-      ? allArticles
-      : allArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter));
+      ? localArticles
+      : localArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter));
   const spotlight = [];
   const seenKeys = new Set();
 
@@ -2189,14 +2190,14 @@ const getRadarSpotlightArticles = (filter = "todos") => {
   };
 
   if (normalizedFilter === "todos") {
-    const { leadArticles } = pickRadarLeadArticles(allArticles);
+    const { leadArticles } = pickRadarLeadArticles(localArticles);
     leadArticles.some(pushUnique);
   }
 
   filteredArticles.some(pushUnique);
 
   if (spotlight.length < 2) {
-    allArticles.some(pushUnique);
+    localArticles.some(pushUnique);
   }
 
   return spotlight.slice(0, 2);
@@ -3760,6 +3761,22 @@ const isNationalPoliticsArticle = (article = {}) => {
 const shouldUseNationalPoliticsInHotSurface = (article = {}) =>
   !isNationalPoliticsArticle(article) || hasClearLocalReaderImpact(article);
 
+const isRadarLocalSummaryArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const scope = getMosaicRegionalScope(normalizedArticle);
+  const text = getLocalImpactScopeText(normalizedArticle);
+
+  if (scope === "jurua") {
+    return true;
+  }
+
+  if (scope === "acre") {
+    return isAcreGovernmentScope(text) || isAcreGeneralScope(text) || hasClearLocalReaderImpact(normalizedArticle);
+  }
+
+  return false;
+};
+
 const compareEditorialFlowArticles = (
   left,
   right,
@@ -4042,7 +4059,7 @@ const pickRadarLeadArticles = (articles = []) => {
     articleHasUsableImageCandidate(article, "hero")
   );
   const sameDayAllArticlesWithImage = sortMosaicRegionalArticles(
-    normalizedDisplayArticles.filter(
+    normalizedRegionalArticles.filter(
       (article) => sameDayArticle(article) && articleHasUsableImageCandidate(article, "hero")
     )
   );
@@ -4138,7 +4155,7 @@ const pickRadarLeadArticles = (articles = []) => {
 
   if (leadArticles.length < targetCount) {
     const fallbackArticlesWithImage = sortMosaicRegionalArticles(
-      normalizedDisplayArticles.filter(
+      normalizedRegionalArticles.filter(
         (article) =>
           (sameDayAllArticlesWithImage.length < targetCount || sameDayArticle(article)) &&
           !selectedKeys.has(getArticleUsageKey(article)) &&
@@ -7034,116 +7051,116 @@ const pickBuzzCopy = (items = [], seed = 0, offset = 0) =>
 
 const buzzAgentFallbackReaders = [
   {
-    name: "Editora Ari",
-    office: "Escritório Principal",
+    name: "Mesa local",
+    office: "Redação local",
     role: "editor",
     specialty: "hierarquia de notícias, capa, manchetes e ritmo editorial"
   },
   {
-    name: "Malu Cultura",
-    office: "Escritório Principal",
+    name: "Agenda local",
+    office: "Redação local",
     role: "editor",
     specialty: "agenda cultural, personagens, serviço e impacto para o leitor"
   },
   {
-    name: "Paula Manchete",
-    office: "Escritório Principal",
+    name: "Manchete pública",
+    office: "Redação local",
     role: "editor",
     specialty: "abertura de matéria, ângulo público e peso da manchete"
   },
   {
-    name: "Revisor Bento",
-    office: "Escritório Principal",
+    name: "Revisão de leitura",
+    office: "Redação local",
     role: "review",
     specialty: "erros editoriais, botões, acessibilidade e clareza"
   },
   {
-    name: "Bruno Mesa",
-    office: "Escritório Principal",
+    name: "Contraponto público",
+    office: "Redação local",
     role: "review",
     specialty: "contraponto, dúvida do leitor e excesso de certeza"
   },
   {
-    name: "Lia Copy",
-    office: "Escritório Principal",
+    name: "Chamada pública",
+    office: "Redação local",
     role: "copy",
     specialty: "títulos, chamadas, microcopy e tom humano"
   },
   {
-    name: "Nina Texto",
-    office: "Escritório Principal",
+    name: "Texto claro",
+    office: "Redação local",
     role: "copy",
     specialty: "texto institucional, apresentação pública, clareza e edição de linguagem"
   },
   {
-    name: "Paulo Lede",
-    office: "Escritório Principal",
+    name: "Lede local",
+    office: "Redação local",
     role: "copy",
     specialty: "ledes curtos, precisão de promessa e ritmo de leitura"
   },
   {
-    name: "Sofia Fontes",
-    office: "Escritório Principal",
+    name: "Fonte aberta",
+    office: "Redação local",
     role: "sources",
     specialty: "fontes confiáveis, origem da informação e cobertura externa"
   },
   {
-    name: "Caio Fontes",
-    office: "Escritório Principal",
+    name: "Data e documento",
+    office: "Redação local",
     role: "sources",
     specialty: "checagem cruzada, datas, documentos e links de origem"
   },
   {
-    name: "Téo Buzz",
-    office: "Escritório Principal",
+    name: "Sinal público",
+    office: "Redação local",
     role: "social",
     specialty: "redes sociais, buzz local, creators e pedidos da comunidade"
   },
   {
-    name: "Rafa Redes",
-    office: "Escritório Principal",
+    name: "Temperatura da rede",
+    office: "Redação local",
     role: "social",
     specialty: "temperatura de comentários, ironia, apoio e cobrança pública"
   },
   {
-    name: "Dara Design",
-    office: "Escritório Principal",
+    name: "Leitura visual",
+    office: "Redação local",
     role: "design",
     specialty: "layout, contraste, responsivo, identidade visual e experiência"
   },
   {
-    name: "Joana UX",
-    office: "Escritório Principal",
+    name: "Fluxo de leitura",
+    office: "Redação local",
     role: "design",
     specialty: "escaneabilidade, densidade visual e leitura em card"
   },
   {
-    name: "Vera Vendas",
-    office: "Escritório Principal",
+    name: "Utilidade local",
+    office: "Redação local",
     role: "sales",
     specialty: "vendas locais, anúncios, vitrine, Pix e confiança"
   },
   {
-    name: "Nico Study",
-    office: "Escritório Principal",
+    name: "Contexto ampliado",
+    office: "Redação local",
     role: "sources",
     specialty: "educação, campus, carreira, IA e fontes globais"
   },
   {
-    name: "Tami QA",
-    office: "Escritório Nerd",
+    name: "Revisão final",
+    office: "Redação local",
     role: "review",
     specialty: "playtest, revisão de atritos, clareza de botões e consistência"
   },
   {
-    name: "Beto HUD",
-    office: "Escritório Nerd",
+    name: "Painel público",
+    office: "Redação local",
     role: "design",
     specialty: "HUD, painéis, microcopy de ação e clareza de informação"
   },
   {
-    name: "Codex CEO",
-    office: "Escritório Principal",
+    name: "Coordenação editorial",
+    office: "Redação local",
     role: "ceo",
     specialty: "organização da equipe, prioridades do portal e visão de conjunto"
   }
@@ -7405,12 +7422,12 @@ const buildBuzzAgentOpinion = ({
   const supportAgent = agents[3]?.name ? ` ${agents[3].name} fica no apoio de leitura.` : "";
 
   return {
-    captureLabel: `${voiceAgents.length} leituras do time real`,
+    captureLabel: `${voiceAgents.length} leituras públicas`,
     debateAxis: detail.axis || profile.debateAxis,
     publicMood: detail.mood || profile.publicMood,
     voices,
     agentContext: `${visibleNames} leem "${subject}" por ${detail.context}.${supportAgent}`,
-    agentEvaluation: `Clima dos agentes: ${detail.climate}; ${detail.route}.`
+    agentEvaluation: `Leitura pública: ${detail.climate}; ${detail.route}.`
   };
 };
 
@@ -7433,9 +7450,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "impacto real x discurso oficial",
       publicMood: "satisfação baixa, cobrança alta",
       captureLabel: "três grupos de fala em tensão",
-      context: `Contexto para os agentes: separar anúncio, consequência prática e cobrança de dados antes de opinar sobre "${subject}".`,
+      context: `Contexto público: separar anúncio, consequência prática e cobrança de dados antes de opinar sobre "${subject}".`,
       evaluation:
-        "Avaliação dos agentes: o texto precisa começar pelo impacto humano, checar números e evitar tratar decisão empresarial como espetáculo.",
+        "Leitura pública: começar pelo impacto humano, checar números e evitar tratar decisão empresarial como espetáculo.",
       voices: [
         ["preocupação", "Leitores cobram efeito concreto: emprego, renda e continuidade do serviço vêm antes do discurso bonito."],
         ["defesa", "Uma parte aceita mudança se houver plano claro, prazo e explicação sem frase pronta."],
@@ -7448,9 +7465,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "expectativa x prova prática",
       publicMood: "satisfação moderada, confiança em teste",
       captureLabel: "apoio, dúvida e cobrança mapeados",
-      context: `Contexto para os agentes: explicar o que muda para o público e onde ainda falta evidência sobre "${subject}".`,
+      context: `Contexto público: explicar o que muda para o público e onde ainda falta evidência sobre "${subject}".`,
       evaluation:
-        "Avaliação dos agentes: há espaço para leitura autoral, mas a conclusão deve pesar promessa, histórico e benefício real para o leitor.",
+        "Leitura pública: a conclusão deve pesar promessa, histórico e benefício real para o leitor.",
       voices: [
         ["apoio", "Parte do público vê chance de renovação se a mudança vier acompanhada de entrega visível."],
         ["dúvida", "Outra parte segura o entusiasmo porque já viu anúncio grande sem resultado prático."],
@@ -7463,9 +7480,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "formato x credibilidade",
       publicMood: "satisfação cautelosa",
       captureLabel: "preferências de leitura cruzadas",
-      context: `Contexto para os agentes: cruzar reação de formato, pedido de apuração e utilidade para quem acompanha "${subject}".`,
+      context: `Contexto público: cruzar reação de formato, pedido de apuração e utilidade para quem acompanha "${subject}".`,
       evaluation:
-        "Avaliação dos agentes: a opinião autoral deve defender clareza, fonte aberta e ritmo humano, sem transformar formato em fetiche.",
+        "Leitura pública: defender clareza, fonte aberta e ritmo humano, sem transformar formato em fetiche.",
       voices: [
         ["apoio", "Há leitores que gostam de formato mais direto quando ele ajuda a entender rápido."],
         ["critério", "Outro grupo pede fonte, contexto e apuração para não virar só embalagem de rede."],
@@ -7478,9 +7495,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "proteção x autonomia",
       publicMood: "satisfação dividida",
       captureLabel: "famílias, usuários e críticos separados",
-      context: `Contexto para os agentes: tratar proteção, excesso de controle e rotina real das famílias no mesmo quadro sobre "${subject}".`,
+      context: `Contexto público: tratar proteção, excesso de controle e rotina real das famílias no mesmo quadro sobre "${subject}".`,
       evaluation:
-        "Avaliação dos agentes: a análise precisa reconhecer o medo legítimo sem vender controle como solução mágica.",
+        "Leitura pública: reconhecer o medo legítimo sem vender controle como solução mágica.",
       voices: [
         ["famílias", "Pais e responsáveis querem menos exposição e mais ferramenta compreensível."],
         ["autonomia", "Usuários lembram que controle sem conversa pode só deslocar o problema."],
@@ -7493,9 +7510,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "utilidade x prazo",
       publicMood: "satisfação útil, cobrança por resposta",
       captureLabel: "moradores, usuários e cobrança reunidos",
-      context: `Contexto para os agentes: priorizar endereço, prazo, impacto no bairro e confirmação oficial antes de opinar sobre "${subject}".`,
+      context: `Contexto público: priorizar endereço, prazo, impacto no bairro e confirmação oficial antes de opinar sobre "${subject}".`,
       evaluation:
-        "Avaliação dos agentes: o caso ganha força quando vira serviço autoral, com orientação clara e pergunta objetiva ao responsável.",
+        "Leitura pública: o caso ganha força quando vira serviço, com orientação clara e pergunta objetiva ao responsável.",
       voices: [
         ["uso prático", "Quem depende do serviço valoriza informação simples: onde, quando e o que muda."],
         ["cobrança", "A parte crítica quer prazo, responsável e retorno público, não só aviso genérico."],
@@ -7508,9 +7525,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "oportunidade x exagero",
       publicMood: "satisfação instável",
       captureLabel: "interesse, comparação e desconfiança",
-      context: `Contexto para os agentes: separar desejo de compra, comparação de preço e risco de hype em torno de "${subject}".`,
+      context: `Contexto público: separar desejo de compra, comparação de preço e risco de hype em torno de "${subject}".`,
       evaluation:
-        "Avaliação dos agentes: o texto autoral deve apontar valor real, limite da oferta e cuidado com propaganda disfarçada.",
+        "Leitura pública: apontar valor real, limite da oferta e cuidado com propaganda disfarçada.",
       voices: [
         ["interesse", "Uma parte entra pelo benefício imediato e quer saber se vale a pena agora."],
         ["comparação", "Outra parte compara preço, histórico e experiência de quem já testou."],
@@ -7523,9 +7540,9 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
       debateAxis: "apoio x dúvida x cobrança",
       publicMood: "satisfação moderada, leitura aberta",
       captureLabel: "opiniões captadas em três camadas",
-      context: `Contexto para os agentes: ler "${subject}" por utilidade, incômodo e dúvida antes de escrever uma avaliação autoral.`,
+      context: `Contexto público: ler "${subject}" por utilidade, incômodo e dúvida antes de escrever uma avaliação autoral.`,
       evaluation:
-        "Avaliação dos agentes: o caso ainda pede contexto; o melhor caminho é explicar por que importa, para quem muda algo e o que falta confirmar.",
+        "Leitura pública: explicar por que importa, para quem muda algo e o que falta confirmar.",
       voices: [
         ["apoio", "Um grupo vê valor no tema porque ele toca rotina, consumo ou informação útil."],
         ["cautela", "Outro grupo evita conclusão rápida e pede dado melhor antes de aderir ao clima da rede."],
@@ -7567,41 +7584,35 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
   const sourceContext = hasSocialEvidence
     ? pickBuzzCopy(
         [
-          `${networkName} trouxe ${primarySignal}; ${sourceName} dá o ponto de partida da notícia.`,
-          `${sourceName} aparece como referência inicial, enquanto ${networkName} mostra a temperatura da conversa.`,
-          `Os sinais vieram de ${primarySignal} e foram separados antes da avaliação editorial.`
+          `Sinal público captado em ${networkName}; a notícia fica ligada à fonte antes de virar conclusão.`,
+          `A conversa aparece em ${networkName}, mas o card separa repercussão, fonte e impacto prático.`,
+          `O sinal veio de ${primarySignal}; a leitura pública entra com cautela e fonte aberta.`
         ],
         seed,
         index
       )
-    : `${sourceName} sustenta a notícia. O card fica como radar editorial e não vende tendência sem sinal público real.`;
-  const agentOpinion = buildBuzzAgentOpinion({
-    article,
-    networkContext,
-    profile,
-    seed,
-    index,
-    voiceWeights,
-    agentPulse,
-    subject
-  });
+    : `${sourceName} sustenta a notícia. O card entra como radar editorial e não vende tendência sem sinal público verificável.`;
+  const publicContext = hasSocialEvidence
+    ? `O que importa: entender o motivo da repercussão, quem é afetado e que dado ainda precisa de confirmação.`
+    : `O que importa: a fonte existe, mas ainda não há sinal social público suficiente para chamar de conversa em alta.`;
+  const publicReading = hasSocialEvidence
+    ? `Próximo cuidado: separar apoio, dúvida e cobrança antes de concluir o sentido da repercussão.`
+    : `Próximo cuidado: manter em acompanhamento, cruzar fonte e só subir o tom com prova pública nas redes.`;
 
   return {
     meter: satisfaction,
     satisfaction,
     kicker: hasSocialEvidence ? profile.kicker : "radar editorial em checagem",
-    debateAxis: hasSocialEvidence ? agentOpinion?.debateAxis || profile.debateAxis : "fonte x impacto local",
+    debateAxis: hasSocialEvidence ? profile.debateAxis : "fonte x impacto local",
     publicMood: hasSocialEvidence
-      ? agentOpinion?.publicMood || profile.publicMood
+      ? profile.publicMood
       : "radar editorial em acompanhamento",
-    captureLabel: hasSocialEvidence ? agentOpinion?.captureLabel || profile.captureLabel : "leituras editoriais separadas",
+    captureLabel: hasSocialEvidence ? "sinal público confirmado" : "fonte em acompanhamento",
     signalLabel: hasSocialEvidence ? primarySignal : "fonte confirmada",
     sourceContext,
-    agentContext: agentOpinion?.agentContext || profile.context,
-    agentEvaluation: hasSocialEvidence
-      ? agentOpinion?.agentEvaluation || profile.evaluation
-      : "Leitura da equipe: assunto relevante, mas só vira conversa em alta quando Facebook, Instagram, X ou outra fonte pública entregarem sinal verificável.",
-    voices: agentOpinion?.voices || fallbackVoices
+    agentContext: publicContext,
+    agentEvaluation: publicReading,
+    voices: fallbackVoices
   };
 };
 
@@ -7671,18 +7682,22 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
     .filter(Boolean)
     .join(" · ");
   const headline = truncateCopy(article.title || "Polemica em repercussao nas redes", 110);
-  const summary = truncateCopy(
-    cleanArticleExcerpt(
-      article.displaySummary || article.lede || article.summary,
-      "O assunto entrou na conversa pública e segue em acompanhamento."
-    ),
-    190
+  const summary = buildReadableCardSummary(
+    {
+      ...article,
+      displaySummary:
+        article.displaySummary ||
+        article.lede ||
+        article.summary ||
+        "O assunto entrou na conversa pública e segue em acompanhamento."
+    },
+    220
   );
   const networkLabel = hasSocialEvidence
-    ? `${networkContext.network || "Rede"} • sinal ${index + 1}`
+    ? `${networkContext.network || "Rede"} • fonte pública`
     : `radar editorial • caso ${index + 1}`;
   const signalLine = hasSocialEvidence
-    ? `${networkContext.network || "Rede"}: ${pulse.signalLabel || "comentários"}`
+    ? `sinal: ${pulse.signalLabel || "registro público"}`
     : `status: ${sourceStatus.label}`;
   const debateLine = `debate: ${pulse.debateAxis}`;
   const satisfactionPercent = clampBuzzPercent(pulse.satisfaction || pulse.meter || 50, 0, 100);
@@ -7735,7 +7750,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
         <span>${escapeHtml(debateLine)}</span>
       </div>
 
-      <div class="buzz-reaction-box buzz-public-capture" aria-label="Captação pública e avaliação dos agentes">
+      <div class="buzz-reaction-box buzz-public-capture" aria-label="Captação pública e contexto">
         <div class="buzz-capture-head">
           <span>${hasSocialEvidence ? "captação pública diversa" : "radar editorial"}</span>
           <strong>${escapeHtml(pulse.captureLabel || "vozes separadas")}</strong>
@@ -7745,9 +7760,9 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
           ${voiceMarkup}
         </div>
         <div class="buzz-agent-evaluation">
-          <span>clima e avaliação dos agentes</span>
-          <p>${escapeHtml(pulse.agentContext || "Contexto editorial reunido antes da escrita autoral.")}</p>
-          <strong>${escapeHtml(pulse.agentEvaluation || "Avaliação dos agentes em revisão.")}</strong>
+          <span>o que importa agora</span>
+          <p>${escapeHtml(pulse.agentContext || "Contexto público reunido antes do destaque.")}</p>
+          <strong>${escapeHtml(pulse.agentEvaluation || "Contexto em revisão.")}</strong>
         </div>
         <div class="buzz-satisfaction-panel" aria-label="${escapeRuntimeAttribute(meterLabel)}: ${satisfactionPercent}%">
           <div class="buzz-satisfaction-head">
@@ -7898,16 +7913,18 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
     normalizedArticle.date ||
     "agora";
   const title = truncateCopy(normalizedArticle.title || "Atualização importante", 98);
-  const summary = truncateCopy(
-    cleanArticleExcerpt(
-      normalizedArticle.displaySummary || normalizedArticle.lede || normalizedArticle.summary,
-      "Atualização em acompanhamento no portal."
-    ),
-    138
+  const summary = buildReadableCardSummary(
+    {
+      ...normalizedArticle,
+      summary: normalizedArticle.summary || topic.fallbackSummary,
+      lede: normalizedArticle.lede || topic.fallbackSummary,
+      displaySummary: normalizedArticle.displaySummary || topic.fallbackSummary
+    },
+    210
   );
 
   return `
-    <article class="what-matters-card reveal ${index ? "delay-1" : ""}">
+    <article class="what-matters-card reveal active ${index ? "delay-1" : ""}">
       <span class="source-status-badge ${escapeHtml(sourceStatus.className)}">${escapeHtml(sourceStatus.label)}</span>
       <p>${escapeHtml(topic.label)}</p>
       <h3><a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(title)}</a></h3>
@@ -9438,6 +9455,69 @@ const syncNewsDataset = (runtimeItems = []) => {
 
 const truncateCopy = (value, maxLength = 140) => {
   return truncateCopyAtWord(value, maxLength);
+};
+
+const stripRepeatedTitleFromSummary = (summary = "", title = "") => {
+  const cleanSummary = cleanArticleExcerpt(summary);
+  const cleanTitle = cleanArticleText(title);
+
+  if (!cleanSummary || !cleanTitle) {
+    return cleanSummary;
+  }
+
+  const summaryKey = normalizeText(cleanSummary);
+  const titleKey = normalizeText(cleanTitle);
+
+  if (summaryKey === titleKey) {
+    return "";
+  }
+
+  if (summaryKey.startsWith(`${titleKey} `) || summaryKey.startsWith(`${titleKey}.`)) {
+    const stripped = cleanSummary.slice(cleanTitle.length).replace(/^[\s.:-]+/, "").trim();
+    return stripped.length >= 56 ? stripped : cleanSummary;
+  }
+
+  return cleanSummary;
+};
+
+const buildReadableCardSummary = (article = {}, maxLength = 250) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const bodyCandidates = Array.isArray(normalizedArticle.body)
+    ? normalizedArticle.body
+    : [normalizedArticle.body].filter(Boolean);
+  const candidates = [
+    normalizedArticle.displaySummary,
+    normalizedArticle.summary,
+    normalizedArticle.lede,
+    normalizedArticle.description,
+    ...bodyCandidates
+  ]
+    .map((value) => stripRepeatedTitleFromSummary(value, normalizedArticle.title))
+    .map((value) =>
+      cleanArticleExcerpt(value)
+        .replace(/\b(o portal mant[eé]m o link da fonte original para acompanhamento completo\.?)/gi, "")
+        .replace(/\b(a reda[cç][aã]o manteve o link da fonte original.*)$/i, "")
+        .replace(/\s+/g, " ")
+        .trim()
+    )
+    .filter(Boolean);
+
+  const titleKey = normalizeText(normalizedArticle.title);
+  const usefulCandidates = candidates.filter((candidate) => {
+    const key = normalizeText(candidate);
+    return key && key !== titleKey && candidate.length >= 64;
+  });
+  const bestCandidate =
+    usefulCandidates.find((candidate) => candidate.length >= 145) ||
+    usefulCandidates[0] ||
+    candidates.find((candidate) => normalizeText(candidate) !== titleKey) ||
+    `${normalizedArticle.title}. A notícia segue em acompanhamento pela redação, com foco no impacto prático para o leitor local.`;
+
+  return truncateCopyAtWord(bestCandidate, maxLength, {
+    suffix: "",
+    minSentenceLength: 72,
+    minWordSafeLength: 44
+  });
 };
 
 const entertainmentFilmPattern =
@@ -11762,10 +11842,7 @@ const buildFeedCard = (article) => {
   source.textContent = formatCrossedSourceMeta(normalizedArticle);
 
   title.textContent = normalizedArticle.title;
-  summary.textContent = truncateCopy(
-    normalizedArticle.displaySummary || normalizedArticle.lede,
-    card.classList.contains("featured") ? 150 : 132
-  );
+  summary.textContent = buildReadableCardSummary(normalizedArticle, 255);
 
   category.textContent = formatCrossedSourceFooter(normalizedArticle);
   link.href = href;
