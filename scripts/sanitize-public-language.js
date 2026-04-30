@@ -113,10 +113,6 @@ function repairIncompletePublicText(value, kind, item) {
   const text = normalizePublicText(value);
   if (text.length < 80 || /[.!?…]$/.test(text)) return value;
 
-  const tail = (text.match(/([\p{L}\p{N}]+)$/u) || [])[1] || "";
-  const connectorTail = /^(?:a|o|e|da|de|do|das|dos|na|no|nas|nos|em|por|para|com|sem)$/i.test(tail);
-  if (tail.length > 2 && !connectorTail) return value;
-
   const sentenceEnd = Math.max(text.lastIndexOf("."), text.lastIndexOf("!"), text.lastIndexOf("?"));
   if (sentenceEnd >= 60) {
     return text.slice(0, sentenceEnd + 1).trim();

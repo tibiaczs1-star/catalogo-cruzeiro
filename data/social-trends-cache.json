@@ -1,19 +1,20 @@
 {
   "ok": true,
-  "updatedAt": "2026-04-30T11:47:50.233Z",
+  "updatedAt": "2026-04-30T12:04:15.362Z",
   "items": [
     {
       "id": "trends24-brazil-alex-brasil",
       "title": "Alex Brasil",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Alex Brasil.",
-      "category": "X/Twitter",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Alex Brasil. Divisão sugerida: Cotidiano.",
+      "category": "Cotidiano",
       "sourceName": "Trends24 Brasil",
       "sourceUrl": "https://trends24.in/brazil/",
-      "publishedAt": "2026-04-30T11:47:48.313Z",
-      "date": "2026-04-30T11:47:48.313Z",
+      "publishedAt": "2026-04-30T12:04:13.419Z",
+      "date": "2026-04-30T12:04:13.419Z",
       "externalSource": true,
       "socialPlatform": "X/Twitter",
       "coverageLayer": "brasil",
+      "importanceDivision": "Cotidiano",
       "topicGroup": "twitter-trends",
       "hashtags": [
         "#AlexBrasil"
@@ -22,15 +23,16 @@
     {
       "id": "trends24-brazil-educacao",
       "title": "Educação",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Educação.",
-      "category": "X/Twitter",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Educação. Divisão sugerida: Utilidade Pública.",
+      "category": "Utilidade Pública",
       "sourceName": "Trends24 Brasil",
       "sourceUrl": "https://trends24.in/brazil/",
-      "publishedAt": "2026-04-30T11:47:48.313Z",
-      "date": "2026-04-30T11:47:48.313Z",
+      "publishedAt": "2026-04-30T12:04:13.419Z",
+      "date": "2026-04-30T12:04:13.419Z",
       "externalSource": true,
       "socialPlatform": "X/Twitter",
       "coverageLayer": "brasil",
+      "importanceDivision": "Utilidade Pública",
       "topicGroup": "twitter-trends",
       "hashtags": [
         "#Educacao"
@@ -39,15 +41,16 @@
     {
       "id": "trends24-brazil-ganha-o-brasil",
       "title": "Ganha o Brasil",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Ganha o Brasil.",
-      "category": "X/Twitter",
+      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: Ganha o Brasil. Divisão sugerida: Cotidiano.",
+      "category": "Cotidiano",
       "sourceName": "Trends24 Brasil",
       "sourceUrl": "https://trends24.in/brazil/",
-      "publishedAt": "2026-04-30T11:47:48.313Z",
-      "date": "2026-04-30T11:47:48.313Z",
+      "publishedAt": "2026-04-30T12:04:13.419Z",
+      "date": "2026-04-30T12:04:13.419Z",
       "externalSource": true,
       "socialPlatform": "X/Twitter",
       "coverageLayer": "brasil",
+      "importanceDivision": "Cotidiano",
       "topicGroup": "twitter-trends",
       "hashtags": [
         "#GanhaBrasil"
@@ -56,15 +59,16 @@
     {
       "id": "best-hashtags-acre-acre",
       "title": "#acre",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #acre.",
-      "category": "Instagram",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #acre. Divisão sugerida: Acre / Governo.",
+      "category": "Acre / Governo",
       "sourceName": "Best Hashtags Acre",
       "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-04-30T11:47:50.232Z",
-      "date": "2026-04-30T11:47:50.232Z",
+      "publishedAt": "2026-04-30T12:04:15.350Z",
+      "date": "2026-04-30T12:04:15.350Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
+      "importanceDivision": "Acre / Governo",
       "topicGroup": "instagram-hashtags",
       "hashtags": [
         "#acre"
@@ -73,15 +77,16 @@
     {
       "id": "best-hashtags-acre-amazonia",
       "title": "#amazonia",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #amazonia.",
-      "category": "Instagram",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #amazonia. Divisão sugerida: Acre / Governo.",
+      "category": "Acre / Governo",
       "sourceName": "Best Hashtags Acre",
       "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-04-30T11:47:50.232Z",
-      "date": "2026-04-30T11:47:50.232Z",
+      "publishedAt": "2026-04-30T12:04:15.350Z",
+      "date": "2026-04-30T12:04:15.350Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
+      "importanceDivision": "Acre / Governo",
       "topicGroup": "instagram-hashtags",
       "hashtags": [
         "#amazonia"
@@ -90,15 +95,16 @@
     {
       "id": "best-hashtags-acre-czs",
       "title": "#czs",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #czs.",
-      "category": "Instagram",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #czs. Divisão sugerida: Acre / Governo.",
+      "category": "Acre / Governo",
       "sourceName": "Best Hashtags Acre",
       "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-04-30T11:47:50.232Z",
-      "date": "2026-04-30T11:47:50.232Z",
+      "publishedAt": "2026-04-30T12:04:15.350Z",
+      "date": "2026-04-30T12:04:15.350Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
+      "importanceDivision": "Acre / Governo",
       "topicGroup": "instagram-hashtags",
       "hashtags": [
         "#czs"
@@ -107,15 +113,16 @@
     {
       "id": "best-hashtags-brasil-futebol",
       "title": "#futebol",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #futebol.",
-      "category": "Instagram",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #futebol. Divisão sugerida: Esporte.",
+      "category": "Esporte",
       "sourceName": "Best Hashtags Brasil",
       "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-04-30T11:47:49.980Z",
-      "date": "2026-04-30T11:47:49.980Z",
+      "publishedAt": "2026-04-30T12:04:15.047Z",
+      "date": "2026-04-30T12:04:15.047Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
+      "importanceDivision": "Esporte",
       "topicGroup": "instagram-hashtags",
       "hashtags": [
         "#futebol"
@@ -124,15 +131,16 @@
     {
       "id": "best-hashtags-brasil-musica",
       "title": "#musica",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #musica.",
-      "category": "Instagram",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #musica. Divisão sugerida: Cultura.",
+      "category": "Cultura",
       "sourceName": "Best Hashtags Brasil",
       "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-04-30T11:47:49.980Z",
-      "date": "2026-04-30T11:47:49.980Z",
+      "publishedAt": "2026-04-30T12:04:15.047Z",
+      "date": "2026-04-30T12:04:15.047Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
+      "importanceDivision": "Cultura",
       "topicGroup": "instagram-hashtags",
       "hashtags": [
         "#musica"
@@ -141,15 +149,16 @@
     {
       "id": "best-hashtags-brasil-saude",
       "title": "#saude",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #saude.",
-      "category": "Instagram",
+      "summary": "Hashtag pública monitorada em lista externa de Instagram: #saude. Divisão sugerida: Utilidade Pública.",
+      "category": "Utilidade Pública",
       "sourceName": "Best Hashtags Brasil",
       "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-04-30T11:47:49.980Z",
-      "date": "2026-04-30T11:47:49.980Z",
+      "publishedAt": "2026-04-30T12:04:15.047Z",
+      "date": "2026-04-30T12:04:15.047Z",
       "externalSource": true,
       "socialPlatform": "Instagram",
       "coverageLayer": "brasil",
+      "importanceDivision": "Utilidade Pública",
       "topicGroup": "instagram-hashtags",
       "hashtags": [
         "#saude"
@@ -184,6 +193,14 @@
       "ok": true,
       "count": 3,
       "url": "https://best-hashtags.com/hashtag/acre/"
+    },
+    {
+      "source": "facebook-public-pages",
+      "platform": "Facebook",
+      "ok": false,
+      "error": "facebook_graph_config_missing",
+      "hint": "Configure FACEBOOK_GRAPH_ACCESS_TOKEN e FACEBOOK_PUBLIC_PAGE_IDS para captar páginas públicas.",
+      "url": "https://developers.facebook.com/docs/graph-api/reference/page/posts/"
     }
   ],
   "external": true
