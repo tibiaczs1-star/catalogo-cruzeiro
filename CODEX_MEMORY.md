@@ -1,5 +1,15 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-30 - Selos, fluxo e social real
+
+- Usuario pediu selos visiveis, continuidade Home -> Arquivo -> Servicos/Subsites, politica nacional quente so com impacto local claro e bloco `O que importa agora` para cheia/Jurua, eventos e utilidade publica.
+- Regra aplicada: a experiencia publica nao usa rotulo de rede indisponivel como produto; sem evidencia social verificavel, o card vira `radar editorial`; com origem jornalistica/link, vira `fonte confirmada`; com fonte social publica real, vira `sinal social real`.
+- Criado `PROMPT_SELOS_FLUXO_SOCIAL_REAL_2026-04-30.md` e ordem registrada em `data/office-orders.json` para Codex CEO + 181 agentes reais seguirem essa regra em tendencias, chamadas e revisoes.
+- `index.html`, `script.js`, `premium-clarity.css` e `server.js` receberam a primeira implementacao: bloco novo na home, rota visual para arquivo/servicos/subsites, filtro de politica nacional por impacto local e status publico de fonte nos cards de tendencia.
+- `scripts/sanitize-public-language.js` recebeu cobertura para o vazamento `Instagram says it doesn't want your tweet round ups`; depois disso `npm run review:team` voltou com `totalIssues=0`.
+- Smoke local em `127.0.0.1:4148` confirmou home, arquivo, catalogo de servicos, Esttiles, `/api/news` e `/api/social-trends` 200; Playwright CLI confirmou 4 cards no bloco novo, selos visiveis, 6 cards de tendencias, sem rotulo proibido e com politica nacional por impacto local.
+- PubPaid segue fora deste pacote por regra permanente.
+
 ## Atualizacao rapida 2026-04-30 - Sync geral, reuniao dos agentes e subsites
 
 - Usuario pediu a rodada completa: subir pagina, sincronizar tudo, atualizar subsites, ordenar reuniao geral dos agentes, estudar fontes/jornais, organizar prompts claros, commit/deploy e relatorio resumido.
@@ -8,18 +18,18 @@
 - Home e subsites checados em servidor local: `/`, `arquivo.html`, `esttiles.html`, `lifestile.html`, `infantil.html`, `estudantes.html`, `games.html`, `animes.html`, `catalogo-servicos.html`, `/api/news`, `/api/social-trends` e `/api/daily-agent-pulse` responderam 200.
 - Corrigida a Capa Especial/mosaico para completar com noticias do dia antes de voltar a lotes antigos; Playwright final retornou `hasRotinas=false`, `hasFakeEscuta=false` e `stale26Matches=[]`.
 - Fontes externas conferidas na rodada apontaram prioridades editoriais: cheia do Jurua/Cruzeiro do Sul como servico local forte, rejeicao de Jorge Messias no Senado como politica nacional quente, PNLL 2026-2036 como pauta de cultura/educacao e TV publica/TV 3.0 como utilidade/tecnologia publica.
-- Facebook real ficou implementado como captacao configuravel por `FACEBOOK_GRAPH_ACCESS_TOKEN` + `FACEBOOK_PUBLIC_PAGE_IDS`; sem essas variaveis, o site deve declarar `facebook_graph_config_missing` e degradar para radar editorial, sem fingir opiniao/tendencia.
+- Facebook real ficou implementado como captacao configuravel por `FACEBOOK_GRAPH_ACCESS_TOKEN` + `FACEBOOK_PUBLIC_PAGE_IDS`; sem essas variaveis, o site degrada para radar editorial, sem fingir opiniao/tendencia.
 - PubPaid continuou fora do pacote publico por regra permanente: sem commit/deploy de PubPaid sem ordem explicita.
 
 ## Atualizacao rapida 2026-04-30 - Tendencias sociais honestas e Facebook
 
 - Usuario apontou que `Tendencias & Conversas` mostrava noticias comuns como se fossem escuta de Instagram/TikTok, e que cards de outra area vazavam tarefa interna dos agentes (`identificar rotinas manuais...`) como noticia publica.
 - Diagnostico: `script.js` escolhia noticia do feed `buzz` e, sem prova social, rotacionava contextos de Instagram/TikTok/Facebook; `pickMonthlyDynamicStories` tambem injetava `agentPulse.actions` nos cards publicos.
-- Criado `PROMPT_CAPTACAO_SOCIAL_FACEBOOK_TENDENCIAS_2026-04-30.md` com regra de ouro: online nao significa certo; sem prova social o card deve degradar para sinal nao confirmado/radar, nunca fingir tendencia.
-- `script.js`: `renderDailyTrendingBuzz` passa a priorizar `/api/social-trends`; `resolveBuzzNetworkContext` so rotula rede quando ha `externalSource/socialPlatform/topicGroup` social; caso contrario usa contexto neutro. Textos publicos passam a dizer quando o sinal social nao foi confirmado. `pickMonthlyDynamicStories` removeu tarefas internas dos agentes e aceita tendencias externas no pool.
-- `server.js`: `/api/social-trends` ganhou fonte `facebook-public-pages` configuravel por `FACEBOOK_GRAPH_ACCESS_TOKEN` + `FACEBOOK_PUBLIC_PAGE_IDS`; sem configuracao, reporta `facebook_graph_config_missing` em vez de inventar posts. Tendencias agora recebem divisao sugerida (`Politica`, `Utilidade Publica`, `Cultura`, `Economia`, `Esporte`, `Acre / Governo`, `Cotidiano`).
+- Criado `PROMPT_CAPTACAO_SOCIAL_FACEBOOK_TENDENCIAS_2026-04-30.md` com regra de ouro: online nao significa certo; sem prova social o card deve degradar para radar editorial, nunca fingir tendencia.
+- `script.js`: `renderDailyTrendingBuzz` passa a priorizar `/api/social-trends`; `resolveBuzzNetworkContext` so rotula rede quando ha `externalSource/socialPlatform/topicGroup` social; caso contrario usa contexto neutro. Textos publicos passam a separar radar editorial de sinal social real. `pickMonthlyDynamicStories` removeu tarefas internas dos agentes e aceita tendencias externas no pool.
+- `server.js`: `/api/social-trends` ganhou fonte `facebook-public-pages` configuravel por `FACEBOOK_GRAPH_ACCESS_TOKEN` + `FACEBOOK_PUBLIC_PAGE_IDS`; sem configuracao, reporta configuracao pendente em vez de inventar posts. Tendencias agora recebem divisao sugerida (`Politica`, `Utilidade Publica`, `Cultura`, `Economia`, `Esporte`, `Acre / Governo`, `Cotidiano`).
 - `index.html`: cache-bust de `script.js` atualizado para `20260430-social-truth-facebook1`.
-- Validacoes: `node --check script.js`, `node --check server.js`, endpoint temporario em `127.0.0.1:4141/api/social-trends` incluindo relatorio Facebook offline/config faltando e divisoes sugeridas, Playwright DOM na home com `hasRotinas=false` e `hasFakeTemp=false`, captura `output/playwright/home-social-truth-facebook-20260430.png`, e `npm run review:team` com `totalIssues=0`.
+- Validacoes: `node --check script.js`, `node --check server.js`, endpoint temporario em `127.0.0.1:4141/api/social-trends` incluindo relatorio Facebook com configuracao pendente e divisoes sugeridas, Playwright DOM na home com `hasRotinas=false` e `hasFakeTemp=false`, captura `output/playwright/home-social-truth-facebook-20260430.png`, e `npm run review:team` com `totalIssues=0`.
 - Observacao: o servidor local que ja estava rodando em `3000` precisa ser reiniciado para carregar o `server.js` novo; nao houve push.
 
 ## Atualizacao rapida 2026-04-30 - Home sem lote velho nas outras areas

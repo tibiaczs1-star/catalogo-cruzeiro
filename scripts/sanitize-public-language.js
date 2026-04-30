@@ -60,7 +60,8 @@ const KNOWN_SOURCE_URL_TITLES = new Map([
   ["turtle-beach-mc7-gaming-mouse-touchscreen-command-series", "Mouse gamer da Turtle Beach aposta em tela sensível ao toque"],
   ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"],
   ["microsoft-windows-update-pause-indefinitely", "Microsoft deve facilitar pausa nas atualizações do Windows"],
-  ["how-project-maven-taught-the-military-to-love-ai", "Como o Project Maven aproximou os militares da IA"]
+  ["how-project-maven-taught-the-military-to-love-ai", "Como o Project Maven aproximou os militares da IA"],
+  ["instagram-says-it-doesnt-want-your-tweet-round-ups", "Instagram quer reduzir republicações de tuítes"]
 ]);
 const ENGLISH_SOURCE_FRAGMENT_PATTERN =
   /\b(?:Microsoft will let|Alex Jones has uncovered|Xreal’s best|Xreal's best|360-degree cameras have|Cybercab goes into production|Skylight’s color-coded|Skylight's color-coded|Acclaimed Japanese director)\b/i;
@@ -220,6 +221,11 @@ function translateKnownEnglishText(text, kind = "summary") {
     return "Como o Project Maven aproximou os militares da IA.";
   }
 
+  if (/instagram says it doesn[’']t want your tweet round ups/i.test(value)) {
+    if (kind === "title") return "Instagram quer reduzir republicações de tuítes";
+    return "Instagram quer reduzir republicações de tuítes e conteúdos copiados de baixo esforço na plataforma.";
+  }
+
   return null;
 }
 
@@ -288,6 +294,13 @@ function ensurePublicLabels(item) {
 function sanitizeEnglishSourceFields(item) {
   if (!isEnglishSourceItem(item)) return;
 
+  if (typeof item.categoryKey === "string" && publicTextLooksEnglish(item.categoryKey)) {
+    const categoryText = [item.category, item.title, item.sourceUrl, item.url, item.slug].join(" ");
+    item.categoryKey = /instagram|tiktok|youtube|tweet|repost|social/i.test(categoryText)
+      ? "social"
+      : "cultura";
+  }
+
   ["lede", "summary", "description", "displaySummary"].forEach((key) => {
     const value = item[key];
     if (typeof value !== "string") return;
@@ -342,6 +355,7 @@ function sanitizeBodyValue(value, item) {
   const title = typeof item?.title === "string" ? item.title.trim() : "";
   const sourceLabel = typeof item?.sourceLabel === "string" ? item.sourceLabel.trim() : "";
   const titlePt = translateKnownEnglishText(title, "title");
+  const inferredTitlePt = inferPublicTitle(item);
 
   if (title && publicTextLooksEnglish(title) && titlePt) {
     const pattern = new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
@@ -355,6 +369,10 @@ function sanitizeBodyValue(value, item) {
 
   if (titlePt && /a base desta noticia sobre\s*\./i.test(text)) {
     text = text.replace(/(a base desta noticia sobre)\s*\./i, `$1 ${titlePt}.`);
+  }
+
+  if (/instagram says it doesn[’']t want your tweet round ups/i.test(text)) {
+    text = text.replace(/instagram says it doesn[’']t want your tweet round ups/gi, inferredTitlePt);
   }
 
   if (publicTextLooksEnglish(text)) {

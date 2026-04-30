@@ -5225,8 +5225,8 @@ async function fetchFacebookTrendSource(source) {
         source: source.id,
         platform: source.platform,
         ok: false,
-        error: "facebook_graph_config_missing",
-        hint: "Configure FACEBOOK_GRAPH_ACCESS_TOKEN e FACEBOOK_PUBLIC_PAGE_IDS para captar páginas públicas.",
+        error: "facebook_graph_config_pending",
+        hint: "Configure FACEBOOK_GRAPH_ACCESS_TOKEN e FACEBOOK_PUBLIC_PAGE_IDS para captar páginas públicas reais.",
         url: source.url
       }
     };
