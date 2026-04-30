@@ -6834,6 +6834,51 @@ const getBuzzNetworkContexts = () => {
     .sort((left, right) => right.relevance - left.relevance);
 };
 
+const getSocialOpinionStats = (source = {}) => {
+  const bucket =
+    source && typeof source.opinionStats === "object" && source.opinionStats
+      ? source.opinionStats
+      : source && typeof source === "object"
+        ? source
+        : null;
+
+  if (!bucket) {
+    return null;
+  }
+
+  const positiveCount = Math.max(0, Number(bucket.positiveCount || 0));
+  const neutralCount = Math.max(0, Number(bucket.neutralCount || 0));
+  const negativeCount = Math.max(0, Number(bucket.negativeCount || 0));
+  const sampledComments = Math.max(
+    0,
+    Number(bucket.sampledComments || bucket.commentSample || bucket.commentCount || 0)
+  );
+  const totalCount = Math.max(sampledComments, positiveCount + neutralCount + negativeCount);
+
+  if (!totalCount) {
+    return null;
+  }
+
+  let dominantLabel = String(bucket.dominantLabel || "").trim();
+  if (!dominantLabel) {
+    if (positiveCount > negativeCount && positiveCount > neutralCount) {
+      dominantLabel = "apoio maior";
+    } else if (negativeCount > positiveCount && negativeCount > neutralCount) {
+      dominantLabel = "rejeição maior";
+    } else {
+      dominantLabel = "leitura dividida";
+    }
+  }
+
+  return {
+    sampledComments: totalCount,
+    positiveCount,
+    neutralCount,
+    negativeCount,
+    dominantLabel
+  };
+};
+
 const getBuzzSocialEvidence = (article = {}) => {
   const embeddedEvidence = article.socialEvidence || article.socialSignal || null;
   if (embeddedEvidence) {
@@ -6864,6 +6909,7 @@ const getBuzzSocialEvidence = (article = {}) => {
           ? ["post público", "comentários", "engajamento"]
           : ["assunto citado", "circulação pública", "sinal em checagem"],
       engagement: Number(embeddedEvidence.engagement || 0),
+      opinionStats: getSocialOpinionStats(embeddedEvidence),
       sourceName: embeddedEvidence.sourceName || "",
       sourceUrl: embeddedEvidence.sourceUrl || "",
       title: embeddedEvidence.title || ""
@@ -6920,10 +6966,15 @@ const getBuzzSocialEvidence = (article = {}) => {
     hasTrendSignal: true,
     evidenceKind,
     network,
+    engagement: Number(article.facebookEngagement || article.engagement || 0),
     signals:
       evidenceKind === "public-post"
         ? socialSignals[network] || ["sinal público", "comentários", "compartilhamento"]
-        : ["assunto citado", "circulação pública", "sinal em checagem"]
+        : ["assunto citado", "circulação pública", "sinal em checagem"],
+    opinionStats: getSocialOpinionStats(article),
+    sourceName: article.sourceName || article.sourceTitle || "",
+    sourceUrl: article.sourceUrl || article.url || article.link || "",
+    title: article.title || ""
   };
 };
 
@@ -6936,7 +6987,10 @@ const getNeutralBuzzNetworkContext = () => ({
   trust: 72,
   utility: 70,
   relevance: 58,
-  hasSocialEvidence: false
+  hasSocialEvidence: false,
+  hasTrendSignal: false,
+  evidenceKind: "editorial",
+  opinionStats: null
 });
 
 const socialSignalMatchStopwords = new Set([
@@ -7088,6 +7142,7 @@ const attachSocialSignalToArticle = (article = {}, signalItem = {}, matchScore =
         ? "public-post"
         : "trend-signal",
       engagement: Number(signalItem.facebookEngagement || 0),
+      opinionStats: getSocialOpinionStats(signalItem),
       matchScore
     }
   };
@@ -7277,11 +7332,42 @@ const isBrazilBuzzArticle = (article = {}) => {
   );
 };
 
+const isConversationDrivenBuzzArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const haystack = normalizeText(
+    [
+      normalizedArticle.title,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.category,
+      normalizedArticle.topicGroup,
+      normalizedArticle.sourceName
+    ].join(" ")
+  );
+  const hasConversationSignal =
+    /\b(repercuss|polem|polêm|debate|critica|crítica|revolta|viral|coment|rede|influenc|festa|show|agenda|cantor|cantora|artista|celebridade|fofoca)\b/.test(
+      haystack
+    );
+  const hasRelevantContext =
+    hasClearLocalReaderImpact(normalizedArticle) ||
+    /\b(cultura|show|festival|festa|agenda|evento|artista|cantor|cantora|celebridade|comunidade|bairro)\b/.test(
+      haystack
+    );
+
+  return (
+    normalizedArticle.title &&
+    isBrazilBuzzArticle(normalizedArticle) &&
+    shouldUseNationalPoliticsInHotSurface(normalizedArticle) &&
+    hasConversationSignal &&
+    hasRelevantContext
+  );
+};
+
 const resolveBuzzNetworkContext = (article = {}, index = 0) => {
   const contexts = getBuzzNetworkContexts();
   const evidence = getBuzzSocialEvidence(article);
 
-  if (!evidence.hasSocialEvidence) {
+  if (!evidence.hasSocialEvidence && !evidence.hasTrendSignal) {
     return getNeutralBuzzNetworkContext();
   }
 
@@ -7690,10 +7776,6 @@ const buildBuzzAgentOpinion = ({
 };
 
 const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, agentPulse = null) => {
-  const haystack = normalizeText(
-    [article.title, article.summary, article.lede, article.category, article.topicGroup].join(" ")
-  );
-  const seed = getDailyIndexSeed(`${article.title || "buzz"}:${index}`);
   const trustSignal = Number(networkContext.trust || networkContext.relevance || 64);
   const utilitySignal = Number(networkContext.utility || 64);
   const networkName = networkContext.network || "rede";
@@ -7703,29 +7785,43 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
   const hasSocialEvidence = networkContext.hasSocialEvidence === true;
   const hasTrendSignal = networkContext.hasTrendSignal === true;
   const evidenceKind = networkContext.evidenceKind || (hasSocialEvidence ? "public-post" : hasTrendSignal ? "trend-signal" : "editorial");
+  const opinionStats =
+    getSocialOpinionStats(networkContext) ||
+    getSocialOpinionStats(article.socialEvidence || article.socialSignal || article);
   const baseSignalStrength = hasSocialEvidence
     ? clampBuzzPercent(34 + Math.log10(Number(networkContext.engagement || 0) + 1) * 18 + (trustSignal - 60) * 0.16, 24, 92)
     : hasTrendSignal
       ? clampBuzzPercent(Number(networkContext.relevance || 58) + (trustSignal - 62) * 0.08, 24, 78)
       : clampBuzzPercent(Math.max(trustSignal, utilitySignal) - 6, 24, 84);
+  const socialTitle = truncateCopy(
+    article.socialEvidence?.title || article.socialSignal?.title || article.title || "assunto nas redes",
+    76
+  );
+  const hashtagLabel = [
+    ...(Array.isArray(article.socialEvidence?.hashtags) ? article.socialEvidence.hashtags : []),
+    ...(Array.isArray(article.hashtags) ? article.hashtags : [])
+  ]
+    .filter(Boolean)
+    .slice(0, 2)
+    .join(" ");
 
   if (evidenceKind !== "public-post") {
     const journalisticVoices = [
       {
-        label: "fonte",
-        text: `${sourceName} sustenta a notícia-base; o portal trata o link original como ponto de partida da leitura.`,
+        label: "tema",
+        text: `${socialTitle} entrou na conversa e só apareceu aqui porque foi ligado a uma matéria-base real.`,
         weight: clampBuzzPercent(baseSignalStrength + 14, 28, 86)
       },
       {
-        label: hasTrendSignal ? "sinal" : "checagem",
+        label: hasTrendSignal ? "onde pegou" : "base",
         text: hasTrendSignal
-          ? `O tema apareceu em ${networkName}, mas isso entra como sinal inicial e não como aprovação pública concluída.`
-          : `Ainda não há leitura pública confiável nas redes; o card fica no radar editorial até surgir evidência verificável.`,
+          ? `O sinal aberto veio de ${networkName}${hashtagLabel ? ` (${hashtagLabel})` : ""}; isso mostra circulação, não maioria medida de opinião.`
+          : `${sourceName} sustenta a notícia. Sem trilha pública aberta suficiente, ela fica como radar e não como polêmica fechada.`,
         weight: clampBuzzPercent(baseSignalStrength, 24, 78)
       },
       {
-        label: "próximo passo",
-        text: `Cruzar impacto local, documento, serviço e fala oficial antes de resumir "${subject}" como polêmica consolidada.`,
+        label: "o que falta",
+        text: `Ainda falta prova pública melhor para dizer se "${subject}" foi aprovado, rejeitado ou só citado sem força real.`,
         weight: clampBuzzPercent(baseSignalStrength - 8, 20, 72)
       }
     ];
@@ -7733,194 +7829,107 @@ const buildBuzzAudiencePulse = (article = {}, networkContext = {}, index = 0, ag
     return {
       meter: baseSignalStrength,
       satisfaction: baseSignalStrength,
-      meterLabel: hasTrendSignal ? "força do sinal" : "relevância editorial",
-      kicker: hasTrendSignal ? `sinal em circulação em ${networkName.toLowerCase()}` : "radar editorial em checagem",
-      debateAxis: hasTrendSignal ? "circulação x impacto local" : "fonte x impacto local",
-      publicMood: hasTrendSignal ? "tema circulando, sem aprovação medida" : "fonte confirmada, sinal em espera",
-      captureLabel: hasTrendSignal ? "sinal público em checagem" : "fonte em acompanhamento",
+      meterLabel: hasTrendSignal ? "calor do assunto" : "força editorial",
+      kicker: hasTrendSignal ? `assunto em alta em ${networkName.toLowerCase()}` : "matéria-base em observação",
+      debateAxis: hasTrendSignal ? "assunto em alta x opinião medida" : "fonte x impacto local",
+      publicMood: hasTrendSignal ? "repercussão visível, maioria ainda não medida" : "fonte confirmada, sem conversa pública forte",
+      captureLabel: hasTrendSignal ? "assunto puxado por rede aberta" : "matéria confirmada, sem termômetro público",
       signalLabel: hasTrendSignal ? `${networkName}: ${primarySignal}` : "fonte confirmada",
       sourceContext: hasTrendSignal
-        ? `O tema apareceu em listas públicas de ${networkName}; ele só vira caso do portal quando encontra matéria real, data e efeito concreto para o leitor.`
-        : `${sourceName} sustenta a notícia. Sem sinal público verificável, o card não vende tendência nem opinião pronta.`,
-      agentContext:
-        "O que importa: ligar o sinal à notícia publicada, ao território e ao que realmente muda para quem lê.",
+        ? `O tema apareceu em listas públicas de ${networkName} e foi amarrado a uma matéria real antes de entrar na home.`
+        : `${sourceName} sustenta a notícia. Sem conversa pública verificável, o card não vende aprovação nem rejeição.`,
+      agentContext: hasTrendSignal
+        ? "A leitura certa aqui é abrir a notícia ligada ao assunto antes de transformar o burburinho em conclusão."
+        : "O que importa: manter o caso como leitura de notícia até existir base pública aberta suficiente para virar conversa do dia.",
       agentEvaluation: hasTrendSignal
-        ? "Próximo cuidado: não confundir assunto citado na rede com fato confirmado ou termômetro de aprovação."
-        : "Próximo cuidado: seguir na fonte e só subir o tom quando houver evidência pública verificável.",
+        ? "Próximo cuidado: diferenciar assunto citado, calor da rede e aprovação real do público."
+        : "Próximo cuidado: seguir na fonte e só subir o tom quando houver conversa pública verificável.",
       voices: journalisticVoices
     };
   }
 
-  const profiles = {
-    employment: {
-      base: 36,
-      kicker: `escuta crítica em ${networkName.toLowerCase()}`,
-      debateAxis: "impacto real x discurso oficial",
-      publicMood: "satisfação baixa, cobrança alta",
-      captureLabel: "três grupos de fala em tensão",
-      context: `Contexto público: separar anúncio, consequência prática e cobrança de dados antes de opinar sobre "${subject}".`,
-      evaluation:
-        "Leitura pública: começar pelo impacto humano, checar números e evitar tratar decisão empresarial como espetáculo.",
-      voices: [
-        ["preocupação", "Leitores cobram efeito concreto: emprego, renda e continuidade do serviço vêm antes do discurso bonito."],
-        ["defesa", "Uma parte aceita mudança se houver plano claro, prazo e explicação sem frase pronta."],
-        ["cobrança", "A pergunta que ficou é simples: quem perde, quem ganha e qual dado confirma a promessa?"]
-      ]
-    },
-    strategy: {
-      base: 52,
-      kicker: `percepção dividida em ${networkName.toLowerCase()}`,
-      debateAxis: "expectativa x prova prática",
-      publicMood: "satisfação moderada, confiança em teste",
-      captureLabel: "apoio, dúvida e cobrança mapeados",
-      context: `Contexto público: explicar o que muda para o público e onde ainda falta evidência sobre "${subject}".`,
-      evaluation:
-        "Leitura pública: a conclusão deve pesar promessa, histórico e benefício real para o leitor.",
-      voices: [
-        ["apoio", "Parte do público vê chance de renovação se a mudança vier acompanhada de entrega visível."],
-        ["dúvida", "Outra parte segura o entusiasmo porque já viu anúncio grande sem resultado prático."],
-        ["cobrança", "O ponto comum é pedido por exemplo, prazo e comparação com o que existia antes."]
-      ]
-    },
-    journalism: {
-      base: 60,
-      kicker: `escuta comentada em ${networkName.toLowerCase()}`,
-      debateAxis: "formato x credibilidade",
-      publicMood: "satisfação cautelosa",
-      captureLabel: "preferências de leitura cruzadas",
-      context: `Contexto público: cruzar reação de formato, pedido de apuração e utilidade para quem acompanha "${subject}".`,
-      evaluation:
-        "Leitura pública: defender clareza, fonte aberta e ritmo humano, sem transformar formato em fetiche.",
-      voices: [
-        ["apoio", "Há leitores que gostam de formato mais direto quando ele ajuda a entender rápido."],
-        ["critério", "Outro grupo pede fonte, contexto e apuração para não virar só embalagem de rede."],
-        ["hábito", "Também aparece gente que prefere texto e resumo bem editado antes de vídeo longo."]
-      ]
-    },
-    family: {
-      base: 54,
-      kicker: `tema sensível em ${networkName.toLowerCase()}`,
-      debateAxis: "proteção x autonomia",
-      publicMood: "satisfação dividida",
-      captureLabel: "famílias, usuários e críticos separados",
-      context: `Contexto público: tratar proteção, excesso de controle e rotina real das famílias no mesmo quadro sobre "${subject}".`,
-      evaluation:
-        "Leitura pública: reconhecer o medo legítimo sem vender controle como solução mágica.",
-      voices: [
-        ["famílias", "Pais e responsáveis querem menos exposição e mais ferramenta compreensível."],
-        ["autonomia", "Usuários lembram que controle sem conversa pode só deslocar o problema."],
-        ["equilíbrio", "A síntese pede educação digital, regra clara e transparência da plataforma."]
-      ]
-    },
-    service: {
-      base: 66,
-      kicker: `serviço observado em ${networkName.toLowerCase()}`,
-      debateAxis: "utilidade x prazo",
-      publicMood: "satisfação útil, cobrança por resposta",
-      captureLabel: "moradores, usuários e cobrança reunidos",
-      context: `Contexto público: priorizar endereço, prazo, impacto no bairro e confirmação oficial antes de opinar sobre "${subject}".`,
-      evaluation:
-        "Leitura pública: o caso ganha força quando vira serviço, com orientação clara e pergunta objetiva ao responsável.",
-      voices: [
-        ["uso prático", "Quem depende do serviço valoriza informação simples: onde, quando e o que muda."],
-        ["cobrança", "A parte crítica quer prazo, responsável e retorno público, não só aviso genérico."],
-        ["experiência", "Moradores ajudam a completar o quadro quando contam como aquilo aparece na rotina."]
-      ]
-    },
-    commerce: {
-      base: 57,
-      kicker: `interesse com ressalva em ${networkName.toLowerCase()}`,
-      debateAxis: "oportunidade x exagero",
-      publicMood: "satisfação instável",
-      captureLabel: "interesse, comparação e desconfiança",
-      context: `Contexto público: separar desejo de compra, comparação de preço e risco de hype em torno de "${subject}".`,
-      evaluation:
-        "Leitura pública: apontar valor real, limite da oferta e cuidado com propaganda disfarçada.",
-      voices: [
-        ["interesse", "Uma parte entra pelo benefício imediato e quer saber se vale a pena agora."],
-        ["comparação", "Outra parte compara preço, histórico e experiência de quem já testou."],
-        ["desconfiança", "O ruído aparece quando a conversa parece empurrada por hype, não por utilidade."]
-      ]
-    },
-    default: {
-      base: 56,
-      kicker: `escuta pública em ${networkName.toLowerCase()}`,
-      debateAxis: "apoio x dúvida x cobrança",
-      publicMood: "satisfação moderada, leitura aberta",
-      captureLabel: "opiniões captadas em três camadas",
-      context: `Contexto público: ler "${subject}" por utilidade, incômodo e dúvida antes de escrever uma avaliação autoral.`,
-      evaluation:
-        "Leitura pública: explicar por que importa, para quem muda algo e o que falta confirmar.",
-      voices: [
-        ["apoio", "Um grupo vê valor no tema porque ele toca rotina, consumo ou informação útil."],
-        ["cautela", "Outro grupo evita conclusão rápida e pede dado melhor antes de aderir ao clima da rede."],
-        ["pergunta", "A dúvida recorrente é o que muda de fato para o leitor quando a repercussão passa."]
-      ]
-    }
-  };
+  if (opinionStats?.sampledComments) {
+    const totalCount = Math.max(1, Number(opinionStats.sampledComments || 0));
+    const positiveCount = Number(opinionStats.positiveCount || 0);
+    const neutralCount = Number(opinionStats.neutralCount || 0);
+    const negativeCount = Number(opinionStats.negativeCount || 0);
+    const approvalPercent = clampBuzzPercent((positiveCount / totalCount) * 100, 0, 100);
+    const rejectionPercent = clampBuzzPercent((negativeCount / totalCount) * 100, 0, 100);
+    const cautionPercent = clampBuzzPercent((neutralCount / totalCount) * 100, 0, 100);
+    const dominantMood =
+      positiveCount > negativeCount && positiveCount > neutralCount
+        ? "apoio maior na amostra lida"
+        : negativeCount > positiveCount && negativeCount > neutralCount
+          ? "rejeição maior na amostra lida"
+          : "amostra dividida ou cautelosa";
 
-  let profile = profiles.default;
-
-  if (/\b(layoff|demiss|corte|job|staff)\b/.test(haystack)) {
-    profile = profiles.employment;
-  } else if (/\b(reevaluat|reavali|future|memo|strategy|xbox|mudanca|estrategia)\b/.test(haystack)) {
-    profile = profiles.strategy;
-  } else if (/\b(journalism|jornalismo|video-first|independent|credibil|news|noticia|apuracao)\b/.test(haystack)) {
-    profile = profiles.journalism;
-  } else if (/\b(parental|famil|healthy digital habits|shorts|crianca|adolescente)\b/.test(haystack)) {
-    profile = profiles.family;
-  } else if (/\b(tempo|cheia|leilao|edital|posto|calendario|fiscalizacao|ubs|hospital|educacao|servico|serviço|agenda)\b/.test(haystack)) {
-    profile = profiles.service;
-  } else if (/\b(sale|deal|promo|desconto|produto|speaker|oferta|compra|preco|preço)\b/.test(haystack)) {
-    profile = profiles.commerce;
+    return {
+      meter: approvalPercent,
+      satisfaction: approvalPercent,
+      sampledComments: totalCount,
+      meterLabel: "aprovação na amostra",
+      kicker: `comentários públicos lidos em ${networkName.toLowerCase()}`,
+      debateAxis: "apoio x rejeição x cautela",
+      publicMood: dominantMood,
+      captureLabel: `${totalCount} comentários públicos lidos`,
+      signalLabel: `${networkName}: comentários públicos`,
+      sourceContext: `${sourceName} sustenta a matéria-base; a leitura pública usa uma amostra real de comentários do post aberto.`,
+      agentContext:
+        "O que importa: ler a maioria da amostra sem soltar a matéria da mão e sem vender vontade absoluta do público.",
+      agentEvaluation:
+        "Próximo cuidado: tratar o resultado como fotografia do dia; se a amostra crescer, o termômetro pode mudar.",
+      voices: [
+        {
+          label: "apoio",
+          text: `${positiveCount} comentários lidos puxam concordância, defesa ou aprovação do tema.`,
+          weight: approvalPercent
+        },
+        {
+          label: "cautela",
+          text: `${neutralCount} comentários seguram o tom, pedem contexto melhor ou esperam mais dado antes de fechar posição.`,
+          weight: cautionPercent
+        },
+        {
+          label: "rejeição",
+          text: `${negativeCount} comentários lidos discordam, criticam ou reagem mal ao assunto.`,
+          weight: rejectionPercent
+        }
+      ]
+    };
   }
 
-  const satisfaction = clampBuzzPercent(
-    profile.base + ((seed % 13) - 6) + (trustSignal - 64) * 0.1 + (utilitySignal - 64) * 0.08,
-    24,
-    84
-  );
-  const supportWeight = clampBuzzPercent(satisfaction + ((seed % 9) - 4), 22, 84);
-  const concernWeight = clampBuzzPercent(92 - satisfaction + (((seed >> 1) % 11) - 5), 18, 78);
-  const questionWeight = clampBuzzPercent(38 + ((seed >> 2) % 23), 18, 66);
-  const voiceWeights = [supportWeight, concernWeight, questionWeight];
-  const fallbackVoices = profile.voices.map(([label, text], voiceIndex) => ({
-    label,
-    text,
-    weight: voiceWeights[voiceIndex] || questionWeight
-  }));
-  const sourceContext = hasSocialEvidence
-    ? pickBuzzCopy(
-        [
-          `Sinal público captado em ${networkName}; a notícia fica ligada à fonte antes de virar conclusão.`,
-          `A conversa aparece em ${networkName}, mas o card separa repercussão, fonte e impacto prático.`,
-          `O sinal veio de ${primarySignal}; a leitura pública entra com cautela e fonte aberta.`
-        ],
-        seed,
-        index
-      )
-    : `${sourceName} sustenta a notícia. O card entra como radar editorial e não vende tendência sem sinal público verificável.`;
-  const publicContext = hasSocialEvidence
-    ? `O que importa: entender o motivo da repercussão, quem é afetado e que dado ainda precisa de confirmação.`
-    : `O que importa: a fonte existe, mas ainda não há sinal social público suficiente para chamar de conversa em alta.`;
-  const publicReading = hasSocialEvidence
-    ? `Próximo cuidado: separar apoio, dúvida e cobrança antes de concluir o sentido da repercussão.`
-    : `Próximo cuidado: manter em acompanhamento, cruzar fonte e só subir o tom com prova pública nas redes.`;
-
   return {
-    meter: satisfaction,
-    satisfaction,
-    kicker: hasSocialEvidence ? profile.kicker : "radar editorial em checagem",
-    debateAxis: hasSocialEvidence ? profile.debateAxis : "fonte x impacto local",
-    publicMood: hasSocialEvidence
-      ? profile.publicMood
-      : "radar editorial em acompanhamento",
-    captureLabel: hasSocialEvidence ? "sinal público confirmado" : "fonte em acompanhamento",
-    signalLabel: hasSocialEvidence ? primarySignal : "fonte confirmada",
-    sourceContext,
-    agentContext: publicContext,
-    agentEvaluation: publicReading,
-    voices: fallbackVoices
+    meter: baseSignalStrength,
+    satisfaction: baseSignalStrength,
+    sampledComments: 0,
+    meterLabel: "calor da repercussão",
+    kicker: `post público em ${networkName.toLowerCase()}`,
+    debateAxis: "interação x opinião medida",
+    publicMood: "conversa real aberta, maioria ainda não lida",
+    captureLabel: "post público com interação aberta",
+    signalLabel: `${networkName}: ${primarySignal}`,
+    sourceContext: `${sourceName} sustenta a matéria-base e o post é público, mas ainda não há amostra suficiente de comentários para falar em maioria.`,
+    agentContext:
+      "O que importa: usar o calor como pista de repercussão e não como aprovação pronta do público.",
+    agentEvaluation:
+      "Próximo cuidado: ler comentários públicos antes de chamar o caso de apoiado ou rejeitado.",
+    voices: [
+      {
+        label: "post base",
+        text: `${socialTitle} puxou interação aberta e ficou ligado a uma matéria real antes de entrar na home.`,
+        weight: clampBuzzPercent(baseSignalStrength + 10, 28, 86)
+      },
+      {
+        label: "calor",
+        text: `As interações mostram que o assunto pegou em ${networkName}, mas o volume sozinho não diz se a maioria aprovou ou rejeitou.`,
+        weight: baseSignalStrength
+      },
+      {
+        label: "o que falta",
+        text: `Ainda falta leitura suficiente de comentários públicos para medir apoio, rejeição ou divisão real sobre "${subject}".`,
+        weight: clampBuzzPercent(baseSignalStrength - 8, 20, 72)
+      }
+    ]
   };
 };
 
@@ -7992,6 +8001,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
   const pulse = buildBuzzAudiencePulse(article, networkContext, index, agentPulse);
   const hasSocialEvidence = networkContext.hasSocialEvidence === true;
   const hasTrendSignal = networkContext.hasTrendSignal === true;
+  const opinionSampleSize = Number(networkContext.opinionStats?.sampledComments || pulse.sampledComments || 0);
   const sourceStatus = getPublicSourceStatusBadge(article, networkContext);
   const photoUrl = getDailyBuzzDisplayImageUrl(article, index);
   const avatarUrl = sanitizeImageUrl(article.sourceImageUrl) || photoUrl;
@@ -8015,9 +8025,11 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
     220
   );
   const networkLabel = hasSocialEvidence
-    ? `${networkContext.network || "Rede"} • fonte pública`
+    ? opinionSampleSize > 0
+      ? `${networkContext.network || "Rede"} • conversa medida`
+      : `${networkContext.network || "Rede"} • post público`
     : hasTrendSignal
-      ? `${networkContext.network || "Rede"} • sinal em checagem`
+      ? `${networkContext.network || "Rede"} • assunto em alta`
       : `radar editorial • caso ${index + 1}`;
   const signalLine = hasSocialEvidence || hasTrendSignal
     ? `sinal: ${pulse.signalLabel || "registro público"}`
@@ -8075,7 +8087,7 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
 
       <div class="buzz-reaction-box buzz-public-capture" aria-label="Captação pública e contexto">
         <div class="buzz-capture-head">
-          <span>${hasSocialEvidence ? "captação pública diversa" : hasTrendSignal ? "sinal público" : "radar editorial"}</span>
+          <span>${hasSocialEvidence ? (opinionSampleSize > 0 ? "conversa pública" : "post público") : hasTrendSignal ? "assunto em alta" : "radar editorial"}</span>
           <strong>${escapeHtml(pulse.captureLabel || "vozes separadas")}</strong>
         </div>
         <p class="buzz-source-context">${escapeHtml(pulse.sourceContext || "Sinais públicos separados antes da avaliação.")}</p>
@@ -8106,6 +8118,32 @@ const buildDailyInfluencerBuzzCard = (item = {}, index = 0, agentPulse = null) =
   `;
 };
 
+const buildDailyBuzzEmptyState = (signalItems = []) => {
+  const labels = signalItems
+    .slice(0, 3)
+    .map((item) => item.title || item.hashtags?.[0] || item.socialPlatform || "")
+    .filter(Boolean)
+    .map((label) => `<span>${escapeHtml(truncateCopy(label, 24))}</span>`)
+    .join("");
+
+  return `
+    <article class="trending-card influencer-buzz-card opinion-buzz-card buzz-empty-state reveal">
+      <span class="trend-badge hot">em observação</span>
+      <div class="influencer-buzz-copy">
+        <p class="buzz-kicker">sem maioria pública medida por enquanto</p>
+        <h3>Esta área só sobe quando houver conversa pública real ligada a uma matéria-base.</h3>
+        <p>
+          Quando entrar post público aberto, comentário suficiente ou assunto com ligação clara à notícia,
+          o card volta com calor de repercussão e, se der para medir, termômetro de aprovação.
+        </p>
+      </div>
+      <div class="buzz-inline-meta" aria-label="Assuntos monitorados agora">
+        ${labels || "<span>monitorando Facebook, Instagram e X/Twitter</span>"}
+      </div>
+    </article>
+  `;
+};
+
 const rerenderEditorialRemainderSurfaces = () => {
   window.setTimeout(() => {
     renderArchiveHighlights();
@@ -8127,16 +8165,31 @@ const renderDailyTrendingBuzz = async (options = {}) => {
     ...liveBuzzItems,
     ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ]);
+  const socialCases = buildSocialSignalLinkedArticles(socialTrendItems, newsroomPool, {
+    limit: 6,
+    minScore: 34,
+    strictLocal: true
+  });
   const reservedKeys = buildReservedArticleKeys(["dailyBuzz"]);
   const reservedImages = buildReservedArticleImageKeys(["dailyBuzz"]);
-  const socialCases = buildSocialSignalLinkedArticles(socialTrendItems, newsroomPool, {
-    limit: 3,
-    minScore: 30
+  const filteredSocialCases = socialCases.filter((item) => {
+    const key = getArticleUsageKey(item);
+    const imageKey = getArticleImageKey(item);
+    if (!key || reservedKeys.has(key) || (imageKey && reservedImages.has(imageKey))) {
+      return false;
+    }
+
+    reservedKeys.add(key);
+    if (imageKey) {
+      reservedImages.add(imageKey);
+    }
+    return true;
   });
+  const measuredCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind === "public-post");
+  const signalCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind !== "public-post");
   const liveCases = dedupeNewsItems(liveBuzzItems)
     .map((item) => normalizeRuntimeArticle(item))
-    .filter(isBrazilBuzzArticle)
-    .filter(shouldUseNationalPoliticsInHotSurface)
+    .filter(isConversationDrivenBuzzArticle)
     .filter((item) => item.title && (item.sourceUrl || item.slug))
     .sort((left, right) =>
       compareEditorialFlowArticles(left, right, {
@@ -8157,18 +8210,15 @@ const renderDailyTrendingBuzz = async (options = {}) => {
       }
       return true;
     })
-    .slice(0, 6);
-  const selectedPool = dedupeNewsItems([...socialCases, ...liveCases]);
-
-  const selectedCases =
-    selectedPool.length >= 6
-      ? selectedPool.slice(0, 6)
-      : [...selectedPool, ...pickDailyItems(getBuzzFallbackItems(), 6 - selectedPool.length, 31)].slice(0, 6);
+    .slice(0, 3);
+  const selectedCases = dedupeNewsItems([...measuredCases, ...signalCases, ...liveCases]).slice(0, 6);
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
-  trendingBuzzGrid.innerHTML = selectedCases
-    .map((item, itemIndex) => buildDailyInfluencerBuzzCard(item, itemIndex, agentPulse))
-    .join("");
+  trendingBuzzGrid.innerHTML = selectedCases.length
+    ? selectedCases
+        .map((item, itemIndex) => buildDailyInfluencerBuzzCard(item, itemIndex, agentPulse))
+        .join("")
+    : buildDailyBuzzEmptyState(socialTrendItems);
   reserveSurfaceArticles("dailyBuzz", selectedCases);
   registerArticleCardLinks(trendingBuzzGrid);
   rerenderEditorialRemainderSurfaces();
@@ -10244,6 +10294,21 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   const normalized = normalizeRuntimeArticle(article);
+  const safeTitle = truncateCopy(
+    normalized.title || normalized.sourceLabel || normalized.category || "Atualização social em acompanhamento",
+    118
+  );
+  const safeSummary = buildReadableCardSummary(
+    {
+      ...normalized,
+      displaySummary:
+        normalized.displaySummary ||
+        normalized.summary ||
+        normalized.lede ||
+        "Chamada social em atualização com leitura rápida e acesso direto à matéria."
+    },
+    132
+  );
   const linkNode = card.querySelector(".news-thumb");
   const tagNode = linkNode?.querySelector("span");
   const sourceNode = card.querySelector(".news-source");
@@ -10260,7 +10325,7 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (tagNode) {
-    tagNode.textContent = truncateCopy(normalized.category, 22);
+    tagNode.textContent = truncateCopy(normalized.category || normalized.eyebrow || "Social", 22);
   }
 
   if (sourceNode) {
@@ -10268,11 +10333,11 @@ const applySocialCardFromArticle = (card, article) => {
   }
 
   if (titleNode) {
-    titleNode.textContent = normalized.title;
+    titleNode.textContent = safeTitle;
   }
 
   if (copyNode) {
-    copyNode.textContent = truncateCopy(normalized.displaySummary || normalized.lede, 132);
+    copyNode.textContent = safeSummary;
   }
 
   if (footerSource) {
@@ -12176,22 +12241,37 @@ const buildFeedCard = (article) => {
   card.dataset.category = normalizeText(normalizedArticle.category);
 
   const href = buildArticleHref(normalizedArticle);
+  const safeTitle = truncateCopy(
+    normalizedArticle.title || normalizedArticle.sourceLabel || normalizedArticle.category || "Atualização em acompanhamento",
+    118
+  );
+  const safeSummary = buildReadableCardSummary(
+    {
+      ...normalizedArticle,
+      displaySummary:
+        normalizedArticle.displaySummary ||
+        normalizedArticle.summary ||
+        normalizedArticle.lede ||
+        "Resumo rápido da notícia com link aberto para seguir a leitura."
+    },
+    255
+  );
 
   thumb.className = `news-thumb ${normalizedArticle.previewClass}`;
   thumb.href = href;
-  thumb.setAttribute("aria-label", `Abrir noticia ${normalizedArticle.title}`);
+  thumb.setAttribute("aria-label", `Abrir noticia ${safeTitle}`);
   thumb.dataset.topic = normalizedArticle.category;
   applyThumbImage(thumb, normalizedArticle);
   applyArticleLinkAttrs(thumb, href);
 
-  chip.textContent = normalizedArticle.category;
+  chip.textContent = normalizedArticle.category || normalizedArticle.eyebrow || "geral";
   thumb.append(chip);
 
   source.className = "news-source";
   source.textContent = formatCrossedSourceMeta(normalizedArticle);
 
-  title.textContent = normalizedArticle.title;
-  summary.textContent = buildReadableCardSummary(normalizedArticle, 255);
+  title.textContent = safeTitle;
+  summary.textContent = safeSummary;
 
   category.textContent = formatCrossedSourceFooter(normalizedArticle);
   link.href = href;
