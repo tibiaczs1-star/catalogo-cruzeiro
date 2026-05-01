@@ -72,7 +72,7 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260501-home-fast-social1" />
+    <link rel="stylesheet" href="./styles.css?v=20260501-home-real-brasil2" />
   <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
   <link rel="stylesheet" href="./premium-clarity.css?v=20260430-matters-flow1" />
 </head>
@@ -713,9 +713,9 @@
               <div class="community-trend-tag-panel" aria-label="Marcadores em circulação">
                 <small>marcadores em circulação</small>
                 <div class="community-trend-tags" data-community-trend-tags>
-                  <span>#CZS</span>
-                  <span>#ValedoJurua</span>
-                  <span>#Acre</span>
+                  <span>Cruzeiro</span>
+                  <span>Vale do Juruá</span>
+                  <span>Acre</span>
                 </div>
               </div>
             </article>
@@ -2534,16 +2534,16 @@
         <section id="trending" class="section-block trending-shell">
           <div class="section-heading reveal">
             <div>
-              <p class="eyebrow">fofoca, treta e repercussão</p>
-              <h2>Fofocas & Polêmicas</h2>
+              <p class="eyebrow">notícias reais do dia</p>
+              <h2>Polêmicas do Brasil Hoje</h2>
             </div>
             <p>
-              O assunto que ferveu, quem está concordando, quem está batendo contra e o que ainda parece só barulho.
+              Notícias com fonte sobre o que movimenta o Brasil, com prioridade para Cruzeiro do Sul, Vale do Juruá e Acre quando houver assunto forte.
             </p>
           </div>
           <p class="trending-test-note">
-            Agora nas redes: manchetes curtas do que está repercutindo. É um termômetro de conversa,
-            não é notícia confirmada.
+            Aqui só entra chamada com fonte real. Quando o assunto vier das redes, ele precisa apontar
+            para uma notícia, fala pública ou repercussão verificável.
           </p>
 
           <div class="trending-grid">
@@ -2682,13 +2682,13 @@
           </div>
 
           <div class="trending-topics reveal">
-            <p class="topics-label">Hashtags em alta agora:</p>
+            <p class="topics-label">Assuntos que guiam a cobertura:</p>
             <div class="hashtag-list">
-              <button class="hashtag-chip">#CZS</button>
-              <button class="hashtag-chip">#ValedoJurua</button>
-              <button class="hashtag-chip">#AcreQueAma</button>
-              <button class="hashtag-chip">#Local</button>
-              <button class="hashtag-chip">#DesdeAqui</button>
+              <button class="hashtag-chip">Cruzeiro do Sul</button>
+              <button class="hashtag-chip">Vale do Juruá</button>
+              <button class="hashtag-chip">Acre</button>
+              <button class="hashtag-chip">Brasil</button>
+              <button class="hashtag-chip">Famosos e bastidores</button>
             </div>
           </div>
         </section>
@@ -2696,10 +2696,10 @@
         <section id="monthly" class="section-block month-shell" data-daily-agent-pulse>
           <div class="section-heading reveal">
             <div>
-              <p class="eyebrow">assuntos do dia</p>
+              <p class="eyebrow">Brasil e Juruá hoje</p>
               <h2>Celebridades & Polêmicas do Dia</h2>
             </div>
-            <p>Um resumo diário sobre quem chamou atenção nas redes e quais temas seguem em debate.</p>
+            <p>Um resumo diário com notícias reais sobre famosos, bastidores, falas fortes e temas que mexeram com o Brasil.</p>
           </div>
 
           <div class="month-grid">
@@ -3495,7 +3495,7 @@
         .then((response) => (response.ok ? response.json() : null))
         .catch(() => null);
     </script>
-    <script defer src="./script.js?v=20260501-home-fast-social1"></script>
+    <script defer src="./script.js?v=20260501-home-real-brasil2"></script>
     <script>
       (function () {
         const styles = [
@@ -3517,7 +3517,7 @@
           "./home-header-blue-restore.css?v=20260422a"
         ];
         const queue = [
-          "./startup-experience.js?v=20260501-home-fast-social1",
+          "./startup-experience.js?v=20260501-home-real-brasil1",
           "./sidebar-data.js?v=20260413a",
           "./sidebar-widgets-recovery.js?v=20260423a",
           "./social-rss-data.js?v=20260413a",
@@ -3547,6 +3547,7 @@
           for (const src of queue) {
             await loadScript(src);
           }
+          window.dispatchEvent(new Event("catalogo:deferred-news-ready"));
         };
         const start = () => window.setTimeout(run, 700);
         if (document.readyState === "complete") {

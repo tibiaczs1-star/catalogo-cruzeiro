@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-01T12:40:31.394Z",
+  "lastUpdatedAt": "2026-05-01T14:53:39.982Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -9000,6 +9000,21 @@
       ],
       "nextSteps": [],
       "notes": "Playwright local: antes DCL ~5,1s/load ~11,2s; depois mobile DCL ~1,3s/load ~2,9s. PubPaid fora do pacote."
+    },
+    {
+      "id": "2026-05-01-trocar-fofocas-polemicas-e-celebridades-do-dia-para-noticias-reais-do-dia-sem-ca",
+      "createdAt": "2026-05-01T14:53:39.982Z",
+      "updatedAt": "2026-05-01T14:53:39.982Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Usuario pediu que as areas de polemicas e celebridades passem a usar noticias reais do dia, em linguagem para publico leigo, remetendo a polemicas do Brasil e priorizando Vale do Jurua/Cruzeiro do Sul quando houver.",
+      "summary": "Trocar Fofocas/Polemicas e Celebridades do Dia para noticias reais do dia, sem cards de hashtag/lista externa, com prioridade Juruá/Acre/Brasil.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }
