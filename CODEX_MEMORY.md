@@ -1,5 +1,12 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-01 - Aviso de fofocas para consumidor
+
+- Usuario apontou que o aviso de `Fofocas & Polemicas` ainda parecia texto de editor e pediu algo mais voltado ao consumidor, deixando claro que a area esta em teste e que os cards nao sao noticias.
+- `index.html` trocou o aviso para: `Estamos testando esta area. Aqui entram conversas, rumores e assuntos que estao repercutindo nas redes; nao sao noticias confirmadas. Leia como termometro do momento, nao como reportagem.`
+- Cache-bust da home atualizado para `fofocas-teste2`.
+- Validacoes: `node --check script.js`, busca local do texto/cache-bust e `npm run review:team` com `totalIssues=0`.
+
 ## Atualizacao rapida 2026-04-30 - Hero destravado, Tendencias cheio e news preload
 
 - Usuario apontou que o jornal online ainda parecia lento, o hero ficou preso em uma so materia e o caderno `Tendencias & Conversas` estava sem materias.
