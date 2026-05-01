@@ -5521,6 +5521,7 @@ async function getSocialTrends(limit = 24) {
       ...cached,
       items: scopedItems,
       total: scopedItems.length,
+      external: scopedItems.length > 0,
       stale: false
     };
   }
@@ -5544,6 +5545,7 @@ async function getSocialTrends(limit = 24) {
       ...cached,
       items: scopedItems,
       total: scopedItems.length,
+      external: scopedItems.length > 0,
       stale: true
     };
   }
