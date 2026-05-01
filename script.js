@@ -7507,6 +7507,29 @@ const buildBrazilDayContentHaystack = (article = {}) => {
   ].join(" "));
 };
 
+const buildBrazilDaySubjectHaystack = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  return normalizeText([
+    normalized.title,
+    normalized.category,
+    normalized.categoryKey,
+    normalized.topicGroup,
+    normalized.sourceUrl
+  ].join(" "));
+};
+
+const isInternationalSubjectArticle = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const subjectText = buildBrazilDaySubjectHaystack(normalized);
+  const localSubjectText = normalizeText([normalized.title, normalized.category, normalized.categoryKey].join(" "));
+
+  if (juruaScopePattern.test(localSubjectText) || acreScopePattern.test(localSubjectText)) {
+    return false;
+  }
+
+  return internationalOnlyPattern.test(subjectText) || /\b\/(?:mundo|internacional)\//.test(subjectText);
+};
+
 const hasExplicitBrazilDayScope = (article = {}) => {
   const text = buildBrazilDayContentHaystack(article);
   return (
@@ -7522,6 +7545,7 @@ const isInternationalOnlyPublicArticle = (article = {}) => {
   const text = buildBrazilDayHaystack(normalized);
   const sourceUrl = normalizeText(normalized.sourceUrl || "");
 
+  if (isInternationalSubjectArticle(normalized)) return true;
   if (hasExplicitBrazilDayScope(normalized)) return false;
   return internationalOnlyPattern.test(text) || /\b\/(?:mundo|internacional)\//.test(sourceUrl);
 };
@@ -8878,6 +8902,9 @@ const renderWhatMattersNow = (items = []) => {
     ].filter(Boolean)
   )
     .map((item) => normalizeRuntimeArticle(item))
+    .filter(isRealPublicNewsSource)
+    .filter(isBrazilBuzzArticle)
+    .filter((item) => !isInternationalOnlyPublicArticle(item))
     .filter((item) => item.title && (item.sourceUrl || item.slug))
     .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
     .sort((left, right) =>
@@ -9436,6 +9463,9 @@ const pickCommunityTrendTopics = async (options = {}) => {
     ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ])
     .map((item) => normalizeRuntimeArticle(item))
+    .filter(isRealPublicNewsSource)
+    .filter((article) => isBrazilBuzzArticle(article) && !isInternationalOnlyPublicArticle(article))
+    .filter((article) => isBrazilDayPublicFocus(article) || hasExplicitBrazilDayScope(article))
     .map((article) => ({ article, score: getCommunityTrendScore(article) }))
     .filter((entry) => entry.score >= 22)
     .sort((left, right) => {

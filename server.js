@@ -90,7 +90,7 @@ const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   : 5 * 60 * 1000;
-const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "false").toLowerCase() !== "false";
+const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
 const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_INTERVAL_MS || 30 * 60 * 1000);
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
@@ -4917,6 +4917,13 @@ const SOCIAL_TREND_SOURCES = [
   }
 ];
 
+const SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS = /^(1|true|yes)$/i.test(
+  String(process.env.SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS || "")
+);
+
+const SOCIAL_TREND_DIRECTORY_SOURCE_PATTERN =
+  /\b(best-hashtags\.com|getdaytrends\.com|trends24\.in|developers\.facebook\.com)\b/i;
+
 const SOCIAL_TREND_BLOCKLIST = new Set([
   "twitter",
   "x",
@@ -5054,6 +5061,25 @@ function inferSocialTrendDivision(value = "") {
     return "Acre / Governo";
   }
   return "Cotidiano";
+}
+
+function isDirectorySocialTrendSource(source = {}) {
+  return Boolean(source && source.type !== "facebook");
+}
+
+function isDirectorySocialTrendItem(item = {}) {
+  const sourceText = [
+    item.sourceName,
+    item.source,
+    item.sourceUrl,
+    item.url,
+    item.topicGroup,
+    item.summary
+  ]
+    .map((value) => String(value || ""))
+    .join(" ");
+
+  return SOCIAL_TREND_DIRECTORY_SOURCE_PATTERN.test(sourceText);
 }
 
 async function fetchExternalText(url, timeoutMs = 6500) {
@@ -5423,6 +5449,7 @@ function mergeSocialTrendItems(items = [], limit = 24) {
   const platformPriority = { Facebook: 0, "X/Twitter": 1, Instagram: 2 };
 
   items
+    .filter((item) => SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS || !isDirectorySocialTrendItem(item))
     .filter((item) => isPortugueseBrazilianSocialTrendLabel(item.title || item.hashtags?.[0] || ""))
     .slice()
     .sort((left, right) => {
@@ -5451,7 +5478,18 @@ function mergeSocialTrendItems(items = [], limit = 24) {
 }
 
 async function refreshSocialTrends(limit = 24) {
-  const sourceResults = await mapWithConcurrency(SOCIAL_TREND_SOURCES, 3, fetchSocialTrendSource);
+  const allowedSources = SOCIAL_TREND_SOURCES.filter(
+    (source) => SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS || !isDirectorySocialTrendSource(source)
+  );
+  const skippedReports = SOCIAL_TREND_SOURCES.filter((source) => !allowedSources.includes(source)).map((source) => ({
+    source: source.id,
+    platform: source.platform,
+    ok: false,
+    skipped: true,
+    reason: "directory_signal_disabled",
+    url: source.url
+  }));
+  const sourceResults = await mapWithConcurrency(allowedSources, 3, fetchSocialTrendSource);
   const items = mergeSocialTrendItems(
     sourceResults.flatMap((entry) => entry.items),
     Math.max(1, Math.min(50, limit))
@@ -5460,13 +5498,11 @@ async function refreshSocialTrends(limit = 24) {
     ok: true,
     updatedAt: new Date().toISOString(),
     items,
-    reports: sourceResults.map((entry) => entry.report),
+    reports: [...sourceResults.map((entry) => entry.report), ...skippedReports],
     external: items.length > 0
   };
 
-  if (items.length) {
-    writeJson(SOCIAL_TRENDS_CACHE_FILE, payload);
-  }
+  writeJson(SOCIAL_TRENDS_CACHE_FILE, payload);
 
   return payload;
 }
@@ -5477,7 +5513,7 @@ async function getSocialTrends(limit = 24) {
   const cachedItems = Array.isArray(cached?.items) ? cached.items : [];
   const cachedUpdatedAt = cached?.updatedAt ? Date.parse(cached.updatedAt) : 0;
   const cacheIsFresh =
-    cachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < SOCIAL_TRENDS_TTL_MS;
+    cached?.ok === true && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < SOCIAL_TRENDS_TTL_MS;
 
   if (cacheIsFresh) {
     const scopedItems = mergeSocialTrendItems(cachedItems, safeLimit);
@@ -5491,7 +5527,7 @@ async function getSocialTrends(limit = 24) {
 
   try {
     const refreshed = await withPromiseTimeout(refreshSocialTrends(Math.max(safeLimit, 24)), 9000, "social_trends_timeout");
-    if (Array.isArray(refreshed.items) && refreshed.items.length) {
+    if (refreshed?.ok === true && Array.isArray(refreshed.items)) {
       return {
         ...refreshed,
         items: refreshed.items.slice(0, safeLimit),
