@@ -1,5 +1,59 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-04-30 - Hero destravado, Tendencias cheio e news preload
+
+- Usuario apontou que o jornal online ainda parecia lento, o hero ficou preso em uma so materia e o caderno `Tendencias & Conversas` estava sem materias.
+- `index.html` recebeu preload inline de `./api/news` antes dos scripts pesados; `script.js` consome `window.__CATALOGO_NEWS_PRELOAD__` em `hydrateDynamicNews`, evitando esperar toda a cadeia de scripts para iniciar a busca.
+- `script.js` agora invalida o cache diario do hero sempre que `NEWS_DATA` muda, intercala o pool por editoria, usa chave de historia em vez de depender so da imagem e religou a rotacao do destaque principal mesmo quando existem cards de topicos.
+- `Tendencias & Conversas` ganhou fallback publico baseado em sinais sociais reais de `/api/social-trends` quando nao ha materia perfeitamente ligada; os cards entram como `sinal em checagem`, sem fingir maioria/opiniao medida.
+- Cache-bust da home: `script.js?v=20260430-hero-trends-speed1`.
+- Validacoes locais: `node --check script.js`, `node --check server.js`, smoke home/API 200, Playwright com `/api/news` iniciando em ~`1,0s`, hero com 5 titulos distintos e Tendencias com 6 cards; console sem erros; `npm run review:team` com `totalIssues=0`.
+
+## Atualizacao rapida 2026-04-30 - Home com cards mais rapidos depois da hero
+
+- Usuario pediu para trabalhar a velocidade: a estrutura abria, mas cards apos a hero demoravam.
+- Diagnostico Playwright local antes da mudanca: `/api/news` so iniciava por volta de `9,4s`, porque a home esperava `load` + `requestIdleCallback` e ainda ficava presa em hidratacao de cadernos/social/global antes de renderizar superficies principais.
+- `script.js` agora dispara a hidratacao dinamica cedo, renderiza mosaico, `O que importa`, regional, sidebar, radar e live feed antes das tarefas pesadas, e deixa cadernos, tendencias auxiliares, comentarios, politica global e mural de fundadores em segundo plano.
+- `index.html` recebeu cache-bust `script.js?v=20260430-home-speed8`.
+- Validacoes locais: `node --check script.js`, `node --check server.js`, `npm run review:team` com `totalIssues=0`, Playwright console 0. Medicao final: `/api/news` iniciou em ~`2,9s` e terminou em ~`3,4s`; load ficou em ~`4,1s`. Captura: `output/playwright/home-speed-hydration-20260430.png`.
+
+## Atualizacao rapida 2026-04-30 - Tendencias sem vazamento editorial
+
+- Usuario apontou vazamento editorial em `Tendencias & Conversas`: o bloco mostrava raciocinio interno (`RADAR EDITORIAL`, `tema/base/o que falta`, `Proximo cuidado`, `forca editorial`) em vez de leitura publica viva.
+- `script.js` foi corrigido para linguagem de leitor: `o que estao falando`, `o que nao esta claro`, `por que importa`, clima quente/morno/frio e termometro somente quando houver comentario/opiniao publica real.
+- O fallback de noticia generica foi cortado da area: sem sinal social ligado a materia real, o bloco mostra `monitoramento aberto` com sinais observados, nao transforma noticia comum em conversa/polemica.
+- `index.html` recebeu cache-bust novo de `script.js` para forcar a correcao no navegador.
+- Commit local: `2c50454` (`Corrigir vazamento editorial nas tendencias`). Deploy publicado via `.codex-temp/deploy-render` no commit `4636810`, enviado para `render-target/main`.
+- Validacoes: `node --check script.js`, `node --check server.js`, `npm run review:team` com `totalIssues=0` no principal e no deploy, servidor local 200, `/api/social-trends?limit=5` 200 e Playwright local/producao sem vazamentos antigos/sem cards genericos na area. Producao confirmou `script.js?v=20260430-public-buzz-leakfix2`. Captura: `output/playwright/home-buzz-public-leakfix-20260430.png`.
+
+## Atualizacao rapida 2026-04-30 - Capa especial sem faixa vazia
+
+- Usuario apontou que os ultimos cards da `Capa Especial do Jurua` ainda mostravam uma faixa vazia grande no topo, junto com placeholders fracos como `Esporte ocupa o décimo primeiro espaço`.
+- Causa: o layout lateral da capa sempre reservava um painel de imagem; quando o card nao tinha foto real antes da hidratacao, a faixa ficava vazia.
+- `premium-clarity.css` agora trata `mosaic-item.side:not(.has-photo)` e `card-without-photo` como modo textual: sem painel vazio, com fundo leve e bloco inteiro ocupado pelo conteudo.
+- `script.js` passou a marcar o card da capa como `card-without-photo` ate a imagem real resolver; quando a foto chega, o modo textual sai e o visual fotografico volta.
+- `index.html` trocou tres placeholders ruins por fallbacks locais mais humanos para esporte, utilidade publica e comunidade.
+- Validacoes: `node --check script.js`, `npm run review:team` com `totalIssues=0`, smoke local `200`, conferência do HTML servido com `MOSAIC_FALLBACK_OK`, deploy publicado em `render-target/main` no commit `f74ffcc`.
+
+## Atualizacao rapida 2026-04-30 - Home local, bloco visivel e deploy final
+
+- Usuario mandou fechar a rodada corrigindo tres vazamentos publicos: bloco `O que importa agora` em branco, cards com texto interno de agentes e fallback local ainda puxando assuntos genéricos fora de Cruzeiro do Sul/Juruá.
+- `styles.css` foi corrigido para a animacao `reveal` aceitar `.active` tambem no bloco mais novo, eliminando o estado em branco do `#o-que-importa`.
+- `script.js` passou a usar resumos mais cheios nos cards de tendencias e trocou os nomes internos remanescentes do fallback por rotulos publicos neutros.
+- `index.html` removeu os fallbacks estaticos de CNN/Shakira/Brunna no bloco social e colocou chamadas locais de Cruzeiro do Sul/Juruá.
+- Validacoes desta rodada: `node --check script.js`, `node --check news-data.js`, grep sem `Tami QA/Hugo Pipe/...`, smoke local 200 em `/?skipIntro=1`, leitura do HTML confirmando `what-matters-grid` + fallbacks locais e `npm run review:team` com `totalIssues=0`.
+- Commit local da branch: `45e0059` (`Corrigir home local e cards publicos`). Deploy publicado via `.codex-temp/deploy-render` no commit `4e18ddf`, enviado para `render-target/main` e confirmado remoto em `4e18ddf1cbe56c6036c690528a69308b8c4c203a`.
+- Render conferido em `https://catalogo-cruzeiro-web.onrender.com/?skipIntro=1` com status `200`.
+
+## Atualizacao rapida 2026-04-30 - Deploy dos selos e fluxo de impacto local
+
+- Pacote publico foi commitado localmente em `codex/segunda-sync-reuniao` como `3c134ec` (`Adicionar selos e fluxo de impacto local`) e publicado no main de producao via worktree limpo `.codex-temp/deploy-render` como `90f7afe`.
+- `render-target/main` foi confirmado em `90f7afed9385fa6f4fe45d079baff51a19554d85`.
+- Validacoes no deploy: `node --check` em `script.js`, `server.js`, `news-data.js` e `scripts/sanitize-public-language.js`; `npm run review:team` com `totalIssues=0`; smoke local em `127.0.0.1:4155` com 200 para `/`, `arquivo.html`, `catalogo-servicos.html`, `esttiles.html`, `/api/news` e `/api/social-trends`.
+- Producao conferida em `https://catalogo-cruzeiro-web.onrender.com/?skipIntro=1`: home 200 com `#o-que-importa` e cache-bust novo; `arquivo.html` 200; `catalogo-servicos.html` 200; `/api/social-trends?limit=3` 200 com `total=3` e `external=true`.
+- Durante a rodada o daemon reintroduziu texto publico em ingles nos dados captados; foi rodado `scripts/sanitize-public-language.js` antes do push e a auditoria zerou de novo. A regra pratica fica: dado captado por agente/daemon precisa passar pelo sanitizer antes de commit ou deploy.
+- PubPaid ficou fora do commit/deploy publico, conforme regra permanente.
+
 ## Atualizacao rapida 2026-04-30 - Selos, fluxo e social real
 
 - Usuario pediu selos visiveis, continuidade Home -> Arquivo -> Servicos/Subsites, politica nacional quente so com impacto local claro e bloco `O que importa agora` para cheia/Jurua, eventos e utilidade publica.
@@ -756,4 +810,5 @@ Leitura atual dessas validacoes:
 - Aviso de transparencia na home em 2026-04-28: rodape recebeu `footer-automation-notice` explicando que a pagina inicial usa rotinas automaticas e pode ter falhas de programacao/layout/ordenacao, sem alterar o compromisso editorial com a noticia. Cache CSS atualizado para `mosaico-capa5`. Validacoes: CSS braces 312/312, `node --check script.js`, `npm run review:team` totalIssues=0 e captura `output/playwright/home-footer-aviso-automatico-20260428.png`.
 - Correção home desktop/console/agentes em 2026-04-29: após feedback do usuário, `index.html` e `site.webmanifest` trocaram favicon/manifest/assets absolutos por relativos; `site-google-auth.js` não chama `/api/auth/config` em `file://`; `news-data.js` converteu fallbacks para `./assets/news-fallbacks`; `script.js` normaliza assets locais, mantém a Mesa ao vivo dinâmica com categorias diversas e troca o bloco genérico `apoio/cautela/pergunta` por leituras de agentes nomeados por tema/role. `server.js` passou a expor `readers` públicos em `/api/daily-agent-pulse` após restart. Validações: `node --check script.js`, `node --check site-google-auth.js`, `node --check server.js`, `node --check news-data.js`, Playwright HTTP com console limpo e agentes `Editora Ari/Téo Buzz/Lia Copy`, Playwright `file://` com `failed=[]`, `brokenImages=[]`, `consoleItems=[]`, e `npm run review:team` totalIssues=0.
 - Supervisão editorial da home em 2026-04-29/30: criado `PROMPT_SUPERVISAO_EDITORIAL_DATA_REGIAO_2026-04-29.md` e aplicado fluxo global `data primeiro -> Cruzeiro do Sul -> Vale do Jurua -> Acre -> Brasil/resto -> divisao`, com reservas por superficie para evitar repeticao. `script.js`, `server.js`, `scripts/capture-latest-news.js` e `scripts/re-rodada-dia-geral.js` foram reforçados; captacao geral trouxe 204 itens/107 do dia/420 ativos. Validações: `node --check` nos scripts tocados, Playwright `output/playwright/home-editorial-supervisor-20260429-final-check.png` com duplicatas 0 e stale 26/04 0 nas areas auditadas, e `npm run review:team` totalIssues=0.
+- Tendencias & Conversas corrigido em 2026-04-30: por feedback do usuario, a area deixou de ser vitrine generica de noticia/trend e passou a ser superficie de repercussao publica. `script.js` separa `assunto em alta`, `post publico` e `conversa medida`, nao completa com fallback inventado e so mostra termometro de aprovacao/rejeicao quando houver amostra real de comentarios; `server.js` passou a buscar ate 25 comentarios publicos por post do Facebook Graph e entregar `opinionStats` com apoio/cautela/rejeicao. Validacoes: `node --check script.js`, `node --check server.js`, `npm run review:team` totalIssues=0, smoke local 200 e Render 200. Commit local `660054f`; deploy `render-target/main` em `be0533dcb5fd2689aff46a6f1cf3c4587e98b136`.
 

@@ -4381,6 +4381,7 @@ const copyTextToClipboard = async (value = "") => {
 
 const heroTourismDailyPoolState = {
   dayKey: "",
+  signature: "",
   items: []
 };
 
@@ -4588,8 +4589,67 @@ const hashHeroTourismSeed = (value = "") => {
   return hash >>> 0;
 };
 
-const buildDailyOrderedHeroItems = (items = []) =>
-  [...(Array.isArray(items) ? items : [])];
+const getHeroTourismDatasetSignature = () => {
+  const items = Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [];
+  return items
+    .slice(0, 36)
+    .map((article) =>
+      [
+        getArticleUsageKey(article),
+        getArticleDateKey(article),
+        normalizeText(article?.category || article?.categoryKey || "")
+      ]
+        .filter(Boolean)
+        .join(":")
+    )
+    .filter(Boolean)
+    .join("|");
+};
+
+const buildDailyOrderedHeroItems = (items = [], seedKey = getHeroTourismDayKey()) => {
+  const sourceItems = Array.isArray(items) ? items.filter(Boolean) : [];
+  if (sourceItems.length <= 1) {
+    return sourceItems;
+  }
+
+  const seed = hashHeroTourismSeed(seedKey);
+  const buckets = new Map();
+  sourceItems.forEach((item) => {
+    const areaKey = getHeroAreaKey(item) || normalizeText(item.category || "") || "geral";
+    if (!buckets.has(areaKey)) {
+      buckets.set(areaKey, []);
+    }
+    buckets.get(areaKey).push(item);
+  });
+
+  const bucketKeys = [...buckets.keys()].sort((left, right) => {
+    const leftPriority = heroDailyThemeOrder.indexOf(left);
+    const rightPriority = heroDailyThemeOrder.indexOf(right);
+    const safeLeftPriority = leftPriority >= 0 ? leftPriority : 99;
+    const safeRightPriority = rightPriority >= 0 ? rightPriority : 99;
+    if (safeLeftPriority !== safeRightPriority) {
+      return safeLeftPriority - safeRightPriority;
+    }
+    return left.localeCompare(right, "pt-BR");
+  });
+  const start = bucketKeys.length ? seed % bucketKeys.length : 0;
+  const rotatedKeys = [...bucketKeys.slice(start), ...bucketKeys.slice(0, start)];
+  const ordered = [];
+  let guard = 0;
+
+  while (ordered.length < sourceItems.length && guard < sourceItems.length * 2) {
+    rotatedKeys.forEach((key) => {
+      const bucket = buckets.get(key) || [];
+      const next = bucket.shift();
+      if (next) {
+        ordered.push(next);
+      }
+    });
+    guard += 1;
+  }
+
+  return ordered.length ? ordered : sourceItems;
+};
 
 const getHeroDailyArticleFocus = (article = {}) => {
   const manualFocus = resolveArticleImageFocus(article, "").trim();
@@ -4783,7 +4843,12 @@ const buildHeroTourismFallbackPool = () => {
 
 const buildHeroTourismDailyPool = () => {
   const dayKey = getHeroTourismDayKey();
-  if (heroTourismDailyPoolState.dayKey === dayKey && heroTourismDailyPoolState.items.length) {
+  const signature = getHeroTourismDatasetSignature();
+  if (
+    heroTourismDailyPoolState.dayKey === dayKey &&
+    heroTourismDailyPoolState.signature === signature &&
+    heroTourismDailyPoolState.items.length
+  ) {
     return heroTourismDailyPoolState.items;
   }
 
@@ -4813,7 +4878,7 @@ const buildHeroTourismDailyPool = () => {
   const runtimePool = buildDailyOrderedHeroItems(buildHeroTourismRuntimePool(), `${dayKey}:runtime`);
 
   const pushUniquePhoto = (photo = {}) => {
-    const sourceKey = String(photo.proxyUrl || photo.fallbackUrl || photo.file || photo.title || "").trim();
+    const sourceKey = getHeroStoryKey(photo) || String(photo.proxyUrl || photo.fallbackUrl || photo.file || photo.title || "").trim();
     if (!sourceKey || seenKeys.has(sourceKey)) {
       return false;
     }
@@ -4845,6 +4910,7 @@ const buildHeroTourismDailyPool = () => {
   }
 
   heroTourismDailyPoolState.dayKey = dayKey;
+  heroTourismDailyPoolState.signature = signature;
   heroTourismDailyPoolState.items = merged.slice(0, heroTourismDailyTarget);
   return heroTourismDailyPoolState.items;
 };
@@ -5587,7 +5653,7 @@ const initializeHeroTourismHero = () => {
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
 
-  if (!shouldUseSolidHeroShell() && !liteRuntime && dailyPool.length > 1 && heroTopicCards.length === 0) {
+  if (dailyPool.length > 1) {
     heroTourismRotation.timerId = window.setInterval(() => {
       const currentPool = getHeroTourismDailyPool();
       if (!currentPool.length) {
@@ -5595,8 +5661,14 @@ const initializeHeroTourismHero = () => {
       }
 
       const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % currentPool.length;
+      heroTourismRotation.photoIndex = nextPhotoIndex;
+      if (shouldUseSolidHeroShell() || liteRuntime) {
+        setHeroTourismMeta(currentPool[nextPhotoIndex]);
+        return;
+      }
+
       renderHeroTourismBackground(nextPhotoIndex);
-    }, heroTourismRotationIntervalMs);
+    }, liteRuntime ? heroTourismRotationIntervalMs + 2200 : heroTourismRotationIntervalMs);
   }
 
   if (!liteRuntime && heroOfficeStatusNodes.length && heroOfficeStatusGroups.length > 1) {
@@ -7220,6 +7292,106 @@ const buildSocialSignalLinkedArticles = (signalItems = [], articlePool = [], opt
     .slice(0, safeLimit);
 };
 
+const getDirectSocialTrendStrength = (signalItem = {}) => {
+  const title = String(signalItem.title || signalItem.hashtags?.[0] || "").trim();
+  const text = normalizeText(
+    [
+      title,
+      signalItem.summary,
+      signalItem.category,
+      signalItem.importanceDivision,
+      signalItem.socialPlatform,
+      signalItem.topicGroup
+    ].join(" ")
+  );
+  let score = 34;
+
+  if (/\b(facebook|instagram|tiktok|twitter|x\/twitter)\b/.test(text)) score += 12;
+  if (/\b(polem|debate|repercuss|viral|meme|fal[aou]|critica|cobra|inimigo|divid)\b/.test(text)) score += 24;
+  if (/\b(acre|jurua|juru[aá]|cruzeiro do sul|czs|rio branco|amazonia|brasil)\b/.test(text)) score += 18;
+  if (/\b(politica|política|cultura|futebol|saude|saúde|servico|serviço|evento|show|cidade|bairro)\b/.test(text)) score += 10;
+
+  const engagement = Number(signalItem.facebookEngagement || signalItem.engagement || 0);
+  if (engagement > 0) {
+    score += Math.min(24, Math.round(Math.log10(engagement + 1) * 10));
+  }
+
+  return clampBuzzPercent(score, 24, 96);
+};
+
+const buildDirectSocialTrendBuzzArticles = (signalItems = [], limit = 6) => {
+  const seen = new Set();
+  const fallbackImages = dailyBuzzFallbackImages.length
+    ? dailyBuzzFallbackImages
+    : ["./assets/home-cache/buzz-cruzeiro-01.jpg"];
+
+  return (Array.isArray(signalItems) ? signalItems : [])
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((item) => item.title || item.hashtags?.[0])
+    .sort((left, right) => getDirectSocialTrendStrength(right) - getDirectSocialTrendStrength(left))
+    .reduce((selected, item, index) => {
+      if (selected.length >= limit) {
+        return selected;
+      }
+
+      const title = String(item.title || item.hashtags?.[0] || "Assunto em alta").trim();
+      const key = normalizeText(`${title}:${item.socialPlatform || item.sourceName || ""}`);
+      if (!key || seen.has(key)) {
+        return selected;
+      }
+
+      seen.add(key);
+      const platform = item.socialPlatform || item.platform || "Rede social";
+      const sourceName = item.sourceName || platform;
+      const sourceUrl = item.sourceUrl || item.url || item.link || "./arquivo.html";
+      const strength = getDirectSocialTrendStrength(item);
+      const evidenceKind = /facebook-public|facebook-pages|facebook-posts/.test(normalizeText(item.topicGroup || ""))
+        ? "public-post"
+        : "trend-signal";
+      const category = item.importanceDivision || item.category || "Tendências";
+      const hashtags = Array.isArray(item.hashtags) ? item.hashtags.slice(0, 4) : [];
+
+      selected.push({
+        ...item,
+        id: item.id || `social-trend-${slugify(title).slice(0, 54) || index}`,
+        title,
+        displaySummary:
+          item.displaySummary ||
+          item.summary ||
+          `Sinal público captado em ${platform}. A redação acompanha a repercussão antes de tratar como maioria.`,
+        summary:
+          item.summary ||
+          `Sinal público captado em ${platform}. A redação acompanha a repercussão antes de tratar como maioria.`,
+        category,
+        categoryKey: normalizeText(category),
+        sourceName,
+        sourceUrl,
+        publishedAt: item.publishedAt || item.date || new Date().toISOString(),
+        date: item.date || item.publishedAt || new Date().toISOString(),
+        imageUrl: item.imageUrl || fallbackImages[index % fallbackImages.length],
+        sourceImageUrl: item.sourceImageUrl || item.imageUrl || fallbackImages[index % fallbackImages.length],
+        externalSource: true,
+        socialPlatform: platform,
+        topicGroup: item.topicGroup || "social-trends",
+        socialEvidence: {
+          title,
+          summary: item.summary || "",
+          network: platform,
+          sourceName,
+          sourceUrl,
+          topicGroup: item.topicGroup || "social-trends",
+          hashtags,
+          publishedAt: item.publishedAt || item.date || "",
+          evidenceKind,
+          engagement: Number(item.facebookEngagement || item.engagement || strength),
+          opinionStats: getSocialOpinionStats(item),
+          matchScore: strength
+        }
+      });
+      return selected;
+    }, []);
+};
+
 const getBuzzFallbackItems = () => [
   ...trendingInfluencerBuzzPool.map((item) => ({
     title: item.title,
@@ -8212,7 +8384,22 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   });
   const measuredCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind === "public-post");
   const signalCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind !== "public-post");
-  const selectedCases = dedupeNewsItems([...measuredCases, ...signalCases]).slice(0, 6);
+  const directSignalCases = buildDirectSocialTrendBuzzArticles(socialTrendItems, 6);
+  const editorialFallbackCases =
+    directSignalCases.length || measuredCases.length || signalCases.length
+      ? []
+      : getBuzzFallbackItems().map((item) => ({
+          ...item,
+          displaySummary:
+            item.summary ||
+            "Radar editorial mantém assuntos sociais em observação enquanto não há sinal externo forte."
+        }));
+  const selectedCases = dedupeNewsItems([
+    ...measuredCases,
+    ...signalCases,
+    ...directSignalCases,
+    ...editorialFallbackCases
+  ]).slice(0, 6);
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
   trendingBuzzGrid.innerHTML = selectedCases.length
@@ -8587,8 +8774,10 @@ const pickMonthlyDynamicStories = async (options = {}) => {
       minScore: 30
     }
   );
+  const directSocialStories = buildDirectSocialTrendBuzzArticles(socialTrendItems, 4);
   const candidates = dedupeNewsItems([
     ...socialLinkedStories,
+    ...directSocialStories,
     ...liveBuzzItems,
     ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ])
@@ -9836,6 +10025,9 @@ const renderRegionalPoliticsHighlights = (items = window.NEWS_DATA || []) => {
 const syncNewsDataset = (runtimeItems = []) => {
   const merged = sortRadarArticles(dedupeNewsItems([...(runtimeItems || []), ...initialStaticNews]));
   window.NEWS_DATA = merged;
+  heroTourismDailyPoolState.dayKey = "";
+  heroTourismDailyPoolState.signature = "";
+  heroTourismDailyPoolState.items = [];
   window.NEWS_MAP = merged.reduce((map, item) => {
     if (item.slug) {
       map[item.slug] = item;
@@ -13712,8 +13904,13 @@ initializeSidebarWidgets();
 
 const hydrateDynamicNews = async () => {
   try {
-    const payload = await requestApiJson("/api/news", { method: "GET" });
-    const runtimeItems = Array.isArray(payload.items) ? payload.items : [];
+    const preloadedNewsPromise = window.__CATALOGO_NEWS_PRELOAD__;
+    window.__CATALOGO_NEWS_PRELOAD__ = null;
+    const payload =
+      preloadedNewsPromise && typeof preloadedNewsPromise.then === "function"
+        ? await preloadedNewsPromise
+        : await requestApiJson("/api/news", { method: "GET" });
+    const runtimeItems = Array.isArray(payload?.items) ? payload.items : [];
 
     if (runtimeItems.length === 0) {
       return;
