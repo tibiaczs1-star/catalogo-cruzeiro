@@ -8,6 +8,7 @@
 - `Tendencias & Conversas` ganhou fallback publico baseado em sinais sociais reais de `/api/social-trends` quando nao ha materia perfeitamente ligada; os cards entram como `sinal em checagem`, sem fingir maioria/opiniao medida.
 - Cache-bust da home: `script.js?v=20260430-hero-trends-speed1`.
 - Validacoes locais: `node --check script.js`, `node --check server.js`, smoke home/API 200, Playwright com `/api/news` iniciando em ~`1,0s`, hero com 5 titulos distintos e Tendencias com 6 cards; console sem erros; `npm run review:team` com `totalIssues=0`.
+- Commit local: `ffada45`; deploy limpo sem PubPaid 2.0 aplicado no worktree `.codex-temp/deploy-render` como `230ac0a` e enviado para `render-target/main`. Producao confirmou 200, `script.js?v=20260430-hero-trends-speed1` e `__CATALOGO_NEWS_PRELOAD__` no HTML.
 
 ## Atualizacao rapida 2026-04-30 - Home com cards mais rapidos depois da hero
 
