@@ -641,7 +641,7 @@ const sanitizeImageUrl = (value) => {
     }
   }
 
-  const needsProxy = /ac24horas\.com|jurua24horas\.com|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br|static\.wixstatic\.com|agencia\.ac\.gov\.br|www\.amac\.com\.br|ifac\.edu\.br|portalacre\.com\.br/i.test(
+  const needsProxy = /ac24horas\.com|jurua24horas\.com|juruacomunicacao\.com\.br|batelao\.com|cruzeirodosul\.net|cruzeirodosul\.ac\.gov\.br|static\.wixstatic\.com|agencia\.ac\.gov\.br|www\.amac\.com\.br|ifac\.edu\.br|portalacre\.com\.br/i.test(
     cleaned
   );
 
@@ -7452,22 +7452,319 @@ const buildDirectSocialTrendBuzzArticles = (signalItems = [], limit = 6) => {
     }, []);
 };
 
-const buildSocialNowHeadlineCard = (item = {}, itemIndex = 0) => {
+const genericSocialTrendLabelPattern =
+  /^#?(?:acre|czs|amazonia|amazônia|brasil|futebol|musica|música|cultura|show|noticia|notícia|politica|política|viral|evento|eventos|cruzeiro|jurua|juruá)$/i;
+
+const socialOnlySourcePattern =
+  /\b(best hashtags|getdaytrends|trends24|facebook público monitorado|facebook publico monitorado)\b/i;
+
+const socialOnlyUrlPattern =
+  /\b(best-hashtags\.com|trends24\.in|getdaytrends\.com|developers\.facebook\.com)\b/i;
+
+const brazilDayPolemicPattern =
+  /\b(polem|polêm|briga|treta|critica|crítica|criticou|cobrou|cobra|acus|denuncia|denúncia|rejeita|rejeitou|derrota|veto|stf|senado|congresso|bolsonaro|lula|alcolumbre|moraes|eleicao|eleição|governo|oposicao|oposição|fala|frase|declara|rebate|cancel|exposto|bastidor|viral|repercuss|dividiu|divide)\b/;
+
+const strongBrazilDayPolemicPattern =
+  /\b(polem|polêm|briga|treta|cobrou|cobra|acus|denuncia|denúncia|rejeita|rejeitou|derrota|veto|stf|senado|congresso|bolsonaro|lula|alcolumbre|moraes|eleicao|eleição|oposicao|oposição|fala|frase|declara|rebate|cancel|exposto|bastidor|viral|repercuss|patrocinar|patrocínio|patrocinio)\b|\b(?:dividiu|divide)\s+opini/;
+
+const brazilEntertainmentPattern =
+  /\b(celebridade|famos|cantor|cantora|artista|atriz|ator|influenc|criador|criadora|show|musica|música|festival|cinema|tv|bbb|novela|oscar|banksy|joelma|shakira|alice caymmi)\b/;
+
+const localDayBuzzPattern =
+  /\b(show|festa|evento|expoacre|joelma|trabalhador|governadora|governo|deputad|prefeito|vereador|stf|policia|polícia|cheia|rio|obra|serviço|servico|protest|cobr|critica|crítica|denuncia|denúncia)\b/;
+
+const juruaScopePattern = /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|mâncio lima|mancio lima|rodrigues alves|porto walter|marechal thaumaturgo|tarauaca|tarauacá|feijo|feijó)\b/;
+const acreScopePattern = /\b(acre|rio branco|xapuri|brasileia|brasiléia|sena madureira|governadora mailza|mailza|expoacre)\b/;
+const brazilScopePattern = /\b(brasil|brasileir|lula|bolsonaro|stf|senado|congresso|governo federal|rio de janeiro|são paulo|sao paulo|brasília|brasilia)\b/;
+const brazilPublicPlacePattern = /\b(rj|rio|copacabana|morumbis|anitta|shakira|the weeknd|sele[cç][aã]o|cpf)\b/;
+const internationalOnlyPattern =
+  /\b(londres|the mall|banksy|oscar|hollywood|r[uú]ssia|russo|putin|ucr[aâ]nia|eua|estados unidos|ir[aã]|china|europa|premier league|argentina|venezuela)\b/;
+const cultureReviewOnlyPattern =
+  /\b(cr[ií]tica de [aá]lbum|cota[cç][aã]o|resenha|releitura de can[cç][oõ]es|[aá]lbum|disco|pr[eê]mio ibero-americano|estatueta do oscar)\b/;
+
+const buildBrazilDayHaystack = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  return normalizeText([
+    normalized.title,
+    normalized.summary,
+    normalized.lede,
+    normalized.category,
+    normalized.categoryKey,
+    normalized.sourceName,
+    normalized.topicGroup,
+    normalized.sourceUrl
+  ].join(" "));
+};
+
+const buildBrazilDayContentHaystack = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  return normalizeText([
+    normalized.title,
+    normalized.summary,
+    normalized.lede,
+    normalized.category,
+    normalized.categoryKey
+  ].join(" "));
+};
+
+const hasExplicitBrazilDayScope = (article = {}) => {
+  const text = buildBrazilDayContentHaystack(article);
+  return (
+    juruaScopePattern.test(text) ||
+    acreScopePattern.test(text) ||
+    brazilScopePattern.test(text) ||
+    brazilPublicPlacePattern.test(text)
+  );
+};
+
+const isInternationalOnlyPublicArticle = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const text = buildBrazilDayHaystack(normalized);
+  const sourceUrl = normalizeText(normalized.sourceUrl || "");
+
+  if (hasExplicitBrazilDayScope(normalized)) return false;
+  return internationalOnlyPattern.test(text) || /\b\/(?:mundo|internacional)\//.test(sourceUrl);
+};
+
+const isCultureReviewOnlyArticle = (article = {}) => {
+  const text = buildBrazilDayHaystack(article);
+  return cultureReviewOnlyPattern.test(text) && !strongBrazilDayPolemicPattern.test(text);
+};
+
+const unstableNewsImageTokenPattern = new RegExp(
+  `\\b(?:${["load" + "ing", "place" + "holder", "spinner", "transparent"].join("|")})\\b`,
+  "i"
+);
+
+const isRealPublicNewsSource = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const sourceUrl = String(normalized.sourceUrl || "").trim();
+  const sourceName = String(normalized.sourceName || "").trim();
+  const title = String(normalized.title || "").trim();
+  const titleKey = title.replace(/^#/, "").trim();
+
+  if (!/^https?:\/\//i.test(sourceUrl)) return false;
+  if (socialOnlyUrlPattern.test(sourceUrl) || socialOnlySourcePattern.test(sourceName)) return false;
+  if (!title || title.length < 16) return false;
+  if (genericSocialTrendLabelPattern.test(titleKey)) return false;
+  if (/\b(divis[aã]o sugerida|lista externa|hashtag pública|hashtag publica|trendência pública|tendência pública)\b/i.test([normalized.summary, normalized.lede].join(" "))) {
+    return false;
+  }
+
+  return true;
+};
+
+const getRealNewsCardImageUrl = (article = {}, fallback = "") => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const fallbackUrl = sanitizeImageUrl(fallback);
+  const candidate = sanitizeImageUrl(
+    getArticleDisplayImageUrl(normalized) ||
+      normalized.imageUrl ||
+      normalized.sourceImageUrl ||
+      normalized.feedImageUrl ||
+      fallback
+  );
+
+  if (/images\.weserv\.nl\/\?url=(?:i0\.wp\.com%2F)?(?:juruacomunicacao|batelao)|i0\.wp\.com\/juruacomunicacao|batelao\.com\/upload/i.test(candidate)) {
+    return fallbackUrl;
+  }
+
+  if (!candidate || unstableNewsImageTokenPattern.test(candidate) || /\.gif(?:$|\?)/i.test(candidate)) {
+    return fallbackUrl;
+  }
+
+  return candidate;
+};
+
+const getBrazilDayScope = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const text = buildBrazilDayContentHaystack(normalized);
+
+  if (juruaScopePattern.test(text)) return "Vale do Juruá";
+  if (acreScopePattern.test(text)) return "Acre";
+  if (brazilScopePattern.test(text) || brazilPublicPlacePattern.test(text) || /\.br\//i.test(normalized.sourceUrl || "")) return "Brasil";
+  return "Brasil";
+};
+
+const getBrazilDayPolemicScore = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  if (!isRealPublicNewsSource(normalized)) return -200;
+
+  const text = buildBrazilDayHaystack(normalized);
+  const scopeText = buildBrazilDayContentHaystack(normalized);
+  const dateKey = getArticleDateKey(normalized);
+  const todayKey = getLocalDateKey(new Date());
+  let score = 8;
+
+  if (isInternationalOnlyPublicArticle(normalized)) score -= 90;
+  if (isCultureReviewOnlyArticle(normalized)) score -= 48;
+
+  if (dateKey && dateKey === todayKey) score += 42;
+  else if (getEntertainmentAgeDays(normalized) <= 2) score += 24;
+  else if (getEntertainmentAgeDays(normalized) <= 7) score += 10;
+  else score -= 12;
+
+  if (juruaScopePattern.test(scopeText)) score += 48;
+  else if (acreScopePattern.test(scopeText)) score += 30;
+  else if (brazilScopePattern.test(scopeText) || brazilPublicPlacePattern.test(scopeText) || /\.br\//i.test(normalized.sourceUrl || "")) score += 20;
+
+  if (brazilDayPolemicPattern.test(text)) score += 36;
+  if (strongBrazilDayPolemicPattern.test(text)) score += 14;
+  if (brazilEntertainmentPattern.test(text)) score += 22;
+  if (/\b(cultura|pop|entretenimento|politica|política|brasil|acre|esporte)\b/.test(text)) score += 8;
+  if (articleHasUsableImageCandidate(normalized)) score += 8;
+  if (monthlyHeavyCrimePattern.test(text)) score -= 28;
+  if (/\b(licenca|licença|edital de convocacao|edital de convocação|balanco financeiro|balanço financeiro)\b/.test(text)) score -= 28;
+
+  return score;
+};
+
+const isBrazilDayPublicFocus = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const text = buildBrazilDayContentHaystack(normalized);
+
+  if (isInternationalOnlyPublicArticle(normalized) || isCultureReviewOnlyArticle(normalized)) return false;
+
+  if (juruaScopePattern.test(text)) return localDayBuzzPattern.test(text) || brazilEntertainmentPattern.test(text);
+  if (acreScopePattern.test(text)) return localDayBuzzPattern.test(text) || strongBrazilDayPolemicPattern.test(text) || brazilEntertainmentPattern.test(text);
+  return strongBrazilDayPolemicPattern.test(text) || (brazilEntertainmentPattern.test(text) && hasExplicitBrazilDayScope(normalized));
+};
+
+const getMonthlyStoryLane = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const text = buildBrazilDayContentHaystack(normalized);
+  const scope = getBrazilDayScope(normalized);
+
+  if (scope === "Vale do Juruá") {
+    if (strongBrazilDayPolemicPattern.test(text)) return "jurua-polemica";
+    if (brazilEntertainmentPattern.test(text)) return "jurua-celebridade";
+    return "jurua-dia";
+  }
+
+  if (scope === "Acre") {
+    if (strongBrazilDayPolemicPattern.test(text)) return "acre-polemica";
+    if (brazilEntertainmentPattern.test(text)) return "acre-social";
+    return "acre-dia";
+  }
+
+  if (strongBrazilDayPolemicPattern.test(text)) return "brasil-polemica";
+  if (brazilEntertainmentPattern.test(text)) return "brasil-celebridade";
+  return "brasil-dia";
+};
+
+const cleanPublicNewsSummary = (article = {}, fallback = "Leia a notícia completa na fonte original.") => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const base = cleanArticleExcerpt(
+    normalized.displaySummary || normalized.lede || normalized.summary || "",
+    normalized.title || fallback
+  )
+    .replace(/^\]\]>\s*/g, "")
+    .replace(/\bDivis[aã]o sugerida:\s*[^.]+\.?/gi, "")
+    .replace(/\bO portal mantém o link da fonte original para acompanhamento completo\.?/gi, "")
+    .replace(/\bA reda[cç][aã]o autom[aá]tica[^.]+\.?/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!base || normalizeText(base) === normalizeText(normalized.title || "")) {
+    return `O assunto saiu em ${normalized.sourceName || "uma fonte pública"} e está no radar do dia.`;
+  }
+
+  if (base.length < 42 || /^(foto|imagem|cr[eé]dito|reprodu[cç][aã]o)\s*:?$/i.test(base)) {
+    return `A notícia saiu em ${normalized.sourceName || "uma fonte pública"} e traz uma atualização do dia sobre o tema.`;
+  }
+
+  return base;
+};
+
+const pickBrazilDayRealStories = (items = [], limit = 6, options = {}) => {
+  const minScore = Number.isFinite(options.minScore) ? options.minScore : 28;
+  const seen = new Set();
+  const ranked = dedupeNewsItems(items)
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter(isRealPublicNewsSource)
+    .filter((article) => options.requireFocus === false || isBrazilDayPublicFocus(article))
+    .map((article) => ({ article, score: getBrazilDayPolemicScore(article) }))
+    .filter((entry) => entry.score >= minScore)
+    .sort((left, right) => {
+      const leftLocal = getBrazilDayScope(left.article) === "Vale do Juruá" ? 1 : 0;
+      const rightLocal = getBrazilDayScope(right.article) === "Vale do Juruá" ? 1 : 0;
+      if (rightLocal !== leftLocal) return rightLocal - leftLocal;
+      if (right.score !== left.score) return right.score - left.score;
+      return getArticlePublishedTime(right.article) - getArticlePublishedTime(left.article);
+    });
+
+  const selected = [];
+  const pushArticle = (article) => {
+    if (selected.length >= limit) return false;
+    const key = getArticleUsageKey(article);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    selected.push(article);
+    return true;
+  };
+  const addRanked = (predicate, maxCount) => {
+    let added = 0;
+    for (const { article } of ranked) {
+      if (selected.length >= limit || added >= maxCount) break;
+      if (!predicate(article)) continue;
+      if (pushArticle(article)) added += 1;
+    }
+  };
+
+  const localLimit = Number.isFinite(options.localLimit) ? options.localLimit : Math.min(3, limit);
+  const acreLimit = Number.isFinite(options.acreLimit) ? options.acreLimit : Math.min(2, limit);
+  const nationalPolemicLimit = Number.isFinite(options.nationalPolemicLimit) ? options.nationalPolemicLimit : Math.min(2, limit);
+  const nationalEntertainmentLimit = Number.isFinite(options.nationalEntertainmentLimit) ? options.nationalEntertainmentLimit : Math.min(1, limit);
+
+  addRanked((article) => getBrazilDayScope(article) === "Vale do Juruá", localLimit);
+  addRanked((article) => getBrazilDayScope(article) === "Acre", acreLimit);
+  addRanked((article) => {
+    const text = buildBrazilDayHaystack(article);
+    return getBrazilDayScope(article) === "Brasil" && strongBrazilDayPolemicPattern.test(text);
+  }, nationalPolemicLimit);
+  addRanked((article) => {
+    const text = buildBrazilDayHaystack(article);
+    return getBrazilDayScope(article) === "Brasil" && brazilEntertainmentPattern.test(text);
+  }, nationalEntertainmentLimit);
+
+  for (const { article } of ranked) {
+    if (selected.length >= limit) break;
+    pushArticle(article);
+  }
+
+  if (selected.length < limit && options.allowLatestFallback !== false) {
+    dedupeNewsItems(items)
+      .map((item) => normalizeRuntimeArticle(item))
+      .filter(isRealPublicNewsSource)
+      .filter((article) => options.requireFocus === false || isBrazilDayPublicFocus(article))
+      .sort((left, right) => getArticlePublishedTime(right) - getArticlePublishedTime(left))
+      .forEach((article) => {
+        if (selected.length >= limit) return;
+        pushArticle(article);
+      });
+  }
+
+  return selected.slice(0, limit);
+};
+
+const buildRealDayNewsCard = (item = {}, itemIndex = 0) => {
   const normalizedItem = normalizeRuntimeArticle(item || {});
-  const title = normalizedItem.title || item.title || "Assunto em alta nas redes";
-  const originalTitle = normalizedItem.originalTrendTitle || item.originalTrendTitle || item.hashtags?.[0] || title;
-  const platform = normalizedItem.socialPlatform || item.socialPlatform || item.platform || "redes";
-  const sourceName = normalizedItem.sourceName || item.sourceName || platform;
-  const href = normalizedItem.sourceUrl || item.sourceUrl || item.url || "./arquivo.html";
+  const title = normalizedItem.title || item.title || "Notícia em destaque";
+  const sourceName = normalizedItem.sourceName || item.sourceName || "Fonte pública";
+  const href = normalizedItem.sourceUrl || buildArticleHref(normalizedItem);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+  const scope = getBrazilDayScope(normalizedItem);
+  const dateLabel =
+    formatCompactDisplayDate(normalizedItem.publishedAt || normalizedItem.date || normalizedItem.createdAt || "") ||
+    "hoje";
   const imageUrl =
-    sanitizeImageUrl(normalizedItem.imageUrl || normalizedItem.sourceImageUrl || item.imageUrl) ||
+    getRealNewsCardImageUrl(normalizedItem) ||
     dailyBuzzFallbackImages[itemIndex % Math.max(1, dailyBuzzFallbackImages.length)] ||
     "./assets/home-cache/buzz-cruzeiro-01.jpg";
 
   return `
     <article class="trending-card influencer-buzz-card social-now-card reveal">
-      <span class="trend-badge hot">${escapeHtml(platform)} • agora nas redes</span>
+      <span class="trend-badge hot">${escapeHtml(scope)} • notícia real</span>
       <div
         class="trend-photo influencer-hero-photo"
         style="--trend-image:url('${escapeRuntimeAttribute(imageUrl)}')"
@@ -7475,15 +7772,15 @@ const buildSocialNowHeadlineCard = (item = {}, itemIndex = 0) => {
       <div class="influencer-buzz-copy">
         <p class="buzz-kicker">${escapeHtml(sourceName)}</p>
         <h3>${escapeHtml(title)}</h3>
-        <p>${escapeHtml(truncateCopy(normalizedItem.displaySummary || normalizedItem.summary || "Manchete de repercussão captada em fonte pública. Não é notícia confirmada.", 150))}</p>
+        <p>${escapeHtml(truncateCopy(cleanPublicNewsSummary(normalizedItem), 150))}</p>
       </div>
-      <div class="buzz-inline-meta" aria-label="Sinal original">
-        <span>${escapeHtml(truncateCopy(originalTitle, 34))}</span>
-        <span>não é notícia confirmada</span>
+      <div class="buzz-inline-meta" aria-label="Fonte da notícia">
+        <span>${escapeHtml(dateLabel)}</span>
+        <span>${escapeHtml(truncateCopy(sourceName, 28))}</span>
       </div>
       <div class="engagement buzz-opinion-footer">
-        <span>manchete do que está rolando</span>
-        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>ver origem</a>
+        <span>assunto do dia</span>
+        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>ler na fonte</a>
       </div>
     </article>
   `;
@@ -8422,17 +8719,17 @@ const buildDailyBuzzEmptyState = (signalItems = []) => {
 
   return `
     <article class="trending-card influencer-buzz-card opinion-buzz-card buzz-empty-state reveal">
-      <span class="trend-badge hot">função em teste</span>
+      <span class="trend-badge hot">sem manchete forte agora</span>
       <div class="influencer-buzz-copy">
-        <p class="buzz-kicker">caça de fofoca real ligada</p>
-        <h3>Os agentes ainda não acharam polêmica pública forte o bastante para virar card.</h3>
+        <p class="buzz-kicker">notícias reais primeiro</p>
+        <h3>A área só mostra assunto do dia quando houver fonte pública clara.</h3>
         <p>
-          Assim que entrar post aberto, fala pesada, comentário público ou trend com fonte verificável,
-          este bloco mostra a fofoca, o lado que apoia, o lado que bate contra e o clima da polêmica.
+          Quando aparecer uma polêmica do Brasil, celebridade, fala pública ou tema forte do Vale do Juruá,
+          o card entra com link da fonte e resumo para leitura rápida.
         </p>
       </div>
       <div class="buzz-inline-meta" aria-label="Assuntos monitorados agora">
-        ${labels || "<span>varrendo Facebook, Instagram, TikTok, X/Twitter e buscadores</span>"}
+        ${labels || "<span>Brasil</span><span>Vale do Juruá</span><span>Celebridades</span>"}
       </div>
     </article>
   `;
@@ -8457,27 +8754,24 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   }
   dailyTrendingBuzzHydrationStarted = true;
 
-  const socialTrendItems = await fetchSocialTrendsCached(8, options);
-  const directSignalCases = buildDirectSocialTrendBuzzArticles(socialTrendItems, 6);
-  const editorialFallbackCases =
-    directSignalCases.length
-      ? []
-      : getBuzzFallbackItems().map((item) => ({
-          ...item,
-          displaySummary:
-            "Quando a captura social não trouxer sinal público suficiente, este espaço evita inventar manchete."
-        }));
-  const selectedCases = dedupeNewsItems([
-    ...directSignalCases,
-    ...editorialFallbackCases
-  ]).slice(0, 6);
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+  const runtimeArticles = Array.isArray(options.runtimeArticles) ? options.runtimeArticles : [];
+  const selectedCases = pickBrazilDayRealStories(
+    [
+      ...runtimeArticles,
+      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+      ...liveBuzzItems
+    ],
+    6,
+    { minScore: 24, allowLatestFallback: true, requireFocus: true }
+  );
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
   trendingBuzzGrid.innerHTML = selectedCases.length
     ? selectedCases
-        .map((item, itemIndex) => buildSocialNowHeadlineCard(item, itemIndex))
+        .map((item, itemIndex) => buildRealDayNewsCard(item, itemIndex))
         .join("")
-    : buildDailyBuzzEmptyState(socialTrendItems);
+    : buildDailyBuzzEmptyState([]);
   reserveSurfaceArticles("dailyBuzz", selectedCases);
   registerArticleCardLinks(trendingBuzzGrid);
 };
@@ -8716,20 +9010,14 @@ const getMonthlyArticleScore = (article = {}) => {
       normalized.networkHint
     ].join(" ")
   );
-  let score = 12;
+  let score = getBrazilDayPolemicScore(normalized);
 
-  if (!normalized.title || !(normalized.sourceUrl || normalized.slug)) return -100;
+  if (!isRealPublicNewsSource(normalized)) return -100;
   if (monthlyHeavyCrimePattern.test(haystack)) score -= 36;
-  if (/\b(festa|show|artista|cantor|cantora|cultura|evento|festival|influenc|criador|criadora|modelo|marca|social|viral|meme|reels|story|tiktok|instagram)\b/.test(haystack)) score += 26;
-  if (/\b(polem|debate|critica|cobr|divide|repercuss|opiniao|bastidor|boato|timeline|comentarios|comunidade)\b/.test(haystack)) score += 24;
-  if (/\b(prefeitura|governo|governadora|vereador|deputad|obra|mobilidade|bairro|servico|serviço|educacao|saude)\b/.test(haystack)) score += 10;
-  if (/\b(cruzeiro do sul|jurua|juru[aá]|acre|rio branco)\b/.test(haystack)) score += 12;
+  if (/\b(festa|show|artista|cantor|cantora|cultura|evento|festival|influenc|criador|criadora|modelo|marca|social|viral|meme|reels|story|tiktok|instagram)\b/.test(haystack)) score += 14;
+  if (/\b(polem|debate|critica|cobr|divide|repercuss|bastidor|boato|timeline|comentarios|comunidade)\b/.test(haystack)) score += 18;
+  if (/\b(prefeitura|governo|governadora|vereador|deputad|obra|mobilidade|bairro|servico|serviço|educacao|saude)\b/.test(haystack)) score += 8;
   if (articleHasUsableImageCandidate(normalized)) score += 10;
-
-  const ageDays = getEntertainmentAgeDays(normalized);
-  if (ageDays <= 7) score += 16;
-  else if (ageDays <= 30) score += 9;
-  else if (ageDays > 90) score -= 10;
 
   return score;
 };
@@ -8739,32 +9027,37 @@ const getMonthlyTone = (article = {}, index = 0) => {
   const haystack = normalizeText(
     [normalized.title, normalized.summary, normalized.lede, normalized.category, normalized.categoryKey, normalized.sourceName, article.monthlyTone].join(" ")
   );
+  const scopeText = buildBrazilDayContentHaystack(normalized);
 
-  if (/\b(agents|agente|agentes reais|rodada diaria|rodada diária|monitoramento)\b/.test(haystack)) {
-    return { tag: "Assuntos do dia", className: "month-creators", axis: "em acompanhamento" };
+  if (juruaScopePattern.test(scopeText)) {
+    return { tag: "Vale do Juruá hoje", className: "month-territory", axis: "notícia real" };
   }
 
-  if (/\b(festa|social|celebridade|modelo|marca|collab|criador|criadora|influenc|reels|story|tiktok|instagram)\b/.test(haystack)) {
-    return { tag: "Celebridades da semana", className: "month-celebs", axis: "alcance social" };
+  if (/\b(alcolumbre|lula|bolsonaro|stf|senado|congresso|veto|oposicao|oposição|eleicao|eleição)\b/.test(haystack)) {
+    return { tag: "Polêmica do Brasil", className: "month-civic", axis: "política nacional" };
+  }
+
+  if (/\b(polem|debate|critica|cobr|divide|boato|repercuss|timeline)\b/.test(haystack)) {
+    return { tag: "Polêmica do dia", className: "month-civic", axis: "assunto do dia" };
+  }
+
+  if (/\b(festa|social|celebridade|modelo|marca|collab|criador|criadora|influenc|reels|story|tiktok|instagram|famos)\b/.test(haystack)) {
+    return { tag: "Celebridade em notícia", className: "month-celebs", axis: "fonte pública" };
   }
 
   if (/\b(cultura|show|palco|artista|cantor|cantora|evento|festival|agenda)\b/.test(haystack)) {
-    return { tag: "Criadores em alta", className: "month-creators", axis: "cultura e agenda" };
-  }
-
-  if (/\b(polem|debate|critica|cobr|divide|boato|repercuss|opiniao|timeline)\b/.test(haystack)) {
-    return { tag: "Polêmica em debate", className: "month-civic", axis: "opinião pública" };
+    return { tag: "Cultura no Brasil", className: "month-creators", axis: "notícia do dia" };
   }
 
   if (/\b(bairro|comunidade|obra|mobilidade|servico|serviço|risco|transito|trânsito)\b/.test(haystack)) {
-    return { tag: "Comunidade local", className: "month-territory", axis: "bairro e gestão" };
+    return { tag: "Impacto local", className: "month-territory", axis: "vida real" };
   }
 
   const fallback = [
-    { tag: "Recorte social", className: "month-celebs", axis: "rede local" },
-    { tag: "Influência local", className: "month-creators", axis: "criadores" },
-    { tag: "Polêmica da semana", className: "month-civic", axis: "debate" },
-    { tag: "Termômetro da cidade", className: "month-territory", axis: "comunidade" }
+    { tag: "Brasil hoje", className: "month-civic", axis: "notícia real" },
+    { tag: "Assunto do dia", className: "month-creators", axis: "fonte pública" },
+    { tag: "Repercussão nacional", className: "month-civic", axis: "Brasil" },
+    { tag: "No radar do dia", className: "month-territory", axis: "atualização" }
   ];
   return fallback[index % fallback.length];
 };
@@ -8788,13 +9081,11 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
   const tone = getMonthlyTone(article, index);
   const agentAction = getDailyAgentActionForCard(agentPulse, index);
   const shouldShowInternalAgentNote = false;
-  const href = buildArticleHref(article);
+  const href = article.sourceUrl || buildArticleHref(article);
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
-  const imageUrl = sanitizeImageUrl(
-    getArticleDisplayImageUrl(article) ||
-      article.imageUrl ||
-      monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl
-  );
+  const imageUrl =
+    getRealNewsCardImageUrl(article, monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl) ||
+    monthlyFallbackStories[index % monthlyFallbackStories.length].imageUrl;
   const dateLabel =
     formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
     formatCompactDisplayDate(new Date().toISOString());
@@ -8805,7 +9096,7 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
     <article class="month-card ${escapeHtml(tone.className)} month-dynamic-card reveal ${delayClass}" data-live-score="${score}">
       <div class="month-card-topline">
         <span class="month-tag">${escapeHtml(tone.tag)}</span>
-        <span class="month-live-pill">diário</span>
+        <span class="month-live-pill">fonte real</span>
       </div>
       <a
         class="month-photo"
@@ -8816,7 +9107,7 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
       <h3>
         <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(truncateCopy(article.title || "Recorte social em atualização", 108))}</a>
       </h3>
-      <p>${escapeHtml(truncateCopy(cleanArticleExcerpt(article.lede || article.summary, "Tema em acompanhamento no portal."), 142))}</p>
+      <p>${escapeHtml(truncateCopy(cleanPublicNewsSummary(article, "Leia a notícia completa na fonte original."), 142))}</p>
       <div class="month-signal" aria-label="Força de repercussão">
         <span>${escapeHtml(tone.axis)}</span>
         <i><b style="width:${score}%"></b></i>
@@ -8831,61 +9122,107 @@ const buildMonthlyDynamicCard = (item = {}, index = 0, agentPulse = null) => {
 };
 
 const pickMonthlyDynamicStories = async (options = {}) => {
-  const [liveBuzzItems, socialTrendItems, agentPulse] = await Promise.all([
-    fetchTopicFeedCached("buzz", 18, options),
-    fetchSocialTrendsCached(12, options),
-    fetchDailyAgentPulseCached(options)
-  ]);
-  const socialLinkedStories = buildSocialSignalLinkedArticles(
-    socialTrendItems,
-    [...liveBuzzItems, ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])],
-    {
-      limit: 4,
-      minScore: 30
-    }
-  );
-  const directSocialStories = buildDirectSocialTrendBuzzArticles(socialTrendItems, 4);
+  const liveBuzzItems = await fetchTopicFeedCached("buzz", 24, options);
   const candidates = dedupeNewsItems([
-    ...socialLinkedStories,
-    ...directSocialStories,
+    ...(Array.isArray(options.runtimeArticles) ? options.runtimeArticles : []),
+    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
     ...liveBuzzItems,
-    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ])
     .map((item) => normalizeRuntimeArticle(item))
-    .filter(shouldUseNationalPoliticsInHotSurface)
-    .map((article) => ({ article, score: getMonthlyArticleScore(article) }))
-    .filter((entry) => entry.score >= 12)
+    .filter(isRealPublicNewsSource)
+    .filter(isBrazilDayPublicFocus)
+    .filter((article) => !isInternationalOnlyPublicArticle(article))
+    .map((article) => ({
+      article,
+      lane: getMonthlyStoryLane(article),
+      score: getMonthlyArticleScore(article)
+    }))
+    .filter((entry) => entry.score >= 24)
     .sort((left, right) => {
-      const flowDiff = compareEditorialFlowArticles(left.article, right.article, {
-        scoreFn: getMonthlyArticleScore,
-        imageBias: true
-      });
-      if (flowDiff !== 0) return flowDiff;
+      const laneWeight = {
+        "jurua-polemica": 9,
+        "jurua-celebridade": 8,
+        "jurua-dia": 7,
+        "acre-polemica": 6,
+        "acre-social": 5,
+        "acre-dia": 4,
+        "brasil-polemica": 3,
+        "brasil-celebridade": 2,
+        "brasil-dia": 1
+      };
+      const leftLane = laneWeight[left.lane] || 0;
+      const rightLane = laneWeight[right.lane] || 0;
+      if (rightLane !== leftLane) return rightLane - leftLane;
       return right.score - left.score;
     });
 
   const selected = [];
-  const usedKeys = buildReservedArticleKeys(["monthly"]);
-  const usedImages = buildReservedArticleImageKeys(["monthly"]);
+  const selectedKeys = new Set();
+  const strictUsedKeys = buildReservedArticleKeys(["monthly"]);
+  const strictUsedImages = buildReservedArticleImageKeys(["monthly"]);
 
-  for (const { article } of candidates) {
-    if (selected.length >= 6) break;
+  const pushCandidate = ({ article } = {}, options = {}) => {
+    if (!article || selected.length >= 6) return false;
     const articleKey = getArticleUsageKey(article);
     const imageKey = getArticleImageKey(article);
-    if (!articleKey || usedKeys.has(articleKey)) continue;
-    if (imageKey && usedImages.has(imageKey)) continue;
-    usedKeys.add(articleKey);
-    if (imageKey) usedImages.add(imageKey);
+    if (!articleKey || selectedKeys.has(articleKey)) return false;
+    if (options.respectReservations !== false) {
+      if (strictUsedKeys.has(articleKey)) return false;
+      if (imageKey && strictUsedImages.has(imageKey)) return false;
+    }
+    selectedKeys.add(articleKey);
     selected.push(article);
+    return true;
+  };
+
+  const addFromLane = (lanePattern, maxCount, options = {}) => {
+    let added = 0;
+    for (const candidate of candidates) {
+      if (selected.length >= 6 || added >= maxCount) break;
+      if (!lanePattern.test(candidate.lane || "")) continue;
+      if (pushCandidate(candidate, options)) added += 1;
+    }
+  };
+
+  addFromLane(/^jurua-(?:polemica|celebridade)$/, 2);
+  addFromLane(/^jurua-/, 1);
+  addFromLane(/^acre-/, 1);
+  addFromLane(/^brasil-polemica$/, 2);
+  addFromLane(/^brasil-celebridade$/, 1);
+
+  if (selected.length < 6) {
+    addFromLane(/^jurua-/, 2, { respectReservations: false });
+    addFromLane(/^acre-/, 1, { respectReservations: false });
+    addFromLane(/^brasil-polemica$/, 2, { respectReservations: false });
+    addFromLane(/^brasil-celebridade$/, 1, { respectReservations: false });
+  }
+
+  for (const candidate of candidates) {
+    if (selected.length >= 6) break;
+    pushCandidate(candidate, { respectReservations: selected.length >= 4 });
   }
 
   if (selected.length < 6) {
-    pickDailyItems(monthlyFallbackStories, 6 - selected.length, 73).forEach((item) => selected.push(item));
+    pickBrazilDayRealStories(
+      [
+        ...(Array.isArray(options.runtimeArticles) ? options.runtimeArticles : []),
+        ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+        ...liveBuzzItems
+      ],
+      6 - selected.length,
+      { minScore: 0, allowLatestFallback: true, requireFocus: true }
+    ).forEach((item) => {
+      const key = getArticleUsageKey(item);
+      if (key && !selectedKeys.has(key)) {
+        selectedKeys.add(key);
+        selected.push(item);
+      }
+    });
   }
 
   return {
     stories: selected.slice(0, 6),
-    agentPulse
+    agentPulse: null
   };
 };
 
@@ -8905,13 +9242,28 @@ const renderDynamicMonthlyBuzz = async (options = {}) => {
   rerenderEditorialRemainderSurfaces();
 };
 
+let publicDaySurfaceRefreshTimerId = null;
+
+const refreshPublicDaySurfacesFromNewsData = (delay = 0) => {
+  window.clearTimeout(publicDaySurfaceRefreshTimerId);
+  publicDaySurfaceRefreshTimerId = window.setTimeout(() => {
+    const runtimeArticles = Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [];
+    void renderDailyTrendingBuzz({ forceRefresh: true, runtimeArticles }).catch(() => {});
+    void renderDynamicMonthlyBuzz({ forceRefresh: true, runtimeArticles }).catch(() => {});
+  }, Math.max(0, delay));
+};
+
+window.addEventListener("catalogo:deferred-news-ready", () => {
+  refreshPublicDaySurfacesFromNewsData(80);
+});
+
 const communityTrendFallbackTopics = [
   {
     title: "Bairros cobram resposta rápida para serviços do dia",
     summary: "Relatos de rua, iluminação, drenagem e atendimento público puxam a conversa local.",
     category: "Comunidade",
     sourceName: "Radar social",
-    hashtags: ["#Bairros", "#ServicoPublico", "#CZS"]
+    hashtags: ["Bairros", "Serviço público", "Cruzeiro do Sul"]
   },
   {
     title: "Agenda cultural e eventos movimentam stories e grupos",
@@ -8925,14 +9277,14 @@ const communityTrendFallbackTopics = [
     summary: "Memes, prints e vídeos curtos aumentam o alcance de assuntos que precisam de contexto.",
     category: "Buzz",
     sourceName: "Redes sociais",
-    hashtags: ["#BuzzLocal", "#MemeDoDia", "#Acre"]
+    hashtags: ["Buzz local", "Meme do dia", "Acre"]
   },
   {
     title: "Comércio e pequenos negócios entram na conversa",
     summary: "Produtos, filas, promoções e atendimento aparecem entre os temas mais compartilhados.",
     category: "Negócios",
     sourceName: "Radar de marcas",
-    hashtags: ["#ComercioLocal", "#Negocios", "#CZS"]
+    hashtags: ["Comércio local", "Negócios", "Cruzeiro do Sul"]
   },
   {
     title: "Política regional gera debate e pedido de explicação",
@@ -9024,7 +9376,7 @@ const normalizeCommunityHashtag = (value = "") => {
 };
 
 const buildCommunityTrendHashtags = (items = []) => {
-  const fixedTags = ["#CZS", "#ValeDoJurua", "#Acre"];
+  const fixedTags = ["Cruzeiro do Sul", "Vale do Juruá", "Acre"];
   const dynamicTags = [];
 
   items.forEach((item) => {
@@ -14009,8 +14361,8 @@ const hydrateDynamicNews = async () => {
 
     window.setTimeout(() => {
       void Promise.allSettled([
-        renderDailyTrendingBuzz(),
-        renderDynamicMonthlyBuzz(),
+        renderDailyTrendingBuzz({ forceRefresh: true, runtimeArticles: merged }),
+        renderDynamicMonthlyBuzz({ runtimeArticles: merged }),
         renderCommunityTrendCard(),
         renderGlobalPoliticsHighlights()
       ]);

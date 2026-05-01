@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-01T02:20:00.000Z
+Updated: 2026-05-01T14:54:17.360Z
 
 ## Active Goal
 
-- Home mais leve e Fofocas & Polemicas como manchetes reais de redes
+- Home com polemicas reais do dia
 
 ## Summary
 
-Usuario disse que o site inteiro ainda estava lento e que a area de fofocas deveria captar novidades reais das redes, com manchetes do que esta rolando e sem leitura de opiniao. `index.html` agora pre-carrega `api/news` e `api/social-trends` no head, deixa `news-data.js` e scripts laterais para depois do load e tira CSS/imagens secundarias do caminho critico. `script.js` consome o preload social e monta Fofocas & Polemicas como manchetes curtas de repercussao, com aviso de termometro e nao noticia confirmada. Medicao local melhorou de DCL ~5,1s/load ~11,2s para mobile DCL ~1,3s/load ~2,9s.
+Blocos Polêmicas do Brasil Hoje e Celebridades & Polêmicas do Dia agora usam notícias reais com fonte, misturando Vale do Juruá/Cruzeiro do Sul, Acre e Brasil, sem hashtag genérica/lista externa/texto de editor. Performance local segue leve.
 
 ## Next
 
-- Commitar/publicar o pacote de performance sem PubPaid; conferir producao com cache-bust `home-fast-social1`.
+- Commitar e publicar o pacote sem PubPaid; confirmar produção com cache-bust home-real-brasil2.

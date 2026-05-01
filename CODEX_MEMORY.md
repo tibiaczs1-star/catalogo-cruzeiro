@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-01 - Polemicas reais do Brasil e Juruá
+
+- Usuario reforcou que os cards ainda pareciam feitos para editor e pediu noticias reais, em linguagem de leitor comum, remetendo ao dia e as polemicas do Brasil; quando houver Vale do Jurua/Cruzeiro do Sul, melhor.
+- `index.html` atualizou cache-bust para `home-real-brasil2`, removeu a faixa publica de hashtags genericas e passou a disparar `catalogo:deferred-news-ready` quando `news-data.js` termina de carregar.
+- `script.js` agora redesenha `Polêmicas do Brasil Hoje` e `Celebridades & Polêmicas do Dia` depois do acervo real carregar, separa fonte local de assunto local, bloqueia Best Hashtags/Trends/lista externa, filtra cultura generica/internacional e monta uma mistura de Juruá, Acre e Brasil com fonte real.
+- Imagens externas instaveis de Batelão/Juruá Comunicação nos cards desses blocos caem em fallback local para evitar card vazio.
+- Validacoes locais: `node --check script.js`, `node --check server.js`, Playwright desktop/mobile com 6 cards reais em cada bloco, sem texto tecnico/hashtags/lista externa, mobile DCL ~1,16s/load ~2,41s, e `npm run review:team` com `totalIssues=0`.
+
 ## Atualizacao rapida 2026-05-01 - Home mais leve e redes como manchetes
 
 - Usuario reforcou que o site inteiro estava lento e que a area de fofocas deveria captar algo real das redes, com manchetes do que esta rolando, sem discussoes de opiniao.
