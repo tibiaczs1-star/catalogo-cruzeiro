@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "startedAt": "2026-04-30T11:51:11.425Z",
-  "finishedAt": "2026-04-30T11:51:13.371Z",
+  "startedAt": "2026-04-30T14:06:11.554Z",
+  "finishedAt": "2026-04-30T14:06:13.307Z",
   "capturedItems": 203,
-  "capturedToday": 92,
+  "capturedToday": 124,
   "activeWindowItems": 420,
-  "archiveItems": 669,
+  "archiveItems": 790,
   "reports": [
     {
       "source": "ac24horas",

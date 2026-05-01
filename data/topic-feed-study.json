@@ -1,6 +1,6 @@
 {
   "topic": "study",
-  "updatedAt": "2026-04-30T12:29:57.516Z",
+  "updatedAt": "2026-05-01T00:53:46.965Z",
   "items": [
     {
       "id": "universidades-buscam-reconstruir-confianca-publica-no-ensino-superior",
@@ -205,8 +205,8 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/media/reyes_diversity%20statement.jpg?itok=t39Yid2f",
-      "sourceImageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/media/reyes_diversity%20statement.jpg?itok=t39Yid2f",
+      "imageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2026-04/GettyImages-1348273219.jpg?itok=YP_3Gl8b",
+      "sourceImageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2026-04/GettyImages-1348273219.jpg?itok=YP_3Gl8b",
       "feedImageUrl": "",
       "imageCredit": "",
       "imageFocus": "",
@@ -227,8 +227,8 @@
     },
     {
       "source": "edsurge",
-      "ok": true,
-      "count": 8
+      "ok": false,
+      "error": "timeout"
     },
     {
       "source": "hechinger",

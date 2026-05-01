@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-30T23:10:34.638Z",
+  "lastUpdatedAt": "2026-05-01T00:39:59.330Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -8915,6 +8915,21 @@
       ],
       "nextSteps": [],
       "notes": "Validado localmente: /api/news preloaded iniciou em ~1.0s no Playwright, hero com 5 titulos distintos, Tendencias com 6 cards de sinais sociais em checagem, console sem erros e review:team totalIssues=0."
+    },
+    {
+      "id": "2026-05-01-automacao-sync-online-local-ok-0-achados-2-fontes-404",
+      "createdAt": "2026-05-01T00:39:59.330Z",
+      "updatedAt": "2026-05-01T00:39:59.330Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Automacao: sincronizar site online/local 12h. Rodar npm run sync:online-local, validar HOME/radar/arquivo/mosaicos/cards com resumos curtos e preservar noticia.html/noticia.js completo. Ler relatorios em .codex-temp/online-local-sync e .codex-temp/review-team.",
+      "summary": "Automacao sync online→local (ok; 0 achados; 2 fontes 404)",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

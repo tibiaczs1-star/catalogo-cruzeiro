@@ -7848,6 +7848,18 @@ input[type="range"] {
     var(--paper);
 }
 
+.trending-test-note {
+  max-width: 780px;
+  margin: -0.65rem 0 1.2rem;
+  padding: 0.78rem 0.95rem;
+  border: 1px solid rgba(176, 64, 64, 0.18);
+  border-left: 4px solid rgba(176, 64, 64, 0.72);
+  background: rgba(255, 248, 238, 0.78);
+  color: #5b2d2d;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
 .trending-grid {
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr;
