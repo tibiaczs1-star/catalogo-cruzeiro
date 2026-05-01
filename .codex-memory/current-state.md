@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-01T00:54:29.252Z
+Updated: 2026-05-01T01:12:00.000Z
 
 ## Active Goal
 
-- Fechamento diario: Fofocas em teste e sync web/offline
+- Ajuste fino do aviso publico em Fofocas & Polemicas
 
 ## Summary
 
-Caderno Tendencias foi renomeado para Fofocas & Polemicas, com aviso de funcao em teste e linguagem publica de fofoca/treta/repercussao. Cards dinamicos agora usam sinais sociais reais em tom publico, sem termos de editor. Sync web/offline rodou ok: 844 noticias no acervo, 199 captadas direto, sanitizer ok, imagens 844/844, 181 agentes ok e review totalIssues=0.
+Caderno Tendencias foi renomeado para Fofocas & Polemicas. Usuario pediu o aviso em tom de consumidor, nao de editor, deixando claro que a area esta em teste e que os cards nao sao noticias confirmadas. `index.html` recebeu texto novo: conversas, rumores e assuntos repercutindo nas redes; ler como termometro do momento, nao como reportagem. Review local zerado.
 
 ## Next
 
-- Publicar pacote publico sem PubPaid 2.0; conferir producao com Fofocas & Polemicas e cache-bust atualizado.
+- Commitar/publicar o ajuste textual sem PubPaid; conferir producao com cache-bust `fofocas-teste2`.

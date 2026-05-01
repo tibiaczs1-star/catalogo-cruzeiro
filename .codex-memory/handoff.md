@@ -1,10 +1,10 @@
 # Handoff
 
-Updated: 2026-05-01T00:54:29.343Z
+Updated: 2026-05-01T01:12:00.000Z
 
-Rodada final do dia: Fofocas & Polemicas recebeu aviso de funcao em teste, texto publico e cards de treta real apurada por sinais sociais. npm run sync:online-local passou com 844 itens, 199 captados, sanitizer/review/imagens/agentes/PDF ok. PubPaid segue fora do pacote.
+Rodada final do dia: Fofocas & Polemicas recebeu texto de aviso mais voltado ao consumidor. A faixa agora diz que a area esta em teste, recebe conversas/rumores/repercussoes de redes e que esses cards nao sao noticias confirmadas; devem ser lidos como termometro, nao reportagem. PubPaid segue fora do pacote.
 
 ## Next
 
-- Commitar e publicar apenas index/script/styles/dados sincronizados/assets news-fallbacks/memoria
-- excluindo pubpaid e runtime de jogo.
+- Commitar e publicar apenas `index.html` e memorias relacionadas
+- conferir producao com `fofocas-teste2`.

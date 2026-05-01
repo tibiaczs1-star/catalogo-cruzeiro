@@ -8930,6 +8930,32 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-01-aviso-fofocas-consumidor-nao-noticia",
+      "createdAt": "2026-05-01T01:12:00.000Z",
+      "updatedAt": "2026-05-01T01:12:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "O texto do aviso nao esta legal; quero algo mais pro consumidor e nao pro editor, algo como estamos testando essa area, e deixa claro que nao sao noticias.",
+      "summary": "Trocar aviso de Fofocas & Polemicas para linguagem de consumidor e deixar claro que sao conversas/rumores/repercussoes em teste, nao noticias confirmadas.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "index.html",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "fofocas",
+        "aviso-publico",
+        "consumidor"
+      ],
+      "nextSteps": [],
+      "notes": "Texto aplicado e validado localmente com node --check script.js e npm run review:team totalIssues=0."
     }
   ]
 }
