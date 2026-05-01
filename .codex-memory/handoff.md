@@ -1,9 +1,10 @@
 # Handoff
 
-Updated: 2026-05-01T00:27:41.458Z
+Updated: 2026-05-01T00:54:29.343Z
 
-Pacote publico commitado localmente em ffada45 e aplicado no worktree limpo de deploy como 230ac0a; publicado em render-target/main sem incluir PubPaid 2.0 nem arquivos data/runtime ruidosos. Producao respondeu 200 com cache-bust novo 20260430-hero-trends-speed1 e preload presente.
+Rodada final do dia: Fofocas & Polemicas recebeu aviso de funcao em teste, texto publico e cards de treta real apurada por sinais sociais. npm run sync:online-local passou com 844 itens, 199 captados, sanitizer/review/imagens/agentes/PDF ok. PubPaid segue fora do pacote.
 
 ## Next
 
-- Acompanhar Render/producao; PubPaid segue local e fora do deploy.
+- Commitar e publicar apenas index/script/styles/dados sincronizados/assets news-fallbacks/memoria
+- excluindo pubpaid e runtime de jogo.

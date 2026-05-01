@@ -10,6 +10,15 @@
 - Validacoes locais: `node --check script.js`, `node --check server.js`, smoke home/API 200, Playwright com `/api/news` iniciando em ~`1,0s`, hero com 5 titulos distintos e Tendencias com 6 cards; console sem erros; `npm run review:team` com `totalIssues=0`.
 - Commit local: `ffada45`; deploy limpo sem PubPaid 2.0 aplicado no worktree `.codex-temp/deploy-render` como `230ac0a` e enviado para `render-target/main`. Producao confirmou 200, `script.js?v=20260430-hero-trends-speed1` e `__CATALOGO_NEWS_PRELOAD__` no HTML.
 
+## Atualizacao rapida 2026-04-30 - Fofocas em teste e fechamento web/offline
+
+- Usuario aprovou a direcao de fofoca/polemica, mas reforcou que precisa ser de verdade: agentes devem varrer internet/redes/fontes abertas e nao parecer painel de editor.
+- `index.html` renomeou o caderno para `Fofocas & Polemicas`, trocou a chamada para fofoca/treta/repercussao e adicionou aviso publico: `Funcao em teste`, com regra de que sem fonte publica o card nao vira noticia.
+- `script.js` reescreveu os cards dinamicos para linguagem publica: `fofoca em alta`, `treta captada`, `termometro da treta`, `quem concorda x quem discorda`, `ver a treta`; removeu termos de bastidor como `sinal em checagem`, `monitoramento aberto`, `fonte confirmada` e `Fonte monitorada` da area.
+- `styles.css` adicionou o aviso visual de funcao em teste no caderno.
+- `npm run sync:online-local` fechou web/offline: 844 noticias no acervo, 199 itens captados direto, sanitizer ok, `review:team totalIssues=0`, imagens 844/844 ok, 181 agentes/5 escritorios ok e PDF em `.codex-temp/online-local-sync/latest-report.pdf`.
+- Playwright local confirmou `Fofocas & Polemicas`, aviso visivel, 6 cards, exemplo `ALCOLUMBRE INIMIGO DO BRASIL: frase pesada vira munição de polêmica`, sem termos editoriais antigos e console sem erros.
+
 ## Atualizacao rapida 2026-04-30 - Home com cards mais rapidos depois da hero
 
 - Usuario pediu para trabalhar a velocidade: a estrutura abria, mas cards apos a hero demoravam.
