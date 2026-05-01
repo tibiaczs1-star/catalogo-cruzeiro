@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-01T00:39:59.330Z",
+  "lastUpdatedAt": "2026-05-01T12:40:31.394Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -8956,6 +8956,50 @@
       ],
       "nextSteps": [],
       "notes": "Texto aplicado e validado localmente com node --check script.js e npm run review:team totalIssues=0."
+    },
+    {
+      "id": "2026-05-01-rodar-sync-online-local-e-validar-resumos-curtos-na-home-preservar-noticia-revis",
+      "createdAt": "2026-05-01T12:40:31.394Z",
+      "updatedAt": "2026-05-01T12:40:31.394Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Automação: sincronizar Catalogo Cruzeiro do Sul online/local; executar npm run sync:online-local; validar home/radar/arquivo/mosaicos/cards com resumos curtos; preservar pagina de leitura (noticia.html/noticia.js); ler relatórios latest-report.md e review-team; reportar status/arquivos/erros.",
+      "summary": "Rodar sync online→local e validar resumos curtos na home; preservar noticia.*; revisar relatórios do sync/review-team.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-01-home-lenta-redes-manchetes-reais",
+      "createdAt": "2026-05-01T02:20:00.000Z",
+      "updatedAt": "2026-05-01T02:20:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "Site todo abrindo devagar demais; transformar area de teste em algo que capte novidades e fofocas quentes reais das redes, sem opiniao, so manchete do que esta rolando.",
+      "summary": "Aliviar carregamento inicial da home e transformar Fofocas & Polemicas em manchetes curtas de repercussao real captada de social trends.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "styles.css",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "performance",
+        "redes-sociais",
+        "fofocas",
+        "manchetes"
+      ],
+      "nextSteps": [],
+      "notes": "Playwright local: antes DCL ~5,1s/load ~11,2s; depois mobile DCL ~1,3s/load ~2,9s. PubPaid fora do pacote."
     }
   ]
 }

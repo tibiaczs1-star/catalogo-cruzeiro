@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-01 - Home mais leve e redes como manchetes
+
+- Usuario reforcou que o site inteiro estava lento e que a area de fofocas deveria captar algo real das redes, com manchetes do que esta rolando, sem discussoes de opiniao.
+- `index.html` passou a iniciar `./api/news` e `./api/social-trends?limit=8` no head, antes dos scripts pesados; `news-data.js` e scripts laterais sairam da fila critica e carregam depois do `load`.
+- CSS secundario e imagens de apoiadores deixaram de bloquear a abertura; a home mantem apenas os estilos centrais no caminho inicial.
+- `script.js` agora consome o preload de social trends e monta `Fofocas & Polemicas` como manchetes curtas de repercussao real, sem esperar caderno buzz, pulso dos agentes ou leitura de opiniao.
+- Aviso publico da area: `Agora nas redes: manchetes curtas do que esta repercutindo. E um termometro de conversa, nao e noticia confirmada.`
+- Medicao Playwright local: antes `DOMContentLoaded` ~5,1s e `load` ~11,2s; depois desktop `DOMContentLoaded` ~1,2-2,1s e mobile `DOMContentLoaded` ~1,3s / `load` ~2,9s.
+
 ## Atualizacao rapida 2026-05-01 - Aviso de fofocas para consumidor
 
 - Usuario apontou que o aviso de `Fofocas & Polemicas` ainda parecia texto de editor e pediu algo mais voltado ao consumidor, deixando claro que a area esta em teste e que os cards nao sao noticias.

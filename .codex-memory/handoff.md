@@ -1,10 +1,10 @@
 # Handoff
 
-Updated: 2026-05-01T01:12:00.000Z
+Updated: 2026-05-01T02:20:00.000Z
 
-Rodada final do dia: Fofocas & Polemicas recebeu texto de aviso mais voltado ao consumidor. A faixa agora diz que a area esta em teste, recebe conversas/rumores/repercussoes de redes e que esses cards nao sao noticias confirmadas; devem ser lidos como termometro, nao reportagem. PubPaid segue fora do pacote.
+Rodada de performance da home: usuario reclamou que todo o site seguia lento. Caminho inicial foi aliviado: `api/news` e `api/social-trends` pre-carregam no head, `news-data.js` e scripts laterais carregam depois do `load`, CSS/imagens secundarias sairam da primeira fila. Fofocas & Polemicas agora mostra manchetes curtas de repercussao real das redes, sem opiniao e com aviso de que e termometro, nao noticia confirmada. PubPaid segue fora do pacote.
 
 ## Next
 
-- Commitar e publicar apenas `index.html` e memorias relacionadas
-- conferir producao com `fofocas-teste2`.
+- Commitar/publicar `index.html`, `script.js`, `styles.css` e memorias relacionadas
+- conferir producao com `home-fast-social1`.

@@ -34,10 +34,22 @@
     <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
     <link rel="manifest" href="./site.webmanifest" />
     <link rel="preload" as="image" href="./assets/logo-czs.svg" type="image/svg+xml" fetchpriority="high" />
-    <link rel="preload" as="image" href="./assets/founders-cafe-pack-static.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="./assets/founders-grupo-as-logo.jpeg" fetchpriority="high" />
-    <link rel="preload" as="image" href="./assets/founders-geane-logo-optimized.png" fetchpriority="high" />
-    <link rel="preload" as="image" href="./assets/founders-recommencer-logo.svg" type="image/svg+xml" fetchpriority="high" />
+    <script>
+      window.__CATALOGO_NEWS_PRELOAD__ = window.__CATALOGO_NEWS_PRELOAD__ || fetch("./api/news", {
+        method: "GET",
+        credentials: "same-origin"
+      })
+        .then((response) => (response.ok ? response.json() : null))
+        .catch(() => null);
+      window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ =
+        window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ ||
+        fetch("./api/social-trends?limit=8", {
+          method: "GET",
+          credentials: "same-origin"
+        })
+          .then((response) => (response.ok ? response.json() : null))
+          .catch(() => null);
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,24 +72,8 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260501-fofocas-teste2" />
-  <link rel="stylesheet" href="./styles-late-overrides.css?v=20260422split-a" />
-  <link rel="stylesheet" href="admin-menu.css?v=20260411k" />
-  <link rel="stylesheet" href="acre-photo-cards.css?v=20260411m" />
-  <link rel="stylesheet" href="servicos-menu.css?v=20260411m" />
-  <link rel="stylesheet" href="catalogo-telefonico-plus.css?v=20260413a" />
-  <link rel="stylesheet" href="rodape-voz-humana.css?v=20260411o" />
-  <link rel="stylesheet" href="sala-redacao-real.css?v=20260414q" />
-  <link rel="stylesheet" href="photo-layout-fix.css?v=20260411ab" />
-  <link rel="stylesheet" href="agentes-newsroom-hero.css?v=20260428-mosaic-publica1" />
-  <link rel="stylesheet" href="startup-experience.css?v=20260429-mobile-founder1" />
-  <link rel="stylesheet" href="./insiders-crowd-march.css?v=20260426caption-outside" />
-  <link rel="stylesheet" href="pro-design.css?v=20260420hero-visiblefix" />
-  <link rel="stylesheet" href="news-photo-fix.css?v=20260415a" />
-  <link rel="stylesheet" href="deploy-stability.css?v=20260413a" />
-  <link rel="stylesheet" href="./modern-launch.css?v=20260415d" />
+    <link rel="stylesheet" href="./styles.css?v=20260501-home-fast-social1" />
   <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
-  <link rel="stylesheet" href="./home-header-blue-restore.css?v=20260422a" />
   <link rel="stylesheet" href="./premium-clarity.css?v=20260430-matters-flow1" />
 </head>
   <body class="editorial-home founder-prelude-pending">
@@ -2546,9 +2542,8 @@
             </p>
           </div>
           <p class="trending-test-note">
-            Estamos testando esta área. Aqui entram conversas, rumores e assuntos que estão
-            repercutindo nas redes; não são notícias confirmadas. Leia como termômetro do momento,
-            não como reportagem.
+            Agora nas redes: manchetes curtas do que está repercutindo. É um termômetro de conversa,
+            não é notícia confirmada.
           </p>
 
           <div class="trending-grid">
@@ -3493,22 +3488,73 @@
     </div>
 
     <script>
-      window.__CATALOGO_NEWS_PRELOAD__ = fetch("./api/news", {
+      window.__CATALOGO_NEWS_PRELOAD__ = window.__CATALOGO_NEWS_PRELOAD__ || fetch("./api/news", {
         method: "GET",
         credentials: "same-origin"
       })
         .then((response) => (response.ok ? response.json() : null))
         .catch(() => null);
     </script>
-    <script defer src="./news-data.js?v=20260429-news-capture3"></script>
-    <script defer src="./social-rss-data.js?v=20260413a"></script>
-    <script defer src="./social-rss.js?v=20260423a"></script>
-    <script defer src="./sidebar-data.js?v=20260413a"></script>
-    <script defer src="./sidebar-widgets-recovery.js?v=20260423a"></script>
-    <script defer src="runtime-config.js?v=20260415d"></script>
-    <script defer src="./site-google-auth.js?v=20260429-home-sync1"></script>
-    <script defer src="./startup-experience.js?v=20260430-public-sync1"></script>
-    <script defer src="./script.js?v=20260501-fofocas-teste2"></script>
-    <script defer src="deferred-home-boot.js?v=20260424startup-office-loader"></script>
+    <script defer src="./script.js?v=20260501-home-fast-social1"></script>
+    <script>
+      (function () {
+        const styles = [
+          "./styles-late-overrides.css?v=20260422split-a",
+          "admin-menu.css?v=20260411k",
+          "acre-photo-cards.css?v=20260411m",
+          "servicos-menu.css?v=20260411m",
+          "catalogo-telefonico-plus.css?v=20260413a",
+          "rodape-voz-humana.css?v=20260411o",
+          "sala-redacao-real.css?v=20260414q",
+          "photo-layout-fix.css?v=20260411ab",
+          "agentes-newsroom-hero.css?v=20260428-mosaic-publica1",
+          "startup-experience.css?v=20260429-mobile-founder1",
+          "./insiders-crowd-march.css?v=20260426caption-outside",
+          "pro-design.css?v=20260420hero-visiblefix",
+          "news-photo-fix.css?v=20260415a",
+          "deploy-stability.css?v=20260413a",
+          "./modern-launch.css?v=20260415d",
+          "./home-header-blue-restore.css?v=20260422a"
+        ];
+        const queue = [
+          "./startup-experience.js?v=20260501-home-fast-social1",
+          "./sidebar-data.js?v=20260413a",
+          "./sidebar-widgets-recovery.js?v=20260423a",
+          "./social-rss-data.js?v=20260413a",
+          "./social-rss.js?v=20260423a",
+          "runtime-config.js?v=20260415d",
+          "./site-google-auth.js?v=20260429-home-sync1",
+          "deferred-home-boot.js?v=20260424startup-office-loader",
+          "./news-data.js?v=20260429-news-capture3"
+        ];
+        const loadScript = (src) =>
+          new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = resolve;
+            document.body.appendChild(script);
+          });
+        const loadStyle = (href) => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = href;
+          document.head.appendChild(link);
+        };
+        const run = async () => {
+          styles.forEach(loadStyle);
+          for (const src of queue) {
+            await loadScript(src);
+          }
+        };
+        const start = () => window.setTimeout(run, 700);
+        if (document.readyState === "complete") {
+          start();
+        } else {
+          window.addEventListener("load", start, { once: true });
+        }
+      })();
+    </script>
 </body>
 </html>
