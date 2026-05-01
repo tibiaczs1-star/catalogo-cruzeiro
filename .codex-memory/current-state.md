@@ -1,15 +1,16 @@
 # Current State
 
-Updated: 2026-04-30T23:39:13.225Z
+Updated: 2026-05-01T00:27:40.418Z
 
 ## Active Goal
 
-- Home mais rapida, hero diversificado e Tendencias abastecido
+- Home publicada sem PubPaid
 
 ## Summary
 
-Rodada aplicou preload de /api/news antes dos scripts pesados, invalidou cache diario do hero quando NEWS_DATA muda, religou rotacao do destaque principal mesmo com cards de topicos e adicionou fallback de Tendencias baseado em sinais sociais reais de Instagram/X/Facebook quando nao ha materia perfeitamente ligada.
+Deploy publico concluido sem PubPaid 2.0. render-target/main esta em 230ac0a com preload de /api/news, hero diversificado e Tendencias abastecido por sinais sociais em checagem. Producao 200 confirmou script.js?v=20260430-hero-trends-speed1 e __CATALOGO_NEWS_PRELOAD__.
 
 ## Next
 
-- Commitar/deployar se aprovado; em producao conferir cache-bust script.js?v=20260430-hero-trends-speed1 e reiniciar Render para carregar server atual se necessario.
+- Monitorar a home online; se o usuario pedir
+- rodar checagem visual de producao apos o Render esfriar.

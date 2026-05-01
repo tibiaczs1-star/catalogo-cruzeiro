@@ -1,12 +1,9 @@
 # Handoff
 
-Updated: 2026-04-30T23:39:13.324Z
+Updated: 2026-05-01T00:27:41.458Z
 
-Correcoes locais em index.html e script.js: preload cedo de /api/news reduziu start Playwright de ~4,0s para ~1,0s; hero agora invalida pool ao receber noticias novas, intercala editorias e rotaciona o destaque principal mesmo com carrossel; Tendencias renderiza 6 cards usando sinais sociais reais em checagem quando nao encontra noticia ligada.
+Pacote publico commitado localmente em ffada45 e aplicado no worktree limpo de deploy como 230ac0a; publicado em render-target/main sem incluir PubPaid 2.0 nem arquivos data/runtime ruidosos. Producao respondeu 200 com cache-bust novo 20260430-hero-trends-speed1 e preload presente.
 
 ## Next
 
-- Publicar apos confirmacao
-- depois validar Render com home 200
-- hero com titulos distintos
-- #trending com 6 cards e review:team zerado.
+- Acompanhar Render/producao; PubPaid segue local e fora do deploy.
