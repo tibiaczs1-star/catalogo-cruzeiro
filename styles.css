@@ -7851,11 +7851,11 @@ input[type="range"] {
 .trending-test-note {
   max-width: 780px;
   margin: -0.65rem 0 1.2rem;
-  padding: 0.78rem 0.95rem;
-  border: 1px solid rgba(176, 64, 64, 0.18);
-  border-left: 4px solid rgba(176, 64, 64, 0.72);
-  background: rgba(255, 248, 238, 0.78);
-  color: #5b2d2d;
+  padding: 0.68rem 0.85rem;
+  border: 1px solid rgba(30, 58, 95, 0.14);
+  border-left: 4px solid rgba(30, 58, 95, 0.58);
+  background: rgba(255, 255, 255, 0.72);
+  color: rgba(16, 35, 60, 0.76);
   font-size: 0.92rem;
   line-height: 1.45;
 }
@@ -7869,6 +7869,22 @@ input[type="range"] {
 
 .trending-grid.is-opinion-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.trending-grid.is-social-now-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.social-now-card .trend-photo {
+  min-height: 150px;
+}
+
+.social-now-card .buzz-inline-meta {
+  align-items: center;
+}
+
+.social-now-card .buzz-inline-meta span {
+  min-width: 0;
 }
 
 .trending-card {

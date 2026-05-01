@@ -7328,10 +7328,10 @@ const buildPublicBuzzHeadlineFromSignal = (signalItem = {}, index = 0) => {
   if (/^#/.test(cleanTitle)) {
     const tag = cleanTitle.replace(/^#/, "");
     const templates = [
-      `Por que #${tag} entrou na boca do povo?`,
-      `O que tem por trás de #${tag}?`,
-      `#${tag}: trend real ou só barulho?`,
-      `A conversa em torno de #${tag} está dividindo opiniões`
+      `#${tag} está entre os assuntos do momento`,
+      `#${tag} ganhou força nas redes`,
+      `#${tag} apareceu no radar de tendências`,
+      `#${tag} entrou na conversa pública`
     ];
     return templates[index % templates.length];
   }
@@ -7362,22 +7362,22 @@ const buildPublicBuzzSummaryFromSignal = (signalItem = {}, platform = "redes") =
   const division = signalItem.importanceDivision || signalItem.category || "cotidiano";
 
   if (/\b(inimigo|vergonha|absurdo|mentira|fora|cancel|boicote|exposto|exposicao|exposição)\b/.test(normalized)) {
-    return `A frase apareceu forte em ${platform} e virou combustível de briga: tem gente usando como cobrança dura, enquanto outro lado vê exagero, torcida ou ataque político.`;
+    return `Assunto captado em ${platform}. É repercussão pública em andamento, ainda sem tratamento como notícia confirmada.`;
   }
 
   if (/^#/.test(cleanTitle)) {
-    return `A hashtag subiu em ${platform}, mas ainda precisa de leitura: pode ser carinho, ironia, campanha ou reclamação. O ponto quente é entender quem está puxando a conversa e quem discorda.`;
+    return `Hashtag vista em ${platform}. Serve como pista do que está chamando atenção agora, sem confirmar fato jornalístico.`;
   }
 
   if (/\b(futebol|time|jogo|campeonato|final)\b/.test(normalized)) {
-    return `O tema entrou com cara de arquibancada digital: provocação, meme e defesa apaixonada. A polêmica é separar zoeira de cobrança real.`;
+    return `Tema esportivo aparecendo em ${platform}. Pode envolver torcida, meme, provocação ou bastidor em circulação.`;
   }
 
   if (/\b(musica|música|show|cantor|cantora|artista|festival)\b/.test(normalized)) {
-    return `O assunto cresceu entre fãs e curiosos. A leitura aqui é de repercussão: elogio, crítica e bastidor cultural ainda estão misturados.`;
+    return `Assunto cultural circulando em ${platform}. É manchete de repercussão, não reportagem fechada.`;
   }
 
-  return `O tema apareceu em ${platform} dentro de ${division}. A pergunta pública é simples: isso virou conversa de verdade, fofoca passageira ou polêmica esperando contexto?`;
+  return `Sinal captado em ${platform} dentro de ${division}. Acompanhe como conversa do momento, não como notícia confirmada.`;
 };
 
 const buildDirectSocialTrendBuzzArticles = (signalItems = [], limit = 6) => {
@@ -7450,6 +7450,43 @@ const buildDirectSocialTrendBuzzArticles = (signalItems = [], limit = 6) => {
       });
       return selected;
     }, []);
+};
+
+const buildSocialNowHeadlineCard = (item = {}, itemIndex = 0) => {
+  const normalizedItem = normalizeRuntimeArticle(item || {});
+  const title = normalizedItem.title || item.title || "Assunto em alta nas redes";
+  const originalTitle = normalizedItem.originalTrendTitle || item.originalTrendTitle || item.hashtags?.[0] || title;
+  const platform = normalizedItem.socialPlatform || item.socialPlatform || item.platform || "redes";
+  const sourceName = normalizedItem.sourceName || item.sourceName || platform;
+  const href = normalizedItem.sourceUrl || item.sourceUrl || item.url || "./arquivo.html";
+  const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+  const imageUrl =
+    sanitizeImageUrl(normalizedItem.imageUrl || normalizedItem.sourceImageUrl || item.imageUrl) ||
+    dailyBuzzFallbackImages[itemIndex % Math.max(1, dailyBuzzFallbackImages.length)] ||
+    "./assets/home-cache/buzz-cruzeiro-01.jpg";
+
+  return `
+    <article class="trending-card influencer-buzz-card social-now-card reveal">
+      <span class="trend-badge hot">${escapeHtml(platform)} • agora nas redes</span>
+      <div
+        class="trend-photo influencer-hero-photo"
+        style="--trend-image:url('${escapeRuntimeAttribute(imageUrl)}')"
+      ></div>
+      <div class="influencer-buzz-copy">
+        <p class="buzz-kicker">${escapeHtml(sourceName)}</p>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(truncateCopy(normalizedItem.displaySummary || normalizedItem.summary || "Manchete de repercussão captada em fonte pública. Não é notícia confirmada.", 150))}</p>
+      </div>
+      <div class="buzz-inline-meta" aria-label="Sinal original">
+        <span>${escapeHtml(truncateCopy(originalTitle, 34))}</span>
+        <span>não é notícia confirmada</span>
+      </div>
+      <div class="engagement buzz-opinion-footer">
+        <span>manchete do que está rolando</span>
+        <a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>ver origem</a>
+      </div>
+    </article>
+  `;
 };
 
 const getBuzzFallbackItems = () => [
@@ -8408,68 +8445,41 @@ const rerenderEditorialRemainderSurfaces = () => {
   }, 0);
 };
 
+let dailyTrendingBuzzHydrationStarted = false;
+
 const renderDailyTrendingBuzz = async (options = {}) => {
   if (!trendingBuzzGrid) {
     return;
   }
 
-  const [liveBuzzItems, socialTrendItems, agentPulse] = await Promise.all([
-    fetchTopicFeedCached("buzz", 12, options),
-    fetchSocialTrendsCached(12, options),
-    fetchDailyAgentPulseCached(options)
-  ]);
-  const newsroomPool = dedupeNewsItems([
-    ...liveBuzzItems,
-    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
-  ]);
-  const socialCases = buildSocialSignalLinkedArticles(socialTrendItems, newsroomPool, {
-    limit: 6,
-    minScore: 34,
-    strictLocal: true
-  });
-  const reservedKeys = buildReservedArticleKeys(["dailyBuzz"]);
-  const reservedImages = buildReservedArticleImageKeys(["dailyBuzz"]);
-  const filteredSocialCases = socialCases.filter((item) => {
-    const key = getArticleUsageKey(item);
-    const imageKey = getArticleImageKey(item);
-    if (!key || reservedKeys.has(key) || (imageKey && reservedImages.has(imageKey))) {
-      return false;
-    }
+  if (dailyTrendingBuzzHydrationStarted && options.forceRefresh !== true) {
+    return;
+  }
+  dailyTrendingBuzzHydrationStarted = true;
 
-    reservedKeys.add(key);
-    if (imageKey) {
-      reservedImages.add(imageKey);
-    }
-    return true;
-  });
-  const measuredCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind === "public-post");
-  const signalCases = filteredSocialCases.filter((item) => item.socialEvidence?.evidenceKind !== "public-post");
+  const socialTrendItems = await fetchSocialTrendsCached(8, options);
   const directSignalCases = buildDirectSocialTrendBuzzArticles(socialTrendItems, 6);
   const editorialFallbackCases =
-    directSignalCases.length || measuredCases.length || signalCases.length
+    directSignalCases.length
       ? []
       : getBuzzFallbackItems().map((item) => ({
           ...item,
           displaySummary:
-            item.summary ||
-            "Radar editorial mantém assuntos sociais em observação enquanto não há sinal externo forte."
+            "Quando a captura social não trouxer sinal público suficiente, este espaço evita inventar manchete."
         }));
   const selectedCases = dedupeNewsItems([
-    ...measuredCases,
-    ...signalCases,
     ...directSignalCases,
     ...editorialFallbackCases
   ]).slice(0, 6);
 
-  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid");
+  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
   trendingBuzzGrid.innerHTML = selectedCases.length
     ? selectedCases
-        .map((item, itemIndex) => buildDailyInfluencerBuzzCard(item, itemIndex, agentPulse))
+        .map((item, itemIndex) => buildSocialNowHeadlineCard(item, itemIndex))
         .join("")
     : buildDailyBuzzEmptyState(socialTrendItems);
   reserveSurfaceArticles("dailyBuzz", selectedCases);
   registerArticleCardLinks(trendingBuzzGrid);
-  rerenderEditorialRemainderSurfaces();
 };
 
 const whatMattersTopics = [
@@ -9530,9 +9540,16 @@ const fetchSocialTrendsCached = async (limit = 24, options = {}) => {
     Date.now() - cachedEntry.createdAt < TOPIC_FEED_CACHE_TTL_MS;
 
   if (!cachedEntry || forceRefresh || !isFresh) {
+    const preloadedSocialPromise = window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__;
+    window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ = null;
+    const requestPromise =
+      preloadedSocialPromise && typeof preloadedSocialPromise.then === "function"
+        ? preloadedSocialPromise
+        : requestApiJson(`/api/social-trends?limit=${safeLimit}`, { method: "GET" });
+
     socialTrendsClientCache.set(cacheKey, {
       createdAt: Date.now(),
-      promise: requestApiJson(`/api/social-trends?limit=${safeLimit}`, { method: "GET" })
+      promise: requestPromise
         .then((payload) =>
           Array.isArray(payload?.items)
             ? payload.items.map((item) => normalizeRuntimeArticle(item))
@@ -14030,6 +14047,7 @@ const scheduleHomeBackgroundHydration = () => {
     }
 
     homeBackgroundHydrationStarted = true;
+    void renderDailyTrendingBuzz().catch(() => {});
     void hydrateDynamicNews();
     window.setTimeout(() => {
       void hydrateCommentsFromApi();
