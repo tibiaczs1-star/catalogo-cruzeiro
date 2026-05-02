@@ -1,6 +1,1114 @@
 window.NEWS_ARCHIVE_TOTAL = 966;
 window.NEWS_DATA = [
   {
+    "id": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/",
+    "slug": "bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza",
+    "title": "Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza",
+    "eyebrow": "governadora mailza",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T18:01:49.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/",
+    "sourceLabel": "Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza",
+    "lede": "Foto: Whidy Melo/ac24horas \" O programa Boa Conversa desta sexta-feira, 1º de maio, teve como foco principal a análise do cenário político acreano.",
+    "summary": "Foto: Whidy Melo/ac24horas \" O programa Boa Conversa desta sexta-feira, 1º de maio, teve como foco principal a análise do cenário político acreano.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-12.13.01-1200x714.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-12.13.01-1200x714.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-12.13.01-1200x714.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza"
+    ],
+    "body": [
+      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza.",
+      "Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/",
+    "slug": "mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua",
+    "title": "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá",
+    "eyebrow": "governadora mailza",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T16:32:13.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/",
+    "sourceLabel": "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá",
+    "lede": "A governadora do Acre, Mailza Assis, marcou presença na programação do Dia do Trabalhador em Cruzeiro do Sul na noite de quarta-feira, 30, para quinta-feira (1º) e aproveitou o clima de festa para interagir com o público",
+    "summary": "A governadora do Acre, Mailza Assis, marcou presença na programação do Dia do Trabalhador em Cruzeiro do Sul na noite de quarta-feira, 30, para quinta-feira (1º) e aproveitou o clima de festa para interagir com o público",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua"
+    ],
+    "body": [
+      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá.",
+      "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/",
+    "slug": "em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pel",
+    "title": "Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul",
+    "eyebrow": "governadora mailza",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T16:15:00.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/",
+    "sourceLabel": "Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul",
+    "lede": "A governadora do Acre, Mailza Assis, mobilizou uma ampla força-tarefa do secretariado estadual em Cruzeiro do Sul para reforçar o apoio às famílias afetadas pelas cheias do Rio Juruá.",
+    "summary": "A governadora do Acre, Mailza Assis, mobilizou uma ampla força-tarefa do secretariado estadual em Cruzeiro do Sul para reforçar o apoio às famílias afetadas pelas cheias do Rio Juruá.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetad.svg",
+    "feedImageUrl": "./assets/news-fallbacks/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetad.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetad.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pel"
+    ],
+    "body": [
+      "Agencia Acre publicou em 01 de mai de 2026 a base desta noticia sobre Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul.",
+      "Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/",
+    "slug": "governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-no",
+    "title": "Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória",
+    "eyebrow": "governadora mailza",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T16:04:32.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/",
+    "sourceLabel": "Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória",
+    "lede": "A governadora Mailza Assis reuniu-se nesta sexta-feira, 1º, com o bispo Dom Flávio Giovenale, da Diocese de Cruzeiro do Sul, para reforçar o apoio do Estado ao Novenário de Nossa Senhora da Glória.",
+    "summary": "A governadora Mailza Assis reuniu-se nesta sexta-feira, 1º, com o bispo Dom Flávio Giovenale, da Diocese de Cruzeiro do Sul, para reforçar o apoio do Estado ao Novenário de Nossa Senhora da Glória.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/96d29df8-92ea-4a80-bf34-ef5df0f6a85b-1024x683.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/96d29df8-92ea-4a80-bf34-ef5df0f6a85b-1024x683.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/96d29df8-92ea-4a80-bf34-ef5df0f6a85b-1024x683.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-no"
+    ],
+    "body": [
+      "Agencia Acre publicou em 01 de mai de 2026 a base desta noticia sobre Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória.",
+      "Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo",
+    "slug": "governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo",
+    "title": "Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó",
+    "eyebrow": "governadora mailza",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T14:28:38.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo",
+    "sourceLabel": "Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó",
+    "lede": "Por Janine Brasil A governadora do Acre, Mailza Assis, realizou nesta quinta-feira, 30, em Feijó, a entrega de novos equipamentos para fortalecer a atuação da Polícia Civil.",
+    "summary": "Por Janine Brasil A governadora do Acre, Mailza Assis, realizou nesta quinta-feira, 30, em Feijó, a entrega de novos equipamentos para fortalecer a atuação da Polícia Civil.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/70875eb2-b721-4c65-86c4-fc460068cade-1024x681.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/70875eb2-b721-4c65-86c4-fc460068cade-1024x681.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/70875eb2-b721-4c65-86c4-fc460068cade-1024x681.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo"
+    ],
+    "body": [
+      "Batelao publicou em 01 de mai de 2026 a base desta noticia sobre Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó.",
+      "Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/",
+    "slug": "governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimento",
+    "title": "Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-05-01T00:10:28.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/",
+    "sourceLabel": "Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior",
+    "lede": "Marcando mais um avanço para a saúde pública no interior do estado, a governadora Mailza Assis entregou, nesta quinta-feira, 30, a reforma e ampliação do Hospital Geral de Feijó Dr. Baba.",
+    "summary": "Marcando mais um avanço para a saúde pública no interior do estado, a governadora Mailza Assis entregou, nesta quinta-feira, 30, a reforma e ampliação do Hospital Geral de Feijó Dr. Baba.",
+    "analysis": "",
+    "body": [
+      "Agencia Acre publicou em 30 de abr de 2026 a base desta noticia sobre Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior.",
+      "Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-invest.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-invest.svg",
+    "feedImageUrl": "./assets/news-fallbacks/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-invest.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimento"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo",
+    "slug": "para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-e",
+    "title": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T23:34:00.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo",
+    "sourceLabel": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó",
+    "lede": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó.",
+      "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/75295a86-8479-4c4d-8350-f6f704190602-1024x681.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/75295a86-8479-4c4d-8350-f6f704190602-1024x681.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/75295a86-8479-4c4d-8350-f6f704190602-1024x681.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-e"
+    ]
+  },
+  {
+    "id": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia",
+    "slug": "governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-",
+    "title": "Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T23:28:41.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia",
+    "sourceLabel": "Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia",
+    "lede": "Por Fernando Santtos A governadora do Acre, Mailza Assis, publicou nesta quinta-feira, 30, o Decreto nº 11.878, de 29 de abril de 2026, que regulamenta sua aplicação normativa.",
+    "summary": "Por Fernando Santtos A governadora do Acre, Mailza Assis, publicou nesta quinta-feira, 30, o Decreto nº 11.878, de 29 de abril de 2026, que regulamenta sua aplicação normativa.",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia.",
+      "Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Joao-Paulo-Silvab-1-300x200.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Joao-Paulo-Silvab-1-300x200.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Joao-Paulo-Silvab-1-300x200.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-"
+    ]
+  },
+  {
+    "id": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio",
+    "slug": "durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agen",
+    "title": "Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T20:47:57.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio",
+    "sourceLabel": "Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município",
+    "lede": "Por Felipe Souza Aproveitando a agenda no município de Feijó, a governadora Mailza Assis concedeu entrevista à Rádio Difusora Acreana, na qual detalhou as atividades programadas para esta quinta-feira, 30.",
+    "summary": "Por Felipe Souza Aproveitando a agenda no município de Feijó, a governadora Mailza Assis concedeu entrevista à Rádio Difusora Acreana, na qual detalhou as atividades programadas para esta quinta-feira, 30.",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município.",
+      "Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/98a9a529-7a80-45b7-ae20-cfcbba4e8347-1024x681.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/98a9a529-7a80-45b7-ae20-cfcbba4e8347-1024x681.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/98a9a529-7a80-45b7-ae20-cfcbba4e8347-1024x681.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agen"
+    ]
+  },
+  {
+    "id": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais",
+    "slug": "em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais",
+    "title": "Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T20:07:09.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais",
+    "sourceLabel": "Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais",
+    "lede": "Batelao publicou uma atualização sobre Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Batelao publicou uma atualização sobre Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais.",
+      "Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/4d93ee2c-8315-4d92-a8b1-7c1b83dc2204-1024x681.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/4d93ee2c-8315-4d92-a8b1-7c1b83dc2204-1024x681.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/4d93ee2c-8315-4d92-a8b1-7c1b83dc2204-1024x681.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais"
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/",
+    "slug": "gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z",
+    "title": "Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z”",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T18:02:10.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/",
+    "sourceLabel": "Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z”",
+    "lede": "O ex-governador do Acre, Gladson Cameli, afirmou nesta quinta-feira (30) que aposta na presença da ex-deputada Jéssica Sales como vice na chapa governista liderada pela atual governadora Mailza Assis.",
+    "summary": "O ex-governador do Acre, Gladson Cameli, afirmou nesta quinta-feira (30) que aposta na presença da ex-deputada Jéssica Sales como vice na chapa governista liderada pela atual governadora Mailza Assis.",
+    "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z”.",
+      "Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z.svg",
+    "feedImageUrl": "./assets/news-fallbacks/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/",
+    "slug": "gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre",
+    "title": "Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T15:54:21.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/",
+    "sourceLabel": "Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre",
+    "lede": "O ex-governador do Acre, Gladson Cameli, comentou as recentes mudanças no primeiro escalão da gestão estadual e afirmou que o processo faz parte da reorganização administrativa conduzida pela atual governadora Mailza Assis.",
+    "summary": "O ex-governador do Acre, Gladson Cameli, comentou as recentes mudanças no primeiro escalão da gestão estadual e afirmou que o processo faz parte da reorganização administrativa conduzida pela atual governadora Mailza Assis.",
+    "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre.",
+      "Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "./assets/news-fallbacks/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre.svg",
+    "sourceImageUrl": "./assets/news-fallbacks/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre.svg",
+    "feedImageUrl": "./assets/news-fallbacks/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre.svg",
+    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
+    "imageFocus": "center 50%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre"
+    ],
+    "originalImageUrl": "",
+    "originalFeedImageUrl": "",
+    "originalSourceImageUrl": "",
+    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/",
+    "slug": "para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder",
+    "title": "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
+    "eyebrow": "governadora mailza",
+    "date": "30 de abr de 2026",
+    "publishedAt": "2026-04-30T10:47:43.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/",
+    "sourceLabel": "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
+    "lede": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador.",
+    "summary": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador.",
+    "analysis": "",
+    "body": [
+      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder.",
+      "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-07-at-16.44.21-2-1200x768.jpeg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-07-at-16.44.21-2-1200x768.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-07-at-16.44.21-2-1200x768.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder"
+    ]
+  },
+  {
+    "id": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano",
+    "slug": "entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano",
+    "title": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano",
+    "eyebrow": "governadora mailza",
+    "date": "29 de abr. de 2026",
+    "publishedAt": "2026-04-30T02:44:19.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano",
+    "sourceLabel": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano",
+    "lede": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano.",
+    "summary": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano.",
+    "analysis": "",
+    "body": [
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/f564c76d-5813-478f-a8be-4c21ca41b054-1024x683.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/f564c76d-5813-478f-a8be-4c21ca41b054-1024x683.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano"
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/",
+    "slug": "mailza-da-posse-a-novos-servidores-efetivos-do-idaf",
+    "title": "Mailza dá posse a novos servidores efetivos do Idaf",
+    "eyebrow": "governadora mailza",
+    "date": "29 de abr. de 2026",
+    "publishedAt": "2026-04-29T23:29:19.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/",
+    "sourceLabel": "Mailza dá posse a novos servidores efetivos do Idaf",
+    "lede": "ac24horas publicou uma atualização sobre Mailza dá posse a novos servidores efetivos do Idaf. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "ac24horas publicou uma atualização sobre Mailza dá posse a novos servidores efetivos do Idaf. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "analysis": "",
+    "body": [
+      "ac24horas publicou em 29 de abr. de 2026 a base desta noticia sobre Mailza dá posse a novos servidores efetivos do Idaf. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Mailza dá posse a novos servidores efetivos do Idaf e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-29-at-17.54.34-1200x753.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-29-at-17.54.34-1200x753.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-da-posse-a-novos-servidores-efetivos-do-idaf"
+    ]
+  },
+  {
+    "id": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
+    "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
+    "title": "Mailza define linha de frente da sua campanha ao governo",
+    "eyebrow": "governadora mailza",
+    "date": "25 de abr. de 2026",
+    "publishedAt": "2026-04-25T15:06:34.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
+    "sourceLabel": "Mailza define linha de frente da sua campanha ao governo",
+    "lede": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
+    "summary": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
+    "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 25 de abr. de 2026 a base desta noticia sobre Mailza define linha de frente da sua campanha ao governo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Mailza define linha de frente da sua campanha ao governo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+    "sourceImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+    "feedImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mailza-define-linha-de-frente-da-sua-campanha-ao-governo"
+    ]
+  },
+  {
+    "id": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
+    "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
+    "title": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-25T00:03:11.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
+    "sourceLabel": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
+    "lede": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes....",
+    "summary": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes...",
+    "analysis": "",
+    "body": [
+      "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural"
+    ]
+  },
+  {
+    "id": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T21:57:54.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+    "sourceLabel": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
+    "lede": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
+    "summary": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves"
+      },
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves"
+      },
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/"
+      }
+    ],
+    "sourceCount": 2,
+    "alternateSlugs": [
+      "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves"
+    ]
+  },
+  {
+    "id": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T21:56:12.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
+    "sourceLabel": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
+    "lede": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza...",
+    "summary": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza...",
+    "analysis": "",
+    "body": [
+      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior"
+      },
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior"
+      },
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/"
+      }
+    ],
+    "sourceCount": 2,
+    "alternateSlugs": [
+      "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior"
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
+    "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
+    "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T19:58:21.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
+    "sourceLabel": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
+    "lede": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
+    "summary": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
+    "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul"
+    ]
+  },
+  {
+    "id": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
+    "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+    "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T19:28:41.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua 24 Horas",
+    "sourceUrl": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
+    "sourceLabel": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
+    "lede": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
+    "summary": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
+    "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua 24 Horas",
+        "url": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural"
+    ]
+  },
+  {
+    "id": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
+    "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
+    "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
+    "eyebrow": "governadora mailza",
+    "date": "24 de abr. de 2026",
+    "publishedAt": "2026-04-24T16:47:11.000Z",
+    "category": "Política Regional",
+    "categoryKey": "politica",
+    "previewClass": "thumb-politica",
+    "sourceName": "Jurua Comunicacao",
+    "sourceUrl": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
+    "sourceLabel": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
+    "lede": "Jurua Comunicacao publicou uma atualização sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "Jurua Comunicacao publicou uma atualização sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
+    "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 24 de abr. de 2026 a base desta noticia sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+      "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+    ],
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
+    "sourceImageUrl": "",
+    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 950,
+    "editorialPriority": "mailza-prioridade",
+    "crossSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Jurua Comunicacao",
+        "url": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre"
+    ]
+  },
+  {
     "id": "https://www.cnnbrasil.com.br/internacional/marcha-em-madri-cobra-melhoria-salarial-no-dia-do-trabalho/",
     "slug": "marcha-em-madri-cobra-melhoria-salarial-no-dia-do-trabalho",
     "title": "Marcha em Madri cobra melhoria salarial no dia do trabalho",
@@ -13,8 +1121,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/marcha-em-madri-cobra-melhoria-salarial-no-dia-do-trabalho/",
     "sourceLabel": "Marcha em Madri cobra melhoria salarial no dia do trabalho",
-    "lede": "Em 1º de Maio, sindicatos alertaram sobre o aumento do custo de vida na cidade",
-    "summary": "Em 1º de Maio, sindicatos alertaram sobre o aumento do custo de vida na cidade",
+    "lede": "Marcha em Madri cobra melhoria salarial no dia do trabalho. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Marcha em Madri cobra melhoria salarial no dia do trabalho. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -62,8 +1170,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/internacional/manifestacao-do-dia-do-trabalho-termina-em-violencia-em-istambul/",
     "sourceLabel": "Manifestação do dia do trabalho termina em violência em Istambul",
-    "lede": "A polícia local impediu os manifestantes a marcharem até a Praça Taksim",
-    "summary": "A polícia local impediu os manifestantes a marcharem até a Praça Taksim",
+    "lede": "Manifestação do dia do trabalho termina em violência em Istambul. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Manifestação do dia do trabalho termina em violência em Istambul. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -144,55 +1252,6 @@ window.NEWS_DATA = [
     "body": [
       "CNN Brasil publicou em 01 de mai de 2026 a base desta noticia sobre Crise no Irã prejudica ajuda a refugiados devido aos altos custos, diz ONU.",
       "Crise no Irã prejudica ajuda a refugiados devido aos altos custos, diz ONU e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/",
-    "slug": "bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza",
-    "title": "Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza",
-    "eyebrow": "Acre / Governo",
-    "date": "01 de mai de 2026",
-    "publishedAt": "2026-05-01T18:01:49.000Z",
-    "category": "Acre / Governo",
-    "categoryKey": "acre-governo",
-    "previewClass": "thumb-acre-governo",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/",
-    "sourceLabel": "Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza",
-    "lede": "Foto: Whidy Melo/ac24horas \" O programa Boa Conversa desta sexta-feira, 1º de maio, teve como foco principal a análise do cenário político acreano.",
-    "summary": "Foto: Whidy Melo/ac24horas \" O programa Boa Conversa desta sexta-feira, 1º de maio, teve como foco principal a análise do cenário político acreano.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-12.13.01-1200x714.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-12.13.01-1200x714.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-12.13.01-1200x714.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza"
-    ],
-    "body": [
-      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza.",
-      "Bittar é incógnita, Santiago “fritado” e Jéssica sofre ataques homofóbicos no entorno de Mailza e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
@@ -760,8 +1819,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/economia/noticia/2026/05/01/acordo-mercosul-ue-brasil-deve-ampliar-exportacoes-em-ate-us-1-bilhao-em-um-ano-estima-agencia.ghtml",
     "sourceLabel": "Acordo Mercosul-UE: Brasil deve ampliar exportações em até US$ 1 bilhão em um ano, estima agência",
-    "lede": "Acordo UE-Mercosul passa a valer no Brasil: o que muda para o agro A Agência Brasileira de Promoção de Exportações e Investimentos (ApexBrasil) projeta que, já no primeiro ano de vigência do Acordo Mercosul-União Europeia, o...",
-    "summary": "Acordo UE-Mercosul passa a valer no Brasil: o que muda para o agro A Agência Brasileira de Promoção de Exportações e Investimentos (ApexBrasil) projeta que, já no primeiro ano de vigência do Acordo Mercosul-União Europeia, o...",
+    "lede": "Acordo Mercosul-UE: Brasil deve ampliar exportações em até US$ 1 bilhão em um ano, estima agência. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Acordo Mercosul-UE: Brasil deve ampliar exportações em até US$ 1 bilhão em um ano, estima agência. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -858,8 +1917,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/05/01/estatueta-do-oscar-perdida-por-companhia-aerea-reaparece-em-frankfurt-apos-confusao-nos-eua.ghtml",
     "sourceLabel": "Estatueta do Oscar perdida por companhia aérea reaparece em Frankfurt após confusão nos EUA",
-    "lede": "Pavel Talankin com a estatueta do Oscar após a 98ª edição do evento Reuters/Danny Moloshok/Arquivo A companhia aérea alemã Lufthansa anunciou nesta sexta-feira (1º) que localizou uma estatueta do Oscar pertencente ao diretor...",
-    "summary": "Pavel Talankin com a estatueta do Oscar após a 98ª edição do evento Reuters/Danny Moloshok/Arquivo A companhia aérea alemã Lufthansa anunciou nesta sexta-feira (1º) que localizou uma estatueta do Oscar pertencente ao diretor...",
+    "lede": "Pavel Talankin com a estatueta do Oscar após a 98ª edição do evento Reuters/Danny Moloshok/Arquivo A companhia aérea alemã Lufthansa anunciou nesta sexta-feira (1º) que localizou uma estatueta do Oscar pertencente ao diretor",
+    "summary": "Pavel Talankin com a estatueta do Oscar após a 98ª edição do evento Reuters/Danny Moloshok/Arquivo A companhia aérea alemã Lufthansa anunciou nesta sexta-feira (1º) que localizou uma estatueta do Oscar pertencente ao diretor",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1156,8 +2215,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-ingles/tottenham-de-zerbi-critica-negatividade-no-elenco-na-luta-contra-a-queda/",
     "sourceLabel": "Tottenham: De Zerbi critica negatividade no elenco na luta contra a queda",
-    "lede": "“Temos que silenciar a negatividade”, diz treinador do Tottenham",
-    "summary": "“Temos que silenciar a negatividade”, diz treinador do Tottenham",
+    "lede": "Tottenham: De Zerbi critica negatividade no elenco na luta contra a queda. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Tottenham: De Zerbi critica negatividade no elenco na luta contra a queda. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1748,8 +2807,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/fato-ou-fake/noticia/2026/05/01/e-fake-que-ulysses-guimaraes-fez-discurso-contra-jair-bolsonaro-cena-foi-criada-por-ia.ghtml",
     "sourceLabel": "É #FAKE que Ulysses Guimarães fez discurso contra Jair Bolsonaro; cena foi criada por IA",
-    "lede": "Discurso de Ulysses Guimarães foi adulterado por IA g1 Circulam nas redes sociais publicações dizendo que ex-deputado federal Ulysses Guimarães (1916-1992) usou um discurso proferido em 1988 para denunciar o então vereador Jair...",
-    "summary": "Discurso de Ulysses Guimarães foi adulterado por IA g1 Circulam nas redes sociais publicações dizendo que ex-deputado federal Ulysses Guimarães (1916-1992) usou um discurso proferido em 1988 para denunciar o então vereador Jair...",
+    "lede": "Discurso de Ulysses Guimarães foi adulterado por IA g1 Circulam nas redes sociais publicações dizendo que ex-deputado federal Ulysses Guimarães (1916-1992) usou um discurso proferido em 1988 para denunciar o então vereador Jair",
+    "summary": "Discurso de Ulysses Guimarães foi adulterado por IA g1 Circulam nas redes sociais publicações dizendo que ex-deputado federal Ulysses Guimarães (1916-1992) usou um discurso proferido em 1988 para denunciar o então vereador Jair",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -1895,8 +2954,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/05/01/apos-ter-o-veto-derrubado-pelo-congresso-lula-nao-deve-promulgar-pl-da-dosimetria-tarefa-cabera-a-alcolumbre.ghtml",
     "sourceLabel": "Após ter veto derrubado pelo Congresso, Lula não deve promulgar PL da Dosimetria; tarefa caberá a Alcolumbre",
-    "lede": "O ministro das Relações Institucionais, José Guimarães, afirmou ao blog que o presidente Lula não deve promulgar a lei que permite a redução de penas de condenados pelos ataques de 8 de Janeiro de 2023 e que pode beneficiar...",
-    "summary": "O ministro das Relações Institucionais, José Guimarães, afirmou ao blog que o presidente Lula não deve promulgar a lei que permite a redução de penas de condenados pelos ataques de 8 de Janeiro de 2023 e que pode beneficiar...",
+    "lede": "O ministro das Relações Institucionais, José Guimarães, afirmou ao blog que o presidente Lula não deve promulgar a lei que permite a redução de penas de condenados pelos ataques de 8 de Janeiro de 2023 e que pode beneficiar",
+    "summary": "O ministro das Relações Institucionais, José Guimarães, afirmou ao blog que o presidente Lula não deve promulgar a lei que permite a redução de penas de condenados pelos ataques de 8 de Janeiro de 2023 e que pode beneficiar",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2185,55 +3244,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/",
-    "slug": "mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua",
-    "title": "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá",
-    "eyebrow": "governadora mailza",
-    "date": "01 de mai de 2026",
-    "publishedAt": "2026-05-01T16:32:13.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/",
-    "sourceLabel": "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá",
-    "lede": "A governadora do Acre, Mailza Assis, marcou presença na programação do Dia do Trabalhador em Cruzeiro do Sul na noite de quarta-feira, 30, para quinta-feira (1º) e aproveitou o clima de festa para interagir com o público...",
-    "summary": "A governadora do Acre, Mailza Assis, marcou presença na programação do Dia do Trabalhador em Cruzeiro do Sul na noite de quarta-feira, 30, para quinta-feira (1º) e aproveitou o clima de festa para interagir com o público...",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua"
-    ],
-    "body": [
-      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá.",
-      "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
     "id": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-05/petrobras-reajusta-querosene-de-aviacao-em-18-e-mantem-parcelamento",
     "slug": "petrobras-reajusta-querosene-de-aviacao-em-18-e-mantem-parcelamento",
     "title": "Petrobras reajusta querosene de aviação em 18% e mantém parcelamento",
@@ -2450,8 +3460,8 @@ window.NEWS_DATA = [
     "sourceName": "CNN Brasil",
     "sourceUrl": "https://www.cnnbrasil.com.br/economia/macroeconomia/setor-industrial-dos-eua-fica-estavel-em-abril-mas-custos-aumentam/",
     "sourceLabel": "Setor industrial dos EUA fica estável em abril, mas custos aumentam",
-    "lede": "Preços de matérias-primas e insumos atingiram o nível mais alto em quatro anos",
-    "summary": "Preços de matérias-primas e insumos atingiram o nível mais alto em quatro anos",
+    "lede": "Setor industrial dos EUA fica estável em abril, mas custos aumentam. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Setor industrial dos EUA fica estável em abril, mas custos aumentam. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -2834,59 +3844,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/",
-    "slug": "em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pel",
-    "title": "Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul",
-    "eyebrow": "governadora mailza",
-    "date": "01 de mai de 2026",
-    "publishedAt": "2026-05-01T16:15:00.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/",
-    "sourceLabel": "Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul",
-    "lede": "A governadora do Acre, Mailza Assis, mobilizou uma ampla força-tarefa do secretariado estadual em Cruzeiro do Sul para reforçar o apoio às famílias afetadas pelas cheias do Rio Juruá.",
-    "summary": "A governadora do Acre, Mailza Assis, mobilizou uma ampla força-tarefa do secretariado estadual em Cruzeiro do Sul para reforçar o apoio às famílias afetadas pelas cheias do Rio Juruá.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "./assets/news-fallbacks/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetad.svg",
-    "feedImageUrl": "./assets/news-fallbacks/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetad.svg",
-    "sourceImageUrl": "./assets/news-fallbacks/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetad.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pelas-cheias-em-cruzeiro-do-sul/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "em-entrevista-a-radio-aldeia-governadora-mailza-destaca-apoio-do-estado-as-familias-afetadas-pel"
-    ],
-    "body": [
-      "Agencia Acre publicou em 01 de mai de 2026 a base desta noticia sobre Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul.",
-      "Em entrevista à Rádio Aldeia, governadora Mailza destaca apoio do Estado às famílias afetadas pelas cheias em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
     "id": "https://jurua24horas.com/2026/05/meninas-de-12-a-17-anos-sao-as-principais-vitimas-de-violencia-sexual-no-acre/",
     "slug": "meninas-de-12-a-17-anos-sao-as-principais-vitimas-de-violencia-sexual-no-acre",
     "title": "Meninas de 12 a 17 anos são as principais vítimas de violência sexual no Acre",
@@ -3095,55 +4052,6 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/",
-    "slug": "governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-no",
-    "title": "Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória",
-    "eyebrow": "Prefeitura",
-    "date": "01 de mai de 2026",
-    "publishedAt": "2026-05-01T16:04:32.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/",
-    "sourceLabel": "Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória",
-    "lede": "A governadora Mailza Assis reuniu-se nesta sexta-feira, 1º, com o bispo Dom Flávio Giovenale, da Diocese de Cruzeiro do Sul, para reforçar o apoio do Estado ao Novenário de Nossa Senhora da Glória.",
-    "summary": "A governadora Mailza Assis reuniu-se nesta sexta-feira, 1º, com o bispo Dom Flávio Giovenale, da Diocese de Cruzeiro do Sul, para reforçar o apoio do Estado ao Novenário de Nossa Senhora da Glória.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/96d29df8-92ea-4a80-bf34-ef5df0f6a85b-1024x683.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/96d29df8-92ea-4a80-bf34-ef5df0f6a85b-1024x683.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/96d29df8-92ea-4a80-bf34-ef5df0f6a85b-1024x683.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-nossa-senhora-da-gloria/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governadora-se-reune-com-diocese-de-cruzeiro-do-sul-e-reforca-apoio-do-estado-ao-novenario-de-no"
-    ],
-    "body": [
-      "Agencia Acre publicou em 01 de mai de 2026 a base desta noticia sobre Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória.",
-      "Governadora se reúne com Diocese de Cruzeiro do Sul e reforça apoio do Estado ao Novenário de Nossa Senhora da Glória e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
     "id": "https://g1.globo.com/politica/noticia/2026/05/01/no-dia-do-trabalhador-lula-cita-queda-no-desemprego-ampliacao-da-licenca-paternidade-e-reducao-do-ir.ghtml",
     "slug": "no-dia-do-trabalhador-lula-cita-queda-no-desemprego-ampliacao-da-licenca-paternidade-e-reducao-d",
     "title": "No Dia do Trabalhador, Lula cita queda no desemprego, ampliação da licença-paternidade e redução do IR",
@@ -3205,8 +4113,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/internacional/noticia/2026-05/entidades-denunciam-golpe-eleitoral-nos-eua-que-pode-beneficiar-trump",
     "sourceLabel": "Entidades denunciam golpe eleitoral nos EUA que pode beneficiar Trump",
-    "lede": "Entidades do movimento negro e dos direitos civis dos Estados Unidos (EUA) denunciam um golpe contra a democracia do país após a decisão da Suprema Corte, de maioria conservadora, que derrubou o mapa eleitoral para o Congresso...",
-    "summary": "Entidades do movimento negro e dos direitos civis dos Estados Unidos (EUA) denunciam um golpe contra a democracia do país após a decisão da Suprema Corte, de maioria conservadora, que derrubou o mapa eleitoral para o Congresso...",
+    "lede": "Entidades do movimento negro e dos direitos civis dos Estados Unidos (EUA) denunciam um golpe contra a democracia do país após a decisão da Suprema Corte, de maioria conservadora, que derrubou o mapa eleitoral para o Congresso",
+    "summary": "Entidades do movimento negro e dos direitos civis dos Estados Unidos (EUA) denunciam um golpe contra a democracia do país após a decisão da Suprema Corte, de maioria conservadora, que derrubou o mapa eleitoral para o Congresso",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3413,8 +4321,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/transplantes-realizados-na-fundhacre-reforcam-a-importancia-de-dizer-sim-a-doacao-de-orgaos-no-acre/?utm_source=rss&utm_medium=rss&utm_campaign=transplantes-realizados-na-fundhacre-reforcam-a-importancia-de-dizer-sim-a-doacao-de-orgaos-no-acre",
     "sourceLabel": "Transplantes realizados na Fundhacre reforçam a importância de dizer ‘sim’ à doação de órgãos no Acre",
-    "lede": "Por Rian Pablo Transplantes realizados na Fundhacre reforçam a importância de dizer ‘sim’ à doação de órgãos no Acre Rian Pablo 01 maio 2026 08:00 Desde o início dos programas de transplante na Fundação Hospitalar Governador...",
-    "summary": "Por Rian Pablo Transplantes realizados na Fundhacre reforçam a importância de dizer ‘sim’ à doação de órgãos no Acre Rian Pablo 01 maio 2026 08:00 Desde o início dos programas de transplante na Fundação Hospitalar Governador...",
+    "lede": "Por Rian Pablo Transplantes realizados na Fundhacre reforçam a importância de dizer ‘sim’ à doação de órgãos no Acre Rian Pablo 01 maio 2026 08:00 Desde o início dos programas de transplante na Fundação Hospitalar Governador",
+    "summary": "Por Rian Pablo Transplantes realizados na Fundhacre reforçam a importância de dizer ‘sim’ à doação de órgãos no Acre Rian Pablo 01 maio 2026 08:00 Desde o início dos programas de transplante na Fundação Hospitalar Governador",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3666,8 +4574,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/cozinheira-amazonense-construiu-casa-negocio-e-familia-ao-longo-de-19-anos-no-acre/",
     "sourceLabel": "Cozinheira amazonense construiu casa, negócio e família ao longo de 19 anos no Acre",
-    "lede": "Foto: David Medeiros \" O ac24horas produziu, nesta sexta-feira (1º), uma matéria especial em homenagem ao Dia do Trabalhador com a cozinheira Francisca Balbino Ferreira, natural do município de Pauini, no Amazonas, que...",
-    "summary": "Foto: David Medeiros \" O ac24horas produziu, nesta sexta-feira (1º), uma matéria especial em homenagem ao Dia do Trabalhador com a cozinheira Francisca Balbino Ferreira, natural do município de Pauini, no Amazonas, que...",
+    "lede": "Cozinheira amazonense construiu casa, negócio e família ao longo de 19 anos no Acre. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Cozinheira amazonense construiu casa, negócio e família ao longo de 19 anos no Acre. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3813,8 +4721,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/em-brasilia-secretaria-de-agricultura-dialoga-sobre-a-presenca-do-poder-publico-em-regioes-de-fronteira/?utm_source=rss&utm_medium=rss&utm_campaign=em-brasilia-secretaria-de-agricultura-dialoga-sobre-a-presenca-do-poder-publico-em-regioes-de-fronteira",
     "sourceLabel": "Em Brasília, Secretaria de Agricultura dialoga sobre a presença do poder público em regiões de fronteira",
-    "lede": "Por Vanessa Sousa O governo do Acre, por meio da Secretaria de Estado de Agricultura (Seagri), participou na quarta-feira, 29, da 46ª Reunião Ordinária do Comitê-Executivo do Programa de Proteção Integrada de Fronteiras...",
-    "summary": "Por Vanessa Sousa O governo do Acre, por meio da Secretaria de Estado de Agricultura (Seagri), participou na quarta-feira, 29, da 46ª Reunião Ordinária do Comitê-Executivo do Programa de Proteção Integrada de Fronteiras...",
+    "lede": "Por Vanessa Sousa O governo do Acre, por meio da Secretaria de Estado de Agricultura (Seagri), participou na quarta-feira, 29, da 46ª Reunião Ordinária do Comitê-Executivo do Programa de Proteção Integrada de Fronteiras",
+    "summary": "Por Vanessa Sousa O governo do Acre, por meio da Secretaria de Estado de Agricultura (Seagri), participou na quarta-feira, 29, da 46ª Reunião Ordinária do Comitê-Executivo do Programa de Proteção Integrada de Fronteiras",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -3899,55 +4807,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo",
-    "slug": "governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo",
-    "title": "Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó",
-    "eyebrow": "governadora mailza",
-    "date": "01 de mai de 2026",
-    "publishedAt": "2026-05-01T14:28:38.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo",
-    "sourceLabel": "Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó",
-    "lede": "Por Janine Brasil A governadora do Acre, Mailza Assis, realizou nesta quinta-feira, 30, em Feijó, a entrega de novos equipamentos para fortalecer a atuação da Polícia Civil.",
-    "summary": "Por Janine Brasil A governadora do Acre, Mailza Assis, realizou nesta quinta-feira, 30, em Feijó, a entrega de novos equipamentos para fortalecer a atuação da Polícia Civil.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/70875eb2-b721-4c65-86c4-fc460068cade-1024x681.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/70875eb2-b721-4c65-86c4-fc460068cade-1024x681.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/70875eb2-b721-4c65-86c4-fc460068cade-1024x681.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governadora-mailza-entrega-viatura-e-motor-para-a-policia-civil-em-feijo"
-    ],
-    "body": [
-      "Batelao publicou em 01 de mai de 2026 a base desta noticia sobre Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó.",
-      "Governadora Mailza entrega viatura e motor para a Polícia Civil em Feijó e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
     "id": "https://ac24horas.com/2026/05/01/com-1-mil-participantes-corrida-nacional-do-sesi-comemora-dia-do-trabalhador-em-rio-branco/",
     "slug": "com-1-mil-participantes-corrida-nacional-do-sesi-comemora-dia-do-trabalhador-em-rio-branco",
     "title": "Com 1 mil participantes, Corrida Nacional do Sesi comemora Dia do Trabalhador em Rio Branco",
@@ -3960,8 +4819,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/com-1-mil-participantes-corrida-nacional-do-sesi-comemora-dia-do-trabalhador-em-rio-branco/",
     "sourceLabel": "Com 1 mil participantes, Corrida Nacional do Sesi comemora Dia do Trabalhador em Rio Branco",
-    "lede": "Foto: Sérgio Vale \" O Serviço Social da Indústria (Sesi) realizou, nesta sexta-feira (1º), a 2ª Corrida Nacional do Sesi em Rio Branco, com largada às 6h30 na Avenida Ceará, na concentração ao lado do Agroboi, na sede da...",
-    "summary": "Foto: Sérgio Vale \" O Serviço Social da Indústria (Sesi) realizou, nesta sexta-feira (1º), a 2ª Corrida Nacional do Sesi em Rio Branco, com largada às 6h30 na Avenida Ceará, na concentração ao lado do Agroboi, na sede da...",
+    "lede": "Com 1 mil participantes, Corrida Nacional do Sesi comemora Dia do Trabalhador em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Com 1 mil participantes, Corrida Nacional do Sesi comemora Dia do Trabalhador em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4058,8 +4917,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/interior-do-acre-concentra-maioria-das-vitimas-de-estupro-de-vulneravel/",
     "sourceLabel": "Interior do Acre concentra maioria das vítimas de estupro de vulnerável",
-    "lede": "Foto: imagem ilustrativa \" O interior do Acre registrou mais casos de estupro de vulnerável contra crianças e adolescentes do que a capital nos anos de 2024 e 2025, conforme relatório do Departamento de Inteligência da Polícia...",
-    "summary": "Foto: imagem ilustrativa \" O interior do Acre registrou mais casos de estupro de vulnerável contra crianças e adolescentes do que a capital nos anos de 2024 e 2025, conforme relatório do Departamento de Inteligência da Polícia...",
+    "lede": "Foto: imagem ilustrativa \" O interior do Acre registrou mais casos de estupro de vulnerável contra crianças e adolescentes do que a capital nos anos de 2024 e 2025, conforme relatório do Departamento de Inteligência da Polícia",
+    "summary": "Foto: imagem ilustrativa \" O interior do Acre registrou mais casos de estupro de vulnerável contra crianças e adolescentes do que a capital nos anos de 2024 e 2025, conforme relatório do Departamento de Inteligência da Polícia",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4107,8 +4966,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/energisa-e-condenada-por-destruir-ponte-e-causar-prejuizos-a-produtores-rurais-no-interior-do-acre/",
     "sourceLabel": "Energisa é condenada por destruir ponte e causar prejuízos a produtores rurais",
-    "lede": "Foto: Imagem ilustrativa I Valor&MercadoRO/",
-    "summary": "Foto: Imagem ilustrativa I Valor&MercadoRO/",
+    "lede": "Energisa é condenada por destruir ponte e causar prejuízos a produtores rurais. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Energisa é condenada por destruir ponte e causar prejuízos a produtores rurais. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4156,8 +5015,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/justica-acreana-tem-media-de-quase-mil-dias-para-concluir-processos-revela-datajud/",
     "sourceLabel": "Justiça acreana tem média de quase mil dias para concluir processos",
-    "lede": "Cidade da Justiça, em Rio Branco I Foto: TJAC/",
-    "summary": "Cidade da Justiça, em Rio Branco I Foto: TJAC/",
+    "lede": "Justiça acreana tem média de quase mil dias para concluir processos. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Justiça acreana tem média de quase mil dias para concluir processos. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4352,8 +5211,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/fact-e-prefeitura-de-rio-branco-lancam-projeto-de-tenis-e-beach-tenis-nas-escolas/",
     "sourceLabel": "FACT e Prefeitura de Rio Branco lançam projeto de Tênis e Beach Tênis nas escolas",
-    "lede": "Foto FACT: Instrutores fecham curso de capacitação de monitores nesta sexta \" A Federação Acreana de Tênis e Beach Tênis(FACT) em parceria com a Confederação Brasileira de Tênis(CBT) e a Prefeitura de Rio Branco lançam nesta...",
-    "summary": "Foto FACT: Instrutores fecham curso de capacitação de monitores nesta sexta \" A Federação Acreana de Tênis e Beach Tênis(FACT) em parceria com a Confederação Brasileira de Tênis(CBT) e a Prefeitura de Rio Branco lançam nesta...",
+    "lede": "Foto FACT: Instrutores fecham curso de capacitação de monitores nesta sexta \" A Federação Acreana de Tênis e Beach Tênis(FACT) em parceria com a Confederação Brasileira de Tênis(CBT) e a Prefeitura de Rio Branco lançam nesta",
+    "summary": "Foto FACT: Instrutores fecham curso de capacitação de monitores nesta sexta \" A Federação Acreana de Tênis e Beach Tênis(FACT) em parceria com a Confederação Brasileira de Tênis(CBT) e a Prefeitura de Rio Branco lançam nesta",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4401,8 +5260,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/cinco-sao-presos-apos-sequestro-execucao-de-rival-e-carcere-privado/",
     "sourceLabel": "Cinco são presos após sequestro, execução de rival e cárcere privado",
-    "lede": "Adaildo da Silva Gomes, Jairo Gabriel Pereira de Oliveira, Ana Cláudia de Moura Silva, João Victor de Souza Lima e Kenedy Virgino Nascimento foram presos na noite desta quinta-feira (30), suspeitos de participação em um...",
-    "summary": "Adaildo da Silva Gomes, Jairo Gabriel Pereira de Oliveira, Ana Cláudia de Moura Silva, João Victor de Souza Lima e Kenedy Virgino Nascimento foram presos na noite desta quinta-feira (30), suspeitos de participação em um...",
+    "lede": "Cinco são presos após sequestro, execução de rival e cárcere privado. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Cinco são presos após sequestro, execução de rival e cárcere privado. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4450,8 +5309,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/escola-adota-escala-de-trabalho-4x3-e-aumenta-faturamento-em-35",
     "sourceLabel": "Escola adota escala de trabalho 4x3 e aumenta faturamento em 35%",
-    "lede": "Enquanto a sociedade brasileira e o Congresso Nacional discutem o fim da escala de seis dias de trabalho para um dia de folga (6x1) na legislação do país, uma escola de baristas e gestão de cafeterias da capital paulista mudou...",
-    "summary": "Enquanto a sociedade brasileira e o Congresso Nacional discutem o fim da escala de seis dias de trabalho para um dia de folga (6x1) na legislação do país, uma escola de baristas e gestão de cafeterias da capital paulista mudou...",
+    "lede": "Enquanto a sociedade brasileira e o Congresso Nacional discutem o fim da escala de seis dias de trabalho para um dia de folga (6x1) na legislação do país, uma escola de baristas e gestão de cafeterias da capital paulista mudou",
+    "summary": "Enquanto a sociedade brasileira e o Congresso Nacional discutem o fim da escala de seis dias de trabalho para um dia de folga (6x1) na legislação do país, uma escola de baristas e gestão de cafeterias da capital paulista mudou",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4605,8 +5464,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/05/01/alice-caymmi-acerta-ao-propor-um-outro-olhar-sobre-a-obra-de-dorival-caymmi-em-album-imerso-nas-aguas-da-latinidade.ghtml",
     "sourceLabel": "Alice Caymmi acerta ao propor um outro olhar sobre a obra de Dorival Caymmi em álbum imerso nas águas da latinidade",
-    "lede": "Cantora Alice Caymmi faz releitura de canções do avó ♫ CRÍTICA DE ÁLBUM Título: Caymmi Artista: Alice Caymmi Cotação: ★ ★ ★ ★ ♬ Com a voz grave, tão doce e profunda quanto o mar que ele decantou em canções praieiras, Dorival...",
-    "summary": "Cantora Alice Caymmi faz releitura de canções do avó ♫ CRÍTICA DE ÁLBUM Título: Caymmi Artista: Alice Caymmi Cotação: ★ ★ ★ ★ ♬ Com a voz grave, tão doce e profunda quanto o mar que ele decantou em canções praieiras, Dorival...",
+    "lede": "Cantora Alice Caymmi faz releitura de canções do avó ♫ CRÍTICA DE ÁLBUM Título: Caymmi Artista: Alice Caymmi Cotação: ★ ★ ★ ★ ♬ Com a voz grave, tão doce e profunda quanto o mar que ele decantou em canções praieiras, Dorival",
+    "summary": "Cantora Alice Caymmi faz releitura de canções do avó ♫ CRÍTICA DE ÁLBUM Título: Caymmi Artista: Alice Caymmi Cotação: ★ ★ ★ ★ ♬ Com a voz grave, tão doce e profunda quanto o mar que ele decantou em canções praieiras, Dorival",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -4801,8 +5660,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/forcas-armadas-mobilizam-mais-de-16-mil-homens-em-operacao-para-reforcar-soberania-e-combater-ilicitos-na-amazonia/",
     "sourceLabel": "Forças Armadas mobilizam mais de 1,6 mil homens em operação para reforçar soberania e combater ilícitos na Amazônia",
-    "lede": "O Ministério da Defesa informou, nesta quinta-feira (30), que intensificou as ações da Operação Ágata Amazônia 2026 na Amazônia Ocidental, com foco na vigilância de fronteiras, combate a crimes e presença do Estado em áreas...",
-    "summary": "O Ministério da Defesa informou, nesta quinta-feira (30), que intensificou as ações da Operação Ágata Amazônia 2026 na Amazônia Ocidental, com foco na vigilância de fronteiras, combate a crimes e presença do Estado em áreas...",
+    "lede": "O Ministério da Defesa informou, nesta quinta-feira (30), que intensificou as ações da Operação Ágata Amazônia 2026 na Amazônia Ocidental, com foco na vigilância de fronteiras, combate a crimes e presença do Estado em áreas",
+    "summary": "O Ministério da Defesa informou, nesta quinta-feira (30), que intensificou as ações da Operação Ágata Amazônia 2026 na Amazônia Ocidental, com foco na vigilância de fronteiras, combate a crimes e presença do Estado em áreas",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5368,8 +6227,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/blog/andreia-sadi/post/2026/05/01/messias-diz-a-aliados-que-derrota-ao-stf-foi-golpe-de-moraes-e-alcolumbre-e-ala-do-governo-entra-em-modo-guerra.ghtml",
     "sourceLabel": "Indignado, Messias diz a aliados que derrota ao STF foi golpe de Moraes e Alcolumbre; ala do governo entra em modo ‘guerra’",
-    "lede": "Senado rejeita indicação de Jorge Messias para o STF Jorge Messias está indignado com o que chama, a interlocutores, de “golpe” do presidente do Senado Davi Alcolumbre e do ministro do Supremo Tribunal Federal (STF) Alexandre...",
-    "summary": "Senado rejeita indicação de Jorge Messias para o STF Jorge Messias está indignado com o que chama, a interlocutores, de “golpe” do presidente do Senado Davi Alcolumbre e do ministro do Supremo Tribunal Federal (STF) Alexandre...",
+    "lede": "Senado rejeita indicação de Jorge Messias para o STF Jorge Messias está indignado com o que chama, a interlocutores, de “golpe” do presidente do Senado Davi Alcolumbre e do ministro do Supremo Tribunal Federal (STF) Alexandre",
+    "summary": "Senado rejeita indicação de Jorge Messias para o STF Jorge Messias está indignado com o que chama, a interlocutores, de “golpe” do presidente do Senado Davi Alcolumbre e do ministro do Supremo Tribunal Federal (STF) Alexandre",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5470,8 +6329,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/mundo/noticia/2026/05/01/autoridades-de-londres-nao-vao-remover-estatua-de-banksy-instalada-perto-do-the-mall.ghtml",
     "sourceLabel": "Autoridades de Londres não vão remover estátua de Banksy instalada perto do The Mall",
-    "lede": "Autoridades de Londres não vão remover estátua de Banks As autoridades londrinas disseram na sexta-feira que acolheram bem uma estátua instalada pelo artista de rua Banksy, que retrata um homem cego por uma bandeira que voou em...",
-    "summary": "Autoridades de Londres não vão remover estátua de Banks As autoridades londrinas disseram na sexta-feira que acolheram bem uma estátua instalada pelo artista de rua Banksy, que retrata um homem cego por uma bandeira que voou em...",
+    "lede": "Autoridades de Londres não vão remover estátua de Banksy instalada perto do The Mall. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Autoridades de Londres não vão remover estátua de Banksy instalada perto do The Mall. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5568,8 +6427,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/blog/natuza-nery/post/2026/05/01/alexandre-de-moraes-e-o-sujeito-oculto-do-combo-messias-dosimetria.ghtml",
     "sourceLabel": "Alexandre de Moraes é o sujeito oculto do combo Messias-Dosimetria",
-    "lede": "Ministro do STF Alexandre de Moraes Luiz Silveira/STF Nos bastidores de Brasília, a articulação envolvendo a indicação de Jorge Messias ao Supremo Tribunal Federal (STF) e a discussão sobre a dosimetria das penas do 8 de...",
-    "summary": "Ministro do STF Alexandre de Moraes Luiz Silveira/STF Nos bastidores de Brasília, a articulação envolvendo a indicação de Jorge Messias ao Supremo Tribunal Federal (STF) e a discussão sobre a dosimetria das penas do 8 de...",
+    "lede": "Alexandre de Moraes é o sujeito oculto do combo Messias-Dosimetria. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Alexandre de Moraes é o sujeito oculto do combo Messias-Dosimetria. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5715,8 +6574,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/05/01/papatinho-detalha-relacao-com-shakira-e-promete-remix-inedito-para-apresentacao-em-copacabana.ghtml",
     "sourceLabel": "Papatinho detalha relação com Shakira e promete remix inédito para apresentação em Copacabana",
-    "lede": "Papatinho procura conectar com o funk carioca com o pop global nas cinco faixas do EP 'Baile do Papato vol 2' Divulgação O produtor e DJ Papatinho terá a missão de se apresentar logo após o show de Shakira na Praia de...",
-    "summary": "Papatinho procura conectar com o funk carioca com o pop global nas cinco faixas do EP 'Baile do Papato vol 2' Divulgação O produtor e DJ Papatinho terá a missão de se apresentar logo após o show de Shakira na Praia de...",
+    "lede": "Papatinho detalha relação com Shakira e promete remix inédito para apresentação em Copacabana. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Papatinho detalha relação com Shakira e promete remix inédito para apresentação em Copacabana. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -5862,8 +6721,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/01/assessor-e-exonerado-apos-invadir-programa-ao-vivo-xingar-e-pedir-reeleicao-de-lula.ghtml",
     "sourceLabel": "Assessor é exonerado após invadir programa ao vivo, xingar e pedir reeleição de Lula",
-    "lede": "Assessor é exonerado após invadir programa ao vivo, xingar e pedir reeleição de Lula O assessor parlamentar Bernardo Moreira Amado Barros foi exonerado nesta quinta-feira (30) após invadir a transmissão ao vivo do programa da...",
-    "summary": "Assessor é exonerado após invadir programa ao vivo, xingar e pedir reeleição de Lula O assessor parlamentar Bernardo Moreira Amado Barros foi exonerado nesta quinta-feira (30) após invadir a transmissão ao vivo do programa da...",
+    "lede": "Assessor é exonerado após invadir programa ao vivo, xingar e pedir reeleição de Lula. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Assessor é exonerado após invadir programa ao vivo, xingar e pedir reeleição de Lula. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6009,8 +6868,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/01/crise-com-alcolumbre-coloca-em-xeque-avanco-de-pautas-prioritarias-de-lula-no-congresso.ghtml",
     "sourceLabel": "Crise com Alcolumbre coloca em xeque avanço de pautas prioritárias de Lula no Congresso",
-    "lede": "A derrota histórica imposta ao governo com a rejeição da indicação do advogado-geral da União, Jorge Messias, ao Supremo Tribunal Federal (STF) e a derrubada do veto do presidente Luiz Inácio Lula da Silva (PT) ao PL da...",
-    "summary": "A derrota histórica imposta ao governo com a rejeição da indicação do advogado-geral da União, Jorge Messias, ao Supremo Tribunal Federal (STF) e a derrubada do veto do presidente Luiz Inácio Lula da Silva (PT) ao PL da...",
+    "lede": "Crise com Alcolumbre coloca em xeque avanço de pautas prioritárias de Lula no Congresso. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Crise com Alcolumbre coloca em xeque avanço de pautas prioritárias de Lula no Congresso. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6058,8 +6917,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/01/seis-partidos-na-camara-e-cinco-no-senado-votaram-100percent-a-favor-da-reducao-da-pena-dos-condenados-pelo-8-de-janeiro.ghtml",
     "sourceLabel": "Seis partidos na Câmara e cinco no Senado votaram 100% a favor da redução da pena dos condenados pelo 8 de janeiro",
-    "lede": "PL da Dosimetria: Câmara e Senado derrubam veto de Lula; texto segue para promulgação Seis partidos na Câmara e cinco no Senado votaram integralmente pela derrubada do veto do presidente Lula (PT) ao PL da Dosimetria, que reduz...",
-    "summary": "PL da Dosimetria: Câmara e Senado derrubam veto de Lula; texto segue para promulgação Seis partidos na Câmara e cinco no Senado votaram integralmente pela derrubada do veto do presidente Lula (PT) ao PL da Dosimetria, que reduz...",
+    "lede": "PL da Dosimetria: Câmara e Senado derrubam veto de Lula; texto segue para promulgação Seis partidos na Câmara e cinco no Senado votaram integralmente pela derrubada do veto do presidente Lula (PT) ao PL da Dosimetria, que reduz",
+    "summary": "PL da Dosimetria: Câmara e Senado derrubam veto de Lula; texto segue para promulgação Seis partidos na Câmara e cinco no Senado votaram integralmente pela derrubada do veto do presidente Lula (PT) ao PL da Dosimetria, que reduz",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6107,8 +6966,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/05/01/apos-congresso-derrubar-veto-de-lula-discussao-sobre-reducao-de-penas-deve-voltar-ao-supremo.ghtml",
     "sourceLabel": "Após Congresso derrubar veto de Lula, discussão sobre redução de penas deve voltar ao Supremo",
-    "lede": "A lei não parece inconstitucional, diz Gustavo Sampaio sobre PL da dosimetria O líder do PT na Câmara dos Deputados, Pedro Uczai (SC), afirmou nesta quinta-feira (30) que a base do governo vai recorrer ao Supremo Tribunal...",
-    "summary": "A lei não parece inconstitucional, diz Gustavo Sampaio sobre PL da dosimetria O líder do PT na Câmara dos Deputados, Pedro Uczai (SC), afirmou nesta quinta-feira (30) que a base do governo vai recorrer ao Supremo Tribunal...",
+    "lede": "A lei não parece inconstitucional, diz Gustavo Sampaio sobre PL da dosimetria O líder do PT na Câmara dos Deputados, Pedro Uczai (SC), afirmou nesta quinta-feira (30) que a base do governo vai recorrer ao Supremo Tribunal",
+    "summary": "A lei não parece inconstitucional, diz Gustavo Sampaio sobre PL da dosimetria O líder do PT na Câmara dos Deputados, Pedro Uczai (SC), afirmou nesta quinta-feira (30) que a base do governo vai recorrer ao Supremo Tribunal",
     "analysis": "",
     "highlights": [],
     "development": [],
@@ -6587,59 +7446,6 @@ window.NEWS_DATA = [
     "alternateSlugs": [
       "com-recusa-a-messias-simone-tebet-e-citada-como-alternativa-ao-stf"
     ]
-  },
-  {
-    "id": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/",
-    "slug": "governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimento",
-    "title": "Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-05-01T00:10:28.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/",
-    "sourceLabel": "Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior",
-    "lede": "Marcando mais um avanço para a saúde pública no interior do estado, a governadora Mailza Assis entregou, nesta quinta-feira, 30, a reforma e ampliação do Hospital Geral de Feijó Dr. Baba.",
-    "summary": "Marcando mais um avanço para a saúde pública no interior do estado, a governadora Mailza Assis entregou, nesta quinta-feira, 30, a reforma e ampliação do Hospital Geral de Feijó Dr. Baba.",
-    "analysis": "",
-    "body": [
-      "Agencia Acre publicou em 30 de abr de 2026 a base desta noticia sobre Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior.",
-      "Governadora Mailza entrega reforma e ampliação do Hospital Geral de Feijó e reforça investimentos na saúde do interior e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "./assets/news-fallbacks/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-invest.svg",
-    "sourceImageUrl": "./assets/news-fallbacks/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-invest.svg",
-    "feedImageUrl": "./assets/news-fallbacks/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-invest.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimentos-na-saude-do-interior/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governadora-mailza-entrega-reforma-e-ampliacao-do-hospital-geral-de-feijo-e-reforca-investimento"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/sulamericana/vasco-vence-e-vai-a-lideranca-do-grupo-g-da-copa-sul-americana/",
@@ -7495,8 +8301,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/30/lula-anuncia-medidas-para-reduzir-nivel-de-endividamento-pacote-inclui-descontos-de-ate-90percent-nas-dividas-e-uso-de-20percent-do-fgts.ghtml",
     "sourceLabel": "Lula anuncia medidas para reduzir nível de endividamento; pacote inclui descontos de até 90% nas dívidas e uso de 20% do FGTS",
-    "lede": "Lula anuncia medidas para reduzir nível de endividamento; pacote inclui descontos de até 90% nas dívidas e uso de 20% do FGTS. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes....",
-    "summary": "Lula anuncia medidas para reduzir nível de endividamento; pacote inclui descontos de até 90% nas dívidas e uso de 20% do FGTS. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes...",
+    "lede": "Lula anuncia medidas para reduzir nível de endividamento; pacote inclui descontos de até 90% nas dívidas e uso de 20% do FGTS. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes.",
+    "summary": "Lula anuncia medidas para reduzir nível de endividamento; pacote inclui descontos de até 90% nas dívidas e uso de 20% do FGTS. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Lula anuncia medidas para reduzir nível de endividamento; pacote inclui descontos de até 90% nas dívidas e uso de 20% do FGTS.",
@@ -7534,55 +8340,6 @@ window.NEWS_DATA = [
     "originalFeedImageUrl": "https://s2-g1.glbimg.com/ovFsbtmTVOFkTZVVwzRm5gMl1fo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/A/4/xoiEohRsuNWx588AOLMg/captura-de-tela-2026-04-30-203104.png",
     "originalSourceImageUrl": "https://s2-g1.glbimg.com/ovFsbtmTVOFkTZVVwzRm5gMl1fo=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/A/4/xoiEohRsuNWx588AOLMg/captura-de-tela-2026-04-30-203104.png",
     "imageQuality": "foto-repetida-na-mesma-divisao-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo",
-    "slug": "para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-e",
-    "title": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T23:34:00.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo",
-    "sourceLabel": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó",
-    "lede": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "summary": "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó.",
-      "Para reforçar o apoio ao setor produtivo, governadora Mailza entrega reforma da unidade do Idaf em Feijó e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/75295a86-8479-4c4d-8350-f6f704190602-1024x681.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/75295a86-8479-4c4d-8350-f6f704190602-1024x681.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/75295a86-8479-4c4d-8350-f6f704190602-1024x681.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo/?utm_source=rss&utm_medium=rss&utm_campaign=para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-em-feijo"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "para-reforcar-o-apoio-ao-setor-produtivo-governadora-mailza-entrega-reforma-da-unidade-do-idaf-e"
-    ]
   },
   {
     "id": "https://batelao.com/governo-articula-regularizacao-da-cadeia-do-acai-e-transferencia-de-tecnologia-para-produtores-do-jurua/?utm_source=rss&utm_medium=rss&utm_campaign=governo-articula-regularizacao-da-cadeia-do-acai-e-transferencia-de-tecnologia-para-produtores-do-jurua",
@@ -7876,55 +8633,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "quem-e-mv-criminoso-apontado-como-maior-ladrao-da-baixada-fluminense"
-    ]
-  },
-  {
-    "id": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia",
-    "slug": "governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-",
-    "title": "Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T23:28:41.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia",
-    "sourceLabel": "Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia",
-    "lede": "Por Fernando Santtos A governadora do Acre, Mailza Assis, publicou nesta quinta-feira, 30, o Decreto nº 11.878, de 29 de abril de 2026, que regulamenta sua aplicação normativa.",
-    "summary": "Por Fernando Santtos A governadora do Acre, Mailza Assis, publicou nesta quinta-feira, 30, o Decreto nº 11.878, de 29 de abril de 2026, que regulamenta sua aplicação normativa.",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia.",
-      "Governo regulamenta lei com diretrizes para ações de respeito à diversidade LGBTQIAPN+ e combate à LGBTfobia e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Joao-Paulo-Silvab-1-300x200.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Joao-Paulo-Silvab-1-300x200.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/Joao-Paulo-Silvab-1-300x200.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia/?utm_source=rss&utm_medium=rss&utm_campaign=governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-a-lgbtfobia"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-regulamenta-lei-com-diretrizes-para-acoes-de-respeito-a-diversidade-lgbtqiapn-e-combate-"
     ]
   },
   {
@@ -9042,8 +9750,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/anp-regulamenta-calculo-para-importacao-do-gas-liquefeito-de-petroleo",
     "sourceLabel": "ANP regulamenta cálculo para importação do gás liquefeito de petróleo",
-    "lede": "A diretoria da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP) aprovou nesta quinta-feira (30) um nova resolução para regulamentar a metodologia de cálculo do preço de referência (PR) para a concessão de...",
-    "summary": "A diretoria da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP) aprovou nesta quinta-feira (30) um nova resolução para regulamentar a metodologia de cálculo do preço de referência (PR) para a concessão de...",
+    "lede": "ANP regulamenta cálculo para importação do gás liquefeito de petróleo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "ANP regulamenta cálculo para importação do gás liquefeito de petróleo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 30 de abr de 2026 a base desta noticia sobre ANP regulamenta cálculo para importação do gás liquefeito de petróleo.",
@@ -9348,8 +10056,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/economia/noticia/2026-04/governo-melhora-condicoes-e-dobra-credito-para-compra-de-caminhoes",
     "sourceLabel": "Governo melhora condições e dobra crédito para compra de caminhões",
-    "lede": "O governo federal lançou nesta quinta-feira (30) uma segunda etapa do programa Move Brasil, que financia a renovação da frota de caminhões em condições favoráveis para empresas de transporte rodoviário de carga, cooperativas e...",
-    "summary": "O governo federal lançou nesta quinta-feira (30) uma segunda etapa do programa Move Brasil, que financia a renovação da frota de caminhões em condições favoráveis para empresas de transporte rodoviário de carga, cooperativas e...",
+    "lede": "Governo melhora condições e dobra crédito para compra de caminhões. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Governo melhora condições e dobra crédito para compra de caminhões. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Governo melhora condições e dobra crédito para compra de caminhões.",
@@ -9450,8 +10158,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/geral/noticia/2026-04/prefeitura-descarta-produtos-que-seriam-vendidos-no-show-da-shakira",
     "sourceLabel": "Prefeitura descarta produtos que seriam vendidos no show da Shakira",
-    "lede": "A Secretaria Municipal de Ordem Pública (Seop) apreendeu, na madrugada desta quinta-feira, (30), 80 kg de materiais perecíveis enterrados na areia da Praia de Copacabana, zona sul do Rio, que seriam vendidos ao público durante...",
-    "summary": "A Secretaria Municipal de Ordem Pública (Seop) apreendeu, na madrugada desta quinta-feira, (30), 80 kg de materiais perecíveis enterrados na areia da Praia de Copacabana, zona sul do Rio, que seriam vendidos ao público durante...",
+    "lede": "Prefeitura descarta produtos que seriam vendidos no show da Shakira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Prefeitura descarta produtos que seriam vendidos no show da Shakira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 30 de abr de 2026 a base desta noticia sobre Prefeitura descarta produtos que seriam vendidos no show da Shakira.",
@@ -9552,8 +10260,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/regularizacao-fundiaria-e-chave-para-acesso-a-credito-e-qualidade-de-vida-no-campo/",
     "sourceLabel": "Regularização fundiária é chave para acesso a crédito e qualidade de vida no campo",
-    "lede": "Em entrevista ao ac24horas Play na tarde desta quinta-feira, 30, a coordenadora do programa União com Municípios, Nazaré Soares, destacou que a regularização fundiária e ambiental, aliada à assistência técnica, é essencial para...",
-    "summary": "Em entrevista ao ac24horas Play na tarde desta quinta-feira, 30, a coordenadora do programa União com Municípios, Nazaré Soares, destacou que a regularização fundiária e ambiental, aliada à assistência técnica, é essencial para...",
+    "lede": "Regularização fundiária é chave para acesso a crédito e qualidade de vida no campo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Regularização fundiária é chave para acesso a crédito e qualidade de vida no campo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Regularização fundiária é chave para acesso a crédito e qualidade de vida no campo.",
@@ -9785,55 +10493,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio",
-    "slug": "durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agen",
-    "title": "Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T20:47:57.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio",
-    "sourceLabel": "Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município",
-    "lede": "Por Felipe Souza Aproveitando a agenda no município de Feijó, a governadora Mailza Assis concedeu entrevista à Rádio Difusora Acreana, na qual detalhou as atividades programadas para esta quinta-feira, 30.",
-    "summary": "Por Felipe Souza Aproveitando a agenda no município de Feijó, a governadora Mailza Assis concedeu entrevista à Rádio Difusora Acreana, na qual detalhou as atividades programadas para esta quinta-feira, 30.",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município.",
-      "Durante passagem por Feijó, governadora Mailza concede entrevista à Rádio Difusora e detalha agenda no município e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/98a9a529-7a80-45b7-ae20-cfcbba4e8347-1024x681.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/98a9a529-7a80-45b7-ae20-cfcbba4e8347-1024x681.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/98a9a529-7a80-45b7-ae20-cfcbba4e8347-1024x681.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio/?utm_source=rss&utm_medium=rss&utm_campaign=durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agenda-no-municipio"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "durante-passagem-por-feijo-governadora-mailza-concede-entrevista-a-radio-difusora-e-detalha-agen"
-    ]
-  },
-  {
     "id": "https://ac24horas.com/2026/04/30/programa-uniao-com-os-municipios-assina-contrato-de-r-10-milhoes-para-regularizacao-no-acre/",
     "slug": "programa-uniao-com-os-municipios-assina-contrato-de-r-10-milhoes-para-regularizacao-no-acre",
     "title": "Programa União com os Municípios assina contrato de R$ 10 milhões para regularização no Acre",
@@ -9895,8 +10554,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/davi-friale-diz-que-primeira-onda-de-frio-polar-chega-ao-acre-em-maio/",
     "sourceLabel": "Davi Friale diz que primeira onda de frio polar chega ao Acre em maio",
-    "lede": "O meteorologista Davi Friale divulgou, nesta quinta-feira (30) em seu site O Tempo Aqui, previsão de que a primeira onda de frio polar de 2026 chega ao Acre entre os dias 9 e 11 de maio, com a possibilidade de provocar a...",
-    "summary": "O meteorologista Davi Friale divulgou, nesta quinta-feira (30) em seu site O Tempo Aqui, previsão de que a primeira onda de frio polar de 2026 chega ao Acre entre os dias 9 e 11 de maio, com a possibilidade de provocar a...",
+    "lede": "Davi Friale diz que primeira onda de frio polar chega ao Acre em maio. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Davi Friale diz que primeira onda de frio polar chega ao Acre em maio. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Davi Friale diz que primeira onda de frio polar chega ao Acre em maio.",
@@ -10223,55 +10882,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "governo-reforca-apoio-as-aldeias-atingidas-por-enchente-do-rio-gregorio-em-tarauaca"
-    ]
-  },
-  {
-    "id": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais",
-    "slug": "em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais",
-    "title": "Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T20:07:09.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais",
-    "sourceLabel": "Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais",
-    "lede": "Batelao publicou uma atualização sobre Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "Batelao publicou uma atualização sobre Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 30 de abr de 2026 a base desta noticia sobre Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais.",
-      "Em Feijó, governadora Mailza autoriza construção de 25 unidades habitacionais e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/4d93ee2c-8315-4d92-a8b1-7c1b83dc2204-1024x681.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/4d93ee2c-8315-4d92-a8b1-7c1b83dc2204-1024x681.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/4d93ee2c-8315-4d92-a8b1-7c1b83dc2204-1024x681.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais/?utm_source=rss&utm_medium=rss&utm_campaign=em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "em-feijo-governadora-mailza-autoriza-construcao-de-25-unidades-habitacionais"
     ]
   },
   {
@@ -10994,8 +11604,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/30/apos-derrubada-de-veto-e-da-indicacao-de-messias-alcolumbre-evita-perguntas-da-imprensa-voces-sabem-mais-do-que-eu.ghtml",
     "sourceLabel": "Após rejeição a indicação de Messias ao STF, Alcolumbre evita perguntas da imprensa: 'Vocês sabem de mais coisa do que eu'",
-    "lede": "Após rejeição a indicação de Messias ao STF, Alcolumbre evita perguntas da imprensa: 'Vocês sabem de mais coisa do que eu'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de....",
-    "summary": "Após rejeição a indicação de Messias ao STF, Alcolumbre evita perguntas da imprensa: 'Vocês sabem de mais coisa do que eu'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de...",
+    "lede": "Após rejeição a indicação de Messias ao STF, Alcolumbre evita perguntas da imprensa: 'Vocês sabem de mais coisa do que eu'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de.",
+    "summary": "Após rejeição a indicação de Messias ao STF, Alcolumbre evita perguntas da imprensa: 'Vocês sabem de mais coisa do que eu'.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Após rejeição a indicação de Messias ao STF, Alcolumbre evita perguntas da imprensa: 'Vocês sabem de mais coisa do que eu'.",
@@ -11043,8 +11653,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/noticia/2026/04/30/com-derrubada-de-veto-saiba-o-que-acontece-com-bolsonaro-agora.ghtml",
     "sourceLabel": "Com derrubada de veto de Lula ao PL da Dosimetria, saiba o que acontece com Bolsonaro",
-    "lede": "PL da Dosimetria: Câmara e Senado derrubam veto de Lula; texto segue para promulgação Com a derrubada do veto do presidente Luiz Inácio Lula da Silva (PT) nesta quinta-feira (30), o Congresso Nacional concluiu a análise do...",
-    "summary": "PL da Dosimetria: Câmara e Senado derrubam veto de Lula; texto segue para promulgação Com a derrubada do veto do presidente Luiz Inácio Lula da Silva (PT) nesta quinta-feira (30), o Congresso Nacional concluiu a análise do...",
+    "lede": "Com derrubada de veto de Lula ao PL da Dosimetria, saiba o que acontece com Bolsonaro. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Com derrubada de veto de Lula ao PL da Dosimetria, saiba o que acontece com Bolsonaro. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Com derrubada de veto de Lula ao PL da Dosimetria, saiba o que acontece com Bolsonaro.",
@@ -11443,59 +12053,6 @@ window.NEWS_DATA = [
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
   },
   {
-    "id": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/",
-    "slug": "gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z",
-    "title": "Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z”",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T18:02:10.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/",
-    "sourceLabel": "Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z”",
-    "lede": "O ex-governador do Acre, Gladson Cameli, afirmou nesta quinta-feira (30) que aposta na presença da ex-deputada Jéssica Sales como vice na chapa governista liderada pela atual governadora Mailza Assis.",
-    "summary": "O ex-governador do Acre, Gladson Cameli, afirmou nesta quinta-feira (30) que aposta na presença da ex-deputada Jéssica Sales como vice na chapa governista liderada pela atual governadora Mailza Assis.",
-    "analysis": "",
-    "body": [
-      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z”.",
-      "Gladson Cameli aposta em Jéssica na chapa e diz que grupo tem planos de “A a Z” e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "./assets/news-fallbacks/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z.svg",
-    "sourceImageUrl": "./assets/news-fallbacks/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z.svg",
-    "feedImageUrl": "./assets/news-fallbacks/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "gladson-cameli-aposta-em-jessica-na-chapa-e-diz-que-grupo-tem-planos-de-a-a-z"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
     "id": "https://jurua24horas.com/2026/04/gladson-desembarca-no-acre-fala-em-ajuste-no-grupo-e-preve-alinhamento-entre-aliados/",
     "slug": "gladson-desembarca-no-acre-fala-em-ajuste-no-grupo-e-preve-alinhamento-entre-aliados",
     "title": "Gladson desembarca no Acre, fala em ajuste no grupo e prevê alinhamento entre aliados",
@@ -11610,8 +12167,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/politica/politico/noticia/2026/04/30/pl-dosimetria-redes-socias.ghtml",
     "sourceLabel": "Nas redes, políticos comentam votação da dosimetria: 'Bandido bom é bandido anistiado pela família Bolsonaro', diz Humberto Costa",
-    "lede": "Nas redes, políticos comentam votação da dosimetria: 'Bandido bom é bandido anistiado pela família Bolsonaro', diz Humberto Costa. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes an...",
-    "summary": "Nas redes, políticos comentam votação da dosimetria: 'Bandido bom é bandido anistiado pela família Bolsonaro', diz Humberto Costa. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes an...",
+    "lede": "Nas redes, políticos comentam votação da dosimetria: 'Bandido bom é bandido anistiado pela família Bolsonaro', diz Humberto Costa. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes an",
+    "summary": "Nas redes, políticos comentam votação da dosimetria: 'Bandido bom é bandido anistiado pela família Bolsonaro', diz Humberto Costa. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes an",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre Nas redes, políticos comentam votação da dosimetria: 'Bandido bom é bandido anistiado pela família Bolsonaro', diz Humberto Costa.",
@@ -12034,8 +12591,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/04/30/chico-cesar-procura-adensar-cancoes-feitas-na-juventude-em-fofo-album-de-voz-violao-e-algum-experimentalismo.ghtml",
     "sourceLabel": "Chico César procura adensar canções feitas na juventude em 'Fofo', álbum de voz, violão e algum experimentalismo",
-    "lede": "Chico César procura adensar canções feitas na juventude em 'Fofo', álbum de voz, violão e algum experimentalismo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o....",
-    "summary": "Chico César procura adensar canções feitas na juventude em 'Fofo', álbum de voz, violão e algum experimentalismo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o...",
+    "lede": "Chico César procura adensar canções feitas na juventude em 'Fofo', álbum de voz, violão e algum experimentalismo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o.",
+    "summary": "Chico César procura adensar canções feitas na juventude em 'Fofo', álbum de voz, violão e algum experimentalismo.",
     "analysis": "",
     "body": [
       "G1 Pop & Arte publicou em 30 de abr de 2026 a base desta noticia sobre Chico César procura adensar canções feitas na juventude em 'Fofo', álbum de voz, violão e algum experimentalismo.",
@@ -12166,59 +12723,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "no-acre-inmet-emite-alerta-de-chuvas-intensas-com-risco-de-ventos-de-ate-60-km-h"
-    ],
-    "originalImageUrl": "",
-    "originalFeedImageUrl": "",
-    "originalSourceImageUrl": "",
-    "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/",
-    "slug": "gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre",
-    "title": "Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T15:54:21.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/",
-    "sourceLabel": "Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre",
-    "lede": "O ex-governador do Acre, Gladson Cameli, comentou as recentes mudanças no primeiro escalão da gestão estadual e afirmou que o processo faz parte da reorganização administrativa conduzida pela atual governadora Mailza Assis.",
-    "summary": "O ex-governador do Acre, Gladson Cameli, comentou as recentes mudanças no primeiro escalão da gestão estadual e afirmou que o processo faz parte da reorganização administrativa conduzida pela atual governadora Mailza Assis.",
-    "analysis": "",
-    "body": [
-      "Jurua 24 Horas publicou em 30 de abr de 2026 a base desta noticia sobre Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre.",
-      "Gladson Cameli comenta mudanças no governo e reforça autonomia da governadora no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "./assets/news-fallbacks/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre.svg",
-    "sourceImageUrl": "./assets/news-fallbacks/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre.svg",
-    "feedImageUrl": "./assets/news-fallbacks/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre.svg",
-    "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
-    "imageFocus": "center 50%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "gladson-cameli-comenta-mudancas-no-governo-e-reforca-autonomia-da-governadora-no-acre"
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -12593,8 +13097,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Politica",
     "sourceUrl": "https://g1.globo.com/podcast/o-assunto/noticia/2026/04/30/derrota-de-messias-e-vitoria-de-alexandre-de-moraes-analisa-ana-flor-em-o-assunto-entenda-divisao-no-stf.ghtml",
     "sourceLabel": "'Derrota de Messias é vitória de Alexandre de Moraes', analisa Ana Flor em O Assunto; entenda divisão no STF",
-    "lede": "'Derrota de Messias é vitória de Alexandre de Moraes', analisa Ana Flor em O Assunto; entenda divisão no STF. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o text...",
-    "summary": "'Derrota de Messias é vitória de Alexandre de Moraes', analisa Ana Flor em O Assunto; entenda divisão no STF. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o text...",
+    "lede": "'Derrota de Messias é vitória de Alexandre de Moraes', analisa Ana Flor em O Assunto; entenda divisão no STF. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o text",
+    "summary": "'Derrota de Messias é vitória de Alexandre de Moraes', analisa Ana Flor em O Assunto; entenda divisão no STF. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o text",
     "analysis": "",
     "body": [
       "G1 Politica publicou em 30 de abr de 2026 a base desta noticia sobre 'Derrota de Messias é vitória de Alexandre de Moraes', analisa Ana Flor em O Assunto; entenda divisão no STF.",
@@ -12797,8 +13301,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/30/homem-e-preso-em-cruzeiro-do-sul-oferecendo-drogas-para-estudantes-nos-jogos-escolares/",
     "sourceLabel": "Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares",
-    "lede": "Screenshot \" Um homem de 24 anos, conhecido como Natanael, que usa tornozeleira eletrônica, foi preso no Ginásio Jader Machado, em Cruzeiro do Sul, na manhã desta quarta-feira, 29, ao tentar vender drogas para os estudantes que...",
-    "summary": "Screenshot \" Um homem de 24 anos, conhecido como Natanael, que usa tornozeleira eletrônica, foi preso no Ginásio Jader Machado, em Cruzeiro do Sul, na manhã desta quarta-feira, 29, ao tentar vender drogas para os estudantes que...",
+    "lede": "Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Homem é preso em Cruzeiro do Sul oferecendo drogas para estudantes nos Jogos Escolares.",
@@ -17233,55 +17737,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/",
-    "slug": "para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder",
-    "title": "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
-    "eyebrow": "governadora mailza",
-    "date": "30 de abr de 2026",
-    "publishedAt": "2026-04-30T10:47:43.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/",
-    "sourceLabel": "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
-    "lede": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador.",
-    "summary": "Foto: Sérgio Vale/ac24horas \" O prefeito de Rio Branco, Alysson Bestene, voltou a defender ontem a abertura de um diálogo das forças que venceram a última eleição municipal, para chegar a um candidato único do grupo a governador.",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 30 de abr de 2026 a base desta noticia sobre Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder.",
-      "Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-07-at-16.44.21-2-1200x768.jpeg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-07-at-16.44.21-2-1200x768.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-07-at-16.44.21-2-1200x768.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/04/30/para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "para-alysson-o-ideal-e-um-candidato-unico-ao-governo-do-grupo-que-esta-no-poder"
-    ]
-  },
-  {
     "id": "https://www.cnnbrasil.com.br/entretenimento/bbb/bbb-26-ana-paula-diz-como-lida-com-alegria-da-vitoria-apos-morte-do-pai/",
     "slug": "bbb-26-ana-paula-diz-como-lida-com-alegria-da-vitoria-apos-morte-do-pai",
     "title": "BBB 26: Ana Paula diz como lida com alegria da vitória após morte do pai",
@@ -21615,53 +22070,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano",
-    "slug": "entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano",
-    "title": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano",
-    "eyebrow": "governadora mailza",
-    "date": "29 de abr. de 2026",
-    "publishedAt": "2026-04-30T02:44:19.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano",
-    "sourceLabel": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano",
-    "lede": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano.",
-    "summary": "Entre emoção e compromisso, governadora Mailza empossa novos servidores do Idaf e reforça atuação do Estado no campo acreano.",
-    "analysis": "",
-    "body": [
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/f564c76d-5813-478f-a8be-4c21ca41b054-1024x683.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/f564c76d-5813-478f-a8be-4c21ca41b054-1024x683.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano/?utm_source=rss&utm_medium=rss&utm_campaign=entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "entre-emocao-e-compromisso-governadora-mailza-empossa-novos-servidores-do-idaf-e-reforca-atuacao-do-estado-no-campo-acreano"
-    ]
-  },
-  {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/sulamericana/cienciano-1-x-0-atletico-mg-veja-os-melhores-momentos-pela-sul-americana/",
     "slug": "cienciano-1-x-0-atletico-mg-veja-os-melhores-momentos-pela-sul-americana",
     "title": "Cienciano 1 x 0 Atlético-MG: veja os melhores momentos pela Sul-Americana",
@@ -24244,55 +24652,6 @@ window.NEWS_DATA = [
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/",
-    "slug": "mailza-da-posse-a-novos-servidores-efetivos-do-idaf",
-    "title": "Mailza dá posse a novos servidores efetivos do Idaf",
-    "eyebrow": "governadora mailza",
-    "date": "29 de abr. de 2026",
-    "publishedAt": "2026-04-29T23:29:19.000Z",
-    "category": "Política Regional",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/",
-    "sourceLabel": "Mailza dá posse a novos servidores efetivos do Idaf",
-    "lede": "ac24horas publicou uma atualização sobre Mailza dá posse a novos servidores efetivos do Idaf. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "summary": "ac24horas publicou uma atualização sobre Mailza dá posse a novos servidores efetivos do Idaf. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
-    "analysis": "",
-    "body": [
-      "ac24horas publicou em 29 de abr. de 2026 a base desta noticia sobre Mailza dá posse a novos servidores efetivos do Idaf. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Mailza dá posse a novos servidores efetivos do Idaf e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-29-at-17.54.34-1200x753.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-29-at-17.54.34-1200x753.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/04/29/mailza-da-posse-a-novos-servidores-efetivos-do-idaf/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mailza-da-posse-a-novos-servidores-efetivos-do-idaf"
-    ]
   },
   {
     "id": "https://g1.globo.com/politica/ao-vivo/sabatina-messias-ccj-senado.ghtml",
@@ -28259,8 +28618,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Pop & Arte",
     "sourceUrl": "https://g1.globo.com/pop-arte/musica/noticia/2026/04/29/batalha-de-rapper-l7nnon-e-yoko-ono-por-nome-artistico-durou-5-anos-e-teve-ate-debate-sobre-idade-de-fas-entenda.ghtml",
     "sourceLabel": "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda",
-    "lede": "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o...",
-    "summary": "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o...",
+    "lede": "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda.",
+    "summary": "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda.",
     "analysis": "",
     "body": [
       "G1 Pop & Arte publicou em 29 de abr de 2026 a base desta noticia sobre Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda.",
@@ -37016,55 +37375,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
-    "slug": "mailza-define-linha-de-frente-da-sua-campanha-ao-governo",
-    "title": "Mailza define linha de frente da sua campanha ao governo",
-    "eyebrow": "governadora mailza",
-    "date": "25 de abr. de 2026",
-    "publishedAt": "2026-04-25T15:06:34.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/",
-    "sourceLabel": "Mailza define linha de frente da sua campanha ao governo",
-    "lede": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
-    "summary": "O que era cobrado pela classe política, um referencial com quem pudessem dialogar dentro do governo sobre a eleição e suas demandas, é um assunto resolvido.",
-    "analysis": "",
-    "body": [
-      "Jurua Comunicacao publicou em 25 de abr. de 2026 a base desta noticia sobre Mailza define linha de frente da sua campanha ao governo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Mailza define linha de frente da sua campanha ao governo e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-    "sourceImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-    "feedImageUrl": "https://juruacomunicacao.com.br/wp-content/uploads/2026/04/976x695_IMAGEM-DESTACADA-1.avif",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/mailza-define-linha-de-frente-da-sua-campanha-ao-governo/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mailza-define-linha-de-frente-da-sua-campanha-ao-governo"
-    ]
-  },
-  {
     "id": "https://www.theverge.com/science/918753/researchers-talking-less",
     "slug": "https://www.theverge.com/science/918753/researchers-talking-less",
     "title": "Estudo aponta queda nas conversas presenciais",
@@ -38839,8 +39149,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/nota-publica-sobre-derramamento-de-oleo-no-rio-tatauaca/",
     "sourceLabel": "Nota pública sobre derramamento de óleo no Rio Tarauacá",
-    "lede": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro...",
-    "summary": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro...",
+    "lede": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro",
+    "summary": "O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), do Instituto de Meio Ambiente do Acre (Imac) e da Coordenadoria de Proteção e Defesa Civil do Estado do Acre (CEPDC/AC), com suporte do Centro",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Nota pública sobre derramamento de óleo no Rio Tarauacá. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -40354,55 +40664,6 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
-    "slug": "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural",
-    "title": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-25T00:03:11.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
-    "sourceLabel": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
-    "lede": "Com foco no desenvolvimento rural e na promoção da segurança alimentar, a governadora Mailza Assis lançou o Programa Estadual de Aquisição de Alimentos (PEAA) em Tarauacá, na tarde desta sexta-feira, 24, consolidando uma...",
-    "summary": "Com foco no desenvolvimento rural e na promoção da segurança alimentar, a governadora Mailza Assis lançou o Programa Estadual de Aquisição de Alimentos (PEAA) em Tarauacá, na tarde desta sexta-feira, 24, consolidando uma...",
-    "analysis": "",
-    "body": [
-      "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/fbcae8c9-abd7-4976-9def-7829389f109e-1024x683.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-5-8-milhoes-na-producao-rural"
-    ]
-  },
-  {
     "id": "https://ac24horas.com/2026/04/24/campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado/",
     "slug": "campea-do-bbb-26-ana-paula-renault-estara-no-saia-justa-um-chamado",
     "title": "Campeã do BBB 26, Ana Paula Renault estará no Saia Justa: ‘Um chamado’",
@@ -41052,8 +41313,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/justica-federal-decreta-nova-prisao-de-mc-ryam-sp-e-mc-poze",
     "sourceLabel": "Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze",
-    "lede": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema...",
-    "summary": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema...",
+    "lede": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema",
+    "summary": "A Justiça Federal decretou a prisão preventiva dos envolvidos na Operação Narcofluxo, entre eles os cantores MC Ryam SP e MC Poze do Rodo e o influenciador Rafael Souza Oliveira por suspeita de participação em um esquema",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre Justiça Federal decreta nova prisão de MC Ryam SP e MC Poze. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41101,8 +41362,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre/?utm_source=rss&utm_medium=rss&utm_campaign=instituto-de-mudancas-climaticas-promove-alinhamento-entre-instituicoes-ambientais-sobre-avancos-do-redd-jurisdicional-do-acre",
     "sourceLabel": "Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre",
-    "lede": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última...",
-    "summary": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última...",
+    "lede": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última",
+    "summary": "Por Ana Campos Com colaboração de Ângela Rodrigues O governo do Acre, por meio do Instituto de Mudanças Climáticas e Regulação de Serviços Ambientais (IMC), concluiu nesta sexta-feira, 24, uma agenda técnica iniciada na última",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Instituto de Mudanças Climáticas promove alinhamento entre instituições ambientais sobre avanços do REDD+ Jurisdicional do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41158,8 +41419,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios/?utm_source=rss&utm_medium=rss&utm_campaign=governo-do-acre-divulga-resultado-da-1a-fase-do-processo-seletivo-para-brigadistas-comunitarios",
     "sourceLabel": "Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários",
-    "lede": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas...",
-    "summary": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas...",
+    "lede": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas",
+    "summary": "Por Ana Thaís Cordeiro O governo do Acre, por meio da Secretaria de Estado do Meio Ambiente (Sema), divulgou, nesta sexta-feira, 24, o resultado da 1ª fase do processo seletivo simplificado para a contratação de 50 brigadistas",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre divulga resultado da 1ª fase do processo seletivo para brigadistas comunitários. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41272,8 +41533,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Brasil",
     "sourceUrl": "https://agenciabrasil.ebc.com.br/justica/noticia/2026-04/pgr-da-aval-para-bolsonaro-fazer-cirurgia-no-ombro",
     "sourceLabel": "PGR dá aval para Bolsonaro fazer cirurgia no ombro",
-    "lede": "O procurador-geral da República, Paulo Gonet, enviou nesta sexta-feira (24) ao Supremo Tribunal Federal (STF) parecer favorável ao pedido do ex-presidente Jair Bolsonaro para deixar a prisão domiciliar e fazer uma cirurgia no...",
-    "summary": "O procurador-geral da República, Paulo Gonet, enviou nesta sexta-feira (24) ao Supremo Tribunal Federal (STF) parecer favorável ao pedido do ex-presidente Jair Bolsonaro para deixar a prisão domiciliar e fazer uma cirurgia no...",
+    "lede": "PGR dá aval para Bolsonaro fazer cirurgia no ombro. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "PGR dá aval para Bolsonaro fazer cirurgia no ombro. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Agencia Brasil publicou em 24 de abr. de 2026 a base desta noticia sobre PGR dá aval para Bolsonaro fazer cirurgia no ombro. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41321,8 +41582,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
     "sourceLabel": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-    "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Obras, Desenvolvimento Humano e Habitação segue nesta sexta-feira, 24, com a operação tapa-buracos no Bairro Aeroporto Velho, sendo aplicada 20 toneladas no...",
-    "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Obras, Desenvolvimento Humano e Habitação segue nesta sexta-feira, 24, com a operação tapa-buracos no Bairro Aeroporto Velho, sendo aplicada 20 toneladas no...",
+    "lede": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes....",
+    "summary": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes...",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41427,8 +41688,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-realizara-atendimento-de-saude-em-comunidades-do-rio-liberdade",
     "sourceLabel": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade",
-    "lede": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Saúde, realizará neste sábado, 25, e domingo, 26, uma ação de atendimento itinerante nas comunidades Morada Nova e São Raimundo, localizadas na região do...",
-    "summary": "A Prefeitura de Cruzeiro do Sul, por meio da Secretaria Municipal de Saúde, realizará neste sábado, 25, e domingo, 26, uma ação de atendimento itinerante nas comunidades Morada Nova e São Raimundo, localizadas na região do...",
+    "lede": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul realizará atendimento de saúde em comunidades do rio Liberdade. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41729,8 +41990,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao/?utm_source=rss&utm_medium=rss&utm_campaign=chuvas-intensas-mantem-acre-em-alerta-para-alagamentos-e-defesa-civil-orienta-populacao",
     "sourceLabel": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população",
-    "lede": "Por Miguel França O governo do Acre, por meio da Defesa Civil Estadual, alerta, nesta sexta-feira, 24, para a continuidade de chuvas intensas nos próximos dias, com previsão de acumulados significativos, principalmente nas...",
-    "summary": "Por Miguel França O governo do Acre, por meio da Defesa Civil Estadual, alerta, nesta sexta-feira, 24, para a continuidade de chuvas intensas nos próximos dias, com previsão de acumulados significativos, principalmente nas...",
+    "lede": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Chuvas intensas mantêm Acre em alerta para alagamentos e Defesa Civil orienta população. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41786,8 +42047,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao/?utm_source=rss&utm_medium=rss&utm_campaign=saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao",
     "sourceLabel": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização",
-    "lede": "Por Abigail Sunamita Com o objetivo de ampliar o acesso a imunobiológicos especiais em todo o estado, a Secretaria de Estado de Saúde do Acre (Sesacre) realizou, nesta sexta-feira, 24 de abril de 2026, o lançamento oficial do...",
-    "summary": "Por Abigail Sunamita Com o objetivo de ampliar o acesso a imunobiológicos especiais em todo o estado, a Secretaria de Estado de Saúde do Acre (Sesacre) realizou, nesta sexta-feira, 24 de abril de 2026, o lançamento oficial do...",
+    "lede": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Saúde lança projeto HUBCRIE e reforça ações de cobertura vacinal na Semana Mundial da Imunização. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -41828,120 +42089,6 @@ window.NEWS_DATA = [
     "sourceCount": 2,
     "alternateSlugs": [
       "saude-lanca-projeto-hubcrie-e-reforca-acoes-de-cobertura-vacinal-na-semana-mundial-da-imunizacao"
-    ]
-  },
-  {
-    "id": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "title": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T21:57:54.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
-    "sourceLabel": "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves",
-    "lede": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
-    "summary": "Por James Rodrigues Durante agenda em Rodrigues Alves, nesta sexta-feira, 24, a governadora Mailza Assis, entregou 5. 409 kits escolares aos estudantes das redes estadual e municipal de ensino.",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega kits escolares e fortalece a educação em Rodrigues Alves e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-24-at-13.43.00-1024x682.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves"
-      },
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves"
-      },
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves/"
-      }
-    ],
-    "sourceCount": 2,
-    "alternateSlugs": [
-      "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves"
-    ]
-  },
-  {
-    "id": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "slug": "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "title": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T21:56:12.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
-    "sourceLabel": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-    "lede": "Por James Rodrigues Reafirmando o compromisso do governo com a segurança no estado, a governadora Mailza Assis, entregou nesta sexta-feira, 24, três viaturas, além de barco e equipamentos operacionais à Polícia Civil de...",
-    "summary": "Por James Rodrigues Reafirmando o compromisso do governo com a segurança no estado, a governadora Mailza Assis, entregou nesta sexta-feira, 24, três viaturas, além de barco e equipamentos operacionais à Polícia Civil de...",
-    "analysis": "",
-    "body": [
-      "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/04/CAPA-7-1024x682.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior"
-      },
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior"
-      },
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/"
-      }
-    ],
-    "sourceCount": 2,
-    "alternateSlugs": [
-      "governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior"
     ]
   },
   {
@@ -42110,8 +42257,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/stf-tem-maioria-para-manter-prisao-de-ex-presidente-do-brb/",
     "sourceLabel": "STF tem maioria para manter prisão de ex-presidente do BRB",
-    "lede": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente...",
-    "summary": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente...",
+    "lede": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente",
+    "summary": "© Lúcio Bernardo Jr/Agência Brasília \" A Segunda Turma do Supremo Tribunal Federal (STF) formou nesta sexta-feira (24) maioria de votos para manter a decisão do ministro André Mendonça que determinou a prisão do ex-presidente",
     "analysis": "",
     "body": [
       "ac24horas publicou em 24 de abr. de 2026 a base desta noticia sobre STF tem maioria para manter prisão de ex-presidente do BRB. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -42257,8 +42404,8 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/04/24/dois-sao-presos-por-trafico-de-drogas-no-bairro-da-paz-em-rio-branco/",
     "sourceLabel": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco",
-    "lede": "A Polícia Civil do Acre (PCAC), por meio de investigadores da Delegacia de Repressão ao Narcotráfico (Denarc), apreendeu no início da desta sexta-feira, 24, cerca de 26 trouxinhas de maconha e um invólucro de cocaína durante...",
-    "summary": "A Polícia Civil do Acre (PCAC), por meio de investigadores da Delegacia de Repressão ao Narcotráfico (Denarc), apreendeu no início da desta sexta-feira, 24, cerca de 26 trouxinhas de maconha e um invólucro de cocaína durante...",
+    "lede": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "ac24horas publicou em 24 de abr. de 2026 a base desta noticia sobre Dois são presos por tráfico de drogas no bairro da Paz, em Rio Branco. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -42555,8 +42702,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/governo-do-acre-fortalece-parceria-com-cozinha-solidaria-para-ampliar-atendimento-a-familias-em-vulnerabilidade/",
     "sourceLabel": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade",
-    "lede": "A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) realizou, nesta sexta-feira, 24, uma visita institucional à Cozinha Solidária Marielle Franco, em Rio Branco, com o objetivo de fortalecer o termo de...",
-    "summary": "A Secretaria de Estado de Assistência Social e Direitos Humanos (SEASDH) realizou, nesta sexta-feira, 24, uma visita institucional à Cozinha Solidária Marielle Franco, em Rio Branco, com o objetivo de fortalecer o termo de...",
+    "lede": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
+    "summary": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -43094,8 +43241,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-previa-areacre-auto-posto-ltda/",
     "sourceLabel": "Licença Prévia – AREACRE AUTO POSTO LTDA",
-    "lede": "AREACRE AUTO POSTO LTDA AREACRE AUTO POSTO Torna público que recebeu do INSTITUTO DE MEIO AMBIENTE DO ACRE-IMAC, a LICENÇA PRÉVIA Nº 000347/2026, válida até 22/04/2029, para atividade de COMERCIO VAREJISTA DE COMBUSTIVEIS...",
-    "summary": "AREACRE AUTO POSTO LTDA AREACRE AUTO POSTO Torna público que recebeu do INSTITUTO DE MEIO AMBIENTE DO ACRE-IMAC, a LICENÇA PRÉVIA Nº 000347/2026, válida até 22/04/2029, para atividade de COMERCIO VAREJISTA DE COMBUSTIVEIS...",
+    "lede": "AREACRE AUTO POSTO LTDA AREACRE AUTO POSTO Torna público que recebeu do INSTITUTO DE MEIO AMBIENTE DO ACRE-IMAC, a LICENÇA PRÉVIA Nº 000347/2026, válida até 22/04/2029, para atividade de COMERCIO VAREJISTA DE COMBUSTIVEIS",
+    "summary": "AREACRE AUTO POSTO LTDA AREACRE AUTO POSTO Torna público que recebeu do INSTITUTO DE MEIO AMBIENTE DO ACRE-IMAC, a LICENÇA PRÉVIA Nº 000347/2026, válida até 22/04/2029, para atividade de COMERCIO VAREJISTA DE COMBUSTIVEIS",
     "analysis": "",
     "body": [
       "Tribuna do Jurua publicou em 24 de abr de 2026 a base desta noticia sobre Licença Prévia – AREACRE AUTO POSTO LTDA.",
@@ -43133,55 +43280,6 @@ window.NEWS_DATA = [
     "originalFeedImageUrl": "",
     "originalSourceImageUrl": "",
     "imageQuality": "imagem-ausente-ou-generica-fallback-e-buscar-na-fonte"
-  },
-  {
-    "id": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
-    "slug": "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
-    "title": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T19:58:21.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/",
-    "sourceLabel": "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul",
-    "lede": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
-    "summary": "Acompanhada do presidente da Aleac, Nicolau Júnior, a gestora destacou que a modernização da frota e dos equipamentos visa agilizar o combate ao crime no Vale do Juruá.",
-    "analysis": "",
-    "body": [
-      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Governadora Mailza entrega investimentos tecnológicos e viaturas para a Polícia Civil em Cruzeiro do Sul e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/1b62e0d2-caf5-4aba-9694-560b123af00d.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul"
-    ]
   },
   {
     "id": "https://www.theverge.com/entertainment/918250/avatar-aang-the-last-airbender-leaks-arrest-paramount-plus",
@@ -43279,55 +43377,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "projeto-vozes-da-floresta-destaca-cultura-indigena-e-fortalece-identidade-cultural-em-cruzeiro-do-sul"
-    ]
-  },
-  {
-    "id": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
-    "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
-    "title": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T19:28:41.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua 24 Horas",
-    "sourceUrl": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/",
-    "sourceLabel": "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural",
-    "lede": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
-    "summary": "A governadora Mailza Assis entregou nesta quinta-feira (23) ao prefeito Zequinha Lima a Licença Ambiental para a construção de dois sistemas de abastecimento de água em comunidades rurais de Cruzeiro do Sul.",
-    "analysis": "",
-    "body": [
-      "Jurua 24 Horas publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Prefeitura de Cruzeiro do Sul recebe Licença Ambiental para construção de sistemas de abastecimento de água na zona rural e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-    "sourceImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-    "feedImageUrl": "https://jurua24horas.com/wp-content/uploads/2026/04/03cbbffb-1e96-42ce-afae-3df36eaf7ebf.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua 24 Horas",
-        "url": "https://jurua24horas.com/2026/04/prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural"
     ]
   },
   {
@@ -43671,55 +43720,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "how-project-maven-taught-the-military-to-love-ai"
-    ]
-  },
-  {
-    "id": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
-    "slug": "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
-    "title": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-    "eyebrow": "governadora mailza",
-    "date": "24 de abr. de 2026",
-    "publishedAt": "2026-04-24T16:47:11.000Z",
-    "category": "Política",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "Jurua Comunicacao",
-    "sourceUrl": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/",
-    "sourceLabel": "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre",
-    "lede": "Jurua Comunicacao publicou uma atualização sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "Jurua Comunicacao publicou uma atualização sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "body": [
-      "Jurua Comunicacao publicou em 24 de abr. de 2026 a base desta noticia sobre Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
-      "Em entrevista, Mailza Assis avalia o início de sua gestão no governo do Acre e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
-      "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
-    ],
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-    "sourceImageUrl": "",
-    "feedImageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/04/Copilot_20260424_114358.png?w=1536&ssl=1",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 950,
-    "editorialPriority": "mailza-prioridade",
-    "crossSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Jurua Comunicacao",
-        "url": "https://juruacomunicacao.com.br/em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre"
     ]
   },
   {
@@ -45023,8 +45023,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/licenca-de-instalacao-josias-o-da-silva-ltda/",
     "sourceLabel": "Licença de Instalação – Josias O. Da Silva Ltda",
-    "lede": "Torna público que requereu ao Instituto de Meio Ambiente do Acre – IMAC, a Licença Instalação – LI, para a atividade de Posto de Abastecimento – PA, localizada a Estrada do Aeroporto,nº2981, Nossa Senhora das Graças na cidade...",
-    "summary": "Torna público que requereu ao Instituto de Meio Ambiente do Acre – IMAC, a Licença Instalação – LI, para a atividade de Posto de Abastecimento – PA, localizada a Estrada do Aeroporto,nº2981, Nossa Senhora das Graças na cidade...",
+    "lede": "Torna público que requereu ao Instituto de Meio Ambiente do Acre – IMAC, a Licença Instalação – LI, para a atividade de Posto de Abastecimento – PA, localizada a Estrada do Aeroporto,nº2981, Nossa Senhora das Graças na cidade",
+    "summary": "Torna público que requereu ao Instituto de Meio Ambiente do Acre – IMAC, a Licença Instalação – LI, para a atividade de Posto de Abastecimento – PA, localizada a Estrada do Aeroporto,nº2981, Nossa Senhora das Graças na cidade",
     "analysis": "",
     "body": [
       "Tribuna do Jurua publicou em 20 de abr de 2026 a base desta noticia sobre Licença de Instalação – Josias O. Da Silva Ltda.",
@@ -45655,8 +45655,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-de-assembleia-geral-ordinaria-ago-coopertransgua/",
     "sourceLabel": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA",
-    "lede": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA",
-    "summary": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA",
+    "lede": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Tribuna do Jurua publicou em 15 de mar de 2026 a base desta noticia sobre EDITAL DE CONVOCAÇÃO DE ASSEMBLEIA GERAL ORDINÁRIA (AGO) – COOPERTRANSGUA.",
@@ -45708,8 +45708,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/geral/edital-de-convocacao-de-assembleia-geral-ordinaria-coopeguajara/",
     "sourceLabel": "Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará",
-    "lede": "Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará",
-    "summary": "Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará",
+    "lede": "Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "Tribuna do Jurua publicou em 12 de mar de 2026 a base desta noticia sobre Edital de Convocação de Assembleia Geral Ordinária – Coopeguajará.",
@@ -45919,8 +45919,8 @@ window.NEWS_DATA = [
     "sourceName": "Tribuna do Jurua",
     "sourceUrl": "https://tribunadojurua.com.br/licencas-ambientais/editais/edital-de-convocacao-assembleia-de-ratificacao-da-fundacao-do-sindicato-dos-trabalhadores-em-transporte-aquaviario-do-estadodo-acre/",
     "sourceLabel": "Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre",
-    "lede": "Convidamos as pessoas interessadas para a Assembleia de Fundação do Sindicato dos Trabalhadores em Transporte Aquaviários do Estado do Acre a comparecerem no dia 28 de Fevereiro de 2026, 07:30 (sete horas e 30 minutos), à Rua...",
-    "summary": "Convidamos as pessoas interessadas para a Assembleia de Fundação do Sindicato dos Trabalhadores em Transporte Aquaviários do Estado do Acre a comparecerem no dia 28 de Fevereiro de 2026, 07:30 (sete horas e 30 minutos), à Rua...",
+    "lede": "Convidamos as pessoas interessadas para a Assembleia de Fundação do Sindicato dos Trabalhadores em Transporte Aquaviários do Estado do Acre a comparecerem no dia 28 de Fevereiro de 2026, 07:30 (sete horas e 30 minutos), à Rua",
+    "summary": "Convidamos as pessoas interessadas para a Assembleia de Fundação do Sindicato dos Trabalhadores em Transporte Aquaviários do Estado do Acre a comparecerem no dia 28 de Fevereiro de 2026, 07:30 (sete horas e 30 minutos), à Rua",
     "analysis": "",
     "body": [
       "Tribuna do Jurua publicou em 04 de fev de 2026 a base desta noticia sobre Edital de Convocação – Assembleia de Ratificação da Fundação do Sindicato dos Trabalhadores em Transporte Aquaviário do Acre.",
@@ -46119,8 +46119,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2023/04/28/criancas-autistas-participam-de-sessao-de-cinoterapia-com-caes-do-bope-em-macapa.ghtml",
     "sourceLabel": "Crianças autistas participam de sessão de terapia com cães do Bope em Macapá",
-    "lede": "Atividade de cinoterapia em Macapá faz parte do projeto Melhor Amigo José Eduardo Lima/g1 Crianças autistas receberam nesta sexta-feira (28) uma atividade terapêutica com cães do Batalhão de Operações Especiais (Bope) da...",
-    "summary": "Atividade de cinoterapia em Macapá faz parte do projeto Melhor Amigo José Eduardo Lima/g1 Crianças autistas receberam nesta sexta-feira (28) uma atividade terapêutica com cães do Batalhão de Operações Especiais (Bope) da...",
+    "lede": "Crianças autistas participam de sessão de terapia com cães do Bope em Macapá. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Crianças autistas participam de sessão de terapia com cães do Bope em Macapá. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 28 de abr de 2023 a base desta noticia sobre Crianças autistas participam de sessão de terapia com cães do Bope em Macapá.",
@@ -46168,8 +46168,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2022/05/06/jacare-de-2-metros-e-resgatado-dentro-do-campus-do-ifap-em-macapa-e-o-2o-animal-em-17-dias.ghtml",
     "sourceLabel": "Jacaré de 2 metros é resgatado dentro do campus do Ifap em Macapá; é o 2º animal em 17 dias",
-    "lede": "Jacaré foi imobilizado com cordas para ser entregue ao Ibama CBM/Divulgação Militares do Corpo de Bombeiros fizeram o resgate de um jacaré com quase dois metros encontrado na área externa do campus Macapá do Instituto Federal...",
-    "summary": "Jacaré foi imobilizado com cordas para ser entregue ao Ibama CBM/Divulgação Militares do Corpo de Bombeiros fizeram o resgate de um jacaré com quase dois metros encontrado na área externa do campus Macapá do Instituto Federal...",
+    "lede": "Jacaré foi imobilizado com cordas para ser entregue ao Ibama CBM/Divulgação Militares do Corpo de Bombeiros fizeram o resgate de um jacaré com quase dois metros encontrado na área externa do campus Macapá do Instituto Federal",
+    "summary": "Jacaré foi imobilizado com cordas para ser entregue ao Ibama CBM/Divulgação Militares do Corpo de Bombeiros fizeram o resgate de um jacaré com quase dois metros encontrado na área externa do campus Macapá do Instituto Federal",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 06 de mai de 2022 a base desta noticia sobre Jacaré de 2 metros é resgatado dentro do campus do Ifap em Macapá; é o 2º animal em 17 dias.",
@@ -46217,8 +46217,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ce/ceara/noticia/2021/10/20/homem-e-condenado-a-50-anos-de-prisao-por-assassinato-de-duas-criancas-em-vicosa-do-ceara.ghtml",
     "sourceLabel": "Acusado do assassinato de duas crianças em Viçosa do Ceará é condenado a 50 anos de prisão",
-    "lede": "As duas crianças foram mortas a golpes de facas",
-    "summary": "As duas crianças foram mortas a golpes de facas",
+    "lede": "Acusado do assassinato de duas crianças em Viçosa do Ceará é condenado a 50 anos de prisão. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Acusado do assassinato de duas crianças em Viçosa do Ceará é condenado a 50 anos de prisão. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 20 de out de 2021 a base desta noticia sobre Acusado do assassinato de duas crianças em Viçosa do Ceará é condenado a 50 anos de prisão.",
@@ -46266,8 +46266,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ma/maranhao/noticia/2020/12/04/justica-determina-o-afastamento-de-sydnei-pereira-da-prefeitura-de-anajatuba-no-maranhao.ghtml",
     "sourceLabel": "Justiça determina o afastamento de Sydnei Pereira da Prefeitura de Anajatuba",
-    "lede": "Sydnei Pereira, prefeito de Anajatuba",
-    "summary": "Sydnei Pereira, prefeito de Anajatuba",
+    "lede": "Justiça determina o afastamento de Sydnei Pereira da Prefeitura de Anajatuba. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Justiça determina o afastamento de Sydnei Pereira da Prefeitura de Anajatuba. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 04 de dez de 2020 a base desta noticia sobre Justiça determina o afastamento de Sydnei Pereira da Prefeitura de Anajatuba.",
@@ -46315,8 +46315,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/mg/triangulo-mineiro/noticia/2020/02/14/grupo-empresarial-deve-pagar-quase-r-21-milhoes-por-desvio-de-recursos-da-cidade-das-aguas-em-frutal.ghtml",
     "sourceLabel": "Grupo empresarial deve pagar quase R$ 21 milhões por desvio de recursos da Cidade das Águas em Frutal",
-    "lede": "Parcela de R$ 10,2 milhões será destinada ao custeio de projetos da Universidade Estadual de Minas Gerais (UEMG), de Frutal Ascom/Unesco-Hidroex Um grupo empresarial português firmou acordo para pagamento de R$ 20,9 milhões em...",
-    "summary": "Parcela de R$ 10,2 milhões será destinada ao custeio de projetos da Universidade Estadual de Minas Gerais (UEMG), de Frutal Ascom/Unesco-Hidroex Um grupo empresarial português firmou acordo para pagamento de R$ 20,9 milhões em...",
+    "lede": "Grupo empresarial deve pagar quase R$ 21 milhões por desvio de recursos da Cidade das Águas em Frutal. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Grupo empresarial deve pagar quase R$ 21 milhões por desvio de recursos da Cidade das Águas em Frutal. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 14 de fev de 2020 a base desta noticia sobre Grupo empresarial deve pagar quase R$ 21 milhões por desvio de recursos da Cidade das Águas em Frutal.",
@@ -46413,8 +46413,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/08/17/michele-maycoth-interpreta-sucessos-de-maria-gadu-em-noite-romantica-no-ap.ghtml",
     "sourceLabel": "Michele Maycoth interpreta sucessos de Maria Gadú em noite romântica no AP",
-    "lede": "Apresentação está marcada para o dia 1º de setembro, em um espaço cultural em Macapá Michele Maycoth/Arquivo Pessoal Interpretando sucessos de Maria Gadú, uma das relevações da MPB, a cantora amapaense Michele Maycoth prepara...",
-    "summary": "Apresentação está marcada para o dia 1º de setembro, em um espaço cultural em Macapá Michele Maycoth/Arquivo Pessoal Interpretando sucessos de Maria Gadú, uma das relevações da MPB, a cantora amapaense Michele Maycoth prepara...",
+    "lede": "Apresentação está marcada para o dia 1º de setembro, em um espaço cultural em Macapá Michele Maycoth/Arquivo Pessoal Interpretando sucessos de Maria Gadú, uma das relevações da MPB, a cantora amapaense Michele Maycoth prepara",
+    "summary": "Apresentação está marcada para o dia 1º de setembro, em um espaço cultural em Macapá Michele Maycoth/Arquivo Pessoal Interpretando sucessos de Maria Gadú, uma das relevações da MPB, a cantora amapaense Michele Maycoth prepara",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 17 de ago de 2018 a base desta noticia sobre Michele Maycoth interpreta sucessos de Maria Gadú em noite romântica no AP.",
@@ -46462,8 +46462,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/08/08/exposicao-minha-aldeia-reune-fotografias-inspiradas-no-cotidiano-amapaense.ghtml",
     "sourceLabel": "Exposição 'Minha Aldeia' reúne fotografias inspiradas no cotidiano amapaense",
-    "lede": "Mostra 'Minha Aldeia' busca evidenciar as belezas escondidas na simplicidade da vida no Amapá Floriano Lima/Divulgação Com fotos de paisagens, cartões-postais e até mesmo de trabalhadores à beira do Rio Amazonas, o fotógrafo...",
-    "summary": "Mostra 'Minha Aldeia' busca evidenciar as belezas escondidas na simplicidade da vida no Amapá Floriano Lima/Divulgação Com fotos de paisagens, cartões-postais e até mesmo de trabalhadores à beira do Rio Amazonas, o fotógrafo...",
+    "lede": "Mostra 'Minha Aldeia' busca evidenciar as belezas escondidas na simplicidade da vida no Amapá Floriano Lima/Divulgação Com fotos de paisagens, cartões-postais e até mesmo de trabalhadores à beira do Rio Amazonas, o fotógrafo",
+    "summary": "Mostra 'Minha Aldeia' busca evidenciar as belezas escondidas na simplicidade da vida no Amapá Floriano Lima/Divulgação Com fotos de paisagens, cartões-postais e até mesmo de trabalhadores à beira do Rio Amazonas, o fotógrafo",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 08 de ago de 2018 a base desta noticia sobre Exposição 'Minha Aldeia' reúne fotografias inspiradas no cotidiano amapaense.",
@@ -46511,8 +46511,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/08/05/peca-de-teatral-amapaense-vai-narrar-acontecimentos-19-anos-depois-o-ultimo-livro-de-harry-potter.ghtml",
     "sourceLabel": "Peça teatral amapaense vai narrar acontecimentos 19 anos depois do último livro de Harry Potter",
-    "lede": "Peça teatral 'Harry Potter e o Herdeiro Amaldiçoado' será nos dias 16 e 17 de agosto, em Macapá Google Inspirada na peça londrina que contou os acontecimentos 19 anos depois de \"Harry Potter e as Relíquias da Morte\", um grupo...",
-    "summary": "Peça teatral 'Harry Potter e o Herdeiro Amaldiçoado' será nos dias 16 e 17 de agosto, em Macapá Google Inspirada na peça londrina que contou os acontecimentos 19 anos depois de \"Harry Potter e as Relíquias da Morte\", um grupo...",
+    "lede": "Peça teatral 'Harry Potter e o Herdeiro Amaldiçoado' será nos dias 16 e 17 de agosto, em Macapá Google Inspirada na peça londrina que contou os acontecimentos 19 anos depois de \"Harry Potter e as Relíquias da Morte\", um grupo",
+    "summary": "Peça teatral 'Harry Potter e o Herdeiro Amaldiçoado' será nos dias 16 e 17 de agosto, em Macapá Google Inspirada na peça londrina que contou os acontecimentos 19 anos depois de \"Harry Potter e as Relíquias da Morte\", um grupo",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 05 de ago de 2018 a base desta noticia sobre Peça teatral amapaense vai narrar acontecimentos 19 anos depois do último livro de Harry Potter.",
@@ -46609,8 +46609,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/29/show-de-humor-em-macapa-leva-historias-de-ribeirinhos-da-amazonia-para-o-teatro.ghtml",
     "sourceLabel": "Show de humor em Macapá leva histórias de ribeirinhos da Amazônia para o teatro",
-    "lede": "Epaminondas Gustavo (com a bandeira) e Adilson Alcântara no show 'Agora é que são Eles’ Divulgação Histórias engraçadas de ribeirinhos que vivem no interior do Pará inspiraram o repertório de “Agora é que são Eles”, novo show...",
-    "summary": "Epaminondas Gustavo (com a bandeira) e Adilson Alcântara no show 'Agora é que são Eles’ Divulgação Histórias engraçadas de ribeirinhos que vivem no interior do Pará inspiraram o repertório de “Agora é que são Eles”, novo show...",
+    "lede": "Epaminondas Gustavo (com a bandeira) e Adilson Alcântara no show 'Agora é que são Eles’ Divulgação Histórias engraçadas de ribeirinhos que vivem no interior do Pará inspiraram o repertório de “Agora é que são Eles”, novo show",
+    "summary": "Epaminondas Gustavo (com a bandeira) e Adilson Alcântara no show 'Agora é que são Eles’ Divulgação Histórias engraçadas de ribeirinhos que vivem no interior do Pará inspiraram o repertório de “Agora é que são Eles”, novo show",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 29 de jul de 2018 a base desta noticia sobre Show de humor em Macapá leva histórias de ribeirinhos da Amazônia para o teatro.",
@@ -46658,8 +46658,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/rr/roraima/noticia/2018/07/26/sem-dinheiro-venezuelanos-acampam-as-margens-de-rodovia-na-fronteira-do-brasil-aqui-pelo-menos-temos-comida.ghtml",
     "sourceLabel": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'",
-    "lede": "Angélia Aguilera, 18, e o filho de 2 anos ao lado da barraca em que estão vivendo há cerca de 1 mês; 'Na rua é muito frio' Inaê Brandão/G1 RR Venezuelanos estão vivendo em acampamentos improvisados em Pacaraima, no Norte de...",
-    "summary": "Angélia Aguilera, 18, e o filho de 2 anos ao lado da barraca em que estão vivendo há cerca de 1 mês; 'Na rua é muito frio' Inaê Brandão/G1 RR Venezuelanos estão vivendo em acampamentos improvisados em Pacaraima, no Norte de...",
+    "lede": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
+    "summary": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 26 de jul de 2018 a base desta noticia sobre Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'.",
@@ -46711,7 +46711,6 @@ window.NEWS_DATA = [
     "summary": "G1 Brasil publicou em 25 de jul de 2018 a base desta noticia sobre Barracas de apoio aos romeiros começam a funcionar nesta sexta na BR-365 em Patos de Minas.",
     "analysis": "",
     "body": [
-      "G1 Brasil publicou em 25 de jul de 2018 a base desta noticia sobre Barracas de apoio aos romeiros começam a funcionar nesta sexta na BR-365 em Patos de Minas.",
       "Barracas de apoio aos romeiros começam a funcionar nesta sexta na BR-365 em Patos de Minas e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
@@ -46756,8 +46755,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ro/rondonia/noticia/2018/07/25/quilo-do-pirarucu-e-vendido-em-rondonia-por-r-936-no-valor-medio.ghtml",
     "sourceLabel": "Quilo do Pirarucu é vendido em Rondônia por R$ 9,36 no valor médio",
-    "lede": "Veja quanto custa o preço do quilo do pirarucu em várias cidades Toni Mendes/ TG A Associação de Assistência Técnica e Extensão Rural do Estado de Rondônia (Emater-RO) realizou, entre os dias 16 a 20 de julho, a pesquisa de...",
-    "summary": "Veja quanto custa o preço do quilo do pirarucu em várias cidades Toni Mendes/ TG A Associação de Assistência Técnica e Extensão Rural do Estado de Rondônia (Emater-RO) realizou, entre os dias 16 a 20 de julho, a pesquisa de...",
+    "lede": "Quilo do Pirarucu é vendido em Rondônia por R$ 9,36 no valor médio. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Quilo do Pirarucu é vendido em Rondônia por R$ 9,36 no valor médio. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 25 de jul de 2018 a base desta noticia sobre Quilo do Pirarucu é vendido em Rondônia por R$ 9,36 no valor médio.",
@@ -46854,8 +46853,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/com-surto-na-regiao-norte-campanha-contra-o-sarampo-no-ap-comeca-em-agosto.ghtml",
     "sourceLabel": "Com surto na região Norte, campanha contra o sarampo no AP começa em agosto",
-    "lede": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era...",
-    "summary": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era...",
+    "lede": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era",
+    "summary": "Vacinação contra sarampo e poliomielite acontece entre 6 a 31 de agosto Carlos Alberto Jr/G1 A ocorrência de centenas de casos confirmados de sarampo no país, reativou o alerta em torno da doença, que desde 2014 não era",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 23 de jul de 2018 a base desta noticia sobre Com surto na região Norte, campanha contra o sarampo no AP começa em agosto.",
@@ -47005,8 +47004,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/comissariado-do-ap-fiscaliza-embarque-de-menores-para-o-festival-do-camarao-no-pa.ghtml",
     "sourceLabel": "Comissariado do AP fiscaliza embarque de menores para o Festival do Camarão no PA",
-    "lede": "Festival do Camarão provoca aumento de fluxo de passageiros com destino ao Afuá Jorge Abreu/G1 Com o aumento de embarques nos portos de Macapá, o Comissariado da Infância e Juventude intensifica a fiscalização para evitar...",
-    "summary": "Festival do Camarão provoca aumento de fluxo de passageiros com destino ao Afuá Jorge Abreu/G1 Com o aumento de embarques nos portos de Macapá, o Comissariado da Infância e Juventude intensifica a fiscalização para evitar...",
+    "lede": "Festival do Camarão provoca aumento de fluxo de passageiros com destino ao Afuá Jorge Abreu/G1 Com o aumento de embarques nos portos de Macapá, o Comissariado da Infância e Juventude intensifica a fiscalização para evitar",
+    "summary": "Festival do Camarão provoca aumento de fluxo de passageiros com destino ao Afuá Jorge Abreu/G1 Com o aumento de embarques nos portos de Macapá, o Comissariado da Infância e Juventude intensifica a fiscalização para evitar",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 23 de jul de 2018 a base desta noticia sobre Comissariado do AP fiscaliza embarque de menores para o Festival do Camarão no PA.",
@@ -47103,8 +47102,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ma/maranhao/noticia/2018/07/23/laudo-aponta-praias-improprias-para-banho-durante-as-ferias-em-sao-luis.ghtml",
     "sourceLabel": "Laudo aponta praias impróprias para banho durante as férias em São Luís",
-    "lede": "13 pontos da orla da região metropolitana de São Luís estão impróprios para banho De acordo com último laudo de balneabilidade divulgado pela Secretaria de Meio Ambiente do Maranhão, 13 de 21 pontos localizados em praias entre...",
-    "summary": "13 pontos da orla da região metropolitana de São Luís estão impróprios para banho De acordo com último laudo de balneabilidade divulgado pela Secretaria de Meio Ambiente do Maranhão, 13 de 21 pontos localizados em praias entre...",
+    "lede": "Laudo aponta praias impróprias para banho durante as férias em São Luís. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Laudo aponta praias impróprias para banho durante as férias em São Luís. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 23 de jul de 2018 a base desta noticia sobre Laudo aponta praias impróprias para banho durante as férias em São Luís.",
@@ -47152,8 +47151,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/mg/triangulo-mineiro/noticia/2018/07/23/bombeiros-registram-fogo-em-vegetacao-no-bairro-industrial-em-uberlandia.ghtml",
     "sourceLabel": "Bombeiros combatem vários focos de incêndio no Distrito Industrial em Uberlândia; veja vídeo",
-    "lede": "Bombeiros trabalham para conter fogo em reserva florestal e pastagem em Uberlândia Equipes do Corpo de Bombeiros trabalharam na tarde desta segunda-feira (23) para conter focos de incêndio na LMG- 749, no Distrito Industrial de...",
-    "summary": "Bombeiros trabalham para conter fogo em reserva florestal e pastagem em Uberlândia Equipes do Corpo de Bombeiros trabalharam na tarde desta segunda-feira (23) para conter focos de incêndio na LMG- 749, no Distrito Industrial de...",
+    "lede": "Bombeiros combatem vários focos de incêndio no Distrito Industrial em Uberlândia; veja vídeo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "Bombeiros combatem vários focos de incêndio no Distrito Industrial em Uberlândia; veja vídeo. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 23 de jul de 2018 a base desta noticia sobre Bombeiros combatem vários focos de incêndio no Distrito Industrial em Uberlândia; veja vídeo.",
@@ -47299,8 +47298,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ce/ceara/noticia/2018/07/23/mpce-apura-se-ha-irregularidade-em-festa-com-concurso-de-saia-mais-curta.ghtml",
     "sourceLabel": "MPCE apura se há irregularidade em festa com concurso de 'saia mais curta'",
-    "lede": "Um evento de forró que divulga concurso da “saia mais curta” em Beberibe, no Ceará, se tornou alvo de apuração do Ministério Público do Ceará, já que o panfleto de divulgação da festa anuncia um cantor adolescente como uma das...",
-    "summary": "Um evento de forró que divulga concurso da “saia mais curta” em Beberibe, no Ceará, se tornou alvo de apuração do Ministério Público do Ceará, já que o panfleto de divulgação da festa anuncia um cantor adolescente como uma das...",
+    "lede": "MPCE apura se há irregularidade em festa com concurso de 'saia mais curta'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
+    "summary": "MPCE apura se há irregularidade em festa com concurso de 'saia mais curta'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o texto.",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 23 de jul de 2018 a base desta noticia sobre MPCE apura se há irregularidade em festa com concurso de 'saia mais curta'.",
@@ -47401,8 +47400,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/ap/amapa/noticia/2018/07/23/mulher-presa-com-droga-na-vagina-em-macapa-e-solta-apos-audiencia-de-custodia.ghtml",
     "sourceLabel": "Mulher presa com droga na vagina em Macapá é solta após audiência de custódia",
-    "lede": "Porções de maconha estavam enroladas em fermento Iapen/Divulgação Vai responder em liberdade pelo crime de tráfico de drogas, a mulher de 45 anos que foi presa na tarde de domingo (22) com porções de maconha escondidas dentro...",
-    "summary": "Porções de maconha estavam enroladas em fermento Iapen/Divulgação Vai responder em liberdade pelo crime de tráfico de drogas, a mulher de 45 anos que foi presa na tarde de domingo (22) com porções de maconha escondidas dentro...",
+    "lede": "Porções de maconha estavam enroladas em fermento Iapen/Divulgação Vai responder em liberdade pelo crime de tráfico de drogas, a mulher de 45 anos que foi presa na tarde de domingo (22) com porções de maconha escondidas dentro",
+    "summary": "Porções de maconha estavam enroladas em fermento Iapen/Divulgação Vai responder em liberdade pelo crime de tráfico de drogas, a mulher de 45 anos que foi presa na tarde de domingo (22) com porções de maconha escondidas dentro",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 23 de jul de 2018 a base desta noticia sobre Mulher presa com droga na vagina em Macapá é solta após audiência de custódia.",
