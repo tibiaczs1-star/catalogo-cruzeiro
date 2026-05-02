@@ -100,6 +100,7 @@ const insidersArmyScene = document.querySelector(
 const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
 const tickerLiveGrid = document.querySelector("#ticker-live-grid");
 const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
+const trendingBuzzInitialMarkup = trendingBuzzGrid?.innerHTML || "";
 const monthlyBuzzGrid = document.querySelector("#monthly .month-grid");
 const whatMattersGrid = document.querySelector("[data-what-matters-grid]");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
@@ -8759,6 +8760,24 @@ const buildDailyBuzzEmptyState = (signalItems = []) => {
   `;
 };
 
+const pickDailyTrendingVisibleStories = (selectedCases = [], runtimeArticles = [], liveBuzzItems = []) => {
+  if (selectedCases.length) {
+    return selectedCases;
+  }
+
+  const fallbackStories = pickBrazilDayRealStories(
+    [
+      ...runtimeArticles,
+      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+      ...liveBuzzItems
+    ],
+    6,
+    { minScore: 0, allowLatestFallback: true, requireFocus: false }
+  );
+
+  return fallbackStories.length ? fallbackStories : getBuzzFallbackItems().slice(0, 6);
+};
+
 const rerenderEditorialRemainderSurfaces = () => {
   window.setTimeout(() => {
     renderArchiveHighlights();
@@ -8778,7 +8797,12 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   }
   dailyTrendingBuzzHydrationStarted = true;
 
-  const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+  let liveBuzzItems = [];
+  try {
+    liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+  } catch (_error) {
+    liveBuzzItems = [];
+  }
   const runtimeArticles = Array.isArray(options.runtimeArticles) ? options.runtimeArticles : [];
   const selectedCases = pickBrazilDayRealStories(
     [
@@ -8789,14 +8813,15 @@ const renderDailyTrendingBuzz = async (options = {}) => {
     6,
     { minScore: 24, allowLatestFallback: true, requireFocus: true }
   );
+  const visibleCases = pickDailyTrendingVisibleStories(selectedCases, runtimeArticles, liveBuzzItems);
 
   trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
-  trendingBuzzGrid.innerHTML = selectedCases.length
-    ? selectedCases
+  trendingBuzzGrid.innerHTML = visibleCases.length
+    ? visibleCases
         .map((item, itemIndex) => buildRealDayNewsCard(item, itemIndex))
         .join("")
-    : buildDailyBuzzEmptyState([]);
-  reserveSurfaceArticles("dailyBuzz", selectedCases);
+    : trendingBuzzInitialMarkup || buildDailyBuzzEmptyState(liveBuzzItems);
+  reserveSurfaceArticles("dailyBuzz", visibleCases);
   registerArticleCardLinks(trendingBuzzGrid);
 };
 
@@ -9260,7 +9285,10 @@ const renderDynamicMonthlyBuzz = async (options = {}) => {
 
   const { stories, agentPulse } = await pickMonthlyDynamicStories(options);
   monthlyBuzzGrid.classList.add("is-dynamic-monthly");
-  monthlyBuzzGrid.innerHTML = stories.map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse)).join("");
+  const safeStories = stories.length ? stories : monthlyFallbackStories.slice(0, 4);
+  monthlyBuzzGrid.innerHTML = safeStories
+    .map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse))
+    .join("");
   reserveSurfaceArticles("monthly", stories);
   monthlyBuzzGrid
     .querySelectorAll(".reveal")
@@ -10776,13 +10804,16 @@ const socialSurfaceBaseScores = {
 };
 
 const socialSurfaceSignalPattern =
-  /\b(festa|show|festival|evento|agenda|cultura|arte|teatro|cinema|musica|viral|rede social|instagram|tiktok|youtube|influenc|celebridade|aniversario|casamento|exposicao|feira|programacao|oficina|comunidade|historia|superacao|retrato|juventude|turma|bairro|trabalhador|pascoa)\b/;
+  /\b(festa|show|festival|evento|agenda|cultura|arte|teatro|cinema|musica|viral|rede social|instagram|tiktok|youtube|influenc|celebridade|aniversario|casamento|exposicao|feira|programacao|oficina|comunidade|historia|superacao|retrato|juventude|turma|bairro|trabalhador|pascoa|joelma|tierry|expoacre|expojurua|natanzinho|cavalgada)\b/;
 
 const socialSurfaceHeavyPattern =
   /\b(crime|homicidio|prisao|operacao|assalto|roubo|furto|morte|ice|stf|cpi|inss|detran|doenca|hospital|vacina|alagacao|enchente|alerta|beneficiario)\b/;
 
 const socialSurfacePublicEventPattern =
-  /\b(show|festa|festival|programacao|agenda|evento|cultura|credenciamento|trabalhador|pascoa|natal|feira|oficina|artista|apresentacao)\b/;
+  /\b(show|festa|festival|programacao|agenda|evento|cultura|credenciamento|trabalhador|pascoa|natal|feira|oficina|artista|apresentacao|joelma|tierry|expoacre|expojurua|natanzinho|cavalgada)\b/;
+
+const socialSurfaceAcreEventPattern =
+  /\b(acre|rio branco|cruzeiro do sul|vale do jurua|vale do juru[aá]|jurua|juru[aá]|mancio lima|m[âa]ncio lima|epitaciolandia|epitaciol[âa]ndia|tarauaca|tarauac[aá]|expoacre|expojurua)\b/;
 
 const getSocialSurfaceScore = (article = {}) => {
   const normalized = normalizeRuntimeArticle(article);
@@ -10818,6 +10849,19 @@ const getSocialSurfaceScore = (article = {}) => {
 
   if (categoryKey === "prefeitura" && socialSurfacePublicEventPattern.test(haystack)) {
     score += 3;
+  }
+
+  if (socialSurfacePublicEventPattern.test(haystack) && socialSurfaceAcreEventPattern.test(haystack)) {
+    score += 18;
+  }
+
+  const ageDays = getEntertainmentAgeDays(normalized);
+  if (ageDays <= 2) {
+    score += 14;
+  } else if (ageDays <= 7) {
+    score += 6;
+  } else {
+    score -= 8;
   }
 
   if (socialSurfaceHeavyPattern.test(haystack)) {
@@ -13011,6 +13055,20 @@ const getArchiveAnchorDate = (items = []) => {
 
   if (todayHasItems) {
     return dateFromLocalKey(todayKey);
+  }
+
+  const todayDate = dateFromLocalKey(todayKey);
+  if (todayDate) {
+    const yesterdayDate = new Date(
+      todayDate.getFullYear(),
+      todayDate.getMonth(),
+      todayDate.getDate() - 1
+    );
+    const yesterdayKey = getLocalDateKey(yesterdayDate);
+    const yesterdayHasItems = items.some((item) => getArticleDateKey(item) === yesterdayKey);
+    if (yesterdayHasItems) {
+      return dateFromLocalKey(yesterdayKey);
+    }
   }
 
   return (

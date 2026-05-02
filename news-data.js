@@ -1,5 +1,152 @@
-window.NEWS_ARCHIVE_TOTAL = 966;
+window.NEWS_ARCHIVE_TOTAL = 1074;
 window.NEWS_DATA = [
+  {
+    "id": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/",
+    "slug": "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry",
+    "title": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
+    "eyebrow": "Prefeitura",
+    "date": "02 de mai de 2026",
+    "publishedAt": "2026-05-02T12:52:44.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/",
+    "sourceLabel": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
+    "lede": "A Festa do Trabalhador, realizada pelo governo do Acre, foi marcada por alegria, animação e muita música.",
+    "summary": "A Festa do Trabalhador, realizada pelo governo do Acre, foi marcada por alegria, animação e muita música.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry"
+    ],
+    "body": [
+      "Agencia Acre publicou em 02 de mai de 2026 a base desta noticia sobre Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry.",
+      "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/",
+    "slug": "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre",
+    "title": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
+    "eyebrow": "Acre / Governo",
+    "date": "02 de mai de 2026",
+    "publishedAt": "2026-05-02T12:30:06.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/",
+    "sourceLabel": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
+    "lede": "O influenciador acreano Jesus Dourado, que ganhou repercussão recente após divulgar uma nota de pesar sobre sua própria morte, voltou a movimentar as redes sociais ao publicar um vídeo em que aparece orando pelo cantor Tierry.",
+    "summary": "O influenciador acreano Jesus Dourado, que ganhou repercussão recente após divulgar uma nota de pesar sobre sua própria morte, voltou a movimentar as redes sociais ao publicar um vídeo em que aparece orando pelo cantor Tierry.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre"
+    ],
+    "body": [
+      "ac24horas publicou em 02 de mai de 2026 a base desta noticia sobre Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre.",
+      "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul",
+    "slug": "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei",
+    "title": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T20:15:44.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul",
+    "sourceLabel": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
+    "lede": "A festa do trabalhador foi marcada por muita alegria e animação.",
+    "summary": "A festa do trabalhador foi marcada por muita alegria e animação.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei"
+    ],
+    "body": [
+      "Batelao publicou em 01 de mai de 2026 a base desta noticia sobre Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul.",
+      "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
   {
     "id": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/",
     "slug": "bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza",
@@ -62,14 +209,19 @@ window.NEWS_DATA = [
     "sourceName": "ac24horas",
     "sourceUrl": "https://ac24horas.com/2026/05/01/mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua/",
     "sourceLabel": "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá",
-    "lede": "A governadora do Acre, Mailza Assis, marcou presença na programação do Dia do Trabalhador em Cruzeiro do Sul na noite de quarta-feira, 30, para quinta-feira (1º) e aproveitou o clima de festa para interagir com o público",
-    "summary": "A governadora do Acre, Mailza Assis, marcou presença na programação do Dia do Trabalhador em Cruzeiro do Sul na noite de quarta-feira, 30, para quinta-feira (1º) e aproveitou o clima de festa para interagir com o público",
+    "lede": "ac24horas publicou uma atualização sobre Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá. O portal mantém o link da fonte original para acompanhamento completo.",
+    "summary": "ac24horas publicou uma atualização sobre Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá. O portal mantém o link da fonte original para acompanhamento completo.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá.",
+      "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/JOELMA_DEST-.jpg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -91,11 +243,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua"
-    ],
-    "body": [
-      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá.",
-      "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -2463,11 +2610,16 @@ window.NEWS_DATA = [
     "lede": "O cantor Natanzinho Lima será a atração da Expoacre Juruá 2026 no dia 30 de junho, abrindo a programação musical do evento.",
     "summary": "O cantor Natanzinho Lima será a atração da Expoacre Juruá 2026 no dia 30 de junho, abrindo a programação musical do evento.",
     "analysis": "",
+    "body": [
+      "Jurua Comunicacao publicou em 01 de mai de 2026 a base desta noticia sobre Natanzinho Lima será atração da Expoacre Juruá 2026 em Cruzeiro do Sul.",
+      "Natanzinho Lima será atração da Expoacre Juruá 2026 em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "./assets/news-fallbacks/natanzinho-lima-sera-atracao-da-expoacre-jurua-2026-em-cruzeiro-do-sul.svg",
-    "feedImageUrl": "./assets/news-fallbacks/natanzinho-lima-sera-atracao-da-expoacre-jurua-2026-em-cruzeiro-do-sul.svg",
     "sourceImageUrl": "./assets/news-fallbacks/natanzinho-lima-sera-atracao-da-expoacre-jurua-2026-em-cruzeiro-do-sul.svg",
+    "feedImageUrl": "./assets/news-fallbacks/natanzinho-lima-sera-atracao-da-expoacre-jurua-2026-em-cruzeiro-do-sul.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -2489,11 +2641,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "natanzinho-lima-sera-atracao-da-expoacre-jurua-2026-em-cruzeiro-do-sul"
-    ],
-    "body": [
-      "Jurua Comunicacao publicou em 01 de mai de 2026 a base desta noticia sobre Natanzinho Lima será atração da Expoacre Juruá 2026 em Cruzeiro do Sul.",
-      "Natanzinho Lima será atração da Expoacre Juruá 2026 em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -3312,11 +3459,16 @@ window.NEWS_DATA = [
     "lede": "A Festa do Trabalhador, realizada na noite da última quinta-feira (30), em Cruzeiro do Sul, contou com um esquema especial de segurança montado pela Polícia Militar do Acre para garantir a tranquilidade do público.",
     "summary": "A Festa do Trabalhador, realizada na noite da última quinta-feira (30), em Cruzeiro do Sul, contou com um esquema especial de segurança montado pela Polícia Militar do Acre para garantir a tranquilidade do público.",
     "analysis": "",
+    "body": [
+      "Jurua 24 Horas publicou em 01 de mai de 2026 a base desta noticia sobre Festa do Trabalhador em Cruzeiro do Sul tem segurança reforçada e ocorre sem registros graves.",
+      "Festa do Trabalhador em Cruzeiro do Sul tem segurança reforçada e ocorre sem registros graves e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "./assets/news-fallbacks/festa-do-trabalhador-em-cruzeiro-do-sul-tem-seguranca-reforcada-e-ocorre-sem-registros-gra.svg",
-    "feedImageUrl": "./assets/news-fallbacks/festa-do-trabalhador-em-cruzeiro-do-sul-tem-seguranca-reforcada-e-ocorre-sem-registros-gra.svg",
     "sourceImageUrl": "./assets/news-fallbacks/festa-do-trabalhador-em-cruzeiro-do-sul-tem-seguranca-reforcada-e-ocorre-sem-registros-gra.svg",
+    "feedImageUrl": "./assets/news-fallbacks/festa-do-trabalhador-em-cruzeiro-do-sul-tem-seguranca-reforcada-e-ocorre-sem-registros-gra.svg",
     "imageCredit": "Arte editorial automática do Catálogo Cruzeiro do Sul",
     "imageFocus": "center 50%",
     "imageFit": "",
@@ -3338,11 +3490,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "festa-do-trabalhador-em-cruzeiro-do-sul-tem-seguranca-reforcada-e-ocorre-sem-registros-graves"
-    ],
-    "body": [
-      "Jurua 24 Horas publicou em 01 de mai de 2026 a base desta noticia sobre Festa do Trabalhador em Cruzeiro do Sul tem segurança reforçada e ocorre sem registros graves.",
-      "Festa do Trabalhador em Cruzeiro do Sul tem segurança reforçada e ocorre sem registros graves e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "originalImageUrl": "",
     "originalFeedImageUrl": "",
@@ -3512,11 +3659,16 @@ window.NEWS_DATA = [
     "lede": "Na madrugada desta sexta-feira, 1º, depois da Festa do Trabalhador, com o show da cantora Joelma, a Prefeitura de Cruzeiro do Sul recolheu 12 toneladas de lixo da Praça Orleir Cameli, no Centro da cidade.",
     "summary": "Na madrugada desta sexta-feira, 1º, depois da Festa do Trabalhador, com o show da cantora Joelma, a Prefeitura de Cruzeiro do Sul recolheu 12 toneladas de lixo da Praça Orleir Cameli, no Centro da cidade.",
     "analysis": "",
+    "body": [
+      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Prefeitura recolhe 12 toneladas de lixo após show da Joelma em Cruzeiro do Sul.",
+      "Prefeitura recolhe 12 toneladas de lixo após show da Joelma em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ],
     "highlights": [],
     "development": [],
     "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/e92f5e33-4d51-4f87-a602-e21c406284ec-1200x900.jpeg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/e92f5e33-4d51-4f87-a602-e21c406284ec-1200x900.jpeg",
     "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/e92f5e33-4d51-4f87-a602-e21c406284ec-1200x900.jpeg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/e92f5e33-4d51-4f87-a602-e21c406284ec-1200x900.jpeg",
     "imageCredit": "",
     "imageFocus": "center 38%",
     "imageFit": "",
@@ -3538,11 +3690,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "prefeitura-recolhe-12-toneladas-de-lixo-apos-show-da-joelma-em-cruzeiro-do-sul"
-    ],
-    "body": [
-      "ac24horas publicou em 01 de mai de 2026 a base desta noticia sobre Prefeitura recolhe 12 toneladas de lixo após show da Joelma em Cruzeiro do Sul.",
-      "Prefeitura recolhe 12 toneladas de lixo após show da Joelma em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
