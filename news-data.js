@@ -1,152 +1,5 @@
-window.NEWS_ARCHIVE_TOTAL = 1074;
+window.NEWS_ARCHIVE_TOTAL = 969;
 window.NEWS_DATA = [
-  {
-    "id": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/",
-    "slug": "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry",
-    "title": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
-    "eyebrow": "Prefeitura",
-    "date": "02 de mai de 2026",
-    "publishedAt": "2026-05-02T12:52:44.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Agencia Acre",
-    "sourceUrl": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/",
-    "sourceLabel": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
-    "lede": "A Festa do Trabalhador, realizada pelo governo do Acre, foi marcada por alegria, animação e muita música.",
-    "summary": "A Festa do Trabalhador, realizada pelo governo do Acre, foi marcada por alegria, animação e muita música.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
-    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
-    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Agencia Acre",
-        "url": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry"
-    ],
-    "body": [
-      "Agencia Acre publicou em 02 de mai de 2026 a base desta noticia sobre Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry.",
-      "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/",
-    "slug": "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre",
-    "title": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
-    "eyebrow": "Acre / Governo",
-    "date": "02 de mai de 2026",
-    "publishedAt": "2026-05-02T12:30:06.000Z",
-    "category": "Acre / Governo",
-    "categoryKey": "acre-governo",
-    "previewClass": "thumb-acre-governo",
-    "sourceName": "ac24horas",
-    "sourceUrl": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/",
-    "sourceLabel": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
-    "lede": "O influenciador acreano Jesus Dourado, que ganhou repercussão recente após divulgar uma nota de pesar sobre sua própria morte, voltou a movimentar as redes sociais ao publicar um vídeo em que aparece orando pelo cantor Tierry.",
-    "summary": "O influenciador acreano Jesus Dourado, que ganhou repercussão recente após divulgar uma nota de pesar sobre sua própria morte, voltou a movimentar as redes sociais ao publicar um vídeo em que aparece orando pelo cantor Tierry.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
-    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
-    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "ac24horas",
-        "url": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre"
-    ],
-    "body": [
-      "ac24horas publicou em 02 de mai de 2026 a base desta noticia sobre Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre.",
-      "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
-  {
-    "id": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul",
-    "slug": "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei",
-    "title": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
-    "eyebrow": "Prefeitura",
-    "date": "01 de mai de 2026",
-    "publishedAt": "2026-05-01T20:15:44.000Z",
-    "category": "Prefeitura",
-    "categoryKey": "prefeitura",
-    "previewClass": "thumb-prefeitura",
-    "sourceName": "Batelao",
-    "sourceUrl": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul",
-    "sourceLabel": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
-    "lede": "A festa do trabalhador foi marcada por muita alegria e animação.",
-    "summary": "A festa do trabalhador foi marcada por muita alegria e animação.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
-    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
-    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
-    "imageCredit": "",
-    "imageFocus": "center 42%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "Batelao",
-        "url": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei"
-    ],
-    "body": [
-      "Batelao publicou em 01 de mai de 2026 a base desta noticia sobre Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul.",
-      "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
-    ]
-  },
   {
     "id": "https://ac24horas.com/2026/05/01/bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza/",
     "slug": "bittar-e-incognita-santiago-fritado-e-jessica-sofre-ataques-homofobicos-no-entorno-de-mailza",
@@ -958,8 +811,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/em-tarauaca-governadora-mailza-lanca-programa-de-aquisicao-de-alimentos-com-investimento-de-r-58-milhoes-na-producao-rural/",
     "sourceLabel": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural",
-    "lede": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes....",
-    "summary": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes...",
+    "lede": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes.",
+    "summary": "Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Em Tarauacá, governadora Mailza lança programa de aquisição de alimentos com investimento de R$ 5,8 milhões na produção rural. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -1064,8 +917,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior/?utm_source=rss&utm_medium=rss&utm_campaign=governadora-mailza-entrega-viaturas-e-equipamentos-a-policia-civil-de-cruzeiro-do-sul-e-reafirma-compromisso-com-a-seguranca-no-interior",
     "sourceLabel": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior",
-    "lede": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza...",
-    "summary": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza...",
+    "lede": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza",
+    "summary": "Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualiza",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Governadora Mailza entrega viaturas e equipamentos à Polícia Civil de Cruzeiro do Sul e reafirma compromisso com a segurança no interior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -1253,6 +1106,153 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre"
+    ]
+  },
+  {
+    "id": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/",
+    "slug": "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry",
+    "title": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
+    "eyebrow": "Prefeitura",
+    "date": "02 de mai de 2026",
+    "publishedAt": "2026-05-02T12:52:44.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Agencia Acre",
+    "sourceUrl": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/",
+    "sourceLabel": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
+    "lede": "A Festa do Trabalhador, realizada pelo governo do Acre, foi marcada por alegria, animação e muita música.",
+    "summary": "A Festa do Trabalhador, realizada pelo governo do Acre, foi marcada por alegria, animação e muita música.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+    "feedImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+    "sourceImageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Agencia Acre",
+        "url": "https://agencia.ac.gov.br/festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry"
+    ],
+    "body": [
+      "Agencia Acre publicou em 02 de mai de 2026 a base desta noticia sobre Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry.",
+      "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/",
+    "slug": "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre",
+    "title": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
+    "eyebrow": "Acre / Governo",
+    "date": "02 de mai de 2026",
+    "publishedAt": "2026-05-02T12:30:06.000Z",
+    "category": "Acre / Governo",
+    "categoryKey": "acre-governo",
+    "previewClass": "thumb-acre-governo",
+    "sourceName": "ac24horas",
+    "sourceUrl": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/",
+    "sourceLabel": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
+    "lede": "O influenciador acreano Jesus Dourado, que ganhou repercussão recente após divulgar uma nota de pesar sobre sua própria morte, voltou a movimentar as redes sociais ao publicar um vídeo em que aparece orando pelo cantor Tierry.",
+    "summary": "O influenciador acreano Jesus Dourado, que ganhou repercussão recente após divulgar uma nota de pesar sobre sua própria morte, voltou a movimentar as redes sociais ao publicar um vídeo em que aparece orando pelo cantor Tierry.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+    "feedImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+    "sourceImageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "ac24horas",
+        "url": "https://ac24horas.com/2026/05/02/influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre/"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre"
+    ],
+    "body": [
+      "ac24horas publicou em 02 de mai de 2026 a base desta noticia sobre Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre.",
+      "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    ]
+  },
+  {
+    "id": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul",
+    "slug": "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei",
+    "title": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
+    "eyebrow": "Prefeitura",
+    "date": "01 de mai de 2026",
+    "publishedAt": "2026-05-01T20:15:44.000Z",
+    "category": "Prefeitura",
+    "categoryKey": "prefeitura",
+    "previewClass": "thumb-prefeitura",
+    "sourceName": "Batelao",
+    "sourceUrl": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul",
+    "sourceLabel": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
+    "lede": "A festa do trabalhador foi marcada por muita alegria e animação.",
+    "summary": "A festa do trabalhador foi marcada por muita alegria e animação.",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+    "feedImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+    "sourceImageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+    "imageCredit": "",
+    "imageFocus": "center 42%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Batelao",
+        "url": "https://batelao.com/mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul/?utm_source=rss&utm_medium=rss&utm_campaign=mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzeiro-do-sul"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei"
+    ],
+    "body": [
+      "Batelao publicou em 01 de mai de 2026 a base desta noticia sobre Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul.",
+      "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ]
   },
   {
@@ -28769,8 +28769,6 @@ window.NEWS_DATA = [
     "summary": "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda.",
     "analysis": "",
     "body": [
-      "G1 Pop & Arte publicou em 29 de abr de 2026 a base desta noticia sobre Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda.",
-      "Batalha de rapper L7nnon e Yoko Ono por nome artístico durou 5 anos e teve até debate sobre idade de fãs; entenda e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
     ],
     "highlights": [],
@@ -41729,8 +41727,8 @@ window.NEWS_DATA = [
     "sourceName": "Batelao",
     "sourceUrl": "https://batelao.com/prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira/?utm_source=rss&utm_medium=rss&utm_campaign=prefeitura-de-cruzeiro-do-sul-aplica-20-toneladas-de-asfalto-nas-ruas-e-segue-com-servicos-de-recuperacao-de-vias-nesta-sexta-feira",
     "sourceLabel": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira",
-    "lede": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes....",
-    "summary": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes...",
+    "lede": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes.",
+    "summary": "Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes",
     "analysis": "",
     "body": [
       "Batelao publicou em 24 de abr. de 2026 a base desta noticia sobre Prefeitura de Cruzeiro do Sul aplica 20 toneladas de asfalto nas ruas e segue com serviços de recuperação de vias nesta sexta-feira. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -42849,8 +42847,8 @@ window.NEWS_DATA = [
     "sourceName": "Agencia Acre",
     "sourceUrl": "https://agencia.ac.gov.br/governo-do-acre-fortalece-parceria-com-cozinha-solidaria-para-ampliar-atendimento-a-familias-em-vulnerabilidade/",
     "sourceLabel": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade",
-    "lede": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
-    "summary": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
+    "lede": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t",
+    "summary": "Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t",
     "analysis": "",
     "body": [
       "Agencia Acre publicou em 24 de abr. de 2026 a base desta noticia sobre Governo do Acre fortalece parceria com Cozinha Solidária para ampliar atendimento a famílias em vulnerabilidade. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -46805,8 +46803,8 @@ window.NEWS_DATA = [
     "sourceName": "G1 Brasil",
     "sourceUrl": "https://g1.globo.com/rr/roraima/noticia/2018/07/26/sem-dinheiro-venezuelanos-acampam-as-margens-de-rodovia-na-fronteira-do-brasil-aqui-pelo-menos-temos-comida.ghtml",
     "sourceLabel": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'",
-    "lede": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
-    "summary": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t...",
+    "lede": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t",
+    "summary": "Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'. A fonte consultada traz a base da publicacao, e o portal acompanha novas atualizacoes antes de ampliar o t",
     "analysis": "",
     "body": [
       "G1 Brasil publicou em 26 de jul de 2018 a base desta noticia sobre Sem dinheiro, venezuelanos acampam às margens de rodovia na fronteira do Brasil: 'aqui pelo menos temos comida'.",

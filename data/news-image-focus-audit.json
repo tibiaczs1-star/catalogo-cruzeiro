@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-02T14:13:37.329Z",
+  "updatedAt": "2026-05-03T12:09:35.724Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 80,
   "offline": false,
@@ -9,8 +9,8 @@
     "review": 0,
     "warning": 0,
     "error": 0,
-    "manualFocus": 60,
-    "newSinceLastAudit": 0,
+    "manualFocus": 61,
+    "newSinceLastAudit": 3,
     "missingImage": 0,
     "unreachableImage": 0
   },
@@ -37,6 +37,9 @@
     "governadora-mailza-entrega-investimentos-tecnologicos-e-viaturas-para-a-policia-civil-em-cruzeiro-do-sul",
     "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
     "em-entrevista-mailza-assis-avalia-o-inicio-de-sua-gestao-no-governo-do-acre",
+    "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry",
+    "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre",
+    "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei",
     "marcha-em-madri-cobra-melhoria-salarial-no-dia-do-trabalho",
     "manifestacao-do-dia-do-trabalho-termina-em-violencia-em-istambul",
     "crise-no-ira-prejudica-ajuda-a-refugiados-devido-aos-altos-custos-diz-onu",
@@ -91,10 +94,7 @@
     "apoio-de-mendonca-pesou-contra-messias-dizem-fontes",
     "cozinheira-amazonense-constroi-casa-negocio-e-familia-apos-quase-duas-decadas-no-acre",
     "sao-paulo-registra-recorde-de-feminicidios-no-1-trimestre-em-2026",
-    "mendonca-diverge-e-defende-veto-de-pais-a-temas-de-genero-nas-escolas",
-    "meninas-de-12-a-17-anos-sao-as-principais-vitimas-de-violencia-sexual-no-acre",
-    "acordo-ue-mercosul-veja-produtos-agricolas-que-terao-beneficio-imediato",
-    "tesouro-dos-eua-alerta-embarcadores-para-nao-pagarem-pedagios-de-ormuz"
+    "mendonca-diverge-e-defende-veto-de-pais-a-temas-de-genero-nas-escolas"
   ],
   "reviewQueue": [],
   "items": [
@@ -142,9 +142,9 @@
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
       "signals": {
-        "hasPersonSignal": true,
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -688,6 +688,83 @@
       "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry",
+      "title": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
+      "category": "Prefeitura",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-05-02T12:52:44.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-23.27.20-150x150.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": {
+        "width": 150,
+        "height": 150,
+        "ratio": 1,
+        "orientation": "square"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre",
+      "title": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
+      "category": "Acre / Governo",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-02T12:30:06.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/Frame-693-42.jpg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei",
+      "title": "Mais de 40 mil pessoas lotam praça pública para show de Joelma na Festa do Trabalhador em Cruzeiro do Sul",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-05-01T20:15:44.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-01-at-02.13.36-1.jpeg",
+      "imageStatus": "ok",
+      "imageHttpStatus": 200,
+      "imageContentType": "image/jpeg",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
@@ -1988,76 +2065,6 @@
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
       "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "meninas-de-12-a-17-anos-sao-as-principais-vitimas-de-violencia-sexual-no-acre",
-      "title": "Meninas de 12 a 17 anos são as principais vítimas de violência sexual no Acre",
-      "category": "Policia",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-05-01T16:14:58.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "./assets/news-fallbacks/meninas-de-12-a-17-anos-sao-as-principais-vitimas-de-violencia-sexual-no-acre.svg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/svg+xml",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "acordo-ue-mercosul-veja-produtos-agricolas-que-terao-beneficio-imediato",
-      "title": "Acordo UE-Mercosul: veja produtos agrícolas que terão benefício imediato",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-01T16:12:57.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/03/uvas_unsplash.jpg?w=200",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/jpeg",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "tesouro-dos-eua-alerta-embarcadores-para-nao-pagarem-pedagios-de-ormuz",
-      "title": "Tesouro dos EUA alerta embarcadores para não pagarem pedágios de Ormuz",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-01T16:12:11.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "./assets/news-fallbacks/tesouro-dos-eua-alerta-embarcadores-para-nao-pagarem-pedagios-de-ormuz.svg",
-      "imageStatus": "ok",
-      "imageHttpStatus": 200,
-      "imageContentType": "image/svg+xml",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
