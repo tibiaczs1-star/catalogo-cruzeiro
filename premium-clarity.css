@@ -1780,13 +1780,16 @@ body.editorial-home .mosaic-item.side.card-without-photo .mosaic-shell.compact {
 body.editorial-home .mosaic-item.side > a {
   display: flex !important;
   flex-direction: column !important;
-  min-height: 100% !important;
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
 }
 
 body.editorial-home .mosaic-item.side .mosaic-shell,
 body.editorial-home .mosaic-shell.compact {
   min-height: 0 !important;
   flex: 1 1 auto !important;
+  justify-content: flex-start !important;
   padding: 0.92rem 0.95rem 1rem !important;
   gap: 0.62rem !important;
   color: #152c45 !important;
@@ -1796,11 +1799,13 @@ body.editorial-home .mosaic-shell.compact {
 body.editorial-home .mosaic-item.side .mosaic-topline {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
+  margin-bottom: 0 !important;
   gap: 0.42rem !important;
   justify-items: start !important;
 }
 
 body.editorial-home .mosaic-item.side .mosaic-copy {
+  margin-top: 0 !important;
   gap: 0.48rem !important;
 }
 

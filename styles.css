@@ -2724,6 +2724,10 @@ body.editorial-home .page-shell {
   margin-bottom: auto;
 }
 
+.mosaic-item.side[data-mosaic-layout="group-safe"] .mosaic-topline {
+  margin-bottom: 0;
+}
+
 .mosaic-item.main[data-mosaic-layout="group-safe"] .mosaic-copy {
   max-width: min(25rem, 82%);
   padding: 0.72rem 0.9rem 0.82rem;
