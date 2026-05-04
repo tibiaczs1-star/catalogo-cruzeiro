@@ -9141,6 +9141,11 @@ function getCheffeCallOpinions(payload, instruction) {
         autonomy: item.autonomy,
         urgency: item.urgency,
         confidence: item.confidence,
+        points: item.points,
+        competitionScore: item.competitionScore,
+        intelligence: item.intelligence,
+        execution: item.execution,
+        impact: item.impact,
         action: item.action,
         deliverable: item.deliverable
       }))
@@ -9152,6 +9157,11 @@ function getCheffeCallOpinions(payload, instruction) {
         autonomy: item.autonomy?.autonomy || 0,
         urgency: item.autonomy?.urgency || 0,
         confidence: item.autonomy?.confidence || 0,
+        points: item.points || 0,
+        competitionScore: item.competition?.competitionScore || 0,
+        intelligence: item.competition?.intelligence || 0,
+        execution: item.competition?.execution || 0,
+        impact: item.competition?.impact || 0,
         action: item.assignment?.action || "",
         deliverable: item.assignment?.deliverable || ""
       }));
@@ -9225,7 +9235,8 @@ function getCheffeCallOpinions(payload, instruction) {
     { role: /\b(review|revis|proof|audit|segur|qualidade)\b/i, words: ["erro", "falha", "nao", "quebrado", "validar", "risco"], lens: "risco e validação" },
     { role: /\b(copy|texto|editor|jornal|manchete)\b/i, words: ["fala", "opiniao", "texto", "prompt", "mensagem"], lens: "clareza da fala" },
     { role: /\b(arte|design|pixel|visual|foto)\b/i, words: ["avatar", "cadeira", "visual", "cena", "layout"], lens: "encaixe visual" },
-    { role: /\b(sources|fonte|ninja)\b/i, words: ["fonte", "evidencia", "memoria", "historico", "rastrear"], lens: "evidência e memória" }
+    { role: /\b(sources|fonte|ninja)\b/i, words: ["fonte", "evidencia", "memoria", "historico", "rastrear"], lens: "evidência e memória" },
+    { role: /\b(social|rede|insta|trend|crescimento)\b/i, words: ["rede", "social", "instagram", "alcance", "engajamento"], lens: "distribuição e crescimento" }
   ];
   const ideaTriggers = new Set(["ideia", "ideias", "sugestao", "melhorar", "criar", "fazer", "resolver", "como", "novo", "fluxo", "visual", "comando"]);
 
@@ -9265,9 +9276,9 @@ function getCheffeCallOpinions(payload, instruction) {
         cleanShortText(item.intent || "", 180) ||
         memories[0];
       const evidence = hasMemory
-        ? `memória operacional (${item.office || item.role}): ${memoryDetail}`
+        ? `${item.office || item.role} tem memória própria para ${focus?.lens || "esta ordem"}`
         : hasOwnIdea
-          ? `ideia própria ligada à especialidade (${focus?.lens || "triagem"})`
+          ? `ideia propria da especialidade ${focus?.lens || "triagem"}`
           : matchingTokens.length
           ? `conecta com: ${matchingTokens.join(", ")}`
           : `urgência operacional ${Number(item.urgency || 0)}%`;
@@ -9285,21 +9296,38 @@ function getCheffeCallOpinions(payload, instruction) {
       seenOpinionKeys.add(uniquenessKey);
       const score = Number(item.autonomy || 0);
       const confidence = Number(item.confidence || 0);
-      const autonomyNote = score >= 78
-        ? `autonomia alta (${score}%)`
-        : `autonomia em crescimento (${score}%, confiança ${confidence || "n/a"}%)`;
+      const intelligence = Number(item.intelligence || confidence || score || 0);
+      const execution = Number(item.execution || item.urgency || score || 0);
+      const impact = Number(item.impact || item.competitionScore || Math.round((score + execution) / 2) || score || 0);
+      const competition = Number(item.competitionScore || Math.round(score * 0.3 + intelligence * 0.25 + execution * 0.25 + impact * 0.2) || 0);
+      const competitionLine = `Placar ${competition}%: autonomia ${score}%, inteligencia ${intelligence}%, execucao ${execution}%, impacto ${impact}%.`;
+      const roleLine = focus?.lens === "fluxo técnico e API"
+        ? "Eu compito provando no endpoint, não repetindo opinião."
+        : focus?.lens === "risco e validação"
+          ? "Eu compito bloqueando risco antes de virar retrabalho."
+          : focus?.lens === "encaixe visual"
+            ? "Eu compito melhorando leitura da interface com mudança mínima."
+            : focus?.lens === "clareza da fala"
+              ? "Eu compito cortando texto morto e deixando decisão executável."
+              : focus?.lens === "distribuição e crescimento"
+                ? "Eu compito ligando a entrega a alcance, rotina e métrica."
+                : "Eu compito trazendo evidência útil ou fico em silêncio.";
       return {
         agent: item.name,
         office: item.office,
         role: item.role,
         score,
+        competitionScore: competition,
+        intelligence,
+        execution,
+        impact,
         urgency: item.urgency,
         evidence,
         opinion: [
-          `Utilidade: ${focus?.lens || item.deliverable || "memória operacional"}.`,
-          `Tenho ${evidence} e ${autonomyNote}; não vou repetir opinião sem ação.`,
-          `Implementação proposta: ${nextAction}.`,
-          hasOwnIdea ? `Hipótese testável: validar isso na fila e devolver evidência no terminal.` : `Critério: se não mudar tela, dado ou rotina, eu fico em silêncio.`
+          `${focus?.lens || item.deliverable || "triagem"}: ${roleLine}`,
+          `Evidencia: ${evidence}.`,
+          `Executo: ${nextAction}.`,
+          `${competitionLine} Se não mudar tela, dado ou rotina, eu saio da disputa.`
         ].join(" "),
         approvalRequired: true
       };
@@ -9322,12 +9350,26 @@ function getCheffeCallOpinions(payload, instruction) {
       }];
 }
 
+function shouldRefreshCheffeCallOpinions(opinions = []) {
+  if (!Array.isArray(opinions) || !opinions.length) return true;
+  const texts = opinions.map((item) => normalizeText(item.opinion || item.text || "")).filter(Boolean);
+  if (!texts.length) return true;
+  const unique = new Set(texts.map((text) => text.slice(0, 180))).size;
+  const stalePattern = /(utilidade:|implementacao proposta|tenho .*nao vou repetir|autonomia em crescimento|inteligencia 0|execucao 0|impacto 0)/i;
+  return unique <= Math.max(1, Math.floor(texts.length / 2)) || texts.some((text) => stalePattern.test(text));
+}
+
 function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
+  const sessionOpinions = Array.isArray(state.sessions[0]?.opinions) ? state.sessions[0].opinions : [];
+  const displayOpinions = shouldRefreshCheffeCallOpinions(sessionOpinions)
+    ? getCheffeCallOpinions(agentsPayload, state.lastInstruction)
+    : sessionOpinions;
   const currentSession = state.sessions[0]
     ? {
         ...state.sessions[0],
+        opinions: displayOpinions,
         approvals: Array.isArray(state.sessions[0].approvals) ? state.sessions[0].approvals.slice(0, 32) : [],
         logs: Array.isArray(state.sessions[0].logs) ? state.sessions[0].logs.slice(0, 64) : [],
         decisions: Array.isArray(state.sessions[0].decisions) ? state.sessions[0].decisions.slice(0, 32) : [],
@@ -9366,7 +9408,7 @@ function buildCheffeCallPayload() {
     autonomyRunner: agentsPayload.autonomyRunner || null,
     awards: agentsPayload.awards || null,
     scoreboard: agentsPayload.scoreboard || null,
-    opinions: state.sessions[0]?.opinions || getCheffeCallOpinions(agentsPayload, state.lastInstruction)
+    opinions: displayOpinions
   };
 }
 

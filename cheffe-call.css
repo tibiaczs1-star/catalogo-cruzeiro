@@ -8448,3 +8448,154 @@ body.cheffe-access-locked {
   50% { opacity: 0.92; }
   100% { transform: translateX(46%); opacity: 0.12; }
 }
+
+/* 2026-05-04: Flow4 - placar competitivo e Prompt Mestre operacional */
+.call-info-deck .daily-board {
+  gap: 12px !important;
+}
+
+.call-info-deck .daily-board article {
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, rgba(8, 12, 20, 0.92), rgba(5, 8, 14, 0.9)),
+    rgba(255, 255, 255, 0.03) !important;
+  box-shadow: none !important;
+}
+
+.call-info-deck .daily-board .agent-spotlight-card {
+  grid-template-columns: 88px minmax(0, 1fr) !important;
+  min-height: 0 !important;
+  align-items: start !important;
+}
+
+.call-info-deck .agent-spotlight-photo {
+  aspect-ratio: 1;
+  min-height: auto !important;
+  border-radius: 10px !important;
+  border-color: rgba(127, 231, 255, 0.18) !important;
+  background:
+    radial-gradient(circle at 50% 26%, rgba(127, 231, 255, 0.15), transparent 42%),
+    linear-gradient(180deg, rgba(13, 18, 30, 0.96), rgba(6, 8, 13, 0.96)) !important;
+}
+
+.call-info-deck .agent-spotlight-copy {
+  gap: 8px !important;
+}
+
+.call-info-deck .agent-spotlight-copy > span,
+.call-info-deck .daily-board article > span,
+.call-info-deck .achievement-period-card span,
+.prompt-field span {
+  letter-spacing: 0 !important;
+}
+
+.agent-score-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 2px 0;
+}
+
+.agent-score-strip span {
+  display: grid !important;
+  gap: 3px;
+  min-width: 0;
+  padding: 8px 7px;
+  border: 1px solid rgba(127, 231, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(127, 231, 255, 0.055);
+}
+
+.agent-score-strip i {
+  display: block;
+  color: #fff8e8;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.agent-score-strip b {
+  display: block;
+  overflow: hidden;
+  color: rgba(239, 248, 255, 0.68);
+  font-size: 0.64rem;
+  font-weight: 800;
+  line-height: 1.05;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+.call-info-deck .agent-neural-progress {
+  height: 8px !important;
+  margin: 3px 0 2px !important;
+  border: 0 !important;
+  background: rgba(255, 255, 255, 0.09) !important;
+}
+
+.call-info-deck .agent-neural-progress i {
+  background: linear-gradient(90deg, #73eba8, #7fe7ff 58%, #f4c96b) !important;
+}
+
+.call-info-deck .agent-award-note {
+  display: block !important;
+  margin: 0 !important;
+}
+
+.call-info-deck .agent-spotlight-actions {
+  display: flex !important;
+  margin-top: 2px !important;
+}
+
+.call-info-deck .agent-spotlight-actions button,
+.call-info-deck .agent-spotlight-actions button:last-child {
+  display: inline-flex !important;
+  width: auto !important;
+  min-height: 32px !important;
+  padding: 0 12px !important;
+  border-radius: 8px !important;
+  border-color: rgba(127, 231, 255, 0.28) !important;
+  background: transparent !important;
+  color: rgba(239, 248, 255, 0.88) !important;
+}
+
+.prompt-command-center {
+  border-radius: 12px !important;
+}
+
+.prompt-command-center.is-pulsing {
+  border-color: rgba(244, 201, 107, 0.62) !important;
+  box-shadow:
+    0 0 0 2px rgba(244, 201, 107, 0.16),
+    0 18px 46px rgba(0, 0, 0, 0.3) !important;
+}
+
+.prompt-command-panel,
+.prompt-preview-panel {
+  border-radius: 10px !important;
+}
+
+.prompt-field select,
+.prompt-quick-actions button {
+  border-radius: 8px !important;
+}
+
+.prompt-adjustment-field select {
+  border-color: rgba(244, 201, 107, 0.32) !important;
+}
+
+.prompt-preview-text {
+  white-space: pre-wrap;
+}
+
+@media (max-width: 760px) {
+  .call-info-deck .daily-board .agent-spotlight-card {
+    grid-template-columns: 68px minmax(0, 1fr) !important;
+  }
+
+  .agent-score-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -24,9 +24,12 @@
   const agentOfDayEl = document.querySelector("#agentOfDay");
   const agentOfDayMetaEl = document.querySelector("#agentOfDayMeta");
   const agentOfDayAvatar = document.querySelector("#agentOfDayAvatar");
+  const agentCompetitionScoreEl = document.querySelector("#agentCompetitionScore");
+  const agentIntelligenceScoreEl = document.querySelector("#agentIntelligenceScore");
+  const agentExecutionScoreEl = document.querySelector("#agentExecutionScore");
+  const agentImpactScoreEl = document.querySelector("#agentImpactScore");
   const agentNeuralBar = document.querySelector("#agentNeuralBar");
   const agentAwardNote = document.querySelector("#agentAwardNote");
-  const voteAgentOfDay = document.querySelector("#voteAgentOfDay");
   const openAgentFile = document.querySelector("#openAgentFile");
   const fullscreenToggleEl = document.querySelector("#toggleFullscreenMode");
   const hudToggleEl = document.querySelector("#toggleHudMode");
@@ -111,6 +114,8 @@
   const promptModeSelect = document.querySelector("#promptModeSelect");
   const promptOfficeSelect = document.querySelector("#promptOfficeSelect");
   const promptAgentSelect = document.querySelector("#promptAgentSelect");
+  const promptAdjustmentSelect = document.querySelector("#promptAdjustmentSelect");
+  const promptCommandCenter = document.querySelector(".prompt-command-center");
   const promptPreviewTitle = document.querySelector("#promptPreviewTitle");
   const promptPreviewBadge = document.querySelector("#promptPreviewBadge");
   const promptPreviewText = document.querySelector("#promptPreviewText");
@@ -148,7 +153,8 @@
   let raisedHandName = "";
   let raisedHandQueue = [];
   let promptConsoleData = null;
-  let activePromptPayload = { title: "Prompt supremo", badge: "Cheffe Call", text: "" };
+  let activePromptPayload = { title: "Prompt Mestre", badge: "Cheffe Call", text: "" };
+  let pendingAdjustmentContext = null;
   let lowerDecksOpen = false;
   let currentMeetingSessionId = "";
   let latestCallPayload = null;
@@ -1074,6 +1080,146 @@
     quickInstructionInput?.focus();
   }
 
+  function clampPercent(value, fallback = 0) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) return fallback;
+    return Math.max(0, Math.min(100, Math.round(numeric)));
+  }
+
+  function normalizePromptKey(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function getAdjustmentGuide() {
+    const guides = {
+      "no-repeat": {
+        label: "Sem repetição",
+        directive: "Reescreva a opinião para ficar única. Corte frases genéricas, repetições de outros agentes e qualquer fala sem ação própria."
+      },
+      specific: {
+        label: "Mais específico",
+        directive: "Troque abstração por contexto concreto: tela, arquivo provável, dado, rotina afetada, risco e validação."
+      },
+      task: {
+        label: "Virar tarefa",
+        directive: "Transforme a opinião em tarefa executável com dono, primeiro passo, critério de aceite e bloqueio."
+      },
+      validation: {
+        label: "Virar validação",
+        directive: "Transforme a opinião em checklist de validação: o que testar, onde observar e qual sinal prova que funcionou."
+      },
+      implementation: {
+        label: "Virar implementação",
+        directive: "Transforme a opinião em prompt de implementação pronto para rodar, com escopo pequeno e resultado verificável."
+      },
+      visual: {
+        label: "Ajuste visual",
+        directive: "Ajuste a opinião para apontar o problema visual real, o efeito na leitura e a mudança mínima de interface."
+      }
+    };
+    return guides[promptAdjustmentSelect?.value || "no-repeat"] || guides["no-repeat"];
+  }
+
+  function findPromptAgentForOpinion(active) {
+    if (!promptConsoleData?.agents?.length || !active) return null;
+    const nameKey = normalizePromptKey(getAgentDisplayName(active));
+    const officeKey = normalizePromptKey(getAgentOffice(active));
+    const roleKey = normalizePromptKey(active.role || "");
+    const agents = promptConsoleData.agents || [];
+    return (
+      agents.find((item) => normalizePromptKey(item.name) === nameKey && normalizePromptKey(item.office) === officeKey) ||
+      agents.find((item) => normalizePromptKey(item.name) === nameKey) ||
+      agents.find((item) => normalizePromptKey(item.office) === officeKey && normalizePromptKey(item.role).includes(roleKey)) ||
+      agents.find((item) => normalizePromptKey(item.office) === officeKey) ||
+      null
+    );
+  }
+
+  function selectPromptAgentForOpinion(active) {
+    const promptAgent = findPromptAgentForOpinion(active);
+    const office = promptAgent?.office || getAgentOffice(active);
+    if (promptModeSelect) promptModeSelect.value = "agent";
+    if (promptOfficeSelect) promptOfficeSelect.value = office || "";
+    refreshPromptAgentOptions(office || "");
+    if (promptAgentSelect) promptAgentSelect.value = promptAgent?.slug || "";
+    return promptAgent;
+  }
+
+  function buildMasterAdjustmentPrompt(active) {
+    const guide = getAdjustmentGuide();
+    const packet = buildExecutionPacket(active, "prompt");
+    const agentName = getAgentDisplayName(active);
+    const office = getAgentOffice(active);
+    const subject = String(quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || "").trim();
+    const opinion = String(active?.opinion || active?.assignment?.idea || packet.text || "").trim();
+    return [
+      "PROMPT MESTRE - AJUSTE DE OPINIAO",
+      `Escritorio selecionado: ${office}`,
+      `Agente selecionado: ${agentName} (${active?.role || "agente"})`,
+      `Tipo de ajuste: ${guide.label}`,
+      "",
+      "Opiniao original:",
+      opinion || "Sem opiniao original registrada.",
+      "",
+      "Ordem do ajuste:",
+      guide.directive,
+      "",
+      "Saida esperada:",
+      "- uma nova opiniao curta e diferente das demais",
+      "- utilidade real para a Cheffe Call",
+      "- proxima acao executavel ou criterio claro de validacao",
+      "- se nao houver evidencia ou impacto, responder que o agente fica em silencio",
+      "",
+      subject ? `Contexto da reuniao: ${subject}` : "Contexto da reuniao: usar a ordem atual da sala.",
+      "",
+      "Prompt base do agente:",
+      packet.prompt
+    ].join("\n");
+  }
+
+  function pulsePromptMaster() {
+    promptCommandCenter?.classList.remove("is-pulsing");
+    window.requestAnimationFrame(() => {
+      promptCommandCenter?.classList.add("is-pulsing");
+      window.setTimeout(() => promptCommandCenter?.classList.remove("is-pulsing"), 1400);
+    });
+  }
+
+  function stageAdjustmentInPromptMaster(active, options = {}) {
+    if (!active) return "";
+    pendingAdjustmentContext = active;
+    const promptAgent = selectPromptAgentForOpinion(active);
+    const promptText = buildMasterAdjustmentPrompt(active);
+    updatePromptPreview({
+      title: `Ajustar ${getAgentDisplayName(active)}`,
+      badge: `${getAgentOffice(active)} • ${getAdjustmentGuide().label}`,
+      text: promptText
+    });
+    if (commandInput) commandInput.value = promptText;
+    if (promptConsoleMeta) {
+      promptConsoleMeta.textContent = promptAgent
+        ? `Ajuste preparado para ${promptAgent.name} em ${promptAgent.office}. Envie ao terminal para executar.`
+        : `Ajuste preparado com o escritório ${getAgentOffice(active)}. Selecione outro agente se quiser redirecionar.`;
+    }
+    terminalEl.textContent = [
+      "> prompt-master/adjustment-ready",
+      `agent: ${getAgentDisplayName(active)}`,
+      `office: ${getAgentOffice(active)}`,
+      `adjustment: ${getAdjustmentGuide().label}`,
+      "status: pronto no Prompt Mestre; Enviar ao terminal executa"
+    ].join("\n");
+    pulsePromptMaster();
+    if (options.scroll !== false) {
+      promptCommandCenter?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return promptText;
+  }
+
   function setCommandBarPulse() {
     commandBarEl?.classList.remove("is-pulsing");
     window.requestAnimationFrame(() => {
@@ -1110,7 +1256,7 @@
     const mode = promptModeSelect?.value || "global";
     if (mode === "global") {
       updatePromptPreview({
-        title: "Prompt supremo",
+        title: "Prompt Mestre",
         badge: "Cheffe Call",
         text: promptConsoleData.globalPrompt || ""
       });
@@ -1163,7 +1309,7 @@
       refreshPromptAgentOptions("");
       selectPromptPayload();
       if (promptConsoleMeta) {
-        promptConsoleMeta.textContent = `${promptConsoleData.totalAgents || 0} agentes carregados. Use o prompt supremo, um escritório ou um agente específico.`;
+        promptConsoleMeta.textContent = `${promptConsoleData.totalAgents || 0} agentes carregados. Use o Prompt Mestre, um escritório ou um agente específico.`;
       }
     } catch (error) {
       updatePromptPreview({
@@ -1351,6 +1497,10 @@
         score: item.score || item.autonomy?.autonomy || item.autonomy || 0,
         urgency: item.urgency || item.autonomy?.urgency || 0,
         confidence: item.confidence || item.autonomy?.confidence || 0,
+        competitionScore: item.competitionScore || item.competition?.competitionScore || 0,
+        intelligence: item.intelligence || item.competition?.intelligence || 0,
+        execution: item.execution || item.competition?.execution || 0,
+        impact: item.impact || item.competition?.impact || 0,
         intent: item.intent || item.autonomy?.intent || item.assignment?.idea || "",
         action: item.action || item.assignment?.action || "",
         assignment: item.assignment || null,
@@ -1561,7 +1711,16 @@
     const action = daily.actionOfDay || {};
     const matchingRealAgent = currentRealAgents.find((item) => getAgentDisplayName(item) === agent.name) || null;
     currentAgentOfDay = agent.name ? { ...matchingRealAgent, ...agent, agent: agent.name } : currentRealAgents[0] || fallbackAgents[0];
-    const neuralScore = Math.max(42, Math.min(100, Number(agent.score || agent.autonomy || 82)));
+    const hasDailyAgent = Boolean(agent.name);
+    const autonomyScore = hasDailyAgent ? clampPercent(agent.score || agent.autonomy || currentAgentOfDay?.score || 0, 0) : 0;
+    const intelligenceScore = hasDailyAgent ? clampPercent(agent.intelligence || agent.confidence || currentAgentOfDay?.confidence || autonomyScore, autonomyScore) : 0;
+    const executionScore = hasDailyAgent ? clampPercent(agent.execution || agent.urgency || currentAgentOfDay?.urgency || autonomyScore, autonomyScore) : 0;
+    const impactScore = hasDailyAgent ? clampPercent(agent.impact || currentAgentOfDay?.impact || Math.round((autonomyScore + executionScore) / 2), autonomyScore) : 0;
+    const competitionScore = clampPercent(
+      hasDailyAgent ? agent.competitionScore || Math.round(autonomyScore * 0.3 + intelligenceScore * 0.25 + executionScore * 0.25 + impactScore * 0.2) : 0,
+      autonomyScore
+    );
+    const neuralScore = hasDailyAgent ? Math.max(42, competitionScore || autonomyScore || 82) : 0;
     if (agentOfDayAvatar) {
       agentOfDayAvatar.innerHTML = `
         <span class="spotlight-rays"></span>
@@ -1586,15 +1745,17 @@
 
     agentOfDayEl.textContent = agent.name || "Sem rodada";
     agentOfDayMetaEl.textContent = agent.name
-      ? `${agent.office} • autonomia ${agent.score || 0}% • ${
-          agent.intent || "intencao em formacao"
-        }`
+      ? `${agent.office} • autonomia ${autonomyScore}% • ${agent.intent || "intencao em formacao"}`
       : "Rode os agentes para calcular o destaque.";
+    if (agentCompetitionScoreEl) agentCompetitionScoreEl.textContent = String(competitionScore || 0);
+    if (agentIntelligenceScoreEl) agentIntelligenceScoreEl.textContent = String(intelligenceScore || 0);
+    if (agentExecutionScoreEl) agentExecutionScoreEl.textContent = String(executionScore || 0);
+    if (agentImpactScoreEl) agentImpactScoreEl.textContent = String(impactScore || 0);
     if (agentNeuralBar) agentNeuralBar.style.width = `${neuralScore}%`;
     if (agentAwardNote) {
       agentAwardNote.textContent = agent.name
-        ? `${agent.name} atingiu um objetivo importante no fluxo de aprendizado neural: ${neuralScore}% de crescimento aplicado. Esse destaque inspira os outros agentes a subir pontuação, foco e qualidade.`
-        : "Objetivo neural em leitura. Quando um agente atinge uma meta, a sala inteira vê o avanço.";
+        ? `${agent.name} venceu a rodada por combinação de autonomia, inteligência, execução e impacto. O próximo agente só passa na frente se entregar mais com menos dependência.`
+        : "Aguardando a próxima rodada para calcular quem resolveu melhor.";
     }
 
     officeOfDayEl.textContent = office.office || "Sem rodada";
@@ -1630,7 +1791,7 @@
     if (achievementHeadlineEl) {
       achievementHeadlineEl.textContent = liveLeader
         ? `${liveLeader.name} puxa a reunião agora`
-        : "Funcionários e escritórios em disputa real";
+        : "Agentes e escritórios em disputa real";
     }
 
     if (achievementChaseLineEl) {
@@ -1823,9 +1984,9 @@
               <div class="speech-actions compact opinion-decision-actions">
                 <button type="button" data-list-idea-action="approve" data-index="${index}" ${isClosed ? "disabled" : ""}>Aprovar card</button>
                 <button type="button" data-list-idea-action="implement" data-index="${index}" ${canRun ? "" : "disabled"}>Implementar card</button>
-                <button type="button" data-list-idea-action="variation" data-index="${index}" ${status.state === "dismissed" ? "disabled" : ""}>Ajustar</button>
-                <button type="button" data-list-idea-action="task" data-index="${index}" ${isClosed ? "disabled" : ""}>Tarefa</button>
-                <button type="button" data-list-idea-action="terminal" data-index="${index}">Terminal</button>
+                <button type="button" data-list-idea-action="variation" data-index="${index}" title="Leva esta opinião para o Prompt Mestre com escritório e agente selecionados." ${status.state === "dismissed" ? "disabled" : ""}>Ajustar</button>
+                <button type="button" data-list-idea-action="task" data-index="${index}" title="Cria uma tarefa rastreável para o agente transformar a opinião em entrega." ${isClosed ? "disabled" : ""}>Criar tarefa</button>
+                <button type="button" data-list-idea-action="terminal" data-index="${index}" title="Envia a opinião deste agente ao terminal da sala.">Terminal</button>
                 <button type="button" data-list-idea-action="dismiss" data-index="${index}" ${isClosed ? "disabled" : ""}>Ignorar</button>
               </div>
             </div>
@@ -2033,9 +2194,9 @@
             <div class="speech-actions">
               <button type="button" data-idea-action="approve">Aprovar card</button>
               <button type="button" data-idea-action="implement">Implementar card</button>
-              <button type="button" data-idea-action="variation">Ajustar</button>
-              <button type="button" data-idea-action="task">Tarefa</button>
-              <button type="button" data-idea-action="terminal">Terminal</button>
+              <button type="button" data-idea-action="variation" title="Leva esta opinião para o Prompt Mestre com escritório e agente selecionados.">Ajustar</button>
+              <button type="button" data-idea-action="task" title="Cria uma tarefa rastreável para o agente transformar a opinião em entrega.">Criar tarefa</button>
+              <button type="button" data-idea-action="terminal" title="Envia a opinião deste agente ao terminal da sala.">Terminal</button>
               <button type="button" data-idea-action="file">Ficha</button>
               <button type="button" data-idea-action="next">Próximo</button>
             </div>
@@ -2176,28 +2337,31 @@
       return;
     }
     if (action === "variation") {
-      const packet = buildExecutionPacket(active, "prompt");
-      const adjustmentPrompt = packet.prompt || `Ajuste a proposta de ${agentName}: ${idea}`;
-      if (await postRoomAction("variation", active, { title: `Ajuste pedido para ${agentName}`, command: adjustmentPrompt, prompt: adjustmentPrompt })) {
-        setStatus(`Ajuste de ${agentName} ficou registrado na fila de decisões.`, "ok");
-        return;
-      }
+      const adjustmentPrompt = stageAdjustmentInPromptMaster(active);
       enqueueTask({
         state: "terminal",
-        kindLabel: "ajuste",
+        kindLabel: "ajuste pronto",
         agent: agentName,
-        title: `Prompt de ajuste para ${agentName}`,
+        title: `Prompt Mestre ajustando ${agentName}`,
         text: adjustmentPrompt,
         prompt: adjustmentPrompt
       });
       addMeetingLog({ kindLabel: "prompt de ajuste", agent: agentName, text: adjustmentPrompt });
-      terminalEl.textContent = [
-        "> cheffe-call/adjustment-prompt",
-        `agent: ${agentName}`,
-        `office: ${getAgentOffice(active)}`,
-        adjustmentPrompt
-      ].join("\n");
-      setStatus(`Prompt de ajuste de ${agentName} foi enviado.`, "ok");
+      setActionFeedback({
+        badge: "Prompt Mestre",
+        title: `Ajuste pronto para ${agentName}`,
+        message: "Escritório e agente foram selecionados no Prompt Mestre. Use Enviar ao terminal para executar.",
+        tone: "ok",
+        steps: [
+          { label: "Opinião original capturada", state: "ok" },
+          { label: "Escritório selecionado", state: "ok" },
+          { label: "Agente selecionado", state: promptAgentSelect?.value ? "ok" : "pending" },
+          { label: "Terminal aguardando envio", state: "pending" }
+        ],
+        details: adjustmentPrompt,
+        closable: true
+      });
+      setStatus(`Ajuste de ${agentName} preparado no Prompt Mestre.`, "ok");
       return;
     }
     if (action === "task") {
@@ -3034,20 +3198,6 @@
     postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
   });
 
-  voteAgentOfDay?.addEventListener("click", () => {
-    if (!currentAgentOfDay) return;
-    const target = {
-      ...currentAgentOfDay,
-      opinion: `Destaque aprovado pela Cheffe Call para ${currentAgentOfDay.name || currentAgentOfDay.agent}.`
-    };
-    postRoomAction("approve", target, {
-      title: `Destaque do agente do dia: ${currentAgentOfDay.name || currentAgentOfDay.agent}`,
-      opinion: target.opinion
-    })
-      .then(() => setStatus(`${currentAgentOfDay.name || currentAgentOfDay.agent} recebeu destaque real na Cheffe Call.`, "ok"))
-      .catch((error) => setStatus(error.message, "bad"));
-  });
-
   openAgentFile?.addEventListener("click", () => {
     const name = currentAgentOfDay?.name || currentAgentOfDay?.agent || "";
     window.location.href = `./real-agents.html?agent=${encodeURIComponent(slugify(name))}`;
@@ -3246,6 +3396,7 @@
   });
 
   promptModeSelect?.addEventListener("change", () => {
+    pendingAdjustmentContext = null;
     const mode = promptModeSelect.value || "global";
     if (mode === "global") {
       if (promptOfficeSelect) promptOfficeSelect.value = "";
@@ -3262,6 +3413,7 @@
   });
 
   promptOfficeSelect?.addEventListener("change", () => {
+    pendingAdjustmentContext = null;
     refreshPromptAgentOptions(promptOfficeSelect.value || "");
     if (promptModeSelect?.value === "agent" && promptAgentSelect) {
       promptAgentSelect.value = "";
@@ -3273,6 +3425,7 @@
   });
 
   promptAgentSelect?.addEventListener("change", () => {
+    pendingAdjustmentContext = null;
     if (promptAgentSelect?.value && promptModeSelect) {
       promptModeSelect.value = "agent";
       const agentPrompt = (promptConsoleData?.agents || []).find((item) => item.slug === promptAgentSelect.value);
@@ -3285,21 +3438,28 @@
     selectPromptPayload();
   });
 
+  promptAdjustmentSelect?.addEventListener("change", () => {
+    if (pendingAdjustmentContext) {
+      stageAdjustmentInPromptMaster(pendingAdjustmentContext, { scroll: false });
+      setStatus(`Tipo de ajuste alterado para ${getAdjustmentGuide().label}.`, "ok");
+    }
+  });
+
   loadPromptToInstruction?.addEventListener("click", () => {
     const promptText = getActivePromptText();
     if (!promptText) {
-      setStatus("Escolha um prompt antes de jogar no assunto.", "bad");
+      setStatus("Escolha um prompt antes de usar no assunto.", "bad");
       return;
     }
     syncVisibleInstruction(promptText);
     setCommandBarPulse();
-    setStatus("Prompt jogado no Comando rápido. Clique Enviar para falar com os agentes.", "ok");
+    setStatus("Assunto preenchido. Ele roda quando você abre a rodada.", "ok");
   });
 
-  loadPromptToTerminal?.addEventListener("click", () => {
+  loadPromptToTerminal?.addEventListener("click", async () => {
     const promptText = getActivePromptText();
     if (!promptText) {
-      setStatus("Escolha um prompt antes de jogar no terminal.", "bad");
+      setStatus("Escolha um prompt antes de enviar ao terminal.", "bad");
       return;
     }
     if (commandInput) commandInput.value = promptText;
@@ -3307,29 +3467,72 @@
     setCommandBarPulse();
     const password = getAdminPassword();
     if (!password) {
-      setStatus("Prompt pronto no Comando rápido. Valide a senha e clique Enviar.", "bad");
-      setPasswordStatus("Senha obrigatória para enviar ao terminal.", "bad");
+      setStatus("Prompt pronto. Valide a senha Full Admin para executar no terminal.", "bad");
+      setPasswordStatus("Senha obrigatória para executar no terminal.", "bad");
       quickPasswordInput?.focus();
       return;
     }
-    setStatus("Enviando prompt ao terminal real da Cheffe Call...");
-    postCall("/api/cheffe-call/start", { password, instruction: promptText })
-      .then((payload) => {
-        activateMeetingResponse(promptText, payload);
-        const active = currentOpinions[activeSpeakerIndex] || null;
-        return postRoomAction("terminal", active, {
-          title: activePromptPayload.title || "Prompt enviado ao terminal",
-          command: promptText,
-          prompt: promptText
-        });
-      })
-      .then(() => setStatus("Prompt enviado ao terminal e agentes reagiram.", "ok"))
-      .catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Terminal",
+      title: "Executando Prompt Mestre",
+      message: "A Cheffe Call está enviando o prompt para a rodada real dos agentes.",
+      tone: "pending",
+      steps: [
+        { label: "Prompt recebido", state: "ok" },
+        { label: "Senha Full Admin validada", state: "ok" },
+        { label: "Rodada dos agentes em execução", state: "pending" },
+        { label: "Resultado será registrado no terminal", state: "pending" }
+      ],
+      details: promptText,
+      closable: false
+    });
+    setStatus("Enviando Prompt Mestre ao terminal real da Cheffe Call...");
+    try {
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: promptText });
+      activateMeetingResponse(promptText, payload);
+      const active = pendingAdjustmentContext || currentOpinions[activeSpeakerIndex] || null;
+      await postRoomAction("terminal", active, {
+        title: activePromptPayload.title || "Prompt enviado ao terminal",
+        command: promptText,
+        prompt: promptText
+      });
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Prompt executado",
+        message: "Os agentes receberam o Prompt Mestre e a resposta entrou na reunião.",
+        tone: "ok",
+        steps: [
+          { label: "Prompt recebido", state: "ok" },
+          { label: "Rodada executada", state: "ok" },
+          { label: "Decisão registrada", state: "ok" },
+          { label: "Terminal atualizado", state: "ok" }
+        ],
+        details: (payload?.opinions || [])
+          .slice(0, 4)
+          .map((item) => `${item.agent || item.name || "Agente"}: ${item.opinion || ""}`)
+          .join("\n\n"),
+        closable: true
+      });
+      setStatus("Prompt Mestre enviado ao terminal e agentes reagiram.", "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Falha ao executar",
+        message: error.message || "Não foi possível enviar o Prompt Mestre ao terminal.",
+        tone: "bad",
+        steps: [
+          { label: "Prompt recebido", state: "ok" },
+          { label: "Execução interrompida", state: "bad" }
+        ],
+        closable: true
+      });
+      setStatus(error.message, "bad");
+    }
   });
 
   copyPromptText?.addEventListener("click", async () => {
     const copied = await copyText(getActivePromptText());
-    setStatus(copied ? "Prompt copiado para a área de transferência." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
+    setStatus(copied ? "Prompt copiado. Copiar não executa nada sozinho." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
   });
 
   document.addEventListener("keydown", (event) => {

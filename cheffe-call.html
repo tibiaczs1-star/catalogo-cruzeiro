@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260504-agent-opinion-flow3" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-agent-competition-flow4" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -294,18 +294,23 @@
               <span class="spotlight-agent-confetti c3"></span>
             </div>
             <div class="agent-spotlight-copy">
-              <span>Agente do dia</span>
+              <span>Líder automático</span>
               <strong id="agentOfDay">Atualizando...</strong>
-              <p id="agentOfDayMeta">Pontuação e intenção aparecem aqui.</p>
-              <div class="agent-neural-progress" aria-label="Crescimento neural do agente do dia">
+              <p id="agentOfDayMeta">Placar, autonomia e entrega aparecem aqui.</p>
+              <div class="agent-score-strip" aria-label="Métricas competitivas do líder">
+                <span><i id="agentCompetitionScore">0</i><b>placar</b></span>
+                <span><i id="agentIntelligenceScore">0</i><b>inteligência</b></span>
+                <span><i id="agentExecutionScore">0</i><b>execução</b></span>
+                <span><i id="agentImpactScore">0</i><b>impacto</b></span>
+              </div>
+              <div class="agent-neural-progress" aria-label="Autonomia competitiva do líder">
                 <i id="agentNeuralBar"></i>
               </div>
               <p class="agent-award-note" id="agentAwardNote">
-                Objetivo neural em leitura. Quando um agente atinge uma meta, a sala inteira vê o avanço.
+                Aguardando a próxima rodada para calcular quem resolveu melhor.
               </p>
               <div class="agent-spotlight-actions">
-                <button type="button" id="voteAgentOfDay">Votar no avatar</button>
-                <button type="button" id="openAgentFile">Abrir ficha completa</button>
+                <button type="button" id="openAgentFile">Abrir ficha</button>
               </div>
             </div>
           </article>
@@ -315,18 +320,18 @@
             <p id="officeOfDayMeta">Autonomia média e foco diário.</p>
           </article>
           <article>
-            <span>Ação do dia</span>
+            <span>Entrega vencedora</span>
             <strong id="actionOfDay">Atualizando...</strong>
-            <p id="actionOfDayMeta">Nada executa sem aprovação.</p>
+            <p id="actionOfDayMeta">A entrega com maior impacto sobe aqui.</p>
           </article>
           <article class="call-mini-terminal">
             <span>Terminal da sala</span>
-            <strong>Fluxo neural</strong>
-            <p>Mensagem, resposta, voto e ficha ficam no mesmo ambiente para parecer operação viva.</p>
+            <strong>Execução real</strong>
+            <p>O prompt roda aqui quando você envia ao terminal com senha Full Admin.</p>
           </article>
           <article class="achievement-board-card">
-            <span>Achievements vivos</span>
-            <strong id="achievementHeadline">Funcionários e escritórios em disputa real</strong>
+            <span>Competição viva</span>
+            <strong id="achievementHeadline">Agentes e escritórios em disputa real</strong>
             <p id="achievementChaseLine">Pontuação, autonomia e evolução do runtime aparecem aqui.</p>
             <div class="achievement-period-grid">
               <section class="achievement-period-card" aria-label="Ranking da hora">
@@ -413,14 +418,14 @@
         <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
         <div class="section-head">
           <p class="call-kicker">181 agentes</p>
-          <h2 id="promptCommandTitle">Console de prompts da Cheffe Call</h2>
+          <h2 id="promptCommandTitle">Prompt Mestre da Cheffe Call</h2>
         </div>
         <div class="prompt-command-layout">
           <article class="prompt-command-panel">
             <label class="prompt-field">
               <span>Modo de consulta</span>
               <select id="promptModeSelect">
-                <option value="global">Prompt supremo</option>
+                <option value="global">Prompt Mestre</option>
                 <option value="office">Por escritório</option>
                 <option value="agent">Por agente</option>
               </select>
@@ -437,17 +442,28 @@
                 <option value="">Selecione um agente</option>
               </select>
             </label>
+            <label class="prompt-field prompt-adjustment-field">
+              <span>Tipo de ajuste</span>
+              <select id="promptAdjustmentSelect">
+                <option value="no-repeat">Sem repetição</option>
+                <option value="specific">Mais específico</option>
+                <option value="task">Virar tarefa</option>
+                <option value="validation">Virar validação</option>
+                <option value="implementation">Virar implementação</option>
+                <option value="visual">Ajuste visual</option>
+              </select>
+            </label>
             <div class="prompt-quick-actions">
-              <button type="button" id="loadPromptToInstruction">Jogar no assunto</button>
-              <button type="button" id="loadPromptToTerminal">Jogar no terminal</button>
-              <button type="button" id="copyPromptText">Copiar prompt</button>
+              <button type="button" id="loadPromptToInstruction" title="Preenche a Ordem da reunião. A execução acontece quando você abre a rodada.">Usar no assunto</button>
+              <button type="button" id="loadPromptToTerminal" title="Executa agora na Cheffe Call e mostra o retorno no terminal.">Enviar ao terminal</button>
+              <button type="button" id="copyPromptText" title="Copia o texto. Não executa nada sozinho.">Copiar texto</button>
             </div>
-            <p class="prompt-console-meta" id="promptConsoleMeta">Diretivas da equipe aparecem aqui quando a reunião sincroniza.</p>
+            <p class="prompt-console-meta" id="promptConsoleMeta">Escolha escopo, agente e tipo de ajuste antes de executar.</p>
           </article>
 
           <article class="prompt-preview-panel">
             <div class="prompt-preview-head">
-              <strong id="promptPreviewTitle">Prompt supremo</strong>
+              <strong id="promptPreviewTitle">Prompt Mestre</strong>
               <span id="promptPreviewBadge">Cheffe Call</span>
             </div>
             <pre id="promptPreviewText" class="prompt-preview-text">Preparando a reunião dos 181 agentes...</pre>
@@ -666,6 +682,6 @@
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260504-agent-opinion-flow3"></script>
+    <script defer src="cheffe-call.js?v=20260504-agent-competition-flow4"></script>
   </body>
 </html>

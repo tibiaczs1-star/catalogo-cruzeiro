@@ -1303,21 +1303,70 @@ function pickDiverseMeetingAgents(rankedAgents = [], limit = 12) {
   return selected.slice(0, limit);
 }
 
+function scoreAgentCompetition(item) {
+  const autonomy = clampNumber(item.autonomy?.autonomy || 0, 0, 100);
+  const urgency = clampNumber(item.autonomy?.urgency || 0, 0, 100);
+  const confidence = clampNumber(item.autonomy?.confidence || 0, 0, 100);
+  const cycles = clampNumber(item.autonomy?.cycles || 0, 0, 20);
+  const growth = item.autonomy?.growth || {};
+  const life = item.autonomy?.life || {};
+  const performance = item.performance || {};
+  const autonomyDelta = Number(growth.autonomyDelta || 0);
+  const confidenceDelta = Number(growth.confidenceDelta || 0);
+  const intelligence = clampNumber(
+    confidence * 0.46 + autonomy * 0.34 + Math.min(100, cycles * 8) * 0.12 + Math.max(0, confidenceDelta) * 2,
+    0,
+    100
+  );
+  const execution = clampNumber(
+    urgency * 0.32 +
+      confidence * 0.24 +
+      autonomy * 0.18 +
+      (life.outcome === "success" ? 20 : life.outcome === "partial" ? 8 : -12) +
+      Math.max(0, Number(life.streak || 0)) * 3,
+    0,
+    100
+  );
+  const impact = clampNumber(
+    Math.min(100, Number(item.points || performance.netPoints || 0) / 7) * 0.48 +
+      Number(life.morale || 0) * 0.2 +
+      Number(life.energy || 0) * 0.14 +
+      Math.max(0, autonomyDelta) * 2 +
+      (performance.penalty ? -Math.min(28, Number(performance.penalty || 0) * 0.18) : 12),
+    0,
+    100
+  );
+  const manualReview = life.manualReview || {};
+  const dependencyPenalty =
+    Number(manualReview.rejected || 0) * 10 +
+    Number(manualReview.reopened || 0) * 6 +
+    (autonomy < 70 ? 8 : 0) +
+    (confidence < 64 ? 6 : 0);
+  const competitionScore = clampNumber(
+    autonomy * 0.28 + intelligence * 0.26 + execution * 0.24 + impact * 0.22 - dependencyPenalty,
+    0,
+    100
+  );
+  return {
+    competitionScore: Math.round(competitionScore),
+    intelligence: Math.round(intelligence),
+    execution: Math.round(execution),
+    impact: Math.round(impact),
+    dependencyPenalty: Math.round(dependencyPenalty)
+  };
+}
+
 function buildDailyAgentContext(queue) {
   const today = new Date().toISOString().slice(0, 10);
   const rankedAgents = queue
+    .map((item) => ({
+      ...item,
+      competition: scoreAgentCompetition(item)
+    }))
     .slice()
     .sort((a, b) => {
-      const aScore =
-        Number(a.autonomy?.autonomy || 0) * 2 +
-        Number(a.autonomy?.urgency || 0) +
-        Number(a.autonomy?.confidence || 0) +
-        Number(a.autonomy?.cycles || 0);
-      const bScore =
-        Number(b.autonomy?.autonomy || 0) * 2 +
-        Number(b.autonomy?.urgency || 0) +
-        Number(b.autonomy?.confidence || 0) +
-        Number(b.autonomy?.cycles || 0);
+      const aScore = Number(a.competition?.competitionScore || 0) * 3 + Number(a.points || 0) * 0.04;
+      const bScore = Number(b.competition?.competitionScore || 0) * 3 + Number(b.points || 0) * 0.04;
       return bScore - aScore || String(a.name).localeCompare(String(b.name), "pt-BR");
     });
   const meetingAgents = pickDiverseMeetingAgents(rankedAgents, 12);
@@ -1358,6 +1407,12 @@ function buildDailyAgentContext(queue) {
           office: agentOfDay.officeLabel,
           role: agentOfDay.role,
           score: agentOfDay.autonomy?.autonomy || 0,
+          points: agentOfDay.points || 0,
+          competitionScore: agentOfDay.competition?.competitionScore || 0,
+          intelligence: agentOfDay.competition?.intelligence || 0,
+          execution: agentOfDay.competition?.execution || 0,
+          impact: agentOfDay.competition?.impact || 0,
+          dependencyPenalty: agentOfDay.competition?.dependencyPenalty || 0,
           urgency: agentOfDay.autonomy?.urgency || 0,
           confidence: agentOfDay.autonomy?.confidence || 0,
           intent: agentOfDay.autonomy?.intent || "",
@@ -1387,6 +1442,11 @@ function buildDailyAgentContext(queue) {
       office: item.officeLabel,
       role: item.role,
       autonomy: item.autonomy?.autonomy || 0,
+      points: item.points || 0,
+      competitionScore: item.competition?.competitionScore || 0,
+      intelligence: item.competition?.intelligence || 0,
+      execution: item.competition?.execution || 0,
+      impact: item.competition?.impact || 0,
       urgency: item.autonomy?.urgency || 0,
       confidence: item.autonomy?.confidence || 0,
       intent: item.autonomy?.intent || "",
