@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260504-order-feedback-flow5" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-decision-flow6" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -408,11 +408,62 @@
           <div class="call-admin-actions">
             <button type="button" id="adminRunAgentsNow">Rodar agentes agora</button>
             <button type="button" id="adminReleaseRoom">Encerrar reunião</button>
+            <a class="call-admin-home" id="adminReturnHome" href="./index.html">Voltar para home</a>
             <button type="button" id="adminClearSession">Limpar sessão</button>
             <button type="button" id="adminExportSnapshot">Exportar snapshot</button>
             <button type="button" id="adminOpenRealAgents">Abrir agentes reais</button>
           </div>
         </article>
+        </section>
+
+        <section class="decision-desk" aria-labelledby="decisionDeskTitle">
+        <div class="section-head decision-desk-head">
+          <div>
+            <p class="call-kicker">Mesa de decisão</p>
+            <h2 id="decisionDeskTitle">Transformar ordem em ação real</h2>
+          </div>
+          <p id="decisionDeskMeta">Escolha dono, ajuste e contexto antes de chamar os agentes. A resposta precisa dizer o que resolveu, o que falta e qual ordem ficou registrada.</p>
+        </div>
+        <div class="decision-desk-grid">
+          <label class="decision-field">
+            <span>Escritório responsável</span>
+            <select id="decisionOfficeSelect">
+              <option value="">Todos os escritórios</option>
+            </select>
+            <small>Define qual setor responde primeiro.</small>
+          </label>
+          <label class="decision-field">
+            <span>Agente principal</span>
+            <select id="decisionAgentSelect">
+              <option value="">Cheffe Call escolhe o melhor</option>
+            </select>
+            <small>Escolha um líder ou deixe a competição decidir.</small>
+          </label>
+          <label class="decision-field">
+            <span>Tipo de ação</span>
+            <select id="decisionActionSelect">
+              <option value="analyze">Analisar e responder</option>
+              <option value="rethink">Repensar opinião</option>
+              <option value="study">Estudar melhor</option>
+              <option value="accept">Aceitar ideia como ordem</option>
+              <option value="task">Criar tarefa rastreável</option>
+              <option value="implement">Implementar agora</option>
+              <option value="validate">Validar resultado</option>
+              <option value="visual">Ajuste visual</option>
+              <option value="confirm">Confirmar se implementou</option>
+            </select>
+            <small>O tipo muda o que os agentes precisam devolver.</small>
+          </label>
+          <article class="decision-context-card">
+            <span>Contexto atual</span>
+            <strong id="decisionContextTitle">Nenhuma decisão aberta</strong>
+            <p id="decisionContextPreview">Clique em Abrir decisão para escrever a ordem com contexto e receber uma resposta analisada.</p>
+          </article>
+        </div>
+        <div class="decision-desk-actions">
+          <button type="button" id="decisionOpenComposer">Abrir decisão</button>
+          <button type="button" id="decisionUseActiveIdea">Usar fala ativa</button>
+        </div>
         </section>
 
         <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
@@ -544,6 +595,24 @@
           <strong id="agentResponseTitle">Aguardando sua ordem</strong>
           <p id="agentResponseText">Digite uma ordem em linguagem simples. Quando você abrir a rodada ou usar um botão, os agentes mostram aqui o que receberam e o próximo passo.</p>
         </div>
+        <div class="agent-response-summary" id="agentResponseSummary" hidden>
+          <article>
+            <span>Resolvido</span>
+            <strong id="agentResponseResolved">Nada ainda</strong>
+          </article>
+          <article>
+            <span>Evidência</span>
+            <strong id="agentResponseEvidence">Sem execução</strong>
+          </article>
+          <article>
+            <span>Falta</span>
+            <strong id="agentResponsePending">Aguardando decisão</strong>
+          </article>
+          <article>
+            <span>Ordem real</span>
+            <strong id="agentResponseOrder">Nenhuma ordem gravada</strong>
+          </article>
+        </div>
         <ol id="agentResponseList" class="agent-response-list">
           <li data-state="pending">
             <span>Pronto</span>
@@ -551,6 +620,14 @@
             <p>Use Abrir rodada, Aprovar card, Ajustar, Criar tarefa, Terminal ou Implementar fila.</p>
           </li>
         </ol>
+        <div class="decision-resolution-actions" id="decisionResolutionActions" hidden>
+          <p id="decisionResolutionMeta">Analise pronta. Escolha se isso vira ordem real.</p>
+          <div>
+            <button type="button" id="decisionAcceptOrder">Aceitar como ordem real</button>
+            <button type="button" id="decisionImplementOrder">Implementar agora</button>
+            <button type="button" id="decisionReviseOrder">Ajustar contexto</button>
+          </div>
+        </div>
         <p class="agent-response-next"><b>Próximo passo:</b> <span id="agentResponseNext">Entrar com senha Full Admin e abrir a primeira rodada.</span></p>
       </section>
 
@@ -694,10 +771,36 @@
         <p id="cheffeActionFeedbackMessage">A Cheffe Call vai mostrar o andamento aqui.</p>
         <ol id="cheffeActionFeedbackSteps"></ol>
         <pre id="cheffeActionFeedbackDetails"></pre>
+        <div class="cheffe-action-feedback-actions">
+          <a id="cheffeActionFeedbackHome" href="./index.html" hidden>Voltar para home</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="decision-composer" id="decisionComposer" hidden role="dialog" aria-modal="true" aria-labelledby="decisionComposerTitle">
+      <section class="decision-composer-card">
+        <header>
+          <div>
+            <span id="decisionComposerBadge">Mesa de decisão</span>
+            <strong id="decisionComposerTitle">Escrever ordem com contexto</strong>
+          </div>
+          <button type="button" id="decisionComposerClose">Fechar</button>
+        </header>
+        <div class="decision-composer-meta" id="decisionComposerMeta">Escolha escritório, agente e tipo de ação antes de enviar.</div>
+        <label class="decision-composer-field">
+          <span>Ordem para a reunião</span>
+          <textarea id="decisionComposerText" rows="8" placeholder="Explique o que deve ser resolvido, qual opinião está sendo aceita/ajustada e como o agente deve provar o resultado."></textarea>
+        </label>
+        <p class="decision-composer-hint" id="decisionComposerHint">A Cheffe Call vai analisar, registrar resposta e avisar se precisa implementar, validar ou voltar para ajuste.</p>
+        <div class="decision-composer-actions">
+          <button type="button" id="decisionComposerCancel">Cancelar</button>
+          <button type="button" id="decisionComposerSubmit">Enviar para análise</button>
+        </div>
+        <p id="decisionComposerStatus" class="decision-composer-status" role="status">Aguardando envio.</p>
       </section>
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260504-order-feedback-flow5"></script>
+    <script defer src="cheffe-call.js?v=20260504-decision-flow6"></script>
   </body>
 </html>

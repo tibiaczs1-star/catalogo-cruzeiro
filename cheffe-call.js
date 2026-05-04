@@ -73,6 +73,7 @@
   const cheffeActionFeedbackSteps = document.querySelector("#cheffeActionFeedbackSteps");
   const cheffeActionFeedbackDetails = document.querySelector("#cheffeActionFeedbackDetails");
   const cheffeActionFeedbackClose = document.querySelector("#cheffeActionFeedbackClose");
+  const cheffeActionFeedbackHome = document.querySelector("#cheffeActionFeedbackHome");
   const quickInstructionInput = document.querySelector("#quickInstructionInput");
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
@@ -81,6 +82,11 @@
   const agentResponseBadge = document.querySelector("#agentResponseBadge");
   const agentResponseTitle = document.querySelector("#agentResponseTitle");
   const agentResponseText = document.querySelector("#agentResponseText");
+  const agentResponseSummary = document.querySelector("#agentResponseSummary");
+  const agentResponseResolved = document.querySelector("#agentResponseResolved");
+  const agentResponseEvidence = document.querySelector("#agentResponseEvidence");
+  const agentResponsePending = document.querySelector("#agentResponsePending");
+  const agentResponseOrder = document.querySelector("#agentResponseOrder");
   const agentResponseList = document.querySelector("#agentResponseList");
   const agentResponseNext = document.querySelector("#agentResponseNext");
   const officeOfDayEl = document.querySelector("#officeOfDay");
@@ -129,6 +135,30 @@
   const loadPromptToInstruction = document.querySelector("#loadPromptToInstruction");
   const loadPromptToTerminal = document.querySelector("#loadPromptToTerminal");
   const copyPromptText = document.querySelector("#copyPromptText");
+  const decisionDesk = document.querySelector(".decision-desk");
+  const decisionOfficeSelect = document.querySelector("#decisionOfficeSelect");
+  const decisionAgentSelect = document.querySelector("#decisionAgentSelect");
+  const decisionActionSelect = document.querySelector("#decisionActionSelect");
+  const decisionDeskMeta = document.querySelector("#decisionDeskMeta");
+  const decisionContextTitle = document.querySelector("#decisionContextTitle");
+  const decisionContextPreview = document.querySelector("#decisionContextPreview");
+  const decisionOpenComposer = document.querySelector("#decisionOpenComposer");
+  const decisionUseActiveIdea = document.querySelector("#decisionUseActiveIdea");
+  const decisionComposer = document.querySelector("#decisionComposer");
+  const decisionComposerBadge = document.querySelector("#decisionComposerBadge");
+  const decisionComposerTitle = document.querySelector("#decisionComposerTitle");
+  const decisionComposerClose = document.querySelector("#decisionComposerClose");
+  const decisionComposerCancel = document.querySelector("#decisionComposerCancel");
+  const decisionComposerSubmit = document.querySelector("#decisionComposerSubmit");
+  const decisionComposerText = document.querySelector("#decisionComposerText");
+  const decisionComposerMeta = document.querySelector("#decisionComposerMeta");
+  const decisionComposerHint = document.querySelector("#decisionComposerHint");
+  const decisionComposerStatus = document.querySelector("#decisionComposerStatus");
+  const decisionResolutionActions = document.querySelector("#decisionResolutionActions");
+  const decisionResolutionMeta = document.querySelector("#decisionResolutionMeta");
+  const decisionAcceptOrder = document.querySelector("#decisionAcceptOrder");
+  const decisionImplementOrder = document.querySelector("#decisionImplementOrder");
+  const decisionReviseOrder = document.querySelector("#decisionReviseOrder");
   const callReportSummary = document.querySelector("#callReportSummary");
   const callReportQueue = document.querySelector("#callReportQueue");
   const callReportOffices = document.querySelector("#callReportOffices");
@@ -170,6 +200,9 @@
   let photoApprovalBusy = false;
   let actionFeedbackTimer = 0;
   let latestOpinionFlow = [];
+  let decisionComposerSeed = null;
+  let latestDecisionOrder = null;
+  let pendingDecisionResolution = null;
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -401,6 +434,7 @@
   function setAgentResponse(options = {}) {
     if (!agentResponsePanel) return;
     const items = Array.isArray(options.items) ? options.items : [];
+    const summary = options.summary && typeof options.summary === "object" ? options.summary : null;
     agentResponsePanel.dataset.tone = options.tone || "idle";
     if (agentResponseBadge) agentResponseBadge.textContent = options.badge || "Resposta dos agentes";
     if (agentResponseTitle) agentResponseTitle.textContent = options.title || "Aguardando sua ordem";
@@ -410,6 +444,15 @@
     }
     if (agentResponseNext) {
       agentResponseNext.textContent = options.next || "Abra uma rodada ou escolha uma ação em um card.";
+    }
+    if (agentResponseSummary) {
+      agentResponseSummary.hidden = !summary;
+      if (summary) {
+        if (agentResponseResolved) agentResponseResolved.textContent = summary.resolved || "Nada confirmado ainda.";
+        if (agentResponseEvidence) agentResponseEvidence.textContent = summary.evidence || "Sem evidência registrada.";
+        if (agentResponsePending) agentResponsePending.textContent = summary.pending || "Aguardando próxima ação.";
+        if (agentResponseOrder) agentResponseOrder.textContent = summary.order || "Nenhuma ordem real gravada.";
+      }
     }
     if (agentResponseList) {
       agentResponseList.innerHTML = items.length
@@ -432,6 +475,50 @@
             <p>Nenhuma resposta nova registrada ainda.</p>
           </li>
         `;
+    }
+    if (!options.decisionActions) {
+      hideDecisionResolutionActions(true);
+    }
+  }
+
+  function setDecisionResolutionBusy(isBusy) {
+    [decisionAcceptOrder, decisionImplementOrder, decisionReviseOrder].forEach((button) => {
+      if (button) button.disabled = Boolean(isBusy);
+    });
+  }
+
+  function hideDecisionResolutionActions(clear = false) {
+    if (clear) pendingDecisionResolution = null;
+    if (decisionResolutionActions) decisionResolutionActions.hidden = true;
+    if (decisionResolutionMeta) {
+      decisionResolutionMeta.textContent = "Analise pronta. Escolha se isso vira ordem real.";
+    }
+    setDecisionResolutionBusy(false);
+  }
+
+  function showDecisionResolutionActions(decision) {
+    if (!decisionResolutionActions || !decision) return;
+    pendingDecisionResolution = decision;
+    decisionResolutionActions.hidden = false;
+    const selection = decision.selection || {};
+    const guide = selection.guide || {};
+    const accepted = Boolean(decision.acceptedAt);
+    if (decisionResolutionMeta) {
+      decisionResolutionMeta.textContent = accepted
+        ? "Ordem real aceita e registrada. Agora você pode implementar ou ajustar antes de executar."
+        : "Resposta analisada. Nada foi implementado ainda: escolha aceitar como ordem real, implementar agora ou ajustar o contexto.";
+    }
+    if (decisionAcceptOrder) {
+      decisionAcceptOrder.textContent =
+        guide.value === "task" || guide.value === "study" ? "Criar tarefa real" : "Aceitar como ordem real";
+      decisionAcceptOrder.disabled = accepted;
+    }
+    if (decisionImplementOrder) {
+      decisionImplementOrder.textContent = accepted ? "Implementar ordem aceita" : "Implementar agora";
+      decisionImplementOrder.disabled = false;
+    }
+    if (decisionReviseOrder) {
+      decisionReviseOrder.disabled = false;
     }
   }
 
@@ -470,6 +557,9 @@
       const details = String(options.details || "").trim();
       cheffeActionFeedbackDetails.textContent = details;
       cheffeActionFeedbackDetails.hidden = !details;
+    }
+    if (cheffeActionFeedbackHome) {
+      cheffeActionFeedbackHome.hidden = !options.home;
     }
     cheffeActionFeedbackClose?.toggleAttribute("hidden", options.closable === false);
     if (options.autoCloseMs) {
@@ -1175,6 +1265,637 @@
     return guides[promptAdjustmentSelect?.value || "no-repeat"] || guides["no-repeat"];
   }
 
+  function getDecisionActionGuide(value = decisionActionSelect?.value || "analyze") {
+    const guides = {
+      analyze: {
+        value: "analyze",
+        label: "Analisar e responder",
+        roomAction: "terminal",
+        directive: "Analise a ordem, explique o entendimento, diga o que pode ser resolvido agora e aponte a próxima ação concreta.",
+        after: "A resposta entra na reunião para você aprovar, ajustar ou transformar em tarefa."
+      },
+      rethink: {
+        value: "rethink",
+        label: "Repensar opinião",
+        roomAction: "terminal",
+        directive: "Reescreva a opinião com mais inteligência: corte repetição, traga evidência, diferença real e próxima ação verificável.",
+        after: "Use a nova resposta para decidir se aprova, transforma em tarefa ou manda implementar."
+      },
+      study: {
+        value: "study",
+        label: "Estudar melhor",
+        roomAction: "task",
+        directive: "Levante contexto, riscos, arquivos/telas prováveis, perguntas em aberto e um roteiro de validação antes de qualquer execução.",
+        after: "O estudo vira tarefa rastreável e volta com lacunas claras."
+      },
+      accept: {
+        value: "accept",
+        label: "Aceitar ideia como ordem",
+        roomAction: "approve",
+        directive: "Trate a ideia como decisão aprovada: explique o que foi aceito, qual entrega ela exige e qual critério prova que ficou bom.",
+        after: "A análise volta primeiro; depois você confirma se a ideia vira ordem real."
+      },
+      task: {
+        value: "task",
+        label: "Criar tarefa rastreável",
+        roomAction: "task",
+        directive: "Transforme a ordem em tarefa com dono, escopo, primeiro passo, critério de aceite, risco e bloqueio.",
+        after: "A tarefa fica registrada para execução posterior."
+      },
+      implement: {
+        value: "implement",
+        label: "Implementar agora",
+        roomAction: "implement",
+        directive: "Implemente a decisão como ordem real. Se não puder implementar, explique bloqueio, arquivo/tela faltante e a menor próxima ação segura.",
+        after: "A análise volta primeiro; a runtime só roda quando você clicar em Implementar agora no painel."
+      },
+      validate: {
+        value: "validate",
+        label: "Validar resultado",
+        roomAction: "terminal",
+        directive: "Monte uma validação objetiva: o que conferir, como testar, qual evidência aceita e qual falha reprova.",
+        after: "A resposta vira checklist para conferir se a ordem foi cumprida."
+      },
+      visual: {
+        value: "visual",
+        label: "Ajuste visual",
+        roomAction: "terminal",
+        directive: "Analise tela, hierarquia, legibilidade e fluxo. Proponha mudança visual pequena, útil e verificável.",
+        after: "A resposta volta como ajuste visual pronto para aprovar ou implementar."
+      },
+      confirm: {
+        value: "confirm",
+        label: "Confirmar se implementou",
+        roomAction: "terminal",
+        directive: "Responda como auditor: o que foi implementado, onde verificar, o que ainda não foi provado e o próximo teste.",
+        after: "A resposta precisa separar concluído, pendente e evidência."
+      }
+    };
+    return guides[value] || guides.analyze;
+  }
+
+  function getDecisionAgents() {
+    if (Array.isArray(promptConsoleData?.agents) && promptConsoleData.agents.length) {
+      return promptConsoleData.agents;
+    }
+    const source = currentRealAgents.length ? currentRealAgents : fallbackAgents;
+    return source.map((item, index) => ({
+      slug: slugify(getAgentDisplayName(item) || `agent-${index}`),
+      name: getAgentDisplayName(item),
+      office: getAgentOffice(item),
+      role: item.role || item.function || "agente",
+      prompt: item.prompt || ""
+    }));
+  }
+
+  function getDecisionAgentBySlug(slug) {
+    const normalizedSlug = String(slug || "").trim();
+    if (!normalizedSlug) return null;
+    return getDecisionAgents().find((item) => item.slug === normalizedSlug) || null;
+  }
+
+  function syncDecisionSelectors() {
+    const agents = getDecisionAgents();
+    const officeValue = decisionOfficeSelect?.value || "";
+    const agentValue = decisionAgentSelect?.value || "";
+    const offices = Array.from(new Set(agents.map((item) => item.office).filter(Boolean))).sort((a, b) =>
+      a.localeCompare(b, "pt-BR")
+    );
+    fillSelect(
+      decisionOfficeSelect,
+      offices.map((office) => ({ value: office, label: office })),
+      "Todos os escritórios"
+    );
+    if (decisionOfficeSelect && offices.includes(officeValue)) {
+      decisionOfficeSelect.value = officeValue;
+    }
+    refreshDecisionAgentOptions(decisionOfficeSelect?.value || "", agentValue);
+    refreshDecisionPreview();
+  }
+
+  function refreshDecisionAgentOptions(selectedOffice = "", preferredSlug = "") {
+    if (!decisionAgentSelect) return;
+    const agents = getDecisionAgents();
+    const filtered = selectedOffice ? agents.filter((item) => item.office === selectedOffice) : agents;
+    fillSelect(
+      decisionAgentSelect,
+      filtered.map((item) => ({
+        value: item.slug,
+        label: `${item.name} • ${item.office} • ${item.role || "agente"}`
+      })),
+      "Cheffe Call escolhe o melhor"
+    );
+    const preferred = preferredSlug || "";
+    if (preferred && filtered.some((item) => item.slug === preferred)) {
+      decisionAgentSelect.value = preferred;
+    }
+  }
+
+  function getDecisionSelection() {
+    const guide = getDecisionActionGuide();
+    const agent = getDecisionAgentBySlug(decisionAgentSelect?.value || "");
+    const office = decisionOfficeSelect?.value || agent?.office || "Todos os escritórios";
+    return {
+      guide,
+      agent,
+      office,
+      officeLabel: office || "Todos os escritórios",
+      agentLabel: agent ? `${agent.name} (${agent.role || "agente"})` : "Competição automática dos agentes"
+    };
+  }
+
+  function refreshDecisionPreview(context = "") {
+    if (!decisionContextTitle || !decisionContextPreview) return;
+    const selection = getDecisionSelection();
+    const subject = String(
+      context || quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || ""
+    ).trim();
+    decisionContextTitle.textContent = `${selection.guide.label} • ${selection.officeLabel}`;
+    decisionContextPreview.textContent = subject
+      ? `${selection.agentLabel}: ${subject.slice(0, 180)}`
+      : `${selection.agentLabel}. Abra a decisão para escrever contexto, evidência esperada e ordem real.`;
+    if (decisionDeskMeta) {
+      decisionDeskMeta.textContent = selection.guide.after;
+    }
+  }
+
+  function selectDecisionAgentForOpinion(active) {
+    if (!active) return null;
+    const promptAgent = findPromptAgentForOpinion(active);
+    const office = promptAgent?.office || getAgentOffice(active);
+    if (decisionOfficeSelect) decisionOfficeSelect.value = office || "";
+    refreshDecisionAgentOptions(office || "", promptAgent?.slug || "");
+    if (decisionAgentSelect) decisionAgentSelect.value = promptAgent?.slug || "";
+    refreshDecisionPreview(active.opinion || active.assignment?.idea || "");
+    return promptAgent;
+  }
+
+  function buildDecisionDefaultText(seed = {}) {
+    const active = seed.active || currentOpinions[activeSpeakerIndex] || null;
+    const baseOrder = String(quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || "").trim();
+    const activeIdea = String(seed.text || active?.opinion || active?.assignment?.idea || "").trim();
+    const pieces = [];
+    if (baseOrder) pieces.push(`Ordem atual: ${baseOrder}`);
+    if (activeIdea) pieces.push(`Opinião/ideia em análise: ${activeIdea}`);
+    pieces.push("Quero resposta objetiva: o que foi entendido, o que será resolvido, evidência, pendências e próxima ação.");
+    return pieces.join("\n\n");
+  }
+
+  function buildDecisionPrompt(contextText, selection) {
+    const agentPrompt = selection.agent?.prompt || "";
+    return [
+      "ORDEM REAL DA CHEFFE CALL",
+      `Escritório responsável: ${selection.officeLabel}`,
+      `Agente principal: ${selection.agentLabel}`,
+      `Tipo de ação: ${selection.guide.label}`,
+      "",
+      "Contexto do operador:",
+      contextText,
+      "",
+      "Diretriz da ação:",
+      selection.guide.directive,
+      "",
+      "Resposta obrigatória dos agentes:",
+      "1. O que foi entendido",
+      "2. O que foi resolvido ou será resolvido agora",
+      "3. Evidência concreta, tela, dado, rotina, arquivo ou comportamento afetado",
+      "4. O que ainda falta, risco ou bloqueio",
+      "5. Próxima ação implementável ou validação",
+      "",
+      "Regra de autonomia:",
+      "Se a fala repetir outra opinião ou não trouxer evidência útil, o agente deve ficar em silêncio e perder prioridade na competição.",
+      agentPrompt ? ["", "Prompt base do agente principal:", agentPrompt].join("\n") : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function summarizeOneLine(value, fallback = "Sem detalhe registrado.") {
+    const text = String(value || "").replace(/\s+/g, " ").trim();
+    if (!text) return fallback;
+    return text.length > 190 ? `${text.slice(0, 187)}...` : text;
+  }
+
+  function findDecisionTargetReply(replies, selection, seed = {}) {
+    const activeName = seed.active ? normalizePromptKey(getAgentDisplayName(seed.active)) : "";
+    const selectedName = selection.agent ? normalizePromptKey(selection.agent.name) : "";
+    const officeKey = normalizePromptKey(selection.officeLabel);
+    return (
+      replies.find((item) => selectedName && normalizePromptKey(getAgentDisplayName(item)) === selectedName) ||
+      replies.find((item) => activeName && normalizePromptKey(getAgentDisplayName(item)) === activeName) ||
+      replies.find((item) => officeKey && normalizePromptKey(getAgentOffice(item)) === officeKey) ||
+      replies[0] ||
+      seed.active ||
+      null
+    );
+  }
+
+  function setDecisionComposerStatus(message, tone = "") {
+    if (!decisionComposerStatus) return;
+    decisionComposerStatus.textContent = message;
+    decisionComposerStatus.dataset.tone = tone;
+  }
+
+  function openDecisionComposer(seed = {}) {
+    decisionComposerSeed = seed;
+    if (seed.active) {
+      selectDecisionAgentForOpinion(seed.active);
+    }
+    if (seed.action && decisionActionSelect) {
+      decisionActionSelect.value = seed.action;
+    }
+    const selection = getDecisionSelection();
+    const text = String(seed.contextText || "").trim() || buildDecisionDefaultText(seed);
+    if (decisionComposerBadge) decisionComposerBadge.textContent = selection.guide.label;
+    if (decisionComposerTitle) decisionComposerTitle.textContent = "Escrever ordem com contexto";
+    if (decisionComposerMeta) {
+      decisionComposerMeta.textContent = `${selection.officeLabel} • ${selection.agentLabel}`;
+    }
+    if (decisionComposerHint) decisionComposerHint.textContent = selection.guide.after;
+    if (decisionComposerText) decisionComposerText.value = text;
+    setDecisionComposerStatus("Aguardando envio.");
+    refreshDecisionPreview(text);
+    if (decisionComposer) {
+      decisionComposer.hidden = false;
+      decisionComposerText?.focus();
+    }
+  }
+
+  function closeDecisionComposer() {
+    if (decisionComposer) decisionComposer.hidden = true;
+  }
+
+  function buildDecisionTerminalText(selection, contextText, replies, runtimePayload = null) {
+    const firstReply = replies[0] || {};
+    return [
+      "> cheffe-call/decision-desk",
+      `escritorio: ${selection.officeLabel}`,
+      `agente: ${selection.agentLabel}`,
+      `acao: ${selection.guide.label}`,
+      `respostas: ${replies.length}`,
+      runtimePayload ? "runtime: concluida" : `registro: ${selection.guide.roomAction}`,
+      "",
+      "ordem:",
+      contextText,
+      "",
+      firstReply.opinion ? `primeira resposta: ${firstReply.opinion}` : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function buildDecisionResponseSummary(selection, replies, runtimePayload = null) {
+    const firstReply = replies[0] || {};
+    const implemented = selection.guide.value === "implement" && runtimePayload;
+    const evidence = implemented
+      ? summarizeOneLine(buildRuntimeFeedbackDetails(runtimePayload), "Runtime finalizada, mas sem detalhe retornado.")
+      : `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na reunião.`;
+    return {
+      resolved: implemented
+        ? "Decisão registrada e runtime executada."
+        : `${selection.guide.label} concluído para decisão.`,
+      evidence,
+      pending: implemented
+        ? "Conferir no terminal e validar visualmente se a mudança apareceu."
+        : selection.guide.value === "accept"
+          ? "Ideia aceita. Falta implementar a fila ou abrir como Implementar agora."
+          : selection.guide.after,
+      order: implemented
+        ? "Implementação real enviada aos agentes."
+        : summarizeOneLine(firstReply.assignment?.action || firstReply.opinion || selection.guide.directive, "Ordem registrada para a próxima etapa.")
+    };
+  }
+
+  function buildDecisionAnalysisSummary(selection, replies) {
+    const firstReply = replies[0] || {};
+    return {
+      resolved: "Resposta analisada. Ainda não virou execução.",
+      evidence: `${replies.length} resposta${replies.length === 1 ? "" : "s"} com dono, escritório e critério de ação.`,
+      pending: "Escolher Aceitar como ordem real ou Implementar agora.",
+      order: summarizeOneLine(
+        firstReply.assignment?.action || firstReply.opinion || selection.guide.directive,
+        "Aguardando aceite do operador."
+      )
+    };
+  }
+
+  function getDecisionCommitAction(selection, mode = "accept") {
+    if (mode === "implement") return "implement";
+    const value = selection?.guide?.value || "analyze";
+    if (value === "task" || value === "study") return "task";
+    if (value === "accept" || value === "implement") return "approve";
+    return "terminal";
+  }
+
+  function buildDecisionCommitSummary(decision, mode, runtimePayload = null) {
+    const selection = decision?.selection || getDecisionSelection();
+    const contextText = decision?.contextText || "";
+    const implemented = mode === "implement";
+    return {
+      resolved: implemented ? "Ordem real registrada e runtime executada." : "Ordem real aceita e registrada.",
+      evidence: implemented
+        ? summarizeOneLine(buildRuntimeFeedbackDetails(runtimePayload), "Runtime finalizada e sala atualizada.")
+        : "Servidor registrou a decisão; terminal e fila da reunião foram atualizados.",
+      pending: implemented
+        ? "Validar na tela se o resultado esperado apareceu."
+        : "Implementar a ordem aceita ou ajustar o contexto antes de executar.",
+      order: summarizeOneLine(
+        contextText || decision?.targetReply?.assignment?.action || decision?.targetReply?.opinion || selection.guide?.directive,
+        "Ordem real registrada."
+      )
+    };
+  }
+
+  async function commitDecisionOrder(mode = "accept") {
+    const decision = pendingDecisionResolution || latestDecisionOrder;
+    if (!decision) {
+      setStatus("Nenhuma análise pronta para aceitar ou implementar.", "bad");
+      return;
+    }
+    const password = getAdminPassword();
+    if (!password) {
+      setStatus("Valide a senha Full Admin antes de aceitar ou implementar a ordem.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    const selection = decision.selection || getDecisionSelection();
+    const contextText = decision.contextText || "";
+    const replies = Array.isArray(decision.replies) ? decision.replies : [];
+    const targetReply = decision.targetReply || findDecisionTargetReply(replies, selection, decision.seed || {});
+    const roomAction = getDecisionCommitAction(selection, mode);
+    const label = mode === "implement" ? "Implementar ordem real" : "Aceitar ordem real";
+    setDecisionResolutionBusy(true);
+    setActionFeedback({
+      badge: mode === "implement" ? "Implementar" : "Aceitar",
+      title: label,
+      message:
+        mode === "implement"
+          ? "Registrando a ordem real e acionando a runtime dos agentes."
+          : "Gravando a decisão como ordem real antes de qualquer execução.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Análise escolhida", state: "done" },
+        { label: "Registro da ordem real", state: "running" },
+        { label: mode === "implement" ? "Runtime dos agentes" : "Aguardando implementação", state: "pending" }
+      ],
+      details: decision.promptText || contextText
+    });
+    try {
+      await postRoomAction(roomAction, targetReply, {
+        title: `${label}: ${selection.guide?.label || "Mesa de decisão"}`,
+        command: decision.promptText || contextText,
+        prompt: decision.promptText || contextText,
+        howTo: selection.guide?.directive || "",
+        decisionType: selection.guide?.value || "analyze",
+        decisionStage: mode,
+        acceptedAt: new Date().toISOString(),
+        text: contextText,
+        agent: selection.agent?.name || getAgentDisplayName(targetReply) || "Cheffe Call",
+        office: selection.officeLabel || getAgentOffice(targetReply),
+        role: selection.agent?.role || targetReply?.role || "agente principal"
+      });
+      let runtimePayload = null;
+      if (mode === "implement") {
+        setActionFeedback({
+          badge: "Runtime",
+          title: "Executando ordem real",
+          message: "A decisão já foi aceita; a runtime real dos agentes está rodando agora.",
+          tone: "pending",
+          closable: false,
+          steps: [
+            { label: "Ordem real registrada", state: "done" },
+            { label: "Runtime em execução", state: "running" },
+            { label: "Atualização da sala", state: "pending" }
+          ],
+          details: contextText
+        });
+        runtimePayload = await runCheffeRuntime(
+          password,
+          `Implementar ordem real da Mesa de Decisão: ${selection.guide?.label || "ação"} / ${
+            selection.officeLabel || "Todos os escritórios"
+          } / ${selection.agentLabel || "competição automática"}. ${contextText}`
+        );
+        await loadCall();
+      }
+      terminalEl.textContent = buildDecisionTerminalText(selection, contextText, replies, runtimePayload);
+      const updatedDecision = {
+        ...decision,
+        acceptedAt: decision.acceptedAt || new Date().toISOString(),
+        implementedAt: mode === "implement" ? new Date().toISOString() : decision.implementedAt || "",
+        runtimePayload
+      };
+      latestDecisionOrder = updatedDecision;
+      setAgentResponse({
+        badge: mode === "implement" ? "Ordem implementada" : "Ordem aceita",
+        title: mode === "implement" ? "A decisão virou execução real" : "A decisão virou ordem real",
+        text:
+          mode === "implement"
+            ? "A Mesa de Decisão registrou a ordem, executou a runtime e atualizou o terminal."
+            : "A Mesa de Decisão registrou a ordem real. Nada foi executado automaticamente além do registro.",
+        next:
+          mode === "implement"
+            ? "Confira evidência no terminal e valide visualmente."
+            : "Use Implementar ordem aceita quando quiser executar, ou ajuste o contexto se algo ficou fraco.",
+        tone: "ok",
+        decisionActions: mode !== "implement",
+        summary: buildDecisionCommitSummary(updatedDecision, mode, runtimePayload),
+        items: replies.length
+          ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: "done" }))
+          : [{ state: "done", label: "ordem", agent: selection.agentLabel || "Cheffe Call", text: contextText }]
+      });
+      setActionFeedback({
+        badge: mode === "implement" ? "Implementado" : "Aceito",
+        title: mode === "implement" ? "Ordem real implementada" : "Ordem real registrada",
+        message:
+          mode === "implement"
+            ? "A ordem foi aceita, executada e registrada com evidência."
+            : "A ordem está registrada. O painel ainda permite implementar esta ordem aceita.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Registro concluído", state: "done" },
+          { label: mode === "implement" ? "Runtime concluída" : "Implementação aguardando comando", state: "done" },
+          { label: "Terminal atualizado", state: "done" }
+        ],
+        details: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, "mesa: ordem implementada") : contextText
+      });
+      closeActionFeedback();
+      if (mode === "implement") {
+        hideDecisionResolutionActions(true);
+      } else {
+        showDecisionResolutionActions(updatedDecision);
+      }
+      setStatus(mode === "implement" ? "Ordem real implementada pela Mesa de decisão." : "Ordem real aceita e registrada.", "ok");
+    } catch (error) {
+      setAgentResponse({
+        badge: "Falha",
+        title: mode === "implement" ? "Implementação não concluiu" : "Ordem não foi aceita",
+        text: error.message || "A Mesa de Decisão não conseguiu concluir esta etapa.",
+        next: "Confira senha/conexão e tente novamente pelos botões da resposta analisada.",
+        tone: "bad",
+        decisionActions: true,
+        summary: {
+          resolved: "Nada confirmado nesta etapa.",
+          evidence: "Falha antes do registro ou execução completa.",
+          pending: "Tentar aceitar/implementar novamente.",
+          order: summarizeOneLine(contextText, "Ordem preservada.")
+        },
+        items: [{ state: "bad", label: "erro", agent: "Mesa de decisão", text: error.message || "Falha." }]
+      });
+      showDecisionResolutionActions(decision);
+      setActionFeedback({
+        badge: "Falha",
+        title: "Mesa não concluiu",
+        message: error.message || "A ordem real não foi concluída.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Etapa interrompida", state: "bad" },
+          { label: "Análise preservada", state: "pending" }
+        ],
+        details: decision.promptText || contextText
+      });
+      setStatus(error.message || "Falha na Mesa de decisão.", "bad");
+    } finally {
+      setDecisionResolutionBusy(false);
+      if (pendingDecisionResolution && decisionResolutionActions && !decisionResolutionActions.hidden) {
+        showDecisionResolutionActions(pendingDecisionResolution);
+      }
+    }
+  }
+
+  async function submitDecisionOrder() {
+    const password = getAdminPassword();
+    const contextText = String(decisionComposerText?.value || "").trim();
+    if (!password) {
+      setDecisionComposerStatus("Senha Full Admin obrigatória para analisar a decisão.", "bad");
+      setStatus("Valide a senha Full Admin para enviar a decisão aos agentes.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    if (!contextText) {
+      setDecisionComposerStatus("Escreva o contexto da ordem antes de enviar.", "bad");
+      decisionComposerText?.focus();
+      return;
+    }
+    const selection = getDecisionSelection();
+    const promptText = buildDecisionPrompt(contextText, selection);
+    latestDecisionOrder = { selection, contextText, promptText, createdAt: new Date().toISOString(), seed: decisionComposerSeed || {} };
+    if (decisionComposerSubmit) decisionComposerSubmit.disabled = true;
+    hideDecisionResolutionActions(true);
+    setDecisionComposerStatus("Enviando para análise dos agentes...", "pending");
+    setActionFeedback({
+      badge: "Mesa",
+      title: "Analisando decisão",
+      message: "A ordem foi montada com escritório, agente principal e tipo de ação. Nada será implementado sem aceite.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Contexto escrito", state: "done" },
+        { label: "Rodada dos agentes", state: "running" },
+        { label: "Resposta auditável", state: "pending" },
+        { label: "Aceite do operador", state: "pending" }
+      ],
+      details: promptText
+    });
+    try {
+      syncVisibleInstruction(promptText);
+      if (commandInput) commandInput.value = promptText;
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: promptText });
+      activateMeetingResponse(promptText, payload);
+      const replies = getPayloadOpinions(payload, promptText);
+      const targetReply = findDecisionTargetReply(replies, selection, decisionComposerSeed || {});
+      const decision = {
+        selection,
+        contextText,
+        promptText,
+        replies,
+        targetReply,
+        payload,
+        seed: decisionComposerSeed || {},
+        createdAt: new Date().toISOString()
+      };
+      latestDecisionOrder = decision;
+      pendingDecisionResolution = decision;
+      terminalEl.textContent = [
+        "> cheffe-call/decision-analysis",
+        `escritorio: ${selection.officeLabel}`,
+        `agente: ${selection.agentLabel}`,
+        `acao solicitada: ${selection.guide.label}`,
+        `respostas: ${replies.length}`,
+        "status: aguardando aceite do operador",
+        "",
+        "contexto:",
+        contextText,
+        "",
+        formatAgentReplies(replies, 5)
+      ].join("\n");
+      setActionFeedback({
+        badge: "Análise",
+        title: "Resposta analisada",
+        message: "Os agentes responderam. A decisão ainda precisa ser aceita ou implementada por você.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Rodada dos agentes concluída", state: "done" },
+          { label: "Resposta auditável montada", state: "done" },
+          { label: "Aguardando aceite/implementação", state: "running" }
+        ],
+        details: formatAgentReplies(replies, 5)
+      });
+      closeActionFeedback();
+      setAgentResponse({
+        badge: "Mesa de decisão",
+        title: "Resposta pronta para decisão final",
+        text: `${selection.officeLabel} / ${selection.agentLabel}: análise pronta, mas ainda sem execução real.`,
+        next: "Clique Aceitar como ordem real para registrar, ou Implementar agora para executar depois da análise.",
+        tone: "ok",
+        decisionActions: true,
+        summary: buildDecisionAnalysisSummary(selection, replies),
+        items: replies.length
+          ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: "done" }))
+          : [{ state: "done", label: "analisado", agent: selection.agentLabel, text: contextText }]
+      });
+      showDecisionResolutionActions(decision);
+      setDecisionComposerStatus("Análise pronta. Escolha aceitar ou implementar no painel.", "ok");
+      refreshDecisionPreview(contextText);
+      closeDecisionComposer();
+      setStatus("Mesa de decisão analisou a ordem. Aguardando aceite ou implementação.", "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Decisão não concluiu",
+        message: error.message || "A ordem não foi concluída.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Fluxo interrompido", state: "bad" },
+          { label: "Ordem preservada no popup", state: "pending" }
+        ],
+        details: promptText
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "A decisão não virou resposta útil",
+        text: error.message || "A Cheffe Call não conseguiu concluir o fluxo.",
+        next: "Revise senha/contexto e envie de novo pela Mesa de decisão.",
+        tone: "bad",
+        summary: {
+          resolved: "Nada confirmado.",
+          evidence: "Fluxo interrompido antes de resposta válida.",
+          pending: "Reenviar com senha e contexto.",
+          order: "Ordem preservada no popup."
+        },
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha na decisão." }]
+      });
+      setDecisionComposerStatus(error.message || "Falha ao enviar decisão.", "bad");
+      setStatus(error.message || "Falha ao enviar decisão.", "bad");
+    } finally {
+      if (decisionComposerSubmit) decisionComposerSubmit.disabled = false;
+    }
+  }
+
   function findPromptAgentForOpinion(active) {
     if (!promptConsoleData?.agents?.length || !active) return null;
     const nameKey = normalizePromptKey(getAgentDisplayName(active));
@@ -1251,6 +1972,9 @@
       text: promptText
     });
     if (commandInput) commandInput.value = promptText;
+    if (decisionActionSelect) decisionActionSelect.value = "rethink";
+    selectDecisionAgentForOpinion(active);
+    refreshDecisionPreview(promptText);
     if (promptConsoleMeta) {
       promptConsoleMeta.textContent = promptAgent
         ? `Ajuste preparado para ${promptAgent.name} em ${promptAgent.office}. Envie ao terminal para executar.`
@@ -1357,6 +2081,7 @@
         "Selecione um escritório"
       );
       refreshPromptAgentOptions("");
+      syncDecisionSelectors();
       selectPromptPayload();
       if (promptConsoleMeta) {
         promptConsoleMeta.textContent = `${promptConsoleData.totalAgents || 0} agentes carregados. Use o Prompt Mestre, um escritório ou um agente específico.`;
@@ -1370,6 +2095,7 @@
       if (promptConsoleMeta) {
         promptConsoleMeta.textContent = String(error?.message || error || "Falha ao carregar prompts.");
       }
+      syncDecisionSelectors();
     }
   }
 
@@ -2360,6 +3086,12 @@
         text: "A opinião entrou na fila de execução. Ela ainda não mexe no site até você implementar o card ou a fila.",
         next: "Clique Implementar card para executar só este, ou Implementar fila para rodar todas as aprovadas.",
         tone: "ok",
+        summary: {
+          resolved: "Ideia aceita e registrada como aprovação.",
+          evidence: "Card entrou na fila de decisões da reunião.",
+          pending: "Ainda falta implementar para alterar tela, dado ou rotina.",
+          order: "Aprovação vira ordem pronta para Implementar card ou Implementar fila."
+        },
         items: [
           { state: "done", label: "aprovado", agent: agentName, text: idea },
           { state: "running", label: "pronto para executar", agent: getAgentOffice(active), text: packet.text }
@@ -2392,6 +3124,12 @@
           text: "O card foi enviado para runtime, a sala foi atualizada e o terminal recebeu o resumo.",
           next: "Confira o terminal ou continue para o próximo agente.",
           tone: "ok",
+          summary: {
+            resolved: "Card enviado para execução real.",
+            evidence: "Runtime finalizada e terminal atualizado.",
+            pending: "Validar visualmente se a mudança apareceu.",
+            order: "Implementação individual concluída pela Cheffe Call."
+          },
           items: [
             { state: "done", label: "executado", agent: agentName, text: active?.assignment?.action || idea },
             { state: "done", label: "verificado", agent: "Cheffe Call", text: "Runtime finalizada e sala sincronizada." }
@@ -2446,6 +3184,12 @@
         text: "A opinião original, o escritório e o agente foram carregados. Nada foi executado ainda.",
         next: "Revise o tipo de ajuste e clique Executar no terminal para pedir a nova resposta.",
         tone: "ok",
+        summary: {
+          resolved: "Opinião carregada com escritório e agente.",
+          evidence: "Prompt Mestre e Mesa de decisão receberam o contexto.",
+          pending: "Executar no terminal ou abrir decisão para analisar.",
+          order: "Ajuste ainda não implementa; ele prepara uma nova resposta."
+        },
         items: [
           { state: "done", label: "capturado", agent: agentName, text: idea },
           { state: "running", label: "aguardando terminal", agent: getAgentOffice(active), text: getAdjustmentGuide().directive }
@@ -2476,6 +3220,12 @@
         text: "A fala foi transformada em uma entrega com dono e critério. Ela aparece na fila de tarefas.",
         next: "Aprove/implemente quando quiser transformar a tarefa em execução real.",
         tone: "ok",
+        summary: {
+          resolved: "Tarefa com dono e critério registrada.",
+          evidence: "Terminal recebeu owner, source e status.",
+          pending: "A tarefa ainda precisa ser aprovada ou implementada.",
+          order: "Tarefa criada para acompanhamento."
+        },
         items: [
           { state: "done", label: "dono", agent: agentName, text: task },
           { state: "running", label: "critério", agent: "Cheffe Call", text: packet.howTo }
@@ -2539,6 +3289,12 @@
         text: "O terminal registrou a fala do agente e preparou prompts de apoio para continuar.",
         next: "Use o campo Terminal para complementar, ou execute pelo Prompt Mestre se quiser uma nova resposta dos agentes.",
         tone: "ok",
+        summary: {
+          resolved: "Pedido registrado no terminal.",
+          evidence: "Terminal recebeu agente, escritório, ideia e prompt.",
+          pending: "Terminal não implementa sozinho; falta aprovar ou rodar runtime.",
+          order: "Prompt pronto para continuidade."
+        },
         items: [
           { state: "done", label: "ordem recebida", agent: agentName, text: idea },
           { state: "running", label: "terminal", agent: getAgentOffice(active), text: active?.assignment?.action || packet.text }
@@ -2802,6 +3558,7 @@
     if (quickInstructionInput && !quickInstructionInput.matches(":focus")) {
       quickInstructionInput.value = instructionInput?.value || payload.meeting?.lastInstruction || "";
     }
+    syncDecisionSelectors();
     syncGameShellState();
   }
 
@@ -3102,6 +3859,12 @@
         text: "A Cheffe Call registrou a fila, rodou a runtime uma vez e atualizou a sala com o resumo.",
         next: "Confira o terminal, recarregue se quiser, ou abra uma nova rodada com outra ordem.",
         tone: "ok",
+        summary: {
+          resolved: `${completed} aprovação${completed === 1 ? "" : "ões"} enviada${completed === 1 ? "" : "s"} para execução real.`,
+          evidence: "Runtime única da fila finalizou e terminal recebeu resumo.",
+          pending: "Validar se tela, dado ou rotina mudaram como esperado.",
+          order: "Fila aprovada implementada."
+        },
         items: readyItems.slice(0, 4).map((flow, index) => ({
           state: "done",
           label: `executado ${index + 1}`,
@@ -3502,14 +4265,45 @@
       return;
     }
     setStatus("Liberando runtimes...");
+    setActionFeedback({
+      badge: "Encerrar",
+      title: "Fechando reunião",
+      message: "A Cheffe Call está liberando as automações e preparando retorno para a home.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha Full Admin validada", state: "done" },
+        { label: "Liberando agentes", state: "running" },
+        { label: "Retorno para home", state: "pending" }
+      ]
+    });
     postCall("/api/cheffe-call/release", { password })
       .then(() => {
+        setActionFeedback({
+          badge: "Encerrada",
+          title: "Reunião encerrada",
+          message: "A sala foi fechada. Use Voltar para home para retomar a página principal.",
+          tone: "ok",
+          closable: true,
+          home: true,
+          steps: [
+            { label: "Automações liberadas", state: "done" },
+            { label: "Sessão fechada", state: "done" },
+            { label: "Home disponível", state: "done" }
+          ]
+        });
         setAgentResponse({
           badge: "Sala liberada",
           title: "Automações devolvidas aos agentes",
           text: "A reunião foi encerrada e as rotinas podem voltar ao ciclo automático.",
-          next: "Abra uma nova rodada quando quiser comandar de novo.",
+          next: "Clique Voltar para home no popup, ou abra uma nova rodada se quiser comandar de novo.",
           tone: "ok",
+          summary: {
+            resolved: "Reunião encerrada e automações liberadas.",
+            evidence: "Servidor confirmou release da Cheffe Call.",
+            pending: "Voltar para home ou iniciar outra rodada.",
+            order: "Sem ordem pendente nesta reunião."
+          },
           items: [{ state: "done", label: "liberado", agent: "Cheffe Call", text: "Runtimes livres." }]
         });
         setStatus("Runtimes liberadas.", "ok");
@@ -3736,14 +4530,45 @@
     const password = requireAdminPassword("encerrar a reunião real");
     if (!password) return;
     setStatus("Encerrando reunião real...");
+    setActionFeedback({
+      badge: "Encerrar",
+      title: "Fechando reunião",
+      message: "Liberando agentes e preparando retorno para a home.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha validada", state: "done" },
+        { label: "Release da sala", state: "running" },
+        { label: "Home disponível", state: "pending" }
+      ]
+    });
     postCall("/api/cheffe-call/release", { password })
       .then(() => {
+        setActionFeedback({
+          badge: "Encerrada",
+          title: "Reunião encerrada",
+          message: "A Cheffe Call fechou a sessão. O botão abaixo volta para a home.",
+          tone: "ok",
+          closable: true,
+          home: true,
+          steps: [
+            { label: "Release confirmado", state: "done" },
+            { label: "Agentes liberados", state: "done" },
+            { label: "Retorno pronto", state: "done" }
+          ]
+        });
         setAgentResponse({
           badge: "Reunião encerrada",
           title: "Sala fechada com sucesso",
           text: "A Cheffe Call saiu do modo reunião e liberou os agentes.",
-          next: "Use Abrir rodada para iniciar outra ordem.",
+          next: "Clique Voltar para home no popup, ou use Abrir rodada para iniciar outra ordem.",
           tone: "ok",
+          summary: {
+            resolved: "Sala fechada e agentes liberados.",
+            evidence: "Release confirmado pelo servidor.",
+            pending: "Voltar para home ou abrir nova rodada.",
+            order: "Nenhuma ordem ativa depois do encerramento."
+          },
           items: [{ state: "done", label: "encerrado", agent: "Cheffe Call", text: "Runtimes liberadas." }]
         });
         setStatus("Reunião encerrada.", "ok");
@@ -3836,6 +4661,74 @@
     }
   });
 
+  decisionOfficeSelect?.addEventListener("change", () => {
+    refreshDecisionAgentOptions(decisionOfficeSelect.value || "");
+    refreshDecisionPreview();
+  });
+
+  decisionAgentSelect?.addEventListener("change", () => {
+    const agent = getDecisionAgentBySlug(decisionAgentSelect.value || "");
+    if (agent?.office && decisionOfficeSelect) {
+      decisionOfficeSelect.value = agent.office;
+      refreshDecisionAgentOptions(agent.office, agent.slug);
+    }
+    refreshDecisionPreview();
+  });
+
+  decisionActionSelect?.addEventListener("change", () => {
+    const selection = getDecisionSelection();
+    if (decisionComposerBadge) decisionComposerBadge.textContent = selection.guide.label;
+    if (decisionComposerHint) decisionComposerHint.textContent = selection.guide.after;
+    refreshDecisionPreview(decisionComposerText?.value || "");
+  });
+
+  decisionOpenComposer?.addEventListener("click", () => {
+    openDecisionComposer({
+      text: quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || ""
+    });
+    decisionDesk?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  decisionUseActiveIdea?.addEventListener("click", () => {
+    const active = currentOpinions[activeSpeakerIndex];
+    if (!active) {
+      setStatus("Abra uma rodada ou selecione um card antes de usar a fala ativa.", "bad");
+      openDecisionComposer();
+      return;
+    }
+    openDecisionComposer({ active, text: active.opinion || active.assignment?.idea || "", action: "accept" });
+    setStatus(`Fala de ${getAgentDisplayName(active)} carregada na Mesa de decisão.`, "ok");
+  });
+
+  decisionComposerClose?.addEventListener("click", closeDecisionComposer);
+  decisionComposerCancel?.addEventListener("click", closeDecisionComposer);
+  decisionComposer?.addEventListener("click", (event) => {
+    if (event.target === decisionComposer) closeDecisionComposer();
+  });
+  decisionComposerText?.addEventListener("input", () => refreshDecisionPreview(decisionComposerText.value));
+  decisionComposerSubmit?.addEventListener("click", () => {
+    submitDecisionOrder();
+  });
+  decisionAcceptOrder?.addEventListener("click", () => {
+    commitDecisionOrder("accept");
+  });
+  decisionImplementOrder?.addEventListener("click", () => {
+    commitDecisionOrder("implement");
+  });
+  decisionReviseOrder?.addEventListener("click", () => {
+    const decision = pendingDecisionResolution || latestDecisionOrder;
+    if (!decision) {
+      openDecisionComposer();
+      return;
+    }
+    openDecisionComposer({
+      active: decision.targetReply,
+      action: decision.selection?.guide?.value || "analyze",
+      contextText: decision.contextText || ""
+    });
+    setStatus("Contexto da análise reaberto para ajuste.", "ok");
+  });
+
   loadPromptToInstruction?.addEventListener("click", () => {
     const promptText = getActivePromptText();
     if (!promptText) {
@@ -3916,6 +4809,12 @@
         text: "O Prompt Mestre foi enviado ao terminal real da Cheffe Call.",
         next: "Escolha uma resposta para aprovar, ajustar ou implementar.",
         tone: "ok",
+        summary: {
+          resolved: "Prompt enviado aos agentes e resposta registrada.",
+          evidence: `${replies.length} resposta${replies.length === 1 ? "" : "s"} entrou${replies.length === 1 ? "" : "aram"} na reunião.`,
+          pending: "Aprovar, ajustar, criar tarefa ou implementar.",
+          order: "Prompt Mestre executado no terminal da sala."
+        },
         items: buildAgentReplyItems(replies, 4)
       });
       setStatus("Prompt Mestre enviado ao terminal e agentes reagiram.", "ok");

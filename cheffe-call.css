@@ -8755,3 +8755,365 @@ body.cheffe-access-locked {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* 2026-05-04: Flow6 - mesa de decisao, resposta auditavel e saida para home */
+.decision-desk {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid rgba(127, 231, 255, 0.16);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(8, 14, 24, 0.96), rgba(5, 8, 15, 0.96)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.decision-desk-head {
+  align-items: start;
+}
+
+.decision-desk-head > p {
+  max-width: 620px;
+  margin: 0;
+  color: rgba(230, 242, 255, 0.7);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.decision-desk-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr)) minmax(220px, 1.1fr);
+  gap: 10px;
+}
+
+.decision-field,
+.decision-context-card {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  min-height: 104px;
+  padding: 12px;
+  border: 1px solid rgba(127, 231, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.decision-field span,
+.decision-context-card span,
+.agent-response-summary span {
+  color: var(--call-cyan);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.decision-field select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid rgba(244, 201, 107, 0.2);
+  border-radius: 8px;
+  padding: 0.7rem 0.75rem;
+  color: var(--call-text);
+  background: rgba(5, 9, 16, 0.92);
+  font-weight: 850;
+}
+
+.decision-field small,
+.decision-context-card p {
+  margin: 0;
+  color: rgba(230, 242, 255, 0.62);
+  font-size: 0.72rem;
+  line-height: 1.32;
+}
+
+.decision-context-card strong {
+  color: #fff8e8;
+  font-size: 0.92rem;
+  line-height: 1.18;
+}
+
+.decision-desk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.decision-desk-actions button,
+.call-admin-home,
+.cheffe-action-feedback-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid rgba(127, 231, 255, 0.18);
+  border-radius: 8px;
+  padding: 0 14px;
+  color: var(--call-text);
+  background: rgba(14, 22, 34, 0.96);
+  font: 900 0.78rem/1 Inter, "Segoe UI", Arial, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.decision-desk-actions button:first-child {
+  color: #1d1215;
+  border-color: rgba(244, 201, 107, 0.66);
+  background: var(--call-gold);
+}
+
+.decision-desk-actions button:nth-child(2),
+.call-admin-home,
+.cheffe-action-feedback-actions a {
+  color: #071018;
+  border-color: rgba(127, 231, 255, 0.5);
+  background: var(--call-cyan);
+}
+
+.agent-response-panel {
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+}
+
+.agent-response-summary {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.agent-response-summary[hidden] {
+  display: none !important;
+}
+
+.agent-response-summary article {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid rgba(127, 231, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.agent-response-summary strong {
+  min-width: 0;
+  color: #fff8e8;
+  font-size: 0.8rem;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+}
+
+.decision-resolution-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid rgba(244, 201, 107, 0.28);
+  border-radius: 8px;
+  background: rgba(244, 201, 107, 0.06);
+}
+
+.decision-resolution-actions[hidden] {
+  display: none !important;
+}
+
+.decision-resolution-actions p {
+  flex: 1 1 260px;
+  margin: 0;
+  color: rgba(255, 248, 235, 0.78);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.decision-resolution-actions div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.decision-resolution-actions button {
+  min-height: 40px;
+  border: 1px solid rgba(127, 231, 255, 0.22);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--call-text);
+  background: rgba(14, 22, 34, 0.96);
+  font: 900 0.74rem/1 Inter, "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.decision-resolution-actions button:first-child {
+  color: #1d1215;
+  border-color: rgba(244, 201, 107, 0.72);
+  background: var(--call-gold);
+}
+
+.decision-resolution-actions button:nth-child(2) {
+  color: #061018;
+  border-color: rgba(115, 235, 168, 0.66);
+  background: var(--call-green);
+}
+
+.decision-resolution-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.decision-composer {
+  position: fixed;
+  inset: 0;
+  z-index: 240;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.decision-composer[hidden] {
+  display: none !important;
+}
+
+.decision-composer-card {
+  width: min(760px, calc(100vw - 28px));
+  max-height: min(86vh, 760px);
+  overflow: auto;
+  border: 1px solid rgba(244, 201, 107, 0.34);
+  border-radius: 12px;
+  padding: 16px;
+  color: var(--call-cream);
+  background:
+    linear-gradient(180deg, rgba(8, 12, 20, 0.98), rgba(3, 6, 12, 0.99)),
+    rgba(8, 12, 20, 0.98);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+}
+
+.decision-composer-card header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.decision-composer-card header span,
+.decision-composer-field span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--call-cyan);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.decision-composer-card header strong {
+  display: block;
+  color: var(--call-cream);
+  font-size: 1.18rem;
+  line-height: 1.18;
+}
+
+.decision-composer-card header button,
+.decision-composer-actions button {
+  min-height: 38px;
+  border: 1px solid rgba(255, 248, 235, 0.14);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: rgba(255, 248, 235, 0.88);
+  background: rgba(255, 248, 235, 0.06);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.decision-composer-meta,
+.decision-composer-hint,
+.decision-composer-status {
+  margin: 0 0 12px;
+  color: rgba(255, 248, 235, 0.72);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.decision-composer-field {
+  display: grid;
+  gap: 6px;
+}
+
+.decision-composer-field textarea {
+  width: 100%;
+  min-height: 220px;
+  resize: vertical;
+  border: 1px solid rgba(127, 231, 255, 0.16);
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--call-text);
+  background: rgba(2, 6, 14, 0.74);
+  font: 800 0.86rem/1.5 Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.decision-composer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.decision-composer-actions button:last-child {
+  color: #1d1215;
+  border-color: rgba(244, 201, 107, 0.66);
+  background: var(--call-gold);
+}
+
+.cheffe-action-feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.cheffe-action-feedback-actions a[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 1180px) {
+  .decision-desk-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .decision-desk {
+    padding: 12px;
+  }
+
+  .decision-desk-grid,
+  .agent-response-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-response-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .decision-resolution-actions,
+  .decision-resolution-actions div,
+  .decision-resolution-actions button {
+    width: 100%;
+  }
+
+  .decision-composer {
+    padding: 10px;
+  }
+
+  .decision-composer-card {
+    width: 100%;
+    max-height: calc(100vh - 20px);
+  }
+}
