@@ -69,15 +69,22 @@
         .page-shell {
           opacity: 1 !important;
           transform: none !important;
+          visibility: visible !important;
+          pointer-events: auto !important;
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260503-radar-continuity3" />
+    <link rel="stylesheet" href="./styles.css?v=20260504-loader-gate1" />
   <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
   <link rel="stylesheet" href="./premium-clarity.css?v=20260504-trending-continuity1" />
 </head>
-  <body class="editorial-home founder-prelude-pending">
-    <div class="logo-splash" aria-hidden="true">
+  <body class="editorial-home founder-prelude-pending catalogo-site-booting">
+    <div
+      class="logo-splash"
+      role="status"
+      aria-live="polite"
+      aria-label="Preparando o Catálogo Cruzeiro do Sul"
+    >
       <div class="logo-splash-noise"></div>
       <div class="logo-splash-orbit orbit-a"></div>
       <div class="logo-splash-orbit orbit-b"></div>
@@ -177,7 +184,10 @@
         </p>
         <div class="logo-splash-meta">
           <span id="logo-splash-status">Preparando os destaques do dia</span>
-          <span id="logo-splash-date">Montando capa</span>
+          <span class="logo-splash-readiness">
+            <span id="logo-splash-date">Montando capa</span>
+            <strong id="logo-splash-percent">0%</strong>
+          </span>
         </div>
         <div class="logo-splash-progress" aria-hidden="true">
           <span></span>
@@ -3495,7 +3505,43 @@
         .then((response) => (response.ok ? response.json() : null))
         .catch(() => null);
     </script>
-    <script defer src="./script.js?v=20260504-trending-continuity1"></script>
+    <script>
+      (function () {
+        window.__CATALOGO_SPLASH_FORCE_RELEASE__ = function (reason) {
+          document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
+          document.body.classList.add("site-loaded", "mobile-intro-ready");
+
+          const splash = document.querySelector(".logo-splash");
+          const status = document.querySelector("#logo-splash-status");
+          const percent = document.querySelector("#logo-splash-percent");
+          const bar = document.querySelector(".logo-splash-progress span");
+
+          if (splash) {
+            splash.dataset.progress = "100";
+            splash.style.setProperty("--splash-progress", "100%");
+            splash.setAttribute("aria-hidden", "true");
+            splash.dataset.releaseReason = reason || "failsafe";
+          }
+
+          if (status) {
+            status.textContent = "Portal pronto para abrir";
+          }
+
+          if (percent) {
+            percent.textContent = "100%";
+          }
+
+          if (bar) {
+            bar.style.width = "100%";
+          }
+        };
+
+        window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
+          window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
+        }, 18000);
+      })();
+    </script>
+    <script defer src="./script.js?v=20260504-loader-gate1"></script>
     <script>
       (function () {
         const styles = [
@@ -3527,27 +3573,85 @@
           "deferred-home-boot.js?v=20260424startup-office-loader",
           "./news-data.js?v=20260429-news-capture3"
         ];
+        const totalSteps = styles.length + queue.length;
+        const bootState = (window.__CATALOGO_DEFERRED_BOOT_STATE__ = {
+          completed: 0,
+          done: false,
+          started: false,
+          total: totalSteps
+        });
+        window.__CATALOGO_DEFERRED_BOOT_DONE__ = false;
+        let resolveDeferredBoot;
+        window.__CATALOGO_DEFERRED_BOOT_PROMISE__ = new Promise((resolve) => {
+          resolveDeferredBoot = resolve;
+        });
+        const notifyProgress = (label) => {
+          window.dispatchEvent(
+            new CustomEvent("catalogo:deferred-boot-progress", {
+              detail: {
+                completed: bootState.completed,
+                done: bootState.done,
+                label,
+                total: bootState.total
+              }
+            })
+          );
+        };
+        const completeStep = (label) => {
+          bootState.completed = Math.min(bootState.total, bootState.completed + 1);
+          notifyProgress(label);
+        };
         const loadScript = (src) =>
           new Promise((resolve) => {
             const script = document.createElement("script");
             script.src = src;
             script.async = true;
-            script.onload = resolve;
-            script.onerror = resolve;
+            script.onload = () => {
+              completeStep("módulos finais prontos");
+              resolve();
+            };
+            script.onerror = () => {
+              completeStep("módulos finais conferidos");
+              resolve();
+            };
             document.body.appendChild(script);
           });
-        const loadStyle = (href) => {
-          const link = document.createElement("link");
-          link.rel = "stylesheet";
-          link.href = href;
-          document.head.appendChild(link);
-        };
+        const loadStyle = (href) =>
+          new Promise((resolve) => {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = href;
+            link.onload = () => {
+              completeStep("estilos visuais prontos");
+              resolve();
+            };
+            link.onerror = () => {
+              completeStep("estilos visuais conferidos");
+              resolve();
+            };
+            document.head.appendChild(link);
+          });
         const run = async () => {
-          styles.forEach(loadStyle);
+          if (bootState.started) {
+            return;
+          }
+          bootState.started = true;
+          notifyProgress("organizando estilos visuais");
+          await Promise.all(styles.map(loadStyle));
           for (const src of queue) {
             await loadScript(src);
           }
+          bootState.done = true;
+          window.__CATALOGO_DEFERRED_BOOT_DONE__ = true;
+          bootState.completed = bootState.total;
+          notifyProgress("edição editorial pronta");
           window.dispatchEvent(new Event("catalogo:deferred-news-ready"));
+          window.dispatchEvent(
+            new CustomEvent("catalogo:deferred-assets-ready", {
+              detail: bootState
+            })
+          );
+          resolveDeferredBoot(bootState);
         };
         const start = () => window.setTimeout(run, 700);
         if (document.readyState === "complete") {

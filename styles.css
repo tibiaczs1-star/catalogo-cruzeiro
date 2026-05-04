@@ -86,6 +86,7 @@ body::before {
 .logo-splash {
   --splash-scene-duration: 2600ms;
   --splash-door-duration: 900ms;
+  --splash-progress: 4%;
   --splash-zoom-scale: 1.16;
   position: fixed;
   inset: 0;
@@ -1110,8 +1111,25 @@ body::before {
   font-weight: 700;
 }
 
+.logo-splash-readiness {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  white-space: nowrap;
+}
+
 #logo-splash-date {
   white-space: nowrap;
+}
+
+#logo-splash-percent {
+  min-width: 3.2rem;
+  padding: 0.28rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(16, 35, 60, 0.09);
+  color: #10233c;
+  font-size: 0.82rem;
+  text-align: center;
 }
 
 .logo-splash-progress {
@@ -1125,12 +1143,24 @@ body::before {
 
 .logo-splash-progress span {
   display: block;
-  width: 42%;
+  width: var(--splash-progress, 4%);
+  min-width: 1.8rem;
   height: 100%;
+  position: relative;
+  overflow: hidden;
   border-radius: inherit;
   background: linear-gradient(90deg, #10233c 0%, #a44928 42%, #e0b45d 100%);
   box-shadow: 0 0 24px rgba(164, 73, 40, 0.24);
-  animation: splashProgress 1.8s ease-in-out infinite;
+  transition: width 260ms ease;
+}
+
+.logo-splash-progress span::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.46), transparent);
+  transform: translateX(-100%);
+  animation: splashProgress 1.35s ease-in-out infinite;
 }
 
 .logo-splash-tags {
@@ -1167,6 +1197,27 @@ body::before {
 
 body.editorial-home .logo-splash {
   display: none !important;
+}
+
+body.catalogo-site-booting {
+  overflow: hidden;
+}
+
+body.catalogo-site-booting .page-shell {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(1.8rem) scale(0.992) !important;
+}
+
+body.editorial-home.catalogo-site-booting .logo-splash {
+  display: grid !important;
+}
+
+body.catalogo-site-booting .logo-splash {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 body.site-loaded .logo-splash {
@@ -2001,10 +2052,21 @@ body.editorial-home .page-shell {
     display: none !important;
   }
 
+  body.editorial-home.catalogo-site-booting .logo-splash {
+    display: grid !important;
+  }
+
   body.editorial-home .page-shell {
     opacity: 1;
     transform: none;
     transition: opacity 260ms ease, transform 260ms ease, filter 260ms ease;
+  }
+
+  body.editorial-home.catalogo-site-booting .page-shell {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(1.2rem) scale(0.992) !important;
   }
 
   body.editorial-home.mobile-simple-shell .page-shell,
