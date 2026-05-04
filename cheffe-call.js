@@ -26,9 +26,29 @@
   const lowerDecksToggleEl = document.querySelector("#toggleLowerDecks");
   const commandBarEl = document.querySelector("#cheffeCommandBar");
   const cheffeAccessModal = document.querySelector("#cheffeAccessModal");
+  const cheffeAccessCard = document.querySelector(".cheffe-access-card");
   const quickPasswordInput = document.querySelector("#quickPasswordInput");
   const quickPasswordConfirm = document.querySelector("#quickPasswordConfirm");
   const quickPasswordStatus = document.querySelector("#quickPasswordStatus");
+  const cheffePhotoApproval = document.querySelector("#cheffePhotoApproval");
+  const photoApprovalCounter = document.querySelector("#photoApprovalCounter");
+  const photoApprovalSummary = document.querySelector("#photoApprovalSummary");
+  const photoApprovalProgress = document.querySelector("#photoApprovalProgress");
+  const photoApprovalList = document.querySelector("#photoApprovalList");
+  const photoApprovalImage = document.querySelector("#photoApprovalImage");
+  const photoApprovalImageCaption = document.querySelector("#photoApprovalImageCaption");
+  const photoApprovalTitle = document.querySelector("#photoApprovalTitle");
+  const photoApprovalMeta = document.querySelector("#photoApprovalMeta");
+  const photoApprovalReasons = document.querySelector("#photoApprovalReasons");
+  const photoApprovalFocus = document.querySelector("#photoApprovalFocus");
+  const photoApprovalReplacementInput = document.querySelector("#photoApprovalReplacementInput");
+  const photoApprovalNote = document.querySelector("#photoApprovalNote");
+  const photoApprovalArticle = document.querySelector("#photoApprovalArticle");
+  const photoApprovalPrev = document.querySelector("#photoApprovalPrev");
+  const photoApprovalNext = document.querySelector("#photoApprovalNext");
+  const photoApprovalContinue = document.querySelector("#photoApprovalContinue");
+  const photoApprovalRunRuntime = document.querySelector("#photoApprovalRunRuntime");
+  const photoApprovalDecisionButtons = Array.from(document.querySelectorAll("[data-photo-decision]"));
   const quickInstructionInput = document.querySelector("#quickInstructionInput");
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
@@ -112,6 +132,9 @@
   let currentMeetingSessionId = "";
   let latestCallPayload = null;
   let cheffeAdminPassword = window.sessionStorage.getItem("cheffeCallFullAdminPassword") || "";
+  let photoApprovalQueue = [];
+  let photoApprovalIndex = 0;
+  let photoApprovalBusy = false;
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -339,7 +362,24 @@
     quickPasswordStatus.dataset.tone = tone || "";
   }
 
+  function resetPhotoApprovalGate() {
+    photoApprovalQueue = [];
+    photoApprovalIndex = 0;
+    photoApprovalBusy = false;
+    if (cheffePhotoApproval) cheffePhotoApproval.hidden = true;
+    cheffeAccessCard?.classList.remove("is-reviewing-photos");
+    cheffeAccessModal?.classList.remove("has-photo-approval");
+    photoApprovalDecisionButtons.forEach((button) => {
+      button.disabled = false;
+    });
+    if (photoApprovalPrev) photoApprovalPrev.disabled = false;
+    if (photoApprovalNext) photoApprovalNext.disabled = false;
+    if (photoApprovalContinue) photoApprovalContinue.disabled = false;
+    if (photoApprovalRunRuntime) photoApprovalRunRuntime.checked = false;
+  }
+
   function openAccessModal(message = "Digite a senha Full Admin para entrar na Cheffe Call.", tone = "") {
+    resetPhotoApprovalGate();
     cheffeAccessModal?.classList.remove("is-unlocked");
     document.body.classList.add("cheffe-access-locked");
     setPasswordStatus(message, tone);
@@ -349,6 +389,7 @@
   function closeAccessModal() {
     cheffeAccessModal?.classList.add("is-unlocked");
     document.body.classList.remove("cheffe-access-locked");
+    resetPhotoApprovalGate();
   }
 
   function getAdminPassword() {
@@ -357,7 +398,7 @@
     return quickPassword || formPassword || cheffeAdminPassword;
   }
 
-  function rememberAdminPassword(password) {
+  function rememberAdminPassword(password, options = {}) {
     const cleanPassword = String(password || "").trim();
     if (!cleanPassword) return;
     cheffeAdminPassword = cleanPassword;
@@ -369,7 +410,7 @@
     } catch (_error) {
       // ignore storage failures
     }
-    closeAccessModal();
+    if (options.close !== false) closeAccessModal();
   }
 
   async function validateAdminPassword(password) {
@@ -396,6 +437,287 @@
       throw new Error(payload.error || "Nao foi possivel carregar agentes reais.");
     }
     return payload;
+  }
+
+  function normalizePhotoApprovalPayload(payload = {}) {
+    const rawQueue = Array.isArray(payload.queue)
+      ? payload.queue
+      : Array.isArray(payload.queue?.queue)
+        ? payload.queue.queue
+        : [];
+    const queue = rawQueue.map((item) => {
+      const latestDecision = item.latestDecision || item.decision || null;
+      const isPending = item.pending !== false && !latestDecision;
+      return {
+        ...item,
+        reasonLabels: Array.isArray(item.reasonLabels) && item.reasonLabels.length ? item.reasonLabels : item.reasons || [],
+        decision: isPending
+          ? null
+          : latestDecision
+            ? {
+                decisionLabel: latestDecision.actionLabel || latestDecision.decisionLabel || latestDecision.action || "decidido",
+                action: latestDecision.action || latestDecision.decision || "",
+                focus: latestDecision.focus || "",
+                replacementImageUrl: latestDecision.replacementImageUrl || "",
+                note: latestDecision.note || ""
+              }
+            : null
+      };
+    });
+    return {
+      ...payload,
+      queue,
+      pendingCount: queue.filter((item) => !item.decision).length
+    };
+  }
+
+  async function fetchPhotoApprovals(password) {
+    const response = await fetch(`/api/news-image-focus-approvals?newOnly=true&password=${encodeURIComponent(password)}`, {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Nao foi possivel carregar a fila de foto/foco.");
+    }
+    return normalizePhotoApprovalPayload(payload);
+  }
+
+  function setPhotoApprovalBusy(isBusy) {
+    photoApprovalBusy = Boolean(isBusy);
+    photoApprovalDecisionButtons.forEach((button) => {
+      button.disabled = photoApprovalBusy;
+    });
+    if (photoApprovalPrev) photoApprovalPrev.disabled = photoApprovalBusy || photoApprovalIndex <= 0;
+    if (photoApprovalNext) photoApprovalNext.disabled = photoApprovalBusy || photoApprovalIndex >= photoApprovalQueue.length - 1;
+    if (photoApprovalContinue) photoApprovalContinue.disabled = photoApprovalBusy;
+  }
+
+  function getPhotoApprovalItem() {
+    return photoApprovalQueue[photoApprovalIndex] || null;
+  }
+
+  function findNextPendingPhotoIndex(startIndex = 0) {
+    if (!photoApprovalQueue.length) return 0;
+    for (let step = 0; step < photoApprovalQueue.length; step += 1) {
+      const index = (startIndex + step) % photoApprovalQueue.length;
+      if (!photoApprovalQueue[index]?.decision) return index;
+    }
+    return Math.min(Math.max(startIndex, 0), photoApprovalQueue.length - 1);
+  }
+
+  function syncPhotoFocusPreview() {
+    if (!photoApprovalImage || !photoApprovalFocus) return;
+    photoApprovalImage.style.objectPosition = photoApprovalFocus.value || "center 42%";
+  }
+
+  function setPhotoFocusValue(value) {
+    if (!photoApprovalFocus) return;
+    const cleanValue = String(value || "center 42%").trim() || "center 42%";
+    const hasOption = Array.from(photoApprovalFocus.options).some((option) => option.value === cleanValue);
+    if (!hasOption) {
+      const option = document.createElement("option");
+      option.value = cleanValue;
+      option.textContent = cleanValue;
+      photoApprovalFocus.append(option);
+    }
+    photoApprovalFocus.value = cleanValue;
+    syncPhotoFocusPreview();
+  }
+
+  function renderPhotoApprovalReasons(item) {
+    if (!photoApprovalReasons) return;
+    photoApprovalReasons.innerHTML = "";
+    const labels = (Array.isArray(item?.reasonLabels) && item.reasonLabels.length ? item.reasonLabels : item?.reasons || [])
+      .map((label) => String(label || "").trim())
+      .filter(Boolean);
+    if (!labels.length) {
+      const span = document.createElement("span");
+      span.textContent = "revisao visual";
+      photoApprovalReasons.append(span);
+      return;
+    }
+    labels.slice(0, 5).forEach((label) => {
+      const span = document.createElement("span");
+      span.textContent = label;
+      photoApprovalReasons.append(span);
+    });
+  }
+
+  function renderPhotoApprovalItem() {
+    const item = getPhotoApprovalItem();
+    const total = photoApprovalQueue.length;
+    const decided = photoApprovalQueue.filter((entry) => entry.decision).length;
+    const pending = Math.max(0, total - decided);
+
+    if (photoApprovalCounter) photoApprovalCounter.textContent = `${pending} pendente${pending === 1 ? "" : "s"}`;
+    if (photoApprovalSummary) {
+      photoApprovalSummary.textContent = total
+        ? `${total} item${total === 1 ? "" : "s"} da auditoria de foto/foco, ${decided} ja decidido${decided === 1 ? "" : "s"}.`
+        : "Sem bloqueio visual pendente.";
+    }
+    if (photoApprovalProgress) photoApprovalProgress.textContent = total ? `${photoApprovalIndex + 1}/${total}` : "0/0";
+    if (photoApprovalList) {
+      photoApprovalList.innerHTML = "";
+      photoApprovalQueue.forEach((entry, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = [
+          "photo-approval-queue-item",
+          index === photoApprovalIndex ? "is-active" : "",
+          entry.decision ? "is-decided" : ""
+        ].filter(Boolean).join(" ");
+        button.disabled = photoApprovalBusy;
+        const title = document.createElement("strong");
+        title.textContent = entry.title || entry.slug || "Item sem titulo";
+        const meta = document.createElement("span");
+        meta.textContent = entry.decision?.decisionLabel || entry.sourceName || "aguardando decisao";
+        button.append(title, meta);
+        button.addEventListener("click", () => {
+          if (photoApprovalBusy) return;
+          photoApprovalIndex = index;
+          renderPhotoApprovalItem();
+        });
+        photoApprovalList.append(button);
+      });
+    }
+
+    if (!item) {
+      if (photoApprovalTitle) photoApprovalTitle.textContent = "Fila limpa";
+      if (photoApprovalMeta) photoApprovalMeta.textContent = "Nenhuma decisao pendente agora.";
+      if (photoApprovalImage) {
+        photoApprovalImage.removeAttribute("src");
+        photoApprovalImage.alt = "";
+      }
+      if (photoApprovalImageCaption) photoApprovalImageCaption.textContent = "";
+      renderPhotoApprovalReasons(null);
+      setPhotoApprovalBusy(false);
+      return;
+    }
+
+    if (photoApprovalTitle) photoApprovalTitle.textContent = item.title || "Sem titulo";
+    if (photoApprovalMeta) {
+      photoApprovalMeta.textContent = [
+        item.category || "Geral",
+        item.sourceName || "fonte nao informada",
+        item.decision?.decisionLabel ? `decidido: ${item.decision.decisionLabel}` : "aguardando decisao"
+      ]
+        .filter(Boolean)
+        .join(" | ");
+    }
+    if (photoApprovalImage) {
+      if (item.imageUrl) {
+        photoApprovalImage.hidden = false;
+        photoApprovalImage.src = item.imageUrl;
+      } else {
+        photoApprovalImage.hidden = true;
+        photoApprovalImage.removeAttribute("src");
+      }
+      photoApprovalImage.alt = item.title ? `Imagem da noticia: ${item.title}` : "Imagem da noticia";
+    }
+    if (photoApprovalImageCaption) {
+      photoApprovalImageCaption.textContent = item.effectiveFocus
+        ? `Foco atual: ${item.effectiveFocus}`
+        : "Sem foco manual registrado";
+    }
+    if (photoApprovalArticle) {
+      photoApprovalArticle.href = item.articleUrl || "noticia.html";
+      photoApprovalArticle.toggleAttribute("aria-disabled", !item.articleUrl);
+    }
+    if (photoApprovalReplacementInput) photoApprovalReplacementInput.value = item.decision?.replacementImageUrl || "";
+    if (photoApprovalNote) photoApprovalNote.value = item.decision?.note || "";
+    setPhotoFocusValue(item.decision?.focus || item.effectiveFocus || item.suggestedFocus || "center 42%");
+    renderPhotoApprovalReasons(item);
+    setPhotoApprovalBusy(false);
+  }
+
+  function openPhotoApprovalQueue(payload) {
+    photoApprovalQueue = Array.isArray(payload?.queue) ? payload.queue : [];
+    photoApprovalIndex = findNextPendingPhotoIndex(0);
+    cheffePhotoApproval.hidden = false;
+    cheffeAccessCard?.classList.add("is-reviewing-photos");
+    cheffeAccessModal?.classList.add("has-photo-approval");
+    setPasswordStatus("Senha validada. Revise a fila de foto/foco antes de abrir a sala.", "pending");
+    setStatus("Fila de foto/foco carregada no acesso da Cheffe Call.", "ok");
+    renderPhotoApprovalItem();
+  }
+
+  async function runAgentsFromAccessGate(password) {
+    const response = await fetch("/api/real-agents/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        password,
+        message: "Rodada manual disparada pelo popup de aprovacao de foto/foco da Cheffe Call."
+      })
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Falha ao rodar agentes.");
+    }
+    return payload;
+  }
+
+  async function enterCheffeRoom(message = "Senha validada. Sala liberada.") {
+    const password = getAdminPassword();
+    const shouldRunAgents = Boolean(photoApprovalRunRuntime?.checked);
+    closeAccessModal();
+    setPasswordStatus(message, "ok");
+    try {
+      if (shouldRunAgents) {
+        setStatus("Rodando agentes reais antes de abrir a sala...");
+        await runAgentsFromAccessGate(password);
+      }
+      await loadCall();
+      setStatus(
+        shouldRunAgents
+          ? "Rodada manual dos agentes concluida e sala atualizada."
+          : "Cheffe Call liberada. Escreva uma ordem e clique Enviar.",
+        "ok"
+      );
+      quickInstructionInput?.focus();
+    } catch (error) {
+      setStatus(error.message || "Nao foi possivel abrir a Cheffe Call.", "bad");
+    }
+  }
+
+  async function submitPhotoApprovalDecision(decision) {
+    const item = getPhotoApprovalItem();
+    const password = getAdminPassword();
+    if (!item || !password || photoApprovalBusy) return;
+    setPhotoApprovalBusy(true);
+    setPasswordStatus("Registrando decisao de foto/foco...", "pending");
+    try {
+      const response = await fetch("/api/news-image-focus-approvals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          password,
+          slug: item.slug,
+          decision,
+          focus: photoApprovalFocus?.value || item.effectiveFocus || item.suggestedFocus || "",
+          replacementImageUrl: photoApprovalReplacementInput?.value || "",
+          note: photoApprovalNote?.value || ""
+        })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao registrar decisao de foto/foco.");
+      }
+      const normalizedPayload = await fetchPhotoApprovals(password);
+      photoApprovalQueue = Array.isArray(normalizedPayload.queue) ? normalizedPayload.queue : photoApprovalQueue;
+      setPasswordStatus("Decisao registrada para a proxima runtime.", "ok");
+      if (Number(normalizedPayload.pendingCount || 0) <= 0) {
+        await enterCheffeRoom("Fila de foto/foco registrada. Sala liberada.");
+        return;
+      }
+      photoApprovalIndex = findNextPendingPhotoIndex(photoApprovalIndex + 1);
+      renderPhotoApprovalItem();
+    } catch (error) {
+      setPasswordStatus(error.message || "Falha ao registrar decisao.", "bad");
+      setStatus(error.message || "Falha ao registrar decisao de foto/foco.", "bad");
+      setPhotoApprovalBusy(false);
+    }
   }
 
   function requireAdminPassword(actionLabel = "operar a Cheffe Call") {
@@ -1810,11 +2132,21 @@
     setStatus("Validando senha Full Admin...");
     try {
       await validateAdminPassword(password);
-      rememberAdminPassword(password);
-      setPasswordStatus("Senha validada. Sala liberada.", "ok");
-      setStatus("Cheffe Call liberada. Escreva uma ordem e clique Enviar.", "ok");
-      loadCall().catch((error) => setStatus(error.message, "bad"));
-      quickInstructionInput?.focus();
+      rememberAdminPassword(password, { close: false });
+      setPasswordStatus("Senha validada. Abrindo fila de foto/foco para revisão.", "pending");
+      let approvalPayload = null;
+      try {
+        approvalPayload = await fetchPhotoApprovals(password);
+      } catch (approvalError) {
+        setPasswordStatus("Senha validada. Fila de foto/foco indisponivel agora.", "bad");
+        await enterCheffeRoom(approvalError.message || "Senha validada. Fila indisponivel.");
+        return;
+      }
+      if (Number(approvalPayload.pendingCount || 0) > 0) {
+        openPhotoApprovalQueue(approvalPayload);
+        return;
+      }
+      await enterCheffeRoom("Senha validada. Sem foto/foco pendente.");
     } catch (error) {
       cheffeAdminPassword = "";
       try {
@@ -1835,6 +2167,32 @@
     if (event.key !== "Enter") return;
     event.preventDefault();
     quickPasswordConfirm?.click();
+  });
+
+  photoApprovalDecisionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const decision = button.dataset.photoDecision || "";
+      submitPhotoApprovalDecision(decision);
+    });
+  });
+
+  photoApprovalFocus?.addEventListener("change", syncPhotoFocusPreview);
+
+  photoApprovalPrev?.addEventListener("click", () => {
+    if (photoApprovalBusy || photoApprovalIndex <= 0) return;
+    photoApprovalIndex -= 1;
+    renderPhotoApprovalItem();
+  });
+
+  photoApprovalNext?.addEventListener("click", () => {
+    if (photoApprovalBusy || photoApprovalIndex >= photoApprovalQueue.length - 1) return;
+    photoApprovalIndex += 1;
+    renderPhotoApprovalItem();
+  });
+
+  photoApprovalContinue?.addEventListener("click", () => {
+    if (photoApprovalBusy) return;
+    enterCheffeRoom("Acesso liberado. Decisoes pendentes ficaram na fila.");
   });
 
   sendTerminalEl?.addEventListener("click", () => {

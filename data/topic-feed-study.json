@@ -1,7 +1,43 @@
 {
   "topic": "study",
-  "updatedAt": "2026-05-01T00:53:46.965Z",
+  "updatedAt": "2026-05-04T17:18:01.914Z",
   "items": [
+    {
+      "id": "https://www.edsurge.com/news/2026-05-01-girls-around-the-globe-are-losing-gains-in-math-data-shows",
+      "slug": "global-math-gains-for-girls-are-slipping-report-finds",
+      "title": "Ganhos das meninas em matemática perdem força no mundo, aponta relatório",
+      "eyebrow": "educacao",
+      "date": "1 de mai. de 2026",
+      "publishedAt": "2026-05-01T08:00:00.000Z",
+      "category": "Educação",
+      "categoryKey": "educacao",
+      "previewClass": "thumb-educacao",
+      "sourceName": "EdSurge",
+      "sourceUrl": "https://www.edsurge.com/news/2026-05-01-girls-around-the-globe-are-losing-gains-in-math-data-shows",
+      "sourceLabel": "Ganhos das meninas em matemática perdem força no mundo, aponta relatório",
+      "lede": "Relatório global aponta que avanços de meninas em matemática estão recuando e que ações precisam começar cedo, com apoio bem direcionado.",
+      "summary": "Relatório global aponta que avanços de meninas em matemática estão recuando e que ações precisam começar cedo, com apoio bem direcionado.",
+      "analysis": "",
+      "body": [
+        "EdSurge publicou em 1 de mai. de 2026 a base desta noticia sobre a perda de avanços das meninas em matemática no mundo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+        "A perda de avanço das meninas em matemática e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+      ],
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://edsurge.imgix.net/uploads/post/image/16714/math_data-1777562518.jpg?auto=compress%2Cformat&amp;w=1600&amp;h=800&amp;fit=crop",
+      "sourceImageUrl": "",
+      "feedImageUrl": "https://edsurge.imgix.net/uploads/post/image/16714/math_data-1777562518.jpg?auto=compress%2Cformat&amp;w=1600&amp;h=800&amp;fit=crop",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "topic": "study",
+      "coverageLayer": "global",
+      "topicGroup": "edtech"
+    },
     {
       "id": "universidades-buscam-reconstruir-confianca-publica-no-ensino-superior",
       "slug": "universidades-buscam-reconstruir-confianca-publica-no-ensino-superior",
@@ -205,8 +241,8 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2026-04/GettyImages-1348273219.jpg?itok=YP_3Gl8b",
-      "sourceImageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2026-04/GettyImages-1348273219.jpg?itok=YP_3Gl8b",
+      "imageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2025-11/GettyImages-2197989610.jpg?itok=nt3yDn34",
+      "sourceImageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2025-11/GettyImages-2197989610.jpg?itok=nt3yDn34",
       "feedImageUrl": "",
       "imageCredit": "",
       "imageFocus": "",
@@ -227,8 +263,8 @@
     },
     {
       "source": "edsurge",
-      "ok": false,
-      "error": "timeout"
+      "ok": true,
+      "count": 8
     },
     {
       "source": "hechinger",
@@ -241,5 +277,5 @@
       "count": 8
     }
   ],
-  "fallbackUsed": true
+  "fallbackUsed": false
 }

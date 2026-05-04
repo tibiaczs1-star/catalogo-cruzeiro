@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
+const { applyPendingImageApprovalDecisions } = require("./news-image-approval-queue");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const AGENTS_DIR = path.join(ROOT_DIR, ".codex-agents");
@@ -19,6 +20,7 @@ const ARCHIVE_NEWS_FILE = path.join(ROOT_DIR, "data", "news-archive.json");
 const AGENT_MEMORY_FILE = path.join(ROOT_DIR, "data", "real-agents-memory.json");
 const AGENT_SCOREBOARD_FILE = path.join(ROOT_DIR, "data", "real-agents-scoreboard.json");
 const OFFICE_ORDERS_FILE = path.join(ROOT_DIR, "data", "office-orders.json");
+const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(ROOT_DIR, "data", "news-image-focus-decisions.json");
 const HEARTBEATS_FILE = path.join(ROOT_DIR, "data", "heartbeats.json");
 const REVIEW_REPORT_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
 const DEFAULT_OFFICE_FILE = path.join(ROOT_DIR, "escritorio.js");
@@ -168,6 +170,29 @@ function writeJson(filePath, payload) {
 function writeText(filePath, content) {
   ensureDir(path.dirname(filePath));
   fs.writeFileSync(filePath, content, "utf-8");
+}
+
+function readPhotoFocusDecisions() {
+  const store = readJson(NEWS_IMAGE_FOCUS_DECISIONS_FILE, { decisions: [] });
+  const decisions = Array.isArray(store)
+    ? store
+    : Array.isArray(store?.decisions)
+      ? store.decisions
+      : [];
+  return decisions
+    .filter((item) => item && item.requestedNextRuntime !== false)
+    .slice(-80)
+    .reverse()
+    .map((item) => ({
+      slug: String(item.slug || ""),
+      title: String(item.title || ""),
+      decision: String(item.decision || ""),
+      decisionLabel: String(item.decisionLabel || item.status || ""),
+      focus: String(item.focus || ""),
+      nextRuntimeAction: String(item.nextRuntimeAction || ""),
+      articleUrl: String(item.articleUrl || ""),
+      updatedAt: String(item.updatedAt || item.createdAt || "")
+    }));
 }
 
 function slugify(value) {
@@ -419,10 +444,11 @@ function pickLeadStory(newsItems, predicate) {
 }
 
 function buildAssignment(agent, context) {
-  const { newsItems, newsSummary, reviewReport } = context;
+  const { newsItems, newsSummary, reviewReport, photoFocusDecisions } = context;
   const topCategory = newsSummary.topCategories[0]?.value || "Geral";
   const weakTopic = reviewReport?.sources?.topicSummary?.find((item) => item.status !== "ok");
   const topIssue = reviewReport?.issues?.[0] || null;
+  const topPhotoDecision = Array.isArray(photoFocusDecisions) ? photoFocusDecisions[0] : null;
 
   let lead = null;
   let action = "";
@@ -442,10 +468,14 @@ function buildAssignment(agent, context) {
       monitor = `vigiar repeticao de assunto e saturacao por categoria`;
       break;
     case "review":
-      action = topIssue
+      action = topPhotoDecision
+        ? `executar decisao de foto/foco (${topPhotoDecision.decisionLabel}) em ${topPhotoDecision.title || topPhotoDecision.slug}`
+        : topIssue
         ? `corrigir ${topIssue.label.toLowerCase()} em ${topIssue.file}`
         : "rodar triagem fina em cards, CTAs e textos provisórios";
-      idea = `fechar uma lista curta do que bloqueia publicacao agora`;
+      idea = topPhotoDecision
+        ? `confirmar que a decisao visual aprovada na Cheffe Call entrou no fluxo editorial`
+        : `fechar uma lista curta do que bloqueia publicacao agora`;
       monitor = `acompanhar regressao editorial e acessibilidade basica`;
       break;
     case "copy":
@@ -469,8 +499,12 @@ function buildAssignment(agent, context) {
       break;
     case "design":
       lead = pickLeadStory(newsItems, (item) => item.imageUrl || item.feedImageUrl);
-      action = `reforcar a embalagem visual de ${lead?.title || "um destaque com imagem"}`;
-      idea = `propor hero, card ou faixa lateral com hierarquia mais limpa`;
+      action = topPhotoDecision
+        ? `${topPhotoDecision.nextRuntimeAction} em ${topPhotoDecision.title || topPhotoDecision.slug}`
+        : `reforcar a embalagem visual de ${lead?.title || "um destaque com imagem"}`;
+      idea = topPhotoDecision
+        ? `registrar foco ${topPhotoDecision.focus || "sem foco manual"} e devolver status visual`
+        : `propor hero, card ou faixa lateral com hierarquia mais limpa`;
       monitor = `vigiar cards sem respiro, thumbs fracas e disputas de leitura`;
       break;
     case "pixel":
@@ -1748,6 +1782,9 @@ function buildMarkdownRun(report) {
     `- Autonomous agents: ${report.summary.autonomousAgents}`,
     `- High autonomy agents: ${report.summary.highAutonomyAgents}`,
     `- Average autonomy: ${report.summary.averageAutonomy}`,
+    `- Image approvals applied: ${report.summary.imageApprovalsApplied || 0}`,
+    `- Image approvals sent to agents: ${report.summary.imageApprovalsSentToAgents || 0}`,
+    `- Photo/focus decisions in context: ${report.summary.photoFocusDecisions || 0}`,
     "",
     "## Top Categories",
     "",
@@ -1763,6 +1800,19 @@ function buildMarkdownRun(report) {
       (office) => `- ${office.officeLabel}: ${office.agentCount} agentes, foco em ${office.focus}`
     ),
     "",
+    ...(Array.isArray(report.photoFocusDecisions) && report.photoFocusDecisions.length
+      ? [
+          "## Photo/Focus Decisions",
+          "",
+          ...report.photoFocusDecisions
+            .slice(0, 10)
+            .map(
+              (item) =>
+                `- ${item.decisionLabel || item.decision}: ${item.title || item.slug} | foco ${item.focus || "sem foco"} | ${item.nextRuntimeAction || "acompanhar"}`
+            ),
+          ""
+        ]
+      : []),
     "## Agent Queue",
     ""
   ];
@@ -1790,6 +1840,7 @@ function main() {
   ensureDir(AGENTS_DIR);
   ensureDir(AGENT_FILES_DIR);
   ensureDir(RUNTIME_DIR);
+  const imageApprovals = applyPendingImageApprovalDecisions({ source: "real-agents-runtime" });
 
   const agents = loadAllAgents().map(enrichAgent);
   const registry = buildRegistry(agents);
@@ -1800,8 +1851,9 @@ function main() {
   const newsSummary = summarizeNews(newsItems);
   const reviewReport = readJson(REVIEW_REPORT_FILE, { issues: [], sources: { topicSummary: [] } });
   const officeOrders = readJson(OFFICE_ORDERS_FILE, []);
+  const photoFocusDecisions = readPhotoFocusDecisions();
   const heartbeats = readJson(HEARTBEATS_FILE, []);
-  const context = { newsItems, newsSummary, reviewReport, officeOrders, heartbeats };
+  const context = { newsItems, newsSummary, reviewReport, officeOrders, heartbeats, photoFocusDecisions };
   const memoryStore = readAgentMemoryStore();
 
   const queue = buildAwardedQueue(agents.map((agent) => {
@@ -1860,9 +1912,13 @@ function main() {
       failedAgents: lifeSummary.failedAgents,
       exhaustedAgents: lifeSummary.exhaustedAgents,
       averageEnergy: lifeSummary.averageEnergy,
-      averageMorale: lifeSummary.averageMorale
+      averageMorale: lifeSummary.averageMorale,
+      imageApprovalsApplied: imageApprovals.applied,
+      imageApprovalsSentToAgents: imageApprovals.sentToAgents,
+      photoFocusDecisions: photoFocusDecisions.length
     },
     news: newsSummary,
+    imageApprovals,
     autonomy: autonomySummary,
     life: lifeSummary,
     awards,
@@ -1872,6 +1928,7 @@ function main() {
     officeLogs,
     agentTimelines,
     officeDashboard,
+    photoFocusDecisions,
     executableActions,
     offices: officeStatus,
     queue,

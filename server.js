@@ -5,6 +5,10 @@ const path = require("path");
 const { execFile } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
+  buildImageApprovalQueue,
+  recordImageApprovalDecision
+} = require("./scripts/news-image-approval-queue");
+const {
   parseHomeLinkedArticleFallbacks,
   auditHomeLinkedArticleIntegrity
 } = require("./scripts/home-linked-article-fallbacks");
@@ -72,6 +76,7 @@ const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-das
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
+const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(DATA_DIR, "news-image-focus-decisions.json");
 const SOCIAL_TRENDS_CACHE_FILE = path.join(DATA_DIR, "social-trends-cache.json");
 const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
@@ -7982,6 +7987,44 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+function appendNewsImageApprovalOfficeOrder(decision = {}) {
+  const action = cleanShortText(decision.action || "", 60);
+  const title = cleanShortText(decision.title || decision.slug || "noticia em revisao", 180);
+  const isApprovedAction = ["approve-focus", "keep-fallback", "replace-image"].includes(action);
+  const status = isApprovedAction ? "aprovado" : "reaberto";
+  const focusText = decision.focus ? ` Foco sugerido: ${decision.focus}.` : "";
+  const replacementText = decision.replacementImageUrl ? ` Nova imagem: ${decision.replacementImageUrl}.` : "";
+  const noteText = decision.note ? ` Observacao do chefe: ${decision.note}` : "";
+  return appendOfficeOrder({
+    id: createRecordId("img"),
+    from: "Full Admin",
+    to: "Codex CEO + Escritorio Design + agentes reais",
+    priority: isApprovedAction ? "media" : "alta",
+    message: cleanShortText(
+      `Cheffe Call registrou decisao de foto/foco: ${decision.actionLabel || action} para "${title}".${focusText}${replacementText}${noteText}`,
+      1200
+    ),
+    ceoReply: isApprovedAction
+      ? "Decisao visual aprovada. A proxima runtime deve aplicar foco, fallback ou imagem definida e devolver feedback ao administrador."
+      : "Revisao visual reaberta. A proxima runtime deve tentar ajustar imagem/foco e devolver uma opcao melhor ao administrador.",
+    status,
+    hierarchy: "Full Admin -> Cheffe Call -> Codex CEO -> agentes reais",
+    imageApproval: {
+      decisionId: decision.id || "",
+      slug: decision.slug || "",
+      action,
+      focus: decision.focus || "",
+      replacementImageUrl: decision.replacementImageUrl || "",
+      articleUrl: decision.articleUrl || ""
+    },
+    review: {
+      status,
+      note: decision.note || decision.actionLabel || ""
+    },
+    createdAt: new Date().toISOString()
+  });
+}
+
 function reviewOfficeOrder(body = {}) {
   const orderId = cleanShortText(body.orderId || body.id, 120);
   const status = cleanShortText(body.status || body.reviewStatus, 40).toLowerCase();
@@ -8422,6 +8465,298 @@ function normalizeCheffeCallDecision(entry = {}) {
     command: cleanShortText(entry.command || "", 1600),
     action: cleanShortText(entry.action || "", 80),
     artifact: cleanShortText(entry.artifact || "", 400)
+  };
+}
+
+const NEWS_IMAGE_FOCUS_DECISION_META = {
+  "approve-focus": {
+    label: "Aprovar foco",
+    status: "aprovado-foco",
+    target: "Revisor Bento + Dara Design",
+    nextRuntimeAction: "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual"
+  },
+  "replace-image": {
+    label: "Trocar imagem",
+    status: "trocar-imagem",
+    target: "Bia Camera + Sofia Fontes + Revisor Bento",
+    nextRuntimeAction: "buscar imagem melhor, validar fonte e voltar com nova proposta visual"
+  },
+  "keep-fallback": {
+    label: "Manter fallback",
+    status: "manter-fallback",
+    target: "Dara Design + Revisor Bento",
+    nextRuntimeAction: "manter o fallback atual e revisar se o card continua legivel no portal"
+  },
+  redo: {
+    label: "Refazer",
+    status: "refazer-foto-foco",
+    target: "Bia Camera + Dara Design + Revisor Bento",
+    nextRuntimeAction: "refazer a decisao visual da materia antes de liberar destaque"
+  }
+};
+
+function normalizeNewsImageFocusDecision(value) {
+  const token = cleanShortText(value || "", 80).toLowerCase();
+  const aliases = {
+    approve: "approve-focus",
+    approved: "approve-focus",
+    aprovar: "approve-focus",
+    "aprovar-foco": "approve-focus",
+    focus: "approve-focus",
+    swap: "replace-image",
+    "swap-image": "replace-image",
+    trocar: "replace-image",
+    "trocar-imagem": "replace-image",
+    replace: "replace-image",
+    fallback: "keep-fallback",
+    keep: "keep-fallback",
+    manter: "keep-fallback",
+    "manter-fallback": "keep-fallback",
+    refazer: "redo",
+    redo: "redo",
+    rework: "redo"
+  };
+  const normalized = aliases[token] || token;
+  return NEWS_IMAGE_FOCUS_DECISION_META[normalized] ? normalized : "";
+}
+
+function labelNewsImageFocusReason(reason) {
+  const labels = {
+    "missing-image-url": "sem imagem",
+    "image-unreachable": "imagem fora do ar",
+    "image-content-type-not-confirmed": "tipo de imagem nao confirmado",
+    "people-or-group-scene-without-manual-focus": "pessoa/grupo sem foco manual",
+    "group-scene-without-manual-focus": "grupo sem foco manual",
+    "manual-focus-present": "tem foco manual",
+    "hero-focus-too-high-for-wide-headline": "foco alto demais para manchete larga"
+  };
+  return labels[reason] || reason;
+}
+
+function readNewsImageFocusDecisionStore() {
+  const store = readJson(NEWS_IMAGE_FOCUS_DECISIONS_FILE, { version: 1, updatedAt: "", decisions: [] });
+  const decisions = Array.isArray(store)
+    ? store
+    : Array.isArray(store?.decisions)
+      ? store.decisions
+      : [];
+  return {
+    version: 1,
+    updatedAt: safeString(store?.updatedAt || "", 80),
+    decisions: decisions.filter(Boolean).slice(-500)
+  };
+}
+
+function writeNewsImageFocusDecisionStore(store) {
+  writeJson(NEWS_IMAGE_FOCUS_DECISIONS_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    decisions: Array.isArray(store.decisions) ? store.decisions.slice(-500) : []
+  });
+}
+
+function normalizeNewsImageFocusAuditItem(item = {}, fullItem = {}) {
+  const slug = safeString(item.slug || fullItem.slug || "", 220);
+  const reasons = Array.isArray(item.reasons)
+    ? item.reasons
+    : Array.isArray(fullItem.reasons)
+      ? fullItem.reasons
+      : [];
+  const effectiveFocus = safeString(item.effectiveFocus || fullItem.effectiveFocus || "", 80);
+  return {
+    slug,
+    title: safeString(item.title || fullItem.title || "Sem titulo", 260),
+    category: safeString(item.category || fullItem.category || "", 120),
+    sourceName: safeString(item.sourceName || item.source || fullItem.sourceName || fullItem.source || "", 160),
+    publishedAt: safeString(item.publishedAt || fullItem.publishedAt || fullItem.date || fullItem.createdAt || "", 80),
+    level: safeString(item.level || fullItem.level || "review", 32),
+    reasons: reasons.map((reason) => safeString(reason || "", 140)).filter(Boolean),
+    reasonLabels: reasons.map((reason) => labelNewsImageFocusReason(safeString(reason || "", 140))).filter(Boolean),
+    imageUrl: safeString(item.imageUrl || fullItem.imageUrl || "", 1200),
+    effectiveFocus,
+    suggestedFocus: effectiveFocus || "center 42%",
+    hasManualFocus: Boolean(fullItem.hasManualFocus || effectiveFocus),
+    isNewSinceLastAudit: Boolean(item.isNewSinceLastAudit ?? fullItem.isNewSinceLastAudit),
+    articleUrl: slug ? `/noticia.html?slug=${encodeURIComponent(slug)}` : ""
+  };
+}
+
+function buildNewsImageFocusApprovalQueue() {
+  const report = readJson(NEWS_IMAGE_FOCUS_AUDIT_FILE, {});
+  const fullItems = Array.isArray(report.items) ? report.items : [];
+  const reviewQueue = Array.isArray(report.reviewQueue) ? report.reviewQueue : [];
+  const itemsBySlug = new Map(fullItems.map((item) => [safeString(item.slug || "", 220), item]));
+  const strictNewItems = fullItems.filter((item) => item.isNewSinceLastAudit && item.level !== "ok");
+  const sourceItems = strictNewItems.length
+    ? strictNewItems
+    : fullItems.filter((item) => item.level !== "ok").length
+      ? fullItems.filter((item) => item.level !== "ok")
+      : reviewQueue;
+  const store = readNewsImageFocusDecisionStore();
+  const latestDecisionBySlug = new Map();
+  store.decisions.forEach((decision) => {
+    const slug = safeString(decision.slug || "", 220);
+    if (slug) latestDecisionBySlug.set(slug, decision);
+  });
+
+  const queue = sourceItems
+    .map((item) => normalizeNewsImageFocusAuditItem(item, itemsBySlug.get(safeString(item.slug || "", 220)) || {}))
+    .filter((item) => item.slug)
+    .map((item) => {
+      const decision = latestDecisionBySlug.get(item.slug) || null;
+      return {
+        ...item,
+        decision: decision
+          ? {
+              id: safeString(decision.id || "", 120),
+              decision: safeString(decision.decision || "", 80),
+              decisionLabel: safeString(decision.decisionLabel || "", 80),
+              status: safeString(decision.status || "", 80),
+              focus: safeString(decision.focus || "", 80),
+              replacementImageUrl: safeString(decision.replacementImageUrl || "", 1200),
+              note: safeString(decision.note || "", 600),
+              nextRuntimeAction: safeString(decision.nextRuntimeAction || "", 260),
+              updatedAt: safeString(decision.updatedAt || decision.createdAt || "", 80)
+            }
+          : null
+      };
+    });
+  const summary = report && typeof report.summary === "object" ? report.summary : {};
+  const pendingCount = queue.filter((item) => !item.decision).length;
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    auditUpdatedAt: safeString(report.updatedAt || "", 80),
+    checkedLimit: Number(report.checkedLimit || 0) || 0,
+    total: queue.length,
+    pendingCount,
+    decidedCount: queue.length - pendingCount,
+    sourceMode: strictNewItems.length ? "new-blockers" : "review-queue",
+    summary: {
+      ok: Number(summary.ok || 0) || 0,
+      review: Number(summary.review || 0) || 0,
+      warning: Number(summary.warning || 0) || 0,
+      error: Number(summary.error || 0) || 0,
+      manualFocus: Number(summary.manualFocus || 0) || 0,
+      newSinceLastAudit: Number(summary.newSinceLastAudit || 0) || 0,
+      missingImage: Number(summary.missingImage || 0) || 0,
+      unreachableImage: Number(summary.unreachableImage || 0) || 0
+    },
+    queue
+  };
+}
+
+function recordNewsImageFocusDecision(body = {}) {
+  const slug = safeString(body.slug || body.articleSlug || "", 220);
+  const decision = normalizeNewsImageFocusDecision(body.decision || body.action || body.status);
+  if (!slug || !decision) {
+    return { ok: false, status: 400, error: "Informe slug e decisao valida para a foto/foco." };
+  }
+
+  const queuePayload = buildNewsImageFocusApprovalQueue();
+  const item = queuePayload.queue.find((entry) => entry.slug === slug);
+  if (!item) {
+    return { ok: false, status: 404, error: "Item de foto/foco nao encontrado na fila atual." };
+  }
+
+  const meta = NEWS_IMAGE_FOCUS_DECISION_META[decision];
+  const now = new Date().toISOString();
+  const focus = cleanShortText(
+    body.focus || (decision === "approve-focus" ? item.effectiveFocus || item.suggestedFocus || "center 42%" : item.effectiveFocus),
+    80
+  );
+  const replacementImageUrl = safeString(body.replacementImageUrl || body.imageUrl || "", 1200);
+  const note = cleanShortText(body.note || body.comment || "", 800);
+  const store = readNewsImageFocusDecisionStore();
+  const previous = store.decisions.find((entry) => safeString(entry.slug || "", 220) === slug);
+  const nextDecision = {
+    id: previous?.id || createRecordId("focusdec"),
+    slug,
+    title: item.title,
+    category: item.category,
+    sourceName: item.sourceName,
+    imageUrl: item.imageUrl,
+    articleUrl: item.articleUrl,
+    level: item.level,
+    reasons: item.reasons,
+    reasonLabels: item.reasonLabels,
+    decision,
+    decisionLabel: meta.label,
+    status: meta.status,
+    focus,
+    replacementImageUrl,
+    note,
+    requestedNextRuntime: true,
+    nextRuntimeAction: meta.nextRuntimeAction,
+    createdBy: "Full Admin",
+    createdAt: previous?.createdAt || now,
+    updatedAt: now
+  };
+  writeNewsImageFocusDecisionStore({
+    decisions: store.decisions
+      .filter((entry) => safeString(entry.slug || "", 220) !== slug)
+      .concat(nextDecision)
+  });
+
+  let runtimeApproval = null;
+  try {
+    const runtimeResult = recordImageApprovalDecision({
+      slug,
+      decision,
+      focus,
+      replacementImageUrl,
+      note,
+      requestedBy: "Full Admin",
+      source: "cheffe-call"
+    });
+    runtimeApproval = runtimeResult.ok ? runtimeResult.decision : null;
+  } catch (error) {
+    runtimeApproval = {
+      error: cleanShortText(error?.message || "Falha ao registrar aprovacao para runtime.", 280)
+    };
+  }
+
+  const orderId = createRecordId("ord");
+  appendOfficeOrder({
+    id: orderId,
+    from: "Cheffe Call",
+    to: meta.target,
+    priority: "alta",
+    message: cleanShortText(
+      `Decisao de foto/foco no popup da Cheffe Call: ${meta.label} para "${item.title}". Slug: ${slug}. Foco: ${focus || "sem foco manual"}. ${replacementImageUrl ? `Nova imagem: ${replacementImageUrl}. ` : ""}Motivo: ${(item.reasonLabels || item.reasons || []).join(", ") || "revisao visual"}.`,
+      1200
+    ),
+    ceoReply: cleanShortText(`Registrado. Na proxima runtime dos agentes: ${meta.nextRuntimeAction}.`, 1200),
+    status: `cheffe-call-foto-foco-${decision}`,
+    hierarchy: "Full Admin -> Cheffe Call -> agentes reais",
+    createdAt: now,
+    assignedAgents: 3,
+    assignments: [
+      {
+        slug,
+        title: item.title,
+        action: meta.nextRuntimeAction,
+        decision,
+        focus,
+        replacementImageUrl,
+        imageUrl: item.imageUrl,
+        articleUrl: item.articleUrl
+      }
+    ],
+    executionSummary: {
+      delivered: decision === "approve-focus" || decision === "keep-fallback" ? 1 : 0,
+      failed: 0,
+      running: decision === "replace-image" || decision === "redo" ? 1 : 0
+    }
+  });
+
+  return {
+    ok: true,
+    orderId,
+    decision: nextDecision,
+    runtimeApproval,
+    ...buildNewsImageFocusApprovalQueue()
   };
 }
 
@@ -11195,6 +11530,22 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 201, { ok: true, ...result.payload });
   }
 
+  if (req.method === "GET" && pathname === "/api/cheffe-call/photo-approvals") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para revisar foto/foco." });
+    }
+    return sendJson(res, 200, buildNewsImageFocusApprovalQueue());
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/photo-approvals") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const result = recordNewsImageFocusDecision(body);
+    return sendJson(res, result.ok ? 200 : result.status || 400, result);
+  }
+
   if (req.method === "GET" && pathname === "/api/cheffe-call") {
     return sendJson(res, 200, buildCheffeCallPayload());
   }
@@ -11803,6 +12154,29 @@ async function handleApi(req, res, pathname, searchParams) {
         articleUrl: item.slug ? `/noticia.html?slug=${encodeURIComponent(item.slug)}` : ""
       }))
     });
+  }
+
+  if (req.method === "GET" && pathname === "/api/news-image-focus-approvals") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const newOnly = String(searchParams.get("newOnly") || "true").toLowerCase() !== "false";
+    return sendJson(res, 200, buildImageApprovalQueue({ newOnly }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/news-image-focus-approvals") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const result = recordImageApprovalDecision({
+      ...body,
+      requestedBy: body.requestedBy || "Full Admin",
+      source: body.source || "cheffe-call"
+    });
+    if (!result.ok) return sendJson(res, result.status || 400, result);
+    appendNewsImageApprovalOfficeOrder(result.decision);
+    return sendJson(res, 201, result);
   }
 
   if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/bridge") {

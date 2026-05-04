@@ -6965,6 +6965,343 @@ body.cheffe-access-locked {
   opacity: 0.62 !important;
 }
 
+.cheffe-photo-approval[hidden] {
+  display: none !important;
+}
+
+.cheffe-access-card.is-reviewing-photos {
+  width: min(1080px, 100%);
+  max-height: calc(100svh - 64px);
+  padding: 22px;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.cheffe-access-card.is-reviewing-photos > p:not(.call-kicker),
+.cheffe-access-card.is-reviewing-photos > label[for="quickPasswordInput"],
+.cheffe-access-card.is-reviewing-photos > .cheffe-access-row {
+  display: none;
+}
+
+.cheffe-access-card.is-reviewing-photos .call-kicker,
+.cheffe-access-card.is-reviewing-photos h2 {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.cheffe-access-card.is-reviewing-photos .call-password-status {
+  margin-bottom: 0;
+}
+
+.cheffe-photo-approval {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(244, 201, 107, 0.18);
+}
+
+.cheffe-photo-approval-head,
+.photo-approval-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cheffe-photo-approval-head span,
+.photo-approval-meta,
+.photo-approval-summary {
+  color: rgba(255, 248, 235, 0.66);
+  font-size: 0.74rem;
+  font-weight: 850;
+  line-height: 1.35;
+}
+
+.cheffe-photo-approval-head strong {
+  display: block;
+  margin-top: 3px;
+  color: var(--call-cream);
+  font-size: 1.08rem;
+  line-height: 1.15;
+}
+
+.photo-approval-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.photo-approval-head-actions span,
+.photo-approval-head-actions a {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(104, 232, 255, 0.22);
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--call-cyan);
+  background: rgba(104, 232, 255, 0.07);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.photo-approval-head-actions a[aria-disabled="true"] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.photo-approval-summary {
+  margin: -2px 0 0 !important;
+}
+
+.photo-approval-list-mini {
+  max-height: 78px;
+  overflow: auto;
+  display: flex;
+  gap: 8px;
+  padding-bottom: 2px;
+}
+
+.photo-approval-queue-item {
+  min-width: 190px;
+  border: 1px solid rgba(255, 248, 235, 0.12);
+  border-radius: 10px;
+  padding: 8px;
+  color: var(--call-cream);
+  text-align: left;
+  background: rgba(255, 248, 235, 0.055);
+}
+
+.photo-approval-queue-item.is-active {
+  border-color: rgba(244, 201, 107, 0.54);
+  background: rgba(244, 201, 107, 0.1);
+}
+
+.photo-approval-queue-item.is-decided {
+  border-color: rgba(88, 214, 141, 0.36);
+  background: rgba(88, 214, 141, 0.08);
+}
+
+.photo-approval-queue-item strong,
+.photo-approval-queue-item span {
+  display: block;
+}
+
+.photo-approval-queue-item strong {
+  font-size: 0.82rem;
+  line-height: 1.24;
+}
+
+.photo-approval-queue-item span {
+  margin-top: 5px;
+  color: rgba(255, 248, 235, 0.62);
+  font-size: 0.68rem;
+  font-weight: 850;
+}
+
+.photo-approval-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.88fr) minmax(320px, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.photo-approval-frame {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 248, 235, 0.14);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(104, 232, 255, 0.12), rgba(244, 201, 107, 0.08)),
+    #080c14;
+}
+
+.photo-approval-frame img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.photo-approval-frame img[hidden] {
+  display: none;
+}
+
+.photo-approval-frame figcaption {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 8px;
+  padding: 7px 9px;
+  color: rgba(255, 248, 235, 0.88);
+  background: rgba(3, 6, 12, 0.72);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.photo-approval-panel {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.photo-approval-panel h3 {
+  margin: 0;
+  color: var(--call-cream);
+  font-size: clamp(1.05rem, 1.8vw, 1.32rem);
+  line-height: 1.18;
+}
+
+.photo-approval-reasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.photo-approval-reasons span {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(244, 201, 107, 0.2);
+  border-radius: 8px;
+  padding: 0 8px;
+  color: rgba(255, 248, 235, 0.82);
+  background: rgba(244, 201, 107, 0.07);
+  font-size: 0.7rem;
+  font-weight: 850;
+}
+
+.photo-approval-panel label,
+.photo-runtime-toggle {
+  color: var(--call-cyan);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.photo-approval-panel select,
+.photo-approval-panel input,
+.photo-approval-panel textarea {
+  width: 100%;
+  border: 1px solid rgba(244, 201, 107, 0.24);
+  border-radius: 8px;
+  padding: 11px;
+  color: var(--call-cream);
+  background: rgba(3, 6, 12, 0.7);
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.photo-approval-panel textarea {
+  height: 48px;
+  min-height: 48px;
+  resize: vertical;
+}
+
+.photo-approval-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.photo-approval-actions button,
+.photo-approval-footer button {
+  min-height: 40px;
+  border: 1px solid rgba(255, 248, 235, 0.16);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--call-cream);
+  background: rgba(255, 248, 235, 0.075);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.photo-approval-actions button:first-child,
+#photoApprovalContinue {
+  border-color: rgba(244, 201, 107, 0.48);
+  color: #201018;
+  background: var(--call-gold);
+}
+
+.photo-approval-actions button:nth-child(2) {
+  border-color: rgba(104, 232, 255, 0.36);
+  color: var(--call-cyan);
+  background: rgba(104, 232, 255, 0.08);
+}
+
+.photo-approval-actions button:nth-child(3) {
+  border-color: rgba(88, 214, 141, 0.36);
+  color: var(--call-green);
+  background: rgba(88, 214, 141, 0.08);
+}
+
+.photo-approval-actions button:nth-child(4) {
+  border-color: rgba(255, 111, 97, 0.42);
+  color: var(--call-red);
+  background: rgba(255, 111, 97, 0.08);
+}
+
+.photo-approval-actions button:disabled,
+.photo-approval-footer button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.photo-approval-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 4;
+  border-top: 1px solid rgba(255, 248, 235, 0.1);
+  padding-top: 10px;
+  background:
+    linear-gradient(180deg, rgba(8, 12, 20, 0.86), rgba(8, 12, 20, 0.98)),
+    rgba(8, 12, 20, 0.96);
+  backdrop-filter: blur(12px);
+}
+
+.photo-approval-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.photo-runtime-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.photo-runtime-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: #f4c96b;
+}
+
+@media (max-width: 860px) {
+  .photo-approval-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-approval-frame {
+    aspect-ratio: 16 / 9;
+  }
+}
+
 .cheffe-info-popup {
   position: fixed;
   inset: 0;
@@ -7032,6 +7369,27 @@ body.cheffe-access-locked {
 
   .cheffe-access-row {
     grid-template-columns: 1fr;
+  }
+
+  .cheffe-access-card.is-reviewing-photos {
+    max-height: calc(100svh - 20px);
+    padding: 18px;
+  }
+
+  .cheffe-photo-approval-head,
+  .photo-approval-footer {
+    align-items: stretch;
+    flex-direction: column;
+    position: static;
+  }
+
+  .photo-approval-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .photo-approval-footer button {
+    width: 100%;
+    flex: 0 0 auto;
   }
 }
 

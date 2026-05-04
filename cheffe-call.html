@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260424-prompt-console-real" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-photo-approval" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -538,11 +538,67 @@
             <button type="button" id="quickPasswordConfirm">Entrar</button>
           </div>
           <small id="quickPasswordStatus" class="call-password-status" aria-live="polite">Aguardando senha.</small>
+          <section class="cheffe-photo-approval" id="cheffePhotoApproval" hidden aria-labelledby="photoApprovalTitle">
+            <div class="cheffe-photo-approval-head">
+              <div>
+                <span>Fila foto/foco</span>
+                <strong id="photoApprovalCounter">0 pendentes</strong>
+              </div>
+              <div class="photo-approval-head-actions">
+                <span id="photoApprovalProgress">0/0</span>
+                <a id="photoApprovalArticle" href="noticia.html" target="_blank" rel="noopener" aria-disabled="true">Abrir notícia</a>
+              </div>
+            </div>
+            <p id="photoApprovalSummary" class="photo-approval-summary">Auditoria visual pronta para decisão.</p>
+            <div id="photoApprovalList" class="photo-approval-list-mini" aria-label="Itens da fila visual"></div>
+            <div class="photo-approval-grid">
+              <figure class="photo-approval-frame">
+                <img id="photoApprovalImage" alt="" />
+                <figcaption id="photoApprovalImageCaption">Sem foco manual registrado</figcaption>
+              </figure>
+              <div class="photo-approval-panel">
+                <h3 id="photoApprovalTitle">Item da fila</h3>
+                <p id="photoApprovalMeta" class="photo-approval-meta">Aguardando decisão</p>
+                <div id="photoApprovalReasons" class="photo-approval-reasons" aria-label="Motivos da auditoria"></div>
+                <label for="photoApprovalFocus">Foco manual</label>
+                <select id="photoApprovalFocus">
+                  <option value="center 32%">center 32%</option>
+                  <option value="center 34%">center 34%</option>
+                  <option value="center 38%">center 38%</option>
+                  <option value="center 42%" selected>center 42%</option>
+                  <option value="center 50%">center 50%</option>
+                  <option value="center 58%">center 58%</option>
+                  <option value="center 66%">center 66%</option>
+                </select>
+                <div class="photo-approval-actions">
+                  <button type="button" data-photo-decision="approve-focus">Aprovar foco</button>
+                  <button type="button" data-photo-decision="swap-image">Trocar imagem</button>
+                  <button type="button" data-photo-decision="keep-fallback">Manter fallback</button>
+                  <button type="button" data-photo-decision="redo">Refazer</button>
+                </div>
+                <label for="photoApprovalReplacementInput">URL nova se trocar imagem</label>
+                <input id="photoApprovalReplacementInput" type="url" placeholder="https://... ou deixe vazio para os agentes refazerem" />
+                <label for="photoApprovalNote">Observação</label>
+                <textarea id="photoApprovalNote" rows="3" placeholder="Nota curta para os agentes"></textarea>
+              </div>
+            </div>
+            <footer class="photo-approval-footer">
+              <div class="photo-approval-nav">
+                <button type="button" id="photoApprovalPrev">Anterior</button>
+                <button type="button" id="photoApprovalNext">Próxima</button>
+              </div>
+              <label class="photo-runtime-toggle">
+                <input type="checkbox" id="photoApprovalRunRuntime" />
+                <span>Rodar agentes ao continuar</span>
+              </label>
+              <button type="button" id="photoApprovalContinue">Continuar para sala</button>
+            </footer>
+          </section>
         </div>
       </div>
     </main>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260424-pixelart-flow-1"></script>
+    <script defer src="cheffe-call.js?v=20260504-photo-approval"></script>
   </body>
 </html>
