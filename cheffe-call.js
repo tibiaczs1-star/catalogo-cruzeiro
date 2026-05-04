@@ -1746,8 +1746,12 @@
     if (opinionRunningCount) opinionRunningCount.textContent = String(running);
     if (opinionFlowMeta) {
       opinionFlowMeta.textContent = flowItems.length
-        ? `${flowItems.length} opinioes separadas. ${pending} aguardam decisao, ${ready} ja viraram ordem e ${running} estao em execucao, terminal ou implementadas.`
-        : "Cada agente entra como card de decisão antes de virar ordem.";
+        ? `${flowItems.length} opinioes na sala. ${pending} aguardam aprovacao, ${ready} estao prontas para implementar em lote e ${running} ja foram enviadas ao terminal/runtime.`
+        : "Aprovar guarda uma opiniao. Implementar fila executa todas as aprovadas e mostra o terminal.";
+    }
+    if (runApprovedOpinions) {
+      runApprovedOpinions.textContent = ready ? `Implementar fila (${ready})` : "Implementar fila";
+      runApprovedOpinions.disabled = ready === 0;
     }
     const activeStep = ready
       ? "run"
@@ -1817,10 +1821,10 @@
                 <span>Ação: ${escapeHtml(context.action).slice(0, 90)}</span>
               </div>
               <div class="speech-actions compact opinion-decision-actions">
-                <button type="button" data-list-idea-action="approve" data-index="${index}" ${isClosed ? "disabled" : ""}>Aprovar</button>
-                <button type="button" data-list-idea-action="implement" data-index="${index}" ${canRun ? "" : "disabled"}>Rodar agora</button>
-                <button type="button" data-list-idea-action="variation" data-index="${index}" ${status.state === "dismissed" ? "disabled" : ""}>Pedir ajuste</button>
-                <button type="button" data-list-idea-action="task" data-index="${index}" ${isClosed ? "disabled" : ""}>Criar tarefa</button>
+                <button type="button" data-list-idea-action="approve" data-index="${index}" ${isClosed ? "disabled" : ""}>Aprovar card</button>
+                <button type="button" data-list-idea-action="implement" data-index="${index}" ${canRun ? "" : "disabled"}>Implementar card</button>
+                <button type="button" data-list-idea-action="variation" data-index="${index}" ${status.state === "dismissed" ? "disabled" : ""}>Ajustar</button>
+                <button type="button" data-list-idea-action="task" data-index="${index}" ${isClosed ? "disabled" : ""}>Tarefa</button>
                 <button type="button" data-list-idea-action="terminal" data-index="${index}">Terminal</button>
                 <button type="button" data-list-idea-action="dismiss" data-index="${index}" ${isClosed ? "disabled" : ""}>Ignorar</button>
               </div>
@@ -2027,13 +2031,13 @@
             <strong>${escapeHtml(activeName)}</strong>
             <p>${escapeHtml(active.opinion || "Aguardando fala.")}</p>
             <div class="speech-actions">
-              <button type="button" data-idea-action="approve">Aprovar A</button>
-              <button type="button" data-idea-action="implement">Implementar I</button>
-              <button type="button" data-idea-action="variation">Ajuste V</button>
-              <button type="button" data-idea-action="task">Tarefa T</button>
-              <button type="button" data-idea-action="terminal">Terminal M</button>
-              <button type="button" data-idea-action="file">Ficha F</button>
-              <button type="button" data-idea-action="next">Próximo N</button>
+              <button type="button" data-idea-action="approve">Aprovar card</button>
+              <button type="button" data-idea-action="implement">Implementar card</button>
+              <button type="button" data-idea-action="variation">Ajustar</button>
+              <button type="button" data-idea-action="task">Tarefa</button>
+              <button type="button" data-idea-action="terminal">Terminal</button>
+              <button type="button" data-idea-action="file">Ficha</button>
+              <button type="button" data-idea-action="next">Próximo</button>
             </div>
           </div>
         </div>
@@ -2124,10 +2128,24 @@
       return;
     }
     if (action === "implement") {
-      if (await postRoomAction("implement", active)) {
+      try {
+        await runSingleImplementation(active);
         setStatus(`${agentName} entrou em execução real pela Cheffe Call.`, "ok");
         moveToNextSpeaker("próxima fala");
         return;
+      } catch (error) {
+        setActionFeedback({
+          badge: "Falha",
+          title: `Falha em ${agentName}`,
+          message: error.message || "Não foi possível implementar este card.",
+          tone: "bad",
+          closable: true,
+          steps: [
+            { label: "Implementação interrompida", state: "bad" },
+            { label: "Card preservado", state: "pending" }
+          ]
+        });
+        throw error;
       }
       const implementation = active?.assignment?.action || `Começar a executar a proposta de ${agentName}.`;
       const packet = buildExecutionPacket(active, "implement");
@@ -2560,6 +2578,221 @@
     return true;
   }
 
+  function getReadyOpinionFlowItems() {
+    return latestOpinionFlow.filter((flow) => ["ready", "queued"].includes(flow.status?.state));
+  }
+
+  function formatRuntimeDetailsForTerminal(payload = {}, prefix = "") {
+    const details = buildRuntimeFeedbackDetails(payload);
+    return [
+      prefix,
+      details,
+      payload?.feedback?.imageApprovalsApplied !== undefined
+        ? `Foto/foco aplicado: ${payload.feedback.imageApprovalsApplied}`
+        : "",
+      payload?.feedback?.imageApprovalsSentToAgents !== undefined
+        ? `Foto/foco enviado aos agentes: ${payload.feedback.imageApprovalsSentToAgents}`
+        : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  async function runCheffeRuntime(password, message) {
+    const response = await fetch("/api/real-agents/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        password,
+        message
+      })
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+    return payload;
+  }
+
+  async function runSingleImplementation(active) {
+    const agentName = getAgentDisplayName(active);
+    const password = requireAdminPassword("implementar o card aprovado");
+    if (!password) throw new Error("Senha Full Admin obrigatória para implementar.");
+    setActionFeedback({
+      badge: "Implementação",
+      title: `Implementando ${agentName}`,
+      message: "Registrando a decisão do card e rodando a runtime dos agentes.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Card aprovado localizado", state: "done" },
+        { label: "Registro da execução no servidor", state: "running" },
+        { label: "Runtime dos agentes", state: "pending" },
+        { label: "Conferência da sala", state: "pending" }
+      ],
+      details: buildExecutionPacket(active, "implement").howTo
+    });
+
+    await postRoomAction("implement", active);
+    setActionFeedback({
+      badge: "Runtime",
+      title: `Runtime de ${agentName}`,
+      message: "A execução foi registrada. Agora os agentes estão rodando.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Execução registrada", state: "done" },
+        { label: "Runtime dos agentes", state: "running" },
+        { label: "Atualização da sala", state: "pending" }
+      ]
+    });
+    const payload = await runCheffeRuntime(
+      password,
+      `Implementar card aprovado na Cheffe Call: ${agentName}.`
+    );
+    await loadCall();
+    setActionFeedback({
+      badge: "Concluído",
+      title: `${agentName} implementado`,
+      message: "A runtime terminou e a sala foi atualizada.",
+      tone: "ok",
+      closable: true,
+      steps: [
+        { label: "Card enviado", state: "done" },
+        { label: "Runtime concluída", state: "done" },
+        { label: "Sala atualizada", state: "done" }
+      ],
+      details: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
+    });
+    terminalEl.textContent = [
+      "> cheffe-call/card-implementation",
+      `owner: ${agentName}`,
+      `office: ${getAgentOffice(active)}`,
+      formatRuntimeDetailsForTerminal(payload, "status: concluído")
+    ].join("\n");
+  }
+
+  async function runApprovedOpinionQueue() {
+    const readyItems = getReadyOpinionFlowItems();
+    if (!readyItems.length) {
+      setActionFeedback({
+        badge: "Fila",
+        title: "Nada aprovado ainda",
+        message: "Aprove cards primeiro. Depois este botão implementa todos de uma vez.",
+        tone: "bad",
+        closable: true,
+        steps: [{ label: "Nenhum card pronto", state: "bad" }]
+      });
+      setStatus("Aprove uma ou mais opiniões antes de implementar a fila.", "bad");
+      return;
+    }
+
+    const password = requireAdminPassword("implementar a fila aprovada");
+    if (!password) return;
+    if (runApprovedOpinions) runApprovedOpinions.disabled = true;
+    if (refreshOpinionFlow) refreshOpinionFlow.disabled = true;
+
+    const batchNames = readyItems.map((flow) => getAgentDisplayName(flow.item));
+    try {
+      setActionFeedback({
+        badge: "Fila",
+        title: `Implementando ${readyItems.length} aprovadas`,
+        message: "A Cheffe Call vai registrar cada card aprovado e rodar a runtime uma vez no final.",
+        tone: "pending",
+        closable: false,
+        steps: [
+          { label: `${readyItems.length} cards aprovados encontrados`, state: "done" },
+          { label: "Registrando execuções", state: "running" },
+          { label: "Runtime única da fila", state: "pending" },
+          { label: "Conferência final", state: "pending" }
+        ],
+        details: batchNames.map((name, index) => `${index + 1}. ${name}`).join("\n")
+      });
+
+      let completed = 0;
+      for (const flow of readyItems) {
+        activeSpeakerIndex = flow.index;
+        showActiveSpeaker();
+        const name = getAgentDisplayName(flow.item);
+        terminalEl.textContent = [
+          "> cheffe-call/batch-register",
+          `item: ${completed + 1}/${readyItems.length}`,
+          `owner: ${name}`,
+          `status: registrando execução aprovada`
+        ].join("\n");
+        await postRoomAction("implement", flow.item, {
+          title: `Implementar fila: ${flow.item?.assignment?.action || flow.item?.opinion || name}`,
+          batch: true
+        });
+        completed += 1;
+        setActionFeedback({
+          badge: "Fila",
+          title: `Registradas ${completed}/${readyItems.length}`,
+          message: "Os cards aprovados estão virando execução real.",
+          tone: "pending",
+          closable: false,
+          steps: [
+            { label: `${completed}/${readyItems.length} execuções registradas`, state: "running" },
+            { label: "Runtime única da fila", state: "pending" },
+            { label: "Conferência final", state: "pending" }
+          ],
+          details: batchNames.map((name, index) => `${index + 1}. ${index < completed ? "ok" : "aguardando"} - ${name}`).join("\n")
+        });
+      }
+
+      setActionFeedback({
+        badge: "Runtime",
+        title: "Rodando fila aprovada",
+        message: "Todos os cards aprovados foram registrados. A runtime está executando agora.",
+        tone: "pending",
+        closable: false,
+        steps: [
+          { label: `${completed} execuções registradas`, state: "done" },
+          { label: "Runtime dos agentes", state: "running" },
+          { label: "Atualização da sala", state: "pending" }
+        ]
+      });
+      const payload = await runCheffeRuntime(
+        password,
+        `Implementar fila aprovada da Cheffe Call com ${completed} cards.`
+      );
+      await loadCall();
+      setActionFeedback({
+        badge: "Concluído",
+        title: "Fila implementada",
+        message: "A runtime terminou e a Cheffe Call foi atualizada.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: `${completed} cards enviados`, state: "done" },
+          { label: "Runtime concluída", state: "done" },
+          { label: "Sala atualizada", state: "done" }
+        ],
+        details: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
+      });
+      terminalEl.textContent = [
+        "> cheffe-call/batch-complete",
+        `cards: ${completed}`,
+        formatRuntimeDetailsForTerminal(payload, "status: concluído")
+      ].join("\n");
+      setStatus(`Fila implementada: ${completed} aprovações enviadas e runtime concluída.`, "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Fila interrompida",
+        message: error.message || "A implementação da fila falhou.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Execução interrompida", state: "bad" },
+          { label: "Sala preservada", state: "pending" }
+        ]
+      });
+      setStatus(error.message || "Falha ao implementar fila.", "bad");
+    } finally {
+      if (runApprovedOpinions) runApprovedOpinions.disabled = getReadyOpinionFlowItems().length === 0;
+      if (refreshOpinionFlow) refreshOpinionFlow.disabled = false;
+    }
+  }
+
   formEl?.addEventListener("submit", (event) => {
     event.preventDefault();
     const form = new FormData(formEl);
@@ -2579,16 +2812,54 @@
     event.preventDefault();
     const quickInstruction = String(quickInstructionInput?.value || "").trim();
     if (!quickInstruction) {
-      setStatus("Digite uma ordem rápida antes de enviar.", "bad");
+      setStatus("Digite uma ordem da reunião antes de abrir rodada.", "bad");
       return;
     }
     const password = requireAdminPassword("enviar ordem rápida real");
     if (!password) return;
     if (instructionInput) instructionInput.value = quickInstruction;
-    setStatus("Enviando ordem rápida real para os agentes...");
+    setStatus("Abrindo rodada real para os agentes...");
+    setActionFeedback({
+      badge: "Rodada",
+      title: "Abrindo reunião",
+      message: "A ordem foi enviada para a Cheffe Call montar opiniões com dono, evidência e ação.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha validada", state: "done" },
+        { label: "Criando sessão", state: "running" },
+        { label: "Montando fila de opiniões", state: "pending" }
+      ],
+      details: quickInstruction
+    });
     postCall("/api/cheffe-call/start", { password, instruction: quickInstruction })
-      .then((payload) => activateMeetingResponse(quickInstruction, payload))
-      .catch((error) => setStatus(error.message, "bad"));
+      .then((payload) => {
+        activateMeetingResponse(quickInstruction, payload);
+        setActionFeedback({
+          badge: "Rodada",
+          title: "Fila pronta",
+          message: "A sala foi atualizada. Aprove cards individuais ou implemente a fila inteira.",
+          tone: "ok",
+          closable: true,
+          steps: [
+            { label: "Sessão criada", state: "done" },
+            { label: "Opiniões renderizadas", state: "done" },
+            { label: "Aguardando aprovação", state: "running" }
+          ],
+          autoCloseMs: 2600
+        });
+      })
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Rodada não abriu",
+          message: error.message || "Falha ao abrir a reunião.",
+          tone: "bad",
+          closable: true,
+          steps: [{ label: "Envio interrompido", state: "bad" }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   quickInstructionInput?.addEventListener("focus", () => {
@@ -2799,10 +3070,11 @@
   });
 
   quickNextSpeaker?.addEventListener("click", () => {
-    if (quickInstructionInput) quickInstructionInput.value = "";
-    if (instructionInput) instructionInput.value = "";
-    if (commandInput) commandInput.value = "";
-    setStatus("Pronto para receber outra ordem direta.", "ok");
+    if (currentOpinions.length) {
+      moveToNextSpeaker("próxima fala");
+      return;
+    }
+    setStatus("Nenhum agente na fila. Abra uma rodada primeiro.", "bad");
     quickInstructionInput?.focus();
   });
 
@@ -2817,13 +3089,45 @@
         .catch((error) => setStatus(error.message, "bad"));
       return;
     }
-    setStatus("Atualizando resumo da última ordem...");
+    setStatus("Recarregando sala e fila de opiniões...");
+    setActionFeedback({
+      badge: "Recarregar",
+      title: "Atualizando sala",
+      message: "Buscando estado atual da reunião, fila e runtime.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Solicitação enviada", state: "running" },
+        { label: "Renderizando fila", state: "pending" }
+      ]
+    });
     loadCall()
       .then(() => {
-        openCheffeInfoPopup("Resumo da última ordem", buildSessionSummaryText());
-        setStatus("Resumo da Cheffe Call atualizado.", "ok");
+        setActionFeedback({
+          badge: "Recarregar",
+          title: "Sala atualizada",
+          message: "Fila e terminal foram sincronizados.",
+          tone: "ok",
+          closable: true,
+          steps: [
+            { label: "Estado recebido", state: "done" },
+            { label: "Fila atualizada", state: "done" }
+          ],
+          autoCloseMs: 2000
+        });
+        setStatus("Cheffe Call recarregada.", "ok");
       })
-      .catch((error) => setStatus(error.message, "bad"));
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Não recarregou",
+          message: error.message || "Falha ao atualizar sala.",
+          tone: "bad",
+          closable: true,
+          steps: [{ label: "Recarregamento interrompido", state: "bad" }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   refreshOpinionFlow?.addEventListener("click", () => {
@@ -2834,14 +3138,7 @@
   });
 
   runApprovedOpinions?.addEventListener("click", () => {
-    const ready = latestOpinionFlow.find((item) => ["ready", "queued"].includes(item.status.state));
-    if (!ready) {
-      setStatus("Aprove uma opinião antes de rodar a execução.", "bad");
-      return;
-    }
-    activeSpeakerIndex = ready.index;
-    showActiveSpeaker();
-    handleIdeaAction("implement").catch((error) => setStatus(error.message, "bad"));
+    runApprovedOpinionQueue().catch((error) => setStatus(error.message, "bad"));
   });
 
   adminRunAgentsNow?.addEventListener("click", () => {

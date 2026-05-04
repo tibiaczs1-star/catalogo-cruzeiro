@@ -582,25 +582,47 @@ function writeAgentMemoryStore(store) {
 function scoreAgentAutonomy(agent, assignment, context, previousMemory) {
   const reviewIssues = Array.isArray(context.reviewReport?.issues) ? context.reviewReport.issues.length : 0;
   const newsItems = context.newsSummary.totalItems || 0;
+  const relevantOrders = getRelevantOrders(agent, context.officeOrders || []);
+  const reviewImpact = getReviewImpact(agent, context.officeOrders || []);
   const rolePressure = {
-    ceo: 18,
-    review: reviewIssues ? 26 : 12,
-    sources: context.newsSummary.topSources.length < 3 ? 24 : 14,
-    dev: 20,
-    editor: 18,
-    design: 16,
-    copy: 15,
-    social: 13,
-    pixel: 12,
-    games: 12,
-    kids: 10,
-    sales: 10
-  }[agent.role] || 10;
+    ceo: 24,
+    review: reviewIssues ? 30 : 18,
+    sources: context.newsSummary.topSources.length < 3 ? 28 : 20,
+    dev: 27,
+    editor: 24,
+    design: 23,
+    copy: 21,
+    social: 19,
+    pixel: 18,
+    games: 18,
+    kids: 17,
+    sales: 17
+  }[agent.role] || 16;
 
   const memoryCycles = Number(previousMemory.cycles || 0);
-  const urgency = clampNumber(35 + rolePressure + Math.min(20, reviewIssues * 3) + Math.min(12, newsItems / 10), 1, 100);
-  const confidence = clampNumber(48 + Math.min(25, memoryCycles) + (assignment.headline ? 12 : 0), 1, 100);
-  const autonomy = clampNumber(Math.round((urgency * 0.55 + confidence * 0.45)), 1, 100);
+  const actionSpecificity = [assignment.action, assignment.idea, assignment.monitor]
+    .filter((value) => String(value || "").trim().length > 28).length;
+  const orderBoost = Math.min(12, relevantOrders.length * 2 + reviewImpact.approved * 2);
+  const urgency = clampNumber(
+    42 + rolePressure + Math.min(16, reviewIssues * 3) + Math.min(10, newsItems / 80) + orderBoost,
+    1,
+    100
+  );
+  const confidence = clampNumber(
+    58 +
+      Math.min(24, memoryCycles * 2) +
+      (assignment.headline ? 12 : 0) +
+      actionSpecificity * 4 +
+      Math.min(10, reviewImpact.approved * 2) -
+      Math.min(8, reviewImpact.reopened * 2),
+    1,
+    100
+  );
+  const autonomy = clampNumber(
+    Math.round(urgency * 0.42 + confidence * 0.58 + (confidence >= 76 ? 5 : 0) + (actionSpecificity >= 2 ? 4 : 0)),
+    1,
+    100
+  );
 
   return { urgency: Math.round(urgency), confidence: Math.round(confidence), autonomy };
 }
@@ -1321,7 +1343,10 @@ function buildDailyAgentContext(queue) {
       role: item.role,
       autonomy: item.autonomy?.autonomy || 0,
       urgency: item.autonomy?.urgency || 0,
-      intent: item.autonomy?.intent || ""
+      confidence: item.autonomy?.confidence || 0,
+      intent: item.autonomy?.intent || "",
+      action: item.assignment?.action || "",
+      deliverable: item.assignment?.deliverable || ""
     }))
   };
 }

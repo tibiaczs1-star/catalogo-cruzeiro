@@ -4379,6 +4379,11 @@ body.cheffe-call-page {
   font-size: 1rem;
 }
 
+.call-command-field small {
+  color: rgba(223, 249, 255, 0.62);
+  font: 800 0.76rem/1.35 Inter, "Segoe UI", Arial, sans-serif;
+}
+
 .call-command-actions {
   display: flex;
   flex-wrap: wrap;
@@ -4400,6 +4405,13 @@ body.cheffe-call-page {
 .call-command-actions button[type="submit"] {
   background: var(--call-gold);
   color: #201018;
+}
+
+.call-command-actions button:disabled,
+.opinion-flow-toolbar button:disabled,
+.speech-actions button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
 }
 
 body.call-lower-open .call-lower-decks {
@@ -7349,7 +7361,7 @@ body.cheffe-access-locked {
   right: 18px;
   bottom: 18px;
   z-index: 220;
-  width: min(420px, calc(100vw - 28px));
+  width: min(560px, calc(100vw - 28px));
   pointer-events: none;
 }
 
@@ -7359,7 +7371,7 @@ body.cheffe-access-locked {
 
 .cheffe-action-feedback-card {
   border: 1px solid rgba(244, 201, 107, 0.34);
-  border-radius: 14px;
+  border-radius: 12px;
   padding: 14px;
   color: var(--call-cream);
   background:
@@ -7468,7 +7480,7 @@ body.cheffe-access-locked {
 }
 
 .cheffe-action-feedback-card pre {
-  max-height: 110px;
+  max-height: 190px;
   margin: 10px 0 0;
   overflow: auto;
   border: 1px solid rgba(104, 232, 255, 0.13);
@@ -7478,6 +7490,16 @@ body.cheffe-access-locked {
   background: rgba(2, 6, 14, 0.74);
   font: 800 0.72rem/1.45 "JetBrains Mono", "Fira Code", monospace;
   white-space: pre-wrap;
+}
+
+.cheffe-action-feedback-card pre::before {
+  content: "terminal";
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(127, 231, 255, 0.72);
+  font: 900 0.62rem/1 Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 @keyframes feedbackPulse {

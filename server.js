@@ -9139,7 +9139,10 @@ function getCheffeCallOpinions(payload, instruction) {
         role: item.role,
         intent: item.intent,
         autonomy: item.autonomy,
-        urgency: item.urgency
+        urgency: item.urgency,
+        confidence: item.confidence,
+        action: item.action,
+        deliverable: item.deliverable
       }))
     : fallbackQueue.map((item) => ({
         name: item.name,
@@ -9147,7 +9150,10 @@ function getCheffeCallOpinions(payload, instruction) {
         role: item.role,
         intent: item.autonomy?.intent || item.assignment?.idea || "",
         autonomy: item.autonomy?.autonomy || 0,
-        urgency: item.autonomy?.urgency || 0
+        urgency: item.autonomy?.urgency || 0,
+        confidence: item.autonomy?.confidence || 0,
+        action: item.assignment?.action || "",
+        deliverable: item.assignment?.deliverable || ""
       }));
   const source = sourceBase.length
     ? sourceBase
@@ -9235,6 +9241,7 @@ function getCheffeCallOpinions(payload, instruction) {
     return haystack.slice(0, 2);
   };
 
+  const seenOpinionLenses = new Set();
   const useful = source
     .map((item) => {
       const signature = `${item.name || ""} ${item.office || ""} ${item.role || ""} ${item.intent || ""}`;
@@ -9250,6 +9257,9 @@ function getCheffeCallOpinions(payload, instruction) {
       const hasOwnIdea = Boolean(focus && [...subjectTokens].some((token) => ideaTriggers.has(token)));
       const highUrgency = Number(item.urgency || 0) >= 76;
       if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency) return null;
+      const lensKey = focus?.lens || item.role || item.office || item.name;
+      if (seenOpinionLenses.has(lensKey) && !hasMemory && !matchingTokens.length) return null;
+      seenOpinionLenses.add(lensKey);
       const evidence = hasMemory
         ? `memória: ${memories.join(" | ")}`
         : hasOwnIdea
@@ -9257,27 +9267,33 @@ function getCheffeCallOpinions(payload, instruction) {
           : matchingTokens.length
           ? `conecta com: ${matchingTokens.join(", ")}`
           : `urgência operacional ${Number(item.urgency || 0)}%`;
-      const nextAction = focus?.lens === "fluxo técnico e API"
+      const roleAction = cleanShortText(item.action || "", 220);
+      const nextAction = roleAction || (focus?.lens === "fluxo técnico e API"
         ? "testar o clique contra endpoint real e mostrar sucesso/erro na interface"
         : focus?.lens === "risco e validação"
           ? "bloquear fala sem evidência e registrar o motivo no log"
           : focus?.lens === "encaixe visual"
             ? "ajustar só o ponto visual que afeta a leitura da cena"
             : focus?.lens === "clareza da fala"
-              ? "reescrever a resposta como diagnóstico curto, não discurso"
-              : "transformar a ordem em decisão rastreável com dono";
+            ? "reescrever a resposta como diagnóstico curto, não discurso"
+              : "transformar a ordem em decisão rastreável com dono");
+      const score = Number(item.autonomy || 0);
+      const confidence = Number(item.confidence || 0);
+      const autonomyNote = score >= 78
+        ? `autonomia alta (${score}%)`
+        : `autonomia em crescimento (${score}%, confiança ${confidence || "n/a"}%)`;
       return {
         agent: item.name,
         office: item.office,
         role: item.role,
-        score: item.autonomy,
+        score,
         urgency: item.urgency,
         evidence,
         opinion: [
-          `Levanto a mão porque tenho ${evidence}.`,
-          `Meu foco em "${subject}" é ${focus?.lens || "memória operacional"}, não opinião genérica.`,
-          `Próxima ação útil: ${nextAction}.`,
-          hasOwnIdea ? `Minha ideia só entra se você quiser testar essa hipótese na próxima rodada.` : `Se isso não tocar a ordem atual, eu fico em silêncio.`
+          `Utilidade: ${focus?.lens || item.deliverable || "memória operacional"}.`,
+          `Tenho ${evidence} e ${autonomyNote}; não vou repetir opinião sem ação.`,
+          `Implementação proposta: ${nextAction}.`,
+          hasOwnIdea ? `Hipótese testável: validar isso na fila e devolver evidência no terminal.` : `Critério: se não mudar tela, dado ou rotina, eu fico em silêncio.`
         ].join(" "),
         approvalRequired: true
       };
