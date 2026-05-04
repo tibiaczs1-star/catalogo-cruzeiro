@@ -2118,14 +2118,16 @@ const scheduleRadarGuideTarget = () => {
   });
 };
 
-const updateRadarGuide = (filter = "todos", spotlightArticles = []) => {
+const updateRadarGuide = (filter = "todos", spotlightArticles = [], options = {}) => {
   if (!radarGuide) {
     return;
   }
 
   const theme = radarGuideThemes[filter] || radarGuideThemes.todos;
   const leadTitle = spotlightArticles[0]?.title
-    ? ` Em destaque agora: ${spotlightArticles[0].title}.`
+    ? options.continuity
+      ? ` Em acompanhamento agora: ${spotlightArticles[0].title}.`
+      : ` Em destaque agora: ${spotlightArticles[0].title}.`
     : "";
 
   radarGuide.dataset.theme = filter;
@@ -2206,6 +2208,176 @@ const getRadarSpotlightArticles = (filter = "todos") => {
   return spotlight.slice(0, 2);
 };
 
+const sortRadarContinuityArticles = (articles = []) =>
+  [...articles].sort((left, right) => {
+    const regionalDiff =
+      getEditorialRegionalPriorityScore(right) - getEditorialRegionalPriorityScore(left);
+    if (regionalDiff !== 0) {
+      return regionalDiff;
+    }
+
+    return compareEditorialFlowArticles(left, right, {
+      scoreFn: getRadarRelevanceScore,
+      imageBias: true
+    });
+  });
+
+const getRadarContinuityArticles = (filter = "todos", excludedArticles = []) => {
+  const allArticles = sortRadarContinuityArticles([...(window.NEWS_DATA || [])]);
+  const normalizedFilter = normalizeText(filter);
+  const reservedKeys = buildReservedArticleKeys(["radar"]);
+  const excludedKeys = new Set(
+    (Array.isArray(excludedArticles) ? excludedArticles : [])
+      .map((article) => getArticleUsageKey(article))
+      .filter(Boolean)
+  );
+  const selected = [];
+  const seenKeys = new Set(excludedKeys);
+  const localArticles = sortRadarContinuityArticles(
+    allArticles.filter((article) => isRadarLocalSummaryArticle(article))
+  );
+  const filteredLocalArticles =
+    normalizedFilter === "todos"
+      ? localArticles
+      : sortRadarContinuityArticles(
+          localArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter))
+        );
+  const filteredImpactArticles =
+    normalizedFilter === "todos"
+      ? []
+      : sortRadarContinuityArticles(
+          allArticles.filter(
+            (article) =>
+              articleMatchesCategoryFilter(article, normalizedFilter) &&
+              hasClearLocalReaderImpact(article)
+          )
+        );
+  const localImpactArticles = sortRadarContinuityArticles(
+    allArticles.filter((article) => hasClearLocalReaderImpact(article))
+  );
+
+  const pushArticle = (article, { allowReserved = false } = {}) => {
+    if (!article) {
+      return false;
+    }
+
+    const normalizedArticle = normalizeRuntimeArticle(article);
+    const articleKey = getArticleUsageKey(normalizedArticle) || getRadarArticleKey(normalizedArticle);
+
+    if (!articleKey || seenKeys.has(articleKey)) {
+      return false;
+    }
+
+    if (!normalizedArticle.title || (!normalizedArticle.slug && !normalizedArticle.sourceUrl)) {
+      return false;
+    }
+
+    if (isNationalPoliticsArticle(normalizedArticle) && !hasClearLocalReaderImpact(normalizedArticle)) {
+      return false;
+    }
+
+    if (!allowReserved && reservedKeys.has(articleKey)) {
+      return false;
+    }
+
+    seenKeys.add(articleKey);
+    selected.push(normalizedArticle);
+    return selected.length >= 3;
+  };
+
+  const continuityRounds = [
+    { pool: filteredLocalArticles, allowReserved: false },
+    { pool: filteredLocalArticles, allowReserved: true },
+    { pool: localArticles, allowReserved: false },
+    { pool: localArticles, allowReserved: true },
+    { pool: filteredImpactArticles, allowReserved: false },
+    { pool: filteredImpactArticles, allowReserved: true },
+    { pool: localImpactArticles, allowReserved: false },
+    { pool: localImpactArticles, allowReserved: true }
+  ];
+
+  continuityRounds.some(({ pool, allowReserved }) =>
+    pool.some((article) => pushArticle(article, { allowReserved }))
+  );
+
+  return selected.slice(0, 3);
+};
+
+const buildRadarContinuityState = (filter = "todos", articles = []) => {
+  const normalizedFilter = normalizeText(filter) || "todos";
+  const theme = radarGuideThemes[normalizedFilter] || radarGuideThemes.todos;
+  const hasArticles = Array.isArray(articles) && articles.length > 0;
+  const card = document.createElement("article");
+  const source = document.createElement("span");
+  const title = document.createElement("h3");
+  const summary = document.createElement("p");
+  const list = document.createElement("div");
+  const footer = document.createElement("footer");
+  const footerLabel = document.createElement("span");
+  const footerLink = document.createElement("a");
+
+  card.className = "news-card radar-continuity-state reveal active";
+  card.dataset.category = normalizedFilter;
+
+  source.className = "news-source";
+  source.textContent = `Resumo CZS • ${theme.label}`;
+
+  title.textContent =
+    normalizedFilter === "todos"
+      ? "Resumo em atualização, sem deixar a leitura parar."
+      : `${theme.label}: sem destaque fechado agora.`;
+
+  summary.textContent = hasArticles
+    ? "Ainda não há uma manchete segura para este recorte com a régua completa de fonte, data e foto. Enquanto isso, o painel mantém a leitura viva com matérias reais que ajudam a seguir o dia."
+    : "Ainda não há matéria suficiente para destacar neste recorte. O painel fica em modo de acompanhamento e aponta para o arquivo vivo até novas fontes entrarem.";
+
+  list.className = "radar-continuity-list";
+
+  articles.forEach((article, index) => {
+    const normalizedArticle = normalizeRuntimeArticle(article);
+    const href = buildArticleHref(normalizedArticle);
+    const link = document.createElement("a");
+    const meta = document.createElement("small");
+    const headline = document.createElement("strong");
+    const excerpt = document.createElement("span");
+
+    link.className = "radar-continuity-link";
+    link.href = href;
+    applyArticleLinkAttrs(link, href);
+    link.setAttribute(
+      "aria-label",
+      `Abrir leitura de continuidade ${index + 1}: ${normalizedArticle.title}`
+    );
+
+    meta.textContent = formatCrossedSourceMeta(normalizedArticle);
+    headline.textContent = truncateCopy(normalizedArticle.title, 96);
+    excerpt.textContent = buildReadableCardSummary(normalizedArticle, 132);
+
+    link.append(meta, headline, excerpt);
+    list.appendChild(link);
+  });
+
+  if (!hasArticles) {
+    const emptyNote = document.createElement("span");
+    emptyNote.className = "radar-continuity-note";
+    emptyNote.textContent = "Aguardando nova entrada confiável das fontes monitoradas.";
+    list.appendChild(emptyNote);
+  }
+
+  footerLabel.textContent = hasArticles
+    ? "Fluxo preservado: sem inventar destaque."
+    : "Fluxo preservado: sem notícia falsa.";
+  const archiveHref = "./arquivo.html";
+  footerLink.href = archiveHref;
+  footerLink.textContent = "abrir arquivo vivo";
+  applyArticleLinkAttrs(footerLink, archiveHref);
+
+  footer.append(footerLabel, footerLink);
+  card.append(source, title, summary, list, footer);
+
+  return card;
+};
+
 // FUNÇÃO PARA RENDERIZAR O RADAR (HOME)
 const renderRadar = (filter = "todos") => {
   const radarGrid = document.querySelector("#radar .news-grid");
@@ -2214,9 +2386,14 @@ const renderRadar = (filter = "todos") => {
   }
 
   const spotlightArticles = getRadarSpotlightArticles(filter);
+  const continuityArticles = spotlightArticles.length
+    ? []
+    : getRadarContinuityArticles(filter, spotlightArticles);
+  const displayedArticles = spotlightArticles.length ? spotlightArticles : continuityArticles;
 
   radarGrid.innerHTML = "";
   radarGrid.dataset.activeFilter = filter;
+  radarGrid.dataset.state = spotlightArticles.length ? "spotlight" : "continuity";
 
   spotlightArticles.forEach((article, index) => {
     const card = buildFeedCard(article);
@@ -2238,19 +2415,12 @@ const renderRadar = (filter = "todos") => {
   });
 
   if (spotlightArticles.length === 0) {
-    const emptyState = document.createElement("article");
-    emptyState.className = "news-card radar-empty-state reveal active";
-    emptyState.innerHTML = `
-      <span class="news-source">Resumo CZS</span>
-      <h3>Sem destaque encontrado para este tema agora.</h3>
-      <p>Escolha outro filtro acima para ver mais notícias.</p>
-    `;
-    radarGrid.appendChild(emptyState);
+    radarGrid.appendChild(buildRadarContinuityState(filter, continuityArticles));
   }
 
   setActiveRadarFilter(filter);
-  reserveSurfaceArticles("radar", spotlightArticles);
-  updateRadarGuide(filter, spotlightArticles);
+  reserveSurfaceArticles("radar", displayedArticles);
+  updateRadarGuide(filter, displayedArticles, { continuity: spotlightArticles.length === 0 });
   registerInteractivePanels(radarGrid);
   window.setTimeout(() => registerArticleCardLinks(radarGrid), 0);
 };
