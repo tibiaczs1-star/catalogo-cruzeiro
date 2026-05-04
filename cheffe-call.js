@@ -60,6 +60,7 @@
   const photoApprovalNext = document.querySelector("#photoApprovalNext");
   const photoApprovalContinue = document.querySelector("#photoApprovalContinue");
   const photoApprovalRunRuntime = document.querySelector("#photoApprovalRunRuntime");
+  const photoApprovalRunRuntimeText = document.querySelector("#photoApprovalRunRuntimeText");
   const photoApprovalDecisionButtons = Array.from(document.querySelectorAll("[data-photo-decision]"));
   const photoFocusPresetButtons = Array.from(document.querySelectorAll("[data-photo-focus]"));
   const cheffeActionFeedback = document.querySelector("#cheffeActionFeedback");
@@ -544,12 +545,54 @@
     return payload;
   }
 
+  function getPhotoApprovalDecisionStatus(item = {}) {
+    return String(item.decision?.status || item.latestDecision?.status || item.decisionStatus || "").trim();
+  }
+
+  function isPhotoApprovalRuntimeStatus(status = "") {
+    return ["queued-for-runtime", "queued-for-agents"].includes(String(status || "").trim());
+  }
+
+  function getPhotoApprovalStats(queue = photoApprovalQueue) {
+    const list = Array.isArray(queue) ? queue : [];
+    const decided = list.filter((entry) => entry.decision).length;
+    const pending = list.filter((entry) => !entry.decision).length;
+    const runtimeWorkCount = list.filter((entry) => isPhotoApprovalRuntimeStatus(getPhotoApprovalDecisionStatus(entry))).length;
+    return {
+      total: list.length,
+      decided,
+      pending,
+      runtimeWorkCount
+    };
+  }
+
+  function hasPhotoApprovalRuntimeWork(payload = {}) {
+    const runtimeWorkCount = Number(payload.runtimeWorkCount || 0);
+    if (runtimeWorkCount > 0) return true;
+    return (Array.isArray(payload.queue) ? payload.queue : []).some((item) =>
+      isPhotoApprovalRuntimeStatus(getPhotoApprovalDecisionStatus(item))
+    );
+  }
+
   function normalizePhotoApprovalPayload(payload = {}) {
-    const rawQueue = Array.isArray(payload.queue)
+    const selectedQueue = Array.isArray(payload.queue)
       ? payload.queue
       : Array.isArray(payload.queue?.queue)
         ? payload.queue.queue
         : [];
+    const allQueue = Array.isArray(payload.allQueue) ? payload.allQueue : [];
+    const rawQueueMap = new Map();
+    selectedQueue.forEach((item) => {
+      const slug = String(item?.slug || "").trim();
+      if (slug) rawQueueMap.set(slug, item);
+    });
+    allQueue.forEach((item) => {
+      const slug = String(item?.slug || "").trim();
+      if (!slug || rawQueueMap.has(slug)) return;
+      const status = String(item?.latestDecision?.status || item?.decisionStatus || "").trim();
+      if (isPhotoApprovalRuntimeStatus(status)) rawQueueMap.set(slug, item);
+    });
+    const rawQueue = Array.from(rawQueueMap.values());
     const queue = rawQueue.map((item) => {
       const latestDecision = item.latestDecision || item.decision || null;
       const isPending = item.pending !== false && !latestDecision;
@@ -562,6 +605,7 @@
             ? {
                 decisionLabel: latestDecision.actionLabel || latestDecision.decisionLabel || latestDecision.action || "decidido",
                 action: latestDecision.action || latestDecision.decision || "",
+                status: latestDecision.status || item.decisionStatus || "",
                 focus: latestDecision.focus || "",
                 imageFit: latestDecision.imageFit || "",
                 manualAdjustment: latestDecision.manualAdjustment || "",
@@ -571,10 +615,13 @@
             : null
       };
     });
+    const stats = getPhotoApprovalStats(queue);
     return {
       ...payload,
       queue,
-      pendingCount: queue.filter((item) => !item.decision).length
+      pendingCount: stats.pending,
+      decidedCount: stats.decided,
+      runtimeWorkCount: stats.runtimeWorkCount
     };
   }
 
@@ -598,6 +645,27 @@
     if (photoApprovalPrev) photoApprovalPrev.disabled = photoApprovalBusy || photoApprovalIndex <= 0;
     if (photoApprovalNext) photoApprovalNext.disabled = photoApprovalBusy || photoApprovalIndex >= photoApprovalQueue.length - 1;
     if (photoApprovalContinue) photoApprovalContinue.disabled = photoApprovalBusy;
+  }
+
+  function updatePhotoApprovalRuntimeControls() {
+    const stats = getPhotoApprovalStats();
+    const shouldRun = Boolean(photoApprovalRunRuntime?.checked);
+    if (photoApprovalRunRuntimeText) {
+      photoApprovalRunRuntimeText.textContent = shouldRun
+        ? "Rodar agentes e aplicar ao continuar"
+        : "Abrir sala sem aplicar agora";
+    }
+    if (photoApprovalContinue) {
+      if (shouldRun && stats.runtimeWorkCount > 0) {
+        photoApprovalContinue.textContent = `Rodar ${stats.runtimeWorkCount} e abrir sala`;
+      } else if (shouldRun) {
+        photoApprovalContinue.textContent = "Rodar agentes e abrir sala";
+      } else if (stats.runtimeWorkCount > 0) {
+        photoApprovalContinue.textContent = "Abrir sem aplicar";
+      } else {
+        photoApprovalContinue.textContent = "Continuar para sala";
+      }
+    }
   }
 
   function getPhotoApprovalItem() {
@@ -678,14 +746,20 @@
 
   function renderPhotoApprovalItem() {
     const item = getPhotoApprovalItem();
-    const total = photoApprovalQueue.length;
-    const decided = photoApprovalQueue.filter((entry) => entry.decision).length;
-    const pending = Math.max(0, total - decided);
+    const { total, decided, pending, runtimeWorkCount } = getPhotoApprovalStats();
 
-    if (photoApprovalCounter) photoApprovalCounter.textContent = `${pending} pendente${pending === 1 ? "" : "s"}`;
+    if (photoApprovalCounter) {
+      photoApprovalCounter.textContent = runtimeWorkCount > 0 && pending <= 0
+        ? `${runtimeWorkCount} para rodar`
+        : `${pending} pendente${pending === 1 ? "" : "s"}`;
+    }
     if (photoApprovalSummary) {
       photoApprovalSummary.textContent = total
-        ? `${total} ${total === 1 ? "item" : "itens"} da auditoria de foto/foco, ${decided} já decidido${decided === 1 ? "" : "s"}.`
+        ? [
+            `${total} ${total === 1 ? "item" : "itens"} da auditoria de foto/foco`,
+            `${decided} já decidido${decided === 1 ? "" : "s"}`,
+            runtimeWorkCount > 0 ? `${runtimeWorkCount} aguardando runtime` : ""
+          ].filter(Boolean).join(", ") + "."
         : "Sem bloqueio visual pendente.";
     }
     if (photoApprovalProgress) photoApprovalProgress.textContent = total ? `${photoApprovalIndex + 1}/${total}` : "0/0";
@@ -764,16 +838,24 @@
     if (photoApprovalNote) photoApprovalNote.value = item.decision?.note || "";
     setPhotoFocusValue(item.decision?.focus || item.effectiveFocus || item.suggestedFocus || "center 42%");
     renderPhotoApprovalReasons(item);
+    updatePhotoApprovalRuntimeControls();
     setPhotoApprovalBusy(false);
   }
 
   function openPhotoApprovalQueue(payload) {
     photoApprovalQueue = Array.isArray(payload?.queue) ? payload.queue : [];
     photoApprovalIndex = findNextPendingPhotoIndex(0);
+    const stats = getPhotoApprovalStats();
+    if (photoApprovalRunRuntime) photoApprovalRunRuntime.checked = true;
     cheffePhotoApproval.hidden = false;
     cheffeAccessCard?.classList.add("is-reviewing-photos");
     cheffeAccessModal?.classList.add("has-photo-approval");
-    setPasswordStatus("Senha validada. Revise a fila de foto/foco antes de abrir a sala.", "pending");
+    setPasswordStatus(
+      stats.pending > 0
+        ? "Senha validada. Revise a fila de foto/foco antes de abrir a sala."
+        : `${stats.runtimeWorkCount} decisao${stats.runtimeWorkCount === 1 ? "" : "es"} salva${stats.runtimeWorkCount === 1 ? "" : "s"}. Rode agentes para aplicar antes de abrir a sala.`,
+      "pending"
+    );
     setStatus("Fila de foto/foco carregada no acesso da Cheffe Call.", "ok");
     renderPhotoApprovalItem();
   }
@@ -921,15 +1003,17 @@
       }
       const normalizedPayload = await fetchPhotoApprovals(password);
       photoApprovalQueue = Array.isArray(normalizedPayload.queue) ? normalizedPayload.queue : photoApprovalQueue;
-      setPasswordStatus("Decisao registrada para a proxima runtime.", "ok");
+      const stats = getPhotoApprovalStats();
+      if (photoApprovalRunRuntime && stats.runtimeWorkCount > 0) photoApprovalRunRuntime.checked = true;
+      setPasswordStatus("Decisao registrada para a runtime.", "ok");
       setActionFeedback({
         badge: "Fila visual",
         title: "Decisão salva",
-        message: `${decisionLabel} registrado. A próxima runtime já sabe o que fazer.`,
+        message: `${decisionLabel} registrado. A runtime vai aplicar antes de abrir a sala.`,
         tone: "ok",
         steps: [
           { label: "Decisão gravada", state: "done" },
-          { label: "Ordem enviada para agentes/escritório", state: "done" },
+          { label: "Ordem pronta para runtime", state: "done" },
           { label: "Fila atualizada", state: "done" }
         ],
         details: [
@@ -941,7 +1025,7 @@
         autoCloseMs: 2600
       });
       if (Number(normalizedPayload.pendingCount || 0) <= 0) {
-        await enterCheffeRoom("Fila de foto/foco registrada. Sala liberada.");
+        await enterCheffeRoom("Fila de foto/foco registrada. Rodando agentes antes de abrir a sala.");
         return;
       }
       photoApprovalIndex = findNextPendingPhotoIndex(photoApprovalIndex + 1);
@@ -2538,6 +2622,10 @@
         openPhotoApprovalQueue(approvalPayload);
         return;
       }
+      if (hasPhotoApprovalRuntimeWork(approvalPayload)) {
+        openPhotoApprovalQueue(approvalPayload);
+        return;
+      }
       await enterCheffeRoom("Senha validada. Sem foto/foco pendente.");
     } catch (error) {
       cheffeAdminPassword = "";
@@ -2594,8 +2682,16 @@
 
   photoApprovalContinue?.addEventListener("click", () => {
     if (photoApprovalBusy) return;
-    enterCheffeRoom("Acesso liberado. Decisoes pendentes ficaram na fila.");
+    const stats = getPhotoApprovalStats();
+    const message = photoApprovalRunRuntime?.checked
+      ? "Rodando agentes para aplicar decisões antes de abrir a sala."
+      : stats.runtimeWorkCount > 0
+        ? "Acesso liberado sem aplicar agora. Decisoes ficaram na fila."
+        : "Acesso liberado. Decisoes pendentes ficaram na fila.";
+    enterCheffeRoom(message);
   });
+
+  photoApprovalRunRuntime?.addEventListener("change", updatePhotoApprovalRuntimeControls);
 
   sendTerminalEl?.addEventListener("click", () => {
     const form = new FormData(formEl);

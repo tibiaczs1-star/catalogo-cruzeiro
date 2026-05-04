@@ -3,9 +3,11 @@ const path = require("node:path");
 const vm = require("node:vm");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
-const DATA_DIR = path.join(ROOT_DIR, "data");
+const DEFAULT_DATA_DIR = path.join(ROOT_DIR, "data");
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : DEFAULT_DATA_DIR;
 const AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
 const APPROVALS_FILE = path.join(DATA_DIR, "news-image-focus-approvals.json");
+const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
@@ -54,6 +56,11 @@ function normalizeFocus(value = "") {
   }
   if (/^\d{1,3}%\s+\d{1,3}%$/.test(normalized)) return normalized;
   return "";
+}
+
+function normalizeImageFit(value = "") {
+  const fit = safeText(value, 40).toLowerCase();
+  return ["cover", "contain", "fill"].includes(fit) ? fit : "";
 }
 
 function isFallbackImage(url = "") {
@@ -138,6 +145,93 @@ function getLatestDecisionMap(decisions = []) {
     }
   });
   return map;
+}
+
+function parseTitleFromOrderMessage(message = "") {
+  const match = String(message || "").match(/para\s+"([^"]+)"/i);
+  return safeText(match?.[1] || "", 260);
+}
+
+function buildDecisionFromOfficeOrder(order = {}) {
+  const imageApproval = order.imageApproval && typeof order.imageApproval === "object" ? order.imageApproval : null;
+  if (!imageApproval) return null;
+
+  const slug = safeText(imageApproval.slug, 220);
+  const action = normalizeDecision(imageApproval.action);
+  if (!slug || !action) return null;
+
+  const createdAt = safeText(order.createdAt, 80) || new Date().toISOString();
+  const replacementImageUrl = normalizeUrl(imageApproval.replacementImageUrl || "");
+  return {
+    id: safeText(imageApproval.decisionId, 160) || buildDecisionId(slug, action, createdAt),
+    slug,
+    title: parseTitleFromOrderMessage(order.message) || slug,
+    action,
+    actionLabel: getDecisionLabel(action),
+    status: getDecisionStatus(action, replacementImageUrl),
+    focus: normalizeFocus(imageApproval.focus || "") || "center 42%",
+    imageFit: normalizeImageFit(imageApproval.imageFit || "") || "cover",
+    manualAdjustment: safeText(imageApproval.manualAdjustment || "", 220),
+    replacementImageUrl,
+    note: safeText(order.review?.note || "", 900),
+    requestedBy: "Full Admin",
+    source: "office-orders-recovery",
+    currentImageUrl: "",
+    currentFocus: "",
+    suggestedFocus: normalizeFocus(imageApproval.focus || "") || "center 42%",
+    reasons: [],
+    articleUrl: safeText(imageApproval.articleUrl || "", 500),
+    createdAt,
+    updatedAt: createdAt,
+    recoveredFromOrderId: safeText(order.id || "", 160)
+  };
+}
+
+function recoverApprovalDecisionsFromOfficeOrders(store) {
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  if (!Array.isArray(orders) || !orders.length) {
+    return { store, recovered: 0 };
+  }
+
+  const existing = Array.isArray(store.decisions) ? store.decisions : [];
+  const latestExistingBySlug = getLatestDecisionMap(existing);
+  const latestRecoveredBySlug = new Map();
+
+  orders.forEach((order) => {
+    const decision = buildDecisionFromOfficeOrder(order);
+    if (!decision) return;
+    const current = latestRecoveredBySlug.get(decision.slug);
+    if (!current || String(decision.createdAt || "") >= String(current.createdAt || "")) {
+      latestRecoveredBySlug.set(decision.slug, decision);
+    }
+  });
+
+  const nextDecisions = [...existing];
+  let recovered = 0;
+  latestRecoveredBySlug.forEach((decision, slug) => {
+    const existingLatest = latestExistingBySlug.get(slug);
+    if (existingLatest && FINAL_DECISION_STATUSES.has(existingLatest.status)) return;
+    if (existingLatest && String(existingLatest.createdAt || "") >= String(decision.createdAt || "")) return;
+
+    for (let index = 0; index < nextDecisions.length; index += 1) {
+      const item = nextDecisions[index];
+      if (item?.slug !== slug || FINAL_DECISION_STATUSES.has(item.status)) continue;
+      nextDecisions[index] = {
+        ...item,
+        status: "superseded",
+        supersededBy: decision.id,
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    nextDecisions.push(decision);
+    recovered += 1;
+  });
+
+  if (!recovered) return { store, recovered: 0 };
+  const nextStore = { ...store, decisions: nextDecisions };
+  writeApprovalStore(nextStore);
+  return { store: readApprovalStore(), recovered };
 }
 
 function getSuggestedFocus(item = {}) {
@@ -248,6 +342,8 @@ function recordImageApprovalDecision(body = {}) {
     actionLabel: getDecisionLabel(finalAction),
     status: getDecisionStatus(finalAction, replacementImageUrl),
     focus,
+    imageFit: normalizeImageFit(body.imageFit || "") || "cover",
+    manualAdjustment: safeText(body.manualAdjustment || body.adjustment || "", 220),
     replacementImageUrl,
     note: safeText(body.note || body.feedback || body.reason, 900),
     requestedBy: safeText(body.requestedBy || "Full Admin", 80),
@@ -317,11 +413,13 @@ function updateArticleList(items, decision) {
       next.imageReviewStatus = "image-replaced-by-admin";
     } else if (decision.action === "swap-image") {
       next.imageReviewStatus = "swap-image-requested";
-      next.imageReviewRequest = decision.note || "Trocar imagem na próxima rodada dos agentes.";
+      next.imageReviewRequest = decision.manualAdjustment || decision.note || "Trocar imagem na próxima rodada dos agentes.";
     } else if (decision.action === "redo") {
       next.imageReviewStatus = "redo-requested";
-      next.imageReviewRequest = decision.note || "Refazer foto/foco na próxima rodada dos agentes.";
+      next.imageReviewRequest = decision.manualAdjustment || decision.note || "Refazer foto/foco na próxima rodada dos agentes.";
     }
+    if (decision.imageFit) next.imageFit = decision.imageFit;
+    if (decision.manualAdjustment) next.imageReviewManualAdjustment = decision.manualAdjustment;
     next.imageReviewDecisionId = decision.id;
     next.imageReviewUpdatedAt = new Date().toISOString();
     touched = true;
@@ -362,7 +460,8 @@ function updateStaticNewsFile(decision) {
 
 function applyPendingImageApprovalDecisions(options = {}) {
   const source = safeText(options.source || "real-agents-runtime", 80);
-  const store = readApprovalStore();
+  const recovery = recoverApprovalDecisionsFromOfficeOrders(readApprovalStore());
+  const store = recovery.store;
   const now = new Date().toISOString();
   const decisions = Array.isArray(store.decisions) ? store.decisions : [];
   let applied = 0;
@@ -411,6 +510,7 @@ function applyPendingImageApprovalDecisions(options = {}) {
     applied,
     sentToAgents,
     fileTouches,
+    recoveredFromOrders: recovery.recovered,
     pendingBefore: decisions.filter((item) => ["queued-for-runtime", "queued-for-agents"].includes(item?.status)).length,
     updatedAt: applied || sentToAgents ? now : store.updatedAt || ""
   };
