@@ -77,6 +77,12 @@
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
   const quickRefreshAgents = document.querySelector("#quickRefreshAgents");
+  const agentResponsePanel = document.querySelector("#agentResponsePanel");
+  const agentResponseBadge = document.querySelector("#agentResponseBadge");
+  const agentResponseTitle = document.querySelector("#agentResponseTitle");
+  const agentResponseText = document.querySelector("#agentResponseText");
+  const agentResponseList = document.querySelector("#agentResponseList");
+  const agentResponseNext = document.querySelector("#agentResponseNext");
   const officeOfDayEl = document.querySelector("#officeOfDay");
   const officeOfDayMetaEl = document.querySelector("#officeOfDayMeta");
   const actionOfDayEl = document.querySelector("#actionOfDay");
@@ -385,6 +391,50 @@
     statusEl.style.color = tone === "bad" ? "var(--call-red)" : tone === "ok" ? "var(--call-green)" : "";
   }
 
+  function normalizeFeedbackState(state) {
+    const value = String(state || "pending").toLowerCase();
+    if (value === "ok" || value === "success" || value === "complete" || value === "completed") return "done";
+    if (value === "error" || value === "fail" || value === "failed") return "bad";
+    return value;
+  }
+
+  function setAgentResponse(options = {}) {
+    if (!agentResponsePanel) return;
+    const items = Array.isArray(options.items) ? options.items : [];
+    agentResponsePanel.dataset.tone = options.tone || "idle";
+    if (agentResponseBadge) agentResponseBadge.textContent = options.badge || "Resposta dos agentes";
+    if (agentResponseTitle) agentResponseTitle.textContent = options.title || "Aguardando sua ordem";
+    if (agentResponseText) {
+      agentResponseText.textContent =
+        options.text || "A Cheffe Call vai registrar aqui o recebimento, a resposta dos agentes e o próximo passo.";
+    }
+    if (agentResponseNext) {
+      agentResponseNext.textContent = options.next || "Abra uma rodada ou escolha uma ação em um card.";
+    }
+    if (agentResponseList) {
+      agentResponseList.innerHTML = items.length
+        ? items
+            .map((item) => {
+              const data = typeof item === "object" ? item : { text: String(item || "") };
+              return `
+                <li data-state="${escapeHtml(normalizeFeedbackState(data.state || "pending"))}">
+                  <span>${escapeHtml(data.label || "resposta")}</span>
+                  <strong>${escapeHtml(data.agent || data.title || "Cheffe Call")}</strong>
+                  <p>${escapeHtml(data.text || "")}</p>
+                </li>
+              `;
+            })
+            .join("")
+        : `
+          <li data-state="pending">
+            <span>aguardando</span>
+            <strong>Cheffe Call</strong>
+            <p>Nenhuma resposta nova registrada ainda.</p>
+          </li>
+        `;
+    }
+  }
+
   function setPasswordStatus(message, tone) {
     if (!quickPasswordStatus) return;
     quickPasswordStatus.textContent = message;
@@ -396,7 +446,7 @@
     cheffeActionFeedbackSteps.innerHTML = "";
     steps.forEach((step) => {
       const item = document.createElement("li");
-      const state = typeof step === "object" ? step.state || "pending" : "pending";
+      const state = normalizeFeedbackState(typeof step === "object" ? step.state || "pending" : "pending");
       item.dataset.state = state;
       item.textContent = typeof step === "object" ? step.label || "" : String(step || "");
       cheffeActionFeedbackSteps.append(item);
@@ -1211,7 +1261,7 @@
       `agent: ${getAgentDisplayName(active)}`,
       `office: ${getAgentOffice(active)}`,
       `adjustment: ${getAdjustmentGuide().label}`,
-      "status: pronto no Prompt Mestre; Enviar ao terminal executa"
+      "status: pronto no Prompt Mestre; Executar no terminal envia aos agentes"
     ].join("\n");
     pulsePromptMaster();
     if (options.scroll !== false) {
@@ -1704,6 +1754,29 @@
     });
   }
 
+  function getPayloadOpinions(payload, subject) {
+    const session = payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
+    return normalizeOpinions(payload?.opinions || session?.opinions || [], subject || payload?.meeting?.lastInstruction || "ordem da sala");
+  }
+
+  function buildAgentReplyItems(opinions, limit = 4) {
+    const list = Array.isArray(opinions) ? opinions : [];
+    return list.slice(0, limit).map((item, index) => ({
+      state: index === 0 ? "running" : "done",
+      label: index === 0 ? "falando agora" : "respondeu",
+      agent: `${getAgentDisplayName(item)} • ${getAgentOffice(item)}`,
+      text: item?.opinion || item?.assignment?.action || "Resposta registrada."
+    }));
+  }
+
+  function formatAgentReplies(opinions, limit = 5) {
+    const list = Array.isArray(opinions) ? opinions : [];
+    return list
+      .slice(0, limit)
+      .map((item) => `${getAgentDisplayName(item)} (${getAgentOffice(item)}): ${item?.opinion || item?.assignment?.action || ""}`)
+      .join("\n\n");
+  }
+
   function renderDaily(payload) {
     const daily = payload.dailyContext || {};
     const agent = daily.agentOfDay || {};
@@ -2093,7 +2166,7 @@
       .join("");
   }
 
-  function moveToNextSpeaker(kindLabel = "próxima fala") {
+  function moveToNextSpeaker(kindLabel = "próxima fala", options = {}) {
     if (!currentOpinions.length) return;
     activeSpeakerIndex = (activeSpeakerIndex + 1) % currentOpinions.length;
     const active = currentOpinions[activeSpeakerIndex];
@@ -2106,6 +2179,16 @@
       agent: getAgentDisplayName(active),
       text: active?.opinion || ""
     });
+    if (options.updateResponse !== false) {
+      setAgentResponse({
+        badge: "Próximo agente",
+        title: `${getAgentDisplayName(active)} assumiu a fala`,
+        text: "A resposta ativa mudou. Os botões do card agora agem sobre este agente.",
+        next: "Aprove, ajuste, transforme em tarefa ou envie ao terminal.",
+        tone: "ok",
+        items: [{ state: "running", label: "falando agora", agent: `${getAgentDisplayName(active)} • ${getAgentOffice(active)}`, text: active?.opinion || "" }]
+      });
+    }
     setStatus(`${getAgentDisplayName(active)} levantou a mão e assumiu a próxima fala.`, "ok");
     window.setTimeout(() => {
       if (raisedHandName === getAgentDisplayName(active)) {
@@ -2268,31 +2351,54 @@
     const agentName = getAgentDisplayName(active);
     const idea = active.opinion || "";
     if (action === "approve") {
-      if (await postRoomAction("approve", active)) {
-        setStatus(`${agentName} recebeu aprovação formal na Cheffe Call.`, "ok");
-        moveToNextSpeaker("próxima fala");
-        return;
-      }
       const packet = buildExecutionPacket(active, "implement");
+      await postRoomAction("approve", active);
       addMeetingLog({ kind: "good", kindLabel: "boa ideia", agent: agentName, text: idea });
-      enqueueTask({
-        state: "ready",
-        kindLabel: "aceita",
-        agent: agentName,
-        title: packet.title,
-        text: packet.text,
-        howTo: packet.howTo,
-        prompt: packet.prompt
+      setAgentResponse({
+        badge: "Card aprovado",
+        title: `${agentName} recebeu aprovação`,
+        text: "A opinião entrou na fila de execução. Ela ainda não mexe no site até você implementar o card ou a fila.",
+        next: "Clique Implementar card para executar só este, ou Implementar fila para rodar todas as aprovadas.",
+        tone: "ok",
+        items: [
+          { state: "done", label: "aprovado", agent: agentName, text: idea },
+          { state: "running", label: "pronto para executar", agent: getAgentOffice(active), text: packet.text }
+        ]
       });
-      setStatus(`${agentName} recebeu voto positivo nessa ideia.`, "ok");
-      moveToNextSpeaker("próxima fala");
+      setActionFeedback({
+        badge: "Aprovação",
+        title: `${agentName} aprovado`,
+        message: "Card guardado. A execução só acontece quando você mandar implementar.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Opinião recebida", state: "done" },
+          { label: "Aprovação registrada", state: "done" },
+          { label: "Aguardando implementação", state: "running" }
+        ],
+        details: packet.howTo,
+        autoCloseMs: 2400
+      });
+      setStatus(`${agentName} recebeu aprovação formal na Cheffe Call.`, "ok");
+      moveToNextSpeaker("próxima fala", { updateResponse: false });
       return;
     }
     if (action === "implement") {
       try {
         await runSingleImplementation(active);
+        setAgentResponse({
+          badge: "Implementado",
+          title: `${agentName} concluiu a execução`,
+          text: "O card foi enviado para runtime, a sala foi atualizada e o terminal recebeu o resumo.",
+          next: "Confira o terminal ou continue para o próximo agente.",
+          tone: "ok",
+          items: [
+            { state: "done", label: "executado", agent: agentName, text: active?.assignment?.action || idea },
+            { state: "done", label: "verificado", agent: "Cheffe Call", text: "Runtime finalizada e sala sincronizada." }
+          ]
+        });
         setStatus(`${agentName} entrou em execução real pela Cheffe Call.`, "ok");
-        moveToNextSpeaker("próxima fala");
+        moveToNextSpeaker("próxima fala", { updateResponse: false });
         return;
       } catch (error) {
         setActionFeedback({
@@ -2308,33 +2414,6 @@
         });
         throw error;
       }
-      const implementation = active?.assignment?.action || `Começar a executar a proposta de ${agentName}.`;
-      const packet = buildExecutionPacket(active, "implement");
-      enqueueTask({
-        state: "running",
-        kindLabel: "implementando",
-        agent: agentName,
-        title: `Execução iniciada por ${agentName}`,
-        text: implementation,
-        howTo: packet.howTo,
-        prompt: packet.prompt
-      });
-      addMeetingLog({
-        kind: "good",
-        kindLabel: "implementando",
-        agent: agentName,
-        text: implementation
-      });
-      terminalEl.textContent = [
-        "> cheffe-call/implementation",
-        `owner: ${agentName}`,
-        `office: ${getAgentOffice(active)}`,
-        `action: ${implementation}`,
-        "status: execução iniciada pela reunião"
-      ].join("\n");
-      setStatus(`${agentName} começou a implementar a ideia aprovada.`, "ok");
-      moveToNextSpeaker("próxima fala");
-      return;
     }
     if (action === "variation") {
       const adjustmentPrompt = stageAdjustmentInPromptMaster(active);
@@ -2350,7 +2429,7 @@
       setActionFeedback({
         badge: "Prompt Mestre",
         title: `Ajuste pronto para ${agentName}`,
-        message: "Escritório e agente foram selecionados no Prompt Mestre. Use Enviar ao terminal para executar.",
+        message: "Escritório e agente foram selecionados no Prompt Mestre. Use Executar no terminal para pedir a resposta.",
         tone: "ok",
         steps: [
           { label: "Opinião original capturada", state: "ok" },
@@ -2361,24 +2440,28 @@
         details: adjustmentPrompt,
         closable: true
       });
+      setAgentResponse({
+        badge: "Ajuste preparado",
+        title: `${agentName} foi enviado ao Prompt Mestre`,
+        text: "A opinião original, o escritório e o agente foram carregados. Nada foi executado ainda.",
+        next: "Revise o tipo de ajuste e clique Executar no terminal para pedir a nova resposta.",
+        tone: "ok",
+        items: [
+          { state: "done", label: "capturado", agent: agentName, text: idea },
+          { state: "running", label: "aguardando terminal", agent: getAgentOffice(active), text: getAdjustmentGuide().directive }
+        ]
+      });
       setStatus(`Ajuste de ${agentName} preparado no Prompt Mestre.`, "ok");
       return;
     }
     if (action === "task") {
-      if (await postRoomAction("task", active)) {
-        setStatus(`Tarefa real registrada para ${agentName}.`, "ok");
-        return;
-      }
       const task = `Tarefa criada para ${agentName}: transformar a ideia em entrega revisável, com critério de aceite e próxima ação.`;
       const packet = buildExecutionPacket(active, "implement");
-      enqueueTask({
-        state: "queued",
-        kindLabel: "tarefa",
-        agent: agentName,
-        title: `Fila de tarefa para ${agentName}`,
-        text: task,
+      await postRoomAction("task", active, {
+        title: `Tarefa para ${agentName}`,
         howTo: packet.howTo,
-        prompt: packet.prompt
+        prompt: packet.prompt,
+        text: task
       });
       addMeetingLog({ kindLabel: "tarefa criada", agent: agentName, text: task });
       terminalEl.textContent = [
@@ -2387,14 +2470,41 @@
         `source: ${idea}`,
         "status: aguardando aprovação para execução"
       ].join("\n");
-      setStatus(`Ideia de ${agentName} virou tarefa aguardando aprovação.`, "ok");
+      setAgentResponse({
+        badge: "Tarefa criada",
+        title: `${agentName} virou tarefa rastreável`,
+        text: "A fala foi transformada em uma entrega com dono e critério. Ela aparece na fila de tarefas.",
+        next: "Aprove/implemente quando quiser transformar a tarefa em execução real.",
+        tone: "ok",
+        items: [
+          { state: "done", label: "dono", agent: agentName, text: task },
+          { state: "running", label: "critério", agent: "Cheffe Call", text: packet.howTo }
+        ]
+      });
+      setActionFeedback({
+        badge: "Tarefa",
+        title: "Tarefa registrada",
+        message: `${agentName} recebeu uma tarefa com próximo passo.`,
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Opinião lida", state: "done" },
+          { label: "Tarefa registrada", state: "done" },
+          { label: "Aguardando execução", state: "running" }
+        ],
+        details: packet.prompt,
+        autoCloseMs: 2600
+      });
+      setStatus(`Tarefa real registrada para ${agentName}.`, "ok");
       return;
     }
     if (action === "terminal") {
-      if (await postRoomAction("terminal", active, { title: active?.assignment?.action || idea })) {
-        setStatus(`Terminal real recebeu a ordem de ${agentName}.`, "ok");
-        return;
-      }
+      const packet = buildExecutionPacket(active, "prompt");
+      await postRoomAction("terminal", active, {
+        title: active?.assignment?.action || idea,
+        command: packet.prompt,
+        prompt: packet.prompt
+      });
       enqueueTask({
         state: "terminal",
         kindLabel: "terminal",
@@ -2419,15 +2529,50 @@
         `agent: ${agentName}`,
         `office: ${getAgentOffice(active)}`,
         `idea: ${idea}`,
-        "command: aguardando seu complemento no campo Terminal"
+        "status: terminal recebeu a ordem e registrou a resposta",
+        "",
+        packet.prompt
       ].join("\n");
-      setStatus(`Ideia de ${agentName} foi enviada ao terminal.`, "ok");
+      setAgentResponse({
+        badge: "Terminal",
+        title: `${agentName} recebeu a ordem`,
+        text: "O terminal registrou a fala do agente e preparou prompts de apoio para continuar.",
+        next: "Use o campo Terminal para complementar, ou execute pelo Prompt Mestre se quiser uma nova resposta dos agentes.",
+        tone: "ok",
+        items: [
+          { state: "done", label: "ordem recebida", agent: agentName, text: idea },
+          { state: "running", label: "terminal", agent: getAgentOffice(active), text: active?.assignment?.action || packet.text }
+        ]
+      });
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Ordem enviada ao terminal",
+        message: `${agentName} respondeu e o prompt ficou registrado no terminal da sala.`,
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Agente selecionado", state: "done" },
+          { label: "Terminal recebeu", state: "done" },
+          { label: "Resposta registrada", state: "done" }
+        ],
+        details: packet.prompt,
+        autoCloseMs: 2600
+      });
+      setStatus(`Terminal real recebeu a ordem de ${agentName}.`, "ok");
       return;
     }
     if (action === "dismiss") {
       if (await postRoomAction("dismiss", active, { title: `Ignorar por enquanto: ${agentName}` })) {
+        setAgentResponse({
+          badge: "Ignorado",
+          title: `${agentName} saiu da fila`,
+          text: "A opinião foi marcada para não entrar na execução desta rodada.",
+          next: "Continue ouvindo os próximos agentes ou implemente as aprovadas.",
+          tone: "ok",
+          items: [{ state: "done", label: "fora da rodada", agent: agentName, text: idea }]
+        });
         setStatus(`${agentName} saiu da fila de ação desta rodada.`, "ok");
-        moveToNextSpeaker("próxima fala");
+        moveToNextSpeaker("próxima fala", { updateResponse: false });
         return;
       }
       enqueueTask({
@@ -2439,7 +2584,7 @@
       });
       addMeetingLog({ kindLabel: "ignorada", agent: agentName, text: idea });
       setStatus(`${agentName} ficou fora da execução desta rodada.`, "ok");
-      moveToNextSpeaker("próxima fala");
+      moveToNextSpeaker("próxima fala", { updateResponse: false });
       return;
     }
     if (action === "file") {
@@ -2662,10 +2807,17 @@
 
   function activateMeetingResponse(instruction, payload) {
     const subject = String(instruction || payload?.meeting?.lastInstruction || "ordem recebida").trim();
-    const session = payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
-    const opinions = normalizeOpinions(payload?.opinions || session?.opinions || [], subject);
+    const opinions = getPayloadOpinions(payload, subject);
     if (!opinions.length) {
       setStatus("Reunião aberta, mas nenhum agente retornou fala ainda.", "bad");
+      setAgentResponse({
+        badge: "Sem resposta",
+        title: "A ordem foi enviada, mas a fila veio vazia",
+        text: "A sala abriu sem fala de agente. Recarregue ou envie uma ordem mais específica.",
+        next: "Clique Recarregar ou Abra rodada novamente.",
+        tone: "bad",
+        items: [{ state: "bad", label: "sem fala", agent: "Cheffe Call", text: subject }]
+      });
       return;
     }
     setSpeakerQueue(opinions, true);
@@ -2684,6 +2836,14 @@
       kindLabel: "primeira reação",
       agent: getAgentDisplayName(active),
       text: active.opinion || ""
+    });
+    setAgentResponse({
+      badge: "Rodada aberta",
+      title: `${opinions.length} agentes responderam`,
+      text: `${getAgentDisplayName(active)} começou a resposta. A fila abaixo mostra quem recebeu a ordem e o que cada um propôs.`,
+      next: "Aprove um card, peça ajuste, crie tarefa ou implemente a fila aprovada.",
+      tone: "ok",
+      items: buildAgentReplyItems(opinions, 4)
     });
     setStatus(`${getAgentDisplayName(active)} respondeu. Use Próximo para ouvir os outros agentes.`, "ok");
   }
@@ -2723,7 +2883,7 @@
     const password = requireAdminPassword("registrar decisões reais dos agentes");
     if (!password) throw new Error("Senha Full Admin obrigatória para registrar decisões reais dos agentes.");
     const packet = active ? buildExecutionPacket(active, action === "terminal" ? "prompt" : "implement") : null;
-    await postCall("/api/cheffe-call/action", {
+    return postCall("/api/cheffe-call/action", {
       password,
       action,
       sessionId: currentMeetingSessionId,
@@ -2739,7 +2899,6 @@
       prompt: extras.prompt || packet?.prompt || "",
       ...extras
     });
-    return true;
   }
 
   function getReadyOpinionFlowItems() {
@@ -2937,6 +3096,19 @@
         `cards: ${completed}`,
         formatRuntimeDetailsForTerminal(payload, "status: concluído")
       ].join("\n");
+      setAgentResponse({
+        badge: "Fila implementada",
+        title: `${completed} aprovações foram executadas`,
+        text: "A Cheffe Call registrou a fila, rodou a runtime uma vez e atualizou a sala com o resumo.",
+        next: "Confira o terminal, recarregue se quiser, ou abra uma nova rodada com outra ordem.",
+        tone: "ok",
+        items: readyItems.slice(0, 4).map((flow, index) => ({
+          state: "done",
+          label: `executado ${index + 1}`,
+          agent: getAgentDisplayName(flow.item),
+          text: flow.item?.assignment?.action || flow.item?.opinion || "Card implementado."
+        }))
+      });
       setStatus(`Fila implementada: ${completed} aprovações enviadas e runtime concluída.`, "ok");
     } catch (error) {
       setActionFeedback({
@@ -2949,6 +3121,14 @@
           { label: "Execução interrompida", state: "bad" },
           { label: "Sala preservada", state: "pending" }
         ]
+      });
+      setAgentResponse({
+        badge: "Falha na fila",
+        title: "A implementação foi interrompida",
+        text: error.message || "A Cheffe Call preservou a fila para você tentar novamente.",
+        next: "Confira a senha, recarregue a fila e tente Implementar fila outra vez.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao implementar fila." }]
       });
       setStatus(error.message || "Falha ao implementar fila.", "bad");
     } finally {
@@ -2969,7 +3149,57 @@
     }
     rememberAdminPassword(password);
     setStatus("Abrindo Cheffe Call...");
-    postCall("/api/cheffe-call/start", { password, instruction }).catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Rodada",
+      title: "Enviando ordem aos agentes",
+      message: "A sala vai receber a ordem e devolver respostas por agente.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha recebida", state: "done" },
+        { label: "Enviando ordem", state: "running" },
+        { label: "Aguardando respostas", state: "pending" }
+      ],
+      details: instruction || "Abrir reunião sem assunto específico."
+    });
+    postCall("/api/cheffe-call/start", { password, instruction })
+      .then((payload) => {
+        activateMeetingResponse(instruction, payload);
+        const replies = getPayloadOpinions(payload, instruction);
+        setActionFeedback({
+          badge: "Rodada",
+          title: "Agentes responderam",
+          message: "A ordem foi recebida. Agora você pode aprovar, ajustar, criar tarefa ou mandar implementar.",
+          tone: "ok",
+          closable: true,
+          steps: [
+            { label: "Ordem enviada", state: "done" },
+            { label: "Respostas recebidas", state: "done" },
+            { label: "Aguardando decisão", state: "running" }
+          ],
+          details: formatAgentReplies(replies, 5),
+          autoCloseMs: 2800
+        });
+      })
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Ordem não enviada",
+          message: error.message || "Não foi possível abrir a rodada.",
+          tone: "bad",
+          closable: true,
+          steps: [{ label: "Envio interrompido", state: "bad" }]
+        });
+        setAgentResponse({
+          badge: "Falha",
+          title: "A ordem não chegou aos agentes",
+          text: error.message || "Verifique a senha e tente novamente.",
+          next: "Digite a senha Full Admin e clique Abrir rodada.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao abrir rodada." }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   commandBarEl?.addEventListener("submit", (event) => {
@@ -2999,10 +3229,11 @@
     postCall("/api/cheffe-call/start", { password, instruction: quickInstruction })
       .then((payload) => {
         activateMeetingResponse(quickInstruction, payload);
+        const replies = getPayloadOpinions(payload, quickInstruction);
         setActionFeedback({
           badge: "Rodada",
           title: "Fila pronta",
-          message: "A sala foi atualizada. Aprove cards individuais ou implemente a fila inteira.",
+          message: "A sala respondeu. Aprove cards individuais, ajuste uma fala ou implemente a fila inteira.",
           tone: "ok",
           closable: true,
           steps: [
@@ -3010,6 +3241,7 @@
             { label: "Opiniões renderizadas", state: "done" },
             { label: "Aguardando aprovação", state: "running" }
           ],
+          details: formatAgentReplies(replies, 5),
           autoCloseMs: 2600
         });
       })
@@ -3021,6 +3253,14 @@
           tone: "bad",
           closable: true,
           steps: [{ label: "Envio interrompido", state: "bad" }]
+        });
+        setAgentResponse({
+          badge: "Falha",
+          title: "Os agentes não receberam a ordem",
+          text: error.message || "A rodada não abriu.",
+          next: "Confira a senha e tente Abrir rodada novamente.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao abrir reunião." }]
         });
         setStatus(error.message, "bad");
       });
@@ -3128,33 +3368,100 @@
 
   photoApprovalRunRuntime?.addEventListener("change", updatePhotoApprovalRuntimeControls);
 
-  sendTerminalEl?.addEventListener("click", () => {
+  sendTerminalEl?.addEventListener("click", async () => {
     const form = new FormData(formEl);
     const instruction = String(form.get("instruction") || "").trim();
     const command = String(form.get("command") || "").trim();
     const password = requireAdminPassword("enviar comando real ao terminal dos agentes");
     if (!password) return;
     if (!instruction && !command) {
-      setStatus("Digite o assunto ou cole um pedido/código antes de enviar ao terminal.", "bad");
+      setStatus("Digite uma ordem ou cole um pedido/código antes de enviar ao terminal.", "bad");
       return;
     }
-    const active = currentOpinions[activeSpeakerIndex] || null;
-    const runTerminal = () =>
-      postRoomAction("terminal", active, {
-        title: instruction || command || "Pedido direto ao terminal",
-        command: command || instruction,
-        prompt: command || instruction
-      });
-    const action = currentMeetingSessionId
-      ? runTerminal()
-      : postCall("/api/cheffe-call/start", { password, instruction: instruction || "Pedido direto ao terminal" }).then(runTerminal);
+    const terminalOrder = command || instruction;
     setStatus("Enviando comando real ao terminal da Cheffe Call...");
-    action.catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Terminal",
+      title: "Enviando ordem direta",
+      message: "O terminal vai abrir uma rodada com resposta dos agentes e registrar o pedido.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Pedido lido", state: "done" },
+        { label: "Enviando aos agentes", state: "running" },
+        { label: "Registrando no terminal", state: "pending" }
+      ],
+      details: terminalOrder
+    });
+    try {
+      if (instructionInput) instructionInput.value = terminalOrder;
+      if (quickInstructionInput) quickInstructionInput.value = terminalOrder;
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: terminalOrder });
+      activateMeetingResponse(terminalOrder, payload);
+      const replies = getPayloadOpinions(payload, terminalOrder);
+      const active = replies[0] || currentOpinions[activeSpeakerIndex] || null;
+      await postRoomAction("terminal", active, {
+        title: instruction || command || "Pedido direto ao terminal",
+        command: terminalOrder,
+        prompt: terminalOrder
+      });
+      terminalEl.textContent = [
+        "> cheffe-call/direct-terminal",
+        `order: ${terminalOrder}`,
+        "status: agentes responderam e terminal registrou",
+        "",
+        formatAgentReplies(replies, 5)
+      ].join("\n");
+      setAgentResponse({
+        badge: "Terminal executado",
+        title: `${replies.length} agentes responderam ao terminal`,
+        text: "O pedido direto foi recebido e virou uma nova fila de respostas.",
+        next: "Aprove a melhor resposta, ajuste no Prompt Mestre ou implemente a fila aprovada.",
+        tone: "ok",
+        items: buildAgentReplyItems(replies, 4)
+      });
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Ordem executada",
+        message: "Os agentes responderam e o terminal foi atualizado.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Pedido enviado", state: "done" },
+          { label: "Respostas recebidas", state: "done" },
+          { label: "Terminal registrado", state: "done" }
+        ],
+        details: formatAgentReplies(replies, 5),
+        autoCloseMs: 3000
+      });
+      setStatus("Terminal recebeu a ordem e os agentes responderam.", "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Terminal não executou",
+        message: error.message || "Não foi possível enviar ao terminal.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Pedido lido", state: "done" },
+          { label: "Execução interrompida", state: "bad" }
+        ]
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "O terminal não devolveu resposta",
+        text: error.message || "A ordem não foi concluída.",
+        next: "Confira a senha e tente Enviar ao terminal novamente.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha no terminal." }]
+      });
+      setStatus(error.message, "bad");
+    }
   });
 
   nextSpeakerEl?.addEventListener("click", () => {
     if (!currentOpinions.length) {
-      setStatus("Envie uma mensagem aos agentes antes de chamar o próximo.", "bad");
+      setStatus("Abra uma rodada para os agentes antes de chamar o próximo.", "bad");
       return;
     }
     moveToNextSpeaker("levantou a mão");
@@ -3195,7 +3502,19 @@
       return;
     }
     setStatus("Liberando runtimes...");
-    postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
+    postCall("/api/cheffe-call/release", { password })
+      .then(() => {
+        setAgentResponse({
+          badge: "Sala liberada",
+          title: "Automações devolvidas aos agentes",
+          text: "A reunião foi encerrada e as rotinas podem voltar ao ciclo automático.",
+          next: "Abra uma nova rodada quando quiser comandar de novo.",
+          tone: "ok",
+          items: [{ state: "done", label: "liberado", agent: "Cheffe Call", text: "Runtimes livres." }]
+        });
+        setStatus("Runtimes liberadas.", "ok");
+      })
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   openAgentFile?.addEventListener("click", () => {
@@ -3265,6 +3584,16 @@
           ],
           autoCloseMs: 2000
         });
+        setAgentResponse({
+          badge: "Sala sincronizada",
+          title: "Estado atual carregado",
+          text: buildSessionSummaryText(),
+          next: "Continue a rodada atual ou digite uma nova ordem.",
+          tone: "ok",
+          items: currentOpinions.length
+            ? buildAgentReplyItems(currentOpinions, 3)
+            : [{ state: "pending", label: "sem rodada", agent: "Cheffe Call", text: "Abra uma rodada para receber respostas." }]
+        });
         setStatus("Cheffe Call recarregada.", "ok");
       })
       .catch((error) => {
@@ -3283,8 +3612,30 @@
   refreshOpinionFlow?.addEventListener("click", () => {
     setStatus("Atualizando fila de opiniões dos agentes...");
     loadCall()
-      .then(() => setStatus("Fila de opiniões atualizada.", "ok"))
-      .catch((error) => setStatus(error.message, "bad"));
+      .then(() => {
+        setAgentResponse({
+          badge: "Fila atualizada",
+          title: "Opiniões sincronizadas",
+          text: currentOpinions.length ? "A lista de agentes foi recarregada com o estado mais recente." : "Ainda não há rodada com respostas.",
+          next: currentOpinions.length ? "Aprove, ajuste ou implemente uma resposta." : "Abra uma rodada com uma ordem.",
+          tone: "ok",
+          items: currentOpinions.length
+            ? buildAgentReplyItems(currentOpinions, 3)
+            : [{ state: "pending", label: "sem respostas", agent: "Cheffe Call", text: "Digite uma ordem para os agentes responderem." }]
+        });
+        setStatus("Fila de opiniões atualizada.", "ok");
+      })
+      .catch((error) => {
+        setAgentResponse({
+          badge: "Falha",
+          title: "Fila não atualizou",
+          text: error.message || "Não foi possível recarregar as opiniões.",
+          next: "Tente novamente em alguns segundos.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao atualizar fila." }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   runApprovedOpinions?.addEventListener("click", () => {
@@ -3345,6 +3696,16 @@
           ],
           closable: true
         });
+        setAgentResponse({
+          badge: "Runtime concluída",
+          title: "Agentes reais terminaram a rodada",
+          text: "A execução manual acabou e o painel foi atualizado com o feedback recebido.",
+          next: "Reveja os novos cards, aprove o que fizer sentido ou implemente a fila.",
+          tone: "ok",
+          items: currentOpinions.length
+            ? buildAgentReplyItems(currentOpinions, 4)
+            : [{ state: "done", label: "runtime", agent: "Cheffe Call", text: "Rodada manual finalizada." }]
+        });
         setStatus("Rodada manual dos agentes concluída e sala atualizada.", "ok");
       })
       .catch((error) => {
@@ -3359,6 +3720,14 @@
           ],
           closable: true
         });
+        setAgentResponse({
+          badge: "Falha",
+          title: "Runtime não concluiu",
+          text: error.message || "Os agentes não finalizaram a rodada manual.",
+          next: "Confira senha/conexão e tente Rodar agentes agora novamente.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Runtime", text: error.message || "Falha ao rodar agentes." }]
+        });
         setStatus(error.message, "bad");
       });
   });
@@ -3367,16 +3736,38 @@
     const password = requireAdminPassword("encerrar a reunião real");
     if (!password) return;
     setStatus("Encerrando reunião real...");
-    postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
+    postCall("/api/cheffe-call/release", { password })
+      .then(() => {
+        setAgentResponse({
+          badge: "Reunião encerrada",
+          title: "Sala fechada com sucesso",
+          text: "A Cheffe Call saiu do modo reunião e liberou os agentes.",
+          next: "Use Abrir rodada para iniciar outra ordem.",
+          tone: "ok",
+          items: [{ state: "done", label: "encerrado", agent: "Cheffe Call", text: "Runtimes liberadas." }]
+        });
+        setStatus("Reunião encerrada.", "ok");
+      })
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   adminClearSession?.addEventListener("click", () => {
     const password = requireAdminPassword("limpar a sessão real");
     if (!password) return;
     setStatus("Limpando sessão atual...");
-    postCall("/api/cheffe-call/admin/clear", { password, sessionId: currentMeetingSessionId }).catch((error) =>
-      setStatus(error.message, "bad")
-    );
+    postCall("/api/cheffe-call/admin/clear", { password, sessionId: currentMeetingSessionId })
+      .then(() => {
+        setAgentResponse({
+          badge: "Sessão limpa",
+          title: "Fila zerada",
+          text: "A sessão atual foi limpa. Nenhuma ação antiga fica confundindo a próxima rodada.",
+          next: "Digite uma nova ordem e abra rodada.",
+          tone: "ok",
+          items: [{ state: "done", label: "limpo", agent: "Cheffe Call", text: "Sessão atual removida." }]
+        });
+        setStatus("Sessão atual limpa.", "ok");
+      })
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   adminExportSnapshot?.addEventListener("click", async () => {
@@ -3448,12 +3839,20 @@
   loadPromptToInstruction?.addEventListener("click", () => {
     const promptText = getActivePromptText();
     if (!promptText) {
-      setStatus("Escolha um prompt antes de usar no assunto.", "bad");
+      setStatus("Escolha um prompt antes de usar como ordem.", "bad");
       return;
     }
     syncVisibleInstruction(promptText);
     setCommandBarPulse();
-    setStatus("Assunto preenchido. Ele roda quando você abre a rodada.", "ok");
+    setAgentResponse({
+      badge: "Ordem preparada",
+      title: "Prompt carregado na ordem da reunião",
+      text: "Nada foi executado ainda. O texto foi colocado no campo de ordem para você revisar.",
+      next: "Clique Abrir rodada para mandar aos agentes e receber respostas.",
+      tone: "ok",
+      items: [{ state: "running", label: "aguardando envio", agent: activePromptPayload.title || "Prompt Mestre", text: promptText.slice(0, 220) }]
+    });
+    setStatus("Ordem preenchida. Ela só roda quando você abre a rodada.", "ok");
   });
 
   loadPromptToTerminal?.addEventListener("click", async () => {
@@ -3496,6 +3895,7 @@
         command: promptText,
         prompt: promptText
       });
+      const replies = getPayloadOpinions(payload, promptText);
       setActionFeedback({
         badge: "Terminal",
         title: "Prompt executado",
@@ -3507,11 +3907,16 @@
           { label: "Decisão registrada", state: "ok" },
           { label: "Terminal atualizado", state: "ok" }
         ],
-        details: (payload?.opinions || [])
-          .slice(0, 4)
-          .map((item) => `${item.agent || item.name || "Agente"}: ${item.opinion || ""}`)
-          .join("\n\n"),
+        details: formatAgentReplies(replies, 5),
         closable: true
+      });
+      setAgentResponse({
+        badge: "Prompt executado",
+        title: `${replies.length} agentes responderam`,
+        text: "O Prompt Mestre foi enviado ao terminal real da Cheffe Call.",
+        next: "Escolha uma resposta para aprovar, ajustar ou implementar.",
+        tone: "ok",
+        items: buildAgentReplyItems(replies, 4)
       });
       setStatus("Prompt Mestre enviado ao terminal e agentes reagiram.", "ok");
     } catch (error) {
@@ -3526,12 +3931,31 @@
         ],
         closable: true
       });
+      setAgentResponse({
+        badge: "Falha",
+        title: "Prompt não executou",
+        text: error.message || "O terminal não conseguiu receber o Prompt Mestre.",
+        next: "Confira a senha e tente Executar no terminal de novo.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Prompt Mestre", text: error.message || "Falha no terminal." }]
+      });
       setStatus(error.message, "bad");
     }
   });
 
   copyPromptText?.addEventListener("click", async () => {
-    const copied = await copyText(getActivePromptText());
+    const promptText = getActivePromptText();
+    const copied = await copyText(promptText);
+    setAgentResponse({
+      badge: copied ? "Copiado" : "Falha",
+      title: copied ? "Texto copiado sem executar" : "Não foi possível copiar",
+      text: copied
+        ? "Copiar só manda o prompt para a área de transferência. Nenhum agente foi acionado."
+        : "O navegador bloqueou a cópia automática.",
+      next: copied ? "Cole onde precisar, ou use Executar no terminal para receber resposta dos agentes." : "Selecione o texto manualmente ou tente novamente.",
+      tone: copied ? "ok" : "bad",
+      items: [{ state: copied ? "done" : "bad", label: copied ? "copiado" : "erro", agent: activePromptPayload.title || "Prompt", text: promptText.slice(0, 220) }]
+    });
     setStatus(copied ? "Prompt copiado. Copiar não executa nada sozinho." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
   });
 

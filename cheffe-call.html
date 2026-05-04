@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260504-agent-competition-flow4" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-order-feedback-flow5" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -32,7 +32,7 @@
             <article>
               <span>Fluxo</span>
               <strong>Ouvir, comparar, aprovar</strong>
-              <p>Abra o assunto, deixe a sala reagir e transforme a melhor ideia em tarefa ou execução.</p>
+              <p>Abra uma ordem, deixe a sala reagir e transforme a melhor ideia em tarefa ou execução.</p>
             </article>
             <article>
               <span>Relatório</span>
@@ -58,32 +58,32 @@
               <li data-flow-step="password">
                 <span>1</span>
                 <strong>Senha</strong>
-                <p>Digite Full Admin para comandar. Sem senha, só consulta.</p>
+                <p>Full Admin habilita decisão.</p>
               </li>
               <li data-flow-step="meeting">
                 <span>2</span>
-                <strong>Abrir reunião</strong>
-                <p>Escreva a ordem e envie para pausar rotinas e ouvir agentes reais.</p>
+                <strong>Abrir sala</strong>
+                <p>Envie a ordem e pause rotinas.</p>
               </li>
               <li data-flow-step="opinions">
                 <span>3</span>
-                <strong>Ouvir opiniões</strong>
-                <p>Use Próximo para navegar pela fala de cada agente.</p>
+                <strong>Ouvir</strong>
+                <p>Passe agente por agente.</p>
               </li>
               <li data-flow-step="decision">
                 <span>4</span>
                 <strong>Decidir</strong>
-                <p>Aprove, peça ajuste, transforme em tarefa ou mande implementar.</p>
+                <p>Aprovar, ajustar ou tarefa.</p>
               </li>
               <li data-flow-step="report">
                 <span>5</span>
-                <strong>Acompanhar</strong>
-                <p>Veja fila, logs, ações e escritórios no relatório abaixo.</p>
+                <strong>Terminal</strong>
+                <p>Acompanhe a execução real.</p>
               </li>
               <li data-flow-step="release">
                 <span>6</span>
                 <strong>Liberar</strong>
-                <p>Quando terminar, libere as automações dos agentes.</p>
+                <p>Feche a sala e solte agentes.</p>
               </li>
             </ol>
           </section>
@@ -95,15 +95,15 @@
                 <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
               </label>
               <label>
-                Assunto da reunião
+                Ordem para os agentes
                 <textarea
                   name="instruction"
                   rows="4"
-                  placeholder="Ex: reorganizar o escritório, receber opiniões, distribuir comandos específicos e deixar a sala mais forte."
+                  placeholder="Ex: reorganizar o escritório, ouvir opiniões, aprovar o melhor caminho e executar com feedback."
                 ></textarea>
               </label>
               <label>
-                Terminal: pedido específico ou código
+                Terminal / pedido direto
                 <textarea
                   name="command"
                   rows="4"
@@ -111,10 +111,10 @@
                 ></textarea>
               </label>
               <div class="call-actions">
-                <button type="submit">Enviar mensagem</button>
+                <button type="submit">Abrir rodada</button>
                 <button type="button" id="sendTerminalCommand">Enviar ao terminal</button>
-                <button type="button" id="nextSpeaker">Próximo</button>
-                <button type="button" id="markGoodIdea">Boa ideia</button>
+                <button type="button" id="nextSpeaker">Próximo agente</button>
+                <button type="button" id="markGoodIdea">Aprovar fala</button>
                 <button type="button" id="releaseCall">Liberar automações</button>
               </div>
               <p id="callStatus" role="status">Sala pronta para relatório real. Digite a senha para comandar os agentes.</p>
@@ -397,7 +397,7 @@
             <div class="call-admin-status-card">
               <span>Sessão</span>
               <strong id="adminSessionState">Aguardando leitura</strong>
-              <p id="adminSessionMeta">Situação da reunião e do último assunto.</p>
+              <p id="adminSessionMeta">Situação da reunião e da última ordem.</p>
             </div>
             <div class="call-admin-status-card">
               <span>Última ação</span>
@@ -454,8 +454,8 @@
               </select>
             </label>
             <div class="prompt-quick-actions">
-              <button type="button" id="loadPromptToInstruction" title="Preenche a Ordem da reunião. A execução acontece quando você abre a rodada.">Usar no assunto</button>
-              <button type="button" id="loadPromptToTerminal" title="Executa agora na Cheffe Call e mostra o retorno no terminal.">Enviar ao terminal</button>
+              <button type="button" id="loadPromptToInstruction" title="Preenche a Ordem da reunião. Nada executa até você abrir a rodada.">Usar como ordem</button>
+              <button type="button" id="loadPromptToTerminal" title="Executa agora na Cheffe Call e mostra o retorno dos agentes.">Executar no terminal</button>
               <button type="button" id="copyPromptText" title="Copia o texto. Não executa nada sozinho.">Copiar texto</button>
             </div>
             <p class="prompt-console-meta" id="promptConsoleMeta">Escolha escopo, agente e tipo de ajuste antes de executar.</p>
@@ -536,6 +536,22 @@
             <div id="callReportLogs" class="call-report-list"></div>
           </article>
         </div>
+      </section>
+
+      <section class="agent-response-panel" id="agentResponsePanel" data-tone="idle" aria-live="polite" aria-labelledby="agentResponseTitle">
+        <div class="agent-response-main">
+          <span id="agentResponseBadge">Resposta dos agentes</span>
+          <strong id="agentResponseTitle">Aguardando sua ordem</strong>
+          <p id="agentResponseText">Digite uma ordem em linguagem simples. Quando você abrir a rodada ou usar um botão, os agentes mostram aqui o que receberam e o próximo passo.</p>
+        </div>
+        <ol id="agentResponseList" class="agent-response-list">
+          <li data-state="pending">
+            <span>Pronto</span>
+            <strong>Cheffe Call</strong>
+            <p>Use Abrir rodada, Aprovar card, Ajustar, Criar tarefa, Terminal ou Implementar fila.</p>
+          </li>
+        </ol>
+        <p class="agent-response-next"><b>Próximo passo:</b> <span id="agentResponseNext">Entrar com senha Full Admin e abrir a primeira rodada.</span></p>
       </section>
 
       <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de ordem da reunião">
@@ -682,6 +698,6 @@
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260504-agent-competition-flow4"></script>
+    <script defer src="cheffe-call.js?v=20260504-order-feedback-flow5"></script>
   </body>
 </html>
