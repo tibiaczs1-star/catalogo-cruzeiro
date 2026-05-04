@@ -11581,7 +11581,7 @@ async function handleApi(req, res, pathname, searchParams) {
     }
     const payload = buildRealAgentsPayload();
     if (!payload.ok) {
-      return sendJson(res, 404, {
+      return sendJson(res, 200, {
         ok: false,
         error: "Agentes reais ainda nao foram gerados. Rode npm run agents:run ou use POST /api/real-agents/run."
       });
