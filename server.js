@@ -9258,14 +9258,19 @@ function getCheffeCallOpinions(payload, instruction) {
       const highUrgency = Number(item.urgency || 0) >= 76;
       if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency) return null;
       const lensKey = focus?.lens || item.role || item.office || item.name;
+      const roleAction = cleanShortText(item.action || "", 220);
+      const memoryDetail =
+        memories.find((memory) => !normalizeText(memory).includes(normalizeText(subject).slice(0, 80))) ||
+        roleAction ||
+        cleanShortText(item.intent || "", 180) ||
+        memories[0];
       const evidence = hasMemory
-        ? `memória: ${memories.join(" | ")}`
+        ? `memória operacional (${item.office || item.role}): ${memoryDetail}`
         : hasOwnIdea
           ? `ideia própria ligada à especialidade (${focus?.lens || "triagem"})`
           : matchingTokens.length
           ? `conecta com: ${matchingTokens.join(", ")}`
           : `urgência operacional ${Number(item.urgency || 0)}%`;
-      const roleAction = cleanShortText(item.action || "", 220);
       const nextAction = roleAction || (focus?.lens === "fluxo técnico e API"
         ? "testar o clique contra endpoint real e mostrar sucesso/erro na interface"
         : focus?.lens === "risco e validação"
