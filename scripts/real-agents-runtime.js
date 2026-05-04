@@ -1259,6 +1259,50 @@ function updateOfficeOrdersLifecycle(orders, agents, queue, nowIso) {
   });
 }
 
+function normalizeDiversityKey(value = "") {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .slice(0, 140);
+}
+
+function pickDiverseMeetingAgents(rankedAgents = [], limit = 12) {
+  const roleOrder = ["ceo", "editor", "review", "sources", "dev", "design", "copy", "social", "pixel", "games", "kids", "sales"];
+  const selected = [];
+  const selectedSlugs = new Set();
+  const selectedActions = new Set();
+
+  const tryAdd = (item, strictAction = true) => {
+    if (!item || selectedSlugs.has(item.slug)) return false;
+    const actionKey = normalizeDiversityKey(item.assignment?.action || item.assignment?.idea || item.autonomy?.intent || item.name);
+    if (strictAction && actionKey && selectedActions.has(actionKey)) return false;
+    selected.push(item);
+    selectedSlugs.add(item.slug);
+    if (actionKey) selectedActions.add(actionKey);
+    return true;
+  };
+
+  roleOrder.forEach((role) => {
+    if (selected.length >= limit) return;
+    tryAdd(rankedAgents.find((item) => item.role === role), true);
+  });
+
+  rankedAgents.forEach((item) => {
+    if (selected.length >= limit) return;
+    tryAdd(item, true);
+  });
+
+  rankedAgents.forEach((item) => {
+    if (selected.length >= limit) return;
+    tryAdd(item, false);
+  });
+
+  return selected.slice(0, limit);
+}
+
 function buildDailyAgentContext(queue) {
   const today = new Date().toISOString().slice(0, 10);
   const rankedAgents = queue
@@ -1276,6 +1320,7 @@ function buildDailyAgentContext(queue) {
         Number(b.autonomy?.cycles || 0);
       return bScore - aScore || String(a.name).localeCompare(String(b.name), "pt-BR");
     });
+  const meetingAgents = pickDiverseMeetingAgents(rankedAgents, 12);
 
   const officeScores = new Map();
   queue.forEach((item) => {
@@ -1337,7 +1382,7 @@ function buildDailyAgentContext(queue) {
           reason: agentOfDay.autonomy?.intent || ""
         }
       : null,
-    topAgents: rankedAgents.slice(0, 12).map((item) => ({
+    topAgents: meetingAgents.map((item) => ({
       name: item.name,
       office: item.officeLabel,
       role: item.role,

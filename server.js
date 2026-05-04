@@ -9238,10 +9238,10 @@ function getCheffeCallOpinions(payload, instruction) {
       ))
       .map((entry) => cleanShortText(entry.title || entry.action || entry.message || entry.text || entry.status || "", 160))
       .filter(Boolean);
-    return haystack.slice(0, 2);
+    return [...new Set(haystack)].slice(0, 2);
   };
 
-  const seenOpinionLenses = new Set();
+  const seenOpinionKeys = new Set();
   const useful = source
     .map((item) => {
       const signature = `${item.name || ""} ${item.office || ""} ${item.role || ""} ${item.intent || ""}`;
@@ -9258,8 +9258,6 @@ function getCheffeCallOpinions(payload, instruction) {
       const highUrgency = Number(item.urgency || 0) >= 76;
       if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency) return null;
       const lensKey = focus?.lens || item.role || item.office || item.name;
-      if (seenOpinionLenses.has(lensKey) && !hasMemory && !matchingTokens.length) return null;
-      seenOpinionLenses.add(lensKey);
       const evidence = hasMemory
         ? `memória: ${memories.join(" | ")}`
         : hasOwnIdea
@@ -9277,6 +9275,9 @@ function getCheffeCallOpinions(payload, instruction) {
             : focus?.lens === "clareza da fala"
             ? "reescrever a resposta como diagnóstico curto, não discurso"
               : "transformar a ordem em decisão rastreável com dono");
+      const uniquenessKey = normalizeText(`${lensKey} ${nextAction}`).slice(0, 180);
+      if (seenOpinionKeys.has(uniquenessKey)) return null;
+      seenOpinionKeys.add(uniquenessKey);
       const score = Number(item.autonomy || 0);
       const confidence = Number(item.confidence || 0);
       const autonomyNote = score >= 78
