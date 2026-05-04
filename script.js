@@ -8930,6 +8930,155 @@ const buildDailyBuzzEmptyState = (signalItems = []) => {
   `;
 };
 
+const DAILY_BUZZ_TOPIC_TIMEOUT_MS = 1800;
+
+const fetchDailyBuzzTopicFeed = async (options = {}) =>
+  Promise.race([
+    fetchTopicFeedCached("buzz", 18, options),
+    new Promise((resolve) => {
+      window.setTimeout(() => resolve([]), DAILY_BUZZ_TOPIC_TIMEOUT_MS);
+    })
+  ]);
+
+const getDailyBuzzCandidateItems = (runtimeArticles = [], liveBuzzItems = []) =>
+  dedupeNewsItems([
+    ...(Array.isArray(runtimeArticles) ? runtimeArticles : []),
+    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+    ...(Array.isArray(liveBuzzItems) ? liveBuzzItems : [])
+  ]).map((item) => normalizeRuntimeArticle(item));
+
+const pickDailyBuzzContinuityStories = (items = [], limit = 4) => {
+  const safeLimit = Math.max(1, Number(limit) || 4);
+  const selected = [];
+  const seen = new Set();
+  const scoredStories = pickBrazilDayRealStories(items, safeLimit, {
+    minScore: 0,
+    allowLatestFallback: true,
+    requireFocus: false,
+    localLimit: Math.min(2, safeLimit),
+    acreLimit: Math.min(2, safeLimit),
+    nationalPolemicLimit: Math.min(2, safeLimit),
+    nationalEntertainmentLimit: Math.min(1, safeLimit)
+  });
+
+  const pushStory = (article) => {
+    const normalizedArticle = normalizeRuntimeArticle(article || {});
+    const key = getArticleUsageKey(normalizedArticle);
+    if (!key || seen.has(key) || !isRealPublicNewsSource(normalizedArticle)) {
+      return false;
+    }
+
+    seen.add(key);
+    selected.push(normalizedArticle);
+    return selected.length >= safeLimit;
+  };
+
+  scoredStories.some(pushStory);
+
+  if (selected.length < safeLimit) {
+    dedupeNewsItems(items)
+      .map((item) => normalizeRuntimeArticle(item))
+      .filter(isRealPublicNewsSource)
+      .filter((article) => !isCultureReviewOnlyArticle(article))
+      .sort((left, right) => {
+        const leftScope = getBrazilDayScope(left);
+        const rightScope = getBrazilDayScope(right);
+        const leftPriority = leftScope === "Vale do Juruá" ? 3 : leftScope === "Acre" ? 2 : 1;
+        const rightPriority = rightScope === "Vale do Juruá" ? 3 : rightScope === "Acre" ? 2 : 1;
+        if (rightPriority !== leftPriority) return rightPriority - leftPriority;
+        return getArticlePublishedTime(right) - getArticlePublishedTime(left);
+      })
+      .some(pushStory);
+  }
+
+  return selected.slice(0, safeLimit);
+};
+
+const buildDailyBuzzContinuityState = (articles = [], signalItems = []) => {
+  const safeArticles = Array.isArray(articles) ? articles.slice(0, 4) : [];
+  const hasArticles = safeArticles.length > 0;
+  const labels = signalItems
+    .slice(0, 3)
+    .map((item) => item.title || item.hashtags?.[0] || item.socialPlatform || "")
+    .filter(Boolean)
+    .map((label) => `<span>${escapeHtml(truncateCopy(label, 28))}</span>`)
+    .join("");
+  const articleLinks = safeArticles
+    .map((item) => {
+      const article = normalizeRuntimeArticle(item);
+      const href = article.sourceUrl || buildArticleHref(article);
+      const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+      const sourceName = article.sourceName || "Fonte pública";
+      const dateLabel =
+        formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+        "agora";
+
+      return `
+        <a class="daily-buzz-continuity-link" href="${escapeRuntimeAttribute(href)}"${externalAttrs}>
+          <small>${escapeHtml([getBrazilDayScope(article), sourceName, dateLabel].filter(Boolean).join(" • "))}</small>
+          <strong>${escapeHtml(truncateCopy(article.title || "Notícia em acompanhamento", 96))}</strong>
+          <span>${escapeHtml(truncateCopy(cleanPublicNewsSummary(article), 132))}</span>
+        </a>
+      `;
+    })
+    .join("");
+
+  return `
+    <article class="trending-card influencer-buzz-card daily-buzz-card daily-buzz-continuity-state reveal active is-visible">
+      <span class="trend-badge hot">leitura em acompanhamento</span>
+      <span class="source-status-badge is-source-confirmed">fontes reais</span>
+      <div class="influencer-buzz-copy">
+        <p class="buzz-kicker">sem inventar polêmica</p>
+        <h3>${hasArticles ? "O dia segue com leitura real enquanto a treta não fecha." : "A editoria acompanha as fontes antes de cravar uma polêmica."}</h3>
+        <p>
+          ${hasArticles
+            ? "Quando não há uma polêmica forte o bastante, o bloco mantém o leitor no fluxo com notícias verificáveis e contexto do Brasil, Acre e Juruá."
+            : "A área fica preenchida em modo de acompanhamento e volta a destacar assunto forte assim que houver fonte pública suficiente."}
+        </p>
+      </div>
+      <div class="daily-buzz-continuity-list">
+        ${articleLinks || `<span class="daily-buzz-continuity-note">Aguardando nova entrada confiável das fontes monitoradas.</span>`}
+      </div>
+      <div class="buzz-inline-meta" aria-label="Assuntos monitorados agora">
+        ${labels || "<span>Brasil</span><span>Acre</span><span>Vale do Juruá</span>"}
+      </div>
+      <div class="engagement buzz-opinion-footer">
+        <span>fluxo preservado: notícia real primeiro</span>
+        <a href="./arquivo.html">abrir arquivo vivo</a>
+      </div>
+    </article>
+  `;
+};
+
+const activateDailyBuzzCards = () => {
+  if (!trendingBuzzGrid) {
+    return;
+  }
+
+  trendingBuzzGrid
+    .querySelectorAll(".reveal")
+    .forEach((node) => node.classList.add("active", "is-visible"));
+  registerArticleCardLinks(trendingBuzzGrid);
+};
+
+const paintDailyTrendingBuzz = (selectedCases = [], continuityStories = [], signalItems = []) => {
+  if (!trendingBuzzGrid) {
+    return;
+  }
+
+  const hasStrongCases = selectedCases.length > 0;
+  const visibleCases = hasStrongCases ? selectedCases : continuityStories;
+
+  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
+  trendingBuzzGrid.classList.toggle("is-daily-buzz-continuity", !hasStrongCases);
+  trendingBuzzGrid.dataset.state = hasStrongCases ? "cases" : "continuity";
+  trendingBuzzGrid.innerHTML = hasStrongCases
+    ? visibleCases.map((item, itemIndex) => buildRealDayNewsCard(item, itemIndex)).join("")
+    : buildDailyBuzzContinuityState(visibleCases, signalItems);
+  reserveSurfaceArticles("dailyBuzz", visibleCases);
+  activateDailyBuzzCards();
+};
+
 const pickDailyTrendingVisibleStories = (selectedCases = [], runtimeArticles = [], liveBuzzItems = []) => {
   if (selectedCases.length) {
     return selectedCases;
@@ -8945,7 +9094,7 @@ const pickDailyTrendingVisibleStories = (selectedCases = [], runtimeArticles = [
     { minScore: 0, allowLatestFallback: true, requireFocus: false }
   );
 
-  return fallbackStories.length ? fallbackStories : getBuzzFallbackItems().slice(0, 6);
+  return fallbackStories;
 };
 
 const rerenderEditorialRemainderSurfaces = () => {
@@ -8967,32 +9116,38 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   }
   dailyTrendingBuzzHydrationStarted = true;
 
+  const runtimeArticles = Array.isArray(options.runtimeArticles) ? options.runtimeArticles : [];
+  const immediateCandidates = getDailyBuzzCandidateItems(runtimeArticles, []);
+  const immediateCases = pickBrazilDayRealStories(
+    immediateCandidates,
+    6,
+    { minScore: 24, allowLatestFallback: false, requireFocus: true }
+  );
+  const immediateContinuity = immediateCases.length
+    ? []
+    : pickDailyBuzzContinuityStories(immediateCandidates, 4);
+
+  paintDailyTrendingBuzz(immediateCases, immediateContinuity, []);
+
   let liveBuzzItems = [];
   try {
-    liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
+    liveBuzzItems = await fetchDailyBuzzTopicFeed(options);
   } catch (_error) {
     liveBuzzItems = [];
   }
-  const runtimeArticles = Array.isArray(options.runtimeArticles) ? options.runtimeArticles : [];
+
+  const candidateItems = getDailyBuzzCandidateItems(runtimeArticles, liveBuzzItems);
   const selectedCases = pickBrazilDayRealStories(
-    [
-      ...runtimeArticles,
-      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
-      ...liveBuzzItems
-    ],
+    candidateItems,
     6,
     { minScore: 24, allowLatestFallback: true, requireFocus: true }
   );
   const visibleCases = pickDailyTrendingVisibleStories(selectedCases, runtimeArticles, liveBuzzItems);
+  const continuityStories = selectedCases.length
+    ? []
+    : pickDailyBuzzContinuityStories(candidateItems, 4);
 
-  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
-  trendingBuzzGrid.innerHTML = visibleCases.length
-    ? visibleCases
-        .map((item, itemIndex) => buildRealDayNewsCard(item, itemIndex))
-        .join("")
-    : trendingBuzzInitialMarkup || buildDailyBuzzEmptyState(liveBuzzItems);
-  reserveSurfaceArticles("dailyBuzz", visibleCases);
-  registerArticleCardLinks(trendingBuzzGrid);
+  paintDailyTrendingBuzz(visibleCases, continuityStories, liveBuzzItems);
 };
 
 const whatMattersTopics = [
