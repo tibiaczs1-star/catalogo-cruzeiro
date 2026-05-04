@@ -41,6 +41,11 @@
   const photoApprovalMeta = document.querySelector("#photoApprovalMeta");
   const photoApprovalReasons = document.querySelector("#photoApprovalReasons");
   const photoApprovalFocus = document.querySelector("#photoApprovalFocus");
+  const photoApprovalFocusX = document.querySelector("#photoApprovalFocusX");
+  const photoApprovalFocusY = document.querySelector("#photoApprovalFocusY");
+  const photoApprovalFocusYValue = document.querySelector("#photoApprovalFocusYValue");
+  const photoApprovalImageFit = document.querySelector("#photoApprovalImageFit");
+  const photoApprovalManualAdjustment = document.querySelector("#photoApprovalManualAdjustment");
   const photoApprovalReplacementInput = document.querySelector("#photoApprovalReplacementInput");
   const photoApprovalNote = document.querySelector("#photoApprovalNote");
   const photoApprovalArticle = document.querySelector("#photoApprovalArticle");
@@ -49,6 +54,14 @@
   const photoApprovalContinue = document.querySelector("#photoApprovalContinue");
   const photoApprovalRunRuntime = document.querySelector("#photoApprovalRunRuntime");
   const photoApprovalDecisionButtons = Array.from(document.querySelectorAll("[data-photo-decision]"));
+  const photoFocusPresetButtons = Array.from(document.querySelectorAll("[data-photo-focus]"));
+  const cheffeActionFeedback = document.querySelector("#cheffeActionFeedback");
+  const cheffeActionFeedbackBadge = document.querySelector("#cheffeActionFeedbackBadge");
+  const cheffeActionFeedbackTitle = document.querySelector("#cheffeActionFeedbackTitle");
+  const cheffeActionFeedbackMessage = document.querySelector("#cheffeActionFeedbackMessage");
+  const cheffeActionFeedbackSteps = document.querySelector("#cheffeActionFeedbackSteps");
+  const cheffeActionFeedbackDetails = document.querySelector("#cheffeActionFeedbackDetails");
+  const cheffeActionFeedbackClose = document.querySelector("#cheffeActionFeedbackClose");
   const quickInstructionInput = document.querySelector("#quickInstructionInput");
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
@@ -135,6 +148,7 @@
   let photoApprovalQueue = [];
   let photoApprovalIndex = 0;
   let photoApprovalBusy = false;
+  let actionFeedbackTimer = 0;
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -362,6 +376,89 @@
     quickPasswordStatus.dataset.tone = tone || "";
   }
 
+  function renderActionFeedbackSteps(steps = []) {
+    if (!cheffeActionFeedbackSteps) return;
+    cheffeActionFeedbackSteps.innerHTML = "";
+    steps.forEach((step) => {
+      const item = document.createElement("li");
+      const state = typeof step === "object" ? step.state || "pending" : "pending";
+      item.dataset.state = state;
+      item.textContent = typeof step === "object" ? step.label || "" : String(step || "");
+      cheffeActionFeedbackSteps.append(item);
+    });
+  }
+
+  function setActionFeedback(options = {}) {
+    if (!cheffeActionFeedback) return;
+    window.clearTimeout(actionFeedbackTimer);
+    const tone = options.tone || "pending";
+    cheffeActionFeedback.hidden = false;
+    cheffeActionFeedback.dataset.tone = tone;
+    cheffeActionFeedback.classList.add("is-open");
+    if (cheffeActionFeedbackBadge) cheffeActionFeedbackBadge.textContent = options.badge || "Runtime";
+    if (cheffeActionFeedbackTitle) cheffeActionFeedbackTitle.textContent = options.title || "Processando ação";
+    if (cheffeActionFeedbackMessage) {
+      cheffeActionFeedbackMessage.textContent = options.message || "A Cheffe Call está processando a solicitação.";
+    }
+    renderActionFeedbackSteps(options.steps || []);
+    if (cheffeActionFeedbackDetails) {
+      const details = String(options.details || "").trim();
+      cheffeActionFeedbackDetails.textContent = details;
+      cheffeActionFeedbackDetails.hidden = !details;
+    }
+    cheffeActionFeedbackClose?.toggleAttribute("hidden", options.closable === false);
+    if (options.autoCloseMs) {
+      actionFeedbackTimer = window.setTimeout(() => closeActionFeedback(), Number(options.autoCloseMs) || 2200);
+    }
+  }
+
+  function closeActionFeedback() {
+    if (!cheffeActionFeedback) return;
+    window.clearTimeout(actionFeedbackTimer);
+    cheffeActionFeedback.classList.remove("is-open");
+    cheffeActionFeedback.hidden = true;
+  }
+
+  function formatFeedbackTime(value = "") {
+    const date = new Date(value);
+    if (!Number.isFinite(date.getTime())) return String(value || "");
+    return date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function buildRuntimeFeedbackDetails(payload = {}) {
+    const runtime = payload.runtime || payload.runtimeSummary || {};
+    const runtimeSummary = runtime.summary || runtime;
+    const publicSummary = payload.summary || {};
+    const imageApprovals = runtime.imageApprovals || {};
+    const appliedCount = [
+      runtimeSummary.imageApprovalsApplied,
+      imageApprovals.applied,
+      publicSummary.imageApprovalsApplied
+    ].find((value) => Number.isFinite(Number(value)));
+    const sentToAgentsCount = [
+      runtimeSummary.imageApprovalsSentToAgents,
+      imageApprovals.sentToAgents,
+      publicSummary.imageApprovalsSentToAgents
+    ].find((value) => Number.isFinite(Number(value)));
+    const lines = [
+      publicSummary.totalAgents ? `${publicSummary.totalAgents} agentes visíveis` : "",
+      publicSummary.averageAutonomy ? `Autonomia média ${publicSummary.averageAutonomy}%` : "",
+      Number.isFinite(Number(appliedCount)) ? `Foto/foco aplicado: ${appliedCount}` : "",
+      Number.isFinite(Number(sentToAgentsCount)) ? `Foto/foco para refazer: ${sentToAgentsCount}` : "",
+      publicSummary.lastRunAt ? `Última runtime: ${formatFeedbackTime(publicSummary.lastRunAt)}` : ""
+    ];
+    return lines.filter(Boolean).join("\n");
+  }
+
+  function getDecisionFeedbackLabel(decision = "") {
+    return {
+      "approve-focus": "Aprovar foco",
+      "swap-image": "Trocar imagem",
+      "keep-fallback": "Manter fallback",
+      redo: "Refazer"
+    }[decision] || "Registrar decisão";
+  }
+
   function resetPhotoApprovalGate() {
     photoApprovalQueue = [];
     photoApprovalIndex = 0;
@@ -458,6 +555,8 @@
                 decisionLabel: latestDecision.actionLabel || latestDecision.decisionLabel || latestDecision.action || "decidido",
                 action: latestDecision.action || latestDecision.decision || "",
                 focus: latestDecision.focus || "",
+                imageFit: latestDecision.imageFit || "",
+                manualAdjustment: latestDecision.manualAdjustment || "",
                 replacementImageUrl: latestDecision.replacementImageUrl || "",
                 note: latestDecision.note || ""
               }
@@ -509,6 +608,30 @@
   function syncPhotoFocusPreview() {
     if (!photoApprovalImage || !photoApprovalFocus) return;
     photoApprovalImage.style.objectPosition = photoApprovalFocus.value || "center 42%";
+    photoApprovalImage.style.objectFit = photoApprovalImageFit?.value || "cover";
+  }
+
+  function parsePhotoFocus(value = "") {
+    const raw = String(value || "center 42%").trim().toLowerCase();
+    const [xRaw = "center", yRaw = "42%"] = raw.split(/\s+/);
+    const x = ["left", "center", "right"].includes(xRaw) ? xRaw : "center";
+    const yMap = { top: 30, center: 50, bottom: 66 };
+    const yNumber = yRaw.endsWith("%") ? Number.parseInt(yRaw, 10) : yMap[yRaw] || 42;
+    const y = Math.max(24, Math.min(76, Number.isFinite(yNumber) ? yNumber : 42));
+    return { x, y };
+  }
+
+  function syncPhotoManualControls(value = "") {
+    const focus = parsePhotoFocus(value || photoApprovalFocus?.value || "center 42%");
+    if (photoApprovalFocusX) photoApprovalFocusX.value = focus.x;
+    if (photoApprovalFocusY) photoApprovalFocusY.value = String(focus.y);
+    if (photoApprovalFocusYValue) photoApprovalFocusYValue.textContent = `${focus.y}%`;
+  }
+
+  function getManualPhotoFocusValue() {
+    const x = photoApprovalFocusX?.value || "center";
+    const y = Number.parseInt(photoApprovalFocusY?.value || "42", 10);
+    return `${x} ${Math.max(24, Math.min(76, Number.isFinite(y) ? y : 42))}%`;
   }
 
   function setPhotoFocusValue(value) {
@@ -522,6 +645,7 @@
       photoApprovalFocus.append(option);
     }
     photoApprovalFocus.value = cleanValue;
+    syncPhotoManualControls(cleanValue);
     syncPhotoFocusPreview();
   }
 
@@ -553,7 +677,7 @@
     if (photoApprovalCounter) photoApprovalCounter.textContent = `${pending} pendente${pending === 1 ? "" : "s"}`;
     if (photoApprovalSummary) {
       photoApprovalSummary.textContent = total
-        ? `${total} item${total === 1 ? "" : "s"} da auditoria de foto/foco, ${decided} ja decidido${decided === 1 ? "" : "s"}.`
+        ? `${total} ${total === 1 ? "item" : "itens"} da auditoria de foto/foco, ${decided} já decidido${decided === 1 ? "" : "s"}.`
         : "Sem bloqueio visual pendente.";
     }
     if (photoApprovalProgress) photoApprovalProgress.textContent = total ? `${photoApprovalIndex + 1}/${total}` : "0/0";
@@ -624,6 +748,10 @@
       photoApprovalArticle.href = item.articleUrl || "noticia.html";
       photoApprovalArticle.toggleAttribute("aria-disabled", !item.articleUrl);
     }
+    if (photoApprovalImageFit) photoApprovalImageFit.value = item.decision?.imageFit || item.imageFit || "cover";
+    if (photoApprovalManualAdjustment) {
+      photoApprovalManualAdjustment.value = item.decision?.manualAdjustment || "";
+    }
     if (photoApprovalReplacementInput) photoApprovalReplacementInput.value = item.decision?.replacementImageUrl || "";
     if (photoApprovalNote) photoApprovalNote.value = item.decision?.note || "";
     setPhotoFocusValue(item.decision?.focus || item.effectiveFocus || item.suggestedFocus || "center 42%");
@@ -643,6 +771,18 @@
   }
 
   async function runAgentsFromAccessGate(password) {
+    setActionFeedback({
+      badge: "Runtime",
+      title: "Rodando agentes agora",
+      message: "A fila aprovada foi enviada para a runtime dos agentes.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Autorização Full Admin validada", state: "done" },
+        { label: "Agentes reais em execução", state: "running" },
+        { label: "Atualizando sala da Cheffe Call", state: "pending" }
+      ]
+    });
     const response = await fetch("/api/real-agents/run", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -655,6 +795,19 @@
     if (!response.ok || !payload.ok) {
       throw new Error(payload.error || "Falha ao rodar agentes.");
     }
+    setActionFeedback({
+      badge: "Runtime",
+      title: "Agentes finalizaram",
+      message: "Runtime concluída. Atualizando a sala com o feedback dos agentes.",
+      tone: "ok",
+      steps: [
+        { label: "Autorização Full Admin validada", state: "done" },
+        { label: "Agentes reais executados", state: "done" },
+        { label: "Sala sendo atualizada", state: "running" }
+      ],
+      details: buildRuntimeFeedbackDetails(payload),
+      closable: true
+    });
     return payload;
   }
 
@@ -669,6 +822,34 @@
         await runAgentsFromAccessGate(password);
       }
       await loadCall();
+      if (shouldRunAgents) {
+        setActionFeedback({
+          badge: "Finalizado",
+          title: "Sala atualizada",
+          message: "Os agentes terminaram e a Cheffe Call já recebeu o feedback da runtime.",
+          tone: "ok",
+          steps: [
+            { label: "Agentes reais executados", state: "done" },
+            { label: "Feedback carregado na sala", state: "done" },
+            { label: "Fluxo normal liberado", state: "done" }
+          ],
+          details: "",
+          closable: true
+        });
+      } else {
+        setActionFeedback({
+          badge: "Sala",
+          title: "Cheffe Call liberada",
+          message: "A sala abriu sem rodar agentes agora. As decisões pendentes continuam na fila.",
+          tone: "ok",
+          steps: [
+            { label: "Senha validada", state: "done" },
+            { label: "Fila mantida para próxima runtime", state: "done" }
+          ],
+          closable: true,
+          autoCloseMs: 3600
+        });
+      }
       setStatus(
         shouldRunAgents
           ? "Rodada manual dos agentes concluida e sala atualizada."
@@ -677,6 +858,17 @@
       );
       quickInstructionInput?.focus();
     } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Ação não concluída",
+        message: error.message || "Não foi possível abrir a Cheffe Call.",
+        tone: "bad",
+        steps: [
+          { label: "Ação interrompida", state: "bad" },
+          { label: "Sala preservada sem gravar nova etapa", state: "pending" }
+        ],
+        closable: true
+      });
       setStatus(error.message || "Nao foi possivel abrir a Cheffe Call.", "bad");
     }
   }
@@ -687,6 +879,19 @@
     if (!item || !password || photoApprovalBusy) return;
     setPhotoApprovalBusy(true);
     setPasswordStatus("Registrando decisao de foto/foco...", "pending");
+    const decisionLabel = getDecisionFeedbackLabel(decision);
+    setActionFeedback({
+      badge: "Fila visual",
+      title: "Registrando decisão",
+      message: `${decisionLabel}: ${item.title || item.slug || "item da fila"}`,
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Decisão enviada ao administrador", state: "running" },
+        { label: "Ordem para agentes preparada", state: "pending" },
+        { label: "Fila será recarregada", state: "pending" }
+      ]
+    });
     try {
       const response = await fetch("/api/news-image-focus-approvals", {
         method: "POST",
@@ -696,6 +901,8 @@
           slug: item.slug,
           decision,
           focus: photoApprovalFocus?.value || item.effectiveFocus || item.suggestedFocus || "",
+          imageFit: photoApprovalImageFit?.value || "cover",
+          manualAdjustment: photoApprovalManualAdjustment?.value || "",
           replacementImageUrl: photoApprovalReplacementInput?.value || "",
           note: photoApprovalNote?.value || ""
         })
@@ -707,6 +914,24 @@
       const normalizedPayload = await fetchPhotoApprovals(password);
       photoApprovalQueue = Array.isArray(normalizedPayload.queue) ? normalizedPayload.queue : photoApprovalQueue;
       setPasswordStatus("Decisao registrada para a proxima runtime.", "ok");
+      setActionFeedback({
+        badge: "Fila visual",
+        title: "Decisão salva",
+        message: `${decisionLabel} registrado. A próxima runtime já sabe o que fazer.`,
+        tone: "ok",
+        steps: [
+          { label: "Decisão gravada", state: "done" },
+          { label: "Ordem enviada para agentes/escritório", state: "done" },
+          { label: "Fila atualizada", state: "done" }
+        ],
+        details: [
+          `Foco: ${photoApprovalFocus?.value || item.suggestedFocus || "sem foco"}`,
+          `Fit: ${photoApprovalImageFit?.value || "cover"}`,
+          photoApprovalManualAdjustment?.value ? `Ajuste: ${photoApprovalManualAdjustment.value}` : ""
+        ].filter(Boolean).join("\n"),
+        closable: true,
+        autoCloseMs: 2600
+      });
       if (Number(normalizedPayload.pendingCount || 0) <= 0) {
         await enterCheffeRoom("Fila de foto/foco registrada. Sala liberada.");
         return;
@@ -716,6 +941,17 @@
     } catch (error) {
       setPasswordStatus(error.message || "Falha ao registrar decisao.", "bad");
       setStatus(error.message || "Falha ao registrar decisao de foto/foco.", "bad");
+      setActionFeedback({
+        badge: "Falha",
+        title: "Decisão não registrada",
+        message: error.message || "Falha ao registrar decisão de foto/foco.",
+        tone: "bad",
+        steps: [
+          { label: "Servidor recusou a decisão", state: "bad" },
+          { label: "Item continua na fila", state: "pending" }
+        ],
+        closable: true
+      });
       setPhotoApprovalBusy(false);
     }
   }
@@ -2176,7 +2412,17 @@
     });
   });
 
-  photoApprovalFocus?.addEventListener("change", syncPhotoFocusPreview);
+  photoApprovalFocus?.addEventListener("change", () => {
+    syncPhotoManualControls(photoApprovalFocus.value);
+    syncPhotoFocusPreview();
+  });
+  photoApprovalFocusX?.addEventListener("change", () => setPhotoFocusValue(getManualPhotoFocusValue()));
+  photoApprovalFocusY?.addEventListener("input", () => setPhotoFocusValue(getManualPhotoFocusValue()));
+  photoApprovalImageFit?.addEventListener("change", syncPhotoFocusPreview);
+  photoFocusPresetButtons.forEach((button) => {
+    button.addEventListener("click", () => setPhotoFocusValue(button.dataset.photoFocus || "center 42%"));
+  });
+  cheffeActionFeedbackClose?.addEventListener("click", closeActionFeedback);
 
   photoApprovalPrev?.addEventListener("click", () => {
     if (photoApprovalBusy || photoApprovalIndex <= 0) return;
@@ -2332,6 +2578,18 @@
     const password = requireAdminPassword("rodar os agentes reais");
     if (!password) return;
     setStatus("Rodando agentes reais...");
+    setActionFeedback({
+      badge: "Runtime",
+      title: "Rodando agentes agora",
+      message: "A Cheffe Call está executando a runtime manual.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha validada", state: "done" },
+        { label: "Runtime dos agentes em execução", state: "running" },
+        { label: "Sala aguardando feedback", state: "pending" }
+      ]
+    });
     fetch("/api/real-agents/run", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -2343,10 +2601,49 @@
       .then(async (response) => {
         const payload = await response.json();
         if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+        setActionFeedback({
+          badge: "Runtime",
+          title: "Agentes finalizaram",
+          message: "Runtime concluída. Feedback pronto para a sala.",
+          tone: "ok",
+          steps: [
+            { label: "Runtime dos agentes executada", state: "done" },
+            { label: "Feedback recebido", state: "done" },
+            { label: "Atualizando painel", state: "running" }
+          ],
+          details: buildRuntimeFeedbackDetails(payload),
+          closable: true
+        });
         return loadCall();
       })
-      .then(() => setStatus("Rodada manual dos agentes concluída e sala atualizada.", "ok"))
-      .catch((error) => setStatus(error.message, "bad"));
+      .then(() => {
+        setActionFeedback({
+          badge: "Finalizado",
+          title: "Sala atualizada",
+          message: "Os agentes terminaram e a Cheffe Call está com dados novos.",
+          tone: "ok",
+          steps: [
+            { label: "Runtime concluída", state: "done" },
+            { label: "Sala atualizada", state: "done" }
+          ],
+          closable: true
+        });
+        setStatus("Rodada manual dos agentes concluída e sala atualizada.", "ok");
+      })
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Runtime não concluiu",
+          message: error.message || "Falha ao rodar agentes.",
+          tone: "bad",
+          steps: [
+            { label: "Runtime interrompida", state: "bad" },
+            { label: "Sala preservada", state: "pending" }
+          ],
+          closable: true
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   adminReleaseRoom?.addEventListener("click", () => {

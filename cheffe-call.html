@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260504-photo-approval" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-photo-approval-final" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -560,16 +560,49 @@
                 <h3 id="photoApprovalTitle">Item da fila</h3>
                 <p id="photoApprovalMeta" class="photo-approval-meta">Aguardando decisão</p>
                 <div id="photoApprovalReasons" class="photo-approval-reasons" aria-label="Motivos da auditoria"></div>
-                <label for="photoApprovalFocus">Foco manual</label>
-                <select id="photoApprovalFocus">
-                  <option value="center 32%">center 32%</option>
-                  <option value="center 34%">center 34%</option>
-                  <option value="center 38%">center 38%</option>
-                  <option value="center 42%" selected>center 42%</option>
-                  <option value="center 50%">center 50%</option>
-                  <option value="center 58%">center 58%</option>
-                  <option value="center 66%">center 66%</option>
-                </select>
+                <div class="photo-manual-tools" aria-label="Ajustes manuais">
+                  <label for="photoApprovalFocus">Foco manual</label>
+                  <select id="photoApprovalFocus">
+                    <option value="center 32%">center 32%</option>
+                    <option value="center 34%">center 34%</option>
+                    <option value="center 38%">center 38%</option>
+                    <option value="center 42%" selected>center 42%</option>
+                    <option value="center 50%">center 50%</option>
+                    <option value="center 58%">center 58%</option>
+                    <option value="center 66%">center 66%</option>
+                  </select>
+                  <div class="photo-manual-axis">
+                    <label for="photoApprovalFocusX">Horizontal</label>
+                    <select id="photoApprovalFocusX">
+                      <option value="left">left</option>
+                      <option value="center" selected>center</option>
+                      <option value="right">right</option>
+                    </select>
+                    <label for="photoApprovalFocusY">Vertical <output id="photoApprovalFocusYValue">42%</output></label>
+                    <input id="photoApprovalFocusY" type="range" min="24" max="76" step="2" value="42" />
+                  </div>
+                  <div class="photo-focus-presets" aria-label="Presets de foco">
+                    <button type="button" data-photo-focus="center 32%">Rosto alto</button>
+                    <button type="button" data-photo-focus="center 42%">Centro alto</button>
+                    <button type="button" data-photo-focus="center 50%">Centro</button>
+                    <button type="button" data-photo-focus="center 66%">Baixo</button>
+                  </div>
+                  <div class="photo-manual-axis">
+                    <label for="photoApprovalImageFit">Fit</label>
+                    <select id="photoApprovalImageFit">
+                      <option value="cover" selected>cover</option>
+                      <option value="contain">contain</option>
+                    </select>
+                    <label for="photoApprovalManualAdjustment">Ajuste pedido</label>
+                    <select id="photoApprovalManualAdjustment">
+                      <option value="">sem pedido extra</option>
+                      <option value="priorizar rosto ou pessoa principal">priorizar rosto/pessoa</option>
+                      <option value="buscar imagem real da fonte original">buscar imagem real</option>
+                      <option value="evitar corte de texto, placa ou objeto central">evitar corte</option>
+                      <option value="usar fallback editorial mais limpo">fallback mais limpo</option>
+                    </select>
+                  </div>
+                </div>
                 <div class="photo-approval-actions">
                   <button type="button" data-photo-decision="approve-focus">Aprovar foco</button>
                   <button type="button" data-photo-decision="swap-image">Trocar imagem</button>
@@ -598,7 +631,20 @@
       </div>
     </main>
 
+    <div class="cheffe-action-feedback" id="cheffeActionFeedback" hidden role="status" aria-live="polite">
+      <section class="cheffe-action-feedback-card" aria-labelledby="cheffeActionFeedbackTitle">
+        <header>
+          <span id="cheffeActionFeedbackBadge">Runtime</span>
+          <button type="button" id="cheffeActionFeedbackClose">Fechar</button>
+        </header>
+        <strong id="cheffeActionFeedbackTitle">Aguardando ação</strong>
+        <p id="cheffeActionFeedbackMessage">A Cheffe Call vai mostrar o andamento aqui.</p>
+        <ol id="cheffeActionFeedbackSteps"></ol>
+        <pre id="cheffeActionFeedbackDetails"></pre>
+      </section>
+    </div>
+
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260504-photo-approval"></script>
+    <script defer src="cheffe-call.js?v=20260504-photo-approval-final"></script>
   </body>
 </html>
