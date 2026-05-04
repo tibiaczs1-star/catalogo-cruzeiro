@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260504-photo-approval-final" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-agent-opinion-flow1" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -456,9 +456,29 @@
         </section>
 
         <section class="call-opinions" aria-labelledby="opinionsTitle">
-        <div class="section-head">
-          <p class="call-kicker">Perspectivas</p>
-          <h2 id="opinionsTitle">Opiniões dos agentes</h2>
+        <div class="section-head opinion-flow-head">
+          <div>
+            <p class="call-kicker">Fila de decisão</p>
+            <h2 id="opinionsTitle">Opiniões dos agentes</h2>
+          </div>
+          <div class="opinion-flow-summary" aria-label="Resumo das opiniões">
+            <span><b id="opinionPendingCount">0</b> pendentes</span>
+            <span><b id="opinionReadyCount">0</b> aprovadas</span>
+            <span><b id="opinionRunningCount">0</b> rodando</span>
+          </div>
+        </div>
+        <div class="opinion-flow-map" aria-label="Fluxo das opiniões">
+          <span data-opinion-flow-step="listen">1. Opinar</span>
+          <span data-opinion-flow-step="decide">2. Decidir</span>
+          <span data-opinion-flow-step="run">3. Rodar</span>
+          <span data-opinion-flow-step="done">4. Implementar</span>
+        </div>
+        <div class="opinion-flow-toolbar">
+          <p id="opinionFlowMeta">Cada agente entra como card de decisão antes de virar ordem.</p>
+          <div>
+            <button type="button" id="runApprovedOpinions">Rodar aprovada</button>
+            <button type="button" id="refreshOpinionFlow">Atualizar fila</button>
+          </div>
         </div>
         <div id="opinionsList" class="opinions-list"></div>
       </section>
@@ -645,6 +665,6 @@
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260504-photo-approval-final"></script>
+    <script defer src="cheffe-call.js?v=20260504-agent-opinion-flow1"></script>
   </body>
 </html>

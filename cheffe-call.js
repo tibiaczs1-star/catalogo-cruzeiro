@@ -8,6 +8,13 @@
   const nextSpeakerEl = document.querySelector("#nextSpeaker");
   const markGoodIdeaEl = document.querySelector("#markGoodIdea");
   const opinionsEl = document.querySelector("#opinionsList");
+  const opinionPendingCount = document.querySelector("#opinionPendingCount");
+  const opinionReadyCount = document.querySelector("#opinionReadyCount");
+  const opinionRunningCount = document.querySelector("#opinionRunningCount");
+  const opinionFlowMeta = document.querySelector("#opinionFlowMeta");
+  const runApprovedOpinions = document.querySelector("#runApprovedOpinions");
+  const refreshOpinionFlow = document.querySelector("#refreshOpinionFlow");
+  const opinionFlowSteps = Array.from(document.querySelectorAll("[data-opinion-flow-step]"));
   const speechBubbleEl = document.querySelector("#activeSpeechBubble");
   const raisedHandBoard = document.querySelector("#raisedHandBoard");
   const raisedHandList = document.querySelector("#raisedHandList");
@@ -149,6 +156,7 @@
   let photoApprovalIndex = 0;
   let photoApprovalBusy = false;
   let actionFeedbackTimer = 0;
+  let latestOpinionFlow = [];
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -1570,19 +1578,141 @@
     }
   }
 
+  function getOpinionKey(item) {
+    const context = enrichAgentContext(item);
+    return slugify(`${context.name}|${context.office}|${context.action || item.opinion || ""}`).slice(0, 140);
+  }
+
+  function getOpinionDecisionMatch(item, session) {
+    const decisions = Array.isArray(session?.decisions) ? session.decisions : [];
+    const approvals = Array.isArray(session?.approvals) ? session.approvals : [];
+    const key = getOpinionKey(item);
+    const agentSlug = slugify(getAgentDisplayName(item));
+    const context = enrichAgentContext(item);
+    const actionSlug = slugify(context.action || item.opinion || "");
+    const opinionSlug = slugify(item.opinion || "");
+    const byKey = decisions.find((decision) => decision.opinionKey && decision.opinionKey === key);
+    if (byKey) return byKey;
+    const byAgentAndContent = decisions.find((decision) => {
+      if (slugify(decision.agent || "") !== agentSlug) return false;
+      const decisionText = slugify([decision.title, decision.text, decision.command].join(" "));
+      return (
+        (actionSlug && (decisionText.includes(actionSlug.slice(0, 44)) || actionSlug.includes(decisionText.slice(0, 44)))) ||
+        (opinionSlug && decisionText.includes(opinionSlug.slice(0, 44)))
+      );
+    });
+    if (byAgentAndContent) return byAgentAndContent;
+    const approval = approvals.find((itemApproval) => (
+      (itemApproval.opinionKey && itemApproval.opinionKey === key) ||
+      slugify(itemApproval.agent || "") === agentSlug
+    ));
+    return approval
+      ? {
+          state: "ready",
+          kindLabel: "aprovada",
+          action: approval.action || "approve",
+          agent: approval.agent,
+          title: approval.note || "Opiniao aprovada"
+        }
+      : null;
+  }
+
+  function getOpinionFlowStatus(item, session) {
+    if (item?.approvalRequired === false) {
+      return {
+        state: "silent",
+        label: "triagem",
+        detail: "Sem ligação suficiente para virar ordem agora.",
+        action: ""
+      };
+    }
+    const match = getOpinionDecisionMatch(item, session);
+    if (!match) {
+      return {
+        state: "pending",
+        label: "pendente",
+        detail: "Aguardando decisão Full Admin.",
+        action: ""
+      };
+    }
+    const state = match.state || "ready";
+    const labelMap = {
+      ready: "aprovada",
+      queued: "tarefa",
+      running: "rodando",
+      terminal: "terminal",
+      fallback: "terminal",
+      published: "implementada",
+      dismissed: "ignorada"
+    };
+    return {
+      state,
+      label: match.kindLabel || labelMap[state] || "decidida",
+      detail: match.title || match.text || "Decisão registrada na reunião.",
+      action: match.action || ""
+    };
+  }
+
+  function updateOpinionFlowSummary(flowItems) {
+    const pending = flowItems.filter((item) => item.status.state === "pending").length;
+    const ready = flowItems.filter((item) => ["ready", "queued"].includes(item.status.state)).length;
+    const running = flowItems.filter((item) => ["running", "terminal", "fallback", "published"].includes(item.status.state)).length;
+    if (opinionPendingCount) opinionPendingCount.textContent = String(pending);
+    if (opinionReadyCount) opinionReadyCount.textContent = String(ready);
+    if (opinionRunningCount) opinionRunningCount.textContent = String(running);
+    if (opinionFlowMeta) {
+      opinionFlowMeta.textContent = flowItems.length
+        ? `${flowItems.length} opinioes separadas. ${pending} aguardam decisao, ${ready} ja viraram ordem e ${running} estao em execucao, terminal ou implementadas.`
+        : "Cada agente entra como card de decisão antes de virar ordem.";
+    }
+    const activeStep = ready
+      ? "run"
+      : pending
+        ? "decide"
+        : running
+          ? "done"
+          : flowItems.length
+            ? "listen"
+            : "";
+    opinionFlowSteps.forEach((step) => {
+      const key = step.dataset.opinionFlowStep || "";
+      step.classList.toggle("is-active", key === activeStep);
+      step.classList.toggle(
+        "is-done",
+        (key === "listen" && flowItems.length > 0) ||
+          (key === "decide" && (ready > 0 || running > 0)) ||
+          (key === "run" && running > 0) ||
+          (key === "done" && flowItems.some((item) => item.status.state === "published"))
+      );
+    });
+  }
+
   function renderOpinions(payload) {
     const opinions = normalizeOpinions(payload.opinions, payload.meeting?.lastInstruction || "o assunto da reunião");
     if (!opinions.length) {
       opinionsEl.innerHTML = '<p class="opinion-body">Nenhuma opinião registrada ainda.</p>';
+      latestOpinionFlow = [];
+      updateOpinionFlowSummary([]);
       return;
     }
+    const session = getActiveSession(payload);
+    latestOpinionFlow = opinions.map((item, index) => ({
+      index,
+      item,
+      status: getOpinionFlowStatus(item, session)
+    }));
+    updateOpinionFlowSummary(latestOpinionFlow);
 
     opinionsEl.innerHTML = opinions
       .map(
         (item, index) => {
           const context = enrichAgentContext(item);
+          const flowItem = latestOpinionFlow[index] || { status: { state: "pending", label: "pendente", detail: "" } };
+          const status = flowItem.status;
+          const canRun = ["ready", "queued"].includes(status.state);
+          const isClosed = ["running", "terminal", "fallback", "published", "dismissed", "silent"].includes(status.state);
           return `
-          <article class="opinion-item" data-opinion-index="${index}">
+          <article class="opinion-item is-${escapeHtml(status.state)}" data-opinion-index="${index}" data-opinion-key="${escapeHtml(getOpinionKey(item))}">
             <div class="opinion-id">
               <div class="opinion-avatar-window" aria-hidden="true">
                 ${renderAgentPhotoToken(item)}
@@ -1592,16 +1722,23 @@
               <span>${escapeHtml(context.office)} • ${escapeHtml(context.role)} • ${escapeHtml(context.score)}%</span>
             </div>
             <div class="opinion-context-window">
+              <div class="opinion-decision-topline">
+                <span>${escapeHtml(status.label)}</span>
+                <span>${escapeHtml(status.detail).slice(0, 120)}</span>
+              </div>
               <p class="opinion-body">${escapeHtml(item.opinion)}</p>
               <div class="idea-context-grid">
                 <span>Neural ${escapeHtml(context.neural)}%</span>
                 <span>Objetivo: ${escapeHtml(context.intent).slice(0, 90)}</span>
                 <span>Ação: ${escapeHtml(context.action).slice(0, 90)}</span>
               </div>
-              <div class="speech-actions compact">
-                <button type="button" data-list-idea-action="approve" data-index="${index}">Aprovar</button>
-                <button type="button" data-list-idea-action="variation" data-index="${index}">Pedir ajuste</button>
-                <button type="button" data-list-idea-action="task" data-index="${index}">Criar tarefa</button>
+              <div class="speech-actions compact opinion-decision-actions">
+                <button type="button" data-list-idea-action="approve" data-index="${index}" ${isClosed ? "disabled" : ""}>Aprovar</button>
+                <button type="button" data-list-idea-action="implement" data-index="${index}" ${canRun ? "" : "disabled"}>Rodar agora</button>
+                <button type="button" data-list-idea-action="variation" data-index="${index}" ${status.state === "dismissed" ? "disabled" : ""}>Pedir ajuste</button>
+                <button type="button" data-list-idea-action="task" data-index="${index}" ${isClosed ? "disabled" : ""}>Criar tarefa</button>
+                <button type="button" data-list-idea-action="terminal" data-index="${index}">Terminal</button>
+                <button type="button" data-list-idea-action="dismiss" data-index="${index}" ${isClosed ? "disabled" : ""}>Ignorar</button>
               </div>
             </div>
           </article>
@@ -1939,8 +2076,8 @@
     if (action === "variation") {
       const packet = buildExecutionPacket(active, "prompt");
       const adjustmentPrompt = packet.prompt || `Ajuste a proposta de ${agentName}: ${idea}`;
-      if (await postRoomAction("terminal", active, { title: `Prompt de ajuste para ${agentName}`, command: adjustmentPrompt, prompt: adjustmentPrompt })) {
-        setStatus(`Prompt de ajuste de ${agentName} foi enviado para execução.`, "ok");
+      if (await postRoomAction("variation", active, { title: `Ajuste pedido para ${agentName}`, command: adjustmentPrompt, prompt: adjustmentPrompt })) {
+        setStatus(`Ajuste de ${agentName} ficou registrado na fila de decisões.`, "ok");
         return;
       }
       enqueueTask({
@@ -2019,6 +2156,24 @@
         "command: aguardando seu complemento no campo Terminal"
       ].join("\n");
       setStatus(`Ideia de ${agentName} foi enviada ao terminal.`, "ok");
+      return;
+    }
+    if (action === "dismiss") {
+      if (await postRoomAction("dismiss", active, { title: `Ignorar por enquanto: ${agentName}` })) {
+        setStatus(`${agentName} saiu da fila de ação desta rodada.`, "ok");
+        moveToNextSpeaker("próxima fala");
+        return;
+      }
+      enqueueTask({
+        state: "dismissed",
+        kindLabel: "ignorada",
+        agent: agentName,
+        title: `Opinião ignorada por enquanto`,
+        text: idea
+      });
+      addMeetingLog({ kindLabel: "ignorada", agent: agentName, text: idea });
+      setStatus(`${agentName} ficou fora da execução desta rodada.`, "ok");
+      moveToNextSpeaker("próxima fala");
       return;
     }
     if (action === "file") {
@@ -2311,6 +2466,7 @@
       agent: active ? getAgentDisplayName(active) : "Cheffe Call",
       office: active ? getAgentOffice(active) : "Sistema",
       role: active?.role || "",
+      opinionKey: active ? getOpinionKey(active) : "",
       title: extras.title || active?.assignment?.action || active?.action || active?.opinion || "Ação da reunião",
       opinion: active?.opinion || "",
       howTo: extras.howTo || packet?.howTo || "",
@@ -2572,6 +2728,24 @@
         setStatus("Resumo da Cheffe Call atualizado.", "ok");
       })
       .catch((error) => setStatus(error.message, "bad"));
+  });
+
+  refreshOpinionFlow?.addEventListener("click", () => {
+    setStatus("Atualizando fila de opiniões dos agentes...");
+    loadCall()
+      .then(() => setStatus("Fila de opiniões atualizada.", "ok"))
+      .catch((error) => setStatus(error.message, "bad"));
+  });
+
+  runApprovedOpinions?.addEventListener("click", () => {
+    const ready = latestOpinionFlow.find((item) => ["ready", "queued"].includes(item.status.state));
+    if (!ready) {
+      setStatus("Aprove uma opinião antes de rodar a execução.", "bad");
+      return;
+    }
+    activeSpeakerIndex = ready.index;
+    showActiveSpeaker();
+    handleIdeaAction("implement").catch((error) => setStatus(error.message, "bad"));
   });
 
   adminRunAgentsNow?.addEventListener("click", () => {

@@ -7993,6 +7993,8 @@ function appendNewsImageApprovalOfficeOrder(decision = {}) {
   const isApprovedAction = ["approve-focus", "keep-fallback", "replace-image"].includes(action);
   const status = isApprovedAction ? "aprovado" : "reaberto";
   const focusText = decision.focus ? ` Foco sugerido: ${decision.focus}.` : "";
+  const fitText = decision.imageFit ? ` Fit: ${decision.imageFit}.` : "";
+  const manualText = decision.manualAdjustment ? ` Ajuste manual: ${decision.manualAdjustment}.` : "";
   const replacementText = decision.replacementImageUrl ? ` Nova imagem: ${decision.replacementImageUrl}.` : "";
   const noteText = decision.note ? ` Observacao do chefe: ${decision.note}` : "";
   return appendOfficeOrder({
@@ -8001,7 +8003,7 @@ function appendNewsImageApprovalOfficeOrder(decision = {}) {
     to: "Codex CEO + Escritorio Design + agentes reais",
     priority: isApprovedAction ? "media" : "alta",
     message: cleanShortText(
-      `Cheffe Call registrou decisao de foto/foco: ${decision.actionLabel || action} para "${title}".${focusText}${replacementText}${noteText}`,
+      `Cheffe Call registrou decisao de foto/foco: ${decision.actionLabel || action} para "${title}".${focusText}${fitText}${manualText}${replacementText}${noteText}`,
       1200
     ),
     ceoReply: isApprovedAction
@@ -8014,6 +8016,8 @@ function appendNewsImageApprovalOfficeOrder(decision = {}) {
       slug: decision.slug || "",
       action,
       focus: decision.focus || "",
+      imageFit: decision.imageFit || "",
+      manualAdjustment: decision.manualAdjustment || "",
       replacementImageUrl: decision.replacementImageUrl || "",
       articleUrl: decision.articleUrl || ""
     },
@@ -8246,7 +8250,10 @@ function buildRealAgentsPayload() {
       failedAgents: Number(latestRun?.summary?.failedAgents || 0),
       exhaustedAgents: Number(latestRun?.summary?.exhaustedAgents || 0),
       averageEnergy: Number(latestRun?.summary?.averageEnergy || 0),
-      averageMorale: Number(latestRun?.summary?.averageMorale || 0)
+      averageMorale: Number(latestRun?.summary?.averageMorale || 0),
+      imageApprovalsApplied: Number(latestRun?.summary?.imageApprovalsApplied || 0),
+      imageApprovalsSentToAgents: Number(latestRun?.summary?.imageApprovalsSentToAgents || 0),
+      photoFocusDecisions: Number(latestRun?.summary?.photoFocusDecisions || 0)
     },
     autonomy: latestRun?.autonomy || null,
     life: latestRun?.life || null,
@@ -8464,6 +8471,7 @@ function normalizeCheffeCallDecision(entry = {}) {
     prompt: cleanShortText(entry.prompt || "", 3200),
     command: cleanShortText(entry.command || "", 1600),
     action: cleanShortText(entry.action || "", 80),
+    opinionKey: cleanShortText(entry.opinionKey || "", 140),
     artifact: cleanShortText(entry.artifact || "", 400)
   };
 }
@@ -8819,6 +8827,7 @@ function applyCheffeCallAction(body = {}) {
   const command = cleanShortText(body.command || "", 1600);
   const howTo = cleanShortText(body.howTo || "", 3200);
   const prompt = cleanShortText(body.prompt || "", 3200);
+  const opinionKey = cleanShortText(body.opinionKey || "", 140);
   const approvals = Array.isArray(targetSession.approvals) ? targetSession.approvals.slice(0, 32) : [];
   const logs = Array.isArray(targetSession.logs) ? targetSession.logs.slice(0, 64) : [];
   const decisions = Array.isArray(targetSession.decisions) ? targetSession.decisions.slice(0, 32) : [];
@@ -8839,6 +8848,7 @@ function applyCheffeCallAction(body = {}) {
       agent,
       office,
       role,
+      opinionKey,
       note: cleanShortText(entry.note || "", 1200),
       executableActionId: cleanShortText(entry.executableActionId || "", 120)
     });
@@ -8934,6 +8944,7 @@ function applyCheffeCallAction(body = {}) {
       howTo,
       prompt,
       command,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -8970,6 +8981,7 @@ function applyCheffeCallAction(body = {}) {
       howTo,
       prompt,
       command,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -9003,6 +9015,7 @@ function applyCheffeCallAction(body = {}) {
       howTo,
       prompt,
       command,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -9026,6 +9039,7 @@ function applyCheffeCallAction(body = {}) {
       text: title,
       command,
       prompt,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -9050,7 +9064,25 @@ function applyCheffeCallAction(body = {}) {
       text: title,
       howTo,
       prompt,
-      command
+      command,
+      opinionKey
+    });
+  } else if (action === "dismiss") {
+    pushLog({
+      kindLabel: "opinião ignorada",
+      agent,
+      office,
+      text: opinion || title
+    });
+    pushDecision({
+      state: "dismissed",
+      kindLabel: "ignorada",
+      agent,
+      office,
+      title: `Ignorada por enquanto: ${agent}`,
+      text: title,
+      command,
+      opinionKey
     });
   } else {
     return { ok: false, status: 400, error: "Ação da Cheffe Call ainda nao suportada." };
@@ -11527,7 +11559,20 @@ async function handleApi(req, res, pathname, searchParams) {
       createdAt: new Date().toISOString()
     });
 
-    return sendJson(res, 201, { ok: true, ...result.payload });
+    const payload = result.payload;
+    return sendJson(res, 201, {
+      ok: true,
+      runtime: result.summary,
+      feedback: {
+        title: "Agentes reais finalizaram",
+        message: "Runtime executada e painel pronto para recarregar.",
+        imageApprovalsApplied:
+          payload?.summary?.imageApprovalsApplied ?? result.summary?.imageApprovals?.applied ?? 0,
+        imageApprovalsSentToAgents:
+          payload?.summary?.imageApprovalsSentToAgents ?? result.summary?.imageApprovals?.sentToAgents ?? 0
+      },
+      ...payload
+    });
   }
 
   if (req.method === "GET" && pathname === "/api/cheffe-call/photo-approvals") {
