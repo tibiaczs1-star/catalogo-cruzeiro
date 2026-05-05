@@ -12326,7 +12326,13 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!result.ok) {
       return sendJson(res, result.status || 400, result);
     }
-    return sendJson(res, 200, result.payload);
+    return sendJson(res, 200, {
+      ...result.payload,
+      action: result.action,
+      reviewedAction: result.reviewedAction || null,
+      proof: result.proof || null,
+      actionProof: result.proof || null
+    });
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/release") {
