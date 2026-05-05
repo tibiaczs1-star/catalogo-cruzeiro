@@ -90,6 +90,8 @@ const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-re
 const REAL_AGENTS_ECOSYSTEM_STUDY_FILE = path.join(DATA_DIR, "real-agents-ecosystem-study.json");
 const CHEFFE_CALL_AUTONOMY_LOG_FILE = path.join(DATA_DIR, "cheffe-call-autonomy-log.json");
 const CHEFFE_CALL_IDE_ACTIONS_FILE = path.join(DATA_DIR, "cheffe-call-ide-actions.json");
+const REVIEW_TEAM_REPORT_JSON_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
+const REVIEW_TEAM_REPORT_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.md");
 const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-autonomy-cycle.js");
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
@@ -9392,6 +9394,65 @@ function appendCheffeIdeAction(action = {}) {
   return nextAction;
 }
 
+function buildCheffeReviewQueue() {
+  const file = path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_JSON_FILE).replace(/\\/g, "/");
+  const report = readJson(REVIEW_TEAM_REPORT_JSON_FILE, null);
+  if (!report || typeof report !== "object") {
+    return {
+      kind: "cheffe-review-queue",
+      source: "npm run review:team",
+      file,
+      markdownFile: path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_MD_FILE).replace(/\\/g, "/"),
+      status: "not-run",
+      generatedAt: "",
+      total: 0,
+      byType: {},
+      topFiles: [],
+      issues: [],
+      summary: "A equipe de revisão ainda não gerou relatório nesta worktree."
+    };
+  }
+
+  const issues = Array.isArray(report.issues) ? report.issues : [];
+  const total = Number(report.summary?.totalIssues ?? issues.length) || 0;
+  const safeIssues = issues
+    .map((issue, index) => ({
+      id: cleanShortText(issue.id || `review-${index + 1}`, 80),
+      status: "open-review",
+      type: cleanShortText(issue.type || "review", 80),
+      severity: cleanShortText(issue.severity || "medium", 40),
+      file: cleanShortText(issue.file || "", 220),
+      line: Number(issue.line || 0) || 0,
+      label: cleanShortText(issue.label || "Pendência de revisão", 160),
+      detail: cleanShortText(issue.detail || "", 1200)
+    }))
+    .slice(0, 80);
+
+  return {
+    kind: "cheffe-review-queue",
+    source: "npm run review:team",
+    file,
+    markdownFile: path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_MD_FILE).replace(/\\/g, "/"),
+    status: total > 0 ? "open" : "clear",
+    generatedAt: cleanShortText(report.generatedAt || "", 80),
+    total,
+    byType: report.summary?.byType && typeof report.summary.byType === "object" ? report.summary.byType : {},
+    topFiles: Array.isArray(report.summary?.topFiles)
+      ? report.summary.topFiles
+          .map((item) => ({
+            file: cleanShortText(item.file || "", 220),
+            count: Number(item.count || 0)
+          }))
+          .filter((item) => item.file)
+          .slice(0, 12)
+      : [],
+    issues: safeIssues,
+    summary: total > 0
+      ? `Revisão encontrou ${total} pendência(s).`
+      : "Revisão sem pendências no relatório atual."
+  };
+}
+
 function runCheffeCommandProof(label, command, args = [], options = {}) {
   const startedAt = new Date().toISOString();
   const timeout = Math.max(1000, Math.min(Number(options.timeoutMs || 60000), 180000));
@@ -9782,16 +9843,32 @@ function executeCheffeAutonomousOrder(context = {}) {
     const commandProof = runCheffeCommandProof("review team", process.execPath, ["scripts/review-team-audit.js"], {
       timeoutMs: 120000
     });
+    const reviewQueue = buildCheffeReviewQueue();
+    const hasReviewIssues = Number(reviewQueue.total || 0) > 0;
     return finish({
-      ok: commandProof.ok,
-      status: commandProof.ok ? "executed" : "failed",
-      summary: commandProof.ok
-        ? "Revisao automatica da equipe local executada."
-        : "Revisao automatica falhou; ver stderr no proof.",
+      ok: commandProof.ok && !hasReviewIssues,
+      status: commandProof.ok ? (hasReviewIssues ? "blocked" : "executed") : "failed",
+      summary: !commandProof.ok
+        ? "Revisao automatica falhou; ver stderr no proof."
+        : hasReviewIssues
+          ? `Revisao automatica encontrou ${reviewQueue.total} pendencia(s).`
+          : "Revisao automatica da equipe local executada sem pendencias.",
+      reasonCode: hasReviewIssues ? "review-team-issues" : "",
+      blockedReason: hasReviewIssues ? "A equipe de revisão encontrou pendências que precisam virar correção concreta." : "",
+      missingRequirements: hasReviewIssues
+        ? reviewQueue.issues.slice(0, 8).map((issue) => `${issue.severity}: ${issue.file}${issue.line ? `:${issue.line}` : ""} - ${issue.label}`)
+        : [],
+      suggestedIdeCommand: hasReviewIssues
+        ? "Codex IDE: corrigir os arquivos listados em reviewQueue, rodar npm run review:team até totalIssues=0 e devolver prova."
+        : "",
+      expectedProof: hasReviewIssues
+        ? ["arquivos corrigidos", "npm run review:team com totalIssues=0", "smoke da página afetada quando houver UI pública"]
+        : [],
       commandProof,
+      reviewQueue,
       files: [
-        buildProofFile(path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.md"), "relatorio review team"),
-        buildProofFile(path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json"), "json review team")
+        buildProofFile(REVIEW_TEAM_REPORT_MD_FILE, "relatorio review team"),
+        buildProofFile(REVIEW_TEAM_REPORT_JSON_FILE, "json review team")
       ]
     });
   }
@@ -10687,6 +10764,7 @@ function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
   const ideActions = readCheffeIdeActionQueue();
+  const reviewQueue = buildCheffeReviewQueue();
   const sessionOpinions = Array.isArray(state.sessions[0]?.opinions) ? state.sessions[0].opinions : [];
   const displayOpinions = shouldRefreshCheffeCallOpinions(sessionOpinions)
     ? getCheffeCallOpinions(agentsPayload, state.lastInstruction)
@@ -10729,6 +10807,7 @@ function buildCheffeCallPayload() {
       waiting: ideActions.filter((item) => String(item.status || "").includes("waiting")).length,
       actions: ideActions.slice(0, 32)
     },
+    reviewQueue,
     queue: Array.isArray(agentsPayload.queue) ? agentsPayload.queue : [],
     liveEvents: Array.isArray(agentsPayload.liveEvents) ? agentsPayload.liveEvents : [],
     officeLogs: Array.isArray(agentsPayload.officeLogs) ? agentsPayload.officeLogs : [],

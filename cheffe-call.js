@@ -22,6 +22,7 @@
   const callModeBanner = document.querySelector("#callModeBanner");
   const taskQueueList = document.querySelector("#taskQueueList");
   const ideActionQueueList = document.querySelector("#ideActionQueueList");
+  const reviewQueueList = document.querySelector("#reviewQueueList");
   const agentOfDayEl = document.querySelector("#agentOfDay");
   const agentOfDayMetaEl = document.querySelector("#agentOfDayMeta");
   const agentOfDayAvatar = document.querySelector("#agentOfDayAvatar");
@@ -207,6 +208,7 @@
   let meetingLogs = [];
   let taskQueue = [];
   let ideActionQueue = [];
+  let reviewQueue = null;
   let raisedHandName = "";
   let raisedHandQueue = [];
   let promptConsoleData = null;
@@ -3748,6 +3750,54 @@
       .join("");
   }
 
+  function renderReviewQueue() {
+    if (!reviewQueueList) return;
+    if (!reviewQueue) {
+      reviewQueueList.innerHTML = '<p class="opinion-body">A revisão ainda não foi carregada pela Cheffe Call.</p>';
+      return;
+    }
+
+    const issues = Array.isArray(reviewQueue.issues) ? reviewQueue.issues : [];
+    const generated = reviewQueue.generatedAt ? ` • ${escapeHtml(formatFeedbackTime(reviewQueue.generatedAt))}` : "";
+    if (reviewQueue.status === "not-run") {
+      reviewQueueList.innerHTML = `
+        <article class="task-queue-item">
+          <span>not-run • review:team</span>
+          <strong>Revisão ainda não rodada</strong>
+          <p>${escapeHtml(reviewQueue.summary || "Peça uma auditoria ou rode review:team para gerar a fila.")}</p>
+          <pre class="task-queue-block">npm run review:team</pre>
+        </article>
+      `;
+      return;
+    }
+
+    if (!issues.length) {
+      reviewQueueList.innerHTML = `
+        <article class="task-queue-item is-clear">
+          <span>clear${generated}</span>
+          <strong>Revisão sem pendências</strong>
+          <p>${escapeHtml(reviewQueue.summary || "Nenhum achado aberto no relatório atual.")}</p>
+          ${reviewQueue.file ? `<pre class="task-queue-block">${escapeHtml(reviewQueue.file)}</pre>` : ""}
+        </article>
+      `;
+      return;
+    }
+
+    reviewQueueList.innerHTML = issues
+      .map((issue) => {
+        const location = `${issue.file || "arquivo não informado"}${issue.line ? `:${issue.line}` : ""}`;
+        return `
+          <article class="task-queue-item is-review ${issue.severity ? `is-${escapeHtml(issue.severity)}` : ""}">
+            <span>${escapeHtml(issue.severity || "review")} • ${escapeHtml(issue.type || "review")}</span>
+            <strong>${escapeHtml(issue.label || "Pendência de revisão")}</strong>
+            <p>${escapeHtml(location)}</p>
+            ${issue.detail ? `<pre class="task-queue-block">${escapeHtml(issue.detail)}</pre>` : ""}
+          </article>
+        `;
+      })
+      .join("");
+  }
+
   function moveToNextSpeaker(kindLabel = "próxima fala", options = {}) {
     if (!currentOpinions.length) return;
     activeSpeakerIndex = (activeSpeakerIndex + 1) % currentOpinions.length;
@@ -3846,6 +3896,18 @@
       expectedProof: Array.isArray(item.expectedProof) ? item.expectedProof : []
     }));
     renderIdeActionQueue();
+
+    reviewQueue = payload?.reviewQueue && typeof payload.reviewQueue === "object"
+      ? {
+          status: payload.reviewQueue.status || "not-run",
+          generatedAt: payload.reviewQueue.generatedAt || "",
+          total: Number(payload.reviewQueue.total || 0),
+          summary: payload.reviewQueue.summary || "",
+          file: payload.reviewQueue.file || "",
+          issues: Array.isArray(payload.reviewQueue.issues) ? payload.reviewQueue.issues : []
+        }
+      : null;
+    renderReviewQueue();
   }
 
   function setSpeakerQueue(opinions, reset = true) {
@@ -5929,5 +5991,6 @@
   renderMeetingLogs();
   renderTaskQueue();
   renderIdeActionQueue();
+  renderReviewQueue();
   window.setInterval(() => loadCall().catch((error) => setStatus(error.message, "bad")), 60 * 1000);
 })();

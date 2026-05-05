@@ -1867,6 +1867,25 @@ body.cheffe-call-page {
   color: #fff4dc;
 }
 
+.task-queue-item.is-review {
+  border-color: rgba(127, 231, 255, 0.36);
+  background: rgba(127, 231, 255, 0.07);
+}
+
+.task-queue-item.is-review.is-high {
+  border-color: rgba(255, 111, 97, 0.46);
+  background: rgba(255, 111, 97, 0.08);
+}
+
+.task-queue-item.is-clear {
+  border-color: rgba(124, 255, 181, 0.38);
+  background: rgba(124, 255, 181, 0.08);
+}
+
+.review-queue-panel .task-queue-item strong {
+  color: #dffdf0;
+}
+
 .task-queue-item span {
   display: block;
   color: var(--call-cyan);
