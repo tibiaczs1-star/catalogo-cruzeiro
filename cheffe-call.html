@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260505-order-flow10" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260505-scene-flow1" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -280,7 +280,29 @@
         </div>
       </section>
 
-      <section class="call-info-deck" aria-label="Painel operacional abaixo da reunião">
+      <section class="cheffe-scene-flow" aria-labelledby="cheffeSceneFlowTitle">
+        <div class="cheffe-scene-head">
+          <div>
+            <p class="call-kicker">Roteiro da reunião</p>
+            <h2 id="cheffeSceneFlowTitle">Cheffe Call por cenas</h2>
+          </div>
+          <p id="cheffeSceneFlowMeta">Finalize uma cena para avançar: pendências, sala, opiniões, decisão, relatórios, ordens, números e premiação.</p>
+        </div>
+        <ol id="cheffeSceneTimeline" class="cheffe-scene-timeline" aria-label="Cenas da reunião"></ol>
+        <article class="cheffe-scene-stage" id="cheffeSceneStage" aria-live="polite">
+          <span id="cheffeSceneBadge">Cena 1</span>
+          <h2 id="cheffeSceneTitle">Pop-up de pendências</h2>
+          <p id="cheffeSceneSummary">A Cheffe Call vai mostrar o que precisa ser visto antes de abrir ou continuar a reunião.</p>
+          <div id="cheffeSceneMetrics" class="cheffe-scene-metrics" aria-label="Métricas da cena"></div>
+          <div class="cheffe-scene-actions">
+            <button type="button" id="cheffeScenePrev">Cena anterior</button>
+            <button type="button" id="cheffeSceneFinish">Finalizar cena</button>
+            <button type="button" id="cheffeSceneNext">Próxima cena</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="call-info-deck" id="cheffeDailyScene" aria-label="Painel operacional abaixo da reunião">
         <section class="daily-board" aria-label="Contexto diário dos agentes">
           <article class="agent-spotlight-card">
             <div class="agent-spotlight-photo" id="agentOfDayAvatar" aria-hidden="true">
@@ -359,7 +381,7 @@
       </section>
       </section>
 
-      <section class="call-lower-decks" aria-label="Painéis da operação">
+      <section class="call-lower-decks" id="cheffeLowerDecks" aria-label="Painéis da operação">
         <section class="call-secondary-grid" aria-label="Painéis da operação">
         <article class="task-queue-panel" aria-labelledby="taskQueueTitle">
           <div class="section-head">
@@ -600,7 +622,7 @@
         </div>
         </section>
 
-        <section class="call-opinions" aria-labelledby="opinionsTitle">
+        <section class="call-opinions" id="cheffeOpinionsScene" aria-labelledby="opinionsTitle">
         <div class="section-head opinion-flow-head">
           <div>
             <p class="call-kicker">Fila de decisão</p>
@@ -629,7 +651,7 @@
       </section>
       </section>
 
-      <section class="call-agent-report" aria-labelledby="callAgentReportTitle">
+      <section class="call-agent-report" id="cheffeReportsScene" aria-labelledby="callAgentReportTitle">
         <div class="section-head">
           <p class="call-kicker">Relatório geral</p>
           <h2 id="callAgentReportTitle">Operação real dos agentes</h2>
@@ -665,6 +687,31 @@
             <div id="callReportLogs" class="call-report-list"></div>
           </article>
         </div>
+      </section>
+
+      <section class="cheffe-meeting-scene-panel" id="cheffeWebsiteNumbers" aria-labelledby="cheffeWebsiteNumbersTitle">
+        <div class="section-head">
+          <p class="call-kicker">Números do website</p>
+          <h2 id="cheffeWebsiteNumbersTitle">Site, notícias e feeds</h2>
+        </div>
+        <div id="cheffeWebsiteNumbersGrid" class="cheffe-scene-data-grid"></div>
+      </section>
+
+      <section class="cheffe-meeting-scene-panel" id="cheffeEditorialHealth" aria-labelledby="cheffeEditorialHealthTitle">
+        <div class="section-head">
+          <p class="call-kicker">Saúde editorial</p>
+          <h2 id="cheffeEditorialHealthTitle">Gates, fontes e aprovações</h2>
+        </div>
+        <div id="cheffeEditorialHealthGrid" class="cheffe-scene-data-grid"></div>
+        <div id="cheffeEditorialHealthQueue" class="editorial-health-queue"></div>
+      </section>
+
+      <section class="cheffe-meeting-scene-panel" id="cheffeAgentNumbers" aria-labelledby="cheffeAgentNumbersTitle">
+        <div class="section-head">
+          <p class="call-kicker">Números dos agentes</p>
+          <h2 id="cheffeAgentNumbersTitle">Runtime, autonomia e escritórios</h2>
+        </div>
+        <div id="cheffeAgentNumbersGrid" class="cheffe-scene-data-grid"></div>
       </section>
 
       <section class="agent-response-panel" id="agentResponsePanel" data-tone="idle" aria-live="polite" aria-labelledby="agentResponseTitle">
@@ -880,6 +927,6 @@
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260505-order-flow10"></script>
+    <script defer src="cheffe-call.js?v=20260505-scene-flow1"></script>
   </body>
 </html>

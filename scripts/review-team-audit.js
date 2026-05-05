@@ -80,7 +80,7 @@ const INTERNAL_COPY_PATTERNS = [
   {
     id: "loading",
     label: "texto temporario de carregamento",
-    regex: /\b(carregando|loading|em breve)\b/i,
+    regex: /(?:\bloading\b|\bcarregando\b(?=\s*(?:\.\.\.|…|$)))/i,
     ignore: [
       /\breadyState\s*===?\s*["']loading["']/i,
       /\bloading\s*=\s*["'][^"']+["']/i,
@@ -91,7 +91,7 @@ const INTERNAL_COPY_PATTERNS = [
   {
     id: "internal-editorial",
     label: "linguagem interna/editorial",
-    regex: /\b(briefing|pauta|uso interno|texto interno|recado interno|para o criador|leitura editorial|monitoramento ativo|painel interno|fechando pauta)\b/i,
+    regex: /\b(briefing|pauta interna|pauta editorial interna|uso interno|texto interno|recado interno|para o criador|leitura editorial|monitoramento ativo|painel interno|fechando pauta)\b/i,
     ignore: [
       /\bclass=(["'])[^"']*briefing[^"']*\1/i,
       /\blogo-splash-briefing-bubble\b/i

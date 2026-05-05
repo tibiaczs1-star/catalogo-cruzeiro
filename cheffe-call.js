@@ -185,6 +185,19 @@
   const callReportOffices = document.querySelector("#callReportOffices");
   const callReportActions = document.querySelector("#callReportActions");
   const callReportLogs = document.querySelector("#callReportLogs");
+  const sceneTimeline = document.querySelector("#cheffeSceneTimeline");
+  const sceneBadge = document.querySelector("#cheffeSceneBadge");
+  const sceneTitle = document.querySelector("#cheffeSceneTitle");
+  const sceneSummary = document.querySelector("#cheffeSceneSummary");
+  const sceneMetrics = document.querySelector("#cheffeSceneMetrics");
+  const scenePrev = document.querySelector("#cheffeScenePrev");
+  const sceneNext = document.querySelector("#cheffeSceneNext");
+  const sceneFinish = document.querySelector("#cheffeSceneFinish");
+  const sceneFlowMeta = document.querySelector("#cheffeSceneFlowMeta");
+  const websiteNumbersGrid = document.querySelector("#cheffeWebsiteNumbersGrid");
+  const editorialHealthGrid = document.querySelector("#cheffeEditorialHealthGrid");
+  const editorialHealthQueueList = document.querySelector("#cheffeEditorialHealthQueue");
+  const agentNumbersGrid = document.querySelector("#cheffeAgentNumbersGrid");
   const realFlowSteps = Array.from(document.querySelectorAll("[data-flow-step]"));
 
   const fallbackAgents = [
@@ -208,6 +221,7 @@
   let meetingLogs = [];
   let taskQueue = [];
   let ideActionQueue = [];
+  let editorialHealthActions = [];
   let reviewQueue = null;
   let raisedHandName = "";
   let raisedHandQueue = [];
@@ -227,6 +241,17 @@
   let latestDecisionOrder = null;
   let pendingDecisionResolution = null;
   let latestDirectOrder = null;
+  let meetingScenes = [];
+  let activeSceneIndex = Math.max(0, Number(window.sessionStorage.getItem("cheffeCallActiveScene") || 0) || 0);
+  const completedScenes = new Set();
+
+  try {
+    JSON.parse(window.sessionStorage.getItem("cheffeCallCompletedScenes") || "[]").forEach((sceneId) => {
+      if (sceneId) completedScenes.add(String(sceneId));
+    });
+  } catch (_error) {
+    window.sessionStorage.removeItem("cheffeCallCompletedScenes");
+  }
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -2849,7 +2874,21 @@
       await navigator.clipboard.writeText(value);
       return true;
     } catch (_error) {
-      return false;
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.top = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        return document.execCommand("copy");
+      } catch (_fallbackError) {
+        return false;
+      } finally {
+        textarea.remove();
+      }
     }
   }
 
@@ -3719,6 +3758,42 @@
       .join("");
   }
 
+  function buildIdeActionPrompt(item = {}) {
+    const missing = Array.isArray(item.missingRequirements) && item.missingRequirements.length
+      ? item.missingRequirements
+      : ["identificar causa concreta no IDE"];
+    const expected = Array.isArray(item.expectedProof) && item.expectedProof.length
+      ? item.expectedProof
+      : ["problema identificado", "arquivo/rota alterado ou bloqueio explicado", "teste/check executado"];
+    return [
+      "Cheffe Call gerou uma ação para resolver aqui no Codex/IDE.",
+      "",
+      "Contexto:",
+      `- ID: ${item.id || "sem-id"}`,
+      `- Status: ${item.status || "waiting-ide-command"}`,
+      `- Intent: ${item.intent || "ide"}`,
+      `- Título: ${item.title || "Ação aguardando IDE"}`,
+      item.reasonCode ? `- Bloqueio/falha: ${item.reasonCode}` : "",
+      "",
+      "Relatório da Cheffe:",
+      item.reason || "A Cheffe Call não conseguiu executar esta ordem de verdade no ambiente atual.",
+      "",
+      "Comando sugerido pelo painel:",
+      item.suggestedIdeCommand || "Codex IDE: reproduzir a pendência localmente, corrigir, testar e devolver prova.",
+      "",
+      "Requisitos faltando:",
+      ...missing.map((line) => `- ${line}`),
+      "",
+      "Prova que devo devolver:",
+      ...expected.map((line) => `- ${line}`),
+      "",
+      "Pedido ao Codex:",
+      "Resolva esta pendência localmente. Não marque como concluída sem execução real. Responda no formato: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
+    ]
+      .filter((line) => line !== null && line !== undefined)
+      .join("\n");
+  }
+
   function renderIdeActionQueue() {
     if (!ideActionQueueList) return;
     if (!ideActionQueue.length) {
@@ -3727,13 +3802,14 @@
     }
     ideActionQueueList.innerHTML = ideActionQueue
       .map(
-        (item) => {
+        (item, index) => {
           const missing = Array.isArray(item.missingRequirements) && item.missingRequirements.length
             ? `<pre class="task-queue-block">${escapeHtml(item.missingRequirements.map((line) => `- ${line}`).join("\n"))}</pre>`
             : "";
           const expected = Array.isArray(item.expectedProof) && item.expectedProof.length
             ? `<pre class="task-queue-block is-prompt">${escapeHtml(item.expectedProof.map((line) => `- ${line}`).join("\n"))}</pre>`
             : "";
+          const idePrompt = item.idePrompt || buildIdeActionPrompt(item);
           return `
           <article class="task-queue-item is-blocked">
             <span>${escapeHtml(item.status || "waiting-ide")} • ${escapeHtml(item.intent || "ide")}</span>
@@ -3743,6 +3819,10 @@
             ${item.suggestedIdeCommand ? `<pre class="task-queue-block">${escapeHtml(item.suggestedIdeCommand)}</pre>` : ""}
             ${missing}
             ${expected}
+            <div class="task-queue-actions">
+              <button type="button" data-copy-ide-prompt="${index}">Copiar prompt para IDE</button>
+            </div>
+            <pre class="task-queue-block is-prompt is-ide-prompt">${escapeHtml(idePrompt)}</pre>
           </article>
         `;
         }
@@ -3893,7 +3973,8 @@
       reason: item.reason || "",
       missingRequirements: Array.isArray(item.missingRequirements) ? item.missingRequirements : [],
       suggestedIdeCommand: item.suggestedIdeCommand || "",
-      expectedProof: Array.isArray(item.expectedProof) ? item.expectedProof : []
+      expectedProof: Array.isArray(item.expectedProof) ? item.expectedProof : [],
+      idePrompt: item.idePrompt || ""
     }));
     renderIdeActionQueue();
 
@@ -4450,6 +4531,356 @@
     );
   }
 
+  function getFallbackMeetingScenes(payload = latestCallPayload) {
+    const summary = payload?.summary || {};
+    const website = payload?.editorialFlow?.websiteNumbers || {};
+    return [
+      {
+        id: "pendencias",
+        number: 1,
+        title: "Pop-up de pendencias",
+        summary: "Abra pelas pendencias de revisao, IDE e correcoes antes de chamar novas ordens.",
+        status: "ready",
+        primaryTarget: "reviewQueueList",
+        metrics: { review: payload?.reviewQueue?.total || 0, ide: payload?.ideActionQueue?.waiting || 0 }
+      },
+      {
+        id: "abertura",
+        number: 2,
+        title: "Abertura da reuniao",
+        summary: payload?.meeting?.active ? "Sala aberta e runtime pausada para ouvir os agentes." : "Abra a sala com uma ordem clara.",
+        status: payload?.meeting?.active ? "running" : "ready",
+        primaryTarget: "cheffeCallForm",
+        metrics: { active: Boolean(payload?.meeting?.active) }
+      },
+      {
+        id: "opinioes",
+        number: 3,
+        title: "Opinioes dos agentes",
+        summary: "Ouça os agentes, compare propostas e escolha o que vira ordem.",
+        status: "ready",
+        primaryTarget: "opinionsList",
+        metrics: { opinions: Array.isArray(payload?.opinions) ? payload.opinions.length : 0 }
+      },
+      {
+        id: "decisao",
+        number: 4,
+        title: "Aceitar, implementar ou pular",
+        summary: "Use a mesa de decisao para transformar a fala em ordem real com evidencia.",
+        status: "ready",
+        primaryTarget: "decisionDeskTitle",
+        metrics: { executableActions: Array.isArray(payload?.executableActions) ? payload.executableActions.length : 0 }
+      },
+      {
+        id: "relatorios",
+        number: 5,
+        title: "Relatorios",
+        summary: "Confira runtime, filas, logs e provas antes de avançar.",
+        status: "ready",
+        primaryTarget: "callAgentReportTitle",
+        metrics: { queue: Array.isArray(payload?.queue) ? payload.queue.length : 0 }
+      },
+      {
+        id: "ordens",
+        number: 6,
+        title: "Ordens do chefe",
+        summary: "Revise a fila que nasceu da reuniao.",
+        status: "ready",
+        primaryTarget: "taskQueueList",
+        metrics: { orders: Array.isArray(payload?.orders) ? payload.orders.length : 0 }
+      },
+      {
+        id: "website",
+        number: 7,
+        title: "Numeros do website",
+        summary: "Veja volume de noticias, feeds e sinais do site.",
+        status: "ready",
+        primaryTarget: "cheffeWebsiteNumbers",
+        metrics: { totalNews: website.totalNews || 0, topicFeeds: website.topicFeeds || 0 }
+      },
+      {
+        id: "agentes",
+        number: 8,
+        title: "Numeros dos agentes",
+        summary: "Confira total de agentes, autonomia e escritorios.",
+        status: "ready",
+        primaryTarget: "cheffeAgentNumbers",
+        metrics: { totalAgents: summary.totalAgents || 181, averageAutonomy: summary.averageAutonomy || 0 }
+      },
+      {
+        id: "premiacao",
+        number: 9,
+        title: "Premiacao dos agentes",
+        summary: "Feche a call reconhecendo o agente e o escritorio de maior impacto.",
+        status: "ready",
+        primaryTarget: "achievementHeadline",
+        metrics: { agentOfDay: payload?.dailyContext?.agentOfDay?.name || "" }
+      }
+    ];
+  }
+
+  function getSceneTargetElement(scene) {
+    const targetMap = {
+      pendencias: "reviewQueueList",
+      abertura: "cheffeCallForm",
+      opinioes: "cheffeOpinionsScene",
+      decisao: "decisionDeskTitle",
+      relatorios: "cheffeReportsScene",
+      ordens: "taskQueueList",
+      website: "cheffeWebsiteNumbers",
+      "saude-editorial": "cheffeEditorialHealth",
+      agentes: "cheffeAgentNumbers",
+      premiacao: "achievementHeadline"
+    };
+    const targetId = scene?.primaryTarget || targetMap[scene?.id] || "";
+    return targetId ? document.getElementById(targetId) : null;
+  }
+
+  function getSceneFocusBlock(scene) {
+    const target = getSceneTargetElement(scene);
+    return target?.closest("section, article, form, .call-console, .task-queue-panel") || target;
+  }
+
+  function formatSceneMetricValue(value) {
+    if (Array.isArray(value)) return `${value.length} itens`;
+    if (value && typeof value === "object") return `${Object.keys(value).length} campos`;
+    if (typeof value === "boolean") return value ? "sim" : "nao";
+    if (value === 0) return "0";
+    return String(value || "");
+  }
+
+  function renderSceneMetrics(metrics = {}) {
+    if (!sceneMetrics) return;
+    const entries = Object.entries(metrics || {})
+      .filter(([key]) => key)
+      .slice(0, 8);
+    sceneMetrics.innerHTML = entries.length
+      ? entries
+          .map(
+            ([key, value]) => `
+              <article>
+                <span>${escapeHtml(key.replace(/([A-Z])/g, " $1").trim())}</span>
+                <strong>${escapeHtml(formatSceneMetricValue(value))}</strong>
+              </article>
+            `
+          )
+          .join("")
+      : `<p>Nenhuma metrica especifica nesta cena.</p>`;
+  }
+
+  function renderSceneTimeline() {
+    if (!sceneTimeline) return;
+    sceneTimeline.innerHTML = meetingScenes
+      .map((scene, index) => {
+        const isActive = index === activeSceneIndex;
+        const isDone = completedScenes.has(scene.id);
+        return `
+          <li>
+            <button type="button" class="cheffe-scene-step ${isActive ? "is-active" : ""} ${isDone ? "is-done" : ""}" data-scene-index="${index}">
+              <span>${escapeHtml(scene.number || index + 1)}</span>
+              <strong>${escapeHtml(scene.title || `Cena ${index + 1}`)}</strong>
+              <i>${escapeHtml(scene.status || "ready")}</i>
+            </button>
+          </li>
+        `;
+      })
+      .join("");
+  }
+
+  function setActiveScene(index, options = {}) {
+    if (!meetingScenes.length) return;
+    const nextIndex = Math.min(Math.max(Number(index) || 0, 0), meetingScenes.length - 1);
+    activeSceneIndex = nextIndex;
+    window.sessionStorage.setItem("cheffeCallActiveScene", String(activeSceneIndex));
+    const scene = meetingScenes[activeSceneIndex];
+    document.body.dataset.cheffeScene = scene.id || "";
+    document.querySelectorAll(".is-scene-focus").forEach((node) => node.classList.remove("is-scene-focus"));
+
+    if (sceneBadge) sceneBadge.textContent = `Cena ${scene.number || activeSceneIndex + 1}`;
+    if (sceneTitle) sceneTitle.textContent = scene.title || `Cena ${activeSceneIndex + 1}`;
+    if (sceneSummary) sceneSummary.textContent = scene.summary || "Cena pronta para leitura.";
+    const stage = document.querySelector("#cheffeSceneStage");
+    if (stage) stage.dataset.sceneStatus = scene.status || "ready";
+    renderSceneMetrics(scene.metrics || {});
+    renderSceneTimeline();
+
+    const focusBlock = getSceneFocusBlock(scene);
+    focusBlock?.classList.add("is-scene-focus");
+    if (options.scroll && focusBlock) {
+      focusBlock.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    if (scenePrev) scenePrev.disabled = activeSceneIndex <= 0;
+    if (sceneNext) sceneNext.disabled = activeSceneIndex >= meetingScenes.length - 1;
+    if (sceneFinish) sceneFinish.textContent = activeSceneIndex >= meetingScenes.length - 1 ? "Finalizar reunião" : "Finalizar cena";
+  }
+
+  function finishActiveScene() {
+    const scene = meetingScenes[activeSceneIndex];
+    if (!scene) return;
+    completedScenes.add(scene.id);
+    window.sessionStorage.setItem("cheffeCallCompletedScenes", JSON.stringify([...completedScenes]));
+    setActiveScene(activeSceneIndex + 1, { scroll: true });
+  }
+
+  function renderSceneFlow(payload) {
+    const scenes = Array.isArray(payload?.editorialFlow?.scenes)
+      ? payload.editorialFlow.scenes
+      : Array.isArray(payload?.meetingScenes)
+        ? payload.meetingScenes
+        : [];
+    meetingScenes = scenes.length ? scenes : getFallbackMeetingScenes(payload);
+    if (activeSceneIndex >= meetingScenes.length) activeSceneIndex = Math.max(0, meetingScenes.length - 1);
+    if (sceneFlowMeta) {
+      const training = payload?.editorialFlow?.training || {};
+      const sheet = payload?.editorialFlow?.briefingSheet?.latest || {};
+      sceneFlowMeta.textContent = training.active
+        ? `${meetingScenes.length} cenas com treinamento editorial ativo (${sheet.gate || "sem gate"}). Finalize uma para avancar.`
+        : `${meetingScenes.length} cenas operacionais. Finalize uma para avancar.`;
+    }
+    setActiveScene(activeSceneIndex);
+  }
+
+  function renderSceneDataGrid(container, rows, emptyText) {
+    if (!container) return;
+    container.innerHTML = rows.length
+      ? rows
+          .map(
+            (row) => `
+              <article>
+                <span>${escapeHtml(row.label)}</span>
+                <strong>${escapeHtml(row.value)}</strong>
+                <p>${escapeHtml(row.detail || "")}</p>
+              </article>
+            `
+          )
+          .join("")
+      : `<p class="opinion-body">${escapeHtml(emptyText || "Sem dados carregados.")}</p>`;
+  }
+
+  function renderWebsiteNumbers(payload) {
+    const website = payload?.editorialFlow?.websiteNumbers || {};
+    const topCategories = Array.isArray(website.topCategories)
+      ? website.topCategories.slice(0, 4).map((item) => `${item.category}: ${item.total}`).join(" | ")
+      : "";
+    renderSceneDataGrid(
+      websiteNumbersGrid,
+      [
+        { label: "Noticias vivas", value: String(website.runtimeNews || 0), detail: "Itens em runtime-news.json." },
+        { label: "Arquivo", value: String(website.archiveNews || 0), detail: "Itens em news-archive.json." },
+        { label: "Total", value: String(website.totalNews || 0), detail: "Volume lido pela Cheffe Call agora." },
+        { label: "Feeds", value: String(website.topicFeeds || 0), detail: `${website.topicFeedItems || 0} itens nos feeds tematicos.` },
+        { label: "Visitas", value: String(website.visits || 0), detail: "Registros locais de visitas." },
+        { label: "Categorias", value: topCategories || "sem ranking", detail: "Principais editorias em dados vivos." }
+      ],
+      "Sem numeros do website no payload."
+    );
+  }
+
+  function buildEditorialHealthPrompt(action = {}) {
+    if (action.idePrompt) return action.idePrompt;
+    const missing = Array.isArray(action.missingRequirements) ? action.missingRequirements : [];
+    const expected = Array.isArray(action.expectedProof) ? action.expectedProof : [];
+    const isHuman = action.resolutionType === "human-approval";
+    return [
+      "Codex, resolva esta pendencia da saude editorial do Jornal.",
+      `Tipo: ${action.resolutionType || "pendencia"}. Prioridade: ${action.priority || action.gate || "P1"}.`,
+      `Materia: ${action.title || "sem titulo"}.`,
+      `Slug: ${action.slug || "sem slug"}.`,
+      `Motivo: ${action.reason || "pendencia editorial detectada"}.`,
+      "",
+      "Requisitos:",
+      ...(missing.length ? missing.map((item) => `- ${item}`) : ["- conferir fonte, imagem, gate e risco editorial"]),
+      "",
+      "Comando sugerido:",
+      action.suggestedIdeCommand || "npm run editorial:health && npm run review:team",
+      "",
+      "Prova esperada:",
+      ...(expected.length ? expected.map((item) => `- ${item}`) : ["- relatorio editorial atualizado", "- teste/check executado"]),
+      "",
+      isHuman
+        ? "Observacao: esta e aprovacao humana. Nao publique nem marque como resolvida sozinho; prepare a decisao para o chefe aprovar ou segurar."
+        : "Resolva localmente no IDE e devolva: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
+    ].join("\n");
+  }
+
+  function renderEditorialHealthQueue() {
+    if (!editorialHealthQueueList) return;
+    if (!editorialHealthActions.length) {
+      editorialHealthQueueList.innerHTML = '<p class="opinion-body">Sem pendências editoriais priorizadas no relatório atual.</p>';
+      return;
+    }
+    editorialHealthQueueList.innerHTML = editorialHealthActions
+      .map((action, index) => {
+        const promptText = buildEditorialHealthPrompt(action);
+        return `
+          <article class="task-queue-item ${action.resolutionType === "human-approval" ? "is-blocked" : ""}">
+            <span>${escapeHtml(action.priority || action.gate || "P1")} • ${escapeHtml(action.resolutionType || "editorial")}</span>
+            <strong>${escapeHtml(action.title || "Pendência editorial")}</strong>
+            <p>${escapeHtml(action.reason || "A saúde editorial pediu revisão.")}</p>
+            ${action.suggestedIdeCommand ? `<pre class="task-queue-block">${escapeHtml(action.suggestedIdeCommand)}</pre>` : ""}
+            <div class="task-queue-actions">
+              <button type="button" data-copy-editorial-health="${index}">Copiar prompt</button>
+            </div>
+            <pre class="task-queue-block is-prompt is-ide-prompt">${escapeHtml(promptText)}</pre>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  function renderEditorialHealth(payload) {
+    const health = payload?.editorialFlow?.health || {};
+    const summary = health.summary || {};
+    const gates = health.gates || {};
+    const sourceIssues = Number(summary.sourceIssues || 0);
+    const visualIssues = Number(summary.visualIssues || 0);
+    const humanApproval = Number(summary.humanApprovalRequired || 0);
+    const generated = health.generatedAt ? formatFeedbackTime(health.generatedAt) : "rode npm run editorial:health";
+    renderSceneDataGrid(
+      editorialHealthGrid,
+      [
+        { label: "Status", value: String(health.status || "not-run"), detail: generated },
+        { label: "P0/P1/P2", value: `${gates.P0 || 0}/${gates.P1 || 0}/${gates.P2 || 0}`, detail: "P0 exige humano; P1 exige revisão editorial." },
+        { label: "Aprovação humana", value: String(humanApproval), detail: "Matérias sensíveis antes de destaque/publicação." },
+        { label: "Fontes", value: String(sourceIssues), detail: "Lacunas de fonte, nome ou cobertura cruzada." },
+        { label: "Imagem", value: String(visualIssues), detail: "Crédito, rótulo ou fallback visual." },
+        { label: "Especiais", value: String(summary.specialCandidates || 0), detail: `${summary.titleAlternativeCount || 0} títulos alternativos gerados.` }
+      ],
+      "Rode npm run editorial:health para gerar gates, fontes e aprovações."
+    );
+    const byId = new Map();
+    const addAction = (action) => {
+      if (!action || typeof action !== "object") return;
+      const key = action.id || `${action.resolutionType || "action"}-${action.slug || action.title || byId.size}`;
+      if (!byId.has(key)) byId.set(key, action);
+    };
+    (Array.isArray(health.humanApprovalQueue) ? health.humanApprovalQueue : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(health.actionQueue) ? health.actionQueue : []).slice(0, 12).forEach(addAction);
+    editorialHealthActions = [...byId.values()].slice(0, 12);
+    renderEditorialHealthQueue();
+  }
+
+  function renderAgentNumbers(payload) {
+    const summary = payload?.summary || {};
+    const offices = Array.isArray(payload?.officeDashboard) ? payload.officeDashboard : [];
+    const queue = Array.isArray(payload?.queue) ? payload.queue : [];
+    const awards = payload?.awards || {};
+    const agentOfDay = payload?.dailyContext?.agentOfDay || {};
+    renderSceneDataGrid(
+      agentNumbersGrid,
+      [
+        { label: "Agentes", value: String(summary.totalAgents || 0), detail: `${summary.autonomousAgents || 0} autonomos no payload.` },
+        { label: "Autonomia media", value: `${summary.averageAutonomy || 0}%`, detail: "Media informada pela runtime." },
+        { label: "Escritorios", value: String(summary.totalOffices || offices.length || 0), detail: "Nucleos de trabalho dos agentes." },
+        { label: "Fila", value: String(queue.length), detail: "Tarefas carregadas para a rodada." },
+        { label: "Entregas", value: String(summary.deliveredAgents || 0), detail: `${summary.failedAgents || 0} falhas registradas.` },
+        { label: "Premios", value: String(Array.isArray(awards.items) ? awards.items.length : 0), detail: agentOfDay.name ? `Lider: ${agentOfDay.name}` : "Aguardando lider da rodada." }
+      ],
+      "Sem numeros dos agentes no payload."
+    );
+  }
+
   function updateRealFlow(payload = latestCallPayload) {
     if (!realFlowSteps.length) return;
     const passwordReady = Boolean(getAdminPassword());
@@ -4496,6 +4927,10 @@
     renderTerminal(payload);
     renderAdminState(payload);
     renderAgentReport(payload);
+    renderWebsiteNumbers(payload);
+    renderEditorialHealth(payload);
+    renderAgentNumbers(payload);
+    renderSceneFlow(payload);
     updateRealFlow(payload);
     setStatus(payload.meeting?.active ? "Cheffe Call ativo. Runtimes pausadas." : "Sala pronta.", "ok");
     if (quickCommandContext) {
@@ -4904,6 +5339,16 @@
       if (refreshOpinionFlow) refreshOpinionFlow.disabled = false;
     }
   }
+
+  sceneTimeline?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-scene-index]");
+    if (!button) return;
+    setActiveScene(Number(button.dataset.sceneIndex || 0), { scroll: true });
+  });
+
+  scenePrev?.addEventListener("click", () => setActiveScene(activeSceneIndex - 1, { scroll: true }));
+  sceneNext?.addEventListener("click", () => setActiveScene(activeSceneIndex + 1, { scroll: true }));
+  sceneFinish?.addEventListener("click", finishActiveScene);
 
   formEl?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -5913,6 +6358,82 @@
       items: [{ state: copied ? "done" : "bad", label: copied ? "copiado" : "erro", agent: activePromptPayload.title || "Prompt", text: promptText.slice(0, 220) }]
     });
     setStatus(copied ? "Prompt copiado. Copiar não executa nada sozinho." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
+  });
+
+  ideActionQueueList?.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-copy-ide-prompt]");
+    if (!button) return;
+    const index = Number(button.dataset.copyIdePrompt || -1);
+    const item = ideActionQueue[index];
+    if (!item) {
+      setStatus("Nao encontrei essa pendencia da fila Aguardando IDE.", "bad");
+      return;
+    }
+    const promptText = item.idePrompt || buildIdeActionPrompt(item);
+    const copied = await copyText(promptText);
+    const originalText = button.textContent;
+    button.textContent = copied ? "Prompt copiado" : "Falha ao copiar";
+    button.disabled = true;
+    window.setTimeout(() => {
+      button.textContent = originalText || "Copiar prompt para IDE";
+      button.disabled = false;
+    }, 1800);
+    setAgentResponse({
+      badge: copied ? "Prompt IDE" : "Falha",
+      title: copied ? "Prompt pronto para colar no Codex" : "Não foi possível copiar",
+      text: copied
+        ? "A pendência foi copiada com relatório, motivo, comando sugerido e prova esperada."
+        : "O navegador bloqueou a cópia automática.",
+      next: copied ? "Cole o prompt aqui no IDE/Codex para executar a correção local." : "Selecione o bloco manualmente e copie.",
+      tone: copied ? "ok" : "bad",
+      items: [
+        {
+          state: copied ? "done" : "bad",
+          label: copied ? "copiado" : "erro",
+          agent: item.agent || "Cheffe Call",
+          text: item.title || "Ação aguardando IDE"
+        }
+      ]
+    });
+    setStatus(copied ? "Prompt da pendência copiado para colar no IDE." : "Nao foi possivel copiar o prompt da pendencia.", copied ? "ok" : "bad");
+  });
+
+  editorialHealthQueueList?.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-copy-editorial-health]");
+    if (!button) return;
+    const index = Number(button.dataset.copyEditorialHealth || -1);
+    const action = editorialHealthActions[index];
+    if (!action) {
+      setStatus("Nao encontrei essa pendencia de saude editorial.", "bad");
+      return;
+    }
+    const promptText = buildEditorialHealthPrompt(action);
+    const copied = await copyText(promptText);
+    const originalText = button.textContent;
+    button.textContent = copied ? "Prompt copiado" : "Falha ao copiar";
+    button.disabled = true;
+    window.setTimeout(() => {
+      button.textContent = originalText || "Copiar prompt";
+      button.disabled = false;
+    }, 1800);
+    setAgentResponse({
+      badge: copied ? "Saúde editorial" : "Falha",
+      title: copied ? "Prompt editorial copiado" : "Não foi possível copiar",
+      text: copied
+        ? "A pendência editorial foi copiada com gate, motivo, requisitos e prova esperada."
+        : "O navegador bloqueou a cópia automática.",
+      next: copied ? "Cole aqui no IDE/Codex para tratar a pendência local." : "Selecione o bloco manualmente e copie.",
+      tone: copied ? "ok" : "bad",
+      items: [
+        {
+          state: copied ? "done" : "bad",
+          label: action.priority || action.gate || "editorial",
+          agent: "Saúde editorial",
+          text: action.title || "Pendência editorial"
+        }
+      ]
+    });
+    setStatus(copied ? "Prompt da saude editorial copiado." : "Nao foi possivel copiar o prompt editorial.", copied ? "ok" : "bad");
   });
 
   document.addEventListener("keydown", (event) => {

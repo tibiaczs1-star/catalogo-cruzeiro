@@ -12,13 +12,6 @@ const {
   parseHomeLinkedArticleFallbacks,
   auditHomeLinkedArticleIntegrity
 } = require("./scripts/home-linked-article-fallbacks");
-let sanitizePublicLanguageNewsList = null;
-try {
-  const publicLanguageTools = require("./scripts/sanitize-public-language");
-  sanitizePublicLanguageNewsList = publicLanguageTools.sanitizeNewsList;
-} catch (_error) {
-  sanitizePublicLanguageNewsList = null;
-}
 const {
   buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
   readStore: readCanonicalPubpaidStore,
@@ -89,25 +82,36 @@ const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
 const REAL_AGENTS_RUNTIME_SCRIPT = path.join(ROOT_DIR, "scripts", "real-agents-runtime.js");
 const REAL_AGENTS_REGISTRY_FILE = path.join(ROOT_DIR, ".codex-agents", "registry.json");
-const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
-const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
+const REAL_AGENTS_RUN_FILE = path.join(DATA_DIR, "real-agents-latest-run.json");
+const REAL_AGENTS_RUN_MD_FILE = path.join(DATA_DIR, "real-agents-latest-run.md");
+const LEGACY_REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
+const LEGACY_REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
 const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
 const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
-const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
 const REAL_AGENTS_ECOSYSTEM_STUDY_FILE = path.join(DATA_DIR, "real-agents-ecosystem-study.json");
+const REAL_AGENTS_EDITORIAL_TRAINING_FILE = path.join(DATA_DIR, "real-agents-editorial-training.json");
+const EDITORIAL_CORRECTIONS_LOG_FILE = path.join(DATA_DIR, "editorial-corrections-log.json");
+const EDITORIAL_MEETING_SHEETS_FILE = path.join(DATA_DIR, "editorial-meeting-sheets.json");
+const EDITORIAL_HEALTH_REPORT_JSON_FILE = path.join(DATA_DIR, "editorial-health-report.json");
+const EDITORIAL_HEALTH_REPORT_MD_FILE = path.join(DATA_DIR, "editorial-health-report.md");
 const CHEFFE_CALL_AUTONOMY_LOG_FILE = path.join(DATA_DIR, "cheffe-call-autonomy-log.json");
 const CHEFFE_CALL_IDE_ACTIONS_FILE = path.join(DATA_DIR, "cheffe-call-ide-actions.json");
 const REVIEW_TEAM_REPORT_JSON_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
 const REVIEW_TEAM_REPORT_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.md");
+const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
 const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-autonomy-cycle.js");
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
 const CHEFFE_CALL_PROMPTS_FILE = path.join(ROOT_DIR, "docs", "cheffe-call-181-prompts.json");
-const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 8 * 60 * 60 * 1000);
+const CHEFFE_CALL_TIMEOUT_MINUTES_INPUT = Number(process.env.CHEFFE_CALL_TIMEOUT_MINUTES || 90);
+const CHEFFE_CALL_TIMEOUT_MS = Number.isFinite(CHEFFE_CALL_TIMEOUT_MINUTES_INPUT)
+  ? Math.max(60, CHEFFE_CALL_TIMEOUT_MINUTES_INPUT) * 60 * 1000
+  : 90 * 60 * 1000;
+const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
-  ? Math.max(60 * 60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
-  : 8 * 60 * 60 * 1000;
-const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "false").toLowerCase() !== "false";
+  ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
+  : 5 * 60 * 1000;
+const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
 const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_INTERVAL_MS || 30 * 60 * 1000);
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
@@ -132,16 +136,6 @@ const realAgentsAutonomyState = {
   lastError: "",
   cycles: 0
 };
-const rssRuntimeRefreshState = {
-  running: false,
-  startedAt: "",
-  lastRunAt: "",
-  lastSuccessAt: "",
-  lastError: "",
-  cycles: 0,
-  lastReport: null
-};
-let rssRuntimeRefreshPromise = null;
 const articleIntegrityAutoState = {
   running: false,
   timer: null,
@@ -724,22 +718,6 @@ const NEWS_REFRESH_INTERVAL_MS = Math.max(
   1000 * 60 * 5,
   Number(process.env.NEWS_REFRESH_INTERVAL_MS || 1000 * 60 * 15)
 );
-const NEWS_REFRESH_CONCURRENCY = Math.max(
-  1,
-  Math.min(8, Number(process.env.NEWS_REFRESH_CONCURRENCY || 6))
-);
-const NEWS_REFRESH_IMAGE_ENRICH_LIMIT = Math.max(
-  0,
-  Math.min(120, Number(process.env.NEWS_REFRESH_IMAGE_ENRICH_LIMIT || 48))
-);
-const NEWS_REFRESH_ARCHIVE_LIMIT = Math.max(
-  200,
-  Math.min(1500, Number(process.env.NEWS_REFRESH_ARCHIVE_LIMIT || 1000))
-);
-const NEWS_REFRESH_ACTIVE_LIMIT = Math.max(
-  120,
-  Math.min(NEWS_REFRESH_ARCHIVE_LIMIT, Number(process.env.NEWS_REFRESH_ACTIVE_LIMIT || 420))
-);
 const TOPIC_FEED_TTL_MS = Math.max(
   1000 * 60 * 5,
   Number(process.env.TOPIC_FEED_TTL_MS || 1000 * 60 * 15)
@@ -948,15 +926,6 @@ const TOPIC_FEED_CONFIG = {
       coverageLayer: "brasil"
     },
     {
-      id: "cnn-brasil-entretenimento",
-      name: "CNN Brasil Entretenimento",
-      feedUrl: "https://www.cnnbrasil.com.br/entretenimento/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/entretenimento/",
-      defaultCategory: "Entretenimento",
-      topicGroup: "celebridades",
-      coverageLayer: "brasil"
-    },
-    {
       id: "agencia-brasil-cultura",
       name: "Agencia Brasil Cultura",
       feedUrl: "https://agenciabrasil.ebc.com.br/rss/cultura/feed.xml",
@@ -988,14 +957,6 @@ const TOPIC_FEED_CONFIG = {
       name: "Agencia Brasil Politica",
       feedUrl: "https://agenciabrasil.ebc.com.br/rss/politica/feed.xml",
       siteUrl: "https://agenciabrasil.ebc.com.br/politica",
-      defaultCategory: "Politica",
-      topicGroup: "nacional"
-    },
-    {
-      id: "cnn-brasil-politica",
-      name: "CNN Brasil Politica",
-      feedUrl: "https://www.cnnbrasil.com.br/politica/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/politica/",
       defaultCategory: "Politica",
       topicGroup: "nacional"
     }
@@ -1142,14 +1103,6 @@ const TOPIC_FEED_CONFIG = {
       topicGroup: "brasil"
     },
     {
-      id: "cnn-brasil-politica",
-      name: "CNN Brasil Politica",
-      feedUrl: "https://www.cnnbrasil.com.br/politica/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/politica/",
-      defaultCategory: "Politica",
-      topicGroup: "brasil"
-    },
-    {
       id: "agencia-brasil-geral",
       name: "Agencia Brasil",
       feedUrl: "https://agenciabrasil.ebc.com.br/rss/geral/feed.xml",
@@ -1233,15 +1186,6 @@ const TOPIC_FEED_CONFIG = {
       defaultCategory: "Tecnologia",
       topicGroup: "tech",
       coverageLayer: "global"
-    },
-    {
-      id: "cnn-brasil-tecnologia",
-      name: "CNN Brasil Tecnologia",
-      feedUrl: "https://www.cnnbrasil.com.br/tecnologia/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/tecnologia/",
-      defaultCategory: "Tecnologia",
-      topicGroup: "tech",
-      coverageLayer: "brasil"
     }
   ],
   economy: [
@@ -1250,15 +1194,6 @@ const TOPIC_FEED_CONFIG = {
       name: "G1 Economia",
       feedUrl: "https://g1.globo.com/rss/g1/economia/",
       siteUrl: "https://g1.globo.com/economia/",
-      defaultCategory: "Economia",
-      topicGroup: "economia",
-      coverageLayer: "brasil"
-    },
-    {
-      id: "cnn-brasil-economia",
-      name: "CNN Brasil Economia",
-      feedUrl: "https://www.cnnbrasil.com.br/economia/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/economia/",
       defaultCategory: "Economia",
       topicGroup: "economia",
       coverageLayer: "brasil"
@@ -1812,28 +1747,8 @@ function updateImagePreviewCache(sourceUrl, imageUrl) {
   scheduleImagePreviewCacheWrite();
 }
 
-function clonePublicNewsItem(item = {}) {
-  try {
-    return JSON.parse(JSON.stringify(item || {}));
-  } catch (_error) {
-    return { ...(item || {}) };
-  }
-}
-
-function sanitizePublicNewsCollection(items = []) {
-  const safeItems = Array.isArray(items) ? items.map(clonePublicNewsItem) : [];
-  if (typeof sanitizePublicLanguageNewsList === "function") {
-    try {
-      sanitizePublicLanguageNewsList(safeItems);
-    } catch (_error) {
-      // Keep the runtime sanitizer below as a defensive fallback.
-    }
-  }
-  return safeItems.map(sanitizePublicPortugueseRuntimeItem);
-}
-
 function writeStaticNewsData(items = []) {
-  const safeItems = sanitizePublicNewsCollection(items);
+  const safeItems = Array.isArray(items) ? items : [];
   const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
@@ -4740,193 +4655,48 @@ function fetchRssFeed(feedUrl, options = {}) {
   return fetchRemoteText(feedUrl, { timeoutMs: 4500, maxBytes: 1200000, ...options });
 }
 
-function getRefreshItemKey(item = {}) {
-  return String(
-    item.sourceUrl ||
-      item.url ||
-      item.link ||
-      item.id ||
-      item.slug ||
-      item.title ||
-      ""
-  ).trim();
-}
+async function refreshRssRuntime(limitPerSource = 30) {
+  const reports = [];
+  const items = [];
 
-async function collectRssSourceItems(source, limitPerSource) {
-  try {
-    const xml = await fetchRssFeed(source.feedUrl);
-    const parsedItems = parseRssItems(xml, source).slice(0, limitPerSource);
-    return {
-      source: source.id,
-      ok: true,
-      count: parsedItems.length,
-      items: parsedItems
-    };
-  } catch (error) {
-    return {
-      source: source.id,
-      ok: false,
-      count: 0,
-      error: String(error?.message || "falha").slice(0, 220),
-      items: []
-    };
+  for (const source of RSS_SOURCES) {
+    try {
+      const xml = await fetchRssFeed(source.feedUrl);
+      const parsedItems = parseRssItems(xml, source).slice(0, limitPerSource);
+      items.push(...parsedItems);
+      reports.push({ source: source.id, ok: true, count: parsedItems.length });
+    } catch (error) {
+      reports.push({ source: source.id, ok: false, error: String(error?.message || "falha") });
+    }
   }
-}
 
-function dedupeRefreshItems(items = []) {
   const deduped = [];
   const seen = new Set();
-
   items.forEach((item) => {
-    const key = getRefreshItemKey(item);
+    const key = item.url || item.sourceUrl || item.title;
     if (!key || seen.has(key)) return;
     seen.add(key);
     deduped.push(item);
   });
 
-  return deduped;
-}
-
-async function normalizeFreshRssItems(items = []) {
-  const imageEnrichLimit = Math.min(NEWS_REFRESH_IMAGE_ENRICH_LIMIT, items.length);
-  const itemsForPreview = items.slice(0, imageEnrichLimit);
-  let imageEnrichError = "";
-  let enrichedPreviewItems = itemsForPreview;
-
-  if (itemsForPreview.length) {
-    try {
-      enrichedPreviewItems = await withPromiseTimeout(
-        enrichNewsItemsWithSourceImages(itemsForPreview),
-        25000,
-        "image_enrich_timeout"
-      );
-    } catch (error) {
-      imageEnrichError = String(error?.message || error || "image_enrich_failed").slice(0, 220);
-      enrichedPreviewItems = itemsForPreview;
-    }
-  }
-
-  const enrichedByKey = new Map();
-  enrichedPreviewItems.forEach((item) => {
-    const key = getRefreshItemKey(item);
-    if (key) enrichedByKey.set(key, item);
-  });
-
-  const normalizedItems = items
-    .map((item) => enrichedByKey.get(getRefreshItemKey(item)) || item)
-    .map(normalizeArticleRecord)
-    .map(sanitizePublicPortugueseRuntimeItem);
-
-  return {
-    items: repairNewsImagesForDisplay(normalizedItems),
-    imageEnrichError,
-    imageEnriched: enrichedPreviewItems.length
-  };
-}
-
-function mergeRefreshArchiveItems(freshItems = [], existingItems = []) {
-  const map = new Map();
-  const addItem = (item) => {
-    const normalized = sanitizePublicPortugueseRuntimeItem(normalizeArticleRecord(item));
-    const key = getArticleStorageKey(normalized);
-    if (key) {
-      upsertCrossedArticleRecord(map, key, normalized);
-    }
-  };
-
-  existingItems.forEach(addItem);
-  freshItems.forEach(addItem);
-
-  return Array.from(map.values())
-    .sort(sortArticleItems)
-    .slice(0, NEWS_REFRESH_ARCHIVE_LIMIT);
-}
-
-async function runRssRuntimeRefresh(limitPerSource = 30, { trigger = "manual" } = {}) {
-  const startedAt = new Date().toISOString();
-  rssRuntimeRefreshState.running = true;
-  rssRuntimeRefreshState.startedAt = startedAt;
-  rssRuntimeRefreshState.lastError = "";
-
-  const sourceResults = await mapWithConcurrency(
-    RSS_SOURCES,
-    NEWS_REFRESH_CONCURRENCY,
-    (source) => collectRssSourceItems(source, limitPerSource)
+  const enrichedItems = repairNewsImagesForDisplay(
+    (await enrichNewsItemsWithSourceImages(deduped))
+      .map(normalizeArticleRecord)
+      .map(sanitizePublicPortugueseRuntimeItem)
   );
-  const reports = sourceResults.map(({ items: _items, ...report }) => report);
-  const freshRawItems = dedupeRefreshItems(sourceResults.flatMap((result) => result.items));
-  const normalizedFresh = await normalizeFreshRssItems(freshRawItems);
-  const existingItems = getRawNewsItems();
-  const archiveItems = sanitizePublicNewsCollection(mergeRefreshArchiveItems(normalizedFresh.items, existingItems));
-  const activeWindowItems = archiveItems.slice(0, NEWS_REFRESH_ACTIVE_LIMIT);
-  const finishedAt = new Date().toISOString();
-  const ok = normalizedFresh.items.length > 0 || archiveItems.length > 0;
-  let staticWriteError = "";
 
   const payload = {
-    lastAttemptAt: startedAt,
-    lastSuccessAt: normalizedFresh.items.length ? finishedAt : null,
-    source: "server-rss-auto-24h",
-    trigger,
-    activeWindowItems,
-    items: archiveItems,
-    reports,
-    refresh: {
-      ok,
-      trigger,
-      startedAt,
-      finishedAt,
-      sourceCount: RSS_SOURCES.length,
-      sourceOk: reports.filter((report) => report.ok).length,
-      freshItems: normalizedFresh.items.length,
-      archiveItems: archiveItems.length,
-      activeWindowItems: activeWindowItems.length,
-      imageEnriched: normalizedFresh.imageEnriched,
-      imageEnrichError: normalizedFresh.imageEnrichError
-    }
+    lastAttemptAt: new Date().toISOString(),
+    lastSuccessAt: enrichedItems.length ? new Date().toISOString() : null,
+    items: enrichedItems,
+    reports
   };
 
-  if (archiveItems.length) {
-    writeJson(path.join(DATA_DIR, "runtime-news.json"), payload);
-    writeJson(path.join(DATA_DIR, "news-archive.json"), archiveItems);
-    try {
-      writeStaticNewsData(archiveItems);
-    } catch (error) {
-      staticWriteError = String(error?.message || error || "static_write_failed").slice(0, 220);
-    }
-    newsApiResponseCache.clear();
+  writeJson(path.join(DATA_DIR, "runtime-news.json"), payload);
+  if (enrichedItems.length) {
+    writeStaticNewsData(enrichedItems);
   }
-
-  payload.refresh.staticWriteError = staticWriteError;
-  rssRuntimeRefreshState.running = false;
-  rssRuntimeRefreshState.lastRunAt = finishedAt;
-  rssRuntimeRefreshState.lastSuccessAt = normalizedFresh.items.length ? finishedAt : rssRuntimeRefreshState.lastSuccessAt;
-  rssRuntimeRefreshState.lastError = ok ? "" : "sem-itens-rss-e-sem-arquivo-local";
-  rssRuntimeRefreshState.cycles += 1;
-  rssRuntimeRefreshState.lastReport = payload.refresh;
-
   return payload;
-}
-
-function refreshRssRuntime(limitPerSource = 30, options = {}) {
-  if (rssRuntimeRefreshPromise) {
-    return rssRuntimeRefreshPromise;
-  }
-
-  rssRuntimeRefreshPromise = runRssRuntimeRefresh(limitPerSource, options)
-    .catch((error) => {
-      const message = String(error?.message || error || "falha").slice(0, 240);
-      rssRuntimeRefreshState.running = false;
-      rssRuntimeRefreshState.lastRunAt = new Date().toISOString();
-      rssRuntimeRefreshState.lastError = message;
-      rssRuntimeRefreshState.cycles += 1;
-      throw error;
-    })
-    .finally(() => {
-      rssRuntimeRefreshPromise = null;
-    });
-
-  return rssRuntimeRefreshPromise;
 }
 
 function getTopicFeedCacheFile(topic) {
@@ -8191,23 +7961,22 @@ function appendOfficeOrder(order) {
 }
 
 function updateOfficeOrderById(orderId, patch = {}) {
-  const cleanId = cleanShortText(orderId || "", 120);
-  if (!cleanId) return { ok: false, status: 400, error: "Informe orderId." };
+  const id = cleanShortText(orderId || "", 120);
+  if (!id) return null;
   const orders = readJson(OFFICE_ORDERS_FILE, []);
-  const safeOrders = Array.isArray(orders) ? orders : [];
+  if (!Array.isArray(orders)) return null;
   let found = null;
-  const nextOrders = safeOrders.map((order) => {
-    if (order.id !== cleanId) return order;
+  const nextOrders = orders.map((order) => {
+    if (order?.id !== id) return order;
     found = {
       ...order,
       ...patch,
-      updatedAt: new Date().toISOString()
+      updatedAt: patch.updatedAt || new Date().toISOString()
     };
     return found;
   });
-  if (!found) return { ok: false, status: 404, error: "Ordem nao encontrada." };
-  writeJson(OFFICE_ORDERS_FILE, nextOrders);
-  return { ok: true, order: found };
+  if (found) writeJson(OFFICE_ORDERS_FILE, nextOrders);
+  return found;
 }
 
 function countOfficeOrders() {
@@ -8347,7 +8116,7 @@ function inferEcosystemFocus(instruction = "") {
     ]);
   }
   if (/noticia|foto|materia|editor|jornal|feed|mailza|jurua|acre/.test(text)) {
-    add("Editorial e notícias", "ordem menciona notícia, foto, feed ou cobertura regional", [
+    add("Editorial e noticias", "ordem menciona noticia, foto, feed ou cobertura regional", [
       "script.js",
       "news-data.js",
       "noticia.js",
@@ -8356,7 +8125,7 @@ function inferEcosystemFocus(instruction = "") {
     ]);
   }
   if (/pubpaid|jogo|phaser|sprite|rua|trafego|dama|dardos/.test(text)) {
-    add("PubPaid 2.0", "ordem menciona jogo, Phaser, sprites ou tráfego", [
+    add("PubPaid 2.0", "ordem menciona jogo, Phaser, sprites ou trafego", [
       "pubpaid-v2.html",
       "pubpaid-phaser/app.js",
       "pubpaid-phaser/scenes/StreetScene.js",
@@ -8372,7 +8141,7 @@ function inferEcosystemFocus(instruction = "") {
     ]);
   }
   if (!focus.length) {
-    add("Ecossistema geral", "ordem ampla sem módulo único; estudar superfícies principais antes de agir", [
+    add("Ecossistema geral", "ordem ampla sem modulo unico; estudar superficies principais antes de agir", [
       "server.js",
       "index.html",
       "script.js",
@@ -8419,17 +8188,17 @@ function buildRealAgentsEcosystemStudy(options = {}) {
     fileBrief("cheffe-call.js", "runtime UI Cheffe Call"),
     fileBrief("cheffe-call.css", "estilo Cheffe Call"),
     fileBrief("script.js", "home/editorial"),
-    fileBrief("news-data.js", "dados estáticos de notícias"),
+    fileBrief("news-data.js", "dados estaticos de noticias"),
     fileBrief("scripts/real-agents-runtime.js", "runtime dos agentes"),
     fileBrief(".codex-agents/registry.json", "registro dos agentes")
   ];
   const impactSignals = [
     officeOrderCount ? `${officeOrderCount} ordens no office-orders` : "",
-    actionsCount ? `${actionsCount} ações executáveis conhecidas` : "",
-    runtimeNewsCount ? `${runtimeNewsCount} notícias runtime` : "",
-    archiveNewsCount ? `${archiveNewsCount} notícias no arquivo` : "",
+    actionsCount ? `${actionsCount} acoes executaveis conhecidas` : "",
+    runtimeNewsCount ? `${runtimeNewsCount} noticias runtime` : "",
+    archiveNewsCount ? `${archiveNewsCount} noticias no arquivo` : "",
     routeCount ? `${routeCount} rotas/handlers mapeados no servidor` : "",
-    memory.open ? `${memory.open} ordens abertas na memória local` : ""
+    memory.open ? `${memory.open} ordens abertas na memoria local` : ""
   ].filter(Boolean);
 
   return {
@@ -8460,27 +8229,27 @@ function buildRealAgentsEcosystemStudy(options = {}) {
       previousStudyAt: previous?.generatedAt || "",
       previousCycle: Number(previous?.learningCycle || 0),
       latestLessons: memory.latest.slice(0, 4).map((order) => order.summary),
-      intent: "estudar módulos, dados, rotas e memória antes de recomendar ou executar",
+      intent: "estudar modulos, dados, rotas e memoria antes de recomendar ou executar",
       betterThanFilterBecause: [
         "usa arquivos reais do projeto e DATA_DIR",
-        "liga a ordem aos módulos em foco",
-        "retorna contadores, relatórios e arquivo persistente",
-        "separa execução de aplicação/publicação"
+        "liga a ordem aos modulos em foco",
+        "retorna contadores, relatorios e arquivo persistente",
+        "separa execucao de aplicacao/publicacao"
       ]
     },
     impactGate: {
       requiredBeforeImportant: [
-        "módulo alvo identificado",
+        "modulo alvo identificado",
         "arquivo/rota/dado verificado",
         "ordem registrada em office-orders",
         "prova retornada no payload",
-        "pendência explícita quando ainda não aplicou/publicou"
+        "pendencia explicita quando ainda nao aplicou/publicou"
       ],
       weakIfOnly: [
-        "opinião sem arquivo",
+        "opiniao sem arquivo",
         "resumo sem contador",
-        "runtime sem relatório",
-        "status implementado sem mudança ou bloqueio explicado"
+        "runtime sem relatorio",
+        "status implementado sem mudanca ou bloqueio explicado"
       ],
       currentSignals: impactSignals
     },
@@ -8740,14 +8509,31 @@ function recordCommunityReport(body = {}, req = null) {
   };
 }
 
+function readLatestRealAgentsRunArtifact() {
+  const primaryRun = readJson(REAL_AGENTS_RUN_FILE, null);
+  const legacyRun = primaryRun ? null : readJson(LEGACY_REAL_AGENTS_RUN_FILE, null);
+  const latestRun = primaryRun || legacyRun;
+  const mdFile = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
+    ? REAL_AGENTS_RUN_MD_FILE
+    : fs.existsSync(LEGACY_REAL_AGENTS_RUN_MD_FILE)
+      ? LEGACY_REAL_AGENTS_RUN_MD_FILE
+      : "";
+  return {
+    latestRun,
+    source: primaryRun ? "data-dir" : legacyRun ? "legacy-codex-temp" : "missing",
+    jsonFile: path.relative(ROOT_DIR, primaryRun ? REAL_AGENTS_RUN_FILE : legacyRun ? LEGACY_REAL_AGENTS_RUN_FILE : REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"),
+    markdownFile: mdFile ? path.relative(ROOT_DIR, mdFile).replace(/\\/g, "/") : path.relative(ROOT_DIR, REAL_AGENTS_RUN_MD_FILE).replace(/\\/g, "/"),
+    markdown: mdFile ? fs.readFileSync(mdFile, "utf-8") : ""
+  };
+}
+
 function buildRealAgentsPayload() {
   const registry = readJson(REAL_AGENTS_REGISTRY_FILE, null);
-  const latestRun = readJson(REAL_AGENTS_RUN_FILE, null);
+  const latestRunArtifact = readLatestRealAgentsRunArtifact();
+  const latestRun = latestRunArtifact.latestRun;
   const autonomyReport = readJson(REAL_AGENTS_AUTONOMY_REPORT_FILE, null);
   const ecosystemStudy = readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null);
-  const latestRunMd = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
-    ? fs.readFileSync(REAL_AGENTS_RUN_MD_FILE, "utf-8")
-    : "";
+  const latestRunMd = latestRunArtifact.markdown;
   const history = readRealAgentsRunHistory();
   const agents = Array.isArray(registry?.agents) ? registry.agents : [];
   const queue = Array.isArray(latestRun?.queue) ? latestRun.queue : [];
@@ -8757,6 +8543,13 @@ function buildRealAgentsPayload() {
     updatedAt: new Date().toISOString(),
     registryGeneratedAt: registry?.generatedAt || "",
     runGeneratedAt: latestRun?.generatedAt || "",
+    runtimePersistence: {
+      source: latestRunArtifact.source,
+      file: latestRunArtifact.jsonFile,
+      markdownFile: latestRunArtifact.markdownFile,
+      primaryFile: path.relative(ROOT_DIR, REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"),
+      legacyFile: path.relative(ROOT_DIR, LEGACY_REAL_AGENTS_RUN_FILE).replace(/\\/g, "/")
+    },
     summary: {
       totalAgents: Number(registry?.totalAgents || agents.length || 0),
       totalOffices: Array.isArray(registry?.offices) ? registry.offices.length : 0,
@@ -8797,18 +8590,6 @@ function buildRealAgentsPayload() {
       lastError: realAgentsAutonomyState.lastError,
       cycles: realAgentsAutonomyState.cycles,
       report: autonomyReport
-    },
-    newsRefresh: {
-      enabled: RSS_SOURCES.length > 0,
-      running: rssRuntimeRefreshState.running,
-      intervalMs: NEWS_REFRESH_INTERVAL_MS,
-      fullAgentsIntervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
-      startedAt: rssRuntimeRefreshState.startedAt,
-      lastRunAt: rssRuntimeRefreshState.lastRunAt,
-      lastSuccessAt: rssRuntimeRefreshState.lastSuccessAt,
-      lastError: rssRuntimeRefreshState.lastError,
-      cycles: rssRuntimeRefreshState.cycles,
-      lastReport: rssRuntimeRefreshState.lastReport
     },
     offices: Array.isArray(registry?.offices) ? registry.offices : [],
     roles: Array.isArray(registry?.roles) ? registry.roles : [],
@@ -8852,6 +8633,13 @@ function buildPublicDailyAgentPulse() {
   const queue = Array.isArray(payload.queue) ? payload.queue : [];
   const officeDashboard = Array.isArray(payload.officeDashboard) ? payload.officeDashboard : [];
   const history = Array.isArray(payload.autoRun?.history) ? payload.autoRun.history : [];
+  const runGeneratedAt = payload.runGeneratedAt || "";
+  const runGeneratedTime = Date.parse(runGeneratedAt);
+  const missingLatestRun = !payload.ok || !runGeneratedAt || payload.runtimePersistence?.source === "missing";
+  const lastRunAgeMs = Number.isFinite(runGeneratedTime) ? Date.now() - runGeneratedTime : null;
+  const staleAfterMs = Math.max(REAL_AGENTS_AUTO_RUN_INTERVAL_MS * 2, 90 * 60 * 1000);
+  const lastRunAgeMinutes = lastRunAgeMs === null ? null : Math.max(0, Math.round(lastRunAgeMs / 60000));
+  const stale = missingLatestRun || (lastRunAgeMs !== null && lastRunAgeMs > staleAfterMs);
   const timelineBySlug = new Map();
   const timelineByName = new Map();
 
@@ -8903,7 +8691,13 @@ function buildPublicDailyAgentPulse() {
   return {
     ok: true,
     updatedAt: new Date().toISOString(),
-    runGeneratedAt: payload.runGeneratedAt || payload.updatedAt || "",
+    runGeneratedAt: runGeneratedAt || payload.updatedAt || "",
+    stale,
+    paused: Boolean(payload.autoRun?.pausedByCheffeCall),
+    missingLatestRun,
+    lastRunAgeMinutes,
+    lastRunAgeLabel: lastRunAgeMinutes === null ? "sem rodada registrada" : `${lastRunAgeMinutes} min`,
+    runtimePersistence: payload.runtimePersistence || null,
     summary: {
       totalAgents: Number(payload.summary?.totalAgents || 0),
       totalOffices: Number(payload.summary?.totalOffices || 0),
@@ -8922,7 +8716,6 @@ function buildPublicDailyAgentPulse() {
           queueItems: Number(history[0].queueItems || 0)
         }
       : null,
-    newsRefresh: payload.newsRefresh || null,
     offices: officeDashboard.slice(0, 6).map((office) => ({
       label: cleanShortText(office.label || office.office || office.name || "Escritório", 80),
       status: cleanShortText(office.status || office.mood || "ativo", 80),
@@ -8955,17 +8748,76 @@ function recordRealAgentsRunHistory(entry) {
   ].slice(0, 24));
 }
 
+function getCheffeCallLastActivityAt(state = {}) {
+  const stamps = [
+    state.lastSessionAt,
+    state.pausedAt,
+    state.releasedAt,
+    state.updatedAt,
+    state.lastActivityAt
+  ];
+  (Array.isArray(state.sessions) ? state.sessions : []).forEach((session) => {
+    stamps.push(session.createdAt, session.updatedAt, session.completedAt, session.expiredAt);
+    ["logs", "decisions", "approvals"].forEach((key) => {
+      (Array.isArray(session[key]) ? session[key] : []).forEach((item) => {
+        stamps.push(item.createdAt, item.updatedAt, item.completedAt);
+      });
+    });
+  });
+  const times = stamps
+    .map((stamp) => Date.parse(stamp || ""))
+    .filter((time) => Number.isFinite(time));
+  if (!times.length) return "";
+  return new Date(Math.max(...times)).toISOString();
+}
+
+function reconcileCheffeCallExpiration(state = {}) {
+  if (!state.active) return state;
+  const lastActivityAt = getCheffeCallLastActivityAt(state) || state.pausedAt || state.lastSessionAt || "";
+  const lastActivityTime = Date.parse(lastActivityAt);
+  if (!Number.isFinite(lastActivityTime)) return { ...state, lastActivityAt };
+  const idleMs = Date.now() - lastActivityTime;
+  if (idleMs < CHEFFE_CALL_TIMEOUT_MS) return { ...state, lastActivityAt };
+  const now = new Date().toISOString();
+  const reason = `timeout-${Math.round(CHEFFE_CALL_TIMEOUT_MS / 60000)}-min-sem-acao`;
+  const sessions = (Array.isArray(state.sessions) ? state.sessions : []).map((session, index) =>
+    index === 0
+      ? {
+          ...session,
+          status: "expirada-por-inatividade",
+          expiredAt: now,
+          updatedAt: now
+        }
+      : session
+  );
+  const expiredState = {
+    ...state,
+    active: false,
+    releasedAt: now,
+    expiredAt: now,
+    expirationReason: reason,
+    lastActivityAt,
+    sessions
+  };
+  writeCheffeCallState(expiredState);
+  return expiredState;
+}
+
 function readCheffeCallState() {
   const payload = readJson(CHEFFE_CALL_STATE_FILE, {});
   const legacyInstruction = payload["last" + "Brief" + "ing"] || "";
-  return {
+  return reconcileCheffeCallExpiration({
     active: Boolean(payload.active),
     pausedAt: payload.pausedAt || "",
     releasedAt: payload.releasedAt || "",
+    expiredAt: payload.expiredAt || "",
+    expirationReason: payload.expirationReason || "",
+    lastActivityAt: payload.lastActivityAt || "",
+    expiresAfterMinutes: Math.round(CHEFFE_CALL_TIMEOUT_MS / 60000),
     lastInstruction: payload.lastInstruction || legacyInstruction,
     lastSessionAt: payload.lastSessionAt || "",
     sessions: Array.isArray(payload.sessions) ? payload.sessions.slice(0, 12) : []
-  };
+  });
 }
 
 function writeCheffeCallState(state) {
@@ -8973,6 +8825,10 @@ function writeCheffeCallState(state) {
     active: Boolean(state.active),
     pausedAt: state.pausedAt || "",
     releasedAt: state.releasedAt || "",
+    expiredAt: state.expiredAt || "",
+    expirationReason: state.expirationReason || "",
+    lastActivityAt: state.lastActivityAt || getCheffeCallLastActivityAt(state),
+    expiresAfterMinutes: Math.round(CHEFFE_CALL_TIMEOUT_MS / 60000),
     lastInstruction: state.lastInstruction || "",
     lastSessionAt: state.lastSessionAt || "",
     sessions: Array.isArray(state.sessions) ? state.sessions.slice(0, 12) : []
@@ -9356,33 +9212,84 @@ function appendCheffeAutonomyLog(entry = {}) {
   return nextEntry;
 }
 
+function cleanCheffePromptText(value, maxLength = 5000) {
+  return String(value || "")
+    .replace(/\r\n/g, "\n")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function buildCheffeIdePrompt(action = {}) {
+  const missingRequirements = Array.isArray(action.missingRequirements)
+    ? action.missingRequirements.filter(Boolean).slice(0, 12)
+    : [];
+  const expectedProof = Array.isArray(action.expectedProof)
+    ? action.expectedProof.filter(Boolean).slice(0, 12)
+    : [];
+  const lines = [
+    "Cheffe Call gerou uma ação para resolver aqui no Codex/IDE.",
+    "",
+    "Contexto:",
+    `- ID: ${action.id || "sem-id"}`,
+    `- Status: ${action.status || "waiting-ide-command"}`,
+    `- Intent: ${action.intent || "ide"}`,
+    `- Título: ${action.title || "Ação aguardando IDE"}`,
+    `- Agente: ${action.agent || "Cheffe Call"}${action.office ? ` / ${action.office}` : ""}`,
+    action.reasonCode ? `- Bloqueio/falha: ${action.reasonCode}` : "",
+    "",
+    "Relatório da Cheffe:",
+    action.reason || "A Cheffe Call não conseguiu executar esta ordem de verdade no ambiente atual.",
+    "",
+    "Comando sugerido pelo painel:",
+    action.suggestedIdeCommand || "Codex IDE: reproduzir a pendência localmente, corrigir, testar e devolver prova.",
+    "",
+    "Requisitos faltando:",
+    ...(missingRequirements.length ? missingRequirements.map((item) => `- ${item}`) : ["- identificar causa concreta no IDE"]),
+    "",
+    "Prova que devo devolver:",
+    ...(expectedProof.length
+      ? expectedProof.map((item) => `- ${item}`)
+      : ["- problema identificado", "- arquivo/rota alterado ou bloqueio explicado", "- teste/check executado"]),
+    "",
+    "Pedido ao Codex:",
+    "Resolva esta pendência localmente. Não marque como concluída sem execução real. Responda no formato: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
+  ];
+  return cleanCheffePromptText(lines.filter((line) => line !== null && line !== undefined).join("\n"), 5000);
+}
+
 function readCheffeIdeActionQueue() {
   const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
   const actions = Array.isArray(store.actions) ? store.actions : [];
   return actions
     .filter(Boolean)
-    .map((action) => ({
-      id: cleanShortText(action.id || createRecordId("ide"), 120),
-      createdAt: cleanShortText(action.createdAt || "", 80),
-      updatedAt: cleanShortText(action.updatedAt || action.createdAt || "", 80),
-      status: cleanShortText(action.status || "waiting-ide", 60),
-      source: cleanShortText(action.source || "Cheffe Call", 120),
-      intent: cleanShortText(action.intent || "", 80),
-      title: cleanShortText(action.title || "Acao aguardando IDE", 220),
-      agent: cleanShortText(action.agent || "Cheffe Call", 120),
-      office: cleanShortText(action.office || "", 120),
-      reasonCode: cleanShortText(action.reasonCode || "", 80),
-      reason: cleanShortText(action.reason || "", 1200),
-      missingRequirements: Array.isArray(action.missingRequirements)
-        ? action.missingRequirements.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
-        : [],
-      suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 1600),
-      expectedProof: Array.isArray(action.expectedProof)
-        ? action.expectedProof.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
-        : [],
-      proofId: cleanShortText(action.proofId || "", 120),
-      orderId: cleanShortText(action.orderId || "", 120)
-    }))
+    .map((action) => {
+      const nextAction = {
+        id: cleanShortText(action.id || createRecordId("ide"), 120),
+        createdAt: cleanShortText(action.createdAt || "", 80),
+        updatedAt: cleanShortText(action.updatedAt || action.createdAt || "", 80),
+        status: cleanShortText(action.status || "waiting-ide", 60),
+        source: cleanShortText(action.source || "Cheffe Call", 120),
+        intent: cleanShortText(action.intent || "", 80),
+        title: cleanShortText(action.title || "Acao aguardando IDE", 220),
+        agent: cleanShortText(action.agent || "Cheffe Call", 120),
+        office: cleanShortText(action.office || "", 120),
+        reasonCode: cleanShortText(action.reasonCode || "", 80),
+        reason: cleanShortText(action.reason || "", 1200),
+        missingRequirements: Array.isArray(action.missingRequirements)
+          ? action.missingRequirements.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+          : [],
+        suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 1600),
+        expectedProof: Array.isArray(action.expectedProof)
+          ? action.expectedProof.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+          : [],
+        proofId: cleanShortText(action.proofId || "", 120),
+        orderId: cleanShortText(action.orderId || "", 120)
+      };
+      nextAction.idePrompt = cleanCheffePromptText(action.idePrompt || buildCheffeIdePrompt(nextAction), 5000);
+      return nextAction;
+    })
     .slice(0, 80);
 }
 
@@ -9412,6 +9319,7 @@ function appendCheffeIdeAction(action = {}) {
     proofId: cleanShortText(action.proofId || "", 120),
     orderId: cleanShortText(action.orderId || "", 120)
   };
+  nextAction.idePrompt = cleanCheffePromptText(action.idePrompt || buildCheffeIdePrompt(nextAction), 5000);
   const nextActions = [nextAction, ...actions.filter((item) => item.id !== nextAction.id)].slice(0, 120);
   writeJson(CHEFFE_CALL_IDE_ACTIONS_FILE, {
     version: 1,
@@ -9419,6 +9327,48 @@ function appendCheffeIdeAction(action = {}) {
     actions: nextActions
   });
   return nextAction;
+}
+
+function reconcileCheffeIdeActionQueue(reviewQueue = {}) {
+  if (reviewQueue.status !== "clear" || Number(reviewQueue.total || 0) !== 0 || !reviewQueue.generatedAt) {
+    return { ok: true, changed: 0, reason: "review-not-clear" };
+  }
+  const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  const now = new Date().toISOString();
+  let changed = 0;
+  const nextActions = actions.map((action) => {
+    const status = String(action?.status || "");
+    const text = normalizeText(
+      [
+        action?.title,
+        action?.reason,
+        action?.reasonCode,
+        action?.suggestedIdeCommand,
+        ...(Array.isArray(action?.missingRequirements) ? action.missingRequirements : [])
+      ].join(" ")
+    );
+    const waiting = /waiting|aguardando|open|pendente/i.test(status);
+    const reviewRelated = /review|revisao|revisao-team|review-team|auditoria/.test(text);
+    if (!waiting || !reviewRelated) return action;
+    changed += 1;
+    return {
+      ...action,
+      status: "resolved-reconciled",
+      updatedAt: now,
+      resolvedAt: now,
+      resolution:
+        "Fila reconciliada automaticamente: o relatorio npm run review:team atual esta sem pendencias abertas."
+    };
+  });
+  if (changed > 0) {
+    writeJson(CHEFFE_CALL_IDE_ACTIONS_FILE, {
+      version: 1,
+      updatedAt: now,
+      actions: nextActions
+    });
+  }
+  return { ok: true, changed, reason: changed ? "review-clear" : "no-review-ide-actions" };
 }
 
 function buildCheffeReviewQueue() {
@@ -9514,10 +9464,10 @@ function inferCheffeAutonomousIntent(context = {}) {
     "real-agents-runtime",
     "ecosystem-study",
     "review-team",
+    "editorial-health",
     "health-check",
     "safe-cleanup",
     "deploy-gate",
-    "public-language-sanitize",
     "agent-action"
   ]);
   if (allowedForced.has(forced)) return forced;
@@ -9533,12 +9483,12 @@ function inferCheffeAutonomousIntent(context = {}) {
     context.executableMatch?.title
   ].join(" "));
 
+  if (/editorial:health|saude editorial|saúde editorial|gate p0|gate p1|gate p2|ranking editorial|cache editorial|titulos alternativos|títulos alternativos/.test(text)) {
+    return "editorial-health";
+  }
   if (/limp|lixo|temporario|temporarios|cache|log/.test(text)) return "safe-cleanup";
   if (/deploy|publicar|producao|produção|render|push|commit|github/.test(text)) return "deploy-gate";
   if (/review:team|revis[aã]o|auditoria|audit|validar layout|validar texto/.test(text)) return "review-team";
-  if (/saniti|idioma p[uú]blico|texto p[uú]blico|ingl[eê]s|portugu[eê]s|news-data/.test(text)) {
-    return "public-language-sanitize";
-  }
   if (/codex:health|saude|saúde|health|travamento|autoteste/.test(text)) return "health-check";
   if (/rodar agentes|agentes reais|181 agentes|runtime|real-agents|atualizar agentes/.test(text)) {
     return "real-agents-runtime";
@@ -9726,7 +9676,7 @@ function markRealAgentActionExecution(actionId, status, note, proof = {}) {
 
 function buildCheffeIdeActionForBlockedProof(context = {}, proof = {}) {
   const reasonCode = cleanShortText(
-    proof.reasonCode || proof.blockedReason || proof.blockedReasonCode || proof.status || "blocked",
+    proof.reasonCode || proof.blockedReason || proof.blockedReasonCode || proof.blockedReason || proof.status || "blocked",
     80
   );
   const reason = cleanShortText(
@@ -9735,6 +9685,9 @@ function buildCheffeIdeActionForBlockedProof(context = {}, proof = {}) {
   );
   const suggestedIdeCommand = cleanShortText(
     proof.suggestedIdeCommand ||
+      (proof.status === "failed"
+        ? "Codex IDE: reproduzir a falha localmente, ler actionProof.autoExecution, corrigir a causa, rodar o check/teste adequado e devolver prova."
+        : "") ||
       (proof.intent === "blocked-terminal" && context.command
         ? `Codex IDE: avaliar e executar manualmente, se seguro: ${context.command}`
         : "Codex IDE: abrir esta acao, executar pelo ambiente local com testes, e devolver prova para a Cheffe Call."),
@@ -9788,7 +9741,8 @@ function executeCheffeAutonomousOrder(context = {}) {
       ...patch,
       finishedAt: new Date().toISOString()
     };
-    if (proof.status === "blocked") {
+    const requiresIdeResolution = proof.status !== "executed" || proof.ok === false;
+    if (requiresIdeResolution) {
       proof.ideAction = buildCheffeIdeActionForBlockedProof(context, proof);
       proof.ideQueueFile = path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/");
     }
@@ -9904,47 +9858,40 @@ function executeCheffeAutonomousOrder(context = {}) {
     });
   }
 
-  if (intent === "public-language-sanitize") {
-    const commandProof = runCheffeCommandProof(
-      "sanitize public language",
-      process.execPath,
-      ["scripts/sanitize-public-language.js"],
-      { timeoutMs: 120000, env: { DATA_DIR } }
-    );
-    const reviewProof = runCheffeCommandProof("review team", process.execPath, ["scripts/review-team-audit.js"], {
+  if (intent === "editorial-health") {
+    const commandProof = runCheffeCommandProof("editorial health", process.execPath, ["scripts/editorial-health-check.js"], {
       timeoutMs: 120000
     });
-    const reviewQueue = buildCheffeReviewQueue();
-    const hasReviewIssues = Number(reviewQueue.total || 0) > 0;
+    const health = buildEditorialHealthReport();
+    const humanApprovalRequired = Number(health.summary?.humanApprovalRequired || 0);
+    const issueTotal =
+      humanApprovalRequired +
+      Number(health.summary?.sourceIssues || 0) +
+      Number(health.summary?.visualIssues || 0);
     return finish({
-      ok: commandProof.ok && reviewProof.ok && !hasReviewIssues,
-      status: !commandProof.ok || !reviewProof.ok ? "failed" : hasReviewIssues ? "blocked" : "executed",
-      summary:
-        !commandProof.ok
-          ? "Sanitização de idioma público falhou; ver stderr no proof."
-          : !reviewProof.ok
-            ? "Revisão pós-sanitização falhou; ver stderr no proof."
-            : hasReviewIssues
-              ? `Sanitização rodou, mas a revisão ainda encontrou ${reviewQueue.total} pendência(s).`
-              : "Sanitização de idioma público executada e revisão voltou sem pendências.",
-      reasonCode: hasReviewIssues ? "review-team-issues" : "",
-      blockedReason: hasReviewIssues ? "A revisão ainda encontrou pendências depois da sanitização automática." : "",
-      missingRequirements: hasReviewIssues
-        ? reviewQueue.issues.slice(0, 8).map((issue) => `${issue.severity}: ${issue.file}${issue.line ? `:${issue.line}` : ""} - ${issue.label}`)
-        : [],
-      suggestedIdeCommand: hasReviewIssues
-        ? "Codex IDE: corrigir manualmente os textos restantes listados em reviewQueue, rodar npm run sanitize:public-language e npm run review:team."
+      ok: commandProof.ok,
+      status: commandProof.ok ? "executed" : "failed",
+      summary: commandProof.ok
+        ? `Saude editorial gerada: P0=${health.gates?.P0 || 0}, P1=${health.gates?.P1 || 0}, pendencias=${issueTotal}.`
+        : "Saude editorial falhou; ver stderr no proof.",
+      reasonCode: commandProof.ok && humanApprovalRequired ? "editorial-human-approval-required" : "",
+      blockedReason: commandProof.ok && humanApprovalRequired
+        ? "Ha materias P0 que precisam de aprovacao humana antes de destaque/publicacao sensivel."
         : "",
-      expectedProof: hasReviewIssues
-        ? ["npm run sanitize:public-language", "npm run review:team com totalIssues=0", "smoke online de news-data.js/reviewQueue"]
+      missingRequirements: commandProof.ok && humanApprovalRequired
+        ? health.humanApprovalQueue.slice(0, 8).map((item) => `${item.priority || item.gate}: ${item.title}`)
+        : [],
+      suggestedIdeCommand: commandProof.ok && humanApprovalRequired
+        ? "Cheffe Call: revisar humanApprovalQueue, aprovar/segurar P0 e rodar npm run editorial:health novamente."
+        : "",
+      expectedProof: commandProof.ok && humanApprovalRequired
+        ? ["decisao humana para cada P0 destacado", "fonte conferida", "imagem/credito validados"]
         : [],
       commandProof,
-      reviewProof,
-      reviewQueue,
+      health,
       files: [
-        buildProofFile(STATIC_NEWS_FILE, "news-data sanitizado"),
-        buildProofFile(REVIEW_TEAM_REPORT_MD_FILE, "relatorio review team"),
-        buildProofFile(REVIEW_TEAM_REPORT_JSON_FILE, "json review team")
+        buildProofFile(EDITORIAL_HEALTH_REPORT_MD_FILE, "relatorio saude editorial"),
+        buildProofFile(EDITORIAL_HEALTH_REPORT_JSON_FILE, "json saude editorial")
       ]
     });
   }
@@ -10175,7 +10122,50 @@ function applyCheffeCallAction(body = {}) {
         : runtimeResult.error || "Falha ao rodar os agentes reais."
     });
     if (!runtimeResult.ok) {
-      return { ok: false, status: 500, error: runtimeResult.error || "Falha ao atualizar os agentes reais." };
+      const failureProof = {
+        kind: "cheffe-call-action-failure",
+        mode: "controlled-autonomy",
+        endpoint: "POST /api/cheffe-call/action",
+        action,
+        intent: "real-agents-runtime",
+        agent,
+        office,
+        title: "Atualizar agentes reais",
+        ok: false,
+        status: "failed",
+        reasonCode: "real-agents-runtime-failed",
+        blockedReason: runtimeResult.error || "Falha ao atualizar os agentes reais.",
+        summary: runtimeResult.error || "Falha ao atualizar os agentes reais.",
+        missingRequirements: ["reproduzir npm run agents:run no IDE", "corrigir erro da runtime", "rodar smoke da Cheffe Call/agentes"],
+        suggestedIdeCommand: "Codex IDE: rodar npm run agents:run, corrigir a falha da runtime, validar /api/real-agents/run e devolver prova.",
+        expectedProof: [
+          "npm run agents:run concluido",
+          "POST /api/real-agents/run validado",
+          "Cheffe Call atualizada com prova da runtime"
+        ],
+        runtimeResult,
+        createdAt: now
+      };
+      failureProof.ideAction = buildCheffeIdeActionForBlockedProof(
+        { body, action, instruction, agent, office, role, title, command },
+        failureProof
+      );
+      failureProof.ideQueueFile = path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/");
+      appendCheffeAutonomyLog({
+        status: "failed",
+        intent: "real-agents-runtime",
+        title: failureProof.title,
+        agent,
+        summary: failureProof.summary,
+        proof: failureProof
+      });
+      return {
+        ok: false,
+        status: 500,
+        error: runtimeResult.error || "Falha ao atualizar os agentes reais.",
+        proof: failureProof,
+        actionProof: failureProof
+      };
     }
   } else if (action === "approve") {
     pushApproval({
@@ -10468,6 +10458,9 @@ function applyCheffeCallAction(body = {}) {
     active: true,
     pausedAt: state.pausedAt || now,
     releasedAt: "",
+    expiredAt: "",
+    expirationReason: "",
+    lastActivityAt: now,
     lastInstruction: instruction,
     lastSessionAt: now,
     sessions: nextSessions
@@ -10836,15 +10829,346 @@ function enrichCheffeOpinionsWithDirectResearch(opinions = [], research = null) 
   }));
 }
 
+function readEditorialTraining() {
+  const training = readJson(REAL_AGENTS_EDITORIAL_TRAINING_FILE, null);
+  if (!training || typeof training !== "object") {
+    return {
+      active: false,
+      trainingId: "",
+      title: "Treinamento editorial ainda nao carregado",
+      principles: [],
+      gates: {},
+      roleOpinions: [],
+      officeOpinions: [],
+      implementationBacklog: [],
+      defaultChecklist: []
+    };
+  }
+  return {
+    active: training.status !== "inactive",
+    trainingId: cleanShortText(training.trainingId || "", 120),
+    title: cleanShortText(training.title || "Treinamento editorial dos agentes", 180),
+    generatedAt: cleanShortText(training.generatedAt || "", 80),
+    scope: cleanShortText(training.scope || "", 180),
+    synthesis: cleanShortText(training.sourceReview?.synthesis || "", 700),
+    runtimeDirective: cleanShortText(training.runtimeDirective || "", 360),
+    principles: Array.isArray(training.principles) ? training.principles.slice(0, 12) : [],
+    workflow: Array.isArray(training.workflow) ? training.workflow.slice(0, 12) : [],
+    gates: training.gates && typeof training.gates === "object" ? training.gates : {},
+    roleOpinions: Array.isArray(training.roleOpinions) ? training.roleOpinions.slice(0, 16) : [],
+    officeOpinions: Array.isArray(training.officeOpinions) ? training.officeOpinions.slice(0, 8) : [],
+    implementationBacklog: Array.isArray(training.implementationBacklog) ? training.implementationBacklog.slice(0, 12) : [],
+    allowedAutomation: Array.isArray(training.allowedAutomation) ? training.allowedAutomation.slice(0, 12) : [],
+    blockedAutomation: Array.isArray(training.blockedAutomation) ? training.blockedAutomation.slice(0, 12) : [],
+    defaultChecklist: Array.isArray(training.defaultChecklist) ? training.defaultChecklist.slice(0, 8) : [],
+    proof: {
+      file: path.relative(ROOT_DIR, REAL_AGENTS_EDITORIAL_TRAINING_FILE).replace(/\\/g, "/"),
+      markdownFile: "data/real-agents-editorial-training.md",
+      agentsTrained: Number(training.proof?.agentsTrained || training.agentBriefings?.length || 0)
+    }
+  };
+}
+
+function buildEditorialCorrectionsLog() {
+  const payload = readJson(EDITORIAL_CORRECTIONS_LOG_FILE, { version: 1, corrections: [] });
+  const corrections = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.corrections)
+      ? payload.corrections
+      : [];
+  const safeCorrections = corrections
+    .map((item) => ({
+      id: cleanShortText(item.id || createRecordId("cor"), 120),
+      status: cleanShortText(item.status || "logged", 40),
+      severity: cleanShortText(item.severity || "media", 40),
+      title: cleanShortText(item.title || "Correcao editorial", 180),
+      file: cleanShortText(item.file || "", 220),
+      before: cleanShortText(item.before || "", 260),
+      after: cleanShortText(item.after || "", 260),
+      publicNote: cleanShortText(item.publicNote || item.note || "", 360),
+      correctedAt: cleanShortText(item.correctedAt || item.updatedAt || item.createdAt || "", 80)
+    }))
+    .slice(-24)
+    .reverse();
+  return {
+    file: path.relative(ROOT_DIR, EDITORIAL_CORRECTIONS_LOG_FILE).replace(/\\/g, "/"),
+    total: safeCorrections.length,
+    open: safeCorrections.filter((item) => !["corrigido", "closed", "resolvido"].includes(String(item.status).toLowerCase())).length,
+    latest: safeCorrections.slice(0, 8)
+  };
+}
+
+function buildEditorialHealthReport() {
+  const report = readJson(EDITORIAL_HEALTH_REPORT_JSON_FILE, null);
+  const file = path.relative(ROOT_DIR, EDITORIAL_HEALTH_REPORT_JSON_FILE).replace(/\\/g, "/");
+  const markdownFile = path.relative(ROOT_DIR, EDITORIAL_HEALTH_REPORT_MD_FILE).replace(/\\/g, "/");
+  if (!report || typeof report !== "object") {
+    return {
+      kind: "editorial-health-report",
+      status: "not-run",
+      source: "npm run editorial:health",
+      file,
+      markdownFile,
+      generatedAt: "",
+      summary: {
+        humanApprovalRequired: 0,
+        sourceIssues: 0,
+        visualIssues: 0,
+        titleAlternativeCount: 0,
+        specialCandidates: 0,
+        actionQueueTotal: 0
+      },
+      gates: { P0: 0, P1: 0, P2: 0 },
+      humanApprovalQueue: [],
+      actionQueue: [],
+      titleAlternatives: [],
+      specialFormats: []
+    };
+  }
+  return {
+    kind: "editorial-health-report",
+    status: cleanShortText(report.status || "ok", 40),
+    source: "npm run editorial:health",
+    file,
+    markdownFile,
+    generatedAt: cleanShortText(report.generatedAt || "", 80),
+    scope: report.scope && typeof report.scope === "object" ? report.scope : {},
+    summary: report.summary && typeof report.summary === "object" ? report.summary : {},
+    gates: report.gates && typeof report.gates === "object" ? report.gates : { P0: 0, P1: 0, P2: 0 },
+    sourceCoverage: report.sourceCoverage && typeof report.sourceCoverage === "object" ? report.sourceCoverage : {},
+    visualIntegrity: report.visualIntegrity && typeof report.visualIntegrity === "object" ? report.visualIntegrity : {},
+    humanApprovalQueue: Array.isArray(report.humanApprovalQueue) ? report.humanApprovalQueue.slice(0, 24) : [],
+    actionQueue: Array.isArray(report.actionQueue) ? report.actionQueue.slice(0, 32) : [],
+    titleAlternatives: Array.isArray(report.titleAlternatives) ? report.titleAlternatives.slice(0, 24) : [],
+    specialFormats: Array.isArray(report.specialFormats) ? report.specialFormats.slice(0, 24) : []
+  };
+}
+
+function buildEditorialMeetingSheet({ state, reviewQueue, ideActions, training }) {
+  const sheetsPayload = readJson(EDITORIAL_MEETING_SHEETS_FILE, { version: 1, sheets: [] });
+  const sheets = Array.isArray(sheetsPayload)
+    ? sheetsPayload
+    : Array.isArray(sheetsPayload?.sheets)
+      ? sheetsPayload.sheets
+      : [];
+  const latestSheet = sheets.slice(-1)[0] || null;
+  const gates = training?.gates && typeof training.gates === "object" ? training.gates : {};
+  const fallbackGate = Number(reviewQueue?.total || 0) > 0 || ideActions.some((item) => String(item.status || "").includes("waiting"))
+    ? "P1"
+    : "P2";
+  return {
+    file: path.relative(ROOT_DIR, EDITORIAL_MEETING_SHEETS_FILE).replace(/\\/g, "/"),
+    latest: latestSheet
+      ? {
+          id: cleanShortText(latestSheet.id || "", 120),
+          title: cleanShortText(latestSheet.title || "", 180),
+          gate: cleanShortText(latestSheet.gate || fallbackGate, 20),
+          owner: cleanShortText(latestSheet.owner || "Cheffe Call", 80),
+          sourceStatus: cleanShortText(latestSheet.sourceStatus || "", 120),
+          nextReviewAt: cleanShortText(latestSheet.nextReviewAt || "", 80),
+          updatedAt: cleanShortText(latestSheet.updatedAt || latestSheet.createdAt || "", 80)
+        }
+      : {
+          id: "meeting-auto-cheffe-call",
+          title: cleanShortText(state.lastInstruction || "Reuniao editorial da Cheffe Call", 180),
+          gate: fallbackGate,
+          owner: "Cheffe Call",
+          sourceStatus: Number(reviewQueue?.total || 0) > 0 ? "revisao pendente" : "fontes e revisao sem bloqueio ativo",
+          nextReviewAt: "",
+          updatedAt: new Date().toISOString()
+        },
+    gates,
+    checklist: Array.isArray(training?.defaultChecklist) ? training.defaultChecklist.slice(0, 8) : []
+  };
+}
+
+function buildWebsiteNumbersForCheffe() {
+  const runtimeNews = getJsonArray(path.join(DATA_DIR, "runtime-news.json"));
+  const archiveNews = getJsonArray(path.join(DATA_DIR, "news-archive.json"));
+  const visits = getJsonArray(VISITS_FILE);
+  const heartbeats = getJsonArray(HEARTBEATS_FILE);
+  const topicFeedFiles = fs.existsSync(DATA_DIR)
+    ? fs.readdirSync(DATA_DIR).filter((name) => /^topic-feed-.+\.json$/i.test(name))
+    : [];
+  const topicFeeds = topicFeedFiles.map((name) => {
+    const payload = readJson(path.join(DATA_DIR, name), null);
+    const items = Array.isArray(payload?.items) ? payload.items : Array.isArray(payload) ? payload : [];
+    return {
+      topic: cleanShortText(payload?.topic || name.replace(/^topic-feed-|\.json$/gi, ""), 60),
+      file: `data/${name}`,
+      items: items.length,
+      updatedAt: cleanShortText(payload?.updatedAt || payload?.generatedAt || "", 80)
+    };
+  });
+  const allNews = [...runtimeNews, ...archiveNews];
+  const categories = new Map();
+  allNews.forEach((item) => {
+    const key = cleanShortText(item.category || item.categoryKey || item.topic || "Geral", 80);
+    categories.set(key, (categories.get(key) || 0) + 1);
+  });
+  return {
+    runtimeNews: runtimeNews.length,
+    archiveNews: archiveNews.length,
+    totalNews: allNews.length,
+    visits: visits.length,
+    heartbeats: heartbeats.length,
+    topicFeeds: topicFeeds.length,
+    topicFeedItems: topicFeeds.reduce((sum, item) => sum + item.items, 0),
+    topCategories: [...categories.entries()]
+      .map(([category, total]) => ({ category, total }))
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 8),
+    topicFeedSummary: topicFeeds.sort((a, b) => b.items - a.items).slice(0, 12)
+  };
+}
+
+function buildCheffeMeetingScenes({ state, displayOpinions, reviewQueue, ideActions, agentsPayload, editorialFlow }) {
+  const currentSession = state.sessions[0] || null;
+  const approvals = Array.isArray(currentSession?.approvals) ? currentSession.approvals : [];
+  const orders = Array.isArray(agentsPayload.orders) ? agentsPayload.orders : [];
+  const waitingIde = ideActions.filter((item) => String(item.status || "").includes("waiting")).length;
+  const humanEditorial = Number(editorialFlow?.health?.summary?.humanApprovalRequired || 0);
+  const pendingTotal =
+    waitingIde + Number(reviewQueue?.total || 0) + Number(editorialFlow?.corrections?.open || 0) + humanEditorial;
+  const awards = agentsPayload.awards || {};
+  const agentOfDay = agentsPayload.dailyContext?.agentOfDay || null;
+  const officeOfDay = agentsPayload.dailyContext?.officeOfDay || null;
+  return [
+    {
+      id: "pendencias",
+      number: 1,
+      title: "Pop-up de pendencias",
+      summary: pendingTotal
+        ? `${pendingTotal} pendencia(s) antes da reuniao: revisao, IDE ou correcoes.`
+        : "Sem bloqueio critico antes da reuniao.",
+      status: pendingTotal ? "attention" : "done",
+      primaryTarget: "reviewQueueList",
+      metrics: {
+        review: Number(reviewQueue?.total || 0),
+        ide: waitingIde,
+        corrections: Number(editorialFlow?.corrections?.open || 0),
+        humanApproval: humanEditorial
+      }
+    },
+    {
+      id: "abertura",
+      number: 2,
+      title: "Abertura da reuniao",
+      summary: state.active
+        ? cleanShortText(state.lastInstruction || "Sala aberta e agentes pausados para ouvir.", 220)
+        : "Abra a sala para pausar a rotina e iniciar a ata.",
+      status: state.active ? "running" : "ready",
+      primaryTarget: "cheffeCallForm",
+      metrics: { active: state.active, sessions: state.sessions.length }
+    },
+    {
+      id: "opinioes",
+      number: 3,
+      title: "Opinioes dos agentes",
+      summary: `${displayOpinions.length} opiniao(oes) disponiveis para ouvir, aceitar, ajustar ou pular.`,
+      status: displayOpinions.length ? "ready" : "waiting",
+      primaryTarget: "opinionsList",
+      metrics: { opinions: displayOpinions.length, approved: approvals.length }
+    },
+    {
+      id: "decisao",
+      number: 4,
+      title: "Aceitar, implementar ou pular",
+      summary: "Mesa de decisao transforma fala em ordem real com prova, pendencia ou bloqueio claro.",
+      status: approvals.length ? "ready" : "waiting",
+      primaryTarget: "decisionDeskTitle",
+      metrics: { approvals: approvals.length, executableActions: agentsPayload.executableActions?.length || 0 }
+    },
+    {
+      id: "relatorios",
+      number: 5,
+      title: "Relatorios",
+      summary: "Revisao, runtime, logs e evidencias ficam concentrados antes de novas ordens.",
+      status: "ready",
+      primaryTarget: "callAgentReportTitle",
+      metrics: { reviewIssues: Number(reviewQueue?.total || 0), logs: currentSession?.logs?.length || 0 }
+    },
+    {
+      id: "ordens",
+      number: 6,
+      title: "Ordens do chefe",
+      summary: `${orders.length} ordem(ns) recentes no contexto dos agentes.`,
+      status: orders.length ? "ready" : "waiting",
+      primaryTarget: "taskQueueList",
+      metrics: { orders: orders.length }
+    },
+    {
+      id: "website",
+      number: 7,
+      title: "Numeros do website",
+      summary: `${editorialFlow.websiteNumbers.totalNews} noticias em dados vivos; saude editorial com P0=${editorialFlow.health?.gates?.P0 || 0}, P1=${editorialFlow.health?.gates?.P1 || 0}.`,
+      status: "ready",
+      primaryTarget: "cheffeWebsiteNumbers",
+      metrics: {
+        ...editorialFlow.websiteNumbers,
+        p0: editorialFlow.health?.gates?.P0 || 0,
+        p1: editorialFlow.health?.gates?.P1 || 0,
+        approvals: humanEditorial
+      }
+    },
+    {
+      id: "agentes",
+      number: 8,
+      title: "Numeros dos agentes",
+      summary: `${agentsPayload.summary?.totalAgents || 181} agentes; autonomia media ${agentsPayload.summary?.averageAutonomy || 0}.`,
+      status: "ready",
+      primaryTarget: "cheffeAgentNumbers",
+      metrics: {
+        totalAgents: agentsPayload.summary?.totalAgents || 181,
+        averageAutonomy: agentsPayload.summary?.averageAutonomy || 0,
+        offices: agentsPayload.summary?.totalOffices || agentsPayload.officeDashboard?.length || 0
+      }
+    },
+    {
+      id: "premiacao",
+      number: 9,
+      title: "Premiacao dos agentes",
+      summary: agentOfDay
+        ? `${agentOfDay.name} lidera; escritorio em destaque: ${officeOfDay?.office || "em apuracao"}.`
+        : "Aguardando runtime para premiar os melhores agentes.",
+      status: agentOfDay ? "ready" : "waiting",
+      primaryTarget: "achievementHeadline",
+      metrics: { agentOfDay: agentOfDay?.name || "", awards: Array.isArray(awards?.items) ? awards.items.length : 0 }
+    }
+  ];
+}
+
 function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
-  const ideActions = readCheffeIdeActionQueue();
   const reviewQueue = buildCheffeReviewQueue();
+  const ideReconciliation = reconcileCheffeIdeActionQueue(reviewQueue);
+  const ideActions = readCheffeIdeActionQueue();
   const sessionOpinions = Array.isArray(state.sessions[0]?.opinions) ? state.sessions[0].opinions : [];
   const displayOpinions = shouldRefreshCheffeCallOpinions(sessionOpinions)
     ? getCheffeCallOpinions(agentsPayload, state.lastInstruction)
     : sessionOpinions;
+  const editorialTraining = readEditorialTraining();
+  const editorialFlow = {
+    training: editorialTraining,
+    corrections: buildEditorialCorrectionsLog(),
+    websiteNumbers: buildWebsiteNumbersForCheffe(),
+    health: buildEditorialHealthReport()
+  };
+  editorialFlow.briefingSheet = buildEditorialMeetingSheet({
+    state,
+    reviewQueue,
+    ideActions,
+    training: editorialTraining
+  });
+  editorialFlow.scenes = buildCheffeMeetingScenes({
+    state,
+    displayOpinions,
+    reviewQueue,
+    ideActions,
+    agentsPayload,
+    editorialFlow
+  });
   const currentSession = state.sessions[0]
     ? {
         ...state.sessions[0],
@@ -10863,11 +11187,24 @@ function buildCheffeCallPayload() {
       active: state.active,
       pausedAt: state.pausedAt,
       releasedAt: state.releasedAt,
+      expiredAt: state.expiredAt,
+      expirationReason: state.expirationReason,
+      lastActivityAt: state.lastActivityAt,
+      expiresAfterMinutes: state.expiresAfterMinutes,
       lastInstruction: state.lastInstruction,
       lastSessionAt: state.lastSessionAt,
       currentSession,
       sessions: state.sessions
     },
+    ideActions,
+    ideActionQueue: {
+      file: path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/"),
+      total: ideActions.length,
+      waiting: ideActions.filter((item) => String(item.status || "").includes("waiting")).length,
+      reconciliation: ideReconciliation,
+      actions: ideActions.slice(0, 32)
+    },
+    reviewQueue,
     dailyContext: agentsPayload.dailyContext || null,
     autonomy: agentsPayload.autonomy || null,
     summary: {
@@ -10876,14 +11213,6 @@ function buildCheffeCallPayload() {
       autonomousAgents: Number(agentsPayload.summary?.autonomousAgents || 181),
       averageAutonomy: Number(agentsPayload.summary?.averageAutonomy || 82)
     },
-    ideActions,
-    ideActionQueue: {
-      file: path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/"),
-      total: ideActions.length,
-      waiting: ideActions.filter((item) => String(item.status || "").includes("waiting")).length,
-      actions: ideActions.slice(0, 32)
-    },
-    reviewQueue,
     queue: Array.isArray(agentsPayload.queue) ? agentsPayload.queue : [],
     liveEvents: Array.isArray(agentsPayload.liveEvents) ? agentsPayload.liveEvents : [],
     officeLogs: Array.isArray(agentsPayload.officeLogs) ? agentsPayload.officeLogs : [],
@@ -10893,10 +11222,11 @@ function buildCheffeCallPayload() {
     orders: Array.isArray(agentsPayload.orders) ? agentsPayload.orders : [],
     autoRun: agentsPayload.autoRun || null,
     autonomyRunner: agentsPayload.autonomyRunner || null,
-    newsRefresh: agentsPayload.newsRefresh || null,
     awards: agentsPayload.awards || null,
     scoreboard: agentsPayload.scoreboard || null,
     ecosystemStudy: agentsPayload.ecosystemStudy || null,
+    editorialFlow,
+    meetingScenes: editorialFlow.scenes,
     opinions: displayOpinions
   };
 }
@@ -10997,6 +11327,9 @@ async function startCheffeCallSession(body) {
     active: true,
     pausedAt: now,
     releasedAt: "",
+    expiredAt: "",
+    expirationReason: "",
+    lastActivityAt: now,
     lastInstruction: instruction,
     lastSessionAt: now,
     sessions: [session, ...state.sessions].slice(0, 12)
@@ -11156,7 +11489,7 @@ function runRealAgentsRuntime(options = {}) {
   }
 }
 
-async function runRealAgentsAutoCycle(trigger) {
+function runRealAgentsAutoCycle(trigger) {
   if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.running) return;
   if (readCheffeCallState().active) {
     realAgentsAutoRunState.lastError = "Cheffe Call ativo: runtime automatica pausada para reuniao.";
@@ -11165,26 +11498,17 @@ async function runRealAgentsAutoCycle(trigger) {
 
   realAgentsAutoRunState.running = true;
   realAgentsAutoRunState.startedAt = new Date().toISOString();
-  try {
-    await refreshRssRuntime(80, { trigger: `agentes-${trigger}` });
-    const result = runRealAgentsRuntime({ trigger });
-    realAgentsAutoRunState.lastRunAt = new Date().toISOString();
-    realAgentsAutoRunState.cycles += 1;
-    realAgentsAutoRunState.lastError = result.ok ? "" : result.error || "Falha ao rodar agentes reais.";
+  const result = runRealAgentsRuntime({ trigger });
+  realAgentsAutoRunState.running = false;
+  realAgentsAutoRunState.lastRunAt = new Date().toISOString();
+  realAgentsAutoRunState.cycles += 1;
+  realAgentsAutoRunState.lastError = result.ok ? "" : result.error || "Falha ao rodar agentes reais.";
 
-    if (result.ok) {
-      console.log(`[catalogo] busca total e agentes atualizados (${trigger})`);
-      runRealAgentsAutonomyCycle(`runtime-${trigger}`);
-    } else {
-      console.warn(`[catalogo] falha no ciclo dos agentes reais (${trigger}): ${realAgentsAutoRunState.lastError}`);
-    }
-  } catch (error) {
-    realAgentsAutoRunState.lastRunAt = new Date().toISOString();
-    realAgentsAutoRunState.cycles += 1;
-    realAgentsAutoRunState.lastError = String(error?.message || error || "Falha ao rodar busca total e agentes.");
-    console.warn(`[catalogo] falha na busca total dos agentes (${trigger}): ${realAgentsAutoRunState.lastError}`);
-  } finally {
-    realAgentsAutoRunState.running = false;
+  if (result.ok) {
+    console.log(`[catalogo] agentes reais atualizados (${trigger})`);
+    runRealAgentsAutonomyCycle(`runtime-${trigger}`);
+  } else {
+    console.warn(`[catalogo] falha no ciclo dos agentes reais (${trigger}): ${realAgentsAutoRunState.lastError}`);
   }
 }
 
@@ -11219,11 +11543,11 @@ function startRealAgentsAutoRunner() {
   if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.timer) return;
 
   realAgentsAutoRunState.timer = setInterval(() => {
-    runRealAgentsAutoCycle("auto-8-horas").catch(() => {});
+    runRealAgentsAutoCycle("auto-5-minutos");
   }, REAL_AGENTS_AUTO_RUN_INTERVAL_MS);
 
   setTimeout(() => {
-    runRealAgentsAutoCycle("auto-inicializacao").catch(() => {});
+    runRealAgentsAutoCycle("auto-inicializacao");
   }, Math.min(15 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_MS));
 }
 
@@ -13370,7 +13694,8 @@ async function handleApi(req, res, pathname, searchParams) {
     writeCheffeCallState({
       ...state,
       active: false,
-      releasedAt: new Date().toISOString()
+      releasedAt: new Date().toISOString(),
+      lastActivityAt: new Date().toISOString()
     });
     return sendJson(res, 200, buildCheffeCallPayload());
   }
@@ -15566,9 +15891,7 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
     const body = await parseBody(req);
     const limit = Number(body.limit || 18);
-    const payload = await refreshRssRuntime(Math.max(5, Math.min(80, limit)), {
-      trigger: cleanShortText(body.trigger || "admin", 80)
-    });
+    const payload = await refreshRssRuntime(Math.max(5, Math.min(80, limit)));
     return sendJson(res, 200, { ok: true, ...payload });
   }
 
@@ -15665,9 +15988,9 @@ function handleStatic(req, res, pathname, requestUrl) {
 ensureDataDir();
 loadImagePreviewCache();
 if (RSS_SOURCES.length) {
-  refreshRssRuntime(30, { trigger: "startup-light" }).catch(() => {});
+  refreshRssRuntime().catch(() => {});
   setInterval(() => {
-    refreshRssRuntime(30, { trigger: "auto-light" }).catch(() => {});
+    refreshRssRuntime().catch(() => {});
   }, NEWS_REFRESH_INTERVAL_MS);
 }
 

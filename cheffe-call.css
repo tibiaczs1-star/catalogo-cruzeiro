@@ -1922,6 +1922,41 @@ body.cheffe-call-page {
   background: rgba(10, 20, 32, 0.7);
 }
 
+.task-queue-block.is-ide-prompt {
+  max-height: 190px;
+  border-color: rgba(244, 201, 107, 0.3);
+  background: rgba(18, 15, 8, 0.72);
+}
+
+.task-queue-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.task-queue-actions button {
+  min-height: 34px;
+  padding: 0 11px;
+  border: 1px solid rgba(244, 201, 107, 0.4);
+  border-radius: 8px;
+  color: #1d1215;
+  background: var(--call-gold);
+  font: 900 0.72rem/1 Inter, "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.task-queue-actions button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.editorial-health-queue {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
 .meeting-log-list {
   display: grid;
   grid-template-columns: 1fr;
@@ -9357,6 +9392,243 @@ body.cheffe-access-locked {
   display: none !important;
 }
 
+/* 2026-05-05: Cheffe Call em cenas operacionais */
+.cheffe-scene-flow,
+.cheffe-meeting-scene-panel {
+  position: relative;
+  z-index: 12;
+  display: grid;
+  gap: 14px;
+  margin: 0 8px 18px;
+  padding: 16px;
+  border: 1px solid rgba(127, 231, 255, 0.16);
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(7, 11, 18, 0.98), rgba(5, 8, 14, 0.96)),
+    rgba(255, 255, 255, 0.02);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+.cheffe-scene-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.cheffe-scene-head h2,
+.cheffe-meeting-scene-panel h2 {
+  margin: 0;
+  color: #fff8e8;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.12;
+}
+
+.cheffe-scene-head p:last-child {
+  max-width: 560px;
+  margin: 0;
+  color: rgba(230, 242, 255, 0.72);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.cheffe-scene-timeline {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(96px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+}
+
+.cheffe-scene-timeline li {
+  min-width: 96px;
+}
+
+.cheffe-scene-step {
+  display: grid;
+  grid-template-columns: 24px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  gap: 4px 7px;
+  width: 100%;
+  min-height: 74px;
+  padding: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 8px;
+  color: rgba(230, 242, 255, 0.86);
+  background: rgba(255, 255, 255, 0.045);
+  text-align: left;
+  cursor: pointer;
+}
+
+.cheffe-scene-step span {
+  display: grid;
+  grid-row: 1 / span 2;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 999px;
+  color: #130c12;
+  background: rgba(244, 201, 107, 0.78);
+  font-size: 0.78rem;
+  font-weight: 1000;
+}
+
+.cheffe-scene-step strong {
+  min-width: 0;
+  color: #fff8e8;
+  font-size: 0.75rem;
+  line-height: 1.16;
+  overflow-wrap: anywhere;
+}
+
+.cheffe-scene-step i {
+  color: rgba(127, 231, 255, 0.76);
+  font-size: 0.62rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.cheffe-scene-step.is-active {
+  border-color: rgba(127, 231, 255, 0.58);
+  background: rgba(127, 231, 255, 0.09);
+  box-shadow: 0 0 0 1px rgba(127, 231, 255, 0.18);
+}
+
+.cheffe-scene-step.is-active span {
+  background: var(--call-cyan);
+}
+
+.cheffe-scene-step.is-done {
+  border-color: rgba(115, 235, 168, 0.34);
+}
+
+.cheffe-scene-step.is-done span {
+  color: #06130d;
+  background: var(--call-green);
+}
+
+.cheffe-scene-stage {
+  display: grid;
+  gap: 12px;
+  padding: 15px;
+  border: 1px solid rgba(244, 201, 107, 0.22);
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgba(12, 17, 27, 0.96), rgba(7, 10, 18, 0.94)),
+    rgba(244, 201, 107, 0.045);
+}
+
+.cheffe-scene-stage > span {
+  width: fit-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #1b1116;
+  background: var(--call-gold);
+  font-size: 0.68rem;
+  font-weight: 1000;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.cheffe-scene-stage h2 {
+  margin: 0;
+  color: #fff8e8;
+  font-size: clamp(1.22rem, 2.2vw, 1.72rem);
+  line-height: 1.1;
+}
+
+.cheffe-scene-stage p {
+  margin: 0;
+  color: rgba(230, 242, 255, 0.76);
+  font-size: 0.92rem;
+  line-height: 1.48;
+}
+
+.cheffe-scene-metrics,
+.cheffe-scene-data-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cheffe-scene-metrics article,
+.cheffe-scene-data-grid article {
+  min-width: 0;
+  min-height: 88px;
+  padding: 11px 12px;
+  border: 1px solid rgba(127, 231, 255, 0.13);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.cheffe-scene-metrics span,
+.cheffe-scene-data-grid span {
+  display: block;
+  margin-bottom: 6px;
+  color: rgba(127, 231, 255, 0.8);
+  font-size: 0.66rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.cheffe-scene-metrics strong,
+.cheffe-scene-data-grid strong {
+  display: block;
+  min-width: 0;
+  color: #fff8e8;
+  font-size: 1rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.cheffe-scene-data-grid p {
+  margin: 7px 0 0;
+  color: rgba(230, 242, 255, 0.7);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.cheffe-scene-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  justify-content: flex-end;
+}
+
+.cheffe-scene-actions button {
+  min-height: 40px;
+  padding: 0 13px;
+  border: 1px solid rgba(127, 231, 255, 0.18);
+  border-radius: 8px;
+  color: var(--call-text);
+  background: rgba(13, 20, 32, 0.96);
+  font: 900 0.76rem/1 Inter, "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.cheffe-scene-actions button:nth-child(2) {
+  color: #1d1215;
+  border-color: rgba(244, 201, 107, 0.66);
+  background: var(--call-gold);
+}
+
+.cheffe-scene-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.is-scene-focus {
+  outline: 2px solid rgba(244, 201, 107, 0.46);
+  outline-offset: 3px;
+}
+
 @media (max-width: 1180px) {
   .decision-desk-grid,
   .direct-command-grid,
@@ -9370,9 +9642,33 @@ body.cheffe-access-locked {
   .execution-control-log {
     grid-column: 1 / -1;
   }
+
+  .cheffe-scene-timeline {
+    grid-template-columns: repeat(9, minmax(122px, 1fr));
+  }
+
+  .cheffe-scene-metrics,
+  .cheffe-scene-data-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
+  .cheffe-scene-head,
+  .cheffe-scene-actions {
+    display: grid;
+    justify-content: stretch;
+  }
+
+  .cheffe-scene-actions button {
+    width: 100%;
+  }
+
+  .cheffe-scene-metrics,
+  .cheffe-scene-data-grid {
+    grid-template-columns: 1fr;
+  }
+
   .decision-desk {
     padding: 12px;
   }
