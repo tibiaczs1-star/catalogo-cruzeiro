@@ -9173,7 +9173,7 @@ function applyCheffeCallAction(body = {}) {
         }
       ],
       executionSummary: {
-        delivered: action === "approve" ? 1 : 0,
+        delivered: ["approve", "complete"].includes(action) ? 1 : 0,
         failed: 0,
         running: action === "implement" ? 1 : 0
       }
@@ -9303,6 +9303,39 @@ function applyCheffeCallAction(body = {}) {
       if (review.ok) reviewedAction = review.action;
     }
     maybeRegisterAgentArticleArtifact();
+  } else if (action === "complete") {
+    const proofLevel = cleanShortText(body.proofLevel || "", 40);
+    const runtimeEvidence = cleanShortText(body.runtimeEvidence || body.evidence || "", 1200);
+    const isApplicationProof = proofLevel === "application";
+    const finalState = isApplicationProof ? "published" : "executed";
+    const finalLabel = isApplicationProof ? "aplicação provada" : "execução provada";
+    pushLog({
+      kind: isApplicationProof ? "good" : "info",
+      kindLabel: finalLabel,
+      agent,
+      office,
+      text: runtimeEvidence || opinion || title
+    });
+    pushDecision({
+      state: finalState,
+      kindLabel: finalLabel,
+      agent,
+      office,
+      title: isApplicationProof ? `Aplicação provada por ${agent}` : `Execução provada por ${agent}`,
+      text: runtimeEvidence || title,
+      howTo,
+      prompt,
+      command,
+      opinionKey,
+      artifact: executableMatch?.artifact || ""
+    });
+    appendActionOrder({
+      message: `${finalLabel} na Cheffe Call: ${title}. Evidência: ${runtimeEvidence || "runtime retornou prova resumida no painel."}`,
+      ceoReply: isApplicationProof
+        ? `${agent} ficou marcado como aplicado com prova no alvo final.`
+        : `${agent} ficou marcado como executado com prova; aplicação/publicação ainda segue pendente.`,
+      status: isApplicationProof ? "cheffe-call-aplicacao-provada" : "cheffe-call-execucao-provada"
+    });
   } else if (action === "task") {
     pushLog({
       kindLabel: "tarefa criada",
@@ -9400,6 +9433,8 @@ function applyCheffeCallAction(body = {}) {
     status:
       action === "implement"
         ? "em-execucao"
+        : action === "complete"
+          ? "execucao-conferida"
         : action === "approve"
           ? "aprovado"
           : action === "refresh"

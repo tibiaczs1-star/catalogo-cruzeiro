@@ -842,6 +842,8 @@
       hasEvidence: hasExecutionProof || hasApplicationProof,
       hasExecutionProof,
       hasApplicationProof,
+      proofLevel: hasApplicationProof ? "application" : hasExecutionProof ? "execution" : "none",
+      isResolved: hasApplicationProof,
       evidence: evidenceLines.length
         ? evidenceLines.join(" ")
         : "Runtime concluiu, mas não retornou endpoint, relatório, arquivo, contador ou aplicação verificável.",
@@ -854,6 +856,55 @@
       executionSignals,
       applicationSignals,
       ecosystemStudy
+    };
+  }
+
+  function getRuntimeProofUi(outcome = {}) {
+    if (outcome?.hasApplicationProof) {
+      return {
+        badge: "Aplicação provada",
+        shortBadge: "Com aplicação",
+        responseBadge: "Ordem aplicada",
+        title: "Runtime provou aplicação no alvo",
+        responseTitle: "Execução aplicada com prova",
+        actionTitle: "Aplicação confirmada",
+        text: "A runtime devolveu sinal de alteração, artefato, publicação ou aplicação no alvo final.",
+        state: "done",
+        tone: "ok",
+        stepLabel: "Aplicação provada",
+        itemLabel: "aplicação",
+        terminalStatus: "status: aplicação provada"
+      };
+    }
+    if (outcome?.hasExecutionProof) {
+      return {
+        badge: "Execução provada",
+        shortBadge: "Aplicação pendente",
+        responseBadge: "Execução provada",
+        title: "Runtime provou execução, não aplicação",
+        responseTitle: "Execução concluída; aplicação pendente",
+        actionTitle: "Execução provada",
+        text: "A runtime retornou endpoint, relatório, arquivo ou contador, mas ainda falta provar mudança aplicada/publicada no alvo final.",
+        state: "pending",
+        tone: "pending",
+        stepLabel: "Aplicação pendente",
+        itemLabel: "aplicação pendente",
+        terminalStatus: "status: execução provada; aplicação pendente"
+      };
+    }
+    return {
+      badge: "Sem prova real",
+      shortBadge: "Pendente",
+      responseBadge: "Runtime rodada",
+      title: "Runtime sem prova verificável",
+      responseTitle: "Runtime sem prova real",
+      actionTitle: "Runtime sem prova",
+      text: "A runtime foi chamada, mas não retornou endpoint, relatório, arquivo, contador ou aplicação comprovada.",
+      state: "pending",
+      tone: "pending",
+      stepLabel: "Prova pendente",
+      itemLabel: "pendente",
+      terminalStatus: "status: prova pendente"
     };
   }
 
@@ -872,7 +923,7 @@
   }
 
   function getRuntimeOutcomeTone(payload = {}) {
-    return getRuntimeEvidence(payload).hasEvidence ? "ok" : "pending";
+    return getRuntimeProofUi(getRuntimeEvidence(payload)).tone;
   }
 
   function buildSessionProofSummary(payload = {}, replies = [], orderText = "") {
@@ -1511,11 +1562,12 @@
     return String(activePromptPayload?.text || promptPreviewText?.textContent || "").trim();
   }
 
-  function syncVisibleInstruction(value) {
+  function syncVisibleInstruction(value, options = {}) {
     const text = String(value || "").trim();
+    const visibleText = String(options.visibleText ?? text).trim();
     if (instructionInput) instructionInput.value = text;
-    if (quickInstructionInput) quickInstructionInput.value = text;
-    quickInstructionInput?.focus();
+    if (quickInstructionInput && options.quick !== false) quickInstructionInput.value = visibleText;
+    if (options.focus !== false) quickInstructionInput?.focus();
   }
 
   function clampPercent(value, fallback = 0) {
@@ -1794,13 +1846,23 @@
     return guides[value] || guides.research;
   }
 
-  function collectAgentIdeas(limit = 6) {
+  function cleanAgentIdeaForDirectOrder(value = "") {
+    const normalized = String(value || "").replace(/\s+/g, " ").trim();
+    if (!normalized) return "";
+    const subjectIndex = normalized.search(/\bAssunto:\s*(ORDEM DIRETA|Ordem direta|CHEFFE CALL|Prompt Mestre)/i);
+    const withoutSubject = subjectIndex > 0 ? normalized.slice(0, subjectIndex).trim() : normalized;
+    const hardStopIndex = withoutSubject.search(/\bIdeias dos agentes que podem ser aproveitadas\b/i);
+    const withoutNestedIdeas = hardStopIndex > 0 ? withoutSubject.slice(0, hardStopIndex).trim() : withoutSubject;
+    return summarizeOneLine(withoutNestedIdeas, "").slice(0, 260).trim();
+  }
+
+  function collectAgentIdeas(limit = 4) {
     const fromFlow = latestOpinionFlow.map((flow) => ({ ...flow.item, status: flow.status }));
     const source = fromFlow.length ? fromFlow : currentOpinions;
     const seen = new Set();
     return source
       .map((item) => {
-        const text = String(item?.opinion || item?.assignment?.action || item?.assignment?.idea || "").trim();
+        const text = cleanAgentIdeaForDirectOrder(item?.opinion || item?.assignment?.action || item?.assignment?.idea || "");
         const key = text.toLowerCase().replace(/\s+/g, " ").slice(0, 140);
         if (!text || seen.has(key)) return null;
         seen.add(key);
@@ -1826,36 +1888,45 @@
     const selection = getDecisionSelection();
     const orderText = String(options.orderText ?? directOrderText?.value ?? "").trim();
     const urlText = String(options.urlText ?? directOrderUrl?.value ?? "").trim();
-    const ideas = Array.isArray(options.ideas) ? options.ideas : collectAgentIdeas();
+    const shouldIncludeIdeas = options.includeIdeas === true ||
+      (options.includeIdeas !== false && directOrderMode?.value === "rewrite" && !/Ideias puxadas dos agentes:/i.test(orderText));
+    const ideas = Array.isArray(options.ideas) ? options.ideas : shouldIncludeIdeas ? collectAgentIdeas() : [];
+    const promptParts = [
+      "ORDEM DIRETA DA CHEFFE CALL",
+      `Modo: ${guide.label}`,
+      `Escritório preferencial: ${selection.officeLabel}`,
+      `Agente principal: ${selection.agentLabel}`,
+      urlText ? `URL específica a pesquisar: ${urlText}` : "URL específica a pesquisar: nenhuma URL informada",
+      "",
+      "Ordem do operador:",
+      orderText || "Pedir esclarecimento se faltar alvo concreto.",
+      ""
+    ];
+    if (ideas.length) {
+      promptParts.push(
+        "Ideias dos agentes que podem ser aproveitadas ou corrigidas:",
+        formatDirectIdeasForPrompt(ideas),
+        ""
+      );
+    }
+    promptParts.push(
+      "Diretriz obrigatória:",
+      guide.directive,
+      "",
+      "Resposta obrigatória:",
+      "1. Resultado analisado ou executado",
+      "2. Evidência real: URL, arquivo, tela, dado, rotina ou comportamento afetado",
+      "3. O que não ficou provado",
+      "4. Próxima ação concreta",
+      "5. Se estiver repetindo pedido antigo, cortar a repetição e trazer uma decisão nova"
+    );
     return {
       guide,
       selection,
       orderText,
       urlText,
       ideas,
-      prompt: [
-        "ORDEM DIRETA DA CHEFFE CALL",
-        `Modo: ${guide.label}`,
-        `Escritório preferencial: ${selection.officeLabel}`,
-        `Agente principal: ${selection.agentLabel}`,
-        urlText ? `URL específica a pesquisar: ${urlText}` : "URL específica a pesquisar: nenhuma URL informada",
-        "",
-        "Ordem do operador:",
-        orderText || "Usar as ideias dos agentes e pedir esclarecimento se faltar alvo.",
-        "",
-        "Ideias dos agentes que podem ser aproveitadas ou corrigidas:",
-        formatDirectIdeasForPrompt(ideas),
-        "",
-        "Diretriz obrigatória:",
-        guide.directive,
-        "",
-        "Resposta obrigatória:",
-        "1. Resultado analisado ou executado",
-        "2. Evidência real: URL, arquivo, tela, dado, rotina ou comportamento afetado",
-        "3. O que não ficou provado",
-        "4. Próxima ação concreta",
-        "5. Se estiver repetindo pedido antigo, cortar a repetição e trazer uma decisão nova"
-      ].join("\n")
+      prompt: promptParts.join("\n")
     };
   }
 
@@ -1946,7 +2017,10 @@
       details: order.prompt
     });
     try {
-      syncVisibleInstruction(order.prompt);
+      syncVisibleInstruction(order.prompt, {
+        visibleText: order.orderText || order.urlText || "",
+        focus: false
+      });
       if (commandInput) commandInput.value = order.prompt;
       const payload = await postCall("/api/cheffe-call/start", { password, instruction: order.prompt });
       activateMeetingResponse(order.prompt, payload);
@@ -1984,23 +2058,22 @@
         : buildSessionProofSummary(payload, replies, order.orderText || order.urlText || order.prompt);
       const tone = shouldRunRuntime ? getRuntimeOutcomeTone(runtimePayload) : "ok";
       const outcome = shouldRunRuntime ? getRuntimeEvidence(runtimePayload) : null;
+      const proofUi = shouldRunRuntime ? getRuntimeProofUi(outcome) : null;
       terminalEl.textContent = [
         shouldRunRuntime ? "> cheffe-call/direct-runtime" : "> cheffe-call/direct-order",
         `modo: ${order.guide.label}`,
         order.urlText ? `url: ${order.urlText}` : "",
         `respostas: ${replies.length}`,
-        shouldRunRuntime ? `evidencia: ${outcome?.hasEvidence ? "sim" : "pendente"}` : "status: resposta analisada",
+        shouldRunRuntime ? `prova: ${proofUi.terminalStatus}` : "status: resposta analisada",
         "",
         shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, "runtime: ordem direta") : formatAgentReplies(replies, 5)
       ]
         .filter(Boolean)
         .join("\n");
       setExecutionControl({
-        badge: shouldRunRuntime ? (outcome?.hasEvidence ? "Com evidência" : "Evidência pendente") : "Ordem direta",
+        badge: shouldRunRuntime ? proofUi.badge : "Ordem direta",
         title: shouldRunRuntime
-          ? outcome?.hasEvidence
-            ? "Runtime retornou prova de execução"
-            : "Runtime rodou sem prova de implementação"
+          ? proofUi.title
           : "Ordem direta analisada",
         text: shouldRunRuntime
           ? "O painel separou o que a runtime provou do que ainda precisa ser validado."
@@ -2010,16 +2083,12 @@
         log: shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, order.prompt) : formatAgentReplies(replies, 5)
       });
       setAgentResponse({
-        badge: shouldRunRuntime ? (outcome?.hasEvidence ? "Ordem com evidência" : "Ordem rodada") : "Ordem direta",
+        badge: shouldRunRuntime ? proofUi.responseBadge : "Ordem direta",
         title: shouldRunRuntime
-          ? outcome?.hasEvidence
-            ? "Ordem direta executada com evidência"
-            : "Agentes rodaram, mas falta prova real"
+          ? proofUi.responseTitle
           : `${replies.length} agentes responderam à ordem direta`,
         text: shouldRunRuntime
-          ? outcome?.hasEvidence
-            ? "A runtime devolveu sinal verificável. Ainda vale validar na tela ou no dado alvo."
-            : "A runtime foi chamada, mas não retornou arquivo, artefato, publicação ou aplicação comprovada."
+          ? proofUi.text
           : "A ordem direta foi recebida e virou resposta analisada sem fechar o controle.",
         next: shouldRunRuntime
           ? summary.pending
@@ -2031,11 +2100,9 @@
           : [{ state: "done", label: "ordem", agent: "Cheffe Call", text: order.orderText || order.urlText || order.prompt }]
       });
       setActionFeedback({
-        badge: shouldRunRuntime ? (outcome?.hasEvidence ? "Com evidência" : "Pendente") : "Ordem direta",
+        badge: shouldRunRuntime ? proofUi.shortBadge : "Ordem direta",
         title: shouldRunRuntime
-          ? outcome?.hasEvidence
-            ? "Runtime concluiu com evidência"
-            : "Runtime concluída sem prova"
+          ? proofUi.actionTitle
           : "Resposta analisada",
         message: shouldRunRuntime ? summary.evidence : "Os agentes responderam. O controle persistente guarda o resultado.",
         tone,
@@ -2044,7 +2111,7 @@
           { label: "Ordem direta enviada", state: "done" },
           { label: "Resposta registrada", state: "done" },
           { label: shouldRunRuntime ? "Runtime concluída" : "Aguardando execução", state: shouldRunRuntime ? "done" : "running" },
-          { label: outcome?.hasEvidence ? "Evidência encontrada" : "Controle atualizado", state: outcome?.hasEvidence ? "done" : "pending" }
+          { label: shouldRunRuntime ? proofUi.stepLabel : "Controle atualizado", state: shouldRunRuntime ? proofUi.state : "pending" }
         ],
         details: shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, order.prompt) : formatAgentReplies(replies, 5)
       });
@@ -2176,9 +2243,11 @@
       : `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na reunião.`;
     return {
       resolved: implemented
-        ? outcome.hasEvidence
-          ? "Decisão registrada e runtime executada com evidência."
-          : "Decisão registrada e runtime rodada sem prova de implementação."
+        ? outcome.hasApplicationProof
+          ? "Decisão registrada e runtime executada com aplicação provada."
+          : outcome.hasExecutionProof
+            ? "Decisão registrada e runtime executada com prova de execução; aplicação ainda pendente."
+            : "Decisão registrada e runtime rodada sem prova de implementação."
         : `${selection.guide.label} concluído para decisão.`,
       evidence,
       pending: implemented
@@ -2220,9 +2289,11 @@
     const outcome = implemented ? getRuntimeEvidence(runtimePayload) : null;
     return {
       resolved: implemented
-        ? outcome.hasEvidence
-          ? "Ordem real registrada e runtime executada com evidência."
-          : "Ordem real registrada e runtime rodada sem prova de implementação."
+        ? outcome.hasApplicationProof
+          ? "Ordem real registrada e runtime executada com aplicação provada."
+          : outcome.hasExecutionProof
+            ? "Ordem real registrada e runtime executada com prova de execução; aplicação ainda pendente."
+            : "Ordem real registrada e runtime rodada sem prova de implementação."
         : "Ordem real aceita e registrada.",
       evidence: implemented
         ? outcome.evidence
@@ -2319,14 +2390,13 @@
       latestDecisionOrder = updatedDecision;
       const commitSummary = buildDecisionCommitSummary(updatedDecision, mode, runtimePayload);
       const commitOutcome = mode === "implement" ? getRuntimeEvidence(runtimePayload) : null;
+      const commitProofUi = mode === "implement" ? getRuntimeProofUi(commitOutcome) : null;
       const commitTone = mode === "implement" ? getRuntimeOutcomeTone(runtimePayload) : "ok";
       setExecutionControl({
-        badge: mode === "implement" ? (commitOutcome?.hasEvidence ? "Com evidência" : "Evidência pendente") : "Ordem aceita",
+        badge: mode === "implement" ? commitProofUi.badge : "Ordem aceita",
         title:
           mode === "implement"
-            ? commitOutcome?.hasEvidence
-              ? "Mesa executou com prova"
-              : "Mesa rodou sem prova de implementação"
+            ? commitProofUi.title
             : "Mesa registrou a ordem real",
         text:
           mode === "implement"
@@ -2337,18 +2407,14 @@
         log: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, decision.promptText || contextText) : decision.promptText || contextText
       });
       setAgentResponse({
-        badge: mode === "implement" ? (commitOutcome?.hasEvidence ? "Ordem com evidência" : "Ordem rodada") : "Ordem aceita",
+        badge: mode === "implement" ? commitProofUi.responseBadge : "Ordem aceita",
         title:
           mode === "implement"
-            ? commitOutcome?.hasEvidence
-              ? "A decisão virou execução com evidência"
-              : "A decisão rodou, mas ainda falta prova"
+            ? commitProofUi.responseTitle
             : "A decisão virou ordem real",
         text:
           mode === "implement"
-            ? commitOutcome?.hasEvidence
-              ? "A Mesa de Decisão registrou a ordem, executou a runtime e recebeu sinal verificável."
-              : "A Mesa de Decisão registrou a ordem e rodou a runtime, mas o retorno não provou alteração real."
+            ? commitProofUi.text
             : "A Mesa de Decisão registrou a ordem real. Nada foi executado automaticamente além do registro.",
         next:
           mode === "implement"
@@ -2362,12 +2428,10 @@
           : [{ state: "done", label: "ordem", agent: selection.agentLabel || "Cheffe Call", text: contextText }]
       });
       setActionFeedback({
-        badge: mode === "implement" ? (commitOutcome?.hasEvidence ? "Com evidência" : "Pendente") : "Aceito",
+        badge: mode === "implement" ? commitProofUi.shortBadge : "Aceito",
         title:
           mode === "implement"
-            ? commitOutcome?.hasEvidence
-              ? "Ordem real com evidência"
-              : "Runtime concluída sem prova"
+            ? commitProofUi.actionTitle
             : "Ordem real registrada",
         message:
           mode === "implement"
@@ -2378,7 +2442,7 @@
         steps: [
           { label: "Registro concluído", state: "done" },
           { label: mode === "implement" ? "Runtime concluída" : "Implementação aguardando comando", state: "done" },
-          { label: mode === "implement" && !commitOutcome?.hasEvidence ? "Evidência pendente" : "Terminal atualizado", state: mode === "implement" && !commitOutcome?.hasEvidence ? "pending" : "done" }
+          { label: mode === "implement" ? commitProofUi.stepLabel : "Terminal atualizado", state: mode === "implement" ? commitProofUi.state : "done" }
         ],
         details: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, "mesa: ordem rodada") : contextText
       });
@@ -2389,9 +2453,11 @@
       }
       setStatus(
         mode === "implement"
-          ? commitOutcome?.hasEvidence
-            ? "Ordem real rodada com evidência pela Mesa de decisão."
-            : "Ordem real rodada, mas sem prova de implementação ainda."
+          ? commitOutcome?.hasApplicationProof
+            ? "Ordem real aplicada com prova pela Mesa de decisão."
+            : commitOutcome?.hasExecutionProof
+              ? "Ordem real executada com prova; aplicação ainda pendente."
+              : "Ordem real rodada, mas sem prova de implementação ainda."
           : "Ordem real aceita e registrada.",
         "ok"
       );
@@ -2468,7 +2534,10 @@
       details: promptText
     });
     try {
-      syncVisibleInstruction(promptText);
+      syncVisibleInstruction(promptText, {
+        visibleText: contextText,
+        focus: false
+      });
       if (commandInput) commandInput.value = promptText;
       const payload = await postCall("/api/cheffe-call/start", { password, instruction: promptText });
       activateMeetingResponse(promptText, payload);
@@ -3379,16 +3448,18 @@
       ready: "aprovada",
       queued: "tarefa",
       running: "em runtime",
+      executed: "execução provada",
       terminal: "no terminal",
       fallback: "no terminal",
-      published: "com evidência",
+      published: "aplicação provada",
       dismissed: "ignorada"
     };
     const detailMap = {
       running: "Execução enviada; aguardando evidência verificável.",
+      executed: "Runtime retornou prova de execução; aplicação/publicação ainda pendente.",
       terminal: "Registrada no terminal; ainda não prova alteração real.",
       fallback: "Registrada como apoio; ainda não prova alteração real.",
-      published: "Servidor marcou entrega com evidência.",
+      published: "Servidor marcou aplicação com evidência no alvo final.",
       queued: "Tarefa rastreável criada; ainda precisa execução."
     };
     return {
@@ -3402,7 +3473,7 @@
   function updateOpinionFlowSummary(flowItems) {
     const pending = flowItems.filter((item) => item.status.state === "pending").length;
     const ready = flowItems.filter((item) => ["ready", "queued"].includes(item.status.state)).length;
-    const running = flowItems.filter((item) => ["running", "terminal", "fallback", "published"].includes(item.status.state)).length;
+    const running = flowItems.filter((item) => ["running", "executed", "terminal", "fallback", "published"].includes(item.status.state)).length;
     if (opinionPendingCount) opinionPendingCount.textContent = String(pending);
     if (opinionReadyCount) opinionReadyCount.textContent = String(ready);
     if (opinionRunningCount) opinionRunningCount.textContent = String(running);
@@ -3436,7 +3507,7 @@
         (key === "listen" && flowItems.length > 0) ||
           (key === "decide" && (ready > 0 || running > 0)) ||
           (key === "run" && running > 0) ||
-          (key === "done" && flowItems.some((item) => item.status.state === "published"))
+          (key === "done" && flowItems.some((item) => ["executed", "published"].includes(item.status.state)))
       );
     });
   }
@@ -3464,7 +3535,7 @@
           const flowItem = latestOpinionFlow[index] || { status: { state: "pending", label: "pendente", detail: "" } };
           const status = flowItem.status;
           const canRun = ["ready", "queued"].includes(status.state);
-          const isClosed = ["running", "terminal", "fallback", "published", "dismissed", "silent"].includes(status.state);
+          const isClosed = ["running", "executed", "terminal", "fallback", "published", "dismissed", "silent"].includes(status.state);
           return `
           <article class="opinion-item is-${escapeHtml(status.state)}" data-opinion-index="${index}" data-opinion-key="${escapeHtml(getOpinionKey(item))}">
             <div class="opinion-id">
@@ -3825,23 +3896,29 @@
       try {
         const payload = await runSingleImplementation(active);
         const outcome = getRuntimeEvidence(payload);
+        const proofUi = getRuntimeProofUi(outcome);
         const summary = buildRuntimeOutcomeSummary(payload, active?.assignment?.action || idea || `Card de ${agentName}`, "card");
         const tone = getRuntimeOutcomeTone(payload);
         setAgentResponse({
-          badge: outcome.hasEvidence ? "Card com evidência" : "Card rodado",
-          title: outcome.hasEvidence ? `${agentName} retornou evidência` : `${agentName} rodou sem prova real`,
-          text: outcome.hasEvidence
-            ? "O card foi enviado para runtime e retornou sinal verificável."
-            : "O card foi enviado para runtime, mas o retorno não provou alteração em tela, dado, rotina ou arquivo.",
+          badge: proofUi.responseBadge,
+          title: `${agentName}: ${proofUi.responseTitle}`,
+          text: proofUi.text,
           next: summary.pending,
           tone,
           summary,
           items: [
             { state: "done", label: "enviado", agent: agentName, text: active?.assignment?.action || idea },
-            { state: outcome.hasEvidence ? "done" : "pending", label: outcome.hasEvidence ? "evidência" : "pendente", agent: "Cheffe Call", text: outcome.evidence }
+            { state: proofUi.state, label: proofUi.itemLabel, agent: "Cheffe Call", text: outcome.evidence }
           ]
         });
-        setStatus(outcome.hasEvidence ? `${agentName} retornou evidência de execução.` : `${agentName} rodou, mas ainda falta prova real.`, "ok");
+        setStatus(
+          outcome.hasApplicationProof
+            ? `${agentName} retornou aplicação provada.`
+            : outcome.hasExecutionProof
+              ? `${agentName} retornou execução provada; aplicação pendente.`
+              : `${agentName} rodou, mas ainda falta prova real.`,
+          "ok"
+        );
         moveToNextSpeaker("próxima fala", { updateResponse: false });
         return;
       } catch (error) {
@@ -4262,8 +4339,11 @@
     renderAgentReport(payload);
     updateRealFlow(payload);
     setStatus(payload.meeting?.active ? "Cheffe Call ativo. Runtimes pausadas." : "Sala pronta.", "ok");
-    if (quickInstructionInput && !quickInstructionInput.matches(":focus")) {
-      quickInstructionInput.value = instructionInput?.value || payload.meeting?.lastInstruction || "";
+    if (quickCommandContext) {
+      const lastInstruction = String(payload.meeting?.lastInstruction || "").replace(/\s+/g, " ").trim();
+      quickCommandContext.textContent = lastInstruction
+        ? `Digite uma nova ordem. Última rodada: ${lastInstruction.slice(0, 120)}${lastInstruction.length > 120 ? "..." : ""}`
+        : "Digite uma ordem nova. Abrir rodada monta a fila; Implementar fila executa somente cards aprovados.";
     }
     syncDecisionSelectors();
     syncGameShellState();
@@ -4446,29 +4526,36 @@
       password,
       `Implementar card aprovado na Cheffe Call: ${agentName}.`
     );
-    await loadCall();
     const outcome = getRuntimeEvidence(payload);
+    const proofUi = getRuntimeProofUi(outcome);
+    await postRoomAction("complete", active, {
+      title: `${agentName}: ${proofUi.actionTitle}`,
+      proofLevel: outcome.proofLevel,
+      runtimeEvidence: outcome.evidence,
+      howTo: proofUi.text
+    });
+    await loadCall();
     const tone = getRuntimeOutcomeTone(payload);
     const orderText = active?.assignment?.action || active?.opinion || `Card aprovado de ${agentName}`;
     const summary = buildRuntimeOutcomeSummary(payload, orderText, "card");
     setExecutionControl({
-      badge: outcome.hasEvidence ? "Com evidência" : "Evidência pendente",
-      title: outcome.hasEvidence ? `${agentName} retornou prova` : `${agentName} rodou sem prova real`,
+      badge: proofUi.badge,
+      title: `${agentName}: ${proofUi.title}`,
       text: "A execução individual foi registrada no controle persistente.",
       tone,
       summary,
       log: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
     });
     setActionFeedback({
-      badge: outcome.hasEvidence ? "Com evidência" : "Pendente",
-      title: outcome.hasEvidence ? `${agentName} com evidência` : `${agentName} sem prova de implementação`,
+      badge: proofUi.shortBadge,
+      title: `${agentName}: ${proofUi.actionTitle}`,
       message: outcome.evidence,
       tone,
       closable: true,
       steps: [
         { label: "Card enviado", state: "done" },
         { label: "Runtime concluída", state: "done" },
-        { label: outcome.hasEvidence ? "Evidência encontrada" : "Evidência pendente", state: outcome.hasEvidence ? "done" : "pending" }
+        { label: proofUi.stepLabel, state: proofUi.state }
       ],
       details: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
     });
@@ -4476,7 +4563,7 @@
       "> cheffe-call/card-implementation",
       `owner: ${agentName}`,
       `office: ${getAgentOffice(active)}`,
-      formatRuntimeDetailsForTerminal(payload, outcome.hasEvidence ? "status: com evidência" : "status: evidência pendente")
+      formatRuntimeDetailsForTerminal(payload, proofUi.terminalStatus)
     ].join("\n");
     return payload;
   }
@@ -4566,57 +4653,66 @@
         password,
         `Implementar fila aprovada da Cheffe Call com ${completed} cards.`
       );
-      await loadCall();
       const outcome = getRuntimeEvidence(payload);
+      const proofUi = getRuntimeProofUi(outcome);
+      for (const flow of readyItems) {
+        await postRoomAction("complete", flow.item, {
+          title: `${getAgentDisplayName(flow.item)}: ${proofUi.actionTitle}`,
+          proofLevel: outcome.proofLevel,
+          runtimeEvidence: outcome.evidence,
+          howTo: proofUi.text
+        });
+      }
+      await loadCall();
       const tone = getRuntimeOutcomeTone(payload);
       const queueOrder = `Fila aprovada da Cheffe Call com ${completed} cards.`;
       const summary = buildRuntimeOutcomeSummary(payload, queueOrder, "fila de ordens");
       setExecutionControl({
-        badge: outcome.hasEvidence ? "Fila com evidência" : "Fila rodada",
-        title: outcome.hasEvidence ? "Fila retornou prova de execução" : "Fila rodou sem prova real",
+        badge: proofUi.badge,
+        title: `Fila: ${proofUi.title}`,
         text: "A fila de ordens foi separada entre runtime concluída, evidência e pendência.",
         tone,
         summary,
         log: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
       });
       setActionFeedback({
-        badge: outcome.hasEvidence ? "Com evidência" : "Pendente",
-        title: outcome.hasEvidence ? "Fila rodada com evidência" : "Fila rodada sem prova real",
+        badge: proofUi.shortBadge,
+        title: `Fila: ${proofUi.actionTitle}`,
         message: outcome.evidence,
         tone,
         closable: true,
         steps: [
           { label: `${completed} cards enviados`, state: "done" },
           { label: "Runtime concluída", state: "done" },
-          { label: outcome.hasEvidence ? "Evidência encontrada" : "Evidência pendente", state: outcome.hasEvidence ? "done" : "pending" }
+          { label: proofUi.stepLabel, state: proofUi.state }
         ],
         details: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
       });
       terminalEl.textContent = [
         "> cheffe-call/batch-complete",
         `cards: ${completed}`,
-        formatRuntimeDetailsForTerminal(payload, outcome.hasEvidence ? "status: com evidência" : "status: evidência pendente")
+        formatRuntimeDetailsForTerminal(payload, proofUi.terminalStatus)
       ].join("\n");
       setAgentResponse({
-        badge: outcome.hasEvidence ? "Fila com evidência" : "Fila rodada",
-        title: outcome.hasEvidence ? `${completed} ordens rodaram com evidência` : `${completed} ordens rodaram sem prova real`,
-        text: outcome.hasEvidence
-          ? "A Cheffe Call registrou a fila, rodou a runtime e recebeu evidência verificável."
-          : "A Cheffe Call registrou a fila e rodou a runtime, mas o retorno não provou mudança real.",
+        badge: proofUi.responseBadge,
+        title: `${completed} ordens: ${proofUi.responseTitle}`,
+        text: proofUi.text,
         next: summary.pending,
         tone,
         summary,
         items: readyItems.slice(0, 4).map((flow, index) => ({
-          state: outcome.hasEvidence ? "done" : "pending",
-          label: outcome.hasEvidence ? `evidência ${index + 1}` : `pendente ${index + 1}`,
+          state: proofUi.state,
+          label: `${proofUi.itemLabel} ${index + 1}`,
           agent: getAgentDisplayName(flow.item),
           text: flow.item?.assignment?.action || flow.item?.opinion || "Card enviado para runtime."
         }))
       });
       setStatus(
-        outcome.hasEvidence
-          ? `Fila de ordens rodada com evidência: ${completed} aprovações enviadas.`
-          : `Fila de ordens rodada, mas evidência real ainda está pendente.`,
+        outcome.hasApplicationProof
+          ? `Fila de ordens aplicada com prova: ${completed} aprovações enviadas.`
+          : outcome.hasExecutionProof
+            ? `Fila de ordens executada com prova; aplicação ainda pendente.`
+            : `Fila de ordens rodada, mas evidência real ainda está pendente.`,
         "ok"
       );
     } catch (error) {
@@ -4777,7 +4873,10 @@
   });
 
   quickInstructionInput?.addEventListener("focus", () => {
-    quickInstructionInput.select();
+    const end = String(quickInstructionInput.value || "").length;
+    if (typeof quickInstructionInput.setSelectionRange === "function") {
+      quickInstructionInput.setSelectionRange(end, end);
+    }
   });
 
   quickPasswordConfirm?.addEventListener("click", async () => {
@@ -4905,7 +5004,7 @@
     });
     try {
       if (instructionInput) instructionInput.value = terminalOrder;
-      if (quickInstructionInput) quickInstructionInput.value = terminalOrder;
+      if (quickInstructionInput) quickInstructionInput.value = summarizeOneLine(terminalOrder, "Ordem enviada ao terminal.");
       const payload = await postCall("/api/cheffe-call/start", { password, instruction: terminalOrder });
       activateMeetingResponse(terminalOrder, payload);
       const replies = getPayloadOpinions(payload, terminalOrder);
@@ -5246,6 +5345,7 @@
       })
       .then(() => {
         const outcome = getRuntimeEvidence(manualRuntimePayload);
+        const proofUi = getRuntimeProofUi(outcome);
         const tone = getRuntimeOutcomeTone(manualRuntimePayload);
         const summary = buildRuntimeOutcomeSummary(
           manualRuntimePayload,
@@ -5253,38 +5353,43 @@
           "rodada manual"
         );
         setExecutionControl({
-          badge: outcome.hasEvidence ? "Com evidência" : "Evidência pendente",
-          title: outcome.hasEvidence ? "Rodada manual com prova" : "Rodada manual sem prova real",
+          badge: proofUi.badge,
+          title: `Rodada manual: ${proofUi.title}`,
           text: "Rodar agentes agora atualizou este controle com evidência ou pendência.",
           tone,
           summary,
           log: formatRuntimeDetailsForTerminal(manualRuntimePayload, "manual: rodar agentes")
         });
         setActionFeedback({
-          badge: outcome.hasEvidence ? "Com evidência" : "Pendente",
-          title: outcome.hasEvidence ? "Sala atualizada com evidência" : "Runtime sem prova de mudança",
+          badge: proofUi.shortBadge,
+          title: `Sala atualizada: ${proofUi.actionTitle}`,
           message: outcome.evidence,
           tone,
           steps: [
             { label: "Runtime concluída", state: "done" },
-            { label: outcome.hasEvidence ? "Evidência encontrada" : "Evidência pendente", state: outcome.hasEvidence ? "done" : "pending" }
+            { label: proofUi.stepLabel, state: proofUi.state }
           ],
           closable: true
         });
         setAgentResponse({
-          badge: outcome.hasEvidence ? "Runtime com evidência" : "Runtime rodada",
-          title: outcome.hasEvidence ? "Agentes terminaram com prova" : "Agentes terminaram sem prova real",
-          text: outcome.hasEvidence
-            ? "A execução manual acabou e retornou evidência verificável."
-            : "A execução manual acabou, mas o retorno não provou alteração em tela, dado, rotina ou arquivo.",
+          badge: proofUi.responseBadge,
+          title: proofUi.responseTitle,
+          text: proofUi.text,
           next: summary.pending,
           tone,
           summary,
           items: currentOpinions.length
             ? buildAgentReplyItems(currentOpinions, 4)
-            : [{ state: outcome.hasEvidence ? "done" : "pending", label: "runtime", agent: "Cheffe Call", text: outcome.evidence }]
+            : [{ state: proofUi.state, label: proofUi.itemLabel, agent: "Cheffe Call", text: outcome.evidence }]
         });
-        setStatus(outcome.hasEvidence ? "Rodada manual com evidência registrada." : "Rodada manual concluída, mas evidência ainda pendente.", "ok");
+        setStatus(
+          outcome.hasApplicationProof
+            ? "Rodada manual com aplicação provada."
+            : outcome.hasExecutionProof
+              ? "Rodada manual com execução provada; aplicação pendente."
+              : "Rodada manual concluída, mas evidência ainda pendente.",
+          "ok"
+        );
       })
       .catch((error) => {
         setActionFeedback({
@@ -5519,13 +5624,16 @@
       setStatus("Escolha um prompt antes de usar como ordem.", "bad");
       return;
     }
-    syncVisibleInstruction(promptText);
+    syncVisibleInstruction(promptText, {
+      visibleText: `Usar ${activePromptPayload.title || "Prompt Mestre"} como base da próxima rodada.`,
+      focus: true
+    });
     setCommandBarPulse();
     setAgentResponse({
       badge: "Ordem preparada",
       title: "Prompt carregado na ordem da reunião",
-      text: "Nada foi executado ainda. O texto foi colocado no campo de ordem para você revisar.",
-      next: "Clique Abrir rodada para mandar aos agentes e receber respostas.",
+      text: "Nada foi executado ainda. A barra recebeu uma ordem curta; use Copiar texto se quiser o prompt inteiro.",
+      next: "Edite a ordem curta ou clique Abrir rodada para mandar aos agentes.",
       tone: "ok",
       items: [{ state: "running", label: "aguardando envio", agent: activePromptPayload.title || "Prompt Mestre", text: promptText.slice(0, 220) }]
     });
@@ -5539,7 +5647,10 @@
       return;
     }
     if (commandInput) commandInput.value = promptText;
-    syncVisibleInstruction(promptText);
+    syncVisibleInstruction(promptText, {
+      visibleText: `Executar ${activePromptPayload.title || "Prompt Mestre"} no terminal.`,
+      focus: false
+    });
     setCommandBarPulse();
     const password = getAdminPassword();
     if (!password) {

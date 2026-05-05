@@ -4384,16 +4384,23 @@ body.cheffe-call-page {
   text-transform: uppercase;
 }
 
-.call-command-field input {
+.call-command-field input,
+.call-command-field textarea {
   width: 100%;
   min-height: 54px;
-  padding: 0 18px;
+  padding: 12px 18px;
   border-radius: 12px;
   border: 1px solid rgba(127, 231, 255, 0.16);
   color: var(--call-text);
   background: rgba(4, 8, 14, 0.92);
   font: inherit;
   font-size: 1rem;
+}
+
+.call-command-field textarea {
+  min-height: 88px;
+  resize: vertical;
+  line-height: 1.35;
 }
 
 .call-command-field small {
@@ -6139,7 +6146,8 @@ body.call-lower-open .call-lower-decks {
     rgba(255,255,255,0.02);
 }
 
-.call-command-field input {
+.call-command-field input,
+.call-command-field textarea {
   min-height: 48px;
 }
 
