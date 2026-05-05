@@ -1858,6 +1858,15 @@ body.cheffe-call-page {
   background: rgba(127, 231, 255, 0.08);
 }
 
+.task-queue-item.is-blocked {
+  border-color: rgba(255, 111, 97, 0.42);
+  background: rgba(255, 111, 97, 0.08);
+}
+
+.ide-action-panel .task-queue-item strong {
+  color: #fff4dc;
+}
+
 .task-queue-item span {
   display: block;
   color: var(--call-cyan);

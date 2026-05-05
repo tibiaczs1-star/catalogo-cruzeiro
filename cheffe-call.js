@@ -21,6 +21,7 @@
   const meetingLogList = document.querySelector("#meetingLogList");
   const callModeBanner = document.querySelector("#callModeBanner");
   const taskQueueList = document.querySelector("#taskQueueList");
+  const ideActionQueueList = document.querySelector("#ideActionQueueList");
   const agentOfDayEl = document.querySelector("#agentOfDay");
   const agentOfDayMetaEl = document.querySelector("#agentOfDayMeta");
   const agentOfDayAvatar = document.querySelector("#agentOfDayAvatar");
@@ -205,6 +206,7 @@
   let activeSpeakerIndex = 0;
   let meetingLogs = [];
   let taskQueue = [];
+  let ideActionQueue = [];
   let raisedHandName = "";
   let raisedHandQueue = [];
   let promptConsoleData = null;
@@ -610,6 +612,52 @@
     if (options.autoCloseMs && options.autoClose === true) {
       actionFeedbackTimer = window.setTimeout(() => closeActionFeedback(), Number(options.autoCloseMs) || 2200);
     }
+  }
+
+  function surfaceAutoExecution(payload = {}, orderText = "") {
+    const proof = payload?.actionProof?.autoExecution || payload?.proof?.autoExecution || null;
+    if (!proof) return;
+    const blocked = proof.status === "blocked";
+    const executed = proof.status === "executed";
+    const ideAction = proof.ideAction || {};
+    const deployProof = proof.deployProof || {};
+    const missing = proof.missingRequirements || deployProof.missingRequirements || ideAction.missingRequirements || [];
+    const details = [
+      proof.summary || "",
+      proof.blockedReason || deployProof.blockedReason || ideAction.reason || "",
+      proof.reasonCode || deployProof.reasonCode || ideAction.reasonCode ? `codigo: ${proof.reasonCode || deployProof.reasonCode || ideAction.reasonCode}` : "",
+      missing.length ? `faltando:\n${missing.map((item) => `- ${item}`).join("\n")}` : "",
+      ideAction.suggestedIdeCommand ? `IDE:\n${ideAction.suggestedIdeCommand}` : "",
+      proof.ideQueueFile ? `fila IDE: ${proof.ideQueueFile}` : ""
+    ].filter(Boolean).join("\n\n");
+    setExecutionControl({
+      badge: executed ? "Autoexecução" : blocked ? "Aguardando IDE" : "Autoexecução",
+      title: executed ? "Ordem executada automaticamente" : "Ordem separada para o IDE",
+      text: executed
+        ? "A Cheffe executou a ordem suportada e registrou prova."
+        : "A Cheffe não marcou como feito: separou motivo, faltas e comando sugerido para rodar aqui.",
+      tone: executed ? "ok" : "bad",
+      summary: {
+        resolved: executed ? "Executado com prova." : "Não executado online.",
+        evidence: proof.summary || "Sem execução online.",
+        pending: executed ? "Validar efeito final quando for publicação." : ideAction.suggestedIdeCommand || "Rodar no IDE.",
+        order: summarizeOneLine(orderText || proof.title || ideAction.title || "Ordem Cheffe Call", "Ordem Cheffe Call")
+      },
+      log: details
+    });
+    setActionFeedback({
+      badge: executed ? "Executado" : "IDE",
+      title: executed ? "Autoexecução concluída" : "Ação aguardando comando do IDE",
+      message: proof.summary || ideAction.reason || "A Cheffe devolveu o bloqueio e separou a ação.",
+      tone: executed ? "ok" : "bad",
+      closable: true,
+      steps: [
+        { label: "Ordem recebida", state: "done" },
+        { label: executed ? "Executor rodou" : "Deploy/comando bloqueado", state: executed ? "done" : "bad" },
+        { label: executed ? "Prova registrada" : "Fila Aguardando IDE criada", state: executed ? "done" : "running" }
+      ],
+      details
+    });
   }
 
   function closeActionFeedback() {
@@ -3669,6 +3717,37 @@
       .join("");
   }
 
+  function renderIdeActionQueue() {
+    if (!ideActionQueueList) return;
+    if (!ideActionQueue.length) {
+      ideActionQueueList.innerHTML = '<p class="opinion-body">Se deploy, terminal ou ação local não puder rodar online, ela aparece aqui com motivo e comando sugerido.</p>';
+      return;
+    }
+    ideActionQueueList.innerHTML = ideActionQueue
+      .map(
+        (item) => {
+          const missing = Array.isArray(item.missingRequirements) && item.missingRequirements.length
+            ? `<pre class="task-queue-block">${escapeHtml(item.missingRequirements.map((line) => `- ${line}`).join("\n"))}</pre>`
+            : "";
+          const expected = Array.isArray(item.expectedProof) && item.expectedProof.length
+            ? `<pre class="task-queue-block is-prompt">${escapeHtml(item.expectedProof.map((line) => `- ${line}`).join("\n"))}</pre>`
+            : "";
+          return `
+          <article class="task-queue-item is-blocked">
+            <span>${escapeHtml(item.status || "waiting-ide")} • ${escapeHtml(item.intent || "ide")}</span>
+            <strong>${escapeHtml(item.title || "Ação aguardando IDE")}</strong>
+            <p>${escapeHtml(item.reason || "A Cheffe Call pediu execução local pelo IDE.")}</p>
+            ${item.reasonCode ? `<p><strong>Bloqueio:</strong> ${escapeHtml(item.reasonCode)}</p>` : ""}
+            ${item.suggestedIdeCommand ? `<pre class="task-queue-block">${escapeHtml(item.suggestedIdeCommand)}</pre>` : ""}
+            ${missing}
+            ${expected}
+          </article>
+        `;
+        }
+      )
+      .join("");
+  }
+
   function moveToNextSpeaker(kindLabel = "próxima fala", options = {}) {
     if (!currentOpinions.length) return;
     activeSpeakerIndex = (activeSpeakerIndex + 1) % currentOpinions.length;
@@ -3749,6 +3828,24 @@
       renderTaskQueue();
       applyAudienceStates();
     }
+
+    const ideQueue = Array.isArray(payload?.ideActions)
+      ? payload.ideActions
+      : Array.isArray(payload?.ideActionQueue?.actions)
+        ? payload.ideActionQueue.actions
+        : [];
+    ideActionQueue = ideQueue.map((item) => ({
+      id: item.id || "",
+      status: item.status || "waiting-ide",
+      intent: item.intent || "",
+      title: item.title || "Ação aguardando IDE",
+      reasonCode: item.reasonCode || "",
+      reason: item.reason || "",
+      missingRequirements: Array.isArray(item.missingRequirements) ? item.missingRequirements : [],
+      suggestedIdeCommand: item.suggestedIdeCommand || "",
+      expectedProof: Array.isArray(item.expectedProof) ? item.expectedProof : []
+    }));
+    renderIdeActionQueue();
   }
 
   function setSpeakerQueue(opinions, reset = true) {
@@ -4420,6 +4517,9 @@
     const payload = await response.json();
     if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha na Cheffe Call.");
     render(payload);
+    if (path === "/api/cheffe-call/action") {
+      surfaceAutoExecution(payload, body?.title || body?.instruction || body?.command || "");
+    }
     return payload;
   }
 
@@ -5828,5 +5928,6 @@
   loadCall().catch((error) => setStatus(error.message, "bad"));
   renderMeetingLogs();
   renderTaskQueue();
+  renderIdeActionQueue();
   window.setInterval(() => loadCall().catch((error) => setStatus(error.message, "bad")), 60 * 1000);
 })();

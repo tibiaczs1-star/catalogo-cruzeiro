@@ -2,7 +2,7 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
-const { execFile } = require("child_process");
+const { execFile, spawnSync } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
 const {
   buildImageApprovalQueue,
@@ -88,6 +88,8 @@ const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-histor
 const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
 const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
 const REAL_AGENTS_ECOSYSTEM_STUDY_FILE = path.join(DATA_DIR, "real-agents-ecosystem-study.json");
+const CHEFFE_CALL_AUTONOMY_LOG_FILE = path.join(DATA_DIR, "cheffe-call-autonomy-log.json");
+const CHEFFE_CALL_IDE_ACTIONS_FILE = path.join(DATA_DIR, "cheffe-call-ide-actions.json");
 const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-autonomy-cycle.js");
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
@@ -8159,6 +8161,26 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+function updateOfficeOrderById(orderId, patch = {}) {
+  const cleanId = cleanShortText(orderId || "", 120);
+  if (!cleanId) return { ok: false, status: 400, error: "Informe orderId." };
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  const safeOrders = Array.isArray(orders) ? orders : [];
+  let found = null;
+  const nextOrders = safeOrders.map((order) => {
+    if (order.id !== cleanId) return order;
+    found = {
+      ...order,
+      ...patch,
+      updatedAt: new Date().toISOString()
+    };
+    return found;
+  });
+  if (!found) return { ok: false, status: 404, error: "Ordem nao encontrada." };
+  writeJson(OFFICE_ORDERS_FILE, nextOrders);
+  return { ok: true, order: found };
+}
+
 function countOfficeOrders() {
   const orders = readJson(OFFICE_ORDERS_FILE, []);
   return Array.isArray(orders) ? orders.length : 0;
@@ -8554,11 +8576,19 @@ function reviewRealAgentAction(body = {}) {
     reprovado: "reprovado",
     reject: "reprovado",
     rejected: "reprovado",
-    aplicar: "aprovado-para-aplicar"
+    aplicar: "aprovado-para-aplicar",
+    executado: "executado",
+    execute: "executado",
+    executed: "executado",
+    bloquear: "bloqueado",
+    bloqueado: "bloqueado",
+    blocked: "bloqueado",
+    falhou: "falhou",
+    failed: "falhou"
   };
   const nextStatus = allowed[status];
   if (!actionId || !nextStatus) {
-    return { ok: false, status: 400, error: "Informe actionId e status aprovado/reprovado." };
+    return { ok: false, status: 400, error: "Informe actionId e status aprovado/reprovado/executado/bloqueado." };
   }
   const store = readJson(REAL_AGENTS_ACTIONS_FILE, { version: 1, actions: [] });
   const actions = Array.isArray(store.actions) ? store.actions : [];
@@ -9276,6 +9306,587 @@ function findCheffeExecutableActionMatch(body = {}) {
   );
 }
 
+function appendCheffeAutonomyLog(entry = {}) {
+  const store = readJson(CHEFFE_CALL_AUTONOMY_LOG_FILE, { version: 1, runs: [] });
+  const runs = Array.isArray(store.runs) ? store.runs : [];
+  const nextEntry = {
+    id: cleanShortText(entry.id || createRecordId("auto"), 120),
+    createdAt: cleanShortText(entry.createdAt || new Date().toISOString(), 80),
+    status: cleanShortText(entry.status || "unknown", 40),
+    intent: cleanShortText(entry.intent || "", 80),
+    title: cleanShortText(entry.title || "", 220),
+    agent: cleanShortText(entry.agent || "", 120),
+    summary: cleanShortText(entry.summary || "", 1200),
+    proof: entry.proof || null
+  };
+  writeJson(CHEFFE_CALL_AUTONOMY_LOG_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    runs: [nextEntry, ...runs].slice(0, 120)
+  });
+  return nextEntry;
+}
+
+function readCheffeIdeActionQueue() {
+  const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  return actions
+    .filter(Boolean)
+    .map((action) => ({
+      id: cleanShortText(action.id || createRecordId("ide"), 120),
+      createdAt: cleanShortText(action.createdAt || "", 80),
+      updatedAt: cleanShortText(action.updatedAt || action.createdAt || "", 80),
+      status: cleanShortText(action.status || "waiting-ide", 60),
+      source: cleanShortText(action.source || "Cheffe Call", 120),
+      intent: cleanShortText(action.intent || "", 80),
+      title: cleanShortText(action.title || "Acao aguardando IDE", 220),
+      agent: cleanShortText(action.agent || "Cheffe Call", 120),
+      office: cleanShortText(action.office || "", 120),
+      reasonCode: cleanShortText(action.reasonCode || "", 80),
+      reason: cleanShortText(action.reason || "", 1200),
+      missingRequirements: Array.isArray(action.missingRequirements)
+        ? action.missingRequirements.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+        : [],
+      suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 1600),
+      expectedProof: Array.isArray(action.expectedProof)
+        ? action.expectedProof.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+        : [],
+      proofId: cleanShortText(action.proofId || "", 120),
+      orderId: cleanShortText(action.orderId || "", 120)
+    }))
+    .slice(0, 80);
+}
+
+function appendCheffeIdeAction(action = {}) {
+  const now = new Date().toISOString();
+  const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  const nextAction = {
+    id: cleanShortText(action.id || createRecordId("ide"), 120),
+    createdAt: cleanShortText(action.createdAt || now, 80),
+    updatedAt: now,
+    status: cleanShortText(action.status || "waiting-ide", 60),
+    source: cleanShortText(action.source || "Cheffe Call", 120),
+    intent: cleanShortText(action.intent || "", 80),
+    title: cleanShortText(action.title || "Acao aguardando comando geral do IDE", 220),
+    agent: cleanShortText(action.agent || "Cheffe Call", 120),
+    office: cleanShortText(action.office || "", 120),
+    reasonCode: cleanShortText(action.reasonCode || "", 80),
+    reason: cleanShortText(action.reason || "", 1200),
+    missingRequirements: Array.isArray(action.missingRequirements)
+      ? action.missingRequirements.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+      : [],
+    suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 1600),
+    expectedProof: Array.isArray(action.expectedProof)
+      ? action.expectedProof.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+      : [],
+    proofId: cleanShortText(action.proofId || "", 120),
+    orderId: cleanShortText(action.orderId || "", 120)
+  };
+  const nextActions = [nextAction, ...actions.filter((item) => item.id !== nextAction.id)].slice(0, 120);
+  writeJson(CHEFFE_CALL_IDE_ACTIONS_FILE, {
+    version: 1,
+    updatedAt: now,
+    actions: nextActions
+  });
+  return nextAction;
+}
+
+function runCheffeCommandProof(label, command, args = [], options = {}) {
+  const startedAt = new Date().toISOString();
+  const timeout = Math.max(1000, Math.min(Number(options.timeoutMs || 60000), 180000));
+  const result = spawnSync(command, args, {
+    cwd: options.cwd || ROOT_DIR,
+    encoding: "utf-8",
+    timeout,
+    windowsHide: true,
+    env: { ...process.env, ...(options.env || {}) }
+  });
+  const finishedAt = new Date().toISOString();
+  const errorMessage = result.error?.message || "";
+  return {
+    kind: "command-proof",
+    label: cleanShortText(label || command, 120),
+    command: [path.basename(command), ...args].join(" "),
+    cwd: path.relative(ROOT_DIR, options.cwd || ROOT_DIR).replace(/\\/g, "/") || ".",
+    ok: !result.error && result.status === 0,
+    exitCode: Number.isInteger(result.status) ? result.status : null,
+    signal: cleanShortText(result.signal || "", 40),
+    timedOut: result.error?.code === "ETIMEDOUT",
+    startedAt,
+    finishedAt,
+    stdout: cleanShortText(result.stdout || "", 2400),
+    stderr: cleanShortText(result.stderr || errorMessage, 2400)
+  };
+}
+
+function inferCheffeAutonomousIntent(context = {}) {
+  const forced = cleanShortText(context.body?.autonomyIntent || context.body?.intent || "", 80).toLowerCase();
+  const allowedForced = new Set([
+    "real-agents-runtime",
+    "ecosystem-study",
+    "review-team",
+    "health-check",
+    "safe-cleanup",
+    "deploy-gate",
+    "agent-action"
+  ]);
+  if (allowedForced.has(forced)) return forced;
+
+  const text = normalizeText([
+    context.title,
+    context.opinion,
+    context.command,
+    context.prompt,
+    context.howTo,
+    context.instruction,
+    context.executableMatch?.kind,
+    context.executableMatch?.title
+  ].join(" "));
+
+  if (/limp|lixo|temporario|temporarios|cache|log/.test(text)) return "safe-cleanup";
+  if (/deploy|publicar|producao|produção|render|push|commit|github/.test(text)) return "deploy-gate";
+  if (/review:team|revis[aã]o|auditoria|audit|validar layout|validar texto/.test(text)) return "review-team";
+  if (/codex:health|saude|saúde|health|travamento|autoteste/.test(text)) return "health-check";
+  if (/rodar agentes|agentes reais|181 agentes|runtime|real-agents|atualizar agentes/.test(text)) {
+    return "real-agents-runtime";
+  }
+  if (/estudo|estudar|ecossistema|aprend|memoria|memória/.test(text)) return "ecosystem-study";
+  if (context.executableMatch) return "agent-action";
+  if (/organizar|redistribuir|prioridade|identificar rotinas|triagem|revisar|mapear|acompanhar/.test(text)) {
+    return "agent-action";
+  }
+  if (context.command) return "blocked-terminal";
+  return "unsupported";
+}
+
+function runCheffeSafeTempCleanup() {
+  const startedAt = new Date().toISOString();
+  const removed = [];
+  const skipped = [];
+  const roots = [
+    {
+      root: path.join(ROOT_DIR, ".codex-temp"),
+      allowFile: (filePath) => /\.log$/i.test(path.basename(filePath)) || /smoke/i.test(path.basename(filePath))
+    }
+  ];
+
+  roots.forEach(({ root, allowFile }) => {
+    if (!fs.existsSync(root)) {
+      skipped.push({ path: path.relative(ROOT_DIR, root).replace(/\\/g, "/"), reason: "missing" });
+      return;
+    }
+    const visit = (currentDir, depth = 0) => {
+      if (depth > 3) return;
+      let entries = [];
+      try {
+        entries = fs.readdirSync(currentDir, { withFileTypes: true });
+      } catch (error) {
+        skipped.push({
+          path: path.relative(ROOT_DIR, currentDir).replace(/\\/g, "/"),
+          reason: cleanShortText(error.message || "read failed", 160)
+        });
+        return;
+      }
+      entries.forEach((entry) => {
+        const filePath = path.join(currentDir, entry.name);
+        if (entry.isDirectory()) {
+          visit(filePath, depth + 1);
+          return;
+        }
+        if (!entry.isFile() || !allowFile(filePath)) return;
+        try {
+          const stats = fs.statSync(filePath);
+          fs.rmSync(filePath, { force: true });
+          removed.push({
+            path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+            bytes: stats.size
+          });
+        } catch (error) {
+          skipped.push({
+            path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+            reason: cleanShortText(error.message || "remove failed", 160)
+          });
+        }
+      });
+    };
+    visit(root);
+  });
+
+  return {
+    kind: "safe-temp-cleanup-proof",
+    ok: true,
+    startedAt,
+    finishedAt: new Date().toISOString(),
+    removedCount: removed.length,
+    removedBytes: removed.reduce((sum, item) => sum + Number(item.bytes || 0), 0),
+    removed: removed.slice(0, 40),
+    skipped: skipped.slice(0, 20),
+    rule: "remove apenas logs/smokes em .codex-temp; preserva data, assets, latest-run e provas atuais"
+  };
+}
+
+function runCheffeDeployGate(context = {}) {
+  const checks = [
+    runCheffeCommandProof("syntax server", process.execPath, ["--check", "server.js"], { timeoutMs: 30000 }),
+    runCheffeCommandProof("git status", "git", ["status", "--porcelain"], { timeoutMs: 30000 })
+  ];
+  const deployEnabled = String(process.env.CHEFFE_CALL_AUTO_DEPLOY || "").trim().toLowerCase() === "true";
+  const dirty = cleanShortText(checks[1].stdout || "", 2400);
+  const baseMissing = [
+    "CHEFFE_CALL_AUTO_DEPLOY=true no ambiente online/local",
+    "worktree limpo ou escopo de commit escolhido",
+    "credencial Git/Render disponivel",
+    "smoke online apos publicar"
+  ];
+  const proof = {
+    kind: "deploy-gate-proof",
+    ok: false,
+    status: "blocked",
+    deployEnabled,
+    title: cleanShortText(context.title || "", 220),
+    reasonCode: "",
+    blockedReason: "",
+    missingRequirements: [],
+    suggestedIdeCommand: "",
+    expectedProof: [
+      "node --check server.js",
+      "git status com escopo revisado",
+      "push/deploy concluido",
+      "smoke online da Cheffe Call"
+    ],
+    checks,
+    requiredForAutoDeploy: baseMissing
+  };
+
+  if (!checks.every((item) => item.ok)) {
+    proof.reasonCode = "local-checks-failed";
+    proof.blockedReason = "Um ou mais checks locais falharam antes do deploy.";
+    proof.missingRequirements = ["corrigir checks locais antes de publicar"];
+    proof.suggestedIdeCommand = "Codex IDE: ler proof.deployProof.checks, corrigir erro local, rodar node --check server.js e repetir deploy-gate.";
+    proof.summary = "Deploy bloqueado: checks locais falharam.";
+    return proof;
+  }
+  if (dirty) {
+    proof.reasonCode = "dirty-worktree";
+    proof.blockedReason = "Ha mudancas locais sem escopo de commit/deploy definido.";
+    proof.missingRequirements = ["selecionar arquivos do deploy", "rodar testes", "criar commit ou limpar alteracoes fora de escopo"];
+    proof.suggestedIdeCommand = "Codex IDE: revisar git status, separar somente arquivos da ordem, rodar testes, commit/push/deploy e devolver URL validada.";
+    proof.summary = "Deploy bloqueado: worktree possui mudancas locais; precisa commit/selecionar escopo antes de publicar.";
+    proof.dirtyStatus = dirty;
+    return proof;
+  }
+  if (!deployEnabled) {
+    proof.reasonCode = "auto-deploy-disabled";
+    proof.blockedReason = "O ambiente nao autorizou deploy automatico pela Cheffe Call.";
+    proof.missingRequirements = ["definir CHEFFE_CALL_AUTO_DEPLOY=true", "confirmar credencial Git/Render", "confirmar branch/remoto de publicacao"];
+    proof.suggestedIdeCommand = "Codex IDE: se o chefe autorizar, publicar manualmente pelo fluxo git/render e rodar smoke online.";
+    proof.summary = "Deploy bloqueado: auto-deploy nao esta habilitado no ambiente.";
+    return proof;
+  }
+
+  const push = runCheffeCommandProof("push render-target", "git", ["push", "render-target", "HEAD:main"], {
+    timeoutMs: 180000
+  });
+  proof.steps = [push];
+  proof.ok = push.ok;
+  proof.status = push.ok ? "executed" : "failed";
+  proof.summary = push.ok
+    ? "Deploy enviado para render-target."
+    : "Deploy tentou enviar para render-target, mas falhou.";
+  if (!push.ok) {
+    proof.reasonCode = "push-failed";
+    proof.blockedReason = "O push/deploy falhou mesmo com gate habilitado.";
+    proof.missingRequirements = ["verificar autenticacao Git/Render", "ver stderr do push", "repetir push/deploy pelo IDE"];
+    proof.suggestedIdeCommand = "Codex IDE: inspecionar stderr do push, corrigir autenticacao/remoto e repetir git push render-target HEAD:main.";
+  }
+  return proof;
+}
+
+function markRealAgentActionExecution(actionId, status, note, proof = {}) {
+  const action = reviewRealAgentAction({
+    actionId,
+    status,
+    note
+  });
+  if (!action.ok) return action;
+  const store = readJson(REAL_AGENTS_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  const nextActions = actions.map((item) => {
+    if (item.id !== actionId) return item;
+    return {
+      ...item,
+      execution: {
+        status: cleanShortText(status || "", 40),
+        note: cleanShortText(note || "", 800),
+        proof,
+        executedAt: new Date().toISOString()
+      }
+    };
+  });
+  writeJson(REAL_AGENTS_ACTIONS_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    actions: nextActions
+  });
+  return { ok: true, action: nextActions.find((item) => item.id === actionId) || action.action };
+}
+
+function buildCheffeIdeActionForBlockedProof(context = {}, proof = {}) {
+  const reasonCode = cleanShortText(
+    proof.reasonCode || proof.blockedReason || proof.blockedReasonCode || proof.status || "blocked",
+    80
+  );
+  const reason = cleanShortText(
+    proof.blockedReason || proof.summary || "A Cheffe Call nao conseguiu executar esta ordem no ambiente atual.",
+    1200
+  );
+  const suggestedIdeCommand = cleanShortText(
+    proof.suggestedIdeCommand ||
+      (proof.intent === "blocked-terminal" && context.command
+        ? `Codex IDE: avaliar e executar manualmente, se seguro: ${context.command}`
+        : "Codex IDE: abrir esta acao, executar pelo ambiente local com testes, e devolver prova para a Cheffe Call."),
+    1600
+  );
+  return appendCheffeIdeAction({
+    status: "waiting-ide-command",
+    source: "Cheffe Call",
+    intent: proof.intent || inferCheffeAutonomousIntent(context),
+    title: proof.title || context.title || "Acao aguardando comando geral do IDE",
+    agent: context.agent || proof.agent || "Cheffe Call",
+    office: context.office || proof.office || "",
+    reasonCode,
+    reason,
+    missingRequirements: proof.missingRequirements || [],
+    suggestedIdeCommand,
+    expectedProof: proof.expectedProof || [
+      "problema identificado",
+      "arquivo/rota alterado ou bloqueio explicado",
+      "teste/check executado",
+      "deploy/smoke online quando aplicavel"
+    ],
+    proofId: proof.id || "",
+    orderId: context.order?.id || proof.orderId || ""
+  });
+}
+
+function executeCheffeAutonomousOrder(context = {}) {
+  const startedAt = new Date().toISOString();
+  const intent = inferCheffeAutonomousIntent(context);
+  const baseProof = {
+    kind: "cheffe-call-autonomous-execution",
+    mode: "controlled-autonomy",
+    endpoint: "POST /api/cheffe-call/action",
+    intent,
+    agent: cleanShortText(context.agent || "Cheffe Call", 120),
+    office: cleanShortText(context.office || "", 120),
+    title: cleanShortText(context.title || "", 220),
+    orderId: cleanShortText(context.order?.id || "", 120),
+    startedAt,
+    finishedAt: "",
+    ok: false,
+    status: "blocked",
+    summary: "",
+    files: []
+  };
+
+  const finish = (patch = {}) => {
+    const proof = {
+      ...baseProof,
+      ...patch,
+      finishedAt: new Date().toISOString()
+    };
+    if (proof.status === "blocked") {
+      proof.ideAction = buildCheffeIdeActionForBlockedProof(context, proof);
+      proof.ideQueueFile = path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/");
+    }
+    appendCheffeAutonomyLog({
+      status: proof.status,
+      intent,
+      title: proof.title,
+      agent: proof.agent,
+      summary: proof.summary,
+      proof
+    });
+    if (context.order?.id) {
+      updateOfficeOrderById(context.order.id, {
+        status:
+          proof.status === "executed"
+            ? "cheffe-call-autoexecutado"
+            : proof.status === "failed"
+              ? "cheffe-call-falhou"
+              : "cheffe-call-bloqueado",
+        ceoReply: cleanShortText(proof.summary || context.order.ceoReply || "", 1200),
+        executionSummary: {
+          delivered: proof.status === "executed" ? 1 : 0,
+          failed: proof.status === "failed" ? 1 : 0,
+          running: 0,
+          blocked: proof.status === "blocked" ? 1 : 0
+        },
+        autonomyProof: proof
+      });
+    }
+    return {
+      ok: proof.ok,
+      status: proof.status,
+      intent,
+      proof
+    };
+  };
+
+  if (intent === "real-agents-runtime") {
+    const beforeOrders = countOfficeOrders();
+    const result = runRealAgentsRuntime({ trigger: "cheffe-call-auto-execute" });
+    if (!result.ok) {
+      return finish({
+        ok: false,
+        status: "failed",
+        summary: cleanShortText(result.error || "Runtime dos agentes falhou.", 800),
+        runtime: result
+      });
+    }
+    runRealAgentsAutonomyCycle("cheffe-call-auto-execute");
+    const runtimeProof = buildRealAgentsExecutionProof(result, {
+      beforeOrders,
+      afterOrders: countOfficeOrders(),
+      message: context.title,
+      endpoint: "POST /api/cheffe-call/action",
+      httpStatus: 200,
+      trigger: "cheffe-call-auto-execute"
+    });
+    return finish({
+      ok: true,
+      status: "executed",
+      summary: `Runtime executada autonomamente: ${runtimeProof.totalAgents || 0} agentes, ${runtimeProof.files?.length || 0} provas.`,
+      runtime: result.summary,
+      runtimeProof,
+      files: Array.isArray(runtimeProof.files) ? runtimeProof.files : []
+    });
+  }
+
+  if (intent === "ecosystem-study") {
+    const study = recordRealAgentsEcosystemStudy({
+      trigger: "cheffe-call-auto-execute",
+      instruction: context.instruction || context.title || ""
+    });
+    return finish({
+      ok: true,
+      status: "executed",
+      summary: `Estudo do ecossistema atualizado no ciclo ${study.learningCycle}.`,
+      study,
+      files: [buildProofFile(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, "estudo do ecossistema")]
+    });
+  }
+
+  if (intent === "review-team") {
+    const commandProof = runCheffeCommandProof("review team", process.execPath, ["scripts/review-team-audit.js"], {
+      timeoutMs: 120000
+    });
+    return finish({
+      ok: commandProof.ok,
+      status: commandProof.ok ? "executed" : "failed",
+      summary: commandProof.ok
+        ? "Revisao automatica da equipe local executada."
+        : "Revisao automatica falhou; ver stderr no proof.",
+      commandProof,
+      files: [
+        buildProofFile(path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.md"), "relatorio review team"),
+        buildProofFile(path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json"), "json review team")
+      ]
+    });
+  }
+
+  if (intent === "health-check") {
+    const commandProof = runCheffeCommandProof("codex health", process.execPath, ["scripts/codex-health-check.js"], {
+      timeoutMs: 60000
+    });
+    return finish({
+      ok: commandProof.ok,
+      status: commandProof.ok ? "executed" : "failed",
+      summary: commandProof.ok ? "Health check local executado." : "Health check local falhou.",
+      commandProof
+    });
+  }
+
+  if (intent === "safe-cleanup") {
+    const cleanupProof = runCheffeSafeTempCleanup();
+    return finish({
+      ok: true,
+      status: "executed",
+      summary: `Limpeza segura executada: ${cleanupProof.removedCount} arquivo(s), ${cleanupProof.removedBytes} bytes removidos.`,
+      cleanupProof
+    });
+  }
+
+  if (intent === "deploy-gate") {
+    const deployProof = runCheffeDeployGate(context);
+    return finish({
+      ok: deployProof.ok,
+      status: deployProof.status,
+      summary: deployProof.summary,
+      reasonCode: deployProof.reasonCode || deployProof.status,
+      blockedReason: deployProof.blockedReason || deployProof.summary,
+      missingRequirements: deployProof.missingRequirements || deployProof.requiredForAutoDeploy || [],
+      suggestedIdeCommand: deployProof.suggestedIdeCommand || "",
+      expectedProof: deployProof.expectedProof || [],
+      deployProof
+    });
+  }
+
+  if (intent === "agent-action") {
+    const proofFile = context.executableMatch?.artifact
+      ? buildProofFile(path.join(ROOT_DIR, context.executableMatch.artifact), "artefato da acao do agente")
+      : null;
+    const executionProof = {
+      kind: "agent-action-execution-proof",
+      actionId: cleanShortText(context.executableMatch?.id || "", 120),
+      artifact: proofFile,
+      rule: "acao operacional segura: fecha proposta/triagem no painel e registra prova; codigo/deploy seguem pelo deploy-gate"
+    };
+    let actionReview = null;
+    if (context.executableMatch?.id) {
+      actionReview = markRealAgentActionExecution(
+        context.executableMatch.id,
+        "executado",
+        `Executado autonomamente pela Cheffe Call em ${new Date().toISOString()}.`,
+        executionProof
+      );
+    }
+    return finish({
+      ok: !actionReview || actionReview.ok,
+      status: !actionReview || actionReview.ok ? "executed" : "failed",
+      summary: actionReview && !actionReview.ok
+        ? actionReview.error || "Falha ao marcar acao executada."
+        : "Acao operacional do agente executada e registrada com prova.",
+      actionReview,
+      executionProof,
+      files: proofFile ? [proofFile] : []
+    });
+  }
+
+  return finish({
+    ok: false,
+    status: "blocked",
+    summary:
+      intent === "blocked-terminal"
+        ? "Comando de terminal nao esta na lista segura de autoexecucao."
+        : "Ordem nao mapeada para um executor autonomo seguro.",
+    reasonCode: intent === "blocked-terminal" ? "terminal-command-requires-ide" : "unsupported-autonomous-order",
+    blockedReason:
+      intent === "blocked-terminal"
+        ? "O agente pediu terminal/comando que precisa ser revisado e rodado no IDE."
+        : "A ordem nao corresponde a um executor autonomo seguro conhecido.",
+    missingRequirements:
+      intent === "blocked-terminal"
+        ? ["revisao humana/IDE do comando", "validacao de segurança", "prova apos execucao local"]
+        : ["mapear executor seguro", "definir arquivo/rota alvo", "validar impacto antes de executar"],
+    suggestedIdeCommand:
+      intent === "blocked-terminal" && context.command
+        ? `Codex IDE: revisar e, se seguro, executar este comando localmente: ${context.command}`
+        : "Codex IDE: transformar esta ordem em tarefa concreta com arquivo alvo, teste e prova."
+  });
+}
+
 function applyCheffeCallAction(body = {}) {
   const action = cleanShortText(body.action || body.type, 40).toLowerCase();
   if (!action) {
@@ -9310,6 +9921,8 @@ function applyCheffeCallAction(body = {}) {
   const decisions = Array.isArray(targetSession.decisions) ? targetSession.decisions.slice(0, 32) : [];
   const executableMatch = findCheffeExecutableActionMatch({ agent, title, text: opinion });
   let reviewedAction = null;
+  let autoExecution = null;
+  let sessionStatusOverride = "";
   const actionProofs = [];
 
   const pushLog = (entry) => {
@@ -9473,7 +10086,7 @@ function applyCheffeCallAction(body = {}) {
       opinionKey,
       artifact: executableMatch?.artifact || ""
     });
-    appendActionOrder({
+    const implementationOrder = appendActionOrder({
       message: `Executar agora a partir da Cheffe Call: ${title}. Comando: ${command || "sem complemento de terminal"}`,
       ceoReply: `${agent} entrou em execução acompanhada a partir da sala.`,
       status: "cheffe-call-em-execucao"
@@ -9487,6 +10100,58 @@ function applyCheffeCallAction(body = {}) {
       if (review.ok) reviewedAction = review.action;
     }
     maybeRegisterAgentArticleArtifact();
+    autoExecution = executeCheffeAutonomousOrder({
+      body,
+      action,
+      instruction,
+      agent,
+      office,
+      role,
+      title,
+      opinion,
+      command,
+      howTo,
+      prompt,
+      opinionKey,
+      executableMatch,
+      order: implementationOrder
+    });
+    if (autoExecution?.proof) {
+      actionProofs.push(autoExecution.proof);
+      const autoExecuted = autoExecution.status === "executed";
+      const autoFailed = autoExecution.status === "failed";
+      const autoLabel = autoExecuted
+        ? "autoexecutado"
+        : autoFailed
+          ? "falha na autoexecucao"
+          : "autoexecucao bloqueada";
+      pushLog({
+        kind: autoExecuted ? "good" : autoFailed ? "error" : "warning",
+        kindLabel: autoLabel,
+        agent: "Cheffe Autonomia",
+        office: "Sistema",
+        text: autoExecution.proof.summary || "Executor autonomo retornou prova."
+      });
+      pushDecision({
+        state: autoExecuted ? "executed" : autoFailed ? "failed" : "blocked",
+        kindLabel: autoLabel,
+        agent,
+        office,
+        title: autoExecuted ? `Executado automaticamente por ${agent}` : `Execucao autonoma pendente para ${agent}`,
+        text: autoExecution.proof.summary || title,
+        howTo,
+        prompt,
+        command,
+        opinionKey,
+        artifact: executableMatch?.artifact || ""
+      });
+      if (autoExecution.proof.actionReview?.action) reviewedAction = autoExecution.proof.actionReview.action;
+      sessionStatusOverride = autoExecuted
+        ? "execucao-conferida"
+        : autoFailed
+          ? "execucao-falhou"
+          : "execucao-bloqueada";
+    }
   } else if (action === "complete") {
     const proofLevel = cleanShortText(body.proofLevel || "", 40);
     const runtimeEvidence = cleanShortText(body.runtimeEvidence || body.evidence || "", 1200);
@@ -9615,15 +10280,16 @@ function applyCheffeCallAction(body = {}) {
     instruction,
     updatedAt: now,
     status:
-      action === "implement"
+      sessionStatusOverride ||
+      (action === "implement"
         ? "em-execucao"
         : action === "complete"
           ? "execucao-conferida"
         : action === "approve"
           ? "aprovado"
-          : action === "refresh"
+        : action === "refresh"
             ? "sincronizado"
-            : "aguardando-aprovacao",
+            : "aguardando-aprovacao"),
     approvals: approvals.slice(0, 32),
     logs: logs.slice(0, 64),
     decisions: decisions.slice(0, 32),
@@ -9636,7 +10302,9 @@ function applyCheffeCallAction(body = {}) {
       sessionId: targetSession.id || sessionId,
       createdAt: now,
       officeOrders: actionProofs,
-      reviewedActionId: reviewedAction?.id || ""
+      reviewedActionId: reviewedAction?.id || "",
+      autoExecution: autoExecution?.proof || null,
+      autonomyLogFile: path.relative(ROOT_DIR, CHEFFE_CALL_AUTONOMY_LOG_FILE).replace(/\\/g, "/")
     }
   };
 
@@ -10018,6 +10686,7 @@ function enrichCheffeOpinionsWithDirectResearch(opinions = [], research = null) 
 function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
+  const ideActions = readCheffeIdeActionQueue();
   const sessionOpinions = Array.isArray(state.sessions[0]?.opinions) ? state.sessions[0].opinions : [];
   const displayOpinions = shouldRefreshCheffeCallOpinions(sessionOpinions)
     ? getCheffeCallOpinions(agentsPayload, state.lastInstruction)
@@ -10052,6 +10721,13 @@ function buildCheffeCallPayload() {
       totalAgents: Number(agentsPayload.summary?.totalAgents || 181),
       autonomousAgents: Number(agentsPayload.summary?.autonomousAgents || 181),
       averageAutonomy: Number(agentsPayload.summary?.averageAutonomy || 82)
+    },
+    ideActions,
+    ideActionQueue: {
+      file: path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/"),
+      total: ideActions.length,
+      waiting: ideActions.filter((item) => String(item.status || "").includes("waiting")).length,
+      actions: ideActions.slice(0, 32)
     },
     queue: Array.isArray(agentsPayload.queue) ? agentsPayload.queue : [],
     liveEvents: Array.isArray(agentsPayload.liveEvents) ? agentsPayload.liveEvents : [],
