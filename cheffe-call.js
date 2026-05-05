@@ -684,6 +684,7 @@
     const feedback = payload.feedback || {};
     const proof = payload.proof || payload.executionProof || runtime.executionProof || {};
     const proofApplication = proof.application || {};
+    const ecosystemStudy = proof.ecosystemStudy || payload.ecosystemStudy || runtime.ecosystemStudy || {};
     const executionSummary = payload.executionSummary || runtime.executionSummary || {};
     const imageApprovals = runtime.imageApprovals || {};
     const generatedAt = firstText([
@@ -697,6 +698,26 @@
     const reportJson = firstText([proof.reportJson, runtimeSummary.reportJson, payload.reportJson]);
     const reportMd = firstText([proof.reportMd, runtimeSummary.reportMd, payload.reportMd]);
     const registry = firstText([proof.registry, runtimeSummary.registry, payload.registry]);
+    const ecosystemStudyFile = firstText([
+      proof.ecosystemStudyFile,
+      ecosystemStudy.proof?.file,
+      payload.ecosystemStudyFile
+    ]);
+    const ecosystemCycle = firstFiniteNumber([
+      ecosystemStudy.learningCycle,
+      proof.ecosystemLearningCycle,
+      payload.ecosystemLearningCycle
+    ]);
+    const ecosystemFocus = Array.isArray(ecosystemStudy.focusModules)
+      ? ecosystemStudy.focusModules
+      : Array.isArray(proof.ecosystemFocus)
+        ? proof.ecosystemFocus.map((area) => ({ area }))
+        : [];
+    const ecosystemSignals = Array.isArray(ecosystemStudy.currentSignals)
+      ? ecosystemStudy.currentSignals
+      : Array.isArray(ecosystemStudy.impactGate?.currentSignals)
+        ? ecosystemStudy.impactGate.currentSignals
+        : [];
     const endpoint = firstText([proof.endpoint, payload.endpoint, payload.ok ? "POST /api/real-agents/run" : ""]);
     const httpStatus = firstText([proof.httpStatus, proof.status, payload.httpStatus, payload.ok ? "201" : ""]);
     const deliveredAgents = firstFiniteNumber([
@@ -784,6 +805,12 @@
       reportJson ? `relatório JSON: ${reportJson}` : "",
       reportMd ? `relatório MD: ${reportMd}` : "",
       registry ? `registro de agentes: ${registry}` : "",
+      ecosystemStudyFile ? `estudo do ecossistema: ${ecosystemStudyFile}` : "",
+      ecosystemCycle ? `ciclo de aprendizado ${ecosystemCycle}` : "",
+      ecosystemFocus.length
+        ? `módulos estudados: ${ecosystemFocus.map((item) => item.area || item).filter(Boolean).slice(0, 4).join(", ")}`
+        : "",
+      ecosystemSignals.length ? `sinais de impacto: ${ecosystemSignals.slice(0, 3).join("; ")}` : "",
       generatedAt ? `runtime gerada em ${formatFeedbackTime(generatedAt) || generatedAt}` : "",
       deliveredAgents > 0 ? `${deliveredAgents}${totalAgents ? `/${totalAgents}` : ""} agentes entregaram` : "",
       failedAgents > 0 ? `${failedAgents} agente${failedAgents === 1 ? "" : "s"} falharam` : "",
@@ -825,7 +852,8 @@
           : "Reenviar com alvo mais específico ou pedir validação explícita de URL/arquivo/tela.",
       signals: hasApplicationProof ? applicationSignals : executionSignals,
       executionSignals,
-      applicationSignals
+      applicationSignals,
+      ecosystemStudy
     };
   }
 
@@ -851,9 +879,15 @@
     const session = payload?.meeting?.currentSession || payload?.session || {};
     const proof = session.proof || payload.proof || {};
     const research = session.directUrlResearch || payload.directUrlResearch || {};
+    const ecosystemStudy = session.ecosystemStudy || payload.ecosystemStudy || {};
     const lines = [
       proof.sessionId ? `sessão: ${proof.sessionId}` : session.id ? `sessão: ${session.id}` : "",
       proof.officeOrderId ? `ordem em office-orders.json: ${proof.officeOrderId}` : "",
+      proof.ecosystemStudyFile ? `estudo do ecossistema: ${proof.ecosystemStudyFile}` : "",
+      proof.ecosystemLearningCycle ? `ciclo de aprendizado ${proof.ecosystemLearningCycle}` : "",
+      Array.isArray(ecosystemStudy.focusModules) && ecosystemStudy.focusModules.length
+        ? `módulos estudados: ${ecosystemStudy.focusModules.map((item) => item.area).filter(Boolean).slice(0, 4).join(", ")}`
+        : "",
       research.url
         ? research.ok
           ? `URL lida HTTP ${research.status}: ${research.title || research.h1 || research.description || research.url}`
@@ -1938,7 +1972,7 @@
             { label: "Resposta dos agentes recebida", state: "done" },
             { label: "Ordem direta registrada", state: "done" },
             { label: "Runtime real em andamento", state: "running" },
-            { label: "Evidência pendente", state: "pending" }
+            { label: "Prova e aprendizado em conferência", state: "pending" }
           ],
           details: order.prompt
         });

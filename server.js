@@ -87,6 +87,7 @@ const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents"
 const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
 const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
 const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
+const REAL_AGENTS_ECOSYSTEM_STUDY_FILE = path.join(DATA_DIR, "real-agents-ecosystem-study.json");
 const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-autonomy-cycle.js");
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
@@ -8010,6 +8011,273 @@ function buildProofFile(filePath, label) {
   }
 }
 
+function countDirFilesByExtension(dirPath, extensions = [], maxFiles = 600) {
+  const summary = {
+    exists: false,
+    totalFiles: 0,
+    byExtension: {},
+    recent: []
+  };
+  const allow = new Set(extensions.map((ext) => String(ext || "").toLowerCase()));
+  const visit = (currentDir, depth = 0) => {
+    if (summary.totalFiles >= maxFiles || depth > 3) return;
+    let entries = [];
+    try {
+      entries = fs.readdirSync(currentDir, { withFileTypes: true });
+    } catch (_error) {
+      return;
+    }
+    entries.forEach((entry) => {
+      if (summary.totalFiles >= maxFiles) return;
+      if (entry.name === "node_modules" || entry.name === ".git") return;
+      const filePath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        visit(filePath, depth + 1);
+        return;
+      }
+      if (!entry.isFile()) return;
+      const ext = path.extname(entry.name).toLowerCase() || "(none)";
+      if (allow.size && !allow.has(ext)) return;
+      summary.totalFiles += 1;
+      summary.byExtension[ext] = (summary.byExtension[ext] || 0) + 1;
+      try {
+        const stats = fs.statSync(filePath);
+        summary.recent.push({
+          path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+          updatedAt: stats.mtime.toISOString(),
+          bytes: stats.size
+        });
+      } catch (_error) {
+        // Ignore files that disappear during scan.
+      }
+    });
+  };
+
+  if (fs.existsSync(dirPath)) {
+    summary.exists = true;
+    visit(dirPath);
+  }
+
+  summary.recent = summary.recent
+    .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)))
+    .slice(0, 8);
+  return summary;
+}
+
+function readMemoryOrderSnapshot() {
+  const ordersPayload = readJson(path.join(ROOT_DIR, ".codex-memory", "orders.json"), { orders: [] });
+  const orders = Array.isArray(ordersPayload.orders) ? ordersPayload.orders : [];
+  return {
+    total: orders.length,
+    open: orders.filter((order) => String(order.status || "open") === "open").length,
+    latest: orders
+      .slice(-6)
+      .reverse()
+      .map((order) => ({
+        id: cleanShortText(order.id || "", 120),
+        status: cleanShortText(order.status || "", 40),
+        summary: cleanShortText(order.summary || order.rawRequest || "", 220),
+        updatedAt: cleanShortText(order.updatedAt || order.createdAt || "", 80)
+      }))
+  };
+}
+
+function countJsonItems(filePath, pick = "") {
+  const payload = readJson(filePath, null);
+  const value = pick && payload && typeof payload === "object" ? payload[pick] : payload;
+  if (Array.isArray(value)) return value.length;
+  if (value && typeof value === "object") return Object.keys(value).length;
+  return 0;
+}
+
+function fileBrief(relativePath, label, kind = "surface") {
+  const filePath = path.join(ROOT_DIR, relativePath);
+  const proof = buildProofFile(filePath, label || relativePath);
+  return {
+    kind,
+    label: label || relativePath,
+    path: proof.path,
+    exists: !proof.missing,
+    bytes: proof.bytes || 0,
+    updatedAt: proof.updatedAt || ""
+  };
+}
+
+function inferEcosystemFocus(instruction = "") {
+  const text = normalizeText(instruction);
+  const focus = [];
+  const add = (area, reason, files = []) => {
+    if (focus.some((item) => item.area === area)) return;
+    focus.push({
+      area,
+      reason,
+      files: files.map((file) => cleanShortText(file, 180)).filter(Boolean)
+    });
+  };
+
+  if (/cheffe|call|ordem|agente|runtime|prova|evidencia|ecossistema|aprend/.test(text)) {
+    add("Cheffe Call / agentes reais", "ordem ligada a comando, prova, aprendizado ou runtime", [
+      "cheffe-call.html",
+      "cheffe-call.js",
+      "server.js",
+      "scripts/real-agents-runtime.js",
+      ".codex-agents/registry.json"
+    ]);
+  }
+  if (/noticia|foto|materia|editor|jornal|feed|mailza|jurua|acre/.test(text)) {
+    add("Editorial e notícias", "ordem menciona notícia, foto, feed ou cobertura regional", [
+      "script.js",
+      "news-data.js",
+      "noticia.js",
+      "data/runtime-news.json",
+      "data/news-archive.json"
+    ]);
+  }
+  if (/pubpaid|jogo|phaser|sprite|rua|trafego|dama|dardos/.test(text)) {
+    add("PubPaid 2.0", "ordem menciona jogo, Phaser, sprites ou tráfego", [
+      "pubpaid-v2.html",
+      "pubpaid-phaser/app.js",
+      "pubpaid-phaser/scenes/StreetScene.js",
+      "pubpaid-phaser/scenes/InteriorScene.js"
+    ]);
+  }
+  if (/visual|layout|css|mobile|card|tela|interface|design/.test(text)) {
+    add("Interface visual", "ordem menciona visual, tela, layout ou mobile", [
+      "styles.css",
+      "premium-clarity.css",
+      "cheffe-call.css",
+      "mobile-home-final.css"
+    ]);
+  }
+  if (!focus.length) {
+    add("Ecossistema geral", "ordem ampla sem módulo único; estudar superfícies principais antes de agir", [
+      "server.js",
+      "index.html",
+      "script.js",
+      "CODEX_MEMORY.md",
+      ".codex-memory/current-state.md"
+    ]);
+  }
+  return focus.slice(0, 5);
+}
+
+function buildRealAgentsEcosystemStudy(options = {}) {
+  const now = new Date().toISOString();
+  const instruction = cleanShortText(options.instruction || options.message || "", 1200);
+  const previous = readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null);
+  const packagePayload = readJson(path.join(ROOT_DIR, "package.json"), {});
+  const registry = readJson(REAL_AGENTS_REGISTRY_FILE, {});
+  const runtimeNewsCount = countJsonItems(path.join(DATA_DIR, "runtime-news.json"));
+  const archiveNewsCount = countJsonItems(path.join(DATA_DIR, "news-archive.json"));
+  const officeOrderCount = countOfficeOrders();
+  const actionsCount = countJsonItems(REAL_AGENTS_ACTIONS_FILE, "actions");
+  const topics = fs.existsSync(DATA_DIR)
+    ? fs.readdirSync(DATA_DIR).filter((name) => /^topic-feed-.+\.json$/i.test(name)).length
+    : 0;
+  const serverText = fs.existsSync(__filename) ? fs.readFileSync(__filename, "utf-8") : "";
+  const routeCount = (serverText.match(/pathname === "/g) || []).length;
+  const routeFamilies = [...new Set(
+    [...serverText.matchAll(/pathname === "([^"]+)"/g)]
+      .map((match) => String(match[1] || "").split("/").slice(1, 3).join("/"))
+      .filter(Boolean)
+  )].slice(0, 20);
+  const focusModules = inferEcosystemFocus(instruction);
+  const memory = readMemoryOrderSnapshot();
+  const agentCount = Array.isArray(registry.agents) ? registry.agents.length : Number(registry.totalAgents || 0);
+  const officesCount = Array.isArray(registry.offices) ? registry.offices.length : 0;
+  const directories = {
+    scripts: countDirFilesByExtension(path.join(ROOT_DIR, "scripts"), [".js", ".mjs", ".cjs"], 300),
+    pubpaidPhaser: countDirFilesByExtension(path.join(ROOT_DIR, "pubpaid-phaser"), [".js", ".css", ".json"], 260),
+    agents: countDirFilesByExtension(path.join(ROOT_DIR, ".codex-agents", "agents"), [".md"], 260),
+    data: countDirFilesByExtension(DATA_DIR, [".json"], 260)
+  };
+  const keyFiles = [
+    fileBrief("server.js", "backend/API principal"),
+    fileBrief("cheffe-call.html", "interface Cheffe Call"),
+    fileBrief("cheffe-call.js", "runtime UI Cheffe Call"),
+    fileBrief("cheffe-call.css", "estilo Cheffe Call"),
+    fileBrief("script.js", "home/editorial"),
+    fileBrief("news-data.js", "dados estáticos de notícias"),
+    fileBrief("scripts/real-agents-runtime.js", "runtime dos agentes"),
+    fileBrief(".codex-agents/registry.json", "registro dos agentes")
+  ];
+  const impactSignals = [
+    officeOrderCount ? `${officeOrderCount} ordens no office-orders` : "",
+    actionsCount ? `${actionsCount} ações executáveis conhecidas` : "",
+    runtimeNewsCount ? `${runtimeNewsCount} notícias runtime` : "",
+    archiveNewsCount ? `${archiveNewsCount} notícias no arquivo` : "",
+    routeCount ? `${routeCount} rotas/handlers mapeados no servidor` : "",
+    memory.open ? `${memory.open} ordens abertas na memória local` : ""
+  ].filter(Boolean);
+
+  return {
+    ok: true,
+    kind: "real-agents-ecosystem-study",
+    studyId: createRecordId("study"),
+    learningCycle: Number(previous?.learningCycle || 0) + 1,
+    generatedAt: now,
+    trigger: cleanShortText(options.trigger || "manual", 80),
+    instruction,
+    summary: {
+      totalAgents: agentCount,
+      totalOffices: officesCount,
+      routeCount,
+      routeFamilies,
+      runtimeNewsCount,
+      archiveNewsCount,
+      topicFeeds: topics,
+      officeOrderCount,
+      executableActions: actionsCount,
+      packageScripts: Object.keys(packagePayload.scripts || {}).slice(0, 20)
+    },
+    focusModules,
+    keyFiles,
+    directories,
+    memory,
+    learning: {
+      previousStudyAt: previous?.generatedAt || "",
+      previousCycle: Number(previous?.learningCycle || 0),
+      latestLessons: memory.latest.slice(0, 4).map((order) => order.summary),
+      intent: "estudar módulos, dados, rotas e memória antes de recomendar ou executar",
+      betterThanFilterBecause: [
+        "usa arquivos reais do projeto e DATA_DIR",
+        "liga a ordem aos módulos em foco",
+        "retorna contadores, relatórios e arquivo persistente",
+        "separa execução de aplicação/publicação"
+      ]
+    },
+    impactGate: {
+      requiredBeforeImportant: [
+        "módulo alvo identificado",
+        "arquivo/rota/dado verificado",
+        "ordem registrada em office-orders",
+        "prova retornada no payload",
+        "pendência explícita quando ainda não aplicou/publicou"
+      ],
+      weakIfOnly: [
+        "opinião sem arquivo",
+        "resumo sem contador",
+        "runtime sem relatório",
+        "status implementado sem mudança ou bloqueio explicado"
+      ],
+      currentSignals: impactSignals
+    },
+    proof: {
+      file: path.relative(ROOT_DIR, REAL_AGENTS_ECOSYSTEM_STUDY_FILE).replace(/\\/g, "/"),
+      source: "server.js",
+      dataDir: path.relative(ROOT_DIR, DATA_DIR).replace(/\\/g, "/") || ".",
+      keyFilesChecked: keyFiles.filter((item) => item.exists).length,
+      directoriesChecked: Object.keys(directories).filter((key) => directories[key].exists).length
+    }
+  };
+}
+
+function recordRealAgentsEcosystemStudy(options = {}) {
+  const study = buildRealAgentsEcosystemStudy(options);
+  writeJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, study);
+  return study;
+}
+
 function appendNewsImageApprovalOfficeOrder(decision = {}) {
   const action = cleanShortText(decision.action || "", 60);
   const title = cleanShortText(decision.title || decision.slug || "noticia em revisao", 180);
@@ -8246,6 +8514,7 @@ function buildRealAgentsPayload() {
   const registry = readJson(REAL_AGENTS_REGISTRY_FILE, null);
   const latestRun = readJson(REAL_AGENTS_RUN_FILE, null);
   const autonomyReport = readJson(REAL_AGENTS_AUTONOMY_REPORT_FILE, null);
+  const ecosystemStudy = readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null);
   const latestRunMd = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
     ? fs.readFileSync(REAL_AGENTS_RUN_MD_FILE, "utf-8")
     : "";
@@ -8330,6 +8599,7 @@ function buildRealAgentsPayload() {
     scoreboard: latestRun?.scoreboard || null,
     officeStatus: Array.isArray(latestRun?.offices) ? latestRun.offices : [],
     queue,
+    ecosystemStudy,
     reportMarkdown: latestRunMd
   };
 }
@@ -9275,6 +9545,11 @@ function getCheffeCallOpinions(payload, instruction) {
   );
   const actionMemory = Array.isArray(payload.executableActions) ? payload.executableActions : [];
   const queueMemory = Array.isArray(payload.queue) ? payload.queue : [];
+  const ecosystemStudy = payload.ecosystemStudy || {};
+  const ecosystemFocus = Array.isArray(ecosystemStudy.focusModules) ? ecosystemStudy.focusModules : [];
+  const ecosystemSignals = Array.isArray(ecosystemStudy.impactGate?.currentSignals)
+    ? ecosystemStudy.impactGate.currentSignals
+    : [];
   const roleFocus = [
     { role: /\b(ceo|lead|coord|produtor)\b/i, words: ["prioridade", "reuniao", "decisao", "fluxo"], lens: "prioridade e decisão" },
     { role: /\b(dev|code|sistema|autom|terminal)\b/i, words: ["comando", "terminal", "api", "senha", "botao", "fluxo", "funciona"], lens: "fluxo técnico e API" },
@@ -9309,11 +9584,16 @@ function getCheffeCallOpinions(payload, instruction) {
       const focus = roleFocus.find((entry) => entry.role.test(signature) || entry.words.some((word) => subjectTokens.has(word)));
       const matchingTokens = [...subjectTokens].filter((token) => normalizedSignature.includes(token)).slice(0, 4);
       const memories = memoryMatchesAgent(item);
+      const studyMatch = ecosystemFocus.find((entry) => {
+        const haystack = normalizeText(`${entry.area || ""} ${entry.reason || ""} ${(entry.files || []).join(" ")}`);
+        return [...subjectTokens].some((token) => haystack.includes(token)) ||
+          /ceo|dev|review|audit|proof|fontes|sistema|autom/.test(normalizedSignature);
+      });
       const hasDirectUse = Boolean(focus && focus.words.some((word) => subjectTokens.has(word)));
       const hasMemory = memories.length > 0;
       const hasOwnIdea = Boolean(focus && [...subjectTokens].some((token) => ideaTriggers.has(token)));
       const highUrgency = Number(item.urgency || 0) >= 76;
-      if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency) return null;
+      if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency && !studyMatch) return null;
       const lensKey = focus?.lens || item.role || item.office || item.name;
       const roleAction = cleanShortText(item.action || "", 220);
       const memoryDetail =
@@ -9321,13 +9601,18 @@ function getCheffeCallOpinions(payload, instruction) {
         roleAction ||
         cleanShortText(item.intent || "", 180) ||
         memories[0];
-      const evidence = hasMemory
+      const studyEvidence = studyMatch
+        ? `estudo do ecossistema ciclo ${ecosystemStudy.learningCycle || 1}: ${studyMatch.area} (${(studyMatch.files || []).slice(0, 3).join(", ")})`
+        : ecosystemSignals[0]
+          ? `sinal do ecossistema: ${ecosystemSignals[0]}`
+          : "";
+      const evidence = studyEvidence || (hasMemory
         ? `${item.office || item.role} tem memória própria para ${focus?.lens || "esta ordem"}`
         : hasOwnIdea
           ? `ideia propria da especialidade ${focus?.lens || "triagem"}`
           : matchingTokens.length
           ? `conecta com: ${matchingTokens.join(", ")}`
-          : `urgência operacional ${Number(item.urgency || 0)}%`;
+          : `urgência operacional ${Number(item.urgency || 0)}%`);
       const nextAction = roleAction || (focus?.lens === "fluxo técnico e API"
         ? "testar o clique contra endpoint real e mostrar sucesso/erro na interface"
         : focus?.lens === "risco e validação"
@@ -9369,6 +9654,14 @@ function getCheffeCallOpinions(payload, instruction) {
         impact,
         urgency: item.urgency,
         evidence,
+        studyProof: studyMatch
+          ? {
+              studyId: ecosystemStudy.studyId || "",
+              learningCycle: ecosystemStudy.learningCycle || 0,
+              area: studyMatch.area || "",
+              files: Array.isArray(studyMatch.files) ? studyMatch.files.slice(0, 5) : []
+            }
+          : null,
         opinion: [
           `${focus?.lens || item.deliverable || "triagem"}: ${roleLine}`,
           `Evidencia: ${evidence}.`,
@@ -9552,6 +9845,7 @@ function buildCheffeCallPayload() {
     autonomyRunner: agentsPayload.autonomyRunner || null,
     awards: agentsPayload.awards || null,
     scoreboard: agentsPayload.scoreboard || null,
+    ecosystemStudy: agentsPayload.ecosystemStudy || null,
     opinions: displayOpinions
   };
 }
@@ -9567,7 +9861,15 @@ async function startCheffeCallSession(body) {
   const directUrlResearch = await fetchCheffeDirectUrlResearch(instruction);
   const researchContext = buildCheffeDirectResearchContext(directUrlResearch);
   const agentInstruction = researchContext ? cleanShortText(`${researchContext}\n\n${instruction}`, 2400) : instruction;
-  const agentsPayload = buildRealAgentsPayload();
+  const ecosystemStudy = recordRealAgentsEcosystemStudy({
+    trigger: "cheffe-call-start",
+    instruction: agentInstruction,
+    directUrl: directUrlResearch?.url || ""
+  });
+  const agentsPayload = {
+    ...buildRealAgentsPayload(),
+    ecosystemStudy
+  };
   const now = new Date().toISOString();
   const state = readCheffeCallState();
   const opinions = enrichCheffeOpinionsWithDirectResearch(
@@ -9586,7 +9888,11 @@ async function startCheffeCallSession(body) {
     directUrl: directUrlResearch?.url || "",
     directUrlStatus: directUrlResearch?.url ? (directUrlResearch.ok ? "pesquisada" : "pendente") : "",
     directUrlHttpStatus: directUrlResearch?.status || 0,
-    directUrlTitle: directUrlResearch?.title || directUrlResearch?.h1 || directUrlResearch?.description || ""
+    directUrlTitle: directUrlResearch?.title || directUrlResearch?.h1 || directUrlResearch?.description || "",
+    ecosystemStudyId: ecosystemStudy.studyId,
+    ecosystemStudyFile: ecosystemStudy.proof.file,
+    ecosystemLearningCycle: ecosystemStudy.learningCycle,
+    ecosystemFocus: ecosystemStudy.focusModules.map((item) => item.area).slice(0, 5)
   };
   const logs = [
     normalizeCheffeCallLog({
@@ -9610,12 +9916,22 @@ async function startCheffeCallSession(body) {
       })
     );
   }
+  logs.push(
+    normalizeCheffeCallLog({
+      createdAt: now,
+      kindLabel: "ecossistema estudado",
+      agent: "Cheffe Call",
+      office: "Sistema",
+      text: `Ciclo ${ecosystemStudy.learningCycle}: ${(ecosystemStudy.focusModules || []).map((item) => item.area).join(", ")}`
+    })
+  );
   const session = {
     id: sessionId,
     createdAt: now,
     instruction,
     agentInstruction,
     directUrlResearch,
+    ecosystemStudy,
     proof: sessionProof,
     dailyContext: agentsPayload.dailyContext || null,
     opinions,
@@ -9697,6 +10013,7 @@ function buildRealAgentsExecutionProof(result = {}, options = {}) {
   const runtime = result.summary || {};
   const summary = payload.summary || {};
   const imageApprovals = payload.imageApprovals || {};
+  const ecosystemStudy = options.ecosystemStudy || payload.ecosystemStudy || {};
   const beforeOrders = Number(options.beforeOrders || 0);
   const afterOrders = Number(options.afterOrders || beforeOrders);
   const orderDelta = Math.max(0, afterOrders - beforeOrders);
@@ -9704,6 +10021,7 @@ function buildRealAgentsExecutionProof(result = {}, options = {}) {
     buildProofFile(REAL_AGENTS_RUN_FILE, "relatorio JSON da runtime"),
     buildProofFile(REAL_AGENTS_RUN_MD_FILE, "relatorio Markdown da runtime"),
     buildProofFile(REAL_AGENTS_REGISTRY_FILE, "registro dos agentes"),
+    buildProofFile(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, "estudo persistente do ecossistema"),
     buildProofFile(REAL_AGENTS_ACTIONS_FILE, "acoes executaveis dos agentes"),
     buildProofFile(OFFICE_ORDERS_FILE, "fila office-orders")
   ];
@@ -9718,6 +10036,22 @@ function buildRealAgentsExecutionProof(result = {}, options = {}) {
     reportJson: cleanShortText(runtime.reportJson || path.relative(ROOT_DIR, REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"), 180),
     reportMd: cleanShortText(runtime.reportMd || path.relative(ROOT_DIR, REAL_AGENTS_RUN_MD_FILE).replace(/\\/g, "/"), 180),
     registry: cleanShortText(runtime.registry || path.relative(ROOT_DIR, REAL_AGENTS_REGISTRY_FILE).replace(/\\/g, "/"), 180),
+    ecosystemStudyFile: cleanShortText(path.relative(ROOT_DIR, REAL_AGENTS_ECOSYSTEM_STUDY_FILE).replace(/\\/g, "/"), 180),
+    ecosystemStudy: ecosystemStudy && typeof ecosystemStudy === "object"
+      ? {
+          studyId: cleanShortText(ecosystemStudy.studyId || "", 120),
+          learningCycle: Number(ecosystemStudy.learningCycle || 0),
+          generatedAt: cleanShortText(ecosystemStudy.generatedAt || "", 80),
+          focusModules: Array.isArray(ecosystemStudy.focusModules)
+            ? ecosystemStudy.focusModules.map((item) => cleanShortText(item.area || "", 120)).filter(Boolean).slice(0, 6)
+            : [],
+          currentSignals: Array.isArray(ecosystemStudy.impactGate?.currentSignals)
+            ? ecosystemStudy.impactGate.currentSignals.map((item) => cleanShortText(item, 160)).slice(0, 6)
+            : [],
+          keyFilesChecked: Number(ecosystemStudy.proof?.keyFilesChecked || 0),
+          directoriesChecked: Number(ecosystemStudy.proof?.directoriesChecked || 0)
+        }
+      : null,
     files,
     totalAgents: Number(summary.totalAgents || runtime.totalAgents || 0),
     deliveredAgents: Number(summary.deliveredAgents || 0),
@@ -11834,6 +12168,10 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
+    const ecosystemStudy = recordRealAgentsEcosystemStudy({
+      trigger: "real-agents-run",
+      instruction: body.message || "Rodada operacional dos agentes reais"
+    });
     const beforeOrders = countOfficeOrders();
     const result = runRealAgentsRuntime({ trigger: "manual-painel" });
     if (!result.ok) {
@@ -11862,7 +12200,8 @@ async function handleApi(req, res, pathname, searchParams) {
       message: body.message,
       endpoint: "POST /api/real-agents/run",
       httpStatus: 201,
-      trigger: "manual-painel"
+      trigger: "manual-painel",
+      ecosystemStudy
     });
     return sendJson(res, 201, {
       ok: true,
@@ -11907,6 +12246,30 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 404, { ok: false, error: "Arquivo de prompts da Cheffe Call nao encontrado." });
     }
     return sendJson(res, 200, { ok: true, ...payload });
+  }
+
+  if (req.method === "GET" && pathname === "/api/cheffe-call/ecosystem-study") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para consultar estudo do ecossistema." });
+    }
+    return sendJson(res, 200, {
+      ok: true,
+      study: readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null)
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/ecosystem-study") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    return sendJson(res, 201, {
+      ok: true,
+      study: recordRealAgentsEcosystemStudy({
+        trigger: cleanShortText(body.trigger || "cheffe-call-manual-study", 80),
+        instruction: body.instruction || body.message || ""
+      })
+    });
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/start") {
