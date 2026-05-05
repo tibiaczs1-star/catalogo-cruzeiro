@@ -261,7 +261,24 @@ function getNewsTimestamp(item = {}) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getArticleSourceKey(item = {}) {
+  const sourceName = slugify(item.sourceName || item.source || item.provider || "");
+  if (sourceName) return sourceName;
+
+  try {
+    const parsed = new URL(item.sourceUrl || item.url || item.link || "");
+    return slugify(parsed.hostname.replace(/^www\./, ""));
+  } catch (_) {
+    return "";
+  }
+}
+
 function getArticleArchiveKey(item = {}) {
+  const titleKey = slugify(item.title || item.sourceLabel || "");
+  const sourceKey = getArticleSourceKey(item);
+  const dayKey = String(item.publishedAt || item.createdAt || item.date || "").slice(0, 10);
+  if (titleKey && sourceKey) return `title:${sourceKey}:${dayKey}:${titleKey.slice(0, 180)}`;
+
   return String(
     item.slug ||
       item.id ||
