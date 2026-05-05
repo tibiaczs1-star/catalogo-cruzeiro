@@ -8863,6 +8863,7 @@ function buildPublicDailyAgentPulse() {
           queueItems: Number(history[0].queueItems || 0)
         }
       : null,
+    newsRefresh: payload.newsRefresh || null,
     offices: officeDashboard.slice(0, 6).map((office) => ({
       label: cleanShortText(office.label || office.office || office.name || "Escritório", 80),
       status: cleanShortText(office.status || office.mood || "ativo", 80),

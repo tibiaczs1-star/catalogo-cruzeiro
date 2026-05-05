@@ -165,6 +165,31 @@ function readJson(filePath, fallback) {
   }
 }
 
+function readCurrentReviewReport() {
+  const fallback = { issues: [], sources: { topicSummary: [] }, stale: true };
+  const report = readJson(REVIEW_REPORT_FILE, fallback);
+  if (!report || typeof report !== "object") return fallback;
+
+  const runtimePayload = readJson(RUNTIME_NEWS_FILE, {});
+  const reportGeneratedAt = Date.parse(report.generatedAt || "");
+  const newsRefreshedAt = Date.parse(runtimePayload.lastSuccessAt || runtimePayload.lastAttemptAt || "");
+  if (Number.isFinite(reportGeneratedAt) && Number.isFinite(newsRefreshedAt) && reportGeneratedAt < newsRefreshedAt) {
+    return {
+      issues: [],
+      sources: report.sources || { topicSummary: [] },
+      stale: true,
+      ignoredReason: "review-report-before-latest-news-refresh",
+      generatedAt: report.generatedAt || ""
+    };
+  }
+
+  return {
+    ...report,
+    stale: false,
+    issues: Array.isArray(report.issues) ? report.issues : []
+  };
+}
+
 function writeJson(filePath, payload) {
   fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf-8");
 }
@@ -1981,7 +2006,7 @@ function main() {
 
   const newsItems = loadNewsItems();
   const newsSummary = summarizeNews(newsItems);
-  const reviewReport = readJson(REVIEW_REPORT_FILE, { issues: [], sources: { topicSummary: [] } });
+  const reviewReport = readCurrentReviewReport();
   const officeOrders = readJson(OFFICE_ORDERS_FILE, []);
   const photoFocusDecisions = readPhotoFocusDecisions();
   const heartbeats = readJson(HEARTBEATS_FILE, []);
