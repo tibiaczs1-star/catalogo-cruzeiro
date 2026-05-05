@@ -5,7 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
-const DATA_DIR = path.join(ROOT_DIR, "data");
+const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(ROOT_DIR, "data");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
@@ -528,7 +528,7 @@ async function runSanitizePublicLanguage() {
   };
 }
 
-module.exports = { runSanitizePublicLanguage };
+module.exports = { runSanitizePublicLanguage, sanitizeNewsList };
 
 if (require.main === module) {
   runSanitizePublicLanguage()

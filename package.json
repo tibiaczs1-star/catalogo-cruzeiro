@@ -15,6 +15,7 @@
     "memory:ensure": "node scripts/codex-memory.js ensure",
     "memory:status": "node scripts/codex-memory.js status",
     "review:team": "node scripts/review-team-audit.js",
+    "sanitize:public-language": "node scripts/sanitize-public-language.js",
     "start": "node server.js",
     "sync:online-local": "node scripts/sync-online-local.js"
   },

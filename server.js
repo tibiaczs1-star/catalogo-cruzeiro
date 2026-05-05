@@ -12,6 +12,13 @@ const {
   parseHomeLinkedArticleFallbacks,
   auditHomeLinkedArticleIntegrity
 } = require("./scripts/home-linked-article-fallbacks");
+let sanitizePublicLanguageNewsList = null;
+try {
+  const publicLanguageTools = require("./scripts/sanitize-public-language");
+  sanitizePublicLanguageNewsList = publicLanguageTools.sanitizeNewsList;
+} catch (_error) {
+  sanitizePublicLanguageNewsList = null;
+}
 const {
   buildDashboardPayload: buildCanonicalPubpaidAdminPayload,
   readStore: readCanonicalPubpaidStore,
@@ -1805,8 +1812,28 @@ function updateImagePreviewCache(sourceUrl, imageUrl) {
   scheduleImagePreviewCacheWrite();
 }
 
+function clonePublicNewsItem(item = {}) {
+  try {
+    return JSON.parse(JSON.stringify(item || {}));
+  } catch (_error) {
+    return { ...(item || {}) };
+  }
+}
+
+function sanitizePublicNewsCollection(items = []) {
+  const safeItems = Array.isArray(items) ? items.map(clonePublicNewsItem) : [];
+  if (typeof sanitizePublicLanguageNewsList === "function") {
+    try {
+      sanitizePublicLanguageNewsList(safeItems);
+    } catch (_error) {
+      // Keep the runtime sanitizer below as a defensive fallback.
+    }
+  }
+  return safeItems.map(sanitizePublicPortugueseRuntimeItem);
+}
+
 function writeStaticNewsData(items = []) {
-  const safeItems = Array.isArray(items) ? items : [];
+  const safeItems = sanitizePublicNewsCollection(items);
   const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
@@ -4800,7 +4827,7 @@ async function normalizeFreshRssItems(items = []) {
 function mergeRefreshArchiveItems(freshItems = [], existingItems = []) {
   const map = new Map();
   const addItem = (item) => {
-    const normalized = normalizeArticleRecord(item);
+    const normalized = sanitizePublicPortugueseRuntimeItem(normalizeArticleRecord(item));
     const key = getArticleStorageKey(normalized);
     if (key) {
       upsertCrossedArticleRecord(map, key, normalized);
@@ -4830,7 +4857,7 @@ async function runRssRuntimeRefresh(limitPerSource = 30, { trigger = "manual" } 
   const freshRawItems = dedupeRefreshItems(sourceResults.flatMap((result) => result.items));
   const normalizedFresh = await normalizeFreshRssItems(freshRawItems);
   const existingItems = getRawNewsItems();
-  const archiveItems = mergeRefreshArchiveItems(normalizedFresh.items, existingItems);
+  const archiveItems = sanitizePublicNewsCollection(mergeRefreshArchiveItems(normalizedFresh.items, existingItems));
   const activeWindowItems = archiveItems.slice(0, NEWS_REFRESH_ACTIVE_LIMIT);
   const finishedAt = new Date().toISOString();
   const ok = normalizedFresh.items.length > 0 || archiveItems.length > 0;
@@ -9490,6 +9517,7 @@ function inferCheffeAutonomousIntent(context = {}) {
     "health-check",
     "safe-cleanup",
     "deploy-gate",
+    "public-language-sanitize",
     "agent-action"
   ]);
   if (allowedForced.has(forced)) return forced;
@@ -9508,6 +9536,9 @@ function inferCheffeAutonomousIntent(context = {}) {
   if (/limp|lixo|temporario|temporarios|cache|log/.test(text)) return "safe-cleanup";
   if (/deploy|publicar|producao|produção|render|push|commit|github/.test(text)) return "deploy-gate";
   if (/review:team|revis[aã]o|auditoria|audit|validar layout|validar texto/.test(text)) return "review-team";
+  if (/saniti|idioma p[uú]blico|texto p[uú]blico|ingl[eê]s|portugu[eê]s|news-data/.test(text)) {
+    return "public-language-sanitize";
+  }
   if (/codex:health|saude|saúde|health|travamento|autoteste/.test(text)) return "health-check";
   if (/rodar agentes|agentes reais|181 agentes|runtime|real-agents|atualizar agentes/.test(text)) {
     return "real-agents-runtime";
@@ -9867,6 +9898,51 @@ function executeCheffeAutonomousOrder(context = {}) {
       commandProof,
       reviewQueue,
       files: [
+        buildProofFile(REVIEW_TEAM_REPORT_MD_FILE, "relatorio review team"),
+        buildProofFile(REVIEW_TEAM_REPORT_JSON_FILE, "json review team")
+      ]
+    });
+  }
+
+  if (intent === "public-language-sanitize") {
+    const commandProof = runCheffeCommandProof(
+      "sanitize public language",
+      process.execPath,
+      ["scripts/sanitize-public-language.js"],
+      { timeoutMs: 120000, env: { DATA_DIR } }
+    );
+    const reviewProof = runCheffeCommandProof("review team", process.execPath, ["scripts/review-team-audit.js"], {
+      timeoutMs: 120000
+    });
+    const reviewQueue = buildCheffeReviewQueue();
+    const hasReviewIssues = Number(reviewQueue.total || 0) > 0;
+    return finish({
+      ok: commandProof.ok && reviewProof.ok && !hasReviewIssues,
+      status: !commandProof.ok || !reviewProof.ok ? "failed" : hasReviewIssues ? "blocked" : "executed",
+      summary:
+        !commandProof.ok
+          ? "Sanitização de idioma público falhou; ver stderr no proof."
+          : !reviewProof.ok
+            ? "Revisão pós-sanitização falhou; ver stderr no proof."
+            : hasReviewIssues
+              ? `Sanitização rodou, mas a revisão ainda encontrou ${reviewQueue.total} pendência(s).`
+              : "Sanitização de idioma público executada e revisão voltou sem pendências.",
+      reasonCode: hasReviewIssues ? "review-team-issues" : "",
+      blockedReason: hasReviewIssues ? "A revisão ainda encontrou pendências depois da sanitização automática." : "",
+      missingRequirements: hasReviewIssues
+        ? reviewQueue.issues.slice(0, 8).map((issue) => `${issue.severity}: ${issue.file}${issue.line ? `:${issue.line}` : ""} - ${issue.label}`)
+        : [],
+      suggestedIdeCommand: hasReviewIssues
+        ? "Codex IDE: corrigir manualmente os textos restantes listados em reviewQueue, rodar npm run sanitize:public-language e npm run review:team."
+        : "",
+      expectedProof: hasReviewIssues
+        ? ["npm run sanitize:public-language", "npm run review:team com totalIssues=0", "smoke online de news-data.js/reviewQueue"]
+        : [],
+      commandProof,
+      reviewProof,
+      reviewQueue,
+      files: [
+        buildProofFile(STATIC_NEWS_FILE, "news-data sanitizado"),
         buildProofFile(REVIEW_TEAM_REPORT_MD_FILE, "relatorio review team"),
         buildProofFile(REVIEW_TEAM_REPORT_JSON_FILE, "json review team")
       ]
