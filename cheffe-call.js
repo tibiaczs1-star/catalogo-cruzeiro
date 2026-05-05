@@ -159,6 +159,25 @@
   const decisionAcceptOrder = document.querySelector("#decisionAcceptOrder");
   const decisionImplementOrder = document.querySelector("#decisionImplementOrder");
   const decisionReviseOrder = document.querySelector("#decisionReviseOrder");
+  const directCommandDesk = document.querySelector(".direct-command-desk");
+  const directCommandMeta = document.querySelector("#directCommandMeta");
+  const directOrderText = document.querySelector("#directOrderText");
+  const directOrderUrl = document.querySelector("#directOrderUrl");
+  const directOrderMode = document.querySelector("#directOrderMode");
+  const pullAgentIdeasToDirectOrder = document.querySelector("#pullAgentIdeasToDirectOrder");
+  const directOrderAnalyze = document.querySelector("#directOrderAnalyze");
+  const directOrderRunAgents = document.querySelector("#directOrderRunAgents");
+  const directOrderRunQueue = document.querySelector("#directOrderRunQueue");
+  const directOrderStatus = document.querySelector("#directOrderStatus");
+  const executionControlPanel = document.querySelector("#executionControlPanel");
+  const executionControlBadge = document.querySelector("#executionControlBadge");
+  const executionControlTitle = document.querySelector("#executionControlTitle");
+  const executionControlText = document.querySelector("#executionControlText");
+  const executionControlResolved = document.querySelector("#executionControlResolved");
+  const executionControlEvidence = document.querySelector("#executionControlEvidence");
+  const executionControlPending = document.querySelector("#executionControlPending");
+  const executionControlOrder = document.querySelector("#executionControlOrder");
+  const executionControlLog = document.querySelector("#executionControlLog");
   const callReportSummary = document.querySelector("#callReportSummary");
   const callReportQueue = document.querySelector("#callReportQueue");
   const callReportOffices = document.querySelector("#callReportOffices");
@@ -203,6 +222,7 @@
   let decisionComposerSeed = null;
   let latestDecisionOrder = null;
   let pendingDecisionResolution = null;
+  let latestDirectOrder = null;
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -424,6 +444,31 @@
     statusEl.style.color = tone === "bad" ? "var(--call-red)" : tone === "ok" ? "var(--call-green)" : "";
   }
 
+  function setDirectOrderStatus(message, tone = "") {
+    if (!directOrderStatus) return;
+    directOrderStatus.textContent = message;
+    directOrderStatus.dataset.tone = tone;
+  }
+
+  function setExecutionControl(options = {}) {
+    if (!executionControlPanel) return;
+    const summary = options.summary || {};
+    executionControlPanel.dataset.state = options.tone || options.state || "idle";
+    if (executionControlBadge) executionControlBadge.textContent = options.badge || "Controle";
+    if (executionControlTitle) executionControlTitle.textContent = options.title || "Aguardando comando real";
+    if (executionControlText) {
+      executionControlText.textContent =
+        options.text || "A ordem direta, a runtime e a fila deixam o estado aqui, mesmo se o popup for fechado.";
+    }
+    if (executionControlResolved) executionControlResolved.textContent = summary.resolved || "Nada executado";
+    if (executionControlEvidence) executionControlEvidence.textContent = summary.evidence || "Sem evidência ainda";
+    if (executionControlPending) executionControlPending.textContent = summary.pending || "Aguardando ordem";
+    if (executionControlOrder) executionControlOrder.textContent = summary.order || "Nenhuma";
+    if (executionControlLog) {
+      executionControlLog.textContent = String(options.log || "controle pronto").trim() || "controle pronto";
+    }
+  }
+
   function normalizeFeedbackState(state) {
     const value = String(state || "pending").toLowerCase();
     if (value === "ok" || value === "success" || value === "complete" || value === "completed") return "done";
@@ -562,7 +607,7 @@
       cheffeActionFeedbackHome.hidden = !options.home;
     }
     cheffeActionFeedbackClose?.toggleAttribute("hidden", options.closable === false);
-    if (options.autoCloseMs) {
+    if (options.autoCloseMs && options.autoClose === true) {
       actionFeedbackTimer = window.setTimeout(() => closeActionFeedback(), Number(options.autoCloseMs) || 2200);
     }
   }
@@ -581,6 +626,7 @@
   }
 
   function buildRuntimeFeedbackDetails(payload = {}) {
+    payload = payload || {};
     const runtime = payload.runtime || payload.runtimeSummary || {};
     const runtimeSummary = runtime.summary || runtime;
     const publicSummary = payload.summary || {};
@@ -603,6 +649,100 @@
       publicSummary.lastRunAt ? `Última runtime: ${formatFeedbackTime(publicSummary.lastRunAt)}` : ""
     ];
     return lines.filter(Boolean).join("\n");
+  }
+
+  function firstFiniteNumber(values = []) {
+    const found = values.find((value) => Number.isFinite(Number(value)));
+    return found === undefined ? null : Number(found);
+  }
+
+  function getListCount(value) {
+    if (Array.isArray(value)) return value.length;
+    if (value && typeof value === "object") return Object.keys(value).length;
+    return 0;
+  }
+
+  function getRuntimeEvidence(payload = {}) {
+    payload = payload || {};
+    const runtime = payload.runtime || payload.runtimeSummary || {};
+    const runtimeSummary = runtime.summary || runtime;
+    const publicSummary = payload.summary || {};
+    const feedback = payload.feedback || {};
+    const executionSummary = payload.executionSummary || runtime.executionSummary || {};
+    const imageApprovals = runtime.imageApprovals || {};
+    const changedFilesCount = Math.max(
+      getListCount(payload.changedFiles),
+      getListCount(runtime.changedFiles),
+      getListCount(publicSummary.changedFiles),
+      getListCount(feedback.changedFiles)
+    );
+    const artifactsCount = Math.max(
+      getListCount(payload.artifacts),
+      getListCount(runtime.artifacts),
+      getListCount(publicSummary.artifacts),
+      getListCount(feedback.artifacts)
+    );
+    const deliveredCount = firstFiniteNumber([
+      executionSummary.delivered,
+      runtimeSummary.delivered,
+      publicSummary.delivered,
+      feedback.delivered,
+      payload.delivered
+    ]);
+    const generatedCount = firstFiniteNumber([
+      runtimeSummary.generatedArticles,
+      publicSummary.generatedArticles,
+      feedback.generatedArticles,
+      runtimeSummary.articlesGenerated,
+      publicSummary.articlesGenerated
+    ]);
+    const publishedCount = firstFiniteNumber([
+      runtimeSummary.publishedArticles,
+      publicSummary.publishedArticles,
+      feedback.publishedArticles,
+      runtimeSummary.published,
+      publicSummary.published
+    ]);
+    const appliedFocusCount = firstFiniteNumber([
+      runtimeSummary.imageApprovalsApplied,
+      imageApprovals.applied,
+      publicSummary.imageApprovalsApplied,
+      feedback.imageApprovalsApplied
+    ]);
+    const signals = [
+      changedFilesCount > 0 ? `${changedFilesCount} arquivo${changedFilesCount === 1 ? "" : "s"} alterado${changedFilesCount === 1 ? "" : "s"}` : "",
+      artifactsCount > 0 ? `${artifactsCount} artefato${artifactsCount === 1 ? "" : "s"} retornado${artifactsCount === 1 ? "" : "s"}` : "",
+      deliveredCount > 0 ? `${deliveredCount} entrega${deliveredCount === 1 ? "" : "s"} registrada${deliveredCount === 1 ? "" : "s"}` : "",
+      generatedCount > 0 ? `${generatedCount} artigo${generatedCount === 1 ? "" : "s"} gerado${generatedCount === 1 ? "" : "s"}` : "",
+      publishedCount > 0 ? `${publishedCount} ${publishedCount === 1 ? "publicação confirmada" : "publicações confirmadas"}` : "",
+      appliedFocusCount > 0 ? `foto/foco aplicado: ${appliedFocusCount}` : ""
+    ].filter(Boolean);
+    return {
+      hasEvidence: signals.length > 0,
+      evidence: signals.length
+        ? signals.join("; ")
+        : "Runtime concluiu, mas retornou só resumo operacional. Nenhum arquivo, artefato, publicação ou aplicação foi provado.",
+      pending: signals.length
+        ? "Validar a tela, dado ou rotina afetada antes de encerrar."
+        : "Reenviar com alvo mais específico ou usar Validar resultado para provar a alteração.",
+      signals
+    };
+  }
+
+  function buildRuntimeOutcomeSummary(payload = {}, orderText = "", scopeLabel = "ordem") {
+    const outcome = getRuntimeEvidence(payload);
+    return {
+      resolved: outcome.hasEvidence
+        ? `Runtime da ${scopeLabel} retornou evidência verificável.`
+        : `Runtime da ${scopeLabel} foi rodada, mas ainda não provou implementação.`,
+      evidence: outcome.evidence,
+      pending: outcome.pending,
+      order: summarizeOneLine(orderText, "Ordem enviada aos agentes.")
+    };
+  }
+
+  function getRuntimeOutcomeTone(payload = {}) {
+    return getRuntimeEvidence(payload).hasEvidence ? "ok" : "pending";
   }
 
   function getDecisionFeedbackLabel(decision = "") {
@@ -1470,6 +1610,336 @@
       .join("\n");
   }
 
+  function getDirectModeGuide(value = directOrderMode?.value || "research") {
+    const guides = {
+      research: {
+        label: "Pesquisar URL e responder",
+        directive:
+          "Pesquisar a URL específica quando existir, resumir fatos úteis, separar o que foi comprovado do que ainda é inferência e propor alteração verificável."
+      },
+      rewrite: {
+        label: "Alterar com minhas instruções",
+        directive:
+          "Usar as ideias dos agentes como matéria-prima, aplicar as instruções do operador e devolver uma versão alterada sem repetir pedidos antigos."
+      },
+      run: {
+        label: "Rodar agentes com esta ordem",
+        directive:
+          "Executar a ordem na runtime real. Se não houver alvo suficiente para alterar arquivo, dado ou rotina, explicar o bloqueio e pedir o menor complemento possível."
+      },
+      validate: {
+        label: "Validar o que foi feito",
+        directive:
+          "Auditar o resultado: dizer o que foi implementado, onde verificar, qual evidência existe e qual parte ainda não foi provada."
+      }
+    };
+    return guides[value] || guides.research;
+  }
+
+  function collectAgentIdeas(limit = 6) {
+    const fromFlow = latestOpinionFlow.map((flow) => ({ ...flow.item, status: flow.status }));
+    const source = fromFlow.length ? fromFlow : currentOpinions;
+    const seen = new Set();
+    return source
+      .map((item) => {
+        const text = String(item?.opinion || item?.assignment?.action || item?.assignment?.idea || "").trim();
+        const key = text.toLowerCase().replace(/\s+/g, " ").slice(0, 140);
+        if (!text || seen.has(key)) return null;
+        seen.add(key);
+        return {
+          agent: getAgentDisplayName(item),
+          office: getAgentOffice(item),
+          status: item.status?.label || item.status?.state || "opinião",
+          text
+        };
+      })
+      .filter(Boolean)
+      .slice(0, limit);
+  }
+
+  function formatDirectIdeasForPrompt(ideas = []) {
+    return ideas.length
+      ? ideas.map((idea, index) => `${index + 1}. ${idea.agent} (${idea.office}, ${idea.status}): ${idea.text}`).join("\n")
+      : "Nenhuma ideia de agente carregada. Responda só com a ordem direta do operador.";
+  }
+
+  function buildDirectOrderPrompt(options = {}) {
+    const guide = getDirectModeGuide(options.mode);
+    const selection = getDecisionSelection();
+    const orderText = String(options.orderText ?? directOrderText?.value ?? "").trim();
+    const urlText = String(options.urlText ?? directOrderUrl?.value ?? "").trim();
+    const ideas = Array.isArray(options.ideas) ? options.ideas : collectAgentIdeas();
+    return {
+      guide,
+      selection,
+      orderText,
+      urlText,
+      ideas,
+      prompt: [
+        "ORDEM DIRETA DA CHEFFE CALL",
+        `Modo: ${guide.label}`,
+        `Escritório preferencial: ${selection.officeLabel}`,
+        `Agente principal: ${selection.agentLabel}`,
+        urlText ? `URL específica a pesquisar: ${urlText}` : "URL específica a pesquisar: nenhuma URL informada",
+        "",
+        "Ordem do operador:",
+        orderText || "Usar as ideias dos agentes e pedir esclarecimento se faltar alvo.",
+        "",
+        "Ideias dos agentes que podem ser aproveitadas ou corrigidas:",
+        formatDirectIdeasForPrompt(ideas),
+        "",
+        "Diretriz obrigatória:",
+        guide.directive,
+        "",
+        "Resposta obrigatória:",
+        "1. Resultado analisado ou executado",
+        "2. Evidência real: URL, arquivo, tela, dado, rotina ou comportamento afetado",
+        "3. O que não ficou provado",
+        "4. Próxima ação concreta",
+        "5. Se estiver repetindo pedido antigo, cortar a repetição e trazer uma decisão nova"
+      ].join("\n")
+    };
+  }
+
+  function setDirectOrderBusy(isBusy) {
+    [directOrderAnalyze, directOrderRunAgents, directOrderRunQueue, pullAgentIdeasToDirectOrder].forEach((button) => {
+      if (button) button.disabled = Boolean(isBusy);
+    });
+  }
+
+  function pullAgentIdeasIntoDirectOrder(active = null) {
+    const ideas = active
+      ? [{ agent: getAgentDisplayName(active), office: getAgentOffice(active), status: "fala ativa", text: active.opinion || active.assignment?.action || "" }]
+      : collectAgentIdeas();
+    const cleanIdeas = ideas.filter((idea) => String(idea.text || "").trim());
+    if (!cleanIdeas.length) {
+      setDirectOrderStatus("Ainda não há ideia útil dos agentes para puxar. Abra uma rodada primeiro.", "bad");
+      return "";
+    }
+    const current = String(directOrderText?.value || "").trim();
+    const block = [
+      current,
+      current ? "" : "Quero aproveitar estas ideias, ajustar com minhas instruções e devolver uma ordem melhor:",
+      "Ideias puxadas dos agentes:",
+      formatDirectIdeasForPrompt(cleanIdeas),
+      "",
+      "Minhas alterações:",
+      current ? "" : "- "
+    ]
+      .filter((line) => line !== null && line !== undefined)
+      .join("\n");
+    if (directOrderText) {
+      directOrderText.value = block;
+      directOrderText.focus();
+      directOrderText.setSelectionRange(directOrderText.value.length, directOrderText.value.length);
+    }
+    if (directOrderMode) directOrderMode.value = "rewrite";
+    setDirectOrderStatus(`${cleanIdeas.length} ideia${cleanIdeas.length === 1 ? "" : "s"} puxada${cleanIdeas.length === 1 ? "" : "s"} para ordem direta.`, "ok");
+    directCommandDesk?.scrollIntoView({ behavior: "smooth", block: "center" });
+    return block;
+  }
+
+  async function submitDirectOrder(shouldRunRuntime = false) {
+    const password = getAdminPassword();
+    if (!password) {
+      setDirectOrderStatus("Senha Full Admin obrigatória para enviar ordem direta.", "bad");
+      setStatus("Valide a senha Full Admin antes de enviar ordem direta.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    const order = buildDirectOrderPrompt();
+    if (!order.orderText && !order.urlText && !order.ideas.length) {
+      setDirectOrderStatus("Escreva uma ordem, cole uma URL ou puxe ideias dos agentes.", "bad");
+      directOrderText?.focus();
+      return;
+    }
+    latestDirectOrder = { ...order, shouldRunRuntime, createdAt: new Date().toISOString() };
+    setDirectOrderBusy(true);
+    setDirectOrderStatus(shouldRunRuntime ? "Rodando ordem direta nos agentes..." : "Enviando ordem direta para análise...", "ok");
+    setExecutionControl({
+      badge: shouldRunRuntime ? "Runtime" : "Ordem direta",
+      title: shouldRunRuntime ? "Rodando agentes com ordem direta" : "Analisando ordem direta",
+      text: shouldRunRuntime
+        ? "A ordem foi montada com URL, ideias puxadas e instruções do operador. A runtime vai rodar e o painel vai separar evidência de pendência."
+        : "A ordem foi enviada para resposta analisada. Nada será chamado de implementação sem evidência.",
+      tone: "idle",
+      summary: {
+        resolved: "Em andamento",
+        evidence: "Aguardando resposta",
+        pending: shouldRunRuntime ? "Runtime dos agentes" : "Aceite ou execução posterior",
+        order: summarizeOneLine(order.orderText || order.urlText, "Ordem direta montada.")
+      },
+      log: order.prompt
+    });
+    setActionFeedback({
+      badge: shouldRunRuntime ? "Runtime" : "Ordem direta",
+      title: shouldRunRuntime ? "Rodando agentes" : "Analisando ordem direta",
+      message: shouldRunRuntime
+        ? "A Cheffe Call está executando a ordem direta na runtime real."
+        : "A Cheffe Call está enviando a ordem direta para resposta dos agentes.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Ordem direta montada", state: "done" },
+        { label: "Resposta dos agentes", state: "running" },
+        { label: shouldRunRuntime ? "Runtime real" : "Aguardando decisão", state: shouldRunRuntime ? "pending" : "running" },
+        { label: "Controle persistente", state: "pending" }
+      ],
+      details: order.prompt
+    });
+    try {
+      syncVisibleInstruction(order.prompt);
+      if (commandInput) commandInput.value = order.prompt;
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: order.prompt });
+      activateMeetingResponse(order.prompt, payload);
+      const replies = getPayloadOpinions(payload, order.prompt);
+      const active = replies[0] || null;
+      await postRoomAction("terminal", active, {
+        title: `Ordem direta: ${order.guide.label}`,
+        command: order.prompt,
+        prompt: order.prompt,
+        directOrder: true,
+        directUrl: order.urlText,
+        directMode: order.guide.label
+      });
+      let runtimePayload = null;
+      if (shouldRunRuntime) {
+        setActionFeedback({
+          badge: "Runtime",
+          title: "Runtime da ordem direta",
+          message: "Os agentes responderam. Agora a runtime real tenta executar ou provar bloqueio.",
+          tone: "pending",
+          closable: false,
+          steps: [
+            { label: "Resposta dos agentes recebida", state: "done" },
+            { label: "Ordem direta registrada", state: "done" },
+            { label: "Runtime real em andamento", state: "running" },
+            { label: "Evidência pendente", state: "pending" }
+          ],
+          details: order.prompt
+        });
+        runtimePayload = await runCheffeRuntime(password, order.prompt);
+        await loadCall();
+      }
+      const summary = shouldRunRuntime
+        ? buildRuntimeOutcomeSummary(runtimePayload, order.orderText || order.urlText || order.prompt, "ordem direta")
+        : {
+            resolved: "Ordem direta recebeu resposta analisada.",
+            evidence: `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na sala.`,
+            pending: "Aceitar, ajustar ou rodar agentes com esta mesma ordem.",
+            order: summarizeOneLine(order.orderText || order.urlText || order.prompt, "Ordem direta registrada.")
+          };
+      const tone = shouldRunRuntime ? getRuntimeOutcomeTone(runtimePayload) : "ok";
+      const outcome = shouldRunRuntime ? getRuntimeEvidence(runtimePayload) : null;
+      terminalEl.textContent = [
+        shouldRunRuntime ? "> cheffe-call/direct-runtime" : "> cheffe-call/direct-order",
+        `modo: ${order.guide.label}`,
+        order.urlText ? `url: ${order.urlText}` : "",
+        `respostas: ${replies.length}`,
+        shouldRunRuntime ? `evidencia: ${outcome?.hasEvidence ? "sim" : "pendente"}` : "status: resposta analisada",
+        "",
+        shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, "runtime: ordem direta") : formatAgentReplies(replies, 5)
+      ]
+        .filter(Boolean)
+        .join("\n");
+      setExecutionControl({
+        badge: shouldRunRuntime ? (outcome?.hasEvidence ? "Com evidência" : "Evidência pendente") : "Ordem direta",
+        title: shouldRunRuntime
+          ? outcome?.hasEvidence
+            ? "Runtime retornou prova de execução"
+            : "Runtime rodou sem prova de implementação"
+          : "Ordem direta analisada",
+        text: shouldRunRuntime
+          ? "O painel separou o que a runtime provou do que ainda precisa ser validado."
+          : "A resposta ficou visível para você editar, aceitar ou mandar rodar agentes.",
+        tone,
+        summary,
+        log: shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, order.prompt) : formatAgentReplies(replies, 5)
+      });
+      setAgentResponse({
+        badge: shouldRunRuntime ? (outcome?.hasEvidence ? "Ordem com evidência" : "Ordem rodada") : "Ordem direta",
+        title: shouldRunRuntime
+          ? outcome?.hasEvidence
+            ? "Ordem direta executada com evidência"
+            : "Agentes rodaram, mas falta prova real"
+          : `${replies.length} agentes responderam à ordem direta`,
+        text: shouldRunRuntime
+          ? outcome?.hasEvidence
+            ? "A runtime devolveu sinal verificável. Ainda vale validar na tela ou no dado alvo."
+            : "A runtime foi chamada, mas não retornou arquivo, artefato, publicação ou aplicação comprovada."
+          : "A ordem direta foi recebida e virou resposta analisada sem fechar o controle.",
+        next: shouldRunRuntime
+          ? summary.pending
+          : "Edite a ordem direta, puxe ideias, ou clique Rodar agentes para executar com a mesma base.",
+        tone,
+        summary,
+        items: replies.length
+          ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: shouldRunRuntime ? "done" : item.state }))
+          : [{ state: "done", label: "ordem", agent: "Cheffe Call", text: order.orderText || order.urlText || order.prompt }]
+      });
+      setActionFeedback({
+        badge: shouldRunRuntime ? (outcome?.hasEvidence ? "Com evidência" : "Pendente") : "Ordem direta",
+        title: shouldRunRuntime
+          ? outcome?.hasEvidence
+            ? "Runtime concluiu com evidência"
+            : "Runtime concluída sem prova"
+          : "Resposta analisada",
+        message: shouldRunRuntime ? summary.evidence : "Os agentes responderam. O controle persistente guarda o resultado.",
+        tone,
+        closable: true,
+        steps: [
+          { label: "Ordem direta enviada", state: "done" },
+          { label: "Resposta registrada", state: "done" },
+          { label: shouldRunRuntime ? "Runtime concluída" : "Aguardando execução", state: shouldRunRuntime ? "done" : "running" },
+          { label: outcome?.hasEvidence ? "Evidência encontrada" : "Controle atualizado", state: outcome?.hasEvidence ? "done" : "pending" }
+        ],
+        details: shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, order.prompt) : formatAgentReplies(replies, 5)
+      });
+      setDirectOrderStatus(shouldRunRuntime ? "Ordem direta rodada. Confira evidência e pendências no controle." : "Ordem direta analisada. Você ainda controla a execução.", tone === "bad" ? "bad" : "ok");
+      setStatus(shouldRunRuntime ? "Ordem direta rodada; evidência separada no controle." : "Ordem direta analisada pelos agentes.", "ok");
+    } catch (error) {
+      setExecutionControl({
+        badge: "Falha",
+        title: "Ordem direta não concluiu",
+        text: error.message || "A Cheffe Call não conseguiu concluir a ordem direta.",
+        tone: "bad",
+        summary: {
+          resolved: "Nada confirmado.",
+          evidence: "Falha antes de resposta ou runtime completa.",
+          pending: "Corrigir senha, URL ou ordem e tentar novamente.",
+          order: summarizeOneLine(order.orderText || order.urlText || order.prompt, "Ordem preservada.")
+        },
+        log: error.message || "falha"
+      });
+      setActionFeedback({
+        badge: "Falha",
+        title: "Ordem direta falhou",
+        message: error.message || "Não foi possível concluir a ordem direta.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Fluxo interrompido", state: "bad" },
+          { label: "Ordem preservada no painel", state: "pending" }
+        ],
+        details: order.prompt
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "Ordem direta não retornou resultado",
+        text: error.message || "A ordem não chegou ao fim.",
+        next: "Revise senha, URL e texto antes de reenviar.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha na ordem direta." }]
+      });
+      setDirectOrderStatus(error.message || "Falha ao enviar ordem direta.", "bad");
+      setStatus(error.message || "Falha ao enviar ordem direta.", "bad");
+    } finally {
+      setDirectOrderBusy(false);
+      if (runApprovedOpinions) runApprovedOpinions.disabled = getReadyOpinionFlowItems().length === 0;
+      if (directOrderRunQueue) directOrderRunQueue.disabled = getReadyOpinionFlowItems().length === 0;
+    }
+  }
+
   function summarizeOneLine(value, fallback = "Sem detalhe registrado.") {
     const text = String(value || "").replace(/\s+/g, " ").trim();
     if (!text) return fallback;
@@ -1547,21 +2017,24 @@
   function buildDecisionResponseSummary(selection, replies, runtimePayload = null) {
     const firstReply = replies[0] || {};
     const implemented = selection.guide.value === "implement" && runtimePayload;
+    const outcome = implemented ? getRuntimeEvidence(runtimePayload) : null;
     const evidence = implemented
-      ? summarizeOneLine(buildRuntimeFeedbackDetails(runtimePayload), "Runtime finalizada, mas sem detalhe retornado.")
+      ? outcome.evidence
       : `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na reunião.`;
     return {
       resolved: implemented
-        ? "Decisão registrada e runtime executada."
+        ? outcome.hasEvidence
+          ? "Decisão registrada e runtime executada com evidência."
+          : "Decisão registrada e runtime rodada sem prova de implementação."
         : `${selection.guide.label} concluído para decisão.`,
       evidence,
       pending: implemented
-        ? "Conferir no terminal e validar visualmente se a mudança apareceu."
+        ? outcome.pending
         : selection.guide.value === "accept"
           ? "Ideia aceita. Falta implementar a fila ou abrir como Implementar agora."
           : selection.guide.after,
       order: implemented
-        ? "Implementação real enviada aos agentes."
+        ? "Ordem enviada aos agentes; evidência define se pode chamar de implementada."
         : summarizeOneLine(firstReply.assignment?.action || firstReply.opinion || selection.guide.directive, "Ordem registrada para a próxima etapa.")
     };
   }
@@ -1591,13 +2064,18 @@
     const selection = decision?.selection || getDecisionSelection();
     const contextText = decision?.contextText || "";
     const implemented = mode === "implement";
+    const outcome = implemented ? getRuntimeEvidence(runtimePayload) : null;
     return {
-      resolved: implemented ? "Ordem real registrada e runtime executada." : "Ordem real aceita e registrada.",
+      resolved: implemented
+        ? outcome.hasEvidence
+          ? "Ordem real registrada e runtime executada com evidência."
+          : "Ordem real registrada e runtime rodada sem prova de implementação."
+        : "Ordem real aceita e registrada.",
       evidence: implemented
-        ? summarizeOneLine(buildRuntimeFeedbackDetails(runtimePayload), "Runtime finalizada e sala atualizada.")
+        ? outcome.evidence
         : "Servidor registrou a decisão; terminal e fila da reunião foram atualizados.",
       pending: implemented
-        ? "Validar na tela se o resultado esperado apareceu."
+        ? outcome.pending
         : "Implementar a ordem aceita ou ajustar o contexto antes de executar.",
       order: summarizeOneLine(
         contextText || decision?.targetReply?.assignment?.action || decision?.targetReply?.opinion || selection.guide?.directive,
@@ -1686,47 +2164,84 @@
         runtimePayload
       };
       latestDecisionOrder = updatedDecision;
-      setAgentResponse({
-        badge: mode === "implement" ? "Ordem implementada" : "Ordem aceita",
-        title: mode === "implement" ? "A decisão virou execução real" : "A decisão virou ordem real",
+      const commitSummary = buildDecisionCommitSummary(updatedDecision, mode, runtimePayload);
+      const commitOutcome = mode === "implement" ? getRuntimeEvidence(runtimePayload) : null;
+      const commitTone = mode === "implement" ? getRuntimeOutcomeTone(runtimePayload) : "ok";
+      setExecutionControl({
+        badge: mode === "implement" ? (commitOutcome?.hasEvidence ? "Com evidência" : "Evidência pendente") : "Ordem aceita",
+        title:
+          mode === "implement"
+            ? commitOutcome?.hasEvidence
+              ? "Mesa executou com prova"
+              : "Mesa rodou sem prova de implementação"
+            : "Mesa registrou a ordem real",
         text:
           mode === "implement"
-            ? "A Mesa de Decisão registrou a ordem, executou a runtime e atualizou o terminal."
+            ? "A Mesa de decisão separou runtime concluída de implementação comprovada."
+            : "A ordem foi registrada e continua disponível para implementar depois.",
+        tone: commitTone,
+        summary: commitSummary,
+        log: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, decision.promptText || contextText) : decision.promptText || contextText
+      });
+      setAgentResponse({
+        badge: mode === "implement" ? (commitOutcome?.hasEvidence ? "Ordem com evidência" : "Ordem rodada") : "Ordem aceita",
+        title:
+          mode === "implement"
+            ? commitOutcome?.hasEvidence
+              ? "A decisão virou execução com evidência"
+              : "A decisão rodou, mas ainda falta prova"
+            : "A decisão virou ordem real",
+        text:
+          mode === "implement"
+            ? commitOutcome?.hasEvidence
+              ? "A Mesa de Decisão registrou a ordem, executou a runtime e recebeu sinal verificável."
+              : "A Mesa de Decisão registrou a ordem e rodou a runtime, mas o retorno não provou alteração real."
             : "A Mesa de Decisão registrou a ordem real. Nada foi executado automaticamente além do registro.",
         next:
           mode === "implement"
-            ? "Confira evidência no terminal e valide visualmente."
+            ? commitSummary.pending
             : "Use Implementar ordem aceita quando quiser executar, ou ajuste o contexto se algo ficou fraco.",
-        tone: "ok",
+        tone: commitTone,
         decisionActions: mode !== "implement",
-        summary: buildDecisionCommitSummary(updatedDecision, mode, runtimePayload),
+        summary: commitSummary,
         items: replies.length
           ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: "done" }))
           : [{ state: "done", label: "ordem", agent: selection.agentLabel || "Cheffe Call", text: contextText }]
       });
       setActionFeedback({
-        badge: mode === "implement" ? "Implementado" : "Aceito",
-        title: mode === "implement" ? "Ordem real implementada" : "Ordem real registrada",
+        badge: mode === "implement" ? (commitOutcome?.hasEvidence ? "Com evidência" : "Pendente") : "Aceito",
+        title:
+          mode === "implement"
+            ? commitOutcome?.hasEvidence
+              ? "Ordem real com evidência"
+              : "Runtime concluída sem prova"
+            : "Ordem real registrada",
         message:
           mode === "implement"
-            ? "A ordem foi aceita, executada e registrada com evidência."
+            ? commitSummary.evidence
             : "A ordem está registrada. O painel ainda permite implementar esta ordem aceita.",
-        tone: "ok",
+        tone: commitTone,
         closable: true,
         steps: [
           { label: "Registro concluído", state: "done" },
           { label: mode === "implement" ? "Runtime concluída" : "Implementação aguardando comando", state: "done" },
-          { label: "Terminal atualizado", state: "done" }
+          { label: mode === "implement" && !commitOutcome?.hasEvidence ? "Evidência pendente" : "Terminal atualizado", state: mode === "implement" && !commitOutcome?.hasEvidence ? "pending" : "done" }
         ],
-        details: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, "mesa: ordem implementada") : contextText
+        details: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, "mesa: ordem rodada") : contextText
       });
-      closeActionFeedback();
       if (mode === "implement") {
         hideDecisionResolutionActions(true);
       } else {
         showDecisionResolutionActions(updatedDecision);
       }
-      setStatus(mode === "implement" ? "Ordem real implementada pela Mesa de decisão." : "Ordem real aceita e registrada.", "ok");
+      setStatus(
+        mode === "implement"
+          ? commitOutcome?.hasEvidence
+            ? "Ordem real rodada com evidência pela Mesa de decisão."
+            : "Ordem real rodada, mas sem prova de implementação ainda."
+          : "Ordem real aceita e registrada.",
+        "ok"
+      );
     } catch (error) {
       setAgentResponse({
         badge: "Falha",
@@ -1844,7 +2359,6 @@
         ],
         details: formatAgentReplies(replies, 5)
       });
-      closeActionFeedback();
       setAgentResponse({
         badge: "Mesa de decisão",
         title: "Resposta pronta para decisão final",
@@ -2465,14 +2979,42 @@
     return `${match ? match.text : fallback} Assunto: ${cleanSubject}.`;
   }
 
+  function looksLikeRepeatedOpinion(text = "") {
+    const clean = String(text || "").toLowerCase().replace(/\s+/g, " ").trim();
+    if (!clean) return true;
+    const templateHits = [
+      "prioridade e decisão: eu compito trazendo evidência útil",
+      "placar 62%",
+      "se não mudar tela, dado ou rotina",
+      "tem memória própria para prioridade e decisão",
+      "eu saio da disputa"
+    ].filter((piece) => clean.includes(piece)).length;
+    return templateHits >= 2;
+  }
+
+  function normalizeOpinionSkeleton(text = "") {
+    return String(text || "")
+      .toLowerCase()
+      .replace(/r\$\s*[\d.,]+/g, "valor")
+      .replace(/\d+%/g, "pct")
+      .replace(/\d+/g, "num")
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 180);
+  }
+
   function normalizeOpinions(opinions, subject) {
     const list = Array.isArray(opinions) && opinions.length ? opinions : fallbackAgents;
     const seen = new Map();
+    const seenSkeleton = new Map();
     return list.map((item, index) => {
       const rawOpinion = String(item.opinion || "").trim();
       const key = rawOpinion.toLowerCase().replace(/\s+/g, " ");
-      const repeated = key && seen.has(key);
+      const skeleton = normalizeOpinionSkeleton(rawOpinion);
+      const repeated = (key && seen.has(key)) || (skeleton && seenSkeleton.has(skeleton)) || looksLikeRepeatedOpinion(rawOpinion);
       seen.set(key, (seen.get(key) || 0) + 1);
+      if (skeleton) seenSkeleton.set(skeleton, (seenSkeleton.get(skeleton) || 0) + 1);
       return {
         ...item,
         opinion: !rawOpinion || repeated ? buildOpinionForAgent(item, subject, index) : rawOpinion
@@ -2683,16 +3225,23 @@
     const labelMap = {
       ready: "aprovada",
       queued: "tarefa",
-      running: "rodando",
-      terminal: "terminal",
-      fallback: "terminal",
-      published: "implementada",
+      running: "em runtime",
+      terminal: "no terminal",
+      fallback: "no terminal",
+      published: "com evidência",
       dismissed: "ignorada"
+    };
+    const detailMap = {
+      running: "Execução enviada; aguardando evidência verificável.",
+      terminal: "Registrada no terminal; ainda não prova alteração real.",
+      fallback: "Registrada como apoio; ainda não prova alteração real.",
+      published: "Servidor marcou entrega com evidência.",
+      queued: "Tarefa rastreável criada; ainda precisa execução."
     };
     return {
       state,
       label: match.kindLabel || labelMap[state] || "decidida",
-      detail: match.title || match.text || "Decisão registrada na reunião.",
+      detail: detailMap[state] || match.title || match.text || "Decisão registrada na reunião.",
       action: match.action || ""
     };
   }
@@ -2706,12 +3255,16 @@
     if (opinionRunningCount) opinionRunningCount.textContent = String(running);
     if (opinionFlowMeta) {
       opinionFlowMeta.textContent = flowItems.length
-        ? `${flowItems.length} opinioes na sala. ${pending} aguardam aprovacao, ${ready} estao prontas para implementar em lote e ${running} ja foram enviadas ao terminal/runtime.`
-        : "Aprovar guarda uma opiniao. Implementar fila executa todas as aprovadas e mostra o terminal.";
+        ? `${flowItems.length} opinioes na sala. ${pending} aguardam aprovacao, ${ready} estao prontas para fila de ordens e ${running} estao no terminal/runtime aguardando conferência.`
+        : "Aprovar guarda uma opiniao. Implementar fila de ordens roda aprovadas e mostra evidência ou pendência.";
     }
     if (runApprovedOpinions) {
-      runApprovedOpinions.textContent = ready ? `Implementar fila (${ready})` : "Implementar fila";
+      runApprovedOpinions.textContent = ready ? `Implementar fila de ordens (${ready})` : "Implementar fila de ordens";
       runApprovedOpinions.disabled = ready === 0;
+    }
+    if (directOrderRunQueue) {
+      directOrderRunQueue.textContent = ready ? `Implementar fila de ordens (${ready})` : "Implementar fila de ordens";
+      directOrderRunQueue.disabled = ready === 0;
     }
     const activeStep = ready
       ? "run"
@@ -3117,25 +3670,25 @@
     }
     if (action === "implement") {
       try {
-        await runSingleImplementation(active);
+        const payload = await runSingleImplementation(active);
+        const outcome = getRuntimeEvidence(payload);
+        const summary = buildRuntimeOutcomeSummary(payload, active?.assignment?.action || idea || `Card de ${agentName}`, "card");
+        const tone = getRuntimeOutcomeTone(payload);
         setAgentResponse({
-          badge: "Implementado",
-          title: `${agentName} concluiu a execução`,
-          text: "O card foi enviado para runtime, a sala foi atualizada e o terminal recebeu o resumo.",
-          next: "Confira o terminal ou continue para o próximo agente.",
-          tone: "ok",
-          summary: {
-            resolved: "Card enviado para execução real.",
-            evidence: "Runtime finalizada e terminal atualizado.",
-            pending: "Validar visualmente se a mudança apareceu.",
-            order: "Implementação individual concluída pela Cheffe Call."
-          },
+          badge: outcome.hasEvidence ? "Card com evidência" : "Card rodado",
+          title: outcome.hasEvidence ? `${agentName} retornou evidência` : `${agentName} rodou sem prova real`,
+          text: outcome.hasEvidence
+            ? "O card foi enviado para runtime e retornou sinal verificável."
+            : "O card foi enviado para runtime, mas o retorno não provou alteração em tela, dado, rotina ou arquivo.",
+          next: summary.pending,
+          tone,
+          summary,
           items: [
-            { state: "done", label: "executado", agent: agentName, text: active?.assignment?.action || idea },
-            { state: "done", label: "verificado", agent: "Cheffe Call", text: "Runtime finalizada e sala sincronizada." }
+            { state: "done", label: "enviado", agent: agentName, text: active?.assignment?.action || idea },
+            { state: outcome.hasEvidence ? "done" : "pending", label: outcome.hasEvidence ? "evidência" : "pendente", agent: "Cheffe Call", text: outcome.evidence }
           ]
         });
-        setStatus(`${agentName} entrou em execução real pela Cheffe Call.`, "ok");
+        setStatus(outcome.hasEvidence ? `${agentName} retornou evidência de execução.` : `${agentName} rodou, mas ainda falta prova real.`, "ok");
         moveToNextSpeaker("próxima fala", { updateResponse: false });
         return;
       } catch (error) {
@@ -3155,6 +3708,7 @@
     }
     if (action === "variation") {
       const adjustmentPrompt = stageAdjustmentInPromptMaster(active);
+      pullAgentIdeasIntoDirectOrder(active);
       enqueueTask({
         state: "terminal",
         kindLabel: "ajuste pronto",
@@ -3167,7 +3721,7 @@
       setActionFeedback({
         badge: "Prompt Mestre",
         title: `Ajuste pronto para ${agentName}`,
-        message: "Escritório e agente foram selecionados no Prompt Mestre. Use Executar no terminal para pedir a resposta.",
+        message: "A ideia foi puxada para a Ordem direta e também preparada no Prompt Mestre.",
         tone: "ok",
         steps: [
           { label: "Opinião original capturada", state: "ok" },
@@ -3181,14 +3735,14 @@
       setAgentResponse({
         badge: "Ajuste preparado",
         title: `${agentName} foi enviado ao Prompt Mestre`,
-        text: "A opinião original, o escritório e o agente foram carregados. Nada foi executado ainda.",
-        next: "Revise o tipo de ajuste e clique Executar no terminal para pedir a nova resposta.",
+        text: "A opinião original, o escritório e o agente foram carregados na Ordem direta para você alterar com suas instruções. Nada foi executado ainda.",
+        next: "Edite Minhas alterações no painel Comando real e clique Ordem direta ou Rodar agentes.",
         tone: "ok",
         summary: {
           resolved: "Opinião carregada com escritório e agente.",
-          evidence: "Prompt Mestre e Mesa de decisão receberam o contexto.",
-          pending: "Executar no terminal ou abrir decisão para analisar.",
-          order: "Ajuste ainda não implementa; ele prepara uma nova resposta."
+          evidence: "Ordem direta, Prompt Mestre e Mesa de decisão receberam o contexto.",
+          pending: "Editar a ordem direta e escolher análise ou runtime.",
+          order: "Ajuste ainda não implementa; ele prepara uma ordem melhor."
         },
         items: [
           { state: "done", label: "capturado", agent: agentName, text: idea },
@@ -3729,16 +4283,28 @@
       `Implementar card aprovado na Cheffe Call: ${agentName}.`
     );
     await loadCall();
+    const outcome = getRuntimeEvidence(payload);
+    const tone = getRuntimeOutcomeTone(payload);
+    const orderText = active?.assignment?.action || active?.opinion || `Card aprovado de ${agentName}`;
+    const summary = buildRuntimeOutcomeSummary(payload, orderText, "card");
+    setExecutionControl({
+      badge: outcome.hasEvidence ? "Com evidência" : "Evidência pendente",
+      title: outcome.hasEvidence ? `${agentName} retornou prova` : `${agentName} rodou sem prova real`,
+      text: "A execução individual foi registrada no controle persistente.",
+      tone,
+      summary,
+      log: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
+    });
     setActionFeedback({
-      badge: "Concluído",
-      title: `${agentName} implementado`,
-      message: "A runtime terminou e a sala foi atualizada.",
-      tone: "ok",
+      badge: outcome.hasEvidence ? "Com evidência" : "Pendente",
+      title: outcome.hasEvidence ? `${agentName} com evidência` : `${agentName} sem prova de implementação`,
+      message: outcome.evidence,
+      tone,
       closable: true,
       steps: [
         { label: "Card enviado", state: "done" },
         { label: "Runtime concluída", state: "done" },
-        { label: "Sala atualizada", state: "done" }
+        { label: outcome.hasEvidence ? "Evidência encontrada" : "Evidência pendente", state: outcome.hasEvidence ? "done" : "pending" }
       ],
       details: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
     });
@@ -3746,8 +4312,9 @@
       "> cheffe-call/card-implementation",
       `owner: ${agentName}`,
       `office: ${getAgentOffice(active)}`,
-      formatRuntimeDetailsForTerminal(payload, "status: concluído")
+      formatRuntimeDetailsForTerminal(payload, outcome.hasEvidence ? "status: com evidência" : "status: evidência pendente")
     ].join("\n");
+    return payload;
   }
 
   async function runApprovedOpinionQueue() {
@@ -3756,25 +4323,26 @@
       setActionFeedback({
         badge: "Fila",
         title: "Nada aprovado ainda",
-        message: "Aprove cards primeiro. Depois este botão implementa todos de uma vez.",
+        message: "Aprove cards primeiro. Depois este botão roda a fila de ordens.",
         tone: "bad",
         closable: true,
         steps: [{ label: "Nenhum card pronto", state: "bad" }]
       });
-      setStatus("Aprove uma ou mais opiniões antes de implementar a fila.", "bad");
+      setStatus("Aprove uma ou mais opiniões antes de rodar a fila de ordens.", "bad");
       return;
     }
 
-    const password = requireAdminPassword("implementar a fila aprovada");
+    const password = requireAdminPassword("rodar a fila de ordens aprovada");
     if (!password) return;
     if (runApprovedOpinions) runApprovedOpinions.disabled = true;
+    if (directOrderRunQueue) directOrderRunQueue.disabled = true;
     if (refreshOpinionFlow) refreshOpinionFlow.disabled = true;
 
     const batchNames = readyItems.map((flow) => getAgentDisplayName(flow.item));
     try {
       setActionFeedback({
         badge: "Fila",
-        title: `Implementando ${readyItems.length} aprovadas`,
+        title: `Registrando ${readyItems.length} ordens aprovadas`,
         message: "A Cheffe Call vai registrar cada card aprovado e rodar a runtime uma vez no final.",
         tone: "pending",
         closable: false,
@@ -3796,7 +4364,7 @@
           "> cheffe-call/batch-register",
           `item: ${completed + 1}/${readyItems.length}`,
           `owner: ${name}`,
-          `status: registrando execução aprovada`
+          `status: registrando ordem aprovada`
         ].join("\n");
         await postRoomAction("implement", flow.item, {
           title: `Implementar fila: ${flow.item?.assignment?.action || flow.item?.opinion || name}`,
@@ -3806,7 +4374,7 @@
         setActionFeedback({
           badge: "Fila",
           title: `Registradas ${completed}/${readyItems.length}`,
-          message: "Os cards aprovados estão virando execução real.",
+          message: "Os cards aprovados estão virando fila de ordens para runtime.",
           tone: "pending",
           closable: false,
           steps: [
@@ -3835,44 +4403,58 @@
         `Implementar fila aprovada da Cheffe Call com ${completed} cards.`
       );
       await loadCall();
+      const outcome = getRuntimeEvidence(payload);
+      const tone = getRuntimeOutcomeTone(payload);
+      const queueOrder = `Fila aprovada da Cheffe Call com ${completed} cards.`;
+      const summary = buildRuntimeOutcomeSummary(payload, queueOrder, "fila de ordens");
+      setExecutionControl({
+        badge: outcome.hasEvidence ? "Fila com evidência" : "Fila rodada",
+        title: outcome.hasEvidence ? "Fila retornou prova de execução" : "Fila rodou sem prova real",
+        text: "A fila de ordens foi separada entre runtime concluída, evidência e pendência.",
+        tone,
+        summary,
+        log: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
+      });
       setActionFeedback({
-        badge: "Concluído",
-        title: "Fila implementada",
-        message: "A runtime terminou e a Cheffe Call foi atualizada.",
-        tone: "ok",
+        badge: outcome.hasEvidence ? "Com evidência" : "Pendente",
+        title: outcome.hasEvidence ? "Fila rodada com evidência" : "Fila rodada sem prova real",
+        message: outcome.evidence,
+        tone,
         closable: true,
         steps: [
           { label: `${completed} cards enviados`, state: "done" },
           { label: "Runtime concluída", state: "done" },
-          { label: "Sala atualizada", state: "done" }
+          { label: outcome.hasEvidence ? "Evidência encontrada" : "Evidência pendente", state: outcome.hasEvidence ? "done" : "pending" }
         ],
         details: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
       });
       terminalEl.textContent = [
         "> cheffe-call/batch-complete",
         `cards: ${completed}`,
-        formatRuntimeDetailsForTerminal(payload, "status: concluído")
+        formatRuntimeDetailsForTerminal(payload, outcome.hasEvidence ? "status: com evidência" : "status: evidência pendente")
       ].join("\n");
       setAgentResponse({
-        badge: "Fila implementada",
-        title: `${completed} aprovações foram executadas`,
-        text: "A Cheffe Call registrou a fila, rodou a runtime uma vez e atualizou a sala com o resumo.",
-        next: "Confira o terminal, recarregue se quiser, ou abra uma nova rodada com outra ordem.",
-        tone: "ok",
-        summary: {
-          resolved: `${completed} aprovação${completed === 1 ? "" : "ões"} enviada${completed === 1 ? "" : "s"} para execução real.`,
-          evidence: "Runtime única da fila finalizou e terminal recebeu resumo.",
-          pending: "Validar se tela, dado ou rotina mudaram como esperado.",
-          order: "Fila aprovada implementada."
-        },
+        badge: outcome.hasEvidence ? "Fila com evidência" : "Fila rodada",
+        title: outcome.hasEvidence ? `${completed} ordens rodaram com evidência` : `${completed} ordens rodaram sem prova real`,
+        text: outcome.hasEvidence
+          ? "A Cheffe Call registrou a fila, rodou a runtime e recebeu evidência verificável."
+          : "A Cheffe Call registrou a fila e rodou a runtime, mas o retorno não provou mudança real.",
+        next: summary.pending,
+        tone,
+        summary,
         items: readyItems.slice(0, 4).map((flow, index) => ({
-          state: "done",
-          label: `executado ${index + 1}`,
+          state: outcome.hasEvidence ? "done" : "pending",
+          label: outcome.hasEvidence ? `evidência ${index + 1}` : `pendente ${index + 1}`,
           agent: getAgentDisplayName(flow.item),
-          text: flow.item?.assignment?.action || flow.item?.opinion || "Card implementado."
+          text: flow.item?.assignment?.action || flow.item?.opinion || "Card enviado para runtime."
         }))
       });
-      setStatus(`Fila implementada: ${completed} aprovações enviadas e runtime concluída.`, "ok");
+      setStatus(
+        outcome.hasEvidence
+          ? `Fila de ordens rodada com evidência: ${completed} aprovações enviadas.`
+          : `Fila de ordens rodada, mas evidência real ainda está pendente.`,
+        "ok"
+      );
     } catch (error) {
       setActionFeedback({
         badge: "Falha",
@@ -3889,13 +4471,14 @@
         badge: "Falha na fila",
         title: "A implementação foi interrompida",
         text: error.message || "A Cheffe Call preservou a fila para você tentar novamente.",
-        next: "Confira a senha, recarregue a fila e tente Implementar fila outra vez.",
+        next: "Confira a senha, recarregue a fila e tente Implementar fila de ordens outra vez.",
         tone: "bad",
         items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao implementar fila." }]
       });
       setStatus(error.message || "Falha ao implementar fila.", "bad");
     } finally {
       if (runApprovedOpinions) runApprovedOpinions.disabled = getReadyOpinionFlowItems().length === 0;
+      if (directOrderRunQueue) directOrderRunQueue.disabled = getReadyOpinionFlowItems().length === 0;
       if (refreshOpinionFlow) refreshOpinionFlow.disabled = false;
     }
   }
@@ -4436,6 +5019,22 @@
     runApprovedOpinionQueue().catch((error) => setStatus(error.message, "bad"));
   });
 
+  pullAgentIdeasToDirectOrder?.addEventListener("click", () => {
+    pullAgentIdeasIntoDirectOrder();
+  });
+
+  directOrderAnalyze?.addEventListener("click", () => {
+    submitDirectOrder(false);
+  });
+
+  directOrderRunAgents?.addEventListener("click", () => {
+    submitDirectOrder(true);
+  });
+
+  directOrderRunQueue?.addEventListener("click", () => {
+    runApprovedOpinionQueue().catch((error) => setStatus(error.message, "bad"));
+  });
+
   adminRunAgentsNow?.addEventListener("click", () => {
     const password = requireAdminPassword("rodar os agentes reais");
     if (!password) return;
@@ -4452,6 +5051,7 @@
         { label: "Sala aguardando feedback", state: "pending" }
       ]
     });
+    let manualRuntimePayload = null;
     fetch("/api/real-agents/run", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -4463,11 +5063,13 @@
       .then(async (response) => {
         const payload = await response.json();
         if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+        manualRuntimePayload = payload;
+        const outcome = getRuntimeEvidence(payload);
         setActionFeedback({
           badge: "Runtime",
           title: "Agentes finalizaram",
-          message: "Runtime concluída. Feedback pronto para a sala.",
-          tone: "ok",
+          message: outcome.evidence,
+          tone: getRuntimeOutcomeTone(payload),
           steps: [
             { label: "Runtime dos agentes executada", state: "done" },
             { label: "Feedback recebido", state: "done" },
@@ -4479,28 +5081,46 @@
         return loadCall();
       })
       .then(() => {
+        const outcome = getRuntimeEvidence(manualRuntimePayload);
+        const tone = getRuntimeOutcomeTone(manualRuntimePayload);
+        const summary = buildRuntimeOutcomeSummary(
+          manualRuntimePayload,
+          instructionInput?.value || "Rodada manual disparada pela Cheffe Call.",
+          "rodada manual"
+        );
+        setExecutionControl({
+          badge: outcome.hasEvidence ? "Com evidência" : "Evidência pendente",
+          title: outcome.hasEvidence ? "Rodada manual com prova" : "Rodada manual sem prova real",
+          text: "Rodar agentes agora atualizou este controle com evidência ou pendência.",
+          tone,
+          summary,
+          log: formatRuntimeDetailsForTerminal(manualRuntimePayload, "manual: rodar agentes")
+        });
         setActionFeedback({
-          badge: "Finalizado",
-          title: "Sala atualizada",
-          message: "Os agentes terminaram e a Cheffe Call está com dados novos.",
-          tone: "ok",
+          badge: outcome.hasEvidence ? "Com evidência" : "Pendente",
+          title: outcome.hasEvidence ? "Sala atualizada com evidência" : "Runtime sem prova de mudança",
+          message: outcome.evidence,
+          tone,
           steps: [
             { label: "Runtime concluída", state: "done" },
-            { label: "Sala atualizada", state: "done" }
+            { label: outcome.hasEvidence ? "Evidência encontrada" : "Evidência pendente", state: outcome.hasEvidence ? "done" : "pending" }
           ],
           closable: true
         });
         setAgentResponse({
-          badge: "Runtime concluída",
-          title: "Agentes reais terminaram a rodada",
-          text: "A execução manual acabou e o painel foi atualizado com o feedback recebido.",
-          next: "Reveja os novos cards, aprove o que fizer sentido ou implemente a fila.",
-          tone: "ok",
+          badge: outcome.hasEvidence ? "Runtime com evidência" : "Runtime rodada",
+          title: outcome.hasEvidence ? "Agentes terminaram com prova" : "Agentes terminaram sem prova real",
+          text: outcome.hasEvidence
+            ? "A execução manual acabou e retornou evidência verificável."
+            : "A execução manual acabou, mas o retorno não provou alteração em tela, dado, rotina ou arquivo.",
+          next: summary.pending,
+          tone,
+          summary,
           items: currentOpinions.length
             ? buildAgentReplyItems(currentOpinions, 4)
-            : [{ state: "done", label: "runtime", agent: "Cheffe Call", text: "Rodada manual finalizada." }]
+            : [{ state: outcome.hasEvidence ? "done" : "pending", label: "runtime", agent: "Cheffe Call", text: outcome.evidence }]
         });
-        setStatus("Rodada manual dos agentes concluída e sala atualizada.", "ok");
+        setStatus(outcome.hasEvidence ? "Rodada manual com evidência registrada." : "Rodada manual concluída, mas evidência ainda pendente.", "ok");
       })
       .catch((error) => {
         setActionFeedback({

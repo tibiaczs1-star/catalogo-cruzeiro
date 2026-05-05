@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260504-decision-flow6" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260504-direct-flow7" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -103,11 +103,11 @@
                 ></textarea>
               </label>
               <label>
-                Terminal / pedido direto
+                Terminal técnico (opcional)
                 <textarea
                   name="command"
                   rows="4"
-                  placeholder="Cole aqui um pedido direto, trecho de código ou tarefa para o agente ativo analisar."
+                  placeholder="Use para complemento técnico. Para ordem direta, URL e fila, use o painel Comando real abaixo."
                 ></textarea>
               </label>
               <div class="call-actions">
@@ -466,6 +466,70 @@
         </div>
         </section>
 
+        <section class="direct-command-desk" aria-labelledby="directCommandTitle">
+        <div class="section-head direct-command-head">
+          <div>
+            <p class="call-kicker">Comando real</p>
+            <h2 id="directCommandTitle">Ordem direta e fila de ordens</h2>
+          </div>
+          <p id="directCommandMeta">Escreva uma ordem, cole uma URL específica, puxe ideias dos agentes e escolha entre resposta analisada ou runtime real. O resultado fica registrado no controle abaixo.</p>
+        </div>
+        <div class="direct-command-grid">
+          <label class="direct-command-field direct-command-text">
+            <span>Ordem direta</span>
+            <textarea id="directOrderText" rows="7" placeholder="Ex: pesquise esta URL, compare com as ideias dos agentes e proponha a alteração real que deve entrar na página."></textarea>
+          </label>
+          <div class="direct-command-side">
+            <label class="direct-command-field">
+              <span>URL específica</span>
+              <input id="directOrderUrl" type="url" placeholder="https://..." inputmode="url" />
+            </label>
+            <label class="direct-command-field">
+              <span>Modo</span>
+              <select id="directOrderMode">
+                <option value="research">Pesquisar URL e responder</option>
+                <option value="rewrite">Puxar ideias e alterar com minhas instruções</option>
+                <option value="run">Rodar agentes com esta ordem</option>
+                <option value="validate">Validar o que foi feito</option>
+              </select>
+            </label>
+            <div class="direct-command-actions">
+              <button type="button" id="pullAgentIdeasToDirectOrder">Puxar ideias dos agentes</button>
+              <button type="button" id="directOrderAnalyze">Ordem direta</button>
+              <button type="button" id="directOrderRunAgents">Rodar agentes</button>
+              <button type="button" id="directOrderRunQueue" disabled>Implementar fila de ordens</button>
+            </div>
+            <p id="directOrderStatus" class="direct-order-status" role="status">Nenhuma ordem direta enviada nesta rodada.</p>
+          </div>
+        </div>
+        <article class="execution-control-panel" id="executionControlPanel" data-state="idle" aria-live="polite">
+          <div class="execution-control-main">
+            <span id="executionControlBadge">Controle</span>
+            <strong id="executionControlTitle">Aguardando comando real</strong>
+            <p id="executionControlText">Use Ordem direta para receber resposta analisada, Rodar agentes para executar runtime, ou Implementar fila de ordens para enviar os cards aprovados.</p>
+          </div>
+          <div class="execution-control-grid">
+            <article>
+              <span>Resultado</span>
+              <strong id="executionControlResolved">Nada executado</strong>
+            </article>
+            <article>
+              <span>Evidência</span>
+              <strong id="executionControlEvidence">Sem evidência ainda</strong>
+            </article>
+            <article>
+              <span>Pendente</span>
+              <strong id="executionControlPending">Aguardando ordem</strong>
+            </article>
+            <article>
+              <span>Última ordem</span>
+              <strong id="executionControlOrder">Nenhuma</strong>
+            </article>
+          </div>
+          <pre id="executionControlLog" class="execution-control-log">controle pronto</pre>
+        </article>
+        </section>
+
         <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
         <div class="section-head">
           <p class="call-kicker">181 agentes</p>
@@ -531,19 +595,19 @@
           <div class="opinion-flow-summary" aria-label="Resumo das opiniões">
             <span><b id="opinionPendingCount">0</b> pendentes</span>
             <span><b id="opinionReadyCount">0</b> aprovadas</span>
-            <span><b id="opinionRunningCount">0</b> rodando</span>
+            <span><b id="opinionRunningCount">0</b> em runtime</span>
           </div>
         </div>
         <div class="opinion-flow-map" aria-label="Fluxo das opiniões">
           <span data-opinion-flow-step="listen">1. Agentes opinam</span>
           <span data-opinion-flow-step="decide">2. Você aprova</span>
-          <span data-opinion-flow-step="run">3. Fila implementa</span>
+          <span data-opinion-flow-step="run">3. Rodar fila</span>
           <span data-opinion-flow-step="done">4. Terminal confere</span>
         </div>
         <div class="opinion-flow-toolbar">
-          <p id="opinionFlowMeta">Aprovar guarda uma opinião. Implementar fila executa todas as aprovadas e mostra o terminal de acompanhamento.</p>
+          <p id="opinionFlowMeta">Aprovar guarda uma opinião. Implementar fila de ordens roda as aprovadas e só marca como implementada quando houver evidência.</p>
           <div>
-            <button type="button" id="runApprovedOpinions">Implementar fila</button>
+            <button type="button" id="runApprovedOpinions">Implementar fila de ordens</button>
             <button type="button" id="refreshOpinionFlow">Recarregar fila</button>
           </div>
         </div>
@@ -801,6 +865,6 @@
     </div>
 
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260504-decision-flow6"></script>
+    <script defer src="cheffe-call.js?v=20260504-direct-flow7"></script>
   </body>
 </html>

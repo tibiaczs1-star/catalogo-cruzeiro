@@ -8873,6 +8873,245 @@ body.cheffe-access-locked {
   background: var(--call-cyan);
 }
 
+.direct-command-desk {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid rgba(115, 235, 168, 0.18);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(115, 235, 168, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(10, 16, 26, 0.96), rgba(6, 10, 18, 0.94));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 18px 60px rgba(0, 0, 0, 0.24);
+}
+
+.direct-command-head {
+  align-items: start;
+}
+
+.direct-command-head > p {
+  max-width: 680px;
+  margin: 0;
+  color: rgba(230, 242, 255, 0.72);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.direct-command-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: 12px;
+  align-items: stretch;
+}
+
+.direct-command-field {
+  display: grid;
+  gap: 7px;
+}
+
+.direct-command-field span {
+  color: var(--call-cyan);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.direct-command-field textarea,
+.direct-command-field input,
+.direct-command-field select {
+  width: 100%;
+  border: 1px solid rgba(127, 231, 255, 0.16);
+  border-radius: 8px;
+  background: rgba(4, 9, 16, 0.88);
+  color: var(--call-text);
+  font: 600 0.92rem/1.45 Inter, "Segoe UI", Arial, sans-serif;
+  outline: none;
+}
+
+.direct-command-field textarea {
+  min-height: 212px;
+  padding: 13px 14px;
+  resize: vertical;
+}
+
+.direct-command-field input,
+.direct-command-field select {
+  min-height: 42px;
+  padding: 0 12px;
+}
+
+.direct-command-field textarea:focus,
+.direct-command-field input:focus,
+.direct-command-field select:focus {
+  border-color: rgba(115, 235, 168, 0.52);
+  box-shadow: 0 0 0 3px rgba(115, 235, 168, 0.1);
+}
+
+.direct-command-side {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.direct-command-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.direct-command-actions button {
+  min-height: 42px;
+  border: 1px solid rgba(127, 231, 255, 0.18);
+  border-radius: 8px;
+  padding: 0 12px;
+  color: var(--call-text);
+  background: rgba(14, 22, 34, 0.96);
+  font: 900 0.74rem/1 Inter, "Segoe UI", Arial, sans-serif;
+  cursor: pointer;
+}
+
+.direct-command-actions button:nth-child(2) {
+  color: #1d1215;
+  border-color: rgba(244, 201, 107, 0.7);
+  background: var(--call-gold);
+}
+
+.direct-command-actions button:nth-child(3),
+.direct-command-actions button:nth-child(4) {
+  color: #061018;
+  border-color: rgba(115, 235, 168, 0.66);
+  background: var(--call-green);
+}
+
+.direct-command-actions button:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.direct-order-status {
+  min-height: 34px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(127, 231, 255, 0.12);
+  border-radius: 8px;
+  color: rgba(230, 242, 255, 0.74);
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.direct-order-status[data-tone="ok"] {
+  color: #d8ffe5;
+  border-color: rgba(115, 235, 168, 0.26);
+}
+
+.direct-order-status[data-tone="bad"] {
+  color: #ffd5d8;
+  border-color: rgba(245, 109, 122, 0.34);
+}
+
+.execution-control-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(320px, 1.25fr);
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(127, 231, 255, 0.14);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.025)),
+    rgba(6, 10, 18, 0.9);
+}
+
+.execution-control-panel[data-state="ok"] {
+  border-color: rgba(115, 235, 168, 0.34);
+}
+
+.execution-control-panel[data-state="bad"] {
+  border-color: rgba(245, 109, 122, 0.42);
+}
+
+.execution-control-main {
+  min-width: 0;
+}
+
+.execution-control-main span {
+  display: inline-flex;
+  width: max-content;
+  min-height: 28px;
+  align-items: center;
+  padding: 0.2rem 0.58rem;
+  border: 1px solid rgba(127, 231, 255, 0.18);
+  border-radius: 8px;
+  color: var(--call-cyan);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.execution-control-main strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.08rem;
+}
+
+.execution-control-main p {
+  margin: 8px 0 0;
+  color: rgba(230, 242, 255, 0.76);
+  line-height: 1.45;
+}
+
+.execution-control-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.execution-control-grid article {
+  min-height: 86px;
+  padding: 10px;
+  border: 1px solid rgba(127, 231, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.execution-control-grid span {
+  display: block;
+  color: rgba(127, 231, 255, 0.82);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.execution-control-grid strong {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 248, 235, 0.92);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.execution-control-log {
+  grid-column: 1 / -1;
+  max-height: 190px;
+  margin: 0;
+  padding: 12px;
+  overflow: auto;
+  border: 1px solid rgba(127, 231, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(2, 6, 12, 0.88);
+  color: rgba(230, 242, 255, 0.86);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
 .agent-response-panel {
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
 }
@@ -9083,8 +9322,17 @@ body.cheffe-access-locked {
 }
 
 @media (max-width: 1180px) {
-  .decision-desk-grid {
+  .decision-desk-grid,
+  .direct-command-grid,
+  .execution-control-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .direct-command-text,
+  .execution-control-main,
+  .execution-control-grid,
+  .execution-control-log {
+    grid-column: 1 / -1;
   }
 }
 
@@ -9094,6 +9342,10 @@ body.cheffe-access-locked {
   }
 
   .decision-desk-grid,
+  .direct-command-grid,
+  .direct-command-actions,
+  .execution-control-panel,
+  .execution-control-grid,
   .agent-response-summary {
     grid-template-columns: 1fr;
   }

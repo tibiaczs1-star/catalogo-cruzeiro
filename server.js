@@ -9359,6 +9359,104 @@ function shouldRefreshCheffeCallOpinions(opinions = []) {
   return unique <= Math.max(1, Math.floor(texts.length / 2)) || texts.some((text) => stalePattern.test(text));
 }
 
+function extractCheffeDirectUrl(value = "") {
+  const match = String(value || "").match(/https?:\/\/[^\s<>"')]+/i);
+  if (!match) return "";
+  try {
+    const parsed = new URL(match[0].replace(/[.,;]+$/, ""));
+    if (!/^https?:$/.test(parsed.protocol)) return "";
+    return parsed.toString();
+  } catch (_error) {
+    return "";
+  }
+}
+
+function readMetaContent(html = "", name = "") {
+  const escapedName = String(name || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(`<meta[^>]+(?:name|property)=["']${escapedName}["'][^>]+content=["']([^"']+)["'][^>]*>`, "i");
+  const match = String(html || "").match(pattern);
+  return match ? cleanShortText(decodeHtmlEntities(match[1]), 260) : "";
+}
+
+async function fetchCheffeDirectUrlResearch(instruction = "") {
+  const url = extractCheffeDirectUrl(instruction);
+  if (!url) return null;
+  const fetchedAt = new Date().toISOString();
+  try {
+    const response = await withPromiseTimeout(
+      fetch(url, {
+        headers: {
+          Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.5",
+          "User-Agent": "CheffeCallResearch/1.0 (+https://catalogo-cruzeiro-do-sul.onrender.com)"
+        }
+      }),
+      8000,
+      "tempo esgotado ao pesquisar URL"
+    );
+    const contentType = cleanShortText(response.headers.get("content-type") || "", 120);
+    const rawText = await withPromiseTimeout(response.text(), 8000, "tempo esgotado lendo URL");
+    const html = String(rawText || "").slice(0, 180000);
+    const title = cleanShortText(decodeHtmlEntities(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || ""), 220);
+    const description = readMetaContent(html, "description") || readMetaContent(html, "og:description");
+    const h1 = cleanShortText(stripHtml(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || ""), 220);
+    const excerpt = cleanShortText(stripHtml(html), 900);
+    return {
+      ok: response.ok,
+      url,
+      status: response.status,
+      contentType,
+      title,
+      description,
+      h1,
+      excerpt,
+      fetchedAt
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      url,
+      status: 0,
+      error: cleanShortText(error.message || "Falha ao pesquisar URL.", 220),
+      fetchedAt
+    };
+  }
+}
+
+function buildCheffeDirectResearchContext(research = null) {
+  if (!research?.url) return "";
+  if (!research.ok) {
+    return [
+      `Pesquisa real da URL específica: ${research.url}`,
+      `Status: falhou (${research.error || "sem detalhe"})`,
+      "Regra: agentes devem dizer que a URL não foi comprovada e pedir nova tentativa ou outra fonte."
+    ].join("\n");
+  }
+  return [
+    `Pesquisa real da URL específica: ${research.url}`,
+    `Status HTTP: ${research.status}`,
+    research.title ? `Título: ${research.title}` : "",
+    research.description ? `Descrição: ${research.description}` : "",
+    research.h1 ? `H1: ${research.h1}` : "",
+    research.excerpt ? `Trecho lido: ${research.excerpt}` : "",
+    "Regra: agentes devem usar esta evidência da URL e separar fato lido de sugestão."
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+function enrichCheffeOpinionsWithDirectResearch(opinions = [], research = null) {
+  if (!research?.url || !Array.isArray(opinions)) return opinions;
+  const evidence = research.ok
+    ? `URL pesquisada (${research.status}): ${research.title || research.h1 || research.description || research.url}`
+    : `URL não comprovada: ${research.error || research.url}`;
+  return opinions.map((item) => ({
+    ...item,
+    directUrlResearch: research,
+    evidence: cleanShortText(`${item.evidence || ""} ${evidence}`, 320),
+    opinion: cleanShortText(`${item.opinion || ""} Pesquisa URL: ${evidence}.`, 900)
+  }));
+}
+
 function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
@@ -9412,7 +9510,7 @@ function buildCheffeCallPayload() {
   };
 }
 
-function startCheffeCallSession(body) {
+async function startCheffeCallSession(body) {
   const legacyInstruction = body["brief" + "ing"] || "";
   const instruction = cleanShortText(
     body.instruction ||
@@ -9420,25 +9518,48 @@ function startCheffeCallSession(body) {
       "Cheffe Call aberto: pausar rotinas, memorizar contexto, ouvir a orientacao e devolver opinioes por perspectiva antes de qualquer execucao.",
     1600
   );
+  const directUrlResearch = await fetchCheffeDirectUrlResearch(instruction);
+  const researchContext = buildCheffeDirectResearchContext(directUrlResearch);
+  const agentInstruction = researchContext ? cleanShortText(`${researchContext}\n\n${instruction}`, 2400) : instruction;
   const agentsPayload = buildRealAgentsPayload();
   const now = new Date().toISOString();
   const state = readCheffeCallState();
+  const opinions = enrichCheffeOpinionsWithDirectResearch(
+    getCheffeCallOpinions(agentsPayload, agentInstruction),
+    directUrlResearch
+  );
+  const logs = [
+    normalizeCheffeCallLog({
+      createdAt: now,
+      kindLabel: "reunião aberta",
+      agent: "Cheffe Call",
+      office: "Sistema",
+      text: instruction
+    })
+  ];
+  if (directUrlResearch?.url) {
+    logs.push(
+      normalizeCheffeCallLog({
+        createdAt: now,
+        kindLabel: directUrlResearch.ok ? "url pesquisada" : "url pendente",
+        agent: "Cheffe Call",
+        office: "Fontes",
+        text: directUrlResearch.ok
+          ? `${directUrlResearch.url} -> ${directUrlResearch.title || directUrlResearch.description || `HTTP ${directUrlResearch.status}`}`
+          : `${directUrlResearch.url} -> ${directUrlResearch.error || "falha na pesquisa"}`
+      })
+    );
+  }
   const session = {
     id: createRecordId("chef"),
     createdAt: now,
     instruction,
+    agentInstruction,
+    directUrlResearch,
     dailyContext: agentsPayload.dailyContext || null,
-    opinions: getCheffeCallOpinions(agentsPayload, instruction),
+    opinions,
     approvals: [],
-    logs: [
-      normalizeCheffeCallLog({
-        createdAt: now,
-        kindLabel: "reunião aberta",
-        agent: "Cheffe Call",
-        office: "Sistema",
-        text: instruction
-      })
-    ],
+    logs,
     decisions: [],
     status: "aguardando-aprovacao"
   };
@@ -9460,7 +9581,9 @@ function startCheffeCallSession(body) {
     priority: cleanShortText(body.priority || "maxima", 40),
     message: instruction,
     ceoReply:
-      "Cheffe Call aberto. Rotinas automaticas pausadas, agentes em escuta, memoria de reuniao criada e opinioes aguardando aprovacao.",
+      directUrlResearch?.url
+        ? `Cheffe Call aberto com pesquisa de URL ${directUrlResearch.ok ? "registrada" : "pendente"}. Opinioes aguardam aprovacao.`
+        : "Cheffe Call aberto. Rotinas automaticas pausadas, agentes em escuta, memoria de reuniao criada e opinioes aguardando aprovacao.",
     status: "cheffe-call-ativo",
     hierarchy: "Full Admin -> Cheffe Call -> 181 agentes reais",
     createdAt: now
@@ -11673,7 +11796,7 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
-    return sendJson(res, 201, startCheffeCallSession(body));
+    return sendJson(res, 201, await startCheffeCallSession(body));
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/action") {
