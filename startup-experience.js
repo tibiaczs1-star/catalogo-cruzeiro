@@ -40,9 +40,9 @@
   ];
   const FOUNDERS_OPENING_STEPS = [
     "marcas apoiadoras em destaque",
-    "visual do portal em camadas",
-    "abertura mais leve e dinâmica",
-    "experiência principal pronta"
+    "notícias locais em destaque",
+    "serviços e agenda organizados",
+    "leitura da capa pronta"
   ];
   const LEGACY_WELCOME_ACCEPT_KEYS = [
     "catalogo_terms_welcome_accepted_v1",
@@ -581,7 +581,7 @@
             <img
               class="catalogo-founder-thanks-image"
               src="${FOUNDERS_CAFE_IMAGE_SRC}"
-              alt="Pacote do Cafe Cruzeiro em destaque na abertura do portal"
+              alt="Pacote do Cafe Cruzeiro em destaque como apoiador do portal"
               decoding="async"
               loading="eager"
               fetchpriority="high"
@@ -602,7 +602,7 @@
                 <span>Apoio que impulsiona</span>
                 <div class="catalogo-founder-thanks-logo-wrap catalogo-founder-thanks-copy-card">
                   <strong>Cafe Cruzeiro</strong>
-                  <small>presença visual na abertura do portal</small>
+                  <small>apoio local ao jornal</small>
                 </div>
               </article>
               <article class="catalogo-founder-banner-card catalogo-founder-banner-card-grupoas">
@@ -645,11 +645,11 @@
                 </div>
               </article>
             </div>
-            <strong class="catalogo-founder-reveal reveal-4">Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer ajudam a abrir uma experiência mais viva para o Juruá.</strong>
-            <span class="catalogo-founder-reveal reveal-5">Apoio local, carregamento visual e tecnologia trabalhando para aproximar a cidade da informação.</span>
+            <strong class="catalogo-founder-reveal reveal-4">Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer ajudam a manter informação local em circulação no Juruá.</strong>
+            <span class="catalogo-founder-reveal reveal-5">Apoio local para aproximar a cidade das notícias, dos serviços e da agenda do dia.</span>
             <div class="catalogo-founder-opening catalogo-founder-reveal reveal-5" aria-live="polite">
               <div class="catalogo-founder-opening-head">
-                <strong>Experiência do portal</strong>
+                <strong>Leitura da home</strong>
                 <span data-founder-opening-percent>0%</span>
               </div>
               <div class="catalogo-founder-opening-bar">
@@ -762,15 +762,15 @@
       <div class="catalogo-founder-prelude-shell">
         <div class="catalogo-founder-prelude-hud hud-left" aria-hidden="true">
           <span>apoio que impulsiona</span>
-          <strong>Tecnologia com marcas locais</strong>
+          <strong>Jornal com marcas locais</strong>
           <small>apoio local, presença e continuidade</small>
-          <em>abertura visual do portal</em>
+          <em>notícias e serviços locais</em>
         </div>
         <div class="catalogo-founder-prelude-hud hud-right" aria-hidden="true">
-          <span>experiência imersiva</span>
-          <strong>Interface em movimento</strong>
-          <small>profundidade, volume e movimento</small>
-          <em>marcas carregadas com prioridade</em>
+          <span>capa em atualização</span>
+          <strong>Informação em movimento</strong>
+          <small>notícias, serviços e agenda</small>
+          <em>apoio local em destaque</em>
         </div>
         <div class="catalogo-founder-prelude-side side-left" aria-hidden="true">
           <span>apoio local</span>
@@ -778,13 +778,13 @@
           <small>marcas que ajudam a manter o portal de pe</small>
         </div>
         <div class="catalogo-founder-prelude-side side-right" aria-hidden="true">
-          <span>abertura do portal</span>
-          <strong>Presença inteligente</strong>
-          <small>o apoio local aparece com destaque antes da leitura</small>
+          <span>capa do dia</span>
+          <strong>Apoio que fica</strong>
+          <small>marcas locais ajudam a manter a cobertura no ar</small>
         </div>
         <div class="catalogo-founder-prelude-copy">
           <span>apoiadores fundadores</span>
-          <strong>Marcas locais ajudam a acender a tecnologia do portal</strong>
+          <strong>Marcas locais ajudam a manter o jornal vivo</strong>
           <small>Cafe Cruzeiro, Grupo A.S, Dra. Geane Campo e Recommencer</small>
         </div>
         <div class="catalogo-founder-prelude-logos">
@@ -795,7 +795,7 @@
         </div>
         <div class="catalogo-founder-prelude-stage" aria-live="polite">
           <div class="catalogo-founder-prelude-stage-head">
-            <strong>Abertura visual do portal</strong>
+            <strong>Capa do portal</strong>
             <span data-founder-prelude-percent>0%</span>
           </div>
           <div class="catalogo-founder-prelude-stage-bar">
@@ -832,9 +832,9 @@
     const textNode = prelude.querySelector("[data-founder-prelude-text]");
     const steps = [
       "marcas apoiadoras em destaque",
-      "recursos visuais em sintonia",
-      "entrada principal preparada",
-      "home principal pronta"
+      "notícias locais em ordem",
+      "serviços e agenda no lugar",
+      "capa principal pronta"
     ];
     let stepIndex = 0;
     const startedAt = Date.now();
@@ -1071,8 +1071,8 @@
         </div>
 
         <div class="catalogo-visual-copy">
-          <strong>Tecnologia em movimento</strong>
-          <span>IA, curadoria local e recursos visuais trabalham juntos para deixar a entrada no portal mais clara e viva.</span>
+          <strong>Informação local em movimento</strong>
+          <span>Notícias, serviços e agenda do Vale do Juruá organizados para uma leitura rápida e clara.</span>
         </div>
       </div>
     `;
@@ -1134,18 +1134,18 @@
         class="catalogo-welcome-card"
         role="status"
         aria-live="polite"
-        aria-label="Abertura da pagina inicial"
+        aria-label="Carregamento da página inicial"
       >
         ${buildWelcomeVisualMarkup({ compact: true, phone: false })}
         <div class="catalogo-welcome-copy">
-          <p class="catalogo-welcome-kicker">Abertura do portal</p>
-          <h2 id="catalogoInitialLoaderTitle">Abrindo o portal</h2>
+          <p class="catalogo-welcome-kicker">Capa do dia</p>
+          <h2 id="catalogoInitialLoaderTitle">Preparando a leitura</h2>
           <p class="catalogo-welcome-lead">
-            Preparando noticias, fotos e agenda para liberar a leitura sem travar a navegacao.
+            Organizando notícias, fotos e agenda para abrir a home com clareza.
           </p>
           <div class="catalogo-founder-opening" aria-live="polite">
             <div class="catalogo-founder-opening-head">
-              <strong>Experiencia do portal</strong>
+              <strong>Leitura da home</strong>
               <span data-initial-loader-percent>0%</span>
             </div>
             <div class="catalogo-founder-opening-bar">
