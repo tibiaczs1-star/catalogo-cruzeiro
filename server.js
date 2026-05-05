@@ -7987,6 +7987,29 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+function countOfficeOrders() {
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  return Array.isArray(orders) ? orders.length : 0;
+}
+
+function buildProofFile(filePath, label) {
+  try {
+    const stats = fs.statSync(filePath);
+    return {
+      label,
+      path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+      bytes: stats.size,
+      updatedAt: stats.mtime.toISOString()
+    };
+  } catch (_error) {
+    return {
+      label,
+      path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+      missing: true
+    };
+  }
+}
+
 function appendNewsImageApprovalOfficeOrder(decision = {}) {
   const action = cleanShortText(decision.action || "", 60);
   const title = cleanShortText(decision.title || decision.slug || "noticia em revisao", 180);
@@ -8833,6 +8856,7 @@ function applyCheffeCallAction(body = {}) {
   const decisions = Array.isArray(targetSession.decisions) ? targetSession.decisions.slice(0, 32) : [];
   const executableMatch = findCheffeExecutableActionMatch({ agent, title, text: opinion });
   let reviewedAction = null;
+  const actionProofs = [];
 
   const pushLog = (entry) => {
     logs.unshift(normalizeCheffeCallLog({ ...entry, createdAt: now }));
@@ -8854,7 +8878,7 @@ function applyCheffeCallAction(body = {}) {
     });
   };
   const appendActionOrder = (payload = {}) => {
-    appendOfficeOrder({
+    const order = {
       id: createRecordId("ord"),
       from: "Cheffe Call",
       to: cleanShortText(payload.to || `${agent}${office ? ` • ${office}` : ""}`, 120),
@@ -8883,7 +8907,18 @@ function applyCheffeCallAction(body = {}) {
         failed: 0,
         running: action === "implement" ? 1 : 0
       }
+    };
+    appendOfficeOrder(order);
+    actionProofs.push({
+      kind: "office-order-proof",
+      endpoint: "POST /api/cheffe-call/action",
+      file: "data/office-orders.json",
+      orderId: order.id,
+      status: order.status,
+      to: order.to,
+      createdAt: order.createdAt
     });
+    return order;
   };
 
   const maybeRegisterAgentArticleArtifact = () => {
@@ -9103,7 +9138,17 @@ function applyCheffeCallAction(body = {}) {
     approvals: approvals.slice(0, 32),
     logs: logs.slice(0, 64),
     decisions: decisions.slice(0, 32),
-    reviewedActionId: reviewedAction?.id || targetSession.reviewedActionId || ""
+    reviewedActionId: reviewedAction?.id || targetSession.reviewedActionId || "",
+    lastActionProof: {
+      kind: "cheffe-call-action-proof",
+      endpoint: "POST /api/cheffe-call/action",
+      httpStatus: 200,
+      action,
+      sessionId: targetSession.id || sessionId,
+      createdAt: now,
+      officeOrders: actionProofs,
+      reviewedActionId: reviewedAction?.id || ""
+    }
   };
 
   const nextSessions = state.sessions.slice();
@@ -9123,6 +9168,7 @@ function applyCheffeCallAction(body = {}) {
     ok: true,
     action,
     reviewedAction,
+    proof: nextSession.lastActionProof,
     session: payload.meeting.currentSession || null,
     payload
   };
@@ -9528,6 +9574,20 @@ async function startCheffeCallSession(body) {
     getCheffeCallOpinions(agentsPayload, agentInstruction),
     directUrlResearch
   );
+  const sessionId = createRecordId("chef");
+  const openingOrderId = createRecordId("ord");
+  const sessionProof = {
+    kind: "cheffe-call-session-proof",
+    endpoint: "POST /api/cheffe-call/start",
+    httpStatus: 201,
+    sessionId,
+    officeOrderId: openingOrderId,
+    createdAt: now,
+    directUrl: directUrlResearch?.url || "",
+    directUrlStatus: directUrlResearch?.url ? (directUrlResearch.ok ? "pesquisada" : "pendente") : "",
+    directUrlHttpStatus: directUrlResearch?.status || 0,
+    directUrlTitle: directUrlResearch?.title || directUrlResearch?.h1 || directUrlResearch?.description || ""
+  };
   const logs = [
     normalizeCheffeCallLog({
       createdAt: now,
@@ -9551,11 +9611,12 @@ async function startCheffeCallSession(body) {
     );
   }
   const session = {
-    id: createRecordId("chef"),
+    id: sessionId,
     createdAt: now,
     instruction,
     agentInstruction,
     directUrlResearch,
+    proof: sessionProof,
     dailyContext: agentsPayload.dailyContext || null,
     opinions,
     approvals: [],
@@ -9575,7 +9636,7 @@ async function startCheffeCallSession(body) {
   });
 
   appendOfficeOrder({
-    id: createRecordId("ord"),
+    id: openingOrderId,
     from: "Full Admin",
     to: "Cheffe Call + todos os agentes reais",
     priority: cleanShortText(body.priority || "maxima", 40),
@@ -9629,6 +9690,51 @@ function clearCheffeCallSession(body) {
   });
 
   return buildCheffeCallPayload();
+}
+
+function buildRealAgentsExecutionProof(result = {}, options = {}) {
+  const payload = result.payload || {};
+  const runtime = result.summary || {};
+  const summary = payload.summary || {};
+  const imageApprovals = payload.imageApprovals || {};
+  const beforeOrders = Number(options.beforeOrders || 0);
+  const afterOrders = Number(options.afterOrders || beforeOrders);
+  const orderDelta = Math.max(0, afterOrders - beforeOrders);
+  const files = [
+    buildProofFile(REAL_AGENTS_RUN_FILE, "relatorio JSON da runtime"),
+    buildProofFile(REAL_AGENTS_RUN_MD_FILE, "relatorio Markdown da runtime"),
+    buildProofFile(REAL_AGENTS_REGISTRY_FILE, "registro dos agentes"),
+    buildProofFile(REAL_AGENTS_ACTIONS_FILE, "acoes executaveis dos agentes"),
+    buildProofFile(OFFICE_ORDERS_FILE, "fila office-orders")
+  ];
+
+  return {
+    kind: "real-agents-runtime-proof",
+    endpoint: cleanShortText(options.endpoint || "POST /api/real-agents/run", 120),
+    httpStatus: Number(options.httpStatus || 201),
+    trigger: cleanShortText(options.trigger || "manual-painel", 80),
+    generatedAt: cleanShortText(payload.runGeneratedAt || payload.generatedAt || new Date().toISOString(), 80),
+    message: cleanShortText(options.message || "", 500),
+    reportJson: cleanShortText(runtime.reportJson || path.relative(ROOT_DIR, REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"), 180),
+    reportMd: cleanShortText(runtime.reportMd || path.relative(ROOT_DIR, REAL_AGENTS_RUN_MD_FILE).replace(/\\/g, "/"), 180),
+    registry: cleanShortText(runtime.registry || path.relative(ROOT_DIR, REAL_AGENTS_REGISTRY_FILE).replace(/\\/g, "/"), 180),
+    files,
+    totalAgents: Number(summary.totalAgents || runtime.totalAgents || 0),
+    deliveredAgents: Number(summary.deliveredAgents || 0),
+    failedAgents: Number(summary.failedAgents || 0),
+    queueItems: Array.isArray(payload.queue) ? payload.queue.length : 0,
+    ordersBefore: beforeOrders,
+    ordersAfter: afterOrders,
+    orderDelta,
+    ordersReturned: Array.isArray(payload.orders) ? payload.orders.length : 0,
+    officeOrderId: cleanShortText(options.officeOrder?.id || "", 120),
+    application: {
+      imageApprovalsApplied: Number(summary.imageApprovalsApplied || imageApprovals.applied || 0),
+      imageApprovalsSentToAgents: Number(summary.imageApprovalsSentToAgents || imageApprovals.sentToAgents || 0),
+      publishedArticles: Number(summary.publishedArticles || 0),
+      generatedArticles: Number(summary.generatedArticles || 0)
+    }
+  };
 }
 
 function runRealAgentsRuntime(options = {}) {
@@ -11728,13 +11834,14 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
+    const beforeOrders = countOfficeOrders();
     const result = runRealAgentsRuntime({ trigger: "manual-painel" });
     if (!result.ok) {
       return sendJson(res, 500, result);
     }
     runRealAgentsAutonomyCycle("manual-painel");
 
-    appendOfficeOrder({
+    const officeOrder = {
       id: createRecordId("ord"),
       from: "Full Admin",
       to: "Codex CEO + agentes reais",
@@ -11744,15 +11851,27 @@ async function handleApi(req, res, pathname, searchParams) {
       status: "rodada-real-agents-gerada",
       hierarchy: "Full Admin -> Codex CEO -> 181 agentes reais",
       createdAt: new Date().toISOString()
-    });
+    };
+    const nextOrders = appendOfficeOrder(officeOrder);
 
     const payload = result.payload;
+    const executionProof = buildRealAgentsExecutionProof(result, {
+      beforeOrders,
+      afterOrders: nextOrders.length,
+      officeOrder,
+      message: body.message,
+      endpoint: "POST /api/real-agents/run",
+      httpStatus: 201,
+      trigger: "manual-painel"
+    });
     return sendJson(res, 201, {
       ok: true,
       runtime: result.summary,
+      proof: executionProof,
+      executionProof,
       feedback: {
         title: "Agentes reais finalizaram",
-        message: "Runtime executada e painel pronto para recarregar.",
+        message: "Runtime executada com prova: relatório, arquivos e ordem registrada foram retornados no payload.",
         imageApprovalsApplied:
           payload?.summary?.imageApprovalsApplied ?? result.summary?.imageApprovals?.applied ?? 0,
         imageApprovalsSentToAgents:

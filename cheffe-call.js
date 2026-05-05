@@ -461,7 +461,7 @@
         options.text || "A ordem direta, a runtime e a fila deixam o estado aqui, mesmo se o popup for fechado.";
     }
     if (executionControlResolved) executionControlResolved.textContent = summary.resolved || "Nada executado";
-    if (executionControlEvidence) executionControlEvidence.textContent = summary.evidence || "Sem evidência ainda";
+    if (executionControlEvidence) executionControlEvidence.textContent = summary.evidence || "Sem prova ainda";
     if (executionControlPending) executionControlPending.textContent = summary.pending || "Aguardando ordem";
     if (executionControlOrder) executionControlOrder.textContent = summary.order || "Nenhuma";
     if (executionControlLog) {
@@ -494,7 +494,7 @@
       agentResponseSummary.hidden = !summary;
       if (summary) {
         if (agentResponseResolved) agentResponseResolved.textContent = summary.resolved || "Nada confirmado ainda.";
-        if (agentResponseEvidence) agentResponseEvidence.textContent = summary.evidence || "Sem evidência registrada.";
+        if (agentResponseEvidence) agentResponseEvidence.textContent = summary.evidence || "Sem prova registrada.";
         if (agentResponsePending) agentResponsePending.textContent = summary.pending || "Aguardando próxima ação.";
         if (agentResponseOrder) agentResponseOrder.textContent = summary.order || "Nenhuma ordem real gravada.";
       }
@@ -646,7 +646,9 @@
       publicSummary.averageAutonomy ? `Autonomia média ${publicSummary.averageAutonomy}%` : "",
       Number.isFinite(Number(appliedCount)) ? `Foto/foco aplicado: ${appliedCount}` : "",
       Number.isFinite(Number(sentToAgentsCount)) ? `Foto/foco para refazer: ${sentToAgentsCount}` : "",
-      publicSummary.lastRunAt ? `Última runtime: ${formatFeedbackTime(publicSummary.lastRunAt)}` : ""
+      (payload.runGeneratedAt || publicSummary.lastRunAt)
+        ? `Última runtime: ${formatFeedbackTime(payload.runGeneratedAt || publicSummary.lastRunAt)}`
+        : ""
     ];
     return lines.filter(Boolean).join("\n");
   }
@@ -662,21 +664,88 @@
     return 0;
   }
 
+  function firstText(values = []) {
+    const found = values.find((value) => String(value || "").trim());
+    return found === undefined ? "" : String(found || "").trim();
+  }
+
+  function compactProofList(values = [], limit = 6) {
+    return values
+      .map((value) => String(value || "").trim())
+      .filter(Boolean)
+      .slice(0, limit);
+  }
+
   function getRuntimeEvidence(payload = {}) {
     payload = payload || {};
     const runtime = payload.runtime || payload.runtimeSummary || {};
     const runtimeSummary = runtime.summary || runtime;
     const publicSummary = payload.summary || {};
     const feedback = payload.feedback || {};
+    const proof = payload.proof || payload.executionProof || runtime.executionProof || {};
+    const proofApplication = proof.application || {};
     const executionSummary = payload.executionSummary || runtime.executionSummary || {};
     const imageApprovals = runtime.imageApprovals || {};
+    const generatedAt = firstText([
+      proof.generatedAt,
+      payload.generatedAt,
+      payload.runGeneratedAt,
+      publicSummary.generatedAt,
+      publicSummary.lastRunAt,
+      runtimeSummary.generatedAt
+    ]);
+    const reportJson = firstText([proof.reportJson, runtimeSummary.reportJson, payload.reportJson]);
+    const reportMd = firstText([proof.reportMd, runtimeSummary.reportMd, payload.reportMd]);
+    const registry = firstText([proof.registry, runtimeSummary.registry, payload.registry]);
+    const endpoint = firstText([proof.endpoint, payload.endpoint, payload.ok ? "POST /api/real-agents/run" : ""]);
+    const httpStatus = firstText([proof.httpStatus, proof.status, payload.httpStatus, payload.ok ? "201" : ""]);
+    const deliveredAgents = firstFiniteNumber([
+      proof.deliveredAgents,
+      publicSummary.deliveredAgents,
+      runtimeSummary.deliveredAgents,
+      payload.deliveredAgents
+    ]);
+    const totalAgents = firstFiniteNumber([
+      proof.totalAgents,
+      publicSummary.totalAgents,
+      runtimeSummary.totalAgents,
+      payload.totalAgents
+    ]);
+    const failedAgents = firstFiniteNumber([
+      proof.failedAgents,
+      publicSummary.failedAgents,
+      runtimeSummary.failedAgents,
+      payload.failedAgents
+    ]);
+    const queueItems = firstFiniteNumber([
+      proof.queueItems,
+      publicSummary.activeQueue,
+      payload.queueItems,
+      getListCount(payload.queue),
+      getListCount(runtime.queue)
+    ]);
+    const ordersReturned = firstFiniteNumber([
+      proof.ordersReturned,
+      proof.ordersAfter,
+      getListCount(payload.orders),
+      getListCount(runtime.orders)
+    ]);
+    const orderDelta = firstFiniteNumber([proof.orderDelta, payload.orderDelta]);
+    const officeOrderId = firstText([proof.officeOrderId, proof.orderId, payload.officeOrderId]);
+    const proofFiles = compactProofList(
+      Array.isArray(proof.files)
+        ? proof.files.map((file) => file?.path || file?.label || file)
+        : []
+    );
     const changedFilesCount = Math.max(
+      getListCount(proof.changedFiles),
       getListCount(payload.changedFiles),
       getListCount(runtime.changedFiles),
       getListCount(publicSummary.changedFiles),
       getListCount(feedback.changedFiles)
     );
     const artifactsCount = Math.max(
+      getListCount(proof.artifacts),
       getListCount(payload.artifacts),
       getListCount(runtime.artifacts),
       getListCount(publicSummary.artifacts),
@@ -707,34 +776,67 @@
       runtimeSummary.imageApprovalsApplied,
       imageApprovals.applied,
       publicSummary.imageApprovalsApplied,
-      feedback.imageApprovalsApplied
+      feedback.imageApprovalsApplied,
+      proofApplication.imageApprovalsApplied
     ]);
-    const signals = [
-      changedFilesCount > 0 ? `${changedFilesCount} arquivo${changedFilesCount === 1 ? "" : "s"} alterado${changedFilesCount === 1 ? "" : "s"}` : "",
+    const executionSignals = [
+      endpoint ? `${endpoint}${httpStatus ? ` HTTP ${httpStatus}` : ""}` : "",
+      reportJson ? `relatório JSON: ${reportJson}` : "",
+      reportMd ? `relatório MD: ${reportMd}` : "",
+      registry ? `registro de agentes: ${registry}` : "",
+      generatedAt ? `runtime gerada em ${formatFeedbackTime(generatedAt) || generatedAt}` : "",
+      deliveredAgents > 0 ? `${deliveredAgents}${totalAgents ? `/${totalAgents}` : ""} agentes entregaram` : "",
+      failedAgents > 0 ? `${failedAgents} agente${failedAgents === 1 ? "" : "s"} falharam` : "",
+      queueItems > 0 ? `${queueItems} item${queueItems === 1 ? "" : "s"} na fila real` : "",
+      ordersReturned > 0 ? `${ordersReturned} ordem${ordersReturned === 1 ? "" : "s"} retornada${ordersReturned === 1 ? "" : "s"}` : "",
+      orderDelta > 0 ? `${orderDelta} ordem${orderDelta === 1 ? "" : "s"} gravada${orderDelta === 1 ? "" : "s"} em office-orders.json` : "",
+      officeOrderId ? `ordem registrada: ${officeOrderId}` : "",
+      ...proofFiles
+    ].filter(Boolean);
+    const applicationSignals = [
+      changedFilesCount > 0 ? `${changedFilesCount} arquivo${changedFilesCount === 1 ? "" : "s"} de aplicação alterado${changedFilesCount === 1 ? "" : "s"}` : "",
       artifactsCount > 0 ? `${artifactsCount} artefato${artifactsCount === 1 ? "" : "s"} retornado${artifactsCount === 1 ? "" : "s"}` : "",
-      deliveredCount > 0 ? `${deliveredCount} entrega${deliveredCount === 1 ? "" : "s"} registrada${deliveredCount === 1 ? "" : "s"}` : "",
+      deliveredCount > 0 ? `${deliveredCount} entrega${deliveredCount === 1 ? "" : "s"} operacional${deliveredCount === 1 ? "" : "s"} registrada${deliveredCount === 1 ? "" : "s"}` : "",
       generatedCount > 0 ? `${generatedCount} artigo${generatedCount === 1 ? "" : "s"} gerado${generatedCount === 1 ? "" : "s"}` : "",
       publishedCount > 0 ? `${publishedCount} ${publishedCount === 1 ? "publicação confirmada" : "publicações confirmadas"}` : "",
       appliedFocusCount > 0 ? `foto/foco aplicado: ${appliedFocusCount}` : ""
     ].filter(Boolean);
+    const hasExecutionProof = executionSignals.length > 0;
+    const hasApplicationProof = applicationSignals.length > 0;
+    const evidenceLines = [
+      hasExecutionProof ? `Execução provada: ${executionSignals.slice(0, 5).join("; ")}` : "",
+      hasApplicationProof
+        ? `Aplicação provada: ${applicationSignals.join("; ")}`
+        : hasExecutionProof
+          ? "Aplicação/publicação: ainda não provada no alvo final."
+          : ""
+    ].filter(Boolean);
     return {
-      hasEvidence: signals.length > 0,
-      evidence: signals.length
-        ? signals.join("; ")
-        : "Runtime concluiu, mas retornou só resumo operacional. Nenhum arquivo, artefato, publicação ou aplicação foi provado.",
-      pending: signals.length
-        ? "Validar a tela, dado ou rotina afetada antes de encerrar."
-        : "Reenviar com alvo mais específico ou usar Validar resultado para provar a alteração.",
-      signals
+      hasEvidence: hasExecutionProof || hasApplicationProof,
+      hasExecutionProof,
+      hasApplicationProof,
+      evidence: evidenceLines.length
+        ? evidenceLines.join(" ")
+        : "Runtime concluiu, mas não retornou endpoint, relatório, arquivo, contador ou aplicação verificável.",
+      pending: hasApplicationProof
+        ? "Conferir visualmente a tela, dado ou rotina afetada antes de encerrar."
+        : hasExecutionProof
+          ? "Falta provar mudança aplicada/publicada no alvo final. Peça validação por URL, arquivo ou tela específica."
+          : "Reenviar com alvo mais específico ou pedir validação explícita de URL/arquivo/tela.",
+      signals: hasApplicationProof ? applicationSignals : executionSignals,
+      executionSignals,
+      applicationSignals
     };
   }
 
   function buildRuntimeOutcomeSummary(payload = {}, orderText = "", scopeLabel = "ordem") {
     const outcome = getRuntimeEvidence(payload);
     return {
-      resolved: outcome.hasEvidence
-        ? `Runtime da ${scopeLabel} retornou evidência verificável.`
-        : `Runtime da ${scopeLabel} foi rodada, mas ainda não provou implementação.`,
+      resolved: outcome.hasApplicationProof
+        ? `Runtime da ${scopeLabel} provou aplicação no alvo.`
+        : outcome.hasExecutionProof
+          ? `Runtime da ${scopeLabel} tem prova real de execução, mas não de aplicação/publicação.`
+          : `Runtime da ${scopeLabel} foi rodada, mas ainda não provou execução verificável.`,
       evidence: outcome.evidence,
       pending: outcome.pending,
       order: summarizeOneLine(orderText, "Ordem enviada aos agentes.")
@@ -743,6 +845,28 @@
 
   function getRuntimeOutcomeTone(payload = {}) {
     return getRuntimeEvidence(payload).hasEvidence ? "ok" : "pending";
+  }
+
+  function buildSessionProofSummary(payload = {}, replies = [], orderText = "") {
+    const session = payload?.meeting?.currentSession || payload?.session || {};
+    const proof = session.proof || payload.proof || {};
+    const research = session.directUrlResearch || payload.directUrlResearch || {};
+    const lines = [
+      proof.sessionId ? `sessão: ${proof.sessionId}` : session.id ? `sessão: ${session.id}` : "",
+      proof.officeOrderId ? `ordem em office-orders.json: ${proof.officeOrderId}` : "",
+      research.url
+        ? research.ok
+          ? `URL lida HTTP ${research.status}: ${research.title || research.h1 || research.description || research.url}`
+          : `URL não comprovada: ${research.error || research.url}`
+        : "",
+      `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na sessão`
+    ].filter(Boolean);
+    return {
+      resolved: "Ordem direta recebeu resposta analisada e registro rastreável.",
+      evidence: lines.length ? `Resposta provada: ${lines.join("; ")}` : "Resposta registrada, mas sem identificador de sessão retornado.",
+      pending: "Aceitar, ajustar ou rodar agentes para tentar provar aplicação.",
+      order: summarizeOneLine(orderText, "Ordem direta registrada.")
+    };
   }
 
   function getDecisionFeedbackLabel(decision = "") {
@@ -1823,12 +1947,7 @@
       }
       const summary = shouldRunRuntime
         ? buildRuntimeOutcomeSummary(runtimePayload, order.orderText || order.urlText || order.prompt, "ordem direta")
-        : {
-            resolved: "Ordem direta recebeu resposta analisada.",
-            evidence: `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na sala.`,
-            pending: "Aceitar, ajustar ou rodar agentes com esta mesma ordem.",
-            order: summarizeOneLine(order.orderText || order.urlText || order.prompt, "Ordem direta registrada.")
-          };
+        : buildSessionProofSummary(payload, replies, order.orderText || order.urlText || order.prompt);
       const tone = shouldRunRuntime ? getRuntimeOutcomeTone(runtimePayload) : "ok";
       const outcome = shouldRunRuntime ? getRuntimeEvidence(runtimePayload) : null;
       terminalEl.textContent = [
@@ -4218,8 +4337,19 @@
 
   function formatRuntimeDetailsForTerminal(payload = {}, prefix = "") {
     const details = buildRuntimeFeedbackDetails(payload);
+    const outcome = getRuntimeEvidence(payload);
+    const proofBlock = [
+      outcome.executionSignals?.length ? "prova de execução:" : "",
+      ...(outcome.executionSignals || []).map((line) => `- ${line}`),
+      outcome.applicationSignals?.length ? "prova de aplicação:" : "",
+      ...(outcome.applicationSignals || []).map((line) => `- ${line}`),
+      !outcome.applicationSignals?.length && outcome.hasExecutionProof ? "- aplicação/publicação ainda não provada" : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
     return [
       prefix,
+      proofBlock,
       details,
       payload?.feedback?.imageApprovalsApplied !== undefined
         ? `Foto/foco aplicado: ${payload.feedback.imageApprovalsApplied}`
