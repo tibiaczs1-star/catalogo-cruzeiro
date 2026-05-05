@@ -92,11 +92,11 @@ const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-auton
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
 const CHEFFE_CALL_PROMPTS_FILE = path.join(ROOT_DIR, "docs", "cheffe-call-181-prompts.json");
-const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
+const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 8 * 60 * 60 * 1000);
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
-  ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
-  : 5 * 60 * 1000;
-const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "true").toLowerCase() !== "false";
+  ? Math.max(60 * 60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
+  : 8 * 60 * 60 * 1000;
+const REAL_AGENTS_AUTO_RUN_DISABLED = String(process.env.REAL_AGENTS_AUTO_RUN_DISABLED || "false").toLowerCase() !== "false";
 const ARTICLE_INTEGRITY_INTERVAL_INPUT = Number(process.env.ARTICLE_INTEGRITY_INTERVAL_MS || 30 * 60 * 1000);
 const ARTICLE_INTEGRITY_INTERVAL_MS = Number.isFinite(ARTICLE_INTEGRITY_INTERVAL_INPUT)
   ? Math.max(5 * 60 * 1000, ARTICLE_INTEGRITY_INTERVAL_INPUT)
@@ -121,6 +121,16 @@ const realAgentsAutonomyState = {
   lastError: "",
   cycles: 0
 };
+const rssRuntimeRefreshState = {
+  running: false,
+  startedAt: "",
+  lastRunAt: "",
+  lastSuccessAt: "",
+  lastError: "",
+  cycles: 0,
+  lastReport: null
+};
+let rssRuntimeRefreshPromise = null;
 const articleIntegrityAutoState = {
   running: false,
   timer: null,
@@ -702,6 +712,22 @@ const RSS_SOURCES = (() => {
 const NEWS_REFRESH_INTERVAL_MS = Math.max(
   1000 * 60 * 5,
   Number(process.env.NEWS_REFRESH_INTERVAL_MS || 1000 * 60 * 15)
+);
+const NEWS_REFRESH_CONCURRENCY = Math.max(
+  1,
+  Math.min(8, Number(process.env.NEWS_REFRESH_CONCURRENCY || 6))
+);
+const NEWS_REFRESH_IMAGE_ENRICH_LIMIT = Math.max(
+  0,
+  Math.min(120, Number(process.env.NEWS_REFRESH_IMAGE_ENRICH_LIMIT || 48))
+);
+const NEWS_REFRESH_ARCHIVE_LIMIT = Math.max(
+  200,
+  Math.min(1500, Number(process.env.NEWS_REFRESH_ARCHIVE_LIMIT || 1000))
+);
+const NEWS_REFRESH_ACTIVE_LIMIT = Math.max(
+  120,
+  Math.min(NEWS_REFRESH_ARCHIVE_LIMIT, Number(process.env.NEWS_REFRESH_ACTIVE_LIMIT || 420))
 );
 const TOPIC_FEED_TTL_MS = Math.max(
   1000 * 60 * 5,
@@ -4683,48 +4709,193 @@ function fetchRssFeed(feedUrl, options = {}) {
   return fetchRemoteText(feedUrl, { timeoutMs: 4500, maxBytes: 1200000, ...options });
 }
 
-async function refreshRssRuntime(limitPerSource = 30) {
-  const reports = [];
-  const items = [];
+function getRefreshItemKey(item = {}) {
+  return String(
+    item.sourceUrl ||
+      item.url ||
+      item.link ||
+      item.id ||
+      item.slug ||
+      item.title ||
+      ""
+  ).trim();
+}
 
-  for (const source of RSS_SOURCES) {
-    try {
-      const xml = await fetchRssFeed(source.feedUrl);
-      const parsedItems = parseRssItems(xml, source).slice(0, limitPerSource);
-      items.push(...parsedItems);
-      reports.push({ source: source.id, ok: true, count: parsedItems.length });
-    } catch (error) {
-      reports.push({ source: source.id, ok: false, error: String(error?.message || "falha") });
-    }
+async function collectRssSourceItems(source, limitPerSource) {
+  try {
+    const xml = await fetchRssFeed(source.feedUrl);
+    const parsedItems = parseRssItems(xml, source).slice(0, limitPerSource);
+    return {
+      source: source.id,
+      ok: true,
+      count: parsedItems.length,
+      items: parsedItems
+    };
+  } catch (error) {
+    return {
+      source: source.id,
+      ok: false,
+      count: 0,
+      error: String(error?.message || "falha").slice(0, 220),
+      items: []
+    };
   }
+}
 
+function dedupeRefreshItems(items = []) {
   const deduped = [];
   const seen = new Set();
+
   items.forEach((item) => {
-    const key = item.url || item.sourceUrl || item.title;
+    const key = getRefreshItemKey(item);
     if (!key || seen.has(key)) return;
     seen.add(key);
     deduped.push(item);
   });
 
-  const enrichedItems = repairNewsImagesForDisplay(
-    (await enrichNewsItemsWithSourceImages(deduped))
-      .map(normalizeArticleRecord)
-      .map(sanitizePublicPortugueseRuntimeItem)
-  );
+  return deduped;
+}
 
-  const payload = {
-    lastAttemptAt: new Date().toISOString(),
-    lastSuccessAt: enrichedItems.length ? new Date().toISOString() : null,
-    items: enrichedItems,
-    reports
+async function normalizeFreshRssItems(items = []) {
+  const imageEnrichLimit = Math.min(NEWS_REFRESH_IMAGE_ENRICH_LIMIT, items.length);
+  const itemsForPreview = items.slice(0, imageEnrichLimit);
+  let imageEnrichError = "";
+  let enrichedPreviewItems = itemsForPreview;
+
+  if (itemsForPreview.length) {
+    try {
+      enrichedPreviewItems = await withPromiseTimeout(
+        enrichNewsItemsWithSourceImages(itemsForPreview),
+        25000,
+        "image_enrich_timeout"
+      );
+    } catch (error) {
+      imageEnrichError = String(error?.message || error || "image_enrich_failed").slice(0, 220);
+      enrichedPreviewItems = itemsForPreview;
+    }
+  }
+
+  const enrichedByKey = new Map();
+  enrichedPreviewItems.forEach((item) => {
+    const key = getRefreshItemKey(item);
+    if (key) enrichedByKey.set(key, item);
+  });
+
+  const normalizedItems = items
+    .map((item) => enrichedByKey.get(getRefreshItemKey(item)) || item)
+    .map(normalizeArticleRecord)
+    .map(sanitizePublicPortugueseRuntimeItem);
+
+  return {
+    items: repairNewsImagesForDisplay(normalizedItems),
+    imageEnrichError,
+    imageEnriched: enrichedPreviewItems.length
+  };
+}
+
+function mergeRefreshArchiveItems(freshItems = [], existingItems = []) {
+  const map = new Map();
+  const addItem = (item) => {
+    const normalized = normalizeArticleRecord(item);
+    const key = getArticleStorageKey(normalized);
+    if (key) {
+      upsertCrossedArticleRecord(map, key, normalized);
+    }
   };
 
-  writeJson(path.join(DATA_DIR, "runtime-news.json"), payload);
-  if (enrichedItems.length) {
-    writeStaticNewsData(enrichedItems);
+  existingItems.forEach(addItem);
+  freshItems.forEach(addItem);
+
+  return Array.from(map.values())
+    .sort(sortArticleItems)
+    .slice(0, NEWS_REFRESH_ARCHIVE_LIMIT);
+}
+
+async function runRssRuntimeRefresh(limitPerSource = 30, { trigger = "manual" } = {}) {
+  const startedAt = new Date().toISOString();
+  rssRuntimeRefreshState.running = true;
+  rssRuntimeRefreshState.startedAt = startedAt;
+  rssRuntimeRefreshState.lastError = "";
+
+  const sourceResults = await mapWithConcurrency(
+    RSS_SOURCES,
+    NEWS_REFRESH_CONCURRENCY,
+    (source) => collectRssSourceItems(source, limitPerSource)
+  );
+  const reports = sourceResults.map(({ items: _items, ...report }) => report);
+  const freshRawItems = dedupeRefreshItems(sourceResults.flatMap((result) => result.items));
+  const normalizedFresh = await normalizeFreshRssItems(freshRawItems);
+  const existingItems = getRawNewsItems();
+  const archiveItems = mergeRefreshArchiveItems(normalizedFresh.items, existingItems);
+  const activeWindowItems = archiveItems.slice(0, NEWS_REFRESH_ACTIVE_LIMIT);
+  const finishedAt = new Date().toISOString();
+  const ok = normalizedFresh.items.length > 0 || archiveItems.length > 0;
+  let staticWriteError = "";
+
+  const payload = {
+    lastAttemptAt: startedAt,
+    lastSuccessAt: normalizedFresh.items.length ? finishedAt : null,
+    source: "server-rss-auto-24h",
+    trigger,
+    activeWindowItems,
+    items: archiveItems,
+    reports,
+    refresh: {
+      ok,
+      trigger,
+      startedAt,
+      finishedAt,
+      sourceCount: RSS_SOURCES.length,
+      sourceOk: reports.filter((report) => report.ok).length,
+      freshItems: normalizedFresh.items.length,
+      archiveItems: archiveItems.length,
+      activeWindowItems: activeWindowItems.length,
+      imageEnriched: normalizedFresh.imageEnriched,
+      imageEnrichError: normalizedFresh.imageEnrichError
+    }
+  };
+
+  if (archiveItems.length) {
+    writeJson(path.join(DATA_DIR, "runtime-news.json"), payload);
+    writeJson(path.join(DATA_DIR, "news-archive.json"), archiveItems);
+    try {
+      writeStaticNewsData(archiveItems);
+    } catch (error) {
+      staticWriteError = String(error?.message || error || "static_write_failed").slice(0, 220);
+    }
+    newsApiResponseCache.clear();
   }
+
+  payload.refresh.staticWriteError = staticWriteError;
+  rssRuntimeRefreshState.running = false;
+  rssRuntimeRefreshState.lastRunAt = finishedAt;
+  rssRuntimeRefreshState.lastSuccessAt = normalizedFresh.items.length ? finishedAt : rssRuntimeRefreshState.lastSuccessAt;
+  rssRuntimeRefreshState.lastError = ok ? "" : "sem-itens-rss-e-sem-arquivo-local";
+  rssRuntimeRefreshState.cycles += 1;
+  rssRuntimeRefreshState.lastReport = payload.refresh;
+
   return payload;
+}
+
+function refreshRssRuntime(limitPerSource = 30, options = {}) {
+  if (rssRuntimeRefreshPromise) {
+    return rssRuntimeRefreshPromise;
+  }
+
+  rssRuntimeRefreshPromise = runRssRuntimeRefresh(limitPerSource, options)
+    .catch((error) => {
+      const message = String(error?.message || error || "falha").slice(0, 240);
+      rssRuntimeRefreshState.running = false;
+      rssRuntimeRefreshState.lastRunAt = new Date().toISOString();
+      rssRuntimeRefreshState.lastError = message;
+      rssRuntimeRefreshState.cycles += 1;
+      throw error;
+    })
+    .finally(() => {
+      rssRuntimeRefreshPromise = null;
+    });
+
+  return rssRuntimeRefreshPromise;
 }
 
 function getTopicFeedCacheFile(topic) {
@@ -8568,6 +8739,18 @@ function buildRealAgentsPayload() {
       cycles: realAgentsAutonomyState.cycles,
       report: autonomyReport
     },
+    newsRefresh: {
+      enabled: RSS_SOURCES.length > 0,
+      running: rssRuntimeRefreshState.running,
+      intervalMs: NEWS_REFRESH_INTERVAL_MS,
+      fullAgentsIntervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
+      startedAt: rssRuntimeRefreshState.startedAt,
+      lastRunAt: rssRuntimeRefreshState.lastRunAt,
+      lastSuccessAt: rssRuntimeRefreshState.lastSuccessAt,
+      lastError: rssRuntimeRefreshState.lastError,
+      cycles: rssRuntimeRefreshState.cycles,
+      lastReport: rssRuntimeRefreshState.lastReport
+    },
     offices: Array.isArray(registry?.offices) ? registry.offices : [],
     roles: Array.isArray(registry?.roles) ? registry.roles : [],
     agents: agents.map((agent) => ({
@@ -9878,6 +10061,7 @@ function buildCheffeCallPayload() {
     orders: Array.isArray(agentsPayload.orders) ? agentsPayload.orders : [],
     autoRun: agentsPayload.autoRun || null,
     autonomyRunner: agentsPayload.autonomyRunner || null,
+    newsRefresh: agentsPayload.newsRefresh || null,
     awards: agentsPayload.awards || null,
     scoreboard: agentsPayload.scoreboard || null,
     ecosystemStudy: agentsPayload.ecosystemStudy || null,
@@ -10140,7 +10324,7 @@ function runRealAgentsRuntime(options = {}) {
   }
 }
 
-function runRealAgentsAutoCycle(trigger) {
+async function runRealAgentsAutoCycle(trigger) {
   if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.running) return;
   if (readCheffeCallState().active) {
     realAgentsAutoRunState.lastError = "Cheffe Call ativo: runtime automatica pausada para reuniao.";
@@ -10149,17 +10333,26 @@ function runRealAgentsAutoCycle(trigger) {
 
   realAgentsAutoRunState.running = true;
   realAgentsAutoRunState.startedAt = new Date().toISOString();
-  const result = runRealAgentsRuntime({ trigger });
-  realAgentsAutoRunState.running = false;
-  realAgentsAutoRunState.lastRunAt = new Date().toISOString();
-  realAgentsAutoRunState.cycles += 1;
-  realAgentsAutoRunState.lastError = result.ok ? "" : result.error || "Falha ao rodar agentes reais.";
+  try {
+    await refreshRssRuntime(80, { trigger: `agentes-${trigger}` });
+    const result = runRealAgentsRuntime({ trigger });
+    realAgentsAutoRunState.lastRunAt = new Date().toISOString();
+    realAgentsAutoRunState.cycles += 1;
+    realAgentsAutoRunState.lastError = result.ok ? "" : result.error || "Falha ao rodar agentes reais.";
 
-  if (result.ok) {
-    console.log(`[catalogo] agentes reais atualizados (${trigger})`);
-    runRealAgentsAutonomyCycle(`runtime-${trigger}`);
-  } else {
-    console.warn(`[catalogo] falha no ciclo dos agentes reais (${trigger}): ${realAgentsAutoRunState.lastError}`);
+    if (result.ok) {
+      console.log(`[catalogo] busca total e agentes atualizados (${trigger})`);
+      runRealAgentsAutonomyCycle(`runtime-${trigger}`);
+    } else {
+      console.warn(`[catalogo] falha no ciclo dos agentes reais (${trigger}): ${realAgentsAutoRunState.lastError}`);
+    }
+  } catch (error) {
+    realAgentsAutoRunState.lastRunAt = new Date().toISOString();
+    realAgentsAutoRunState.cycles += 1;
+    realAgentsAutoRunState.lastError = String(error?.message || error || "Falha ao rodar busca total e agentes.");
+    console.warn(`[catalogo] falha na busca total dos agentes (${trigger}): ${realAgentsAutoRunState.lastError}`);
+  } finally {
+    realAgentsAutoRunState.running = false;
   }
 }
 
@@ -10194,11 +10387,11 @@ function startRealAgentsAutoRunner() {
   if (REAL_AGENTS_AUTO_RUN_DISABLED || realAgentsAutoRunState.timer) return;
 
   realAgentsAutoRunState.timer = setInterval(() => {
-    runRealAgentsAutoCycle("auto-5-minutos");
+    runRealAgentsAutoCycle("auto-8-horas").catch(() => {});
   }, REAL_AGENTS_AUTO_RUN_INTERVAL_MS);
 
   setTimeout(() => {
-    runRealAgentsAutoCycle("auto-inicializacao");
+    runRealAgentsAutoCycle("auto-inicializacao").catch(() => {});
   }, Math.min(15 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_MS));
 }
 
@@ -14541,7 +14734,9 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!requireAdmin(req)) return sendAdminUnauthorized(res);
     const body = await parseBody(req);
     const limit = Number(body.limit || 18);
-    const payload = await refreshRssRuntime(Math.max(5, Math.min(80, limit)));
+    const payload = await refreshRssRuntime(Math.max(5, Math.min(80, limit)), {
+      trigger: cleanShortText(body.trigger || "admin", 80)
+    });
     return sendJson(res, 200, { ok: true, ...payload });
   }
 
@@ -14638,9 +14833,9 @@ function handleStatic(req, res, pathname, requestUrl) {
 ensureDataDir();
 loadImagePreviewCache();
 if (RSS_SOURCES.length) {
-  refreshRssRuntime().catch(() => {});
+  refreshRssRuntime(30, { trigger: "startup-light" }).catch(() => {});
   setInterval(() => {
-    refreshRssRuntime().catch(() => {});
+    refreshRssRuntime(30, { trigger: "auto-light" }).catch(() => {});
   }, NEWS_REFRESH_INTERVAL_MS);
 }
 

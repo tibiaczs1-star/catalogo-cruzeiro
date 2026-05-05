@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const https = require("node:https");
 const path = require("node:path");
+const { collectLatestNewsItems } = require("./capture-latest-news");
 
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DATA_DIR = path.join(ROOT_DIR, "data");
@@ -695,9 +696,21 @@ async function loadOnlineNewsArchive() {
 async function runReRodadaDiaGeral() {
   const startedAt = new Date().toISOString();
   const localHints = buildLocalArticleHints();
+  let directCapturePayload = { ok: false, items: [], reports: [] };
+  let directCaptureError = "";
+  try {
+    directCapturePayload = await collectLatestNewsItems({
+      limitPerSource: Math.max(5, Math.min(80, Number(process.env.CATALOGO_CAPTURE_LIMIT_PER_SOURCE || 30)))
+    });
+  } catch (error) {
+    directCaptureError = String(error?.message || error).slice(0, 240);
+  }
   const onlinePayload = await loadOnlineNews();
   const onlineArchivePayload = await loadOnlineNewsArchive();
-  const onlineItems = Array.isArray(onlinePayload.items) ? onlinePayload.items : [];
+  const onlineItems = mergeNewsCollections(
+    directCapturePayload.items,
+    Array.isArray(onlinePayload.items) ? onlinePayload.items : []
+  );
   const onlineArchiveItems = Array.isArray(onlineArchivePayload.items) ? onlineArchivePayload.items : [];
   const onlineAuditBefore = auditItems(onlineItems);
   const repaired = repairImages(applyLocalArticleHints(onlineItems, localHints));
@@ -707,7 +720,11 @@ async function runReRodadaDiaGeral() {
     previousArchiveItems.map((item) => [String(item.slug || item.id || item.title || ""), hashString(JSON.stringify(item || {}))])
   );
 
-  const combinedOnlineArchive = mergeNewsCollections(onlineArchiveItems, prioritizedItems).map(sanitizeReviewCopy);
+  const combinedOnlineArchive = mergeNewsCollections(
+    onlineArchiveItems,
+    directCapturePayload.items,
+    prioritizedItems
+  ).map(sanitizeReviewCopy);
   const archiveMissingRepair = repairMissingImages(combinedOnlineArchive);
   const archiveItems = archiveMissingRepair.items;
   const onlineAuditAfterLocalRepair = auditItems(prioritizedItems);
@@ -745,6 +762,9 @@ async function runReRodadaDiaGeral() {
         sourceName: "Render online",
         ok: true,
         fetched: onlineItems.length,
+        directCaptured: directCapturePayload.items.length,
+        directCaptureOk: Boolean(directCapturePayload.ok),
+        directCaptureError,
         fetchedArchive: onlineArchiveItems.length,
         onlineArchiveTotal: Number(onlineArchivePayload?.archiveTotal || onlineArchivePayload?.total || onlineArchiveItems.length || 0),
         onlineArchiveReturned: Number(onlineArchivePayload?.returned || onlineArchiveItems.length || 0),
@@ -773,6 +793,12 @@ async function runReRodadaDiaGeral() {
     cachedArchiveFallback: Boolean(onlineArchivePayload?.cachedFallback),
     cachedArchiveFallbackReason: onlineArchivePayload?.cachedFallbackReason || "",
     onlineAuditBefore,
+    directCapture: {
+      ok: Boolean(directCapturePayload.ok),
+      capturedItems: directCapturePayload.items.length,
+      error: directCaptureError,
+      reports: directCapturePayload.reports
+    },
     onlineArchiveAuditBefore: auditItems(onlineArchiveItems),
     localAuditAfterSync: onlineAuditAfterLocalRepair,
     archiveAuditAfterSync,

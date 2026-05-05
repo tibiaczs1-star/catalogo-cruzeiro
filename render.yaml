@@ -24,7 +24,11 @@ services:
       - key: REAL_AGENTS_AUTO_RUN_DISABLED
         value: "false"
       - key: REAL_AGENTS_AUTO_RUN_INTERVAL_MS
-        value: "300000"
+        value: "28800000"
+      - key: NEWS_REFRESH_INTERVAL_MS
+        value: "900000"
+      - key: NEWS_REFRESH_IMAGE_ENRICH_LIMIT
+        value: "48"
       - key: ADMIN_TOKEN
         sync: false
       - key: SUPER_ADMIN_USER
