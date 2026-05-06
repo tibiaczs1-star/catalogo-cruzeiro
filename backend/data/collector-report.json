@@ -286,11 +286,24 @@
         "collected": 0,
         "total": 20
       }
+    },
+    {
+      "time": "2026-05-06T22:11:10.242Z",
+      "news": {
+        "previous": 16,
+        "collected": 214,
+        "total": 16
+      },
+      "business": {
+        "previous": 20,
+        "collected": 0,
+        "total": 20
+      }
     }
   ],
   "totals": {
     "news": 16,
     "businesses": 20
   },
-  "lastUpdate": "2026-05-06T17:56:26.126Z"
+  "lastUpdate": "2026-05-06T22:11:10.242Z"
 }
