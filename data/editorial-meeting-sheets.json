@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-05T00:00:00.000Z",
+  "sheets": [
+    {
+      "id": "meeting-cheffe-editorial-flow-20260505",
+      "title": "Fluxo editorial por cenas da Cheffe Call",
+      "gate": "P1",
+      "owner": "Cheffe Call",
+      "sourceStatus": "treinamento editorial ativo; revisar fontes, idioma, risco e prova antes de publicar",
+      "reviewStatus": "ativo",
+      "correctionStatus": "registrar correcao quando uma revisao ja foi sanada",
+      "nextReviewAt": "2026-05-06T00:00:00.000Z",
+      "createdAt": "2026-05-05T00:00:00.000Z",
+      "updatedAt": "2026-05-05T00:00:00.000Z",
+      "sceneFlow": [
+        "pendencias",
+        "abertura",
+        "opinioes",
+        "decisao",
+        "relatorios",
+        "ordens",
+        "website",
+        "agentes",
+        "premiacao"
+      ]
+    }
+  ]
+}

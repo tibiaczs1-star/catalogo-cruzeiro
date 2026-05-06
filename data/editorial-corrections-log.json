@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-05T00:00:00.000Z",
+  "corrections": [
+    {
+      "id": "cor-topic-feed-study-pt-20260505",
+      "status": "corrigido",
+      "severity": "alta",
+      "title": "Texto publico em ingles removido do feed de estudos",
+      "file": "data/topic-feed-study.json",
+      "before": "Lede e resumo apareciam em ingles em uma chamada publica do feed de educacao/estudos.",
+      "after": "Chamada reescrita em portugues, com contexto local e linguagem de noticia.",
+      "publicNote": "Correcao registrada para manter todo texto publico do Jornal em portugues e com criterio editorial.",
+      "correctedAt": "2026-05-05T00:00:00.000Z"
+    }
+  ]
+}

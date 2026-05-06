@@ -69,22 +69,15 @@
         .page-shell {
           opacity: 1 !important;
           transform: none !important;
-          visibility: visible !important;
-          pointer-events: auto !important;
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260504-loader-gate1" />
+    <link rel="stylesheet" href="./styles.css?v=20260503-radar-continuity3" />
   <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
   <link rel="stylesheet" href="./premium-clarity.css?v=20260504-trending-continuity1" />
 </head>
-  <body class="editorial-home founder-prelude-pending catalogo-site-booting">
-    <div
-      class="logo-splash"
-      role="status"
-      aria-live="polite"
-      aria-label="Preparando o Catálogo Cruzeiro do Sul"
-    >
+  <body class="editorial-home founder-prelude-pending">
+    <div class="logo-splash" aria-hidden="true">
       <div class="logo-splash-noise"></div>
       <div class="logo-splash-orbit orbit-a"></div>
       <div class="logo-splash-orbit orbit-b"></div>
@@ -180,14 +173,11 @@
           </div>
         </div>
         <p class="logo-splash-copy">
-          Notícias, serviços e agenda local reunidos em uma abertura visual feita para Cruzeiro do Sul e o Vale do Juruá.
+          Tudo que importa em Cruzeiro do Sul e no Vale do Juruá, reunido para você começar bem informado.
         </p>
         <div class="logo-splash-meta">
           <span id="logo-splash-status">Preparando os destaques do dia</span>
-          <span class="logo-splash-readiness">
-            <span id="logo-splash-date">Montando capa</span>
-            <strong id="logo-splash-percent">0%</strong>
-          </span>
+          <span id="logo-splash-date">Montando capa</span>
         </div>
         <div class="logo-splash-progress" aria-hidden="true">
           <span></span>
@@ -958,7 +948,7 @@
           <!-- NOVO HERO MOSAICO -->
           <section class="mosaic-hero reveal" aria-label="Capa da edição">
             <div class="mosaic-intro">
-              <span class="mosaic-edition">Edição visual • 23 abr 2026</span>
+              <span class="mosaic-edition">Seleção do dia • 23 abr 2026</span>
               <p class="mosaic-strap">
                 Destaques que ajudam a entender o clima de Cruzeiro do Sul e o que movimenta a região agora.
               </p>
@@ -1024,7 +1014,7 @@
                       <span class="mosaic-source">fonte local</span>
                     </div>
                     <div class="mosaic-copy compact">
-                      <h3>Atualização de saúde entra na edição visual</h3>
+                      <h3>Atualização de saúde entra no radar do dia</h3>
                       <p>Serviço, atendimento e agenda pública aparecem com leitura rápida.</p>
                     </div>
                     <div class="mosaic-bottomline">
@@ -1059,7 +1049,7 @@
                     </div>
                     <div class="mosaic-copy compact">
                       <h3>Educação e oportunidades seguem na vitrine</h3>
-                      <p>Calendário, escolas e chamadas públicas entram no recorte visual.</p>
+                      <p>Calendário, escolas e chamadas públicas entram na mesma seleção.</p>
                     </div>
                     <div class="mosaic-bottomline">
                       <span class="mosaic-action">Ler cobertura</span>
@@ -1092,7 +1082,7 @@
                       <span class="mosaic-source">fonte local</span>
                     </div>
                     <div class="mosaic-copy compact">
-                      <h3>Cotidiano também entra na área visual</h3>
+                      <h3>Cotidiano também aparece na capa</h3>
                       <p>Bairros, trânsito, clima e serviço público ficam fáceis de abrir.</p>
                     </div>
                     <div class="mosaic-bottomline">
@@ -1109,8 +1099,8 @@
                       <span class="mosaic-source">fonte local</span>
                     </div>
                     <div class="mosaic-copy compact">
-                      <h3>Repercussão local completa a seleção visual</h3>
-                      <p>A edição visual pode repetir destaques do hero somente aqui.</p>
+                      <h3>Repercussão local completa a seleção do dia</h3>
+                      <p>A capa reúne destaque principal, serviço e repercussão em um mesmo bloco.</p>
                     </div>
                     <div class="mosaic-bottomline">
                       <span class="mosaic-action">Ler cobertura</span>
@@ -2085,6 +2075,10 @@
                   Enviar revisão pelo WhatsApp
                 </a>
                 <a class="outline-button" href="./remocao.html">Solicitar pela página</a>
+              </div>
+              <div class="public-corrections-log" id="public-corrections-log" aria-live="polite">
+                <strong>Correções públicas</strong>
+                <p>Carregando registros recentes da redação.</p>
               </div>
             </article>
           </div>
@@ -3128,7 +3122,7 @@
               />
               <div class="founder-banner-copy">
                 <strong>Cafe Cruzeiro</strong>
-                <p>Parceiro de abertura com presenca visual na experiencia do portal.</p>
+                <p>Parceiro fundador no apoio à cobertura local do portal.</p>
               </div>
             </article>
             <article class="founder-banner-card founder-banner-card-grupoas">
@@ -3505,43 +3499,7 @@
         .then((response) => (response.ok ? response.json() : null))
         .catch(() => null);
     </script>
-    <script>
-      (function () {
-        window.__CATALOGO_SPLASH_FORCE_RELEASE__ = function (reason) {
-          document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
-          document.body.classList.add("site-loaded", "mobile-intro-ready");
-
-          const splash = document.querySelector(".logo-splash");
-          const status = document.querySelector("#logo-splash-status");
-          const percent = document.querySelector("#logo-splash-percent");
-          const bar = document.querySelector(".logo-splash-progress span");
-
-          if (splash) {
-            splash.dataset.progress = "100";
-            splash.style.setProperty("--splash-progress", "100%");
-            splash.setAttribute("aria-hidden", "true");
-            splash.dataset.releaseReason = reason || "failsafe";
-          }
-
-          if (status) {
-            status.textContent = "Portal pronto para abrir";
-          }
-
-          if (percent) {
-            percent.textContent = "100%";
-          }
-
-          if (bar) {
-            bar.style.width = "100%";
-          }
-        };
-
-        window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
-          window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, 18000);
-      })();
-    </script>
-    <script defer src="./script.js?v=20260504-loader-gate1"></script>
+    <script defer src="./script.js?v=20260504-trending-continuity1"></script>
     <script>
       (function () {
         const styles = [
@@ -3563,7 +3521,7 @@
           "./home-header-blue-restore.css?v=20260422a"
         ];
         const queue = [
-          "./startup-experience.js?v=20260501-home-real-brasil1",
+          "./startup-experience.js?v=20260505-copy-abertura1",
           "./sidebar-data.js?v=20260413a",
           "./sidebar-widgets-recovery.js?v=20260423a",
           "./social-rss-data.js?v=20260413a",
@@ -3573,85 +3531,27 @@
           "deferred-home-boot.js?v=20260424startup-office-loader",
           "./news-data.js?v=20260429-news-capture3"
         ];
-        const totalSteps = styles.length + queue.length;
-        const bootState = (window.__CATALOGO_DEFERRED_BOOT_STATE__ = {
-          completed: 0,
-          done: false,
-          started: false,
-          total: totalSteps
-        });
-        window.__CATALOGO_DEFERRED_BOOT_DONE__ = false;
-        let resolveDeferredBoot;
-        window.__CATALOGO_DEFERRED_BOOT_PROMISE__ = new Promise((resolve) => {
-          resolveDeferredBoot = resolve;
-        });
-        const notifyProgress = (label) => {
-          window.dispatchEvent(
-            new CustomEvent("catalogo:deferred-boot-progress", {
-              detail: {
-                completed: bootState.completed,
-                done: bootState.done,
-                label,
-                total: bootState.total
-              }
-            })
-          );
-        };
-        const completeStep = (label) => {
-          bootState.completed = Math.min(bootState.total, bootState.completed + 1);
-          notifyProgress(label);
-        };
         const loadScript = (src) =>
           new Promise((resolve) => {
             const script = document.createElement("script");
             script.src = src;
             script.async = true;
-            script.onload = () => {
-              completeStep("módulos finais prontos");
-              resolve();
-            };
-            script.onerror = () => {
-              completeStep("módulos finais conferidos");
-              resolve();
-            };
+            script.onload = resolve;
+            script.onerror = resolve;
             document.body.appendChild(script);
           });
-        const loadStyle = (href) =>
-          new Promise((resolve) => {
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = href;
-            link.onload = () => {
-              completeStep("estilos visuais prontos");
-              resolve();
-            };
-            link.onerror = () => {
-              completeStep("estilos visuais conferidos");
-              resolve();
-            };
-            document.head.appendChild(link);
-          });
+        const loadStyle = (href) => {
+          const link = document.createElement("link");
+          link.rel = "stylesheet";
+          link.href = href;
+          document.head.appendChild(link);
+        };
         const run = async () => {
-          if (bootState.started) {
-            return;
-          }
-          bootState.started = true;
-          notifyProgress("organizando estilos visuais");
-          await Promise.all(styles.map(loadStyle));
+          styles.forEach(loadStyle);
           for (const src of queue) {
             await loadScript(src);
           }
-          bootState.done = true;
-          window.__CATALOGO_DEFERRED_BOOT_DONE__ = true;
-          bootState.completed = bootState.total;
-          notifyProgress("edição editorial pronta");
           window.dispatchEvent(new Event("catalogo:deferred-news-ready"));
-          window.dispatchEvent(
-            new CustomEvent("catalogo:deferred-assets-ready", {
-              detail: bootState
-            })
-          );
-          resolveDeferredBoot(bootState);
         };
         const start = () => window.setTimeout(run, 700);
         if (document.readyState === "complete") {

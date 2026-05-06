@@ -11,17 +11,20 @@ const DEFAULT_DATA_DIR = path.join(ROOT_DIR, "data");
 const DATA_DIR = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : DEFAULT_DATA_DIR;
 const AGENTS_DIR = path.join(ROOT_DIR, ".codex-agents");
 const AGENT_FILES_DIR = path.join(AGENTS_DIR, "agents");
-const RUNTIME_DIR = path.join(ROOT_DIR, ".codex-temp", "real-agents");
+const LEGACY_RUNTIME_DIR = path.join(ROOT_DIR, ".codex-temp", "real-agents");
 const REGISTRY_FILE = path.join(AGENTS_DIR, "registry.json");
-const RUN_FILE = path.join(RUNTIME_DIR, "latest-run.json");
-const RUN_MD_FILE = path.join(RUNTIME_DIR, "latest-run.md");
-const AGENT_ARTIFACTS_DIR = path.join(RUNTIME_DIR, "artifacts");
+const RUN_FILE = path.join(DATA_DIR, "real-agents-latest-run.json");
+const RUN_MD_FILE = path.join(DATA_DIR, "real-agents-latest-run.md");
+const LEGACY_RUN_FILE = path.join(LEGACY_RUNTIME_DIR, "latest-run.json");
+const LEGACY_RUN_MD_FILE = path.join(LEGACY_RUNTIME_DIR, "latest-run.md");
+const AGENT_ARTIFACTS_DIR = path.join(LEGACY_RUNTIME_DIR, "artifacts");
 const AGENT_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
 const RUNTIME_NEWS_FILE = path.join(DATA_DIR, "runtime-news.json");
 const ARCHIVE_NEWS_FILE = path.join(DATA_DIR, "news-archive.json");
 const AGENT_MEMORY_FILE = path.join(DATA_DIR, "real-agents-memory.json");
 const AGENT_SCOREBOARD_FILE = path.join(DATA_DIR, "real-agents-scoreboard.json");
 const OFFICE_ORDERS_FILE = path.join(DATA_DIR, "office-orders.json");
+const EDITORIAL_TRAINING_FILE = path.join(DATA_DIR, "real-agents-editorial-training.json");
 const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(DATA_DIR, "news-image-focus-decisions.json");
 const HEARTBEATS_FILE = path.join(DATA_DIR, "heartbeats.json");
 const REVIEW_REPORT_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
@@ -165,31 +168,6 @@ function readJson(filePath, fallback) {
   }
 }
 
-function readCurrentReviewReport() {
-  const fallback = { issues: [], sources: { topicSummary: [] }, stale: true };
-  const report = readJson(REVIEW_REPORT_FILE, fallback);
-  if (!report || typeof report !== "object") return fallback;
-
-  const runtimePayload = readJson(RUNTIME_NEWS_FILE, {});
-  const reportGeneratedAt = Date.parse(report.generatedAt || "");
-  const newsRefreshedAt = Date.parse(runtimePayload.lastSuccessAt || runtimePayload.lastAttemptAt || "");
-  if (Number.isFinite(reportGeneratedAt) && Number.isFinite(newsRefreshedAt) && reportGeneratedAt < newsRefreshedAt) {
-    return {
-      issues: [],
-      sources: report.sources || { topicSummary: [] },
-      stale: true,
-      ignoredReason: "review-report-before-latest-news-refresh",
-      generatedAt: report.generatedAt || ""
-    };
-  }
-
-  return {
-    ...report,
-    stale: false,
-    issues: Array.isArray(report.issues) ? report.issues : []
-  };
-}
-
 function writeJson(filePath, payload) {
   fs.writeFileSync(filePath, `${JSON.stringify(payload, null, 2)}\n`, "utf-8");
 }
@@ -220,6 +198,46 @@ function readPhotoFocusDecisions() {
       articleUrl: String(item.articleUrl || ""),
       updatedAt: String(item.updatedAt || item.createdAt || "")
     }));
+}
+
+function loadEditorialTraining() {
+  const payload = readJson(EDITORIAL_TRAINING_FILE, null);
+  if (!payload || payload.status === "inactive") return null;
+  const principles = Array.isArray(payload.principles) ? payload.principles : [];
+  const roleOpinions = Array.isArray(payload.roleOpinions) ? payload.roleOpinions : [];
+  const officeOpinions = Array.isArray(payload.officeOpinions) ? payload.officeOpinions : [];
+  const workflow = Array.isArray(payload.workflow) ? payload.workflow : [];
+  const gates = payload.gates && typeof payload.gates === "object" ? payload.gates : {};
+  return {
+    ...payload,
+    principles,
+    roleOpinions,
+    officeOpinions,
+    workflow,
+    gates
+  };
+}
+
+function pickEditorialTrainingForAgent(agent, training) {
+  if (!training) return null;
+  const roleOpinion = training.roleOpinions.find((item) => item.role === agent.role) || null;
+  const officeOpinion = training.officeOpinions.find((item) => item.officeKey === agent.officeKey) || null;
+  const principles = training.principles || [];
+  const principle = principles.length ? principles[hashString(agent.slug) % principles.length] : null;
+  const defaultChecklist = Array.isArray(training.defaultChecklist) ? training.defaultChecklist : [];
+  const roleChecklist = training.checklists && Array.isArray(training.checklists[agent.role])
+    ? training.checklists[agent.role]
+    : defaultChecklist;
+
+  return {
+    trainingId: String(training.trainingId || ""),
+    title: String(training.title || ""),
+    principleId: String(principle?.id || ""),
+    principle: String(principle?.title || principle?.summary || ""),
+    directive: String(roleOpinion?.opinion || officeOpinion?.opinion || training.runtimeDirective || ""),
+    implementation: String(roleOpinion?.implementation || officeOpinion?.implementation || ""),
+    checklist: roleChecklist.slice(0, 5)
+  };
 }
 
 function slugify(value) {
@@ -471,11 +489,12 @@ function pickLeadStory(newsItems, predicate) {
 }
 
 function buildAssignment(agent, context) {
-  const { newsItems, newsSummary, reviewReport, photoFocusDecisions } = context;
+  const { newsItems, newsSummary, reviewReport, photoFocusDecisions, editorialTraining } = context;
   const topCategory = newsSummary.topCategories[0]?.value || "Geral";
   const weakTopic = reviewReport?.sources?.topicSummary?.find((item) => item.status !== "ok");
   const topIssue = reviewReport?.issues?.[0] || null;
   const topPhotoDecision = Array.isArray(photoFocusDecisions) ? photoFocusDecisions[0] : null;
+  const training = pickEditorialTrainingForAgent(agent, editorialTraining);
 
   let lead = null;
   let action = "";
@@ -570,13 +589,22 @@ function buildAssignment(agent, context) {
       break;
   }
 
+  if (training) {
+    const trainingPrinciple = training.principle || training.title || "fluxo editorial treinado";
+    const trainingDirective = training.directive || "aplicar precisao, fonte, contexto e correcao visivel";
+    action = `${action}; aplicar treinamento: ${trainingPrinciple}`;
+    idea = `${idea}; opiniao treinada: ${trainingDirective}`.slice(0, 420);
+    monitor = `${monitor}; checar ${training.checklist?.[0] || "fonte, risco e transparencia"}`.slice(0, 320);
+  }
+
   const headline = lead?.title || newsSummary.newestItems[0]?.title || topCategory;
   return {
     headline,
     action,
     idea,
     monitor,
-    deliverable: agent.deliverables[0] || "observacao operacional"
+    deliverable: agent.deliverables[0] || "observacao operacional",
+    editorialTraining: training
   };
 }
 
@@ -607,47 +635,25 @@ function writeAgentMemoryStore(store) {
 function scoreAgentAutonomy(agent, assignment, context, previousMemory) {
   const reviewIssues = Array.isArray(context.reviewReport?.issues) ? context.reviewReport.issues.length : 0;
   const newsItems = context.newsSummary.totalItems || 0;
-  const relevantOrders = getRelevantOrders(agent, context.officeOrders || []);
-  const reviewImpact = getReviewImpact(agent, context.officeOrders || []);
   const rolePressure = {
-    ceo: 24,
-    review: reviewIssues ? 30 : 18,
-    sources: context.newsSummary.topSources.length < 3 ? 28 : 20,
-    dev: 27,
-    editor: 24,
-    design: 23,
-    copy: 21,
-    social: 19,
-    pixel: 18,
-    games: 18,
-    kids: 17,
-    sales: 17
-  }[agent.role] || 16;
+    ceo: 18,
+    review: reviewIssues ? 26 : 12,
+    sources: context.newsSummary.topSources.length < 3 ? 24 : 14,
+    dev: 20,
+    editor: 18,
+    design: 16,
+    copy: 15,
+    social: 13,
+    pixel: 12,
+    games: 12,
+    kids: 10,
+    sales: 10
+  }[agent.role] || 10;
 
   const memoryCycles = Number(previousMemory.cycles || 0);
-  const actionSpecificity = [assignment.action, assignment.idea, assignment.monitor]
-    .filter((value) => String(value || "").trim().length > 28).length;
-  const orderBoost = Math.min(12, relevantOrders.length * 2 + reviewImpact.approved * 2);
-  const urgency = clampNumber(
-    42 + rolePressure + Math.min(16, reviewIssues * 3) + Math.min(10, newsItems / 80) + orderBoost,
-    1,
-    100
-  );
-  const confidence = clampNumber(
-    58 +
-      Math.min(24, memoryCycles * 2) +
-      (assignment.headline ? 12 : 0) +
-      actionSpecificity * 4 +
-      Math.min(10, reviewImpact.approved * 2) -
-      Math.min(8, reviewImpact.reopened * 2),
-    1,
-    100
-  );
-  const autonomy = clampNumber(
-    Math.round(urgency * 0.42 + confidence * 0.58 + (confidence >= 76 ? 5 : 0) + (actionSpecificity >= 2 ? 4 : 0)),
-    1,
-    100
-  );
+  const urgency = clampNumber(35 + rolePressure + Math.min(20, reviewIssues * 3) + Math.min(12, newsItems / 10), 1, 100);
+  const confidence = clampNumber(48 + Math.min(25, memoryCycles) + (assignment.headline ? 12 : 0), 1, 100);
+  const autonomy = clampNumber(Math.round((urgency * 0.55 + confidence * 0.45)), 1, 100);
 
   return { urgency: Math.round(urgency), confidence: Math.round(confidence), autonomy };
 }
@@ -900,6 +906,7 @@ function updateAgentMemory(agent, assignment, context, memoryStore) {
     growth,
     action: assignment.action,
     signal: assignment.monitor,
+    editorialTraining: assignment.editorialTraining || null,
     autonomy: scores.autonomy,
     urgency: scores.urgency,
     confidence: scores.confidence
@@ -924,6 +931,7 @@ function updateAgentMemory(agent, assignment, context, memoryStore) {
     autonomy: scores.autonomy,
     urgency: scores.urgency,
     confidence: scores.confidence,
+    editorialTraining: assignment.editorialTraining || previous.editorialTraining || null,
     memoryLog: [note, ...memoryLog].slice(0, 8)
   };
 
@@ -1284,117 +1292,23 @@ function updateOfficeOrdersLifecycle(orders, agents, queue, nowIso) {
   });
 }
 
-function normalizeDiversityKey(value = "") {
-  return String(value || "")
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, " ")
-    .trim()
-    .slice(0, 140);
-}
-
-function pickDiverseMeetingAgents(rankedAgents = [], limit = 12) {
-  const roleOrder = ["ceo", "editor", "review", "sources", "dev", "design", "copy", "social", "pixel", "games", "kids", "sales"];
-  const selected = [];
-  const selectedSlugs = new Set();
-  const selectedActions = new Set();
-
-  const tryAdd = (item, strictAction = true) => {
-    if (!item || selectedSlugs.has(item.slug)) return false;
-    const actionKey = normalizeDiversityKey(item.assignment?.action || item.assignment?.idea || item.autonomy?.intent || item.name);
-    if (strictAction && actionKey && selectedActions.has(actionKey)) return false;
-    selected.push(item);
-    selectedSlugs.add(item.slug);
-    if (actionKey) selectedActions.add(actionKey);
-    return true;
-  };
-
-  roleOrder.forEach((role) => {
-    if (selected.length >= limit) return;
-    tryAdd(rankedAgents.find((item) => item.role === role), true);
-  });
-
-  rankedAgents.forEach((item) => {
-    if (selected.length >= limit) return;
-    tryAdd(item, true);
-  });
-
-  rankedAgents.forEach((item) => {
-    if (selected.length >= limit) return;
-    tryAdd(item, false);
-  });
-
-  return selected.slice(0, limit);
-}
-
-function scoreAgentCompetition(item) {
-  const autonomy = clampNumber(item.autonomy?.autonomy || 0, 0, 100);
-  const urgency = clampNumber(item.autonomy?.urgency || 0, 0, 100);
-  const confidence = clampNumber(item.autonomy?.confidence || 0, 0, 100);
-  const cycles = clampNumber(item.autonomy?.cycles || 0, 0, 20);
-  const growth = item.autonomy?.growth || {};
-  const life = item.autonomy?.life || {};
-  const performance = item.performance || {};
-  const autonomyDelta = Number(growth.autonomyDelta || 0);
-  const confidenceDelta = Number(growth.confidenceDelta || 0);
-  const intelligence = clampNumber(
-    confidence * 0.46 + autonomy * 0.34 + Math.min(100, cycles * 8) * 0.12 + Math.max(0, confidenceDelta) * 2,
-    0,
-    100
-  );
-  const execution = clampNumber(
-    urgency * 0.32 +
-      confidence * 0.24 +
-      autonomy * 0.18 +
-      (life.outcome === "success" ? 20 : life.outcome === "partial" ? 8 : -12) +
-      Math.max(0, Number(life.streak || 0)) * 3,
-    0,
-    100
-  );
-  const impact = clampNumber(
-    Math.min(100, Number(item.points || performance.netPoints || 0) / 7) * 0.48 +
-      Number(life.morale || 0) * 0.2 +
-      Number(life.energy || 0) * 0.14 +
-      Math.max(0, autonomyDelta) * 2 +
-      (performance.penalty ? -Math.min(28, Number(performance.penalty || 0) * 0.18) : 12),
-    0,
-    100
-  );
-  const manualReview = life.manualReview || {};
-  const dependencyPenalty =
-    Number(manualReview.rejected || 0) * 10 +
-    Number(manualReview.reopened || 0) * 6 +
-    (autonomy < 70 ? 8 : 0) +
-    (confidence < 64 ? 6 : 0);
-  const competitionScore = clampNumber(
-    autonomy * 0.28 + intelligence * 0.26 + execution * 0.24 + impact * 0.22 - dependencyPenalty,
-    0,
-    100
-  );
-  return {
-    competitionScore: Math.round(competitionScore),
-    intelligence: Math.round(intelligence),
-    execution: Math.round(execution),
-    impact: Math.round(impact),
-    dependencyPenalty: Math.round(dependencyPenalty)
-  };
-}
-
 function buildDailyAgentContext(queue) {
   const today = new Date().toISOString().slice(0, 10);
   const rankedAgents = queue
-    .map((item) => ({
-      ...item,
-      competition: scoreAgentCompetition(item)
-    }))
     .slice()
     .sort((a, b) => {
-      const aScore = Number(a.competition?.competitionScore || 0) * 3 + Number(a.points || 0) * 0.04;
-      const bScore = Number(b.competition?.competitionScore || 0) * 3 + Number(b.points || 0) * 0.04;
+      const aScore =
+        Number(a.autonomy?.autonomy || 0) * 2 +
+        Number(a.autonomy?.urgency || 0) +
+        Number(a.autonomy?.confidence || 0) +
+        Number(a.autonomy?.cycles || 0);
+      const bScore =
+        Number(b.autonomy?.autonomy || 0) * 2 +
+        Number(b.autonomy?.urgency || 0) +
+        Number(b.autonomy?.confidence || 0) +
+        Number(b.autonomy?.cycles || 0);
       return bScore - aScore || String(a.name).localeCompare(String(b.name), "pt-BR");
     });
-  const meetingAgents = pickDiverseMeetingAgents(rankedAgents, 12);
 
   const officeScores = new Map();
   queue.forEach((item) => {
@@ -1432,12 +1346,6 @@ function buildDailyAgentContext(queue) {
           office: agentOfDay.officeLabel,
           role: agentOfDay.role,
           score: agentOfDay.autonomy?.autonomy || 0,
-          points: agentOfDay.points || 0,
-          competitionScore: agentOfDay.competition?.competitionScore || 0,
-          intelligence: agentOfDay.competition?.intelligence || 0,
-          execution: agentOfDay.competition?.execution || 0,
-          impact: agentOfDay.competition?.impact || 0,
-          dependencyPenalty: agentOfDay.competition?.dependencyPenalty || 0,
           urgency: agentOfDay.autonomy?.urgency || 0,
           confidence: agentOfDay.autonomy?.confidence || 0,
           intent: agentOfDay.autonomy?.intent || "",
@@ -1462,21 +1370,13 @@ function buildDailyAgentContext(queue) {
           reason: agentOfDay.autonomy?.intent || ""
         }
       : null,
-    topAgents: meetingAgents.map((item) => ({
+    topAgents: rankedAgents.slice(0, 12).map((item) => ({
       name: item.name,
       office: item.officeLabel,
       role: item.role,
       autonomy: item.autonomy?.autonomy || 0,
-      points: item.points || 0,
-      competitionScore: item.competition?.competitionScore || 0,
-      intelligence: item.competition?.intelligence || 0,
-      execution: item.competition?.execution || 0,
-      impact: item.competition?.impact || 0,
       urgency: item.autonomy?.urgency || 0,
-      confidence: item.autonomy?.confidence || 0,
-      intent: item.autonomy?.intent || "",
-      action: item.assignment?.action || "",
-      deliverable: item.assignment?.deliverable || ""
+      intent: item.autonomy?.intent || ""
     }))
   };
 }
@@ -1942,6 +1842,7 @@ function buildMarkdownRun(report) {
     `- Image approvals applied: ${report.summary.imageApprovalsApplied || 0}`,
     `- Image approvals sent to agents: ${report.summary.imageApprovalsSentToAgents || 0}`,
     `- Photo/focus decisions in context: ${report.summary.photoFocusDecisions || 0}`,
+    `- Editorial training: ${report.summary.editorialTrainingActive ? report.summary.editorialTrainingTitle || report.summary.editorialTrainingId : "inactive"}`,
     "",
     "## Top Categories",
     "",
@@ -1984,6 +1885,10 @@ function buildMarkdownRun(report) {
     lines.push(`- Idea: ${item.assignment.idea}`);
     lines.push(`- Monitor: ${item.assignment.monitor}`);
     lines.push(`- Deliverable: ${item.assignment.deliverable}`);
+    if (item.assignment.editorialTraining) {
+      lines.push(`- Editorial training: ${item.assignment.editorialTraining.principle || item.assignment.editorialTraining.title}`);
+      lines.push(`- Training directive: ${item.assignment.editorialTraining.directive || "aplicar fluxo editorial treinado"}`);
+    }
     lines.push(`- Autonomy: ${item.autonomy.mode} (${item.autonomy.autonomy}/100)`);
     lines.push(`- Intent: ${item.autonomy.intent}`);
     lines.push(`- Next check: ${item.autonomy.nextCheckAt}`);
@@ -1996,7 +1901,8 @@ function buildMarkdownRun(report) {
 function main() {
   ensureDir(AGENTS_DIR);
   ensureDir(AGENT_FILES_DIR);
-  ensureDir(RUNTIME_DIR);
+  ensureDir(DATA_DIR);
+  ensureDir(LEGACY_RUNTIME_DIR);
   const imageApprovals = applyPendingImageApprovalDecisions({ source: "real-agents-runtime" });
 
   const agents = loadAllAgents().map(enrichAgent);
@@ -2006,11 +1912,12 @@ function main() {
 
   const newsItems = loadNewsItems();
   const newsSummary = summarizeNews(newsItems);
-  const reviewReport = readCurrentReviewReport();
+  const reviewReport = readJson(REVIEW_REPORT_FILE, { issues: [], sources: { topicSummary: [] } });
   const officeOrders = readJson(OFFICE_ORDERS_FILE, []);
   const photoFocusDecisions = readPhotoFocusDecisions();
   const heartbeats = readJson(HEARTBEATS_FILE, []);
-  const context = { newsItems, newsSummary, reviewReport, officeOrders, heartbeats, photoFocusDecisions };
+  const editorialTraining = loadEditorialTraining();
+  const context = { newsItems, newsSummary, reviewReport, officeOrders, heartbeats, photoFocusDecisions, editorialTraining };
   const memoryStore = readAgentMemoryStore();
 
   const queue = buildAwardedQueue(agents.map((agent) => {
@@ -2072,7 +1979,10 @@ function main() {
       averageMorale: lifeSummary.averageMorale,
       imageApprovalsApplied: imageApprovals.applied,
       imageApprovalsSentToAgents: imageApprovals.sentToAgents,
-      photoFocusDecisions: photoFocusDecisions.length
+      photoFocusDecisions: photoFocusDecisions.length,
+      editorialTrainingActive: Boolean(editorialTraining),
+      editorialTrainingId: editorialTraining?.trainingId || "",
+      editorialTrainingTitle: editorialTraining?.title || ""
     },
     news: newsSummary,
     imageApprovals,
@@ -2086,19 +1996,25 @@ function main() {
     agentTimelines,
     officeDashboard,
     photoFocusDecisions,
+    editorialTraining,
     executableActions,
     offices: officeStatus,
     queue,
     orders: updatedOrders.slice(-80).reverse()
   };
 
+  const markdownRun = buildMarkdownRun(runReport);
   writeJson(RUN_FILE, runReport);
-  fs.writeFileSync(RUN_MD_FILE, buildMarkdownRun(runReport), "utf-8");
+  fs.writeFileSync(RUN_MD_FILE, markdownRun, "utf-8");
+  writeJson(LEGACY_RUN_FILE, runReport);
+  fs.writeFileSync(LEGACY_RUN_MD_FILE, markdownRun, "utf-8");
 
   return {
     registry: path.relative(ROOT_DIR, REGISTRY_FILE).replace(/\\/g, "/"),
     reportJson: path.relative(ROOT_DIR, RUN_FILE).replace(/\\/g, "/"),
     reportMd: path.relative(ROOT_DIR, RUN_MD_FILE).replace(/\\/g, "/"),
+    legacyReportJson: path.relative(ROOT_DIR, LEGACY_RUN_FILE).replace(/\\/g, "/"),
+    legacyReportMd: path.relative(ROOT_DIR, LEGACY_RUN_MD_FILE).replace(/\\/g, "/"),
     totalAgents: agents.length,
     totalOffices: officeStatus.length,
     newsItems: newsItems.length
