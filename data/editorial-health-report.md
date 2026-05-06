@@ -1,162 +1,198 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-05T22:04:40.289Z
-Escopo: 360/1059 itens recentes.
+Gerado em: 2026-05-06T03:32:06.993Z
+Escopo: 360/1080 itens recentes.
 
 ## Resumo
-- Gates: P0 71, P1 172, P2 117
-- Aprovacao humana exigida: 71
-- Pendencias de fonte: 69
-- Pendencias visuais: 204
+- Gates: P0 132, P1 209, P2 19
+- Aprovacao humana exigida: 132
+- Pendencias de fonte: 131
+- Pendencias visuais: 315
+- Travados para publicacao: 132
+- Travados para destaque: 341
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: Governadora Mailza visita hospital referência em Plácido de Castro e reforça compromisso com a saúde
+- P0 human-approval: Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Governadora Mailza visita hospital referência em Plácido de Castro e reforça compromisso com a saúde
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Governo do Acre realiza emissão de documentos para população em situação de rua em Rio Branco
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Governo do Acre realiza emissão de documentos para população em situação de rua em Rio Branco
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Governo do Acre realiza emissão de documentos para população em situação de rua em Rio Branco
+- P0 ide-fix: Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Trump critica Powell e diz que presidente do Fed é “desastre para os EUA”
+- P0 human-approval: Vítima de ataque em escola cursava enfermagem e deixa um filho
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Trump critica Powell e diz que presidente do Fed é “desastre para os EUA”
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Vítima de ataque em escola cursava enfermagem e deixa um filho
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Trump critica Powell e diz que presidente do Fed é “desastre para os EUA”
+- P0 ide-fix: Vítima de ataque em escola cursava enfermagem e deixa um filho
   Motivo: Pendencia visual: p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Inflação é principal preocupação no mundo, aponta relatório da Ipsos
+- P0 human-approval: Quem são as funcionárias mortas no ataque a tiros em escola do Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Inflação é principal preocupação no mundo, aponta relatório da Ipsos
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Quem são as funcionárias mortas no ataque a tiros em escola do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Inflação é principal preocupação no mundo, aponta relatório da Ipsos
+- P0 ide-fix: Quem são as funcionárias mortas no ataque a tiros em escola do Acre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: O novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712
+- P0 human-approval: Aluna de 11 anos baleada em ataque tem projétil retirado da perna
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: O novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Aluna de 11 anos baleada em ataque tem projétil retirado da perna
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: O novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Aluna de 11 anos baleada em ataque tem projétil retirado da perna
+  Motivo: Pendencia visual: p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Senador Alan Rick participa de aula inaugural do “Partiu Enem 2026” em Rio Branco
+- P0 human-approval: Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Senador Alan Rick participa de aula inaugural do “Partiu Enem 2026” em Rio Branco
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Senador Alan Rick participa de aula inaugural do “Partiu Enem 2026” em Rio Branco
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
+  Motivo: Pendencia visual: p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Corpo em decomposição é encontrado em residência no bairro Panorama
+- P0 human-approval: Justiça nega pensão por morte a viúva de Flaviano Melo
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Corpo em decomposição é encontrado em residência no bairro Panorama
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Justiça nega pensão por morte a viúva de Flaviano Melo
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Corpo em decomposição é encontrado em residência no bairro Panorama
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Justiça nega pensão por morte a viúva de Flaviano Melo
+  Motivo: Pendencia visual: p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Encontro com educadores debate o papel da tecnologia humanizada na escola
+- P0 human-approval: Dono de arma usada em ataque à escola é detido no Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Encontro com educadores debate o papel da tecnologia humanizada na escola
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Dono de arma usada em ataque à escola é detido no Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Encontro com educadores debate o papel da tecnologia humanizada na escola
+- P0 ide-fix: Dono de arma usada em ataque à escola é detido no Acre
+  Motivo: Pendencia visual: p0-com-ilustracao-generica.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Sinteac lamenta morte de funcionárias de escola em atentado
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.
+- P0 ide-fix: Sinteac lamenta morte de funcionárias de escola em atentado
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Sinteac lamenta morte de funcionárias de escola em atentado
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Durigan: BRB fez operações que quebraram banco e responsabilidade é do GDF
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+
+## Fichas de apuracao
+- P1 Primeiro-ministro eleito do Iraque oferece mediação entre EUA e Irã
+  Fonte: ok; visual: pending; publicacao travada: nao; destaque travado: sim.
+- P1 Alan Rick diz que esquerda será “bem-vinda” em eventual 2º turno
+  Fonte: ok; visual: pending; publicacao travada: nao; destaque travado: sim.
+- P2 Angelina Jolie está vendendo casa em Los Angeles por US$ 30 milhões
+  Fonte: ok; visual: ok; publicacao travada: nao; destaque travado: nao.
+- P2 Desenrola 2.0: 28 milhões de clientes são elegíveis, diz Febraban à CNN
+  Fonte: ok; visual: ok; publicacao travada: nao; destaque travado: nao.
+- P0 Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P0 Vítima de ataque em escola cursava enfermagem e deixa um filho
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P2 EUA abrem investigação contra universidade por admitir mulheres transgênero
+  Fonte: ok; visual: ok; publicacao travada: nao; destaque travado: nao.
+- P2 Com referência a super herói, Fluminense anuncia contratação de Hulk
+  Fonte: ok; visual: ok; publicacao travada: nao; destaque travado: nao.
+- P0 Quem são as funcionárias mortas no ataque a tiros em escola do Acre
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P0 Aluna de 11 anos baleada em ataque tem projétil retirado da perna
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P2 Análise: Governistas temem que PEC da escala 6×1 seja descaracterizada
+  Fonte: ok; visual: ok; publicacao travada: nao; destaque travado: nao.
+- P0 Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P0 Justiça nega pensão por morte a viúva de Flaviano Melo
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P0 Dono de arma usada em ataque à escola é detido no Acre
+  Fonte: pending; visual: pending; publicacao travada: sim; destaque travado: sim.
+- P1 Senado aprova PL que cria a primeira Universidade Federal Indígena do país
+  Fonte: ok; visual: pending; publicacao travada: nao; destaque travado: sim.
+- P2 Análise: Taxa Selic de 1 dígito só na próxima década
+  Fonte: ok; visual: ok; publicacao travada: nao; destaque travado: nao.
 
 ## Titulos alternativos
-- Governadora inaugura posto de fiscalização e reforça monitoramento na área de fronteira em Plácido de Castro
-  - Governadora inaugura posto de fiscalização e reforça monitoramento na área de fronteira em Plácido de Castro: 
-  - Entenda governadora inaugura posto de fiscalização e reforça monitoramento na área de fronteira em Plácido de 
-  - Batelao informa: Governadora inaugura posto de fiscalização e reforça monitoramento na área de fronteira em Pl
-- Governadora Mailza visita hospital referência em Plácido de Castro e reforça compromisso com a saúde
-  - Governadora Mailza visita hospital referência em Plácido de Castro e reforça compromisso com a saúde: veja os 
-  - O que se sabe sobre governadora Mailza visita hospital referência em Plácido de Castro e reforça compromisso c
-  - Batelao informa: Governadora Mailza visita hospital referência em Plácido de Castro e reforça compromisso com 
-- Com investimento superior a R$ 1 milhão, governadora entrega kits escolares e autoriza reforma de escolas em Plácido de Castro
-  - Com investimento superior a R$ 1 milhão, governadora entrega kits escolares e autoriza reforma de escolas em P
-  - Entenda com investimento superior a R$ 1 milhão, governadora entrega kits escolares e autoriza reforma de esco
-  - Batelao informa: Com investimento superior a R$ 1 milhão, governadora entrega kits escolares e autoriza reform
-- Ata do Copom deve reiterar cautela em meio a incertezas, dizem analistas
-  - Ata do Copom deve reiterar cautela em meio a incertezas, dizem analistas: veja os pontos principais
-  - Entenda ata do Copom deve reiterar cautela em meio a incertezas, dizem analistas
-  - CNN Brasil informa: Ata do Copom deve reiterar cautela em meio a incertezas, dizem analistas
-- Governo do Acre realiza emissão de documentos para população em situação de rua em Rio Branco
-  - Governo do Acre realiza emissão de documentos para população em situação de rua em Rio Branco: veja os pontos 
-  - O que se sabe sobre governo do Acre realiza emissão de documentos para população em situação de rua em Rio Bra
-  - Batelao informa: Governo do Acre realiza emissão de documentos para população em situação de rua em Rio Branco
-- Futuro do cessar-fogo pode depender do que acontecer em Ormuz nesta terça
-  - Futuro do cessar-fogo pode depender do que acontecer em Ormuz nesta terça: veja os pontos principais
-  - Entenda futuro do cessar-fogo pode depender do que acontecer em Ormuz nesta terça
-  - CNN Brasil informa: Futuro do cessar-fogo pode depender do que acontecer em Ormuz nesta terça
-- Estoques de energia caem e elevam risco de desabastecimento, diz Chevron
-  - Estoques de energia caem e elevam risco de desabastecimento, diz Chevron: veja os pontos principais
-  - Entenda estoques de energia caem e elevam risco de desabastecimento, diz Chevron
-  - CNN Brasil informa: Estoques de energia caem e elevam risco de desabastecimento, diz Chevron
-- Trump critica Powell e diz que presidente do Fed é “desastre para os EUA”
-  - Trump critica Powell e diz que presidente do Fed é “desastre para os EUA”: veja os pontos principais
-  - O que se sabe sobre trump critica Powell e diz que presidente do Fed é “desastre para os EUA”
-  - CNN Brasil informa: Trump critica Powell e diz que presidente do Fed é “desastre para os EUA”
-- Inflação é principal preocupação no mundo, aponta relatório da Ipsos
-  - Inflação é principal preocupação no mundo, aponta relatório da Ipsos: veja os pontos principais
-  - O que se sabe sobre inflação é principal preocupação no mundo, aponta relatório da Ipsos
-  - CNN Brasil informa: Inflação é principal preocupação no mundo, aponta relatório da Ipsos
-- O novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712
-  - O novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712: veja os pontos principais
-  - O que se sabe sobre o novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712
-  - G1 Politica informa: O novo Desenrola: até onde vai o alívio para os endividados? - O Assunto #1712
-- Glória Perez vence a Clícia Gadelha no Estadual de Vôlei Sub-18
-  - Glória Perez vence a Clícia Gadelha no Estadual de Vôlei Sub-18: veja os pontos principais
-  - Entenda glória Perez vence a Clícia Gadelha no Estadual de Vôlei Sub-18
-  - ac24horas informa: Glória Perez vence a Clícia Gadelha no Estadual de Vôlei Sub-18
-- Simpósio sobre direitos de pessoas com Espectro Autista (TEA) será realizado em Rio Branco no dia 14 de maio
-  - Simpósio sobre direitos de pessoas com Espectro Autista (TEA) será realizado em Rio Branco no dia 14 de maio: 
-  - Entenda simpósio sobre direitos de pessoas com Espectro Autista (TEA) será realizado em Rio Branco no dia 14 d
-  - ac24horas informa: Simpósio sobre direitos de pessoas com Espectro Autista (TEA) será realizado em Rio Branco 
+- Primeiro-ministro eleito do Iraque oferece mediação entre EUA e Irã
+  - Primeiro-ministro eleito do Iraque oferece mediação entre EUA e Irã: veja os pontos principais
+  - Entenda primeiro-ministro eleito do Iraque oferece mediação entre EUA e Irã
+  - CNN Brasil informa: Primeiro-ministro eleito do Iraque oferece mediação entre EUA e Irã
+- Alan Rick diz que esquerda será “bem-vinda” em eventual 2º turno
+  - Alan Rick diz que esquerda será “bem-vinda” em eventual 2º turno: veja os pontos principais
+  - Entenda alan Rick diz que esquerda será “bem-vinda” em eventual 2º turno
+  - Jurua Comunicacao informa: Alan Rick diz que esquerda será “bem-vinda” em eventual 2º turno
+- Angelina Jolie está vendendo casa em Los Angeles por US$ 30 milhões
+  - Angelina Jolie está vendendo casa em Los Angeles por US$ 30 milhões: veja os pontos principais
+  - Entenda angelina Jolie está vendendo casa em Los Angeles por US$ 30 milhões
+  - CNN Brasil informa: Angelina Jolie está vendendo casa em Los Angeles por US$ 30 milhões
+- Desenrola 2.0: 28 milhões de clientes são elegíveis, diz Febraban à CNN
+  - Desenrola 2.0: 28 milhões de clientes são elegíveis, diz Febraban à CNN: veja os pontos principais
+  - Entenda desenrola 2.0: 28 milhões de clientes são elegíveis, diz Febraban à CNN
+  - CNN Brasil informa: Desenrola 2.0: 28 milhões de clientes são elegíveis, diz Febraban à CNN
+- Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
+  - Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco: veja os pontos principais
+  - O que se sabe sobre gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
+  - ac24horas informa: Gladson Cameli se solidariza com famílias após ataque em escola de Rio Branco
+- Vítima de ataque em escola cursava enfermagem e deixa um filho
+  - Vítima de ataque em escola cursava enfermagem e deixa um filho: veja os pontos principais
+  - O que se sabe sobre vítima de ataque em escola cursava enfermagem e deixa um filho
+  - Jurua Comunicacao informa: Vítima de ataque em escola cursava enfermagem e deixa um filho
+- EUA abrem investigação contra universidade por admitir mulheres transgênero
+  - EUA abrem investigação contra universidade por admitir mulheres transgênero: veja os pontos principais
+  - Entenda eUA abrem investigação contra universidade por admitir mulheres transgênero
+  - CNN Brasil informa: EUA abrem investigação contra universidade por admitir mulheres transgênero
+- Com referência a super herói, Fluminense anuncia contratação de Hulk
+  - Com referência a super herói, Fluminense anuncia contratação de Hulk: veja os pontos principais
+  - Entenda com referência a super herói, Fluminense anuncia contratação de Hulk
+  - CNN Brasil informa: Com referência a super herói, Fluminense anuncia contratação de Hulk
+- Quem são as funcionárias mortas no ataque a tiros em escola do Acre
+  - Quem são as funcionárias mortas no ataque a tiros em escola do Acre: veja os pontos principais
+  - O que se sabe sobre quem são as funcionárias mortas no ataque a tiros em escola do Acre
+  - ac24horas informa: Quem são as funcionárias mortas no ataque a tiros em escola do Acre
+- Aluna de 11 anos baleada em ataque tem projétil retirado da perna
+  - Aluna de 11 anos baleada em ataque tem projétil retirado da perna: veja os pontos principais
+  - O que se sabe sobre aluna de 11 anos baleada em ataque tem projétil retirado da perna
+  - Jurua 24 Horas informa: Aluna de 11 anos baleada em ataque tem projétil retirado da perna
+- Análise: Governistas temem que PEC da escala 6×1 seja descaracterizada
+  - Análise: Governistas temem que PEC da escala 6×1 seja descaracterizada: veja os pontos principais
+  - Entenda análise: Governistas temem que PEC da escala 6×1 seja descaracterizada
+  - CNN Brasil informa: Análise: Governistas temem que PEC da escala 6×1 seja descaracterizada
+- Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
+  - Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre: veja os pontos principais
+  - O que se sabe sobre funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
+  - Jurua 24 Horas informa: Funcionárias que morreram baleadas tentaram conter atirador em escola do Acre
 
 ## Formatos especiais seguros
-- agenda visual: Com investimento superior a R$ 1 milhão, governadora entrega kits escolares e autoriza reforma de escolas em Plácido de Castro
+- linha do tempo curta: Angelina Jolie está vendendo casa em Los Angeles por US$ 30 milhões
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Glória Perez vence a Clícia Gadelha no Estadual de Vôlei Sub-18
+- guia de impacto no bolso: Desenrola 2.0: 28 milhões de clientes são elegíveis, diz Febraban à CNN
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Simpósio sobre direitos de pessoas com Espectro Autista (TEA) será realizado em Rio Branco no dia 14 de maio
+- guia de servico: EUA abrem investigação contra universidade por admitir mulheres transgênero
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Simpósio sobre direitos de pessoas com TEA será realizado em Rio Branco no dia 14 de maio
+- linha do tempo curta: Com referência a super herói, Fluminense anuncia contratação de Hulk
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Senador Alan Rick participa de aula inaugural do “Partiu Enem 2026”
+- linha do tempo curta: Análise: Governistas temem que PEC da escala 6×1 seja descaracterizada
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Por que Lula está usando chapéu em público? Conheça o modelo escolhido pelo presidente
+- linha do tempo curta: Análise: Taxa Selic de 1 dígito só na próxima década
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Elenco do Galvez viaja e fará preparação em Ji-Paraná
+- linha do tempo curta: STJD marca data do julgamento do Palmeiras por invasão de campo no clássico
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: BR Feminino: São Paulo vence Flamengo para assumir vice-liderança
+- agenda visual: Prêmio Rio de Contos está com inscrições abertas
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Met Gala 2026: Hailey Bieber aposta em look já usado por Gigi Hadid
+- agenda visual: “Histórias”: turnê com duplas sertanejas começa sábado (9), em Brasília
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Lakers confirmam ausência de Luka Doncic para o Jogo 1 contra o Thunder
+- agenda visual: Atualização internacional de The Verge - 16:46
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Ifac promove votação para eleger mascote dos jogos estudantis
+- agenda visual: Lyanco é denunciado no STJD e pode pegar até 12 jogos de suspensão
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: No Médico 24 Horas, cardiologista revela sinais que podem indicar infarto
+- agenda visual: Após gravidez secreta, casal de streamers anuncia chegada de primeiro filho
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

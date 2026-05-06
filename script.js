@@ -17,8 +17,6 @@ const guideTip = document.querySelector("#guide-tip");
 const splashRoot = document.querySelector(".logo-splash");
 const splashStatus = document.querySelector("#logo-splash-status");
 const splashDate = document.querySelector("#logo-splash-date");
-const splashProgressBar = document.querySelector(".logo-splash-progress span");
-const splashPercent = document.querySelector("#logo-splash-percent");
 const radarGuide = document.querySelector("#radar-guide");
 const radarGuideLabel = document.querySelector("#radar-guide-label");
 const radarGuideText = document.querySelector("#radar-guide-text");
@@ -91,6 +89,7 @@ const communityTrendSummary = document.querySelector("[data-community-trend-summ
 const communityTrendCaptions = document.querySelector("[data-community-trend-captions]");
 const communityTrendTags = document.querySelector("[data-community-trend-tags]");
 const communityTrendUpdated = document.querySelector("[data-community-trend-updated]");
+const publicCorrectionsLog = document.querySelector("#public-corrections-log");
 let heroDesktopHighlightItems = [];
 const cadernoCards = [...document.querySelectorAll(".cadernos-grid .caderno-card")];
 const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
@@ -110,14 +109,11 @@ const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
-  "Preparando capa, fontes e identidade",
-  "Sincronizando notícias e tendências",
-  "Finalizando módulos e imagens críticas"
+  "Abrindo os destaques de Cruzeiro do Sul",
+  "Notícias, serviços e agenda em uma só leitura",
+  "Atualizando a edição com foco no Vale do Juruá"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-const splashGateMaximumMs = 16000;
-const splashGateStepTimeoutMs = 9000;
-const splashDeferredBootTimeoutMs = 13000;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -342,7 +338,6 @@ const splashBootStartedAt =
   typeof performance !== "undefined" && typeof performance.now === "function"
     ? performance.now()
     : Date.now();
-let splashGateActive = false;
 window.__CATALOGO_SKIP_HOME_INTRO__ = shouldSkipHomeIntro;
 legacyOfflineStorageKeys.forEach((storageKey) => {
   [window.localStorage, window.sessionStorage].forEach((storage) => {
@@ -1546,248 +1541,31 @@ const formatSplashStamp = () => {
   return `${dateText.charAt(0).toUpperCase()}${dateText.slice(1)} • ${timeText}`;
 };
 
-const waitForSplashDelay = (ms) =>
-  new Promise((resolve) => {
-    window.setTimeout(resolve, Math.max(0, ms));
-  });
-
-const waitForSplashTimeout = (promise, timeoutMs = splashGateStepTimeoutMs) =>
-  Promise.race([
-    Promise.resolve(promise).catch(() => undefined),
-    waitForSplashDelay(timeoutMs)
-  ]);
-
-const clearSplashFailsafe = () => {
-  if (!window.__CATALOGO_SPLASH_FAILSAFE__) {
-    return;
-  }
-
-  window.clearTimeout(window.__CATALOGO_SPLASH_FAILSAFE__);
-  window.__CATALOGO_SPLASH_FAILSAFE__ = 0;
-};
-
-const waitForSplashEvent = (eventName, timeoutMs = splashGateStepTimeoutMs) =>
-  new Promise((resolve) => {
-    let finished = false;
-    const finish = () => {
-      if (finished) {
-        return;
-      }
-
-      finished = true;
-      window.removeEventListener(eventName, finish);
-      resolve();
-    };
-
-    window.addEventListener(eventName, finish, { once: true });
-    window.setTimeout(finish, timeoutMs);
-  });
-
-const waitForSplashDocumentComplete = (timeoutMs = splashGateStepTimeoutMs) => {
-  if (document.readyState === "complete") {
-    return Promise.resolve();
-  }
-
-  return waitForSplashEvent("load", timeoutMs);
-};
-
-const waitForSplashFontsReady = (timeoutMs = splashGateStepTimeoutMs) => {
-  const fontsReady = document.fonts?.ready;
-
-  if (!fontsReady || typeof fontsReady.then !== "function") {
-    return Promise.resolve();
-  }
-
-  return waitForSplashTimeout(fontsReady, timeoutMs);
-};
-
-const waitForSplashPreloads = (timeoutMs = splashGateStepTimeoutMs) => {
-  const preloadPromises = [
-    window.__CATALOGO_NEWS_PRELOAD__,
-    window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__
-  ].filter((promise) => promise && typeof promise.then === "function");
-
-  if (!preloadPromises.length) {
-    return Promise.resolve();
-  }
-
-  return waitForSplashTimeout(
-    Promise.all(preloadPromises.map((promise) => promise.catch(() => null))),
-    timeoutMs
-  );
-};
-
-const waitForSplashDeferredBoot = (timeoutMs = splashDeferredBootTimeoutMs) => {
-  if (
-    window.__CATALOGO_DEFERRED_BOOT_DONE__ ||
-    window.__CATALOGO_DEFERRED_BOOT_STATE__?.done
-  ) {
-    return Promise.resolve();
-  }
-
-  const deferredPromise = window.__CATALOGO_DEFERRED_BOOT_PROMISE__;
-  const eventPromise = waitForSplashEvent("catalogo:deferred-assets-ready", timeoutMs);
-
-  if (deferredPromise && typeof deferredPromise.then === "function") {
-    return waitForSplashTimeout(Promise.race([deferredPromise, eventPromise]), timeoutMs);
-  }
-
-  return eventPromise;
-};
-
-const waitForSplashImage = (image, timeoutMs = 5000) =>
-  new Promise((resolve) => {
-    if (!image) {
-      resolve();
-      return;
-    }
-
-    const done = () => {
-      image.removeEventListener("load", done);
-      image.removeEventListener("error", done);
-      resolve();
-    };
-
-    if (image.complete) {
-      if (typeof image.decode === "function" && image.naturalWidth > 0) {
-        image.decode().then(done).catch(done);
-        return;
-      }
-
-      done();
-      return;
-    }
-
-    image.addEventListener("load", done, { once: true });
-    image.addEventListener("error", done, { once: true });
-    window.setTimeout(done, timeoutMs);
-  });
-
-const waitForSplashCriticalImages = (timeoutMs = splashGateStepTimeoutMs) => {
-  const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 900;
-  const seen = new Set();
-  const criticalImages = [...document.images]
-    .filter((image) => {
-      if (!image || seen.has(image)) {
-        return false;
-      }
-
-      seen.add(image);
-
-      if (image.closest(".logo-splash")) {
-        return true;
-      }
-
-      if (image.getAttribute("fetchpriority") === "high") {
-        return true;
-      }
-
-      const imageMode = (image.getAttribute("load" + "ing") || "").toLowerCase();
-      if (imageMode === "lazy") {
-        return false;
-      }
-
-      if (
-        image.closest(
-          ".site-header, .hero-newsroom-shell, .hero-insiders-shell, .main-layout, .section-block:first-of-type"
-        )
-      ) {
-        return true;
-      }
-
-      const rect = image.getBoundingClientRect();
-      return rect.top < viewportHeight * 1.35 && rect.bottom > -120;
-    })
-    .slice(0, 32);
-
-  if (!criticalImages.length) {
-    return Promise.resolve();
-  }
-
-  return waitForSplashTimeout(
-    Promise.all(criticalImages.map((image) => waitForSplashImage(image))),
-    timeoutMs
-  );
-};
-
-const updateSplashProgress = (progress, status = "") => {
-  if (!splashRoot) {
-    return;
-  }
-
-  const previousProgress = Number(splashRoot.dataset.progress || 0);
-  const safeProgress = Math.max(
-    previousProgress,
-    Math.min(100, Math.max(0, Math.round(progress)))
-  );
-
-  splashRoot.dataset.progress = String(safeProgress);
-  splashRoot.style.setProperty("--splash-progress", `${safeProgress}%`);
-
-  if (splashProgressBar) {
-    splashProgressBar.style.width = `${safeProgress}%`;
-  }
-
-  if (splashPercent) {
-    splashPercent.textContent = `${safeProgress}%`;
-  }
-
-  if (splashStatus && status) {
-    splashStatus.textContent = status;
-  }
-};
-
-const waitForSplashReadiness = async () => {
-  const steps = [
-    {
-      label: "Estrutura da página pronta",
-      progress: 12,
-      wait: () => Promise.resolve()
-    },
-    {
-      label: "Preparando fontes e identidade",
-      progress: 28,
-      wait: () =>
-        Promise.all([
-          waitForSplashDocumentComplete(splashGateStepTimeoutMs),
-          waitForSplashFontsReady(splashGateStepTimeoutMs)
-        ])
-    },
-    {
-      label: "Sincronizando notícias e tendências",
-      progress: 46,
-      wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
-    },
-    {
-      label: "Organizando estilos e módulos finais",
-      progress: 82,
-      wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
-    },
-    {
-      label: "Finalizando imagens críticas",
-      progress: 96,
-      wait: () => waitForSplashCriticalImages(splashGateStepTimeoutMs)
-    },
-    {
-      label: "Portal pronto para abrir",
-      progress: 100,
-      wait: () => Promise.resolve()
-    }
-  ];
-
-  for (const step of steps) {
-    updateSplashProgress(Math.max(0, step.progress - 8), step.label);
-    await waitForSplashTimeout(step.wait(), step.timeout || splashGateStepTimeoutMs);
-    updateSplashProgress(step.progress, step.label);
-  }
-};
-
 const setupSplashExperience = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
 
+  if (document.body.classList.contains("editorial-home") && !mobileIntroMedia?.matches) {
+    try {
+      sessionStorage.setItem(splashStorageKey, "1");
+      sessionStorage.removeItem(skipHomeIntroKey);
+    } catch (_error) {
+      // ignore session storage failures
+    }
+
+    document.body.classList.add("site-loaded");
+    return;
+  }
+
+  if (mobileIntroMedia?.matches) {
+    document.body.classList.add("mobile-simple-shell");
+    window.setTimeout(() => {
+      document.body.classList.add("site-loaded", "mobile-intro-ready");
+      document.body.classList.remove("mobile-simple-shell");
+    }, 180);
+    return;
+  }
+
   if (performanceLiteMode) {
-    clearSplashFailsafe();
-    document.body.classList.remove("catalogo-site-booting");
     document.body.classList.add("site-loaded");
     return;
   }
@@ -1800,23 +1578,14 @@ const setupSplashExperience = () => {
       // ignore session storage failures
     }
 
-    clearSplashFailsafe();
-    document.body.classList.remove("catalogo-site-booting");
     document.body.classList.add("site-loaded");
     return;
   }
 
   if (!splashRoot) {
-    clearSplashFailsafe();
-    document.body.classList.remove("catalogo-site-booting");
     document.body.classList.add("site-loaded");
     return;
   }
-
-  splashGateActive = true;
-  document.body.classList.add("catalogo-site-booting");
-  splashRoot.setAttribute("aria-hidden", "false");
-  updateSplashProgress(4, splashMessages[0]);
 
   if (splashDate) {
     splashDate.textContent = formatSplashStamp();
@@ -1835,31 +1604,16 @@ const setupSplashExperience = () => {
 
   splashRoot.classList.toggle("is-repeat-visit", hasSeenSplash);
 
-  if (splashStatus && !splashMotionQuery.matches) {
-    messageTimer = window.setInterval(() => {
-      if (Number(splashRoot.dataset.progress || 0) >= 82) {
-        return;
-      }
+  if (splashStatus) {
+    splashStatus.textContent = splashMessages[messageIndex];
 
-      messageIndex = (messageIndex + 1) % splashMessages.length;
-      splashStatus.textContent = splashMessages[messageIndex];
-    }, 1350);
-  }
-
-  const handleDeferredBootProgress = (event) => {
-    const detail = event.detail || {};
-    const total = Number(detail.total || 0);
-    const completed = Number(detail.completed || 0);
-
-    if (!total) {
-      return;
+    if (!splashMotionQuery.matches) {
+      messageTimer = window.setInterval(() => {
+        messageIndex = (messageIndex + 1) % splashMessages.length;
+        splashStatus.textContent = splashMessages[messageIndex];
+      }, 760);
     }
-
-    const bootProgress = 54 + (Math.min(total, completed) / total) * 28;
-    updateSplashProgress(bootProgress, detail.label || "Organizando módulos finais");
-  };
-
-  window.addEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
+  }
 
   const releaseSplash = () => {
     if (splashReleased) {
@@ -1867,20 +1621,13 @@ const setupSplashExperience = () => {
     }
 
     splashReleased = true;
-    splashGateActive = false;
 
     if (messageTimer) {
       window.clearInterval(messageTimer);
     }
 
-    window.removeEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
-    clearSplashFailsafe();
-    updateSplashProgress(100, "Portal pronto para abrir");
-    splashRoot.setAttribute("aria-hidden", "true");
-
     requestAnimationFrame(() => {
-      document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
-      document.body.classList.add("site-loaded", "mobile-intro-ready");
+      document.body.classList.add("site-loaded");
     });
 
     try {
@@ -1895,26 +1642,14 @@ const setupSplashExperience = () => {
       ? performance.now()
       : Date.now();
   const elapsed = currentTime - splashBootStartedAt;
-  const minimumDuration = splashMotionQuery.matches ? 220 : hasSeenSplash ? 950 : 1700;
+  const minimumDuration = splashMotionQuery.matches ? 100 : hasSeenSplash ? 220 : 1100;
   const remaining = Math.max(100, minimumDuration - elapsed);
 
-  const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
-    updateSplashProgress(100, "Portal pronto para abrir");
-  });
-
-  const readinessGate = Promise.all([waitForSplashReadiness(), waitForSplashDelay(remaining)]);
-
-  void Promise.race([readinessGate, safetyRelease]).then(releaseSplash).catch(releaseSplash);
+  window.setTimeout(releaseSplash, remaining);
 };
 
 const clearMobilePageTransitionState = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
-
-  if (splashGateActive) {
-    return;
-  }
-
-  document.body.classList.remove("catalogo-site-booting");
   document.body.classList.add("site-loaded");
 };
 
@@ -2923,6 +2658,46 @@ const loadCommunityReports = async () => {
   } catch (_error) {
     renderCommunityReports([]);
     return [];
+  }
+};
+
+const renderPublicCorrectionsLog = (items = []) => {
+  if (!publicCorrectionsLog) return;
+  publicCorrectionsLog.innerHTML = "";
+  const title = document.createElement("strong");
+  title.textContent = "Correções públicas";
+  publicCorrectionsLog.appendChild(title);
+
+  if (!items.length) {
+    const empty = document.createElement("p");
+    empty.textContent = "Nenhuma correção pública registrada no momento.";
+    publicCorrectionsLog.appendChild(empty);
+    return;
+  }
+
+  const list = document.createElement("div");
+  list.className = "public-corrections-list";
+  items.slice(0, 4).forEach((item) => {
+    const article = document.createElement("article");
+    const itemTitle = document.createElement("span");
+    const note = document.createElement("p");
+    const time = document.createElement("small");
+    itemTitle.textContent = item.title || "Correção editorial";
+    note.textContent = item.publicNote || "Correção registrada pela redação.";
+    time.textContent = item.correctedAt ? formatCommunityMessageTime(item.correctedAt) : "registro recente";
+    article.append(itemTitle, note, time);
+    list.appendChild(article);
+  });
+  publicCorrectionsLog.appendChild(list);
+};
+
+const loadPublicCorrectionsLog = async () => {
+  if (!publicCorrectionsLog) return;
+  try {
+    const payload = await requestApiJson("/api/editorial/corrections?limit=4");
+    renderPublicCorrectionsLog(Array.isArray(payload?.corrections) ? payload.corrections : []);
+  } catch (_error) {
+    renderPublicCorrectionsLog([]);
   }
 };
 
@@ -15182,6 +14957,7 @@ const attachCommentSubmission = () => {
 
 const attachCommunitySignalFlow = () => {
   loadCommunityReports();
+  loadPublicCorrectionsLog();
   communityAgentForm?.addEventListener("submit", submitCommunityReport);
 };
 

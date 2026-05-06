@@ -100,8 +100,7 @@ function normalizePublicText(value) {
 
 function fallbackIncompletePublicText(kind, item) {
   const sourceName = deriveSourceName(item) || "Fonte monitorada";
-  const title = String(item?.title || item?.sourceLabel || "a atualizacao").trim();
-  return `${sourceName} publicou uma atualização sobre ${title}. O portal mantém o link da fonte original para acompanhamento completo.`;
+  return `Atualização em ${sourceName}. Leia a matéria completa na fonte original.`;
 }
 
 function repairIncompletePublicText(value, kind, item) {
@@ -410,6 +409,22 @@ function sanitizePublicFields(item) {
     item[key] = sanitizeText(value, key, item);
   });
 
+  ["title", "sourceLabel", "lede", "summary", "description", "displaySummary"].forEach((key) => {
+    if (typeof item[key] !== "string") return;
+    item[key] = item[key].replace(/\s+\./g, ".").replace(/\s+,/g, ",");
+  });
+
+  const lede = typeof item.lede === "string" ? item.lede.trim() : "";
+  const summary = typeof item.summary === "string" ? item.summary.trim() : "";
+  if (lede && summary && lede === summary) {
+    const title = typeof item.title === "string" ? item.title.trim() : "";
+    if (title && title !== lede) {
+      item.summary = title;
+    } else {
+      item.summary = `${lede.slice(0, 140).trim()}…`;
+    }
+  }
+
   return item;
 }
 
@@ -528,7 +543,7 @@ async function runSanitizePublicLanguage() {
   };
 }
 
-module.exports = { runSanitizePublicLanguage, sanitizeNewsList };
+module.exports = { runSanitizePublicLanguage };
 
 if (require.main === module) {
   runSanitizePublicLanguage()

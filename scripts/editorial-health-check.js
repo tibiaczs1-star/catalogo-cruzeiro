@@ -12,6 +12,7 @@ const NEWS_ARCHIVE_FILE = path.join(DATA_DIR, "news-archive.json");
 const TOPIC_FEED_FALLBACK_FILE = path.join(DATA_DIR, "topic-feed-fallback.json");
 const REPORT_JSON_FILE = path.join(DATA_DIR, "editorial-health-report.json");
 const REPORT_MD_FILE = path.join(DATA_DIR, "editorial-health-report.md");
+const APPROVAL_LOCKS_FILE = path.join(DATA_DIR, "editorial-approval-locks.json");
 const DEFAULT_LIMIT = 360;
 
 const P0_PATTERN =
@@ -43,6 +44,28 @@ function readJson(filePath, fallback) {
   } catch (error) {
     return fallback;
   }
+}
+
+function readApprovalLocks() {
+  const payload = readJson(APPROVAL_LOCKS_FILE, { version: 1, decisions: [] });
+  const decisions = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.decisions)
+      ? payload.decisions
+      : [];
+  return decisions
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      slug: cleanText(item.slug || item.articleSlug || "", 140),
+      status: cleanText(item.status || item.decision || "", 60).toLowerCase(),
+      gate: cleanText(item.gate || "", 20).toUpperCase(),
+      allowedPublication: item.allowedPublication === true || item.publicationAllowed === true,
+      allowedHighlight: item.allowedHighlight === true || item.highlightAllowed === true,
+      reviewer: cleanText(item.reviewer || item.approvedBy || "", 120),
+      note: cleanText(item.note || item.publicNote || "", 360),
+      decidedAt: cleanText(item.decidedAt || item.updatedAt || item.createdAt || "", 80)
+    }))
+    .filter((item) => item.slug);
 }
 
 function writeJson(filePath, payload) {
@@ -92,6 +115,22 @@ function slugify(value) {
 
 function getNewsKey(item) {
   return cleanText(item.slug || item.sourceUrl || item.id || item.title || "", 240).toLowerCase();
+}
+
+function getApprovalDecisionForItem(item, decisions = []) {
+  const keys = [
+    item.slug,
+    item.id,
+    item.sourceUrl,
+    slugify(item.title || "")
+  ]
+    .map((value) => cleanText(value || "", 160).toLowerCase())
+    .filter(Boolean);
+  return decisions.find((decision) => keys.includes(decision.slug.toLowerCase())) || null;
+}
+
+function isApprovedDecision(decision) {
+  return Boolean(decision) && /^(approved|aprovado|released|liberado|corrigido|ok)$/i.test(decision.status || "");
 }
 
 function uniqueNews(items) {
@@ -214,6 +253,75 @@ function analyzeVisual(item, gateInfo) {
   };
 }
 
+function buildArticleDossier(rawItem, analyzedItem, source, visual, decision) {
+  const gate = analyzedItem.gate;
+  const approved = isApprovedDecision(decision);
+  const publicationLocked =
+    gate === "P0" && !approved && !Boolean(decision?.allowedPublication);
+  const highlightLocked =
+    (gate === "P0" || gate === "P1") && !approved && !Boolean(decision?.allowedHighlight);
+  const sourceChecklist = [
+    source.sourceUrl ? "url-da-fonte-ok" : "sem-url-da-fonte",
+    source.sourceName ? "nome-da-fonte-ok" : "sem-nome-da-fonte",
+    source.sourceCount > 1 ? "fonte-cruzada" : "fonte-unica"
+  ];
+  const visualChecklist = [
+    visual.imageUrl ? "imagem-presente" : "sem-imagem",
+    visual.imageCredit ? "credito-visual-ok" : "credito-visual-pendente",
+    visual.imageLabel
+  ];
+
+  return {
+    id: `dossier-${analyzedItem.slug || analyzedItem.index}`,
+    slug: analyzedItem.slug,
+    title: analyzedItem.title,
+    category: analyzedItem.category,
+    gate,
+    approval: analyzedItem.approval,
+    gateReason: analyzedItem.gateReason,
+    sourceStatus: source.ok ? "ok" : "pending",
+    sourceChecklist,
+    sourceIssues: analyzedItem.sourceIssues,
+    sourceCount: source.sourceCount,
+    sourceDomain: source.domain,
+    visualStatus: visual.ok ? "ok" : "pending",
+    visualChecklist,
+    visualIssues: analyzedItem.visualIssues,
+    publicationLock: {
+      publicationLocked,
+      highlightLocked,
+      requiredDecision:
+        gate === "P0"
+          ? "aprovacao-humana-antes-de-publicar-ou-destacar"
+          : gate === "P1"
+            ? "revisao-editorial-antes-de-destaque"
+            : "checks-automaticos"
+    },
+    approvalDecision: decision
+      ? {
+          status: decision.status,
+          reviewer: decision.reviewer,
+          note: decision.note,
+          decidedAt: decision.decidedAt
+        }
+      : null,
+    publicTrace: {
+      sourceUrl: cleanText(rawItem.sourceUrl || rawItem.url || rawItem.link || "", 500),
+      sourceName: cleanText(rawItem.sourceName || rawItem.source || rawItem.sourceLabel || "", 160),
+      publishedAt: analyzedItem.publishedAt,
+      editorialHealthSource: analyzedItem.editorialHealthSource
+    },
+    checklist: [
+      "confirmar titulo e resumo em portugues",
+      "conferir fonte original e fontes cruzadas quando necessario",
+      "validar imagem/credito antes de destaque",
+      gate === "P0" ? "registrar decisao humana antes de publicar" : "",
+      gate === "P1" ? "registrar revisao editorial antes de destaque" : "",
+      "registrar correcao publica se houver ajuste depois da publicacao"
+    ].filter(Boolean)
+  };
+}
+
 function lowercaseFirst(value) {
   const text = cleanText(value, 160);
   return text ? `${text.charAt(0).toLowerCase()}${text.slice(1)}` : "";
@@ -285,16 +393,19 @@ function buildActionQueue(items) {
         id: `human-${item.slug || item.index}`,
         priority: "P0",
         gate: item.gate,
+        issueType: "approval-lock",
         resolutionType: "human-approval",
         title: item.title,
         slug: item.slug,
         reason: item.gateReason,
+        dossier: item.dossier,
+        publicationLock: item.dossier?.publicationLock || null,
         missingRequirements: [
           "aprovar ou segurar a publicacao/capa manualmente",
           "confirmar fonte e tom do resumo",
           "verificar imagem e credito antes de destaque"
         ],
-        suggestedIdeCommand: "Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.",
+        suggestedIdeCommand: "Cheffe Call: registrar decisao humana em /api/editorial/approval-locks antes de publicar ou destacar a materia.",
         expectedProof: [
           "decisao humana registrada",
           "fonte conferida",
@@ -307,10 +418,13 @@ function buildActionQueue(items) {
         id: `source-${item.slug || item.index}`,
         priority: item.gate === "P0" ? "P0" : "P1",
         gate: item.gate,
+        issueType: "source",
         resolutionType: "ide-fix",
         title: item.title,
         slug: item.slug,
         reason: `Pendencia de fonte: ${item.sourceIssues.join(", ")}.`,
+        dossier: item.dossier,
+        publicationLock: item.dossier?.publicationLock || null,
         missingRequirements: item.sourceIssues,
         suggestedIdeCommand: "Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.",
         expectedProof: ["fonte ajustada ou justificativa registrada", "npm run editorial:health atualizado"]
@@ -321,10 +435,13 @@ function buildActionQueue(items) {
         id: `visual-${item.slug || item.index}`,
         priority: item.gate === "P0" ? "P0" : "P1",
         gate: item.gate,
+        issueType: "visual",
         resolutionType: "ide-fix",
         title: item.title,
         slug: item.slug,
         reason: `Pendencia visual: ${item.visualIssues.join(", ")}.`,
+        dossier: item.dossier,
+        publicationLock: item.dossier?.publicationLock || null,
         missingRequirements: item.visualIssues,
         suggestedIdeCommand: "Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.",
         expectedProof: ["imagem/credito ajustados ou bloqueio explicado", "npm run editorial:health atualizado"]
@@ -367,6 +484,8 @@ function buildMarkdown(report) {
   lines.push(`- Aprovacao humana exigida: ${report.summary.humanApprovalRequired}`);
   lines.push(`- Pendencias de fonte: ${report.summary.sourceIssues}`);
   lines.push(`- Pendencias visuais: ${report.summary.visualIssues}`);
+  lines.push(`- Travados para publicacao: ${report.summary.publicationLocks}`);
+  lines.push(`- Travados para destaque: ${report.summary.highlightLocks}`);
   lines.push(`- Titulos alternativos gerados: ${report.summary.titleAlternativeCount}`);
   lines.push(`- Especiais seguros sugeridos: ${report.summary.specialCandidates}`);
   lines.push("");
@@ -378,6 +497,16 @@ function buildMarkdown(report) {
       lines.push(`- ${action.priority} ${action.resolutionType}: ${action.title}`);
       lines.push(`  Motivo: ${action.reason}`);
       lines.push(`  Comando: ${action.suggestedIdeCommand}`);
+    });
+  }
+  lines.push("");
+  lines.push("## Fichas de apuracao");
+  if (!report.articleDossiers.length) {
+    lines.push("- Nenhuma ficha gerada no recorte atual.");
+  } else {
+    report.articleDossiers.slice(0, 16).forEach((dossier) => {
+      lines.push(`- ${dossier.gate} ${dossier.title}`);
+      lines.push(`  Fonte: ${dossier.sourceStatus}; visual: ${dossier.visualStatus}; publicacao travada: ${dossier.publicationLock.publicationLocked ? "sim" : "nao"}; destaque travado: ${dossier.publicationLock.highlightLocked ? "sim" : "nao"}.`);
     });
   }
   lines.push("");
@@ -408,13 +537,15 @@ function runEditorialHealthCheck(options = {}) {
   ]);
   const selected = loaded.slice(0, limit);
   const domains = new Map();
+  const approvalDecisions = readApprovalLocks();
 
   const items = selected.map((item, index) => {
     const gateInfo = classifyGate(item);
     const source = analyzeSources(item, gateInfo);
     const visual = analyzeVisual(item, gateInfo);
+    const approvalDecision = getApprovalDecisionForItem(item, approvalDecisions);
     if (source.domain) domains.set(source.domain, (domains.get(source.domain) || 0) + 1);
-    return {
+    const analyzed = {
       index: index + 1,
       slug: cleanText(item.slug || slugify(item.title), 140),
       title: cleanText(item.title || "Sem titulo", 180),
@@ -432,6 +563,8 @@ function runEditorialHealthCheck(options = {}) {
       specialFormat: buildSpecialFormat(item, gateInfo),
       editorialHealthSource: item.editorialHealthSource || ""
     };
+    analyzed.dossier = buildArticleDossier(item, analyzed, source, visual, approvalDecision);
+    return analyzed;
   });
 
   const fullActionQueue = buildActionQueue(items);
@@ -454,7 +587,7 @@ function runEditorialHealthCheck(options = {}) {
   const sourceIssues = items.reduce((sum, item) => sum + item.sourceIssues.length, 0);
   const visualIssues = items.reduce((sum, item) => sum + item.visualIssues.length, 0);
   const report = {
-    version: 1,
+    version: 2,
     kind: "editorial-health-report",
     status: "ok",
     generatedAt: new Date().toISOString(),
@@ -477,7 +610,10 @@ function runEditorialHealthCheck(options = {}) {
       visualIssues,
       titleAlternativeCount: titleAlternatives.reduce((sum, item) => sum + item.alternatives.length, 0),
       specialCandidates: specialFormats.length,
-      actionQueueTotal: fullActionQueue.length
+      actionQueueTotal: fullActionQueue.length,
+      publicationLocks: items.filter((item) => item.dossier?.publicationLock?.publicationLocked).length,
+      highlightLocks: items.filter((item) => item.dossier?.publicationLock?.highlightLocked).length,
+      approvedLocks: approvalDecisions.filter(isApprovedDecision).length
     },
     gates: {
       P0: items.filter((item) => item.gate === "P0").length,
@@ -495,6 +631,20 @@ function runEditorialHealthCheck(options = {}) {
     },
     humanApprovalQueue,
     actionQueue,
+    queueGroups: {
+      approvalLocks: fullActionQueue.filter((action) => action.issueType === "approval-lock").slice(0, 40),
+      source: fullActionQueue.filter((action) => action.issueType === "source").slice(0, 40),
+      visual: fullActionQueue.filter((action) => action.issueType === "visual").slice(0, 40)
+    },
+    articleDossiers: items.map((item) => item.dossier).filter(Boolean).slice(0, 160),
+    approvalLocks: {
+      file: path.relative(ROOT_DIR, APPROVAL_LOCKS_FILE).replace(/\\/g, "/"),
+      decisions: approvalDecisions.slice(0, 80),
+      summary: {
+        total: approvalDecisions.length,
+        approved: approvalDecisions.filter(isApprovedDecision).length
+      }
+    },
     titleAlternatives,
     specialFormats,
     items: items.slice(0, 160)

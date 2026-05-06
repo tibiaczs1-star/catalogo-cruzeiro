@@ -4788,7 +4788,13 @@
       `Materia: ${action.title || "sem titulo"}.`,
       `Slug: ${action.slug || "sem slug"}.`,
       `Motivo: ${action.reason || "pendencia editorial detectada"}.`,
+      action.dossier?.publicationLock
+        ? `Trava: publicacao=${action.dossier.publicationLock.publicationLocked ? "travada" : "liberada"}; destaque=${action.dossier.publicationLock.highlightLocked ? "travado" : "liberado"}.`
+        : "",
       "",
+      action.dossier?.checklist?.length
+        ? ["Ficha de apuracao:", ...action.dossier.checklist.map((item) => `- ${item}`), ""].join("\n")
+        : "",
       "Requisitos:",
       ...(missing.length ? missing.map((item) => `- ${item}`) : ["- conferir fonte, imagem, gate e risco editorial"]),
       "",
@@ -4801,7 +4807,7 @@
       isHuman
         ? "Observacao: esta e aprovacao humana. Nao publique nem marque como resolvida sozinho; prepare a decisao para o chefe aprovar ou segurar."
         : "Resolva localmente no IDE e devolva: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
-    ].join("\n");
+    ].filter(Boolean).join("\n");
   }
 
   function renderEditorialHealthQueue() {
@@ -4813,11 +4819,26 @@
     editorialHealthQueueList.innerHTML = editorialHealthActions
       .map((action, index) => {
         const promptText = buildEditorialHealthPrompt(action);
+        const dossier = action.dossier || {};
+        const lock = action.publicationLock || dossier.publicationLock || {};
+        const lockText = [
+          lock.publicationLocked ? "publicação travada" : "publicação liberada",
+          lock.highlightLocked ? "destaque travado" : "destaque liberado"
+        ].join(" • ");
+        const sourceIssues = Array.isArray(dossier.sourceIssues) ? dossier.sourceIssues : [];
+        const visualIssues = Array.isArray(dossier.visualIssues) ? dossier.visualIssues : [];
         return `
           <article class="task-queue-item ${action.resolutionType === "human-approval" ? "is-blocked" : ""}">
-            <span>${escapeHtml(action.priority || action.gate || "P1")} • ${escapeHtml(action.resolutionType || "editorial")}</span>
+            <span>${escapeHtml(action.priority || action.gate || "P1")} • ${escapeHtml(action.issueType || action.resolutionType || "editorial")} • ${escapeHtml(lockText)}</span>
             <strong>${escapeHtml(action.title || "Pendência editorial")}</strong>
             <p>${escapeHtml(action.reason || "A saúde editorial pediu revisão.")}</p>
+            ${dossier.id ? `
+              <div class="task-queue-block">
+                <strong>Ficha de apuração</strong>
+                <p>Fonte: ${escapeHtml(dossier.sourceStatus || "sem status")} (${escapeHtml(sourceIssues.join(", ") || "ok")})</p>
+                <p>Imagem: ${escapeHtml(dossier.visualStatus || "sem status")} (${escapeHtml(visualIssues.join(", ") || "ok")})</p>
+              </div>
+            ` : ""}
             ${action.suggestedIdeCommand ? `<pre class="task-queue-block">${escapeHtml(action.suggestedIdeCommand)}</pre>` : ""}
             <div class="task-queue-actions">
               <button type="button" data-copy-editorial-health="${index}">Copiar prompt</button>
@@ -4836,6 +4857,9 @@
     const sourceIssues = Number(summary.sourceIssues || 0);
     const visualIssues = Number(summary.visualIssues || 0);
     const humanApproval = Number(summary.humanApprovalRequired || 0);
+    const publicationLocks = Number(summary.publicationLocks || 0);
+    const highlightLocks = Number(summary.highlightLocks || 0);
+    const dossiers = Array.isArray(health.articleDossiers) ? health.articleDossiers : [];
     const generated = health.generatedAt ? formatFeedbackTime(health.generatedAt) : "rode npm run editorial:health";
     renderSceneDataGrid(
       editorialHealthGrid,
@@ -4843,6 +4867,8 @@
         { label: "Status", value: String(health.status || "not-run"), detail: generated },
         { label: "P0/P1/P2", value: `${gates.P0 || 0}/${gates.P1 || 0}/${gates.P2 || 0}`, detail: "P0 exige humano; P1 exige revisão editorial." },
         { label: "Aprovação humana", value: String(humanApproval), detail: "Matérias sensíveis antes de destaque/publicação." },
+        { label: "Travas", value: `${publicationLocks}/${highlightLocks}`, detail: "Publicação sensível / destaque aguardando decisão." },
+        { label: "Fichas", value: String(dossiers.length), detail: "Dossiês de apuração prontos no relatório." },
         { label: "Fontes", value: String(sourceIssues), detail: "Lacunas de fonte, nome ou cobertura cruzada." },
         { label: "Imagem", value: String(visualIssues), detail: "Crédito, rótulo ou fallback visual." },
         { label: "Especiais", value: String(summary.specialCandidates || 0), detail: `${summary.titleAlternativeCount || 0} títulos alternativos gerados.` }
@@ -4855,6 +4881,10 @@
       const key = action.id || `${action.resolutionType || "action"}-${action.slug || action.title || byId.size}`;
       if (!byId.has(key)) byId.set(key, action);
     };
+    const groups = health.queueGroups || {};
+    (Array.isArray(groups.approvalLocks) ? groups.approvalLocks : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(groups.source) ? groups.source : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(groups.visual) ? groups.visual : []).slice(0, 8).forEach(addAction);
     (Array.isArray(health.humanApprovalQueue) ? health.humanApprovalQueue : []).slice(0, 8).forEach(addAction);
     (Array.isArray(health.actionQueue) ? health.actionQueue : []).slice(0, 12).forEach(addAction);
     editorialHealthActions = [...byId.values()].slice(0, 12);

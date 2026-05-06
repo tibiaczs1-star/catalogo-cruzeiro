@@ -91,6 +91,7 @@ const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json")
 const REAL_AGENTS_ECOSYSTEM_STUDY_FILE = path.join(DATA_DIR, "real-agents-ecosystem-study.json");
 const REAL_AGENTS_EDITORIAL_TRAINING_FILE = path.join(DATA_DIR, "real-agents-editorial-training.json");
 const EDITORIAL_CORRECTIONS_LOG_FILE = path.join(DATA_DIR, "editorial-corrections-log.json");
+const EDITORIAL_APPROVAL_LOCKS_FILE = path.join(DATA_DIR, "editorial-approval-locks.json");
 const EDITORIAL_MEETING_SHEETS_FILE = path.join(DATA_DIR, "editorial-meeting-sheets.json");
 const EDITORIAL_HEALTH_REPORT_JSON_FILE = path.join(DATA_DIR, "editorial-health-report.json");
 const EDITORIAL_HEALTH_REPORT_MD_FILE = path.join(DATA_DIR, "editorial-health-report.md");
@@ -107,7 +108,7 @@ const CHEFFE_CALL_TIMEOUT_MINUTES_INPUT = Number(process.env.CHEFFE_CALL_TIMEOUT
 const CHEFFE_CALL_TIMEOUT_MS = Number.isFinite(CHEFFE_CALL_TIMEOUT_MINUTES_INPUT)
   ? Math.max(60, CHEFFE_CALL_TIMEOUT_MINUTES_INPUT) * 60 * 1000
   : 90 * 60 * 1000;
-const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
+const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 8 * 60 * 60 * 1000);
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   : 5 * 60 * 1000;
@@ -1748,7 +1749,7 @@ function updateImagePreviewCache(sourceUrl, imageUrl) {
 }
 
 function writeStaticNewsData(items = []) {
-  const safeItems = Array.isArray(items) ? items : [];
+  const safeItems = applyEditorialPublicationGateToCollection(Array.isArray(items) ? items : []);
   const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
@@ -6444,6 +6445,12 @@ function getEditorialFocusScore(item = {}) {
 }
 
 function sortArticleItems(left, right) {
+  const leftHighlightLocked = left?.editorialGate?.highlightAllowed === false ? 1 : 0;
+  const rightHighlightLocked = right?.editorialGate?.highlightAllowed === false ? 1 : 0;
+  if (leftHighlightLocked !== rightHighlightLocked) {
+    return leftHighlightLocked - rightHighlightLocked;
+  }
+
   const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
   if (dateDiff !== 0) {
     return dateDiff;
@@ -6542,6 +6549,244 @@ function getArticleSourceEntries(item = {}) {
   return entries;
 }
 
+const EDITORIAL_GATE_P0_PATTERN =
+  /\b(ataque|atentado|tiroteio|morte|morre|morreu|morto|morta|assassin|homicidio|feminicidio|estupro|abuso|violencia|crianca|adolescente|menor|escola|aluno|policia|prisao|preso|suspeito|arma|tiro|ferido|hospital|acidente|desastre|enchente|incendio|ameaca|mpac|gaeco)\b/i;
+const EDITORIAL_GATE_P1_PATTERN =
+  /\b(lula|bolsonaro|governo|prefeitura|governador|presidente|vereador|deputado|senador|senado|camara|stf|justica|tribunal|ministerio publico|mpf|tse|eleicao|eleicoes|campanha|orcamento|imposto|tarifa|lei|projeto de lei|greve|audiencia publica|acre|rio branco)\b/i;
+const EDITORIAL_APPROVED_STATUSES = new Set(["approved", "aprovado", "released", "liberado", "corrigido", "ok"]);
+const EDITORIAL_HELD_STATUSES = new Set(["held", "segurado", "blocked", "bloqueado", "reprovado", "needs-fix"]);
+
+function getEditorialGateText(item = {}) {
+  return normalizeText([
+    item.title,
+    item.summary,
+    item.lede,
+    item.category,
+    item.categoryKey,
+    item.sourceLabel,
+    item.analysis,
+    Array.isArray(item.body) ? item.body.join(" ") : item.body
+  ].join(" "));
+}
+
+function classifyArticleEditorialGate(item = {}) {
+  const text = getEditorialGateText(item);
+  if (EDITORIAL_GATE_P0_PATTERN.test(text)) {
+    return {
+      gate: "P0",
+      approval: "human-required",
+      reason: "Cobertura sensivel exige decisao humana antes de publicacao sensivel ou destaque."
+    };
+  }
+  if (EDITORIAL_GATE_P1_PATTERN.test(text)) {
+    return {
+      gate: "P1",
+      approval: "editor-review",
+      reason: "Cobertura civica/local exige revisao editorial antes de destaque."
+    };
+  }
+  return {
+    gate: "P2",
+    approval: "auto-check",
+    reason: "Baixo risco editorial; liberado com checks automaticos."
+  };
+}
+
+function getEditorialApprovalKey(item = {}) {
+  return cleanShortText(item.slug || item.id || item.sourceUrl || slugify(item.title || ""), 160).toLowerCase();
+}
+
+function readEditorialApprovalLocks() {
+  const payload = readJson(EDITORIAL_APPROVAL_LOCKS_FILE, { version: 1, decisions: [] });
+  const decisions = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.decisions)
+      ? payload.decisions
+      : [];
+  return decisions
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      id: cleanShortText(item.id || createRecordId("approval"), 120),
+      slug: cleanShortText(item.slug || item.articleSlug || "", 160),
+      status: cleanShortText(item.status || item.decision || "", 60).toLowerCase(),
+      gate: cleanShortText(item.gate || "", 20).toUpperCase(),
+      allowedPublication: item.allowedPublication === true || item.publicationAllowed === true,
+      allowedHighlight: item.allowedHighlight === true || item.highlightAllowed === true,
+      reviewer: cleanShortText(item.reviewer || item.approvedBy || "Cheffe Call", 120),
+      note: cleanShortText(item.note || item.publicNote || "", 360),
+      decidedAt: cleanShortText(item.decidedAt || item.updatedAt || item.createdAt || "", 80),
+      createdAt: cleanShortText(item.createdAt || item.decidedAt || "", 80),
+      updatedAt: cleanShortText(item.updatedAt || item.decidedAt || item.createdAt || "", 80)
+    }))
+    .filter((item) => item.slug);
+}
+
+function getEditorialApprovalDecision(item = {}, decisions = readEditorialApprovalLocks()) {
+  const keys = [
+    getEditorialApprovalKey(item),
+    cleanShortText(item.id || "", 160).toLowerCase(),
+    cleanShortText(item.sourceUrl || item.url || item.link || "", 160).toLowerCase(),
+    slugify(item.title || "").toLowerCase()
+  ].filter(Boolean);
+  return decisions.find((decision) => keys.includes(decision.slug.toLowerCase())) || null;
+}
+
+function isEditorialDecisionApproved(decision = {}) {
+  return Boolean(decision) && EDITORIAL_APPROVED_STATUSES.has(String(decision.status || "").toLowerCase());
+}
+
+function buildArticleEditorialDossier(item = {}, decisions = readEditorialApprovalLocks()) {
+  const gateInfo = classifyArticleEditorialGate(item);
+  const sources = getArticleSourceEntries(item);
+  const sourceIssues = [];
+  if (!sources.length || !sources.some((source) => source.url)) sourceIssues.push("sem-url-da-fonte");
+  if (!sources.some((source) => source.name)) sourceIssues.push("sem-nome-da-fonte");
+  if (gateInfo.gate === "P0" && sources.length < 2) sourceIssues.push("p0-com-fonte-unica");
+
+  const imageUrl = cleanShortText(item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "", 600);
+  const imageCredit = cleanShortText(item.imageCredit || item.credit || item.media?.credit || "", 220);
+  const imageLabel = !imageUrl
+    ? "sem-imagem"
+    : /assets\/news-fallbacks|fallback|placeholder|thumb-/i.test(imageUrl)
+      ? "ilustracao-editorial"
+      : /^https?:\/\//i.test(imageUrl)
+        ? "imagem-de-fonte"
+        : "imagem-local";
+  const visualIssues = [];
+  if (!imageUrl) visualIssues.push("sem-imagem");
+  if (gateInfo.gate !== "P2" && imageUrl && !imageCredit) visualIssues.push("p0-p1-sem-credito-visual");
+  if (gateInfo.gate === "P0" && imageLabel === "ilustracao-editorial") visualIssues.push("p0-com-ilustracao-generica");
+
+  const decision = getEditorialApprovalDecision(item, decisions);
+  const approved = isEditorialDecisionApproved(decision);
+  const held = decision ? EDITORIAL_HELD_STATUSES.has(String(decision.status || "").toLowerCase()) : false;
+  const publicationLocked =
+    held || (gateInfo.gate === "P0" && !approved && !Boolean(decision?.allowedPublication));
+  const highlightLocked =
+    held || ((gateInfo.gate === "P0" || gateInfo.gate === "P1") && !approved && !Boolean(decision?.allowedHighlight));
+  const slug = cleanShortText(item.slug || slugify(item.title || item.sourceUrl || ""), 140);
+
+  return {
+    id: `dossier-${slug || getEditorialApprovalKey(item) || "item"}`,
+    slug,
+    title: cleanShortText(item.title || "Sem titulo", 180),
+    gate: gateInfo.gate,
+    approval: gateInfo.approval,
+    gateReason: gateInfo.reason,
+    sourceStatus: sourceIssues.length ? "pending" : "ok",
+    sourceIssues,
+    sourceCount: sources.length,
+    sources: sources.slice(0, 4),
+    visualStatus: visualIssues.length ? "pending" : "ok",
+    visualIssues,
+    imageLabel,
+    publicationLock: {
+      publicationLocked,
+      highlightLocked,
+      publicationAllowed: !publicationLocked,
+      highlightAllowed: !highlightLocked,
+      requiredDecision:
+        gateInfo.gate === "P0"
+          ? "aprovacao-humana-antes-de-publicar-ou-destacar"
+          : gateInfo.gate === "P1"
+            ? "revisao-editorial-antes-de-destaque"
+            : "checks-automaticos"
+    },
+    approvalDecision: decision
+      ? {
+          status: decision.status,
+          reviewer: decision.reviewer,
+          note: decision.note,
+          decidedAt: decision.decidedAt
+        }
+      : null,
+    checklist: [
+      "titulo/resumo em portugues",
+      "fonte original preservada",
+      gateInfo.gate === "P0" ? "decisao humana registrada" : "",
+      gateInfo.gate === "P1" ? "revisao editorial registrada antes de destaque" : "",
+      "imagem e credito conferidos",
+      "correcao publica registrada se houver ajuste posterior"
+    ].filter(Boolean)
+  };
+}
+
+function applyEditorialGateToArticle(item = {}, decisions = readEditorialApprovalLocks()) {
+  const dossier = buildArticleEditorialDossier(item, decisions);
+  return {
+    ...item,
+    editorialGate: {
+      gate: dossier.gate,
+      approval: dossier.approval,
+      reason: dossier.gateReason,
+      publicationAllowed: dossier.publicationLock.publicationAllowed,
+      highlightAllowed: dossier.publicationLock.highlightAllowed,
+      publicationLocked: dossier.publicationLock.publicationLocked,
+      highlightLocked: dossier.publicationLock.highlightLocked,
+      sourceStatus: dossier.sourceStatus,
+      visualStatus: dossier.visualStatus,
+      decision: dossier.approvalDecision
+    },
+    editorialDossier: dossier
+  };
+}
+
+function applyEditorialPublicationGateToCollection(items = [], options = {}) {
+  const decisions = readEditorialApprovalLocks();
+  const includeLocked = Boolean(options.includeLocked);
+  return (Array.isArray(items) ? items : [])
+    .map((item) => applyEditorialGateToArticle(item, decisions))
+    .filter((item) => includeLocked || item.editorialGate?.publicationAllowed !== false);
+}
+
+function buildEditorialApprovalLocksPayload() {
+  const decisions = readEditorialApprovalLocks();
+  return {
+    ok: true,
+    kind: "editorial-approval-locks",
+    file: path.relative(ROOT_DIR, EDITORIAL_APPROVAL_LOCKS_FILE).replace(/\\/g, "/"),
+    total: decisions.length,
+    approved: decisions.filter(isEditorialDecisionApproved).length,
+    decisions: decisions.slice(0, 120)
+  };
+}
+
+function recordEditorialApprovalDecision(body = {}) {
+  const now = new Date().toISOString();
+  const slug = cleanShortText(body.slug || body.articleSlug || "", 160);
+  if (!slug) {
+    return { ok: false, status: 400, error: "slug obrigatório para registrar aprovação editorial." };
+  }
+  const gate = cleanShortText(body.gate || "", 20).toUpperCase() || "P1";
+  const rawStatus = cleanShortText(body.status || body.decision || "approved", 60).toLowerCase();
+  const status = rawStatus || "approved";
+  const decision = {
+    id: cleanShortText(body.id || `approval-${slug}-${Date.now()}`, 160),
+    slug,
+    gate,
+    status,
+    allowedPublication:
+      body.allowedPublication === true ||
+      body.publicationAllowed === true ||
+      (status && !EDITORIAL_HELD_STATUSES.has(status)),
+    allowedHighlight:
+      body.allowedHighlight === true ||
+      body.highlightAllowed === true ||
+      EDITORIAL_APPROVED_STATUSES.has(status),
+    reviewer: cleanShortText(body.reviewer || body.approvedBy || "Cheffe Call", 120),
+    note: cleanShortText(body.note || body.publicNote || "", 360),
+    decidedAt: now,
+    createdAt: cleanShortText(body.createdAt || now, 80),
+    updatedAt: now
+  };
+  const store = readJson(EDITORIAL_APPROVAL_LOCKS_FILE, { version: 1, decisions: [] });
+  const current = Array.isArray(store?.decisions) ? store.decisions : Array.isArray(store) ? store : [];
+  const next = [decision, ...current.filter((item) => cleanShortText(item?.slug || "", 160) !== slug)].slice(0, 500);
+  writeJson(EDITORIAL_APPROVAL_LOCKS_FILE, { version: 1, updatedAt: now, decisions: next });
+  newsApiResponseCache.clear();
+  return { ok: true, decision, ...buildEditorialApprovalLocksPayload() };
+}
+
 function mergeCrossedArticleRecord(preferred = {}, secondary = {}) {
   const crossSources = getArticleSourceEntries(preferred);
 
@@ -6591,7 +6836,7 @@ function getArticleStorageKey(item = {}) {
   return String(getArticleCanonicalKey(item) || item.slug || item.id || item.title || "").trim();
 }
 
-function getArticleNews(limit = 30) {
+function getArticleNews(limit = 30, options = {}) {
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
 
@@ -6602,10 +6847,12 @@ function getArticleNews(limit = 30) {
     }
   });
 
-  return repairNewsImagesForDisplay(Array.from(map.values()).sort(sortArticleItems).slice(0, limit));
+  return repairNewsImagesForDisplay(
+    applyEditorialPublicationGateToCollection(Array.from(map.values()), options).sort(sortArticleItems).slice(0, limit)
+  );
 }
 
-function buildArticleNewsApiPayload(limit = 60) {
+function buildArticleNewsApiPayload(limit = 60, options = {}) {
   const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
@@ -6617,28 +6864,37 @@ function buildArticleNewsApiPayload(limit = 60) {
     }
   });
 
-  const sorted = Array.from(map.values()).sort(sortArticleItems);
+  const allSorted = Array.from(map.values()).sort(sortArticleItems);
+  const sorted = applyEditorialPublicationGateToCollection(allSorted, options);
   const visibleItems = repairNewsImagesForDisplay(sorted.slice(0, safeLimit));
+  const lockedTotal = allSorted.length - sorted.length;
 
   return {
     ok: true,
     total: sorted.length,
     archiveTotal: sorted.length,
+    lockedTotal,
+    editorialPublicationGate: {
+      includeLocked: Boolean(options.includeLocked),
+      lockedTotal,
+      rule: "P0 sem decisao humana fica fora da publicacao publica; P1 sem revisao fica fora de destaque."
+    },
     returned: visibleItems.length,
     items: visibleItems
   };
 }
 
-function getCachedArticleNewsApiPayload(limit = 60) {
+function getCachedArticleNewsApiPayload(limit = 60, options = {}) {
   const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
-  const key = `limit:${safeLimit}`;
+  const includeLocked = Boolean(options.includeLocked);
+  const key = `limit:${safeLimit}:locked:${includeLocked ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
 
   if (cached && cached.expiresAt > Date.now()) {
     return cached.payload;
   }
 
-  const payload = buildArticleNewsApiPayload(safeLimit);
+  const payload = buildArticleNewsApiPayload(safeLimit, { includeLocked });
   newsApiResponseCache.set(key, {
     expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
     payload
@@ -6678,7 +6934,7 @@ function buildNewsArchivePayload(limit = 500) {
     }
   });
 
-  const sorted = Array.from(map.values()).sort((left, right) => {
+  const allSorted = Array.from(map.values()).sort((left, right) => {
     const rightDate = new Date(right.publishedAt || right.date || 0).getTime();
     const leftDate = new Date(left.publishedAt || left.date || 0).getTime();
 
@@ -6689,11 +6945,13 @@ function buildNewsArchivePayload(limit = 500) {
     return Number(right.priority || 0) - Number(left.priority || 0);
   });
 
+  const sorted = applyEditorialPublicationGateToCollection(allSorted);
   const archiveItems = repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
 
   return {
     total: sorted.length,
     archiveTotal: sorted.length,
+    lockedTotal: allSorted.length - sorted.length,
     returned: archiveItems.length,
     items: archiveItems
   };
@@ -7198,8 +7456,12 @@ function getNews(limit = 30) {
     if (!map.has(key)) map.set(key, item);
   });
 
-  return Array.from(map.values())
+  return applyEditorialPublicationGateToCollection(Array.from(map.values()))
     .sort((a, b) => {
+      const leftHighlightLocked = a?.editorialGate?.highlightAllowed === false ? 1 : 0;
+      const rightHighlightLocked = b?.editorialGate?.highlightAllowed === false ? 1 : 0;
+      if (leftHighlightLocked !== rightHighlightLocked) return leftHighlightLocked - rightHighlightLocked;
+
       const dateDiff = getPublicNewsTimestamp(b) - getPublicNewsTimestamp(a);
       if (dateDiff !== 0) return dateDiff;
 
@@ -8640,6 +8902,17 @@ function buildPublicDailyAgentPulse() {
   const staleAfterMs = Math.max(REAL_AGENTS_AUTO_RUN_INTERVAL_MS * 2, 90 * 60 * 1000);
   const lastRunAgeMinutes = lastRunAgeMs === null ? null : Math.max(0, Math.round(lastRunAgeMs / 60000));
   const stale = missingLatestRun || (lastRunAgeMs !== null && lastRunAgeMs > staleAfterMs);
+  const runtimeNewsPayload = readJson(path.join(DATA_DIR, "runtime-news.json"), null);
+  const runtimeNewsItems = getJsonArray(path.join(DATA_DIR, "runtime-news.json"));
+  const archiveNewsItems = getJsonArray(path.join(DATA_DIR, "news-archive.json"));
+  const newsUpdatedAt = cleanShortText(
+    runtimeNewsPayload?.updatedAt ||
+      runtimeNewsPayload?.generatedAt ||
+      runtimeNewsItems[0]?.publishedAt ||
+      runtimeNewsItems[0]?.date ||
+      "",
+    80
+  );
   const timelineBySlug = new Map();
   const timelineByName = new Map();
 
@@ -8698,6 +8971,18 @@ function buildPublicDailyAgentPulse() {
     lastRunAgeMinutes,
     lastRunAgeLabel: lastRunAgeMinutes === null ? "sem rodada registrada" : `${lastRunAgeMinutes} min`,
     runtimePersistence: payload.runtimePersistence || null,
+    newsRefresh: {
+      intervalMs: NEWS_REFRESH_INTERVAL_MS,
+      fullAgentsIntervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
+      autoAgentsEnabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
+      lastRuntimeNewsAt: newsUpdatedAt,
+      runtimeItems: runtimeNewsItems.length,
+      archiveItems: archiveNewsItems.length,
+      freshItems: runtimeNewsItems.filter((item) => {
+        const time = Date.parse(item.publishedAt || item.date || item.updatedAt || "");
+        return Number.isFinite(time) && Date.now() - time <= 24 * 60 * 60 * 1000;
+      }).length
+    },
     summary: {
       totalAgents: Number(payload.summary?.totalAgents || 0),
       totalOffices: Number(payload.summary?.totalOffices || 0),
@@ -10898,6 +11183,55 @@ function buildEditorialCorrectionsLog() {
   };
 }
 
+function buildPublicEditorialCorrectionsLog(limit = 24) {
+  const payload = buildEditorialCorrectionsLog();
+  const latest = Array.isArray(payload.latest)
+    ? payload.latest.filter((item) => ["corrigido", "closed", "resolvido", "logged"].includes(String(item.status || "").toLowerCase()))
+    : [];
+  return {
+    ok: true,
+    kind: "public-editorial-corrections",
+    file: payload.file,
+    total: payload.total,
+    returned: Math.max(0, Math.min(Number(limit) || 24, latest.length)),
+    corrections: latest.slice(0, Math.max(1, Math.min(Number(limit) || 24, 80))).map((item) => ({
+      id: item.id,
+      title: item.title,
+      severity: item.severity,
+      publicNote: item.publicNote || "Correção registrada pela redação.",
+      correctedAt: item.correctedAt
+    }))
+  };
+}
+
+function recordEditorialCorrection(body = {}) {
+  const now = new Date().toISOString();
+  const title = cleanShortText(body.title || body.articleTitle || "Correcao editorial", 180);
+  const correction = {
+    id: cleanShortText(body.id || createRecordId("cor"), 120),
+    status: cleanShortText(body.status || "corrigido", 40),
+    severity: cleanShortText(body.severity || "media", 40),
+    title,
+    slug: cleanShortText(body.slug || body.articleSlug || "", 160),
+    file: cleanShortText(body.file || "", 220),
+    before: cleanShortText(body.before || "", 260),
+    after: cleanShortText(body.after || "", 260),
+    publicNote: cleanShortText(body.publicNote || body.note || `Correção registrada: ${title}`, 360),
+    correctedBy: cleanShortText(body.correctedBy || body.reviewer || "Cheffe Call", 120),
+    correctedAt: now,
+    createdAt: now,
+    updatedAt: now
+  };
+  const store = readJson(EDITORIAL_CORRECTIONS_LOG_FILE, { version: 1, corrections: [] });
+  const current = Array.isArray(store?.corrections) ? store.corrections : Array.isArray(store) ? store : [];
+  writeJson(EDITORIAL_CORRECTIONS_LOG_FILE, {
+    version: 1,
+    updatedAt: now,
+    corrections: [correction, ...current].slice(0, 500)
+  });
+  return { ok: true, correction, corrections: buildPublicEditorialCorrectionsLog() };
+}
+
 function buildEditorialHealthReport() {
   const report = readJson(EDITORIAL_HEALTH_REPORT_JSON_FILE, null);
   const file = path.relative(ROOT_DIR, EDITORIAL_HEALTH_REPORT_JSON_FILE).replace(/\\/g, "/");
@@ -10916,11 +11250,17 @@ function buildEditorialHealthReport() {
         visualIssues: 0,
         titleAlternativeCount: 0,
         specialCandidates: 0,
-        actionQueueTotal: 0
+        actionQueueTotal: 0,
+        publicationLocks: 0,
+        highlightLocks: 0,
+        approvedLocks: 0
       },
       gates: { P0: 0, P1: 0, P2: 0 },
       humanApprovalQueue: [],
       actionQueue: [],
+      queueGroups: {},
+      articleDossiers: [],
+      approvalLocks: buildEditorialApprovalLocksPayload(),
       titleAlternatives: [],
       specialFormats: []
     };
@@ -10939,8 +11279,35 @@ function buildEditorialHealthReport() {
     visualIntegrity: report.visualIntegrity && typeof report.visualIntegrity === "object" ? report.visualIntegrity : {},
     humanApprovalQueue: Array.isArray(report.humanApprovalQueue) ? report.humanApprovalQueue.slice(0, 24) : [],
     actionQueue: Array.isArray(report.actionQueue) ? report.actionQueue.slice(0, 32) : [],
+    queueGroups: report.queueGroups && typeof report.queueGroups === "object" ? report.queueGroups : {},
+    articleDossiers: Array.isArray(report.articleDossiers) ? report.articleDossiers.slice(0, 32) : [],
+    approvalLocks: report.approvalLocks && typeof report.approvalLocks === "object" ? report.approvalLocks : buildEditorialApprovalLocksPayload(),
     titleAlternatives: Array.isArray(report.titleAlternatives) ? report.titleAlternatives.slice(0, 24) : [],
     specialFormats: Array.isArray(report.specialFormats) ? report.specialFormats.slice(0, 24) : []
+  };
+}
+
+function buildEditorialDossiersPayload(limit = 80, options = {}) {
+  const safeLimit = Math.max(1, Math.min(Number(limit) || 80, 300));
+  const items = getRawNewsItems().map(normalizeArticleRecord);
+  const map = new Map();
+  items.forEach((item) => {
+    const key = getArticleStorageKey(item);
+    if (key) upsertCrossedArticleRecord(map, key, item);
+  });
+  const decisions = readEditorialApprovalLocks();
+  const dossiers = Array.from(map.values())
+    .sort(sortArticleItems)
+    .map((item) => buildArticleEditorialDossier(item, decisions));
+  const visible = options.includeLocked ? dossiers : dossiers.filter((item) => !item.publicationLock.publicationLocked);
+  return {
+    ok: true,
+    kind: "editorial-article-dossiers",
+    total: dossiers.length,
+    returned: visible.slice(0, safeLimit).length,
+    lockedTotal: dossiers.filter((item) => item.publicationLock.publicationLocked).length,
+    highlightLockedTotal: dossiers.filter((item) => item.publicationLock.highlightLocked).length,
+    items: visible.slice(0, safeLimit)
   };
 }
 
@@ -11152,6 +11519,8 @@ function buildCheffeCallPayload() {
   const editorialFlow = {
     training: editorialTraining,
     corrections: buildEditorialCorrectionsLog(),
+    publicCorrections: buildPublicEditorialCorrectionsLog(12),
+    approvalLocks: buildEditorialApprovalLocksPayload(),
     websiteNumbers: buildWebsiteNumbersForCheffe(),
     health: buildEditorialHealthReport()
   };
@@ -13737,6 +14106,42 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 201, { ok: true, order, ...buildPubPaidSpriteScoutPayload() });
   }
 
+  if (req.method === "GET" && pathname === "/api/editorial/corrections") {
+    const limit = Number(searchParams.get("limit") || 24);
+    return sendJson(res, 200, buildPublicEditorialCorrectionsLog(limit));
+  }
+
+  if (req.method === "POST" && pathname === "/api/editorial/corrections") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para registrar correcao." });
+    }
+    return sendJson(res, 201, recordEditorialCorrection(body));
+  }
+
+  if (req.method === "GET" && pathname === "/api/editorial/approval-locks") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para ver travas editoriais." });
+    }
+    return sendJson(res, 200, buildEditorialApprovalLocksPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/editorial/approval-locks") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para aprovar gate editorial." });
+    }
+    const result = recordEditorialApprovalDecision(body);
+    return sendJson(res, result.ok ? 201 : result.status || 400, result);
+  }
+
+  if (req.method === "GET" && pathname === "/api/editorial/dossiers") {
+    const limit = Number(searchParams.get("limit") || 80);
+    const includeLocked = /^(1|true|yes|sim)$/i.test(String(searchParams.get("includeLocked") || "")) &&
+      requireFullAdminOrderAccess(req);
+    return sendJson(res, 200, buildEditorialDossiersPayload(limit, { includeLocked }));
+  }
+
   if (req.method === "GET" && pathname === "/api/news/aggregator") {
     const limit = Number(searchParams.get("limit") || 30);
     return sendJson(res, 200, { items: getNews(Math.max(1, Math.min(200, limit))) });
@@ -13744,7 +14149,9 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 60);
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
+    const includeLocked = /^(1|true|yes|sim)$/i.test(String(searchParams.get("includeLocked") || "")) &&
+      requireFullAdminOrderAccess(req);
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { includeLocked }));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {

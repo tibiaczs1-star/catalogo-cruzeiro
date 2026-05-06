@@ -21,14 +21,12 @@ services:
         value: https://catalogo-cruzeiro-web.onrender.com
       - key: DATA_DIR
         value: /opt/render/project/src/render-data
+      - key: NEWS_REFRESH_INTERVAL_MS
+        value: "900000"
       - key: REAL_AGENTS_AUTO_RUN_DISABLED
         value: "false"
       - key: REAL_AGENTS_AUTO_RUN_INTERVAL_MS
         value: "28800000"
-      - key: NEWS_REFRESH_INTERVAL_MS
-        value: "900000"
-      - key: NEWS_REFRESH_IMAGE_ENRICH_LIMIT
-        value: "48"
       - key: ADMIN_TOKEN
         sync: false
       - key: SUPER_ADMIN_USER
