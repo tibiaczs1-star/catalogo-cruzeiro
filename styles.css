@@ -2643,10 +2643,13 @@ body.editorial-home .page-shell {
   letter-spacing: 0.03em;
   text-transform: none;
   line-height: 1.25;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  max-height: calc(1.25em * 2);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-  overflow: hidden;
+  line-clamp: 2;
 }
 
 .ticker-chip-caret {
