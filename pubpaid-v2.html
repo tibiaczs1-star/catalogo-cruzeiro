@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260423lobbyclean1" />
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260505arrivalfix1" />
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260424tightsprites1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260506npcwalk5f1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -42,10 +42,10 @@
       <header class="ppg-topbar" aria-label="Barra do PubPaid 2.0">
         <div class="ppg-topbar-copy">
           <p class="ppg-kicker">pubpaid 2.0 oficial</p>
-          <h1>A abertura agora é uma sequência bitmap dentro do jogo.</h1>
+          <h1>Entre com Google e escolha seu personagem.</h1>
           <p>
-            Seis quadros montam a chegada, o celular, o toque, o neon e o quadro final congelado.
-            Depois entram termos, Google e a rua em tela cheia.
+            A entrada agora começa pela conta, abre a frente do bar e só libera o controle depois
+            da escolha entre protagonista homem ou mulher.
           </p>
         </div>
         <div class="ppg-topbar-actions">
@@ -70,7 +70,7 @@
           <button class="ppg-audio-toggle" type="button" data-audio-toggle aria-pressed="false">
             Som 16-bit
           </button>
-          <div class="ppg-permission-gate" data-permission-gate>
+          <div class="ppg-permission-gate" data-permission-gate hidden>
             <section class="ppg-permission-card" aria-label="Permissões para iniciar PubPaid 2.0">
               <p class="ppg-kicker">antes da abertura</p>
               <h2>Ative som e tela cheia.</h2>
@@ -102,9 +102,9 @@
             </section>
 
             <section class="ppg-splash-card ppg-splash-step" data-splash-step="auth" hidden data-google-auth-card>
-              <p class="ppg-kicker">acesso</p>
-              <h2 data-auth-title>Acesso pronto</h2>
-              <p data-google-auth-status>Escolha como entrar.</p>
+              <p class="ppg-kicker">acesso google</p>
+              <h2 data-auth-title>Entrar no PubPaid</h2>
+              <p data-google-auth-status>Entre com Google para abrir a frente do bar.</p>
               <p class="ppg-splash-note" data-google-auth-email>
                 entrada por conta
               </p>
@@ -115,6 +115,31 @@
               </div>
             </section>
           </div>
+          <section class="ppg-character-select" data-character-select hidden aria-live="polite">
+            <div class="ppg-character-select__panel">
+              <header>
+                <span class="ppg-kicker">personagem</span>
+                <h2>Escolha quem entra no PubPaid</h2>
+                <p>Depois da escolha, um carro deixa o personagem na rua antes do controle livre.</p>
+              </header>
+              <div class="ppg-character-grid">
+                <button type="button" class="ppg-character-card" data-character-choice="male">
+                  <span class="ppg-character-frame">
+                    <span class="ppg-character-turnaround is-male" aria-hidden="true"></span>
+                  </span>
+                  <strong>Homem</strong>
+                  <small>protagonista atual</small>
+                </button>
+                <button type="button" class="ppg-character-card is-female" data-character-choice="female">
+                  <span class="ppg-character-frame">
+                    <span class="ppg-character-turnaround is-female" aria-hidden="true"></span>
+                  </span>
+                  <strong>Mulher</strong>
+                  <small>protagonista nova</small>
+                </button>
+              </div>
+            </div>
+          </section>
           <div class="ppg-hud" data-game-hud>
             <article class="ppg-hud-debug">
               <span>scene</span>
@@ -158,6 +183,92 @@
             <strong data-game-objective>entrar no PubPaid</strong>
             <span data-game-prompt-copy>Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão.</span>
           </div>
+          <section class="ppg-mobile-controls" data-mobile-controls aria-label="Controles mobile PubPaid">
+            <div class="ppg-mobile-dpad" aria-label="Direcional">
+              <button type="button" data-mobile-control="up" class="ppg-mobile-btn ppg-dpad-up" aria-label="Mover para cima">▲</button>
+              <button type="button" data-mobile-control="left" class="ppg-mobile-btn ppg-dpad-left" aria-label="Mover para esquerda">◀</button>
+              <span class="ppg-dpad-center" aria-hidden="true"></span>
+              <button type="button" data-mobile-control="right" class="ppg-mobile-btn ppg-dpad-right" aria-label="Mover para direita">▶</button>
+              <button type="button" data-mobile-control="down" class="ppg-mobile-btn ppg-dpad-down" aria-label="Mover para baixo">▼</button>
+            </div>
+            <div class="ppg-mobile-actions" aria-label="Ações">
+              <button type="button" data-mobile-control="door" class="ppg-mobile-action is-door">
+                <span>Porta</span>
+              </button>
+              <button type="button" data-mobile-control="wallet" class="ppg-mobile-action is-wallet">
+                <span>Carteira</span>
+              </button>
+              <button type="button" data-mobile-control="config" class="ppg-mobile-action is-config">
+                <span>Config</span>
+              </button>
+            </div>
+          </section>
+          <section class="ppg-mobile-settings" data-mobile-settings hidden aria-live="polite" aria-label="Configurações mobile">
+            <header>
+              <span class="ppg-kicker">config</span>
+              <strong>Controles</strong>
+            </header>
+            <p>Som, tela e toque mobile.</p>
+            <div class="ppg-mobile-settings-actions">
+              <button type="button" data-audio-toggle>Som 16-bit</button>
+              <button type="button" data-mobile-settings-close>Voltar</button>
+            </div>
+          </section>
+          <section class="ppg-wallet-pix" data-wallet-pix hidden aria-live="polite" aria-label="Pix da carteira PubPaid">
+            <div class="ppg-wallet-pix__panel">
+              <header class="ppg-wallet-pix__head">
+                <div>
+                  <span class="ppg-kicker" data-wallet-pix-kicker>pix</span>
+                  <h2 data-wallet-pix-title>Adicionar dinheiro</h2>
+                </div>
+                <button type="button" data-wallet-pix-close aria-label="Voltar para carteira">ESC</button>
+              </header>
+
+              <div class="ppg-wallet-pix__section" data-wallet-pix-deposit>
+                <p class="ppg-wallet-pix__copy">
+                  Gere o Pix dentro da carteira 2.0. Depois de pagar, avise o deposito para revisao manual.
+                </p>
+                <div class="ppg-wallet-pix__amounts" aria-label="Valores de deposito">
+                  <button type="button" data-wallet-pix-amount-preset="5">5</button>
+                  <button type="button" data-wallet-pix-amount-preset="10" class="is-selected">10</button>
+                  <button type="button" data-wallet-pix-amount-preset="20">20</button>
+                  <button type="button" data-wallet-pix-amount-preset="50">50</button>
+                  <button type="button" data-wallet-pix-amount-preset="100">100</button>
+                </div>
+                <label class="ppg-wallet-pix__field">
+                  <span>Nome no Pix</span>
+                  <input type="text" data-wallet-pix-name maxlength="90" autocomplete="name" placeholder="Quem fez o Pix" />
+                </label>
+                <div class="ppg-wallet-pix__actions">
+                  <button type="button" class="primary" data-wallet-pix-generate>Gerar Pix</button>
+                  <button type="button" data-wallet-pix-register disabled>Avisar pagamento</button>
+                </div>
+                <div class="ppg-wallet-pix__qr" data-wallet-pix-qr>
+                  <p>Escolha o valor e gere o QR Pix.</p>
+                </div>
+                <div class="ppg-wallet-pix__copycode" data-wallet-pix-copy hidden></div>
+              </div>
+
+              <div class="ppg-wallet-pix__section" data-wallet-pix-withdraw hidden>
+                <p class="ppg-wallet-pix__copy">
+                  Retirada via Pix: informe valor e chave de recebimento. O saldo fica travado ate revisao manual.
+                </p>
+                <label class="ppg-wallet-pix__field">
+                  <span>Valor</span>
+                  <input type="number" data-wallet-pix-withdraw-amount min="1" step="0.01" inputmode="decimal" placeholder="10,00" />
+                </label>
+                <label class="ppg-wallet-pix__field">
+                  <span>Chave Pix</span>
+                  <input type="text" data-wallet-pix-withdraw-key maxlength="120" autocomplete="off" placeholder="CPF, email, telefone ou chave aleatoria" />
+                </label>
+                <div class="ppg-wallet-pix__actions">
+                  <button type="button" class="primary" data-wallet-pix-withdraw-submit>Pedir retirada</button>
+                </div>
+              </div>
+
+              <p class="ppg-wallet-pix__feedback" data-wallet-pix-feedback>Pix aberto pela carteira do jogo.</p>
+            </div>
+          </section>
           <aside class="ppg-panel" data-game-panel hidden aria-live="polite">
             <div class="ppg-panel-head">
               <div>

@@ -20,6 +20,11 @@ const INTERIOR_PANELS = {
     actions: [{ id: "toggle-stage-event", label: "Ativar evento", primary: true }]
   }
 };
+const INTERIOR_PUB_NPCS = [
+  { id: "pub-bartender", key: "ppg-interior-npc-pub-bartender", x: 426, y: 274, scale: 0.45, depth: 2.06, frameRate: 0, frames: 5 },
+  { id: "pub-cue-regular", key: "ppg-interior-npc-pub-cue", x: 208, y: 204, scale: 0.43, depth: 2.04, frameRate: 0, frames: 5 },
+  { id: "pub-patron-drink", key: "ppg-interior-npc-pub-patron", x: 560, y: 326, scale: 0.5, depth: 2.12, frameRate: 4, frames: 5 }
+];
 
 export class InteriorScene extends Phaser.Scene {
   constructor() {
@@ -44,6 +49,7 @@ export class InteriorScene extends Phaser.Scene {
     this.stageOrb = null;
     this.loungeMist = null;
     this.actors = [];
+    this.pubNpcs = [];
     this.neonSigns = [];
     this.machineGlows = [];
     this.sparkles = [];
@@ -67,6 +73,14 @@ export class InteriorScene extends Phaser.Scene {
       darts: { signature: "" },
       checkers: { signature: "" }
     };
+    this.walletMenuOpening = false;
+    this.walletMenuClosing = false;
+    this.walletOpenTimer = null;
+    this.walletCloseTimer = null;
+    this.mobileActions = new Set();
+    this.handleMobileControl = this.handleMobileControl.bind(this);
+    this.handleWalletCloseRequest = this.handleWalletCloseRequest.bind(this);
+    this.handleWalletClosed = this.handleWalletClosed.bind(this);
   }
 
   create() {
@@ -81,6 +95,7 @@ export class InteriorScene extends Phaser.Scene {
       this.addActor(TEXTURE_KEYS.guestB, 874, 528, 0.06, 2600, 0x50efff, { staticBitmap: true, depth: 2.18, alpha: 0.82 }),
       this.addActor(TEXTURE_KEYS.guestA, 1112, 530, 0.062, 2800, 0xffd06d, { staticBitmap: true, depth: 2.2, alpha: 0.82 })
     ];
+    this.pubNpcs = this.buildInteriorPubNpcs();
 
     this.player = this.buildPlayer(640, 608);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -112,10 +127,23 @@ export class InteriorScene extends Phaser.Scene {
     this.input.keyboard.on("keydown-A", () => this.nudgePlayer(-40, 0));
     this.input.keyboard.on("keydown-S", () => this.nudgePlayer(0, 40));
     this.input.keyboard.on("keydown-D", () => this.nudgePlayer(40, 0));
-    this.input.keyboard.on("keydown-ENTER", () => this.tryInteraction());
+    this.input.keyboard.on("keydown-ENTER", () => this.openWalletMenuSequence());
+    this.input.keyboard.on("keydown-E", () => this.tryInteraction());
+    this.game.events.on("pubpaid:mobile-control", this.handleMobileControl, this);
+    this.game.events.on("pubpaid:wallet-close-request", this.handleWalletCloseRequest, this);
+    this.game.events.on("pubpaid:wallet-closed", this.handleWalletClosed, this);
+
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.game.events.off("pubpaid:mobile-control", this.handleMobileControl, this);
+      this.game.events.off("pubpaid:wallet-close-request", this.handleWalletCloseRequest, this);
+      this.game.events.off("pubpaid:wallet-closed", this.handleWalletClosed, this);
+      this.walletOpenTimer?.remove(false);
+      this.walletCloseTimer?.remove(false);
+      this.mobileActions.clear();
+    });
 
     this.input.on("pointerdown", (pointer) => {
-      if (this.isTransitioning) return;
+      if (this.isTransitioning || this.isWalletBusy()) return;
       const worldPoint = pointer.positionToCamera(this.cameras.main);
       const clickedZone = this.getZoneAt(worldPoint.x, worldPoint.y);
       if (clickedZone) {
@@ -132,7 +160,7 @@ export class InteriorScene extends Phaser.Scene {
         focus: "salão",
         objective: "Explorar pontos ativos do salão",
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
-        prompt: "Destino marcado. Aproxime-se do garçom e aperte a tecla Entrar para abrir o saguão de mesas."
+        prompt: "Destino marcado. Aproxime-se do garçom e aperte E para abrir o saguão de mesas."
       });
     });
 
@@ -141,7 +169,7 @@ export class InteriorScene extends Phaser.Scene {
       focus: "salão",
       objective: "Falar com o garçom para escolher jogo",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Salão definitivo carregado. O garçom no centro abre o saguão de mesas; os jogos acontecem fora do bar, em tela própria."
+      prompt: "Salão definitivo carregado. Enter abre a carteira; E interage com garçom, palco e saída."
     });
   }
 
@@ -1306,15 +1334,212 @@ export class InteriorScene extends Phaser.Scene {
     graphics.lineBetween(0, radius * 0.2, 0, radius * 0.38);
   }
 
+  getPlayerRig() {
+    const maleRig = {
+      character: "male",
+      frames: 4,
+      scale: 0.88,
+      walkFrameMs: 115,
+      idleFrameMs: 480,
+      phoneFrameMs: 360,
+      keys: {
+        walk: "ppg-player-walk-sheet",
+        idleBreathe: "ppg-player-idle-breathe-sheet",
+        idlePhone: "ppg-player-idle-phone-sheet"
+      }
+    };
+    const femaleRig = {
+      character: "female",
+      frames: 4,
+      scale: 0.88,
+      walkFrameMs: 110,
+      idleFrameMs: 430,
+      phoneFrameMs: 320,
+      keys: {
+        walk: "ppg-player-female-walk-sheet",
+        idleBreathe: "ppg-player-female-idle-breathe-sheet",
+        idlePhone: "ppg-player-female-idle-phone-sheet"
+      }
+    };
+    const rig = gameState.selectedCharacter === "female" ? femaleRig : maleRig;
+    const hasAll = this.textures.exists(rig.keys.walk)
+      && this.textures.exists(rig.keys.idleBreathe)
+      && this.textures.exists(rig.keys.idlePhone);
+    return hasAll ? rig : maleRig;
+  }
+
   buildPlayer(x, y) {
     const player = this.add.container(x, y).setDepth(2.55);
     const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
-    const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
+    const rig = this.getPlayerRig();
+    const hasFinalSheets = this.textures.exists(rig.keys.walk)
+      && this.textures.exists(rig.keys.idleBreathe)
+      && this.textures.exists(rig.keys.idlePhone);
+    const sprite = this.add.image(0, 0, hasFinalSheets ? rig.keys.idleBreathe : TEXTURE_KEYS.player)
       .setOrigin(0.5, 1)
-      .setScale(0.083);
+      .setScale(hasFinalSheets ? rig.scale : 0.083);
+    if (hasFinalSheets) sprite.setFrame(0);
     player.add([shadow, sprite]);
+    player.ppgSprite = sprite;
+    player.ppgFacing = 0;
+    player.ppgMoving = false;
+    player.ppgAnimationMode = "idle_breathe";
+    player.ppgLastMoveAt = 0;
+    player.ppgCharacter = rig.character;
     return player;
+  }
+
+  updatePlayerSprite(vector) {
+    const sprite = this.player?.ppgSprite;
+    const rig = this.getPlayerRig();
+    const keys = rig.keys;
+    if (!sprite || !this.textures.exists(keys.walk)) return;
+    const now = this.time.now || this.game.loop?.time || 0;
+    if (!this.player.ppgLastMoveAt) {
+      this.player.ppgLastMoveAt = now;
+    }
+    if (this.player.ppgCharacter !== rig.character) {
+      this.player.ppgCharacter = rig.character;
+      this.player.ppgFacing = 0;
+      this.player.ppgLastMoveAt = now;
+      sprite.setScale(rig.scale);
+    }
+    const moving = vector && vector.lengthSq() > 0.001;
+    if (moving) {
+      const angle = Phaser.Math.RadToDeg(Math.atan2(vector.y, vector.x));
+      const directions = [
+        { frame: 0, angle: 90 },
+        { frame: 1, angle: 45 },
+        { frame: 2, angle: 0 },
+        { frame: 3, angle: -45 },
+        { frame: 4, angle: -90 },
+        { frame: 5, angle: -135 },
+        { frame: 6, angle: 180 },
+        { frame: 7, angle: 135 }
+      ];
+      const nearest = directions
+        .map((entry) => ({ ...entry, distance: Math.abs(Phaser.Math.Angle.ShortestBetween(angle, entry.angle)) }))
+        .sort((a, b) => a.distance - b.distance)[0];
+      this.player.ppgFacing = nearest.frame;
+      this.player.ppgMoving = true;
+      this.player.ppgLastMoveAt = now;
+    } else {
+      this.player.ppgMoving = false;
+    }
+    const idleMs = now - (this.player.ppgLastMoveAt || now);
+    const phoneSequence = this.player.ppgPhoneSequence;
+    const phoneSequenceActive = Boolean(phoneSequence && now < phoneSequence.until);
+    const phoneActive = phoneSequenceActive || gameState.walletOpen;
+    const nextMode = moving ? "walk" : phoneActive ? "idle_phone" : "idle_breathe";
+    const textureKey = nextMode === "walk"
+      ? keys.walk
+      : nextMode === "idle_phone"
+        ? keys.idlePhone
+        : keys.idleBreathe;
+    if (sprite.texture?.key !== textureKey) {
+      sprite.setTexture(textureKey);
+    }
+    let frameIndex = 0;
+    if (nextMode === "walk") {
+      frameIndex = Math.floor(now / rig.walkFrameMs) % rig.frames;
+    } else if (nextMode === "idle_phone") {
+      frameIndex = this.getPhoneFrameIndex(phoneSequence, rig, now);
+    } else if (idleMs >= 3000) {
+      frameIndex = Math.floor(now / rig.idleFrameMs) % rig.frames;
+    }
+    sprite.setFrame((this.player.ppgFacing || 0) * rig.frames + frameIndex);
+    this.player.ppgAnimationMode = nextMode;
+    this.player.ppgCharacter = rig.character;
+  }
+
+  getPhoneFrameIndex(sequence, rig, now) {
+    if (sequence?.mode === "put-away") {
+      const elapsed = now - sequence.startedAt;
+      const lastPhoneFrame = Math.max(0, Math.min(2, rig.frames - 1));
+      if (elapsed < 170) return lastPhoneFrame;
+      if (elapsed < 350) return Math.min(1, lastPhoneFrame);
+      return 0;
+    }
+    return this.getPhonePullFrameIndex(sequence ? now - sequence.startedAt : 9999, rig);
+  }
+
+  getPhonePullFrameIndex(elapsed, rig) {
+    const lastPhoneFrame = Math.max(0, Math.min(2, rig.frames - 1));
+    if (elapsed < 170) return 0;
+    if (elapsed < 360) return Math.min(1, lastPhoneFrame);
+    return lastPhoneFrame;
+  }
+
+  isWalletBusy() {
+    return this.walletMenuOpening || this.walletMenuClosing || gameState.walletOpen;
+  }
+
+  handleWalletCloseRequest({ source } = {}) {
+    if (!this.walletMenuOpening || gameState.walletOpen) return;
+    this.walletOpenTimer?.remove(false);
+    this.walletMenuOpening = false;
+    this.startPhonePocketSequence(source === "escape" ? "ESC guardou o celular antes da carteira abrir." : "Celular guardado.");
+  }
+
+  handleWalletClosed({ fromScene } = {}) {
+    if (fromScene !== "interior") return;
+    this.startPhonePocketSequence("Guardando o celular no bolso.");
+  }
+
+  startPhonePocketSequence(prompt = "Guardando o celular no bolso.") {
+    if (!this.player) return;
+    const now = this.time.now || 0;
+    this.walletMenuClosing = true;
+    this.targetPoint = null;
+    this.targetMarker?.setVisible(false);
+    this.player.ppgPhoneSequence = {
+      mode: "put-away",
+      startedAt: now,
+      until: now + 620
+    };
+    this.updatePlayerSprite(new Phaser.Math.Vector2(0, 0));
+    updateGameState({
+      currentScene: "interior",
+      walletOpen: false,
+      walletPhase: "phone-pocket",
+      focus: "celular da carteira",
+      objective: "Guardar o celular e voltar ao controle",
+      nerdAgent: formatNerdAgent(NERD_TEAM.hud),
+      prompt
+    });
+    this.walletCloseTimer?.remove(false);
+    this.walletCloseTimer = this.time.delayedCall(620, () => {
+      this.walletMenuClosing = false;
+      if (this.player?.ppgPhoneSequence?.mode === "put-away") {
+        this.player.ppgPhoneSequence = null;
+      }
+      updateGameState({
+        currentScene: "interior",
+        walletOpen: false,
+        walletPhase: "closed",
+        focus: "salão",
+        objective: "Explorar o salão",
+        prompt: "Celular guardado. Use E para interagir com o salão."
+      });
+    });
+  }
+
+  handleMobileControl({ action, pressed } = {}) {
+    if (!action) return;
+    if (["up", "down", "left", "right"].includes(action)) {
+      if (pressed) this.mobileActions.add(action);
+      else this.mobileActions.delete(action);
+      return;
+    }
+    if (!pressed) return;
+    if (action === "wallet") {
+      this.openWalletMenuSequence();
+      return;
+    }
+    if (action === "door") {
+      this.tryInteraction();
+    }
   }
 
   addActor(textureKey, x, y, scale, pulseDuration, glowColor, options = {}) {
@@ -1340,6 +1565,33 @@ export class InteriorScene extends Phaser.Scene {
     return actor;
   }
 
+  buildInteriorPubNpcs() {
+    return INTERIOR_PUB_NPCS
+      .filter((npc) => this.textures.exists(npc.key))
+      .map((npc) => {
+        this.textures.get(npc.key)?.setFilter(Phaser.Textures.FilterMode.NEAREST);
+        const frameCount = npc.frames || 4;
+        const sprite = this.add.sprite(npc.x, npc.y, npc.key, 0)
+          .setOrigin(0.5, 1)
+          .setScale(npc.scale)
+          .setDepth(npc.depth)
+          .setAlpha(npc.alpha ?? 1);
+        if (npc.frameRate > 0) {
+          const animKey = `${npc.key}-idle-${frameCount}f`;
+          if (!this.anims.exists(animKey)) {
+            this.anims.create({
+              key: animKey,
+              frames: this.anims.generateFrameNumbers(npc.key, { start: 0, end: frameCount - 1 }),
+              frameRate: npc.frameRate,
+              repeat: -1
+            });
+          }
+          sprite.play(animKey);
+        }
+        return sprite;
+      });
+  }
+
   moveToZone(zone) {
     this.targetPoint = new Phaser.Math.Vector2(
       Phaser.Math.Clamp(zone.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
@@ -1353,12 +1605,13 @@ export class InteriorScene extends Phaser.Scene {
       nerdAgent: formatNerdAgent(zone.id === "stage" ? NERD_TEAM.sprite : zone.id === "exit" ? NERD_TEAM.engine : NERD_TEAM.physics),
       prompt:
         zone.id === "exit"
-        ? "Saída marcada. Chegue perto e aperte a tecla Entrar."
-        : `${zone.label} marcado. Chegue perto e aperte a tecla Entrar.`
+        ? "Saída marcada. Chegue perto e aperte E."
+        : `${zone.label} marcado. Chegue perto e aperte E.`
     });
   }
 
   nudgePlayer(dx, dy) {
+    if (this.isWalletBusy()) return;
     this.targetPoint = new Phaser.Math.Vector2(
       Phaser.Math.Clamp(this.player.x + dx, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
       Phaser.Math.Clamp(this.player.y + dy, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
@@ -1404,13 +1657,13 @@ export class InteriorScene extends Phaser.Scene {
 
   tryInteraction() {
     const now = this.time.now;
-    if (this.isTransitioning || now < this.interactionCooldown) return;
+    if (this.isTransitioning || this.isWalletBusy() || now < this.interactionCooldown) return;
     this.interactionCooldown = now + 250;
 
     const zone = this.getNearestZone();
     if (!zone) {
       updateGameState({
-        prompt: "Chegue perto do garçom no centro do salão ou da saída."
+        prompt: "Chegue perto do garçom no centro do salão ou da saída. Enter abre a carteira."
       });
       return;
     }
@@ -1442,21 +1695,74 @@ export class InteriorScene extends Phaser.Scene {
     });
   }
 
+  openWalletMenuSequence() {
+    const now = this.time.now || 0;
+    if (this.isTransitioning || this.isWalletBusy() || now < this.interactionCooldown) return;
+    this.interactionCooldown = now + 2600;
+    this.walletMenuOpening = true;
+    this.targetPoint = null;
+    this.targetMarker?.setVisible(false);
+    closePanel();
+    this.player.ppgPhoneSequence = {
+      mode: "pull",
+      startedAt: now,
+      revealAt: now + 2000,
+      until: now + 2600
+    };
+    this.updatePlayerSprite(new Phaser.Math.Vector2(0, 0));
+    updateGameState({
+      currentScene: "interior",
+      walletOpen: false,
+      walletPhase: "phone-pull",
+      focus: "celular da carteira",
+      objective: "Puxar a carteira pelo celular",
+      nerdAgent: formatNerdAgent(NERD_TEAM.hud),
+      prompt: "Puxando o celular. O ultimo sprite fica mais tempo antes da carteira entrar."
+    });
+    this.walletOpenTimer?.remove(false);
+    this.walletOpenTimer = this.time.delayedCall(2000, () => {
+      if (!this.scene.isActive("interior-scene") || this.isTransitioning) {
+        this.walletMenuOpening = false;
+        return;
+      }
+      this.walletMenuOpening = false;
+      this.scene.launch("wallet-scene", {
+        fromScene: "interior",
+        originX: this.player.x,
+        originY: this.player.y,
+        selectedCharacter: gameState.selectedCharacter
+      });
+      this.scene.bringToTop("wallet-scene");
+    });
+  }
+
   update() {
     if (this.isTransitioning) {
       return;
     }
 
+    const movementVector = new Phaser.Math.Vector2(0, 0);
+    if (this.isWalletBusy()) {
+      this.targetPoint = null;
+      this.targetMarker?.setVisible(false);
+      this.updatePlayerSprite(movementVector);
+      return;
+    }
     const keyboardVector = new Phaser.Math.Vector2(0, 0);
     if (this.cursors.left.isDown) keyboardVector.x -= 1;
     if (this.cursors.right.isDown) keyboardVector.x += 1;
     if (this.cursors.up.isDown) keyboardVector.y -= 1;
     if (this.cursors.down.isDown) keyboardVector.y += 1;
+    if (this.mobileActions.has("left")) keyboardVector.x -= 1;
+    if (this.mobileActions.has("right")) keyboardVector.x += 1;
+    if (this.mobileActions.has("up")) keyboardVector.y -= 1;
+    if (this.mobileActions.has("down")) keyboardVector.y += 1;
 
     if (keyboardVector.lengthSq() > 0) {
       keyboardVector.normalize().scale(2.6);
       this.player.x = Phaser.Math.Clamp(this.player.x + keyboardVector.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX);
       this.player.y = Phaser.Math.Clamp(this.player.y + keyboardVector.y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY);
+      movementVector.copy(keyboardVector);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
     } else if (this.targetPoint) {
@@ -1469,10 +1775,12 @@ export class InteriorScene extends Phaser.Scene {
         this.targetMarker.setVisible(false);
       } else {
         const speed = 2.8;
-        this.player.x += (dx / distance) * speed;
-        this.player.y += (dy / distance) * speed;
+        movementVector.set(dx / distance, dy / distance);
+        this.player.x += movementVector.x * speed;
+        this.player.y += movementVector.y * speed;
       }
     }
+    this.updatePlayerSprite(movementVector);
 
     const zone = this.getNearestZone();
     this.setActiveZone(zone?.id || null);
@@ -1562,17 +1870,17 @@ export class InteriorScene extends Phaser.Scene {
         ? zone.id === "exit"
           ? "Voltar para a rua"
           : zone.id === "waiter"
-        ? "Apertar a tecla Entrar para abrir o saguão"
-          : "Apertar a tecla Entrar para interagir"
+        ? "Apertar E para abrir o saguão"
+          : "Apertar E para interagir"
         : "Falar com o garçom no centro",
       nerdAgent: formatNerdAgent(zone ? zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud : NERD_TEAM.physics),
       prompt: zone
         ? zone.id === "exit"
-          ? "Saída localizada. Aperte a tecla Entrar para voltar para a rua."
+          ? "Saída localizada. Aperte E para voltar para a rua."
           : zone.id === "waiter"
-        ? "Garçom localizado. Aperte a tecla Entrar para abrir o saguão de jogos."
-            : `${zone.label} ativo. Aperte a tecla Entrar para interagir.`
-        : "Explore o salão. O garçom no centro abre todos os jogos."
+        ? "Garçom localizado. Aperte E para abrir o saguão de jogos."
+            : `${zone.label} ativo. Aperte E para interagir.`
+        : "Explore o salão. Enter abre a carteira; E interage com o garçom."
     });
   }
 

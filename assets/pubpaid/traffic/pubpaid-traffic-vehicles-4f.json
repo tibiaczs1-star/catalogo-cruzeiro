@@ -1,0 +1,138 @@
+{
+  "frameWidth": 256,
+  "frameHeight": 128,
+  "framesPerVehicle": 4,
+  "source": "C:\\Users\\junio\\.codex\\generated_images\\019dd0d9-7eb6-7ac2-a2d7-67cb86deb976\\ig_0ff905a97677c5270169f00e84bf808190ab6f2b61232cdaac.png",
+  "vehicles": [
+    {
+      "id": "teal_hatch",
+      "label": "Teal hatchback",
+      "kind": "car",
+      "row": 0,
+      "speed": 3.35,
+      "lane": 575,
+      "scale": 1.05,
+      "hitbox": {
+        "width": 174,
+        "height": 46
+      }
+    },
+    {
+      "id": "amber_sedan",
+      "label": "Amber sedan",
+      "kind": "car",
+      "row": 1,
+      "speed": 3.15,
+      "lane": 528,
+      "scale": 1.08,
+      "hitbox": {
+        "width": 186,
+        "height": 44
+      }
+    },
+    {
+      "id": "magenta_city",
+      "label": "Magenta city car",
+      "kind": "car",
+      "row": 2,
+      "speed": 3.55,
+      "lane": 612,
+      "scale": 1.02,
+      "hitbox": {
+        "width": 138,
+        "height": 48
+      }
+    },
+    {
+      "id": "blue_coupe",
+      "label": "Blue compact coupe",
+      "kind": "car",
+      "row": 3,
+      "speed": 3.25,
+      "lane": 654,
+      "scale": 1.06,
+      "hitbox": {
+        "width": 190,
+        "height": 44
+      }
+    },
+    {
+      "id": "navy_scooter",
+      "label": "Navy scooter",
+      "kind": "moto",
+      "row": 4,
+      "speed": 4.2,
+      "lane": 548,
+      "scale": 1.03,
+      "hitbox": {
+        "width": 112,
+        "height": 40
+      }
+    },
+    {
+      "id": "purple_sport",
+      "label": "Purple sport motorcycle",
+      "kind": "moto",
+      "row": 5,
+      "speed": 4.65,
+      "lane": 628,
+      "scale": 1.06,
+      "hitbox": {
+        "width": 138,
+        "height": 40
+      }
+    },
+    {
+      "id": "black_cruiser",
+      "label": "Black cruiser motorcycle",
+      "kind": "moto",
+      "row": 6,
+      "speed": 3.9,
+      "lane": 594,
+      "scale": 1.08,
+      "hitbox": {
+        "width": 148,
+        "height": 42
+      }
+    },
+    {
+      "id": "delivery_moto",
+      "label": "Delivery motorcycle",
+      "kind": "moto",
+      "row": 7,
+      "speed": 3.7,
+      "lane": 668,
+      "scale": 1.06,
+      "hitbox": {
+        "width": 140,
+        "height": 44
+      }
+    },
+    {
+      "id": "pixel_taxi",
+      "label": "Taxi-like car",
+      "kind": "car",
+      "row": 8,
+      "speed": 3.05,
+      "lane": 566,
+      "scale": 1.08,
+      "hitbox": {
+        "width": 188,
+        "height": 44
+      }
+    },
+    {
+      "id": "dark_premium",
+      "label": "Dark premium car",
+      "kind": "car",
+      "row": 9,
+      "speed": 3.8,
+      "lane": 640,
+      "scale": 1.1,
+      "hitbox": {
+        "width": 206,
+        "height": 44
+      }
+    }
+  ]
+}

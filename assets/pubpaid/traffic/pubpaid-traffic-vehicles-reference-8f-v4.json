@@ -1,0 +1,196 @@
+{
+  "frameWidth": 576,
+  "frameHeight": 384,
+  "baseFrameWidth": 192,
+  "baseFrameHeight": 128,
+  "scale": 3,
+  "framesPerDirection": 4,
+  "framesPerVehicle": 8,
+  "rightFrames": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "leftFrames": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "generatedAt": "2026-04-28T19:14:52.008Z",
+  "source": "scripts/generate-pubpaid-traffic-pixelart-v4.js",
+  "visualReferenceRule": "Quando o usuario falar estilo visual para veiculos PubPaid, usar pixel art lateral tipo sprite comercial: contorno preto grosso, rodas grandes, highlights blocados e motorista integrado nas motos. Nao copiar assets de bancos de imagem.",
+  "atlas": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-reference-8f-v4.png",
+  "individualDir": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart",
+  "vehicles": [
+    {
+      "id": "yellow_taxi_px_v4",
+      "label": "Taxi amarelo lateral",
+      "kind": "car",
+      "row": 0,
+      "framesPerDirection": 4,
+      "speed": 3.05,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 340,
+        "height": 92
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/yellow_taxi_px_v4-8f.png"
+    },
+    {
+      "id": "black_sedan_px_v4",
+      "label": "Sedan preto referencia",
+      "kind": "car",
+      "row": 1,
+      "framesPerDirection": 4,
+      "speed": 3.15,
+      "scale": 0.76,
+      "hitbox": {
+        "width": 350,
+        "height": 92
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/black_sedan_px_v4-8f.png"
+    },
+    {
+      "id": "red_muscle_px_v4",
+      "label": "Coupe vermelho montanha",
+      "kind": "car",
+      "row": 2,
+      "framesPerDirection": 4,
+      "speed": 3.45,
+      "scale": 0.75,
+      "hitbox": {
+        "width": 354,
+        "height": 96
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/red_muscle_px_v4-8f.png"
+    },
+    {
+      "id": "teal_hatch_px_v4",
+      "label": "Hatch teal neon",
+      "kind": "car",
+      "row": 3,
+      "framesPerDirection": 4,
+      "speed": 3.4,
+      "scale": 0.68,
+      "hitbox": {
+        "width": 292,
+        "height": 88
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/teal_hatch_px_v4-8f.png"
+    },
+    {
+      "id": "purple_compact_px_v4",
+      "label": "Compacto roxo noite",
+      "kind": "car",
+      "row": 4,
+      "framesPerDirection": 4,
+      "speed": 3.65,
+      "scale": 0.66,
+      "hitbox": {
+        "width": 276,
+        "height": 86
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/purple_compact_px_v4-8f.png"
+    },
+    {
+      "id": "green_pickup_px_v4",
+      "label": "Pickup verde pixel",
+      "kind": "car",
+      "row": 5,
+      "framesPerDirection": 4,
+      "speed": 3.1,
+      "scale": 0.76,
+      "hitbox": {
+        "width": 350,
+        "height": 94
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/green_pickup_px_v4-8f.png"
+    },
+    {
+      "id": "orange_chopper_rider_px_v4",
+      "label": "Chopper laranja com piloto",
+      "kind": "moto",
+      "row": 6,
+      "framesPerDirection": 4,
+      "speed": 3.85,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 242,
+        "height": 120
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/orange_chopper_rider_px_v4-8f.png"
+    },
+    {
+      "id": "red_sport_rider_px_v4",
+      "label": "Moto sport vermelha",
+      "kind": "moto",
+      "row": 7,
+      "framesPerDirection": 4,
+      "speed": 4.55,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 250,
+        "height": 120
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/red_sport_rider_px_v4-8f.png"
+    },
+    {
+      "id": "silver_cruiser_rider_px_v4",
+      "label": "Cruiser prata com piloto",
+      "kind": "moto",
+      "row": 8,
+      "framesPerDirection": 4,
+      "speed": 3.65,
+      "scale": 0.74,
+      "hitbox": {
+        "width": 260,
+        "height": 118
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/silver_cruiser_rider_px_v4-8f.png"
+    },
+    {
+      "id": "purple_street_rider_px_v4",
+      "label": "Moto roxa urbana",
+      "kind": "moto",
+      "row": 9,
+      "framesPerDirection": 4,
+      "speed": 4.1,
+      "scale": 0.7,
+      "hitbox": {
+        "width": 238,
+        "height": 116
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/purple_street_rider_px_v4-8f.png"
+    },
+    {
+      "id": "delivery_bike_rider_px_v4",
+      "label": "Moto delivery com bau",
+      "kind": "moto",
+      "row": 10,
+      "framesPerDirection": 4,
+      "speed": 3.75,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 260,
+        "height": 124
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/delivery_bike_rider_px_v4-8f.png"
+    },
+    {
+      "id": "blue_scooter_rider_px_v4",
+      "label": "Scooter azul com piloto",
+      "kind": "moto",
+      "row": 11,
+      "framesPerDirection": 4,
+      "speed": 4,
+      "scale": 0.68,
+      "hitbox": {
+        "width": 230,
+        "height": 118
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v4-reference-pixelart/blue_scooter_rider_px_v4-8f.png"
+    }
+  ]
+}

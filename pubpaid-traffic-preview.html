@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PubPaid 2.0 - Transito Pixel Art</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070914;
+      --ink: #f6f0dc;
+      --muted: #9db2c9;
+      --line: rgba(180, 221, 255, 0.2);
+      --cyan: #48f1ff;
+      --pink: #ff4fb8;
+      --gold: #ffd06d;
+      --green: #8dffb3;
+      --shadow: rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      min-height: 100svh;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      background:
+        linear-gradient(180deg, rgba(7, 9, 20, 0.16), rgba(7, 9, 20, 0.52) 68%, rgba(7, 9, 20, 0.92)),
+        #070914;
+      isolation: isolate;
+    }
+
+    #previewCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      z-index: 0;
+    }
+
+    .topbar {
+      position: fixed;
+      left: 18px;
+      right: 18px;
+      top: 14px;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      pointer-events: none;
+    }
+
+    .brand {
+      width: min(430px, 100%);
+      padding: 14px 16px;
+      border: 1px solid rgba(255, 208, 109, 0.2);
+      background: rgba(5, 7, 16, 0.7);
+      box-shadow: 0 18px 40px var(--shadow);
+      backdrop-filter: blur(14px);
+      pointer-events: auto;
+    }
+
+    .brand small {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--gold);
+      font: 700 11px/1.2 "Courier New", monospace;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .brand h1 {
+      margin: 0;
+      color: var(--ink);
+      font: 800 clamp(22px, 3.4vw, 44px)/0.95 "Courier New", monospace;
+      letter-spacing: 0;
+      text-shadow: 0 0 16px rgba(72, 241, 255, 0.2);
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+      max-width: 38ch;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 760px;
+      pointer-events: auto;
+    }
+
+    .control,
+    .action {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      background: rgba(5, 7, 16, 0.72);
+      color: var(--ink);
+      box-shadow: 0 18px 40px var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .control {
+      display: grid;
+      grid-template-columns: auto minmax(96px, 150px);
+      align-items: center;
+      gap: 9px;
+      padding: 8px 10px;
+    }
+
+    .control span {
+      color: var(--muted);
+      font: 700 10px/1 "Courier New", monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    select,
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--cyan);
+    }
+
+    select {
+      min-width: 178px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      outline: none;
+    }
+
+    .action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 42px;
+      padding: 0 13px;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .action:hover,
+    .action:focus-visible,
+    select:focus-visible {
+      border-color: rgba(72, 241, 255, 0.74);
+      outline: 2px solid rgba(72, 241, 255, 0.24);
+      outline-offset: 2px;
+    }
+
+    .action[data-active="true"] {
+      border-color: rgba(141, 255, 179, 0.64);
+      color: var(--green);
+    }
+
+    .hud {
+      position: fixed;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: end;
+      pointer-events: none;
+    }
+
+    .readout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      pointer-events: auto;
+    }
+
+    .metric {
+      min-width: 118px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      background: rgba(5, 7, 16, 0.7);
+      box-shadow: 0 18px 40px var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .metric small {
+      display: block;
+      color: var(--muted);
+      font: 700 10px/1 "Courier New", monospace;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--ink);
+      font: 800 22px/1 "Courier New", monospace;
+      letter-spacing: 0;
+    }
+
+    .strip {
+      display: grid;
+      grid-template-columns: repeat(8, 64px);
+      gap: 6px;
+      justify-content: end;
+      padding: 8px;
+      border: 1px solid var(--line);
+      background: rgba(5, 7, 16, 0.72);
+      box-shadow: 0 18px 40px var(--shadow);
+      backdrop-filter: blur(14px);
+      pointer-events: auto;
+    }
+
+    .thumb {
+      width: 64px;
+      height: 38px;
+      border: 1px solid rgba(180, 221, 255, 0.16);
+      background: rgba(255, 255, 255, 0.03);
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      cursor: pointer;
+    }
+
+    .thumb.is-selected {
+      border-color: var(--gold);
+      box-shadow: inset 0 0 0 1px rgba(255, 208, 109, 0.42);
+    }
+
+    .scanline {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.07) 0,
+        rgba(255, 255, 255, 0.07) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+      mix-blend-mode: soft-light;
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .hud {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .topbar {
+        padding-bottom: 0;
+      }
+
+      .hud {
+        align-items: stretch;
+        margin-top: min(55svh, 430px);
+      }
+
+      .tools {
+        justify-content: flex-start;
+      }
+
+      .control {
+        grid-template-columns: 1fr;
+        min-width: calc(50% - 6px);
+      }
+
+      .strip {
+        grid-template-columns: repeat(4, 64px);
+        justify-content: start;
+        width: max-content;
+        max-width: 100%;
+        overflow: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <canvas id="previewCanvas" aria-label="Previa animada do transito PubPaid"></canvas>
+    <div class="scanline" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <section class="brand" aria-label="PubPaid preview">
+        <small>LOCAL TESTE</small>
+        <h1>PubPaid 2.0<br>Transito</h1>
+        <p>Comparacao visual local dos veiculos na rua, com o jogo real preservado em teste.</p>
+      </section>
+
+      <nav class="tools" aria-label="Controles de avaliacao">
+        <label class="control">
+          <span>Pacote</span>
+          <select id="sheetSelect">
+            <option value="artleft">Bitmap novo rua</option>
+            <option value="runtime">Atual runtime</option>
+            <option value="pixel">Pixel art-pass</option>
+          </select>
+        </label>
+        <label class="control">
+          <span>Velocidade</span>
+          <input id="speedRange" type="range" min="0.45" max="1.85" value="1" step="0.05">
+        </label>
+        <label class="control">
+          <span>Escala</span>
+          <input id="scaleRange" type="range" min="0.72" max="1.5" value="1" step="0.03">
+        </label>
+        <label class="control">
+          <span>Filtro</span>
+          <select id="filterSelect">
+            <option value="all">Todos</option>
+            <option value="car">Carros</option>
+            <option value="moto">Motos</option>
+          </select>
+        </label>
+        <button class="action" id="pauseButton" type="button" aria-label="Pausar ou tocar">II</button>
+        <button class="action" id="resetButton" type="button" aria-label="Reiniciar">R</button>
+        <a class="action" href="pubpaid-v2.html" target="_blank" rel="noreferrer">Jogo</a>
+      </nav>
+    </header>
+
+    <footer class="hud">
+      <section class="readout" aria-label="Estado da previa">
+        <div class="metric">
+          <small>Pacote</small>
+          <strong id="packReadout">Bitmap novo</strong>
+        </div>
+        <div class="metric">
+          <small>Veiculos</small>
+          <strong id="vehicleReadout">10</strong>
+        </div>
+        <div class="metric">
+          <small>FPS</small>
+          <strong id="fpsReadout">60</strong>
+        </div>
+      </section>
+      <section class="strip" id="thumbStrip" aria-label="Veiculos"></section>
+    </footer>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("previewCanvas");
+    const ctx = canvas.getContext("2d", { alpha: false });
+    ctx.imageSmoothingEnabled = false;
+
+    const sheetSelect = document.getElementById("sheetSelect");
+    const speedRange = document.getElementById("speedRange");
+    const scaleRange = document.getElementById("scaleRange");
+    const filterSelect = document.getElementById("filterSelect");
+    const pauseButton = document.getElementById("pauseButton");
+    const resetButton = document.getElementById("resetButton");
+    const packReadout = document.getElementById("packReadout");
+    const vehicleReadout = document.getElementById("vehicleReadout");
+    const fpsReadout = document.getElementById("fpsReadout");
+    const thumbStrip = document.getElementById("thumbStrip");
+
+    const sheets = {
+      artleft: {
+        label: "Bitmap novo",
+        path: "assets/pubpaid/traffic/pubpaid-traffic-artistic-left-3f-v1.png?v=20260504streetopening1",
+        frameWidth: 384,
+        frameHeight: 192,
+        frames: 3,
+        rowCount: 10,
+        sourceFacesRight: false,
+        leftOnly: true,
+        scaleBase: 1.32,
+        vehicles: [
+          { label: "Taxi", kind: "car", row: 0, speed: 100 },
+          { label: "Sedan", kind: "car", row: 1, speed: 106 },
+          { label: "Sport", kind: "car", row: 2, speed: 114 },
+          { label: "Hatch", kind: "car", row: 3, speed: 110 },
+          { label: "Pickup", kind: "car", row: 4, speed: 96 },
+          { label: "Van", kind: "car", row: 5, speed: 92 },
+          { label: "Truck", kind: "car", row: 6, speed: 88 },
+          { label: "Classico", kind: "car", row: 7, speed: 98 },
+          { label: "Moto", kind: "moto", row: 8, speed: 138 },
+          { label: "Delivery", kind: "moto", row: 9, speed: 126 }
+        ]
+      },
+      runtime: {
+        label: "Atual",
+        path: "assets/pubpaid/traffic/pubpaid-traffic-artistic-vehicles-playable-3f-v1.png?v=20260429solidholes1",
+        frameWidth: 384,
+        frameHeight: 192,
+        frames: 3,
+        rowCount: 8,
+        sourceFacesRight: true,
+        scaleBase: 1.02,
+        vehicles: [
+          { label: "Taxi", kind: "car", row: 0, speed: 100 },
+          { label: "Sedan", kind: "car", row: 1, speed: 108 },
+          { label: "Coupe", kind: "car", row: 2, speed: 114 },
+          { label: "Hatch", kind: "car", row: 3, speed: 110 },
+          { label: "Pickup", kind: "car", row: 4, speed: 96 },
+          { label: "Van", kind: "car", row: 5, speed: 92 },
+          { label: "Moto", kind: "moto", row: 6, speed: 142 },
+          { label: "Delivery", kind: "moto", row: 7, speed: 126 }
+        ]
+      },
+      pixel: {
+        label: "Art-pass",
+        path: "assets/pubpaid/traffic/pubpaid-pixel-vehicles-art-pass-8f-v1.png?v=20260429solidholes1",
+        frameWidth: 128,
+        frameHeight: 64,
+        frames: 4,
+        rowCount: 9,
+        sourceFacesRight: false,
+        scaleBase: 2.28,
+        vehicles: [
+          { label: "Taxi", kind: "car", row: 0, speed: 112 },
+          { label: "Sedan", kind: "car", row: 1, speed: 106 },
+          { label: "Coupe", kind: "car", row: 2, speed: 116 },
+          { label: "Teal", kind: "car", row: 3, speed: 110 },
+          { label: "Police", kind: "car", row: 4, speed: 120 },
+          { label: "Chopper", kind: "moto", row: 5, speed: 130 },
+          { label: "Sport", kind: "moto", row: 6, speed: 138 },
+          { label: "Purple", kind: "moto", row: 7, speed: 128 },
+          { label: "Delivery", kind: "moto", row: 8, speed: 132 }
+        ]
+      }
+    };
+
+    const images = {};
+    const state = {
+      paused: false,
+      selectedSheet: "artleft",
+      selectedRow: null,
+      speed: 1,
+      scale: 1,
+      filter: "all",
+      vehicles: [],
+      frameTimes: [],
+      lastTime: 0,
+      backgroundReady: false
+    };
+
+    const background = new Image();
+    background.src = "assets/pubpaid-v2-street-bg-v1.png?v=20260429solidholes1";
+    background.onload = () => {
+      state.backgroundReady = true;
+    };
+
+    function loadImage(key, path) {
+      const image = new Image();
+      image.src = path;
+      images[key] = image;
+      return image;
+    }
+
+    Object.entries(sheets).forEach(([key, sheet]) => loadImage(key, sheet.path));
+
+    function fitCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const width = Math.max(320, Math.floor(window.innerWidth));
+      const height = Math.max(420, Math.floor(window.innerHeight));
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+    }
+
+    function visibleVehicleDefs() {
+      const sheet = sheets[state.selectedSheet];
+      return sheet.vehicles.filter((vehicle) => {
+        if (state.filter !== "all" && vehicle.kind !== state.filter) return false;
+        if (state.selectedRow !== null && vehicle.row !== state.selectedRow) return false;
+        return true;
+      });
+    }
+
+    function resetTraffic() {
+      const sheet = sheets[state.selectedSheet];
+      const defs = visibleVehicleDefs();
+      const width = window.innerWidth;
+      const lanes = sheet.leftOnly
+        ? [{ id: "going", y: 0.86, direction: -1, offset: 0.08 }]
+        : [
+            { id: "coming", y: 0.744, direction: 1, offset: 0 },
+            { id: "going", y: 0.825, direction: -1, offset: 0.5 }
+          ];
+      state.vehicles = [];
+
+      if (!defs.length) {
+        vehicleReadout.textContent = "0";
+        return;
+      }
+
+      lanes.forEach((lane, laneIndex) => {
+        const count = Math.min(5, Math.max(2, defs.length));
+        for (let index = 0; index < count; index += 1) {
+          const def = defs[(index + laneIndex * 3) % defs.length];
+          const spacing = (width + 760) / count;
+          const laneJitter = (index % 2) * 8;
+          state.vehicles.push({
+            ...def,
+            laneId: lane.id,
+            direction: lane.direction,
+            x: lane.direction > 0
+              ? -420 + spacing * (index + lane.offset)
+              : width + 420 - spacing * (index + lane.offset),
+            yRatio: lane.y,
+            yJitter: laneJitter,
+            seed: index * 0.41 + laneIndex * 0.19,
+            speed: def.speed * (def.kind === "moto" ? 1.03 : 1)
+          });
+        }
+      });
+
+      packReadout.textContent = sheet.label;
+      vehicleReadout.textContent = String(defs.length);
+    }
+
+    function drawCover(image, alpha = 1) {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      if (image.complete && image.naturalWidth) {
+        const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+        const drawWidth = image.naturalWidth * scale;
+        const drawHeight = image.naturalHeight * scale;
+        ctx.drawImage(image, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight);
+      } else {
+        ctx.fillStyle = "#070914";
+        ctx.fillRect(0, 0, width, height);
+      }
+      ctx.restore();
+    }
+
+    function drawLaneGuides() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const lanes = [0.744, 0.825];
+      ctx.save();
+      ctx.globalCompositeOperation = "screen";
+      lanes.forEach((ratio, index) => {
+        const y = height * ratio;
+        const gradient = ctx.createLinearGradient(0, y, width, y);
+        gradient.addColorStop(0, "rgba(72, 241, 255, 0)");
+        gradient.addColorStop(0.5, index === 0 ? "rgba(72, 241, 255, 0.25)" : "rgba(255, 208, 109, 0.22)");
+        gradient.addColorStop(1, "rgba(255, 79, 184, 0)");
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([34, 26]);
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      });
+      ctx.restore();
+    }
+
+    function drawPlayerGuide(time) {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const x = width * 0.53;
+      const y = height * 0.665;
+      const pulse = 1 + Math.sin(time / 420) * 0.02;
+
+      ctx.save();
+      ctx.globalCompositeOperation = "multiply";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.35)";
+      ctx.beginPath();
+      ctx.ellipse(x, y + 3, 25, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.scale(pulse, pulse);
+      ctx.fillStyle = "rgba(246, 240, 220, 0.82)";
+      ctx.strokeStyle = "rgba(4, 6, 13, 0.86)";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(-10, -72, 20, 48, 7);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "rgba(22, 35, 52, 0.94)";
+      ctx.beginPath();
+      ctx.roundRect(-15, -44, 30, 42, 6);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = "rgba(246, 240, 220, 0.86)";
+      ctx.fillRect(-13, -1, 9, 35);
+      ctx.fillRect(4, -1, 9, 35);
+      ctx.fillStyle = "rgba(37, 21, 13, 0.96)";
+      ctx.beginPath();
+      ctx.arc(0, -82, 13, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function sourceFrameFor(sheet, vehicle, frame) {
+      if (sheet.leftOnly) {
+        return { sx: frame * sheet.frameWidth, sy: vehicle.row * sheet.frameHeight };
+      }
+      if (state.selectedSheet === "pixel") {
+        const column = vehicle.direction > 0 ? frame : frame + 4;
+        return { sx: column * sheet.frameWidth, sy: vehicle.row * sheet.frameHeight };
+      }
+      return { sx: frame * sheet.frameWidth, sy: vehicle.row * sheet.frameHeight };
+    }
+
+    function drawVehicle(vehicle, time) {
+      const sheet = sheets[state.selectedSheet];
+      const image = images[state.selectedSheet];
+      if (!image?.complete || !image.naturalWidth) return;
+
+      const frame = Math.floor(time / 135 + vehicle.seed * sheet.frames) % sheet.frames;
+      const { sx, sy } = sourceFrameFor(sheet, vehicle, frame);
+      const baseScale = sheet.scaleBase * state.scale * (vehicle.kind === "moto" ? 0.9 : 1);
+      const y = window.innerHeight * vehicle.yRatio + vehicle.yJitter;
+      const dw = sheet.frameWidth * baseScale;
+      const dh = sheet.frameHeight * baseScale;
+      const shouldFlip = sheet.sourceFacesRight && vehicle.direction < 0;
+
+      ctx.save();
+      ctx.imageSmoothingEnabled = false;
+      if (shouldFlip) {
+        ctx.translate(vehicle.x, y);
+        ctx.scale(-1, 1);
+        ctx.drawImage(image, sx, sy, sheet.frameWidth, sheet.frameHeight, -dw / 2, -dh, dw, dh);
+      } else {
+        ctx.drawImage(image, sx, sy, sheet.frameWidth, sheet.frameHeight, vehicle.x - dw / 2, y - dh, dw, dh);
+      }
+      ctx.restore();
+    }
+
+    function updateTraffic(delta) {
+      const width = window.innerWidth;
+      state.vehicles.forEach((vehicle) => {
+        vehicle.x += vehicle.direction * vehicle.speed * state.speed * delta;
+        const margin = sheets[state.selectedSheet].frameWidth * sheets[state.selectedSheet].scaleBase * state.scale + 520;
+        if (vehicle.direction > 0 && vehicle.x > width + margin) vehicle.x = -margin;
+        if (vehicle.direction < 0 && vehicle.x < -margin) vehicle.x = width + margin;
+      });
+    }
+
+    function updateFps(time) {
+      state.frameTimes.push(time);
+      while (state.frameTimes.length && state.frameTimes[0] < time - 1000) {
+        state.frameTimes.shift();
+      }
+      fpsReadout.textContent = String(Math.max(1, state.frameTimes.length));
+    }
+
+    function draw(time) {
+      const delta = state.lastTime ? Math.min(0.05, (time - state.lastTime) / 1000) : 0;
+      state.lastTime = time;
+      if (!state.paused) updateTraffic(delta);
+
+      drawCover(background, 1);
+      ctx.fillStyle = "rgba(3, 5, 14, 0.22)";
+      ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+      drawLaneGuides();
+
+      const ordered = [...state.vehicles].sort((a, b) => a.yRatio - b.yRatio);
+      ordered.forEach((vehicle, index) => {
+        if (index === Math.ceil(ordered.length / 2)) drawPlayerGuide(time);
+        drawVehicle(vehicle, time);
+      });
+      if (!ordered.length) drawPlayerGuide(time);
+
+      updateFps(time);
+      requestAnimationFrame(draw);
+    }
+
+    function drawThumb(button, row) {
+      const sheet = sheets[state.selectedSheet];
+      const image = images[state.selectedSheet];
+      const thumb = button.querySelector("canvas");
+      const tctx = thumb.getContext("2d");
+      thumb.width = 128;
+      thumb.height = 76;
+      tctx.clearRect(0, 0, thumb.width, thumb.height);
+      tctx.imageSmoothingEnabled = false;
+      if (!image?.complete || !image.naturalWidth) return;
+      const frame = state.selectedSheet === "pixel" ? 0 : 0;
+      const sx = frame * sheet.frameWidth;
+      const sy = row * sheet.frameHeight;
+      const scale = Math.min(thumb.width / sheet.frameWidth, thumb.height / sheet.frameHeight) * 1.7;
+      const dw = sheet.frameWidth * scale;
+      const dh = sheet.frameHeight * scale;
+      tctx.drawImage(image, sx, sy, sheet.frameWidth, sheet.frameHeight, (thumb.width - dw) / 2, thumb.height - dh - 2, dw, dh);
+    }
+
+    function buildThumbs() {
+      thumbStrip.innerHTML = "";
+      const sheet = sheets[state.selectedSheet];
+      const defs = sheet.vehicles.filter((vehicle) => state.filter === "all" || vehicle.kind === state.filter);
+      defs.forEach((vehicle) => {
+        const button = document.createElement("button");
+        button.className = "thumb";
+        button.type = "button";
+        button.title = vehicle.label;
+        button.setAttribute("aria-label", vehicle.label);
+        button.dataset.row = String(vehicle.row);
+        const thumb = document.createElement("canvas");
+        button.appendChild(thumb);
+        if (state.selectedRow === vehicle.row) button.classList.add("is-selected");
+        button.addEventListener("click", () => {
+          state.selectedRow = state.selectedRow === vehicle.row ? null : vehicle.row;
+          buildThumbs();
+          resetTraffic();
+        });
+        thumbStrip.appendChild(button);
+        drawThumb(button, vehicle.row);
+      });
+    }
+
+    function syncControls() {
+      const sheet = sheets[state.selectedSheet];
+      packReadout.textContent = sheet.label;
+      pauseButton.textContent = state.paused ? "PLAY" : "II";
+      pauseButton.dataset.active = String(!state.paused);
+    }
+
+    sheetSelect.addEventListener("change", () => {
+      state.selectedSheet = sheetSelect.value;
+      state.selectedRow = null;
+      buildThumbs();
+      resetTraffic();
+      syncControls();
+    });
+
+    speedRange.addEventListener("input", () => {
+      state.speed = Number(speedRange.value) || 1;
+    });
+
+    scaleRange.addEventListener("input", () => {
+      state.scale = Number(scaleRange.value) || 1;
+    });
+
+    filterSelect.addEventListener("change", () => {
+      state.filter = filterSelect.value;
+      state.selectedRow = null;
+      buildThumbs();
+      resetTraffic();
+    });
+
+    pauseButton.addEventListener("click", () => {
+      state.paused = !state.paused;
+      syncControls();
+    });
+
+    resetButton.addEventListener("click", resetTraffic);
+
+    window.addEventListener("resize", () => {
+      fitCanvas();
+      resetTraffic();
+    });
+
+    Object.values(images).forEach((image) => {
+      image.addEventListener("load", () => {
+        buildThumbs();
+        resetTraffic();
+      });
+    });
+
+    fitCanvas();
+    buildThumbs();
+    resetTraffic();
+    syncControls();
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>

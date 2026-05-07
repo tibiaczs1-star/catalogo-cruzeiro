@@ -1,0 +1,23 @@
+{
+  "version": "pubpaid-traffic-artistic-left-3f-v1",
+  "sourceKind": "imagegen-bitmap-32bit-pixel-art-normalized",
+  "source": "assets/pubpaid/traffic/pubpaid-traffic-artistic-left-3f-source-v1.png",
+  "direction": "left",
+  "frameWidth": 384,
+  "frameHeight": 192,
+  "framesPerVehicle": 3,
+  "alphaContract": "external alpha only; semi=0; internal holes=0",
+  "note": "Normalization only: no vehicle art is drawn procedurally by this script.",
+  "vehicles": [
+    { "id": "taxi_art_left_v1", "label": "taxi amarelo 32-bit", "kind": "car", "row": 0 },
+    { "id": "black_sedan_art_left_v1", "label": "sedan preto 32-bit", "kind": "car", "row": 1 },
+    { "id": "red_sport_art_left_v1", "label": "esportivo vermelho 32-bit", "kind": "car", "row": 2 },
+    { "id": "teal_hatch_art_left_v1", "label": "hatch teal 32-bit", "kind": "car", "row": 3 },
+    { "id": "olive_pickup_art_left_v1", "label": "pickup verde 32-bit", "kind": "car", "row": 4 },
+    { "id": "white_van_art_left_v1", "label": "van branca 32-bit", "kind": "car", "row": 5 },
+    { "id": "blue_truck_art_left_v1", "label": "caminhao leve azul 32-bit", "kind": "car", "row": 6 },
+    { "id": "retro_brazil_art_left_v1", "label": "classico brasileiro 32-bit", "kind": "car", "row": 7 },
+    { "id": "red_moto_rider_art_left_v1", "label": "moto vermelha com piloto 32-bit", "kind": "moto", "row": 8 },
+    { "id": "teal_delivery_moto_art_left_v1", "label": "moto delivery teal com piloto 32-bit", "kind": "moto", "row": 9 }
+  ]
+}

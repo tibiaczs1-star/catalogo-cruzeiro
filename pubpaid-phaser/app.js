@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
-import { gameState } from "./core/gameState.js";
+import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
 import { bindDomGameInterface } from "./ui/domGameInterface.js";
@@ -7,8 +7,9 @@ import { closePanel } from "./ui/panelActions.js";
 import { syncPubpaidAccount } from "./services/accountService.js";
 import { BootScene } from "./scenes/BootScene.js";
 import { IntroScene } from "./scenes/IntroScene.js";
-import { StreetScene } from "./scenes/StreetScene.js";
+import { StreetScene, resetStreetOpeningPlayback } from "./scenes/StreetScene.js";
 import { InteriorScene } from "./scenes/InteriorScene.js";
+import { WalletScene } from "./scenes/WalletScene.js";
 import { GameLobbyScene } from "./scenes/GameLobbyScene.js";
 import { DartsGameScene } from "./scenes/DartsGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
@@ -20,6 +21,9 @@ const config = {
   type: Phaser.AUTO,
   parent: "pubpaid-phaser-root",
   transparent: true,
+  pixelArt: true,
+  antialias: false,
+  roundPixels: true,
   backgroundColor: "#02050d",
   scale: {
     mode: Phaser.Scale.FIT,
@@ -27,7 +31,7 @@ const config = {
     width: GAME_WIDTH,
     height: GAME_HEIGHT
   },
-  scene: [BootScene, IntroScene, StreetScene, InteriorScene, GameLobbyScene, DartsGameScene, CheckersGameScene, UIScene]
+  scene: [BootScene, IntroScene, StreetScene, InteriorScene, WalletScene, GameLobbyScene, DartsGameScene, CheckersGameScene, UIScene]
 };
 
 const game = new Phaser.Game(config);
@@ -41,6 +45,7 @@ const isTouchDevice =
 const isSmallScreen = window.matchMedia?.("(max-width: 960px)")?.matches ?? window.innerWidth <= 960;
 
 const TERMS_KEY = "pubpaid_v2_terms_accepted";
+const CHARACTER_KEY = "pubpaid_v2_selected_character";
 const refs = {
   body: document.body,
   splash: document.querySelector("[data-splash-screen]"),
@@ -56,6 +61,7 @@ const refs = {
   googleLogout: document.querySelector("[data-google-auth-logout]"),
   authTitle: document.querySelector("[data-auth-title]"),
   audioToggle: document.querySelector("[data-audio-toggle]"),
+  audioToggles: Array.from(document.querySelectorAll("[data-audio-toggle]")),
   streetGoogleGate: document.querySelector("[data-street-google-gate]"),
   streetGoogleButton: document.querySelector("[data-street-google-button]"),
   streetGoogleStatus: document.querySelector("[data-street-google-status]"),
@@ -64,13 +70,57 @@ const refs = {
   permissionGate: document.querySelector("[data-permission-gate]"),
   startExperience: document.querySelector("[data-start-experience]"),
   permissionStatus: document.querySelector("[data-permission-status]"),
-  canvasShell: document.querySelector(".ppg-canvas-shell")
+  canvasShell: document.querySelector(".ppg-canvas-shell"),
+  characterSelect: document.querySelector("[data-character-select]"),
+  characterChoiceButtons: Array.from(document.querySelectorAll("[data-character-choice]")),
+  mobileControls: document.querySelector("[data-mobile-controls]"),
+  mobileControlButtons: Array.from(document.querySelectorAll("[data-mobile-control]")),
+  mobileSettings: document.querySelector("[data-mobile-settings]"),
+  mobileSettingsClose: document.querySelector("[data-mobile-settings-close]"),
+  walletPix: document.querySelector("[data-wallet-pix]"),
+  walletPixTitle: document.querySelector("[data-wallet-pix-title]"),
+  walletPixKicker: document.querySelector("[data-wallet-pix-kicker]"),
+  walletPixClose: document.querySelector("[data-wallet-pix-close]"),
+  walletPixDeposit: document.querySelector("[data-wallet-pix-deposit]"),
+  walletPixWithdraw: document.querySelector("[data-wallet-pix-withdraw]"),
+  walletPixAmountButtons: Array.from(document.querySelectorAll("[data-wallet-pix-amount-preset]")),
+  walletPixName: document.querySelector("[data-wallet-pix-name]"),
+  walletPixQr: document.querySelector("[data-wallet-pix-qr]"),
+  walletPixCopy: document.querySelector("[data-wallet-pix-copy]"),
+  walletPixGenerate: document.querySelector("[data-wallet-pix-generate]"),
+  walletPixRegister: document.querySelector("[data-wallet-pix-register]"),
+  walletPixWithdrawAmount: document.querySelector("[data-wallet-pix-withdraw-amount]"),
+  walletPixWithdrawKey: document.querySelector("[data-wallet-pix-withdraw-key]"),
+  walletPixWithdrawSubmit: document.querySelector("[data-wallet-pix-withdraw-submit]"),
+  walletPixFeedback: document.querySelector("[data-wallet-pix-feedback]")
 };
 
-let currentStep = "intro";
+let currentStep = "auth";
 let gameStarted = false;
 let introStarted = false;
 let orientationLocked = false;
+let characterSelectOpen = false;
+let selectedCharacter = loadSelectedCharacter();
+let mobileSettingsOpen = false;
+const walletPixState = {
+  open: false,
+  mode: "deposit",
+  amount: 10,
+  txid: "",
+  qrReady: false,
+  busy: false
+};
+let preserveFullscreenOnEscapeUntil = 0;
+const ENTRY_SCENE_KEYS = [
+  "intro-scene",
+  "street-scene",
+  "interior-scene",
+  "wallet-scene",
+  "game-lobby-scene",
+  "darts-game-scene",
+  "checkers-game-scene",
+  "ui-scene"
+];
 
 function needsLandscape() {
   return Boolean(isTouchDevice && isSmallScreen);
@@ -86,6 +136,309 @@ function isOrientationBlocked() {
 
 function getAuthApi() {
   return window.CatalogoGoogleAuth || null;
+}
+
+function normalizeCharacter(value) {
+  return value === "female" ? "female" : "male";
+}
+
+function loadSelectedCharacter() {
+  try {
+    return normalizeCharacter(window.localStorage.getItem(CHARACTER_KEY));
+  } catch (_error) {
+    return "male";
+  }
+}
+
+function saveSelectedCharacter(value) {
+  selectedCharacter = normalizeCharacter(value);
+  try {
+    window.localStorage.setItem(CHARACTER_KEY, selectedCharacter);
+  } catch (_error) {
+    // ignore storage failures
+  }
+  updateGameState({ selectedCharacter });
+  return selectedCharacter;
+}
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function normalizeMoneyInput(value, fallback = 0) {
+  const normalized = String(value ?? "")
+    .replace(/\s+/g, "")
+    .replace(",", ".");
+  const amount = Number(normalized);
+  if (!Number.isFinite(amount)) return fallback;
+  return Math.max(0, Math.round(amount * 100) / 100);
+}
+
+function buildWalletTxid(prefix = "PUB") {
+  return `${prefix}${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`
+    .replace(/[^A-Za-z0-9]/g, "")
+    .toUpperCase()
+    .slice(0, 25);
+}
+
+async function requestApiJson(path, options = {}) {
+  const response = await fetch(path, {
+    credentials: "same-origin",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    },
+    ...options
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || payload?.ok === false) {
+    throw new Error(payload?.error || payload?.message || "Nao foi possivel falar com o caixa agora.");
+  }
+  return payload;
+}
+
+async function ensurePubpaidServerSession() {
+  const auth = getAuthApi();
+  if (!auth?.isSignedIn?.() && auth?.isEnabled?.()) {
+    await auth.promptSignIn?.();
+  }
+  const session = await requestApiJson("./api/auth/session", { method: "GET" });
+  if (session?.user?.email) return session.user;
+  throw new Error(
+    session?.enabled === false
+      ? "Pix real exige login Google ativo no servidor. Nesta sessao, a carteira abre apenas para visualizacao."
+      : "Entre com Google para usar Pix na carteira."
+  );
+}
+
+function syncCharacterChoiceButtons() {
+  refs.characterChoiceButtons.forEach((button) => {
+    const character = normalizeCharacter(button.getAttribute("data-character-choice"));
+    button.classList.toggle("is-selected", character === selectedCharacter);
+    button.setAttribute("aria-pressed", String(character === selectedCharacter));
+  });
+}
+
+function setMobileSettingsOpen(open) {
+  mobileSettingsOpen = Boolean(open);
+  refs.mobileSettings?.toggleAttribute("hidden", !mobileSettingsOpen);
+  refs.body?.classList.toggle("mobile-settings-open", mobileSettingsOpen);
+  updateGameState({
+    mobileSettingsOpen,
+    prompt: mobileSettingsOpen
+      ? "Configurações mobile abertas. Ajuste o som ou volte para jogar."
+      : gameState.prompt
+  });
+}
+
+function setWalletPixFeedback(message) {
+  if (refs.walletPixFeedback) {
+    refs.walletPixFeedback.textContent = message;
+  }
+}
+
+function setWalletPixBusy(busy) {
+  walletPixState.busy = Boolean(busy);
+  refs.walletPixGenerate?.toggleAttribute("disabled", walletPixState.busy);
+  refs.walletPixWithdrawSubmit?.toggleAttribute("disabled", walletPixState.busy);
+  if (refs.walletPixRegister) {
+    refs.walletPixRegister.disabled = walletPixState.busy || !walletPixState.qrReady;
+  }
+}
+
+function syncWalletPixAmountButtons() {
+  refs.walletPixAmountButtons.forEach((button) => {
+    const amount = normalizeMoneyInput(button.getAttribute("data-wallet-pix-amount-preset"), 10);
+    button.classList.toggle("is-selected", amount === walletPixState.amount);
+    button.setAttribute("aria-pressed", String(amount === walletPixState.amount));
+  });
+}
+
+function resetWalletPixDeposit() {
+  walletPixState.txid = "";
+  walletPixState.qrReady = false;
+  if (refs.walletPixQr) {
+    refs.walletPixQr.innerHTML = "<p>Escolha o valor e gere o QR Pix.</p>";
+  }
+  if (refs.walletPixCopy) {
+    refs.walletPixCopy.hidden = true;
+    refs.walletPixCopy.textContent = "";
+  }
+  if (refs.walletPixRegister) {
+    refs.walletPixRegister.disabled = true;
+  }
+}
+
+function setWalletPixMode(mode) {
+  walletPixState.mode = mode === "withdraw" ? "withdraw" : "deposit";
+  refs.walletPixDeposit?.toggleAttribute("hidden", walletPixState.mode !== "deposit");
+  refs.walletPixWithdraw?.toggleAttribute("hidden", walletPixState.mode !== "withdraw");
+  if (refs.walletPixTitle) {
+    refs.walletPixTitle.textContent = walletPixState.mode === "withdraw" ? "Retirar Pix" : "Adicionar Pix";
+  }
+  if (refs.walletPixKicker) {
+    refs.walletPixKicker.textContent = walletPixState.mode === "withdraw" ? "saque pix" : "deposito pix";
+  }
+  resetWalletPixDeposit();
+  setWalletPixFeedback(
+    walletPixState.mode === "withdraw"
+      ? "Informe valor e chave Pix para pedir a retirada."
+      : "Pix aberto pela carteira do jogo."
+  );
+  updateGameState({
+    walletPixMode: walletPixState.mode,
+    walletPhase: walletPixState.mode === "withdraw" ? "pix-withdraw" : "pix-deposit"
+  });
+  syncWalletPixAmountButtons();
+}
+
+function setWalletPixOpen(open, mode = walletPixState.mode) {
+  walletPixState.open = Boolean(open);
+  refs.walletPix?.toggleAttribute("hidden", !walletPixState.open);
+  refs.body?.classList.toggle("ppg-wallet-pix-open", walletPixState.open);
+  if (walletPixState.open) {
+    setWalletPixMode(mode);
+    window.setTimeout(() => {
+      if (walletPixState.mode === "withdraw") refs.walletPixWithdrawAmount?.focus?.();
+      else refs.walletPixName?.focus?.();
+    }, 80);
+  }
+  updateGameState({
+    walletPixOpen: walletPixState.open,
+    walletPixMode: walletPixState.mode,
+    walletPhase: walletPixState.open
+      ? walletPixState.mode === "withdraw" ? "pix-withdraw" : "pix-deposit"
+      : gameState.walletOpen ? "menu" : "closed"
+  });
+}
+
+async function generateWalletDepositPix() {
+  const depositorName = String(refs.walletPixName?.value || "").trim();
+  if (depositorName.length < 3) {
+    setWalletPixFeedback("Informe o nome de quem fez o Pix antes de gerar o QR.");
+    refs.walletPixName?.focus?.();
+    return;
+  }
+  setWalletPixBusy(true);
+  setWalletPixFeedback("Gerando QR Pix dentro da carteira...");
+  try {
+    await ensurePubpaidServerSession();
+    walletPixState.txid = walletPixState.txid || buildWalletTxid("PUB");
+    const params = new URLSearchParams({
+      amount: String(walletPixState.amount),
+      txid: walletPixState.txid,
+      description: "PubPaid Creditos"
+    });
+    const payload = await requestApiJson(`./api/pubpaid/deposit/pix?${params.toString()}`, { method: "GET" });
+    walletPixState.txid = payload?.txid || walletPixState.txid;
+    walletPixState.qrReady = true;
+    if (refs.walletPixQr) {
+      refs.walletPixQr.innerHTML = payload?.qrSvg || "<p>QR indisponivel. Gere novamente.</p>";
+    }
+    if (refs.walletPixCopy) {
+      refs.walletPixCopy.hidden = false;
+      refs.walletPixCopy.textContent = payload?.copyCode || "Codigo Pix indisponivel.";
+    }
+    if (refs.walletPixRegister) {
+      refs.walletPixRegister.disabled = false;
+    }
+    setWalletPixFeedback(`QR Pix de ${walletPixState.amount} creditos criado. Depois do pagamento, avise o deposito.`);
+  } catch (error) {
+    walletPixState.qrReady = false;
+    if (refs.walletPixQr) {
+      refs.walletPixQr.innerHTML = `<p>${escapeHtml(error?.message || "Nao foi possivel gerar o QR Pix.")}</p>`;
+    }
+    setWalletPixFeedback("Pix nao abriu. Confira Google/chave Pix do servidor.");
+  } finally {
+    setWalletPixBusy(false);
+  }
+}
+
+async function registerWalletDepositPix() {
+  if (!walletPixState.txid || !walletPixState.qrReady) {
+    setWalletPixFeedback("Gere o QR Pix antes de avisar o pagamento.");
+    return;
+  }
+  const depositorName = String(refs.walletPixName?.value || "").trim();
+  if (depositorName.length < 3) {
+    setWalletPixFeedback("Informe o nome que aparece no Pix para o admin conferir.");
+    refs.walletPixName?.focus?.();
+    return;
+  }
+  setWalletPixBusy(true);
+  setWalletPixFeedback("Enviando deposito para conferencia manual...");
+  try {
+    await ensurePubpaidServerSession();
+    const payload = await requestApiJson("./api/pubpaid/deposits", {
+      method: "POST",
+      body: JSON.stringify({
+        amount: walletPixState.amount,
+        paymentTxid: walletPixState.txid,
+        depositorName,
+        sourcePage: window.location.pathname
+      })
+    });
+    walletPixState.qrReady = false;
+    if (refs.walletPixRegister) {
+      refs.walletPixRegister.disabled = true;
+    }
+    if (refs.walletPixQr) {
+      refs.walletPixQr.innerHTML = `
+        <p><strong>Pagamento avisado.</strong></p>
+        <p>Aguarde a conferencia manual do admin.</p>
+        <p>Ref: ${escapeHtml(walletPixState.txid)}</p>
+      `;
+    }
+    if (refs.walletPixCopy) refs.walletPixCopy.hidden = true;
+    setWalletPixFeedback(payload?.message || "Deposito enviado para conferencia.");
+    await syncPubpaidAccount();
+  } catch (error) {
+    setWalletPixFeedback(String(error?.message || "Falha ao registrar deposito."));
+  } finally {
+    setWalletPixBusy(false);
+  }
+}
+
+async function requestWalletWithdrawalPix() {
+  const amount = normalizeMoneyInput(refs.walletPixWithdrawAmount?.value, 0);
+  const pixKey = String(refs.walletPixWithdrawKey?.value || "").trim();
+  if (amount <= 0) {
+    setWalletPixFeedback("Informe um valor valido para retirada.");
+    refs.walletPixWithdrawAmount?.focus?.();
+    return;
+  }
+  if (pixKey.length < 3) {
+    setWalletPixFeedback("Informe a chave Pix que vai receber a retirada.");
+    refs.walletPixWithdrawKey?.focus?.();
+    return;
+  }
+  setWalletPixBusy(true);
+  setWalletPixFeedback("Pedindo retirada via Pix...");
+  try {
+    await ensurePubpaidServerSession();
+    const payload = await requestApiJson("./api/pubpaid/withdrawals", {
+      method: "POST",
+      body: JSON.stringify({
+        amount,
+        pixKey,
+        paymentTxid: buildWalletTxid("SAQ"),
+        sourcePage: window.location.pathname
+      })
+    });
+    setWalletPixFeedback(payload?.message || "Retirada enviada para revisao manual.");
+    if (refs.walletPixWithdrawAmount) refs.walletPixWithdrawAmount.value = "";
+    await syncPubpaidAccount();
+  } catch (error) {
+    setWalletPixFeedback(String(error?.message || "Falha ao pedir retirada Pix."));
+  } finally {
+    setWalletPixBusy(false);
+  }
 }
 
 function isAuthRequired() {
@@ -137,11 +490,12 @@ function syncEnterExitButtons() {
 }
 
 function syncAudioButton() {
-  if (!refs.audioToggle) return;
   const playing = soundtrack.isPlaying();
-  refs.audioToggle.setAttribute("aria-pressed", String(playing));
-  refs.audioToggle.textContent = playing ? "Som ligado" : "Ligar som";
-  refs.audioToggle.classList.toggle("is-playing", playing);
+  refs.audioToggles.forEach((button) => {
+    button.setAttribute("aria-pressed", String(playing));
+    button.textContent = playing ? "Som ligado" : "Ligar som";
+    button.classList.toggle("is-playing", playing);
+  });
 }
 
 function syncStreetGoogleGate() {
@@ -183,6 +537,37 @@ async function requestFullscreen() {
     }
     return false;
   }
+}
+
+function keepFullscreenAfterGameEscape() {
+  preserveFullscreenOnEscapeUntil = Date.now() + 1400;
+  void requestFullscreen();
+}
+
+function handleGameEscape(event) {
+  if (event.key !== "Escape") return;
+  const walletIsBusy = gameState.walletOpen || gameState.walletPhase === "phone-pull" || gameState.walletPhase === "phone-pocket";
+  if (!gameStarted || (!walletPixState.open && !mobileSettingsOpen && !walletIsBusy)) return;
+  event.preventDefault();
+  event.stopPropagation();
+  event.stopImmediatePropagation?.();
+  keepFullscreenAfterGameEscape();
+  if (walletPixState.open) {
+    setWalletPixOpen(false);
+    return;
+  }
+  if (mobileSettingsOpen) {
+    setMobileSettingsOpen(false);
+    return;
+  }
+  if (walletIsBusy) {
+    game.events.emit("pubpaid:wallet-close-request", { source: "escape" });
+  }
+}
+
+function recoverFullscreenAfterGameEscape() {
+  if (document.fullscreenElement || Date.now() > preserveFullscreenOnEscapeUntil) return;
+  void requestFullscreen();
 }
 
 async function requestLandscapeLock() {
@@ -272,25 +657,29 @@ async function syncAuthUi() {
   refs.googleSlot?.toggleAttribute("hidden", localDemoAccess);
   refs.googleLogout?.toggleAttribute("hidden", localDemoAccess || !signedIn);
   if (refs.openGame) {
-    refs.openGame.disabled = !((signedIn || localDemoAccess) && hasAcceptedTerms());
-    refs.openGame.textContent = localDemoAccess ? "Entrar no jogo" : "Entrar com Google";
+    refs.openGame.disabled = !(signedIn || localDemoAccess);
+    refs.openGame.textContent = signedIn
+      ? "Abrir frente do bar"
+      : localDemoAccess
+        ? "Continuar pre-visualizacao"
+        : "Entrar com Google";
   }
   if (refs.authTitle) {
-    refs.authTitle.textContent = localDemoAccess ? "Rodada local pronta." : "Entrar com Google.";
+    refs.authTitle.textContent = signedIn || localDemoAccess ? "Acesso liberado." : "Entrar com Google.";
   }
   if (localDemoAccess) {
     if (refs.authStatus) {
-      refs.authStatus.textContent = "Acesso local pronto.";
+      refs.authStatus.textContent = "Google nao configurado neste ambiente. Acesso de visualizacao liberado.";
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = "Entre direto e continue a rodada.";
+      refs.authEmail.textContent = "No ar real, este ponto exige login Google antes da escolha do personagem.";
     }
   } else {
     if (refs.authStatus) {
-      refs.authStatus.textContent = signedIn ? "Conta conectada." : "Entre com Google para abrir o portao.";
+      refs.authStatus.textContent = signedIn ? "Conta conectada. Abrindo a frente do bar." : "Entre com Google para continuar.";
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = signedIn ? "Conta Google sincronizada." : "Login Google";
+      refs.authEmail.textContent = signedIn ? "Conta Google sincronizada." : "Depois do login voce escolhe homem ou mulher.";
     }
   }
   if (signedIn) {
@@ -299,20 +688,28 @@ async function syncAuthUi() {
   syncStreetGoogleGate();
 }
 
-function openSplash(step = "intro") {
+function openSplash(step = "auth") {
   refs.permissionGate?.setAttribute("hidden", "");
   refs.body?.classList.add("game-is-locked");
+  refs.body?.classList.add("is-entry-flow");
+  refs.body?.classList.remove("game-has-started");
+  refs.body?.classList.remove("is-character-selecting");
   refs.splash?.removeAttribute("hidden");
   setStep(step);
   gameStarted = false;
+  characterSelectOpen = false;
+  refs.characterSelect?.setAttribute("hidden", "");
   closePanel();
+  setMobileSettingsOpen(false);
+  updateGameState({ characterSelectOpen: false, walletOpen: false, walletPhase: "closed" });
   syncEnterExitButtons();
   syncStreetGoogleGate();
 }
 
-function startGame() {
-  refs.body?.classList.remove("game-is-locked");
+function ensureStreetMapStarted() {
   refs.splash?.setAttribute("hidden", "");
+  refs.body?.classList.add("is-entry-flow");
+  refs.body?.classList.remove("game-has-started");
   if (game.scene.isActive("intro-scene")) {
     game.scene.stop("intro-scene");
   }
@@ -327,12 +724,146 @@ function startGame() {
   syncStreetGoogleGate();
 }
 
+function stopEntryScenes() {
+  ENTRY_SCENE_KEYS.forEach((sceneKey) => {
+    if (game.scene.isActive(sceneKey)) {
+      game.scene.stop(sceneKey);
+    }
+  });
+}
+
+function openCharacterSelect() {
+  refs.splash?.setAttribute("hidden", "");
+  stopEntryScenes();
+  gameStarted = true;
+  characterSelectOpen = true;
+  refs.body?.classList.add("game-is-locked");
+  refs.body?.classList.add("is-entry-flow");
+  refs.body?.classList.remove("game-has-started");
+  refs.body?.classList.add("is-character-selecting");
+  refs.characterSelect?.removeAttribute("hidden");
+  syncCharacterChoiceButtons();
+  updateGameState({
+    selectedCharacter,
+    characterSelectOpen: true,
+    currentScene: "character-select",
+    focus: "escolha de personagem",
+    objective: "Escolher protagonista",
+    prompt: "Escolha homem ou mulher antes da chegada na frente do bar."
+  });
+  syncEnterExitButtons();
+}
+
+function finishCharacterSelect(character) {
+  saveSelectedCharacter(character);
+  characterSelectOpen = false;
+  refs.characterSelect?.setAttribute("hidden", "");
+  resetStreetOpeningPlayback();
+  stopEntryScenes();
+  ensureStreetMapStarted();
+  refs.body?.classList.remove("game-is-locked");
+  refs.body?.classList.remove("is-entry-flow");
+  refs.body?.classList.remove("is-character-selecting");
+  refs.body?.classList.add("game-has-started");
+  updateGameState({
+    selectedCharacter,
+    characterSelectOpen: false,
+    currentScene: "street",
+    focus: selectedCharacter === "female" ? "protagonista mulher" : "protagonista homem",
+    objective: "Assistir o carro deixar o protagonista na rua",
+    prompt: "Personagem escolhido. O carro esta chegando pela rua."
+  });
+  game.events.emit("pubpaid:character-selected", { character: selectedCharacter });
+  syncEnterExitButtons();
+}
+
+function handleMobileControl(action, pressed) {
+  if (!action) return;
+  if (action === "config") {
+    if (pressed) {
+      setMobileSettingsOpen(!mobileSettingsOpen);
+    }
+    return;
+  }
+  if (!gameStarted || characterSelectOpen || refs.body?.classList.contains("game-is-locked")) return;
+  startSoundtrackFromGesture();
+  game.events.emit("pubpaid:mobile-control", { action, pressed });
+}
+
+function bindMobileControls() {
+  refs.mobileControlButtons.forEach((button) => {
+    const action = button.getAttribute("data-mobile-control");
+    const release = (event) => {
+      event?.preventDefault?.();
+      button.classList.remove("is-pressed");
+      handleMobileControl(action, false);
+    };
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      button.setPointerCapture?.(event.pointerId);
+      button.classList.add("is-pressed");
+      handleMobileControl(action, true);
+    });
+    button.addEventListener("pointerup", release);
+    button.addEventListener("pointercancel", release);
+    button.addEventListener("lostpointercapture", release);
+    button.addEventListener("click", (event) => event.preventDefault());
+  });
+}
+
+function bindWalletPixControls() {
+  refs.walletPixClose?.addEventListener("click", (event) => {
+    event.preventDefault();
+    setWalletPixOpen(false);
+  });
+
+  refs.walletPixAmountButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      walletPixState.amount = normalizeMoneyInput(button.getAttribute("data-wallet-pix-amount-preset"), 10);
+      resetWalletPixDeposit();
+      syncWalletPixAmountButtons();
+      setWalletPixFeedback(`Valor selecionado: ${walletPixState.amount} creditos.`);
+    });
+  });
+
+  refs.walletPixGenerate?.addEventListener("click", (event) => {
+    event.preventDefault();
+    void generateWalletDepositPix();
+  });
+
+  refs.walletPixRegister?.addEventListener("click", (event) => {
+    event.preventDefault();
+    void registerWalletDepositPix();
+  });
+
+  refs.walletPixWithdrawSubmit?.addEventListener("click", (event) => {
+    event.preventDefault();
+    void requestWalletWithdrawalPix();
+  });
+}
+
+function startGame() {
+  openCharacterSelect();
+}
+
 function resolveEntryStep() {
-  return "terms";
+  return "auth";
 }
 
 function tryEnterFlow() {
-  openSplash(resolveEntryStep());
+  refs.splash?.setAttribute("hidden", "");
+  refs.characterSelect?.setAttribute("hidden", "");
+  refs.body?.classList.add("game-is-locked");
+  refs.body?.classList.add("is-entry-flow");
+  refs.body?.classList.remove("game-has-started");
+  updateGameState({
+    currentScene: "intro",
+    focus: "intro cinematica PubPaid",
+    objective: "Assistir a abertura cinematica",
+    prompt: "Abertura restaurada. Clique ou aperte Enter no frame final para seguir ao login."
+  });
+  void activateExperience();
 }
 
 function bindSplash() {
@@ -345,12 +876,14 @@ function bindSplash() {
 
     if (event.target.closest("[data-audio-toggle]")) {
       event.preventDefault();
-      if (!introStarted) {
-        await activateExperience();
-      } else {
-        soundtrack.toggle();
-      }
+      soundtrack.toggle();
       syncAudioButton();
+      return;
+    }
+
+    if (event.target.closest("[data-mobile-settings-close]")) {
+      event.preventDefault();
+      setMobileSettingsOpen(false);
       return;
     }
 
@@ -378,7 +911,7 @@ function bindSplash() {
 
     if (event.target.closest("[data-exit-game]")) {
       event.preventDefault();
-      openSplash(getAuthApi()?.isSignedIn?.() ? "auth" : "intro");
+      openSplash("auth");
       return;
     }
 
@@ -395,18 +928,21 @@ function bindSplash() {
     if (event.target.closest("[data-open-game]")) {
       const auth = getAuthApi();
       if (canUseLocalDemoAccess()) {
-        startGame();
+        openCharacterSelect();
         return;
       }
       if (!auth?.isSignedIn?.()) {
         await auth?.promptSignIn?.();
         return;
       }
-      if (!hasAcceptedTerms()) {
-        setStep("terms");
-        return;
-      }
-      startGame();
+      openCharacterSelect();
+      return;
+    }
+
+    const characterChoice = event.target.closest("[data-character-choice]");
+    if (characterChoice) {
+      event.preventDefault();
+      finishCharacterSelect(characterChoice.getAttribute("data-character-choice"));
     }
 
     if (event.target.closest("[data-street-google-button]")) {
@@ -424,10 +960,6 @@ function bindSplash() {
   });
 
   window.addEventListener("keydown", () => {
-    if (!introStarted) {
-      void activateExperience();
-      return;
-    }
     startSoundtrackFromGesture();
   }, { once: true });
 
@@ -437,6 +969,10 @@ function bindSplash() {
 }
 
 bindSplash();
+bindMobileControls();
+bindWalletPixControls();
+window.addEventListener("keydown", handleGameEscape, { capture: true });
+document.addEventListener("fullscreenchange", recoverFullscreenAfterGameEscape);
 syncAudioButton();
 syncEnterExitButtons();
 refs.body?.classList.toggle("is-ios", isIOS);
@@ -445,7 +981,9 @@ refs.body?.classList.add("game-is-locked");
 refs.splash?.setAttribute("hidden", "");
 syncStreetGoogleGate();
 syncOrientationGate();
-setStep("terms");
+saveSelectedCharacter(selectedCharacter);
+syncCharacterChoiceButtons();
+setStep("auth");
 window.setTimeout(() => {
   void syncAuthUi();
 }, 250);
@@ -456,24 +994,25 @@ window.addEventListener("orientationchange", syncOrientationGate);
 window.setInterval(() => {
   if (!gameStarted) return;
   const auth = getAuthApi();
-  if (auth?.isSignedIn?.() || canUseLocalDemoAccess()) {
+  if (auth?.isSignedIn?.()) {
     void syncPubpaidAccount();
   }
 }, 10000);
 
 window.addEventListener("focus", () => {
-  if (gameStarted) {
+  const auth = getAuthApi();
+  if (gameStarted && auth?.isSignedIn?.()) {
     void syncPubpaidAccount();
   }
 });
 
 game.events.on("pubpaid:intro-ready", () => {
-  openSplash("terms");
+  openSplash("auth");
 });
 
 game.events.on("pubpaid:intro-enter", () => {
   setAcceptedTerms(true);
-  startGame();
+  openSplash("auth");
 });
 
 game.events.on("pubpaid:intro-start", () => {
@@ -514,6 +1053,13 @@ window.render_game_to_text = () => {
     `pvpStatus=${gameState.pvpStatus}`,
     `pvpGameId=${gameState.pvpGameId}`,
     `pvpMatchId=${gameState.pvpMatchId}`,
+    `selectedCharacter=${gameState.selectedCharacter}`,
+    `characterSelectOpen=${gameState.characterSelectOpen ? "yes" : "no"}`,
+    `walletOpen=${gameState.walletOpen ? "yes" : "no"}`,
+    `walletPhase=${gameState.walletPhase}`,
+    `mobileSettingsOpen=${mobileSettingsOpen ? "yes" : "no"}`,
+    `trafficCount=${gameState.trafficCount || 0}`,
+    `trafficBlocked=${gameState.trafficBlocked ? "yes" : "no"}`,
     `activeGameId=${gameState.activeGameId}`,
     `lobbyPhase=${gameState.lobbyPhase}`,
     `dartsGame=${gameState.dartsGame ? JSON.stringify(gameState.dartsGame) : "none"}`,

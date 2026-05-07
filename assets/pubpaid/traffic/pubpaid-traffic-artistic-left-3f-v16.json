@@ -1,0 +1,45 @@
+{
+  "id": "pubpaid-traffic-artistic-left-3f-v16",
+  "createdAt": "2026-05-05",
+  "source": "assets/pubpaid/traffic/pubpaid-traffic-artistic-left-3f-v15.png",
+  "frameWidth": 384,
+  "frameHeight": 192,
+  "columns": 3,
+  "rows": 10,
+  "purpose": "stabilize motorcycle animation frames so corrected and defective alpha/rim states do not alternate during playback",
+  "method": "uses the corrected first frame of each motorcycle row as the canonical frame and copies it over columns 1 and 2 for rows 8 and 9; this removes flicker from inconsistent transparent wheel/body pixels inside the same motorcycle animation",
+  "stabilizedRows": [
+    8,
+    9
+  ],
+  "changedFrames": [
+    {
+      "row": 8,
+      "sourceCol": 0,
+      "targetCol": 1,
+      "changedPixels": 17026
+    },
+    {
+      "row": 8,
+      "sourceCol": 0,
+      "targetCol": 2,
+      "changedPixels": 16754
+    },
+    {
+      "row": 9,
+      "sourceCol": 0,
+      "targetCol": 1,
+      "changedPixels": 18126
+    },
+    {
+      "row": 9,
+      "sourceCol": 0,
+      "targetCol": 2,
+      "changedPixels": 17712
+    }
+  ],
+  "notes": [
+    "This intentionally trades subtle wheel-frame cycling on the motorcycles for visual consistency.",
+    "Car and van rows remain from v15; only rows 8 and 9 were normalized."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "pubpaid-traffic-32bit-study-v1",
+  "prompt": "PROMPT_PUBPAID_VEICULOS_32BIT_HIBIT_2026-04-28.md",
+  "status": "study-only-not-runtime",
+  "frameWidth": 128,
+  "frameHeight": 64,
+  "framesPerDirection": 4,
+  "totalFramesPerVehicle": 8,
+  "vehicles": [
+    {
+      "id": "taxi-32bit-study",
+      "label": "Taxi 32-bit study",
+      "type": "car",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/hibi-vehicles-study-v1/taxi-32bit-study-8f.png"
+    },
+    {
+      "id": "moto-rider-32bit-study",
+      "label": "Moto com piloto 32-bit study",
+      "type": "bike",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/hibi-vehicles-study-v1/moto-rider-32bit-study-8f.png"
+    }
+  ]
+}

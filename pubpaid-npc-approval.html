@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PubPaid 2 - NPC approval</title>
+  <style>
+    :root {
+      --bg: #050814;
+      --panel: #0b1020;
+      --panel-2: #11182a;
+      --line: #37c2ce;
+      --muted: #aeb8c7;
+      --text: #f4f1e8;
+      --accent: #62eadc;
+      --sprite-scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    button {
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: #121a2d;
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      min-height: 36px;
+      padding: 8px 12px;
+    }
+
+    button:hover,
+    button.active {
+      border-color: var(--accent);
+      color: #071216;
+      background: var(--accent);
+    }
+
+    .wrap {
+      min-height: 100vh;
+      padding: 18px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      margin: 0 auto 14px;
+      max-width: 1320px;
+    }
+
+    .title {
+      display: grid;
+      gap: 4px;
+    }
+
+    .title h1 {
+      font-size: 18px;
+      line-height: 1.15;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .title p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .controls {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .stage-shell {
+      background: #03050d;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      margin: 0 auto;
+      max-width: 1320px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .stage {
+      background-image: url("./assets/pubpaid-v2-street-bg-v1.png");
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: 1717px 916px;
+      height: 916px;
+      image-rendering: pixelated;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transform-origin: top left;
+      width: 1717px;
+    }
+
+    .stage.guides::before {
+      background: var(--line);
+      content: "";
+      height: 2px;
+      left: 0;
+      position: absolute;
+      top: 560px;
+      width: 100%;
+      z-index: 4;
+    }
+
+    .stage.guides::after {
+      background: rgba(5, 8, 20, 0.78);
+      border: 1px solid rgba(98, 234, 220, 0.45);
+      color: var(--accent);
+      content: "baseline 139 / rua";
+      font-size: 16px;
+      font-weight: 800;
+      left: 28px;
+      padding: 7px 10px;
+      position: absolute;
+      text-transform: uppercase;
+      top: 570px;
+      z-index: 8;
+    }
+
+    .sprite {
+      animation: npcIdle5 1160ms steps(5) infinite;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      height: 144px;
+      image-rendering: pixelated;
+      left: calc(var(--x) * 1px);
+      position: absolute;
+      top: calc(var(--y) * 1px - 139px);
+      transform: translateX(-50%) scale(var(--sprite-scale));
+      transform-origin: 50% 139px;
+      width: 96px;
+      z-index: 7;
+    }
+
+    .paused .sprite {
+      animation-play-state: paused;
+    }
+
+    .sprite.walk {
+      animation: npcWalk5 680ms steps(5) infinite;
+    }
+
+    .sprite.protagonist {
+      animation: prota4 760ms steps(4) infinite;
+      background-image: url("./assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-breathe-8dir-4f.png");
+    }
+
+    .sprite.pub-bartender {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pub-bartender-idle-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.pub-cue {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pub-cue-regular-idle-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.pub-patron {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pub-patron-drink-idle-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.arcade-controller {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/arcade-controller-wall-idle-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.arcade-token {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/arcade-token-wall-idle-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.arcade-phone {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/arcade-phone-wall-idle-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-commuter {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-commuter-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-delivery {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-delivery-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-hoodie {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-hoodie-tote-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-woman-denim {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-woman-denim-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-woman-umbrella {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-woman-umbrella-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-woman-hoodie {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-woman-hoodie-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-elder-woman-coat {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-elder-woman-coat-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-elder-man-cane {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-elder-man-cane-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .sprite.ped-elder-woman-tote {
+      background-image: url("./assets/pubpaid/sprites/street-civilians/pedestrian-elder-woman-tote-walk-v2.png?v=20260506walkidle2");
+    }
+
+    .tag {
+      background: rgba(5, 8, 20, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f7f2db;
+      font-size: 12px;
+      font-weight: 800;
+      left: calc(var(--x) * 1px);
+      padding: 5px 7px;
+      position: absolute;
+      text-transform: uppercase;
+      top: calc(var(--y) * 1px + 12px);
+      transform: translateX(-50%);
+      white-space: nowrap;
+      z-index: 9;
+    }
+
+    .source-strip,
+    .sheet-grid {
+      margin: 16px auto 0;
+      max-width: 1320px;
+    }
+
+    .source-strip {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    }
+
+    .panel,
+    .sheet-card {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      min-width: 0;
+      padding: 12px;
+    }
+
+    .panel h2,
+    .sheet-card h2 {
+      font-size: 14px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    .panel p,
+    .sheet-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      margin: 10px 0 0;
+    }
+
+    .source-image {
+      align-items: center;
+      background: #070b16;
+      display: flex;
+      justify-content: center;
+      overflow: auto;
+    }
+
+    .source-image img {
+      image-rendering: pixelated;
+      max-height: 580px;
+      max-width: 100%;
+    }
+
+    .sheet-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .checker {
+      align-items: center;
+      background-color: #070b16;
+      background-image:
+        linear-gradient(45deg, rgba(255,255,255,0.08) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(255,255,255,0.08) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.08) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.08) 75%);
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+      background-size: 16px 16px;
+      display: flex;
+      justify-content: center;
+      min-height: 150px;
+      overflow: hidden;
+    }
+
+    .checker img {
+      image-rendering: pixelated;
+      max-width: 100%;
+      transform: scale(1.5);
+      transform-origin: center;
+    }
+
+    @keyframes npcIdle5 {
+      to {
+        background-position-x: -480px;
+      }
+    }
+
+    @keyframes npcWalk5 {
+      to {
+        background-position-x: -480px;
+      }
+    }
+
+    @keyframes prota4 {
+      to {
+        background-position-x: -384px;
+      }
+    }
+
+    @media (max-width: 1000px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .controls {
+        justify-content: flex-start;
+      }
+
+      .source-strip,
+      .sheet-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .checker img {
+        transform: scale(1.25);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="topbar">
+      <div class="title">
+        <h1>PubPaid 2 - NPCs de aprovacao</h1>
+        <p>V2 em preview externo: idle e caminhada assados em PNGs 96x144, cinco frames, alpha duro e sem arte gerada no runtime.</p>
+      </div>
+      <div class="controls" aria-label="Controles de preview">
+        <button class="active" type="button" data-scale="1">1.00x</button>
+        <button type="button" data-scale="0.88">0.88x</button>
+        <button type="button" data-scale="1.12">1.12x</button>
+        <button type="button" id="pauseBtn">Pausar</button>
+        <button type="button" id="guideBtn">Guias</button>
+      </div>
+    </header>
+
+    <section class="stage-shell" id="stageShell" aria-label="Preview no fundo da rua PubPaid">
+      <div class="stage guides" id="stage">
+        <div class="sprite pub-bartender" style="--x: 120; --y: 560;" title="Pub bartender"></div>
+        <div class="tag" style="--x: 120; --y: 560;">pub 1</div>
+
+        <div class="sprite pub-cue" style="--x: 250; --y: 560;" title="Pub cue regular"></div>
+        <div class="tag" style="--x: 250; --y: 560;">pub 2</div>
+
+        <div class="sprite pub-patron" style="--x: 380; --y: 560;" title="Pub patron"></div>
+        <div class="tag" style="--x: 380; --y: 560;">pub 3</div>
+
+        <div class="sprite arcade-controller" style="--x: 545; --y: 560;" title="Arcade controller"></div>
+        <div class="tag" style="--x: 545; --y: 560;">arcade 1</div>
+
+        <div class="sprite arcade-token" style="--x: 675; --y: 560;" title="Arcade token"></div>
+        <div class="tag" style="--x: 675; --y: 560;">arcade 2</div>
+
+        <div class="sprite arcade-phone" style="--x: 805; --y: 560;" title="Arcade phone"></div>
+        <div class="tag" style="--x: 805; --y: 560;">arcade 3</div>
+
+        <div class="sprite ped-commuter walk" style="--x: 970; --y: 560;" title="Pedestrian commuter"></div>
+        <div class="tag" style="--x: 970; --y: 560;">ped 1</div>
+
+        <div class="sprite ped-delivery walk" style="--x: 1100; --y: 560;" title="Pedestrian delivery"></div>
+        <div class="tag" style="--x: 1100; --y: 560;">ped 2</div>
+
+        <div class="sprite ped-hoodie walk" style="--x: 1230; --y: 560;" title="Pedestrian hoodie"></div>
+        <div class="tag" style="--x: 1230; --y: 560;">ped 3</div>
+
+        <div class="sprite ped-woman-denim walk" style="--x: 170; --y: 710;" title="Pedestrian woman denim"></div>
+        <div class="tag" style="--x: 170; --y: 710;">garota 1</div>
+
+        <div class="sprite ped-woman-umbrella walk" style="--x: 300; --y: 710;" title="Pedestrian woman umbrella"></div>
+        <div class="tag" style="--x: 300; --y: 710;">garota 2</div>
+
+        <div class="sprite ped-woman-hoodie walk" style="--x: 430; --y: 710;" title="Pedestrian woman hoodie"></div>
+        <div class="tag" style="--x: 430; --y: 710;">garota 3</div>
+
+        <div class="sprite ped-elder-woman-coat walk" style="--x: 590; --y: 710;" title="Pedestrian elder woman coat"></div>
+        <div class="tag" style="--x: 590; --y: 710;">idosa 1</div>
+
+        <div class="sprite ped-elder-man-cane walk" style="--x: 720; --y: 710;" title="Pedestrian elder man cane"></div>
+        <div class="tag" style="--x: 720; --y: 710;">idoso 2</div>
+
+        <div class="sprite ped-elder-woman-tote walk" style="--x: 850; --y: 710;" title="Pedestrian elder woman tote"></div>
+        <div class="tag" style="--x: 850; --y: 710;">idosa 3</div>
+
+        <div class="sprite protagonist" style="--x: 1070; --y: 710;" title="Protagonista referencia"></div>
+        <div class="tag" style="--x: 1070; --y: 710;">prota ref</div>
+      </div>
+    </section>
+
+    <section class="source-strip" aria-label="Fonte e preview normalizado">
+      <article class="panel">
+        <h2>Fonte imagegen</h2>
+        <div class="source-image">
+          <img src="./assets/pubpaid/sprites/street-civilians/approval/pubpaid-npc-themes-source-v1.png?v=20260506walkidle2" alt="Contato fonte com 9 NPCs em fundo verde">
+        </div>
+        <p>Fonte mantida como referencia externa. Os PNGs de uso abaixo foram recortados, normalizados e salvos separadamente.</p>
+      </article>
+
+      <article class="panel">
+        <h2>Preview v2 animacao</h2>
+        <div class="source-image">
+          <img src="./assets/pubpaid/sprites/street-civilians/approval/pubpaid-npc-runtime-v2-animation-preview.png?v=20260506walkidle2" alt="Preview normalizado dos NPCs v2 com idle e walk">
+        </div>
+        <p>Quinze candidatos em 96x144, cinco frames, anchor bottom-center e baseline 139. Estes v2 ainda estao no preview externo.</p>
+      </article>
+    </section>
+
+    <section class="sheet-grid" aria-label="Spritesheets para aprovacao">
+      <article class="sheet-card">
+        <h2>Protagonista ref</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-breathe-8dir-4f.png" alt="Spritesheet do protagonista">
+        </div>
+        <p>Referencia de escala, contraste e linha de chao.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Pub 1 bartender</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pub-bartender-idle-v2.png?v=20260506walkidle2" alt="Spritesheet pub bartender">
+        </div>
+        <p>Balconista cansado, avental, camisa clara e pano integrado no corpo.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Pub 2 taco</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pub-cue-regular-idle-v2.png?v=20260506walkidle2" alt="Spritesheet pub cue regular">
+        </div>
+        <p>Frequentador de pub com colete vinho e taco vertical.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Pub 3 copo</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pub-patron-drink-idle-v2.png?v=20260506walkidle2" alt="Spritesheet pub patron drink">
+        </div>
+        <p>Cliente estiloso de jaqueta escura, copo perto do corpo.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Arcade 1 controle</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/arcade-controller-wall-idle-v2.png?v=20260506walkidle2" alt="Spritesheet arcade controller">
+        </div>
+        <p>Nerd sentado com controle, oculos e postura diferente dos de rua.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Arcade 2 fichas</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/arcade-token-wall-idle-v2.png?v=20260506walkidle2" alt="Spritesheet arcade token">
+        </div>
+        <p>Boné, mochila pequena e fichas integradas no bitmap.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Arcade 3 celular</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/arcade-phone-wall-idle-v2.png?v=20260506walkidle2" alt="Spritesheet arcade phone">
+        </div>
+        <p>Headset, moletom azul e celular sem prop separado.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Ped 1 bolsa</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-commuter-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian commuter">
+        </div>
+        <p>Pedestre andando com bolsa transversal e paleta noturna.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Ped 2 entregador</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-delivery-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian delivery">
+        </div>
+        <p>Entregador caminhando, mochila vermelha e capacete no braco.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Ped 3 moletom</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-hoodie-tote-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian hoodie tote">
+        </div>
+        <p>Moletom verde, ecobag e caminhada lateral.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Garota 1 jeans</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-woman-denim-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian woman denim">
+        </div>
+        <p>Jaqueta jeans, caminhada lateral e escala de calçada.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Garota 2 chuva</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-woman-umbrella-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian woman umbrella">
+        </div>
+        <p>Guarda-chuva integrado ao sprite, sem prop solto.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Garota 3 moletom</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-woman-hoodie-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian woman hoodie">
+        </div>
+        <p>Moletom, postura compacta e passada curta.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Idosa 1 casaco</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-elder-woman-coat-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian elder woman coat">
+        </div>
+        <p>Velhinha com casaco, movimento lento e leitura de silhueta.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Idoso 2 bengala</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-elder-man-cane-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian elder man cane">
+        </div>
+        <p>Bengala integrada ao corpo, passada reduzida.</p>
+      </article>
+
+      <article class="sheet-card">
+        <h2>Idosa 3 bolsa</h2>
+        <div class="checker">
+          <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-elder-woman-tote-walk-v2.png?v=20260506walkidle2" alt="Spritesheet pedestrian elder woman tote">
+        </div>
+        <p>Bolsa lateral, caminhada curta e baseline comum.</p>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const shell = document.getElementById("stageShell");
+    const stage = document.getElementById("stage");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const guideBtn = document.getElementById("guideBtn");
+    const scaleButtons = [...document.querySelectorAll("[data-scale]")];
+
+    function fitStage() {
+      const scale = shell.clientWidth / 1717;
+      shell.style.height = `${916 * scale}px`;
+      stage.style.transform = `scale(${scale})`;
+    }
+
+    scaleButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        document.documentElement.style.setProperty("--sprite-scale", button.dataset.scale);
+        scaleButtons.forEach((item) => item.classList.toggle("active", item === button));
+      });
+    });
+
+    pauseBtn.addEventListener("click", () => {
+      document.body.classList.toggle("paused");
+      pauseBtn.textContent = document.body.classList.contains("paused") ? "Animar" : "Pausar";
+    });
+
+    guideBtn.addEventListener("click", () => {
+      stage.classList.toggle("guides");
+    });
+
+    window.addEventListener("resize", fitStage, { passive: true });
+    fitStage();
+  </script>
+</body>
+</html>

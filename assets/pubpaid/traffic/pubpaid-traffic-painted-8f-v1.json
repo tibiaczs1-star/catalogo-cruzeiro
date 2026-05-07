@@ -1,0 +1,140 @@
+{
+  "frameWidth": 576,
+  "frameHeight": 384,
+  "baseFrameWidth": 192,
+  "baseFrameHeight": 128,
+  "scale": 3,
+  "framesPerDirection": 4,
+  "framesPerVehicle": 8,
+  "rightFrames": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "leftFrames": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "generatedAt": "2026-04-28T19:34:14.096Z",
+  "source": "scripts/export-pubpaid-painted-traffic-v1.js",
+  "status": "avaliacao visual; nao integrado no runtime",
+  "atlas": "assets/pubpaid/traffic/pubpaid-traffic-painted-8f-v1.png",
+  "individualDir": "assets/pubpaid/traffic/painted-v1",
+  "vehicles": [
+    {
+      "id": "taxi-32bit-painted-v1",
+      "label": "Taxi 32-bit lateral",
+      "kind": "car",
+      "row": 0,
+      "framesPerDirection": 4,
+      "speed": 3.1,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 338,
+        "height": 94
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/taxi-32bit-painted-v1-8f.png"
+    },
+    {
+      "id": "black-sedan-painted-v1",
+      "label": "Sedan preto pixel",
+      "kind": "car",
+      "row": 1,
+      "framesPerDirection": 4,
+      "speed": 3.25,
+      "scale": 0.74,
+      "hitbox": {
+        "width": 346,
+        "height": 96
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/black-sedan-painted-v1-8f.png"
+    },
+    {
+      "id": "red-coupe-painted-v1",
+      "label": "Coupe vermelho neon",
+      "kind": "car",
+      "row": 2,
+      "framesPerDirection": 4,
+      "speed": 3.6,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 340,
+        "height": 98
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/red-coupe-painted-v1-8f.png"
+    },
+    {
+      "id": "green-pickup-painted-v1",
+      "label": "Pickup verde urbana",
+      "kind": "car",
+      "row": 3,
+      "framesPerDirection": 4,
+      "speed": 3.05,
+      "scale": 0.75,
+      "hitbox": {
+        "width": 350,
+        "height": 96
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/green-pickup-painted-v1-8f.png"
+    },
+    {
+      "id": "orange-chopper-rider-painted-v1",
+      "label": "Chopper laranja com piloto",
+      "kind": "moto",
+      "row": 4,
+      "framesPerDirection": 4,
+      "speed": 3.85,
+      "scale": 0.74,
+      "hitbox": {
+        "width": 246,
+        "height": 128
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/orange-chopper-rider-painted-v1-8f.png"
+    },
+    {
+      "id": "red-sport-rider-painted-v1",
+      "label": "Moto sport vermelha",
+      "kind": "moto",
+      "row": 5,
+      "framesPerDirection": 4,
+      "speed": 4.55,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 252,
+        "height": 126
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/red-sport-rider-painted-v1-8f.png"
+    },
+    {
+      "id": "silver-cruiser-rider-painted-v1",
+      "label": "Cruiser prata com piloto",
+      "kind": "moto",
+      "row": 6,
+      "framesPerDirection": 4,
+      "speed": 3.7,
+      "scale": 0.74,
+      "hitbox": {
+        "width": 260,
+        "height": 126
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/silver-cruiser-rider-painted-v1-8f.png"
+    },
+    {
+      "id": "delivery-bike-rider-painted-v1",
+      "label": "Moto delivery pixel",
+      "kind": "moto",
+      "row": 7,
+      "framesPerDirection": 4,
+      "speed": 3.8,
+      "scale": 0.72,
+      "hitbox": {
+        "width": 264,
+        "height": 132
+      },
+      "sheet": "assets/pubpaid/traffic/painted-v1/delivery-bike-rider-painted-v1-8f.png"
+    }
+  ]
+}

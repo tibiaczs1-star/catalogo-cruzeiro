@@ -1,0 +1,118 @@
+{
+  "version": "pixel-vehicles-art-pass-v1",
+  "sourceNote": "Sprites derivados de referencias CC0 do OpenGameArt por Chasersgaming; usados para estudo/base legal, recoloridos e animados para avaliacao PubPaid. Nao integrado no runtime.",
+  "frameWidth": 128,
+  "frameHeight": 64,
+  "framesPerDirection": 4,
+  "totalFramesPerVehicle": 8,
+  "directions": {
+    "right": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "left": [
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "styleContract": [
+    "2D pixel art game asset",
+    "sprite sheet",
+    "retro 16-bit and 32-bit game style",
+    "32x32 / 64x64 pixel art vocabulary",
+    "no blur, no smoothing",
+    "limited color palette",
+    "2-4 tones per color",
+    "transparent background",
+    "external background alpha 0 only",
+    "vehicle pixels alpha 255 only",
+    "no alpha holes inside body, wheels, windows, rider, or interior",
+    "no smooth gradients",
+    "no 3D look"
+  ],
+  "sources": [
+    {
+      "title": "2D car sprite",
+      "author": "Chasersgaming",
+      "url": "https://opengameart.org/content/2d-car-sprite-2",
+      "license": "CC0",
+      "localFile": "assets\\pubpaid\\traffic\\reference-sources\\opengameart-chasersgaming-classiccar-cc0.png"
+    },
+    {
+      "title": "2D Bike Sprite",
+      "author": "Chasersgaming",
+      "url": "https://opengameart.org/content/2d-bike-sprite-1",
+      "license": "CC0",
+      "localFile": "assets\\pubpaid\\traffic\\reference-sources\\opengameart-chasersgaming-chopper-rider-cc0.png"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "taxi-yellow",
+      "label": "Taxi amarelo",
+      "type": "car",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/taxi-yellow-8f.png"
+    },
+    {
+      "id": "black-sedan",
+      "label": "Sedan preto",
+      "type": "car",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/black-sedan-8f.png"
+    },
+    {
+      "id": "red-coupe",
+      "label": "Coupe vermelho",
+      "type": "car",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/red-coupe-8f.png"
+    },
+    {
+      "id": "teal-compact",
+      "label": "Compacto teal",
+      "type": "car",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/teal-compact-8f.png"
+    },
+    {
+      "id": "blue-police",
+      "label": "Carro azul com giroflex",
+      "type": "car",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/blue-police-8f.png"
+    },
+    {
+      "id": "orange-chopper-rider",
+      "label": "Chopper laranja com piloto",
+      "type": "bike",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/orange-chopper-rider-8f.png"
+    },
+    {
+      "id": "red-sport-rider",
+      "label": "Moto sport vermelha com piloto",
+      "type": "bike",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/red-sport-rider-8f.png"
+    },
+    {
+      "id": "purple-rider",
+      "label": "Moto roxa com piloto",
+      "type": "bike",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/purple-rider-8f.png"
+    },
+    {
+      "id": "delivery-blue-rider",
+      "label": "Moto delivery azul com piloto",
+      "type": "bike",
+      "frames": 8,
+      "sheet": "assets/pubpaid/traffic/pixel-vehicles-art-pass-v1/delivery-blue-rider-8f.png"
+    }
+  ]
+}

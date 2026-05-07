@@ -210,6 +210,7 @@ export function bindOverlay() {
   });
 
   subscribeGameState((state) => {
+    document.body.classList.toggle("ppg-wallet-open", Boolean(state.walletOpen));
     if (refs.scene) refs.scene.textContent = state.currentScene;
     if (refs.focus) refs.focus.textContent = state.focus;
     if (refs.mode) refs.mode.textContent = state.mode;

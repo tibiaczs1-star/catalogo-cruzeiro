@@ -1,0 +1,154 @@
+{
+  "frameWidth": 384,
+  "frameHeight": 192,
+  "baseFrameWidth": 96,
+  "baseFrameHeight": 48,
+  "scale": 4,
+  "framesPerVehicle": 5,
+  "generatedAt": "2026-04-28T18:45:02.488Z",
+  "source": "scripts/generate-pubpaid-traffic-pixelart-v3.js",
+  "atlas": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-pixelart-5f-v3.png",
+  "individualDir": "assets/pubpaid/traffic/vehicles-v3-pixelart",
+  "vehicles": [
+    {
+      "id": "teal_hatch_px_v3",
+      "label": "Compacto teal pixel",
+      "kind": "car",
+      "row": 0,
+      "frames": 5,
+      "speed": 3.3,
+      "scale": 0.82,
+      "hitbox": {
+        "width": 202,
+        "height": 68
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/teal_hatch_px_v3-5f.png"
+    },
+    {
+      "id": "amber_sedan_px_v3",
+      "label": "Sedan ambar pixel",
+      "kind": "car",
+      "row": 1,
+      "frames": 5,
+      "speed": 3.15,
+      "scale": 0.86,
+      "hitbox": {
+        "width": 226,
+        "height": 68
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/amber_sedan_px_v3-5f.png"
+    },
+    {
+      "id": "magenta_city_px_v3",
+      "label": "City magenta pixel",
+      "kind": "car",
+      "row": 2,
+      "frames": 5,
+      "speed": 3.55,
+      "scale": 0.78,
+      "hitbox": {
+        "width": 178,
+        "height": 70
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/magenta_city_px_v3-5f.png"
+    },
+    {
+      "id": "blue_coupe_px_v3",
+      "label": "Coupe azul pixel",
+      "kind": "car",
+      "row": 3,
+      "frames": 5,
+      "speed": 3.25,
+      "scale": 0.84,
+      "hitbox": {
+        "width": 216,
+        "height": 64
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/blue_coupe_px_v3-5f.png"
+    },
+    {
+      "id": "pixel_taxi_px_v3",
+      "label": "Taxi pixel",
+      "kind": "car",
+      "row": 4,
+      "frames": 5,
+      "speed": 3.05,
+      "scale": 0.86,
+      "hitbox": {
+        "width": 226,
+        "height": 68
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/pixel_taxi_px_v3-5f.png"
+    },
+    {
+      "id": "dark_premium_px_v3",
+      "label": "Premium escuro pixel",
+      "kind": "car",
+      "row": 5,
+      "frames": 5,
+      "speed": 3.8,
+      "scale": 0.88,
+      "hitbox": {
+        "width": 240,
+        "height": 66
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/dark_premium_px_v3-5f.png"
+    },
+    {
+      "id": "navy_scooter_rider_px_v3",
+      "label": "Scooter navy com piloto",
+      "kind": "moto",
+      "row": 6,
+      "frames": 5,
+      "speed": 4.2,
+      "scale": 0.84,
+      "hitbox": {
+        "width": 172,
+        "height": 96
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/navy_scooter_rider_px_v3-5f.png"
+    },
+    {
+      "id": "purple_sport_rider_px_v3",
+      "label": "Moto sport roxa com piloto",
+      "kind": "moto",
+      "row": 7,
+      "frames": 5,
+      "speed": 4.65,
+      "scale": 0.86,
+      "hitbox": {
+        "width": 188,
+        "height": 94
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/purple_sport_rider_px_v3-5f.png"
+    },
+    {
+      "id": "black_cruiser_rider_px_v3",
+      "label": "Cruiser preta com piloto",
+      "kind": "moto",
+      "row": 8,
+      "frames": 5,
+      "speed": 3.9,
+      "scale": 0.88,
+      "hitbox": {
+        "width": 202,
+        "height": 96
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/black_cruiser_rider_px_v3-5f.png"
+    },
+    {
+      "id": "delivery_moto_rider_px_v3",
+      "label": "Moto delivery com piloto",
+      "kind": "moto",
+      "row": 9,
+      "frames": 5,
+      "speed": 3.7,
+      "scale": 0.86,
+      "hitbox": {
+        "width": 204,
+        "height": 100
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v3-pixelart/delivery_moto_rider_px_v3-5f.png"
+    }
+  ]
+}

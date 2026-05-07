@@ -1,0 +1,152 @@
+{
+  "frameWidth": 320,
+  "frameHeight": 160,
+  "framesPerVehicle": 5,
+  "generatedAt": "2026-04-28T18:36:30.530Z",
+  "source": "scripts/generate-pubpaid-traffic-sprites-v2.js",
+  "note": "V2 de avaliacao: veiculos inteiros, motos com piloto integrado e rodas animadas em cinco frames.",
+  "atlas": "assets/pubpaid/traffic/pubpaid-traffic-vehicles-5f-v2.png",
+  "individualDir": "assets/pubpaid/traffic/vehicles-v2",
+  "vehicles": [
+    {
+      "id": "teal_hatch_v2",
+      "label": "Compacto teal sem corte",
+      "kind": "car",
+      "row": 0,
+      "frames": 5,
+      "speed": 3.3,
+      "scale": 0.86,
+      "hitbox": {
+        "width": 196,
+        "height": 58
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/teal_hatch_v2-5f.png"
+    },
+    {
+      "id": "amber_sedan_v2",
+      "label": "Sedan âmbar inteiro",
+      "kind": "car",
+      "row": 1,
+      "frames": 5,
+      "speed": 3.15,
+      "scale": 0.9,
+      "hitbox": {
+        "width": 216,
+        "height": 56
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/amber_sedan_v2-5f.png"
+    },
+    {
+      "id": "magenta_city_v2",
+      "label": "City car magenta",
+      "kind": "car",
+      "row": 2,
+      "frames": 5,
+      "speed": 3.55,
+      "scale": 0.84,
+      "hitbox": {
+        "width": 174,
+        "height": 58
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/magenta_city_v2-5f.png"
+    },
+    {
+      "id": "blue_coupe_v2",
+      "label": "Cupê azul neon",
+      "kind": "car",
+      "row": 3,
+      "frames": 5,
+      "speed": 3.25,
+      "scale": 0.88,
+      "hitbox": {
+        "width": 212,
+        "height": 52
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/blue_coupe_v2-5f.png"
+    },
+    {
+      "id": "pixel_taxi_v2",
+      "label": "Táxi pixel inteiro",
+      "kind": "car",
+      "row": 4,
+      "frames": 5,
+      "speed": 3.05,
+      "scale": 0.9,
+      "hitbox": {
+        "width": 218,
+        "height": 56
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/pixel_taxi_v2-5f.png"
+    },
+    {
+      "id": "dark_premium_v2",
+      "label": "Premium escuro largo",
+      "kind": "car",
+      "row": 5,
+      "frames": 5,
+      "speed": 3.8,
+      "scale": 0.93,
+      "hitbox": {
+        "width": 232,
+        "height": 54
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/dark_premium_v2-5f.png"
+    },
+    {
+      "id": "navy_scooter_rider_v2",
+      "label": "Scooter navy com piloto",
+      "kind": "moto",
+      "row": 6,
+      "frames": 5,
+      "speed": 4.2,
+      "scale": 0.88,
+      "hitbox": {
+        "width": 160,
+        "height": 72
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/navy_scooter_rider_v2-5f.png"
+    },
+    {
+      "id": "purple_sport_rider_v2",
+      "label": "Moto sport roxa com piloto",
+      "kind": "moto",
+      "row": 7,
+      "frames": 5,
+      "speed": 4.65,
+      "scale": 0.9,
+      "hitbox": {
+        "width": 178,
+        "height": 70
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/purple_sport_rider_v2-5f.png"
+    },
+    {
+      "id": "black_cruiser_rider_v2",
+      "label": "Cruiser preta com piloto",
+      "kind": "moto",
+      "row": 8,
+      "frames": 5,
+      "speed": 3.9,
+      "scale": 0.92,
+      "hitbox": {
+        "width": 190,
+        "height": 72
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/black_cruiser_rider_v2-5f.png"
+    },
+    {
+      "id": "delivery_moto_rider_v2",
+      "label": "Moto delivery com piloto e baú",
+      "kind": "moto",
+      "row": 9,
+      "frames": 5,
+      "speed": 3.7,
+      "scale": 0.9,
+      "hitbox": {
+        "width": 188,
+        "height": 76
+      },
+      "sheet": "assets/pubpaid/traffic/vehicles-v2/delivery_moto_rider_v2-5f.png"
+    }
+  ]
+}
