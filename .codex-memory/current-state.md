@@ -46,6 +46,9 @@ Limpeza temporaria local equivalente em `.codex-temp` nao encontrou logs/smoke r
 - Para Jornal grande: `npm run review:team` antes de commit/PR/deploy.
 - Para Cheffe/agentes: provar pagina 200, rota de estudo, inicio da call, `complete` e runtime antes de declarar implementado.
 - Antes de qualquer nova rodada: rodar `npm run codex:health`.
+- Health agora deve mostrar risk gates para escopo amplo, Render/admin sem credencial, PubPaid visual, branch ahead e worktree suja.
+- Neste sandbox, `codex:health` nao consegue spawnar `git` dentro do Node (`spawnSync git EPERM`); ele avisa e exige conferir `git status` pelo shell.
+- Existem mudancas vivas em `data/article-integrity-report.json` e `data/image-preview-cache.json`; nao reverter nem misturar sem ordem explicita.
 
 ## Files In Focus
 
@@ -53,3 +56,4 @@ Limpeza temporaria local equivalente em `.codex-temp` nao encontrou logs/smoke r
 - `C:\Users\junio\projeto codex\.codex-memory\current-state.md`
 - `C:\Users\junio\projeto codex\.codex-memory\handoff.md`
 - `C:\Users\junio\projeto codex\.codex-memory\orders.json`
+- `C:\Users\junio\projeto codex\scripts\codex-health-check.js`

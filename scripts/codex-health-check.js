@@ -21,6 +21,34 @@ const REQUIRED_FILES = [
 ];
 
 const ACTIVE_STATUSES = new Set(["open", "in-progress"]);
+const RENDER_CREDENTIAL_KEYS = [
+  "ADMIN_TOKEN",
+  "FULL_ADMIN_PASSWORD",
+  "SUPER_ADMIN_PASSWORD",
+  "RENDER_API_KEY",
+  "RENDER_TOKEN"
+];
+const BROAD_REQUEST_PATTERNS = [
+  /\bresolv(a|er)\s+tudo\b/i,
+  /\bfaz(er)?\s+tudo\b/i,
+  /\barrum(a|ar)\s+tudo\b/i,
+  /\blimp(a|ar)\s+tudo\b/i,
+  /\bmelhor(a|ar)\s+tudo\b/i,
+  /\bcontinua(r)?\s+tudo\b/i,
+  /\bsem\s+escopo\b/i,
+  /\border[mn]\s+ampla\b/i
+];
+const SCOPE_HINT_PATTERNS = [
+  /\bpubpaid\b/i,
+  /\bjornal\b/i,
+  /\bcheffe\b/i,
+  /\bagentes?\b/i,
+  /\brender\b/i,
+  /\bgit\b/i,
+  /\bworktree\b/i,
+  /\bmem[oó]ria\b/i,
+  /\bcodex:health\b/i
+];
 const MEMORY_LIMITS = {
   "CODEX_MEMORY.md": { warn: 6000, fail: 20000 },
   ".codex-memory/current-state.md": { warn: 6000, fail: 16000 },
@@ -112,6 +140,23 @@ function parseGitStatus(output) {
   };
 }
 
+function parseGitBranch(output) {
+  const firstLine = output.split(/\r?\n/).find((line) => line.startsWith("## ")) || "";
+  const cleanLine = firstLine.replace(/^##\s+/, "");
+  const match = cleanLine.match(/^(.*?)(?:\.\.\.(.*?))?(?:\s+\[(.*)\])?$/);
+  const flags = match?.[3] || "";
+  const aheadMatch = flags.match(/ahead\s+(\d+)/);
+  const behindMatch = flags.match(/behind\s+(\d+)/);
+
+  return {
+    raw: firstLine,
+    branch: (match?.[1] || cleanLine || "").trim(),
+    upstream: (match?.[2] || "").trim(),
+    ahead: aheadMatch ? Number(aheadMatch[1]) : 0,
+    behind: behindMatch ? Number(behindMatch[1]) : 0
+  };
+}
+
 function safeGitStatus() {
   try {
     const normalOutput = execFileSync("git", ["status", "--porcelain=v1"], {
@@ -124,15 +169,184 @@ function safeGitStatus() {
       encoding: "utf8",
       timeout: 10000
     });
+    const branchOutput = execFileSync("git", ["status", "--short", "--branch"], {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+      timeout: 10000
+    });
 
     return {
       available: true,
       normal: parseGitStatus(normalOutput),
-      expanded: parseGitStatus(expandedOutput)
+      expanded: parseGitStatus(expandedOutput),
+      branch: parseGitBranch(branchOutput)
     };
   } catch (error) {
     return { available: false, error: error.message };
   }
+}
+
+function commandExists(commandName) {
+  const lookupCommand = process.platform === "win32" ? "where" : "which";
+  try {
+    execFileSync(lookupCommand, [commandName], {
+      cwd: ROOT_DIR,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+      timeout: 5000
+    });
+    return true;
+  } catch (_error) {
+    return false;
+  }
+}
+
+function orderSearchText(order) {
+  if (!order) return "";
+  return [
+    order.rawRequest,
+    order.summary,
+    ...(Array.isArray(order.normalizedTasks) ? order.normalizedTasks : []),
+    ...(Array.isArray(order.tags) ? order.tags : []),
+    ...(Array.isArray(order.nextSteps) ? order.nextSteps : [])
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+}
+
+function matchesAnyPattern(text, patterns) {
+  return patterns.some((pattern) => pattern.test(text));
+}
+
+function hasAnyRenderCredential() {
+  return RENDER_CREDENTIAL_KEYS.some((key) => String(process.env[key] || "").trim());
+}
+
+function hasOrderTag(order, tagName) {
+  return Array.isArray(order?.tags) && order.tags.includes(tagName);
+}
+
+function assessRiskGates(activeOrder, git) {
+  const gates = [];
+  const activeText = orderSearchText(activeOrder);
+  const hasActiveOrder = Boolean(activeOrder);
+  const isGuardrailOrder = hasOrderTag(activeOrder, "risk-gates") || hasOrderTag(activeOrder, "scope-gates");
+  const hasScopedHint = matchesAnyPattern(activeText, SCOPE_HINT_PATTERNS);
+  const broadUnsafe =
+    hasActiveOrder &&
+    matchesAnyPattern(activeText, BROAD_REQUEST_PATTERNS) &&
+    !hasScopedHint &&
+    !isGuardrailOrder;
+  const wantsRenderAdmin =
+    hasActiveOrder &&
+    !isGuardrailOrder &&
+    /\brender\b|\bdeploy\b|\bstorage\b|\badmin\b|\bprodução\b|\bproducao\b|\bonline\b/.test(activeText);
+  const wantsPubPaidVisual =
+    hasActiveOrder &&
+    !isGuardrailOrder &&
+    /\bpubpaid\b/.test(activeText) &&
+    /\bvisual\b|\barte\b|\bsprite\b|\bnpc\b|\bcarro\b|\bmoto\b|\bfundo\b|\bhud\b|\bphaser\b|\bcanvas\b/.test(
+      activeText
+    );
+  const renderCredentialAvailable = hasAnyRenderCredential();
+  const renderCliAvailable = commandExists("render");
+
+  if (!hasActiveOrder) {
+    gates.push({
+      name: "escopo",
+      status: "standby",
+      message: "sem ordem ativa; parar e registrar escopo antes de editar"
+    });
+  } else if (broadUnsafe) {
+    gates.push({
+      name: "escopo",
+      status: "blocked",
+      message: "ordem ampla sem frente/arquivo/prova; pedir recorte antes de agir"
+    });
+  } else {
+    gates.push({
+      name: "escopo",
+      status: "ok",
+      message: "ordem ativa tem recorte ou e uma trava operacional"
+    });
+  }
+
+  if (wantsRenderAdmin && !renderCredentialAvailable && !renderCliAvailable) {
+    gates.push({
+      name: "render-admin",
+      status: "blocked",
+      message: "pedido envolve Render/admin, mas nao ha token nem Render CLI; nao inventar acesso"
+    });
+  } else if (wantsRenderAdmin) {
+    gates.push({
+      name: "render-admin",
+      status: "ok",
+      message: "pedido Render detectado; exigir prova da rota ou CLI antes de declarar limpeza/deploy"
+    });
+  } else {
+    gates.push({
+      name: "render-admin",
+      status: "standby",
+      message: "sem pedido Render/admin ativo; se aparecer, exigir credencial/prova"
+    });
+  }
+
+  if (wantsPubPaidVisual) {
+    gates.push({
+      name: "pubpaid-visual",
+      status: "warn",
+      message: "rodar npm run pubpaid:visual-audit antes de concluir; falha bloqueia declaracao visual"
+    });
+  } else {
+    gates.push({
+      name: "pubpaid-visual",
+      status: "standby",
+      message: "sem rodada visual PubPaid ativa"
+    });
+  }
+
+  if (git.available && git.branch?.ahead > 0) {
+    gates.push({
+      name: "branch-ahead",
+      status: "warn",
+      message: `branch esta ${git.branch.ahead} commit(s) ahead; decidir push/PR/merge antes de chamar historico de pronto`
+    });
+  } else if (git.available) {
+    gates.push({
+      name: "branch-ahead",
+      status: "ok",
+      message: "branch sem commits locais pendentes contra upstream"
+    });
+  } else {
+    gates.push({
+      name: "branch-ahead",
+      status: "warn",
+      message: "git indisponivel para o health; conferir branch com git status antes de afirmar historico limpo"
+    });
+  }
+
+  if (git.available && git.expanded.total > 0) {
+    gates.push({
+      name: "worktree",
+      status: "warn",
+      message: `worktree tem ${git.expanded.total} mudanca(s); nao misturar com novo escopo sem classificar`
+    });
+  } else if (git.available) {
+    gates.push({
+      name: "worktree",
+      status: "ok",
+      message: "worktree limpa"
+    });
+  } else {
+    gates.push({
+      name: "worktree",
+      status: "warn",
+      message: "git indisponivel para o health; conferir worktree externamente antes de editar"
+    });
+  }
+
+  return gates;
 }
 
 function checkMemorySizes(files, warnings, errors) {
@@ -234,6 +448,10 @@ function collectSummary() {
   );
 
   const git = safeGitStatus();
+  if (!git.available) {
+    warnings.push(`Git status indisponivel para codex:health: ${git.error}. Conferir git status fora do script.`);
+  }
+
   if (git.available && git.normal.total > 0) {
     warnings.push(
       `Worktree com ${git.normal.total} mudanca(s): ${git.normal.tracked} rastreada(s), ${git.normal.untracked} nao rastreada(s).`
@@ -244,6 +462,15 @@ function collectSummary() {
     warnings.push(
       `Worktree expandida com ${git.expanded.total} entrada(s). Antes de editar, declarar escopo e usar git add com pathspec explicito.`
     );
+  }
+
+  const riskGates = assessRiskGates(activeOrders[0] || null, git);
+  for (const gate of riskGates) {
+    if (gate.status === "blocked") {
+      errors.push(`Risk gate bloqueado (${gate.name}): ${gate.message}`);
+    } else if (gate.status === "warn") {
+      warnings.push(`Risk gate aviso (${gate.name}): ${gate.message}`);
+    }
   }
 
   return {
@@ -279,6 +506,7 @@ function collectSummary() {
         : null
     },
     git,
+    riskGates,
     repairScript: {
       path: path.relative(ROOT_DIR, repairScript),
       exists: fs.existsSync(repairScript)
@@ -319,6 +547,13 @@ function printHuman(summary) {
           `  - ${group.group}: ${group.total} (${group.tracked} rastreadas, ${group.untracked} nao rastreadas)`
         );
       }
+    }
+  }
+
+  if (summary.riskGates.length) {
+    console.log("- risk gates:");
+    for (const gate of summary.riskGates) {
+      console.log(`  - ${gate.name}: ${gate.status} - ${gate.message}`);
     }
   }
 

@@ -30,6 +30,9 @@ Depois do commit final de memoria, a worktree deve ficar limpa. Se `npm run code
 - Nao apagar `data/`, assets vivos, `.codex-temp/real-agents`, `.codex-temp/review-team` ou `.codex-temp/online-local-sync` sem nova prova/ordem.
 - Nao dizer que Render foi limpo online sem credencial ou prova da rota admin.
 - Nao dizer que PubPaid 2 esta visualmente limpa enquanto `npm run pubpaid:visual-audit` falhar.
+- Travas 10/10 agora devem aparecer em `npm run codex:health`: escopo, Render/admin, PubPaid visual, branch ahead e worktree.
+- Se `codex:health` disser `spawnSync git EPERM`, conferir `git status` pelo shell antes de afirmar worktree/branch.
+- `data/article-integrity-report.json` e `data/image-preview-cache.json` apareceram modificados fora desta mudanca; tratar como dado vivo ate nova ordem.
 
 ## Focos vivos
 

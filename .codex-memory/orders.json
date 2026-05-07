@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdatedAt": "2026-05-07T05:35:00.0000000Z",
+  "lastUpdatedAt": "2026-05-07T06:15:00.0000000Z",
   "compactedAt": "2026-05-07T00:25:00.000Z",
   "orders": [
     {
@@ -288,6 +288,41 @@
         "aguardar proxima ordem explicita"
       ],
       "notes": "Final checkpoint para que codex:health mostre a limpeza como ultimo fato, nao a rodada de sync anterior."
+    },
+    {
+      "id": "2026-05-07-risk-gates-10-10",
+      "createdAt": "2026-05-07T06:00:00.0000000Z",
+      "updatedAt": "2026-05-07T06:15:00.0000000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "Ficar 10/10 transformando riscos conhecidos em travas operacionais.",
+      "summary": "Endurecer o codex:health contra ordem ampla, Render sem credencial, PubPaid visual com auditoria falhando, branch adiantada e worktree suja.",
+      "normalizedTasks": [
+        "adicionar risk gates ao codex:health",
+        "registrar regra curta na memoria viva",
+        "nao resolver dados sujos sem escopo explicito",
+        "validar health e sintaxe"
+      ],
+      "filesTouched": [
+        "scripts/codex-health-check.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "anti-hallucination",
+        "risk-gates",
+        "scope-gates",
+        "codex-health"
+      ],
+      "nextSteps": [
+        "aguardar proxima ordem explicita",
+        "conferir git status pelo shell quando o Node reportar EPERM",
+        "nao misturar os dois JSONs de data sujos com novo escopo sem ordem"
+      ],
+      "notes": "Risk gates implementados e validados: escopo, Render/admin, PubPaid visual, branch ahead e worktree. node --check passou. codex:health passou e agora avisa quando git dentro do Node falha com EPERM."
     }
   ]
 }

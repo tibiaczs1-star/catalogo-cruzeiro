@@ -50,6 +50,17 @@ Nao inventar credencial. Para limpar Render online, pedir token/acesso ou usar a
 - Memoria local deve continuar curta. Registrar so ordens atuais, provas e assets realmente uteis.
 - Nao usar arquivo morto como memoria operacional.
 
+## Risk gates 10/10
+
+`npm run codex:health` deve imprimir risk gates antes de trabalho real.
+
+- Escopo: ordem ampla tipo "resolver tudo" bloqueia acao se nao tiver frente/arquivo/prova.
+- Render/admin: pedido Render administrativo bloqueia sem token, CLI ou prova de rota autenticada.
+- PubPaid visual: qualquer rodada visual exige `npm run pubpaid:visual-audit`; falha bloqueia declarar visual limpo.
+- Branch ahead: commits locais adiantados exigem decisao de push/PR/merge antes de dizer que historico esta pronto.
+- Worktree: sujeira ativa exige classificacao; nao misturar dados sujos com novo escopo.
+- Se o sandbox bloquear `git` dentro do Node (`spawnSync git EPERM`), o health deve avisar e eu devo conferir `git status` pelo shell antes de afirmar limpeza.
+
 ## Proximo passo
 
 Aguardar proxima ordem explicita do usuario.
