@@ -28,6 +28,7 @@ Depois do commit final de memoria, a worktree deve ficar limpa. Se `npm run code
 ## Trava anti-alucinacao
 
 - Nao continuar NPCs, PubPaid, Jornal ou Cheffe por inercia.
+- PubPaid 1 nao e produto ativo: usar somente como fonte legada de pagamento/carteira/admin/dashboard e seguir `PUBPAID_1_SOURCE_ONLY.md`.
 - Nao usar arquivo morto como memoria.
 - Nao apagar `data/`, assets vivos, `.codex-temp/real-agents`, `.codex-temp/review-team` ou `.codex-temp/online-local-sync` sem nova prova/ordem.
 - Nao dizer que Render foi limpo online sem credencial ou prova da rota admin.
@@ -36,6 +37,7 @@ Depois do commit final de memoria, a worktree deve ficar limpa. Se `npm run code
 - Travas 10/10 agora devem aparecer em `npm run codex:health`: escopo, Render/admin, PubPaid visual, branch ahead e worktree.
 - Se `codex:health` disser `spawnSync git EPERM`, conferir `git status` pelo shell antes de afirmar worktree/branch.
 - `data/article-integrity-report.json` e `data/image-preview-cache.json` apareceram modificados fora desta mudanca; tratar como dado vivo ate nova ordem.
+- Na rodada Git/PubPaid1, esses dois dados vivos foram classificados como atualizacao pequena de runtime/cache e podem ser commitados junto da higiene Git.
 
 ## Focos vivos
 

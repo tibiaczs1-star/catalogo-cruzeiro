@@ -4,7 +4,7 @@ Updated: 2026-05-07
 
 ## Active Goal
 
-Render/admin verificado e limpeza segura online executada. Aguardar proxima ordem explicita.
+Git organizado localmente e PubPaid 1 marcado como fonte legada. Aguardar proxima ordem explicita depois do push da branch.
 
 ## Summary
 
@@ -46,6 +46,7 @@ Os tokens foram expostos no chat; devem ser rotacionados no Render depois desta 
 ## Guardrails
 
 - Nao publicar PubPaid sem autorizacao.
+- PubPaid 1 esta descontinuado como produto: usar somente como fonte de pagamento, carteira, admin e dashboard; seguir `PUBPAID_1_SOURCE_ONLY.md`.
 - PubPaid 2 segue com divida visual: `npm run pubpaid:visual-audit` falhou por `graphics`, `fillRect`, gradientes/glow e nomes `canvas` no runtime.
 - Para Jornal grande: `npm run review:team` antes de commit/PR/deploy.
 - Para Cheffe/agentes: provar pagina 200, rota de estudo, inicio da call, `complete` e runtime antes de declarar implementado.
@@ -53,6 +54,7 @@ Os tokens foram expostos no chat; devem ser rotacionados no Render depois desta 
 - Health agora deve mostrar risk gates para escopo amplo, Render/admin sem credencial, PubPaid visual, branch ahead e worktree suja.
 - Neste sandbox, `codex:health` nao consegue spawnar `git` dentro do Node (`spawnSync git EPERM`); ele avisa e exige conferir `git status` pelo shell.
 - Existem mudancas vivas em `data/article-integrity-report.json` e `data/image-preview-cache.json`; nao reverter nem misturar sem ordem explicita.
+- Os dois dados vivos foram classificados como atualizacao pequena de runtime/cache e entram no commit de higiene Git desta rodada.
 
 ## Files In Focus
 
@@ -63,3 +65,4 @@ Os tokens foram expostos no chat; devem ser rotacionados no Render depois desta 
 - `C:\Users\junio\projeto codex\scripts\codex-health-check.js`
 - `C:\Users\junio\projeto codex\server.js`
 - `C:\Users\junio\projeto codex\backend\server.js`
+- `C:\Users\junio\projeto codex\PUBPAID_1_SOURCE_ONLY.md`

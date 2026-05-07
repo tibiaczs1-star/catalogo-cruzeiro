@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdatedAt": "2026-05-07T07:00:00.0000000Z",
+  "lastUpdatedAt": "2026-05-07T07:35:00.0000000Z",
   "compactedAt": "2026-05-07T00:25:00.000Z",
   "orders": [
     {
@@ -361,6 +361,44 @@
         "aguardar proxima ordem explicita"
       ],
       "notes": "Concluido online: Render API encontrou catalogo-cruzeiro-web srv-d7heure7r5hc73br2aqg; storage-health 200 com write probe OK; Cheffe ecosystem-study 201, start 201, safe-cleanup 200 removeu 0 arquivos/0 bytes, complete 200; /api/real-agents/run 201 com 181 agentes. Removidos defaults hardcoded que coincidiam com o token simples; varredura local por valores dos tokens retornou 0 hits. Tokens nao foram salvos em arquivo."
-    }
+    },
+    {
+      "id": "2026-05-07-git-hygiene-pubpaid1-source-only",
+      "createdAt": "2026-05-07T07:20:00.0000000Z",
+    "updatedAt": "2026-05-07T07:35:00.0000000Z",
+    "status": "completed-local",
+      "source": "chat",
+    "rawRequest": "Nao rotacionar tokens agora; ajeitar o Git e fazer PubPaid 1 virar somente fonte de metodos de pagamento e dashboard.",
+    "summary": "Limpar/organizar Git e transformar PubPaid 1 em protocolo legado fonte-only para pagamento/dashboard.",
+      "normalizedTasks": [
+        "classificar e resolver os dois dados vivos sujos",
+        "registrar PubPaid 1 como fonte legada, nao produto ativo",
+        "nao publicar PubPaid",
+        "commit/push da branch de trabalho se saudavel"
+      ],
+    "filesTouched": [
+      ".codex-memory/orders.json",
+      ".codex-memory/current-state.md",
+      ".codex-memory/handoff.md",
+      "CODEX_MEMORY.md",
+      "AGENTS.md",
+      "PUBPAID_1_SOURCE_ONLY.md",
+      "data/article-integrity-report.json",
+      "data/image-preview-cache.json"
+    ],
+      "assetRefs": [],
+      "tags": [
+        "git-hygiene",
+        "pubpaid-1",
+        "source-only",
+        "protocol"
+      ],
+    "nextSteps": [
+      "commitar com pathspec explicito",
+      "push da branch se possivel",
+      "aguardar proxima ordem explicita"
+    ],
+    "notes": "PubPaid 1 marcado como fonte legada em AGENTS, memoria e PUBPAID_1_SOURCE_ONLY.md. Dois dados vivos classificados como atualizacao pequena de runtime/cache. Usuario decidiu nao rotacionar tokens agora; continuar recomendando sem bloquear o trabalho."
+  }
   ]
 }

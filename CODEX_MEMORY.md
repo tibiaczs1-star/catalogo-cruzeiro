@@ -6,12 +6,26 @@ Atualizado: 2026-05-07
 
 Trabalhar somente em quatro frentes:
 
-- PubPaid 1: `pubpaid.html`, `pubpaid.css`, `pubpaid.js`, `pubpaid-admin.html`, `pubpaid-runtime.js`.
+- PubPaid 1: fonte legada somente para pagamento, carteira, admin e dashboard (`pubpaid.html`, `pubpaid.css`, `pubpaid.js`, `pubpaid-admin.html`, `pubpaid-runtime.js`, `PUBPAID_1_SOURCE_ONLY.md`).
 - PubPaid 2: `pubpaid-v2.html`, `pubpaid-phaser.css`, `pubpaid-phaser/`, `assets/pubpaid/`, `PUBPAID_2_GLOBAL_HANDOFF.md`, `PUBPAID_2_VISUAL_DIRECTION.md`.
 - Jornal: `index.html`, `script.js`, `styles.css`, `server.js`, `news-data.js`, `data/`, `assets/news-fallbacks/`, paginas de noticia/arquivo/editorias e scripts de sync/review.
 - Cheffe Call / agentes reais: `cheffe-call.*`, `real-agents.*`, `escritorio*.*`, `.codex-agents/`, `scripts/real-agents-runtime.js`, `scripts/news-image-approval-queue.js`.
 
 Todo o resto e arquivo morto ou lixo potencial ate o usuario pedir explicitamente.
+
+## PubPaid 1
+
+PubPaid 1 esta descontinuado como produto. Nao desenvolver jogo, arte, UI publica ou runtime visual nele.
+
+Usar apenas como fonte para:
+
+- metodos de pagamento;
+- carteira/saldo;
+- depositos e saques manuais;
+- dashboard/admin;
+- padroes de revisao/aprovacao em `pubpaid-runtime.js`.
+
+Antes de extrair algo, ler `PUBPAID_1_SOURCE_ONLY.md`.
 
 ## Estado atual
 
