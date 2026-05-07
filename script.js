@@ -2007,16 +2007,25 @@ const initializeLiveTicker = () => {
   const isDesktopStaticTicker = tickerDesktopStaticMedia?.matches === true;
   const phrasesPerLane = isDesktopStaticTicker ? 4 : 10;
   let phraseCursor = 0;
+  const advanceCursor = (delta) => {
+    const length = activeTickerPhrasePool.length || 1;
+    phraseCursor = (phraseCursor + delta) % length;
+    if (phraseCursor < 0) phraseCursor += length;
+  };
   const nextPhrase = () => {
     const phrase = activeTickerPhrasePool[phraseCursor % activeTickerPhrasePool.length];
     phraseCursor += 1;
     return phrase;
   };
+  const prevPhrase = () => {
+    advanceCursor(-1);
+    return activeTickerPhrasePool[phraseCursor % activeTickerPhrasePool.length];
+  };
 
   const lanes = laneNodes.map((laneNode, laneIndex) => {
     const track = document.createElement("div");
     track.className = "ticker-track";
-    track.style.setProperty("--ticker-duration", "34s");
+    track.style.setProperty("--ticker-duration", "44s");
 
     const primarySegment = document.createElement("div");
     primarySegment.className = "ticker-segment";
@@ -2050,6 +2059,27 @@ const initializeLiveTicker = () => {
     };
   });
 
+  const stepLane = (direction = 1) => {
+    const lane = lanes[0];
+    if (!lane || !lane.primaryChips?.length) return;
+    lane.rotationIndex =
+      (lane.rotationIndex + (direction >= 0 ? 1 : -1) + lane.primaryChips.length) % lane.primaryChips.length;
+    const phrase = direction >= 0 ? nextPhrase() : prevPhrase();
+    setTickerChipPhrase(lane.primaryChips[lane.rotationIndex], phrase, { type: true });
+    setTickerChipPhrase(lane.cloneChips[lane.rotationIndex], phrase);
+  };
+
+  const prevButton = document.getElementById("ticker-live-prev");
+  const nextButton = document.getElementById("ticker-live-next");
+  if (prevButton && !prevButton._tickerBound) {
+    prevButton._tickerBound = true;
+    prevButton.addEventListener("click", () => stepLane(-1));
+  }
+  if (nextButton && !nextButton._tickerBound) {
+    nextButton._tickerBound = true;
+    nextButton.addEventListener("click", () => stepLane(1));
+  }
+
   if (splashMotionQuery.matches) {
     return;
   }
@@ -2064,7 +2094,7 @@ const initializeLiveTicker = () => {
 
     const timeoutId = window.setTimeout(() => {
       cycleLane();
-      const intervalId = window.setInterval(cycleLane, 2600 + laneIndex * 240);
+      const intervalId = window.setInterval(cycleLane, 5200 + laneIndex * 240);
       tickerRuntime.timerIds.push(intervalId);
     }, 1100 + laneIndex * 320);
 

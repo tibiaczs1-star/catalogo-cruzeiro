@@ -2480,6 +2480,43 @@ body.editorial-home .page-shell {
   padding: 0 0.15rem;
 }
 
+.ticker-live-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.ticker-live-arrow {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 49, 79, 0.14);
+  background: rgba(255, 255, 255, 0.88);
+  color: rgba(15, 39, 66, 0.82);
+  box-shadow: 0 10px 22px rgba(16, 35, 60, 0.08);
+  display: grid;
+  place-items: center;
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.ticker-live-arrow:hover {
+  transform: translateY(-1px);
+  border-color: rgba(23, 49, 79, 0.22);
+  box-shadow: 0 14px 28px rgba(16, 35, 60, 0.12);
+}
+
+.ticker-live-arrow:focus-visible {
+  outline: 3px solid rgba(16, 35, 60, 0.28);
+  outline-offset: 3px;
+}
+
+.ticker-live-arrow:active {
+  transform: translateY(0);
+}
+
 .ticker-live-copy {
   max-width: 44rem;
 }
