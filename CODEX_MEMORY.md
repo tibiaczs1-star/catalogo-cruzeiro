@@ -27,6 +27,12 @@ Usar apenas como fonte para:
 
 Antes de extrair algo, ler `PUBPAID_1_SOURCE_ONLY.md`.
 
+## PubPaid 2 personagens
+
+O prompt oficial para personagens/pedestres esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
+
+Regra curta: qualquer personagem, pedestre ou figurante novo deve ser pixel art 2D 32 bits, spritesheet manual, caminhada lateral real de 5 frames quando andar, recorte limpo e aprovacao humana em HTML simples antes de qualquer runtime.
+
 ## Estado atual
 
 Limpeza grande concluida localmente.

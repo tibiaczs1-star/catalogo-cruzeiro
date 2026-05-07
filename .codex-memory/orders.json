@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdatedAt": "2026-05-07T07:35:00.0000000Z",
+  "lastUpdatedAt": "2026-05-07T08:10:00.0000000Z",
   "compactedAt": "2026-05-07T00:25:00.000Z",
   "orders": [
     {
@@ -399,6 +399,51 @@
       "aguardar proxima ordem explicita"
     ],
     "notes": "PubPaid 1 marcado como fonte legada em AGENTS, memoria e PUBPAID_1_SOURCE_ONLY.md. Dois dados vivos classificados como atualizacao pequena de runtime/cache. Usuario decidiu nao rotacionar tokens agora; continuar recomendando sem bloquear o trabalho."
+  },
+  {
+    "id": "2026-05-07-pubpaid2-art-direction-preview-only",
+    "createdAt": "2026-05-07T07:50:00.0000000Z",
+    "updatedAt": "2026-05-07T08:10:00.0000000Z",
+    "status": "completed-local",
+    "source": "chat",
+    "rawRequest": "comece a resolver a direcao de arte do PubPaid 2.0 sem mexer no runtime final ainda",
+    "summary": "Resolver a direcao de arte do PubPaid 2 em preview externo e documento de decisao, sem trocar assets ou codigo do runtime final.",
+    "normalizedTasks": [
+      "ler memoria e handoffs obrigatorios",
+      "rodar codex:health antes de editar",
+      "classificar dados sujos existentes sem mistura-los com a rodada visual",
+      "criar preview externo de comparacao visual",
+      "documentar criterios de aprovacao antes de integrar no runtime",
+      "rodar pubpaid:visual-audit antes de concluir"
+    ],
+    "filesTouched": [
+      ".codex-memory/orders.json",
+      ".codex-memory/current-state.md",
+      ".codex-memory/handoff.md",
+      "AGENTS.md",
+      "CODEX_MEMORY.md",
+      "PUBPAID_2_GLOBAL_HANDOFF.md",
+      "PUBPAID_2_VISUAL_DIRECTION.md",
+      "PUBPAID_2_ART_DIRECTION_DECISION.md",
+      "PUBPAID_2_CHARACTER_ART_PROMPT.md",
+      "pubpaid-art-direction-preview.html",
+      "pubpaid-character-approval.html"
+    ],
+    "assetRefs": [
+      "assets/pubpaid/"
+    ],
+    "tags": [
+      "pubpaid-2",
+      "visual-direction",
+      "preview-only",
+      "no-runtime-change"
+    ],
+    "nextSteps": [
+      "usuario aprovar ou corrigir a linha no HTML simples",
+      "criar primeiro pack novo de pedestres 96x144 5 frames fora do runtime",
+      "corrigir divida visual do runtime em rodada separada antes de declarar PubPaid visualmente limpa"
+    ],
+    "notes": "Prompt oficial de personagens registrado e aprovacao simples criada. HTMLs validados com referencias existentes. Runtime final nao foi editado. npm run pubpaid:visual-audit falhou por divida preexistente no runtime (ppg-canvas-shell, graphics/fillRect, gradientes/glow); nao declarar direcao visual implementada."
   }
   ]
 }

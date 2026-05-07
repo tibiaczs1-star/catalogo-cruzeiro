@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PubPaid 2.0 - Direcao de arte</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7efd9;
+      --muted: #aab3bc;
+      --bg: #090a0d;
+      --band: #12110f;
+      --panel: #18191d;
+      --panel-2: #22191b;
+      --line: #4b525c;
+      --cyan: #51e9ef;
+      --pink: #fb4ea4;
+      --amber: #f8bf58;
+      --green: #79d58e;
+      --brick: #9a453b;
+      --danger: #ff6d62;
+      --stage-w: 1717;
+      --stage-h: 916;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Courier New", ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: 0;
+    }
+
+    body {
+      background:
+        linear-gradient(90deg, rgba(248, 191, 88, 0.04) 0 1px, transparent 1px 16px),
+        linear-gradient(180deg, #090a0d 0%, #111015 48%, #0b0d0d 100%);
+    }
+
+    a {
+      color: var(--cyan);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    .page {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .topbar {
+      align-items: end;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      margin: 0 auto;
+      max-width: 1480px;
+      width: 100%;
+    }
+
+    .title {
+      display: grid;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      color: var(--ink);
+      font-size: clamp(26px, 4vw, 54px);
+      line-height: 0.95;
+      max-width: 16ch;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 18px;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: 14px;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .status-strip {
+      align-content: end;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .tag,
+    .verdict {
+      border: 1px solid var(--line);
+      color: var(--ink);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 700;
+      min-height: 30px;
+      padding: 7px 9px;
+      text-transform: uppercase;
+    }
+
+    .tag.locked {
+      border-color: rgba(121, 213, 142, 0.72);
+      color: var(--green);
+    }
+
+    .tag.warning {
+      border-color: rgba(248, 191, 88, 0.72);
+      color: var(--amber);
+    }
+
+    .section {
+      background: rgba(18, 17, 15, 0.78);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin: 0 auto;
+      max-width: 1480px;
+      width: 100%;
+    }
+
+    .section-head {
+      align-items: start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(220px, 0.8fr) minmax(260px, 1.2fr);
+      padding: 14px;
+    }
+
+    .section-head p {
+      justify-self: end;
+      max-width: 68ch;
+    }
+
+    .stage-scroll {
+      background: #050608;
+      overflow: auto;
+      padding: 14px;
+    }
+
+    .stage {
+      height: calc(var(--stage-h) * 1px);
+      position: relative;
+      width: calc(var(--stage-w) * 1px);
+    }
+
+    .stage-bg {
+      height: 916px;
+      width: 1717px;
+    }
+
+    .baseline {
+      background: rgba(248, 191, 88, 0.82);
+      height: 2px;
+      left: 0;
+      position: absolute;
+      top: calc(var(--y) * 1px);
+      width: 100%;
+      z-index: 6;
+    }
+
+    .baseline span {
+      background: rgba(5, 6, 8, 0.88);
+      border: 1px solid rgba(248, 191, 88, 0.7);
+      color: var(--amber);
+      font-size: 12px;
+      font-weight: 700;
+      left: 12px;
+      padding: 5px 7px;
+      position: absolute;
+      top: 7px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sheet-window {
+      height: calc(var(--fh) * var(--scale) * 1px);
+      left: calc(var(--x) * 1px);
+      overflow: hidden;
+      position: absolute;
+      top: calc(var(--y) * 1px);
+      transform: translate(-50%, -100%);
+      width: calc(var(--fw) * var(--scale) * 1px);
+      z-index: var(--z, 8);
+    }
+
+    .sheet-window img {
+      height: calc(var(--sheet-h) * var(--scale) * 1px);
+      max-width: none;
+      transform: translate(
+        calc(var(--col, 0) * var(--fw) * var(--scale) * -1px),
+        calc(var(--row, 0) * var(--fh) * var(--scale) * -1px)
+      );
+      width: calc(var(--sheet-w) * var(--scale) * 1px);
+    }
+
+    .pin {
+      background: rgba(5, 6, 8, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 700;
+      left: calc(var(--x) * 1px);
+      padding: 5px 7px;
+      position: absolute;
+      top: calc(var(--y) * 1px);
+      transform: translate(-50%, 8px);
+      white-space: nowrap;
+      z-index: 12;
+    }
+
+    .pin.good {
+      border-color: rgba(121, 213, 142, 0.72);
+      color: var(--green);
+    }
+
+    .pin.hold {
+      border-color: rgba(248, 191, 88, 0.72);
+      color: var(--amber);
+    }
+
+    .pin.bad {
+      border-color: rgba(255, 109, 98, 0.75);
+      color: var(--danger);
+    }
+
+    .decision-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    .decision {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      gap: 9px;
+      min-height: 160px;
+      padding: 12px;
+    }
+
+    .decision[data-state="keep"] {
+      border-color: rgba(121, 213, 142, 0.56);
+    }
+
+    .decision[data-state="hold"] {
+      border-color: rgba(248, 191, 88, 0.56);
+    }
+
+    .decision[data-state="reject"] {
+      border-color: rgba(255, 109, 98, 0.58);
+    }
+
+    .verdict {
+      justify-self: start;
+      min-height: 26px;
+      padding: 5px 7px;
+    }
+
+    .keep .verdict,
+    .decision[data-state="keep"] .verdict {
+      border-color: rgba(121, 213, 142, 0.72);
+      color: var(--green);
+    }
+
+    .hold .verdict,
+    .decision[data-state="hold"] .verdict {
+      border-color: rgba(248, 191, 88, 0.72);
+      color: var(--amber);
+    }
+
+    .reject .verdict,
+    .decision[data-state="reject"] .verdict {
+      border-color: rgba(255, 109, 98, 0.72);
+      color: var(--danger);
+    }
+
+    .asset-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    .asset {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 320px;
+    }
+
+    .asset h3 {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 11px 12px;
+    }
+
+    .asset-media {
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 16px),
+        linear-gradient(180deg, #121820 0%, #0b0d10 100%);
+      display: flex;
+      justify-content: center;
+      min-height: 190px;
+      overflow: auto;
+      padding: 12px;
+    }
+
+    .asset-media.tall {
+      align-items: start;
+      max-height: 520px;
+    }
+
+    .asset-media.strip img {
+      max-width: none;
+    }
+
+    .asset p {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 11px 12px;
+    }
+
+    .frame-row {
+      align-items: end;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      min-width: 760px;
+      padding: 12px;
+    }
+
+    .frame-sample {
+      display: grid;
+      gap: 8px;
+      justify-items: center;
+    }
+
+    .crop {
+      background: #0c1118;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      height: calc(var(--fh) * var(--scale) * 1px);
+      overflow: hidden;
+      width: calc(var(--fw) * var(--scale) * 1px);
+    }
+
+    .crop img {
+      height: calc(var(--sheet-h) * var(--scale) * 1px);
+      max-width: none;
+      transform: translate(
+        calc(var(--col, 0) * var(--fw) * var(--scale) * -1px),
+        calc(var(--row, 0) * var(--fh) * var(--scale) * -1px)
+      );
+      width: calc(var(--sheet-w) * var(--scale) * 1px);
+    }
+
+    .frame-sample small {
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .rules {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    .rule {
+      background: var(--panel-2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px;
+    }
+
+    .rule h3 {
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      color: var(--muted);
+      margin: 0 auto;
+      max-width: 1480px;
+      padding-bottom: 10px;
+      width: 100%;
+    }
+
+    @media (max-width: 1040px) {
+      .topbar,
+      .section-head,
+      .decision-grid,
+      .asset-grid,
+      .rules {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head p,
+      .status-strip {
+        justify-self: start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <div class="title">
+        <div class="eyebrow">PubPaid 2.0 / preview externo / 2026-05-07</div>
+        <h1>Direcao de arte</h1>
+        <p>Esta pagina e uma mesa de decisao. Ela nao carrega Phaser, nao muda `BootScene`, nao troca sprites do jogo e nao publica PubPaid.</p>
+      </div>
+      <div class="status-strip" aria-label="Status da rodada">
+        <span class="tag locked">runtime final intocado</span>
+        <span class="tag warning">aprovar antes de integrar</span>
+        <span class="tag">pixel art ate 32 bits</span>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="scene-title">
+      <div class="section-head">
+        <h2 id="scene-title">Composicao de escala</h2>
+        <p>O norte e a rua neon chuvosa com adultos proporcionais, sombras de chao e leitura de bairro. As camadas abaixo usam assets existentes apenas para comparar baseline, volume e contraste.</p>
+      </div>
+      <div class="stage-scroll" aria-label="Cena de comparacao com fundo e sprites existentes">
+        <div class="stage">
+          <img class="stage-bg" src="./assets/pubpaid-v2-street-bg-v1.png" alt="Rua PubPaid 2.0 em pixel art noturna">
+          <div class="baseline" style="--y: 556;"><span>baseline calcada / NPC meio plano</span></div>
+          <div class="baseline" style="--y: 716;"><span>baseline rua / veiculos</span></div>
+
+          <div class="sheet-window" style="--x: 650; --y: 640; --fw: 96; --fh: 144; --sheet-w: 384; --sheet-h: 1152; --scale: 0.84; --z: 10;">
+            <img src="./assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-breathe-8dir-4f.png" alt="Protagonista masculino, primeiro frame">
+          </div>
+          <span class="pin good" style="--x: 650; --y: 640;">escala-alvo 120 px</span>
+
+          <div class="sheet-window" style="--x: 118; --y: 556; --fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 0.72; --z: 9;">
+            <img src="./assets/pubpaid/sprites/street-civilians/arcade-controller-wall-idle-v1.png" alt="NPC arcade sentado, primeiro frame">
+          </div>
+          <span class="pin hold" style="--x: 118; --y: 556;">identidade boa, refinar corpo</span>
+
+          <div class="sheet-window" style="--x: 242; --y: 556; --fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 0.72; --z: 9;">
+            <img src="./assets/pubpaid/sprites/street-civilians/arcade-token-wall-idle-v1.png" alt="NPC arcade fichas, primeiro frame">
+          </div>
+          <div class="sheet-window" style="--x: 350; --y: 556; --fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 0.72; --z: 9;">
+            <img src="./assets/pubpaid/sprites/street-civilians/arcade-phone-wall-idle-v1.png" alt="NPC arcade celular, primeiro frame">
+          </div>
+
+          <div class="sheet-window" style="--x: 1088; --y: 574; --fw: 64; --fh: 128; --sheet-w: 256; --sheet-h: 128; --scale: 0.48; --z: 7;">
+            <img src="./assets/pubpaid/sprites/street-civilians/curb-sitter-idle-v1.png" alt="NPC sentado de fundo, primeiro frame">
+          </div>
+          <div class="sheet-window" style="--x: 1160; --y: 568; --fw: 64; --fh: 128; --sheet-w: 256; --sheet-h: 128; --scale: 0.44; --z: 7;">
+            <img src="./assets/pubpaid/sprites/street-civilians/bus-lady-idle-v1.png" alt="NPC ponto de onibus, primeiro frame">
+          </div>
+          <span class="pin good" style="--x: 1120; --y: 574;">fundo 56-62 px</span>
+
+          <div class="sheet-window" style="--x: 885; --y: 724; --fw: 384; --fh: 192; --sheet-w: 1152; --sheet-h: 1920; --scale: 0.45; --row: 0; --z: 11;">
+            <img src="./assets/pubpaid/traffic/pubpaid-traffic-artistic-left-3f-v28.png" alt="Veiculo v28, primeiro frame">
+          </div>
+          <span class="pin bad" style="--x: 885; --y: 724;">v28: manter so ate substituir</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="decision-title">
+      <div class="section-head">
+        <h2 id="decision-title">Decisao visual inicial</h2>
+        <p>A direcao resolve a linguagem antes de asset novo: fundo como ancora, personagens proporcionais, menos props chapados e veiculos com sheet refeito fora do runtime.</p>
+      </div>
+      <div class="decision-grid">
+        <article class="decision" data-state="keep">
+          <span class="verdict">preservar como norte</span>
+          <h3>Rua, paleta e luz</h3>
+          <p>Neon ciano/magenta, janela ambar, asfalto molhado e silhueta urbana sao a identidade do PubPaid 2. Cenario continua sendo o comparador principal de densidade.</p>
+        </article>
+        <article class="decision" data-state="hold">
+          <span class="verdict">refinar antes de aprovar</span>
+          <h3>NPCs da rua</h3>
+          <p>Manter escala 105-130 px no primeiro plano e 50-75 px no fundo. Remover leitura de placa/bloco solto cobrindo corpo e desenhar acessorios integrados ao sprite.</p>
+        </article>
+        <article class="decision" data-state="reject">
+          <span class="verdict">nao virar final</span>
+          <h3>Trafego v28</h3>
+          <p>Fica apenas como estado atual restaurado. A linha final deve sair de sprites bitmap por veiculo, com hard-alpha, motos menos plasticas e dimensoes verificaveis em preview.</p>
+        </article>
+        <article class="decision" data-state="keep">
+          <span class="verdict">usar como padrao</span>
+          <h3>UI da carteira</h3>
+          <p>A carteira em PNG ja aponta o caminho certo para DOM/HUD: moldura bitmap, pixels visiveis, botoes retos e nenhuma cara de dashboard moderno.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="assets-title">
+      <div class="section-head">
+        <h2 id="assets-title">Assets comparados</h2>
+        <p>Esta area organiza o que ja existe. Ela nao aprova integracao automatica; so separa norte visual, candidatos e dividas.</p>
+      </div>
+      <div class="asset-grid">
+        <article class="asset keep">
+          <h3>Fundo de rua</h3>
+          <div class="asset-media">
+            <img src="./assets/pubpaid-v2-street-bg-v1.png" alt="Fundo oficial da rua PubPaid">
+          </div>
+          <p><span class="verdict">norte</span> Casa com a fantasia: bairro chuvoso, neon, profundidade 2D e foco claro na entrada do pub.</p>
+        </article>
+
+        <article class="asset hold">
+          <h3>Protagonista</h3>
+          <div class="asset-media tall">
+            <img src="./assets/pubpaid/sprites/protagonist/protagonist-final-3sheet-preview.png" alt="Preview de sheets do protagonista">
+          </div>
+          <p><span class="verdict">escala</span> Serve para baseline e proporcao. O proximo pack de NPCs precisa igualar pe, sombra, densidade e direcao de luz.</p>
+        </article>
+
+        <article class="asset hold">
+          <h3>Elenco de fundo atual</h3>
+          <div class="asset-media tall">
+            <img src="./assets/pubpaid/sprites/street-civilians/street-civilians-v1-preview.png" alt="Preview dos civis de rua existentes">
+          </div>
+          <p><span class="verdict">refazer</span> Os corpos pertencem ao universo, mas os blocos de prop parecem colados. Proxima passada: silhueta limpa antes de detalhe.</p>
+        </article>
+
+        <article class="asset hold">
+          <h3>Arcade na calcada</h3>
+          <div class="asset-media">
+            <div class="frame-row" aria-label="Tres NPCs do arcade em primeiro frame">
+              <div class="frame-sample">
+                <div class="crop" style="--fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 1;">
+                  <img src="./assets/pubpaid/sprites/street-civilians/arcade-controller-wall-idle-v1.png" alt="NPC arcade controle">
+                </div>
+                <small>controle</small>
+              </div>
+              <div class="frame-sample">
+                <div class="crop" style="--fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 1;">
+                  <img src="./assets/pubpaid/sprites/street-civilians/arcade-token-wall-idle-v1.png" alt="NPC arcade ficha">
+                </div>
+                <small>fichas</small>
+              </div>
+              <div class="frame-sample">
+                <div class="crop" style="--fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 1;">
+                  <img src="./assets/pubpaid/sprites/street-civilians/arcade-phone-wall-idle-v1.png" alt="NPC arcade celular">
+                </div>
+                <small>celular</small>
+              </div>
+            </div>
+          </div>
+          <p><span class="verdict">candidato</span> Boa ideia de mundo. Precisa trocar postura/props por desenho manual integrado antes de ser chamado de final.</p>
+        </article>
+
+        <article class="asset reject">
+          <h3>Trafego atual v28</h3>
+          <div class="asset-media strip">
+            <img src="./assets/pubpaid/traffic/pubpaid-traffic-artistic-left-3f-v28.png" alt="Spritesheet de trafego v28">
+          </div>
+          <p><span class="verdict">saida planejada</span> Mantido por historico do runtime restaurado. A direcao nova deve nascer em preview e so depois substituir com aprovacao.</p>
+        </article>
+
+        <article class="asset keep">
+          <h3>Estudo de veiculos</h3>
+          <div class="asset-media tall">
+            <img src="./assets/pubpaid/traffic/pubpaid-pixel-vehicles-art-pass-8f-v1-preview.png" alt="Preview dos veiculos pixel art v1">
+          </div>
+          <p><span class="verdict">norte de trafego</span> Melhor leitura de carro/moto como sprite bitmap. Antes de integrar, gerar pack individual verificavel e alinhar com a rua.</p>
+        </article>
+
+        <article class="asset keep">
+          <h3>Carteira / HUD</h3>
+          <div class="asset-media">
+            <img src="./assets/pubpaid/ui/pubpaid-wallet-phone-ui-v2.png" alt="UI bitmap da carteira PubPaid">
+          </div>
+          <p><span class="verdict">padrao UI</span> UI deve continuar parecendo objeto do jogo. Qualquer painel novo precisa virar bitmap ou CSS pixelado muito simples.</p>
+        </article>
+
+        <article class="asset hold">
+          <h3>Ambiente animado</h3>
+          <div class="asset-media strip">
+            <img src="./assets/pubpaid/background/pubpaid-street-ambient-life-4f-v6.png" alt="Sheet de ambiente animado da rua">
+          </div>
+          <p><span class="verdict">checar</span> Pode servir para chuva/reflexo discreto, mas nao deve virar muleta para esconder falta de asset coerente.</p>
+        </article>
+
+        <article class="asset reject">
+          <h3>Nerds v4</h3>
+          <div class="asset-media">
+            <div class="frame-row" aria-label="Tres nerds v4 em primeiro frame">
+              <div class="frame-sample">
+                <div class="crop" style="--fw: 96; --fh: 144; --sheet-w: 384; --sheet-h: 144; --scale: 1;">
+                  <img src="./assets/pubpaid/sprites/street-civilians/arcade-nerd-seated-stick-idle-v4.png" alt="Nerd sentado v4">
+                </div>
+                <small>sentado</small>
+              </div>
+              <div class="frame-sample">
+                <div class="crop" style="--fw: 96; --fh: 144; --sheet-w: 384; --sheet-h: 144; --scale: 1;">
+                  <img src="./assets/pubpaid/sprites/street-civilians/arcade-nerd-token-stand-idle-v4.png" alt="Nerd ficha v4">
+                </div>
+                <small>ficha</small>
+              </div>
+              <div class="frame-sample">
+                <div class="crop" style="--fw: 96; --fh: 144; --sheet-w: 384; --sheet-h: 144; --scale: 1;">
+                  <img src="./assets/pubpaid/sprites/street-civilians/arcade-nerd-phone-lean-idle-v4.png" alt="Nerd celular v4">
+                </div>
+                <small>celular</small>
+              </div>
+            </div>
+          </div>
+          <p><span class="verdict">nao usar</span> Guardados so como comparacao. A leitura continua chapada demais para ser elenco final de frente.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="rules-title">
+      <div class="section-head">
+        <h2 id="rules-title">Proximo pacote de arte</h2>
+        <p>Estas regras transformam a direcao em trabalho executavel sem mexer no jogo vivo.</p>
+      </div>
+      <div class="rules">
+        <article class="rule">
+          <h3>1. Pessoas</h3>
+          <ul>
+            <li>96x144 para adultos de calcada, 4 ou 5 frames.</li>
+            <li>Pe no baseline row 139, sombra no PNG e alpha 0/255.</li>
+            <li>Props integrados ao corpo, nunca placa retangular colada por cima.</li>
+          </ul>
+        </article>
+        <article class="rule">
+          <h3>2. Veiculos</h3>
+          <ul>
+            <li>Pack individual por veiculo antes de tocar `BootScene`.</li>
+            <li>Carro entre 170 e 240 px renderizados; moto entre 100 e 150 px.</li>
+            <li>Comparar contra a faixa da rua e contra o protagonista no preview.</li>
+          </ul>
+        </article>
+        <article class="rule">
+          <h3>3. UI</h3>
+          <ul>
+            <li>Carteira bitmap e menus retos como base de linguagem.</li>
+            <li>Sem card moderno, glow suave ou icone liso como acabamento final.</li>
+            <li>DOM permitido, aparencia precisa continuar jogo pixel art.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <p class="footer">
+      Documento de decisao: <a href="./PUBPAID_2_ART_DIRECTION_DECISION.md">PUBPAID_2_ART_DIRECTION_DECISION.md</a>.
+      Prompt de personagens: <a href="./PUBPAID_2_CHARACTER_ART_PROMPT.md">PUBPAID_2_CHARACTER_ART_PROMPT.md</a>.
+      Aprovacao simples: <a href="./pubpaid-character-approval.html">personagens</a>.
+      Previews especificos existentes: <a href="./pubpaid-npc-approval.html">NPC approval</a> e <a href="./pubpaid-traffic-preview.html">traffic preview</a>.
+    </p>
+  </main>
+</body>
+</html>

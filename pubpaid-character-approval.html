@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PubPaid 2.0 - Aprovacao de personagens</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0c0f;
+      --paper: #15171b;
+      --line: #3f4650;
+      --ink: #f5edda;
+      --muted: #aeb6bd;
+      --ok: #78d68b;
+      --hold: #f4bd57;
+      --bad: #ff7065;
+      --cyan: #55e4ee;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Courier New", ui-monospace, SFMono-Regular, Consolas, monospace;
+      letter-spacing: 0;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    a {
+      color: var(--cyan);
+    }
+
+    main {
+      display: grid;
+      gap: 14px;
+      margin: 0 auto;
+      max-width: 1240px;
+      padding: 16px;
+    }
+
+    header,
+    section,
+    article {
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+
+    header,
+    section {
+      padding: 14px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      padding: 10px;
+      text-transform: uppercase;
+    }
+
+    p,
+    li {
+      color: var(--muted);
+      font: 14px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      letter-spacing: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .note {
+      margin-top: 8px;
+      max-width: 78ch;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .badge,
+    .status {
+      border: 1px solid var(--line);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 700;
+      min-height: 26px;
+      padding: 5px 7px;
+      text-transform: uppercase;
+    }
+
+    .status.ok {
+      border-color: var(--ok);
+      color: var(--ok);
+    }
+
+    .status.hold {
+      border-color: var(--hold);
+      color: var(--hold);
+    }
+
+    .status.bad {
+      border-color: var(--bad);
+      color: var(--bad);
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      min-height: 260px;
+    }
+
+    .media {
+      align-items: center;
+      background: #10141a;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      min-height: 168px;
+      overflow: auto;
+      padding: 12px;
+    }
+
+    .media.sheet img {
+      max-width: none;
+    }
+
+    .body {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+    }
+
+    .scene {
+      background: #050608;
+      overflow: auto;
+      padding: 12px;
+    }
+
+    .scene-frame {
+      height: 458px;
+      position: relative;
+      width: 858px;
+    }
+
+    .scene-frame > img {
+      height: 458px;
+      width: 858px;
+    }
+
+    .char {
+      height: calc(var(--fh) * var(--scale) * 1px);
+      left: calc(var(--x) * 1px);
+      overflow: hidden;
+      position: absolute;
+      top: calc(var(--y) * 1px);
+      transform: translate(-50%, -100%);
+      width: calc(var(--fw) * var(--scale) * 1px);
+      z-index: 3;
+    }
+
+    .char img {
+      height: calc(var(--sheet-h) * var(--scale) * 1px);
+      max-width: none;
+      width: calc(var(--sheet-w) * var(--scale) * 1px);
+    }
+
+    .baseline {
+      background: var(--hold);
+      height: 2px;
+      left: 0;
+      position: absolute;
+      top: calc(var(--y) * 1px);
+      width: 100%;
+      z-index: 4;
+    }
+
+    .checklist {
+      columns: 2 260px;
+    }
+
+    @media (max-width: 840px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Aprovacao de personagens</h1>
+      <p class="note">Pagina simples para aprovar personagens antes de qualquer integracao no runtime. Nao usa Canvas, JavaScript, animacao procedural nem troca assets do jogo.</p>
+      <div class="badges" aria-label="Regras ativas">
+        <span class="badge">pixel art 2D 32 bits</span>
+        <span class="badge">walk lateral 5 frames</span>
+        <span class="badge">fundo transparente</span>
+        <span class="badge">aprovacao humana antes do runtime</span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Status desta reavaliacao</h2>
+      <p><span class="status bad">nenhum personagem novo aprovado</span></p>
+      <p class="note">A arte atual foi organizada como referencia, candidato ou divida. O proximo passo e criar um pack novo de pedestres a partir do prompt oficial em <a href="./PUBPAID_2_CHARACTER_ART_PROMPT.md">PUBPAID_2_CHARACTER_ART_PROMPT.md</a>.</p>
+    </section>
+
+    <section>
+      <h2>Comparacao no cenario</h2>
+      <div class="scene">
+        <div class="scene-frame">
+          <img src="./assets/pubpaid-v2-street-bg-v1.png" alt="Rua PubPaid reduzida para comparacao">
+          <div class="baseline" style="--y: 320;"></div>
+          <div class="char" style="--x: 320; --y: 320; --fw: 96; --fh: 144; --sheet-w: 384; --sheet-h: 1152; --scale: 0.42;">
+            <img src="./assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-breathe-8dir-4f.png" alt="Protagonista como escala de referencia">
+          </div>
+          <div class="char" style="--x: 122; --y: 278; --fw: 96; --fh: 144; --sheet-w: 480; --sheet-h: 144; --scale: 0.36;">
+            <img src="./assets/pubpaid/sprites/street-civilians/arcade-controller-wall-idle-v1.png" alt="NPC arcade atual, candidato em revisao">
+          </div>
+          <div class="char" style="--x: 566; --y: 286; --fw: 64; --fh: 128; --sheet-w: 256; --sheet-h: 128; --scale: 0.24;">
+            <img src="./assets/pubpaid/sprites/street-civilians/bus-lady-idle-v1.png" alt="NPC de fundo atual">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Arte atual reavaliada</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Protagonista</h3>
+          <div class="media sheet">
+            <img src="./assets/pubpaid/sprites/protagonist/protagonist-final-3sheet-preview.png" alt="Preview do protagonista">
+          </div>
+          <div class="body">
+            <span class="status ok">referencia de escala</span>
+            <p>Usar para baseline, proporcao e leitura de corpo. Novos pedestres precisam casar com esta escala e com o fundo.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Civis de fundo antigos</h3>
+          <div class="media sheet">
+            <img src="./assets/pubpaid/sprites/street-civilians/street-civilians-v1-preview.png" alt="Preview dos civis antigos">
+          </div>
+          <div class="body">
+            <span class="status bad">nao final</span>
+            <p>Corpo e paleta ajudam como estudo, mas varios props parecem placas coladas. Refazer acessorios dentro da silhueta.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Pedestres v2</h3>
+          <div class="media sheet">
+            <img src="./assets/pubpaid/sprites/street-civilians/pedestrian-commuter-walk-v2.png" alt="Pedestre commuter v2">
+          </div>
+          <div class="body">
+            <span class="status hold">candidato a refazer</span>
+            <p>A ideia de caminhada em 5 frames esta no caminho, mas a proxima versao precisa provar pernas alternadas, peso e bracos com leitura humana.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Arcade calcada</h3>
+          <div class="media sheet">
+            <img src="./assets/pubpaid/sprites/street-civilians/arcade-token-wall-idle-v1.png" alt="NPC arcade token v1">
+          </div>
+          <div class="body">
+            <span class="status hold">identidade boa</span>
+            <p>Tem tema certo para o mundo, mas o corpo precisa perder leitura de bloco/prop solto antes de virar final.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Interior bar</h3>
+          <div class="media sheet">
+            <img src="./assets/pubpaid/sprites/street-civilians/pub-bartender-idle-v2.png" alt="Bartender v2">
+          </div>
+          <div class="body">
+            <span class="status hold">reavaliar com interior</span>
+            <p>Bom tipo de figurante para bar, mas precisa ser comparado contra o interior real antes de aprovacao.</p>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Nerds v4</h3>
+          <div class="media sheet">
+            <img src="./assets/pubpaid/sprites/street-civilians/arcade-nerd-phone-lean-idle-v4.png" alt="Nerd v4">
+          </div>
+          <div class="body">
+            <span class="status bad">rejeitar como final</span>
+            <p>Ficam como memoria de comparacao. A leitura ainda parece simples/chapada demais para o padrao pedido.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Checklist antes de aprovar arte nova</h2>
+      <ul class="checklist">
+        <li>Pixel art 2D 32 bits.</li>
+        <li>Mesmo universo visual do cenario.</li>
+        <li>Escala correta.</li>
+        <li>Contorno escuro limpo.</li>
+        <li>Paleta limitada e compativel.</li>
+        <li>Walk lateral com 5 frames reais.</li>
+        <li>Pernas alternando corretamente.</li>
+        <li>Bracos acompanham o movimento.</li>
+        <li>Sem fundo, halo ou manchas.</li>
+        <li>Spritesheet pronto para engine.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

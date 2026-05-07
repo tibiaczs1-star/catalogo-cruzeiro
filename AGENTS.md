@@ -46,6 +46,7 @@ Todo o resto so deve voltar se o usuario pedir explicitamente.
 - Nao publicar alteracoes de PubPaid sem autorizacao explicita.
 - Para PubPaid 2, seguir sempre `PUBPAID_2_GLOBAL_HANDOFF.md`.
 - Para qualquer alteracao visual da PubPaid 2, seguir tambem `PUBPAID_2_VISUAL_DIRECTION.md`.
+- Para arte de personagens/pedestres PubPaid 2, seguir `PUBPAID_2_CHARACTER_ART_PROMPT.md` e entregar primeiro em HTML simples de aprovacao, sem mexer no runtime final.
 - Nao trocar carros, motos, NPCs, fundo, HUD ou sprites no runtime para "comparar arte"; comparacoes novas devem ficar em HTML/preview externo e so entram no jogo apos aprovacao humana explicita.
 - Arte visual final nao pode ser canvas/procedural/runtime: nada de `createCanvas`, `generateTexture`, `document.createElement("canvas")`, `graphics()` para personagem/veiculo/fundo/UI final, Canva, vetor, clipart, stock ou personagem generico.
 - Antes de concluir qualquer rodada visual PubPaid, rodar `npm run pubpaid:visual-audit`; se falhar, reportar os achados e nao dizer que a direcao visual esta implementada.

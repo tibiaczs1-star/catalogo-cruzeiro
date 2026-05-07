@@ -76,6 +76,19 @@ Contrato atual de escala:
 - fundo: 50 a 75 px renderizados;
 - sprites jogaveis/protagonistas continuam em grade propria, mas qualquer NPC novo precisa ser comparado contra o protagonista e contra o cenario antes de entrar no runtime.
 
+### Protocolo de personagens/pedestres
+
+O prompt operacional vivo esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
+
+Regras adicionais obrigatorias:
+- pedestre de rua andando precisa ter spritesheet lateral com 5 frames reais;
+- nada de caminhada procedural, interpolada ou automatica;
+- pernas e bracos precisam alternar com peso humano;
+- personagem deve ter fundo transparente real, sem halo, mancha branca, mancha verde ou pixel solto;
+- props e acessorios precisam fazer parte da silhueta, nao parecer retangulo colado por cima;
+- entregar sempre em HTML simples de aprovacao antes de qualquer runtime;
+- se a aprovacao falhar em escala, paleta, recorte, contorno, caminhada ou pertencimento ao cenario, refazer antes de integrar.
+
 ## Contrato Do Cenario
 
 O cenario deve ser pixel art 2D real, com objetos desenhados manualmente e profundidade sem parecer 3D moderno.

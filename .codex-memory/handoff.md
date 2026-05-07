@@ -23,7 +23,7 @@ Ja feito:
 
 ## Estado esperado
 
-Depois do commit final de memoria, a worktree deve ficar limpa. Se `npm run codex:health` avisar que nao ha ordem ativa, isso e esperado: parar e esperar a proxima ordem do usuario.
+Rodada PubPaid 2 preview-only registrada. O usuario deve aprovar/corrigir `pubpaid-character-approval.html` antes de gerar primeiro pack novo de pedestres. Nao tocar runtime final sem aprovacao explicita.
 
 ## Trava anti-alucinacao
 
@@ -34,6 +34,9 @@ Depois do commit final de memoria, a worktree deve ficar limpa. Se `npm run code
 - Nao dizer que Render foi limpo online sem credencial ou prova da rota admin.
 - Render online agora tem prova, mas os tokens precisam ser rotacionados.
 - Nao dizer que PubPaid 2 esta visualmente limpa enquanto `npm run pubpaid:visual-audit` falhar.
+- Para personagens/pedestres, usar `PUBPAID_2_CHARACTER_ART_PROMPT.md`; qualquer arte nova precisa aparecer antes em HTML simples de aprovacao e so depois pode entrar no runtime.
+- HTMLs criados nesta rodada: `pubpaid-art-direction-preview.html` e `pubpaid-character-approval.html`.
+- `npm run pubpaid:visual-audit` falhou por divida preexistente no runtime; reportar isso sempre e nao chamar PubPaid 2 de visualmente pronta.
 - Travas 10/10 agora devem aparecer em `npm run codex:health`: escopo, Render/admin, PubPaid visual, branch ahead e worktree.
 - Se `codex:health` disser `spawnSync git EPERM`, conferir `git status` pelo shell antes de afirmar worktree/branch.
 - `data/article-integrity-report.json` e `data/image-preview-cache.json` apareceram modificados fora desta mudanca; tratar como dado vivo ate nova ordem.
