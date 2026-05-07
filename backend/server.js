@@ -33,7 +33,7 @@ function getRequiredSecret(name, fallbackValue) {
 }
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
-const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "local-super-admin-password-change-me");
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();

@@ -4,7 +4,7 @@ Updated: 2026-05-07
 
 ## Active Goal
 
-Limpeza local encerrada. Aguardar proxima ordem explicita.
+Render/admin verificado e limpeza segura online executada. Aguardar proxima ordem explicita.
 
 ## Summary
 
@@ -30,14 +30,18 @@ Render publico esta online:
 - `/` respondeu 200.
 - `/api/news` respondeu 200 com JSON.
 
-Limpeza administrativa online ficou bloqueada por falta de acesso:
+Limpeza administrativa online concluida em 2026-05-07:
 
-- Render CLI ausente.
-- Sem `ADMIN_TOKEN` ou credenciais Full Admin no ambiente.
-- `npm run deploy:storage-check -- --url https://catalogo-cruzeiro-web.onrender.com` falhou por falta de token.
-- `/api/admin/storage-health` respondeu 401 sem token.
+- Render API encontrou service id `srv-d7heure7r5hc73br2aqg`.
+- Deploy live `dep-d7trp41oagis73ff8sn0`, commit `cca9821f2bf54715de3b50c438f8297deebc30a6`.
+- Storage health autenticado: OK; `DATA_DIR` em `/opt/render/project/src/render-data`; write probe OK; persistencia esperada.
+- Cheffe Call online: estudo 201, start 201, safe-cleanup 200, complete 200.
+- Safe-cleanup removeu 0 arquivo(s), 0 bytes.
+- Runtime online dos agentes: `/api/real-agents/run` 201, 181 agentes.
+- Removidos defaults hardcoded do token simples em codigo/exemplos locais.
+- Varredura local por valores dos tokens retornou 0 hits.
 
-Limpeza temporaria local equivalente em `.codex-temp` nao encontrou logs/smoke removiveis.
+Os tokens foram expostos no chat; devem ser rotacionados no Render depois desta rodada.
 
 ## Guardrails
 
@@ -57,3 +61,5 @@ Limpeza temporaria local equivalente em `.codex-temp` nao encontrou logs/smoke r
 - `C:\Users\junio\projeto codex\.codex-memory\handoff.md`
 - `C:\Users\junio\projeto codex\.codex-memory\orders.json`
 - `C:\Users\junio\projeto codex\scripts\codex-health-check.js`
+- `C:\Users\junio\projeto codex\server.js`
+- `C:\Users\junio\projeto codex\backend\server.js`

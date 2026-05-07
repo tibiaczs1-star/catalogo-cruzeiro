@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdatedAt": "2026-05-07T06:15:00.0000000Z",
+  "lastUpdatedAt": "2026-05-07T07:00:00.0000000Z",
   "compactedAt": "2026-05-07T00:25:00.000Z",
   "orders": [
     {
@@ -323,6 +323,44 @@
         "nao misturar os dois JSONs de data sujos com novo escopo sem ordem"
       ],
       "notes": "Risk gates implementados e validados: escopo, Render/admin, PubPaid visual, branch ahead e worktree. node --check passou. codex:health passou e agora avisa quando git dentro do Node falha com EPERM."
+    },
+    {
+      "id": "2026-05-07-render-admin-token-check",
+      "createdAt": "2026-05-07T06:30:00.0000000Z",
+      "updatedAt": "2026-05-07T07:00:00.0000000Z",
+      "status": "completed-online",
+      "source": "chat",
+      "rawRequest": "Usar ADMIN_TOKEN fornecido para verificar/limpar Render administrativo sem salvar segredo.",
+      "summary": "Rodar storage-health e limpeza segura online do Render com token administrativo fornecido pelo usuario.",
+      "normalizedTasks": [
+        "nao salvar nem commitar token",
+        "validar /api/admin/storage-health",
+        "executar apenas limpeza segura autenticada se a rota aceitar",
+        "reportar provas sem expor segredo"
+      ],
+      "filesTouched": [
+        ".codex-memory/orders.json",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        "server.js",
+        "backend/server.js",
+        ".env.example",
+        "backend/.env.example",
+        "backend/README.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "render",
+        "admin",
+        "token-check",
+        "safe-cleanup"
+      ],
+      "nextSteps": [
+        "rotacionar ADMIN_TOKEN e Render API key porque foram colados no chat",
+        "aguardar proxima ordem explicita"
+      ],
+      "notes": "Concluido online: Render API encontrou catalogo-cruzeiro-web srv-d7heure7r5hc73br2aqg; storage-health 200 com write probe OK; Cheffe ecosystem-study 201, start 201, safe-cleanup 200 removeu 0 arquivos/0 bytes, complete 200; /api/real-agents/run 201 com 181 agentes. Removidos defaults hardcoded que coincidiam com o token simples; varredura local por valores dos tokens retornou 0 hits. Tokens nao foram salvos em arquivo."
     }
   ]
 }

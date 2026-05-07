@@ -35,7 +35,7 @@ Variáveis relevantes:
 O painel administrativo aceita login HTTP Basic:
 
 - Usuário: `admin`
-- Senha: `99831455a`
+- Senha: defina `SUPER_ADMIN_PASSWORD` no ambiente.
 
 Também é possível definir `ADMIN_TOKEN` no ambiente para acesso por token em integrações:
 

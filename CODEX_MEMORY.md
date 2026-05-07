@@ -27,13 +27,18 @@ Limpeza grande concluida localmente.
 
 Render publico respondeu 200 em `https://catalogo-cruzeiro-web.onrender.com/` e `/api/news`.
 
-Limpeza administrativa online nao foi executada porque:
+Rodada administrativa online concluida em 2026-05-07:
 
-- Render CLI nao esta instalado neste ambiente.
-- `ADMIN_TOKEN`, `FULL_ADMIN_PASSWORD`, `SUPER_ADMIN_PASSWORD`, `RENDER_API_KEY` e `RENDER_TOKEN` nao existem no ambiente.
-- `/api/admin/storage-health` respondeu 401 sem token.
+- Render API autenticada encontrou `catalogo-cruzeiro-web`, service id `srv-d7heure7r5hc73br2aqg`.
+- Deploy live: `dep-d7trp41oagis73ff8sn0`, commit `cca9821f2bf54715de3b50c438f8297deebc30a6`.
+- `/api/admin/storage-health`: 200, storage em `/opt/render/project/src/render-data`, persistente esperado, write probe OK.
+- Cheffe online: ecosystem-study 201, start 201, action safe-cleanup 200, complete 200.
+- Safe-cleanup removeu 0 arquivo(s), 0 bytes: nao havia logs/smoke removiveis.
+- `/api/real-agents/run`: 201, 181 agentes OK.
+- Seguranca local: removidos defaults hardcoded que coincidiam com o token simples em `server.js`, `backend/server.js`, `.env.example`, `backend/.env.example` e `backend/README.md`.
+- Varredura local por valores dos tokens: 0 arquivos com ADMIN_TOKEN/API key gravados.
 
-Nao inventar credencial. Para limpar Render online, pedir token/acesso ou usar a rota administrativa autenticada.
+Tokens foram colados no chat; nao repetir, nao salvar em arquivo e recomendar rotacao no Render.
 
 ## Validacoes
 
