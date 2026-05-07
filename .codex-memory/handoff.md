@@ -34,7 +34,8 @@ Rodada PubPaid 2 preview-only registrada. O usuario deve aprovar/corrigir `pubpa
 - Nao dizer que Render foi limpo online sem credencial ou prova da rota admin.
 - Render online agora tem prova, mas os tokens precisam ser rotacionados.
 - Nao dizer que PubPaid 2 esta visualmente limpa enquanto `npm run pubpaid:visual-audit` falhar.
-- Para personagens/pedestres, usar `PUBPAID_2_CHARACTER_ART_PROMPT.md`; qualquer arte nova precisa aparecer antes em HTML simples de aprovacao e so depois pode entrar no runtime.
+- Para personagens/pedestres, usar `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md` e `PUBPAID_2_CHARACTER_ART_PROMPT.md`; qualquer arte nova precisa aparecer antes em HTML simples de aprovacao e so depois pode entrar no runtime.
+- Regra nova do usuario: pedestre andando exige 5 ciclos completos de caminhada manual, nao apenas 5 frames.
 - HTMLs criados nesta rodada: `pubpaid-art-direction-preview.html` e `pubpaid-character-approval.html`.
 - `npm run pubpaid:visual-audit` falhou por divida preexistente no runtime; reportar isso sempre e nao chamar PubPaid 2 de visualmente pronta.
 - Travas 10/10 agora devem aparecer em `npm run codex:health`: escopo, Render/admin, PubPaid visual, branch ahead e worktree.

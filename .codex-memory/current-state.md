@@ -13,10 +13,12 @@ A worktree foi reduzida e organizada sem `git reset --hard`, sem `git clean -fd`
 Rodada PubPaid 2 preview-only de 2026-05-07:
 
 - Criado `PUBPAID_2_CHARACTER_ART_PROMPT.md` com o contrato oficial de personagens/pedestres.
+- Criado `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md` com o prompt master de NPCs.
 - Criado `pubpaid-character-approval.html` como HTML simples de aprovacao.
 - Criado `pubpaid-art-direction-preview.html` e `PUBPAID_2_ART_DIRECTION_DECISION.md` para separar norte visual, candidatos e dividas.
 - Nenhum arquivo final de runtime PubPaid 2 foi editado.
 - `npm run pubpaid:visual-audit` falhou por divida preexistente no runtime; nao declarar visual implementado.
+- Regra atualizada: pedestre andando precisa de 5 ciclos completos de caminhada manual, nao apenas 5 frames.
 
 Foram removidos 497 arquivos nao rastreados e sem referencia encontrada:
 
@@ -56,7 +58,7 @@ Os tokens foram expostos no chat; devem ser rotacionados no Render depois desta 
 - Nao publicar PubPaid sem autorizacao.
 - PubPaid 1 esta descontinuado como produto: usar somente como fonte de pagamento, carteira, admin e dashboard; seguir `PUBPAID_1_SOURCE_ONLY.md`.
 - PubPaid 2 segue com divida visual: `npm run pubpaid:visual-audit` falhou por `graphics`, `fillRect`, gradientes/glow e nomes `canvas` no runtime.
-- Para personagens/pedestres PubPaid 2, seguir `PUBPAID_2_CHARACTER_ART_PROMPT.md` e entregar primeiro em `pubpaid-character-approval.html` ou HTML simples equivalente; runtime final so depois de aprovacao humana explicita.
+- Para personagens/pedestres PubPaid 2, seguir `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md` e `PUBPAID_2_CHARACTER_ART_PROMPT.md`; entregar primeiro em `pubpaid-character-approval.html` ou HTML simples equivalente; runtime final so depois de aprovacao humana explicita.
 - Para Jornal grande: `npm run review:team` antes de commit/PR/deploy.
 - Para Cheffe/agentes: provar pagina 200, rota de estudo, inicio da call, `complete` e runtime antes de declarar implementado.
 - Antes de qualquer nova rodada: rodar `npm run codex:health`.

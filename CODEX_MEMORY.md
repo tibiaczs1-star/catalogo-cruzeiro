@@ -31,7 +31,7 @@ Antes de extrair algo, ler `PUBPAID_1_SOURCE_ONLY.md`.
 
 O prompt oficial para personagens/pedestres esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
 
-Regra curta: qualquer personagem, pedestre ou figurante novo deve ser pixel art 2D 32 bits, spritesheet manual, caminhada lateral real de 5 frames quando andar, recorte limpo e aprovacao humana em HTML simples antes de qualquer runtime.
+Regra curta: qualquer personagem, pedestre ou figurante novo deve ser pixel art 2D 32 bits, spritesheet manual, e para pedestres andando exige 5 ciclos completos de caminhada manual. Entregar em HTML simples antes de qualquer runtime. Prompt master: `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md`.
 
 ## Estado atual
 

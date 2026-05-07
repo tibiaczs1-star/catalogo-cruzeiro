@@ -20,6 +20,7 @@ Preview externo criado:
 
 Prompt oficial de personagens registrado:
 
+- `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md`
 - `PUBPAID_2_CHARACTER_ART_PROMPT.md`
 
 ## Decisao inicial
@@ -63,7 +64,8 @@ O fundo da rua continua sendo a ancora visual principal. Personagens, trafego e 
 
 1. Criar pacote de NPCs de calcada fora do jogo:
    - 96x144 por frame;
-   - 4 ou 5 frames;
+   - para pedestres andando, 5 ciclos completos de caminhada manual;
+   - padrao lateral de producao: 5 ciclos x 5 frames em celulas 96x144;
    - pe no baseline row 139;
    - alpha apenas 0 ou 255;
    - sombra no PNG;
@@ -88,7 +90,7 @@ O fundo da rua continua sendo a ancora visual principal. Personagens, trafego e 
 
 ## Regra nova de personagens/pedestres
 
-Toda arte humana nova precisa seguir `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
+Toda arte humana nova precisa seguir `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md` e `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
 
 Entrega obrigatoria antes de runtime:
 
@@ -99,7 +101,7 @@ Entrega obrigatoria antes de runtime:
 - comparacao contra cenario real;
 - status claro: aprovado, em revisao ou rejeitado.
 
-Nao existe aprovacao implicita por estar bonito isolado. Se o personagem parecer colado, chapado, procedural, generico, com prop solto, sem caminhada humana de 5 frames ou com recorte sujo, ele volta para refacao.
+Nao existe aprovacao implicita por estar bonito isolado. Se o personagem parecer colado, chapado, procedural, generico, com prop solto, sem 5 ciclos reais de caminhada humana quando for pedestre andando, ou com recorte sujo, ele volta para refacao.
 
 ## Gate de conclusao
 

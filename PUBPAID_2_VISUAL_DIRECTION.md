@@ -78,10 +78,10 @@ Contrato atual de escala:
 
 ### Protocolo de personagens/pedestres
 
-O prompt operacional vivo esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
+O prompt master esta em `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md`; o protocolo operacional vivo esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
 
 Regras adicionais obrigatorias:
-- pedestre de rua andando precisa ter spritesheet lateral com 5 frames reais;
+- pedestre de rua andando precisa ter 5 ciclos completos de caminhada manual, nao apenas 5 frames;
 - nada de caminhada procedural, interpolada ou automatica;
 - pernas e bracos precisam alternar com peso humano;
 - personagem deve ter fundo transparente real, sem halo, mancha branca, mancha verde ou pixel solto;

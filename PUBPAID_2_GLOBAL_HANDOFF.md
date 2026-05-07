@@ -43,7 +43,7 @@ Primeiros jogos:
 ## Direcao visual fixa
 
 - A lei visual detalhada esta em `PUBPAID_2_VISUAL_DIRECTION.md`; seguir antes de qualquer arte nova.
-- O prompt oficial de personagens e pedestres esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
+- O prompt master de NPCs esta em `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md`; o protocolo operacional de personagens e pedestres esta em `PUBPAID_2_CHARACTER_ART_PROMPT.md`.
 - Toda arte humana nova deve ser entregue antes em HTML simples de aprovacao, como `pubpaid-character-approval.html`.
 - Pixel art bitmap semi-realista.
 - Nada de personagem final desenhado por canvas/procedural.
@@ -130,7 +130,7 @@ Rollback imediato desta tentativa: o usuario corrigiu que a ordem era comparar a
 
 - Validar visualmente no navegador real se player, 3 nerds arcade V4, civis de fundo, trafego v28 e motos atuais estao no estado anterior.
 - Montar comparacao de artes em HTML/preview separado, sem trocar o runtime.
-- Para personagens/pedestres, usar `PUBPAID_2_CHARACTER_ART_PROMPT.md` e aprovar em `pubpaid-character-approval.html` ou HTML simples equivalente.
+- Para personagens/pedestres, usar `PUBPAID_V2_NPC_PIXEL_ART_MASTER_PROMPT.md` + `PUBPAID_2_CHARACTER_ART_PROMPT.md` e aprovar em `pubpaid-character-approval.html` ou HTML simples equivalente.
 - Fazer o fluxo completo: intro -> rua -> salao -> garcom -> lobby -> Dardos -> resultado.
 - Fazer o fluxo completo da Dama.
 - Criar pacote coerente para cachorro antes de religar animal.
