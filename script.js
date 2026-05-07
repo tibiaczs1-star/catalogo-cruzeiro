@@ -66,6 +66,8 @@ const heroTourismKicker = document.querySelector("[data-hero-tourism-kicker]");
 const heroTourismTitle = document.querySelector("[data-hero-tourism-title]");
 const heroTourismNote = document.querySelector("[data-hero-tourism-note]");
 const heroTourismMetaLink = document.querySelector("[data-hero-tourism-meta-link]");
+const heroTourismPrevButton = document.querySelector("#hero-tourism-prev");
+const heroTourismNextButton = document.querySelector("#hero-tourism-next");
 const heroDailyNewsCard = document.querySelector("[data-hero-daily-link]");
 const heroDailyNewsCategory = document.querySelector("[data-hero-daily-category]");
 const heroDailyNewsTitle = document.querySelector("[data-hero-daily-title]");
@@ -2007,26 +2009,16 @@ const initializeLiveTicker = () => {
   const isDesktopStaticTicker = tickerDesktopStaticMedia?.matches === true;
   const phrasesPerLane = isDesktopStaticTicker ? 4 : 10;
   let phraseCursor = 0;
-  const advanceCursor = (delta) => {
-    const length = activeTickerPhrasePool.length || 1;
-    phraseCursor = (phraseCursor + delta) % length;
-    if (phraseCursor < 0) phraseCursor += length;
-  };
   const nextPhrase = () => {
     const phrase = activeTickerPhrasePool[phraseCursor % activeTickerPhrasePool.length];
     phraseCursor += 1;
     return phrase;
   };
-  const prevPhrase = () => {
-    advanceCursor(-1);
-    return activeTickerPhrasePool[phraseCursor % activeTickerPhrasePool.length];
-  };
 
   const lanes = laneNodes.map((laneNode, laneIndex) => {
     const track = document.createElement("div");
     track.className = "ticker-track";
-    // A passagem (scroll) precisa ser mais lenta que a troca de itens.
-    track.style.setProperty("--ticker-duration", "70s");
+    track.style.setProperty("--ticker-duration", "34s");
 
     const primarySegment = document.createElement("div");
     primarySegment.className = "ticker-segment";
@@ -2060,27 +2052,6 @@ const initializeLiveTicker = () => {
     };
   });
 
-  const stepLane = (direction = 1) => {
-    const lane = lanes[0];
-    if (!lane || !lane.primaryChips?.length) return;
-    lane.rotationIndex =
-      (lane.rotationIndex + (direction >= 0 ? 1 : -1) + lane.primaryChips.length) % lane.primaryChips.length;
-    const phrase = direction >= 0 ? nextPhrase() : prevPhrase();
-    setTickerChipPhrase(lane.primaryChips[lane.rotationIndex], phrase, { type: true });
-    setTickerChipPhrase(lane.cloneChips[lane.rotationIndex], phrase);
-  };
-
-  const prevButton = document.getElementById("ticker-live-prev");
-  const nextButton = document.getElementById("ticker-live-next");
-  if (prevButton && !prevButton._tickerBound) {
-    prevButton._tickerBound = true;
-    prevButton.addEventListener("click", () => stepLane(-1));
-  }
-  if (nextButton && !nextButton._tickerBound) {
-    nextButton._tickerBound = true;
-    nextButton.addEventListener("click", () => stepLane(1));
-  }
-
   if (splashMotionQuery.matches) {
     return;
   }
@@ -2095,7 +2066,7 @@ const initializeLiveTicker = () => {
 
     const timeoutId = window.setTimeout(() => {
       cycleLane();
-      const intervalId = window.setInterval(cycleLane, 6800 + laneIndex * 240);
+      const intervalId = window.setInterval(cycleLane, 2600 + laneIndex * 240);
       tickerRuntime.timerIds.push(intervalId);
     }, 1100 + laneIndex * 320);
 
@@ -4867,7 +4838,7 @@ const heroTourismDailyPoolState = {
 };
 
 const heroTourismDailyTarget = 10;
-const heroTourismRotationIntervalMs = 4000;
+const heroTourismRotationIntervalMs = 9000;
 const heroTourismDailyTimeZone = "America/Rio_Branco";
 const heroTourismLocalPattern =
   /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima|rodrigues alves)\b/i;
@@ -6133,6 +6104,30 @@ const initializeHeroTourismHero = () => {
 
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
+
+  const stepHeroTourism = (direction = 1) => {
+    const currentPool = getHeroTourismDailyPool();
+    if (!currentPool.length) return;
+    const length = currentPool.length;
+    const delta = direction >= 0 ? 1 : -1;
+    const nextIndex = (heroTourismRotation.photoIndex + delta + length) % length;
+    heroTourismRotation.photoIndex = nextIndex;
+    if (shouldUseSolidHeroShell() || liteRuntime) {
+      setHeroTourismMeta(currentPool[nextIndex]);
+      return;
+    }
+    renderHeroTourismBackground(nextIndex);
+  };
+
+  if (heroTourismPrevButton && !heroTourismPrevButton._heroTourismBound) {
+    heroTourismPrevButton._heroTourismBound = true;
+    heroTourismPrevButton.addEventListener("click", () => stepHeroTourism(-1));
+  }
+
+  if (heroTourismNextButton && !heroTourismNextButton._heroTourismBound) {
+    heroTourismNextButton._heroTourismBound = true;
+    heroTourismNextButton.addEventListener("click", () => stepHeroTourism(1));
+  }
 
   if (dailyPool.length > 1) {
     heroTourismRotation.timerId = window.setInterval(() => {
