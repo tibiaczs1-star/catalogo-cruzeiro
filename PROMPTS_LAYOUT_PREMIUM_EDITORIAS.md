@@ -392,7 +392,6 @@ sem roubar a funcao de navegacao.
 | Home/capa | `index.html`, `styles.css`, `styles-late-overrides.css`, `mobile-home-final.css`, `premium-clarity.css`, `script.js` | Capa-mae editorial, menos densidade, uma linguagem base e acentos por editoria. |
 | Materia | `noticia.html`, `noticia.js`, `noticia-enhance.css`, `noticia-enhance.js` | Paper premium: leitura limpa, foto/credito/fonte em destaque, sidebar enxuta. |
 | Arquivo | `arquivo.html`, `arquivo-noticias.js`, `news-data.js` | Biblioteca editorial pesquisavel, busca forte, timeline e resultados confiaveis. |
-| Analises | `analyses.html`, `analyses.css`, `analyses.js` | Painel de triagem editorial, denso mas limpo, com foco em decisao. |
 | Cheffe Call | `cheffe-call.html`, `cheffe-call.css`, `cheffe-call.js` | Sala de comando premium, teatro operacional com menos blocos competindo. |
 | Pesquisa/SPO | `pesquisa-acre-2026.html`, `pesquisa-acre-2026.css`, `pesquisa-acre-2026.js` | Data-luxury, sobrio, legalmente claro, com KPIs e leitura publica. |
 | Games | `games.html`, `subpages-redesign.css`, `subpages-redesign.js` | Revista gamer premium, imagem forte, menos card-heavy, secoes por universo. |

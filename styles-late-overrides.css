@@ -1872,11 +1872,6 @@
   background: linear-gradient(180deg, rgba(9, 34, 60, 0.92), rgba(7, 20, 37, 0.96));
 }
 
-.site-footer .footer-utility-button-tracer {
-  border-color: rgba(244, 179, 93, 0.34);
-  background: linear-gradient(180deg, rgba(51, 31, 16, 0.92), rgba(19, 14, 10, 0.96));
-}
-
 .site-footer .footer-utility-button:hover,
 .site-footer .footer-utility-button:focus-visible {
   transform: translateY(-2px);
@@ -9031,11 +9026,6 @@ body.fx-lite .site-footer.footer-tech.footer-mega .assembly-sparks {
 .site-footer.footer-tech.footer-mega .footer-utility-button-spo {
   background: linear-gradient(180deg, rgba(12, 39, 71, 0.96), rgba(8, 24, 47, 0.98)) !important;
   border-color: rgba(141, 224, 255, 0.26) !important;
-}
-
-.site-footer.footer-tech.footer-mega .footer-utility-button-tracer {
-  background: linear-gradient(180deg, rgba(58, 33, 16, 0.94), rgba(21, 15, 11, 0.98)) !important;
-  border-color: rgba(255, 183, 94, 0.26) !important;
 }
 
 .site-footer.footer-tech.footer-mega .footer-local-strip {

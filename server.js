@@ -635,18 +635,6 @@ const STATIC_PAGE_SEO = {
     sitemap: false,
     fileName: "pesquisa-acre-2026.html"
   },
-  "/analyses.html": {
-    title: `Analyses | Auditoria Manual de Fotos | ${SITE_NAME}`,
-    description:
-      "Fila manual da auditoria de fotos do Catalogo, com noticias em analise, motivos do bloqueio e atalhos para revisar imagem, foco e materia.",
-    robots: "noindex,follow",
-    themeColor: "#0C1324",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    sitemap: false,
-    fileName: "analyses.html"
-  },
   "/pubpaid.html": {
     title: `PubPaid Demo | ${SITE_NAME}`,
     description:
@@ -14572,7 +14560,7 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!requireFullAdminPasswordAccess(req)) {
       return sendJson(res, 401, {
         ok: false,
-        error: "Senha admin total obrigatoria para abrir previa."
+        error: "Senha admin total obrigatoria para consultar imagem."
       });
     }
 
