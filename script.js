@@ -2025,7 +2025,8 @@ const initializeLiveTicker = () => {
   const lanes = laneNodes.map((laneNode, laneIndex) => {
     const track = document.createElement("div");
     track.className = "ticker-track";
-    track.style.setProperty("--ticker-duration", "44s");
+    // A passagem (scroll) precisa ser mais lenta que a troca de itens.
+    track.style.setProperty("--ticker-duration", "70s");
 
     const primarySegment = document.createElement("div");
     primarySegment.className = "ticker-segment";
@@ -2094,7 +2095,7 @@ const initializeLiveTicker = () => {
 
     const timeoutId = window.setTimeout(() => {
       cycleLane();
-      const intervalId = window.setInterval(cycleLane, 5200 + laneIndex * 240);
+      const intervalId = window.setInterval(cycleLane, 6800 + laneIndex * 240);
       tickerRuntime.timerIds.push(intervalId);
     }, 1100 + laneIndex * 320);
 

@@ -2470,6 +2470,7 @@ body.editorial-home .page-shell {
   display: grid;
   gap: 0.95rem;
   padding: 1rem 0.95rem 1.05rem;
+  position: relative;
 }
 
 .ticker-live-head {
@@ -2484,19 +2485,28 @@ body.editorial-home .page-shell {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
+  position: absolute;
+  right: 1.05rem;
+  bottom: 0.85rem;
+  z-index: 6;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(23, 49, 79, 0.12);
+  backdrop-filter: blur(10px);
 }
 
 .ticker-live-arrow {
-  width: 2.2rem;
-  height: 2.2rem;
+  width: 2.05rem;
+  height: 2.05rem;
   border-radius: 999px;
   border: 1px solid rgba(23, 49, 79, 0.14);
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   color: rgba(15, 39, 66, 0.82);
   box-shadow: 0 10px 22px rgba(16, 35, 60, 0.08);
   display: grid;
   place-items: center;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   line-height: 1;
   cursor: pointer;
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
