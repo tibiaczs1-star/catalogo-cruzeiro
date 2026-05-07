@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdatedAt": "2026-05-07T01:05:00.000Z",
+  "lastUpdatedAt": "2026-05-07T01:45:00.000Z",
   "compactedAt": "2026-05-07T00:25:00.000Z",
   "orders": [
     {
@@ -141,6 +141,44 @@
         "triar assets nao rastreados em rodada separada se o usuario pedir"
       ],
       "notes": "PowerShell direto falhou com operacao requer elevacao; comandos foram executados via Node exec. Removido apenas .codex-temp/mailza-cartoon-deploy; diretorios de prova em .codex-temp foram preservados. Commit de higiene restrito a memoria/protocolo, .gitignore e delecoes de arquivo morto."
+    },
+    {
+      "id": "2026-05-07-travas-anti-alucinacao",
+      "createdAt": "2026-05-07T01:35:00.000Z",
+      "updatedAt": "2026-05-07T01:45:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "entao faca o que for necessario, mas pare as alucinacoes",
+      "summary": "Instalar travas locais para impedir retomada por inercia, memoria inchada e edicao sem ordem ativa clara.",
+      "normalizedTasks": [
+        "reforcar codex:health com checkpoint de aterramento",
+        "avisar quando nao houver ordem ativa",
+        "mostrar grupos sujos da worktree antes de agir",
+        "impor limites de tamanho para memoria operacional",
+        "commitar apenas as travas anti-alucinacao"
+      ],
+      "filesTouched": [
+        "scripts/codex-health-check.js",
+        "package.json",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/codex-health-protocol.md",
+        ".codex-memory/orders.json",
+        "progress.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "anti-hallucination",
+        "grounding",
+        "codex-health",
+        "memory-hygiene"
+      ],
+      "nextSteps": [
+        "usar codex:health antes de qualquer nova rodada",
+        "triar assets e mudancas vivas somente em rodada separada"
+      ],
+      "notes": "codex:health agora imprime aterramento com ordem ativa, worktree normal/expandida, grupos sujos, limite de memoria e aviso quando nao houver ordem ativa."
     }
   ]
 }

@@ -15,6 +15,7 @@ Ja feito:
 - Memoria principal compactada para foco vivo.
 - `.codex-temp/mailza-cartoon-deploy` removido; demais `.codex-temp` preservados eram provas atuais.
 - Commit de higiene preparado com memoria/protocolo, `.gitignore` e delecoes de arquivo morto.
+- Travas anti-alucinacao instaladas no `codex:health`.
 
 ## Estado da sujeira
 
@@ -29,6 +30,10 @@ Nao usar `git clean -fd` amplo. Nao usar `git reset --hard`.
 ## Decisao pendente
 
 Ainda resta triar, em rodada separada, os assets nao rastreados de `assets/news-fallbacks/` e `assets/pubpaid/`, alem de mudancas vivas em `data/`, `scripts/` e runtime. Nao misturar isso em commit de higiene.
+
+## Trava anti-alucinacao
+
+Antes de qualquer trabalho novo, `npm run codex:health` mostra ordem ativa, worktree normal/expandida e grupos sujos. Se nao houver ordem ativa, nao retomar tarefas antigas por inercia.
 
 ## Focos vivos
 

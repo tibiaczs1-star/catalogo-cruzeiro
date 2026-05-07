@@ -4,7 +4,7 @@ Updated: 2026-05-07
 
 ## Active Goal
 
-Limpeza de worktree e memoria concluida localmente em commit de higiene. Aguardar proxima ordem explicita.
+Travas anti-alucinacao instaladas localmente. Aguardar proxima ordem explicita.
 
 ## Summary
 
@@ -14,7 +14,9 @@ O workspace esta grande demais para retomada segura. A memoria foi compactada pa
 
 Temporario seguro removido: `.codex-temp/mailza-cartoon-deploy`. `.codex-temp/real-agents`, `.codex-temp/review-team` e `.codex-temp/online-local-sync` foram preservados.
 
-O commit de higiene inclui apenas memoria/protocolo, `.gitignore` e os 2933 deletados de arquivo morto. Nao inclui os assets novos, `data/`, `scripts/` funcionais, PubPaid/Jornal/Cheffe vivos ou mudancas de runtime.
+O commit de higiene inclui apenas memoria/protocolo, `.gitignore` e os 2933 deletados de arquivo morto. Nao inclui os assets novos, `data/`, `scripts` funcionais, PubPaid/Jornal/Cheffe vivos ou mudancas de runtime.
+
+`codex:health` agora imprime aterramento: ordem ativa, worktree normal/expandida, grupos sujos principais, limite de memoria e aviso quando nao houver ordem ativa.
 
 Principais grupos vistos:
 
@@ -31,15 +33,18 @@ Principais grupos vistos:
 
 - Nao resetar, restaurar ou apagar mudancas rastreadas sem classificar.
 - Nao apagar dados vivos, assets vivos, PubPaid, Jornal, Cheffe Call, agentes reais ou provas atuais.
+- Uma ordem ativa por vez; sem ordem ativa, parar e pedir/registrar a ordem nova.
+- `npm run codex:health` deve mostrar aterramento: ordem ativa, worktree e grupos sujos.
+- Stage sempre com pathspec explicito em worktree suja.
 - Nao publicar PubPaid sem autorizacao.
 - Para Jornal grande: `npm run review:team` antes de commit/PR/deploy.
 - Para Cheffe/agentes: provar pagina 200, rota de estudo, inicio da call, `complete` e runtime antes de declarar implementado.
 
 ## Next
 
-1. Aguardar proxima ordem do usuario.
-2. Se a limpeza continuar, triar separadamente assets nao rastreados do Jornal/PubPaid.
-3. Nao retomar tarefas pausadas por inercia.
+1. Aguardar proxima ordem explicita.
+2. Antes de qualquer nova rodada, rodar `npm run codex:health` e obedecer o aterramento.
+3. Se continuar limpeza, triar assets e mudancas vivas em commit separado.
 
 ## Files In Focus
 

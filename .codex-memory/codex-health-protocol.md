@@ -12,6 +12,9 @@ Protocolo curto para retomada segura neste workspace.
 ## Durante
 
 - Manter foco em PubPaid 1, PubPaid 2, Jornal e Cheffe Call / agentes reais.
+- Trabalhar com uma ordem ativa por vez.
+- Se `codex:health` mostrar nenhuma ordem ativa, nao continuar tarefas antigas por inercia.
+- Em worktree suja, declarar escopo antes de editar e usar `git add` com pathspec explicito.
 - Nao usar `git reset --hard` nem `git clean -fd` amplo.
 - Nao apagar dados vivos, assets vivos ou provas atuais.
 - Limpar temporarios claros ao final da rodada.

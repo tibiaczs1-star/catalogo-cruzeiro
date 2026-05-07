@@ -36,6 +36,13 @@ Limpeza local concluida nesta rodada: memoria curta, protocolo curto e commit de
 - `.codex-temp/deploy-news-24h-fix-v2` porque foi marcada como worktree Git suja.
 - Cheffe Call, real-agents, escritorios e `.codex-agents/`.
 
+## Anti-alucinacao
+
+- Uma ordem ativa por vez. Se `npm run codex:health` mostrar nenhuma ordem ativa, nao continuar tarefa antiga por inercia.
+- Antes de editar, declarar escopo e conferir os grupos sujos da worktree.
+- Em Git, usar `git add` com pathspec explicito; nunca `git add .` em worktree suja.
+- Memoria local deve continuar curta. Se crescer, compactar antes de trabalhar.
+
 ## Proximo passo
 
 Proxima ordem deve partir do usuario. Se for continuar limpeza, triar separadamente os assets nao rastreados em `assets/news-fallbacks/` e `assets/pubpaid/`.
