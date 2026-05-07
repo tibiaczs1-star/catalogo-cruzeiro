@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "lastUpdatedAt": "2026-05-07T01:45:00.000Z",
+  "lastUpdatedAt": "2026-05-07T05:35:00.0000000Z",
   "compactedAt": "2026-05-07T00:25:00.000Z",
   "orders": [
     {
@@ -179,6 +179,115 @@
         "triar assets e mudancas vivas somente em rodada separada"
       ],
       "notes": "codex:health agora imprime aterramento com ordem ativa, worktree normal/expandida, grupos sujos, limite de memoria e aviso quando nao houver ordem ativa."
+    },
+    {
+      "id": "2026-05-07-limpeza-worktree-commit-render",
+      "createdAt": "2026-05-07T02:05:00.000Z",
+      "updatedAt": "2026-05-07T05:35:00.0000000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "limpe a work tree limpe o comit e limpe o render e fique ainda mais leve e preparado pra continuar os trabalhos",
+      "summary": "Limpar a worktree em commits coerentes, deixar memoria/comits leves e verificar/limpar Render somente de forma segura.",
+      "normalizedTasks": [
+        "classificar worktree viva por grupos antes de agir",
+        "commitar ou limpar apenas escopos seguros e coerentes",
+        "nao descartar mudancas vivas sem prova de lixo",
+        "verificar Render e limpar apenas temporarios/caches seguros se houver rota ou script",
+        "deixar health/status final leve para retomada"
+      ],
+      "filesTouched": [
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        "assets/news-fallbacks/",
+        "assets/pubpaid/",
+        "data/",
+        "scripts/",
+        "pubpaid-phaser/",
+        "server.js",
+        "render.yaml"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "workspace-cleanup",
+        "git-hygiene",
+        "render-cleanup",
+        "anti-hallucination"
+      ],
+      "nextSteps": [
+        "aguardar proxima ordem explicita",
+        "para limpar Render online, fornecer ADMIN_TOKEN ou acesso Render",
+        "corrigir divida visual PubPaid antes de declarar visual limpo"
+      ],
+      "notes": "Concluido localmente: removidos 497 untracked sem referencia, commits 53271593 e b355aceb criados. Render publico respondeu 200, mas limpeza admin online bloqueada por falta de CLI/token; /api/admin/storage-health retornou 401 sem token."
+    },
+    {
+      "id": "2026-05-07-sync-online-local-agentes-8h",
+      "createdAt": "2026-05-07T04:13:29.9238420Z",
+      "updatedAt": "2026-05-07T04:16:04.8544871Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "Rode a busca total de noticias do Catalogo Cruzeiro do Sul com os agentes. No workspace, execute `npm run sync:online-local`; esse fluxo deve capturar RSS direto, mesclar com o Render online, atualizar `news-data.js`, `data/runtime-news.json`, `data/news-archive.json` e rodar os agentes reais. Depois execute `npm run review:team`, leia `.codex-temp/online-local-sync/latest-report.md`, `.codex-temp/review-team/latest-report.md` e `data/re-rodada-dia-geral-report.json`, e reporte resumidamente: horario da rodada, quantidade de noticias capturadas, noticias de hoje, status dos agentes, problemas bloqueantes e arquivos alterados. Se a API online continuar sem noticias recentes, tente uma rodada manual menor no endpoint de refresh antes de concluir e destaque o resultado.",
+      "summary": "Rodar sync online-local, rodar agentes reais, revisar e reportar rodada.",
+      "normalizedTasks": [
+        "executar npm run sync:online-local",
+        "mesclar RSS com Render online",
+        "atualizar news-data.js e data/*.json",
+        "rodar agentes reais",
+        "executar npm run review:team",
+        "resumir horario, volume, hoje, agentes, bloqueios e arquivos"
+      ],
+      "filesTouched": [
+        "news-data.js",
+        "data/runtime-news.json",
+        "data/news-archive.json",
+        "data/re-rodada-dia-geral-report.json",
+        ".codex-temp/online-local-sync/latest-report.md",
+        ".codex-temp/review-team/latest-report.md"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "jornal",
+        "sync",
+        "real-agents"
+      ],
+      "nextSteps": [
+        "rodada concluida; acompanhar fontes 404 e jurua-online=0"
+      ],
+      "notes": "Ordem ativa criada a pedido do usuario; executar com cuidado em worktree suja."
+    },
+    {
+      "id": "2026-05-07-limpeza-final-checkpoint",
+      "createdAt": "2026-05-07T05:35:00.0000000Z",
+      "updatedAt": "2026-05-07T05:35:00.0000000Z",
+      "status": "completed-local",
+      "source": "memory-summary",
+      "rawRequest": "limpe a work tree limpe o comit e limpe o render e fique ainda mais leve e preparado pra continuar os trabalhos",
+      "summary": "Limpeza final registrada: worktree organizada em commits, memoria compactada e Render verificado sem credenciais admin.",
+      "normalizedTasks": [
+        "nao continuar tarefas antigas por inercia",
+        "manter commits por frente",
+        "reportar que Render admin exige token",
+        "manter memoria curta"
+      ],
+      "filesTouched": [
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "workspace-cleanup",
+        "git-hygiene",
+        "render-cleanup",
+        "memory-hygiene"
+      ],
+      "nextSteps": [
+        "aguardar proxima ordem explicita"
+      ],
+      "notes": "Final checkpoint para que codex:health mostre a limpeza como ultimo fato, nao a rodada de sync anterior."
     }
   ]
 }

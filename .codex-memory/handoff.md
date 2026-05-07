@@ -4,36 +4,32 @@ Updated: 2026-05-07
 
 ## Retomar por aqui
 
-O usuario pediu limpar a worktree e a memoria porque o projeto ficou grande e o Codex estava puxando contexto antigo.
+O usuario pediu limpar worktree, commits, Render e memoria para reduzir alucinacao.
 
 Ja feito:
 
 - Lidos `CODEX_MEMORY.md`, `.codex-memory/current-state.md` e `.codex-memory/handoff.md`.
-- `npm run codex:health` executado com sucesso via Node `exec`.
-- Ordem nova registrada em `.codex-memory/orders.json`.
-- Ordem anterior de NPCs PubPaid 2 pausada.
-- Memoria principal compactada para foco vivo.
-- `.codex-temp/mailza-cartoon-deploy` removido; demais `.codex-temp` preservados eram provas atuais.
-- Commit de higiene preparado com memoria/protocolo, `.gitignore` e delecoes de arquivo morto.
-- Travas anti-alucinacao instaladas no `codex:health`.
+- `npm run codex:health` rodou OK e reconheceu a ordem ativa de limpeza.
+- Removidos 497 arquivos nao rastreados sem referencia.
+- `npm run review:team` passou com `totalIssues: 0`.
+- `node --check` passou nos JS principais.
+- Commit `53271593` separou Jornal/Cheffe/agentes/dados/fallbacks.
+- `npm run pubpaid:visual-audit` falhou por divida visual real.
+- Commit `b355aceb` separou PubPaid 2 como checkpoint com auditoria pendente.
+- Render publico respondeu 200 em `/` e `/api/news`.
+- Render admin nao foi limpo porque nao ha CLI/token; `/api/admin/storage-health` deu 401.
 
-## Estado da sujeira
+## Estado esperado
 
-Status expandido: 3923 entradas.
-
-- 2933 deletados rastreados, principalmente `sprite-vault/`, `.codex-backups/`, `output/`, `games externos/`, `.playwright-cli/`, prompts e relatorios antigos.
-- 124 modificados rastreados.
-- 866 nao rastreados ao expandir todos os arquivos.
-
-Nao usar `git clean -fd` amplo. Nao usar `git reset --hard`.
-
-## Decisao pendente
-
-Ainda resta triar, em rodada separada, os assets nao rastreados de `assets/news-fallbacks/` e `assets/pubpaid/`, alem de mudancas vivas em `data/`, `scripts/` e runtime. Nao misturar isso em commit de higiene.
+Depois do commit final de memoria, a worktree deve ficar limpa. Se `npm run codex:health` avisar que nao ha ordem ativa, isso e esperado: parar e esperar a proxima ordem do usuario.
 
 ## Trava anti-alucinacao
 
-Antes de qualquer trabalho novo, `npm run codex:health` mostra ordem ativa, worktree normal/expandida e grupos sujos. Se nao houver ordem ativa, nao retomar tarefas antigas por inercia.
+- Nao continuar NPCs, PubPaid, Jornal ou Cheffe por inercia.
+- Nao usar arquivo morto como memoria.
+- Nao apagar `data/`, assets vivos, `.codex-temp/real-agents`, `.codex-temp/review-team` ou `.codex-temp/online-local-sync` sem nova prova/ordem.
+- Nao dizer que Render foi limpo online sem credencial ou prova da rota admin.
+- Nao dizer que PubPaid 2 esta visualmente limpa enquanto `npm run pubpaid:visual-audit` falhar.
 
 ## Focos vivos
 

@@ -13,36 +13,43 @@ Trabalhar somente em quatro frentes:
 
 Todo o resto e arquivo morto ou lixo potencial ate o usuario pedir explicitamente.
 
-## Ordem ativa
+## Estado atual
 
-Limpeza local concluida nesta rodada: memoria curta, protocolo curto e commit de higiene no Git. Nao continuar PubPaid, Jornal ou Cheffe por inercia; retomar somente a proxima ordem explicita do usuario.
+Limpeza grande concluida localmente.
 
-## Estado confirmado
+- Commit `0a372fbc`: memoria/protocolo e arquivo morto removido.
+- Commit `529d4b6c`: travas de aterramento em `npm run codex:health`.
+- Commit `53271593`: Jornal, Cheffe Call, agentes, dados e fallbacks vivos.
+- Commit `b355aceb`: checkpoint PubPaid 2 separado, com assets/scripts vivos e divida visual registrada.
+- Worktree ficou limpa depois do commit de memoria final, salvo proxima ordem nova.
 
-- `npm run codex:health` rodou OK em 2026-05-07 via Node `exec`, porque o PowerShell direto retornou `operacao requer elevacao`.
-- O health apontou worktree muito suja: 3669 mudancas no modo normal; com `--untracked-files=all`, 3923 entradas.
-- Principais blocos: `sprite-vault/` deletado, `.codex-backups/` deletado, `output/` deletado, `games externos/` deletado, muitos fallback assets do Jornal e muitos assets PubPaid ainda nao triados.
-- Temporario fisico removido nesta limpeza: `.codex-temp/mailza-cartoon-deploy`. Restaram apenas `.codex-temp/real-agents`, `.codex-temp/review-team` e `.codex-temp/online-local-sync`, preservados como provas atuais.
-- Commit de higiene preparado apenas com memoria/protocolo, `.gitignore` de temporarios e delecoes de arquivo morto. Assets vivos e codigo funcional ficaram fora.
-- Cheffe Call / Saude editorial online ja foi validado no commit `689d838`.
-- Pacote Jornal/Cheffe limpo esta no PR draft #9, branch `codex/jornal-cheffe-operacional`, commit `5284d96f`.
-- PubPaid 2 e local. Nao publicar sem autorizacao explicita. Mudancas visuais exigem preview externo e `npm run pubpaid:visual-audit`.
-- A ultima auditoria visual PubPaid falhou por divida preexistente no runtime; nao declarar visual limpo ate resolver.
+## Render
 
-## Preservar
+Render publico respondeu 200 em `https://catalogo-cruzeiro-web.onrender.com/` e `/api/news`.
 
-- `data/`, `news-data.js`, assets vivos do Jornal e PubPaid.
-- `.codex-temp/real-agents`, `.codex-temp/review-team`, `.codex-temp/online-local-sync` enquanto forem prova atual.
-- `.codex-temp/deploy-news-24h-fix-v2` porque foi marcada como worktree Git suja.
-- Cheffe Call, real-agents, escritorios e `.codex-agents/`.
+Limpeza administrativa online nao foi executada porque:
+
+- Render CLI nao esta instalado neste ambiente.
+- `ADMIN_TOKEN`, `FULL_ADMIN_PASSWORD`, `SUPER_ADMIN_PASSWORD`, `RENDER_API_KEY` e `RENDER_TOKEN` nao existem no ambiente.
+- `/api/admin/storage-health` respondeu 401 sem token.
+
+Nao inventar credencial. Para limpar Render online, pedir token/acesso ou usar a rota administrativa autenticada.
+
+## Validacoes
+
+- `npm run codex:health`: OK antes da rodada.
+- `npm run review:team`: OK, `totalIssues: 0`.
+- `node --check` nos JS principais de Jornal/Cheffe/PubPaid: OK.
+- `npm run pubpaid:visual-audit`: falhou por divida visual real no runtime PubPaid 2 (`graphics`, `fillRect`, gradientes/glow). Nao declarar PubPaid visualmente limpa ate corrigir.
 
 ## Anti-alucinacao
 
 - Uma ordem ativa por vez. Se `npm run codex:health` mostrar nenhuma ordem ativa, nao continuar tarefa antiga por inercia.
-- Antes de editar, declarar escopo e conferir os grupos sujos da worktree.
-- Em Git, usar `git add` com pathspec explicito; nunca `git add .` em worktree suja.
-- Memoria local deve continuar curta. Se crescer, compactar antes de trabalhar.
+- Antes de editar, declarar escopo e conferir grupos sujos da worktree.
+- Usar `git add` com pathspec explicito; nunca `git add .` em worktree suja.
+- Memoria local deve continuar curta. Registrar so ordens atuais, provas e assets realmente uteis.
+- Nao usar arquivo morto como memoria operacional.
 
 ## Proximo passo
 
-Proxima ordem deve partir do usuario. Se for continuar limpeza, triar separadamente os assets nao rastreados em `assets/news-fallbacks/` e `assets/pubpaid/`.
+Aguardar proxima ordem explicita do usuario.
