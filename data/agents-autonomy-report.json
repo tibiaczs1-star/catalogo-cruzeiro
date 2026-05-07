@@ -1,15 +1,15 @@
 {
   "ok": true,
-  "trigger": "daemon",
-  "startedAt": "2026-04-30T11:51:11.425Z",
-  "finishedAt": "2026-04-30T11:51:16.599Z",
+  "trigger": "once",
+  "startedAt": "2026-05-04T16:44:40.343Z",
+  "finishedAt": "2026-05-04T16:44:46.739Z",
   "actions": [
     {
       "id": "latest-news-capture",
       "agentGroup": "fontes/rss/captacao",
       "status": "done",
       "capturedItems": 203,
-      "capturedToday": 92,
+      "capturedToday": 119,
       "detail": "Captou 203 itens dos RSS monitorados antes da revisao dos agentes."
     },
     {
@@ -19,7 +19,8 @@
       "changedFiles": [
         "data\\runtime-news.json",
         "data\\news-archive.json",
-        "news-data.js"
+        "news-data.js",
+        "data\\topic-feed-buzz.json"
       ],
       "detail": "Sanitizou textos publicos de fontes externas antes da revisao."
     },
@@ -27,8 +28,8 @@
       "id": "news-editorial-body",
       "agentGroup": "copy/editor/review/sources",
       "status": "done",
-      "changedRuntimeItems": 5,
-      "changedStaticItems": 5,
+      "changedRuntimeItems": 2,
+      "changedStaticItems": 2,
       "detail": "Garantiu body editorial proprio em noticias captadas e removeu repeticao entre resumo e corpo."
     },
     {
@@ -37,7 +38,7 @@
       "status": "done",
       "totalAgents": 181,
       "totalOffices": 5,
-      "newsItems": 669
+      "newsItems": 1000
     },
     {
       "id": "review-team",

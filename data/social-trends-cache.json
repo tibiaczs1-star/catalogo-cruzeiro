@@ -1,163 +1,8 @@
 {
   "ok": true,
-  "updatedAt": "2026-05-01T01:12:29.028Z",
-  "items": [
-    {
-      "id": "trends24-brazil-alcolumbre-inimigo-do-brasil",
-      "title": "ALCOLUMBRE INIMIGO DO BRASIL",
-      "summary": "Tendência pública captada em lista externa de X/Twitter Brasil: ALCOLUMBRE INIMIGO DO BRASIL. Divisão sugerida: Cotidiano.",
-      "category": "Cotidiano",
-      "sourceName": "Trends24 Brasil",
-      "sourceUrl": "https://trends24.in/brazil/",
-      "publishedAt": "2026-05-01T01:12:27.327Z",
-      "date": "2026-05-01T01:12:27.327Z",
-      "externalSource": true,
-      "socialPlatform": "X/Twitter",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Cotidiano",
-      "topicGroup": "twitter-trends",
-      "hashtags": [
-        "#AlcolumbreInimigoDoBrasil"
-      ]
-    },
-    {
-      "id": "best-hashtags-acre-acre",
-      "title": "#acre",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #acre. Divisão sugerida: Acre / Governo.",
-      "category": "Acre / Governo",
-      "sourceName": "Best Hashtags Acre",
-      "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-05-01T01:12:29.028Z",
-      "date": "2026-05-01T01:12:29.028Z",
-      "externalSource": true,
-      "socialPlatform": "Instagram",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Acre / Governo",
-      "topicGroup": "instagram-hashtags",
-      "hashtags": [
-        "#acre"
-      ]
-    },
-    {
-      "id": "best-hashtags-acre-amazonia",
-      "title": "#amazonia",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #amazonia. Divisão sugerida: Acre / Governo.",
-      "category": "Acre / Governo",
-      "sourceName": "Best Hashtags Acre",
-      "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-05-01T01:12:29.028Z",
-      "date": "2026-05-01T01:12:29.028Z",
-      "externalSource": true,
-      "socialPlatform": "Instagram",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Acre / Governo",
-      "topicGroup": "instagram-hashtags",
-      "hashtags": [
-        "#amazonia"
-      ]
-    },
-    {
-      "id": "best-hashtags-acre-czs",
-      "title": "#czs",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #czs. Divisão sugerida: Acre / Governo.",
-      "category": "Acre / Governo",
-      "sourceName": "Best Hashtags Acre",
-      "sourceUrl": "https://best-hashtags.com/hashtag/acre/",
-      "publishedAt": "2026-05-01T01:12:29.028Z",
-      "date": "2026-05-01T01:12:29.028Z",
-      "externalSource": true,
-      "socialPlatform": "Instagram",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Acre / Governo",
-      "topicGroup": "instagram-hashtags",
-      "hashtags": [
-        "#czs"
-      ]
-    },
-    {
-      "id": "best-hashtags-brasil-futebol",
-      "title": "#futebol",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #futebol. Divisão sugerida: Esporte.",
-      "category": "Esporte",
-      "sourceName": "Best Hashtags Brasil",
-      "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-05-01T01:12:28.159Z",
-      "date": "2026-05-01T01:12:28.159Z",
-      "externalSource": true,
-      "socialPlatform": "Instagram",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Esporte",
-      "topicGroup": "instagram-hashtags",
-      "hashtags": [
-        "#futebol"
-      ]
-    },
-    {
-      "id": "best-hashtags-brasil-musica",
-      "title": "#musica",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #musica. Divisão sugerida: Cultura.",
-      "category": "Cultura",
-      "sourceName": "Best Hashtags Brasil",
-      "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-05-01T01:12:28.159Z",
-      "date": "2026-05-01T01:12:28.159Z",
-      "externalSource": true,
-      "socialPlatform": "Instagram",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Cultura",
-      "topicGroup": "instagram-hashtags",
-      "hashtags": [
-        "#musica"
-      ]
-    },
-    {
-      "id": "best-hashtags-brasil-saude",
-      "title": "#saude",
-      "summary": "Hashtag pública monitorada em lista externa de Instagram: #saude. Divisão sugerida: Utilidade Pública.",
-      "category": "Utilidade Pública",
-      "sourceName": "Best Hashtags Brasil",
-      "sourceUrl": "https://best-hashtags.com/hashtag/brasil/",
-      "publishedAt": "2026-05-01T01:12:28.159Z",
-      "date": "2026-05-01T01:12:28.159Z",
-      "externalSource": true,
-      "socialPlatform": "Instagram",
-      "coverageLayer": "brasil",
-      "importanceDivision": "Utilidade Pública",
-      "topicGroup": "instagram-hashtags",
-      "hashtags": [
-        "#saude"
-      ]
-    }
-  ],
+  "updatedAt": "2026-05-06T16:15:16.129Z",
+  "items": [],
   "reports": [
-    {
-      "source": "getdaytrends-brazil",
-      "platform": "X/Twitter",
-      "ok": true,
-      "count": 0,
-      "url": "https://getdaytrends.com/brazil/"
-    },
-    {
-      "source": "trends24-brazil",
-      "platform": "X/Twitter",
-      "ok": true,
-      "count": 1,
-      "url": "https://trends24.in/brazil/"
-    },
-    {
-      "source": "best-hashtags-brasil",
-      "platform": "Instagram",
-      "ok": true,
-      "count": 3,
-      "url": "https://best-hashtags.com/hashtag/brasil/"
-    },
-    {
-      "source": "best-hashtags-acre",
-      "platform": "Instagram",
-      "ok": true,
-      "count": 3,
-      "url": "https://best-hashtags.com/hashtag/acre/"
-    },
     {
       "source": "facebook-public-pages",
       "platform": "Facebook",
@@ -165,7 +10,39 @@
       "error": "facebook_graph_config_pending",
       "hint": "Configure FACEBOOK_GRAPH_ACCESS_TOKEN e FACEBOOK_PUBLIC_PAGE_IDS para captar páginas públicas reais.",
       "url": "https://developers.facebook.com/docs/graph-api/reference/page/posts/"
+    },
+    {
+      "source": "getdaytrends-brazil",
+      "platform": "X/Twitter",
+      "ok": false,
+      "skipped": true,
+      "reason": "directory_signal_disabled",
+      "url": "https://getdaytrends.com/brazil/"
+    },
+    {
+      "source": "trends24-brazil",
+      "platform": "X/Twitter",
+      "ok": false,
+      "skipped": true,
+      "reason": "directory_signal_disabled",
+      "url": "https://trends24.in/brazil/"
+    },
+    {
+      "source": "best-hashtags-brasil",
+      "platform": "Instagram",
+      "ok": false,
+      "skipped": true,
+      "reason": "directory_signal_disabled",
+      "url": "https://best-hashtags.com/hashtag/brasil/"
+    },
+    {
+      "source": "best-hashtags-acre",
+      "platform": "Instagram",
+      "ok": false,
+      "skipped": true,
+      "reason": "directory_signal_disabled",
+      "url": "https://best-hashtags.com/hashtag/acre/"
     }
   ],
-  "external": true
+  "external": false
 }

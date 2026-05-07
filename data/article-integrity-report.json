@@ -1,9 +1,21 @@
 {
   "trigger": "auto-30-minutos",
-  "checkedAt": "2026-05-01T01:10:52.718Z",
-  "totalHomeLinked": 23,
-  "missingCount": 3,
+  "checkedAt": "2026-05-07T04:12:50.708Z",
+  "totalHomeLinked": 24,
+  "missingCount": 23,
   "missing": [
+    {
+      "slug": "grupos-artisticos-denunciam-exclusao-na-programacao-dos-20-anos-da-usina-de-arte-joao-donato",
+      "title": "Grupos artísticos denunciam exclusão na programação dos 20 anos da Usina de Arte João Donato",
+      "sourceName": "Fonte local",
+      "hasImage": false
+    },
+    {
+      "slug": "faccionada-ameaca-esposa-de-militar-e-e-presa-em-cruzeiro-do-sul",
+      "title": "Faccionada ameaça esposa de militar e é presa em Cruzeiro do Sul",
+      "sourceName": "Fonte local",
+      "hasImage": false
+    },
     {
       "slug": "campeonato-estadual-sub-20-comeca-com-rodada-dupla-na-arena",
       "title": "Campeonato Estadual Sub-20 começa com rodada dupla na Arena da Floresta",
@@ -11,17 +23,125 @@
       "hasImage": true
     },
     {
-      "slug": "inscricoes-para-corrida-maio-amarelo-2026-em-cruzeiro-do-sul-comecam-nesta-quinta-feira",
-      "title": "Inscrições para a corrida Maio Amarelo 2026 começam em Cruzeiro do Sul",
-      "sourceName": "Juruá em Tempo",
+      "slug": "prefeitura-de-cruzeiro-do-sul-recebe-licenca-ambiental-para-construcao-de-sistemas-de-abastecimento-de-agua-na-zona-rural",
+      "title": "Prefeitura de Cruzeiro do Sul recebe licença para ampliar abastecimento de água na zona rural",
+      "sourceName": "Fonte local",
+      "hasImage": true
+    },
+    {
+      "slug": "governadora-mailza-entrega-kits-escolares-e-fortalece-a-educacao-em-rodrigues-alves",
+      "title": "Mailza entrega kits escolares e reforça a educação em Rodrigues Alves",
+      "sourceName": "Fonte local",
+      "hasImage": true
+    },
+    {
+      "slug": "vazante-retorno-seguro",
+      "title": "Com o rio abaixo da cota de alerta, famílias iniciam retorno seguro",
+      "sourceName": "ac24horas",
       "hasImage": false
     },
     {
-      "slug": "governo-realiza-busca-ativa-por-demandas-de-empresarios-e-do-setor-industrial-de-cruzeiro-do-sul",
-      "title": "Governo realiza busca ativa por demandas de empresários e da indústria de Cruzeiro do Sul",
-      "sourceName": "Agência de Notícias do Acre",
+      "slug": "saude-25-agosto-ubs",
+      "title": "UBS do 25 de Agosto promove dia de saúde em movimento para idosos",
+      "sourceName": "Juruá Online",
+      "hasImage": false
+    },
+    {
+      "slug": "mais-12-mil-afetados",
+      "title": "O mês já abre com mais de 12 mil afetados e expansão dos abrigos",
+      "sourceName": "1 abr",
+      "hasImage": true
+    },
+    {
+      "slug": "vazante-retorno-familias",
+      "title": "A água subiu, os abrigos abriram e a cidade passou a girar em torno da enchente",
+      "sourceName": "4 a 9 abr",
+      "hasImage": true
+    },
+    {
+      "slug": "agua-mineral-familias-cheia",
+      "title": "Água mineral e apoio logístico viram prioridade nos bairros atingidos",
+      "sourceName": "3 abr",
+      "hasImage": true
+    },
+    {
+      "slug": "moradores-rotina-cheia",
+      "title": "Mesmo alagados, bairros seguem tentando manter a rotina entre barro e improviso",
+      "sourceName": "4 abr",
+      "hasImage": true
+    },
+    {
+      "slug": "saude-familias-abrigadas",
+      "title": "Atendimento de saúde dentro dos abrigos vira eixo para segurar a crise",
+      "sourceName": "4 abr",
+      "hasImage": true
+    },
+    {
+      "slug": "tenda-saude-cheia-jurua",
+      "title": "Tenda de atendimento vira linha de frente da saúde após inundação de UBSs",
+      "sourceName": "8 abr",
+      "hasImage": true
+    },
+    {
+      "slug": "wanderley-andrade-e-atracao-confirmada-de-cavalgada-em-mancio-lima",
+      "title": "Shows, cavalgadas e conversa local",
+      "sourceName": "Social",
+      "hasImage": true
+    },
+    {
+      "slug": "festa-do-trabalhador-reune-multidao-em-rio-branco-com-show-de-tierry",
+      "title": "Festa do Trabalhador reúne multidão em Rio Branco com show de Tierry",
+      "sourceName": "Agência Acre",
+      "hasImage": false
+    },
+    {
+      "slug": "mais-de-40-mil-pessoas-lotam-praca-publica-para-show-de-joelma-na-festa-do-trabalhador-em-cruzei",
+      "title": "Mais de 40 mil pessoas lotam praça pública para show de Joelma em Cruzeiro do Sul",
+      "sourceName": "Batelão",
+      "hasImage": false
+    },
+    {
+      "slug": "show-da-cantora-joelma-deve-reunir-ate-40-mil-pessoas-nesta-quinta-feira-30-em-cruzeiro-do-sul",
+      "title": "Show da cantora Joelma deve reunir até 40 mil pessoas em Cruzeiro do Sul",
+      "sourceName": "Juruá Comunicação",
+      "hasImage": false
+    },
+    {
+      "slug": "hoje-show-de-joelma-deve-reunir-multidao-em-cruzeiro-do-sul",
+      "title": "Hoje: show de Joelma deve reunir multidão em Cruzeiro do Sul",
+      "sourceName": "Juruá 24 Horas",
+      "hasImage": false
+    },
+    {
+      "slug": "mailza-prestigia-show-de-joelma-e-anuncia-atracao-para-expojurua",
+      "title": "Mailza prestigia show de Joelma e anuncia atração para ExpoJuruá",
+      "sourceName": "ac24horas",
+      "hasImage": false
+    },
+    {
+      "slug": "natanzinho-lima-sera-atracao-da-expoacre-jurua-2026-em-cruzeiro-do-sul",
+      "title": "Natanzinho Lima será atração da Expoacre Juruá 2026 em Cruzeiro do Sul",
+      "sourceName": "Juruá Comunicação",
+      "hasImage": false
+    },
+    {
+      "slug": "influenciador-que-fingiu-a-propria-morte-ora-por-tierry-durante-evento-no-acre",
+      "title": "Influenciador que fingiu a própria morte ora por Tierry durante evento no Acre",
+      "sourceName": "ac24horas",
+      "hasImage": false
+    },
+    {
+      "slug": "festa-do-trabalhador-em-cruzeiro-do-sul-tem-seguranca-reforcada-e-ocorre-sem-registros-graves",
+      "title": "Festa do Trabalhador em Cruzeiro do Sul tem segurança reforçada e ocorre sem registros graves",
+      "sourceName": "Juruá 24 Horas",
+      "hasImage": false
+    },
+    {
+      "slug": "prefeitura-recolhe-12-toneladas-de-lixo-apos-show-da-joelma-em-cruzeiro-do-sul",
+      "title": "Prefeitura recolhe 12 toneladas de lixo após show da Joelma em Cruzeiro do Sul",
+      "sourceName": "ac24horas",
       "hasImage": false
     }
   ],
-  "withoutImageCount": 13
+  "withoutImageCount": 14
 }

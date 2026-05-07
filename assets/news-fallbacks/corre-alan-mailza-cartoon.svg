@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Alan Rick e Mailza correndo em estilo cartoon</title>
+  <desc id="desc">Ilustracao editorial com Alan Rick correndo na frente e Mailza aproximando por tras, em linguagem de charge politica leve.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f7c66a"/>
+      <stop offset=".46" stop-color="#6bb9d7"/>
+      <stop offset="1" stop-color="#27345f"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#4c566b"/>
+      <stop offset="1" stop-color="#222736"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#101522" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="1280" height="720" fill="url(#sky)"/>
+  <path d="M0 520 C210 480 355 548 530 505 C775 444 930 485 1280 420 L1280 720 L0 720 Z" fill="url(#road)"/>
+  <path d="M0 565 C235 532 406 592 615 548 C815 506 1044 534 1280 480" fill="none" stroke="#f8e7a1" stroke-width="10" stroke-dasharray="72 42" opacity=".9"/>
+  <g opacity=".2" fill="#fff">
+    <circle cx="94" cy="108" r="26"/>
+    <circle cx="168" cy="88" r="14"/>
+    <circle cx="1058" cy="120" r="34"/>
+    <circle cx="1138" cy="98" r="20"/>
+  </g>
+  <g transform="translate(165 118)" opacity=".24" fill="#12213a">
+    <rect x="0" y="168" width="92" height="202" rx="6"/>
+    <rect x="114" y="112" width="128" height="258" rx="6"/>
+    <rect x="268" y="138" width="84" height="232" rx="6"/>
+    <rect x="984" y="116" width="92" height="260" rx="6"/>
+  </g>
+  <g filter="url(#shadow)">
+    <ellipse cx="740" cy="628" rx="270" ry="38" fill="#111827" opacity=".28"/>
+    <ellipse cx="490" cy="624" rx="205" ry="30" fill="#111827" opacity=".22"/>
+  </g>
+  <g transform="translate(706 226)" filter="url(#shadow)">
+    <path d="M168 82 C234 94 282 136 301 199 C319 256 303 320 257 359 C216 395 150 395 99 365 C42 331 15 272 28 206 C42 132 91 72 168 82Z" fill="#f7d19b"/>
+    <path d="M44 177 C78 81 162 48 243 79 C276 92 306 119 319 151 C269 124 213 128 176 154 C134 183 111 238 114 301 C69 279 29 234 44 177Z" fill="#8c3d32"/>
+    <circle cx="148" cy="202" r="12" fill="#202638"/>
+    <circle cx="230" cy="200" r="12" fill="#202638"/>
+    <path d="M168 250 C188 268 216 269 238 249" fill="none" stroke="#8f3d37" stroke-width="9" stroke-linecap="round"/>
+    <path d="M122 296 L258 296 L284 447 L92 447 Z" fill="#2f9d67"/>
+    <path d="M116 318 C60 326 20 356 0 421" fill="none" stroke="#f7d19b" stroke-width="31" stroke-linecap="round"/>
+    <path d="M274 322 C326 343 363 383 386 446" fill="none" stroke="#f7d19b" stroke-width="31" stroke-linecap="round"/>
+    <path d="M142 446 L88 592" fill="none" stroke="#243143" stroke-width="40" stroke-linecap="round"/>
+    <path d="M235 446 L315 590" fill="none" stroke="#243143" stroke-width="40" stroke-linecap="round"/>
+    <path d="M57 585 L127 585" stroke="#ffffff" stroke-width="34" stroke-linecap="round"/>
+    <path d="M286 590 L357 590" stroke="#ffffff" stroke-width="34" stroke-linecap="round"/>
+    <text x="180" y="382" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="35" fill="#fff">MAILZA</text>
+    <path d="M-18 420 C40 392 96 388 148 411" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+  </g>
+  <g transform="translate(352 250)" filter="url(#shadow)">
+    <path d="M154 61 C214 72 256 117 267 175 C278 235 250 289 201 313 C154 337 94 323 61 280 C23 232 27 163 62 113 C84 82 119 55 154 61Z" fill="#f2c58b"/>
+    <path d="M63 110 C100 35 201 30 245 98 C196 78 146 90 118 124 C88 159 85 203 101 247 C55 226 35 169 63 110Z" fill="#3d516c"/>
+    <circle cx="129" cy="158" r="11" fill="#1b2233"/>
+    <circle cx="205" cy="160" r="11" fill="#1b2233"/>
+    <path d="M142 211 C162 196 185 196 204 214" fill="none" stroke="#7d302d" stroke-width="8" stroke-linecap="round"/>
+    <path d="M96 260 L234 260 L254 398 L70 398 Z" fill="#315cab"/>
+    <path d="M78 287 C31 307 -3 350 -28 414" fill="none" stroke="#f2c58b" stroke-width="30" stroke-linecap="round"/>
+    <path d="M242 288 C297 296 337 325 374 383" fill="none" stroke="#f2c58b" stroke-width="30" stroke-linecap="round"/>
+    <path d="M111 398 L47 550" fill="none" stroke="#1f2937" stroke-width="39" stroke-linecap="round"/>
+    <path d="M214 398 L282 542" fill="none" stroke="#1f2937" stroke-width="39" stroke-linecap="round"/>
+    <path d="M18 549 L87 549" stroke="#ffffff" stroke-width="33" stroke-linecap="round"/>
+    <path d="M258 545 L328 545" stroke="#ffffff" stroke-width="33" stroke-linecap="round"/>
+    <text x="162" y="344" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="34" fill="#fff">ALAN</text>
+    <path d="M375 380 C425 348 476 341 530 360" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".65"/>
+  </g>
+  <g transform="translate(70 72)">
+    <rect x="0" y="0" width="455" height="162" rx="34" fill="#fff7e9" opacity=".96"/>
+    <text x="34" y="61" font-family="Arial Black, Arial, sans-serif" font-size="47" fill="#111827">Corre Alan!</text>
+    <text x="34" y="115" font-family="Arial Black, Arial, sans-serif" font-size="38" fill="#2f9d67">A Mailza ta chegando</text>
+  </g>
+</svg>

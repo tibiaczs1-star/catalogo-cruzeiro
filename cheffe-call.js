@@ -8,31 +8,90 @@
   const nextSpeakerEl = document.querySelector("#nextSpeaker");
   const markGoodIdeaEl = document.querySelector("#markGoodIdea");
   const opinionsEl = document.querySelector("#opinionsList");
+  const opinionPendingCount = document.querySelector("#opinionPendingCount");
+  const opinionReadyCount = document.querySelector("#opinionReadyCount");
+  const opinionRunningCount = document.querySelector("#opinionRunningCount");
+  const opinionFlowMeta = document.querySelector("#opinionFlowMeta");
+  const runApprovedOpinions = document.querySelector("#runApprovedOpinions");
+  const refreshOpinionFlow = document.querySelector("#refreshOpinionFlow");
+  const opinionFlowSteps = Array.from(document.querySelectorAll("[data-opinion-flow-step]"));
   const speechBubbleEl = document.querySelector("#activeSpeechBubble");
+  const sceneFlowSection = document.querySelector(".cheffe-scene-flow");
   const raisedHandBoard = document.querySelector("#raisedHandBoard");
   const raisedHandList = document.querySelector("#raisedHandList");
   const meetingLogList = document.querySelector("#meetingLogList");
   const callModeBanner = document.querySelector("#callModeBanner");
   const taskQueueList = document.querySelector("#taskQueueList");
+  const ideActionQueueList = document.querySelector("#ideActionQueueList");
+  const reviewQueueList = document.querySelector("#reviewQueueList");
   const agentOfDayEl = document.querySelector("#agentOfDay");
   const agentOfDayMetaEl = document.querySelector("#agentOfDayMeta");
   const agentOfDayAvatar = document.querySelector("#agentOfDayAvatar");
+  const agentCompetitionScoreEl = document.querySelector("#agentCompetitionScore");
+  const agentIntelligenceScoreEl = document.querySelector("#agentIntelligenceScore");
+  const agentExecutionScoreEl = document.querySelector("#agentExecutionScore");
+  const agentImpactScoreEl = document.querySelector("#agentImpactScore");
   const agentNeuralBar = document.querySelector("#agentNeuralBar");
   const agentAwardNote = document.querySelector("#agentAwardNote");
-  const voteAgentOfDay = document.querySelector("#voteAgentOfDay");
   const openAgentFile = document.querySelector("#openAgentFile");
   const fullscreenToggleEl = document.querySelector("#toggleFullscreenMode");
   const hudToggleEl = document.querySelector("#toggleHudMode");
   const lowerDecksToggleEl = document.querySelector("#toggleLowerDecks");
   const commandBarEl = document.querySelector("#cheffeCommandBar");
   const cheffeAccessModal = document.querySelector("#cheffeAccessModal");
+  const cheffeAccessCard = document.querySelector(".cheffe-access-card");
   const quickPasswordInput = document.querySelector("#quickPasswordInput");
   const quickPasswordConfirm = document.querySelector("#quickPasswordConfirm");
   const quickPasswordStatus = document.querySelector("#quickPasswordStatus");
+  const cheffePhotoApproval = document.querySelector("#cheffePhotoApproval");
+  const photoApprovalCounter = document.querySelector("#photoApprovalCounter");
+  const photoApprovalSummary = document.querySelector("#photoApprovalSummary");
+  const photoApprovalProgress = document.querySelector("#photoApprovalProgress");
+  const photoApprovalList = document.querySelector("#photoApprovalList");
+  const photoApprovalImage = document.querySelector("#photoApprovalImage");
+  const photoApprovalImageCaption = document.querySelector("#photoApprovalImageCaption");
+  const photoApprovalTitle = document.querySelector("#photoApprovalTitle");
+  const photoApprovalMeta = document.querySelector("#photoApprovalMeta");
+  const photoApprovalReasons = document.querySelector("#photoApprovalReasons");
+  const photoApprovalFocus = document.querySelector("#photoApprovalFocus");
+  const photoApprovalFocusX = document.querySelector("#photoApprovalFocusX");
+  const photoApprovalFocusY = document.querySelector("#photoApprovalFocusY");
+  const photoApprovalFocusYValue = document.querySelector("#photoApprovalFocusYValue");
+  const photoApprovalImageFit = document.querySelector("#photoApprovalImageFit");
+  const photoApprovalManualAdjustment = document.querySelector("#photoApprovalManualAdjustment");
+  const photoApprovalReplacementInput = document.querySelector("#photoApprovalReplacementInput");
+  const photoApprovalNote = document.querySelector("#photoApprovalNote");
+  const photoApprovalArticle = document.querySelector("#photoApprovalArticle");
+  const photoApprovalPrev = document.querySelector("#photoApprovalPrev");
+  const photoApprovalNext = document.querySelector("#photoApprovalNext");
+  const photoApprovalContinue = document.querySelector("#photoApprovalContinue");
+  const photoApprovalRunRuntime = document.querySelector("#photoApprovalRunRuntime");
+  const photoApprovalRunRuntimeText = document.querySelector("#photoApprovalRunRuntimeText");
+  const photoApprovalDecisionButtons = Array.from(document.querySelectorAll("[data-photo-decision]"));
+  const photoFocusPresetButtons = Array.from(document.querySelectorAll("[data-photo-focus]"));
+  const cheffeActionFeedback = document.querySelector("#cheffeActionFeedback");
+  const cheffeActionFeedbackBadge = document.querySelector("#cheffeActionFeedbackBadge");
+  const cheffeActionFeedbackTitle = document.querySelector("#cheffeActionFeedbackTitle");
+  const cheffeActionFeedbackMessage = document.querySelector("#cheffeActionFeedbackMessage");
+  const cheffeActionFeedbackSteps = document.querySelector("#cheffeActionFeedbackSteps");
+  const cheffeActionFeedbackDetails = document.querySelector("#cheffeActionFeedbackDetails");
+  const cheffeActionFeedbackClose = document.querySelector("#cheffeActionFeedbackClose");
+  const cheffeActionFeedbackHome = document.querySelector("#cheffeActionFeedbackHome");
   const quickInstructionInput = document.querySelector("#quickInstructionInput");
   const focusCommandDetails = document.querySelector("#focusCommandDetails");
   const quickNextSpeaker = document.querySelector("#quickNextSpeaker");
   const quickRefreshAgents = document.querySelector("#quickRefreshAgents");
+  const agentResponsePanel = document.querySelector("#agentResponsePanel");
+  const agentResponseBadge = document.querySelector("#agentResponseBadge");
+  const agentResponseTitle = document.querySelector("#agentResponseTitle");
+  const agentResponseText = document.querySelector("#agentResponseText");
+  const agentResponseSummary = document.querySelector("#agentResponseSummary");
+  const agentResponseResolved = document.querySelector("#agentResponseResolved");
+  const agentResponseEvidence = document.querySelector("#agentResponseEvidence");
+  const agentResponsePending = document.querySelector("#agentResponsePending");
+  const agentResponseOrder = document.querySelector("#agentResponseOrder");
+  const agentResponseList = document.querySelector("#agentResponseList");
+  const agentResponseNext = document.querySelector("#agentResponseNext");
   const officeOfDayEl = document.querySelector("#officeOfDay");
   const officeOfDayMetaEl = document.querySelector("#officeOfDayMeta");
   const actionOfDayEl = document.querySelector("#actionOfDay");
@@ -70,6 +129,8 @@
   const promptModeSelect = document.querySelector("#promptModeSelect");
   const promptOfficeSelect = document.querySelector("#promptOfficeSelect");
   const promptAgentSelect = document.querySelector("#promptAgentSelect");
+  const promptAdjustmentSelect = document.querySelector("#promptAdjustmentSelect");
+  const promptCommandCenter = document.querySelector(".prompt-command-center");
   const promptPreviewTitle = document.querySelector("#promptPreviewTitle");
   const promptPreviewBadge = document.querySelector("#promptPreviewBadge");
   const promptPreviewText = document.querySelector("#promptPreviewText");
@@ -77,11 +138,99 @@
   const loadPromptToInstruction = document.querySelector("#loadPromptToInstruction");
   const loadPromptToTerminal = document.querySelector("#loadPromptToTerminal");
   const copyPromptText = document.querySelector("#copyPromptText");
+  const decisionDesk = document.querySelector(".decision-desk");
+  const decisionOfficeSelect = document.querySelector("#decisionOfficeSelect");
+  const decisionAgentSelect = document.querySelector("#decisionAgentSelect");
+  const decisionActionSelect = document.querySelector("#decisionActionSelect");
+  const decisionDeskMeta = document.querySelector("#decisionDeskMeta");
+  const decisionContextTitle = document.querySelector("#decisionContextTitle");
+  const decisionContextPreview = document.querySelector("#decisionContextPreview");
+  const decisionOpenComposer = document.querySelector("#decisionOpenComposer");
+  const decisionUseActiveIdea = document.querySelector("#decisionUseActiveIdea");
+  const decisionComposer = document.querySelector("#decisionComposer");
+  const decisionComposerBadge = document.querySelector("#decisionComposerBadge");
+  const decisionComposerTitle = document.querySelector("#decisionComposerTitle");
+  const decisionComposerClose = document.querySelector("#decisionComposerClose");
+  const decisionComposerCancel = document.querySelector("#decisionComposerCancel");
+  const decisionComposerSubmit = document.querySelector("#decisionComposerSubmit");
+  const decisionComposerText = document.querySelector("#decisionComposerText");
+  const decisionComposerMeta = document.querySelector("#decisionComposerMeta");
+  const decisionComposerHint = document.querySelector("#decisionComposerHint");
+  const decisionComposerStatus = document.querySelector("#decisionComposerStatus");
+  const decisionResolutionActions = document.querySelector("#decisionResolutionActions");
+  const decisionResolutionMeta = document.querySelector("#decisionResolutionMeta");
+  const decisionAcceptOrder = document.querySelector("#decisionAcceptOrder");
+  const decisionImplementOrder = document.querySelector("#decisionImplementOrder");
+  const decisionReviseOrder = document.querySelector("#decisionReviseOrder");
+  const directCommandDesk = document.querySelector(".direct-command-desk");
+  const directCommandMeta = document.querySelector("#directCommandMeta");
+  const directOrderText = document.querySelector("#directOrderText");
+  const directOrderUrl = document.querySelector("#directOrderUrl");
+  const directOrderMode = document.querySelector("#directOrderMode");
+  const pullAgentIdeasToDirectOrder = document.querySelector("#pullAgentIdeasToDirectOrder");
+  const directOrderAnalyze = document.querySelector("#directOrderAnalyze");
+  const directOrderRunAgents = document.querySelector("#directOrderRunAgents");
+  const directOrderRunQueue = document.querySelector("#directOrderRunQueue");
+  const directOrderStatus = document.querySelector("#directOrderStatus");
+  const executionControlPanel = document.querySelector("#executionControlPanel");
+  const executionControlBadge = document.querySelector("#executionControlBadge");
+  const executionControlTitle = document.querySelector("#executionControlTitle");
+  const executionControlText = document.querySelector("#executionControlText");
+  const executionControlResolved = document.querySelector("#executionControlResolved");
+  const executionControlEvidence = document.querySelector("#executionControlEvidence");
+  const executionControlPending = document.querySelector("#executionControlPending");
+  const executionControlOrder = document.querySelector("#executionControlOrder");
+  const executionControlLog = document.querySelector("#executionControlLog");
   const callReportSummary = document.querySelector("#callReportSummary");
   const callReportQueue = document.querySelector("#callReportQueue");
   const callReportOffices = document.querySelector("#callReportOffices");
   const callReportActions = document.querySelector("#callReportActions");
   const callReportLogs = document.querySelector("#callReportLogs");
+  const sceneTimeline = document.querySelector("#cheffeSceneTimeline");
+  const sceneBadge = document.querySelector("#cheffeSceneBadge");
+  const sceneTitle = document.querySelector("#cheffeSceneTitle");
+  const sceneSummary = document.querySelector("#cheffeSceneSummary");
+  const sceneMetrics = document.querySelector("#cheffeSceneMetrics");
+  const scenePrev = document.querySelector("#cheffeScenePrev");
+  const sceneNext = document.querySelector("#cheffeSceneNext");
+  const sceneFinish = document.querySelector("#cheffeSceneFinish");
+  const sceneFlowMeta = document.querySelector("#cheffeSceneFlowMeta");
+  const cheffeApprovalScene = document.querySelector("#cheffeApprovalScene");
+  const editorialApprovalStatus = document.querySelector("#editorialApprovalStatus");
+  const editorialApprovalQueueEl = document.querySelector("#editorialApprovalQueue");
+  const editorialApprovalRefresh = document.querySelector("#editorialApprovalRefresh");
+  const editorialApprovalImage = document.querySelector("#editorialApprovalImage");
+  const editorialApprovalPreviewMeta = document.querySelector("#editorialApprovalPreviewMeta");
+  const editorialApprovalPreviewSource = document.querySelector("#editorialApprovalPreviewSource");
+  const editorialApprovalPreviewTitle = document.querySelector("#editorialApprovalPreviewTitle");
+  const editorialApprovalPreviewSummary = document.querySelector("#editorialApprovalPreviewSummary");
+  const editorialApprovalArticleLink = document.querySelector("#editorialApprovalArticleLink");
+  const editorialApprovalTitleInput = document.querySelector("#editorialApprovalTitleInput");
+  const editorialApprovalSummaryInput = document.querySelector("#editorialApprovalSummaryInput");
+  const editorialApprovalBodyInput = document.querySelector("#editorialApprovalBodyInput");
+  const editorialApprovalSourceNameInput = document.querySelector("#editorialApprovalSourceNameInput");
+  const editorialApprovalSourceUrlInput = document.querySelector("#editorialApprovalSourceUrlInput");
+  const editorialApprovalImageInput = document.querySelector("#editorialApprovalImageInput");
+  const editorialApprovalFocusInput = document.querySelector("#editorialApprovalFocusInput");
+  const editorialApprovalFocusX = document.querySelector("#editorialApprovalFocusX");
+  const editorialApprovalFocusY = document.querySelector("#editorialApprovalFocusY");
+  const editorialApprovalFocusYValue = document.querySelector("#editorialApprovalFocusYValue");
+  const editorialApprovalImageFit = document.querySelector("#editorialApprovalImageFit");
+  const editorialApprovalImageCreditInput = document.querySelector("#editorialApprovalImageCreditInput");
+  const editorialApprovalNoteInput = document.querySelector("#editorialApprovalNoteInput");
+  const editorialApprovalSuggestions = document.querySelector("#editorialApprovalSuggestions");
+  const editorialApprovalProof = document.querySelector("#editorialApprovalProof");
+  const editorialApprovalActionButtons = Array.from(document.querySelectorAll("[data-editorial-approval-action]"));
+  const editorialFocusPresetButtons = Array.from(document.querySelectorAll("[data-editorial-focus-preset]"));
+  const editorialApprovalGatedNodes = Array.from(
+    document.querySelectorAll(
+      ".cheffe-scene-flow, #cheffeDailyScene, #cheffeLowerDecks, #cheffeOpinionsScene, #cheffeReportsScene, #cheffeWebsiteNumbers, #cheffeEditorialHealth, #cheffeAgentNumbers, #agentResponsePanel"
+    )
+  );
+  const websiteNumbersGrid = document.querySelector("#cheffeWebsiteNumbersGrid");
+  const editorialHealthGrid = document.querySelector("#cheffeEditorialHealthGrid");
+  const editorialHealthQueueList = document.querySelector("#cheffeEditorialHealthQueue");
+  const agentNumbersGrid = document.querySelector("#cheffeAgentNumbersGrid");
   const realFlowSteps = Array.from(document.querySelectorAll("[data-flow-step]"));
 
   const fallbackAgents = [
@@ -104,14 +253,43 @@
   let activeSpeakerIndex = 0;
   let meetingLogs = [];
   let taskQueue = [];
+  let ideActionQueue = [];
+  let editorialHealthActions = [];
+  let reviewQueue = null;
   let raisedHandName = "";
   let raisedHandQueue = [];
   let promptConsoleData = null;
-  let activePromptPayload = { title: "Prompt supremo", badge: "Cheffe Call", text: "" };
+  let activePromptPayload = { title: "Prompt Mestre", badge: "Cheffe Call", text: "" };
+  let pendingAdjustmentContext = null;
   let lowerDecksOpen = false;
   let currentMeetingSessionId = "";
   let latestCallPayload = null;
   let cheffeAdminPassword = window.sessionStorage.getItem("cheffeCallFullAdminPassword") || "";
+  let photoApprovalQueue = [];
+  let photoApprovalIndex = 0;
+  let photoApprovalBusy = false;
+  let editorialApprovalPayload = null;
+  let editorialApprovalQueue = [];
+  let editorialApprovalIndex = 0;
+  let editorialApprovalBusy = false;
+  let editorialApprovalGateActive = false;
+  let actionFeedbackTimer = 0;
+  let latestOpinionFlow = [];
+  let decisionComposerSeed = null;
+  let latestDecisionOrder = null;
+  let pendingDecisionResolution = null;
+  let latestDirectOrder = null;
+  let meetingScenes = [];
+  let activeSceneIndex = Math.max(0, Number(window.sessionStorage.getItem("cheffeCallActiveScene") || 0) || 0);
+  const completedScenes = new Set();
+
+  try {
+    JSON.parse(window.sessionStorage.getItem("cheffeCallCompletedScenes") || "[]").forEach((sceneId) => {
+      if (sceneId) completedScenes.add(String(sceneId));
+    });
+  } catch (_error) {
+    window.sessionStorage.removeItem("cheffeCallCompletedScenes");
+  }
 
   function rectToPercent(rect, rootRect) {
     if (!rect || !rootRect || !rootRect.width || !rootRect.height) return null;
@@ -333,13 +511,589 @@
     statusEl.style.color = tone === "bad" ? "var(--call-red)" : tone === "ok" ? "var(--call-green)" : "";
   }
 
+  function setDirectOrderStatus(message, tone = "") {
+    if (!directOrderStatus) return;
+    directOrderStatus.textContent = message;
+    directOrderStatus.dataset.tone = tone;
+  }
+
+  function setExecutionControl(options = {}) {
+    if (!executionControlPanel) return;
+    const summary = options.summary || {};
+    executionControlPanel.dataset.state = options.tone || options.state || "idle";
+    if (executionControlBadge) executionControlBadge.textContent = options.badge || "Controle";
+    if (executionControlTitle) executionControlTitle.textContent = options.title || "Aguardando comando real";
+    if (executionControlText) {
+      executionControlText.textContent =
+        options.text || "A ordem direta, a runtime e a fila deixam o estado aqui, mesmo se o popup for fechado.";
+    }
+    if (executionControlResolved) executionControlResolved.textContent = summary.resolved || "Nada executado";
+    if (executionControlEvidence) executionControlEvidence.textContent = summary.evidence || "Sem prova ainda";
+    if (executionControlPending) executionControlPending.textContent = summary.pending || "Aguardando ordem";
+    if (executionControlOrder) executionControlOrder.textContent = summary.order || "Nenhuma";
+    if (executionControlLog) {
+      executionControlLog.textContent = String(options.log || "controle pronto").trim() || "controle pronto";
+    }
+  }
+
+  function normalizeFeedbackState(state) {
+    const value = String(state || "pending").toLowerCase();
+    if (value === "ok" || value === "success" || value === "complete" || value === "completed") return "done";
+    if (value === "error" || value === "fail" || value === "failed") return "bad";
+    return value;
+  }
+
+  function setAgentResponse(options = {}) {
+    if (!agentResponsePanel) return;
+    const items = Array.isArray(options.items) ? options.items : [];
+    const summary = options.summary && typeof options.summary === "object" ? options.summary : null;
+    agentResponsePanel.dataset.tone = options.tone || "idle";
+    if (agentResponseBadge) agentResponseBadge.textContent = options.badge || "Resposta dos agentes";
+    if (agentResponseTitle) agentResponseTitle.textContent = options.title || "Aguardando sua ordem";
+    if (agentResponseText) {
+      agentResponseText.textContent =
+        options.text || "A Cheffe Call vai registrar aqui o recebimento, a resposta dos agentes e o próximo passo.";
+    }
+    if (agentResponseNext) {
+      agentResponseNext.textContent = options.next || "Abra uma rodada ou escolha uma ação em um card.";
+    }
+    if (agentResponseSummary) {
+      agentResponseSummary.hidden = !summary;
+      if (summary) {
+        if (agentResponseResolved) agentResponseResolved.textContent = summary.resolved || "Nada confirmado ainda.";
+        if (agentResponseEvidence) agentResponseEvidence.textContent = summary.evidence || "Sem prova registrada.";
+        if (agentResponsePending) agentResponsePending.textContent = summary.pending || "Aguardando próxima ação.";
+        if (agentResponseOrder) agentResponseOrder.textContent = summary.order || "Nenhuma ordem real gravada.";
+      }
+    }
+    if (agentResponseList) {
+      agentResponseList.innerHTML = items.length
+        ? items
+            .map((item) => {
+              const data = typeof item === "object" ? item : { text: String(item || "") };
+              return `
+                <li data-state="${escapeHtml(normalizeFeedbackState(data.state || "pending"))}">
+                  <span>${escapeHtml(data.label || "resposta")}</span>
+                  <strong>${escapeHtml(data.agent || data.title || "Cheffe Call")}</strong>
+                  <p>${escapeHtml(data.text || "")}</p>
+                </li>
+              `;
+            })
+            .join("")
+        : `
+          <li data-state="pending">
+            <span>aguardando</span>
+            <strong>Cheffe Call</strong>
+            <p>Nenhuma resposta nova registrada ainda.</p>
+          </li>
+        `;
+    }
+    if (!options.decisionActions) {
+      hideDecisionResolutionActions(true);
+    }
+  }
+
+  function setDecisionResolutionBusy(isBusy) {
+    [decisionAcceptOrder, decisionImplementOrder, decisionReviseOrder].forEach((button) => {
+      if (button) button.disabled = Boolean(isBusy);
+    });
+  }
+
+  function hideDecisionResolutionActions(clear = false) {
+    if (clear) pendingDecisionResolution = null;
+    if (decisionResolutionActions) decisionResolutionActions.hidden = true;
+    if (decisionResolutionMeta) {
+      decisionResolutionMeta.textContent = "Analise pronta. Escolha se isso vira ordem real.";
+    }
+    setDecisionResolutionBusy(false);
+  }
+
+  function showDecisionResolutionActions(decision) {
+    if (!decisionResolutionActions || !decision) return;
+    pendingDecisionResolution = decision;
+    decisionResolutionActions.hidden = false;
+    const selection = decision.selection || {};
+    const guide = selection.guide || {};
+    const accepted = Boolean(decision.acceptedAt);
+    if (decisionResolutionMeta) {
+      decisionResolutionMeta.textContent = accepted
+        ? "Ordem real aceita e registrada. Agora você pode implementar ou ajustar antes de executar."
+        : "Resposta analisada. Nada foi implementado ainda: escolha aceitar como ordem real, implementar agora ou ajustar o contexto.";
+    }
+    if (decisionAcceptOrder) {
+      decisionAcceptOrder.textContent =
+        guide.value === "task" || guide.value === "study" ? "Criar tarefa real" : "Aceitar como ordem real";
+      decisionAcceptOrder.disabled = accepted;
+    }
+    if (decisionImplementOrder) {
+      decisionImplementOrder.textContent = accepted ? "Implementar ordem aceita" : "Implementar agora";
+      decisionImplementOrder.disabled = false;
+    }
+    if (decisionReviseOrder) {
+      decisionReviseOrder.disabled = false;
+    }
+  }
+
   function setPasswordStatus(message, tone) {
     if (!quickPasswordStatus) return;
     quickPasswordStatus.textContent = message;
     quickPasswordStatus.dataset.tone = tone || "";
   }
 
+  function renderActionFeedbackSteps(steps = []) {
+    if (!cheffeActionFeedbackSteps) return;
+    cheffeActionFeedbackSteps.innerHTML = "";
+    steps.forEach((step) => {
+      const item = document.createElement("li");
+      const state = normalizeFeedbackState(typeof step === "object" ? step.state || "pending" : "pending");
+      item.dataset.state = state;
+      item.textContent = typeof step === "object" ? step.label || "" : String(step || "");
+      cheffeActionFeedbackSteps.append(item);
+    });
+  }
+
+  function setActionFeedback(options = {}) {
+    if (!cheffeActionFeedback) return;
+    window.clearTimeout(actionFeedbackTimer);
+    const tone = options.tone || "pending";
+    cheffeActionFeedback.hidden = false;
+    cheffeActionFeedback.dataset.tone = tone;
+    cheffeActionFeedback.classList.add("is-open");
+    if (cheffeActionFeedbackBadge) cheffeActionFeedbackBadge.textContent = options.badge || "Runtime";
+    if (cheffeActionFeedbackTitle) cheffeActionFeedbackTitle.textContent = options.title || "Processando ação";
+    if (cheffeActionFeedbackMessage) {
+      cheffeActionFeedbackMessage.textContent = options.message || "A Cheffe Call está processando a solicitação.";
+    }
+    renderActionFeedbackSteps(options.steps || []);
+    if (cheffeActionFeedbackDetails) {
+      const details = String(options.details || "").trim();
+      cheffeActionFeedbackDetails.textContent = details;
+      cheffeActionFeedbackDetails.hidden = !details;
+    }
+    if (cheffeActionFeedbackHome) {
+      cheffeActionFeedbackHome.hidden = !options.home;
+    }
+    cheffeActionFeedbackClose?.toggleAttribute("hidden", options.closable === false);
+    if (options.autoCloseMs && options.autoClose === true) {
+      actionFeedbackTimer = window.setTimeout(() => closeActionFeedback(), Number(options.autoCloseMs) || 2200);
+    }
+  }
+
+  function surfaceAutoExecution(payload = {}, orderText = "") {
+    const proof = payload?.actionProof?.autoExecution || payload?.proof?.autoExecution || null;
+    if (!proof) return;
+    const blocked = proof.status === "blocked";
+    const executed = proof.status === "executed";
+    const ideAction = proof.ideAction || {};
+    const deployProof = proof.deployProof || {};
+    const missing = proof.missingRequirements || deployProof.missingRequirements || ideAction.missingRequirements || [];
+    const details = [
+      proof.summary || "",
+      proof.blockedReason || deployProof.blockedReason || ideAction.reason || "",
+      proof.reasonCode || deployProof.reasonCode || ideAction.reasonCode ? `codigo: ${proof.reasonCode || deployProof.reasonCode || ideAction.reasonCode}` : "",
+      missing.length ? `faltando:\n${missing.map((item) => `- ${item}`).join("\n")}` : "",
+      ideAction.suggestedIdeCommand ? `IDE:\n${ideAction.suggestedIdeCommand}` : "",
+      proof.ideQueueFile ? `fila IDE: ${proof.ideQueueFile}` : ""
+    ].filter(Boolean).join("\n\n");
+    setExecutionControl({
+      badge: executed ? "Autoexecução" : blocked ? "Aguardando IDE" : "Autoexecução",
+      title: executed ? "Ordem executada automaticamente" : "Ordem separada para o IDE",
+      text: executed
+        ? "A Cheffe executou a ordem suportada e registrou prova."
+        : "A Cheffe não marcou como feito: separou motivo, faltas e comando sugerido para rodar aqui.",
+      tone: executed ? "ok" : "bad",
+      summary: {
+        resolved: executed ? "Executado com prova." : "Não executado online.",
+        evidence: proof.summary || "Sem execução online.",
+        pending: executed ? "Validar efeito final quando for publicação." : ideAction.suggestedIdeCommand || "Rodar no IDE.",
+        order: summarizeOneLine(orderText || proof.title || ideAction.title || "Ordem Cheffe Call", "Ordem Cheffe Call")
+      },
+      log: details
+    });
+    setActionFeedback({
+      badge: executed ? "Executado" : "IDE",
+      title: executed ? "Autoexecução concluída" : "Ação aguardando comando do IDE",
+      message: proof.summary || ideAction.reason || "A Cheffe devolveu o bloqueio e separou a ação.",
+      tone: executed ? "ok" : "bad",
+      closable: true,
+      steps: [
+        { label: "Ordem recebida", state: "done" },
+        { label: executed ? "Executor rodou" : "Deploy/comando bloqueado", state: executed ? "done" : "bad" },
+        { label: executed ? "Prova registrada" : "Fila Aguardando IDE criada", state: executed ? "done" : "running" }
+      ],
+      details
+    });
+  }
+
+  function closeActionFeedback() {
+    if (!cheffeActionFeedback) return;
+    window.clearTimeout(actionFeedbackTimer);
+    cheffeActionFeedback.classList.remove("is-open");
+    cheffeActionFeedback.hidden = true;
+  }
+
+  function formatFeedbackTime(value = "") {
+    const date = new Date(value);
+    if (!Number.isFinite(date.getTime())) return String(value || "");
+    return date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function buildRuntimeFeedbackDetails(payload = {}) {
+    payload = payload || {};
+    const runtime = payload.runtime || payload.runtimeSummary || {};
+    const runtimeSummary = runtime.summary || runtime;
+    const publicSummary = payload.summary || {};
+    const imageApprovals = runtime.imageApprovals || {};
+    const appliedCount = [
+      runtimeSummary.imageApprovalsApplied,
+      imageApprovals.applied,
+      publicSummary.imageApprovalsApplied
+    ].find((value) => Number.isFinite(Number(value)));
+    const sentToAgentsCount = [
+      runtimeSummary.imageApprovalsSentToAgents,
+      imageApprovals.sentToAgents,
+      publicSummary.imageApprovalsSentToAgents
+    ].find((value) => Number.isFinite(Number(value)));
+    const lines = [
+      publicSummary.totalAgents ? `${publicSummary.totalAgents} agentes visíveis` : "",
+      publicSummary.averageAutonomy ? `Autonomia média ${publicSummary.averageAutonomy}%` : "",
+      Number.isFinite(Number(appliedCount)) ? `Foto/foco aplicado: ${appliedCount}` : "",
+      Number.isFinite(Number(sentToAgentsCount)) ? `Foto/foco para refazer: ${sentToAgentsCount}` : "",
+      (payload.runGeneratedAt || publicSummary.lastRunAt)
+        ? `Última runtime: ${formatFeedbackTime(payload.runGeneratedAt || publicSummary.lastRunAt)}`
+        : ""
+    ];
+    return lines.filter(Boolean).join("\n");
+  }
+
+  function firstFiniteNumber(values = []) {
+    const found = values.find((value) => Number.isFinite(Number(value)));
+    return found === undefined ? null : Number(found);
+  }
+
+  function getListCount(value) {
+    if (Array.isArray(value)) return value.length;
+    if (value && typeof value === "object") return Object.keys(value).length;
+    return 0;
+  }
+
+  function firstText(values = []) {
+    const found = values.find((value) => String(value || "").trim());
+    return found === undefined ? "" : String(found || "").trim();
+  }
+
+  function compactProofList(values = [], limit = 6) {
+    return values
+      .map((value) => String(value || "").trim())
+      .filter(Boolean)
+      .slice(0, limit);
+  }
+
+  function getRuntimeEvidence(payload = {}) {
+    payload = payload || {};
+    const runtime = payload.runtime || payload.runtimeSummary || {};
+    const runtimeSummary = runtime.summary || runtime;
+    const publicSummary = payload.summary || {};
+    const feedback = payload.feedback || {};
+    const proof = payload.proof || payload.executionProof || runtime.executionProof || {};
+    const proofApplication = proof.application || {};
+    const ecosystemStudy = proof.ecosystemStudy || payload.ecosystemStudy || runtime.ecosystemStudy || {};
+    const executionSummary = payload.executionSummary || runtime.executionSummary || {};
+    const imageApprovals = runtime.imageApprovals || {};
+    const generatedAt = firstText([
+      proof.generatedAt,
+      payload.generatedAt,
+      payload.runGeneratedAt,
+      publicSummary.generatedAt,
+      publicSummary.lastRunAt,
+      runtimeSummary.generatedAt
+    ]);
+    const reportJson = firstText([proof.reportJson, runtimeSummary.reportJson, payload.reportJson]);
+    const reportMd = firstText([proof.reportMd, runtimeSummary.reportMd, payload.reportMd]);
+    const registry = firstText([proof.registry, runtimeSummary.registry, payload.registry]);
+    const ecosystemStudyFile = firstText([
+      proof.ecosystemStudyFile,
+      ecosystemStudy.proof?.file,
+      payload.ecosystemStudyFile
+    ]);
+    const ecosystemCycle = firstFiniteNumber([
+      ecosystemStudy.learningCycle,
+      proof.ecosystemLearningCycle,
+      payload.ecosystemLearningCycle
+    ]);
+    const ecosystemFocus = Array.isArray(ecosystemStudy.focusModules)
+      ? ecosystemStudy.focusModules
+      : Array.isArray(proof.ecosystemFocus)
+        ? proof.ecosystemFocus.map((area) => ({ area }))
+        : [];
+    const ecosystemSignals = Array.isArray(ecosystemStudy.currentSignals)
+      ? ecosystemStudy.currentSignals
+      : Array.isArray(ecosystemStudy.impactGate?.currentSignals)
+        ? ecosystemStudy.impactGate.currentSignals
+        : [];
+    const endpoint = firstText([proof.endpoint, payload.endpoint, payload.ok ? "POST /api/real-agents/run" : ""]);
+    const httpStatus = firstText([proof.httpStatus, proof.status, payload.httpStatus, payload.ok ? "201" : ""]);
+    const deliveredAgents = firstFiniteNumber([
+      proof.deliveredAgents,
+      publicSummary.deliveredAgents,
+      runtimeSummary.deliveredAgents,
+      payload.deliveredAgents
+    ]);
+    const totalAgents = firstFiniteNumber([
+      proof.totalAgents,
+      publicSummary.totalAgents,
+      runtimeSummary.totalAgents,
+      payload.totalAgents
+    ]);
+    const failedAgents = firstFiniteNumber([
+      proof.failedAgents,
+      publicSummary.failedAgents,
+      runtimeSummary.failedAgents,
+      payload.failedAgents
+    ]);
+    const queueItems = firstFiniteNumber([
+      proof.queueItems,
+      publicSummary.activeQueue,
+      payload.queueItems,
+      getListCount(payload.queue),
+      getListCount(runtime.queue)
+    ]);
+    const ordersReturned = firstFiniteNumber([
+      proof.ordersReturned,
+      proof.ordersAfter,
+      getListCount(payload.orders),
+      getListCount(runtime.orders)
+    ]);
+    const orderDelta = firstFiniteNumber([proof.orderDelta, payload.orderDelta]);
+    const officeOrderId = firstText([proof.officeOrderId, proof.orderId, payload.officeOrderId]);
+    const proofFiles = compactProofList(
+      Array.isArray(proof.files)
+        ? proof.files.map((file) => file?.path || file?.label || file)
+        : []
+    );
+    const changedFilesCount = Math.max(
+      getListCount(proof.changedFiles),
+      getListCount(payload.changedFiles),
+      getListCount(runtime.changedFiles),
+      getListCount(publicSummary.changedFiles),
+      getListCount(feedback.changedFiles)
+    );
+    const artifactsCount = Math.max(
+      getListCount(proof.artifacts),
+      getListCount(payload.artifacts),
+      getListCount(runtime.artifacts),
+      getListCount(publicSummary.artifacts),
+      getListCount(feedback.artifacts)
+    );
+    const deliveredCount = firstFiniteNumber([
+      executionSummary.delivered,
+      runtimeSummary.delivered,
+      publicSummary.delivered,
+      feedback.delivered,
+      payload.delivered
+    ]);
+    const generatedCount = firstFiniteNumber([
+      runtimeSummary.generatedArticles,
+      publicSummary.generatedArticles,
+      feedback.generatedArticles,
+      runtimeSummary.articlesGenerated,
+      publicSummary.articlesGenerated
+    ]);
+    const publishedCount = firstFiniteNumber([
+      runtimeSummary.publishedArticles,
+      publicSummary.publishedArticles,
+      feedback.publishedArticles,
+      runtimeSummary.published,
+      publicSummary.published
+    ]);
+    const appliedFocusCount = firstFiniteNumber([
+      runtimeSummary.imageApprovalsApplied,
+      imageApprovals.applied,
+      publicSummary.imageApprovalsApplied,
+      feedback.imageApprovalsApplied,
+      proofApplication.imageApprovalsApplied
+    ]);
+    const executionSignals = [
+      endpoint ? `${endpoint}${httpStatus ? ` HTTP ${httpStatus}` : ""}` : "",
+      reportJson ? `relatório JSON: ${reportJson}` : "",
+      reportMd ? `relatório MD: ${reportMd}` : "",
+      registry ? `registro de agentes: ${registry}` : "",
+      ecosystemStudyFile ? `estudo do ecossistema: ${ecosystemStudyFile}` : "",
+      ecosystemCycle ? `ciclo de aprendizado ${ecosystemCycle}` : "",
+      ecosystemFocus.length
+        ? `módulos estudados: ${ecosystemFocus.map((item) => item.area || item).filter(Boolean).slice(0, 4).join(", ")}`
+        : "",
+      ecosystemSignals.length ? `sinais de impacto: ${ecosystemSignals.slice(0, 3).join("; ")}` : "",
+      generatedAt ? `runtime gerada em ${formatFeedbackTime(generatedAt) || generatedAt}` : "",
+      deliveredAgents > 0 ? `${deliveredAgents}${totalAgents ? `/${totalAgents}` : ""} agentes entregaram` : "",
+      failedAgents > 0 ? `${failedAgents} agente${failedAgents === 1 ? "" : "s"} falharam` : "",
+      queueItems > 0 ? `${queueItems} item${queueItems === 1 ? "" : "s"} na fila real` : "",
+      ordersReturned > 0 ? `${ordersReturned} ordem${ordersReturned === 1 ? "" : "s"} retornada${ordersReturned === 1 ? "" : "s"}` : "",
+      orderDelta > 0 ? `${orderDelta} ordem${orderDelta === 1 ? "" : "s"} gravada${orderDelta === 1 ? "" : "s"} em office-orders.json` : "",
+      officeOrderId ? `ordem registrada: ${officeOrderId}` : "",
+      ...proofFiles
+    ].filter(Boolean);
+    const applicationSignals = [
+      changedFilesCount > 0 ? `${changedFilesCount} arquivo${changedFilesCount === 1 ? "" : "s"} de aplicação alterado${changedFilesCount === 1 ? "" : "s"}` : "",
+      artifactsCount > 0 ? `${artifactsCount} artefato${artifactsCount === 1 ? "" : "s"} retornado${artifactsCount === 1 ? "" : "s"}` : "",
+      deliveredCount > 0 ? `${deliveredCount} entrega${deliveredCount === 1 ? "" : "s"} operacional${deliveredCount === 1 ? "" : "s"} registrada${deliveredCount === 1 ? "" : "s"}` : "",
+      generatedCount > 0 ? `${generatedCount} artigo${generatedCount === 1 ? "" : "s"} gerado${generatedCount === 1 ? "" : "s"}` : "",
+      publishedCount > 0 ? `${publishedCount} ${publishedCount === 1 ? "publicação confirmada" : "publicações confirmadas"}` : "",
+      appliedFocusCount > 0 ? `foto/foco aplicado: ${appliedFocusCount}` : ""
+    ].filter(Boolean);
+    const hasExecutionProof = executionSignals.length > 0;
+    const hasApplicationProof = applicationSignals.length > 0;
+    const evidenceLines = [
+      hasExecutionProof ? `Execução provada: ${executionSignals.slice(0, 5).join("; ")}` : "",
+      hasApplicationProof
+        ? `Aplicação provada: ${applicationSignals.join("; ")}`
+        : hasExecutionProof
+          ? "Aplicação/publicação: ainda não provada no alvo final."
+          : ""
+    ].filter(Boolean);
+    return {
+      hasEvidence: hasExecutionProof || hasApplicationProof,
+      hasExecutionProof,
+      hasApplicationProof,
+      proofLevel: hasApplicationProof ? "application" : hasExecutionProof ? "execution" : "none",
+      isResolved: hasApplicationProof,
+      evidence: evidenceLines.length
+        ? evidenceLines.join(" ")
+        : "Runtime concluiu, mas não retornou endpoint, relatório, arquivo, contador ou aplicação verificável.",
+      pending: hasApplicationProof
+        ? "Conferir visualmente a tela, dado ou rotina afetada antes de encerrar."
+        : hasExecutionProof
+          ? "Falta provar mudança aplicada/publicada no alvo final. Peça validação por URL, arquivo ou tela específica."
+          : "Reenviar com alvo mais específico ou pedir validação explícita de URL/arquivo/tela.",
+      signals: hasApplicationProof ? applicationSignals : executionSignals,
+      executionSignals,
+      applicationSignals,
+      ecosystemStudy
+    };
+  }
+
+  function getRuntimeProofUi(outcome = {}) {
+    if (outcome?.hasApplicationProof) {
+      return {
+        badge: "Aplicação provada",
+        shortBadge: "Com aplicação",
+        responseBadge: "Ordem aplicada",
+        title: "Runtime provou aplicação no alvo",
+        responseTitle: "Execução aplicada com prova",
+        actionTitle: "Aplicação confirmada",
+        text: "A runtime devolveu sinal de alteração, artefato, publicação ou aplicação no alvo final.",
+        state: "done",
+        tone: "ok",
+        stepLabel: "Aplicação provada",
+        itemLabel: "aplicação",
+        terminalStatus: "status: aplicação provada"
+      };
+    }
+    if (outcome?.hasExecutionProof) {
+      return {
+        badge: "Execução provada",
+        shortBadge: "Aplicação pendente",
+        responseBadge: "Execução provada",
+        title: "Runtime provou execução, não aplicação",
+        responseTitle: "Execução concluída; aplicação pendente",
+        actionTitle: "Execução provada",
+        text: "A runtime retornou endpoint, relatório, arquivo ou contador, mas ainda falta provar mudança aplicada/publicada no alvo final.",
+        state: "pending",
+        tone: "pending",
+        stepLabel: "Aplicação pendente",
+        itemLabel: "aplicação pendente",
+        terminalStatus: "status: execução provada; aplicação pendente"
+      };
+    }
+    return {
+      badge: "Sem prova real",
+      shortBadge: "Pendente",
+      responseBadge: "Runtime rodada",
+      title: "Runtime sem prova verificável",
+      responseTitle: "Runtime sem prova real",
+      actionTitle: "Runtime sem prova",
+      text: "A runtime foi chamada, mas não retornou endpoint, relatório, arquivo, contador ou aplicação comprovada.",
+      state: "pending",
+      tone: "pending",
+      stepLabel: "Prova pendente",
+      itemLabel: "pendente",
+      terminalStatus: "status: prova pendente"
+    };
+  }
+
+  function buildRuntimeOutcomeSummary(payload = {}, orderText = "", scopeLabel = "ordem") {
+    const outcome = getRuntimeEvidence(payload);
+    return {
+      resolved: outcome.hasApplicationProof
+        ? `Runtime da ${scopeLabel} provou aplicação no alvo.`
+        : outcome.hasExecutionProof
+          ? `Runtime da ${scopeLabel} tem prova real de execução, mas não de aplicação/publicação.`
+          : `Runtime da ${scopeLabel} foi rodada, mas ainda não provou execução verificável.`,
+      evidence: outcome.evidence,
+      pending: outcome.pending,
+      order: summarizeOneLine(orderText, "Ordem enviada aos agentes.")
+    };
+  }
+
+  function getRuntimeOutcomeTone(payload = {}) {
+    return getRuntimeProofUi(getRuntimeEvidence(payload)).tone;
+  }
+
+  function buildSessionProofSummary(payload = {}, replies = [], orderText = "") {
+    const session = payload?.meeting?.currentSession || payload?.session || {};
+    const proof = session.proof || payload.proof || {};
+    const research = session.directUrlResearch || payload.directUrlResearch || {};
+    const ecosystemStudy = session.ecosystemStudy || payload.ecosystemStudy || {};
+    const lines = [
+      proof.sessionId ? `sessão: ${proof.sessionId}` : session.id ? `sessão: ${session.id}` : "",
+      proof.officeOrderId ? `ordem em office-orders.json: ${proof.officeOrderId}` : "",
+      proof.ecosystemStudyFile ? `estudo do ecossistema: ${proof.ecosystemStudyFile}` : "",
+      proof.ecosystemLearningCycle ? `ciclo de aprendizado ${proof.ecosystemLearningCycle}` : "",
+      Array.isArray(ecosystemStudy.focusModules) && ecosystemStudy.focusModules.length
+        ? `módulos estudados: ${ecosystemStudy.focusModules.map((item) => item.area).filter(Boolean).slice(0, 4).join(", ")}`
+        : "",
+      research.url
+        ? research.ok
+          ? `URL lida HTTP ${research.status}: ${research.title || research.h1 || research.description || research.url}`
+          : `URL não comprovada: ${research.error || research.url}`
+        : "",
+      `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na sessão`
+    ].filter(Boolean);
+    return {
+      resolved: "Ordem direta recebeu resposta analisada e registro rastreável.",
+      evidence: lines.length ? `Resposta provada: ${lines.join("; ")}` : "Resposta registrada, mas sem identificador de sessão retornado.",
+      pending: "Aceitar, ajustar ou rodar agentes para tentar provar aplicação.",
+      order: summarizeOneLine(orderText, "Ordem direta registrada.")
+    };
+  }
+
+  function getDecisionFeedbackLabel(decision = "") {
+    return {
+      "approve-focus": "Aprovar foco",
+      "swap-image": "Trocar imagem",
+      "keep-fallback": "Manter fallback",
+      redo: "Refazer"
+    }[decision] || "Registrar decisão";
+  }
+
+  function resetPhotoApprovalGate() {
+    photoApprovalQueue = [];
+    photoApprovalIndex = 0;
+    photoApprovalBusy = false;
+    if (cheffePhotoApproval) cheffePhotoApproval.hidden = true;
+    cheffeAccessCard?.classList.remove("is-reviewing-photos");
+    cheffeAccessModal?.classList.remove("has-photo-approval");
+    photoApprovalDecisionButtons.forEach((button) => {
+      button.disabled = false;
+    });
+    if (photoApprovalPrev) photoApprovalPrev.disabled = false;
+    if (photoApprovalNext) photoApprovalNext.disabled = false;
+    if (photoApprovalContinue) photoApprovalContinue.disabled = false;
+    if (photoApprovalRunRuntime) photoApprovalRunRuntime.checked = false;
+  }
+
   function openAccessModal(message = "Digite a senha Full Admin para entrar na Cheffe Call.", tone = "") {
+    resetPhotoApprovalGate();
     cheffeAccessModal?.classList.remove("is-unlocked");
     document.body.classList.add("cheffe-access-locked");
     setPasswordStatus(message, tone);
@@ -349,6 +1103,7 @@
   function closeAccessModal() {
     cheffeAccessModal?.classList.add("is-unlocked");
     document.body.classList.remove("cheffe-access-locked");
+    resetPhotoApprovalGate();
   }
 
   function getAdminPassword() {
@@ -357,7 +1112,7 @@
     return quickPassword || formPassword || cheffeAdminPassword;
   }
 
-  function rememberAdminPassword(password) {
+  function rememberAdminPassword(password, options = {}) {
     const cleanPassword = String(password || "").trim();
     if (!cleanPassword) return;
     cheffeAdminPassword = cleanPassword;
@@ -369,7 +1124,7 @@
     } catch (_error) {
       // ignore storage failures
     }
-    closeAccessModal();
+    if (options.close !== false) closeAccessModal();
   }
 
   async function validateAdminPassword(password) {
@@ -398,6 +1153,938 @@
     return payload;
   }
 
+  function getPhotoApprovalDecisionStatus(item = {}) {
+    return String(item.decision?.status || item.latestDecision?.status || item.decisionStatus || "").trim();
+  }
+
+  function isPhotoApprovalRuntimeStatus(status = "") {
+    return ["queued-for-runtime", "queued-for-agents"].includes(String(status || "").trim());
+  }
+
+  function getPhotoApprovalStats(queue = photoApprovalQueue) {
+    const list = Array.isArray(queue) ? queue : [];
+    const decided = list.filter((entry) => entry.decision).length;
+    const pending = list.filter((entry) => !entry.decision).length;
+    const runtimeWorkCount = list.filter((entry) => isPhotoApprovalRuntimeStatus(getPhotoApprovalDecisionStatus(entry))).length;
+    return {
+      total: list.length,
+      decided,
+      pending,
+      runtimeWorkCount
+    };
+  }
+
+  function hasPhotoApprovalRuntimeWork(payload = {}) {
+    const runtimeWorkCount = Number(payload.runtimeWorkCount || 0);
+    if (runtimeWorkCount > 0) return true;
+    return (Array.isArray(payload.queue) ? payload.queue : []).some((item) =>
+      isPhotoApprovalRuntimeStatus(getPhotoApprovalDecisionStatus(item))
+    );
+  }
+
+  function normalizePhotoApprovalPayload(payload = {}) {
+    const selectedQueue = Array.isArray(payload.queue)
+      ? payload.queue
+      : Array.isArray(payload.queue?.queue)
+        ? payload.queue.queue
+        : [];
+    const allQueue = Array.isArray(payload.allQueue) ? payload.allQueue : [];
+    const rawQueueMap = new Map();
+    selectedQueue.forEach((item) => {
+      const slug = String(item?.slug || "").trim();
+      if (slug) rawQueueMap.set(slug, item);
+    });
+    allQueue.forEach((item) => {
+      const slug = String(item?.slug || "").trim();
+      if (!slug || rawQueueMap.has(slug)) return;
+      const status = String(item?.latestDecision?.status || item?.decisionStatus || "").trim();
+      if (isPhotoApprovalRuntimeStatus(status)) rawQueueMap.set(slug, item);
+    });
+    const rawQueue = Array.from(rawQueueMap.values());
+    const queue = rawQueue.map((item) => {
+      const latestDecision = item.latestDecision || item.decision || null;
+      const isPending = item.pending !== false && !latestDecision;
+      return {
+        ...item,
+        reasonLabels: Array.isArray(item.reasonLabels) && item.reasonLabels.length ? item.reasonLabels : item.reasons || [],
+        decision: isPending
+          ? null
+          : latestDecision
+            ? {
+                decisionLabel: latestDecision.actionLabel || latestDecision.decisionLabel || latestDecision.action || "decidido",
+                action: latestDecision.action || latestDecision.decision || "",
+                status: latestDecision.status || item.decisionStatus || "",
+                focus: latestDecision.focus || "",
+                imageFit: latestDecision.imageFit || "",
+                manualAdjustment: latestDecision.manualAdjustment || "",
+                replacementImageUrl: latestDecision.replacementImageUrl || "",
+                note: latestDecision.note || ""
+              }
+            : null
+      };
+    });
+    const stats = getPhotoApprovalStats(queue);
+    return {
+      ...payload,
+      queue,
+      pendingCount: stats.pending,
+      decidedCount: stats.decided,
+      runtimeWorkCount: stats.runtimeWorkCount
+    };
+  }
+
+  async function fetchPhotoApprovals(password) {
+    const response = await fetch(`/api/news-image-focus-approvals?newOnly=true&password=${encodeURIComponent(password)}`, {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Nao foi possivel carregar a fila de foto/foco.");
+    }
+    return normalizePhotoApprovalPayload(payload);
+  }
+
+  function normalizeEditorialApprovalPayload(payload = {}) {
+    const items = Array.isArray(payload.items) ? payload.items : Array.isArray(payload.approvalDesk?.items) ? payload.approvalDesk.items : [];
+    return {
+      ...payload,
+      items,
+      pendingCount: Number(payload.pendingCount ?? items.filter((item) => item.pending !== false && !item.approvalDecision).length),
+      returned: Number(payload.returned || items.length),
+      total: Number(payload.total || items.length)
+    };
+  }
+
+  async function fetchEditorialApprovals(password) {
+    const response = await fetch(`/api/cheffe-call/editorial-approvals?limit=80&password=${encodeURIComponent(password)}`, {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Nao foi possivel carregar a mesa editorial.");
+    }
+    return normalizeEditorialApprovalPayload(payload);
+  }
+
+  async function loadEditorialApprovalDesk(password = getAdminPassword()) {
+    if (!password) {
+      renderEditorialApprovalDesk(null);
+      return null;
+    }
+    setEditorialApprovalBusy(true);
+    try {
+      const payload = await fetchEditorialApprovals(password);
+      renderEditorialApprovalDesk(payload);
+      return payload;
+    } finally {
+      setEditorialApprovalBusy(false);
+    }
+  }
+
+  function getEditorialApprovalStats(queue = editorialApprovalQueue) {
+    const list = Array.isArray(queue) ? queue : [];
+    const pending = list.filter((item) => item.pending !== false).length;
+    return {
+      total: list.length,
+      pending,
+      decided: list.length - pending
+    };
+  }
+
+  function getEditorialApprovalPendingCount(payload = editorialApprovalPayload) {
+    const count = Number(payload?.pendingCount);
+    if (Number.isFinite(count)) return Math.max(0, count);
+    return getEditorialApprovalStats(Array.isArray(payload?.items) ? payload.items : editorialApprovalQueue).pending;
+  }
+
+  function updateEditorialApprovalGateState(payload = editorialApprovalPayload) {
+    const hasPayload = Boolean(payload);
+    const pending = hasPayload ? getEditorialApprovalPendingCount(payload) : 0;
+    editorialApprovalGateActive = hasPayload && pending > 0;
+    document.body.classList.toggle("cheffe-approval-gate-active", editorialApprovalGateActive);
+    document.body.classList.toggle("cheffe-approval-gate-clear", hasPayload && !editorialApprovalGateActive);
+    document.body.dataset.cheffeApprovalGate = editorialApprovalGateActive ? "pending" : hasPayload ? "clear" : "locked";
+
+    editorialApprovalGatedNodes.forEach((node) => {
+      if (!node) return;
+      node.hidden = editorialApprovalGateActive;
+      node.setAttribute("aria-hidden", editorialApprovalGateActive ? "true" : "false");
+    });
+
+    if (speechBubbleEl) {
+      speechBubbleEl.hidden = editorialApprovalGateActive;
+      speechBubbleEl.setAttribute("aria-hidden", editorialApprovalGateActive ? "true" : "false");
+      if (editorialApprovalGateActive) speechBubbleEl.classList.remove("is-expanded");
+    }
+
+    if (editorialApprovalGateActive) {
+      lowerDecksOpen = false;
+      if (scenePrev) scenePrev.disabled = true;
+      if (sceneNext) sceneNext.disabled = true;
+      if (sceneFinish) sceneFinish.disabled = true;
+    } else {
+      setActiveScene(activeSceneIndex);
+    }
+  }
+
+  function setEditorialApprovalBusy(isBusy) {
+    editorialApprovalBusy = Boolean(isBusy);
+    editorialApprovalActionButtons.forEach((button) => {
+      button.disabled = editorialApprovalBusy;
+    });
+    if (editorialApprovalRefresh) editorialApprovalRefresh.disabled = editorialApprovalBusy;
+    editorialApprovalQueueEl?.querySelectorAll("button").forEach((button) => {
+      button.disabled = editorialApprovalBusy;
+    });
+  }
+
+  function setEditorialApprovalStatus(message, tone = "") {
+    if (!editorialApprovalStatus) return;
+    editorialApprovalStatus.textContent = message;
+    editorialApprovalStatus.dataset.tone = tone;
+  }
+
+  function getEditorialApprovalItem() {
+    return editorialApprovalQueue[editorialApprovalIndex] || null;
+  }
+
+  function findNextPendingEditorialIndex(startIndex = 0) {
+    if (!editorialApprovalQueue.length) return 0;
+    for (let step = 0; step < editorialApprovalQueue.length; step += 1) {
+      const index = (startIndex + step) % editorialApprovalQueue.length;
+      const item = editorialApprovalQueue[index];
+      if (item?.pending !== false) return index;
+    }
+    return Math.min(Math.max(startIndex, 0), editorialApprovalQueue.length - 1);
+  }
+
+  function syncEditorialManualControls(value = "") {
+    const focus = parsePhotoFocus(value || editorialApprovalFocusInput?.value || "center 42%");
+    if (editorialApprovalFocusX) editorialApprovalFocusX.value = focus.x;
+    if (editorialApprovalFocusY) editorialApprovalFocusY.value = String(focus.y);
+    if (editorialApprovalFocusYValue) editorialApprovalFocusYValue.textContent = `${focus.y}%`;
+  }
+
+  function getManualEditorialFocusValue() {
+    const x = editorialApprovalFocusX?.value || "center";
+    const y = Number.parseInt(editorialApprovalFocusY?.value || "42", 10);
+    return `${x} ${Math.max(24, Math.min(76, Number.isFinite(y) ? y : 42))}%`;
+  }
+
+  function setEditorialFocusValue(value = "") {
+    if (!editorialApprovalFocusInput) return;
+    const cleanValue = String(value || "center 42%").trim() || "center 42%";
+    const hasOption = Array.from(editorialApprovalFocusInput.options).some((option) => option.value === cleanValue);
+    if (!hasOption) {
+      const option = document.createElement("option");
+      option.value = cleanValue;
+      option.textContent = cleanValue;
+      editorialApprovalFocusInput.append(option);
+    }
+    editorialApprovalFocusInput.value = cleanValue;
+    syncEditorialManualControls(cleanValue);
+    syncEditorialApprovalPreview();
+  }
+
+  function syncEditorialApprovalPreview() {
+    const item = getEditorialApprovalItem();
+    const title = String(editorialApprovalTitleInput?.value || item?.title || "Selecione uma pendência").trim();
+    const summary = String(editorialApprovalSummaryInput?.value || item?.summary || "A mesa editorial vai montar a notícia aqui para revisão humana.").trim();
+    const source = String(editorialApprovalSourceNameInput?.value || item?.sourceName || "Fonte não carregada").trim();
+    const sourceUrl = String(editorialApprovalSourceUrlInput?.value || item?.sourceUrl || "").trim();
+    const imageUrl = String(editorialApprovalImageInput?.value || item?.imageUrl || "").trim();
+    const focus = String(editorialApprovalFocusInput?.value || item?.imageFocus || "center 42%").trim();
+    const fit = String(editorialApprovalImageFit?.value || item?.imageFit || "cover").trim() || "cover";
+
+    if (editorialApprovalPreviewTitle) editorialApprovalPreviewTitle.textContent = title;
+    if (editorialApprovalPreviewSummary) editorialApprovalPreviewSummary.textContent = summary;
+    if (editorialApprovalPreviewSource) {
+      editorialApprovalPreviewSource.textContent = sourceUrl ? `${source} | fonte original` : source;
+    }
+    if (editorialApprovalPreviewMeta) {
+      editorialApprovalPreviewMeta.textContent = [
+        item?.gate || "gate",
+        item?.category || "editorial",
+        item?.pending === false || item?.approvalDecision ? "decidido" : "aguardando aprovação"
+      ].filter(Boolean).join(" | ");
+    }
+    if (editorialApprovalImage) {
+      if (imageUrl) {
+        editorialApprovalImage.hidden = false;
+        editorialApprovalImage.src = imageUrl;
+      } else {
+        editorialApprovalImage.hidden = true;
+        editorialApprovalImage.removeAttribute("src");
+      }
+      editorialApprovalImage.alt = title ? `Imagem da noticia: ${title}` : "";
+      editorialApprovalImage.style.objectPosition = focus;
+      editorialApprovalImage.style.objectFit = fit;
+    }
+    if (editorialApprovalArticleLink) {
+      editorialApprovalArticleLink.href = item?.articleUrl || "noticia.html";
+      editorialApprovalArticleLink.toggleAttribute("aria-disabled", !item?.articleUrl);
+    }
+  }
+
+  function getEditorialApprovalPatch() {
+    return {
+      title: editorialApprovalTitleInput?.value || "",
+      summary: editorialApprovalSummaryInput?.value || "",
+      lede: editorialApprovalSummaryInput?.value || "",
+      bodyText: editorialApprovalBodyInput?.value || "",
+      sourceName: editorialApprovalSourceNameInput?.value || "",
+      sourceUrl: editorialApprovalSourceUrlInput?.value || "",
+      imageUrl: editorialApprovalImageInput?.value || "",
+      imageFocus: editorialApprovalFocusInput?.value || "",
+      imageFit: editorialApprovalImageFit?.value || "cover",
+      imageCredit: editorialApprovalImageCreditInput?.value || ""
+    };
+  }
+
+  function renderEditorialApprovalProof(item = null) {
+    if (!editorialApprovalProof) return;
+    if (!item) {
+      editorialApprovalProof.textContent = "Nenhum item carregado.";
+      return;
+    }
+    const lock = item.publicationLock || {};
+    const lines = [
+      `Gate: ${item.gate || "P1"} (${item.approval || "revisão"})`,
+      lock.publicationLocked ? "Publicação travada até aprovação" : "Publicação liberável",
+      lock.highlightLocked ? "Destaque travado até aprovação" : "Destaque liberável",
+      item.humanReasons?.length ? `Humano: ${item.humanReasons.join(", ")}` : "",
+      item.sourceIssues?.length ? `Fonte: ${item.sourceIssues.join(", ")}` : "Fonte: ok",
+      item.visualIssues?.length ? `Imagem: ${item.visualIssues.join(", ")}` : "Imagem: ok",
+      item.imageReasons?.length ? `Auditoria visual: ${item.imageReasons.join(", ")}` : "",
+      item.approvalDecision ? `Decisão: ${item.approvalDecision.status || "registrada"}` : "Decisão: pendente"
+    ].filter(Boolean);
+    editorialApprovalProof.innerHTML = lines.map((line) => `<p>${escapeHtml(line)}</p>`).join("");
+  }
+
+  function renderEditorialApprovalSuggestions(item = null) {
+    if (!editorialApprovalSuggestions) return;
+    const suggestions = Array.isArray(item?.suggestions) ? item.suggestions : [];
+    if (!suggestions.length) {
+      editorialApprovalSuggestions.innerHTML = '<p class="approval-empty">Sem sugestão automática para este item.</p>';
+      return;
+    }
+    editorialApprovalSuggestions.innerHTML = suggestions
+      .map((suggestion, index) => `
+        <article class="approval-suggestion-item">
+          <span>${escapeHtml(suggestion.label || suggestion.kind || "Sugestão")}</span>
+          <strong>${escapeHtml(suggestion.source || "Agentes editoriais")}</strong>
+          <p>${escapeHtml(suggestion.text || suggestion.command || "")}</p>
+          ${suggestion.patch ? `<button type="button" data-editorial-suggestion="${index}">Usar sugestão</button>` : ""}
+        </article>
+      `)
+      .join("");
+  }
+
+  function populateEditorialApprovalEditor(item = null) {
+    if (!item) {
+      [
+        editorialApprovalTitleInput,
+        editorialApprovalSummaryInput,
+        editorialApprovalBodyInput,
+        editorialApprovalSourceNameInput,
+        editorialApprovalSourceUrlInput,
+        editorialApprovalImageInput,
+        editorialApprovalImageCreditInput,
+        editorialApprovalNoteInput
+      ].forEach((node) => {
+        if (node) node.value = "";
+      });
+      setEditorialFocusValue("center 42%");
+      if (editorialApprovalImageFit) editorialApprovalImageFit.value = "cover";
+      syncEditorialApprovalPreview();
+      renderEditorialApprovalSuggestions(null);
+      renderEditorialApprovalProof(null);
+      return;
+    }
+
+    if (editorialApprovalTitleInput) editorialApprovalTitleInput.value = item.title || "";
+    if (editorialApprovalSummaryInput) editorialApprovalSummaryInput.value = item.summary || item.lede || "";
+    if (editorialApprovalBodyInput) editorialApprovalBodyInput.value = item.bodyText || "";
+    if (editorialApprovalSourceNameInput) editorialApprovalSourceNameInput.value = item.sourceName || "";
+    if (editorialApprovalSourceUrlInput) editorialApprovalSourceUrlInput.value = item.sourceUrl || "";
+    if (editorialApprovalImageInput) editorialApprovalImageInput.value = item.imageUrl || "";
+    if (editorialApprovalImageCreditInput) editorialApprovalImageCreditInput.value = item.imageCredit || "";
+    if (editorialApprovalNoteInput) editorialApprovalNoteInput.value = item.approvalDecision?.note || "";
+    if (editorialApprovalImageFit) editorialApprovalImageFit.value = item.imageFit || "cover";
+    setEditorialFocusValue(item.imageFocus || item.suggestedFocus || "center 42%");
+    renderEditorialApprovalSuggestions(item);
+    renderEditorialApprovalProof(item);
+    syncEditorialApprovalPreview();
+  }
+
+  function renderEditorialApprovalQueue() {
+    if (!editorialApprovalQueueEl) return;
+    if (!editorialApprovalQueue.length) {
+      editorialApprovalQueueEl.innerHTML = '<p class="approval-empty">Nenhuma pendência humana carregada. A sequência da reunião fica liberada quando a fila estiver vazia.</p>';
+      populateEditorialApprovalEditor(null);
+      return;
+    }
+    editorialApprovalQueueEl.innerHTML = "";
+    editorialApprovalQueue.forEach((item, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = [
+        "approval-queue-item",
+        index === editorialApprovalIndex ? "is-active" : "",
+        item.approvalDecision ? "is-decided" : "",
+        item.publicationLock?.publicationLocked ? "is-locked" : ""
+      ].filter(Boolean).join(" ");
+      const badge = document.createElement("span");
+      badge.textContent = [item.gate || "P1", item.category || "editorial"].filter(Boolean).join(" | ");
+      const title = document.createElement("strong");
+      title.textContent = item.title || item.slug || "Item editorial";
+      const meta = document.createElement("p");
+      meta.textContent = item.humanReasons?.[0] || item.approvalDecision?.status || item.gateReason || item.sourceName || "aguardando decisão humana";
+      button.append(badge, title, meta);
+      button.addEventListener("click", () => {
+        if (editorialApprovalBusy) return;
+        editorialApprovalIndex = index;
+        renderEditorialApprovalQueue();
+        populateEditorialApprovalEditor(getEditorialApprovalItem());
+      });
+      editorialApprovalQueueEl.append(button);
+    });
+  }
+
+  function renderEditorialApprovalDesk(payload = null) {
+    editorialApprovalPayload = payload;
+    editorialApprovalQueue = Array.isArray(payload?.items) ? payload.items : [];
+    editorialApprovalIndex = findNextPendingEditorialIndex(editorialApprovalIndex);
+    const stats = getEditorialApprovalStats();
+    const pendingCount = payload ? getEditorialApprovalPendingCount(payload) : stats.pending;
+    const loadedCount = editorialApprovalQueue.length;
+    const loadedNote = pendingCount > loadedCount && loadedCount > 0
+      ? ` ${loadedCount} carregadas agora; as próximas entram conforme você decide.`
+      : "";
+    if (!payload) {
+      setEditorialApprovalStatus("Entre com a senha para carregar a Cena 1.", "pending");
+    } else {
+      setEditorialApprovalStatus(
+        pendingCount
+          ? `${pendingCount} pendência${pendingCount === 1 ? "" : "s"} humana${pendingCount === 1 ? "" : "s"} aberta${pendingCount === 1 ? "" : "s"}. Resolva a Cena 1 para liberar a sequência.${loadedNote}`
+          : "Sem pendência humana aberta. Sequência da Cheffe Call liberada.",
+        pendingCount ? "pending" : "ok"
+      );
+    }
+    renderEditorialApprovalQueue();
+    populateEditorialApprovalEditor(getEditorialApprovalItem());
+    updateEditorialApprovalGateState(payload);
+  }
+
+  function applyEditorialSuggestion(index = 0) {
+    const item = getEditorialApprovalItem();
+    const suggestion = item?.suggestions?.[index];
+    if (!suggestion?.patch) return;
+    if (suggestion.patch.title && editorialApprovalTitleInput) editorialApprovalTitleInput.value = suggestion.patch.title;
+    if (suggestion.patch.summary && editorialApprovalSummaryInput) editorialApprovalSummaryInput.value = suggestion.patch.summary;
+    if (suggestion.patch.imageUrl && editorialApprovalImageInput) editorialApprovalImageInput.value = suggestion.patch.imageUrl;
+    if (suggestion.patch.imageFocus) setEditorialFocusValue(suggestion.patch.imageFocus);
+    syncEditorialApprovalPreview();
+    setEditorialApprovalStatus("Sugestão aplicada no rascunho local.", "ok");
+  }
+
+  async function submitEditorialApprovalDecision(action = "approve") {
+    const item = getEditorialApprovalItem();
+    const password = getAdminPassword();
+    if (action === "skip") {
+      editorialApprovalIndex = Math.min(editorialApprovalIndex + 1, Math.max(editorialApprovalQueue.length - 1, 0));
+      renderEditorialApprovalQueue();
+      populateEditorialApprovalEditor(getEditorialApprovalItem());
+      return;
+    }
+    if (!item || !password || editorialApprovalBusy) return;
+    setEditorialApprovalBusy(true);
+    setEditorialApprovalStatus("Registrando decisão editorial...", "pending");
+    setActionFeedback({
+      badge: "Cena 1",
+      title: action === "approve" ? "Aplicando no Jornal" : action === "hold" ? "Segurando matéria" : "Pedindo agentes",
+      message: item.title || item.slug || "Pendência editorial",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Decisão enviada", state: "running" },
+        { label: action === "approve" ? "Patch no Jornal" : "Trava editorial", state: "pending" },
+        { label: "Fila recarregada", state: "pending" }
+      ]
+    });
+    try {
+      const response = await fetch("/api/cheffe-call/editorial-approvals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          password,
+          slug: item.slug,
+          gate: item.gate,
+          decision: action,
+          note: editorialApprovalNoteInput?.value || "",
+          patch: getEditorialApprovalPatch()
+        })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao registrar aprovação editorial.");
+      }
+      renderEditorialApprovalDesk(normalizeEditorialApprovalPayload(payload.approvalDesk || {}));
+      await loadCall();
+      setActiveScene(0, { scroll: true });
+      const files = Array.isArray(payload.applied?.files) ? payload.applied.files : [];
+      setActionFeedback({
+        badge: "Cena 1",
+        title: action === "approve" ? "Jornal atualizado" : action === "hold" ? "Matéria segurada" : "Agentes acionados",
+        message: action === "approve"
+          ? "A aprovação humana foi registrada e o patch entrou nos dados locais do Jornal."
+          : action === "hold"
+            ? "A trava humana foi registrada; a matéria não entra até nova decisão."
+            : "Os agentes receberam a pendência para voltar com sugestão antes de aplicar.",
+        tone: "ok",
+        steps: [
+          { label: "Decisão gravada", state: "done" },
+          { label: action === "approve" ? "Jornal atualizado" : "Jornal preservado", state: "done" },
+          { label: "Cena 1 recarregada", state: "done" }
+        ],
+        details: files.length ? files.join("\n") : payload.applied?.reason || "",
+        closable: true,
+        autoClose: true,
+        autoCloseMs: 3200
+      });
+      setStatus(action === "approve" ? "Pendência aprovada e aplicada no Jornal." : "Decisão editorial registrada.", "ok");
+    } catch (error) {
+      setEditorialApprovalStatus(error.message || "Falha ao registrar decisão.", "bad");
+      setStatus(error.message || "Falha na mesa editorial.", "bad");
+      setActionFeedback({
+        badge: "Falha",
+        title: "Decisão não registrada",
+        message: error.message || "A mesa editorial não conseguiu gravar.",
+        tone: "bad",
+        steps: [
+          { label: "Servidor recusou", state: "bad" },
+          { label: "Item continua na fila", state: "pending" }
+        ],
+        closable: true
+      });
+    } finally {
+      setEditorialApprovalBusy(false);
+    }
+  }
+
+  function setPhotoApprovalBusy(isBusy) {
+    photoApprovalBusy = Boolean(isBusy);
+    photoApprovalDecisionButtons.forEach((button) => {
+      button.disabled = photoApprovalBusy;
+    });
+    if (photoApprovalPrev) photoApprovalPrev.disabled = photoApprovalBusy || photoApprovalIndex <= 0;
+    if (photoApprovalNext) photoApprovalNext.disabled = photoApprovalBusy || photoApprovalIndex >= photoApprovalQueue.length - 1;
+    if (photoApprovalContinue) photoApprovalContinue.disabled = photoApprovalBusy;
+  }
+
+  function updatePhotoApprovalRuntimeControls() {
+    const stats = getPhotoApprovalStats();
+    const shouldRun = Boolean(photoApprovalRunRuntime?.checked);
+    if (photoApprovalRunRuntimeText) {
+      photoApprovalRunRuntimeText.textContent = shouldRun
+        ? "Rodar agentes e aplicar ao continuar"
+        : "Abrir sala sem aplicar agora";
+    }
+    if (photoApprovalContinue) {
+      if (shouldRun && stats.runtimeWorkCount > 0) {
+        photoApprovalContinue.textContent = `Rodar ${stats.runtimeWorkCount} e abrir sala`;
+      } else if (shouldRun) {
+        photoApprovalContinue.textContent = "Rodar agentes e abrir sala";
+      } else if (stats.runtimeWorkCount > 0) {
+        photoApprovalContinue.textContent = "Abrir sem aplicar";
+      } else {
+        photoApprovalContinue.textContent = "Continuar para sala";
+      }
+    }
+  }
+
+  function getPhotoApprovalItem() {
+    return photoApprovalQueue[photoApprovalIndex] || null;
+  }
+
+  function findNextPendingPhotoIndex(startIndex = 0) {
+    if (!photoApprovalQueue.length) return 0;
+    for (let step = 0; step < photoApprovalQueue.length; step += 1) {
+      const index = (startIndex + step) % photoApprovalQueue.length;
+      if (!photoApprovalQueue[index]?.decision) return index;
+    }
+    return Math.min(Math.max(startIndex, 0), photoApprovalQueue.length - 1);
+  }
+
+  function syncPhotoFocusPreview() {
+    if (!photoApprovalImage || !photoApprovalFocus) return;
+    photoApprovalImage.style.objectPosition = photoApprovalFocus.value || "center 42%";
+    photoApprovalImage.style.objectFit = photoApprovalImageFit?.value || "cover";
+  }
+
+  function parsePhotoFocus(value = "") {
+    const raw = String(value || "center 42%").trim().toLowerCase();
+    const [xRaw = "center", yRaw = "42%"] = raw.split(/\s+/);
+    const x = ["left", "center", "right"].includes(xRaw) ? xRaw : "center";
+    const yMap = { top: 30, center: 50, bottom: 66 };
+    const yNumber = yRaw.endsWith("%") ? Number.parseInt(yRaw, 10) : yMap[yRaw] || 42;
+    const y = Math.max(24, Math.min(76, Number.isFinite(yNumber) ? yNumber : 42));
+    return { x, y };
+  }
+
+  function syncPhotoManualControls(value = "") {
+    const focus = parsePhotoFocus(value || photoApprovalFocus?.value || "center 42%");
+    if (photoApprovalFocusX) photoApprovalFocusX.value = focus.x;
+    if (photoApprovalFocusY) photoApprovalFocusY.value = String(focus.y);
+    if (photoApprovalFocusYValue) photoApprovalFocusYValue.textContent = `${focus.y}%`;
+  }
+
+  function getManualPhotoFocusValue() {
+    const x = photoApprovalFocusX?.value || "center";
+    const y = Number.parseInt(photoApprovalFocusY?.value || "42", 10);
+    return `${x} ${Math.max(24, Math.min(76, Number.isFinite(y) ? y : 42))}%`;
+  }
+
+  function setPhotoFocusValue(value) {
+    if (!photoApprovalFocus) return;
+    const cleanValue = String(value || "center 42%").trim() || "center 42%";
+    const hasOption = Array.from(photoApprovalFocus.options).some((option) => option.value === cleanValue);
+    if (!hasOption) {
+      const option = document.createElement("option");
+      option.value = cleanValue;
+      option.textContent = cleanValue;
+      photoApprovalFocus.append(option);
+    }
+    photoApprovalFocus.value = cleanValue;
+    syncPhotoManualControls(cleanValue);
+    syncPhotoFocusPreview();
+  }
+
+  function renderPhotoApprovalReasons(item) {
+    if (!photoApprovalReasons) return;
+    photoApprovalReasons.innerHTML = "";
+    const labels = (Array.isArray(item?.reasonLabels) && item.reasonLabels.length ? item.reasonLabels : item?.reasons || [])
+      .map((label) => String(label || "").trim())
+      .filter(Boolean);
+    if (!labels.length) {
+      const span = document.createElement("span");
+      span.textContent = "revisao visual";
+      photoApprovalReasons.append(span);
+      return;
+    }
+    labels.slice(0, 5).forEach((label) => {
+      const span = document.createElement("span");
+      span.textContent = label;
+      photoApprovalReasons.append(span);
+    });
+  }
+
+  function renderPhotoApprovalItem() {
+    const item = getPhotoApprovalItem();
+    const { total, decided, pending, runtimeWorkCount } = getPhotoApprovalStats();
+
+    if (photoApprovalCounter) {
+      photoApprovalCounter.textContent = runtimeWorkCount > 0 && pending <= 0
+        ? `${runtimeWorkCount} para rodar`
+        : `${pending} pendente${pending === 1 ? "" : "s"}`;
+    }
+    if (photoApprovalSummary) {
+      photoApprovalSummary.textContent = total
+        ? [
+            `${total} ${total === 1 ? "item" : "itens"} da auditoria de foto/foco`,
+            `${decided} já decidido${decided === 1 ? "" : "s"}`,
+            runtimeWorkCount > 0 ? `${runtimeWorkCount} aguardando runtime` : ""
+          ].filter(Boolean).join(", ") + "."
+        : "Sem bloqueio visual pendente.";
+    }
+    if (photoApprovalProgress) photoApprovalProgress.textContent = total ? `${photoApprovalIndex + 1}/${total}` : "0/0";
+    if (photoApprovalList) {
+      photoApprovalList.innerHTML = "";
+      photoApprovalQueue.forEach((entry, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = [
+          "photo-approval-queue-item",
+          index === photoApprovalIndex ? "is-active" : "",
+          entry.decision ? "is-decided" : ""
+        ].filter(Boolean).join(" ");
+        button.disabled = photoApprovalBusy;
+        const title = document.createElement("strong");
+        title.textContent = entry.title || entry.slug || "Item sem titulo";
+        const meta = document.createElement("span");
+        meta.textContent = entry.decision?.decisionLabel || entry.sourceName || "aguardando decisao";
+        button.append(title, meta);
+        button.addEventListener("click", () => {
+          if (photoApprovalBusy) return;
+          photoApprovalIndex = index;
+          renderPhotoApprovalItem();
+        });
+        photoApprovalList.append(button);
+      });
+    }
+
+    if (!item) {
+      if (photoApprovalTitle) photoApprovalTitle.textContent = "Fila limpa";
+      if (photoApprovalMeta) photoApprovalMeta.textContent = "Nenhuma decisao pendente agora.";
+      if (photoApprovalImage) {
+        photoApprovalImage.removeAttribute("src");
+        photoApprovalImage.alt = "";
+      }
+      if (photoApprovalImageCaption) photoApprovalImageCaption.textContent = "";
+      renderPhotoApprovalReasons(null);
+      setPhotoApprovalBusy(false);
+      return;
+    }
+
+    if (photoApprovalTitle) photoApprovalTitle.textContent = item.title || "Sem titulo";
+    if (photoApprovalMeta) {
+      photoApprovalMeta.textContent = [
+        item.category || "Geral",
+        item.sourceName || "fonte nao informada",
+        item.decision?.decisionLabel ? `decidido: ${item.decision.decisionLabel}` : "aguardando decisao"
+      ]
+        .filter(Boolean)
+        .join(" | ");
+    }
+    if (photoApprovalImage) {
+      if (item.imageUrl) {
+        photoApprovalImage.hidden = false;
+        photoApprovalImage.src = item.imageUrl;
+      } else {
+        photoApprovalImage.hidden = true;
+        photoApprovalImage.removeAttribute("src");
+      }
+      photoApprovalImage.alt = item.title ? `Imagem da noticia: ${item.title}` : "Imagem da noticia";
+    }
+    if (photoApprovalImageCaption) {
+      photoApprovalImageCaption.textContent = item.effectiveFocus
+        ? `Foco atual: ${item.effectiveFocus}`
+        : "Sem foco manual registrado";
+    }
+    if (photoApprovalArticle) {
+      photoApprovalArticle.href = item.articleUrl || "noticia.html";
+      photoApprovalArticle.toggleAttribute("aria-disabled", !item.articleUrl);
+    }
+    if (photoApprovalImageFit) photoApprovalImageFit.value = item.decision?.imageFit || item.imageFit || "cover";
+    if (photoApprovalManualAdjustment) {
+      photoApprovalManualAdjustment.value = item.decision?.manualAdjustment || "";
+    }
+    if (photoApprovalReplacementInput) photoApprovalReplacementInput.value = item.decision?.replacementImageUrl || "";
+    if (photoApprovalNote) photoApprovalNote.value = item.decision?.note || "";
+    setPhotoFocusValue(item.decision?.focus || item.effectiveFocus || item.suggestedFocus || "center 42%");
+    renderPhotoApprovalReasons(item);
+    updatePhotoApprovalRuntimeControls();
+    setPhotoApprovalBusy(false);
+  }
+
+  function openPhotoApprovalQueue(payload) {
+    photoApprovalQueue = Array.isArray(payload?.queue) ? payload.queue : [];
+    photoApprovalIndex = findNextPendingPhotoIndex(0);
+    const stats = getPhotoApprovalStats();
+    if (photoApprovalRunRuntime) photoApprovalRunRuntime.checked = true;
+    cheffePhotoApproval.hidden = false;
+    cheffeAccessCard?.classList.add("is-reviewing-photos");
+    cheffeAccessModal?.classList.add("has-photo-approval");
+    setPasswordStatus(
+      stats.pending > 0
+        ? "Senha validada. Revise a fila de foto/foco antes de abrir a sala."
+        : `${stats.runtimeWorkCount} decisao${stats.runtimeWorkCount === 1 ? "" : "es"} salva${stats.runtimeWorkCount === 1 ? "" : "s"}. Rode agentes para aplicar antes de abrir a sala.`,
+      "pending"
+    );
+    setStatus("Fila de foto/foco carregada no acesso da Cheffe Call.", "ok");
+    renderPhotoApprovalItem();
+  }
+
+  async function runAgentsFromAccessGate(password) {
+    setActionFeedback({
+      badge: "Runtime",
+      title: "Rodando agentes agora",
+      message: "A fila aprovada foi enviada para a runtime dos agentes.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Autorização Full Admin validada", state: "done" },
+        { label: "Agentes reais em execução", state: "running" },
+        { label: "Atualizando sala da Cheffe Call", state: "pending" }
+      ]
+    });
+    const response = await fetch("/api/real-agents/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        password,
+        message: "Rodada manual disparada pelo popup de aprovacao de foto/foco da Cheffe Call."
+      })
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || "Falha ao rodar agentes.");
+    }
+    setActionFeedback({
+      badge: "Runtime",
+      title: "Agentes finalizaram",
+      message: "Runtime concluída. Atualizando a sala com o feedback dos agentes.",
+      tone: "ok",
+      steps: [
+        { label: "Autorização Full Admin validada", state: "done" },
+        { label: "Agentes reais executados", state: "done" },
+        { label: "Sala sendo atualizada", state: "running" }
+      ],
+      details: buildRuntimeFeedbackDetails(payload),
+      closable: true
+    });
+    return payload;
+  }
+
+  async function enterCheffeRoom(message = "Senha validada. Sala liberada.") {
+    const password = getAdminPassword();
+    const shouldRunAgents = Boolean(photoApprovalRunRuntime?.checked);
+    closeAccessModal();
+    setPasswordStatus(message, "ok");
+    try {
+      if (shouldRunAgents) {
+        setStatus("Rodando agentes reais antes de abrir a sala...");
+        await runAgentsFromAccessGate(password);
+      }
+      await loadCall();
+      if (shouldRunAgents) {
+        setActionFeedback({
+          badge: "Finalizado",
+          title: "Sala atualizada",
+          message: "Os agentes terminaram e a Cheffe Call já recebeu o feedback da runtime.",
+          tone: "ok",
+          steps: [
+            { label: "Agentes reais executados", state: "done" },
+            { label: "Feedback carregado na sala", state: "done" },
+            { label: "Fluxo normal liberado", state: "done" }
+          ],
+          details: "",
+          closable: true
+        });
+      } else {
+        setActionFeedback({
+          badge: "Sala",
+          title: "Cheffe Call liberada",
+          message: "A sala abriu sem rodar agentes agora. As decisões pendentes continuam na fila.",
+          tone: "ok",
+          steps: [
+            { label: "Senha validada", state: "done" },
+            { label: "Fila mantida para próxima runtime", state: "done" }
+          ],
+          closable: true,
+          autoCloseMs: 3600
+        });
+      }
+      setStatus(
+        shouldRunAgents
+          ? "Rodada manual dos agentes concluida e sala atualizada."
+          : "Cheffe Call liberada. Escreva uma ordem e clique Enviar.",
+        "ok"
+      );
+      quickInstructionInput?.focus();
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Ação não concluída",
+        message: error.message || "Não foi possível abrir a Cheffe Call.",
+        tone: "bad",
+        steps: [
+          { label: "Ação interrompida", state: "bad" },
+          { label: "Sala preservada sem gravar nova etapa", state: "pending" }
+        ],
+        closable: true
+      });
+      setStatus(error.message || "Nao foi possivel abrir a Cheffe Call.", "bad");
+    }
+  }
+
+  async function submitPhotoApprovalDecision(decision) {
+    const item = getPhotoApprovalItem();
+    const password = getAdminPassword();
+    if (!item || !password || photoApprovalBusy) return;
+    setPhotoApprovalBusy(true);
+    setPasswordStatus("Registrando decisao de foto/foco...", "pending");
+    const decisionLabel = getDecisionFeedbackLabel(decision);
+    setActionFeedback({
+      badge: "Fila visual",
+      title: "Registrando decisão",
+      message: `${decisionLabel}: ${item.title || item.slug || "item da fila"}`,
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Decisão enviada ao administrador", state: "running" },
+        { label: "Ordem para agentes preparada", state: "pending" },
+        { label: "Fila será recarregada", state: "pending" }
+      ]
+    });
+    try {
+      const response = await fetch("/api/news-image-focus-approvals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          password,
+          slug: item.slug,
+          decision,
+          focus: photoApprovalFocus?.value || item.effectiveFocus || item.suggestedFocus || "",
+          imageFit: photoApprovalImageFit?.value || "cover",
+          manualAdjustment: photoApprovalManualAdjustment?.value || "",
+          replacementImageUrl: photoApprovalReplacementInput?.value || "",
+          note: photoApprovalNote?.value || ""
+        })
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Falha ao registrar decisao de foto/foco.");
+      }
+      const normalizedPayload = await fetchPhotoApprovals(password);
+      photoApprovalQueue = Array.isArray(normalizedPayload.queue) ? normalizedPayload.queue : photoApprovalQueue;
+      const stats = getPhotoApprovalStats();
+      if (photoApprovalRunRuntime && stats.runtimeWorkCount > 0) photoApprovalRunRuntime.checked = true;
+      setPasswordStatus("Decisao registrada para a runtime.", "ok");
+      setActionFeedback({
+        badge: "Fila visual",
+        title: "Decisão salva",
+        message: `${decisionLabel} registrado. A runtime vai aplicar antes de abrir a sala.`,
+        tone: "ok",
+        steps: [
+          { label: "Decisão gravada", state: "done" },
+          { label: "Ordem pronta para runtime", state: "done" },
+          { label: "Fila atualizada", state: "done" }
+        ],
+        details: [
+          `Foco: ${photoApprovalFocus?.value || item.suggestedFocus || "sem foco"}`,
+          `Fit: ${photoApprovalImageFit?.value || "cover"}`,
+          photoApprovalManualAdjustment?.value ? `Ajuste: ${photoApprovalManualAdjustment.value}` : ""
+        ].filter(Boolean).join("\n"),
+        closable: true,
+        autoCloseMs: 2600
+      });
+      if (Number(normalizedPayload.pendingCount || 0) <= 0) {
+        await enterCheffeRoom("Fila de foto/foco registrada. Rodando agentes antes de abrir a sala.");
+        return;
+      }
+      photoApprovalIndex = findNextPendingPhotoIndex(photoApprovalIndex + 1);
+      renderPhotoApprovalItem();
+    } catch (error) {
+      setPasswordStatus(error.message || "Falha ao registrar decisao.", "bad");
+      setStatus(error.message || "Falha ao registrar decisao de foto/foco.", "bad");
+      setActionFeedback({
+        badge: "Falha",
+        title: "Decisão não registrada",
+        message: error.message || "Falha ao registrar decisão de foto/foco.",
+        tone: "bad",
+        steps: [
+          { label: "Servidor recusou a decisão", state: "bad" },
+          { label: "Item continua na fila", state: "pending" }
+        ],
+        closable: true
+      });
+      setPhotoApprovalBusy(false);
+    }
+  }
+
   function requireAdminPassword(actionLabel = "operar a Cheffe Call") {
     const password = getAdminPassword();
     if (password) return password;
@@ -417,11 +2104,1172 @@
     return String(activePromptPayload?.text || promptPreviewText?.textContent || "").trim();
   }
 
-  function syncVisibleInstruction(value) {
+  function syncVisibleInstruction(value, options = {}) {
     const text = String(value || "").trim();
+    const visibleText = String(options.visibleText ?? text).trim();
     if (instructionInput) instructionInput.value = text;
-    if (quickInstructionInput) quickInstructionInput.value = text;
-    quickInstructionInput?.focus();
+    if (quickInstructionInput && options.quick !== false) quickInstructionInput.value = visibleText;
+    if (options.focus !== false) quickInstructionInput?.focus();
+  }
+
+  function clampPercent(value, fallback = 0) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) return fallback;
+    return Math.max(0, Math.min(100, Math.round(numeric)));
+  }
+
+  function normalizePromptKey(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, " ")
+      .trim();
+  }
+
+  function getAdjustmentGuide() {
+    const guides = {
+      "no-repeat": {
+        label: "Sem repetição",
+        directive: "Reescreva a opinião para ficar única. Corte frases genéricas, repetições de outros agentes e qualquer fala sem ação própria."
+      },
+      specific: {
+        label: "Mais específico",
+        directive: "Troque abstração por contexto concreto: tela, arquivo provável, dado, rotina afetada, risco e validação."
+      },
+      task: {
+        label: "Virar tarefa",
+        directive: "Transforme a opinião em tarefa executável com dono, primeiro passo, critério de aceite e bloqueio."
+      },
+      validation: {
+        label: "Virar validação",
+        directive: "Transforme a opinião em checklist de validação: o que testar, onde observar e qual sinal prova que funcionou."
+      },
+      implementation: {
+        label: "Virar implementação",
+        directive: "Transforme a opinião em prompt de implementação pronto para rodar, com escopo pequeno e resultado verificável."
+      },
+      visual: {
+        label: "Ajuste visual",
+        directive: "Ajuste a opinião para apontar o problema visual real, o efeito na leitura e a mudança mínima de interface."
+      }
+    };
+    return guides[promptAdjustmentSelect?.value || "no-repeat"] || guides["no-repeat"];
+  }
+
+  function getDecisionActionGuide(value = decisionActionSelect?.value || "analyze") {
+    const guides = {
+      analyze: {
+        value: "analyze",
+        label: "Analisar e responder",
+        roomAction: "terminal",
+        directive: "Analise a ordem, explique o entendimento, diga o que pode ser resolvido agora e aponte a próxima ação concreta.",
+        after: "A resposta entra na reunião para você aprovar, ajustar ou transformar em tarefa."
+      },
+      rethink: {
+        value: "rethink",
+        label: "Repensar opinião",
+        roomAction: "terminal",
+        directive: "Reescreva a opinião com mais inteligência: corte repetição, traga evidência, diferença real e próxima ação verificável.",
+        after: "Use a nova resposta para decidir se aprova, transforma em tarefa ou manda implementar."
+      },
+      study: {
+        value: "study",
+        label: "Estudar melhor",
+        roomAction: "task",
+        directive: "Levante contexto, riscos, arquivos/telas prováveis, perguntas em aberto e um roteiro de validação antes de qualquer execução.",
+        after: "O estudo vira tarefa rastreável e volta com lacunas claras."
+      },
+      accept: {
+        value: "accept",
+        label: "Aceitar ideia como ordem",
+        roomAction: "approve",
+        directive: "Trate a ideia como decisão aprovada: explique o que foi aceito, qual entrega ela exige e qual critério prova que ficou bom.",
+        after: "A análise volta primeiro; depois você confirma se a ideia vira ordem real."
+      },
+      task: {
+        value: "task",
+        label: "Criar tarefa rastreável",
+        roomAction: "task",
+        directive: "Transforme a ordem em tarefa com dono, escopo, primeiro passo, critério de aceite, risco e bloqueio.",
+        after: "A tarefa fica registrada para execução posterior."
+      },
+      implement: {
+        value: "implement",
+        label: "Implementar agora",
+        roomAction: "implement",
+        directive: "Implemente a decisão como ordem real. Se não puder implementar, explique bloqueio, arquivo/tela faltante e a menor próxima ação segura.",
+        after: "A análise volta primeiro; a runtime só roda quando você clicar em Implementar agora no painel."
+      },
+      validate: {
+        value: "validate",
+        label: "Validar resultado",
+        roomAction: "terminal",
+        directive: "Monte uma validação objetiva: o que conferir, como testar, qual evidência aceita e qual falha reprova.",
+        after: "A resposta vira checklist para conferir se a ordem foi cumprida."
+      },
+      visual: {
+        value: "visual",
+        label: "Ajuste visual",
+        roomAction: "terminal",
+        directive: "Analise tela, hierarquia, legibilidade e fluxo. Proponha mudança visual pequena, útil e verificável.",
+        after: "A resposta volta como ajuste visual pronto para aprovar ou implementar."
+      },
+      confirm: {
+        value: "confirm",
+        label: "Confirmar se implementou",
+        roomAction: "terminal",
+        directive: "Responda como auditor: o que foi implementado, onde verificar, o que ainda não foi provado e o próximo teste.",
+        after: "A resposta precisa separar concluído, pendente e evidência."
+      }
+    };
+    return guides[value] || guides.analyze;
+  }
+
+  function getDecisionAgents() {
+    if (Array.isArray(promptConsoleData?.agents) && promptConsoleData.agents.length) {
+      return promptConsoleData.agents;
+    }
+    const source = currentRealAgents.length ? currentRealAgents : fallbackAgents;
+    return source.map((item, index) => ({
+      slug: slugify(getAgentDisplayName(item) || `agent-${index}`),
+      name: getAgentDisplayName(item),
+      office: getAgentOffice(item),
+      role: item.role || item.function || "agente",
+      prompt: item.prompt || ""
+    }));
+  }
+
+  function getDecisionAgentBySlug(slug) {
+    const normalizedSlug = String(slug || "").trim();
+    if (!normalizedSlug) return null;
+    return getDecisionAgents().find((item) => item.slug === normalizedSlug) || null;
+  }
+
+  function syncDecisionSelectors() {
+    const agents = getDecisionAgents();
+    const officeValue = decisionOfficeSelect?.value || "";
+    const agentValue = decisionAgentSelect?.value || "";
+    const offices = Array.from(new Set(agents.map((item) => item.office).filter(Boolean))).sort((a, b) =>
+      a.localeCompare(b, "pt-BR")
+    );
+    fillSelect(
+      decisionOfficeSelect,
+      offices.map((office) => ({ value: office, label: office })),
+      "Todos os escritórios"
+    );
+    if (decisionOfficeSelect && offices.includes(officeValue)) {
+      decisionOfficeSelect.value = officeValue;
+    }
+    refreshDecisionAgentOptions(decisionOfficeSelect?.value || "", agentValue);
+    refreshDecisionPreview();
+  }
+
+  function refreshDecisionAgentOptions(selectedOffice = "", preferredSlug = "") {
+    if (!decisionAgentSelect) return;
+    const agents = getDecisionAgents();
+    const filtered = selectedOffice ? agents.filter((item) => item.office === selectedOffice) : agents;
+    fillSelect(
+      decisionAgentSelect,
+      filtered.map((item) => ({
+        value: item.slug,
+        label: `${item.name} • ${item.office} • ${item.role || "agente"}`
+      })),
+      "Cheffe Call escolhe o melhor"
+    );
+    const preferred = preferredSlug || "";
+    if (preferred && filtered.some((item) => item.slug === preferred)) {
+      decisionAgentSelect.value = preferred;
+    }
+  }
+
+  function getDecisionSelection() {
+    const guide = getDecisionActionGuide();
+    const agent = getDecisionAgentBySlug(decisionAgentSelect?.value || "");
+    const office = decisionOfficeSelect?.value || agent?.office || "Todos os escritórios";
+    return {
+      guide,
+      agent,
+      office,
+      officeLabel: office || "Todos os escritórios",
+      agentLabel: agent ? `${agent.name} (${agent.role || "agente"})` : "Competição automática dos agentes"
+    };
+  }
+
+  function refreshDecisionPreview(context = "") {
+    if (!decisionContextTitle || !decisionContextPreview) return;
+    const selection = getDecisionSelection();
+    const subject = String(
+      context || quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || ""
+    ).trim();
+    decisionContextTitle.textContent = `${selection.guide.label} • ${selection.officeLabel}`;
+    decisionContextPreview.textContent = subject
+      ? `${selection.agentLabel}: ${subject.slice(0, 180)}`
+      : `${selection.agentLabel}. Abra a decisão para escrever contexto, evidência esperada e ordem real.`;
+    if (decisionDeskMeta) {
+      decisionDeskMeta.textContent = selection.guide.after;
+    }
+  }
+
+  function selectDecisionAgentForOpinion(active) {
+    if (!active) return null;
+    const promptAgent = findPromptAgentForOpinion(active);
+    const office = promptAgent?.office || getAgentOffice(active);
+    if (decisionOfficeSelect) decisionOfficeSelect.value = office || "";
+    refreshDecisionAgentOptions(office || "", promptAgent?.slug || "");
+    if (decisionAgentSelect) decisionAgentSelect.value = promptAgent?.slug || "";
+    refreshDecisionPreview(active.opinion || active.assignment?.idea || "");
+    return promptAgent;
+  }
+
+  function buildDecisionDefaultText(seed = {}) {
+    const active = seed.active || currentOpinions[activeSpeakerIndex] || null;
+    const baseOrder = String(quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || "").trim();
+    const activeIdea = String(seed.text || active?.opinion || active?.assignment?.idea || "").trim();
+    const pieces = [];
+    if (baseOrder) pieces.push(`Ordem atual: ${baseOrder}`);
+    if (activeIdea) pieces.push(`Opinião/ideia em análise: ${activeIdea}`);
+    pieces.push("Quero resposta objetiva: o que foi entendido, o que será resolvido, evidência, pendências e próxima ação.");
+    return pieces.join("\n\n");
+  }
+
+  function buildDecisionPrompt(contextText, selection) {
+    const agentPrompt = selection.agent?.prompt || "";
+    return [
+      "ORDEM REAL DA CHEFFE CALL",
+      `Escritório responsável: ${selection.officeLabel}`,
+      `Agente principal: ${selection.agentLabel}`,
+      `Tipo de ação: ${selection.guide.label}`,
+      "",
+      "Contexto do operador:",
+      contextText,
+      "",
+      "Diretriz da ação:",
+      selection.guide.directive,
+      "",
+      "Resposta obrigatória dos agentes:",
+      "1. O que foi entendido",
+      "2. O que foi resolvido ou será resolvido agora",
+      "3. Evidência concreta, tela, dado, rotina, arquivo ou comportamento afetado",
+      "4. O que ainda falta, risco ou bloqueio",
+      "5. Próxima ação implementável ou validação",
+      "",
+      "Regra de autonomia:",
+      "Se a fala repetir outra opinião ou não trouxer evidência útil, o agente deve ficar em silêncio e perder prioridade na competição.",
+      agentPrompt ? ["", "Prompt base do agente principal:", agentPrompt].join("\n") : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function getDirectModeGuide(value = directOrderMode?.value || "research") {
+    const guides = {
+      research: {
+        label: "Pesquisar URL e responder",
+        directive:
+          "Pesquisar a URL específica quando existir, resumir fatos úteis, separar o que foi comprovado do que ainda é inferência e propor alteração verificável."
+      },
+      rewrite: {
+        label: "Alterar com minhas instruções",
+        directive:
+          "Usar as ideias dos agentes como matéria-prima, aplicar as instruções do operador e devolver uma versão alterada sem repetir pedidos antigos."
+      },
+      run: {
+        label: "Rodar agentes com esta ordem",
+        directive:
+          "Executar a ordem na runtime real. Se não houver alvo suficiente para alterar arquivo, dado ou rotina, explicar o bloqueio e pedir o menor complemento possível."
+      },
+      validate: {
+        label: "Validar o que foi feito",
+        directive:
+          "Auditar o resultado: dizer o que foi implementado, onde verificar, qual evidência existe e qual parte ainda não foi provada."
+      }
+    };
+    return guides[value] || guides.research;
+  }
+
+  function cleanAgentIdeaForDirectOrder(value = "") {
+    const normalized = String(value || "").replace(/\s+/g, " ").trim();
+    if (!normalized) return "";
+    const subjectIndex = normalized.search(/\bAssunto:\s*(ORDEM DIRETA|Ordem direta|CHEFFE CALL|Prompt Mestre)/i);
+    const withoutSubject = subjectIndex > 0 ? normalized.slice(0, subjectIndex).trim() : normalized;
+    const hardStopIndex = withoutSubject.search(/\bIdeias dos agentes que podem ser aproveitadas\b/i);
+    const withoutNestedIdeas = hardStopIndex > 0 ? withoutSubject.slice(0, hardStopIndex).trim() : withoutSubject;
+    return summarizeOneLine(withoutNestedIdeas, "").slice(0, 260).trim();
+  }
+
+  function collectAgentIdeas(limit = 4) {
+    const fromFlow = latestOpinionFlow.map((flow) => ({ ...flow.item, status: flow.status }));
+    const source = fromFlow.length ? fromFlow : currentOpinions;
+    const seen = new Set();
+    return source
+      .map((item) => {
+        const text = cleanAgentIdeaForDirectOrder(item?.opinion || item?.assignment?.action || item?.assignment?.idea || "");
+        const key = text.toLowerCase().replace(/\s+/g, " ").slice(0, 140);
+        if (!text || seen.has(key)) return null;
+        seen.add(key);
+        return {
+          agent: getAgentDisplayName(item),
+          office: getAgentOffice(item),
+          status: item.status?.label || item.status?.state || "opinião",
+          text
+        };
+      })
+      .filter(Boolean)
+      .slice(0, limit);
+  }
+
+  function formatDirectIdeasForPrompt(ideas = []) {
+    return ideas.length
+      ? ideas.map((idea, index) => `${index + 1}. ${idea.agent} (${idea.office}, ${idea.status}): ${idea.text}`).join("\n")
+      : "Nenhuma ideia de agente carregada. Responda só com a ordem direta do operador.";
+  }
+
+  function buildDirectOrderPrompt(options = {}) {
+    const guide = getDirectModeGuide(options.mode);
+    const selection = getDecisionSelection();
+    const orderText = String(options.orderText ?? directOrderText?.value ?? "").trim();
+    const urlText = String(options.urlText ?? directOrderUrl?.value ?? "").trim();
+    const shouldIncludeIdeas = options.includeIdeas === true ||
+      (options.includeIdeas !== false && directOrderMode?.value === "rewrite" && !/Ideias puxadas dos agentes:/i.test(orderText));
+    const ideas = Array.isArray(options.ideas) ? options.ideas : shouldIncludeIdeas ? collectAgentIdeas() : [];
+    const promptParts = [
+      "ORDEM DIRETA DA CHEFFE CALL",
+      `Modo: ${guide.label}`,
+      `Escritório preferencial: ${selection.officeLabel}`,
+      `Agente principal: ${selection.agentLabel}`,
+      urlText ? `URL específica a pesquisar: ${urlText}` : "URL específica a pesquisar: nenhuma URL informada",
+      "",
+      "Ordem do operador:",
+      orderText || "Pedir esclarecimento se faltar alvo concreto.",
+      ""
+    ];
+    if (ideas.length) {
+      promptParts.push(
+        "Ideias dos agentes que podem ser aproveitadas ou corrigidas:",
+        formatDirectIdeasForPrompt(ideas),
+        ""
+      );
+    }
+    promptParts.push(
+      "Diretriz obrigatória:",
+      guide.directive,
+      "",
+      "Resposta obrigatória:",
+      "1. Resultado analisado ou executado",
+      "2. Evidência real: URL, arquivo, tela, dado, rotina ou comportamento afetado",
+      "3. O que não ficou provado",
+      "4. Próxima ação concreta",
+      "5. Se estiver repetindo pedido antigo, cortar a repetição e trazer uma decisão nova"
+    );
+    return {
+      guide,
+      selection,
+      orderText,
+      urlText,
+      ideas,
+      prompt: promptParts.join("\n")
+    };
+  }
+
+  function setDirectOrderBusy(isBusy) {
+    [directOrderAnalyze, directOrderRunAgents, directOrderRunQueue, pullAgentIdeasToDirectOrder].forEach((button) => {
+      if (button) button.disabled = Boolean(isBusy);
+    });
+  }
+
+  function pullAgentIdeasIntoDirectOrder(active = null) {
+    const ideas = active
+      ? [{ agent: getAgentDisplayName(active), office: getAgentOffice(active), status: "fala ativa", text: active.opinion || active.assignment?.action || "" }]
+      : collectAgentIdeas();
+    const cleanIdeas = ideas.filter((idea) => String(idea.text || "").trim());
+    if (!cleanIdeas.length) {
+      setDirectOrderStatus("Ainda não há ideia útil dos agentes para puxar. Abra uma rodada primeiro.", "bad");
+      return "";
+    }
+    const current = String(directOrderText?.value || "").trim();
+    const block = [
+      current,
+      current ? "" : "Quero aproveitar estas ideias, ajustar com minhas instruções e devolver uma ordem melhor:",
+      "Ideias puxadas dos agentes:",
+      formatDirectIdeasForPrompt(cleanIdeas),
+      "",
+      "Minhas alterações:",
+      current ? "" : "- "
+    ]
+      .filter((line) => line !== null && line !== undefined)
+      .join("\n");
+    if (directOrderText) {
+      directOrderText.value = block;
+      directOrderText.focus();
+      directOrderText.setSelectionRange(directOrderText.value.length, directOrderText.value.length);
+    }
+    if (directOrderMode) directOrderMode.value = "rewrite";
+    setDirectOrderStatus(`${cleanIdeas.length} ideia${cleanIdeas.length === 1 ? "" : "s"} puxada${cleanIdeas.length === 1 ? "" : "s"} para ordem direta.`, "ok");
+    directCommandDesk?.scrollIntoView({ behavior: "smooth", block: "center" });
+    return block;
+  }
+
+  async function submitDirectOrder(shouldRunRuntime = false) {
+    const password = getAdminPassword();
+    if (!password) {
+      setDirectOrderStatus("Senha Full Admin obrigatória para enviar ordem direta.", "bad");
+      setStatus("Valide a senha Full Admin antes de enviar ordem direta.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    const order = buildDirectOrderPrompt();
+    if (!order.orderText && !order.urlText && !order.ideas.length) {
+      setDirectOrderStatus("Escreva uma ordem, cole uma URL ou puxe ideias dos agentes.", "bad");
+      directOrderText?.focus();
+      return;
+    }
+    latestDirectOrder = { ...order, shouldRunRuntime, createdAt: new Date().toISOString() };
+    setDirectOrderBusy(true);
+    setDirectOrderStatus(shouldRunRuntime ? "Rodando ordem direta nos agentes..." : "Enviando ordem direta para análise...", "ok");
+    setExecutionControl({
+      badge: shouldRunRuntime ? "Runtime" : "Ordem direta",
+      title: shouldRunRuntime ? "Rodando agentes com ordem direta" : "Analisando ordem direta",
+      text: shouldRunRuntime
+        ? "A ordem foi montada com URL, ideias puxadas e instruções do operador. A runtime vai rodar e o painel vai separar evidência de pendência."
+        : "A ordem foi enviada para resposta analisada. Nada será chamado de implementação sem evidência.",
+      tone: "idle",
+      summary: {
+        resolved: "Em andamento",
+        evidence: "Aguardando resposta",
+        pending: shouldRunRuntime ? "Runtime dos agentes" : "Aceite ou execução posterior",
+        order: summarizeOneLine(order.orderText || order.urlText, "Ordem direta montada.")
+      },
+      log: order.prompt
+    });
+    setActionFeedback({
+      badge: shouldRunRuntime ? "Runtime" : "Ordem direta",
+      title: shouldRunRuntime ? "Rodando agentes" : "Analisando ordem direta",
+      message: shouldRunRuntime
+        ? "A Cheffe Call está executando a ordem direta na runtime real."
+        : "A Cheffe Call está enviando a ordem direta para resposta dos agentes.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Ordem direta montada", state: "done" },
+        { label: "Resposta dos agentes", state: "running" },
+        { label: shouldRunRuntime ? "Runtime real" : "Aguardando decisão", state: shouldRunRuntime ? "pending" : "running" },
+        { label: "Controle persistente", state: "pending" }
+      ],
+      details: order.prompt
+    });
+    try {
+      syncVisibleInstruction(order.prompt, {
+        visibleText: order.orderText || order.urlText || "",
+        focus: false
+      });
+      if (commandInput) commandInput.value = order.prompt;
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: order.prompt });
+      activateMeetingResponse(order.prompt, payload);
+      const replies = getPayloadOpinions(payload, order.prompt);
+      const active = replies[0] || null;
+      await postRoomAction("terminal", active, {
+        title: `Ordem direta: ${order.guide.label}`,
+        command: order.prompt,
+        prompt: order.prompt,
+        directOrder: true,
+        directUrl: order.urlText,
+        directMode: order.guide.label
+      });
+      let runtimePayload = null;
+      if (shouldRunRuntime) {
+        setActionFeedback({
+          badge: "Runtime",
+          title: "Runtime da ordem direta",
+          message: "Os agentes responderam. Agora a runtime real tenta executar ou provar bloqueio.",
+          tone: "pending",
+          closable: false,
+          steps: [
+            { label: "Resposta dos agentes recebida", state: "done" },
+            { label: "Ordem direta registrada", state: "done" },
+            { label: "Runtime real em andamento", state: "running" },
+            { label: "Prova e aprendizado em conferência", state: "pending" }
+          ],
+          details: order.prompt
+        });
+        runtimePayload = await runCheffeRuntime(password, order.prompt);
+        await loadCall();
+      }
+      const summary = shouldRunRuntime
+        ? buildRuntimeOutcomeSummary(runtimePayload, order.orderText || order.urlText || order.prompt, "ordem direta")
+        : buildSessionProofSummary(payload, replies, order.orderText || order.urlText || order.prompt);
+      const tone = shouldRunRuntime ? getRuntimeOutcomeTone(runtimePayload) : "ok";
+      const outcome = shouldRunRuntime ? getRuntimeEvidence(runtimePayload) : null;
+      const proofUi = shouldRunRuntime ? getRuntimeProofUi(outcome) : null;
+      terminalEl.textContent = [
+        shouldRunRuntime ? "> cheffe-call/direct-runtime" : "> cheffe-call/direct-order",
+        `modo: ${order.guide.label}`,
+        order.urlText ? `url: ${order.urlText}` : "",
+        `respostas: ${replies.length}`,
+        shouldRunRuntime ? `prova: ${proofUi.terminalStatus}` : "status: resposta analisada",
+        "",
+        shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, "runtime: ordem direta") : formatAgentReplies(replies, 5)
+      ]
+        .filter(Boolean)
+        .join("\n");
+      setExecutionControl({
+        badge: shouldRunRuntime ? proofUi.badge : "Ordem direta",
+        title: shouldRunRuntime
+          ? proofUi.title
+          : "Ordem direta analisada",
+        text: shouldRunRuntime
+          ? "O painel separou o que a runtime provou do que ainda precisa ser validado."
+          : "A resposta ficou visível para você editar, aceitar ou mandar rodar agentes.",
+        tone,
+        summary,
+        log: shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, order.prompt) : formatAgentReplies(replies, 5)
+      });
+      setAgentResponse({
+        badge: shouldRunRuntime ? proofUi.responseBadge : "Ordem direta",
+        title: shouldRunRuntime
+          ? proofUi.responseTitle
+          : `${replies.length} agentes responderam à ordem direta`,
+        text: shouldRunRuntime
+          ? proofUi.text
+          : "A ordem direta foi recebida e virou resposta analisada sem fechar o controle.",
+        next: shouldRunRuntime
+          ? summary.pending
+          : "Edite a ordem direta, puxe ideias, ou clique Rodar agentes para executar com a mesma base.",
+        tone,
+        summary,
+        items: replies.length
+          ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: shouldRunRuntime ? "done" : item.state }))
+          : [{ state: "done", label: "ordem", agent: "Cheffe Call", text: order.orderText || order.urlText || order.prompt }]
+      });
+      setActionFeedback({
+        badge: shouldRunRuntime ? proofUi.shortBadge : "Ordem direta",
+        title: shouldRunRuntime
+          ? proofUi.actionTitle
+          : "Resposta analisada",
+        message: shouldRunRuntime ? summary.evidence : "Os agentes responderam. O controle persistente guarda o resultado.",
+        tone,
+        closable: true,
+        steps: [
+          { label: "Ordem direta enviada", state: "done" },
+          { label: "Resposta registrada", state: "done" },
+          { label: shouldRunRuntime ? "Runtime concluída" : "Aguardando execução", state: shouldRunRuntime ? "done" : "running" },
+          { label: shouldRunRuntime ? proofUi.stepLabel : "Controle atualizado", state: shouldRunRuntime ? proofUi.state : "pending" }
+        ],
+        details: shouldRunRuntime ? formatRuntimeDetailsForTerminal(runtimePayload, order.prompt) : formatAgentReplies(replies, 5)
+      });
+      setDirectOrderStatus(shouldRunRuntime ? "Ordem direta rodada. Confira evidência e pendências no controle." : "Ordem direta analisada. Você ainda controla a execução.", tone === "bad" ? "bad" : "ok");
+      setStatus(shouldRunRuntime ? "Ordem direta rodada; evidência separada no controle." : "Ordem direta analisada pelos agentes.", "ok");
+    } catch (error) {
+      setExecutionControl({
+        badge: "Falha",
+        title: "Ordem direta não concluiu",
+        text: error.message || "A Cheffe Call não conseguiu concluir a ordem direta.",
+        tone: "bad",
+        summary: {
+          resolved: "Nada confirmado.",
+          evidence: "Falha antes de resposta ou runtime completa.",
+          pending: "Corrigir senha, URL ou ordem e tentar novamente.",
+          order: summarizeOneLine(order.orderText || order.urlText || order.prompt, "Ordem preservada.")
+        },
+        log: error.message || "falha"
+      });
+      setActionFeedback({
+        badge: "Falha",
+        title: "Ordem direta falhou",
+        message: error.message || "Não foi possível concluir a ordem direta.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Fluxo interrompido", state: "bad" },
+          { label: "Ordem preservada no painel", state: "pending" }
+        ],
+        details: order.prompt
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "Ordem direta não retornou resultado",
+        text: error.message || "A ordem não chegou ao fim.",
+        next: "Revise senha, URL e texto antes de reenviar.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha na ordem direta." }]
+      });
+      setDirectOrderStatus(error.message || "Falha ao enviar ordem direta.", "bad");
+      setStatus(error.message || "Falha ao enviar ordem direta.", "bad");
+    } finally {
+      setDirectOrderBusy(false);
+      if (runApprovedOpinions) runApprovedOpinions.disabled = getReadyOpinionFlowItems().length === 0;
+      if (directOrderRunQueue) directOrderRunQueue.disabled = getReadyOpinionFlowItems().length === 0;
+    }
+  }
+
+  function summarizeOneLine(value, fallback = "Sem detalhe registrado.") {
+    const text = String(value || "").replace(/\s+/g, " ").trim();
+    if (!text) return fallback;
+    return text.length > 190 ? `${text.slice(0, 187)}...` : text;
+  }
+
+  function findDecisionTargetReply(replies, selection, seed = {}) {
+    const activeName = seed.active ? normalizePromptKey(getAgentDisplayName(seed.active)) : "";
+    const selectedName = selection.agent ? normalizePromptKey(selection.agent.name) : "";
+    const officeKey = normalizePromptKey(selection.officeLabel);
+    return (
+      replies.find((item) => selectedName && normalizePromptKey(getAgentDisplayName(item)) === selectedName) ||
+      replies.find((item) => activeName && normalizePromptKey(getAgentDisplayName(item)) === activeName) ||
+      replies.find((item) => officeKey && normalizePromptKey(getAgentOffice(item)) === officeKey) ||
+      replies[0] ||
+      seed.active ||
+      null
+    );
+  }
+
+  function setDecisionComposerStatus(message, tone = "") {
+    if (!decisionComposerStatus) return;
+    decisionComposerStatus.textContent = message;
+    decisionComposerStatus.dataset.tone = tone;
+  }
+
+  function openDecisionComposer(seed = {}) {
+    decisionComposerSeed = seed;
+    if (seed.active) {
+      selectDecisionAgentForOpinion(seed.active);
+    }
+    if (seed.action && decisionActionSelect) {
+      decisionActionSelect.value = seed.action;
+    }
+    const selection = getDecisionSelection();
+    const text = String(seed.contextText || "").trim() || buildDecisionDefaultText(seed);
+    if (decisionComposerBadge) decisionComposerBadge.textContent = selection.guide.label;
+    if (decisionComposerTitle) decisionComposerTitle.textContent = "Escrever ordem com contexto";
+    if (decisionComposerMeta) {
+      decisionComposerMeta.textContent = `${selection.officeLabel} • ${selection.agentLabel}`;
+    }
+    if (decisionComposerHint) decisionComposerHint.textContent = selection.guide.after;
+    if (decisionComposerText) decisionComposerText.value = text;
+    setDecisionComposerStatus("Aguardando envio.");
+    refreshDecisionPreview(text);
+    if (decisionComposer) {
+      decisionComposer.hidden = false;
+      decisionComposerText?.focus();
+    }
+  }
+
+  function closeDecisionComposer() {
+    if (decisionComposer) decisionComposer.hidden = true;
+  }
+
+  function buildDecisionTerminalText(selection, contextText, replies, runtimePayload = null) {
+    const firstReply = replies[0] || {};
+    return [
+      "> cheffe-call/decision-desk",
+      `escritorio: ${selection.officeLabel}`,
+      `agente: ${selection.agentLabel}`,
+      `acao: ${selection.guide.label}`,
+      `respostas: ${replies.length}`,
+      runtimePayload ? "runtime: concluida" : `registro: ${selection.guide.roomAction}`,
+      "",
+      "ordem:",
+      contextText,
+      "",
+      firstReply.opinion ? `primeira resposta: ${firstReply.opinion}` : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  function buildDecisionResponseSummary(selection, replies, runtimePayload = null) {
+    const firstReply = replies[0] || {};
+    const implemented = selection.guide.value === "implement" && runtimePayload;
+    const outcome = implemented ? getRuntimeEvidence(runtimePayload) : null;
+    const evidence = implemented
+      ? outcome.evidence
+      : `${replies.length} resposta${replies.length === 1 ? "" : "s"} registrada${replies.length === 1 ? "" : "s"} na reunião.`;
+    return {
+      resolved: implemented
+        ? outcome.hasApplicationProof
+          ? "Decisão registrada e runtime executada com aplicação provada."
+          : outcome.hasExecutionProof
+            ? "Decisão registrada e runtime executada com prova de execução; aplicação ainda pendente."
+            : "Decisão registrada e runtime rodada sem prova de implementação."
+        : `${selection.guide.label} concluído para decisão.`,
+      evidence,
+      pending: implemented
+        ? outcome.pending
+        : selection.guide.value === "accept"
+          ? "Ideia aceita. Falta implementar a fila ou abrir como Implementar agora."
+          : selection.guide.after,
+      order: implemented
+        ? "Ordem enviada aos agentes; evidência define se pode chamar de implementada."
+        : summarizeOneLine(firstReply.assignment?.action || firstReply.opinion || selection.guide.directive, "Ordem registrada para a próxima etapa.")
+    };
+  }
+
+  function buildDecisionAnalysisSummary(selection, replies) {
+    const firstReply = replies[0] || {};
+    return {
+      resolved: "Resposta analisada. Ainda não virou execução.",
+      evidence: `${replies.length} resposta${replies.length === 1 ? "" : "s"} com dono, escritório e critério de ação.`,
+      pending: "Escolher Aceitar como ordem real ou Implementar agora.",
+      order: summarizeOneLine(
+        firstReply.assignment?.action || firstReply.opinion || selection.guide.directive,
+        "Aguardando aceite do operador."
+      )
+    };
+  }
+
+  function getDecisionCommitAction(selection, mode = "accept") {
+    if (mode === "implement") return "implement";
+    const value = selection?.guide?.value || "analyze";
+    if (value === "task" || value === "study") return "task";
+    if (value === "accept" || value === "implement") return "approve";
+    return "terminal";
+  }
+
+  function buildDecisionCommitSummary(decision, mode, runtimePayload = null) {
+    const selection = decision?.selection || getDecisionSelection();
+    const contextText = decision?.contextText || "";
+    const implemented = mode === "implement";
+    const outcome = implemented ? getRuntimeEvidence(runtimePayload) : null;
+    return {
+      resolved: implemented
+        ? outcome.hasApplicationProof
+          ? "Ordem real registrada e runtime executada com aplicação provada."
+          : outcome.hasExecutionProof
+            ? "Ordem real registrada e runtime executada com prova de execução; aplicação ainda pendente."
+            : "Ordem real registrada e runtime rodada sem prova de implementação."
+        : "Ordem real aceita e registrada.",
+      evidence: implemented
+        ? outcome.evidence
+        : "Servidor registrou a decisão; terminal e fila da reunião foram atualizados.",
+      pending: implemented
+        ? outcome.pending
+        : "Implementar a ordem aceita ou ajustar o contexto antes de executar.",
+      order: summarizeOneLine(
+        contextText || decision?.targetReply?.assignment?.action || decision?.targetReply?.opinion || selection.guide?.directive,
+        "Ordem real registrada."
+      )
+    };
+  }
+
+  async function commitDecisionOrder(mode = "accept") {
+    const decision = pendingDecisionResolution || latestDecisionOrder;
+    if (!decision) {
+      setStatus("Nenhuma análise pronta para aceitar ou implementar.", "bad");
+      return;
+    }
+    const password = getAdminPassword();
+    if (!password) {
+      setStatus("Valide a senha Full Admin antes de aceitar ou implementar a ordem.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    const selection = decision.selection || getDecisionSelection();
+    const contextText = decision.contextText || "";
+    const replies = Array.isArray(decision.replies) ? decision.replies : [];
+    const targetReply = decision.targetReply || findDecisionTargetReply(replies, selection, decision.seed || {});
+    const roomAction = getDecisionCommitAction(selection, mode);
+    const label = mode === "implement" ? "Implementar ordem real" : "Aceitar ordem real";
+    setDecisionResolutionBusy(true);
+    setActionFeedback({
+      badge: mode === "implement" ? "Implementar" : "Aceitar",
+      title: label,
+      message:
+        mode === "implement"
+          ? "Registrando a ordem real e acionando a runtime dos agentes."
+          : "Gravando a decisão como ordem real antes de qualquer execução.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Análise escolhida", state: "done" },
+        { label: "Registro da ordem real", state: "running" },
+        { label: mode === "implement" ? "Runtime dos agentes" : "Aguardando implementação", state: "pending" }
+      ],
+      details: decision.promptText || contextText
+    });
+    try {
+      await postRoomAction(roomAction, targetReply, {
+        title: `${label}: ${selection.guide?.label || "Mesa de decisão"}`,
+        command: decision.promptText || contextText,
+        prompt: decision.promptText || contextText,
+        howTo: selection.guide?.directive || "",
+        decisionType: selection.guide?.value || "analyze",
+        decisionStage: mode,
+        acceptedAt: new Date().toISOString(),
+        text: contextText,
+        agent: selection.agent?.name || getAgentDisplayName(targetReply) || "Cheffe Call",
+        office: selection.officeLabel || getAgentOffice(targetReply),
+        role: selection.agent?.role || targetReply?.role || "agente principal"
+      });
+      let runtimePayload = null;
+      if (mode === "implement") {
+        setActionFeedback({
+          badge: "Runtime",
+          title: "Executando ordem real",
+          message: "A decisão já foi aceita; a runtime real dos agentes está rodando agora.",
+          tone: "pending",
+          closable: false,
+          steps: [
+            { label: "Ordem real registrada", state: "done" },
+            { label: "Runtime em execução", state: "running" },
+            { label: "Atualização da sala", state: "pending" }
+          ],
+          details: contextText
+        });
+        runtimePayload = await runCheffeRuntime(
+          password,
+          `Implementar ordem real da Mesa de Decisão: ${selection.guide?.label || "ação"} / ${
+            selection.officeLabel || "Todos os escritórios"
+          } / ${selection.agentLabel || "competição automática"}. ${contextText}`
+        );
+        await loadCall();
+      }
+      terminalEl.textContent = buildDecisionTerminalText(selection, contextText, replies, runtimePayload);
+      const updatedDecision = {
+        ...decision,
+        acceptedAt: decision.acceptedAt || new Date().toISOString(),
+        implementedAt: mode === "implement" ? new Date().toISOString() : decision.implementedAt || "",
+        runtimePayload
+      };
+      latestDecisionOrder = updatedDecision;
+      const commitSummary = buildDecisionCommitSummary(updatedDecision, mode, runtimePayload);
+      const commitOutcome = mode === "implement" ? getRuntimeEvidence(runtimePayload) : null;
+      const commitProofUi = mode === "implement" ? getRuntimeProofUi(commitOutcome) : null;
+      const commitTone = mode === "implement" ? getRuntimeOutcomeTone(runtimePayload) : "ok";
+      setExecutionControl({
+        badge: mode === "implement" ? commitProofUi.badge : "Ordem aceita",
+        title:
+          mode === "implement"
+            ? commitProofUi.title
+            : "Mesa registrou a ordem real",
+        text:
+          mode === "implement"
+            ? "A Mesa de decisão separou runtime concluída de implementação comprovada."
+            : "A ordem foi registrada e continua disponível para implementar depois.",
+        tone: commitTone,
+        summary: commitSummary,
+        log: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, decision.promptText || contextText) : decision.promptText || contextText
+      });
+      setAgentResponse({
+        badge: mode === "implement" ? commitProofUi.responseBadge : "Ordem aceita",
+        title:
+          mode === "implement"
+            ? commitProofUi.responseTitle
+            : "A decisão virou ordem real",
+        text:
+          mode === "implement"
+            ? commitProofUi.text
+            : "A Mesa de Decisão registrou a ordem real. Nada foi executado automaticamente além do registro.",
+        next:
+          mode === "implement"
+            ? commitSummary.pending
+            : "Use Implementar ordem aceita quando quiser executar, ou ajuste o contexto se algo ficou fraco.",
+        tone: commitTone,
+        decisionActions: mode !== "implement",
+        summary: commitSummary,
+        items: replies.length
+          ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: "done" }))
+          : [{ state: "done", label: "ordem", agent: selection.agentLabel || "Cheffe Call", text: contextText }]
+      });
+      setActionFeedback({
+        badge: mode === "implement" ? commitProofUi.shortBadge : "Aceito",
+        title:
+          mode === "implement"
+            ? commitProofUi.actionTitle
+            : "Ordem real registrada",
+        message:
+          mode === "implement"
+            ? commitSummary.evidence
+            : "A ordem está registrada. O painel ainda permite implementar esta ordem aceita.",
+        tone: commitTone,
+        closable: true,
+        steps: [
+          { label: "Registro concluído", state: "done" },
+          { label: mode === "implement" ? "Runtime concluída" : "Implementação aguardando comando", state: "done" },
+          { label: mode === "implement" ? commitProofUi.stepLabel : "Terminal atualizado", state: mode === "implement" ? commitProofUi.state : "done" }
+        ],
+        details: runtimePayload ? formatRuntimeDetailsForTerminal(runtimePayload, "mesa: ordem rodada") : contextText
+      });
+      if (mode === "implement") {
+        hideDecisionResolutionActions(true);
+      } else {
+        showDecisionResolutionActions(updatedDecision);
+      }
+      setStatus(
+        mode === "implement"
+          ? commitOutcome?.hasApplicationProof
+            ? "Ordem real aplicada com prova pela Mesa de decisão."
+            : commitOutcome?.hasExecutionProof
+              ? "Ordem real executada com prova; aplicação ainda pendente."
+              : "Ordem real rodada, mas sem prova de implementação ainda."
+          : "Ordem real aceita e registrada.",
+        "ok"
+      );
+    } catch (error) {
+      setAgentResponse({
+        badge: "Falha",
+        title: mode === "implement" ? "Implementação não concluiu" : "Ordem não foi aceita",
+        text: error.message || "A Mesa de Decisão não conseguiu concluir esta etapa.",
+        next: "Confira senha/conexão e tente novamente pelos botões da resposta analisada.",
+        tone: "bad",
+        decisionActions: true,
+        summary: {
+          resolved: "Nada confirmado nesta etapa.",
+          evidence: "Falha antes do registro ou execução completa.",
+          pending: "Tentar aceitar/implementar novamente.",
+          order: summarizeOneLine(contextText, "Ordem preservada.")
+        },
+        items: [{ state: "bad", label: "erro", agent: "Mesa de decisão", text: error.message || "Falha." }]
+      });
+      showDecisionResolutionActions(decision);
+      setActionFeedback({
+        badge: "Falha",
+        title: "Mesa não concluiu",
+        message: error.message || "A ordem real não foi concluída.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Etapa interrompida", state: "bad" },
+          { label: "Análise preservada", state: "pending" }
+        ],
+        details: decision.promptText || contextText
+      });
+      setStatus(error.message || "Falha na Mesa de decisão.", "bad");
+    } finally {
+      setDecisionResolutionBusy(false);
+      if (pendingDecisionResolution && decisionResolutionActions && !decisionResolutionActions.hidden) {
+        showDecisionResolutionActions(pendingDecisionResolution);
+      }
+    }
+  }
+
+  async function submitDecisionOrder() {
+    const password = getAdminPassword();
+    const contextText = String(decisionComposerText?.value || "").trim();
+    if (!password) {
+      setDecisionComposerStatus("Senha Full Admin obrigatória para analisar a decisão.", "bad");
+      setStatus("Valide a senha Full Admin para enviar a decisão aos agentes.", "bad");
+      quickPasswordInput?.focus();
+      return;
+    }
+    if (!contextText) {
+      setDecisionComposerStatus("Escreva o contexto da ordem antes de enviar.", "bad");
+      decisionComposerText?.focus();
+      return;
+    }
+    const selection = getDecisionSelection();
+    const promptText = buildDecisionPrompt(contextText, selection);
+    latestDecisionOrder = { selection, contextText, promptText, createdAt: new Date().toISOString(), seed: decisionComposerSeed || {} };
+    if (decisionComposerSubmit) decisionComposerSubmit.disabled = true;
+    hideDecisionResolutionActions(true);
+    setDecisionComposerStatus("Enviando para análise dos agentes...", "pending");
+    setActionFeedback({
+      badge: "Mesa",
+      title: "Analisando decisão",
+      message: "A ordem foi montada com escritório, agente principal e tipo de ação. Nada será implementado sem aceite.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Contexto escrito", state: "done" },
+        { label: "Rodada dos agentes", state: "running" },
+        { label: "Resposta auditável", state: "pending" },
+        { label: "Aceite do operador", state: "pending" }
+      ],
+      details: promptText
+    });
+    try {
+      syncVisibleInstruction(promptText, {
+        visibleText: contextText,
+        focus: false
+      });
+      if (commandInput) commandInput.value = promptText;
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: promptText });
+      activateMeetingResponse(promptText, payload);
+      const replies = getPayloadOpinions(payload, promptText);
+      const targetReply = findDecisionTargetReply(replies, selection, decisionComposerSeed || {});
+      const decision = {
+        selection,
+        contextText,
+        promptText,
+        replies,
+        targetReply,
+        payload,
+        seed: decisionComposerSeed || {},
+        createdAt: new Date().toISOString()
+      };
+      latestDecisionOrder = decision;
+      pendingDecisionResolution = decision;
+      terminalEl.textContent = [
+        "> cheffe-call/decision-analysis",
+        `escritorio: ${selection.officeLabel}`,
+        `agente: ${selection.agentLabel}`,
+        `acao solicitada: ${selection.guide.label}`,
+        `respostas: ${replies.length}`,
+        "status: aguardando aceite do operador",
+        "",
+        "contexto:",
+        contextText,
+        "",
+        formatAgentReplies(replies, 5)
+      ].join("\n");
+      setActionFeedback({
+        badge: "Análise",
+        title: "Resposta analisada",
+        message: "Os agentes responderam. A decisão ainda precisa ser aceita ou implementada por você.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Rodada dos agentes concluída", state: "done" },
+          { label: "Resposta auditável montada", state: "done" },
+          { label: "Aguardando aceite/implementação", state: "running" }
+        ],
+        details: formatAgentReplies(replies, 5)
+      });
+      setAgentResponse({
+        badge: "Mesa de decisão",
+        title: "Resposta pronta para decisão final",
+        text: `${selection.officeLabel} / ${selection.agentLabel}: análise pronta, mas ainda sem execução real.`,
+        next: "Clique Aceitar como ordem real para registrar, ou Implementar agora para executar depois da análise.",
+        tone: "ok",
+        decisionActions: true,
+        summary: buildDecisionAnalysisSummary(selection, replies),
+        items: replies.length
+          ? buildAgentReplyItems(replies, 4).map((item) => ({ ...item, state: "done" }))
+          : [{ state: "done", label: "analisado", agent: selection.agentLabel, text: contextText }]
+      });
+      showDecisionResolutionActions(decision);
+      setDecisionComposerStatus("Análise pronta. Escolha aceitar ou implementar no painel.", "ok");
+      refreshDecisionPreview(contextText);
+      closeDecisionComposer();
+      setStatus("Mesa de decisão analisou a ordem. Aguardando aceite ou implementação.", "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Decisão não concluiu",
+        message: error.message || "A ordem não foi concluída.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Fluxo interrompido", state: "bad" },
+          { label: "Ordem preservada no popup", state: "pending" }
+        ],
+        details: promptText
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "A decisão não virou resposta útil",
+        text: error.message || "A Cheffe Call não conseguiu concluir o fluxo.",
+        next: "Revise senha/contexto e envie de novo pela Mesa de decisão.",
+        tone: "bad",
+        summary: {
+          resolved: "Nada confirmado.",
+          evidence: "Fluxo interrompido antes de resposta válida.",
+          pending: "Reenviar com senha e contexto.",
+          order: "Ordem preservada no popup."
+        },
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha na decisão." }]
+      });
+      setDecisionComposerStatus(error.message || "Falha ao enviar decisão.", "bad");
+      setStatus(error.message || "Falha ao enviar decisão.", "bad");
+    } finally {
+      if (decisionComposerSubmit) decisionComposerSubmit.disabled = false;
+    }
+  }
+
+  function findPromptAgentForOpinion(active) {
+    if (!promptConsoleData?.agents?.length || !active) return null;
+    const nameKey = normalizePromptKey(getAgentDisplayName(active));
+    const officeKey = normalizePromptKey(getAgentOffice(active));
+    const roleKey = normalizePromptKey(active.role || "");
+    const agents = promptConsoleData.agents || [];
+    return (
+      agents.find((item) => normalizePromptKey(item.name) === nameKey && normalizePromptKey(item.office) === officeKey) ||
+      agents.find((item) => normalizePromptKey(item.name) === nameKey) ||
+      agents.find((item) => normalizePromptKey(item.office) === officeKey && normalizePromptKey(item.role).includes(roleKey)) ||
+      agents.find((item) => normalizePromptKey(item.office) === officeKey) ||
+      null
+    );
+  }
+
+  function selectPromptAgentForOpinion(active) {
+    const promptAgent = findPromptAgentForOpinion(active);
+    const office = promptAgent?.office || getAgentOffice(active);
+    if (promptModeSelect) promptModeSelect.value = "agent";
+    if (promptOfficeSelect) promptOfficeSelect.value = office || "";
+    refreshPromptAgentOptions(office || "");
+    if (promptAgentSelect) promptAgentSelect.value = promptAgent?.slug || "";
+    return promptAgent;
+  }
+
+  function buildMasterAdjustmentPrompt(active) {
+    const guide = getAdjustmentGuide();
+    const packet = buildExecutionPacket(active, "prompt");
+    const agentName = getAgentDisplayName(active);
+    const office = getAgentOffice(active);
+    const subject = String(quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || "").trim();
+    const opinion = String(active?.opinion || active?.assignment?.idea || packet.text || "").trim();
+    return [
+      "PROMPT MESTRE - AJUSTE DE OPINIAO",
+      `Escritorio selecionado: ${office}`,
+      `Agente selecionado: ${agentName} (${active?.role || "agente"})`,
+      `Tipo de ajuste: ${guide.label}`,
+      "",
+      "Opiniao original:",
+      opinion || "Sem opiniao original registrada.",
+      "",
+      "Ordem do ajuste:",
+      guide.directive,
+      "",
+      "Saida esperada:",
+      "- uma nova opiniao curta e diferente das demais",
+      "- utilidade real para a Cheffe Call",
+      "- proxima acao executavel ou criterio claro de validacao",
+      "- se nao houver evidencia ou impacto, responder que o agente fica em silencio",
+      "",
+      subject ? `Contexto da reuniao: ${subject}` : "Contexto da reuniao: usar a ordem atual da sala.",
+      "",
+      "Prompt base do agente:",
+      packet.prompt
+    ].join("\n");
+  }
+
+  function pulsePromptMaster() {
+    promptCommandCenter?.classList.remove("is-pulsing");
+    window.requestAnimationFrame(() => {
+      promptCommandCenter?.classList.add("is-pulsing");
+      window.setTimeout(() => promptCommandCenter?.classList.remove("is-pulsing"), 1400);
+    });
+  }
+
+  function stageAdjustmentInPromptMaster(active, options = {}) {
+    if (!active) return "";
+    pendingAdjustmentContext = active;
+    const promptAgent = selectPromptAgentForOpinion(active);
+    const promptText = buildMasterAdjustmentPrompt(active);
+    updatePromptPreview({
+      title: `Ajustar ${getAgentDisplayName(active)}`,
+      badge: `${getAgentOffice(active)} • ${getAdjustmentGuide().label}`,
+      text: promptText
+    });
+    if (commandInput) commandInput.value = promptText;
+    if (decisionActionSelect) decisionActionSelect.value = "rethink";
+    selectDecisionAgentForOpinion(active);
+    refreshDecisionPreview(promptText);
+    if (promptConsoleMeta) {
+      promptConsoleMeta.textContent = promptAgent
+        ? `Ajuste preparado para ${promptAgent.name} em ${promptAgent.office}. Envie ao terminal para executar.`
+        : `Ajuste preparado com o escritório ${getAgentOffice(active)}. Selecione outro agente se quiser redirecionar.`;
+    }
+    terminalEl.textContent = [
+      "> prompt-master/adjustment-ready",
+      `agent: ${getAgentDisplayName(active)}`,
+      `office: ${getAgentOffice(active)}`,
+      `adjustment: ${getAdjustmentGuide().label}`,
+      "status: pronto no Prompt Mestre; Executar no terminal envia aos agentes"
+    ].join("\n");
+    pulsePromptMaster();
+    if (options.scroll !== false) {
+      promptCommandCenter?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    return promptText;
   }
 
   function setCommandBarPulse() {
@@ -460,7 +3308,7 @@
     const mode = promptModeSelect?.value || "global";
     if (mode === "global") {
       updatePromptPreview({
-        title: "Prompt supremo",
+        title: "Prompt Mestre",
         badge: "Cheffe Call",
         text: promptConsoleData.globalPrompt || ""
       });
@@ -493,7 +3341,21 @@
       await navigator.clipboard.writeText(value);
       return true;
     } catch (_error) {
-      return false;
+      const textarea = document.createElement("textarea");
+      textarea.value = value;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.top = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        return document.execCommand("copy");
+      } catch (_fallbackError) {
+        return false;
+      } finally {
+        textarea.remove();
+      }
     }
   }
 
@@ -511,9 +3373,10 @@
         "Selecione um escritório"
       );
       refreshPromptAgentOptions("");
+      syncDecisionSelectors();
       selectPromptPayload();
       if (promptConsoleMeta) {
-        promptConsoleMeta.textContent = `${promptConsoleData.totalAgents || 0} agentes carregados. Use o prompt supremo, um escritório ou um agente específico.`;
+        promptConsoleMeta.textContent = `${promptConsoleData.totalAgents || 0} agentes carregados. Use o Prompt Mestre, um escritório ou um agente específico.`;
       }
     } catch (error) {
       updatePromptPreview({
@@ -524,6 +3387,7 @@
       if (promptConsoleMeta) {
         promptConsoleMeta.textContent = String(error?.message || error || "Falha ao carregar prompts.");
       }
+      syncDecisionSelectors();
     }
   }
 
@@ -701,6 +3565,10 @@
         score: item.score || item.autonomy?.autonomy || item.autonomy || 0,
         urgency: item.urgency || item.autonomy?.urgency || 0,
         confidence: item.confidence || item.autonomy?.confidence || 0,
+        competitionScore: item.competitionScore || item.competition?.competitionScore || 0,
+        intelligence: item.intelligence || item.competition?.intelligence || 0,
+        execution: item.execution || item.competition?.execution || 0,
+        impact: item.impact || item.competition?.impact || 0,
         intent: item.intent || item.autonomy?.intent || item.assignment?.idea || "",
         action: item.action || item.assignment?.action || "",
         assignment: item.assignment || null,
@@ -889,19 +3757,70 @@
     return `${match ? match.text : fallback} Assunto: ${cleanSubject}.`;
   }
 
+  function looksLikeRepeatedOpinion(text = "") {
+    const clean = String(text || "").toLowerCase().replace(/\s+/g, " ").trim();
+    if (!clean) return true;
+    const templateHits = [
+      "prioridade e decisão: eu compito trazendo evidência útil",
+      "placar 62%",
+      "se não mudar tela, dado ou rotina",
+      "tem memória própria para prioridade e decisão",
+      "eu saio da disputa"
+    ].filter((piece) => clean.includes(piece)).length;
+    return templateHits >= 2;
+  }
+
+  function normalizeOpinionSkeleton(text = "") {
+    return String(text || "")
+      .toLowerCase()
+      .replace(/r\$\s*[\d.,]+/g, "valor")
+      .replace(/\d+%/g, "pct")
+      .replace(/\d+/g, "num")
+      .replace(/[^\p{L}\p{N}\s]/gu, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 180);
+  }
+
   function normalizeOpinions(opinions, subject) {
     const list = Array.isArray(opinions) && opinions.length ? opinions : fallbackAgents;
     const seen = new Map();
+    const seenSkeleton = new Map();
     return list.map((item, index) => {
       const rawOpinion = String(item.opinion || "").trim();
       const key = rawOpinion.toLowerCase().replace(/\s+/g, " ");
-      const repeated = key && seen.has(key);
+      const skeleton = normalizeOpinionSkeleton(rawOpinion);
+      const repeated = (key && seen.has(key)) || (skeleton && seenSkeleton.has(skeleton)) || looksLikeRepeatedOpinion(rawOpinion);
       seen.set(key, (seen.get(key) || 0) + 1);
+      if (skeleton) seenSkeleton.set(skeleton, (seenSkeleton.get(skeleton) || 0) + 1);
       return {
         ...item,
         opinion: !rawOpinion || repeated ? buildOpinionForAgent(item, subject, index) : rawOpinion
       };
     });
+  }
+
+  function getPayloadOpinions(payload, subject) {
+    const session = payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
+    return normalizeOpinions(payload?.opinions || session?.opinions || [], subject || payload?.meeting?.lastInstruction || "ordem da sala");
+  }
+
+  function buildAgentReplyItems(opinions, limit = 4) {
+    const list = Array.isArray(opinions) ? opinions : [];
+    return list.slice(0, limit).map((item, index) => ({
+      state: index === 0 ? "running" : "done",
+      label: index === 0 ? "falando agora" : "respondeu",
+      agent: `${getAgentDisplayName(item)} • ${getAgentOffice(item)}`,
+      text: item?.opinion || item?.assignment?.action || "Resposta registrada."
+    }));
+  }
+
+  function formatAgentReplies(opinions, limit = 5) {
+    const list = Array.isArray(opinions) ? opinions : [];
+    return list
+      .slice(0, limit)
+      .map((item) => `${getAgentDisplayName(item)} (${getAgentOffice(item)}): ${item?.opinion || item?.assignment?.action || ""}`)
+      .join("\n\n");
   }
 
   function renderDaily(payload) {
@@ -911,7 +3830,16 @@
     const action = daily.actionOfDay || {};
     const matchingRealAgent = currentRealAgents.find((item) => getAgentDisplayName(item) === agent.name) || null;
     currentAgentOfDay = agent.name ? { ...matchingRealAgent, ...agent, agent: agent.name } : currentRealAgents[0] || fallbackAgents[0];
-    const neuralScore = Math.max(42, Math.min(100, Number(agent.score || agent.autonomy || 82)));
+    const hasDailyAgent = Boolean(agent.name);
+    const autonomyScore = hasDailyAgent ? clampPercent(agent.score || agent.autonomy || currentAgentOfDay?.score || 0, 0) : 0;
+    const intelligenceScore = hasDailyAgent ? clampPercent(agent.intelligence || agent.confidence || currentAgentOfDay?.confidence || autonomyScore, autonomyScore) : 0;
+    const executionScore = hasDailyAgent ? clampPercent(agent.execution || agent.urgency || currentAgentOfDay?.urgency || autonomyScore, autonomyScore) : 0;
+    const impactScore = hasDailyAgent ? clampPercent(agent.impact || currentAgentOfDay?.impact || Math.round((autonomyScore + executionScore) / 2), autonomyScore) : 0;
+    const competitionScore = clampPercent(
+      hasDailyAgent ? agent.competitionScore || Math.round(autonomyScore * 0.3 + intelligenceScore * 0.25 + executionScore * 0.25 + impactScore * 0.2) : 0,
+      autonomyScore
+    );
+    const neuralScore = hasDailyAgent ? Math.max(42, competitionScore || autonomyScore || 82) : 0;
     if (agentOfDayAvatar) {
       agentOfDayAvatar.innerHTML = `
         <span class="spotlight-rays"></span>
@@ -936,15 +3864,17 @@
 
     agentOfDayEl.textContent = agent.name || "Sem rodada";
     agentOfDayMetaEl.textContent = agent.name
-      ? `${agent.office} • autonomia ${agent.score || 0}% • ${
-          agent.intent || "intencao em formacao"
-        }`
+      ? `${agent.office} • autonomia ${autonomyScore}% • ${agent.intent || "intencao em formacao"}`
       : "Rode os agentes para calcular o destaque.";
+    if (agentCompetitionScoreEl) agentCompetitionScoreEl.textContent = String(competitionScore || 0);
+    if (agentIntelligenceScoreEl) agentIntelligenceScoreEl.textContent = String(intelligenceScore || 0);
+    if (agentExecutionScoreEl) agentExecutionScoreEl.textContent = String(executionScore || 0);
+    if (agentImpactScoreEl) agentImpactScoreEl.textContent = String(impactScore || 0);
     if (agentNeuralBar) agentNeuralBar.style.width = `${neuralScore}%`;
     if (agentAwardNote) {
       agentAwardNote.textContent = agent.name
-        ? `${agent.name} atingiu um objetivo importante no fluxo de aprendizado neural: ${neuralScore}% de crescimento aplicado. Esse destaque inspira os outros agentes a subir pontuação, foco e qualidade.`
-        : "Objetivo neural em leitura. Quando um agente atinge uma meta, a sala inteira vê o avanço.";
+        ? `${agent.name} venceu a rodada por combinação de autonomia, inteligência, execução e impacto. O próximo agente só passa na frente se entregar mais com menos dependência.`
+        : "Aguardando a próxima rodada para calcular quem resolveu melhor.";
     }
 
     officeOfDayEl.textContent = office.office || "Sem rodada";
@@ -980,7 +3910,7 @@
     if (achievementHeadlineEl) {
       achievementHeadlineEl.textContent = liveLeader
         ? `${liveLeader.name} puxa a reunião agora`
-        : "Funcionários e escritórios em disputa real";
+        : "Agentes e escritórios em disputa real";
     }
 
     if (achievementChaseLineEl) {
@@ -1012,19 +3942,158 @@
     }
   }
 
+  function getOpinionKey(item) {
+    const context = enrichAgentContext(item);
+    return slugify(`${context.name}|${context.office}|${context.action || item.opinion || ""}`).slice(0, 140);
+  }
+
+  function getOpinionDecisionMatch(item, session) {
+    const decisions = Array.isArray(session?.decisions) ? session.decisions : [];
+    const approvals = Array.isArray(session?.approvals) ? session.approvals : [];
+    const key = getOpinionKey(item);
+    const agentSlug = slugify(getAgentDisplayName(item));
+    const context = enrichAgentContext(item);
+    const actionSlug = slugify(context.action || item.opinion || "");
+    const opinionSlug = slugify(item.opinion || "");
+    const byKey = decisions.find((decision) => decision.opinionKey && decision.opinionKey === key);
+    if (byKey) return byKey;
+    const byAgentAndContent = decisions.find((decision) => {
+      if (slugify(decision.agent || "") !== agentSlug) return false;
+      const decisionText = slugify([decision.title, decision.text, decision.command].join(" "));
+      return (
+        (actionSlug && (decisionText.includes(actionSlug.slice(0, 44)) || actionSlug.includes(decisionText.slice(0, 44)))) ||
+        (opinionSlug && decisionText.includes(opinionSlug.slice(0, 44)))
+      );
+    });
+    if (byAgentAndContent) return byAgentAndContent;
+    const approval = approvals.find((itemApproval) => (
+      (itemApproval.opinionKey && itemApproval.opinionKey === key) ||
+      slugify(itemApproval.agent || "") === agentSlug
+    ));
+    return approval
+      ? {
+          state: "ready",
+          kindLabel: "aprovada",
+          action: approval.action || "approve",
+          agent: approval.agent,
+          title: approval.note || "Opiniao aprovada"
+        }
+      : null;
+  }
+
+  function getOpinionFlowStatus(item, session) {
+    if (item?.approvalRequired === false) {
+      return {
+        state: "silent",
+        label: "triagem",
+        detail: "Sem ligação suficiente para virar ordem agora.",
+        action: ""
+      };
+    }
+    const match = getOpinionDecisionMatch(item, session);
+    if (!match) {
+      return {
+        state: "pending",
+        label: "pendente",
+        detail: "Aguardando decisão Full Admin.",
+        action: ""
+      };
+    }
+    const state = match.state || "ready";
+    const labelMap = {
+      ready: "aprovada",
+      queued: "tarefa",
+      running: "em runtime",
+      executed: "execução provada",
+      terminal: "no terminal",
+      fallback: "no terminal",
+      published: "aplicação provada",
+      dismissed: "ignorada"
+    };
+    const detailMap = {
+      running: "Execução enviada; aguardando evidência verificável.",
+      executed: "Runtime retornou prova de execução; aplicação/publicação ainda pendente.",
+      terminal: "Registrada no terminal; ainda não prova alteração real.",
+      fallback: "Registrada como apoio; ainda não prova alteração real.",
+      published: "Servidor marcou aplicação com evidência no alvo final.",
+      queued: "Tarefa rastreável criada; ainda precisa execução."
+    };
+    return {
+      state,
+      label: match.kindLabel || labelMap[state] || "decidida",
+      detail: detailMap[state] || match.title || match.text || "Decisão registrada na reunião.",
+      action: match.action || ""
+    };
+  }
+
+  function updateOpinionFlowSummary(flowItems) {
+    const pending = flowItems.filter((item) => item.status.state === "pending").length;
+    const ready = flowItems.filter((item) => ["ready", "queued"].includes(item.status.state)).length;
+    const running = flowItems.filter((item) => ["running", "executed", "terminal", "fallback", "published"].includes(item.status.state)).length;
+    if (opinionPendingCount) opinionPendingCount.textContent = String(pending);
+    if (opinionReadyCount) opinionReadyCount.textContent = String(ready);
+    if (opinionRunningCount) opinionRunningCount.textContent = String(running);
+    if (opinionFlowMeta) {
+      opinionFlowMeta.textContent = flowItems.length
+        ? `${flowItems.length} opinioes na sala. ${pending} aguardam aprovacao, ${ready} estao prontas para fila de ordens e ${running} estao no terminal/runtime aguardando conferência.`
+        : "Aprovar guarda uma opiniao. Implementar fila de ordens roda aprovadas e mostra evidência ou pendência.";
+    }
+    if (runApprovedOpinions) {
+      runApprovedOpinions.textContent = ready ? `Implementar fila de ordens (${ready})` : "Implementar fila de ordens";
+      runApprovedOpinions.disabled = ready === 0;
+    }
+    if (directOrderRunQueue) {
+      directOrderRunQueue.textContent = ready ? `Implementar fila de ordens (${ready})` : "Implementar fila de ordens";
+      directOrderRunQueue.disabled = ready === 0;
+    }
+    const activeStep = ready
+      ? "run"
+      : pending
+        ? "decide"
+        : running
+          ? "done"
+          : flowItems.length
+            ? "listen"
+            : "";
+    opinionFlowSteps.forEach((step) => {
+      const key = step.dataset.opinionFlowStep || "";
+      step.classList.toggle("is-active", key === activeStep);
+      step.classList.toggle(
+        "is-done",
+        (key === "listen" && flowItems.length > 0) ||
+          (key === "decide" && (ready > 0 || running > 0)) ||
+          (key === "run" && running > 0) ||
+          (key === "done" && flowItems.some((item) => ["executed", "published"].includes(item.status.state)))
+      );
+    });
+  }
+
   function renderOpinions(payload) {
     const opinions = normalizeOpinions(payload.opinions, payload.meeting?.lastInstruction || "o assunto da reunião");
     if (!opinions.length) {
       opinionsEl.innerHTML = '<p class="opinion-body">Nenhuma opinião registrada ainda.</p>';
+      latestOpinionFlow = [];
+      updateOpinionFlowSummary([]);
       return;
     }
+    const session = getActiveSession(payload);
+    latestOpinionFlow = opinions.map((item, index) => ({
+      index,
+      item,
+      status: getOpinionFlowStatus(item, session)
+    }));
+    updateOpinionFlowSummary(latestOpinionFlow);
 
     opinionsEl.innerHTML = opinions
       .map(
         (item, index) => {
           const context = enrichAgentContext(item);
+          const flowItem = latestOpinionFlow[index] || { status: { state: "pending", label: "pendente", detail: "" } };
+          const status = flowItem.status;
+          const canRun = ["ready", "queued"].includes(status.state);
+          const isClosed = ["running", "executed", "terminal", "fallback", "published", "dismissed", "silent"].includes(status.state);
           return `
-          <article class="opinion-item" data-opinion-index="${index}">
+          <article class="opinion-item is-${escapeHtml(status.state)}" data-opinion-index="${index}" data-opinion-key="${escapeHtml(getOpinionKey(item))}">
             <div class="opinion-id">
               <div class="opinion-avatar-window" aria-hidden="true">
                 ${renderAgentPhotoToken(item)}
@@ -1034,16 +4103,23 @@
               <span>${escapeHtml(context.office)} • ${escapeHtml(context.role)} • ${escapeHtml(context.score)}%</span>
             </div>
             <div class="opinion-context-window">
+              <div class="opinion-decision-topline">
+                <span>${escapeHtml(status.label)}</span>
+                <span>${escapeHtml(status.detail).slice(0, 120)}</span>
+              </div>
               <p class="opinion-body">${escapeHtml(item.opinion)}</p>
               <div class="idea-context-grid">
                 <span>Neural ${escapeHtml(context.neural)}%</span>
                 <span>Objetivo: ${escapeHtml(context.intent).slice(0, 90)}</span>
                 <span>Ação: ${escapeHtml(context.action).slice(0, 90)}</span>
               </div>
-              <div class="speech-actions compact">
-                <button type="button" data-list-idea-action="approve" data-index="${index}">Aprovar</button>
-                <button type="button" data-list-idea-action="variation" data-index="${index}">Pedir ajuste</button>
-                <button type="button" data-list-idea-action="task" data-index="${index}">Criar tarefa</button>
+              <div class="speech-actions compact opinion-decision-actions">
+                <button type="button" data-list-idea-action="approve" data-index="${index}" ${isClosed ? "disabled" : ""}>Aprovar card</button>
+                <button type="button" data-list-idea-action="implement" data-index="${index}" ${canRun ? "" : "disabled"}>Implementar card</button>
+                <button type="button" data-list-idea-action="variation" data-index="${index}" title="Leva esta opinião para o Prompt Mestre com escritório e agente selecionados." ${status.state === "dismissed" ? "disabled" : ""}>Ajustar</button>
+                <button type="button" data-list-idea-action="task" data-index="${index}" title="Cria uma tarefa rastreável para o agente transformar a opinião em entrega." ${isClosed ? "disabled" : ""}>Criar tarefa</button>
+                <button type="button" data-list-idea-action="terminal" data-index="${index}" title="Envia a opinião deste agente ao terminal da sala.">Terminal</button>
+                <button type="button" data-list-idea-action="dismiss" data-index="${index}" ${isClosed ? "disabled" : ""}>Ignorar</button>
               </div>
             </div>
           </article>
@@ -1149,7 +4225,127 @@
       .join("");
   }
 
-  function moveToNextSpeaker(kindLabel = "próxima fala") {
+  function buildIdeActionPrompt(item = {}) {
+    const missing = Array.isArray(item.missingRequirements) && item.missingRequirements.length
+      ? item.missingRequirements
+      : ["identificar causa concreta no IDE"];
+    const expected = Array.isArray(item.expectedProof) && item.expectedProof.length
+      ? item.expectedProof
+      : ["problema identificado", "arquivo/rota alterado ou bloqueio explicado", "teste/check executado"];
+    return [
+      "Cheffe Call gerou uma ação para resolver aqui no Codex/IDE.",
+      "",
+      "Contexto:",
+      `- ID: ${item.id || "sem-id"}`,
+      `- Status: ${item.status || "waiting-ide-command"}`,
+      `- Intent: ${item.intent || "ide"}`,
+      `- Título: ${item.title || "Ação aguardando IDE"}`,
+      item.reasonCode ? `- Bloqueio/falha: ${item.reasonCode}` : "",
+      "",
+      "Relatório da Cheffe:",
+      item.reason || "A Cheffe Call não conseguiu executar esta ordem de verdade no ambiente atual.",
+      "",
+      "Comando sugerido pelo painel:",
+      item.suggestedIdeCommand || "Codex IDE: reproduzir a pendência localmente, corrigir, testar e devolver prova.",
+      "",
+      "Requisitos faltando:",
+      ...missing.map((line) => `- ${line}`),
+      "",
+      "Prova que devo devolver:",
+      ...expected.map((line) => `- ${line}`),
+      "",
+      "Pedido ao Codex:",
+      "Resolva esta pendência localmente. Não marque como concluída sem execução real. Responda no formato: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
+    ]
+      .filter((line) => line !== null && line !== undefined)
+      .join("\n");
+  }
+
+  function renderIdeActionQueue() {
+    if (!ideActionQueueList) return;
+    if (!ideActionQueue.length) {
+      ideActionQueueList.innerHTML = '<p class="opinion-body">Se deploy, terminal ou ação local não puder rodar online, ela aparece aqui com motivo e comando sugerido.</p>';
+      return;
+    }
+    ideActionQueueList.innerHTML = ideActionQueue
+      .map(
+        (item, index) => {
+          const missing = Array.isArray(item.missingRequirements) && item.missingRequirements.length
+            ? `<pre class="task-queue-block">${escapeHtml(item.missingRequirements.map((line) => `- ${line}`).join("\n"))}</pre>`
+            : "";
+          const expected = Array.isArray(item.expectedProof) && item.expectedProof.length
+            ? `<pre class="task-queue-block is-prompt">${escapeHtml(item.expectedProof.map((line) => `- ${line}`).join("\n"))}</pre>`
+            : "";
+          const idePrompt = item.idePrompt || buildIdeActionPrompt(item);
+          return `
+          <article class="task-queue-item is-blocked">
+            <span>${escapeHtml(item.status || "waiting-ide")} • ${escapeHtml(item.intent || "ide")}</span>
+            <strong>${escapeHtml(item.title || "Ação aguardando IDE")}</strong>
+            <p>${escapeHtml(item.reason || "A Cheffe Call pediu execução local pelo IDE.")}</p>
+            ${item.reasonCode ? `<p><strong>Bloqueio:</strong> ${escapeHtml(item.reasonCode)}</p>` : ""}
+            ${item.suggestedIdeCommand ? `<pre class="task-queue-block">${escapeHtml(item.suggestedIdeCommand)}</pre>` : ""}
+            ${missing}
+            ${expected}
+            <div class="task-queue-actions">
+              <button type="button" data-copy-ide-prompt="${index}">Copiar prompt para IDE</button>
+            </div>
+            <pre class="task-queue-block is-prompt is-ide-prompt">${escapeHtml(idePrompt)}</pre>
+          </article>
+        `;
+        }
+      )
+      .join("");
+  }
+
+  function renderReviewQueue() {
+    if (!reviewQueueList) return;
+    if (!reviewQueue) {
+      reviewQueueList.innerHTML = '<p class="opinion-body">A revisão ainda não foi carregada pela Cheffe Call.</p>';
+      return;
+    }
+
+    const issues = Array.isArray(reviewQueue.issues) ? reviewQueue.issues : [];
+    const generated = reviewQueue.generatedAt ? ` • ${escapeHtml(formatFeedbackTime(reviewQueue.generatedAt))}` : "";
+    if (reviewQueue.status === "not-run") {
+      reviewQueueList.innerHTML = `
+        <article class="task-queue-item">
+          <span>not-run • review:team</span>
+          <strong>Revisão ainda não rodada</strong>
+          <p>${escapeHtml(reviewQueue.summary || "Peça uma auditoria ou rode review:team para gerar a fila.")}</p>
+          <pre class="task-queue-block">npm run review:team</pre>
+        </article>
+      `;
+      return;
+    }
+
+    if (!issues.length) {
+      reviewQueueList.innerHTML = `
+        <article class="task-queue-item is-clear">
+          <span>clear${generated}</span>
+          <strong>Revisão sem pendências</strong>
+          <p>${escapeHtml(reviewQueue.summary || "Nenhum achado aberto no relatório atual.")}</p>
+          ${reviewQueue.file ? `<pre class="task-queue-block">${escapeHtml(reviewQueue.file)}</pre>` : ""}
+        </article>
+      `;
+      return;
+    }
+
+    reviewQueueList.innerHTML = issues
+      .map((issue) => {
+        const location = `${issue.file || "arquivo não informado"}${issue.line ? `:${issue.line}` : ""}`;
+        return `
+          <article class="task-queue-item is-review ${issue.severity ? `is-${escapeHtml(issue.severity)}` : ""}">
+            <span>${escapeHtml(issue.severity || "review")} • ${escapeHtml(issue.type || "review")}</span>
+            <strong>${escapeHtml(issue.label || "Pendência de revisão")}</strong>
+            <p>${escapeHtml(location)}</p>
+            ${issue.detail ? `<pre class="task-queue-block">${escapeHtml(issue.detail)}</pre>` : ""}
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  function moveToNextSpeaker(kindLabel = "próxima fala", options = {}) {
     if (!currentOpinions.length) return;
     activeSpeakerIndex = (activeSpeakerIndex + 1) % currentOpinions.length;
     const active = currentOpinions[activeSpeakerIndex];
@@ -1162,6 +4358,16 @@
       agent: getAgentDisplayName(active),
       text: active?.opinion || ""
     });
+    if (options.updateResponse !== false) {
+      setAgentResponse({
+        badge: "Próximo agente",
+        title: `${getAgentDisplayName(active)} assumiu a fala`,
+        text: "A resposta ativa mudou. Os botões do card agora agem sobre este agente.",
+        next: "Aprove, ajuste, transforme em tarefa ou envie ao terminal.",
+        tone: "ok",
+        items: [{ state: "running", label: "falando agora", agent: `${getAgentDisplayName(active)} • ${getAgentOffice(active)}`, text: active?.opinion || "" }]
+      });
+    }
     setStatus(`${getAgentDisplayName(active)} levantou a mão e assumiu a próxima fala.`, "ok");
     window.setTimeout(() => {
       if (raisedHandName === getAgentDisplayName(active)) {
@@ -1219,6 +4425,37 @@
       renderTaskQueue();
       applyAudienceStates();
     }
+
+    const ideQueue = Array.isArray(payload?.ideActions)
+      ? payload.ideActions
+      : Array.isArray(payload?.ideActionQueue?.actions)
+        ? payload.ideActionQueue.actions
+        : [];
+    ideActionQueue = ideQueue.map((item) => ({
+      id: item.id || "",
+      status: item.status || "waiting-ide",
+      intent: item.intent || "",
+      title: item.title || "Ação aguardando IDE",
+      reasonCode: item.reasonCode || "",
+      reason: item.reason || "",
+      missingRequirements: Array.isArray(item.missingRequirements) ? item.missingRequirements : [],
+      suggestedIdeCommand: item.suggestedIdeCommand || "",
+      expectedProof: Array.isArray(item.expectedProof) ? item.expectedProof : [],
+      idePrompt: item.idePrompt || ""
+    }));
+    renderIdeActionQueue();
+
+    reviewQueue = payload?.reviewQueue && typeof payload.reviewQueue === "object"
+      ? {
+          status: payload.reviewQueue.status || "not-run",
+          generatedAt: payload.reviewQueue.generatedAt || "",
+          total: Number(payload.reviewQueue.total || 0),
+          summary: payload.reviewQueue.summary || "",
+          file: payload.reviewQueue.file || "",
+          issues: Array.isArray(payload.reviewQueue.issues) ? payload.reviewQueue.issues : []
+        }
+      : null;
+    renderReviewQueue();
   }
 
   function setSpeakerQueue(opinions, reset = true) {
@@ -1248,13 +4485,13 @@
             <strong>${escapeHtml(activeName)}</strong>
             <p>${escapeHtml(active.opinion || "Aguardando fala.")}</p>
             <div class="speech-actions">
-              <button type="button" data-idea-action="approve">Aprovar A</button>
-              <button type="button" data-idea-action="implement">Implementar I</button>
-              <button type="button" data-idea-action="variation">Ajuste V</button>
-              <button type="button" data-idea-action="task">Tarefa T</button>
-              <button type="button" data-idea-action="terminal">Terminal M</button>
-              <button type="button" data-idea-action="file">Ficha F</button>
-              <button type="button" data-idea-action="next">Próximo N</button>
+              <button type="button" data-idea-action="approve">Aprovar card</button>
+              <button type="button" data-idea-action="implement">Implementar card</button>
+              <button type="button" data-idea-action="variation" title="Leva esta opinião para o Prompt Mestre com escritório e agente selecionados.">Ajustar</button>
+              <button type="button" data-idea-action="task" title="Cria uma tarefa rastreável para o agente transformar a opinião em entrega.">Criar tarefa</button>
+              <button type="button" data-idea-action="terminal" title="Envia a opinião deste agente ao terminal da sala.">Terminal</button>
+              <button type="button" data-idea-action="file">Ficha</button>
+              <button type="button" data-idea-action="next">Próximo</button>
             </div>
           </div>
         </div>
@@ -1324,100 +4561,142 @@
     const agentName = getAgentDisplayName(active);
     const idea = active.opinion || "";
     if (action === "approve") {
-      if (await postRoomAction("approve", active)) {
-        setStatus(`${agentName} recebeu aprovação formal na Cheffe Call.`, "ok");
-        moveToNextSpeaker("próxima fala");
-        return;
-      }
       const packet = buildExecutionPacket(active, "implement");
+      await postRoomAction("approve", active);
       addMeetingLog({ kind: "good", kindLabel: "boa ideia", agent: agentName, text: idea });
-      enqueueTask({
-        state: "ready",
-        kindLabel: "aceita",
-        agent: agentName,
-        title: packet.title,
-        text: packet.text,
-        howTo: packet.howTo,
-        prompt: packet.prompt
+      setAgentResponse({
+        badge: "Card aprovado",
+        title: `${agentName} recebeu aprovação`,
+        text: "A opinião entrou na fila de execução. Ela ainda não mexe no site até você implementar o card ou a fila.",
+        next: "Clique Implementar card para executar só este, ou Implementar fila para rodar todas as aprovadas.",
+        tone: "ok",
+        summary: {
+          resolved: "Ideia aceita e registrada como aprovação.",
+          evidence: "Card entrou na fila de decisões da reunião.",
+          pending: "Ainda falta implementar para alterar tela, dado ou rotina.",
+          order: "Aprovação vira ordem pronta para Implementar card ou Implementar fila."
+        },
+        items: [
+          { state: "done", label: "aprovado", agent: agentName, text: idea },
+          { state: "running", label: "pronto para executar", agent: getAgentOffice(active), text: packet.text }
+        ]
       });
-      setStatus(`${agentName} recebeu voto positivo nessa ideia.`, "ok");
-      moveToNextSpeaker("próxima fala");
+      setActionFeedback({
+        badge: "Aprovação",
+        title: `${agentName} aprovado`,
+        message: "Card guardado. A execução só acontece quando você mandar implementar.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Opinião recebida", state: "done" },
+          { label: "Aprovação registrada", state: "done" },
+          { label: "Aguardando implementação", state: "running" }
+        ],
+        details: packet.howTo,
+        autoCloseMs: 2400
+      });
+      setStatus(`${agentName} recebeu aprovação formal na Cheffe Call.`, "ok");
+      moveToNextSpeaker("próxima fala", { updateResponse: false });
       return;
     }
     if (action === "implement") {
-      if (await postRoomAction("implement", active)) {
-        setStatus(`${agentName} entrou em execução real pela Cheffe Call.`, "ok");
-        moveToNextSpeaker("próxima fala");
+      try {
+        const payload = await runSingleImplementation(active);
+        const outcome = getRuntimeEvidence(payload);
+        const proofUi = getRuntimeProofUi(outcome);
+        const summary = buildRuntimeOutcomeSummary(payload, active?.assignment?.action || idea || `Card de ${agentName}`, "card");
+        const tone = getRuntimeOutcomeTone(payload);
+        setAgentResponse({
+          badge: proofUi.responseBadge,
+          title: `${agentName}: ${proofUi.responseTitle}`,
+          text: proofUi.text,
+          next: summary.pending,
+          tone,
+          summary,
+          items: [
+            { state: "done", label: "enviado", agent: agentName, text: active?.assignment?.action || idea },
+            { state: proofUi.state, label: proofUi.itemLabel, agent: "Cheffe Call", text: outcome.evidence }
+          ]
+        });
+        setStatus(
+          outcome.hasApplicationProof
+            ? `${agentName} retornou aplicação provada.`
+            : outcome.hasExecutionProof
+              ? `${agentName} retornou execução provada; aplicação pendente.`
+              : `${agentName} rodou, mas ainda falta prova real.`,
+          "ok"
+        );
+        moveToNextSpeaker("próxima fala", { updateResponse: false });
         return;
+      } catch (error) {
+        setActionFeedback({
+          badge: "Falha",
+          title: `Falha em ${agentName}`,
+          message: error.message || "Não foi possível implementar este card.",
+          tone: "bad",
+          closable: true,
+          steps: [
+            { label: "Implementação interrompida", state: "bad" },
+            { label: "Card preservado", state: "pending" }
+          ]
+        });
+        throw error;
       }
-      const implementation = active?.assignment?.action || `Começar a executar a proposta de ${agentName}.`;
-      const packet = buildExecutionPacket(active, "implement");
-      enqueueTask({
-        state: "running",
-        kindLabel: "implementando",
-        agent: agentName,
-        title: `Execução iniciada por ${agentName}`,
-        text: implementation,
-        howTo: packet.howTo,
-        prompt: packet.prompt
-      });
-      addMeetingLog({
-        kind: "good",
-        kindLabel: "implementando",
-        agent: agentName,
-        text: implementation
-      });
-      terminalEl.textContent = [
-        "> cheffe-call/implementation",
-        `owner: ${agentName}`,
-        `office: ${getAgentOffice(active)}`,
-        `action: ${implementation}`,
-        "status: execução iniciada pela reunião"
-      ].join("\n");
-      setStatus(`${agentName} começou a implementar a ideia aprovada.`, "ok");
-      moveToNextSpeaker("próxima fala");
-      return;
     }
     if (action === "variation") {
-      const packet = buildExecutionPacket(active, "prompt");
-      const adjustmentPrompt = packet.prompt || `Ajuste a proposta de ${agentName}: ${idea}`;
-      if (await postRoomAction("terminal", active, { title: `Prompt de ajuste para ${agentName}`, command: adjustmentPrompt, prompt: adjustmentPrompt })) {
-        setStatus(`Prompt de ajuste de ${agentName} foi enviado para execução.`, "ok");
-        return;
-      }
+      const adjustmentPrompt = stageAdjustmentInPromptMaster(active);
+      pullAgentIdeasIntoDirectOrder(active);
       enqueueTask({
         state: "terminal",
-        kindLabel: "ajuste",
+        kindLabel: "ajuste pronto",
         agent: agentName,
-        title: `Prompt de ajuste para ${agentName}`,
+        title: `Prompt Mestre ajustando ${agentName}`,
         text: adjustmentPrompt,
         prompt: adjustmentPrompt
       });
       addMeetingLog({ kindLabel: "prompt de ajuste", agent: agentName, text: adjustmentPrompt });
-      terminalEl.textContent = [
-        "> cheffe-call/adjustment-prompt",
-        `agent: ${agentName}`,
-        `office: ${getAgentOffice(active)}`,
-        adjustmentPrompt
-      ].join("\n");
-      setStatus(`Prompt de ajuste de ${agentName} foi enviado.`, "ok");
+      setActionFeedback({
+        badge: "Prompt Mestre",
+        title: `Ajuste pronto para ${agentName}`,
+        message: "A ideia foi puxada para a Ordem direta e também preparada no Prompt Mestre.",
+        tone: "ok",
+        steps: [
+          { label: "Opinião original capturada", state: "ok" },
+          { label: "Escritório selecionado", state: "ok" },
+          { label: "Agente selecionado", state: promptAgentSelect?.value ? "ok" : "pending" },
+          { label: "Terminal aguardando envio", state: "pending" }
+        ],
+        details: adjustmentPrompt,
+        closable: true
+      });
+      setAgentResponse({
+        badge: "Ajuste preparado",
+        title: `${agentName} foi enviado ao Prompt Mestre`,
+        text: "A opinião original, o escritório e o agente foram carregados na Ordem direta para você alterar com suas instruções. Nada foi executado ainda.",
+        next: "Edite Minhas alterações no painel Comando real e clique Ordem direta ou Rodar agentes.",
+        tone: "ok",
+        summary: {
+          resolved: "Opinião carregada com escritório e agente.",
+          evidence: "Ordem direta, Prompt Mestre e Mesa de decisão receberam o contexto.",
+          pending: "Editar a ordem direta e escolher análise ou runtime.",
+          order: "Ajuste ainda não implementa; ele prepara uma ordem melhor."
+        },
+        items: [
+          { state: "done", label: "capturado", agent: agentName, text: idea },
+          { state: "running", label: "aguardando terminal", agent: getAgentOffice(active), text: getAdjustmentGuide().directive }
+        ]
+      });
+      setStatus(`Ajuste de ${agentName} preparado no Prompt Mestre.`, "ok");
       return;
     }
     if (action === "task") {
-      if (await postRoomAction("task", active)) {
-        setStatus(`Tarefa real registrada para ${agentName}.`, "ok");
-        return;
-      }
       const task = `Tarefa criada para ${agentName}: transformar a ideia em entrega revisável, com critério de aceite e próxima ação.`;
       const packet = buildExecutionPacket(active, "implement");
-      enqueueTask({
-        state: "queued",
-        kindLabel: "tarefa",
-        agent: agentName,
-        title: `Fila de tarefa para ${agentName}`,
-        text: task,
+      await postRoomAction("task", active, {
+        title: `Tarefa para ${agentName}`,
         howTo: packet.howTo,
-        prompt: packet.prompt
+        prompt: packet.prompt,
+        text: task
       });
       addMeetingLog({ kindLabel: "tarefa criada", agent: agentName, text: task });
       terminalEl.textContent = [
@@ -1426,14 +4705,47 @@
         `source: ${idea}`,
         "status: aguardando aprovação para execução"
       ].join("\n");
-      setStatus(`Ideia de ${agentName} virou tarefa aguardando aprovação.`, "ok");
+      setAgentResponse({
+        badge: "Tarefa criada",
+        title: `${agentName} virou tarefa rastreável`,
+        text: "A fala foi transformada em uma entrega com dono e critério. Ela aparece na fila de tarefas.",
+        next: "Aprove/implemente quando quiser transformar a tarefa em execução real.",
+        tone: "ok",
+        summary: {
+          resolved: "Tarefa com dono e critério registrada.",
+          evidence: "Terminal recebeu owner, source e status.",
+          pending: "A tarefa ainda precisa ser aprovada ou implementada.",
+          order: "Tarefa criada para acompanhamento."
+        },
+        items: [
+          { state: "done", label: "dono", agent: agentName, text: task },
+          { state: "running", label: "critério", agent: "Cheffe Call", text: packet.howTo }
+        ]
+      });
+      setActionFeedback({
+        badge: "Tarefa",
+        title: "Tarefa registrada",
+        message: `${agentName} recebeu uma tarefa com próximo passo.`,
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Opinião lida", state: "done" },
+          { label: "Tarefa registrada", state: "done" },
+          { label: "Aguardando execução", state: "running" }
+        ],
+        details: packet.prompt,
+        autoCloseMs: 2600
+      });
+      setStatus(`Tarefa real registrada para ${agentName}.`, "ok");
       return;
     }
     if (action === "terminal") {
-      if (await postRoomAction("terminal", active, { title: active?.assignment?.action || idea })) {
-        setStatus(`Terminal real recebeu a ordem de ${agentName}.`, "ok");
-        return;
-      }
+      const packet = buildExecutionPacket(active, "prompt");
+      await postRoomAction("terminal", active, {
+        title: active?.assignment?.action || idea,
+        command: packet.prompt,
+        prompt: packet.prompt
+      });
       enqueueTask({
         state: "terminal",
         kindLabel: "terminal",
@@ -1458,9 +4770,68 @@
         `agent: ${agentName}`,
         `office: ${getAgentOffice(active)}`,
         `idea: ${idea}`,
-        "command: aguardando seu complemento no campo Terminal"
+        "status: terminal recebeu a ordem e registrou a resposta",
+        "",
+        packet.prompt
       ].join("\n");
-      setStatus(`Ideia de ${agentName} foi enviada ao terminal.`, "ok");
+      setAgentResponse({
+        badge: "Terminal",
+        title: `${agentName} recebeu a ordem`,
+        text: "O terminal registrou a fala do agente e preparou prompts de apoio para continuar.",
+        next: "Use o campo Terminal para complementar, ou execute pelo Prompt Mestre se quiser uma nova resposta dos agentes.",
+        tone: "ok",
+        summary: {
+          resolved: "Pedido registrado no terminal.",
+          evidence: "Terminal recebeu agente, escritório, ideia e prompt.",
+          pending: "Terminal não implementa sozinho; falta aprovar ou rodar runtime.",
+          order: "Prompt pronto para continuidade."
+        },
+        items: [
+          { state: "done", label: "ordem recebida", agent: agentName, text: idea },
+          { state: "running", label: "terminal", agent: getAgentOffice(active), text: active?.assignment?.action || packet.text }
+        ]
+      });
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Ordem enviada ao terminal",
+        message: `${agentName} respondeu e o prompt ficou registrado no terminal da sala.`,
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Agente selecionado", state: "done" },
+          { label: "Terminal recebeu", state: "done" },
+          { label: "Resposta registrada", state: "done" }
+        ],
+        details: packet.prompt,
+        autoCloseMs: 2600
+      });
+      setStatus(`Terminal real recebeu a ordem de ${agentName}.`, "ok");
+      return;
+    }
+    if (action === "dismiss") {
+      if (await postRoomAction("dismiss", active, { title: `Ignorar por enquanto: ${agentName}` })) {
+        setAgentResponse({
+          badge: "Ignorado",
+          title: `${agentName} saiu da fila`,
+          text: "A opinião foi marcada para não entrar na execução desta rodada.",
+          next: "Continue ouvindo os próximos agentes ou implemente as aprovadas.",
+          tone: "ok",
+          items: [{ state: "done", label: "fora da rodada", agent: agentName, text: idea }]
+        });
+        setStatus(`${agentName} saiu da fila de ação desta rodada.`, "ok");
+        moveToNextSpeaker("próxima fala", { updateResponse: false });
+        return;
+      }
+      enqueueTask({
+        state: "dismissed",
+        kindLabel: "ignorada",
+        agent: agentName,
+        title: `Opinião ignorada por enquanto`,
+        text: idea
+      });
+      addMeetingLog({ kindLabel: "ignorada", agent: agentName, text: idea });
+      setStatus(`${agentName} ficou fora da execução desta rodada.`, "ok");
+      moveToNextSpeaker("próxima fala", { updateResponse: false });
       return;
     }
     if (action === "file") {
@@ -1627,6 +4998,393 @@
     );
   }
 
+  function getFallbackMeetingScenes(payload = latestCallPayload) {
+    const summary = payload?.summary || {};
+    const website = payload?.editorialFlow?.websiteNumbers || {};
+    return [
+      {
+        id: "pendencias",
+        number: 1,
+        title: "Pendencias para aprovar",
+        summary: "Revise texto, imagem, fonte e sugestoes antes de liberar qualquer mudanca para o Jornal.",
+        status: "ready",
+        primaryTarget: "cheffeApprovalScene",
+        metrics: { review: payload?.reviewQueue?.total || 0, ide: payload?.ideActionQueue?.waiting || 0 }
+      },
+      {
+        id: "abertura",
+        number: 2,
+        title: "Abertura da reuniao",
+        summary: payload?.meeting?.active ? "Sala aberta e runtime pausada para ouvir os agentes." : "Abra a sala com uma ordem clara.",
+        status: payload?.meeting?.active ? "running" : "ready",
+        primaryTarget: "cheffeCallForm",
+        metrics: { active: Boolean(payload?.meeting?.active) }
+      },
+      {
+        id: "opinioes",
+        number: 3,
+        title: "Opinioes dos agentes",
+        summary: "Ouça os agentes, compare propostas e escolha o que vira ordem.",
+        status: "ready",
+        primaryTarget: "opinionsList",
+        metrics: { opinions: Array.isArray(payload?.opinions) ? payload.opinions.length : 0 }
+      },
+      {
+        id: "decisao",
+        number: 4,
+        title: "Aceitar, implementar ou pular",
+        summary: "Use a mesa de decisao para transformar a fala em ordem real com evidencia.",
+        status: "ready",
+        primaryTarget: "decisionDeskTitle",
+        metrics: { executableActions: Array.isArray(payload?.executableActions) ? payload.executableActions.length : 0 }
+      },
+      {
+        id: "relatorios",
+        number: 5,
+        title: "Relatorios",
+        summary: "Confira runtime, filas, logs e provas antes de avançar.",
+        status: "ready",
+        primaryTarget: "callAgentReportTitle",
+        metrics: { queue: Array.isArray(payload?.queue) ? payload.queue.length : 0 }
+      },
+      {
+        id: "ordens",
+        number: 6,
+        title: "Ordens do chefe",
+        summary: "Revise a fila que nasceu da reuniao.",
+        status: "ready",
+        primaryTarget: "taskQueueList",
+        metrics: { orders: Array.isArray(payload?.orders) ? payload.orders.length : 0 }
+      },
+      {
+        id: "website",
+        number: 7,
+        title: "Numeros do website",
+        summary: "Veja volume de noticias, feeds e sinais do site.",
+        status: "ready",
+        primaryTarget: "cheffeWebsiteNumbers",
+        metrics: { totalNews: website.totalNews || 0, topicFeeds: website.topicFeeds || 0 }
+      },
+      {
+        id: "agentes",
+        number: 8,
+        title: "Numeros dos agentes",
+        summary: "Confira total de agentes, autonomia e escritorios.",
+        status: "ready",
+        primaryTarget: "cheffeAgentNumbers",
+        metrics: { totalAgents: summary.totalAgents || 181, averageAutonomy: summary.averageAutonomy || 0 }
+      },
+      {
+        id: "premiacao",
+        number: 9,
+        title: "Premiacao dos agentes",
+        summary: "Feche a call reconhecendo o agente e o escritorio de maior impacto.",
+        status: "ready",
+        primaryTarget: "achievementHeadline",
+        metrics: { agentOfDay: payload?.dailyContext?.agentOfDay?.name || "" }
+      }
+    ];
+  }
+
+  function getSceneTargetElement(scene) {
+    const targetMap = {
+      pendencias: "cheffeApprovalScene",
+      abertura: "cheffeCallForm",
+      opinioes: "cheffeOpinionsScene",
+      decisao: "decisionDeskTitle",
+      relatorios: "cheffeReportsScene",
+      ordens: "taskQueueList",
+      website: "cheffeWebsiteNumbers",
+      "saude-editorial": "cheffeEditorialHealth",
+      agentes: "cheffeAgentNumbers",
+      premiacao: "achievementHeadline"
+    };
+    const targetId = scene?.primaryTarget || targetMap[scene?.id] || "";
+    return targetId ? document.getElementById(targetId) : null;
+  }
+
+  function getSceneFocusBlock(scene) {
+    const target = getSceneTargetElement(scene);
+    return target?.closest("section, article, form, .call-console, .task-queue-panel") || target;
+  }
+
+  function formatSceneMetricValue(value) {
+    if (Array.isArray(value)) return `${value.length} itens`;
+    if (value && typeof value === "object") return `${Object.keys(value).length} campos`;
+    if (typeof value === "boolean") return value ? "sim" : "nao";
+    if (value === 0) return "0";
+    return String(value || "");
+  }
+
+  function renderSceneMetrics(metrics = {}) {
+    if (!sceneMetrics) return;
+    const entries = Object.entries(metrics || {})
+      .filter(([key]) => key)
+      .slice(0, 8);
+    sceneMetrics.innerHTML = entries.length
+      ? entries
+          .map(
+            ([key, value]) => `
+              <article>
+                <span>${escapeHtml(key.replace(/([A-Z])/g, " $1").trim())}</span>
+                <strong>${escapeHtml(formatSceneMetricValue(value))}</strong>
+              </article>
+            `
+          )
+          .join("")
+      : `<p>Nenhuma metrica especifica nesta cena.</p>`;
+  }
+
+  function renderSceneTimeline() {
+    if (!sceneTimeline) return;
+    sceneTimeline.innerHTML = meetingScenes
+      .map((scene, index) => {
+        const isActive = index === activeSceneIndex;
+        const isDone = completedScenes.has(scene.id);
+        return `
+          <li>
+            <button type="button" class="cheffe-scene-step ${isActive ? "is-active" : ""} ${isDone ? "is-done" : ""}" data-scene-index="${index}">
+              <span>${escapeHtml(scene.number || index + 1)}</span>
+              <strong>${escapeHtml(scene.title || `Cena ${index + 1}`)}</strong>
+              <i>${escapeHtml(scene.status || "ready")}</i>
+            </button>
+          </li>
+        `;
+      })
+      .join("");
+  }
+
+  function setActiveScene(index, options = {}) {
+    if (!meetingScenes.length) return;
+    const nextIndex = Math.min(Math.max(Number(index) || 0, 0), meetingScenes.length - 1);
+    activeSceneIndex = nextIndex;
+    window.sessionStorage.setItem("cheffeCallActiveScene", String(activeSceneIndex));
+    const scene = meetingScenes[activeSceneIndex];
+    document.body.dataset.cheffeScene = scene.id || "";
+    document.querySelectorAll(".is-scene-focus").forEach((node) => node.classList.remove("is-scene-focus"));
+
+    if (sceneBadge) sceneBadge.textContent = `Cena ${scene.number || activeSceneIndex + 1}`;
+    if (sceneTitle) sceneTitle.textContent = scene.title || `Cena ${activeSceneIndex + 1}`;
+    if (sceneSummary) sceneSummary.textContent = scene.summary || "Cena pronta para leitura.";
+    const stage = document.querySelector("#cheffeSceneStage");
+    if (stage) stage.dataset.sceneStatus = scene.status || "ready";
+    renderSceneMetrics(scene.metrics || {});
+    renderSceneTimeline();
+
+    const focusBlock = getSceneFocusBlock(scene);
+    focusBlock?.classList.add("is-scene-focus");
+    if (options.scroll && focusBlock) {
+      focusBlock.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    if (scenePrev) scenePrev.disabled = editorialApprovalGateActive || activeSceneIndex <= 0;
+    if (sceneNext) sceneNext.disabled = editorialApprovalGateActive || activeSceneIndex >= meetingScenes.length - 1;
+    if (sceneFinish) {
+      sceneFinish.disabled = editorialApprovalGateActive;
+      sceneFinish.textContent = activeSceneIndex >= meetingScenes.length - 1 ? "Finalizar reunião" : "Finalizar cena";
+    }
+  }
+
+  function finishActiveScene() {
+    if (editorialApprovalGateActive) {
+      setEditorialApprovalStatus("Resolva as pendências humanas da Cena 1 antes de avançar.", "pending");
+      return;
+    }
+    const scene = meetingScenes[activeSceneIndex];
+    if (!scene) return;
+    completedScenes.add(scene.id);
+    window.sessionStorage.setItem("cheffeCallCompletedScenes", JSON.stringify([...completedScenes]));
+    setActiveScene(activeSceneIndex + 1, { scroll: true });
+  }
+
+  function renderSceneFlow(payload) {
+    const scenes = Array.isArray(payload?.editorialFlow?.scenes)
+      ? payload.editorialFlow.scenes
+      : Array.isArray(payload?.meetingScenes)
+        ? payload.meetingScenes
+        : [];
+    meetingScenes = scenes.length ? scenes : getFallbackMeetingScenes(payload);
+    if (activeSceneIndex >= meetingScenes.length) activeSceneIndex = Math.max(0, meetingScenes.length - 1);
+    if (sceneFlowMeta) {
+      const training = payload?.editorialFlow?.training || {};
+      const sheet = payload?.editorialFlow?.briefingSheet?.latest || {};
+      sceneFlowMeta.textContent = training.active
+        ? `${meetingScenes.length} cenas com treinamento editorial ativo (${sheet.gate || "sem gate"}). Finalize uma para avancar.`
+        : `${meetingScenes.length} cenas operacionais. Finalize uma para avancar.`;
+    }
+    setActiveScene(activeSceneIndex);
+  }
+
+  function renderSceneDataGrid(container, rows, emptyText) {
+    if (!container) return;
+    container.innerHTML = rows.length
+      ? rows
+          .map(
+            (row) => `
+              <article>
+                <span>${escapeHtml(row.label)}</span>
+                <strong>${escapeHtml(row.value)}</strong>
+                <p>${escapeHtml(row.detail || "")}</p>
+              </article>
+            `
+          )
+          .join("")
+      : `<p class="opinion-body">${escapeHtml(emptyText || "Sem dados carregados.")}</p>`;
+  }
+
+  function renderWebsiteNumbers(payload) {
+    const website = payload?.editorialFlow?.websiteNumbers || {};
+    const topCategories = Array.isArray(website.topCategories)
+      ? website.topCategories.slice(0, 4).map((item) => `${item.category}: ${item.total}`).join(" | ")
+      : "";
+    renderSceneDataGrid(
+      websiteNumbersGrid,
+      [
+        { label: "Noticias vivas", value: String(website.runtimeNews || 0), detail: "Itens em runtime-news.json." },
+        { label: "Arquivo", value: String(website.archiveNews || 0), detail: "Itens em news-archive.json." },
+        { label: "Total", value: String(website.totalNews || 0), detail: "Volume lido pela Cheffe Call agora." },
+        { label: "Feeds", value: String(website.topicFeeds || 0), detail: `${website.topicFeedItems || 0} itens nos feeds tematicos.` },
+        { label: "Visitas", value: String(website.visits || 0), detail: "Registros locais de visitas." },
+        { label: "Categorias", value: topCategories || "sem ranking", detail: "Principais editorias em dados vivos." }
+      ],
+      "Sem numeros do website no payload."
+    );
+  }
+
+  function buildEditorialHealthPrompt(action = {}) {
+    if (action.idePrompt) return action.idePrompt;
+    const missing = Array.isArray(action.missingRequirements) ? action.missingRequirements : [];
+    const expected = Array.isArray(action.expectedProof) ? action.expectedProof : [];
+    const isHuman = action.resolutionType === "human-approval";
+    return [
+      "Codex, resolva esta pendencia da saude editorial do Jornal.",
+      `Tipo: ${action.resolutionType || "pendencia"}. Prioridade: ${action.priority || action.gate || "P1"}.`,
+      `Materia: ${action.title || "sem titulo"}.`,
+      `Slug: ${action.slug || "sem slug"}.`,
+      `Motivo: ${action.reason || "pendencia editorial detectada"}.`,
+      action.dossier?.publicationLock
+        ? `Trava: publicacao=${action.dossier.publicationLock.publicationLocked ? "travada" : "liberada"}; destaque=${action.dossier.publicationLock.highlightLocked ? "travado" : "liberado"}.`
+        : "",
+      "",
+      action.dossier?.checklist?.length
+        ? ["Ficha de apuracao:", ...action.dossier.checklist.map((item) => `- ${item}`), ""].join("\n")
+        : "",
+      "Requisitos:",
+      ...(missing.length ? missing.map((item) => `- ${item}`) : ["- conferir fonte, imagem, gate e risco editorial"]),
+      "",
+      "Comando sugerido:",
+      action.suggestedIdeCommand || "npm run editorial:health && npm run review:team",
+      "",
+      "Prova esperada:",
+      ...(expected.length ? expected.map((item) => `- ${item}`) : ["- relatorio editorial atualizado", "- teste/check executado"]),
+      "",
+      isHuman
+        ? "Observacao: esta e aprovacao humana. Nao publique nem marque como resolvida sozinho; prepare a decisao para o chefe aprovar ou segurar."
+        : "Resolva localmente no IDE e devolva: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
+    ].filter(Boolean).join("\n");
+  }
+
+  function renderEditorialHealthQueue() {
+    if (!editorialHealthQueueList) return;
+    if (!editorialHealthActions.length) {
+      editorialHealthQueueList.innerHTML = '<p class="opinion-body">Sem pendências editoriais priorizadas no relatório atual.</p>';
+      return;
+    }
+    editorialHealthQueueList.innerHTML = editorialHealthActions
+      .map((action, index) => {
+        const promptText = buildEditorialHealthPrompt(action);
+        const dossier = action.dossier || {};
+        const lock = action.publicationLock || dossier.publicationLock || {};
+        const lockText = [
+          lock.publicationLocked ? "publicação travada" : "publicação liberada",
+          lock.highlightLocked ? "destaque travado" : "destaque liberado"
+        ].join(" • ");
+        const sourceIssues = Array.isArray(dossier.sourceIssues) ? dossier.sourceIssues : [];
+        const visualIssues = Array.isArray(dossier.visualIssues) ? dossier.visualIssues : [];
+        return `
+          <article class="task-queue-item ${action.resolutionType === "human-approval" ? "is-blocked" : ""}">
+            <span>${escapeHtml(action.priority || action.gate || "P1")} • ${escapeHtml(action.issueType || action.resolutionType || "editorial")} • ${escapeHtml(lockText)}</span>
+            <strong>${escapeHtml(action.title || "Pendência editorial")}</strong>
+            <p>${escapeHtml(action.reason || "A saúde editorial pediu revisão.")}</p>
+            ${dossier.id ? `
+              <div class="task-queue-block">
+                <strong>Ficha de apuração</strong>
+                <p>Fonte: ${escapeHtml(dossier.sourceStatus || "sem status")} (${escapeHtml(sourceIssues.join(", ") || "ok")})</p>
+                <p>Imagem: ${escapeHtml(dossier.visualStatus || "sem status")} (${escapeHtml(visualIssues.join(", ") || "ok")})</p>
+              </div>
+            ` : ""}
+            ${action.suggestedIdeCommand ? `<pre class="task-queue-block">${escapeHtml(action.suggestedIdeCommand)}</pre>` : ""}
+            <div class="task-queue-actions">
+              <button type="button" data-copy-editorial-health="${index}">Copiar prompt</button>
+            </div>
+            <pre class="task-queue-block is-prompt is-ide-prompt">${escapeHtml(promptText)}</pre>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  function renderEditorialHealth(payload) {
+    const health = payload?.editorialFlow?.health || {};
+    const summary = health.summary || {};
+    const gates = health.gates || {};
+    const sourceIssues = Number(summary.sourceIssues || 0);
+    const visualIssues = Number(summary.visualIssues || 0);
+    const humanApproval = Number(summary.humanApprovalRequired || 0);
+    const publicationLocks = Number(summary.publicationLocks || 0);
+    const highlightLocks = Number(summary.highlightLocks || 0);
+    const dossiers = Array.isArray(health.articleDossiers) ? health.articleDossiers : [];
+    const generated = health.generatedAt ? formatFeedbackTime(health.generatedAt) : "rode npm run editorial:health";
+    renderSceneDataGrid(
+      editorialHealthGrid,
+      [
+        { label: "Status", value: String(health.status || "not-run"), detail: generated },
+        { label: "P0/P1/P2", value: `${gates.P0 || 0}/${gates.P1 || 0}/${gates.P2 || 0}`, detail: "P0 exige humano; P1 exige revisão editorial." },
+        { label: "Aprovação humana", value: String(humanApproval), detail: "Matérias sensíveis antes de destaque/publicação." },
+        { label: "Travas", value: `${publicationLocks}/${highlightLocks}`, detail: "Publicação sensível / destaque aguardando decisão." },
+        { label: "Fichas", value: String(dossiers.length), detail: "Dossiês de apuração prontos no relatório." },
+        { label: "Fontes", value: String(sourceIssues), detail: "Lacunas de fonte, nome ou cobertura cruzada." },
+        { label: "Imagem", value: String(visualIssues), detail: "Crédito, rótulo ou fallback visual." },
+        { label: "Especiais", value: String(summary.specialCandidates || 0), detail: `${summary.titleAlternativeCount || 0} títulos alternativos gerados.` }
+      ],
+      "Rode npm run editorial:health para gerar gates, fontes e aprovações."
+    );
+    const byId = new Map();
+    const addAction = (action) => {
+      if (!action || typeof action !== "object") return;
+      const key = action.id || `${action.resolutionType || "action"}-${action.slug || action.title || byId.size}`;
+      if (!byId.has(key)) byId.set(key, action);
+    };
+    const groups = health.queueGroups || {};
+    (Array.isArray(groups.approvalLocks) ? groups.approvalLocks : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(groups.source) ? groups.source : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(groups.visual) ? groups.visual : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(health.humanApprovalQueue) ? health.humanApprovalQueue : []).slice(0, 8).forEach(addAction);
+    (Array.isArray(health.actionQueue) ? health.actionQueue : []).slice(0, 12).forEach(addAction);
+    editorialHealthActions = [...byId.values()].slice(0, 12);
+    renderEditorialHealthQueue();
+  }
+
+  function renderAgentNumbers(payload) {
+    const summary = payload?.summary || {};
+    const offices = Array.isArray(payload?.officeDashboard) ? payload.officeDashboard : [];
+    const queue = Array.isArray(payload?.queue) ? payload.queue : [];
+    const awards = payload?.awards || {};
+    const agentOfDay = payload?.dailyContext?.agentOfDay || {};
+    renderSceneDataGrid(
+      agentNumbersGrid,
+      [
+        { label: "Agentes", value: String(summary.totalAgents || 0), detail: `${summary.autonomousAgents || 0} autonomos no payload.` },
+        { label: "Autonomia media", value: `${summary.averageAutonomy || 0}%`, detail: "Media informada pela runtime." },
+        { label: "Escritorios", value: String(summary.totalOffices || offices.length || 0), detail: "Nucleos de trabalho dos agentes." },
+        { label: "Fila", value: String(queue.length), detail: "Tarefas carregadas para a rodada." },
+        { label: "Entregas", value: String(summary.deliveredAgents || 0), detail: `${summary.failedAgents || 0} falhas registradas.` },
+        { label: "Premios", value: String(Array.isArray(awards.items) ? awards.items.length : 0), detail: agentOfDay.name ? `Lider: ${agentOfDay.name}` : "Aguardando lider da rodada." }
+      ],
+      "Sem numeros dos agentes no payload."
+    );
+  }
+
   function updateRealFlow(payload = latestCallPayload) {
     if (!realFlowSteps.length) return;
     const passwordReady = Boolean(getAdminPassword());
@@ -1673,20 +5431,37 @@
     renderTerminal(payload);
     renderAdminState(payload);
     renderAgentReport(payload);
+    renderWebsiteNumbers(payload);
+    renderEditorialHealth(payload);
+    if (!editorialApprovalPayload && !getAdminPassword()) renderEditorialApprovalDesk(null);
+    renderAgentNumbers(payload);
+    renderSceneFlow(payload);
     updateRealFlow(payload);
     setStatus(payload.meeting?.active ? "Cheffe Call ativo. Runtimes pausadas." : "Sala pronta.", "ok");
-    if (quickInstructionInput && !quickInstructionInput.matches(":focus")) {
-      quickInstructionInput.value = instructionInput?.value || payload.meeting?.lastInstruction || "";
+    if (quickCommandContext) {
+      const lastInstruction = String(payload.meeting?.lastInstruction || "").replace(/\s+/g, " ").trim();
+      quickCommandContext.textContent = lastInstruction
+        ? `Digite uma nova ordem. Última rodada: ${lastInstruction.slice(0, 120)}${lastInstruction.length > 120 ? "..." : ""}`
+        : "Digite uma ordem nova. Abrir rodada monta a fila; Implementar fila executa somente cards aprovados.";
     }
+    syncDecisionSelectors();
     syncGameShellState();
+    updateEditorialApprovalGateState(editorialApprovalPayload);
   }
 
   function activateMeetingResponse(instruction, payload) {
     const subject = String(instruction || payload?.meeting?.lastInstruction || "ordem recebida").trim();
-    const session = payload?.meeting?.currentSession || payload?.meeting?.sessions?.[0] || null;
-    const opinions = normalizeOpinions(payload?.opinions || session?.opinions || [], subject);
+    const opinions = getPayloadOpinions(payload, subject);
     if (!opinions.length) {
       setStatus("Reunião aberta, mas nenhum agente retornou fala ainda.", "bad");
+      setAgentResponse({
+        badge: "Sem resposta",
+        title: "A ordem foi enviada, mas a fila veio vazia",
+        text: "A sala abriu sem fala de agente. Recarregue ou envie uma ordem mais específica.",
+        next: "Clique Recarregar ou Abra rodada novamente.",
+        tone: "bad",
+        items: [{ state: "bad", label: "sem fala", agent: "Cheffe Call", text: subject }]
+      });
       return;
     }
     setSpeakerQueue(opinions, true);
@@ -1705,6 +5480,14 @@
       kindLabel: "primeira reação",
       agent: getAgentDisplayName(active),
       text: active.opinion || ""
+    });
+    setAgentResponse({
+      badge: "Rodada aberta",
+      title: `${opinions.length} agentes responderam`,
+      text: `${getAgentDisplayName(active)} começou a resposta. A fila abaixo mostra quem recebeu a ordem e o que cada um propôs.`,
+      next: "Aprove um card, peça ajuste, crie tarefa ou implemente a fila aprovada.",
+      tone: "ok",
+      items: buildAgentReplyItems(opinions, 4)
     });
     setStatus(`${getAgentDisplayName(active)} respondeu. Use Próximo para ouvir os outros agentes.`, "ok");
   }
@@ -1725,6 +5508,13 @@
       realPayload = realResult.value;
     }
     render(mergeCheffeAndRealPayload(callPayload, realPayload));
+    if (password) {
+      try {
+        await loadEditorialApprovalDesk(password);
+      } catch (error) {
+        setEditorialApprovalStatus(error.message || "Mesa editorial indisponivel.", "bad");
+      }
+    }
   }
 
   async function postCall(path, body) {
@@ -1737,6 +5527,9 @@
     const payload = await response.json();
     if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha na Cheffe Call.");
     render(payload);
+    if (path === "/api/cheffe-call/action") {
+      surfaceAutoExecution(payload, body?.title || body?.instruction || body?.command || "");
+    }
     return payload;
   }
 
@@ -1744,7 +5537,7 @@
     const password = requireAdminPassword("registrar decisões reais dos agentes");
     if (!password) throw new Error("Senha Full Admin obrigatória para registrar decisões reais dos agentes.");
     const packet = active ? buildExecutionPacket(active, action === "terminal" ? "prompt" : "implement") : null;
-    await postCall("/api/cheffe-call/action", {
+    return postCall("/api/cheffe-call/action", {
       password,
       action,
       sessionId: currentMeetingSessionId,
@@ -1753,14 +5546,322 @@
       agent: active ? getAgentDisplayName(active) : "Cheffe Call",
       office: active ? getAgentOffice(active) : "Sistema",
       role: active?.role || "",
+      opinionKey: active ? getOpinionKey(active) : "",
       title: extras.title || active?.assignment?.action || active?.action || active?.opinion || "Ação da reunião",
       opinion: active?.opinion || "",
       howTo: extras.howTo || packet?.howTo || "",
       prompt: extras.prompt || packet?.prompt || "",
       ...extras
     });
-    return true;
   }
+
+  function getReadyOpinionFlowItems() {
+    return latestOpinionFlow.filter((flow) => ["ready", "queued"].includes(flow.status?.state));
+  }
+
+  function formatRuntimeDetailsForTerminal(payload = {}, prefix = "") {
+    const details = buildRuntimeFeedbackDetails(payload);
+    const outcome = getRuntimeEvidence(payload);
+    const proofBlock = [
+      outcome.executionSignals?.length ? "prova de execução:" : "",
+      ...(outcome.executionSignals || []).map((line) => `- ${line}`),
+      outcome.applicationSignals?.length ? "prova de aplicação:" : "",
+      ...(outcome.applicationSignals || []).map((line) => `- ${line}`),
+      !outcome.applicationSignals?.length && outcome.hasExecutionProof ? "- aplicação/publicação ainda não provada" : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+    return [
+      prefix,
+      proofBlock,
+      details,
+      payload?.feedback?.imageApprovalsApplied !== undefined
+        ? `Foto/foco aplicado: ${payload.feedback.imageApprovalsApplied}`
+        : "",
+      payload?.feedback?.imageApprovalsSentToAgents !== undefined
+        ? `Foto/foco enviado aos agentes: ${payload.feedback.imageApprovalsSentToAgents}`
+        : ""
+    ]
+      .filter(Boolean)
+      .join("\n");
+  }
+
+  async function runCheffeRuntime(password, message) {
+    const response = await fetch("/api/real-agents/run", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        password,
+        message
+      })
+    });
+    const payload = await response.json();
+    if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+    return payload;
+  }
+
+  async function runSingleImplementation(active) {
+    const agentName = getAgentDisplayName(active);
+    const password = requireAdminPassword("implementar o card aprovado");
+    if (!password) throw new Error("Senha Full Admin obrigatória para implementar.");
+    setActionFeedback({
+      badge: "Implementação",
+      title: `Implementando ${agentName}`,
+      message: "Registrando a decisão do card e rodando a runtime dos agentes.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Card aprovado localizado", state: "done" },
+        { label: "Registro da execução no servidor", state: "running" },
+        { label: "Runtime dos agentes", state: "pending" },
+        { label: "Conferência da sala", state: "pending" }
+      ],
+      details: buildExecutionPacket(active, "implement").howTo
+    });
+
+    await postRoomAction("implement", active);
+    setActionFeedback({
+      badge: "Runtime",
+      title: `Runtime de ${agentName}`,
+      message: "A execução foi registrada. Agora os agentes estão rodando.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Execução registrada", state: "done" },
+        { label: "Runtime dos agentes", state: "running" },
+        { label: "Atualização da sala", state: "pending" }
+      ]
+    });
+    const payload = await runCheffeRuntime(
+      password,
+      `Implementar card aprovado na Cheffe Call: ${agentName}.`
+    );
+    const outcome = getRuntimeEvidence(payload);
+    const proofUi = getRuntimeProofUi(outcome);
+    await postRoomAction("complete", active, {
+      title: `${agentName}: ${proofUi.actionTitle}`,
+      proofLevel: outcome.proofLevel,
+      runtimeEvidence: outcome.evidence,
+      howTo: proofUi.text
+    });
+    await loadCall();
+    const tone = getRuntimeOutcomeTone(payload);
+    const orderText = active?.assignment?.action || active?.opinion || `Card aprovado de ${agentName}`;
+    const summary = buildRuntimeOutcomeSummary(payload, orderText, "card");
+    setExecutionControl({
+      badge: proofUi.badge,
+      title: `${agentName}: ${proofUi.title}`,
+      text: "A execução individual foi registrada no controle persistente.",
+      tone,
+      summary,
+      log: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
+    });
+    setActionFeedback({
+      badge: proofUi.shortBadge,
+      title: `${agentName}: ${proofUi.actionTitle}`,
+      message: outcome.evidence,
+      tone,
+      closable: true,
+      steps: [
+        { label: "Card enviado", state: "done" },
+        { label: "Runtime concluída", state: "done" },
+        { label: proofUi.stepLabel, state: proofUi.state }
+      ],
+      details: formatRuntimeDetailsForTerminal(payload, `owner: ${agentName}`)
+    });
+    terminalEl.textContent = [
+      "> cheffe-call/card-implementation",
+      `owner: ${agentName}`,
+      `office: ${getAgentOffice(active)}`,
+      formatRuntimeDetailsForTerminal(payload, proofUi.terminalStatus)
+    ].join("\n");
+    return payload;
+  }
+
+  async function runApprovedOpinionQueue() {
+    const readyItems = getReadyOpinionFlowItems();
+    if (!readyItems.length) {
+      setActionFeedback({
+        badge: "Fila",
+        title: "Nada aprovado ainda",
+        message: "Aprove cards primeiro. Depois este botão roda a fila de ordens.",
+        tone: "bad",
+        closable: true,
+        steps: [{ label: "Nenhum card pronto", state: "bad" }]
+      });
+      setStatus("Aprove uma ou mais opiniões antes de rodar a fila de ordens.", "bad");
+      return;
+    }
+
+    const password = requireAdminPassword("rodar a fila de ordens aprovada");
+    if (!password) return;
+    if (runApprovedOpinions) runApprovedOpinions.disabled = true;
+    if (directOrderRunQueue) directOrderRunQueue.disabled = true;
+    if (refreshOpinionFlow) refreshOpinionFlow.disabled = true;
+
+    const batchNames = readyItems.map((flow) => getAgentDisplayName(flow.item));
+    try {
+      setActionFeedback({
+        badge: "Fila",
+        title: `Registrando ${readyItems.length} ordens aprovadas`,
+        message: "A Cheffe Call vai registrar cada card aprovado e rodar a runtime uma vez no final.",
+        tone: "pending",
+        closable: false,
+        steps: [
+          { label: `${readyItems.length} cards aprovados encontrados`, state: "done" },
+          { label: "Registrando execuções", state: "running" },
+          { label: "Runtime única da fila", state: "pending" },
+          { label: "Conferência final", state: "pending" }
+        ],
+        details: batchNames.map((name, index) => `${index + 1}. ${name}`).join("\n")
+      });
+
+      let completed = 0;
+      for (const flow of readyItems) {
+        activeSpeakerIndex = flow.index;
+        showActiveSpeaker();
+        const name = getAgentDisplayName(flow.item);
+        terminalEl.textContent = [
+          "> cheffe-call/batch-register",
+          `item: ${completed + 1}/${readyItems.length}`,
+          `owner: ${name}`,
+          `status: registrando ordem aprovada`
+        ].join("\n");
+        await postRoomAction("implement", flow.item, {
+          title: `Implementar fila: ${flow.item?.assignment?.action || flow.item?.opinion || name}`,
+          batch: true
+        });
+        completed += 1;
+        setActionFeedback({
+          badge: "Fila",
+          title: `Registradas ${completed}/${readyItems.length}`,
+          message: "Os cards aprovados estão virando fila de ordens para runtime.",
+          tone: "pending",
+          closable: false,
+          steps: [
+            { label: `${completed}/${readyItems.length} execuções registradas`, state: "running" },
+            { label: "Runtime única da fila", state: "pending" },
+            { label: "Conferência final", state: "pending" }
+          ],
+          details: batchNames.map((name, index) => `${index + 1}. ${index < completed ? "ok" : "aguardando"} - ${name}`).join("\n")
+        });
+      }
+
+      setActionFeedback({
+        badge: "Runtime",
+        title: "Rodando fila aprovada",
+        message: "Todos os cards aprovados foram registrados. A runtime está executando agora.",
+        tone: "pending",
+        closable: false,
+        steps: [
+          { label: `${completed} execuções registradas`, state: "done" },
+          { label: "Runtime dos agentes", state: "running" },
+          { label: "Atualização da sala", state: "pending" }
+        ]
+      });
+      const payload = await runCheffeRuntime(
+        password,
+        `Implementar fila aprovada da Cheffe Call com ${completed} cards.`
+      );
+      const outcome = getRuntimeEvidence(payload);
+      const proofUi = getRuntimeProofUi(outcome);
+      for (const flow of readyItems) {
+        await postRoomAction("complete", flow.item, {
+          title: `${getAgentDisplayName(flow.item)}: ${proofUi.actionTitle}`,
+          proofLevel: outcome.proofLevel,
+          runtimeEvidence: outcome.evidence,
+          howTo: proofUi.text
+        });
+      }
+      await loadCall();
+      const tone = getRuntimeOutcomeTone(payload);
+      const queueOrder = `Fila aprovada da Cheffe Call com ${completed} cards.`;
+      const summary = buildRuntimeOutcomeSummary(payload, queueOrder, "fila de ordens");
+      setExecutionControl({
+        badge: proofUi.badge,
+        title: `Fila: ${proofUi.title}`,
+        text: "A fila de ordens foi separada entre runtime concluída, evidência e pendência.",
+        tone,
+        summary,
+        log: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
+      });
+      setActionFeedback({
+        badge: proofUi.shortBadge,
+        title: `Fila: ${proofUi.actionTitle}`,
+        message: outcome.evidence,
+        tone,
+        closable: true,
+        steps: [
+          { label: `${completed} cards enviados`, state: "done" },
+          { label: "Runtime concluída", state: "done" },
+          { label: proofUi.stepLabel, state: proofUi.state }
+        ],
+        details: formatRuntimeDetailsForTerminal(payload, `fila: ${completed} cards`)
+      });
+      terminalEl.textContent = [
+        "> cheffe-call/batch-complete",
+        `cards: ${completed}`,
+        formatRuntimeDetailsForTerminal(payload, proofUi.terminalStatus)
+      ].join("\n");
+      setAgentResponse({
+        badge: proofUi.responseBadge,
+        title: `${completed} ordens: ${proofUi.responseTitle}`,
+        text: proofUi.text,
+        next: summary.pending,
+        tone,
+        summary,
+        items: readyItems.slice(0, 4).map((flow, index) => ({
+          state: proofUi.state,
+          label: `${proofUi.itemLabel} ${index + 1}`,
+          agent: getAgentDisplayName(flow.item),
+          text: flow.item?.assignment?.action || flow.item?.opinion || "Card enviado para runtime."
+        }))
+      });
+      setStatus(
+        outcome.hasApplicationProof
+          ? `Fila de ordens aplicada com prova: ${completed} aprovações enviadas.`
+          : outcome.hasExecutionProof
+            ? `Fila de ordens executada com prova; aplicação ainda pendente.`
+            : `Fila de ordens rodada, mas evidência real ainda está pendente.`,
+        "ok"
+      );
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Fila interrompida",
+        message: error.message || "A implementação da fila falhou.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Execução interrompida", state: "bad" },
+          { label: "Sala preservada", state: "pending" }
+        ]
+      });
+      setAgentResponse({
+        badge: "Falha na fila",
+        title: "A implementação foi interrompida",
+        text: error.message || "A Cheffe Call preservou a fila para você tentar novamente.",
+        next: "Confira a senha, recarregue a fila e tente Implementar fila de ordens outra vez.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao implementar fila." }]
+      });
+      setStatus(error.message || "Falha ao implementar fila.", "bad");
+    } finally {
+      if (runApprovedOpinions) runApprovedOpinions.disabled = getReadyOpinionFlowItems().length === 0;
+      if (directOrderRunQueue) directOrderRunQueue.disabled = getReadyOpinionFlowItems().length === 0;
+      if (refreshOpinionFlow) refreshOpinionFlow.disabled = false;
+    }
+  }
+
+  sceneTimeline?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-scene-index]");
+    if (!button) return;
+    setActiveScene(Number(button.dataset.sceneIndex || 0), { scroll: true });
+  });
+
+  scenePrev?.addEventListener("click", () => setActiveScene(activeSceneIndex - 1, { scroll: true }));
+  sceneNext?.addEventListener("click", () => setActiveScene(activeSceneIndex + 1, { scroll: true }));
+  sceneFinish?.addEventListener("click", finishActiveScene);
 
   formEl?.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -1774,27 +5875,128 @@
     }
     rememberAdminPassword(password);
     setStatus("Abrindo Cheffe Call...");
-    postCall("/api/cheffe-call/start", { password, instruction }).catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Rodada",
+      title: "Enviando ordem aos agentes",
+      message: "A sala vai receber a ordem e devolver respostas por agente.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha recebida", state: "done" },
+        { label: "Enviando ordem", state: "running" },
+        { label: "Aguardando respostas", state: "pending" }
+      ],
+      details: instruction || "Abrir reunião sem assunto específico."
+    });
+    postCall("/api/cheffe-call/start", { password, instruction })
+      .then((payload) => {
+        activateMeetingResponse(instruction, payload);
+        const replies = getPayloadOpinions(payload, instruction);
+        setActionFeedback({
+          badge: "Rodada",
+          title: "Agentes responderam",
+          message: "A ordem foi recebida. Agora você pode aprovar, ajustar, criar tarefa ou mandar implementar.",
+          tone: "ok",
+          closable: true,
+          steps: [
+            { label: "Ordem enviada", state: "done" },
+            { label: "Respostas recebidas", state: "done" },
+            { label: "Aguardando decisão", state: "running" }
+          ],
+          details: formatAgentReplies(replies, 5),
+          autoCloseMs: 2800
+        });
+      })
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Ordem não enviada",
+          message: error.message || "Não foi possível abrir a rodada.",
+          tone: "bad",
+          closable: true,
+          steps: [{ label: "Envio interrompido", state: "bad" }]
+        });
+        setAgentResponse({
+          badge: "Falha",
+          title: "A ordem não chegou aos agentes",
+          text: error.message || "Verifique a senha e tente novamente.",
+          next: "Digite a senha Full Admin e clique Abrir rodada.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao abrir rodada." }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   commandBarEl?.addEventListener("submit", (event) => {
     event.preventDefault();
     const quickInstruction = String(quickInstructionInput?.value || "").trim();
     if (!quickInstruction) {
-      setStatus("Digite uma ordem rápida antes de enviar.", "bad");
+      setStatus("Digite uma ordem da reunião antes de abrir rodada.", "bad");
       return;
     }
     const password = requireAdminPassword("enviar ordem rápida real");
     if (!password) return;
     if (instructionInput) instructionInput.value = quickInstruction;
-    setStatus("Enviando ordem rápida real para os agentes...");
+    setStatus("Abrindo rodada real para os agentes...");
+    setActionFeedback({
+      badge: "Rodada",
+      title: "Abrindo reunião",
+      message: "A ordem foi enviada para a Cheffe Call montar opiniões com dono, evidência e ação.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha validada", state: "done" },
+        { label: "Criando sessão", state: "running" },
+        { label: "Montando fila de opiniões", state: "pending" }
+      ],
+      details: quickInstruction
+    });
     postCall("/api/cheffe-call/start", { password, instruction: quickInstruction })
-      .then((payload) => activateMeetingResponse(quickInstruction, payload))
-      .catch((error) => setStatus(error.message, "bad"));
+      .then((payload) => {
+        activateMeetingResponse(quickInstruction, payload);
+        const replies = getPayloadOpinions(payload, quickInstruction);
+        setActionFeedback({
+          badge: "Rodada",
+          title: "Fila pronta",
+          message: "A sala respondeu. Aprove cards individuais, ajuste uma fala ou implemente a fila inteira.",
+          tone: "ok",
+          closable: true,
+          steps: [
+            { label: "Sessão criada", state: "done" },
+            { label: "Opiniões renderizadas", state: "done" },
+            { label: "Aguardando aprovação", state: "running" }
+          ],
+          details: formatAgentReplies(replies, 5),
+          autoCloseMs: 2600
+        });
+      })
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Rodada não abriu",
+          message: error.message || "Falha ao abrir a reunião.",
+          tone: "bad",
+          closable: true,
+          steps: [{ label: "Envio interrompido", state: "bad" }]
+        });
+        setAgentResponse({
+          badge: "Falha",
+          title: "Os agentes não receberam a ordem",
+          text: error.message || "A rodada não abriu.",
+          next: "Confira a senha e tente Abrir rodada novamente.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao abrir reunião." }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   quickInstructionInput?.addEventListener("focus", () => {
-    quickInstructionInput.select();
+    const end = String(quickInstructionInput.value || "").length;
+    if (typeof quickInstructionInput.setSelectionRange === "function") {
+      quickInstructionInput.setSelectionRange(end, end);
+    }
   });
 
   quickPasswordConfirm?.addEventListener("click", async () => {
@@ -1810,11 +6012,27 @@
     setStatus("Validando senha Full Admin...");
     try {
       await validateAdminPassword(password);
-      rememberAdminPassword(password);
-      setPasswordStatus("Senha validada. Sala liberada.", "ok");
-      setStatus("Cheffe Call liberada. Escreva uma ordem e clique Enviar.", "ok");
-      loadCall().catch((error) => setStatus(error.message, "bad"));
-      quickInstructionInput?.focus();
+      rememberAdminPassword(password, { close: false });
+      setPasswordStatus("Senha validada. Abrindo Cena 1 de aprovações editoriais.", "pending");
+      let approvalPayload = null;
+      try {
+        approvalPayload = await fetchEditorialApprovals(password);
+      } catch (approvalError) {
+        setPasswordStatus("Senha validada. Mesa editorial indisponivel agora.", "bad");
+        await enterCheffeRoom(approvalError.message || "Senha validada. Mesa indisponivel.");
+        return;
+      }
+      closeAccessModal();
+      renderEditorialApprovalDesk(approvalPayload);
+      await loadCall();
+      renderEditorialApprovalDesk(editorialApprovalPayload || approvalPayload);
+      setActiveScene(0, { scroll: true });
+      if (Number(approvalPayload.pendingCount || 0) > 0) {
+        closeActionFeedback();
+        setStatus("Cena 1 bloqueando a reunião até resolver as pendências humanas.", "ok");
+        return;
+      }
+      await enterCheffeRoom("Senha validada. Sem pendencia editorial pendente.");
     } catch (error) {
       cheffeAdminPassword = "";
       try {
@@ -1837,33 +6055,188 @@
     quickPasswordConfirm?.click();
   });
 
-  sendTerminalEl?.addEventListener("click", () => {
+  [
+    editorialApprovalTitleInput,
+    editorialApprovalSummaryInput,
+    editorialApprovalBodyInput,
+    editorialApprovalSourceNameInput,
+    editorialApprovalSourceUrlInput,
+    editorialApprovalImageInput,
+    editorialApprovalImageCreditInput
+  ].forEach((field) => {
+    field?.addEventListener("input", syncEditorialApprovalPreview);
+  });
+
+  editorialApprovalFocusInput?.addEventListener("change", () => {
+    syncEditorialManualControls(editorialApprovalFocusInput.value);
+    syncEditorialApprovalPreview();
+  });
+  editorialApprovalFocusX?.addEventListener("change", () => setEditorialFocusValue(getManualEditorialFocusValue()));
+  editorialApprovalFocusY?.addEventListener("input", () => setEditorialFocusValue(getManualEditorialFocusValue()));
+  editorialApprovalImageFit?.addEventListener("change", syncEditorialApprovalPreview);
+  editorialFocusPresetButtons.forEach((button) => {
+    button.addEventListener("click", () => setEditorialFocusValue(button.dataset.editorialFocusPreset || "center 42%"));
+  });
+  editorialApprovalRefresh?.addEventListener("click", async () => {
+    const password = requireAdminPassword("recarregar a mesa editorial");
+    if (!password) return;
+    try {
+      await loadEditorialApprovalDesk(password);
+      setActiveScene(0, { scroll: true });
+      setStatus("Mesa editorial recarregada.", "ok");
+    } catch (error) {
+      setStatus(error.message || "Nao foi possivel recarregar a mesa editorial.", "bad");
+    }
+  });
+  editorialApprovalActionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      submitEditorialApprovalDecision(button.dataset.editorialApprovalAction || "approve");
+    });
+  });
+  editorialApprovalSuggestions?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-editorial-suggestion]");
+    if (!button) return;
+    applyEditorialSuggestion(Number(button.dataset.editorialSuggestion || 0));
+  });
+
+  photoApprovalDecisionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const decision = button.dataset.photoDecision || "";
+      submitPhotoApprovalDecision(decision);
+    });
+  });
+
+  photoApprovalFocus?.addEventListener("change", () => {
+    syncPhotoManualControls(photoApprovalFocus.value);
+    syncPhotoFocusPreview();
+  });
+  photoApprovalFocusX?.addEventListener("change", () => setPhotoFocusValue(getManualPhotoFocusValue()));
+  photoApprovalFocusY?.addEventListener("input", () => setPhotoFocusValue(getManualPhotoFocusValue()));
+  photoApprovalImageFit?.addEventListener("change", syncPhotoFocusPreview);
+  photoFocusPresetButtons.forEach((button) => {
+    button.addEventListener("click", () => setPhotoFocusValue(button.dataset.photoFocus || "center 42%"));
+  });
+  cheffeActionFeedbackClose?.addEventListener("click", closeActionFeedback);
+
+  photoApprovalPrev?.addEventListener("click", () => {
+    if (photoApprovalBusy || photoApprovalIndex <= 0) return;
+    photoApprovalIndex -= 1;
+    renderPhotoApprovalItem();
+  });
+
+  photoApprovalNext?.addEventListener("click", () => {
+    if (photoApprovalBusy || photoApprovalIndex >= photoApprovalQueue.length - 1) return;
+    photoApprovalIndex += 1;
+    renderPhotoApprovalItem();
+  });
+
+  photoApprovalContinue?.addEventListener("click", () => {
+    if (photoApprovalBusy) return;
+    const stats = getPhotoApprovalStats();
+    const message = photoApprovalRunRuntime?.checked
+      ? "Rodando agentes para aplicar decisões antes de abrir a sala."
+      : stats.runtimeWorkCount > 0
+        ? "Acesso liberado sem aplicar agora. Decisoes ficaram na fila."
+        : "Acesso liberado. Decisoes pendentes ficaram na fila.";
+    enterCheffeRoom(message);
+  });
+
+  photoApprovalRunRuntime?.addEventListener("change", updatePhotoApprovalRuntimeControls);
+
+  sendTerminalEl?.addEventListener("click", async () => {
     const form = new FormData(formEl);
     const instruction = String(form.get("instruction") || "").trim();
     const command = String(form.get("command") || "").trim();
     const password = requireAdminPassword("enviar comando real ao terminal dos agentes");
     if (!password) return;
     if (!instruction && !command) {
-      setStatus("Digite o assunto ou cole um pedido/código antes de enviar ao terminal.", "bad");
+      setStatus("Digite uma ordem ou cole um pedido/código antes de enviar ao terminal.", "bad");
       return;
     }
-    const active = currentOpinions[activeSpeakerIndex] || null;
-    const runTerminal = () =>
-      postRoomAction("terminal", active, {
-        title: instruction || command || "Pedido direto ao terminal",
-        command: command || instruction,
-        prompt: command || instruction
-      });
-    const action = currentMeetingSessionId
-      ? runTerminal()
-      : postCall("/api/cheffe-call/start", { password, instruction: instruction || "Pedido direto ao terminal" }).then(runTerminal);
+    const terminalOrder = command || instruction;
     setStatus("Enviando comando real ao terminal da Cheffe Call...");
-    action.catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Terminal",
+      title: "Enviando ordem direta",
+      message: "O terminal vai abrir uma rodada com resposta dos agentes e registrar o pedido.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Pedido lido", state: "done" },
+        { label: "Enviando aos agentes", state: "running" },
+        { label: "Registrando no terminal", state: "pending" }
+      ],
+      details: terminalOrder
+    });
+    try {
+      if (instructionInput) instructionInput.value = terminalOrder;
+      if (quickInstructionInput) quickInstructionInput.value = summarizeOneLine(terminalOrder, "Ordem enviada ao terminal.");
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: terminalOrder });
+      activateMeetingResponse(terminalOrder, payload);
+      const replies = getPayloadOpinions(payload, terminalOrder);
+      const active = replies[0] || currentOpinions[activeSpeakerIndex] || null;
+      await postRoomAction("terminal", active, {
+        title: instruction || command || "Pedido direto ao terminal",
+        command: terminalOrder,
+        prompt: terminalOrder
+      });
+      terminalEl.textContent = [
+        "> cheffe-call/direct-terminal",
+        `order: ${terminalOrder}`,
+        "status: agentes responderam e terminal registrou",
+        "",
+        formatAgentReplies(replies, 5)
+      ].join("\n");
+      setAgentResponse({
+        badge: "Terminal executado",
+        title: `${replies.length} agentes responderam ao terminal`,
+        text: "O pedido direto foi recebido e virou uma nova fila de respostas.",
+        next: "Aprove a melhor resposta, ajuste no Prompt Mestre ou implemente a fila aprovada.",
+        tone: "ok",
+        items: buildAgentReplyItems(replies, 4)
+      });
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Ordem executada",
+        message: "Os agentes responderam e o terminal foi atualizado.",
+        tone: "ok",
+        closable: true,
+        steps: [
+          { label: "Pedido enviado", state: "done" },
+          { label: "Respostas recebidas", state: "done" },
+          { label: "Terminal registrado", state: "done" }
+        ],
+        details: formatAgentReplies(replies, 5),
+        autoCloseMs: 3000
+      });
+      setStatus("Terminal recebeu a ordem e os agentes responderam.", "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Falha",
+        title: "Terminal não executou",
+        message: error.message || "Não foi possível enviar ao terminal.",
+        tone: "bad",
+        closable: true,
+        steps: [
+          { label: "Pedido lido", state: "done" },
+          { label: "Execução interrompida", state: "bad" }
+        ]
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "O terminal não devolveu resposta",
+        text: error.message || "A ordem não foi concluída.",
+        next: "Confira a senha e tente Enviar ao terminal novamente.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha no terminal." }]
+      });
+      setStatus(error.message, "bad");
+    }
   });
 
   nextSpeakerEl?.addEventListener("click", () => {
     if (!currentOpinions.length) {
-      setStatus("Envie uma mensagem aos agentes antes de chamar o próximo.", "bad");
+      setStatus("Abra uma rodada para os agentes antes de chamar o próximo.", "bad");
       return;
     }
     moveToNextSpeaker("levantou a mão");
@@ -1904,20 +6277,49 @@
       return;
     }
     setStatus("Liberando runtimes...");
-    postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
-  });
-
-  voteAgentOfDay?.addEventListener("click", () => {
-    if (!currentAgentOfDay) return;
-    const target = {
-      ...currentAgentOfDay,
-      opinion: `Destaque aprovado pela Cheffe Call para ${currentAgentOfDay.name || currentAgentOfDay.agent}.`
-    };
-    postRoomAction("approve", target, {
-      title: `Destaque do agente do dia: ${currentAgentOfDay.name || currentAgentOfDay.agent}`,
-      opinion: target.opinion
-    })
-      .then(() => setStatus(`${currentAgentOfDay.name || currentAgentOfDay.agent} recebeu destaque real na Cheffe Call.`, "ok"))
+    setActionFeedback({
+      badge: "Encerrar",
+      title: "Fechando reunião",
+      message: "A Cheffe Call está liberando as automações e preparando retorno para a home.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha Full Admin validada", state: "done" },
+        { label: "Liberando agentes", state: "running" },
+        { label: "Retorno para home", state: "pending" }
+      ]
+    });
+    postCall("/api/cheffe-call/release", { password })
+      .then(() => {
+        setActionFeedback({
+          badge: "Encerrada",
+          title: "Reunião encerrada",
+          message: "A sala foi fechada. Use Voltar para home para retomar a página principal.",
+          tone: "ok",
+          closable: true,
+          home: true,
+          steps: [
+            { label: "Automações liberadas", state: "done" },
+            { label: "Sessão fechada", state: "done" },
+            { label: "Home disponível", state: "done" }
+          ]
+        });
+        setAgentResponse({
+          badge: "Sala liberada",
+          title: "Automações devolvidas aos agentes",
+          text: "A reunião foi encerrada e as rotinas podem voltar ao ciclo automático.",
+          next: "Clique Voltar para home no popup, ou abra uma nova rodada se quiser comandar de novo.",
+          tone: "ok",
+          summary: {
+            resolved: "Reunião encerrada e automações liberadas.",
+            evidence: "Servidor confirmou release da Cheffe Call.",
+            pending: "Voltar para home ou iniciar outra rodada.",
+            order: "Sem ordem pendente nesta reunião."
+          },
+          items: [{ state: "done", label: "liberado", agent: "Cheffe Call", text: "Runtimes livres." }]
+        });
+        setStatus("Runtimes liberadas.", "ok");
+      })
       .catch((error) => setStatus(error.message, "bad"));
   });
 
@@ -1943,10 +6345,11 @@
   });
 
   quickNextSpeaker?.addEventListener("click", () => {
-    if (quickInstructionInput) quickInstructionInput.value = "";
-    if (instructionInput) instructionInput.value = "";
-    if (commandInput) commandInput.value = "";
-    setStatus("Pronto para receber outra ordem direta.", "ok");
+    if (currentOpinions.length) {
+      moveToNextSpeaker("próxima fala");
+      return;
+    }
+    setStatus("Nenhum agente na fila. Abra uma rodada primeiro.", "bad");
     quickInstructionInput?.focus();
   });
 
@@ -1961,19 +6364,123 @@
         .catch((error) => setStatus(error.message, "bad"));
       return;
     }
-    setStatus("Atualizando resumo da última ordem...");
+    setStatus("Recarregando sala e fila de opiniões...");
+    setActionFeedback({
+      badge: "Recarregar",
+      title: "Atualizando sala",
+      message: "Buscando estado atual da reunião, fila e runtime.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Solicitação enviada", state: "running" },
+        { label: "Renderizando fila", state: "pending" }
+      ]
+    });
     loadCall()
       .then(() => {
-        openCheffeInfoPopup("Resumo da última ordem", buildSessionSummaryText());
-        setStatus("Resumo da Cheffe Call atualizado.", "ok");
+        setActionFeedback({
+          badge: "Recarregar",
+          title: "Sala atualizada",
+          message: "Fila e terminal foram sincronizados.",
+          tone: "ok",
+          closable: true,
+          steps: [
+            { label: "Estado recebido", state: "done" },
+            { label: "Fila atualizada", state: "done" }
+          ],
+          autoCloseMs: 2000
+        });
+        setAgentResponse({
+          badge: "Sala sincronizada",
+          title: "Estado atual carregado",
+          text: buildSessionSummaryText(),
+          next: "Continue a rodada atual ou digite uma nova ordem.",
+          tone: "ok",
+          items: currentOpinions.length
+            ? buildAgentReplyItems(currentOpinions, 3)
+            : [{ state: "pending", label: "sem rodada", agent: "Cheffe Call", text: "Abra uma rodada para receber respostas." }]
+        });
+        setStatus("Cheffe Call recarregada.", "ok");
       })
-      .catch((error) => setStatus(error.message, "bad"));
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Não recarregou",
+          message: error.message || "Falha ao atualizar sala.",
+          tone: "bad",
+          closable: true,
+          steps: [{ label: "Recarregamento interrompido", state: "bad" }]
+        });
+        setStatus(error.message, "bad");
+      });
+  });
+
+  refreshOpinionFlow?.addEventListener("click", () => {
+    setStatus("Atualizando fila de opiniões dos agentes...");
+    loadCall()
+      .then(() => {
+        setAgentResponse({
+          badge: "Fila atualizada",
+          title: "Opiniões sincronizadas",
+          text: currentOpinions.length ? "A lista de agentes foi recarregada com o estado mais recente." : "Ainda não há rodada com respostas.",
+          next: currentOpinions.length ? "Aprove, ajuste ou implemente uma resposta." : "Abra uma rodada com uma ordem.",
+          tone: "ok",
+          items: currentOpinions.length
+            ? buildAgentReplyItems(currentOpinions, 3)
+            : [{ state: "pending", label: "sem respostas", agent: "Cheffe Call", text: "Digite uma ordem para os agentes responderem." }]
+        });
+        setStatus("Fila de opiniões atualizada.", "ok");
+      })
+      .catch((error) => {
+        setAgentResponse({
+          badge: "Falha",
+          title: "Fila não atualizou",
+          text: error.message || "Não foi possível recarregar as opiniões.",
+          next: "Tente novamente em alguns segundos.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Cheffe Call", text: error.message || "Falha ao atualizar fila." }]
+        });
+        setStatus(error.message, "bad");
+      });
+  });
+
+  runApprovedOpinions?.addEventListener("click", () => {
+    runApprovedOpinionQueue().catch((error) => setStatus(error.message, "bad"));
+  });
+
+  pullAgentIdeasToDirectOrder?.addEventListener("click", () => {
+    pullAgentIdeasIntoDirectOrder();
+  });
+
+  directOrderAnalyze?.addEventListener("click", () => {
+    submitDirectOrder(false);
+  });
+
+  directOrderRunAgents?.addEventListener("click", () => {
+    submitDirectOrder(true);
+  });
+
+  directOrderRunQueue?.addEventListener("click", () => {
+    runApprovedOpinionQueue().catch((error) => setStatus(error.message, "bad"));
   });
 
   adminRunAgentsNow?.addEventListener("click", () => {
     const password = requireAdminPassword("rodar os agentes reais");
     if (!password) return;
     setStatus("Rodando agentes reais...");
+    setActionFeedback({
+      badge: "Runtime",
+      title: "Rodando agentes agora",
+      message: "A Cheffe Call está executando a runtime manual.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha validada", state: "done" },
+        { label: "Runtime dos agentes em execução", state: "running" },
+        { label: "Sala aguardando feedback", state: "pending" }
+      ]
+    });
+    let manualRuntimePayload = null;
     fetch("/api/real-agents/run", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -1985,26 +6492,162 @@
       .then(async (response) => {
         const payload = await response.json();
         if (!response.ok || !payload.ok) throw new Error(payload.error || "Falha ao rodar agentes.");
+        manualRuntimePayload = payload;
+        const outcome = getRuntimeEvidence(payload);
+        setActionFeedback({
+          badge: "Runtime",
+          title: "Agentes finalizaram",
+          message: outcome.evidence,
+          tone: getRuntimeOutcomeTone(payload),
+          steps: [
+            { label: "Runtime dos agentes executada", state: "done" },
+            { label: "Feedback recebido", state: "done" },
+            { label: "Atualizando painel", state: "running" }
+          ],
+          details: buildRuntimeFeedbackDetails(payload),
+          closable: true
+        });
         return loadCall();
       })
-      .then(() => setStatus("Rodada manual dos agentes concluída e sala atualizada.", "ok"))
-      .catch((error) => setStatus(error.message, "bad"));
+      .then(() => {
+        const outcome = getRuntimeEvidence(manualRuntimePayload);
+        const proofUi = getRuntimeProofUi(outcome);
+        const tone = getRuntimeOutcomeTone(manualRuntimePayload);
+        const summary = buildRuntimeOutcomeSummary(
+          manualRuntimePayload,
+          instructionInput?.value || "Rodada manual disparada pela Cheffe Call.",
+          "rodada manual"
+        );
+        setExecutionControl({
+          badge: proofUi.badge,
+          title: `Rodada manual: ${proofUi.title}`,
+          text: "Rodar agentes agora atualizou este controle com evidência ou pendência.",
+          tone,
+          summary,
+          log: formatRuntimeDetailsForTerminal(manualRuntimePayload, "manual: rodar agentes")
+        });
+        setActionFeedback({
+          badge: proofUi.shortBadge,
+          title: `Sala atualizada: ${proofUi.actionTitle}`,
+          message: outcome.evidence,
+          tone,
+          steps: [
+            { label: "Runtime concluída", state: "done" },
+            { label: proofUi.stepLabel, state: proofUi.state }
+          ],
+          closable: true
+        });
+        setAgentResponse({
+          badge: proofUi.responseBadge,
+          title: proofUi.responseTitle,
+          text: proofUi.text,
+          next: summary.pending,
+          tone,
+          summary,
+          items: currentOpinions.length
+            ? buildAgentReplyItems(currentOpinions, 4)
+            : [{ state: proofUi.state, label: proofUi.itemLabel, agent: "Cheffe Call", text: outcome.evidence }]
+        });
+        setStatus(
+          outcome.hasApplicationProof
+            ? "Rodada manual com aplicação provada."
+            : outcome.hasExecutionProof
+              ? "Rodada manual com execução provada; aplicação pendente."
+              : "Rodada manual concluída, mas evidência ainda pendente.",
+          "ok"
+        );
+      })
+      .catch((error) => {
+        setActionFeedback({
+          badge: "Falha",
+          title: "Runtime não concluiu",
+          message: error.message || "Falha ao rodar agentes.",
+          tone: "bad",
+          steps: [
+            { label: "Runtime interrompida", state: "bad" },
+            { label: "Sala preservada", state: "pending" }
+          ],
+          closable: true
+        });
+        setAgentResponse({
+          badge: "Falha",
+          title: "Runtime não concluiu",
+          text: error.message || "Os agentes não finalizaram a rodada manual.",
+          next: "Confira senha/conexão e tente Rodar agentes agora novamente.",
+          tone: "bad",
+          items: [{ state: "bad", label: "erro", agent: "Runtime", text: error.message || "Falha ao rodar agentes." }]
+        });
+        setStatus(error.message, "bad");
+      });
   });
 
   adminReleaseRoom?.addEventListener("click", () => {
     const password = requireAdminPassword("encerrar a reunião real");
     if (!password) return;
     setStatus("Encerrando reunião real...");
-    postCall("/api/cheffe-call/release", { password }).catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Encerrar",
+      title: "Fechando reunião",
+      message: "Liberando agentes e preparando retorno para a home.",
+      tone: "pending",
+      closable: false,
+      steps: [
+        { label: "Senha validada", state: "done" },
+        { label: "Release da sala", state: "running" },
+        { label: "Home disponível", state: "pending" }
+      ]
+    });
+    postCall("/api/cheffe-call/release", { password })
+      .then(() => {
+        setActionFeedback({
+          badge: "Encerrada",
+          title: "Reunião encerrada",
+          message: "A Cheffe Call fechou a sessão. O botão abaixo volta para a home.",
+          tone: "ok",
+          closable: true,
+          home: true,
+          steps: [
+            { label: "Release confirmado", state: "done" },
+            { label: "Agentes liberados", state: "done" },
+            { label: "Retorno pronto", state: "done" }
+          ]
+        });
+        setAgentResponse({
+          badge: "Reunião encerrada",
+          title: "Sala fechada com sucesso",
+          text: "A Cheffe Call saiu do modo reunião e liberou os agentes.",
+          next: "Clique Voltar para home no popup, ou use Abrir rodada para iniciar outra ordem.",
+          tone: "ok",
+          summary: {
+            resolved: "Sala fechada e agentes liberados.",
+            evidence: "Release confirmado pelo servidor.",
+            pending: "Voltar para home ou abrir nova rodada.",
+            order: "Nenhuma ordem ativa depois do encerramento."
+          },
+          items: [{ state: "done", label: "encerrado", agent: "Cheffe Call", text: "Runtimes liberadas." }]
+        });
+        setStatus("Reunião encerrada.", "ok");
+      })
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   adminClearSession?.addEventListener("click", () => {
     const password = requireAdminPassword("limpar a sessão real");
     if (!password) return;
     setStatus("Limpando sessão atual...");
-    postCall("/api/cheffe-call/admin/clear", { password, sessionId: currentMeetingSessionId }).catch((error) =>
-      setStatus(error.message, "bad")
-    );
+    postCall("/api/cheffe-call/admin/clear", { password, sessionId: currentMeetingSessionId })
+      .then(() => {
+        setAgentResponse({
+          badge: "Sessão limpa",
+          title: "Fila zerada",
+          text: "A sessão atual foi limpa. Nenhuma ação antiga fica confundindo a próxima rodada.",
+          next: "Digite uma nova ordem e abra rodada.",
+          tone: "ok",
+          items: [{ state: "done", label: "limpo", agent: "Cheffe Call", text: "Sessão atual removida." }]
+        });
+        setStatus("Sessão atual limpa.", "ok");
+      })
+      .catch((error) => setStatus(error.message, "bad"));
   });
 
   adminExportSnapshot?.addEventListener("click", async () => {
@@ -2024,6 +6667,7 @@
   });
 
   promptModeSelect?.addEventListener("change", () => {
+    pendingAdjustmentContext = null;
     const mode = promptModeSelect.value || "global";
     if (mode === "global") {
       if (promptOfficeSelect) promptOfficeSelect.value = "";
@@ -2040,6 +6684,7 @@
   });
 
   promptOfficeSelect?.addEventListener("change", () => {
+    pendingAdjustmentContext = null;
     refreshPromptAgentOptions(promptOfficeSelect.value || "");
     if (promptModeSelect?.value === "agent" && promptAgentSelect) {
       promptAgentSelect.value = "";
@@ -2051,6 +6696,7 @@
   });
 
   promptAgentSelect?.addEventListener("change", () => {
+    pendingAdjustmentContext = null;
     if (promptAgentSelect?.value && promptModeSelect) {
       promptModeSelect.value = "agent";
       const agentPrompt = (promptConsoleData?.agents || []).find((item) => item.slug === promptAgentSelect.value);
@@ -2063,51 +6709,290 @@
     selectPromptPayload();
   });
 
+  promptAdjustmentSelect?.addEventListener("change", () => {
+    if (pendingAdjustmentContext) {
+      stageAdjustmentInPromptMaster(pendingAdjustmentContext, { scroll: false });
+      setStatus(`Tipo de ajuste alterado para ${getAdjustmentGuide().label}.`, "ok");
+    }
+  });
+
+  decisionOfficeSelect?.addEventListener("change", () => {
+    refreshDecisionAgentOptions(decisionOfficeSelect.value || "");
+    refreshDecisionPreview();
+  });
+
+  decisionAgentSelect?.addEventListener("change", () => {
+    const agent = getDecisionAgentBySlug(decisionAgentSelect.value || "");
+    if (agent?.office && decisionOfficeSelect) {
+      decisionOfficeSelect.value = agent.office;
+      refreshDecisionAgentOptions(agent.office, agent.slug);
+    }
+    refreshDecisionPreview();
+  });
+
+  decisionActionSelect?.addEventListener("change", () => {
+    const selection = getDecisionSelection();
+    if (decisionComposerBadge) decisionComposerBadge.textContent = selection.guide.label;
+    if (decisionComposerHint) decisionComposerHint.textContent = selection.guide.after;
+    refreshDecisionPreview(decisionComposerText?.value || "");
+  });
+
+  decisionOpenComposer?.addEventListener("click", () => {
+    openDecisionComposer({
+      text: quickInstructionInput?.value || instructionInput?.value || latestCallPayload?.meeting?.lastInstruction || ""
+    });
+    decisionDesk?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  decisionUseActiveIdea?.addEventListener("click", () => {
+    const active = currentOpinions[activeSpeakerIndex];
+    if (!active) {
+      setStatus("Abra uma rodada ou selecione um card antes de usar a fala ativa.", "bad");
+      openDecisionComposer();
+      return;
+    }
+    openDecisionComposer({ active, text: active.opinion || active.assignment?.idea || "", action: "accept" });
+    setStatus(`Fala de ${getAgentDisplayName(active)} carregada na Mesa de decisão.`, "ok");
+  });
+
+  decisionComposerClose?.addEventListener("click", closeDecisionComposer);
+  decisionComposerCancel?.addEventListener("click", closeDecisionComposer);
+  decisionComposer?.addEventListener("click", (event) => {
+    if (event.target === decisionComposer) closeDecisionComposer();
+  });
+  decisionComposerText?.addEventListener("input", () => refreshDecisionPreview(decisionComposerText.value));
+  decisionComposerSubmit?.addEventListener("click", () => {
+    submitDecisionOrder();
+  });
+  decisionAcceptOrder?.addEventListener("click", () => {
+    commitDecisionOrder("accept");
+  });
+  decisionImplementOrder?.addEventListener("click", () => {
+    commitDecisionOrder("implement");
+  });
+  decisionReviseOrder?.addEventListener("click", () => {
+    const decision = pendingDecisionResolution || latestDecisionOrder;
+    if (!decision) {
+      openDecisionComposer();
+      return;
+    }
+    openDecisionComposer({
+      active: decision.targetReply,
+      action: decision.selection?.guide?.value || "analyze",
+      contextText: decision.contextText || ""
+    });
+    setStatus("Contexto da análise reaberto para ajuste.", "ok");
+  });
+
   loadPromptToInstruction?.addEventListener("click", () => {
     const promptText = getActivePromptText();
     if (!promptText) {
-      setStatus("Escolha um prompt antes de jogar no assunto.", "bad");
+      setStatus("Escolha um prompt antes de usar como ordem.", "bad");
       return;
     }
-    syncVisibleInstruction(promptText);
+    syncVisibleInstruction(promptText, {
+      visibleText: `Usar ${activePromptPayload.title || "Prompt Mestre"} como base da próxima rodada.`,
+      focus: true
+    });
     setCommandBarPulse();
-    setStatus("Prompt jogado no Comando rápido. Clique Enviar para falar com os agentes.", "ok");
+    setAgentResponse({
+      badge: "Ordem preparada",
+      title: "Prompt carregado na ordem da reunião",
+      text: "Nada foi executado ainda. A barra recebeu uma ordem curta; use Copiar texto se quiser o prompt inteiro.",
+      next: "Edite a ordem curta ou clique Abrir rodada para mandar aos agentes.",
+      tone: "ok",
+      items: [{ state: "running", label: "aguardando envio", agent: activePromptPayload.title || "Prompt Mestre", text: promptText.slice(0, 220) }]
+    });
+    setStatus("Ordem preenchida. Ela só roda quando você abre a rodada.", "ok");
   });
 
-  loadPromptToTerminal?.addEventListener("click", () => {
+  loadPromptToTerminal?.addEventListener("click", async () => {
     const promptText = getActivePromptText();
     if (!promptText) {
-      setStatus("Escolha um prompt antes de jogar no terminal.", "bad");
+      setStatus("Escolha um prompt antes de enviar ao terminal.", "bad");
       return;
     }
     if (commandInput) commandInput.value = promptText;
-    syncVisibleInstruction(promptText);
+    syncVisibleInstruction(promptText, {
+      visibleText: `Executar ${activePromptPayload.title || "Prompt Mestre"} no terminal.`,
+      focus: false
+    });
     setCommandBarPulse();
     const password = getAdminPassword();
     if (!password) {
-      setStatus("Prompt pronto no Comando rápido. Valide a senha e clique Enviar.", "bad");
-      setPasswordStatus("Senha obrigatória para enviar ao terminal.", "bad");
+      setStatus("Prompt pronto. Valide a senha Full Admin para executar no terminal.", "bad");
+      setPasswordStatus("Senha obrigatória para executar no terminal.", "bad");
       quickPasswordInput?.focus();
       return;
     }
-    setStatus("Enviando prompt ao terminal real da Cheffe Call...");
-    postCall("/api/cheffe-call/start", { password, instruction: promptText })
-      .then((payload) => {
-        activateMeetingResponse(promptText, payload);
-        const active = currentOpinions[activeSpeakerIndex] || null;
-        return postRoomAction("terminal", active, {
-          title: activePromptPayload.title || "Prompt enviado ao terminal",
-          command: promptText,
-          prompt: promptText
-        });
-      })
-      .then(() => setStatus("Prompt enviado ao terminal e agentes reagiram.", "ok"))
-      .catch((error) => setStatus(error.message, "bad"));
+    setActionFeedback({
+      badge: "Terminal",
+      title: "Executando Prompt Mestre",
+      message: "A Cheffe Call está enviando o prompt para a rodada real dos agentes.",
+      tone: "pending",
+      steps: [
+        { label: "Prompt recebido", state: "ok" },
+        { label: "Senha Full Admin validada", state: "ok" },
+        { label: "Rodada dos agentes em execução", state: "pending" },
+        { label: "Resultado será registrado no terminal", state: "pending" }
+      ],
+      details: promptText,
+      closable: false
+    });
+    setStatus("Enviando Prompt Mestre ao terminal real da Cheffe Call...");
+    try {
+      const payload = await postCall("/api/cheffe-call/start", { password, instruction: promptText });
+      activateMeetingResponse(promptText, payload);
+      const active = pendingAdjustmentContext || currentOpinions[activeSpeakerIndex] || null;
+      await postRoomAction("terminal", active, {
+        title: activePromptPayload.title || "Prompt enviado ao terminal",
+        command: promptText,
+        prompt: promptText
+      });
+      const replies = getPayloadOpinions(payload, promptText);
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Prompt executado",
+        message: "Os agentes receberam o Prompt Mestre e a resposta entrou na reunião.",
+        tone: "ok",
+        steps: [
+          { label: "Prompt recebido", state: "ok" },
+          { label: "Rodada executada", state: "ok" },
+          { label: "Decisão registrada", state: "ok" },
+          { label: "Terminal atualizado", state: "ok" }
+        ],
+        details: formatAgentReplies(replies, 5),
+        closable: true
+      });
+      setAgentResponse({
+        badge: "Prompt executado",
+        title: `${replies.length} agentes responderam`,
+        text: "O Prompt Mestre foi enviado ao terminal real da Cheffe Call.",
+        next: "Escolha uma resposta para aprovar, ajustar ou implementar.",
+        tone: "ok",
+        summary: {
+          resolved: "Prompt enviado aos agentes e resposta registrada.",
+          evidence: `${replies.length} resposta${replies.length === 1 ? "" : "s"} entrou${replies.length === 1 ? "" : "aram"} na reunião.`,
+          pending: "Aprovar, ajustar, criar tarefa ou implementar.",
+          order: "Prompt Mestre executado no terminal da sala."
+        },
+        items: buildAgentReplyItems(replies, 4)
+      });
+      setStatus("Prompt Mestre enviado ao terminal e agentes reagiram.", "ok");
+    } catch (error) {
+      setActionFeedback({
+        badge: "Terminal",
+        title: "Falha ao executar",
+        message: error.message || "Não foi possível enviar o Prompt Mestre ao terminal.",
+        tone: "bad",
+        steps: [
+          { label: "Prompt recebido", state: "ok" },
+          { label: "Execução interrompida", state: "bad" }
+        ],
+        closable: true
+      });
+      setAgentResponse({
+        badge: "Falha",
+        title: "Prompt não executou",
+        text: error.message || "O terminal não conseguiu receber o Prompt Mestre.",
+        next: "Confira a senha e tente Executar no terminal de novo.",
+        tone: "bad",
+        items: [{ state: "bad", label: "erro", agent: "Prompt Mestre", text: error.message || "Falha no terminal." }]
+      });
+      setStatus(error.message, "bad");
+    }
   });
 
   copyPromptText?.addEventListener("click", async () => {
-    const copied = await copyText(getActivePromptText());
-    setStatus(copied ? "Prompt copiado para a área de transferência." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
+    const promptText = getActivePromptText();
+    const copied = await copyText(promptText);
+    setAgentResponse({
+      badge: copied ? "Copiado" : "Falha",
+      title: copied ? "Texto copiado sem executar" : "Não foi possível copiar",
+      text: copied
+        ? "Copiar só manda o prompt para a área de transferência. Nenhum agente foi acionado."
+        : "O navegador bloqueou a cópia automática.",
+      next: copied ? "Cole onde precisar, ou use Executar no terminal para receber resposta dos agentes." : "Selecione o texto manualmente ou tente novamente.",
+      tone: copied ? "ok" : "bad",
+      items: [{ state: copied ? "done" : "bad", label: copied ? "copiado" : "erro", agent: activePromptPayload.title || "Prompt", text: promptText.slice(0, 220) }]
+    });
+    setStatus(copied ? "Prompt copiado. Copiar não executa nada sozinho." : "Nao foi possivel copiar o prompt.", copied ? "ok" : "bad");
+  });
+
+  ideActionQueueList?.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-copy-ide-prompt]");
+    if (!button) return;
+    const index = Number(button.dataset.copyIdePrompt || -1);
+    const item = ideActionQueue[index];
+    if (!item) {
+      setStatus("Nao encontrei essa pendencia da fila Aguardando IDE.", "bad");
+      return;
+    }
+    const promptText = item.idePrompt || buildIdeActionPrompt(item);
+    const copied = await copyText(promptText);
+    const originalText = button.textContent;
+    button.textContent = copied ? "Prompt copiado" : "Falha ao copiar";
+    button.disabled = true;
+    window.setTimeout(() => {
+      button.textContent = originalText || "Copiar prompt para IDE";
+      button.disabled = false;
+    }, 1800);
+    setAgentResponse({
+      badge: copied ? "Prompt IDE" : "Falha",
+      title: copied ? "Prompt pronto para colar no Codex" : "Não foi possível copiar",
+      text: copied
+        ? "A pendência foi copiada com relatório, motivo, comando sugerido e prova esperada."
+        : "O navegador bloqueou a cópia automática.",
+      next: copied ? "Cole o prompt aqui no IDE/Codex para executar a correção local." : "Selecione o bloco manualmente e copie.",
+      tone: copied ? "ok" : "bad",
+      items: [
+        {
+          state: copied ? "done" : "bad",
+          label: copied ? "copiado" : "erro",
+          agent: item.agent || "Cheffe Call",
+          text: item.title || "Ação aguardando IDE"
+        }
+      ]
+    });
+    setStatus(copied ? "Prompt da pendência copiado para colar no IDE." : "Nao foi possivel copiar o prompt da pendencia.", copied ? "ok" : "bad");
+  });
+
+  editorialHealthQueueList?.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-copy-editorial-health]");
+    if (!button) return;
+    const index = Number(button.dataset.copyEditorialHealth || -1);
+    const action = editorialHealthActions[index];
+    if (!action) {
+      setStatus("Nao encontrei essa pendencia de saude editorial.", "bad");
+      return;
+    }
+    const promptText = buildEditorialHealthPrompt(action);
+    const copied = await copyText(promptText);
+    const originalText = button.textContent;
+    button.textContent = copied ? "Prompt copiado" : "Falha ao copiar";
+    button.disabled = true;
+    window.setTimeout(() => {
+      button.textContent = originalText || "Copiar prompt";
+      button.disabled = false;
+    }, 1800);
+    setAgentResponse({
+      badge: copied ? "Saúde editorial" : "Falha",
+      title: copied ? "Prompt editorial copiado" : "Não foi possível copiar",
+      text: copied
+        ? "A pendência editorial foi copiada com gate, motivo, requisitos e prova esperada."
+        : "O navegador bloqueou a cópia automática.",
+      next: copied ? "Cole aqui no IDE/Codex para tratar a pendência local." : "Selecione o bloco manualmente e copie.",
+      tone: copied ? "ok" : "bad",
+      items: [
+        {
+          state: copied ? "done" : "bad",
+          label: action.priority || action.gate || "editorial",
+          agent: "Saúde editorial",
+          text: action.title || "Pendência editorial"
+        }
+      ]
+    });
+    setStatus(copied ? "Prompt da saude editorial copiado." : "Nao foi possivel copiar o prompt editorial.", copied ? "ok" : "bad");
   });
 
   document.addEventListener("keydown", (event) => {
@@ -2185,5 +7070,7 @@
   loadCall().catch((error) => setStatus(error.message, "bad"));
   renderMeetingLogs();
   renderTaskQueue();
+  renderIdeActionQueue();
+  renderReviewQueue();
   window.setInterval(() => loadCall().catch((error) => setStatus(error.message, "bad")), 60 * 1000);
 })();

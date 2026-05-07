@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-30T11:51:15.469Z",
+  "updatedAt": "2026-05-07T04:14:46.414Z",
   "actions": [
     {
       "id": "act-esttiles-fashion-ecommerce-1",
@@ -10,11 +10,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Transparencia editorial",
       "artifact": ".codex-temp/real-agents/artifacts/01-esttiles-fashion-ecommerce.md",
-      "createdAt": "2026-04-30T11:51:15.416Z"
+      "createdAt": "2026-05-07T04:14:46.377Z"
     },
     {
       "id": "act-esttiles-fashion-cms-fashion-2",
@@ -24,11 +24,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Retrospectiva continua",
       "artifact": ".codex-temp/real-agents/artifacts/02-esttiles-fashion-cms-fashion.md",
-      "createdAt": "2026-04-30T11:51:15.417Z"
+      "createdAt": "2026-05-07T04:14:46.378Z"
     },
     {
       "id": "act-esttiles-fashion-data-fashion-3",
@@ -38,11 +38,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Contexto e peso devido",
       "artifact": ".codex-temp/real-agents/artifacts/03-esttiles-fashion-data-fashion.md",
-      "createdAt": "2026-04-30T11:51:15.418Z"
+      "createdAt": "2026-05-07T04:14:46.379Z"
     },
     {
       "id": "act-esttiles-fashion-photo-pipeline-4",
@@ -52,11 +52,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Contexto e peso devido",
       "artifact": ".codex-temp/real-agents/artifacts/04-esttiles-fashion-photo-pipeline.md",
-      "createdAt": "2026-04-30T11:51:15.419Z"
+      "createdAt": "2026-05-07T04:14:46.380Z"
     },
     {
       "id": "act-esttiles-fashion-calendar-fashion-5",
@@ -66,11 +66,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Contexto e peso devido",
       "artifact": ".codex-temp/real-agents/artifacts/05-esttiles-fashion-calendar-fashion.md",
-      "createdAt": "2026-04-30T11:51:15.420Z"
+      "createdAt": "2026-05-07T04:14:46.381Z"
     },
     {
       "id": "act-esttiles-fashion-trend-ai-6",
@@ -80,11 +80,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Transparencia editorial",
       "artifact": ".codex-temp/real-agents/artifacts/06-esttiles-fashion-trend-ai.md",
-      "createdAt": "2026-04-30T11:51:15.421Z"
+      "createdAt": "2026-05-07T04:14:46.382Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-deploy-7",
@@ -94,11 +94,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2060,
+      "points": 2385,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Retrospectiva continua",
       "artifact": ".codex-temp/real-agents/artifacts/07-esttiles-fashion-fashion-deploy.md",
-      "createdAt": "2026-04-30T11:51:15.422Z"
+      "createdAt": "2026-05-07T04:14:46.383Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-lead-8",
@@ -108,11 +108,11 @@
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2053,
+      "points": 2379,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Interesse publico primeiro",
       "artifact": ".codex-temp/real-agents/artifacts/08-esttiles-fashion-fashion-lead.md",
-      "createdAt": "2026-04-30T11:51:15.422Z"
+      "createdAt": "2026-05-07T04:14:46.384Z"
     },
     {
       "id": "act-editorial-hq-dev-automacao-9",
@@ -122,11 +122,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Interesse publico primeiro",
       "artifact": ".codex-temp/real-agents/artifacts/09-editorial-hq-dev-automacao.md",
-      "createdAt": "2026-04-30T11:51:15.423Z"
+      "createdAt": "2026-05-07T04:14:46.384Z"
     },
     {
       "id": "act-editorial-hq-otto-physics-10",
@@ -136,11 +136,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Interesse publico primeiro",
       "artifact": ".codex-temp/real-agents/artifacts/10-editorial-hq-otto-physics.md",
-      "createdAt": "2026-04-30T11:51:15.424Z"
+      "createdAt": "2026-05-07T04:14:46.385Z"
     },
     {
       "id": "act-nerd-studio-zed-engine-11",
@@ -150,11 +150,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Transparencia editorial",
       "artifact": ".codex-temp/real-agents/artifacts/11-nerd-studio-zed-engine.md",
-      "createdAt": "2026-04-30T11:51:15.424Z"
+      "createdAt": "2026-05-07T04:14:46.386Z"
     },
     {
       "id": "act-arte-game-design-collision-12",
@@ -164,11 +164,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Transparencia editorial",
       "artifact": ".codex-temp/real-agents/artifacts/12-arte-game-design-collision.md",
-      "createdAt": "2026-04-30T11:51:15.425Z"
+      "createdAt": "2026-05-07T04:14:46.386Z"
     },
     {
       "id": "act-arte-game-design-physics-13",
@@ -178,11 +178,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Contexto e peso devido",
       "artifact": ".codex-temp/real-agents/artifacts/13-arte-game-design-physics.md",
-      "createdAt": "2026-04-30T11:51:15.428Z"
+      "createdAt": "2026-05-07T04:14:46.387Z"
     },
     {
       "id": "act-arte-game-design-controls-14",
@@ -192,11 +192,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Retrospectiva continua",
       "artifact": ".codex-temp/real-agents/artifacts/14-arte-game-design-controls.md",
-      "createdAt": "2026-04-30T11:51:15.429Z"
+      "createdAt": "2026-05-07T04:14:46.388Z"
     },
     {
       "id": "act-arte-game-design-engine-arch-15",
@@ -206,11 +206,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: IA como material nao verificado",
       "artifact": ".codex-temp/real-agents/artifacts/15-arte-game-design-engine-arch.md",
-      "createdAt": "2026-04-30T11:51:15.431Z"
+      "createdAt": "2026-05-07T04:14:46.388Z"
     },
     {
       "id": "act-arte-game-design-npc-ai-16",
@@ -220,11 +220,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Retrospectiva continua",
       "artifact": ".codex-temp/real-agents/artifacts/16-arte-game-design-npc-ai.md",
-      "createdAt": "2026-04-30T11:51:15.432Z"
+      "createdAt": "2026-05-07T04:14:46.389Z"
     },
     {
       "id": "act-arte-game-design-pool-physics-17",
@@ -234,11 +234,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Reducao de dano",
       "artifact": ".codex-temp/real-agents/artifacts/17-arte-game-design-pool-physics.md",
-      "createdAt": "2026-04-30T11:51:15.433Z"
+      "createdAt": "2026-05-07T04:14:46.389Z"
     },
     {
       "id": "act-arte-game-design-spritesheet-export-18",
@@ -248,11 +248,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: IA como material nao verificado",
       "artifact": ".codex-temp/real-agents/artifacts/18-arte-game-design-spritesheet-export.md",
-      "createdAt": "2026-04-30T11:51:15.433Z"
+      "createdAt": "2026-05-07T04:14:46.390Z"
     },
     {
       "id": "act-arte-game-design-optimizer-19",
@@ -262,11 +262,11 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Contexto e peso devido",
       "artifact": ".codex-temp/real-agents/artifacts/19-arte-game-design-optimizer.md",
-      "createdAt": "2026-04-30T11:51:15.434Z"
+      "createdAt": "2026-05-07T04:14:46.390Z"
     },
     {
       "id": "act-arte-game-design-deploy-games-20",
@@ -276,235 +276,235 @@
       "role": "dev",
       "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2048,
+      "points": 2373,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Interesse publico primeiro",
       "artifact": ".codex-temp/real-agents/artifacts/20-arte-game-design-deploy-games.md",
-      "createdAt": "2026-04-30T11:51:15.435Z"
+      "createdAt": "2026-05-07T04:14:46.391Z"
     },
     {
-      "id": "act-nerd-studio-otto-physics-21",
-      "slug": "nerd-studio-otto-physics",
-      "agent": "Otto Physics",
-      "office": "Escritorio Nerd",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 2042,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/21-nerd-studio-otto-physics.md",
-      "createdAt": "2026-04-30T11:51:15.435Z"
-    },
-    {
-      "id": "act-arte-game-design-camera-22",
-      "slug": "arte-game-design-camera",
-      "agent": "Bia Camera",
-      "office": "Escritorio de Arte",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 2042,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/22-arte-game-design-camera.md",
-      "createdAt": "2026-04-30T11:51:15.436Z"
-    },
-    {
-      "id": "act-arte-game-design-state-machine-23",
-      "slug": "arte-game-design-state-machine",
-      "agent": "Rui State",
-      "office": "Escritorio de Arte",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 2042,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/23-arte-game-design-state-machine.md",
-      "createdAt": "2026-04-30T11:51:15.437Z"
-    },
-    {
-      "id": "act-arte-game-design-map-tools-24",
-      "slug": "arte-game-design-map-tools",
-      "agent": "Vini MapTool",
-      "office": "Escritorio de Arte",
-      "role": "dev",
-      "kind": "automacao-proposta",
-      "status": "aguardando-aprovacao",
-      "points": 2042,
-      "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 669 noticias ativas",
-      "artifact": ".codex-temp/real-agents/artifacts/24-arte-game-design-map-tools.md",
-      "createdAt": "2026-04-30T11:51:15.437Z"
-    },
-    {
-      "id": "act-editorial-hq-ceo-codex-25",
+      "id": "act-editorial-hq-ceo-codex-21",
       "slug": "editorial-hq-ceo-codex",
       "agent": "Codex CEO",
       "office": "Escritorio Principal",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/25-editorial-hq-ceo-codex.md",
-      "createdAt": "2026-04-30T11:51:15.438Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Precisao antes da velocidade",
+      "artifact": ".codex-temp/real-agents/artifacts/21-editorial-hq-ceo-codex.md",
+      "createdAt": "2026-05-07T04:14:46.391Z"
     },
     {
-      "id": "act-editorial-hq-editor-chefe-26",
+      "id": "act-editorial-hq-editor-chefe-22",
       "slug": "editorial-hq-editor-chefe",
       "agent": "Editora Ari",
       "office": "Escritorio Principal",
       "role": "editor",
       "kind": "ajuste-editorial",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "revisar a hierarquia de capa com prioridade para Territórios - Sob o Domínio do Crime: 100º documentário do Globoplay mostra avanço das facções criminosas no Brasil",
-      "artifact": ".codex-temp/real-agents/artifacts/26-editorial-hq-editor-chefe.md",
-      "createdAt": "2026-04-30T11:51:15.438Z"
+      "title": "revisar a hierarquia de capa com prioridade para Secretaria de Agricultura participa de intercâmbio no Paraná para fortalecer cadeia produtiva do mel; aplicar treinamento: Corroboracao proporcional ao risco",
+      "artifact": ".codex-temp/real-agents/artifacts/22-editorial-hq-editor-chefe.md",
+      "createdAt": "2026-05-07T04:14:46.392Z"
     },
     {
-      "id": "act-nerd-studio-codex-nerd-27",
+      "id": "act-nerd-studio-codex-nerd-23",
       "slug": "nerd-studio-codex-nerd",
       "agent": "Codex Nerd Lead",
       "office": "Escritorio Nerd",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/27-nerd-studio-codex-nerd.md",
-      "createdAt": "2026-04-30T11:51:15.439Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Interesse publico primeiro",
+      "artifact": ".codex-temp/real-agents/artifacts/23-nerd-studio-codex-nerd.md",
+      "createdAt": "2026-05-07T04:14:46.393Z"
     },
     {
-      "id": "act-ninja-vault-ninja-chief-28",
+      "id": "act-nerd-studio-otto-physics-24",
+      "slug": "nerd-studio-otto-physics",
+      "agent": "Otto Physics",
+      "office": "Escritorio Nerd",
+      "role": "dev",
+      "kind": "automacao-proposta",
+      "status": "aguardando-aprovacao",
+      "points": 2367,
+      "outcome": "success",
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Retrospectiva continua",
+      "artifact": ".codex-temp/real-agents/artifacts/24-nerd-studio-otto-physics.md",
+      "createdAt": "2026-05-07T04:14:46.393Z"
+    },
+    {
+      "id": "act-ninja-vault-ninja-chief-25",
       "slug": "ninja-vault-ninja-chief",
       "agent": "Codex Ninja Lead",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/28-ninja-vault-ninja-chief.md",
-      "createdAt": "2026-04-30T11:51:15.440Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: IA como material nao verificado",
+      "artifact": ".codex-temp/real-agents/artifacts/25-ninja-vault-ninja-chief.md",
+      "createdAt": "2026-05-07T04:14:46.394Z"
     },
     {
-      "id": "act-ninja-vault-ninja-ops-29",
+      "id": "act-ninja-vault-ninja-ops-26",
       "slug": "ninja-vault-ninja-ops",
       "agent": "Lia Ops",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/29-ninja-vault-ninja-ops.md",
-      "createdAt": "2026-04-30T11:51:15.440Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Reducao de dano",
+      "artifact": ".codex-temp/real-agents/artifacts/26-ninja-vault-ninja-ops.md",
+      "createdAt": "2026-05-07T04:14:46.395Z"
     },
     {
-      "id": "act-ninja-vault-ninja-scope-30",
+      "id": "act-ninja-vault-ninja-scope-27",
       "slug": "ninja-vault-ninja-scope",
       "agent": "Mira Scope",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/30-ninja-vault-ninja-scope.md",
-      "createdAt": "2026-04-30T11:51:15.445Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Reducao de dano",
+      "artifact": ".codex-temp/real-agents/artifacts/27-ninja-vault-ninja-scope.md",
+      "createdAt": "2026-05-07T04:14:46.396Z"
     },
     {
-      "id": "act-ninja-vault-ninja-rights-31",
+      "id": "act-ninja-vault-ninja-rights-28",
       "slug": "ninja-vault-ninja-rights",
       "agent": "Tessa Licença",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/31-ninja-vault-ninja-rights.md",
-      "createdAt": "2026-04-30T11:51:15.447Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Fonte rastreavel",
+      "artifact": ".codex-temp/real-agents/artifacts/28-ninja-vault-ninja-rights.md",
+      "createdAt": "2026-05-07T04:14:46.397Z"
     },
     {
-      "id": "act-ninja-vault-ninja-archive-32",
+      "id": "act-ninja-vault-ninja-archive-29",
       "slug": "ninja-vault-ninja-archive",
       "agent": "Bento Vault",
       "office": "Escritorio de Ninjas",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/32-ninja-vault-ninja-archive.md",
-      "createdAt": "2026-04-30T11:51:15.449Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Retrospectiva continua",
+      "artifact": ".codex-temp/real-agents/artifacts/29-ninja-vault-ninja-archive.md",
+      "createdAt": "2026-05-07T04:14:46.397Z"
     },
     {
-      "id": "act-arte-game-design-arte-lead-33",
+      "id": "act-arte-game-design-arte-lead-30",
       "slug": "arte-game-design-arte-lead",
       "agent": "Ari Art Lead",
       "office": "Escritorio de Arte",
       "role": "ceo",
       "kind": "prioridade-operacional",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "redistribuir foco entre Cultura, Cotidiano, Esporte",
-      "artifact": ".codex-temp/real-agents/artifacts/33-arte-game-design-arte-lead.md",
-      "createdAt": "2026-04-30T11:51:15.450Z"
+      "title": "redistribuir foco entre Política, Polícia, Negócios; aplicar treinamento: Correcao visivel",
+      "artifact": ".codex-temp/real-agents/artifacts/30-arte-game-design-arte-lead.md",
+      "createdAt": "2026-05-07T04:14:46.398Z"
     },
     {
-      "id": "act-esttiles-fashion-beauty-watch-34",
-      "slug": "esttiles-fashion-beauty-watch",
-      "agent": "Luna Beauty",
-      "office": "Esttiles",
-      "role": "design",
-      "kind": "melhoria-visual",
+      "id": "act-arte-game-design-camera-31",
+      "slug": "arte-game-design-camera",
+      "agent": "Bia Camera",
+      "office": "Escritorio de Arte",
+      "role": "dev",
+      "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
-      "artifact": ".codex-temp/real-agents/artifacts/34-esttiles-fashion-beauty-watch.md",
-      "createdAt": "2026-04-30T11:51:15.451Z"
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: IA como material nao verificado",
+      "artifact": ".codex-temp/real-agents/artifacts/31-arte-game-design-camera.md",
+      "createdAt": "2026-05-07T04:14:46.399Z"
     },
     {
-      "id": "act-esttiles-fashion-color-stylist-35",
-      "slug": "esttiles-fashion-color-stylist",
-      "agent": "Mika Cor",
-      "office": "Esttiles",
-      "role": "design",
-      "kind": "melhoria-visual",
+      "id": "act-arte-game-design-state-machine-32",
+      "slug": "arte-game-design-state-machine",
+      "agent": "Rui State",
+      "office": "Escritorio de Arte",
+      "role": "dev",
+      "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
-      "artifact": ".codex-temp/real-agents/artifacts/35-esttiles-fashion-color-stylist.md",
-      "createdAt": "2026-04-30T11:51:15.452Z"
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Contexto e peso devido",
+      "artifact": ".codex-temp/real-agents/artifacts/32-arte-game-design-state-machine.md",
+      "createdAt": "2026-05-07T04:14:46.400Z"
     },
     {
-      "id": "act-esttiles-fashion-styling-lead-36",
-      "slug": "esttiles-fashion-styling-lead",
-      "agent": "Cleo Styling",
-      "office": "Esttiles",
-      "role": "design",
-      "kind": "melhoria-visual",
+      "id": "act-arte-game-design-map-tools-33",
+      "slug": "arte-game-design-map-tools",
+      "agent": "Vini MapTool",
+      "office": "Escritorio de Arte",
+      "role": "dev",
+      "kind": "automacao-proposta",
       "status": "aguardando-aprovacao",
-      "points": 2041,
+      "points": 2367,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de Para Alysson, o ideal é um candidato único ao governo do grupo que está no poder",
-      "artifact": ".codex-temp/real-agents/artifacts/36-esttiles-fashion-styling-lead.md",
-      "createdAt": "2026-04-30T11:51:15.453Z"
+      "title": "identificar rotinas manuais para automatizar a partir de 1112 noticias ativas; aplicar treinamento: Corroboracao proporcional ao risco",
+      "artifact": ".codex-temp/real-agents/artifacts/33-arte-game-design-map-tools.md",
+      "createdAt": "2026-05-07T04:14:46.400Z"
+    },
+    {
+      "id": "act-esttiles-fashion-trend-lead-34",
+      "slug": "esttiles-fashion-trend-lead",
+      "agent": "Iris Tendência",
+      "office": "Esttiles",
+      "role": "copy",
+      "kind": "copy-sugerida",
+      "status": "aguardando-aprovacao",
+      "points": 2366,
+      "outcome": "success",
+      "title": "reescrever titulo, apoio e gancho de clique para Secretaria de Agricultura participa de intercâmbio no Paraná para fortalecer cadeia produtiva do mel; aplicar treinamento: Corroboracao proporcional ao risco",
+      "artifact": ".codex-temp/real-agents/artifacts/34-esttiles-fashion-trend-lead.md",
+      "createdAt": "2026-05-07T04:14:46.401Z"
+    },
+    {
+      "id": "act-esttiles-fashion-street-style-35",
+      "slug": "esttiles-fashion-street-style",
+      "agent": "Nina Rua",
+      "office": "Esttiles",
+      "role": "copy",
+      "kind": "copy-sugerida",
+      "status": "aguardando-aprovacao",
+      "points": 2366,
+      "outcome": "success",
+      "title": "reescrever titulo, apoio e gancho de clique para Secretaria de Agricultura participa de intercâmbio no Paraná para fortalecer cadeia produtiva do mel; aplicar treinamento: IA como material nao verificado",
+      "artifact": ".codex-temp/real-agents/artifacts/35-esttiles-fashion-street-style.md",
+      "createdAt": "2026-05-07T04:14:46.402Z"
+    },
+    {
+      "id": "act-esttiles-fashion-fashion-reporter-36",
+      "slug": "esttiles-fashion-fashion-reporter",
+      "agent": "Theo Moda",
+      "office": "Esttiles",
+      "role": "copy",
+      "kind": "copy-sugerida",
+      "status": "aguardando-aprovacao",
+      "points": 2366,
+      "outcome": "success",
+      "title": "reescrever titulo, apoio e gancho de clique para Secretaria de Agricultura participa de intercâmbio no Paraná para fortalecer cadeia produtiva do mel; aplicar treinamento: Reducao de dano",
+      "artifact": ".codex-temp/real-agents/artifacts/36-esttiles-fashion-fashion-reporter.md",
+      "createdAt": "2026-05-07T04:14:46.402Z"
     }
   ]
 }

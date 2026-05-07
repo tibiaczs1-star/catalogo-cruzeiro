@@ -1,7 +1,43 @@
 {
   "topic": "kids",
-  "updatedAt": "2026-05-01T00:53:49.724Z",
+  "updatedAt": "2026-05-06T16:54:05.917Z",
   "items": [
+    {
+      "id": "https://www.animenewsnetwork.com/feature/2026-05-06/exploring-the-dan-da-dan-exhibit-can-you-outlast-the-paranormal-exhibition/.236967",
+      "slug": "exploring-the-dan-da-dan-exhibit-can-you-outlast-the-paranormal-exhibition",
+      "title": "Notícia internacional (fonte: Anime News Network)",
+      "eyebrow": "cotidiano",
+      "date": "6 de mai. de 2026",
+      "publishedAt": "2026-05-06T14:00:00.000Z",
+      "category": "Cotidiano",
+      "categoryKey": "cotidiano",
+      "previewClass": "thumb-cheia",
+      "sourceName": "Anime News Network",
+      "sourceUrl": "https://www.animenewsnetwork.com/feature/2026-05-06/exploring-the-dan-da-dan-exhibit-can-you-outlast-the-paranormal-exhibition/.236967",
+      "sourceLabel": "Anime News Network",
+      "lede": "Anime News Network publicou uma atualização sobre Notícia internacional (fonte: Anime News Network). A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+      "summary": "Notícia internacional (fonte: Anime News Network)",
+      "analysis": "",
+      "body": [
+        "Anime News Network publicou em 6 de mai. de 2026 a base desta noticia sobre Exploring the DAN DA DAN Exhibit: Can You Outlast the Paranormal Exhibition. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+        "Exploring the DAN DA DAN Exhibit: Can You Outlast the Paranormal Exhibition e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+      ],
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://www.animenewsnetwork.com/thumbnails/crop600x315gFI/cms/feature/236967/img-1377.jpg",
+      "sourceImageUrl": "https://www.animenewsnetwork.com/thumbnails/crop600x315gFI/cms/feature/236967/img-1377.jpg",
+      "feedImageUrl": "",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "topic": "kids",
+      "coverageLayer": "global",
+      "topicGroup": "anime"
+    },
     {
       "id": "relatorio-do-youtube-mostra-como-animadores-pela-internet-mudam-o-entretenimento",
       "slug": "relatorio-do-youtube-mostra-como-animadores-pela-internet-mudam-o-entretenimento",
@@ -16,7 +52,7 @@
       "sourceUrl": "https://blog.youtube/culture-and-trends/independent-animation-trends-report/",
       "sourceLabel": "Relatório do YouTube mostra como animadores pela internet mudam o entretenimento",
       "lede": "Novo relatorio do YouTube mostra o salto dos animadores independentes e como series feitas para a internet estao ganhando status de fenomeno cultural.",
-      "summary": "Novo relatorio do YouTube mostra o salto dos animadores independentes e como series feitas para a internet estao ganhando status de fenomeno cultural.",
+      "summary": "Atualização em YouTube Blog. Leia a matéria completa na fonte original.",
       "analysis": "",
       "body": [
         "YouTube Blog publicou em 9 de abr. de 2026 a base desta noticia sobre Relatório do YouTube mostra como animadores pela internet mudam o entretenimento. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -52,7 +88,7 @@
       "sourceUrl": "https://awn.com/news/moonbug-debuts-little-angel-spin-emmies-wonder-wardrobe",
       "sourceLabel": "Moonbug estreia Emmie's Wonder Wardrobe, série derivada pre-escolar de Little Angel",
       "lede": "A nova serie animada foi lancada no YouTube com foco em imaginacao, fantasia, criatividade e autoexpressao para o publico pequeno.",
-      "summary": "A nova serie animada foi lancada no YouTube com foco em imaginacao, fantasia, criatividade e autoexpressao para o publico pequeno.",
+      "summary": "Atualização em Animation World Network. Leia a matéria completa na fonte original.",
       "analysis": "",
       "body": [
         "Animation World Network publicou em 9 de abr. de 2026 a base desta noticia sobre Moonbug estreia Emmie's Wonder Wardrobe, série derivada pre-escolar de Little Angel. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -88,7 +124,7 @@
       "sourceUrl": "https://www.animenewsnetwork.com/",
       "sourceLabel": "Radar infantil acompanha estreias, animações e videos de anuncio da temporada",
       "lede": "O radar de anime continua util para reunir series novas, videos de anuncio e novidades que as criancas maiores e adolescentes acompanham semana a semana.",
-      "summary": "O radar de anime continua util para reunir series novas, videos de anuncio e novidades que as criancas maiores e adolescentes acompanham semana a semana.",
+      "summary": "Radar infantil acompanha estreias, animações e videos de anuncio da temporada",
       "analysis": "",
       "body": [
         "Anime News Network publicou em 4 de abr. de 2026 a base desta noticia sobre Radar infantil acompanha estreias, animações e videos de anuncio da temporada. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -124,7 +160,7 @@
       "sourceUrl": "https://www.awn.com/news/hasbro-appoints-adam-redfern-peppa-pig-showrunner",
       "sourceLabel": "Peppa Pig entra em nova fase com Adam Redfern como responsável criativo",
       "lede": "A mudanca criativa em Peppa Pig virou pauta internacional e ajuda a acompanhar como as grandes series infantis estao se renovando.",
-      "summary": "A mudanca criativa em Peppa Pig virou pauta internacional e ajuda a acompanhar como as grandes series infantis estao se renovando.",
+      "summary": "Peppa Pig entra em nova fase com Adam Redfern como responsável criativo",
       "analysis": "",
       "body": [
         "Animation World Network publicou em 3 de abr. de 2026 a base desta noticia sobre Peppa Pig entra em nova fase com Adam Redfern como responsável criativo. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -160,7 +196,7 @@
       "sourceUrl": "https://blog.youtube/news-and-events/youtube-creator-partnerships-newfronts-2026/",
       "sourceLabel": "YouTube reforca parceria entre marcas e criadores em 2026",
       "lede": "O canal oficial destacou como canais e criadores seguem puxando novidades, licenciamento e entretenimento digital para familias e criancas.",
-      "summary": "O canal oficial destacou como canais e criadores seguem puxando novidades, licenciamento e entretenimento digital para familias e criancas.",
+      "summary": "YouTube reforca parceria entre marcas e criadores em 2026",
       "analysis": "",
       "body": [
         "YouTube Blog publicou em 23 de mar. de 2026 a base desta noticia sobre YouTube reforca parceria entre marcas e criadores em 2026. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -196,7 +232,7 @@
       "sourceUrl": "https://press.disneyplus.com/news/disney-plus-more-bluey",
       "sourceLabel": "Mais Bluey chega ao Disney+ com especial de palco e leva de episodios curtos",
       "lede": "O anuncio oficial confirmou a estreia televisiva de especial de palco de Bluey em 16 de marco e a chegada dos episodios curtos ao Disney+ em 20 de maio.",
-      "summary": "O anuncio oficial confirmou a estreia televisiva de especial de palco de Bluey em 16 de marco e a chegada dos episodios curtos ao Disney+ em 20 de maio.",
+      "summary": "Mais Bluey chega ao Disney+ com especial de palco e leva de episodios curtos",
       "analysis": "",
       "body": [
         "Disney+ Press publicou em 12 de mar. de 2026 a base desta noticia sobre Mais Bluey chega ao Disney+ com especial de palco e leva de episodios curtos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -256,5 +292,5 @@
       "count": 8
     }
   ],
-  "fallbackUsed": true
+  "fallbackUsed": false
 }

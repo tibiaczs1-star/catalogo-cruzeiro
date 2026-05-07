@@ -2,8 +2,12 @@ const http = require("http");
 const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
-const { execFile } = require("child_process");
+const { execFile, spawnSync } = require("child_process");
 const { runRealAgentsRuntimeLocal } = require("./scripts/real-agents-runtime");
+const {
+  buildImageApprovalQueue,
+  recordImageApprovalDecision
+} = require("./scripts/news-image-approval-queue");
 const {
   parseHomeLinkedArticleFallbacks,
   auditHomeLinkedArticleIntegrity
@@ -70,23 +74,43 @@ const DATA_DIR = process.env.DATA_DIR
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
-const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
+const STATIC_NEWS_FILE = process.env.STATIC_NEWS_FILE
+  ? path.resolve(process.env.STATIC_NEWS_FILE)
+  : path.join(ROOT_DIR, "news-data.js");
 const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
+const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(DATA_DIR, "news-image-focus-decisions.json");
 const SOCIAL_TRENDS_CACHE_FILE = path.join(DATA_DIR, "social-trends-cache.json");
 const ELECTIONS_FILE = path.join(ROOT_DIR, "elections-data.js");
 const SERVICES_CATALOG_FILE = path.join(ROOT_DIR, "catalogo-servicos-data.js");
 const REAL_AGENTS_RUNTIME_SCRIPT = path.join(ROOT_DIR, "scripts", "real-agents-runtime.js");
 const REAL_AGENTS_REGISTRY_FILE = path.join(ROOT_DIR, ".codex-agents", "registry.json");
-const REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
-const REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
+const REAL_AGENTS_RUN_FILE = path.join(DATA_DIR, "real-agents-latest-run.json");
+const REAL_AGENTS_RUN_MD_FILE = path.join(DATA_DIR, "real-agents-latest-run.md");
+const LEGACY_REAL_AGENTS_RUN_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.json");
+const LEGACY_REAL_AGENTS_RUN_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "real-agents", "latest-run.md");
 const REAL_AGENTS_RUN_HISTORY_FILE = path.join(DATA_DIR, "real-agents-run-history.json");
 const REAL_AGENTS_ACTIONS_FILE = path.join(DATA_DIR, "real-agents-actions.json");
+const REAL_AGENTS_ECOSYSTEM_STUDY_FILE = path.join(DATA_DIR, "real-agents-ecosystem-study.json");
+const REAL_AGENTS_EDITORIAL_TRAINING_FILE = path.join(DATA_DIR, "real-agents-editorial-training.json");
+const EDITORIAL_CORRECTIONS_LOG_FILE = path.join(DATA_DIR, "editorial-corrections-log.json");
+const EDITORIAL_APPROVAL_LOCKS_FILE = path.join(DATA_DIR, "editorial-approval-locks.json");
+const EDITORIAL_MEETING_SHEETS_FILE = path.join(DATA_DIR, "editorial-meeting-sheets.json");
+const EDITORIAL_HEALTH_REPORT_JSON_FILE = path.join(DATA_DIR, "editorial-health-report.json");
+const EDITORIAL_HEALTH_REPORT_MD_FILE = path.join(DATA_DIR, "editorial-health-report.md");
+const CHEFFE_CALL_AUTONOMY_LOG_FILE = path.join(DATA_DIR, "cheffe-call-autonomy-log.json");
+const CHEFFE_CALL_IDE_ACTIONS_FILE = path.join(DATA_DIR, "cheffe-call-ide-actions.json");
+const REVIEW_TEAM_REPORT_JSON_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
+const REVIEW_TEAM_REPORT_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.md");
 const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
 const REAL_AGENTS_AUTONOMY_SCRIPT = path.join(ROOT_DIR, "scripts", "agents-autonomy-cycle.js");
 const ARTICLE_INTEGRITY_REPORT_FILE = path.join(DATA_DIR, "article-integrity-report.json");
 const CHEFFE_CALL_STATE_FILE = path.join(DATA_DIR, "cheffe-call-state.json");
 const CHEFFE_CALL_PROMPTS_FILE = path.join(ROOT_DIR, "docs", "cheffe-call-181-prompts.json");
-const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 5 * 60 * 1000);
+const CHEFFE_CALL_TIMEOUT_MINUTES_INPUT = Number(process.env.CHEFFE_CALL_TIMEOUT_MINUTES || 90);
+const CHEFFE_CALL_TIMEOUT_MS = Number.isFinite(CHEFFE_CALL_TIMEOUT_MINUTES_INPUT)
+  ? Math.max(60, CHEFFE_CALL_TIMEOUT_MINUTES_INPUT) * 60 * 1000
+  : 90 * 60 * 1000;
+const REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT = Number(process.env.REAL_AGENTS_AUTO_RUN_INTERVAL_MS || 8 * 60 * 60 * 1000);
 const REAL_AGENTS_AUTO_RUN_INTERVAL_MS = Number.isFinite(REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   ? Math.max(60 * 1000, REAL_AGENTS_AUTO_RUN_INTERVAL_INPUT)
   : 5 * 60 * 1000;
@@ -905,15 +929,6 @@ const TOPIC_FEED_CONFIG = {
       coverageLayer: "brasil"
     },
     {
-      id: "cnn-brasil-entretenimento",
-      name: "CNN Brasil Entretenimento",
-      feedUrl: "https://www.cnnbrasil.com.br/entretenimento/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/entretenimento/",
-      defaultCategory: "Entretenimento",
-      topicGroup: "celebridades",
-      coverageLayer: "brasil"
-    },
-    {
       id: "agencia-brasil-cultura",
       name: "Agencia Brasil Cultura",
       feedUrl: "https://agenciabrasil.ebc.com.br/rss/cultura/feed.xml",
@@ -945,14 +960,6 @@ const TOPIC_FEED_CONFIG = {
       name: "Agencia Brasil Politica",
       feedUrl: "https://agenciabrasil.ebc.com.br/rss/politica/feed.xml",
       siteUrl: "https://agenciabrasil.ebc.com.br/politica",
-      defaultCategory: "Politica",
-      topicGroup: "nacional"
-    },
-    {
-      id: "cnn-brasil-politica",
-      name: "CNN Brasil Politica",
-      feedUrl: "https://www.cnnbrasil.com.br/politica/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/politica/",
       defaultCategory: "Politica",
       topicGroup: "nacional"
     }
@@ -1099,14 +1106,6 @@ const TOPIC_FEED_CONFIG = {
       topicGroup: "brasil"
     },
     {
-      id: "cnn-brasil-politica",
-      name: "CNN Brasil Politica",
-      feedUrl: "https://www.cnnbrasil.com.br/politica/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/politica/",
-      defaultCategory: "Politica",
-      topicGroup: "brasil"
-    },
-    {
       id: "agencia-brasil-geral",
       name: "Agencia Brasil",
       feedUrl: "https://agenciabrasil.ebc.com.br/rss/geral/feed.xml",
@@ -1190,15 +1189,6 @@ const TOPIC_FEED_CONFIG = {
       defaultCategory: "Tecnologia",
       topicGroup: "tech",
       coverageLayer: "global"
-    },
-    {
-      id: "cnn-brasil-tecnologia",
-      name: "CNN Brasil Tecnologia",
-      feedUrl: "https://www.cnnbrasil.com.br/tecnologia/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/tecnologia/",
-      defaultCategory: "Tecnologia",
-      topicGroup: "tech",
-      coverageLayer: "brasil"
     }
   ],
   economy: [
@@ -1207,15 +1197,6 @@ const TOPIC_FEED_CONFIG = {
       name: "G1 Economia",
       feedUrl: "https://g1.globo.com/rss/g1/economia/",
       siteUrl: "https://g1.globo.com/economia/",
-      defaultCategory: "Economia",
-      topicGroup: "economia",
-      coverageLayer: "brasil"
-    },
-    {
-      id: "cnn-brasil-economia",
-      name: "CNN Brasil Economia",
-      feedUrl: "https://www.cnnbrasil.com.br/economia/feed/",
-      siteUrl: "https://www.cnnbrasil.com.br/economia/",
       defaultCategory: "Economia",
       topicGroup: "economia",
       coverageLayer: "brasil"
@@ -1770,7 +1751,7 @@ function updateImagePreviewCache(sourceUrl, imageUrl) {
 }
 
 function writeStaticNewsData(items = []) {
-  const safeItems = Array.isArray(items) ? items : [];
+  const safeItems = applyEditorialPublicationGateToCollection(Array.isArray(items) ? items : []);
   const payload = `window.NEWS_ARCHIVE_TOTAL = ${safeItems.length};\nwindow.NEWS_DATA = ${JSON.stringify(safeItems, null, 2)};\n`;
   fs.writeFileSync(STATIC_NEWS_FILE, payload, "utf-8");
 }
@@ -4917,6 +4898,13 @@ const SOCIAL_TREND_SOURCES = [
   }
 ];
 
+const SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS = /^(1|true|yes)$/i.test(
+  String(process.env.SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS || "")
+);
+
+const SOCIAL_TREND_DIRECTORY_SOURCE_PATTERN =
+  /\b(best-hashtags\.com|getdaytrends\.com|trends24\.in|developers\.facebook\.com)\b/i;
+
 const SOCIAL_TREND_BLOCKLIST = new Set([
   "twitter",
   "x",
@@ -5054,6 +5042,25 @@ function inferSocialTrendDivision(value = "") {
     return "Acre / Governo";
   }
   return "Cotidiano";
+}
+
+function isDirectorySocialTrendSource(source = {}) {
+  return Boolean(source && source.type !== "facebook");
+}
+
+function isDirectorySocialTrendItem(item = {}) {
+  const sourceText = [
+    item.sourceName,
+    item.source,
+    item.sourceUrl,
+    item.url,
+    item.topicGroup,
+    item.summary
+  ]
+    .map((value) => String(value || ""))
+    .join(" ");
+
+  return SOCIAL_TREND_DIRECTORY_SOURCE_PATTERN.test(sourceText);
 }
 
 async function fetchExternalText(url, timeoutMs = 6500) {
@@ -5423,6 +5430,7 @@ function mergeSocialTrendItems(items = [], limit = 24) {
   const platformPriority = { Facebook: 0, "X/Twitter": 1, Instagram: 2 };
 
   items
+    .filter((item) => SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS || !isDirectorySocialTrendItem(item))
     .filter((item) => isPortugueseBrazilianSocialTrendLabel(item.title || item.hashtags?.[0] || ""))
     .slice()
     .sort((left, right) => {
@@ -5451,7 +5459,18 @@ function mergeSocialTrendItems(items = [], limit = 24) {
 }
 
 async function refreshSocialTrends(limit = 24) {
-  const sourceResults = await mapWithConcurrency(SOCIAL_TREND_SOURCES, 3, fetchSocialTrendSource);
+  const allowedSources = SOCIAL_TREND_SOURCES.filter(
+    (source) => SOCIAL_TRENDS_ALLOW_DIRECTORY_SIGNALS || !isDirectorySocialTrendSource(source)
+  );
+  const skippedReports = SOCIAL_TREND_SOURCES.filter((source) => !allowedSources.includes(source)).map((source) => ({
+    source: source.id,
+    platform: source.platform,
+    ok: false,
+    skipped: true,
+    reason: "directory_signal_disabled",
+    url: source.url
+  }));
+  const sourceResults = await mapWithConcurrency(allowedSources, 3, fetchSocialTrendSource);
   const items = mergeSocialTrendItems(
     sourceResults.flatMap((entry) => entry.items),
     Math.max(1, Math.min(50, limit))
@@ -5460,13 +5479,11 @@ async function refreshSocialTrends(limit = 24) {
     ok: true,
     updatedAt: new Date().toISOString(),
     items,
-    reports: sourceResults.map((entry) => entry.report),
+    reports: [...sourceResults.map((entry) => entry.report), ...skippedReports],
     external: items.length > 0
   };
 
-  if (items.length) {
-    writeJson(SOCIAL_TRENDS_CACHE_FILE, payload);
-  }
+  writeJson(SOCIAL_TRENDS_CACHE_FILE, payload);
 
   return payload;
 }
@@ -5477,7 +5494,7 @@ async function getSocialTrends(limit = 24) {
   const cachedItems = Array.isArray(cached?.items) ? cached.items : [];
   const cachedUpdatedAt = cached?.updatedAt ? Date.parse(cached.updatedAt) : 0;
   const cacheIsFresh =
-    cachedItems.length > 0 && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < SOCIAL_TRENDS_TTL_MS;
+    cached?.ok === true && Number.isFinite(cachedUpdatedAt) && Date.now() - cachedUpdatedAt < SOCIAL_TRENDS_TTL_MS;
 
   if (cacheIsFresh) {
     const scopedItems = mergeSocialTrendItems(cachedItems, safeLimit);
@@ -5485,13 +5502,14 @@ async function getSocialTrends(limit = 24) {
       ...cached,
       items: scopedItems,
       total: scopedItems.length,
+      external: scopedItems.length > 0,
       stale: false
     };
   }
 
   try {
     const refreshed = await withPromiseTimeout(refreshSocialTrends(Math.max(safeLimit, 24)), 9000, "social_trends_timeout");
-    if (Array.isArray(refreshed.items) && refreshed.items.length) {
+    if (refreshed?.ok === true && Array.isArray(refreshed.items)) {
       return {
         ...refreshed,
         items: refreshed.items.slice(0, safeLimit),
@@ -5508,6 +5526,7 @@ async function getSocialTrends(limit = 24) {
       ...cached,
       items: scopedItems,
       total: scopedItems.length,
+      external: scopedItems.length > 0,
       stale: true
     };
   }
@@ -6428,6 +6447,12 @@ function getEditorialFocusScore(item = {}) {
 }
 
 function sortArticleItems(left, right) {
+  const leftHighlightLocked = left?.editorialGate?.highlightAllowed === false ? 1 : 0;
+  const rightHighlightLocked = right?.editorialGate?.highlightAllowed === false ? 1 : 0;
+  if (leftHighlightLocked !== rightHighlightLocked) {
+    return leftHighlightLocked - rightHighlightLocked;
+  }
+
   const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
   if (dateDiff !== 0) {
     return dateDiff;
@@ -6526,6 +6551,244 @@ function getArticleSourceEntries(item = {}) {
   return entries;
 }
 
+const EDITORIAL_GATE_P0_PATTERN =
+  /\b(ataque|atentado|tiroteio|morte|morre|morreu|morto|morta|assassin|homicidio|feminicidio|estupro|abuso|violencia|crianca|adolescente|menor|escola|aluno|policia|prisao|preso|suspeito|arma|tiro|ferido|hospital|acidente|desastre|enchente|incendio|ameaca|mpac|gaeco)\b/i;
+const EDITORIAL_GATE_P1_PATTERN =
+  /\b(lula|bolsonaro|governo|prefeitura|governador|presidente|vereador|deputado|senador|senado|camara|stf|justica|tribunal|ministerio publico|mpf|tse|eleicao|eleicoes|campanha|orcamento|imposto|tarifa|lei|projeto de lei|greve|audiencia publica|acre|rio branco)\b/i;
+const EDITORIAL_APPROVED_STATUSES = new Set(["approved", "aprovado", "released", "liberado", "corrigido", "ok"]);
+const EDITORIAL_HELD_STATUSES = new Set(["held", "segurado", "blocked", "bloqueado", "reprovado", "needs-fix"]);
+
+function getEditorialGateText(item = {}) {
+  return normalizeText([
+    item.title,
+    item.summary,
+    item.lede,
+    item.category,
+    item.categoryKey,
+    item.sourceLabel,
+    item.analysis,
+    Array.isArray(item.body) ? item.body.join(" ") : item.body
+  ].join(" "));
+}
+
+function classifyArticleEditorialGate(item = {}) {
+  const text = getEditorialGateText(item);
+  if (EDITORIAL_GATE_P0_PATTERN.test(text)) {
+    return {
+      gate: "P0",
+      approval: "human-required",
+      reason: "Cobertura sensivel exige decisao humana antes de publicacao sensivel ou destaque."
+    };
+  }
+  if (EDITORIAL_GATE_P1_PATTERN.test(text)) {
+    return {
+      gate: "P1",
+      approval: "editor-review",
+      reason: "Cobertura civica/local exige revisao editorial antes de destaque."
+    };
+  }
+  return {
+    gate: "P2",
+    approval: "auto-check",
+    reason: "Baixo risco editorial; liberado com checks automaticos."
+  };
+}
+
+function getEditorialApprovalKey(item = {}) {
+  return cleanShortText(item.slug || item.id || item.sourceUrl || slugify(item.title || ""), 160).toLowerCase();
+}
+
+function readEditorialApprovalLocks() {
+  const payload = readJson(EDITORIAL_APPROVAL_LOCKS_FILE, { version: 1, decisions: [] });
+  const decisions = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.decisions)
+      ? payload.decisions
+      : [];
+  return decisions
+    .filter((item) => item && typeof item === "object")
+    .map((item) => ({
+      id: cleanShortText(item.id || createRecordId("approval"), 120),
+      slug: cleanShortText(item.slug || item.articleSlug || "", 160),
+      status: cleanShortText(item.status || item.decision || "", 60).toLowerCase(),
+      gate: cleanShortText(item.gate || "", 20).toUpperCase(),
+      allowedPublication: item.allowedPublication === true || item.publicationAllowed === true,
+      allowedHighlight: item.allowedHighlight === true || item.highlightAllowed === true,
+      reviewer: cleanShortText(item.reviewer || item.approvedBy || "Cheffe Call", 120),
+      note: cleanShortText(item.note || item.publicNote || "", 360),
+      decidedAt: cleanShortText(item.decidedAt || item.updatedAt || item.createdAt || "", 80),
+      createdAt: cleanShortText(item.createdAt || item.decidedAt || "", 80),
+      updatedAt: cleanShortText(item.updatedAt || item.decidedAt || item.createdAt || "", 80)
+    }))
+    .filter((item) => item.slug);
+}
+
+function getEditorialApprovalDecision(item = {}, decisions = readEditorialApprovalLocks()) {
+  const keys = [
+    getEditorialApprovalKey(item),
+    cleanShortText(item.id || "", 160).toLowerCase(),
+    cleanShortText(item.sourceUrl || item.url || item.link || "", 160).toLowerCase(),
+    slugify(item.title || "").toLowerCase()
+  ].filter(Boolean);
+  return decisions.find((decision) => keys.includes(decision.slug.toLowerCase())) || null;
+}
+
+function isEditorialDecisionApproved(decision = {}) {
+  return Boolean(decision) && EDITORIAL_APPROVED_STATUSES.has(String(decision.status || "").toLowerCase());
+}
+
+function buildArticleEditorialDossier(item = {}, decisions = readEditorialApprovalLocks()) {
+  const gateInfo = classifyArticleEditorialGate(item);
+  const sources = getArticleSourceEntries(item);
+  const sourceIssues = [];
+  if (!sources.length || !sources.some((source) => source.url)) sourceIssues.push("sem-url-da-fonte");
+  if (!sources.some((source) => source.name)) sourceIssues.push("sem-nome-da-fonte");
+  if (gateInfo.gate === "P0" && sources.length < 2) sourceIssues.push("p0-com-fonte-unica");
+
+  const imageUrl = cleanShortText(item.imageUrl || item.feedImageUrl || item.sourceImageUrl || item.image || "", 600);
+  const imageCredit = cleanShortText(item.imageCredit || item.credit || item.media?.credit || "", 220);
+  const imageLabel = !imageUrl
+    ? "sem-imagem"
+    : /assets\/news-fallbacks|fallback|placeholder|thumb-/i.test(imageUrl)
+      ? "ilustracao-editorial"
+      : /^https?:\/\//i.test(imageUrl)
+        ? "imagem-de-fonte"
+        : "imagem-local";
+  const visualIssues = [];
+  if (!imageUrl) visualIssues.push("sem-imagem");
+  if (gateInfo.gate !== "P2" && imageUrl && !imageCredit) visualIssues.push("p0-p1-sem-credito-visual");
+  if (gateInfo.gate === "P0" && imageLabel === "ilustracao-editorial") visualIssues.push("p0-com-ilustracao-generica");
+
+  const decision = getEditorialApprovalDecision(item, decisions);
+  const approved = isEditorialDecisionApproved(decision);
+  const held = decision ? EDITORIAL_HELD_STATUSES.has(String(decision.status || "").toLowerCase()) : false;
+  const publicationLocked =
+    held || (gateInfo.gate === "P0" && !approved && !Boolean(decision?.allowedPublication));
+  const highlightLocked =
+    held || ((gateInfo.gate === "P0" || gateInfo.gate === "P1") && !approved && !Boolean(decision?.allowedHighlight));
+  const slug = cleanShortText(item.slug || slugify(item.title || item.sourceUrl || ""), 140);
+
+  return {
+    id: `dossier-${slug || getEditorialApprovalKey(item) || "item"}`,
+    slug,
+    title: cleanShortText(item.title || "Sem titulo", 180),
+    gate: gateInfo.gate,
+    approval: gateInfo.approval,
+    gateReason: gateInfo.reason,
+    sourceStatus: sourceIssues.length ? "pending" : "ok",
+    sourceIssues,
+    sourceCount: sources.length,
+    sources: sources.slice(0, 4),
+    visualStatus: visualIssues.length ? "pending" : "ok",
+    visualIssues,
+    imageLabel,
+    publicationLock: {
+      publicationLocked,
+      highlightLocked,
+      publicationAllowed: !publicationLocked,
+      highlightAllowed: !highlightLocked,
+      requiredDecision:
+        gateInfo.gate === "P0"
+          ? "aprovacao-humana-antes-de-publicar-ou-destacar"
+          : gateInfo.gate === "P1"
+            ? "revisao-editorial-antes-de-destaque"
+            : "checks-automaticos"
+    },
+    approvalDecision: decision
+      ? {
+          status: decision.status,
+          reviewer: decision.reviewer,
+          note: decision.note,
+          decidedAt: decision.decidedAt
+        }
+      : null,
+    checklist: [
+      "titulo/resumo em portugues",
+      "fonte original preservada",
+      gateInfo.gate === "P0" ? "decisao humana registrada" : "",
+      gateInfo.gate === "P1" ? "revisao editorial registrada antes de destaque" : "",
+      "imagem e credito conferidos",
+      "correcao publica registrada se houver ajuste posterior"
+    ].filter(Boolean)
+  };
+}
+
+function applyEditorialGateToArticle(item = {}, decisions = readEditorialApprovalLocks()) {
+  const dossier = buildArticleEditorialDossier(item, decisions);
+  return {
+    ...item,
+    editorialGate: {
+      gate: dossier.gate,
+      approval: dossier.approval,
+      reason: dossier.gateReason,
+      publicationAllowed: dossier.publicationLock.publicationAllowed,
+      highlightAllowed: dossier.publicationLock.highlightAllowed,
+      publicationLocked: dossier.publicationLock.publicationLocked,
+      highlightLocked: dossier.publicationLock.highlightLocked,
+      sourceStatus: dossier.sourceStatus,
+      visualStatus: dossier.visualStatus,
+      decision: dossier.approvalDecision
+    },
+    editorialDossier: dossier
+  };
+}
+
+function applyEditorialPublicationGateToCollection(items = [], options = {}) {
+  const decisions = readEditorialApprovalLocks();
+  const includeLocked = Boolean(options.includeLocked);
+  return (Array.isArray(items) ? items : [])
+    .map((item) => applyEditorialGateToArticle(item, decisions))
+    .filter((item) => includeLocked || item.editorialGate?.publicationAllowed !== false);
+}
+
+function buildEditorialApprovalLocksPayload() {
+  const decisions = readEditorialApprovalLocks();
+  return {
+    ok: true,
+    kind: "editorial-approval-locks",
+    file: path.relative(ROOT_DIR, EDITORIAL_APPROVAL_LOCKS_FILE).replace(/\\/g, "/"),
+    total: decisions.length,
+    approved: decisions.filter(isEditorialDecisionApproved).length,
+    decisions: decisions.slice(0, 120)
+  };
+}
+
+function recordEditorialApprovalDecision(body = {}) {
+  const now = new Date().toISOString();
+  const slug = cleanShortText(body.slug || body.articleSlug || "", 160);
+  if (!slug) {
+    return { ok: false, status: 400, error: "slug obrigatório para registrar aprovação editorial." };
+  }
+  const gate = cleanShortText(body.gate || "", 20).toUpperCase() || "P1";
+  const rawStatus = cleanShortText(body.status || body.decision || "approved", 60).toLowerCase();
+  const status = rawStatus || "approved";
+  const decision = {
+    id: cleanShortText(body.id || `approval-${slug}-${Date.now()}`, 160),
+    slug,
+    gate,
+    status,
+    allowedPublication:
+      body.allowedPublication === true ||
+      body.publicationAllowed === true ||
+      (status && !EDITORIAL_HELD_STATUSES.has(status)),
+    allowedHighlight:
+      body.allowedHighlight === true ||
+      body.highlightAllowed === true ||
+      EDITORIAL_APPROVED_STATUSES.has(status),
+    reviewer: cleanShortText(body.reviewer || body.approvedBy || "Cheffe Call", 120),
+    note: cleanShortText(body.note || body.publicNote || "", 360),
+    decidedAt: now,
+    createdAt: cleanShortText(body.createdAt || now, 80),
+    updatedAt: now
+  };
+  const store = readJson(EDITORIAL_APPROVAL_LOCKS_FILE, { version: 1, decisions: [] });
+  const current = Array.isArray(store?.decisions) ? store.decisions : Array.isArray(store) ? store : [];
+  const next = [decision, ...current.filter((item) => cleanShortText(item?.slug || "", 160) !== slug)].slice(0, 500);
+  writeJson(EDITORIAL_APPROVAL_LOCKS_FILE, { version: 1, updatedAt: now, decisions: next });
+  newsApiResponseCache.clear();
+  return { ok: true, decision, ...buildEditorialApprovalLocksPayload() };
+}
+
 function mergeCrossedArticleRecord(preferred = {}, secondary = {}) {
   const crossSources = getArticleSourceEntries(preferred);
 
@@ -6575,7 +6838,7 @@ function getArticleStorageKey(item = {}) {
   return String(getArticleCanonicalKey(item) || item.slug || item.id || item.title || "").trim();
 }
 
-function getArticleNews(limit = 30) {
+function getArticleNews(limit = 30, options = {}) {
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
 
@@ -6586,10 +6849,12 @@ function getArticleNews(limit = 30) {
     }
   });
 
-  return repairNewsImagesForDisplay(Array.from(map.values()).sort(sortArticleItems).slice(0, limit));
+  return repairNewsImagesForDisplay(
+    applyEditorialPublicationGateToCollection(Array.from(map.values()), options).sort(sortArticleItems).slice(0, limit)
+  );
 }
 
-function buildArticleNewsApiPayload(limit = 60) {
+function buildArticleNewsApiPayload(limit = 60, options = {}) {
   const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
@@ -6601,28 +6866,37 @@ function buildArticleNewsApiPayload(limit = 60) {
     }
   });
 
-  const sorted = Array.from(map.values()).sort(sortArticleItems);
+  const allSorted = Array.from(map.values()).sort(sortArticleItems);
+  const sorted = applyEditorialPublicationGateToCollection(allSorted, options);
   const visibleItems = repairNewsImagesForDisplay(sorted.slice(0, safeLimit));
+  const lockedTotal = allSorted.length - sorted.length;
 
   return {
     ok: true,
     total: sorted.length,
     archiveTotal: sorted.length,
+    lockedTotal,
+    editorialPublicationGate: {
+      includeLocked: Boolean(options.includeLocked),
+      lockedTotal,
+      rule: "P0 sem decisao humana fica fora da publicacao publica; P1 sem revisao fica fora de destaque."
+    },
     returned: visibleItems.length,
     items: visibleItems
   };
 }
 
-function getCachedArticleNewsApiPayload(limit = 60) {
+function getCachedArticleNewsApiPayload(limit = 60, options = {}) {
   const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
-  const key = `limit:${safeLimit}`;
+  const includeLocked = Boolean(options.includeLocked);
+  const key = `limit:${safeLimit}:locked:${includeLocked ? "1" : "0"}`;
   const cached = newsApiResponseCache.get(key);
 
   if (cached && cached.expiresAt > Date.now()) {
     return cached.payload;
   }
 
-  const payload = buildArticleNewsApiPayload(safeLimit);
+  const payload = buildArticleNewsApiPayload(safeLimit, { includeLocked });
   newsApiResponseCache.set(key, {
     expiresAt: Date.now() + NEWS_API_CACHE_TTL_MS,
     payload
@@ -6662,7 +6936,7 @@ function buildNewsArchivePayload(limit = 500) {
     }
   });
 
-  const sorted = Array.from(map.values()).sort((left, right) => {
+  const allSorted = Array.from(map.values()).sort((left, right) => {
     const rightDate = new Date(right.publishedAt || right.date || 0).getTime();
     const leftDate = new Date(left.publishedAt || left.date || 0).getTime();
 
@@ -6673,11 +6947,13 @@ function buildNewsArchivePayload(limit = 500) {
     return Number(right.priority || 0) - Number(left.priority || 0);
   });
 
+  const sorted = applyEditorialPublicationGateToCollection(allSorted);
   const archiveItems = repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
 
   return {
     total: sorted.length,
     archiveTotal: sorted.length,
+    lockedTotal: allSorted.length - sorted.length,
     returned: archiveItems.length,
     items: archiveItems
   };
@@ -7182,8 +7458,12 @@ function getNews(limit = 30) {
     if (!map.has(key)) map.set(key, item);
   });
 
-  return Array.from(map.values())
+  return applyEditorialPublicationGateToCollection(Array.from(map.values()))
     .sort((a, b) => {
+      const leftHighlightLocked = a?.editorialGate?.highlightAllowed === false ? 1 : 0;
+      const rightHighlightLocked = b?.editorialGate?.highlightAllowed === false ? 1 : 0;
+      if (leftHighlightLocked !== rightHighlightLocked) return leftHighlightLocked - rightHighlightLocked;
+
       const dateDiff = getPublicNewsTimestamp(b) - getPublicNewsTimestamp(a);
       if (dateDiff !== 0) return dateDiff;
 
@@ -7944,6 +8224,357 @@ function appendOfficeOrder(order) {
   return nextOrders;
 }
 
+function updateOfficeOrderById(orderId, patch = {}) {
+  const id = cleanShortText(orderId || "", 120);
+  if (!id) return null;
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  if (!Array.isArray(orders)) return null;
+  let found = null;
+  const nextOrders = orders.map((order) => {
+    if (order?.id !== id) return order;
+    found = {
+      ...order,
+      ...patch,
+      updatedAt: patch.updatedAt || new Date().toISOString()
+    };
+    return found;
+  });
+  if (found) writeJson(OFFICE_ORDERS_FILE, nextOrders);
+  return found;
+}
+
+function countOfficeOrders() {
+  const orders = readJson(OFFICE_ORDERS_FILE, []);
+  return Array.isArray(orders) ? orders.length : 0;
+}
+
+function buildProofFile(filePath, label) {
+  try {
+    const stats = fs.statSync(filePath);
+    return {
+      label,
+      path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+      bytes: stats.size,
+      updatedAt: stats.mtime.toISOString()
+    };
+  } catch (_error) {
+    return {
+      label,
+      path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+      missing: true
+    };
+  }
+}
+
+function countDirFilesByExtension(dirPath, extensions = [], maxFiles = 600) {
+  const summary = {
+    exists: false,
+    totalFiles: 0,
+    byExtension: {},
+    recent: []
+  };
+  const allow = new Set(extensions.map((ext) => String(ext || "").toLowerCase()));
+  const visit = (currentDir, depth = 0) => {
+    if (summary.totalFiles >= maxFiles || depth > 3) return;
+    let entries = [];
+    try {
+      entries = fs.readdirSync(currentDir, { withFileTypes: true });
+    } catch (_error) {
+      return;
+    }
+    entries.forEach((entry) => {
+      if (summary.totalFiles >= maxFiles) return;
+      if (entry.name === "node_modules" || entry.name === ".git") return;
+      const filePath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        visit(filePath, depth + 1);
+        return;
+      }
+      if (!entry.isFile()) return;
+      const ext = path.extname(entry.name).toLowerCase() || "(none)";
+      if (allow.size && !allow.has(ext)) return;
+      summary.totalFiles += 1;
+      summary.byExtension[ext] = (summary.byExtension[ext] || 0) + 1;
+      try {
+        const stats = fs.statSync(filePath);
+        summary.recent.push({
+          path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+          updatedAt: stats.mtime.toISOString(),
+          bytes: stats.size
+        });
+      } catch (_error) {
+        // Ignore files that disappear during scan.
+      }
+    });
+  };
+
+  if (fs.existsSync(dirPath)) {
+    summary.exists = true;
+    visit(dirPath);
+  }
+
+  summary.recent = summary.recent
+    .sort((a, b) => String(b.updatedAt).localeCompare(String(a.updatedAt)))
+    .slice(0, 8);
+  return summary;
+}
+
+function readMemoryOrderSnapshot() {
+  const ordersPayload = readJson(path.join(ROOT_DIR, ".codex-memory", "orders.json"), { orders: [] });
+  const orders = Array.isArray(ordersPayload.orders) ? ordersPayload.orders : [];
+  return {
+    total: orders.length,
+    open: orders.filter((order) => String(order.status || "open") === "open").length,
+    latest: orders
+      .slice(-6)
+      .reverse()
+      .map((order) => ({
+        id: cleanShortText(order.id || "", 120),
+        status: cleanShortText(order.status || "", 40),
+        summary: cleanShortText(order.summary || order.rawRequest || "", 220),
+        updatedAt: cleanShortText(order.updatedAt || order.createdAt || "", 80)
+      }))
+  };
+}
+
+function countJsonItems(filePath, pick = "") {
+  const payload = readJson(filePath, null);
+  const value = pick && payload && typeof payload === "object" ? payload[pick] : payload;
+  if (Array.isArray(value)) return value.length;
+  if (value && typeof value === "object") return Object.keys(value).length;
+  return 0;
+}
+
+function fileBrief(relativePath, label, kind = "surface") {
+  const filePath = path.join(ROOT_DIR, relativePath);
+  const proof = buildProofFile(filePath, label || relativePath);
+  return {
+    kind,
+    label: label || relativePath,
+    path: proof.path,
+    exists: !proof.missing,
+    bytes: proof.bytes || 0,
+    updatedAt: proof.updatedAt || ""
+  };
+}
+
+function inferEcosystemFocus(instruction = "") {
+  const text = normalizeText(instruction);
+  const focus = [];
+  const add = (area, reason, files = []) => {
+    if (focus.some((item) => item.area === area)) return;
+    focus.push({
+      area,
+      reason,
+      files: files.map((file) => cleanShortText(file, 180)).filter(Boolean)
+    });
+  };
+
+  if (/cheffe|call|ordem|agente|runtime|prova|evidencia|ecossistema|aprend/.test(text)) {
+    add("Cheffe Call / agentes reais", "ordem ligada a comando, prova, aprendizado ou runtime", [
+      "cheffe-call.html",
+      "cheffe-call.js",
+      "server.js",
+      "scripts/real-agents-runtime.js",
+      ".codex-agents/registry.json"
+    ]);
+  }
+  if (/noticia|foto|materia|editor|jornal|feed|mailza|jurua|acre/.test(text)) {
+    add("Editorial e noticias", "ordem menciona noticia, foto, feed ou cobertura regional", [
+      "script.js",
+      "news-data.js",
+      "noticia.js",
+      "data/runtime-news.json",
+      "data/news-archive.json"
+    ]);
+  }
+  if (/pubpaid|jogo|phaser|sprite|rua|trafego|dama|dardos/.test(text)) {
+    add("PubPaid 2.0", "ordem menciona jogo, Phaser, sprites ou trafego", [
+      "pubpaid-v2.html",
+      "pubpaid-phaser/app.js",
+      "pubpaid-phaser/scenes/StreetScene.js",
+      "pubpaid-phaser/scenes/InteriorScene.js"
+    ]);
+  }
+  if (/visual|layout|css|mobile|card|tela|interface|design/.test(text)) {
+    add("Interface visual", "ordem menciona visual, tela, layout ou mobile", [
+      "styles.css",
+      "premium-clarity.css",
+      "cheffe-call.css",
+      "mobile-home-final.css"
+    ]);
+  }
+  if (!focus.length) {
+    add("Ecossistema geral", "ordem ampla sem modulo unico; estudar superficies principais antes de agir", [
+      "server.js",
+      "index.html",
+      "script.js",
+      "CODEX_MEMORY.md",
+      ".codex-memory/current-state.md"
+    ]);
+  }
+  return focus.slice(0, 5);
+}
+
+function buildRealAgentsEcosystemStudy(options = {}) {
+  const now = new Date().toISOString();
+  const instruction = cleanShortText(options.instruction || options.message || "", 1200);
+  const previous = readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null);
+  const packagePayload = readJson(path.join(ROOT_DIR, "package.json"), {});
+  const registry = readJson(REAL_AGENTS_REGISTRY_FILE, {});
+  const runtimeNewsCount = countJsonItems(path.join(DATA_DIR, "runtime-news.json"));
+  const archiveNewsCount = countJsonItems(path.join(DATA_DIR, "news-archive.json"));
+  const officeOrderCount = countOfficeOrders();
+  const actionsCount = countJsonItems(REAL_AGENTS_ACTIONS_FILE, "actions");
+  const topics = fs.existsSync(DATA_DIR)
+    ? fs.readdirSync(DATA_DIR).filter((name) => /^topic-feed-.+\.json$/i.test(name)).length
+    : 0;
+  const serverText = fs.existsSync(__filename) ? fs.readFileSync(__filename, "utf-8") : "";
+  const routeCount = (serverText.match(/pathname === "/g) || []).length;
+  const routeFamilies = [...new Set(
+    [...serverText.matchAll(/pathname === "([^"]+)"/g)]
+      .map((match) => String(match[1] || "").split("/").slice(1, 3).join("/"))
+      .filter(Boolean)
+  )].slice(0, 20);
+  const focusModules = inferEcosystemFocus(instruction);
+  const memory = readMemoryOrderSnapshot();
+  const agentCount = Array.isArray(registry.agents) ? registry.agents.length : Number(registry.totalAgents || 0);
+  const officesCount = Array.isArray(registry.offices) ? registry.offices.length : 0;
+  const directories = {
+    scripts: countDirFilesByExtension(path.join(ROOT_DIR, "scripts"), [".js", ".mjs", ".cjs"], 300),
+    pubpaidPhaser: countDirFilesByExtension(path.join(ROOT_DIR, "pubpaid-phaser"), [".js", ".css", ".json"], 260),
+    agents: countDirFilesByExtension(path.join(ROOT_DIR, ".codex-agents", "agents"), [".md"], 260),
+    data: countDirFilesByExtension(DATA_DIR, [".json"], 260)
+  };
+  const keyFiles = [
+    fileBrief("server.js", "backend/API principal"),
+    fileBrief("cheffe-call.html", "interface Cheffe Call"),
+    fileBrief("cheffe-call.js", "runtime UI Cheffe Call"),
+    fileBrief("cheffe-call.css", "estilo Cheffe Call"),
+    fileBrief("script.js", "home/editorial"),
+    fileBrief("news-data.js", "dados estaticos de noticias"),
+    fileBrief("scripts/real-agents-runtime.js", "runtime dos agentes"),
+    fileBrief(".codex-agents/registry.json", "registro dos agentes")
+  ];
+  const impactSignals = [
+    officeOrderCount ? `${officeOrderCount} ordens no office-orders` : "",
+    actionsCount ? `${actionsCount} acoes executaveis conhecidas` : "",
+    runtimeNewsCount ? `${runtimeNewsCount} noticias runtime` : "",
+    archiveNewsCount ? `${archiveNewsCount} noticias no arquivo` : "",
+    routeCount ? `${routeCount} rotas/handlers mapeados no servidor` : "",
+    memory.open ? `${memory.open} ordens abertas na memoria local` : ""
+  ].filter(Boolean);
+
+  return {
+    ok: true,
+    kind: "real-agents-ecosystem-study",
+    studyId: createRecordId("study"),
+    learningCycle: Number(previous?.learningCycle || 0) + 1,
+    generatedAt: now,
+    trigger: cleanShortText(options.trigger || "manual", 80),
+    instruction,
+    summary: {
+      totalAgents: agentCount,
+      totalOffices: officesCount,
+      routeCount,
+      routeFamilies,
+      runtimeNewsCount,
+      archiveNewsCount,
+      topicFeeds: topics,
+      officeOrderCount,
+      executableActions: actionsCount,
+      packageScripts: Object.keys(packagePayload.scripts || {}).slice(0, 20)
+    },
+    focusModules,
+    keyFiles,
+    directories,
+    memory,
+    learning: {
+      previousStudyAt: previous?.generatedAt || "",
+      previousCycle: Number(previous?.learningCycle || 0),
+      latestLessons: memory.latest.slice(0, 4).map((order) => order.summary),
+      intent: "estudar modulos, dados, rotas e memoria antes de recomendar ou executar",
+      betterThanFilterBecause: [
+        "usa arquivos reais do projeto e DATA_DIR",
+        "liga a ordem aos modulos em foco",
+        "retorna contadores, relatorios e arquivo persistente",
+        "separa execucao de aplicacao/publicacao"
+      ]
+    },
+    impactGate: {
+      requiredBeforeImportant: [
+        "modulo alvo identificado",
+        "arquivo/rota/dado verificado",
+        "ordem registrada em office-orders",
+        "prova retornada no payload",
+        "pendencia explicita quando ainda nao aplicou/publicou"
+      ],
+      weakIfOnly: [
+        "opiniao sem arquivo",
+        "resumo sem contador",
+        "runtime sem relatorio",
+        "status implementado sem mudanca ou bloqueio explicado"
+      ],
+      currentSignals: impactSignals
+    },
+    proof: {
+      file: path.relative(ROOT_DIR, REAL_AGENTS_ECOSYSTEM_STUDY_FILE).replace(/\\/g, "/"),
+      source: "server.js",
+      dataDir: path.relative(ROOT_DIR, DATA_DIR).replace(/\\/g, "/") || ".",
+      keyFilesChecked: keyFiles.filter((item) => item.exists).length,
+      directoriesChecked: Object.keys(directories).filter((key) => directories[key].exists).length
+    }
+  };
+}
+
+function recordRealAgentsEcosystemStudy(options = {}) {
+  const study = buildRealAgentsEcosystemStudy(options);
+  writeJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, study);
+  return study;
+}
+
+function appendNewsImageApprovalOfficeOrder(decision = {}) {
+  const action = cleanShortText(decision.action || "", 60);
+  const title = cleanShortText(decision.title || decision.slug || "noticia em revisao", 180);
+  const isApprovedAction = ["approve-focus", "keep-fallback", "replace-image"].includes(action);
+  const status = isApprovedAction ? "aprovado" : "reaberto";
+  const focusText = decision.focus ? ` Foco sugerido: ${decision.focus}.` : "";
+  const fitText = decision.imageFit ? ` Fit: ${decision.imageFit}.` : "";
+  const manualText = decision.manualAdjustment ? ` Ajuste manual: ${decision.manualAdjustment}.` : "";
+  const replacementText = decision.replacementImageUrl ? ` Nova imagem: ${decision.replacementImageUrl}.` : "";
+  const noteText = decision.note ? ` Observacao do chefe: ${decision.note}` : "";
+  return appendOfficeOrder({
+    id: createRecordId("img"),
+    from: "Full Admin",
+    to: "Codex CEO + Escritorio Design + agentes reais",
+    priority: isApprovedAction ? "media" : "alta",
+    message: cleanShortText(
+      `Cheffe Call registrou decisao de foto/foco: ${decision.actionLabel || action} para "${title}".${focusText}${fitText}${manualText}${replacementText}${noteText}`,
+      1200
+    ),
+    ceoReply: isApprovedAction
+      ? "Decisao visual aprovada. A proxima runtime deve aplicar foco, fallback ou imagem definida e devolver feedback ao administrador."
+      : "Revisao visual reaberta. A proxima runtime deve tentar ajustar imagem/foco e devolver uma opcao melhor ao administrador.",
+    status,
+    hierarchy: "Full Admin -> Cheffe Call -> Codex CEO -> agentes reais",
+    imageApproval: {
+      decisionId: decision.id || "",
+      slug: decision.slug || "",
+      action,
+      focus: decision.focus || "",
+      imageFit: decision.imageFit || "",
+      manualAdjustment: decision.manualAdjustment || "",
+      replacementImageUrl: decision.replacementImageUrl || "",
+      articleUrl: decision.articleUrl || ""
+    },
+    review: {
+      status,
+      note: decision.note || decision.actionLabel || ""
+    },
+    createdAt: new Date().toISOString()
+  });
+}
+
 function reviewOfficeOrder(body = {}) {
   const orderId = cleanShortText(body.orderId || body.id, 120);
   const status = cleanShortText(body.status || body.reviewStatus, 40).toLowerCase();
@@ -8007,11 +8638,19 @@ function reviewRealAgentAction(body = {}) {
     reprovado: "reprovado",
     reject: "reprovado",
     rejected: "reprovado",
-    aplicar: "aprovado-para-aplicar"
+    aplicar: "aprovado-para-aplicar",
+    executado: "executado",
+    execute: "executado",
+    executed: "executado",
+    bloquear: "bloqueado",
+    bloqueado: "bloqueado",
+    blocked: "bloqueado",
+    falhou: "falhou",
+    failed: "falhou"
   };
   const nextStatus = allowed[status];
   if (!actionId || !nextStatus) {
-    return { ok: false, status: 400, error: "Informe actionId e status aprovado/reprovado." };
+    return { ok: false, status: 400, error: "Informe actionId e status aprovado/reprovado/executado/bloqueado." };
   }
   const store = readJson(REAL_AGENTS_ACTIONS_FILE, { version: 1, actions: [] });
   const actions = Array.isArray(store.actions) ? store.actions : [];
@@ -8134,13 +8773,31 @@ function recordCommunityReport(body = {}, req = null) {
   };
 }
 
+function readLatestRealAgentsRunArtifact() {
+  const primaryRun = readJson(REAL_AGENTS_RUN_FILE, null);
+  const legacyRun = primaryRun ? null : readJson(LEGACY_REAL_AGENTS_RUN_FILE, null);
+  const latestRun = primaryRun || legacyRun;
+  const mdFile = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
+    ? REAL_AGENTS_RUN_MD_FILE
+    : fs.existsSync(LEGACY_REAL_AGENTS_RUN_MD_FILE)
+      ? LEGACY_REAL_AGENTS_RUN_MD_FILE
+      : "";
+  return {
+    latestRun,
+    source: primaryRun ? "data-dir" : legacyRun ? "legacy-codex-temp" : "missing",
+    jsonFile: path.relative(ROOT_DIR, primaryRun ? REAL_AGENTS_RUN_FILE : legacyRun ? LEGACY_REAL_AGENTS_RUN_FILE : REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"),
+    markdownFile: mdFile ? path.relative(ROOT_DIR, mdFile).replace(/\\/g, "/") : path.relative(ROOT_DIR, REAL_AGENTS_RUN_MD_FILE).replace(/\\/g, "/"),
+    markdown: mdFile ? fs.readFileSync(mdFile, "utf-8") : ""
+  };
+}
+
 function buildRealAgentsPayload() {
   const registry = readJson(REAL_AGENTS_REGISTRY_FILE, null);
-  const latestRun = readJson(REAL_AGENTS_RUN_FILE, null);
+  const latestRunArtifact = readLatestRealAgentsRunArtifact();
+  const latestRun = latestRunArtifact.latestRun;
   const autonomyReport = readJson(REAL_AGENTS_AUTONOMY_REPORT_FILE, null);
-  const latestRunMd = fs.existsSync(REAL_AGENTS_RUN_MD_FILE)
-    ? fs.readFileSync(REAL_AGENTS_RUN_MD_FILE, "utf-8")
-    : "";
+  const ecosystemStudy = readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null);
+  const latestRunMd = latestRunArtifact.markdown;
   const history = readRealAgentsRunHistory();
   const agents = Array.isArray(registry?.agents) ? registry.agents : [];
   const queue = Array.isArray(latestRun?.queue) ? latestRun.queue : [];
@@ -8150,6 +8807,13 @@ function buildRealAgentsPayload() {
     updatedAt: new Date().toISOString(),
     registryGeneratedAt: registry?.generatedAt || "",
     runGeneratedAt: latestRun?.generatedAt || "",
+    runtimePersistence: {
+      source: latestRunArtifact.source,
+      file: latestRunArtifact.jsonFile,
+      markdownFile: latestRunArtifact.markdownFile,
+      primaryFile: path.relative(ROOT_DIR, REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"),
+      legacyFile: path.relative(ROOT_DIR, LEGACY_REAL_AGENTS_RUN_FILE).replace(/\\/g, "/")
+    },
     summary: {
       totalAgents: Number(registry?.totalAgents || agents.length || 0),
       totalOffices: Array.isArray(registry?.offices) ? registry.offices.length : 0,
@@ -8165,7 +8829,10 @@ function buildRealAgentsPayload() {
       failedAgents: Number(latestRun?.summary?.failedAgents || 0),
       exhaustedAgents: Number(latestRun?.summary?.exhaustedAgents || 0),
       averageEnergy: Number(latestRun?.summary?.averageEnergy || 0),
-      averageMorale: Number(latestRun?.summary?.averageMorale || 0)
+      averageMorale: Number(latestRun?.summary?.averageMorale || 0),
+      imageApprovalsApplied: Number(latestRun?.summary?.imageApprovalsApplied || 0),
+      imageApprovalsSentToAgents: Number(latestRun?.summary?.imageApprovalsSentToAgents || 0),
+      photoFocusDecisions: Number(latestRun?.summary?.photoFocusDecisions || 0)
     },
     autonomy: latestRun?.autonomy || null,
     life: latestRun?.life || null,
@@ -8219,6 +8886,7 @@ function buildRealAgentsPayload() {
     scoreboard: latestRun?.scoreboard || null,
     officeStatus: Array.isArray(latestRun?.offices) ? latestRun.offices : [],
     queue,
+    ecosystemStudy,
     reportMarkdown: latestRunMd
   };
 }
@@ -8229,6 +8897,24 @@ function buildPublicDailyAgentPulse() {
   const queue = Array.isArray(payload.queue) ? payload.queue : [];
   const officeDashboard = Array.isArray(payload.officeDashboard) ? payload.officeDashboard : [];
   const history = Array.isArray(payload.autoRun?.history) ? payload.autoRun.history : [];
+  const runGeneratedAt = payload.runGeneratedAt || "";
+  const runGeneratedTime = Date.parse(runGeneratedAt);
+  const missingLatestRun = !payload.ok || !runGeneratedAt || payload.runtimePersistence?.source === "missing";
+  const lastRunAgeMs = Number.isFinite(runGeneratedTime) ? Date.now() - runGeneratedTime : null;
+  const staleAfterMs = Math.max(REAL_AGENTS_AUTO_RUN_INTERVAL_MS * 2, 90 * 60 * 1000);
+  const lastRunAgeMinutes = lastRunAgeMs === null ? null : Math.max(0, Math.round(lastRunAgeMs / 60000));
+  const stale = missingLatestRun || (lastRunAgeMs !== null && lastRunAgeMs > staleAfterMs);
+  const runtimeNewsPayload = readJson(path.join(DATA_DIR, "runtime-news.json"), null);
+  const runtimeNewsItems = getJsonArray(path.join(DATA_DIR, "runtime-news.json"));
+  const archiveNewsItems = getJsonArray(path.join(DATA_DIR, "news-archive.json"));
+  const newsUpdatedAt = cleanShortText(
+    runtimeNewsPayload?.updatedAt ||
+      runtimeNewsPayload?.generatedAt ||
+      runtimeNewsItems[0]?.publishedAt ||
+      runtimeNewsItems[0]?.date ||
+      "",
+    80
+  );
   const timelineBySlug = new Map();
   const timelineByName = new Map();
 
@@ -8280,7 +8966,25 @@ function buildPublicDailyAgentPulse() {
   return {
     ok: true,
     updatedAt: new Date().toISOString(),
-    runGeneratedAt: payload.runGeneratedAt || payload.updatedAt || "",
+    runGeneratedAt: runGeneratedAt || payload.updatedAt || "",
+    stale,
+    paused: Boolean(payload.autoRun?.pausedByCheffeCall),
+    missingLatestRun,
+    lastRunAgeMinutes,
+    lastRunAgeLabel: lastRunAgeMinutes === null ? "sem rodada registrada" : `${lastRunAgeMinutes} min`,
+    runtimePersistence: payload.runtimePersistence || null,
+    newsRefresh: {
+      intervalMs: NEWS_REFRESH_INTERVAL_MS,
+      fullAgentsIntervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
+      autoAgentsEnabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
+      lastRuntimeNewsAt: newsUpdatedAt,
+      runtimeItems: runtimeNewsItems.length,
+      archiveItems: archiveNewsItems.length,
+      freshItems: runtimeNewsItems.filter((item) => {
+        const time = Date.parse(item.publishedAt || item.date || item.updatedAt || "");
+        return Number.isFinite(time) && Date.now() - time <= 24 * 60 * 60 * 1000;
+      }).length
+    },
     summary: {
       totalAgents: Number(payload.summary?.totalAgents || 0),
       totalOffices: Number(payload.summary?.totalOffices || 0),
@@ -8331,17 +9035,76 @@ function recordRealAgentsRunHistory(entry) {
   ].slice(0, 24));
 }
 
+function getCheffeCallLastActivityAt(state = {}) {
+  const stamps = [
+    state.lastSessionAt,
+    state.pausedAt,
+    state.releasedAt,
+    state.updatedAt,
+    state.lastActivityAt
+  ];
+  (Array.isArray(state.sessions) ? state.sessions : []).forEach((session) => {
+    stamps.push(session.createdAt, session.updatedAt, session.completedAt, session.expiredAt);
+    ["logs", "decisions", "approvals"].forEach((key) => {
+      (Array.isArray(session[key]) ? session[key] : []).forEach((item) => {
+        stamps.push(item.createdAt, item.updatedAt, item.completedAt);
+      });
+    });
+  });
+  const times = stamps
+    .map((stamp) => Date.parse(stamp || ""))
+    .filter((time) => Number.isFinite(time));
+  if (!times.length) return "";
+  return new Date(Math.max(...times)).toISOString();
+}
+
+function reconcileCheffeCallExpiration(state = {}) {
+  if (!state.active) return state;
+  const lastActivityAt = getCheffeCallLastActivityAt(state) || state.pausedAt || state.lastSessionAt || "";
+  const lastActivityTime = Date.parse(lastActivityAt);
+  if (!Number.isFinite(lastActivityTime)) return { ...state, lastActivityAt };
+  const idleMs = Date.now() - lastActivityTime;
+  if (idleMs < CHEFFE_CALL_TIMEOUT_MS) return { ...state, lastActivityAt };
+  const now = new Date().toISOString();
+  const reason = `timeout-${Math.round(CHEFFE_CALL_TIMEOUT_MS / 60000)}-min-sem-acao`;
+  const sessions = (Array.isArray(state.sessions) ? state.sessions : []).map((session, index) =>
+    index === 0
+      ? {
+          ...session,
+          status: "expirada-por-inatividade",
+          expiredAt: now,
+          updatedAt: now
+        }
+      : session
+  );
+  const expiredState = {
+    ...state,
+    active: false,
+    releasedAt: now,
+    expiredAt: now,
+    expirationReason: reason,
+    lastActivityAt,
+    sessions
+  };
+  writeCheffeCallState(expiredState);
+  return expiredState;
+}
+
 function readCheffeCallState() {
   const payload = readJson(CHEFFE_CALL_STATE_FILE, {});
   const legacyInstruction = payload["last" + "Brief" + "ing"] || "";
-  return {
+  return reconcileCheffeCallExpiration({
     active: Boolean(payload.active),
     pausedAt: payload.pausedAt || "",
     releasedAt: payload.releasedAt || "",
+    expiredAt: payload.expiredAt || "",
+    expirationReason: payload.expirationReason || "",
+    lastActivityAt: payload.lastActivityAt || "",
+    expiresAfterMinutes: Math.round(CHEFFE_CALL_TIMEOUT_MS / 60000),
     lastInstruction: payload.lastInstruction || legacyInstruction,
     lastSessionAt: payload.lastSessionAt || "",
     sessions: Array.isArray(payload.sessions) ? payload.sessions.slice(0, 12) : []
-  };
+  });
 }
 
 function writeCheffeCallState(state) {
@@ -8349,6 +9112,10 @@ function writeCheffeCallState(state) {
     active: Boolean(state.active),
     pausedAt: state.pausedAt || "",
     releasedAt: state.releasedAt || "",
+    expiredAt: state.expiredAt || "",
+    expirationReason: state.expirationReason || "",
+    lastActivityAt: state.lastActivityAt || getCheffeCallLastActivityAt(state),
+    expiresAfterMinutes: Math.round(CHEFFE_CALL_TIMEOUT_MS / 60000),
     lastInstruction: state.lastInstruction || "",
     lastSessionAt: state.lastSessionAt || "",
     sessions: Array.isArray(state.sessions) ? state.sessions.slice(0, 12) : []
@@ -8383,7 +9150,924 @@ function normalizeCheffeCallDecision(entry = {}) {
     prompt: cleanShortText(entry.prompt || "", 3200),
     command: cleanShortText(entry.command || "", 1600),
     action: cleanShortText(entry.action || "", 80),
+    opinionKey: cleanShortText(entry.opinionKey || "", 140),
     artifact: cleanShortText(entry.artifact || "", 400)
+  };
+}
+
+const NEWS_IMAGE_FOCUS_DECISION_META = {
+  "approve-focus": {
+    label: "Aprovar foco",
+    status: "aprovado-foco",
+    target: "Revisor Bento + Dara Design",
+    nextRuntimeAction: "aplicar o foco aprovado, liberar a noticia e manter rastreio de qualidade visual"
+  },
+  "replace-image": {
+    label: "Trocar imagem",
+    status: "trocar-imagem",
+    target: "Bia Camera + Sofia Fontes + Revisor Bento",
+    nextRuntimeAction: "buscar imagem melhor, validar fonte e voltar com nova proposta visual"
+  },
+  "keep-fallback": {
+    label: "Manter fallback",
+    status: "manter-fallback",
+    target: "Dara Design + Revisor Bento",
+    nextRuntimeAction: "manter o fallback atual e revisar se o card continua legivel no portal"
+  },
+  redo: {
+    label: "Refazer",
+    status: "refazer-foto-foco",
+    target: "Bia Camera + Dara Design + Revisor Bento",
+    nextRuntimeAction: "refazer a decisao visual da materia antes de liberar destaque"
+  }
+};
+
+function normalizeNewsImageFocusDecision(value) {
+  const token = cleanShortText(value || "", 80).toLowerCase();
+  const aliases = {
+    approve: "approve-focus",
+    approved: "approve-focus",
+    aprovar: "approve-focus",
+    "aprovar-foco": "approve-focus",
+    focus: "approve-focus",
+    swap: "replace-image",
+    "swap-image": "replace-image",
+    trocar: "replace-image",
+    "trocar-imagem": "replace-image",
+    replace: "replace-image",
+    fallback: "keep-fallback",
+    keep: "keep-fallback",
+    manter: "keep-fallback",
+    "manter-fallback": "keep-fallback",
+    refazer: "redo",
+    redo: "redo",
+    rework: "redo"
+  };
+  const normalized = aliases[token] || token;
+  return NEWS_IMAGE_FOCUS_DECISION_META[normalized] ? normalized : "";
+}
+
+function labelNewsImageFocusReason(reason) {
+  const labels = {
+    "missing-image-url": "sem imagem",
+    "image-unreachable": "imagem fora do ar",
+    "image-content-type-not-confirmed": "tipo de imagem nao confirmado",
+    "people-or-group-scene-without-manual-focus": "pessoa/grupo sem foco manual",
+    "group-scene-without-manual-focus": "grupo sem foco manual",
+    "manual-focus-present": "tem foco manual",
+    "hero-focus-too-high-for-wide-headline": "foco alto demais para manchete larga"
+  };
+  return labels[reason] || reason;
+}
+
+function readNewsImageFocusDecisionStore() {
+  const store = readJson(NEWS_IMAGE_FOCUS_DECISIONS_FILE, { version: 1, updatedAt: "", decisions: [] });
+  const decisions = Array.isArray(store)
+    ? store
+    : Array.isArray(store?.decisions)
+      ? store.decisions
+      : [];
+  return {
+    version: 1,
+    updatedAt: safeString(store?.updatedAt || "", 80),
+    decisions: decisions.filter(Boolean).slice(-500)
+  };
+}
+
+function writeNewsImageFocusDecisionStore(store) {
+  writeJson(NEWS_IMAGE_FOCUS_DECISIONS_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    decisions: Array.isArray(store.decisions) ? store.decisions.slice(-500) : []
+  });
+}
+
+function normalizeNewsImageFocusAuditItem(item = {}, fullItem = {}) {
+  const slug = safeString(item.slug || fullItem.slug || "", 220);
+  const reasons = Array.isArray(item.reasons)
+    ? item.reasons
+    : Array.isArray(fullItem.reasons)
+      ? fullItem.reasons
+      : [];
+  const effectiveFocus = safeString(item.effectiveFocus || fullItem.effectiveFocus || "", 80);
+  return {
+    slug,
+    title: safeString(item.title || fullItem.title || "Sem titulo", 260),
+    category: safeString(item.category || fullItem.category || "", 120),
+    sourceName: safeString(item.sourceName || item.source || fullItem.sourceName || fullItem.source || "", 160),
+    publishedAt: safeString(item.publishedAt || fullItem.publishedAt || fullItem.date || fullItem.createdAt || "", 80),
+    level: safeString(item.level || fullItem.level || "review", 32),
+    reasons: reasons.map((reason) => safeString(reason || "", 140)).filter(Boolean),
+    reasonLabels: reasons.map((reason) => labelNewsImageFocusReason(safeString(reason || "", 140))).filter(Boolean),
+    imageUrl: safeString(item.imageUrl || fullItem.imageUrl || "", 1200),
+    effectiveFocus,
+    suggestedFocus: effectiveFocus || "center 42%",
+    hasManualFocus: Boolean(fullItem.hasManualFocus || effectiveFocus),
+    isNewSinceLastAudit: Boolean(item.isNewSinceLastAudit ?? fullItem.isNewSinceLastAudit),
+    articleUrl: slug ? `/noticia.html?slug=${encodeURIComponent(slug)}` : ""
+  };
+}
+
+function buildNewsImageFocusApprovalQueue() {
+  const report = readJson(NEWS_IMAGE_FOCUS_AUDIT_FILE, {});
+  const fullItems = Array.isArray(report.items) ? report.items : [];
+  const reviewQueue = Array.isArray(report.reviewQueue) ? report.reviewQueue : [];
+  const itemsBySlug = new Map(fullItems.map((item) => [safeString(item.slug || "", 220), item]));
+  const strictNewItems = fullItems.filter((item) => item.isNewSinceLastAudit && item.level !== "ok");
+  const sourceItems = strictNewItems.length
+    ? strictNewItems
+    : fullItems.filter((item) => item.level !== "ok").length
+      ? fullItems.filter((item) => item.level !== "ok")
+      : reviewQueue;
+  const store = readNewsImageFocusDecisionStore();
+  const latestDecisionBySlug = new Map();
+  store.decisions.forEach((decision) => {
+    const slug = safeString(decision.slug || "", 220);
+    if (slug) latestDecisionBySlug.set(slug, decision);
+  });
+
+  const queue = sourceItems
+    .map((item) => normalizeNewsImageFocusAuditItem(item, itemsBySlug.get(safeString(item.slug || "", 220)) || {}))
+    .filter((item) => item.slug)
+    .map((item) => {
+      const decision = latestDecisionBySlug.get(item.slug) || null;
+      return {
+        ...item,
+        decision: decision
+          ? {
+              id: safeString(decision.id || "", 120),
+              decision: safeString(decision.decision || "", 80),
+              decisionLabel: safeString(decision.decisionLabel || "", 80),
+              status: safeString(decision.status || "", 80),
+              focus: safeString(decision.focus || "", 80),
+              replacementImageUrl: safeString(decision.replacementImageUrl || "", 1200),
+              note: safeString(decision.note || "", 600),
+              nextRuntimeAction: safeString(decision.nextRuntimeAction || "", 260),
+              updatedAt: safeString(decision.updatedAt || decision.createdAt || "", 80)
+            }
+          : null
+      };
+    });
+  const summary = report && typeof report.summary === "object" ? report.summary : {};
+  const pendingCount = queue.filter((item) => !item.decision).length;
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    auditUpdatedAt: safeString(report.updatedAt || "", 80),
+    checkedLimit: Number(report.checkedLimit || 0) || 0,
+    total: queue.length,
+    pendingCount,
+    decidedCount: queue.length - pendingCount,
+    sourceMode: strictNewItems.length ? "new-blockers" : "review-queue",
+    summary: {
+      ok: Number(summary.ok || 0) || 0,
+      review: Number(summary.review || 0) || 0,
+      warning: Number(summary.warning || 0) || 0,
+      error: Number(summary.error || 0) || 0,
+      manualFocus: Number(summary.manualFocus || 0) || 0,
+      newSinceLastAudit: Number(summary.newSinceLastAudit || 0) || 0,
+      missingImage: Number(summary.missingImage || 0) || 0,
+      unreachableImage: Number(summary.unreachableImage || 0) || 0
+    },
+    queue
+  };
+}
+
+function recordNewsImageFocusDecision(body = {}) {
+  const slug = safeString(body.slug || body.articleSlug || "", 220);
+  const decision = normalizeNewsImageFocusDecision(body.decision || body.action || body.status);
+  if (!slug || !decision) {
+    return { ok: false, status: 400, error: "Informe slug e decisao valida para a foto/foco." };
+  }
+
+  const queuePayload = buildNewsImageFocusApprovalQueue();
+  const item = queuePayload.queue.find((entry) => entry.slug === slug);
+  if (!item) {
+    return { ok: false, status: 404, error: "Item de foto/foco nao encontrado na fila atual." };
+  }
+
+  const meta = NEWS_IMAGE_FOCUS_DECISION_META[decision];
+  const now = new Date().toISOString();
+  const focus = cleanShortText(
+    body.focus || (decision === "approve-focus" ? item.effectiveFocus || item.suggestedFocus || "center 42%" : item.effectiveFocus),
+    80
+  );
+  const replacementImageUrl = safeString(body.replacementImageUrl || body.imageUrl || "", 1200);
+  const note = cleanShortText(body.note || body.comment || "", 800);
+  const store = readNewsImageFocusDecisionStore();
+  const previous = store.decisions.find((entry) => safeString(entry.slug || "", 220) === slug);
+  const nextDecision = {
+    id: previous?.id || createRecordId("focusdec"),
+    slug,
+    title: item.title,
+    category: item.category,
+    sourceName: item.sourceName,
+    imageUrl: item.imageUrl,
+    articleUrl: item.articleUrl,
+    level: item.level,
+    reasons: item.reasons,
+    reasonLabels: item.reasonLabels,
+    decision,
+    decisionLabel: meta.label,
+    status: meta.status,
+    focus,
+    replacementImageUrl,
+    note,
+    requestedNextRuntime: true,
+    nextRuntimeAction: meta.nextRuntimeAction,
+    createdBy: "Full Admin",
+    createdAt: previous?.createdAt || now,
+    updatedAt: now
+  };
+  writeNewsImageFocusDecisionStore({
+    decisions: store.decisions
+      .filter((entry) => safeString(entry.slug || "", 220) !== slug)
+      .concat(nextDecision)
+  });
+
+  let runtimeApproval = null;
+  try {
+    const runtimeResult = recordImageApprovalDecision({
+      slug,
+      decision,
+      focus,
+      replacementImageUrl,
+      note,
+      requestedBy: "Full Admin",
+      source: "cheffe-call"
+    });
+    runtimeApproval = runtimeResult.ok ? runtimeResult.decision : null;
+  } catch (error) {
+    runtimeApproval = {
+      error: cleanShortText(error?.message || "Falha ao registrar aprovacao para runtime.", 280)
+    };
+  }
+
+  const orderId = createRecordId("ord");
+  appendOfficeOrder({
+    id: orderId,
+    from: "Cheffe Call",
+    to: meta.target,
+    priority: "alta",
+    message: cleanShortText(
+      `Decisao de foto/foco no popup da Cheffe Call: ${meta.label} para "${item.title}". Slug: ${slug}. Foco: ${focus || "sem foco manual"}. ${replacementImageUrl ? `Nova imagem: ${replacementImageUrl}. ` : ""}Motivo: ${(item.reasonLabels || item.reasons || []).join(", ") || "revisao visual"}.`,
+      1200
+    ),
+    ceoReply: cleanShortText(`Registrado. Na proxima runtime dos agentes: ${meta.nextRuntimeAction}.`, 1200),
+    status: `cheffe-call-foto-foco-${decision}`,
+    hierarchy: "Full Admin -> Cheffe Call -> agentes reais",
+    createdAt: now,
+    assignedAgents: 3,
+    assignments: [
+      {
+        slug,
+        title: item.title,
+        action: meta.nextRuntimeAction,
+        decision,
+        focus,
+        replacementImageUrl,
+        imageUrl: item.imageUrl,
+        articleUrl: item.articleUrl
+      }
+    ],
+    executionSummary: {
+      delivered: decision === "approve-focus" || decision === "keep-fallback" ? 1 : 0,
+      failed: 0,
+      running: decision === "replace-image" || decision === "redo" ? 1 : 0
+    }
+  });
+
+  return {
+    ok: true,
+    orderId,
+    decision: nextDecision,
+    runtimeApproval,
+    ...buildNewsImageFocusApprovalQueue()
+  };
+}
+
+function getCheffeEditorialArticleMatchKeys(item = {}) {
+  return [
+    item.slug,
+    item.id,
+    item.sourceUrl,
+    item.url,
+    item.link,
+    item.title ? slugify(item.title) : "",
+    item.sourceLabel ? slugify(item.sourceLabel) : "",
+    getArticleStorageKey(item)
+  ]
+    .map((value) => cleanShortText(value || "", 260).toLowerCase())
+    .filter(Boolean);
+}
+
+function isCheffeEditorialArticleMatch(item = {}, slug = "") {
+  const safeSlug = cleanShortText(slug || "", 260).toLowerCase();
+  const slugKey = slugify(safeSlug);
+  if (!safeSlug) return false;
+  return getCheffeEditorialArticleMatchKeys(item).some((key) => key === safeSlug || key === slugKey);
+}
+
+function getCheffeEditorialArticleMap() {
+  const map = new Map();
+  getRawNewsItems()
+    .map(normalizeArticleRecord)
+    .forEach((item) => {
+      const key = getArticleStorageKey(item);
+      if (key) upsertCrossedArticleRecord(map, key, item);
+    });
+  return map;
+}
+
+function findCheffeEditorialArticle(slug = "") {
+  const safeSlug = cleanShortText(slug || "", 260);
+  if (!safeSlug) return null;
+  return Array.from(getCheffeEditorialArticleMap().values()).find((item) =>
+    isCheffeEditorialArticleMatch(item, safeSlug)
+  ) || null;
+}
+
+function collectCheffeEditorialHealthActions(health = {}) {
+  const actions = [];
+  const pushAction = (item) => {
+    if (!item || typeof item !== "object") return;
+    actions.push(item);
+  };
+  const groups = health.queueGroups && typeof health.queueGroups === "object" ? health.queueGroups : {};
+  Object.values(groups).forEach((group) => {
+    if (Array.isArray(group)) group.forEach(pushAction);
+  });
+  [
+    health.humanApprovalQueue,
+    health.actionQueue,
+    health.articleDossiers,
+    health.titleAlternatives,
+    health.specialFormats
+  ].forEach((collection) => {
+    if (Array.isArray(collection)) collection.forEach(pushAction);
+  });
+  return actions;
+}
+
+function getCheffeEditorialActionSlug(action = {}) {
+  return cleanShortText(
+    action.slug ||
+      action.articleSlug ||
+      action.dossier?.slug ||
+      action.item?.slug ||
+      action.publicTrace?.slug ||
+      "",
+    260
+  );
+}
+
+function buildCheffeEditorialActionMap(health = {}) {
+  const bySlug = new Map();
+  collectCheffeEditorialHealthActions(health).forEach((action) => {
+    const slug = getCheffeEditorialActionSlug(action);
+    if (!slug) return;
+    if (!bySlug.has(slug)) bySlug.set(slug, []);
+    bySlug.get(slug).push(action);
+  });
+  return bySlug;
+}
+
+function collectCheffeTitleSuggestions(article = {}, dossier = {}, actions = []) {
+  const suggestions = [];
+  const pushTitle = (value, source = "Saude editorial") => {
+    const text = cleanShortText(value || "", 220);
+    if (!text || text === cleanShortText(article.title || "", 220)) return;
+    if (suggestions.some((item) => item.kind === "title" && item.text === text)) return;
+    suggestions.push({
+      kind: "title",
+      label: "Titulo sugerido",
+      source,
+      text,
+      patch: { title: text }
+    });
+  };
+
+  [
+    dossier.titleAlternatives,
+    dossier.dossier?.titleAlternatives,
+    ...actions.map((action) => action.titleAlternatives),
+    ...actions.map((action) => action.dossier?.titleAlternatives)
+  ].forEach((collection) => {
+    if (Array.isArray(collection)) collection.slice(0, 4).forEach((value) => pushTitle(value));
+  });
+
+  actions.slice(0, 4).forEach((action) => {
+    const reason = cleanShortText(action.reason || action.issueType || action.resolutionType || "", 260);
+    const command = cleanShortText(action.suggestedIdeCommand || action.idePrompt || "", 1200);
+    if (reason || command) {
+      suggestions.push({
+        kind: "agent",
+        label: cleanShortText(action.priority || action.gate || "Sugestao", 80),
+        source: cleanShortText(action.agent || action.owner || "Agentes editoriais", 120),
+        text: reason || command,
+        command
+      });
+    }
+  });
+
+  return suggestions.slice(0, 10);
+}
+
+function isCheffeEditorialDecisionResolved(decision = null) {
+  if (!decision) return false;
+  const status = String(decision.status || "").toLowerCase();
+  if (!status) return Boolean(decision.decidedAt);
+  return EDITORIAL_APPROVED_STATUSES.has(status) || EDITORIAL_HELD_STATUSES.has(status) || Boolean(decision.decidedAt);
+}
+
+function getCheffeEditorialHumanActions(actions = []) {
+  return (Array.isArray(actions) ? actions : []).filter((action) => {
+    const resolution = String(action?.resolutionType || "").toLowerCase();
+    const issue = String(action?.issueType || "").toLowerCase();
+    const approval = String(action?.dossier?.approval || action?.approval || "").toLowerCase();
+    return resolution === "human-approval" || issue === "approval-lock" || approval === "human-required";
+  });
+}
+
+function buildCheffeEditorialDeskItem(article = {}, options = {}) {
+  const decisions = options.decisions || readEditorialApprovalLocks();
+  const dossier = options.dossier || buildArticleEditorialDossier(article, decisions);
+  const imageItem = options.imageItem || null;
+  const actions = Array.isArray(options.actions) ? options.actions : [];
+  const humanActions = getCheffeEditorialHumanActions(actions);
+  const titleSuggestions = collectCheffeTitleSuggestions(article, dossier, actions);
+  const sourceIssues = Array.isArray(dossier.sourceIssues) ? dossier.sourceIssues : [];
+  const visualIssues = Array.isArray(dossier.visualIssues) ? dossier.visualIssues : [];
+  const imageReasons = Array.isArray(imageItem?.reasonLabels) && imageItem.reasonLabels.length
+    ? imageItem.reasonLabels
+    : Array.isArray(imageItem?.reasons)
+      ? imageItem.reasons
+      : [];
+  const lock = dossier.publicationLock || {};
+  const humanDecisionResolved = isCheffeEditorialDecisionResolved(dossier.approvalDecision);
+  const editorialHumanRequired =
+    !humanDecisionResolved &&
+    (dossier.approval === "human-required" ||
+      Boolean(lock.publicationLocked || lock.highlightLocked) ||
+      humanActions.length > 0);
+  const imageHumanRequired = Boolean(imageItem && !imageItem.decision);
+  const pending = editorialHumanRequired || imageHumanRequired;
+  const humanReasons = [
+    editorialHumanRequired ? cleanShortText(dossier.gateReason || "decisao humana editorial pendente", 260) : "",
+    imageHumanRequired ? cleanShortText((imageReasons || []).join(", ") || "foto/foco aguardando edicao humana", 260) : ""
+  ].filter(Boolean);
+  const slug = cleanShortText(article.slug || dossier.slug || imageItem?.slug || "", 220);
+  const summary = cleanShortText(article.summary || article.lede || article.description || "", 900);
+
+  return {
+    id: `approval-desk-${slug || createRecordId("item")}`,
+    slug,
+    type: "editorial",
+    pending,
+    humanRequired: pending,
+    humanDecisionResolved,
+    humanReasons,
+    title: cleanShortText(article.title || dossier.title || imageItem?.title || "Sem titulo", 220),
+    summary,
+    lede: cleanShortText(article.lede || summary, 900),
+    bodyText: Array.isArray(article.body) ? article.body.join("\n\n") : cleanShortText(article.body || "", 2200),
+    category: cleanShortText(article.category || "", 90),
+    categoryKey: cleanShortText(article.categoryKey || "", 90),
+    sourceName: cleanShortText(article.sourceName || "", 140),
+    sourceUrl: cleanShortText(article.sourceUrl || "", 900),
+    sourceLabel: cleanShortText(article.sourceLabel || article.title || "", 220),
+    publishedAt: cleanShortText(article.publishedAt || article.date || "", 80),
+    articleUrl: slug ? `/noticia.html?slug=${encodeURIComponent(slug)}` : "",
+    imageUrl: cleanShortText(article.imageUrl || article.feedImageUrl || article.sourceImageUrl || imageItem?.imageUrl || "", 1200),
+    feedImageUrl: cleanShortText(article.feedImageUrl || "", 1200),
+    sourceImageUrl: cleanShortText(article.sourceImageUrl || "", 1200),
+    imageFocus: cleanShortText(article.imageFocus || imageItem?.effectiveFocus || imageItem?.suggestedFocus || "center 42%", 80),
+    suggestedFocus: cleanShortText(imageItem?.suggestedFocus || article.imageFocus || "center 42%", 80),
+    imageFit: cleanShortText(article.imageFit || "", 40) || "cover",
+    imageCredit: cleanShortText(article.imageCredit || "", 220),
+    gate: dossier.gate || "P1",
+    approval: dossier.approval || "",
+    gateReason: dossier.gateReason || "",
+    sourceStatus: dossier.sourceStatus || "",
+    visualStatus: dossier.visualStatus || "",
+    sourceIssues,
+    visualIssues,
+    imageReasons,
+    publicationLock: lock,
+    approvalDecision: dossier.approvalDecision || null,
+    imageDecision: imageItem?.decision || null,
+    humanActions: humanActions.slice(0, 6),
+    checklist: Array.isArray(dossier.checklist) ? dossier.checklist.slice(0, 8) : [],
+    suggestions: titleSuggestions
+  };
+}
+
+function buildCheffeEditorialApprovalDeskPayload(options = {}) {
+  const limit = Math.max(1, Math.min(Number(options.limit || 60), 180));
+  const includeResolved = Boolean(options.includeResolved);
+  const health = buildEditorialHealthReport({
+    humanApprovalQueueLimit: "all",
+    actionQueueLimit: 120,
+    articleDossiersLimit: 240,
+    titleAlternativesLimit: 80,
+    specialFormatsLimit: 80
+  });
+  const decisions = readEditorialApprovalLocks();
+  const actionMap = buildCheffeEditorialActionMap(health);
+  const imageQueuePayload = buildNewsImageFocusApprovalQueue();
+  const imageBySlug = new Map();
+  (Array.isArray(imageQueuePayload.queue) ? imageQueuePayload.queue : []).forEach((item) => {
+    const slug = cleanShortText(item?.slug || "", 220);
+    if (slug) imageBySlug.set(slug, item);
+  });
+
+  const itemsBySlug = new Map();
+  const humanApprovalActions = Array.isArray(health.humanApprovalQueue) && health.humanApprovalQueue.length
+    ? health.humanApprovalQueue
+    : collectCheffeEditorialHealthActions(health).filter((action) => getCheffeEditorialHumanActions([action]).length);
+
+  humanApprovalActions.forEach((action) => {
+    const slug = getCheffeEditorialActionSlug(action);
+    if (!slug || itemsBySlug.has(slug)) return;
+    const article = findCheffeEditorialArticle(slug) || action.dossier || {
+      slug,
+      title: action.title,
+      summary: action.reason,
+      category: action.category
+    };
+    const dossier = buildArticleEditorialDossier(article, decisions);
+    const item = buildCheffeEditorialDeskItem(article, {
+      decisions,
+      dossier,
+      imageItem: imageBySlug.get(slug) || null,
+      actions: actionMap.get(slug) || [action]
+    });
+    if (includeResolved || item.pending) itemsBySlug.set(slug, item);
+  });
+
+  imageBySlug.forEach((imageItem, slug) => {
+    if (itemsBySlug.has(slug)) return;
+    const article = findCheffeEditorialArticle(slug) || {
+      slug,
+      title: imageItem.title,
+      summary: "",
+      category: imageItem.category,
+      sourceName: imageItem.sourceName,
+      imageUrl: imageItem.imageUrl,
+      imageFocus: imageItem.effectiveFocus || imageItem.suggestedFocus,
+      imageFit: "cover"
+    };
+    itemsBySlug.set(slug, buildCheffeEditorialDeskItem(article, {
+      decisions,
+      imageItem,
+      actions: actionMap.get(slug) || []
+    }));
+  });
+
+  const sortedItems = Array.from(itemsBySlug.values())
+    .sort((left, right) => {
+      const leftLocked = left.publicationLock?.publicationLocked ? 1 : 0;
+      const rightLocked = right.publicationLock?.publicationLocked ? 1 : 0;
+      if (leftLocked !== rightLocked) return rightLocked - leftLocked;
+      const leftImage = left.imageDecision ? 0 : left.imageReasons.length ? 1 : 0;
+      const rightImage = right.imageDecision ? 0 : right.imageReasons.length ? 1 : 0;
+      if (leftImage !== rightImage) return rightImage - leftImage;
+      return getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
+    });
+  const pendingCount = sortedItems.filter((item) => item.pending).length;
+  const items = sortedItems.slice(0, limit);
+
+  return {
+    ok: true,
+    kind: "cheffe-editorial-approval-desk",
+    updatedAt: new Date().toISOString(),
+    total: sortedItems.length,
+    returned: items.length,
+    pendingCount,
+    imagePendingCount: Number(imageQueuePayload.pendingCount || 0),
+    healthSummary: health.summary || {},
+    gates: health.gates || {},
+    items
+  };
+}
+
+function normalizeCheffeEditorialPatch(patch = {}) {
+  const bodyText = Object.prototype.hasOwnProperty.call(patch, "bodyText")
+    ? String(patch.bodyText || "").replace(/\r\n/g, "\n").trim()
+    : "";
+  const body = bodyText
+    ? bodyText.split(/\n{2,}/).map((line) => cleanShortText(line, 1600)).filter(Boolean).slice(0, 14)
+    : null;
+  const next = {};
+  const copyField = (key, maxLength, targetKey = key) => {
+    if (!Object.prototype.hasOwnProperty.call(patch, key)) return;
+    const value = cleanShortText(patch[key], maxLength);
+    if (value || ["imageCredit", "imageFocus", "imageFit", "sourceLabel"].includes(targetKey)) {
+      next[targetKey] = value;
+    }
+  };
+
+  copyField("title", 240);
+  copyField("summary", 900);
+  copyField("lede", 900);
+  copyField("category", 100);
+  copyField("categoryKey", 100);
+  copyField("sourceName", 140);
+  copyField("sourceUrl", 900);
+  copyField("sourceLabel", 220);
+  copyField("imageUrl", 1200);
+  copyField("feedImageUrl", 1200);
+  copyField("sourceImageUrl", 1200);
+  copyField("imageFocus", 80);
+  copyField("imageFit", 40);
+  copyField("imageCredit", 220);
+  if (body) next.body = body;
+  if (!body && Array.isArray(patch.body)) {
+    const bodyLines = patch.body.map((line) => cleanShortText(line, 1600)).filter(Boolean).slice(0, 14);
+    if (bodyLines.length) next.body = bodyLines;
+  }
+  return next;
+}
+
+function applyCheffeEditorialPatchToArticle(item = {}, patch = {}, now = new Date().toISOString()) {
+  const next = { ...item };
+  const oldTitle = cleanShortText(next.title || "", 240);
+  Object.entries(patch).forEach(([key, value]) => {
+    if (key === "body") {
+      if (Array.isArray(value) && value.length) next.body = value;
+      return;
+    }
+    if (value !== undefined) next[key] = value;
+  });
+  if (patch.title && (!next.sourceLabel || cleanShortText(next.sourceLabel, 240) === oldTitle)) {
+    next.sourceLabel = patch.title;
+  }
+  if (patch.summary && !patch.lede) next.lede = patch.summary;
+  if (patch.lede && !patch.summary) next.summary = patch.lede;
+  if (patch.category && !patch.categoryKey) next.categoryKey = slugify(patch.category);
+  if (patch.imageUrl) {
+    next.feedImageUrl = patch.feedImageUrl || patch.imageUrl;
+    next.sourceImageUrl = patch.sourceImageUrl || next.sourceImageUrl || patch.imageUrl;
+  }
+  next.editorialApprovalStatus = "approved-by-cheffe-call";
+  next.editorialApprovalUpdatedAt = now;
+  return next;
+}
+
+function updateCheffeEditorialArticleCollection(items = [], slug = "", patch = {}, now = new Date().toISOString()) {
+  let touched = false;
+  const nextItems = (Array.isArray(items) ? items : []).map((item) => {
+    if (!isCheffeEditorialArticleMatch(item, slug)) return item;
+    touched = true;
+    return applyCheffeEditorialPatchToArticle(item, patch, now);
+  });
+  return { items: nextItems, touched };
+}
+
+function writeCheffeJsonNewsCollection(filePath, slug = "", patch = {}, now = new Date().toISOString()) {
+  const payload = readJson(filePath, null);
+  if (!payload) return null;
+  const isArrayPayload = Array.isArray(payload);
+  const items = isArrayPayload ? payload : Array.isArray(payload.items) ? payload.items : null;
+  if (!items) return null;
+  const result = updateCheffeEditorialArticleCollection(items, slug, patch, now);
+  if (!result.touched) return null;
+  writeJson(filePath, isArrayPayload ? result.items : {
+    ...payload,
+    items: result.items,
+    editorialApprovalDeskAppliedAt: now
+  });
+  return path.relative(ROOT_DIR, filePath).replace(/\\/g, "/");
+}
+
+function applyCheffeEditorialPatchToJornal(slug = "", patch = {}, options = {}) {
+  const safeSlug = cleanShortText(slug || "", 220);
+  const now = new Date().toISOString();
+  const files = [];
+  const normalizedPatch = normalizeCheffeEditorialPatch(patch);
+  const sourceArticle = findCheffeEditorialArticle(safeSlug);
+  const staticItems = getStaticNewsItems();
+  const staticResult = updateCheffeEditorialArticleCollection(staticItems, safeSlug, normalizedPatch, now);
+  let nextStaticItems = staticResult.items;
+  let staticTouched = staticResult.touched;
+
+  if (!staticTouched && sourceArticle && options.insertIfMissing !== false) {
+    nextStaticItems = nextStaticItems.concat(applyCheffeEditorialPatchToArticle(sourceArticle, normalizedPatch, now));
+    staticTouched = true;
+  }
+
+  if (staticTouched) {
+    writeStaticNewsData(nextStaticItems);
+    files.push(path.relative(ROOT_DIR, STATIC_NEWS_FILE).replace(/\\/g, "/"));
+  }
+
+  [
+    path.join(DATA_DIR, "runtime-news.json"),
+    path.join(DATA_DIR, "news-archive.json")
+  ].forEach((filePath) => {
+    const touchedFile = writeCheffeJsonNewsCollection(filePath, safeSlug, normalizedPatch, now);
+    if (touchedFile) files.push(touchedFile);
+  });
+
+  newsApiResponseCache.clear();
+  return {
+    ok: files.length > 0,
+    slug: safeSlug,
+    patch: normalizedPatch,
+    files: [...new Set(files)],
+    updatedAt: now
+  };
+}
+
+function rewriteStaticNewsDataAfterEditorialDecision() {
+  const items = getStaticNewsItems();
+  if (!items.length) return null;
+  writeStaticNewsData(items);
+  newsApiResponseCache.clear();
+  return path.relative(ROOT_DIR, STATIC_NEWS_FILE).replace(/\\/g, "/");
+}
+
+function appendCheffeEditorialApprovalOrder(options = {}) {
+  const article = options.article || {};
+  const slug = cleanShortText(options.slug || article.slug || "", 220);
+  const action = cleanShortText(options.action || "approve", 80);
+  const title = cleanShortText(options.title || article.title || slug || "materia editorial", 220);
+  const patch = options.patch && typeof options.patch === "object" ? options.patch : {};
+  const changedFields = Object.keys(patch).filter((key) => patch[key] !== undefined);
+  return appendOfficeOrder({
+    id: createRecordId("edt"),
+    from: "Full Admin",
+    to: action === "agents" ? "Codex CEO + agentes editoriais" : "Codex CEO + Jornal",
+    priority: action === "hold" ? "alta" : "media",
+    message: cleanShortText(
+      [
+        `Cheffe Call Cena 1 registrou ${action} para "${title}".`,
+        slug ? `Slug: ${slug}.` : "",
+        changedFields.length ? `Campos: ${changedFields.join(", ")}.` : "",
+        options.note ? `Nota: ${options.note}` : ""
+      ].filter(Boolean).join(" "),
+      1400
+    ),
+    ceoReply:
+      action === "approve"
+        ? "Aprovacao humana registrada e patch aplicado no Jornal local."
+        : action === "hold"
+          ? "Materia segurada por decisao humana ate nova revisao."
+          : "Agentes receberam pedido de melhoria antes de qualquer publicacao.",
+    status:
+      action === "approve"
+        ? "cheffe-call-editorial-aprovado"
+        : action === "hold"
+          ? "cheffe-call-editorial-segurado"
+          : "cheffe-call-editorial-agentes",
+    hierarchy: "Full Admin -> Cheffe Call -> Codex CEO -> Jornal/agentes reais",
+    editorialApproval: {
+      slug,
+      action,
+      fields: changedFields,
+      files: Array.isArray(options.files) ? options.files : []
+    },
+    createdAt: new Date().toISOString()
+  });
+}
+
+function normalizeCheffeEditorialDeskDecision(value = "") {
+  const token = cleanShortText(value || "", 80).toLowerCase();
+  const aliases = {
+    apply: "approve",
+    approved: "approve",
+    aprovar: "approve",
+    publicar: "approve",
+    release: "approve",
+    released: "approve",
+    segurar: "hold",
+    hold: "hold",
+    block: "hold",
+    blocked: "hold",
+    agentes: "agents",
+    agents: "agents",
+    "request-agents": "agents",
+    "pedir-agentes": "agents"
+  };
+  return aliases[token] || token || "approve";
+}
+
+function recordCheffeEditorialApprovalDeskDecision(body = {}) {
+  const slug = cleanShortText(body.slug || body.articleSlug || "", 220);
+  if (!slug) {
+    return { ok: false, status: 400, error: "slug obrigatorio para aprovar a pendencia editorial." };
+  }
+  const action = normalizeCheffeEditorialDeskDecision(body.decision || body.action || "approve");
+  const article = findCheffeEditorialArticle(slug) || {};
+  const dossier = buildArticleEditorialDossier(article.slug ? article : { ...article, slug, title: body.title || slug });
+  const gate = cleanShortText(body.gate || dossier.gate || "P1", 20).toUpperCase();
+  const note = cleanShortText(body.note || body.comment || "", 800);
+  const patch = normalizeCheffeEditorialPatch(body.patch || {});
+  const hasPatch = Object.keys(patch).length > 0;
+
+  if (action === "hold") {
+    const editorialDecision = recordEditorialApprovalDecision({
+      slug,
+      gate,
+      status: "held",
+      allowedPublication: false,
+      allowedHighlight: false,
+      reviewer: "Full Admin via Cheffe Call Cena 1",
+      note
+    });
+    const staticFile = rewriteStaticNewsDataAfterEditorialDecision();
+    const order = appendCheffeEditorialApprovalOrder({
+      slug,
+      article,
+      action: "hold",
+      note,
+      files: staticFile ? [staticFile] : []
+    });
+    return {
+      ok: true,
+      action,
+      editorialDecision: editorialDecision.decision || null,
+      orderId: order.at(-1)?.id || "",
+      applied: { ok: false, files: staticFile ? [staticFile] : [], reason: "materia-segurada" },
+      approvalDesk: buildCheffeEditorialApprovalDeskPayload({ limit: Number(body.limit || 60) })
+    };
+  }
+
+  if (action === "agents") {
+    const editorialDecision = recordEditorialApprovalDecision({
+      slug,
+      gate,
+      status: "needs-fix",
+      allowedPublication: false,
+      allowedHighlight: false,
+      reviewer: "Full Admin via Cheffe Call Cena 1",
+      note: note || "Pedir sugestao dos agentes antes de aprovar."
+    });
+    const order = appendCheffeEditorialApprovalOrder({
+      slug,
+      article,
+      action: "agents",
+      note,
+      patch,
+      files: []
+    });
+    return {
+      ok: true,
+      action,
+      editorialDecision: editorialDecision.decision || null,
+      orderId: order.at(-1)?.id || "",
+      applied: { ok: false, files: [], reason: "pedido-aos-agentes" },
+      approvalDesk: buildCheffeEditorialApprovalDeskPayload({ limit: Number(body.limit || 60) })
+    };
+  }
+
+  const editorialDecision = recordEditorialApprovalDecision({
+    slug,
+    gate,
+    status: "approved",
+    allowedPublication: true,
+    allowedHighlight: true,
+    reviewer: "Full Admin via Cheffe Call Cena 1",
+    note
+  });
+  const applied = applyCheffeEditorialPatchToJornal(slug, patch, { insertIfMissing: true });
+  let imageApproval = null;
+  if (hasPatch && (patch.imageUrl || patch.imageFocus || patch.imageFit)) {
+    try {
+      const imageResult = recordImageApprovalDecision({
+        slug,
+        decision: patch.imageUrl ? "replace-image" : "approve-focus",
+        replacementImageUrl: patch.imageUrl || "",
+        focus: patch.imageFocus || "",
+        imageFit: patch.imageFit || "",
+        note,
+        requestedBy: "Full Admin",
+        source: "cheffe-editorial-approval-desk"
+      });
+      imageApproval = imageResult.ok ? imageResult.decision : { error: imageResult.error || "Foto/foco fora da fila visual." };
+      if (imageResult.ok) appendNewsImageApprovalOfficeOrder(imageResult.decision);
+    } catch (error) {
+      imageApproval = { error: cleanShortText(error?.message || "Falha ao registrar foto/foco.", 260) };
+    }
+  }
+  const order = appendCheffeEditorialApprovalOrder({
+    slug,
+    article,
+    action: "approve",
+    note,
+    patch,
+    files: applied.files
+  });
+
+  return {
+    ok: true,
+    action: "approve",
+    editorialDecision: editorialDecision.decision || null,
+    imageApproval,
+    orderId: order.at(-1)?.id || "",
+    applied,
+    approvalDesk: buildCheffeEditorialApprovalDeskPayload({ limit: Number(body.limit || 60) })
   };
 }
 
@@ -8418,6 +10102,802 @@ function findCheffeExecutableActionMatch(body = {}) {
   );
 }
 
+function appendCheffeAutonomyLog(entry = {}) {
+  const store = readJson(CHEFFE_CALL_AUTONOMY_LOG_FILE, { version: 1, runs: [] });
+  const runs = Array.isArray(store.runs) ? store.runs : [];
+  const nextEntry = {
+    id: cleanShortText(entry.id || createRecordId("auto"), 120),
+    createdAt: cleanShortText(entry.createdAt || new Date().toISOString(), 80),
+    status: cleanShortText(entry.status || "unknown", 40),
+    intent: cleanShortText(entry.intent || "", 80),
+    title: cleanShortText(entry.title || "", 220),
+    agent: cleanShortText(entry.agent || "", 120),
+    summary: cleanShortText(entry.summary || "", 1200),
+    proof: entry.proof || null
+  };
+  writeJson(CHEFFE_CALL_AUTONOMY_LOG_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    runs: [nextEntry, ...runs].slice(0, 120)
+  });
+  return nextEntry;
+}
+
+function cleanCheffePromptText(value, maxLength = 5000) {
+  return String(value || "")
+    .replace(/\r\n/g, "\n")
+    .replace(/[^\S\n]+/g, " ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function buildCheffeIdePrompt(action = {}) {
+  const missingRequirements = Array.isArray(action.missingRequirements)
+    ? action.missingRequirements.filter(Boolean).slice(0, 12)
+    : [];
+  const expectedProof = Array.isArray(action.expectedProof)
+    ? action.expectedProof.filter(Boolean).slice(0, 12)
+    : [];
+  const lines = [
+    "Cheffe Call gerou uma ação para resolver aqui no Codex/IDE.",
+    "",
+    "Contexto:",
+    `- ID: ${action.id || "sem-id"}`,
+    `- Status: ${action.status || "waiting-ide-command"}`,
+    `- Intent: ${action.intent || "ide"}`,
+    `- Título: ${action.title || "Ação aguardando IDE"}`,
+    `- Agente: ${action.agent || "Cheffe Call"}${action.office ? ` / ${action.office}` : ""}`,
+    action.reasonCode ? `- Bloqueio/falha: ${action.reasonCode}` : "",
+    "",
+    "Relatório da Cheffe:",
+    action.reason || "A Cheffe Call não conseguiu executar esta ordem de verdade no ambiente atual.",
+    "",
+    "Comando sugerido pelo painel:",
+    action.suggestedIdeCommand || "Codex IDE: reproduzir a pendência localmente, corrigir, testar e devolver prova.",
+    "",
+    "Requisitos faltando:",
+    ...(missingRequirements.length ? missingRequirements.map((item) => `- ${item}`) : ["- identificar causa concreta no IDE"]),
+    "",
+    "Prova que devo devolver:",
+    ...(expectedProof.length
+      ? expectedProof.map((item) => `- ${item}`)
+      : ["- problema identificado", "- arquivo/rota alterado ou bloqueio explicado", "- teste/check executado"]),
+    "",
+    "Pedido ao Codex:",
+    "Resolva esta pendência localmente. Não marque como concluída sem execução real. Responda no formato: problema identificado -> causa encontrada -> arquivo alterado -> teste passou -> prova retornada."
+  ];
+  return cleanCheffePromptText(lines.filter((line) => line !== null && line !== undefined).join("\n"), 5000);
+}
+
+function readCheffeIdeActionQueue() {
+  const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  return actions
+    .filter(Boolean)
+    .map((action) => {
+      const nextAction = {
+        id: cleanShortText(action.id || createRecordId("ide"), 120),
+        createdAt: cleanShortText(action.createdAt || "", 80),
+        updatedAt: cleanShortText(action.updatedAt || action.createdAt || "", 80),
+        status: cleanShortText(action.status || "waiting-ide", 60),
+        source: cleanShortText(action.source || "Cheffe Call", 120),
+        intent: cleanShortText(action.intent || "", 80),
+        title: cleanShortText(action.title || "Acao aguardando IDE", 220),
+        agent: cleanShortText(action.agent || "Cheffe Call", 120),
+        office: cleanShortText(action.office || "", 120),
+        reasonCode: cleanShortText(action.reasonCode || "", 80),
+        reason: cleanShortText(action.reason || "", 1200),
+        missingRequirements: Array.isArray(action.missingRequirements)
+          ? action.missingRequirements.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+          : [],
+        suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 1600),
+        expectedProof: Array.isArray(action.expectedProof)
+          ? action.expectedProof.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+          : [],
+        proofId: cleanShortText(action.proofId || "", 120),
+        orderId: cleanShortText(action.orderId || "", 120)
+      };
+      nextAction.idePrompt = cleanCheffePromptText(action.idePrompt || buildCheffeIdePrompt(nextAction), 5000);
+      return nextAction;
+    })
+    .slice(0, 80);
+}
+
+function appendCheffeIdeAction(action = {}) {
+  const now = new Date().toISOString();
+  const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  const nextAction = {
+    id: cleanShortText(action.id || createRecordId("ide"), 120),
+    createdAt: cleanShortText(action.createdAt || now, 80),
+    updatedAt: now,
+    status: cleanShortText(action.status || "waiting-ide", 60),
+    source: cleanShortText(action.source || "Cheffe Call", 120),
+    intent: cleanShortText(action.intent || "", 80),
+    title: cleanShortText(action.title || "Acao aguardando comando geral do IDE", 220),
+    agent: cleanShortText(action.agent || "Cheffe Call", 120),
+    office: cleanShortText(action.office || "", 120),
+    reasonCode: cleanShortText(action.reasonCode || "", 80),
+    reason: cleanShortText(action.reason || "", 1200),
+    missingRequirements: Array.isArray(action.missingRequirements)
+      ? action.missingRequirements.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+      : [],
+    suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 1600),
+    expectedProof: Array.isArray(action.expectedProof)
+      ? action.expectedProof.map((item) => cleanShortText(item || "", 220)).filter(Boolean).slice(0, 12)
+      : [],
+    proofId: cleanShortText(action.proofId || "", 120),
+    orderId: cleanShortText(action.orderId || "", 120)
+  };
+  nextAction.idePrompt = cleanCheffePromptText(action.idePrompt || buildCheffeIdePrompt(nextAction), 5000);
+  const nextActions = [nextAction, ...actions.filter((item) => item.id !== nextAction.id)].slice(0, 120);
+  writeJson(CHEFFE_CALL_IDE_ACTIONS_FILE, {
+    version: 1,
+    updatedAt: now,
+    actions: nextActions
+  });
+  return nextAction;
+}
+
+function reconcileCheffeIdeActionQueue(reviewQueue = {}) {
+  if (reviewQueue.status !== "clear" || Number(reviewQueue.total || 0) !== 0 || !reviewQueue.generatedAt) {
+    return { ok: true, changed: 0, reason: "review-not-clear" };
+  }
+  const store = readJson(CHEFFE_CALL_IDE_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  const now = new Date().toISOString();
+  let changed = 0;
+  const nextActions = actions.map((action) => {
+    const status = String(action?.status || "");
+    const text = normalizeText(
+      [
+        action?.title,
+        action?.reason,
+        action?.reasonCode,
+        action?.suggestedIdeCommand,
+        ...(Array.isArray(action?.missingRequirements) ? action.missingRequirements : [])
+      ].join(" ")
+    );
+    const waiting = /waiting|aguardando|open|pendente/i.test(status);
+    const reviewRelated = /review|revisao|revisao-team|review-team|auditoria/.test(text);
+    if (!waiting || !reviewRelated) return action;
+    changed += 1;
+    return {
+      ...action,
+      status: "resolved-reconciled",
+      updatedAt: now,
+      resolvedAt: now,
+      resolution:
+        "Fila reconciliada automaticamente: o relatorio npm run review:team atual esta sem pendencias abertas."
+    };
+  });
+  if (changed > 0) {
+    writeJson(CHEFFE_CALL_IDE_ACTIONS_FILE, {
+      version: 1,
+      updatedAt: now,
+      actions: nextActions
+    });
+  }
+  return { ok: true, changed, reason: changed ? "review-clear" : "no-review-ide-actions" };
+}
+
+function buildCheffeReviewQueue() {
+  const file = path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_JSON_FILE).replace(/\\/g, "/");
+  const report = readJson(REVIEW_TEAM_REPORT_JSON_FILE, null);
+  if (!report || typeof report !== "object") {
+    return {
+      kind: "cheffe-review-queue",
+      source: "npm run review:team",
+      file,
+      markdownFile: path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_MD_FILE).replace(/\\/g, "/"),
+      status: "not-run",
+      generatedAt: "",
+      total: 0,
+      byType: {},
+      topFiles: [],
+      issues: [],
+      summary: "A equipe de revisão ainda não gerou relatório nesta worktree."
+    };
+  }
+
+  const issues = Array.isArray(report.issues) ? report.issues : [];
+  const total = Number(report.summary?.totalIssues ?? issues.length) || 0;
+  const safeIssues = issues
+    .map((issue, index) => ({
+      id: cleanShortText(issue.id || `review-${index + 1}`, 80),
+      status: "open-review",
+      type: cleanShortText(issue.type || "review", 80),
+      severity: cleanShortText(issue.severity || "medium", 40),
+      file: cleanShortText(issue.file || "", 220),
+      line: Number(issue.line || 0) || 0,
+      label: cleanShortText(issue.label || "Pendência de revisão", 160),
+      detail: cleanShortText(issue.detail || "", 1200)
+    }))
+    .slice(0, 80);
+
+  return {
+    kind: "cheffe-review-queue",
+    source: "npm run review:team",
+    file,
+    markdownFile: path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_MD_FILE).replace(/\\/g, "/"),
+    status: total > 0 ? "open" : "clear",
+    generatedAt: cleanShortText(report.generatedAt || "", 80),
+    total,
+    byType: report.summary?.byType && typeof report.summary.byType === "object" ? report.summary.byType : {},
+    topFiles: Array.isArray(report.summary?.topFiles)
+      ? report.summary.topFiles
+          .map((item) => ({
+            file: cleanShortText(item.file || "", 220),
+            count: Number(item.count || 0)
+          }))
+          .filter((item) => item.file)
+          .slice(0, 12)
+      : [],
+    issues: safeIssues,
+    summary: total > 0
+      ? `Revisão encontrou ${total} pendência(s).`
+      : "Revisão sem pendências no relatório atual."
+  };
+}
+
+function runCheffeCommandProof(label, command, args = [], options = {}) {
+  const startedAt = new Date().toISOString();
+  const timeout = Math.max(1000, Math.min(Number(options.timeoutMs || 60000), 180000));
+  const result = spawnSync(command, args, {
+    cwd: options.cwd || ROOT_DIR,
+    encoding: "utf-8",
+    timeout,
+    windowsHide: true,
+    env: { ...process.env, ...(options.env || {}) }
+  });
+  const finishedAt = new Date().toISOString();
+  const errorMessage = result.error?.message || "";
+  return {
+    kind: "command-proof",
+    label: cleanShortText(label || command, 120),
+    command: [path.basename(command), ...args].join(" "),
+    cwd: path.relative(ROOT_DIR, options.cwd || ROOT_DIR).replace(/\\/g, "/") || ".",
+    ok: !result.error && result.status === 0,
+    exitCode: Number.isInteger(result.status) ? result.status : null,
+    signal: cleanShortText(result.signal || "", 40),
+    timedOut: result.error?.code === "ETIMEDOUT",
+    startedAt,
+    finishedAt,
+    stdout: cleanShortText(result.stdout || "", 2400),
+    stderr: cleanShortText(result.stderr || errorMessage, 2400)
+  };
+}
+
+function inferCheffeAutonomousIntent(context = {}) {
+  const forced = cleanShortText(context.body?.autonomyIntent || context.body?.intent || "", 80).toLowerCase();
+  const allowedForced = new Set([
+    "real-agents-runtime",
+    "ecosystem-study",
+    "review-team",
+    "editorial-health",
+    "health-check",
+    "safe-cleanup",
+    "deploy-gate",
+    "agent-action"
+  ]);
+  if (allowedForced.has(forced)) return forced;
+
+  const text = normalizeText([
+    context.title,
+    context.opinion,
+    context.command,
+    context.prompt,
+    context.howTo,
+    context.instruction,
+    context.executableMatch?.kind,
+    context.executableMatch?.title
+  ].join(" "));
+
+  if (/editorial:health|saude editorial|saúde editorial|gate p0|gate p1|gate p2|ranking editorial|cache editorial|titulos alternativos|títulos alternativos/.test(text)) {
+    return "editorial-health";
+  }
+  if (/limp|lixo|temporario|temporarios|cache|log/.test(text)) return "safe-cleanup";
+  if (/deploy|publicar|producao|produção|render|push|commit|github/.test(text)) return "deploy-gate";
+  if (/review:team|revis[aã]o|auditoria|audit|validar layout|validar texto/.test(text)) return "review-team";
+  if (/codex:health|saude|saúde|health|travamento|autoteste/.test(text)) return "health-check";
+  if (/rodar agentes|agentes reais|181 agentes|runtime|real-agents|atualizar agentes/.test(text)) {
+    return "real-agents-runtime";
+  }
+  if (/estudo|estudar|ecossistema|aprend|memoria|memória/.test(text)) return "ecosystem-study";
+  if (context.executableMatch) return "agent-action";
+  if (/organizar|redistribuir|prioridade|identificar rotinas|triagem|revisar|mapear|acompanhar/.test(text)) {
+    return "agent-action";
+  }
+  if (context.command) return "blocked-terminal";
+  return "unsupported";
+}
+
+function runCheffeSafeTempCleanup() {
+  const startedAt = new Date().toISOString();
+  const removed = [];
+  const skipped = [];
+  const roots = [
+    {
+      root: path.join(ROOT_DIR, ".codex-temp"),
+      allowFile: (filePath) => /\.log$/i.test(path.basename(filePath)) || /smoke/i.test(path.basename(filePath))
+    }
+  ];
+
+  roots.forEach(({ root, allowFile }) => {
+    if (!fs.existsSync(root)) {
+      skipped.push({ path: path.relative(ROOT_DIR, root).replace(/\\/g, "/"), reason: "missing" });
+      return;
+    }
+    const visit = (currentDir, depth = 0) => {
+      if (depth > 3) return;
+      let entries = [];
+      try {
+        entries = fs.readdirSync(currentDir, { withFileTypes: true });
+      } catch (error) {
+        skipped.push({
+          path: path.relative(ROOT_DIR, currentDir).replace(/\\/g, "/"),
+          reason: cleanShortText(error.message || "read failed", 160)
+        });
+        return;
+      }
+      entries.forEach((entry) => {
+        const filePath = path.join(currentDir, entry.name);
+        if (entry.isDirectory()) {
+          visit(filePath, depth + 1);
+          return;
+        }
+        if (!entry.isFile() || !allowFile(filePath)) return;
+        try {
+          const stats = fs.statSync(filePath);
+          fs.rmSync(filePath, { force: true });
+          removed.push({
+            path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+            bytes: stats.size
+          });
+        } catch (error) {
+          skipped.push({
+            path: path.relative(ROOT_DIR, filePath).replace(/\\/g, "/"),
+            reason: cleanShortText(error.message || "remove failed", 160)
+          });
+        }
+      });
+    };
+    visit(root);
+  });
+
+  return {
+    kind: "safe-temp-cleanup-proof",
+    ok: true,
+    startedAt,
+    finishedAt: new Date().toISOString(),
+    removedCount: removed.length,
+    removedBytes: removed.reduce((sum, item) => sum + Number(item.bytes || 0), 0),
+    removed: removed.slice(0, 40),
+    skipped: skipped.slice(0, 20),
+    rule: "remove apenas logs/smokes em .codex-temp; preserva data, assets, latest-run e provas atuais"
+  };
+}
+
+function runCheffeDeployGate(context = {}) {
+  const checks = [
+    runCheffeCommandProof("syntax server", process.execPath, ["--check", "server.js"], { timeoutMs: 30000 }),
+    runCheffeCommandProof("git status", "git", ["status", "--porcelain"], { timeoutMs: 30000 })
+  ];
+  const deployEnabled = String(process.env.CHEFFE_CALL_AUTO_DEPLOY || "").trim().toLowerCase() === "true";
+  const dirty = cleanShortText(checks[1].stdout || "", 2400);
+  const baseMissing = [
+    "CHEFFE_CALL_AUTO_DEPLOY=true no ambiente online/local",
+    "worktree limpo ou escopo de commit escolhido",
+    "credencial Git/Render disponivel",
+    "smoke online apos publicar"
+  ];
+  const proof = {
+    kind: "deploy-gate-proof",
+    ok: false,
+    status: "blocked",
+    deployEnabled,
+    title: cleanShortText(context.title || "", 220),
+    reasonCode: "",
+    blockedReason: "",
+    missingRequirements: [],
+    suggestedIdeCommand: "",
+    expectedProof: [
+      "node --check server.js",
+      "git status com escopo revisado",
+      "push/deploy concluido",
+      "smoke online da Cheffe Call"
+    ],
+    checks,
+    requiredForAutoDeploy: baseMissing
+  };
+
+  if (!checks.every((item) => item.ok)) {
+    proof.reasonCode = "local-checks-failed";
+    proof.blockedReason = "Um ou mais checks locais falharam antes do deploy.";
+    proof.missingRequirements = ["corrigir checks locais antes de publicar"];
+    proof.suggestedIdeCommand = "Codex IDE: ler proof.deployProof.checks, corrigir erro local, rodar node --check server.js e repetir deploy-gate.";
+    proof.summary = "Deploy bloqueado: checks locais falharam.";
+    return proof;
+  }
+  if (dirty) {
+    proof.reasonCode = "dirty-worktree";
+    proof.blockedReason = "Ha mudancas locais sem escopo de commit/deploy definido.";
+    proof.missingRequirements = ["selecionar arquivos do deploy", "rodar testes", "criar commit ou limpar alteracoes fora de escopo"];
+    proof.suggestedIdeCommand = "Codex IDE: revisar git status, separar somente arquivos da ordem, rodar testes, commit/push/deploy e devolver URL validada.";
+    proof.summary = "Deploy bloqueado: worktree possui mudancas locais; precisa commit/selecionar escopo antes de publicar.";
+    proof.dirtyStatus = dirty;
+    return proof;
+  }
+  if (!deployEnabled) {
+    proof.reasonCode = "auto-deploy-disabled";
+    proof.blockedReason = "O ambiente nao autorizou deploy automatico pela Cheffe Call.";
+    proof.missingRequirements = ["definir CHEFFE_CALL_AUTO_DEPLOY=true", "confirmar credencial Git/Render", "confirmar branch/remoto de publicacao"];
+    proof.suggestedIdeCommand = "Codex IDE: se o chefe autorizar, publicar manualmente pelo fluxo git/render e rodar smoke online.";
+    proof.summary = "Deploy bloqueado: auto-deploy nao esta habilitado no ambiente.";
+    return proof;
+  }
+
+  const push = runCheffeCommandProof("push render-target", "git", ["push", "render-target", "HEAD:main"], {
+    timeoutMs: 180000
+  });
+  proof.steps = [push];
+  proof.ok = push.ok;
+  proof.status = push.ok ? "executed" : "failed";
+  proof.summary = push.ok
+    ? "Deploy enviado para render-target."
+    : "Deploy tentou enviar para render-target, mas falhou.";
+  if (!push.ok) {
+    proof.reasonCode = "push-failed";
+    proof.blockedReason = "O push/deploy falhou mesmo com gate habilitado.";
+    proof.missingRequirements = ["verificar autenticacao Git/Render", "ver stderr do push", "repetir push/deploy pelo IDE"];
+    proof.suggestedIdeCommand = "Codex IDE: inspecionar stderr do push, corrigir autenticacao/remoto e repetir git push render-target HEAD:main.";
+  }
+  return proof;
+}
+
+function markRealAgentActionExecution(actionId, status, note, proof = {}) {
+  const action = reviewRealAgentAction({
+    actionId,
+    status,
+    note
+  });
+  if (!action.ok) return action;
+  const store = readJson(REAL_AGENTS_ACTIONS_FILE, { version: 1, actions: [] });
+  const actions = Array.isArray(store.actions) ? store.actions : [];
+  const nextActions = actions.map((item) => {
+    if (item.id !== actionId) return item;
+    return {
+      ...item,
+      execution: {
+        status: cleanShortText(status || "", 40),
+        note: cleanShortText(note || "", 800),
+        proof,
+        executedAt: new Date().toISOString()
+      }
+    };
+  });
+  writeJson(REAL_AGENTS_ACTIONS_FILE, {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    actions: nextActions
+  });
+  return { ok: true, action: nextActions.find((item) => item.id === actionId) || action.action };
+}
+
+function buildCheffeIdeActionForBlockedProof(context = {}, proof = {}) {
+  const reasonCode = cleanShortText(
+    proof.reasonCode || proof.blockedReason || proof.blockedReasonCode || proof.blockedReason || proof.status || "blocked",
+    80
+  );
+  const reason = cleanShortText(
+    proof.blockedReason || proof.summary || "A Cheffe Call nao conseguiu executar esta ordem no ambiente atual.",
+    1200
+  );
+  const suggestedIdeCommand = cleanShortText(
+    proof.suggestedIdeCommand ||
+      (proof.status === "failed"
+        ? "Codex IDE: reproduzir a falha localmente, ler actionProof.autoExecution, corrigir a causa, rodar o check/teste adequado e devolver prova."
+        : "") ||
+      (proof.intent === "blocked-terminal" && context.command
+        ? `Codex IDE: avaliar e executar manualmente, se seguro: ${context.command}`
+        : "Codex IDE: abrir esta acao, executar pelo ambiente local com testes, e devolver prova para a Cheffe Call."),
+    1600
+  );
+  return appendCheffeIdeAction({
+    status: "waiting-ide-command",
+    source: "Cheffe Call",
+    intent: proof.intent || inferCheffeAutonomousIntent(context),
+    title: proof.title || context.title || "Acao aguardando comando geral do IDE",
+    agent: context.agent || proof.agent || "Cheffe Call",
+    office: context.office || proof.office || "",
+    reasonCode,
+    reason,
+    missingRequirements: proof.missingRequirements || [],
+    suggestedIdeCommand,
+    expectedProof: proof.expectedProof || [
+      "problema identificado",
+      "arquivo/rota alterado ou bloqueio explicado",
+      "teste/check executado",
+      "deploy/smoke online quando aplicavel"
+    ],
+    proofId: proof.id || "",
+    orderId: context.order?.id || proof.orderId || ""
+  });
+}
+
+function executeCheffeAutonomousOrder(context = {}) {
+  const startedAt = new Date().toISOString();
+  const intent = inferCheffeAutonomousIntent(context);
+  const baseProof = {
+    kind: "cheffe-call-autonomous-execution",
+    mode: "controlled-autonomy",
+    endpoint: "POST /api/cheffe-call/action",
+    intent,
+    agent: cleanShortText(context.agent || "Cheffe Call", 120),
+    office: cleanShortText(context.office || "", 120),
+    title: cleanShortText(context.title || "", 220),
+    orderId: cleanShortText(context.order?.id || "", 120),
+    startedAt,
+    finishedAt: "",
+    ok: false,
+    status: "blocked",
+    summary: "",
+    files: []
+  };
+
+  const finish = (patch = {}) => {
+    const proof = {
+      ...baseProof,
+      ...patch,
+      finishedAt: new Date().toISOString()
+    };
+    const requiresIdeResolution = proof.status !== "executed" || proof.ok === false;
+    if (requiresIdeResolution) {
+      proof.ideAction = buildCheffeIdeActionForBlockedProof(context, proof);
+      proof.ideQueueFile = path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/");
+    }
+    appendCheffeAutonomyLog({
+      status: proof.status,
+      intent,
+      title: proof.title,
+      agent: proof.agent,
+      summary: proof.summary,
+      proof
+    });
+    if (context.order?.id) {
+      updateOfficeOrderById(context.order.id, {
+        status:
+          proof.status === "executed"
+            ? "cheffe-call-autoexecutado"
+            : proof.status === "failed"
+              ? "cheffe-call-falhou"
+              : "cheffe-call-bloqueado",
+        ceoReply: cleanShortText(proof.summary || context.order.ceoReply || "", 1200),
+        executionSummary: {
+          delivered: proof.status === "executed" ? 1 : 0,
+          failed: proof.status === "failed" ? 1 : 0,
+          running: 0,
+          blocked: proof.status === "blocked" ? 1 : 0
+        },
+        autonomyProof: proof
+      });
+    }
+    return {
+      ok: proof.ok,
+      status: proof.status,
+      intent,
+      proof
+    };
+  };
+
+  if (intent === "real-agents-runtime") {
+    const beforeOrders = countOfficeOrders();
+    const result = runRealAgentsRuntime({ trigger: "cheffe-call-auto-execute" });
+    if (!result.ok) {
+      return finish({
+        ok: false,
+        status: "failed",
+        summary: cleanShortText(result.error || "Runtime dos agentes falhou.", 800),
+        runtime: result
+      });
+    }
+    runRealAgentsAutonomyCycle("cheffe-call-auto-execute");
+    const runtimeProof = buildRealAgentsExecutionProof(result, {
+      beforeOrders,
+      afterOrders: countOfficeOrders(),
+      message: context.title,
+      endpoint: "POST /api/cheffe-call/action",
+      httpStatus: 200,
+      trigger: "cheffe-call-auto-execute"
+    });
+    return finish({
+      ok: true,
+      status: "executed",
+      summary: `Runtime executada autonomamente: ${runtimeProof.totalAgents || 0} agentes, ${runtimeProof.files?.length || 0} provas.`,
+      runtime: result.summary,
+      runtimeProof,
+      files: Array.isArray(runtimeProof.files) ? runtimeProof.files : []
+    });
+  }
+
+  if (intent === "ecosystem-study") {
+    const study = recordRealAgentsEcosystemStudy({
+      trigger: "cheffe-call-auto-execute",
+      instruction: context.instruction || context.title || ""
+    });
+    return finish({
+      ok: true,
+      status: "executed",
+      summary: `Estudo do ecossistema atualizado no ciclo ${study.learningCycle}.`,
+      study,
+      files: [buildProofFile(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, "estudo do ecossistema")]
+    });
+  }
+
+  if (intent === "review-team") {
+    const commandProof = runCheffeCommandProof("review team", process.execPath, ["scripts/review-team-audit.js"], {
+      timeoutMs: 120000
+    });
+    const reviewQueue = buildCheffeReviewQueue();
+    const hasReviewIssues = Number(reviewQueue.total || 0) > 0;
+    return finish({
+      ok: commandProof.ok && !hasReviewIssues,
+      status: commandProof.ok ? (hasReviewIssues ? "blocked" : "executed") : "failed",
+      summary: !commandProof.ok
+        ? "Revisao automatica falhou; ver stderr no proof."
+        : hasReviewIssues
+          ? `Revisao automatica encontrou ${reviewQueue.total} pendencia(s).`
+          : "Revisao automatica da equipe local executada sem pendencias.",
+      reasonCode: hasReviewIssues ? "review-team-issues" : "",
+      blockedReason: hasReviewIssues ? "A equipe de revisão encontrou pendências que precisam virar correção concreta." : "",
+      missingRequirements: hasReviewIssues
+        ? reviewQueue.issues.slice(0, 8).map((issue) => `${issue.severity}: ${issue.file}${issue.line ? `:${issue.line}` : ""} - ${issue.label}`)
+        : [],
+      suggestedIdeCommand: hasReviewIssues
+        ? "Codex IDE: corrigir os arquivos listados em reviewQueue, rodar npm run review:team até totalIssues=0 e devolver prova."
+        : "",
+      expectedProof: hasReviewIssues
+        ? ["arquivos corrigidos", "npm run review:team com totalIssues=0", "smoke da página afetada quando houver UI pública"]
+        : [],
+      commandProof,
+      reviewQueue,
+      files: [
+        buildProofFile(REVIEW_TEAM_REPORT_MD_FILE, "relatorio review team"),
+        buildProofFile(REVIEW_TEAM_REPORT_JSON_FILE, "json review team")
+      ]
+    });
+  }
+
+  if (intent === "editorial-health") {
+    const commandProof = runCheffeCommandProof("editorial health", process.execPath, ["scripts/editorial-health-check.js"], {
+      timeoutMs: 120000
+    });
+    const health = buildEditorialHealthReport();
+    const humanApprovalRequired = Number(health.summary?.humanApprovalRequired || 0);
+    const issueTotal =
+      humanApprovalRequired +
+      Number(health.summary?.sourceIssues || 0) +
+      Number(health.summary?.visualIssues || 0);
+    return finish({
+      ok: commandProof.ok,
+      status: commandProof.ok ? "executed" : "failed",
+      summary: commandProof.ok
+        ? `Saude editorial gerada: P0=${health.gates?.P0 || 0}, P1=${health.gates?.P1 || 0}, pendencias=${issueTotal}.`
+        : "Saude editorial falhou; ver stderr no proof.",
+      reasonCode: commandProof.ok && humanApprovalRequired ? "editorial-human-approval-required" : "",
+      blockedReason: commandProof.ok && humanApprovalRequired
+        ? "Ha materias P0 que precisam de aprovacao humana antes de destaque/publicacao sensivel."
+        : "",
+      missingRequirements: commandProof.ok && humanApprovalRequired
+        ? health.humanApprovalQueue.slice(0, 8).map((item) => `${item.priority || item.gate}: ${item.title}`)
+        : [],
+      suggestedIdeCommand: commandProof.ok && humanApprovalRequired
+        ? "Cheffe Call: revisar humanApprovalQueue, aprovar/segurar P0 e rodar npm run editorial:health novamente."
+        : "",
+      expectedProof: commandProof.ok && humanApprovalRequired
+        ? ["decisao humana para cada P0 destacado", "fonte conferida", "imagem/credito validados"]
+        : [],
+      commandProof,
+      health,
+      files: [
+        buildProofFile(EDITORIAL_HEALTH_REPORT_MD_FILE, "relatorio saude editorial"),
+        buildProofFile(EDITORIAL_HEALTH_REPORT_JSON_FILE, "json saude editorial")
+      ]
+    });
+  }
+
+  if (intent === "health-check") {
+    const commandProof = runCheffeCommandProof("codex health", process.execPath, ["scripts/codex-health-check.js"], {
+      timeoutMs: 60000
+    });
+    return finish({
+      ok: commandProof.ok,
+      status: commandProof.ok ? "executed" : "failed",
+      summary: commandProof.ok ? "Health check local executado." : "Health check local falhou.",
+      commandProof
+    });
+  }
+
+  if (intent === "safe-cleanup") {
+    const cleanupProof = runCheffeSafeTempCleanup();
+    return finish({
+      ok: true,
+      status: "executed",
+      summary: `Limpeza segura executada: ${cleanupProof.removedCount} arquivo(s), ${cleanupProof.removedBytes} bytes removidos.`,
+      cleanupProof
+    });
+  }
+
+  if (intent === "deploy-gate") {
+    const deployProof = runCheffeDeployGate(context);
+    return finish({
+      ok: deployProof.ok,
+      status: deployProof.status,
+      summary: deployProof.summary,
+      reasonCode: deployProof.reasonCode || deployProof.status,
+      blockedReason: deployProof.blockedReason || deployProof.summary,
+      missingRequirements: deployProof.missingRequirements || deployProof.requiredForAutoDeploy || [],
+      suggestedIdeCommand: deployProof.suggestedIdeCommand || "",
+      expectedProof: deployProof.expectedProof || [],
+      deployProof
+    });
+  }
+
+  if (intent === "agent-action") {
+    const proofFile = context.executableMatch?.artifact
+      ? buildProofFile(path.join(ROOT_DIR, context.executableMatch.artifact), "artefato da acao do agente")
+      : null;
+    const executionProof = {
+      kind: "agent-action-execution-proof",
+      actionId: cleanShortText(context.executableMatch?.id || "", 120),
+      artifact: proofFile,
+      rule: "acao operacional segura: fecha proposta/triagem no painel e registra prova; codigo/deploy seguem pelo deploy-gate"
+    };
+    let actionReview = null;
+    if (context.executableMatch?.id) {
+      actionReview = markRealAgentActionExecution(
+        context.executableMatch.id,
+        "executado",
+        `Executado autonomamente pela Cheffe Call em ${new Date().toISOString()}.`,
+        executionProof
+      );
+    }
+    return finish({
+      ok: !actionReview || actionReview.ok,
+      status: !actionReview || actionReview.ok ? "executed" : "failed",
+      summary: actionReview && !actionReview.ok
+        ? actionReview.error || "Falha ao marcar acao executada."
+        : "Acao operacional do agente executada e registrada com prova.",
+      actionReview,
+      executionProof,
+      files: proofFile ? [proofFile] : []
+    });
+  }
+
+  return finish({
+    ok: false,
+    status: "blocked",
+    summary:
+      intent === "blocked-terminal"
+        ? "Comando de terminal nao esta na lista segura de autoexecucao."
+        : "Ordem nao mapeada para um executor autonomo seguro.",
+    reasonCode: intent === "blocked-terminal" ? "terminal-command-requires-ide" : "unsupported-autonomous-order",
+    blockedReason:
+      intent === "blocked-terminal"
+        ? "O agente pediu terminal/comando que precisa ser revisado e rodado no IDE."
+        : "A ordem nao corresponde a um executor autonomo seguro conhecido.",
+    missingRequirements:
+      intent === "blocked-terminal"
+        ? ["revisao humana/IDE do comando", "validacao de segurança", "prova apos execucao local"]
+        : ["mapear executor seguro", "definir arquivo/rota alvo", "validar impacto antes de executar"],
+    suggestedIdeCommand:
+      intent === "blocked-terminal" && context.command
+        ? `Codex IDE: revisar e, se seguro, executar este comando localmente: ${context.command}`
+        : "Codex IDE: transformar esta ordem em tarefa concreta com arquivo alvo, teste e prova."
+  });
+}
+
 function applyCheffeCallAction(body = {}) {
   const action = cleanShortText(body.action || body.type, 40).toLowerCase();
   if (!action) {
@@ -8446,11 +10926,15 @@ function applyCheffeCallAction(body = {}) {
   const command = cleanShortText(body.command || "", 1600);
   const howTo = cleanShortText(body.howTo || "", 3200);
   const prompt = cleanShortText(body.prompt || "", 3200);
+  const opinionKey = cleanShortText(body.opinionKey || "", 140);
   const approvals = Array.isArray(targetSession.approvals) ? targetSession.approvals.slice(0, 32) : [];
   const logs = Array.isArray(targetSession.logs) ? targetSession.logs.slice(0, 64) : [];
   const decisions = Array.isArray(targetSession.decisions) ? targetSession.decisions.slice(0, 32) : [];
   const executableMatch = findCheffeExecutableActionMatch({ agent, title, text: opinion });
   let reviewedAction = null;
+  let autoExecution = null;
+  let sessionStatusOverride = "";
+  const actionProofs = [];
 
   const pushLog = (entry) => {
     logs.unshift(normalizeCheffeCallLog({ ...entry, createdAt: now }));
@@ -8466,12 +10950,13 @@ function applyCheffeCallAction(body = {}) {
       agent,
       office,
       role,
+      opinionKey,
       note: cleanShortText(entry.note || "", 1200),
       executableActionId: cleanShortText(entry.executableActionId || "", 120)
     });
   };
   const appendActionOrder = (payload = {}) => {
-    appendOfficeOrder({
+    const order = {
       id: createRecordId("ord"),
       from: "Cheffe Call",
       to: cleanShortText(payload.to || `${agent}${office ? ` • ${office}` : ""}`, 120),
@@ -8496,11 +10981,22 @@ function applyCheffeCallAction(body = {}) {
         }
       ],
       executionSummary: {
-        delivered: action === "approve" ? 1 : 0,
+        delivered: ["approve", "complete"].includes(action) ? 1 : 0,
         failed: 0,
         running: action === "implement" ? 1 : 0
       }
+    };
+    appendOfficeOrder(order);
+    actionProofs.push({
+      kind: "office-order-proof",
+      endpoint: "POST /api/cheffe-call/action",
+      file: "data/office-orders.json",
+      orderId: order.id,
+      status: order.status,
+      to: order.to,
+      createdAt: order.createdAt
     });
+    return order;
   };
 
   const maybeRegisterAgentArticleArtifact = () => {
@@ -8537,7 +11033,50 @@ function applyCheffeCallAction(body = {}) {
         : runtimeResult.error || "Falha ao rodar os agentes reais."
     });
     if (!runtimeResult.ok) {
-      return { ok: false, status: 500, error: runtimeResult.error || "Falha ao atualizar os agentes reais." };
+      const failureProof = {
+        kind: "cheffe-call-action-failure",
+        mode: "controlled-autonomy",
+        endpoint: "POST /api/cheffe-call/action",
+        action,
+        intent: "real-agents-runtime",
+        agent,
+        office,
+        title: "Atualizar agentes reais",
+        ok: false,
+        status: "failed",
+        reasonCode: "real-agents-runtime-failed",
+        blockedReason: runtimeResult.error || "Falha ao atualizar os agentes reais.",
+        summary: runtimeResult.error || "Falha ao atualizar os agentes reais.",
+        missingRequirements: ["reproduzir npm run agents:run no IDE", "corrigir erro da runtime", "rodar smoke da Cheffe Call/agentes"],
+        suggestedIdeCommand: "Codex IDE: rodar npm run agents:run, corrigir a falha da runtime, validar /api/real-agents/run e devolver prova.",
+        expectedProof: [
+          "npm run agents:run concluido",
+          "POST /api/real-agents/run validado",
+          "Cheffe Call atualizada com prova da runtime"
+        ],
+        runtimeResult,
+        createdAt: now
+      };
+      failureProof.ideAction = buildCheffeIdeActionForBlockedProof(
+        { body, action, instruction, agent, office, role, title, command },
+        failureProof
+      );
+      failureProof.ideQueueFile = path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/");
+      appendCheffeAutonomyLog({
+        status: "failed",
+        intent: "real-agents-runtime",
+        title: failureProof.title,
+        agent,
+        summary: failureProof.summary,
+        proof: failureProof
+      });
+      return {
+        ok: false,
+        status: 500,
+        error: runtimeResult.error || "Falha ao atualizar os agentes reais.",
+        proof: failureProof,
+        actionProof: failureProof
+      };
     }
   } else if (action === "approve") {
     pushApproval({
@@ -8561,6 +11100,7 @@ function applyCheffeCallAction(body = {}) {
       howTo,
       prompt,
       command,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -8597,9 +11137,10 @@ function applyCheffeCallAction(body = {}) {
       howTo,
       prompt,
       command,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
-    appendActionOrder({
+    const implementationOrder = appendActionOrder({
       message: `Executar agora a partir da Cheffe Call: ${title}. Comando: ${command || "sem complemento de terminal"}`,
       ceoReply: `${agent} entrou em execução acompanhada a partir da sala.`,
       status: "cheffe-call-em-execucao"
@@ -8613,6 +11154,91 @@ function applyCheffeCallAction(body = {}) {
       if (review.ok) reviewedAction = review.action;
     }
     maybeRegisterAgentArticleArtifact();
+    autoExecution = executeCheffeAutonomousOrder({
+      body,
+      action,
+      instruction,
+      agent,
+      office,
+      role,
+      title,
+      opinion,
+      command,
+      howTo,
+      prompt,
+      opinionKey,
+      executableMatch,
+      order: implementationOrder
+    });
+    if (autoExecution?.proof) {
+      actionProofs.push(autoExecution.proof);
+      const autoExecuted = autoExecution.status === "executed";
+      const autoFailed = autoExecution.status === "failed";
+      const autoLabel = autoExecuted
+        ? "autoexecutado"
+        : autoFailed
+          ? "falha na autoexecucao"
+          : "autoexecucao bloqueada";
+      pushLog({
+        kind: autoExecuted ? "good" : autoFailed ? "error" : "warning",
+        kindLabel: autoLabel,
+        agent: "Cheffe Autonomia",
+        office: "Sistema",
+        text: autoExecution.proof.summary || "Executor autonomo retornou prova."
+      });
+      pushDecision({
+        state: autoExecuted ? "executed" : autoFailed ? "failed" : "blocked",
+        kindLabel: autoLabel,
+        agent,
+        office,
+        title: autoExecuted ? `Executado automaticamente por ${agent}` : `Execucao autonoma pendente para ${agent}`,
+        text: autoExecution.proof.summary || title,
+        howTo,
+        prompt,
+        command,
+        opinionKey,
+        artifact: executableMatch?.artifact || ""
+      });
+      if (autoExecution.proof.actionReview?.action) reviewedAction = autoExecution.proof.actionReview.action;
+      sessionStatusOverride = autoExecuted
+        ? "execucao-conferida"
+        : autoFailed
+          ? "execucao-falhou"
+          : "execucao-bloqueada";
+    }
+  } else if (action === "complete") {
+    const proofLevel = cleanShortText(body.proofLevel || "", 40);
+    const runtimeEvidence = cleanShortText(body.runtimeEvidence || body.evidence || "", 1200);
+    const isApplicationProof = proofLevel === "application";
+    const finalState = isApplicationProof ? "published" : "executed";
+    const finalLabel = isApplicationProof ? "aplicação provada" : "execução provada";
+    pushLog({
+      kind: isApplicationProof ? "good" : "info",
+      kindLabel: finalLabel,
+      agent,
+      office,
+      text: runtimeEvidence || opinion || title
+    });
+    pushDecision({
+      state: finalState,
+      kindLabel: finalLabel,
+      agent,
+      office,
+      title: isApplicationProof ? `Aplicação provada por ${agent}` : `Execução provada por ${agent}`,
+      text: runtimeEvidence || title,
+      howTo,
+      prompt,
+      command,
+      opinionKey,
+      artifact: executableMatch?.artifact || ""
+    });
+    appendActionOrder({
+      message: `${finalLabel} na Cheffe Call: ${title}. Evidência: ${runtimeEvidence || "runtime retornou prova resumida no painel."}`,
+      ceoReply: isApplicationProof
+        ? `${agent} ficou marcado como aplicado com prova no alvo final.`
+        : `${agent} ficou marcado como executado com prova; aplicação/publicação ainda segue pendente.`,
+      status: isApplicationProof ? "cheffe-call-aplicacao-provada" : "cheffe-call-execucao-provada"
+    });
   } else if (action === "task") {
     pushLog({
       kindLabel: "tarefa criada",
@@ -8630,6 +11256,7 @@ function applyCheffeCallAction(body = {}) {
       howTo,
       prompt,
       command,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -8653,6 +11280,7 @@ function applyCheffeCallAction(body = {}) {
       text: title,
       command,
       prompt,
+      opinionKey,
       artifact: executableMatch?.artifact || ""
     });
     appendActionOrder({
@@ -8677,7 +11305,25 @@ function applyCheffeCallAction(body = {}) {
       text: title,
       howTo,
       prompt,
-      command
+      command,
+      opinionKey
+    });
+  } else if (action === "dismiss") {
+    pushLog({
+      kindLabel: "opinião ignorada",
+      agent,
+      office,
+      text: opinion || title
+    });
+    pushDecision({
+      state: "dismissed",
+      kindLabel: "ignorada",
+      agent,
+      office,
+      title: `Ignorada por enquanto: ${agent}`,
+      text: title,
+      command,
+      opinionKey
     });
   } else {
     return { ok: false, status: 400, error: "Ação da Cheffe Call ainda nao suportada." };
@@ -8688,17 +11334,32 @@ function applyCheffeCallAction(body = {}) {
     instruction,
     updatedAt: now,
     status:
-      action === "implement"
+      sessionStatusOverride ||
+      (action === "implement"
         ? "em-execucao"
+        : action === "complete"
+          ? "execucao-conferida"
         : action === "approve"
           ? "aprovado"
-          : action === "refresh"
+        : action === "refresh"
             ? "sincronizado"
-            : "aguardando-aprovacao",
+            : "aguardando-aprovacao"),
     approvals: approvals.slice(0, 32),
     logs: logs.slice(0, 64),
     decisions: decisions.slice(0, 32),
-    reviewedActionId: reviewedAction?.id || targetSession.reviewedActionId || ""
+    reviewedActionId: reviewedAction?.id || targetSession.reviewedActionId || "",
+    lastActionProof: {
+      kind: "cheffe-call-action-proof",
+      endpoint: "POST /api/cheffe-call/action",
+      httpStatus: 200,
+      action,
+      sessionId: targetSession.id || sessionId,
+      createdAt: now,
+      officeOrders: actionProofs,
+      reviewedActionId: reviewedAction?.id || "",
+      autoExecution: autoExecution?.proof || null,
+      autonomyLogFile: path.relative(ROOT_DIR, CHEFFE_CALL_AUTONOMY_LOG_FILE).replace(/\\/g, "/")
+    }
   };
 
   const nextSessions = state.sessions.slice();
@@ -8708,6 +11369,9 @@ function applyCheffeCallAction(body = {}) {
     active: true,
     pausedAt: state.pausedAt || now,
     releasedAt: "",
+    expiredAt: "",
+    expirationReason: "",
+    lastActivityAt: now,
     lastInstruction: instruction,
     lastSessionAt: now,
     sessions: nextSessions
@@ -8718,6 +11382,7 @@ function applyCheffeCallAction(body = {}) {
     ok: true,
     action,
     reviewedAction,
+    proof: nextSession.lastActionProof,
     session: payload.meeting.currentSession || null,
     payload
   };
@@ -8734,7 +11399,15 @@ function getCheffeCallOpinions(payload, instruction) {
         role: item.role,
         intent: item.intent,
         autonomy: item.autonomy,
-        urgency: item.urgency
+        urgency: item.urgency,
+        confidence: item.confidence,
+        points: item.points,
+        competitionScore: item.competitionScore,
+        intelligence: item.intelligence,
+        execution: item.execution,
+        impact: item.impact,
+        action: item.action,
+        deliverable: item.deliverable
       }))
     : fallbackQueue.map((item) => ({
         name: item.name,
@@ -8742,7 +11415,15 @@ function getCheffeCallOpinions(payload, instruction) {
         role: item.role,
         intent: item.autonomy?.intent || item.assignment?.idea || "",
         autonomy: item.autonomy?.autonomy || 0,
-        urgency: item.autonomy?.urgency || 0
+        urgency: item.autonomy?.urgency || 0,
+        confidence: item.autonomy?.confidence || 0,
+        points: item.points || 0,
+        competitionScore: item.competition?.competitionScore || 0,
+        intelligence: item.competition?.intelligence || 0,
+        execution: item.competition?.execution || 0,
+        impact: item.competition?.impact || 0,
+        action: item.assignment?.action || "",
+        deliverable: item.assignment?.deliverable || ""
       }));
   const source = sourceBase.length
     ? sourceBase
@@ -8808,13 +11489,19 @@ function getCheffeCallOpinions(payload, instruction) {
   );
   const actionMemory = Array.isArray(payload.executableActions) ? payload.executableActions : [];
   const queueMemory = Array.isArray(payload.queue) ? payload.queue : [];
+  const ecosystemStudy = payload.ecosystemStudy || {};
+  const ecosystemFocus = Array.isArray(ecosystemStudy.focusModules) ? ecosystemStudy.focusModules : [];
+  const ecosystemSignals = Array.isArray(ecosystemStudy.impactGate?.currentSignals)
+    ? ecosystemStudy.impactGate.currentSignals
+    : [];
   const roleFocus = [
     { role: /\b(ceo|lead|coord|produtor)\b/i, words: ["prioridade", "reuniao", "decisao", "fluxo"], lens: "prioridade e decisão" },
     { role: /\b(dev|code|sistema|autom|terminal)\b/i, words: ["comando", "terminal", "api", "senha", "botao", "fluxo", "funciona"], lens: "fluxo técnico e API" },
     { role: /\b(review|revis|proof|audit|segur|qualidade)\b/i, words: ["erro", "falha", "nao", "quebrado", "validar", "risco"], lens: "risco e validação" },
     { role: /\b(copy|texto|editor|jornal|manchete)\b/i, words: ["fala", "opiniao", "texto", "prompt", "mensagem"], lens: "clareza da fala" },
     { role: /\b(arte|design|pixel|visual|foto)\b/i, words: ["avatar", "cadeira", "visual", "cena", "layout"], lens: "encaixe visual" },
-    { role: /\b(sources|fonte|ninja)\b/i, words: ["fonte", "evidencia", "memoria", "historico", "rastrear"], lens: "evidência e memória" }
+    { role: /\b(sources|fonte|ninja)\b/i, words: ["fonte", "evidencia", "memoria", "historico", "rastrear"], lens: "evidência e memória" },
+    { role: /\b(social|rede|insta|trend|crescimento)\b/i, words: ["rede", "social", "instagram", "alcance", "engajamento"], lens: "distribuição e crescimento" }
   ];
   const ideaTriggers = new Set(["ideia", "ideias", "sugestao", "melhorar", "criar", "fazer", "resolver", "como", "novo", "fluxo", "visual", "comando"]);
 
@@ -8827,9 +11514,10 @@ function getCheffeCallOpinions(payload, instruction) {
       ))
       .map((entry) => cleanShortText(entry.title || entry.action || entry.message || entry.text || entry.status || "", 160))
       .filter(Boolean);
-    return haystack.slice(0, 2);
+    return [...new Set(haystack)].slice(0, 2);
   };
 
+  const seenOpinionKeys = new Set();
   const useful = source
     .map((item) => {
       const signature = `${item.name || ""} ${item.office || ""} ${item.role || ""} ${item.intent || ""}`;
@@ -8840,39 +11528,89 @@ function getCheffeCallOpinions(payload, instruction) {
       const focus = roleFocus.find((entry) => entry.role.test(signature) || entry.words.some((word) => subjectTokens.has(word)));
       const matchingTokens = [...subjectTokens].filter((token) => normalizedSignature.includes(token)).slice(0, 4);
       const memories = memoryMatchesAgent(item);
+      const studyMatch = ecosystemFocus.find((entry) => {
+        const haystack = normalizeText(`${entry.area || ""} ${entry.reason || ""} ${(entry.files || []).join(" ")}`);
+        return [...subjectTokens].some((token) => haystack.includes(token)) ||
+          /ceo|dev|review|audit|proof|fontes|sistema|autom/.test(normalizedSignature);
+      });
       const hasDirectUse = Boolean(focus && focus.words.some((word) => subjectTokens.has(word)));
       const hasMemory = memories.length > 0;
       const hasOwnIdea = Boolean(focus && [...subjectTokens].some((token) => ideaTriggers.has(token)));
       const highUrgency = Number(item.urgency || 0) >= 76;
-      if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency) return null;
-      const evidence = hasMemory
-        ? `memória: ${memories.join(" | ")}`
+      if (!hasDirectUse && !hasMemory && !hasOwnIdea && !matchingTokens.length && !highUrgency && !studyMatch) return null;
+      const lensKey = focus?.lens || item.role || item.office || item.name;
+      const roleAction = cleanShortText(item.action || "", 220);
+      const memoryDetail =
+        memories.find((memory) => !normalizeText(memory).includes(normalizeText(subject).slice(0, 80))) ||
+        roleAction ||
+        cleanShortText(item.intent || "", 180) ||
+        memories[0];
+      const studyEvidence = studyMatch
+        ? `estudo do ecossistema ciclo ${ecosystemStudy.learningCycle || 1}: ${studyMatch.area} (${(studyMatch.files || []).slice(0, 3).join(", ")})`
+        : ecosystemSignals[0]
+          ? `sinal do ecossistema: ${ecosystemSignals[0]}`
+          : "";
+      const evidence = studyEvidence || (hasMemory
+        ? `${item.office || item.role} tem memória própria para ${focus?.lens || "esta ordem"}`
         : hasOwnIdea
-          ? `ideia própria ligada à especialidade (${focus?.lens || "triagem"})`
+          ? `ideia propria da especialidade ${focus?.lens || "triagem"}`
           : matchingTokens.length
           ? `conecta com: ${matchingTokens.join(", ")}`
-          : `urgência operacional ${Number(item.urgency || 0)}%`;
-      const nextAction = focus?.lens === "fluxo técnico e API"
+          : `urgência operacional ${Number(item.urgency || 0)}%`);
+      const nextAction = roleAction || (focus?.lens === "fluxo técnico e API"
         ? "testar o clique contra endpoint real e mostrar sucesso/erro na interface"
         : focus?.lens === "risco e validação"
           ? "bloquear fala sem evidência e registrar o motivo no log"
           : focus?.lens === "encaixe visual"
             ? "ajustar só o ponto visual que afeta a leitura da cena"
             : focus?.lens === "clareza da fala"
-              ? "reescrever a resposta como diagnóstico curto, não discurso"
-              : "transformar a ordem em decisão rastreável com dono";
+            ? "reescrever a resposta como diagnóstico curto, não discurso"
+              : "transformar a ordem em decisão rastreável com dono");
+      const uniquenessKey = normalizeText(`${lensKey} ${nextAction}`).slice(0, 180);
+      if (seenOpinionKeys.has(uniquenessKey)) return null;
+      seenOpinionKeys.add(uniquenessKey);
+      const score = Number(item.autonomy || 0);
+      const confidence = Number(item.confidence || 0);
+      const intelligence = Number(item.intelligence || confidence || score || 0);
+      const execution = Number(item.execution || item.urgency || score || 0);
+      const impact = Number(item.impact || item.competitionScore || Math.round((score + execution) / 2) || score || 0);
+      const competition = Number(item.competitionScore || Math.round(score * 0.3 + intelligence * 0.25 + execution * 0.25 + impact * 0.2) || 0);
+      const competitionLine = `Placar ${competition}%: autonomia ${score}%, inteligencia ${intelligence}%, execucao ${execution}%, impacto ${impact}%.`;
+      const roleLine = focus?.lens === "fluxo técnico e API"
+        ? "Eu compito provando no endpoint, não repetindo opinião."
+        : focus?.lens === "risco e validação"
+          ? "Eu compito bloqueando risco antes de virar retrabalho."
+          : focus?.lens === "encaixe visual"
+            ? "Eu compito melhorando leitura da interface com mudança mínima."
+            : focus?.lens === "clareza da fala"
+              ? "Eu compito cortando texto morto e deixando decisão executável."
+              : focus?.lens === "distribuição e crescimento"
+                ? "Eu compito ligando a entrega a alcance, rotina e métrica."
+                : "Eu compito trazendo evidência útil ou fico em silêncio.";
       return {
         agent: item.name,
         office: item.office,
         role: item.role,
-        score: item.autonomy,
+        score,
+        competitionScore: competition,
+        intelligence,
+        execution,
+        impact,
         urgency: item.urgency,
         evidence,
+        studyProof: studyMatch
+          ? {
+              studyId: ecosystemStudy.studyId || "",
+              learningCycle: ecosystemStudy.learningCycle || 0,
+              area: studyMatch.area || "",
+              files: Array.isArray(studyMatch.files) ? studyMatch.files.slice(0, 5) : []
+            }
+          : null,
         opinion: [
-          `Levanto a mão porque tenho ${evidence}.`,
-          `Meu foco em "${subject}" é ${focus?.lens || "memória operacional"}, não opinião genérica.`,
-          `Próxima ação útil: ${nextAction}.`,
-          hasOwnIdea ? `Minha ideia só entra se você quiser testar essa hipótese na próxima rodada.` : `Se isso não tocar a ordem atual, eu fico em silêncio.`
+          `${focus?.lens || item.deliverable || "triagem"}: ${roleLine}`,
+          `Evidencia: ${evidence}.`,
+          `Executo: ${nextAction}.`,
+          `${competitionLine} Se não mudar tela, dado ou rotina, eu saio da disputa.`
         ].join(" "),
         approvalRequired: true
       };
@@ -8895,12 +11633,563 @@ function getCheffeCallOpinions(payload, instruction) {
       }];
 }
 
+function shouldRefreshCheffeCallOpinions(opinions = []) {
+  if (!Array.isArray(opinions) || !opinions.length) return true;
+  const texts = opinions.map((item) => normalizeText(item.opinion || item.text || "")).filter(Boolean);
+  if (!texts.length) return true;
+  const unique = new Set(texts.map((text) => text.slice(0, 180))).size;
+  const stalePattern = /(utilidade:|implementacao proposta|tenho .*nao vou repetir|autonomia em crescimento|inteligencia 0|execucao 0|impacto 0)/i;
+  return unique <= Math.max(1, Math.floor(texts.length / 2)) || texts.some((text) => stalePattern.test(text));
+}
+
+function extractCheffeDirectUrl(value = "") {
+  const match = String(value || "").match(/https?:\/\/[^\s<>"')]+/i);
+  if (!match) return "";
+  try {
+    const parsed = new URL(match[0].replace(/[.,;]+$/, ""));
+    if (!/^https?:$/.test(parsed.protocol)) return "";
+    return parsed.toString();
+  } catch (_error) {
+    return "";
+  }
+}
+
+function readMetaContent(html = "", name = "") {
+  const escapedName = String(name || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const pattern = new RegExp(`<meta[^>]+(?:name|property)=["']${escapedName}["'][^>]+content=["']([^"']+)["'][^>]*>`, "i");
+  const match = String(html || "").match(pattern);
+  return match ? cleanShortText(decodeHtmlEntities(match[1]), 260) : "";
+}
+
+async function fetchCheffeDirectUrlResearch(instruction = "") {
+  const url = extractCheffeDirectUrl(instruction);
+  if (!url) return null;
+  const fetchedAt = new Date().toISOString();
+  try {
+    const response = await withPromiseTimeout(
+      fetch(url, {
+        headers: {
+          Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.5",
+          "User-Agent": "CheffeCallResearch/1.0 (+https://catalogo-cruzeiro-do-sul.onrender.com)"
+        }
+      }),
+      8000,
+      "tempo esgotado ao pesquisar URL"
+    );
+    const contentType = cleanShortText(response.headers.get("content-type") || "", 120);
+    const rawText = await withPromiseTimeout(response.text(), 8000, "tempo esgotado lendo URL");
+    const html = String(rawText || "").slice(0, 180000);
+    const title = cleanShortText(decodeHtmlEntities(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || ""), 220);
+    const description = readMetaContent(html, "description") || readMetaContent(html, "og:description");
+    const h1 = cleanShortText(stripHtml(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || ""), 220);
+    const excerpt = cleanShortText(stripHtml(html), 900);
+    return {
+      ok: response.ok,
+      url,
+      status: response.status,
+      contentType,
+      title,
+      description,
+      h1,
+      excerpt,
+      fetchedAt
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      url,
+      status: 0,
+      error: cleanShortText(error.message || "Falha ao pesquisar URL.", 220),
+      fetchedAt
+    };
+  }
+}
+
+function buildCheffeDirectResearchContext(research = null) {
+  if (!research?.url) return "";
+  if (!research.ok) {
+    return [
+      `Pesquisa real da URL específica: ${research.url}`,
+      `Status: falhou (${research.error || "sem detalhe"})`,
+      "Regra: agentes devem dizer que a URL não foi comprovada e pedir nova tentativa ou outra fonte."
+    ].join("\n");
+  }
+  return [
+    `Pesquisa real da URL específica: ${research.url}`,
+    `Status HTTP: ${research.status}`,
+    research.title ? `Título: ${research.title}` : "",
+    research.description ? `Descrição: ${research.description}` : "",
+    research.h1 ? `H1: ${research.h1}` : "",
+    research.excerpt ? `Trecho lido: ${research.excerpt}` : "",
+    "Regra: agentes devem usar esta evidência da URL e separar fato lido de sugestão."
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+function enrichCheffeOpinionsWithDirectResearch(opinions = [], research = null) {
+  if (!research?.url || !Array.isArray(opinions)) return opinions;
+  const evidence = research.ok
+    ? `URL pesquisada (${research.status}): ${research.title || research.h1 || research.description || research.url}`
+    : `URL não comprovada: ${research.error || research.url}`;
+  return opinions.map((item) => ({
+    ...item,
+    directUrlResearch: research,
+    evidence: cleanShortText(`${item.evidence || ""} ${evidence}`, 320),
+    opinion: cleanShortText(`${item.opinion || ""} Pesquisa URL: ${evidence}.`, 900)
+  }));
+}
+
+function readEditorialTraining() {
+  const training = readJson(REAL_AGENTS_EDITORIAL_TRAINING_FILE, null);
+  if (!training || typeof training !== "object") {
+    return {
+      active: false,
+      trainingId: "",
+      title: "Treinamento editorial ainda nao carregado",
+      principles: [],
+      gates: {},
+      roleOpinions: [],
+      officeOpinions: [],
+      implementationBacklog: [],
+      defaultChecklist: []
+    };
+  }
+  return {
+    active: training.status !== "inactive",
+    trainingId: cleanShortText(training.trainingId || "", 120),
+    title: cleanShortText(training.title || "Treinamento editorial dos agentes", 180),
+    generatedAt: cleanShortText(training.generatedAt || "", 80),
+    scope: cleanShortText(training.scope || "", 180),
+    synthesis: cleanShortText(training.sourceReview?.synthesis || "", 700),
+    runtimeDirective: cleanShortText(training.runtimeDirective || "", 360),
+    principles: Array.isArray(training.principles) ? training.principles.slice(0, 12) : [],
+    workflow: Array.isArray(training.workflow) ? training.workflow.slice(0, 12) : [],
+    gates: training.gates && typeof training.gates === "object" ? training.gates : {},
+    roleOpinions: Array.isArray(training.roleOpinions) ? training.roleOpinions.slice(0, 16) : [],
+    officeOpinions: Array.isArray(training.officeOpinions) ? training.officeOpinions.slice(0, 8) : [],
+    implementationBacklog: Array.isArray(training.implementationBacklog) ? training.implementationBacklog.slice(0, 12) : [],
+    allowedAutomation: Array.isArray(training.allowedAutomation) ? training.allowedAutomation.slice(0, 12) : [],
+    blockedAutomation: Array.isArray(training.blockedAutomation) ? training.blockedAutomation.slice(0, 12) : [],
+    defaultChecklist: Array.isArray(training.defaultChecklist) ? training.defaultChecklist.slice(0, 8) : [],
+    proof: {
+      file: path.relative(ROOT_DIR, REAL_AGENTS_EDITORIAL_TRAINING_FILE).replace(/\\/g, "/"),
+      markdownFile: "data/real-agents-editorial-training.md",
+      agentsTrained: Number(training.proof?.agentsTrained || training.agentBriefings?.length || 0)
+    }
+  };
+}
+
+function buildEditorialCorrectionsLog() {
+  const payload = readJson(EDITORIAL_CORRECTIONS_LOG_FILE, { version: 1, corrections: [] });
+  const corrections = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.corrections)
+      ? payload.corrections
+      : [];
+  const safeCorrections = corrections
+    .map((item) => ({
+      id: cleanShortText(item.id || createRecordId("cor"), 120),
+      status: cleanShortText(item.status || "logged", 40),
+      severity: cleanShortText(item.severity || "media", 40),
+      title: cleanShortText(item.title || "Correcao editorial", 180),
+      file: cleanShortText(item.file || "", 220),
+      before: cleanShortText(item.before || "", 260),
+      after: cleanShortText(item.after || "", 260),
+      publicNote: cleanShortText(item.publicNote || item.note || "", 360),
+      correctedAt: cleanShortText(item.correctedAt || item.updatedAt || item.createdAt || "", 80)
+    }))
+    .slice(-24)
+    .reverse();
+  return {
+    file: path.relative(ROOT_DIR, EDITORIAL_CORRECTIONS_LOG_FILE).replace(/\\/g, "/"),
+    total: safeCorrections.length,
+    open: safeCorrections.filter((item) => !["corrigido", "closed", "resolvido"].includes(String(item.status).toLowerCase())).length,
+    latest: safeCorrections.slice(0, 8)
+  };
+}
+
+function buildPublicEditorialCorrectionsLog(limit = 24) {
+  const payload = buildEditorialCorrectionsLog();
+  const latest = Array.isArray(payload.latest)
+    ? payload.latest.filter((item) => ["corrigido", "closed", "resolvido", "logged"].includes(String(item.status || "").toLowerCase()))
+    : [];
+  return {
+    ok: true,
+    kind: "public-editorial-corrections",
+    file: payload.file,
+    total: payload.total,
+    returned: Math.max(0, Math.min(Number(limit) || 24, latest.length)),
+    corrections: latest.slice(0, Math.max(1, Math.min(Number(limit) || 24, 80))).map((item) => ({
+      id: item.id,
+      title: item.title,
+      severity: item.severity,
+      publicNote: item.publicNote || "Correção registrada pela redação.",
+      correctedAt: item.correctedAt
+    }))
+  };
+}
+
+function recordEditorialCorrection(body = {}) {
+  const now = new Date().toISOString();
+  const title = cleanShortText(body.title || body.articleTitle || "Correcao editorial", 180);
+  const correction = {
+    id: cleanShortText(body.id || createRecordId("cor"), 120),
+    status: cleanShortText(body.status || "corrigido", 40),
+    severity: cleanShortText(body.severity || "media", 40),
+    title,
+    slug: cleanShortText(body.slug || body.articleSlug || "", 160),
+    file: cleanShortText(body.file || "", 220),
+    before: cleanShortText(body.before || "", 260),
+    after: cleanShortText(body.after || "", 260),
+    publicNote: cleanShortText(body.publicNote || body.note || `Correção registrada: ${title}`, 360),
+    correctedBy: cleanShortText(body.correctedBy || body.reviewer || "Cheffe Call", 120),
+    correctedAt: now,
+    createdAt: now,
+    updatedAt: now
+  };
+  const store = readJson(EDITORIAL_CORRECTIONS_LOG_FILE, { version: 1, corrections: [] });
+  const current = Array.isArray(store?.corrections) ? store.corrections : Array.isArray(store) ? store : [];
+  writeJson(EDITORIAL_CORRECTIONS_LOG_FILE, {
+    version: 1,
+    updatedAt: now,
+    corrections: [correction, ...current].slice(0, 500)
+  });
+  return { ok: true, correction, corrections: buildPublicEditorialCorrectionsLog() };
+}
+
+function sliceEditorialHealthList(collection, limit = 24) {
+  const items = Array.isArray(collection) ? collection : [];
+  if (limit === "all" || limit === Infinity || limit === null) return items.slice();
+  const safeLimit = Math.max(0, Number(limit) || 0);
+  return safeLimit ? items.slice(0, safeLimit) : [];
+}
+
+function buildEditorialHealthReport(options = {}) {
+  const humanApprovalQueueLimit = Object.prototype.hasOwnProperty.call(options, "humanApprovalQueueLimit")
+    ? options.humanApprovalQueueLimit
+    : 24;
+  const actionQueueLimit = Object.prototype.hasOwnProperty.call(options, "actionQueueLimit")
+    ? options.actionQueueLimit
+    : 32;
+  const articleDossiersLimit = Object.prototype.hasOwnProperty.call(options, "articleDossiersLimit")
+    ? options.articleDossiersLimit
+    : 32;
+  const titleAlternativesLimit = Object.prototype.hasOwnProperty.call(options, "titleAlternativesLimit")
+    ? options.titleAlternativesLimit
+    : 24;
+  const specialFormatsLimit = Object.prototype.hasOwnProperty.call(options, "specialFormatsLimit")
+    ? options.specialFormatsLimit
+    : 24;
+  const report = readJson(EDITORIAL_HEALTH_REPORT_JSON_FILE, null);
+  const file = path.relative(ROOT_DIR, EDITORIAL_HEALTH_REPORT_JSON_FILE).replace(/\\/g, "/");
+  const markdownFile = path.relative(ROOT_DIR, EDITORIAL_HEALTH_REPORT_MD_FILE).replace(/\\/g, "/");
+  if (!report || typeof report !== "object") {
+    return {
+      kind: "editorial-health-report",
+      status: "not-run",
+      source: "npm run editorial:health",
+      file,
+      markdownFile,
+      generatedAt: "",
+      summary: {
+        humanApprovalRequired: 0,
+        sourceIssues: 0,
+        visualIssues: 0,
+        titleAlternativeCount: 0,
+        specialCandidates: 0,
+        actionQueueTotal: 0,
+        publicationLocks: 0,
+        highlightLocks: 0,
+        approvedLocks: 0
+      },
+      gates: { P0: 0, P1: 0, P2: 0 },
+      humanApprovalQueue: [],
+      actionQueue: [],
+      queueGroups: {},
+      articleDossiers: [],
+      approvalLocks: buildEditorialApprovalLocksPayload(),
+      titleAlternatives: [],
+      specialFormats: []
+    };
+  }
+  return {
+    kind: "editorial-health-report",
+    status: cleanShortText(report.status || "ok", 40),
+    source: "npm run editorial:health",
+    file,
+    markdownFile,
+    generatedAt: cleanShortText(report.generatedAt || "", 80),
+    scope: report.scope && typeof report.scope === "object" ? report.scope : {},
+    summary: report.summary && typeof report.summary === "object" ? report.summary : {},
+    gates: report.gates && typeof report.gates === "object" ? report.gates : { P0: 0, P1: 0, P2: 0 },
+    sourceCoverage: report.sourceCoverage && typeof report.sourceCoverage === "object" ? report.sourceCoverage : {},
+    visualIntegrity: report.visualIntegrity && typeof report.visualIntegrity === "object" ? report.visualIntegrity : {},
+    humanApprovalQueue: sliceEditorialHealthList(report.humanApprovalQueue, humanApprovalQueueLimit),
+    actionQueue: sliceEditorialHealthList(report.actionQueue, actionQueueLimit),
+    queueGroups: report.queueGroups && typeof report.queueGroups === "object" ? report.queueGroups : {},
+    articleDossiers: sliceEditorialHealthList(report.articleDossiers, articleDossiersLimit),
+    approvalLocks: report.approvalLocks && typeof report.approvalLocks === "object" ? report.approvalLocks : buildEditorialApprovalLocksPayload(),
+    titleAlternatives: sliceEditorialHealthList(report.titleAlternatives, titleAlternativesLimit),
+    specialFormats: sliceEditorialHealthList(report.specialFormats, specialFormatsLimit)
+  };
+}
+
+function buildEditorialDossiersPayload(limit = 80, options = {}) {
+  const safeLimit = Math.max(1, Math.min(Number(limit) || 80, 300));
+  const items = getRawNewsItems().map(normalizeArticleRecord);
+  const map = new Map();
+  items.forEach((item) => {
+    const key = getArticleStorageKey(item);
+    if (key) upsertCrossedArticleRecord(map, key, item);
+  });
+  const decisions = readEditorialApprovalLocks();
+  const dossiers = Array.from(map.values())
+    .sort(sortArticleItems)
+    .map((item) => buildArticleEditorialDossier(item, decisions));
+  const visible = options.includeLocked ? dossiers : dossiers.filter((item) => !item.publicationLock.publicationLocked);
+  return {
+    ok: true,
+    kind: "editorial-article-dossiers",
+    total: dossiers.length,
+    returned: visible.slice(0, safeLimit).length,
+    lockedTotal: dossiers.filter((item) => item.publicationLock.publicationLocked).length,
+    highlightLockedTotal: dossiers.filter((item) => item.publicationLock.highlightLocked).length,
+    items: visible.slice(0, safeLimit)
+  };
+}
+
+function buildEditorialMeetingSheet({ state, reviewQueue, ideActions, training }) {
+  const sheetsPayload = readJson(EDITORIAL_MEETING_SHEETS_FILE, { version: 1, sheets: [] });
+  const sheets = Array.isArray(sheetsPayload)
+    ? sheetsPayload
+    : Array.isArray(sheetsPayload?.sheets)
+      ? sheetsPayload.sheets
+      : [];
+  const latestSheet = sheets.slice(-1)[0] || null;
+  const gates = training?.gates && typeof training.gates === "object" ? training.gates : {};
+  const fallbackGate = Number(reviewQueue?.total || 0) > 0 || ideActions.some((item) => String(item.status || "").includes("waiting"))
+    ? "P1"
+    : "P2";
+  return {
+    file: path.relative(ROOT_DIR, EDITORIAL_MEETING_SHEETS_FILE).replace(/\\/g, "/"),
+    latest: latestSheet
+      ? {
+          id: cleanShortText(latestSheet.id || "", 120),
+          title: cleanShortText(latestSheet.title || "", 180),
+          gate: cleanShortText(latestSheet.gate || fallbackGate, 20),
+          owner: cleanShortText(latestSheet.owner || "Cheffe Call", 80),
+          sourceStatus: cleanShortText(latestSheet.sourceStatus || "", 120),
+          nextReviewAt: cleanShortText(latestSheet.nextReviewAt || "", 80),
+          updatedAt: cleanShortText(latestSheet.updatedAt || latestSheet.createdAt || "", 80)
+        }
+      : {
+          id: "meeting-auto-cheffe-call",
+          title: cleanShortText(state.lastInstruction || "Reuniao editorial da Cheffe Call", 180),
+          gate: fallbackGate,
+          owner: "Cheffe Call",
+          sourceStatus: Number(reviewQueue?.total || 0) > 0 ? "revisao pendente" : "fontes e revisao sem bloqueio ativo",
+          nextReviewAt: "",
+          updatedAt: new Date().toISOString()
+        },
+    gates,
+    checklist: Array.isArray(training?.defaultChecklist) ? training.defaultChecklist.slice(0, 8) : []
+  };
+}
+
+function buildWebsiteNumbersForCheffe() {
+  const runtimeNews = getJsonArray(path.join(DATA_DIR, "runtime-news.json"));
+  const archiveNews = getJsonArray(path.join(DATA_DIR, "news-archive.json"));
+  const visits = getJsonArray(VISITS_FILE);
+  const heartbeats = getJsonArray(HEARTBEATS_FILE);
+  const topicFeedFiles = fs.existsSync(DATA_DIR)
+    ? fs.readdirSync(DATA_DIR).filter((name) => /^topic-feed-.+\.json$/i.test(name))
+    : [];
+  const topicFeeds = topicFeedFiles.map((name) => {
+    const payload = readJson(path.join(DATA_DIR, name), null);
+    const items = Array.isArray(payload?.items) ? payload.items : Array.isArray(payload) ? payload : [];
+    return {
+      topic: cleanShortText(payload?.topic || name.replace(/^topic-feed-|\.json$/gi, ""), 60),
+      file: `data/${name}`,
+      items: items.length,
+      updatedAt: cleanShortText(payload?.updatedAt || payload?.generatedAt || "", 80)
+    };
+  });
+  const allNews = [...runtimeNews, ...archiveNews];
+  const categories = new Map();
+  allNews.forEach((item) => {
+    const key = cleanShortText(item.category || item.categoryKey || item.topic || "Geral", 80);
+    categories.set(key, (categories.get(key) || 0) + 1);
+  });
+  return {
+    runtimeNews: runtimeNews.length,
+    archiveNews: archiveNews.length,
+    totalNews: allNews.length,
+    visits: visits.length,
+    heartbeats: heartbeats.length,
+    topicFeeds: topicFeeds.length,
+    topicFeedItems: topicFeeds.reduce((sum, item) => sum + item.items, 0),
+    topCategories: [...categories.entries()]
+      .map(([category, total]) => ({ category, total }))
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 8),
+    topicFeedSummary: topicFeeds.sort((a, b) => b.items - a.items).slice(0, 12)
+  };
+}
+
+function buildCheffeMeetingScenes({ state, displayOpinions, reviewQueue, ideActions, agentsPayload, editorialFlow }) {
+  const currentSession = state.sessions[0] || null;
+  const approvals = Array.isArray(currentSession?.approvals) ? currentSession.approvals : [];
+  const orders = Array.isArray(agentsPayload.orders) ? agentsPayload.orders : [];
+  const waitingIde = ideActions.filter((item) => String(item.status || "").includes("waiting")).length;
+  const humanEditorial = Number(editorialFlow?.health?.summary?.humanApprovalRequired || 0);
+  const pendingTotal =
+    waitingIde + Number(reviewQueue?.total || 0) + Number(editorialFlow?.corrections?.open || 0) + humanEditorial;
+  const awards = agentsPayload.awards || {};
+  const agentOfDay = agentsPayload.dailyContext?.agentOfDay || null;
+  const officeOfDay = agentsPayload.dailyContext?.officeOfDay || null;
+  return [
+    {
+      id: "pendencias",
+      number: 1,
+      title: "Pendencias para aprovar",
+      summary: pendingTotal
+        ? `${pendingTotal} pendencia(s) antes da reuniao: texto, imagem, fonte, sugestoes ou correcoes.`
+        : "Sem bloqueio critico antes da reuniao.",
+      status: pendingTotal ? "attention" : "done",
+      primaryTarget: "cheffeApprovalScene",
+      metrics: {
+        review: Number(reviewQueue?.total || 0),
+        ide: waitingIde,
+        corrections: Number(editorialFlow?.corrections?.open || 0),
+        humanApproval: humanEditorial
+      }
+    },
+    {
+      id: "abertura",
+      number: 2,
+      title: "Abertura da reuniao",
+      summary: state.active
+        ? cleanShortText(state.lastInstruction || "Sala aberta e agentes pausados para ouvir.", 220)
+        : "Abra a sala para pausar a rotina e iniciar a ata.",
+      status: state.active ? "running" : "ready",
+      primaryTarget: "cheffeCallForm",
+      metrics: { active: state.active, sessions: state.sessions.length }
+    },
+    {
+      id: "opinioes",
+      number: 3,
+      title: "Opinioes dos agentes",
+      summary: `${displayOpinions.length} opiniao(oes) disponiveis para ouvir, aceitar, ajustar ou pular.`,
+      status: displayOpinions.length ? "ready" : "waiting",
+      primaryTarget: "opinionsList",
+      metrics: { opinions: displayOpinions.length, approved: approvals.length }
+    },
+    {
+      id: "decisao",
+      number: 4,
+      title: "Aceitar, implementar ou pular",
+      summary: "Mesa de decisao transforma fala em ordem real com prova, pendencia ou bloqueio claro.",
+      status: approvals.length ? "ready" : "waiting",
+      primaryTarget: "decisionDeskTitle",
+      metrics: { approvals: approvals.length, executableActions: agentsPayload.executableActions?.length || 0 }
+    },
+    {
+      id: "relatorios",
+      number: 5,
+      title: "Relatorios",
+      summary: "Revisao, runtime, logs e evidencias ficam concentrados antes de novas ordens.",
+      status: "ready",
+      primaryTarget: "callAgentReportTitle",
+      metrics: { reviewIssues: Number(reviewQueue?.total || 0), logs: currentSession?.logs?.length || 0 }
+    },
+    {
+      id: "ordens",
+      number: 6,
+      title: "Ordens do chefe",
+      summary: `${orders.length} ordem(ns) recentes no contexto dos agentes.`,
+      status: orders.length ? "ready" : "waiting",
+      primaryTarget: "taskQueueList",
+      metrics: { orders: orders.length }
+    },
+    {
+      id: "website",
+      number: 7,
+      title: "Numeros do website",
+      summary: `${editorialFlow.websiteNumbers.totalNews} noticias em dados vivos; saude editorial com P0=${editorialFlow.health?.gates?.P0 || 0}, P1=${editorialFlow.health?.gates?.P1 || 0}.`,
+      status: "ready",
+      primaryTarget: "cheffeWebsiteNumbers",
+      metrics: {
+        ...editorialFlow.websiteNumbers,
+        p0: editorialFlow.health?.gates?.P0 || 0,
+        p1: editorialFlow.health?.gates?.P1 || 0,
+        approvals: humanEditorial
+      }
+    },
+    {
+      id: "agentes",
+      number: 8,
+      title: "Numeros dos agentes",
+      summary: `${agentsPayload.summary?.totalAgents || 181} agentes; autonomia media ${agentsPayload.summary?.averageAutonomy || 0}.`,
+      status: "ready",
+      primaryTarget: "cheffeAgentNumbers",
+      metrics: {
+        totalAgents: agentsPayload.summary?.totalAgents || 181,
+        averageAutonomy: agentsPayload.summary?.averageAutonomy || 0,
+        offices: agentsPayload.summary?.totalOffices || agentsPayload.officeDashboard?.length || 0
+      }
+    },
+    {
+      id: "premiacao",
+      number: 9,
+      title: "Premiacao dos agentes",
+      summary: agentOfDay
+        ? `${agentOfDay.name} lidera; escritorio em destaque: ${officeOfDay?.office || "em apuracao"}.`
+        : "Aguardando runtime para premiar os melhores agentes.",
+      status: agentOfDay ? "ready" : "waiting",
+      primaryTarget: "achievementHeadline",
+      metrics: { agentOfDay: agentOfDay?.name || "", awards: Array.isArray(awards?.items) ? awards.items.length : 0 }
+    }
+  ];
+}
+
 function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
+  const reviewQueue = buildCheffeReviewQueue();
+  const ideReconciliation = reconcileCheffeIdeActionQueue(reviewQueue);
+  const ideActions = readCheffeIdeActionQueue();
+  const sessionOpinions = Array.isArray(state.sessions[0]?.opinions) ? state.sessions[0].opinions : [];
+  const displayOpinions = shouldRefreshCheffeCallOpinions(sessionOpinions)
+    ? getCheffeCallOpinions(agentsPayload, state.lastInstruction)
+    : sessionOpinions;
+  const editorialTraining = readEditorialTraining();
+  const editorialFlow = {
+    training: editorialTraining,
+    corrections: buildEditorialCorrectionsLog(),
+    publicCorrections: buildPublicEditorialCorrectionsLog(12),
+    approvalLocks: buildEditorialApprovalLocksPayload(),
+    websiteNumbers: buildWebsiteNumbersForCheffe(),
+    health: buildEditorialHealthReport()
+  };
+  editorialFlow.briefingSheet = buildEditorialMeetingSheet({
+    state,
+    reviewQueue,
+    ideActions,
+    training: editorialTraining
+  });
+  editorialFlow.scenes = buildCheffeMeetingScenes({
+    state,
+    displayOpinions,
+    reviewQueue,
+    ideActions,
+    agentsPayload,
+    editorialFlow
+  });
   const currentSession = state.sessions[0]
     ? {
         ...state.sessions[0],
+        opinions: displayOpinions,
         approvals: Array.isArray(state.sessions[0].approvals) ? state.sessions[0].approvals.slice(0, 32) : [],
         logs: Array.isArray(state.sessions[0].logs) ? state.sessions[0].logs.slice(0, 64) : [],
         decisions: Array.isArray(state.sessions[0].decisions) ? state.sessions[0].decisions.slice(0, 32) : [],
@@ -8915,11 +12204,24 @@ function buildCheffeCallPayload() {
       active: state.active,
       pausedAt: state.pausedAt,
       releasedAt: state.releasedAt,
+      expiredAt: state.expiredAt,
+      expirationReason: state.expirationReason,
+      lastActivityAt: state.lastActivityAt,
+      expiresAfterMinutes: state.expiresAfterMinutes,
       lastInstruction: state.lastInstruction,
       lastSessionAt: state.lastSessionAt,
       currentSession,
       sessions: state.sessions
     },
+    ideActions,
+    ideActionQueue: {
+      file: path.relative(ROOT_DIR, CHEFFE_CALL_IDE_ACTIONS_FILE).replace(/\\/g, "/"),
+      total: ideActions.length,
+      waiting: ideActions.filter((item) => String(item.status || "").includes("waiting")).length,
+      reconciliation: ideReconciliation,
+      actions: ideActions.slice(0, 32)
+    },
+    reviewQueue,
     dailyContext: agentsPayload.dailyContext || null,
     autonomy: agentsPayload.autonomy || null,
     summary: {
@@ -8939,11 +12241,14 @@ function buildCheffeCallPayload() {
     autonomyRunner: agentsPayload.autonomyRunner || null,
     awards: agentsPayload.awards || null,
     scoreboard: agentsPayload.scoreboard || null,
-    opinions: state.sessions[0]?.opinions || getCheffeCallOpinions(agentsPayload, state.lastInstruction)
+    ecosystemStudy: agentsPayload.ecosystemStudy || null,
+    editorialFlow,
+    meetingScenes: editorialFlow.scenes,
+    opinions: displayOpinions
   };
 }
 
-function startCheffeCallSession(body) {
+async function startCheffeCallSession(body) {
   const legacyInstruction = body["brief" + "ing"] || "";
   const instruction = cleanShortText(
     body.instruction ||
@@ -8951,25 +12256,85 @@ function startCheffeCallSession(body) {
       "Cheffe Call aberto: pausar rotinas, memorizar contexto, ouvir a orientacao e devolver opinioes por perspectiva antes de qualquer execucao.",
     1600
   );
-  const agentsPayload = buildRealAgentsPayload();
+  const directUrlResearch = await fetchCheffeDirectUrlResearch(instruction);
+  const researchContext = buildCheffeDirectResearchContext(directUrlResearch);
+  const agentInstruction = researchContext ? cleanShortText(`${researchContext}\n\n${instruction}`, 2400) : instruction;
+  const ecosystemStudy = recordRealAgentsEcosystemStudy({
+    trigger: "cheffe-call-start",
+    instruction: agentInstruction,
+    directUrl: directUrlResearch?.url || ""
+  });
+  const agentsPayload = {
+    ...buildRealAgentsPayload(),
+    ecosystemStudy
+  };
   const now = new Date().toISOString();
   const state = readCheffeCallState();
-  const session = {
-    id: createRecordId("chef"),
+  const opinions = enrichCheffeOpinionsWithDirectResearch(
+    getCheffeCallOpinions(agentsPayload, agentInstruction),
+    directUrlResearch
+  );
+  const sessionId = createRecordId("chef");
+  const openingOrderId = createRecordId("ord");
+  const sessionProof = {
+    kind: "cheffe-call-session-proof",
+    endpoint: "POST /api/cheffe-call/start",
+    httpStatus: 201,
+    sessionId,
+    officeOrderId: openingOrderId,
     createdAt: now,
-    instruction,
-    dailyContext: agentsPayload.dailyContext || null,
-    opinions: getCheffeCallOpinions(agentsPayload, instruction),
-    approvals: [],
-    logs: [
+    directUrl: directUrlResearch?.url || "",
+    directUrlStatus: directUrlResearch?.url ? (directUrlResearch.ok ? "pesquisada" : "pendente") : "",
+    directUrlHttpStatus: directUrlResearch?.status || 0,
+    directUrlTitle: directUrlResearch?.title || directUrlResearch?.h1 || directUrlResearch?.description || "",
+    ecosystemStudyId: ecosystemStudy.studyId,
+    ecosystemStudyFile: ecosystemStudy.proof.file,
+    ecosystemLearningCycle: ecosystemStudy.learningCycle,
+    ecosystemFocus: ecosystemStudy.focusModules.map((item) => item.area).slice(0, 5)
+  };
+  const logs = [
+    normalizeCheffeCallLog({
+      createdAt: now,
+      kindLabel: "reunião aberta",
+      agent: "Cheffe Call",
+      office: "Sistema",
+      text: instruction
+    })
+  ];
+  if (directUrlResearch?.url) {
+    logs.push(
       normalizeCheffeCallLog({
         createdAt: now,
-        kindLabel: "reunião aberta",
+        kindLabel: directUrlResearch.ok ? "url pesquisada" : "url pendente",
         agent: "Cheffe Call",
-        office: "Sistema",
-        text: instruction
+        office: "Fontes",
+        text: directUrlResearch.ok
+          ? `${directUrlResearch.url} -> ${directUrlResearch.title || directUrlResearch.description || `HTTP ${directUrlResearch.status}`}`
+          : `${directUrlResearch.url} -> ${directUrlResearch.error || "falha na pesquisa"}`
       })
-    ],
+    );
+  }
+  logs.push(
+    normalizeCheffeCallLog({
+      createdAt: now,
+      kindLabel: "ecossistema estudado",
+      agent: "Cheffe Call",
+      office: "Sistema",
+      text: `Ciclo ${ecosystemStudy.learningCycle}: ${(ecosystemStudy.focusModules || []).map((item) => item.area).join(", ")}`
+    })
+  );
+  const session = {
+    id: sessionId,
+    createdAt: now,
+    instruction,
+    agentInstruction,
+    directUrlResearch,
+    ecosystemStudy,
+    proof: sessionProof,
+    dailyContext: agentsPayload.dailyContext || null,
+    opinions,
+    approvals: [],
+    logs,
     decisions: [],
     status: "aguardando-aprovacao"
   };
@@ -8979,19 +12344,24 @@ function startCheffeCallSession(body) {
     active: true,
     pausedAt: now,
     releasedAt: "",
+    expiredAt: "",
+    expirationReason: "",
+    lastActivityAt: now,
     lastInstruction: instruction,
     lastSessionAt: now,
     sessions: [session, ...state.sessions].slice(0, 12)
   });
 
   appendOfficeOrder({
-    id: createRecordId("ord"),
+    id: openingOrderId,
     from: "Full Admin",
     to: "Cheffe Call + todos os agentes reais",
     priority: cleanShortText(body.priority || "maxima", 40),
     message: instruction,
     ceoReply:
-      "Cheffe Call aberto. Rotinas automaticas pausadas, agentes em escuta, memoria de reuniao criada e opinioes aguardando aprovacao.",
+      directUrlResearch?.url
+        ? `Cheffe Call aberto com pesquisa de URL ${directUrlResearch.ok ? "registrada" : "pendente"}. Opinioes aguardam aprovacao.`
+        : "Cheffe Call aberto. Rotinas automaticas pausadas, agentes em escuta, memoria de reuniao criada e opinioes aguardando aprovacao.",
     status: "cheffe-call-ativo",
     hierarchy: "Full Admin -> Cheffe Call -> 181 agentes reais",
     createdAt: now
@@ -9037,6 +12407,69 @@ function clearCheffeCallSession(body) {
   });
 
   return buildCheffeCallPayload();
+}
+
+function buildRealAgentsExecutionProof(result = {}, options = {}) {
+  const payload = result.payload || {};
+  const runtime = result.summary || {};
+  const summary = payload.summary || {};
+  const imageApprovals = payload.imageApprovals || {};
+  const ecosystemStudy = options.ecosystemStudy || payload.ecosystemStudy || {};
+  const beforeOrders = Number(options.beforeOrders || 0);
+  const afterOrders = Number(options.afterOrders || beforeOrders);
+  const orderDelta = Math.max(0, afterOrders - beforeOrders);
+  const files = [
+    buildProofFile(REAL_AGENTS_RUN_FILE, "relatorio JSON da runtime"),
+    buildProofFile(REAL_AGENTS_RUN_MD_FILE, "relatorio Markdown da runtime"),
+    buildProofFile(REAL_AGENTS_REGISTRY_FILE, "registro dos agentes"),
+    buildProofFile(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, "estudo persistente do ecossistema"),
+    buildProofFile(REAL_AGENTS_ACTIONS_FILE, "acoes executaveis dos agentes"),
+    buildProofFile(OFFICE_ORDERS_FILE, "fila office-orders")
+  ];
+
+  return {
+    kind: "real-agents-runtime-proof",
+    endpoint: cleanShortText(options.endpoint || "POST /api/real-agents/run", 120),
+    httpStatus: Number(options.httpStatus || 201),
+    trigger: cleanShortText(options.trigger || "manual-painel", 80),
+    generatedAt: cleanShortText(payload.runGeneratedAt || payload.generatedAt || new Date().toISOString(), 80),
+    message: cleanShortText(options.message || "", 500),
+    reportJson: cleanShortText(runtime.reportJson || path.relative(ROOT_DIR, REAL_AGENTS_RUN_FILE).replace(/\\/g, "/"), 180),
+    reportMd: cleanShortText(runtime.reportMd || path.relative(ROOT_DIR, REAL_AGENTS_RUN_MD_FILE).replace(/\\/g, "/"), 180),
+    registry: cleanShortText(runtime.registry || path.relative(ROOT_DIR, REAL_AGENTS_REGISTRY_FILE).replace(/\\/g, "/"), 180),
+    ecosystemStudyFile: cleanShortText(path.relative(ROOT_DIR, REAL_AGENTS_ECOSYSTEM_STUDY_FILE).replace(/\\/g, "/"), 180),
+    ecosystemStudy: ecosystemStudy && typeof ecosystemStudy === "object"
+      ? {
+          studyId: cleanShortText(ecosystemStudy.studyId || "", 120),
+          learningCycle: Number(ecosystemStudy.learningCycle || 0),
+          generatedAt: cleanShortText(ecosystemStudy.generatedAt || "", 80),
+          focusModules: Array.isArray(ecosystemStudy.focusModules)
+            ? ecosystemStudy.focusModules.map((item) => cleanShortText(item.area || "", 120)).filter(Boolean).slice(0, 6)
+            : [],
+          currentSignals: Array.isArray(ecosystemStudy.impactGate?.currentSignals)
+            ? ecosystemStudy.impactGate.currentSignals.map((item) => cleanShortText(item, 160)).slice(0, 6)
+            : [],
+          keyFilesChecked: Number(ecosystemStudy.proof?.keyFilesChecked || 0),
+          directoriesChecked: Number(ecosystemStudy.proof?.directoriesChecked || 0)
+        }
+      : null,
+    files,
+    totalAgents: Number(summary.totalAgents || runtime.totalAgents || 0),
+    deliveredAgents: Number(summary.deliveredAgents || 0),
+    failedAgents: Number(summary.failedAgents || 0),
+    queueItems: Array.isArray(payload.queue) ? payload.queue.length : 0,
+    ordersBefore: beforeOrders,
+    ordersAfter: afterOrders,
+    orderDelta,
+    ordersReturned: Array.isArray(payload.orders) ? payload.orders.length : 0,
+    officeOrderId: cleanShortText(options.officeOrder?.id || "", 120),
+    application: {
+      imageApprovalsApplied: Number(summary.imageApprovalsApplied || imageApprovals.applied || 0),
+      imageApprovalsSentToAgents: Number(summary.imageApprovalsSentToAgents || imageApprovals.sentToAgents || 0),
+      publishedArticles: Number(summary.publishedArticles || 0),
+      generatedArticles: Number(summary.generatedArticles || 0)
+    }
+  };
 }
 
 function runRealAgentsRuntime(options = {}) {
@@ -11112,7 +14545,7 @@ async function handleApi(req, res, pathname, searchParams) {
     }
     const payload = buildRealAgentsPayload();
     if (!payload.ok) {
-      return sendJson(res, 404, {
+      return sendJson(res, 200, {
         ok: false,
         error: "Agentes reais ainda nao foram gerados. Rode npm run agents:run ou use POST /api/real-agents/run."
       });
@@ -11136,13 +14569,18 @@ async function handleApi(req, res, pathname, searchParams) {
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
+    const ecosystemStudy = recordRealAgentsEcosystemStudy({
+      trigger: "real-agents-run",
+      instruction: body.message || "Rodada operacional dos agentes reais"
+    });
+    const beforeOrders = countOfficeOrders();
     const result = runRealAgentsRuntime({ trigger: "manual-painel" });
     if (!result.ok) {
       return sendJson(res, 500, result);
     }
     runRealAgentsAutonomyCycle("manual-painel");
 
-    appendOfficeOrder({
+    const officeOrder = {
       id: createRecordId("ord"),
       from: "Full Admin",
       to: "Codex CEO + agentes reais",
@@ -11152,9 +14590,69 @@ async function handleApi(req, res, pathname, searchParams) {
       status: "rodada-real-agents-gerada",
       hierarchy: "Full Admin -> Codex CEO -> 181 agentes reais",
       createdAt: new Date().toISOString()
-    });
+    };
+    const nextOrders = appendOfficeOrder(officeOrder);
 
-    return sendJson(res, 201, { ok: true, ...result.payload });
+    const payload = result.payload;
+    const executionProof = buildRealAgentsExecutionProof(result, {
+      beforeOrders,
+      afterOrders: nextOrders.length,
+      officeOrder,
+      message: body.message,
+      endpoint: "POST /api/real-agents/run",
+      httpStatus: 201,
+      trigger: "manual-painel",
+      ecosystemStudy
+    });
+    return sendJson(res, 201, {
+      ok: true,
+      runtime: result.summary,
+      proof: executionProof,
+      executionProof,
+      feedback: {
+        title: "Agentes reais finalizaram",
+        message: "Runtime executada com prova: relatório, arquivos e ordem registrada foram retornados no payload.",
+        imageApprovalsApplied:
+          payload?.summary?.imageApprovalsApplied ?? result.summary?.imageApprovals?.applied ?? 0,
+        imageApprovalsSentToAgents:
+          payload?.summary?.imageApprovalsSentToAgents ?? result.summary?.imageApprovals?.sentToAgents ?? 0
+      },
+      ...payload
+    });
+  }
+
+  if (req.method === "GET" && pathname === "/api/cheffe-call/editorial-approvals") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para abrir a mesa editorial." });
+    }
+    const limit = Number(searchParams.get("limit") || 60);
+    const includeResolved = /^(1|true|yes|sim)$/i.test(String(searchParams.get("includeResolved") || ""));
+    return sendJson(res, 200, buildCheffeEditorialApprovalDeskPayload({ limit, includeResolved }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/editorial-approvals") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para aprovar pendencias editoriais." });
+    }
+    const result = recordCheffeEditorialApprovalDeskDecision(body);
+    return sendJson(res, result.ok ? 200 : result.status || 400, result);
+  }
+
+  if (req.method === "GET" && pathname === "/api/cheffe-call/photo-approvals") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para revisar foto/foco." });
+    }
+    return sendJson(res, 200, buildNewsImageFocusApprovalQueue());
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/photo-approvals") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const result = recordNewsImageFocusDecision(body);
+    return sendJson(res, result.ok ? 200 : result.status || 400, result);
   }
 
   if (req.method === "GET" && pathname === "/api/cheffe-call") {
@@ -11169,13 +14667,37 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, { ok: true, ...payload });
   }
 
+  if (req.method === "GET" && pathname === "/api/cheffe-call/ecosystem-study") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Senha Full Admin obrigatoria para consultar estudo do ecossistema." });
+    }
+    return sendJson(res, 200, {
+      ok: true,
+      study: readJson(REAL_AGENTS_ECOSYSTEM_STUDY_FILE, null)
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/cheffe-call/ecosystem-study") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    return sendJson(res, 201, {
+      ok: true,
+      study: recordRealAgentsEcosystemStudy({
+        trigger: cleanShortText(body.trigger || "cheffe-call-manual-study", 80),
+        instruction: body.instruction || body.message || ""
+      })
+    });
+  }
+
   if (req.method === "POST" && pathname === "/api/cheffe-call/start") {
     const body = await parseBody(req);
     if (!requireFullAdminOrderAccess(req, body)) {
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
-    return sendJson(res, 201, startCheffeCallSession(body));
+    return sendJson(res, 201, await startCheffeCallSession(body));
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/action") {
@@ -11188,7 +14710,13 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!result.ok) {
       return sendJson(res, result.status || 400, result);
     }
-    return sendJson(res, 200, result.payload);
+    return sendJson(res, 200, {
+      ...result.payload,
+      action: result.action,
+      reviewedAction: result.reviewedAction || null,
+      proof: result.proof || null,
+      actionProof: result.proof || null
+    });
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/release") {
@@ -11201,7 +14729,8 @@ async function handleApi(req, res, pathname, searchParams) {
     writeCheffeCallState({
       ...state,
       active: false,
-      releasedAt: new Date().toISOString()
+      releasedAt: new Date().toISOString(),
+      lastActivityAt: new Date().toISOString()
     });
     return sendJson(res, 200, buildCheffeCallPayload());
   }
@@ -11243,6 +14772,42 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 201, { ok: true, order, ...buildPubPaidSpriteScoutPayload() });
   }
 
+  if (req.method === "GET" && pathname === "/api/editorial/corrections") {
+    const limit = Number(searchParams.get("limit") || 24);
+    return sendJson(res, 200, buildPublicEditorialCorrectionsLog(limit));
+  }
+
+  if (req.method === "POST" && pathname === "/api/editorial/corrections") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para registrar correcao." });
+    }
+    return sendJson(res, 201, recordEditorialCorrection(body));
+  }
+
+  if (req.method === "GET" && pathname === "/api/editorial/approval-locks") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para ver travas editoriais." });
+    }
+    return sendJson(res, 200, buildEditorialApprovalLocksPayload());
+  }
+
+  if (req.method === "POST" && pathname === "/api/editorial/approval-locks") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin para aprovar gate editorial." });
+    }
+    const result = recordEditorialApprovalDecision(body);
+    return sendJson(res, result.ok ? 201 : result.status || 400, result);
+  }
+
+  if (req.method === "GET" && pathname === "/api/editorial/dossiers") {
+    const limit = Number(searchParams.get("limit") || 80);
+    const includeLocked = /^(1|true|yes|sim)$/i.test(String(searchParams.get("includeLocked") || "")) &&
+      requireFullAdminOrderAccess(req);
+    return sendJson(res, 200, buildEditorialDossiersPayload(limit, { includeLocked }));
+  }
+
   if (req.method === "GET" && pathname === "/api/news/aggregator") {
     const limit = Number(searchParams.get("limit") || 30);
     return sendJson(res, 200, { items: getNews(Math.max(1, Math.min(200, limit))) });
@@ -11250,7 +14815,9 @@ async function handleApi(req, res, pathname, searchParams) {
 
   if (req.method === "GET" && pathname === "/api/news") {
     const limit = Number(searchParams.get("limit") || 60);
-    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
+    const includeLocked = /^(1|true|yes|sim)$/i.test(String(searchParams.get("includeLocked") || "")) &&
+      requireFullAdminOrderAccess(req);
+    return sendJson(res, 200, getCachedArticleNewsApiPayload(limit, { includeLocked }));
   }
 
   if (req.method === "GET" && pathname === "/api/news/archive") {
@@ -11765,6 +15332,29 @@ async function handleApi(req, res, pathname, searchParams) {
         articleUrl: item.slug ? `/noticia.html?slug=${encodeURIComponent(item.slug)}` : ""
       }))
     });
+  }
+
+  if (req.method === "GET" && pathname === "/api/news-image-focus-approvals") {
+    if (!requireFullAdminOrderAccess(req)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const newOnly = String(searchParams.get("newOnly") || "true").toLowerCase() !== "false";
+    return sendJson(res, 200, buildImageApprovalQueue({ newOnly }));
+  }
+
+  if (req.method === "POST" && pathname === "/api/news-image-focus-approvals") {
+    const body = await parseBody(req);
+    if (!requireFullAdminOrderAccess(req, body)) {
+      return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
+    }
+    const result = recordImageApprovalDecision({
+      ...body,
+      requestedBy: body.requestedBy || "Full Admin",
+      source: body.source || "cheffe-call"
+    });
+    if (!result.ok) return sendJson(res, result.status || 400, result);
+    appendNewsImageApprovalOfficeOrder(result.decision);
+    return sendJson(res, 201, result);
   }
 
   if (req.method === "GET" && pathname === "/api/pesquisa-acre-2026/bridge") {

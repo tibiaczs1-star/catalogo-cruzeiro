@@ -323,6 +323,10 @@ body.editorial-home #trending .trending-grid.is-daily-buzz {
   gap: 1.1rem;
 }
 
+body.editorial-home #trending .trending-grid.is-daily-buzz-continuity {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
 body.editorial-home #trending .daily-buzz-card {
   position: relative;
   overflow: hidden;
@@ -496,6 +500,82 @@ body.editorial-home #trending .daily-buzz-card .engagement {
 body.editorial-home #trending .daily-buzz-card .engagement span {
   color: rgba(208, 227, 246, 0.7) !important;
   font-size: 0.78rem;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-state {
+  min-height: 0 !important;
+  padding: clamp(1.05rem, 2vw, 1.35rem) !important;
+  border-radius: 24px !important;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(125, 201, 255, 0.12), transparent 26%),
+    radial-gradient(circle at 12% 88%, rgba(239, 193, 78, 0.14), transparent 24%),
+    linear-gradient(180deg, rgba(13, 31, 54, 0.99), rgba(20, 47, 76, 0.97)) !important;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-state .influencer-buzz-copy h3 {
+  max-width: 24ch;
+  font-size: clamp(1.58rem, 2vw, 2.28rem) !important;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-list {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 0.72rem;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-link {
+  display: grid;
+  gap: 0.28rem;
+  padding: 0.86rem 0.95rem;
+  border: 1px solid rgba(160, 214, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fbff;
+  text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-link:hover,
+body.editorial-home #trending .daily-buzz-continuity-link:focus-visible {
+  border-color: rgba(159, 213, 255, 0.28);
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+body.editorial-home #trending .daily-buzz-continuity-link small {
+  color: #9fd5ff;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-link strong {
+  color: #ffffff;
+  font-size: clamp(1rem, 1vw, 1.22rem);
+  line-height: 1.1;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-link span {
+  color: rgba(226, 241, 255, 0.84);
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
+body.editorial-home #trending .daily-buzz-continuity-note {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid rgba(160, 214, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(226, 241, 255, 0.86);
+  font-weight: 800;
 }
 
 body.editorial-home #trending .daily-buzz-card.reveal {
@@ -1780,13 +1860,16 @@ body.editorial-home .mosaic-item.side.card-without-photo .mosaic-shell.compact {
 body.editorial-home .mosaic-item.side > a {
   display: flex !important;
   flex-direction: column !important;
-  min-height: 100% !important;
+  flex: 1 1 auto !important;
+  height: auto !important;
+  min-height: 0 !important;
 }
 
 body.editorial-home .mosaic-item.side .mosaic-shell,
 body.editorial-home .mosaic-shell.compact {
   min-height: 0 !important;
   flex: 1 1 auto !important;
+  justify-content: flex-start !important;
   padding: 0.92rem 0.95rem 1rem !important;
   gap: 0.62rem !important;
   color: #152c45 !important;
@@ -1796,11 +1879,13 @@ body.editorial-home .mosaic-shell.compact {
 body.editorial-home .mosaic-item.side .mosaic-topline {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
+  margin-bottom: 0 !important;
   gap: 0.42rem !important;
   justify-items: start !important;
 }
 
 body.editorial-home .mosaic-item.side .mosaic-copy {
+  margin-top: 0 !important;
   gap: 0.48rem !important;
 }
 

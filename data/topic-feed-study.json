@@ -1,7 +1,43 @@
 {
   "topic": "study",
-  "updatedAt": "2026-05-01T00:53:46.965Z",
+  "updatedAt": "2026-05-06T16:54:01.565Z",
   "items": [
+    {
+      "id": "https://www.edsurge.com/news/2026-05-01-girls-around-the-globe-are-losing-gains-in-math-data-shows",
+      "slug": "global-math-gains-for-girls-are-slipping-report-finds",
+      "title": "Atualização internacional de EdSurge - 03:00",
+      "eyebrow": "educacao",
+      "date": "1 de mai. de 2026",
+      "publishedAt": "2026-05-01T08:00:00.000Z",
+      "category": "Educação",
+      "categoryKey": "educacao",
+      "previewClass": "thumb-educacao",
+      "sourceName": "EdSurge",
+      "sourceUrl": "https://www.edsurge.com/news/2026-05-01-girls-around-the-globe-are-losing-gains-in-math-data-shows",
+      "sourceLabel": "Atualização internacional de EdSurge - 03:00",
+      "lede": "EdSurge publicou uma atualização sobre Atualização internacional de EdSurge - 03:00. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+      "summary": "Atualização internacional de EdSurge - 03:00",
+      "analysis": "",
+      "body": [
+        "EdSurge publicou em 1 de mai. de 2026 a base desta noticia sobre Global Math Gains for Girls Are Slipping, Report Finds. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
+        "Global Math Gains for Girls Are Slipping, Report Finds e o eixo mais concreto da publicacao consultada. A partir dele, a materia deve ser lida com atencao a origem da informacao, impacto imediato e possibilidade de novas atualizacoes conforme a fonte publicar mais detalhes.",
+        "Como o material original ainda nao trouxe desenvolvimento suficiente para um texto mais longo nesta pagina, o portal apresenta o essencial, mostra a base consultada e mantem o acesso direto para a fonte completa."
+      ],
+      "highlights": [],
+      "development": [],
+      "imageUrl": "https://edsurge.imgix.net/uploads/post/image/16714/math_data-1777562518.jpg?auto=compress%2Cformat&amp;w=1600&amp;h=800&amp;fit=crop",
+      "sourceImageUrl": "",
+      "feedImageUrl": "https://edsurge.imgix.net/uploads/post/image/16714/math_data-1777562518.jpg?auto=compress%2Cformat&amp;w=1600&amp;h=800&amp;fit=crop",
+      "imageCredit": "",
+      "imageFocus": "",
+      "imageFit": "",
+      "media": null,
+      "priority": 0,
+      "editorialPriority": "",
+      "topic": "study",
+      "coverageLayer": "global",
+      "topicGroup": "edtech"
+    },
     {
       "id": "universidades-buscam-reconstruir-confianca-publica-no-ensino-superior",
       "slug": "universidades-buscam-reconstruir-confianca-publica-no-ensino-superior",
@@ -16,7 +52,7 @@
       "sourceUrl": "https://www.insidehighered.com/news/governance/executive-leadership/2026/04/09/presidents-puzzled-rebuilding-public-trust-higher",
       "sourceLabel": "Universidades buscam reconstruir confiança pública no ensino superior",
       "lede": "Levantamento internacional mostra dirigentes tentando recuperar confianca publica nas universidades enquanto cobram mudancas mais claras na experiencia estudantil.",
-      "summary": "Levantamento internacional mostra dirigentes tentando recuperar confianca publica nas universidades enquanto cobram mudancas mais claras na experiencia estudantil.",
+      "summary": "Universidades buscam reconstruir confiança pública no ensino superior",
       "analysis": "",
       "body": [
         "Inside Higher Ed publicou em 9 de abr. de 2026 a base desta noticia sobre Universidades buscam reconstruir confiança pública no ensino superior. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -52,7 +88,7 @@
       "sourceUrl": "https://hechingerreport.org/",
       "sourceLabel": "A busca por tutores de IA mais úteis para alunos e professores",
       "lede": "A Hechinger acompanha pesquisas tentando criar tutores de IA que ajudem de verdade sem virar resposta pronta ou dependencia para os alunos.",
-      "summary": "A Hechinger acompanha pesquisas tentando criar tutores de IA que ajudem de verdade sem virar resposta pronta ou dependencia para os alunos.",
+      "summary": "A busca por tutores de IA mais úteis para alunos e professores",
       "analysis": "",
       "body": [
         "The Hechinger Report publicou em 6 de abr. de 2026 a base desta noticia sobre A busca por tutores de IA mais úteis para alunos e professores. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -88,7 +124,7 @@
       "sourceUrl": "https://www.edsurge.com/news/2026-03-30-from-hello-world-to-ai-what-skills-actually-prepare-students-for-the-future",
       "sourceLabel": "Da programação básica à IA: quais habilidades preparam estudantes para o futuro",
       "lede": "A pauta discute quais habilidades seguem valendo para os estudantes quando a tecnologia muda rapido e o uso de IA ainda nao tem um papel claro em sala.",
-      "summary": "A pauta discute quais habilidades seguem valendo para os estudantes quando a tecnologia muda rapido e o uso de IA ainda nao tem um papel claro em sala.",
+      "summary": "Da programação básica à IA: quais habilidades preparam estudantes para o futuro",
       "analysis": "",
       "body": [
         "EdSurge publicou em 30 de mar. de 2026 a base desta noticia sobre Da programação básica à IA: quais habilidades preparam estudantes para o futuro. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -124,7 +160,7 @@
       "sourceUrl": "https://hechingerreport.org/faster-thinner-colleges-bachelors-degree-three-years/",
       "sourceLabel": "Faculdades aceleram cursos e testam graduação de três anos",
       "lede": "Reportagem da Hechinger mostra faculdades acelerando bacharelados de tres anos para reduzir custo, encurtar trajetoria e responder a pressao por retorno mais rapido.",
-      "summary": "Reportagem da Hechinger mostra faculdades acelerando bacharelados de tres anos para reduzir custo, encurtar trajetoria e responder a pressao por retorno mais rapido.",
+      "summary": "Faculdades aceleram cursos e testam graduação de três anos",
       "analysis": "",
       "body": [
         "The Hechinger Report publicou em 11 de mar. de 2026 a base desta noticia sobre Faculdades aceleram cursos e testam graduação de três anos. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -160,7 +196,7 @@
       "sourceUrl": "https://www.edsurge.com/news/2026-01-27-k-12-edtech-in-2026-five-trends-shaping-the-year-ahead",
       "sourceLabel": "Tecnologia educacional em 2026 aponta cinco tendências para escolas",
       "lede": "EdSurge mapeia como escolas estao deixando a corrida por ferramenta nova e passando a cobrar uso consistente, impacto real e menos tecnologia sem proposito.",
-      "summary": "EdSurge mapeia como escolas estao deixando a corrida por ferramenta nova e passando a cobrar uso consistente, impacto real e menos tecnologia sem proposito.",
+      "summary": "Tecnologia educacional em 2026 aponta cinco tendências para escolas",
       "analysis": "",
       "body": [
         "EdSurge publicou em 27 de jan. de 2026 a base desta noticia sobre Tecnologia educacional em 2026 aponta cinco tendências para escolas. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -196,7 +232,7 @@
       "sourceUrl": "https://www.insidehighered.com/news/quick-takes/2026/01/23/key-podcast-teaching-students-agency-age-ai",
       "sourceLabel": "Podcast discute autonomia dos estudantes na era da inteligência artificial",
       "lede": "Podcast especializado defende que universidade e escola precisam devolver autonomia aos estudantes em vez de tratar a IA so como atalho ou ameaca.",
-      "summary": "Podcast especializado defende que universidade e escola precisam devolver autonomia aos estudantes em vez de tratar a IA so como atalho ou ameaca.",
+      "summary": "Podcast discute autonomia dos estudantes na era da inteligência artificial",
       "analysis": "",
       "body": [
         "Inside Higher Ed publicou em 23 de jan. de 2026 a base desta noticia sobre Podcast discute autonomia dos estudantes na era da inteligência artificial. Para o leitor local, o ponto principal e entender como o tema se conecta ao cotidiano de quem vive no Acre e acompanha os servicos, decisoes publicas e impactos da regiao.",
@@ -205,8 +241,8 @@
       ],
       "highlights": [],
       "development": [],
-      "imageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2026-04/GettyImages-1348273219.jpg?itok=YP_3Gl8b",
-      "sourceImageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2026-04/GettyImages-1348273219.jpg?itok=YP_3Gl8b",
+      "imageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2024-08/tim_walz_gettyimages-2160509322_crop.jpg?itok=IRWpC64B",
+      "sourceImageUrl": "https://www.insidehighered.com/sites/default/files/styles/image_192_x_128/public/2024-08/tim_walz_gettyimages-2160509322_crop.jpg?itok=IRWpC64B",
       "feedImageUrl": "",
       "imageCredit": "",
       "imageFocus": "",
@@ -227,8 +263,8 @@
     },
     {
       "source": "edsurge",
-      "ok": false,
-      "error": "timeout"
+      "ok": true,
+      "count": 8
     },
     {
       "source": "hechinger",
@@ -241,5 +277,5 @@
       "count": 8
     }
   ],
-  "fallbackUsed": true
+  "fallbackUsed": false
 }

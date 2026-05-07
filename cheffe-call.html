@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cheffe Call • Catálogo Cruzeiro do Sul</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070b12'/%3E%3Crect x='12' y='14' width='40' height='36' rx='8' fill='%23132745'/%3E%3Crect x='24' y='18' width='16' height='12' fill='%23f2c5a0'/%3E%3Crect x='20' y='32' width='24' height='16' fill='%23f4c96b'/%3E%3C/svg%3E" />
-    <link rel="stylesheet" href="cheffe-call.css?v=20260424-prompt-console-real" />
+    <link rel="stylesheet" href="cheffe-call.css?v=20260506-approval-gate2" />
   </head>
   <body class="cheffe-call-page">
     <header class="call-topbar">
@@ -32,7 +32,7 @@
             <article>
               <span>Fluxo</span>
               <strong>Ouvir, comparar, aprovar</strong>
-              <p>Abra o assunto, deixe a sala reagir e transforme a melhor ideia em tarefa ou execução.</p>
+              <p>Abra uma ordem, deixe a sala reagir e transforme a melhor ideia em tarefa ou execução.</p>
             </article>
             <article>
               <span>Relatório</span>
@@ -58,32 +58,32 @@
               <li data-flow-step="password">
                 <span>1</span>
                 <strong>Senha</strong>
-                <p>Digite Full Admin para comandar. Sem senha, só consulta.</p>
+                <p>Full Admin habilita decisão.</p>
               </li>
               <li data-flow-step="meeting">
                 <span>2</span>
-                <strong>Abrir reunião</strong>
-                <p>Escreva a ordem e envie para pausar rotinas e ouvir agentes reais.</p>
+                <strong>Abrir sala</strong>
+                <p>Envie a ordem e pause rotinas.</p>
               </li>
               <li data-flow-step="opinions">
                 <span>3</span>
-                <strong>Ouvir opiniões</strong>
-                <p>Use Próximo para navegar pela fala de cada agente.</p>
+                <strong>Ouvir</strong>
+                <p>Passe agente por agente.</p>
               </li>
               <li data-flow-step="decision">
                 <span>4</span>
                 <strong>Decidir</strong>
-                <p>Aprove, peça ajuste, transforme em tarefa ou mande implementar.</p>
+                <p>Aprovar, ajustar ou tarefa.</p>
               </li>
               <li data-flow-step="report">
                 <span>5</span>
-                <strong>Acompanhar</strong>
-                <p>Veja fila, logs, ações e escritórios no relatório abaixo.</p>
+                <strong>Terminal</strong>
+                <p>Acompanhe a execução real.</p>
               </li>
               <li data-flow-step="release">
                 <span>6</span>
                 <strong>Liberar</strong>
-                <p>Quando terminar, libere as automações dos agentes.</p>
+                <p>Feche a sala e solte agentes.</p>
               </li>
             </ol>
           </section>
@@ -95,26 +95,26 @@
                 <input name="password" type="password" autocomplete="current-password" placeholder="••••••••" />
               </label>
               <label>
-                Assunto da reunião
+                Ordem para os agentes
                 <textarea
                   name="instruction"
                   rows="4"
-                  placeholder="Ex: reorganizar o escritório, receber opiniões, distribuir comandos específicos e deixar a sala mais forte."
+                  placeholder="Ex: reorganizar o escritório, ouvir opiniões, aprovar o melhor caminho e executar com feedback."
                 ></textarea>
               </label>
               <label>
-                Terminal: pedido específico ou código
+                Terminal técnico (opcional)
                 <textarea
                   name="command"
                   rows="4"
-                  placeholder="Cole aqui um pedido direto, trecho de código ou tarefa para o agente ativo analisar."
+                  placeholder="Use para complemento técnico. Para ordem direta, URL e fila, use o painel Comando real abaixo."
                 ></textarea>
               </label>
               <div class="call-actions">
-                <button type="submit">Enviar mensagem</button>
+                <button type="submit">Abrir rodada</button>
                 <button type="button" id="sendTerminalCommand">Enviar ao terminal</button>
-                <button type="button" id="nextSpeaker">Próximo</button>
-                <button type="button" id="markGoodIdea">Boa ideia</button>
+                <button type="button" id="nextSpeaker">Próximo agente</button>
+                <button type="button" id="markGoodIdea">Aprovar fala</button>
                 <button type="button" id="releaseCall">Liberar automações</button>
               </div>
               <p id="callStatus" role="status">Sala pronta para relatório real. Digite a senha para comandar os agentes.</p>
@@ -280,7 +280,151 @@
         </div>
       </section>
 
-      <section class="call-info-deck" aria-label="Painel operacional abaixo da reunião">
+      <section class="cheffe-scene-flow" aria-labelledby="cheffeSceneFlowTitle">
+        <div class="cheffe-scene-head">
+          <div>
+            <p class="call-kicker">Roteiro da reunião</p>
+            <h2 id="cheffeSceneFlowTitle">Cheffe Call por cenas</h2>
+          </div>
+          <p id="cheffeSceneFlowMeta">A sequência aparece depois que a Cena 1 não tiver pendências humanas abertas.</p>
+        </div>
+        <ol id="cheffeSceneTimeline" class="cheffe-scene-timeline" aria-label="Cenas da reunião"></ol>
+        <article class="cheffe-scene-stage" id="cheffeSceneStage" aria-live="polite">
+          <span id="cheffeSceneBadge">Cena 1</span>
+          <h2 id="cheffeSceneTitle">Mesa de pendências</h2>
+          <p id="cheffeSceneSummary">A Cheffe Call vai mostrar o que precisa ser visto antes de abrir ou continuar a reunião.</p>
+          <div id="cheffeSceneMetrics" class="cheffe-scene-metrics" aria-label="Métricas da cena"></div>
+          <div class="cheffe-scene-actions">
+            <button type="button" id="cheffeScenePrev">Cena anterior</button>
+            <button type="button" id="cheffeSceneFinish">Finalizar cena</button>
+            <button type="button" id="cheffeSceneNext">Próxima cena</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="cheffe-approval-desk" id="cheffeApprovalScene" aria-labelledby="cheffeApprovalTitle">
+        <div class="cheffe-approval-head">
+          <div>
+            <p class="call-kicker">Cena 1</p>
+            <h2 id="cheffeApprovalTitle">Pendências para aprovar</h2>
+          </div>
+          <div class="cheffe-approval-status" id="editorialApprovalStatus" aria-live="polite">Aguardando senha Full Admin.</div>
+        </div>
+        <div class="cheffe-approval-grid">
+          <aside class="approval-queue-panel" aria-label="Fila editorial">
+            <div class="approval-panel-head">
+              <span>Fila editorial</span>
+              <button type="button" id="editorialApprovalRefresh">Recarregar</button>
+            </div>
+            <div id="editorialApprovalQueue" class="approval-queue-list"></div>
+          </aside>
+
+          <article class="approval-preview-panel" aria-label="Preview da notícia">
+            <div class="approval-preview-top">
+              <span id="editorialApprovalPreviewMeta">Sem item selecionado</span>
+              <a id="editorialApprovalArticleLink" href="noticia.html" target="_blank" rel="noopener" aria-disabled="true">Abrir notícia</a>
+            </div>
+            <figure class="approval-preview-figure">
+              <img id="editorialApprovalImage" alt="" />
+            </figure>
+            <div class="approval-preview-copy">
+              <span id="editorialApprovalPreviewSource">Fonte não carregada</span>
+              <h3 id="editorialApprovalPreviewTitle">Selecione uma pendência</h3>
+              <p id="editorialApprovalPreviewSummary">A mesa editorial vai montar a notícia aqui para revisão humana.</p>
+            </div>
+          </article>
+
+          <article class="approval-editor-panel" aria-label="Editor editorial">
+            <div class="approval-field-row">
+              <label for="editorialApprovalTitleInput">Título</label>
+              <input id="editorialApprovalTitleInput" type="text" autocomplete="off" />
+            </div>
+            <div class="approval-field-row">
+              <label for="editorialApprovalSummaryInput">Resumo</label>
+              <textarea id="editorialApprovalSummaryInput" rows="4"></textarea>
+            </div>
+            <div class="approval-field-row">
+              <label for="editorialApprovalBodyInput">Texto</label>
+              <textarea id="editorialApprovalBodyInput" rows="7"></textarea>
+            </div>
+            <div class="approval-editor-columns">
+              <div class="approval-field-row">
+                <label for="editorialApprovalSourceNameInput">Fonte</label>
+                <input id="editorialApprovalSourceNameInput" type="text" autocomplete="off" />
+              </div>
+              <div class="approval-field-row">
+                <label for="editorialApprovalSourceUrlInput">URL da fonte</label>
+                <input id="editorialApprovalSourceUrlInput" type="url" autocomplete="off" />
+              </div>
+            </div>
+            <div class="approval-field-row">
+              <label for="editorialApprovalImageInput">Imagem</label>
+              <input id="editorialApprovalImageInput" type="url" autocomplete="off" />
+            </div>
+            <div class="approval-editor-columns">
+              <div class="approval-field-row">
+                <label for="editorialApprovalFocusInput">Foco</label>
+                <select id="editorialApprovalFocusInput">
+                  <option value="center 32%">center 32%</option>
+                  <option value="center 42%" selected>center 42%</option>
+                  <option value="center 50%">center 50%</option>
+                  <option value="center 66%">center 66%</option>
+                </select>
+              </div>
+              <div class="approval-field-row">
+                <label for="editorialApprovalImageFit">Fit</label>
+                <select id="editorialApprovalImageFit">
+                  <option value="cover" selected>cover</option>
+                  <option value="contain">contain</option>
+                </select>
+              </div>
+            </div>
+            <div class="approval-axis-row">
+              <label for="editorialApprovalFocusX">Horizontal</label>
+              <select id="editorialApprovalFocusX">
+                <option value="left">left</option>
+                <option value="center" selected>center</option>
+                <option value="right">right</option>
+              </select>
+              <label for="editorialApprovalFocusY">Vertical <output id="editorialApprovalFocusYValue">42%</output></label>
+              <input id="editorialApprovalFocusY" type="range" min="24" max="76" step="2" value="42" />
+            </div>
+            <div class="approval-focus-presets" aria-label="Presets de foco">
+              <button type="button" data-editorial-focus-preset="center 32%">Alto</button>
+              <button type="button" data-editorial-focus-preset="center 42%">Centro alto</button>
+              <button type="button" data-editorial-focus-preset="center 50%">Centro</button>
+              <button type="button" data-editorial-focus-preset="center 66%">Baixo</button>
+            </div>
+            <div class="approval-field-row">
+              <label for="editorialApprovalImageCreditInput">Crédito da imagem</label>
+              <input id="editorialApprovalImageCreditInput" type="text" autocomplete="off" />
+            </div>
+          </article>
+
+          <aside class="approval-side-panel" aria-label="Sugestões e decisão">
+            <div class="approval-side-block">
+              <span>Sugestões</span>
+              <div id="editorialApprovalSuggestions" class="approval-suggestion-list"></div>
+            </div>
+            <div class="approval-side-block">
+              <span>Prova</span>
+              <div id="editorialApprovalProof" class="approval-proof-list">Nenhum item carregado.</div>
+            </div>
+            <label class="approval-note-field" for="editorialApprovalNoteInput">
+              Nota humana
+              <textarea id="editorialApprovalNoteInput" rows="4" placeholder="Motivo curto da decisão"></textarea>
+            </label>
+            <div class="approval-decision-actions">
+              <button type="button" data-editorial-approval-action="approve">Aprovar e aplicar no Jornal</button>
+              <button type="button" data-editorial-approval-action="hold">Segurar</button>
+              <button type="button" data-editorial-approval-action="agents">Pedir agentes</button>
+              <button type="button" data-editorial-approval-action="skip">Pular</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="call-info-deck" id="cheffeDailyScene" aria-label="Painel operacional abaixo da reunião">
         <section class="daily-board" aria-label="Contexto diário dos agentes">
           <article class="agent-spotlight-card">
             <div class="agent-spotlight-photo" id="agentOfDayAvatar" aria-hidden="true">
@@ -294,18 +438,23 @@
               <span class="spotlight-agent-confetti c3"></span>
             </div>
             <div class="agent-spotlight-copy">
-              <span>Agente do dia</span>
+              <span>Líder automático</span>
               <strong id="agentOfDay">Atualizando...</strong>
-              <p id="agentOfDayMeta">Pontuação e intenção aparecem aqui.</p>
-              <div class="agent-neural-progress" aria-label="Crescimento neural do agente do dia">
+              <p id="agentOfDayMeta">Placar, autonomia e entrega aparecem aqui.</p>
+              <div class="agent-score-strip" aria-label="Métricas competitivas do líder">
+                <span><i id="agentCompetitionScore">0</i><b>placar</b></span>
+                <span><i id="agentIntelligenceScore">0</i><b>inteligência</b></span>
+                <span><i id="agentExecutionScore">0</i><b>execução</b></span>
+                <span><i id="agentImpactScore">0</i><b>impacto</b></span>
+              </div>
+              <div class="agent-neural-progress" aria-label="Autonomia competitiva do líder">
                 <i id="agentNeuralBar"></i>
               </div>
               <p class="agent-award-note" id="agentAwardNote">
-                Objetivo neural em leitura. Quando um agente atinge uma meta, a sala inteira vê o avanço.
+                Aguardando a próxima rodada para calcular quem resolveu melhor.
               </p>
               <div class="agent-spotlight-actions">
-                <button type="button" id="voteAgentOfDay">Votar no avatar</button>
-                <button type="button" id="openAgentFile">Abrir ficha completa</button>
+                <button type="button" id="openAgentFile">Abrir ficha</button>
               </div>
             </div>
           </article>
@@ -315,18 +464,18 @@
             <p id="officeOfDayMeta">Autonomia média e foco diário.</p>
           </article>
           <article>
-            <span>Ação do dia</span>
+            <span>Entrega vencedora</span>
             <strong id="actionOfDay">Atualizando...</strong>
-            <p id="actionOfDayMeta">Nada executa sem aprovação.</p>
+            <p id="actionOfDayMeta">A entrega com maior impacto sobe aqui.</p>
           </article>
           <article class="call-mini-terminal">
             <span>Terminal da sala</span>
-            <strong>Fluxo neural</strong>
-            <p>Mensagem, resposta, voto e ficha ficam no mesmo ambiente para parecer operação viva.</p>
+            <strong>Execução real</strong>
+            <p>O prompt roda aqui quando você envia ao terminal com senha Full Admin.</p>
           </article>
           <article class="achievement-board-card">
-            <span>Achievements vivos</span>
-            <strong id="achievementHeadline">Funcionários e escritórios em disputa real</strong>
+            <span>Competição viva</span>
+            <strong id="achievementHeadline">Agentes e escritórios em disputa real</strong>
             <p id="achievementChaseLine">Pontuação, autonomia e evolução do runtime aparecem aqui.</p>
             <div class="achievement-period-grid">
               <section class="achievement-period-card" aria-label="Ranking da hora">
@@ -354,7 +503,7 @@
       </section>
       </section>
 
-      <section class="call-lower-decks" aria-label="Painéis da operação">
+      <section class="call-lower-decks" id="cheffeLowerDecks" aria-label="Painéis da operação">
         <section class="call-secondary-grid" aria-label="Painéis da operação">
         <article class="task-queue-panel" aria-labelledby="taskQueueTitle">
           <div class="section-head">
@@ -362,6 +511,20 @@
             <h2 id="taskQueueTitle">Tarefas e prompts</h2>
           </div>
           <div id="taskQueueList" class="task-queue-list"></div>
+        </article>
+        <article class="task-queue-panel ide-action-panel" aria-labelledby="ideActionQueueTitle">
+          <div class="section-head">
+            <p class="call-kicker">Aguardando IDE</p>
+            <h2 id="ideActionQueueTitle">Comando geral do IDE</h2>
+          </div>
+          <div id="ideActionQueueList" class="task-queue-list"></div>
+        </article>
+        <article class="task-queue-panel review-queue-panel" aria-labelledby="reviewQueueTitle">
+          <div class="section-head">
+            <p class="call-kicker">Revisão</p>
+            <h2 id="reviewQueueTitle">Pendências da revisão</h2>
+          </div>
+          <div id="reviewQueueList" class="task-queue-list"></div>
         </article>
         <article class="meeting-log-panel" aria-labelledby="meetingLogTitle">
           <div class="section-head">
@@ -392,7 +555,7 @@
             <div class="call-admin-status-card">
               <span>Sessão</span>
               <strong id="adminSessionState">Aguardando leitura</strong>
-              <p id="adminSessionMeta">Situação da reunião e do último assunto.</p>
+              <p id="adminSessionMeta">Situação da reunião e da última ordem.</p>
             </div>
             <div class="call-admin-status-card">
               <span>Última ação</span>
@@ -403,6 +566,7 @@
           <div class="call-admin-actions">
             <button type="button" id="adminRunAgentsNow">Rodar agentes agora</button>
             <button type="button" id="adminReleaseRoom">Encerrar reunião</button>
+            <a class="call-admin-home" id="adminReturnHome" href="./index.html">Voltar para home</a>
             <button type="button" id="adminClearSession">Limpar sessão</button>
             <button type="button" id="adminExportSnapshot">Exportar snapshot</button>
             <button type="button" id="adminOpenRealAgents">Abrir agentes reais</button>
@@ -410,17 +574,131 @@
         </article>
         </section>
 
+        <section class="decision-desk" aria-labelledby="decisionDeskTitle">
+        <div class="section-head decision-desk-head">
+          <div>
+            <p class="call-kicker">Mesa de decisão</p>
+            <h2 id="decisionDeskTitle">Transformar ordem em ação real</h2>
+          </div>
+          <p id="decisionDeskMeta">Escolha dono, ajuste e contexto antes de chamar os agentes. A resposta precisa dizer o que resolveu, o que falta e qual ordem ficou registrada.</p>
+        </div>
+        <div class="decision-desk-grid">
+          <label class="decision-field">
+            <span>Escritório responsável</span>
+            <select id="decisionOfficeSelect">
+              <option value="">Todos os escritórios</option>
+            </select>
+            <small>Define qual setor responde primeiro.</small>
+          </label>
+          <label class="decision-field">
+            <span>Agente principal</span>
+            <select id="decisionAgentSelect">
+              <option value="">Cheffe Call escolhe o melhor</option>
+            </select>
+            <small>Escolha um líder ou deixe a competição decidir.</small>
+          </label>
+          <label class="decision-field">
+            <span>Tipo de ação</span>
+            <select id="decisionActionSelect">
+              <option value="analyze">Analisar e responder</option>
+              <option value="rethink">Repensar opinião</option>
+              <option value="study">Estudar melhor</option>
+              <option value="accept">Aceitar ideia como ordem</option>
+              <option value="task">Criar tarefa rastreável</option>
+              <option value="implement">Implementar agora</option>
+              <option value="validate">Validar resultado</option>
+              <option value="visual">Ajuste visual</option>
+              <option value="confirm">Confirmar se implementou</option>
+            </select>
+            <small>O tipo muda o que os agentes precisam devolver.</small>
+          </label>
+          <article class="decision-context-card">
+            <span>Contexto atual</span>
+            <strong id="decisionContextTitle">Nenhuma decisão aberta</strong>
+            <p id="decisionContextPreview">Clique em Abrir decisão para escrever a ordem com contexto e receber uma resposta analisada.</p>
+          </article>
+        </div>
+        <div class="decision-desk-actions">
+          <button type="button" id="decisionOpenComposer">Abrir decisão</button>
+          <button type="button" id="decisionUseActiveIdea">Usar fala ativa</button>
+        </div>
+        </section>
+
+        <section class="direct-command-desk" aria-labelledby="directCommandTitle">
+        <div class="section-head direct-command-head">
+          <div>
+            <p class="call-kicker">Comando real</p>
+            <h2 id="directCommandTitle">Ordem direta e fila de ordens</h2>
+          </div>
+          <p id="directCommandMeta">Escreva uma ordem, cole uma URL específica, puxe ideias dos agentes e escolha entre resposta analisada ou runtime real. O resultado fica registrado no controle abaixo.</p>
+        </div>
+        <div class="direct-command-grid">
+          <label class="direct-command-field direct-command-text">
+            <span>Ordem direta</span>
+            <textarea id="directOrderText" rows="7" placeholder="Ex: pesquise esta URL, compare com as ideias dos agentes e proponha a alteração real que deve entrar na página."></textarea>
+          </label>
+          <div class="direct-command-side">
+            <label class="direct-command-field">
+              <span>URL específica</span>
+              <input id="directOrderUrl" type="url" placeholder="https://..." inputmode="url" />
+            </label>
+            <label class="direct-command-field">
+              <span>Modo</span>
+              <select id="directOrderMode">
+                <option value="research">Pesquisar URL e responder</option>
+                <option value="rewrite">Puxar ideias e alterar com minhas instruções</option>
+                <option value="run">Rodar agentes com esta ordem</option>
+                <option value="validate">Validar o que foi feito</option>
+              </select>
+            </label>
+            <div class="direct-command-actions">
+              <button type="button" id="pullAgentIdeasToDirectOrder">Puxar ideias dos agentes</button>
+              <button type="button" id="directOrderAnalyze">Ordem direta</button>
+              <button type="button" id="directOrderRunAgents">Rodar agentes</button>
+              <button type="button" id="directOrderRunQueue" disabled>Implementar fila de ordens</button>
+            </div>
+            <p id="directOrderStatus" class="direct-order-status" role="status">Nenhuma ordem direta enviada nesta rodada.</p>
+          </div>
+        </div>
+        <article class="execution-control-panel" id="executionControlPanel" data-state="idle" aria-live="polite">
+          <div class="execution-control-main">
+            <span id="executionControlBadge">Controle</span>
+            <strong id="executionControlTitle">Aguardando comando real</strong>
+            <p id="executionControlText">Use Ordem direta para receber resposta analisada, Rodar agentes para executar runtime, ou Implementar fila de ordens para enviar os cards aprovados.</p>
+          </div>
+          <div class="execution-control-grid">
+            <article>
+              <span>Resultado</span>
+              <strong id="executionControlResolved">Nada executado</strong>
+            </article>
+            <article>
+              <span>Prova real</span>
+              <strong id="executionControlEvidence">Sem prova ainda</strong>
+            </article>
+            <article>
+              <span>Pendente</span>
+              <strong id="executionControlPending">Aguardando ordem</strong>
+            </article>
+            <article>
+              <span>Última ordem</span>
+              <strong id="executionControlOrder">Nenhuma</strong>
+            </article>
+          </div>
+          <pre id="executionControlLog" class="execution-control-log">controle pronto</pre>
+        </article>
+        </section>
+
         <section class="prompt-command-center" aria-labelledby="promptCommandTitle">
         <div class="section-head">
           <p class="call-kicker">181 agentes</p>
-          <h2 id="promptCommandTitle">Console de prompts da Cheffe Call</h2>
+          <h2 id="promptCommandTitle">Prompt Mestre da Cheffe Call</h2>
         </div>
         <div class="prompt-command-layout">
           <article class="prompt-command-panel">
             <label class="prompt-field">
               <span>Modo de consulta</span>
               <select id="promptModeSelect">
-                <option value="global">Prompt supremo</option>
+                <option value="global">Prompt Mestre</option>
                 <option value="office">Por escritório</option>
                 <option value="agent">Por agente</option>
               </select>
@@ -437,17 +715,28 @@
                 <option value="">Selecione um agente</option>
               </select>
             </label>
+            <label class="prompt-field prompt-adjustment-field">
+              <span>Tipo de ajuste</span>
+              <select id="promptAdjustmentSelect">
+                <option value="no-repeat">Sem repetição</option>
+                <option value="specific">Mais específico</option>
+                <option value="task">Virar tarefa</option>
+                <option value="validation">Virar validação</option>
+                <option value="implementation">Virar implementação</option>
+                <option value="visual">Ajuste visual</option>
+              </select>
+            </label>
             <div class="prompt-quick-actions">
-              <button type="button" id="loadPromptToInstruction">Jogar no assunto</button>
-              <button type="button" id="loadPromptToTerminal">Jogar no terminal</button>
-              <button type="button" id="copyPromptText">Copiar prompt</button>
+              <button type="button" id="loadPromptToInstruction" title="Preenche a Ordem da reunião. Nada executa até você abrir a rodada.">Usar como ordem</button>
+              <button type="button" id="loadPromptToTerminal" title="Executa agora na Cheffe Call e mostra o retorno dos agentes.">Executar no terminal</button>
+              <button type="button" id="copyPromptText" title="Copia o texto. Não executa nada sozinho.">Copiar texto</button>
             </div>
-            <p class="prompt-console-meta" id="promptConsoleMeta">Diretivas da equipe aparecem aqui quando a reunião sincroniza.</p>
+            <p class="prompt-console-meta" id="promptConsoleMeta">Escolha escopo, agente e tipo de ajuste antes de executar.</p>
           </article>
 
           <article class="prompt-preview-panel">
             <div class="prompt-preview-head">
-              <strong id="promptPreviewTitle">Prompt supremo</strong>
+              <strong id="promptPreviewTitle">Prompt Mestre</strong>
               <span id="promptPreviewBadge">Cheffe Call</span>
             </div>
             <pre id="promptPreviewText" class="prompt-preview-text">Preparando a reunião dos 181 agentes...</pre>
@@ -455,16 +744,36 @@
         </div>
         </section>
 
-        <section class="call-opinions" aria-labelledby="opinionsTitle">
-        <div class="section-head">
-          <p class="call-kicker">Perspectivas</p>
-          <h2 id="opinionsTitle">Opiniões dos agentes</h2>
+        <section class="call-opinions" id="cheffeOpinionsScene" aria-labelledby="opinionsTitle">
+        <div class="section-head opinion-flow-head">
+          <div>
+            <p class="call-kicker">Fila de decisão</p>
+            <h2 id="opinionsTitle">Opiniões dos agentes</h2>
+          </div>
+          <div class="opinion-flow-summary" aria-label="Resumo das opiniões">
+            <span><b id="opinionPendingCount">0</b> pendentes</span>
+            <span><b id="opinionReadyCount">0</b> aprovadas</span>
+            <span><b id="opinionRunningCount">0</b> em runtime</span>
+          </div>
+        </div>
+        <div class="opinion-flow-map" aria-label="Fluxo das opiniões">
+          <span data-opinion-flow-step="listen">1. Agentes opinam</span>
+          <span data-opinion-flow-step="decide">2. Você aprova</span>
+          <span data-opinion-flow-step="run">3. Rodar fila</span>
+          <span data-opinion-flow-step="done">4. Terminal confere</span>
+        </div>
+        <div class="opinion-flow-toolbar">
+          <p id="opinionFlowMeta">Aprovar guarda uma opinião. Implementar fila de ordens roda as aprovadas e só marca como implementada quando houver evidência.</p>
+          <div>
+            <button type="button" id="runApprovedOpinions">Implementar fila de ordens</button>
+            <button type="button" id="refreshOpinionFlow">Recarregar fila</button>
+          </div>
         </div>
         <div id="opinionsList" class="opinions-list"></div>
       </section>
       </section>
 
-      <section class="call-agent-report" aria-labelledby="callAgentReportTitle">
+      <section class="call-agent-report" id="cheffeReportsScene" aria-labelledby="callAgentReportTitle">
         <div class="section-head">
           <p class="call-kicker">Relatório geral</p>
           <h2 id="callAgentReportTitle">Operação real dos agentes</h2>
@@ -502,22 +811,91 @@
         </div>
       </section>
 
-      <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de comando rápida">
+      <section class="cheffe-meeting-scene-panel" id="cheffeWebsiteNumbers" aria-labelledby="cheffeWebsiteNumbersTitle">
+        <div class="section-head">
+          <p class="call-kicker">Números do website</p>
+          <h2 id="cheffeWebsiteNumbersTitle">Site, notícias e feeds</h2>
+        </div>
+        <div id="cheffeWebsiteNumbersGrid" class="cheffe-scene-data-grid"></div>
+      </section>
+
+      <section class="cheffe-meeting-scene-panel" id="cheffeEditorialHealth" aria-labelledby="cheffeEditorialHealthTitle">
+        <div class="section-head">
+          <p class="call-kicker">Saúde editorial</p>
+          <h2 id="cheffeEditorialHealthTitle">Gates, fontes e aprovações</h2>
+        </div>
+        <div id="cheffeEditorialHealthGrid" class="cheffe-scene-data-grid"></div>
+        <div id="cheffeEditorialHealthQueue" class="editorial-health-queue"></div>
+      </section>
+
+      <section class="cheffe-meeting-scene-panel" id="cheffeAgentNumbers" aria-labelledby="cheffeAgentNumbersTitle">
+        <div class="section-head">
+          <p class="call-kicker">Números dos agentes</p>
+          <h2 id="cheffeAgentNumbersTitle">Runtime, autonomia e escritórios</h2>
+        </div>
+        <div id="cheffeAgentNumbersGrid" class="cheffe-scene-data-grid"></div>
+      </section>
+
+      <section class="agent-response-panel" id="agentResponsePanel" data-tone="idle" aria-live="polite" aria-labelledby="agentResponseTitle">
+        <div class="agent-response-main">
+          <span id="agentResponseBadge">Resposta dos agentes</span>
+          <strong id="agentResponseTitle">Aguardando sua ordem</strong>
+          <p id="agentResponseText">Digite uma ordem em linguagem simples. Quando você abrir a rodada ou usar um botão, os agentes mostram aqui o que receberam e o próximo passo.</p>
+        </div>
+        <div class="agent-response-summary" id="agentResponseSummary" hidden>
+          <article>
+            <span>Resolvido</span>
+            <strong id="agentResponseResolved">Nada ainda</strong>
+          </article>
+          <article>
+            <span>Prova real</span>
+            <strong id="agentResponseEvidence">Sem execução</strong>
+          </article>
+          <article>
+            <span>Falta</span>
+            <strong id="agentResponsePending">Aguardando decisão</strong>
+          </article>
+          <article>
+            <span>Ordem real</span>
+            <strong id="agentResponseOrder">Nenhuma ordem gravada</strong>
+          </article>
+        </div>
+        <ol id="agentResponseList" class="agent-response-list">
+          <li data-state="pending">
+            <span>Pronto</span>
+            <strong>Cheffe Call</strong>
+            <p>Use Abrir rodada, Aprovar card, Ajustar, Criar tarefa, Terminal ou Implementar fila.</p>
+          </li>
+        </ol>
+        <div class="decision-resolution-actions" id="decisionResolutionActions" hidden>
+          <p id="decisionResolutionMeta">Analise pronta. Escolha se isso vira ordem real.</p>
+          <div>
+            <button type="button" id="decisionAcceptOrder">Aceitar como ordem real</button>
+            <button type="button" id="decisionImplementOrder">Implementar agora</button>
+            <button type="button" id="decisionReviseOrder">Ajustar contexto</button>
+          </div>
+        </div>
+        <p class="agent-response-next"><b>Próximo passo:</b> <span id="agentResponseNext">Entrar com senha Full Admin e abrir a primeira rodada.</span></p>
+      </section>
+
+      <form class="call-command-bar" id="cheffeCommandBar" aria-label="Barra de ordem da reunião">
         <label class="call-command-field">
-          <span>Comando rápido</span>
-          <input
+          <span>Ordem da reunião</span>
+          <textarea
             id="quickInstructionInput"
             name="quickInstruction"
-            type="text"
-            placeholder="Digite uma ordem para a sala e pressione Enter"
+            rows="3"
+            placeholder="Digite o objetivo que os agentes devem resolver"
             autocomplete="off"
-          />
+            spellcheck="true"
+          ></textarea>
+          <small id="quickCommandContext">Abrir rodada monta a fila; Aprovar guarda cards; Implementar fila executa tudo que já foi aprovado.</small>
         </label>
         <div class="call-command-actions">
-          <button type="submit">Enviar</button>
-          <button type="button" id="quickRefreshAgents">Atualizar</button>
-          <button type="button" id="focusCommandDetails">Detalhes</button>
-          <button type="button" id="quickNextSpeaker">Próximo</button>
+          <button type="submit">Abrir rodada</button>
+          <button type="button" id="quickRefreshAgents">Recarregar</button>
+          <button type="button" id="focusCommandDetails">Ver terminal</button>
+          <button type="button" id="quickNextSpeaker">Próximo agente</button>
         </div>
       </form>
 
@@ -538,11 +916,139 @@
             <button type="button" id="quickPasswordConfirm">Entrar</button>
           </div>
           <small id="quickPasswordStatus" class="call-password-status" aria-live="polite">Aguardando senha.</small>
+          <section class="cheffe-photo-approval" id="cheffePhotoApproval" hidden aria-labelledby="photoApprovalTitle">
+            <div class="cheffe-photo-approval-head">
+              <div>
+                <span>Fila foto/foco</span>
+                <strong id="photoApprovalCounter">0 pendentes</strong>
+              </div>
+              <div class="photo-approval-head-actions">
+                <span id="photoApprovalProgress">0/0</span>
+                <a id="photoApprovalArticle" href="noticia.html" target="_blank" rel="noopener" aria-disabled="true">Abrir notícia</a>
+              </div>
+            </div>
+            <p id="photoApprovalSummary" class="photo-approval-summary">Auditoria visual pronta para decisão.</p>
+            <div id="photoApprovalList" class="photo-approval-list-mini" aria-label="Itens da fila visual"></div>
+            <div class="photo-approval-grid">
+              <figure class="photo-approval-frame">
+                <img id="photoApprovalImage" alt="" />
+                <figcaption id="photoApprovalImageCaption">Sem foco manual registrado</figcaption>
+              </figure>
+              <div class="photo-approval-panel">
+                <h3 id="photoApprovalTitle">Item da fila</h3>
+                <p id="photoApprovalMeta" class="photo-approval-meta">Aguardando decisão</p>
+                <div id="photoApprovalReasons" class="photo-approval-reasons" aria-label="Motivos da auditoria"></div>
+                <div class="photo-manual-tools" aria-label="Ajustes manuais">
+                  <label for="photoApprovalFocus">Foco manual</label>
+                  <select id="photoApprovalFocus">
+                    <option value="center 32%">center 32%</option>
+                    <option value="center 34%">center 34%</option>
+                    <option value="center 38%">center 38%</option>
+                    <option value="center 42%" selected>center 42%</option>
+                    <option value="center 50%">center 50%</option>
+                    <option value="center 58%">center 58%</option>
+                    <option value="center 66%">center 66%</option>
+                  </select>
+                  <div class="photo-manual-axis">
+                    <label for="photoApprovalFocusX">Horizontal</label>
+                    <select id="photoApprovalFocusX">
+                      <option value="left">left</option>
+                      <option value="center" selected>center</option>
+                      <option value="right">right</option>
+                    </select>
+                    <label for="photoApprovalFocusY">Vertical <output id="photoApprovalFocusYValue">42%</output></label>
+                    <input id="photoApprovalFocusY" type="range" min="24" max="76" step="2" value="42" />
+                  </div>
+                  <div class="photo-focus-presets" aria-label="Presets de foco">
+                    <button type="button" data-photo-focus="center 32%">Rosto alto</button>
+                    <button type="button" data-photo-focus="center 42%">Centro alto</button>
+                    <button type="button" data-photo-focus="center 50%">Centro</button>
+                    <button type="button" data-photo-focus="center 66%">Baixo</button>
+                  </div>
+                  <div class="photo-manual-axis">
+                    <label for="photoApprovalImageFit">Fit</label>
+                    <select id="photoApprovalImageFit">
+                      <option value="cover" selected>cover</option>
+                      <option value="contain">contain</option>
+                    </select>
+                    <label for="photoApprovalManualAdjustment">Ajuste pedido</label>
+                    <select id="photoApprovalManualAdjustment">
+                      <option value="">sem pedido extra</option>
+                      <option value="priorizar rosto ou pessoa principal">priorizar rosto/pessoa</option>
+                      <option value="buscar imagem real da fonte original">buscar imagem real</option>
+                      <option value="evitar corte de texto, placa ou objeto central">evitar corte</option>
+                      <option value="usar fallback editorial mais limpo">fallback mais limpo</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="photo-approval-actions">
+                  <button type="button" data-photo-decision="approve-focus">Aprovar foco</button>
+                  <button type="button" data-photo-decision="swap-image">Trocar imagem</button>
+                  <button type="button" data-photo-decision="keep-fallback">Manter fallback</button>
+                  <button type="button" data-photo-decision="redo">Refazer</button>
+                </div>
+                <label for="photoApprovalReplacementInput">URL nova se trocar imagem</label>
+                <input id="photoApprovalReplacementInput" type="url" placeholder="https://... ou deixe vazio para os agentes refazerem" />
+                <label for="photoApprovalNote">Observação</label>
+                <textarea id="photoApprovalNote" rows="3" placeholder="Nota curta para os agentes"></textarea>
+              </div>
+            </div>
+            <footer class="photo-approval-footer">
+              <div class="photo-approval-nav">
+                <button type="button" id="photoApprovalPrev">Anterior</button>
+                <button type="button" id="photoApprovalNext">Próxima</button>
+              </div>
+              <label class="photo-runtime-toggle">
+                <input type="checkbox" id="photoApprovalRunRuntime" />
+                <span id="photoApprovalRunRuntimeText">Rodar agentes e aplicar ao continuar</span>
+              </label>
+              <button type="button" id="photoApprovalContinue">Continuar para sala</button>
+            </footer>
+          </section>
         </div>
       </div>
     </main>
 
+    <div class="cheffe-action-feedback" id="cheffeActionFeedback" hidden role="status" aria-live="polite">
+      <section class="cheffe-action-feedback-card" aria-labelledby="cheffeActionFeedbackTitle">
+        <header>
+          <span id="cheffeActionFeedbackBadge">Runtime</span>
+          <button type="button" id="cheffeActionFeedbackClose">Fechar</button>
+        </header>
+        <strong id="cheffeActionFeedbackTitle">Aguardando ação</strong>
+        <p id="cheffeActionFeedbackMessage">A Cheffe Call vai mostrar o andamento aqui.</p>
+        <ol id="cheffeActionFeedbackSteps"></ol>
+        <pre id="cheffeActionFeedbackDetails"></pre>
+        <div class="cheffe-action-feedback-actions">
+          <a id="cheffeActionFeedbackHome" href="./index.html" hidden>Voltar para home</a>
+        </div>
+      </section>
+    </div>
+
+    <div class="decision-composer" id="decisionComposer" hidden role="dialog" aria-modal="true" aria-labelledby="decisionComposerTitle">
+      <section class="decision-composer-card">
+        <header>
+          <div>
+            <span id="decisionComposerBadge">Mesa de decisão</span>
+            <strong id="decisionComposerTitle">Escrever ordem com contexto</strong>
+          </div>
+          <button type="button" id="decisionComposerClose">Fechar</button>
+        </header>
+        <div class="decision-composer-meta" id="decisionComposerMeta">Escolha escritório, agente e tipo de ação antes de enviar.</div>
+        <label class="decision-composer-field">
+          <span>Ordem para a reunião</span>
+          <textarea id="decisionComposerText" rows="8" placeholder="Explique o que deve ser resolvido, qual opinião está sendo aceita/ajustada e como o agente deve provar o resultado."></textarea>
+        </label>
+        <p class="decision-composer-hint" id="decisionComposerHint">A Cheffe Call vai analisar, registrar resposta e avisar se precisa implementar, validar ou voltar para ajuste.</p>
+        <div class="decision-composer-actions">
+          <button type="button" id="decisionComposerCancel">Cancelar</button>
+          <button type="button" id="decisionComposerSubmit">Enviar para análise</button>
+        </div>
+        <p id="decisionComposerStatus" class="decision-composer-status" role="status">Aguardando envio.</p>
+      </section>
+    </div>
+
     <script defer src="cheffe-call-game.js?v=20260423admin-functional"></script>
-    <script defer src="cheffe-call.js?v=20260424-pixelart-flow-1"></script>
+    <script defer src="cheffe-call.js?v=20260506-approval-gate2"></script>
   </body>
 </html>

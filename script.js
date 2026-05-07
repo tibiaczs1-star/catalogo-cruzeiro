@@ -89,6 +89,7 @@ const communityTrendSummary = document.querySelector("[data-community-trend-summ
 const communityTrendCaptions = document.querySelector("[data-community-trend-captions]");
 const communityTrendTags = document.querySelector("[data-community-trend-tags]");
 const communityTrendUpdated = document.querySelector("[data-community-trend-updated]");
+const publicCorrectionsLog = document.querySelector("#public-corrections-log");
 let heroDesktopHighlightItems = [];
 const cadernoCards = [...document.querySelectorAll(".cadernos-grid .caderno-card")];
 const archiveBrowserLaunchers = [...document.querySelectorAll("[data-open-archive-browser]")];
@@ -100,6 +101,7 @@ const insidersArmyScene = document.querySelector(
 const insidersChantTrack = document.querySelector("[data-insiders-chant-track]");
 const tickerLiveGrid = document.querySelector("#ticker-live-grid");
 const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
+const trendingBuzzInitialMarkup = trendingBuzzGrid?.innerHTML || "";
 const monthlyBuzzGrid = document.querySelector("#monthly .month-grid");
 const whatMattersGrid = document.querySelector("[data-what-matters-grid]");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
@@ -2117,14 +2119,16 @@ const scheduleRadarGuideTarget = () => {
   });
 };
 
-const updateRadarGuide = (filter = "todos", spotlightArticles = []) => {
+const updateRadarGuide = (filter = "todos", spotlightArticles = [], options = {}) => {
   if (!radarGuide) {
     return;
   }
 
   const theme = radarGuideThemes[filter] || radarGuideThemes.todos;
   const leadTitle = spotlightArticles[0]?.title
-    ? ` Em destaque agora: ${spotlightArticles[0].title}.`
+    ? options.continuity
+      ? ` Em acompanhamento agora: ${spotlightArticles[0].title}.`
+      : ` Em destaque agora: ${spotlightArticles[0].title}.`
     : "";
 
   radarGuide.dataset.theme = filter;
@@ -2205,6 +2209,176 @@ const getRadarSpotlightArticles = (filter = "todos") => {
   return spotlight.slice(0, 2);
 };
 
+const sortRadarContinuityArticles = (articles = []) =>
+  [...articles].sort((left, right) => {
+    const regionalDiff =
+      getEditorialRegionalPriorityScore(right) - getEditorialRegionalPriorityScore(left);
+    if (regionalDiff !== 0) {
+      return regionalDiff;
+    }
+
+    return compareEditorialFlowArticles(left, right, {
+      scoreFn: getRadarRelevanceScore,
+      imageBias: true
+    });
+  });
+
+const getRadarContinuityArticles = (filter = "todos", excludedArticles = []) => {
+  const allArticles = sortRadarContinuityArticles([...(window.NEWS_DATA || [])]);
+  const normalizedFilter = normalizeText(filter);
+  const reservedKeys = buildReservedArticleKeys(["radar"]);
+  const excludedKeys = new Set(
+    (Array.isArray(excludedArticles) ? excludedArticles : [])
+      .map((article) => getArticleUsageKey(article))
+      .filter(Boolean)
+  );
+  const selected = [];
+  const seenKeys = new Set(excludedKeys);
+  const localArticles = sortRadarContinuityArticles(
+    allArticles.filter((article) => isRadarLocalSummaryArticle(article))
+  );
+  const filteredLocalArticles =
+    normalizedFilter === "todos"
+      ? localArticles
+      : sortRadarContinuityArticles(
+          localArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter))
+        );
+  const filteredImpactArticles =
+    normalizedFilter === "todos"
+      ? []
+      : sortRadarContinuityArticles(
+          allArticles.filter(
+            (article) =>
+              articleMatchesCategoryFilter(article, normalizedFilter) &&
+              hasClearLocalReaderImpact(article)
+          )
+        );
+  const localImpactArticles = sortRadarContinuityArticles(
+    allArticles.filter((article) => hasClearLocalReaderImpact(article))
+  );
+
+  const pushArticle = (article, { allowReserved = false } = {}) => {
+    if (!article) {
+      return false;
+    }
+
+    const normalizedArticle = normalizeRuntimeArticle(article);
+    const articleKey = getArticleUsageKey(normalizedArticle) || getRadarArticleKey(normalizedArticle);
+
+    if (!articleKey || seenKeys.has(articleKey)) {
+      return false;
+    }
+
+    if (!normalizedArticle.title || (!normalizedArticle.slug && !normalizedArticle.sourceUrl)) {
+      return false;
+    }
+
+    if (isNationalPoliticsArticle(normalizedArticle) && !hasClearLocalReaderImpact(normalizedArticle)) {
+      return false;
+    }
+
+    if (!allowReserved && reservedKeys.has(articleKey)) {
+      return false;
+    }
+
+    seenKeys.add(articleKey);
+    selected.push(normalizedArticle);
+    return selected.length >= 3;
+  };
+
+  const continuityRounds = [
+    { pool: filteredLocalArticles, allowReserved: false },
+    { pool: filteredLocalArticles, allowReserved: true },
+    { pool: localArticles, allowReserved: false },
+    { pool: localArticles, allowReserved: true },
+    { pool: filteredImpactArticles, allowReserved: false },
+    { pool: filteredImpactArticles, allowReserved: true },
+    { pool: localImpactArticles, allowReserved: false },
+    { pool: localImpactArticles, allowReserved: true }
+  ];
+
+  continuityRounds.some(({ pool, allowReserved }) =>
+    pool.some((article) => pushArticle(article, { allowReserved }))
+  );
+
+  return selected.slice(0, 3);
+};
+
+const buildRadarContinuityState = (filter = "todos", articles = []) => {
+  const normalizedFilter = normalizeText(filter) || "todos";
+  const theme = radarGuideThemes[normalizedFilter] || radarGuideThemes.todos;
+  const hasArticles = Array.isArray(articles) && articles.length > 0;
+  const card = document.createElement("article");
+  const source = document.createElement("span");
+  const title = document.createElement("h3");
+  const summary = document.createElement("p");
+  const list = document.createElement("div");
+  const footer = document.createElement("footer");
+  const footerLabel = document.createElement("span");
+  const footerLink = document.createElement("a");
+
+  card.className = "news-card radar-continuity-state reveal active";
+  card.dataset.category = normalizedFilter;
+
+  source.className = "news-source";
+  source.textContent = `Resumo CZS • ${theme.label}`;
+
+  title.textContent =
+    normalizedFilter === "todos"
+      ? "Resumo em atualização, sem deixar a leitura parar."
+      : `${theme.label}: sem destaque fechado agora.`;
+
+  summary.textContent = hasArticles
+    ? "Ainda não há uma manchete segura para este recorte com a régua completa de fonte, data e foto. Enquanto isso, o painel mantém a leitura viva com matérias reais que ajudam a seguir o dia."
+    : "Ainda não há matéria suficiente para destacar neste recorte. O painel fica em modo de acompanhamento e aponta para o arquivo vivo até novas fontes entrarem.";
+
+  list.className = "radar-continuity-list";
+
+  articles.forEach((article, index) => {
+    const normalizedArticle = normalizeRuntimeArticle(article);
+    const href = buildArticleHref(normalizedArticle);
+    const link = document.createElement("a");
+    const meta = document.createElement("small");
+    const headline = document.createElement("strong");
+    const excerpt = document.createElement("span");
+
+    link.className = "radar-continuity-link";
+    link.href = href;
+    applyArticleLinkAttrs(link, href);
+    link.setAttribute(
+      "aria-label",
+      `Abrir leitura de continuidade ${index + 1}: ${normalizedArticle.title}`
+    );
+
+    meta.textContent = formatCrossedSourceMeta(normalizedArticle);
+    headline.textContent = truncateCopy(normalizedArticle.title, 96);
+    excerpt.textContent = buildReadableCardSummary(normalizedArticle, 132);
+
+    link.append(meta, headline, excerpt);
+    list.appendChild(link);
+  });
+
+  if (!hasArticles) {
+    const emptyNote = document.createElement("span");
+    emptyNote.className = "radar-continuity-note";
+    emptyNote.textContent = "Aguardando nova entrada confiável das fontes monitoradas.";
+    list.appendChild(emptyNote);
+  }
+
+  footerLabel.textContent = hasArticles
+    ? "Fluxo preservado: sem inventar destaque."
+    : "Fluxo preservado: sem notícia falsa.";
+  const archiveHref = "./arquivo.html";
+  footerLink.href = archiveHref;
+  footerLink.textContent = "abrir arquivo vivo";
+  applyArticleLinkAttrs(footerLink, archiveHref);
+
+  footer.append(footerLabel, footerLink);
+  card.append(source, title, summary, list, footer);
+
+  return card;
+};
+
 // FUNÇÃO PARA RENDERIZAR O RADAR (HOME)
 const renderRadar = (filter = "todos") => {
   const radarGrid = document.querySelector("#radar .news-grid");
@@ -2213,9 +2387,14 @@ const renderRadar = (filter = "todos") => {
   }
 
   const spotlightArticles = getRadarSpotlightArticles(filter);
+  const continuityArticles = spotlightArticles.length
+    ? []
+    : getRadarContinuityArticles(filter, spotlightArticles);
+  const displayedArticles = spotlightArticles.length ? spotlightArticles : continuityArticles;
 
   radarGrid.innerHTML = "";
   radarGrid.dataset.activeFilter = filter;
+  radarGrid.dataset.state = spotlightArticles.length ? "spotlight" : "continuity";
 
   spotlightArticles.forEach((article, index) => {
     const card = buildFeedCard(article);
@@ -2237,19 +2416,12 @@ const renderRadar = (filter = "todos") => {
   });
 
   if (spotlightArticles.length === 0) {
-    const emptyState = document.createElement("article");
-    emptyState.className = "news-card radar-empty-state reveal active";
-    emptyState.innerHTML = `
-      <span class="news-source">Resumo CZS</span>
-      <h3>Sem destaque encontrado para este tema agora.</h3>
-      <p>Escolha outro filtro acima para ver mais notícias.</p>
-    `;
-    radarGrid.appendChild(emptyState);
+    radarGrid.appendChild(buildRadarContinuityState(filter, continuityArticles));
   }
 
   setActiveRadarFilter(filter);
-  reserveSurfaceArticles("radar", spotlightArticles);
-  updateRadarGuide(filter, spotlightArticles);
+  reserveSurfaceArticles("radar", displayedArticles);
+  updateRadarGuide(filter, displayedArticles, { continuity: spotlightArticles.length === 0 });
   registerInteractivePanels(radarGrid);
   window.setTimeout(() => registerArticleCardLinks(radarGrid), 0);
 };
@@ -2486,6 +2658,46 @@ const loadCommunityReports = async () => {
   } catch (_error) {
     renderCommunityReports([]);
     return [];
+  }
+};
+
+const renderPublicCorrectionsLog = (items = []) => {
+  if (!publicCorrectionsLog) return;
+  publicCorrectionsLog.innerHTML = "";
+  const title = document.createElement("strong");
+  title.textContent = "Correções públicas";
+  publicCorrectionsLog.appendChild(title);
+
+  if (!items.length) {
+    const empty = document.createElement("p");
+    empty.textContent = "Nenhuma correção pública registrada no momento.";
+    publicCorrectionsLog.appendChild(empty);
+    return;
+  }
+
+  const list = document.createElement("div");
+  list.className = "public-corrections-list";
+  items.slice(0, 4).forEach((item) => {
+    const article = document.createElement("article");
+    const itemTitle = document.createElement("span");
+    const note = document.createElement("p");
+    const time = document.createElement("small");
+    itemTitle.textContent = item.title || "Correção editorial";
+    note.textContent = item.publicNote || "Correção registrada pela redação.";
+    time.textContent = item.correctedAt ? formatCommunityMessageTime(item.correctedAt) : "registro recente";
+    article.append(itemTitle, note, time);
+    list.appendChild(article);
+  });
+  publicCorrectionsLog.appendChild(list);
+};
+
+const loadPublicCorrectionsLog = async () => {
+  if (!publicCorrectionsLog) return;
+  try {
+    const payload = await requestApiJson("/api/editorial/corrections?limit=4");
+    renderPublicCorrectionsLog(Array.isArray(payload?.corrections) ? payload.corrections : []);
+  } catch (_error) {
+    renderPublicCorrectionsLog([]);
   }
 };
 
@@ -7507,6 +7719,29 @@ const buildBrazilDayContentHaystack = (article = {}) => {
   ].join(" "));
 };
 
+const buildBrazilDaySubjectHaystack = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  return normalizeText([
+    normalized.title,
+    normalized.category,
+    normalized.categoryKey,
+    normalized.topicGroup,
+    normalized.sourceUrl
+  ].join(" "));
+};
+
+const isInternationalSubjectArticle = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article || {});
+  const subjectText = buildBrazilDaySubjectHaystack(normalized);
+  const localSubjectText = normalizeText([normalized.title, normalized.category, normalized.categoryKey].join(" "));
+
+  if (juruaScopePattern.test(localSubjectText) || acreScopePattern.test(localSubjectText)) {
+    return false;
+  }
+
+  return internationalOnlyPattern.test(subjectText) || /\b\/(?:mundo|internacional)\//.test(subjectText);
+};
+
 const hasExplicitBrazilDayScope = (article = {}) => {
   const text = buildBrazilDayContentHaystack(article);
   return (
@@ -7522,6 +7757,7 @@ const isInternationalOnlyPublicArticle = (article = {}) => {
   const text = buildBrazilDayHaystack(normalized);
   const sourceUrl = normalizeText(normalized.sourceUrl || "");
 
+  if (isInternationalSubjectArticle(normalized)) return true;
   if (hasExplicitBrazilDayScope(normalized)) return false;
   return internationalOnlyPattern.test(text) || /\b\/(?:mundo|internacional)\//.test(sourceUrl);
 };
@@ -8735,6 +8971,173 @@ const buildDailyBuzzEmptyState = (signalItems = []) => {
   `;
 };
 
+const DAILY_BUZZ_TOPIC_TIMEOUT_MS = 1800;
+
+const fetchDailyBuzzTopicFeed = async (options = {}) =>
+  Promise.race([
+    fetchTopicFeedCached("buzz", 18, options),
+    new Promise((resolve) => {
+      window.setTimeout(() => resolve([]), DAILY_BUZZ_TOPIC_TIMEOUT_MS);
+    })
+  ]);
+
+const getDailyBuzzCandidateItems = (runtimeArticles = [], liveBuzzItems = []) =>
+  dedupeNewsItems([
+    ...(Array.isArray(runtimeArticles) ? runtimeArticles : []),
+    ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+    ...(Array.isArray(liveBuzzItems) ? liveBuzzItems : [])
+  ]).map((item) => normalizeRuntimeArticle(item));
+
+const pickDailyBuzzContinuityStories = (items = [], limit = 4) => {
+  const safeLimit = Math.max(1, Number(limit) || 4);
+  const selected = [];
+  const seen = new Set();
+  const scoredStories = pickBrazilDayRealStories(items, safeLimit, {
+    minScore: 0,
+    allowLatestFallback: true,
+    requireFocus: false,
+    localLimit: Math.min(2, safeLimit),
+    acreLimit: Math.min(2, safeLimit),
+    nationalPolemicLimit: Math.min(2, safeLimit),
+    nationalEntertainmentLimit: Math.min(1, safeLimit)
+  });
+
+  const pushStory = (article) => {
+    const normalizedArticle = normalizeRuntimeArticle(article || {});
+    const key = getArticleUsageKey(normalizedArticle);
+    if (!key || seen.has(key) || !isRealPublicNewsSource(normalizedArticle)) {
+      return false;
+    }
+
+    seen.add(key);
+    selected.push(normalizedArticle);
+    return selected.length >= safeLimit;
+  };
+
+  scoredStories.some(pushStory);
+
+  if (selected.length < safeLimit) {
+    dedupeNewsItems(items)
+      .map((item) => normalizeRuntimeArticle(item))
+      .filter(isRealPublicNewsSource)
+      .filter((article) => !isCultureReviewOnlyArticle(article))
+      .sort((left, right) => {
+        const leftScope = getBrazilDayScope(left);
+        const rightScope = getBrazilDayScope(right);
+        const leftPriority = leftScope === "Vale do Juruá" ? 3 : leftScope === "Acre" ? 2 : 1;
+        const rightPriority = rightScope === "Vale do Juruá" ? 3 : rightScope === "Acre" ? 2 : 1;
+        if (rightPriority !== leftPriority) return rightPriority - leftPriority;
+        return getArticlePublishedTime(right) - getArticlePublishedTime(left);
+      })
+      .some(pushStory);
+  }
+
+  return selected.slice(0, safeLimit);
+};
+
+const buildDailyBuzzContinuityState = (articles = [], signalItems = []) => {
+  const safeArticles = Array.isArray(articles) ? articles.slice(0, 4) : [];
+  const hasArticles = safeArticles.length > 0;
+  const labels = signalItems
+    .slice(0, 3)
+    .map((item) => item.title || item.hashtags?.[0] || item.socialPlatform || "")
+    .filter(Boolean)
+    .map((label) => `<span>${escapeHtml(truncateCopy(label, 28))}</span>`)
+    .join("");
+  const articleLinks = safeArticles
+    .map((item) => {
+      const article = normalizeRuntimeArticle(item);
+      const href = article.sourceUrl || buildArticleHref(article);
+      const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+      const sourceName = article.sourceName || "Fonte pública";
+      const dateLabel =
+        formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+        "agora";
+
+      return `
+        <a class="daily-buzz-continuity-link" href="${escapeRuntimeAttribute(href)}"${externalAttrs}>
+          <small>${escapeHtml([getBrazilDayScope(article), sourceName, dateLabel].filter(Boolean).join(" • "))}</small>
+          <strong>${escapeHtml(truncateCopy(article.title || "Notícia em acompanhamento", 96))}</strong>
+          <span>${escapeHtml(truncateCopy(cleanPublicNewsSummary(article), 132))}</span>
+        </a>
+      `;
+    })
+    .join("");
+
+  return `
+    <article class="trending-card influencer-buzz-card daily-buzz-card daily-buzz-continuity-state reveal active is-visible">
+      <span class="trend-badge hot">leitura em acompanhamento</span>
+      <span class="source-status-badge is-source-confirmed">fontes reais</span>
+      <div class="influencer-buzz-copy">
+        <p class="buzz-kicker">sem inventar polêmica</p>
+        <h3>${hasArticles ? "O dia segue com leitura real enquanto a treta não fecha." : "A editoria acompanha as fontes antes de cravar uma polêmica."}</h3>
+        <p>
+          ${hasArticles
+            ? "Quando não há uma polêmica forte o bastante, o bloco mantém o leitor no fluxo com notícias verificáveis e contexto do Brasil, Acre e Juruá."
+            : "A área fica preenchida em modo de acompanhamento e volta a destacar assunto forte assim que houver fonte pública suficiente."}
+        </p>
+      </div>
+      <div class="daily-buzz-continuity-list">
+        ${articleLinks || `<span class="daily-buzz-continuity-note">Aguardando nova entrada confiável das fontes monitoradas.</span>`}
+      </div>
+      <div class="buzz-inline-meta" aria-label="Assuntos monitorados agora">
+        ${labels || "<span>Brasil</span><span>Acre</span><span>Vale do Juruá</span>"}
+      </div>
+      <div class="engagement buzz-opinion-footer">
+        <span>fluxo preservado: notícia real primeiro</span>
+        <a href="./arquivo.html">abrir arquivo vivo</a>
+      </div>
+    </article>
+  `;
+};
+
+const activateDailyBuzzCards = () => {
+  if (!trendingBuzzGrid) {
+    return;
+  }
+
+  trendingBuzzGrid
+    .querySelectorAll(".reveal")
+    .forEach((node) => node.classList.add("active", "is-visible"));
+  registerArticleCardLinks(trendingBuzzGrid);
+};
+
+const paintDailyTrendingBuzz = (selectedCases = [], continuityStories = [], signalItems = []) => {
+  if (!trendingBuzzGrid) {
+    return;
+  }
+
+  const hasStrongCases = selectedCases.length > 0;
+  const visibleCases = hasStrongCases ? selectedCases : continuityStories;
+
+  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
+  trendingBuzzGrid.classList.toggle("is-daily-buzz-continuity", !hasStrongCases);
+  trendingBuzzGrid.dataset.state = hasStrongCases ? "cases" : "continuity";
+  trendingBuzzGrid.innerHTML = hasStrongCases
+    ? visibleCases.map((item, itemIndex) => buildRealDayNewsCard(item, itemIndex)).join("")
+    : buildDailyBuzzContinuityState(visibleCases, signalItems);
+  reserveSurfaceArticles("dailyBuzz", visibleCases);
+  activateDailyBuzzCards();
+};
+
+const pickDailyTrendingVisibleStories = (selectedCases = [], runtimeArticles = [], liveBuzzItems = []) => {
+  if (selectedCases.length) {
+    return selectedCases;
+  }
+
+  const fallbackStories = pickBrazilDayRealStories(
+    [
+      ...runtimeArticles,
+      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+      ...liveBuzzItems
+    ],
+    6,
+    { minScore: 0, allowLatestFallback: true, requireFocus: false }
+  );
+
+  return fallbackStories;
+};
+
 const rerenderEditorialRemainderSurfaces = () => {
   window.setTimeout(() => {
     renderArchiveHighlights();
@@ -8754,26 +9157,38 @@ const renderDailyTrendingBuzz = async (options = {}) => {
   }
   dailyTrendingBuzzHydrationStarted = true;
 
-  const liveBuzzItems = await fetchTopicFeedCached("buzz", 18, options);
   const runtimeArticles = Array.isArray(options.runtimeArticles) ? options.runtimeArticles : [];
+  const immediateCandidates = getDailyBuzzCandidateItems(runtimeArticles, []);
+  const immediateCases = pickBrazilDayRealStories(
+    immediateCandidates,
+    6,
+    { minScore: 24, allowLatestFallback: false, requireFocus: true }
+  );
+  const immediateContinuity = immediateCases.length
+    ? []
+    : pickDailyBuzzContinuityStories(immediateCandidates, 4);
+
+  paintDailyTrendingBuzz(immediateCases, immediateContinuity, []);
+
+  let liveBuzzItems = [];
+  try {
+    liveBuzzItems = await fetchDailyBuzzTopicFeed(options);
+  } catch (_error) {
+    liveBuzzItems = [];
+  }
+
+  const candidateItems = getDailyBuzzCandidateItems(runtimeArticles, liveBuzzItems);
   const selectedCases = pickBrazilDayRealStories(
-    [
-      ...runtimeArticles,
-      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
-      ...liveBuzzItems
-    ],
+    candidateItems,
     6,
     { minScore: 24, allowLatestFallback: true, requireFocus: true }
   );
+  const visibleCases = pickDailyTrendingVisibleStories(selectedCases, runtimeArticles, liveBuzzItems);
+  const continuityStories = selectedCases.length
+    ? []
+    : pickDailyBuzzContinuityStories(candidateItems, 4);
 
-  trendingBuzzGrid.classList.add("is-daily-buzz", "is-opinion-grid", "is-social-now-grid");
-  trendingBuzzGrid.innerHTML = selectedCases.length
-    ? selectedCases
-        .map((item, itemIndex) => buildRealDayNewsCard(item, itemIndex))
-        .join("")
-    : buildDailyBuzzEmptyState([]);
-  reserveSurfaceArticles("dailyBuzz", selectedCases);
-  registerArticleCardLinks(trendingBuzzGrid);
+  paintDailyTrendingBuzz(visibleCases, continuityStories, liveBuzzItems);
 };
 
 const whatMattersTopics = [
@@ -8878,6 +9293,9 @@ const renderWhatMattersNow = (items = []) => {
     ].filter(Boolean)
   )
     .map((item) => normalizeRuntimeArticle(item))
+    .filter(isRealPublicNewsSource)
+    .filter(isBrazilBuzzArticle)
+    .filter((item) => !isInternationalOnlyPublicArticle(item))
     .filter((item) => item.title && (item.sourceUrl || item.slug))
     .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
     .sort((left, right) =>
@@ -9233,7 +9651,10 @@ const renderDynamicMonthlyBuzz = async (options = {}) => {
 
   const { stories, agentPulse } = await pickMonthlyDynamicStories(options);
   monthlyBuzzGrid.classList.add("is-dynamic-monthly");
-  monthlyBuzzGrid.innerHTML = stories.map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse)).join("");
+  const safeStories = stories.length ? stories : monthlyFallbackStories.slice(0, 4);
+  monthlyBuzzGrid.innerHTML = safeStories
+    .map((story, index) => buildMonthlyDynamicCard(story, index, agentPulse))
+    .join("");
   reserveSurfaceArticles("monthly", stories);
   monthlyBuzzGrid
     .querySelectorAll(".reveal")
@@ -9436,6 +9857,9 @@ const pickCommunityTrendTopics = async (options = {}) => {
     ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
   ])
     .map((item) => normalizeRuntimeArticle(item))
+    .filter(isRealPublicNewsSource)
+    .filter((article) => isBrazilBuzzArticle(article) && !isInternationalOnlyPublicArticle(article))
+    .filter((article) => isBrazilDayPublicFocus(article) || hasExplicitBrazilDayScope(article))
     .map((article) => ({ article, score: getCommunityTrendScore(article) }))
     .filter((entry) => entry.score >= 22)
     .sort((left, right) => {
@@ -10746,13 +11170,16 @@ const socialSurfaceBaseScores = {
 };
 
 const socialSurfaceSignalPattern =
-  /\b(festa|show|festival|evento|agenda|cultura|arte|teatro|cinema|musica|viral|rede social|instagram|tiktok|youtube|influenc|celebridade|aniversario|casamento|exposicao|feira|programacao|oficina|comunidade|historia|superacao|retrato|juventude|turma|bairro|trabalhador|pascoa)\b/;
+  /\b(festa|show|festival|evento|agenda|cultura|arte|teatro|cinema|musica|viral|rede social|instagram|tiktok|youtube|influenc|celebridade|aniversario|casamento|exposicao|feira|programacao|oficina|comunidade|historia|superacao|retrato|juventude|turma|bairro|trabalhador|pascoa|joelma|tierry|expoacre|expojurua|natanzinho|cavalgada)\b/;
 
 const socialSurfaceHeavyPattern =
   /\b(crime|homicidio|prisao|operacao|assalto|roubo|furto|morte|ice|stf|cpi|inss|detran|doenca|hospital|vacina|alagacao|enchente|alerta|beneficiario)\b/;
 
 const socialSurfacePublicEventPattern =
-  /\b(show|festa|festival|programacao|agenda|evento|cultura|credenciamento|trabalhador|pascoa|natal|feira|oficina|artista|apresentacao)\b/;
+  /\b(show|festa|festival|programacao|agenda|evento|cultura|credenciamento|trabalhador|pascoa|natal|feira|oficina|artista|apresentacao|joelma|tierry|expoacre|expojurua|natanzinho|cavalgada)\b/;
+
+const socialSurfaceAcreEventPattern =
+  /\b(acre|rio branco|cruzeiro do sul|vale do jurua|vale do juru[aá]|jurua|juru[aá]|mancio lima|m[âa]ncio lima|epitaciolandia|epitaciol[âa]ndia|tarauaca|tarauac[aá]|expoacre|expojurua)\b/;
 
 const getSocialSurfaceScore = (article = {}) => {
   const normalized = normalizeRuntimeArticle(article);
@@ -10788,6 +11215,19 @@ const getSocialSurfaceScore = (article = {}) => {
 
   if (categoryKey === "prefeitura" && socialSurfacePublicEventPattern.test(haystack)) {
     score += 3;
+  }
+
+  if (socialSurfacePublicEventPattern.test(haystack) && socialSurfaceAcreEventPattern.test(haystack)) {
+    score += 18;
+  }
+
+  const ageDays = getEntertainmentAgeDays(normalized);
+  if (ageDays <= 2) {
+    score += 14;
+  } else if (ageDays <= 7) {
+    score += 6;
+  } else {
+    score -= 8;
   }
 
   if (socialSurfaceHeavyPattern.test(haystack)) {
@@ -12983,6 +13423,20 @@ const getArchiveAnchorDate = (items = []) => {
     return dateFromLocalKey(todayKey);
   }
 
+  const todayDate = dateFromLocalKey(todayKey);
+  if (todayDate) {
+    const yesterdayDate = new Date(
+      todayDate.getFullYear(),
+      todayDate.getMonth(),
+      todayDate.getDate() - 1
+    );
+    const yesterdayKey = getLocalDateKey(yesterdayDate);
+    const yesterdayHasItems = items.some((item) => getArticleDateKey(item) === yesterdayKey);
+    if (yesterdayHasItems) {
+      return dateFromLocalKey(yesterdayKey);
+    }
+  }
+
   return (
     getSortedLiveFeedArticles(items)
       .map((item) => dateFromLocalKey(getArticleDateKey(item)))
@@ -14503,6 +14957,7 @@ const attachCommentSubmission = () => {
 
 const attachCommunitySignalFlow = () => {
   loadCommunityReports();
+  loadPublicCorrectionsLog();
   communityAgentForm?.addEventListener("submit", submitCommunityReport);
 };
 

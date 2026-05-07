@@ -220,9 +220,9 @@ function categoryKeyFromLabel(label = "") {
   if (/\beducacao|escola|aluno|estudante|enem|onibus escolar\b/.test(normalized)) return "educacao";
   if (/\beconomia|negocio|ifood|banco central|juros|comercio|mercadoria|fpm\b/.test(normalized)) return "negocios";
   if (/\besporte|futebol|campeonato|time|atleta\b/.test(normalized)) return "esporte";
-  if (/\bcultura|show|joelma|shakira|anitta|musica|festival|festa|social\b/.test(normalized)) return "cultura";
+  if (/\bcultura|entretenimento|show|joelma|shakira|anitta|musica|festival|festa|social\b/.test(normalized)) return "cultura";
   if (/\bacre|deracre|seasdh|iapen|agenda 2030\b/.test(normalized)) return "acre-governo";
-  return normalized || "cotidiano";
+  return "cotidiano";
 }
 
 const CATEGORY_LABELS = {
@@ -314,9 +314,9 @@ function buildBody(item = {}) {
   const title = cleanText(item.title || "noticia", 180);
   const dateLabel = formatDate(item.publishedAt || item.createdAt || item.date);
   return [
-    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}.`,
-    `${title} e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.`,
-    "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
+    `${sourceName} publicou em ${dateLabel} a base desta notícia.`,
+    "Resumo curto indisponível no momento; veja a matéria completa na fonte original.",
+    "O portal organiza a leitura por editorias e preserva a íntegra na página de leitura."
   ];
 }
 
@@ -354,7 +354,11 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
     sanitizeUrl(pickFirstTag(block, ["guid", "id"]));
   const descriptionMarkup = pickFirstTag(block, ["description", "summary"]);
   const contentMarkup = pickFirstTag(block, ["content:encoded", "content"]);
-  const summary = cleanText(descriptionMarkup || contentMarkup || title, 260);
+  const ledeText = cleanText(descriptionMarkup || contentMarkup || title, 260);
+  const shortSummaryCandidate = cleanText(descriptionMarkup || contentMarkup || title, 160) || title;
+  let summaryText = shortSummaryCandidate;
+  if (summaryText === ledeText) summaryText = title;
+  if (summaryText === ledeText) summaryText = `${String(ledeText).slice(0, 140).trim()}…`;
   const rawDate = pickFirstTag(block, ["pubDate", "published", "updated", "dc:date"]);
   const publishedAt = parseFeedDate(rawDate);
   const rawCategory = cleanText(pickFirstTag(block, ["category"]), 80);
@@ -366,8 +370,9 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
 
   if (!title || !link) return null;
 
-  const categoryInfo = inferCategory({ title, summary, source, rawCategory });
+  const categoryInfo = inferCategory({ title, summary: ledeText, source, rawCategory });
   const slug = slugify(title);
+  const sourceDisplayName = source.name || source.id || "Fonte monitorada";
   const item = {
     id: link,
     slug,
@@ -378,11 +383,11 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
     category: categoryInfo.category,
     categoryKey: categoryInfo.categoryKey,
     previewClass: PREVIEW_CLASS_BY_CATEGORY[categoryInfo.categoryKey] || "thumb-cotidiano",
-    sourceName: source.name || source.id || "Fonte monitorada",
+    sourceName: sourceDisplayName,
     sourceUrl: link,
-    sourceLabel: title,
-    lede: summary || title,
-    summary: summary || title,
+    sourceLabel: `Atualização de ${sourceDisplayName} - ${formatDate(publishedAt)}`,
+    lede: ledeText || title,
+    summary: summaryText || title,
     analysis: "",
     highlights: [],
     development: [],
