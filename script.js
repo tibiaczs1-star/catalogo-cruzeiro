@@ -248,7 +248,7 @@ const buildLiveTickerPhrasePool = (items = []) => {
     .slice(0, 80)
     .map((article) => ({
       label: truncateCopy(article.category || article.sourceName || "Agora", 20),
-      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 120),
+      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 160),
       href: article.slug
         ? `./noticia.html?slug=${encodeURIComponent(article.slug)}`
         : article.sourceUrl || "#radar"

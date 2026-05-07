@@ -2586,6 +2586,9 @@ body.editorial-home .page-shell {
   cursor: pointer;
 }
 
+@media (min-width: 821px) {
+  .ticker-chip {\r\n    min-width: clamp(18rem, 22vw, 26rem);\r\n    min-height: 3.35rem;\r\n  }\r\n\r\n  .ticker-chip-text {\r\n    font-size: 0.76rem;\r\n    max-height: calc(1.25em * 3);\r\n    -webkit-line-clamp: 3;\r\n    line-clamp: 3;\r\n  }\r\n}
+
 .ticker-chip:hover {
   border-color: rgba(16, 35, 60, 0.18);
   box-shadow: 0 18px 34px rgba(16, 35, 60, 0.12);
