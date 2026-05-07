@@ -248,7 +248,10 @@ const buildLiveTickerPhrasePool = (items = []) => {
     .slice(0, 80)
     .map((article) => ({
       label: truncateCopy(article.category || article.sourceName || "Agora", 20),
-      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 84)
+      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 120),
+      href: article.slug
+        ? `./noticia.html?slug=${encodeURIComponent(article.slug)}`
+        : article.sourceUrl || "#radar"
     }))
     .forEach((phrase) => {
       const labelKey = normalizeText(phrase.label || "agora") || "agora";
@@ -1933,8 +1936,9 @@ document.addEventListener("visibilitychange", () => {
 });
 
 const buildTickerChip = (phrase) => {
-  const chip = document.createElement("article");
+  const chip = document.createElement("a");
   chip.className = "ticker-chip";
+  chip.href = phrase?.href || "#radar";
   chip.innerHTML = `
     <span class="ticker-chip-label"></span>
     <span class="ticker-chip-text"></span>
@@ -1953,6 +1957,7 @@ const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
   const textNode = chip.querySelector(".ticker-chip-text");
   const nextLabel = String(phrase.label || "Ao vivo").trim();
   const nextText = String(phrase.text || "").trim();
+  const nextHref = String(phrase.href || "").trim();
 
   if (chip._typingInterval) {
     window.clearInterval(chip._typingInterval);
@@ -1975,6 +1980,14 @@ const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
   chip.classList.remove("is-typing");
 
   textNode.textContent = nextText;
+
+  if (typeof chip.href === "string" && nextHref) {
+    chip.href = nextHref;
+  }
+
+  if (nextText) {
+    chip.setAttribute("aria-label", `${nextLabel}: ${nextText}`);
+  }
 };
 
 const initializeLiveTicker = () => {

@@ -545,8 +545,10 @@ async function collectLatestNewsItems({ limitPerSource = DEFAULT_LIMIT_PER_SOURC
   const results = await Promise.all(
     sources.map(async (source) => {
       try {
+        const sourceLimitRaw = Number(source.limitPerSource || source.limit || 0);
+        const effectiveLimit = sourceLimitRaw > 0 ? sourceLimitRaw : limitPerSource;
         const xml = await fetchText(source.feedUrl);
-        const items = parseFeedItems(xml, source, limitPerSource);
+        const items = parseFeedItems(xml, source, effectiveLimit);
         reports.push({ source: source.id, ok: true, count: items.length });
         return items;
       } catch (error) {
@@ -568,12 +570,41 @@ async function collectLatestNewsItems({ limitPerSource = DEFAULT_LIMIT_PER_SOURC
   };
 }
 
+function buildCuratedActiveWindow(items = [], limit = ACTIVE_WINDOW_LIMIT) {
+  const normalizedItems = Array.isArray(items) ? items : [];
+  const target = Math.max(120, Number(limit || 0) || 0);
+  const pool = normalizedItems.slice(0, Math.min(normalizedItems.length, target * 3));
+  const picked = new Map();
+
+  const take = (predicate) => {
+    for (const item of pool) {
+      if (picked.size >= target) break;
+      const key = dedupeKey(item);
+      if (!key || picked.has(key)) continue;
+      if (!predicate(item)) continue;
+      picked.set(key, item);
+    }
+  };
+
+  // Garantia: mais destaque para Cruzeiro do Sul / Vale do Juruá sem jogar fora recência.
+  take((item) => getRegionalPriorityScore(item) >= 4200);
+  take((item) => getRegionalPriorityScore(item) >= 3200);
+  take(() => true);
+
+  return [...picked.values()].slice(0, target);
+}
+
 async function runCaptureLatestNews(options = {}) {
   const startedAt = new Date().toISOString();
   const capture = await collectLatestNewsItems(options);
   const existingItems = readExistingNewsItems();
   const mergedItems = mergeNewsItems(capture.items, existingItems).slice(0, ARCHIVE_LIMIT);
-  const activeWindowItems = mergedItems.slice(0, ACTIVE_WINDOW_LIMIT);
+  const activeWindowItems = buildCuratedActiveWindow(mergedItems, ACTIVE_WINDOW_LIMIT);
+  const activeKeys = new Set(activeWindowItems.map((item) => dedupeKey(item)).filter(Boolean));
+  const mergedUiItems = [
+    ...activeWindowItems,
+    ...mergedItems.filter((item) => !activeKeys.has(dedupeKey(item)))
+  ].slice(0, ARCHIVE_LIMIT);
   const todayKey = new Intl.DateTimeFormat("en-CA", {
     timeZone: "America/Rio_Branco",
     year: "numeric",
@@ -587,13 +618,13 @@ async function runCaptureLatestNews(options = {}) {
     lastSuccessAt: capture.ok ? new Date().toISOString() : null,
     source: "rss-direct-agents-capture",
     activeWindowItems,
-    items: mergedItems,
+    items: mergedUiItems,
     reports: capture.reports
   };
 
   writeJson(RUNTIME_NEWS_FILE, payload);
   writeJson(NEWS_ARCHIVE_FILE, mergedItems);
-  writeStaticNews(mergedItems);
+  writeStaticNews(mergedUiItems);
 
   const report = {
     ok: capture.ok,
@@ -602,7 +633,7 @@ async function runCaptureLatestNews(options = {}) {
     capturedItems: capture.items.length,
     capturedToday,
     activeWindowItems: activeWindowItems.length,
-    archiveItems: mergedItems.length,
+    archiveItems: mergedUiItems.length,
     reports: capture.reports
   };
 
