@@ -1,54 +1,28 @@
-# Codex Memory System
+# Codex Memory
 
-Memoria local persistente do projeto para ordens do usuario, referencias de fotos/textos,
-estado atual e handoff entre sessoes.
+Memoria local curta para este workspace.
 
-## Objetivo
+## Foco Vivo
 
-Evitar perder contexto quando:
+- PubPaid 1
+- PubPaid 2
+- Jornal
+- Cheffe Call / agentes reais
 
-- os creditos acabarem;
-- a conversa reiniciar;
-- a conta mudar;
-- outra sessao do Codex assumir o mesmo workspace.
+## Arquivos
 
-## Arquivos principais
+- `current-state.md`: estado atual curto.
+- `handoff.md`: retomada curta.
+- `orders.json`: somente ordens relevantes atuais.
+- `assets.json`: somente assets realmente uteis.
+- `credit-end-protocol.md`: protocolo de retomada/fim de credito.
+- `codex-health-protocol.md`: rotina de saude local.
 
-- `../PUBPAID_2_GLOBAL_HANDOFF.md`: retomada global da PubPaid 2.0 para qualquer conta/agente.
-- `current-state.md`: foco atual, contexto vivo e proximos passos.
-- `handoff.md`: resumo curto para retomada rapida por outra sessao.
-- `orders.json`: historico estruturado das ordens do usuario.
-- `assets.json`: referencias locais para fotos, capturas, anexos e textos relevantes.
-- `credit-end-protocol.md`: protocolo obrigatorio para fim de credito, retomada e leitura das instrucoes antes de agir.
+## Regras
 
-## Regras de uso
-
-1. Ler este diretorio junto com `CODEX_MEMORY.md` antes de continuar um trabalho em andamento.
-2. Ler `credit-end-protocol.md` quando a sessao estiver perto de acabar ou quando houver retomada.
-3. Registrar cada nova ordem relevante do usuario em `orders.json`.
-4. Vincular imagens, capturas, pastas recuperadas e arquivos importantes em `assets.json`.
-5. Atualizar `current-state.md` e `handoff.md` ao final de mudancas grandes, validacoes visuais ou pausas de sessao.
-6. Preferir guardar caminhos locais e referencias concretas, nao lembrancas vagas.
-
-## Comandos
-
-```bash
-node scripts/codex-memory.js ensure
-node scripts/codex-memory.js status
-node scripts/codex-memory.js add-order --raw "texto bruto" --summary "resumo curto"
-node scripts/codex-memory.js add-asset --path ".codex-temp/alguma-captura.png" --kind image --note "captura de validacao"
-node scripts/codex-memory.js set-state --title "objetivo atual" --summary "contexto curto" --next "proximo passo"
-node scripts/codex-memory.js set-handoff --summary "o que foi feito" --next "o que falta"
-```
-
-## Fontes locais de memoria visual ja conhecidas
-
-- `recovered-chat-assets/`
-- `recovered-vscode-chat-assets/`
-- `.codex-temp/session-recovery-review/`
-- `.codex-temp/focus-review/`
-
-## Limite real
-
-Esta memoria e local ao workspace. Ela persiste neste projeto e nesta maquina, mas nao altera
-a memoria interna da plataforma fora deste repositorio.
+1. Nao transformar lixo temporario em memoria permanente.
+2. Nao guardar historico gigante de conversa aqui.
+3. Se gerar capturas, logs, `output/` ou `.codex-temp/`, apagar ao final da rodada.
+4. Se o trabalho for PubPaid 2, ler `../PUBPAID_2_GLOBAL_HANDOFF.md`.
+5. Se o trabalho for Jornal, preservar portugues publico e usar review em rodada grande.
+6. Se o trabalho for Cheffe Call/agentes, validar rotas com prova antes de dizer que esta implementado.
