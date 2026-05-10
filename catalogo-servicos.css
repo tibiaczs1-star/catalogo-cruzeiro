@@ -1120,3 +1120,163 @@ body.catalogo-servicos-page[data-svc-module="locacao-transporte"] .svc-hero {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* 2026-05-08: catálogo integrado ao sistema premium escuro. */
+:root {
+  --svc-bg: #03101d;
+  --svc-card: rgba(10, 33, 54, 0.94);
+  --svc-ink: #f8fbff;
+  --svc-muted: #cbd5e1;
+  --svc-line: rgba(121, 181, 226, 0.2);
+  --svc-accent: #f0b429;
+}
+
+body.catalogo-servicos-page {
+  background:
+    radial-gradient(circle at 8% 14%, rgba(240, 180, 41, 0.12), transparent 28rem),
+    radial-gradient(circle at 90% 24%, rgba(77, 163, 255, 0.14), transparent 30rem),
+    linear-gradient(180deg, #03101d 0%, #061624 44%, #020812 100%) !important;
+  color: var(--svc-ink) !important;
+  color-scheme: dark;
+}
+
+.svc-wrap {
+  width: min(100% - 32px, 1560px);
+}
+
+.svc-topbar,
+.svc-hero,
+.site-demo-notice,
+.svc-controls,
+.svc-card,
+.svc-card.is-featured,
+.svc-disclaimer,
+.svc-sources,
+.svc-ads-rack,
+.svc-ad-slot {
+  border: 1px solid var(--svc-line) !important;
+  background:
+    radial-gradient(circle at 96% 0%, rgba(240, 180, 41, 0.1), transparent 30%),
+    linear-gradient(145deg, rgba(10, 33, 54, 0.96), rgba(3, 16, 29, 0.98)) !important;
+  color: #f8fbff !important;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22) !important;
+}
+
+.site-demo-notice span,
+.svc-feature-eyebrow,
+.svc-ads-head span {
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--svc-accent) !important;
+}
+
+.site-demo-notice span::before,
+.svc-feature-eyebrow::before,
+.svc-ads-head span::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 2px;
+  margin-right: 0.42rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--svc-accent), rgba(240, 180, 41, 0.15));
+  vertical-align: middle;
+}
+
+.svc-hero::before {
+  background:
+    linear-gradient(180deg, rgba(3, 16, 29, 0.16) 0%, rgba(3, 16, 29, 0.84) 84%) !important;
+}
+
+.site-demo-notice strong,
+.svc-feature-copy h2,
+.svc-card h3,
+.svc-ads-head strong,
+.svc-ad-slot strong,
+.svc-disclaimer strong,
+.svc-sources strong {
+  color: #ffffff !important;
+}
+
+.site-demo-notice p,
+.svc-hero p,
+.svc-feature-copy p,
+.svc-feature-list li,
+.svc-card p,
+.svc-ad-slot small,
+.svc-disclaimer,
+.svc-sources {
+  color: rgba(203, 213, 225, 0.82) !important;
+}
+
+.svc-search,
+.svc-tab,
+.svc-btn {
+  border: 1px solid rgba(121, 181, 226, 0.24) !important;
+  background: rgba(2, 13, 23, 0.76) !important;
+  color: #f8fbff !important;
+  box-shadow: none !important;
+}
+
+.svc-search::placeholder {
+  color: rgba(203, 213, 225, 0.62) !important;
+}
+
+.svc-tab.is-active,
+.svc-btn.primary {
+  border-color: rgba(240, 180, 41, 0.62) !important;
+  background: linear-gradient(180deg, #ffd06a, #eda51f) !important;
+  color: #061421 !important;
+}
+
+.svc-tabs {
+  overflow: visible !important;
+  scrollbar-width: none !important;
+}
+
+.svc-tabs::-webkit-scrollbar,
+.svc-grid::-webkit-scrollbar,
+.svc-ads-rack::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+.svc-tag {
+  border: 1px solid rgba(121, 181, 226, 0.22);
+  background: rgba(255, 255, 255, 0.055) !important;
+  color: rgba(248, 251, 255, 0.88) !important;
+}
+
+.svc-tag.em-breve {
+  border-color: rgba(240, 180, 41, 0.36);
+  background: rgba(240, 180, 41, 0.1) !important;
+  color: #ffd37a !important;
+}
+
+.svc-tag.destaque {
+  border-color: rgba(77, 163, 255, 0.4);
+  background: rgba(77, 163, 255, 0.12) !important;
+  color: #9fd1ff !important;
+}
+
+.svc-ad-slot {
+  border-style: solid !important;
+  text-decoration: none;
+}
+
+.svc-ad-slot span {
+  color: #ffd37a !important;
+}
+
+@media (max-width: 640px) {
+  .svc-wrap {
+    width: min(100% - 20px, 1560px);
+    margin-block: 10px;
+  }
+
+  .svc-topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

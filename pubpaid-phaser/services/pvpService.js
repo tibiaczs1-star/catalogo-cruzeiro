@@ -23,7 +23,7 @@ async function requestPvp(path, body = {}) {
   return payload;
 }
 
-export async function fetchPvpState(gameId = "darts") {
+export async function fetchPvpState(gameId = "pool") {
   try {
     const response = await fetch(`./api/pubpaid/pvp/state?gameId=${encodeURIComponent(gameId)}`, {
       method: "GET",

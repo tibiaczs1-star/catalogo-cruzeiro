@@ -23,28 +23,32 @@ const refs = {
   accountLabel: document.querySelector("[data-game-account-label]")
 };
 
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
 function renderChips(chips = []) {
   if (!refs.panelChips) return;
-  refs.panelChips.innerHTML = "";
-  chips.forEach((chip) => {
-    const node = document.createElement("span");
-    node.textContent = chip;
-    refs.panelChips.appendChild(node);
-  });
+  refs.panelChips.innerHTML = chips
+    .map((chip) => `<span>${escapeHtml(chip)}</span>`)
+    .join("");
 }
 
 function renderActions(actions = []) {
   if (!refs.panelActions) return;
-  refs.panelActions.innerHTML = "";
-  actions.forEach((action) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.textContent = action.label;
-    button.dataset.panelAction = action.id;
-    if (action.primary) button.classList.add("is-primary");
-    if (window.__PUBPAID_PANEL_BUSY__) button.disabled = true;
-    refs.panelActions.appendChild(button);
-  });
+  refs.panelActions.innerHTML = actions
+    .map((action) => {
+      const className = action.primary ? " class=\"is-primary\"" : "";
+      const disabled = window.__PUBPAID_PANEL_BUSY__ ? " disabled" : "";
+      return `<button type="button"${className} data-panel-action="${escapeHtml(action.id)}"${disabled}>${escapeHtml(action.label)}</button>`;
+    })
+    .join("");
 }
 
 function renderPanelStatus(view) {

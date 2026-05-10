@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Central Master | Catálogo Cruzeiro do Sul</title>
+    <style>
+      :root {
+        --bg: #020d18;
+        --panel: rgba(7, 20, 34, 0.86);
+        --panel-strong: rgba(9, 28, 46, 0.94);
+        --line: rgba(131, 190, 238, 0.2);
+        --gold: #f6b93b;
+        --gold-soft: rgba(246, 185, 59, 0.16);
+        --blue: #68b7ff;
+        --ink: #f8fbff;
+        --muted: #a7b6c8;
+        --good: #8ff3bd;
+        --warn: #ffd07a;
+        --bad: #ff9a9a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 12% 8%, rgba(246, 185, 59, 0.12), transparent 30%),
+          radial-gradient(circle at 86% 16%, rgba(104, 183, 255, 0.14), transparent 28%),
+          linear-gradient(180deg, #020d18 0%, #041323 54%, #020a13 100%);
+        color: var(--ink);
+        font-family: "Segoe UI", "Inter", Arial, sans-serif;
+        letter-spacing: 0;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(110deg, transparent 0 18%, rgba(246, 185, 59, 0.12) 18.4% 19.1%, transparent 19.5% 100%),
+          linear-gradient(78deg, transparent 0 69%, rgba(104, 183, 255, 0.1) 69.4% 70%, transparent 70.3% 100%);
+        opacity: 0.88;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .master-gate {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background:
+          radial-gradient(circle at 50% 24%, rgba(246, 185, 59, 0.18), transparent 18%),
+          radial-gradient(circle at 20% 20%, rgba(104, 183, 255, 0.16), transparent 28%),
+          rgba(2, 10, 19, 0.96);
+        transition: opacity 420ms ease, visibility 420ms ease;
+      }
+
+      body.is-unlocked .master-gate {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .gate-card {
+        width: min(100%, 560px);
+        display: grid;
+        gap: 18px;
+        padding: clamp(22px, 5vw, 36px);
+        border: 1px solid rgba(246, 185, 59, 0.22);
+        border-radius: 18px;
+        background:
+          linear-gradient(180deg, rgba(8, 25, 43, 0.96), rgba(3, 14, 25, 0.98));
+        box-shadow:
+          0 28px 80px rgba(0, 0, 0, 0.48),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      }
+
+      .brand-mark {
+        width: 66px;
+        aspect-ratio: 1;
+        border: 1px solid rgba(246, 185, 59, 0.55);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--gold);
+        position: relative;
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        background: currentColor;
+        border-radius: 999px;
+      }
+
+      .brand-mark::before {
+        width: 48px;
+        height: 2px;
+      }
+
+      .brand-mark::after {
+        width: 2px;
+        height: 48px;
+      }
+
+      .gate-card h1,
+      .hub-hero h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2rem, 7vw, 4.8rem);
+        line-height: 0.94;
+        letter-spacing: 0;
+      }
+
+      .gate-card p,
+      .hub-hero p,
+      .card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .gate-form {
+        display: grid;
+        gap: 12px;
+      }
+
+      .field {
+        display: grid;
+        gap: 7px;
+      }
+
+      .field span {
+        color: #dce9f8;
+        font-size: 0.84rem;
+        font-weight: 800;
+      }
+
+      .field input,
+      .field textarea {
+        width: 100%;
+        border: 1px solid rgba(131, 190, 238, 0.28);
+        border-radius: 10px;
+        background: rgba(2, 10, 19, 0.72);
+        color: var(--ink);
+        padding: 13px 14px;
+        outline: none;
+      }
+
+      .field textarea {
+        min-height: 104px;
+        resize: vertical;
+      }
+
+      .field input:focus,
+      .field textarea:focus {
+        border-color: rgba(246, 185, 59, 0.68);
+        box-shadow: 0 0 0 3px rgba(246, 185, 59, 0.12);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 11px 16px;
+        border: 1px solid rgba(246, 185, 59, 0.34);
+        border-radius: 10px;
+        background: linear-gradient(180deg, #f8c65f, #d79626);
+        color: #08111d;
+        font-weight: 900;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .button.secondary {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--ink);
+        border-color: rgba(131, 190, 238, 0.22);
+      }
+
+      .feedback {
+        min-height: 20px;
+        color: var(--warn);
+        font-size: 0.9rem;
+      }
+
+      .unlock-transition {
+        position: fixed;
+        inset: 0;
+        z-index: 18;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(2, 10, 19, 0.9);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      body.is-transitioning .unlock-transition {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .unlock-core {
+        display: grid;
+        place-items: center;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .pulse-ring {
+        width: 140px;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        border: 1px solid rgba(246, 185, 59, 0.34);
+        display: grid;
+        place-items: center;
+        animation: masterPulse 1350ms ease-in-out infinite;
+      }
+
+      .pulse-ring .brand-mark {
+        width: 88px;
+      }
+
+      @keyframes masterPulse {
+        0%, 100% { box-shadow: 0 0 0 0 rgba(246, 185, 59, 0.26); transform: scale(0.98); }
+        50% { box-shadow: 0 0 0 28px rgba(246, 185, 59, 0); transform: scale(1); }
+      }
+
+      .shell {
+        position: relative;
+        z-index: 1;
+        width: min(1760px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 30px 0 48px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(4, 18, 32, 0.74);
+        backdrop-filter: blur(12px);
+      }
+
+      .topbar strong {
+        color: var(--gold);
+      }
+
+      .topbar-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hub-hero {
+        min-height: 420px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .hero-copy,
+      .choice-panel,
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background:
+          linear-gradient(180deg, rgba(9, 28, 46, 0.86), rgba(3, 14, 25, 0.92));
+        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.28);
+      }
+
+      .hero-copy {
+        display: grid;
+        align-content: end;
+        gap: 18px;
+        padding: clamp(22px, 4vw, 48px);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .hero-copy::after {
+        content: "";
+        position: absolute;
+        right: 8%;
+        top: 10%;
+        width: 240px;
+        aspect-ratio: 1;
+        border: 1px solid rgba(246, 185, 59, 0.22);
+        border-radius: 50%;
+        opacity: 0.8;
+      }
+
+      .hero-copy > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .status-strip {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 10px;
+      }
+
+      .status-pill {
+        display: grid;
+        gap: 4px;
+        padding: 12px;
+        border: 1px solid rgba(131, 190, 238, 0.16);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .status-pill span {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .status-pill strong {
+        color: var(--ink);
+      }
+
+      .choice-panel {
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .choice-panel h2,
+      .card h2 {
+        margin: 0;
+        font-size: 1.16rem;
+      }
+
+      .card h3 {
+        margin: 8px 0 0;
+        font-size: 0.9rem;
+        color: var(--gold);
+      }
+
+      .choice-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .choice-card {
+        display: grid;
+        gap: 8px;
+        min-height: 126px;
+        padding: 14px;
+        border: 1px solid rgba(131, 190, 238, 0.18);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.045);
+        text-decoration: none;
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      }
+
+      .choice-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(246, 185, 59, 0.5);
+        background: rgba(246, 185, 59, 0.08);
+      }
+
+      .choice-card span {
+        color: var(--gold);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .choice-card strong {
+        font-size: 1rem;
+      }
+
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .grid.kpis {
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      }
+
+      .grid.two {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      }
+
+      .card {
+        padding: 18px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .kpi-value {
+        font-size: 1.85rem;
+        font-weight: 900;
+        color: var(--ink);
+      }
+
+      .report-list,
+      .suggestion-list,
+      .action-log {
+        display: grid;
+        gap: 10px;
+      }
+
+      .report-row,
+      .suggestion-row,
+      .log-row {
+        padding: 12px;
+        border: 1px solid rgba(131, 190, 238, 0.14);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .report-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        width: fit-content;
+        padding: 5px 8px;
+        border-radius: 999px;
+        background: rgba(104, 183, 255, 0.14);
+        color: #9fd4ff;
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .badge.good {
+        background: rgba(143, 243, 189, 0.14);
+        color: var(--good);
+      }
+
+      .badge.warn {
+        background: rgba(255, 208, 122, 0.14);
+        color: var(--warn);
+      }
+
+      .action-panel {
+        display: grid;
+        gap: 12px;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      @media (max-width: 980px) {
+        .hub-hero {
+          grid-template-columns: 1fr;
+          min-height: 0;
+        }
+
+        .choice-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: min(100% - 20px, 1760px);
+          padding-top: 14px;
+        }
+
+        .topbar,
+        .topbar-actions,
+        .button-row {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .button,
+        .topbar-actions a {
+          width: 100%;
+        }
+
+        .hero-copy {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="master-gate" aria-label="Acesso master">
+      <form class="gate-card gate-form" id="masterForm">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>Central Master</h1>
+          <p>Digite a senha admin master existente. A senha é conferida pelo backend e não fica escrita no HTML público.</p>
+        </div>
+        <label class="field">
+          <span>API base</span>
+          <input id="apiBaseInput" type="url" placeholder="http://localhost:3000" autocomplete="url" />
+        </label>
+        <label class="field">
+          <span>Senha master</span>
+          <input id="masterPasswordInput" type="password" placeholder="Senha admin master" autocomplete="current-password" />
+        </label>
+        <button class="button" type="submit">Entrar na central</button>
+        <div class="feedback" id="gateFeedback" role="status"></div>
+      </form>
+    </section>
+
+    <section class="unlock-transition" aria-hidden="true">
+      <div class="unlock-core">
+        <div class="pulse-ring"><div class="brand-mark"></div></div>
+        <h2>Para onde deseja ir?</h2>
+        <p>A central está abrindo os caminhos de controle, captação, revisão e agentes.</p>
+      </div>
+    </section>
+
+    <main class="shell" id="masterShell" hidden>
+      <nav class="topbar" aria-label="Topo da central">
+        <div>
+          <strong>Catálogo Cruzeiro do Sul</strong>
+          <div>Operação local antes de qualquer publicação online.</div>
+        </div>
+        <div class="topbar-actions">
+          <a class="button secondary" href="/index.html?skipIntro=1&skipWelcome=1">Ver home</a>
+          <button class="button secondary" type="button" id="lockButton">Bloquear</button>
+        </div>
+      </nav>
+
+      <section class="hub-hero">
+        <article class="hero-copy">
+          <div class="brand-mark" aria-hidden="true"></div>
+          <h1>Controle editorial, agentes e captação no mesmo lugar.</h1>
+          <p>
+            Esta tela reúne o admin master, Chefe Call, dashboards, escritórios, captação,
+            revisão e sincronização local. O objetivo é estudar tudo antes de publicar online.
+          </p>
+          <div class="status-strip" id="statusStrip"></div>
+        </article>
+
+        <aside class="choice-panel">
+          <div>
+            <h2>Para onde quer ir?</h2>
+            <p>Atalhos principais da operação.</p>
+          </div>
+          <div class="choice-grid" id="choiceGrid"></div>
+        </aside>
+      </section>
+
+      <section class="grid kpis" id="kpiGrid"></section>
+
+      <section class="grid two">
+        <article class="card">
+          <h2>Rodada com os agentes</h2>
+          <p>
+            Envie a ordem mestre para Chefe Call e runtime dos agentes. Use antes de gerar
+            relatório final ou antes de decidir publicar online.
+          </p>
+          <label class="field">
+            <span>Ordem da reunião</span>
+            <textarea id="meetingInstruction">Ordem mestre local: reunir todos os agentes e escritórios antes de qualquer deploy online. Estudem o novo layout premium, a home mobile, catálogo telefônico, captação de notícias, sincronização online/offline, review team, admin master, Chefe Call, dashboards e escritórios. Usem a senha master existente apenas pelo fluxo protegido, sem gravar segredo em HTML, JS público, relatório ou log. Entreguem: 1) o que está funcionando; 2) riscos encontrados; 3) aprendizados da rodada; 4) melhorias obrigatórias antes de publicar; 5) sugestões para o site ficar mais profissional, rápido, confiável e fácil de controlar.</textarea>
+          </label>
+          <div class="button-row">
+            <button class="button" type="button" id="startCheffeButton">Abrir Chefe Call</button>
+            <button class="button secondary" type="button" id="runAgentsButton">Rodar agentes</button>
+            <button class="button secondary" type="button" id="studyButton">Estudar ecossistema</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Captação e sincronização</h2>
+          <p>
+            Atualize notícias e confira a última sincronização online/offline. O sync completo
+            continua sendo travado pelo comando local para evitar publicação acidental.
+          </p>
+          <div class="button-row">
+            <button class="button" type="button" id="refreshNewsButton">Atualizar captação</button>
+            <a class="button secondary" href="/api/news/aggregator?limit=50" target="_blank" rel="noreferrer">Ver agregador</a>
+            <a class="button secondary" href="/api/daily-agent-pulse" target="_blank" rel="noreferrer">Pulso público</a>
+          </div>
+          <div class="report-list" id="reportList"></div>
+          <h3>Saúde das fontes</h3>
+          <div class="report-list" id="sourceHealthList"></div>
+        </article>
+      </section>
+
+      <section class="grid two">
+        <article class="card">
+          <h2>O que os agentes devem estudar</h2>
+          <div class="suggestion-list" id="suggestionList"></div>
+        </article>
+
+        <article class="card">
+          <h2>Interação da rodada</h2>
+          <div class="action-log" id="actionLog">
+            <div class="log-row">Aguardando ação master.</div>
+          </div>
+          <h3>Auditoria master</h3>
+          <div class="report-list" id="auditList"></div>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const ACCESS_KEY = "catalogo_master_access_v1";
+      let state = {
+        apiBase: "",
+        password: "",
+        hub: null
+      };
+
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function normalizeBase(value) {
+        return String(value || "").trim().replace(/\/$/, "");
+      }
+
+      function getStoredAccess() {
+        try {
+          return JSON.parse(sessionStorage.getItem(ACCESS_KEY) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function storeAccess(value) {
+        try {
+          sessionStorage.setItem(ACCESS_KEY, JSON.stringify(value || {}));
+        } catch {
+          // session storage may be blocked
+        }
+      }
+
+      function clearAccess() {
+        try {
+          sessionStorage.removeItem(ACCESS_KEY);
+        } catch {
+          // session storage may be blocked
+        }
+      }
+
+      function headers() {
+        return {
+          "Content-Type": "application/json",
+          "x-full-admin-password": state.password || ""
+        };
+      }
+
+      async function requestJson(path, options = {}) {
+        const response = await fetch(`${state.apiBase}${path}`, {
+          ...options,
+          headers: {
+            ...headers(),
+            ...(options.headers || {})
+          }
+        });
+        const payload = await response.json().catch(() => ({}));
+        if (!response.ok || payload.ok === false) {
+          throw new Error(payload.error || payload.message || "Ação não concluída.");
+        }
+        return payload;
+      }
+
+      function setLog(message, tone = "") {
+        const el = $("actionLog");
+        const at = new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+        const row = document.createElement("div");
+        row.className = "log-row";
+        row.innerHTML = `<span class="badge ${tone}">${escapeHtml(at)}</span><p>${escapeHtml(message)}</p>`;
+        el.prepend(row);
+      }
+
+      function renderHub(hub) {
+        state.hub = hub;
+        $("masterShell").hidden = false;
+        const statusStrip = $("statusStrip");
+        statusStrip.innerHTML = (hub.statusCards || []).slice(0, 3).map((card) => `
+          <article class="status-pill">
+            <span>${escapeHtml(card.label)}</span>
+            <strong>${escapeHtml(card.value)}</strong>
+          </article>
+        `).join("");
+
+        $("choiceGrid").innerHTML = (hub.links || []).map((link) => `
+          <a class="choice-card" href="${escapeHtml(link.href)}" ${link.href.startsWith("/api/") ? 'target="_blank" rel="noreferrer"' : ""}>
+            <span>${escapeHtml(link.area)}</span>
+            <strong>${escapeHtml(link.label)}</strong>
+            <p>Entrar</p>
+          </a>
+        `).join("");
+
+        $("kpiGrid").innerHTML = (hub.statusCards || []).map((card) => `
+          <article class="card">
+            <span class="badge">${escapeHtml(card.label)}</span>
+            <div class="kpi-value">${escapeHtml(card.value)}</div>
+            <p>${escapeHtml(card.detail)}</p>
+          </article>
+        `).join("");
+
+        const reports = [
+          ["Review team", hub.reports?.review?.totalIssues === 0 ? "OK" : "Revisar", hub.reports?.review?.generatedAt || "sem relatório"],
+          ["Sync online/offline", hub.reports?.sync?.ok ? "OK" : "Pendente", hub.reports?.sync?.finishedAt || "rode npm run sync:online-local"],
+          ["Captação", hub.reports?.capture?.capturedItems || hub.reports?.capture?.totalItems || 0, hub.reports?.capture?.lastSuccessAt || hub.reports?.capture?.updatedAt || "sem data"],
+          ["Integridade", hub.reports?.articleIntegrity?.missingCount || 0, hub.reports?.articleIntegrity?.checkedAt || "sem auditoria"]
+        ];
+        $("reportList").innerHTML = reports.map(([label, value, detail]) => `
+          <div class="report-row">
+            <strong>${escapeHtml(label)}</strong>
+            <span class="badge ${value === "OK" || value === 0 ? "good" : "warn"}">${escapeHtml(value)}</span>
+            <small>${escapeHtml(detail)}</small>
+          </div>
+        `).join("");
+
+        const sourceHealth = hub.reports?.sourceHealth || [];
+        $("sourceHealthList").innerHTML = sourceHealth.length ? sourceHealth.slice(0, 12).map((item) => {
+          const tone = item.status === "ok" ? "good" : "warn";
+          const detail = item.error || `${item.count || 0} itens`;
+          return `
+            <div class="report-row">
+              <strong>${escapeHtml(item.source)}</strong>
+              <span class="badge ${tone}">${escapeHtml(item.status)}</span>
+              <small>${escapeHtml(detail)}</small>
+            </div>
+          `;
+        }).join("") : '<div class="report-row"><strong>Sem relatório de fontes</strong><span class="badge warn">pendente</span><small>rode sync/captação</small></div>';
+
+        $("suggestionList").innerHTML = (hub.suggestions || []).map((item) => `
+          <article class="suggestion-row">
+            <span class="badge ${item.priority === "agora" ? "good" : "warn"}">${escapeHtml(item.priority)}</span>
+            <strong>${escapeHtml(item.title)}</strong>
+            <p>${escapeHtml(item.detail)}</p>
+          </article>
+        `).join("");
+
+        const auditRows = hub.reports?.audit?.recent || [];
+        $("auditList").innerHTML = auditRows.length ? auditRows.slice(0, 6).map((item) => `
+          <div class="report-row">
+            <strong>${escapeHtml(item.action)}</strong>
+            <span class="badge ${item.ok ? "good" : "warn"}">${escapeHtml(item.ok ? "ok" : "bloq")}</span>
+            <small>${escapeHtml(item.result || item.endpoint || item.at)}</small>
+          </div>
+        `).join("") : '<div class="report-row"><strong>Sem ações registradas</strong><span class="badge">novo</span><small>o log começa no próximo acesso</small></div>';
+      }
+
+      async function unlock(event) {
+        event.preventDefault();
+        const feedback = $("gateFeedback");
+        state.apiBase = normalizeBase($("apiBaseInput").value || (location.protocol === "file:" ? "http://localhost:3000" : location.origin));
+        state.password = String($("masterPasswordInput").value || "");
+        feedback.textContent = "Conferindo senha master...";
+        try {
+          const payload = await requestJson("/api/master-admin/access", {
+            method: "POST",
+            body: JSON.stringify({ password: state.password })
+          });
+          storeAccess({ apiBase: state.apiBase, masterPassword: state.password });
+          document.body.classList.add("is-transitioning");
+          window.setTimeout(() => {
+            document.body.classList.add("is-unlocked");
+            renderHub(payload.hub);
+            setLog("Central master aberta. Escolha o destino ou rode a reunião dos agentes.", "good");
+            window.setTimeout(() => document.body.classList.remove("is-transitioning"), 760);
+          }, 520);
+        } catch (error) {
+          feedback.textContent = error.message || "Senha inválida.";
+        }
+      }
+
+      async function refreshHub() {
+        const payload = await requestJson("/api/master-admin/summary");
+        renderHub(payload);
+      }
+
+      async function runAction(kind) {
+        const instruction = $("meetingInstruction").value;
+        try {
+          if (kind === "cheffe") {
+            setLog("Abrindo Chefe Call com a ordem mestre...");
+            await requestJson("/api/cheffe-call/start", {
+              method: "POST",
+              body: JSON.stringify({ password: state.password, instruction, priority: "maxima" })
+            });
+            setLog("Chefe Call aberta e registrada para os agentes.", "good");
+          }
+          if (kind === "agents") {
+            setLog("Rodando runtime dos agentes reais...");
+            await requestJson("/api/real-agents/run", {
+              method: "POST",
+              body: JSON.stringify({ password: state.password, message: instruction, priority: "alta" })
+            });
+            setLog("Agentes reais finalizaram a rodada local.", "good");
+          }
+          if (kind === "study") {
+            setLog("Gerando estudo do ecossistema...");
+            await requestJson("/api/cheffe-call/ecosystem-study", {
+              method: "POST",
+              body: JSON.stringify({ password: state.password, instruction, trigger: "admin-master-study" })
+            });
+            setLog("Estudo do ecossistema atualizado.", "good");
+          }
+          if (kind === "news") {
+            setLog("Atualizando captação RSS local...");
+            await requestJson("/api/news/refresh", {
+              method: "POST",
+              body: JSON.stringify({ limit: 24 })
+            });
+            setLog("Captação atualizada no backend local.", "good");
+          }
+          await refreshHub();
+        } catch (error) {
+          setLog(error.message || "Ação não concluída.", "warn");
+        }
+      }
+
+      function boot() {
+        const stored = getStoredAccess();
+        const base = normalizeBase(stored.apiBase || (location.protocol === "file:" ? "http://localhost:3000" : location.origin));
+        $("apiBaseInput").value = base;
+        state.apiBase = base;
+        state.password = String(stored.masterPassword || "");
+        if (state.password) {
+          requestJson("/api/master-admin/summary")
+            .then((payload) => {
+              document.body.classList.add("is-unlocked");
+              renderHub(payload);
+              setLog("Sessão master restaurada nesta aba.", "good");
+            })
+            .catch(() => {
+              clearAccess();
+              state.password = "";
+            });
+        }
+      }
+
+      $("masterForm").addEventListener("submit", unlock);
+      $("lockButton").addEventListener("click", () => {
+        clearAccess();
+        location.reload();
+      });
+      $("startCheffeButton").addEventListener("click", () => runAction("cheffe"));
+      $("runAgentsButton").addEventListener("click", () => runAction("agents"));
+      $("studyButton").addEventListener("click", () => runAction("study"));
+      $("refreshNewsButton").addEventListener("click", () => runAction("news"));
+      boot();
+    </script>
+  </body>
+</html>

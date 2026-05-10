@@ -281,6 +281,14 @@
     }
   }
 
+  function hasSeenInitialHomeLoaderInThisSession() {
+    try {
+      return sessionStorage.getItem(INITIAL_HOME_LOADER_SESSION_KEY) === "1";
+    } catch (_error) {
+      return false;
+    }
+  }
+
   function isBackForwardNavigation() {
     try {
       const navigationEntry = performance.getEntriesByType("navigation")?.[0];
@@ -409,17 +417,21 @@
     banner.innerHTML = `
       <span class="cookie-consent-handle" aria-hidden="true"></span>
       <p class="cookie-consent-kicker">Antes de navegar</p>
-      <h3>Cookies e preferencias</h3>
+      <h3>Cookies e preferências</h3>
       <p>
-        O site recebe atualizacoes varias vezes por dia. Por isso usamos cookies
-        essenciais e metricas basicas para manter tudo rapido, estavel e facil de ler.
+        O site recebe atualizações várias vezes por dia. Por isso usamos cookies
+        essenciais e métricas básicas para manter tudo rápido, estável e fácil de ler.
+      </p>
+      <p>
+        No celular, o portal abre leve: manchete grande primeiro,
+        atalhos curtos e fotos em tela cheia para escolher o que ler.
       </p>
       <span class="cookie-consent-inline-note">
         <span class="cookie-consent-inline-dot" aria-hidden="true"></span>
-        Ao aceitar, voce continua para o portal
+        Ao aceitar, você continua para o portal
       </span>
       <div class="cookie-consent-actions">
-        <button class="cookie-consent-accept" type="button">Aceitar cookies e continuar</button>
+        <button class="cookie-consent-accept" type="button">Aceitar e abrir portal</button>
       </div>
     `;
     return banner;
@@ -456,16 +468,16 @@
     const phone = options.phone === true;
     if (phone) {
       return `
-        <p class="catalogo-welcome-kicker">Antes de entrar</p>
-        <h2 id="catalogoWelcomeTitle">Cookies e preferências</h2>
+        <p class="catalogo-welcome-kicker">No celular</p>
+        <h2 id="catalogoWelcomeTitle">Leitura rápida do Juruá</h2>
         <p class="catalogo-welcome-lead">
-          Atualizamos o portal varias vezes por dia. O aceite libera cookies essenciais e
-          metricas basicas para manter a leitura rapida, estavel e melhor a cada visita.
+          O portal abre leve, com manchetes grandes, cookie simples e fotos em tela
+          cheia para você escolher o que ler.
         </p>
 
         <div class="catalogo-welcome-actions">
           <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button">
-            Continuar
+            Abrir portal
           </button>
         </div>
       `;
@@ -473,54 +485,24 @@
 
     return `
       <p class="catalogo-welcome-kicker">Antes de continuar</p>
-      <h2 id="catalogoWelcomeTitle">Preferencias de cookies</h2>
+      <h2 id="catalogoWelcomeTitle">Cookies no portal</h2>
       <p class="catalogo-welcome-lead">
-        O portal muda o dia inteiro: novas noticias, capas e paginas entram varias vezes
-        por dia. Para manter essa atualizacao rapida e estavel, usamos cookies essenciais e
-        metricas basicas de navegacao.
+        Cookies ajudam a manter a leitura rápida, lembrar preferências básicas e melhorar a experiência no Catálogo Cruzeiro do Sul.
       </p>
 
       <div class="catalogo-consent-intro">
-        <strong>Por que pedimos isso</strong>
+        <strong>Uso simples e transparente</strong>
         <p>
-          Nao e cadastro nem tela de venda. O aceite ajuda o site a carregar melhor,
-          corrigir travamentos e entender quais areas precisam de ajuste.
+          Ao continuar, você concorda com cookies essenciais e métricas básicas de navegação.
         </p>
       </div>
-
-      <div class="catalogo-terms-list">
-        <div class="catalogo-term-item">
-          <strong>O que fica ativo</strong>
-          <span>Cookies essenciais e sinais basicos de desempenho, como carregamento e estabilidade.</span>
-        </div>
-        <div class="catalogo-term-item">
-          <strong>O que isso melhora</strong>
-          <span>Velocidade, leitura das noticias, troca de capas e funcionamento das paginas.</span>
-        </div>
-      </div>
-
-      <div class="catalogo-consent-focus" aria-hidden="true">
-        <strong>Seu aceite</strong>
-        <p>
-          Marque abaixo para entrar com esses recursos basicos ativos neste acesso.
-        </p>
-      </div>
-
-      <label class="catalogo-terms-check">
-        <input type="checkbox" id="catalogoAcceptTerms" />
-        <span>Aceito o uso de cookies essenciais e metricas basicas para melhorar minha visita.</span>
-      </label>
-
-      <p class="catalogo-welcome-note">
-        A politica completa continua disponivel para consulta e revisao.
-      </p>
 
       <div class="catalogo-welcome-actions">
-        <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button" disabled>
-          Continuar
+        <button class="catalogo-btn primary" id="catalogoAcceptButton" type="button">
+          Aceitar
         </button>
         <a class="catalogo-btn ghost" href="./legal.html" target="_blank" rel="noopener noreferrer">
-          Ver politica
+          Ver política
         </a>
       </div>
     `;
@@ -874,7 +856,7 @@
 
     return `
         <div class="${visualClass}" aria-hidden="true">
-        <div class="catalogo-stage-chip">MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS</div>
+        <div class="catalogo-stage-chip">PORTAL REGIONAL, LEITURA EM CAMADAS</div>
 
         <div class="catalogo-cosmos">
           <span class="catalogo-sky-glow glow-a"></span>
@@ -960,9 +942,9 @@
           <span class="catalogo-prophecy-kicker">Ilustracao alegorica do portal</span>
           <strong class="catalogo-prophecy-title">Tecnologia transforma barulho em manchete</strong>
           <div class="catalogo-prophecy-console">
-            <span class="catalogo-prophecy-console-line">> pintar linha 01 :: binario bruto</span>
-            <span class="catalogo-prophecy-console-line">> converter :: ASCII :: probabilidade</span>
-            <span class="catalogo-prophecy-console-line">> assinar previsao :: alienigenas</span>
+            <span class="catalogo-prophecy-console-line">fontes locais em organização</span>
+            <span class="catalogo-prophecy-console-line">serviços úteis em destaque</span>
+            <span class="catalogo-prophecy-console-line">leitura regional pronta para abrir</span>
           </div>
           <div class="catalogo-prophecy-stream">
             <div class="catalogo-prophecy-phase phase-binary">
@@ -976,31 +958,30 @@
               50 4F 55 43 4F 53 20 44 49 41 53
             </div>
             <div class="catalogo-prophecy-phase phase-code">
-              const probabilidade = IA.calcular({<br />
-              &nbsp;&nbsp;caos: "alto", meme: "viral", aliens: "observando"<br />
-              });<br />
-              if (probabilidade &gt; 0.87) publicar("alerta");
+              Notícias, serviços e agenda local<br />
+              ganham ordem antes da leitura.<br />
+              Cada destaque aponta para sua fonte.
             </div>
             <div class="catalogo-prophecy-phase phase-glyph">
-              probabilidade_final = 98.7%<br />
-              margem_de_absurdo = maxima<br />
-              fonte = "onibus espacial em zigue-zague"<br />
-              status = aguardando assinatura alienigena
+              Prioridade regional<br />
+              serviços em primeiro plano<br />
+              fontes identificadas<br />
+              comunidade com caminho de checagem
             </div>
             <div class="catalogo-prophecy-phase phase-alert">
-              <span class="catalogo-prophecy-alert-tag">meme calculado</span>
-              <strong>DESTRUICAO MUNDIAL EM POUCOS DIAS</strong>
-              <span>se continuar assim</span>
-              <small>assinado: alienigenas perto do Cruzeiro do Sul</small>
+              <span class="catalogo-prophecy-alert-tag">leitura regional</span>
+              <strong>Juruá em foco, serviços no mapa</strong>
+              <span>informação útil antes do ruído</span>
+              <small>leitura regional com fonte aberta</small>
             </div>
             <div class="catalogo-prophecy-phase phase-meme">
-              <span class="catalogo-prophecy-alert-tag">meme geopolitico do dia</span>
-              <strong>cessar-fogo no papel, drone no ceu, reuniao em looping</strong>
-              <span>enquanto isso, o feed chama de estabilidade e a guerra abre outra aba</span>
-              <small>leitura do momento: diplomacia fragil, drones dominando e paz em buffering</small>
+              <span class="catalogo-prophecy-alert-tag">leitura do dia</span>
+              <strong>Juruá em destaque, serviços no mapa, agenda aberta</strong>
+              <span>o portal organiza o que afeta a rotina da região</span>
+              <small>notícias, agenda, serviços e comunidade no mesmo fluxo</small>
             </div>
           </div>
-          <small>terminal > binario > ascii > codigo > probabilidade > meme > reboot</small>
+          <small>fontes > contexto > serviço > comunidade > leitura</small>
         </div>
 
         <div class="catalogo-night-landscape" aria-hidden="true">
@@ -1096,7 +1077,7 @@
         <div class="catalogo-welcome-copy">
           <div class="catalogo-compact-banner" aria-hidden="true">
             <span class="catalogo-compact-dot"></span>
-            <strong>MUNDO EM GUERRA, ESCOLHAS EM MIGALHAS</strong>
+            <strong>PORTAL REGIONAL, LEITURA EM CAMADAS</strong>
           </div>
           ${buildWelcomeCopyMarkup({ phone })}
         </div>
@@ -1107,7 +1088,7 @@
   }
 
   function createReturningLoaderModal(options = {}) {
-    const label = options.label || "Preparando pagina";
+    const label = options.label || "Preparando página";
     const loader = document.createElement("div");
     loader.id = `${MODAL_ID}ReturningLoader`;
     loader.className = "catalogo-top-return-loader";
@@ -1127,31 +1108,52 @@
   function createInitialHomeLoaderModal() {
     const modal = document.createElement("section");
     modal.id = `${MODAL_ID}InitialLoader`;
-    modal.className = "catalogo-welcome is-home-opening-loader is-compact";
+    modal.className = "catalogo-welcome is-home-opening-loader is-premium-loader is-newspaper-loader";
     modal.setAttribute("aria-hidden", "true");
     modal.innerHTML = `
       <article
-        class="catalogo-welcome-card"
+        class="catalogo-welcome-card premium-opening-card"
         role="status"
         aria-live="polite"
-        aria-label="Abertura da pagina inicial"
+        aria-label="Abertura da página inicial"
       >
-        ${buildWelcomeVisualMarkup({ compact: true, phone: false })}
-        <div class="catalogo-welcome-copy">
-          <p class="catalogo-welcome-kicker">Abertura do portal</p>
-          <h2 id="catalogoInitialLoaderTitle">Abrindo o portal</h2>
+        <div class="premium-opening-map" aria-hidden="true">
+          <span class="map-line"></span>
+          <i class="map-point point-czs"></i>
+          <i class="map-point point-mancio"></i>
+          <i class="map-point point-rodrigues"></i>
+          <i class="map-point point-porto"></i>
+          <em class="map-label label-czs">Cruzeiro do Sul</em>
+          <em class="map-label label-mancio">Mancio Lima</em>
+          <em class="map-label label-porto">Porto Walter</em>
+        </div>
+        <div class="premium-opening-fragments" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="premium-opening-media" aria-hidden="true"></div>
+        <div class="premium-opening-copy">
+          <span class="premium-opening-compass"></span>
+          <p class="catalogo-welcome-kicker">Portal</p>
+          <h2 id="catalogoInitialLoaderTitle">Cruzeiro do Sul</h2>
+          <strong class="premium-opening-subtitle">Vale do Juruá</strong>
           <p class="catalogo-welcome-lead">
-            Preparando noticias, fotos e agenda para liberar a leitura sem travar a navegacao.
+            Informação que conecta. Conteúdo que transforma nossa região.
           </p>
-          <div class="catalogo-founder-opening" aria-live="polite">
+          <div class="premium-opening-pillars" aria-hidden="true">
+            <span><i></i>Notícias</span>
+            <span><i></i>Comunidade</span>
+            <span><i></i>Agenda</span>
+            <span><i></i>Serviços</span>
+          </div>
+          <div class="catalogo-founder-opening premium-opening-progress" aria-live="polite">
             <div class="catalogo-founder-opening-head">
-              <strong>Experiencia do portal</strong>
+              <strong>Carregando</strong>
               <span data-initial-loader-percent>0%</span>
             </div>
             <div class="catalogo-founder-opening-bar">
               <span data-initial-loader-bar style="width: 0%"></span>
             </div>
-            <p data-initial-loader-status>preparando estrutura da home</p>
+            <p data-initial-loader-status>organizando os destaques do portal</p>
           </div>
         </div>
       </article>
@@ -1229,7 +1231,7 @@
     const update = typeof options.update === "function" ? options.update : () => {};
     const statuses = Array.isArray(options.statuses) && options.statuses.length
       ? options.statuses
-      : ["preparando estrutura", "montando noticias", "preparando imagens", "home pronta"];
+      : ["preparando estrutura", "montando notícias", "preparando imagens", "home pronta"];
     const startedAt = Date.now();
     let currentProgress = 0;
     let statusIndex = 0;
@@ -1363,7 +1365,7 @@
     runProgressUntilReady(loader, {
       minDuration: RETURNING_LOADER_MS,
       maxDuration: READY_FALLBACK_MS,
-      statuses: ["retomando pagina", "atualizando capa", "conferindo noticias", "home pronta"],
+      statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
       update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
     }).then(finish);
   }
@@ -1377,17 +1379,17 @@
     window.setTimeout(() => {
       releaseFounderPreludeGate();
       openWelcomeModal(loader);
-      updateInitialLoaderProgress(loader, 4, "iniciando preparacao da home");
+      updateInitialLoaderProgress(loader, 4, "iniciando preparação da home");
     }, 30);
 
     runProgressUntilReady(loader, {
       minDuration: INITIAL_HOME_LOADER_MIN_MS,
       maxDuration: READY_FALLBACK_MS,
       statuses: [
-        "preparando estrutura da home",
-        "montando noticias e fotos",
-        "preparando agenda e servicos",
-        "home principal pronta"
+        "montando capa do jornal",
+        "encaixando notícias e fotos",
+        "organizando agenda e serviços",
+        "portal pronto para leitura"
       ],
       update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
     }).then(() => {
@@ -1412,7 +1414,7 @@
         return;
       }
       finished = true;
-      updateTopLoaderProgress(loader, 100, "abrindo pagina");
+      updateTopLoaderProgress(loader, 100, "abrindo página");
       loader.classList.add("is-leaving");
       window.setTimeout(() => {
         loader.remove();
@@ -1436,7 +1438,7 @@
       runProgressUntilReady(loader, {
         minDuration: ACTION_LOADER_MIN_MS,
         maxDuration: ACTION_LOADER_MAX_MS,
-        statuses: ["preparando materia", "baixando pagina", "conferindo conteudo", "abrindo pagina"],
+        statuses: ["preparando matéria", "baixando página", "conferindo conteúdo", "abrindo página"],
         update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
       })
     ]).finally(() => {
@@ -1606,14 +1608,28 @@
 
       if (fastEditorialHome && !phoneFlow) {
         if (!shouldSkipWelcomeModal()) {
+          if (!actionLoaderRequested && !hasSeenInitialHomeLoaderInThisSession()) {
+            showInitialHomeLoaderThen(() => {
+              openWelcomeConsentModal({
+                afterAccept: finishLoaded
+              });
+            });
+            return;
+          }
+
           openWelcomeConsentModal({
-            afterAccept: showInitialLoaderAfterConsent
+            afterAccept: finishLoaded
           });
           return;
         }
 
         if (actionLoaderRequested) {
           finishOrOpenWelcome();
+          return;
+        }
+
+        if (!hasSeenInitialHomeLoaderInThisSession()) {
+          showInitialHomeLoaderThen(finishLoaded);
           return;
         }
 
@@ -1653,7 +1669,6 @@
     };
 
     if (fastEditorialHome && !phoneFlow) {
-      releaseFounderPreludeGate();
       continueAfterFounderPrelude();
       return;
     }

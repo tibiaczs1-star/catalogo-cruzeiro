@@ -48,6 +48,8 @@
     const panel = document.getElementById("catalogo-telefonico");
     if (!panel || !data.length) return;
 
+    const HOME_PREVIEW_LIMIT = 8;
+    const FOCUSED_FILTER_LIMIT = 24;
     const categories = ["Todos", ...Array.from(new Set(data.map((item) => item.category))).sort()];
     let activeCategory = "Todos";
     let query = "";
@@ -79,7 +81,8 @@
       <div class="phonebook-plus-list" id="phonebook-plus-list"></div>
 
       <p class="phonebook-plus-note">
-        Base com contatos comerciais e institucionais publicados. Confirme horário e disponibilidade antes de sair.
+        <span id="phonebook-plus-note-copy">Prévia com contatos úteis para consulta rápida.</span>
+        <a href="./catalogo-servicos.html">Abrir guia completo</a>
       </p>
     `;
 
@@ -87,6 +90,7 @@
     const categoryBox = panel.querySelector("#phonebook-plus-categories");
     const list = panel.querySelector("#phonebook-plus-list");
     const count = panel.querySelector("#phonebook-plus-count");
+    const noteCopy = panel.querySelector("#phonebook-plus-note-copy");
 
     const render = () => {
       const normalizedQuery = normalize(query);
@@ -94,11 +98,18 @@
         .filter((item) => activeCategory === "Todos" || item.category === activeCategory)
         .filter((item) => !normalizedQuery || getSearchText(item).includes(normalizedQuery))
         .sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+      const hasFocusedFilter = Boolean(normalizedQuery || activeCategory !== "Todos");
+      const visibleLimit = hasFocusedFilter ? FOCUSED_FILTER_LIMIT : HOME_PREVIEW_LIMIT;
+      const visibleItems = filtered.slice(0, visibleLimit);
 
       count.textContent = String(filtered.length);
+      if (noteCopy) {
+        noteCopy.textContent = hasFocusedFilter
+          ? "Resultados filtrados para consulta rápida. Confirme horário e disponibilidade antes de sair."
+          : "Prévia com contatos úteis; o guia completo reúne todas as categorias confirmadas.";
+      }
 
-      list.innerHTML = filtered
-        .slice(0, 120)
+      list.innerHTML = visibleItems
         .map((item) => {
           const firstPhone = (item.phones || [])[0];
           const tel = firstPhone ? phoneHref(firstPhone) : "";
@@ -133,6 +144,22 @@
           `;
         })
         .join("");
+
+      if (filtered.length > visibleItems.length) {
+        list.insertAdjacentHTML(
+          "beforeend",
+          `
+            <article class="phonebook-plus-card phonebook-plus-more">
+              <div>
+                <span>${filtered.length - visibleItems.length} contatos a mais</span>
+                <h4>Abra o guia completo para ver toda a lista</h4>
+                <p>Use a busca do catálogo para encontrar bairros, categorias e serviços específicos.</p>
+              </div>
+              <a href="./catalogo-servicos.html">Abrir guia</a>
+            </article>
+          `
+        );
+      }
 
       if (!filtered.length) {
         list.innerHTML = `

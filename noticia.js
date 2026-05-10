@@ -4,7 +4,49 @@ const OFFLINE_LAST_ARTICLE_KEYS = ["catalogo_last_article_v2", "catalogo_last_ar
 const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
 const DETAIL_FALLBACK_IMAGES = [];
+
+document.body.classList.add("article-premium-ready");
 const AUTHORIAL_DETAIL_ARTICLES = {
+  "prefeitura-bairros-e-servicos-entram-na-leitura-principal": {
+    id: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
+    slug: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
+    title: "Prefeitura, bairros e serviços entram na leitura principal",
+    eyebrow: "Cruzeiro do Sul",
+    date: "08 de maio de 2026",
+    publishedAt: "2026-05-08T08:20:00-05:00",
+    category: "Cruzeiro do Sul",
+    previewClass: "thumb-servico",
+    sourceName: "Catálogo Cruzeiro do Sul",
+    sourceUrl: "./arquivo.html?busca=Cruzeiro%20do%20Sul",
+    sourceLabel: "Resumo local organizado pelo Catálogo Cruzeiro do Sul a partir do acompanhamento público da cidade.",
+    imageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+    imageCredit: "Imagem de apoio do acervo visual do portal",
+    imageFocus: "center 48%",
+    heroFeatured: true,
+    lede: "A leitura diária da cidade passa a reunir obras, atendimento, agenda pública e avisos úteis em um mesmo caminho, para que o morador encontre rápido o que muda na rotina.",
+    summary: "O destaque organiza temas de prefeitura, bairros e serviços públicos com linguagem curta, fonte identificada quando houver e ligação com as áreas de serviço, arquivo e notícias locais.",
+    analysis: "A proposta desta matéria é separar o que realmente ajuda a rotina do leitor: obras em andamento, mudanças em atendimento, avisos de órgãos públicos, prazos e informações de bairro. O conteúdo não substitui a fonte oficial, mas aponta o caminho para a pessoa entender o impacto local e seguir para a confirmação quando disponível.",
+    body: [
+      "Cruzeiro do Sul tem uma rotina de informações espalhadas entre prefeitura, órgãos públicos, comunidades, comércio, agenda e serviços essenciais. Quando esses dados aparecem separados demais, o leitor perde tempo tentando descobrir o que realmente afeta o dia.",
+      "A leitura principal do portal organiza esse fluxo por impacto: primeiro o que mexe com deslocamento, atendimento, saúde, educação pública quando houver fonte, serviços, bairros e prazos. Depois entram contexto, arquivo e acompanhamento por assunto.",
+      "A cada nova atualização, a matéria pode apontar para a área correta do portal: notícias locais, serviços úteis, agenda, catálogo telefônico, fontes monitoradas ou arquivo do mês. Assim, uma mudança de rua, um aviso de atendimento ou uma decisão administrativa não fica solta.",
+      "Quando a informação depender de confirmação externa, o portal deve tratar como acompanhamento e direcionar o leitor para a origem. Quando houver fonte clara, a notícia entra com resumo curto e acesso ao conteúdo completo.",
+      "Para o morador, o objetivo é simples: abrir a capa, entender o que mudou na cidade e encontrar o próximo passo sem precisar atravessar páginas que não conversam entre si."
+    ],
+    highlights: [
+      "Bairros, serviços e agenda pública ficam reunidos por impacto local",
+      "Cada destaque aponta para uma área real do portal",
+      "A fonte deve aparecer sempre que estiver disponível",
+      "Avisos sem confirmação entram como acompanhamento, não como notícia fechada"
+    ],
+    development: [
+      "Integrar fontes oficiais para automatizar avisos de serviços e obras.",
+      "Criar filtros por bairro, órgão público e tipo de atendimento.",
+      "Ligar cada atualização ao arquivo mensal para manter histórico consultável."
+    ]
+  },
   "pixel-art-nao-e-nostalgia-e-interface": {
     id: "pixel-art-nao-e-nostalgia-e-interface",
     slug: "pixel-art-nao-e-nostalgia-e-interface",
@@ -1419,11 +1461,12 @@ const renderFactTabs = (article = {}) => {
 };
 
 const renderNotFound = () => {
+  document.querySelector("#detail-shell")?.classList.add("article-premium-template");
   updateArticleSeo(null, { indexable: false });
-  titleNode.textContent = "Noticia nao encontrada";
-  eyebrowNode.textContent = "catalogo cruzeiro do sul";
-  metaNode.textContent = "O link pode estar incompleto ou a noticia ainda nao foi cadastrada.";
-  ledeNode.textContent = "Volte para a home e escolha outra noticia.";
+  titleNode.textContent = "Notícia não encontrada";
+  eyebrowNode.textContent = "Catálogo Cruzeiro do Sul";
+  metaNode.textContent = "O link pode estar incompleto ou a notícia ainda não foi cadastrada.";
+  ledeNode.textContent = "Volte para a capa e escolha outra notícia.";
   clearFactTabs();
   if (analysisContainer) {
     analysisContainer.hidden = true;
@@ -1436,7 +1479,7 @@ const renderNotFound = () => {
 
   if (mediaKindNode && mediaNoteNode && mediaLinkNode) {
     mediaKindNode.textContent = "Foto real";
-    mediaNoteNode.textContent = "Esta capa e um apoio visual da pagina de leitura.";
+    mediaNoteNode.textContent = "Esta capa é um apoio visual da página de leitura.";
     mediaLinkNode.href = HOME_RETURN_URL;
     mediaLinkNode.removeAttribute("target");
     mediaLinkNode.removeAttribute("rel");
@@ -1451,6 +1494,8 @@ const renderArticle = (article) => {
   }
 
   article = normalizeDetailArticle(article);
+  document.querySelector("#detail-shell")?.classList.add("article-premium-template");
+  document.querySelector("#detail-shell")?.setAttribute("data-article-template", "premium");
 
   window.currentArticle = article;
   window.__CURRENT_ARTICLE__ = article;

@@ -40,7 +40,14 @@ const PUBLIC_LANGUAGE_PATTERNS = [
   /\bcould get even worse\b/i,
   /\bwill no longer be forced\b/i,
   /\bthe us military struck\b/i,
-  /\baccording to\b/i
+  /\baccording to\b/i,
+  /\b(?:the|a)\s+company\s+(?:said|announced|confirmed|reported)\b/i,
+  /\b(?:is|are|was|were)\s+coming\s+to\b/i,
+  /\b(?:will|would|could|should)\s+(?:be|have|get|make|bring|allow|include)\b/i,
+  /\b(?:said|says|reported|announced|confirmed)\s+(?:that|it|the)\b/i,
+  /\b(?:new|old|latest|early|late|major)\s+(?:look|design|feature|update|app|apps|icons|service|services)\b/i,
+  /\b(?:users|customers|developers|people)\s+(?:can|will|would|could|should)\b/i,
+  /\b(?:Microsoft will let|Alex Jones has uncovered|Xreal’s best|Xreal's best|360-degree cameras have|Cybercab goes into production|Skylight’s color-coded|Skylight's color-coded|Acclaimed Japanese director)\b/i
 ];
 
 const ENGLISH_PUBLIC_MARKER_PATTERN =
@@ -61,7 +68,8 @@ const KNOWN_SOURCE_URL_TITLES = new Map([
   ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"],
   ["microsoft-windows-update-pause-indefinitely", "Microsoft deve facilitar pausa nas atualizações do Windows"],
   ["how-project-maven-taught-the-military-to-love-ai", "Como o Project Maven aproximou os militares da IA"],
-  ["instagram-says-it-doesnt-want-your-tweet-round-ups", "Instagram quer reduzir republicações de tuítes"]
+  ["instagram-says-it-doesnt-want-your-tweet-round-ups", "Instagram quer reduzir republicações de tuítes"],
+  ["girls-around-the-globe-are-losing-gains-in-math-data-shows", "Relatório aponta recuo global de meninas em matemática"]
 ]);
 const ENGLISH_SOURCE_FRAGMENT_PATTERN =
   /\b(?:Microsoft will let|Alex Jones has uncovered|Xreal’s best|Xreal's best|360-degree cameras have|Cybercab goes into production|Skylight’s color-coded|Skylight's color-coded|Acclaimed Japanese director)\b/i;

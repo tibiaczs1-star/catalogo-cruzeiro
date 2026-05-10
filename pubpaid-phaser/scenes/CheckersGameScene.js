@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "../config/gameConfig.js";
-import { updateGameState } from "../core/gameState.js";
+import { settleDemoMatch, updateGameState } from "../core/gameState.js";
 
 const BOARD = {
   x: 720,
@@ -29,6 +29,7 @@ export class CheckersGameScene extends Phaser.Scene {
     this.boardLayer = null;
     this.hud = {};
     this.moveCount = 0;
+    this.settlement = null;
   }
 
   init(data = {}) {
@@ -42,6 +43,7 @@ export class CheckersGameScene extends Phaser.Scene {
     this.message = "Sua vez. Escolha uma peça vermelha.";
     this.buttons = [];
     this.moveCount = 0;
+    this.settlement = null;
   }
 
   create() {
@@ -174,8 +176,7 @@ export class CheckersGameScene extends Phaser.Scene {
       return;
     }
     const captures = moves.filter((move) => move.capture);
-    const pool = captures.length ? captures : moves;
-    const move = pool[Phaser.Math.Between(0, pool.length - 1)];
+    const move = this.chooseAiMove(captures.length ? captures : moves);
     const piece = this.board[move.from.row][move.from.col];
     this.board[move.from.row][move.from.col] = null;
     this.board[move.to.row][move.to.col] = piece;
@@ -219,10 +220,22 @@ export class CheckersGameScene extends Phaser.Scene {
   }
 
   finishMatch(result, reason) {
+    if (this.phase === "finished") return;
     this.phase = "finished";
     this.turn = "none";
     const headline = result === "win" ? "VITÓRIA" : result === "loss" ? "DERROTA" : "EMPATE";
     const color = result === "win" ? 0x8ef0a3 : result === "loss" ? 0xff4fb8 : 0x50efff;
+    this.settlement = settleDemoMatch({
+      gameId: "checkers",
+      result,
+      stake: this.stake,
+      summary: `Damas demo: ${reason}`
+    });
+    const creditCopy = this.settlement.delta > 0
+      ? `+${this.settlement.delta} créditos demo`
+      : this.settlement.delta < 0
+        ? `${this.settlement.delta} créditos demo`
+        : "créditos demo sem alteração";
     this.add.rectangle(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4, 438, 166, 0x05070d, 0.88)
       .setStrokeStyle(5, color, 0.62)
       .setDepth(9);
@@ -230,14 +243,19 @@ export class CheckersGameScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(10)
       .setLetterSpacing(4);
-    this.add.text(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4 + 18, reason, this.textStyle(15, "#fff6dc"))
+    this.add.text(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4 + 18, `${reason}\n${creditCopy}`, this.textStyle(15, "#fff6dc"))
       .setOrigin(0.5)
       .setDepth(10)
       .setWordWrapWidth(360);
     this.makeButton(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4 + 82, 220, 44, "JOGAR DE NOVO", () => this.restartMatch(), true);
-    this.message = `${headline}: ${reason}`;
+    this.message = `${headline}: ${reason} ${creditCopy}.`;
     this.updateHud();
     this.syncState(this.message);
+    this.game.events.emit("pubpaid:checkers-result", {
+      result,
+      settlement: this.settlement,
+      body: this.message
+    });
   }
 
   getMovesFor(row, col, enforceCapture = false) {
@@ -307,6 +325,7 @@ export class CheckersGameScene extends Phaser.Scene {
     updateGameState({
       currentScene: "checkers-game",
       activeGameId: "checkers",
+      poolGame: null,
       lobbyPhase: this.phase === "finished" ? "finished" : "playing",
       objective: "Vencer a IA na Dama",
       focus: "tabuleiro de dama",
@@ -317,7 +336,8 @@ export class CheckersGameScene extends Phaser.Scene {
         aiPieces: this.countPieces("ai"),
         selected: this.selected,
         legalMoves: this.legalMoves.map((move) => ({ to: move.to, capture: Boolean(move.capture) })),
-        moveCount: this.moveCount
+        moveCount: this.moveCount,
+        settlement: this.settlement
       },
       prompt
     });
@@ -325,6 +345,19 @@ export class CheckersGameScene extends Phaser.Scene {
 
   restartMatch() {
     this.scene.restart({ stake: this.stake, opponent: this.opponent });
+  }
+
+  chooseAiMove(moves) {
+    return [...moves].sort((a, b) => {
+      const captureScore = Number(Boolean(b.capture)) - Number(Boolean(a.capture));
+      if (captureScore) return captureScore;
+      const rowScore = b.to.row - a.to.row;
+      if (rowScore) return rowScore;
+      const centerA = Math.abs(3.5 - a.to.col);
+      const centerB = Math.abs(3.5 - b.to.col);
+      if (centerA !== centerB) return centerA - centerB;
+      return a.to.col - b.to.col;
+    })[0];
   }
 
   backToLobby() {
@@ -339,6 +372,7 @@ export class CheckersGameScene extends Phaser.Scene {
     updateGameState({
       currentScene: "interior",
       activeGameId: "",
+      checkersGame: null,
       lobbyPhase: "hub",
       objective: "Falar com o garçom para escolher jogo",
       prompt: "Voltando ao salão. Escolha outro jogo pelo garçom."

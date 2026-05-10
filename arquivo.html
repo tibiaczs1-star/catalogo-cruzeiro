@@ -10,9 +10,34 @@
   />
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css?v=20260415zb" />
+  <link rel="stylesheet" href="premium-home-redesign.css?v=20260508-archive-premium1" />
 </head>
 <body class="editorial-home archive-browser-page" data-archive-page-size="18">
+  <div class="archive-premium-stars" aria-hidden="true"></div>
   <div class="page-shell">
+    <header class="archive-premium-header">
+      <a class="brand" href="./index.html#topo" aria-label="Voltar para o Catálogo Cruzeiro do Sul">
+        <span class="brand-compass" aria-hidden="true">
+          <svg viewBox="0 0 96 96" focusable="false">
+            <circle cx="48" cy="48" r="34"></circle>
+            <path d="M48 4 56 40 92 48 56 56 48 92 40 56 4 48 40 40Z"></path>
+            <path d="M48 17 52 44 79 48 52 52 48 79 44 52 17 48 44 44Z"></path>
+            <path d="M48 24v48M24 48h48"></path>
+          </svg>
+        </span>
+        <div>
+          <span class="brand-kicker">Catálogo</span>
+          <strong>Cruzeiro do Sul</strong>
+          <small>Arquivo regional</small>
+        </div>
+      </a>
+      <nav aria-label="Navegação do arquivo">
+        <a href="./index.html#o-que-importa">Destaques</a>
+        <a href="./index.html#radar">Resumo CZS</a>
+        <a href="./index.html#arquivo">Linha do tempo</a>
+        <a href="./index.html#social">Festas & Social</a>
+      </nav>
+    </header>
     <main class="archive-browser-main">
       <section class="archive-browser-hero reveal active">
         <div>
@@ -32,7 +57,7 @@
       <section id="arquivo-vivo" class="section-block live-feed-shell archive-browser-shell reveal active">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">arquivo vivo em tela cheia</p>
+            <p class="eyebrow">arquivo regional em tela cheia</p>
             <h2>Pesquisa de notícias, temas e fontes</h2>
           </div>
           <p>
@@ -60,6 +85,18 @@
               aria-label="Sugestões de busca do arquivo"
               hidden
             ></div>
+          </div>
+
+          <div class="feed-period-picker" aria-label="Escolher período do arquivo">
+            <span>Período</span>
+            <div class="feed-period-options">
+              <button type="button" data-period-filter="hoje">Hoje</button>
+              <button type="button" data-period-filter="7d">7 dias</button>
+              <button type="button" data-period-filter="30d">30 dias</button>
+              <button type="button" data-period-filter="3m">3 meses</button>
+              <button type="button" data-period-filter="6m">6 meses</button>
+              <button type="button" data-period-filter="">Todo arquivo</button>
+            </div>
           </div>
 
           <div class="feed-meta">
@@ -105,19 +142,19 @@
 
         <div class="editorial-capture-grid archive-capture-grid">
           <article class="editorial-capture-card reveal active">
-            <span>captação exemplo</span>
-            <h3>Exemplo de chamada para acervo</h3>
-            <p>"Abra o histórico inteiro e veja como um tema voltou a aparecer ao longo das semanas."</p>
+            <span>linha do tempo</span>
+            <h3>Veja quando o assunto apareceu</h3>
+            <p>O arquivo ajuda a acompanhar recorrência, mudanças e decisões públicas ao longo dos dias.</p>
           </article>
           <article class="editorial-capture-card reveal active">
-            <span>captação exemplo</span>
-            <h3>Exemplo de chamada para busca</h3>
-            <p>"Busque por bairro, órgão ou assunto e encontre rápido onde a história começou."</p>
+            <span>busca rápida</span>
+            <h3>Encontre por bairro, fonte ou tema</h3>
+            <p>Digite uma palavra e filtre a cobertura por serviço, política, saúde, cultura ou rotina local.</p>
           </article>
           <article class="editorial-capture-card reveal active">
-            <span>captação exemplo</span>
-            <h3>Exemplo de chamada para contexto</h3>
-            <p>"O arquivo não serve só para achar notícia; serve para enxergar recorrência, mudança e padrão."</p>
+            <span>fontes abertas</span>
+            <h3>Leia com origem identificada</h3>
+            <p>Cada card mostra fonte consultada e caminho para análise, evitando notícia solta no portal.</p>
           </article>
         </div>
 

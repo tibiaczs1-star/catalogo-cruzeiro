@@ -31,7 +31,7 @@ export async function syncPubpaidAccount() {
   }
 }
 
-export async function joinPubpaidPvpQueue(gameId = "darts", stake = 10) {
+export async function joinPubpaidPvpQueue(gameId = "pool", stake = 10) {
   try {
     const response = await fetch("./api/pubpaid/pvp/join", {
       method: "POST",
@@ -74,7 +74,7 @@ export async function joinPubpaidPvpQueue(gameId = "darts", stake = 10) {
   }
 }
 
-export async function leavePubpaidPvpQueue(gameId = "darts") {
+export async function leavePubpaidPvpQueue(gameId = "pool") {
   try {
     const response = await fetch("./api/pubpaid/pvp/leave", {
       method: "POST",

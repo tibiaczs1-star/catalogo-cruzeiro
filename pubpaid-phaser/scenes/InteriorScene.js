@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH, INTERIOR_BOUNDS } from "../config/gameConfig.js";
-import { addIdleSpriteActor, ensureCoreSprites, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { PUBPAID_TEXTURE_KEYS, fitImageToHeight } from "../core/assetRegistry.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { closePanel, openPanel } from "../ui/panelActions.js";
 import { gameState, updateGameState } from "../core/gameState.js";
@@ -20,6 +20,141 @@ const INTERIOR_PANELS = {
     actions: [{ id: "toggle-stage-event", label: "Ativar evento", primary: true }]
   }
 };
+
+const HANDCRAFTED_SPARKLES = [
+  { x: 92, y: 590, size: 1.4, alpha: 0.12, speed: 0.22, phase: 0.1, color: 0xffd06d },
+  { x: 148, y: 472, size: 1.8, alpha: 0.16, speed: 0.28, phase: 0.8, color: 0xff4fb8 },
+  { x: 214, y: 548, size: 1.2, alpha: 0.1, speed: 0.24, phase: 1.4, color: 0x50efff },
+  { x: 286, y: 422, size: 2.2, alpha: 0.18, speed: 0.34, phase: 2.1, color: 0x8ef0a3 },
+  { x: 356, y: 618, size: 1.6, alpha: 0.14, speed: 0.26, phase: 2.8, color: 0xffd06d },
+  { x: 430, y: 506, size: 2.4, alpha: 0.2, speed: 0.38, phase: 3.5, color: 0xff4fb8 },
+  { x: 512, y: 384, size: 1.5, alpha: 0.12, speed: 0.3, phase: 4.2, color: 0x50efff },
+  { x: 584, y: 574, size: 2.1, alpha: 0.18, speed: 0.36, phase: 4.9, color: 0x8ef0a3 },
+  { x: 656, y: 330, size: 1.3, alpha: 0.1, speed: 0.2, phase: 5.6, color: 0xffd06d },
+  { x: 730, y: 458, size: 2.5, alpha: 0.22, speed: 0.42, phase: 0.45, color: 0xff4fb8 },
+  { x: 802, y: 612, size: 1.7, alpha: 0.14, speed: 0.27, phase: 1.15, color: 0x50efff },
+  { x: 874, y: 364, size: 2, alpha: 0.16, speed: 0.32, phase: 1.85, color: 0x8ef0a3 },
+  { x: 946, y: 532, size: 1.4, alpha: 0.12, speed: 0.25, phase: 2.55, color: 0xffd06d },
+  { x: 1018, y: 414, size: 2.3, alpha: 0.2, speed: 0.4, phase: 3.25, color: 0xff4fb8 },
+  { x: 1090, y: 590, size: 1.6, alpha: 0.13, speed: 0.31, phase: 3.95, color: 0x50efff },
+  { x: 1162, y: 478, size: 2.2, alpha: 0.18, speed: 0.35, phase: 4.65, color: 0x8ef0a3 },
+  { x: 120, y: 338, size: 1.5, alpha: 0.11, speed: 0.23, phase: 5.35, color: 0xffd06d },
+  { x: 246, y: 266, size: 2, alpha: 0.17, speed: 0.33, phase: 0.25, color: 0xff4fb8 },
+  { x: 394, y: 300, size: 1.4, alpha: 0.12, speed: 0.29, phase: 0.95, color: 0x50efff },
+  { x: 548, y: 244, size: 2.4, alpha: 0.21, speed: 0.43, phase: 1.65, color: 0x8ef0a3 },
+  { x: 698, y: 258, size: 1.8, alpha: 0.15, speed: 0.3, phase: 2.35, color: 0xffd06d },
+  { x: 846, y: 288, size: 2.1, alpha: 0.18, speed: 0.37, phase: 3.05, color: 0xff4fb8 },
+  { x: 994, y: 248, size: 1.3, alpha: 0.1, speed: 0.24, phase: 3.75, color: 0x50efff },
+  { x: 1140, y: 312, size: 2.6, alpha: 0.22, speed: 0.44, phase: 4.45, color: 0x8ef0a3 }
+];
+
+const SPARKLE_RESET_POINTS = [
+  { x: 104, y: 642 },
+  { x: 248, y: 594 },
+  { x: 392, y: 636 },
+  { x: 536, y: 566 },
+  { x: 680, y: 626 },
+  { x: 824, y: 586 },
+  { x: 968, y: 648 },
+  { x: 1112, y: 604 }
+];
+
+const RESULT_BURST_PATTERN = [
+  { x: -18, y: -22, vx: -1.4, vy: -1.9, life: 30, size: 3 },
+  { x: -8, y: -14, vx: -0.8, vy: -2.4, life: 36, size: 4 },
+  { x: 4, y: -24, vx: 0.2, vy: -2.1, life: 32, size: 3 },
+  { x: 14, y: -10, vx: 1.1, vy: -1.7, life: 34, size: 5 },
+  { x: 20, y: 4, vx: 1.6, vy: -1.2, life: 28, size: 4 },
+  { x: 8, y: 12, vx: 0.7, vy: -0.8, life: 26, size: 3 },
+  { x: -14, y: 8, vx: -1.1, vy: -1, life: 38, size: 6 },
+  { x: -4, y: -30, vx: -0.2, vy: -2.7, life: 40, size: 4 },
+  { x: 18, y: -26, vx: 1.3, vy: -2.2, life: 35, size: 3 },
+  { x: -20, y: 0, vx: -1.7, vy: -1.3, life: 31, size: 5 }
+];
+
+const DART_THROW_PATTERN = [
+  { vx: -1.2, vy: -1.6, life: 16, size: 2 },
+  { vx: -0.7, vy: -1.2, life: 20, size: 3 },
+  { vx: -0.2, vy: -1.8, life: 18, size: 2 },
+  { vx: 0.4, vy: -0.9, life: 22, size: 4 },
+  { vx: 0.9, vy: -1.4, life: 19, size: 3 },
+  { vx: 1.2, vy: -0.7, life: 15, size: 2 },
+  { vx: 0.1, vy: -1.1, life: 24, size: 3 },
+  { vx: -1, vy: -0.6, life: 17, size: 2 }
+];
+
+const CHECKERS_CAPTURE_PATTERN = [
+  { vx: -1, vy: -1.4, life: 18, size: 2 },
+  { vx: -0.6, vy: -1, life: 22, size: 3 },
+  { vx: -0.2, vy: -1.5, life: 24, size: 2 },
+  { vx: 0.3, vy: -0.8, life: 20, size: 4 },
+  { vx: 0.8, vy: -1.2, life: 26, size: 3 },
+  { vx: 1.1, vy: -0.5, life: 19, size: 2 },
+  { vx: 0.5, vy: -1.6, life: 23, size: 3 },
+  { vx: -0.8, vy: -0.7, life: 21, size: 2 },
+  { vx: 0, vy: -1.1, life: 28, size: 4 },
+  { vx: 1, vy: -0.9, life: 17, size: 3 }
+];
+
+const INTERIOR_MAP = {
+  playableArea: { ...INTERIOR_BOUNDS },
+  blockedAreas: [
+    { id: "bar-counter", kind: "bar", x: 330, y: 88, width: 386, height: 156 },
+    { id: "back-wall-shelves", kind: "wall", x: 84, y: 54, width: 1114, height: 86 },
+    { id: "left-dining-north", kind: "tables", x: 76, y: 216, width: 402, height: 170 },
+    { id: "left-dining-south", kind: "tables", x: 92, y: 430, width: 372, height: 168 },
+    { id: "stage-platform", kind: "stage", x: 928, y: 126, width: 292, height: 222 },
+    { id: "jukebox", kind: "prop", x: 1164, y: 542, width: 88, height: 132 },
+    { id: "pvp-checkers-table", kind: "gameplay", x: 208, y: 448, width: 222, height: 152 }
+  ],
+  seatingSpots: [
+    { id: "north-table-seat-a", x: 172, y: 330, faces: "east", table: "left-dining-north" },
+    { id: "north-table-seat-b", x: 356, y: 330, faces: "west", table: "left-dining-north" },
+    { id: "south-table-seat-a", x: 178, y: 546, faces: "east", table: "left-dining-south" },
+    { id: "south-table-seat-b", x: 386, y: 546, faces: "west", table: "left-dining-south" },
+    { id: "checkers-seat-a", x: 216, y: 552, faces: "east", table: "pvp-checkers-table" },
+    { id: "checkers-seat-b", x: 420, y: 552, faces: "west", table: "pvp-checkers-table" }
+  ],
+  interactionPoints: {
+    waiter: { x: 620, y: 488 },
+    stage: { x: 990, y: 368 },
+    exit: { x: 640, y: 610 }
+  },
+  routes: {
+    mainAisle: [
+      { x: 640, y: 610 },
+      { x: 646, y: 510 },
+      { x: 630, y: 430 },
+      { x: 724, y: 352 },
+      { x: 854, y: 360 }
+    ],
+    waiterLoop: [
+      { x: 620, y: 418 },
+      { x: 566, y: 486 },
+      { x: 704, y: 504 },
+      { x: 738, y: 408 }
+    ]
+  },
+  lightingZones: [
+    { id: "bar-warm", x: 330, y: 118, width: 420, height: 150, color: "warm" },
+    { id: "stage-magenta", x: 928, y: 126, width: 292, height: 222, color: "magenta" },
+    { id: "exit-cool", x: 560, y: 548, width: 164, height: 96, color: "green" }
+  ]
+};
+
+const WALKABLE_ANCHORS = [
+  { x: 640, y: 610 },
+  { x: 620, y: 488 },
+  { x: 520, y: 512 },
+  { x: 730, y: 508 },
+  { x: 836, y: 420 },
+  { x: 990, y: 368 },
+  { x: 1038, y: 512 },
+  { x: 580, y: 356 },
+  { x: 760, y: 350 },
+  { x: 500, y: 610 },
+  { x: 832, y: 612 }
+];
 
 export class InteriorScene extends Phaser.Scene {
   constructor() {
@@ -44,6 +179,7 @@ export class InteriorScene extends Phaser.Scene {
     this.stageOrb = null;
     this.loungeMist = null;
     this.actors = [];
+    this.waiterIndicator = null;
     this.neonSigns = [];
     this.machineGlows = [];
     this.sparkles = [];
@@ -63,6 +199,8 @@ export class InteriorScene extends Phaser.Scene {
       checkers: { signature: "" }
     };
     this.resultFloatTexts = [];
+    this.pendingZoneInteraction = null;
+    this.interiorMapWarnings = [];
     this.actionFxState = {
       darts: { signature: "" },
       checkers: { signature: "" }
@@ -70,17 +208,17 @@ export class InteriorScene extends Phaser.Scene {
   }
 
   create() {
-    ensureCoreSprites(this);
     this.game.events.emit("pubpaid:music-zone", "salon");
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "interior-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientFx();
 
     this.actors = [
-      this.addActor(TEXTURE_KEYS.waiterHero, 306, 456, 0.075, 2400, 0xfff0c0),
-      this.addActor(TEXTURE_KEYS.singer, 1056, 322, 0.078, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.32, alpha: 0.92 }),
-      this.addActor(TEXTURE_KEYS.guestB, 874, 528, 0.06, 2600, 0x50efff, { staticBitmap: true, depth: 2.18, alpha: 0.82 }),
-      this.addActor(TEXTURE_KEYS.guestA, 1112, 530, 0.062, 2800, 0xffd06d, { staticBitmap: true, depth: 2.2, alpha: 0.82 })
+      this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 620, 418, 0.075, 2400, 0xfff0c0, { depth: 2.48 }),
+      this.addActor(PUBPAID_TEXTURE_KEYS.singer, 1056, 322, 0.078, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.32, alpha: 0.92 }),
+      this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 874, 528, 0.06, 2600, 0x50efff, { staticBitmap: true, depth: 2.18, alpha: 0.82 }),
+      this.addActor(PUBPAID_TEXTURE_KEYS.guestA, 1112, 530, 0.062, 2800, 0xffd06d, { staticBitmap: true, depth: 2.2, alpha: 0.82 })
     ];
+    this.waiterIndicator = this.buildWaiterIndicator(620, 322);
 
     this.player = this.buildPlayer(640, 608);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -100,11 +238,12 @@ export class InteriorScene extends Phaser.Scene {
       .setDepth(1.4);
 
     this.zones = [
-      { id: "waiter", x: 306, y: 438, radius: 72, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom" },
-      { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco" },
-      { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua" }
+      { id: "waiter", x: 620, y: 418, radius: 74, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter },
+      { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco", approach: INTERIOR_MAP.interactionPoints.stage },
+      { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua", approach: INTERIOR_MAP.interactionPoints.exit }
     ];
     this.zoneHotspots = this.zones.map((zone) => this.buildZoneHotspot(zone));
+    this.validateInteriorMap();
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -122,16 +261,17 @@ export class InteriorScene extends Phaser.Scene {
         this.moveToZone(clickedZone);
         return;
       }
-      this.targetPoint = new Phaser.Math.Vector2(
-        Phaser.Math.Clamp(worldPoint.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
-        Phaser.Math.Clamp(worldPoint.y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
-      );
+      this.pendingZoneInteraction = null;
+      const target = this.resolveWalkablePoint(worldPoint.x, worldPoint.y);
+      this.targetPoint = new Phaser.Math.Vector2(target.x, target.y);
       this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
       updateGameState({
         currentScene: "interior",
         focus: "salão",
         objective: "Explorar pontos ativos do salão",
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
+        interiorMap: this.getInteriorMapSnapshot(),
+        interiorMapWarnings: this.interiorMapWarnings,
         prompt: "Destino marcado. Aproxime-se do garçom e aperte Enter para abrir o lobby."
       });
     });
@@ -141,6 +281,8 @@ export class InteriorScene extends Phaser.Scene {
       focus: "salão",
       objective: "Falar com o garçom para escolher jogo",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
+      interiorMap: this.getInteriorMapSnapshot(),
+      interiorMapWarnings: this.interiorMapWarnings,
       prompt: "Salão definitivo carregado. O garçom no centro abre o lobby; os jogos acontecem fora do bar, em tela própria."
     });
   }
@@ -215,17 +357,9 @@ export class InteriorScene extends Phaser.Scene {
         .setBlendMode(Phaser.BlendModes.SCREEN)
         .setDepth(1.09)
     ));
-    for (let index = 0; index < 70; index += 1) {
-      this.sparkles.push({
-        x: Phaser.Math.Between(70, GAME_WIDTH - 70),
-        y: Phaser.Math.Between(70, 620),
-        size: Phaser.Math.FloatBetween(1.1, 2.7),
-        alpha: Phaser.Math.FloatBetween(0.08, 0.34),
-        speed: Phaser.Math.FloatBetween(0.18, 0.58),
-        phase: Phaser.Math.FloatBetween(0, Math.PI * 2),
-        color: [0xffd06d, 0xff4fb8, 0x50efff, 0x8ef0a3][index % 4]
-      });
-    }
+    HANDCRAFTED_SPARKLES.forEach((sparkle) => {
+      this.sparkles.push({ ...sparkle });
+    });
 
     this.tweens.add({
       targets: [this.stageGlow, stageAura, this.stageOrb],
@@ -789,14 +923,16 @@ export class InteriorScene extends Phaser.Scene {
       : { x: 318, y: 520 };
 
     for (let index = 0; index < config.amount; index += 1) {
+      const pattern = RESULT_BURST_PATTERN[index % RESULT_BURST_PATTERN.length];
+      const velocityScale = kind === "darts" ? 1.35 : 0.9;
       this.resultParticles.push({
-        x: origin.x + Phaser.Math.Between(-18, 18),
-        y: origin.y + Phaser.Math.Between(-24, 12),
-        vx: kind === "darts" ? Phaser.Math.FloatBetween(-2.6, 2.6) : Phaser.Math.FloatBetween(-1.6, 1.6),
-        vy: kind === "darts" ? Phaser.Math.FloatBetween(-2.9, -0.9) : Phaser.Math.FloatBetween(-2.1, -0.6),
-        life: Phaser.Math.Between(22, 40),
-        maxLife: Phaser.Math.Between(22, 40),
-        size: Phaser.Math.Between(3, 6),
+        x: origin.x + pattern.x,
+        y: origin.y + pattern.y,
+        vx: pattern.vx * velocityScale,
+        vy: pattern.vy,
+        life: pattern.life,
+        maxLife: pattern.life,
+        size: pattern.size,
         color: index % 3 === 0 ? config.accent : config.color,
         kind:
           kind === "darts"
@@ -867,14 +1003,15 @@ export class InteriorScene extends Phaser.Scene {
           ease: "Back.easeOut"
         });
         for (let index = 0; index < 8; index += 1) {
+          const pattern = DART_THROW_PATTERN[index % DART_THROW_PATTERN.length];
           this.resultParticles.push({
             x,
             y,
-            vx: Phaser.Math.FloatBetween(-1.3, 1.3),
-            vy: Phaser.Math.FloatBetween(-1.8, -0.4),
-            life: Phaser.Math.Between(14, 24),
-            maxLife: Phaser.Math.Between(14, 24),
-            size: Phaser.Math.Between(2, 4),
+            vx: pattern.vx,
+            vy: pattern.vy,
+            life: pattern.life,
+            maxLife: pattern.life,
+            size: pattern.size,
             color: index % 2 ? 0xffd06d : 0x50efff,
             kind: "spark"
           });
@@ -910,14 +1047,15 @@ export class InteriorScene extends Phaser.Scene {
           const captureX = 318 + stage.boardOriginX + moveEntry.capture.col * stage.cell;
           const captureY = 520 + stage.boardOriginY + moveEntry.capture.row * stage.cell;
           for (let index = 0; index < 10; index += 1) {
+            const pattern = CHECKERS_CAPTURE_PATTERN[index % CHECKERS_CAPTURE_PATTERN.length];
             this.resultParticles.push({
               x: captureX,
               y: captureY,
-              vx: Phaser.Math.FloatBetween(-1.1, 1.1),
-              vy: Phaser.Math.FloatBetween(-1.5, -0.3),
-              life: Phaser.Math.Between(16, 28),
-              maxLife: Phaser.Math.Between(16, 28),
-              size: Phaser.Math.Between(2, 4),
+              vx: pattern.vx,
+              vy: pattern.vy,
+              life: pattern.life,
+              maxLife: pattern.life,
+              size: pattern.size,
               color: index % 2 ? 0xff4fb8 : 0xffd06d,
               kind: "diamond"
             });
@@ -1294,6 +1432,39 @@ export class InteriorScene extends Phaser.Scene {
     return container;
   }
 
+  buildWaiterIndicator(x, y) {
+    const indicator = this.add.container(x, y).setDepth(2.74);
+    const glow = this.add.triangle(0, 3, 0, 0, 24, 0, 12, 16, 0xffd06d, 0.18)
+      .setOrigin(0.5)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const body = this.add.triangle(0, 0, 0, 0, 18, 0, 9, 13, 0xffd06d, 0.94)
+      .setOrigin(0.5)
+      .setStrokeStyle(2, 0x07101c, 0.9);
+    const shine = this.add.rectangle(0, -2, 9, 2, 0xfff6dc, 0.72)
+      .setOrigin(0.5)
+      .setAngle(0);
+    const stem = this.add.rectangle(0, 13, 4, 4, 0xffd06d, 0.82)
+      .setStrokeStyle(1, 0x07101c, 0.8);
+    indicator.add([glow, body, shine, stem]);
+    this.tweens.add({
+      targets: indicator,
+      y: y - 8,
+      duration: 760,
+      yoyo: true,
+      repeat: -1,
+      ease: "Sine.easeInOut"
+    });
+    this.tweens.add({
+      targets: [glow, shine],
+      alpha: { from: 0.18, to: 0.7 },
+      duration: 620,
+      yoyo: true,
+      repeat: -1,
+      ease: "Steps"
+    });
+    return indicator;
+  }
+
   drawZoneFrame(graphics, radius, color, alpha) {
     graphics.clear();
     graphics.lineStyle(2, color, alpha);
@@ -1310,9 +1481,11 @@ export class InteriorScene extends Phaser.Scene {
     const player = this.add.container(x, y).setDepth(2.55);
     const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
-    const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
-      .setOrigin(0.5, 1)
-      .setScale(0.083);
+    const spriteKey = gameState.selectedCharacter?.spriteKey || PUBPAID_TEXTURE_KEYS.player;
+    const sprite = this.add.image(0, 0, spriteKey)
+      .setOrigin(0.5, 1);
+    fitImageToHeight(sprite, 118);
+    player.ppgSprite = sprite;
     player.add([shadow, sprite]);
     return player;
   }
@@ -1321,11 +1494,9 @@ export class InteriorScene extends Phaser.Scene {
     const glow = this.add.ellipse(x, y - 8, Math.max(34, 680 * scale), Math.max(10, 150 * scale), glowColor, 0.1)
       .setBlendMode(Phaser.BlendModes.SCREEN)
       .setDepth(2.36);
-    const actor = addIdleSpriteActor(this, textureKey, x, y, scale, {
-      frameDuration: 220,
-      delay: Math.floor((x + y) % 170),
-      staticBitmap: Boolean(options.staticBitmap)
-    });
+    const actor = this.add.image(x, y, textureKey)
+      .setOrigin(0.5, 1)
+      .setScale(scale);
     actor.setDepth(options.depth || 2.45);
     if (options.alpha) actor.setAlpha(options.alpha);
     this.tweens.add({
@@ -1340,11 +1511,123 @@ export class InteriorScene extends Phaser.Scene {
     return actor;
   }
 
+  getInteriorMapSnapshot() {
+    return {
+      playableArea: { ...INTERIOR_MAP.playableArea },
+      blockedAreas: INTERIOR_MAP.blockedAreas.map((area) => ({ ...area })),
+      seatingSpots: INTERIOR_MAP.seatingSpots.map((seat) => ({ ...seat })),
+      interactionPoints: Object.fromEntries(
+        Object.entries(INTERIOR_MAP.interactionPoints).map(([id, point]) => [id, { ...point }])
+      ),
+      routes: Object.fromEntries(
+        Object.entries(INTERIOR_MAP.routes).map(([id, route]) => [id, route.map((point) => ({ ...point }))])
+      ),
+      lightingZones: INTERIOR_MAP.lightingZones.map((zone) => ({ ...zone }))
+    };
+  }
+
+  validateInteriorMap() {
+    const warnings = [];
+    Object.entries(INTERIOR_MAP.interactionPoints).forEach(([id, point]) => {
+      if (this.getBlockingArea(point.x, point.y, 4)) warnings.push(`interaction-${id}-blocked`);
+    });
+    Object.entries(INTERIOR_MAP.routes).forEach(([routeId, route]) => {
+      route.forEach((point, index) => {
+        if (this.getBlockingArea(point.x, point.y, 4)) warnings.push(`route-${routeId}-${index}-blocked`);
+      });
+    });
+    INTERIOR_MAP.seatingSpots.forEach((seat) => {
+      const parent = INTERIOR_MAP.blockedAreas.find((area) => area.id === seat.table);
+      if (!parent) warnings.push(`seat-${seat.id}-missing-table`);
+      if (!this.isInsideInteriorBounds(seat.x, seat.y, 0)) warnings.push(`seat-${seat.id}-outside-bounds`);
+    });
+    const waiterSpot = INTERIOR_MAP.routes.waiterLoop[0];
+    if (this.getBlockingArea(waiterSpot.x, waiterSpot.y, 4)) warnings.push("waiter-home-blocked");
+    this.interiorMapWarnings = warnings;
+  }
+
+  isInsideInteriorBounds(x, y, padding = 0) {
+    return x >= INTERIOR_BOUNDS.minX + padding
+      && x <= INTERIOR_BOUNDS.maxX - padding
+      && y >= INTERIOR_BOUNDS.minY + padding
+      && y <= INTERIOR_BOUNDS.maxY - padding;
+  }
+
+  getBlockingArea(x, y, padding = 0) {
+    return INTERIOR_MAP.blockedAreas.find((area) => (
+      x >= area.x - padding
+      && x <= area.x + area.width + padding
+      && y >= area.y - padding
+      && y <= area.y + area.height + padding
+    )) || null;
+  }
+
+  isWalkablePoint(x, y, padding = 10) {
+    return this.isInsideInteriorBounds(x, y, 0) && !this.getBlockingArea(x, y, padding);
+  }
+
+  resolveWalkablePoint(x, y) {
+    const clamped = {
+      x: Phaser.Math.Clamp(x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
+      y: Phaser.Math.Clamp(y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
+    };
+    if (this.isWalkablePoint(clamped.x, clamped.y, 10)) return clamped;
+
+    const blocked = this.getBlockingArea(clamped.x, clamped.y, 10);
+    const edgeCandidates = blocked
+      ? [
+          { x: blocked.x - 28, y: Phaser.Math.Clamp(clamped.y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY) },
+          { x: blocked.x + blocked.width + 28, y: Phaser.Math.Clamp(clamped.y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY) },
+          { x: Phaser.Math.Clamp(clamped.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX), y: blocked.y - 28 },
+          { x: Phaser.Math.Clamp(clamped.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX), y: blocked.y + blocked.height + 28 }
+        ]
+      : [];
+    const points = [
+      ...edgeCandidates,
+      ...WALKABLE_ANCHORS,
+      ...Object.values(INTERIOR_MAP.interactionPoints)
+    ].filter((point) => this.isWalkablePoint(point.x, point.y, 10));
+
+    points.sort((a, b) => (
+      Phaser.Math.Distance.Between(clamped.x, clamped.y, a.x, a.y)
+      - Phaser.Math.Distance.Between(clamped.x, clamped.y, b.x, b.y)
+    ));
+    return points[0] || { x: this.player?.x || 640, y: this.player?.y || 608 };
+  }
+
+  movePlayerBy(dx, dy) {
+    const direct = this.resolveWalkStep(this.player.x + dx, this.player.y + dy);
+    if (direct) {
+      this.player.setPosition(direct.x, direct.y);
+      return true;
+    }
+
+    const xOnly = this.resolveWalkStep(this.player.x + dx, this.player.y);
+    if (xOnly) {
+      this.player.setPosition(xOnly.x, xOnly.y);
+      return true;
+    }
+
+    const yOnly = this.resolveWalkStep(this.player.x, this.player.y + dy);
+    if (yOnly) {
+      this.player.setPosition(yOnly.x, yOnly.y);
+      return true;
+    }
+    return false;
+  }
+
+  resolveWalkStep(x, y) {
+    const clamped = {
+      x: Phaser.Math.Clamp(x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
+      y: Phaser.Math.Clamp(y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
+    };
+    return this.isWalkablePoint(clamped.x, clamped.y, 12) ? clamped : null;
+  }
+
   moveToZone(zone) {
-    this.targetPoint = new Phaser.Math.Vector2(
-      Phaser.Math.Clamp(zone.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
-      Phaser.Math.Clamp(zone.y + (zone.id === "exit" ? 20 : 42), INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
-    );
+    this.pendingZoneInteraction = zone.id === "waiter" || zone.id === "exit" ? zone.id : null;
+    const approach = this.resolveWalkablePoint(zone.approach?.x ?? zone.x, zone.approach?.y ?? zone.y + 42);
+    this.targetPoint = new Phaser.Math.Vector2(approach.x, approach.y);
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
     updateGameState({
       currentScene: "interior",
@@ -1359,10 +1642,9 @@ export class InteriorScene extends Phaser.Scene {
   }
 
   nudgePlayer(dx, dy) {
-    this.targetPoint = new Phaser.Math.Vector2(
-      Phaser.Math.Clamp(this.player.x + dx, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX),
-      Phaser.Math.Clamp(this.player.y + dy, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY)
-    );
+    this.pendingZoneInteraction = null;
+    const target = this.resolveWalkablePoint(this.player.x + dx, this.player.y + dy);
+    this.targetPoint = new Phaser.Math.Vector2(target.x, target.y);
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
   }
 
@@ -1455,8 +1737,7 @@ export class InteriorScene extends Phaser.Scene {
 
     if (keyboardVector.lengthSq() > 0) {
       keyboardVector.normalize().scale(2.6);
-      this.player.x = Phaser.Math.Clamp(this.player.x + keyboardVector.x, INTERIOR_BOUNDS.minX, INTERIOR_BOUNDS.maxX);
-      this.player.y = Phaser.Math.Clamp(this.player.y + keyboardVector.y, INTERIOR_BOUNDS.minY, INTERIOR_BOUNDS.maxY);
+      this.movePlayerBy(keyboardVector.x, keyboardVector.y);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
     } else if (this.targetPoint) {
@@ -1467,15 +1748,32 @@ export class InteriorScene extends Phaser.Scene {
         this.player.setPosition(this.targetPoint.x, this.targetPoint.y);
         this.targetPoint = null;
         this.targetMarker.setVisible(false);
+        if (this.pendingZoneInteraction) {
+          this.pendingZoneInteraction = null;
+          this.tryInteraction();
+          return;
+        }
       } else {
         const speed = 2.8;
-        this.player.x += (dx / distance) * speed;
-        this.player.y += (dy / distance) * speed;
+        const moved = this.movePlayerBy((dx / distance) * speed, (dy / distance) * speed);
+        if (!moved) {
+          this.targetPoint = null;
+          this.targetMarker.setVisible(false);
+          updateGameState({
+            prompt: "Caminho bloqueado por móveis do salão. Escolha um ponto livre no corredor."
+          });
+          return;
+        }
       }
     }
 
     const zone = this.getNearestZone();
     this.setActiveZone(zone?.id || null);
+    if (this.waiterIndicator) {
+      const waiterActive = zone?.id === "waiter";
+      this.waiterIndicator.setAlpha(waiterActive ? 1 : 0.82);
+      this.waiterIndicator.setScale(waiterActive ? 1.08 : 1);
+    }
 
     this.stageGlow.alpha = gameState.stageEventActive
       ? 0.26 + (Math.sin(this.time.now / 150) + 1) * 0.09
@@ -1534,8 +1832,9 @@ export class InteriorScene extends Phaser.Scene {
         spark.y -= spark.speed;
         spark.x += Math.sin(this.time.now / 800 + spark.phase) * 0.15;
         if (spark.y < 48) {
-          spark.y = Phaser.Math.Between(530, 650);
-          spark.x = Phaser.Math.Between(70, GAME_WIDTH - 70);
+          const reset = SPARKLE_RESET_POINTS[index % SPARKLE_RESET_POINTS.length];
+          spark.y = reset.y;
+          spark.x = reset.x;
         }
         const twinkle = (Math.sin(this.time.now / 210 + spark.phase + index) + 1) * 0.5;
         this.sparkleLayer.fillStyle(spark.color, spark.alpha * (0.35 + twinkle));
@@ -1582,7 +1881,7 @@ export class InteriorScene extends Phaser.Scene {
     this.targetPoint = null;
     this.targetMarker?.setVisible(false);
     this.input.enabled = false;
-    this.player.setTint(0xb8ffd0);
+    this.player.ppgSprite?.setTint(0xb8ffd0);
     this.transitionLabel?.setAlpha(1);
     this.tweens.add({
       targets: [this.transitionVeil, this.transitionLabel],
@@ -1598,7 +1897,7 @@ export class InteriorScene extends Phaser.Scene {
       ease: "Sine.easeInOut"
     });
     this.cameras.main.once("camerafadeoutcomplete", () => {
-      this.player.clearTint();
+      this.player.ppgSprite?.clearTint();
       closePanel();
       this.scene.start("street-scene");
     });

@@ -484,8 +484,8 @@ Ultima atualizacao: 2026-04-17 01:39 -05:00 (America/Rio_Branco)
 
 ## Atualizacao rapida 2026-04-19
 
-- Painel `SPRTIS CHECK & CHANGE` criado em `sprites-check-change.html`, com `CHECKPUBPAID` primeiro no menu, senha `99831455`, varredura de `sprite-vault` e `assets`, e botoes de aceitar/reprovar/pedir ajuste por sprite.
-- Chat flutuante de ordens criado para os escritorios via `office-command-chat.js`, com senha Full Admin `99831455A`, hierarquia `Full Admin -> Codex CEO -> equipes` e APIs `/api/office-orders`.
+- Painel `SPRTIS CHECK & CHANGE` criado em `sprites-check-change.html`, com `CHECKPUBPAID` primeiro no menu, senha configurada por variavel de ambiente, varredura de `sprite-vault` e `assets`, e botoes de aceitar/reprovar/pedir ajuste por sprite.
+- Chat flutuante de ordens criado para os escritorios via `office-command-chat.js`, com senha Full Admin configurada por variavel de ambiente, hierarquia `Full Admin -> Codex CEO -> equipes` e APIs `/api/office-orders`.
 - Validacoes locais: `node --check server.js`, `node --check sprites-check-change.js`, `node --check office-command-chat.js`, `npm run review:team` com 0 achados, API de sprites retornando 2600 assets.
 - `Escritorio de Arte` criado em `escritorio-arte.html` com `escritorio-arte-config.js`: 50 agentes de Design Art e Programacao de Game Design, trabalhando junto com Ninjas para aprender/aplicar pixel art, sprites, game engine, colisao, fisica, mapeamento, mapas, som, QA e build. Menus e chat de ordens atualizados com `Equipe Arte/Game Design`.
 - `SPRTIS CHECK & CHANGE` foi corrigido depois do feedback forte do usuario: nao mostra mais senha no placeholder, nao lista `assets` ja publicados, agrupa frames em sprites animados, abre avaliacao em tela cheia, usa `<img>` e nao canvas para preview, e inclui observacoes de modo construcao para mapas/cenarios. Validacao local: 2107 grupos, 190 animados, 1668 mapas/cenarios, 0 `assets` na fila.
@@ -634,8 +634,8 @@ Leitura atual dessas validacoes:
 - tentativa de screenshot mobile automatica do HTML local ficou instavel nesta sessao: Chrome headless respondeu com tela de conexao recusada mesmo com o servidor local pronto, entao a revisao mobile foi fechada principalmente por inspecao estrutural do CSS responsivo
 - sintaxe: `node --check script.js`, `startup-experience.js` e `pesquisa-acre-2026.js` passaram depois da retomada das ultimas ordens
 - consistencia basica: `styles.css`, `startup-experience.css` e `pesquisa-acre-2026.css` ficaram com `brace-balance 0`
-- backend local: `POST /api/pesquisa-acre-2026/admin` respondeu `200` com a senha `99831455a`
-- backend local: `GET /api/admin/dashboard` respondeu `200` com Basic Auth `admin:99831455a`
+- backend local: `POST /api/pesquisa-acre-2026/admin` respondeu `200` com senha admin configurada no ambiente local
+- backend local: `GET /api/admin/dashboard` respondeu `200` com Basic Auth admin configurado no ambiente local
 - validacao visual automatica por screenshot continuou bloqueada nesta sessao porque o Chrome headless abriu com erro de `crashpad CreateFile: Acesso negado` e nao escreveu os PNGs, entao a conferencia visual final ainda pede navegador manual
 - o bloqueio do `crashpad CreateFile: Acesso negado` foi contornado nesta retomada usando DevTools/CDP do Chrome headless com perfil temporario, sem depender da flag nativa de screenshot
 - erro de runtime identificado e corrigido: `registerArticleCardLinks(radarGrid)` estava sendo chamado cedo demais e interrompia a execucao do `script.js`

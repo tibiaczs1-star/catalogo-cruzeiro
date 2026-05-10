@@ -7,10 +7,11 @@ import { closePanel } from "./ui/panelActions.js";
 import { syncPubpaidAccount } from "./services/accountService.js";
 import { BootScene } from "./scenes/BootScene.js";
 import { IntroScene } from "./scenes/IntroScene.js";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
 import { InteriorScene } from "./scenes/InteriorScene.js";
 import { GameLobbyScene } from "./scenes/GameLobbyScene.js";
-import { DartsGameScene } from "./scenes/DartsGameScene.js";
+import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
@@ -27,7 +28,7 @@ const config = {
     width: GAME_WIDTH,
     height: GAME_HEIGHT
   },
-  scene: [BootScene, IntroScene, StreetScene, InteriorScene, GameLobbyScene, DartsGameScene, CheckersGameScene, UIScene]
+  scene: [BootScene, IntroScene, CharacterSelectScene, StreetScene, InteriorScene, GameLobbyScene, PoolGameScene, CheckersGameScene, UIScene]
 };
 
 const game = new Phaser.Game(config);
@@ -64,7 +65,7 @@ const refs = {
   permissionGate: document.querySelector("[data-permission-gate]"),
   startExperience: document.querySelector("[data-start-experience]"),
   permissionStatus: document.querySelector("[data-permission-status]"),
-  canvasShell: document.querySelector(".ppg-canvas-shell")
+  gameShell: document.querySelector(".ppg-game-shell")
 };
 
 let currentStep = "intro";
@@ -167,7 +168,7 @@ function startSoundtrackFromGesture() {
 }
 
 async function requestFullscreen() {
-  const target = refs.canvasShell || document.documentElement;
+  const target = refs.gameShell || document.documentElement;
   if (document.fullscreenElement || !target?.requestFullscreen) return true;
   try {
     await target.requestFullscreen({ navigationUI: "hide" });
@@ -316,8 +317,12 @@ function startGame() {
   if (game.scene.isActive("intro-scene")) {
     game.scene.stop("intro-scene");
   }
-  if (!game.scene.isActive("street-scene") && !game.scene.isActive("interior-scene")) {
-    game.scene.start("street-scene");
+  if (
+    !game.scene.isActive("character-select-scene") &&
+    !game.scene.isActive("street-scene") &&
+    !game.scene.isActive("interior-scene")
+  ) {
+    game.scene.start(gameState.selectedCharacter?.id ? "street-scene" : "character-select-scene");
   }
   if (!game.scene.isActive("ui-scene")) {
     game.scene.start("ui-scene");
@@ -514,10 +519,13 @@ window.render_game_to_text = () => {
     `pvpStatus=${gameState.pvpStatus}`,
     `pvpGameId=${gameState.pvpGameId}`,
     `pvpMatchId=${gameState.pvpMatchId}`,
+    `selectedCharacter=${gameState.selectedCharacter ? JSON.stringify(gameState.selectedCharacter) : "none"}`,
     `activeGameId=${gameState.activeGameId}`,
     `lobbyPhase=${gameState.lobbyPhase}`,
+    `poolGame=${gameState.poolGame ? JSON.stringify(gameState.poolGame) : "none"}`,
     `dartsGame=${gameState.dartsGame ? JSON.stringify(gameState.dartsGame) : "none"}`,
     `checkersGame=${gameState.checkersGame ? JSON.stringify(gameState.checkersGame) : "none"}`,
+    `lastDemoSettlement=${gameState.lastDemoSettlement ? JSON.stringify(gameState.lastDemoSettlement) : "none"}`,
     `music=${soundtrack.getState().playing ? "on" : "off"}`,
     `musicStyle=${soundtrack.getState().style}`,
     `musicZone=${soundtrack.getState().zone}`,

@@ -18,20 +18,20 @@ const HOST = process.env.HOST || "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
 
-function getRequiredSecret(name, fallbackValue) {
+function getRequiredSecret(name, fallbackValue = "") {
   const value = String(process.env[name] || "").trim();
   if (value) return value;
 
-  if (!IS_PRODUCTION) {
+  if (!IS_PRODUCTION && fallbackValue) {
     return fallbackValue;
   }
 
-  console.warn(`[security] Missing required env ${name} in production. Related admin access is disabled until it is set.`);
-  return `missing-${name.toLowerCase()}-in-production`;
+  console.warn(`[security] Missing required env ${name}. Related admin access is disabled until it is set.`);
+  return `disabled-${name.toLowerCase()}-${crypto.randomBytes(24).toString("hex")}`;
 }
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
-const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD");
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();
@@ -94,6 +94,8 @@ const STORE_DEFAULTS = {
   pubpaidDeposits: [],
   pubpaidWithdrawals: [],
   pubpaidWallets: [],
+  communityReports: [],
+  agentMessages: [],
   news: {
     updatedAt: null,
     online: false,
@@ -386,6 +388,18 @@ function safeEmail(value) {
   const email = safeString(value, 160).toLowerCase();
   const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   return ok ? email : "";
+}
+
+function safeUrl(value) {
+  const input = safeString(value, 1000);
+  if (!input) return "";
+
+  try {
+    const parsed = new URL(input);
+    return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : "";
+  } catch (_error) {
+    return "";
+  }
 }
 
 function base64UrlEncode(value) {
@@ -1454,6 +1468,153 @@ app.get("/api/comments/:articleId", async (req, res) => {
     .reverse();
 
   res.json({ ok: true, total: filtered.length, comments: filtered });
+});
+
+app.get("/api/community/reports", async (req, res) => {
+  const limit = Math.max(1, Math.min(60, Number(req.query.limit || 12)));
+  const reports = await readStore("communityReports", []);
+  const items = reports
+    .filter((item) => item.status !== "hidden")
+    .slice(-limit)
+    .reverse();
+
+  res.json({ ok: true, total: items.length, items });
+});
+
+app.post("/api/community/reports", async (req, res) => {
+  const body = req.body || {};
+  const tracking = buildTrackingMeta(req, body);
+  const message = safeString(body.message, 1000);
+
+  if (message.length < 12) {
+    return res.status(400).json({
+      ok: false,
+      error: "Mensagem com pelo menos 12 caracteres e obrigatoria."
+    });
+  }
+
+  const reports = await readStore("communityReports", []);
+  const item = {
+    id: buildId("community"),
+    name: safeString(body.name || "Morador(a)", 80) || "Morador(a)",
+    contact: safeString(body.contact, 140),
+    neighborhood: safeString(body.neighborhood, 120),
+    topic: safeString(body.topic || "Mensagem comunitaria", 120),
+    message,
+    status: "under-review",
+    sourcePage: tracking.pagePath,
+    visitorId: tracking.visitorId || tracking.cookieVisitorId,
+    sessionId: tracking.sessionId || tracking.cookieSessionId,
+    createdAt: nowIso()
+  };
+
+  reports.push(item);
+  await writeStore("communityReports", reports.slice(-300));
+
+  res.status(201).json({ ok: true, item });
+});
+
+app.post("/api/agent-messages", async (req, res) => {
+  const body = req.body || {};
+  const message = safeString(body.message, 2000);
+
+  if (message.length < 5) {
+    return res.status(400).json({
+      ok: false,
+      error: "Mensagem com pelo menos 5 caracteres e obrigatoria."
+    });
+  }
+
+  const messages = await readStore("agentMessages", []);
+  const item = {
+    id: buildId("agentmsg"),
+    name: safeString(body.name || "Leitor(a)", 100) || "Leitor(a)",
+    email: safeEmail(body.email),
+    subject: safeString(body.subject || "Contato pelo portal", 180),
+    message,
+    recipient: safeString(body.recipient || "Atendimento do portal", 160),
+    status: "received",
+    createdAt: nowIso()
+  };
+
+  messages.push(item);
+  await writeStore("agentMessages", messages.slice(-500));
+
+  res.status(201).json({ ok: true, item });
+});
+
+app.get("/api/social-trends", async (req, res) => {
+  const limit = Math.max(1, Math.min(30, Number(req.query.limit || 8)));
+  const news = await readStore("news", { updatedAt: null, online: false, items: [] });
+  const localItems = Array.isArray(news.items) ? news.items : [];
+  const fallbackItems = [
+    {
+      id: "radar-dolar",
+      title: "Dolar e mercado entram no radar do dia",
+      summary: "Cotacao, bolsa e economia nacional aparecem aqui quando forem uteis para o leitor local.",
+      category: "economia",
+      sourceName: "Radar do portal",
+      sourceUrl: "/arquivo.html?busca=dolar",
+      href: "/arquivo.html?busca=dolar"
+    },
+    {
+      id: "radar-mundo",
+      title: "Noticias internacionais com impacto no Brasil",
+      summary: "O portal separa fatos de fora que podem afetar economia, servicos ou rotina da regiao.",
+      category: "mundo",
+      sourceName: "Radar do portal",
+      sourceUrl: "/arquivo.html?busca=internacional",
+      href: "/arquivo.html?busca=internacional"
+    },
+    {
+      id: "radar-cultura-pop",
+      title: "Animes, filmes e cultura pop em leitura leve",
+      summary: "Assuntos de entretenimento entram separados da cobertura jornalistica principal.",
+      category: "entretenimento",
+      sourceName: "Radar cultural",
+      sourceUrl: "/animes.html",
+      href: "/animes.html"
+    }
+  ];
+  const items = [...localItems, ...fallbackItems].slice(0, limit);
+
+  res.json({ ok: true, total: items.length, updatedAt: news.updatedAt || nowIso(), items });
+});
+
+app.get("/api/topic-feed", async (req, res) => {
+  const topic = safeString(req.query.topic, 120).toLowerCase();
+  const limit = Math.max(1, Math.min(24, Number(req.query.limit || 8)));
+  const news = await readStore("news", { updatedAt: null, online: false, items: [] });
+  const items = (Array.isArray(news.items) ? news.items : [])
+    .filter((item) => {
+      const haystack = `${item.title || ""} ${item.summary || ""} ${item.category || ""}`.toLowerCase();
+      return !topic || haystack.includes(topic);
+    })
+    .slice(0, limit);
+
+  res.json({ ok: true, topic, total: items.length, items });
+});
+
+app.get("/api/daily-agent-pulse", (_req, res) => {
+  res.json({
+    ok: true,
+    updatedAt: nowIso(),
+    items: [
+      { core: "redacao", label: "Redacao", status: "organizando materias e fontes" },
+      { core: "servicos", label: "Servicos", status: "separando telefones e utilidade publica" },
+      { core: "comunidade", label: "Comunidade", status: "recebendo relatos para conferencia" },
+      { core: "comercial", label: "Comercial", status: "direcionando marcas e anuncios locais" }
+    ]
+  });
+});
+
+app.get("/api/preview-image", (req, res) => {
+  const url = safeUrl(req.query.url);
+  if (!url) {
+    return res.status(400).json({ ok: false, error: "URL invalida." });
+  }
+
+  res.json({ ok: true, image: url, url });
 });
 
 app.post("/api/analytics/visit", async (req, res) => {

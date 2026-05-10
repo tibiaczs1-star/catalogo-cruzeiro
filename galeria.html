@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeria de Fotos | Catálogo Cruzeiro do Sul</title>
+    <meta
+      name="description"
+      content="Galeria visual de Cruzeiro do Sul e do Vale do Juruá, com fotos da cidade, rio, cultura, eventos e cotidiano."
+    />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+    <link rel="stylesheet" href="./galeria.css?v=20260509-gallery1" />
+  </head>
+  <body class="gallery-page">
+    <div class="gallery-bg" aria-hidden="true"></div>
+    <header class="gallery-header">
+      <a class="gallery-brand" href="./index.html">
+        <span class="brand-compass" aria-hidden="true"></span>
+        <span><small>Portal</small><strong>Cruzeiro do Sul</strong><em>Vale do Juruá</em></span>
+      </a>
+      <nav aria-label="Navegação da galeria">
+        <a href="./index.html">Início</a>
+        <a href="./arquivo.html">Arquivo</a>
+        <a href="./fontes-monitoradas.html">Fontes</a>
+        <a href="./index.html#participacao-comunitaria">Enviar foto</a>
+      </nav>
+    </header>
+
+    <main class="gallery-shell">
+      <section class="gallery-hero">
+        <div>
+          <span class="gallery-kicker">galeria visual</span>
+          <h1>Fotos da cidade, do rio e da vida no Vale do Juruá.</h1>
+          <p>
+            Imagens organizadas por tema para preservar memória local, mostrar eventos,
+            acompanhar o cotidiano e abrir caminho para novas publicações com fonte identificada.
+          </p>
+          <div class="gallery-actions">
+            <a href="#mosaico">Ver fotos</a>
+            <a href="./index.html#participacao-comunitaria">Enviar imagem ou relato</a>
+          </div>
+        </div>
+        <aside class="gallery-hero-card">
+          <span>Acervo em organização</span>
+          <strong>5 seções</strong>
+          <small>Cidade, Rio, Eventos, Cultura e Cotidiano.</small>
+        </aside>
+      </section>
+
+      <section class="gallery-filter-panel" aria-label="Filtros da galeria">
+        <button class="is-active" type="button" data-gallery-filter="todos">Tudo</button>
+        <button type="button" data-gallery-filter="cidade">Cidade</button>
+        <button type="button" data-gallery-filter="rio">Rio e natureza</button>
+        <button type="button" data-gallery-filter="eventos">Eventos</button>
+        <button type="button" data-gallery-filter="cultura">Cultura</button>
+        <button type="button" data-gallery-filter="cotidiano">Cotidiano</button>
+      </section>
+
+      <section id="mosaico" class="gallery-mosaic" aria-label="Mosaico de fotos">
+        <button class="gallery-photo large" type="button" data-gallery-item data-category="cidade" data-title="Entrada de Cruzeiro do Sul" data-summary="Registro urbano da cidade, usado como referência visual para cobertura local." style="--photo:url('./assets/home-cache/buzz-cruzeiro-01.jpg')"><span>Cidade</span></button>
+        <button class="gallery-photo" type="button" data-gallery-item data-category="transito cidade" data-title="Rua, ônibus e rotina urbana" data-summary="Movimento de vias e transporte para leitura de trânsito e mobilidade." style="--photo:url('./assets/home-cache/buzz-via-cruzeiro.jpg')"><span>Trânsito</span></button>
+        <button class="gallery-photo tall" type="button" data-gallery-item data-category="rio natureza" data-title="Rio Juruá ao amanhecer" data-summary="Imagem de paisagem do Juruá para memória visual, clima e ambiente." style="--photo:url('./assets/home-cache/rio-jurua-panorama.jpg')"><span>Rio</span></button>
+        <button class="gallery-photo" type="button" data-gallery-item data-category="eventos cultura" data-title="Show e luzes no palco" data-summary="Referência visual para eventos, cultura, música e agenda social." style="--photo:url('./assets/home-cache/buzz-cultura-show.jpg')"><span>Eventos</span></button>
+        <button class="gallery-photo" type="button" data-gallery-item data-category="cotidiano economia" data-title="Açaí e produção local" data-summary="Cena de economia, comida regional e comércio do cotidiano." style="--photo:url('./assets/home-cache/buzz-acai-bowl.jpg')"><span>Economia</span></button>
+        <button class="gallery-photo wide" type="button" data-gallery-item data-category="cultura eventos" data-title="Teatro e plateia" data-summary="Espaço cultural para registrar apresentações, encontros e bastidores." style="--photo:url('./assets/home-cache/ent-theater-audience.jpg')"><span>Cultura</span></button>
+        <button class="gallery-photo" type="button" data-gallery-item data-category="cotidiano cidade" data-title="Cotidiano nos bairros" data-summary="Imagem de apoio para reportagens de rotina, bairro e comunidade." style="--photo:url('./assets/home-cache/fallback-cotidiano.jpg')"><span>Cotidiano</span></button>
+        <button class="gallery-photo" type="button" data-gallery-item data-category="cidade" data-title="Vista urbana do Juruá" data-summary="Foto de cidade para acompanhar notícias locais com contexto visual." style="--photo:url('./assets/home-cache/buzz-cruzeiro-04.jpg')"><span>Cidade</span></button>
+        <button class="gallery-photo" type="button" data-gallery-item data-category="cultura entretenimento" data-title="Cinema e cultura pop" data-summary="Área de entretenimento visual para filmes, séries e cultura pop." style="--photo:url('./assets/home-cache/ent-starlight-stage.jpg')"><span>Entretenimento</span></button>
+      </section>
+
+      <section class="gallery-sections" aria-label="Seções da galeria">
+        <article><span>Cidade</span><h2>Ruas, bairros e lugares conhecidos.</h2><p>Fotos para reconhecer a cidade e acompanhar mudanças urbanas.</p></article>
+        <article><span>Rio e natureza</span><h2>Juruá, clima e paisagem.</h2><p>Registros que ajudam a contar a relação da região com o rio.</p></article>
+        <article><span>Eventos</span><h2>Festas, shows e encontros.</h2><p>Imagens com data, local e contexto quando houver fonte.</p></article>
+        <article><span>Cotidiano</span><h2>Vida local e memória.</h2><p>Cenas simples também fazem parte da história visual do portal.</p></article>
+      </section>
+    </main>
+
+    <div class="gallery-lightbox" data-gallery-lightbox hidden>
+      <button type="button" data-gallery-close aria-label="Fechar foto">×</button>
+      <figure>
+        <span data-gallery-preview></span>
+        <figcaption>
+          <small data-gallery-category>Galeria</small>
+          <strong data-gallery-title>Foto da região</strong>
+          <p data-gallery-summary>Resumo da imagem selecionada.</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <script src="./galeria.js?v=20260509-gallery1" defer></script>
+  </body>
+</html>

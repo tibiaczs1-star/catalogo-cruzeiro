@@ -467,10 +467,19 @@
   }
 
   function removeConsentBanner() {
-    document.getElementById(CONSENT_BANNER_ID)?.remove();
+    const banner = document.getElementById(CONSENT_BANNER_ID);
+    if (banner?.classList.contains("cookie-consent-banner-mobile")) {
+      return;
+    }
+
+    banner?.remove();
   }
 
   function mountConsentBanner() {
+    if (document.body.classList.contains("mobile-cookie-consent-active")) {
+      return;
+    }
+
     removeConsentBanner();
   }
 

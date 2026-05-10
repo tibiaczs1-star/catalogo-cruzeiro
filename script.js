@@ -66,6 +66,7 @@ const heroTourismKicker = document.querySelector("[data-hero-tourism-kicker]");
 const heroTourismTitle = document.querySelector("[data-hero-tourism-title]");
 const heroTourismNote = document.querySelector("[data-hero-tourism-note]");
 const heroTourismMetaLink = document.querySelector("[data-hero-tourism-meta-link]");
+const heroTourismDots = document.querySelector("[data-hero-tourism-dots]");
 const heroTourismPrevButton = document.querySelector("#hero-tourism-prev");
 const heroTourismNextButton = document.querySelector("#hero-tourism-next");
 const heroDailyNewsCard = document.querySelector("[data-hero-daily-link]");
@@ -90,6 +91,7 @@ const communityReportList = document.querySelector("#community-report-list");
 const communityTrendCard = document.querySelector("#community-trend-card");
 const communityTrendTitle = document.querySelector("[data-community-trend-title]");
 const communityTrendSummary = document.querySelector("[data-community-trend-summary]");
+const communityTrendReference = document.querySelector("[data-community-trend-reference]");
 const communityTrendCaptions = document.querySelector("[data-community-trend-captions]");
 const communityTrendTags = document.querySelector("[data-community-trend-tags]");
 const communityTrendUpdated = document.querySelector("[data-community-trend-updated]");
@@ -107,14 +109,15 @@ const trendingBuzzGrid = document.querySelector("#trending .trending-grid");
 const trendingBuzzInitialMarkup = trendingBuzzGrid?.innerHTML || "";
 const monthlyBuzzGrid = document.querySelector("#monthly .month-grid");
 const whatMattersGrid = document.querySelector("[data-what-matters-grid]");
+const whatMattersTitle = document.querySelector("[data-what-matters-title]");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
-  "Preparando capa, fontes e identidade",
-  "Sincronizando notícias e tendências",
-  "Finalizando módulos e imagens críticas"
+  "Fragmentando imagens e capa do dia",
+  "Sincronizando notícias do Vale do Juruá",
+  "Finalizando leitura, serviços e agenda"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const splashGateMaximumMs = 16000;
@@ -125,14 +128,38 @@ const tickerDesktopStaticMedia =
     ? window.matchMedia("(min-width: 821px)")
     : null;
 const tickerPhrasePool = [
-  { label: "Notícias", text: "As notícias locais mostram primeiro o que impacta Cruzeiro do Sul no dia." },
-  { label: "Arquivo", text: "Arquivo do mês ajuda a entender o contexto das notícias mais recentes." },
-  { label: "Comunidade", text: "Recados da comunidade entram com leitura rápida e informação útil." },
-  { label: "Serviço", text: "Serviço útil aparece com endereço, horário e caminho para resolver." },
+  {
+    label: "Serviços",
+    title: "Atendimento, prazos e avisos.",
+    text: "Informações úteis entram cedo quando ajudam a resolver a rotina.",
+    href: "./catalogo-servicos.html",
+    tone: "servicos"
+  },
+  {
+    label: "Trânsito",
+    title: "Mudou a rua, mudou a rota.",
+    text: "Rotas, vias e mobilidade aparecem com leitura rápida.",
+    href: "#clima-alertas",
+    tone: "transito"
+  },
+  {
+    label: "Clima",
+    title: "Tempo, cheia e alertas.",
+    text: "Rio, chuva e alertas ficam sempre perto do leitor.",
+    href: "#clima-alertas",
+    tone: "clima"
+  },
+  {
+    label: "Cultura",
+    title: "A cultura local aparece aqui.",
+    text: "Shows, festas e programação ganham chamada no fluxo.",
+    href: "#social",
+    tone: "cultura"
+  },
   { label: "Checagem", text: "Cada destaque sobe com checagem, contexto e fonte identificada." },
   { label: "Agenda", text: "Agenda cultural, cinema e teatro correm juntos no painel vivo." },
   { label: "Negócios", text: "Negócios locais ganham espaço com foco no que movimenta a cidade." },
-  { label: "Educação", text: "Escolas, vestibular e oportunidades estudantis ficam sempre por perto." },
+  { label: "Serviços", text: "Atendimento, prazos e avisos úteis ficam sempre por perto." },
   { label: "Trânsito", text: "Mudou a rua, mudou a rotina: o letreiro avisa sem rodeio." },
   { label: "Clima", text: "Tempo, cheia e alerta entram cedo quando afetam o dia da população." },
   { label: "Cultura", text: "A cultura local aparece com voz própria e espaço de verdade." },
@@ -143,7 +170,7 @@ const tickerPhrasePool = [
   { label: "Bairro", text: "O que acontece no bairro também merece manchete bem tratada." },
   { label: "Plantão", text: "Plantão leve, visual limpo e leitura rápida para quem está no corre." },
   { label: "Comunidade", text: "Pedidos de correção, avisos de evento e mensagens úteis entram no fluxo." },
-  { label: "Saúde", text: "Saúde, escola e utilidade pública ficam mais fáceis de achar nesta faixa." },
+  { label: "Saúde", text: "Saúde e utilidade pública ficam mais fáceis de achar nesta faixa." },
   { label: "Feira", text: "Feira, comércio e pequenos negócios entram no mapa com clareza." },
   { label: "Atualização", text: "A página mostra movimento e atualização sem perder clareza." },
   { label: "Agenda", text: "Show, peça, oficina e evento local aparecem em uma mesma corrida." },
@@ -192,7 +219,7 @@ const heroDesktopBackdropMedia =
     : null;
 const shouldUseSolidHeroShell = () => !heroDesktopBackdropMedia?.matches;
 const heroOfficeBubblePool = [
-  "Atualizando destaques da cidade",
+  "Destaques da cidade em organização",
   "Resumo local em revisão",
   "Acompanhando ruas, redes e agenda",
   "Novas informações chegando",
@@ -229,13 +256,129 @@ const clearLiveTickerRuntime = () => {
   tickerRuntime.timerIds = [];
 };
 
+const stripTickerBoilerplateSummary = (value = "") =>
+  cleanArticleExcerpt(value)
+    .replace(/^[^.]{2,80}\s+publicou em\s+[^.]{2,90}\s+a base desta not[ií]cia sobre\s*/i, "")
+    .replace(/\bPara o leitor local,\s*o ponto principal\s+[ée]\s*$/i, "")
+    .replace(/\bPara o leitor local,\s*o ponto principal\s+[ée]\s+entender.*$/i, "")
+    .replace(/\bA reda[cç][aã]o autom[aá]tica[^.]+\.?/gi, "")
+    .replace(/\bO portal mant[eé]m o link da fonte original[^.]+\.?/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const buildTickerBriefTitle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const title = cleanArticleText(normalizedArticle.title || article.title || "Atualização local");
+  if (title.length <= 62) {
+    return title;
+  }
+
+  const beforeQuote = trimDanglingTickerWords(title.split(/[“"']/)[0] || "");
+  if (beforeQuote.length >= 28 && beforeQuote.length <= 62) {
+    return beforeQuote;
+  }
+
+  const splitTitle = title.split(/\s[-–—:]\s|:\s/).map((part) => part.trim()).filter(Boolean);
+  const strongSegment = splitTitle.find((part) => part.length >= 28 && part.length <= 62);
+  if (strongSegment) {
+    return strongSegment;
+  }
+
+  return trimDanglingTickerWords(truncateCopyAtWord(title, 62, {
+    suffix: "",
+    minWordSafeLength: 34
+  }));
+};
+
+const trimDanglingTickerWords = (value = "") => {
+  const danglingWords = new Set([
+    "a",
+    "as",
+    "com",
+    "da",
+    "das",
+    "de",
+    "do",
+    "dos",
+    "e",
+    "em",
+    "entre",
+    "na",
+    "nas",
+    "no",
+    "nos",
+    "o",
+    "os",
+    "para",
+    "por",
+    "que",
+    "ser",
+    "ter",
+    "um",
+    "uma",
+    "é"
+  ]);
+  const words = cleanArticleText(value).split(/\s+/).filter(Boolean);
+
+  while (words.length > 4) {
+    const last = normalizeText(words[words.length - 1]).replace(/[^a-z0-9]+/g, "");
+    if (!danglingWords.has(last)) {
+      break;
+    }
+    words.pop();
+  }
+
+  return words.join(" ");
+};
+
+const buildTickerTopicFromTitle = (title = "") => {
+  const cleanTitle = cleanArticleText(title).replace(/[.!?]+$/g, "");
+  const words = cleanTitle.split(/\s+/).filter(Boolean);
+  const topic = trimDanglingTickerWords(words.slice(0, 8).join(" "));
+  return topic || cleanTitle || "a atualizacao do dia";
+};
+
+const buildTickerBriefSummary = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const bodyCandidates = Array.isArray(normalizedArticle.body)
+    ? normalizedArticle.body
+    : [normalizedArticle.body].filter(Boolean);
+  const titleKey = normalizeText(normalizedArticle.title || "");
+  const candidates = [
+    article.description,
+    article.summary,
+    article.lede,
+    article.rawLede,
+    normalizedArticle.rawLede,
+    normalizedArticle.summary,
+    normalizedArticle.displaySummary,
+    normalizedArticle.sourceLabel,
+    ...bodyCandidates
+  ]
+    .map((value) => stripTickerBoilerplateSummary(value))
+    .filter((value) => {
+      const key = normalizeText(value);
+      return value && key && key !== titleKey && value.length >= 38 && !/a base desta not[ií]cia/i.test(value);
+    });
+
+  const bestCandidate =
+    candidates.find((value) => /[.!?]$/.test(value) && value.length <= 92) ||
+    candidates.find((value) => value.length <= 98);
+
+  if (bestCandidate) {
+    return bestCandidate.replace(/\s+/g, " ").trim();
+  }
+
+  const topic = buildTickerTopicFromTitle(normalizedArticle.title).toLowerCase();
+  return `Acompanhe a cobertura sobre ${topic} com contexto para a rotina local.`;
+};
+
 const buildLiveTickerPhrasePool = (items = []) => {
   const seenKeys = new Set();
   const seenLabels = new Set();
   const firstByLabel = [];
   const repeatedLabels = [];
-
-  (Array.isArray(items) ? items : [])
+  const normalizedItems = (Array.isArray(items) ? items : [])
     .map((item) => normalizeRuntimeArticle(item))
     .filter((article) => {
       const key = article.slug || article.sourceUrl || article.id || article.title;
@@ -247,14 +390,27 @@ const buildLiveTickerPhrasePool = (items = []) => {
       seenKeys.add(key);
       return true;
     })
+    .sort((left, right) =>
+      compareEditorialFlowArticles(left, right, {
+        scoreFn: getRadarRelevanceScore,
+        imageBias: true
+      })
+    );
+
+  normalizedItems
     .slice(0, 80)
-    .map((article) => ({
-      label: truncateCopy(article.category || article.sourceName || "Agora", 20),
-      text: truncateCopy(article.title || article.lede || "Atualização local em destaque.", 160),
-      href: article.slug
-        ? `./noticia.html?slug=${encodeURIComponent(article.slug)}`
-        : article.sourceUrl || "#radar"
-    }))
+    .map((article) => {
+      return {
+        label: truncateCopy(article.category || article.sourceName || "Agora", 20),
+        title: buildTickerBriefTitle(article),
+        text: buildTickerBriefSummary(article),
+        href: article.slug
+          ? `./noticia.html?slug=${encodeURIComponent(article.slug)}`
+          : article.sourceUrl || "#radar",
+        tone: article.categoryKey || normalizeText(article.category || article.sourceName || "agora"),
+        sourceName: article.sourceName
+      };
+    })
     .forEach((phrase) => {
       const labelKey = normalizeText(phrase.label || "agora") || "agora";
 
@@ -297,9 +453,7 @@ const ensureTickerPhraseDiversity = (phrases = []) => {
 
 const getTickerPhrasePool = () => {
   const livePhrases = buildLiveTickerPhrasePool(window.NEWS_DATA || []);
-  return ensureTickerPhraseDiversity(
-    livePhrases.length >= 6 ? livePhrases : [...livePhrases, ...tickerPhrasePool]
-  );
+  return ensureTickerPhraseDiversity([...tickerPhrasePool, ...livePhrases]);
 };
 const splashStorageKey = "catalogo_splash_seen_v1";
 const skipHomeIntroKey = "catalogo_skip_home_intro_once";
@@ -362,9 +516,9 @@ const initialStaticNews = Array.isArray(window.NEWS_DATA) ? [...window.NEWS_DATA
 const homepageStaticPreviewBySlug = {
   "pixel-art-nao-e-nostalgia-e-interface": {
     slug: "pixel-art-nao-e-nostalgia-e-interface",
-    title: "Pixel art não é nostalgia: é uma tecnologia de leitura para jogos, mapas e notícias",
-    category: "Jogos e arte",
-    sourceName: "Cheffe Call - arte e design de jogos",
+    title: "Pixel art não é nostalgia: é uma tecnologia de leitura para mapas e notícias",
+    category: "Arte e design",
+    sourceName: "Chefe Call - arte e design",
     imageUrl: "./assets/home-cache/pixel-art-editorial.svg",
     feedImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
     sourceImageUrl: "./assets/home-cache/pixel-art-editorial.svg",
@@ -1764,7 +1918,7 @@ const waitForSplashReadiness = async () => {
       wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
     },
     {
-      label: "Organizando estilos e módulos finais",
+      label: "Organizando estilos e áreas finais",
       progress: 82,
       wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
     },
@@ -1861,7 +2015,7 @@ const setupSplashExperience = () => {
     }
 
     const bootProgress = 54 + (Math.min(total, completed) / total) * 28;
-    updateSplashProgress(bootProgress, detail.label || "Organizando módulos finais");
+    updateSplashProgress(bootProgress, detail.label || "Organizando áreas finais");
   };
 
   window.addEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
@@ -1900,7 +2054,7 @@ const setupSplashExperience = () => {
       ? performance.now()
       : Date.now();
   const elapsed = currentTime - splashBootStartedAt;
-  const minimumDuration = splashMotionQuery.matches ? 220 : hasSeenSplash ? 950 : 1700;
+  const minimumDuration = hasSeenSplash ? 950 : 1700;
   const remaining = Math.max(100, minimumDuration - elapsed);
 
   const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
@@ -1942,8 +2096,12 @@ const buildTickerChip = (phrase) => {
   chip.className = "ticker-chip";
   chip.href = phrase?.href || "#radar";
   chip.innerHTML = `
-    <span class="ticker-chip-label"></span>
-    <span class="ticker-chip-text"></span>
+    <span class="ticker-chip-orb" aria-hidden="true"></span>
+    <span class="ticker-chip-copy">
+      <span class="ticker-chip-label"></span>
+      <strong class="ticker-chip-title"></strong>
+      <span class="ticker-chip-text"></span>
+    </span>
     <span class="ticker-chip-caret" aria-hidden="true"></span>
   `;
   setTickerChipPhrase(chip, phrase);
@@ -1956,10 +2114,13 @@ const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
   }
 
   const labelNode = chip.querySelector(".ticker-chip-label");
+  const titleNode = chip.querySelector(".ticker-chip-title");
   const textNode = chip.querySelector(".ticker-chip-text");
-  const nextLabel = String(phrase.label || "Ao vivo").trim();
+  const nextLabel = String(phrase.label || "Agora").trim();
+  const nextTitle = String(phrase.title || phrase.headline || nextLabel || "Atualização local").trim();
   const nextText = String(phrase.text || "").trim();
   const nextHref = String(phrase.href || "").trim();
+  const nextTone = normalizeText(phrase.tone || nextLabel || "agora") || "agora";
 
   if (chip._typingInterval) {
     window.clearInterval(chip._typingInterval);
@@ -1975,11 +2136,16 @@ const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
     labelNode.textContent = nextLabel;
   }
 
+  if (titleNode) {
+    titleNode.textContent = nextTitle;
+  }
+
   if (!textNode) {
     return;
   }
 
   chip.classList.remove("is-typing");
+  chip.dataset.tickerTone = nextTone;
 
   textNode.textContent = nextText;
 
@@ -1988,7 +2154,7 @@ const setTickerChipPhrase = (chip, phrase, { type = false } = {}) => {
   }
 
   if (nextText) {
-    chip.setAttribute("aria-label", `${nextLabel}: ${nextText}`);
+    chip.setAttribute("aria-label", `${nextLabel}: ${nextTitle}. ${nextText}`);
   }
 };
 
@@ -2052,7 +2218,7 @@ const initializeLiveTicker = () => {
     };
   });
 
-  if (splashMotionQuery.matches) {
+  if (isDesktopStaticTicker || splashMotionQuery.matches) {
     return;
   }
 
@@ -2206,8 +2372,8 @@ const radarGuideThemes = {
     text: "Saúde reúne campanhas, atendimento, prevenção e tudo o que mexe com o cuidado público na cidade."
   },
   educacao: {
-    label: "Educação",
-    text: "Educação acompanha escola, calendário letivo, formação, campus e oportunidades para estudantes e professores."
+    label: "Serviços",
+    text: "Avisos públicos, prazos e atendimentos entram quando ajudam famílias e estudantes na rotina."
   },
   negocios: {
     label: "Negócios",
@@ -2601,16 +2767,16 @@ const buildRadarContinuityState = (filter = "todos", articles = []) => {
   card.dataset.category = normalizedFilter;
 
   source.className = "news-source";
-  source.textContent = `Resumo CZS • ${theme.label}`;
+  source.textContent = `Resumo local • ${theme.label}`;
 
   title.textContent =
     normalizedFilter === "todos"
-      ? "Resumo em atualização, sem deixar a leitura parar."
-      : `${theme.label}: sem destaque fechado agora.`;
+      ? "O dia segue em acompanhamento."
+      : `${theme.label}: novidades aparecem aqui.`;
 
   summary.textContent = hasArticles
-    ? "Ainda não há uma manchete segura para este recorte com a régua completa de fonte, data e foto. Enquanto isso, o painel mantém a leitura viva com matérias reais que ajudam a seguir o dia."
-    : "Ainda não há matéria suficiente para destacar neste recorte. O painel fica em modo de acompanhamento e aponta para o arquivo vivo até novas fontes entrarem.";
+    ? "Enquanto não há uma manchete principal nesta área, separamos leituras úteis para você seguir informado."
+    : "Quando surgir uma notícia importante nesta área, ela aparece aqui. Enquanto isso, o arquivo regional continua aberto para consulta.";
 
   list.className = "radar-continuity-list";
 
@@ -2641,16 +2807,14 @@ const buildRadarContinuityState = (filter = "todos", articles = []) => {
   if (!hasArticles) {
     const emptyNote = document.createElement("span");
     emptyNote.className = "radar-continuity-note";
-    emptyNote.textContent = "Aguardando nova entrada confiável das fontes monitoradas.";
+    emptyNote.textContent = "Novas notícias aparecem aqui assim que forem publicadas.";
     list.appendChild(emptyNote);
   }
 
-  footerLabel.textContent = hasArticles
-    ? "Fluxo preservado: sem inventar destaque."
-    : "Fluxo preservado: sem notícia falsa.";
+  footerLabel.textContent = hasArticles ? "Sem boato, sem pressa." : "Sem boato: só entra notícia com base.";
   const archiveHref = "./arquivo.html";
   footerLink.href = archiveHref;
-  footerLink.textContent = "abrir arquivo vivo";
+  footerLink.textContent = "Abrir arquivo regional";
   applyArticleLinkAttrs(footerLink, archiveHref);
 
   footer.append(footerLabel, footerLink);
@@ -2896,7 +3060,7 @@ const buildCommunityReportCard = (report = {}) => {
   badge.textContent = "em conferência";
   title.textContent = report.neighborhood || "Bairro não informado";
   message.textContent = report.message || "";
-  footer.textContent = `${report.name || "Morador local"} • informação da população`;
+  footer.textContent = `${report.name || "Morador local"} • conversa pública`;
   if (report.createdAt) {
     time.dateTime = report.createdAt;
     time.textContent = formatCommunityMessageTime(report.createdAt);
@@ -2993,7 +3157,7 @@ const submitCommunityReport = async (event) => {
     });
 
     communityAgentFeedback.textContent =
-      "Mensagem recebida. Ela entra como informação da população e pode passar por conferência.";
+      "Mensagem recebida. Ela entra na conversa pública e pode passar por conferência.";
     communityAgentForm.reset();
     const refreshedItems = await loadCommunityReports();
     if (!Array.isArray(refreshedItems) || !refreshedItems.length) {
@@ -3042,6 +3206,94 @@ if (!performanceLiteMode && parallaxNodes.length > 0) {
     { passive: true }
   );
 }
+
+const setupCinematicParallax = () => {
+  const root = document.querySelector("[data-cinematic-parallax]");
+  if (!root || performanceLiteMode || splashMotionQuery.matches) {
+    document.body.classList.add("cinematic-parallax-lite");
+    return;
+  }
+
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  const saveData = Boolean(connection?.saveData);
+  const lowPower =
+    saveData ||
+    /2g/i.test(String(connection?.effectiveType || "")) ||
+    (Number(navigator.hardwareConcurrency || 8) <= 4 && window.innerWidth < 900);
+
+  if (lowPower) {
+    document.body.classList.add("cinematic-parallax-lite");
+    return;
+  }
+
+  let latestScroll = window.scrollY || 0;
+  let mouseX = 0;
+  let mouseY = 0;
+  let rafId = 0;
+
+  const render = () => {
+    rafId = 0;
+    root.style.setProperty("--parallax-scroll", `${(latestScroll * 0.045).toFixed(2)}px`);
+    root.style.setProperty("--parallax-scroll-slow", `${(latestScroll * -0.022).toFixed(2)}px`);
+    root.style.setProperty("--parallax-mouse-x", `${mouseX.toFixed(2)}px`);
+    root.style.setProperty("--parallax-mouse-y", `${mouseY.toFixed(2)}px`);
+  };
+
+  const requestRender = () => {
+    if (!rafId) {
+      rafId = window.requestAnimationFrame(render);
+    }
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      latestScroll = window.scrollY || 0;
+      requestRender();
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      mouseX = ((event.clientX / Math.max(1, window.innerWidth)) - 0.5) * 18;
+      mouseY = ((event.clientY / Math.max(1, window.innerHeight)) - 0.5) * 12;
+      requestRender();
+    },
+    { passive: true }
+  );
+
+  render();
+};
+
+const hydratePortalStatusRibbon = () => {
+  const today = new Date();
+  const todayLabel = new Intl.DateTimeFormat("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    timeZone: localeTimeZone
+  }).format(today);
+  const dateNode = document.querySelector("[data-portal-date]");
+  if (dateNode) {
+    dateNode.textContent = todayLabel;
+  }
+
+  document.querySelectorAll("[data-today-archive-link]").forEach((link) => {
+    if (!(link instanceof HTMLAnchorElement)) {
+      return;
+    }
+
+    const url = new URL("./arquivo.html", window.location.href);
+    url.searchParams.set("q", todayLabel);
+    url.searchParams.set("periodo", "hoje");
+    link.href = url.pathname.split("/").pop() + url.search;
+  });
+};
+
+setupCinematicParallax();
+hydratePortalStatusRibbon();
 
 if (guideTip && !performanceLiteMode) {
   let guideIndex = 0;
@@ -3102,8 +3354,8 @@ const liveFeedFocus = document.querySelector("#live-feed-focus");
 const liveFeedSources = document.querySelector("#live-feed-sources");
 const liveFeedClear = document.querySelector("#live-feed-clear");
 const liveFeedState = {
-  pageSize: 6,
-  visibleItems: 6,
+  pageSize: 10,
+  visibleItems: 10,
   items: [...initialStaticNews],
   archiveTotal: Math.max(initialStaticNews.length, Number(window.NEWS_ARCHIVE_TOTAL || 0) || 0),
   activeCategory: ""
@@ -3396,7 +3648,7 @@ const previewClassByCategory = {
   saude: "thumb-saude",
   negocios: "thumb-pascoa",
   policia: "thumb-policia",
-  educacao: "thumb-educacao",
+  educacao: "thumb-servico",
   prefeitura: "thumb-politica",
   "acre-governo": "thumb-politica",
   politica: "thumb-politica",
@@ -3414,7 +3666,7 @@ const categoryLabelByKey = {
   politica: "Política",
   policia: "Polícia",
   saude: "Saúde",
-  educacao: "Educação",
+  educacao: "Serviços",
   negocios: "Negócios",
   cultura: "Cultura",
   esporte: "Esporte",
@@ -3941,8 +4193,11 @@ const normalizeRuntimeArticle = (article = {}) => {
   );
   const sourceUrl = article.sourceUrl || article.url || article.link || "#";
   const rawLede = cleanArticleExcerpt(
-    article.lede || article.summary || article.description || "Sem resumo.",
-    article.sourceLabel || article.title || "Sem resumo."
+    article.lede ||
+      article.summary ||
+      article.description ||
+      "Resumo rápido em organização para acompanhar este destaque.",
+    article.sourceLabel || article.title || "Resumo rápido em organização."
   );
   const displaySummary = buildShortArticleSummary(
     rawLede,
@@ -4059,22 +4314,44 @@ const getEditorialFlowPriorityScore = (article = {}) => {
   const prefeituraScore = getPrefeituraJuruaPriorityScore(scopeText);
 
   if (prefeituraScore) {
-    return 10000 + prefeituraScore;
+    return 2600 + prefeituraScore;
   }
 
-  if (categoryKey === "politica") {
-    return 9000;
+  const categoryFlowPriority = {
+    servicos: 2400,
+    "utilidade-publica": 2380,
+    saude: 2350,
+    seguranca: 2320,
+    educacao: 2280,
+    agenda: 2240,
+    cotidiano: 2180,
+    comunidade: 2140,
+    cidades: 2100,
+    "acre-governo": 1700,
+    esporte: 1450,
+    economia: 1360,
+    cultura: 1280,
+    politica: 1100,
+    entretenimento: 720,
+    buzz: 520,
+    fofocas: 520,
+    mundo: 240,
+    tecnologia: 220
+  };
+
+  if (categoryFlowPriority[categoryKey]) {
+    return categoryFlowPriority[categoryKey];
   }
 
   if (categoryKey === "acre-governo" || isAcreGovernmentScope(scopeText)) {
-    return 8200;
+    return 1700;
   }
 
   if (isAcreGeneralScope(scopeText) && categoryKey !== "prefeitura") {
-    return 7600;
+    return 1650;
   }
 
-  return 0;
+  return 400;
 };
 
 const isMailzaPriorityArticle = (article = {}) => {
@@ -4163,6 +4440,20 @@ const editorialRegionalPriority = {
 const getEditorialRegionalPriorityScore = (article = {}) =>
   editorialRegionalPriority[getEditorialRegionalTier(article)] || 0;
 
+const getEditorialSortDayTimestamp = (article = {}) => {
+  const timestamp = getArticleSortTimestamp(article);
+  if (!timestamp) {
+    return 0;
+  }
+
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) {
+    return 0;
+  }
+
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+};
+
 const getLocalImpactScopeText = (article = {}) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
   return normalizeText(
@@ -4236,20 +4527,20 @@ const compareEditorialFlowArticles = (
   right,
   { scoreFn = null, imageBias = false } = {}
 ) => {
-  const dateDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
-  if (dateDiff !== 0) {
-    return dateDiff;
+  const dateLayerDiff = getEditorialSortDayTimestamp(right) - getEditorialSortDayTimestamp(left);
+  if (dateLayerDiff !== 0) {
+    return dateLayerDiff;
+  }
+
+  const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);
+  if (mailzaDiff !== 0) {
+    return mailzaDiff;
   }
 
   const regionalDiff =
     getEditorialRegionalPriorityScore(right) - getEditorialRegionalPriorityScore(left);
   if (regionalDiff !== 0) {
     return regionalDiff;
-  }
-
-  const mailzaDiff = getMailzaPriorityScore(right) - getMailzaPriorityScore(left);
-  if (mailzaDiff !== 0) {
-    return mailzaDiff;
   }
 
   const editorialFlowDiff =
@@ -4268,6 +4559,11 @@ const compareEditorialFlowArticles = (
   const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
   if (priorityDiff !== 0) {
     return priorityDiff;
+  }
+
+  const timestampDiff = getArticleSortTimestamp(right) - getArticleSortTimestamp(left);
+  if (timestampDiff !== 0) {
+    return timestampDiff;
   }
 
   if (imageBias) {
@@ -4837,8 +5133,9 @@ const heroTourismDailyPoolState = {
   items: []
 };
 
-const heroTourismDailyTarget = 10;
-const heroTourismRotationIntervalMs = 9000;
+const heroTourismDailyTarget = 5;
+const heroTourismRotationIntervalMs = 5000;
+const heroTourismEditorialImageUrl = "./assets/home-cache/rio-jurua-panorama.jpg";
 const heroTourismDailyTimeZone = "America/Rio_Branco";
 const heroTourismLocalPattern =
   /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima|rodrigues alves)\b/i;
@@ -4853,7 +5150,6 @@ const heroTourismFocusPositions = [
   "center 34%"
 ];
 const heroDailyThemeOrder = [
-  "games",
   "prefeitura",
   "politica",
   "acre-governo",
@@ -4913,78 +5209,31 @@ const ensureMobileHomeLeadLayout = () => {
     document.querySelector(".header-services-strip")
   ].filter(Boolean);
 
-  if (isMobile) {
-    if (!mobileHomeDomState.menuDropdown) {
-      const dropdown = document.createElement("details");
-      dropdown.className = "mobile-main-nav-dropdown";
-      dropdown.setAttribute("aria-label", "Menu principal do portal");
-      dropdown.innerHTML = `<summary><span>Áreas</span><small>toque para abrir</small><i aria-hidden="true"></i></summary><div class="mobile-main-nav-links"></div>`;
-      mobileHomeDomState.menuDropdown = dropdown;
+  const restorePremiumHomeOrder = () => {
+    if (mobileHomeDomState.menuDropdown?.parentNode) {
+      mobileHomeDomState.menuDropdown.remove();
     }
 
-    const mobileLinksWrap = mobileHomeDomState.menuDropdown.querySelector(".mobile-main-nav-links");
-    if (mobileLinksWrap) {
-      const mobileEditorialPriority = [
-        "#radar",
-        "#acre-destaque",
-        "#politica-global",
-        "#entretenimento",
-        "#social",
-        "./lifestile.html",
-        "#trending",
-        "#panorama",
-        "#arquivo"
-      ];
-      const stripLinks = editorialStrip
-        ? [...editorialStrip.querySelectorAll("a[href]")].map((anchor) => ({
-            href: anchor.getAttribute("href") || "",
-            label: anchor.textContent?.trim() || ""
-          }))
-        : [];
-      const editorialLinks = mobileEditorialPriority
-        .map((targetHref) => stripLinks.find((link) => link.href === targetHref))
-        .filter((link) => link?.href && link?.label)
-        .map(
-          (link) => `<a href="${escapeHtml(link.href)}">${escapeHtml(link.label)}</a>`
-        );
-
-      mobileLinksWrap.innerHTML = editorialLinks.join("");
-    }
-
-    if (!mobileHomeDomState.initialized) {
-      moveAfterHero.forEach((node) => {
-        const marker = document.createComment(`mobile-home-placeholder-${node.className || node.tagName}`);
-        node.parentNode?.insertBefore(marker, node);
-        mobileHomeDomState.placeHolders.set(node, marker);
-      });
-
-      mobileHomeDomState.movedNodes = moveAfterHero;
-      mobileHomeDomState.initialized = true;
-    }
-
-    if (!masthead.contains(mobileHomeDomState.menuDropdown)) {
-      masthead.appendChild(mobileHomeDomState.menuDropdown);
-    }
-
-    const anchorNode = officePlayStrip || heroShell.nextSibling;
-    moveAfterHero.forEach((node) => {
-      if (node.parentNode !== mainLayout) {
-        mainLayout.insertBefore(node, anchorNode);
+    mobileHomeDomState.movedNodes.forEach((node) => {
+      const placeholder = mobileHomeDomState.placeHolders.get(node);
+      if (placeholder?.parentNode) {
+        placeholder.parentNode.insertBefore(node, placeholder.nextSibling);
+        placeholder.remove();
       }
     });
+
+    mobileHomeDomState.initialized = false;
+    mobileHomeDomState.menuDropdown = null;
+    mobileHomeDomState.movedNodes = [];
+    mobileHomeDomState.placeHolders.clear();
+  };
+
+  if (isMobile) {
+    restorePremiumHomeOrder();
     return;
   }
 
-  if (mobileHomeDomState.menuDropdown && masthead.contains(mobileHomeDomState.menuDropdown)) {
-    mobileHomeDomState.menuDropdown.remove();
-  }
-
-  mobileHomeDomState.movedNodes.forEach((node) => {
-    const placeholder = mobileHomeDomState.placeHolders.get(node);
-    if (placeholder?.parentNode) {
-      placeholder.parentNode.insertBefore(node, placeholder.nextSibling);
-    }
-  });
+  restorePremiumHomeOrder();
 };
 const heroDailyPersonFocusPattern =
   /\b(presidente|governador|governadora|prefeito|prefeita|senador|senadora|deputado|deputada|vereador|vereadora|delegado|delegada|secretario|secretaria|ministro|ministra|professor|professora|aluno|aluna|estudante|atleta|jogador|jogadora|cantor|cantora|artista|influencer|criador|criadora|empresario|empresaria|medico|medica|familia|mulher|homem|pessoa|equipe|time|colegio|posse|reuniao|entrevista)\b/;
@@ -5158,7 +5407,7 @@ const getHeroAreaKey = (article = {}) => {
     return "social";
   }
   if (/(games|jogos)/.test(categoryKey)) {
-    return "games";
+    return "cultura";
   }
   if (/(kids|infantil)/.test(categoryKey)) {
     return "infantil";
@@ -5214,15 +5463,15 @@ const buildHeroTourismRuntimePool = () => {
         [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
       );
       return {
-        title: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
+        title: heroDailyAreaLabels[areaKey] || article.category || "Destaque local",
         note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte local", 46),
         proxyUrl: imageUrl,
         fallbackUrl: imageUrl,
         focusPosition: getHeroDailyArticleFocus(article),
         hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
         articleTitle: article.title || "Notícia em destaque",
-        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 138),
+        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Destaque local",
+        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 190),
         articleHref: buildHeroArticleHref(article),
         themeKey: areaKey,
         sourceName: article.sourceName || "Fonte local"
@@ -5277,15 +5526,15 @@ const buildHeroTourismFallbackPool = () => {
         [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
       );
       return {
-        title: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
+        title: heroDailyAreaLabels[areaKey] || article.category || "Destaque local",
         note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte local", 46),
         proxyUrl: imageUrl,
         fallbackUrl: imageUrl,
         focusPosition: getHeroDailyArticleFocus(article),
         hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
         articleTitle: article.title || "Notícia em destaque",
-        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Area em destaque",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 138),
+        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Destaque local",
+        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 190),
         articleHref: buildHeroArticleHref(article),
         themeKey: areaKey,
         sourceName: article.sourceName || "Fonte local"
@@ -5320,7 +5569,7 @@ const buildHeroTourismDailyPool = () => {
         hasPeopleScene: false,
         articleTitle: article.title || "Matéria autoral em destaque",
         articleCategory: article.category || "Destaque autoral",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Artigo autoral em destaque.", 138),
+        articleSummary: truncateCopy(article.displaySummary || article.lede || "Artigo autoral em destaque.", 190),
         articleHref: buildHeroArticleHref(article),
         themeKey: getHeroAreaKey(article),
         sourceName: article.sourceName || "Catálogo Cruzeiro do Sul"
@@ -5336,10 +5585,23 @@ const buildHeroTourismDailyPool = () => {
     }
 
     seenKeys.add(sourceKey);
+    const leadEditorialBackdrop =
+      merged.length === 0 && heroTourismEditorialImageUrl
+        ? {
+            proxyUrl: heroTourismEditorialImageUrl,
+            fallbackUrl: heroTourismEditorialImageUrl,
+            focusPosition: "center 48%",
+            hasPeopleScene: false
+          }
+        : {};
+
     merged.push({
       ...photo,
+      ...leadEditorialBackdrop,
       focusPosition:
-        photo.focusPosition || heroTourismFocusPositions[merged.length % heroTourismFocusPositions.length]
+        leadEditorialBackdrop.focusPosition ||
+        photo.focusPosition ||
+        heroTourismFocusPositions[merged.length % heroTourismFocusPositions.length]
     });
     return true;
   };
@@ -5465,7 +5727,291 @@ const getNextHeroPoolItem = (currentItem = {}, offset = 1) => {
   return null;
 };
 
-const setHeroTourismMeta = (photo) => {
+const updateHeroMainStory = (photo = {}) => {
+  if (!heroTourismShell || !photo) {
+    return;
+  }
+
+  const titleNode = heroTourismShell.querySelector(".hero-newsroom-copy h1");
+  const summaryNode =
+    heroTourismShell.querySelector("[data-hero-tourism-summary-copy]") ||
+    heroTourismShell.querySelector(".hero-newsroom-copy > p:not(.eyebrow)");
+  const primaryLink = heroTourismShell.querySelector(".hero-newsroom-actions .solid-button");
+  const title = photo.articleTitle || photo.title || "";
+  const summary =
+    photo.articleSummary ||
+    photo.note ||
+    photo.sourceName ||
+    "Resumo rápido da notícia em destaque para acompanhar o que muda na região.";
+  const href = photo.articleHref || "#radar";
+
+  if (titleNode && title) {
+    titleNode.textContent = truncateCopy(title, 112);
+  }
+
+  if (summaryNode) {
+    summaryNode.textContent = truncateCopy(summary, 176);
+  }
+
+  if (primaryLink) {
+    primaryLink.href = href;
+    primaryLink.textContent = "Ler destaque";
+    applyArticleLinkAttrs(primaryLink, href);
+  }
+
+  heroTourismShell.classList.add("is-news-carousel-active");
+};
+
+const extractHeroThumbUrl = (thumb) => {
+  if (!thumb) {
+    return "";
+  }
+
+  const rawValue =
+    thumb.style.getPropertyValue("--thumb") ||
+    window.getComputedStyle(thumb).getPropertyValue("--thumb") ||
+    "";
+  const match = String(rawValue).match(/url\((['"]?)(.*?)\1\)/i);
+  return sanitizeImageUrl(match?.[2] || "");
+};
+
+const escapeCssUrl = (url = "") =>
+  String(url || "")
+    .replace(/\\/g, "\\\\")
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, "");
+
+const paintHeroShellImage = (imageUrl = "") => {
+  if (!heroTourismShell || !imageUrl) {
+    return;
+  }
+
+  const selectedImage = `url("${escapeCssUrl(imageUrl)}")`;
+  const backdrop = heroTourismShell.querySelector(".hero-tourism-backdrop");
+  heroTourismShell.style.setProperty("--hero-selected-image", selectedImage);
+  heroTourismSlides.forEach((slide) => {
+    slide.style.setProperty("--hero-selected-image", selectedImage);
+    slide.style.setProperty(
+      "background-image",
+      `
+        linear-gradient(90deg, rgba(3, 18, 31, 0.86) 0%, rgba(3, 18, 31, 0.58) 34%, rgba(3, 18, 31, 0.26) 66%, rgba(3, 18, 31, 0.08) 100%),
+        linear-gradient(180deg, rgba(3, 18, 31, 0.03) 0%, rgba(3, 18, 31, 0.28) 62%, rgba(3, 18, 31, 0.44) 100%),
+        ${selectedImage}
+      `,
+      "important"
+    );
+    slide.style.setProperty("background-position", "center center", "important");
+    slide.style.setProperty("background-size", "cover", "important");
+    slide.style.setProperty("background-repeat", "no-repeat", "important");
+    slide.dataset.heroBackdropReady = "true";
+  });
+  if (backdrop) {
+    backdrop.style.setProperty("--hero-selected-image", selectedImage);
+    backdrop.style.setProperty(
+      "background-image",
+      `
+        linear-gradient(90deg, rgba(3, 18, 31, 0.86) 0%, rgba(3, 18, 31, 0.58) 34%, rgba(3, 18, 31, 0.26) 66%, rgba(3, 18, 31, 0.08) 100%),
+        linear-gradient(180deg, rgba(3, 18, 31, 0.03) 0%, rgba(3, 18, 31, 0.28) 62%, rgba(3, 18, 31, 0.44) 100%),
+        ${selectedImage}
+      `,
+      "important"
+    );
+    backdrop.style.setProperty("background-position", "center center", "important");
+    backdrop.style.setProperty("background-size", "cover", "important");
+    backdrop.style.setProperty("background-repeat", "no-repeat", "important");
+  }
+};
+
+const buildHeroPanelPhotoItem = (thumb, index = 0) => {
+  const bubble = thumb?.querySelector("span");
+  const category = bubble?.querySelector("b")?.textContent?.trim() || "Destaque local";
+  const title =
+    thumb?.dataset?.headline ||
+    bubble?.querySelector("strong")?.textContent?.trim() ||
+    category;
+  const summary =
+    thumb?.dataset?.summary ||
+    bubble?.querySelector("em")?.textContent?.trim() ||
+    "Resumo rápido para escolher o destaque que aparece na capa.";
+  const imageUrl = extractHeroThumbUrl(thumb);
+
+  return {
+    title: category,
+    articleCategory: category,
+    articleTitle: title,
+    articleSummary: summary,
+    articleHref: thumb?.getAttribute("href") || "#radar",
+    proxyUrl: imageUrl,
+    fallbackUrl: imageUrl,
+    focusPosition: "center center",
+    panelIndex: index
+  };
+};
+
+const ensureHeroPanelBubblePart = (bubble, selector, tagName) => {
+  if (!bubble) {
+    return null;
+  }
+
+  const existing = bubble.querySelector(selector);
+  if (existing) {
+    return existing;
+  }
+
+  const created = document.createElement(tagName);
+  bubble.appendChild(created);
+  return created;
+};
+
+const getHeroPanelSyncIndex = (photo = {}, thumbs = []) => {
+  if (!thumbs.length) {
+    return -1;
+  }
+
+  const explicitIndex = Number(photo.panelIndex);
+  if (Number.isFinite(explicitIndex) && explicitIndex >= 0) {
+    return explicitIndex % thumbs.length;
+  }
+
+  const photoKey = getHeroStoryKey(photo);
+  const href = String(photo.articleHref || "").trim();
+  const title = normalizeText(photo.articleTitle || photo.title || photo.articleCategory || "");
+  const exactIndex = thumbs.findIndex((thumb) => {
+    const thumbKey = thumb.dataset.heroStoryKey || "";
+    const thumbHref = String(thumb.getAttribute("href") || "").trim();
+    const thumbTitle = normalizeText(thumb.dataset.headline || thumb.querySelector("strong")?.textContent || "");
+    return Boolean(
+      (photoKey && thumbKey && photoKey === thumbKey) ||
+        (href && thumbHref && href === thumbHref) ||
+        (title && thumbTitle && (title.includes(thumbTitle.slice(0, 30)) || thumbTitle.includes(title.slice(0, 30))))
+    );
+  });
+
+  if (exactIndex >= 0) {
+    return exactIndex;
+  }
+
+  return Math.abs(Number(heroTourismRotation.photoIndex) || 0) % thumbs.length;
+};
+
+const syncHeroPanelThumbContent = (photo = {}, index = 0) => {
+  const thumbs = [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
+  const thumb = thumbs[index];
+  if (!thumb || !photo) {
+    return;
+  }
+
+  const imageUrl = sanitizeImageUrl(photo.proxyUrl || photo.fallbackUrl || "");
+  const href = photo.articleHref || thumb.getAttribute("href") || "#radar";
+  const category = photo.articleCategory || photo.title || "Destaque local";
+  const title = photo.articleTitle || photo.title || category;
+  const summary =
+    photo.articleSummary ||
+    photo.note ||
+    photo.sourceName ||
+    "Resumo rápido para acompanhar o destaque selecionado.";
+
+  if (imageUrl) {
+    thumb.style.setProperty("--thumb", `url("${escapeCssUrl(imageUrl)}")`);
+  }
+
+  thumb.href = href;
+  applyArticleLinkAttrs(thumb, href);
+  thumb.dataset.headline = title;
+  thumb.dataset.summary = summary;
+  thumb.dataset.heroStoryKey = getHeroStoryKey(photo);
+
+  const bubble = thumb.querySelector("span");
+  const labelNode = ensureHeroPanelBubblePart(bubble, "b", "b");
+  const titleNode = ensureHeroPanelBubblePart(bubble, "strong", "strong");
+  const summaryNode = ensureHeroPanelBubblePart(bubble, "em", "em");
+  const actionNode = ensureHeroPanelBubblePart(bubble, "small", "small");
+
+  if (labelNode) labelNode.textContent = category;
+  if (titleNode) titleNode.textContent = truncateCopy(title, 74);
+  if (summaryNode) summaryNode.textContent = truncateCopy(summary, 140);
+  if (actionNode) actionNode.textContent = href.startsWith("#") ? "Ver seção" : "Abrir matéria";
+};
+
+const paintHeroPanelSelection = (photo = {}, index = 0) => {
+  if (!heroTourismShell || !photo) {
+    return;
+  }
+
+  heroTourismShell.classList.add("is-panel-transitioning");
+  window.clearTimeout(heroTourismShell._panelTransitionTimer);
+  heroTourismShell._panelTransitionTimer = window.setTimeout(() => {
+    heroTourismShell.classList.remove("is-panel-transitioning");
+  }, 520);
+
+  updateHeroMainStory(photo);
+  setHeroTourismMeta(photo, { promoteToHero: false });
+
+  const immediateImage = photo.proxyUrl || photo.fallbackUrl || "";
+  paintHeroShellImage(immediateImage);
+
+  if (heroTourismSlides.length && immediateImage && !shouldUseSolidHeroShell()) {
+    const activeSlide =
+      heroTourismSlides[heroTourismRotation.activeSlideIndex] || heroTourismSlides[0];
+    const nextSlide = heroTourismSlides.find((slide) => slide !== activeSlide) || activeSlide;
+    const safeImage = escapeCssUrl(immediateImage);
+
+    nextSlide.style.backgroundImage = `
+      linear-gradient(90deg, rgba(3, 14, 26, 0.2), rgba(3, 14, 26, 0.84) 72%),
+      linear-gradient(180deg, rgba(3, 14, 26, 0.22), rgba(3, 14, 26, 0.72)),
+      url("${safeImage}")
+    `;
+    nextSlide.style.setProperty("background-position", photo.focusPosition || "center center", "important");
+    nextSlide.style.setProperty("background-size", "cover", "important");
+    nextSlide.style.setProperty("background-repeat", "no-repeat", "important");
+    nextSlide.dataset.heroBackdropReady = "true";
+    heroTourismRotation.activeSlideIndex = Math.max(heroTourismSlides.indexOf(nextSlide), 0);
+    heroTourismSlides.forEach((slide) => {
+      slide.classList.toggle("is-active", slide === nextSlide);
+    });
+  }
+
+  document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo").forEach((thumb, thumbIndex) => {
+    thumb.classList.toggle("is-active", thumbIndex === index);
+  });
+  document.querySelectorAll("[data-hero-panel-dot]").forEach((dot, dotIndex) => {
+    const isActive = dotIndex === index % 5;
+    dot.classList.toggle("is-active", isActive);
+    dot.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+
+  window.dispatchEvent(
+    new CustomEvent("catalogo:hero-panel-selected", {
+      detail: {
+        photo,
+        index
+      }
+    })
+  );
+};
+
+const syncHeroPanelThumbs = (photo = {}) => {
+  const thumbs = [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
+  if (!thumbs.length) {
+    return;
+  }
+
+  const activeIndex = getHeroPanelSyncIndex(photo, thumbs);
+  if (activeIndex >= 0) {
+    syncHeroPanelThumbContent(photo, activeIndex);
+  }
+
+  thumbs.forEach((thumb, index) => {
+    thumb.classList.toggle("is-active", index === activeIndex);
+  });
+
+  document.querySelectorAll("[data-hero-panel-dot]").forEach((dot, index) => {
+    dot.classList.toggle("is-active", index === activeIndex % 5);
+    dot.setAttribute("aria-pressed", index === activeIndex % 5 ? "true" : "false");
+  });
+};
+
+const setHeroTourismMeta = (photo, { promoteToHero = false } = {}) => {
   if (!photo) {
     return;
   }
@@ -5473,7 +6019,7 @@ const setHeroTourismMeta = (photo) => {
   const dailyPhoto = getNextHeroPoolItem(photo, 1) || photo;
 
   if (heroTourismKicker) {
-    heroTourismKicker.textContent = photo.articleCategory || photo.title || "Area em destaque";
+    heroTourismKicker.textContent = photo.articleCategory || photo.title || "Destaque local";
   }
 
   if (heroTourismTitle) {
@@ -5500,7 +6046,7 @@ const setHeroTourismMeta = (photo) => {
   }
 
   if (heroDailyNewsCategory) {
-    heroDailyNewsCategory.textContent = dailyPhoto.articleCategory || "Area em destaque";
+    heroDailyNewsCategory.textContent = dailyPhoto.articleCategory || "Destaque local";
   }
 
   if (heroDailyNewsTitle) {
@@ -5513,6 +6059,12 @@ const setHeroTourismMeta = (photo) => {
         dailyPhoto.articleSummary || dailyPhoto.note || "Resumo da notícia principal selecionada para este assunto.",
         132
       );
+  }
+
+  syncHeroPanelThumbs(photo);
+
+  if (promoteToHero) {
+    updateHeroMainStory(photo);
   }
 };
 
@@ -5540,7 +6092,7 @@ const renderHeroDesktopHighlights = (items = []) => {
     card.href = item.articleHref || "#radar";
 
     if (categoryNode) {
-      categoryNode.textContent = item.articleCategory || item.title || "Area em destaque";
+      categoryNode.textContent = item.articleCategory || item.title || "Destaque local";
     }
 
     if (titleNode) {
@@ -5750,7 +6302,7 @@ const paintHeroOfficeTvItem = (index = 0) => {
   const paintToken = heroOfficeTvPaintToken;
 
   if (heroOfficeTvCaption) {
-    heroOfficeTvCaption.textContent = truncateCopy(item.title || "Destaques captados", 42);
+    heroOfficeTvCaption.textContent = truncateCopy(item.title || "Destaques do dia", 42);
   }
 
   if (!item.imageUrl) {
@@ -5807,7 +6359,7 @@ const renderHeroOfficeTv = (items = []) => {
   if (!heroOfficeTvItems.length) {
     heroOfficeTvItems = [
       {
-        title: "Destaques captados ao vivo",
+        title: "Destaques do dia",
         category: "Cobertura local",
         imageUrl: ""
       }
@@ -5961,6 +6513,53 @@ const restartHeroDesktopCarouselTimer = () => {
   }, 4000);
 };
 
+const syncHeroTourismDots = (activeIndex = 0) => {
+  if (!heroTourismDots) {
+    return;
+  }
+
+  const dots = [...heroTourismDots.querySelectorAll(".hero-tourism-dot")];
+  if (!dots.length) {
+    return;
+  }
+
+  const safeIndex = ((Number(activeIndex) % dots.length) + dots.length) % dots.length;
+  dots.forEach((dot, index) => {
+    const isActive = index === safeIndex;
+    dot.classList.toggle("is-active", isActive);
+    dot.setAttribute("aria-pressed", isActive ? "true" : "false");
+  });
+};
+
+const mountHeroTourismDots = (count = 0, onSelect = null) => {
+  if (!heroTourismDots) {
+    return;
+  }
+
+  const safeCount = Math.min(heroTourismDailyTarget, Math.max(0, Number(count) || 0));
+  heroTourismDots.innerHTML = "";
+
+  if (safeCount <= 1) {
+    heroTourismDots.hidden = true;
+    return;
+  }
+
+  heroTourismDots.hidden = false;
+  for (let index = 0; index < safeCount; index += 1) {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-tourism-dot";
+    dot.setAttribute("aria-label", `Abrir destaque ${index + 1}`);
+    dot.setAttribute("aria-pressed", index === 0 ? "true" : "false");
+    dot.addEventListener("click", () => {
+      if (typeof onSelect === "function") {
+        onSelect(index);
+      }
+    });
+    heroTourismDots.appendChild(dot);
+  }
+};
+
 const paintHeroTourismBackdrop = (slideNode, photo) => {
   if (shouldUseSolidHeroShell()) {
     return Promise.resolve(false);
@@ -6027,6 +6626,9 @@ const renderHeroTourismBackground = (photoIndex = 0, { initial = false } = {}) =
     return;
   }
 
+  const immediateImage = photo.proxyUrl || photo.fallbackUrl || "";
+  paintHeroShellImage(immediateImage);
+
   const activeSlide =
     heroTourismSlides[heroTourismRotation.activeSlideIndex] || heroTourismSlides[0];
   const fallbackNextSlide = heroTourismSlides.find((slide) => slide !== activeSlide) || activeSlide;
@@ -6037,14 +6639,15 @@ const renderHeroTourismBackground = (photoIndex = 0, { initial = false } = {}) =
       return;
     }
 
-    setHeroTourismMeta(photo);
+    heroTourismRotation.activeSlideIndex = Math.max(heroTourismSlides.indexOf(nextSlide), 0);
+    heroTourismRotation.photoIndex = photoIndex;
+    setHeroTourismMeta(photo, { promoteToHero: !initial });
 
     heroTourismSlides.forEach((slide) => {
       slide.classList.toggle("is-active", slide === nextSlide);
     });
 
-    heroTourismRotation.activeSlideIndex = Math.max(heroTourismSlides.indexOf(nextSlide), 0);
-    heroTourismRotation.photoIndex = photoIndex;
+    syncHeroTourismDots(photoIndex);
 
     if (heroTourismShell) {
       heroTourismShell.dataset.heroTourismReady = "true";
@@ -6096,7 +6699,7 @@ const initializeHeroTourismHero = () => {
       slide.style.backgroundImage = "none";
       slide.dataset.heroBackdropReady = "false";
     });
-    setHeroTourismMeta(dailyPool[0] || getHeroTourismPhoto(0));
+    setHeroTourismMeta(dailyPool[0] || getHeroTourismPhoto(0), { promoteToHero: false });
     heroTourismShell.dataset.heroTourismReady = "solid";
   } else {
     renderHeroTourismBackground(0, { initial: true });
@@ -6105,18 +6708,57 @@ const initializeHeroTourismHero = () => {
   rotateHeroOfficeStatus(0);
   rotateHeroOfficeBubble(0);
 
+  const showHeroTourismIndex = (targetIndex = 0) => {
+    const currentPool = getHeroTourismDailyPool();
+    if (!currentPool.length) return;
+    const length = currentPool.length;
+    const nextIndex = ((Number(targetIndex) % length) + length) % length;
+    heroTourismRotation.photoIndex = nextIndex;
+    if (shouldUseSolidHeroShell() || liteRuntime) {
+      setHeroTourismMeta(currentPool[nextIndex], { promoteToHero: true });
+      syncHeroTourismDots(nextIndex);
+      return;
+    }
+    renderHeroTourismBackground(nextIndex);
+  };
+
   const stepHeroTourism = (direction = 1) => {
     const currentPool = getHeroTourismDailyPool();
     if (!currentPool.length) return;
     const length = currentPool.length;
     const delta = direction >= 0 ? 1 : -1;
     const nextIndex = (heroTourismRotation.photoIndex + delta + length) % length;
-    heroTourismRotation.photoIndex = nextIndex;
-    if (shouldUseSolidHeroShell() || liteRuntime) {
-      setHeroTourismMeta(currentPool[nextIndex]);
+    showHeroTourismIndex(nextIndex);
+  };
+
+  mountHeroTourismDots(dailyPool.length, showHeroTourismIndex);
+  syncHeroTourismDots(heroTourismRotation.photoIndex);
+
+  const getHeroPanelThumbs = () => [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
+  const stopHeroPanelAutoRotation = () => {
+    if (heroTourismRotation.timerId) {
+      window.clearInterval(heroTourismRotation.timerId);
+      heroTourismRotation.timerId = 0;
+    }
+  };
+  const restartHeroPanelAutoRotation = (delayMs = liteRuntime ? heroTourismRotationIntervalMs + 2200 : heroTourismRotationIntervalMs) => {
+    stopHeroPanelAutoRotation();
+    const panelThumbs = getHeroPanelThumbs();
+    if (panelThumbs.length <= 1) {
       return;
     }
-    renderHeroTourismBackground(nextIndex);
+
+    heroTourismRotation.timerId = window.setInterval(() => {
+      const freshThumbs = getHeroPanelThumbs();
+      if (freshThumbs.length <= 1) {
+        stopHeroPanelAutoRotation();
+        return;
+      }
+
+      const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % freshThumbs.length;
+      heroTourismRotation.photoIndex = nextPhotoIndex;
+      paintHeroPanelSelection(buildHeroPanelPhotoItem(freshThumbs[nextPhotoIndex], nextPhotoIndex), nextPhotoIndex);
+    }, delayMs);
   };
 
   if (heroTourismPrevButton && !heroTourismPrevButton._heroTourismBound) {
@@ -6129,23 +6771,400 @@ const initializeHeroTourismHero = () => {
     heroTourismNextButton.addEventListener("click", () => stepHeroTourism(1));
   }
 
-  if (dailyPool.length > 1) {
-    heroTourismRotation.timerId = window.setInterval(() => {
-      const currentPool = getHeroTourismDailyPool();
-      if (!currentPool.length) {
+  let heroPanelFloatingBubble = document.querySelector(".hero-floating-story-bubble");
+  const getHeroPanelFloatingBubble = () => {
+    if (heroPanelFloatingBubble) {
+      return heroPanelFloatingBubble;
+    }
+
+    heroPanelFloatingBubble = document.createElement("aside");
+    heroPanelFloatingBubble.className = "hero-floating-story-bubble";
+    heroPanelFloatingBubble.setAttribute("aria-hidden", "true");
+    document.body.appendChild(heroPanelFloatingBubble);
+    return heroPanelFloatingBubble;
+  };
+
+  const renderHeroPanelFloatingBubble = (thumb) => {
+    const bubble = getHeroPanelFloatingBubble();
+    const source = thumb.querySelector("span");
+    const label = source?.querySelector("b")?.textContent || "Destaque";
+    const title = source?.querySelector("strong")?.textContent || thumb.dataset.headline || "";
+    const summary =
+      source?.querySelector("em")?.textContent ||
+      thumb.dataset.summary ||
+      "Resumo rápido para acompanhar o destaque selecionado.";
+    const action = source?.querySelector("small")?.textContent || "Abrir matéria";
+    const rect = thumb.getBoundingClientRect();
+    const width = Math.min(520, Math.max(320, window.innerWidth - 32));
+    const left = Math.min(
+      window.innerWidth - width - 16,
+      Math.max(16, rect.left + rect.width / 2 - width / 2)
+    );
+    const top = Math.min(
+      window.innerHeight - 112,
+      Math.max(112, rect.top + rect.height / 2)
+    );
+
+    bubble.replaceChildren();
+    const labelNode = document.createElement("b");
+    const titleNode = document.createElement("strong");
+    const summaryNode = document.createElement("em");
+    const actionNode = document.createElement("small");
+    labelNode.textContent = label;
+    titleNode.textContent = title;
+    summaryNode.textContent = summary;
+    actionNode.textContent = action;
+    bubble.append(labelNode, titleNode, summaryNode, actionNode);
+    bubble.style.setProperty("--hero-bubble-left", `${left}px`);
+    bubble.style.setProperty("--hero-bubble-top", `${top}px`);
+    bubble.style.setProperty("--hero-bubble-width", `${width}px`);
+    bubble.classList.add("is-visible");
+    bubble.setAttribute("aria-hidden", "false");
+  };
+
+  const hideHeroPanelFloatingBubble = () => {
+    if (!heroPanelFloatingBubble) {
+      return;
+    }
+    heroPanelFloatingBubble.classList.remove("is-visible");
+    heroPanelFloatingBubble.setAttribute("aria-hidden", "true");
+  };
+
+  const getHeroPanelThumbMeta = (thumb, index = 0) => {
+    const bubble = thumb?.querySelector("span");
+    const label = bubble?.querySelector("b")?.textContent?.trim() || "Destaque";
+    const title =
+      thumb?.dataset?.headline ||
+      bubble?.querySelector("strong")?.textContent?.trim() ||
+      "Manchete do Juruá";
+    const summary =
+      thumb?.dataset?.summary ||
+      bubble?.querySelector("em")?.textContent?.trim() ||
+      "Toque para ampliar a foto e escolher o que ler.";
+    const action = bubble?.querySelector("small")?.textContent?.trim() || "Abrir matéria";
+    const href = thumb?.getAttribute("href") || "#radar";
+    const imageUrl = extractHeroThumbUrl(thumb);
+
+    return {
+      label,
+      title,
+      summary,
+      action,
+      href,
+      imageUrl,
+      index
+    };
+  };
+
+  const paintMobileHeroThumbBackground = (element, thumb) => {
+    if (!element || !thumb) {
+      return;
+    }
+
+    const imageUrl = extractHeroThumbUrl(thumb);
+    if (imageUrl) {
+      element.style.setProperty("--mobile-hero-thumb", `url("${escapeCssUrl(imageUrl)}")`);
+    }
+  };
+
+  const updateMobileHeroSheetTrigger = (trigger, thumb, index = 0) => {
+    if (!trigger || !thumb) {
+      return;
+    }
+
+    const meta = getHeroPanelThumbMeta(thumb, index);
+    paintMobileHeroThumbBackground(trigger, thumb);
+    trigger.querySelector("[data-mobile-hero-trigger-label]")?.replaceChildren(document.createTextNode(meta.label));
+    trigger.querySelector("[data-mobile-hero-trigger-title]")?.replaceChildren(
+      document.createTextNode(truncateCopy(meta.title, 72))
+    );
+    trigger.querySelector("[data-mobile-hero-trigger-summary]")?.replaceChildren(
+      document.createTextNode("Fotos grandes para escolher a notícia.")
+    );
+  };
+
+  const getMobileHeroSheet = () => document.getElementById("mobileHeroStorySheet");
+
+  const createMobileHeroSheetCard = (thumb, index) => {
+    const meta = getHeroPanelThumbMeta(thumb, index);
+    const card = document.createElement("article");
+    const photoButton = document.createElement("button");
+    const copy = document.createElement("div");
+    const label = document.createElement("small");
+    const title = document.createElement("strong");
+    const summary = document.createElement("p");
+    const actions = document.createElement("div");
+    const selectButton = document.createElement("button");
+    const openLink = document.createElement("a");
+
+    card.className = "mobile-hero-sheet-card";
+    card.dataset.mobileHeroCard = String(index);
+
+    photoButton.className = "mobile-hero-sheet-photo";
+    photoButton.type = "button";
+    photoButton.dataset.mobileHeroSelect = String(index);
+    photoButton.setAttribute("aria-label", `Ver na capa: ${meta.title}`);
+    paintMobileHeroThumbBackground(photoButton, thumb);
+
+    copy.className = "mobile-hero-sheet-copy";
+    label.textContent = meta.label;
+    title.textContent = meta.title;
+    summary.textContent = meta.summary;
+
+    actions.className = "mobile-hero-sheet-actions";
+    selectButton.className = "mobile-hero-sheet-select";
+    selectButton.type = "button";
+    selectButton.dataset.mobileHeroSelect = String(index);
+    selectButton.textContent = "Ver na capa";
+
+    openLink.className = "mobile-hero-sheet-open";
+    openLink.href = meta.href;
+    applyArticleLinkAttrs(openLink, meta.href);
+    openLink.textContent = meta.action;
+
+    actions.append(selectButton, openLink);
+    copy.append(label, title, summary, actions);
+    card.append(photoButton, copy);
+
+    return card;
+  };
+
+  const renderMobileHeroSheetCards = (sheet) => {
+    const grid = sheet?.querySelector("[data-mobile-hero-sheet-grid]");
+    const thumbs = getHeroPanelThumbs();
+    if (!grid || !thumbs.length) {
+      return;
+    }
+
+    grid.replaceChildren(...thumbs.map((thumb, index) => createMobileHeroSheetCard(thumb, index)));
+  };
+
+  const closeMobileHeroSheet = ({ returnFocus = true } = {}) => {
+    const sheet = getMobileHeroSheet();
+    if (!sheet) {
+      return;
+    }
+
+    sheet.classList.remove("is-open");
+    sheet.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("mobile-hero-sheet-active");
+    window.setTimeout(() => {
+      if (!sheet.classList.contains("is-open")) {
+        sheet.hidden = true;
+      }
+    }, 220);
+
+    if (returnFocus) {
+      sheet._mobileHeroTrigger?.focus({ preventScroll: true });
+    }
+  };
+
+  const openMobileHeroSheet = (trigger) => {
+    const sheet = getMobileHeroSheet();
+    if (!sheet) {
+      return;
+    }
+
+    renderMobileHeroSheetCards(sheet);
+    sheet._mobileHeroTrigger = trigger || null;
+    sheet.hidden = false;
+    sheet.setAttribute("aria-hidden", "false");
+    document.body.classList.add("mobile-hero-sheet-active");
+    window.requestAnimationFrame(() => sheet.classList.add("is-open"));
+    window.setTimeout(() => {
+      sheet.querySelector("[data-mobile-hero-sheet-close]")?.focus({ preventScroll: true });
+    }, 60);
+  };
+
+  const selectMobileHeroSheetCard = (index = 0) => {
+    const thumbs = getHeroPanelThumbs();
+    const thumb = thumbs[index];
+    if (!thumb) {
+      return;
+    }
+
+    stopHeroPanelAutoRotation();
+    heroTourismRotation.photoIndex = index;
+    paintHeroPanelSelection(buildHeroPanelPhotoItem(thumb, index), index);
+    updateMobileHeroSheetTrigger(
+      document.querySelector("[data-mobile-hero-sheet-trigger]"),
+      thumb,
+      index
+    );
+    closeMobileHeroSheet();
+    restartHeroPanelAutoRotation(heroTourismRotationIntervalMs + 9000);
+  };
+
+  const mountMobileHeroSheet = () => {
+    const panel = document.querySelector(".hero-newsroom-panel.hero-office-panel");
+    const galleryRow = panel?.querySelector(".hero-panel-row-gallery");
+    if (!panel || !galleryRow || panel._mobileHeroSheetBound) {
+      return;
+    }
+
+    panel._mobileHeroSheetBound = true;
+
+    const trigger = document.createElement("button");
+    trigger.className = "mobile-hero-sheet-trigger";
+    trigger.type = "button";
+    trigger.dataset.mobileHeroSheetTrigger = "true";
+    trigger.innerHTML = `
+      <span class="mobile-hero-sheet-trigger-photo" aria-hidden="true"></span>
+      <span class="mobile-hero-sheet-trigger-copy">
+        <small data-mobile-hero-trigger-label>Manchetes</small>
+        <strong data-mobile-hero-trigger-title>Ver fotos grandes</strong>
+        <em data-mobile-hero-trigger-summary>Escolha uma notícia pelo visual.</em>
+      </span>
+      <span class="mobile-hero-sheet-trigger-icon" aria-hidden="true"></span>
+    `;
+    galleryRow.appendChild(trigger);
+
+    let sheet = getMobileHeroSheet();
+    if (!sheet) {
+      sheet = document.createElement("aside");
+      sheet.id = "mobileHeroStorySheet";
+      sheet.className = "mobile-hero-sheet";
+      sheet.hidden = true;
+      sheet.setAttribute("aria-hidden", "true");
+      sheet.setAttribute("role", "dialog");
+      sheet.setAttribute("aria-modal", "true");
+      sheet.setAttribute("aria-labelledby", "mobileHeroStorySheetTitle");
+      sheet.innerHTML = `
+        <button class="mobile-hero-sheet-backdrop" type="button" data-mobile-hero-sheet-close aria-label="Fechar manchetes"></button>
+        <section class="mobile-hero-sheet-panel">
+          <header class="mobile-hero-sheet-head">
+            <span>
+              <small>Manchetes com foto</small>
+              <strong id="mobileHeroStorySheetTitle">Escolha o que ler</strong>
+            </span>
+            <button class="mobile-hero-sheet-close" type="button" data-mobile-hero-sheet-close aria-label="Fechar">Fechar</button>
+          </header>
+          <div class="mobile-hero-sheet-grid" data-mobile-hero-sheet-grid></div>
+        </section>
+      `;
+      document.body.appendChild(sheet);
+
+      sheet.addEventListener("click", (event) => {
+        if (event.target.closest("[data-mobile-hero-sheet-close]")) {
+          event.preventDefault();
+          closeMobileHeroSheet();
+          return;
+        }
+
+        const selectControl = event.target.closest("[data-mobile-hero-select]");
+        if (selectControl) {
+          event.preventDefault();
+          selectMobileHeroSheetCard(Number(selectControl.dataset.mobileHeroSelect || 0));
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !sheet.hidden) {
+          closeMobileHeroSheet();
+        }
+      });
+    }
+
+    const activeThumb = getHeroPanelThumbs()[heroTourismRotation.photoIndex] || getHeroPanelThumbs()[0];
+    if (activeThumb) {
+      updateMobileHeroSheetTrigger(trigger, activeThumb, heroTourismRotation.photoIndex || 0);
+    }
+
+    trigger.addEventListener("click", () => openMobileHeroSheet(trigger));
+    window.addEventListener("catalogo:hero-panel-selected", (event) => {
+      const thumbs = getHeroPanelThumbs();
+      const selectedIndex = Number(event.detail?.index || 0);
+      const selectedThumb = thumbs[selectedIndex] || thumbs[0];
+      updateMobileHeroSheetTrigger(trigger, selectedThumb, selectedIndex);
+    });
+  };
+
+  document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo").forEach((thumb, index) => {
+    if (thumb._heroTourismThumbBound) {
+      return;
+    }
+    thumb._heroTourismThumbBound = true;
+    const bubble = thumb.querySelector("span");
+    if (bubble && !bubble.querySelector("em")) {
+      const summary = document.createElement("em");
+      summary.textContent = String(thumb.dataset.summary || "").trim();
+      const action = bubble.querySelector("small");
+      bubble.insertBefore(summary, action || null);
+    }
+    const openThumbStory = () => {
+      stopHeroPanelAutoRotation();
+      const selected = buildHeroPanelPhotoItem(thumb, index);
+      heroTourismRotation.photoIndex = index;
+      paintHeroPanelSelection(selected, index);
+      renderHeroPanelFloatingBubble(thumb);
+      thumb.classList.add("is-previewing");
+      const activeBubble = thumb.querySelector("span");
+      if (activeBubble) {
+        activeBubble.style.removeProperty("opacity");
+        activeBubble.style.removeProperty("transform");
+      }
+    };
+    const closeThumbStory = () => {
+      window.setTimeout(() => {
+        if (thumb.matches(":hover") || document.activeElement === thumb) {
+          return;
+        }
+
+        thumb.classList.remove("is-previewing");
+        hideHeroPanelFloatingBubble();
+        restartHeroPanelAutoRotation(heroTourismRotationIntervalMs + 5000);
+        const activeBubble = thumb.querySelector("span");
+        if (activeBubble) {
+          activeBubble.style.removeProperty("opacity");
+          activeBubble.style.removeProperty("transform");
+        }
+      }, 90);
+    };
+    thumb.addEventListener("mouseenter", openThumbStory);
+    thumb.addEventListener("pointerenter", openThumbStory);
+    thumb.addEventListener("pointermove", () => renderHeroPanelFloatingBubble(thumb));
+    thumb.addEventListener("mouseleave", closeThumbStory);
+    thumb.addEventListener("pointerleave", closeThumbStory);
+    thumb.addEventListener("focus", openThumbStory);
+    thumb.addEventListener("blur", closeThumbStory);
+    thumb.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openThumbStory();
+      }
+    });
+    thumb.addEventListener("click", (event) => {
+      event.preventDefault();
+      const selected = buildHeroPanelPhotoItem(thumb, index);
+      heroTourismRotation.photoIndex = index;
+      paintHeroPanelSelection(selected, index);
+      hideHeroPanelFloatingBubble();
+      thumb.focus({ preventScroll: true });
+      restartHeroPanelAutoRotation(heroTourismRotationIntervalMs + 7000);
+    });
+  });
+
+  mountMobileHeroSheet();
+
+  document.querySelectorAll("[data-hero-panel-dot]").forEach((dot) => {
+    if (dot._heroPanelDotBound) {
+      return;
+    }
+    dot._heroPanelDotBound = true;
+    dot.addEventListener("click", () => {
+      const index = Number(dot.dataset.heroPanelDot || 0);
+      const panelThumbs = [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
+      const thumb = panelThumbs[index];
+      if (thumb) {
+        heroTourismRotation.photoIndex = index;
+        paintHeroPanelSelection(buildHeroPanelPhotoItem(thumb, index), index);
         return;
       }
+      showHeroTourismIndex(index);
+    });
+  });
 
-      const nextPhotoIndex = (heroTourismRotation.photoIndex + 1) % currentPool.length;
-      heroTourismRotation.photoIndex = nextPhotoIndex;
-      if (shouldUseSolidHeroShell() || liteRuntime) {
-        setHeroTourismMeta(currentPool[nextPhotoIndex]);
-        return;
-      }
-
-      renderHeroTourismBackground(nextPhotoIndex);
-    }, liteRuntime ? heroTourismRotationIntervalMs + 2200 : heroTourismRotationIntervalMs);
-  }
+  restartHeroPanelAutoRotation();
 
   if (!liteRuntime && heroOfficeStatusNodes.length && heroOfficeStatusGroups.length > 1) {
     heroTourismRotation.statusTimerId = window.setInterval(() => {
@@ -6250,13 +7269,13 @@ const typeInsidersLine = (node, text, delay, step) => {
 const insidersBootPhaseNode = insidersBootScene?.querySelector("[data-insiders-boot-phase]") || null;
 const insidersTerminalStream = insidersBootScene?.querySelector("[data-insiders-terminal-stream]") || null;
 const insidersAsciiGlyphs = "01<>[]{}()/\\|=+*#%@&$░▒▓█";
-const insidersCodeGlyphs = "const render local_stack = compose(dev, design, infra, dados);{}[]()<>/_$.:";
+const insidersCodeGlyphs = "fontes locais servicos agenda comunidade leitura clara:{}[]()<>/_$.:";
 
 const insidersBootPhases = {
-  code: "CODE_STREAM > BIN_STREAM > ASCII_DECODE > UI_RENDER",
-  binary: "CODE_STREAM > [BIN_STREAM] > ASCII_DECODE > UI_RENDER",
-  ascii: "CODE_STREAM > BIN_STREAM > [ASCII_DECODE] > UI_RENDER",
-  render: "CODE_STREAM > BIN_STREAM > ASCII_DECODE > [UI_RENDER]"
+  code: "FONTES > CONTEXTO > SERVIÇO > LEITURA",
+  binary: "FONTES > CONTEXTO > SERVIÇO > LEITURA",
+  ascii: "FONTES > CONTEXTO > SERVIÇO > LEITURA",
+  render: "FONTES > CONTEXTO > SERVIÇO > LEITURA"
 };
 
 const getRandomGlyph = () =>
@@ -6319,8 +7338,8 @@ const animateInsidersTerminalStream = async () => {
     return;
   }
 
-  const codeText = "const localStack = compose(dev, design, infra, dados);";
-  const finalText = "render local_stack => operacao legivel para tela e atendimento";
+  const codeText = "fontes locais, serviço útil, agenda e comunidade";
+  const finalText = "informação regional organizada para leitura e atendimento";
 
   insidersTerminalStream.dataset.ready = "true";
 
@@ -6372,7 +7391,7 @@ const animateInsidersTerminalStream = async () => {
   insidersTerminalStream.classList.remove("is-typing");
   insidersTerminalStream.classList.add("is-rendered");
   if (insidersBootPhaseNode) {
-    insidersBootPhaseNode.textContent = "CODE_STREAM > BIN_STREAM > ASCII_DECODE > UI_RENDER";
+    insidersBootPhaseNode.textContent = "FONTES > CONTEXTO > SERVIÇO > LEITURA";
   }
 };
 
@@ -7366,7 +8385,7 @@ const getBuzzNetworkContexts = () => {
     {
       network: "X/Twitter",
       summary: "Termômetro de debate e comentário rápido.",
-      signals: ["tempo real", "debate", "ruído alto"],
+      signals: ["atualização rápida", "debate", "ruído alto"],
       engagement: 68,
       velocity: 88,
       trust: 55,
@@ -7516,7 +8535,7 @@ const getBuzzSocialEvidence = (article = {}) => {
     Instagram: ["hashtag pública", "imagem", "repercussão visual"],
     TikTok: ["vídeo curto", "repetição", "velocidade"],
     YouTube: ["contexto", "vídeo", "retenção"],
-    "X/Twitter": ["tempo real", "debate", "volume público"]
+    "X/Twitter": ["atualização rápida", "debate", "volume público"]
   };
 
   const evidenceKind = /\b(facebook-public|facebook-pages|facebook-posts)\b/.test(topicText)
@@ -8568,7 +9587,7 @@ const buzzAgentFallbackReaders = [
     name: "Contexto ampliado",
     office: "Redação local",
     role: "sources",
-    specialty: "educação, campus, carreira, IA e fontes globais"
+    specialty: "serviços públicos, oportunidades, IA e fontes globais"
   },
   {
     name: "Revisão final",
@@ -9330,26 +10349,26 @@ const buildDailyBuzzContinuityState = (articles = [], signalItems = []) => {
 
   return `
     <article class="trending-card influencer-buzz-card daily-buzz-card daily-buzz-continuity-state reveal active is-visible">
-      <span class="trend-badge hot">leitura em acompanhamento</span>
-      <span class="source-status-badge is-source-confirmed">fontes reais</span>
+      <span class="trend-badge hot">assuntos do dia</span>
+      <span class="source-status-badge is-source-confirmed">notícias checadas</span>
       <div class="influencer-buzz-copy">
-        <p class="buzz-kicker">sem inventar polêmica</p>
-        <h3>${hasArticles ? "O dia segue com leitura real enquanto a treta não fecha." : "A editoria acompanha as fontes antes de cravar uma polêmica."}</h3>
+        <p class="buzz-kicker">olho no dia</p>
+        <h3>${hasArticles ? "O que vale acompanhar agora." : "Novidades aparecem aqui quando o assunto ganhar força."}</h3>
         <p>
           ${hasArticles
-            ? "Quando não há uma polêmica forte o bastante, o bloco mantém o leitor no fluxo com notícias verificáveis e contexto do Brasil, Acre e Juruá."
-            : "A área fica preenchida em modo de acompanhamento e volta a destacar assunto forte assim que houver fonte pública suficiente."}
+            ? "Reunimos notícias úteis do Brasil, Acre e Juruá para você seguir informado sem cair em boato."
+            : "Quando houver uma notícia forte, ela entra aqui com contexto para você entender rápido."}
         </p>
       </div>
       <div class="daily-buzz-continuity-list">
-        ${articleLinks || `<span class="daily-buzz-continuity-note">Aguardando nova entrada confiável das fontes monitoradas.</span>`}
+        ${articleLinks || `<span class="daily-buzz-continuity-note">Novas notícias aparecem aqui ao longo do dia.</span>`}
       </div>
       <div class="buzz-inline-meta" aria-label="Assuntos monitorados agora">
         ${labels || "<span>Brasil</span><span>Acre</span><span>Vale do Juruá</span>"}
       </div>
       <div class="engagement buzz-opinion-footer">
-        <span>fluxo preservado: notícia real primeiro</span>
-        <a href="./arquivo.html">abrir arquivo vivo</a>
+        <span>Notícia real primeiro.</span>
+        <a href="./arquivo.html">Abrir arquivo regional</a>
       </div>
     </article>
   `;
@@ -9458,7 +10477,7 @@ const renderDailyTrendingBuzz = async (options = {}) => {
 const whatMattersTopics = [
   {
     key: "cheia-jurua",
-    label: "Cheia / Juruá",
+    label: "Juruá hoje",
     cta: "Abrir cobertura",
     href: "./arquivo.html?busca=cheia",
     fallbackTitle: "Rio, bairros e Defesa Civil abrem a leitura prática do dia",
@@ -9466,33 +10485,45 @@ const whatMattersTopics = [
     matcher: /\b(cheia|enchente|alag|alagamento|rio jurua|rio juru[aá]|jurua|juru[aá]|defesa civil|abrigo|desabrig|cota|vazante|chuva|seca|bairro|familias atingidas|famílias atingidas)\b/
   },
   {
-    key: "eventos",
-    label: "Eventos",
-    cta: "Ver agenda",
-    href: "#social",
-    fallbackTitle: "Agenda cultural entra junto com trânsito, público e serviço",
-    fallbackSummary: "Shows, festas e encontros aparecem com data, local e efeito para a cidade.",
-    matcher: /\b(show|festa|festival|evento|agenda|cultura|cultural|musica|música|teatro|cavalgada|feira|encontro|palco|artista|cantor|cantora)\b/
+    key: "cruzeiro-do-sul",
+    label: "Cruzeiro do Sul",
+    cta: "Ver cidade",
+    href: "./arquivo.html?busca=Cruzeiro%20do%20Sul",
+    fallbackTitle: "Prefeitura, bairros e serviços entram na leitura principal",
+    fallbackSummary: "Obras, atendimento, agenda pública e decisões locais aparecem com contexto para quem vive na cidade.",
+    matcher: /\b(cruzeiro do sul|cruzeiro-do-sul|czs|bairro|prefeitura|mercado do agricultor|rodovia|aeroporto|centro|miritizal|remanso|boca da alemanha)\b/
   },
   {
-    key: "utilidade",
-    label: "Utilidade pública",
-    cta: "Abrir serviço",
+    key: "servico-jurua",
+    label: "Serviço no Juruá",
+    cta: "Abrir serviços",
     href: "./catalogo-servicos.html",
-    fallbackTitle: "Prazos, atendimento e avisos úteis ficam separados do ruído",
-    fallbackSummary: "Benefícios, saúde, educação, energia, trânsito e serviços ganham prioridade de leitor.",
-    matcher: /\b(utilidade|servico|serviço|prazo|calendario|calendário|edital|concurso|inscric|atendimento|hospital|ubs|upa|saude|saúde|educacao|educação|bolsa familia|bolsa família|inss|energia|transito|trânsito|detran|rodovia|alerta|vacina|pix|beneficio|benefício)\b/
+    fallbackTitle: "Atendimento, prazos e avisos úteis ficam separados do ruído",
+    fallbackSummary: "Saúde, energia, trânsito, benefícios e serviços ganham prioridade quando afetam a região.",
+    matcher: /\b(utilidade|servico|serviço|prazo|calendario|calendário|edital|concurso|inscric|atendimento|hospital|ubs|upa|saude|saúde|educacao|educação|bolsa familia|bolsa família|inss|energia|transito|trânsito|detran|rodovia|alerta|vacina|pix|beneficio|benefício|mercado|obra|ordem de servico|ordem de serviço)\b/
   },
   {
-    key: "continuidade",
-    label: "Continuidade",
-    cta: "Ver subsites",
-    href: "#cadernos",
-    fallbackTitle: "Da home para arquivo, serviços e subsites sem perder o fio",
-    fallbackSummary: "O caminho rápido mantém notícia, acervo e páginas especiais conectados.",
-    matcher: /\b(esttiles|lifestile|infantil|estudantes|games|animes|servicos|serviços|arquivo|especial|guia|catalogo|catálogo)\b/
+    key: "agenda-regional",
+    label: "Agenda regional",
+    cta: "Ver agenda",
+    href: "#agenda",
+    fallbackTitle: "Eventos, encontros e movimentação local completam o quadro",
+    fallbackSummary: "Quando shows, feiras, cultura ou comunidade movimentam a região, entram aqui com fonte e caminho de leitura.",
+    matcher: /\b(show|festa|festival|evento|agenda|cultura|cultural|musica|música|teatro|cavalgada|feira|encontro|palco|artista|cantor|cantora|expojurua|expojuruá|comunidade)\b/
   }
 ];
+
+const isWhatMattersJuruaArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const tier = getEditorialRegionalTier(normalizedArticle);
+  const text = getLocalImpactScopeText(normalizedArticle);
+
+  return (
+    tier === "cruzeiro" ||
+    tier === "jurua" ||
+    isJuruaRegionalScope(text)
+  );
+};
 
 const getWhatMattersArticleTopic = (article = {}, usedTopicKeys = new Set()) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
@@ -9507,7 +10538,16 @@ const getWhatMattersArticleTopic = (article = {}, usedTopicKeys = new Set()) => 
     ].join(" ")
   );
 
-  return whatMattersTopics.find((topic) => !usedTopicKeys.has(topic.key) && topic.matcher.test(text)) || null;
+  const matchedTopic =
+    whatMattersTopics.find((topic) => !usedTopicKeys.has(topic.key) && topic.matcher.test(text)) || null;
+
+  if (matchedTopic) {
+    return matchedTopic;
+  }
+
+  return isWhatMattersJuruaArticle(normalizedArticle)
+    ? whatMattersTopics.find((topic) => !usedTopicKeys.has(topic.key)) || null
+    : null;
 };
 
 const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index = 0) => {
@@ -9519,7 +10559,9 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
     formatCompactDisplayDate(normalizedArticle.publishedAt || normalizedArticle.date || normalizedArticle.createdAt || "") ||
     normalizedArticle.date ||
     "agora";
-  const title = truncateCopy(normalizedArticle.title || "Atualização importante", 98);
+  const title = truncateCopyAtWord(normalizedArticle.title || "Atualização importante", 128, {
+    suffix: ""
+  });
   const summary = buildReadableCardSummary(
     {
       ...normalizedArticle,
@@ -9527,7 +10569,7 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
       lede: normalizedArticle.lede || topic.fallbackSummary,
       displaySummary: normalizedArticle.displaySummary || topic.fallbackSummary
     },
-    210
+    260
   );
 
   return `
@@ -9558,7 +10600,7 @@ const renderWhatMattersNow = (items = []) => {
   )
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isRealPublicNewsSource)
-    .filter(isBrazilBuzzArticle)
+    .filter(isWhatMattersJuruaArticle)
     .filter((item) => !isInternationalOnlyPublicArticle(item))
     .filter((item) => item.title && (item.sourceUrl || item.slug))
     .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
@@ -9599,13 +10641,17 @@ const renderWhatMattersNow = (items = []) => {
         title: topic.fallbackTitle,
         summary: topic.fallbackSummary,
         lede: topic.fallbackSummary,
-        sourceName: "Radar editorial",
+        sourceName: "Base local do Juruá",
         sourceUrl: topic.href,
         category: topic.label,
         publishedAt: new Date().toISOString()
       }
     });
   });
+
+  if (whatMattersTitle) {
+    whatMattersTitle.textContent = "Destaques do Juruá";
+  }
 
   whatMattersGrid.innerHTML = selected
     .slice(0, whatMattersTopics.length)
@@ -10183,6 +11229,28 @@ const renderCommunityTrendCard = async (options = {}) => {
     );
   }
 
+  if (communityTrendReference) {
+    const referenceHref = buildArticleHref(mainTopic);
+    const hasReferenceHref = referenceHref && referenceHref !== "#";
+
+    if (hasReferenceHref) {
+      communityTrendReference.href = referenceHref;
+      communityTrendReference.hidden = false;
+      communityTrendReference.textContent = "Ler artigo de referência";
+      communityTrendReference.setAttribute(
+        "aria-label",
+        `Ler artigo de referência: ${truncateCopy(mainTopic.title || "assunto destacado", 96)}`
+      );
+      applyArticleLinkAttrs(communityTrendReference, referenceHref);
+    } else {
+      communityTrendReference.hidden = true;
+      communityTrendReference.removeAttribute("href");
+      communityTrendReference.removeAttribute("target");
+      communityTrendReference.removeAttribute("rel");
+      communityTrendReference.removeAttribute("aria-label");
+    }
+  }
+
   if (communityTrendUpdated) {
     communityTrendUpdated.textContent = mainTopic.socialEvidence ? `sinal ${updatedLabel}` : `atualizado ${updatedLabel}`;
   }
@@ -10198,11 +11266,26 @@ const renderCommunityTrendCard = async (options = {}) => {
           item.sourceName ||
           (index === 0 ? "top trend" : "em alta");
         const captionText = item.socialEvidence?.title || item.title || "Assunto em alta no dia";
-        return `
-          <span>
+        const articleHref = buildArticleHref(item);
+        const hasArticleHref = articleHref && articleHref !== "#";
+        const externalAttrs = /^https?:\/\//i.test(articleHref) ? ' target="_blank" rel="noreferrer"' : "";
+        const innerMarkup = `
             <b>${escapeHtml(truncateCopy(label, 22))}</b>
             ${escapeHtml(truncateCopy(captionText, 58))}
+        `;
+
+        if (!hasArticleHref) {
+          return `
+          <span>
+            ${innerMarkup}
           </span>
+        `;
+        }
+
+        return `
+          <a href="${escapeHtml(articleHref)}"${externalAttrs} aria-label="Ler artigo: ${escapeHtml(truncateCopy(captionText, 96))}">
+            ${innerMarkup}
+          </a>
         `;
       })
       .join("");
@@ -11765,8 +12848,9 @@ const hydrateMosaicHero = (items = []) => {
   }
 
   const editionNode = hero.querySelector(".mosaic-edition");
-  if (editionNode && referenceDateKey) {
-    editionNode.textContent = `Edição visual • ${formatCompactDisplayDate(`${referenceDateKey}T12:00:00`)}`;
+  if (editionNode) {
+    editionNode.hidden = true;
+    editionNode.textContent = "";
   }
 
   cards.forEach((card, index) => {
@@ -11815,10 +12899,7 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (copyNode) {
-      copyNode.textContent = truncateCopy(
-        cleanArticleExcerpt(article.displaySummary || article.lede, "Resumo em atualização."),
-        index === 0 ? 88 : 64
-      );
+      copyNode.textContent = buildReadableCardSummary(article, index === 0 ? 230 : 120);
     }
 
     if (statNode) {
@@ -11829,7 +12910,7 @@ const hydrateMosaicHero = (items = []) => {
     }
 
     if (actionNode) {
-      actionNode.textContent = index === 0 ? "Ler tudo" : "Ler cobertura";
+      actionNode.textContent = index === 0 ? "Ler matéria completa" : "Ler cobertura";
     }
 
     applyMosaicImage(card, article);
@@ -13162,7 +14243,7 @@ if (window.ELECTIONS_DATA?.offices?.length) {
         localFallback: true,
         message: String(
           error?.message ||
-            "O backend oscilou, mas o voto foi salvo localmente neste dispositivo."
+            "Não foi possível confirmar online agora, mas o voto ficou salvo neste dispositivo."
         )
       };
     }
@@ -13569,6 +14650,50 @@ const attachAgentMailFlow = () => {
     );
   });
 };
+
+const attachOfficeVisitFlow = () => {
+  const root = document.querySelector("#escritorios.office-visit-section");
+  const bubble = document.querySelector("[data-office-visit-bubble]");
+  const toggle = document.querySelector("[data-office-toggle]");
+  const choices = document.querySelector("[data-office-choices]");
+  const collapseButton = document.querySelector('[data-collapse-panel="office-visit"]');
+
+  if (!bubble || !toggle || !choices) {
+    return;
+  }
+
+  toggle.addEventListener("click", () => {
+    const isOpen = choices.hasAttribute("hidden");
+    choices.hidden = !isOpen;
+    bubble.classList.toggle("is-choosing-office", isOpen);
+    toggle.textContent = isOpen ? "Fechar visita" : "Visitar";
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  if (root && collapseButton && collapseButton.dataset.officeWidgetBound !== "true") {
+    collapseButton.dataset.officeWidgetBound = "true";
+    const syncOfficeWidget = () => {
+      const collapsed = root.classList.contains("is-collapsed");
+      collapseButton.setAttribute("aria-pressed", collapsed ? "true" : "false");
+      collapseButton.setAttribute(
+        "aria-label",
+        collapsed ? "Abrir atendimento" : "Minimizar atendimento"
+      );
+      collapseButton.textContent = collapsed ? "Atendimento" : "×";
+    };
+
+    collapseButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      root.classList.toggle("is-collapsed");
+      syncOfficeWidget();
+    });
+
+    syncOfficeWidget();
+  }
+};
+
+attachOfficeVisitFlow();
 
 const buildFeedCard = (article) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
@@ -14129,11 +15254,11 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   }
 
   if (visibleSlice.length < filtered.length) {
-    liveFeedStatus.textContent = `Arquivo vivo pronto: ${filtered.length} notícias verificadas na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
+    liveFeedStatus.textContent = `Arquivo regional pronto: ${filtered.length} notícias verificadas na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
     return;
   }
 
-  liveFeedStatus.textContent = `Arquivo vivo com ${filtered.length} notícias. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
+  liveFeedStatus.textContent = `Arquivo regional com ${filtered.length} notícias. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
 };
 
 const renderLiveFeed = () => {
@@ -15618,10 +16743,111 @@ const attachSubscriptionSubmission = () => {
     } catch (error) {
       setFeedbackState(
         subscriptionFeedback,
-        String(error?.message || "Nao consegui falar com o backend agora. Ligue o servidor para receber assinaturas reais."),
+        String(error?.message || "Não foi possível concluir agora. Tente novamente em instantes ou fale com o portal pelo WhatsApp."),
         "is-error"
       );
     }
+  });
+};
+
+const initializeFloatingPanelToggles = () => {
+  const panels = [
+    {
+      root: document.querySelector(".premium-side-radar"),
+      button: document.querySelector('[data-collapse-panel="side-radar"]'),
+      openLabel: "Recolher radar lateral",
+      closedLabel: "Abrir radar lateral"
+    },
+    {
+      root: document.querySelector("#escritorios.office-visit-section"),
+      button: document.querySelector('[data-collapse-panel="office-visit"]'),
+      openLabel: "Recolher sala de atendimento",
+      closedLabel: "Abrir sala de atendimento"
+    }
+  ];
+
+  panels.forEach(({ root, button, openLabel, closedLabel }) => {
+    if (!root || !button || button.dataset.panelToggleBound === "true") {
+      return;
+    }
+
+    button.dataset.panelToggleBound = "true";
+    const syncLabel = () => {
+      if (button.dataset.collapsePanel === "office-visit" && button.dataset.officeWidgetBound === "true") {
+        return;
+      }
+
+      const collapsed = root.classList.contains("is-collapsed");
+      button.setAttribute("aria-pressed", collapsed ? "true" : "false");
+      button.setAttribute("aria-label", collapsed ? closedLabel : openLabel);
+      button.textContent =
+        button.dataset.collapsePanel === "office-visit"
+          ? collapsed ? "Atendimento" : "×"
+          : collapsed ? "›" : "‹";
+    };
+
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      root.classList.toggle("is-collapsed");
+      syncLabel();
+    });
+
+    syncLabel();
+  });
+};
+
+const initializeFoundersAutoCarousel = () => {
+  const strip = document.querySelector("#founders .founders-banner-strip");
+  if (!strip || strip.dataset.foundersCarouselBound === "true") {
+    return;
+  }
+
+  const cards = Array.from(strip.querySelectorAll(".founder-banner-card"));
+  if (cards.length < 2) {
+    return;
+  }
+
+  strip.dataset.foundersCarouselBound = "true";
+  const mobileQuery = window.matchMedia("(max-width: 760px)");
+  let activeIndex = 0;
+  let pauseUntil = 0;
+
+  const scrollToActiveCard = (behavior = "smooth") => {
+    if (!mobileQuery.matches) {
+      strip.scrollTo({ left: 0, behavior: "auto" });
+      return;
+    }
+
+    const target = cards[activeIndex];
+    if (!target) {
+      return;
+    }
+
+    strip.scrollTo({
+      left: target.offsetLeft,
+      behavior
+    });
+  };
+
+  const pauseCarousel = () => {
+    pauseUntil = Date.now() + 7000;
+  };
+
+  strip.addEventListener("pointerdown", pauseCarousel, { passive: true });
+  strip.addEventListener("focusin", pauseCarousel);
+
+  window.setInterval(() => {
+    if (document.hidden || !mobileQuery.matches || Date.now() < pauseUntil) {
+      return;
+    }
+
+    activeIndex = (activeIndex + 1) % cards.length;
+    scrollToActiveCard();
+  }, 3600);
+
+  mobileQuery.addEventListener?.("change", () => {
+    activeIndex = 0;
+    scrollToActiveCard("auto");
   });
 };
 
@@ -15629,6 +16855,8 @@ attachCommentSubmission();
 attachCommunitySignalFlow();
 attachSubscriptionSubmission();
 attachAgentMailFlow();
+initializeFloatingPanelToggles();
+initializeFoundersAutoCarousel();
 scheduleHomeBackgroundHydration();
 renderWhatMattersNow(window.NEWS_DATA || []);
 window.setTimeout(() => {

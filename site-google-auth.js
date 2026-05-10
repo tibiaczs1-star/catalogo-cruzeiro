@@ -8,6 +8,11 @@
     scriptPromise: null
   };
   const FORCE_REAUTH_KEY = "catalogo_google_force_reauth_v1";
+  const isFileProtocol = window.location.protocol === "file:";
+
+  function canUseAuthApi() {
+    return !isFileProtocol && /^https?:$/i.test(window.location.protocol);
+  }
 
   function $(selector, root = document) {
     return root.querySelector(selector);
@@ -18,6 +23,10 @@
   }
 
   async function requestJson(url, options = {}) {
+    if (!canUseAuthApi() && String(url || "").startsWith("/api/")) {
+      throw new Error("Login indisponivel ao abrir o arquivo localmente.");
+    }
+
     const response = await fetch(url, {
       credentials: "same-origin",
       headers: {
@@ -96,7 +105,7 @@
       setText(
         node,
         !state.enabled
-          ? "Login Google precisa ser configurado no Render"
+          ? "Entrada segura em preparação"
           : signedIn
             ? `Conectado como ${state.user.name || state.user.email}`
             : "Entre com Google para continuar"
@@ -109,7 +118,7 @@
           ? state.user.email
           : state.enabled
             ? "Cadastros, newsletter, fundadores e PubPaid usam a mesma identidade."
-            : "Configure GOOGLE_AUTH_CLIENT_ID e SITE_AUTH_SESSION_SECRET para liberar o acesso."
+            : "A equipe está preparando a entrada segura para newsletter e fundadores. A leitura do portal continua aberta."
       );
     });
     $all("[data-google-auth-button]").forEach((node) => {
@@ -171,6 +180,10 @@
   }
 
   async function promptSignIn() {
+    if (!canUseAuthApi()) {
+      return false;
+    }
+
     if (!state.enabled || state.user) return false;
     await renderGoogleButtons().catch(() => {});
     focusAuthCard();
@@ -236,6 +249,15 @@
   }
 
   async function refresh() {
+    if (!canUseAuthApi()) {
+      state.enabled = false;
+      state.user = null;
+      state.ready = true;
+      syncDom();
+      emitAuthChange();
+      return;
+    }
+
     try {
       const config = await requestJson("/api/auth/config", { method: "GET" });
       state.enabled = Boolean(config.enabled && config.clientId);

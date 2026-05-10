@@ -200,3 +200,149 @@
   font-size: 0.72rem;
   line-height: 1.45;
 }
+
+.phonebook-plus-note a {
+  color: inherit;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* 2026-05-08: versão escura integrada à capa premium. */
+.phonebook-plus {
+  border-radius: 12px;
+  border-color: rgba(121, 181, 226, 0.22);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(240, 180, 41, 0.12), transparent 30%),
+    linear-gradient(145deg, rgba(10, 33, 54, 0.97), rgba(3, 16, 29, 0.98));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+  color: #ffffff;
+}
+
+.phonebook-plus-head h3,
+.phonebook-plus-card h4 {
+  color: #ffffff;
+  letter-spacing: 0;
+}
+
+.phonebook-plus-head strong {
+  background: rgba(75, 130, 207, 0.42);
+  color: #ffffff;
+}
+
+.phonebook-plus-search span,
+.phonebook-plus-card p,
+.phonebook-plus-note {
+  color: rgba(203, 213, 225, 0.78);
+}
+
+.phonebook-plus-search input {
+  border-color: rgba(121, 181, 226, 0.26);
+  background: rgba(2, 13, 23, 0.78);
+  color: #ffffff;
+}
+
+.phonebook-plus-search input::placeholder {
+  color: rgba(203, 213, 225, 0.62);
+}
+
+.phonebook-plus-categories {
+  flex-wrap: wrap;
+  overflow: visible;
+  padding-bottom: 0;
+  scrollbar-width: none;
+}
+
+.phonebook-plus-categories::-webkit-scrollbar,
+.phonebook-plus-list::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.phonebook-plus-categories button,
+.phonebook-plus-phone,
+.phonebook-plus-actions a {
+  border: 1px solid rgba(121, 181, 226, 0.22);
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(248, 251, 255, 0.86);
+}
+
+.phonebook-plus-categories button.active,
+.phonebook-plus-actions a {
+  border-color: rgba(240, 180, 41, 0.54);
+  background: linear-gradient(180deg, #ffd06a, #eda51f);
+  color: #061421;
+}
+
+.phonebook-plus-list {
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+  scrollbar-width: none;
+}
+
+.phonebook-plus-card,
+.phonebook-plus-note {
+  border-color: rgba(121, 181, 226, 0.2);
+  background:
+    radial-gradient(circle at 0 0, rgba(240, 180, 41, 0.08), transparent 34%),
+    linear-gradient(145deg, rgba(10, 33, 54, 0.95), rgba(3, 16, 29, 0.95));
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.phonebook-plus-card-top span,
+.phonebook-plus-card-top small {
+  background: rgba(240, 180, 41, 0.1);
+  color: #ffd37a;
+}
+
+.phonebook-plus-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem;
+}
+
+.phonebook-plus-note a,
+.phonebook-plus-more > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 180, 41, 0.48);
+  background: rgba(240, 180, 41, 0.12);
+  color: #ffd37a;
+  padding: 0.42rem 0.68rem;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.phonebook-plus-more {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.phonebook-plus-more span {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(77, 163, 255, 0.12);
+  color: #9fd0ff;
+  padding: 0.24rem 0.5rem;
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .phonebook-plus-more {
+    grid-template-columns: 1fr;
+  }
+}

@@ -143,7 +143,7 @@
       <article class="svc-featured">
         <div class="svc-feature-copy">
           <span class="svc-feature-eyebrow">${featured.eyebrow || "destaque premium"}</span>
-          <h2>${featured.title || "Destaque do modulo"}</h2>
+            <h2>${featured.title || "Destaque do módulo"}</h2>
           <p>${featured.description || ""}</p>
           <div class="svc-feature-chip-row">
             ${chips.map((chip) => `<span>${chip}</span>`).join("")}
@@ -153,10 +153,10 @@
           </ul>
           ${
             isConstructionModule
-              ? `<div class="svc-construction-strip" aria-label="Modulo em construcao">
+              ? `<div class="svc-construction-strip" aria-label="Área em preparação">
                   <div class="svc-construction-sign">
-                    <span>EM CONSTRUCAO</span>
-                    <strong>Robos montando os cards do modulo</strong>
+                    <span>EM PREPARAÇÃO</span>
+                    <strong>Novos contatos serão organizados aqui</strong>
                   </div>
                   <div class="svc-pixel-worker-field" aria-hidden="true">
                     <span class="svc-pixel-card board-a"></span>
@@ -173,7 +173,7 @@
               : ""
           }
           <div class="svc-feature-actions">
-            <a class="svc-btn primary" href="#svcGrid">Ver cards do modulo</a>
+            <a class="svc-btn primary" href="#svcGrid">Ver contatos do módulo</a>
             <a class="svc-btn" href="index.html">Voltar para home</a>
           </div>
         </div>

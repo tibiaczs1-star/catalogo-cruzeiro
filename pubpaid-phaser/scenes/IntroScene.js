@@ -93,7 +93,6 @@ export class IntroScene extends Phaser.Scene {
     super("intro-scene");
     this.currentImage = null;
     this.nextImage = null;
-    this.scanline = null;
     this.flashLayer = null;
     this.vignette = null;
     this.caption = null;
@@ -134,9 +133,6 @@ export class IntroScene extends Phaser.Scene {
 
     this.flashLayer = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0xffe3a0, 0)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const scanlineTexture = this.makeScanlineTexture();
-    this.scanline = this.add.tileSprite(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, scanlineTexture)
-      .setAlpha(0.08);
     this.vignette = this.add.graphics();
     this.drawVignette();
 
@@ -153,19 +149,6 @@ export class IntroScene extends Phaser.Scene {
       const mark = this.add.rectangle(48 + index * 28, 38, 18, 4, 0xffd06d, 0.2);
       this.progressMarks.push(mark);
     }
-  }
-
-  makeScanlineTexture() {
-    const key = "intro-scanline-texture";
-    if (this.textures.exists(key)) return key;
-    const canvas = this.textures.createCanvas(key, 8, 8);
-    const ctx = canvas.getContext();
-    ctx.fillStyle = "rgba(255,255,255,0.16)";
-    ctx.fillRect(0, 0, 8, 1);
-    ctx.fillStyle = "rgba(0,0,0,0.18)";
-    ctx.fillRect(0, 4, 8, 1);
-    canvas.refresh();
-    return key;
   }
 
   drawVignette() {
@@ -356,9 +339,5 @@ export class IntroScene extends Phaser.Scene {
     this.cameras.main.setZoom(gameSize.width < 700 ? 0.82 : 1);
   }
 
-  update(_time, delta) {
-    if (this.scanline) {
-      this.scanline.tilePositionY += delta * 0.025;
-    }
-  }
+  update() {}
 }

@@ -34,6 +34,7 @@ data/real-agents-ecosystem-study.json
 data/cheffe-call-autonomy-log.json
 data/cheffe-call-ide-actions.json
 data/cheffe-call-state.json
+data/master-admin-audit-log.json
 data/real-agents-scoreboard.json
 .edge-headless/
 recovered-chat-assets/

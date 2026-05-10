@@ -1,19 +1,19 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "../config/gameConfig.js";
 import { gameState, updateGameState } from "../core/gameState.js";
-import { TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { PUBPAID_TEXTURE_KEYS } from "../core/assetRegistry.js";
 
 const GAME_META = {
-  darts: {
-    title: "Dardos",
+  pool: {
+    title: "Sinuca",
     accent: 0xffd06d,
-    alt: 0x50efff,
-    description: "Mira rápida, rounds curtos e placar auditável.",
-    badge: "PRECISÃO",
-    strap: "Foco, pressão e impacto",
-    panelA: 0x1a0f12,
+    alt: 0x8ef0a3,
+    description: "Tacadas curtas, leitura de mesa e placar demo claro.",
+    badge: "CONTROLE",
+    strap: "Mira, força e mesa viva",
+    panelA: 0x10241c,
     panelB: 0x0a111b,
-    chip: 0x2d78ff,
-    ai: ["Rafa Mira Fina", "Nina Triplo 20", "Beto Bullseye"]
+    chip: 0x1c8f5e,
+    ai: ["Nando Giz Azul", "Lia Caçapa", "Caio Tabela"]
   },
   checkers: {
     title: "Dama",
@@ -33,20 +33,20 @@ const LOBBY_META = {
   title: "Lobby",
   accent: 0xffd06d,
   alt: 0x50efff,
-  description: "Escolha um jogo para abrir aposta, oponente e confirmação."
-};
+    description: "Escolha Sinuca ou Damas para abrir créditos demo, oponente e confirmação."
+  };
 
 const STAKES = [2, 5, 10, 20, 30, 40, 50, 100];
 const CARD_TEXTURES = {
   checkers: "game-menu-damas-card",
-  darts: "game-menu-dardos-card"
+  pool: ""
 };
 
 export class GameLobbyScene extends Phaser.Scene {
   constructor() {
     super("game-lobby-scene");
-    this.gameId = "darts";
-    this.meta = GAME_META.darts;
+    this.gameId = "pool";
+    this.meta = GAME_META.pool;
     this.phase = "select";
     this.stake = 10;
     this.opponent = null;
@@ -60,7 +60,7 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   init(data = {}) {
-    this.gameId = data.gameId === "checkers" || data.gameId === "darts" ? data.gameId : "";
+    this.gameId = data.gameId === "checkers" || data.gameId === "pool" ? data.gameId : "";
     this.meta = GAME_META[this.gameId] || LOBBY_META;
     this.phase = "select";
     this.stake = Number(data.stake || gameState.lobbyStake || 10);
@@ -80,7 +80,7 @@ export class GameLobbyScene extends Phaser.Scene {
       lobbyPhase: "selecting",
       objective: "Escolher jogo",
       focus: "catálogo do garçom",
-      prompt: "Escolha Dardos ou Dama para iniciar a mesa."
+      prompt: "Escolha Sinuca ou Damas para iniciar a mesa."
     });
   }
 
@@ -98,12 +98,12 @@ export class GameLobbyScene extends Phaser.Scene {
     this.fxLayer = this.add.graphics().setDepth(0.8).setBlendMode(Phaser.BlendModes.SCREEN);
     for (let index = 0; index < 34; index += 1) {
       this.add.rectangle(
-        Phaser.Math.Between(80, GAME_WIDTH - 80),
-        Phaser.Math.Between(130, GAME_HEIGHT - 80),
-        Phaser.Math.Between(3, 12),
+        80 + (index * 149) % (GAME_WIDTH - 160),
+        130 + (index * 83) % (GAME_HEIGHT - 210),
+        3 + index % 10,
         2,
         index % 2 ? this.meta.accent : this.meta.alt,
-        Phaser.Math.FloatBetween(0.08, 0.24)
+        0.08 + (index % 7) * 0.022
       ).setDepth(0.7).setBlendMode(Phaser.BlendModes.SCREEN);
     }
   }
@@ -163,8 +163,8 @@ export class GameLobbyScene extends Phaser.Scene {
     this.phase = "select";
     updateGameState({ lobbyPhase: "selecting", lobbyStake: this.stake, lobbyOpponent: null });
 
-    this.drawGameChoiceCard(410, 394, "checkers");
-    this.drawGameChoiceCard(742, 394, "darts");
+    this.drawGameChoiceCard(410, 394, "pool");
+    this.drawGameChoiceCard(742, 394, "checkers");
     if (this.gameId) {
       this.drawLobbyWaiter(1094, 642, "Pronto para a mesa.");
     } else {
@@ -200,10 +200,11 @@ export class GameLobbyScene extends Phaser.Scene {
   findAiOpponent() {
     this.phase = "matching";
     const names = this.meta.ai;
+    const opponentIndex = (this.stake + (this.gameId === "pool" ? 0 : 1)) % names.length;
     this.opponent = {
-      name: names[Phaser.Math.Between(0, names.length - 1)],
-      style: this.gameId === "darts" ? "mira agressiva" : "jogo posicional",
-      rating: Phaser.Math.Between(680, 920)
+      name: names[opponentIndex],
+      style: this.gameId === "pool" ? "controle de mesa" : "jogo posicional",
+      rating: this.gameId === "pool" ? 790 : 760
     };
     updateGameState({
       lobbyPhase: "matched",
@@ -217,8 +218,8 @@ export class GameLobbyScene extends Phaser.Scene {
       });
       return;
     }
-    if (this.gameId === "darts") {
-      this.scene.start("darts-game-scene", {
+    if (this.gameId === "pool") {
+      this.scene.start("pool-game-scene", {
         stake: this.stake,
         opponent: this.opponent
       });
@@ -241,15 +242,15 @@ export class GameLobbyScene extends Phaser.Scene {
 
   startMatchScreen() {
     this.phase = "match";
-    if (this.gameId === "darts") {
+    if (this.gameId === "pool") {
       updateGameState({
-        currentScene: "darts-game",
-        activeGameId: "darts",
+        currentScene: "pool-game",
+        activeGameId: "pool",
         lobbyPhase: "playing",
-        objective: "Jogar Dardos",
-        prompt: `Partida de Dardos aberta contra ${this.opponent.name}.`
+        objective: "Jogar Sinuca",
+        prompt: `Partida de Sinuca aberta contra ${this.opponent.name}.`
       });
-      this.scene.start("darts-game-scene", {
+      this.scene.start("pool-game-scene", {
         stake: this.stake,
         opponent: this.opponent
       });
@@ -284,8 +285,8 @@ export class GameLobbyScene extends Phaser.Scene {
     this.drawGlassPanel(80, 128, 570, 444, this.meta.accent);
     this.tableLayer.add(this.add.text(96, 150, this.meta.title.toUpperCase(), this.textStyle(40, "#fff6dc")).setLetterSpacing(4));
     this.tableLayer.add(this.add.text(98, 206, `Você x ${this.opponent.name} / aposta ${this.stake}`, this.textStyle(16, "#d5dff2")));
-    if (this.gameId === "darts") {
-      this.drawDartsMatch();
+    if (this.gameId === "pool") {
+      this.drawPoolMatch();
     } else {
       this.drawCheckersMatch();
     }
@@ -295,12 +296,8 @@ export class GameLobbyScene extends Phaser.Scene {
 
   drawGamePreview(x, y) {
     this.tableLayer.add(this.add.rectangle(x, y, 410, 380, 0x05070d, 0.62).setStrokeStyle(3, this.meta.accent, 0.24));
-    if (this.gameId === "darts") {
-      this.tableLayer.add(this.add.rectangle(x, y, 300, 360, 0x160c15, 1).setStrokeStyle(4, this.meta.accent, 0.36));
-      this.tableLayer.add(this.add.circle(x, y - 30, 106, 0x0b1220, 1).setStrokeStyle(8, this.meta.accent, 0.45));
-      this.tableLayer.add(this.add.circle(x, y - 30, 70, 0xff4fb8, 0.28));
-      this.tableLayer.add(this.add.circle(x, y - 30, 38, 0x50efff, 0.32));
-      this.tableLayer.add(this.add.circle(x, y - 30, 10, 0x8ef0a3, 0.95));
+    if (this.gameId === "pool") {
+      this.drawMiniPoolTable(x, y, 1.35);
     } else {
       this.tableLayer.add(this.add.rectangle(x, y, 360, 320, 0x140b12, 1).setStrokeStyle(4, this.meta.alt, 0.34));
       const size = 32;
@@ -321,10 +318,10 @@ export class GameLobbyScene extends Phaser.Scene {
     this.tableLayer.add(this.add.text(x - 18, y + 22, `rating ${this.opponent.rating}`, this.textStyle(12, "#ffd06d")));
   }
 
-  drawDartsMatch() {
-    this.drawDartsTarget(848, 374, 126);
-    this.tableLayer.add(this.add.text(118, 310, "Tela própria dos Dardos", this.textStyle(20, "#ffd06d")));
-    this.tableLayer.add(this.add.text(118, 350, "Aqui entram mira, rounds, IA e liquidação da partida.", this.textStyle(14, "#d5dff2")));
+  drawPoolMatch() {
+    this.drawMiniPoolTable(848, 374, 1.55);
+    this.tableLayer.add(this.add.text(118, 310, "Tela própria da Sinuca", this.textStyle(20, "#ffd06d")));
+    this.tableLayer.add(this.add.text(118, 350, "Aqui entram mira, força, IA demo e liquidação de créditos demo.", this.textStyle(14, "#d5dff2")));
   }
 
   drawCheckersMatch() {
@@ -334,20 +331,20 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   switchGame() {
-    this.gameId = this.gameId === "darts" ? "checkers" : "darts";
+    this.gameId = this.gameId === "pool" ? "checkers" : "pool";
     this.meta = GAME_META[this.gameId];
     updateGameState({ activeGameId: this.gameId, selectedTable: this.gameId });
     this.renderLobby();
   }
 
   selectGame(gameId) {
-    this.gameId = gameId === "checkers" || gameId === "darts" ? gameId : "";
+    this.gameId = gameId === "checkers" || gameId === "pool" ? gameId : "";
     this.meta = GAME_META[this.gameId] || LOBBY_META;
     this.opponent = null;
     this.phase = "select";
     updateGameState({
       activeGameId: this.gameId,
-      selectedTable: this.gameId || "darts",
+      selectedTable: this.gameId || "pool",
       lobbyPhase: "selecting",
       objective: this.gameId ? `Configurar ${this.meta.title}` : "Escolher jogo",
       prompt: this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta e busque um oponente.` : "Escolha um jogo no catálogo."
@@ -403,6 +400,23 @@ export class GameLobbyScene extends Phaser.Scene {
     const image = this.textures.exists(CARD_TEXTURES[gameId])
       ? this.add.image(0, -8, CARD_TEXTURES[gameId]).setDisplaySize(292, 208)
       : this.add.rectangle(0, -8, 292, 208, meta.panelA, 0.92).setStrokeStyle(2, meta.alt, 0.3);
+    const cardArt = [];
+    if (gameId === "pool" && !this.textures.exists(CARD_TEXTURES[gameId])) {
+      cardArt.push(
+        this.add.rectangle(0, -18, 222, 110, 0x2b140d, 0.96).setStrokeStyle(3, 0xffd06d, 0.32),
+        this.add.rectangle(0, -18, 194, 82, 0x0b5a42, 0.96).setStrokeStyle(2, 0x07101c, 0.8),
+        this.add.circle(-78, -50, 9, 0x07101c, 1),
+        this.add.circle(0, -58, 8, 0x07101c, 1),
+        this.add.circle(78, -50, 9, 0x07101c, 1),
+        this.add.circle(-78, 14, 9, 0x07101c, 1),
+        this.add.circle(0, 24, 8, 0x07101c, 1),
+        this.add.circle(78, 14, 9, 0x07101c, 1),
+        this.add.circle(-34, -8, 8, 0xf4ead8, 1).setStrokeStyle(2, 0x07101c, 0.7),
+        this.add.circle(32, -24, 8, 0xff4f7d, 1).setStrokeStyle(2, 0x07101c, 0.7),
+        this.add.circle(58, 2, 8, 0xffd06d, 1).setStrokeStyle(2, 0x07101c, 0.7),
+        this.add.rectangle(-20, 28, 132, 4, 0xc48b3a, 0.86).setRotation(-0.34)
+      );
+    }
     const selectedRing = this.add.rectangle(0, -8, 300, 216, 0x000000, 0)
       .setStrokeStyle(3, selected ? meta.accent : 0xc48b3a, selected ? 0.7 : 0.1);
     const title = this.add.text(0, 122, meta.title.toUpperCase(), {
@@ -413,7 +427,7 @@ export class GameLobbyScene extends Phaser.Scene {
       stroke: "#120904",
       strokeThickness: 2
     }).setOrigin(0.5).setLetterSpacing(1);
-    container.add([glow, shadow, image, selectedRing, title]);
+    container.add([glow, shadow, image, ...cardArt, selectedRing, title]);
     container.setSize(302, 226);
     container.setInteractive(new Phaser.Geom.Rectangle(-151, -113, 302, 226), Phaser.Geom.Rectangle.Contains);
     container.on("pointerdown", () => this.selectGame(gameId));
@@ -448,13 +462,13 @@ export class GameLobbyScene extends Phaser.Scene {
   drawCatalogPreview(x, y) {
     this.tableLayer.add(this.add.rectangle(x, y, 410, 380, 0x05070d, 0.62).setStrokeStyle(3, this.meta.accent, 0.24));
     this.tableLayer.add(this.add.text(x, y - 126, "ESCOLHA NO CATÁLOGO", this.textStyle(18, "#fff6dc")).setOrigin(0.5).setLetterSpacing(2));
-    this.drawDartsTarget(x - 90, y + 18, 76);
+    this.drawMiniPoolTable(x - 100, y + 20, 0.64);
     this.drawCheckersBoard(x + 100, y + 20, 24);
   }
 
   drawLobbyWaiter(x, y, message) {
-    if (this.textures.exists(TEXTURE_KEYS.waiterLobby)) {
-      this.waiterSprite = this.add.image(x, y, TEXTURE_KEYS.waiterLobby)
+    if (this.textures.exists(PUBPAID_TEXTURE_KEYS.waiterLobby)) {
+      this.waiterSprite = this.add.image(x, y, PUBPAID_TEXTURE_KEYS.waiterLobby)
         .setOrigin(0.5, 1)
         .setScale(0.16)
         .setDepth(2.2);
@@ -474,20 +488,20 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   startWaiterTalking() {
-    if (!this.waiterSprite || !this.textures.exists(TEXTURE_KEYS.waiterLobbySpeaking)) return;
+    if (!this.waiterSprite || !this.textures.exists(PUBPAID_TEXTURE_KEYS.waiterLobbySpeaking)) return;
     let speaking = false;
     this.waiterTalkTimer = this.time.addEvent({
       delay: 260,
       loop: true,
       callback: () => {
         speaking = !speaking;
-        this.waiterSprite?.setTexture(speaking ? TEXTURE_KEYS.waiterLobbySpeaking : TEXTURE_KEYS.waiterLobby);
+        this.waiterSprite?.setTexture(speaking ? PUBPAID_TEXTURE_KEYS.waiterLobbySpeaking : PUBPAID_TEXTURE_KEYS.waiterLobby);
       }
     });
   }
 
   drawMatchBackdrop() {
-    const textureKey = this.gameId === "darts" ? "game-darts-room" : "game-checkers-room";
+    const textureKey = this.gameId === "pool" ? "game-pool-room" : "game-checkers-room";
     if (this.textures.exists(textureKey)) {
       this.tableLayer.add(this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, textureKey)
         .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
@@ -499,6 +513,42 @@ export class GameLobbyScene extends Phaser.Scene {
     }
     this.tableLayer.add(this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x07101c, 0.92)
       .setDepth(-2));
+  }
+
+  drawMiniPoolTable(x, y, scale = 1) {
+    const width = 214 * scale;
+    const height = 126 * scale;
+    this.tableLayer.add(this.add.ellipse(x, y + height / 2 + 12 * scale, width * 0.78, 16 * scale, 0x000000, 0.2)
+      .setBlendMode(Phaser.BlendModes.MULTIPLY));
+    this.tableLayer.add(this.add.rectangle(x, y, width + 28 * scale, height + 28 * scale, 0x2b140d, 0.96)
+      .setStrokeStyle(Math.max(2, 3 * scale), 0xffd06d, 0.28));
+    this.tableLayer.add(this.add.rectangle(x, y, width, height, 0x0b5a42, 0.96)
+      .setStrokeStyle(Math.max(2, 2 * scale), 0x07101c, 0.82));
+    [
+      [-width / 2 + 14 * scale, -height / 2 + 14 * scale],
+      [0, -height / 2 + 8 * scale],
+      [width / 2 - 14 * scale, -height / 2 + 14 * scale],
+      [-width / 2 + 14 * scale, height / 2 - 14 * scale],
+      [0, height / 2 - 8 * scale],
+      [width / 2 - 14 * scale, height / 2 - 14 * scale]
+    ].forEach(([px, py]) => {
+      this.tableLayer.add(this.add.circle(x + px, y + py, 9 * scale, 0x05070d, 1)
+        .setStrokeStyle(Math.max(1, 2 * scale), 0xc48b3a, 0.56));
+    });
+    [
+      { dx: -44, dy: 20, color: 0xf4ead8 },
+      { dx: 22, dy: -24, color: 0xff4f7d },
+      { dx: 58, dy: 12, color: 0xffd06d },
+      { dx: 82, dy: -14, color: 0x10131a }
+    ].forEach((ball, index) => {
+      this.tableLayer.add(this.add.circle(x + ball.dx * scale, y + ball.dy * scale, 8 * scale, ball.color, 1)
+        .setStrokeStyle(Math.max(1, 2 * scale), 0x07101c, 0.75));
+      if (index > 0) {
+        this.tableLayer.add(this.add.circle(x + ball.dx * scale - 2 * scale, y + ball.dy * scale - 2 * scale, 2 * scale, 0xfff6dc, 0.5));
+      }
+    });
+    this.tableLayer.add(this.add.rectangle(x - 24 * scale, y + 42 * scale, 118 * scale, 4 * scale, 0xc48b3a, 0.86)
+      .setRotation(-0.32));
   }
 
   drawDartsTarget(x, y, radius) {

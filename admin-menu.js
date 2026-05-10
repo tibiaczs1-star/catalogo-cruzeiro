@@ -14,7 +14,7 @@
 
   function buildDashboardUrl() {
     const base = resolveApiBase();
-    return `${base}/admin/admin-dashboard.html`;
+    return `${base}/admin`;
   }
 
   function hydrateDashboardLinks() {
@@ -42,7 +42,7 @@
     button.setAttribute("data-admin-dashboard-link", "");
     button.target = "_blank";
     button.rel = "noopener noreferrer";
-    button.textContent = "Administrativo";
+    button.textContent = "Central Master";
     return button;
   }
 
@@ -95,16 +95,10 @@
   }
 
   function init() {
-    const hasManualLink = hydrateDashboardLinks();
-    if (!hasManualLink) {
-      injectMenuItem();
-    }
+    hydrateDashboardLinks();
 
     const observer = new MutationObserver(() => {
-      const hasLink = hydrateDashboardLinks();
-      if (!hasLink) {
-        injectMenuItem();
-      }
+      hydrateDashboardLinks();
     });
     observer.observe(document.body, { childList: true, subtree: true });
   }

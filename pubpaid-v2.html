@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260423lobbyclean1" />
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260507flow1" />
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260424tightsprites1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260507flow1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -57,7 +57,7 @@
       </header>
 
       <section class="ppg-stage ppg-stage--official" aria-label="Jogo oficial da PubPaid 2.0">
-        <div class="ppg-canvas-shell ppg-canvas-shell--official">
+        <div class="ppg-game-shell ppg-game-shell--official">
           <div id="pubpaid-phaser-root" class="ppg-game" aria-label="Jogo PubPaid 2.0 em Phaser"></div>
           <div class="ppg-orientation-gate" data-orientation-gate hidden>
             <section class="ppg-orientation-card" aria-label="Orientação recomendada para o PubPaid 2.0">
@@ -184,30 +184,60 @@
                 <h2>Escolha a mesa</h2>
               </header>
               <div class="ppg-dom-game-cards">
-                <button type="button" class="ppg-dom-game-card is-darts" data-dom-start-game="darts">
-                  <span>Dardos</span>
-                  <strong>3 rodadas</strong>
+                <button type="button" class="ppg-dom-game-card is-pool" data-dom-start-game="pool">
+                  <span>Sinuca</span>
+                  <strong>mira e força</strong>
                 </button>
                 <button type="button" class="ppg-dom-game-card is-checkers" data-dom-start-game="checkers">
-                  <span>Dama</span>
+                  <span>Damas</span>
                   <strong>turnos locais</strong>
                 </button>
               </div>
+              <div class="ppg-dom-lobby-foot">
+                <span>créditos demo <strong data-dom-lobby-balance>100</strong></span>
+                <span>entrada <strong data-dom-lobby-stake>10</strong></span>
+                <span data-dom-lobby-state>pronto</span>
+                <button type="button" data-dom-return-salon>Sair</button>
+              </div>
             </aside>
 
-            <aside class="ppg-dom-darts" data-dom-darts hidden>
+            <aside class="ppg-dom-matchmaking" data-dom-matchmaking hidden>
               <header>
-                <span class="ppg-kicker">dardos</span>
-                <h2 data-dom-darts-title>Mesa aberta</h2>
+                <span class="ppg-kicker">matchmaking</span>
+                <h2 data-dom-matchmaking-game>Sinuca</h2>
               </header>
-              <div class="ppg-dom-score">
-                <strong data-dom-darts-score>0 x 0</strong>
-                <span data-dom-darts-round>rodada 1/3</span>
+              <div class="ppg-dom-match-lights" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
               </div>
-              <p data-dom-darts-status>Mire no alvo e arremesse.</p>
+              <p data-dom-matchmaking-status>Procurando oponente demo.</p>
               <div class="ppg-dom-actions">
-                <button type="button" class="primary" data-dom-darts-throw>Arremessar</button>
-                <button type="button" data-dom-game-reset="darts">Revanche</button>
+                <button type="button" data-dom-open-lobby>Cancelar</button>
+              </div>
+            </aside>
+
+            <aside class="ppg-dom-pool" data-dom-pool hidden>
+              <header>
+                <span class="ppg-kicker">sinuca</span>
+                <h2 data-dom-pool-title>Mesa aberta</h2>
+              </header>
+              <div class="ppg-dom-pool-table" aria-hidden="true">
+                <span class="pocket p1"></span>
+                <span class="pocket p2"></span>
+                <span class="pocket p3"></span>
+                <span class="pocket p4"></span>
+                <span class="ball cue"></span>
+                <span class="ball b1"></span>
+                <span class="ball b2"></span>
+                <span class="cue-stick"></span>
+              </div>
+              <div class="ppg-dom-score">
+                <strong data-dom-pool-score>0 x 0</strong>
+                <span data-dom-pool-round>rodada 1/4</span>
+              </div>
+              <p data-dom-pool-status>Trave mira e força para tacar.</p>
+              <div class="ppg-dom-actions">
+                <button type="button" class="primary" data-dom-pool-shot>Tacada</button>
+                <button type="button" data-dom-game-reset="pool">Revanche</button>
                 <button type="button" data-dom-open-lobby>Lobby</button>
               </div>
             </aside>

@@ -1,6 +1,18 @@
-import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
+import { gameState, settleDemoMatch, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const CHECKERS_SIZE = 8;
+const MATCH_OPPONENTS = {
+  pool: [
+    { name: "Nando Giz Azul", rating: 790, style: "controle de mesa" },
+    { name: "Lia Caçapa", rating: 830, style: "tacadas curtas" },
+    { name: "Caio Tabela", rating: 760, style: "defesa paciente" }
+  ],
+  checkers: [
+    { name: "Dona Coroa", rating: 780, style: "jogo posicional" },
+    { name: "Caio Diagonal", rating: 740, style: "captura agressiva" },
+    { name: "Lia Rainha", rating: 820, style: "final forte" }
+  ]
+};
 
 function createCheckersBoard() {
   return Array.from({ length: CHECKERS_SIZE }, (_, row) =>
@@ -94,6 +106,19 @@ function getCheckersResult(board, moveCount) {
   return null;
 }
 
+function chooseCheckersAiMove(moves) {
+  return [...moves].sort((a, b) => {
+    const captureScore = Number(Boolean(b.capture)) - Number(Boolean(a.capture));
+    if (captureScore) return captureScore;
+    const rowScore = b.to.row - a.to.row;
+    if (rowScore) return rowScore;
+    const centerA = Math.abs(3.5 - a.to.col);
+    const centerB = Math.abs(3.5 - b.to.col);
+    if (centerA !== centerB) return centerA - centerB;
+    return a.to.col - b.to.col;
+  })[0];
+}
+
 function resultTitle(result) {
   if (result === "win") return "Vitória";
   if (result === "loss") return "Derrota";
@@ -118,11 +143,17 @@ export function bindDomGameInterface(game) {
     scene: document.querySelector("[data-dom-ui-scene]"),
     objective: document.querySelector("[data-dom-ui-objective]"),
     lobby: document.querySelector("[data-dom-lobby]"),
-    darts: document.querySelector("[data-dom-darts]"),
-    dartsTitle: document.querySelector("[data-dom-darts-title]"),
-    dartsScore: document.querySelector("[data-dom-darts-score]"),
-    dartsRound: document.querySelector("[data-dom-darts-round]"),
-    dartsStatus: document.querySelector("[data-dom-darts-status]"),
+    lobbyBalance: document.querySelector("[data-dom-lobby-balance]"),
+    lobbyStake: document.querySelector("[data-dom-lobby-stake]"),
+    lobbyState: document.querySelector("[data-dom-lobby-state]"),
+    matchmaking: document.querySelector("[data-dom-matchmaking]"),
+    matchmakingGame: document.querySelector("[data-dom-matchmaking-game]"),
+    matchmakingStatus: document.querySelector("[data-dom-matchmaking-status]"),
+    pool: document.querySelector("[data-dom-pool]"),
+    poolTitle: document.querySelector("[data-dom-pool-title]"),
+    poolScore: document.querySelector("[data-dom-pool-score]"),
+    poolRound: document.querySelector("[data-dom-pool-round]"),
+    poolStatus: document.querySelector("[data-dom-pool-status]"),
     checkers: document.querySelector("[data-dom-checkers]"),
     checkersBoard: document.querySelector("[data-dom-checkers-board]"),
     checkersTitle: document.querySelector("[data-dom-checkers-title]"),
@@ -137,77 +168,108 @@ export function bindDomGameInterface(game) {
   if (!refs.root) return;
 
   const local = {
-    selectedGame: "darts",
-    checkers: initialCheckersState()
+    selectedGame: "pool",
+    checkers: initialCheckersState(),
+    matchCounter: { pool: 0, checkers: 0 },
+    matchmakingTimer: null
   };
 
   const setPanel = (name) => {
     refs.root.classList.toggle("is-lobby", name === "lobby");
-    refs.root.classList.toggle("is-darts", name === "darts");
+    refs.root.classList.toggle("is-matchmaking", name === "matchmaking");
+    refs.root.classList.toggle("is-pool", name === "pool");
     refs.root.classList.toggle("is-checkers", name === "checkers");
     refs.root.classList.toggle("is-result", name === "result");
     refs.lobby.hidden = name !== "lobby";
-    refs.darts.hidden = name !== "darts";
+    refs.matchmaking.hidden = name !== "matchmaking";
+    refs.pool.hidden = name !== "pool";
     refs.checkers.hidden = name !== "checkers";
     refs.result.hidden = name !== "result";
-    refs.root.classList.toggle("is-playing", name === "darts" || name === "checkers");
+    refs.root.classList.toggle("is-playing", name === "pool" || name === "checkers");
   };
 
   const showLobby = () => {
-    local.selectedGame = gameState.activeGameId || local.selectedGame || "darts";
+    window.clearTimeout(local.matchmakingTimer);
+    local.matchmakingTimer = null;
+    local.selectedGame = gameState.activeGameId || local.selectedGame || "pool";
     setPanel("lobby");
     updateGameState({
       lobbyPhase: "selecting",
-      objective: "Escolher Dardos ou Dama",
-      prompt: "Lobby DOM aberto. Escolha uma mesa para jogar localmente."
+      objective: "Escolher Sinuca ou Damas",
+      prompt: "Lobby aberto. Escolha uma mesa para jogar com créditos demo."
     });
   };
 
   const showResult = (gameId, result, body) => {
     local.selectedGame = gameId;
-    refs.resultGame.textContent = gameId === "checkers" ? "dama" : "dardos";
+    refs.resultGame.textContent = gameId === "checkers" ? "damas" : "sinuca";
     refs.resultTitle.textContent = resultTitle(result);
     refs.resultBody.textContent = body;
     refs.result.dataset.result = result;
     setPanel("result");
   };
 
-  const startDarts = () => {
-    local.selectedGame = "darts";
-    setPanel("darts");
-    updateGameState({ activeGameId: "darts", lobbyPhase: "playing" });
+  const pickOpponent = (gameId) => {
+    const list = MATCH_OPPONENTS[gameId] || MATCH_OPPONENTS.pool;
+    const index = local.matchCounter[gameId] % list.length;
+    local.matchCounter[gameId] += 1;
+    return list[index];
+  };
+
+  const startPool = (opponent = pickOpponent("pool")) => {
+    local.selectedGame = "pool";
+    setPanel("pool");
+    updateGameState({ activeGameId: "pool", lobbyPhase: "playing", lobbyOpponent: opponent });
     game.scene.stop("game-lobby-scene");
     game.scene.stop("checkers-game-scene");
-    game.scene.start("darts-game-scene", { stake: gameState.lobbyStake || 10 });
+    game.scene.start("pool-game-scene", { stake: gameState.lobbyStake || 10, opponent });
+  };
+
+  const showMatchmaking = (gameId) => {
+    window.clearTimeout(local.matchmakingTimer);
+    local.selectedGame = gameId;
+    const gameName = gameId === "checkers" ? "Damas" : "Sinuca";
+    refs.matchmakingGame.textContent = gameName;
+    refs.matchmakingStatus.textContent = `Procurando oponente demo para ${gameName}.`;
+    setPanel("matchmaking");
+    updateGameState({
+      activeGameId: gameId,
+      selectedTable: gameId,
+      lobbyPhase: "matching",
+      objective: `Encontrar oponente para ${gameName}`,
+      focus: "matchmaking demo",
+      prompt: `Buscando oponente demo para ${gameName}.`
+    });
+    local.matchmakingTimer = window.setTimeout(() => {
+      const opponent = pickOpponent(gameId);
+      updateGameState({
+        lobbyPhase: "matched",
+        lobbyOpponent: opponent,
+        prompt: `${opponent.name} encontrado. Abrindo mesa demo.`
+      });
+      gameId === "checkers" ? startCheckers(opponent) : startPool(opponent);
+    }, 980);
   };
 
   const renderCheckers = () => {
     const state = local.checkers;
     const targetKeys = new Set(state.legalMoves.map((move) => `${move.to.row}-${move.to.col}`));
-    refs.checkersBoard.innerHTML = "";
-    state.board.forEach((row, rowIndex) => {
-      row.forEach((piece, colIndex) => {
-        const cell = document.createElement("button");
+    refs.checkersBoard.innerHTML = state.board.flatMap((row, rowIndex) => (
+      row.map((piece, colIndex) => {
         const dark = (rowIndex + colIndex) % 2 === 1;
-        cell.type = "button";
-        cell.className = [
+        const className = [
           "ppg-dom-cell",
           dark ? "is-dark" : "is-light",
           state.selected?.row === rowIndex && state.selected?.col === colIndex ? "is-selected" : "",
           targetKeys.has(`${rowIndex}-${colIndex}`) ? "is-target" : ""
         ].filter(Boolean).join(" ");
-        cell.dataset.row = String(rowIndex);
-        cell.dataset.col = String(colIndex);
-        cell.disabled = state.turn !== "player" || Boolean(state.result);
-        if (piece) {
-          const checker = document.createElement("span");
-          checker.className = `ppg-dom-piece is-${piece.owner}${piece.king ? " is-king" : ""}`;
-          checker.textContent = piece.king ? "K" : "";
-          cell.append(checker);
-        }
-        refs.checkersBoard.append(cell);
-      });
-    });
+        const disabled = state.turn !== "player" || Boolean(state.result) ? " disabled" : "";
+        const checker = piece
+          ? `<span class="ppg-dom-piece is-${piece.owner}${piece.king ? " is-king" : ""}">${piece.king ? "K" : ""}</span>`
+          : "";
+        return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}"${disabled}>${checker}</button>`;
+      })
+    )).join("");
     refs.checkersTitle.textContent = state.result ? "Mesa encerrada" : state.turn === "player" ? "Sua vez" : "Vez da rival";
     refs.checkersScore.textContent = `${countPieces(state.board, "player")} x ${countPieces(state.board, "ai")}`;
     refs.checkersStatus.textContent = state.status;
@@ -234,9 +296,20 @@ export function bindDomGameInterface(game) {
     const result = getCheckersResult(local.checkers.board, local.checkers.moveCount);
     if (!result) return false;
     local.checkers.result = result.result;
-    local.checkers.status = result.reason;
+    const settlement = settleDemoMatch({
+      gameId: "checkers",
+      result: result.result,
+      stake: gameState.lobbyStake || 10,
+      summary: `Damas demo: ${result.reason}`
+    });
+    const creditCopy = settlement.delta > 0
+      ? ` +${settlement.delta} créditos demo.`
+      : settlement.delta < 0
+        ? ` ${settlement.delta} créditos demo.`
+        : " Créditos demo sem alteração.";
+    local.checkers.status = `${result.reason}${creditCopy}`;
     renderCheckers();
-    showResult("checkers", result.result, result.reason);
+    showResult("checkers", result.result, local.checkers.status);
     return true;
   };
 
@@ -244,14 +317,19 @@ export function bindDomGameInterface(game) {
     const moves = getAllMoves(local.checkers.board, "ai", true);
     if (!moves.length) {
       local.checkers.result = "win";
-      local.checkers.status = "A rival ficou sem jogadas.";
+      const settlement = settleDemoMatch({
+        gameId: "checkers",
+        result: "win",
+        stake: gameState.lobbyStake || 10,
+        summary: "Damas demo: rival sem jogadas"
+      });
+      local.checkers.status = `A rival ficou sem jogadas. +${settlement.delta} créditos demo.`;
       renderCheckers();
       showResult("checkers", "win", local.checkers.status);
       return;
     }
     const captures = moves.filter((move) => move.capture);
-    const pool = captures.length ? captures : moves;
-    const move = pool[Math.floor(Math.random() * pool.length)];
+    const move = chooseCheckersAiMove(captures.length ? captures : moves);
     local.checkers.board = applyCheckersMove(local.checkers.board, move);
     local.checkers.turn = "player";
     local.checkers.moveCount += 1;
@@ -288,31 +366,33 @@ export function bindDomGameInterface(game) {
     renderCheckers();
   };
 
-  const startCheckers = () => {
+  const startCheckers = (opponent = pickOpponent("checkers")) => {
     local.selectedGame = "checkers";
     local.checkers = initialCheckersState();
     setPanel("checkers");
     game.scene.stop("game-lobby-scene");
-    game.scene.stop("darts-game-scene");
-    game.scene.start("checkers-game-scene", { stake: gameState.lobbyStake || 10 });
+    game.scene.stop("pool-game-scene");
+    game.scene.start("checkers-game-scene", { stake: gameState.lobbyStake || 10, opponent });
     renderCheckers();
   };
 
   document.addEventListener("click", (event) => {
     const startButton = event.target.closest("[data-dom-start-game]");
     if (startButton) {
-      startButton.dataset.domStartGame === "checkers" ? startCheckers() : startDarts();
+      showMatchmaking(startButton.dataset.domStartGame === "checkers" ? "checkers" : "pool");
       return;
     }
     if (event.target.closest("[data-dom-open-lobby]")) {
-      game.scene.stop("darts-game-scene");
+      window.clearTimeout(local.matchmakingTimer);
+      game.scene.stop("pool-game-scene");
       game.scene.stop("checkers-game-scene");
       game.scene.start("game-lobby-scene", { gameId: local.selectedGame });
       showLobby();
       return;
     }
     if (event.target.closest("[data-dom-return-salon]")) {
-      game.scene.stop("darts-game-scene");
+      window.clearTimeout(local.matchmakingTimer);
+      game.scene.stop("pool-game-scene");
       game.scene.stop("checkers-game-scene");
       game.scene.stop("game-lobby-scene");
       game.scene.start("interior-scene");
@@ -320,17 +400,17 @@ export function bindDomGameInterface(game) {
       updateGameState({ activeGameId: "", lobbyPhase: "hub" });
       return;
     }
-    if (event.target.closest("[data-dom-darts-throw]")) {
-      game.events.emit("pubpaid:darts-dom-throw");
+    if (event.target.closest("[data-dom-pool-shot]")) {
+      game.events.emit("pubpaid:pool-dom-shot");
       return;
     }
     const resetButton = event.target.closest("[data-dom-game-reset]");
     if (resetButton) {
-      resetButton.dataset.domGameReset === "checkers" ? startCheckers() : startDarts();
+      resetButton.dataset.domGameReset === "checkers" ? startCheckers() : startPool();
       return;
     }
     if (event.target.closest("[data-dom-result-again]")) {
-      local.selectedGame === "checkers" ? startCheckers() : startDarts();
+      local.selectedGame === "checkers" ? startCheckers() : startPool();
       return;
     }
     const cell = event.target.closest("[data-dom-checkers-board] [data-row]");
@@ -340,8 +420,11 @@ export function bindDomGameInterface(game) {
   });
 
   game.events.on("pubpaid:open-dom-lobby", showLobby);
-  game.events.on("pubpaid:darts-result", ({ result, body } = {}) => {
-    showResult("darts", result || "draw", body || "Partida encerrada.");
+  game.events.on("pubpaid:pool-result", ({ result, body } = {}) => {
+    showResult("pool", result || "draw", body || "Partida encerrada.");
+  });
+  game.events.on("pubpaid:checkers-result", ({ result, body } = {}) => {
+    showResult("checkers", result || "draw", body || "Partida encerrada.");
   });
 
   subscribeGameState((state) => {
@@ -349,22 +432,35 @@ export function bindDomGameInterface(game) {
     refs.objective.textContent = state.objective || "PubPaid";
     const shouldShow =
       state.currentScene === "game-lobby" ||
-      state.activeGameId === "darts" ||
+      state.activeGameId === "pool" ||
       state.activeGameId === "checkers" ||
       state.lobbyPhase === "selecting" ||
+      state.lobbyPhase === "matching" ||
+      state.lobbyPhase === "matched" ||
       state.lobbyPhase === "playing" ||
       state.lobbyPhase === "finished";
     refs.root.classList.toggle("is-hidden", !shouldShow);
     document.body.classList.toggle("ppg-lobby-clean", shouldShow);
-    if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
-    if (state.currentScene === "game-lobby" || state.lobbyPhase === "selecting") {
-      if (refs.darts.hidden && refs.checkers.hidden && refs.result.hidden) setPanel("lobby");
+    if (refs.lobbyBalance) refs.lobbyBalance.textContent = `${state.testBalance || 0}`;
+    if (refs.lobbyStake) refs.lobbyStake.textContent = `${state.lobbyStake || 10}`;
+    if (refs.lobbyState) {
+      refs.lobbyState.textContent =
+        state.lobbyPhase === "matching" ? "buscando" :
+        state.lobbyPhase === "matched" ? "oponente encontrado" :
+        state.lobbyPhase === "playing" ? "em mesa" :
+        state.lobbyPhase === "finished" ? "resultado" :
+        "pronto";
     }
-    if (state.activeGameId === "darts" && state.dartsGame) {
-      refs.dartsScore.textContent = `${state.dartsGame.playerScore || 0} x ${state.dartsGame.aiScore || 0}`;
-      refs.dartsRound.textContent = `rodada ${Math.min(state.dartsGame.round || 1, state.dartsGame.maxRounds || 3)}/${state.dartsGame.maxRounds || 3}`;
-      refs.dartsTitle.textContent = state.dartsGame.phase === "finished" ? "Mesa encerrada" : "Mire e arremesse";
-      refs.dartsStatus.textContent = state.prompt || "Mire no alvo e arremesse.";
+    if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
+    if (state.lobbyPhase === "matching" && !refs.matchmaking.hidden) return;
+    if (state.currentScene === "game-lobby" || state.lobbyPhase === "selecting") {
+      if (refs.pool.hidden && refs.checkers.hidden && refs.result.hidden && refs.matchmaking.hidden) setPanel("lobby");
+    }
+    if (state.activeGameId === "pool" && state.poolGame) {
+      refs.poolScore.textContent = `${state.poolGame.playerScore || 0} x ${state.poolGame.aiScore || 0}`;
+      refs.poolRound.textContent = `rodada ${Math.min(state.poolGame.round || 1, state.poolGame.maxRounds || 4)}/${state.poolGame.maxRounds || 4}`;
+      refs.poolTitle.textContent = state.poolGame.phase === "finished" ? "Mesa encerrada" : "Mira e força";
+      refs.poolStatus.textContent = state.prompt || "Trave mira e força para tacar.";
     }
   });
 }

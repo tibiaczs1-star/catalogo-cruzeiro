@@ -24,7 +24,11 @@ services:
       - key: REAL_AGENTS_AUTO_RUN_DISABLED
         value: "false"
       - key: REAL_AGENTS_AUTO_RUN_INTERVAL_MS
-        value: "28800000"
+        value: "1800000"
+      - key: ARTICLE_INTEGRITY_INTERVAL_MS
+        value: "1800000"
+      - key: TOPIC_FEED_AUTO_REFRESH_INTERVAL_MS
+        value: "1800000"
       - key: NEWS_REFRESH_INTERVAL_MS
         value: "900000"
       - key: NEWS_REFRESH_IMAGE_ENRICH_LIMIT
@@ -34,6 +38,14 @@ services:
       - key: SUPER_ADMIN_USER
         sync: false
       - key: SUPER_ADMIN_PASSWORD
+        sync: false
+      - key: FULL_ADMIN_PASSWORD
+        sync: false
+      - key: CHEFFE_CALL_USER
+        sync: false
+      - key: CHEFFE_CALL_PASSWORD
+        sync: false
+      - key: SPRITE_CHECK_PASSWORD
         sync: false
       - key: POLL_ADMIN_PASSWORD
         sync: false

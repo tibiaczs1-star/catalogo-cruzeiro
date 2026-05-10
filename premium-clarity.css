@@ -1793,13 +1793,16 @@ body.editorial-home .mosaic-item.main .mosaic-copy {
 }
 
 body.editorial-home .mosaic-item.main h1 {
-  max-width: 13ch !important;
+  max-width: min(20ch, 100%) !important;
   color: #fff7ea !important;
-  font-size: clamp(2.1rem, 4.8vw, 4.85rem) !important;
+  font-size: clamp(1.9rem, 3.6vw, 3.65rem) !important;
   font-weight: 850 !important;
-  line-height: 0.9 !important;
+  line-height: 0.96 !important;
   text-wrap: balance !important;
-  -webkit-line-clamp: 4 !important;
+  -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
+  display: block !important;
+  overflow: visible !important;
 }
 
 body.editorial-home .mosaic-item.main p {
@@ -2005,8 +2008,12 @@ body.editorial-home .mosaic-item.main:hover::before {
   }
 
   body.editorial-home .mosaic-item.main h1 {
-    max-width: 14ch !important;
-    font-size: clamp(2rem, 11vw, 3.1rem) !important;
+    max-width: min(17ch, 100%) !important;
+    font-size: clamp(1.85rem, 9vw, 2.85rem) !important;
+    -webkit-line-clamp: unset !important;
+    line-clamp: unset !important;
+    display: block !important;
+    overflow: visible !important;
   }
 
   body.editorial-home .mosaic-side {

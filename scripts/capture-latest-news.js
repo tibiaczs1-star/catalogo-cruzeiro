@@ -457,6 +457,62 @@ function getTimestamp(item = {}) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getDayTimestamp(item = {}) {
+  const timestamp = getTimestamp(item);
+  if (!timestamp) return 0;
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) return 0;
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
+function isMailzaPriorityArticle(item = {}) {
+  const haystack = normalizeText(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  return /\b(mailza|maisa|mailsa|mailza assis|mailza assis cameli|governadora mailza|governadora em exercicio)\b/.test(
+    haystack
+  );
+}
+
+function getCategoryFlowScore(item = {}) {
+  const categoryKey = normalizeText(item.categoryKey || item.category || "");
+  const scores = {
+    prefeitura: 2600,
+    servicos: 2400,
+    "utilidade-publica": 2380,
+    saude: 2350,
+    seguranca: 2320,
+    educacao: 2280,
+    agenda: 2240,
+    cotidiano: 2180,
+    comunidade: 2140,
+    cidades: 2100,
+    "acre-governo": 1700,
+    esporte: 1450,
+    economia: 1360,
+    cultura: 1280,
+    politica: 1100,
+    entretenimento: 720,
+    buzz: 520,
+    fofocas: 520
+  };
+
+  return scores[categoryKey] || 400;
+}
+
 function getRegionalPriorityScore(item = {}) {
   const haystack = normalizeText(
     [
@@ -531,11 +587,17 @@ function mergeNewsItems(...collections) {
   });
 
   return [...map.values()].sort((left, right) => {
-    const dateDiff = getTimestamp(right) - getTimestamp(left);
-    if (dateDiff !== 0) return dateDiff;
+    const dateLayerDiff = getDayTimestamp(right) - getDayTimestamp(left);
+    if (dateLayerDiff !== 0) return dateLayerDiff;
+    const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
+    if (mailzaDiff !== 0) return mailzaDiff;
     const regionalDiff = getRegionalPriorityScore(right) - getRegionalPriorityScore(left);
     if (regionalDiff !== 0) return regionalDiff;
-    return Number(right.priority || 0) - Number(left.priority || 0);
+    const categoryDiff = getCategoryFlowScore(right) - getCategoryFlowScore(left);
+    if (categoryDiff !== 0) return categoryDiff;
+    const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
+    if (priorityDiff !== 0) return priorityDiff;
+    return getTimestamp(right) - getTimestamp(left);
   });
 }
 
@@ -586,7 +648,8 @@ function buildCuratedActiveWindow(items = [], limit = ACTIVE_WINDOW_LIMIT) {
     }
   };
 
-  // Garantia: mais destaque para Cruzeiro do Sul / Vale do Juruá sem jogar fora recência.
+  // Garantia: a capa segue data atual, Mailza/Mailsa, Cruzeiro do Sul, Juruá e Acre.
+  take((item) => isMailzaPriorityArticle(item));
   take((item) => getRegionalPriorityScore(item) >= 4200);
   take((item) => getRegionalPriorityScore(item) >= 3200);
   take(() => true);

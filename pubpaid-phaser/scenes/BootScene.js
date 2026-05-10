@@ -1,4 +1,4 @@
-import { ensureCoreSprites } from "../core/spriteFactory.js";
+import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
 export class BootScene extends Phaser.Scene {
@@ -14,10 +14,12 @@ export class BootScene extends Phaser.Scene {
     this.load.image("street-bg", "./assets/pubpaid-v2-street-bg-v1.png");
     this.load.image("interior-bg", "./assets/pubpaid-interior-v5.png");
     this.load.image("game-lobby-bg", "./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png");
+    this.load.image("game-pool-room", "./assets/pubpaid/lobby/pubpaid-lobby-bg-v2-crowd.png");
     this.load.image("game-darts-room", "./assets/pubpaid/lobby/pubpaid-darts-room-v1.png");
     this.load.image("game-checkers-room", "./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png");
     this.load.image("game-menu-damas-card", "./assets/pubpaid/lobby/pubpaid-menu-damas-card-v1.png");
     this.load.image("game-menu-dardos-card", "./assets/pubpaid/lobby/pubpaid-menu-dardos-card-v1.png");
+    this.load.image("ppg-car-side", "./assets/pubpaid/vehicles/pubpaid-car-side-v1.png");
     this.load.spritesheet("checkers-wood-tiles", "./assets/pubpaid/checkers/wood-tiles-oga.png", {
       frameWidth: 32,
       frameHeight: 32
@@ -37,7 +39,7 @@ export class BootScene extends Phaser.Scene {
   }
 
   create() {
-    ensureCoreSprites(this);
+    applyPixelTextureFilters(this);
     updateGameState({
       currentScene: "intro",
       focus: "placa PUB PAID",

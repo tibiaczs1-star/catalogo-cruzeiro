@@ -43,9 +43,11 @@
   const state = {
     items: [],
     activeCategory: "",
+    activePeriod: "",
     visibleItems: pageSize,
     ownsRendering: false,
     initialQueryApplied: false,
+    initialPeriodApplied: false,
     drawerOpen: false,
     drawerCloseTimer: 0
   };
@@ -596,6 +598,56 @@
     return new Date(Number(year), monthIndex[month] ?? 0, Number(day)).getTime();
   };
 
+  const getTodayStart = () => {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      timeZone: localeTimeZone
+    }).formatToParts(new Date());
+    const getPart = (type) => parts.find((part) => part.type === type)?.value || "";
+    return new Date(`${getPart("year")}-${getPart("month")}-${getPart("day")}T00:00:00`).getTime();
+  };
+
+  const getPeriodLabel = (period = "") => {
+    const labels = {
+      hoje: "hoje",
+      "7d": "últimos 7 dias",
+      "30d": "últimos 30 dias",
+      "3m": "últimos 3 meses",
+      "6m": "últimos 6 meses"
+    };
+    return labels[period] || "";
+  };
+
+  const getPeriodDays = (period = "") => {
+    const days = {
+      hoje: 1,
+      "7d": 7,
+      "30d": 30,
+      "3m": 92,
+      "6m": 183
+    };
+    return days[period] || 0;
+  };
+
+  const matchesPeriod = (article = {}, period = "") => {
+    const days = getPeriodDays(period);
+    if (!days) {
+      return true;
+    }
+
+    const timestamp = getSortTimestamp(article);
+    if (!timestamp) {
+      return false;
+    }
+
+    const todayStart = getTodayStart();
+    const start = todayStart - (days - 1) * 24 * 60 * 60 * 1000;
+    const end = todayStart + 24 * 60 * 60 * 1000 - 1;
+    return timestamp >= start && timestamp <= end;
+  };
+
   const articleImageFocusOverridesBySlug = {
     "stf-decide-que-piso-nacional-deve-ser-pago-a-professores-temporarios": "62% 12%",
     "governo-avanca-na-regularizacao-fundiaria-e-conclui-primeira-etapa-do-programa-em-assis-brasil":
@@ -903,7 +955,14 @@
     const category = normalizeText(normalizedArticle.category);
     const sourceName = normalizeText(normalizedArticle.sourceName);
     const sourceLabel = normalizeText(normalizedArticle.sourceLabel);
-    const haystack = normalizeText([title, lede, category, sourceName, sourceLabel].join(" "));
+    const date = normalizeText(
+      [
+        normalizedArticle.date,
+        normalizedArticle.publishedAt,
+        normalizedArticle.createdAt
+      ].join(" ")
+    );
+    const haystack = normalizeText([title, lede, category, sourceName, sourceLabel, date].join(" "));
     const terms = getSearchTerms(normalizedQuery);
 
     let score = 0;
@@ -1161,6 +1220,7 @@
     total: document.querySelector("#live-feed-total"),
     status: document.querySelector("#live-feed-status"),
     filters: document.querySelector("#live-feed-filters"),
+    periodButtons: document.querySelectorAll("[data-period-filter]"),
     updated: document.querySelector("#live-feed-updated"),
     focus: document.querySelector("#live-feed-focus"),
     sources: document.querySelector("#live-feed-sources"),
@@ -1177,7 +1237,33 @@
 
   const getInitialQuery = () => {
     try {
-      return String(new URLSearchParams(window.location.search).get("q") || "").trim();
+      const params = new URLSearchParams(window.location.search);
+      const directQuery = String(params.get("q") || params.get("busca") || "").trim();
+      if (directQuery) {
+        return directQuery;
+      }
+
+      if (String(params.get("periodo") || "").toLowerCase() === "hoje") {
+        return new Intl.DateTimeFormat("pt-BR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          timeZone: localeTimeZone
+        }).format(new Date());
+      }
+
+      return "";
+    } catch (_error) {
+      return "";
+    }
+  };
+
+  const getInitialPeriod = () => {
+    try {
+      const period = String(new URLSearchParams(window.location.search).get("periodo") || "")
+        .trim()
+        .toLowerCase();
+      return ["hoje", "7d", "30d", "3m", "6m"].includes(period) ? period : "";
     } catch (_error) {
       return "";
     }
@@ -1197,6 +1283,15 @@
 
     query.value = initialQuery;
     state.initialQueryApplied = true;
+  };
+
+  const applyInitialPeriod = () => {
+    if (state.initialPeriodApplied) {
+      return;
+    }
+
+    state.activePeriod = getInitialPeriod();
+    state.initialPeriodApplied = true;
   };
 
   const openArchiveDrawer = () => {
@@ -1251,7 +1346,12 @@
 
     const queryText = String(query?.value || "").trim();
     const activeCategory = String(state.activeCategory || "").trim();
-    const activeContext = [activeCategory, queryText ? `busca "${queryText}"` : ""].filter(Boolean);
+    const periodText = getPeriodLabel(state.activePeriod);
+    const activeContext = [
+      activeCategory,
+      periodText,
+      queryText ? `busca "${queryText}"` : ""
+    ].filter(Boolean);
 
     drawerCount.textContent = String(items.length);
     drawerLabel.textContent =
@@ -1312,7 +1412,7 @@
   const getFilteredItems = (queryNode) => {
     const queryValue = String(queryNode?.value || "").trim();
     const categoryFiltered = state.items.filter((article) =>
-      matchesCategory(article, state.activeCategory)
+      matchesCategory(article, state.activeCategory) && matchesPeriod(article, state.activePeriod)
     );
 
     if (!normalizeText(queryValue)) {
@@ -1493,11 +1593,37 @@
     });
   };
 
+  const renderPeriodFilters = () => {
+    const { periodButtons } = getNodes();
+    periodButtons.forEach((button) => {
+      const period = String(button.dataset.periodFilter || "");
+      const isActive = period === state.activePeriod;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", isActive ? "true" : "false");
+
+      if (button.dataset.bound === "true") {
+        return;
+      }
+
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        state.activePeriod = period;
+        state.visibleItems = pageSize;
+        renderArchive();
+      });
+    });
+  };
+
   const updateSummary = (filtered, visibleSlice) => {
     const { count, countLabel, total, status, updated, focus, sources, clear, query } = getNodes();
     const activeText = state.activeCategory ? state.activeCategory : "";
+    const periodText = getPeriodLabel(state.activePeriod);
     const queryText = String(query?.value || "").trim();
-    const activeContext = [activeText, queryText ? `busca "${queryText}"` : ""].filter(Boolean);
+    const activeContext = [
+      activeText,
+      periodText,
+      queryText ? `busca "${queryText}"` : ""
+    ].filter(Boolean);
     const summaryItems = filtered.length ? filtered : state.items;
 
     if (count) {
@@ -1558,6 +1684,7 @@
     grid.innerHTML = "";
     updateSummary(filtered, visibleSlice);
     renderFilters();
+    renderPeriodFilters();
     renderArchiveDrawer(filtered);
 
     if (!filtered.length) {
@@ -1600,6 +1727,7 @@
 
     clear?.addEventListener("click", () => {
       state.activeCategory = "";
+      state.activePeriod = "";
       state.visibleItems = pageSize;
       query.value = "";
       query.focus();
@@ -1617,6 +1745,7 @@
       });
     });
 
+    applyInitialPeriod();
     applyInitialQuery();
     renderArchive();
   };

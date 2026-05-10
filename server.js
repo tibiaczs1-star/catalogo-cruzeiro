@@ -30,26 +30,56 @@ try {
   QRCode = null;
 }
 
+function loadLocalEnvFile(fileName) {
+  const filePath = path.join(__dirname, fileName);
+  if (!fs.existsSync(filePath)) return;
+
+  const source = fs.readFileSync(filePath, "utf-8");
+  source.split(/\r?\n/).forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) return;
+
+    const divider = trimmed.indexOf("=");
+    if (divider <= 0) return;
+
+    const key = trimmed.slice(0, divider).trim();
+    let value = trimmed.slice(divider + 1).trim();
+    if (!key || Object.prototype.hasOwnProperty.call(process.env, key)) return;
+
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1);
+    }
+
+    process.env[key] = value;
+  });
+}
+
+loadLocalEnvFile(".env.local");
+loadLocalEnvFile(".env");
+
 const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
 
-function getRequiredSecret(name, fallbackValue) {
+function getRequiredSecret(name, fallbackValue = "") {
   const value = String(process.env[name] || "").trim();
   if (value) return value;
 
-  if (!IS_PRODUCTION) {
+  if (!IS_PRODUCTION && fallbackValue) {
     return fallbackValue;
   }
 
-  console.warn(`[security] Missing required env ${name} in production. Related admin access is disabled until it is set.`);
-  return `missing-${name.toLowerCase()}-in-production`;
+  console.warn(`[security] Missing required env ${name}. Related admin access is disabled until it is set.`);
+  return `disabled-${name.toLowerCase()}-${crypto.randomBytes(24).toString("hex")}`;
 }
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
-const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
-const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "99831455a");
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD");
+const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", SUPER_ADMIN_PASSWORD);
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();
@@ -72,9 +102,11 @@ const DATA_DIR = process.env.DATA_DIR
   ? path.resolve(process.env.DATA_DIR)
   : DEFAULT_DATA_DIR;
 const INDEX_FILE = path.join(ROOT_DIR, "index.html");
+const ADMIN_MASTER_FILE = path.join(ROOT_DIR, "backend", "public", "admin-master.html");
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
+const RE_RODADA_DIA_GERAL_REPORT_FILE = path.join(DATA_DIR, "re-rodada-dia-geral-report.json");
 const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
 const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(DATA_DIR, "news-image-focus-decisions.json");
 const SOCIAL_TRENDS_CACHE_FILE = path.join(DATA_DIR, "social-trends-cache.json");
@@ -96,6 +128,7 @@ const EDITORIAL_HEALTH_REPORT_JSON_FILE = path.join(DATA_DIR, "editorial-health-
 const EDITORIAL_HEALTH_REPORT_MD_FILE = path.join(DATA_DIR, "editorial-health-report.md");
 const CHEFFE_CALL_AUTONOMY_LOG_FILE = path.join(DATA_DIR, "cheffe-call-autonomy-log.json");
 const CHEFFE_CALL_IDE_ACTIONS_FILE = path.join(DATA_DIR, "cheffe-call-ide-actions.json");
+const MASTER_ADMIN_AUDIT_FILE = path.join(DATA_DIR, "master-admin-audit-log.json");
 const REVIEW_TEAM_REPORT_JSON_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.json");
 const REVIEW_TEAM_REPORT_MD_FILE = path.join(ROOT_DIR, ".codex-temp", "review-team", "latest-report.md");
 const REAL_AGENTS_AUTONOMY_REPORT_FILE = path.join(DATA_DIR, "agents-autonomy-report.json");
@@ -231,8 +264,12 @@ const WHATSAPP_CHAT_AUTOREPLY_TEXT = String(
   .replace(/\s+/g, " ")
   .trim()
   .slice(0, 1000);
-const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
-const FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "99831455A").trim();
+const RAW_FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "").trim();
+const FULL_ADMIN_PASSWORD = getRequiredSecret("FULL_ADMIN_PASSWORD", SUPER_ADMIN_PASSWORD).trim();
+const ALLOW_SUPER_ADMIN_AS_FULL = !RAW_FULL_ADMIN_PASSWORD;
+const CHEFFE_CALL_USER = getRequiredSecret("CHEFFE_CALL_USER", "chefecall");
+const CHEFFE_CALL_PASSWORD = getRequiredSecret("CHEFFE_CALL_PASSWORD", FULL_ADMIN_PASSWORD).trim();
+const SPRITE_CHECK_PASSWORD = getRequiredSecret("SPRITE_CHECK_PASSWORD", FULL_ADMIN_PASSWORD).trim();
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
@@ -2289,6 +2326,36 @@ function formatDisplayDate(value) {
 
 function cleanShortText(value, maxLength = 160) {
   return String(value || "").replace(/\s+/g, " ").trim().slice(0, maxLength);
+}
+
+function maskAuditActor(req) {
+  const userAgent = cleanShortText(req?.headers?.["user-agent"] || "", 120);
+  const forwarded = cleanShortText(req?.headers?.["x-forwarded-for"] || "", 80);
+  const remote = cleanShortText(req?.socket?.remoteAddress || "", 80);
+  return {
+    ip: forwarded ? `${forwarded.split(",")[0].trim().slice(0, 16)}...` : remote.slice(0, 16),
+    userAgent
+  };
+}
+
+function readMasterAuditLog() {
+  const payload = readJson(MASTER_ADMIN_AUDIT_FILE, []);
+  return Array.isArray(payload) ? payload : [];
+}
+
+function appendMasterAudit(req, entry = {}) {
+  const now = new Date().toISOString();
+  const log = readMasterAuditLog();
+  log.unshift({
+    at: now,
+    action: cleanShortText(entry.action || "master-action", 120),
+    endpoint: cleanShortText(entry.endpoint || "", 120),
+    ok: Boolean(entry.ok),
+    result: cleanShortText(entry.result || (entry.ok ? "ok" : "blocked"), 160),
+    payloadSummary: cleanShortText(entry.payloadSummary || "", 240),
+    actor: maskAuditActor(req)
+  });
+  writeJson(MASTER_ADMIN_AUDIT_FILE, log.slice(0, 500));
 }
 
 function hasPixKeyConfigured() {
@@ -6389,6 +6456,44 @@ function getPublicNewsTimestamp(item = {}) {
   return new Date(Number(match[3]), month, Number(match[1])).getTime();
 }
 
+function getPublicNewsDayTimestamp(item = {}) {
+  const timestamp = getPublicNewsTimestamp(item);
+  if (!timestamp) return 0;
+
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) return 0;
+
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
+function getEditorialCategoryFlowScore(item = {}) {
+  const categoryKey = normalizeText(item.categoryKey || item.category || "");
+  const scores = {
+    prefeitura: 2600,
+    servicos: 2400,
+    "utilidade-publica": 2380,
+    saude: 2350,
+    seguranca: 2320,
+    educacao: 2280,
+    agenda: 2240,
+    cotidiano: 2180,
+    comunidade: 2140,
+    cidades: 2100,
+    "acre-governo": 1700,
+    esporte: 1450,
+    economia: 1360,
+    cultura: 1280,
+    politica: 1100,
+    entretenimento: 720,
+    buzz: 520,
+    fofocas: 520,
+    mundo: 240,
+    tecnologia: 220
+  };
+
+  return scores[categoryKey] || 400;
+}
+
 function getEditorialFocusScore(item = {}) {
   const text = normalizeText(
     [
@@ -6403,7 +6508,9 @@ function getEditorialFocusScore(item = {}) {
       item.sourceUrl
     ].join(" ")
   );
-  if (isMailzaPriorityArticle(item)) return 900;
+  const categoryScore = getEditorialCategoryFlowScore(item);
+
+  if (isMailzaPriorityArticle(item)) return 9000 + categoryScore;
 
   const isAcre = /\b(acre|rio branco|sena madureira|feijo|feij[oó]|xapuri|brasileia|epitaciolandia|assis brasil|placido de castro)\b/.test(
     text
@@ -6423,18 +6530,19 @@ function getEditorialFocusScore(item = {}) {
       text
     );
 
-  if (isCruzeiro) return 380 + (isImportant ? 50 : 0);
-  if (isValeJurua) return 300 + (isImportant ? 40 : 0);
-  if (isAcre) return 220 + (isImportant ? 35 : 0);
-  if (isImportant) return 80;
-  if (isGlobalEntertainment) return 90;
-  return 40;
+  if (isCruzeiro) return 8000 + categoryScore + (isImportant ? 50 : 0);
+  if (isValeJurua) return 7000 + categoryScore + (isImportant ? 40 : 0);
+  if (isAcre) return 6000 + categoryScore + (isImportant ? 35 : 0);
+  if (categoryScore > 400) return 2000 + categoryScore;
+  if (isImportant) return 1200;
+  if (isGlobalEntertainment) return 700;
+  return 400;
 }
 
 function sortArticleItems(left, right) {
-  const dateDiff = getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
-  if (dateDiff !== 0) {
-    return dateDiff;
+  const dateLayerDiff = getPublicNewsDayTimestamp(right) - getPublicNewsDayTimestamp(left);
+  if (dateLayerDiff !== 0) {
+    return dateLayerDiff;
   }
 
   const rightFocus = getEditorialFocusScore(right);
@@ -6443,7 +6551,10 @@ function sortArticleItems(left, right) {
     return rightFocus - leftFocus;
   }
 
-  return Number(right.priority || 0) - Number(left.priority || 0);
+  const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
+  if (priorityDiff !== 0) return priorityDiff;
+
+  return getPublicNewsTimestamp(right) - getPublicNewsTimestamp(left);
 }
 
 function getArticleRecordQualityScore(item = {}) {
@@ -6641,6 +6752,52 @@ function getArticleBySlug(slug) {
   }
 
   const targetSlug = normalizeLookupSlug(slug);
+  const staticDetailFallbacks = {
+    "prefeitura-bairros-e-servicos-entram-na-leitura-principal": normalizeArticleRecord({
+      id: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
+      slug: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
+      title: "Prefeitura, bairros e serviços entram na leitura principal",
+      eyebrow: "Cruzeiro do Sul",
+      date: "08 de maio de 2026",
+      publishedAt: "2026-05-08T08:20:00-05:00",
+      category: "Cruzeiro do Sul",
+      sourceName: "Catálogo Cruzeiro do Sul",
+      sourceUrl: "./arquivo.html?busca=Cruzeiro%20do%20Sul",
+      sourceLabel: "Resumo local organizado pelo Catálogo Cruzeiro do Sul.",
+      imageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+      feedImageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+      sourceImageUrl: "./assets/home-cache/buzz-via-cruzeiro.jpg",
+      imageCredit: "Imagem de apoio do acervo visual do portal",
+      imageFocus: "center 48%",
+      lede:
+        "A leitura diária da cidade passa a reunir obras, atendimento, agenda pública e avisos úteis em um mesmo caminho, para que o morador encontre rápido o que muda na rotina.",
+      summary:
+        "O destaque organiza temas de prefeitura, bairros e serviços públicos com linguagem curta, fonte identificada quando houver e ligação com as áreas de serviço, arquivo e notícias locais.",
+      analysis:
+        "A proposta desta matéria é separar o que realmente ajuda a rotina do leitor: obras em andamento, mudanças em atendimento, avisos de órgãos públicos, prazos e informações de bairro.",
+      body: [
+        "Cruzeiro do Sul tem uma rotina de informações espalhadas entre prefeitura, órgãos públicos, comunidades, comércio, agenda e serviços essenciais.",
+        "A leitura principal do portal organiza esse fluxo por impacto: primeiro o que mexe com deslocamento, atendimento, serviços, bairros e prazos.",
+        "A cada nova atualização, a matéria pode apontar para a área correta do portal: notícias locais, serviços úteis, agenda, catálogo telefônico, fontes monitoradas ou arquivo do mês.",
+        "Quando a informação depender de confirmação externa, o portal deve tratar como acompanhamento e direcionar o leitor para a origem."
+      ],
+      highlights: [
+        "Bairros, serviços e agenda pública ficam reunidos por impacto local",
+        "Cada destaque aponta para uma área real do portal",
+        "A fonte deve aparecer sempre que estiver disponível",
+        "Avisos sem confirmação entram como acompanhamento"
+      ],
+      development: [
+        "Integrar fontes oficiais para automatizar avisos de serviços e obras.",
+        "Criar filtros por bairro, órgão público e tipo de atendimento."
+      ]
+    })
+  };
+
+  if (staticDetailFallbacks[targetSlug]) {
+    return staticDetailFallbacks[targetSlug];
+  }
+
   return (
     getArticleNews(1000).find((item) => {
       if (normalizeLookupSlug(item.slug) === targetSlug) {
@@ -6666,16 +6823,7 @@ function buildNewsArchivePayload(limit = 500) {
     }
   });
 
-  const sorted = Array.from(map.values()).sort((left, right) => {
-    const rightDate = new Date(right.publishedAt || right.date || 0).getTime();
-    const leftDate = new Date(left.publishedAt || left.date || 0).getTime();
-
-    if (rightDate !== leftDate) {
-      return rightDate - leftDate;
-    }
-
-    return Number(right.priority || 0) - Number(left.priority || 0);
-  });
+  const sorted = Array.from(map.values()).sort(sortArticleItems);
 
   const archiveItems = repairNewsImagesForDisplay(diversifyArchiveStories(sorted, safeLimit).slice(0, safeLimit));
 
@@ -7186,17 +7334,7 @@ function getNews(limit = 30) {
     if (!map.has(key)) map.set(key, item);
   });
 
-  return Array.from(map.values())
-    .sort((a, b) => {
-      const dateDiff = getPublicNewsTimestamp(b) - getPublicNewsTimestamp(a);
-      if (dateDiff !== 0) return dateDiff;
-
-      const focus = getEditorialFocusScore(b) - getEditorialFocusScore(a);
-      if (focus !== 0) return focus;
-
-      return Number(b.priority || 0) - Number(a.priority || 0);
-    })
-    .slice(0, limit);
+  return Array.from(map.values()).sort(sortArticleItems).slice(0, limit);
 }
 
 function getBusinesses(cityFilter) {
@@ -7229,13 +7367,15 @@ function parseBasicAuth(req) {
 function requireAdmin(req) {
   const tokenFromHeader = req.headers["x-admin-token"];
   const tokenFromQuery = new URL(req.url, `http://${req.headers.host}`).searchParams.get("token");
+  const masterFromHeader = req.headers["x-full-admin-password"] || req.headers["x-admin-password"];
   const basic = parseBasicAuth(req);
   const hasValidBasic =
     basic?.user === SUPER_ADMIN_USER && basic?.password === SUPER_ADMIN_PASSWORD;
   const hasValidToken =
     Boolean(ADMIN_TOKEN) && (tokenFromHeader === ADMIN_TOKEN || tokenFromQuery === ADMIN_TOKEN);
+  const hasValidMaster = hasFullAdminPassword(masterFromHeader);
 
-  return hasValidBasic || hasValidToken;
+  return hasValidBasic || hasValidToken || hasValidMaster;
 }
 
 const SPRITE_IMAGE_EXTENSIONS = new Set([".png", ".jpg", ".jpeg", ".webp", ".svg"]);
@@ -7301,9 +7441,19 @@ function hasFullAdminPassword(value) {
   const token = cleanShortText(value, 160);
   return Boolean(token) && (
     token === FULL_ADMIN_PASSWORD ||
-    token === SUPER_ADMIN_PASSWORD ||
-    token.toLowerCase() === SUPER_ADMIN_PASSWORD.toLowerCase() ||
-    token.toLowerCase() === FULL_ADMIN_PASSWORD.toLowerCase()
+    token.toLowerCase() === FULL_ADMIN_PASSWORD.toLowerCase() ||
+    (
+      ALLOW_SUPER_ADMIN_AS_FULL &&
+      (token === SUPER_ADMIN_PASSWORD || token.toLowerCase() === SUPER_ADMIN_PASSWORD.toLowerCase())
+    )
+  );
+}
+
+function hasCheffeCallPassword(value) {
+  const token = cleanShortText(value, 160);
+  return Boolean(token) && (
+    token === CHEFFE_CALL_PASSWORD ||
+    token.toLowerCase() === CHEFFE_CALL_PASSWORD.toLowerCase()
   );
 }
 
@@ -7314,7 +7464,13 @@ function requireSpriteCheckAccess(req, body = {}) {
 
 function requireFullAdminOrderAccess(req, body = {}) {
   const authValue = getAuthValue(req, body);
-  return hasFullAdminPassword(authValue) || requireAdmin(req);
+  const basic = parseBasicAuth(req);
+  return (
+    hasFullAdminPassword(authValue) ||
+    hasCheffeCallPassword(authValue) ||
+    (basic?.user === CHEFFE_CALL_USER && hasCheffeCallPassword(basic?.password)) ||
+    requireAdmin(req)
+  );
 }
 
 function requireFullAdminPasswordAccess(req, body = {}) {
@@ -8711,6 +8867,174 @@ function buildPublicDailyAgentPulse() {
     })),
     readers: readerItems,
     actions: actionItems
+  };
+}
+
+function buildMasterAdminHubPayload() {
+  const admin = buildAdminDashboardPayload();
+  const agents = buildRealAgentsPayload();
+  const cheffe = buildCheffeCallPayload();
+  const reviewReport = readJson(REVIEW_TEAM_REPORT_JSON_FILE, null);
+  const syncReport = readJson(path.join(ROOT_DIR, ".codex-temp", "online-local-sync", "latest-report.json"), null);
+  const captureReport = readJson(path.join(DATA_DIR, "latest-news-capture-report.json"), null);
+  const dailyRoundReport = readJson(RE_RODADA_DIA_GERAL_REPORT_FILE, null);
+  const articleIntegrity = readJson(ARTICLE_INTEGRITY_REPORT_FILE, null);
+  const editorialHealth = readJson(EDITORIAL_HEALTH_REPORT_JSON_FILE, null);
+  const storage = buildStorageHealthPayload({ writeProbe: false });
+  const agentSummary = agents?.summary || {};
+  const adminTotals = admin?.totals || {};
+  const reviewIssues = Number(reviewReport?.summary?.totalIssues || 0);
+  const syncOk = syncReport ? Boolean(syncReport.ok) : false;
+  const captureItems = Number(captureReport?.capturedItems || captureReport?.totalItems || 0);
+  const syncNewsStep = Array.isArray(syncReport?.steps)
+    ? syncReport.steps.find((step) => step?.name === "sync online news to local")
+    : null;
+  let syncNewsPayload = null;
+  try {
+    syncNewsPayload = syncNewsStep?.stdout ? JSON.parse(syncNewsStep.stdout) : null;
+  } catch {
+    syncNewsPayload = null;
+  }
+  const sourceReports = Array.isArray(captureReport?.directCapture?.reports)
+    ? captureReport.directCapture.reports
+    : (Array.isArray(syncNewsPayload?.directCapture?.reports)
+        ? syncNewsPayload.directCapture.reports
+        : (Array.isArray(dailyRoundReport?.directCapture?.reports)
+            ? dailyRoundReport.directCapture.reports
+            : (Array.isArray(captureReport?.reports) ? captureReport.reports : [])));
+  const sourceHealth = sourceReports.slice(0, 24).map((item) => ({
+    source: cleanShortText(item.source || item.name || "fonte", 80),
+    status: item.ok ? (Number(item.count || 0) > 0 ? "ok" : "vazia") : "erro",
+    count: Number(item.count || 0),
+    error: cleanShortText(item.error || "", 120)
+  }));
+  const auditLog = readMasterAuditLog().slice(0, 20);
+
+  return {
+    ok: true,
+    updatedAt: new Date().toISOString(),
+    title: "Central Master do Catálogo",
+    auth: {
+      mode: "full-admin-password",
+      passwordExposed: false,
+      note: "Senha conferida no backend. O HTML nao contem a senha master."
+    },
+    links: [
+      { id: "dashboard", label: "Dashboard completo", href: "/admin/admin-dashboard.html", area: "controle" },
+      { id: "cheffe", label: "Chefe Call", href: "/cheffe-call.html", area: "reuniao" },
+      { id: "office-main", label: "Escritório principal", href: "/escritorio.html", area: "agentes" },
+      { id: "office-ninjas", label: "Escritório Ninjas", href: "/escritorio-ninjas.html", area: "servicos" },
+      { id: "office-nerd", label: "Escritório Nerd", href: "/escritorio-nerd.html", area: "comunidade" },
+      { id: "office-arte", label: "Escritório Arte", href: "/escritorio-arte.html", area: "visual" },
+      { id: "capture", label: "Agregador de notícias", href: "/api/news/aggregator?limit=50", area: "captacao" },
+      { id: "home", label: "Home pública", href: "/index.html?skipIntro=1&skipWelcome=1", area: "publico" }
+    ],
+    statusCards: [
+      {
+        label: "Agentes",
+        value: Number(agentSummary.totalAgents || 0),
+        detail: agents?.autoRun?.enabled
+          ? `${Number(agentSummary.totalOffices || 0)} escritorios, ciclo ${Math.round(Number(agents.autoRun.intervalMs || 0) / 60000)} min`
+          : `${Number(agentSummary.totalOffices || 0)} escritorios, ${Number(agentSummary.deliveredAgents || 0)} entregas`
+      },
+      {
+        label: "Noticias no admin",
+        value: Number(adminTotals.news || 0),
+        detail: `${captureItems || 0} itens no ultimo relatorio de captacao`
+      },
+      {
+        label: "Review team",
+        value: reviewIssues,
+        detail: reviewIssues ? "ha achados para corrigir antes de publicar" : "sem achados no ultimo relatorio"
+      },
+      {
+        label: "Sync online/offline",
+        value: syncReport ? (syncOk ? "OK" : "Revisar") : "Pendente",
+        detail: syncReport?.finishedAt || "rode npm run sync:online-local antes de deploy"
+      },
+      {
+        label: "Chefe Call",
+        value: cheffe?.active ? "Ativa" : "Livre",
+        detail: cheffe?.lastInstruction || "pronta para abrir reuniao com os agentes"
+      },
+      {
+        label: "Storage",
+        value: storage?.mode || "local",
+        detail: storage?.target || "data/"
+      }
+    ],
+    reports: {
+      review: {
+        ok: Boolean(reviewReport),
+        totalIssues: reviewIssues,
+        generatedAt: reviewReport?.generatedAt || ""
+      },
+      sync: syncReport
+        ? {
+            ok: Boolean(syncReport.ok),
+            startedAt: syncReport.startedAt || "",
+            finishedAt: syncReport.finishedAt || "",
+            steps: Array.isArray(syncReport.steps)
+              ? syncReport.steps.map((step) => ({
+                  name: step.name,
+                  status: step.status,
+                  exitCode: step.exitCode
+                }))
+              : []
+          }
+        : null,
+      capture: captureReport || null,
+      agentsRuntime: {
+        autoRun: agents?.autoRun || null,
+        autonomy: agents?.autonomy || null,
+        lastRun: agents?.lastRun || null
+      },
+      sourceHealth,
+      audit: {
+        total: readMasterAuditLog().length,
+        recent: auditLog
+      },
+      articleIntegrity,
+      editorialHealth
+    },
+    suggestions: [
+      {
+        priority: "agora",
+        title: "Centralizar operacao no hub master",
+        detail: "Usar /admin como porta unica e deixar dashboard, Chefe Call, escritorios, captacao e relatorios como destinos internos."
+      },
+      {
+        priority: "agora",
+        title: "Fechar ciclo online/offline antes de deploy",
+        detail: "Rodar sync, sanitizer, review team, auditoria de imagens e agentes; bloquear publicacao se totalIssues for maior que zero."
+      },
+      {
+        priority: "proximo",
+        title: "Transformar captacao em fila visual",
+        detail: "Separar itens captados em Novo, Em revisao, Pronto, Sem fonte e Rejeitado, com origem e imagem visiveis."
+      },
+      {
+        priority: "proximo",
+        title: "Dar painel proprio para Chefe Call",
+        detail: "Mostrar reuniao ativa, decisoes aguardando aprovacao, provas geradas e botoes de liberar, limpar ou executar acao."
+      },
+      {
+        priority: "depois",
+        title: "Migrar status critico para banco persistente",
+        detail: "Manter arquivos locais como fallback, mas levar filas, votos, assinaturas, acoes dos agentes e relatorios para storage duravel."
+      }
+    ],
+    adminSummary: {
+      totals: adminTotals,
+      period: admin?.period || null,
+      storage: admin?.storage || null
+    },
+    agentsSummary: agentSummary,
+    cheffeSummary: {
+      active: Boolean(cheffe?.active),
+      lastInstruction: cheffe?.lastInstruction || "",
+      sessions: Array.isArray(cheffe?.sessions) ? cheffe.sessions.length : 0
+    }
   };
 }
 
@@ -13370,6 +13694,51 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, { ok: true });
   }
 
+  if (req.method === "POST" && pathname === "/api/master-admin/access") {
+    const body = await parseBody(req);
+    if (!requireFullAdminPasswordAccess(req, body)) {
+      appendMasterAudit(req, {
+        action: "master access",
+        endpoint: "POST /api/master-admin/access",
+        ok: false,
+        result: "senha invalida"
+      });
+      return sendJson(res, 401, { ok: false, error: "Senha master invalida." });
+    }
+
+    appendMasterAudit(req, {
+      action: "master access",
+      endpoint: "POST /api/master-admin/access",
+      ok: true,
+      result: "central aberta"
+    });
+    return sendJson(res, 200, {
+      ok: true,
+      unlockedAt: new Date().toISOString(),
+      hub: buildMasterAdminHubPayload()
+    });
+  }
+
+  if (req.method === "GET" && pathname === "/api/master-admin/summary") {
+    if (!requireFullAdminPasswordAccess(req)) {
+      appendMasterAudit(req, {
+        action: "master summary",
+        endpoint: "GET /api/master-admin/summary",
+        ok: false,
+        result: "sem senha master"
+      });
+      return sendJson(res, 401, { ok: false, error: "Senha master obrigatoria." });
+    }
+
+    appendMasterAudit(req, {
+      action: "master summary",
+      endpoint: "GET /api/master-admin/summary",
+      ok: true,
+      result: "resumo entregue"
+    });
+    return sendJson(res, 200, buildMasterAdminHubPayload());
+  }
+
   if (req.method === "GET" && pathname === "/api/sprites-check") {
     if (!requireSpriteCheckAccess(req)) {
       return sendJson(res, 401, { ok: false, error: "Senha do CHECKPUBPAID obrigatoria." });
@@ -13633,8 +14002,21 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "POST" && pathname === "/api/cheffe-call/ecosystem-study") {
     const body = await parseBody(req);
     if (!requireFullAdminOrderAccess(req, body)) {
+      appendMasterAudit(req, {
+        action: "cheffe ecosystem study",
+        endpoint: "POST /api/cheffe-call/ecosystem-study",
+        ok: false,
+        result: "acesso negado"
+      });
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
+    appendMasterAudit(req, {
+      action: "cheffe ecosystem study",
+      endpoint: "POST /api/cheffe-call/ecosystem-study",
+      ok: true,
+      result: "estudo registrado",
+      payloadSummary: body.instruction || body.message || body.trigger || ""
+    });
     return sendJson(res, 201, {
       ok: true,
       study: recordRealAgentsEcosystemStudy({
@@ -13647,22 +14029,55 @@ async function handleApi(req, res, pathname, searchParams) {
   if (req.method === "POST" && pathname === "/api/cheffe-call/start") {
     const body = await parseBody(req);
     if (!requireFullAdminOrderAccess(req, body)) {
+      appendMasterAudit(req, {
+        action: "cheffe start",
+        endpoint: "POST /api/cheffe-call/start",
+        ok: false,
+        result: "acesso negado"
+      });
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
+    appendMasterAudit(req, {
+      action: "cheffe start",
+      endpoint: "POST /api/cheffe-call/start",
+      ok: true,
+      result: "reuniao aberta",
+      payloadSummary: body.instruction || body.message || ""
+    });
     return sendJson(res, 201, await startCheffeCallSession(body));
   }
 
   if (req.method === "POST" && pathname === "/api/cheffe-call/action") {
     const body = await parseBody(req);
     if (!requireFullAdminOrderAccess(req, body)) {
+      appendMasterAudit(req, {
+        action: "cheffe action",
+        endpoint: "POST /api/cheffe-call/action",
+        ok: false,
+        result: "acesso negado"
+      });
       return sendJson(res, 401, { ok: false, error: "Acesso restrito ao Full Admin." });
     }
 
     const result = applyCheffeCallAction(body);
     if (!result.ok) {
+      appendMasterAudit(req, {
+        action: "cheffe action",
+        endpoint: "POST /api/cheffe-call/action",
+        ok: false,
+        result: result.error || "acao recusada",
+        payloadSummary: body.title || body.action || body.text || ""
+      });
       return sendJson(res, result.status || 400, result);
     }
+    appendMasterAudit(req, {
+      action: "cheffe action",
+      endpoint: "POST /api/cheffe-call/action",
+      ok: true,
+      result: "acao registrada",
+      payloadSummary: body.title || body.action || body.text || ""
+    });
     return sendJson(res, 200, {
       ...result.payload,
       action: result.action,
@@ -15932,6 +16347,12 @@ function handleStatic(req, res, pathname, requestUrl) {
   ) {
     if (pathname === "/pubpaid-admin" || pathname === "/pubpaid-admin/" || pathname === "/pubpaid-admin.html") {
       return sendFile(req, res, PUBPAID_ADMIN_FILE, {
+        cacheControl: "no-store",
+        templateVars
+      });
+    }
+    if (pathname === "/admin" || pathname === "/admin/") {
+      return sendFile(req, res, ADMIN_MASTER_FILE, {
         cacheControl: "no-store",
         templateVars
       });

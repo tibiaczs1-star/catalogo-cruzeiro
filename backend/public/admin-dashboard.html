@@ -693,7 +693,7 @@
       <section class="card" id="accessCard" hidden>
         <h2>Acesso administrativo</h2>
           <p class="mini-note">
-          Use este bloco quando o painel abrir fora do servidor principal. O acesso padrao usa o usuario <strong>admin</strong> com a senha configurada no backend.
+          Use este bloco quando o painel abrir fora do servidor principal. A senha master/admin existente tambem libera os dados do painel sem ficar gravada no HTML.
           </p>
         <form class="admin-auth-form" id="accessForm">
           <div class="admin-auth-grid">
@@ -710,12 +710,12 @@
               <input id="userInput" type="text" placeholder="admin" autocomplete="username" />
             </label>
             <label class="field">
-              <span>Senha</span>
-              <input id="passwordInput" type="password" placeholder="Digite a senha administrativa" autocomplete="current-password" />
+              <span>Senha master/admin</span>
+              <input id="passwordInput" type="password" placeholder="Digite a senha master" autocomplete="current-password" />
             </label>
           </div>
           <div class="actions">
-            <button class="btn" type="submit">Entrar no dashboard</button>
+            <button class="btn" type="submit">Entrar com senha master</button>
             <button class="btn" id="clearAccessButton" type="button">Limpar credenciais</button>
           </div>
           <p class="mini-note" id="accessFeedback"></p>
@@ -1475,6 +1475,7 @@
       }
 
       const ACCESS_STORAGE_KEY = "catalogo_admin_access_v1";
+      const MASTER_ACCESS_STORAGE_KEY = "catalogo_master_access_v1";
       let latestAccess = null;
       let latestDashboardData = null;
 
@@ -1485,6 +1486,14 @@
       function getStoredAccess() {
         try {
           return JSON.parse(sessionStorage.getItem(ACCESS_STORAGE_KEY) || "{}");
+        } catch {
+          return {};
+        }
+      }
+
+      function getStoredMasterAccess() {
+        try {
+          return JSON.parse(sessionStorage.getItem(MASTER_ACCESS_STORAGE_KEY) || "{}");
         } catch {
           return {};
         }
@@ -1518,16 +1527,19 @@
       function resolveAccess() {
         const params = new URLSearchParams(location.search);
         const stored = getStoredAccess();
+        const masterStored = getStoredMasterAccess();
         const apiBase = normalizeBase(
           params.get("apiBase") ||
             stored.apiBase ||
+            masterStored.apiBase ||
             (location.protocol === "file:" ? "http://localhost:3000" : location.origin)
         );
         const token = String(params.get("token") || stored.token || "").trim();
         const auth = String(stored.auth || "").trim();
         const user = String(stored.user || "").trim();
+        const masterPassword = String(stored.masterPassword || masterStored.masterPassword || "").trim();
 
-        return { apiBase, token, auth, user };
+        return { apiBase, token, auth, user, masterPassword };
       }
 
       function buildHeaders(access) {
@@ -1537,6 +1549,9 @@
         }
         if (access?.auth) {
           headers.Authorization = access.auth;
+        }
+        if (access?.masterPassword) {
+          headers["x-full-admin-password"] = access.masterPassword;
         }
         return headers;
       }
@@ -1620,7 +1635,7 @@
 
           const data = await response.json().catch(() => ({}));
           if (response.status === 401) {
-            toggleAccessCard(true, "Informe o usuario admin com a senha do backend ou um token admin para liberar o painel.");
+            toggleAccessCard(true, "Informe a senha master/admin ou um token admin para liberar o painel.");
           }
           if (!response.ok || data.ok === false) {
             throw new Error(data.error || "Falha ao carregar o dashboard");
@@ -2061,8 +2076,14 @@
           apiBase,
           token,
           auth,
-          user
+          user,
+          masterPassword: password
         });
+        try {
+          sessionStorage.setItem(MASTER_ACCESS_STORAGE_KEY, JSON.stringify({ apiBase, masterPassword: password }));
+        } catch {
+          // ignore
+        }
 
         toggleAccessCard(true, "Tentando autenticar no dashboard...");
         loadDashboard();
@@ -2070,6 +2091,11 @@
 
       document.getElementById("clearAccessButton")?.addEventListener("click", () => {
         clearStoredAccess();
+        try {
+          sessionStorage.removeItem(MASTER_ACCESS_STORAGE_KEY);
+        } catch {
+          // ignore
+        }
         syncAccessForm();
         toggleAccessCard(true, "Credenciais locais removidas.");
       });

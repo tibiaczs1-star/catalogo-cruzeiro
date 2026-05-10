@@ -261,6 +261,83 @@ function getNewsTimestamp(item = {}) {
   return Number.isNaN(timestamp) ? 0 : timestamp;
 }
 
+function getNewsDayTimestamp(item = {}) {
+  const timestamp = getNewsTimestamp(item);
+  if (!timestamp) return 0;
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) return 0;
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
+function getRegionalPriorityScore(item = {}) {
+  const text = slugify(
+    [
+      item.title,
+      item.summary,
+      item.lede,
+      item.description,
+      item.category,
+      item.categoryKey,
+      item.eyebrow,
+      item.sourceName,
+      item.sourceLabel,
+      item.sourceUrl,
+      Array.isArray(item.body) ? item.body.join(" ") : item.body
+    ].join(" ")
+  );
+
+  if (/\b(cruzeiro-do-sul|cruzeirodosul|czs)\b/.test(text)) return 5000;
+  if (/\b(vale-do-jurua|jurua|mancio-lima|rodrigues-alves|porto-walter|marechal-thaumaturgo|tarauaca|jurua24horas|juruaemtempo|juruacomunicacao|tribunadojurua|portaldojurua)\b/.test(text)) return 4200;
+  if (/\b(acre|rio-branco|sena-madureira|feijo|xapuri|brasileia|epitaciolandia|assis-brasil|placido-de-castro|agencia-acre|ac24horas|contilnet|acrenews)\b/.test(text)) return 3200;
+  if (/\b(brasil|brasilia|stf|senado|congresso|governo-federal|agencia-brasil|g1|cnn-brasil)\b/.test(text)) return 900;
+  return 0;
+}
+
+function getCategoryFlowScore(item = {}) {
+  const categoryKey = slugify(item.categoryKey || item.category || "");
+  const scores = {
+    prefeitura: 2600,
+    servicos: 2400,
+    "utilidade-publica": 2380,
+    saude: 2350,
+    seguranca: 2320,
+    educacao: 2280,
+    agenda: 2240,
+    cotidiano: 2180,
+    comunidade: 2140,
+    cidades: 2100,
+    "acre-governo": 1700,
+    esporte: 1450,
+    economia: 1360,
+    cultura: 1280,
+    politica: 1100,
+    entretenimento: 720,
+    buzz: 520,
+    fofocas: 520
+  };
+
+  return scores[categoryKey] || 400;
+}
+
+function compareNewsByEditorialFlow(left = {}, right = {}) {
+  const dateLayerDiff = getNewsDayTimestamp(right) - getNewsDayTimestamp(left);
+  if (dateLayerDiff !== 0) return dateLayerDiff;
+
+  const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
+  if (mailzaDiff !== 0) return mailzaDiff;
+
+  const regionalDiff = getRegionalPriorityScore(right) - getRegionalPriorityScore(left);
+  if (regionalDiff !== 0) return regionalDiff;
+
+  const categoryDiff = getCategoryFlowScore(right) - getCategoryFlowScore(left);
+  if (categoryDiff !== 0) return categoryDiff;
+
+  const priorityDiff = Number(right.priority || 0) - Number(left.priority || 0);
+  if (priorityDiff !== 0) return priorityDiff;
+
+  return getNewsTimestamp(right) - getNewsTimestamp(left);
+}
+
 function getArticleSourceKey(item = {}) {
   const sourceName = slugify(item.sourceName || item.source || item.provider || "");
   if (sourceName) return sourceName;
@@ -312,11 +389,7 @@ function mergeNewsCollections(...collections) {
     map.set(key, itemScore >= existingScore ? { ...existing, ...item } : { ...item, ...existing });
   });
 
-  return [...map.values()].sort((left, right) => {
-    const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
-    if (dateDiff !== 0) return dateDiff;
-    return Number(right.priority || 0) - Number(left.priority || 0);
-  });
+  return [...map.values()].sort(compareNewsByEditorialFlow);
 }
 
 function promoteMailzaPriority(items = []) {
@@ -333,15 +406,7 @@ function promoteMailzaPriority(items = []) {
         editorialPriority: "mailza-prioridade"
       };
     })
-    .sort((left, right) => {
-      const mailzaDiff = Number(isMailzaPriorityArticle(right)) - Number(isMailzaPriorityArticle(left));
-      if (mailzaDiff !== 0) return mailzaDiff;
-
-      const dateDiff = getNewsTimestamp(right) - getNewsTimestamp(left);
-      if (dateDiff !== 0) return dateDiff;
-
-      return Number(right.priority || 0) - Number(left.priority || 0);
-    });
+    .sort(compareNewsByEditorialFlow);
 }
 
 function buildLocalArticleHints() {

@@ -1,8 +1,8 @@
 import { GAME_HEIGHT, GAME_WIDTH, STREET_BOUNDS } from "../config/gameConfig.js";
-import { addIdleSpriteActor, ensureCoreSprites, PUBPAID_WORLD_SCALE, TEXTURE_KEYS } from "../core/spriteFactory.js";
+import { PUBPAID_TEXTURE_KEYS, PUBPAID_WORLD_SCALE, fitImageToHeight } from "../core/assetRegistry.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { openPanel } from "../ui/panelActions.js";
-import { updateGameState } from "../core/gameState.js";
+import { gameState, updateGameState } from "../core/gameState.js";
 
 const TERMINAL_PANEL = {
   kicker: "terminal",
@@ -18,6 +18,73 @@ const GOOGLE_PANEL = {
   body: "Google Port está parado para os experimentos locais. Quando o modo real estiver ativo, este ponto abre a conexão da conta.",
   chips: ["google", "modo local", "sem bloqueio"],
   actions: [{ id: "close-panel", label: "Fechar", primary: true }]
+};
+
+const STREET_RAIN_DROPS = [
+  { x: 72, y: 318, length: 30, speed: 7.2, alpha: 0.1 },
+  { x: 156, y: 402, length: 36, speed: 8.4, alpha: 0.14 },
+  { x: 238, y: 284, length: 24, speed: 6.8, alpha: 0.09 },
+  { x: 326, y: 538, length: 38, speed: 9.6, alpha: 0.18 },
+  { x: 412, y: 356, length: 28, speed: 7.8, alpha: 0.12 },
+  { x: 504, y: 646, length: 40, speed: 10.2, alpha: 0.2 },
+  { x: 590, y: 300, length: 26, speed: 7.1, alpha: 0.11 },
+  { x: 676, y: 492, length: 34, speed: 8.9, alpha: 0.16 },
+  { x: 758, y: 378, length: 32, speed: 8.1, alpha: 0.13 },
+  { x: 842, y: 590, length: 38, speed: 9.9, alpha: 0.19 },
+  { x: 926, y: 330, length: 24, speed: 6.9, alpha: 0.1 },
+  { x: 1014, y: 454, length: 30, speed: 8.6, alpha: 0.15 },
+  { x: 1098, y: 676, length: 36, speed: 10.5, alpha: 0.18 },
+  { x: 1180, y: 416, length: 28, speed: 7.6, alpha: 0.12 },
+  { x: 64, y: 628, length: 40, speed: 10.1, alpha: 0.17 },
+  { x: 210, y: 520, length: 26, speed: 7.4, alpha: 0.11 },
+  { x: 372, y: 692, length: 34, speed: 9.4, alpha: 0.16 },
+  { x: 548, y: 448, length: 30, speed: 8.2, alpha: 0.13 },
+  { x: 712, y: 632, length: 38, speed: 9.8, alpha: 0.18 },
+  { x: 884, y: 280, length: 24, speed: 6.7, alpha: 0.09 },
+  { x: 1048, y: 566, length: 36, speed: 9.2, alpha: 0.15 },
+  { x: 1216, y: 352, length: 32, speed: 8.5, alpha: 0.14 }
+];
+
+const STREET_RAIN_RESET_POINTS = [
+  { x: 86, y: 248 },
+  { x: 244, y: 280 },
+  { x: 402, y: 252 },
+  { x: 560, y: 306 },
+  { x: 718, y: 264 },
+  { x: 876, y: 292 },
+  { x: 1034, y: 244 },
+  { x: 1192, y: 316 }
+];
+
+const STREET_MAP = {
+  walkableAreas: [
+    { id: "main-sidewalk", x: 34, y: 394, width: 1212, height: 168 },
+    { id: "curb-lane-edge", x: 34, y: 562, width: 1212, height: 92 }
+  ],
+  blockedAreas: [
+    { id: "building-front", kind: "building", x: 0, y: 0, width: 1280, height: 386 },
+    { id: "terminal-kiosk", kind: "prop", x: 46, y: 386, width: 132, height: 118 },
+    { id: "bus-shelter", kind: "prop", x: 936, y: 360, width: 226, height: 142 },
+    { id: "door-threshold", kind: "door", x: 254, y: 398, width: 92, height: 116 }
+  ],
+  doors: [
+    { id: "pubpaid-main-door", x: 300, y: 486, approach: { x: 300, y: 526 } }
+  ],
+  pedestrianRoutes: [
+    { id: "left-sidewalk", x: 94, y: 558, toX: 228, delay: 180, scale: 0.76, shadow: 42 },
+    { id: "pub-front", x: 660, y: 500, toX: 760, delay: 620, scale: 0.66, shadow: 38 },
+    { id: "bus-stop", x: 1128, y: 578, toX: 1042, delay: 980, scale: 0.7, shadow: 40 },
+    { id: "curb-walk", x: 920, y: 602, toX: 812, delay: 1320, scale: 0.72, shadow: 42 }
+  ],
+  trafficLanes: [
+    { id: "near-lane", y: 654, startX: -160, endX: 1430, direction: 1, width: 146, height: 42, duration: 7800, delay: 240, depth: 2.08 },
+    { id: "far-lane", y: 602, startX: 1390, endX: -170, direction: -1, width: 132, height: 38, duration: 9200, delay: 1680, depth: 1.82 }
+  ],
+  lightingZones: [
+    { id: "pub-neon", x: 474, y: 188, width: 388, height: 166, color: "cyan-magenta" },
+    { id: "bus-stop-lamp", x: 944, y: 352, width: 212, height: 220, color: "warm" },
+    { id: "wet-road-reflection", x: 0, y: 578, width: 1280, height: 132, color: "blue-pink" }
+  ]
 };
 
 export class StreetScene extends Phaser.Scene {
@@ -45,10 +112,12 @@ export class StreetScene extends Phaser.Scene {
     this.pedestrians = [];
     this.vehicles = [];
     this.streetSfxTimer = null;
+    this.pendingDoorEntry = false;
+    this.streetMapWarnings = [];
   }
 
   create() {
-    ensureCoreSprites(this);
+    this.textures.get("ppg-car-side")?.setFilter?.(Phaser.Textures.FilterMode.NEAREST);
     this.game.events.emit("pubpaid:music-zone", "street");
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "street-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientStreetFx();
@@ -84,6 +153,7 @@ export class StreetScene extends Phaser.Scene {
       label: "TERMINAL"
     });
     this.hotspots = [this.doorHotspot, this.terminalHotspot, this.googlePortSign];
+    this.validateStreetMap();
 
     this.player = this.buildPlayer(176, 560);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -105,16 +175,18 @@ export class StreetScene extends Phaser.Scene {
         this.handleHotspot(hit);
         return;
       }
-      this.targetPoint = new Phaser.Math.Vector2(
-        Phaser.Math.Clamp(worldPoint.x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX),
-        Phaser.Math.Clamp(worldPoint.y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY)
-      );
+      this.pendingDoorEntry = false;
+      const target = this.resolveStreetPoint(worldPoint.x, worldPoint.y);
+      this.targetPoint = new Phaser.Math.Vector2(target.x, target.y);
+      this.pendingDoorEntry = Phaser.Math.Distance.Between(this.targetPoint.x, this.targetPoint.y, 300, 486) < 88;
       this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
       updateGameState({
         currentScene: "street",
         focus: "rua principal",
         objective: "Aproximar da porta principal",
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
+        streetMap: this.getStreetMapSnapshot(),
+        streetMapWarnings: this.streetMapWarnings,
         prompt: "Destino marcado. Caminhe até a porta principal; a rua agora usa figurantes bitmap em escala controlada."
       });
     });
@@ -132,6 +204,8 @@ export class StreetScene extends Phaser.Scene {
       focus: "porta principal",
       objective: "Entrar no PubPaid pela porta principal",
       nerdAgent: formatNerdAgent(NERD_TEAM.engine),
+      streetMap: this.getStreetMapSnapshot(),
+      streetMapWarnings: this.streetMapWarnings,
       prompt: "Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão."
     });
   }
@@ -176,15 +250,7 @@ export class StreetScene extends Phaser.Scene {
     });
 
     const rainLayer = this.add.graphics().setDepth(1.4);
-    for (let index = 0; index < 22; index += 1) {
-      this.rainLines.push({
-        x: Phaser.Math.Between(20, GAME_WIDTH - 20),
-        y: Phaser.Math.Between(260, GAME_HEIGHT + 120),
-        length: Phaser.Math.Between(22, 40),
-        speed: Phaser.Math.FloatBetween(6.6, 10.8),
-        alpha: Phaser.Math.FloatBetween(0.08, 0.2)
-      });
-    }
+    this.rainLines = STREET_RAIN_DROPS.map((drop) => ({ ...drop }));
     rainLayer.ppgRainLayer = true;
     this.rainLines.graphics = rainLayer;
 
@@ -200,26 +266,17 @@ export class StreetScene extends Phaser.Scene {
   }
 
   buildStreetLife() {
-    const people = [
-      { key: TEXTURE_KEYS.guestA, x: 94, y: 558, toX: 216, delay: 180, scale: 0.072, shadow: 50 },
-      { key: TEXTURE_KEYS.guestA, x: 918, y: 558, toX: 812, delay: 620, scale: 0.066, shadow: 46 },
-      { key: TEXTURE_KEYS.guestA, x: 682, y: 500, toX: 752, delay: 1200, scale: 0.052, shadow: 38 },
-      { key: TEXTURE_KEYS.guestA, x: 1138, y: 578, toX: 1042, delay: 880, scale: 0.06, shadow: 42 }
-    ];
-
-    people.forEach((person, index) => {
-      const sprite = addIdleSpriteActor(this, person.key, person.x, person.y, person.scale, {
-        frameDuration: 260,
-        delay: person.delay,
-        staticBitmap: true
-      });
+    STREET_MAP.pedestrianRoutes.forEach((person, index) => {
+      const sprite = this.add.image(person.x, person.y, PUBPAID_TEXTURE_KEYS.guestA)
+        .setOrigin(0.5, 1);
+      fitImageToHeight(sprite, PUBPAID_WORLD_SCALE.adultForegroundPx * person.scale);
       sprite.setDepth(person.y > 540 ? 2.25 : 1.62);
-      sprite.setAlpha(0.88);
+      sprite.setAlpha(0.94);
       sprite.setFlipX(person.toX < person.x);
       const shadow = this.add.ellipse(person.x, person.y + 2, person.shadow, person.shadow * 0.2, 0x000000, 0.22)
         .setDepth(sprite.depth - 0.02)
         .setBlendMode(Phaser.BlendModes.MULTIPLY);
-      this.pedestrians.push({ sprite, shadow });
+      this.pedestrians.push({ id: person.id, sprite, shadow, source: "bitmap-png" });
       this.tweens.add({
         targets: [sprite, shadow],
         x: person.toX,
@@ -233,6 +290,8 @@ export class StreetScene extends Phaser.Scene {
       });
     });
 
+    this.buildTraffic();
+
     const scaleNote = this.add.text(18, 704, `escala adulta: player ~${PUBPAID_WORLD_SCALE.adultForegroundPx}px / porta ~${PUBPAID_WORLD_SCALE.doorHeightPx}px`, {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "9px",
@@ -245,6 +304,42 @@ export class StreetScene extends Phaser.Scene {
     });
 
     this.streetSfxTimer = null;
+  }
+
+  buildTraffic() {
+    STREET_MAP.trafficLanes.forEach((lane, index) => {
+      const vehicle = this.add.container(lane.startX, lane.y).setDepth(lane.depth);
+      const shadow = this.add.ellipse(0, 15, lane.width * 0.82, 13, 0x000000, 0.28)
+        .setBlendMode(Phaser.BlendModes.MULTIPLY);
+      vehicle.add(shadow);
+      if (this.textures.exists("ppg-car-side")) {
+        const car = this.add.image(0, 0, "ppg-car-side")
+          .setDisplaySize(lane.width, lane.height)
+          .setFlipX(lane.direction < 0)
+          .setAlpha(0.94);
+        vehicle.add(car);
+      } else {
+        vehicle.add([
+          this.add.rectangle(0, 0, lane.width, lane.height * 0.62, index ? 0xff4fb8 : 0x50efff, 0.92),
+          this.add.rectangle(-lane.width * 0.16, -lane.height * 0.16, lane.width * 0.34, lane.height * 0.22, 0xc7ebff, 0.88),
+          this.add.rectangle(lane.width * 0.36 * lane.direction, 0, 18, 8, 0xffd06d, 0.9)
+        ]);
+      }
+      const lightA = this.add.rectangle(lane.width * 0.44 * lane.direction, 0, 28, 8, 0xffd06d, 0.42)
+        .setBlendMode(Phaser.BlendModes.SCREEN);
+      const tail = this.add.rectangle(-lane.width * 0.44 * lane.direction, 0, 18, 8, 0xff4fb8, 0.28)
+        .setBlendMode(Phaser.BlendModes.SCREEN);
+      vehicle.add([lightA, tail]);
+      this.vehicles.push({ id: lane.id, vehicle, lane });
+      this.tweens.add({
+        targets: vehicle,
+        x: lane.endX,
+        duration: lane.duration,
+        delay: lane.delay,
+        repeat: -1,
+        ease: "Linear"
+      });
+    });
   }
 
   buildHotspot({ id, x, y, width, height, color, label }) {
@@ -401,6 +496,106 @@ export class StreetScene extends Phaser.Scene {
     return sign;
   }
 
+  getStreetMapSnapshot() {
+    return {
+      walkableAreas: STREET_MAP.walkableAreas.map((area) => ({ ...area })),
+      blockedAreas: STREET_MAP.blockedAreas.map((area) => ({ ...area })),
+      doors: STREET_MAP.doors.map((door) => ({ ...door, approach: { ...door.approach } })),
+      pedestrianRoutes: STREET_MAP.pedestrianRoutes.map((route) => ({ ...route })),
+      trafficLanes: STREET_MAP.trafficLanes.map((lane) => ({ ...lane })),
+      lightingZones: STREET_MAP.lightingZones.map((zone) => ({ ...zone }))
+    };
+  }
+
+  validateStreetMap() {
+    const warnings = [];
+    STREET_MAP.doors.forEach((door) => {
+      if (!this.isStreetWalkable(door.approach.x, door.approach.y, 4)) warnings.push(`door-${door.id}-approach-blocked`);
+    });
+    STREET_MAP.pedestrianRoutes.forEach((route) => {
+      if (!this.isStreetWalkable(route.x, route.y, 0)) warnings.push(`pedestrian-${route.id}-start-blocked`);
+      if (!this.isStreetWalkable(route.toX, route.y, 0)) warnings.push(`pedestrian-${route.id}-end-blocked`);
+    });
+    STREET_MAP.trafficLanes.forEach((lane) => {
+      if (lane.y < STREET_BOUNDS.minY || lane.y > GAME_HEIGHT + 12) warnings.push(`traffic-${lane.id}-outside-road`);
+      if (lane.duration < 3000) warnings.push(`traffic-${lane.id}-too-fast`);
+    });
+    this.streetMapWarnings = warnings;
+  }
+
+  getStreetBlockingArea(x, y, padding = 0) {
+    return STREET_MAP.blockedAreas.find((area) => (
+      x >= area.x - padding
+      && x <= area.x + area.width + padding
+      && y >= area.y - padding
+      && y <= area.y + area.height + padding
+    )) || null;
+  }
+
+  isStreetWalkable(x, y, padding = 10) {
+    const insideBounds = x >= STREET_BOUNDS.minX
+      && x <= STREET_BOUNDS.maxX
+      && y >= STREET_BOUNDS.minY
+      && y <= STREET_BOUNDS.maxY;
+    return insideBounds && !this.getStreetBlockingArea(x, y, padding);
+  }
+
+  resolveStreetPoint(x, y) {
+    const clamped = {
+      x: Phaser.Math.Clamp(x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX),
+      y: Phaser.Math.Clamp(y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY)
+    };
+    if (this.isStreetWalkable(clamped.x, clamped.y, 10)) return clamped;
+    const blocked = this.getStreetBlockingArea(clamped.x, clamped.y, 10);
+    const edgeCandidates = blocked
+      ? [
+          { x: blocked.x - 22, y: Phaser.Math.Clamp(clamped.y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY) },
+          { x: blocked.x + blocked.width + 22, y: Phaser.Math.Clamp(clamped.y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY) },
+          { x: Phaser.Math.Clamp(clamped.x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX), y: blocked.y + blocked.height + 22 },
+          { x: Phaser.Math.Clamp(clamped.x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX), y: blocked.y - 22 }
+        ]
+      : [];
+    const doorPoints = STREET_MAP.doors.map((door) => door.approach);
+    const pedestrianPoints = STREET_MAP.pedestrianRoutes.flatMap((route) => [
+      { x: route.x, y: route.y },
+      { x: route.toX, y: route.y }
+    ]);
+    const candidates = [...edgeCandidates, ...doorPoints, ...pedestrianPoints]
+      .filter((point) => this.isStreetWalkable(point.x, point.y, 10));
+    candidates.sort((a, b) => (
+      Phaser.Math.Distance.Between(clamped.x, clamped.y, a.x, a.y)
+      - Phaser.Math.Distance.Between(clamped.x, clamped.y, b.x, b.y)
+    ));
+    return candidates[0] || { x: this.player?.x || 176, y: this.player?.y || 560 };
+  }
+
+  moveStreetPlayerBy(dx, dy) {
+    const direct = this.resolveStreetStep(this.player.x + dx, this.player.y + dy);
+    if (direct) {
+      this.player.setPosition(direct.x, direct.y);
+      return true;
+    }
+    const xOnly = this.resolveStreetStep(this.player.x + dx, this.player.y);
+    if (xOnly) {
+      this.player.setPosition(xOnly.x, xOnly.y);
+      return true;
+    }
+    const yOnly = this.resolveStreetStep(this.player.x, this.player.y + dy);
+    if (yOnly) {
+      this.player.setPosition(yOnly.x, yOnly.y);
+      return true;
+    }
+    return false;
+  }
+
+  resolveStreetStep(x, y) {
+    const clamped = {
+      x: Phaser.Math.Clamp(x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX),
+      y: Phaser.Math.Clamp(y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY)
+    };
+    return this.isStreetWalkable(clamped.x, clamped.y, 12) ? clamped : null;
+  }
+
   findHotspotAt(x, y) {
     return this.hotspots.find((hotspot) => {
       const data = hotspot.ppgHotspot;
@@ -432,8 +627,14 @@ export class StreetScene extends Phaser.Scene {
     if (this.isTransitioning) return;
     const id = hotspot.ppgHotspot?.id;
     if (id === "door") {
-      this.targetPoint = new Phaser.Math.Vector2(300, 526);
-      this.targetMarker.setPosition(300, 526).setVisible(true);
+      if (Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486) < 74) {
+        this.enterInterior();
+        return;
+      }
+      this.pendingDoorEntry = true;
+      const doorApproach = STREET_MAP.doors[0].approach;
+      this.targetPoint = new Phaser.Math.Vector2(doorApproach.x, doorApproach.y);
+      this.targetMarker.setPosition(doorApproach.x, doorApproach.y).setVisible(true);
       updateGameState({
         focus: "entrada",
         objective: "Entrar no salão",
@@ -470,9 +671,11 @@ export class StreetScene extends Phaser.Scene {
     const player = this.add.container(x, y).setDepth(2.42);
     const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
-    const sprite = this.add.image(0, 0, TEXTURE_KEYS.player)
-      .setOrigin(0.5, 1)
-      .setScale(0.083);
+    const spriteKey = gameState.selectedCharacter?.spriteKey || PUBPAID_TEXTURE_KEYS.player;
+    const sprite = this.add.image(0, 0, spriteKey)
+      .setOrigin(0.5, 1);
+    fitImageToHeight(sprite, PUBPAID_WORLD_SCALE.adultForegroundPx);
+    player.ppgSprite = sprite;
     player.add([shadow, sprite]);
     return player;
   }
@@ -483,10 +686,9 @@ export class StreetScene extends Phaser.Scene {
   }
 
   nudgePlayer(dx, dy) {
-    this.targetPoint = new Phaser.Math.Vector2(
-      Phaser.Math.Clamp(this.player.x + dx, STREET_BOUNDS.minX, STREET_BOUNDS.maxX),
-      Phaser.Math.Clamp(this.player.y + dy, STREET_BOUNDS.minY, STREET_BOUNDS.maxY)
-    );
+    this.pendingDoorEntry = false;
+    const target = this.resolveStreetPoint(this.player.x + dx, this.player.y + dy);
+    this.targetPoint = new Phaser.Math.Vector2(target.x, target.y);
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
   }
 
@@ -538,8 +740,7 @@ export class StreetScene extends Phaser.Scene {
 
     if (keyboardVector.lengthSq() > 0) {
       keyboardVector.normalize().scale(2.6);
-      this.player.x = Phaser.Math.Clamp(this.player.x + keyboardVector.x, STREET_BOUNDS.minX, STREET_BOUNDS.maxX);
-      this.player.y = Phaser.Math.Clamp(this.player.y + keyboardVector.y, STREET_BOUNDS.minY, STREET_BOUNDS.maxY);
+      this.moveStreetPlayerBy(keyboardVector.x, keyboardVector.y);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
     } else if (this.targetPoint) {
@@ -550,10 +751,21 @@ export class StreetScene extends Phaser.Scene {
         this.player.setPosition(this.targetPoint.x, this.targetPoint.y);
         this.targetPoint = null;
         this.targetMarker.setVisible(false);
+        if (this.pendingDoorEntry) {
+          this.enterInterior();
+          return;
+        }
       } else {
         const speed = 2.8;
-        this.player.x += (dx / distance) * speed;
-        this.player.y += (dy / distance) * speed;
+        const moved = this.moveStreetPlayerBy((dx / distance) * speed, (dy / distance) * speed);
+        if (!moved) {
+          this.targetPoint = null;
+          this.targetMarker.setVisible(false);
+          updateGameState({
+            prompt: "Caminho bloqueado por fachada ou mobiliário urbano. Escolha a calçada livre."
+          });
+          return;
+        }
       }
     }
 
@@ -589,12 +801,13 @@ export class StreetScene extends Phaser.Scene {
     const rainLayer = this.rainLines.graphics;
     if (rainLayer) {
       rainLayer.clear();
-      this.rainLines.forEach((drop) => {
+      this.rainLines.forEach((drop, index) => {
         drop.y += drop.speed;
         drop.x -= drop.speed * 0.32;
         if (drop.y > GAME_HEIGHT + 50 || drop.x < -30) {
-          drop.y = Phaser.Math.Between(240, 320);
-          drop.x = Phaser.Math.Between(40, GAME_WIDTH - 20);
+          const reset = STREET_RAIN_RESET_POINTS[index % STREET_RAIN_RESET_POINTS.length];
+          drop.y = reset.y;
+          drop.x = reset.x;
         }
         rainLayer.lineStyle(1, 0xc7ebff, drop.alpha);
         rainLayer.lineBetween(drop.x, drop.y, drop.x + 7, drop.y - drop.length);
@@ -624,7 +837,7 @@ export class StreetScene extends Phaser.Scene {
     this.targetPoint = null;
     this.targetMarker?.setVisible(false);
     this.input.enabled = false;
-    this.player.setTint(0xffe0ae);
+    this.player.ppgSprite?.setTint(0xffe0ae);
     this.transitionLabel?.setAlpha(1);
     this.tweens.add({
       targets: [this.transitionVeil, this.transitionLabel],
@@ -640,7 +853,7 @@ export class StreetScene extends Phaser.Scene {
       ease: "Sine.easeInOut"
     });
     this.cameras.main.once("camerafadeoutcomplete", () => {
-      this.player.clearTint();
+      this.player.ppgSprite?.clearTint();
       this.scene.start("interior-scene");
     });
     this.cameras.main.fadeOut(460, 8, 12, 20);
