@@ -8870,10 +8870,112 @@ function buildPublicDailyAgentPulse() {
   };
 }
 
+function buildMasterAgentsSummaryForHub() {
+  const registry = readJson(REAL_AGENTS_REGISTRY_FILE, null);
+  const latestRun = readJson(REAL_AGENTS_RUN_FILE, null) || readJson(LEGACY_REAL_AGENTS_RUN_FILE, null);
+  const actions = readJson(REAL_AGENTS_ACTIONS_FILE, { actions: [] });
+  const history = readRealAgentsRunHistory();
+  const agents = Array.isArray(registry?.agents) ? registry.agents : [];
+  const offices = Array.isArray(registry?.offices) ? registry.offices : [];
+  const runSummary = latestRun?.summary || {};
+  const actionItems = Array.isArray(actions?.actions) ? actions.actions : [];
+
+  return {
+    summary: {
+      totalAgents: Number(registry?.totalAgents || agents.length || runSummary.totalAgents || 0),
+      totalOffices: offices.length || Number(runSummary.totalOffices || 0),
+      newsItems: Number(runSummary.newsItems || countJsonItems(path.join(DATA_DIR, "runtime-news.json")) || 0),
+      reviewIssues: Number(runSummary.reviewIssues || 0),
+      activeQueue: Number(runSummary.activeQueue || actionItems.length || 0),
+      deliveredAgents: Number(runSummary.deliveredAgents || 0),
+      averageEnergy: Number(runSummary.averageEnergy || 0)
+    },
+    autoRun: {
+      enabled: !REAL_AGENTS_AUTO_RUN_DISABLED,
+      pausedByCheffeCall: Boolean(readJson(CHEFFE_CALL_STATE_FILE, {})?.active),
+      intervalMs: REAL_AGENTS_AUTO_RUN_INTERVAL_MS,
+      running: realAgentsAutoRunState.running,
+      startedAt: realAgentsAutoRunState.startedAt,
+      lastRunAt: realAgentsAutoRunState.lastRunAt || latestRun?.generatedAt || history[0]?.at || "",
+      lastError: realAgentsAutoRunState.lastError,
+      cycles: realAgentsAutoRunState.cycles,
+      history: history.slice(0, 5)
+    },
+    autonomy: latestRun?.autonomy
+      ? {
+          averageAutonomy: Number(runSummary.averageAutonomy || 0),
+          autonomousAgents: Number(runSummary.autonomousAgents || 0),
+          highAutonomyAgents: Number(runSummary.highAutonomyAgents || 0)
+        }
+      : null,
+    lastRun: latestRun
+      ? {
+          generatedAt: latestRun.generatedAt || "",
+          trigger: latestRun.trigger || latestRun.startedBy || "",
+          summary: {
+            newsItems: Number(runSummary.newsItems || 0),
+            reviewIssues: Number(runSummary.reviewIssues || 0),
+            queueItems: Number(runSummary.activeQueue || actionItems.length || 0)
+          }
+        }
+      : null
+  };
+}
+
+function buildMasterCheffeSummaryForHub() {
+  const state = readCheffeCallState();
+  const reviewReport = readJson(REVIEW_TEAM_REPORT_JSON_FILE, null);
+  const reviewIssues = Array.isArray(reviewReport?.issues) ? reviewReport.issues.length : Number(reviewReport?.summary?.totalIssues || 0);
+  return {
+    active: Boolean(state.active),
+    lastInstruction: cleanShortText(state.lastInstruction || "", 180),
+    lastSessionAt: state.lastSessionAt || "",
+    sessions: Array.isArray(state.sessions) ? state.sessions.length : 0,
+    pendingDecisions: Number(reviewIssues || 0)
+  };
+}
+
+function summarizeMasterCaptureReport(report = null, sourceReports = []) {
+  const capturedItems = Number(report?.capturedItems || report?.totalItems || 0);
+  const reports = Array.isArray(sourceReports) ? sourceReports : [];
+  return {
+    ok: Boolean(report),
+    capturedItems,
+    totalItems: capturedItems,
+    lastSuccessAt: report?.lastSuccessAt || report?.finishedAt || report?.updatedAt || "",
+    updatedAt: report?.updatedAt || report?.finishedAt || "",
+    sourceCount: reports.length,
+    okSources: reports.filter((item) => item?.ok && Number(item.count || 0) > 0).length,
+    emptySources: reports.filter((item) => item?.ok && Number(item.count || 0) <= 0).length,
+    failedSources: reports.filter((item) => !item?.ok).length
+  };
+}
+
+function summarizeMasterArticleIntegrity(report = null) {
+  return report
+    ? {
+        checkedAt: report.checkedAt || "",
+        totalHomeLinked: Number(report.totalHomeLinked || 0),
+        missingCount: Number(report.missingCount || 0),
+        withoutImageCount: Number(report.withoutImageCount || 0)
+      }
+    : null;
+}
+
+function summarizeMasterEditorialHealth(report = null) {
+  return report
+    ? {
+        ok: report.ok !== false,
+        generatedAt: report.generatedAt || report.checkedAt || report.updatedAt || "",
+        totalIssues: Number(report.totalIssues || report.summary?.totalIssues || 0),
+        publicEnglishIssues: Number(report.publicEnglishIssues || report.summary?.publicEnglishIssues || 0)
+      }
+    : null;
+}
+
 function buildMasterAdminHubPayload() {
-  const admin = buildAdminDashboardPayload();
-  const agents = buildRealAgentsPayload();
-  const cheffe = buildCheffeCallPayload();
+  const agents = buildMasterAgentsSummaryForHub();
+  const cheffe = buildMasterCheffeSummaryForHub();
   const reviewReport = readJson(REVIEW_TEAM_REPORT_JSON_FILE, null);
   const syncReport = readJson(path.join(ROOT_DIR, ".codex-temp", "online-local-sync", "latest-report.json"), null);
   const captureReport = readJson(path.join(DATA_DIR, "latest-news-capture-report.json"), null);
@@ -8882,7 +8984,6 @@ function buildMasterAdminHubPayload() {
   const editorialHealth = readJson(EDITORIAL_HEALTH_REPORT_JSON_FILE, null);
   const storage = buildStorageHealthPayload({ writeProbe: false });
   const agentSummary = agents?.summary || {};
-  const adminTotals = admin?.totals || {};
   const reviewIssues = Number(reviewReport?.summary?.totalIssues || 0);
   const syncOk = syncReport ? Boolean(syncReport.ok) : false;
   const captureItems = Number(captureReport?.capturedItems || captureReport?.totalItems || 0);
@@ -8909,6 +9010,13 @@ function buildMasterAdminHubPayload() {
     error: cleanShortText(item.error || "", 120)
   }));
   const auditLog = readMasterAuditLog().slice(0, 20);
+  const newsCount = countJsonItems(path.join(DATA_DIR, "runtime-news.json")) + countJsonItems(path.join(DATA_DIR, "news-archive.json"));
+  const adminTotals = {
+    news: newsCount,
+    runtimeNews: countJsonItems(path.join(DATA_DIR, "runtime-news.json")),
+    archiveNews: countJsonItems(path.join(DATA_DIR, "news-archive.json")),
+    businesses: countJsonItems(path.join(DATA_DIR, "businesses-cruzeiro.json"))
+  };
 
   return {
     ok: true,
@@ -8983,7 +9091,7 @@ function buildMasterAdminHubPayload() {
               : []
           }
         : null,
-      capture: captureReport || null,
+      capture: summarizeMasterCaptureReport(captureReport, sourceReports),
       agentsRuntime: {
         autoRun: agents?.autoRun || null,
         autonomy: agents?.autonomy || null,
@@ -8994,8 +9102,8 @@ function buildMasterAdminHubPayload() {
         total: readMasterAuditLog().length,
         recent: auditLog
       },
-      articleIntegrity,
-      editorialHealth
+      articleIntegrity: summarizeMasterArticleIntegrity(articleIntegrity),
+      editorialHealth: summarizeMasterEditorialHealth(editorialHealth)
     },
     suggestions: [
       {
@@ -9026,16 +9134,75 @@ function buildMasterAdminHubPayload() {
     ],
     adminSummary: {
       totals: adminTotals,
-      period: admin?.period || null,
-      storage: admin?.storage || null
+      period: null,
+      storage: storage || null
     },
     agentsSummary: agentSummary,
     cheffeSummary: {
       active: Boolean(cheffe?.active),
       lastInstruction: cheffe?.lastInstruction || "",
-      sessions: Array.isArray(cheffe?.sessions) ? cheffe.sessions.length : 0
+      sessions: Number(cheffe?.sessions || 0),
+      pendingDecisions: Number(cheffe?.pendingDecisions || 0)
     }
   };
+}
+
+function safeBuildMasterAdminHubPayload() {
+  try {
+    return buildMasterAdminHubPayload();
+  } catch (error) {
+    console.warn(`[catalogo] falha ao montar hub master resumido: ${String(error?.message || error)}`);
+    const auditLog = readMasterAuditLog().slice(0, 20);
+    return {
+      ok: true,
+      degraded: true,
+      updatedAt: new Date().toISOString(),
+      title: "Central Master do Catálogo",
+      auth: {
+        mode: "full-admin-password",
+        passwordExposed: false,
+        note: "Senha conferida no backend. O HTML nao contem a senha master."
+      },
+      links: [
+        { id: "dashboard", label: "Dashboard completo", href: "/admin/admin-dashboard.html", area: "controle" },
+        { id: "cheffe", label: "Chefe Call", href: "/cheffe-call.html", area: "reuniao" },
+        { id: "office-main", label: "Escritório principal", href: "/escritorio.html", area: "agentes" },
+        { id: "home", label: "Home pública", href: "/index.html?skipIntro=1&skipWelcome=1", area: "publico" }
+      ],
+      statusCards: [
+        { label: "Central", value: "Aberta", detail: "Resumo reduzido entregue para preservar a operacao online." },
+        { label: "Review team", value: "Revisar", detail: "Rode a revisão local antes de publicar novas alterações." },
+        { label: "Storage", value: "Checar", detail: "Verifique os relatórios completos no dashboard interno." }
+      ],
+      reports: {
+        review: null,
+        sync: null,
+        capture: null,
+        agentsRuntime: null,
+        sourceHealth: [],
+        audit: {
+          total: auditLog.length,
+          recent: auditLog
+        },
+        articleIntegrity: null,
+        editorialHealth: null
+      },
+      suggestions: [
+        {
+          priority: "agora",
+          title: "Abrir dashboard completo",
+          detail: "A central entrou em modo resumido. Use o dashboard interno e rode as checagens locais para diagnosticar o relatorio pesado."
+        }
+      ],
+      adminSummary: {
+        totals: {},
+        period: null,
+        storage: null
+      },
+      agentsSummary: {},
+      cheffeSummary: {}
+    };
+  }
 }
 
 function readRealAgentsRunHistory() {
@@ -13715,7 +13882,7 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, {
       ok: true,
       unlockedAt: new Date().toISOString(),
-      hub: buildMasterAdminHubPayload()
+      hub: safeBuildMasterAdminHubPayload()
     });
   }
 
@@ -13736,7 +13903,7 @@ async function handleApi(req, res, pathname, searchParams) {
       ok: true,
       result: "resumo entregue"
     });
-    return sendJson(res, 200, buildMasterAdminHubPayload());
+    return sendJson(res, 200, safeBuildMasterAdminHubPayload());
   }
 
   if (req.method === "GET" && pathname === "/api/sprites-check") {
