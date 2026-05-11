@@ -437,6 +437,18 @@ function sanitizeBodyValue(value, item) {
     text = text.replace(/^\s*e o eixo mais concreto/i, `${replacementTitle} e o eixo mais concreto`);
   }
 
+  text = text
+    .replace(
+      /\s+e o ponto principal da atualizacao captada automaticamente\./gi,
+      ". O ponto principal foi organizado para leitura rapida."
+    )
+    .replace(
+      /A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas\./gi,
+      "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
+    )
+    .replace(/\bcaptada automaticamente\b/gi, "organizada pela cobertura")
+    .replace(/\bredacao automatica\b/gi, "cobertura do portal");
+
   if (/instagram says it doesn[’']t want your tweet round ups/i.test(text)) {
     text = text.replace(/instagram says it doesn[’']t want your tweet round ups/gi, inferredTitlePt);
   }

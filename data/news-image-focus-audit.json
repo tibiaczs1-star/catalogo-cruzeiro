@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-11T18:09:19.252Z",
+  "updatedAt": "2026-05-11T18:23:42.354Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 1000,
   "offline": true,
@@ -9,8 +9,8 @@
     "review": 0,
     "warning": 0,
     "error": 0,
-    "manualFocus": 652,
-    "newSinceLastAudit": 128,
+    "manualFocus": 646,
+    "newSinceLastAudit": 14,
     "missingImage": 0,
     "unreachableImage": 0
   },
@@ -29,16 +29,15 @@
     "homem-e-conduzido-a-delegacia-suspeito-de-aplicar-golpes-via-pix-em-cruzeiro-do-sul",
     "incendio-atinge-casa-e-deixa-morador-com-queimaduras-graves-em-cruzeiro-do-sul",
     "estado-toma-moto-usada-por-traficante-para-transportar-drogas-de-cruzeiro-do-sul-a-feijo",
+    "urgente-porto-de-rodrigues-alves-e-interditado-apos-risco-de-desbarrancamento",
     "poste-cai-e-energisa-faz-transferencia-de-carga-para-outro-equipamento-em-rodrigues-alves",
     "rodrigues-alves-e-jordao-recebem-recursos-para-reforco-na-saude",
     "poste-de-alta-tensao-pode-cair-em-meio-a-desbarrancamento-em-rodrigues-alves",
     "frio-intenso-atinge-o-vale-do-jurua-nesta-segunda-feira",
     "poste-cai-e-energisa-faz-transferencia-de-carga-para-outro-equipamento-em-rodrigues-alves",
-    "governo-do-acre-alcanca-marco-historico-com-entrega-de-600-identidades-em-santa-rosa-do-purus",
-    "senai-certifica-turmas-de-cursos-profissionalizantes-em-placido-de-castro",
-    "sinteac-cobra-reajuste-salarial-e-ameaca-greve-em-rio-branco",
     "rio-acre-apresenta-vazante-e-registra-nivel-de-7-40-metros-em-rio-branco",
     "ms-libera-mais-de-r-1-8-milhao-para-reforcar-unidades-de-saude-em-municipios-do-acre",
+    "sinteac-cobra-reajuste-salarial-e-ameaca-greve-em-rio-branco",
     "beijo-de-judas",
     "primeira-friagem-do-ano-provoca-filas-extensas-em-busca-de-tacaca-em-rio-branco",
     "casa-do-patrao-prova-que-record-devia-ter-apostado-em-davi-brito-nao-em-boninho",
@@ -46,6 +45,7 @@
     "corinthians-derrota-sao-paulo-e-vence-mais-um-majestoso-em-casa",
     "filho-faz-apelo-para-encontrar-familia-acreana-que-mae-nao-ve-ha-50-anos",
     "acre-ja-recebeu-quase-69-mil-declaracoes-do-imposto-de-renda-2026-maioria-dos-contribuintes-deve",
+    "governo-do-acre-alcanca-marco-historico-com-entrega-de-600-identidades-em-santa-rosa-do-purus",
     "ufac-abre-65-vagas-remanescentes-para-cursos-de-graduacao-no-interior-do-acre",
     "tce-da-48-horas-para-sead-explicar-pregao-de-r-13-3-milhoes-no-acre",
     "influenciadora-alice-salazar-vem-ao-acre-para-seminario-gratuito-de-beleza",
@@ -68,15 +68,23 @@
     "seguranca-escolar-no-acre-aplicativo-aciona-policia-com-um-botao-e-deve-chegar-a-100-das-escolas",
     "acre-lidera-crescimento-do-comercio-varejista-no-brasil-com-alta-de-11-5",
     "prf-apreende-quase-175-kg-de-skunk-e-prende-dois-homens-na-br-364-em-rio-branco",
+    "senai-certifica-turmas-de-cursos-profissionalizantes-em-placido-de-castro",
     "acre-lidera-crescimento-do-varejo-no-pais-com-alta-de-11-5-aponta-levantamento",
     "brigas-durante-consumo-de-alcool-lideram-motivacoes-de-homicidios-no-acre-em-abril",
     "briga-de-bebedeira-e-motivacao-principal-de-mortes-violentas-no-acre-em-abril-aponta-policia-civ",
     "com-queda-de-14-mes-de-abril-registra-menor-numero-de-homicidios-no-acre",
+    "brasil-tera-dia-nacional-em-memoria-de-vitimas-do-transito",
+    "a-ia-pode-se-tornar-sua-amiga-entenda-a-opiniao-dos-especialistas",
+    "mesmo-em-niveis-baixos-poluicao-aumenta-internacoes-por-doencas-renais",
+    "apos-sofrer-avc-marido-de-kelly-key-faz-reflexao-olhar-com-gratidao",
+    "comer-carne-vermelha-aumenta-o-risco-de-diabetes-tipo-2",
     "saiba-quem-e-o-brasileiro-duble-de-pedro-pascal-no-novo-filme-da-saga-star-wars",
+    "corinthians-x-sao-paulo-foragidos-sao-presos-ao-entrar-no-estadio",
+    "brasil-e-china-concordam-com-isencao-de-vistos-para-viagens-de-ate-30-dias",
+    "bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo",
     "mosaic-tem-prejuizo-liquido-de-us-258-milhoes-no-trimestre",
     "recife-tera-chuvas-em-volumes-variados-todos-os-dias-da-semana",
     "semana-em-joao-pessoa-sera-marcada-por-chuvas-em-todos-os-dias",
-    "bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo",
     "ons-melhora-previsao-de-chuvas-para-hidreletricas-do-sul-em-maio",
     "semana-em-fortaleza-sera-predominantemente-chuvosa",
     "salvador-tera-semana-dominada-por-chuvas-e-ceu-parcialmente-nublado",
@@ -84,49 +92,71 @@
     "semana-em-maceio-sera-marcada-por-chuvas-diarias-e-ceu-parcialmente-nublado",
     "desenrola-brasil-permite-uso-do-fgts-para-quitar-dividas-veja-como-funciona-e-quem-pode-aderir",
     "ldc-projeta-expansao-e-prioriza-o-brasil-em-seus-investimentos-globais",
+    "tecnico-de-curacao-pede-demissao-a-um-mes-da-copa-do-mundo",
     "santa-cruz-tera-o-paysandu-como-adversario-na-2-fase-da-copa-do-brasil-sub-15",
     "tv-brasil-mostra-nesta-segunda-confronto-entre-palmeiras-e-atletico-mg",
     "campeao-mundial-pelo-brasil-ve-dificuldade-nas-laterais-da-selecao",
     "pentacampeao-nao-ve-brasil-favorito-mas-cre-em-evolucao-na-copa",
+    "benedict-cumberbatch-se-envolve-em-discussao-acalorada-com-ciclista-veja",
     "resumo-de-a-nobreza-do-amor-de-11-a-16-de-maio",
     "iza-anitta-marina-sena-e-mais-estrelas-do-pop-fortalecem-bom-momento-do-reggae-no-brasil",
     "moraes-suspende-dosimetria-ate-stf-julgar-acoes-contra-lei-que-reduz-pena-de-bolsonaro-e-condena",
+    "apos-moraes-suspender-dosimetria-lider-do-pl-articula-pec-sobre-anistia",
+    "estados-unidos-devem-flexibilizar-tarifas-para-importacao-de-carne-bovina",
     "bolsa-familia-veja-quando-comeca-o-pagamento-do-beneficio-em-maio",
     "stf-deve-manter-validade-da-lei-da-dosimetria-mesmo-apos-suspensao-determinada-por-moraes",
     "oposicao-articula-retardar-avanco-da-pec-da-escala-6-1-no-senado",
     "ministros-do-stf-veem-senado-sem-clima-para-nova-indicacao-de-lula",
     "moraes-acerta-ao-suspender-lei-da-dosimetria-mas-stf-tem-de-julgar-rapido-acoes-que-contestam-su",
-    "brasil-e-china-concordam-com-isencao-de-vistos-para-viagens-de-ate-30-dias",
-    "bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo",
-    "brasil-tera-dia-nacional-em-memoria-de-vitimas-do-transito",
+    "pesquisa-global-de-percepcao-sobre-o-brasil-revela-pontos-fortes-e-fracos",
+    "era-briga-todo-dia-afirma-vizinho-de-mulher-morta-apos-casamento-em-sp",
+    "fazenda-espera-votacao-do-projeto-sobre-receitas-de-petroleo-nesta-semana",
+    "precos-do-petroleo-sobem-apos-trump-rejeitar-proposta-de-paz-do-ira",
+    "homem-atropela-e-mata-quatro-pessoas-foge-e-e-preso-no-interior-de-sp",
     "guarda-municipal-mata-esposa-apos-casamento-em-sp-veja-como-briga-comecou",
     "datafolha-40-dos-brasileiros-sofreram-com-violencia-ou-crimes",
     "cotacao-de-precos-fornecimento-de-veiculos-de-passeio",
     "prefeitura-de-acrelandia-divulga-resultado-preliminar-de-seletivo-da-saude-confira-classificacao",
-    "audiencia-publica-debate-novo-plano-diretor-e-propostas-para-mobilidade-comercio-e-combate-as-al",
-    "prefeitura-nao-apresenta-proposta-e-sinteac-mantem-manifestacoes-com-ameaca-de-greve-em-rio-bran",
-    "governo-anuncia-leilao-eletronico-de-maquinas-e-veiculos-do-deracre",
-    "era-briga-todo-dia-afirma-vizinho-de-mulher-morta-apos-casamento-em-sp",
-    "procon-divulga-balanco-da-operacao-dia-das-maes",
-    "educacao-lanca-guia-com-estrategias-de-acolhimento-e-seguranca-para-o-retorno-as-aulas-na-rede-e",
-    "sinteac-mantem-pressao-por-reajuste-e-cobra-medidas-de-seguranca-nas-escolas",
-    "seguranca-publica-registra-reducao-nos-indices-de-mortes-violentas-em-todo-o-estado",
-    "profissionais-da-educacao-municipal-fazem-manifestacao-em-frente-a-prefeitura-e-ameacam-greve-po",
     "prf-aponta-invasao-de-pista-contraria-como-causa-inicial-de-acidente-fatal-na-variante",
-    "sao-paulo-tem-a-menor-temperatura-do-ano-nesta-madrugada",
     "acreana-vive-primeiro-dia-das-maes-apos-nascimento-de-trigemeos",
+    "decreto-n-195-2026-de-5-de-maio-de-2026",
+    "ce-n-007-2026-aviso-de-licitacao",
     "roberto-duarte-critica-situacao-da-br-364-e-cobra-explicacoes-sobre-recursos-destinados-a-rodovia",
-    "a-ia-pode-se-tornar-sua-amiga-entenda-a-opiniao-dos-especialistas",
-    "mesmo-em-niveis-baixos-poluicao-aumenta-internacoes-por-doencas-renais",
-    "apos-sofrer-avc-marido-de-kelly-key-faz-reflexao-olhar-com-gratidao",
-    "comer-carne-vermelha-aumenta-o-risco-de-diabetes-tipo-2",
     "revalida-candidatos-ja-podem-conferir-local-da-prova-pratica",
     "minas-gerais-confirma-primeira-morte-por-hantavirus-em-2026",
     "duas-pessoas-retiradas-de-navio-testam-positivo-para-o-hantavirus",
     "eua-confirma-que-americano-testou-positivo-para-hantavirus-apos-cruzeiro",
     "fuvest-2027-isencao-e-reducao-da-taxa-de-inscricao-comecam-nesta-segunda",
+    "prefeitura-nao-apresenta-proposta-e-sinteac-mantem-manifestacoes-com-ameaca-de-greve-em-rio-bran",
+    "educacao-lanca-guia-com-estrategias-de-acolhimento-e-seguranca-para-o-retorno-as-aulas-na-rede-e",
+    "sinteac-mantem-pressao-por-reajuste-e-cobra-medidas-de-seguranca-nas-escolas",
+    "profissionais-da-educacao-municipal-fazem-manifestacao-em-frente-a-prefeitura-e-ameacam-greve-po",
     "fies-2026-pre-selecionados-devem-validar-dados-da-inscricao-ate-hoje",
     "crimes-de-maio-foi-como-uma-bomba-que-caiu-em-sp-compara-professor",
+    "ira-executa-homem-condenado-por-espionagem-a-servico-dos-eua-e-de-israel",
+    "homem-acusado-de-tentar-assassinar-trump-em-jantar-na-casa-branca-se-declara-inocente",
+    "mega-sena-concurso-3-006-nenhuma-aposta-acerta-as-seis-dezenas-e-premio-vai-a-r-52-milhoes",
+    "putin-diz-que-guerra-na-ucrania-e-justa-e-critica-otan-em-desfile-enxuto-do-dia-da-vitoria",
+    "cruzeiro-tem-cinco-jogadores-na-pre-lista-da-selecao-para-a-copa-do-mundo",
+    "selecao-da-argentina-divulga-pre-lista-de-convocados-para-copa-do-mundo-com-flaco-lopez-e-giay-d",
+    "endrick-detona-brasileiros-que-torcem-para-a-argentina-loucura",
+    "flamengo-vence-o-gremio-na-arena-e-segue-caca-ao-lider-palmeiras",
+    "selecao-brasileira-veja-os-55-pre-selecionados-para-a-copa",
+    "ira-adverte-aliados-dos-eua-que-sera-dificil-para-eles-cruzar-estreito-de-ormuz",
+    "cidadaos-repatriados-testam-positivo-para-hantavirus-apos-serem-retirados-de-navio",
+    "apos-criticas-de-trump-ira-defende-sua-proposta-para-encerrar-guerra-e-negociacoes-travam-entend",
+    "apple-brings-encrypted-rcs-chats-to-iphone",
+    "tenis-victoria-barros-conquista-maior-titulo-da-carreira-na-alemanha",
+    "texas-sues-netflix-for-advertising-bait-and-switch-and-spying",
+    "emmanuel-macron-reprime-plateia-por-barulho-em-evento-no-quenia-veja-video",
+    "com-chuva-e-frio-meia-maratona-internacional-reune-atletas-da-triplice-fronteira-em-assis-brasil",
+    "a-million-baby-monitors-and-security-cameras-were-easily-viewable-by-hackers",
+    "nova-lei-define-percentual-minimo-de-cacau-nos-chocolates",
+    "7-of-our-favorite-deals-from-amazon-s-pet-days-sale",
+    "live-updates-from-elon-musk-and-sam-altman-s-court-battle-over-the-future-of-openai",
+    "gm-settles-california-lawsuit-claiming-it-sold-driving-habit-data-to-insurance-companies",
+    "matter-and-openadr-team-up-to-connect-smart-homes-to-the-grid",
+    "tiktok-is-letting-uk-users-pay-to-remove-ads",
     "a-solucao-para-a-br-364-esta-no-concreto-armado-e-nao-no-macadame-diz-bocalom",
     "semana-em-natal-sera-marcada-por-chuvas-em-todos-os-dias",
     "venmo-finally-takes-privacy-seriously",
@@ -138,9 +168,12 @@
     "nao-me-surpreendi",
     "logitech-s-tiny-folding-mouse-improves-upon-the-laptop-trackpad",
     "frio-intenso-muda-visual-dos-rio-branquenses-e-agasalhos-tomam-conta-do-centro-da-capital",
+    "governo-anuncia-leilao-eletronico-de-maquinas-e-veiculos-do-deracre",
+    "seguranca-publica-registra-reducao-nos-indices-de-mortes-violentas-em-todo-o-estado",
     "com-recorde-na-producao-de-milho-armazens-da-cageacre-operam-com-capacidade-maxima-no-interior-d",
     "mpac-instaura-procedimento-para-proteger-adolescente-vitima-de-abuso-sexual-em-ambiente-familiar",
     "jogos-de-hoje-quem-joga-no-futebol-e-onde-assistir-ao-vivo-segunda-feira-11-05",
+    "napoli-x-bologna-escalacoes-e-onde-assistir-ao-campeonato-italiano",
     "rayo-vallecano-x-girona-horario-e-onde-assistir-ao-jogo-de-laliga",
     "copa-do-mundo-confira-quando-as-campeas-mundiais-serao-convocadas",
     "google-stopped-a-zero-day-hack-that-it-says-was-developed-with-ai",
@@ -154,6 +187,7 @@
     "empreendedor-edmilson-lanca-livro-sobre-os-bastidores-do-futebol",
     "flamengo-vence-o-gremio-e-manda-time-gaucho-para-o-z4-do-brasileirao",
     "edmilson-evita-comparar-geracoes-nao-e-por-isso-que-nao-e-campeao",
+    "o-fenomeno-carla-madeira-que-domina-as-redes-e-divide-leitores-com-seus-livros-literatura-nao-e-",
     "lily-allen-posta-que-quer-dancar-com-gays-e-conhecer-a-patixa-apos-confirmar-show-em-sp",
     "michael-jackson-e-o-artista-mais-ouvido-do-spotify-global-quase-17-anos-apos-sua-morte",
     "primavera-sound-2026-anuncia-line-up-com-gorillaz-strokes-e-lily-allen",
@@ -163,10 +197,11 @@
     "predio-do-ultimo-show-dos-beatles-sera-transformado-em-museu-de-sete-andares-em-londres",
     "lei-reconhece-atividade-circense-como-expressao-da-cultura-popular",
     "aplicacao-a-partir-de-r-1-rendimento-atrelado-a-selic-como-funciona-o-novo-tesouro-reserva",
-    "apos-moraes-suspender-dosimetria-lider-do-pl-articula-pec-sobre-anistia",
+    "governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate",
+    "audiencia-publica-debate-novo-plano-diretor-e-propostas-para-mobilidade-comercio-e-combate-as-al",
+    "governo-lanca-editais-para-conectar-ate-3-8-mil-ubs",
     "nefasta-a-democracia-brasileira-diz-lider-do-governo-sobre-pec-da-anistia",
     "ministro-da-fazenda-diz-que-reavaliar-constantemente-os-precos-de-combustiveis-e-tarefa-da-petro",
-    "estados-unidos-devem-flexibilizar-tarifas-para-importacao-de-carne-bovina",
     "lula-sanciona-lei-que-endurece-regras-para-a-fabricacao-de-chocolate-veja-o-que-muda",
     "nao-restou-outra-alternativa-diz-lider-do-pl-na-camara-sobre-retomar-debate-de-pec-da-anistia",
     "nunes-marques-convida-ex-presidentes-para-posse-no-tse-incluindo-bolsonaro-e-collor-que-estao-pr",
@@ -186,6 +221,7 @@
     "lula-recebe-michelle-bachelet-nesta-segunda-em-meio-a-disputa-pelo-comando-da-onu",
     "medo-de-violencia-politica-atinge-6-a-cada-10-brasileiros-aponta-estudo",
     "fundos-que-compraram-precatorios-antecipados-investigados-pela-pf-repassaram-creditos-ao-master",
+    "ira-diz-que-sua-proposta-de-paz-e-legitima",
     "taxa-das-blusinhas-arrecadacao-federal-sobe-25-ate-abril-e-bate-novo-recorde-governo-discute-aca",
     "nunes-marques-assume-tse-com-desafio-do-uso-da-ia-nas-eleicoes-2026",
     "como-suspensao-da-ype-pela-anvisa-virou-tema-de-disputa-politica-nas-redes",
@@ -196,50 +232,26 @@
     "golpes-digitais-preocupam-83-da-populacao-aponta-levantamento",
     "medo-da-violencia-altera-a-rotina-de-57-dos-brasileiros-e-afeta-mais-mulheres-e-populacao-de-bai",
     "41-dos-brasileiros-afirmam-conviver-com-o-crime-organizado-no-bairro-onde-moram",
-    "decreto-n-195-2026-de-5-de-maio-de-2026",
-    "ce-n-007-2026-aviso-de-licitacao",
-    "ira-executa-homem-condenado-por-espionagem-a-servico-dos-eua-e-de-israel",
     "operacao-integrada-cumpre-34-mandados-de-prisao-em-quatro-estados-e-mira-organizacao-criminosa",
-    "homem-acusado-de-tentar-assassinar-trump-em-jantar-na-casa-branca-se-declara-inocente",
-    "mega-sena-concurso-3-006-nenhuma-aposta-acerta-as-seis-dezenas-e-premio-vai-a-r-52-milhoes",
-    "putin-diz-que-guerra-na-ucrania-e-justa-e-critica-otan-em-desfile-enxuto-do-dia-da-vitoria",
-    "cruzeiro-tem-cinco-jogadores-na-pre-lista-da-selecao-para-a-copa-do-mundo",
-    "selecao-da-argentina-divulga-pre-lista-de-convocados-para-copa-do-mundo-com-flaco-lopez-e-giay-d",
-    "endrick-detona-brasileiros-que-torcem-para-a-argentina-loucura",
-    "flamengo-vence-o-gremio-na-arena-e-segue-caca-ao-lider-palmeiras",
-    "selecao-brasileira-veja-os-55-pre-selecionados-para-a-copa",
-    "ira-adverte-aliados-dos-eua-que-sera-dificil-para-eles-cruzar-estreito-de-ormuz",
-    "cidadaos-repatriados-testam-positivo-para-hantavirus-apos-serem-retirados-de-navio",
-    "apos-criticas-de-trump-ira-defende-sua-proposta-para-encerrar-guerra-e-negociacoes-travam-entend",
-    "apple-brings-encrypted-rcs-chats-to-iphone",
-    "corinthians-x-sao-paulo-foragidos-sao-presos-ao-entrar-no-estadio",
-    "tecnico-de-curacao-pede-demissao-a-um-mes-da-copa-do-mundo",
-    "tenis-victoria-barros-conquista-maior-titulo-da-carreira-na-alemanha",
-    "fazenda-espera-votacao-do-projeto-sobre-receitas-de-petroleo-nesta-semana",
+    "acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte",
+    "elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade",
+    "veja-as-listas-de-convocados-de-todas-as-48-selecoes-da-copa-do-mundo-2026",
+    "guilherme-fontes-de-a-viagem-posta-cliques-raros-com-a-namorada",
+    "bolsas-da-europa-fecham-mistas-com-impasse-para-resolucao-da-guerra",
+    "setor-de-proteina-animal-alerta-para-risco-de-inflacao-nos-alimentos",
+    "trump-ve-moderados-e-lunaticos-em-negociacoes-com-ira",
+    "anac-orienta-aereas-a-aceitarem-certidao-de-nascimento-digital",
+    "procon-divulga-balanco-da-operacao-dia-das-maes",
     "saiba-como-investir-no-tesouro-reserva",
-    "benedict-cumberbatch-se-envolve-em-discussao-acalorada-com-ciclista-veja",
-    "precos-do-petroleo-sobem-apos-trump-rejeitar-proposta-de-paz-do-ira",
-    "homem-atropela-e-mata-quatro-pessoas-foge-e-e-preso-no-interior-de-sp",
-    "texas-sues-netflix-for-advertising-bait-and-switch-and-spying",
     "red-hot-chili-peppers-vende-catalogo-musical-por-mais-de-r-1-bilhao-a-warner-music",
-    "emmanuel-macron-reprime-plateia-por-barulho-em-evento-no-quenia-veja-video",
     "aplicativo-de-emergencia-ja-atende-47-escolas-e-reforca-seguranca-na-volta-as-aulas",
-    "com-chuva-e-frio-meia-maratona-internacional-reune-atletas-da-triplice-fronteira-em-assis-brasil",
     "sindicato-dos-professores-diz-que-escolas-nao-estao-preparadas-para-retorno-apos-ataque-no-insti",
     "pm-lanca-operacao-escola-segura-e-mobiliza-70-policiais-para-o-retorno-as-aulas-em-rio-branco",
-    "a-million-baby-monitors-and-security-cameras-were-easily-viewable-by-hackers",
-    "nova-lei-define-percentual-minimo-de-cacau-nos-chocolates",
-    "7-of-our-favorite-deals-from-amazon-s-pet-days-sale",
     "sindicato-dos-professores-questiona-retorno-das-aulas-apos-ataque-em-escola",
-    "live-updates-from-elon-musk-and-sam-altman-s-court-battle-over-the-future-of-openai",
     "adolescente-de-13-anos-e-apreendido-apos-estuprar-idosa-de-92-anos",
-    "gm-settles-california-lawsuit-claiming-it-sold-driving-habit-data-to-insurance-companies",
-    "matter-and-openadr-team-up-to-connect-smart-homes-to-the-grid",
+    "sao-paulo-tem-a-menor-temperatura-do-ano-nesta-madrugada",
     "acao-do-ipem-e-inmetro-fortalece-a-seguranca-do-consumidor-acreano-no-dia-das-maes",
     "mercado-eleva-previsao-da-inflacao-para-4-91-este-ano",
-    "tiktok-is-letting-uk-users-pay-to-remove-ads",
-    "ira-diz-que-sua-proposta-de-paz-e-legitima",
-    "nova-lei-define-percentual-minimo-de-cacau-nos-chocolates",
     "dua-lipa-processa-samsung-por-uso-indevido-de-imagem-para-vender-televisoes-e-pede-us-15-milhoes",
     "chiclete-descartado-ajuda-a-prender-assassino-e-estuprador-apos-decadas",
     "mailza-reforca-compromisso-com-maes-acreanas-em-video-carregado-de-emocao",
@@ -606,7 +618,6 @@
     "forro-do-senadinho-celebra-dia-das-maes-no-casarao-com-musica-e-confraternizacao",
     "os-cabra-macho-roberto-rizzo-e-seu-sergio-fazem-show-de-humor-no-jupara",
     "defesa-afirma-que-eventual-uso-do-nome-de-padrasto-de-atirador-ocorreu-sem-autorizacao",
-    "la-testa-gira-musica-com-anitta-e-a-5-mais-ouvida-na-italia-e-marca-segundo-top-5-dela-no-pais",
     "no-japao-yudi-tamashiro-se-declara-para-o-filho-mudou-minha-vida",
     "nicolau-junior-enaltece-investimentos-do-governo-na-entrega-do-servico-de-ressonancia-em-brasile",
     "relator-de-acoes-que-questionam-lei-da-dosimetria-moraes-pede-informacoes-a-presidencia-e-ao-con",
@@ -667,6 +678,7 @@
     "faturamento-da-industria-tem-recuperacao-e-sobe-3-8-em-marco",
     "rendimento-dos-mais-ricos-e-13-8-vezes-maior-que-o-dos-mais-pobres",
     "renda-media-das-familias-chega-a-r-2-264-e-e-recorde-em-2025",
+    "la-testa-gira-musica-com-anitta-e-a-5-mais-ouvida-na-italia-e-marca-segundo-top-5-dela-no-pais",
     "por-que-seu-jorge-demorou-mais-de-15-anos-para-lancar-o-album-que-ele-diz-ser-a-sua-cara",
     "mega-sena-acumula-e-premio-principal-vai-para-r-45-milhoes",
     "mailza-manifesta-apoio-a-gladson-apos-condenacao-no-stj-e-afirma-seguir-com-fe-na-justica",
@@ -1002,19 +1014,7 @@
     "mp-impede-que-contraventor-adilsinho-retorne-para-o-rio-de-janeiro",
     "mega-sena-3005-sorteio-desta-quinta-feira-7-pode-pagar-r-36-milhoes",
     "em-ato-de-solidariedade-caminhada-pelas-vitimas-do-instituto-sao-jose-acontece-nesta-quinta",
-    "delegacao-europeia-confia-em-aprovacao-final-de-acordo-com-mercosul",
-    "o-menino-nao-agiu-sozinho-diz-governadora-mailza",
-    "corre-alan-a-mailza-ta-chegando",
-    "prefeitura-de-cruzeiro-do-sul-suspende-aulas-da-rede-municipal-em-sinal-de-luto-e-reforco-a-segu",
-    "baixa-do-rio-jurua-paralisa-travessia-de-balsa-entre-cruzeiro-do-sul-e-rodrigues-alves",
-    "zequinha-vistoria-obras-de-reforma-e-ampliacao-do-centro-de-zoonose-em-cruzeiro-do-sul",
-    "evento-meca-brasil-promete-agitar-cruzeiro-do-sul-com-som-automotivo-e-carros-rebaixados",
-    "prazo-final-para-regularizacao-do-titulo-movimenta-cartorio-eleitoral-em-cruzeiro-do-sul",
-    "comerciante-idoso-reage-a-assalto-e-e-baleado-em-cruzeiro-do-sul",
-    "dupla-com-mandado-de-prisao-por-homicidio-e-presa-com-arma-e-cocaina-em-cruzeiro-do-sul",
-    "cruzeiro-do-sul-suspende-aulas-e-jogos-escolares-em-sinal-de-luto",
-    "mancio-lima-participa-pela-primeira-vez-do-financidades-e-apresenta-projeto-de-gestao-de-residuo",
-    "mancio-lima-participa-do-financidades-e-apresenta-projeto-de-gestao-de-residuos-solidos"
+    "delegacao-europeia-confia-em-aprovacao-final-de-acordo-com-mercosul"
   ],
   "reviewQueue": [],
   "items": [
@@ -1024,7 +1024,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T20:04:08.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/20192d7b-4f38-4f26-95d6-88c2dce71c67.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1048,7 +1048,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T19:14:57.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7446.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1070,7 +1070,7 @@
       "category": "Prefeitura",
       "sourceName": "Agencia Acre",
       "publishedAt": "2026-05-11T17:25:15.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.25.34-1-300x200.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1097,7 +1097,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T17:10:57.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/prefeitura-de-cruzeiro-do-sul-insere-471-novas-familias-no-bolsa-familia-e-amplia-busca-at.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1121,7 +1121,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T16:35:54.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/erosao-avanca-e-compromete-acesso-ao-porto-entre-cruzeiro-do-sul-e-rodrigues-alves.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1364,6 +1364,28 @@
       "reasons": []
     },
     {
+      "slug": "urgente-porto-de-rodrigues-alves-e-interditado-apos-risco-de-desbarrancamento",
+      "title": "Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento",
+      "category": "Prefeitura",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T23:23:18.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7429.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "poste-cai-e-energisa-faz-transferencia-de-carga-para-outro-equipamento-em-rodrigues-alves",
       "title": "Poste cai e Energisa faz transferência de carga para outro equipamento em Rodrigues Alves",
       "category": "Prefeitura",
@@ -1380,23 +1402,25 @@
         "ratio": 0.829,
         "orientation": "portrait"
       },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "rodrigues-alves-e-jordao-recebem-recursos-para-reforco-na-saude",
       "title": "Rodrigues Alves e Jordão recebem recursos para reforço na saúde",
-      "category": "Saude",
+      "category": "Saúde",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T17:08:39.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/rodrigues-alves-e-jordao-recebem-recursos-para-reforco-na-saude.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1490,83 +1514,6 @@
       ]
     },
     {
-      "slug": "governo-do-acre-alcanca-marco-historico-com-entrega-de-600-identidades-em-santa-rosa-do-purus",
-      "title": "Governo do Acre alcança marco histórico com entrega de 600 identidades em Santa Rosa do Purus",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-05-11T17:22:38.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "/assets/news-fallbacks/governo-do-acre-alcanca-marco-historico-com-entrega-de-600-identidades-em-santa-rosa-do-pu.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "senai-certifica-turmas-de-cursos-profissionalizantes-em-placido-de-castro",
-      "title": "SENAI certifica turmas de cursos profissionalizantes em Plácido de Castro",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T16:06:48.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/01-foto-principal-1200x843.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 843,
-        "ratio": 1.423,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "sinteac-cobra-reajuste-salarial-e-ameaca-greve-em-rio-branco",
-      "title": "Sinteac cobra reajuste salarial e ameaça greve em Rio Branco",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T15:21:17.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-49.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "rio-acre-apresenta-vazante-e-registra-nivel-de-7-40-metros-em-rio-branco",
       "title": "Rio Acre apresenta vazante e registra nível de 7,40 metros em Rio Branco",
       "category": "Utilidade Pública",
@@ -1596,10 +1543,10 @@
     {
       "slug": "ms-libera-mais-de-r-1-8-milhao-para-reforcar-unidades-de-saude-em-municipios-do-acre",
       "title": "MS libera mais de R$ 1,8 milhão para reforçar unidades de saúde em municípios do Acre",
-      "category": "Saude",
+      "category": "Saúde",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T16:41:28.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2025/05/d6a2683.webp",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1614,6 +1561,30 @@
       },
       "level": "ok",
       "reasons": []
+    },
+    {
+      "slug": "sinteac-cobra-reajuste-salarial-e-ameaca-greve-em-rio-branco",
+      "title": "Sinteac cobra reajuste salarial e ameaça greve em Rio Branco",
+      "category": "Educação",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T15:21:17.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-49.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "beijo-de-judas",
@@ -1784,7 +1755,7 @@
       "category": "Acre / Governo",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T20:23:26.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/acre-ja-recebeu-quase-69-mil-declaracoes-do-imposto-de-renda-2026-maioria-dos-contribuinte.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1803,12 +1774,36 @@
       ]
     },
     {
+      "slug": "governo-do-acre-alcanca-marco-historico-com-entrega-de-600-identidades-em-santa-rosa-do-purus",
+      "title": "Governo do Acre alcança marco histórico com entrega de 600 identidades em Santa Rosa do Purus",
+      "category": "Acre / Governo",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-05-11T17:22:38.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/governo-do-acre-alcanca-marco-historico-com-entrega-de-600-identidades-em-santa-rosa-do-pu.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "ufac-abre-65-vagas-remanescentes-para-cursos-de-graduacao-no-interior-do-acre",
       "title": "Ufac abre 65 vagas remanescentes para cursos de graduação no interior do Acre",
       "category": "Acre / Governo",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T16:23:52.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/ufac-abre-65-vagas-remanescentes-para-cursos-de-graduacao-no-interior-do-acre.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1832,7 +1827,7 @@
       "category": "Acre / Governo",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T16:12:45.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/4d29544a-11bb-423f-b052-fdb6933aee51-1200x675.webp",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1861,7 +1856,7 @@
       "category": "Acre / Governo",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-05-11T16:09:16.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/influenciadora-alice-salazar-vem-ao-acre-para-seminario-gratuito-de-beleza.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -1885,7 +1880,7 @@
       "category": "Acre / Governo",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-05-11T16:07:26.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/acre-recebeu-quase-69-mil-declaracoes-do-imposto-de-renda-2026.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2182,10 +2177,10 @@
     {
       "slug": "jorge-viana-inicia-agenda-pelo-interior-do-acre-ao-lado-de-binho-marques-e-fala-em-novo-momento-",
       "title": "Jorge Viana inicia agenda pelo interior do Acre ao lado de Binho Marques e fala em “novo momento” para o estado",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T19:19:23.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7447.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2206,10 +2201,10 @@
     {
       "slug": "governo-do-acre-leva-acao-integrada-de-saude-e-cidadania-a-moradores-da-floresta-estadual-do-ant",
       "title": "Governo do Acre leva ação integrada de saúde e cidadania a moradores da Floresta Estadual do Antimary",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Batelao",
       "publishedAt": "2026-05-11T15:37:35.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-09-at-21.53.34-10-1024x768.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2235,10 +2230,10 @@
     {
       "slug": "a-saude-do-acre-esta-doente-e-precisa-de-alguem-preparado-para-resolver-diz-thor-em-agenda-no-cr",
       "title": "“A saúde do Acre está doente e precisa de alguém preparado para resolver”, diz Thor em agenda no CRM/AC",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T15:15:25.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.04.35.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2259,10 +2254,10 @@
     {
       "slug": "seguranca-publica-do-acre-reforca-combate-ao-suicidio-com-curso-de-intervencao-em-crises-e-prese",
       "title": "Segurança pública do Acre reforça combate ao suicídio com curso de intervenção em crises e preservação de vidas",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T18:55:52.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/7671a3d8-81c7-4930-ac1a-e2e3c8dc183a-scaled.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2281,10 +2276,10 @@
     {
       "slug": "brigas-durante-consumo-de-alcool-lideram-causas-de-homicidios-no-acre-aponta-policia-civil",
       "title": "Brigas durante consumo de álcool lideram causas de homicídios no Acre, aponta Polícia Civil",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T18:24:52.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T082408.436.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2305,10 +2300,10 @@
     {
       "slug": "seguranca-escolar-no-acre-aplicativo-aciona-policia-com-um-botao-e-deve-chegar-a-100-das-escolas",
       "title": "Segurança escolar no Acre: aplicativo aciona polícia com um botão e deve chegar a 100% das escolas até dezembro",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T17:46:40.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-11.20.58-1200x900.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2334,10 +2329,10 @@
     {
       "slug": "acre-lidera-crescimento-do-comercio-varejista-no-brasil-com-alta-de-11-5",
       "title": "Acre lidera crescimento do comércio varejista no Brasil com alta de 11,5%",
-      "category": "Negocios",
+      "category": "Negócios",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T16:22:26.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/acre-lidera-crescimento-do-comercio-varejista-no-brasil-com-alta-de-11-5.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2358,10 +2353,10 @@
     {
       "slug": "prf-apreende-quase-175-kg-de-skunk-e-prende-dois-homens-na-br-364-em-rio-branco",
       "title": "PRF apreende quase 175 kg de skunk e prende dois homens na BR-364 em Rio Branco",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-05-11T16:13:47.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/prf-apreende-quase-175-kg-de-skunk-e-prende-dois-homens-na-br-364-em-rio-branco.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2380,12 +2375,41 @@
       ]
     },
     {
+      "slug": "senai-certifica-turmas-de-cursos-profissionalizantes-em-placido-de-castro",
+      "title": "SENAI certifica turmas de cursos profissionalizantes em Plácido de Castro",
+      "category": "Negócios",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T16:06:48.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/01-foto-principal-1200x843.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 843,
+        "ratio": 1.423,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "acre-lidera-crescimento-do-varejo-no-pais-com-alta-de-11-5-aponta-levantamento",
       "title": "Acre lidera crescimento do varejo no país com alta de 11,5%, aponta levantamento",
-      "category": "Negocios",
+      "category": "Negócios",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T15:56:11.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/02/WhatsApp-Image-2026-02-20-at-11.45.14-1200x675.webp",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2489,6 +2513,118 @@
       ]
     },
     {
+      "slug": "brasil-tera-dia-nacional-em-memoria-de-vitimas-do-transito",
+      "title": "Brasil terá Dia Nacional em Memória de Vítimas do Trânsito",
+      "category": "Utilidade Pública",
+      "sourceName": "Agencia Brasil",
+      "publishedAt": "2026-05-11T12:12:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/brasil-tera-dia-nacional-em-memoria-de-vitimas-do-transito.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "a-ia-pode-se-tornar-sua-amiga-entenda-a-opiniao-dos-especialistas",
+      "title": "A IA pode se tornar sua amiga? Entenda a opinião dos especialistas",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:34:13.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/google-chrome-e1778280706987.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "mesmo-em-niveis-baixos-poluicao-aumenta-internacoes-por-doencas-renais",
+      "title": "Mesmo em níveis baixos, poluição aumenta internações por doenças renais",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:22:37.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/robina-weermeijer-sRXCFkJahGk-unsplash.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "apos-sofrer-avc-marido-de-kelly-key-faz-reflexao-olhar-com-gratidao",
+      "title": "Após sofrer AVC, marido de Kelly Key faz reflexão: “Olhar com gratidão”",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:20:07.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/kelly-key-marido.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "comer-carne-vermelha-aumenta-o-risco-de-diabetes-tipo-2",
+      "title": "Comer carne vermelha aumenta o risco de diabetes tipo 2?",
+      "category": "Saúde",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:19:54.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/envelhecimento.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "saiba-quem-e-o-brasileiro-duble-de-pedro-pascal-no-novo-filme-da-saga-star-wars",
       "title": "Saiba quem é o brasileiro dublê de Pedro Pascal no novo filme da saga 'Star Wars'",
       "category": "Educação",
@@ -2509,6 +2645,74 @@
       },
       "level": "ok",
       "reasons": []
+    },
+    {
+      "slug": "corinthians-x-sao-paulo-foragidos-sao-presos-ao-entrar-no-estadio",
+      "title": "Corinthians x São Paulo: foragidos são presos ao entrar no estádio",
+      "category": "Cotidiano",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:41:59.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/ARCEBISPO-APARECIDA-1.png?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "brasil-e-china-concordam-com-isencao-de-vistos-para-viagens-de-ate-30-dias",
+      "title": "Brasil e China concordam com isenção de vistos para viagens de até 30 dias",
+      "category": "Cotidiano",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:09:39.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Presidentes-dos-EUA-Donald-Trump-e-da-China-Xi-Jinping-30-de-outubro-de-2025.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo",
+      "title": "Bonito e inseguro: pesquisa inédita revela como Brasil é visto no mundo",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-05-11T16:18:12.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "mosaic-tem-prejuizo-liquido-de-us-258-milhoes-no-trimestre",
@@ -2577,28 +2781,6 @@
       "reasons": [
         "manual-focus-present"
       ]
-    },
-    {
-      "slug": "bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo",
-      "title": "Bonito e inseguro: pesquisa inédita revela como Brasil é visto no mundo",
-      "category": "Cotidiano",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T11:45:33.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/ChatGPT-Image-8-de-mai.-de-2026-16_21_33.webp",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
     },
     {
       "slug": "ons-melhora-previsao-de-chuvas-para-hidreletricas-do-sul-em-maio",
@@ -2716,7 +2898,7 @@
       "category": "Esporte",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T19:22:27.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/desenrola-brasil-permite-uso-do-fgts-para-quitar-dividas-veja-como-funciona-e-quem-pode-ad.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2740,7 +2922,7 @@
       "category": "Esporte",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:41:10.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/WhatsApp-Image-2026-05-11-at-11.45.51-1.jpeg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2757,12 +2939,36 @@
       "reasons": []
     },
     {
+      "slug": "tecnico-de-curacao-pede-demissao-a-um-mes-da-copa-do-mundo",
+      "title": "Técnico de Curaçao pede demissão a um mês da Copa do Mundo",
+      "category": "Esporte",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:35:45.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "santa-cruz-tera-o-paysandu-como-adversario-na-2-fase-da-copa-do-brasil-sub-15",
       "title": "Santa Cruz terá o Paysandu como adversário na 2ª fase da Copa do Brasil Sub-15",
       "category": "Esporte",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T15:51:52.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-09.55.14-1200x1200.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2856,6 +3062,30 @@
       ]
     },
     {
+      "slug": "benedict-cumberbatch-se-envolve-em-discussao-acalorada-com-ciclista-veja",
+      "title": "Benedict Cumberbatch se envolve em discussão acalorada com ciclista; veja",
+      "category": "Cultura",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:17:03.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/virginia-18.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "resumo-de-a-nobreza-do-amor-de-11-a-16-de-maio",
       "title": "Resumo de “A Nobreza do Amor”: de 11 a 16 de maio",
       "category": "Cultura",
@@ -2902,10 +3132,10 @@
     {
       "slug": "moraes-suspende-dosimetria-ate-stf-julgar-acoes-contra-lei-que-reduz-pena-de-bolsonaro-e-condena",
       "title": "Moraes suspende Dosimetria até STF julgar ações contra lei que reduz pena de Bolsonaro e condenados do 8 de Janeiro; o que acontece agora",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T19:51:46.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T095114.419.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2924,12 +3154,58 @@
       ]
     },
     {
+      "slug": "apos-moraes-suspender-dosimetria-lider-do-pl-articula-pec-sobre-anistia",
+      "title": "Após Moraes suspender dosimetria, líder do PL articula PEC sobre anistia",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:42:21.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/alexandre-moraes-plenario-stf.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "estados-unidos-devem-flexibilizar-tarifas-para-importacao-de-carne-bovina",
+      "title": "Estados Unidos devem flexibilizar tarifas para importação de carne bovina",
+      "category": "Política",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:10:34.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/reuters.webp?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "bolsa-familia-veja-quando-comeca-o-pagamento-do-beneficio-em-maio",
       "title": "Bolsa Família: veja quando começa o pagamento do benefício em maio",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T15:50:30.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/bolsa-familia-veja-quando-comeca-o-pagamento-do-beneficio-em-maio.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -2950,10 +3226,10 @@
     {
       "slug": "stf-deve-manter-validade-da-lei-da-dosimetria-mesmo-apos-suspensao-determinada-por-moraes",
       "title": "STF deve manter validade da Lei da Dosimetria mesmo após suspensão determinada por Moraes",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T13:01:41.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/stf-deve-manter-validade-da-lei-da-dosimetria-mesmo-apos-suspensao-determinada-por-moraes.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3044,35 +3320,61 @@
       ]
     },
     {
-      "slug": "brasil-e-china-concordam-com-isencao-de-vistos-para-viagens-de-ate-30-dias",
-      "title": "Brasil e China concordam com isenção de vistos para viagens de até 30 dias",
-      "category": "Nacional",
+      "slug": "pesquisa-global-de-percepcao-sobre-o-brasil-revela-pontos-fortes-e-fracos",
+      "title": "Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos",
+      "category": "Policia",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:09:39.000Z",
+      "publishedAt": "2026-05-11T18:00:34.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Presidentes-dos-EUA-Donald-Trump-e-da-China-Xi-Jinping-30-de-outubro-de-2025.jpg?w=200",
+      "imageUrl": "/assets/news-fallbacks/pesquisa-global-de-percepcao-sobre-o-brasil-revela-pontos-fortes-e-fracos.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
-      "slug": "bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo",
-      "title": "Bonito e inseguro: pesquisa inédita revela como Brasil é visto no mundo",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-05-11T16:18:12.000Z",
+      "slug": "era-briga-todo-dia-afirma-vizinho-de-mulher-morta-apos-casamento-em-sp",
+      "title": "“Era briga todo dia”, afirma vizinho de mulher morta após casamento em SP",
+      "category": "Festas & Social",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:34:38.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/bonito-e-inseguro-pesquisa-inedita-revela-como-brasil-e-visto-no-mundo.svg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GCM-PRESO-FEMINICIDIO.png?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "fazenda-espera-votacao-do-projeto-sobre-receitas-de-petroleo-nesta-semana",
+      "title": "Fazenda espera votação do projeto sobre receitas de petróleo nesta semana",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:19:49.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/fazenda-espera-votacao-do-projeto-sobre-receitas-de-petroleo-nesta-semana.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -3090,19 +3392,41 @@
       ]
     },
     {
-      "slug": "brasil-tera-dia-nacional-em-memoria-de-vitimas-do-transito",
-      "title": "Brasil terá Dia Nacional em Memória de Vítimas do Trânsito",
-      "category": "Nacional",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-05-11T12:12:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "/assets/news-fallbacks/brasil-tera-dia-nacional-em-memoria-de-vitimas-do-transito.svg",
+      "slug": "precos-do-petroleo-sobem-apos-trump-rejeitar-proposta-de-paz-do-ira",
+      "title": "Preços do petróleo sobem após Trump rejeitar proposta de paz do Irã",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:16:45.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/wall-street-bolsas-dos-estados-unidos-guerra-ia.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "homem-atropela-e-mata-quatro-pessoas-foge-e-e-preso-no-interior-de-sp",
+      "title": "Homem atropela e mata quatro pessoas, foge e é preso no interior de SP",
+      "category": "Polícia",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:15:08.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-18-at-12.17.48.jpeg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
+      "effectiveFocus": "center 42%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -3167,7 +3491,7 @@
       "category": "Prefeitura",
       "sourceName": "Prefeitura de CZS",
       "publishedAt": "2026-05-11T18:09:00.366Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://static.wixstatic.com/media/0204e8_ccf4c8b57a3948d1b6a6d340b9c14af1~mv2.jpg/v1/fill/w_147,h_68,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_ccf4c8b57a3948d1b6a6d340b9c14af1~mv2.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3191,7 +3515,7 @@
       "category": "Prefeitura",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T19:05:42.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7445.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3208,282 +3532,13 @@
       "reasons": []
     },
     {
-      "slug": "audiencia-publica-debate-novo-plano-diretor-e-propostas-para-mobilidade-comercio-e-combate-as-al",
-      "title": "Audiência pública debate novo Plano Diretor e propostas para mobilidade, comércio e combate às alagações",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T17:54:39.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-11.23.07-1-1200x759.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 759,
-        "ratio": 1.581,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "prefeitura-nao-apresenta-proposta-e-sinteac-mantem-manifestacoes-com-ameaca-de-greve-em-rio-bran",
-      "title": "Prefeitura não apresenta proposta e Sinteac mantém manifestações com ameaça de greve em Rio Branco",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T17:50:47.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.17.55-1-1200x675.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "governo-anuncia-leilao-eletronico-de-maquinas-e-veiculos-do-deracre",
-      "title": "Governo anuncia leilão eletrônico de máquinas e veículos do Deracre",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-05-11T17:35:57.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-04-at-11.27.49-1-150x150.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 150,
-        "height": 150,
-        "ratio": 1,
-        "orientation": "square"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "era-briga-todo-dia-afirma-vizinho-de-mulher-morta-apos-casamento-em-sp",
-      "title": "“Era briga todo dia”, afirma vizinho de mulher morta após casamento em SP",
-      "category": "Prefeitura",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:34:38.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/GCM-PRESO-FEMINICIDIO.png?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "procon-divulga-balanco-da-operacao-dia-das-maes",
-      "title": "Procon divulga balanço da Operação Dia das Mães",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-05-11T17:32:41.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-04-at-10.30.37-1-1-1024x771.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 771,
-        "ratio": 1.328,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "educacao-lanca-guia-com-estrategias-de-acolhimento-e-seguranca-para-o-retorno-as-aulas-na-rede-e",
-      "title": "Educação lança guia com estratégias de acolhimento e segurança para o retorno às aulas na rede estadual",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-05-11T17:17:30.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_20260510_174545-813x1024.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 813,
-        "height": 1024,
-        "ratio": 0.794,
-        "orientation": "portrait"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "sinteac-mantem-pressao-por-reajuste-e-cobra-medidas-de-seguranca-nas-escolas",
-      "title": "Sinteac mantém pressão por reajuste e cobra medidas de segurança nas escolas",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T17:13:12.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-52.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "seguranca-publica-registra-reducao-nos-indices-de-mortes-violentas-em-todo-o-estado",
-      "title": "Segurança pública registra redução nos índices de mortes violentas em todo o Estado",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Acre",
-      "publishedAt": "2026-05-11T17:12:27.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-08-at-12.23.36-17-1024x682.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1024,
-        "height": 682,
-        "ratio": 1.501,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "profissionais-da-educacao-municipal-fazem-manifestacao-em-frente-a-prefeitura-e-ameacam-greve-po",
-      "title": "Profissionais da educação municipal fazem manifestação em frente à Prefeitura e ameaçam greve por reajuste salarial",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T16:03:43.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.17.55-1200x675.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "prf-aponta-invasao-de-pista-contraria-como-causa-inicial-de-acidente-fatal-na-variante",
       "title": "PRF aponta invasão de pista contrária como causa inicial de acidente fatal na Variante",
       "category": "Prefeitura",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T15:30:49.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/prf-aponta-invasao-de-pista-contraria-como-causa-inicial-de-acidente-fatal-na-variante.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "sao-paulo-tem-a-menor-temperatura-do-ano-nesta-madrugada",
-      "title": "São Paulo tem a menor temperatura do ano nesta madrugada",
-      "category": "Prefeitura",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-05-11T15:07:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "/assets/news-fallbacks/sao-paulo-tem-a-menor-temperatura-do-ano-nesta-madrugada.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -3528,6 +3583,50 @@
       "reasons": []
     },
     {
+      "slug": "decreto-n-195-2026-de-5-de-maio-de-2026",
+      "title": "DECRETO Nº 195/2026, DE 5 DE MAIO DE 2026",
+      "category": "Utilidade Pública",
+      "sourceName": "Prefeitura de CZS",
+      "publishedAt": "2026-05-11T18:09:00.366Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://static.wixstatic.com/media/0204e8_cde933d3817f4cb19b4c69eb0103439b~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_cde933d3817f4cb19b4c69eb0103439b~mv2.png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "ce-n-007-2026-aviso-de-licitacao",
+      "title": "CE N°007/2026 - Aviso de Licitação",
+      "category": "Utilidade Pública",
+      "sourceName": "Prefeitura de CZS",
+      "publishedAt": "2026-05-11T18:09:00.365Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "roberto-duarte-critica-situacao-da-br-364-e-cobra-explicacoes-sobre-recursos-destinados-a-rodovia",
       "title": "Roberto Duarte critica situação da BR-364 e cobra explicações sobre recursos destinados à rodovia",
       "category": "Utilidade Pública",
@@ -3555,100 +3654,12 @@
       "reasons": []
     },
     {
-      "slug": "a-ia-pode-se-tornar-sua-amiga-entenda-a-opiniao-dos-especialistas",
-      "title": "A IA pode se tornar sua amiga? Entenda a opinião dos especialistas",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:34:13.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/google-chrome-e1778280706987.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mesmo-em-niveis-baixos-poluicao-aumenta-internacoes-por-doencas-renais",
-      "title": "Mesmo em níveis baixos, poluição aumenta internações por doenças renais",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:22:37.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/10/robina-weermeijer-sRXCFkJahGk-unsplash.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "apos-sofrer-avc-marido-de-kelly-key-faz-reflexao-olhar-com-gratidao",
-      "title": "Após sofrer AVC, marido de Kelly Key faz reflexão: “Olhar com gratidão”",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:20:07.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/kelly-key-marido.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "comer-carne-vermelha-aumenta-o-risco-de-diabetes-tipo-2",
-      "title": "Comer carne vermelha aumenta o risco de diabetes tipo 2?",
-      "category": "Saude",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:19:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/envelhecimento.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
       "slug": "revalida-candidatos-ja-podem-conferir-local-da-prova-pratica",
       "title": "Revalida: candidatos já podem conferir local da prova prática",
-      "category": "Saude",
+      "category": "Saúde",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T16:19:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/revalida-candidatos-ja-podem-conferir-local-da-prova-pratica.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3669,10 +3680,10 @@
     {
       "slug": "minas-gerais-confirma-primeira-morte-por-hantavirus-em-2026",
       "title": "Minas Gerais confirma primeira morte por hantavírus em 2026",
-      "category": "Saude",
+      "category": "Saúde",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T15:59:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/minas-gerais-confirma-primeira-morte-por-hantavirus-em-2026.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3763,12 +3774,123 @@
       ]
     },
     {
+      "slug": "prefeitura-nao-apresenta-proposta-e-sinteac-mantem-manifestacoes-com-ameaca-de-greve-em-rio-bran",
+      "title": "Prefeitura não apresenta proposta e Sinteac mantém manifestações com ameaça de greve em Rio Branco",
+      "category": "Educação",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T17:50:47.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.17.55-1-1200x675.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "educacao-lanca-guia-com-estrategias-de-acolhimento-e-seguranca-para-o-retorno-as-aulas-na-rede-e",
+      "title": "Educação lança guia com estratégias de acolhimento e segurança para o retorno às aulas na rede estadual",
+      "category": "Educação",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-05-11T17:17:30.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/IMG_20260510_174545-813x1024.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 813,
+        "height": 1024,
+        "ratio": 0.794,
+        "orientation": "portrait"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "sinteac-mantem-pressao-por-reajuste-e-cobra-medidas-de-seguranca-nas-escolas",
+      "title": "Sinteac mantém pressão por reajuste e cobra medidas de segurança nas escolas",
+      "category": "Educação",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T17:13:12.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-52.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "profissionais-da-educacao-municipal-fazem-manifestacao-em-frente-a-prefeitura-e-ameacam-greve-po",
+      "title": "Profissionais da educação municipal fazem manifestação em frente à Prefeitura e ameaçam greve por reajuste salarial",
+      "category": "Educação",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T16:03:43.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.17.55-1200x675.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "fies-2026-pre-selecionados-devem-validar-dados-da-inscricao-ate-hoje",
       "title": "Fies 2026: pré-selecionados devem validar dados da inscrição até hoje",
-      "category": "Educacao",
+      "category": "Educação",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T13:45:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/fies-2026-pre-selecionados-devem-validar-dados-da-inscricao-ate-hoje.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3809,6 +3931,561 @@
       "reasons": [
         "manual-focus-present"
       ]
+    },
+    {
+      "slug": "ira-executa-homem-condenado-por-espionagem-a-servico-dos-eua-e-de-israel",
+      "title": "Irã executa homem condenado por espionagem a serviço dos EUA e de Israel",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T20:50:30.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T104955.747.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "homem-acusado-de-tentar-assassinar-trump-em-jantar-na-casa-branca-se-declara-inocente",
+      "title": "Homem acusado de tentar assassinar Trump em jantar na Casa Branca se declara inocente",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T20:32:50.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T103141.856.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "mega-sena-concurso-3-006-nenhuma-aposta-acerta-as-seis-dezenas-e-premio-vai-a-r-52-milhoes",
+      "title": "Mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 milhões",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T20:24:10.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2025/07/226527-mega-sena-acumula-e-premio-deve-chegar-a-r-51-milhoes.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "putin-diz-que-guerra-na-ucrania-e-justa-e-critica-otan-em-desfile-enxuto-do-dia-da-vitoria",
+      "title": "Putin diz que guerra na Ucrânia é ‘justa’ e critica Otan em desfile enxuto do Dia da Vitória",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T19:58:42.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T095738.624.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "cruzeiro-tem-cinco-jogadores-na-pre-lista-da-selecao-para-a-copa-do-mundo",
+      "title": "Cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T19:33:35.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T093242.430.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "selecao-da-argentina-divulga-pre-lista-de-convocados-para-copa-do-mundo-com-flaco-lopez-e-giay-d",
+      "title": "Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Palmeiras",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T19:26:19.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T092555.231.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "endrick-detona-brasileiros-que-torcem-para-a-argentina-loucura",
+      "title": "Endrick detona brasileiros que torcem para a Argentina: “Loucura”",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T19:08:46.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T090816.467.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "flamengo-vence-o-gremio-na-arena-e-segue-caca-ao-lider-palmeiras",
+      "title": "Flamengo vence o Grêmio na Arena e segue caça ao líder Palmeiras",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T19:01:10.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T090041.503.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "selecao-brasileira-veja-os-55-pre-selecionados-para-a-copa",
+      "title": "Seleção Brasileira: Veja os 55 pré-selecionados para a Copa",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T18:54:55.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T085418.629.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 42%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "ira-adverte-aliados-dos-eua-que-sera-dificil-para-eles-cruzar-estreito-de-ormuz",
+      "title": "Irã adverte aliados dos EUA que será difícil para eles cruzar Estreito de Ormuz",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T18:46:54.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T084634.617.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "cidadaos-repatriados-testam-positivo-para-hantavirus-apos-serem-retirados-de-navio",
+      "title": "Cidadãos repatriados testam positivo para hantavírus após serem retirados de navio",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T18:41:11.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T084010.513.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "apos-criticas-de-trump-ira-defende-sua-proposta-para-encerrar-guerra-e-negociacoes-travam-entend",
+      "title": "Após críticas de Trump, Irã defende sua proposta para encerrar guerra, e negociações travam; entenda as exigências de cada país",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Online",
+      "publishedAt": "2026-05-11T18:34:50.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T083343.330.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "apple-brings-encrypted-rcs-chats-to-iphone",
+      "title": "Atualização internacional de The Verge - 12:57",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T17:57:56.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/Apple-RCS-messaging-beta_quick-read-16x9.jpg.medium_2x.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "tenis-victoria-barros-conquista-maior-titulo-da-carreira-na-alemanha",
+      "title": "Tênis: Victoria Barros conquista maior título da carreira na Alemanha",
+      "category": "Cotidiano",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:28:53.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/joao-fonseca-jodar-madrid-open-e1777244050269.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "texas-sues-netflix-for-advertising-bait-and-switch-and-spying",
+      "title": "Atualização internacional de The Verge - 12:04",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T17:04:22.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/acastro_STK072-05.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "emmanuel-macron-reprime-plateia-por-barulho-em-evento-no-quenia-veja-video",
+      "title": "Emmanuel Macron reprime plateia por barulho em evento no Quênia. Veja vídeo",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-05-11T16:33:43.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/emmanuel-macron-reprime-plateia-por-barulho-em-evento-no-quenia-veja-video.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "com-chuva-e-frio-meia-maratona-internacional-reune-atletas-da-triplice-fronteira-em-assis-brasil",
+      "title": "Com chuva e frio, meia maratona internacional reúne atletas da tríplice fronteira em Assis Brasil",
+      "category": "Cotidiano",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T16:29:12.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-10-at-11.16.18-2-1200x675.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 675,
+        "ratio": 1.778,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "a-million-baby-monitors-and-security-cameras-were-easily-viewable-by-hackers",
+      "title": "Atualização internacional de The Verge - 11:00",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T16:00:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/meari-baby-monitor-2.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "nova-lei-define-percentual-minimo-de-cacau-nos-chocolates",
+      "title": "Nova lei define percentual mínimo de cacau nos chocolates",
+      "category": "Cotidiano",
+      "sourceName": "Jurua Comunicacao",
+      "publishedAt": "2026-05-11T15:57:21.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/nova-lei-define-percentual-minimo-de-cacau-nos-chocolates.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "7-of-our-favorite-deals-from-amazon-s-pet-days-sale",
+      "title": "Atualização internacional de The Verge - 10:45",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T15:45:32.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/bisselllead.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "live-updates-from-elon-musk-and-sam-altman-s-court-battle-over-the-future-of-openai",
+      "title": "Atualização internacional de The Verge - 10:27",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T15:27:12.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268474_musk_vs_altman_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "gm-settles-california-lawsuit-claiming-it-sold-driving-habit-data-to-insurance-companies",
+      "title": "Atualização internacional de The Verge - 10:11",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T15:11:23.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23988525/acastro_STK057_01.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "matter-and-openadr-team-up-to-connect-smart-homes-to-the-grid",
+      "title": "Atualização internacional de The Verge - 09:40",
+      "category": "Novidades",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T14:40:28.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/Screenshot-2026-05-11-at-10.24.55AM.png?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "tiktok-is-letting-uk-users-pay-to-remove-ads",
+      "title": "Atualização internacional de The Verge - 08:02",
+      "category": "Cotidiano",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T13:02:20.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK051_VRG_Illo_N_Barclay_2_tiktok.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
     },
     {
       "slug": "a-solucao-para-a-br-364-esta-no-concreto-armado-e-nao-no-macadame-diz-bocalom",
@@ -4056,7 +4733,7 @@
       "category": "Acre / Governo",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T17:44:11.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-12.30.52-3-1200x800.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4080,12 +4757,68 @@
       ]
     },
     {
+      "slug": "governo-anuncia-leilao-eletronico-de-maquinas-e-veiculos-do-deracre",
+      "title": "Governo anuncia leilão eletrônico de máquinas e veículos do Deracre",
+      "category": "Acre / Governo",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-05-11T17:35:57.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-04-at-11.27.49-1-150x150.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 150,
+        "height": 150,
+        "ratio": 1,
+        "orientation": "square"
+      },
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "seguranca-publica-registra-reducao-nos-indices-de-mortes-violentas-em-todo-o-estado",
+      "title": "Segurança pública registra redução nos índices de mortes violentas em todo o Estado",
+      "category": "Acre / Governo",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-05-11T17:12:27.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-08-at-12.23.36-17-1024x682.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 682,
+        "ratio": 1.501,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "com-recorde-na-producao-de-milho-armazens-da-cageacre-operam-com-capacidade-maxima-no-interior-d",
       "title": "Com recorde na produção de milho, armazéns da Cageacre operam com capacidade máxima no interior do estado",
       "category": "Acre / Governo",
       "sourceName": "Batelao",
       "publishedAt": "2026-05-11T13:56:56.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/62e8e33b-7e95-468a-8c57-fd5afbde1d02-1024x683.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4134,7 +4867,7 @@
       "category": "Esporte",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T19:18:53.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T091835.246.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4151,13 +4884,35 @@
       "reasons": []
     },
     {
+      "slug": "napoli-x-bologna-escalacoes-e-onde-assistir-ao-campeonato-italiano",
+      "title": "Napoli x Bologna: escalações e onde assistir ao Campeonato Italiano",
+      "category": "Esporte",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T18:02:11.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/07/nico-williams-espanha-inglaterra-eurocopa-e1720988510511.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "rayo-vallecano-x-girona-horario-e-onde-assistir-ao-jogo-de-laliga",
       "title": "Rayo Vallecano x Girona: horário e onde assistir ao jogo de LaLiga",
       "category": "Esporte",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:24:09.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/07/nico-williams-espanha-inglaterra-eurocopa-e1720988510511.jpg?w=200",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/rayo-vallecano-x-girona-horario-e-onde-assistir-ao-jogo-de-laliga.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -4180,7 +4935,7 @@
       "category": "Esporte",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-05-11T16:40:22.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://i0.wp.com/juruacomunicacao.com.br/wp-content/uploads/2026/05/88.webp?resize=800%2C533&ssl=1",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4202,8 +4957,8 @@
       "category": "Esporte",
       "sourceName": "The Verge",
       "publishedAt": "2026-05-11T16:09:42.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25330660/STK414_AI_CHATBOT_H.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/google-stopped-a-zero-day-hack-that-it-says-was-developed-with-ai.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -4226,21 +4981,23 @@
       "category": "Esporte",
       "sourceName": "The Verge",
       "publishedAt": "2026-05-11T14:00:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/DCD_joanna_stern.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/joanna-stern-is-not-a-robot-but-she-lived-with-them.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "liverpool-anuncia-memorial-permanente-em-homenagem-a-diogo-jota",
@@ -4453,12 +5210,34 @@
       ]
     },
     {
+      "slug": "o-fenomeno-carla-madeira-que-domina-as-redes-e-divide-leitores-com-seus-livros-literatura-nao-e-",
+      "title": "O fenômeno Carla Madeira, que domina as redes e divide leitores com seus livros: 'Literatura não é manual'",
+      "category": "Cultura",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-05-11T18:03:41.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://s2-g1.glbimg.com/WRry8ZPsK6jiDFMbRJAWT4Ooi6g=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/s/d/6QjLYYRhmYAKmCw4wzFg/carla-madeira-1-260.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
       "slug": "lily-allen-posta-que-quer-dancar-com-gays-e-conhecer-a-patixa-apos-confirmar-show-em-sp",
       "title": "Lily Allen posta que quer 'dançar com gays' e 'conhecer a Patixa' após confirmar show em SP",
       "category": "Cultura",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-05-11T17:44:07.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/U3P_tapzx50yWHb2PZJFLGXbnrM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/i/8/Bnd8UcTomjHYADVl8HEw/lily-allen-cultura-inglesa-f99a7114-celso-tavares-g1-.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4480,7 +5259,7 @@
       "category": "Cultura",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-05-11T17:10:35.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/7lwJKuZ5vdJ3TI56QmGDhkBgc20=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2024/3/8/1lTIumSKKr6PnjXN9SNw/thriller.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4504,7 +5283,7 @@
       "category": "Cultura",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-05-11T15:04:33.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/khEX-1d7jjTyEH5nd-W3OE9lCZg=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/v/L/XqkukFSMaueZC5g5f4ig/primavera1-2-.png",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4526,7 +5305,7 @@
       "category": "Cultura",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-05-11T13:27:06.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/uBfggF0s74pZ2wn4x4A_QdbhDMc=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/7/7/OgpgLHRyaEDs2UY57R4Q/juliana-linhares-elisa-maciel.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4639,10 +5418,10 @@
     {
       "slug": "aplicacao-a-partir-de-r-1-rendimento-atrelado-a-selic-como-funciona-o-novo-tesouro-reserva",
       "title": "Aplicação a partir de R$ 1, rendimento atrelado à Selic: como funciona o novo Tesouro Reserva",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T20:12:39.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T100920.283.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4659,23 +5438,72 @@
       "reasons": []
     },
     {
-      "slug": "apos-moraes-suspender-dosimetria-lider-do-pl-articula-pec-sobre-anistia",
-      "title": "Após Moraes suspender dosimetria, líder do PL articula PEC sobre anistia",
+      "slug": "governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate",
+      "title": "Governo regulamenta lei que define o que pode ser chamado de chocolate",
       "category": "Politica",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:42:21.000Z",
+      "publishedAt": "2026-05-11T18:05:41.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/alexandre-moraes-plenario-stf.jpg?w=200",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2025binary_LYNXNPEL8L0UW-BASEIMAGE.jpg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "audiencia-publica-debate-novo-plano-diretor-e-propostas-para-mobilidade-comercio-e-combate-as-al",
+      "title": "Audiência pública debate novo Plano Diretor e propostas para mobilidade, comércio e combate às alagações",
+      "category": "Política",
+      "sourceName": "ac24horas",
+      "publishedAt": "2026-05-11T17:54:39.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-11.23.07-1-1200x759.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1200,
+        "height": 759,
+        "ratio": 1.581,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "governo-lanca-editais-para-conectar-ate-3-8-mil-ubs",
+      "title": "Governo lança editais para conectar até 3,8 mil UBS",
+      "category": "Politica",
+      "sourceName": "Agencia Brasil",
+      "publishedAt": "2026-05-11T17:44:00.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "/assets/news-fallbacks/governo-lanca-editais-para-conectar-ate-3-8-mil-ubs.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": false
+        "hasLandscapeSignal": true
       },
       "level": "ok",
       "reasons": [
@@ -4685,10 +5513,10 @@
     {
       "slug": "nefasta-a-democracia-brasileira-diz-lider-do-governo-sobre-pec-da-anistia",
       "title": "'Nefasta à democracia brasileira', diz líder do governo sobre PEC da anistia",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T17:34:57.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/nefasta-a-democracia-brasileira-diz-lider-do-governo-sobre-pec-da-anistia.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4709,10 +5537,10 @@
     {
       "slug": "ministro-da-fazenda-diz-que-reavaliar-constantemente-os-precos-de-combustiveis-e-tarefa-da-petro",
       "title": "Ministro da Fazenda diz que reavaliar constantemente os preços de combustíveis é tarefa da Petrobras, não do governo",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T17:14:31.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/eqSjN0tpA9joTUjS5u5V1EdPSnY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/p/w/wCR8ddTkWlDT6bfcazyg/mg-1446-0.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4731,34 +5559,12 @@
       ]
     },
     {
-      "slug": "estados-unidos-devem-flexibilizar-tarifas-para-importacao-de-carne-bovina",
-      "title": "Estados Unidos devem flexibilizar tarifas para importação de carne bovina",
-      "category": "Politica",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:10:34.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/reuters.webp?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
       "slug": "lula-sanciona-lei-que-endurece-regras-para-a-fabricacao-de-chocolate-veja-o-que-muda",
       "title": "Lula sanciona lei que endurece regras para a fabricação de chocolate; veja o que muda",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T17:04:40.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/9K8vXTotuCO4MOuDhXCXWZx4Gec=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/X/U/oCFep1Qly214njASVd9g/chocolate-cafe-jc.mp4-snapshot-06.30.063.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4779,10 +5585,10 @@
     {
       "slug": "nao-restou-outra-alternativa-diz-lider-do-pl-na-camara-sobre-retomar-debate-de-pec-da-anistia",
       "title": "'Não restou outra alternativa', diz líder do PL na Câmara sobre retomar debate de PEC da Anistia",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T16:58:51.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/nao-restou-outra-alternativa-diz-lider-do-pl-na-camara-sobre-retomar-debate-de-pec-da-anis.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4803,10 +5609,10 @@
     {
       "slug": "nunes-marques-convida-ex-presidentes-para-posse-no-tse-incluindo-bolsonaro-e-collor-que-estao-pr",
       "title": "Nunes Marques convida ex-presidentes para posse no TSE, incluindo Bolsonaro e Collor, que estão presos",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T16:54:42.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/w12DG1vry7_yKg0nOqLPFn8DKag=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/n/g/vpv3UoTJAyEdl0FSYxqg/bolsonaro.webp",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4827,10 +5633,10 @@
     {
       "slug": "alan-rick-lanca-plataforma-digital-para-construcao-de-plano-de-governo-colaborativo",
       "title": "Alan Rick lança plataforma digital para construção de plano de governo colaborativo",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T16:46:22.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/alan-rick-lanca-plataforma-digital-para-construcao-de-plano-de-governo-colaborativo.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4851,10 +5657,10 @@
     {
       "slug": "oposicao-articula-pec-da-anistia-apos-moraes-suspender-lei-da-dosimetria",
       "title": "Oposição articula PEC da Anistia após Moraes suspender Lei da Dosimetria",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T16:28:14.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/B3jsDewdyQNgJUYsiyu9meQyAO8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2025/C/I/23S8xUQpKLnwXrB8UK8A/img20250826160730836.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4875,10 +5681,10 @@
     {
       "slug": "governo-de-sp-aplica-multa-recorde-de-r-1-bilhao-contra-fast-shop",
       "title": "Governo de SP aplica multa recorde de R$ 1 bilhão contra Fast Shop",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T16:25:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/governo-de-sp-aplica-multa-recorde-de-r-1-bilhao-contra-fast-shop.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4899,10 +5705,10 @@
     {
       "slug": "flavio-bolsonaro-caiado-e-zema-criticam-decisao-de-moraes-sobre-o-pl-da-dosimetria",
       "title": "Flávio Bolsonaro, Caiado e Zema criticam decisão de Moraes sobre o PL da Dosimetria",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T16:11:24.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/881RHtQkp5bSXYSdk1E7zs_kvtY=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/D/ZyuxVFR6W4vAzJW5YaDQ/stf-divulgacao.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4923,10 +5729,10 @@
     {
       "slug": "socorro-neri-apresenta-projeto-de-lei-que-autoriza-seguranca-privada-em-escolas",
       "title": "Socorro Neri apresenta projeto de lei que autoriza segurança privada em escolas",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T16:11:04.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/04/PHOTO-2026-04-07-17-23-46-1200x800.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4952,10 +5758,10 @@
     {
       "slug": "inacio-moreira-critica-bittar-e-pede-transparencia-no-caso-da-emenda-de-r-126-milhoes-em-caso-da",
       "title": "Inácio Moreira critica Bittar e pede transparência no caso da emenda de R$ 126 milhões em caso da Santa Casa",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T15:12:11.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/INACIO_BITTAR.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4976,10 +5782,10 @@
     {
       "slug": "governo-amplia-luz-para-todos-na-amazonia-legal",
       "title": "Governo amplia Luz para Todos na Amazônia Legal",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T14:59:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/governo-amplia-luz-para-todos-na-amazonia-legal.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5000,10 +5806,10 @@
     {
       "slug": "ciro-gomes-recusa-convite-do-psdb-e-decide-nao-concorrer-a-presidencia-da-republica",
       "title": "Ciro Gomes recusa convite do PSDB e decide não concorrer à Presidência da República",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T14:57:23.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/xG5D8BqzbMyKAmSIRSKqDph_Z9M=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2023/l/B/oEkvlzQAS4KY7vdmE2mw/ciro-gomes-thiago-gadelha.png",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5024,10 +5830,10 @@
     {
       "slug": "fachin-diz-que-judiciario-pode-ser-alvo-de-criticas-e-deve-ser-resiliente-diante-de-ataques-infu",
       "title": "Fachin diz que Judiciário pode ser alvo de críticas e deve ser resiliente diante de ataques 'infundados'",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T14:23:55.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/R3AhQ4zgjRE9bjfipq26GAjEp-k=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/f/i/m9FiypTLKBFBwVGGsb3w/fachin-rosinei-coutinho-stf-.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5048,10 +5854,10 @@
     {
       "slug": "lula-veta-lei-que-reconhece-estagio-como-experiencia-profissional",
       "title": "Lula veta lei que reconhece estágio como experiência profissional",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T14:21:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/lula-veta-lei-que-reconhece-estagio-como-experiencia-profissional.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5072,10 +5878,10 @@
     {
       "slug": "kakay-diz-que-decisao-de-deixar-defesa-de-ciro-nogueira-foi-de-comum-acordo",
       "title": "Kakay diz que decisão de deixar defesa de Ciro Nogueira foi 'de comum acordo'",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T13:44:30.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/YQV9g3yVSpZcckyFZSNAOnDGtGU=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/I/V/HoVs3ySPCl99NDqimTag/ascom-ciro-nogueira.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5096,10 +5902,10 @@
     {
       "slug": "dino-defende-decisoes-monocraticas-e-diz-que-fim-do-modelo-geraria-colapso-no-judiciario",
       "title": "Dino defende decisões monocráticas e diz que fim do modelo geraria ‘colapso’ no Judiciário",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T13:38:37.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/KCuWJJUj2Gtn2vg8q7VEdHJhMkw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/Q/B/Y45AweQAmqowZzgS2KTA/55212196863-ff7b99a247-k.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5120,10 +5926,10 @@
     {
       "slug": "ciro-nogueira-muda-defesa-apos-ser-alvo-da-pf-no-caso-master",
       "title": "Ciro Nogueira muda defesa após ser alvo da PF no caso Master",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T13:19:35.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/XFEA2a2LJWvtzaJfS0HsVXzYGC8=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/k/t/nL5DYbR0mDmlbQCXvBQw/0d9a4042.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5144,10 +5950,10 @@
     {
       "slug": "lula-recebe-michelle-bachelet-nesta-segunda-em-meio-a-disputa-pelo-comando-da-onu",
       "title": "Lula recebe Michelle Bachelet nesta segunda em meio à disputa pelo comando da ONU",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T13:16:52.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/fLHomQIyXcltsNyQjWFCFJUS64w=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/u/R/QVaBUPQVCQuTyOUSowAw/53879254269-b9edf2b19e-k.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5168,10 +5974,10 @@
     {
       "slug": "medo-de-violencia-politica-atinge-6-a-cada-10-brasileiros-aponta-estudo",
       "title": "Medo de violência política atinge 6 a cada 10 brasileiros, aponta estudo",
-      "category": "Politica",
+      "category": "Política",
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T12:48:17.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/medo-de-violencia-politica-atinge-6-a-cada-10-brasileiros-aponta-estudo.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5196,20 +6002,46 @@
       "sourceName": "G1 Politica",
       "publishedAt": "2026-05-11T12:28:38.000Z",
       "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/GtmXtxFHwWxpIIMzEmVgEs9mkSM=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/D/2/N2wQhaQAG69v9Ai39O0A/rj2-limpo-20260506-1810-frame-93779.jpeg",
+      "imageUrl": "/assets/news-fallbacks/fundos-que-compraram-precatorios-antecipados-investigados-pela-pf-repassaram-creditos-ao-m.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "ira-diz-que-sua-proposta-de-paz-e-legitima",
+      "title": "Irã diz que sua proposta de paz é “legítima\"",
+      "category": "Política",
+      "sourceName": "Agencia Brasil",
+      "publishedAt": "2026-05-11T12:26:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/ira-diz-que-sua-proposta-de-paz-e-legitima.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "taxa-das-blusinhas-arrecadacao-federal-sobe-25-ate-abril-e-bate-novo-recorde-governo-discute-aca",
@@ -5444,80 +6276,12 @@
       "reasons": []
     },
     {
-      "slug": "decreto-n-195-2026-de-5-de-maio-de-2026",
-      "title": "DECRETO Nº 195/2026, DE 5 DE MAIO DE 2026",
-      "category": "Utilidade Publica",
-      "sourceName": "Prefeitura de CZS",
-      "publishedAt": "2026-05-11T18:09:00.366Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://static.wixstatic.com/media/0204e8_cde933d3817f4cb19b4c69eb0103439b~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_cde933d3817f4cb19b4c69eb0103439b~mv2.png",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "ce-n-007-2026-aviso-de-licitacao",
-      "title": "CE N°007/2026 - Aviso de Licitação",
-      "category": "Utilidade Publica",
-      "sourceName": "Prefeitura de CZS",
-      "publishedAt": "2026-05-11T18:09:00.365Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://static.wixstatic.com/media/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png/v1/fill/w_49,h_23,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_auto/0204e8_42ec8c4838744fc0a51db7567b8dd992~mv2.png",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "ira-executa-homem-condenado-por-espionagem-a-servico-dos-eua-e-de-israel",
-      "title": "Irã executa homem condenado por espionagem a serviço dos EUA e de Israel",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T20:50:30.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T104955.747.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "operacao-integrada-cumpre-34-mandados-de-prisao-em-quatro-estados-e-mira-organizacao-criminosa",
       "title": "Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização criminosa",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Jurua Online",
       "publishedAt": "2026-05-11T20:33:47.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7458.webp",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5534,41 +6298,22 @@
       "reasons": []
     },
     {
-      "slug": "homem-acusado-de-tentar-assassinar-trump-em-jantar-na-casa-branca-se-declara-inocente",
-      "title": "Homem acusado de tentar assassinar Trump em jantar na Casa Branca se declara inocente",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T20:32:50.000Z",
+      "slug": "acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte",
+      "title": "Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte",
+      "category": "Nacional",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T18:07:48.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T103141.856.jpg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/2026-04-27T042210Z_1_LOP575227042026RP1_RTRMADP_BASEIMAGE-960X540_IRAN-CRISIS-ARAQCHI-RUSSIA-ARRIVAL.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
+      "dimensionsFromUrl": {
+        "width": 960,
+        "height": 540,
+        "ratio": 1.778,
+        "orientation": "landscape"
       },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "mega-sena-concurso-3-006-nenhuma-aposta-acerta-as-seis-dezenas-e-premio-vai-a-r-52-milhoes",
-      "title": "Mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 milhões",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T20:24:10.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2025/07/226527-mega-sena-acumula-e-premio-deve-chegar-a-r-51-milhoes.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
@@ -5580,109 +6325,13 @@
       "reasons": []
     },
     {
-      "slug": "putin-diz-que-guerra-na-ucrania-e-justa-e-critica-otan-em-desfile-enxuto-do-dia-da-vitoria",
-      "title": "Putin diz que guerra na Ucrânia é ‘justa’ e critica Otan em desfile enxuto do Dia da Vitória",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T19:58:42.000Z",
+      "slug": "elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade",
+      "title": "Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade",
+      "category": "Negocios",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T18:07:17.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T095738.624.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "cruzeiro-tem-cinco-jogadores-na-pre-lista-da-selecao-para-a-copa-do-mundo",
-      "title": "Cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T19:33:35.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T093242.430.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "selecao-da-argentina-divulga-pre-lista-de-convocados-para-copa-do-mundo-com-flaco-lopez-e-giay-d",
-      "title": "Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Palmeiras",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T19:26:19.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T092555.231.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "endrick-detona-brasileiros-que-torcem-para-a-argentina-loucura",
-      "title": "Endrick detona brasileiros que torcem para a Argentina: “Loucura”",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T19:08:46.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T090816.467.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "flamengo-vence-o-gremio-na-arena-e-segue-caca-ao-lider-palmeiras",
-      "title": "Flamengo vence o Grêmio na Arena e segue caça ao líder Palmeiras",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T19:01:10.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T090041.503.jpg",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/02/2022-02-11T174725Z_1_LYNXMPEI1A0TQ_RTROPTP_4_BOLSAEUROPA-FECHA-1.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -5700,175 +6349,17 @@
       ]
     },
     {
-      "slug": "selecao-brasileira-veja-os-55-pre-selecionados-para-a-copa",
-      "title": "Seleção Brasileira: Veja os 55 pré-selecionados para a Copa",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T18:54:55.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T085418.629.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "ira-adverte-aliados-dos-eua-que-sera-dificil-para-eles-cruzar-estreito-de-ormuz",
-      "title": "Irã adverte aliados dos EUA que será difícil para eles cruzar Estreito de Ormuz",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T18:46:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T084634.617.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "cidadaos-repatriados-testam-positivo-para-hantavirus-apos-serem-retirados-de-navio",
-      "title": "Cidadãos repatriados testam positivo para hantavírus após serem retirados de navio",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T18:41:11.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T084010.513.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "apos-criticas-de-trump-ira-defende-sua-proposta-para-encerrar-guerra-e-negociacoes-travam-entend",
-      "title": "Após críticas de Trump, Irã defende sua proposta para encerrar guerra, e negociações travam; entenda as exigências de cada país",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T18:34:50.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/Novo-Projeto-2026-05-11T083343.330.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "apple-brings-encrypted-rcs-chats-to-iphone",
-      "title": "Atualização internacional de The Verge - 12:57",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T17:57:56.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/Apple-RCS-messaging-beta_quick-read-16x9.jpg.medium_2x.jpg?quality=90&strip=all&crop=0,0,100,100",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "corinthians-x-sao-paulo-foragidos-sao-presos-ao-entrar-no-estadio",
-      "title": "Corinthians x São Paulo: foragidos são presos ao entrar no estádio",
+      "slug": "veja-as-listas-de-convocados-de-todas-as-48-selecoes-da-copa-do-mundo-2026",
+      "title": "Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026",
       "category": "Nacional",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:41:59.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/03/ARCEBISPO-APARECIDA-1.png?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "tecnico-de-curacao-pede-demissao-a-um-mes-da-copa-do-mundo",
-      "title": "Técnico de Curaçao pede demissão a um mês da Copa do Mundo",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:35:45.000Z",
+      "publishedAt": "2026-05-11T18:06:48.000Z",
       "isNewSinceLastAudit": true,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "tenis-victoria-barros-conquista-maior-titulo-da-carreira-na-alemanha",
-      "title": "Tênis: Victoria Barros conquista maior título da carreira na Alemanha",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:28:53.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/joao-fonseca-jodar-madrid-open-e1777244050269.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
       "hasManualFocus": false,
       "effectiveFocus": "",
       "signals": {
@@ -5880,59 +6371,13 @@
       "reasons": []
     },
     {
-      "slug": "fazenda-espera-votacao-do-projeto-sobre-receitas-de-petroleo-nesta-semana",
-      "title": "Fazenda espera votação do projeto sobre receitas de petróleo nesta semana",
+      "slug": "guilherme-fontes-de-a-viagem-posta-cliques-raros-com-a-namorada",
+      "title": "Guilherme Fontes, de “A Viagem”, posta cliques raros com a namorada",
       "category": "Nacional",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:19:49.000Z",
+      "publishedAt": "2026-05-11T17:51:05.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "/assets/news-fallbacks/fazenda-espera-votacao-do-projeto-sobre-receitas-de-petroleo-nesta-semana.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "saiba-como-investir-no-tesouro-reserva",
-      "title": "Saiba como investir no Tesouro Reserva",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:18:54.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/09/front-view-finance-elements-with-pink-piggy-bank.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "benedict-cumberbatch-se-envolve-em-discussao-acalorada-com-ciclista-veja",
-      "title": "Benedict Cumberbatch se envolve em discussão acalorada com ciclista; veja",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:17:03.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/virginia-18.jpg?w=200",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/pedro-novaes.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -5950,13 +6395,13 @@
       ]
     },
     {
-      "slug": "precos-do-petroleo-sobem-apos-trump-rejeitar-proposta-de-paz-do-ira",
-      "title": "Preços do petróleo sobem após Trump rejeitar proposta de paz do Irã",
+      "slug": "bolsas-da-europa-fecham-mistas-com-impasse-para-resolucao-da-guerra",
+      "title": "Bolsas da Europa fecham mistas com impasse para resolução da guerra",
       "category": "Nacional",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:16:45.000Z",
+      "publishedAt": "2026-05-11T17:51:01.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/wall-street-bolsas-dos-estados-unidos-guerra-ia.jpg?w=200",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXNPEL950XE-BASEIMAGE.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -5966,25 +6411,47 @@
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": true
+        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": []
     },
     {
-      "slug": "homem-atropela-e-mata-quatro-pessoas-foge-e-e-preso-no-interior-de-sp",
-      "title": "Homem atropela e mata quatro pessoas, foge e é preso no interior de SP",
+      "slug": "setor-de-proteina-animal-alerta-para-risco-de-inflacao-nos-alimentos",
+      "title": "Setor de proteína animal alerta para risco de inflação nos alimentos",
       "category": "Nacional",
       "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T17:15:08.000Z",
+      "publishedAt": "2026-05-11T17:50:55.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/WhatsApp-Image-2026-02-18-at-12.17.48.jpeg?w=200",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/cafe-brasil.jpeg?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "trump-ve-moderados-e-lunaticos-em-negociacoes-com-ira",
+      "title": "Trump vê ‘moderados’ e ‘lunáticos’ em negociações com Irã",
+      "category": "Nacional",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:45:10.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trump-fala-com-jornalistas.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
       "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
+      "effectiveFocus": "center 38%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
@@ -5996,13 +6463,62 @@
       ]
     },
     {
-      "slug": "texas-sues-netflix-for-advertising-bait-and-switch-and-spying",
-      "title": "Atualização internacional de The Verge - 12:04",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T17:04:22.000Z",
+      "slug": "anac-orienta-aereas-a-aceitarem-certidao-de-nascimento-digital",
+      "title": "Anac orienta aéreas a aceitarem certidão de nascimento digital",
+      "category": "Nacional",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:44:30.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/acastro_STK072-05.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "procon-divulga-balanco-da-operacao-dia-das-maes",
+      "title": "Procon divulga balanço da Operação Dia das Mães",
+      "category": "Polícia",
+      "sourceName": "Agencia Acre",
+      "publishedAt": "2026-05-11T17:32:41.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-04-at-10.30.37-1-1-1024x771.jpeg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": {
+        "width": 1024,
+        "height": 771,
+        "ratio": 1.328,
+        "orientation": "landscape"
+      },
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": []
+    },
+    {
+      "slug": "saiba-como-investir-no-tesouro-reserva",
+      "title": "Saiba como investir no Tesouro Reserva",
+      "category": "Negócios",
+      "sourceName": "CNN Brasil",
+      "publishedAt": "2026-05-11T17:18:54.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2023/09/front-view-finance-elements-with-pink-piggy-bank.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -6020,10 +6536,10 @@
     {
       "slug": "red-hot-chili-peppers-vende-catalogo-musical-por-mais-de-r-1-bilhao-a-warner-music",
       "title": "Red Hot Chili Peppers vende catálogo musical por mais de R$ 1 bilhão à Warner Music",
-      "category": "Negocios",
+      "category": "Negócios",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-05-11T16:56:15.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/iUn1BL7ITEqhlk69wqC7p4t2c1Q=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2019/m/q/C4yRNkRMWCSAV1aFdD6g/005-f99a1897.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6042,36 +6558,12 @@
       ]
     },
     {
-      "slug": "emmanuel-macron-reprime-plateia-por-barulho-em-evento-no-quenia-veja-video",
-      "title": "Emmanuel Macron reprime plateia por barulho em evento no Quênia. Veja vídeo",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-05-11T16:33:43.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "/assets/news-fallbacks/emmanuel-macron-reprime-plateia-por-barulho-em-evento-no-quenia-veja-video.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "aplicativo-de-emergencia-ja-atende-47-escolas-e-reforca-seguranca-na-volta-as-aulas",
       "title": "Aplicativo de emergência já atende 47 escolas e reforça segurança na volta às aulas",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T16:32:08.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-51.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6090,39 +6582,12 @@
       ]
     },
     {
-      "slug": "com-chuva-e-frio-meia-maratona-internacional-reune-atletas-da-triplice-fronteira-em-assis-brasil",
-      "title": "Com chuva e frio, meia maratona internacional reúne atletas da tríplice fronteira em Assis Brasil",
-      "category": "Cotidiano",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-11T16:29:12.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-10-at-11.16.18-2-1200x675.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 675,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
       "slug": "sindicato-dos-professores-diz-que-escolas-nao-estao-preparadas-para-retorno-apos-ataque-no-insti",
       "title": "Sindicato dos professores diz que escolas não estão preparadas para retorno após ataque no Instituto São José",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T16:21:42.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-10.17.54-1200x675.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6148,10 +6613,10 @@
     {
       "slug": "pm-lanca-operacao-escola-segura-e-mobiliza-70-policiais-para-o-retorno-as-aulas-em-rio-branco",
       "title": "PM lança Operação Escola Segura e mobiliza 70 policiais para o retorno às aulas em Rio Branco",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Jurua Comunicacao",
       "publishedAt": "2026-05-11T16:02:54.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://i0.wp.com/ac24horas.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-11-at-09.10.59-1.jpeg?resize=800%2C450&ssl=1",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6170,80 +6635,12 @@
       ]
     },
     {
-      "slug": "a-million-baby-monitors-and-security-cameras-were-easily-viewable-by-hackers",
-      "title": "Atualização internacional de The Verge - 11:00",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T16:00:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/meari-baby-monitor-2.jpg?quality=90&strip=all&crop=0,0,100,100",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "nova-lei-define-percentual-minimo-de-cacau-nos-chocolates",
-      "title": "Nova lei define percentual mínimo de cacau nos chocolates",
-      "category": "Cotidiano",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-05-11T15:57:21.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/nova-lei-define-percentual-minimo-de-cacau-nos-chocolates.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "7-of-our-favorite-deals-from-amazon-s-pet-days-sale",
-      "title": "Atualização internacional de The Verge - 10:45",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T15:45:32.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/bisselllead.jpg?quality=90&strip=all&crop=0,0,100,100",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
       "slug": "sindicato-dos-professores-questiona-retorno-das-aulas-apos-ataque-em-escola",
       "title": "Sindicato dos Professores questiona retorno das aulas após ataque em escola",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "ac24horas",
       "publishedAt": "2026-05-11T15:35:26.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/CAPA-DO-SITE-50.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6262,36 +6659,12 @@
       ]
     },
     {
-      "slug": "live-updates-from-elon-musk-and-sam-altman-s-court-battle-over-the-future-of-openai",
-      "title": "Atualização internacional de The Verge - 10:27",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T15:27:12.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/268474_musk_vs_altman_CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
       "slug": "adolescente-de-13-anos-e-apreendido-apos-estuprar-idosa-de-92-anos",
       "title": "Adolescente de 13 anos é apreendido após estuprar idosa de 92 anos",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Jurua 24 Horas",
       "publishedAt": "2026-05-11T15:23:42.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/adolescente-de-13-anos-e-apreendido-apos-estuprar-idosa-de-92-anos.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6310,56 +6683,36 @@
       ]
     },
     {
-      "slug": "gm-settles-california-lawsuit-claiming-it-sold-driving-habit-data-to-insurance-companies",
-      "title": "Atualização internacional de The Verge - 10:11",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T15:11:23.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23988525/acastro_STK057_01.jpg?quality=90&strip=all&crop=0,0,100,100",
+      "slug": "sao-paulo-tem-a-menor-temperatura-do-ano-nesta-madrugada",
+      "title": "São Paulo tem a menor temperatura do ano nesta madrugada",
+      "category": "Negócios",
+      "sourceName": "Agencia Brasil",
+      "publishedAt": "2026-05-11T15:07:00.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "/assets/news-fallbacks/sao-paulo-tem-a-menor-temperatura-do-ano-nesta-madrugada.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
-        "hasLandscapeSignal": false
+        "hasLandscapeSignal": true
       },
       "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "matter-and-openadr-team-up-to-connect-smart-homes-to-the-grid",
-      "title": "Atualização internacional de The Verge - 09:40",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T14:40:28.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/Screenshot-2026-05-11-at-10.24.55AM.png?quality=90&strip=all&crop=0,0,100,100",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
+      "reasons": [
+        "manual-focus-present"
+      ]
     },
     {
       "slug": "acao-do-ipem-e-inmetro-fortalece-a-seguranca-do-consumidor-acreano-no-dia-das-maes",
       "title": "Ação do Ipem e Inmetro fortalece a segurança do consumidor acreano no Dia das Mães",
-      "category": "Policia",
+      "category": "Polícia",
       "sourceName": "Batelao",
       "publishedAt": "2026-05-11T14:39:43.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://agencia.ac.gov.br/wp-content/uploads/2026/05/Ipem-Acre-Operacao-Dia-das-Maes-2026-14-1024x768.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6383,10 +6736,10 @@
     {
       "slug": "mercado-eleva-previsao-da-inflacao-para-4-91-este-ano",
       "title": "Mercado eleva previsão da inflação para 4,91% este ano",
-      "category": "Negocios",
+      "category": "Negócios",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T13:38:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/mercado-eleva-previsao-da-inflacao-para-4-91-este-ano.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6398,76 +6751,6 @@
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "tiktok-is-letting-uk-users-pay-to-remove-ads",
-      "title": "Atualização internacional de The Verge - 08:02",
-      "category": "Novidades",
-      "sourceName": "The Verge",
-      "publishedAt": "2026-05-11T13:02:20.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2025/03/STK051_VRG_Illo_N_Barclay_2_tiktok.jpg?quality=90&strip=all&crop=0,0,100,100",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "ira-diz-que-sua-proposta-de-paz-e-legitima",
-      "title": "Irã diz que sua proposta de paz é “legítima\"",
-      "category": "Nacional",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-05-11T12:26:00.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "/assets/news-fallbacks/ira-diz-que-sua-proposta-de-paz-e-legitima.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "nova-lei-define-percentual-minimo-de-cacau-nos-chocolates",
-      "title": "Nova lei define percentual mínimo de cacau nos chocolates",
-      "category": "Negócios",
-      "sourceName": "Agencia Brasil",
-      "publishedAt": "2026-05-11T11:34:00.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/nova-lei-define-percentual-minimo-de-cacau-nos-chocolates.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
       },
       "level": "ok",
       "reasons": [
@@ -12430,17 +12713,15 @@
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
+      "hasManualFocus": false,
+      "effectiveFocus": "",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
+      "reasons": []
     },
     {
       "slug": "joao-pedro-defende-neymar-na-copa-e-como-messi-para-a-argentina",
@@ -12570,17 +12851,15 @@
       "imageHttpStatus": null,
       "imageContentType": "",
       "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
+      "hasManualFocus": false,
+      "effectiveFocus": "",
       "signals": {
         "hasPersonSignal": false,
         "hasGroupSignal": false,
         "hasLandscapeSignal": false
       },
       "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
+      "reasons": []
     },
     {
       "slug": "documentario-do-oasis-tera-primeira-entrevista-dos-irmaos-gallagher-em-mais-de-25-anos",
@@ -14403,7 +14682,7 @@
       "category": "Acre / Governo",
       "sourceName": "Portal do Jurua",
       "publishedAt": "2026-05-08T12:58:31.808Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/publicacao-de-licenca.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -15310,28 +15589,6 @@
       "publishedAt": "2026-05-08T15:03:03.000Z",
       "isNewSinceLastAudit": false,
       "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/RUAN_DEMISSA.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "la-testa-gira-musica-com-anitta-e-a-5-mais-ouvida-na-italia-e-marca-segundo-top-5-dela-no-pais",
-      "title": "'La Testa Gira': música com Anitta é a 5ª mais ouvida na Itália e marca segundo top 5 dela no país",
-      "category": "Festas & Social",
-      "sourceName": "G1 Pop & Arte",
-      "publishedAt": "2026-05-08T06:00:59.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://s2-g1.glbimg.com/G1gdq--mrdxgf8yZ59cR6Z0rZ3w=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/t/6/CMsMcPRNGshAbZR3jAhA/latestagira.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -16813,6 +17070,28 @@
       "reasons": [
         "manual-focus-present"
       ]
+    },
+    {
+      "slug": "la-testa-gira-musica-com-anitta-e-a-5-mais-ouvida-na-italia-e-marca-segundo-top-5-dela-no-pais",
+      "title": "'La Testa Gira': música com Anitta é a 5ª mais ouvida na Itália e marca segundo top 5 dela no país",
+      "category": "Festas & Social",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-05-08T06:00:59.000Z",
+      "isNewSinceLastAudit": false,
+      "imageUrl": "https://s2-g1.glbimg.com/G1gdq--mrdxgf8yZ59cR6Z0rZ3w=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/t/6/CMsMcPRNGshAbZR3jAhA/latestagira.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": false,
+      "effectiveFocus": "",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": []
     },
     {
       "slug": "por-que-seu-jorge-demorou-mais-de-15-anos-para-lancar-o-album-que-ele-diz-ser-a-sua-cara",
@@ -24913,307 +25192,6 @@
       "effectiveFocus": "center 50%",
       "signals": {
         "hasPersonSignal": true,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "o-menino-nao-agiu-sozinho-diz-governadora-mailza",
-      "title": "“O menino não agiu sozinho”, diz governadora Mailza",
-      "category": "Política",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-05-06T01:09:07.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/o-menino-nao-agiu-sozinho-diz-governadora-mailza.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "corre-alan-a-mailza-ta-chegando",
-      "title": "Corre Alan, a Mailza tá chegando!",
-      "category": "Política",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-06T10:00:42.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/tricas-06-05-26-atentado-sao-jose.png",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "prefeitura-de-cruzeiro-do-sul-suspende-aulas-da-rede-municipal-em-sinal-de-luto-e-reforco-a-segu",
-      "title": "Prefeitura de Cruzeiro do Sul suspende aulas da rede municipal em sinal de luto e reforço à segurança escolar; Jogos Escolares também são suspensos",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-05-06T20:16:17.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-05-at-20.46.58.jpg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "baixa-do-rio-jurua-paralisa-travessia-de-balsa-entre-cruzeiro-do-sul-e-rodrigues-alves",
-      "title": "Baixa do Rio Juruá paralisa travessia de balsa entre Cruzeiro do Sul e Rodrigues Alves",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-05-06T19:25:46.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/baixa-do-rio-jurua-paralisa-travessia-de-balsa-entre-cruzeiro-do-sul-e-rodrigues-alves.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "zequinha-vistoria-obras-de-reforma-e-ampliacao-do-centro-de-zoonose-em-cruzeiro-do-sul",
-      "title": "Zequinha vistoria obras de reforma e ampliação do Centro de Zoonose em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-06T16:43:19.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/f8074c06-84e8-44b9-a7f0-974d5b83d37c-1200x800.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 800,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": true,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "evento-meca-brasil-promete-agitar-cruzeiro-do-sul-com-som-automotivo-e-carros-rebaixados",
-      "title": "Evento “Meca Brasil” promete agitar Cruzeiro do Sul com som automotivo e carros rebaixados",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-05-06T16:39:12.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/evento-meca-brasil-promete-agitar-cruzeiro-do-sul-com-som-automotivo-e-carros-rebaixados.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "prazo-final-para-regularizacao-do-titulo-movimenta-cartorio-eleitoral-em-cruzeiro-do-sul",
-      "title": "Prazo final para regularização do título movimenta cartório eleitoral em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua 24 Horas",
-      "publishedAt": "2026-05-06T16:36:05.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/prazo-final-para-regularizacao-do-titulo-movimenta-cartorio-eleitoral-em-cruzeiro-do-sul.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "comerciante-idoso-reage-a-assalto-e-e-baleado-em-cruzeiro-do-sul",
-      "title": "Comerciante idoso reage à assalto e é baleado em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "Jurua Comunicacao",
-      "publishedAt": "2026-05-06T16:10:05.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "/assets/news-fallbacks/comerciante-idoso-reage-a-assalto-e-e-baleado-em-cruzeiro-do-sul.svg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 50%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "dupla-com-mandado-de-prisao-por-homicidio-e-presa-com-arma-e-cocaina-em-cruzeiro-do-sul",
-      "title": "Dupla com mandado de prisão por homicídio é presa com arma e cocaína em Cruzeiro do Sul",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-06T15:37:04.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_8889.png",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": true
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "cruzeiro-do-sul-suspende-aulas-e-jogos-escolares-em-sinal-de-luto",
-      "title": "Cruzeiro do Sul suspende aulas e Jogos Escolares em sinal de luto",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-06T00:23:38.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/IMG_5159-300x175.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 300,
-        "height": 175,
-        "ratio": 1.714,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "mancio-lima-participa-pela-primeira-vez-do-financidades-e-apresenta-projeto-de-gestao-de-residuo",
-      "title": "Mâncio Lima participa pela primeira vez do FinanCidades e apresenta projeto de gestão de resíduos sólidos em Brasília",
-      "category": "Prefeitura",
-      "sourceName": "Batelao",
-      "publishedAt": "2026-05-06T21:20:25.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-06-at-17.34.21.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": true,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "mancio-lima-participa-do-financidades-e-apresenta-projeto-de-gestao-de-residuos-solidos",
-      "title": "Mâncio Lima participa do FinanCidades e apresenta projeto de gestão de resíduos sólidos",
-      "category": "Prefeitura",
-      "sourceName": "ac24horas",
-      "publishedAt": "2026-05-06T21:00:44.000Z",
-      "isNewSinceLastAudit": false,
-      "imageUrl": "https://ac24horas.com/wp-content/uploads/2026/05/057e82a9-196c-4160-9796-9fbefae40cc2-1200x800.jpeg",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 1200,
-        "height": 800,
-        "ratio": 1.5,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": true,
-      "effectiveFocus": "center 42%",
-      "signals": {
-        "hasPersonSignal": false,
         "hasGroupSignal": true,
         "hasLandscapeSignal": true
       },

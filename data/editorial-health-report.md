@@ -1,13 +1,13 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-11T18:09:41.618Z
-Escopo: 360/1178 itens recentes.
+Gerado em: 2026-05-11T18:25:29.958Z
+Escopo: 360/1074 itens recentes.
 
 ## Resumo
-- Gates: P0 74, P1 173, P2 113
-- Aprovacao humana exigida: 74
-- Pendencias de fonte: 74
-- Pendencias visuais: 209
+- Gates: P0 73, P1 172, P2 115
+- Aprovacao humana exigida: 73
+- Pendencias de fonte: 73
+- Pendencias visuais: 206
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
@@ -48,6 +48,15 @@ Escopo: 360/1178 itens recentes.
 - P0 ide-fix: Brigas durante consumo de álcool lideram causas de homicídios no Acre, aponta Polícia Civil
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos
+  Motivo: Pendencia visual: p0-com-ilustracao-generica.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 - P0 human-approval: Prefeitura não apresenta proposta e Sinteac mantém manifestações com ameaça de greve em Rio Branco
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
@@ -75,17 +84,12 @@ Escopo: 360/1178 itens recentes.
 - P0 ide-fix: “Era briga todo dia”, afirma vizinho de mulher morta após casamento em SP
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Procon divulga balanço da Operação Dia das Mães
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Procon divulga balanço da Operação Dia das Mães
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Procon divulga balanço da Operação Dia das Mães
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
+- Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento
+  - Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento: veja os pontos principais
+  - Entenda urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento
+  - Jurua Online informa: Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento
 - Irã executa homem condenado por espionagem a serviço dos EUA e de Israel
   - Irã executa homem condenado por espionagem a serviço dos EUA e de Israel: veja os pontos principais
   - Entenda irã executa homem condenado por espionagem a serviço dos EUA e de Israel
@@ -130,10 +134,6 @@ Escopo: 360/1178 itens recentes.
   - Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Palmeiras:
   - Entenda seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Pal
   - Jurua Online informa: Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López
-- Desenrola Brasil permite uso do FGTS para quitar dívidas; veja como funciona e quem pode aderir
-  - Desenrola Brasil permite uso do FGTS para quitar dívidas; veja como funciona e quem pode aderir: veja os ponto
-  - Entenda desenrola Brasil permite uso do FGTS para quitar dívidas; veja como funciona e quem pode aderir
-  - Jurua Online informa: Desenrola Brasil permite uso do FGTS para quitar dívidas; veja como funciona e quem pode
 
 ## Formatos especiais seguros
 - linha do tempo curta: Irã executa homem condenado por espionagem a serviço dos EUA e de Israel
