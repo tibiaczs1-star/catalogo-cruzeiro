@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-01T14:53:39.982Z",
+  "lastUpdatedAt": "2026-05-11T19:15:00.432Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -9015,6 +9015,41 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-11-destravar-intros-e-otimizar-a-abertura-da-home-sem-remover-o-show-visual-de-carr",
+      "createdAt": "2026-05-11T19:15:00.432Z",
+      "updatedAt": "2026-05-11T19:15:00.432Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "eu nao quero perde as intro e o carregamento so quero q eles não travem, eles deveriam servi pra carregar todos o esqueleto e conteudo da pagina, e não pra torna toda a abertura um exercicio de espera e a home deveria ser otimizada pra carregar mais rapido e so isso",
+      "summary": "Destravar intros e otimizar a abertura da home sem remover o show visual de carregamento",
+      "normalizedTasks": [
+        "manter intro visual",
+        "liberar home com saida garantida",
+        "fatiar hidratacao de noticias",
+        "adiar scripts e cache pesado",
+        "validar desktop e mobile"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "startup-experience.js",
+        "startup-experience.css",
+        "deferred-home-boot.js"
+      ],
+      "assetRefs": [
+        "C:\\Users\\junio\\AppData\\Local\\Temp\\catalogo-intro-hotfix-qa-20260511-v2\\desktop.png",
+        "C:\\Users\\junio\\AppData\\Local\\Temp\\catalogo-intro-hotfix-qa-20260511-v2\\mobile.png"
+      ],
+      "tags": [
+        "home",
+        "performance",
+        "intro",
+        "deploy"
+      ],
+      "nextSteps": [],
+      "notes": "Validado localmente em 127.0.0.1:3168: intro nao fica presa, body sem catalogo-lock-scroll, maxLongTask desktop 731ms e mobile 654ms, review:team totalIssues=0 e perf:budget ok."
     }
   ]
 }

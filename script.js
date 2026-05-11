@@ -124,10 +124,10 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 1100 : 1350;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 2600 : 3400;
-const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 760 : 980;
-const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 420 : 580;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 760 : 980;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 1500 : 1900;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 180 : 240;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 120 : 160;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -467,16 +467,10 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260511-intro-speed1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260511-speed-areas1",
-  "./startup-experience.css?v=20260511-loader-flow1",
-  "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260511-loader-flow1",
-  "./startup-experience.js?v=20260511-loader-flow1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -1859,41 +1853,46 @@ const warmPortalCacheInBackground = () => {
     return;
   }
 
-  runSplashIdleTask(() => {
+  const warmDelayMs = splashCompactViewportQuery.matches ? 18000 : 14000;
+
+  window.setTimeout(() => runSplashIdleTask(async () => {
     const urls = collectPortalWarmCacheUrls();
     if (!urls.length) {
       return;
     }
 
     rememberPortalCacheWarmToday();
+    const warmUrls = urls.slice(0, splashCompactViewportQuery.matches ? 5 : 8);
 
     if ("caches" in window) {
-      caches
-        .open(portalWarmCacheName)
-        .then((cache) =>
-          Promise.all(
-            urls.map((href) =>
-              fetch(href, {
-                cache: "force-cache",
-                credentials: "same-origin"
-              })
-                .then((response) => {
-                  if (response.ok) {
-                    return cache.put(href, response.clone()).then(() => true);
-                  }
+      try {
+        const cache = await caches.open(portalWarmCacheName);
+        for (const href of warmUrls) {
+          await fetch(href, {
+            cache: "force-cache",
+            credentials: "same-origin"
+          })
+            .then((response) => {
+              if (response.ok) {
+                return cache.put(href, response.clone()).then(() => true);
+              }
 
-                  return false;
-                })
-                .catch(() => false)
-            )
-          )
-        )
-        .catch(() => {});
+              return false;
+            })
+            .catch(() => false);
+          await waitForSplashDelay(180);
+        }
+      } catch (_error) {
+        // Cache warmup is optional and should never block the reader.
+      }
       return;
     }
 
-    Promise.all(urls.map(prefetchPortalUrl)).catch(() => {});
-  }, 2200);
+    for (const href of warmUrls) {
+      await prefetchPortalUrl(href);
+      await waitForSplashDelay(180);
+    }
+  }, 6000), warmDelayMs);
 };
 
 const waitForSplashTimeout = (promise, timeoutMs = splashGateStepTimeoutMs) =>
@@ -2086,32 +2085,23 @@ const waitForSplashReadiness = async () => {
   const steps = [
     {
       label: "Preparando o site",
-      progress: 12,
-      wait: () => Promise.resolve()
+      progress: 18,
+      wait: () => waitForSplashDelay(90)
     },
     {
-      label: "Separando logo, fontes e capa",
-      progress: 28,
-      wait: () =>
-        Promise.all([
-          waitForSplashDocumentComplete(splashGateStepTimeoutMs),
-          waitForSplashFontsReady(splashGateStepTimeoutMs)
-        ])
+      label: "Separando logo e capa",
+      progress: 42,
+      wait: () => waitForSplashFontsReady(140)
     },
     {
-      label: "Guardando notícias para abrir mais rápido",
-      progress: 46,
-      wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
+      label: "Guardando notícias em segundo plano",
+      progress: 68,
+      wait: () => waitForSplashPreloads(160)
     },
     {
-      label: "Deixando a primeira tela pronta",
-      progress: 82,
-      wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
-    },
-    {
-      label: "Finalizando imagens críticas",
-      progress: 96,
-      wait: () => waitForSplashCriticalImages(splashGateStepTimeoutMs)
+      label: "Mostrando a primeira tela",
+      progress: 90,
+      wait: () => waitForSplashDelay(120)
     },
     {
       label: "Portal pronto para abrir",
@@ -2121,10 +2111,13 @@ const waitForSplashReadiness = async () => {
   ];
 
   for (const step of steps) {
-    updateSplashProgress(Math.max(0, step.progress - 8), step.label);
+    updateSplashProgress(Math.max(0, step.progress - 10), step.label);
     await waitForSplashTimeout(step.wait(), step.timeout || splashGateStepTimeoutMs);
     updateSplashProgress(step.progress, step.label);
   }
+
+  waitForSplashDeferredBoot(900).catch(() => undefined);
+  waitForSplashCriticalImages(900).catch(() => undefined);
 };
 
 const setupSplashExperience = () => {
@@ -13895,11 +13888,38 @@ const articleCardSelector = [
 const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
 
 const initialMergedNews = syncNewsDataset(initialStaticNews);
-ensureMobileHomeLeadLayout();
-reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(getHeroTourismDailyPool()));
-hydrateMosaicHero(initialMergedNews);
-void hydrateStaticMediaSurfaces({ deferCadernos: true });
-initializeHeroTourismHero();
+const scheduleHomeBootstrapTask = (callback, delay = 0, options = {}) => {
+  const run = () => {
+    try {
+      callback();
+    } catch (_error) {
+      // A home mantem os fallbacks estaticos se uma hidratacao tardia falhar.
+    }
+  };
+
+  window.setTimeout(() => {
+    if (options.idle && "requestIdleCallback" in window) {
+      window.requestIdleCallback(run, { timeout: options.timeout || 1200 });
+      return;
+    }
+
+    run();
+  }, delay);
+};
+
+const yieldHomeHydration = (delay = 0) =>
+  new Promise((resolve) => {
+    window.setTimeout(resolve, Math.max(0, delay));
+  });
+
+scheduleHomeBootstrapTask(() => ensureMobileHomeLeadLayout(), 0);
+scheduleHomeBootstrapTask(
+  () => reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(getHeroTourismDailyPool())),
+  20
+);
+scheduleHomeBootstrapTask(() => hydrateMosaicHero(initialMergedNews), 40);
+scheduleHomeBootstrapTask(() => void hydrateStaticMediaSurfaces({ deferCadernos: true }), 120, { idle: true });
+scheduleHomeBootstrapTask(() => initializeHeroTourismHero(), 80);
 if (heroDesktopBackdropMedia) {
   const handleHeroShellModeChange = () => {
     initializeHeroTourismHero();
@@ -13911,10 +13931,10 @@ if (heroDesktopBackdropMedia) {
     heroDesktopBackdropMedia.addListener(handleHeroShellModeChange);
   }
 }
-attachArchiveBrowserLaunchers();
-initializeInsidersArmy();
-initializeInsidersBootScreen();
-initializeInsidersHeroScene();
+scheduleHomeBootstrapTask(() => attachArchiveBrowserLaunchers(), 120);
+scheduleHomeBootstrapTask(() => initializeInsidersArmy(), 260, { idle: true });
+scheduleHomeBootstrapTask(() => initializeInsidersBootScreen(), 320, { idle: true });
+scheduleHomeBootstrapTask(() => initializeInsidersHeroScene(), 380, { idle: true });
 if (mobileHomeLeadMedia) {
   const handleMobileHomeLeadChange = () => {
     ensureMobileHomeLeadLayout();
@@ -13980,9 +14000,9 @@ function registerArticleCardLinks(root = document) {
   cards.forEach(bindArticleCardLink);
 }
 
-registerArticleCardLinks();
-renderRegionalPoliticsHighlights(initialMergedNews);
-renderGlobalPoliticsHighlights();
+scheduleHomeBootstrapTask(() => registerArticleCardLinks(), 120);
+scheduleHomeBootstrapTask(() => renderRegionalPoliticsHighlights(initialMergedNews), 220, { idle: true });
+scheduleHomeBootstrapTask(() => renderGlobalPoliticsHighlights(), 360, { idle: true });
 
 const initializeMobilePagePrefetch = () => {
   if (!mobileIntroMedia?.matches) {
@@ -14025,7 +14045,7 @@ const initializeMobilePagePrefetch = () => {
   });
 };
 
-initializeMobilePagePrefetch();
+scheduleHomeBootstrapTask(() => initializeMobilePagePrefetch(), 420, { idle: true });
 
 const isInternalArticleLink = (link) => {
   const href = link?.getAttribute?.("href") || "";
@@ -16465,10 +16485,10 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
 }
 
 bindArchiveHighlightControls();
-renderArchiveHighlights();
+scheduleHomeBootstrapTask(() => renderArchiveHighlights(), 460, { idle: true });
 
 // Inicializar o radar somente depois que os helpers e normalizadores ja existem.
-renderRadar();
+scheduleHomeBootstrapTask(() => renderRadar(), 520, { idle: true });
 
 // --- WIDGETS LATERAIS ---
 const sidebarData = window.SIDEBAR_DATA || null;
@@ -17123,7 +17143,7 @@ const initializeSidebarWidgets = () => {
   registerInteractivePanels(document.querySelector(".side-rail"));
 };
 
-initializeSidebarWidgets();
+scheduleHomeBootstrapTask(() => initializeSidebarWidgets(), 680, { idle: true });
 
 const hydrateDynamicNews = async () => {
   try {
@@ -17144,23 +17164,23 @@ const hydrateDynamicNews = async () => {
       document.querySelector("#radar .chip-button.is-active[data-filter]")?.dataset.filter ||
       "todos";
     hydrateMosaicHero(merged);
+    await yieldHomeHydration();
     renderWhatMattersNow(merged);
-    void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
+    await yieldHomeHydration();
     initializeHeroTourismHero();
+    await yieldHomeHydration();
     renderRegionalPoliticsHighlights(merged);
+    await yieldHomeHydration();
     renderSidebarWidgets();
+    await yieldHomeHydration();
     renderRadar(activeFilter);
+    await yieldHomeHydration();
     updateLiveFeedItems(merged, { resetFilter: false });
+    await yieldHomeHydration();
     initializeLiveTicker();
 
-    window.setTimeout(() => {
-      void Promise.allSettled([
-        renderDailyTrendingBuzz({ forceRefresh: true, runtimeArticles: merged }),
-        renderDynamicMonthlyBuzz({ runtimeArticles: merged }),
-        renderCommunityTrendCard(),
-        renderGlobalPoliticsHighlights()
-      ]);
-    }, 120);
+    // Os blocos editoriais secundarios ja nascem com fallback estatico e entram
+    // no ciclo normal de atualizacao; evitar refresco em massa durante a abertura.
   } catch (error) {
     // Mantem o fallback estatico quando a API nao estiver ligada.
   }
@@ -17209,7 +17229,7 @@ const scheduleHomeBackgroundHydration = () => {
   };
 
   const runSoon = () => {
-    execute();
+    scheduleHomeBootstrapTask(execute, 780, { idle: true, timeout: 1800 });
   };
 
   if (document.readyState === "interactive" || document.readyState === "complete") {
@@ -17220,7 +17240,7 @@ const scheduleHomeBackgroundHydration = () => {
   document.addEventListener("DOMContentLoaded", runSoon, { once: true });
 };
 
-scheduleHomeBackgroundHydration();
+scheduleHomeBootstrapTask(() => scheduleHomeBackgroundHydration(), 520, { idle: true });
 
 const attachCommentSubmission = () => {
   if (!publishCommentButton || !opinionInput || !commentsFeed || !charCount) {
@@ -17806,20 +17826,20 @@ const initializeFoundersAutoCarousel = () => {
   });
 };
 
-attachCommentSubmission();
-attachCommunitySignalFlow();
-attachSubscriptionSubmission();
-attachAgentMailFlow();
-initializeFloatingPanelToggles();
-initializeFoundersAutoCarousel();
-renderWhatMattersNow(window.NEWS_DATA || []);
+scheduleHomeBootstrapTask(() => attachCommentSubmission(), 760, { idle: true });
+scheduleHomeBootstrapTask(() => attachCommunitySignalFlow(), 820, { idle: true });
+scheduleHomeBootstrapTask(() => attachSubscriptionSubmission(), 900, { idle: true });
+scheduleHomeBootstrapTask(() => attachAgentMailFlow(), 960, { idle: true });
+scheduleHomeBootstrapTask(() => initializeFloatingPanelToggles(), 220);
+scheduleHomeBootstrapTask(() => initializeFoundersAutoCarousel(), 1040, { idle: true });
+scheduleHomeBootstrapTask(() => renderWhatMattersNow(window.NEWS_DATA || []), 180);
 window.setTimeout(() => {
   void renderDailyTrendingBuzz();
   void renderDynamicMonthlyBuzz();
   void renderCommunityTrendCard();
 }, 320);
-scheduleTopicSurfaceRefresh();
-initializeLiveTicker();
+scheduleHomeBootstrapTask(() => scheduleTopicSurfaceRefresh(), 1180, { idle: true });
+scheduleHomeBootstrapTask(() => initializeLiveTicker(), 260);
 window.setTimeout(() => {
   void hydrateFoundersWallFromApi();
 }, 1600);

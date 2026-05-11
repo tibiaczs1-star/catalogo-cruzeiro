@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-11 - Intro bonita sem travar a home
+
+- Usuario esclareceu que nao quer remover as intros nem o carregamento; eles devem servir para preparar esqueleto/conteudo, sem transformar a abertura em espera longa ou travar a home.
+- `script.js` reduziu os gates da splash, removeu espera bloqueante por `document complete`/imagens criticas, fatiou a hidratacao dinamica de noticias com yields e impediu refrescos pesados em massa durante a abertura.
+- `deferred-home-boot.js` passou a carregar scripts auxiliares em ondas pequenas e espaçadas por ociosidade; o warm cache da splash foi atrasado e deixou de puxar JS/CSS grandes antigos na largada.
+- `startup-experience.js`/`startup-experience.css` mantem o show visual da abertura, mas com saida garantida, loader nao bloqueante e card premium ajustado ao viewport.
+- `index.html` recebeu cache-bust `intro-speed1`, failsafe inline curto e carregamento inicial priorizando `startup-experience.css` + `premium-home-redesign.css`, deixando estilos secundarios em segundo plano.
+- Validacoes locais em `127.0.0.1:3168`: desktop/mobile sem overlay preso, sem `catalogo-lock-scroll`, 91 links de noticia, `NEWS_DATA` com 60 itens, console sem erros; maior long task medida caiu para ~731ms desktop e ~654ms mobile. `npm run review:team` retornou `totalIssues=0` e `npm run perf:budget` retornou `ok=true`.
+
 ## Atualizacao rapida 2026-05-01 - Polemicas reais do Brasil e Juruá
 
 - Usuario reforcou que os cards ainda pareciam feitos para editor e pediu noticias reais, em linguagem de leitor comum, remetendo ao dia e as polemicas do Brasil; quando houver Vale do Jurua/Cruzeiro do Sul, melhor.

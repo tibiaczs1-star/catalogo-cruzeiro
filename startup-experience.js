@@ -3,7 +3,7 @@
 (() => {
   const MODAL_ID = "catalogoPremiumTerms";
   const CONSENT_BANNER_ID = "catalogo-cookie-consent";
-  const READY_FALLBACK_MS = 8000;
+  const READY_FALLBACK_MS = 2400;
   const OPEN_DELAY_MS = 140;
   const CONSENT_KEY = "catalogo_lgpd_consent_v1";
   const CONSENT_COOKIE = "catalogo_tracking_consent";
@@ -19,7 +19,7 @@
   const INITIAL_HOME_LOADER_DAILY_KEY = "catalogo_initial_home_loader_seen_day_v2";
   const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
   const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
-  const INITIAL_HOME_LOADER_MIN_MS = 1550;
+  const INITIAL_HOME_LOADER_MIN_MS = 1050;
   const ACTION_LOADER_MIN_MS = 920;
   const ACTION_LOADER_MAX_MS = 2200;
   const THANKS_SCREEN_MS = 2600;
@@ -1220,7 +1220,7 @@
     return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
-  function waitForLogoSplashDone(timeoutMs = 3200) {
+  function waitForLogoSplashDone(timeoutMs = 1400) {
     if (
       window.__CATALOGO_LOGO_SPLASH_DONE__ === true ||
       document.body.classList.contains("site-loaded") ||
@@ -1300,6 +1300,8 @@
   async function runProgressUntilReady(loader, options = {}) {
     const minDuration = options.minDuration || INITIAL_HOME_LOADER_MIN_MS;
     const maxDuration = options.maxDuration || READY_FALLBACK_MS;
+    const hardMaxDuration = options.hardMaxDuration || maxDuration;
+    const waitForReady = options.waitForReady !== false;
     const update = typeof options.update === "function" ? options.update : () => {};
     const statuses = Array.isArray(options.statuses) && options.statuses.length
       ? options.statuses
@@ -1307,11 +1309,13 @@
     const startedAt = Date.now();
     let currentProgress = 0;
     let statusIndex = 0;
-    let ready = false;
+    let ready = !waitForReady;
 
-    waitForHomeReady(maxDuration).then(() => {
-      ready = true;
-    });
+    if (waitForReady) {
+      waitForHomeReady(maxDuration).then(() => {
+        ready = true;
+      });
+    }
 
     return new Promise((resolve) => {
       const timer = window.setInterval(() => {
@@ -1325,7 +1329,7 @@
         );
         update(currentProgress, statuses[statusIndex]);
 
-        if (ready && elapsed >= minDuration) {
+        if ((ready && elapsed >= minDuration) || elapsed >= hardMaxDuration) {
           window.clearInterval(timer);
           update(100, statuses[statuses.length - 1]);
           window.setTimeout(resolve, 180);
@@ -1334,7 +1338,7 @@
 
       window.setTimeout(() => {
         ready = true;
-      }, maxDuration);
+      }, hardMaxDuration);
     });
   }
 
@@ -1365,7 +1369,9 @@
   function openWelcomeModal(modal) {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("catalogo-lock-scroll");
+    if (!modal.classList.contains("is-home-opening-loader")) {
+      document.body.classList.add("catalogo-lock-scroll");
+    }
   }
 
   function closeWelcomeModal(modal, callback) {
@@ -1446,6 +1452,8 @@
     rememberInitialHomeLoaderInThisSession();
     waitForLogoSplashDone().then(() => {
       const loader = createInitialHomeLoaderModal();
+      const isEditorialHome = document.body.classList.contains("editorial-home");
+      loader.classList.add("is-nonblocking-loader");
       let finished = false;
       let failsafeTimer = 0;
       const finish = () => {
@@ -1463,7 +1471,9 @@
         });
       };
 
-      document.body.classList.add("home-ready-gate-active");
+      if (!isEditorialHome) {
+        document.body.classList.add("home-ready-gate-active");
+      }
       document.body.appendChild(loader);
 
       window.setTimeout(() => {
@@ -1472,15 +1482,17 @@
         updateInitialLoaderProgress(loader, 4, "preparando a primeira abertura");
       }, 30);
 
-      failsafeTimer = window.setTimeout(finish, Math.max(READY_FALLBACK_MS + 1200, INITIAL_HOME_LOADER_MIN_MS + 2200));
+      failsafeTimer = window.setTimeout(finish, 1900);
 
       runProgressUntilReady(loader, {
-        minDuration: INITIAL_HOME_LOADER_MIN_MS,
-        maxDuration: READY_FALLBACK_MS,
+        minDuration: isEditorialHome ? 980 : INITIAL_HOME_LOADER_MIN_MS,
+        maxDuration: isEditorialHome ? 1350 : READY_FALLBACK_MS,
+        hardMaxDuration: isEditorialHome ? 1500 : READY_FALLBACK_MS,
+        waitForReady: !isEditorialHome,
         statuses: [
           "montando capa do jornal",
-          "guardando áreas no navegador",
           "organizando agenda e serviços",
+          "carregando notícias em segundo plano",
           "portal pronto para leitura"
         ],
         update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)

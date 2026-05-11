@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-04-30T11:48:09.881Z",
+  "lastUpdatedAt": "2026-05-11T19:15:12.429Z",
   "assets": [
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
@@ -1889,6 +1889,28 @@
         "2026-04-30-corrigir-tendencias-conversas-com-sinais-sociais-reais-facebook-publico-configur"
       ],
       "createdAt": "2026-04-30T03:14:20.025Z"
+    },
+    {
+      "id": "intro-hotfix-desktop-20260511",
+      "kind": "screenshot",
+      "path": "C:\\Users\\junio\\AppData\\Local\\Temp\\catalogo-intro-hotfix-qa-20260511-v2\\desktop.png",
+      "source": "playwright",
+      "note": "Desktop apos intro: home carregada, sem overlay preso e sem scroll travado.",
+      "linkedOrderIds": [
+        "2026-05-11-destravar-intros-e-otimizar-a-abertura-da-home-sem-remover-o-show-visual-de-carr"
+      ],
+      "createdAt": "2026-05-11T19:15:12.418Z"
+    },
+    {
+      "id": "intro-hotfix-mobile-20260511",
+      "kind": "screenshot",
+      "path": "C:\\Users\\junio\\AppData\\Local\\Temp\\catalogo-intro-hotfix-qa-20260511-v2\\mobile.png",
+      "source": "playwright",
+      "note": "Mobile apos intro: topo e status cards carregados, sem overlay preso e sem overflow horizontal.",
+      "linkedOrderIds": [
+        "2026-05-11-destravar-intros-e-otimizar-a-abertura-da-home-sem-remover-o-show-visual-de-carr"
+      ],
+      "createdAt": "2026-05-11T19:15:12.429Z"
     }
   ]
 }

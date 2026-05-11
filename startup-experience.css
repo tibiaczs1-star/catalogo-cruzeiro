@@ -12640,3 +12640,142 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
     transition: opacity 120ms ease, visibility 120ms ease !important;
   }
 }
+
+/* 2026-05-11: abertura util, visual e com saida garantida. */
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader {
+  pointer-events: none !important;
+  background:
+    linear-gradient(180deg, rgba(1, 7, 14, 0.78), rgba(1, 7, 14, 0.9)),
+    radial-gradient(circle at 18% 18%, rgba(240, 180, 41, 0.18), transparent 30%),
+    #020d18 !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-card {
+  width: min(1120px, calc(100vw - 32px)) !important;
+  height: min(620px, calc(100svh - 40px)) !important;
+  max-width: 1120px !important;
+  max-height: calc(100svh - 40px) !important;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.62fr) !important;
+  justify-items: stretch !important;
+  align-items: center !important;
+  gap: clamp(1rem, 3vw, 3.5rem) !important;
+  padding: clamp(1.2rem, 4vw, 4.25rem) !important;
+  border: 1px solid rgba(240, 180, 41, 0.22) !important;
+  border-radius: clamp(20px, 3vw, 34px) !important;
+  background:
+    linear-gradient(115deg, rgba(3, 18, 31, 0.92), rgba(3, 18, 31, 0.7) 46%, rgba(3, 18, 31, 0.92)),
+    url("./assets/home-cache/rio-jurua-panorama.jpg") center / cover no-repeat !important;
+  box-shadow:
+    0 34px 120px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-card::before {
+  background:
+    linear-gradient(90deg, rgba(1, 8, 16, 0.88), rgba(1, 8, 16, 0.34) 58%, rgba(1, 8, 16, 0.76)),
+    linear-gradient(115deg, transparent 0 18%, rgba(240, 180, 41, 0.18) 18.2% 20%, transparent 20.5% 100%) !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-card::after {
+  left: auto !important;
+  right: clamp(20px, 6vw, 80px) !important;
+  top: 50% !important;
+  width: clamp(220px, 28vw, 420px) !important;
+  opacity: 0.34 !important;
+  transform: translateY(-50%) !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-copy {
+  justify-items: start !important;
+  align-content: center !important;
+  width: min(560px, 100%) !important;
+  max-width: 560px !important;
+  text-align: left !important;
+  gap: clamp(0.5rem, 1.4vw, 0.9rem) !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader h2 {
+  max-width: 8.5ch !important;
+  font-size: clamp(3rem, 6.2vw, 5.8rem) !important;
+  line-height: 0.88 !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-subtitle {
+  font-size: clamp(0.82rem, 1.2vw, 1.05rem) !important;
+  letter-spacing: 0.28em !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .catalogo-welcome-lead {
+  max-width: 35ch !important;
+  font-size: clamp(0.94rem, 1.2vw, 1.08rem) !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-pillars {
+  width: min(520px, 100%) !important;
+  margin-top: 0.45rem !important;
+  gap: 0.62rem !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-pillars span {
+  min-height: 46px !important;
+  align-content: center !important;
+  border: 1px solid rgba(240, 180, 41, 0.2) !important;
+  border-radius: 8px !important;
+  background: rgba(2, 13, 24, 0.42) !important;
+  font-size: 0.78rem !important;
+  font-weight: 800 !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-pillars i {
+  width: 22px !important;
+  height: 22px !important;
+  border-radius: 6px !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-progress {
+  width: min(520px, 100%) !important;
+  margin-top: clamp(0.55rem, 1.6vw, 1rem) !important;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-map {
+  position: relative !important;
+  z-index: 2 !important;
+  justify-self: end !important;
+  right: auto !important;
+  top: auto !important;
+  width: min(280px, 100%) !important;
+  height: min(440px, 58svh) !important;
+}
+
+@media (max-width: 760px) {
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-card {
+    width: calc(100vw - 24px) !important;
+    height: calc(100svh - 24px) !important;
+    grid-template-columns: 1fr !important;
+    gap: 0.8rem !important;
+    padding: 1.05rem !important;
+  }
+
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-copy {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader h2 {
+    max-width: 8ch !important;
+    font-size: clamp(2.45rem, 12vw, 4rem) !important;
+  }
+
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-map {
+    position: absolute !important;
+    right: -58px !important;
+    top: 24px !important;
+    width: 170px !important;
+    height: 260px !important;
+    opacity: 0.32 !important;
+  }
+
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-nonblocking-loader .premium-opening-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

@@ -1,15 +1,30 @@
 # Current State
 
-Updated: 2026-05-01T14:54:17.360Z
+Updated: 2026-05-11T19:15:27.277Z
 
 ## Active Goal
 
-- Home com polemicas reais do dia
+- Home sem travar nas intros
 
 ## Summary
 
-Blocos Polêmicas do Brasil Hoje e Celebridades & Polêmicas do Dia agora usam notícias reais com fonte, misturando Vale do Juruá/Cruzeiro do Sul, Acre e Brasil, sem hashtag genérica/lista externa/texto de editor. Performance local segue leve.
+A intro continua visual, mas deixou de esperar a cadeia inteira de hidratação. A abertura agora libera a home com failsafe curto, carrega notícias em blocos, adia scripts auxiliares, desativa aquecimento pesado de cache na largada e mantém CSS/JS com cache-bust intro-speed1. QA local desktop/mobile passou sem overlay preso, sem scroll lock, console limpo, maxLongTask abaixo de 1s; review:team e perf:budget ok.
 
 ## Next
 
-- Commitar e publicar o pacote sem PubPaid; confirmar produção com cache-bust home-real-brasil2.
+- Staging seletivo dos arquivos de hotfix
+- commit e push para origin/main
+- validar produção online com cache-bust intro-speed1 e sem Página sem resposta
+
+## Files In Focus
+
+- index.html
+- script.js
+- startup-experience.js
+- startup-experience.css
+- deferred-home-boot.js
+
+## Assets In Focus
+
+- C:\Users\junio\AppData\Local\Temp\catalogo-intro-hotfix-qa-20260511-v2\desktop.png
+- C:\Users\junio\AppData\Local\Temp\catalogo-intro-hotfix-qa-20260511-v2\mobile.png
