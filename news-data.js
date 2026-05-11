@@ -1,4 +1,4 @@
-window.NEWS_ARCHIVE_TOTAL = 1066;
+window.NEWS_ARCHIVE_TOTAL = 1064;
 window.NEWS_DATA = [
   {
     "id": "https://juruaonline.com.br/acidente-na-variante-de-cruzeiro-do-sul-deixou-uma-vitima-morta-e-duas-feridas-diz-medico-do-samu/",
@@ -728,7 +728,7 @@ window.NEWS_DATA = [
     "title": "Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento",
     "eyebrow": "Prefeitura",
     "date": "11 de mai de 2026",
-    "publishedAt": "2026-05-11T23:23:18.000Z",
+    "publishedAt": "2026-05-11T18:23:18.000Z",
     "category": "Prefeitura",
     "categoryKey": "prefeitura",
     "previewClass": "thumb-prefeitura",
@@ -7955,6 +7955,55 @@ window.NEWS_DATA = [
     ]
   },
   {
+    "id": "https://g1.globo.com/pop-arte/noticia/2026/05/11/sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen.ghtml",
+    "slug": "sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen",
+    "title": "Sony Music compra catálogo musical da Recognition, com sucessos de Beyoncé e Leonard Cohen",
+    "eyebrow": "Esporte",
+    "date": "11 de mai de 2026",
+    "publishedAt": "2026-05-11T18:22:33.000Z",
+    "category": "Esporte",
+    "categoryKey": "esporte",
+    "previewClass": "thumb-esporte",
+    "sourceName": "G1 Pop & Arte",
+    "sourceUrl": "https://g1.globo.com/pop-arte/noticia/2026/05/11/sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen.ghtml",
+    "sourceLabel": "Sony Music compra catálogo musical da Recognition, com sucessos de Beyoncé e Leonard Cohen",
+    "lede": "A cantora Beyoncé AFP A Sony Music comprará os direitos de canções icônicas de Beyoncé, Leonard Cohen e outros gigantes da música da gestora de investimentos Blackstone, em um acordo avaliado em cerca de 4 bilhões de dólares...",
+    "summary": "A cantora Beyoncé AFP A Sony Music comprará os direitos de canções icônicas de Beyoncé, Leonard Cohen e outros gigantes da música da gestora de investimentos Blackstone, em um acordo avaliado em cerca de 4 bilhões de dólares...",
+    "analysis": "",
+    "highlights": [],
+    "development": [],
+    "imageUrl": "https://s2-g1.glbimg.com/rjE7BaEdgLMAoci2ewj3Lgk9cyw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/9/5/aajvasTMqj2FQxAvoRMA/fotos-g1-1920-x-1080-px-42-.png",
+    "feedImageUrl": "https://s2-g1.glbimg.com/rjE7BaEdgLMAoci2ewj3Lgk9cyw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/9/5/aajvasTMqj2FQxAvoRMA/fotos-g1-1920-x-1080-px-42-.png",
+    "sourceImageUrl": "https://s2-g1.glbimg.com/rjE7BaEdgLMAoci2ewj3Lgk9cyw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/9/5/aajvasTMqj2FQxAvoRMA/fotos-g1-1920-x-1080-px-42-.png",
+    "imageCredit": "",
+    "imageFocus": "center 38%",
+    "imageFit": "",
+    "media": null,
+    "priority": 0,
+    "editorialPriority": "",
+    "crossSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/11/sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen.ghtml"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "G1 Pop & Arte",
+        "url": "https://g1.globo.com/pop-arte/noticia/2026/05/11/sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen.ghtml"
+      }
+    ],
+    "sourceCount": 1,
+    "alternateSlugs": [
+      "sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen"
+    ],
+    "body": [
+      "G1 Pop & Arte publicou em 11 de mai de 2026 uma atualizacao sobre Sony Music compra catálogo musical da Recognition, com sucessos de Beyoncé e Leonard Cohen.",
+      "O ponto principal e Sony Music compra catálogo musical da Recognition, com sucessos de Beyoncé e Leonard Cohen. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
+    ]
+  },
+  {
     "id": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-italiano/napoli-x-bologna-escalacoes-e-onde-assistir-ao-campeonato-italiano/",
     "slug": "napoli-x-bologna-escalacoes-e-onde-assistir-ao-campeonato-italiano",
     "title": "Napoli x Bologna: escalações e onde assistir ao Campeonato Italiano",
@@ -9152,55 +9201,6 @@ window.NEWS_DATA = [
     "sourceCount": 1,
     "alternateSlugs": [
       "aplicacao-a-partir-de-r-1-rendimento-atrelado-a-selic-como-funciona-o-novo-tesouro-reserva"
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/agro/governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate/",
-    "slug": "governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate",
-    "title": "Governo regulamenta lei que define o que pode ser chamado de chocolate",
-    "eyebrow": "Politica",
-    "date": "11 de mai de 2026",
-    "publishedAt": "2026-05-11T18:05:41.000Z",
-    "category": "Politica",
-    "categoryKey": "politica",
-    "previewClass": "thumb-politica",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/agro/governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate/",
-    "sourceLabel": "Governo regulamenta lei que define o que pode ser chamado de chocolate",
-    "lede": "CNN Brasil publicou uma atualização sobre Governo regulamenta lei que define o que pode ser chamado de chocolate. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Governo regulamenta lei que define o que pode ser chamado de chocolate. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2025binary_LYNXNPEL8L0UW-BASEIMAGE.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2025binary_LYNXNPEL8L0UW-BASEIMAGE.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2025binary_LYNXNPEL8L0UW-BASEIMAGE.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/agro/governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/agro/governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate"
-    ],
-    "body": [
-      "CNN Brasil publicou em 11 de mai de 2026 uma atualizacao sobre Governo regulamenta lei que define o que pode ser chamado de chocolate.",
-      "O ponto principal e Governo regulamenta lei que define o que pode ser chamado de chocolate. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
     ]
   },
   {
@@ -10967,26 +10967,26 @@ window.NEWS_DATA = [
     ]
   },
   {
-    "id": "https://www.cnnbrasil.com.br/internacional/acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte/",
-    "slug": "acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte",
-    "title": "Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte",
-    "eyebrow": "Nacional",
+    "id": "https://www.theverge.com/report/928026/palantir-chore-coat",
+    "slug": "palantir-s-true-believers-are-wearing-this-jacket",
+    "title": "Atualização internacional de The Verge - 13:26",
+    "eyebrow": "Novidades",
     "date": "11 de mai de 2026",
-    "publishedAt": "2026-05-11T18:07:48.000Z",
-    "category": "Nacional",
-    "categoryKey": "internacional nacional acordo ira eua pode depender de visita de trump a china diz fonte acao chinesa e crucial para garantir o andamento das conversas que estao em pausa antes de cupula presidencial",
+    "publishedAt": "2026-05-11T18:26:04.000Z",
+    "category": "Novidades",
+    "categoryKey": "cultura",
     "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/internacional/acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte/",
-    "sourceLabel": "Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte",
-    "lede": "CNN Brasil publicou uma atualização sobre Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte. O portal mantém o link da fonte original para acompanhamento completo.",
+    "sourceName": "The Verge",
+    "sourceUrl": "https://www.theverge.com/report/928026/palantir-chore-coat",
+    "sourceLabel": "Atualização internacional de The Verge - 13:26",
+    "lede": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 13:26. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
+    "summary": "The Verge publicou uma atualização sobre Atualização internacional de The Verge - 13:26. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.",
     "analysis": "",
     "highlights": [],
     "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/2026-04-27T042210Z_1_LOP575227042026RP1_RTRMADP_BASEIMAGE-960X540_IRAN-CRISIS-ARAQCHI-RUSSIA-ARRIVAL.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/2026-04-27T042210Z_1_LOP575227042026RP1_RTRMADP_BASEIMAGE-960X540_IRAN-CRISIS-ARAQCHI-RUSSIA-ARRIVAL.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/2026-04-27T042210Z_1_LOP575227042026RP1_RTRMADP_BASEIMAGE-960X540_IRAN-CRISIS-ARAQCHI-RUSSIA-ARRIVAL.jpg?w=200",
+    "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/268519_Why_would_Palantir_make_a_chore_coat__CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "feedImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/268519_Why_would_Palantir_make_a_chore_coat__CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
+    "sourceImageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/268519_Why_would_Palantir_make_a_chore_coat__CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
     "imageCredit": "",
     "imageFocus": "",
     "imageFit": "",
@@ -10995,121 +10995,23 @@ window.NEWS_DATA = [
     "editorialPriority": "",
     "crossSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/internacional/acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte/"
+        "name": "The Verge",
+        "url": "https://www.theverge.com/report/928026/palantir-chore-coat"
       }
     ],
     "alternateSources": [
       {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/internacional/acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte/"
+        "name": "The Verge",
+        "url": "https://www.theverge.com/report/928026/palantir-chore-coat"
       }
     ],
     "sourceCount": 1,
     "alternateSlugs": [
-      "acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte"
+      "palantir-s-true-believers-are-wearing-this-jacket"
     ],
     "body": [
-      "CNN Brasil publicou em 11 de mai de 2026 uma atualizacao sobre Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte.",
-      "O ponto principal e Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/economia/negocios/elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade/",
-    "slug": "elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade",
-    "title": "Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade",
-    "eyebrow": "Negocios",
-    "date": "11 de mai de 2026",
-    "publishedAt": "2026-05-11T18:07:17.000Z",
-    "category": "Negocios",
-    "categoryKey": "negocios",
-    "previewClass": "thumb-negocios",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/economia/negocios/elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade/",
-    "sourceLabel": "Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade",
-    "lede": "CNN Brasil publicou uma atualização sobre Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/02/2022-02-11T174725Z_1_LYNXMPEI1A0TQ_RTROPTP_4_BOLSAEUROPA-FECHA-1.jpg?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/02/2022-02-11T174725Z_1_LYNXMPEI1A0TQ_RTROPTP_4_BOLSAEUROPA-FECHA-1.jpg?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/02/2022-02-11T174725Z_1_LYNXMPEI1A0TQ_RTROPTP_4_BOLSAEUROPA-FECHA-1.jpg?w=200",
-    "imageCredit": "",
-    "imageFocus": "center 38%",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/economia/negocios/elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/economia/negocios/elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade"
-    ],
-    "body": [
-      "CNN Brasil publicou em 11 de mai de 2026 uma atualizacao sobre Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade.",
-      "O ponto principal e Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
-      "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
-    ]
-  },
-  {
-    "id": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/listas-convocados-todas-48-selecoes-copa-do-mundo-2026/",
-    "slug": "veja-as-listas-de-convocados-de-todas-as-48-selecoes-da-copa-do-mundo-2026",
-    "title": "Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026",
-    "eyebrow": "Nacional",
-    "date": "11 de mai de 2026",
-    "publishedAt": "2026-05-11T18:06:48.000Z",
-    "category": "Nacional",
-    "categoryKey": "copa do mundo nacional veja as listas de convocados de todas as 48 selecoes da copa do mundo 2026 este sera o maior mundial da historia tres paises vao receber o torneio entre junho e julho",
-    "previewClass": "thumb-cotidiano",
-    "sourceName": "CNN Brasil",
-    "sourceUrl": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/listas-convocados-todas-48-selecoes-copa-do-mundo-2026/",
-    "sourceLabel": "Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026",
-    "lede": "CNN Brasil publicou uma atualização sobre Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026. O portal mantém o link da fonte original para acompanhamento completo.",
-    "summary": "CNN Brasil publicou uma atualização sobre Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026. O portal mantém o link da fonte original para acompanhamento completo.",
-    "analysis": "",
-    "highlights": [],
-    "development": [],
-    "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
-    "feedImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
-    "sourceImageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
-    "imageCredit": "",
-    "imageFocus": "",
-    "imageFit": "",
-    "media": null,
-    "priority": 0,
-    "editorialPriority": "",
-    "crossSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/listas-convocados-todas-48-selecoes-copa-do-mundo-2026/"
-      }
-    ],
-    "alternateSources": [
-      {
-        "name": "CNN Brasil",
-        "url": "https://www.cnnbrasil.com.br/esportes/futebol/copa-do-mundo/listas-convocados-todas-48-selecoes-copa-do-mundo-2026/"
-      }
-    ],
-    "sourceCount": 1,
-    "alternateSlugs": [
-      "veja-as-listas-de-convocados-de-todas-as-48-selecoes-da-copa-do-mundo-2026"
-    ],
-    "body": [
-      "CNN Brasil publicou em 11 de mai de 2026 uma atualizacao sobre Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026.",
-      "O ponto principal e Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
+      "The Verge publicou em 11 de mai de 2026 uma atualizacao sobre Palantir’s true believers are wearing this jacket.",
+      "O ponto principal e Palantir’s true believers are wearing this jacket. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.",
       "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
     ]
   },

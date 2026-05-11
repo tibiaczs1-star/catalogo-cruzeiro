@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-11T18:23:42.354Z",
+  "updatedAt": "2026-05-11T18:28:10.536Z",
   "sourceFile": "news-data.js",
   "checkedLimit": 1000,
   "offline": true,
@@ -9,8 +9,8 @@
     "review": 0,
     "warning": 0,
     "error": 0,
-    "manualFocus": 646,
-    "newSinceLastAudit": 14,
+    "manualFocus": 648,
+    "newSinceLastAudit": 4,
     "missingImage": 0,
     "unreachableImage": 0
   },
@@ -173,6 +173,7 @@
     "com-recorde-na-producao-de-milho-armazens-da-cageacre-operam-com-capacidade-maxima-no-interior-d",
     "mpac-instaura-procedimento-para-proteger-adolescente-vitima-de-abuso-sexual-em-ambiente-familiar",
     "jogos-de-hoje-quem-joga-no-futebol-e-onde-assistir-ao-vivo-segunda-feira-11-05",
+    "sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen",
     "napoli-x-bologna-escalacoes-e-onde-assistir-ao-campeonato-italiano",
     "rayo-vallecano-x-girona-horario-e-onde-assistir-ao-jogo-de-laliga",
     "copa-do-mundo-confira-quando-as-campeas-mundiais-serao-convocadas",
@@ -197,7 +198,6 @@
     "predio-do-ultimo-show-dos-beatles-sera-transformado-em-museu-de-sete-andares-em-londres",
     "lei-reconhece-atividade-circense-como-expressao-da-cultura-popular",
     "aplicacao-a-partir-de-r-1-rendimento-atrelado-a-selic-como-funciona-o-novo-tesouro-reserva",
-    "governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate",
     "audiencia-publica-debate-novo-plano-diretor-e-propostas-para-mobilidade-comercio-e-combate-as-al",
     "governo-lanca-editais-para-conectar-ate-3-8-mil-ubs",
     "nefasta-a-democracia-brasileira-diz-lider-do-governo-sobre-pec-da-anistia",
@@ -233,9 +233,7 @@
     "medo-da-violencia-altera-a-rotina-de-57-dos-brasileiros-e-afeta-mais-mulheres-e-populacao-de-bai",
     "41-dos-brasileiros-afirmam-conviver-com-o-crime-organizado-no-bairro-onde-moram",
     "operacao-integrada-cumpre-34-mandados-de-prisao-em-quatro-estados-e-mira-organizacao-criminosa",
-    "acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte",
-    "elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade",
-    "veja-as-listas-de-convocados-de-todas-as-48-selecoes-da-copa-do-mundo-2026",
+    "palantir-s-true-believers-are-wearing-this-jacket",
     "guilherme-fontes-de-a-viagem-posta-cliques-raros-com-a-namorada",
     "bolsas-da-europa-fecham-mistas-com-impasse-para-resolucao-da-guerra",
     "setor-de-proteina-animal-alerta-para-risco-de-inflacao-nos-alimentos",
@@ -1014,7 +1012,9 @@
     "mp-impede-que-contraventor-adilsinho-retorne-para-o-rio-de-janeiro",
     "mega-sena-3005-sorteio-desta-quinta-feira-7-pode-pagar-r-36-milhoes",
     "em-ato-de-solidariedade-caminhada-pelas-vitimas-do-instituto-sao-jose-acontece-nesta-quinta",
-    "delegacao-europeia-confia-em-aprovacao-final-de-acordo-com-mercosul"
+    "delegacao-europeia-confia-em-aprovacao-final-de-acordo-com-mercosul",
+    "prefeitura-de-cruzeiro-do-sul-suspende-aulas-da-rede-municipal-em-sinal-de-luto-e-reforco-a-segu",
+    "baixa-do-rio-jurua-paralisa-travessia-de-balsa-entre-cruzeiro-do-sul-e-rodrigues-alves"
   ],
   "reviewQueue": [],
   "items": [
@@ -1368,8 +1368,8 @@
       "title": "Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento",
       "category": "Prefeitura",
       "sourceName": "Jurua Online",
-      "publishedAt": "2026-05-11T23:23:18.000Z",
-      "isNewSinceLastAudit": true,
+      "publishedAt": "2026-05-11T18:23:18.000Z",
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://juruaonline.com.br/wp-content/uploads/2026/05/IMG_7429.jpeg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -3325,7 +3325,7 @@
       "category": "Policia",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T18:00:34.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/pesquisa-global-de-percepcao-sobre-o-brasil-revela-pontos-fortes-e-fracos.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -4884,12 +4884,36 @@
       "reasons": []
     },
     {
+      "slug": "sony-music-compra-catalogo-musical-da-recognition-com-sucessos-de-beyonce-e-leonard-cohen",
+      "title": "Sony Music compra catálogo musical da Recognition, com sucessos de Beyoncé e Leonard Cohen",
+      "category": "Esporte",
+      "sourceName": "G1 Pop & Arte",
+      "publishedAt": "2026-05-11T18:22:33.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://s2-g1.glbimg.com/rjE7BaEdgLMAoci2ewj3Lgk9cyw=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/9/5/aajvasTMqj2FQxAvoRMA/fotos-g1-1920-x-1080-px-42-.png",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": false
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
       "slug": "napoli-x-bologna-escalacoes-e-onde-assistir-ao-campeonato-italiano",
       "title": "Napoli x Bologna: escalações e onde assistir ao Campeonato Italiano",
       "category": "Esporte",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T18:02:11.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/07/nico-williams-espanha-inglaterra-eurocopa-e1720988510511.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5215,7 +5239,7 @@
       "category": "Cultura",
       "sourceName": "G1 Pop & Arte",
       "publishedAt": "2026-05-11T18:03:41.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://s2-g1.glbimg.com/WRry8ZPsK6jiDFMbRJAWT4Ooi6g=/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/s/d/6QjLYYRhmYAKmCw4wzFg/carla-madeira-1-260.jpg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -5438,28 +5462,6 @@
       "reasons": []
     },
     {
-      "slug": "governo-regulamenta-lei-que-define-o-que-pode-ser-chamado-de-chocolate",
-      "title": "Governo regulamenta lei que define o que pode ser chamado de chocolate",
-      "category": "Politica",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T18:05:41.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportAgribusinessNews/tagreuters.com2025binary_LYNXNPEL8L0UW-BASEIMAGE.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
       "slug": "audiencia-publica-debate-novo-plano-diretor-e-propostas-para-mobilidade-comercio-e-combate-as-al",
       "title": "Audiência pública debate novo Plano Diretor e propostas para mobilidade, comércio e combate às alagações",
       "category": "Política",
@@ -5492,7 +5494,7 @@
       "category": "Politica",
       "sourceName": "Agencia Brasil",
       "publishedAt": "2026-05-11T17:44:00.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "/assets/news-fallbacks/governo-lanca-editais-para-conectar-ate-3-8-mil-ubs.svg",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6298,64 +6300,13 @@
       "reasons": []
     },
     {
-      "slug": "acordo-ira-eua-pode-depender-de-visita-de-trump-a-china-diz-fonte",
-      "title": "Acordo Irã-EUA pode depender de visita de Trump à China, diz fonte",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T18:07:48.000Z",
+      "slug": "palantir-s-true-believers-are-wearing-this-jacket",
+      "title": "Atualização internacional de The Verge - 13:26",
+      "category": "Novidades",
+      "sourceName": "The Verge",
+      "publishedAt": "2026-05-11T18:26:04.000Z",
       "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/04/2026-04-27T042210Z_1_LOP575227042026RP1_RTRMADP_BASEIMAGE-960X540_IRAN-CRISIS-ARAQCHI-RUSSIA-ARRIVAL.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": {
-        "width": 960,
-        "height": 540,
-        "ratio": 1.778,
-        "orientation": "landscape"
-      },
-      "hasManualFocus": false,
-      "effectiveFocus": "",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": []
-    },
-    {
-      "slug": "elon-musk-e-ceo-da-apple-devem-viajar-a-china-com-trump-diz-autoridade",
-      "title": "Elon Musk e CEO da Apple devem viajar à China com Trump, diz autoridade",
-      "category": "Negocios",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T18:07:17.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/02/2022-02-11T174725Z_1_LYNXMPEI1A0TQ_RTROPTP_4_BOLSAEUROPA-FECHA-1.jpg?w=200",
-      "imageStatus": "skipped-offline",
-      "imageHttpStatus": null,
-      "imageContentType": "",
-      "dimensionsFromUrl": null,
-      "hasManualFocus": true,
-      "effectiveFocus": "center 38%",
-      "signals": {
-        "hasPersonSignal": false,
-        "hasGroupSignal": false,
-        "hasLandscapeSignal": false
-      },
-      "level": "ok",
-      "reasons": [
-        "manual-focus-present"
-      ]
-    },
-    {
-      "slug": "veja-as-listas-de-convocados-de-todas-as-48-selecoes-da-copa-do-mundo-2026",
-      "title": "Veja as listas de convocados de todas as 48 seleções da Copa do Mundo 2026",
-      "category": "Nacional",
-      "sourceName": "CNN Brasil",
-      "publishedAt": "2026-05-11T18:06:48.000Z",
-      "isNewSinceLastAudit": true,
-      "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
+      "imageUrl": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/05/268519_Why_would_Palantir_make_a_chore_coat__CVirginia.jpg?quality=90&strip=all&crop=0,0,100,100",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
       "imageContentType": "",
@@ -6376,7 +6327,7 @@
       "category": "Nacional",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:51:05.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/pedro-novaes.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6400,7 +6351,7 @@
       "category": "Nacional",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:51:01.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/Reuters_Direct_Media/BrazilOnlineReportBusinessNews/tagreuters.com2025binary_LYNXNPEL950XE-BASEIMAGE.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6422,7 +6373,7 @@
       "category": "Nacional",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:50:55.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/02/cafe-brasil.jpeg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6444,7 +6395,7 @@
       "category": "Nacional",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:45:10.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trump-fala-com-jornalistas.jpg?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -6468,7 +6419,7 @@
       "category": "Nacional",
       "sourceName": "CNN Brasil",
       "publishedAt": "2026-05-11T17:44:30.000Z",
-      "isNewSinceLastAudit": true,
+      "isNewSinceLastAudit": false,
       "imageUrl": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/05/Trofeu-Copa-do-Mundo-e1778516081937.avif?w=200",
       "imageStatus": "skipped-offline",
       "imageHttpStatus": null,
@@ -25193,6 +25144,54 @@
       "signals": {
         "hasPersonSignal": true,
         "hasGroupSignal": true,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "prefeitura-de-cruzeiro-do-sul-suspende-aulas-da-rede-municipal-em-sinal-de-luto-e-reforco-a-segu",
+      "title": "Prefeitura de Cruzeiro do Sul suspende aulas da rede municipal em sinal de luto e reforço à segurança escolar; Jogos Escolares também são suspensos",
+      "category": "Prefeitura",
+      "sourceName": "Batelao",
+      "publishedAt": "2026-05-06T20:16:17.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "https://batelao.com/wp-content/uploads/2026/05/WhatsApp-Image-2026-05-05-at-20.46.58.jpg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 38%",
+      "signals": {
+        "hasPersonSignal": true,
+        "hasGroupSignal": false,
+        "hasLandscapeSignal": true
+      },
+      "level": "ok",
+      "reasons": [
+        "manual-focus-present"
+      ]
+    },
+    {
+      "slug": "baixa-do-rio-jurua-paralisa-travessia-de-balsa-entre-cruzeiro-do-sul-e-rodrigues-alves",
+      "title": "Baixa do Rio Juruá paralisa travessia de balsa entre Cruzeiro do Sul e Rodrigues Alves",
+      "category": "Prefeitura",
+      "sourceName": "Jurua 24 Horas",
+      "publishedAt": "2026-05-06T19:25:46.000Z",
+      "isNewSinceLastAudit": true,
+      "imageUrl": "/assets/news-fallbacks/baixa-do-rio-jurua-paralisa-travessia-de-balsa-entre-cruzeiro-do-sul-e-rodrigues-alves.svg",
+      "imageStatus": "skipped-offline",
+      "imageHttpStatus": null,
+      "imageContentType": "",
+      "dimensionsFromUrl": null,
+      "hasManualFocus": true,
+      "effectiveFocus": "center 50%",
+      "signals": {
+        "hasPersonSignal": false,
+        "hasGroupSignal": false,
         "hasLandscapeSignal": true
       },
       "level": "ok",
