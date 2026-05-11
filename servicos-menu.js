@@ -9,7 +9,6 @@
     { id: "saude", label: "Saúde" },
     { id: "transporte", label: "Transporte" },
     { id: "locacao-transporte", label: "Locação e Transporte" },
-    { id: "ninjas-cruzeiro", label: "Ninjas Cruzeiro" },
     { id: "emergencia", label: "Emergência" }
   ];
 
@@ -26,13 +25,7 @@
     const wrap = document.createElement("div");
     wrap.className = "servicos-modulos-row";
     wrap.innerHTML = MODULES.map(
-      (module) => {
-        const href =
-          module.id === "ninjas-cruzeiro"
-            ? "ninjas.html"
-            : `catalogo-servicos.html?modulo=${encodeURIComponent(module.id)}`;
-        return `<a class="servicos-modulo-link" href="${href}">${module.label}</a>`;
-      }
+      (module) => `<a class="servicos-modulo-link" href="catalogo-servicos.html?modulo=${encodeURIComponent(module.id)}">${module.label}</a>`
     ).join("");
     return wrap;
   }

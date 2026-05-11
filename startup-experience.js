@@ -15,19 +15,20 @@
   const FOUNDER_PRELUDE_SESSION_KEY = "catalogo_founder_prelude_seen_session_v1";
   const FOUNDER_PRELUDE_WEEKLY_KEY = "catalogo_founder_prelude_seen_week_v1";
   const FOUNDER_PRELUDE_WEEKLY_COOKIE = "catalogo_founder_prelude_seen_week_v1";
-  const INITIAL_HOME_LOADER_SESSION_KEY = "catalogo_initial_home_loader_seen_session_v1";
+  const INITIAL_HOME_LOADER_SESSION_KEY = "catalogo_initial_home_loader_seen_session_v2";
+  const INITIAL_HOME_LOADER_DAILY_KEY = "catalogo_initial_home_loader_seen_day_v2";
   const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
   const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
-  const INITIAL_HOME_LOADER_MIN_MS = 2000;
-  const ACTION_LOADER_MIN_MS = 850;
-  const ACTION_LOADER_MAX_MS = 2600;
+  const INITIAL_HOME_LOADER_MIN_MS = 1550;
+  const ACTION_LOADER_MIN_MS = 920;
+  const ACTION_LOADER_MAX_MS = 2200;
   const THANKS_SCREEN_MS = 2600;
   const THANKS_SCREEN_MS_COMPACT = 2200;
   const THANKS_SCREEN_MS_PHONE = 1800;
   const FOUNDER_PRELUDE_MS = 3000;
   const FOUNDER_PRELUDE_MS_COMPACT = 3000;
   const FOUNDER_PRELUDE_MS_PHONE = 3000;
-  const RETURNING_LOADER_MS = 950;
+  const RETURNING_LOADER_MS = 980;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -126,6 +127,19 @@
     return `${date.getFullYear()}-W${String(week).padStart(2, "0")}`;
   }
 
+  function getDayKey() {
+    try {
+      return new Intl.DateTimeFormat("en-CA", {
+        day: "2-digit",
+        month: "2-digit",
+        timeZone: "America/Rio_Branco",
+        year: "numeric"
+      }).format(new Date());
+    } catch (_error) {
+      return new Date().toISOString().slice(0, 10);
+    }
+  }
+
   function rememberWelcomeAcceptedThisWeek() {
     const weekKey = getWeekKey();
 
@@ -207,7 +221,19 @@
     return founderAssetsPromise;
   }
 
+  function releaseIntroLocks() {
+    document.body.classList.remove("home-ready-gate-active", "founder-prelude-active");
+
+    if (!document.querySelector(".catalogo-welcome.is-open:not(.is-leaving), .catalogo-founder-prelude.is-open")) {
+      document.body.classList.remove("catalogo-lock-scroll");
+    }
+  }
+
   function dispatchIntroFinished() {
+    releaseIntroLocks();
+    document.querySelectorAll(".catalogo-welcome.is-home-opening-loader").forEach((node) => {
+      node.remove();
+    });
     window.dispatchEvent(new CustomEvent("catalogo:intro-finished"));
   }
 
@@ -274,14 +300,32 @@
   }
 
   function rememberInitialHomeLoaderInThisSession() {
+    const dayKey = getDayKey();
+
     try {
       sessionStorage.setItem(INITIAL_HOME_LOADER_SESSION_KEY, "1");
+    } catch (_error) {
+      // ignore storage failures
+    }
+
+    try {
+      localStorage.setItem(INITIAL_HOME_LOADER_DAILY_KEY, dayKey);
     } catch (_error) {
       // ignore storage failures
     }
   }
 
   function hasSeenInitialHomeLoaderInThisSession() {
+    const dayKey = getDayKey();
+
+    try {
+      if (localStorage.getItem(INITIAL_HOME_LOADER_DAILY_KEY) === dayKey) {
+        return true;
+      }
+    } catch (_error) {
+      // ignore storage failures
+    }
+
     try {
       return sessionStorage.getItem(INITIAL_HOME_LOADER_SESSION_KEY) === "1";
     } catch (_error) {
@@ -318,6 +362,10 @@
 
   function shouldSkipWelcomeModal() {
     if (window.__CATALOGO_SKIP_HOME_WELCOME__ === true) {
+      return true;
+    }
+
+    if (window.location.protocol === "file:") {
       return true;
     }
 
@@ -410,28 +458,25 @@
   function createMobileConsentBanner() {
     const banner = document.createElement("aside");
     banner.id = CONSENT_BANNER_ID;
-    banner.className = "cookie-consent-banner cookie-consent-banner-mobile";
-    banner.setAttribute("role", "dialog");
+    banner.className = "cookie-consent-banner cookie-consent-banner-mobile is-passive";
+    banner.setAttribute("role", "region");
     banner.setAttribute("aria-live", "polite");
     banner.setAttribute("aria-label", "Consentimento de cookies");
     banner.innerHTML = `
       <span class="cookie-consent-handle" aria-hidden="true"></span>
-      <p class="cookie-consent-kicker">Antes de navegar</p>
-      <h3>Cookies e preferências</h3>
+      <p class="cookie-consent-kicker">Privacidade</p>
+      <h3>Cookies e LGPD</h3>
       <p>
-        O site recebe atualizações várias vezes por dia. Por isso usamos cookies
-        essenciais e métricas básicas para manter tudo rápido, estável e fácil de ler.
-      </p>
-      <p>
-        No celular, o portal abre leve: manchete grande primeiro,
-        atalhos curtos e fotos em tela cheia para escolher o que ler.
+        Usamos cookies essenciais e métricas básicas para manter a leitura rápida,
+        lembrar preferências e melhorar o portal.
       </p>
       <span class="cookie-consent-inline-note">
         <span class="cookie-consent-inline-dot" aria-hidden="true"></span>
-        Ao aceitar, você continua para o portal
+        O site continua liberado enquanto você decide.
       </span>
       <div class="cookie-consent-actions">
-        <button class="cookie-consent-accept" type="button">Aceitar e abrir portal</button>
+        <button class="cookie-consent-accept" type="button">Aceitar</button>
+        <a class="cookie-consent-policy" href="./legal.html">Ver política</a>
       </div>
     `;
     return banner;
@@ -448,8 +493,19 @@
 
     const banner = createMobileConsentBanner();
     document.body.appendChild(banner);
-    document.body.classList.add("catalogo-lock-scroll", "mobile-cookie-consent-active");
+    document.body.classList.add("cookie-consent-visible");
+    document.body.classList.remove("catalogo-lock-scroll", "mobile-cookie-consent-active");
     releaseFounderPreludeGate();
+
+    window.requestAnimationFrame(() => {
+      banner.classList.add("is-visible");
+    });
+
+    if (typeof callback === "function") {
+      callback();
+    } else {
+      dispatchIntroFinished();
+    }
 
     banner.querySelector(".cookie-consent-accept")?.addEventListener("click", () => {
       persistConsentState("accepted");
@@ -457,10 +513,9 @@
       rememberWelcomeAcceptedThisBrowserSession();
       rememberWelcomeAcceptedThisWeek();
       dispatchConsent(true);
+      banner.classList.add("is-leaving");
       banner.remove();
-      document.body.classList.remove("catalogo-lock-scroll", "mobile-cookie-consent-active");
-      dispatchIntroFinished();
-      if (typeof callback === "function") callback();
+      document.body.classList.remove("cookie-consent-visible");
     });
   }
 
@@ -1165,6 +1220,23 @@
     return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
+  function waitForLogoSplashDone(timeoutMs = 3200) {
+    if (
+      window.__CATALOGO_LOGO_SPLASH_DONE__ === true ||
+      document.body.classList.contains("site-loaded") ||
+      !document.body.classList.contains("catalogo-site-booting")
+    ) {
+      return Promise.resolve();
+    }
+
+    return Promise.race([
+      new Promise((resolve) => {
+        window.addEventListener("catalogo:logo-splash-finished", resolve, { once: true });
+      }),
+      delay(timeoutMs)
+    ]);
+  }
+
   function waitForDocumentComplete(timeoutMs = READY_FALLBACK_MS) {
     if (document.readyState === "complete") {
       return Promise.resolve();
@@ -1312,7 +1384,7 @@
     modal.classList.add("is-leaving");
     modal.setAttribute("aria-hidden", "true");
     modal.style.pointerEvents = "none";
-    document.body.classList.remove("catalogo-lock-scroll");
+    releaseIntroLocks();
     window.setTimeout(() => {
       modal.remove();
       dispatchIntroFinished();
@@ -1331,75 +1403,93 @@
         node.remove();
       });
 
-    if (!document.querySelector(".catalogo-welcome.is-open")) {
-      document.body.classList.remove("catalogo-lock-scroll");
-    }
+    releaseIntroLocks();
   }
 
   function showReturningLoaderThen(callback) {
-    const loader = createReturningLoaderModal({
-      label: "Preparando retorno"
-    });
-    let finished = false;
-    const finish = () => {
-      if (finished) {
-        return;
-      }
-      finished = true;
-      loader.classList.add("is-leaving");
-      window.setTimeout(() => {
-        loader.remove();
-        if (typeof callback === "function") {
-          callback();
+    waitForLogoSplashDone(1800).then(() => {
+      const loader = createReturningLoaderModal({
+        label: "Preparando retorno"
+      });
+      let finished = false;
+      const finish = () => {
+        if (finished) {
+          return;
         }
-      }, 180);
-    };
+        finished = true;
+        loader.classList.add("is-leaving");
+        window.setTimeout(() => {
+          loader.remove();
+          if (typeof callback === "function") {
+            callback();
+          }
+        }, 180);
+      };
 
-    document.body.appendChild(loader);
-    window.requestAnimationFrame(() => {
-      releaseFounderPreludeGate();
-      loader.classList.add("is-visible");
-      updateTopLoaderProgress(loader, 8, "Preparando retorno");
+      document.body.appendChild(loader);
+      window.requestAnimationFrame(() => {
+        releaseFounderPreludeGate();
+        loader.classList.add("is-visible");
+        updateTopLoaderProgress(loader, 8, "Preparando retorno");
+      });
+
+      runProgressUntilReady(loader, {
+        minDuration: RETURNING_LOADER_MS,
+        maxDuration: READY_FALLBACK_MS,
+        statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
+        update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
+      }).then(finish).catch(finish);
     });
-
-    runProgressUntilReady(loader, {
-      minDuration: RETURNING_LOADER_MS,
-      maxDuration: READY_FALLBACK_MS,
-      statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
-      update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
-    }).then(finish);
   }
 
   function showInitialHomeLoaderThen(callback) {
     rememberInitialHomeLoaderInThisSession();
-    const loader = createInitialHomeLoaderModal();
-    document.body.classList.add("home-ready-gate-active");
-    document.body.appendChild(loader);
-
-    window.setTimeout(() => {
-      releaseFounderPreludeGate();
-      openWelcomeModal(loader);
-      updateInitialLoaderProgress(loader, 4, "iniciando preparação da home");
-    }, 30);
-
-    runProgressUntilReady(loader, {
-      minDuration: INITIAL_HOME_LOADER_MIN_MS,
-      maxDuration: READY_FALLBACK_MS,
-      statuses: [
-        "montando capa do jornal",
-        "encaixando notícias e fotos",
-        "organizando agenda e serviços",
-        "portal pronto para leitura"
-      ],
-      update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
-    }).then(() => {
-      closeWelcomeModalImmediately(loader);
-      window.setTimeout(() => {
-        document.body.classList.remove("home-ready-gate-active");
-        if (typeof callback === "function") {
-          callback();
+    waitForLogoSplashDone().then(() => {
+      const loader = createInitialHomeLoaderModal();
+      let finished = false;
+      let failsafeTimer = 0;
+      const finish = () => {
+        if (finished) {
+          return;
         }
-      }, 300);
+        finished = true;
+        window.clearTimeout(failsafeTimer);
+        updateInitialLoaderProgress(loader, 100, "portal pronto para leitura");
+        closeWelcomeModalImmediately(loader, () => {
+          releaseIntroLocks();
+          if (typeof callback === "function") {
+            callback();
+          }
+        });
+      };
+
+      document.body.classList.add("home-ready-gate-active");
+      document.body.appendChild(loader);
+
+      window.setTimeout(() => {
+        releaseFounderPreludeGate();
+        openWelcomeModal(loader);
+        updateInitialLoaderProgress(loader, 4, "preparando a primeira abertura");
+      }, 30);
+
+      failsafeTimer = window.setTimeout(finish, Math.max(READY_FALLBACK_MS + 1200, INITIAL_HOME_LOADER_MIN_MS + 2200));
+
+      runProgressUntilReady(loader, {
+        minDuration: INITIAL_HOME_LOADER_MIN_MS,
+        maxDuration: READY_FALLBACK_MS,
+        statuses: [
+          "montando capa do jornal",
+          "guardando áreas no navegador",
+          "organizando agenda e serviços",
+          "portal pronto para leitura"
+        ],
+        update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
+      }).then(finish).catch(finish);
+    }).catch(() => {
+      releaseIntroLocks();
+      if (typeof callback === "function") {
+        callback();
+      }
     });
   }
 
@@ -1485,6 +1575,11 @@
 
   function openWelcomeConsentModal(options = {}) {
     const afterAccept = typeof options.afterAccept === "function" ? options.afterAccept : null;
+    if (document.body.classList.contains("editorial-home")) {
+      showMobileConsentBanner(afterAccept);
+      return;
+    }
+
     whenSiteReady(() => {
       runWhenBrowserIsIdle(() => {
         preloadFounderBannerAssets();
@@ -1607,8 +1702,13 @@
       };
 
       if (fastEditorialHome && !phoneFlow) {
+        if (actionLoaderRequested) {
+          showReturningLoaderThen(finishOrOpenWelcome);
+          return;
+        }
+
         if (!shouldSkipWelcomeModal()) {
-          if (!actionLoaderRequested && !hasSeenInitialHomeLoaderInThisSession()) {
+          if (!hasSeenInitialHomeLoaderInThisSession()) {
             showInitialHomeLoaderThen(() => {
               openWelcomeConsentModal({
                 afterAccept: finishLoaded
@@ -1620,11 +1720,6 @@
           openWelcomeConsentModal({
             afterAccept: finishLoaded
           });
-          return;
-        }
-
-        if (actionLoaderRequested) {
-          finishOrOpenWelcome();
           return;
         }
 

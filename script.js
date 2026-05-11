@@ -115,14 +115,19 @@ const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
-  "Fragmentando imagens e capa do dia",
-  "Sincronizando notícias do Vale do Juruá",
-  "Finalizando leitura, serviços e agenda"
+  "Preparando o site",
+  "Guardando a capa para abrir mais rápido",
+  "Abrindo a primeira leitura"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-const splashGateMaximumMs = 16000;
-const splashGateStepTimeoutMs = 9000;
-const splashDeferredBootTimeoutMs = 13000;
+const splashCompactViewportQuery =
+  typeof window !== "undefined" && typeof window.matchMedia === "function"
+    ? window.matchMedia("(max-width: 820px)")
+    : { matches: false };
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 1100 : 1350;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 2600 : 3400;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 760 : 980;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 420 : 580;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -151,9 +156,9 @@ const tickerPhrasePool = [
   },
   {
     label: "Cultura",
-    title: "A cultura local aparece aqui.",
-    text: "Shows, festas e programação ganham chamada no fluxo.",
-    href: "#social",
+    title: "Abrir notícias de cultura.",
+    text: "Shows, eventos e programação entram direto no arquivo de cultura.",
+    href: "./arquivo.html?busca=cultura",
     tone: "cultura"
   },
   { label: "Checagem", text: "Cada destaque sobe com checagem, contexto e fonte identificada." },
@@ -455,11 +460,27 @@ const getTickerPhrasePool = () => {
   const livePhrases = buildLiveTickerPhrasePool(window.NEWS_DATA || []);
   return ensureTickerPhraseDiversity([...tickerPhrasePool, ...livePhrases]);
 };
-const splashStorageKey = "catalogo_splash_seen_v1";
+const splashStorageKey = "catalogo_splash_seen_v2";
+const splashDailyStorageKey = "catalogo_splash_seen_day_v2";
 const skipHomeIntroKey = "catalogo_skip_home_intro_once";
 const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
+const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
+const portalWarmStaticUrls = [
+  "./assets/logo-czs.svg",
+  "./assets/favicon.svg",
+  "./styles.css?v=20260511-loader-flow1",
+  "./premium-home-redesign.css?v=20260511-speed-areas1",
+  "./startup-experience.css?v=20260511-loader-flow1",
+  "./early-home-surfaces.js?v=20260511-speed-areas5",
+  "./script.js?v=20260511-loader-flow1",
+  "./startup-experience.js?v=20260511-loader-flow1",
+  "./noticia.html",
+  "./arquivo.html",
+  "./catalogo-servicos.html"
+];
 const urlSearchParams = new URLSearchParams(window.location.search);
 const urlRequestsSkipHomeIntro = (() => {
   const rawValue = String(urlSearchParams.get("skipIntro") || "").trim().toLowerCase();
@@ -477,6 +498,51 @@ const clearSkipHomeIntroParamFromUrl = () => {
     window.history.replaceState({}, document.title, nextUrl);
   } catch (_error) {
     // Mantem a URL original se o navegador restringir a mudanca.
+  }
+};
+const getSplashDayKey = () => {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      day: "2-digit",
+      month: "2-digit",
+      timeZone: localeTimeZone,
+      year: "numeric"
+    }).format(new Date());
+  } catch (_error) {
+    return new Date().toISOString().slice(0, 10);
+  }
+};
+const hasSeenSplashToday = () => {
+  const dayKey = getSplashDayKey();
+
+  try {
+    if (localStorage.getItem(splashDailyStorageKey) === dayKey) {
+      return true;
+    }
+  } catch (_error) {
+    // ignore storage failures
+  }
+
+  try {
+    return sessionStorage.getItem(splashStorageKey) === dayKey;
+  } catch (_error) {
+    return false;
+  }
+};
+const rememberSplashToday = () => {
+  const dayKey = getSplashDayKey();
+  window.__CATALOGO_DAILY_INTRO_SHOWN__ = true;
+
+  try {
+    localStorage.setItem(splashDailyStorageKey, dayKey);
+  } catch (_error) {
+    // ignore storage failures
+  }
+
+  try {
+    sessionStorage.setItem(splashStorageKey, dayKey);
+  } catch (_error) {
+    // ignore storage failures
   }
 };
 const shouldSkipHomeIntro = (() => {
@@ -1710,6 +1776,126 @@ const waitForSplashDelay = (ms) =>
     window.setTimeout(resolve, Math.max(0, ms));
   });
 
+const runSplashIdleTask = (callback, timeout = 1200) => {
+  if (typeof callback !== "function") {
+    return;
+  }
+
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(callback, { timeout });
+    return;
+  }
+
+  window.setTimeout(callback, 160);
+};
+
+const rememberPortalCacheWarmToday = () => {
+  try {
+    localStorage.setItem(portalWarmCacheKey, getSplashDayKey());
+  } catch (_error) {
+    // Cache warmup is an enhancement only.
+  }
+};
+
+const hasWarmedPortalCacheToday = () => {
+  try {
+    return localStorage.getItem(portalWarmCacheKey) === getSplashDayKey();
+  } catch (_error) {
+    return false;
+  }
+};
+
+const normalizeWarmCacheUrl = (href) => {
+  try {
+    const targetUrl = new URL(href, window.location.href);
+    if (targetUrl.origin !== window.location.origin) {
+      return "";
+    }
+
+    return targetUrl.href;
+  } catch (_error) {
+    return "";
+  }
+};
+
+const collectPortalWarmCacheUrls = () => {
+  const urls = new Set(portalWarmStaticUrls.map(normalizeWarmCacheUrl).filter(Boolean));
+  const articleLinks = [...document.querySelectorAll('a[href*="noticia.html?slug="]')]
+    .map((link) => normalizeWarmCacheUrl(link.getAttribute("href") || ""))
+    .filter(Boolean)
+    .slice(0, splashCompactViewportQuery.matches ? 4 : 8);
+
+  articleLinks.forEach((href) => urls.add(href));
+  return [...urls].slice(0, splashCompactViewportQuery.matches ? 14 : 22);
+};
+
+const prefetchPortalUrl = (href) => {
+  const normalizedHref = normalizeWarmCacheUrl(href);
+  if (!normalizedHref || window.location.protocol === "file:") {
+    return Promise.resolve(false);
+  }
+
+  try {
+    if (!document.querySelector(`link[rel="prefetch"][href="${CSS.escape(normalizedHref)}"]`)) {
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = normalizedHref;
+      document.head.appendChild(link);
+    }
+  } catch (_error) {
+    // Browsers without CSS.escape still continue with fetch warmup.
+  }
+
+  return fetch(normalizedHref, {
+    cache: "force-cache",
+    credentials: "same-origin"
+  })
+    .then((response) => response.ok)
+    .catch(() => false);
+};
+
+const warmPortalCacheInBackground = () => {
+  if (window.location.protocol === "file:" || hasWarmedPortalCacheToday()) {
+    return;
+  }
+
+  runSplashIdleTask(() => {
+    const urls = collectPortalWarmCacheUrls();
+    if (!urls.length) {
+      return;
+    }
+
+    rememberPortalCacheWarmToday();
+
+    if ("caches" in window) {
+      caches
+        .open(portalWarmCacheName)
+        .then((cache) =>
+          Promise.all(
+            urls.map((href) =>
+              fetch(href, {
+                cache: "force-cache",
+                credentials: "same-origin"
+              })
+                .then((response) => {
+                  if (response.ok) {
+                    return cache.put(href, response.clone()).then(() => true);
+                  }
+
+                  return false;
+                })
+                .catch(() => false)
+            )
+          )
+        )
+        .catch(() => {});
+      return;
+    }
+
+    Promise.all(urls.map(prefetchPortalUrl)).catch(() => {});
+  }, 2200);
+};
+
 const waitForSplashTimeout = (promise, timeoutMs = splashGateStepTimeoutMs) =>
   Promise.race([
     Promise.resolve(promise).catch(() => undefined),
@@ -1763,7 +1949,7 @@ const waitForSplashFontsReady = (timeoutMs = splashGateStepTimeoutMs) => {
 const waitForSplashPreloads = (timeoutMs = splashGateStepTimeoutMs) => {
   const preloadPromises = [
     window.__CATALOGO_NEWS_PRELOAD__,
-    window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__
+    splashCompactViewportQuery.matches ? null : window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__
   ].filter((promise) => promise && typeof promise.then === "function");
 
   if (!preloadPromises.length) {
@@ -1857,7 +2043,7 @@ const waitForSplashCriticalImages = (timeoutMs = splashGateStepTimeoutMs) => {
       const rect = image.getBoundingClientRect();
       return rect.top < viewportHeight * 1.35 && rect.bottom > -120;
     })
-    .slice(0, 32);
+    .slice(0, splashCompactViewportQuery.matches ? 8 : 14);
 
   if (!criticalImages.length) {
     return Promise.resolve();
@@ -1899,12 +2085,12 @@ const updateSplashProgress = (progress, status = "") => {
 const waitForSplashReadiness = async () => {
   const steps = [
     {
-      label: "Estrutura da página pronta",
+      label: "Preparando o site",
       progress: 12,
       wait: () => Promise.resolve()
     },
     {
-      label: "Preparando fontes e identidade",
+      label: "Separando logo, fontes e capa",
       progress: 28,
       wait: () =>
         Promise.all([
@@ -1913,12 +2099,12 @@ const waitForSplashReadiness = async () => {
         ])
     },
     {
-      label: "Sincronizando notícias e tendências",
+      label: "Guardando notícias para abrir mais rápido",
       progress: 46,
       wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
     },
     {
-      label: "Organizando estilos e áreas finais",
+      label: "Deixando a primeira tela pronta",
       progress: 82,
       wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
     },
@@ -1953,15 +2139,26 @@ const setupSplashExperience = () => {
 
   if (shouldSkipHomeIntro) {
     try {
-      sessionStorage.setItem(splashStorageKey, "1");
       sessionStorage.removeItem(skipHomeIntroKey);
     } catch (_error) {
       // ignore session storage failures
     }
 
+    rememberSplashToday();
     clearSplashFailsafe();
     document.body.classList.remove("catalogo-site-booting");
     document.body.classList.add("site-loaded");
+    return;
+  }
+
+  if (hasSeenSplashToday()) {
+    window.__CATALOGO_DAILY_INTRO_SHOWN__ = true;
+    clearSplashFailsafe();
+    if (splashRoot) {
+      splashRoot.setAttribute("aria-hidden", "true");
+    }
+    document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
+    document.body.classList.add("site-loaded", "mobile-intro-ready");
     return;
   }
 
@@ -1974,8 +2171,13 @@ const setupSplashExperience = () => {
 
   splashGateActive = true;
   document.body.classList.add("catalogo-site-booting");
+  splashRoot.classList.add("is-logo-primer");
   splashRoot.setAttribute("aria-hidden", "false");
   updateSplashProgress(4, splashMessages[0]);
+
+  window.setTimeout(() => {
+    splashRoot.classList.remove("is-logo-primer");
+  }, splashMotionQuery.matches ? 220 : 720);
 
   if (splashDate) {
     splashDate.textContent = formatSplashStamp();
@@ -1984,16 +2186,6 @@ const setupSplashExperience = () => {
   let splashReleased = false;
   let messageIndex = 0;
   let messageTimer = 0;
-  let hasSeenSplash = false;
-
-  try {
-    hasSeenSplash = sessionStorage.getItem(splashStorageKey) === "1";
-  } catch (_error) {
-    hasSeenSplash = false;
-  }
-
-  splashRoot.classList.toggle("is-repeat-visit", hasSeenSplash);
-
   if (splashStatus && !splashMotionQuery.matches) {
     messageTimer = window.setInterval(() => {
       if (Number(splashRoot.dataset.progress || 0) >= 82) {
@@ -2015,7 +2207,7 @@ const setupSplashExperience = () => {
     }
 
     const bootProgress = 54 + (Math.min(total, completed) / total) * 28;
-    updateSplashProgress(bootProgress, detail.label || "Organizando áreas finais");
+    updateSplashProgress(bootProgress, detail.label || "Deixando a primeira tela pronta");
   };
 
   window.addEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
@@ -2035,18 +2227,24 @@ const setupSplashExperience = () => {
     window.removeEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
     clearSplashFailsafe();
     updateSplashProgress(100, "Portal pronto para abrir");
-    splashRoot.setAttribute("aria-hidden", "true");
+    splashRoot.classList.add("is-completing");
+    window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
+    warmPortalCacheInBackground();
+    window.dispatchEvent(new CustomEvent("catalogo:logo-splash-finished"));
 
     requestAnimationFrame(() => {
-      document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
-      document.body.classList.add("site-loaded", "mobile-intro-ready");
+      splashRoot.classList.add("is-leaving");
+      window.setTimeout(
+        () => {
+          splashRoot.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
+          document.body.classList.add("site-loaded", "mobile-intro-ready");
+        },
+        splashMotionQuery.matches ? 120 : 640
+      );
     });
 
-    try {
-      sessionStorage.setItem(splashStorageKey, "1");
-    } catch (_error) {
-      // ignore session storage failures
-    }
+    rememberSplashToday();
   };
 
   const currentTime =
@@ -2054,8 +2252,7 @@ const setupSplashExperience = () => {
       ? performance.now()
       : Date.now();
   const elapsed = currentTime - splashBootStartedAt;
-  const minimumDuration = hasSeenSplash ? 950 : 1700;
-  const remaining = Math.max(100, minimumDuration - elapsed);
+  const remaining = Math.max(100, splashDailyMinimumMs - elapsed);
 
   const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
     updateSplashProgress(100, "Portal pronto para abrir");
@@ -2345,7 +2542,31 @@ registerInteractivePanels();
 const radarGuideThemes = {
   todos: {
     label: "Tudo",
-    text: "Uma leitura rápida do que mais importa no momento em Cruzeiro do Sul e na região, reunindo os assuntos que estão puxando o dia."
+    text: "Uma leitura rápida das notícias que puxam o dia, do Juruá ao Brasil e ao mundo."
+  },
+  governo: {
+    label: "Governo",
+    text: "Ações públicas, serviços e decisões oficiais aparecem quando mexem com a rotina do leitor."
+  },
+  cruzeiro: {
+    label: "Cruzeiro",
+    text: "Notícias de Cruzeiro do Sul entram primeiro quando afetam bairros, serviços, política ou rotina."
+  },
+  jurua: {
+    label: "Vale do Juruá",
+    text: "Mâncio Lima, Rodrigues Alves, Porto Walter, Marechal Thaumaturgo e região ficam juntos neste filtro."
+  },
+  acre: {
+    label: "Acre",
+    text: "Fatos estaduais, governo, cidades e serviços do Acre aparecem em leitura direta."
+  },
+  brasil: {
+    label: "Brasil",
+    text: "Notícias nacionais entram quando ajudam o leitor a entender política, economia, saúde e serviços."
+  },
+  internacional: {
+    label: "Internacional",
+    text: "Assuntos de fora do Brasil aparecem separados para não misturar com o fluxo regional."
   },
   cotidiano: {
     label: "Cotidiano",
@@ -2592,7 +2813,7 @@ const updateRadarGuide = (filter = "todos", spotlightArticles = [], options = {}
   }
 
   if (radarFlowLead) {
-    radarFlowLead.textContent = spotlightArticles[0]?.title || "Resumo local em preparação";
+    radarFlowLead.textContent = spotlightArticles[0]?.title || "Resumo de notícias em atualização";
   }
 
   radarGuideScanIndex = 0;
@@ -2609,50 +2830,70 @@ const setActiveRadarFilter = (filter = "todos") => {
   });
 };
 
+const radarSummaryTarget = 10;
+const radarSummaryFlowFilters = ["governo", "cruzeiro", "jurua", "acre", "politica", "brasil", "internacional"];
+
+const isRadarSummaryArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  return Boolean(
+    normalizedArticle.title &&
+      (normalizedArticle.slug || normalizedArticle.sourceUrl) &&
+      (!normalizedArticle.sourceUrl || normalizedArticle.sourceUrl !== "#") &&
+      (!isRealPublicNewsSource || isRealPublicNewsSource(normalizedArticle))
+  );
+};
+
 const getRadarSpotlightArticles = (filter = "todos") => {
-  const allArticles = sortRadarArticles([...(window.NEWS_DATA || [])]);
+  const allArticles = sortRadarArticles([...(window.NEWS_DATA || [])])
+    .map((article) => normalizeRuntimeArticle(article))
+    .filter(isRadarSummaryArticle);
   const normalizedFilter = normalizeText(filter);
   const reservedKeys = buildReservedArticleKeys(["radar"]);
-  const localArticles = allArticles.filter((article) => isRadarLocalSummaryArticle(article));
   const filteredArticles =
     normalizedFilter === "todos"
-      ? localArticles
-      : localArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter));
+      ? allArticles
+      : allArticles.filter((article) => articleMatchesCategoryFilter(article, normalizedFilter));
   const spotlight = [];
   const seenKeys = new Set();
 
-  const pushUnique = (article) => {
+  const pushUnique = (article, { allowReserved = false } = {}) => {
     if (!article) {
-      return false;
-    }
-
-    if (!articleHasUsableImageCandidate(article)) {
       return false;
     }
 
     const articleKey = getRadarArticleKey(article);
     const usageKey = getArticleUsageKey(article);
-    if (!articleKey || seenKeys.has(articleKey) || (usageKey && reservedKeys.has(usageKey))) {
+    if (!articleKey || seenKeys.has(articleKey) || (!allowReserved && usageKey && reservedKeys.has(usageKey))) {
       return false;
     }
 
     seenKeys.add(articleKey);
     spotlight.push(article);
-    return spotlight.length >= 2;
+    return spotlight.length >= radarSummaryTarget;
   };
 
   if (normalizedFilter === "todos") {
-    const { leadArticles } = pickRadarLeadArticles(localArticles);
-    leadArticles.some(pushUnique);
+    radarSummaryFlowFilters.forEach((flowFilter) => {
+      if (spotlight.length >= radarSummaryTarget) {
+        return;
+      }
+
+      const match = allArticles.find((article) => articleMatchesCategoryFilter(article, flowFilter));
+      pushUnique(match, { allowReserved: true });
+    });
   }
 
-  filteredArticles.some(pushUnique);
+  filteredArticles.some((article) => pushUnique(article));
 
-  if (spotlight.length < 2) {
-    localArticles.some(pushUnique);
+  if (spotlight.length < radarSummaryTarget) {
+    filteredArticles.some((article) => pushUnique(article, { allowReserved: true }));
   }
 
-  return spotlight.slice(0, 2);
+  if (spotlight.length < radarSummaryTarget) {
+    allArticles.some((article) => pushUnique(article, { allowReserved: true }));
+  }
+
+  return spotlight.slice(0, radarSummaryTarget);
 };
 
 const sortRadarContinuityArticles = (articles = []) =>
@@ -2811,7 +3052,7 @@ const buildRadarContinuityState = (filter = "todos", articles = []) => {
     list.appendChild(emptyNote);
   }
 
-  footerLabel.textContent = hasArticles ? "Sem boato, sem pressa." : "Sem boato: só entra notícia com base.";
+  footerLabel.textContent = hasArticles ? "Mais contexto no arquivo." : "Novas notícias entram quando houver publicação.";
   const archiveHref = "./arquivo.html";
   footerLink.href = archiveHref;
   footerLink.textContent = "Abrir arquivo regional";
@@ -3275,10 +3516,9 @@ const hydratePortalStatusRibbon = () => {
     year: "numeric",
     timeZone: localeTimeZone
   }).format(today);
-  const dateNode = document.querySelector("[data-portal-date]");
-  if (dateNode) {
+  document.querySelectorAll("[data-portal-date]").forEach((dateNode) => {
     dateNode.textContent = todayLabel;
-  }
+  });
 
   document.querySelectorAll("[data-today-archive-link]").forEach((link) => {
     if (!(link instanceof HTMLAnchorElement)) {
@@ -4083,6 +4323,10 @@ const cleanArticleExcerpt = (value = "", fallback = "") => {
     .replace(/\s*srcset="[^"]*"/gi, " ")
     .replace(/\s*src="[^"]*"/gi, " ")
     .replace(/\s*The post .*? appeared first on .*?\.?$/i, "")
+    .replace(
+      /\s+e\s+o ponto principal da atualiza[cç][aã]o captada automaticamente\.?\s*O portal organiza o material para leitura r[aá]pida e mant[eé]m o link da fonte original para acompanhamento completo\.?/gi,
+      ". O portal resume o caso e mantém o link da fonte original para acompanhamento."
+    )
     .replace(/\[\s*\.{3}\s*\]|\[\s*…\s*\]/g, "...")
     .replace(/\s+/g, " ")
     .trim();
@@ -4607,6 +4851,49 @@ const articleMatchesCategoryFilter = (article = {}, filter = "") => {
 
   const normalizedArticle = normalizeRuntimeArticle(article);
   const categoryKey = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+  const regionalTier = getEditorialRegionalTier(normalizedArticle);
+  const regionalText = getLocalImpactScopeText(normalizedArticle);
+
+  if (normalizedFilter === "governo" || normalizedFilter === "poder-publico") {
+    return (
+      isMailzaPriorityArticle(normalizedArticle) ||
+      /\b(governo|governador|governadora|prefeitura|secretaria|estado|municipio|município|camara|câmara|assembleia|servi[cç]o p[uú]blico)\b/.test(regionalText) ||
+      /\b(governo|governador|governadora|prefeitura|secretaria|estado|municipio|município|camara|câmara|assembleia|servi[cç]o p[uú]blico)\b/.test(
+        normalizeText([
+          normalizedArticle.title,
+          normalizedArticle.summary,
+          normalizedArticle.lede,
+          normalizedArticle.category,
+          normalizedArticle.sourceName
+        ].join(" "))
+      )
+    );
+  }
+
+  if (normalizedFilter === "mailza" || normalizedFilter === "mailsa") {
+    return isMailzaPriorityArticle(normalizedArticle);
+  }
+
+  if (normalizedFilter === "cruzeiro" || normalizedFilter === "cruzeiro-do-sul") {
+    return regionalTier === "cruzeiro";
+  }
+
+  if (normalizedFilter === "jurua" || normalizedFilter === "vale-jurua" || normalizedFilter === "vale-do-jurua") {
+    return regionalTier === "jurua" || isJuruaRegionalScope(regionalText);
+  }
+
+  if (normalizedFilter === "acre") {
+    return regionalTier === "acre" || isAcreGeneralScope(regionalText) || isAcreGovernmentScope(regionalText);
+  }
+
+  if (normalizedFilter === "brasil") {
+    return regionalTier === "brasil" || (isNationalPoliticsArticle(normalizedArticle) && !isInternationalOnlyPublicArticle(normalizedArticle));
+  }
+
+  if (normalizedFilter === "internacional" || normalizedFilter === "mundo") {
+    return isInternationalOnlyPublicArticle(normalizedArticle) || regionalTier === "global";
+  }
+
   if (normalizedFilter === "prefeitura") {
     return categoryKey === "prefeitura" || isJuruaPrefeituraScope(getRegionalScopeText(normalizedArticle));
   }
@@ -5133,7 +5420,8 @@ const heroTourismDailyPoolState = {
   items: []
 };
 
-const heroTourismDailyTarget = 5;
+const heroTourismDailyTarget = 15;
+const heroTourismDotTarget = 5;
 const heroTourismRotationIntervalMs = 5000;
 const heroTourismEditorialImageUrl = "./assets/home-cache/rio-jurua-panorama.jpg";
 const heroTourismDailyTimeZone = "America/Rio_Branco";
@@ -5421,70 +5709,115 @@ const getHeroAreaKey = (article = {}) => {
   return categoryKey || "cotidiano";
 };
 
+const getLatestArticleTimestamp = (articles = []) =>
+  Math.max(0, ...articles.map((article) => getArticleSortTimestamp(article)).filter(Boolean));
+
+const isHeroPanelNewsCandidate = (
+  article = {},
+  { latestTimestamp = 0, windowHours = 36, requireLocal = false } = {}
+) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const text = [
+    normalizedArticle.title,
+    normalizedArticle.lede,
+    normalizedArticle.summary,
+    normalizedArticle.category,
+    normalizedArticle.categoryKey,
+    normalizedArticle.sourceName,
+    normalizedArticle.sourceLabel,
+    normalizedArticle.sourceUrl
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const normalizedText = normalizeText(text);
+  const categoryKey = normalizedArticle.categoryKey || normalizeText(normalizedArticle.category);
+  const timestamp = getArticleSortTimestamp(normalizedArticle);
+
+  if (!normalizedArticle.title || (!normalizedArticle.slug && !normalizedArticle.sourceUrl)) {
+    return false;
+  }
+
+  if (requireLocal && !heroTourismLocalPattern.test(text)) {
+    return false;
+  }
+
+  if (categoryKey === "servicos" || /\b(catalogo telefonico|guia de servicos|guia de serviços|locacao|locação|ninja|pubpaid|anuncie|comercial)\b/.test(normalizedText)) {
+    return false;
+  }
+
+  if (latestTimestamp && timestamp && timestamp < latestTimestamp - windowHours * 36e5) {
+    return false;
+  }
+
+  return Boolean(sanitizeImageUrl(getArticleDisplayImageUrl(normalizedArticle, "hero")));
+};
+
+const buildHeroPhotoFromArticle = (article = {}) => {
+  const areaKey = getHeroAreaKey(article);
+  const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+  const storyText = normalizeText(
+    [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
+  );
+
+  return {
+    title: heroDailyAreaLabels[areaKey] || article.category || "Destaque",
+    note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte consultada", 46),
+    proxyUrl: imageUrl,
+    fallbackUrl: imageUrl,
+    focusPosition: getHeroDailyArticleFocus(article),
+    hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
+    articleTitle: article.title || "Notícia em destaque",
+    articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Destaque",
+    articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 190),
+    articleHref: buildHeroArticleHref(article),
+    themeKey: areaKey,
+    sourceName: article.sourceName || "Fonte consultada",
+    publishedAt: article.publishedAt || article.createdAt || article.date || ""
+  };
+};
+
 const buildHeroTourismRuntimePool = () => {
   const articles = Array.isArray(window.NEWS_DATA) ? sortRadarArticles(window.NEWS_DATA) : [];
+  const normalizedArticles = dedupeNewsItems(articles).map((article) => normalizeRuntimeArticle(article));
+  const latestTimestamp = getLatestArticleTimestamp(normalizedArticles);
+  const seenKeys = new Set();
   const seenImages = new Set();
-  const todayKey = getHeroTourismDayKey();
-  const normalizedArticles = articles
-    .map((article) => normalizeRuntimeArticle(article))
-    .filter((article) => {
-      const haystack = [
-        article.title,
-        article.lede,
-        article.category,
-        article.sourceName,
-        article.sourceLabel
-      ]
-        .filter(Boolean)
-        .join(" ");
-      return heroTourismLocalPattern.test(haystack);
-    });
-  const todaysArticles = normalizedArticles.filter(
-    (article) => getArticleDateKey(article) === todayKey
-  );
-  const sourceArticles = todaysArticles.length >= 3 ? todaysArticles : normalizedArticles;
+  const selected = [];
 
-  return sourceArticles
-    .filter((article) => {
-      const areaKey = getHeroAreaKey(article);
-      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
-      const imageKey = String(imageUrl || "").trim();
-      if (!areaKey || !imageKey || seenImages.has(imageKey)) {
-        return false;
-      }
+  const pushArticle = (article) => {
+    if (!article || selected.length >= heroTourismDailyTarget) {
+      return true;
+    }
 
-      seenImages.add(imageKey);
-      return true;
-    })
-    .map((article) => {
-      const areaKey = getHeroAreaKey(article);
-      const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
-      const storyText = normalizeText(
-        [article.title, article.lede, article.summary, article.category, article.sourceName].join(" ")
-      );
-      return {
-        title: heroDailyAreaLabels[areaKey] || article.category || "Destaque local",
-        note: truncateCopy(article.sourceName || article.sourceLabel || "Fonte local", 46),
-        proxyUrl: imageUrl,
-        fallbackUrl: imageUrl,
-        focusPosition: getHeroDailyArticleFocus(article),
-        hasPeopleScene: heroDailyPersonFocusPattern.test(storyText),
-        articleTitle: article.title || "Notícia em destaque",
-        articleCategory: heroDailyAreaLabels[areaKey] || article.category || "Destaque local",
-        articleSummary: truncateCopy(article.displaySummary || article.lede || "Resumo da notícia em destaque.", 190),
-        articleHref: buildHeroArticleHref(article),
-        themeKey: areaKey,
-        sourceName: article.sourceName || "Fonte local"
-      };
-    })
-    .filter((photo) => {
-      const imageKey = String(photo?.proxyUrl || "").trim();
-      if (!imageKey || seenImages.has(imageKey)) {
-        return true;
-      }
-      return true;
-    })
-    .slice(0, heroTourismDailyTarget);
+    const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
+    const articleKey = getArticleUsageKey(article) || getRadarArticleKey(article);
+    const imageKey = String(imageUrl || "").trim();
+    if (!articleKey || !imageKey || seenKeys.has(articleKey) || seenImages.has(imageKey)) {
+      return false;
+    }
+
+    seenKeys.add(articleKey);
+    seenImages.add(imageKey);
+    selected.push(buildHeroPhotoFromArticle(article));
+    return selected.length >= heroTourismDailyTarget;
+  };
+
+  [
+    normalizedArticles.filter((article) =>
+      isHeroPanelNewsCandidate(article, { latestTimestamp, windowHours: 30, requireLocal: true })
+    ),
+    normalizedArticles.filter((article) =>
+      isHeroPanelNewsCandidate(article, { latestTimestamp, windowHours: 30, requireLocal: false })
+    ),
+    normalizedArticles.filter((article) =>
+      isHeroPanelNewsCandidate(article, { latestTimestamp, windowHours: 168, requireLocal: true })
+    ),
+    normalizedArticles.filter((article) =>
+      isHeroPanelNewsCandidate(article, { latestTimestamp, windowHours: 168, requireLocal: false })
+    )
+  ].some((pool) => pool.some(pushArticle));
+
+  return selected.slice(0, heroTourismDailyTarget);
 };
 
 const buildHeroTourismFallbackPool = () => {
@@ -5585,21 +5918,9 @@ const buildHeroTourismDailyPool = () => {
     }
 
     seenKeys.add(sourceKey);
-    const leadEditorialBackdrop =
-      merged.length === 0 && heroTourismEditorialImageUrl
-        ? {
-            proxyUrl: heroTourismEditorialImageUrl,
-            fallbackUrl: heroTourismEditorialImageUrl,
-            focusPosition: "center 48%",
-            hasPeopleScene: false
-          }
-        : {};
-
     merged.push({
       ...photo,
-      ...leadEditorialBackdrop,
       focusPosition:
-        leadEditorialBackdrop.focusPosition ||
         photo.focusPosition ||
         heroTourismFocusPositions[merged.length % heroTourismFocusPositions.length]
     });
@@ -5737,6 +6058,7 @@ const updateHeroMainStory = (photo = {}) => {
     heroTourismShell.querySelector("[data-hero-tourism-summary-copy]") ||
     heroTourismShell.querySelector(".hero-newsroom-copy > p:not(.eyebrow)");
   const primaryLink = heroTourismShell.querySelector(".hero-newsroom-actions .solid-button");
+  const metaLink = heroTourismShell.querySelector("[data-hero-tourism-meta-link]");
   const title = photo.articleTitle || photo.title || "";
   const summary =
     photo.articleSummary ||
@@ -5757,6 +6079,13 @@ const updateHeroMainStory = (photo = {}) => {
     primaryLink.href = href;
     primaryLink.textContent = "Ler destaque";
     applyArticleLinkAttrs(primaryLink, href);
+  }
+
+  if (metaLink) {
+    metaLink.href = href;
+    metaLink.textContent = href.startsWith("#") ? "Ver seção" : "Ler matéria";
+    metaLink.setAttribute("aria-label", href.startsWith("#") ? `Ver seção: ${title}` : `Ler matéria: ${title}`);
+    applyArticleLinkAttrs(metaLink, href);
   }
 
   heroTourismShell.classList.add("is-news-carousel-active");
@@ -5931,6 +6260,25 @@ const syncHeroPanelThumbContent = (photo = {}, index = 0) => {
   if (titleNode) titleNode.textContent = truncateCopy(title, 74);
   if (summaryNode) summaryNode.textContent = truncateCopy(summary, 140);
   if (actionNode) actionNode.textContent = href.startsWith("#") ? "Ver seção" : "Abrir matéria";
+  thumb.setAttribute("aria-label", href.startsWith("#") ? `Ver seção: ${title}` : `Abrir matéria: ${title}`);
+};
+
+const renderHeroPanelThumbsFromDailyPool = (pool = []) => {
+  const thumbs = [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
+  if (!thumbs.length) {
+    return;
+  }
+
+  thumbs.forEach((thumb, index) => {
+    const item = pool[index];
+    if (!item) {
+      thumb.hidden = true;
+      return;
+    }
+
+    thumb.hidden = false;
+    syncHeroPanelThumbContent({ ...item, panelIndex: index }, index);
+  });
 };
 
 const paintHeroPanelSelection = (photo = {}, index = 0) => {
@@ -6536,7 +6884,7 @@ const mountHeroTourismDots = (count = 0, onSelect = null) => {
     return;
   }
 
-  const safeCount = Math.min(heroTourismDailyTarget, Math.max(0, Number(count) || 0));
+  const safeCount = Math.min(heroTourismDotTarget, Math.max(0, Number(count) || 0));
   heroTourismDots.innerHTML = "";
 
   if (safeCount <= 1) {
@@ -6686,7 +7034,8 @@ const initializeHeroTourismHero = () => {
   heroTourismRotation.activeTopicIndex = 0;
   heroTourismRotation.statusIndex = 0;
   heroTourismRotation.bubbleIndex = 0;
-  const topicStartIndex = Math.min(2, Math.max(dailyPool.length - 1, 0));
+  renderHeroPanelThumbsFromDailyPool(dailyPool);
+  const topicStartIndex = Math.min(5, Math.max(dailyPool.length - 1, 0));
   const topicItems = dailyPool.slice(topicStartIndex, topicStartIndex + heroTopicCards.length);
   const officeStartIndex = topicStartIndex + Math.max(topicItems.length, heroTopicCards.length);
   const officeItems = dailyPool.slice(officeStartIndex);
@@ -7134,6 +7483,17 @@ const initializeHeroTourismHero = () => {
       }
     });
     thumb.addEventListener("click", (event) => {
+      const href = String(thumb.getAttribute("href") || "").trim();
+      const canOpenArticle =
+        href &&
+        !href.startsWith("#") &&
+        (thumb.classList.contains("is-active") || thumb.classList.contains("is-previewing"));
+      if (canOpenArticle || event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) {
+        hideHeroPanelFloatingBubble();
+        stopHeroPanelAutoRotation();
+        return;
+      }
+
       event.preventDefault();
       const selected = buildHeroPanelPhotoItem(thumb, index);
       heroTourismRotation.photoIndex = index;
@@ -10476,40 +10836,40 @@ const renderDailyTrendingBuzz = async (options = {}) => {
 
 const whatMattersTopics = [
   {
-    key: "cheia-jurua",
-    label: "Juruá hoje",
-    cta: "Abrir cobertura",
-    href: "./arquivo.html?busca=cheia",
-    fallbackTitle: "Rio, bairros e Defesa Civil abrem a leitura prática do dia",
-    fallbackSummary: "Quando a base atualiza, este card puxa a notícia mais recente sobre cheia, chuva ou rotina do Juruá.",
-    matcher: /\b(cheia|enchente|alag|alagamento|rio jurua|rio juru[aá]|jurua|juru[aá]|defesa civil|abrigo|desabrig|cota|vazante|chuva|seca|bairro|familias atingidas|famílias atingidas)\b/
+    key: "fato-principal",
+    label: "Destaque da semana",
+    cta: "Ler matéria",
+    href: "./arquivo.html?modo=recentes",
+    fallbackTitle: "O fato mais forte da semana aparece aqui com fonte",
+    fallbackSummary: "Este card abre uma matéria real quando a base identifica o principal acontecimento da semana.",
+    matcher: /\b(mailza|cheia|enchente|morte|morre|acidente|pris[aã]o|opera[cç][aã]o|alerta|concurso|milh[oõ]es|r\$|emerg[eê]ncia)\b/
   },
   {
-    key: "cruzeiro-do-sul",
-    label: "Cruzeiro do Sul",
-    cta: "Ver cidade",
+    key: "cruzeiro-jurua",
+    label: "Cruzeiro e Juruá",
+    cta: "Ler matéria",
     href: "./arquivo.html?busca=Cruzeiro%20do%20Sul",
-    fallbackTitle: "Prefeitura, bairros e serviços entram na leitura principal",
-    fallbackSummary: "Obras, atendimento, agenda pública e decisões locais aparecem com contexto para quem vive na cidade.",
-    matcher: /\b(cruzeiro do sul|cruzeiro-do-sul|czs|bairro|prefeitura|mercado do agricultor|rodovia|aeroporto|centro|miritizal|remanso|boca da alemanha)\b/
+    fallbackTitle: "Cruzeiro do Sul e Vale do Juruá ficam no centro da semana",
+    fallbackSummary: "Bairros, cidades vizinhas e decisões locais aparecem quando viram notícia importante.",
+    matcher: /\b(cruzeiro do sul|cruzeiro-do-sul|czs|vale do jurua|vale do juru[aá]|jurua|juru[aá]|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|bairro|prefeitura)\b/
   },
   {
-    key: "servico-jurua",
-    label: "Serviço no Juruá",
-    cta: "Abrir serviços",
-    href: "./catalogo-servicos.html",
-    fallbackTitle: "Atendimento, prazos e avisos úteis ficam separados do ruído",
-    fallbackSummary: "Saúde, energia, trânsito, benefícios e serviços ganham prioridade quando afetam a região.",
-    matcher: /\b(utilidade|servico|serviço|prazo|calendario|calendário|edital|concurso|inscric|atendimento|hospital|ubs|upa|saude|saúde|educacao|educação|bolsa familia|bolsa família|inss|energia|transito|trânsito|detran|rodovia|alerta|vacina|pix|beneficio|benefício|mercado|obra|ordem de servico|ordem de serviço)\b/
+    key: "acre-politica",
+    label: "Acre e política",
+    cta: "Ler matéria",
+    href: "./arquivo.html?busca=Acre%20pol%C3%ADtica",
+    fallbackTitle: "Acre, governo e política ganham leitura da semana",
+    fallbackSummary: "Decisões públicas e movimentos políticos entram quando afetam a vida do leitor.",
+    matcher: /\b(acre|rio branco|governo|governadora|mailza|aleac|assembleia|deputad|senador|prefeito|prefeita|politica|política|partido|elei[cç][aã]o)\b/
   },
   {
-    key: "agenda-regional",
-    label: "Agenda regional",
-    cta: "Ver agenda",
+    key: "agenda-sociedade",
+    label: "Agenda e sociedade",
+    cta: "Ler matéria",
     href: "#agenda",
-    fallbackTitle: "Eventos, encontros e movimentação local completam o quadro",
-    fallbackSummary: "Quando shows, feiras, cultura ou comunidade movimentam a região, entram aqui com fonte e caminho de leitura.",
-    matcher: /\b(show|festa|festival|evento|agenda|cultura|cultural|musica|música|teatro|cavalgada|feira|encontro|palco|artista|cantor|cantora|expojurua|expojuruá|comunidade)\b/
+    fallbackTitle: "Eventos, cultura e sociedade completam os quatro destaques",
+    fallbackSummary: "Shows, eventos, influenciadores e movimentação pública entram quando houver notícia com fonte.",
+    matcher: /\b(show|festa|festival|evento|agenda|cultura|cultural|musica|música|teatro|cavalgada|feira|encontro|palco|artista|cantor|cantora|expojurua|expojuruá|influenc|comunidade)\b/
   }
 ];
 
@@ -10650,7 +11010,7 @@ const renderWhatMattersNow = (items = []) => {
   });
 
   if (whatMattersTitle) {
-    whatMattersTitle.textContent = "Destaques do Juruá";
+    whatMattersTitle.textContent = "4 destaques da semana";
   }
 
   whatMattersGrid.innerHTML = selected
@@ -11824,6 +12184,10 @@ const scheduleTopicSurfaceRefresh = () => {
     void renderGlobalPoliticsHighlights({ forceRefresh: true });
     renderRegionalPoliticsHighlights(window.NEWS_DATA || []);
     renderSidebarWidgets({ forceRefresh: true });
+    renderClimateAlertsSection(window.NEWS_DATA || []);
+    renderAgendaSection(window.NEWS_DATA || []);
+    renderSocialAgendaSurface(window.NEWS_DATA || []);
+    renderPremiumBottomNewsSurface(window.NEWS_DATA || []);
   }, 60 * 1000);
 };
 
@@ -12791,6 +13155,497 @@ const hydrateSocialCards = (items = []) => {
   reserveSurfaceArticles("social", appliedArticles);
 };
 
+const getSurfaceArticleText = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  return normalizeText(
+    [
+      normalized.title,
+      normalized.lede,
+      normalized.summary,
+      normalized.displaySummary,
+      normalized.category,
+      normalized.categoryKey,
+      normalized.sourceName,
+      normalized.sourceLabel,
+      normalized.sourceUrl
+    ].join(" ")
+  );
+};
+
+const surfaceImpactPriorityPattern =
+  /\b(morre|morte|morto|vítima|vitima|acidente|pris[aã]o|preso|opera[cç][aã]o|homic[ií]dio|desaparece|naufr[aá]gio|emerg[eê]ncia|decreta emerg[eê]ncia|alerta|cheia|enchente|alag|cota|defesa civil|milh[oõ]es|r\$|investimento|concurso|dados|n[uú]mero|recorde)\b/;
+
+const getSurfaceImpactPriorityScore = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const haystack = getSurfaceArticleText(normalizedArticle);
+  let score = getEditorialRegionalPriorityScore(normalizedArticle) + getEditorialFlowPriorityScore(normalizedArticle);
+
+  if (surfaceImpactPriorityPattern.test(haystack)) score += 2600;
+  if (isMailzaPriorityArticle(normalizedArticle)) score += 1800;
+  if (/\b(cruzeiro do sul|mancio lima|m[âa]ncio lima|vale do jurua|vale do juru[aá]|jurua|juru[aá])\b/.test(haystack)) score += 900;
+  if (/\b(internacional|eua|trump|china|russia|rússia|ucrania|ucrânia|israel)\b/.test(haystack)) score -= 300;
+
+  return score;
+};
+
+const getSurfaceSourceArticles = (items = []) =>
+  sortRadarArticles(
+    dedupeNewsItems([
+      ...(Array.isArray(items) ? items : []),
+      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : []),
+      ...(Array.isArray(liveFeedState.items) ? liveFeedState.items : [])
+    ])
+  ).map((item) => normalizeRuntimeArticle(item));
+
+const pickSurfaceArticles = (items = [], matcher = null, limit = 6, options = {}) => {
+  const selected = [];
+  const seen = new Set();
+  const sourceItems = getSurfaceSourceArticles(items)
+    .filter((article) => article.title && (article.slug || article.sourceUrl))
+    .filter((article) => (typeof matcher === "function" ? matcher(article) : true));
+  const latestTimestamp = getLatestArticleTimestamp(sourceItems);
+  const windows = Array.isArray(options.windows) && options.windows.length ? options.windows : [1, 7, 31, 120];
+
+  const push = (article) => {
+    const key = getArticleUsageKey(article) || getRadarArticleKey(article);
+    if (!key || seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    selected.push(article);
+    return selected.length >= limit;
+  };
+
+  windows.some((days) => {
+    if (!latestTimestamp) {
+      return false;
+    }
+
+    const start = latestTimestamp - days * 864e5;
+    return sourceItems
+      .filter((article) => {
+        const timestamp = getArticleSortTimestamp(article);
+        return !timestamp || timestamp >= start;
+      })
+      .sort((left, right) =>
+        compareEditorialFlowArticles(left, right, {
+          scoreFn: options.scoreFn || null,
+          imageBias: options.imageBias !== false
+        })
+      )
+      .some(push);
+  });
+
+  if (selected.length < limit) {
+    sourceItems
+      .sort((left, right) =>
+        compareEditorialFlowArticles(left, right, {
+          scoreFn: options.scoreFn || null,
+          imageBias: options.imageBias !== false
+        })
+      )
+      .some(push);
+  }
+
+  return selected.slice(0, limit);
+};
+
+const setPremiumImageFromArticle = (node, article = {}) => {
+  if (!node) {
+    return;
+  }
+
+  const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "card"));
+  if (imageUrl) {
+    node.style.setProperty("--premium-image", `url("${escapeCssUrl(imageUrl)}")`);
+  }
+};
+
+const buildPremiumNewsRow = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const href = buildArticleHref(normalized);
+  const row = document.createElement("a");
+  const photo = document.createElement("span");
+  const category = document.createElement("small");
+  const title = document.createElement("strong");
+  const date = document.createElement("em");
+  const action = document.createElement("i");
+
+  row.className = "premium-news-row";
+  row.href = href;
+  applyArticleLinkAttrs(row, href);
+  setPremiumImageFromArticle(photo, normalized);
+  category.textContent = normalized.category || "Notícia";
+  title.textContent = truncateCopy(normalized.title || "Notícia em destaque", 96);
+  date.textContent =
+    formatCompactDisplayDate(normalized.publishedAt || normalized.date || normalized.createdAt || "") ||
+    normalized.sourceName ||
+    "agora";
+  action.textContent = "Ler matéria";
+  row.append(photo, category, title, date, action);
+  return row;
+};
+
+const climateSurfacePattern =
+  /\b(clima|tempo|chuva|temporal|cheia|enchente|alag|rio|jurua|juru[aá]|defesa civil|cota|vazante|seca|alerta|tr[aâ]nsito|transito|br-364|rodovia|energia|abastecimento|agua|água|hospital|saude|saúde)\b/;
+const climateProcurementNoisePattern =
+  /\b(licita[cç][aã]o|cotação|cotacao|preg[aã]o|edital|contrata[cç][aã]o|fornecimento|pre[cç]os?|pessoa jur[ií]dica|registro de pre[cç]o|ata de registro)\b/;
+const publicAlertSurfacePattern =
+  /\b(acidente|v[ií]tima|morte|ferid|hospital|samu|pol[ií]cia|bombeiro|defesa civil|tr[aâ]nsito|transito|rodovia|br-364|ponte|energia|abastecimento|[áa]gua|atendimento|interdit|emerg[eê]ncia|alerta)\b/;
+const eventSurfacePattern =
+  /\b(show|festa|festival|evento|agenda|cultura|cultural|musica|música|teatro|cavalgada|feira|programa[cç][aã]o|oficina|expoacre|expojurua|expojuru[aá]|artista|influenc|criador|instagram|tiktok|youtube)\b/;
+const analysisSurfacePattern =
+  /\b(coluna|opini[aã]o|analise|análise|bastidor|perspectiva|entenda|impacto|politica|política|economia|governo|mailza|assembleia|aleac)\b/;
+
+const renderClimateAlertsSection = (items = []) => {
+  const section = document.querySelector("#clima-alertas");
+  const stack = section?.querySelector(".premium-alert-stack");
+  const weatherCopy = section?.querySelector(".premium-weather-card > div p");
+  const riverStatus = section?.querySelector(".premium-weather-card li:nth-child(3) strong");
+  const mapList = section?.querySelector(".premium-region-map ul");
+  if (!section || !stack) {
+    return;
+  }
+
+  const climateMatcher = (article) => {
+    const text = getSurfaceArticleText(article);
+    return climateSurfacePattern.test(text) && !climateProcurementNoisePattern.test(text);
+  };
+  const publicAlertMatcher = (article) => {
+    const text = getSurfaceArticleText(article);
+    return publicAlertSurfacePattern.test(text) && !climateProcurementNoisePattern.test(text);
+  };
+  const articles = pickSurfaceArticles(
+    items,
+    climateMatcher,
+    3,
+    { windows: [1, 7, 31], scoreFn: getSurfaceImpactPriorityScore }
+  );
+  const fallbackArticles =
+    articles.length >= 3
+      ? articles
+      : dedupeNewsItems([
+          ...articles,
+          ...pickSurfaceArticles(items, publicAlertMatcher, 3, {
+            windows: [1, 7, 31],
+            scoreFn: getSurfaceImpactPriorityScore
+          })
+        ]);
+  const rows = fallbackArticles.slice(0, 3);
+  const rowClasses = ["alert-high", "alert-mid", "alert-ok"];
+  const rowLabels = ["Alerta principal", "Atenção no dia", "Serviço público"];
+
+  if (rows.length === 0) {
+    return;
+  }
+
+  const rowsFragment = document.createDocumentFragment();
+  rows.forEach((article, index) => {
+    const normalized = normalizeRuntimeArticle(article);
+    const href = buildArticleHref(normalized);
+    const row = document.createElement("a");
+    const marker = document.createElement("span");
+    const copy = document.createElement("div");
+    const label = document.createElement("small");
+    const title = document.createElement("strong");
+    const summary = document.createElement("p");
+    const time = document.createElement("em");
+
+    row.className = `premium-alert-row ${rowClasses[index] || "alert-mid"}`;
+    row.href = href;
+    applyArticleLinkAttrs(row, href);
+    label.textContent = rowLabels[index] || normalized.category || "Atualização";
+    title.textContent = truncateCopy(normalized.title || "Atualização em acompanhamento", 96);
+    summary.textContent = buildReadableCardSummary(normalized, 132);
+    time.textContent =
+      formatCompactDisplayDate(normalized.publishedAt || normalized.date || normalized.createdAt || "") ||
+      "agora";
+    copy.append(label, title, summary);
+    row.append(marker, copy, time);
+    rowsFragment.appendChild(row);
+  });
+  stack.replaceChildren(rowsFragment);
+
+  const lead = rows[0];
+  if (weatherCopy && lead) {
+    weatherCopy.textContent = `Última atualização: ${truncateCopy(lead.title || lead.sourceLabel || "notícia em acompanhamento", 118)}`;
+  }
+  if (riverStatus) {
+    riverStatus.textContent = rows.some((article) => /cheia|enchente|rio|cota|alag/i.test(getSurfaceArticleText(article)))
+      ? "Atenção"
+      : "Monitorado";
+  }
+  if (mapList && Array.isArray(items) && items.length > 0) {
+    const cities = ["Cruzeiro do Sul", "Mâncio Lima", "Rodrigues Alves", "Porto Walter", "Marechal Thaumaturgo"];
+    mapList.innerHTML = cities
+      .map((city, index) => {
+        const count = getSurfaceSourceArticles(items).filter((article) =>
+          normalizeText([article.title, article.summary, article.lede, article.sourceLabel].join(" ")).includes(normalizeText(city))
+        ).length;
+        return `<li class="${index === 0 ? "is-active" : ""}"><span></span><a href="./arquivo.html?busca=${encodeURIComponent(city)}">${escapeHtml(city)}${count ? ` (${count})` : ""}</a></li>`;
+      })
+      .join("");
+  }
+};
+
+const formatAgendaDate = (article = {}) => {
+  const date =
+    getArchiveArticleDate(article) ||
+    dateFromLocalKey(getArticleDateKey(article)) ||
+    new Date(getArticleSortTimestamp(article) || Date.now());
+  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", timeZone: localeTimeZone }).replace(".", "");
+};
+
+const renderAgendaSection = (items = []) => {
+  const section = document.querySelector("#agenda");
+  const stack = section?.querySelector(".premium-event-stack");
+  const calendar = section?.querySelector(".premium-calendar-days");
+  const monthTitle = section?.querySelector(".premium-calendar-card header strong");
+  if (!section || !stack) {
+    return;
+  }
+
+  const articles = pickSurfaceArticles(
+    items,
+    (article) => eventSurfacePattern.test(getSurfaceArticleText(article)),
+    6,
+    { windows: [1, 7, 31, 120], scoreFn: getSocialSurfaceScore }
+  );
+  const visible = articles.slice(0, 4);
+  if (visible.length === 0) {
+    return;
+  }
+
+  const stackFragment = document.createDocumentFragment();
+  visible.forEach((article) => {
+    const normalized = normalizeRuntimeArticle(article);
+    const href = buildArticleHref(normalized);
+    const card = document.createElement("article");
+    const time = document.createElement("time");
+    const copy = document.createElement("div");
+    const label = document.createElement("small");
+    const title = document.createElement("strong");
+    const summary = document.createElement("p");
+    const link = document.createElement("a");
+
+    time.textContent = formatAgendaDate(normalized);
+    label.textContent = normalized.category || "Agenda";
+    title.textContent = truncateCopy(normalized.title || "Evento em destaque", 94);
+    summary.textContent = buildReadableCardSummary(normalized, 122);
+    link.href = href;
+    link.textContent = "Ler matéria";
+    applyArticleLinkAttrs(link, href);
+    copy.append(label, title, summary);
+    card.append(time, copy, link);
+    stackFragment.appendChild(card);
+  });
+  stack.replaceChildren(stackFragment);
+
+  if (calendar && visible.length) {
+    const baseDate = getArchiveArticleDate(visible[0]) || new Date();
+    const year = baseDate.getFullYear();
+    const month = baseDate.getMonth();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const byDay = new Map();
+    visible.forEach((article) => {
+      const date = getArchiveArticleDate(article);
+      if (date && date.getMonth() === month) {
+        byDay.set(date.getDate(), article);
+      }
+    });
+    if (monthTitle) {
+      monthTitle.textContent = `Eventos de ${baseDate.toLocaleDateString("pt-BR", { month: "long" })}`;
+    }
+    calendar.innerHTML = "";
+    for (let blank = 0; blank < firstDay; blank += 1) {
+      calendar.appendChild(document.createElement("span"));
+    }
+    for (let day = 1; day <= Math.min(daysInMonth, 35); day += 1) {
+      const article = byDay.get(day);
+      const node = article ? document.createElement("a") : document.createElement("b");
+      node.textContent = String(day);
+      if (article) {
+        node.href = buildArticleHref(article);
+        node.className = day === baseDate.getDate() ? "is-active" : "";
+        applyArticleLinkAttrs(node, node.href);
+      }
+      calendar.appendChild(node);
+    }
+  }
+};
+
+const socialAgendaState = { filter: "dia", items: [] };
+const socialAgendaFilters = [
+  { key: "dia", label: "Dia" },
+  { key: "semana", label: "Semana" },
+  { key: "mes", label: "Mês" },
+  { key: "cultura", label: "Cultura" },
+  { key: "eventos", label: "Eventos" },
+  { key: "influencers", label: "Influencers" }
+];
+
+const socialAgendaFilterMatcher = (filter = "dia") => (article = {}) => {
+  const text = getSurfaceArticleText(article);
+  if (filter === "cultura") return /\b(cultura|cultural|teatro|musica|música|show|artista|palco|exposi[cç][aã]o)\b/.test(text);
+  if (filter === "eventos") return eventSurfacePattern.test(text);
+  if (filter === "influencers") return /\b(influenc|instagram|tiktok|youtube|criador|creator|blogueir|viral|rede social)\b/.test(text);
+  return eventSurfacePattern.test(text) || getSocialSurfaceScore(article) > 0;
+};
+
+const getSocialAgendaWindows = (filter = "dia") => {
+  if (filter === "dia") return [1, 7, 31];
+  if (filter === "semana") return [7, 31, 120];
+  if (filter === "mes") return [31, 120, 365];
+  return [7, 31, 120, 365];
+};
+
+const buildSocialAgendaCard = (article = {}, index = 0) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const href = buildArticleHref(normalized);
+  const card = document.createElement("article");
+  const media = document.createElement("a");
+  const tag = document.createElement("span");
+  const copy = document.createElement("div");
+  const label = document.createElement("small");
+  const title = document.createElement("h3");
+  const summary = document.createElement("p");
+  const footer = document.createElement("footer");
+  const source = document.createElement("span");
+  const link = document.createElement("a");
+
+  card.className = `premium-event-card social-card reveal active${index === 0 ? " featured" : ""}`;
+  media.className = "premium-media-frame news-thumb";
+  media.href = href;
+  applyArticleLinkAttrs(media, href);
+  setPremiumImageFromArticle(media, normalized);
+  tag.textContent = normalized.category || "Social";
+  media.appendChild(tag);
+  label.textContent = normalized.category || "Festas & Social";
+  title.textContent = truncateCopy(normalized.title || "Atualização social", 96);
+  summary.textContent = buildReadableCardSummary(normalized, 132);
+  source.textContent = formatCrossedSourceFooter(normalized);
+  link.href = href;
+  link.textContent = "Ler";
+  applyArticleLinkAttrs(link, href);
+  footer.append(source, link);
+  copy.append(label, title, summary, footer);
+  card.append(media, copy);
+  return card;
+};
+
+const renderSocialAgendaSurface = (items = []) => {
+  const section = document.querySelector("#social");
+  const grid = section?.querySelector(".premium-social-grid.social-grid");
+  const filters = section?.querySelector("#social-surface-filters");
+  if (!section || !grid) {
+    return;
+  }
+
+  socialAgendaState.items = Array.isArray(items) ? items : socialAgendaState.items;
+
+  if (filters && filters.dataset.bound !== "true") {
+    filters.dataset.bound = "true";
+    socialAgendaFilters.forEach((option) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "feed-filter-chip";
+      button.dataset.socialFilter = option.key;
+      button.textContent = option.label;
+      button.addEventListener("click", () => {
+        socialAgendaState.filter = option.key;
+        renderSocialAgendaSurface(socialAgendaState.items);
+      });
+      filters.appendChild(button);
+    });
+  }
+
+  filters?.querySelectorAll("[data-social-filter]").forEach((button) => {
+    const active = button.dataset.socialFilter === socialAgendaState.filter;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", active ? "true" : "false");
+  });
+
+  const articles = pickSurfaceArticles(
+    items,
+    socialAgendaFilterMatcher(socialAgendaState.filter),
+    9,
+    {
+      windows: getSocialAgendaWindows(socialAgendaState.filter),
+      scoreFn: getSocialSurfaceScore
+    }
+  );
+  const fallback = articles.length >= 6
+    ? articles
+    : pickSurfaceArticles(items, (article) => getSocialSurfaceScore(article) > -4, 9, {
+        windows: [7, 31, 120],
+        scoreFn: getSocialSurfaceScore
+      });
+
+  if (fallback.length === 0) {
+    return;
+  }
+
+  const socialFragment = document.createDocumentFragment();
+  fallback.slice(0, 9).forEach((article, index) => {
+    socialFragment.appendChild(buildSocialAgendaCard(article, index));
+  });
+  grid.replaceChildren(socialFragment);
+  reserveSurfaceArticles("social", fallback.slice(0, 9));
+  registerInteractivePanels(grid);
+  window.setTimeout(() => registerArticleCardLinks(grid), 0);
+};
+
+const renderPremiumBottomNewsSurface = (items = []) => {
+  const section = document.querySelector("#trending.premium-bottom-news");
+  if (!section) {
+    return;
+  }
+
+  const panels = [...section.querySelectorAll(".premium-bottom-grid > section")];
+  const latestPanel = panels[0];
+  const columnsPanel = panels[1];
+  const latestArticles = pickSurfaceArticles(items, (article) => article.title, 4, {
+    windows: [1, 7, 31],
+    scoreFn: getSurfaceImpactPriorityScore
+  });
+  const columnArticles = pickSurfaceArticles(
+    items,
+    (article) => analysisSurfacePattern.test(getSurfaceArticleText(article)),
+    4,
+    { windows: [7, 31, 120], scoreFn: getSurfaceImpactPriorityScore }
+  );
+
+  if (latestPanel && latestArticles.length) {
+    [...latestPanel.querySelectorAll(".premium-news-row")].forEach((node) => node.remove());
+    latestArticles.slice(0, 4).forEach((article) => latestPanel.appendChild(buildPremiumNewsRow(article)));
+  }
+
+  if (columnsPanel && columnArticles.length) {
+    [...columnsPanel.querySelectorAll(".premium-column-row")].forEach((node) => node.remove());
+    columnArticles.slice(0, 4).forEach((article, index) => {
+      const normalized = normalizeRuntimeArticle(article);
+      const href = buildArticleHref(normalized);
+      const row = document.createElement("a");
+      const avatar = document.createElement("b");
+      const copy = document.createElement("span");
+      const label = document.createElement("small");
+      const title = document.createElement("strong");
+      const action = document.createElement("i");
+      row.className = "premium-column-row";
+      row.href = href;
+      applyArticleLinkAttrs(row, href);
+      avatar.textContent = (normalized.sourceName || normalized.category || "AN").slice(0, 2).toUpperCase();
+      label.textContent = normalized.category || (index ? "Análise" : "Contexto");
+      title.textContent = truncateCopy(normalized.title || "Análise em destaque", 104);
+      action.textContent = "Abrir artigo";
+      copy.append(label, title);
+      row.append(avatar, copy, action);
+      columnsPanel.appendChild(row);
+    });
+  }
+};
+
 const hydrateStaticMediaSurfaces = async (options = {}) => {
   const deferCadernos = options.deferCadernos === true;
 
@@ -12805,6 +13660,10 @@ const hydrateStaticMediaSurfaces = async (options = {}) => {
   if (window.NEWS_MAP) {
     hydrateStaticThumbs(window.NEWS_MAP);
     hydrateSocialCards(window.NEWS_DATA || []);
+    renderClimateAlertsSection(window.NEWS_DATA || []);
+    renderAgendaSection(window.NEWS_DATA || []);
+    renderSocialAgendaSurface(window.NEWS_DATA || []);
+    renderPremiumBottomNewsSurface(window.NEWS_DATA || []);
 
     const hydrateSecondarySurfaces = () => {
       hydrateEntertainmentSection(window.NEWS_DATA || []);
@@ -13026,6 +13885,15 @@ const renderAcreRegionalHighlights = (items = window.NEWS_DATA || []) => {
   registerArticleCardLinks(grid);
 };
 
+const articleCardSelector = [
+  ".news-card",
+  ".archive-card",
+  ".mosaic-item",
+  ".global-politics-card",
+  ".trending-card"
+].join(", ");
+const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
+
 const initialMergedNews = syncNewsDataset(initialStaticNews);
 ensureMobileHomeLeadLayout();
 reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(getHeroTourismDailyPool()));
@@ -13059,15 +13927,6 @@ if (mobileHomeLeadMedia) {
     mobileHomeLeadMedia.addListener(handleMobileHomeLeadChange);
   }
 }
-
-const articleCardSelector = [
-  ".news-card",
-  ".archive-card",
-  ".mosaic-item",
-  ".global-politics-card",
-  ".trending-card"
-].join(", ");
-const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
 
 const getPrimaryCardLink = (card) =>
   card?.querySelector?.('a[href*="noticia.html?slug="], a[href]') || null;
@@ -13195,6 +14054,31 @@ const shouldHandleArticleNavigationClick = (event, link) => {
   return !target || target === "_self";
 };
 
+const showInlineNavigationFallbackLoader = (options = {}) => {
+  const label = options.label || "Abrindo matéria";
+  const loader = document.createElement("div");
+  loader.className = "catalogo-top-return-loader is-visible is-action-loader";
+  loader.setAttribute("role", "status");
+  loader.setAttribute("aria-live", "polite");
+  loader.setAttribute("aria-label", label);
+  loader.style.cssText =
+    "position:fixed;inset:0;z-index:10060;display:grid;place-items:center;padding:18px;background:rgba(2,13,24,.82);backdrop-filter:blur(10px);color:#fff;";
+  loader.innerHTML = `
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:66%"></i></span>
+    <span class="catalogo-top-return-loader-row">
+      <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
+      <strong data-top-loader-percent>66%</strong>
+    </span>
+  `;
+  document.body.appendChild(loader);
+
+  return waitForSplashDelay(920).finally(() => {
+    loader.classList.add("is-leaving");
+    loader.style.opacity = "0";
+    window.setTimeout(() => loader.remove(), 160);
+  });
+};
+
 const navigateWithArticleLoader = (href) => {
   let navigated = false;
   const navigate = () => {
@@ -13214,9 +14098,12 @@ const navigateWithArticleLoader = (href) => {
   const loaderPromise = window.CatalogoPageLoader?.showForNavigation
     ? window.CatalogoPageLoader.showForNavigation({
         href,
-        label: "Abrindo materia"
+        label: "Abrindo matéria"
       })
-    : Promise.resolve();
+    : showInlineNavigationFallbackLoader({
+        href,
+        label: "Abrindo matéria"
+      });
 
   Promise.race([
     Promise.resolve(loaderPromise),
@@ -13226,9 +14113,17 @@ const navigateWithArticleLoader = (href) => {
     .then(navigate);
 };
 
-document.addEventListener("click", (event) => {
+const handleArticleNavigationClick = (event) => {
   const link = event.target instanceof Element ? event.target.closest('a[href*="noticia.html?slug="]') : null;
   if (!link) {
+    return;
+  }
+
+  if (
+    link.classList.contains("hero-panel-photo") &&
+    !link.classList.contains("is-active") &&
+    !link.classList.contains("is-previewing")
+  ) {
     return;
   }
 
@@ -13245,7 +14140,9 @@ document.addEventListener("click", (event) => {
     event.preventDefault();
     navigateWithArticleLoader(new URL(href, window.location.href).href);
   }
-});
+};
+
+document.addEventListener("click", handleArticleNavigationClick, { capture: true });
 
 const getAnchorScrollOffset = () => {
   const headerStack = document.querySelector("#site-header-stack");
@@ -14745,7 +15642,7 @@ const buildFeedCard = (article) => {
 
   category.textContent = formatCrossedSourceFooter(normalizedArticle);
   link.href = href;
-  link.textContent = "ler análise";
+  link.textContent = "Ler matéria";
   applyArticleLinkAttrs(link, href);
 
   footer.append(category, link);
@@ -14754,12 +15651,15 @@ const buildFeedCard = (article) => {
   return card;
 };
 
-const archiveHighlightShell = document.querySelector("#arquivo.archive-shell");
+const archiveHighlightShell = document.querySelector("#arquivo");
 const archiveHighlightGrid = archiveHighlightShell?.querySelector(".archive-grid") || null;
 const archiveHighlightButtons = archiveHighlightShell
   ? [...archiveHighlightShell.querySelectorAll(".day-chip[data-archive-filter]")]
   : [];
-const archiveHighlightSummary = archiveHighlightShell?.querySelector(".section-heading > p:last-child") || null;
+const archiveHighlightSummary =
+  archiveHighlightShell?.querySelector(".premium-section-head p") ||
+  archiveHighlightShell?.querySelector(".section-heading > p:last-child") ||
+  null;
 const archiveHighlightState = {
   filter: archiveHighlightButtons.find((button) => button.classList.contains("is-active"))?.dataset.archiveFilter || "today"
 };
@@ -14783,6 +15683,41 @@ const archiveTopicPatterns = {
   saude:
     /\b(saude|saúde|hospital|ubs|upa|vacina|vacinacao|vacinação|atendimento|medic|consulta|dengue|sus|tenda)\b/
 };
+
+const archiveTimelineImpactPattern =
+  /\b(morre|morte|morto|vítima|vitima|acidente|pris[aã]o|preso|opera[cç][aã]o|homic[ií]dio|desaparece|naufr[aá]gio|emerg[eê]ncia|decreta emerg[eê]ncia|alerta|cheia|enchente|alag|cota|defesa civil|milh[oõ]es|r\$|investimento|concurso|dados|n[uú]mero|recorde)\b/;
+
+const getArchiveTimelinePriorityScore = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const haystack = normalizeText(
+    [
+      normalizedArticle.title,
+      normalizedArticle.lede,
+      normalizedArticle.summary,
+      normalizedArticle.category,
+      normalizedArticle.categoryKey,
+      normalizedArticle.sourceName
+    ].join(" ")
+  );
+  let score = getEditorialRegionalPriorityScore(normalizedArticle) + getEditorialFlowPriorityScore(normalizedArticle);
+
+  if (archiveTimelineImpactPattern.test(haystack)) score += 2600;
+  if (isMailzaPriorityArticle(normalizedArticle)) score += 1800;
+  if (/\b(cruzeiro do sul|mancio lima|m[âa]ncio lima|vale do jurua|vale do juru[aá]|jurua|juru[aá])\b/.test(haystack)) score += 900;
+  if (/\b(internacional|eua|trump|china|russia|rússia|ucrania|ucrânia|israel)\b/.test(haystack)) score -= 300;
+
+  return score;
+};
+
+const sortArchiveTimelineArticles = (items = []) =>
+  [...items].sort((left, right) => {
+    const scoreDiff = getArchiveTimelinePriorityScore(right) - getArchiveTimelinePriorityScore(left);
+    if (scoreDiff !== 0) {
+      return scoreDiff;
+    }
+
+    return compareEditorialFlowArticles(left, right);
+  });
 
 const dateFromLocalKey = (dateKey = "") => {
   const match = String(dateKey || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
@@ -14853,7 +15788,7 @@ const getArchiveHighlightItems = () => {
     ).getTime();
 
     return diversifyArchiveStories(
-      getSortedLiveFeedArticles(normalizedItems).filter((article) => {
+      sortArchiveTimelineArticles(normalizedItems).filter((article) => {
       const articleDate = getArchiveArticleDate(article);
       if (!articleDate) {
         return false;
@@ -14874,7 +15809,7 @@ const getArchiveHighlightItems = () => {
   const topicPattern = archiveTopicPatterns[currentFilter];
   if (topicPattern) {
     return diversifyArchiveStories(
-      getSortedLiveFeedArticles(normalizedItems).filter((article) => {
+      sortArchiveTimelineArticles(normalizedItems).filter((article) => {
       const normalizedArticle = normalizeRuntimeArticle(article);
       const haystack = normalizeText(
         [
@@ -14896,14 +15831,36 @@ const getArchiveHighlightItems = () => {
     );
   }
 
-  return diversifyArchiveStories(getSortedLiveFeedArticles(normalizedItems), 18);
+  return diversifyArchiveStories(sortArchiveTimelineArticles(normalizedItems), 18);
 };
 
 const buildArchiveHighlightCard = (article, index = 0) => {
-  const card = buildFeedCard(article);
-  card.classList.remove("news-card");
-  card.classList.add("archive-card", "generated-archive-card");
-  card.classList.toggle("tall", index === 1);
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const href = buildArticleHref(normalizedArticle);
+  const card = document.createElement("article");
+  const time = document.createElement("time");
+  const marker = document.createElement("span");
+  const copy = document.createElement("div");
+  const meta = document.createElement("small");
+  const title = document.createElement("h3");
+  const summary = document.createElement("p");
+  const link = document.createElement("a");
+  const dateLabel =
+    formatCompactDisplayDate(normalizedArticle.publishedAt || normalizedArticle.date || normalizedArticle.createdAt || "") ||
+    normalizedArticle.date ||
+    "agora";
+
+  card.className = `premium-timeline-item archive-card generated-archive-card reveal active${index === 1 ? " tall" : ""}`;
+  time.textContent = dateLabel.replace(/\s+de\s+/i, " ");
+  marker.setAttribute("aria-hidden", "true");
+  meta.textContent = formatCrossedSourceMeta(normalizedArticle);
+  title.textContent = truncateCopy(normalizedArticle.title || "Acontecimento em destaque", 118);
+  summary.textContent = buildReadableCardSummary(normalizedArticle, 170);
+  link.href = href;
+  link.textContent = "Ler matéria";
+  applyArticleLinkAttrs(link, href);
+  copy.append(meta, title, summary, link);
+  card.append(time, marker, copy);
   return card;
 };
 
@@ -14912,18 +15869,12 @@ const renderArchiveHighlights = () => {
     return;
   }
 
-  const reservedKeys = buildReservedArticleKeys(["archive", "live"]);
-  const reservedImages = buildReservedArticleImageKeys(["archive", "live"]);
   const filteredItems = getArchiveHighlightItems();
   const fallbackItems = getSortedLiveFeedArticles(
     liveFeedState.items.length ? liveFeedState.items : initialStaticNews
   ).map((item) => normalizeRuntimeArticle(item));
   const visibleItems = diversifyArchiveStories(
-    (filteredItems.length ? filteredItems : fallbackItems).filter((article) => {
-      const key = getArticleUsageKey(article);
-      const imageKey = getArticleImageKey(article);
-      return key && !reservedKeys.has(key) && (!imageKey || !reservedImages.has(imageKey));
-    }),
+    (filteredItems.length ? filteredItems : fallbackItems).filter((article) => getArticleUsageKey(article)),
     6
   ).slice(0, 6);
   const activeLabel = archiveFilterLabels[archiveHighlightState.filter] || "Arquivo";
@@ -15142,7 +16093,7 @@ const getFilteredLiveFeedArticles = () => {
   const query = String(liveFeedQuery?.value || "").trim();
   const normalizedQuery = normalizeText(query);
   const sortedArticles = getSortedLiveFeedArticles(liveFeedState.items);
-  const shouldExcludePromotedSurfaces = !normalizedQuery && !liveFeedState.activeCategory;
+  const shouldExcludePromotedSurfaces = false;
   const reservedKeys = shouldExcludePromotedSurfaces ? buildReservedArticleKeys(["live"]) : new Set();
   const reservedImages = shouldExcludePromotedSurfaces ? buildReservedArticleImageKeys(["live"]) : new Set();
   const categoryFiltered = sortedArticles
@@ -15206,7 +16157,7 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
 
   if (liveFeedCountLabel) {
     liveFeedCountLabel.textContent =
-      activeContext.length > 0 ? "notícias no recorte atual" : "notícias verificadas na base";
+      activeContext.length > 0 ? "notícias no recorte atual" : "notícias na base";
   }
 
   if (liveFeedTotal) {
@@ -15254,11 +16205,11 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   }
 
   if (visibleSlice.length < filtered.length) {
-    liveFeedStatus.textContent = `Arquivo regional pronto: ${filtered.length} notícias verificadas na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
+    liveFeedStatus.textContent = `Mais notícias: ${filtered.length} cards na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
     return;
   }
 
-  liveFeedStatus.textContent = `Arquivo regional com ${filtered.length} notícias. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
+  liveFeedStatus.textContent = `Mais notícias com ${filtered.length} cards. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
 };
 
 const renderLiveFeed = () => {
@@ -16242,11 +17193,13 @@ const scheduleHomeBackgroundHydration = () => {
     }
 
     homeBackgroundHydrationStarted = true;
-    void renderDailyTrendingBuzz().catch(() => {});
     void hydrateDynamicNews();
     window.setTimeout(() => {
+      void renderDailyTrendingBuzz().catch(() => {});
+    }, 260);
+    window.setTimeout(() => {
       void hydrateCommentsFromApi();
-    }, 900);
+    }, 1200);
 
     if (!homeBackgroundHydrationIntervalId) {
       homeBackgroundHydrationIntervalId = window.setInterval(() => {
@@ -16266,6 +17219,8 @@ const scheduleHomeBackgroundHydration = () => {
 
   document.addEventListener("DOMContentLoaded", runSoon, { once: true });
 };
+
+scheduleHomeBackgroundHydration();
 
 const attachCommentSubmission = () => {
   if (!publishCommentButton || !opinionInput || !commentsFeed || !charCount) {
@@ -16857,7 +17812,6 @@ attachSubscriptionSubmission();
 attachAgentMailFlow();
 initializeFloatingPanelToggles();
 initializeFoundersAutoCarousel();
-scheduleHomeBackgroundHydration();
 renderWhatMattersNow(window.NEWS_DATA || []);
 window.setTimeout(() => {
   void renderDailyTrendingBuzz();

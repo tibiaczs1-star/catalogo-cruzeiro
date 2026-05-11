@@ -350,3 +350,72 @@ body.detail-body .analysis-box,
 body.detail-body .detail-fact-tabs {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
 }
+
+/* 2026-05-11: contraste alto na area "Resultado da Checagem". */
+body.detail-body .detail-fact-tabs {
+  border-color: rgba(240, 180, 41, 0.26) !important;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(240, 180, 41, 0.12), transparent 18rem),
+    linear-gradient(145deg, rgba(7, 28, 47, 0.96), rgba(3, 15, 27, 0.98)) !important;
+  color: #ffffff !important;
+}
+
+body.detail-body .detail-fact-tabs-header .eyebrow {
+  color: rgba(255, 255, 255, 0.82) !important;
+  background: rgba(121, 181, 226, 0.12) !important;
+  border: 1px solid rgba(121, 181, 226, 0.18) !important;
+}
+
+body.detail-body .detail-fact-tabs-header h2,
+body.detail-body #detail-fact-tabs-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.34) !important;
+}
+
+body.detail-body .detail-fact-tabs-header p,
+body.detail-body .detail-fact-tabs-header p:last-child,
+body.detail-body .detail-fact-panel-note {
+  color: rgba(246, 250, 255, 0.84) !important;
+}
+
+body.detail-body .detail-fact-tab-button {
+  background: rgba(255, 255, 255, 0.07) !important;
+  color: #ffffff !important;
+}
+
+body.detail-body .detail-fact-tab-button:hover,
+body.detail-body .detail-fact-tab-button.is-active {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06)),
+    rgba(3, 16, 29, 0.62) !important;
+  color: #ffffff !important;
+}
+
+body.detail-body .detail-fact-tab-button strong,
+body.detail-body .detail-fact-panel h3,
+body.detail-body .detail-fact-panel li {
+  color: #ffffff !important;
+}
+
+body.detail-body .detail-fact-tab-button small {
+  color: rgba(246, 250, 255, 0.72) !important;
+}
+
+body.detail-body .detail-fact-panel {
+  background:
+    radial-gradient(circle at top right, color-mix(in srgb, var(--fact-accent) 16%, transparent), transparent 36%),
+    rgba(255, 255, 255, 0.065) !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 720px) {
+  body.detail-body .page-shell,
+  body.detail-body .detail-main,
+  body.detail-body .detail-shell.article-premium-template {
+    overflow-x: hidden !important;
+  }
+
+  body.detail-body .detail-shell.article-premium-template::before {
+    display: none !important;
+  }
+}

@@ -68,6 +68,8 @@ const PUBLIC_LANGUAGE_PATTERNS = [
 ];
 const ENGLISH_PUBLIC_MARKER_PATTERN =
   /\b(?:the|and|that|with|from|this|will|would|could|should|their|there|these|those|about|after|before|because|during|while|into|over|under|more|most|new|now|look|coming|started|rolling|design|apps|users|people|company|whether|it's|its|is|are|was|were|been|being|have|has|had|can|may|might|must|your|you|they|them|his|her|our|out|up|down|when|where|why|how|who|what|which|if|then|than|as|at|by|for|of|on|off|in|to|or|not|one|first|last|latest|today|according|reports|reportedly|expected|available|feature|features|released|announced|video|podcast|phone|camera|smart|gaming|mouse|touchscreen)\b/g;
+const EMBEDDED_ENGLISH_MARKER_PATTERN =
+  /\b(?:according|announced|available|because|before|camera|coming|company|confirmed|customers|developers|expected|feature|features|gaming|latest|microsoft|people|podcast|released|reported|reportedly|rolling|shortage|started|touchscreen|update|users|windows|would|could|should)\b/g;
 const PORTUGUESE_PUBLIC_MARKER_PATTERN =
   /\b(?:que|com|para|por|uma|um|das|dos|nas|nos|ao|aos|pela|pelo|mais|sobre|como|quando|porque|tambem|também|empresa|aplicativos|visual|icone|ícone|noticia|notícia|fonte|resumo|atualizacao|atualização|publicou|redacao|redação|internacional|brasil|acre)\b/g;
 
@@ -244,13 +246,25 @@ function publicTextLooksEnglish(value) {
   return englishMarkers.length >= 7 && englishMarkers.length >= Math.max(1, portugueseMarkers.length * 2);
 }
 
+function publicTextHasEmbeddedEnglish(value) {
+  const text = normalizePublicText(value);
+  if (!text) return false;
+  if (publicTextLooksEnglish(text)) return true;
+  const lowerText = text.toLowerCase();
+  const englishMarkers = lowerText.match(EMBEDDED_ENGLISH_MARKER_PATTERN) || [];
+  const portugueseMarkers = lowerText.match(PORTUGUESE_PUBLIC_MARKER_PATTERN) || [];
+  const hasPortugueseShell =
+    portugueseMarkers.length > 0 || /\b(?:publicou|sobre|atualizacao|atualização|fonte|resumo)\b/i.test(text);
+  return hasPortugueseShell && englishMarkers.length >= 3;
+}
+
 function publicTextSnippet(value) {
   const text = normalizePublicText(value);
   return text.length > 180 ? `${text.slice(0, 177)}...` : text;
 }
 
 function auditPublicTextValue(filePath, source, valuePath, value, issues) {
-  if (typeof value !== "string" || !publicTextLooksEnglish(value)) {
+  if (typeof value !== "string" || !publicTextHasEmbeddedEnglish(value)) {
     return;
   }
 

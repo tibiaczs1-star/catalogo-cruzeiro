@@ -8,7 +8,7 @@
     "engagement-api.js?v=20260411k",
     "elections-static-fix.js?v=20260415b",
     "acre-photo-cards.js?v=20260415a",
-    "servicos-menu.js?v=20260413a",
+    "servicos-menu.js?v=20260511-no-ninjas1",
     "catalogo-telefonico-plus-data.js?v=20260413a",
     "catalogo-telefonico-plus.js?v=20260508-preview1",
     "rodape-voz-humana.js?v=20260411o",

@@ -16,6 +16,7 @@
     "editorial:health": "node scripts/editorial-health-check.js",
     "memory:ensure": "node scripts/codex-memory.js ensure",
     "memory:status": "node scripts/codex-memory.js status",
+    "perf:budget": "node scripts/performance-budget-check.js",
     "guard:pubpaid": "node scripts/guard-pubpaid-no-canvas.js",
     "review:team": "node scripts/guard-pubpaid-no-canvas.js && node scripts/review-team-audit.js",
     "start": "node server.js",

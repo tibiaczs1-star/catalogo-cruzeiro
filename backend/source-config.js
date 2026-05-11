@@ -10,10 +10,13 @@ module.exports = [
   {
     id: "jurua-online",
     name: "Jurua Online",
-    feedUrl: "https://juruaonline.com.br/feed/",
+    feedUrl: "https://juruaonline.com.br/wp-json/wp/v2/posts?per_page=24&_embed=1",
+    feedType: "wordpress-json",
     siteUrl: "https://juruaonline.com.br/",
     defaultCategory: "Cotidiano",
-    limitPerSource: 45
+    limitPerSource: 45,
+    priority: 980,
+    priorityReason: "Fonte regional prioritaria do Vale do Jurua; usar REST do WordPress quando RSS redirecionar para HTML."
   },
   {
     id: "agencia-acre",
@@ -26,10 +29,13 @@ module.exports = [
   {
     id: "prefeitura-czs",
     name: "Prefeitura de CZS",
-    feedUrl: "https://www.cruzeirodosul.ac.gov.br/feed",
+    feedUrl: "https://www.cruzeirodosul.ac.gov.br/",
+    feedType: "prefeitura-wix-home",
     siteUrl: "https://www.cruzeirodosul.ac.gov.br/",
     defaultCategory: "Utilidade Publica",
-    limitPerSource: 60
+    limitPerSource: 60,
+    priority: 1000,
+    priorityReason: "Fonte oficial municipal prioritaria; site Wix sem RSS confiavel, capturar cards publicos da home."
   },
   {
     id: "jurua-24-horas",
@@ -66,10 +72,12 @@ module.exports = [
   {
     id: "portal-do-jurua",
     name: "Portal do Jurua",
-    feedUrl: "https://www.portaldojurua.com.br/feed/",
+    feedUrl: "https://www.portaldojurua.com.br/feeds/posts/default",
     siteUrl: "https://www.portaldojurua.com.br/",
     defaultCategory: "Cotidiano",
-    limitPerSource: 45
+    limitPerSource: 45,
+    priority: 970,
+    priorityReason: "Fonte regional prioritaria; o feed valido e Atom/Blogger em /feeds/posts/default."
   },
   {
     id: "agencia-brasil-ultimas",
@@ -117,7 +125,9 @@ module.exports = [
     feedUrl: "https://www.terra.com.br/rss/Controller?channelid=7f6c931cc6b6d310VgnVCM4000009bcceb0aRCRD",
     siteUrl: "https://www.terra.com.br/diversao/",
     defaultCategory: "Cultura",
-    limitPerSource: 10
+    limitPerSource: 10,
+    disabled: true,
+    disabledReason: "Canal web ativo, mas RSS monitorado retornou 0 itens; usar como referência manual até trocar integração."
   },
   {
     id: "the-verge",

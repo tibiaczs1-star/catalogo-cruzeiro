@@ -25,7 +25,7 @@ body.catalogo-lock-scroll {
   border: 0 !important;
   border-radius: 0 !important;
   background:
-    linear-gradient(180deg, rgba(2, 15, 29, 0.36), rgba(1, 8, 16, 0.92)),
+    linear-gradient(180deg, rgba(2, 15, 29, 0.74), rgba(1, 8, 16, 0.96)),
     url("./assets/home-cache/rio-jurua-panorama.jpg") center / cover no-repeat !important;
   box-shadow: none !important;
   color: #fff;
@@ -36,8 +36,8 @@ body.catalogo-lock-scroll {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 0 50%, rgba(244, 173, 53, 0.18), transparent 22%),
-    linear-gradient(90deg, rgba(1, 8, 16, 0.86), rgba(2, 18, 33, 0.28) 36%, rgba(1, 8, 16, 0.88));
+    radial-gradient(circle at 0 50%, rgba(244, 173, 53, 0.12), transparent 22%),
+    linear-gradient(90deg, rgba(1, 8, 16, 0.92), rgba(2, 18, 33, 0.58) 36%, rgba(1, 8, 16, 0.94));
   pointer-events: none;
 }
 
@@ -65,8 +65,8 @@ body.catalogo-lock-scroll {
     linear-gradient(105deg, transparent 0 12%, rgba(244, 173, 53, 0.86) 12.2% 14.5%, transparent 15% 100%),
     linear-gradient(102deg, transparent 0 58%, rgba(110, 177, 235, 0.38) 58.2% 60.4%, transparent 61% 100%),
     linear-gradient(100deg, transparent 0 72%, rgba(244, 173, 53, 0.54) 72.2% 73.4%, transparent 74% 100%);
-  opacity: 0.66;
-  mix-blend-mode: screen;
+  opacity: 0.34;
+  mix-blend-mode: normal;
   animation: catalogoNewspaperPanelsDrift 6.8s ease-in-out infinite;
 }
 
@@ -12471,5 +12471,172 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
 
   .catalogo-welcome.is-home-opening-loader.is-newspaper-loader .premium-opening-pillars {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* 2026-05-11: segunda tela de carregamento para navegação interna. */
+.catalogo-top-return-loader {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10060 !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: max(18px, env(safe-area-inset-top, 0px)) 18px max(18px, env(safe-area-inset-bottom, 0px)) !important;
+  overflow: hidden !important;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(240, 180, 41, 0.22), transparent 28%),
+    radial-gradient(circle at 18% 82%, rgba(121, 181, 226, 0.18), transparent 30%),
+    rgba(2, 13, 24, 0.88) !important;
+  color: #f8fbff !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: auto !important;
+  backdrop-filter: blur(12px) !important;
+  transition:
+    opacity 220ms ease,
+    visibility 220ms ease,
+    filter 220ms ease !important;
+}
+
+.catalogo-top-return-loader::before {
+  content: "";
+  width: 74px;
+  height: 74px;
+  align-self: end;
+  margin-bottom: 1rem;
+  border-radius: 22px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+    url("./assets/logo-czs.svg") center / 72% no-repeat;
+  box-shadow:
+    0 0 0 1px rgba(240, 180, 41, 0.24),
+    0 20px 58px rgba(0, 0, 0, 0.34),
+    0 0 34px rgba(240, 180, 41, 0.22);
+}
+
+.catalogo-top-return-loader::after {
+  content: "";
+  position: absolute;
+  inset: auto 14% 18% 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240, 180, 41, 0.48), transparent);
+  opacity: 0.7;
+}
+
+.catalogo-top-return-loader.is-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.catalogo-top-return-loader.is-leaving {
+  opacity: 0 !important;
+  visibility: visible !important;
+  filter: blur(6px) !important;
+}
+
+.catalogo-top-return-loader-row {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(440px, calc(100vw - 44px));
+  padding: 0.92rem 1rem;
+  border: 1px solid rgba(121, 181, 226, 0.24);
+  border-radius: 10px;
+  background: rgba(4, 22, 38, 0.78);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+}
+
+.catalogo-top-return-loader-text,
+.catalogo-top-return-loader-row strong {
+  color: #f8fbff;
+  font-family: "Sora", "Inter", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.catalogo-top-return-loader-row strong {
+  color: #f0b429;
+  font-variant-numeric: tabular-nums;
+}
+
+.catalogo-top-return-loader-track {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(440px, calc(100vw - 44px));
+  height: 6px;
+  margin-bottom: 0.72rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(121, 181, 226, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(121, 181, 226, 0.12);
+}
+
+.catalogo-top-return-loader-track i {
+  display: block;
+  width: 16%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f0b429, #ffd66a);
+  box-shadow: 0 0 24px rgba(240, 180, 41, 0.58);
+  transition: width 160ms ease;
+}
+
+@media (max-width: 520px) {
+  .catalogo-top-return-loader::before {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+  }
+
+  .catalogo-top-return-loader-row {
+    gap: 0.72rem;
+    padding: 0.84rem 0.88rem;
+  }
+
+  .catalogo-top-return-loader-text,
+  .catalogo-top-return-loader-row strong {
+    font-size: 0.68rem;
+  }
+}
+
+/* 2026-05-11: saida mais suave do carregamento inicial. */
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader {
+  will-change: opacity, transform, filter;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-leaving {
+  visibility: visible;
+  opacity: 0;
+  transform: scale(1.012);
+  filter: blur(9px);
+  transition:
+    opacity 360ms ease,
+    transform 360ms ease,
+    filter 360ms ease,
+    visibility 360ms ease;
+}
+
+.catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-leaving .premium-opening-card {
+  opacity: 0;
+  transform: translateY(-12px) scale(0.988);
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader,
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-leaving,
+  .catalogo-welcome.is-home-opening-loader.is-newspaper-loader.is-leaving .premium-opening-card {
+    filter: none !important;
+    transform: none !important;
+    transition: opacity 120ms ease, visibility 120ms ease !important;
   }
 }

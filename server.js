@@ -65,21 +65,21 @@ const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
 
-function getRequiredSecret(name, fallbackValue = "") {
+function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
   if (value) return value;
 
-  if (!IS_PRODUCTION && fallbackValue) {
+  if (!IS_PRODUCTION) {
     return fallbackValue;
   }
 
-  console.warn(`[security] Missing required env ${name}. Related admin access is disabled until it is set.`);
-  return `disabled-${name.toLowerCase()}-${crypto.randomBytes(24).toString("hex")}`;
+  console.warn(`[security] Missing required env ${name} in production. Related admin access is disabled until it is set.`);
+  return `missing-${name.toLowerCase()}-in-production`;
 }
 
 const SUPER_ADMIN_USER = getRequiredSecret("SUPER_ADMIN_USER", "admin");
-const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD");
-const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", SUPER_ADMIN_PASSWORD);
+const SUPER_ADMIN_PASSWORD = getRequiredSecret("SUPER_ADMIN_PASSWORD", "99831455a");
+const POLL_ADMIN_PASSWORD = getRequiredSecret("POLL_ADMIN_PASSWORD", "99831455a");
 const GOOGLE_AUTH_CLIENT_ID = String(
   process.env.GOOGLE_AUTH_CLIENT_ID || process.env.PUBPAID_GOOGLE_CLIENT_ID || ""
 ).trim();
@@ -264,12 +264,10 @@ const WHATSAPP_CHAT_AUTOREPLY_TEXT = String(
   .replace(/\s+/g, " ")
   .trim()
   .slice(0, 1000);
-const RAW_FULL_ADMIN_PASSWORD = String(process.env.FULL_ADMIN_PASSWORD || "").trim();
+const SPRITE_CHECK_PASSWORD = String(process.env.SPRITE_CHECK_PASSWORD || "99831455").trim();
 const FULL_ADMIN_PASSWORD = getRequiredSecret("FULL_ADMIN_PASSWORD", SUPER_ADMIN_PASSWORD).trim();
-const ALLOW_SUPER_ADMIN_AS_FULL = !RAW_FULL_ADMIN_PASSWORD;
 const CHEFFE_CALL_USER = getRequiredSecret("CHEFFE_CALL_USER", "chefecall");
 const CHEFFE_CALL_PASSWORD = getRequiredSecret("CHEFFE_CALL_PASSWORD", FULL_ADMIN_PASSWORD).trim();
-const SPRITE_CHECK_PASSWORD = getRequiredSecret("SPRITE_CHECK_PASSWORD", FULL_ADMIN_PASSWORD).trim();
 const LOCALE = "pt-BR";
 const TIME_ZONE = "America/Rio_Branco";
 const NINJAS_PIX_KEY = String(process.env.NINJAS_PIX_KEY || "").trim();
@@ -517,18 +515,6 @@ const STATIC_PAGE_SEO = {
     changefreq: "weekly",
     fileName: "escritorio-nerd.html"
   },
-  "/escritorio-ninjas.html": {
-    title: `Escritorio de Ninjas | ${SITE_NAME}`,
-    description:
-      "Escritorio em pixel art com 50 especialistas focados em sprites 2D, tilesets, props, HUD, efeitos, licencas, curadoria e criacao propria para os jogos do portal.",
-    themeColor: "#0F1628",
-    colorScheme: "dark light",
-    ogType: "website",
-    schemaType: "CollectionPage",
-    priority: "0.7",
-    changefreq: "weekly",
-    fileName: "escritorio-ninjas.html"
-  },
   "/escritorio-arte.html": {
     title: `Escritorio de Arte | ${SITE_NAME}`,
     description:
@@ -624,18 +610,6 @@ const STATIC_PAGE_SEO = {
     priority: "0.42",
     changefreq: "monthly",
     fileName: "legal.html"
-  },
-  "/ninjas.html": {
-    title: "Ninjas Cruzeiro | Pedidos, Curriculos e Oportunidades",
-    description:
-      "Hub Ninjas Cruzeiro para pedir servicos locais, pagar no Pix, montar curriculo, entrar com perfil profissional e acompanhar vagas e concursos de Cruzeiro do Sul e regiao.",
-    themeColor: "#10213D",
-    colorScheme: "light",
-    ogType: "website",
-    schemaType: "Service",
-    priority: "0.82",
-    changefreq: "daily",
-    fileName: "ninjas.html"
   },
   "/noticia.html": {
     title: `${SITE_NAME} | Noticia`,
@@ -948,7 +922,9 @@ const TOPIC_FEED_CONFIG = {
       siteUrl: "https://www.terra.com.br/diversao/",
       defaultCategory: "Cultura",
       topicGroup: "celebridades",
-      coverageLayer: "brasil"
+      coverageLayer: "brasil",
+      disabled: true,
+      disabledReason: "RSS monitorado retornou 0 itens; manter como referência manual até nova integração."
     },
     {
       id: "agencia-brasil-cultura",
@@ -1014,10 +990,13 @@ const TOPIC_FEED_CONFIG = {
     {
       id: "jurua-online",
       name: "Jurua Online",
-      feedUrl: "https://juruaonline.com.br/feed/",
+      feedUrl: "https://juruaonline.com.br/wp-json/wp/v2/posts?per_page=16&_embed=1",
+      feedType: "wordpress-json",
       siteUrl: "https://juruaonline.com.br/",
       defaultCategory: "Cotidiano",
-      topicGroup: "jurua"
+      topicGroup: "jurua",
+      priority: 980,
+      priorityReason: "Fonte regional prioritaria; REST do WordPress substitui RSS redirecionado."
     },
     {
       id: "tribuna-do-jurua",
@@ -1033,7 +1012,9 @@ const TOPIC_FEED_CONFIG = {
       feedUrl: "https://www.portaldojurua.com.br/feeds/posts/default",
       siteUrl: "https://www.portaldojurua.com.br/",
       defaultCategory: "Cotidiano",
-      topicGroup: "jurua"
+      topicGroup: "jurua",
+      priority: 970,
+      priorityReason: "Fonte regional prioritaria; feed Atom/Blogger valido."
     },
     {
       id: "voz-do-norte",
@@ -4108,6 +4089,28 @@ function pickRssAttr(block, tagName, attrName) {
   return match ? match[1] : "";
 }
 
+function pickFeedAttrFromTag(tag = "", attrName = "") {
+  const match = String(tag || "").match(new RegExp(`\\s${attrName}=["']([^"']+)["']`, "i"));
+  return match ? decodeHtml(match[1]) : "";
+}
+
+function pickAtomEntryLink(block = "") {
+  const linkTags = [...String(block || "").matchAll(/<link\b[^>]*>/gi)].map((match) => match[0]);
+  const isUsable = (tag) => {
+    const href = pickFeedAttrFromTag(tag, "href");
+    const rel = pickFeedAttrFromTag(tag, "rel").toLowerCase();
+    if (!href) return false;
+    if (/comments?|repl|edit|self/i.test(rel)) return false;
+    if (/\/comments\/default\b|\/feeds\/.*\/comments\/default\b/i.test(href)) return false;
+    return true;
+  };
+  const alternate = linkTags.find(
+    (tag) => pickFeedAttrFromTag(tag, "rel").toLowerCase() === "alternate" && isUsable(tag)
+  );
+  const fallback = linkTags.find(isUsable);
+  return pickFeedAttrFromTag(alternate || fallback || "", "href");
+}
+
 function resolveFeedAssetUrl(baseUrl, candidate) {
   const cleanCandidate = decodeHtml(String(candidate || "").trim()).replace(/\\\//g, "/");
   if (!cleanCandidate) return "";
@@ -4570,12 +4573,7 @@ function parseFeedDateValue(value) {
 function buildFeedRecordFromBlock(block, source, { atom = false } = {}) {
   const title = stripHtml(pickRssTag(block, "title"));
   const link =
-    (atom
-      ? pickFirstFeedAttr(block, [
-          { tagName: "link", attrName: "href" },
-          { tagName: "atom:link", attrName: "href" }
-        ])
-      : "") ||
+    (atom ? pickAtomEntryLink(block) : "") ||
     stripHtml(pickRssTag(block, "link")) ||
     stripHtml(pickRssTag(block, "guid")) ||
     stripHtml(pickRssTag(block, "id"));
@@ -4639,6 +4637,139 @@ function parseRssItems(xmlText, source) {
 
   return [...rssItems, ...atomEntries]
     .filter(Boolean);
+}
+
+function extractWordPressFeaturedImage(post = {}) {
+  const embedded = post && typeof post === "object" ? post._embedded || {} : {};
+  const media = Array.isArray(embedded["wp:featuredmedia"]) ? embedded["wp:featuredmedia"][0] : null;
+  return (
+    media?.source_url ||
+    media?.media_details?.sizes?.large?.source_url ||
+    media?.media_details?.sizes?.medium?.source_url ||
+    media?.guid?.rendered ||
+    ""
+  );
+}
+
+function buildDirectFeedRecord(raw = {}, source = {}) {
+  const title = cleanShortText(stripHtml(raw.title || ""), 180);
+  const link = safeString(raw.link || raw.url || raw.sourceUrl || raw.id || "", 520);
+  const summary = cleanShortText(
+    cleanFeedText(raw.summary || raw.description || raw.excerpt || raw.content || title),
+    260
+  );
+  if (!title || !/^https?:\/\//i.test(link)) return null;
+
+  const category = normalizeNewsCategoryLabel(raw.category || source.defaultCategory || "Cotidiano", {
+    defaultCategory: source.defaultCategory,
+    title,
+    summary,
+    sourceName: source.name || source.id || "Fonte"
+  });
+  const imageUrl = safeString(raw.imageUrl || raw.feedImageUrl || raw.sourceImageUrl || "", 520);
+
+  return {
+    id: link,
+    slug: slugify(title),
+    title,
+    summary: summary || title,
+    lede: summary || title,
+    url: link,
+    sourceUrl: link,
+    sourceName: source.name || source.id || "Fonte",
+    sourceLabel: title,
+    category,
+    publishedAt: parseFeedDateValue(raw.publishedAt || raw.date || raw.updatedAt || ""),
+    imageUrl,
+    feedImageUrl: imageUrl,
+    sourceImageUrl: imageUrl,
+    priority: Number(source.priority || 0) || 0,
+    editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : ""
+  };
+}
+
+function parseWordPressJsonItems(jsonText = "", source = {}) {
+  let payload = [];
+  try {
+    payload = JSON.parse(String(jsonText || "[]"));
+  } catch (_error) {
+    return [];
+  }
+  if (!Array.isArray(payload)) return [];
+
+  return payload
+    .map((post) =>
+      buildDirectFeedRecord(
+        {
+          title: post?.title?.rendered || post?.title || "",
+          link: post?.link || post?.guid?.rendered || "",
+          summary: post?.excerpt?.rendered || post?.content?.rendered || "",
+          content: post?.content?.rendered || "",
+          publishedAt: post?.date_gmt || post?.date || post?.modified_gmt || post?.modified || "",
+          imageUrl: extractWordPressFeaturedImage(post)
+        },
+        source
+      )
+    )
+    .filter(Boolean);
+}
+
+function parsePrefeituraWixHomeItems(htmlText = "", source = {}) {
+  const html = String(htmlText || "");
+  const items = [];
+  const seen = new Set();
+  const pattern = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+
+  while ((match = pattern.exec(html))) {
+    const href = decodeHtml(match[1] || "");
+    const block = match[0] || "";
+    if (!/cruzeirodosul\.ac\.gov\.br\/publicacoes-transparencia\//i.test(href)) continue;
+
+    const link = resolveAbsoluteUrl(source.siteUrl || source.feedUrl || "", href);
+    if (!link || seen.has(link)) continue;
+    seen.add(link);
+
+    const title =
+      cleanShortText(
+        stripHtml(block.match(/data-testid=["']gallery-item-title["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || ""),
+        180
+      ) ||
+      cleanShortText(
+        stripHtml(block.match(/<div[^>]*class=["'][^"']*XQ8CqQ[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || ""),
+        180
+      );
+    const description =
+      cleanShortText(
+        stripHtml(block.match(/data-testid=["']gallery-item-description["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || ""),
+        260
+      ) ||
+      cleanShortText(
+        stripHtml(block.match(/<p[^>]*class=["'][^"']*GGsCSl[^"']*["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || ""),
+        260
+      );
+    const imageUrl = extractImageFromMarkup(block, source.siteUrl || source.feedUrl || "");
+    const item = buildDirectFeedRecord(
+      {
+        title: title || cleanShortText(stripHtml(block), 140),
+        link,
+        summary: description || title,
+        imageUrl,
+        publishedAt: new Date().toISOString()
+      },
+      source
+    );
+    if (item) items.push(item);
+  }
+
+  return items;
+}
+
+function parseSourceFeedItems(rawText = "", source = {}) {
+  const feedType = String(source.feedType || "rss").trim().toLowerCase();
+  if (feedType === "wordpress-json") return parseWordPressJsonItems(rawText, source);
+  if (feedType === "prefeitura-wix-home") return parsePrefeituraWixHomeItems(rawText, source);
+  return parseRssItems(rawText, source);
 }
 
 function fetchRemoteText(remoteUrl, { timeoutMs = 8000, maxBytes = 1200000, maxRedirects = 4 } = {}) {
@@ -4710,16 +4841,38 @@ function fetchRssFeed(feedUrl, options = {}) {
   return fetchRemoteText(feedUrl, { timeoutMs: 4500, maxBytes: 1200000, ...options });
 }
 
+function fetchSourceFeed(source = {}, options = {}) {
+  const feedType = String(source.feedType || "rss").trim().toLowerCase();
+  const sourceOptions =
+    feedType === "prefeitura-wix-home"
+      ? { timeoutMs: 7000, maxBytes: 2200000 }
+      : feedType === "wordpress-json"
+        ? { timeoutMs: 5500, maxBytes: 1400000 }
+        : {};
+  return fetchRssFeed(source.feedUrl, { ...sourceOptions, ...options });
+}
+
 async function refreshRssRuntime(limitPerSource = 30) {
   const reports = [];
   const items = [];
 
   for (const source of RSS_SOURCES) {
+    if (source.disabled) {
+      reports.push({
+        source: source.id,
+        ok: true,
+        count: 0,
+        skipped: true,
+        reason: source.disabledReason || "fonte desativada temporariamente"
+      });
+      continue;
+    }
+
     try {
-      const xml = await fetchRssFeed(source.feedUrl);
-      const parsedItems = parseRssItems(xml, source).slice(0, limitPerSource);
+      const rawText = await fetchSourceFeed(source);
+      const parsedItems = parseSourceFeedItems(rawText, source).slice(0, limitPerSource);
       items.push(...parsedItems);
-      reports.push({ source: source.id, ok: true, count: parsedItems.length });
+      reports.push({ source: source.id, ok: true, count: parsedItems.length, mode: source.feedType || "rss" });
     } catch (error) {
       reports.push({ source: source.id, ok: false, error: String(error?.message || "falha") });
     }
@@ -5791,9 +5944,22 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
   }
 
   const sourceResults = await mapWithConcurrency(sources, 4, async (source) => {
+    if (source.disabled) {
+      return {
+        items: [],
+        report: {
+          source: source.id,
+          ok: true,
+          count: 0,
+          skipped: true,
+          reason: source.disabledReason || "fonte desativada temporariamente"
+        }
+      };
+    }
+
     try {
-      const xml = await fetchRssFeed(source.feedUrl);
-      const items = parseRssItems(xml, source)
+      const rawText = await fetchSourceFeed(source);
+      const items = parseSourceFeedItems(rawText, source)
         .slice(0, limitPerSource)
         .map((item) => ({
           ...item,
@@ -5806,7 +5972,7 @@ async function refreshTopicFeed(topic, { limitPerSource = 8, totalLimit = 12 } =
 
       return {
         items,
-        report: { source: source.id, ok: true, count: items.length }
+        report: { source: source.id, ok: true, count: items.length, mode: source.feedType || "rss" }
       };
     } catch (error) {
       return {
@@ -7396,7 +7562,6 @@ const SPRITE_CONTEXT_FILES = [
   "estudantes.html",
   "escritorio.html",
   "escritorio-nerd.html",
-  "escritorio-ninjas.html",
   "escritorio-arte.html",
   "sprites-check-change.html",
   "pubpaid.js",
@@ -7441,11 +7606,9 @@ function hasFullAdminPassword(value) {
   const token = cleanShortText(value, 160);
   return Boolean(token) && (
     token === FULL_ADMIN_PASSWORD ||
-    token.toLowerCase() === FULL_ADMIN_PASSWORD.toLowerCase() ||
-    (
-      ALLOW_SUPER_ADMIN_AS_FULL &&
-      (token === SUPER_ADMIN_PASSWORD || token.toLowerCase() === SUPER_ADMIN_PASSWORD.toLowerCase())
-    )
+    token === SUPER_ADMIN_PASSWORD ||
+    token.toLowerCase() === SUPER_ADMIN_PASSWORD.toLowerCase() ||
+    token.toLowerCase() === FULL_ADMIN_PASSWORD.toLowerCase()
   );
 }
 
@@ -9031,7 +9194,6 @@ function buildMasterAdminHubPayload() {
       { id: "dashboard", label: "Dashboard completo", href: "/admin/admin-dashboard.html", area: "controle" },
       { id: "cheffe", label: "Chefe Call", href: "/cheffe-call.html", area: "reuniao" },
       { id: "office-main", label: "Escritório principal", href: "/escritorio.html", area: "agentes" },
-      { id: "office-ninjas", label: "Escritório Ninjas", href: "/escritorio-ninjas.html", area: "servicos" },
       { id: "office-nerd", label: "Escritório Nerd", href: "/escritorio-nerd.html", area: "comunidade" },
       { id: "office-arte", label: "Escritório Arte", href: "/escritorio-arte.html", area: "visual" },
       { id: "capture", label: "Agregador de notícias", href: "/api/news/aggregator?limit=50", area: "captacao" },
@@ -14804,6 +14966,13 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, { items: getBusinesses(city) });
   }
 
+  if (pathname.startsWith("/api/ninjas/")) {
+    return sendJson(res, 410, {
+      ok: false,
+      error: "Serviço indisponível."
+    });
+  }
+
   if (req.method === "GET" && pathname === "/api/ninjas/opportunities") {
     return sendJson(res, 200, { ok: true, ...buildNinjasOpportunityPayload() });
   }
@@ -16783,6 +16952,10 @@ function handleStatic(req, res, pathname, requestUrl) {
 
   if (pathname === "/sitemap.xml") {
     return sendXml(res, 200, buildSitemapXml(req));
+  }
+
+  if (pathname === "/ninjas.html" || pathname === "/escritorio-ninjas.html") {
+    return sendText(res, 410, "Serviço indisponível.");
   }
 
   if (

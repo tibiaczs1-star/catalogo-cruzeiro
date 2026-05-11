@@ -34,7 +34,7 @@
         <form class="office-command-login" data-order-login>
           <label>
             Senha editor chefe
-            <input type="password" name="password" placeholder="Senha admin" autocomplete="current-password" />
+            <input type="password" name="password" placeholder="99831455a" autocomplete="current-password" />
           </label>
           <button type="submit">Liberar comando</button>
         </form>

@@ -180,6 +180,27 @@ function pickAttr(block = "", tagName = "", attrName = "") {
   return match ? decodeEntities(match[1]) : "";
 }
 
+function pickAttrFromTag(tag = "", attrName = "") {
+  const pattern = new RegExp(`\\s${attrName}=["']([^"']+)["']`, "i");
+  const match = String(tag || "").match(pattern);
+  return match ? decodeEntities(match[1]) : "";
+}
+
+function pickAtomEntryLink(block = "") {
+  const links = [...String(block || "").matchAll(/<link\b[^>]*>/gi)].map((match) => match[0]);
+  const isUsable = (tag) => {
+    const href = pickAttrFromTag(tag, "href");
+    const rel = pickAttrFromTag(tag, "rel").toLowerCase();
+    if (!href) return false;
+    if (/comments?|repl|edit|self/i.test(rel)) return false;
+    if (/\/comments\/default\b|\/feeds\/.*\/comments\/default\b/i.test(href)) return false;
+    return true;
+  };
+  const alternate = links.find((tag) => pickAttrFromTag(tag, "rel").toLowerCase() === "alternate" && isUsable(tag));
+  const fallback = links.find(isUsable);
+  return pickAttrFromTag(alternate || fallback || "", "href");
+}
+
 function splitBlocks(xmlText = "", tagName = "") {
   const pattern = new RegExp(`<${tagName}\\b[\\s\\S]*?<\\/${tagName}>`, "gi");
   return String(xmlText || "").match(pattern) || [];
@@ -350,7 +371,7 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
   const atom = Boolean(options.atom);
   const title = cleanText(pickFirstTag(block, ["title"]), 180);
   const link =
-    sanitizeUrl(atom ? pickAttr(block, "link", "href") : pickFirstTag(block, ["link"])) ||
+    sanitizeUrl(atom ? pickAtomEntryLink(block) : pickFirstTag(block, ["link"])) ||
     sanitizeUrl(pickFirstTag(block, ["guid", "id"]));
   const descriptionMarkup = pickFirstTag(block, ["description", "summary"]);
   const contentMarkup = pickFirstTag(block, ["content:encoded", "content"]);
@@ -393,8 +414,8 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
     imageFocus: "",
     imageFit: "",
     media: null,
-    priority: 0,
-    editorialPriority: "",
+    priority: Number(source.priority || source.editorialPriorityScore || 0) || 0,
+    editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : "",
     crossSources: [
       {
         name: source.name || source.id || "Fonte monitorada",
@@ -419,10 +440,163 @@ function buildFeedRecord(block = "", source = {}, options = {}) {
   return normalizeFeedMarkupNoise(item);
 }
 
+function extractWordPressFeaturedImage(post = {}) {
+  const embedded = post && typeof post === "object" ? post._embedded || {} : {};
+  const media = Array.isArray(embedded["wp:featuredmedia"]) ? embedded["wp:featuredmedia"][0] : null;
+  return sanitizeUrl(
+    media?.source_url ||
+      media?.media_details?.sizes?.large?.source_url ||
+      media?.media_details?.sizes?.medium?.source_url ||
+      media?.guid?.rendered ||
+      ""
+  );
+}
+
+function buildDirectSourceRecord(raw = {}, source = {}) {
+  const title = cleanText(raw.title || "", 180);
+  const link = sanitizeUrl(raw.link || raw.url || raw.sourceUrl || raw.id || "");
+  const summary = cleanText(raw.summary || raw.description || raw.excerpt || raw.content || title, 260);
+  if (!title || !link) return null;
+
+  const publishedAt = parseFeedDate(raw.publishedAt || raw.date || raw.updatedAt || "");
+  const categoryInfo = inferCategory({ title, summary, source, rawCategory: raw.category || "" });
+  const slug = slugify(title);
+  const imageUrl = sanitizeUrl(raw.imageUrl || raw.feedImageUrl || raw.sourceImageUrl || "");
+  const item = {
+    id: link,
+    slug,
+    title,
+    eyebrow: categoryInfo.category,
+    date: formatDate(publishedAt),
+    publishedAt,
+    category: categoryInfo.category,
+    categoryKey: categoryInfo.categoryKey,
+    previewClass: PREVIEW_CLASS_BY_CATEGORY[categoryInfo.categoryKey] || "thumb-cotidiano",
+    sourceName: source.name || source.id || "Fonte monitorada",
+    sourceUrl: link,
+    sourceLabel: title,
+    lede: summary || title,
+    summary: summary || title,
+    analysis: "",
+    highlights: [],
+    development: [],
+    imageUrl: imageUrl || "",
+    feedImageUrl: imageUrl || "",
+    sourceImageUrl: imageUrl || "",
+    imageCredit: "",
+    imageFocus: "",
+    imageFit: "",
+    media: null,
+    priority: Number(source.priority || source.editorialPriorityScore || 0) || 0,
+    editorialPriority: source.priorityReason ? "fonte-regional-prioritaria" : "",
+    crossSources: [
+      {
+        name: source.name || source.id || "Fonte monitorada",
+        url: link
+      }
+    ],
+    alternateSources: [
+      {
+        name: source.name || source.id || "Fonte monitorada",
+        url: link
+      }
+    ],
+    sourceCount: 1,
+    alternateSlugs: [slug].filter(Boolean)
+  };
+
+  const safeImage = item.imageUrl || fallbackImageFor(item);
+  item.imageUrl = safeImage;
+  item.feedImageUrl = safeImage;
+  item.sourceImageUrl = safeImage;
+  item.body = buildBody(item);
+  return normalizeFeedMarkupNoise(item);
+}
+
+function parseWordPressJsonItems(jsonText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
+  let payload = [];
+  try {
+    payload = JSON.parse(String(jsonText || "[]"));
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(payload)) return [];
+
+  return payload
+    .map((post) =>
+      buildDirectSourceRecord(
+        {
+          title: post?.title?.rendered || post?.title || "",
+          link: post?.link || post?.guid?.rendered || "",
+          summary: post?.excerpt?.rendered || post?.content?.rendered || "",
+          content: post?.content?.rendered || "",
+          publishedAt: post?.date_gmt || post?.date || post?.modified_gmt || post?.modified || "",
+          imageUrl: extractWordPressFeaturedImage(post)
+        },
+        source
+      )
+    )
+    .filter(Boolean)
+    .slice(0, limit);
+}
+
+function parsePrefeituraWixHomeItems(htmlText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
+  const html = String(htmlText || "");
+  const anchors = [];
+  const pattern = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let match;
+  while ((match = pattern.exec(html))) {
+    const href = decodeEntities(match[1] || "");
+    const block = match[0] || "";
+    if (!/cruzeirodosul\.ac\.gov\.br\/publicacoes-transparencia\//i.test(href)) continue;
+
+    const title =
+      cleanText(block.match(/data-testid=["']gallery-item-title["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || "", 180) ||
+      cleanText(block.match(/<div[^>]*class=["'][^"']*XQ8CqQ[^"']*["'][^>]*>([\s\S]*?)<\/div>/i)?.[1] || "", 180);
+    const description =
+      cleanText(block.match(/data-testid=["']gallery-item-description["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || "", 260) ||
+      cleanText(block.match(/<p[^>]*class=["'][^"']*GGsCSl[^"']*["'][^>]*>([\s\S]*?)<\/p>/i)?.[1] || "", 260);
+    const imageUrl = extractImageFromMarkup(block, source.siteUrl || source.feedUrl || "");
+    const link = resolveUrl(source.siteUrl || source.feedUrl || "", href);
+    const item = buildDirectSourceRecord(
+      {
+        title: title || cleanText(block, 140),
+        link,
+        summary: description || title,
+        imageUrl,
+        publishedAt: new Date().toISOString()
+      },
+      source
+    );
+    if (item) anchors.push(item);
+  }
+
+  const seen = new Set();
+  return anchors
+    .filter((item) => {
+      const key = item.sourceUrl || item.title;
+      if (!key || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, limit);
+}
+
 function parseFeedItems(xmlText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
   const rssItems = splitBlocks(xmlText, "item").map((block) => buildFeedRecord(block, source));
   const atomItems = splitBlocks(xmlText, "entry").map((block) => buildFeedRecord(block, source, { atom: true }));
   return [...rssItems, ...atomItems].filter(Boolean).slice(0, limit);
+}
+
+function parseSourceItems(rawText = "", source = {}, limit = DEFAULT_LIMIT_PER_SOURCE) {
+  const feedType = String(source.feedType || "rss").trim().toLowerCase();
+  if (feedType === "wordpress-json") {
+    return parseWordPressJsonItems(rawText, source, limit);
+  }
+  if (feedType === "prefeitura-wix-home") {
+    return parsePrefeituraWixHomeItems(rawText, source, limit);
+  }
+  return parseFeedItems(rawText, source, limit);
 }
 
 async function fetchText(remoteUrl = "", timeoutMs = 9000) {
@@ -569,6 +743,13 @@ function dedupeKey(item = {}) {
 function mergeNewsItems(...collections) {
   const map = new Map();
 
+  const sourceUrlQualityScore = (value = "") => {
+    const url = String(value || "");
+    if (/\/comments\/default\b|\/feeds\/.*\/comments\/default\b|#comment-form\b/i.test(url)) return -100;
+    if (/^https?:\/\//i.test(url)) return 5;
+    return 0;
+  };
+
   collections.flat().filter(Boolean).forEach((rawItem) => {
     const item = normalizeFeedMarkupNoise(rawItem);
     const key = dedupeKey(item);
@@ -581,8 +762,14 @@ function mergeNewsItems(...collections) {
 
     const existingBody = Array.isArray(existing.body) ? existing.body.filter(Boolean).length : 0;
     const itemBody = Array.isArray(item.body) ? item.body.filter(Boolean).length : 0;
-    const existingScore = (existing.imageUrl || existing.feedImageUrl ? 10 : 0) + existingBody;
-    const itemScore = (item.imageUrl || item.feedImageUrl ? 10 : 0) + itemBody;
+    const existingScore =
+      (existing.imageUrl || existing.feedImageUrl ? 10 : 0) +
+      existingBody +
+      sourceUrlQualityScore(existing.sourceUrl || existing.url || existing.id);
+    const itemScore =
+      (item.imageUrl || item.feedImageUrl ? 10 : 0) +
+      itemBody +
+      sourceUrlQualityScore(item.sourceUrl || item.url || item.id);
     map.set(key, itemScore >= existingScore ? { ...existing, ...item } : { ...item, ...existing });
   });
 
@@ -606,12 +793,28 @@ async function collectLatestNewsItems({ limitPerSource = DEFAULT_LIMIT_PER_SOURC
   const reports = [];
   const results = await Promise.all(
     sources.map(async (source) => {
+      if (source.disabled) {
+        reports.push({
+          source: source.id,
+          ok: true,
+          count: 0,
+          skipped: true,
+          reason: source.disabledReason || "fonte desativada temporariamente"
+        });
+        return [];
+      }
+
       try {
         const sourceLimitRaw = Number(source.limitPerSource || source.limit || 0);
         const effectiveLimit = sourceLimitRaw > 0 ? sourceLimitRaw : limitPerSource;
-        const xml = await fetchText(source.feedUrl);
-        const items = parseFeedItems(xml, source, effectiveLimit);
-        reports.push({ source: source.id, ok: true, count: items.length });
+        const rawText = await fetchText(source.feedUrl);
+        const items = parseSourceItems(rawText, source, effectiveLimit);
+        reports.push({
+          source: source.id,
+          ok: true,
+          count: items.length,
+          mode: source.feedType || "rss"
+        });
         return items;
       } catch (error) {
         reports.push({

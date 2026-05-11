@@ -102,6 +102,39 @@ body::before {
   transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 
+.logo-splash.is-completing {
+  --splash-progress: 100%;
+}
+
+.logo-splash.is-leaving {
+  opacity: 0;
+  visibility: visible;
+  transform: scale(1.018);
+  filter: blur(8px);
+  transition:
+    opacity 0.62s ease,
+    transform 0.62s ease,
+    filter 0.62s ease,
+    visibility 0.62s ease;
+}
+
+.logo-splash.is-leaving .logo-splash-card {
+  opacity: 0;
+  transform: translateY(-14px) scale(0.985);
+  transition:
+    opacity 0.48s ease,
+    transform 0.48s ease;
+}
+
+.logo-splash.is-leaving .logo-splash-river,
+.logo-splash.is-leaving .logo-splash-fragments {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.54s ease,
+    transform 0.54s ease;
+}
+
 .logo-splash.is-repeat-visit {
   --splash-scene-duration: 900ms;
   --splash-door-duration: 520ms;
@@ -24527,6 +24560,44 @@ body.editorial-home .logo-splash-progress span {
   border-radius: inherit !important;
   background: linear-gradient(90deg, #f6a825, #ffd66a) !important;
   box-shadow: 0 0 20px rgba(246, 168, 37, 0.62) !important;
+}
+
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-card {
+  width: min(310px, calc(100vw - 44px)) !important;
+  gap: 0.68rem !important;
+  margin: 0 !important;
+  padding: 1.25rem !important;
+  border: 1px solid rgba(246, 168, 37, 0.2) !important;
+  border-radius: 18px !important;
+  background: rgba(2, 13, 24, 0.42) !important;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.32) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-compass {
+  width: 78px !important;
+  height: 78px !important;
+}
+
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-kicker,
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-brand,
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-meta,
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-progress,
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-fragments,
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-river {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
+  max-width: 20ch !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  line-height: 1.25 !important;
+  text-transform: uppercase !important;
 }
 
 @keyframes splashFragmentDrift {

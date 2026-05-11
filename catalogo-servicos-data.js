@@ -400,27 +400,6 @@ window.CATALOGO_SERVICOS_DATA = {
       ]
     },
     {
-      id: "ninjas-cruzeiro",
-      title: "Ninjas Cruzeiro",
-      subtitle: "Corre local, apoio rápido, entrega e socorro urbano",
-      photoUrl:
-        "https://images.unsplash.com/photo-1529078155058-5d716f45d604?auto=format&fit=crop&w=1200&q=80",
-      items: [
-        {
-          name: "Abrir plataforma Ninjas Cruzeiro",
-          description: "Pedido de serviço, Pix, criador de currículo, destaque profissional e vagas locais em um hub próprio.",
-          website: "./ninjas.html",
-          status: "online"
-        },
-        {
-          name: "Apoio expresso",
-          description: "Fluxo ativo com pedido pago por Pix de R$ 5, QR code e referência para conferência manual.",
-          website: "./ninjas.html",
-          status: "online"
-        }
-      ]
-    },
-    {
       id: "pets",
       title: "Pets e Veterinário",
       subtitle: "Atendimento pet e banho",
