@@ -11617,6 +11617,274 @@ function buildCheffeMeetingScenes({ state, displayOpinions, reviewQueue, ideActi
   ];
 }
 
+function summarizeCheffeEcosystemStudyForPayload(study = null) {
+  if (!study || typeof study !== "object") return null;
+  return {
+    generatedAt: study.generatedAt || study.updatedAt || "",
+    trigger: cleanShortText(study.trigger || "", 80),
+    instruction: cleanShortText(study.instruction || "", 220),
+    focusModules: Array.isArray(study.focusModules)
+      ? study.focusModules.slice(0, 6).map((item) => ({
+          area: cleanShortText(item.area || item.module || "", 100),
+          reason: cleanShortText(item.reason || item.summary || "", 180),
+          files: Array.isArray(item.files) ? item.files.slice(0, 5).map((file) => cleanShortText(file, 160)) : []
+        }))
+      : [],
+    stats: study.stats && typeof study.stats === "object"
+      ? {
+          files: Number(study.stats.files || 0),
+          routes: Number(study.stats.routes || 0),
+          agents: Number(study.stats.agents || 0),
+          newsItems: Number(study.stats.newsItems || 0)
+        }
+      : null
+  };
+}
+
+function summarizeCheffeDirectResearchForPayload(research = null) {
+  if (!research || typeof research !== "object") return null;
+  return {
+    ok: Boolean(research.ok),
+    url: cleanShortText(research.url || "", 260),
+    status: Number(research.status || 0),
+    title: cleanShortText(research.title || "", 180),
+    h1: cleanShortText(research.h1 || "", 180),
+    description: cleanShortText(research.description || "", 260),
+    error: cleanShortText(research.error || "", 180)
+  };
+}
+
+function summarizeCheffeProofForPayload(proof = null) {
+  if (!proof || typeof proof !== "object") return null;
+  return {
+    sessionId: cleanShortText(proof.sessionId || "", 80),
+    officeOrderId: cleanShortText(proof.officeOrderId || proof.orderId || "", 100),
+    ecosystemStudyFile: cleanShortText(proof.ecosystemStudyFile || "", 180),
+    ecosystemLearningCycle: Number(proof.ecosystemLearningCycle || 0),
+    reportJson: cleanShortText(proof.reportJson || "", 180),
+    reportMd: cleanShortText(proof.reportMd || "", 180),
+    endpoint: cleanShortText(proof.endpoint || "", 120),
+    httpStatus: cleanShortText(proof.httpStatus || proof.status || "", 40)
+  };
+}
+
+function summarizeCheffeSessionForPayload(session = null, { opinions = [], includeDetails = false } = {}) {
+  if (!session || typeof session !== "object") return null;
+  const safeOpinions = Array.isArray(opinions) && opinions.length
+    ? opinions
+    : (Array.isArray(session.opinions) ? session.opinions : []);
+  return {
+    id: cleanShortText(session.id || "", 80),
+    status: cleanShortText(session.status || "", 80),
+    createdAt: session.createdAt || "",
+    updatedAt: session.updatedAt || "",
+    expiredAt: session.expiredAt || "",
+    instruction: cleanShortText(session.instruction || "", includeDetails ? 600 : 220),
+    agentInstruction: cleanShortText(session.agentInstruction || "", 260),
+    proof: summarizeCheffeProofForPayload(session.proof),
+    directUrlResearch: summarizeCheffeDirectResearchForPayload(session.directUrlResearch),
+    ecosystemStudy: summarizeCheffeEcosystemStudyForPayload(session.ecosystemStudy),
+    dailyContext: session.dailyContext || null,
+    approvals: Array.isArray(session.approvals) ? session.approvals.slice(0, includeDetails ? 16 : 4) : [],
+    logs: Array.isArray(session.logs) ? session.logs.slice(0, includeDetails ? 24 : 4) : [],
+    decisions: Array.isArray(session.decisions) ? session.decisions.slice(0, includeDetails ? 16 : 4) : [],
+    lastActionProof: summarizeCheffeProofForPayload(session.lastActionProof),
+    opinions: includeDetails
+      ? safeOpinions.slice(0, 8).map((item) => ({
+          agent: cleanShortText(item.agent || item.name || "", 100),
+          role: cleanShortText(item.role || "", 80),
+          office: cleanShortText(item.office || item.officeLabel || "", 80),
+          opinion: cleanShortText(item.opinion || item.text || "", 700),
+          recommendation: cleanShortText(item.recommendation || "", 220),
+          action: cleanShortText(item.action || "", 220),
+          confidence: cleanShortText(item.confidence || "", 40)
+        }))
+      : [],
+    actionStats: summarizeCheffeCallSession(session)
+  };
+}
+
+function summarizeCheffeEditorialActionForPayload(action = {}) {
+  return {
+    id: cleanShortText(action.id || "", 120),
+    priority: cleanShortText(action.priority || action.gate || "", 40),
+    gate: cleanShortText(action.gate || "", 40),
+    resolutionType: cleanShortText(action.resolutionType || action.type || "", 80),
+    title: cleanShortText(action.title || "", 180),
+    slug: cleanShortText(action.slug || "", 180),
+    reason: cleanShortText(action.reason || action.detail || "", 360),
+    suggestedIdeCommand: cleanShortText(action.suggestedIdeCommand || "", 260),
+    missingRequirements: Array.isArray(action.missingRequirements)
+      ? action.missingRequirements.slice(0, 5).map((item) => cleanShortText(item, 220))
+      : [],
+    expectedProof: Array.isArray(action.expectedProof)
+      ? action.expectedProof.slice(0, 5).map((item) => cleanShortText(item, 220))
+      : [],
+    idePrompt: cleanShortText(action.idePrompt || "", 1200)
+  };
+}
+
+function summarizeCheffeEditorialHealthForPayload(health = null) {
+  if (!health || typeof health !== "object") return health || null;
+  return {
+    kind: cleanShortText(health.kind || "", 80),
+    status: cleanShortText(health.status || "not-run", 40),
+    generatedAt: health.generatedAt || "",
+    source: cleanShortText(health.source || "", 120),
+    file: cleanShortText(health.file || "", 180),
+    markdownFile: cleanShortText(health.markdownFile || "", 180),
+    scope: health.scope || null,
+    summary: health.summary || {},
+    gates: health.gates || {},
+    humanApprovalQueue: Array.isArray(health.humanApprovalQueue)
+      ? health.humanApprovalQueue.slice(0, 8).map(summarizeCheffeEditorialActionForPayload)
+      : [],
+    actionQueue: Array.isArray(health.actionQueue)
+      ? health.actionQueue.slice(0, 12).map(summarizeCheffeEditorialActionForPayload)
+      : [],
+    titleAlternatives: Array.isArray(health.titleAlternatives)
+      ? health.titleAlternatives.slice(0, 6).map((item) => ({
+          slug: cleanShortText(item.slug || "", 180),
+          title: cleanShortText(item.title || "", 180),
+          alternative: cleanShortText(item.alternative || item.suggestion || "", 180)
+        }))
+      : [],
+    specialFormats: Array.isArray(health.specialFormats)
+      ? health.specialFormats.slice(0, 6).map((item) => ({
+          slug: cleanShortText(item.slug || "", 180),
+          title: cleanShortText(item.title || "", 180),
+          format: cleanShortText(item.format || item.type || "", 120)
+        }))
+      : []
+  };
+}
+
+function summarizeCheffeQueueItemForPayload(item = {}) {
+  const assignment = item.assignment && typeof item.assignment === "object" ? item.assignment : {};
+  const autonomy = item.autonomy && typeof item.autonomy === "object" ? item.autonomy : {};
+  const life = autonomy.life && typeof autonomy.life === "object" ? autonomy.life : {};
+  const performance = item.performance && typeof item.performance === "object" ? item.performance : {};
+  return {
+    id: cleanShortText(item.id || "", 120),
+    slug: cleanShortText(item.slug || "", 160),
+    name: cleanShortText(item.name || item.agent || "", 160),
+    agent: cleanShortText(item.agent || item.name || "", 160),
+    office: cleanShortText(item.office || item.officeLabel || "", 160),
+    officeLabel: cleanShortText(item.officeLabel || item.office || "", 160),
+    officeKey: cleanShortText(item.officeKey || "", 120),
+    role: cleanShortText(item.role || item.title || "agent", 80),
+    assignment: {
+      headline: cleanShortText(assignment.headline || "", 220),
+      action: cleanShortText(assignment.action || "", 260),
+      idea: cleanShortText(assignment.idea || "", 260),
+      monitor: cleanShortText(assignment.monitor || "", 220),
+      deliverable: cleanShortText(assignment.deliverable || item.deliverable || "", 160)
+    },
+    action: cleanShortText(item.action || assignment.action || "", 260),
+    intent: cleanShortText(item.intent || autonomy.intent || assignment.idea || "", 260),
+    score: Number(item.score || autonomy.autonomy || performance.netPoints || item.points || 0),
+    urgency: Number(item.urgency || autonomy.urgency || 0),
+    confidence: Number(item.confidence || autonomy.confidence || 0),
+    points: Number(item.points || performance.netPoints || 0),
+    autonomy: {
+      mode: cleanShortText(autonomy.mode || "", 80),
+      intent: cleanShortText(autonomy.intent || item.intent || "", 260),
+      urgency: Number(autonomy.urgency || item.urgency || 0),
+      confidence: Number(autonomy.confidence || item.confidence || 0),
+      autonomy: Number(autonomy.autonomy || item.score || 0),
+      cycles: Number(autonomy.cycles || 0),
+      nextCheckAt: cleanShortText(autonomy.nextCheckAt || "", 80),
+      life: {
+        status: cleanShortText(life.status || "", 80),
+        outcome: cleanShortText(life.outcome || "", 80),
+        energy: Number(life.energy || 0),
+        morale: Number(life.morale || 0),
+        fatigue: Number(life.fatigue || 0),
+        pressure: Number(life.pressure || 0),
+        queueDepth: Number(life.queueDepth || 0),
+        assignedOrders: Number(life.assignedOrders || 0),
+        completedTasks: Number(life.completedTasks || 0),
+        failedTasks: Number(life.failedTasks || 0),
+        streak: Number(life.streak || 0),
+        level: Number(life.level || 0),
+        rank: cleanShortText(life.rank || "", 80),
+        lastEvent: cleanShortText(life.lastEvent || "", 220),
+        lastOrderId: cleanShortText(life.lastOrderId || "", 120),
+        alive: life.alive !== false
+      }
+    },
+    photo: item.photo || null,
+    awards: Array.isArray(item.awards)
+      ? item.awards.slice(0, 2).map((award) => ({
+          id: cleanShortText(award.id || "", 100),
+          title: cleanShortText(award.title || award.shortTitle || "", 140),
+          shortTitle: cleanShortText(award.shortTitle || award.title || "", 80),
+          icon: cleanShortText(award.icon || "", 20),
+          rank: Number(award.rank || 0)
+        }))
+      : []
+  };
+}
+
+function summarizeCheffeOrderForPayload(order = {}) {
+  const assignments = Array.isArray(order.assignments) ? order.assignments : [];
+  return {
+    id: cleanShortText(order.id || "", 160),
+    from: cleanShortText(order.from || "", 180),
+    to: cleanShortText(order.to || "", 240),
+    priority: cleanShortText(order.priority || "", 80),
+    message: cleanShortText(order.message || "", 520),
+    ceoReply: cleanShortText(order.ceoReply || "", 260),
+    status: cleanShortText(order.status || "", 80),
+    hierarchy: cleanShortText(order.hierarchy || "", 180),
+    promptFile: cleanShortText(order.promptFile || "", 180),
+    createdAt: cleanShortText(order.createdAt || "", 80),
+    updatedAt: cleanShortText(order.updatedAt || "", 80),
+    lastRuntimeAt: cleanShortText(order.lastRuntimeAt || "", 80),
+    assignedAgents: Number(order.assignedAgents || assignments.length || 0),
+    assignmentsTotal: assignments.length,
+    executionSummary: order.executionSummary && typeof order.executionSummary === "object"
+      ? {
+          delivered: Number(order.executionSummary.delivered || 0),
+          failed: Number(order.executionSummary.failed || 0),
+          running: Number(order.executionSummary.running || 0)
+        }
+      : null,
+    assignments: assignments.slice(0, 6).map((assignment) => ({
+      agentId: cleanShortText(assignment.agentId || "", 120),
+      slug: cleanShortText(assignment.slug || "", 160),
+      name: cleanShortText(assignment.name || "", 160),
+      office: cleanShortText(assignment.office || "", 160),
+      role: cleanShortText(assignment.role || "", 80),
+      status: cleanShortText(assignment.status || "", 80),
+      outcome: cleanShortText(assignment.outcome || "", 80),
+      points: Number(assignment.points || 0),
+      lastEvent: cleanShortText(assignment.lastEvent || "", 180),
+      updatedAt: cleanShortText(assignment.updatedAt || "", 80)
+    }))
+  };
+}
+
+function summarizeCheffeTimelineForPayload(timeline = {}) {
+  return {
+    slug: cleanShortText(timeline.slug || "", 160),
+    name: cleanShortText(timeline.name || "", 160),
+    office: cleanShortText(timeline.office || timeline.officeLabel || "", 160),
+    role: cleanShortText(timeline.role || "", 80),
+    level: Number(timeline.level || 0),
+    rank: cleanShortText(timeline.rank || "", 80),
+    events: Array.isArray(timeline.events)
+      ? timeline.events.slice(0, 2).map((event) => ({
+          at: cleanShortText(event.at || "", 80),
+          type: cleanShortText(event.type || "", 80),
+          title: cleanShortText(event.title || event.message || "", 220),
+          points: Number(event.points || 0),
+          status: cleanShortText(event.status || "", 160)
+        }))
+      : []
+  };
+}
+
 function buildCheffeCallPayload() {
   const agentsPayload = buildRealAgentsPayload();
   const state = readCheffeCallState();
@@ -11649,15 +11917,28 @@ function buildCheffeCallPayload() {
     editorialFlow
   });
   const currentSession = state.sessions[0]
-    ? {
-        ...state.sessions[0],
-        opinions: displayOpinions,
-        approvals: Array.isArray(state.sessions[0].approvals) ? state.sessions[0].approvals.slice(0, 32) : [],
-        logs: Array.isArray(state.sessions[0].logs) ? state.sessions[0].logs.slice(0, 64) : [],
-        decisions: Array.isArray(state.sessions[0].decisions) ? state.sessions[0].decisions.slice(0, 32) : [],
-        actionStats: summarizeCheffeCallSession(state.sessions[0])
-      }
+    ? summarizeCheffeSessionForPayload(state.sessions[0], { opinions: displayOpinions, includeDetails: true })
     : null;
+  const sessionSummaries = state.sessions
+    .slice(0, 4)
+    .map((session, index) => summarizeCheffeSessionForPayload(session, {
+      opinions: index === 0 ? displayOpinions : [],
+      includeDetails: index === 0
+    }))
+    .filter(Boolean);
+  const summarizedEditorialFlow = {
+    ...editorialFlow,
+    health: summarizeCheffeEditorialHealthForPayload(editorialFlow.health)
+  };
+  const summarizedQueue = Array.isArray(agentsPayload.queue)
+    ? agentsPayload.queue.map(summarizeCheffeQueueItemForPayload)
+    : [];
+  const summarizedAgentTimelines = Array.isArray(agentsPayload.agentTimelines)
+    ? agentsPayload.agentTimelines.map(summarizeCheffeTimelineForPayload)
+    : [];
+  const summarizedOrders = Array.isArray(agentsPayload.orders)
+    ? agentsPayload.orders.map(summarizeCheffeOrderForPayload)
+    : [];
   return {
     ok: true,
     updatedAt: new Date().toISOString(),
@@ -11673,7 +11954,7 @@ function buildCheffeCallPayload() {
       lastInstruction: state.lastInstruction,
       lastSessionAt: state.lastSessionAt,
       currentSession,
-      sessions: state.sessions
+      sessions: sessionSummaries
     },
     ideActions,
     ideActionQueue: {
@@ -11692,20 +11973,23 @@ function buildCheffeCallPayload() {
       autonomousAgents: Number(agentsPayload.summary?.autonomousAgents || 181),
       averageAutonomy: Number(agentsPayload.summary?.averageAutonomy || 82)
     },
-    queue: Array.isArray(agentsPayload.queue) ? agentsPayload.queue : [],
+    queue: summarizedQueue.slice(0, 32),
+    queueTotal: summarizedQueue.length,
     liveEvents: Array.isArray(agentsPayload.liveEvents) ? agentsPayload.liveEvents : [],
     officeLogs: Array.isArray(agentsPayload.officeLogs) ? agentsPayload.officeLogs : [],
-    agentTimelines: Array.isArray(agentsPayload.agentTimelines) ? agentsPayload.agentTimelines : [],
+    agentTimelines: summarizedAgentTimelines.slice(0, 32),
+    agentTimelinesTotal: summarizedAgentTimelines.length,
     officeDashboard: Array.isArray(agentsPayload.officeDashboard) ? agentsPayload.officeDashboard : [],
     executableActions: Array.isArray(agentsPayload.executableActions) ? agentsPayload.executableActions : [],
-    orders: Array.isArray(agentsPayload.orders) ? agentsPayload.orders : [],
+    orders: summarizedOrders.slice(0, 24),
+    ordersTotal: summarizedOrders.length,
     autoRun: agentsPayload.autoRun || null,
     autonomyRunner: agentsPayload.autonomyRunner || null,
     awards: agentsPayload.awards || null,
     scoreboard: agentsPayload.scoreboard || null,
     ecosystemStudy: agentsPayload.ecosystemStudy || null,
-    editorialFlow,
-    meetingScenes: editorialFlow.scenes,
+    editorialFlow: summarizedEditorialFlow,
+    meetingScenes: summarizedEditorialFlow.scenes,
     opinions: displayOpinions
   };
 }

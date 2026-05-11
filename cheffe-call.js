@@ -739,6 +739,13 @@
     return 0;
   }
 
+  function getCountWithTotal(list, total) {
+    const numericTotal = Number(total);
+    return Number.isFinite(numericTotal) && numericTotal >= 0
+      ? numericTotal
+      : getListCount(list);
+  }
+
   function firstText(values = []) {
     const found = values.find((value) => String(value || "").trim());
     return found === undefined ? "" : String(found || "").trim();
@@ -816,6 +823,7 @@
     const queueItems = firstFiniteNumber([
       proof.queueItems,
       publicSummary.activeQueue,
+      payload.queueTotal,
       payload.queueItems,
       getListCount(payload.queue),
       getListCount(runtime.queue)
@@ -823,6 +831,7 @@
     const ordersReturned = firstFiniteNumber([
       proof.ordersReturned,
       proof.ordersAfter,
+      payload.ordersTotal,
       getListCount(payload.orders),
       getListCount(runtime.orders)
     ]);
@@ -4449,6 +4458,7 @@
     const session = payload.meeting?.currentSession || null;
     const actions = Array.isArray(payload.executableActions) ? payload.executableActions.slice(0, 8) : [];
     const queue = Array.isArray(payload.queue) ? payload.queue.slice(0, 8) : [];
+    const queueTotal = getCountWithTotal(payload.queue, payload.queueTotal);
     const offices = Array.isArray(payload.officeDashboard) ? payload.officeDashboard.slice(0, 6) : [];
     const logs = [
       ...(Array.isArray(session?.logs) ? session.logs : []),
@@ -4463,7 +4473,7 @@
         ["Autonomia média", `${summary.averageAutonomy || 0}%`],
         ["Entregas", summary.deliveredAgents || 0],
         ["Falhas", summary.failedAgents || 0],
-        ["Fila", queue.length],
+        ["Fila", queueTotal],
         ["Ações", actions.length],
         ["Estado", meetingState]
       ]
@@ -4578,7 +4588,7 @@
         summary: "Confira runtime, filas, logs e provas antes de avançar.",
         status: "ready",
         primaryTarget: "callAgentReportTitle",
-        metrics: { queue: Array.isArray(payload?.queue) ? payload.queue.length : 0 }
+        metrics: { queue: getCountWithTotal(payload?.queue, payload?.queueTotal) }
       },
       {
         id: "ordens",
@@ -4587,7 +4597,7 @@
         summary: "Revise a fila que nasceu da reuniao.",
         status: "ready",
         primaryTarget: "taskQueueList",
-        metrics: { orders: Array.isArray(payload?.orders) ? payload.orders.length : 0 }
+        metrics: { orders: getCountWithTotal(payload?.orders, payload?.ordersTotal) }
       },
       {
         id: "website",
@@ -4865,6 +4875,7 @@
     const summary = payload?.summary || {};
     const offices = Array.isArray(payload?.officeDashboard) ? payload.officeDashboard : [];
     const queue = Array.isArray(payload?.queue) ? payload.queue : [];
+    const queueTotal = getCountWithTotal(queue, payload?.queueTotal);
     const awards = payload?.awards || {};
     const agentOfDay = payload?.dailyContext?.agentOfDay || {};
     renderSceneDataGrid(
@@ -4873,7 +4884,7 @@
         { label: "Agentes", value: String(summary.totalAgents || 0), detail: `${summary.autonomousAgents || 0} autonomos no payload.` },
         { label: "Autonomia media", value: `${summary.averageAutonomy || 0}%`, detail: "Media informada pela runtime." },
         { label: "Escritorios", value: String(summary.totalOffices || offices.length || 0), detail: "Nucleos de trabalho dos agentes." },
-        { label: "Fila", value: String(queue.length), detail: "Tarefas carregadas para a rodada." },
+        { label: "Fila", value: String(queueTotal), detail: "Tarefas carregadas para a rodada." },
         { label: "Entregas", value: String(summary.deliveredAgents || 0), detail: `${summary.failedAgents || 0} falhas registradas.` },
         { label: "Premios", value: String(Array.isArray(awards.items) ? awards.items.length : 0), detail: agentOfDay.name ? `Lider: ${agentOfDay.name}` : "Aguardando lider da rodada." }
       ],
@@ -4888,7 +4899,7 @@
     const session = meeting.currentSession || meeting.sessions?.[0] || null;
     const opinionsReady = Array.isArray(payload?.opinions) && payload.opinions.length > 0;
     const decisionsReady = Array.isArray(session?.decisions) && session.decisions.length > 0;
-    const reportReady = Array.isArray(payload?.queue) && payload.queue.length > 0;
+    const reportReady = getCountWithTotal(payload?.queue, payload?.queueTotal) > 0;
     const completed = new Set([
       passwordReady ? "password" : "",
       session ? "meeting" : "",
