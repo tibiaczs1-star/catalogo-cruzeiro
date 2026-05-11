@@ -6,7 +6,7 @@
 - `script.js` reduziu os gates da splash, removeu espera bloqueante por `document complete`/imagens criticas, fatiou a hidratacao dinamica de noticias com yields e impediu refrescos pesados em massa durante a abertura.
 - `deferred-home-boot.js` passou a carregar scripts auxiliares em ondas pequenas e espaçadas por ociosidade; o warm cache da splash foi atrasado e deixou de puxar JS/CSS grandes antigos na largada.
 - `startup-experience.js`/`startup-experience.css` mantem o show visual da abertura, mas com saida garantida, loader nao bloqueante e card premium ajustado ao viewport.
-- `index.html` recebeu cache-bust `intro-speed1`, failsafe inline curto e carregamento inicial priorizando `startup-experience.css` + `premium-home-redesign.css`, deixando estilos secundarios em segundo plano.
+- `index.html` recebeu cache-bust `intro-speed1`, failsafe inline curto e carregamento inicial priorizando `startup-experience.css` + `premium-home-redesign.css`, deixando estilos secundarios em segundo plano; em HTTP nao carrega mais `news-data.js` gigante durante a abertura se a API ainda estiver respondendo.
 - Validacoes locais em `127.0.0.1:3168`: desktop/mobile sem overlay preso, sem `catalogo-lock-scroll`, 91 links de noticia, `NEWS_DATA` com 60 itens, console sem erros; maior long task medida caiu para ~731ms desktop e ~654ms mobile. `npm run review:team` retornou `totalIssues=0` e `npm run perf:budget` retornou `ok=true`.
 
 ## Atualizacao rapida 2026-05-01 - Polemicas reais do Brasil e Juruá

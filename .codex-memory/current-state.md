@@ -1,6 +1,6 @@
 # Current State
 
-Updated: 2026-05-11T19:15:27.277Z
+Updated: 2026-05-11T19:21:50.616Z
 
 ## Active Goal
 
@@ -8,13 +8,13 @@ Updated: 2026-05-11T19:15:27.277Z
 
 ## Summary
 
-A intro continua visual, mas deixou de esperar a cadeia inteira de hidratação. A abertura agora libera a home com failsafe curto, carrega notícias em blocos, adia scripts auxiliares, desativa aquecimento pesado de cache na largada e mantém CSS/JS com cache-bust intro-speed1. QA local desktop/mobile passou sem overlay preso, sem scroll lock, console limpo, maxLongTask abaixo de 1s; review:team e perf:budget ok.
+A intro continua visual, mas deixou de esperar a cadeia inteira de hidratacao. A abertura agora libera a home com failsafe curto, carrega noticias em blocos, adia scripts auxiliares, nao puxa news-data.js gigante na abertura HTTP quando a API demora, e empurra warm cache para depois. QA local desktop/mobile passou sem overlay preso, sem scroll lock, console limpo, maxLongTask abaixo de 1s; review:team e perf:budget ok.
 
 ## Next
 
-- Staging seletivo dos arquivos de hotfix
-- commit e push para origin/main
-- validar produção online com cache-bust intro-speed1 e sem Página sem resposta
+- Commit complementar
+- push para origin/main
+- validar producao online com cache-bust intro-speed1 sem news-data.js cedo e sem Pagina sem resposta
 
 ## Files In Focus
 
