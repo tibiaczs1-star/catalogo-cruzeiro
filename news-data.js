@@ -1,5 +1,137 @@
-window.NEWS_ARCHIVE_TOTAL = 1084;
+window.NEWS_ARCHIVE_TOTAL = 1165;
 window.NEWS_DATA = [
+  {
+    "id": "rede-social-antonio-rnascimento-jr-facebook-2026-05-12",
+    "slug": "antonio-rnascimento-jr-presenca-digital-facebook",
+    "title": "Antonio e Rnascimento Jr. fortalece presença digital no Facebook",
+    "eyebrow": "Rede Social",
+    "date": "12 de mai de 2026",
+    "publishedAt": "2026-05-12T12:00:00.000Z",
+    "category": "Social",
+    "categoryKey": "social",
+    "previewClass": "thumb-social",
+    "sourceName": "Facebook público",
+    "sourceUrl": "https://www.facebook.com/AClsJr",
+    "sourceLabel": "Página pública AClsJr no Facebook",
+    "lede": "A página pública de Antonio e Rnascimento Jr., identificada como AClsJr, aparece no Facebook como perfil de criador de conteúdo digital e reúne conteúdos que podem ser organizados também no site.",
+    "summary": "Perfil público AClsJr serve como ponto de partida para presença digital, vídeos, reels e artigos autorais no site, com links para a fonte original.",
+    "analysis": "O site usa os dados públicos como referência editorial, sem copiar posts literalmente e sem afirmar métricas não verificadas.",
+    "highlights": [
+      "Página pública no Facebook identificada como perfil de criador de conteúdo digital",
+      "Conteúdos podem virar matérias curtas com contexto e link original",
+      "A dobra Rede Social organiza perfil, reels e vídeos em um caminho interno",
+      "Não há ranking público de vídeos confirmado no pacote local"
+    ],
+    "development": [
+      "Atualizar o acervo quando links específicos de reels ou vídeos forem fornecidos.",
+      "Manter a fonte pública visível em cada matéria derivada de rede social."
+    ],
+    "imageUrl": "./assets/social/antonio-rnascimento-jr-facebook.jpg",
+    "feedImageUrl": "./assets/social/antonio-rnascimento-jr-facebook.jpg",
+    "sourceImageUrl": "./assets/social/antonio-rnascimento-jr-facebook.jpg",
+    "imageCredit": "Imagem pública OpenGraph do Facebook",
+    "imageFocus": "center 45%",
+    "imageFit": "cover",
+    "media": null,
+    "priority": 930,
+    "editorialPriority": "rede-social",
+    "crossSources": [
+      {
+        "name": "Perfil público AClsJr",
+        "url": "https://www.facebook.com/AClsJr"
+      },
+      {
+        "name": "Reels públicos AClsJr",
+        "url": "https://www.facebook.com/AClsJr/reels/"
+      },
+      {
+        "name": "Vídeos públicos AClsJr",
+        "url": "https://www.facebook.com/AClsJr/videos"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Perfil público AClsJr",
+        "url": "https://www.facebook.com/AClsJr"
+      }
+    ],
+    "sourceCount": 3,
+    "alternateSlugs": [
+      "antonio-rnascimento-jr-criador-conteudo-digital-facebook"
+    ],
+    "body": [
+      "Antonio e Rnascimento Jr. vem construindo presença no Facebook por meio da página pública AClsJr, apresentada pela própria rede como perfil de criador de conteúdo digital.",
+      "A coleta pública do pacote local confirmou o caminho principal do perfil, a área de reels e a área de vídeos. Esses links ajudam o site a organizar um acervo próprio, com textos autorais e botões para a fonte original.",
+      "A função do site não é reproduzir posts literalmente. A ideia é transformar assuntos publicados na rede em chamadas com contexto, imagem permitida, resumo próprio e caminho claro para quem quiser acompanhar no Facebook.",
+      "Como o Facebook não expôs ranking completo de vídeos, comentários, compartilhamentos ou visualizações na coleta pública, esta matéria não afirma quais conteúdos estão em alta. O tratamento editorial fica limitado aos dados públicos disponíveis."
+    ]
+  },
+  {
+    "id": "rede-social-reels-videos-antonio-rnascimento-jr-facebook-2026-05-12",
+    "slug": "reels-videos-antonio-rnascimento-jr-facebook",
+    "title": "Reels e vídeos de Antonio e Rnascimento Jr. ganham caminho próprio no site",
+    "eyebrow": "Rede Social",
+    "date": "12 de mai de 2026",
+    "publishedAt": "2026-05-12T11:50:00.000Z",
+    "category": "Social",
+    "categoryKey": "social",
+    "previewClass": "thumb-social",
+    "sourceName": "Facebook público",
+    "sourceUrl": "https://www.facebook.com/AClsJr/reels/",
+    "sourceLabel": "Reels públicos do perfil AClsJr",
+    "lede": "A área pública de reels e vídeos do perfil AClsJr pode servir como base para matérias rápidas, chamadas de vídeo e conteúdos organizados no site.",
+    "summary": "Reels e vídeos do Facebook entram como fonte pública para textos autorais, com link para assistir na rede social e sem promessa de ranking não confirmado.",
+    "analysis": "Vídeos curtos ajudam a abrir caminho para novos conteúdos, mas precisam de contexto próprio e transparência sobre a origem.",
+    "highlights": [
+      "Reels podem virar chamadas curtas com contexto editorial",
+      "Cada publicação deve manter link para o vídeo original no Facebook",
+      "O site pode preservar histórico e facilitar busca fora da rede social",
+      "Métricas de alcance não foram confirmadas pela coleta pública"
+    ],
+    "development": [
+      "Adicionar links específicos de vídeos quando forem fornecidos manualmente.",
+      "Criar novas matérias individuais para reels com contexto, título e fonte."
+    ],
+    "imageUrl": "./assets/social/antonio-rnascimento-jr-facebook.jpg",
+    "feedImageUrl": "./assets/social/antonio-rnascimento-jr-facebook.jpg",
+    "sourceImageUrl": "./assets/social/antonio-rnascimento-jr-facebook.jpg",
+    "imageCredit": "Imagem pública OpenGraph do Facebook",
+    "imageFocus": "center 45%",
+    "imageFit": "cover",
+    "media": null,
+    "priority": 920,
+    "editorialPriority": "rede-social",
+    "crossSources": [
+      {
+        "name": "Reels públicos AClsJr",
+        "url": "https://www.facebook.com/AClsJr/reels/"
+      },
+      {
+        "name": "Vídeos públicos AClsJr",
+        "url": "https://www.facebook.com/AClsJr/videos"
+      },
+      {
+        "name": "Perfil público AClsJr",
+        "url": "https://www.facebook.com/AClsJr"
+      }
+    ],
+    "alternateSources": [
+      {
+        "name": "Vídeos públicos AClsJr",
+        "url": "https://www.facebook.com/AClsJr/videos"
+      }
+    ],
+    "sourceCount": 3,
+    "alternateSlugs": [
+      "reels-antonio-rnascimento-jr-facebook"
+    ],
+    "body": [
+      "Vídeos curtos continuam sendo uma das formas mais diretas de aproximação entre criadores e público. No perfil AClsJr, a área de reels aparece como parte pública da presença digital de Antonio e Rnascimento Jr.",
+      "Dentro do site, esses vídeos podem virar artigos curtos. O formato recomendado é simples: título próprio, contexto do assunto, descrição autoral e botão para assistir no Facebook.",
+      "Essa organização tira o conteúdo da dependência exclusiva do feed da rede social e cria um histórico pesquisável, útil para quem acompanha o criador por buscadores, arquivo ou links compartilhados.",
+      "A coleta pública confirmou os endereços de reels e vídeos, mas não entregou lista completa nem ranking de engajamento. Por isso, os links são tratados como conteúdos em destaque e não como prova de audiência."
+    ]
+  },
   {
     "id": "https://juruaonline.com.br/caminhonete-da-policia-penal-sai-da-pista-apos-tentar-desviar-de-buraco-em-comunidade-de-cruzeiro-do-sul/",
     "slug": "caminhonete-da-policia-penal-sai-da-pista-apos-tentar-desviar-de-buraco-em-comunidade-de-cruzeir",

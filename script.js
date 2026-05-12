@@ -124,10 +124,10 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = 2500;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 4200 : 5200;
-const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 760 : 980;
-const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 420 : 580;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 520 : 680;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 1500 : 1900;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 220 : 300;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 120 : 160;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -467,18 +467,18 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260512-normal-cache-cleanup1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260512-open-fast2";
 const browserStateVersionKey = "catalogo_browser_state_version_v1";
-const browserStateVersion = "20260512-normal-cache-cleanup1";
+const browserStateVersion = "20260512-open-fast2";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
   "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260512-closed-grids-air1",
+  "./premium-home-redesign.css?v=20260512-open-fast1",
   "./startup-experience.css?v=20260511-cookie-passive1",
   "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260512-normal-cache-cleanup1",
-  "./startup-experience.js?v=20260511-cookie-passive1",
+  "./script.js?v=20260512-open-fast2",
+  "./startup-experience.js?v=20260512-open-fast1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -2150,32 +2150,13 @@ const waitForSplashReadiness = async () => {
   const steps = [
     {
       label: "Preparando o site",
-      progress: 12,
+      progress: 24,
       wait: () => Promise.resolve()
     },
     {
-      label: "Separando logo, fontes e capa",
-      progress: 28,
-      wait: () =>
-        Promise.all([
-          waitForSplashDocumentComplete(splashGateStepTimeoutMs),
-          waitForSplashFontsReady(splashGateStepTimeoutMs)
-        ])
-    },
-    {
-      label: "Guardando notícias para abrir mais rápido",
-      progress: 46,
-      wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
-    },
-    {
-      label: "Deixando a primeira tela pronta",
-      progress: 82,
-      wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
-    },
-    {
-      label: "Finalizando imagens críticas",
-      progress: 96,
-      wait: () => waitForSplashCriticalImages(splashGateStepTimeoutMs)
+      label: "Abrindo a primeira leitura",
+      progress: 72,
+      wait: () => waitForSplashFontsReady(splashGateStepTimeoutMs)
     },
     {
       label: "Portal pronto para abrir",
@@ -11330,9 +11311,14 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
     },
     260
   );
+  const imageUrl = cardImageUrl;
+  const mediaMarkup = imageUrl
+    ? `<div class="what-matters-media" style="--matter-image:url('${escapeRuntimeAttribute(imageUrl)}')"></div>`
+    : "";
 
   return `
-    <article class="what-matters-card reveal active ${index ? "delay-1" : ""}"${cardImageStyle}>
+    <article class="what-matters-card reveal active ${imageUrl ? "has-article-photo" : ""} ${index ? "delay-1" : ""}">
+      ${mediaMarkup}
       <span class="source-status-badge ${escapeHtml(sourceStatus.className)}">${escapeHtml(sourceStatus.label)}</span>
       <p>${escapeHtml(topic.label)}</p>
       <h3><a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(title)}</a></h3>

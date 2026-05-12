@@ -1,10 +1,9 @@
 # Handoff
 
-Updated: 2026-05-12T02:08:29.187Z
+Updated: 2026-05-12T22:39:27.454Z
 
-Preparado deploy da home otimizada em worktree limpa baseada em origin/main. Validacoes pre-push: node --check nos JS centrais, review team totalIssues=0 e perf budget ok=true; news-data.js ficou over apenas no orcamento nao estrito.
+Home: rede social, hotfix visual e abertura rapida aplicados. script.js solta splash rapido e cards com imagem separada; startup-experience.js nao coloca segundo loader na home; index.html carrega secundários em fila. review:team totalIssues=0 e perf:budget ok=true.
 
 ## Next
 
-- Apos push
-- aguardar Render e validar online home/API/asset early-home-surfaces.
+- Fazer commit selecionado sem incluir PubPaid; depois validar no navegador real/deploy.

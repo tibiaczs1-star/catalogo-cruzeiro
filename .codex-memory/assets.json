@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-11T19:15:12.429Z",
+  "lastUpdatedAt": "2026-05-12T22:01:52.230Z",
   "assets": [
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
@@ -1911,6 +1911,15 @@
         "2026-05-11-destravar-intros-e-otimizar-a-abertura-da-home-sem-remover-o-show-visual-de-carr"
       ],
       "createdAt": "2026-05-11T19:15:12.429Z"
+    },
+    {
+      "id": "antonio-rnascimento-jr-facebook-jpg",
+      "kind": "image",
+      "path": "assets/social/antonio-rnascimento-jr-facebook.jpg",
+      "source": "workspace",
+      "note": "Imagem publica OpenGraph do perfil Facebook AClsJr copiada do pacote facebook-trends 2026-05-12 para a dobra Rede Social.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-12T22:01:52.230Z"
     }
   ]
 }

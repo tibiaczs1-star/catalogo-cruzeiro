@@ -1,5 +1,21 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-12 - Hotfix visual da home para ir ao ar
+
+- Usuario apontou tres problemas de fechamento visual: texto por cima de imagem nos cards `4 materias da semana`, dobra `Voz da rua` com vazio/demora aparente e `Publicidade local` com titulo/palavras cortadas.
+- `script.js` agora gera uma midia propria nos cards de `what-matters`, usando a foto da materia em um bloco separado antes do texto.
+- `premium-home-redesign.css` recebeu trava final para os cards ficarem imagem em cima e conteudo abaixo, removeu reserva fantasma de `content-visibility` em comentarios/monetizacao/newsletter/fundadores e reorganizou `#monetizacao` para evitar texto estourado.
+- Abertura da home foi destravada: a splash solta em janela curta, o failsafe inline caiu para 2,2s, a home editorial nao mostra mais o segundo loader inicial, e os CSS/scripts secundarios entram em fila depois da primeira tela.
+- Validacoes: `node --check script.js`, `node --check startup-experience.js`, `node --check server.js`, braces CSS `2217/2217`, `npm run review:team` com `totalIssues=0` e `npm run perf:budget` com `ok=true`. O Browser interno bloqueou `localhost/127.0.0.1` nesta sessao, entao falta conferencia visual final no navegador real antes do deploy.
+
+## Atualizacao rapida 2026-05-12 - Dobra Rede Social na home
+
+- Usuario corrigiu a direcao: `Rede Social` nao deve ser pagina nova; deve ser uma dobra dentro da home, no padrao do site, levando para artigos internos.
+- `index.html` ganhou links de menu para `#rede-social`, um card em `Cadernos e Serviços`, a nova dobra `Rede Social` e botoes para perfil, reels e videos publicos do Facebook.
+- `news-data.js` recebeu dois artigos internos: `antonio-rnascimento-jr-presenca-digital-facebook` e `reels-videos-antonio-rnascimento-jr-facebook`, com texto autoral, fonte publica e sem inventar ranking/metricas.
+- A imagem publica OpenGraph do pacote foi copiada para `assets/social/antonio-rnascimento-jr-facebook.jpg`.
+- Validacoes: sintaxe de `news-data.js`, `server.js` e `script.js` conferida via Node REPL/VM; `npm run review:team` retornou `totalIssues=0`; smoke local em `127.0.0.1:3187` confirmou home 200 com `#rede-social`, dois artigos 200 e imagem JPEG 200.
+
 ## Atualizacao rapida 2026-05-11 - Intro bonita sem travar a home
 
 - Usuario esclareceu que nao quer remover as intros nem o carregamento; eles devem servir para preparar esqueleto/conteudo, sem transformar a abertura em espera longa ou travar a home.
