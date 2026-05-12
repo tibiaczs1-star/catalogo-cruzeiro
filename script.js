@@ -124,8 +124,8 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 520 : 680;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 1500 : 1900;
+const splashDailyMinimumMs = 2500;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 3200 : 3600;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 220 : 300;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 120 : 160;
 const tickerDesktopStaticMedia =
@@ -467,18 +467,18 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260512-open-fast2";
+const portalWarmCacheName = "catalogo-portal-shell-v20260512-privacy-intro1";
 const browserStateVersionKey = "catalogo_browser_state_version_v1";
-const browserStateVersion = "20260512-open-fast2";
+const browserStateVersion = "20260512-privacy-intro1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
   "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260512-open-fast1",
+  "./premium-home-redesign.css?v=20260512-privacy-intro1",
   "./startup-experience.css?v=20260511-cookie-passive1",
   "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260512-open-fast2",
-  "./startup-experience.js?v=20260512-open-fast1",
+  "./script.js?v=20260512-privacy-intro1",
+  "./startup-experience.js?v=20260512-privacy-intro1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
