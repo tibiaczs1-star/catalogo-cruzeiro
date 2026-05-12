@@ -3,7 +3,7 @@
 (() => {
   const MODAL_ID = "catalogoPremiumTerms";
   const CONSENT_BANNER_ID = "catalogo-cookie-consent";
-  const READY_FALLBACK_MS = 3600;
+  const READY_FALLBACK_MS = 6200;
   const OPEN_DELAY_MS = 140;
   const CONSENT_KEY = "catalogo_lgpd_consent_v1";
   const CONSENT_COOKIE = "catalogo_tracking_consent";
@@ -19,16 +19,16 @@
   const INITIAL_HOME_LOADER_DAILY_KEY = "catalogo_initial_home_loader_seen_day_v2";
   const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
   const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
-  const INITIAL_HOME_LOADER_MIN_MS = 2500;
-  const ACTION_LOADER_MIN_MS = 2500;
-  const ACTION_LOADER_MAX_MS = 3200;
+  const INITIAL_HOME_LOADER_MIN_MS = 4200;
+  const ACTION_LOADER_MIN_MS = 4200;
+  const ACTION_LOADER_MAX_MS = 5400;
   const THANKS_SCREEN_MS = 2600;
   const THANKS_SCREEN_MS_COMPACT = 2200;
   const THANKS_SCREEN_MS_PHONE = 1800;
   const FOUNDER_PRELUDE_MS = 3000;
   const FOUNDER_PRELUDE_MS_COMPACT = 3000;
   const FOUNDER_PRELUDE_MS_PHONE = 3000;
-  const RETURNING_LOADER_MS = 2500;
+  const RETURNING_LOADER_MS = 4200;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -1216,6 +1216,14 @@
     return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
+  function waitForVisiblePaint() {
+    return new Promise((resolve) => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(resolve);
+      });
+    });
+  }
+
   function waitForLogoSplashDone(timeoutMs = 3200) {
     if (
       window.__CATALOGO_LOGO_SPLASH_DONE__ === true ||
@@ -1300,10 +1308,12 @@
     const statuses = Array.isArray(options.statuses) && options.statuses.length
       ? options.statuses
       : ["preparando estrutura", "montando notícias", "preparando imagens", "home pronta"];
-    const startedAt = Date.now();
     let currentProgress = 0;
     let statusIndex = 0;
     let ready = false;
+
+    await waitForVisiblePaint();
+    const startedAt = Date.now();
 
     waitForHomeReady(maxDuration).then(() => {
       ready = true;
@@ -1429,12 +1439,14 @@
         updateTopLoaderProgress(loader, 8, "Preparando retorno");
       });
 
-      runProgressUntilReady(loader, {
-        minDuration: RETURNING_LOADER_MS,
-        maxDuration: READY_FALLBACK_MS,
-        statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
-        update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
-      }).then(finish).catch(finish);
+      waitForVisiblePaint().then(() => {
+        runProgressUntilReady(loader, {
+          minDuration: RETURNING_LOADER_MS,
+          maxDuration: READY_FALLBACK_MS,
+          statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
+          update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
+        }).then(finish).catch(finish);
+      });
     });
   }
 
@@ -1466,21 +1478,20 @@
         releaseFounderPreludeGate();
         openWelcomeModal(loader);
         updateInitialLoaderProgress(loader, 4, "preparando a primeira abertura");
+        runProgressUntilReady(loader, {
+          minDuration: INITIAL_HOME_LOADER_MIN_MS,
+          maxDuration: READY_FALLBACK_MS,
+          statuses: [
+            "montando capa do jornal",
+            "guardando áreas no navegador",
+            "organizando agenda e serviços",
+            "portal pronto para leitura"
+          ],
+          update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
+        }).then(finish).catch(finish);
       }, 30);
 
       failsafeTimer = window.setTimeout(finish, Math.max(READY_FALLBACK_MS + 1200, INITIAL_HOME_LOADER_MIN_MS + 2200));
-
-      runProgressUntilReady(loader, {
-        minDuration: INITIAL_HOME_LOADER_MIN_MS,
-        maxDuration: READY_FALLBACK_MS,
-        statuses: [
-          "montando capa do jornal",
-          "guardando áreas no navegador",
-          "organizando agenda e serviços",
-          "portal pronto para leitura"
-        ],
-        update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
-      }).then(finish).catch(finish);
     }).catch(() => {
       releaseIntroLocks();
       if (typeof callback === "function") {
@@ -1523,17 +1534,21 @@
       updateTopLoaderProgress(loader, 6, label);
     });
 
-    return Promise.all([
-      prefetchNavigationTarget(href),
-      runProgressUntilReady(loader, {
-        minDuration: ACTION_LOADER_MIN_MS,
-        maxDuration: ACTION_LOADER_MAX_MS,
-        statuses: ["preparando matéria", "baixando página", "conferindo conteúdo", "abrindo página"],
-        update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
-      })
-    ]).finally(() => {
-      finish();
-    });
+    return waitForVisiblePaint()
+      .then(() =>
+        Promise.all([
+          prefetchNavigationTarget(href),
+          runProgressUntilReady(loader, {
+            minDuration: ACTION_LOADER_MIN_MS,
+            maxDuration: ACTION_LOADER_MAX_MS,
+            statuses: ["preparando matéria", "baixando página", "conferindo conteúdo", "abrindo página"],
+            update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
+          })
+        ])
+      )
+      .finally(() => {
+        finish();
+      });
   }
 
   function runWhenBrowserIsIdle(callback) {
@@ -1670,11 +1685,6 @@
         dispatchIntroFinished();
       };
       const showInitialLoaderAfterConsent = () => {
-        if (fastEditorialHome && !phoneFlow) {
-          finishLoaded();
-          return;
-        }
-
         showInitialHomeLoaderThen(finishLoaded);
       };
 
@@ -1685,8 +1695,7 @@
           if (oldModal) {
             oldModal.remove();
           }
-          releaseFounderPreludeGate();
-          dispatchIntroFinished();
+          showInitialHomeLoaderThen(finishLoaded);
           return;
         }
 
@@ -1709,12 +1718,12 @@
 
         if (!shouldSkipWelcomeModal()) {
           openWelcomeConsentModal({
-            afterAccept: finishLoaded
+            afterAccept: showInitialLoaderAfterConsent
           });
           return;
         }
 
-        finishLoaded();
+        showInitialLoaderAfterConsent();
         return;
       }
 

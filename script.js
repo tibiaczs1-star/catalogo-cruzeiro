@@ -124,8 +124,8 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = 2500;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 3200 : 3600;
+const splashDailyMinimumMs = 5200;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 6800 : 7600;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 220 : 300;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 120 : 160;
 const tickerDesktopStaticMedia =
@@ -467,18 +467,18 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260512-privacy-intro1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260512-intro-visible1";
 const browserStateVersionKey = "catalogo_browser_state_version_v1";
-const browserStateVersion = "20260512-privacy-intro1";
+const browserStateVersion = "20260512-intro-visible1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
   "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260512-privacy-intro1",
+  "./premium-home-redesign.css?v=20260512-intro-visible1",
   "./startup-experience.css?v=20260511-cookie-passive1",
   "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260512-privacy-intro1",
-  "./startup-experience.js?v=20260512-privacy-intro1",
+  "./script.js?v=20260512-intro-visible1",
+  "./startup-experience.js?v=20260512-intro-visible1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -1840,6 +1840,13 @@ const waitForSplashDelay = (ms) =>
     window.setTimeout(resolve, Math.max(0, ms));
   });
 
+const waitForSplashPaint = () =>
+  new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(resolve);
+    });
+  });
+
 const runSplashIdleTask = (callback, timeout = 1200) => {
   if (typeof callback !== "function") {
     return;
@@ -2196,17 +2203,6 @@ const setupSplashExperience = () => {
     return;
   }
 
-  if (hasSeenSplashToday()) {
-    window.__CATALOGO_DAILY_INTRO_SHOWN__ = true;
-    clearSplashFailsafe();
-    if (splashRoot) {
-      splashRoot.setAttribute("aria-hidden", "true");
-    }
-    document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
-    document.body.classList.add("site-loaded", "mobile-intro-ready");
-    return;
-  }
-
   if (!splashRoot) {
     clearSplashFailsafe();
     document.body.classList.remove("catalogo-site-booting");
@@ -2292,20 +2288,18 @@ const setupSplashExperience = () => {
     rememberSplashToday();
   };
 
-  const currentTime =
-    typeof performance !== "undefined" && typeof performance.now === "function"
-      ? performance.now()
-      : Date.now();
-  const elapsed = currentTime - splashBootStartedAt;
-  const remaining = Math.max(100, splashDailyMinimumMs - elapsed);
+  void waitForSplashPaint()
+    .then(() => {
+      const minimumVisibleGate = waitForSplashDelay(splashDailyMinimumMs);
+      const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
+        updateSplashProgress(100, "Portal pronto para abrir");
+      });
+      const readinessGate = Promise.all([waitForSplashReadiness(), minimumVisibleGate]);
 
-  const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
-    updateSplashProgress(100, "Portal pronto para abrir");
-  });
-
-  const readinessGate = Promise.all([waitForSplashReadiness(), waitForSplashDelay(remaining)]);
-
-  void Promise.race([readinessGate, safetyRelease]).then(releaseSplash).catch(releaseSplash);
+      return Promise.race([readinessGate, safetyRelease]);
+    })
+    .then(releaseSplash)
+    .catch(releaseSplash);
 };
 
 const clearMobilePageTransitionState = () => {

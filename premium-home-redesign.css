@@ -606,8 +606,7 @@ body.editorial-home .page-shell {
     #f4f8fa !important;
 }
 
-body.editorial-home.site-loaded > .logo-splash,
-body.editorial-home.pro-design-ready > .logo-splash {
+body.editorial-home.site-loaded > .logo-splash {
   display: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
