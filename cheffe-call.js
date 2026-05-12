@@ -1381,7 +1381,7 @@
   }
 
   async function fetchPhotoApprovals(password) {
-    const response = await fetch(`/api/news-image-focus-approvals?newOnly=true&password=${encodeURIComponent(password)}`, {
+    const response = await fetch(`/api/cheffe-call/photo-approvals?password=${encodeURIComponent(password)}`, {
       headers: { Accept: "application/json" },
       cache: "no-store"
     });
@@ -1746,7 +1746,7 @@
       ]
     });
     try {
-      const response = await fetch("/api/news-image-focus-approvals", {
+      const response = await fetch("/api/cheffe-call/photo-approvals", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
