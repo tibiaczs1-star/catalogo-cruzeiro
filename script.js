@@ -467,20 +467,84 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260512-normal-cache-cleanup1";
+const browserStateVersionKey = "catalogo_browser_state_version_v1";
+const browserStateVersion = "20260512-normal-cache-cleanup1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
   "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260511-speed-areas1",
-  "./startup-experience.css?v=20260511-loader-flow1",
+  "./premium-home-redesign.css?v=20260512-closed-grids-air1",
+  "./startup-experience.css?v=20260511-cookie-passive1",
   "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260511-loader-flow1",
-  "./startup-experience.js?v=20260511-loader-flow1",
+  "./script.js?v=20260512-normal-cache-cleanup1",
+  "./startup-experience.js?v=20260511-cookie-passive1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
 ];
+const getAvailableStorage = (storageName) => {
+  try {
+    return window[storageName] || null;
+  } catch (_error) {
+    return null;
+  }
+};
+const resetNormalBrowserStateForVersion = () => {
+  let currentVersion = "";
+  const localStore = getAvailableStorage("localStorage");
+  const sessionStore = getAvailableStorage("sessionStorage");
+
+  try {
+    currentVersion = localStore?.getItem(browserStateVersionKey) || "";
+  } catch (_error) {
+    currentVersion = "";
+  }
+
+  if (currentVersion === browserStateVersion) {
+    return;
+  }
+
+  const storageKeysToClear = [
+    splashStorageKey,
+    splashDailyStorageKey,
+    skipHomeIntroKey,
+    offlineNewsCacheKey,
+    offlineLastArticleKey,
+    portalWarmCacheKey,
+    "catalogo_page_action_loader_pending_v1"
+  ];
+
+  [localStore, sessionStore].forEach((storage) => {
+    storageKeysToClear.forEach((storageKey) => {
+      try {
+        storage?.removeItem(storageKey);
+      } catch (_error) {
+        // Ignora ambientes sem storage disponivel.
+      }
+    });
+  });
+
+  try {
+    localStore?.setItem(browserStateVersionKey, browserStateVersion);
+  } catch (_error) {
+    // A limpeza ainda vale para a visita atual mesmo sem persistir versao.
+  }
+
+  if ("caches" in window) {
+    caches
+      .keys()
+      .then((cacheNames) =>
+        Promise.all(
+          cacheNames
+            .filter((cacheName) => /^catalogo-portal-shell-/i.test(cacheName) && cacheName !== portalWarmCacheName)
+            .map((cacheName) => caches.delete(cacheName))
+        )
+      )
+      .catch(() => {});
+  }
+};
+resetNormalBrowserStateForVersion();
 const urlSearchParams = new URLSearchParams(window.location.search);
 const urlRequestsSkipHomeIntro = (() => {
   const rawValue = String(urlSearchParams.get("skipIntro") || "").trim().toLowerCase();
