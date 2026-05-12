@@ -11230,6 +11230,10 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
   const rawHref = buildArticleHref(normalizedArticle);
   const href = rawHref && rawHref !== "#" ? rawHref : topic.href;
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
+  const cardImageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(normalizedArticle, "whatMatters"));
+  const cardImageStyle = cardImageUrl
+    ? ` style="--card-image:url('${escapeHtml(escapeCssUrl(cardImageUrl).replace(/'/g, "\\'"))}')"`
+    : "";
   const sourceStatus = getPublicSourceStatusBadge(normalizedArticle);
   const dateLabel =
     formatCompactDisplayDate(normalizedArticle.publishedAt || normalizedArticle.date || normalizedArticle.createdAt || "") ||
@@ -11264,7 +11268,7 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
   );
 
   return `
-    <article class="what-matters-card reveal active ${index ? "delay-1" : ""}">
+    <article class="what-matters-card reveal active ${index ? "delay-1" : ""}"${cardImageStyle}>
       <span class="source-status-badge ${escapeHtml(sourceStatus.className)}">${escapeHtml(sourceStatus.label)}</span>
       <p>${escapeHtml(topic.label)}</p>
       <h3><a href="${escapeRuntimeAttribute(href)}"${externalAttrs}>${escapeHtml(title)}</a></h3>
@@ -11282,7 +11286,14 @@ const renderWhatMattersNow = (items = []) => {
     return;
   }
 
-  const realItems = dedupeNewsItems(
+  const targetCount = whatMattersTopics.length;
+  const sortWhatMattersItems = (list = []) =>
+    [...list].sort((left, right) =>
+      compareEditorialFlowArticles(left, right, {
+        imageBias: false
+      })
+    );
+  const candidateItems = dedupeNewsItems(
     [
       ...(Array.isArray(items) ? items : []),
       ...(Array.isArray(liveFeedState.items) ? liveFeedState.items : []),
@@ -11291,36 +11302,70 @@ const renderWhatMattersNow = (items = []) => {
   )
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isRealPublicNewsSource)
-    .filter(isUsableWhatMattersArticle)
     .filter((item) => !isInternationalOnlyPublicArticle(item))
-    .filter((item) => item.title && (item.sourceUrl || item.slug))
-    .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
-    .sort((left, right) =>
-      compareEditorialFlowArticles(left, right, {
-        imageBias: false
+    .filter((item) => item.title && (item.sourceUrl || item.slug));
+  const fallbackCandidateItems = sortWhatMattersItems(
+    candidateItems
+      .filter((item) => {
+        const titleText = normalizeText(item.title);
+        const sourceName = normalizeText(item.sourceName || item.sourceLabel);
+        return (
+          titleText &&
+          !whatMattersPlaceholderPattern.test(titleText) &&
+          !whatMattersNoticePattern.test(titleText) &&
+          (!whatMattersRemoteHumanInterestPattern.test(titleText) || whatMattersLocalTitlePattern.test(titleText)) &&
+          (!whatMattersNationalSourcePattern.test(sourceName) || whatMattersLocalTitlePattern.test(titleText))
+        );
       })
-    );
-  const sourceItems = realItems.filter(isWhatMattersJuruaArticle);
-  const frontPageItems = realItems.filter(isWhatMattersFrontPageArticle);
+      .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
+  );
+  const realItems = sortWhatMattersItems(
+    fallbackCandidateItems.filter(isUsableWhatMattersArticle)
+  );
+  const visualRealItems = realItems.filter(articleHasPremiumHeroImageCandidate);
+  const visualFallbackItems = fallbackCandidateItems.filter(articleHasPremiumHeroImageCandidate);
+  const primaryPool =
+    visualRealItems.length >= targetCount
+      ? visualRealItems
+      : realItems.length >= targetCount
+        ? realItems
+        : visualFallbackItems.length >= targetCount
+          ? visualFallbackItems
+          : fallbackCandidateItems;
+  const sourceItems = primaryPool.filter(isWhatMattersJuruaArticle);
+  const frontPageItems = primaryPool.filter(isWhatMattersFrontPageArticle);
 
   const selected = [];
   const usedTopics = new Set();
-  const usedKeys = buildReservedArticleKeys(["whatMatters"]);
+  const reservedKeys = buildReservedArticleKeys(["whatMatters"]);
+  const selectedKeys = new Set();
 
-  const pushWhatMattersArticle = (article, topic) => {
+  const pushWhatMattersArticle = (article, topic, { allowReserved = false } = {}) => {
     const key = getArticleUsageKey(article);
-    if (!topic || !key || usedKeys.has(key)) {
+    if (!topic || !key || selectedKeys.has(key) || (!allowReserved && reservedKeys.has(key))) {
       return false;
     }
 
     usedTopics.add(topic.key);
-    usedKeys.add(key);
+    selectedKeys.add(key);
     selected.push({ article, topic });
     return true;
   };
 
+  const fillFromPool = (pool = [], options = {}) => {
+    for (const article of pool) {
+      if (selected.length >= targetCount) {
+        break;
+      }
+
+      const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
+      const topic = getWhatMattersArticleTopic(article, usedTopics) || firstOpenTopic;
+      pushWhatMattersArticle(article, topic, options);
+    }
+  };
+
   for (const article of sourceItems) {
-    if (selected.length >= whatMattersTopics.length) {
+    if (selected.length >= targetCount) {
       break;
     }
 
@@ -11329,7 +11374,7 @@ const renderWhatMattersNow = (items = []) => {
   }
 
   for (const article of frontPageItems) {
-    if (selected.length >= whatMattersTopics.length) {
+    if (selected.length >= targetCount) {
       break;
     }
 
@@ -11355,17 +11400,41 @@ const renderWhatMattersNow = (items = []) => {
     return;
   }
 
-  if (selected.length < whatMattersTopics.length) {
+  if (selected.length < targetCount) {
     const existingCount = selected.length;
     const repeatedRealItems = frontPageItems.filter((article) => {
       const key = getArticleUsageKey(article);
-      return key && !usedKeys.has(key);
+      return key && !selectedKeys.has(key) && !reservedKeys.has(key);
     });
 
-    repeatedRealItems.slice(0, whatMattersTopics.length - existingCount).forEach((article) => {
+    repeatedRealItems.slice(0, targetCount - existingCount).forEach((article) => {
       const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
       pushWhatMattersArticle(article, firstOpenTopic);
     });
+  }
+
+  if (selected.length < targetCount) {
+    fillFromPool(visualRealItems);
+  }
+
+  if (selected.length < targetCount) {
+    fillFromPool(realItems);
+  }
+
+  if (selected.length < targetCount) {
+    fillFromPool(visualRealItems, { allowReserved: true });
+  }
+
+  if (selected.length < targetCount) {
+    fillFromPool(visualFallbackItems, { allowReserved: true });
+  }
+
+  if (selected.length < targetCount) {
+    fillFromPool(realItems, { allowReserved: true });
+  }
+
+  if (selected.length < targetCount) {
+    fillFromPool(fallbackCandidateItems, { allowReserved: true });
   }
 
   selected.forEach((item) => {
@@ -11393,11 +11462,11 @@ const renderWhatMattersNow = (items = []) => {
   });
 
   if (whatMattersTitle) {
-    whatMattersTitle.textContent = selected.length >= 4 ? "4 matérias da semana" : "Matérias da semana";
+    whatMattersTitle.textContent = selected.length >= targetCount ? "4 matérias da semana" : "Matérias da semana";
   }
 
   whatMattersGrid.innerHTML = selected
-    .slice(0, whatMattersTopics.length)
+    .slice(0, targetCount)
     .map(({ article, topic }, index) => buildWhatMattersCard(article, topic, index))
     .join("");
 
