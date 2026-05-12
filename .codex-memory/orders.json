@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-11T19:15:00.432Z",
+  "lastUpdatedAt": "2026-05-12T02:08:21.485Z",
   "orders": [
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
@@ -9050,6 +9050,21 @@
       ],
       "nextSteps": [],
       "notes": "Validado localmente em 127.0.0.1:3168: intro nao fica presa, body sem catalogo-lock-scroll, maxLongTask desktop 731ms e mobile 654ms, review:team totalIssues=0 e perf:budget ok."
+    },
+    {
+      "id": "2026-05-12-usuario-pediu-commit-e-deploy-da-correcao-de-velocidade-da-home-para-testar-onli",
+      "createdAt": "2026-05-12T02:08:21.485Z",
+      "updatedAt": "2026-05-12T02:08:21.485Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faça o comit e deploy e vmaos ver se deu certo",
+      "summary": "Usuario pediu commit e deploy da correcao de velocidade da home para testar online.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }
