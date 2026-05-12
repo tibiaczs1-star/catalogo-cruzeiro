@@ -89,7 +89,7 @@
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260511-intro-speed1" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260512-closed-grids-air1" />
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
@@ -588,8 +588,8 @@
               <span class="hero-panel-icon hero-panel-icon-star" aria-hidden="true"></span>
               <span class="hero-panel-copy">
                 <small>Manchetes</small>
-                <strong class="hero-panel-copy-desktop">Escolha uma foto e veja a manchete em destaque.</strong>
-                <strong class="hero-panel-copy-mobile">Toque para ver fotos grandes e escolher o que ler.</strong>
+                <strong class="hero-panel-copy-desktop">Escolha uma foto para destacar a manchete. Clique para abrir a matéria.</strong>
+                <strong class="hero-panel-copy-mobile">Toque numa foto para ver a manchete e abrir a matéria.</strong>
               </span>
               <span class="hero-panel-media hero-panel-thumbs" aria-label="Manchetes com foto">
                 <a class="hero-panel-photo" href="./arquivo.html?busca=pol%C3%ADtica" data-headline="Decisões públicas entram quando afetam Cruzeiro do Sul e o Vale do Juruá" data-summary="Acompanhe decisões da prefeitura, governo e câmaras quando elas mudam serviços, obras, saúde ou rotina da cidade." style="--thumb:url('./assets/home-cache/fallback-cotidiano.jpg')"><span><b>Política regional</b><strong>Decisões públicas com impacto local</strong><small>Abrir matéria</small></span></a>
@@ -971,6 +971,9 @@
               <article class="premium-caderno-card caderno-card editorial-public"><span class="premium-icon icon-archive"></span><small>Arquivo regional</small><h3>Notícias por tema, fonte e período</h3><p>Tudo que já entrou no portal, pronto para busca limpa.</p><a href="./arquivo.html">Abrir arquivo</a></article>
               <article class="premium-caderno-card caderno-card editorial-anime"><span class="premium-icon icon-video"></span><small>Cultura</small><h3>Cultura, palco e programação publicada</h3><p>O atalho abre notícias de cultura no arquivo, sem cair em área genérica.</p><a href="./arquivo.html?busca=cultura">Ver cultura</a></article>
               <article class="premium-caderno-card caderno-card editorial-commercial"><span class="premium-icon icon-commercial"></span><small>Comercial</small><h3>Anúncios, patrocínio e guia local</h3><p>Marcas da região entram com identificação clara e visual premium.</p><a href="#monetizacao">Anunciar</a></article>
+              <article class="premium-caderno-card caderno-card editorial-calendar"><span class="premium-icon icon-calendar"></span><small>Calendário</small><h3>Feriados, eventos e datas da região</h3><p>Datas comemorativas, pontos facultativos e agendas públicas explicadas.</p><a href="#agenda">Ver calendário</a></article>
+              <article class="premium-caderno-card caderno-card editorial-gallery"><span class="premium-icon icon-gallery"></span><small>Galeria</small><h3>Fotos organizadas por tema e lugar</h3><p>Imagens da cidade, eventos e cotidiano em mosaico para consulta rápida.</p><a href="./galeria.html">Abrir galeria</a></article>
+              <article class="premium-caderno-card caderno-card editorial-community"><span class="premium-icon icon-community"></span><small>Comunidade</small><h3>Moradores, bairros e histórias locais</h3><p>Relatos, pedidos, serviços e personagens que ajudam a contar o Juruá.</p><a href="./arquivo.html?busca=comunidade">Ver comunidade</a></article>
             </div>
           </section>
 
@@ -1027,6 +1030,7 @@
               <a class="future-feature-card" href="./arquivo.html?busca=entrevista"><span class="premium-icon icon-audio"></span><small>Arquivo</small><h3>Entrevistas e bastidores</h3><p>Conversas, relatos e registros publicados ficam organizados para consulta.</p><em>Abrir arquivo</em></a>
               <a class="future-feature-card" href="./arquivo.html?busca=video"><span class="premium-icon icon-video"></span><small>Registros</small><h3>Vídeos regionais</h3><p>Atalho para imagens, bastidores e cobertura visual já vinculada às notícias.</p><em>Ver registros</em></a>
               <a class="future-feature-card" href="./arquivo.html?busca=games"><span class="premium-icon icon-commercial"></span><small>Cultura pop</small><h3>Games, animes e tecnologia</h3><p>Leitura leve com fonte identificada e caminho para o acervo completo.</p><em>Ver caderno</em></a>
+              <a class="future-feature-card" href="./arquivo.html?busca=cinema"><span class="premium-icon icon-culture"></span><small>Cinema</small><h3>Filmes, palco e agenda cultural</h3><p>Estreias, apresentações e eventos culturais ficam reunidos com fonte.</p><em>Abrir cultura</em></a>
             </div>
           </section>
 
@@ -1094,13 +1098,13 @@
               <aside class="premium-region-map" aria-label="Mapa regional do Vale do Juruá">
                 <span class="premium-map-line" aria-hidden="true"></span>
                 <h3>Mapa regional</h3>
-                <p>Resumo por município, rota de serviço e informação útil para o dia.</p>
+                <p>Atalho por município: abre notícias, serviços e alertas locais quando a atualização cita aquela cidade.</p>
                 <ul>
-                  <li class="is-active"><span></span>Cruzeiro do Sul</li>
-                  <li><span></span>Mâncio Lima</li>
-                  <li><span></span>Rodrigues Alves</li>
-                  <li><span></span>Porto Walter</li>
-                  <li><span></span>Marechal Thaumaturgo</li>
+                  <li class="is-active"><span></span><a href="./arquivo.html?busca=Cruzeiro%20do%20Sul"><strong>Cruzeiro do Sul</strong><small>notícias, serviços e alertas</small></a></li>
+                  <li><span></span><a href="./arquivo.html?busca=M%C3%A2ncio%20Lima"><strong>Mâncio Lima</strong><small>notícias, serviços e alertas</small></a></li>
+                  <li><span></span><a href="./arquivo.html?busca=Rodrigues%20Alves"><strong>Rodrigues Alves</strong><small>notícias, serviços e alertas</small></a></li>
+                  <li><span></span><a href="./arquivo.html?busca=Porto%20Walter"><strong>Porto Walter</strong><small>notícias, serviços e alertas</small></a></li>
+                  <li><span></span><a href="./arquivo.html?busca=Marechal%20Thaumaturgo"><strong>Marechal Thaumaturgo</strong><small>notícias, serviços e alertas</small></a></li>
                 </ul>
               </aside>
             </div>
@@ -1112,34 +1116,34 @@
             </div>
           </section>
 
-          <section id="agenda" class="premium-flow-section premium-agenda-section reveal" aria-label="Festas, encontros e programação social">
+          <section id="agenda" class="premium-flow-section premium-agenda-section reveal" aria-label="Calendário regional, feriados e datas importantes">
             <div class="premium-section-head">
               <div>
-                <span class="premium-kicker">festas e social</span>
-                <h2>Eventos do Juruá</h2>
-                <p>Shows, feiras, encontros e movimentações culturais com data, local e caminho para confirmar.</p>
+                <span class="premium-kicker">calendário regional</span>
+                <h2>Eventos, feriados e datas do Brasil e do Juruá</h2>
+                <p>Feriados nacionais, datas comemorativas brasileiras e marcos regionais entram com data clara e caminho para confirmação.</p>
               </div>
-              <a class="premium-button ghost" href="#social">Ver Festas & Social</a>
+              <a class="premium-button ghost" href="./arquivo.html?busca=eventos">Ver arquivo de eventos</a>
             </div>
             <div class="premium-agenda-grid">
               <article class="premium-calendar-card" aria-label="Calendário de maio de 2026">
                 <header>
                   <button class="premium-calendar-control" type="button" aria-label="Ver mês anterior">Mês anterior</button>
-                  <strong>Eventos de maio</strong>
+                  <strong>Maio de 2026</strong>
                   <button class="premium-calendar-control" type="button" aria-label="Ver próximo mês">Próximo mês</button>
                 </header>
                 <div class="premium-calendar-week"><span>Dom</span><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span></div>
                 <div class="premium-calendar-days">
-                  <span></span><span></span><span></span><span></span><b>1</b><b>2</b><b>3</b>
-                  <b>4</b><b>5</b><b>6</b><button type="button" class="is-active">7</button><b>8</b><b>9</b><b>10</b>
-                  <b>11</b><b>12</b><b>13</b><b>14</b><b>15</b><b>16</b><b>17</b>
+                  <span></span><span></span><span></span><span></span><button type="button" class="is-event">1</button><b>2</b><b>3</b>
+                  <b>4</b><b>5</b><b>6</b><b>7</b><b>8</b><b>9</b><button type="button" class="is-event">10</button>
+                  <b>11</b><b>12</b><button type="button" class="is-event">13</button><b>14</b><b>15</b><b>16</b><b>17</b>
                   <b>18</b><b>19</b><b>20</b><b>21</b><b>22</b><b>23</b><b>24</b>
                 </div>
               </article>
               <div class="premium-event-stack">
-                <article><time>08 mai</time><div><small>Comunidade</small><strong>Reunião comunitária no Bairro Miritizal</strong><p>Encontro com pauta de saúde, acesso e mobilidade.</p></div><a href="./arquivo.html?busca=reuni%C3%A3o">Detalhes</a></article>
-                <article><time>10 mai</time><div><small>Cultura</small><strong>Feira do produtor com música e gastronomia local</strong><p>Programação entra com fonte, horário e rota de serviço.</p></div><a href="./arquivo.html?busca=feira">Detalhes</a></article>
-                <article><time>15 mai</time><div><small>Serviço</small><strong>Atendimento itinerante de documentação</strong><p>Ação com data e local para quem precisa resolver pendências sem circular por vários canais.</p></div><a href="./catalogo-servicos.html">Serviços</a></article>
+                <article><time>01 mai</time><div><small>Feriado nacional</small><strong>Dia Mundial do Trabalho</strong><p>Data oficial do calendário brasileiro, útil para funcionamento de serviços e comércio.</p></div><a href="https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026" target="_blank" rel="noreferrer">Confirmar</a></article>
+                <article><time>10 mai</time><div><small>Data comemorativa</small><strong>Dia das Mães</strong><p>Referência para eventos, comércio, homenagens e programação familiar.</p></div><a href="./arquivo.html?busca=Dia%20das%20M%C3%A3es">Ver eventos</a></article>
+                <article><time>13 mai</time><div><small>Data cívica</small><strong>Abolição da Escravatura</strong><p>Marco histórico brasileiro que pode orientar pautas educativas e culturais.</p></div><a href="./arquivo.html?busca=Aboli%C3%A7%C3%A3o">Ver contexto</a></article>
               </div>
               <aside class="premium-poll-card">
                 <span class="premium-kicker">conversa da cidade</span>
@@ -1742,11 +1746,11 @@
 
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, 3200);
+        }, 18000);
       })();
     </script>
     <script defer src="./early-home-surfaces.js?v=20260511-speed-areas5"></script>
-    <script defer src="./script.js?v=20260511-intro-speed1"></script>
+    <script defer src="./script.js?v=20260512-real-matters1"></script>
     <script>
       (function () {
         const styles = [
@@ -1759,30 +1763,28 @@
           "sala-redacao-real.css?v=20260414q",
           "photo-layout-fix.css?v=20260411ab",
           "agentes-newsroom-hero.css?v=20260428-mosaic-publica1",
-          "startup-experience.css?v=20260511-intro-speed1",
+          "startup-experience.css?v=20260511-cookie-passive1",
           "./insiders-crowd-march.css?v=20260426caption-outside",
           "pro-design.css?v=20260420hero-visiblefix",
           "news-photo-fix.css?v=20260415a",
           "deploy-stability.css?v=20260413a",
           "./modern-launch.css?v=20260415d",
-          "./home-header-blue-restore.css?v=20260422a"
+          "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260511-intro-speed1";
-        const startupStyle = "startup-experience.css?v=20260511-intro-speed1";
-        const backgroundStyles = styles.filter((href) => href !== startupStyle);
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260512-closed-grids-air1";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =
           typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
         const queue = [
-          "./startup-experience.js?v=20260511-intro-speed1",
+          "./startup-experience.js?v=20260511-cookie-passive1",
           "./sidebar-data.js?v=20260413a",
           "./sidebar-widgets-recovery.js?v=20260423a",
           "./social-rss-data.js?v=20260413a",
           "./social-rss.js?v=20260423a",
           "runtime-config.js?v=20260415d",
           "./site-google-auth.js?v=20260510-file-authfix1",
-          "deferred-home-boot.js?v=20260511-intro-speed1"
+          "deferred-home-boot.js?v=20260511-no-ninjas1"
         ];
         const deferredBootDelayMs = isCompactBoot ? 220 : 120;
         const deferredBootIdleTimeoutMs = isCompactBoot ? 900 : 650;
@@ -1889,7 +1891,7 @@
               : null;
 
           if (!Array.isArray(payload?.items) || payload.items.length === 0) {
-            completeStep("notícias pela API em segundo plano");
+            await loadScript(staticNewsFallbackScript);
             return;
           }
 
@@ -1901,9 +1903,8 @@
           }
           bootState.started = true;
           notifyProgress("organizando destaques regionais");
-          await loadStyle(startupStyle);
+          await Promise.all(styles.map(loadStyle));
           await loadStyle(premiumHomeStyle);
-          const backgroundStylesPromise = Promise.all(backgroundStyles.map(loadStyle));
           for (const src of queue) {
             await loadScript(src);
           }
@@ -1919,7 +1920,6 @@
             })
           );
           resolveDeferredBoot(bootState);
-          backgroundStylesPromise.catch(() => {});
         };
         const start = () => {
           const launch = () => window.setTimeout(run, deferredBootDelayMs);

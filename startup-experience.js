@@ -3,11 +3,11 @@
 (() => {
   const MODAL_ID = "catalogoPremiumTerms";
   const CONSENT_BANNER_ID = "catalogo-cookie-consent";
-  const READY_FALLBACK_MS = 2400;
+  const READY_FALLBACK_MS = 8000;
   const OPEN_DELAY_MS = 140;
   const CONSENT_KEY = "catalogo_lgpd_consent_v1";
   const CONSENT_COOKIE = "catalogo_tracking_consent";
-  const COOKIE_MAX_AGE_DAYS = 180;
+  const COOKIE_MAX_AGE_DAYS = 3650;
   const SESSION_ACCEPT_KEY = "catalogo_terms_session_accept_v1";
   const WELCOME_SESSION_COOKIE = "catalogo_terms_welcome_session_v1";
   const WELCOME_WEEKLY_KEY = "catalogo_terms_welcome_seen_week_v1";
@@ -19,16 +19,16 @@
   const INITIAL_HOME_LOADER_DAILY_KEY = "catalogo_initial_home_loader_seen_day_v2";
   const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
   const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
-  const INITIAL_HOME_LOADER_MIN_MS = 1050;
-  const ACTION_LOADER_MIN_MS = 920;
-  const ACTION_LOADER_MAX_MS = 2200;
+  const INITIAL_HOME_LOADER_MIN_MS = 2500;
+  const ACTION_LOADER_MIN_MS = 3000;
+  const ACTION_LOADER_MAX_MS = 3600;
   const THANKS_SCREEN_MS = 2600;
   const THANKS_SCREEN_MS_COMPACT = 2200;
   const THANKS_SCREEN_MS_PHONE = 1800;
   const FOUNDER_PRELUDE_MS = 3000;
   const FOUNDER_PRELUDE_MS_COMPACT = 3000;
   const FOUNDER_PRELUDE_MS_PHONE = 3000;
-  const RETURNING_LOADER_MS = 980;
+  const RETURNING_LOADER_MS = 3000;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -171,7 +171,7 @@
   }
 
   function resetConsentForNewBrowserSession() {
-    if (hasAcceptedWelcomeThisWeek()) {
+    if (hasStoredConsent() || hasAcceptedWelcomeThisWeek()) {
       return;
     }
 
@@ -303,7 +303,7 @@
     const dayKey = getDayKey();
 
     try {
-      sessionStorage.setItem(INITIAL_HOME_LOADER_SESSION_KEY, "1");
+      sessionStorage.setItem(INITIAL_HOME_LOADER_SESSION_KEY, dayKey);
     } catch (_error) {
       // ignore storage failures
     }
@@ -315,7 +315,7 @@
     }
   }
 
-  function hasSeenInitialHomeLoaderInThisSession() {
+  function hasSeenInitialHomeLoaderToday() {
     const dayKey = getDayKey();
 
     try {
@@ -327,7 +327,7 @@
     }
 
     try {
-      return sessionStorage.getItem(INITIAL_HOME_LOADER_SESSION_KEY) === "1";
+      return sessionStorage.getItem(INITIAL_HOME_LOADER_SESSION_KEY) === dayKey;
     } catch (_error) {
       return false;
     }
@@ -378,16 +378,12 @@
       // ignore URL parsing failures
     }
 
-    if (hasAcceptedWelcomeThisWeek()) {
-      return true;
-    }
-
-    if (hasStoredConsent() && hasAcceptedWelcomeThisWeek()) {
+    if (hasStoredConsent() || hasAcceptedWelcomeThisWeek()) {
       return true;
     }
 
     try {
-      if (sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1" && hasAcceptedWelcomeThisWeek()) {
+      if (sessionStorage.getItem(SESSION_ACCEPT_KEY) === "1" && (hasStoredConsent() || hasAcceptedWelcomeThisWeek())) {
         return true;
       }
     } catch (_error) {
@@ -1220,7 +1216,7 @@
     return new Promise((resolve) => window.setTimeout(resolve, ms));
   }
 
-  function waitForLogoSplashDone(timeoutMs = 1400) {
+  function waitForLogoSplashDone(timeoutMs = 3200) {
     if (
       window.__CATALOGO_LOGO_SPLASH_DONE__ === true ||
       document.body.classList.contains("site-loaded") ||
@@ -1300,8 +1296,6 @@
   async function runProgressUntilReady(loader, options = {}) {
     const minDuration = options.minDuration || INITIAL_HOME_LOADER_MIN_MS;
     const maxDuration = options.maxDuration || READY_FALLBACK_MS;
-    const hardMaxDuration = options.hardMaxDuration || maxDuration;
-    const waitForReady = options.waitForReady !== false;
     const update = typeof options.update === "function" ? options.update : () => {};
     const statuses = Array.isArray(options.statuses) && options.statuses.length
       ? options.statuses
@@ -1309,13 +1303,11 @@
     const startedAt = Date.now();
     let currentProgress = 0;
     let statusIndex = 0;
-    let ready = !waitForReady;
+    let ready = false;
 
-    if (waitForReady) {
-      waitForHomeReady(maxDuration).then(() => {
-        ready = true;
-      });
-    }
+    waitForHomeReady(maxDuration).then(() => {
+      ready = true;
+    });
 
     return new Promise((resolve) => {
       const timer = window.setInterval(() => {
@@ -1329,7 +1321,7 @@
         );
         update(currentProgress, statuses[statusIndex]);
 
-        if ((ready && elapsed >= minDuration) || elapsed >= hardMaxDuration) {
+        if (ready && elapsed >= minDuration) {
           window.clearInterval(timer);
           update(100, statuses[statuses.length - 1]);
           window.setTimeout(resolve, 180);
@@ -1338,7 +1330,7 @@
 
       window.setTimeout(() => {
         ready = true;
-      }, hardMaxDuration);
+      }, maxDuration);
     });
   }
 
@@ -1369,9 +1361,7 @@
   function openWelcomeModal(modal) {
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    if (!modal.classList.contains("is-home-opening-loader")) {
-      document.body.classList.add("catalogo-lock-scroll");
-    }
+    document.body.classList.add("catalogo-lock-scroll");
   }
 
   function closeWelcomeModal(modal, callback) {
@@ -1452,8 +1442,6 @@
     rememberInitialHomeLoaderInThisSession();
     waitForLogoSplashDone().then(() => {
       const loader = createInitialHomeLoaderModal();
-      const isEditorialHome = document.body.classList.contains("editorial-home");
-      loader.classList.add("is-nonblocking-loader");
       let finished = false;
       let failsafeTimer = 0;
       const finish = () => {
@@ -1471,9 +1459,7 @@
         });
       };
 
-      if (!isEditorialHome) {
-        document.body.classList.add("home-ready-gate-active");
-      }
+      document.body.classList.add("home-ready-gate-active");
       document.body.appendChild(loader);
 
       window.setTimeout(() => {
@@ -1482,17 +1468,15 @@
         updateInitialLoaderProgress(loader, 4, "preparando a primeira abertura");
       }, 30);
 
-      failsafeTimer = window.setTimeout(finish, 1900);
+      failsafeTimer = window.setTimeout(finish, Math.max(READY_FALLBACK_MS + 1200, INITIAL_HOME_LOADER_MIN_MS + 2200));
 
       runProgressUntilReady(loader, {
-        minDuration: isEditorialHome ? 980 : INITIAL_HOME_LOADER_MIN_MS,
-        maxDuration: isEditorialHome ? 1350 : READY_FALLBACK_MS,
-        hardMaxDuration: isEditorialHome ? 1500 : READY_FALLBACK_MS,
-        waitForReady: !isEditorialHome,
+        minDuration: INITIAL_HOME_LOADER_MIN_MS,
+        maxDuration: READY_FALLBACK_MS,
         statuses: [
           "montando capa do jornal",
+          "guardando áreas no navegador",
           "organizando agenda e serviços",
-          "carregando notícias em segundo plano",
           "portal pronto para leitura"
         ],
         update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
@@ -1508,6 +1492,7 @@
   function showNavigationActionLoader(options = {}) {
     const href = options.href || "";
     const label = options.label || "Abrindo materia";
+    const persistUntilNavigation = options.persistUntilNavigation !== false;
     const loader = createReturningLoaderModal({ label });
     let finished = false;
 
@@ -1517,6 +1502,9 @@
       }
       finished = true;
       updateTopLoaderProgress(loader, 100, "abrindo página");
+      if (persistUntilNavigation) {
+        return;
+      }
       loader.classList.add("is-leaving");
       window.setTimeout(() => {
         loader.remove();
@@ -1720,7 +1708,7 @@
         }
 
         if (!shouldSkipWelcomeModal()) {
-          if (!hasSeenInitialHomeLoaderInThisSession()) {
+          if (!hasSeenInitialHomeLoaderToday()) {
             showInitialHomeLoaderThen(() => {
               openWelcomeConsentModal({
                 afterAccept: finishLoaded
@@ -1735,7 +1723,7 @@
           return;
         }
 
-        if (!hasSeenInitialHomeLoaderInThisSession()) {
+        if (!hasSeenInitialHomeLoaderToday()) {
           showInitialHomeLoaderThen(finishLoaded);
           return;
         }

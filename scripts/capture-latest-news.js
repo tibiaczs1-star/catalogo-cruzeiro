@@ -335,9 +335,9 @@ function buildBody(item = {}) {
   const title = cleanText(item.title || "noticia", 180);
   const dateLabel = formatDate(item.publishedAt || item.createdAt || item.date);
   return [
-    `${sourceName} publicou em ${dateLabel} uma atualizacao sobre ${title}.`,
-    `O ponto principal e ${title}. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.`,
-    "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
+    `${sourceName} publicou em ${dateLabel} a base desta noticia sobre ${title}.`,
+    `${title} e o ponto principal da atualizacao captada automaticamente. O portal organiza o material para leitura rapida e mantem o link da fonte original para acompanhamento completo.`,
+    "A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas."
   ];
 }
 

@@ -72,8 +72,6 @@ const EMBEDDED_ENGLISH_MARKER_PATTERN =
   /\b(?:according|announced|available|because|before|camera|coming|company|confirmed|customers|developers|expected|feature|features|gaming|latest|microsoft|people|podcast|released|reported|reportedly|rolling|shortage|started|touchscreen|update|users|windows|would|could|should)\b/g;
 const PORTUGUESE_PUBLIC_MARKER_PATTERN =
   /\b(?:que|com|para|por|uma|um|das|dos|nas|nos|ao|aos|pela|pelo|mais|sobre|como|quando|porque|tambem|também|empresa|aplicativos|visual|icone|ícone|noticia|notícia|fonte|resumo|atualizacao|atualização|publicou|redacao|redação|internacional|brasil|acre)\b/g;
-const PUBLIC_BACKSTAGE_COPY_PATTERN =
-  /\b(?:captada automaticamente|redacao automatica|redação automática|texto automatico|texto automático|gerado automaticamente)\b/i;
 
 const INTERNAL_COPY_PATTERNS = [
   {
@@ -266,23 +264,9 @@ function publicTextSnippet(value) {
 }
 
 function auditPublicTextValue(filePath, source, valuePath, value, issues) {
-  if (typeof value !== "string") {
+  if (typeof value !== "string" || !publicTextHasEmbeddedEnglish(value)) {
     return;
   }
-
-  if (PUBLIC_BACKSTAGE_COPY_PATTERN.test(value)) {
-    pushIssue(issues, {
-      type: "language-review",
-      severity: "high",
-      file: normalizePath(filePath),
-      line: findLineForSerializedText(source, value),
-      label: "Texto publico com linguagem de bastidor",
-      detail: `${valuePath}: ${publicTextSnippet(value)}`
-    });
-    return;
-  }
-
-  if (!publicTextHasEmbeddedEnglish(value)) return;
 
   pushIssue(issues, {
     type: "language-review",

@@ -53,7 +53,7 @@ const PUBLIC_LANGUAGE_PATTERNS = [
 const ENGLISH_PUBLIC_MARKER_PATTERN =
   /\b(?:the|and|that|with|from|this|will|would|could|should|their|there|these|those|about|after|before|because|during|while|into|over|under|more|most|new|now|look|coming|started|rolling|design|apps|users|people|company|whether|it's|its|is|are|was|were|been|being|have|has|had|can|may|might|must|your|you|they|them|his|her|our|out|up|down|when|where|why|how|who|what|which|if|then|than|as|at|by|for|of|on|off|in|to|or|not|one|first|last|latest|today|according|reports|reportedly|expected|available|feature|features|released|announced|video|podcast|phone|camera|smart|gaming|mouse|touchscreen)\b/g;
 const EMBEDDED_ENGLISH_MARKER_PATTERN =
-  /\b(?:according|announced|available|because|before|camera|coming|company|confirmed|customers|developers|expected|feature|features|gaming|latest|microsoft|people|podcast|released|reported|reportedly|rolling|shortage|started|touchscreen|update|users|windows|would|could|should)\b/g;
+  /\b(?:according|announced|available|because|before|camera|coming|company|confirmed|customers|developers|expected|feature|features|gaming|latest|microsoft|people|podcast|released|reported|reportedly|rolling|shortage|started|touchscreen|update|users|windows|would|could|should|school districts|three-year degrees|double milestone|opening the doors|phasmophobia)\b/g;
 const PORTUGUESE_PUBLIC_MARKER_PATTERN =
   /\b(?:que|com|para|por|uma|um|das|dos|nas|nos|ao|aos|pela|pelo|mais|sobre|como|quando|porque|tambem|também|empresa|aplicativos|visual|icone|ícone|noticia|notícia|fonte|resumo|atualizacao|atualização|publicou|redacao|redação|internacional|brasil|acre)\b/g;
 
@@ -71,7 +71,11 @@ const KNOWN_SOURCE_URL_TITLES = new Map([
   ["microsoft-windows-update-pause-indefinitely", "Microsoft deve facilitar pausa nas atualizações do Windows"],
   ["how-project-maven-taught-the-military-to-love-ai", "Como o Project Maven aproximou os militares da IA"],
   ["instagram-says-it-doesnt-want-your-tweet-round-ups", "Instagram quer reduzir republicações de tuítes"],
-  ["girls-around-the-globe-are-losing-gains-in-math-data-shows", "Relatório aponta recuo global de meninas em matemática"]
+  ["girls-around-the-globe-are-losing-gains-in-math-data-shows", "Relatório aponta recuo global de meninas em matemática"],
+  ["as-school-districts-cut-budgets-dei-work-may-be-first-to-go", "Cortes em distritos escolares ameaçam trabalho de diversidade"],
+  ["opinion-three-year-degrees", "Diplomas de três anos ganham debate nos Estados Unidos"],
+  ["eurovision-2026-70th-anniversary-youtube-guide", "Eurovision celebra 70 anos e guia especial no YouTube"],
+  ["phasmophobia-by-alan-wake-opening-the-doors-to-phasmophobias-first-collaboration", "Phasmophobia anuncia colaboração com Alan Wake"]
 ]);
 const ENGLISH_SOURCE_FRAGMENT_PATTERN =
   /\b(?:Microsoft will let|Alex Jones has uncovered|Xreal’s best|Xreal's best|360-degree cameras have|Cybercab goes into production|Skylight’s color-coded|Skylight's color-coded|Acclaimed Japanese director)\b/i;
@@ -329,7 +333,7 @@ function isEnglishSourceItem(item = {}) {
   const sourceText = [item.sourceName, item.source, item.sourceDomain, item.sourceUrl, item.url, item.id, item.slug]
     .map((value) => String(value || "").toLowerCase())
     .join(" ");
-  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com)\b/.test(sourceText);
+  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com|hechingerreport\.org|the hechinger report|blog\.youtube|youtube blog|news\.xbox\.com|xbox wire|blog\.playstation\.com|playstation blog)\b/.test(sourceText);
 }
 
 function inferPublicTitle(item) {
@@ -436,18 +440,6 @@ function sanitizeBodyValue(value, item) {
   if (replacementTitle && /^\s*e o eixo mais concreto/i.test(text)) {
     text = text.replace(/^\s*e o eixo mais concreto/i, `${replacementTitle} e o eixo mais concreto`);
   }
-
-  text = text
-    .replace(
-      /\s+e o ponto principal da atualizacao captada automaticamente\./gi,
-      ". O ponto principal foi organizado para leitura rapida."
-    )
-    .replace(
-      /A redacao automatica acompanha novas atualizacoes da fonte e pode ampliar o contexto conforme novas informacoes forem publicadas\./gi,
-      "A cobertura pode ser ampliada quando a fonte publicar novos dados ou documentos."
-    )
-    .replace(/\bcaptada automaticamente\b/gi, "organizada pela cobertura")
-    .replace(/\bredacao automatica\b/gi, "cobertura do portal");
 
   if (/instagram says it doesn[’']t want your tweet round ups/i.test(text)) {
     text = text.replace(/instagram says it doesn[’']t want your tweet round ups/gi, inferredTitlePt);

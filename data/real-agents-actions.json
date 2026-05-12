@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-05-12T14:49:34.453Z",
+  "updatedAt": "2026-05-12T20:24:33.853Z",
   "actions": [
     {
       "id": "act-editorial-hq-dev-automacao-1",
@@ -12,9 +12,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/01-editorial-hq-dev-automacao.md",
-      "createdAt": "2026-05-12T14:49:34.445Z"
+      "createdAt": "2026-05-12T20:24:33.816Z"
     },
     {
       "id": "act-editorial-hq-otto-physics-2",
@@ -26,9 +26,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/02-editorial-hq-otto-physics.md",
-      "createdAt": "2026-05-12T14:49:34.445Z"
+      "createdAt": "2026-05-12T20:24:33.817Z"
     },
     {
       "id": "act-nerd-studio-otto-physics-3",
@@ -40,9 +40,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/03-nerd-studio-otto-physics.md",
-      "createdAt": "2026-05-12T14:49:34.445Z"
+      "createdAt": "2026-05-12T20:24:33.818Z"
     },
     {
       "id": "act-nerd-studio-zed-engine-4",
@@ -54,9 +54,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/04-nerd-studio-zed-engine.md",
-      "createdAt": "2026-05-12T14:49:34.445Z"
+      "createdAt": "2026-05-12T20:24:33.820Z"
     },
     {
       "id": "act-arte-game-design-collision-5",
@@ -68,9 +68,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/05-arte-game-design-collision.md",
-      "createdAt": "2026-05-12T14:49:34.445Z"
+      "createdAt": "2026-05-12T20:24:33.821Z"
     },
     {
       "id": "act-arte-game-design-physics-6",
@@ -82,9 +82,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/06-arte-game-design-physics.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.821Z"
     },
     {
       "id": "act-arte-game-design-controls-7",
@@ -96,9 +96,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/07-arte-game-design-controls.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.822Z"
     },
     {
       "id": "act-arte-game-design-camera-8",
@@ -110,9 +110,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/08-arte-game-design-camera.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.824Z"
     },
     {
       "id": "act-arte-game-design-engine-arch-9",
@@ -124,9 +124,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/09-arte-game-design-engine-arch.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.825Z"
     },
     {
       "id": "act-arte-game-design-state-machine-10",
@@ -138,9 +138,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/10-arte-game-design-state-machine.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.826Z"
     },
     {
       "id": "act-arte-game-design-npc-ai-11",
@@ -152,9 +152,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/11-arte-game-design-npc-ai.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.826Z"
     },
     {
       "id": "act-arte-game-design-pool-physics-12",
@@ -166,9 +166,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/12-arte-game-design-pool-physics.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.828Z"
     },
     {
       "id": "act-arte-game-design-spritesheet-export-13",
@@ -180,9 +180,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/13-arte-game-design-spritesheet-export.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.829Z"
     },
     {
       "id": "act-arte-game-design-optimizer-14",
@@ -194,9 +194,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/14-arte-game-design-optimizer.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.830Z"
     },
     {
       "id": "act-arte-game-design-deploy-games-15",
@@ -208,9 +208,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/15-arte-game-design-deploy-games.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.831Z"
     },
     {
       "id": "act-arte-game-design-map-tools-16",
@@ -222,9 +222,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/16-arte-game-design-map-tools.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.831Z"
     },
     {
       "id": "act-esttiles-fashion-ecommerce-17",
@@ -236,9 +236,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/17-esttiles-fashion-ecommerce.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.832Z"
     },
     {
       "id": "act-esttiles-fashion-cms-fashion-18",
@@ -250,9 +250,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/18-esttiles-fashion-cms-fashion.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.833Z"
     },
     {
       "id": "act-esttiles-fashion-data-fashion-19",
@@ -264,9 +264,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/19-esttiles-fashion-data-fashion.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.835Z"
     },
     {
       "id": "act-esttiles-fashion-photo-pipeline-20",
@@ -278,9 +278,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/20-esttiles-fashion-photo-pipeline.md",
-      "createdAt": "2026-05-12T14:49:34.446Z"
+      "createdAt": "2026-05-12T20:24:33.835Z"
     },
     {
       "id": "act-esttiles-fashion-calendar-fashion-21",
@@ -292,9 +292,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/21-esttiles-fashion-calendar-fashion.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.836Z"
     },
     {
       "id": "act-esttiles-fashion-trend-ai-22",
@@ -306,9 +306,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/22-esttiles-fashion-trend-ai.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.837Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-deploy-23",
@@ -320,9 +320,9 @@
       "status": "aguardando-aprovacao",
       "points": 754,
       "outcome": "success",
-      "title": "identificar rotinas manuais para automatizar a partir de 1152 noticias ativas",
+      "title": "identificar rotinas manuais para automatizar a partir de 1163 noticias ativas",
       "artifact": ".codex-temp/real-agents/artifacts/23-esttiles-fashion-fashion-deploy.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.837Z"
     },
     {
       "id": "act-editorial-hq-ceo-codex-24",
@@ -334,9 +334,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/24-editorial-hq-ceo-codex.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.838Z"
     },
     {
       "id": "act-editorial-hq-editor-chefe-25",
@@ -348,9 +348,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "revisar a hierarquia de capa com prioridade para Ativista brasileiro chega a São Paulo após ser deportado por Israel",
+      "title": "revisar a hierarquia de capa com prioridade para Vale do Juruá terá reforço na Educação com convocação de aprovados em seletivos",
       "artifact": ".codex-temp/real-agents/artifacts/25-editorial-hq-editor-chefe.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.839Z"
     },
     {
       "id": "act-nerd-studio-codex-nerd-26",
@@ -362,9 +362,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/26-nerd-studio-codex-nerd.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.839Z"
     },
     {
       "id": "act-ninja-vault-ninja-chief-27",
@@ -376,9 +376,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/27-ninja-vault-ninja-chief.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.840Z"
     },
     {
       "id": "act-ninja-vault-ninja-ops-28",
@@ -390,9 +390,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/28-ninja-vault-ninja-ops.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.841Z"
     },
     {
       "id": "act-ninja-vault-ninja-scope-29",
@@ -404,9 +404,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/29-ninja-vault-ninja-scope.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.842Z"
     },
     {
       "id": "act-ninja-vault-ninja-rights-30",
@@ -418,9 +418,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/30-ninja-vault-ninja-rights.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.843Z"
     },
     {
       "id": "act-ninja-vault-ninja-archive-31",
@@ -432,9 +432,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/31-ninja-vault-ninja-archive.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.843Z"
     },
     {
       "id": "act-ninja-vault-ninja-dns-32",
@@ -446,9 +446,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/32-ninja-vault-ninja-dns.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.844Z"
     },
     {
       "id": "act-arte-game-design-arte-lead-33",
@@ -460,9 +460,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/33-arte-game-design-arte-lead.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.845Z"
     },
     {
       "id": "act-esttiles-fashion-fashion-lead-34",
@@ -474,9 +474,9 @@
       "status": "aguardando-aprovacao",
       "points": 745,
       "outcome": "success",
-      "title": "redistribuir foco entre Cotidiano, Política, Esporte",
+      "title": "redistribuir foco entre Política, Cotidiano, Prefeitura",
       "artifact": ".codex-temp/real-agents/artifacts/34-esttiles-fashion-fashion-lead.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.845Z"
     },
     {
       "id": "act-editorial-hq-design-lead-35",
@@ -488,9 +488,9 @@
       "status": "aguardando-aprovacao",
       "points": 740,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de ‘Compromisso e respeito com as contas públicas’, afirma governadora Mailza ao atingir 85% de convocação no concurso do Iapen",
+      "title": "reforcar a embalagem visual de Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/35-editorial-hq-design-lead.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.846Z"
     },
     {
       "id": "act-editorial-hq-robo-arsenal-36",
@@ -502,9 +502,9 @@
       "status": "aguardando-aprovacao",
       "points": 740,
       "outcome": "success",
-      "title": "reforcar a embalagem visual de ‘Compromisso e respeito com as contas públicas’, afirma governadora Mailza ao atingir 85% de convocação no concurso do Iapen",
+      "title": "reforcar a embalagem visual de Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul",
       "artifact": ".codex-temp/real-agents/artifacts/36-editorial-hq-robo-arsenal.md",
-      "createdAt": "2026-05-12T14:49:34.447Z"
+      "createdAt": "2026-05-12T20:24:33.846Z"
     }
   ]
 }

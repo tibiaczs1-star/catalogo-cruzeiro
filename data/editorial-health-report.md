@@ -1,162 +1,162 @@
 # Saude editorial do Jornal
 
-Gerado em: 2026-05-11T18:25:29.958Z
-Escopo: 360/1074 itens recentes.
+Gerado em: 2026-05-12T20:25:13.274Z
+Escopo: 360/1167 itens recentes.
 
 ## Resumo
-- Gates: P0 73, P1 172, P2 115
-- Aprovacao humana exigida: 73
-- Pendencias de fonte: 73
-- Pendencias visuais: 206
+- Gates: P0 76, P1 146, P2 138
+- Aprovacao humana exigida: 76
+- Pendencias de fonte: 76
+- Pendencias visuais: 183
 - Titulos alternativos gerados: 240
 - Especiais seguros sugeridos: 60
 
 ## Pendencias para humano/IDE
-- P0 human-approval: Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização criminosa
+- P0 human-approval: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização criminosa
+- P0 ide-fix: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização criminosa
+- P0 ide-fix: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médico do SAMU
+- P0 human-approval: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médico do SAMU
+- P0 ide-fix: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médico do SAMU
+- P0 ide-fix: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Segurança pública do Acre reforça combate ao suicídio com curso de intervenção em crises e preservação de vidas
+- P0 human-approval: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Segurança pública do Acre reforça combate ao suicídio com curso de intervenção em crises e preservação de vidas
+- P0 ide-fix: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Segurança pública do Acre reforça combate ao suicídio com curso de intervenção em crises e preservação de vidas
+- P0 ide-fix: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Brigas durante consumo de álcool lideram causas de homicídios no Acre, aponta Polícia Civil
+- P0 human-approval: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Brigas durante consumo de álcool lideram causas de homicídios no Acre, aponta Polícia Civil
+- P0 ide-fix: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Brigas durante consumo de álcool lideram causas de homicídios no Acre, aponta Polícia Civil
+- P0 ide-fix: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
   Motivo: Pendencia visual: p0-p1-sem-credito-visual.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos
+- P0 human-approval: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos
+- P0 ide-fix: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Pesquisa global de percepção sobre o Brasil revela pontos fortes e fracos
+- P0 ide-fix: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Acre registra queda de 21,56% nos furtos em 2026, aponta Sejusp
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Acre registra queda de 21,56% nos furtos em 2026, aponta Sejusp
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Acre registra queda de 21,56% nos furtos em 2026, aponta Sejusp
+  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
+- P0 human-approval: Urgente: homem é encontrado morto debaixo de ponte em Rio Branco
+  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
+  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
+- P0 ide-fix: Urgente: homem é encontrado morto debaixo de ponte em Rio Branco
+  Motivo: Pendencia de fonte: p0-com-fonte-unica.
+  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
+- P0 ide-fix: Urgente: homem é encontrado morto debaixo de ponte em Rio Branco
   Motivo: Pendencia visual: p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Prefeitura não apresenta proposta e Sinteac mantém manifestações com ameaça de greve em Rio Branco
+- P0 human-approval: Caminhonete da Polícia Penal sofre acidente após tentativa de desviar de buraco em estrada de Cruzeiro do Sul
   Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
   Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Prefeitura não apresenta proposta e Sinteac mantém manifestações com ameaça de greve em Rio Branco
+- P0 ide-fix: Caminhonete da Polícia Penal sofre acidente após tentativa de desviar de buraco em estrada de Cruzeiro do Sul
   Motivo: Pendencia de fonte: p0-com-fonte-unica.
   Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Prefeitura não apresenta proposta e Sinteac mantém manifestações com ameaça de greve em Rio Branco
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: Segurança escolar no Acre: aplicativo aciona polícia com um botão e deve chegar a 100% das escolas até dezembro
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: Segurança escolar no Acre: aplicativo aciona polícia com um botão e deve chegar a 100% das escolas até dezembro
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: Segurança escolar no Acre: aplicativo aciona polícia com um botão e deve chegar a 100% das escolas até dezembro
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
-  Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
-- P0 human-approval: “Era briga todo dia”, afirma vizinho de mulher morta após casamento em SP
-  Motivo: Cobertura sensivel: violencia, menor, policia, justica, saude publica ou crise.
-  Comando: Cheffe Call: aprovar, segurar ou pedir ajuste humano antes de destacar a materia.
-- P0 ide-fix: “Era briga todo dia”, afirma vizinho de mulher morta após casamento em SP
-  Motivo: Pendencia de fonte: p0-com-fonte-unica.
-  Comando: Codex IDE: conferir sourceUrl/sourceName/crossSources da materia e rodar npm run editorial:health.
-- P0 ide-fix: “Era briga todo dia”, afirma vizinho de mulher morta após casamento em SP
-  Motivo: Pendencia visual: p0-p1-sem-credito-visual.
+- P0 ide-fix: Caminhonete da Polícia Penal sofre acidente após tentativa de desviar de buraco em estrada de Cruzeiro do Sul
+  Motivo: Pendencia visual: p0-com-ilustracao-generica.
   Comando: Codex IDE: conferir imageUrl/imageCredit/imageLabel da materia e rodar npm run editorial:health.
 
 ## Titulos alternativos
-- Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento
-  - Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento: veja os pontos principais
-  - Entenda urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento
-  - Jurua Online informa: Urgente: porto de Rodrigues Alves é interditado após risco de desbarrancamento
-- Irã executa homem condenado por espionagem a serviço dos EUA e de Israel
-  - Irã executa homem condenado por espionagem a serviço dos EUA e de Israel: veja os pontos principais
-  - Entenda irã executa homem condenado por espionagem a serviço dos EUA e de Israel
-  - Jurua Online informa: Irã executa homem condenado por espionagem a serviço dos EUA e de Israel
-- Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização criminosa
-  - Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização criminosa: veja os pontos
-  - O que se sabe sobre operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização crimi
-  - Jurua Online informa: Operação integrada cumpre 34 mandados de prisão em quatro estados e mira organização cri
-- Homem acusado de tentar assassinar Trump em jantar na Casa Branca se declara inocente
-  - Homem acusado de tentar assassinar Trump em jantar na Casa Branca se declara inocente: veja os pontos principa
-  - Entenda homem acusado de tentar assassinar Trump em jantar na Casa Branca se declara inocente
-  - Jurua Online informa: Homem acusado de tentar assassinar Trump em jantar na Casa Branca se declara inocente
-- Mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 milhões
-  - Mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 milhões: veja os pontos
-  - Entenda mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 milhões
-  - Jurua Online informa: Mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 mi
-- Acre já recebeu quase 69 mil declarações do Imposto de Renda 2026; maioria dos contribuintes deve ter restituição
-  - Acre já recebeu quase 69 mil declarações do Imposto de Renda 2026; maioria dos contribuintes deve ter restitui
-  - Entenda acre já recebeu quase 69 mil declarações do Imposto de Renda 2026; maioria dos contribuintes deve ter
-  - Jurua Online informa: Acre já recebeu quase 69 mil declarações do Imposto de Renda 2026; maioria dos contribui
-- Aplicação a partir de R$ 1, rendimento atrelado à Selic: como funciona o novo Tesouro Reserva
-  - Aplicação a partir de R$ 1, rendimento atrelado à Selic: como funciona o novo Tesouro Reserva: veja os pontos
-  - Entenda aplicação a partir de R$ 1, rendimento atrelado à Selic: como funciona o novo Tesouro Reserva
-  - Jurua Online informa: Aplicação a partir de R$ 1, rendimento atrelado à Selic: como funciona o novo Tesouro Re
-- Acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médico do SAMU
-  - Acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médico do SAMU: veja os po
-  - O que se sabe sobre acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médico
-  - Jurua Online informa: Acidente na Variante de Cruzeiro do Sul deixou uma vítima morta e duas feridas, diz médi
-- Putin diz que guerra na Ucrânia é ‘justa’ e critica Otan em desfile enxuto do Dia da Vitória
-  - Putin diz que guerra na Ucrânia é ‘justa’ e critica Otan em desfile enxuto do Dia da Vitória: veja os pontos p
-  - Entenda putin diz que guerra na Ucrânia é ‘justa’ e critica Otan em desfile enxuto do Dia da Vitória
-  - Jurua Online informa: Putin diz que guerra na Ucrânia é ‘justa’ e critica Otan em desfile enxuto do Dia da Vit
-- Moraes suspende Dosimetria até STF julgar ações contra lei que reduz pena de Bolsonaro e condenados do 8 de Janeiro; o que acontece agora
-  - Moraes suspende Dosimetria até STF julgar ações contra lei que reduz pena de Bolsonaro e condenados do 8 de Ja
-  - Entenda moraes suspende Dosimetria até STF julgar ações contra lei que reduz pena de Bolsonaro e condenados do
-  - Jurua Online informa: Moraes suspende Dosimetria até STF julgar ações contra lei que reduz pena de Bolsonaro e
-- Cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo
-  - Cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo: veja os pontos principais
-  - Entenda cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo
-  - Jurua Online informa: Cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo
-- Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Palmeiras
-  - Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Palmeiras:
-  - Entenda seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Pal
-  - Jurua Online informa: Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López
+- Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul
+  - Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de Cruzeiro do Sul: veja
+  - O que se sabe sobre caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de C
+  - Jurua Online informa: Caminhonete da Polícia Penal sai da pista após tentar desviar de buraco em comunidade de
+- Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
+  - Operação nacional da PF mira facções criminosas e cumpre mandados no Acre: veja os pontos principais
+  - O que se sabe sobre operação nacional da PF mira facções criminosas e cumpre mandados no Acre
+  - Jurua Online informa: Operação nacional da PF mira facções criminosas e cumpre mandados no Acre
+- Câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por enchentes
+  - Câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por enchentes: veja os pon
+  - Entenda câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por enchentes
+  - Jurua Online informa: Câmara de Rio Branco aprova auxílio emergencial de R$ 2 mil para famílias atingidas por
+- Após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa Civil fará laudo técnico
+  - Após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa Civil fará laudo técnic
+  - Entenda após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa Civil fará laud
+  - Jurua Online informa: Após susto com estalos e lajotas soltas, prédio é evacuado em Cruzeiro do Sul e Defesa C
+- Suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul
+  - Suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul: veja os pontos principais
+  - Entenda suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul
+  - Jurua Online informa: Suspeita de rachaduras mobiliza evacuação de prédio comercial em Cruzeiro do Sul
+- Frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Juruá
+  - Frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Juruá: veja os pontos pri
+  - Entenda frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Juruá
+  - Jurua Online informa: Frente fria muda rotina em Cruzeiro do Sul e movimenta comércio de roupas no Vale do Jur
+- Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
+  - Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual: veja os pontos princip
+  - O que se sabe sobre cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
+  - Jurua Online informa: Cruzeiro do Sul já conta com programa Escola Segura em cinco unidades da rede estadual
+- Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual
+  - Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a rede estadual: veja
+  - O que se sabe sobre aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda a
+  - Jurua Online informa: Aplicativo Escola Segura já funciona em 47 escolas do Acre e deve ser ampliado para toda
+- Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica
+  - Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência doméstica: veja os pontos
+  - O que se sabe sobre detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência domést
+  - Jurua Online informa: Detran do Acre prorroga inscrições da CNH Social para mulheres vítimas de violência domé
+- Acre tem um dos maiores números de mães solo do país, aponta IBGE
+  - Acre tem um dos maiores números de mães solo do país, aponta IBGE: veja os pontos principais
+  - Entenda acre tem um dos maiores números de mães solo do país, aponta IBGE
+  - Jurua Online informa: Acre tem um dos maiores números de mães solo do país, aponta IBGE
+- Governo do Acre amplia prazo de adesão ao Refis
+  - Governo do Acre amplia prazo de adesão ao Refis: veja os pontos principais
+  - Entenda governo do Acre amplia prazo de adesão ao Refis
+  - Jurua Online informa: Governo do Acre amplia prazo de adesão ao Refis
+- COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO
+  - COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO: veja os pontos principais
+  - Entenda cOTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO
+  - Prefeitura de CZS informa: COTAÇÃO DE PREÇOS - FORNECIMENTO DE VEÍCULOS DE PASSEIO
 
 ## Formatos especiais seguros
-- linha do tempo curta: Irã executa homem condenado por espionagem a serviço dos EUA e de Israel
+- agenda visual: Jogos e eventos para não perder nesta terça-feira (12)
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- guia de servico: Mega-Sena, concurso 3.006: nenhuma aposta acerta as seis dezenas e prêmio vai a R$ 52 milhões
+- linha do tempo curta: Clima adverso nos EUA eleva cotações do trigo em chicago
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Cruzeiro tem cinco jogadores na pré-lista da Seleção para a Copa do Mundo
+- guia de servico: Professores bolivianos bloqueiam ponte na fronteira com o Acre em protesto por reajuste salarial
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Seleção da Argentina divulga pré-lista de convocados para Copa do Mundo com Flaco López e Giay, do Palmeiras
+- linha do tempo curta: Irmã do traficante Abelha é presa por tráfico e ligação com CV no Rio
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Desenrola Brasil permite uso do FGTS para quitar dívidas; veja como funciona e quem pode aderir
+- agenda visual: Porto Walter conquista 3º lugar em evolução da Alfabetização no Acre
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Jorge Viana inicia agenda pelo interior do Acre ao lado de Binho Marques e fala em “novo momento” para o estado
+- agenda visual: Possível convocado, Bento sofre falha bizarra e adia título saudita de CR7
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Jogos de hoje: quem joga no futebol e onde assistir ao vivo – segunda-feira (11/05)
+- agenda visual: Bento tem falha bisonha, Al-Nassr empata e não confirma título saudita
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- agenda visual: Expoacre Juruá em Cruzeiro do Sul e Expoacre Rio Branco já têm datas definidas para 2026
+- linha do tempo curta: Autoridades de defesa e comércio viajam com Trump à China; veja lista
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Endrick detona brasileiros que torcem para a Argentina: “Loucura”
+- linha do tempo curta: Copa do Mundo: veja os jogadores que estão na pré-lista da seleção brasileira
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Flamengo vence o Grêmio na Arena e segue caça ao líder Palmeiras
+- agenda visual: Mansão bloqueada de Renato Aragão tem heliponto e campo de futebol; veja
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Seleção Brasileira: Veja os 55 pré-selecionados para a Copa
+- agenda visual: Cantor de “Lose Control” revela perrengue ao se ouvir no rádio pela 1ª vez
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.
-- linha do tempo curta: Irã adverte aliados dos EUA que será difícil para eles cruzar Estreito de Ormuz
+- linha do tempo curta: Lupita Nyong’o interpretará duas personagens em filme de Christopher Nolan
   Guarda: Usar apenas fatos da fonte, sem sensacionalismo e sem prometer dado nao apurado.

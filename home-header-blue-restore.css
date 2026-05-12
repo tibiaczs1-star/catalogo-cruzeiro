@@ -1,4 +1,66 @@
 /* Restaura o topo azul da home quando camadas de "glass" o deixam lavado. */
+html:has(body.editorial-home),
+html body.editorial-home {
+  background-color: #020b14 !important;
+  background-image:
+    radial-gradient(circle at 8% 16%, rgba(240, 180, 41, 0.08), transparent 24rem),
+    radial-gradient(circle at 90% 14%, rgba(77, 163, 255, 0.1), transparent 26rem),
+    linear-gradient(180deg, #020b14 0%, #051724 50%, #020b14 100%) !important;
+}
+
+body.editorial-home::before {
+  background-color: #020b14 !important;
+  background-image:
+    radial-gradient(circle at 11% 18%, rgba(240, 180, 41, 0.12), transparent 18rem),
+    radial-gradient(circle at 88% 20%, rgba(77, 163, 255, 0.1), transparent 20rem),
+    linear-gradient(180deg, rgba(2, 11, 20, 0.98), rgba(5, 23, 36, 0.96) 50%, rgba(2, 11, 20, 0.98)) !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+
+body.editorial-home::after {
+  mix-blend-mode: normal !important;
+}
+
+body.editorial-home .cinematic-parallax {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(240, 180, 41, 0.08), transparent 24rem),
+    radial-gradient(circle at 88% 18%, rgba(77, 163, 255, 0.1), transparent 26rem),
+    linear-gradient(180deg, #020b14 0%, #061624 48%, #020b14 100%) !important;
+}
+
+body.editorial-home .cinematic-parallax .parallax-base {
+  background:
+    radial-gradient(circle at 50% 14%, rgba(77, 163, 255, 0.08), transparent 28rem),
+    linear-gradient(180deg, rgba(2, 11, 20, 0.98), rgba(6, 22, 36, 0.94) 50%, rgba(2, 11, 20, 0.98)) !important;
+  opacity: 1 !important;
+}
+
+body.editorial-home .cinematic-parallax .parallax-light {
+  background:
+    radial-gradient(ellipse at center, rgba(77, 163, 255, 0.13), rgba(240, 180, 41, 0.06) 42%, transparent 70%) !important;
+  filter: blur(32px) saturate(0.72) brightness(0.72) !important;
+  mix-blend-mode: normal !important;
+  opacity: 0.2 !important;
+}
+
+body.editorial-home .cinematic-parallax .parallax-light-left {
+  left: -14vw !important;
+  width: 32vw !important;
+}
+
+body.editorial-home .cinematic-parallax .parallax-light-right {
+  right: -14vw !important;
+  width: 32vw !important;
+}
+
+body.editorial-home .cinematic-parallax .parallax-map,
+body.editorial-home .cinematic-parallax .parallax-lines,
+body.editorial-home .cinematic-parallax .parallax-fragments {
+  filter: saturate(0.7) brightness(0.68) !important;
+  opacity: 0.18 !important;
+}
+
 body.editorial-home .site-header-stack {
   border: 1px solid rgba(146, 214, 255, 0.2) !important;
   background:
@@ -298,4 +360,52 @@ body.editorial-home .trending-card.main .reaction-meter {
 body.editorial-home .trending-card.main .reaction-meter i {
   background: #f0c14f !important;
   box-shadow: 0 0 0 1px rgba(255, 225, 132, 0.1), 0 8px 18px rgba(240, 193, 79, 0.18) !important;
+}
+
+/* 2026-05-12: trava carregada por ultimo para cards respirarem e fecharem linhas completas. */
+html body.editorial-home :is(
+  #radar .news-grid,
+  .premium-timeline.archive-grid,
+  .live-feed-grid,
+  .premium-social-grid.social-grid
+) {
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)) !important;
+  gap: 1.05rem !important;
+}
+
+html body.editorial-home #cadernos.premium-cadernos-section .premium-caderno-grid.cadernos-grid,
+html body.editorial-home #entretenimento.premium-entertainment-section .premium-entertainment-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+@media (max-width: 1500px) {
+  html body.editorial-home #cadernos.premium-cadernos-section .premium-caderno-grid.cadernos-grid,
+  html body.editorial-home #entretenimento.premium-entertainment-section .premium-entertainment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1180px) {
+  html body.editorial-home :is(
+    #radar .news-grid,
+    .premium-timeline.archive-grid,
+    .live-feed-grid,
+    .premium-social-grid.social-grid
+  ) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  }
+}
+
+@media (max-width: 720px) {
+  html body.editorial-home :is(
+    #radar .news-grid,
+    .premium-timeline.archive-grid,
+    .live-feed-grid,
+    .premium-social-grid.social-grid
+  ),
+  html body.editorial-home #cadernos.premium-cadernos-section .premium-caderno-grid.cadernos-grid,
+  html body.editorial-home #entretenimento.premium-entertainment-section .premium-entertainment-grid {
+    grid-template-columns: 1fr !important;
+  }
 }

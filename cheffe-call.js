@@ -68,6 +68,12 @@
   const photoApprovalRunRuntimeText = document.querySelector("#photoApprovalRunRuntimeText");
   const photoApprovalDecisionButtons = Array.from(document.querySelectorAll("[data-photo-decision]"));
   const photoFocusPresetButtons = Array.from(document.querySelectorAll("[data-photo-focus]"));
+  const cheffeFrontendReview = document.querySelector("#cheffeFrontendReview");
+  const frontendReviewCounter = document.querySelector("#frontendReviewCounter");
+  const frontendReviewSummary = document.querySelector("#frontendReviewSummary");
+  const frontendReviewList = document.querySelector("#frontendReviewList");
+  const frontendReviewBackToPhotos = document.querySelector("#frontendReviewBackToPhotos");
+  const frontendReviewContinue = document.querySelector("#frontendReviewContinue");
   const cheffeActionFeedback = document.querySelector("#cheffeActionFeedback");
   const cheffeActionFeedbackBadge = document.querySelector("#cheffeActionFeedbackBadge");
   const cheffeActionFeedbackTitle = document.querySelector("#cheffeActionFeedbackTitle");
@@ -235,6 +241,9 @@
   let photoApprovalQueue = [];
   let photoApprovalIndex = 0;
   let photoApprovalBusy = false;
+  let photoApprovalMode = "approval";
+  let frontendReviewItems = [];
+  let frontendReviewBusy = false;
   let actionFeedbackTimer = 0;
   let latestOpinionFlow = [];
   let decisionComposerSeed = null;
@@ -1047,10 +1056,175 @@
     }[decision] || "Registrar decisão";
   }
 
+  function normalizeFrontendArticleReviewItem(item = {}) {
+    const slug = String(item.slug || item.id || "").trim();
+    const title = String(item.title || item.headline || slug || "Matéria sem título").trim();
+    const imageUrl = String(
+      item.imageUrl ||
+        item.feedImageUrl ||
+        item.sourceImageUrl ||
+        item.thumbnail ||
+        item.image ||
+        ""
+    ).trim();
+    return {
+      slug,
+      title,
+      category: String(item.category || item.eyebrow || "Notícia").trim(),
+      sourceName: String(item.sourceName || item.source || item.sourceLabel || "fonte não informada").trim(),
+      publishedAt: String(item.publishedAt || item.date || item.createdAt || "").trim(),
+      summary: String(item.summary || item.lede || item.description || "").trim(),
+      imageUrl,
+      imageFocus: String(item.imageFocus || item.effectiveFocus || item.objectPosition || "center 42%").trim(),
+      articleUrl: slug ? `./noticia.html?slug=${encodeURIComponent(slug)}` : "./arquivo.html"
+    };
+  }
+
+  async function fetchFrontendOnlineArticles() {
+    const response = await fetch("/api/news?limit=120", {
+      headers: { Accept: "application/json" },
+      cache: "no-store"
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || !payload.ok) {
+      throw new Error(payload.error || payload.message || "Não foi possível carregar as matérias online.");
+    }
+    return (Array.isArray(payload.items) ? payload.items : [])
+      .map(normalizeFrontendArticleReviewItem)
+      .filter((item) => item.slug && item.title)
+      .slice(0, 80);
+  }
+
+  function renderFrontendReviewList() {
+    if (!frontendReviewList) return;
+    frontendReviewList.innerHTML = "";
+    const fragment = document.createDocumentFragment();
+    frontendReviewItems.forEach((item, index) => {
+      const card = document.createElement("article");
+      card.className = "frontend-review-item";
+      const badge = document.createElement("span");
+      badge.textContent = String(index + 1).padStart(2, "0");
+      const copy = document.createElement("div");
+      const title = document.createElement("strong");
+      const meta = document.createElement("small");
+      const summary = document.createElement("p");
+      const actions = document.createElement("div");
+      const openLink = document.createElement("a");
+      const reviewButton = document.createElement("button");
+
+      title.textContent = item.title;
+      meta.textContent = [item.category, item.sourceName].filter(Boolean).join(" | ");
+      summary.textContent = item.summary || "Matéria publicada no frontend e disponível para revisão humana.";
+      openLink.href = item.articleUrl;
+      openLink.target = "_blank";
+      openLink.rel = "noopener";
+      openLink.textContent = "Abrir";
+      reviewButton.type = "button";
+      reviewButton.textContent = "Revisar texto/imagem";
+      reviewButton.addEventListener("click", () => openFrontendArticleForManualReview(item));
+      actions.append(openLink, reviewButton);
+      copy.append(title, meta, summary);
+      card.append(badge, copy, actions);
+      fragment.appendChild(card);
+    });
+    frontendReviewList.appendChild(fragment);
+  }
+
+  async function openFrontendReviewList(options = {}) {
+    const password = getAdminPassword();
+    if (!password) {
+      openAccessModal("Senha obrigatória para conferir as matérias online.", "bad");
+      return;
+    }
+    photoApprovalMode = "approval";
+    frontendReviewBusy = true;
+    if (cheffePhotoApproval) cheffePhotoApproval.hidden = true;
+    if (cheffeFrontendReview) cheffeFrontendReview.hidden = false;
+    cheffeAccessCard?.classList.remove("is-reviewing-photos");
+    cheffeAccessCard?.classList.add("is-reviewing-frontend");
+    cheffeAccessModal?.classList.remove("has-photo-approval");
+    cheffeAccessModal?.classList.add("has-frontend-review");
+    if (frontendReviewBackToPhotos) frontendReviewBackToPhotos.hidden = photoApprovalQueue.length <= 0;
+    if (frontendReviewContinue) frontendReviewContinue.disabled = true;
+    setPasswordStatus(options.message || "Senha validada. Conferindo matérias online antes da sala.", "pending");
+    try {
+      if (options.reload !== false || frontendReviewItems.length === 0) {
+        frontendReviewItems = await fetchFrontendOnlineArticles();
+      }
+      if (frontendReviewCounter) {
+        frontendReviewCounter.textContent = `${frontendReviewItems.length} matéria${frontendReviewItems.length === 1 ? "" : "s"}`;
+      }
+      if (frontendReviewSummary) {
+        frontendReviewSummary.textContent = frontendReviewItems.length
+          ? "Lista real do frontend carregada. Abra qualquer matéria ou envie uma para correção humana antes de continuar."
+          : "Nenhuma matéria online foi retornada pela API agora.";
+      }
+      renderFrontendReviewList();
+      setPasswordStatus("Matérias online conferidas. Escolha uma para revisar ou continue para a sala.", "ok");
+      setStatus("Lista de matérias online carregada antes da Cheffe Call.", "ok");
+    } catch (error) {
+      if (frontendReviewSummary) {
+        frontendReviewSummary.textContent = error.message || "Falha ao carregar a lista online.";
+      }
+      setPasswordStatus(error.message || "Falha ao carregar lista online.", "bad");
+      setStatus(error.message || "Falha ao carregar lista online.", "bad");
+    } finally {
+      frontendReviewBusy = false;
+      if (frontendReviewContinue) frontendReviewContinue.disabled = false;
+    }
+  }
+
+  function openFrontendArticleForManualReview(item = {}) {
+    const normalized = normalizeFrontendArticleReviewItem(item);
+    if (!normalized.slug) {
+      setPasswordStatus("Matéria sem slug não pode ir para correção automática.", "bad");
+      return;
+    }
+    photoApprovalMode = "frontend";
+    photoApprovalQueue = [
+      {
+        slug: normalized.slug,
+        title: normalized.title,
+        category: normalized.category,
+        sourceName: normalized.sourceName,
+        publishedAt: normalized.publishedAt,
+        level: "manual-review",
+        reasons: ["frontend-manual-review"],
+        reasonLabels: ["revisão humana solicitada no frontend"],
+        imageUrl: normalized.imageUrl,
+        effectiveFocus: normalized.imageFocus || "center 42%",
+        suggestedFocus: normalized.imageFocus || "center 42%",
+        articleUrl: normalized.articleUrl,
+        decision: null
+      }
+    ];
+    photoApprovalIndex = 0;
+    if (photoApprovalRunRuntime) photoApprovalRunRuntime.checked = true;
+    if (cheffeFrontendReview) cheffeFrontendReview.hidden = true;
+    if (cheffePhotoApproval) cheffePhotoApproval.hidden = false;
+    cheffeAccessCard?.classList.remove("is-reviewing-frontend");
+    cheffeAccessCard?.classList.add("is-reviewing-photos");
+    cheffeAccessModal?.classList.remove("has-frontend-review");
+    cheffeAccessModal?.classList.add("has-photo-approval");
+    setPasswordStatus("Matéria aberta para revisão humana. Salve a decisão e volte para a lista online.", "pending");
+    renderPhotoApprovalItem();
+  }
+
+  function resetFrontendReviewGate() {
+    frontendReviewItems = [];
+    frontendReviewBusy = false;
+    if (cheffeFrontendReview) cheffeFrontendReview.hidden = true;
+    if (frontendReviewList) frontendReviewList.innerHTML = "";
+    if (frontendReviewCounter) frontendReviewCounter.textContent = "0 matérias";
+    cheffeAccessCard?.classList.remove("is-reviewing-frontend");
+    cheffeAccessModal?.classList.remove("has-frontend-review");
+  }
+
   function resetPhotoApprovalGate() {
     photoApprovalQueue = [];
     photoApprovalIndex = 0;
     photoApprovalBusy = false;
+    photoApprovalMode = "approval";
     if (cheffePhotoApproval) cheffePhotoApproval.hidden = true;
     cheffeAccessCard?.classList.remove("is-reviewing-photos");
     cheffeAccessModal?.classList.remove("has-photo-approval");
@@ -1065,6 +1239,7 @@
 
   function openAccessModal(message = "Digite a senha Full Admin para entrar na Cheffe Call.", tone = "") {
     resetPhotoApprovalGate();
+    resetFrontendReviewGate();
     cheffeAccessModal?.classList.remove("is-unlocked");
     document.body.classList.add("cheffe-access-locked");
     setPasswordStatus(message, tone);
@@ -1075,6 +1250,7 @@
     cheffeAccessModal?.classList.add("is-unlocked");
     document.body.classList.remove("cheffe-access-locked");
     resetPhotoApprovalGate();
+    resetFrontendReviewGate();
   }
 
   function getAdminPassword() {
@@ -1235,6 +1411,10 @@
         : "Abrir sala sem aplicar agora";
     }
     if (photoApprovalContinue) {
+      if (photoApprovalMode === "frontend") {
+        photoApprovalContinue.textContent = "Voltar para lista online";
+        return;
+      }
       if (shouldRun && stats.runtimeWorkCount > 0) {
         photoApprovalContinue.textContent = `Rodar ${stats.runtimeWorkCount} e abrir sala`;
       } else if (shouldRun) {
@@ -1422,13 +1602,17 @@
   }
 
   function openPhotoApprovalQueue(payload) {
+    photoApprovalMode = "approval";
     photoApprovalQueue = Array.isArray(payload?.queue) ? payload.queue : [];
     photoApprovalIndex = findNextPendingPhotoIndex(0);
     const stats = getPhotoApprovalStats();
     if (photoApprovalRunRuntime) photoApprovalRunRuntime.checked = true;
     cheffePhotoApproval.hidden = false;
+    if (cheffeFrontendReview) cheffeFrontendReview.hidden = true;
     cheffeAccessCard?.classList.add("is-reviewing-photos");
+    cheffeAccessCard?.classList.remove("is-reviewing-frontend");
     cheffeAccessModal?.classList.add("has-photo-approval");
+    cheffeAccessModal?.classList.remove("has-frontend-review");
     setPasswordStatus(
       stats.pending > 0
         ? "Senha validada. Revise a fila de foto/foco antes de abrir a sala."
@@ -1580,6 +1764,30 @@
       if (!response.ok || !payload.ok) {
         throw new Error(payload.error || "Falha ao registrar decisao de foto/foco.");
       }
+      if (photoApprovalMode === "frontend") {
+        setPhotoApprovalBusy(false);
+        photoApprovalQueue = [];
+        photoApprovalIndex = 0;
+        setPasswordStatus("Correção registrada. Voltando para a lista online.", "ok");
+        setActionFeedback({
+          badge: "Frontend",
+          title: "Correção registrada",
+          message: `${decisionLabel} salvo para "${item.title || item.slug}". A runtime dos agentes pode aplicar ao continuar.`,
+          tone: "ok",
+          steps: [
+            { label: "Matéria online localizada", state: "done" },
+            { label: "Decisão humana gravada", state: "done" },
+            { label: "Lista online reaberta", state: "done" }
+          ],
+          closable: true,
+          autoCloseMs: 2600
+        });
+        await openFrontendReviewList({
+          reload: true,
+          message: "Correção registrada. Confira a lista online novamente."
+        });
+        return;
+      }
       const normalizedPayload = await fetchPhotoApprovals(password);
       photoApprovalQueue = Array.isArray(normalizedPayload.queue) ? normalizedPayload.queue : photoApprovalQueue;
       const stats = getPhotoApprovalStats();
@@ -1604,7 +1812,11 @@
         autoCloseMs: 2600
       });
       if (Number(normalizedPayload.pendingCount || 0) <= 0) {
-        await enterCheffeRoom("Fila de foto/foco registrada. Rodando agentes antes de abrir a sala.");
+        setPhotoApprovalBusy(false);
+        await openFrontendReviewList({
+          reload: true,
+          message: "Fila de foto/foco registrada. Confira as matérias online antes da sala."
+        });
         return;
       }
       photoApprovalIndex = findNextPendingPhotoIndex(photoApprovalIndex + 1);
@@ -5517,7 +5729,10 @@
         approvalPayload = await fetchPhotoApprovals(password);
       } catch (approvalError) {
         setPasswordStatus("Senha validada. Fila de foto/foco indisponivel agora.", "bad");
-        await enterCheffeRoom(approvalError.message || "Senha validada. Fila indisponivel.");
+        await openFrontendReviewList({
+          reload: true,
+          message: approvalError.message || "Fila de foto/foco indisponível. Conferindo matérias online."
+        });
         return;
       }
       if (Number(approvalPayload.pendingCount || 0) > 0) {
@@ -5528,7 +5743,10 @@
         openPhotoApprovalQueue(approvalPayload);
         return;
       }
-      await enterCheffeRoom("Senha validada. Sem foto/foco pendente.");
+      await openFrontendReviewList({
+        reload: true,
+        message: "Senha validada. Sem foto/foco pendente; confira as matérias online."
+      });
     } catch (error) {
       cheffeAdminPassword = "";
       try {
@@ -5584,16 +5802,32 @@
 
   photoApprovalContinue?.addEventListener("click", () => {
     if (photoApprovalBusy) return;
-    const stats = getPhotoApprovalStats();
-    const message = photoApprovalRunRuntime?.checked
-      ? "Rodando agentes para aplicar decisões antes de abrir a sala."
-      : stats.runtimeWorkCount > 0
-        ? "Acesso liberado sem aplicar agora. Decisoes ficaram na fila."
-        : "Acesso liberado. Decisoes pendentes ficaram na fila.";
-    enterCheffeRoom(message);
+    openFrontendReviewList({
+      reload: true,
+      message:
+        photoApprovalMode === "frontend"
+          ? "Voltando para a lista das matérias online."
+          : "Foto/foco conferido. Agora confira as matérias online antes da sala."
+    });
   });
 
   photoApprovalRunRuntime?.addEventListener("change", updatePhotoApprovalRuntimeControls);
+
+  frontendReviewBackToPhotos?.addEventListener("click", () => {
+    if (frontendReviewBusy || photoApprovalQueue.length <= 0) return;
+    if (cheffeFrontendReview) cheffeFrontendReview.hidden = true;
+    if (cheffePhotoApproval) cheffePhotoApproval.hidden = false;
+    cheffeAccessCard?.classList.remove("is-reviewing-frontend");
+    cheffeAccessCard?.classList.add("is-reviewing-photos");
+    cheffeAccessModal?.classList.remove("has-frontend-review");
+    cheffeAccessModal?.classList.add("has-photo-approval");
+    renderPhotoApprovalItem();
+  });
+
+  frontendReviewContinue?.addEventListener("click", () => {
+    if (frontendReviewBusy) return;
+    enterCheffeRoom("Lista online conferida. Abrindo Cheffe Call.");
+  });
 
   sendTerminalEl?.addEventListener("click", async () => {
     const form = new FormData(formEl);

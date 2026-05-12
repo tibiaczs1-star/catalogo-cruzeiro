@@ -124,10 +124,10 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 760 : 980;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 1500 : 1900;
-const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 180 : 240;
-const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 120 : 160;
+const splashDailyMinimumMs = 2500;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 4200 : 5200;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 760 : 980;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 420 : 580;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -467,10 +467,16 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260511-intro-speed1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
+  "./styles.css?v=20260511-loader-flow1",
+  "./premium-home-redesign.css?v=20260511-speed-areas1",
+  "./startup-experience.css?v=20260511-loader-flow1",
+  "./early-home-surfaces.js?v=20260511-speed-areas5",
+  "./script.js?v=20260511-loader-flow1",
+  "./startup-experience.js?v=20260511-loader-flow1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -1853,46 +1859,41 @@ const warmPortalCacheInBackground = () => {
     return;
   }
 
-  const warmDelayMs = splashCompactViewportQuery.matches ? 18000 : 14000;
-
-  window.setTimeout(() => runSplashIdleTask(async () => {
+  runSplashIdleTask(() => {
     const urls = collectPortalWarmCacheUrls();
     if (!urls.length) {
       return;
     }
 
     rememberPortalCacheWarmToday();
-    const warmUrls = urls.slice(0, splashCompactViewportQuery.matches ? 5 : 8);
 
     if ("caches" in window) {
-      try {
-        const cache = await caches.open(portalWarmCacheName);
-        for (const href of warmUrls) {
-          await fetch(href, {
-            cache: "force-cache",
-            credentials: "same-origin"
-          })
-            .then((response) => {
-              if (response.ok) {
-                return cache.put(href, response.clone()).then(() => true);
-              }
+      caches
+        .open(portalWarmCacheName)
+        .then((cache) =>
+          Promise.all(
+            urls.map((href) =>
+              fetch(href, {
+                cache: "force-cache",
+                credentials: "same-origin"
+              })
+                .then((response) => {
+                  if (response.ok) {
+                    return cache.put(href, response.clone()).then(() => true);
+                  }
 
-              return false;
-            })
-            .catch(() => false);
-          await waitForSplashDelay(180);
-        }
-      } catch (_error) {
-        // Cache warmup is optional and should never block the reader.
-      }
+                  return false;
+                })
+                .catch(() => false)
+            )
+          )
+        )
+        .catch(() => {});
       return;
     }
 
-    for (const href of warmUrls) {
-      await prefetchPortalUrl(href);
-      await waitForSplashDelay(180);
-    }
-  }, 6000), warmDelayMs);
+    Promise.all(urls.map(prefetchPortalUrl)).catch(() => {});
+  }, 2200);
 };
 
 const waitForSplashTimeout = (promise, timeoutMs = splashGateStepTimeoutMs) =>
@@ -2085,23 +2086,32 @@ const waitForSplashReadiness = async () => {
   const steps = [
     {
       label: "Preparando o site",
-      progress: 18,
-      wait: () => waitForSplashDelay(90)
+      progress: 12,
+      wait: () => Promise.resolve()
     },
     {
-      label: "Separando logo e capa",
-      progress: 42,
-      wait: () => waitForSplashFontsReady(140)
+      label: "Separando logo, fontes e capa",
+      progress: 28,
+      wait: () =>
+        Promise.all([
+          waitForSplashDocumentComplete(splashGateStepTimeoutMs),
+          waitForSplashFontsReady(splashGateStepTimeoutMs)
+        ])
     },
     {
-      label: "Guardando notícias em segundo plano",
-      progress: 68,
-      wait: () => waitForSplashPreloads(160)
+      label: "Guardando notícias para abrir mais rápido",
+      progress: 46,
+      wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
     },
     {
-      label: "Mostrando a primeira tela",
-      progress: 90,
-      wait: () => waitForSplashDelay(120)
+      label: "Deixando a primeira tela pronta",
+      progress: 82,
+      wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
+    },
+    {
+      label: "Finalizando imagens críticas",
+      progress: 96,
+      wait: () => waitForSplashCriticalImages(splashGateStepTimeoutMs)
     },
     {
       label: "Portal pronto para abrir",
@@ -2111,13 +2121,10 @@ const waitForSplashReadiness = async () => {
   ];
 
   for (const step of steps) {
-    updateSplashProgress(Math.max(0, step.progress - 10), step.label);
+    updateSplashProgress(Math.max(0, step.progress - 8), step.label);
     await waitForSplashTimeout(step.wait(), step.timeout || splashGateStepTimeoutMs);
     updateSplashProgress(step.progress, step.label);
   }
-
-  waitForSplashDeferredBoot(900).catch(() => undefined);
-  waitForSplashCriticalImages(900).catch(() => undefined);
 };
 
 const setupSplashExperience = () => {
@@ -2823,7 +2830,129 @@ const setActiveRadarFilter = (filter = "todos") => {
   });
 };
 
-const radarSummaryTarget = 10;
+const getRenderedCardGridColumnCount = (grid, fallbackColumns = 1) => {
+  if (!grid) {
+    return Math.max(1, Number(fallbackColumns) || 1);
+  }
+
+  const computedColumns = window.getComputedStyle(grid).gridTemplateColumns || "";
+  const columnCount = computedColumns
+    .split(/\s+/)
+    .map((value) => value.trim())
+    .filter((value) => value && value !== "none").length;
+
+  if (columnCount > 0) {
+    return columnCount;
+  }
+
+  const width = grid.getBoundingClientRect().width || window.innerWidth || 0;
+  if (width >= 1680) return 4;
+  if (width >= 1280) return 4;
+  if (width >= 900) return 3;
+  if (width >= 560) return 2;
+  return 1;
+};
+
+const getClosedCardGridTarget = (
+  grid,
+  { rows = 2, fallbackColumns = 3, singleColumnTarget = 0, minimum = 1 } = {}
+) => {
+  const columns = getRenderedCardGridColumnCount(grid, fallbackColumns);
+  if (columns <= 1) {
+    return Math.max(minimum, singleColumnTarget || rows);
+  }
+
+  return Math.max(minimum, columns * rows);
+};
+
+const getVisibleGeometryCards = (grid, cardSelector = ":scope > *") => {
+  if (!grid) {
+    return [];
+  }
+
+  return [...grid.querySelectorAll(cardSelector)].filter((card) => {
+    if (card.parentElement !== grid) {
+      return false;
+    }
+
+    if (card.dataset.geometryHidden === "true") {
+      card.hidden = false;
+      delete card.dataset.geometryHidden;
+    }
+
+    const rect = card.getBoundingClientRect();
+    const style = window.getComputedStyle(card);
+    return !card.hidden && style.display !== "none" && style.visibility !== "hidden" && rect.width > 24 && rect.height > 24;
+  });
+};
+
+const applyClosedCardGridGeometry = (
+  grid,
+  { cardSelector = ":scope > *", fallbackColumns = 3 } = {}
+) => {
+  const cards = getVisibleGeometryCards(grid, cardSelector);
+  if (cards.length < 3) {
+    return { columns: 1, count: cards.length, hidden: 0, remainder: 0 };
+  }
+
+  const columns = getRenderedCardGridColumnCount(grid, fallbackColumns);
+  if (columns <= 1 || cards.length <= columns) {
+    return { columns, count: cards.length, hidden: 0, remainder: 0 };
+  }
+
+  const remainder = cards.length % columns;
+  if (!remainder) {
+    return { columns, count: cards.length, hidden: 0, remainder: 0 };
+  }
+
+  cards.slice(-remainder).forEach((card) => {
+    card.dataset.geometryHidden = "true";
+    card.hidden = true;
+  });
+
+  return { columns, count: cards.length, hidden: remainder, remainder };
+};
+
+const closedCardGridRegistry = [
+  { selector: "#radar .news-grid", cardSelector: ":scope > .news-card", fallbackColumns: 4 },
+  { selector: ".premium-social-grid.social-grid", cardSelector: ":scope > .premium-event-card", fallbackColumns: 3 },
+  { selector: ".premium-timeline.archive-grid", cardSelector: ":scope > .premium-timeline-item", fallbackColumns: 4 },
+  { selector: ".premium-caderno-grid.cadernos-grid", cardSelector: ":scope > .caderno-card", fallbackColumns: 4 },
+  { selector: ".premium-entertainment-grid", cardSelector: ":scope > .future-feature-card", fallbackColumns: 4 },
+  { selector: "#live-feed-grid", cardSelector: ":scope > .generated-feed-card", fallbackColumns: 4 }
+];
+
+const applyGlobalClosedCardGrids = () => {
+  closedCardGridRegistry.forEach((entry) => {
+    document.querySelectorAll(entry.selector).forEach((grid) => {
+      applyClosedCardGridGeometry(grid, entry);
+    });
+  });
+};
+
+let closedCardGridResizeTimer = 0;
+window.addEventListener("resize", () => {
+  window.clearTimeout(closedCardGridResizeTimer);
+  closedCardGridResizeTimer = window.setTimeout(applyGlobalClosedCardGrids, 180);
+});
+
+window.addEventListener("catalogo:deferred-assets-ready", () => {
+  window.setTimeout(applyGlobalClosedCardGrids, 0);
+  window.setTimeout(applyGlobalClosedCardGrids, 360);
+});
+
+window.addEventListener("load", () => {
+  window.setTimeout(applyGlobalClosedCardGrids, 720);
+});
+
+const radarSummaryDefaultTarget = 10;
+const getRadarSummaryTarget = (grid) =>
+  getClosedCardGridTarget(grid, {
+    rows: 3,
+    fallbackColumns: 4,
+    singleColumnTarget: radarSummaryDefaultTarget,
+    minimum: 9
+  });
 const radarSummaryFlowFilters = ["governo", "cruzeiro", "jurua", "acre", "politica", "brasil", "internacional"];
 
 const isRadarSummaryArticle = (article = {}) => {
@@ -2836,7 +2965,8 @@ const isRadarSummaryArticle = (article = {}) => {
   );
 };
 
-const getRadarSpotlightArticles = (filter = "todos") => {
+const getRadarSpotlightArticles = (filter = "todos", target = radarSummaryDefaultTarget) => {
+  const targetLimit = Math.max(1, Number(target) || radarSummaryDefaultTarget);
   const allArticles = sortRadarArticles([...(window.NEWS_DATA || [])])
     .map((article) => normalizeRuntimeArticle(article))
     .filter(isRadarSummaryArticle);
@@ -2862,12 +2992,12 @@ const getRadarSpotlightArticles = (filter = "todos") => {
 
     seenKeys.add(articleKey);
     spotlight.push(article);
-    return spotlight.length >= radarSummaryTarget;
+    return spotlight.length >= targetLimit;
   };
 
   if (normalizedFilter === "todos") {
     radarSummaryFlowFilters.forEach((flowFilter) => {
-      if (spotlight.length >= radarSummaryTarget) {
+      if (spotlight.length >= targetLimit) {
         return;
       }
 
@@ -2878,15 +3008,15 @@ const getRadarSpotlightArticles = (filter = "todos") => {
 
   filteredArticles.some((article) => pushUnique(article));
 
-  if (spotlight.length < radarSummaryTarget) {
+  if (spotlight.length < targetLimit) {
     filteredArticles.some((article) => pushUnique(article, { allowReserved: true }));
   }
 
-  if (spotlight.length < radarSummaryTarget) {
+  if (spotlight.length < targetLimit) {
     allArticles.some((article) => pushUnique(article, { allowReserved: true }));
   }
 
-  return spotlight.slice(0, radarSummaryTarget);
+  return spotlight.slice(0, targetLimit);
 };
 
 const sortRadarContinuityArticles = (articles = []) =>
@@ -3064,7 +3194,8 @@ const renderRadar = (filter = "todos") => {
     return;
   }
 
-  const spotlightArticles = getRadarSpotlightArticles(filter);
+  const radarTarget = getRadarSummaryTarget(radarGrid);
+  const spotlightArticles = getRadarSpotlightArticles(filter, radarTarget);
   const continuityArticles = spotlightArticles.length
     ? []
     : getRadarContinuityArticles(filter, spotlightArticles);
@@ -3102,6 +3233,10 @@ const renderRadar = (filter = "todos") => {
   updateRadarGuide(filter, displayedArticles, { continuity: spotlightArticles.length === 0 });
   registerInteractivePanels(radarGrid);
   window.setTimeout(() => registerArticleCardLinks(radarGrid), 0);
+  applyClosedCardGridGeometry(radarGrid, {
+    cardSelector: ":scope > .news-card",
+    fallbackColumns: 5
+  });
 };
 
 if (radarGuide && !performanceLiteMode) {
@@ -3587,11 +3722,54 @@ const liveFeedFocus = document.querySelector("#live-feed-focus");
 const liveFeedSources = document.querySelector("#live-feed-sources");
 const liveFeedClear = document.querySelector("#live-feed-clear");
 const liveFeedState = {
-  pageSize: 10,
-  visibleItems: 10,
+  pageSize: 12,
+  visibleItems: 12,
   items: [...initialStaticNews],
   archiveTotal: Math.max(initialStaticNews.length, Number(window.NEWS_ARCHIVE_TOTAL || 0) || 0),
   activeCategory: ""
+};
+
+const getLiveFeedColumnCount = () => {
+  if (!liveFeedGrid) {
+    return 4;
+  }
+
+  const computedColumns = window.getComputedStyle(liveFeedGrid).gridTemplateColumns || "";
+  const columnCount = computedColumns
+    .split(/\s+/)
+    .map((value) => value.trim())
+    .filter((value) => value && value !== "none").length;
+
+  if (columnCount > 0) {
+    return columnCount;
+  }
+
+  const width = liveFeedGrid.getBoundingClientRect().width || window.innerWidth || 0;
+  if (width >= 1280) return 4;
+  if (width >= 900) return 3;
+  if (width >= 560) return 2;
+  return 1;
+};
+
+const getLiveFeedPageSizeForCurrentGrid = () =>
+  Math.max(3, getLiveFeedColumnCount() * 3);
+
+const syncLiveFeedGridPageSize = ({ reset = false } = {}) => {
+  const currentPageSize = Math.max(1, Number(liveFeedState.pageSize) || 12);
+  const nextPageSize = getLiveFeedPageSizeForCurrentGrid();
+  const wasInitialWindow = Number(liveFeedState.visibleItems || 0) <= currentPageSize;
+
+  liveFeedState.pageSize = nextPageSize;
+
+  if (reset || wasInitialWindow) {
+    liveFeedState.visibleItems = nextPageSize;
+    return;
+  }
+
+  liveFeedState.visibleItems = Math.max(
+    nextPageSize,
+    Math.ceil(Number(liveFeedState.visibleItems || nextPageSize) / nextPageSize) * nextPageSize
+  );
 };
 
 const monthIndex = {
@@ -3882,6 +4060,7 @@ const previewClassByCategory = {
   negocios: "thumb-pascoa",
   policia: "thumb-policia",
   educacao: "thumb-servico",
+  calendario: "thumb-servico",
   prefeitura: "thumb-politica",
   "acre-governo": "thumb-politica",
   politica: "thumb-politica",
@@ -3900,6 +4079,7 @@ const categoryLabelByKey = {
   policia: "Polícia",
   saude: "Saúde",
   educacao: "Serviços",
+  calendario: "Calendário",
   negocios: "Negócios",
   cultura: "Cultura",
   esporte: "Esporte",
@@ -3916,6 +4096,11 @@ const categoryAliasMap = {
   educacao: "educacao",
   economia: "negocios",
   negocios: "negocios",
+  calendario: "calendario",
+  calendário: "calendario",
+  feriado: "calendario",
+  feriados: "calendario",
+  "datas comemorativas": "calendario",
   cultura: "cultura",
   variedades: "cultura",
   esporte: "esporte",
@@ -3962,6 +4147,7 @@ const radarCategoryRelevance = {
   policia: 4,
   educacao: 4,
   esporte: 4,
+  calendario: 4,
   negocios: 3,
   cultura: 3,
   "festas & social": 2,
@@ -4936,6 +5122,34 @@ function articleHasUsableImageCandidate(article = {}, surface = "default") {
   return Boolean(getArticlePreferredImageUrl(article, surface));
 }
 
+const weakHeroImageUrlPattern =
+  /(?:^|\/)assets\/news-fallbacks\/|(?:^|\/)assets\/home-cache\/fallback-|placeholder|spacer|blank|favicon|logo|avatar|blur_\d|\/v1\/fill\/w_(?:[1-9]|[1-9]\d|1\d\d),h_/i;
+
+const weakHeroImageQualityPattern =
+  /\b(fallback|placeholder|imagem ausente|sem imagem|generica|genérica|buscar na fonte|review|aguardando decisao|aguardando decisão)\b/;
+
+const articleHasPremiumHeroImageCandidate = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const imageUrl = getArticlePreferredImageUrl(normalizedArticle, "hero");
+  const rawImageUrl = unwrapProxyImageUrl(imageUrl);
+
+  if (!imageUrl || weakHeroImageUrlPattern.test(rawImageUrl)) {
+    return false;
+  }
+
+  const qualityText = normalizeText(
+    [
+      normalizedArticle.imageQuality,
+      normalizedArticle.imageReviewStatus,
+      normalizedArticle.imageStatus,
+      normalizedArticle.media?.quality,
+      normalizedArticle.media?.status
+    ].join(" ")
+  );
+
+  return !weakHeroImageQualityPattern.test(qualityText);
+};
+
 function getArticleImageKey(article = {}, surface = "default") {
   return getImageFingerprint(getArticleDisplayImageUrl(article, surface));
 }
@@ -5742,7 +5956,7 @@ const isHeroPanelNewsCandidate = (
     return false;
   }
 
-  return Boolean(sanitizeImageUrl(getArticleDisplayImageUrl(normalizedArticle, "hero")));
+  return articleHasPremiumHeroImageCandidate(normalizedArticle);
 };
 
 const buildHeroPhotoFromArticle = (article = {}) => {
@@ -5780,6 +5994,10 @@ const buildHeroTourismRuntimePool = () => {
   const pushArticle = (article) => {
     if (!article || selected.length >= heroTourismDailyTarget) {
       return true;
+    }
+
+    if (!articleHasPremiumHeroImageCandidate(article)) {
+      return false;
     }
 
     const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
@@ -5837,6 +6055,10 @@ const buildHeroTourismFallbackPool = () => {
   )
     .filter((article) => {
       const areaKey = getHeroAreaKey(article);
+      if (!articleHasPremiumHeroImageCandidate(article)) {
+        return false;
+      }
+
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
       const storyKey = getRadarArticleKey(article);
       if (!areaKey || !imageUrl || seenKeys.has(storyKey)) {
@@ -5885,6 +6107,10 @@ const buildHeroTourismDailyPool = () => {
     .map((article) => normalizeRuntimeArticle(article))
     .filter((article) => article.heroFeatured || article.featuredHero)
     .map((article) => {
+      if (!articleHasPremiumHeroImageCandidate(article)) {
+        return null;
+      }
+
       const imageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(article, "hero"));
       return {
         title: article.category || "Destaque autoral",
@@ -5901,7 +6127,7 @@ const buildHeroTourismDailyPool = () => {
         sourceName: article.sourceName || "Catálogo Cruzeiro do Sul"
       };
     })
-    .filter((item) => item.proxyUrl && item.articleHref);
+    .filter((item) => item && item.proxyUrl && item.articleHref);
   const runtimePool = buildDailyOrderedHeroItems(buildHeroTourismRuntimePool(), `${dayKey}:runtime`);
 
   const pushUniquePhoto = (photo = {}) => {
@@ -10878,6 +11104,102 @@ const isWhatMattersJuruaArticle = (article = {}) => {
   );
 };
 
+const whatMattersPlaceholderPattern =
+  /\b(aparece aqui|entra aqui|completam os quatro|ficam no centro|ganham leitura|noticia em destaque|notícia em destaque|atualizacao importante|atualização importante|base identifica|quando houver noticia|quando houver notícia)\b/;
+const whatMattersNoticePattern =
+  /\b(aviso de licitacao|aviso de licitação|cotacao de precos|cotação de preços|pregao|pregão|edital|decreto n|decreto nº|portaria|extrato|diario oficial|diário oficial|chamada publica|chamada pública|credenciamento|dispensa de licitacao|dispensa de licitação)\b/;
+const whatMattersWeakSummaryPattern =
+  /\b(fonte consultada traz a base|base desta noticia|base desta notícia|publicou uma atualizacao sobre|publicou uma atualização sobre|publicou em .* a base desta noticia|publicou em .* a base desta notícia|acompanha novas atualizacoes antes de ampliar|acompanha novas atualizações antes de ampliar|material original ainda nao trouxe|material original ainda não trouxe|a materia entra na vitrine|a matéria entra na vitrine)\b/;
+const whatMattersRemoteHumanInterestPattern =
+  /\b(adriane galisteu|simony|chico pinheiro|ana maria braga|globo|record|sbt|cnn brasil|celebridade|famos[ao]s?|dia das maes|dia das mães|cancer|câncer|hospital|atividade fisica|atividade física|drogas na juventude|álcool|alcool|maconha)\b/;
+const whatMattersNationalSourcePattern =
+  /\b(cnn brasil|agencia brasil|agência brasil|terra|uol|g1 nacional|bbc brasil|reuters|estadao|estadão|folha)\b/;
+const whatMattersLocalTitlePattern =
+  /\b(cruzeiro do sul|czs|juru[aá]|acre|rio branco|sena madureira|feij[oó]|tarauac[aá]|xapuri|brasil[eé]ia|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|assis brasil|placido de castro|pl[aá]cido de castro)\b/;
+
+const isUsableWhatMattersArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const titleText = normalizeText(normalizedArticle.title);
+  const summaryText = normalizeText(
+    [
+      normalizedArticle.displaySummary,
+      normalizedArticle.summary,
+      normalizedArticle.lede,
+      normalizedArticle.description,
+      Array.isArray(normalizedArticle.body) ? normalizedArticle.body.join(" ") : normalizedArticle.body
+    ].join(" ")
+  );
+  const sourceName = normalizeText(normalizedArticle.sourceName || normalizedArticle.sourceLabel);
+  const href = buildArticleHref(normalizedArticle);
+
+  if (!titleText || whatMattersPlaceholderPattern.test(titleText)) {
+    return false;
+  }
+
+  if (whatMattersNoticePattern.test(titleText)) {
+    return false;
+  }
+
+  if (whatMattersRemoteHumanInterestPattern.test(titleText) && !whatMattersLocalTitlePattern.test(titleText)) {
+    return false;
+  }
+
+  if (whatMattersNationalSourcePattern.test(sourceName) && !whatMattersLocalTitlePattern.test(titleText)) {
+    return false;
+  }
+
+  if (whatMattersWeakSummaryPattern.test(summaryText) && !/\b(acidente|morte|hospital|saude|saúde|aula|escola|ponte|balsa|trânsito|transito|governo|politica|política|cancer|câncer)\b/.test(summaryText)) {
+    return false;
+  }
+
+  if (!href || href === "#" || /^#/.test(href)) {
+    return false;
+  }
+
+  if (sourceName === "base local do jurua" && !normalizedArticle.slug) {
+    return false;
+  }
+
+  return Boolean(normalizedArticle.slug || normalizedArticle.sourceUrl || normalizedArticle.url || normalizedArticle.link);
+};
+
+const isWhatMattersFrontPageArticle = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const tier = getEditorialRegionalTier(normalizedArticle);
+
+  return (
+    tier === "cruzeiro" ||
+    tier === "jurua" ||
+    tier === "acre" ||
+    isWhatMattersJuruaArticle(normalizedArticle) ||
+    hasClearLocalReaderImpact(normalizedArticle)
+  );
+};
+
+const buildWhatMattersFallbackSummary = (article = {}) => {
+  const normalizedArticle = normalizeRuntimeArticle(article);
+  const title = cleanArticleText(normalizedArticle.title || "Atualização em acompanhamento").replace(/\.$/, "");
+  const titleKey = normalizeText(title);
+
+  if (/\b(acidente|vitima|vítima|morte|medico|médico|hospital)\b/.test(titleKey)) {
+    return `${title}. A atualização acompanha o estado das vítimas e os detalhes informados pela fonte.`;
+  }
+
+  if (/\b(mailza|governo|politica|política|liderancas|lideranças|acre)\b/.test(titleKey)) {
+    return `${title}. A cobertura acompanha a movimentação política e os impactos na agenda pública do Acre.`;
+  }
+
+  if (/\b(balsa|travessia|ponte|rodovia|variante|interditad|transito|trânsito)\b/.test(titleKey)) {
+    return `${title}. A informação ajuda o leitor a entender mudanças de rota, acesso e serviço na região.`;
+  }
+
+  if (/\b(escola|educacao|educação|ifac|aluno|estudante|saude|saúde)\b/.test(titleKey)) {
+    return `${title}. A notícia resume o impacto direto para serviços públicos e rotina da comunidade.`;
+  }
+
+  return `${title}. Leia a cobertura completa com fonte identificada e contexto para acompanhar o desdobramento.`;
+};
+
 const getWhatMattersArticleTopic = (article = {}, usedTopicKeys = new Set()) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
   const text = normalizeText(
@@ -10905,7 +11227,8 @@ const getWhatMattersArticleTopic = (article = {}, usedTopicKeys = new Set()) => 
 
 const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index = 0) => {
   const normalizedArticle = normalizeRuntimeArticle(article);
-  const href = normalizedArticle.slug ? buildArticleHref(normalizedArticle) : topic.href;
+  const rawHref = buildArticleHref(normalizedArticle);
+  const href = rawHref && rawHref !== "#" ? rawHref : topic.href;
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
   const sourceStatus = getPublicSourceStatusBadge(normalizedArticle);
   const dateLabel =
@@ -10915,12 +11238,27 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
   const title = truncateCopyAtWord(normalizedArticle.title || "Atualização importante", 128, {
     suffix: ""
   });
+  const rawSummary =
+    normalizedArticle.displaySummary ||
+    normalizedArticle.summary ||
+    normalizedArticle.lede ||
+    normalizedArticle.description ||
+    "";
+  const safeSummary = whatMattersPlaceholderPattern.test(normalizeText(rawSummary))
+    ? ""
+    : rawSummary;
+  const realSummary =
+    safeSummary && !whatMattersWeakSummaryPattern.test(normalizeText(safeSummary))
+      ? safeSummary
+      : buildWhatMattersFallbackSummary(normalizedArticle);
   const summary = buildReadableCardSummary(
     {
       ...normalizedArticle,
-      summary: normalizedArticle.summary || topic.fallbackSummary,
-      lede: normalizedArticle.lede || topic.fallbackSummary,
-      displaySummary: normalizedArticle.displaySummary || topic.fallbackSummary
+      summary: realSummary,
+      lede: realSummary,
+      displaySummary: realSummary,
+      description: realSummary,
+      body: [realSummary]
     },
     260
   );
@@ -10944,7 +11282,7 @@ const renderWhatMattersNow = (items = []) => {
     return;
   }
 
-  const sourceItems = dedupeNewsItems(
+  const realItems = dedupeNewsItems(
     [
       ...(Array.isArray(items) ? items : []),
       ...(Array.isArray(liveFeedState.items) ? liveFeedState.items : []),
@@ -10953,7 +11291,7 @@ const renderWhatMattersNow = (items = []) => {
   )
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isRealPublicNewsSource)
-    .filter(isWhatMattersJuruaArticle)
+    .filter(isUsableWhatMattersArticle)
     .filter((item) => !isInternationalOnlyPublicArticle(item))
     .filter((item) => item.title && (item.sourceUrl || item.slug))
     .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
@@ -10962,10 +11300,24 @@ const renderWhatMattersNow = (items = []) => {
         imageBias: false
       })
     );
+  const sourceItems = realItems.filter(isWhatMattersJuruaArticle);
+  const frontPageItems = realItems.filter(isWhatMattersFrontPageArticle);
 
   const selected = [];
   const usedTopics = new Set();
   const usedKeys = buildReservedArticleKeys(["whatMatters"]);
+
+  const pushWhatMattersArticle = (article, topic) => {
+    const key = getArticleUsageKey(article);
+    if (!topic || !key || usedKeys.has(key)) {
+      return false;
+    }
+
+    usedTopics.add(topic.key);
+    usedKeys.add(key);
+    selected.push({ article, topic });
+    return true;
+  };
 
   for (const article of sourceItems) {
     if (selected.length >= whatMattersTopics.length) {
@@ -10973,37 +11325,75 @@ const renderWhatMattersNow = (items = []) => {
     }
 
     const topic = getWhatMattersArticleTopic(article, usedTopics);
-    const key = getArticleUsageKey(article);
-    if (!topic || !key || usedKeys.has(key)) {
-      continue;
-    }
-
-    usedTopics.add(topic.key);
-    usedKeys.add(key);
-    selected.push({ article, topic });
+    pushWhatMattersArticle(article, topic);
   }
 
-  whatMattersTopics.forEach((topic) => {
-    if (selected.some((item) => item.topic.key === topic.key)) {
+  for (const article of frontPageItems) {
+    if (selected.length >= whatMattersTopics.length) {
+      break;
+    }
+
+    const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key));
+    const topic = getWhatMattersArticleTopic(article, usedTopics) || firstOpenTopic;
+    pushWhatMattersArticle(article, topic);
+  }
+
+  if (!selected.length) {
+    whatMattersGrid.innerHTML = `
+      <article class="what-matters-card reveal active">
+        <span class="source-status-badge is-editorial-radar">arquivo</span>
+        <p>Notícias</p>
+        <h3><a href="./arquivo.html">Arquivo regional em atualização</a></h3>
+        <small>As matérias reais aparecem aqui assim que a base local carregar títulos, fontes e links confirmados.</small>
+        <footer>
+          <span>Catálogo Cruzeiro do Sul</span>
+          <a href="./arquivo.html">Abrir arquivo</a>
+        </footer>
+      </article>
+    `;
+    registerArticleCardLinks(whatMattersGrid);
+    return;
+  }
+
+  if (selected.length < whatMattersTopics.length) {
+    const existingCount = selected.length;
+    const repeatedRealItems = frontPageItems.filter((article) => {
+      const key = getArticleUsageKey(article);
+      return key && !usedKeys.has(key);
+    });
+
+    repeatedRealItems.slice(0, whatMattersTopics.length - existingCount).forEach((article) => {
+      const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
+      pushWhatMattersArticle(article, firstOpenTopic);
+    });
+  }
+
+  selected.forEach((item) => {
+    const articleTopic = item.topic;
+    if (!articleTopic || !articleTopic.matcher) {
       return;
     }
 
-    selected.push({
-      topic,
-      article: {
-        title: topic.fallbackTitle,
-        summary: topic.fallbackSummary,
-        lede: topic.fallbackSummary,
-        sourceName: "Base local do Juruá",
-        sourceUrl: topic.href,
-        category: topic.label,
-        publishedAt: new Date().toISOString()
+    const text = normalizeText(
+      [
+        item.article.title,
+        item.article.summary,
+        item.article.lede,
+        item.article.category,
+        item.article.sourceName
+      ].join(" ")
+    );
+
+    if (!articleTopic.matcher.test(text)) {
+      const matchedTopic = whatMattersTopics.find((topic) => topic.matcher.test(text));
+      if (matchedTopic) {
+        item.topic = matchedTopic;
       }
-    });
+    }
   });
 
   if (whatMattersTitle) {
-    whatMattersTitle.textContent = "4 destaques da semana";
+    whatMattersTitle.textContent = selected.length >= 4 ? "4 matérias da semana" : "Matérias da semana";
   }
 
   whatMattersGrid.innerHTML = selected
@@ -13289,6 +13679,231 @@ const eventSurfacePattern =
   /\b(show|festa|festival|evento|agenda|cultura|cultural|musica|música|teatro|cavalgada|feira|programa[cç][aã]o|oficina|expoacre|expojurua|expojuru[aá]|artista|influenc|criador|instagram|tiktok|youtube)\b/;
 const analysisSurfacePattern =
   /\b(coluna|opini[aã]o|analise|análise|bastidor|perspectiva|entenda|impacto|politica|política|economia|governo|mailza|assembleia|aleac)\b/;
+const regionalCalendarEvents = [
+  {
+    isoDate: "2026-01-01",
+    label: "Feriado nacional",
+    title: "Confraternização Universal",
+    summary: "Primeiro feriado nacional do calendário brasileiro.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-01-23",
+    label: "Feriado estadual",
+    title: "Dia do Evangélico no Acre",
+    summary: "Data estadual acreana para organização de atendimento e expediente.",
+    href: "./arquivo.html?busca=Dia%20do%20Evang%C3%A9lico%20Acre"
+  },
+  {
+    isoDate: "2026-02-16",
+    label: "Ponto facultativo",
+    title: "Carnaval",
+    summary: "Ponto facultativo federal, com impacto em serviços e repartições.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-02-17",
+    label: "Ponto facultativo",
+    title: "Carnaval",
+    summary: "Continuação do período de Carnaval no calendário administrativo.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-03-08",
+    label: "Data comemorativa",
+    title: "Dia Internacional da Mulher",
+    summary: "Referência para eventos, serviços, ações públicas e programação comunitária.",
+    href: "./arquivo.html?busca=Dia%20Internacional%20da%20Mulher"
+  },
+  {
+    isoDate: "2026-04-03",
+    label: "Feriado nacional",
+    title: "Paixão de Cristo",
+    summary: "Feriado nacional do calendário oficial de 2026.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-04-21",
+    label: "Feriado nacional",
+    title: "Tiradentes",
+    summary: "Data cívica nacional prevista no calendário federal.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-05-01",
+    label: "Feriado nacional",
+    title: "Dia Mundial do Trabalho",
+    summary: "Feriado nacional com reflexo em comércio, serviços e repartições.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-05-10",
+    label: "Data comemorativa",
+    title: "Dia das Mães",
+    summary: "Data de movimento familiar, comercial e comunitário no fim de semana.",
+    href: "./arquivo.html?busca=Dia%20das%20M%C3%A3es"
+  },
+  {
+    isoDate: "2026-05-13",
+    label: "Data cívica",
+    title: "Abolição da Escravatura",
+    summary: "Marco histórico brasileiro para pautas educativas e culturais.",
+    href: "./arquivo.html?busca=Aboli%C3%A7%C3%A3o%20da%20Escravatura"
+  },
+  {
+    isoDate: "2026-06-04",
+    label: "Ponto facultativo",
+    title: "Corpus Christi",
+    summary: "Data religiosa tratada como ponto facultativo federal em 2026.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-06-15",
+    label: "Data regional",
+    title: "Aniversário do Estado do Acre",
+    summary: "Marco da autonomia política do Acre e referência regional para o calendário.",
+    href: "./arquivo.html?busca=Anivers%C3%A1rio%20do%20Acre"
+  },
+  {
+    isoDate: "2026-09-05",
+    label: "Data ambiental",
+    title: "Dia da Amazônia",
+    summary: "Data útil para pautas de meio ambiente, educação e território amazônico.",
+    href: "./arquivo.html?busca=Dia%20da%20Amaz%C3%B4nia"
+  },
+  {
+    isoDate: "2026-09-07",
+    label: "Feriado nacional",
+    title: "Independência do Brasil",
+    summary: "Feriado nacional do calendário cívico brasileiro.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-09-28",
+    label: "Data municipal",
+    title: "Aniversário de Cruzeiro do Sul",
+    summary: "Data da fundação do município, celebrada com programação cívica e cultural.",
+    href: "https://www.cruzeirodosul.ac.gov.br/post/prefeitura-prepara-anivers%C3%A1rio-dos-121-anos-de-cruzeiro-do-sul-com-6-inaugura%C3%A7%C3%B5es"
+  },
+  {
+    isoDate: "2026-10-12",
+    label: "Feriado nacional",
+    title: "Nossa Senhora Aparecida",
+    summary: "Feriado nacional e Dia das Crianças no calendário brasileiro.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-10-28",
+    label: "Ponto facultativo",
+    title: "Dia do Servidor Público",
+    summary: "Ponto facultativo federal que pode alterar atendimento público.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-11-02",
+    label: "Feriado nacional",
+    title: "Finados",
+    summary: "Feriado nacional do calendário brasileiro.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-11-15",
+    label: "Feriado nacional",
+    title: "Proclamação da República",
+    summary: "Feriado nacional cívico.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-11-17",
+    label: "Data regional",
+    title: "Tratado de Petrópolis",
+    summary: "Marco histórico ligado à incorporação do território acreano ao Brasil.",
+    href: "./arquivo.html?busca=Tratado%20de%20Petr%C3%B3polis"
+  },
+  {
+    isoDate: "2026-11-20",
+    label: "Feriado nacional",
+    title: "Consciência Negra",
+    summary: "Feriado nacional de Zumbi e da Consciência Negra.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-12-25",
+    label: "Feriado nacional",
+    title: "Natal",
+    summary: "Feriado nacional de fim de ano.",
+    href: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  }
+];
+
+const slugifyRegionalCalendarText = (value = "") =>
+  String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const buildRegionalCalendarArticleSlug = (event = {}) => {
+  const datePart = String(event.isoDate || "data").replace(/[^0-9-]/g, "");
+  const titlePart = slugifyRegionalCalendarText(event.title || event.label || "calendario");
+  return `calendario-${datePart}-${titlePart || "data"}`;
+};
+
+const buildRegionalCalendarArticleHref = (event = {}) =>
+  `./noticia.html?slug=${encodeURIComponent(buildRegionalCalendarArticleSlug(event))}`;
+
+const getPortalDateKey = (date = new Date()) => {
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      timeZone: localeTimeZone,
+      year: "numeric"
+    })
+      .formatToParts(date)
+      .reduce((acc, part) => {
+        if (part.type !== "literal") acc[part.type] = part.value;
+        return acc;
+      }, {});
+    return `${parts.year}-${parts.month}-${parts.day}`;
+  } catch (_error) {
+    return new Date(date).toISOString().slice(0, 10);
+  }
+};
+
+const parseRegionalCalendarDate = (isoDate = "") => {
+  const [year, month, day] = String(isoDate || "").split("-").map((part) => Number.parseInt(part, 10));
+  if (!year || !month || !day) {
+    return null;
+  }
+  return {
+    day,
+    monthIndex: month - 1,
+    year,
+    date: new Date(`${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}T12:00:00-05:00`)
+  };
+};
+
+const formatRegionalCalendarEventDate = (event = {}) => {
+  const parsed = parseRegionalCalendarDate(event.isoDate);
+  if (!parsed) return "";
+  return parsed.date
+    .toLocaleDateString("pt-BR", { day: "2-digit", month: "short", timeZone: localeTimeZone })
+    .replace(".", "");
+};
+
+const getRegionalCalendarEventsForMonth = (year, monthIndex) =>
+  regionalCalendarEvents.filter((event) => {
+    const parsed = parseRegionalCalendarDate(event.isoDate);
+    return parsed && parsed.year === year && parsed.monthIndex === monthIndex;
+  });
+
+const getUpcomingRegionalCalendarEvents = (limit = 4) => {
+  const todayKey = getPortalDateKey(new Date());
+  const upcoming = regionalCalendarEvents.filter((event) => event.isoDate >= todayKey);
+  return (upcoming.length ? upcoming : regionalCalendarEvents).slice(0, limit);
+};
 
 const renderClimateAlertsSection = (items = []) => {
   const section = document.querySelector("#clima-alertas");
@@ -13375,7 +13990,7 @@ const renderClimateAlertsSection = (items = []) => {
         const count = getSurfaceSourceArticles(items).filter((article) =>
           normalizeText([article.title, article.summary, article.lede, article.sourceLabel].join(" ")).includes(normalizeText(city))
         ).length;
-        return `<li class="${index === 0 ? "is-active" : ""}"><span></span><a href="./arquivo.html?busca=${encodeURIComponent(city)}">${escapeHtml(city)}${count ? ` (${count})` : ""}</a></li>`;
+        return `<li class="${index === 0 ? "is-active" : ""}"><span></span><a href="./arquivo.html?busca=${encodeURIComponent(city)}"><strong>${escapeHtml(city)}${count ? ` (${count})` : ""}</strong><small>notícias, serviços e alertas</small></a></li>`;
       })
       .join("");
   }
@@ -13389,7 +14004,7 @@ const formatAgendaDate = (article = {}) => {
   return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", timeZone: localeTimeZone }).replace(".", "");
 };
 
-const renderAgendaSection = (items = []) => {
+const renderAgendaSection = () => {
   const section = document.querySelector("#agenda");
   const stack = section?.querySelector(".premium-event-stack");
   const calendar = section?.querySelector(".premium-calendar-days");
@@ -13398,21 +14013,9 @@ const renderAgendaSection = (items = []) => {
     return;
   }
 
-  const articles = pickSurfaceArticles(
-    items,
-    (article) => eventSurfacePattern.test(getSurfaceArticleText(article)),
-    6,
-    { windows: [1, 7, 31, 120], scoreFn: getSocialSurfaceScore }
-  );
-  const visible = articles.slice(0, 4);
-  if (visible.length === 0) {
-    return;
-  }
-
+  const visible = getUpcomingRegionalCalendarEvents(4);
   const stackFragment = document.createDocumentFragment();
-  visible.forEach((article) => {
-    const normalized = normalizeRuntimeArticle(article);
-    const href = buildArticleHref(normalized);
+  visible.forEach((event) => {
     const card = document.createElement("article");
     const time = document.createElement("time");
     const copy = document.createElement("div");
@@ -13421,47 +14024,53 @@ const renderAgendaSection = (items = []) => {
     const summary = document.createElement("p");
     const link = document.createElement("a");
 
-    time.textContent = formatAgendaDate(normalized);
-    label.textContent = normalized.category || "Agenda";
-    title.textContent = truncateCopy(normalized.title || "Evento em destaque", 94);
-    summary.textContent = buildReadableCardSummary(normalized, 122);
-    link.href = href;
-    link.textContent = "Ler matéria";
-    applyArticleLinkAttrs(link, href);
+    time.textContent = formatRegionalCalendarEventDate(event);
+    label.textContent = event.label || "Calendário";
+    title.textContent = truncateCopy(event.title || "Data em destaque", 94);
+    summary.textContent = truncateCopy(event.summary || "Data acompanhada pelo calendário regional.", 132);
+    const rawHref = buildRegionalCalendarArticleHref(event);
+    link.href = rawHref;
+    link.textContent = "Entender data";
+    applyArticleLinkAttrs(link, link.href);
     copy.append(label, title, summary);
     card.append(time, copy, link);
     stackFragment.appendChild(card);
   });
   stack.replaceChildren(stackFragment);
 
-  if (calendar && visible.length) {
-    const baseDate = getArchiveArticleDate(visible[0]) || new Date();
-    const year = baseDate.getFullYear();
-    const month = baseDate.getMonth();
+  if (calendar) {
+    const todayKey = getPortalDateKey(new Date());
+    const todayParsed = parseRegionalCalendarDate(todayKey) || parseRegionalCalendarDate("2026-05-12");
+    const year = todayParsed.year;
+    const month = todayParsed.monthIndex;
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const firstDay = new Date(year, month, 1).getDay();
-    const byDay = new Map();
-    visible.forEach((article) => {
-      const date = getArchiveArticleDate(article);
-      if (date && date.getMonth() === month) {
-        byDay.set(date.getDate(), article);
-      }
-    });
+    const byDay = new Map(getRegionalCalendarEventsForMonth(year, month).map((event) => {
+      const parsed = parseRegionalCalendarDate(event.isoDate);
+      return [parsed.day, event];
+    }));
     if (monthTitle) {
-      monthTitle.textContent = `Eventos de ${baseDate.toLocaleDateString("pt-BR", { month: "long" })}`;
+      monthTitle.textContent = todayParsed.date.toLocaleDateString("pt-BR", {
+        month: "long",
+        timeZone: localeTimeZone,
+        year: "numeric"
+      });
     }
     calendar.innerHTML = "";
     for (let blank = 0; blank < firstDay; blank += 1) {
       calendar.appendChild(document.createElement("span"));
     }
     for (let day = 1; day <= Math.min(daysInMonth, 35); day += 1) {
-      const article = byDay.get(day);
-      const node = article ? document.createElement("a") : document.createElement("b");
+      const event = byDay.get(day);
+      const node = event ? document.createElement("a") : document.createElement("b");
       node.textContent = String(day);
-      if (article) {
-        node.href = buildArticleHref(article);
-        node.className = day === baseDate.getDate() ? "is-active" : "";
+      if (event) {
+        node.href = buildRegionalCalendarArticleHref(event);
+        node.className = ["is-event", day === todayParsed.day ? "is-active" : ""].filter(Boolean).join(" ");
+        node.setAttribute("aria-label", `Abrir matéria: o que significa ${event.title} em ${formatRegionalCalendarEventDate(event)}`);
         applyArticleLinkAttrs(node, node.href);
+      } else if (day === todayParsed.day) {
+        node.className = "is-active";
       }
       calendar.appendChild(node);
     }
@@ -13559,10 +14168,16 @@ const renderSocialAgendaSurface = (items = []) => {
     button.setAttribute("aria-pressed", active ? "true" : "false");
   });
 
+  const socialTarget = getClosedCardGridTarget(grid, {
+    rows: 3,
+    fallbackColumns: 3,
+    singleColumnTarget: 9,
+    minimum: 6
+  });
   const articles = pickSurfaceArticles(
     items,
     socialAgendaFilterMatcher(socialAgendaState.filter),
-    9,
+    socialTarget,
     {
       windows: getSocialAgendaWindows(socialAgendaState.filter),
       scoreFn: getSocialSurfaceScore
@@ -13570,7 +14185,7 @@ const renderSocialAgendaSurface = (items = []) => {
   );
   const fallback = articles.length >= 6
     ? articles
-    : pickSurfaceArticles(items, (article) => getSocialSurfaceScore(article) > -4, 9, {
+    : pickSurfaceArticles(items, (article) => getSocialSurfaceScore(article) > -4, socialTarget, {
         windows: [7, 31, 120],
         scoreFn: getSocialSurfaceScore
       });
@@ -13580,13 +14195,17 @@ const renderSocialAgendaSurface = (items = []) => {
   }
 
   const socialFragment = document.createDocumentFragment();
-  fallback.slice(0, 9).forEach((article, index) => {
+  fallback.slice(0, socialTarget).forEach((article, index) => {
     socialFragment.appendChild(buildSocialAgendaCard(article, index));
   });
   grid.replaceChildren(socialFragment);
-  reserveSurfaceArticles("social", fallback.slice(0, 9));
+  reserveSurfaceArticles("social", fallback.slice(0, socialTarget));
   registerInteractivePanels(grid);
   window.setTimeout(() => registerArticleCardLinks(grid), 0);
+  applyClosedCardGridGeometry(grid, {
+    cardSelector: ":scope > .premium-event-card",
+    fallbackColumns: 3
+  });
 };
 
 const renderPremiumBottomNewsSurface = (items = []) => {
@@ -13888,38 +14507,11 @@ const articleCardSelector = [
 const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
 
 const initialMergedNews = syncNewsDataset(initialStaticNews);
-const scheduleHomeBootstrapTask = (callback, delay = 0, options = {}) => {
-  const run = () => {
-    try {
-      callback();
-    } catch (_error) {
-      // A home mantem os fallbacks estaticos se uma hidratacao tardia falhar.
-    }
-  };
-
-  window.setTimeout(() => {
-    if (options.idle && "requestIdleCallback" in window) {
-      window.requestIdleCallback(run, { timeout: options.timeout || 1200 });
-      return;
-    }
-
-    run();
-  }, delay);
-};
-
-const yieldHomeHydration = (delay = 0) =>
-  new Promise((resolve) => {
-    window.setTimeout(resolve, Math.max(0, delay));
-  });
-
-scheduleHomeBootstrapTask(() => ensureMobileHomeLeadLayout(), 0);
-scheduleHomeBootstrapTask(
-  () => reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(getHeroTourismDailyPool())),
-  20
-);
-scheduleHomeBootstrapTask(() => hydrateMosaicHero(initialMergedNews), 40);
-scheduleHomeBootstrapTask(() => void hydrateStaticMediaSurfaces({ deferCadernos: true }), 120, { idle: true });
-scheduleHomeBootstrapTask(() => initializeHeroTourismHero(), 80);
+ensureMobileHomeLeadLayout();
+reserveSurfaceArticles("topHero", getHeroPoolReservationArticles(getHeroTourismDailyPool()));
+hydrateMosaicHero(initialMergedNews);
+void hydrateStaticMediaSurfaces({ deferCadernos: true });
+initializeHeroTourismHero();
 if (heroDesktopBackdropMedia) {
   const handleHeroShellModeChange = () => {
     initializeHeroTourismHero();
@@ -13931,10 +14523,10 @@ if (heroDesktopBackdropMedia) {
     heroDesktopBackdropMedia.addListener(handleHeroShellModeChange);
   }
 }
-scheduleHomeBootstrapTask(() => attachArchiveBrowserLaunchers(), 120);
-scheduleHomeBootstrapTask(() => initializeInsidersArmy(), 260, { idle: true });
-scheduleHomeBootstrapTask(() => initializeInsidersBootScreen(), 320, { idle: true });
-scheduleHomeBootstrapTask(() => initializeInsidersHeroScene(), 380, { idle: true });
+attachArchiveBrowserLaunchers();
+initializeInsidersArmy();
+initializeInsidersBootScreen();
+initializeInsidersHeroScene();
 if (mobileHomeLeadMedia) {
   const handleMobileHomeLeadChange = () => {
     ensureMobileHomeLeadLayout();
@@ -14000,9 +14592,9 @@ function registerArticleCardLinks(root = document) {
   cards.forEach(bindArticleCardLink);
 }
 
-scheduleHomeBootstrapTask(() => registerArticleCardLinks(), 120);
-scheduleHomeBootstrapTask(() => renderRegionalPoliticsHighlights(initialMergedNews), 220, { idle: true });
-scheduleHomeBootstrapTask(() => renderGlobalPoliticsHighlights(), 360, { idle: true });
+registerArticleCardLinks();
+renderRegionalPoliticsHighlights(initialMergedNews);
+renderGlobalPoliticsHighlights();
 
 const initializeMobilePagePrefetch = () => {
   if (!mobileIntroMedia?.matches) {
@@ -14045,7 +14637,7 @@ const initializeMobilePagePrefetch = () => {
   });
 };
 
-scheduleHomeBootstrapTask(() => initializeMobilePagePrefetch(), 420, { idle: true });
+initializeMobilePagePrefetch();
 
 const isInternalArticleLink = (link) => {
   const href = link?.getAttribute?.("href") || "";
@@ -14081,21 +14673,18 @@ const showInlineNavigationFallbackLoader = (options = {}) => {
   loader.setAttribute("role", "status");
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", label);
-  loader.style.cssText =
-    "position:fixed;inset:0;z-index:10060;display:grid;place-items:center;padding:18px;background:rgba(2,13,24,.82);backdrop-filter:blur(10px);color:#fff;";
   loader.innerHTML = `
-    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:66%"></i></span>
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:100%"></i></span>
     <span class="catalogo-top-return-loader-row">
       <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
-      <strong data-top-loader-percent>66%</strong>
+      <strong data-top-loader-percent>100%</strong>
     </span>
   `;
   document.body.appendChild(loader);
 
-  return waitForSplashDelay(920).finally(() => {
-    loader.classList.add("is-leaving");
-    loader.style.opacity = "0";
-    window.setTimeout(() => loader.remove(), 160);
+  return waitForSplashDelay(3000).then(() => {
+    const textNode = loader.querySelector("[data-top-loader-text]");
+    if (textNode) textNode.textContent = "abrindo página";
   });
 };
 
@@ -14127,7 +14716,7 @@ const navigateWithArticleLoader = (href) => {
 
   Promise.race([
     Promise.resolve(loaderPromise),
-    new Promise((resolve) => window.setTimeout(resolve, 3200))
+    new Promise((resolve) => window.setTimeout(resolve, 3600))
   ])
     .catch(() => undefined)
     .then(navigate);
@@ -15893,10 +16482,16 @@ const renderArchiveHighlights = () => {
   const fallbackItems = getSortedLiveFeedArticles(
     liveFeedState.items.length ? liveFeedState.items : initialStaticNews
   ).map((item) => normalizeRuntimeArticle(item));
+  const archiveTarget = getClosedCardGridTarget(archiveHighlightGrid, {
+    rows: 3,
+    fallbackColumns: 4,
+    singleColumnTarget: 9,
+    minimum: 6
+  });
   const visibleItems = diversifyArchiveStories(
     (filteredItems.length ? filteredItems : fallbackItems).filter((article) => getArticleUsageKey(article)),
-    6
-  ).slice(0, 6);
+    archiveTarget
+  ).slice(0, archiveTarget);
   const activeLabel = archiveFilterLabels[archiveHighlightState.filter] || "Arquivo";
 
   archiveHighlightButtons.forEach((button) => {
@@ -15926,6 +16521,10 @@ const renderArchiveHighlights = () => {
   reserveSurfaceArticles("archive", visibleItems);
   registerInteractivePanels(archiveHighlightGrid);
   registerArticleCardLinks(archiveHighlightGrid);
+  applyClosedCardGridGeometry(archiveHighlightGrid, {
+    cardSelector: ":scope > .premium-timeline-item",
+    fallbackColumns: 4
+  });
 };
 
 const bindArchiveHighlightControls = () => {
@@ -16101,7 +16700,7 @@ const renderLiveFeedFilters = () => {
       }
 
       liveFeedState.activeCategory = option.key;
-      liveFeedState.visibleItems = liveFeedState.pageSize;
+      syncLiveFeedGridPageSize({ reset: true });
       renderLiveFeedFilters();
       renderLiveFeed();
     });
@@ -16217,7 +16816,7 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   if (activeContext.length > 0) {
     const loadedText =
       visibleSlice.length < filtered.length
-        ? ` Mostrando ${visibleSlice.length} de ${filtered.length} agora.`
+        ? ` Mostrando ${visibleSlice.length} de ${filtered.length} agora, em linhas completas.`
         : ` ${filtered.length} notícia${filtered.length === 1 ? "" : "s"} encontrada${filtered.length === 1 ? "" : "s"}.`;
 
     liveFeedStatus.textContent = `Recorte ativo por ${activeContext.join(" e ")}.${loadedText}`;
@@ -16225,7 +16824,7 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   }
 
   if (visibleSlice.length < filtered.length) {
-    liveFeedStatus.textContent = `Mais notícias: ${filtered.length} cards na base. As ${liveFeedState.pageSize} mais recentes já aparecem aqui, e o restante pode ser aberto no botão abaixo.`;
+    liveFeedStatus.textContent = `Mais notícias: ${filtered.length} cards na base. As ${liveFeedState.pageSize} primeiras já fecham 3 linhas sem área morta; o restante abre no botão abaixo.`;
     return;
   }
 
@@ -16237,6 +16836,7 @@ const renderLiveFeed = () => {
     return;
   }
 
+  syncLiveFeedGridPageSize();
   const filtered = getFilteredLiveFeedArticles();
   const visibleSlice = filtered.slice(0, liveFeedState.visibleItems);
 
@@ -16261,6 +16861,10 @@ const renderLiveFeed = () => {
   liveFeedMore.hidden = visibleSlice.length >= filtered.length;
   registerInteractivePanels(liveFeedGrid);
   registerArticleCardLinks(liveFeedGrid);
+  applyClosedCardGridGeometry(liveFeedGrid, {
+    cardSelector: ":scope > .generated-feed-card",
+    fallbackColumns: 4
+  });
 };
 
 const closeLiveFeedSuggestions = () => {
@@ -16380,7 +16984,7 @@ const attachLiveFeedAutocomplete = () => {
     const nextValue = article?.title || button.querySelector("strong")?.textContent || "";
 
     liveFeedQuery.value = nextValue;
-    liveFeedState.visibleItems = liveFeedState.pageSize;
+    syncLiveFeedGridPageSize({ reset: true });
     renderLiveFeed();
     closeLiveFeedSuggestions();
     liveFeedQuery.focus();
@@ -16415,7 +17019,7 @@ const applyLiveFeedCategoryFilter = (filter = "todos", { scroll = false } = {}) 
 
   const normalizedFilter = normalizeText(filter);
   liveFeedState.activeCategory = normalizedFilter === "todos" ? "" : normalizedFilter;
-  liveFeedState.visibleItems = liveFeedState.pageSize;
+  syncLiveFeedGridPageSize({ reset: true });
   liveFeedQuery.value = "";
 
   renderLiveFeedFilters();
@@ -16444,7 +17048,7 @@ const updateLiveFeedItems = (items = [], { resetFilter = true } = {}) => {
     Number(window.NEWS_ARCHIVE_TOTAL || 0) || 0
   );
   liveFeedState.activeCategory = resetFilter ? "" : currentCategory;
-  liveFeedState.visibleItems = liveFeedState.pageSize;
+  syncLiveFeedGridPageSize({ reset: true });
   renderLiveFeedFilters();
   renderLiveFeed();
   renderLiveFeedSuggestions();
@@ -16455,7 +17059,7 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
   attachLiveFeedAutocomplete();
 
   liveFeedQuery.addEventListener("input", () => {
-    liveFeedState.visibleItems = liveFeedState.pageSize;
+    syncLiveFeedGridPageSize({ reset: true });
     renderLiveFeed();
     renderLiveFeedSuggestions();
   });
@@ -16463,7 +17067,7 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
   if (liveFeedClear) {
     liveFeedClear.addEventListener("click", () => {
       liveFeedState.activeCategory = "";
-      liveFeedState.visibleItems = liveFeedState.pageSize;
+      syncLiveFeedGridPageSize({ reset: true });
 
       if (liveFeedQuery) {
         liveFeedQuery.value = "";
@@ -16477,18 +17081,33 @@ if (liveFeedGrid && liveFeedQuery && liveFeedMore && liveFeedCount) {
   }
 
   liveFeedMore.addEventListener("click", () => {
+    syncLiveFeedGridPageSize();
     liveFeedState.visibleItems += liveFeedState.pageSize;
     renderLiveFeed();
   });
+
+  let liveFeedResizeTimer = 0;
+  window.addEventListener(
+    "resize",
+    () => {
+      window.clearTimeout(liveFeedResizeTimer);
+      liveFeedResizeTimer = window.setTimeout(() => {
+        syncLiveFeedGridPageSize({ reset: true });
+        renderLiveFeed();
+      }, 180);
+    },
+    { passive: true }
+  );
 
   updateLiveFeedItems(window.NEWS_DATA || []);
 }
 
 bindArchiveHighlightControls();
-scheduleHomeBootstrapTask(() => renderArchiveHighlights(), 460, { idle: true });
+renderArchiveHighlights();
 
 // Inicializar o radar somente depois que os helpers e normalizadores ja existem.
-scheduleHomeBootstrapTask(() => renderRadar(), 520, { idle: true });
+renderRadar();
+applyGlobalClosedCardGrids();
 
 // --- WIDGETS LATERAIS ---
 const sidebarData = window.SIDEBAR_DATA || null;
@@ -17143,7 +17762,7 @@ const initializeSidebarWidgets = () => {
   registerInteractivePanels(document.querySelector(".side-rail"));
 };
 
-scheduleHomeBootstrapTask(() => initializeSidebarWidgets(), 680, { idle: true });
+initializeSidebarWidgets();
 
 const hydrateDynamicNews = async () => {
   try {
@@ -17164,23 +17783,25 @@ const hydrateDynamicNews = async () => {
       document.querySelector("#radar .chip-button.is-active[data-filter]")?.dataset.filter ||
       "todos";
     hydrateMosaicHero(merged);
-    await yieldHomeHydration();
     renderWhatMattersNow(merged);
-    await yieldHomeHydration();
+    void hydrateStaticMediaSurfaces({ deferCadernos: true }).catch(() => {});
     initializeHeroTourismHero();
-    await yieldHomeHydration();
     renderRegionalPoliticsHighlights(merged);
-    await yieldHomeHydration();
     renderSidebarWidgets();
-    await yieldHomeHydration();
     renderRadar(activeFilter);
-    await yieldHomeHydration();
     updateLiveFeedItems(merged, { resetFilter: false });
-    await yieldHomeHydration();
     initializeLiveTicker();
+    applyGlobalClosedCardGrids();
 
-    // Os blocos editoriais secundarios ja nascem com fallback estatico e entram
-    // no ciclo normal de atualizacao; evitar refresco em massa durante a abertura.
+    window.setTimeout(() => {
+      void Promise.allSettled([
+        renderDailyTrendingBuzz({ forceRefresh: true, runtimeArticles: merged }),
+        renderDynamicMonthlyBuzz({ runtimeArticles: merged }),
+        renderCommunityTrendCard(),
+        renderGlobalPoliticsHighlights()
+      ]);
+      applyGlobalClosedCardGrids();
+    }, 120);
   } catch (error) {
     // Mantem o fallback estatico quando a API nao estiver ligada.
   }
@@ -17229,7 +17850,7 @@ const scheduleHomeBackgroundHydration = () => {
   };
 
   const runSoon = () => {
-    scheduleHomeBootstrapTask(execute, 780, { idle: true, timeout: 1800 });
+    execute();
   };
 
   if (document.readyState === "interactive" || document.readyState === "complete") {
@@ -17240,7 +17861,7 @@ const scheduleHomeBackgroundHydration = () => {
   document.addEventListener("DOMContentLoaded", runSoon, { once: true });
 };
 
-scheduleHomeBootstrapTask(() => scheduleHomeBackgroundHydration(), 520, { idle: true });
+scheduleHomeBackgroundHydration();
 
 const attachCommentSubmission = () => {
   if (!publishCommentButton || !opinionInput || !commentsFeed || !charCount) {
@@ -17826,20 +18447,20 @@ const initializeFoundersAutoCarousel = () => {
   });
 };
 
-scheduleHomeBootstrapTask(() => attachCommentSubmission(), 760, { idle: true });
-scheduleHomeBootstrapTask(() => attachCommunitySignalFlow(), 820, { idle: true });
-scheduleHomeBootstrapTask(() => attachSubscriptionSubmission(), 900, { idle: true });
-scheduleHomeBootstrapTask(() => attachAgentMailFlow(), 960, { idle: true });
-scheduleHomeBootstrapTask(() => initializeFloatingPanelToggles(), 220);
-scheduleHomeBootstrapTask(() => initializeFoundersAutoCarousel(), 1040, { idle: true });
-scheduleHomeBootstrapTask(() => renderWhatMattersNow(window.NEWS_DATA || []), 180);
+attachCommentSubmission();
+attachCommunitySignalFlow();
+attachSubscriptionSubmission();
+attachAgentMailFlow();
+initializeFloatingPanelToggles();
+initializeFoundersAutoCarousel();
+renderWhatMattersNow(window.NEWS_DATA || []);
 window.setTimeout(() => {
   void renderDailyTrendingBuzz();
   void renderDynamicMonthlyBuzz();
   void renderCommunityTrendCard();
 }, 320);
-scheduleHomeBootstrapTask(() => scheduleTopicSurfaceRefresh(), 1180, { idle: true });
-scheduleHomeBootstrapTask(() => initializeLiveTicker(), 260);
+scheduleTopicSurfaceRefresh();
+initializeLiveTicker();
 window.setTimeout(() => {
   void hydrateFoundersWallFromApi();
 }, 1600);

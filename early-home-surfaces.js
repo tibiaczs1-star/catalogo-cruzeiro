@@ -201,23 +201,7 @@
   };
 
   const hydrateAgenda = (items) => {
-    const stack = document.querySelector("#agenda .premium-event-stack");
-    const rows = pick(items, isEvent, 4);
-    if (!stack || !rows.length) {
-      return 0;
-    }
-
-    stack.innerHTML = rows
-      .map((item) => {
-        const href = getHref(item);
-        return `<article><time>${escapeHtml(getDateLabel(item))}</time><div><small>${escapeHtml(
-          item.category || "Agenda"
-        )}</small><strong>${escapeHtml(truncate(item.title, 94))}</strong><p>${escapeHtml(
-          getSummary(item, 122)
-        )}</p></div><a href="${escapeAttr(href)}"${getLinkAttrs(href)}>Ler matéria</a></article>`;
-      })
-      .join("");
-    return rows.length;
+    return 0;
   };
 
   const hydrateBottomNews = (items) => {

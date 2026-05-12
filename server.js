@@ -305,6 +305,7 @@ const CATEGORY_LABEL_BY_KEY = {
   saude: "Saúde",
   educacao: "Educação",
   negocios: "Negócios",
+  calendario: "Calendário",
   cultura: "Cultura",
   esporte: "Esporte",
   social: "Social",
@@ -319,6 +320,11 @@ const CATEGORY_ALIAS_MAP = {
   educacao: "educacao",
   economia: "negocios",
   negocios: "negocios",
+  calendario: "calendario",
+  calendário: "calendario",
+  feriado: "calendario",
+  feriados: "calendario",
+  "datas comemorativas": "calendario",
   cultura: "cultura",
   variedades: "cultura",
   esporte: "esporte",
@@ -1822,6 +1828,222 @@ function slugify(value) {
   return normalizeText(value)
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+const REGIONAL_CALENDAR_EVENTS = [
+  {
+    isoDate: "2026-01-01",
+    label: "Feriado nacional",
+    title: "Confraternização Universal",
+    summary: "Primeiro feriado nacional do calendário brasileiro.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-01-23",
+    label: "Feriado estadual",
+    title: "Dia do Evangélico no Acre",
+    summary: "Data estadual acreana para organização de atendimento e expediente.",
+    sourceUrl: "/arquivo.html?busca=Dia%20do%20Evang%C3%A9lico%20Acre"
+  },
+  {
+    isoDate: "2026-02-16",
+    label: "Ponto facultativo",
+    title: "Carnaval",
+    summary: "Ponto facultativo federal, com impacto em serviços e repartições.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-02-17",
+    label: "Ponto facultativo",
+    title: "Carnaval",
+    summary: "Continuação do período de Carnaval no calendário administrativo.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-03-08",
+    label: "Data comemorativa",
+    title: "Dia Internacional da Mulher",
+    summary: "Referência para eventos, serviços, ações públicas e programação comunitária.",
+    sourceUrl: "/arquivo.html?busca=Dia%20Internacional%20da%20Mulher"
+  },
+  {
+    isoDate: "2026-04-03",
+    label: "Feriado nacional",
+    title: "Paixão de Cristo",
+    summary: "Feriado nacional do calendário oficial de 2026.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-04-21",
+    label: "Feriado nacional",
+    title: "Tiradentes",
+    summary: "Data cívica nacional prevista no calendário federal.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-05-01",
+    label: "Feriado nacional",
+    title: "Dia Mundial do Trabalho",
+    summary: "Feriado nacional com reflexo em comércio, serviços e repartições.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-05-10",
+    label: "Data comemorativa",
+    title: "Dia das Mães",
+    summary: "Data de movimento familiar, comercial e comunitário no fim de semana.",
+    sourceUrl: "/arquivo.html?busca=Dia%20das%20M%C3%A3es"
+  },
+  {
+    isoDate: "2026-05-13",
+    label: "Data cívica",
+    title: "Abolição da Escravatura",
+    summary: "Marco histórico brasileiro para pautas educativas e culturais.",
+    sourceUrl: "/arquivo.html?busca=Aboli%C3%A7%C3%A3o%20da%20Escravatura"
+  },
+  {
+    isoDate: "2026-06-04",
+    label: "Ponto facultativo",
+    title: "Corpus Christi",
+    summary: "Data religiosa tratada como ponto facultativo federal em 2026.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-06-15",
+    label: "Data regional",
+    title: "Aniversário do Estado do Acre",
+    summary: "Marco da autonomia política do Acre e referência regional para o calendário.",
+    sourceUrl: "/arquivo.html?busca=Anivers%C3%A1rio%20do%20Acre"
+  },
+  {
+    isoDate: "2026-09-05",
+    label: "Data ambiental",
+    title: "Dia da Amazônia",
+    summary: "Data útil para pautas de meio ambiente, educação e território amazônico.",
+    sourceUrl: "/arquivo.html?busca=Dia%20da%20Amaz%C3%B4nia"
+  },
+  {
+    isoDate: "2026-09-07",
+    label: "Feriado nacional",
+    title: "Independência do Brasil",
+    summary: "Feriado nacional do calendário cívico brasileiro.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-09-28",
+    label: "Data municipal",
+    title: "Aniversário de Cruzeiro do Sul",
+    summary: "Data da fundação do município, celebrada com programação cívica e cultural.",
+    sourceUrl: "https://www.cruzeirodosul.ac.gov.br/post/prefeitura-prepara-anivers%C3%A1rio-dos-121-anos-de-cruzeiro-do-sul-com-6-inaugura%C3%A7%C3%B5es"
+  },
+  {
+    isoDate: "2026-10-12",
+    label: "Feriado nacional",
+    title: "Nossa Senhora Aparecida",
+    summary: "Feriado nacional e Dia das Crianças no calendário brasileiro.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-10-28",
+    label: "Ponto facultativo",
+    title: "Dia do Servidor Público",
+    summary: "Ponto facultativo federal que pode alterar atendimento público.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-11-02",
+    label: "Feriado nacional",
+    title: "Finados",
+    summary: "Feriado nacional do calendário brasileiro.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-11-15",
+    label: "Feriado nacional",
+    title: "Proclamação da República",
+    summary: "Feriado nacional cívico.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-11-17",
+    label: "Data regional",
+    title: "Tratado de Petrópolis",
+    summary: "Marco histórico ligado à incorporação do território acreano ao Brasil.",
+    sourceUrl: "/arquivo.html?busca=Tratado%20de%20Petr%C3%B3polis"
+  },
+  {
+    isoDate: "2026-11-20",
+    label: "Feriado nacional",
+    title: "Consciência Negra",
+    summary: "Feriado nacional de Zumbi e da Consciência Negra.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  },
+  {
+    isoDate: "2026-12-25",
+    label: "Feriado nacional",
+    title: "Natal",
+    summary: "Feriado nacional de fim de ano.",
+    sourceUrl: "https://www.gov.br/gestao/pt-br/assuntos/noticias/2025/dezembro/confira-o-calendario-oficial-de-feriados-nacionais-e-pontos-facultativos-em-2026"
+  }
+];
+
+function buildRegionalCalendarArticleSlug(event = {}) {
+  return `calendario-${String(event.isoDate || "data").replace(/[^0-9-]/g, "")}-${slugify(event.title || event.label || "data") || "data"}`;
+}
+
+function formatRegionalCalendarArticleDate(isoDate = "") {
+  const [year, month, day] = String(isoDate || "").split("-").map((part) => Number.parseInt(part, 10));
+  if (!year || !month || !day) return "data do calendário";
+  const date = new Date(`${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}T12:00:00-05:00`);
+  return date.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric", timeZone: "America/Rio_Branco" });
+}
+
+function getRegionalCalendarEventBySlug(slug = "") {
+  const targetSlug = normalizeLookupSlug(slug);
+  return REGIONAL_CALENDAR_EVENTS.find((event) => normalizeLookupSlug(buildRegionalCalendarArticleSlug(event)) === targetSlug) || null;
+}
+
+function buildRegionalCalendarArticle(event = {}) {
+  const dateLabel = formatRegionalCalendarArticleDate(event.isoDate);
+  const lowerLabel = String(event.label || "data do calendário").toLowerCase();
+  const title = `O que significa ${event.title}`;
+
+  return normalizeArticleRecord({
+    id: buildRegionalCalendarArticleSlug(event),
+    slug: buildRegionalCalendarArticleSlug(event),
+    title,
+    eyebrow: "Calendário regional",
+    date: dateLabel,
+    publishedAt: `${event.isoDate}T12:00:00-05:00`,
+    category: "Calendário",
+    sourceName: "Calendário regional",
+    sourceUrl: event.sourceUrl || "/index.html#agenda",
+    sourceLabel: `${event.title} em ${dateLabel}`,
+    imageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    feedImageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    sourceImageUrl: "./assets/home-cache/buzz-cruzeiro-04.jpg",
+    imageCredit: "Acervo visual do Catálogo Cruzeiro do Sul",
+    imageFocus: "center 42%",
+    lede: `${event.title} aparece em ${dateLabel} como ${lowerLabel}. A página explica por que a data entra no calendário do portal e como ela pode afetar serviços, eventos, comércio ou programação comunitária.`,
+    summary: event.summary || `Data acompanhada pelo calendário regional em ${dateLabel}.`,
+    analysis: `Esta matéria existe para transformar o clique no calendário em explicação. Em vez de abrir só uma lista de eventos, a data vira um artigo curto com significado, contexto e caminho para confirmação.`,
+    body: [
+      `${event.title} é marcada no calendário em ${dateLabel}. No portal, ela aparece como ${lowerLabel} para orientar o leitor antes de organizar atendimento, deslocamento, eventos ou rotina familiar.`,
+      event.summary || "A data foi incluída por relevância nacional, estadual, municipal ou comunitária.",
+      "Na prática, algumas datas mudam expediente público, funcionamento de serviços, movimento do comércio, agenda escolar, programação cultural ou campanhas de interesse público.",
+      "Quando houver programação específica em Cruzeiro do Sul, no Vale do Juruá ou no Acre, o calendário pode apontar para novas matérias, avisos oficiais e cobertura de eventos."
+    ],
+    highlights: [
+      `${event.title} cai em ${dateLabel}`,
+      `Tipo da data: ${event.label || "Calendário"}`,
+      "O calendário abre explicação em formato de matéria",
+      "Programações locais podem ser vinculadas quando houver fonte"
+    ],
+    development: [
+      "Vincular eventos oficiais de Cruzeiro do Sul quando a prefeitura ou organizadores publicarem programação.",
+      "Atualizar a matéria se houver mudança de expediente, feriado local ou serviço especial."
+    ]
+  });
 }
 
 const ARCHIVE_STORY_STOPWORDS = new Set([
@@ -4930,9 +5152,10 @@ function normalizeTopicFeedItem(item = {}, topic = "", sourceMeta = {}) {
     sourceUrl: item.sourceUrl || item.url || sourceMeta.siteUrl || "#",
     defaultCategory: item.defaultCategory || sourceMeta.defaultCategory || item.category || "Cotidiano"
   });
+  const publicRecord = sanitizePublicPortugueseRuntimeItem(normalizedRecord);
 
   return {
-    ...normalizedRecord,
+    ...publicRecord,
     topic: normalizedTopic,
     coverageLayer:
       normalizeText(
@@ -4948,8 +5171,8 @@ function normalizeTopicFeedItem(item = {}, topic = "", sourceMeta = {}) {
       ) || "global",
     topicGroup:
       normalizeText(item.topicGroup || sourceMeta.topicGroup || normalizedRecord.categoryKey || "") || "",
-    summary: cleanShortText(item.summary || item.lede || item.description || normalizedRecord.summary, 260),
-    lede: cleanShortText(item.lede || item.summary || item.description || normalizedRecord.lede, 220)
+    summary: cleanShortText(publicRecord.summary || publicRecord.lede || publicRecord.description || "", 260),
+    lede: cleanShortText(publicRecord.lede || publicRecord.summary || publicRecord.description || "", 220)
   };
 }
 
@@ -5816,7 +6039,7 @@ const ENGLISH_CARD_LEAK_PATTERN =
 const PORTUGUESE_CARD_SIGNAL_PATTERN =
   /\b(uma?|pela?|pelos?|das?|dos?|para|com|sobre|entre|chega|estreia|refor[cç]a|acompanha|mostra|jogos|filme|temporada|educa[cç][aã]o|alunos|escolas|professores|criadores|crian[cç]as|brasileir[ao]s?|comunidades?|f[aã]s|lan[cç]amentos?|cultura|publico|p[uú]blico)\b/i;
 const PUBLIC_NEWS_ENGLISH_MARKER_PATTERN =
-  /\b(?:whether|it's|according to|today|started|rolling|coming|expected|available|company|people|users|feature|features|released|announced|podcast|fitness|playlist|dummy unit|foldable|touchscreen|gaming|mouse|smart lighting|mother's day|who's asking|the auto design world|google started|microsoft will let|alex jones has uncovered|xreal’s best|xreal's best|360-degree cameras have|cybercab goes into production|skylight’s color-coded|skylight's color-coded|acclaimed japanese director)\b/i;
+  /\b(?:whether|it's|according to|today|started|rolling|coming|expected|available|company|people|users|feature|features|released|announced|podcast|fitness|playlist|dummy unit|foldable|touchscreen|gaming|mouse|smart lighting|mother's day|who's asking|the auto design world|school districts|three-year degrees|double milestone|opening the doors|phasmophobia|google started|microsoft will let|alex jones has uncovered|xreal’s best|xreal's best|360-degree cameras have|cybercab goes into production|skylight’s color-coded|skylight's color-coded|acclaimed japanese director)\b/i;
 const PUBLIC_NEWS_KNOWN_URL_TITLES = new Map([
   ["best-mothers-day-gift-ideas-2026-mom-tech-gadgets", "Ideias de presentes tecnológicos para o Dia das Mães em 2026"],
   ["canva-magic-layers-ai-replacing-palestine", "Canva corrige falha de IA em camadas mágicas"],
@@ -5827,7 +6050,12 @@ const PUBLIC_NEWS_KNOWN_URL_TITLES = new Map([
   ["samsung-galaxy-z-fold-8-wide-dummy-leak", "Vazamento mostra possível Galaxy Z Fold largo"],
   ["gm-ai-car-design-nissan-neural-concept", "Montadoras testam IA no desenho de novos carros"],
   ["turtle-beach-mc7-gaming-mouse-touchscreen-command-series", "Mouse gamer da Turtle Beach aposta em tela sensível ao toque"],
-  ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"]
+  ["googles-new-gradient-icon-design-is-coming-to-more-apps", "Novo visual de ícones do Google chega a mais aplicativos"],
+  ["girls-around-the-globe-are-losing-gains-in-math-data-shows", "Relatório aponta recuo global de meninas em matemática"],
+  ["as-school-districts-cut-budgets-dei-work-may-be-first-to-go", "Cortes em distritos escolares ameaçam trabalho de diversidade"],
+  ["opinion-three-year-degrees", "Diplomas de três anos ganham debate nos Estados Unidos"],
+  ["eurovision-2026-70th-anniversary-youtube-guide", "Eurovision celebra 70 anos e guia especial no YouTube"],
+  ["phasmophobia-by-alan-wake-opening-the-doors-to-phasmophobias-first-collaboration", "Phasmophobia anuncia colaboração com Alan Wake"]
 ]);
 
 function hasEnglishCardLeak(value = "") {
@@ -5852,7 +6080,7 @@ function isEnglishRuntimeSource(item = {}) {
   const sourceText = [item.sourceName, item.source, item.sourceDomain, item.sourceUrl, item.url, item.id, item.slug]
     .map((value) => String(value || "").toLowerCase())
     .join(" ");
-  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com)\b/.test(sourceText);
+  return /\b(the verge|theverge\.com|techcrunch\.com|deadline\.com|variety\.com|cartoonbrew\.com|broadwayworld\.com|insidehighered\.com|edsurge\.com|thepienews\.com|hechingerreport\.org|the hechinger report|blog\.youtube|youtube blog|news\.xbox\.com|xbox wire|blog\.playstation\.com|playstation blog)\b/.test(sourceText);
 }
 
 function inferPublicRuntimeTitle(item = {}) {
@@ -5869,22 +6097,28 @@ function inferPublicRuntimeTitle(item = {}) {
 function buildPortugueseRuntimeFallback(item = {}) {
   const sourceName = cleanShortText(item.sourceName || item.source || item.sourceDomain || "Fonte externa", 90);
   const title = cleanShortText(item.title || item.sourceLabel || "tema internacional", 180);
-  return `${sourceName} publicou uma atualização sobre ${title}. A redação manteve o link da fonte original e bloqueou o resumo importado até que uma versão em português esteja pronta.`;
+  return `${sourceName} publicou uma atualização sobre ${title}. O portal mantém a referência da fonte original e apresenta o tema em português para acompanhamento.`;
 }
 
 function sanitizePublicPortugueseRuntimeItem(item = {}) {
   if (!item || typeof item !== "object") return item;
 
   const next = { ...item };
-  if (!cleanShortText(next.title || "", 180)) {
+  const strictEnglishSource = isEnglishRuntimeSource(next);
+  if (
+    !cleanShortText(next.title || "", 180) ||
+    (strictEnglishSource && (!hasPortugueseRuntimeSignal(next.title || "") || publicNewsTextLooksEnglish(next.title || "")))
+  ) {
     next.title = inferPublicRuntimeTitle(next);
   }
-  if (!cleanShortText(next.sourceLabel || "", 180)) {
+  if (
+    !cleanShortText(next.sourceLabel || "", 180) ||
+    (strictEnglishSource && (!hasPortugueseRuntimeSignal(next.sourceLabel || "") || publicNewsTextLooksEnglish(next.sourceLabel || "")))
+  ) {
     next.sourceLabel = next.title;
   }
 
   const fallback = buildPortugueseRuntimeFallback(next);
-  const strictEnglishSource = isEnglishRuntimeSource(next);
   if (publicNewsTextLooksEnglish(next.lede || "") || (strictEnglishSource && !hasPortugueseRuntimeSignal(next.lede || ""))) {
     next.lede = fallback;
   }
@@ -5899,6 +6133,15 @@ function sanitizePublicPortugueseRuntimeItem(item = {}) {
     (strictEnglishSource && !hasPortugueseRuntimeSignal(next.displaySummary || ""))
   ) {
     next.displaySummary = fallback;
+  }
+  if (
+    Array.isArray(next.body) &&
+    (strictEnglishSource || next.body.some((entry) => publicNewsTextLooksEnglish(entry || "")))
+  ) {
+    next.body = [
+      `${cleanShortText(next.sourceName || next.source || "Fonte externa", 90)} publicou uma atualização internacional sobre ${cleanShortText(next.title || "tema educacional", 180)}. O portal mantém o link da fonte original e apresenta apenas uma síntese em português.`,
+      "O item permanece no acervo como acompanhamento de fonte externa até receber apuração editorial completa."
+    ];
   }
 
   return next;
@@ -6918,6 +7161,11 @@ function getArticleBySlug(slug) {
   }
 
   const targetSlug = normalizeLookupSlug(slug);
+  const regionalCalendarEvent = getRegionalCalendarEventBySlug(targetSlug);
+  if (regionalCalendarEvent) {
+    return buildRegionalCalendarArticle(regionalCalendarEvent);
+  }
+
   const staticDetailFallbacks = {
     "prefeitura-bairros-e-servicos-entram-na-leitura-principal": normalizeArticleRecord({
       id: "prefeitura-bairros-e-servicos-entram-na-leitura-principal",
@@ -9569,7 +9817,8 @@ function labelNewsImageFocusReason(reason) {
     "people-or-group-scene-without-manual-focus": "pessoa/grupo sem foco manual",
     "group-scene-without-manual-focus": "grupo sem foco manual",
     "manual-focus-present": "tem foco manual",
-    "hero-focus-too-high-for-wide-headline": "foco alto demais para manchete larga"
+    "hero-focus-too-high-for-wide-headline": "foco alto demais para manchete larga",
+    "frontend-manual-review": "revisão humana solicitada no frontend"
   };
   return labels[reason] || reason;
 }
@@ -9696,7 +9945,21 @@ function recordNewsImageFocusDecision(body = {}) {
   }
 
   const queuePayload = buildNewsImageFocusApprovalQueue();
-  const item = queuePayload.queue.find((entry) => entry.slug === slug);
+  let item = queuePayload.queue.find((entry) => entry.slug === slug);
+  if (!item) {
+    const frontendArticle = getArticleBySlug(slug);
+    if (frontendArticle) {
+      item = normalizeNewsImageFocusAuditItem(
+        {
+          slug,
+          level: "manual-review",
+          reasons: ["frontend-manual-review"],
+          effectiveFocus: body.focus || frontendArticle.imageFocus || frontendArticle.effectiveFocus || ""
+        },
+        frontendArticle
+      );
+    }
+  }
   if (!item) {
     return { ok: false, status: 404, error: "Item de foto/foco nao encontrado na fila atual." };
   }

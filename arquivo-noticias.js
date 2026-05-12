@@ -44,12 +44,57 @@
     items: [],
     activeCategory: "",
     activePeriod: "",
+    pageSize,
     visibleItems: pageSize,
     ownsRendering: false,
     initialQueryApplied: false,
     initialPeriodApplied: false,
     drawerOpen: false,
     drawerCloseTimer: 0
+  };
+
+  const getArchiveGridColumnCount = () => {
+    const grid = document.querySelector("#live-feed-grid");
+    if (!grid) {
+      return 4;
+    }
+
+    const computedColumns = window.getComputedStyle(grid).gridTemplateColumns || "";
+    const columnCount = computedColumns
+      .split(/\s+/)
+      .map((value) => value.trim())
+      .filter((value) => value && value !== "none").length;
+
+    if (columnCount > 0) {
+      return columnCount;
+    }
+
+    const width = grid.getBoundingClientRect().width || window.innerWidth || 0;
+    if (width >= 1680) return 4;
+    if (width >= 1180) return 4;
+    if (width >= 720) return 3;
+    if (width >= 520) return 2;
+    return 1;
+  };
+
+  const getArchivePageSizeForGrid = () => Math.max(3, getArchiveGridColumnCount() * 3);
+
+  const normalizeArchiveVisibleItems = ({ reset = false } = {}) => {
+    const previousPageSize = Math.max(1, Number(state.pageSize || pageSize) || pageSize);
+    const nextPageSize = getArchivePageSizeForGrid();
+    const wasInitialWindow = Number(state.visibleItems || 0) <= previousPageSize;
+
+    state.pageSize = nextPageSize;
+
+    if (reset || wasInitialWindow) {
+      state.visibleItems = nextPageSize;
+      return;
+    }
+
+    state.visibleItems = Math.max(
+      nextPageSize,
+      Math.ceil(Number(state.visibleItems || nextPageSize) / nextPageSize) * nextPageSize
+    );
   };
 
   const normalizeText = (value) =>
@@ -1586,7 +1631,7 @@
       button.textContent = label;
       button.addEventListener("click", () => {
         state.activeCategory = key;
-        state.visibleItems = pageSize;
+        normalizeArchiveVisibleItems({ reset: true });
         renderArchive();
       });
       filters.appendChild(button);
@@ -1608,7 +1653,7 @@
       button.dataset.bound = "true";
       button.addEventListener("click", () => {
         state.activePeriod = period;
-        state.visibleItems = pageSize;
+        normalizeArchiveVisibleItems({ reset: true });
         renderArchive();
       });
     });
@@ -1678,6 +1723,7 @@
       return;
     }
 
+    normalizeArchiveVisibleItems();
     const filtered = getFilteredItems(query);
     const visibleSlice = diversifyArchiveStories(filtered, state.visibleItems).slice(0, state.visibleItems);
 
@@ -1716,19 +1762,20 @@
     }
 
     query.addEventListener("input", () => {
-      state.visibleItems = pageSize;
+      normalizeArchiveVisibleItems({ reset: true });
       renderArchive();
     });
 
     more.addEventListener("click", () => {
-      state.visibleItems += pageSize;
+      normalizeArchiveVisibleItems();
+      state.visibleItems += state.pageSize;
       renderArchive();
     });
 
     clear?.addEventListener("click", () => {
       state.activeCategory = "";
       state.activePeriod = "";
-      state.visibleItems = pageSize;
+      normalizeArchiveVisibleItems({ reset: true });
       query.value = "";
       query.focus();
       renderArchive();
@@ -1738,12 +1785,24 @@
       button.addEventListener("click", () => {
         const filter = normalizeText(button.dataset.filter || "");
         state.activeCategory = filter === "todos" ? "" : filter;
-        state.visibleItems = pageSize;
+        normalizeArchiveVisibleItems({ reset: true });
         query.value = "";
         renderArchive();
         document.querySelector("#arquivo-vivo")?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
+
+    if (!document.body.dataset.archiveGeometryResizeBound) {
+      let resizeTimer = 0;
+      document.body.dataset.archiveGeometryResizeBound = "true";
+      window.addEventListener("resize", () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => {
+          normalizeArchiveVisibleItems();
+          renderArchive();
+        }, 180);
+      });
+    }
 
     applyInitialPeriod();
     applyInitialQuery();

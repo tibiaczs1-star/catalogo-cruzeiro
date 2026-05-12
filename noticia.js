@@ -2,8 +2,107 @@ const params = new URLSearchParams(window.location.search);
 const OFFLINE_NEWS_CACHE_KEYS = ["catalogo_news_cache_v2", "catalogo_news_cache_v1"];
 const OFFLINE_LAST_ARTICLE_KEYS = ["catalogo_last_article_v2", "catalogo_last_article_v1"];
 const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
+const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
+const ARTICLE_NAVIGATION_LOADER_MS = 3000;
 const DETAIL_FALLBACK_IMAGES = [];
+
+const articleNavigationLoaderState = {
+  loader: null,
+  startedAt: 0
+};
+
+const consumePageActionLoaderFlag = () => {
+  try {
+    const hasFlag = sessionStorage.getItem(PAGE_ACTION_LOADER_KEY) === "1";
+    sessionStorage.removeItem(PAGE_ACTION_LOADER_KEY);
+    return hasFlag;
+  } catch (_error) {
+    return false;
+  }
+};
+
+const rememberPageActionLoaderFlag = () => {
+  try {
+    sessionStorage.setItem(PAGE_ACTION_LOADER_KEY, "1");
+  } catch (_error) {
+    // Ignora ambientes sem sessionStorage.
+  }
+};
+
+const createArticleNavigationLoader = (label = "Abrindo matéria") => {
+  const loader = document.createElement("div");
+  loader.className = "catalogo-top-return-loader is-visible is-action-loader";
+  loader.setAttribute("role", "status");
+  loader.setAttribute("aria-live", "polite");
+  loader.setAttribute("aria-label", label);
+  loader.innerHTML = `
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:100%"></i></span>
+    <span class="catalogo-top-return-loader-row">
+      <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
+      <strong data-top-loader-percent>100%</strong>
+    </span>
+  `;
+  return loader;
+};
+
+const showArticleNavigationLoader = (label = "Abrindo matéria", options = {}) => {
+  if (options.remember) {
+    rememberPageActionLoaderFlag();
+  }
+  if (articleNavigationLoaderState.loader) {
+    const textNode = articleNavigationLoaderState.loader.querySelector("[data-top-loader-text]");
+    if (textNode) textNode.textContent = label;
+    return articleNavigationLoaderState.loader;
+  }
+  const loader = createArticleNavigationLoader(label);
+  articleNavigationLoaderState.loader = loader;
+  articleNavigationLoaderState.startedAt = Date.now();
+  document.body.appendChild(loader);
+  return loader;
+};
+
+const hideArticleNavigationLoader = () => {
+  const loader = articleNavigationLoaderState.loader;
+  if (!loader) {
+    return Promise.resolve();
+  }
+  const elapsed = Date.now() - articleNavigationLoaderState.startedAt;
+  const remaining = Math.max(0, ARTICLE_NAVIGATION_LOADER_MS - elapsed);
+  return new Promise((resolve) => {
+    window.setTimeout(() => {
+      loader.classList.add("is-leaving");
+      window.setTimeout(() => {
+        loader.remove();
+        articleNavigationLoaderState.loader = null;
+        articleNavigationLoaderState.startedAt = 0;
+        resolve();
+      }, 220);
+    }, remaining);
+  });
+};
+
+const shouldHandleLoaderNavigation = (event, link) => {
+  if (!link || event.defaultPrevented) return false;
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return false;
+  const target = String(link.getAttribute("target") || "").trim();
+  return !target || target === "_self";
+};
+
+if (consumePageActionLoaderFlag()) {
+  showArticleNavigationLoader("Abrindo matéria");
+}
+
+document.addEventListener("click", (event) => {
+  const link = event.target instanceof Element ? event.target.closest("a[data-home-return]") : null;
+  if (!shouldHandleLoaderNavigation(event, link)) return;
+  const href = link.getAttribute("href") || HOME_RETURN_URL;
+  event.preventDefault();
+  showArticleNavigationLoader("Voltando para a home", { remember: true });
+  window.setTimeout(() => {
+    window.location.href = new URL(href, window.location.href).href;
+  }, ARTICLE_NAVIGATION_LOADER_MS);
+});
 
 document.body.classList.add("article-premium-ready");
 const AUTHORIAL_DETAIL_ARTICLES = {
@@ -1788,4 +1887,11 @@ const loadArticle = async () => {
   }
 };
 
-loadArticle();
+loadArticle()
+  .catch((error) => {
+    console.error("[noticia] falha ao carregar materia", error);
+    renderNotFound();
+  })
+  .finally(() => {
+    hideArticleNavigationLoader();
+  });
