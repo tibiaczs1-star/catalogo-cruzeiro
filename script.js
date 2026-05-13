@@ -2217,7 +2217,7 @@ const setupSplashExperience = () => {
       window.setTimeout(
         () => {
           splashRoot.setAttribute("aria-hidden", "true");
-          document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
+          document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
           document.body.classList.add("site-loaded", "mobile-intro-ready");
         },
         splashMotionQuery.matches ? 120 : splashCompactViewportQuery.matches ? 240 : 640
@@ -2249,8 +2249,7 @@ const setupSplashExperience = () => {
     if (splashCopy) {
       splashCopy.textContent = "Abertura de jornal do Vale do Juruá";
     }
-    document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
-    document.body.classList.add("site-loaded", "mobile-intro-ready");
+    document.body.classList.add("broadcast-page-ready");
     rememberSplashToday();
     updateSplashProgress(72, "Vale do Juruá no ar");
     await waitForSplashDelay(splashCinematicDurationMs);

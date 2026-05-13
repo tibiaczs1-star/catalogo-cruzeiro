@@ -1262,6 +1262,13 @@ body.catalogo-site-booting .logo-splash {
   pointer-events: auto;
 }
 
+body.editorial-home.catalogo-site-booting.broadcast-page-ready .page-shell {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
 body.site-loaded .logo-splash {
   opacity: 0;
   visibility: hidden;
