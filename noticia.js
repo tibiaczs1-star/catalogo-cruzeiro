@@ -3,6 +3,7 @@ const OFFLINE_NEWS_CACHE_KEYS = ["catalogo_news_cache_v2", "catalogo_news_cache_
 const OFFLINE_LAST_ARTICLE_KEYS = ["catalogo_last_article_v2", "catalogo_last_article_v1"];
 const SKIP_HOME_INTRO_KEY = "catalogo_skip_home_intro_once";
 const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
+const PUBLIC_CORRECTION_FOCUS_KEY = "catalogo_public_correction_focus_v1";
 const HOME_RETURN_URL = "./index.html?skipIntro=1";
 const ARTICLE_NAVIGATION_LOADER_MS = 650;
 const DETAIL_FALLBACK_IMAGES = [];
@@ -315,6 +316,13 @@ try {
 const titleNode = document.querySelector("#detail-title");
 const eyebrowNode = document.querySelector("#detail-eyebrow");
 const metaNode = document.querySelector("#detail-meta");
+const reportButton = document.querySelector("#detail-report-button");
+const reportModal = document.querySelector("#detail-report-modal");
+const reportForm = document.querySelector("#detail-report-form");
+const reportType = document.querySelector("#detail-report-type");
+const reportNote = document.querySelector("#detail-report-note");
+const reportStatus = document.querySelector("#detail-report-status");
+const reportSubmit = document.querySelector("#detail-report-submit");
 const thumbNode = document.querySelector("#detail-thumb");
 const categoryNode = document.querySelector("#detail-category");
 const ledeNode = document.querySelector("#detail-lede");
@@ -613,6 +621,129 @@ const stripLeadingMediaCredit = (value = "") => {
 
 const normalizeEditorialText = (value = "") =>
   normalizeParagraph(stripLeadingMediaCredit(stripFeedArtifacts(decodeBasicEntities(value))));
+
+const getCorrectionTypeLabel = (type) => {
+  const labels = {
+    foto: "foto ou crédito da imagem",
+    texto: "texto da matéria",
+    titulo: "título ou chamada",
+    fonte: "fonte ou link",
+    dado: "data, local ou informação",
+    outro: "outro ponto"
+  };
+  return labels[type] || labels.outro;
+};
+
+const buildPublicCorrectionPayload = (article, formData = {}) => {
+  const type = String(formData.type || "foto").trim() || "foto";
+  const note = normalizeEditorialText(formData.note || "").slice(0, 700);
+  const articleUrl = new URL(
+    `./noticia.html?slug=${encodeURIComponent(article.slug || slug || "")}`,
+    window.location.href
+  ).href;
+
+  return {
+    source: "public-article-button",
+    type,
+    typeLabel: getCorrectionTypeLabel(type),
+    priority: type === "foto" || type === "fonte" ? "alta" : "media",
+    slug: article.slug || slug || "",
+    title: article.title || "Matéria",
+    category: article.category || "Notícia",
+    articleUrl,
+    sourceUrl: article.sourceUrl || "",
+    imageUrl: article.imageUrl || article.image || article.media?.url || "",
+    note,
+    createdAt: new Date().toISOString()
+  };
+};
+
+const persistPublicCorrectionFocus = (payload) => {
+  try {
+    sessionStorage.setItem(PUBLIC_CORRECTION_FOCUS_KEY, JSON.stringify(payload));
+  } catch (_error) {
+    // O fluxo continua mesmo se o navegador bloquear storage.
+  }
+};
+
+const postPublicCorrection = async (payload) => {
+  const response = await fetch("/api/editorial-corrections", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(payload),
+    cache: "no-store"
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || result?.ok === false) {
+    throw new Error(result?.error || "Não foi possível registrar a correção agora.");
+  }
+  return result;
+};
+
+const openReportModal = () => {
+  if (!reportModal) return;
+  reportModal.hidden = false;
+  reportStatus?.classList.remove("is-error");
+  if (reportStatus) reportStatus.textContent = "";
+  setTimeout(() => reportNote?.focus(), 30);
+};
+
+const closeReportModal = () => {
+  if (!reportModal) return;
+  reportModal.hidden = true;
+  reportForm?.reset();
+  if (reportSubmit) reportSubmit.disabled = false;
+  reportStatus?.classList.remove("is-error");
+  if (reportStatus) reportStatus.textContent = "";
+};
+
+const setupPublicCorrectionFlow = (article) => {
+  if (!reportButton || !reportForm) return;
+  reportButton.hidden = false;
+  reportButton.onclick = openReportModal;
+  reportForm.onsubmit = async (event) => {
+    event.preventDefault();
+    const note = normalizeEditorialText(reportNote?.value || "");
+    if (note.length < 4) {
+      reportStatus?.classList.add("is-error");
+      if (reportStatus) reportStatus.textContent = "Descreva rapidamente o erro antes de enviar.";
+      reportNote?.focus();
+      return;
+    }
+
+    const payload = buildPublicCorrectionPayload(article, {
+      type: reportType?.value || "foto",
+      note
+    });
+    persistPublicCorrectionFocus(payload);
+    if (reportSubmit) reportSubmit.disabled = true;
+    reportStatus?.classList.remove("is-error");
+    if (reportStatus) reportStatus.textContent = "Registrando prioridade e abrindo a revisão...";
+    showArticleNavigationLoader("Enviando correção", { remember: true });
+
+    try {
+      await postPublicCorrection(payload);
+    } catch (error) {
+      console.warn("Correção pública guardada localmente; API indisponível.", error);
+    } finally {
+      const target = new URL("./cheffe-call.html", window.location.href);
+      target.searchParams.set("publicCorrection", "1");
+      if (payload.slug) target.searchParams.set("slug", payload.slug);
+      if (payload.type) target.searchParams.set("type", payload.type);
+      window.location.href = target.href;
+    }
+  };
+};
+
+reportModal?.querySelectorAll("[data-report-close]").forEach((button) => {
+  button.addEventListener("click", closeReportModal);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && reportModal && !reportModal.hidden) {
+    closeReportModal();
+  }
+});
 
 const dedupeTextList = (values = []) =>
   [
@@ -1603,6 +1734,7 @@ const renderArticle = (article) => {
   window.currentArticle = article;
   window.__CURRENT_ARTICLE__ = article;
   window.__ARTICLE__ = article;
+  setupPublicCorrectionFlow(article);
 
   updateArticleSeo(article, { indexable: true });
   eyebrowNode.textContent = article.eyebrow || "catalogo cruzeiro do sul";

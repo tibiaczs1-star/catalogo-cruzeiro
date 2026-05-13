@@ -8927,6 +8927,14 @@ body.cheffe-access-locked {
   background: rgba(5, 18, 31, 0.78);
 }
 
+.frontend-review-item.is-public-priority {
+  border-color: rgba(255, 214, 106, 0.76);
+  background:
+    linear-gradient(135deg, rgba(255, 214, 106, 0.16), rgba(121, 218, 238, 0.08)),
+    rgba(5, 18, 31, 0.9);
+  box-shadow: 0 18px 48px rgba(255, 214, 106, 0.16);
+}
+
 .frontend-review-item > span {
   display: grid;
   place-items: center;
@@ -8936,6 +8944,13 @@ body.cheffe-access-locked {
   background: rgba(244, 201, 107, 0.16);
   color: #f4c96b;
   font-weight: 900;
+}
+
+.frontend-review-item.is-public-priority > span {
+  background: #ffd66a;
+  color: #15100a;
+  font-size: 0.66rem;
+  letter-spacing: 0;
 }
 
 .frontend-review-item strong {

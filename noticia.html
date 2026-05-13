@@ -45,7 +45,7 @@
     <script type="application/ld+json" id="article-structured-data">
       {{SEO_JSON_LD}}
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260512-broadcast-opening1" />
+    <link rel="stylesheet" href="./styles.css?v=20260512-report-error1" />
   <link rel="stylesheet" href="noticia-enhance.css?v=20260423fact-contrast" />
   <link rel="stylesheet" href="contrast-mixer.css?v=20260411n" />
   <link rel="stylesheet" href="servicos-menu.css?v=20260411m" />
@@ -80,6 +80,21 @@
           <p class="eyebrow" id="detail-eyebrow">notícia em destaque</p>
           <h1 id="detail-title">Notícia</h1>
           <p class="detail-meta" id="detail-meta"></p>
+          <div class="detail-report-row">
+            <button
+              class="detail-report-button"
+              id="detail-report-button"
+              type="button"
+              hidden
+              title="Informar erro de texto, foto, título, fonte ou dado desta matéria."
+              aria-describedby="detail-report-hint"
+            >
+              Informar erro
+            </button>
+            <span class="detail-report-hint" id="detail-report-hint">
+              Texto, foto, título, fonte ou informação.
+            </span>
+          </div>
 
           <div class="detail-hero-thumb" id="detail-thumb">
             <span id="detail-category">Notícia</span>
@@ -196,9 +211,48 @@
       </footer>
     </div>
 
+    <div class="detail-report-modal" id="detail-report-modal" hidden>
+      <div class="detail-report-backdrop" data-report-close></div>
+      <form class="detail-report-panel" id="detail-report-form" aria-labelledby="detail-report-title">
+        <button class="detail-report-close" type="button" data-report-close aria-label="Fechar">×</button>
+        <p class="eyebrow">correção da matéria</p>
+        <h2 id="detail-report-title">Informar erro</h2>
+        <p>
+          O pedido entra primeiro na revisão da matéria, antes da fila geral e antes da Cheffe Call.
+        </p>
+        <label>
+          O que precisa de correção?
+          <select id="detail-report-type" name="type">
+            <option value="foto">Foto ou crédito da imagem</option>
+            <option value="texto">Texto da matéria</option>
+            <option value="titulo">Título ou chamada</option>
+            <option value="fonte">Fonte ou link</option>
+            <option value="dado">Data, local ou informação</option>
+            <option value="outro">Outro ponto</option>
+          </select>
+        </label>
+        <label>
+          Explique rápido
+          <textarea
+            id="detail-report-note"
+            name="note"
+            rows="4"
+            maxlength="700"
+            placeholder="Ex.: a foto não corresponde ao fato, o nome está errado, falta fonte, há erro no texto..."
+            required
+          ></textarea>
+        </label>
+        <p class="detail-report-status" id="detail-report-status" role="status"></p>
+        <div class="detail-report-actions">
+          <button class="outline-button" type="button" data-report-close>Cancelar</button>
+          <button class="solid-button" id="detail-report-submit" type="submit">Enviar para edição</button>
+        </div>
+      </form>
+    </div>
+
     <script defer src="./news-data.js?v=20260424pixelart1"></script>
     <script defer src="runtime-config.js?v=20260413d"></script>
-    <script defer src="./noticia.js?v=20260512-broadcast-opening1"></script>
+    <script defer src="./noticia.js?v=20260512-report-error1"></script>
   <script defer src="analytics-client.js?v=20260428consent1"></script>
   <script defer src="engagement-api.js?v=20260411j"></script>
   <script defer src="servicos-menu.js?v=20260511-no-ninjas1"></script>

@@ -1,9 +1,10 @@
 # Handoff
 
-Updated: 2026-05-13T01:43:55.920Z
+Updated: 2026-05-13T03:03:21.010Z
 
-Rodada atual troca a intro simples por abertura jornalistica azul: index.html adiciona logo-splash-broadcast; styles.css controla is-shell-preparing e is-broadcast-started; script.js espera estrutura real, roda 4,5s de abertura e libera site-loaded. Cache-bust novo: 20260512-broadcast-opening1. Manter fora do commit as mudancas antigas de PubPaid/data/agents/output.
+Implementado botão Informar erro em noticia.html/noticia.js/styles.css, endpoint /api/editorial-corrections em server.js e prioridade pública na fila do cheffe-call. QA local desktop/mobile passou; review:team sem issues.
 
 ## Next
 
-- Commit, push e validacao online mobile.
+- Stage seletivo
+- commit e push para Render.

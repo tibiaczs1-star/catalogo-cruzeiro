@@ -1,15 +1,16 @@
 # Current State
 
-Updated: 2026-05-13T01:43:55.920Z
+Updated: 2026-05-13T03:03:20.937Z
 
 ## Active Goal
 
-- Subir a abertura jornalistica azul com relogio, cidades do Vale do Jurua e news depois do pre-carregamento real.
+- Fluxo de correção pública de matéria
 
 ## Summary
 
-A intro foi refeita em duas fases: primeiro logo/estrutura real com is-shell-preparing; depois abertura televisiva azul com relogio, estrelas, cidades e chamadas de news por 4,5s a partir de is-broadcast-started. Navegacao interna continua com loader superior curto. Smoke local confirmou saida para site-loaded e segunda visita sem intro.
+Matérias agora têm botão Informar erro; envio registra correção editorial e abre Cheffe Call com prioridade do leitor no topo da fila de revisão antes da sala.
 
 ## Next
 
-- Commitar, push em origin/main e smoke online no Render.
+- Commitar e publicar apenas arquivos do fluxo
+- sem incluir dados automáticos antigos.

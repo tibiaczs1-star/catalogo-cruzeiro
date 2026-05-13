@@ -244,6 +244,9 @@
   let photoApprovalMode = "approval";
   let frontendReviewItems = [];
   let frontendReviewBusy = false;
+  const PUBLIC_CORRECTION_FOCUS_KEY = "catalogo_public_correction_focus_v1";
+  const cheffeUrlParams = new URLSearchParams(window.location.search);
+  let publicCorrectionFocus = null;
   let actionFeedbackTimer = 0;
   let latestOpinionFlow = [];
   let decisionComposerSeed = null;
@@ -1080,6 +1083,72 @@
     };
   }
 
+  function normalizePublicCorrectionFocus(value = null) {
+    const item = value && typeof value === "object" ? value : {};
+    const slug = String(item.slug || cheffeUrlParams.get("slug") || "").trim();
+    const type = String(item.type || cheffeUrlParams.get("type") || "outro").trim();
+    const note = String(item.note || item.publicNote || "").trim();
+    if (!slug && !cheffeUrlParams.has("publicCorrection")) return null;
+    return {
+      source: "public-article-button",
+      slug,
+      type,
+      typeLabel: String(item.typeLabel || type || "correção").trim(),
+      priority: String(item.priority || "alta").trim(),
+      title: String(item.title || "").trim(),
+      category: String(item.category || "").trim(),
+      articleUrl: String(item.articleUrl || (slug ? `./noticia.html?slug=${encodeURIComponent(slug)}` : "")).trim(),
+      imageUrl: String(item.imageUrl || "").trim(),
+      note
+    };
+  }
+
+  function readPublicCorrectionFocus() {
+    if (publicCorrectionFocus) return publicCorrectionFocus;
+    let stored = null;
+    try {
+      stored = JSON.parse(window.sessionStorage.getItem(PUBLIC_CORRECTION_FOCUS_KEY) || "null");
+    } catch (_error) {
+      stored = null;
+    }
+    publicCorrectionFocus = normalizePublicCorrectionFocus(stored);
+    return publicCorrectionFocus;
+  }
+
+  function clearPublicCorrectionFocus() {
+    publicCorrectionFocus = null;
+    try {
+      window.sessionStorage.removeItem(PUBLIC_CORRECTION_FOCUS_KEY);
+    } catch (_error) {
+      // ignore storage failures
+    }
+  }
+
+  function prioritizeFrontendReviewItems(items = []) {
+    const focus = readPublicCorrectionFocus();
+    if (!focus?.slug) return items;
+    const targetSlug = focus.slug.toLowerCase();
+    const matched = [];
+    const rest = [];
+    items.forEach((item) => {
+      if (String(item.slug || "").toLowerCase() === targetSlug) {
+        matched.push({ ...item, publicCorrection: focus });
+      } else {
+        rest.push(item);
+      }
+    });
+    if (matched.length) return [...matched, ...rest];
+    const fallbackItem = normalizeFrontendArticleReviewItem({
+        slug: focus.slug,
+        title: focus.title || "Matéria informada pelo leitor",
+        category: focus.category || "Correção",
+        summary: focus.note || "Leitor informou um erro nesta matéria.",
+        imageUrl: focus.imageUrl,
+        articleUrl: focus.articleUrl
+      });
+    return [{ ...fallbackItem, publicCorrection: focus }, ...rest];
+  }
+
   async function fetchFrontendOnlineArticles() {
     const response = await fetch("/api/news?limit=120", {
       headers: { Accept: "application/json" },
@@ -1112,9 +1181,15 @@
       const openLink = document.createElement("a");
       const reviewButton = document.createElement("button");
 
+      if (item.publicCorrection) {
+        card.classList.add("is-public-priority");
+        badge.textContent = "PRIO";
+      }
       title.textContent = item.title;
       meta.textContent = [item.category, item.sourceName].filter(Boolean).join(" | ");
-      summary.textContent = item.summary || "Matéria publicada no frontend e disponível para revisão humana.";
+      summary.textContent = item.publicCorrection?.note
+        ? `Prioridade do leitor: ${item.publicCorrection.note}`
+        : item.summary || "Matéria publicada no frontend e disponível para revisão humana.";
       openLink.href = item.articleUrl;
       openLink.target = "_blank";
       openLink.rel = "noopener";
@@ -1151,16 +1226,25 @@
       if (options.reload !== false || frontendReviewItems.length === 0) {
         frontendReviewItems = await fetchFrontendOnlineArticles();
       }
+      frontendReviewItems = prioritizeFrontendReviewItems(frontendReviewItems);
+      const correctionFocus = readPublicCorrectionFocus();
       if (frontendReviewCounter) {
         frontendReviewCounter.textContent = `${frontendReviewItems.length} matéria${frontendReviewItems.length === 1 ? "" : "s"}`;
       }
       if (frontendReviewSummary) {
-        frontendReviewSummary.textContent = frontendReviewItems.length
+        frontendReviewSummary.textContent = correctionFocus?.slug
+          ? "Prioridade do leitor carregada primeiro. Revise esta matéria, depois siga para as demais edições e só então para a Cheffe Call."
+          : frontendReviewItems.length
           ? "Lista real do frontend carregada. Abra qualquer matéria ou envie uma para correção humana antes de continuar."
           : "Nenhuma matéria online foi retornada pela API agora.";
       }
       renderFrontendReviewList();
-      setPasswordStatus("Matérias online conferidas. Escolha uma para revisar ou continue para a sala.", "ok");
+      setPasswordStatus(
+        correctionFocus?.slug
+          ? "Correção do leitor está no topo. Abra a matéria priorizada para edição antes da sala."
+          : "Matérias online conferidas. Escolha uma para revisar ou continue para a sala.",
+        "ok"
+      );
       setStatus("Lista de matérias online carregada antes da Cheffe Call.", "ok");
     } catch (error) {
       if (frontendReviewSummary) {
@@ -1180,6 +1264,10 @@
       setPasswordStatus("Matéria sem slug não pode ir para correção automática.", "bad");
       return;
     }
+    const correctionFocus = item.publicCorrection || readPublicCorrectionFocus();
+    const hasReaderPriority =
+      correctionFocus?.slug &&
+      String(correctionFocus.slug).toLowerCase() === String(normalized.slug).toLowerCase();
     photoApprovalMode = "frontend";
     photoApprovalQueue = [
       {
@@ -1189,13 +1277,24 @@
         sourceName: normalized.sourceName,
         publishedAt: normalized.publishedAt,
         level: "manual-review",
-        reasons: ["frontend-manual-review"],
-        reasonLabels: ["revisão humana solicitada no frontend"],
-        imageUrl: normalized.imageUrl,
+        reasons: hasReaderPriority ? ["public-correction", "frontend-manual-review"] : ["frontend-manual-review"],
+        reasonLabels: hasReaderPriority
+          ? [
+              `prioridade do leitor: ${correctionFocus.typeLabel || correctionFocus.type || "correção"}`,
+              "revisão humana solicitada no frontend"
+            ]
+          : ["revisão humana solicitada no frontend"],
+        imageUrl: normalized.imageUrl || correctionFocus?.imageUrl || "",
         effectiveFocus: normalized.imageFocus || "center 42%",
         suggestedFocus: normalized.imageFocus || "center 42%",
-        articleUrl: normalized.articleUrl,
-        decision: null
+        articleUrl: normalized.articleUrl || correctionFocus?.articleUrl || "",
+        decision: hasReaderPriority
+          ? {
+              note: correctionFocus.note
+                ? `Correção do leitor (${correctionFocus.typeLabel || correctionFocus.type || "prioridade"}): ${correctionFocus.note}`
+                : "Correção do leitor aberta como prioridade antes da Cheffe Call."
+            }
+          : null
       }
     ];
     photoApprovalIndex = 0;
@@ -1206,7 +1305,12 @@
     cheffeAccessCard?.classList.add("is-reviewing-photos");
     cheffeAccessModal?.classList.remove("has-frontend-review");
     cheffeAccessModal?.classList.add("has-photo-approval");
-    setPasswordStatus("Matéria aberta para revisão humana. Salve a decisão e volte para a lista online.", "pending");
+    setPasswordStatus(
+      hasReaderPriority
+        ? "Prioridade do leitor aberta para edição. Salve a decisão, revise o restante e depois siga para a Cheffe Call."
+        : "Matéria aberta para revisão humana. Salve a decisão e volte para a lista online.",
+      "pending"
+    );
     renderPhotoApprovalItem();
   }
 
@@ -1765,10 +1869,20 @@
         throw new Error(payload.error || "Falha ao registrar decisao de foto/foco.");
       }
       if (photoApprovalMode === "frontend") {
+        const correctionFocus = readPublicCorrectionFocus();
+        const resolvedReaderPriority =
+          correctionFocus?.slug &&
+          String(correctionFocus.slug).toLowerCase() === String(item.slug || "").toLowerCase();
+        if (resolvedReaderPriority) clearPublicCorrectionFocus();
         setPhotoApprovalBusy(false);
         photoApprovalQueue = [];
         photoApprovalIndex = 0;
-        setPasswordStatus("Correção registrada. Voltando para a lista online.", "ok");
+        setPasswordStatus(
+          resolvedReaderPriority
+            ? "Prioridade do leitor registrada. Agora revise as demais edições antes da sala."
+            : "Correção registrada. Voltando para a lista online.",
+          "ok"
+        );
         setActionFeedback({
           badge: "Frontend",
           title: "Correção registrada",
@@ -1784,7 +1898,9 @@
         });
         await openFrontendReviewList({
           reload: true,
-          message: "Correção registrada. Confira a lista online novamente."
+          message: resolvedReaderPriority
+            ? "Prioridade do leitor concluída. Confira as demais matérias antes da Cheffe Call."
+            : "Correção registrada. Confira a lista online novamente."
         });
         return;
       }
@@ -5723,7 +5839,12 @@
     try {
       await validateAdminPassword(password);
       rememberAdminPassword(password, { close: false });
-      setPasswordStatus("Senha validada. Abrindo fila de foto/foco para revisão.", "pending");
+      setPasswordStatus(
+        readPublicCorrectionFocus()
+          ? "Senha validada. Abrindo prioridade do leitor antes da sala."
+          : "Senha validada. Abrindo fila de foto/foco para revisão.",
+        "pending"
+      );
       let approvalPayload = null;
       try {
         approvalPayload = await fetchPhotoApprovals(password);
@@ -5732,6 +5853,13 @@
         await openFrontendReviewList({
           reload: true,
           message: approvalError.message || "Fila de foto/foco indisponível. Conferindo matérias online."
+        });
+        return;
+      }
+      if (readPublicCorrectionFocus()) {
+        await openFrontendReviewList({
+          reload: true,
+          message: "Prioridade do leitor aberta antes das demais edições e antes da Cheffe Call."
         });
         return;
       }
@@ -5745,7 +5873,9 @@
       }
       await openFrontendReviewList({
         reload: true,
-        message: "Senha validada. Sem foto/foco pendente; confira as matérias online."
+        message: readPublicCorrectionFocus()
+          ? "Senha validada. Correção do leitor está no topo da fila online."
+          : "Senha validada. Sem foto/foco pendente; confira as matérias online."
       });
     } catch (error) {
       cheffeAdminPassword = "";
@@ -5826,6 +5956,12 @@
 
   frontendReviewContinue?.addEventListener("click", () => {
     if (frontendReviewBusy) return;
+    if (readPublicCorrectionFocus()) {
+      setPasswordStatus("Revise primeiro a prioridade informada pelo leitor. Depois a Cheffe Call será liberada.", "bad");
+      const priorityItem = frontendReviewItems.find((item) => item.publicCorrection);
+      if (priorityItem) openFrontendArticleForManualReview(priorityItem);
+      return;
+    }
     enterCheffeRoom("Lista online conferida. Abrindo Cheffe Call.");
   });
 
@@ -6745,15 +6881,34 @@
   }
   if (cheffeAdminPassword) {
     closeAccessModal();
-    setPasswordStatus("Senha lembrada nesta sessão.", "ok");
+    setPasswordStatus(
+      readPublicCorrectionFocus()
+        ? "Senha lembrada. Abrindo prioridade informada pelo leitor antes da sala."
+        : "Senha lembrada nesta sessão.",
+      "ok"
+    );
   } else {
-    openAccessModal();
+    openAccessModal(
+      readPublicCorrectionFocus()
+        ? "Correção do leitor recebida. Digite a senha para revisar essa matéria primeiro."
+        : "Digite a senha Full Admin para entrar na Cheffe Call.",
+      readPublicCorrectionFocus() ? "pending" : ""
+    );
   }
   formEl?.querySelector('[name="password"]')?.addEventListener("input", () => updateRealFlow());
   syncGameShellState();
 
   initPromptConsole();
-  loadCall().catch((error) => setStatus(error.message, "bad"));
+  loadCall()
+    .then(async () => {
+      if (cheffeAdminPassword && readPublicCorrectionFocus()) {
+        await openFrontendReviewList({
+          reload: true,
+          message: "Correção do leitor recebida. Abrindo revisão da matéria antes da Cheffe Call."
+        });
+      }
+    })
+    .catch((error) => setStatus(error.message, "bad"));
   renderMeetingLogs();
   renderTaskQueue();
   renderIdeActionQueue();

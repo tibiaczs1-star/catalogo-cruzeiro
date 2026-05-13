@@ -1,7 +1,35 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T00:55:36.316Z",
+  "lastUpdatedAt": "2026-05-13T03:03:20.860Z",
   "orders": [
+    {
+      "id": "2026-05-13-instagram-profissional-jornal",
+      "createdAt": "2026-05-13T02:00:00.000Z",
+      "updatedAt": "2026-05-13T02:00:00.000Z",
+      "status": "in-progress",
+      "source": "chat",
+      "rawRequest": "eu quero que ageite o perfil puxe tudo do jornal que temos aqui e faça postagens la ja com legenda e link sabe um instgran proficional",
+      "summary": "Organizar o Instagram profissional do jornal usando conteudo do projeto local, preparando perfil, legendas, links e postagens para aprovacao antes de publicar.",
+      "normalizedTasks": [
+        "mapear conteudo jornalistico local",
+        "selecionar materias e links para Instagram",
+        "preparar bio/perfil/destaques",
+        "criar legendas e fila de postagens",
+        "operar o Instagram aberto pelo usuario somente com confirmacao para acoes publicas"
+      ],
+      "tags": [
+        "instagram",
+        "social",
+        "jornal",
+        "conteudo",
+        "perfil"
+      ],
+      "filesTouched": [
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "notes": "Usuario quer transformar o Instagram em perfil profissional do jornal, puxando conteudo do projeto. Acoes publicas no Instagram devem ser revisadas e confirmadas pelo usuario antes de publicar."
+    },
     {
       "id": "2026-05-12-subir-validar-online-e-intro-mobile-app",
       "createdAt": "2026-05-13T00:43:07.553Z",
@@ -9278,6 +9306,21 @@
         "Commitar, subir e validar online"
       ],
       "notes": "Smoke local em 127.0.0.1:3228: is-shell-preparing antes, is-broadcast-started durante, site-loaded/mobile-intro-ready apos a abertura, segunda visita da sessao com splash oculta."
+    },
+    {
+      "id": "2026-05-13-fluxo-publico-de-informar-erro-em-materia-priorizando-revisao-antes-da-cheffe-ca",
+      "createdAt": "2026-05-13T03:03:20.860Z",
+      "updatedAt": "2026-05-13T03:03:20.860Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Adicionar botão pequeno Informar erro em cada matéria, explicar no hover que serve para erros em fotos/texto/fonte, enviar para primeira chamada do Cheffe Call priorizando a matéria informada pelo usuário, depois demais edições e só então Cheffe Call.",
+      "summary": "Fluxo publico de informar erro em materia priorizando revisao antes da Cheffe Call",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

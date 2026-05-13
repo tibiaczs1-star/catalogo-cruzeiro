@@ -11786,6 +11786,11 @@ function buildEditorialCorrectionsLog() {
       status: cleanShortText(item.status || "logged", 40),
       severity: cleanShortText(item.severity || "media", 40),
       title: cleanShortText(item.title || "Correcao editorial", 180),
+      slug: cleanShortText(item.slug || "", 180),
+      type: cleanShortText(item.type || item.kind || "", 80),
+      typeLabel: cleanShortText(item.typeLabel || "", 120),
+      articleUrl: cleanShortText(item.articleUrl || "", 260),
+      source: cleanShortText(item.source || "", 80),
       file: cleanShortText(item.file || "", 220),
       before: cleanShortText(item.before || "", 260),
       after: cleanShortText(item.after || "", 260),
@@ -11798,7 +11803,63 @@ function buildEditorialCorrectionsLog() {
     file: path.relative(ROOT_DIR, EDITORIAL_CORRECTIONS_LOG_FILE).replace(/\\/g, "/"),
     total: safeCorrections.length,
     open: safeCorrections.filter((item) => !["corrigido", "closed", "resolvido"].includes(String(item.status).toLowerCase())).length,
-    latest: safeCorrections.slice(0, 8)
+      latest: safeCorrections.slice(0, 8)
+  };
+}
+
+function recordPublicEditorialCorrection(body = {}, req = null) {
+  const now = new Date().toISOString();
+  const slug = slugify(cleanShortText(body.slug || body.id || body.title || "", 180));
+  const type = cleanShortText(body.type || "outro", 80).toLowerCase() || "outro";
+  const typeLabel = cleanShortText(body.typeLabel || type, 120);
+  const note = cleanShortText(body.note || body.publicNote || body.message || "", 700);
+  const title = cleanShortText(body.title || "Matéria com correção informada", 180);
+  const articleUrl = cleanShortText(body.articleUrl || (slug ? `/noticia.html?slug=${slug}` : ""), 260);
+  const sourceUrl = cleanShortText(body.sourceUrl || "", 260);
+  const imageUrl = cleanShortText(body.imageUrl || "", 260);
+  const priority = cleanShortText(body.priority || (type === "foto" || type === "fonte" ? "alta" : "media"), 40);
+  const userAgent = cleanShortText(req?.headers?.["user-agent"] || "", 140);
+  const forwarded = cleanShortText(req?.headers?.["x-forwarded-for"] || req?.socket?.remoteAddress || "", 90);
+  const payload = readJson(EDITORIAL_CORRECTIONS_LOG_FILE, { version: 1, corrections: [] });
+  const corrections = Array.isArray(payload)
+    ? payload
+    : Array.isArray(payload?.corrections)
+      ? payload.corrections
+      : [];
+  const correction = {
+    id: createRecordId("cor"),
+    status: "public-reported",
+    severity: priority,
+    priority,
+    source: "public-article-button",
+    type,
+    typeLabel,
+    slug,
+    title: `Leitor informou erro: ${title}`,
+    articleUrl,
+    sourceUrl,
+    imageUrl,
+    file: slug ? `noticia.html?slug=${slug}` : "noticia.html",
+    before: "",
+    after: "",
+    publicNote: note || `Correção solicitada em ${typeLabel}.`,
+    createdAt: now,
+    reportedAt: now,
+    requester: {
+      userAgent,
+      forwarded
+    }
+  };
+  const nextPayload = {
+    version: 1,
+    updatedAt: now,
+    corrections: [correction, ...corrections].slice(0, 300)
+  };
+  writeJson(EDITORIAL_CORRECTIONS_LOG_FILE, nextPayload);
+  return {
+    ok: true,
+    correction,
+    message: "Correção registrada e priorizada para revisão editorial."
   };
 }
 
@@ -14851,6 +14912,12 @@ async function handleApi(req, res, pathname, searchParams) {
     }
     const result = recordNewsImageFocusDecision(body);
     return sendJson(res, result.ok ? 200 : result.status || 400, result);
+  }
+
+  if (req.method === "POST" && pathname === "/api/editorial-corrections") {
+    const body = await parseBody(req);
+    const result = recordPublicEditorialCorrection(body, req);
+    return sendJson(res, result.ok ? 201 : result.status || 400, result);
   }
 
   if (req.method === "GET" && pathname === "/api/cheffe-call") {
