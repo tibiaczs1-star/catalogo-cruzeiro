@@ -9243,6 +9243,41 @@
         "Deploy e validacao online apos commit"
       ],
       "notes": "Validado localmente em 127.0.0.1:3219: primeira abertura mostra Abertura cinematografica e libera site-loaded; segunda visita na sessao pula intro; home sem #rede-social, sem texto Rede Social e sem Abrindo app; navegacao nao cria logo-splash full-screen."
+    },
+    {
+      "id": "2026-05-12-refazer-abertura-jornalistica-azul-com-relogio-cidades-e-news",
+      "createdAt": "2026-05-13T01:43:55.920Z",
+      "updatedAt": "2026-05-13T01:43:55.920Z",
+      "status": "validated-local",
+      "source": "chat",
+      "rawRequest": "Refazer a abertura: antes da animacao deixar so logo carregando pagina/estrutura real; quando carregar, soltar abertura bonita de jornal na TV com relogio rodando, estrelas/universo azul, paralaxe, news e nomes das cidades do Vale do Jurua por 4,5 segundos; entre navegacao manter carregador real.",
+      "summary": "Criar abertura jornalistica azul com relogio, cidades do Vale do Jurua e news apos pre-carregamento real.",
+      "normalizedTasks": [
+        "Separar pre-carregamento real da animacao",
+        "Criar visual de abertura jornalistica com relogio e cidades",
+        "Manter loader curto entre navegacao"
+      ],
+      "filesTouched": [
+        "index.html",
+        "styles.css",
+        "script.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "home",
+        "intro",
+        "mobile",
+        "cinematic",
+        "loader"
+      ],
+      "nextSteps": [
+        "Commitar, subir e validar online"
+      ],
+      "notes": "Smoke local em 127.0.0.1:3228: is-shell-preparing antes, is-broadcast-started durante, site-loaded/mobile-intro-ready apos a abertura, segunda visita da sessao com splash oculta."
     }
   ]
 }

@@ -16,6 +16,7 @@ const charCount = document.querySelector("#char-count");
 const guideTip = document.querySelector("#guide-tip");
 const splashRoot = document.querySelector(".logo-splash");
 const splashStatus = document.querySelector("#logo-splash-status");
+const splashCopy = document.querySelector(".logo-splash-copy");
 const splashDate = document.querySelector("#logo-splash-date");
 const splashProgressBar = document.querySelector(".logo-splash-progress span");
 const splashPercent = document.querySelector("#logo-splash-percent");
@@ -125,7 +126,9 @@ const splashCompactViewportQuery =
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
 const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 520 : 680;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 980 : 1900;
+const splashCinematicDurationMs = 4500;
+const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 6500 : 7600;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 9800 : 10800;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 120 : 300;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 80 : 160;
 const tickerDesktopStaticMedia =
@@ -471,12 +474,12 @@ const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260512-cinematic-loader1",
-  "./premium-home-redesign.css?v=20260512-cinematic-loader1",
-  "./startup-experience.css?v=20260512-cinematic-loader1",
-  "./early-home-surfaces.js?v=20260512-cinematic-loader1",
-  "./script.js?v=20260512-cinematic-loader1",
-  "./startup-experience.js?v=20260512-cinematic-loader1",
+  "./styles.css?v=20260512-broadcast-opening1",
+  "./premium-home-redesign.css?v=20260512-broadcast-opening1",
+  "./startup-experience.css?v=20260512-broadcast-opening1",
+  "./early-home-surfaces.js?v=20260512-broadcast-opening1",
+  "./script.js?v=20260512-broadcast-opening1",
+  "./startup-experience.js?v=20260512-broadcast-opening1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -2074,12 +2077,12 @@ const updateSplashProgress = (progress, status = "") => {
 const waitForSplashReadiness = async () => {
   const steps = [
     {
-      label: "Abertura cinematográfica",
+      label: "Carregando estrutura real",
       progress: 24,
       wait: () => Promise.resolve()
     },
     {
-      label: "Carregando capa",
+      label: "Preparando dados da capa",
       progress: 72,
       wait: () =>
         splashCompactViewportQuery.matches
@@ -2087,7 +2090,7 @@ const waitForSplashReadiness = async () => {
           : waitForSplashFontsReady(splashGateStepTimeoutMs)
     },
     {
-      label: "Portal pronto para abrir",
+      label: "Estrutura pronta",
       progress: 100,
       wait: () => Promise.resolve()
     }
@@ -2144,11 +2147,12 @@ const setupSplashExperience = () => {
 
   splashGateActive = true;
   document.body.classList.add("catalogo-site-booting");
+  splashRoot.classList.add("is-shell-preparing");
   if (!splashCompactViewportQuery.matches) {
     splashRoot.classList.add("is-logo-primer");
   }
   splashRoot.setAttribute("aria-hidden", "false");
-  updateSplashProgress(4, splashMessages[0]);
+  updateSplashProgress(4, "Carregando estrutura real");
 
   window.setTimeout(() => {
     splashRoot.classList.remove("is-logo-primer");
@@ -2202,6 +2206,7 @@ const setupSplashExperience = () => {
     window.removeEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
     clearSplashFailsafe();
     updateSplashProgress(100, "Portal pronto para abrir");
+    splashRoot.classList.remove("is-shell-preparing", "is-broadcast-started");
     splashRoot.classList.add("is-completing");
     window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
     warmPortalCacheInBackground();
@@ -2229,13 +2234,28 @@ const setupSplashExperience = () => {
   const elapsed = currentTime - splashBootStartedAt;
   const remaining = Math.max(100, splashDailyMinimumMs - elapsed);
 
-  const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
-    updateSplashProgress(100, "Portal pronto para abrir");
-  });
+  const structureGate = Promise.race([
+    Promise.all([waitForSplashReadiness(), waitForSplashDelay(remaining)]),
+    waitForSplashDelay(splashStructureGateMaximumMs)
+  ]);
 
-  const readinessGate = Promise.all([waitForSplashReadiness(), waitForSplashDelay(remaining)]);
+  const runCinematicOpening = async () => {
+    if (splashReleased) {
+      return;
+    }
 
-  void Promise.race([readinessGate, safetyRelease]).then(releaseSplash).catch(releaseSplash);
+    splashRoot.classList.remove("is-shell-preparing", "is-logo-primer");
+    splashRoot.classList.add("is-broadcast-started");
+    if (splashCopy) {
+      splashCopy.textContent = "Abertura de jornal do Vale do Juruá";
+    }
+    updateSplashProgress(72, "Vale do Juruá no ar");
+    await waitForSplashDelay(splashCinematicDurationMs);
+    releaseSplash();
+  };
+
+  void structureGate.then(runCinematicOpening).catch(releaseSplash);
+  void waitForSplashDelay(splashGateMaximumMs).then(releaseSplash).catch(releaseSplash);
 };
 
 const clearMobilePageTransitionState = () => {

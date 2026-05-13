@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-12 - Abertura jornalistica azul com relogio
+
+- Usuario esclareceu o objetivo visual: antes da animacao, mostrar so uma logo enquanto a pagina/estrutura real carrega; quando tudo estiver pronto, rodar uma abertura bonita de jornal de TV por cerca de 4,5s, com relogio, estrelas/universo azul, paralaxe, cidades do Vale do Jurua e chamadas de news.
+- `index.html` ganhou a camada `logo-splash-broadcast` com relogio, estrelas, cidades e linhas de noticia; cache-bust atualizado para `20260512-broadcast-opening1`.
+- `styles.css` criou o modo `is-shell-preparing` (logo simples) e `is-broadcast-started` (abertura azul televisiva com relogio, estrelas, cidades, news lines e titulo em movimento).
+- `script.js` separou as fases: espera estrutura/carregamento real, inicia a abertura cinematografica, conta 4,5s a partir da animacao e so entao libera `site-loaded`. A intro continua sendo por sessao do navegador e a navegacao interna continua com barra curta, nao full-screen.
+- Validacoes: `node --check script.js`, `startup-experience.js`, `noticia.js`, `early-home-surfaces.js`; braces CSS `3597/3597`; smoke mobile local em `127.0.0.1:3228` confirmou saida para `site-loaded` depois da abertura e segundo acesso sem intro.
+
 ## Atualizacao rapida 2026-05-12 - Abertura cinematografica e navegacao real
 
 - Usuario corrigiu a direcao: a dobra/area `Rede Social` nao deveria existir na home e a abertura nao deveria ser uma intro tipo app. O fluxo correto e primeiro acesso do navegador com abertura cinematografica, depois website, e entre home/materias/recursos apenas carregamento real curto.

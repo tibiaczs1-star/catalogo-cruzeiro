@@ -24462,6 +24462,202 @@ body.editorial-home .logo-splash-river .panel-c {
   opacity: 0.3 !important;
 }
 
+body.editorial-home .logo-splash-broadcast {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  transform: scale(1.04) translateY(18px) !important;
+  transition: opacity 360ms ease, transform 680ms cubic-bezier(0.18, 0.82, 0.24, 1) !important;
+}
+
+body.editorial-home .broadcast-clock {
+  position: absolute !important;
+  left: max(7vw, 42px) !important;
+  top: 50% !important;
+  width: clamp(180px, 20vw, 320px) !important;
+  aspect-ratio: 1 !important;
+  transform: translateY(-50%) rotateX(62deg) rotateZ(-12deg) !important;
+  filter: drop-shadow(0 0 38px rgba(75, 168, 255, 0.34)) drop-shadow(0 0 24px rgba(246, 168, 37, 0.2)) !important;
+}
+
+body.editorial-home .clock-ring,
+body.editorial-home .clock-hand,
+body.editorial-home .clock-core {
+  position: absolute !important;
+  inset: 0 !important;
+  margin: auto !important;
+}
+
+body.editorial-home .clock-ring {
+  border-radius: 50% !important;
+  border: 1px solid rgba(142, 211, 255, 0.42) !important;
+  box-shadow:
+    inset 0 0 0 10px rgba(17, 92, 148, 0.14),
+    0 0 44px rgba(75, 168, 255, 0.2) !important;
+}
+
+body.editorial-home .clock-ring.ring-a {
+  width: 100% !important;
+  height: 100% !important;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(246, 168, 37, 0.9) 0 2deg, transparent 2deg 12deg),
+    radial-gradient(circle, transparent 0 58%, rgba(2, 13, 24, 0.5) 59% 100%) !important;
+}
+
+body.editorial-home .clock-ring.ring-b {
+  width: 72% !important;
+  height: 72% !important;
+  border-color: rgba(246, 168, 37, 0.38) !important;
+  animation: broadcastClockCounter 4.5s linear both !important;
+}
+
+body.editorial-home .clock-hand {
+  width: 3px !important;
+  height: 42% !important;
+  bottom: 50% !important;
+  border-radius: 999px !important;
+  transform-origin: 50% 100% !important;
+  background: linear-gradient(180deg, #fff, #f6a825) !important;
+  box-shadow: 0 0 18px rgba(246, 168, 37, 0.74) !important;
+}
+
+body.editorial-home .clock-hand.hand-hour {
+  height: 31% !important;
+  transform: rotate(34deg) !important;
+}
+
+body.editorial-home .clock-hand.hand-minute {
+  animation: broadcastClockSweep 4.5s cubic-bezier(0.18, 0.82, 0.24, 1) both !important;
+}
+
+body.editorial-home .clock-core {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  background: #f6a825 !important;
+  box-shadow: 0 0 0 8px rgba(246, 168, 37, 0.14), 0 0 34px rgba(246, 168, 37, 0.64) !important;
+}
+
+body.editorial-home .broadcast-stars {
+  position: absolute !important;
+  inset: 0 !important;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.92) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 25% 74%, rgba(134, 205, 255, 0.82) 0 1px, transparent 2px),
+    radial-gradient(circle at 46% 16%, rgba(255, 218, 118, 0.86) 0 1px, transparent 2px),
+    radial-gradient(circle at 64% 68%, rgba(255, 255, 255, 0.74) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 24%, rgba(134, 205, 255, 0.78) 0 1px, transparent 2px),
+    radial-gradient(circle at 92% 56%, rgba(255, 218, 118, 0.72) 0 1px, transparent 2px) !important;
+  background-size: 280px 220px, 310px 260px, 360px 260px, 290px 240px, 340px 250px, 320px 230px !important;
+  animation: broadcastStarDrift 4.5s ease-out both !important;
+}
+
+body.editorial-home .broadcast-stars i {
+  position: absolute !important;
+  width: clamp(90px, 10vw, 170px) !important;
+  height: 1px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, transparent, rgba(142, 211, 255, 0.82), transparent) !important;
+  opacity: 0 !important;
+  animation: broadcastMeteor 4.5s ease-out both !important;
+}
+
+body.editorial-home .broadcast-stars i:nth-child(1) { left: 12%; top: 18%; animation-delay: 0.25s !important; }
+body.editorial-home .broadcast-stars i:nth-child(2) { left: 68%; top: 22%; animation-delay: 0.55s !important; background: linear-gradient(90deg, transparent, rgba(246, 168, 37, 0.72), transparent) !important; }
+body.editorial-home .broadcast-stars i:nth-child(3) { left: 34%; top: 62%; animation-delay: 0.9s !important; }
+body.editorial-home .broadcast-stars i:nth-child(4) { left: 76%; top: 72%; animation-delay: 1.25s !important; }
+body.editorial-home .broadcast-stars i:nth-child(5) { left: 6%; top: 76%; animation-delay: 1.65s !important; background: linear-gradient(90deg, transparent, rgba(246, 168, 37, 0.66), transparent) !important; }
+
+body.editorial-home .broadcast-cities,
+body.editorial-home .broadcast-news-lines {
+  position: absolute !important;
+  right: clamp(20px, 7vw, 100px) !important;
+  display: grid !important;
+  justify-items: end !important;
+  gap: 0.42rem !important;
+  color: #eff8ff !important;
+  font-family: "Sora", system-ui, sans-serif !important;
+  text-transform: uppercase !important;
+  text-align: right !important;
+}
+
+body.editorial-home .broadcast-cities {
+  top: 18% !important;
+}
+
+body.editorial-home .broadcast-news-lines {
+  bottom: 18% !important;
+}
+
+body.editorial-home .broadcast-cities span,
+body.editorial-home .broadcast-news-lines span {
+  display: inline-flex !important;
+  padding: 0.38rem 0.58rem !important;
+  border: 1px solid rgba(142, 211, 255, 0.22) !important;
+  background: rgba(3, 24, 44, 0.52) !important;
+  color: rgba(239, 248, 255, 0.86) !important;
+  font-size: clamp(0.62rem, 0.82vw, 0.82rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.14em !important;
+  transform: translate3d(42px, 0, 0) !important;
+  opacity: 0 !important;
+  animation: broadcastTextIn 4.5s ease both !important;
+}
+
+body.editorial-home .broadcast-cities span:nth-child(1) { animation-delay: 0.35s !important; }
+body.editorial-home .broadcast-cities span:nth-child(2) { animation-delay: 0.62s !important; }
+body.editorial-home .broadcast-cities span:nth-child(3) { animation-delay: 0.89s !important; }
+body.editorial-home .broadcast-cities span:nth-child(4) { animation-delay: 1.16s !important; }
+body.editorial-home .broadcast-cities span:nth-child(5) { animation-delay: 1.43s !important; }
+body.editorial-home .broadcast-news-lines span:nth-child(1) { animation-delay: 2.25s !important; }
+body.editorial-home .broadcast-news-lines span:nth-child(2) { animation-delay: 2.55s !important; }
+body.editorial-home .broadcast-news-lines span:nth-child(3) { animation-delay: 2.85s !important; }
+
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-broadcast,
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-fragments,
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-river,
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-kicker,
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-brand {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-card {
+  width: min(320px, calc(100vw - 48px)) !important;
+  gap: 0.72rem !important;
+  margin: 0 !important;
+  padding: 1.2rem !important;
+  border: 1px solid rgba(142, 211, 255, 0.18) !important;
+  border-radius: 8px !important;
+  background: rgba(2, 13, 24, 0.48) !important;
+  box-shadow: 0 18px 64px rgba(0, 0, 0, 0.34) !important;
+}
+
+body.editorial-home .logo-splash.is-shell-preparing .logo-splash-compass {
+  width: 76px !important;
+  height: 76px !important;
+  animation: structureLogoPulse 1.15s ease-in-out infinite !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(24, 110, 184, 0.48), transparent 36%),
+    radial-gradient(circle at 24% 18%, rgba(246, 168, 37, 0.18), transparent 28%),
+    linear-gradient(132deg, #010917 0%, #052c58 46%, #010713 100%) !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-broadcast {
+  opacity: 1 !important;
+  transform: scale(1) translateY(0) !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-card {
+  animation: broadcastTitleLift 4.5s cubic-bezier(0.18, 0.82, 0.24, 1) both !important;
+}
+
 body.editorial-home .logo-splash-card {
   position: relative !important;
   z-index: 2 !important;
@@ -24614,6 +24810,47 @@ body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
   to { transform: translate3d(28px, -5px, 0) scaleX(1.06); opacity: 0.86; }
 }
 
+@keyframes structureLogoPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 14px rgba(142, 211, 255, 0.26)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 28px rgba(246, 168, 37, 0.34)); }
+}
+
+@keyframes broadcastClockSweep {
+  0% { transform: rotate(-48deg); }
+  72% { transform: rotate(292deg); }
+  100% { transform: rotate(348deg); }
+}
+
+@keyframes broadcastClockCounter {
+  0% { transform: rotate(12deg) scale(0.96); opacity: 0.36; }
+  48% { opacity: 0.9; }
+  100% { transform: rotate(-82deg) scale(1.04); opacity: 0.58; }
+}
+
+@keyframes broadcastStarDrift {
+  0% { transform: translate3d(0, 18px, 0) scale(1.1); opacity: 0.2; }
+  18%, 76% { opacity: 1; }
+  100% { transform: translate3d(-34px, -18px, 0) scale(1); opacity: 0.48; }
+}
+
+@keyframes broadcastMeteor {
+  0%, 14% { transform: translate3d(110px, -22px, 0) rotate(-18deg) scaleX(0.4); opacity: 0; }
+  22%, 48% { opacity: 0.86; }
+  68%, 100% { transform: translate3d(-160px, 36px, 0) rotate(-18deg) scaleX(1); opacity: 0; }
+}
+
+@keyframes broadcastTextIn {
+  0%, 8% { transform: translate3d(42px, 0, 0); opacity: 0; }
+  18%, 76% { transform: translate3d(0, 0, 0); opacity: 1; }
+  100% { transform: translate3d(-16px, 0, 0); opacity: 0.34; }
+}
+
+@keyframes broadcastTitleLift {
+  0% { transform: translate3d(0, 34px, 0) scale(0.96); opacity: 0.16; }
+  18%, 76% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  100% { transform: translate3d(0, -10px, 0) scale(1.02); opacity: 1; }
+}
+
 @media (max-width: 760px) {
   body.editorial-home .logo-splash {
     padding: clamp(18px, 5vw, 32px) !important;
@@ -24701,5 +24938,49 @@ body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
 
   body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
     font-size: 0.78rem !important;
+  }
+
+  body.editorial-home .broadcast-clock {
+    left: 50% !important;
+    top: 35% !important;
+    width: min(58vw, 210px) !important;
+    transform: translate(-50%, -50%) rotateX(62deg) rotateZ(-12deg) !important;
+    opacity: 0.78 !important;
+  }
+
+  body.editorial-home .broadcast-cities,
+  body.editorial-home .broadcast-news-lines {
+    right: 16px !important;
+    left: 16px !important;
+    justify-items: center !important;
+    text-align: center !important;
+  }
+
+  body.editorial-home .broadcast-cities {
+    top: 9% !important;
+  }
+
+  body.editorial-home .broadcast-news-lines {
+    bottom: 10% !important;
+  }
+
+  body.editorial-home .broadcast-cities span,
+  body.editorial-home .broadcast-news-lines span {
+    max-width: 92vw !important;
+    justify-content: center !important;
+    font-size: 0.61rem !important;
+  }
+
+  body.editorial-home .logo-splash.is-shell-preparing .logo-splash-card {
+    width: min(310px, calc(100vw - 44px)) !important;
+    min-height: 0 !important;
+    padding: 1rem !important;
+    border-radius: 8px !important;
+    background: rgba(2, 13, 24, 0.52) !important;
+  }
+
+  body.editorial-home .logo-splash.is-shell-preparing .logo-splash-compass {
+    width: 68px !important;
+    height: 68px !important;
   }
 }

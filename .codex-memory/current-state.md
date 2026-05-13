@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T01:22:16.933Z
+Updated: 2026-05-13T01:43:55.920Z
 
 ## Active Goal
 
-- Corrigir home mobile/desktop: sem area Rede Social indevida, abertura cinematografica no primeiro acesso e carregamento real curto entre paginas.
+- Subir a abertura jornalistica azul com relogio, cidades do Vale do Jurua e news depois do pre-carregamento real.
 
 ## Summary
 
-Mudancas locais validadas: home nao contem mais #rede-social nem texto Rede Social nos arquivos publicos, abertura saiu do modelo app para Abertura cinematografica por sessao do navegador, e navegacao home/materia/recursos usa barra superior curta em vez de full-screen cinematico. Checks: node --check script/startup/noticia/early-home-surfaces, review:team totalIssues=0, perf:budget ok=true. Smoke mobile local em 127.0.0.1:3219 confirmou primeira abertura e segunda visita sem intro.
+A intro foi refeita em duas fases: primeiro logo/estrutura real com is-shell-preparing; depois abertura televisiva azul com relogio, estrelas, cidades e chamadas de news por 4,5s a partir de is-broadcast-started. Navegacao interna continua com loader superior curto. Smoke local confirmou saida para site-loaded e segunda visita sem intro.
 
 ## Next
 
-- Commitar, enviar para origin/main e validar online no Render com viewport mobile.
+- Commitar, push em origin/main e smoke online no Render.

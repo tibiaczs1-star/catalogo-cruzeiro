@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T01:22:16.933Z
+Updated: 2026-05-13T01:43:55.920Z
 
-Rodada atual corrigiu a direcao do usuario: remover de vez a area Rede Social da home e separar abertura de carregamento. Arquivos principais alterados: index.html, styles.css, premium-home-redesign.css, script.js, startup-experience.js/css, noticia.html e noticia.js. Validacao local OK com primeira abertura cinematografica por sessao, sem Abrindo app, sem #rede-social e sem loader cinematico full-screen na navegacao. Workspace ainda tem alteracoes antigas nao relacionadas em PubPaid/data/agents; nao incluir no commit.
+Rodada atual troca a intro simples por abertura jornalistica azul: index.html adiciona logo-splash-broadcast; styles.css controla is-shell-preparing e is-broadcast-started; script.js espera estrutura real, roda 4,5s de abertura e libera site-loaded. Cache-bust novo: 20260512-broadcast-opening1. Manter fora do commit as mudancas antigas de PubPaid/data/agents/output.
 
 ## Next
 
-- Staging seletivo dos arquivos desta rodada, commit, push e smoke online.
+- Commit, push e validacao online mobile.
