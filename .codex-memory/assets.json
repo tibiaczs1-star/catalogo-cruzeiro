@@ -1,7 +1,29 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T05:54:02.927Z",
+  "lastUpdatedAt": "2026-05-13T21:43:41.499Z",
   "assets": [
+    {
+      "id": "home-entry-separated-cards-validation-20260513",
+      "kind": "image",
+      "path": "output/playwright/home-entry-separated-cards-20260513.png",
+      "source": "workspace-playwright",
+      "note": "Captura antes do commit: entrada da home respirando, cards de manchete separados abaixo da hero, sem Resumo do dia e sem TV nacional quando nao ha video local.",
+      "linkedOrderIds": [
+        "2026-05-13-hero-cards-video-local"
+      ],
+      "createdAt": "2026-05-13T21:43:41.499Z"
+    },
+    {
+      "id": "home-hero-local-video-validation-20260513",
+      "kind": "image",
+      "path": "output/playwright/home-hero-local-video-20260513.png",
+      "source": "workspace-playwright",
+      "note": "Captura antes do commit: hero com cards de noticia embaixo, bolinhas manuais, sem bloco Resumo do dia e TV local ocultada quando nao ha video do Jurua incorporavel.",
+      "linkedOrderIds": [
+        "2026-05-13-hero-cards-video-local"
+      ],
+      "createdAt": "2026-05-13T20:42:59.941Z"
+    },
     {
       "id": "instagram-render-assets-20260513",
       "kind": "image-set",

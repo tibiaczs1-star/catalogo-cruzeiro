@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T20:15:48.767Z
+Updated: 2026-05-13T21:43:41.499Z
 
 ## Active Goal
 
-- Home CZS pronta para commit e push
+- Commit final da home CZS
 
 ## Summary
 
-Apoiadores confirmados ficam na faixa visual; grid inferior virou vagas abertas sem duplicar logos: Voce aqui, Sua empresa aqui, Sua marca no Jurua e Seu negocio aqui. Validacoes locais passaram.
+Hero respira como entrada principal. Cards de manchete com foto foram separados em bloco logo abaixo, com bolinhas manuais e clique para trocar a manchete. Dobra Resumo do dia em video foi removida; TV fica oculta quando nao houver video local do Jurua/Cruzeiro do Sul incorporavel.
 
 ## Next
 
-- Commit seletivo e push para main; depois conferir deploy online.
+- Commit seletivo e push quando solicitado.

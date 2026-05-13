@@ -1,7 +1,46 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T20:15:48.701Z",
+  "lastUpdatedAt": "2026-05-13T21:43:41.499Z",
   "orders": [
+    {
+      "id": "2026-05-13-hero-cards-video-local",
+      "createdAt": "2026-05-13T20:42:59.941Z",
+      "updatedAt": "2026-05-13T21:43:41.499Z",
+      "status": "ready-for-commit",
+      "source": "chat",
+      "rawRequest": "nao seria otimo agente botar aquele sistema de card e click pra mudar a hero como era na direita so que embaixo agora... e na hero nao tem como ter bolinhas... me mande uma foto de como ficou antes do comit... / a minha pergunta e vc consegue fazer um video todo dia com resumo? se n consegue nao bota ali, e outra de preferencia a videos do jurua, cruizeirdo so sul, nao videos da cbcn",
+      "summary": "Reativar cards com foto abaixo da hero para trocar manchete manualmente, adicionar bolinhas, remover promessa de resumo diario em video e permitir TV apenas com videos locais do Jurua/Cruzeiro do Sul.",
+      "normalizedTasks": [
+        "mover/reativar cards de manchetes com foto para baixo da hero",
+        "permitir troca manual da hero por cards e bolinhas",
+        "gerar captura antes de commit",
+        "remover promessa de resumo diario em video",
+        "filtrar TV para videos locais e bloquear fontes nacionais como CNN/CBCN/CBC"
+      ],
+      "tags": [
+        "home",
+        "hero",
+        "video",
+        "jurua",
+        "cruzeiro-do-sul",
+        "validacao-visual"
+      ],
+      "filesTouched": [
+        "index.html",
+        "script.js",
+        "premium-home-redesign.css",
+        "CODEX_MEMORY.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        "output/playwright/home-hero-local-video-20260513.png",
+        "output/playwright/home-entry-separated-cards-20260513.png"
+      ],
+      "notes": "Cards foram separados da entrada da hero apos feedback de que a abertura estava apertada. Browser interno bloqueou localhost/127.0.0.1 com net::ERR_BLOCKED_BY_CLIENT; validacao visual feita via Playwright local. Pronto para commit."
+    },
     {
       "id": "2026-05-13-codex-sem-perguntas-permissao",
       "createdAt": "2026-05-13T03:33:01.283Z",

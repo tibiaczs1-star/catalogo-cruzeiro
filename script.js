@@ -6568,7 +6568,7 @@ const buildHeroPanelPhotoItem = (thumb, index = 0) => {
     articleCategory: category,
     articleTitle: title,
     articleSummary: summary,
-    articleHref: thumb?.getAttribute("href") || "#radar",
+    articleHref: thumb?.dataset?.articleHref || thumb?.getAttribute("href") || "#radar",
     proxyUrl: imageUrl,
     fallbackUrl: imageUrl,
     focusPosition: "center center",
@@ -6643,8 +6643,8 @@ const syncHeroPanelThumbContent = (photo = {}, index = 0) => {
     thumb.style.setProperty("--thumb", `url("${escapeCssUrl(imageUrl)}")`);
   }
 
-  thumb.href = href;
-  applyArticleLinkAttrs(thumb, href);
+  thumb.dataset.articleHref = href;
+  thumb.href = "#topo";
   thumb.dataset.headline = title;
   thumb.dataset.summary = summary;
   thumb.dataset.heroStoryKey = getHeroStoryKey(photo);
@@ -6665,6 +6665,13 @@ const syncHeroPanelThumbContent = (photo = {}, index = 0) => {
 const renderHeroPanelThumbsFromDailyPool = (pool = []) => {
   const thumbs = [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
   if (!thumbs.length) {
+    return;
+  }
+
+  if (!Array.isArray(pool) || !pool.length) {
+    thumbs.forEach((thumb) => {
+      thumb.hidden = false;
+    });
     return;
   }
 
@@ -7479,10 +7486,22 @@ const initializeHeroTourismHero = () => {
     showHeroTourismIndex(nextIndex);
   };
 
-  mountHeroTourismDots(dailyPool.length, showHeroTourismIndex);
+  const getHeroPanelThumbs = () => [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
+  const showHeroPanelOrTourismIndex = (targetIndex = 0) => {
+    const panelThumbs = getHeroPanelThumbs().filter((thumb) => !thumb.hidden);
+    const panelThumb = panelThumbs[targetIndex];
+    if (panelThumb) {
+      heroTourismRotation.photoIndex = targetIndex;
+      paintHeroPanelSelection(buildHeroPanelPhotoItem(panelThumb, targetIndex), targetIndex);
+      return;
+    }
+
+    showHeroTourismIndex(targetIndex);
+  };
+
+  mountHeroTourismDots(Math.max(dailyPool.length, getHeroPanelThumbs().filter((thumb) => !thumb.hidden).length), showHeroPanelOrTourismIndex);
   syncHeroTourismDots(heroTourismRotation.photoIndex);
 
-  const getHeroPanelThumbs = () => [...document.querySelectorAll(".hero-panel-thumbs .hero-panel-photo")];
   const stopHeroPanelAutoRotation = () => {
     if (heroTourismRotation.timerId) {
       window.clearInterval(heroTourismRotation.timerId);
@@ -7590,7 +7609,7 @@ const initializeHeroTourismHero = () => {
       bubble?.querySelector("em")?.textContent?.trim() ||
       "Toque para ampliar a foto e escolher o que ler.";
     const action = bubble?.querySelector("small")?.textContent?.trim() || "Abrir matéria";
-    const href = thumb?.getAttribute("href") || "#radar";
+    const href = thumb?.dataset?.articleHref || thumb?.getAttribute("href") || "#radar";
     const imageUrl = extractHeroThumbUrl(thumb);
 
     return {
@@ -7832,6 +7851,12 @@ const initializeHeroTourismHero = () => {
       return;
     }
     thumb._heroTourismThumbBound = true;
+    const originalHref = String(thumb.getAttribute("href") || "").trim();
+    if (originalHref && originalHref !== "#" && originalHref !== "#topo") {
+      thumb.dataset.articleHref = originalHref;
+      thumb.href = "#topo";
+      thumb.setAttribute("role", "button");
+    }
     const bubble = thumb.querySelector("span");
     if (bubble && !bubble.querySelector("em")) {
       const summary = document.createElement("em");
@@ -7880,17 +7905,7 @@ const initializeHeroTourismHero = () => {
       }
     });
     thumb.addEventListener("click", (event) => {
-      const href = String(thumb.getAttribute("href") || "").trim();
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) {
-        hideHeroPanelFloatingBubble();
-        stopHeroPanelAutoRotation();
-        return;
-      }
-
-      if (href && href !== "#") {
-        const selected = buildHeroPanelPhotoItem(thumb, index);
-        heroTourismRotation.photoIndex = index;
-        paintHeroPanelSelection(selected, index);
         hideHeroPanelFloatingBubble();
         stopHeroPanelAutoRotation();
         return;
@@ -14421,6 +14436,10 @@ const getSocialAgendaWindows = (filter = "dia") => {
 
 const catalogTvVideoPattern =
   /\b(v[ií]deo|video|reels?|shorts?|youtube|youtu\.be|watch|clipe|filmagem|c[aâ]mera|ao vivo)\b/i;
+const catalogTvLocalPattern =
+  /\b(cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|mancio lima|mâncio lima|rodrigues alves|porto walter|marechal thaumaturgo)\b/i;
+const catalogTvBlockedSourcePattern =
+  /\b(cnn|cnn brasil|cbcn|cbc|g1 politica|g1 política|the verge|agencia brasil|agência brasil|bbc|uol|folha|estadao|estadão)\b/i;
 
 const isCatalogTvArticle = (article = {}) => {
   const normalized = normalizeRuntimeArticle(article);
@@ -14437,6 +14456,15 @@ const isCatalogTvArticle = (article = {}) => {
     normalized.sourceImageUrl,
     normalized.feedImageUrl
   ].join(" ");
+  const sourceText = [normalized.sourceName, normalized.sourceLabel, normalized.sourceUrl].join(" ");
+
+  if (!catalogTvLocalPattern.test(text)) {
+    return false;
+  }
+
+  if (catalogTvBlockedSourcePattern.test(sourceText)) {
+    return false;
+  }
 
   return catalogTvVideoPattern.test(text) && Boolean(normalized.sourceUrl || normalized.url || normalized.link || normalized.slug);
 };
@@ -14488,48 +14516,7 @@ const getCatalogTvEmbedUrl = (article = {}) => {
   return "";
 };
 
-const catalogTvFallbackVideos = [
-  {
-    id: "catalog-tv-youtube-5vNzcdsHHcs",
-    slug: "tv-catalogo-eu-te-amo-mae-justica",
-    title: "“Eu te amo, mãe. Justiça”, diz filho de mulher morta após casamento em SP",
-    category: "Vídeo",
-    sourceName: "CNN Brasil",
-    sourceUrl: "https://www.cnnbrasil.com.br/nacional/sudeste/sp/eu-te-amo-mae-justica-diz-filho-de-mulher-morta-apos-casamento-em-sp/",
-    imageUrl: "https://img.youtube.com/vi/5vNzcdsHHcs/sddefault.jpg",
-    catalogTvEmbedUrl: "https://www.youtube.com/embed/5vNzcdsHHcs?rel=0&modestbranding=1"
-  },
-  {
-    id: "catalog-tv-youtube-Hghced2NqXg",
-    slug: "tv-catalogo-guarda-municipal-mata-esposa",
-    title: "Guarda municipal mata esposa após casamento em SP: veja como briga começou",
-    category: "Vídeo",
-    sourceName: "CNN Brasil",
-    sourceUrl: "https://www.cnnbrasil.com.br/nacional/sudeste/sp/guarda-municipal-mata-esposa-apos-casamento-em-sp-veja-como-briga-comecou/",
-    imageUrl: "https://img.youtube.com/vi/Hghced2NqXg/sddefault.jpg",
-    catalogTvEmbedUrl: "https://www.youtube.com/embed/Hghced2NqXg?rel=0&modestbranding=1"
-  },
-  {
-    id: "catalog-tv-youtube-U2A72RPYkoU",
-    slug: "tv-catalogo-disputa-senado-estrategias-partidarias",
-    title: "Disputa no Senado é centro das estratégias partidárias nas eleições",
-    category: "Vídeo",
-    sourceName: "CNN Brasil",
-    sourceUrl: "https://www.cnnbrasil.com.br/politica/disputa-no-senado-e-centro-das-estrategias-partidarias-nas-eleicoes/",
-    imageUrl: "https://img.youtube.com/vi/U2A72RPYkoU/sddefault.jpg",
-    catalogTvEmbedUrl: "https://www.youtube.com/embed/U2A72RPYkoU?rel=0&modestbranding=1"
-  },
-  {
-    id: "catalog-tv-youtube-6Ol2K85mABI",
-    slug: "tv-catalogo-prints-obsessao-tenente-coronel",
-    title: "Prints revelam “obsessão” de tenente-coronel por subordinada mesmo casado",
-    category: "Vídeo",
-    sourceName: "CNN Brasil",
-    sourceUrl: "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prints-revelam-obsessao-de-tenente-coronel-por-subordinada-mesmo-casado/",
-    imageUrl: "https://img.youtube.com/vi/6Ol2K85mABI/sddefault.jpg",
-    catalogTvEmbedUrl: "https://www.youtube.com/embed/6Ol2K85mABI?rel=0&modestbranding=1"
-  }
-];
+const catalogTvFallbackVideos = [];
 
 const pickCatalogTvItems = (items = []) => {
   const strictItems = dedupeNewsItems([...(items || []), ...initialStaticNews, ...catalogTvFallbackVideos])
@@ -14626,8 +14613,10 @@ const renderCatalogTvSurface = (items = []) => {
 
   const selected = pickCatalogTvItems(items);
   if (!selected.length) {
+    section.hidden = true;
     return;
   }
+  section.hidden = false;
 
   const maxVisible =
     typeof window.matchMedia === "function" && window.matchMedia("(max-width: 760px)").matches ? 2 : 4;

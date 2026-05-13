@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Hero com cards embaixo e video so local
+
+- Usuario pediu voltar o sistema de cards/fotos para trocar a hero, agora abaixo da manchete, com bolinhas para mudar manualmente a noticia ja lida antes de commit.
+- `index.html`, `script.js` e `premium-home-redesign.css` reativaram a galeria da hero abaixo da manchete, com 15 cards visuais, 5 bolinhas e clique trocando a manchete sem abrir a materia imediatamente; o CTA principal passa a abrir a materia selecionada.
+- Usuario questionou a promessa de "Resumo do dia" em video. A dobra de resumo diario foi removida para nao prometer producao que ainda nao existe.
+- A TV foi reposicionada como "Videos do Jurua", com filtro para exigir sinal de Cruzeiro do Sul/Vale do Jurua e bloquear fallbacks nacionais como CNN/CBCN/CBC; se nao houver video local incorporavel, a secao fica oculta.
+- Depois do feedback de que a entrada ficou apertada, a galeria saiu de dentro da hero e virou bloco separado logo abaixo, com respiro entre hero/cards/proximo bloco e cards sem espremimento.
+- Validacoes locais: `script.js` sem erro de sintaxe, `premium-home-redesign.css` braces 2271/2271, Playwright gerou captura em `output/playwright/home-entry-separated-cards-20260513.png`; Browser interno bloqueou localhost/127.0.0.1 com `net::ERR_BLOCKED_BY_CLIENT`, entao a captura foi feita via Playwright local.
+
 ## Atualizacao rapida 2026-05-13 - Apoiadores sem duplicacao
 
 - Usuario pediu commit/push e, antes de subir, retirar duplicacoes em apoiadores/fundadores.

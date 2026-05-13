@@ -15144,3 +15144,207 @@ body.editorial-home #founders .founder-slot-card a {
   font-weight: 900 !important;
   text-decoration: none !important;
 }
+
+/* 2026-05-13: manchetes com foto embaixo da hero, com troca manual. */
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell {
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: minmax(506px, auto) !important;
+  height: auto !important;
+  min-height: 506px !important;
+  overflow: hidden !important;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-tourism-backdrop {
+  width: 100% !important;
+}
+
+html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-copy.hero-restored-copy {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  min-height: 460px !important;
+  max-width: 780px !important;
+}
+
+html body.editorial-home .hero-tourism-dots {
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  min-height: 22px !important;
+  margin-top: 1rem !important;
+}
+
+html body.editorial-home .hero-tourism-dot {
+  width: 10px !important;
+  height: 10px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255, 225, 162, 0.5) !important;
+  border-radius: 999px !important;
+  background: rgba(232, 242, 250, 0.26) !important;
+  cursor: pointer !important;
+}
+
+html body.editorial-home .hero-tourism-dot.is-active {
+  width: 32px !important;
+  background: linear-gradient(90deg, #ffe1a2, #f7aa2c) !important;
+  box-shadow: 0 0 18px rgba(247, 170, 44, 0.34) !important;
+}
+
+html body.editorial-home .main-layout > .hero-newsroom-panel.hero-office-panel {
+  order: 11 !important;
+  grid-column: 1 / -1 !important;
+  grid-row: auto !important;
+  align-self: auto !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  margin-top: 0 !important;
+  padding: 0.95rem 1rem 1rem !important;
+  border: 1px solid rgba(155, 192, 222, 0.24) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, rgba(3, 18, 31, 0.66), rgba(3, 18, 31, 0.9)),
+    rgba(2, 19, 34, 0.72) !important;
+}
+
+html body.editorial-home .main-layout > .hero-newsroom-panel.hero-office-panel > .hero-panel-row:not(.hero-panel-row-gallery) {
+  display: none !important;
+}
+
+html body.editorial-home .main-layout > .content-column {
+  order: 20 !important;
+  grid-column: 1 / -1 !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0.75rem !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-icon-star {
+  display: none !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-copy {
+  display: flex !important;
+  align-items: end !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-copy small {
+  color: var(--ph-gold) !important;
+  font-size: 0.78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-copy strong {
+  max-width: none !important;
+  color: rgba(247, 251, 255, 0.88) !important;
+  font-size: 0.92rem !important;
+  font-weight: 650 !important;
+  line-height: 1.25 !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs {
+  grid-column: 1 / -1 !important;
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(210px, 1fr)) !important;
+  grid-auto-rows: 126px !important;
+  gap: 0.72rem !important;
+  width: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 0.08rem 0 0.4rem !important;
+  border: 0 !important;
+  scroll-snap-type: x proximity !important;
+  scrollbar-width: thin !important;
+}
+
+html body.editorial-home .hero-panel-row-gallery .hero-panel-media.hero-panel-thumbs {
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+}
+
+html body.editorial-home .hero-panel-photo {
+  position: relative !important;
+  width: 100% !important;
+  min-width: 210px !important;
+  min-height: 126px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  scroll-snap-align: start !important;
+}
+
+html body.editorial-home .hero-panel-photo::before {
+  content: attr(data-headline) !important;
+  position: absolute !important;
+  inset: auto 0 0 0 !important;
+  display: -webkit-box !important;
+  min-height: 44px !important;
+  padding: 0.58rem 0.65rem !important;
+  overflow: hidden !important;
+  background: linear-gradient(180deg, transparent, rgba(2, 13, 24, 0.92) 28%) !important;
+  color: #fff !important;
+  font-size: 0.78rem !important;
+  font-weight: 850 !important;
+  line-height: 1.14 !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+}
+
+html body.editorial-home .hero-panel-photo > span,
+html body.editorial-home .hero-panel-photo::after {
+  display: none !important;
+}
+
+html body.editorial-home .hero-panel-photo.is-active {
+  border-color: rgba(240, 180, 41, 0.95) !important;
+  box-shadow: 0 0 0 3px rgba(240, 180, 41, 0.18), inset 0 -42px 46px rgba(0, 0, 0, 0.42) !important;
+}
+
+@media (max-width: 900px) {
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom-copy.hero-restored-copy {
+    min-height: 430px !important;
+  }
+
+  html body.editorial-home .hero-panel-row-gallery .hero-panel-copy {
+    display: grid !important;
+    gap: 0.28rem !important;
+  }
+
+  html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs {
+    grid-template-columns: repeat(3, minmax(180px, 1fr)) !important;
+    grid-auto-rows: 108px !important;
+  }
+
+  html body.editorial-home .hero-panel-photo {
+    min-width: 180px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  html body.editorial-home .hero-newsroom-shell.hero-restored-shell {
+    grid-template-rows: minmax(500px, auto) !important;
+  }
+
+  html body.editorial-home .hero-tourism-dots {
+    display: flex !important;
+  }
+
+  html body.editorial-home .hero-panel-row-gallery .hero-panel-thumbs {
+    grid-template-columns: repeat(2, minmax(160px, 1fr)) !important;
+    grid-auto-rows: 104px !important;
+  }
+
+  html body.editorial-home .hero-panel-photo {
+    min-width: 160px !important;
+  }
+}
