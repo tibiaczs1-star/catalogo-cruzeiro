@@ -2190,11 +2190,14 @@ const setupSplashExperience = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
 
   clearSplashFailsafe();
+  document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
+  document.body.classList.add("site-loaded", "mobile-intro-ready");
+  if (splashRoot?.classList.contains("catalogo-cinematic-safe")) {
+    return;
+  }
   if (splashRoot) {
     splashRoot.setAttribute("aria-hidden", "true");
   }
-  document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
-  document.body.classList.add("site-loaded", "mobile-intro-ready");
   return;
 
   if (performanceLiteMode) {

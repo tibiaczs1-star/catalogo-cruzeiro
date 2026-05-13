@@ -25778,6 +25778,107 @@ body.editorial-home:not(.catalogo-site-booting) .page-shell {
   transform: none !important;
 }
 
+/* 2026-05-13: intro cinematografica segura. A home ja abre por baixo; a intro nunca bloqueia. */
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(38, 142, 255, 0.52), transparent 31%),
+    radial-gradient(circle at 26% 18%, rgba(246, 168, 37, 0.18), transparent 24%),
+    linear-gradient(128deg, rgba(0, 6, 24, 0.98), rgba(0, 42, 92, 0.96) 48%, rgba(1, 7, 19, 0.98)) !important;
+  animation: catalogoSafeIntroExit 5.8s ease forwards !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 10% 8% !important;
+  border: 1px solid rgba(233, 252, 252, 0.16) !important;
+  background:
+    linear-gradient(90deg, transparent 0 48%, rgba(233, 252, 252, 0.16) 49% 51%, transparent 52% 100%),
+    linear-gradient(0deg, transparent 0 48%, rgba(77, 179, 214, 0.14) 49% 51%, transparent 52% 100%) !important;
+  opacity: 0.76 !important;
+  transform: skewX(-10deg) !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 43% !important;
+  z-index: 8 !important;
+  width: clamp(92px, 10vw, 148px) !important;
+  height: clamp(92px, 10vw, 148px) !important;
+  border-radius: 50% !important;
+  background: url("./assets/logo-czs.svg") center / contain no-repeat !important;
+  filter: drop-shadow(0 0 34px rgba(246, 168, 37, 0.5)) drop-shadow(0 18px 50px rgba(0, 0, 0, 0.42)) !important;
+  transform: translate(-50%, -50%) !important;
+  animation: safeLogoBreath 1.18s ease-in-out infinite !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe > * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-card {
+  z-index: 9 !important;
+  margin: clamp(8.5rem, 18vh, 12rem) 0 0 !important;
+  width: min(760px, calc(100vw - 36px)) !important;
+  display: grid !important;
+  justify-items: center !important;
+  gap: 0.45rem !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  text-align: center !important;
+  animation: safeTitleReveal 5.2s ease both !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-compass {
+  display: none !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-brand,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy {
+  display: grid !important;
+  justify-items: center !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy strong {
+  color: #ffffff !important;
+  font-family: "Fraunces", Georgia, serif !important;
+  font-size: clamp(2.45rem, 7vw, 6rem) !important;
+  line-height: 0.9 !important;
+  text-shadow: 0 0 42px rgba(77, 179, 214, 0.42), 0 18px 70px rgba(0, 0, 0, 0.62) !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-kicker,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-label,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-copy,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-meta,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-progress {
+  display: none !important;
+}
+
+@keyframes catalogoSafeIntroExit {
+  0%, 76% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
 /* 2026-05-13 hotfix: abertura nunca pode ficar em tela azul vazia. */
 body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-card,
 body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-compass,

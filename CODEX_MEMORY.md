@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Intro segura sem travar a home
+
+- Usuario reportou que, apos hotfixes anteriores, o site continuava preso na tela azul e a intro cinematografica tinha sido removida.
+- Diagnostico: o modelo antigo escondia `.page-shell` enquanto a splash segurava a pagina; se cache/CSS/JS falhasse, a home ficava atras da camada azul. A correcao definitiva foi tornar a intro decorativa e nao bloqueante.
+- `index.html` agora nasce com `body.site-loaded mobile-intro-ready`, mantem `.logo-splash catalogo-cinematic-safe` como camada visual e usa cache-bust `20260513-safe-cinematic1`.
+- `styles.css` adicionou a intro cinematografica segura: fundo azul, grade televisiva, logo central, titulo grande e fade automatico em CSS, com `pointer-events:none`; a home fica visivel por baixo e nao pode ser bloqueada.
+- `script.js` detecta `catalogo-cinematic-safe`, limpa failsafes, garante `site-loaded` e retorna sem tentar controlar/liberar a splash.
+- Validacoes locais: `node --check script.js`; CSS braces `3862/3862`; HTTP local `200`, HTML com `safe-cinematic1` e body `site-loaded`.
+
 ## Atualizacao rapida 2026-05-13 - Hotfix splash presa sem logo
 
 - Usuario reportou que a home online ficou presa em uma tela azul escura vazia, sem abrir o site e sem mostrar a logo na abertura.
