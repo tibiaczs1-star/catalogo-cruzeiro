@@ -24647,6 +24647,7 @@ body.editorial-home .logo-splash.is-broadcast-started {
     radial-gradient(circle at 50% 42%, rgba(24, 110, 184, 0.48), transparent 36%),
     radial-gradient(circle at 24% 18%, rgba(246, 168, 37, 0.18), transparent 28%),
     linear-gradient(132deg, #010917 0%, #052c58 46%, #010713 100%) !important;
+  animation: broadcastOverlayAutoRelease 5.05s ease both !important;
 }
 
 body.editorial-home .logo-splash.is-broadcast-started .logo-splash-broadcast {
@@ -24849,6 +24850,11 @@ body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
   0% { transform: translate3d(0, 34px, 0) scale(0.96); opacity: 0.16; }
   18%, 76% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
   100% { transform: translate3d(0, -10px, 0) scale(1.02); opacity: 1; }
+}
+
+@keyframes broadcastOverlayAutoRelease {
+  0%, 88% { opacity: 1; visibility: visible; pointer-events: auto; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
 }
 
 @media (max-width: 760px) {
