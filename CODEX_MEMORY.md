@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - TV embutida, comunidade mobile e servicos direto
+
+- Ajuste final pedido pelo usuario: TV do Catalogo agora toca dentro do site com iframe YouTube, mostrando 4 videos no desktop e 2 no mobile.
+- `4 materias da semana` foi travado para manter 4 cards quando a base dinamica ainda nao preenche tudo.
+- Bottom nav mobile de Comunidade aponta para `#community-agent-form`; Servicos foi retirado do loader interceptado para navegar direto e evitar tela presa.
+- `/favicon.ico` agora responde usando `assets/favicon-32x32.png`.
+- Validacoes: `node --check script.js server.js navigation-loader.js`; CSS braces `3844/3844`; Playwright local confirmou desktop `tvTotal=4` e `whatCards=4`, mobile `tvTotal=2` e `whatCards=4`, Servicos com `loaders=0`, favicon `200`; `npm run review:team` `totalIssues=0`; `npm run perf:budget` `ok=true`.
+
 ## Atualizacao rapida 2026-05-13 - Intro, TV e erro prontos para subida
 
 - Usuario perguntou se a intro/video ja podiam subir e apontou que a sessao parecia travada; retomada feita lendo memoria local obrigatoria.

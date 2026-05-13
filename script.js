@@ -472,16 +472,16 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260513-preload-gate2";
+const portalWarmCacheName = "catalogo-portal-shell-v20260513-tv-communityfix1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260513-preload-gate2",
-  "./premium-home-redesign.css?v=20260513-preload-gate2",
-  "./startup-experience.css?v=20260513-preload-gate2",
-  "./early-home-surfaces.js?v=20260513-preload-gate2",
-  "./script.js?v=20260513-preload-gate2",
-  "./startup-experience.js?v=20260513-preload-gate2",
+  "./styles.css?v=20260513-tv-communityfix1",
+  "./premium-home-redesign.css?v=20260513-tv-communityfix1",
+  "./startup-experience.css?v=20260513-tv-communityfix1",
+  "./early-home-surfaces.js?v=20260513-tv-communityfix1",
+  "./script.js?v=20260513-tv-communityfix1",
+  "./startup-experience.js?v=20260513-tv-communityfix1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html",
@@ -11385,15 +11385,17 @@ const renderWhatMattersNow = (items = []) => {
   const selected = [];
   const usedTopics = new Set();
   const usedKeys = buildReservedArticleKeys(["whatMatters"]);
+  const selectedKeys = new Set();
 
-  const pushWhatMattersArticle = (article, topic) => {
+  const pushWhatMattersArticle = (article, topic, options = {}) => {
     const key = getArticleUsageKey(article);
-    if (!topic || !key || usedKeys.has(key)) {
+    if (!topic || !key || selectedKeys.has(key) || (!options.allowReserved && usedKeys.has(key))) {
       return false;
     }
 
     usedTopics.add(topic.key);
     usedKeys.add(key);
+    selectedKeys.add(key);
     selected.push({ article, topic });
     return true;
   };
@@ -11418,6 +11420,14 @@ const renderWhatMattersNow = (items = []) => {
   }
 
   if (!selected.length) {
+    if (whatMattersGrid.querySelectorAll(".what-matters-card").length >= whatMattersTopics.length) {
+      if (whatMattersTitle) {
+        whatMattersTitle.textContent = "4 matérias da semana";
+      }
+      registerArticleCardLinks(whatMattersGrid);
+      return;
+    }
+
     whatMattersGrid.innerHTML = `
       <article class="what-matters-card reveal active">
         <span class="source-status-badge is-editorial-radar">arquivo</span>
@@ -11445,6 +11455,35 @@ const renderWhatMattersNow = (items = []) => {
       const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
       pushWhatMattersArticle(article, firstOpenTopic);
     });
+  }
+
+  if (selected.length < whatMattersTopics.length) {
+    realItems
+      .filter((article) => article?.title && (article.sourceUrl || article.slug))
+      .slice(0, 24)
+      .some((article) => {
+        if (selected.length >= whatMattersTopics.length) {
+          return true;
+        }
+
+        const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
+        return pushWhatMattersArticle(article, firstOpenTopic, { allowReserved: true }) && false;
+      });
+  }
+
+  if (selected.length < whatMattersTopics.length) {
+    dedupeNewsItems([...(items || []), ...initialStaticNews])
+      .map((item) => normalizeRuntimeArticle(item))
+      .filter((article) => article?.title && (article.sourceUrl || article.slug))
+      .slice(0, 48)
+      .some((article) => {
+        if (selected.length >= whatMattersTopics.length) {
+          return true;
+        }
+
+        const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
+        return pushWhatMattersArticle(article, firstOpenTopic, { allowReserved: true }) && false;
+      });
   }
 
   selected.forEach((item) => {
@@ -14195,7 +14234,10 @@ const isCatalogTvArticle = (article = {}) => {
     normalized.category,
     normalized.sourceName,
     normalized.sourceLabel,
-    normalized.sourceUrl
+    normalized.sourceUrl,
+    normalized.imageUrl,
+    normalized.sourceImageUrl,
+    normalized.feedImageUrl
   ].join(" ");
 
   return catalogTvVideoPattern.test(text) && Boolean(normalized.sourceUrl || normalized.url || normalized.link || normalized.slug);
@@ -14217,13 +14259,91 @@ const getCatalogTvSourceHref = (article = {}) => {
   return normalized.sourceUrl || normalized.url || normalized.link || buildArticleHref(normalized);
 };
 
+const getCatalogTvEmbedUrl = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const candidates = [
+    normalized.videoUrl,
+    normalized.embedUrl,
+    normalized.sourceUrl,
+    normalized.url,
+    normalized.link,
+    normalized.id,
+    normalized.imageUrl,
+    normalized.sourceImageUrl,
+    normalized.feedImageUrl
+  ].filter(Boolean);
+
+  for (const candidate of candidates) {
+    const value = String(candidate);
+    const youtubeMatch = value.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/|img\.youtube\.com\/vi\/)([A-Za-z0-9_-]{6,})/i
+    );
+    if (youtubeMatch?.[1]) {
+      return `https://www.youtube.com/embed/${youtubeMatch[1]}?rel=0&modestbranding=1`;
+    }
+
+    if (/facebook\.com\/.+\/videos/i.test(value)) {
+      return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(value)}&show_text=false&width=734`;
+    }
+  }
+
+  return "";
+};
+
+const catalogTvFallbackVideos = [
+  {
+    id: "catalog-tv-youtube-5vNzcdsHHcs",
+    slug: "tv-catalogo-eu-te-amo-mae-justica",
+    title: "“Eu te amo, mãe. Justiça”, diz filho de mulher morta após casamento em SP",
+    category: "Vídeo",
+    sourceName: "CNN Brasil",
+    sourceUrl: "https://www.cnnbrasil.com.br/nacional/sudeste/sp/eu-te-amo-mae-justica-diz-filho-de-mulher-morta-apos-casamento-em-sp/",
+    imageUrl: "https://img.youtube.com/vi/5vNzcdsHHcs/sddefault.jpg",
+    catalogTvEmbedUrl: "https://www.youtube.com/embed/5vNzcdsHHcs?rel=0&modestbranding=1"
+  },
+  {
+    id: "catalog-tv-youtube-Hghced2NqXg",
+    slug: "tv-catalogo-guarda-municipal-mata-esposa",
+    title: "Guarda municipal mata esposa após casamento em SP: veja como briga começou",
+    category: "Vídeo",
+    sourceName: "CNN Brasil",
+    sourceUrl: "https://www.cnnbrasil.com.br/nacional/sudeste/sp/guarda-municipal-mata-esposa-apos-casamento-em-sp-veja-como-briga-comecou/",
+    imageUrl: "https://img.youtube.com/vi/Hghced2NqXg/sddefault.jpg",
+    catalogTvEmbedUrl: "https://www.youtube.com/embed/Hghced2NqXg?rel=0&modestbranding=1"
+  },
+  {
+    id: "catalog-tv-youtube-U2A72RPYkoU",
+    slug: "tv-catalogo-disputa-senado-estrategias-partidarias",
+    title: "Disputa no Senado é centro das estratégias partidárias nas eleições",
+    category: "Vídeo",
+    sourceName: "CNN Brasil",
+    sourceUrl: "https://www.cnnbrasil.com.br/politica/disputa-no-senado-e-centro-das-estrategias-partidarias-nas-eleicoes/",
+    imageUrl: "https://img.youtube.com/vi/U2A72RPYkoU/sddefault.jpg",
+    catalogTvEmbedUrl: "https://www.youtube.com/embed/U2A72RPYkoU?rel=0&modestbranding=1"
+  },
+  {
+    id: "catalog-tv-youtube-6Ol2K85mABI",
+    slug: "tv-catalogo-prints-obsessao-tenente-coronel",
+    title: "Prints revelam “obsessão” de tenente-coronel por subordinada mesmo casado",
+    category: "Vídeo",
+    sourceName: "CNN Brasil",
+    sourceUrl: "https://www.cnnbrasil.com.br/nacional/sudeste/sp/prints-revelam-obsessao-de-tenente-coronel-por-subordinada-mesmo-casado/",
+    imageUrl: "https://img.youtube.com/vi/6Ol2K85mABI/sddefault.jpg",
+    catalogTvEmbedUrl: "https://www.youtube.com/embed/6Ol2K85mABI?rel=0&modestbranding=1"
+  }
+];
+
 const pickCatalogTvItems = (items = []) => {
-  const strictItems = dedupeNewsItems([...(items || []), ...initialStaticNews])
-    .map((item) => normalizeRuntimeArticle(item))
-    .filter(isCatalogTvArticle)
+  const strictItems = dedupeNewsItems([...(items || []), ...initialStaticNews, ...catalogTvFallbackVideos])
+    .map((item) => {
+      const article = normalizeRuntimeArticle(item);
+      return { ...article, catalogTvEmbedUrl: item.catalogTvEmbedUrl || getCatalogTvEmbedUrl(article) };
+    })
+    .filter((article) => isCatalogTvArticle(article))
+    .filter((article) => article.catalogTvEmbedUrl)
     .sort((left, right) => getCatalogTvScore(right) - getCatalogTvScore(left));
 
-  return strictItems.slice(0, 5);
+  return strictItems.slice(0, 4);
 };
 
 const renderCatalogTvFeature = (feature, article = {}) => {
@@ -14234,8 +14354,9 @@ const renderCatalogTvFeature = (feature, article = {}) => {
   const normalized = normalizeRuntimeArticle(article);
   const sourceHref = getCatalogTvSourceHref(normalized);
   const articleHref = buildArticleHref(normalized);
-  const screen = document.createElement("a");
-  const play = document.createElement("span");
+  const embedUrl = article.catalogTvEmbedUrl || getCatalogTvEmbedUrl(normalized);
+  const screen = document.createElement("div");
+  const frame = document.createElement("iframe");
   const sourceBadge = document.createElement("em");
   const copy = document.createElement("div");
   const kicker = document.createElement("small");
@@ -14248,21 +14369,22 @@ const renderCatalogTvFeature = (feature, article = {}) => {
 
   feature.className = "catalog-tv-feature";
   screen.className = "catalog-tv-screen";
-  screen.href = sourceHref;
-  screen.setAttribute("aria-label", `Ver vídeo na fonte: ${normalized.title}`);
-  applyArticleLinkAttrs(screen, sourceHref);
+  frame.className = "catalog-tv-frame";
+  frame.src = embedUrl;
+  frame.title = normalized.title || "Vídeo da TV do Catálogo";
+  frame.loading = "lazy";
+  frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  frame.allowFullscreen = true;
   setPremiumImageFromArticle(screen, normalized);
-  play.className = "catalog-tv-play";
-  play.setAttribute("aria-hidden", "true");
   sourceBadge.textContent = normalized.sourceName || "Fonte pública";
-  screen.append(play, sourceBadge);
+  screen.append(frame, sourceBadge);
 
-  kicker.textContent = "na fonte original";
+  kicker.textContent = "player no site";
   title.textContent = truncateCopy(normalized.title || "Vídeo da fonte", 120);
   summary.textContent = truncateCopy(
     cleanArticleExcerpt(
       normalized.displaySummary || normalized.summary || normalized.lede,
-      "Vídeo publicado pela fonte original, organizado aqui para consulta rápida."
+      "Vídeo publicado pela fonte original, organizado aqui para assistir sem sair do portal."
     ),
     185
   );
@@ -14278,17 +14400,17 @@ const renderCatalogTvFeature = (feature, article = {}) => {
   feature.replaceChildren(screen, copy);
 };
 
-const buildCatalogTvMiniCard = (article = {}) => {
+const buildCatalogTvMiniCard = (article = {}, index = 0) => {
   const normalized = normalizeRuntimeArticle(article);
-  const sourceHref = getCatalogTvSourceHref(normalized);
-  const card = document.createElement("a");
+  const card = document.createElement("button");
   const media = document.createElement("span");
   const source = document.createElement("small");
   const title = document.createElement("strong");
 
   card.className = "catalog-tv-mini";
-  card.href = sourceHref;
-  applyArticleLinkAttrs(card, sourceHref);
+  card.type = "button";
+  card.dataset.catalogTvIndex = String(index);
+  card.setAttribute("aria-label", `Tocar vídeo: ${normalized.title || "vídeo da fonte"}`);
   setPremiumImageFromArticle(media, normalized);
   source.textContent = truncateCopy(normalized.sourceName || "Fonte pública", 32);
   title.textContent = truncateCopy(normalized.title || "Vídeo publicado na fonte", 82);
@@ -14309,13 +14431,28 @@ const renderCatalogTvSurface = (items = []) => {
     return;
   }
 
-  renderCatalogTvFeature(feature, selected[0]);
+  const maxVisible =
+    typeof window.matchMedia === "function" && window.matchMedia("(max-width: 760px)").matches ? 2 : 4;
+  const visibleItems = selected.slice(0, maxVisible);
+
+  renderCatalogTvFeature(feature, visibleItems[0]);
   const fragment = document.createDocumentFragment();
-  selected.slice(1, 5).forEach((article) => {
-    fragment.appendChild(buildCatalogTvMiniCard(article));
+  visibleItems.slice(1).forEach((article, index) => {
+    fragment.appendChild(buildCatalogTvMiniCard(article, index + 1));
   });
   grid.replaceChildren(fragment);
-  reserveSurfaceArticles("catalogTv", selected);
+  grid.onclick = (event) => {
+    const trigger = event.target instanceof Element ? event.target.closest("[data-catalog-tv-index]") : null;
+    if (!trigger) {
+      return;
+    }
+
+    const nextArticle = visibleItems[Number(trigger.dataset.catalogTvIndex || 0)];
+    if (nextArticle) {
+      renderCatalogTvFeature(feature, nextArticle);
+    }
+  };
+  reserveSurfaceArticles("catalogTv", visibleItems);
 };
 
 const buildSocialAgendaCard = (article = {}, index = 0) => {
@@ -15151,7 +15288,7 @@ const isInternalPageLink = (link) => {
       return false;
     }
 
-    return /\/(?:index|noticia|arquivo|galeria|catalogo-servicos|cheffe-call)\.html$/i.test(targetUrl.pathname);
+    return /\/(?:index|noticia|arquivo|galeria|cheffe-call)\.html$/i.test(targetUrl.pathname);
   } catch (_error) {
     return false;
   }
@@ -15260,10 +15397,14 @@ const scrollSectionIntoView = (target, { updateHash = true } = {}) => {
   const centerOffset = offsetTop + freeSpace / 2;
   const nextTop = Math.max(0, absoluteTop - centerOffset);
 
-  window.scrollTo({
-    top: nextTop,
-    behavior: splashMotionQuery.matches ? "auto" : "smooth"
-  });
+  if (target.id === "community-agent-form") {
+    target.scrollIntoView({ behavior: "auto", block: "center" });
+  } else {
+    window.scrollTo({
+      top: nextTop,
+      behavior: splashMotionQuery.matches ? "auto" : "smooth"
+    });
+  }
 
   if (updateHash && target.id) {
     try {

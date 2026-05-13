@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T04:42:49.944Z
+Updated: 2026-05-13T05:00:39.036Z
 
-QA local passou: node --check nos JS principais, CSS braces ok, Playwright mobile/desktop confirmou intro liberando, TV presente, loader de navegacao e botao Informar erro nos cards; review:team zerado e perf:budget ok.
+Validado local: JS ok, CSS braces ok, review:team zerado, perf ok, Playwright confirmou videos/cards/servicos/favicon.
 
 ## Next
 
-- Fazer commit/push seletivo se o usuario confirmar subida ou seguir com deploy imediato mantendo fora os arquivos de dados/caches sujos.
+- Push para main e checar Render 200 com cache-bust 20260513-tv-communityfix1.

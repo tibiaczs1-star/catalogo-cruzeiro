@@ -8,7 +8,7 @@
   const loaderStyleId = "catalogo-shared-navigation-loader-style";
   const skipHomeIntroKey = "catalogo_skip_home_intro_once";
   const pendingLoaderKey = "catalogo_page_action_loader_pending_v1";
-  const handledPages = /\/(?:index|noticia|arquivo|galeria|catalogo-servicos|cheffe-call)\.html$/i;
+  const handledPages = /\/(?:index|noticia|arquivo|galeria|cheffe-call)\.html$/i;
   const minimumMs = 520;
   const maximumMs = 980;
   let activeLoader = null;

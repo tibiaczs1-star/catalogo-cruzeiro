@@ -106,6 +106,7 @@ const ADMIN_MASTER_FILE = path.join(ROOT_DIR, "backend", "public", "admin-master
 const ADMIN_DASHBOARD_FILE = path.join(ROOT_DIR, "backend", "public", "admin-dashboard.html");
 const PUBPAID_ADMIN_FILE = path.join(ROOT_DIR, "pubpaid-admin.html");
 const STATIC_NEWS_FILE = path.join(ROOT_DIR, "news-data.js");
+const FAVICON_ICO_FILE = path.join(ROOT_DIR, "assets", "favicon-32x32.png");
 const RE_RODADA_DIA_GERAL_REPORT_FILE = path.join(DATA_DIR, "re-rodada-dia-geral-report.json");
 const NEWS_IMAGE_FOCUS_AUDIT_FILE = path.join(DATA_DIR, "news-image-focus-audit.json");
 const NEWS_IMAGE_FOCUS_DECISIONS_FILE = path.join(DATA_DIR, "news-image-focus-decisions.json");
@@ -17278,6 +17279,12 @@ function handleStatic(req, res, pathname, requestUrl) {
 
   if (pathname === "/robots.txt") {
     return sendText(res, 200, buildRobotsTxt(req), "public, max-age=3600");
+  }
+
+  if (pathname === "/favicon.ico") {
+    return sendFile(req, res, FAVICON_ICO_FILE, {
+      cacheControl: VERSIONED_STATIC_CACHE_CONTROL
+    });
   }
 
   if (pathname === "/sitemap.xml") {
