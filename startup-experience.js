@@ -20,8 +20,8 @@
   const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
   const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
   const INITIAL_HOME_LOADER_MIN_MS = 900;
-  const ACTION_LOADER_MIN_MS = 700;
-  const ACTION_LOADER_MAX_MS = 1200;
+  const ACTION_LOADER_MIN_MS = 360;
+  const ACTION_LOADER_MAX_MS = 760;
   const THANKS_SCREEN_MS = 2600;
   const THANKS_SCREEN_MS_COMPACT = 2200;
   const THANKS_SCREEN_MS_PHONE = 1800;
@@ -1161,51 +1161,18 @@
     const detail = options.detail || "Carregando o conteúdo";
     const percent = options.percent || "0%";
     const loader = document.createElement("div");
-    loader.className = "logo-splash is-navigation-loader is-repeat-visit";
+    loader.className = "catalogo-top-return-loader is-navigation-action-loader";
     loader.setAttribute("role", "status");
     loader.setAttribute("aria-live", "polite");
     loader.setAttribute("aria-label", label);
     loader.innerHTML = `
-      <div class="logo-splash-noise"></div>
-      <div class="logo-splash-fragments" aria-hidden="true">
-        <span class="fragment fragment-a"></span>
-        <span class="fragment fragment-b"></span>
-        <span class="fragment fragment-c"></span>
-        <span class="fragment fragment-d"></span>
-        <span class="fragment fragment-e"></span>
-        <span class="fragment fragment-f"></span>
-        <span class="fragment fragment-g"></span>
-        <span class="fragment fragment-h"></span>
-      </div>
-      <div class="logo-splash-river" aria-hidden="true">
-        <span class="river-panel panel-a"></span>
-        <span class="river-panel panel-b"></span>
-        <span class="river-panel panel-c"></span>
-      </div>
-      <article class="logo-splash-card">
-        <div class="logo-splash-compass" aria-hidden="true">
-          <img src="./assets/logo-czs.svg" alt="" decoding="async" />
-        </div>
-        <p class="logo-splash-kicker">Portal</p>
-        <div class="logo-splash-brand">
-          <div class="logo-splash-brand-copy">
-            <span class="logo-splash-label">Cruzeiro do Sul</span>
-            <strong>Catálogo Cruzeiro do Sul</strong>
-            <small>Vale do Juruá</small>
-          </div>
-        </div>
-        <p class="logo-splash-copy">${label}</p>
-        <div class="logo-splash-meta">
-          <span data-navigation-loader-status>${detail}</span>
-          <span class="logo-splash-readiness">
-            <span>Leitura regional</span>
-            <strong data-navigation-loader-percent>${percent}</strong>
-          </span>
-        </div>
-        <div class="logo-splash-progress" aria-hidden="true">
-          <span data-navigation-loader-bar style="width: ${percent}"></span>
-        </div>
-      </article>
+      <span class="catalogo-top-return-loader-track" aria-hidden="true">
+        <i data-navigation-loader-bar style="width: ${percent}"></i>
+      </span>
+      <span class="catalogo-top-return-loader-row">
+        <span class="catalogo-top-return-loader-text" data-navigation-loader-status>${detail || label}</span>
+        <strong data-navigation-loader-percent>${percent}</strong>
+      </span>
     `;
     return loader;
   }
@@ -1356,6 +1323,8 @@
     if (percentNode) percentNode.textContent = `${safeProgress}%`;
     if (statusNode && label) statusNode.textContent = label;
     if (barNode) barNode.style.width = `${safeProgress}%`;
+    const trackNode = loader.querySelector(".catalogo-top-return-loader-track i");
+    if (trackNode) trackNode.style.width = `${Math.max(14, safeProgress)}%`;
     if (safeProgress >= 92) loader.classList.add("is-completing");
   }
 
@@ -1583,6 +1552,7 @@
 
     document.body.appendChild(loader);
     window.requestAnimationFrame(() => {
+      loader.classList.add("is-visible");
       updateNavigationSplashProgress(loader, 6, label);
     });
 

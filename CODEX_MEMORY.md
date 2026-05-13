@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-12 - Abertura cinematografica e navegacao real
+
+- Usuario corrigiu a direcao: a dobra/area `Rede Social` nao deveria existir na home e a abertura nao deveria ser uma intro tipo app. O fluxo correto e primeiro acesso do navegador com abertura cinematografica, depois website, e entre home/materias/recursos apenas carregamento real curto.
+- `index.html` removeu todos os links, card, rodape, bottom nav e a secao `#rede-social`; `premium-home-redesign.css` removeu os estilos mortos dessa dobra.
+- `script.js` mudou a abertura para sessao do navegador (`catalogo_cinematic_intro_seen_session_v3`), com copy `Abertura cinematográfica`, sem `Abrindo app`, sem primer de app no mobile e com fallback de navegacao curto.
+- `startup-experience.js`/`.css` e `noticia.js` deixam de usar `logo-splash` cinematografico entre paginas; o carregamento de navegacao virou barra superior curta, sem full-screen preso.
+- Validacoes: `node --check script.js`, `node --check startup-experience.js`, `node --check noticia.js`, `node --check early-home-surfaces.js`, `npm run review:team` `totalIssues=0`, `npm run perf:budget` `ok=true`. Smoke mobile local em `127.0.0.1:3219` confirmou primeira abertura cinematografica, liberacao para `site-loaded`, segunda visita da sessao sem intro, sem `#rede-social`, sem `Rede Social` e sem `Abrindo app`.
+
 ## Atualizacao rapida 2026-05-12 - Intro mobile tipo app e subida
 
 - Usuario pediu para subir, validar online e corrigir a demora do mobile com uma intro tipo app.

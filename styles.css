@@ -24616,18 +24616,19 @@ body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
 
 @media (max-width: 760px) {
   body.editorial-home .logo-splash {
-    padding: 22px !important;
+    padding: clamp(18px, 5vw, 32px) !important;
     background:
-      radial-gradient(circle at 50% 18%, rgba(246, 168, 37, 0.2), transparent 28%),
-      linear-gradient(180deg, #06111e 0%, #071827 54%, #10253a 100%) !important;
+      radial-gradient(circle at 24% 18%, rgba(246, 168, 37, 0.2), transparent 28%),
+      radial-gradient(circle at 76% 62%, rgba(59, 136, 200, 0.18), transparent 34%),
+      linear-gradient(140deg, #020b14 0%, #061827 54%, #010713 100%) !important;
   }
 
   body.editorial-home .logo-splash-river .river-panel {
-    width: 92vw !important;
-    height: 42svh !important;
-    right: -48vw !important;
-    top: 10svh !important;
-    opacity: 0.18 !important;
+    width: 126vw !important;
+    height: 54svh !important;
+    right: -58vw !important;
+    top: 8svh !important;
+    opacity: 0.32 !important;
   }
 
   body.editorial-home .logo-splash-river .panel-b,
@@ -24637,38 +24638,31 @@ body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
 
   body.editorial-home .logo-splash-card {
     margin: 0 !important;
-    width: min(360px, calc(100vw - 34px)) !important;
-    min-height: min(520px, calc(100svh - 48px)) !important;
+    width: min(620px, calc(100vw - 34px)) !important;
+    min-height: 0 !important;
     align-content: center !important;
-    gap: 0.78rem !important;
-    padding: 1.25rem 1.15rem !important;
-    border: 1px solid rgba(246, 168, 37, 0.2) !important;
-    border-radius: 30px !important;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.035)),
-      rgba(4, 18, 31, 0.72) !important;
-    box-shadow:
-      0 28px 90px rgba(0, 0, 0, 0.44),
-      inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
-    backdrop-filter: blur(18px) !important;
+    gap: 0.62rem !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
   }
 
   body.editorial-home .logo-splash-compass {
-    width: 86px !important;
-    height: 86px !important;
-    padding: 15px !important;
-    border-radius: 24px !important;
-    background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(232, 239, 246, 0.88)) !important;
-    box-shadow:
-      0 18px 48px rgba(0, 0, 0, 0.34),
-      0 0 0 1px rgba(246, 168, 37, 0.22) !important;
+    width: 72px !important;
+    height: 72px !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   body.editorial-home .logo-splash-brand-copy strong {
-    max-width: 10ch !important;
-    font-size: clamp(2.05rem, 11vw, 3.15rem) !important;
-    line-height: 0.88 !important;
+    max-width: 11ch !important;
+    font-size: clamp(2rem, 10vw, 3.2rem) !important;
+    line-height: 0.9 !important;
   }
 
   body.editorial-home .logo-splash-kicker,
@@ -24678,19 +24672,19 @@ body.editorial-home .logo-splash.is-logo-primer .logo-splash-copy {
   }
 
   body.editorial-home .logo-splash-copy {
-    max-width: 24ch !important;
+    max-width: 28ch !important;
     font-size: 0.9rem !important;
-    line-height: 1.35 !important;
+    line-height: 1.45 !important;
   }
 
   body.editorial-home .logo-splash-meta {
-    width: min(290px, 82vw) !important;
-    padding: 0.72rem 0 !important;
-    border-top: 1px solid rgba(139, 180, 214, 0.16) !important;
+    width: min(330px, 82vw) !important;
+    padding: 0.2rem 0 0 !important;
+    border-top: 0 !important;
   }
 
   body.editorial-home .logo-splash-progress {
-    width: min(290px, 82vw) !important;
+    width: min(330px, 82vw) !important;
     height: 5px !important;
   }
 

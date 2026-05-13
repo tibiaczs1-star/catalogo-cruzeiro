@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T00:55:36.316Z
+Updated: 2026-05-13T01:22:16.933Z
 
 ## Active Goal
 
-- Home/noticia publicados e validados online
+- Corrigir home mobile/desktop: sem area Rede Social indevida, abertura cinematografica no primeiro acesso e carregamento real curto entre paginas.
 
 ## Summary
 
-Commit a6d19e1a foi enviado para origin/main. Render atualizou e a home online ja entrega mobile-app-intro1 com intro tipo app. Validacao online mobile confirmou body site-loaded, sem catalogo-site-booting preso, sem erros de console, FCP remoto ~1440ms, APIs adiadas fora da primeira janela e navegacao para materia com logo-splash em vez do loader de relogio.
+Mudancas locais validadas: home nao contem mais #rede-social nem texto Rede Social nos arquivos publicos, abertura saiu do modelo app para Abertura cinematografica por sessao do navegador, e navegacao home/materia/recursos usa barra superior curta em vez de full-screen cinematico. Checks: node --check script/startup/noticia/early-home-surfaces, review:team totalIssues=0, perf:budget ok=true. Smoke mobile local em 127.0.0.1:3219 confirmou primeira abertura e segunda visita sem intro.
 
 ## Next
 
-- Se o usuario ainda sentir demora em rede real, proximo corte e quebrar o HTML/CSS principal ou criar uma pagina shell mobile menor antes do acervo completo.
+- Commitar, enviar para origin/main e validar online no Render com viewport mobile.

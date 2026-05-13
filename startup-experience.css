@@ -12593,6 +12593,46 @@ body.site-loaded .catalogo-welcome.is-splash-loader .logo-splash-card {
   transition: width 160ms ease;
 }
 
+.catalogo-top-return-loader.is-navigation-action-loader {
+  inset: 0 0 auto 0 !important;
+  display: block !important;
+  padding: max(10px, env(safe-area-inset-top, 0px)) 14px 0 !important;
+  overflow: visible !important;
+  background: linear-gradient(180deg, rgba(2, 13, 24, 0.72), transparent) !important;
+  pointer-events: none !important;
+  backdrop-filter: none !important;
+}
+
+.catalogo-top-return-loader.is-navigation-action-loader::before,
+.catalogo-top-return-loader.is-navigation-action-loader::after {
+  display: none !important;
+}
+
+.catalogo-top-return-loader.is-navigation-action-loader .catalogo-top-return-loader-track,
+.catalogo-top-return-loader.is-navigation-action-loader .catalogo-top-return-loader-row {
+  width: min(430px, calc(100vw - 28px)) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.catalogo-top-return-loader.is-navigation-action-loader .catalogo-top-return-loader-track {
+  height: 4px !important;
+  margin-bottom: 0.38rem !important;
+}
+
+.catalogo-top-return-loader.is-navigation-action-loader .catalogo-top-return-loader-row {
+  padding: 0.58rem 0.72rem !important;
+  border-radius: 8px !important;
+  background: rgba(4, 22, 38, 0.86) !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22) !important;
+}
+
+.catalogo-top-return-loader.is-navigation-action-loader .catalogo-top-return-loader-text,
+.catalogo-top-return-loader.is-navigation-action-loader .catalogo-top-return-loader-row strong {
+  font-size: 0.68rem !important;
+  letter-spacing: 0.05em !important;
+}
+
 @keyframes catalogoClockSweep {
   from {
     transform: rotate(0deg);

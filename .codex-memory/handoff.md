@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T00:55:36.316Z
+Updated: 2026-05-13T01:22:16.933Z
 
-Publicado em origin/main no commit a6d19e1a. Online em https://catalogo-cruzeiro-web.onrender.com voltou 200 apos 502 momentaneo de deploy e ja contem mobile-app-intro1/Abrindo app. Teste mobile online: sem erros de console, sem loader antigo topReturn, materia abriu normalmente, FCP remoto ~1440ms. Workspace ainda tem alteracoes locais antigas nao relacionadas em PubPaid/data/agents e stashes autostash; nao incluir em commits de home.
+Rodada atual corrigiu a direcao do usuario: remover de vez a area Rede Social da home e separar abertura de carregamento. Arquivos principais alterados: index.html, styles.css, premium-home-redesign.css, script.js, startup-experience.js/css, noticia.html e noticia.js. Validacao local OK com primeira abertura cinematografica por sessao, sem Abrindo app, sem #rede-social e sem loader cinematico full-screen na navegacao. Workspace ainda tem alteracoes antigas nao relacionadas em PubPaid/data/agents; nao incluir no commit.
 
 ## Next
 
-- Validar no celular real do usuario; se ainda parecer lento, reduzir peso inicial de index/styles ou separar shell mobile.
+- Staging seletivo dos arquivos desta rodada, commit, push e smoke online.

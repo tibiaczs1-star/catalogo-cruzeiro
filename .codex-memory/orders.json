@@ -9206,6 +9206,43 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-12-remover-rede-social-e-corrigir-abertura-cinematografica-com-carregamento-real",
+      "createdAt": "2026-05-13T01:22:16.933Z",
+      "updatedAt": "2026-05-13T01:22:16.933Z",
+      "status": "validated-local",
+      "source": "chat",
+      "rawRequest": "Remover a area Rede Social que voltou, corrigir intro travando e aplicar fluxo correto: primeiro acesso do navegador com abertura cinematografica; depois website; entre home, materias e recursos somente carregamento real para nao estancar o site.",
+      "summary": "Remover Rede Social da home e corrigir abertura cinematografica com carregamento real curto entre paginas.",
+      "normalizedTasks": [
+        "Remover secao e links Rede Social da home",
+        "Trocar intro tipo app por abertura cinematografica de primeira sessao",
+        "Usar loader superior curto entre home, materias e recursos"
+      ],
+      "filesTouched": [
+        "index.html",
+        "styles.css",
+        "premium-home-redesign.css",
+        "script.js",
+        "startup-experience.js",
+        "startup-experience.css",
+        "noticia.html",
+        "noticia.js"
+      ],
+      "assetRefs": [
+        "output/playwright/first-access-cinematic-20260512.png"
+      ],
+      "tags": [
+        "home",
+        "mobile",
+        "loader",
+        "rede-social"
+      ],
+      "nextSteps": [
+        "Deploy e validacao online apos commit"
+      ],
+      "notes": "Validado localmente em 127.0.0.1:3219: primeira abertura mostra Abertura cinematografica e libera site-loaded; segunda visita na sessao pula intro; home sem #rede-social, sem texto Rede Social e sem Abrindo app; navegacao nao cria logo-splash full-screen."
     }
   ]
 }

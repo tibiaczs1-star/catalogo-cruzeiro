@@ -115,17 +115,17 @@ const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
-  "Preparando o site",
-  "Guardando a capa para abrir mais rápido",
-  "Abrindo a primeira leitura"
+  "Abertura cinematográfica",
+  "Carregando capa",
+  "Portal pronto para abrir"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 360 : 680;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 1050 : 1900;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 520 : 680;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 980 : 1900;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 120 : 300;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 80 : 160;
 const tickerDesktopStaticMedia =
@@ -460,7 +460,7 @@ const getTickerPhrasePool = () => {
   const livePhrases = buildLiveTickerPhrasePool(window.NEWS_DATA || []);
   return ensureTickerPhraseDiversity([...tickerPhrasePool, ...livePhrases]);
 };
-const splashStorageKey = "catalogo_splash_seen_v2";
+const splashStorageKey = "catalogo_cinematic_intro_seen_session_v3";
 const splashDailyStorageKey = "catalogo_splash_seen_day_v2";
 const skipHomeIntroKey = "catalogo_skip_home_intro_once";
 const offlineNewsCacheKey = "catalogo_news_cache_v2";
@@ -471,12 +471,12 @@ const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260511-speed-areas1",
-  "./startup-experience.css?v=20260511-loader-flow1",
-  "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260511-loader-flow1",
-  "./startup-experience.js?v=20260511-loader-flow1",
+  "./styles.css?v=20260512-cinematic-loader1",
+  "./premium-home-redesign.css?v=20260512-cinematic-loader1",
+  "./startup-experience.css?v=20260512-cinematic-loader1",
+  "./early-home-surfaces.js?v=20260512-cinematic-loader1",
+  "./script.js?v=20260512-cinematic-loader1",
+  "./startup-experience.js?v=20260512-cinematic-loader1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -513,34 +513,23 @@ const getSplashDayKey = () => {
   }
 };
 const hasSeenSplashToday = () => {
-  const dayKey = getSplashDayKey();
-
   try {
-    if (localStorage.getItem(splashDailyStorageKey) === dayKey) {
-      return true;
-    }
-  } catch (_error) {
-    // ignore storage failures
-  }
-
-  try {
-    return sessionStorage.getItem(splashStorageKey) === dayKey;
+    return sessionStorage.getItem(splashStorageKey) === "1";
   } catch (_error) {
     return false;
   }
 };
 const rememberSplashToday = () => {
-  const dayKey = getSplashDayKey();
   window.__CATALOGO_DAILY_INTRO_SHOWN__ = true;
 
   try {
-    localStorage.setItem(splashDailyStorageKey, dayKey);
+    localStorage.removeItem(splashDailyStorageKey);
   } catch (_error) {
     // ignore storage failures
   }
 
   try {
-    sessionStorage.setItem(splashStorageKey, dayKey);
+    sessionStorage.setItem(splashStorageKey, "1");
   } catch (_error) {
     // ignore storage failures
   }
@@ -2085,12 +2074,12 @@ const updateSplashProgress = (progress, status = "") => {
 const waitForSplashReadiness = async () => {
   const steps = [
     {
-      label: splashCompactViewportQuery.matches ? "Abrindo app" : "Preparando o site",
+      label: "Abertura cinematográfica",
       progress: 24,
       wait: () => Promise.resolve()
     },
     {
-      label: splashCompactViewportQuery.matches ? "Carregando capa" : "Abrindo a primeira leitura",
+      label: "Carregando capa",
       progress: 72,
       wait: () =>
         splashCompactViewportQuery.matches
@@ -2155,7 +2144,9 @@ const setupSplashExperience = () => {
 
   splashGateActive = true;
   document.body.classList.add("catalogo-site-booting");
-  splashRoot.classList.add("is-logo-primer");
+  if (!splashCompactViewportQuery.matches) {
+    splashRoot.classList.add("is-logo-primer");
+  }
   splashRoot.setAttribute("aria-hidden", "false");
   updateSplashProgress(4, splashMessages[0]);
 
@@ -14664,58 +14655,27 @@ const shouldHandleArticleNavigationClick = (event, link) => {
 const showInlineNavigationFallbackLoader = (options = {}) => {
   const label = options.label || "Abrindo matéria";
   const loader = document.createElement("div");
-  loader.className = "logo-splash is-navigation-loader is-repeat-visit";
+  loader.className = "catalogo-top-return-loader is-navigation-action-loader is-visible";
   loader.setAttribute("role", "status");
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", label);
   loader.innerHTML = `
-    <div class="logo-splash-noise"></div>
-    <div class="logo-splash-fragments" aria-hidden="true">
-      <span class="fragment fragment-a"></span>
-      <span class="fragment fragment-b"></span>
-      <span class="fragment fragment-c"></span>
-      <span class="fragment fragment-d"></span>
-      <span class="fragment fragment-e"></span>
-      <span class="fragment fragment-f"></span>
-      <span class="fragment fragment-g"></span>
-      <span class="fragment fragment-h"></span>
-    </div>
-    <div class="logo-splash-river" aria-hidden="true">
-      <span class="river-panel panel-a"></span>
-      <span class="river-panel panel-b"></span>
-      <span class="river-panel panel-c"></span>
-    </div>
-    <article class="logo-splash-card">
-      <div class="logo-splash-compass" aria-hidden="true">
-        <img src="./assets/logo-czs.svg" alt="" decoding="async" />
-      </div>
-      <p class="logo-splash-kicker">Portal</p>
-      <div class="logo-splash-brand">
-        <div class="logo-splash-brand-copy">
-          <span class="logo-splash-label">Cruzeiro do Sul</span>
-          <strong>Catálogo Cruzeiro do Sul</strong>
-          <small>Vale do Juruá</small>
-        </div>
-      </div>
-      <p class="logo-splash-copy">${label}</p>
-      <div class="logo-splash-meta">
-        <span data-navigation-loader-status>preparando matéria</span>
-        <span class="logo-splash-readiness">
-          <span>Leitura regional</span>
-          <strong data-navigation-loader-percent>100%</strong>
-        </span>
-      </div>
-      <div class="logo-splash-progress" aria-hidden="true">
-        <span data-navigation-loader-bar style="width:100%"></span>
-      </div>
-    </article>
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width: 42%"></i></span>
+    <span class="catalogo-top-return-loader-row">
+      <span class="catalogo-top-return-loader-text" data-navigation-loader-status>${label}</span>
+      <strong data-navigation-loader-percent>42%</strong>
+    </span>
   `;
   document.body.appendChild(loader);
 
-  return waitForSplashDelay(3000).then(() => {
+  return waitForSplashDelay(520).then(() => {
     loader.classList.add("is-completing");
     const textNode = loader.querySelector("[data-navigation-loader-status]");
     if (textNode) textNode.textContent = "abrindo página";
+    const percentNode = loader.querySelector("[data-navigation-loader-percent]");
+    if (percentNode) percentNode.textContent = "100%";
+    const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
+    if (barNode) barNode.style.width = "100%";
   });
 };
 
@@ -14741,10 +14701,12 @@ const navigateWithArticleLoader = (href) => {
 
   Promise.race([
     Promise.resolve(loaderPromise),
-    new Promise((resolve) => window.setTimeout(resolve, 3600))
+    new Promise((resolve) => window.setTimeout(resolve, 700))
   ])
     .catch(() => undefined)
     .then(navigate);
+
+  window.setTimeout(navigate, 1100);
 };
 
 const handleArticleNavigationClick = (event) => {
