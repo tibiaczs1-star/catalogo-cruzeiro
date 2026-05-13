@@ -1,12 +1,40 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T03:03:20.860Z",
+  "lastUpdatedAt": "2026-05-13T04:36:14.028Z",
   "orders": [
+    {
+      "id": "2026-05-13-codex-sem-perguntas-permissao",
+      "createdAt": "2026-05-13T03:33:01.283Z",
+      "updatedAt": "2026-05-13T03:33:01.283Z",
+      "status": "config-updated-restart-needed",
+      "source": "chat",
+      "rawRequest": "https://www.perplexity.ai/page/codex-cli-unattended-mode-bypa-trr1DFl6Ts2RbYcjIdnMtA estude isso e me libere das pergfuntas o tempo todo de permisao",
+      "summary": "Configurar Codex para modo sem prompts recorrentes de permissao, usando approval_policy never e sandbox_mode danger-full-access no config global.",
+      "normalizedTasks": [
+        "estudar configuracao unattended/full access do Codex",
+        "atualizar config.toml global para reduzir prompts de permissao",
+        "ajustar sandbox do Windows para evitar pedido de elevacao recorrente",
+        "avisar que a sessao precisa ser reiniciada para reler a configuracao"
+      ],
+      "tags": [
+        "codex",
+        "config",
+        "permissoes",
+        "unattended",
+        "windows"
+      ],
+      "filesTouched": [
+        "C:\\Users\\junio\\.codex\\config.toml",
+        ".codex-memory/orders.json"
+      ],
+      "assetRefs": [],
+      "notes": "Configuracao persistente alterada para approval_policy = never, sandbox_mode = danger-full-access e [windows] sandbox = unelevated. A sessao atual ainda pode manter o modo antigo ate reiniciar o Codex."
+    },
     {
       "id": "2026-05-13-instagram-profissional-jornal",
       "createdAt": "2026-05-13T02:00:00.000Z",
       "updatedAt": "2026-05-13T02:00:00.000Z",
-      "status": "in-progress",
+      "status": "draft-assets-ready",
       "source": "chat",
       "rawRequest": "eu quero que ageite o perfil puxe tudo do jornal que temos aqui e faça postagens la ja com legenda e link sabe um instgran proficional",
       "summary": "Organizar o Instagram profissional do jornal usando conteudo do projeto local, preparando perfil, legendas, links e postagens para aprovacao antes de publicar.",
@@ -25,10 +53,17 @@
         "perfil"
       ],
       "filesTouched": [
-        ".codex-memory/orders.json"
+        ".codex-memory/orders.json",
+        "output/instagram/instagram-kit-render-2026-05-13.json",
+        "output/instagram/instagram-profissional-render-2026-05-13.md",
+        "output/instagram/legendas-prontas-render-2026-05-13.txt",
+        "output/instagram/plano-crescimento-reels-seguir-2026-05-13.md",
+        "output/instagram/assets-render-2026-05-13/"
       ],
-      "assetRefs": [],
-      "notes": "Usuario quer transformar o Instagram em perfil profissional do jornal, puxando conteudo do projeto. Acoes publicas no Instagram devem ser revisadas e confirmadas pelo usuario antes de publicar."
+      "assetRefs": [
+        "output/instagram/assets-render-2026-05-13/"
+      ],
+      "notes": "Usuario quer transformar o Instagram em perfil profissional do jornal. Fonte correta online informada pelo usuario: https://catalogo-cruzeiro-web.onrender.com. Foi gerado kit a partir de /api/news do Render com 60 itens, 10 rascunhos de postagem, legendas, stories, roteiros de reels e 25 PNGs (feed, story e capas de reels). Acoes publicas no Instagram, inclusive seguir de volta, devem ser revisadas e confirmadas pelo usuario antes de executar."
     },
     {
       "id": "2026-05-12-subir-validar-online-e-intro-mobile-app",
@@ -9315,6 +9350,36 @@
       "source": "chat",
       "rawRequest": "Adicionar botão pequeno Informar erro em cada matéria, explicar no hover que serve para erros em fotos/texto/fonte, enviar para primeira chamada do Cheffe Call priorizando a matéria informada pelo usuário, depois demais edições e só então Cheffe Call.",
       "summary": "Fluxo publico de informar erro em materia priorizando revisao antes da Cheffe Call",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-garantir-que-o-preload-carregue-a-estrutura-real-e-so-revele-o-site-completo-dep",
+      "createdAt": "2026-05-13T03:28:20.060Z",
+      "updatedAt": "2026-05-13T03:28:20.060Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "tambem pedi que o preload ocorra e so abra o site completo",
+      "summary": "Garantir que o preload carregue a estrutura real e so revele o site completo depois da abertura/preparacao.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-validar-estado-da-intro-video-tv-e-botao-de-erro-antes-de-decidir-se-pode-subir",
+      "createdAt": "2026-05-13T04:36:14.028Z",
+      "updatedAt": "2026-05-13T04:36:14.028Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "e ok, ja esta como ai? a questão do video e da intro ja da pra subir? vc travo",
+      "summary": "Validar estado da intro, video/TV e botao de erro antes de decidir se pode subir.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

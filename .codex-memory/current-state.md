@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T03:03:20.937Z
+Updated: 2026-05-13T04:42:49.868Z
 
 ## Active Goal
 
-- Fluxo de correção pública de matéria
+- Intro, TV e erro prontos para subida
 
 ## Summary
 
-Matérias agora têm botão Informar erro; envio registra correção editorial e abre Cheffe Call com prioridade do leitor no topo da fila de revisão antes da sala.
+Intro da home ajustada para preload + constelacao/meteoro com saida mobile validada; bloco TV do Catalogo presente e compacto; botoes Informar erro aparecem nos cards e abrem Cheffe Call com publicCorrection=1.
 
 ## Next
 
-- Commitar e publicar apenas arquivos do fluxo
-- sem incluir dados automáticos antigos.
+- Stage seletivo dos arquivos da intro/TV/loader e subir sem incluir caches/dados automaticos antigos.

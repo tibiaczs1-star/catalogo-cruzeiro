@@ -131,14 +131,14 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260512-broadcast-opening1" />
+    <link rel="stylesheet" href="./styles.css?v=20260513-preload-gate2" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260512-broadcast-opening1" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260513-preload-gate2" />
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
@@ -164,6 +164,18 @@
         <span class="river-panel panel-c"></span>
       </div>
       <div class="logo-splash-broadcast" aria-hidden="true">
+        <div class="broadcast-cruzeiro-constellation">
+          <span class="constellation-meteor"></span>
+          <span class="constellation-orbit orbit-a"></span>
+          <span class="constellation-orbit orbit-b"></span>
+          <span class="constellation-line line-vertical"></span>
+          <span class="constellation-line line-cross"></span>
+          <span class="cruzeiro-star star-alpha"></span>
+          <span class="cruzeiro-star star-beta"></span>
+          <span class="cruzeiro-star star-gamma"></span>
+          <span class="cruzeiro-star star-delta"></span>
+          <span class="cruzeiro-star star-epsilon"></span>
+        </div>
         <div class="broadcast-clock">
           <span class="clock-ring ring-a"></span>
           <span class="clock-ring ring-b"></span>
@@ -362,6 +374,7 @@
                   <a href="#o-que-importa"><span class="premium-icon icon-topics"></span>Assuntos</a>
                   <a href="./catalogo-servicos.html"><span class="premium-icon icon-services"></span>Serviços</a>
                   <a href="#social"><span class="premium-icon icon-calendar"></span>Festas & Social</a>
+                  <a href="#tv-catalogo"><span class="premium-icon icon-video"></span>TV</a>
                   <a href="#arquivo"><span class="premium-icon icon-archive"></span>Arquivo</a>
                   <a href="#participacao-comunitaria"><span class="premium-icon icon-community"></span>Comunidade</a>
                   <a href="#entretenimento"><span class="premium-icon icon-audio"></span>Entretenimento</a>
@@ -1067,6 +1080,42 @@
             </div>
           </section>
 
+          <section id="tv-catalogo" class="premium-flow-section catalog-tv-section reveal" aria-label="TV do Catálogo">
+            <div class="premium-section-head">
+              <div>
+                <span class="premium-kicker">vídeos das fontes</span>
+                <h2>TV do Catálogo</h2>
+                <p>Recortes em vídeo publicados por fontes públicas monitoradas, com caminho direto para a origem.</p>
+              </div>
+              <a class="premium-button ghost" href="./arquivo.html?busca=video">Ver vídeos no arquivo</a>
+            </div>
+            <div class="catalog-tv-layout">
+              <article class="catalog-tv-feature" data-catalog-tv-feature>
+                <a class="catalog-tv-screen" href="./arquivo.html?busca=video" aria-label="Abrir vídeos no arquivo">
+                  <span class="catalog-tv-play" aria-hidden="true"></span>
+                  <em>Fonte pública</em>
+                </a>
+                <div>
+                  <small>seleção monitorada</small>
+                  <h3>Vídeos publicados nas fontes entram aqui com crédito e link original.</h3>
+                  <p>O Catálogo organiza o acesso, mas o vídeo continua pertencendo à fonte que publicou o material.</p>
+                  <footer>
+                    <span>Fonte identificada</span>
+                    <a href="./arquivo.html?busca=video">Abrir recorte</a>
+                  </footer>
+                </div>
+              </article>
+              <div class="catalog-tv-grid" data-catalog-tv-grid>
+                <a class="catalog-tv-mini" href="./arquivo.html?busca=video"><span></span><small>Fonte pública</small><strong>Vídeos regionais com origem identificada</strong></a>
+                <a class="catalog-tv-mini" href="./arquivo.html?busca=reels"><span></span><small>Reels</small><strong>Publicações curtas quando houver link aberto</strong></a>
+                <a class="catalog-tv-mini" href="./arquivo.html?busca=evento%20video"><span></span><small>Eventos</small><strong>Registros visuais de cultura, cidade e comunidade</strong></a>
+              </div>
+            </div>
+            <p class="catalog-tv-transparency">
+              Transparência: a TV do Catálogo não republica vídeo como se fosse próprio; ela destaca links, imagens e chamadas vindas das fontes públicas acompanhadas.
+            </p>
+          </section>
+
           <section id="catalogo-telefonico" class="premium-flow-section premium-services-board reveal" aria-label="Catálogo telefônico e utilidade pública">
             <div class="premium-section-head">
               <div><span class="premium-kicker">serviço rápido</span><h2>Catálogo telefônico e utilidade pública</h2><p>Contatos importantes ficam organizados para resolver mais rápido.</p></div>
@@ -1727,6 +1776,7 @@
     <nav class="premium-bottom-nav" aria-label="Navegação principal mobile">
       <a href="#topo" class="is-active"><span class="premium-icon icon-news"></span><strong>Início</strong></a>
       <a href="#radar"><span class="premium-icon icon-news"></span><strong>Notícias</strong></a>
+      <a href="#tv-catalogo"><span class="premium-icon icon-video"></span><strong>TV</strong></a>
       <a href="./catalogo-servicos.html"><span class="premium-icon icon-services"></span><strong>Serviços</strong></a>
       <a href="#participacao-comunitaria"><span class="premium-icon icon-community"></span><strong>Comunidade</strong></a>
     </nav>
@@ -1822,11 +1872,11 @@
 
         window.__CATALOGO_SPLASH_FAILSAFE__ = window.setTimeout(function () {
           window.__CATALOGO_SPLASH_FORCE_RELEASE__("html-failsafe");
-        }, window.__CATALOGO_COMPACT_BOOT__ ? 9800 : 10800);
+        }, window.__CATALOGO_COMPACT_BOOT__ ? 22000 : 24000);
       })();
     </script>
-    <script defer src="./early-home-surfaces.js?v=20260512-broadcast-opening1"></script>
-  <script defer src="./script.js?v=20260512-broadcast-opening1"></script>
+    <script defer src="./early-home-surfaces.js?v=20260513-preload-gate2"></script>
+  <script defer src="./script.js?v=20260513-preload-gate2"></script>
     <script>
       (function () {
         const styles = [
@@ -1839,7 +1889,7 @@
           "sala-redacao-real.css?v=20260414q",
           "photo-layout-fix.css?v=20260411ab",
           "agentes-newsroom-hero.css?v=20260428-mosaic-publica1",
-      "startup-experience.css?v=20260512-broadcast-opening1",
+      "startup-experience.css?v=20260513-preload-gate2",
           "./insiders-crowd-march.css?v=20260426caption-outside",
           "pro-design.css?v=20260420hero-visiblefix",
           "news-photo-fix.css?v=20260415a",
@@ -1847,13 +1897,13 @@
           "./modern-launch.css?v=20260415d",
           "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260512-broadcast-opening1";
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260513-preload-gate2";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =
           typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
         const queue = [
-      "./startup-experience.js?v=20260512-broadcast-opening1",
+      "./startup-experience.js?v=20260513-preload-gate2",
           "./sidebar-data.js?v=20260413a",
           "./sidebar-widgets-recovery.js?v=20260423a",
           "./social-rss-data.js?v=20260413a",

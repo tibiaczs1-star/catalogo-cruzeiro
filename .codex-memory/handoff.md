@@ -1,10 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T03:03:21.010Z
+Updated: 2026-05-13T04:42:49.944Z
 
-Implementado botão Informar erro em noticia.html/noticia.js/styles.css, endpoint /api/editorial-corrections em server.js e prioridade pública na fila do cheffe-call. QA local desktop/mobile passou; review:team sem issues.
+QA local passou: node --check nos JS principais, CSS braces ok, Playwright mobile/desktop confirmou intro liberando, TV presente, loader de navegacao e botao Informar erro nos cards; review:team zerado e perf:budget ok.
 
 ## Next
 
-- Stage seletivo
-- commit e push para Render.
+- Fazer commit/push seletivo se o usuario confirmar subida ou seguir com deploy imediato mantendo fora os arquivos de dados/caches sujos.

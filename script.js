@@ -116,8 +116,9 @@ const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
-  "Abertura cinematográfica",
-  "Carregando capa",
+  "Desenhando constelação",
+  "Carregando capa real",
+  "Aquecendo matérias e imagens",
   "Portal pronto para abrir"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -125,12 +126,12 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 360 : 520;
-const splashCinematicDurationMs = 5000;
-const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 900 : 1200;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 6800 : 7600;
-const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 120 : 300;
-const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 80 : 160;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 900 : 1200;
+const splashCinematicDurationMs = 5200;
+const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 1700 : 2200;
+const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 2800 : 3400;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 220 : 320;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 280 : 420;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -466,23 +467,26 @@ const getTickerPhrasePool = () => {
 const splashStorageKey = "catalogo_cinematic_intro_seen_session_v3";
 const splashDailyStorageKey = "catalogo_splash_seen_day_v2";
 const skipHomeIntroKey = "catalogo_skip_home_intro_once";
+const publicCorrectionFocusKey = "catalogo_public_correction_focus_v1";
 const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260513-preload-gate2";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
-  "./styles.css?v=20260512-broadcast-opening1",
-  "./premium-home-redesign.css?v=20260512-broadcast-opening1",
-  "./startup-experience.css?v=20260512-broadcast-opening1",
-  "./early-home-surfaces.js?v=20260512-broadcast-opening1",
-  "./script.js?v=20260512-broadcast-opening1",
-  "./startup-experience.js?v=20260512-broadcast-opening1",
+  "./styles.css?v=20260513-preload-gate2",
+  "./premium-home-redesign.css?v=20260513-preload-gate2",
+  "./startup-experience.css?v=20260513-preload-gate2",
+  "./early-home-surfaces.js?v=20260513-preload-gate2",
+  "./script.js?v=20260513-preload-gate2",
+  "./startup-experience.js?v=20260513-preload-gate2",
   "./noticia.html",
   "./arquivo.html",
-  "./catalogo-servicos.html"
+  "./catalogo-servicos.html",
+  "./galeria.html",
+  "./cheffe-call.html"
 ];
 const urlSearchParams = new URLSearchParams(window.location.search);
 const urlRequestsSkipHomeIntro = (() => {
@@ -1781,6 +1785,60 @@ const runSplashIdleTask = (callback, timeout = 1200) => {
   window.setTimeout(callback, 160);
 };
 
+const isSplashHoldingPage = () =>
+  document.body.classList.contains("catalogo-site-booting") &&
+  !document.body.classList.contains("site-loaded");
+
+const runAfterSplashFinished = (callback, timeout = 1200) => {
+  if (typeof callback !== "function") {
+    return;
+  }
+
+  if (!isSplashHoldingPage()) {
+    runSplashIdleTask(callback, timeout);
+    return;
+  }
+
+  let didRun = false;
+  const runOnce = () => {
+    if (didRun) {
+      return;
+    }
+
+    didRun = true;
+    runSplashIdleTask(callback, timeout);
+  };
+
+  window.addEventListener("catalogo:logo-splash-finished", runOnce, { once: true });
+  window.setTimeout(runOnce, splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1600);
+};
+
+const runIdleStepQueue = (steps = [], timeout = 900, gap = 360) => {
+  const queue = steps.filter((step) => typeof step === "function");
+  if (!queue.length) {
+    return;
+  }
+
+  const runNext = () => {
+    const step = queue.shift();
+    if (!step) {
+      return;
+    }
+
+    try {
+      step();
+    } catch (_error) {
+      // A below-the-fold hydration failure should not freeze the first screen.
+    }
+
+    if (queue.length) {
+      window.setTimeout(() => runSplashIdleTask(runNext, timeout), gap);
+    }
+  };
+
+  runSplashIdleTask(runNext, timeout);
+};
+
 const rememberPortalCacheWarmToday = () => {
   try {
     localStorage.setItem(portalWarmCacheKey, getSplashDayKey());
@@ -2078,16 +2136,26 @@ const waitForSplashReadiness = async () => {
   const steps = [
     {
       label: "Carregando estrutura real",
-      progress: 24,
-      wait: () => Promise.resolve()
+      progress: 18,
+      wait: () => waitForSplashDocumentComplete(splashGateStepTimeoutMs)
     },
     {
       label: "Preparando dados da capa",
-      progress: 72,
+      progress: 48,
+      wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
+    },
+    {
+      label: "Montando primeira tela",
+      progress: 68,
+      wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
+    },
+    {
+      label: "Polindo imagens principais",
+      progress: 86,
       wait: () =>
         splashCompactViewportQuery.matches
-          ? Promise.resolve()
-          : waitForSplashFontsReady(splashGateStepTimeoutMs)
+          ? waitForSplashFontsReady(splashGateStepTimeoutMs)
+          : waitForSplashCriticalImages(splashGateStepTimeoutMs)
     },
     {
       label: "Estrutura pronta",
@@ -2163,6 +2231,7 @@ const setupSplashExperience = () => {
   }
 
   let splashReleased = false;
+  let splashBroadcastStarted = false;
   let messageIndex = 0;
   let messageTimer = 0;
   if (splashStatus && !splashMotionQuery.matches) {
@@ -2234,29 +2303,32 @@ const setupSplashExperience = () => {
   const elapsed = currentTime - splashBootStartedAt;
   const remaining = Math.max(100, splashDailyMinimumMs - elapsed);
 
+  const readinessGate = waitForSplashReadiness().catch(() => undefined);
   const structureGate = Promise.race([
-    Promise.all([waitForSplashReadiness(), waitForSplashDelay(remaining)]),
+    Promise.all([readinessGate, waitForSplashDelay(remaining)]),
     waitForSplashDelay(splashStructureGateMaximumMs)
   ]);
 
   const runCinematicOpening = async () => {
-    if (splashReleased) {
+    if (splashReleased || splashBroadcastStarted) {
       return;
     }
 
+    splashBroadcastStarted = true;
     splashRoot.classList.remove("is-shell-preparing", "is-logo-primer");
     splashRoot.classList.add("is-broadcast-started");
     if (splashCopy) {
-      splashCopy.textContent = "Abertura de jornal do Vale do Juruá";
+      splashCopy.textContent = "Cruzeiro do Sul em abertura";
     }
     rememberSplashToday();
-    updateSplashProgress(72, "Vale do Juruá no ar");
+    updateSplashProgress(92, "Constelação do Cruzeiro do Sul");
+    warmPortalCacheInBackground();
     await waitForSplashDelay(splashCinematicDurationMs);
     releaseSplash();
   };
 
-  void structureGate.then(runCinematicOpening).catch(releaseSplash);
-  void waitForSplashDelay(splashGateMaximumMs).then(releaseSplash).catch(releaseSplash);
+  void structureGate.then(runCinematicOpening).catch(runCinematicOpening);
+  void waitForSplashDelay(splashBroadcastStartMaximumMs).then(runCinematicOpening).catch(releaseSplash);
 };
 
 const clearMobilePageTransitionState = () => {
@@ -12577,6 +12649,7 @@ const scheduleTopicSurfaceRefresh = () => {
     renderClimateAlertsSection(window.NEWS_DATA || []);
     renderAgendaSection(window.NEWS_DATA || []);
     renderSocialAgendaSurface(window.NEWS_DATA || []);
+    renderCatalogTvSurface(window.NEWS_DATA || []);
     renderPremiumBottomNewsSurface(window.NEWS_DATA || []);
   }, 60 * 1000);
 };
@@ -14109,6 +14182,142 @@ const getSocialAgendaWindows = (filter = "dia") => {
   return [7, 31, 120, 365];
 };
 
+const catalogTvVideoPattern =
+  /\b(v[ií]deo|video|reels?|shorts?|youtube|youtu\.be|watch|clipe|filmagem|c[aâ]mera|ao vivo)\b/i;
+
+const isCatalogTvArticle = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const text = [
+    normalized.title,
+    normalized.slug,
+    normalized.summary,
+    normalized.lede,
+    normalized.category,
+    normalized.sourceName,
+    normalized.sourceLabel,
+    normalized.sourceUrl
+  ].join(" ");
+
+  return catalogTvVideoPattern.test(text) && Boolean(normalized.sourceUrl || normalized.url || normalized.link || normalized.slug);
+};
+
+const getCatalogTvScore = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const text = getSurfaceArticleText(normalized);
+  let score = getSurfaceImpactPriorityScore(normalized);
+  if (/cruzeiro do sul|vale do jurua|vale do juruá|jurua|juruá|acre|mancio lima|mâncio lima/i.test(text)) score += 34;
+  if (/reels?|shorts?|youtube|facebook|instagram/i.test([normalized.sourceUrl, normalized.sourceName, text].join(" "))) score += 16;
+  if (/^https?:\/\//i.test(normalized.sourceUrl || "")) score += 12;
+  if (articleHasUsableImageCandidate(normalized)) score += 10;
+  return score;
+};
+
+const getCatalogTvSourceHref = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  return normalized.sourceUrl || normalized.url || normalized.link || buildArticleHref(normalized);
+};
+
+const pickCatalogTvItems = (items = []) => {
+  const strictItems = dedupeNewsItems([...(items || []), ...initialStaticNews])
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter(isCatalogTvArticle)
+    .sort((left, right) => getCatalogTvScore(right) - getCatalogTvScore(left));
+
+  return strictItems.slice(0, 5);
+};
+
+const renderCatalogTvFeature = (feature, article = {}) => {
+  if (!feature || !article?.title) {
+    return;
+  }
+
+  const normalized = normalizeRuntimeArticle(article);
+  const sourceHref = getCatalogTvSourceHref(normalized);
+  const articleHref = buildArticleHref(normalized);
+  const screen = document.createElement("a");
+  const play = document.createElement("span");
+  const sourceBadge = document.createElement("em");
+  const copy = document.createElement("div");
+  const kicker = document.createElement("small");
+  const title = document.createElement("h3");
+  const summary = document.createElement("p");
+  const footer = document.createElement("footer");
+  const source = document.createElement("span");
+  const sourceLink = document.createElement("a");
+  const articleLink = document.createElement("a");
+
+  feature.className = "catalog-tv-feature";
+  screen.className = "catalog-tv-screen";
+  screen.href = sourceHref;
+  screen.setAttribute("aria-label", `Ver vídeo na fonte: ${normalized.title}`);
+  applyArticleLinkAttrs(screen, sourceHref);
+  setPremiumImageFromArticle(screen, normalized);
+  play.className = "catalog-tv-play";
+  play.setAttribute("aria-hidden", "true");
+  sourceBadge.textContent = normalized.sourceName || "Fonte pública";
+  screen.append(play, sourceBadge);
+
+  kicker.textContent = "na fonte original";
+  title.textContent = truncateCopy(normalized.title || "Vídeo da fonte", 120);
+  summary.textContent = truncateCopy(
+    cleanArticleExcerpt(
+      normalized.displaySummary || normalized.summary || normalized.lede,
+      "Vídeo publicado pela fonte original, organizado aqui para consulta rápida."
+    ),
+    185
+  );
+  source.textContent = `Fonte: ${truncateCopy(normalized.sourceName || "fonte pública", 42)}`;
+  sourceLink.href = sourceHref;
+  sourceLink.textContent = "Ver na fonte";
+  applyArticleLinkAttrs(sourceLink, sourceHref);
+  articleLink.href = articleHref;
+  articleLink.textContent = normalized.slug ? "Ler contexto" : "Abrir recorte";
+  applyArticleLinkAttrs(articleLink, articleHref);
+  footer.append(source, sourceLink, articleLink);
+  copy.append(kicker, title, summary, footer);
+  feature.replaceChildren(screen, copy);
+};
+
+const buildCatalogTvMiniCard = (article = {}) => {
+  const normalized = normalizeRuntimeArticle(article);
+  const sourceHref = getCatalogTvSourceHref(normalized);
+  const card = document.createElement("a");
+  const media = document.createElement("span");
+  const source = document.createElement("small");
+  const title = document.createElement("strong");
+
+  card.className = "catalog-tv-mini";
+  card.href = sourceHref;
+  applyArticleLinkAttrs(card, sourceHref);
+  setPremiumImageFromArticle(media, normalized);
+  source.textContent = truncateCopy(normalized.sourceName || "Fonte pública", 32);
+  title.textContent = truncateCopy(normalized.title || "Vídeo publicado na fonte", 82);
+  card.append(media, source, title);
+  return card;
+};
+
+const renderCatalogTvSurface = (items = []) => {
+  const section = document.querySelector("#tv-catalogo");
+  const feature = section?.querySelector("[data-catalog-tv-feature]");
+  const grid = section?.querySelector("[data-catalog-tv-grid]");
+  if (!section || !feature || !grid) {
+    return;
+  }
+
+  const selected = pickCatalogTvItems(items);
+  if (!selected.length) {
+    return;
+  }
+
+  renderCatalogTvFeature(feature, selected[0]);
+  const fragment = document.createDocumentFragment();
+  selected.slice(1, 5).forEach((article) => {
+    fragment.appendChild(buildCatalogTvMiniCard(article));
+  });
+  grid.replaceChildren(fragment);
+  reserveSurfaceArticles("catalogTv", selected);
+};
+
 const buildSocialAgendaCard = (article = {}, index = 0) => {
   const normalized = normalizeRuntimeArticle(article);
   const href = buildArticleHref(normalized);
@@ -14278,16 +14487,69 @@ const hydrateStaticMediaSurfaces = async (options = {}) => {
 
   if (window.NEWS_MAP) {
     hydrateStaticThumbs(window.NEWS_MAP);
-    hydrateSocialCards(window.NEWS_DATA || []);
-    renderClimateAlertsSection(window.NEWS_DATA || []);
-    renderAgendaSection(window.NEWS_DATA || []);
-    renderSocialAgendaSurface(window.NEWS_DATA || []);
-    renderPremiumBottomNewsSurface(window.NEWS_DATA || []);
+    const deferMobileFirstSplash = splashCompactViewportQuery.matches && isSplashHoldingPage();
 
     const hydrateSecondarySurfaces = () => {
       hydrateEntertainmentSection(window.NEWS_DATA || []);
       renderAcreRegionalHighlights(window.NEWS_DATA || []);
     };
+
+    const hydrateCadernos = () => hydrateCadernoCards(window.NEWS_DATA || []);
+    const hydrateBelowFoldSurfaces = () => {
+      const belowFoldSteps = [
+        () => hydrateSocialCards(window.NEWS_DATA || []),
+        () => {
+          renderClimateAlertsSection(window.NEWS_DATA || []);
+          renderAgendaSection(window.NEWS_DATA || []);
+        },
+        () => {
+          renderSocialAgendaSurface(window.NEWS_DATA || []);
+          renderCatalogTvSurface(window.NEWS_DATA || []);
+        },
+        () => renderPremiumBottomNewsSurface(window.NEWS_DATA || [])
+      ];
+
+      if (!deferMobileFirstSplash) {
+        belowFoldSteps.push(
+          () => {
+            if (deferCadernos) {
+              window.setTimeout(hydrateSecondarySurfaces, 0);
+            } else {
+              hydrateSecondarySurfaces();
+            }
+          },
+          () => {
+            if (deferCadernos) {
+              window.setTimeout(() => {
+                void hydrateCadernos().catch(() => {});
+              }, 180);
+            } else {
+              void hydrateCadernos().catch(() => {});
+            }
+          }
+        );
+      }
+
+      runIdleStepQueue(
+        belowFoldSteps,
+        deferMobileFirstSplash ? 1600 : 900,
+        deferMobileFirstSplash ? 900 : 360
+      );
+    };
+
+    if (deferMobileFirstSplash) {
+      runAfterSplashFinished(() => {
+        window.setTimeout(hydrateBelowFoldSurfaces, 2500);
+      }, 1400);
+      return;
+    }
+
+    hydrateSocialCards(window.NEWS_DATA || []);
+    renderClimateAlertsSection(window.NEWS_DATA || []);
+    renderAgendaSection(window.NEWS_DATA || []);
+    renderSocialAgendaSurface(window.NEWS_DATA || []);
+    renderCatalogTvSurface(window.NEWS_DATA || []);
+    renderPremiumBottomNewsSurface(window.NEWS_DATA || []);
 
     if (deferCadernos) {
       window.setTimeout(hydrateSecondarySurfaces, 0);
@@ -14295,7 +14557,6 @@ const hydrateStaticMediaSurfaces = async (options = {}) => {
       hydrateSecondarySurfaces();
     }
 
-    const hydrateCadernos = () => hydrateCadernoCards(window.NEWS_DATA || []);
     if (deferCadernos) {
       window.setTimeout(() => {
         void hydrateCadernos().catch(() => {});
@@ -14505,11 +14766,29 @@ const renderAcreRegionalHighlights = (items = window.NEWS_DATA || []) => {
 };
 
 const articleCardSelector = [
+  ".hero-card",
+  ".hero-main-card",
+  ".hero-panel-photo",
+  ".hero-panel-row",
+  ".latest-news-item",
   ".news-card",
   ".archive-card",
   ".mosaic-item",
   ".global-politics-card",
-  ".trending-card"
+  ".trending-card",
+  ".live-feed-card",
+  ".feed-card",
+  ".premium-event-card",
+  ".premium-news-row",
+  ".premium-timeline-item",
+  ".premium-media-frame",
+  ".premium-caderno-card",
+  ".special-card",
+  ".future-feature-card",
+  ".column-card",
+  ".generated-feed-card",
+  ".generated-archive-card",
+  ".candidate-card"
 ].join(", ");
 const cardInteractiveSelector = "a, button, input, select, textarea, label, summary";
 
@@ -14550,6 +14829,124 @@ if (mobileHomeLeadMedia) {
 const getPrimaryCardLink = (card) =>
   card?.querySelector?.('a[href*="noticia.html?slug="], a[href]') || null;
 
+const getSlugFromArticleHref = (href = "") => {
+  try {
+    const targetUrl = new URL(href, window.location.href);
+    return targetUrl.searchParams.get("slug") || "";
+  } catch (_error) {
+    const match = String(href || "").match(/[?&]slug=([^&#]+)/i);
+    return match ? decodeURIComponent(match[1]) : "";
+  }
+};
+
+const buildPublicCorrectionPayloadFromCard = (card, link) => {
+  const href = link?.getAttribute?.("href") || "";
+  const slug = getSlugFromArticleHref(href);
+  const article = slug ? window.NEWS_MAP?.[slug] : null;
+  const title =
+    article?.title ||
+    card?.querySelector?.("h1, h2, h3, strong")?.textContent?.trim() ||
+    "Matéria";
+  const category =
+    article?.category ||
+    article?.eyebrow ||
+    card?.dataset?.category ||
+    card?.querySelector?.(".eyebrow, .news-source, small")?.textContent?.trim() ||
+    "Notícia";
+  const articleUrl = slug
+    ? new URL(`./noticia.html?slug=${encodeURIComponent(slug)}`, window.location.href).href
+    : new URL(href || "./arquivo.html", window.location.href).href;
+
+  return {
+    source: "public-card-button",
+    type: "outro",
+    typeLabel: "erro informado pelo leitor",
+    priority: "alta",
+    slug,
+    title,
+    category,
+    articleUrl,
+    sourceUrl: article?.sourceUrl || "",
+    imageUrl: article?.imageUrl || article?.image || "",
+    note: "Leitor abriu a fila de correção a partir do botão Informar erro.",
+    createdAt: new Date().toISOString()
+  };
+};
+
+const persistPublicCorrectionFocusFromHome = (payload) => {
+  try {
+    sessionStorage.setItem(publicCorrectionFocusKey, JSON.stringify(payload));
+  } catch (_error) {
+    // O botão continua navegando mesmo sem sessionStorage.
+  }
+};
+
+const submitPublicCorrectionFromHome = (payload) => {
+  if (!payload?.slug || window.location.protocol === "file:") {
+    return Promise.resolve(false);
+  }
+
+  return fetch("/api/editorial-corrections", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(payload),
+    keepalive: true,
+    cache: "no-store"
+  })
+    .then((response) => response.ok)
+    .catch(() => false);
+};
+
+const navigateToPublicCorrectionFlow = (payload) => {
+  persistPublicCorrectionFocusFromHome(payload);
+  const target = new URL("./cheffe-call.html", window.location.href);
+  target.searchParams.set("publicCorrection", "1");
+  if (payload.slug) target.searchParams.set("slug", payload.slug);
+  target.searchParams.set("type", payload.type || "outro");
+
+  const navigate = () => {
+    window.location.href = target.href;
+  };
+
+  Promise.race([
+    submitPublicCorrectionFromHome(payload),
+    waitForSplashDelay(420)
+  ])
+    .catch(() => undefined)
+    .then(navigate);
+
+  window.setTimeout(navigate, 900);
+};
+
+const injectArticleReportButton = (card, primaryLink) => {
+  if (!card || card.querySelector?.(".article-report-button")) {
+    return;
+  }
+
+  const href = primaryLink?.getAttribute?.("href") || "";
+  const slug = getSlugFromArticleHref(href);
+  if (!slug) {
+    return;
+  }
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "article-report-button";
+  button.textContent = "Informar erro";
+  button.title = "Informar erro em foto, título, texto, fonte ou dado desta matéria.";
+  button.setAttribute("aria-label", `Informar erro nesta matéria: ${card.querySelector("h1, h2, h3, strong")?.textContent?.trim() || "notícia"}`);
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const payload = buildPublicCorrectionPayloadFromCard(card, primaryLink);
+    showInlineNavigationFallbackLoader({ label: "Informando erro" }).catch(() => {});
+    navigateToPublicCorrectionFlow(payload);
+  });
+
+  card.classList.add("has-article-report-button");
+  card.appendChild(button);
+};
+
 const bindArticleCardLink = (card) => {
   if (!card || card.dataset.cardLinkBound === "true") {
     return;
@@ -14562,6 +14959,7 @@ const bindArticleCardLink = (card) => {
 
   card.dataset.cardLinkBound = "true";
   card.classList.add("is-card-link");
+  injectArticleReportButton(card, primaryLink);
   card.addEventListener("click", (event) => {
     if (event.defaultPrevented || event.target.closest(cardInteractiveSelector)) {
       return;
@@ -14596,6 +14994,17 @@ function registerArticleCardLinks(root = document) {
     : [];
 
   cards.push(...nestedCards);
+  if (root.querySelectorAll) {
+    root.querySelectorAll('a[href*="noticia.html?slug="]').forEach((link) => {
+      const host =
+        link.closest(articleCardSelector) ||
+        link.closest("article, li, section, div") ||
+        link;
+      if (host && !cards.includes(host)) {
+        cards.push(host);
+      }
+    });
+  }
   cards.forEach(bindArticleCardLink);
 }
 
@@ -14742,7 +15151,7 @@ const isInternalPageLink = (link) => {
       return false;
     }
 
-    return /\/(?:noticia|arquivo|galeria|catalogo-servicos)\.html$/i.test(targetUrl.pathname);
+    return /\/(?:index|noticia|arquivo|galeria|catalogo-servicos|cheffe-call)\.html$/i.test(targetUrl.pathname);
   } catch (_error) {
     return false;
   }
@@ -14752,6 +15161,8 @@ const getInternalPageLoaderLabel = (href = "") => {
   if (/galeria\.html/i.test(href)) return "Abrindo galeria";
   if (/arquivo\.html/i.test(href)) return "Abrindo arquivo";
   if (/catalogo-servicos\.html/i.test(href)) return "Abrindo serviços";
+  if (/cheffe-call\.html/i.test(href)) return "Abrindo Cheffe Call";
+  if (/index\.html/i.test(href)) return "Voltando para a home";
   return "Abrindo página";
 };
 

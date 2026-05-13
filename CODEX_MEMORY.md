@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Intro, TV e erro prontos para subida
+
+- Usuario perguntou se a intro/video ja podiam subir e apontou que a sessao parecia travada; retomada feita lendo memoria local obrigatoria.
+- `script.js` encurtou a abertura: preload segura a pagina, a animacao da constelacao/meteoro roda em janela propria de 5,2s e o mobile libera em torno de 6,7s no smoke local.
+- `styles.css` alinhou as animacoes da constelacao para 5,2s, manteve elementos visiveis no mobile e compactou o bloco `TV do Catalogo` para nao ocupar altura excessiva em cards.
+- `index.html` inclui a secao `#tv-catalogo` e `navigation-loader.js` foi ligado em home/subpaginas para loader curto em navegacao real.
+- Validacoes locais: `node --check script.js navigation-loader.js noticia.js startup-experience.js server.js`; braces CSS `3843/3843`; Playwright mobile/desktop confirmou constelacao visivel, `site-loaded`, 25/32 botoes `Informar erro` em cards e clique abrindo `cheffe-call.html?publicCorrection=1`; bloco TV existe e navegacao para servicos mostra loader; `npm run review:team` `totalIssues=0`; `npm run perf:budget` `ok=true` com `news-data.js` ainda acima do teto de observacao.
+
 ## Atualizacao rapida 2026-05-12 - Abertura jornalistica azul com relogio
 
 - Usuario esclareceu o objetivo visual: antes da animacao, mostrar so uma logo enquanto a pagina/estrutura real carrega; quando tudo estiver pronto, rodar uma abertura bonita de jornal de TV por cerca de 4,5s, com relogio, estrelas/universo azul, paralaxe, cidades do Vale do Jurua e chamadas de news.

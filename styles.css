@@ -6090,6 +6090,53 @@ input[type="range"] {
   flex-wrap: wrap;
 }
 
+.has-article-report-button {
+  position: relative;
+}
+
+.article-report-button {
+  position: absolute;
+  top: 0.62rem;
+  right: 0.62rem;
+  z-index: 40;
+  appearance: none;
+  border: 1px solid rgba(255, 239, 190, 0.78);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe08a, #ffc233);
+  color: #071423;
+  cursor: pointer;
+  font-family: "Outfit", system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+  max-width: calc(100% - 1.44rem);
+  min-height: 30px;
+  padding: 0.48rem 0.66rem;
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.28),
+    0 0 0 2px rgba(5, 18, 31, 0.32);
+  opacity: 0.96;
+  transition: opacity 160ms ease, transform 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.article-report-button:hover,
+.article-report-button:focus-visible {
+  background: #ffffff;
+  color: #071423;
+  opacity: 1;
+  transform: translateY(-1px) scale(1.02);
+  outline: 2px solid rgba(255, 214, 106, 0.52);
+  outline-offset: 2px;
+}
+
+.news-thumb .article-report-button,
+.feed-thumb .article-report-button,
+.archive-thumb .article-report-button {
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
 .detail-hero-thumb {
   min-height: 280px;
   margin: 0;
@@ -25318,4 +25365,790 @@ body.editorial-home .logo-splash.is-broadcast-started .logo-splash-brand-copy st
   0%, 10% { opacity: 0; transform: translateY(24px) scale(0.98); }
   26%, 88% { opacity: 1; transform: translateY(0) scale(1); }
   100% { opacity: 1; transform: translateY(-8px) scale(1.01); }
+}
+
+/* 2026-05-13: abertura Cruzeiro do Sul com meteoro, constelação 3D e jornal regional. */
+body.editorial-home .logo-splash.is-broadcast-started {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(27, 135, 255, 0.58), transparent 38%),
+    linear-gradient(128deg, #00062a 0%, #003f9f 42%, #020817 100%) !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-broadcast {
+  overflow: hidden !important;
+  perspective: 1200px !important;
+  animation: broadcastDeepParallax 5.2s cubic-bezier(0.18, 0.82, 0.24, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-broadcast::before {
+  inset: 8% 6% !important;
+  border-color: rgba(191, 230, 255, 0.24) !important;
+  background:
+    linear-gradient(90deg, transparent 0 49%, rgba(191, 230, 255, 0.2) 49.4% 50.6%, transparent 51% 100%),
+    linear-gradient(0deg, transparent 0 49%, rgba(83, 179, 255, 0.18) 49.4% 50.6%, transparent 51% 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 90px) !important;
+  transform: skewX(-10deg) translateZ(-90px);
+  animation: constellationGridSweep 5.2s ease both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-broadcast::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: -14% !important;
+  background-image:
+    radial-gradient(circle at 8% 18%, rgba(255, 255, 255, 0.92) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 24% 78%, rgba(136, 211, 255, 0.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 42% 22%, rgba(255, 222, 135, 0.86) 0 1px, transparent 2px),
+    radial-gradient(circle at 62% 68%, rgba(255, 255, 255, 0.78) 0 1px, transparent 2px),
+    radial-gradient(circle at 82% 30%, rgba(136, 211, 255, 0.88) 0 1px, transparent 2px),
+    radial-gradient(circle at 94% 58%, rgba(255, 222, 135, 0.72) 0 1px, transparent 2px) !important;
+  background-size: 260px 220px, 320px 260px, 390px 300px, 300px 240px, 360px 280px, 330px 250px !important;
+  opacity: 0.78;
+  transform: translateZ(-180px) scale(1.12);
+  animation: constellationStarfieldParallax 5.2s ease-out both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cruzeiro-constellation {
+  position: absolute !important;
+  left: 50% !important;
+  top: 42% !important;
+  z-index: 2 !important;
+  width: clamp(260px, 32vw, 520px) !important;
+  aspect-ratio: 1 !important;
+  transform-style: preserve-3d !important;
+  transform: translate(-50%, -50%) rotateX(64deg) rotateZ(-28deg) scale(0.74);
+  opacity: 0;
+  filter: drop-shadow(0 0 28px rgba(110, 200, 255, 0.36)) !important;
+  animation: cruzeiroConstellationAssemble 5.2s cubic-bezier(0.16, 0.86, 0.2, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .constellation-meteor {
+  position: absolute !important;
+  left: 66% !important;
+  top: 5% !important;
+  z-index: 4 !important;
+  width: clamp(150px, 18vw, 310px) !important;
+  height: 3px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, transparent, rgba(154, 222, 255, 0.95) 44%, #ffd66a 72%, #ffffff) !important;
+  box-shadow: 0 0 22px rgba(130, 214, 255, 0.7), 0 0 48px rgba(255, 214, 106, 0.3) !important;
+  transform-origin: right center !important;
+  opacity: 0;
+  animation: cruzeiroMeteorStrike 5.2s cubic-bezier(0.16, 0.82, 0.12, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .constellation-orbit {
+  position: absolute !important;
+  inset: 10% !important;
+  border: 1px solid rgba(142, 211, 255, 0.2) !important;
+  border-radius: 50% !important;
+  transform-style: preserve-3d !important;
+  opacity: 0;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .constellation-orbit.orbit-a {
+  animation: cruzeiroOrbitSpinA 5.2s linear both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .constellation-orbit.orbit-b {
+  inset: 18% !important;
+  border-color: rgba(255, 214, 106, 0.18) !important;
+  transform: rotateX(72deg) rotateY(24deg);
+  animation: cruzeiroOrbitSpinB 5.2s linear both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .cruzeiro-star {
+  position: absolute !important;
+  z-index: 3 !important;
+  width: clamp(10px, 1.1vw, 17px) !important;
+  height: clamp(10px, 1.1vw, 17px) !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  box-shadow:
+    0 0 0 5px rgba(255, 214, 106, 0.08),
+    0 0 22px rgba(255, 255, 255, 0.92),
+    0 0 54px rgba(83, 179, 255, 0.58) !important;
+  opacity: 0;
+  transform: translateZ(70px) scale(0.38);
+  animation: cruzeiroStarIgnite 5.2s cubic-bezier(0.18, 0.82, 0.24, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .cruzeiro-star::before,
+body.editorial-home .logo-splash.is-broadcast-started .cruzeiro-star::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 270% !important;
+  height: 1px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.88), transparent) !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .cruzeiro-star::after {
+  transform: translate(-50%, -50%) rotate(90deg) !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .star-alpha { left: 50%; top: 12%; animation-delay: 0.95s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .star-beta { left: 48%; top: 38%; animation-delay: 1.12s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .star-gamma { left: 50%; top: 66%; animation-delay: 1.29s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .star-delta { left: 24%; top: 44%; animation-delay: 1.46s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .star-epsilon { left: 70%; top: 46%; width: clamp(7px, 0.8vw, 12px) !important; height: clamp(7px, 0.8vw, 12px) !important; animation-delay: 1.62s !important; }
+
+body.editorial-home .logo-splash.is-broadcast-started .constellation-line {
+  position: absolute !important;
+  z-index: 2 !important;
+  left: 50% !important;
+  top: 50% !important;
+  width: 2px !important;
+  height: 55% !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, transparent, rgba(154, 222, 255, 0.82), rgba(255, 214, 106, 0.54), transparent) !important;
+  transform-origin: center !important;
+  opacity: 0;
+  animation: cruzeiroLineDraw 5.2s ease both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .line-vertical {
+  transform: translate(-50%, -50%) rotate(2deg) scaleY(0.2);
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .line-cross {
+  width: 42% !important;
+  height: 2px !important;
+  transform: translate(-48%, -18%) rotate(4deg) scaleX(0.2);
+  animation-name: cruzeiroLineDrawCross !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-clock {
+  top: 46% !important;
+  width: clamp(210px, 30vw, 430px) !important;
+  opacity: 0;
+  mix-blend-mode: screen !important;
+  animation: cruzeiroClockReveal 5.2s ease both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .clock-ring.ring-b {
+  animation: cruzeiroClockCounter 5.2s linear both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .clock-hand.hand-minute {
+  animation: cruzeiroClockSweep 5.2s cubic-bezier(0.16, 0.86, 0.2, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-stars {
+  opacity: 0.72;
+  animation: cruzeiroAmbientStars 5.2s ease-out both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-card {
+  z-index: 4 !important;
+  animation: cruzeiroLogoFinale 5.2s cubic-bezier(0.16, 0.86, 0.2, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .logo-splash-compass {
+  animation: cruzeiroLogoSpinLock 5.2s cubic-bezier(0.16, 0.86, 0.2, 1) both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities span,
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-news-lines span {
+  animation: cruzeiroCaptionReveal 5.2s ease both !important;
+}
+
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities span:nth-child(1) { animation-delay: 2.95s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities span:nth-child(2) { animation-delay: 3.14s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities span:nth-child(3) { animation-delay: 3.33s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities span:nth-child(4) { animation-delay: 3.52s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities span:nth-child(5) { animation-delay: 3.71s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-news-lines span:nth-child(1) { animation-delay: 4.2s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-news-lines span:nth-child(2) { animation-delay: 4.42s !important; }
+body.editorial-home .logo-splash.is-broadcast-started .broadcast-news-lines span:nth-child(3) { animation-delay: 4.64s !important; }
+
+@keyframes broadcastDeepParallax {
+  0% { transform: translate3d(0, 22px, 0) scale(1.08); opacity: 0.72; }
+  18% { opacity: 1; }
+  72% { transform: translate3d(-18px, -8px, 0) scale(1.02); opacity: 1; }
+  100% { transform: translate3d(-32px, -14px, 0) scale(1); opacity: 0.92; }
+}
+
+@keyframes constellationGridSweep {
+  0% { opacity: 0; transform: skewX(-10deg) translate3d(36px, 0, -90px); }
+  28%, 84% { opacity: 0.86; }
+  100% { opacity: 0.28; transform: skewX(-10deg) translate3d(-22px, 0, -90px); }
+}
+
+@keyframes constellationStarfieldParallax {
+  0% { opacity: 0.18; transform: translate3d(42px, 20px, -180px) scale(1.16); }
+  22%, 88% { opacity: 0.86; }
+  100% { opacity: 0.48; transform: translate3d(-46px, -22px, -180px) scale(1.08); }
+}
+
+@keyframes cruzeiroMeteorStrike {
+  0%, 8% { opacity: 0; transform: translate3d(190px, -110px, 210px) rotate(-31deg) scaleX(0.34); }
+  18% { opacity: 1; transform: translate3d(18px, 18px, 120px) rotate(-31deg) scaleX(1); }
+  28% { opacity: 0.78; transform: translate3d(-70px, 70px, 40px) rotate(-31deg) scaleX(0.58); }
+  36%, 100% { opacity: 0; transform: translate3d(-96px, 86px, 0) rotate(-31deg) scaleX(0.18); }
+}
+
+@keyframes cruzeiroConstellationAssemble {
+  0%, 10% { opacity: 0; transform: translate(-50%, -50%) rotateX(74deg) rotateY(-58deg) rotateZ(-44deg) scale(0.58); }
+  28% { opacity: 1; transform: translate(-50%, -50%) rotateX(60deg) rotateY(34deg) rotateZ(320deg) scale(1.16); }
+  48% { opacity: 1; transform: translate(-50%, -50%) rotateX(12deg) rotateY(0deg) rotateZ(-10deg) scale(0.9); }
+  74% { opacity: 0.34; transform: translate(-50%, -50%) rotateX(8deg) rotateY(0deg) rotateZ(0deg) scale(0.62); }
+  100% { opacity: 0; transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(0.36); }
+}
+
+@keyframes cruzeiroStarIgnite {
+  0%, 14% { opacity: 0; transform: translateZ(120px) scale(0.2); }
+  28% { opacity: 1; transform: translateZ(96px) scale(1.35); }
+  48% { opacity: 1; transform: translateZ(60px) scale(1); }
+  72% { opacity: 0.4; transform: translateZ(0) scale(0.72); }
+  100% { opacity: 0; transform: translateZ(-60px) scale(0.36); }
+}
+
+@keyframes cruzeiroLineDraw {
+  0%, 20% { opacity: 0; transform: translate(-50%, -50%) rotate(2deg) scaleY(0.1); }
+  34%, 56% { opacity: 0.84; transform: translate(-50%, -50%) rotate(2deg) scaleY(1); }
+  76%, 100% { opacity: 0; transform: translate(-50%, -50%) rotate(2deg) scaleY(0.55); }
+}
+
+@keyframes cruzeiroLineDrawCross {
+  0%, 22% { opacity: 0; transform: translate(-48%, -18%) rotate(4deg) scaleX(0.1); }
+  36%, 56% { opacity: 0.78; transform: translate(-48%, -18%) rotate(4deg) scaleX(1); }
+  76%, 100% { opacity: 0; transform: translate(-48%, -18%) rotate(4deg) scaleX(0.45); }
+}
+
+@keyframes cruzeiroOrbitSpinA {
+  0%, 14% { opacity: 0; transform: rotateX(66deg) rotateZ(0deg) scale(0.72); }
+  30%, 60% { opacity: 0.86; }
+  100% { opacity: 0; transform: rotateX(66deg) rotateZ(460deg) scale(0.88); }
+}
+
+@keyframes cruzeiroOrbitSpinB {
+  0%, 14% { opacity: 0; transform: rotateX(72deg) rotateY(24deg) rotateZ(0deg) scale(0.72); }
+  30%, 60% { opacity: 0.7; }
+  100% { opacity: 0; transform: rotateX(72deg) rotateY(24deg) rotateZ(-420deg) scale(0.92); }
+}
+
+@keyframes cruzeiroClockReveal {
+  0%, 34% { opacity: 0; transform: translate(-50%, -50%) scale(1.16); }
+  46%, 88% { opacity: 0.82; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0.22; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+@keyframes cruzeiroClockSweep {
+  0% { transform: rotate(-54deg); }
+  42% { transform: rotate(520deg); }
+  100% { transform: rotate(684deg); }
+}
+
+@keyframes cruzeiroClockCounter {
+  0% { transform: rotate(0deg) scale(0.92); opacity: 0.34; }
+  50% { opacity: 0.92; }
+  100% { transform: rotate(-240deg) scale(1.04); opacity: 0.44; }
+}
+
+@keyframes cruzeiroAmbientStars {
+  0% { opacity: 0.18; transform: translate3d(0, 22px, 0); }
+  35%, 90% { opacity: 0.86; }
+  100% { opacity: 0.44; transform: translate3d(-20px, -16px, 0); }
+}
+
+@keyframes cruzeiroLogoSpinLock {
+  0%, 38% { transform: rotateY(-80deg) rotateZ(-26deg) scale(0.74); opacity: 0; }
+  50% { transform: rotateY(34deg) rotateZ(14deg) scale(1.22); opacity: 1; }
+  64%, 100% { transform: rotateY(0deg) rotateZ(0deg) scale(1); opacity: 1; }
+}
+
+@keyframes cruzeiroLogoFinale {
+  0%, 36% { opacity: 0; transform: translate3d(0, 36px, 120px) scale(0.92); }
+  52% { opacity: 1; transform: translate3d(0, 0, 0) scale(1.04); }
+  88% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 1; transform: translate3d(0, -10px, 0) scale(1.01); }
+}
+
+@keyframes cruzeiroCaptionReveal {
+  0%, 54% { opacity: 0; transform: translateY(12px); }
+  66%, 88% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0.34; transform: translateY(-5px); }
+}
+
+@media (max-width: 760px) {
+  body.editorial-home .broadcast-cruzeiro-constellation {
+    top: 38% !important;
+    width: min(78vw, 360px) !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .broadcast-clock {
+    top: 39% !important;
+    width: min(84vw, 340px) !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .logo-splash-card {
+    width: min(94vw, 390px) !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .logo-splash-brand-copy strong {
+    font-size: clamp(2.05rem, 12vw, 3.25rem) !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .broadcast-cities {
+    bottom: clamp(124px, 18svh, 170px) !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .broadcast-news-lines {
+    bottom: clamp(28px, 5svh, 48px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.editorial-home .logo-splash.is-broadcast-started .broadcast-cruzeiro-constellation {
+    animation: none !important;
+    opacity: 0.76 !important;
+    transform: translate(-50%, -50%) rotateX(12deg) rotateZ(-8deg) scale(0.78) !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .cruzeiro-star,
+  body.editorial-home .logo-splash.is-broadcast-started .constellation-line {
+    animation: none !important;
+    opacity: 0.88 !important;
+  }
+
+  body.editorial-home .logo-splash.is-broadcast-started .constellation-meteor,
+  body.editorial-home .logo-splash.is-broadcast-started .constellation-orbit {
+    animation: none !important;
+    opacity: 0.18 !important;
+  }
+}
+
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .page-shell,
+body.editorial-home.catalogo-site-booting.broadcast-page-ready:not(.site-loaded) .page-shell {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(1.4rem) scale(0.992) !important;
+}
+
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broadcast-started {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(27, 135, 255, 0.58), transparent 38%),
+    linear-gradient(128deg, #00062a 0%, #003f9f 42%, #020817 100%) !important;
+}
+
+.catalog-tv-section {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(79, 164, 255, 0.18);
+  background:
+    radial-gradient(circle at 15% 16%, rgba(79, 164, 255, 0.2), transparent 28rem),
+    radial-gradient(circle at 86% 8%, rgba(255, 214, 106, 0.16), transparent 24rem),
+    linear-gradient(135deg, rgba(2, 14, 29, 0.96), rgba(7, 35, 62, 0.96));
+  color: #f2f8ff;
+}
+
+.catalog-tv-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  background-image:
+    linear-gradient(rgba(142, 204, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(142, 204, 255, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.catalog-tv-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.catalog-tv-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+  gap: clamp(0.9rem, 2vw, 1.3rem);
+  align-items: stretch;
+}
+
+.catalog-tv-feature,
+.catalog-tv-mini {
+  border: 1px solid rgba(142, 204, 255, 0.18);
+  background: rgba(3, 18, 33, 0.66);
+  box-shadow: 0 22px 64px rgba(0, 0, 0, 0.22);
+}
+
+.catalog-tv-feature {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1fr);
+  gap: clamp(0.9rem, 2vw, 1.3rem);
+  min-height: 360px;
+  padding: clamp(0.8rem, 1.8vw, 1.1rem);
+  border-radius: 22px;
+}
+
+.catalog-tv-screen {
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background:
+    linear-gradient(180deg, rgba(1, 8, 16, 0.08), rgba(1, 8, 16, 0.62)),
+    var(--premium-image, var(--tv-image, url("./assets/home-cache/buzz-cultura-show.jpg"))) center / cover no-repeat;
+}
+
+.catalog-tv-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 7px),
+    linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.46));
+  opacity: 0.62;
+}
+
+.catalog-tv-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(70px, 8vw, 96px);
+  height: clamp(70px, 8vw, 96px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(255, 214, 106, 0.94));
+  box-shadow: 0 0 0 12px rgba(255, 214, 106, 0.12), 0 22px 60px rgba(0, 0, 0, 0.38);
+}
+
+.catalog-tv-play::before {
+  content: "";
+  position: absolute;
+  left: 42%;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 24px solid #071423;
+}
+
+.catalog-tv-screen em {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  max-width: calc(100% - 1.6rem);
+  padding: 0.4rem 0.62rem;
+  border-radius: 999px;
+  background: rgba(2, 14, 29, 0.78);
+  color: #ffd66a;
+  font-style: normal;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.catalog-tv-feature > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.74rem;
+  padding: clamp(0.4rem, 1.2vw, 1rem);
+}
+
+.catalog-tv-feature small,
+.catalog-tv-mini small,
+.catalog-tv-transparency {
+  color: #ffd66a;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.catalog-tv-feature h3 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.75rem, 3vw, 3rem);
+  line-height: 0.94;
+  color: #fff8e8;
+}
+
+.catalog-tv-feature p {
+  max-width: 62ch;
+  margin: 0;
+  color: rgba(232, 244, 255, 0.82);
+  line-height: 1.55;
+}
+
+.catalog-tv-feature footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.35rem;
+}
+
+.catalog-tv-feature footer span,
+.catalog-tv-feature footer a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 900;
+}
+
+.catalog-tv-feature footer span {
+  padding: 0.45rem 0.72rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(232, 244, 255, 0.82);
+}
+
+.catalog-tv-feature footer a {
+  padding: 0.48rem 0.82rem;
+  background: #ffd66a;
+  color: #061624;
+}
+
+.catalog-tv-grid {
+  display: grid;
+  gap: 0.78rem;
+}
+
+.catalog-tv-mini {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 0.78rem;
+  align-items: center;
+  min-height: 116px;
+  padding: 0.72rem;
+  border-radius: 18px;
+}
+
+.catalog-tv-mini span {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(1, 8, 16, 0.08), rgba(1, 8, 16, 0.56)),
+    var(--premium-image, var(--tv-image, url("./assets/home-cache/buzz-cruzeiro-03.jpg"))) center / cover no-repeat;
+}
+
+.catalog-tv-mini span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffd66a;
+  box-shadow: 0 0 0 7px rgba(255, 214, 106, 0.16);
+}
+
+.catalog-tv-mini span::before {
+  content: "";
+  position: absolute;
+  left: calc(50% - 3px);
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 11px solid #071423;
+}
+
+.catalog-tv-mini small,
+.catalog-tv-mini strong {
+  min-width: 0;
+  grid-column: 2;
+}
+
+.catalog-tv-mini small {
+  align-self: end;
+  font-size: 0.68rem;
+}
+
+.catalog-tv-mini strong {
+  align-self: start;
+  color: #fff8e8;
+  font-size: 1rem;
+  line-height: 1.18;
+}
+
+.catalog-tv-transparency {
+  margin: 1rem 0 0;
+  padding: 0.78rem 0.9rem;
+  border: 1px solid rgba(255, 214, 106, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 214, 106, 0.08);
+  color: rgba(255, 234, 178, 0.92);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 920px) {
+  .catalog-tv-layout,
+  .catalog-tv-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-tv-feature {
+    min-height: 0;
+  }
+
+  .catalog-tv-screen {
+    min-height: 240px;
+  }
+}
+
+@media (max-width: 560px) {
+  .catalog-tv-section {
+    padding: 1rem !important;
+  }
+
+  .catalog-tv-section .premium-section-head {
+    gap: 0.72rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .catalog-tv-section .premium-section-head p {
+    font-size: 0.9rem;
+  }
+
+  .catalog-tv-feature {
+    gap: 0.72rem;
+    padding: 0.72rem;
+  }
+
+  .catalog-tv-screen {
+    min-height: 168px;
+  }
+
+  .catalog-tv-feature > div {
+    gap: 0.58rem;
+  }
+
+  .catalog-tv-feature p {
+    font-size: 0.9rem;
+  }
+
+  .catalog-tv-feature footer {
+    gap: 0.46rem;
+  }
+
+  .catalog-tv-feature footer span,
+  .catalog-tv-feature footer a {
+    min-height: 34px;
+    font-size: 0.82rem;
+  }
+
+  .catalog-tv-grid {
+    gap: 0.55rem;
+  }
+
+  .catalog-tv-mini {
+    grid-template-columns: 78px minmax(0, 1fr);
+    min-height: 96px;
+    padding: 0.55rem;
+  }
+
+  .catalog-tv-feature h3 {
+    font-size: clamp(1.35rem, 6vw, 1.85rem);
+    line-height: 1.02;
+  }
+
+  .catalog-tv-mini strong {
+    font-size: 0.9rem;
+  }
+
+  .catalog-tv-transparency {
+    margin-top: 0.72rem;
+    padding: 0.64rem 0.7rem;
+    font-size: 0.72rem;
+  }
+}
+
+.catalogo-top-return-loader {
+  position: fixed;
+  left: 50%;
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  z-index: 2147483000;
+  width: min(520px, calc(100vw - 24px));
+  padding: 0.74rem 0.84rem;
+  border: 1px solid rgba(86, 157, 217, 0.35);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(4, 18, 32, 0.96), rgba(10, 37, 61, 0.94));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: #eff8ff;
+  font-family: "Inter", "Sora", system-ui, sans-serif;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 18px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.catalogo-top-return-loader.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.catalogo-top-return-loader.is-leaving {
+  opacity: 0;
+  transform: translate(-50%, 12px);
+}
+
+.catalogo-top-return-loader-track {
+  display: block;
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.catalogo-top-return-loader-track i {
+  display: block;
+  width: 10%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #43b8ff, #ffd66a);
+  box-shadow: 0 0 18px rgba(255, 214, 106, 0.42);
+  transition: width 180ms ease;
+}
+
+.catalogo-top-return-loader-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 0.54rem;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.catalogo-top-return-loader-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalogo-top-return-loader-row strong {
+  color: #ffd66a;
+}
+
+@media (max-width: 620px) {
+  .catalogo-top-return-loader {
+    bottom: calc(0.7rem + env(safe-area-inset-bottom));
+    border-radius: 16px;
+  }
 }
