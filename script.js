@@ -126,9 +126,9 @@ const splashCompactViewportQuery =
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
 const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 520 : 680;
-const splashCinematicDurationMs = 4500;
-const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 6500 : 7600;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 9800 : 10800;
+const splashCinematicDurationMs = 5000;
+const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 2600 : 3200;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 8200 : 9000;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 120 : 300;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 80 : 160;
 const tickerDesktopStaticMedia =
@@ -2249,7 +2249,6 @@ const setupSplashExperience = () => {
     if (splashCopy) {
       splashCopy.textContent = "Abertura de jornal do Vale do Juruá";
     }
-    document.body.classList.add("broadcast-page-ready");
     rememberSplashToday();
     updateSplashProgress(72, "Vale do Juruá no ar");
     await waitForSplashDelay(splashCinematicDurationMs);
