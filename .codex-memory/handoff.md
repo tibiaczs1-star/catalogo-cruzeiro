@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T00:48:58.866Z
+Updated: 2026-05-13T00:55:36.316Z
 
-Home/noticia prontos para subida seletiva: entre-carregamento de matéria usa logo-splash, mobile tem intro tipo app e abertura mais rápida. Incluir no commit somente home/noticia/memoria/rede-social: index.html, early-home-surfaces.js, script.js, styles.css, startup-experience.js, noticia.html, noticia.js, news-data.js, premium-home-redesign.css, assets/social/antonio-rnascimento-jr-facebook.jpg, CODEX_MEMORY.md e .codex-memory/*. Ignorar PubPaid e data/*.
+Publicado em origin/main no commit a6d19e1a. Online em https://catalogo-cruzeiro-web.onrender.com voltou 200 apos 502 momentaneo de deploy e ja contem mobile-app-intro1/Abrindo app. Teste mobile online: sem erros de console, sem loader antigo topReturn, materia abriu normalmente, FCP remoto ~1440ms. Workspace ainda tem alteracoes locais antigas nao relacionadas em PubPaid/data/agents e stashes autostash; nao incluir em commits de home.
 
 ## Next
 
-- Push em main, aguardar deploy Render, validar online e corrigir se aparecer regressão.
+- Validar no celular real do usuario; se ainda parecer lento, reduzir peso inicial de index/styles ou separar shell mobile.

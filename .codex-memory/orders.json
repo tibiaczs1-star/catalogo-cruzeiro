@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T00:48:58.866Z",
+  "lastUpdatedAt": "2026-05-13T00:55:36.316Z",
   "orders": [
     {
       "id": "2026-05-12-subir-validar-online-e-intro-mobile-app",
       "createdAt": "2026-05-13T00:43:07.553Z",
-      "updatedAt": "2026-05-13T00:48:58.866Z",
-      "status": "ready-to-deploy-local",
+      "updatedAt": "2026-05-13T00:55:36.316Z",
+      "status": "completed-online",
       "source": "chat",
       "rawRequest": "agora suba e veja se ta tudo ok online e corrija o mobile ta demorando pra carregar e faça uma intro pra ele tipo app",
       "summary": "Publicar ajustes, validar online, acelerar carregamento mobile e transformar a intro mobile em experiencia tipo app.",
@@ -44,7 +44,7 @@
         "output/playwright/mobile-app-intro-after-20260512.png",
         "output/playwright/navigation-splash-loader-20260512.png"
       ],
-      "notes": "Mobile otimizado localmente: fontes async, API/news e social trends adiados no compact boot, early-home fetch atrasado, splash mobile estilo app e gates mais curtos. Aguardando commit/push e validacao online."
+      "notes": "Publicado no commit a6d19e1a. Render atualizou para 200 com mobile-app-intro1 e Abrindo app. Browser online mobile sem erros. Playwright online mobile: hasMobileIntro=true, body site-loaded, booting=false, FCP ~1440ms no teste remoto, nenhuma chamada /api/news ou social trends antes de 900ms, home->materia usa logoNav=true e topReturn=false, noticia abriu sem loader preso."
     },
     {
       "id": "2026-05-12-corrigir-loader-entre-carregamento-materia",

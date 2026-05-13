@@ -8,6 +8,7 @@
 - `script.js` encurtou os gates mobile da splash, pula espera de fonte no celular, acelera a troca do primer e joga a hidratação dinâmica de notícias para background.
 - `styles.css` transformou a abertura mobile em uma tela tipo app: fundo escuro, card central, ícone arredondado e progresso compacto.
 - Validações locais: `node --check script.js`, `node --check early-home-surfaces.js`, `node --check startup-experience.js`, `node --check noticia.js`; Browser interno mobile sem erros de console; Playwright mobile local com `domContentLoaded ~408ms`, `FCP ~404ms`, splash liberada e `site-loaded`; `npm run review:team` `totalIssues=0`; `npm run perf:budget` `ok=true`.
+- Publicado em `origin/main` no commit `a6d19e1a`; Render passou por 502 momentaneo durante deploy e voltou 200. Validacao online mobile confirmou `mobile-app-intro1`, `Abrindo app`, sem erros de console, FCP remoto ~1440ms, APIs fora da primeira janela de 900ms e home -> materia com `logoNav=true`/`topReturn=false`.
 
 ## Atualizacao rapida 2026-05-12 - Loader correto entre home e materia
 
