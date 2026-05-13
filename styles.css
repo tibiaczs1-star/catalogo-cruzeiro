@@ -25761,6 +25761,23 @@ body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broa
     linear-gradient(128deg, #00062a 0%, #003f9f 42%, #020817 100%) !important;
 }
 
+/* 2026-05-13 emergency: disable splash overlay so the portal always opens. */
+body.editorial-home.site-loaded > .logo-splash,
+body.editorial-home .logo-splash[aria-hidden="true"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.editorial-home.site-loaded .page-shell,
+body.editorial-home:not(.catalogo-site-booting) .page-shell {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
 /* 2026-05-13 hotfix: abertura nunca pode ficar em tela azul vazia. */
 body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-card,
 body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-compass,
