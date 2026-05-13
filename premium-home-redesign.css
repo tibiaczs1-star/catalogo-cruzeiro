@@ -613,6 +613,13 @@ body.editorial-home.site-loaded > .logo-splash {
   pointer-events: none !important;
 }
 
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 body.editorial-home a,
 body.editorial-home button,
 body.editorial-home input,

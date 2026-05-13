@@ -9,6 +9,14 @@
 - Depois do feedback de que a entrada ficou apertada, a galeria saiu de dentro da hero e virou bloco separado logo abaixo, com respiro entre hero/cards/proximo bloco e cards sem espremimento.
 - Validacoes locais: `script.js` sem erro de sintaxe, `premium-home-redesign.css` braces 2271/2271, Playwright gerou captura em `output/playwright/home-entry-separated-cards-20260513.png`; Browser interno bloqueou localhost/127.0.0.1 com `net::ERR_BLOCKED_BY_CLIENT`, entao a captura foi feita via Playwright local.
 
+## Atualizacao rapida 2026-05-13 - Hotfix intro sem bloqueio e subida pendente
+
+- Usuario mostrou online travando com modal "Pagina sem resposta", intro ofuscando a tela, TV antiga com CNN e a parte aprovada ausente; diagnostico: commit anterior estava apenas local (`main` ahead 1), nao havia sido enviado ao `origin/main`.
+- `script.js` desativou a intro `catalogo-cinematic-safe` como camada visual: ela nasce `hidden`, `aria-hidden=true`, `is-released`, nao reabre, dispara evento de splash concluida e deixa a home carregada sem cortina falsa.
+- `index.html` reforcou o failsafe para tambem aplicar `hidden=true` na splash e atualizou cache-bust para `20260513-no-intro1`.
+- `premium-home-redesign.css` adicionou trava para `.logo-splash.catalogo-cinematic-safe` ficar sempre `display:none`, sem pointer events e sem ofuscar relogio/site.
+- Validacao local Playwright: splash `display:none`, `hidden=true`, sem `#resumo-do-dia`, TV oculta sem video regional, sem texto CNN/CBC, cards fora da hero com gap de 20px.
+
 ## Atualizacao rapida 2026-05-13 - Apoiadores sem duplicacao
 
 - Usuario pediu commit/push e, antes de subir, retirar duplicacoes em apoiadores/fundadores.
