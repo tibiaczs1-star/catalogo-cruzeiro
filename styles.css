@@ -25992,6 +25992,118 @@ body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadc
   visibility: visible !important;
 }
 
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-news-lines {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 3 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  transform: none !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities span,
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-news-lines span {
+  position: absolute !important;
+  left: auto !important;
+  right: -32vw !important;
+  top: var(--intro-name-y, 50%) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: max-content !important;
+  max-width: none !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 196, 70, 0.76), rgba(108, 189, 255, 0.5), transparent) !important;
+  color: rgba(225, 242, 255, 0.72) !important;
+  font-family: "Sora", system-ui, sans-serif !important;
+  font-size: clamp(0.72rem, 1.15vw, 1.04rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.28em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 0 18px rgba(90, 185, 255, 0.44), 0 0 26px rgba(246, 168, 37, 0.24) !important;
+  white-space: nowrap !important;
+  opacity: 0 !important;
+  filter: blur(0.1px) !important;
+  mix-blend-mode: screen !important;
+  transform: translate3d(0, -50%, 0) !important;
+  animation: introNamePass 5.8s linear both !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-news-lines span {
+  color: rgba(184, 226, 255, 0.48) !important;
+  font-size: clamp(0.62rem, 0.92vw, 0.86rem) !important;
+  letter-spacing: 0.32em !important;
+  background: linear-gradient(90deg, transparent, rgba(96, 185, 255, 0.48), transparent) !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities span:nth-child(1) {
+  --intro-name-y: 18%;
+  animation-delay: -0.3s !important;
+  animation-duration: 5.6s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities span:nth-child(2) {
+  --intro-name-y: 34%;
+  animation-delay: -1.35s !important;
+  animation-duration: 6.1s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities span:nth-child(3) {
+  --intro-name-y: 52%;
+  animation-delay: -2.15s !important;
+  animation-duration: 5.75s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities span:nth-child(4) {
+  --intro-name-y: 70%;
+  animation-delay: -3.2s !important;
+  animation-duration: 6.25s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-cities span:nth-child(5) {
+  --intro-name-y: 84%;
+  animation-delay: -4.1s !important;
+  animation-duration: 6s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-news-lines span:nth-child(1) {
+  --intro-name-y: 27%;
+  animation-delay: -0.95s !important;
+  animation-duration: 6.4s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-news-lines span:nth-child(2) {
+  --intro-name-y: 62%;
+  animation-delay: -2.65s !important;
+  animation-duration: 6.2s !important;
+}
+
+body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-news-lines span:nth-child(3) {
+  --intro-name-y: 78%;
+  animation-delay: -3.65s !important;
+  animation-duration: 6.6s !important;
+}
+
+@keyframes introNamePass {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -50%, 0) scaleX(0.92);
+  }
+  8%, 72% {
+    opacity: 0.82;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(-132vw - 100%), -50%, 0) scaleX(1);
+  }
+}
+
 @keyframes catalogoApprovedIntroExit {
   0%, 82% {
     opacity: 1;

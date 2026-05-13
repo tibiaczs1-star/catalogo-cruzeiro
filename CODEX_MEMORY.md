@@ -1,5 +1,12 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Nomes atravessando toda a intro
+
+- Usuario pediu que os nomes/textos de fundo da introducao aprovada passassem por toda a abertura, nao so aparecessem em pontos isolados.
+- `styles.css` adicionou `introNamePass` para `.broadcast-cities` e `.broadcast-news-lines`: os nomes atravessam a tela em alturas diferentes, com delays negativos para ja estarem em movimento desde o inicio da intro.
+- `index.html` atualizou cache-bust para `20260513-approved-intro2`.
+- Validacoes locais: `node --check script.js`; CSS braces `3891/3891`.
+
 ## Atualizacao rapida 2026-05-13 - Intro segura sem travar a home
 
 - Usuario reportou que, apos hotfixes anteriores, o site continuava preso na tela azul e a intro cinematografica tinha sido removida.
