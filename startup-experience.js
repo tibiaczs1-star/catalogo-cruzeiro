@@ -1291,7 +1291,8 @@
   }
 
   function updateTopLoaderProgress(loader, progress, label = "") {
-    const safeProgress = Math.max(0, Math.min(100, Math.round(progress)));
+    const isPersistentActionLoader = loader.classList.contains("is-action-loader");
+    const safeProgress = Math.max(0, Math.min(isPersistentActionLoader ? 94 : 100, Math.round(progress)));
     const percentNode = loader.querySelector("[data-top-loader-percent]");
     const textNode = loader.querySelector("[data-top-loader-text]");
     const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
@@ -1512,7 +1513,7 @@
         return;
       }
       finished = true;
-      updateTopLoaderProgress(loader, 100, "abrindo página");
+      updateTopLoaderProgress(loader, persistUntilNavigation ? 94 : 100, "preparando página");
       if (persistUntilNavigation) {
         return;
       }

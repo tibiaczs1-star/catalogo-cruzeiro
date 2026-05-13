@@ -467,9 +467,9 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260512-intro-visible1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260512-clock-loader1";
 const browserStateVersionKey = "catalogo_browser_state_version_v1";
-const browserStateVersion = "20260512-intro-visible1";
+const browserStateVersion = "20260512-clock-loader1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
@@ -477,8 +477,8 @@ const portalWarmStaticUrls = [
   "./premium-home-redesign.css?v=20260512-intro-visible1",
   "./startup-experience.css?v=20260511-cookie-passive1",
   "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260512-intro-visible1",
-  "./startup-experience.js?v=20260512-intro-visible1",
+  "./script.js?v=20260512-clock-loader1",
+  "./startup-experience.js?v=20260512-clock-loader1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
@@ -14787,17 +14787,32 @@ const showInlineNavigationFallbackLoader = (options = {}) => {
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", label);
   loader.innerHTML = `
-    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:100%"></i></span>
+    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:14%"></i></span>
     <span class="catalogo-top-return-loader-row">
       <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
-      <strong data-top-loader-percent>100%</strong>
+      <strong data-top-loader-percent>0%</strong>
     </span>
   `;
   document.body.appendChild(loader);
 
-  return waitForSplashDelay(3000).then(() => {
-    const textNode = loader.querySelector("[data-top-loader-text]");
-    if (textNode) textNode.textContent = "abrindo página";
+  const percentNode = loader.querySelector("[data-top-loader-percent]");
+  const textNode = loader.querySelector("[data-top-loader-text]");
+  const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
+  const startedAt = Date.now();
+
+  return new Promise((resolve) => {
+    const timer = window.setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      const progress = Math.min(94, Math.round((elapsed / 3600) * 82) + 8);
+      if (percentNode) percentNode.textContent = `${progress}%`;
+      if (barNode) barNode.style.width = `${Math.max(14, progress)}%`;
+      if (textNode && elapsed > 1900) textNode.textContent = "preparando página";
+
+      if (elapsed >= 3600) {
+        window.clearInterval(timer);
+        resolve();
+      }
+    }, 90);
   });
 };
 
@@ -14829,7 +14844,7 @@ const navigateWithArticleLoader = (href) => {
 
   Promise.race([
     Promise.resolve(loaderPromise),
-    new Promise((resolve) => window.setTimeout(resolve, 3600))
+    new Promise((resolve) => window.setTimeout(resolve, 5600))
   ])
     .catch(() => undefined)
     .then(navigate);
