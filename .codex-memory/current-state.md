@@ -1,16 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T05:54:02.739Z
+Updated: 2026-05-13T18:45:43.077Z
 
 ## Active Goal
 
-- Hotfix splash da home
+- Home CZS com regra mestre editorial e fluxo mobile validado
 
 ## Summary
 
-Corrigida abertura presa: logo forçada no modo azul, failsafe reduzido e hard-release no script para liberar a home.
+Regra central do CZS registrada em docs/CZS_PRODUCT_MASTER_RULES.md e AGENTS.md. Home ganhou fluxo editorial de retencao: linha viva, assunto dominante, videos/checagem, editorias, servicos, comunidade e arquivo. Blocos antigos redundantes foram ocultados. Logo/cache atualizados.
 
 ## Next
 
-- Rodar review:team
-- commitar index/styles/script/memorias e subir para main.
+- Commitar e subir escopo da entrega; depois validar online no Render em desktop e mobile.

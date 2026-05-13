@@ -16,6 +16,36 @@
 - `script.js` detecta `catalogo-cinematic-safe`, limpa failsafes, garante `site-loaded` e retorna sem tentar controlar/liberar a splash.
 - Validacoes locais: `node --check script.js`; CSS braces `3862/3862`; HTTP local `200`, HTML com `safe-cinematic1` e body `site-loaded`.
 
+## Atualizacao rapida 2026-05-13 - Regra mestre editorial e home por retencao
+
+- Usuario forneceu prompt-mestre para o CZS virar "painel diario do Vale do Jurua", com prioridade hiperlocal, utilidade publica e leitura em ate poucos segundos.
+- Criado `docs/CZS_PRODUCT_MASTER_RULES.md` e `AGENTS.md` passou a apontar para esse documento antes de qualquer trabalho em home/UX/editorial.
+- `index.html` ganhou fluxo editorial novo na coluna principal: `linha-viva`, `assunto-dominante`, `videos-checagem`, `editorias-principais`, `servicos-uteis`, `comunidade-prioritaria` e `arquivo-memoria`.
+- Hero foi simplificado para foco em rotina local, CTA `Ler em 1 minuto` e box de video resumo; painel antigo de galeria da hero ficou `hidden` como redundante.
+- `styles.css` ganhou camada mobile-first para os blocos de retencao e ocultou blocos redundantes (`latest-news-panel`, colunas, especiais, entretenimento/trending/agenda/comentarios) para reduzir grade infinita.
+- Logo ajustada: `assets/logo-czs.svg` redesenhada com estrela dentro do aro, `assets/logo-czs.png` exportada, e cache-bust geral atualizado para `20260513-editorial-flow1`.
+- Validacoes locais finais: `node --check script.js catalogo-app-core.js catalogo-sw.js`; CSS braces `3917/3917`; `npm run perf:budget` ok; `npm run review:team` totalIssues=0.
+- Playwright local com SW bloqueado para evitar cache: desktop/mobile `siteLoaded=true`, splash oculta, sem overflow horizontal; mobile `fpsHint=58`, quality `balanced`, fluxo editorial presente e painel antigo oculto.
+
+## Atualizacao rapida 2026-05-13 - Fluxo AAA de abertura, cache e qualidade adaptativa
+
+- Usuario pediu reconstrucao definitiva do fluxo cinematografico, limpeza estrutural, cache persistente, performance AAA e validacao mobile/web.
+- `catalogo-app-core.js` foi criado como nucleo modular com `AdaptiveQualityManager`, `PerformanceMonitor`, `CacheManager`, `AssetManager`, `RoutePreloader`, `LoaderManager` e `MemoryCleaner`.
+- `catalogo-sw.js` foi criado com Cache API/versionamento `20260513-aaa-core1`, cache estatico critico e runtime cache com stale-while-revalidate para assets locais.
+- `index.html` agora reduz o preload inicial de noticias para `/api/news?limit=80`, agenda preloads em idle, evita duplicacao de preloads, carrega `catalogo-app-core.js` antes da home e mostra "Inicializando experiencia..." na splash.
+- `styles.css` recebeu camada final AAA para splash com grid futurista leve, glass, scan cinematografico, modo lite adaptativo e pausa de animacoes quando a aba fica oculta/descartando.
+- Limpeza estrutural: removidos `startup-sequence-v2.js` e `startup-sequence-v2.css`, sem referencias em HTML/JS/CSS.
+- Validacoes locais: `node --check catalogo-app-core.js catalogo-sw.js script.js`; CSS braces `3866/3866`; `npm run perf:budget` ok; `npm run review:team` totalIssues=0 e PubPaid guard OK.
+- Playwright local: desktop `siteLoaded=true`, splash `aria-hidden=true`, quality `cinematic`, uma chamada `/api/news?limit=80`; mobile `siteLoaded=true`, splash oculta, fpsHint 60, sem overflow horizontal e sem erros de console.
+
+## Atualizacao rapida 2026-05-13 - Instagram atualizado via BlueStacks
+
+- Usuario liberou acesso ao Instagram pelo BlueStacks/ADB para atualizar noticias e stories do perfil `catalogo_czs_`.
+- `node scripts/capture-latest-news.js` rodou com `ok=true`: 199 itens captados, 55 de hoje, acervo ativo 420 e arquivo 1000.
+- Geradas 6 artes verticais 1080x1920 em `output/instagram/stories-20260513/` com chamadas de noticias verificadas: Rua Tarauaca/Cruzeiro do Sul, porto alternativo em Rodrigues Alves, seguranca nas escolas, graos no Acre, Porto Walter e seguranca publica/Mailza.
+- BlueStacks/ADB alvo `emulator-5554`; artes copiadas para `/sdcard/Pictures/CatalogoStories20260513/` e publicadas no `Seu story` do Instagram.
+- Confirmacao visual: `.codex-temp/instagram-story-sequence-check.png` mostra story novo no perfil com timestamp de 2 min e card 5/6.
+- Validacoes: `node scripts/sanitize-public-language.js` sem issues; `npm run review:team` com `totalIssues=0`.
 ## Atualizacao rapida 2026-05-13 - Hotfix splash presa sem logo
 
 - Usuario reportou que a home online ficou presa em uma tela azul escura vazia, sem abrir o site e sem mostrar a logo na abertura.

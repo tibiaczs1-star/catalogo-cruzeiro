@@ -2,6 +2,14 @@
 
 Lista de agentes personalizados criados para este projeto.
 
+## Regra central do CZS
+
+Antes de mexer na homepage, arquitetura editorial, UX, retenção, cards, vídeo, editorias, serviços ou módulos públicos do CZS, leia e siga:
+
+`docs/CZS_PRODUCT_MASTER_RULES.md`
+
+Resumo obrigatório: o CZS deve ser o painel diário do Vale do Juruá, não um portal genérico. A prioridade é hiperlocal, a home deve responder em poucos segundos o que aconteceu agora, o que muda hoje, se o fato é confiável e o que o leitor precisa acompanhar.
+
 ## 📱 Agente Instagram Manager
 
 **Descrição**: Gerencia conteúdo do Instagram, planejamento de postagens, estratégia de crescimento, community management e análise de métricas.

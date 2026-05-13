@@ -32,7 +32,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
-    <link rel="preload" as="image" href="./assets/logo-czs.svg" type="image/svg+xml" fetchpriority="high" />
+    <link rel="preload" as="image" href="./assets/logo-czs.svg?v=20260513-editorial-flow2" type="image/svg+xml" fetchpriority="high" />
     <script>
       window.__CATALOGO_COMPACT_BOOT__ =
         typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
@@ -40,9 +40,13 @@
         if (window.location.protocol === "file:") {
           return Promise.resolve(null);
         }
+        if (window.__CATALOGO_NEWS_PRELOAD_STARTED__) {
+          return window.__CATALOGO_NEWS_PRELOAD__ || Promise.resolve(null);
+        }
+        window.__CATALOGO_NEWS_PRELOAD_STARTED__ = true;
         window.__CATALOGO_NEWS_PRELOAD__ =
           window.__CATALOGO_NEWS_PRELOAD__ ||
-          fetch("./api/news?limit=1000", {
+          fetch("./api/news?limit=80", {
             method: "GET",
             credentials: "same-origin"
           })
@@ -54,6 +58,10 @@
         if (window.location.protocol === "file:") {
           return Promise.resolve(null);
         }
+        if (window.__CATALOGO_SOCIAL_TRENDS_PRELOAD_STARTED__) {
+          return window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ || Promise.resolve(null);
+        }
+        window.__CATALOGO_SOCIAL_TRENDS_PRELOAD_STARTED__ = true;
         window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ =
           window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ ||
           fetch("./api/social-trends?limit=8", {
@@ -69,9 +77,16 @@
         manifest.rel = "manifest";
         manifest.href = "./site.webmanifest";
         document.head.appendChild(manifest);
+        const scheduleBootPreload = (callback, timeout) => {
+          if (typeof window.requestIdleCallback === "function") {
+            window.requestIdleCallback(callback, { timeout });
+            return;
+          }
+          window.setTimeout(callback, timeout);
+        };
+        scheduleBootPreload(window.__CATALOGO_START_NEWS_PRELOAD__, window.__CATALOGO_COMPACT_BOOT__ ? 1200 : 800);
         if (!window.__CATALOGO_COMPACT_BOOT__) {
-          window.__CATALOGO_START_NEWS_PRELOAD__();
-          window.__CATALOGO_START_SOCIAL_TRENDS_PRELOAD__();
+          scheduleBootPreload(window.__CATALOGO_START_SOCIAL_TRENDS_PRELOAD__, 1800);
         }
       } else {
         window.__CATALOGO_NEWS_PRELOAD__ = Promise.resolve(null);
@@ -94,7 +109,7 @@
         content: "";
         width: clamp(78px, 14vw, 120px);
         height: clamp(78px, 14vw, 120px);
-        background: url("./assets/logo-czs.svg") center / contain no-repeat;
+        background: url("./assets/logo-czs.svg?v=20260513-editorial-flow2") center / contain no-repeat;
         animation: initialLogoBreath 1.2s ease-in-out infinite;
       }
       body.catalogo-site-booting .logo-splash.is-broadcast-started { background: transparent; }
@@ -131,7 +146,7 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260513-approved-intro2" />
+    <link rel="stylesheet" href="./styles.css?v=20260513-editorial-flow2" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
@@ -202,7 +217,7 @@
       </div>
       <article class="logo-splash-card">
         <div class="logo-splash-compass" aria-hidden="true">
-          <img src="./assets/logo-czs.svg" alt="" decoding="async" fetchpriority="high" />
+          <img src="./assets/logo-czs.svg?v=20260513-editorial-flow2" alt="" decoding="async" fetchpriority="high" />
         </div>
         <p class="logo-splash-kicker">Portal</p>
         <div class="logo-splash-brand">
@@ -213,10 +228,10 @@
           </div>
         </div>
         <p class="logo-splash-copy">
-          Carregando estrutura real
+          Inicializando experiência...
         </p>
         <div class="logo-splash-meta">
-          <span id="logo-splash-status">Preparando a capa</span>
+          <span id="logo-splash-status">Inicializando experiência...</span>
           <span class="logo-splash-readiness">
             <span id="logo-splash-date">Leitura regional</span>
             <strong id="logo-splash-percent">0%</strong>
@@ -579,7 +594,7 @@
         <section class="hero-newsroom-shell hero-restored-shell" aria-label="Abertura principal do Catálogo Cruzeiro do Sul">
           <div class="hero-constellation-intro" aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span>
-            <img src="./assets/logo-czs.svg" alt="" />
+            <img src="./assets/logo-czs.svg?v=20260513-editorial-flow2" alt="" />
           </div>
           <div class="hero-tourism-backdrop" aria-hidden="true">
             <span class="hero-tourism-slide is-active" data-hero-tourism-slide></span>
@@ -597,13 +612,13 @@
 
           <div class="hero-newsroom-copy hero-restored-copy">
             <p class="eyebrow">cruzeiro do sul e vale do jurua</p>
-            <h1>Cruzeiro do Sul e o Vale do Juruá com notícia, serviço e agenda em um só lugar.</h1>
+            <h1>O que muda a rotina de Cruzeiro do Sul hoje.</h1>
             <p class="hero-tourism-summary-copy" data-hero-tourism-summary-copy>
-              Notícias, serviços e agenda do Juruá em leitura rápida.
+              Manchete local, contexto curto e caminho direto para ler.
             </p>
             <div class="hero-newsroom-actions">
-              <a class="solid-button" href="#radar">Ler principais notícias</a>
-              <a class="outline-button" href="./catalogo-servicos.html">Explorar serviços</a>
+              <a class="solid-button" href="#linha-viva">Ler em 1 minuto</a>
+              <a class="outline-button" href="#servicos-uteis">Serviços úteis</a>
             </div>
             <a class="hero-tourism-meta" href="#radar" data-hero-tourism-meta-link aria-label="Ler notícia em destaque">
               <span class="hero-tourism-kicker" data-hero-tourism-kicker>destaque principal</span>
@@ -617,6 +632,12 @@
               <a href="#social">Festas & Social</a>
               <a href="#arquivo">Arquivo do mês</a>
             </nav>
+            <aside class="hero-video-summary" aria-label="Vídeo resumo do dia">
+              <span class="hero-video-chip">vídeo</span>
+              <strong>Resumo do dia</strong>
+              <small>1 minuto com os fatos que mexem na cidade.</small>
+              <a href="#videos-checagem">Assistir resumo</a>
+            </aside>
             <div class="hero-tourism-dots" data-hero-tourism-dots aria-label="Trocar destaque principal"></div>
             <a
               class="hero-photo-credit"
@@ -670,7 +691,7 @@
             <div class="hero-desktop-topic-dots" data-hero-topic-dots aria-label="Paginação dos destaques"></div>
           </section>
 
-          <section class="hero-newsroom-panel hero-office-panel" aria-label="Galeria dos destaques do dia no Juruá">
+          <section class="hero-newsroom-panel hero-office-panel editorial-redundant-panel" aria-label="Galeria dos destaques do dia no Juruá" hidden>
             <div class="hero-panel-row hero-panel-row-gallery">
               <span class="hero-panel-icon hero-panel-icon-star" aria-hidden="true"></span>
               <span class="hero-panel-copy">
@@ -745,6 +766,120 @@
           </a>
         </section>
         <div class="content-column">
+          <section class="editorial-retention-flow" aria-label="Fluxo editorial principal">
+            <section id="linha-viva" class="retention-block live-line-block" aria-label="Linha viva do dia">
+              <div class="retention-head">
+                <span>Linha viva do dia</span>
+                <h2>Atualizações que mudam a rotina</h2>
+              </div>
+              <div class="live-line-grid">
+                <a href="./arquivo.html?periodo=hoje" class="live-line-card">
+                  <time>Agora</time>
+                  <strong>Serviços, ruas e avisos públicos monitorados.</strong>
+                </a>
+                <a href="#clima-alertas" class="live-line-card">
+                  <time>Hoje</time>
+                  <strong>Rio, chuva e alertas em leitura rápida.</strong>
+                </a>
+                <a href="#servicos-uteis" class="live-line-card">
+                  <time>Útil</time>
+                  <strong>Telefones e canais essenciais reunidos.</strong>
+                </a>
+              </div>
+            </section>
+
+            <section id="assunto-dominante" class="retention-block dominant-topic-block" aria-label="Assunto dominante do dia">
+              <div class="retention-head">
+                <span>Assunto dominante</span>
+                <h2>Rio, clima e serviços no radar</h2>
+              </div>
+              <div class="dominant-topic-layout">
+                <a href="#clima-alertas" class="dominant-topic-main">
+                  <small>Tema central</small>
+                  <strong>Impactos no deslocamento, saúde e atendimento público.</strong>
+                  <span>Ver quadro completo</span>
+                </a>
+                <div class="dominant-topic-links">
+                  <a href="./arquivo.html?busca=cheia">Cheia</a>
+                  <a href="./arquivo.html?busca=sa%C3%BAde">Saúde</a>
+                  <a href="./arquivo.html?busca=seguran%C3%A7a">Segurança</a>
+                </div>
+              </div>
+            </section>
+
+            <section id="videos-checagem" class="retention-block video-check-block" aria-label="Vídeos e checagem">
+              <div class="retention-head">
+                <span>Vídeos e checagem</span>
+                <h2>Resumo rápido e versões verificadas</h2>
+              </div>
+              <div class="video-check-grid">
+                <a href="#tv-catalogo" class="video-check-feature">
+                  <span aria-hidden="true">▶</span>
+                  <strong>Vídeo local em destaque</strong>
+                  <small>Fonte, crédito e contexto.</small>
+                </a>
+                <a href="./arquivo.html?busca=checagem" class="check-card">Checar versões</a>
+                <a href="./arquivo.html?busca=video" class="check-card">Ver vídeos</a>
+              </div>
+            </section>
+
+            <section id="editorias-principais" class="retention-block section-directory-block" aria-label="Editorias principais">
+              <div class="retention-head">
+                <span>Editorias</span>
+                <h2>Escolha o assunto</h2>
+              </div>
+              <nav class="section-directory-grid" aria-label="Editorias principais">
+                <a href="./arquivo.html?busca=cidade">Cidade</a>
+                <a href="#clima-alertas">Rio & Clima</a>
+                <a href="./arquivo.html?busca=sa%C3%BAde">Saúde</a>
+                <a href="./arquivo.html?busca=pol%C3%ADtica">Política</a>
+                <a href="./arquivo.html?busca=seguran%C3%A7a">Segurança</a>
+                <a href="#participacao-comunitaria">Comunidade</a>
+                <a href="#servicos-uteis">Serviços</a>
+                <a href="./arquivo.html?busca=cultura">Cultura</a>
+              </nav>
+            </section>
+
+            <section id="servicos-uteis" class="retention-block useful-services-block" aria-label="Serviços úteis">
+              <div class="retention-head">
+                <span>Serviços úteis</span>
+                <h2>Resolver agora</h2>
+              </div>
+              <div class="useful-services-grid">
+                <a href="#catalogo-telefonico">Telefones</a>
+                <a href="./catalogo-servicos.html?busca=prefeitura">Prefeitura</a>
+                <a href="./catalogo-servicos.html?busca=saude">Saúde</a>
+                <a href="./catalogo-servicos.html?busca=farmacia">Farmácia</a>
+                <a href="./catalogo-servicos.html?busca=energia">Energia</a>
+                <a href="#clima-alertas">Defesa Civil</a>
+              </div>
+            </section>
+
+            <section id="comunidade-prioritaria" class="retention-block community-priority-block" aria-label="Comunidade">
+              <div class="retention-head">
+                <span>Comunidade</span>
+                <h2>Bairro, foto e denúncia verificada</h2>
+              </div>
+              <div class="community-priority-grid">
+                <a href="#midia-galeria">Fotos</a>
+                <a href="#participacao-comunitaria">Bairro</a>
+                <a href="#participacao-comunitaria">Participar</a>
+                <a href="#participacao-comunitaria">Denunciar</a>
+              </div>
+            </section>
+
+            <section id="arquivo-memoria" class="retention-block archive-memory-block" aria-label="Arquivo e memória">
+              <div class="retention-head">
+                <span>Arquivo e memória</span>
+                <h2>Linha do tempo do mês</h2>
+              </div>
+              <div class="archive-memory-actions">
+                <a href="./arquivo.html?periodo=hoje">Hoje</a>
+                <a href="#arquivo-vivo">Histórico</a>
+                <a href="./arquivo.html">Arquivo completo</a>
+              </div>
+            </section>
+          </section>
           <section id="o-que-importa" class="what-matters-now reveal" aria-label="Juruá em destaque agora">
             <div class="what-matters-head">
               <div>
@@ -1572,7 +1707,7 @@
       >
         <section class="footer-brand" aria-label="Catálogo Cruzeiro do Sul">
           <div class="footer-brand-mark" aria-hidden="true">
-            <img src="./assets/logo-czs.svg" alt="" loading="lazy" decoding="async" />
+            <img src="./assets/logo-czs.svg?v=20260513-editorial-flow2" alt="" loading="lazy" decoding="async" />
           </div>
           <p class="eyebrow">Catálogo Cruzeiro do Sul</p>
           <h2 id="footer-title">Jornal local, serviço público e agenda do Vale do Juruá.</h2>
@@ -1825,18 +1960,7 @@
     </div>
 
     <script>
-      if (window.location.protocol !== "file:") {
-        const startNewsPreload = function () {
-          if (typeof window.__CATALOGO_START_NEWS_PRELOAD__ === "function") {
-            window.__CATALOGO_START_NEWS_PRELOAD__();
-          }
-        };
-        if (window.__CATALOGO_COMPACT_BOOT__) {
-          window.setTimeout(startNewsPreload, 760);
-        } else {
-          startNewsPreload();
-        }
-      } else {
+      if (window.location.protocol === "file:") {
         window.__CATALOGO_NEWS_PRELOAD__ = window.__CATALOGO_NEWS_PRELOAD__ || Promise.resolve(null);
       }
     </script>
@@ -1876,6 +2000,7 @@
         }, window.__CATALOGO_COMPACT_BOOT__ ? 7000 : 8500);
       })();
     </script>
+    <script defer src="./catalogo-app-core.js?v=20260513-editorial-flow2"></script>
     <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
   <script defer src="./script.js?v=20260513-approved-intro2"></script>
     <script>
