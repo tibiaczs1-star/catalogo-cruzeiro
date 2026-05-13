@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T05:36:57.672Z
+Updated: 2026-05-13T05:54:02.908Z
 
-Aplicado acabamento premium no bloco #founders: background azul profundo, brilho, flutuação 3D, zoom nas logos, cache-bust founder-premium1 e logos Grupo AS/Recommencer trocadas para PNG.
+Hotfix aplicado para tela azul vazia da splash: CSS força logo, HTML reduz failsafe e JS força release depois da janela da abertura.
 
 ## Next
 
-- Conferir review:team; capturas em output/playwright/founders-premium-3d-desktop-20260513-v5.png e mobile-v6.png.
+- Subir commit e validar produção com CSS/JS cache-bust 20260513-splash-logo-hotfix1.

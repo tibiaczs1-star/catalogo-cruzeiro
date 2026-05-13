@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T05:30:23.033Z",
+  "lastUpdatedAt": "2026-05-13T05:54:02.609Z",
   "orders": [
     {
       "id": "2026-05-13-codex-sem-perguntas-permissao",
@@ -9410,6 +9410,36 @@
       "source": "chat",
       "rawRequest": "Corrigir Informar erro para fila primaria da Cheffe, trocar hierarquia Ler materia/Informar erro, buscar melhor foto na fonte quando houver fallback, sincronizar acervo amplo e clarear metricas como 81.",
       "summary": "Ajustar CTA de cards, fila primaria da Cheffe, imagens de fonte, acervo amplo e rotulos de metricas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-operar-instagram-via-bluestacks-adb-com-noticias-stories-e-plano-de-crescimento",
+      "createdAt": "2026-05-13T05:50:31.947Z",
+      "updatedAt": "2026-05-13T05:50:31.947Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Acessar Instagram pelo BlueStacks via ADB, atualizar com noticias e stories e trabalhar crescimento do perfil.",
+      "summary": "Operar Instagram via BlueStacks/ADB com noticias, stories e plano de crescimento.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-corrigir-splash-abertura-presa-sem-logo-apos-deploy-garantindo-logo-visivel-e-li",
+      "createdAt": "2026-05-13T05:54:02.609Z",
+      "updatedAt": "2026-05-13T05:54:02.609Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Depois do deploy do mural premium, a home ficou presa em uma tela azul escura vazia sem abrir e sem logo; corrigir e subir hotfix.",
+      "summary": "Corrigir splash/abertura presa sem logo após deploy, garantindo logo visível e liberação rápida da home.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

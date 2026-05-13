@@ -2288,6 +2288,7 @@ const setupSplashExperience = () => {
     }
 
     window.removeEventListener("catalogo:deferred-boot-progress", handleDeferredBootProgress);
+    window.clearTimeout(hardReleaseTimer);
     clearSplashFailsafe();
     updateSplashProgress(100, "Portal pronto para abrir");
     splashRoot.classList.remove("is-shell-preparing", "is-broadcast-started");
@@ -2310,6 +2311,12 @@ const setupSplashExperience = () => {
 
     rememberSplashToday();
   };
+
+  const hardReleaseTimer = window.setTimeout(() => {
+    if (!splashReleased) {
+      releaseSplash();
+    }
+  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1100);
 
   const currentTime =
     typeof performance !== "undefined" && typeof performance.now === "function"

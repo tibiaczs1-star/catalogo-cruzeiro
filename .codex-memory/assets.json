@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T05:36:57.674Z",
+  "lastUpdatedAt": "2026-05-13T05:54:02.927Z",
   "assets": [
     {
       "id": "instagram-render-assets-20260513",
@@ -1960,6 +1960,15 @@
       "note": "Validação mobile do mural de fundadores com animação 3D ativa e sem overflow horizontal.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-13T05:36:57.674Z"
+    },
+    {
+      "id": "splash-hotfix-released-local-20260513-png",
+      "kind": "screenshot",
+      "path": "output/playwright/splash-hotfix-released-local-20260513.png",
+      "source": "workspace",
+      "note": "Validação local da home liberada após hotfix da splash presa sem logo.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-13T05:54:02.927Z"
     }
   ]
 }

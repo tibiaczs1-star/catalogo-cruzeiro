@@ -25761,6 +25761,36 @@ body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broa
     linear-gradient(128deg, #00062a 0%, #003f9f 42%, #020817 100%) !important;
 }
 
+/* 2026-05-13 hotfix: abertura nunca pode ficar em tela azul vazia. */
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-card,
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-compass,
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-shell-preparing .logo-splash-compass img,
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broadcast-started > *,
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broadcast-started .logo-splash-card,
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broadcast-started .logo-splash-compass,
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broadcast-started .logo-splash-compass img {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+body.editorial-home.catalogo-site-booting:not(.site-loaded) .logo-splash.is-broadcast-started::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  top: 44% !important;
+  z-index: 10 !important;
+  width: clamp(84px, 9vw, 132px) !important;
+  height: clamp(84px, 9vw, 132px) !important;
+  border-radius: 50% !important;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.18), transparent 62%),
+    url("./assets/logo-czs.svg") center / contain no-repeat !important;
+  filter: drop-shadow(0 0 30px rgba(246, 168, 37, 0.42)) !important;
+  transform: translate(-50%, -50%) !important;
+  animation: safeLogoBreath 1.18s ease-in-out infinite !important;
+  pointer-events: none !important;
+}
+
 .catalog-tv-section {
   position: relative;
   overflow: hidden;

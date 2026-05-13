@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Hotfix splash presa sem logo
+
+- Usuario reportou que a home online ficou presa em uma tela azul escura vazia, sem abrir o site e sem mostrar a logo na abertura.
+- `index.html` reduziu o failsafe inline da splash para 7s no mobile/8,5s no desktop e atualizou cache-bust de `styles.css`/`script.js` para `20260513-splash-logo-hotfix1`.
+- `script.js` ganhou hard-release dentro da experiencia da splash para chamar `releaseSplash()` caso a abertura nao finalize apos a janela cinematografica.
+- `styles.css` passou a forcar visibilidade da logo/card no modo `is-shell-preparing` e `is-broadcast-started`, alem de colocar uma logo central via `::after` para evitar tela azul vazia.
+- Validacoes locais: `node --check script.js`, CSS braces `3848/3848`, Playwright confirmou `site-loaded`, splash `aria-hidden=true`, logo com `naturalWidth=256` e page shell visivel.
+
 ## Atualizacao rapida 2026-05-13 - Mural de fundadores premium
 
 - Usuario pediu que o bloco de fundadores ficasse mais premium, com logos em fundo azul/transparente e movimento 3D rotacional com zoom in/out.
