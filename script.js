@@ -125,10 +125,10 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 520 : 680;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 360 : 520;
 const splashCinematicDurationMs = 5000;
-const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 2600 : 3200;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 8200 : 9000;
+const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 900 : 1200;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 6800 : 7600;
 const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 120 : 300;
 const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 80 : 160;
 const tickerDesktopStaticMedia =
@@ -14730,6 +14730,55 @@ const navigateWithArticleLoader = (href) => {
   window.setTimeout(navigate, 1100);
 };
 
+const isInternalPageLink = (link) => {
+  const href = link?.getAttribute?.("href") || "";
+  if (!href || href.startsWith("#") || /^mailto:|^tel:|^javascript:/i.test(href)) {
+    return false;
+  }
+
+  try {
+    const targetUrl = new URL(href, window.location.href);
+    if (targetUrl.origin !== window.location.origin) {
+      return false;
+    }
+
+    return /\/(?:noticia|arquivo|galeria|catalogo-servicos)\.html$/i.test(targetUrl.pathname);
+  } catch (_error) {
+    return false;
+  }
+};
+
+const getInternalPageLoaderLabel = (href = "") => {
+  if (/galeria\.html/i.test(href)) return "Abrindo galeria";
+  if (/arquivo\.html/i.test(href)) return "Abrindo arquivo";
+  if (/catalogo-servicos\.html/i.test(href)) return "Abrindo serviços";
+  return "Abrindo página";
+};
+
+const navigateWithInternalPageLoader = (href, label = "Abrindo página") => {
+  let navigated = false;
+  const navigate = () => {
+    if (navigated) {
+      return;
+    }
+    navigated = true;
+    window.location.href = href;
+  };
+
+  const loaderPromise = window.CatalogoPageLoader?.showForNavigation
+    ? window.CatalogoPageLoader.showForNavigation({ href, label })
+    : showInlineNavigationFallbackLoader({ href, label });
+
+  Promise.race([
+    Promise.resolve(loaderPromise),
+    new Promise((resolve) => window.setTimeout(resolve, 520))
+  ])
+    .catch(() => undefined)
+    .then(navigate);
+
+  window.setTimeout(navigate, 900);
+};
+
 const handleArticleNavigationClick = (event) => {
   const link = event.target instanceof Element ? event.target.closest('a[href*="noticia.html?slug="]') : null;
   if (!link) {
@@ -14760,6 +14809,25 @@ const handleArticleNavigationClick = (event) => {
 };
 
 document.addEventListener("click", handleArticleNavigationClick, { capture: true });
+
+document.addEventListener(
+  "click",
+  (event) => {
+    const link = event.target instanceof Element ? event.target.closest("a[href]") : null;
+    if (!link || isInternalArticleLink(link) || !isInternalPageLink(link)) {
+      return;
+    }
+
+    if (!shouldHandleArticleNavigationClick(event, link)) {
+      return;
+    }
+
+    event.preventDefault();
+    const href = new URL(link.getAttribute("href") || "", window.location.href).href;
+    navigateWithInternalPageLoader(href, getInternalPageLoaderLabel(href));
+  },
+  { capture: true }
+);
 
 const getAnchorScrollOffset = () => {
   const headerStack = document.querySelector("#site-header-stack");

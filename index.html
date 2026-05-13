@@ -78,6 +78,33 @@
         window.__CATALOGO_SOCIAL_TRENDS_PRELOAD__ = Promise.resolve(null);
       }
     </script>
+    <style id="critical-logo-preloader">
+      body.catalogo-site-booting { overflow: hidden; }
+      body.catalogo-site-booting .page-shell { opacity: 0; visibility: hidden; pointer-events: none; }
+      body.catalogo-site-booting .logo-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        display: grid;
+        place-items: center;
+        background: #ffffff;
+      }
+      body.catalogo-site-booting .logo-splash > * { opacity: 0; visibility: hidden; }
+      body.catalogo-site-booting .logo-splash::before {
+        content: "";
+        width: clamp(78px, 14vw, 120px);
+        height: clamp(78px, 14vw, 120px);
+        background: url("./assets/logo-czs.svg") center / contain no-repeat;
+        animation: initialLogoBreath 1.2s ease-in-out infinite;
+      }
+      body.catalogo-site-booting .logo-splash.is-broadcast-started { background: transparent; }
+      body.catalogo-site-booting .logo-splash.is-broadcast-started > * { opacity: revert; visibility: revert; }
+      body.catalogo-site-booting .logo-splash.is-broadcast-started::before { display: none; }
+      @keyframes initialLogoBreath {
+        0%, 100% { transform: scale(1); opacity: 0.82; }
+        50% { transform: scale(1.04); opacity: 1; }
+      }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
