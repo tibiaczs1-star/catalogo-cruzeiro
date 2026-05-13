@@ -20,6 +20,8 @@ const splashCopy = document.querySelector(".logo-splash-copy");
 const splashDate = document.querySelector("#logo-splash-date");
 const splashProgressBar = document.querySelector(".logo-splash-progress span");
 const splashPercent = document.querySelector("#logo-splash-percent");
+const splashNewsBubbles = document.querySelector("[data-splash-news-bubbles]");
+const splashCursorGlow = document.querySelector("[data-splash-cursor-glow]");
 const radarGuide = document.querySelector("#radar-guide");
 const radarGuideLabel = document.querySelector("#radar-guide-label");
 const radarGuideText = document.querySelector("#radar-guide-text");
@@ -123,9 +125,11 @@ const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
 const portalWhatsappNumber = "5568992269296";
 const splashMessages = [
-  "Desenhando constelação",
-  "Carregando capa real",
-  "Aquecendo matérias e imagens",
+  "Lendo títulos do Juruá",
+  "Separando serviço de opinião",
+  "Comparando fonte, data e contexto",
+  "Resumindo matérias para a capa",
+  "Carregando imagens da primeira dobra",
   "Portal pronto para abrir"
 ];
 const splashMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -133,12 +137,12 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 900 : 1200;
-const splashCinematicDurationMs = 5200;
-const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 1700 : 2200;
-const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 2800 : 3400;
-const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 220 : 320;
-const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 280 : 420;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 850 : 1100;
+const splashCinematicDurationMs = splashCompactViewportQuery.matches ? 3600 : 4600;
+const splashStructureGateMaximumMs = splashCompactViewportQuery.matches ? 1300 : 1700;
+const splashBroadcastStartMaximumMs = splashCompactViewportQuery.matches ? 1600 : 2100;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 320 : 460;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 520 : 760;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -2152,35 +2156,106 @@ const updateSplashProgress = (progress, status = "") => {
   if (splashStatus && status) {
     splashStatus.textContent = status;
   }
+
+  if (splashCopy && status) {
+    splashCopy.textContent = status;
+  }
+};
+
+const collectSplashNewsPhrases = () => {
+  const liveTitles = editorialFlowLiveCards
+    .map((card) => card.querySelector("[data-flow-live-title]")?.textContent?.trim())
+    .filter(Boolean);
+  const topicTitle = editorialFlowTopicTitle?.textContent?.trim();
+  const tickerTitles = tickerPhrasePool
+    .map((item) => item.title || item.text)
+    .filter(Boolean);
+
+  return [
+    ...liveTitles,
+    topicTitle,
+    "Pesando fontes antes do clique",
+    "Resumo local em poucos segundos",
+    "Serviços, clima e bairro na capa",
+    ...tickerTitles
+  ]
+    .filter(Boolean)
+    .slice(0, 12);
+};
+
+const seedSplashNewsBubbles = () => {
+  if (!splashNewsBubbles) {
+    return;
+  }
+
+  const phrases = collectSplashNewsPhrases();
+  const sanitizeBubbleText = (value = "") =>
+    String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  splashNewsBubbles.innerHTML = phrases
+    .map(
+      (phrase, index) =>
+        `<span style="--bubble-i:${index};--bubble-x:${12 + ((index * 23) % 76)}%;--bubble-delay:${(index % 6) * 0.42}s">${sanitizeBubbleText(
+          phrase
+        )}</span>`
+    )
+    .join("");
+};
+
+const setupSplashPointerParallax = () => {
+  if (!splashRoot || splashMotionQuery.matches) {
+    return;
+  }
+
+  const updatePointer = (event) => {
+    const x = event.clientX ?? window.innerWidth / 2;
+    const y = event.clientY ?? window.innerHeight / 2;
+    const px = window.innerWidth ? (x / window.innerWidth - 0.5) * 2 : 0;
+    const py = window.innerHeight ? (y / window.innerHeight - 0.5) * 2 : 0;
+    splashRoot.style.setProperty("--splash-pointer-x", px.toFixed(3));
+    splashRoot.style.setProperty("--splash-pointer-y", py.toFixed(3));
+    splashRoot.style.setProperty("--splash-cursor-left", `${x}px`);
+    splashRoot.style.setProperty("--splash-cursor-top", `${y}px`);
+  };
+
+  window.addEventListener("pointermove", updatePointer, { passive: true });
+  window.addEventListener(
+    "catalogo:logo-splash-finished",
+    () => window.removeEventListener("pointermove", updatePointer),
+    { once: true }
+  );
 };
 
 const waitForSplashReadiness = async () => {
   const steps = [
     {
-      label: "Carregando estrutura real",
-      progress: 18,
+      label: "Carregando HTML, estilos e relógio",
+      progress: 28,
       wait: () => waitForSplashDocumentComplete(splashGateStepTimeoutMs)
     },
     {
-      label: "Preparando dados da capa",
-      progress: 48,
+      label: "Lendo títulos e fontes locais",
+      progress: 52,
       wait: () => waitForSplashPreloads(splashGateStepTimeoutMs)
     },
     {
-      label: "Montando primeira tela",
-      progress: 68,
+      label: "Resumindo matérias e cards",
+      progress: 72,
       wait: () => waitForSplashDeferredBoot(splashDeferredBootTimeoutMs)
     },
     {
-      label: "Polindo imagens principais",
-      progress: 86,
+      label: "Conferindo imagens da primeira dobra",
+      progress: 92,
       wait: () =>
         splashCompactViewportQuery.matches
           ? waitForSplashFontsReady(splashGateStepTimeoutMs)
           : waitForSplashCriticalImages(splashGateStepTimeoutMs)
     },
     {
-      label: "Estrutura pronta",
+      label: "Home pronta para abrir",
       progress: 100,
       wait: () => Promise.resolve()
     }
@@ -2195,8 +2270,9 @@ const waitForSplashReadiness = async () => {
 
 const setupSplashExperience = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
+  const liveSplashMode = splashRoot?.classList.contains("catalogo-cinematic-live");
 
-  if (splashRoot?.classList.contains("catalogo-cinematic-safe")) {
+  if (!liveSplashMode && splashRoot?.classList.contains("catalogo-cinematic-safe")) {
     clearSplashFailsafe();
     document.body.classList.remove(
       "catalogo-site-booting",
@@ -2218,14 +2294,14 @@ const setupSplashExperience = () => {
     return;
   }
 
-  if (performanceLiteMode) {
+  if (!liveSplashMode && performanceLiteMode) {
     clearSplashFailsafe();
     document.body.classList.remove("catalogo-site-booting");
     document.body.classList.add("site-loaded");
     return;
   }
 
-  if (shouldSkipHomeIntro) {
+  if (!liveSplashMode && shouldSkipHomeIntro) {
     try {
       sessionStorage.removeItem(skipHomeIntroKey);
     } catch (_error) {
@@ -2239,7 +2315,7 @@ const setupSplashExperience = () => {
     return;
   }
 
-  if (hasSeenSplashToday()) {
+  if (!liveSplashMode && hasSeenSplashToday()) {
     window.__CATALOGO_DAILY_INTRO_SHOWN__ = true;
     clearSplashFailsafe();
     if (splashRoot) {
@@ -2264,7 +2340,9 @@ const setupSplashExperience = () => {
     splashRoot.classList.add("is-logo-primer");
   }
   splashRoot.setAttribute("aria-hidden", "false");
-  updateSplashProgress(4, "Carregando estrutura real");
+  seedSplashNewsBubbles();
+  setupSplashPointerParallax();
+  updateSplashProgress(2, "Preparando abertura");
 
   window.setTimeout(() => {
     splashRoot.classList.remove("is-logo-primer");
@@ -2320,7 +2398,7 @@ const setupSplashExperience = () => {
     window.clearTimeout(hardReleaseTimer);
     clearSplashFailsafe();
     updateSplashProgress(100, "Portal pronto para abrir");
-    splashRoot.classList.remove("is-shell-preparing", "is-broadcast-started");
+    splashRoot.classList.remove("is-shell-preparing", "is-broadcast-started", "is-loader-active");
     splashRoot.classList.add("is-completing");
     window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
     warmPortalCacheInBackground();
@@ -2345,7 +2423,7 @@ const setupSplashExperience = () => {
     if (!splashReleased) {
       releaseSplash();
     }
-  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + 1100);
+  }, splashBroadcastStartMaximumMs + splashCinematicDurationMs + (splashCompactViewportQuery.matches ? 4200 : 5600));
 
   const currentTime =
     typeof performance !== "undefined" && typeof performance.now === "function"
@@ -2354,9 +2432,12 @@ const setupSplashExperience = () => {
   const elapsed = currentTime - splashBootStartedAt;
   const remaining = Math.max(100, splashDailyMinimumMs - elapsed);
 
-  const readinessGate = waitForSplashReadiness().catch(() => undefined);
-  const structureGate = Promise.race([
-    Promise.all([readinessGate, waitForSplashDelay(remaining)]),
+  const introGate = Promise.race([
+    Promise.all([
+      waitForSplashDocumentComplete(splashGateStepTimeoutMs),
+      waitForSplashFontsReady(splashGateStepTimeoutMs),
+      waitForSplashDelay(remaining)
+    ]),
     waitForSplashDelay(splashStructureGateMaximumMs)
   ]);
 
@@ -2372,13 +2453,20 @@ const setupSplashExperience = () => {
       splashCopy.textContent = "Cruzeiro do Sul em abertura";
     }
     rememberSplashToday();
-    updateSplashProgress(92, "Constelação do Cruzeiro do Sul");
+    updateSplashProgress(18, "Notícias subindo para a capa");
     warmPortalCacheInBackground();
     await waitForSplashDelay(splashCinematicDurationMs);
+    splashRoot.classList.remove("is-broadcast-started");
+    splashRoot.classList.add("is-loader-active");
+    updateSplashProgress(24, "Agora carregando a home completa");
+    await waitForSplashTimeout(
+      waitForSplashReadiness().catch(() => undefined),
+      splashCompactViewportQuery.matches ? 3200 : 4600
+    );
     releaseSplash();
   };
 
-  void structureGate.then(runCinematicOpening).catch(runCinematicOpening);
+  void introGate.then(runCinematicOpening).catch(runCinematicOpening);
   void waitForSplashDelay(splashBroadcastStartMaximumMs).then(runCinematicOpening).catch(releaseSplash);
 };
 

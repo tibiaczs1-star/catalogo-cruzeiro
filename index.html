@@ -94,8 +94,16 @@
       }
     </script>
     <style id="critical-logo-preloader">
-      body.catalogo-site-booting { overflow: auto; }
-      body.catalogo-site-booting .page-shell { opacity: 1; visibility: visible; pointer-events: auto; }
+      body.catalogo-site-booting { overflow: hidden; background: #020d18; }
+      body.catalogo-site-booting .page-shell,
+      body.catalogo-site-booting .site-header,
+      body.catalogo-site-booting .premium-side-radar,
+      body.catalogo-site-booting .premium-bottom-nav,
+      body.catalogo-site-booting .cinematic-parallax {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
       body.catalogo-site-booting .logo-splash {
         position: fixed;
         inset: 0;
@@ -153,11 +161,11 @@
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260513-no-intro1" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260513-real-loader1" />
 </head>
-  <body class="editorial-home founder-prelude-pending site-loaded mobile-intro-ready">
+  <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
-      class="logo-splash is-logo-primer catalogo-cinematic-safe"
+      class="logo-splash is-logo-primer catalogo-cinematic-live"
       role="status"
       aria-live="polite"
       aria-hidden="false"
@@ -215,6 +223,8 @@
           <span>Notícias, serviços e comunidade</span>
         </div>
       </div>
+      <div class="logo-splash-news-bubbles" data-splash-news-bubbles aria-hidden="true"></div>
+      <div class="logo-splash-cursor-glow" data-splash-cursor-glow aria-hidden="true"></div>
       <article class="logo-splash-card">
         <div class="logo-splash-compass" aria-hidden="true">
           <img src="./assets/logo-czs.svg?v=20260513-layout-order1" alt="" decoding="async" fetchpriority="high" />
@@ -829,7 +839,7 @@
             <section id="checagem-do-dia" class="retention-block video-check-block" aria-label="Vídeo, fonte e checagem">
               <div class="retention-head">
                 <span>Fonte e checagem</span>
-                <h2>Confiança antes do clique</h2>
+                <h2>Antes de compartilhar</h2>
               </div>
               <div class="video-check-grid">
                 <a href="#tv-catalogo" class="video-check-feature">
@@ -837,36 +847,40 @@
                   <strong>Vídeos locais</strong>
                   <small>Somente registros do Juruá e de Cruzeiro do Sul, quando houver fonte aberta.</small>
                 </a>
-                <a href="./fontes-monitoradas.html" class="check-card">Fontes monitoradas</a>
-                <a href="./legal.html" class="check-card">Correções e transparência</a>
+                <a href="./fontes-monitoradas.html" class="check-card">
+                  <strong>Ver fontes usadas</strong>
+                  <small>Quem publicou e de onde veio.</small>
+                </a>
+                <a href="./legal.html#correcoes" class="check-card">
+                  <strong>Pedir correção</strong>
+                  <small>Achou erro? Envie o ajuste.</small>
+                </a>
               </div>
             </section>
 
             <section id="servicos-uteis" class="retention-block useful-services-block" aria-label="Serviços úteis">
               <div class="retention-head">
                 <span>Serviços úteis</span>
-                <h2>Resolver sem procurar muito</h2>
+                <h2>Resolver agora</h2>
               </div>
               <div class="useful-services-grid">
-                <a href="#catalogo-telefonico">Telefones</a>
-                <a href="./catalogo-servicos.html?busca=prefeitura">Prefeitura</a>
-                <a href="./catalogo-servicos.html?busca=saude">Saúde</a>
-                <a href="./catalogo-servicos.html?busca=farmacia">Farmácia</a>
-                <a href="./catalogo-servicos.html?busca=energia">Energia</a>
-                <a href="#clima-alertas">Defesa Civil</a>
+                <a href="#catalogo-telefonico"><strong>Telefones urgentes</strong><small>Saúde, energia, água e prefeitura</small></a>
+                <a href="./catalogo-servicos.html?busca=saude"><strong>Saúde perto</strong><small>Unidades, contatos e orientação</small></a>
+                <a href="#clima-alertas"><strong>Chuva e rio</strong><small>Defesa Civil e avisos do dia</small></a>
+                <a href="./catalogo-servicos.html?busca=farmacia"><strong>Farmácia</strong><small>Busca rápida no catálogo</small></a>
               </div>
             </section>
 
             <section id="comunidade-prioritaria" class="retention-block community-priority-block" aria-label="Comunidade">
               <div class="retention-head">
                 <span>Comunidade</span>
-                <h2>Participar com caminho claro</h2>
+                <h2>Mandar informação</h2>
               </div>
               <div class="community-priority-grid">
-                <a href="#midia-galeria">Enviar foto</a>
-                <a href="#participacao-comunitaria">Sugerir pauta</a>
-                <a href="#participacao-comunitaria">Aviso do bairro</a>
-                <a href="#comentarios">Opinião curta</a>
+                <a href="https://wa.me/5568992269296?text=Tenho%20uma%20foto%20ou%20video%20para%20o%20Catalogo%20Cruzeiro%20do%20Sul" target="_blank" rel="noopener noreferrer">Enviar foto/vídeo</a>
+                <a href="https://wa.me/5568992269296?text=Sugestao%20de%20pauta%20para%20o%20Catalogo%20Cruzeiro%20do%20Sul" target="_blank" rel="noopener noreferrer">Sugerir pauta</a>
+                <a href="./arquivo.html?busca=bairro">Ver bairro</a>
+                <a href="#comentarios">Comentar notícia</a>
               </div>
             </section>
           </section>
@@ -2014,7 +2028,7 @@
     </script>
     <script defer src="./catalogo-app-core.js?v=20260513-layout-order1"></script>
     <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
-  <script defer src="./script.js?v=20260513-no-intro1"></script>
+    <script defer src="./script.js?v=20260513-real-loader1"></script>
     <script>
       (function () {
         const styles = [
