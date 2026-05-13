@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T05:54:02.609Z",
+  "lastUpdatedAt": "2026-05-13T20:15:48.701Z",
   "orders": [
     {
       "id": "2026-05-13-codex-sem-perguntas-permissao",
@@ -9440,6 +9440,36 @@
       "source": "chat",
       "rawRequest": "Depois do deploy do mural premium, a home ficou presa em uma tela azul escura vazia sem abrir e sem logo; corrigir e subir hotfix.",
       "summary": "Corrigir splash/abertura presa sem logo após deploy, garantindo logo visível e liberação rápida da home.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-reorganizar-a-home-czs-para-que-as-novas-secoes-tenham-funcao-real-limpar-hero-e",
+      "createdAt": "2026-05-13T20:02:00.576Z",
+      "updatedAt": "2026-05-13T20:02:00.576Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faca as secoes terem funcoes e organize o fluxo; fundadores sem foto; hero espremida e cheia de funcoes sem captacao real",
+      "summary": "Reorganizar a home CZS para que as novas secoes tenham funcao real, limpar hero espremida, priorizar fluxo hiperlocal e dar fotos/presenca ao bloco de fundadores.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-remover-duplicacao-no-bloco-de-apoiadores-fundadores-trocar-repeticao-por-convit",
+      "createdAt": "2026-05-13T20:15:48.701Z",
+      "updatedAt": "2026-05-13T20:15:48.701Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok faça o comit, por enquanto so retire as duplicações ali em apoiadores, e ponha tipo algo vc aqui, sua empresa aqui etc.... e pode subir a pagina",
+      "summary": "Remover duplicacao no bloco de apoiadores/fundadores, trocar repeticao por convites como Voce aqui/Sua empresa aqui, commitar e subir a pagina.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

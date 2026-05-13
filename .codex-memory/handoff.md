@@ -1,11 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T18:45:43.153Z
+Updated: 2026-05-13T20:15:48.834Z
 
-Fluxo editorial CZS local validado: desktop/mobile sem overflow, mobile fpsHint 58, hero antigo redundante oculto, latest/columns/specials/topic carousel ocultos, style cache-bust 20260513-editorial-flow1.
+Ajuste final em fundadores: removida duplicacao entre faixa de apoiadores e grid; cards de convite ganharam contraste em premium-home-redesign.css e cache-bust founder-slots1.
 
 ## Next
 
-- Fazer git add seletivo
-- commit
-- push para main e validar producao.
+- Aguardar Render publicar e validar a URL online.

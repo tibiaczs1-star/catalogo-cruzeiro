@@ -1,15 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T18:45:43.077Z
+Updated: 2026-05-13T20:15:48.767Z
 
 ## Active Goal
 
-- Home CZS com regra mestre editorial e fluxo mobile validado
+- Home CZS pronta para commit e push
 
 ## Summary
 
-Regra central do CZS registrada em docs/CZS_PRODUCT_MASTER_RULES.md e AGENTS.md. Home ganhou fluxo editorial de retencao: linha viva, assunto dominante, videos/checagem, editorias, servicos, comunidade e arquivo. Blocos antigos redundantes foram ocultados. Logo/cache atualizados.
+Apoiadores confirmados ficam na faixa visual; grid inferior virou vagas abertas sem duplicar logos: Voce aqui, Sua empresa aqui, Sua marca no Jurua e Seu negocio aqui. Validacoes locais passaram.
 
 ## Next
 
-- Commitar e subir escopo da entrega; depois validar online no Render em desktop e mobile.
+- Commit seletivo e push para main; depois conferir deploy online.

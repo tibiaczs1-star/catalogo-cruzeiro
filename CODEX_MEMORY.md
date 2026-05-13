@@ -1,5 +1,22 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Apoiadores sem duplicacao
+
+- Usuario pediu commit/push e, antes de subir, retirar duplicacoes em apoiadores/fundadores.
+- `index.html` manteve os quatro apoiadores confirmados apenas na faixa visual e trocou o grid inferior por vagas abertas: "Voce aqui", "Sua empresa aqui", "Sua marca no Jurua" e "Seu negocio aqui".
+- `script.js` preserva esses cards estaticos quando a API de fundadores vier vazia, em vez de substituir por um card generico.
+- `premium-home-redesign.css` recebeu override final para contraste dos cards de convite e `index.html` atualizou cache-bust para `20260513-founder-slots1`.
+- Validacoes: `node --check script.js`, CSS braces `styles.css 4130/4130` e `premium-home-redesign.css 2242/2242`, Playwright local sem overflow no bloco, `npm run review:team` totalIssues=0.
+
+## Atualizacao rapida 2026-05-13 - Home funcional sem blocos decorativos
+
+- Usuario cobrou que as novas secoes da home tinham cara de enfeite, hero espremida, funcoes sem captacao real e fundadores sem foto.
+- index.html removeu da primeira dobra os blocos duplicados portal-status-ribbon/ticker e ocultou o seletor pesado de manchetes dentro da hero; a hero ficou focada na manchete, leitura e atalhos essenciais.
+- index.html reorganizou o fluxo inicial com painel-do-dia, linha-viva, assunto-dominante, checagem-do-dia, servicos-uteis e comunidade-prioritaria, todos com destinos funcionais.
+- script.js passou a preencher linha viva, contagem do acervo e assunto dominante com noticias reais, priorizando itens hiperlocais/impacto regional para evitar tema nacional solto como prioridade do CZS.
+- Fundadores ganharam cards visuais no mural usando assets existentes e o fallback da API nao apaga mais esse mural estatico quando vier vazio.
+- Validacoes: node --check script.js, CSS braces 4124/4124, Chrome headless desktop/mobile em output/chrome/home-flow-20260513/, npm run review:team totalIssues=0.
+
 ## Atualizacao rapida 2026-05-13 - Nomes atravessando toda a intro
 
 - Usuario pediu que os nomes/textos de fundo da introducao aprovada passassem por toda a abertura, nao so aparecessem em pontos isolados.

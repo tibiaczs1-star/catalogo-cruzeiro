@@ -111,6 +111,13 @@ const trendingBuzzInitialMarkup = trendingBuzzGrid?.innerHTML || "";
 const monthlyBuzzGrid = document.querySelector("#monthly .month-grid");
 const whatMattersGrid = document.querySelector("[data-what-matters-grid]");
 const whatMattersTitle = document.querySelector("[data-what-matters-title]");
+const editorialFlowLiveCards = [...document.querySelectorAll("[data-flow-live-card]")];
+const editorialFlowTopicTitle = document.querySelector("[data-flow-topic-title]");
+const editorialFlowTopicLabel = document.querySelector("[data-flow-topic-label]");
+const editorialFlowTopicSummary = document.querySelector("[data-flow-topic-summary]");
+const editorialFlowTopicLink = document.querySelector("[data-flow-topic-link]");
+const editorialFlowNewsCount = document.querySelector("#flow-news-count");
+const dayPanelWeather = document.querySelector("[data-day-panel-weather]");
 const performanceLiteMode = document.body.classList.contains("fx-lite");
 const localeTimeZone = "America/Rio_Branco";
 const isLocalFileProtocol = window.location.protocol === "file:";
@@ -7837,7 +7844,6 @@ const initializeHeroTourismHero = () => {
       const selected = buildHeroPanelPhotoItem(thumb, index);
       heroTourismRotation.photoIndex = index;
       paintHeroPanelSelection(selected, index);
-      renderHeroPanelFloatingBubble(thumb);
       thumb.classList.add("is-previewing");
       const activeBubble = thumb.querySelector("span");
       if (activeBubble) {
@@ -7863,24 +7869,28 @@ const initializeHeroTourismHero = () => {
     };
     thumb.addEventListener("mouseenter", openThumbStory);
     thumb.addEventListener("pointerenter", openThumbStory);
-    thumb.addEventListener("pointermove", () => renderHeroPanelFloatingBubble(thumb));
     thumb.addEventListener("mouseleave", closeThumbStory);
     thumb.addEventListener("pointerleave", closeThumbStory);
     thumb.addEventListener("focus", openThumbStory);
     thumb.addEventListener("blur", closeThumbStory);
     thumb.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
+      if (event.key === " ") {
         event.preventDefault();
         openThumbStory();
       }
     });
     thumb.addEventListener("click", (event) => {
       const href = String(thumb.getAttribute("href") || "").trim();
-      const canOpenArticle =
-        href &&
-        !href.startsWith("#") &&
-        (thumb.classList.contains("is-active") || thumb.classList.contains("is-previewing"));
-      if (canOpenArticle || event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.button === 1) {
+        hideHeroPanelFloatingBubble();
+        stopHeroPanelAutoRotation();
+        return;
+      }
+
+      if (href && href !== "#") {
+        const selected = buildHeroPanelPhotoItem(thumb, index);
+        heroTourismRotation.photoIndex = index;
+        paintHeroPanelSelection(selected, index);
         hideHeroPanelFloatingBubble();
         stopHeroPanelAutoRotation();
         return;
@@ -11459,6 +11469,89 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
       </footer>
     </article>
   `;
+};
+
+const getEditorialFlowArticles = (items = []) =>
+  dedupeNewsItems(
+    [
+      ...(Array.isArray(items) ? items : []),
+      ...(Array.isArray(liveFeedState.items) ? liveFeedState.items : []),
+      ...(Array.isArray(window.NEWS_DATA) ? window.NEWS_DATA : [])
+    ].filter(Boolean)
+  )
+    .map((item) => normalizeRuntimeArticle(item))
+    .filter((article) => article?.title && (article.sourceUrl || article.slug))
+    .filter(isRealPublicNewsSource)
+    .sort((left, right) => compareEditorialFlowArticles(left, right, { imageBias: false }));
+
+const renderEditorialUtilityFlow = (items = []) => {
+  const articles = getEditorialFlowArticles(items);
+  const localArticles = articles.filter((article) => {
+    if (isWhatMattersJuruaArticle(article) || hasClearLocalReaderImpact(article)) {
+      return true;
+    }
+    const text = normalizeText([article.title, article.summary, article.category, article.sourceName].join(" "));
+    return /\b(cruzeiro do sul|vale do jurua|vale do juru[aá]|jurua|juru[aá]|acre|rio branco|mancio lima|m[âa]ncio lima|rodrigues alves|porto walter|marechal thaumaturgo|prefeitura|detran|saude|saúde|servi[cç]o|energia|defesa civil)\b/.test(text);
+  });
+  const flowArticles = localArticles.length >= 3 ? localArticles : articles;
+
+  if (editorialFlowNewsCount) {
+    const count = Math.max(articles.length, liveFeedState.archiveTotal || 0);
+    editorialFlowNewsCount.textContent = String(count);
+  }
+
+  if (dayPanelWeather) {
+    const weatherLabel = document.querySelector("[data-portal-weather-label]")?.textContent?.trim();
+    const weatherTemp = document.querySelector("[data-portal-weather-temp]")?.textContent?.trim();
+    dayPanelWeather.textContent =
+      [weatherTemp, weatherLabel].filter(Boolean).join(" · ") || "Alertas locais monitorados";
+  }
+
+  editorialFlowLiveCards.forEach((card, index) => {
+    const article = flowArticles[index];
+    if (!article) {
+      return;
+    }
+
+    const href = buildArticleHref(article);
+    const title = truncateCopyAtWord(article.title || "Atualização do dia", 96, { suffix: "" });
+    const dateLabel =
+      formatCompactDisplayDate(article.publishedAt || article.date || article.createdAt || "") ||
+      article.category ||
+      "Agora";
+
+    card.href = href && href !== "#" ? href : "./arquivo.html?periodo=hoje";
+    applyArticleLinkAttrs(card, card.href);
+    card.querySelector("[data-flow-live-time]")?.replaceChildren(document.createTextNode(dateLabel));
+    card.querySelector("[data-flow-live-title]")?.replaceChildren(document.createTextNode(title));
+  });
+
+  const dominantLabel = getLiveFeedDominantCategory(flowArticles) || "Cruzeiro do Sul";
+  const dominantQuery = encodeURIComponent(dominantLabel.replace(/^categoria:\s*/i, "").trim() || "Cruzeiro do Sul");
+  const dominantArticles = flowArticles.filter((article) => {
+    const haystack = normalizeText([article.title, article.summary, article.category, article.sourceName].join(" "));
+    return haystack.includes(normalizeText(dominantLabel));
+  });
+  const leadArticle = dominantArticles[0] || flowArticles[0];
+
+  if (editorialFlowTopicTitle) {
+    editorialFlowTopicTitle.textContent = dominantLabel;
+  }
+
+  if (editorialFlowTopicLabel) {
+    editorialFlowTopicLabel.textContent = `${dominantArticles.length || articles.length || 0} publicações no recorte`;
+  }
+
+  if (editorialFlowTopicSummary) {
+    editorialFlowTopicSummary.textContent = leadArticle?.title
+      ? truncateCopyAtWord(leadArticle.title, 118, { suffix: "" })
+      : "Quando a base carregar, este bloco mostra o assunto mais forte do dia.";
+  }
+
+  if (editorialFlowTopicLink) {
+    editorialFlowTopicLink.href = `./arquivo.html?busca=${dominantQuery}`;
+    applyArticleLinkAttrs(editorialFlowTopicLink, editorialFlowTopicLink.href);
+  }
 };
 
 const renderWhatMattersNow = (items = []) => {
@@ -17581,6 +17674,7 @@ const renderLiveFeed = () => {
 
   liveFeedGrid.innerHTML = "";
   updateLiveFeedSummary(filtered, visibleSlice);
+  renderEditorialUtilityFlow(filtered);
 
   if (filtered.length === 0) {
     const empty = document.createElement("div");
@@ -18876,6 +18970,7 @@ const buildFounderCard = (founder = {}) => {
   const card = document.createElement("article");
   const amount = Number(founder.amount || 0);
   const safeName = String(founder.name || "Fundador do Catálogo").trim() || "Fundador do Catálogo";
+  const founderImage = sanitizeImageUrl(founder.imageUrl || founder.logoUrl || founder.avatarUrl || "");
   const joinedAt = founder.createdAt
     ? new Date(founder.createdAt).toLocaleDateString("pt-BR", {
         day: "2-digit",
@@ -18885,9 +18980,10 @@ const buildFounderCard = (founder = {}) => {
       })
     : "agora";
 
-  card.className = "founder-card";
+  card.className = `founder-card${founderImage ? " founder-card-visual" : ""}`;
   card.innerHTML = `
-    <strong>? ${escapeHtml(safeName)}</strong>
+    ${founderImage ? `<img src="${escapeRuntimeAttribute(founderImage)}" alt="${escapeHtml(safeName)}" loading="lazy" decoding="async" />` : ""}
+    <strong>${escapeHtml(safeName)}</strong>
     <p>Fundador do Catálogo CZS com apoio simbólico${amount ? ` de R$ ${amount}` : ""}.</p>
     <span>entrou em ${escapeHtml(joinedAt)}</span>
   `;
@@ -18904,12 +19000,14 @@ const renderFoundersWall = (items = [], totalFounders = items.length) => {
   foundersCount.textContent = `${confirmedFounders} ${confirmedFounders === 1 ? "fundador confirmado" : "fundadores confirmados"}`;
 
   if (!founders.length) {
-    foundersList.innerHTML = `
-      <article class="founder-card is-empty">
-        <strong>Quem fortalece este jornal</strong>
-        <p>Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público.</p>
-      </article>
-    `;
+    if (!foundersList.querySelector(".founder-card-visual, .founder-slot-card")) {
+      foundersList.innerHTML = `
+        <article class="founder-card is-empty">
+          <strong>Quem fortalece este jornal</strong>
+          <p>Marcas, profissionais e leitores que apoiam o portal aparecem neste espaço com destaque público.</p>
+        </article>
+      `;
+    }
     return;
   }
 
@@ -19196,6 +19294,7 @@ attachSubscriptionSubmission();
 attachAgentMailFlow();
 initializeFloatingPanelToggles();
 initializeFoundersAutoCarousel();
+renderEditorialUtilityFlow(window.NEWS_DATA || []);
 renderWhatMattersNow(window.NEWS_DATA || []);
 window.setTimeout(() => {
   void renderDailyTrendingBuzz();
