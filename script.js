@@ -124,10 +124,10 @@ const splashCompactViewportQuery =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(max-width: 820px)")
     : { matches: false };
-const splashDailyMinimumMs = 5200;
-const splashGateMaximumMs = splashCompactViewportQuery.matches ? 6800 : 7600;
-const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 220 : 300;
-const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 120 : 160;
+const splashDailyMinimumMs = splashCompactViewportQuery.matches ? 360 : 680;
+const splashGateMaximumMs = splashCompactViewportQuery.matches ? 1050 : 1900;
+const splashGateStepTimeoutMs = splashCompactViewportQuery.matches ? 120 : 300;
+const splashDeferredBootTimeoutMs = splashCompactViewportQuery.matches ? 80 : 160;
 const tickerDesktopStaticMedia =
   typeof window !== "undefined" && typeof window.matchMedia === "function"
     ? window.matchMedia("(min-width: 821px)")
@@ -467,84 +467,20 @@ const offlineNewsCacheKey = "catalogo_news_cache_v2";
 const offlineLastArticleKey = "catalogo_last_article_v2";
 const legacyOfflineStorageKeys = ["catalogo_news_cache_v1", "catalogo_last_article_v1"];
 const portalWarmCacheKey = "catalogo_portal_cache_warm_day_v1";
-const portalWarmCacheName = "catalogo-portal-shell-v20260512-clock-loader1";
-const browserStateVersionKey = "catalogo_browser_state_version_v1";
-const browserStateVersion = "20260512-clock-loader1";
+const portalWarmCacheName = "catalogo-portal-shell-v20260511-loader-flow1";
 const portalWarmStaticUrls = [
   "./assets/logo-czs.svg",
   "./assets/favicon.svg",
   "./styles.css?v=20260511-loader-flow1",
-  "./premium-home-redesign.css?v=20260512-intro-visible1",
-  "./startup-experience.css?v=20260511-cookie-passive1",
+  "./premium-home-redesign.css?v=20260511-speed-areas1",
+  "./startup-experience.css?v=20260511-loader-flow1",
   "./early-home-surfaces.js?v=20260511-speed-areas5",
-  "./script.js?v=20260512-clock-loader1",
-  "./startup-experience.js?v=20260512-clock-loader1",
+  "./script.js?v=20260511-loader-flow1",
+  "./startup-experience.js?v=20260511-loader-flow1",
   "./noticia.html",
   "./arquivo.html",
   "./catalogo-servicos.html"
 ];
-const getAvailableStorage = (storageName) => {
-  try {
-    return window[storageName] || null;
-  } catch (_error) {
-    return null;
-  }
-};
-const resetNormalBrowserStateForVersion = () => {
-  let currentVersion = "";
-  const localStore = getAvailableStorage("localStorage");
-  const sessionStore = getAvailableStorage("sessionStorage");
-
-  try {
-    currentVersion = localStore?.getItem(browserStateVersionKey) || "";
-  } catch (_error) {
-    currentVersion = "";
-  }
-
-  if (currentVersion === browserStateVersion) {
-    return;
-  }
-
-  const storageKeysToClear = [
-    splashStorageKey,
-    splashDailyStorageKey,
-    skipHomeIntroKey,
-    offlineNewsCacheKey,
-    offlineLastArticleKey,
-    portalWarmCacheKey,
-    "catalogo_page_action_loader_pending_v1"
-  ];
-
-  [localStore, sessionStore].forEach((storage) => {
-    storageKeysToClear.forEach((storageKey) => {
-      try {
-        storage?.removeItem(storageKey);
-      } catch (_error) {
-        // Ignora ambientes sem storage disponivel.
-      }
-    });
-  });
-
-  try {
-    localStore?.setItem(browserStateVersionKey, browserStateVersion);
-  } catch (_error) {
-    // A limpeza ainda vale para a visita atual mesmo sem persistir versao.
-  }
-
-  if ("caches" in window) {
-    caches
-      .keys()
-      .then((cacheNames) =>
-        Promise.all(
-          cacheNames
-            .filter((cacheName) => /^catalogo-portal-shell-/i.test(cacheName) && cacheName !== portalWarmCacheName)
-            .map((cacheName) => caches.delete(cacheName))
-        )
-      )
-      .catch(() => {});
-  }
-};
-resetNormalBrowserStateForVersion();
 const urlSearchParams = new URLSearchParams(window.location.search);
 const urlRequestsSkipHomeIntro = (() => {
   const rawValue = String(urlSearchParams.get("skipIntro") || "").trim().toLowerCase();
@@ -1840,13 +1776,6 @@ const waitForSplashDelay = (ms) =>
     window.setTimeout(resolve, Math.max(0, ms));
   });
 
-const waitForSplashPaint = () =>
-  new Promise((resolve) => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(resolve);
-    });
-  });
-
 const runSplashIdleTask = (callback, timeout = 1200) => {
   if (typeof callback !== "function") {
     return;
@@ -2156,14 +2085,17 @@ const updateSplashProgress = (progress, status = "") => {
 const waitForSplashReadiness = async () => {
   const steps = [
     {
-      label: "Preparando o site",
+      label: splashCompactViewportQuery.matches ? "Abrindo app" : "Preparando o site",
       progress: 24,
       wait: () => Promise.resolve()
     },
     {
-      label: "Abrindo a primeira leitura",
+      label: splashCompactViewportQuery.matches ? "Carregando capa" : "Abrindo a primeira leitura",
       progress: 72,
-      wait: () => waitForSplashFontsReady(splashGateStepTimeoutMs)
+      wait: () =>
+        splashCompactViewportQuery.matches
+          ? Promise.resolve()
+          : waitForSplashFontsReady(splashGateStepTimeoutMs)
     },
     {
       label: "Portal pronto para abrir",
@@ -2203,6 +2135,17 @@ const setupSplashExperience = () => {
     return;
   }
 
+  if (hasSeenSplashToday()) {
+    window.__CATALOGO_DAILY_INTRO_SHOWN__ = true;
+    clearSplashFailsafe();
+    if (splashRoot) {
+      splashRoot.setAttribute("aria-hidden", "true");
+    }
+    document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
+    document.body.classList.add("site-loaded", "mobile-intro-ready");
+    return;
+  }
+
   if (!splashRoot) {
     clearSplashFailsafe();
     document.body.classList.remove("catalogo-site-booting");
@@ -2218,7 +2161,7 @@ const setupSplashExperience = () => {
 
   window.setTimeout(() => {
     splashRoot.classList.remove("is-logo-primer");
-  }, splashMotionQuery.matches ? 220 : 720);
+  }, splashMotionQuery.matches ? 180 : splashCompactViewportQuery.matches ? 280 : 720);
 
   if (splashDate) {
     splashDate.textContent = formatSplashStamp();
@@ -2281,25 +2224,27 @@ const setupSplashExperience = () => {
           document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift");
           document.body.classList.add("site-loaded", "mobile-intro-ready");
         },
-        splashMotionQuery.matches ? 120 : 640
+        splashMotionQuery.matches ? 120 : splashCompactViewportQuery.matches ? 240 : 640
       );
     });
 
     rememberSplashToday();
   };
 
-  void waitForSplashPaint()
-    .then(() => {
-      const minimumVisibleGate = waitForSplashDelay(splashDailyMinimumMs);
-      const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
-        updateSplashProgress(100, "Portal pronto para abrir");
-      });
-      const readinessGate = Promise.all([waitForSplashReadiness(), minimumVisibleGate]);
+  const currentTime =
+    typeof performance !== "undefined" && typeof performance.now === "function"
+      ? performance.now()
+      : Date.now();
+  const elapsed = currentTime - splashBootStartedAt;
+  const remaining = Math.max(100, splashDailyMinimumMs - elapsed);
 
-      return Promise.race([readinessGate, safetyRelease]);
-    })
-    .then(releaseSplash)
-    .catch(releaseSplash);
+  const safetyRelease = waitForSplashDelay(splashGateMaximumMs).then(() => {
+    updateSplashProgress(100, "Portal pronto para abrir");
+  });
+
+  const readinessGate = Promise.all([waitForSplashReadiness(), waitForSplashDelay(remaining)]);
+
+  void Promise.race([readinessGate, safetyRelease]).then(releaseSplash).catch(releaseSplash);
 };
 
 const clearMobilePageTransitionState = () => {
@@ -11269,10 +11214,6 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
   const rawHref = buildArticleHref(normalizedArticle);
   const href = rawHref && rawHref !== "#" ? rawHref : topic.href;
   const externalAttrs = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noreferrer"' : "";
-  const cardImageUrl = sanitizeImageUrl(getArticleDisplayImageUrl(normalizedArticle, "whatMatters"));
-  const cardImageStyle = cardImageUrl
-    ? ` style="--card-image:url('${escapeHtml(escapeCssUrl(cardImageUrl).replace(/'/g, "\\'"))}')"`
-    : "";
   const sourceStatus = getPublicSourceStatusBadge(normalizedArticle);
   const dateLabel =
     formatCompactDisplayDate(normalizedArticle.publishedAt || normalizedArticle.date || normalizedArticle.createdAt || "") ||
@@ -11305,7 +11246,13 @@ const buildWhatMattersCard = (article = {}, topic = whatMattersTopics[0], index 
     },
     260
   );
-  const imageUrl = cardImageUrl;
+  const imageUrl = sanitizeImageUrl(
+    normalizedArticle.imageUrl ||
+      normalizedArticle.feedImageUrl ||
+      normalizedArticle.sourceImageUrl ||
+      normalizedArticle.originalImageUrl ||
+      ""
+  );
   const mediaMarkup = imageUrl
     ? `<div class="what-matters-media" style="--matter-image:url('${escapeRuntimeAttribute(imageUrl)}')"></div>`
     : "";
@@ -11330,14 +11277,7 @@ const renderWhatMattersNow = (items = []) => {
     return;
   }
 
-  const targetCount = whatMattersTopics.length;
-  const sortWhatMattersItems = (list = []) =>
-    [...list].sort((left, right) =>
-      compareEditorialFlowArticles(left, right, {
-        imageBias: false
-      })
-    );
-  const candidateItems = dedupeNewsItems(
+  const realItems = dedupeNewsItems(
     [
       ...(Array.isArray(items) ? items : []),
       ...(Array.isArray(liveFeedState.items) ? liveFeedState.items : []),
@@ -11346,70 +11286,36 @@ const renderWhatMattersNow = (items = []) => {
   )
     .map((item) => normalizeRuntimeArticle(item))
     .filter(isRealPublicNewsSource)
+    .filter(isUsableWhatMattersArticle)
     .filter((item) => !isInternationalOnlyPublicArticle(item))
-    .filter((item) => item.title && (item.sourceUrl || item.slug));
-  const fallbackCandidateItems = sortWhatMattersItems(
-    candidateItems
-      .filter((item) => {
-        const titleText = normalizeText(item.title);
-        const sourceName = normalizeText(item.sourceName || item.sourceLabel);
-        return (
-          titleText &&
-          !whatMattersPlaceholderPattern.test(titleText) &&
-          !whatMattersNoticePattern.test(titleText) &&
-          (!whatMattersRemoteHumanInterestPattern.test(titleText) || whatMattersLocalTitlePattern.test(titleText)) &&
-          (!whatMattersNationalSourcePattern.test(sourceName) || whatMattersLocalTitlePattern.test(titleText))
-        );
+    .filter((item) => item.title && (item.sourceUrl || item.slug))
+    .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
+    .sort((left, right) =>
+      compareEditorialFlowArticles(left, right, {
+        imageBias: false
       })
-      .filter((item) => !isNationalPoliticsArticle(item) || hasClearLocalReaderImpact(item))
-  );
-  const realItems = sortWhatMattersItems(
-    fallbackCandidateItems.filter(isUsableWhatMattersArticle)
-  );
-  const visualRealItems = realItems.filter(articleHasPremiumHeroImageCandidate);
-  const visualFallbackItems = fallbackCandidateItems.filter(articleHasPremiumHeroImageCandidate);
-  const primaryPool =
-    visualRealItems.length >= targetCount
-      ? visualRealItems
-      : realItems.length >= targetCount
-        ? realItems
-        : visualFallbackItems.length >= targetCount
-          ? visualFallbackItems
-          : fallbackCandidateItems;
-  const sourceItems = primaryPool.filter(isWhatMattersJuruaArticle);
-  const frontPageItems = primaryPool.filter(isWhatMattersFrontPageArticle);
+    );
+  const sourceItems = realItems.filter(isWhatMattersJuruaArticle);
+  const frontPageItems = realItems.filter(isWhatMattersFrontPageArticle);
 
   const selected = [];
   const usedTopics = new Set();
-  const reservedKeys = buildReservedArticleKeys(["whatMatters"]);
-  const selectedKeys = new Set();
+  const usedKeys = buildReservedArticleKeys(["whatMatters"]);
 
-  const pushWhatMattersArticle = (article, topic, { allowReserved = false } = {}) => {
+  const pushWhatMattersArticle = (article, topic) => {
     const key = getArticleUsageKey(article);
-    if (!topic || !key || selectedKeys.has(key) || (!allowReserved && reservedKeys.has(key))) {
+    if (!topic || !key || usedKeys.has(key)) {
       return false;
     }
 
     usedTopics.add(topic.key);
-    selectedKeys.add(key);
+    usedKeys.add(key);
     selected.push({ article, topic });
     return true;
   };
 
-  const fillFromPool = (pool = [], options = {}) => {
-    for (const article of pool) {
-      if (selected.length >= targetCount) {
-        break;
-      }
-
-      const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
-      const topic = getWhatMattersArticleTopic(article, usedTopics) || firstOpenTopic;
-      pushWhatMattersArticle(article, topic, options);
-    }
-  };
-
   for (const article of sourceItems) {
-    if (selected.length >= targetCount) {
+    if (selected.length >= whatMattersTopics.length) {
       break;
     }
 
@@ -11418,7 +11324,7 @@ const renderWhatMattersNow = (items = []) => {
   }
 
   for (const article of frontPageItems) {
-    if (selected.length >= targetCount) {
+    if (selected.length >= whatMattersTopics.length) {
       break;
     }
 
@@ -11444,41 +11350,17 @@ const renderWhatMattersNow = (items = []) => {
     return;
   }
 
-  if (selected.length < targetCount) {
+  if (selected.length < whatMattersTopics.length) {
     const existingCount = selected.length;
     const repeatedRealItems = frontPageItems.filter((article) => {
       const key = getArticleUsageKey(article);
-      return key && !selectedKeys.has(key) && !reservedKeys.has(key);
+      return key && !usedKeys.has(key);
     });
 
-    repeatedRealItems.slice(0, targetCount - existingCount).forEach((article) => {
+    repeatedRealItems.slice(0, whatMattersTopics.length - existingCount).forEach((article) => {
       const firstOpenTopic = whatMattersTopics.find((topic) => !usedTopics.has(topic.key)) || whatMattersTopics[0];
       pushWhatMattersArticle(article, firstOpenTopic);
     });
-  }
-
-  if (selected.length < targetCount) {
-    fillFromPool(visualRealItems);
-  }
-
-  if (selected.length < targetCount) {
-    fillFromPool(realItems);
-  }
-
-  if (selected.length < targetCount) {
-    fillFromPool(visualRealItems, { allowReserved: true });
-  }
-
-  if (selected.length < targetCount) {
-    fillFromPool(visualFallbackItems, { allowReserved: true });
-  }
-
-  if (selected.length < targetCount) {
-    fillFromPool(realItems, { allowReserved: true });
-  }
-
-  if (selected.length < targetCount) {
-    fillFromPool(fallbackCandidateItems, { allowReserved: true });
   }
 
   selected.forEach((item) => {
@@ -11506,11 +11388,11 @@ const renderWhatMattersNow = (items = []) => {
   });
 
   if (whatMattersTitle) {
-    whatMattersTitle.textContent = selected.length >= targetCount ? "4 matérias da semana" : "Matérias da semana";
+    whatMattersTitle.textContent = selected.length >= 4 ? "4 matérias da semana" : "Matérias da semana";
   }
 
   whatMattersGrid.innerHTML = selected
-    .slice(0, targetCount)
+    .slice(0, whatMattersTopics.length)
     .map(({ article, topic }, index) => buildWhatMattersCard(article, topic, index))
     .join("");
 
@@ -14782,37 +14664,58 @@ const shouldHandleArticleNavigationClick = (event, link) => {
 const showInlineNavigationFallbackLoader = (options = {}) => {
   const label = options.label || "Abrindo matéria";
   const loader = document.createElement("div");
-  loader.className = "catalogo-top-return-loader is-visible is-action-loader";
+  loader.className = "logo-splash is-navigation-loader is-repeat-visit";
   loader.setAttribute("role", "status");
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", label);
   loader.innerHTML = `
-    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:14%"></i></span>
-    <span class="catalogo-top-return-loader-row">
-      <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
-      <strong data-top-loader-percent>0%</strong>
-    </span>
+    <div class="logo-splash-noise"></div>
+    <div class="logo-splash-fragments" aria-hidden="true">
+      <span class="fragment fragment-a"></span>
+      <span class="fragment fragment-b"></span>
+      <span class="fragment fragment-c"></span>
+      <span class="fragment fragment-d"></span>
+      <span class="fragment fragment-e"></span>
+      <span class="fragment fragment-f"></span>
+      <span class="fragment fragment-g"></span>
+      <span class="fragment fragment-h"></span>
+    </div>
+    <div class="logo-splash-river" aria-hidden="true">
+      <span class="river-panel panel-a"></span>
+      <span class="river-panel panel-b"></span>
+      <span class="river-panel panel-c"></span>
+    </div>
+    <article class="logo-splash-card">
+      <div class="logo-splash-compass" aria-hidden="true">
+        <img src="./assets/logo-czs.svg" alt="" decoding="async" />
+      </div>
+      <p class="logo-splash-kicker">Portal</p>
+      <div class="logo-splash-brand">
+        <div class="logo-splash-brand-copy">
+          <span class="logo-splash-label">Cruzeiro do Sul</span>
+          <strong>Catálogo Cruzeiro do Sul</strong>
+          <small>Vale do Juruá</small>
+        </div>
+      </div>
+      <p class="logo-splash-copy">${label}</p>
+      <div class="logo-splash-meta">
+        <span data-navigation-loader-status>preparando matéria</span>
+        <span class="logo-splash-readiness">
+          <span>Leitura regional</span>
+          <strong data-navigation-loader-percent>100%</strong>
+        </span>
+      </div>
+      <div class="logo-splash-progress" aria-hidden="true">
+        <span data-navigation-loader-bar style="width:100%"></span>
+      </div>
+    </article>
   `;
   document.body.appendChild(loader);
 
-  const percentNode = loader.querySelector("[data-top-loader-percent]");
-  const textNode = loader.querySelector("[data-top-loader-text]");
-  const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
-  const startedAt = Date.now();
-
-  return new Promise((resolve) => {
-    const timer = window.setInterval(() => {
-      const elapsed = Date.now() - startedAt;
-      const progress = Math.min(94, Math.round((elapsed / 3600) * 82) + 8);
-      if (percentNode) percentNode.textContent = `${progress}%`;
-      if (barNode) barNode.style.width = `${Math.max(14, progress)}%`;
-      if (textNode && elapsed > 1900) textNode.textContent = "preparando página";
-
-      if (elapsed >= 3600) {
-        window.clearInterval(timer);
-        resolve();
-      }
-    }, 90);
+  return waitForSplashDelay(3000).then(() => {
+    loader.classList.add("is-completing");
+    const textNode = loader.querySelector("[data-navigation-loader-status]");
+    if (textNode) textNode.textContent = "abrindo página";
   });
 };
 
@@ -14826,12 +14729,6 @@ const navigateWithArticleLoader = (href) => {
     window.location.href = href;
   };
 
-  try {
-    sessionStorage.setItem("catalogo_page_action_loader_pending_v1", "1");
-  } catch (_error) {
-    // ignore storage failures
-  }
-
   const loaderPromise = window.CatalogoPageLoader?.showForNavigation
     ? window.CatalogoPageLoader.showForNavigation({
         href,
@@ -14844,7 +14741,7 @@ const navigateWithArticleLoader = (href) => {
 
   Promise.race([
     Promise.resolve(loaderPromise),
-    new Promise((resolve) => window.setTimeout(resolve, 5600))
+    new Promise((resolve) => window.setTimeout(resolve, 3600))
   ])
     .catch(() => undefined)
     .then(navigate);
@@ -17978,6 +17875,10 @@ const scheduleHomeBackgroundHydration = () => {
   };
 
   const runSoon = () => {
+    if (splashCompactViewportQuery.matches) {
+      window.setTimeout(execute, 900);
+      return;
+    }
     execute();
   };
 

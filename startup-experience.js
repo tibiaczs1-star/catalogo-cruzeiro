@@ -3,7 +3,7 @@
 (() => {
   const MODAL_ID = "catalogoPremiumTerms";
   const CONSENT_BANNER_ID = "catalogo-cookie-consent";
-  const READY_FALLBACK_MS = 6200;
+  const READY_FALLBACK_MS = 2600;
   const OPEN_DELAY_MS = 140;
   const CONSENT_KEY = "catalogo_lgpd_consent_v1";
   const CONSENT_COOKIE = "catalogo_tracking_consent";
@@ -19,16 +19,16 @@
   const INITIAL_HOME_LOADER_DAILY_KEY = "catalogo_initial_home_loader_seen_day_v2";
   const PAGE_ACTION_LOADER_KEY = "catalogo_page_action_loader_pending_v1";
   const WEEKLY_MARKER_MAX_AGE_DAYS = 8;
-  const INITIAL_HOME_LOADER_MIN_MS = 4200;
-  const ACTION_LOADER_MIN_MS = 4200;
-  const ACTION_LOADER_MAX_MS = 5400;
+  const INITIAL_HOME_LOADER_MIN_MS = 900;
+  const ACTION_LOADER_MIN_MS = 700;
+  const ACTION_LOADER_MAX_MS = 1200;
   const THANKS_SCREEN_MS = 2600;
   const THANKS_SCREEN_MS_COMPACT = 2200;
   const THANKS_SCREEN_MS_PHONE = 1800;
   const FOUNDER_PRELUDE_MS = 3000;
   const FOUNDER_PRELUDE_MS_COMPACT = 3000;
   const FOUNDER_PRELUDE_MS_PHONE = 3000;
-  const RETURNING_LOADER_MS = 4200;
+  const RETURNING_LOADER_MS = 900;
   const FOUNDERS_CAFE_IMAGE_SRC = "./assets/founders-cafe-pack-static.jpg";
   const FOUNDERS_GRUPO_AS_LOGO_SRC = "./assets/founders-grupo-as-logo.jpeg";
   const FOUNDERS_GEANE_LOGO_SRC = "./assets/founders-geane-logo-optimized.png";
@@ -1156,6 +1156,60 @@
     return loader;
   }
 
+  function createNavigationSplashLoader(options = {}) {
+    const label = options.label || "Abrindo página";
+    const detail = options.detail || "Carregando o conteúdo";
+    const percent = options.percent || "0%";
+    const loader = document.createElement("div");
+    loader.className = "logo-splash is-navigation-loader is-repeat-visit";
+    loader.setAttribute("role", "status");
+    loader.setAttribute("aria-live", "polite");
+    loader.setAttribute("aria-label", label);
+    loader.innerHTML = `
+      <div class="logo-splash-noise"></div>
+      <div class="logo-splash-fragments" aria-hidden="true">
+        <span class="fragment fragment-a"></span>
+        <span class="fragment fragment-b"></span>
+        <span class="fragment fragment-c"></span>
+        <span class="fragment fragment-d"></span>
+        <span class="fragment fragment-e"></span>
+        <span class="fragment fragment-f"></span>
+        <span class="fragment fragment-g"></span>
+        <span class="fragment fragment-h"></span>
+      </div>
+      <div class="logo-splash-river" aria-hidden="true">
+        <span class="river-panel panel-a"></span>
+        <span class="river-panel panel-b"></span>
+        <span class="river-panel panel-c"></span>
+      </div>
+      <article class="logo-splash-card">
+        <div class="logo-splash-compass" aria-hidden="true">
+          <img src="./assets/logo-czs.svg" alt="" decoding="async" />
+        </div>
+        <p class="logo-splash-kicker">Portal</p>
+        <div class="logo-splash-brand">
+          <div class="logo-splash-brand-copy">
+            <span class="logo-splash-label">Cruzeiro do Sul</span>
+            <strong>Catálogo Cruzeiro do Sul</strong>
+            <small>Vale do Juruá</small>
+          </div>
+        </div>
+        <p class="logo-splash-copy">${label}</p>
+        <div class="logo-splash-meta">
+          <span data-navigation-loader-status>${detail}</span>
+          <span class="logo-splash-readiness">
+            <span>Leitura regional</span>
+            <strong data-navigation-loader-percent>${percent}</strong>
+          </span>
+        </div>
+        <div class="logo-splash-progress" aria-hidden="true">
+          <span data-navigation-loader-bar style="width: ${percent}"></span>
+        </div>
+      </article>
+    `;
+    return loader;
+  }
+
   function createInitialHomeLoaderModal() {
     const modal = document.createElement("section");
     modal.id = `${MODAL_ID}InitialLoader`;
@@ -1214,14 +1268,6 @@
 
   function delay(ms) {
     return new Promise((resolve) => window.setTimeout(resolve, ms));
-  }
-
-  function waitForVisiblePaint() {
-    return new Promise((resolve) => {
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(resolve);
-      });
-    });
   }
 
   function waitForLogoSplashDone(timeoutMs = 3200) {
@@ -1291,8 +1337,7 @@
   }
 
   function updateTopLoaderProgress(loader, progress, label = "") {
-    const isPersistentActionLoader = loader.classList.contains("is-action-loader");
-    const safeProgress = Math.max(0, Math.min(isPersistentActionLoader ? 94 : 100, Math.round(progress)));
+    const safeProgress = Math.max(0, Math.min(100, Math.round(progress)));
     const percentNode = loader.querySelector("[data-top-loader-percent]");
     const textNode = loader.querySelector("[data-top-loader-text]");
     const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
@@ -1302,6 +1347,18 @@
     if (barNode) barNode.style.width = `${Math.max(14, safeProgress)}%`;
   }
 
+  function updateNavigationSplashProgress(loader, progress, label = "") {
+    const safeProgress = Math.max(0, Math.min(100, Math.round(progress)));
+    const percentNode = loader.querySelector("[data-navigation-loader-percent]");
+    const statusNode = loader.querySelector("[data-navigation-loader-status]");
+    const barNode = loader.querySelector("[data-navigation-loader-bar]");
+
+    if (percentNode) percentNode.textContent = `${safeProgress}%`;
+    if (statusNode && label) statusNode.textContent = label;
+    if (barNode) barNode.style.width = `${safeProgress}%`;
+    if (safeProgress >= 92) loader.classList.add("is-completing");
+  }
+
   async function runProgressUntilReady(loader, options = {}) {
     const minDuration = options.minDuration || INITIAL_HOME_LOADER_MIN_MS;
     const maxDuration = options.maxDuration || READY_FALLBACK_MS;
@@ -1309,12 +1366,10 @@
     const statuses = Array.isArray(options.statuses) && options.statuses.length
       ? options.statuses
       : ["preparando estrutura", "montando notícias", "preparando imagens", "home pronta"];
+    const startedAt = Date.now();
     let currentProgress = 0;
     let statusIndex = 0;
     let ready = false;
-
-    await waitForVisiblePaint();
-    const startedAt = Date.now();
 
     waitForHomeReady(maxDuration).then(() => {
       ready = true;
@@ -1440,14 +1495,12 @@
         updateTopLoaderProgress(loader, 8, "Preparando retorno");
       });
 
-      waitForVisiblePaint().then(() => {
-        runProgressUntilReady(loader, {
-          minDuration: RETURNING_LOADER_MS,
-          maxDuration: READY_FALLBACK_MS,
-          statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
-          update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
-        }).then(finish).catch(finish);
-      });
+      runProgressUntilReady(loader, {
+        minDuration: RETURNING_LOADER_MS,
+        maxDuration: READY_FALLBACK_MS,
+        statuses: ["retomando página", "atualizando capa", "conferindo notícias", "home pronta"],
+        update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
+      }).then(finish).catch(finish);
     });
   }
 
@@ -1479,20 +1532,21 @@
         releaseFounderPreludeGate();
         openWelcomeModal(loader);
         updateInitialLoaderProgress(loader, 4, "preparando a primeira abertura");
-        runProgressUntilReady(loader, {
-          minDuration: INITIAL_HOME_LOADER_MIN_MS,
-          maxDuration: READY_FALLBACK_MS,
-          statuses: [
-            "montando capa do jornal",
-            "guardando áreas no navegador",
-            "organizando agenda e serviços",
-            "portal pronto para leitura"
-          ],
-          update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
-        }).then(finish).catch(finish);
       }, 30);
 
       failsafeTimer = window.setTimeout(finish, Math.max(READY_FALLBACK_MS + 1200, INITIAL_HOME_LOADER_MIN_MS + 2200));
+
+      runProgressUntilReady(loader, {
+        minDuration: INITIAL_HOME_LOADER_MIN_MS,
+        maxDuration: READY_FALLBACK_MS,
+        statuses: [
+          "montando capa do jornal",
+          "guardando áreas no navegador",
+          "organizando agenda e serviços",
+          "portal pronto para leitura"
+        ],
+        update: (progress, status) => updateInitialLoaderProgress(loader, progress, status)
+      }).then(finish).catch(finish);
     }).catch(() => {
       releaseIntroLocks();
       if (typeof callback === "function") {
@@ -1505,7 +1559,11 @@
     const href = options.href || "";
     const label = options.label || "Abrindo materia";
     const persistUntilNavigation = options.persistUntilNavigation !== false;
-    const loader = createReturningLoaderModal({ label });
+    const loader = createNavigationSplashLoader({
+      label,
+      detail: "preparando matéria",
+      percent: "6%"
+    });
     let finished = false;
 
     const finish = () => {
@@ -1513,7 +1571,7 @@
         return;
       }
       finished = true;
-      updateTopLoaderProgress(loader, persistUntilNavigation ? 94 : 100, "preparando página");
+      updateNavigationSplashProgress(loader, 100, "abrindo página");
       if (persistUntilNavigation) {
         return;
       }
@@ -1523,33 +1581,22 @@
       }, 180);
     };
 
-    try {
-      sessionStorage.setItem(PAGE_ACTION_LOADER_KEY, "1");
-    } catch (_error) {
-      // ignore storage failures
-    }
-
     document.body.appendChild(loader);
     window.requestAnimationFrame(() => {
-      loader.classList.add("is-visible", "is-action-loader");
-      updateTopLoaderProgress(loader, 6, label);
+      updateNavigationSplashProgress(loader, 6, label);
     });
 
-    return waitForVisiblePaint()
-      .then(() =>
-        Promise.all([
-          prefetchNavigationTarget(href),
-          runProgressUntilReady(loader, {
-            minDuration: ACTION_LOADER_MIN_MS,
-            maxDuration: ACTION_LOADER_MAX_MS,
-            statuses: ["preparando matéria", "baixando página", "conferindo conteúdo", "abrindo página"],
-            update: (progress, status) => updateTopLoaderProgress(loader, progress, status)
-          })
-        ])
-      )
-      .finally(() => {
-        finish();
-      });
+    return Promise.all([
+      prefetchNavigationTarget(href),
+      runProgressUntilReady(loader, {
+        minDuration: ACTION_LOADER_MIN_MS,
+        maxDuration: ACTION_LOADER_MAX_MS,
+        statuses: ["preparando matéria", "baixando página", "conferindo conteúdo", "abrindo página"],
+        update: (progress, status) => updateNavigationSplashProgress(loader, progress, status)
+      })
+    ]).finally(() => {
+      finish();
+    });
   }
 
   function runWhenBrowserIsIdle(callback) {
@@ -1686,6 +1733,11 @@
         dispatchIntroFinished();
       };
       const showInitialLoaderAfterConsent = () => {
+        if (fastEditorialHome && !phoneFlow) {
+          finishLoaded();
+          return;
+        }
+
         showInitialHomeLoaderThen(finishLoaded);
       };
 
@@ -1696,7 +1748,8 @@
           if (oldModal) {
             oldModal.remove();
           }
-          showInitialHomeLoaderThen(finishLoaded);
+          releaseFounderPreludeGate();
+          dispatchIntroFinished();
           return;
         }
 
@@ -1719,12 +1772,12 @@
 
         if (!shouldSkipWelcomeModal()) {
           openWelcomeConsentModal({
-            afterAccept: showInitialLoaderAfterConsent
+            afterAccept: finishLoaded
           });
           return;
         }
 
-        showInitialLoaderAfterConsent();
+        finishLoaded();
         return;
       }
 

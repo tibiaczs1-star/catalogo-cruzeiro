@@ -1,5 +1,22 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-12 - Intro mobile tipo app e subida
+
+- Usuario pediu para subir, validar online e corrigir a demora do mobile com uma intro tipo app.
+- `index.html` deixou de disparar `api/news` e `api/social-trends` imediatamente no mobile; as fontes Google passaram para preload assíncrono e o failsafe mobile da splash caiu para 1,45s.
+- `early-home-surfaces.js` adia a primeira busca dinâmica no mobile para nao disputar a abertura.
+- `script.js` encurtou os gates mobile da splash, pula espera de fonte no celular, acelera a troca do primer e joga a hidratação dinâmica de notícias para background.
+- `styles.css` transformou a abertura mobile em uma tela tipo app: fundo escuro, card central, ícone arredondado e progresso compacto.
+- Validações locais: `node --check script.js`, `node --check early-home-surfaces.js`, `node --check startup-experience.js`, `node --check noticia.js`; Browser interno mobile sem erros de console; Playwright mobile local com `domContentLoaded ~408ms`, `FCP ~404ms`, splash liberada e `site-loaded`; `npm run review:team` `totalIssues=0`; `npm run perf:budget` `ok=true`.
+
+## Atualizacao rapida 2026-05-12 - Loader correto entre home e materia
+
+- Usuario apontou que o entre-carregamento ao abrir materia nao deveria ser o loader de relogio/barra com `ABRINDO MATERIA 100%`, e sim o outro visual de abertura.
+- `startup-experience.js` agora usa o splash visual do portal (`logo-splash is-navigation-loader`) no carregamento de navegacao para materia, sem gravar a flag que reapresentava o relogio na pagina de destino.
+- `script.js` recebeu o mesmo fallback visual para quando `CatalogoPageLoader` nao estiver disponivel; `noticia.js` tambem foi alinhado para evitar o loader antigo em flags antigas de sessao ou retornos.
+- `styles.css`, `index.html` e `noticia.html` receberam ajuste de camada/cache-bust para o novo loader de navegacao.
+- Validacoes: `node --check startup-experience.js`, `node --check script.js`, `node --check noticia.js`; `npm run review:team` com `totalIssues=0`; Playwright local em `127.0.0.1:3199` confirmou `logoNav=true`, `topReturn=false` durante o clique e materia aberta depois sem loader preso.
+
 ## Atualizacao rapida 2026-05-12 - Hotfix visual da home para ir ao ar
 
 - Usuario apontou tres problemas de fechamento visual: texto por cima de imagem nos cards `4 materias da semana`, dobra `Voz da rua` com vazio/demora aparente e `Publicidade local` com titulo/palavras cortadas.

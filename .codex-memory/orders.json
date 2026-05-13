@@ -1,7 +1,88 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-12T22:39:27.331Z",
+  "lastUpdatedAt": "2026-05-13T00:48:58.866Z",
   "orders": [
+    {
+      "id": "2026-05-12-subir-validar-online-e-intro-mobile-app",
+      "createdAt": "2026-05-13T00:43:07.553Z",
+      "updatedAt": "2026-05-13T00:48:58.866Z",
+      "status": "ready-to-deploy-local",
+      "source": "chat",
+      "rawRequest": "agora suba e veja se ta tudo ok online e corrija o mobile ta demorando pra carregar e faça uma intro pra ele tipo app",
+      "summary": "Publicar ajustes, validar online, acelerar carregamento mobile e transformar a intro mobile em experiencia tipo app.",
+      "normalizedTasks": [
+        "medir e otimizar carregamento mobile",
+        "criar intro mobile estilo app",
+        "validar local e online",
+        "commitar e subir escopo correto"
+      ],
+      "tags": [
+        "deploy",
+        "mobile",
+        "intro",
+        "home",
+        "noticia"
+      ],
+      "filesTouched": [
+        "index.html",
+        "early-home-surfaces.js",
+        "script.js",
+        "styles.css",
+        "startup-experience.js",
+        "noticia.html",
+        "noticia.js",
+        "news-data.js",
+        "premium-home-redesign.css",
+        "assets/social/antonio-rnascimento-jr-facebook.jpg",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "output/playwright/mobile-app-intro-after-20260512.png",
+        "output/playwright/navigation-splash-loader-20260512.png"
+      ],
+      "notes": "Mobile otimizado localmente: fontes async, API/news e social trends adiados no compact boot, early-home fetch atrasado, splash mobile estilo app e gates mais curtos. Aguardando commit/push e validacao online."
+    },
+    {
+      "id": "2026-05-12-corrigir-loader-entre-carregamento-materia",
+      "createdAt": "2026-05-13T00:30:07.253Z",
+      "updatedAt": "2026-05-13T00:38:07.861Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "nao e esse que devia ser o entre carregamento, deveria ser, o outro",
+      "summary": "Corrigir a tela de entre-carregamento ao abrir materia para usar o outro loader/visual esperado, nao o loader circular com barra mostrado na captura.",
+      "normalizedTasks": [
+        "localizar loader de abertura de materia",
+        "trocar para o outro visual de carregamento existente",
+        "validar no navegador/localmente"
+      ],
+      "tags": [
+        "home",
+        "noticia",
+        "loader",
+        "visual"
+      ],
+      "filesTouched": [
+        "startup-experience.js",
+        "script.js",
+        "noticia.js",
+        "styles.css",
+        "index.html",
+        "noticia.html",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "output/playwright/navigation-splash-loader-20260512.png"
+      ],
+      "notes": "Loader de navegacao para materia trocado para logo-splash is-navigation-loader; flag de page action nao e mais gravada no clique da home, evitando relogio/barra na chegada. Playwright confirmou logoNav=true e topReturn=false durante o clique, depois noticia abriu sem loader preso."
+    },
     {
       "id": "2026-04-28-ajuste-copy-agentes-editor",
       "createdAt": "2026-04-28T15:01:55.754Z",

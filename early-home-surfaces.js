@@ -1,12 +1,27 @@
 (function () {
+  const isCompactBoot =
+    typeof window.matchMedia === "function" && window.matchMedia("(max-width: 820px)").matches;
+  const requestNewsPayload = () => {
+    if (typeof window.__CATALOGO_START_NEWS_PRELOAD__ === "function") {
+      return window.__CATALOGO_START_NEWS_PRELOAD__();
+    }
+
+    return window.location.protocol !== "file:"
+      ? fetch("./api/news", { credentials: "same-origin" })
+          .then((response) => (response.ok ? response.json() : null))
+          .catch(() => null)
+      : Promise.resolve(null);
+  };
   const newsPromise =
     window.__CATALOGO_NEWS_PRELOAD__ && typeof window.__CATALOGO_NEWS_PRELOAD__.then === "function"
       ? window.__CATALOGO_NEWS_PRELOAD__
-      : window.location.protocol !== "file:"
-        ? fetch("./api/news", { credentials: "same-origin" })
-            .then((response) => (response.ok ? response.json() : null))
-            .catch(() => null)
-        : Promise.resolve(null);
+      : isCompactBoot
+        ? new Promise((resolve) => {
+            window.setTimeout(() => {
+              Promise.resolve(requestNewsPayload()).then(resolve).catch(() => resolve(null));
+            }, 520);
+          })
+        : requestNewsPayload();
 
   const normalizeText = (value) =>
     String(value || "")

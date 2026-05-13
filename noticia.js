@@ -32,16 +32,51 @@ const rememberPageActionLoaderFlag = () => {
 
 const createArticleNavigationLoader = (label = "Abrindo matéria") => {
   const loader = document.createElement("div");
-  loader.className = "catalogo-top-return-loader is-visible is-action-loader";
+  loader.className = "logo-splash is-navigation-loader is-repeat-visit is-completing";
   loader.setAttribute("role", "status");
   loader.setAttribute("aria-live", "polite");
   loader.setAttribute("aria-label", label);
   loader.innerHTML = `
-    <span class="catalogo-top-return-loader-track" aria-hidden="true"><i style="width:100%"></i></span>
-    <span class="catalogo-top-return-loader-row">
-      <span class="catalogo-top-return-loader-text" data-top-loader-text>${label}</span>
-      <strong data-top-loader-percent>100%</strong>
-    </span>
+    <div class="logo-splash-noise"></div>
+    <div class="logo-splash-fragments" aria-hidden="true">
+      <span class="fragment fragment-a"></span>
+      <span class="fragment fragment-b"></span>
+      <span class="fragment fragment-c"></span>
+      <span class="fragment fragment-d"></span>
+      <span class="fragment fragment-e"></span>
+      <span class="fragment fragment-f"></span>
+      <span class="fragment fragment-g"></span>
+      <span class="fragment fragment-h"></span>
+    </div>
+    <div class="logo-splash-river" aria-hidden="true">
+      <span class="river-panel panel-a"></span>
+      <span class="river-panel panel-b"></span>
+      <span class="river-panel panel-c"></span>
+    </div>
+    <article class="logo-splash-card">
+      <div class="logo-splash-compass" aria-hidden="true">
+        <img src="./assets/logo-czs.svg" alt="" decoding="async" />
+      </div>
+      <p class="logo-splash-kicker">Portal</p>
+      <div class="logo-splash-brand">
+        <div class="logo-splash-brand-copy">
+          <span class="logo-splash-label">Cruzeiro do Sul</span>
+          <strong>Catálogo Cruzeiro do Sul</strong>
+          <small>Vale do Juruá</small>
+        </div>
+      </div>
+      <p class="logo-splash-copy">${label}</p>
+      <div class="logo-splash-meta">
+        <span data-navigation-loader-status>${label}</span>
+        <span class="logo-splash-readiness">
+          <span>Leitura regional</span>
+          <strong data-navigation-loader-percent>100%</strong>
+        </span>
+      </div>
+      <div class="logo-splash-progress" aria-hidden="true">
+        <span data-navigation-loader-bar style="width:100%"></span>
+      </div>
+    </article>
   `;
   return loader;
 };
@@ -51,7 +86,7 @@ const showArticleNavigationLoader = (label = "Abrindo matéria", options = {}) =
     rememberPageActionLoaderFlag();
   }
   if (articleNavigationLoaderState.loader) {
-    const textNode = articleNavigationLoaderState.loader.querySelector("[data-top-loader-text]");
+    const textNode = articleNavigationLoaderState.loader.querySelector("[data-navigation-loader-status]");
     if (textNode) textNode.textContent = label;
     return articleNavigationLoaderState.loader;
   }

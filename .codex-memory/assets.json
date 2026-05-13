@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-12T22:01:52.230Z",
+  "lastUpdatedAt": "2026-05-13T00:38:07.861Z",
   "assets": [
+    {
+      "id": "navigation-splash-loader-validation-20260512",
+      "kind": "image",
+      "path": "output/playwright/navigation-splash-loader-20260512.png",
+      "source": "workspace-playwright",
+      "note": "Captura Playwright apos validar que a navegacao home -> noticia usa logo-splash is-navigation-loader e nao catalogo-top-return-loader/relogio.",
+      "linkedOrderIds": [
+        "2026-05-12-corrigir-loader-entre-carregamento-materia"
+      ],
+      "createdAt": "2026-05-13T00:38:07.861Z"
+    },
     {
       "id": "pubpaid-traffic-policy-validation-20260428",
       "kind": "image-set",
