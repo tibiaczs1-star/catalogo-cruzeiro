@@ -1,5 +1,12 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - Mural de fundadores premium
+
+- Usuario pediu que o bloco de fundadores ficasse mais premium, com logos em fundo azul/transparente e movimento 3D rotacional com zoom in/out.
+- `premium-home-redesign.css` recebeu override final para `#founders`: palco azul profundo, brilho de vidro, aurora discreta, cards com flutuacao 3D, shine e logos com animacao `founderLogoAlive`.
+- `index.html` atualizou cache-bust para `20260513-founder-premium1` e trocou Grupo A.S/Recommencer para PNG local, melhorando leitura visual no palco azul.
+- Validacoes: CSS braces `2236/2236`; Playwright local confirmou desktop/mobile com 4 cards, 4 imagens carregadas, animacoes `founderCardFloat` e `founderLogoAlive`, e mobile sem overflow horizontal. Capturas: `output/playwright/founders-premium-3d-desktop-20260513-v5.png` e `output/playwright/founders-premium-3d-mobile-20260513-v6.png`.
+
 ## Atualizacao rapida 2026-05-13 - CTA, fila primaria e foto de fonte
 
 - Usuario corrigiu a hierarquia dos cards: `Ler matéria` deve ser CTA principal e `Informar erro` acao pequena/secundaria.

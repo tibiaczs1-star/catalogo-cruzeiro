@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T00:38:07.861Z",
+  "lastUpdatedAt": "2026-05-13T05:36:57.674Z",
   "assets": [
+    {
+      "id": "instagram-render-assets-20260513",
+      "kind": "image-set",
+      "path": "output/instagram/assets-render-2026-05-13/",
+      "source": "render-api-and-playwright",
+      "note": "Pacote inicial do Instagram profissional do jornal: 25 PNGs gerados a partir de https://catalogo-cruzeiro-web.onrender.com/api/news, com feed, stories e capas de reels.",
+      "linkedOrderIds": [
+        "2026-05-13-instagram-profissional-jornal"
+      ],
+      "createdAt": "2026-05-13T02:20:00.000Z"
+    },
     {
       "id": "navigation-splash-loader-validation-20260512",
       "kind": "image",
@@ -1931,6 +1942,24 @@
       "note": "Imagem publica OpenGraph do perfil Facebook AClsJr copiada do pacote facebook-trends 2026-05-12 para a dobra Rede Social.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-12T22:01:52.230Z"
+    },
+    {
+      "id": "founders-premium-3d-desktop-20260513-v5-png",
+      "kind": "screenshot",
+      "path": "output/playwright/founders-premium-3d-desktop-20260513-v5.png",
+      "source": "workspace",
+      "note": "Validação desktop do mural de fundadores com palco azul premium, logos visíveis e animações 3D.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-13T05:36:57.510Z"
+    },
+    {
+      "id": "founders-premium-3d-mobile-20260513-v6-png",
+      "kind": "screenshot",
+      "path": "output/playwright/founders-premium-3d-mobile-20260513-v6.png",
+      "source": "workspace",
+      "note": "Validação mobile do mural de fundadores com animação 3D ativa e sem overflow horizontal.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-13T05:36:57.674Z"
     }
   ]
 }

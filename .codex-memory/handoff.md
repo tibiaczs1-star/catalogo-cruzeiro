@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T05:30:23.224Z
+Updated: 2026-05-13T05:36:57.672Z
 
-Patch local aplicado em index/script/styles/server/Cheffe/navigation para CTA, loader, foto de fonte, acervo e fila primaria. Checks: node --check e review:team totalIssues=0. Smoke API local em porta temporaria confirmou /api/news total 1188 returned 1000 e preview-image da Mailza com foto real da Agencia Acre.
+Aplicado acabamento premium no bloco #founders: background azul profundo, brilho, flutuação 3D, zoom nas logos, cache-bust founder-premium1 e logos Grupo AS/Recommencer trocadas para PNG.
 
 ## Next
 
-- Rodar smoke visual final; stage apenas arquivos do pacote se for subir.
+- Conferir review:team; capturas em output/playwright/founders-premium-3d-desktop-20260513-v5.png e mobile-v6.png.

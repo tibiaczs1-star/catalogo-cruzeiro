@@ -1,15 +1,17 @@
 # Current State
 
-Updated: 2026-05-13T05:30:23.186Z
+Updated: 2026-05-13T05:36:57.690Z
 
 ## Active Goal
 
-- Correcoes finais de card, foto e Cheffe
+- Mural de fundadores premium
 
 ## Summary
 
-CTA Ler materia virou principal; Informar erro ficou secundario e registra fila primaria; /api/news agora serve ate 1000 itens; fallback de foto tenta preview da fonte e problemas de foto entram na fila da Cheffe; metricas da Cheffe rotuladas.
+Mural de fundadores ganhou palco azul escuro, cards com vidro/shine, logos em PNG quando disponível e animações 3D/zoom sutis.
 
 ## Next
 
-- Validar visual no navegador real e decidir commit/deploy somente com arquivos do pacote.
+- Rodar review:team e
+- se aprovado
+- deixar pronto para commit/subida quando o usuario pedir.
