@@ -7114,8 +7114,8 @@ function getArticleNews(limit = 30) {
   return repairNewsImagesForDisplay(Array.from(map.values()).sort(sortArticleItems).slice(0, limit));
 }
 
-function buildArticleNewsApiPayload(limit = 60) {
-  const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
+function buildArticleNewsApiPayload(limit = 1000) {
+  const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const items = getRawNewsItems().map(normalizeArticleRecord);
   const map = new Map();
 
@@ -7138,8 +7138,8 @@ function buildArticleNewsApiPayload(limit = 60) {
   };
 }
 
-function getCachedArticleNewsApiPayload(limit = 60) {
-  const safeLimit = Math.max(1, Math.min(500, Number(limit) || 60));
+function getCachedArticleNewsApiPayload(limit = 1000) {
+  const safeLimit = Math.max(1, Math.min(1000, Number(limit) || 1000));
   const key = `limit:${safeLimit}`;
   const cached = newsApiResponseCache.get(key);
 
@@ -10279,19 +10279,116 @@ function reconcileCheffeIdeActionQueue(reviewQueue = {}) {
 function buildCheffeReviewQueue() {
   const file = path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_JSON_FILE).replace(/\\/g, "/");
   const report = readJson(REVIEW_TEAM_REPORT_JSON_FILE, null);
+  const imageAudit = readJson(NEWS_IMAGE_FOCUS_AUDIT_FILE, {});
+  const auditImageIssues = Array.isArray(imageAudit.reviewQueue)
+    ? imageAudit.reviewQueue.slice(0, 16).map((item, index) => ({
+        id: cleanShortText(item.id || item.slug || `image-review-${index + 1}`, 80),
+        status: "image-review",
+        type: "image-focus-review",
+        severity: cleanShortText(item.level === "error" ? "high" : item.level || "medium", 40),
+        file: cleanShortText(item.slug ? `noticia.html?slug=${item.slug}` : "noticia.html", 220),
+        line: 0,
+        label: cleanShortText(item.title || "Foto da matéria precisa de revisão", 160),
+        detail: cleanShortText(
+          [
+            Array.isArray(item.reasons) && item.reasons.length ? `Motivos: ${item.reasons.join(", ")}` : "",
+            item.imageUrl ? `Imagem atual: ${item.imageUrl}` : "Sem imagem confiável",
+            item.slug ? `Abrir: /noticia.html?slug=${encodeURIComponent(item.slug)}` : ""
+          ]
+            .filter(Boolean)
+            .join("\n"),
+          1200
+        )
+      }))
+    : [];
+  const imageIssueKeys = new Set(
+    auditImageIssues.map((item) => normalizeText(`${item.type}|${item.file}`)).filter(Boolean)
+  );
+  const generatedFallbackImageIssues = getArticleNews(200)
+    .filter((item) => {
+      const imageUrl = String(getArticleImageUrl(item) || "");
+      const hasSource = Boolean(item.sourceUrl || item.url || item.link);
+      return hasSource && (imageUrl.includes("/assets/news-fallbacks/") || /buscar-na-fonte/i.test(String(item.imageQuality || "")));
+    })
+    .map((item, index) => {
+      const fileName = item.slug ? `noticia.html?slug=${item.slug}` : "noticia.html";
+      return {
+        id: cleanShortText(item.slug || `source-image-review-${index + 1}`, 80),
+        status: "image-review",
+        type: "image-focus-review",
+        severity: "medium",
+        file: cleanShortText(fileName, 220),
+        line: 0,
+        label: cleanShortText(item.title || "Foto da matéria precisa de revisão", 160),
+        detail: cleanShortText(
+          [
+            "Motivos: foto automática/fallback; buscar melhor imagem na fonte",
+            item.sourceUrl ? `Fonte: ${item.sourceUrl}` : "",
+            item.imageUrl ? `Imagem atual: ${item.imageUrl}` : ""
+          ]
+            .filter(Boolean)
+            .join("\n"),
+          1200
+        )
+      };
+    })
+    .filter((item) => {
+      const key = normalizeText(`${item.type}|${item.file}`);
+      if (!key || imageIssueKeys.has(key)) return false;
+      imageIssueKeys.add(key);
+      return true;
+    })
+    .slice(0, 16);
+  const imageIssues = [...auditImageIssues, ...generatedFallbackImageIssues].slice(0, 24);
+  const correctionsPayload = buildEditorialCorrectionsLog();
+  const correctionKeys = new Set();
+  const correctionIssues = Array.isArray(correctionsPayload.latest)
+    ? correctionsPayload.latest
+        .filter((item) => !["corrigido", "closed", "resolvido"].includes(String(item.status || "").toLowerCase()))
+        .filter((item) => {
+          const key = normalizeText(`${item.slug || item.file || item.articleUrl}|${item.type || item.typeLabel || "correction"}`);
+          if (!key || correctionKeys.has(key)) return false;
+          correctionKeys.add(key);
+          return true;
+        })
+        .map((item, index) => ({
+          id: cleanShortText(item.id || `public-correction-${index + 1}`, 80),
+          status: "public-reported",
+          type: "public-correction",
+          severity: cleanShortText(item.severity || "alta", 40),
+          file: cleanShortText(item.file || (item.slug ? `noticia.html?slug=${item.slug}` : "noticia.html"), 220),
+          line: 0,
+          label: cleanShortText(item.title || "Matéria enviada pelo leitor para revisão", 160),
+          detail: cleanShortText(
+            [
+              item.publicNote ? `Pedido: ${item.publicNote}` : "",
+              item.typeLabel ? `Tipo: ${item.typeLabel}` : "",
+              item.articleUrl ? `Abrir: ${item.articleUrl}` : ""
+            ]
+              .filter(Boolean)
+              .join("\n"),
+            1200
+          )
+        }))
+    : [];
   if (!report || typeof report !== "object") {
     return {
       kind: "cheffe-review-queue",
-      source: "npm run review:team",
+      source: correctionIssues.length || imageIssues.length ? "public-corrections + image-review + npm run review:team" : "npm run review:team",
       file,
       markdownFile: path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_MD_FILE).replace(/\\/g, "/"),
-      status: "not-run",
+      status: correctionIssues.length || imageIssues.length ? "open" : "not-run",
       generatedAt: "",
-      total: 0,
-      byType: {},
+      total: correctionIssues.length + imageIssues.length,
+      byType: {
+        ...(correctionIssues.length ? { "public-correction": correctionIssues.length } : {}),
+        ...(imageIssues.length ? { "image-focus-review": imageIssues.length } : {})
+      },
       topFiles: [],
-      issues: [],
-      summary: "A equipe de revisão ainda não gerou relatório nesta worktree."
+      issues: [...correctionIssues, ...imageIssues],
+      summary: correctionIssues.length || imageIssues.length
+        ? `${correctionIssues.length} matéria(s) enviada(s) pelo botão Informar erro aguardam revisão primária da Cheffe.`
+        : "A equipe de revisão ainda não gerou relatório nesta worktree."
     };
   }
 
@@ -10310,15 +10407,27 @@ function buildCheffeReviewQueue() {
     }))
     .slice(0, 80);
 
+  const mergedIssues = [...correctionIssues, ...imageIssues, ...safeIssues].slice(0, 80);
+  const mergedTotal = total + correctionIssues.length + imageIssues.length;
+  const mergedByType = {
+    ...(report.summary?.byType && typeof report.summary.byType === "object" ? report.summary.byType : {})
+  };
+  if (correctionIssues.length) {
+    mergedByType["public-correction"] = correctionIssues.length;
+  }
+  if (imageIssues.length) {
+    mergedByType["image-focus-review"] = imageIssues.length;
+  }
+
   return {
     kind: "cheffe-review-queue",
-    source: "npm run review:team",
+    source: correctionIssues.length || imageIssues.length ? "public-corrections + image-review + npm run review:team" : "npm run review:team",
     file,
     markdownFile: path.relative(ROOT_DIR, REVIEW_TEAM_REPORT_MD_FILE).replace(/\\/g, "/"),
-    status: total > 0 ? "open" : "clear",
+    status: mergedTotal > 0 ? "open" : "clear",
     generatedAt: cleanShortText(report.generatedAt || "", 80),
-    total,
-    byType: report.summary?.byType && typeof report.summary.byType === "object" ? report.summary.byType : {},
+    total: mergedTotal,
+    byType: mergedByType,
     topFiles: Array.isArray(report.summary?.topFiles)
       ? report.summary.topFiles
           .map((item) => ({
@@ -10328,9 +10437,15 @@ function buildCheffeReviewQueue() {
           .filter((item) => item.file)
           .slice(0, 12)
       : [],
-    issues: safeIssues,
-    summary: total > 0
-      ? `Revisão encontrou ${total} pendência(s).`
+    issues: mergedIssues,
+    summary: mergedTotal > 0
+      ? correctionIssues.length && total
+        ? `Cheffe tem ${correctionIssues.length} correção(ões) do leitor, ${imageIssues.length} foto(s) para revisão e ${total} pendência(s) da revisão automática.`
+        : correctionIssues.length
+          ? `${correctionIssues.length} matéria(s) enviada(s) pelo botão Informar erro aguardam revisão primária da Cheffe.`
+          : imageIssues.length
+            ? `${imageIssues.length} foto(s) de matéria aguardam revisão primária da Cheffe.`
+            : `Revisão encontrou ${total} pendência(s).`
       : "Revisão sem pendências no relatório atual."
   };
 }
@@ -11827,8 +11942,14 @@ function recordPublicEditorialCorrection(body = {}, req = null) {
     : Array.isArray(payload?.corrections)
       ? payload.corrections
       : [];
+  const existingIndex = corrections.findIndex((item) => {
+    const sameSlug = slug && String(item?.slug || "").toLowerCase() === slug.toLowerCase();
+    const sameType = String(item?.type || "").toLowerCase() === type;
+    const open = !["corrigido", "closed", "resolvido"].includes(String(item?.status || "").toLowerCase());
+    return sameSlug && sameType && open;
+  });
   const correction = {
-    id: createRecordId("cor"),
+    id: existingIndex >= 0 ? cleanShortText(corrections[existingIndex].id || createRecordId("cor"), 120) : createRecordId("cor"),
     status: "public-reported",
     severity: priority,
     priority,
@@ -11846,15 +11967,21 @@ function recordPublicEditorialCorrection(body = {}, req = null) {
     publicNote: note || `Correção solicitada em ${typeLabel}.`,
     createdAt: now,
     reportedAt: now,
+    updatedAt: now,
+    reportCount: existingIndex >= 0 ? Number(corrections[existingIndex].reportCount || 1) + 1 : 1,
     requester: {
       userAgent,
       forwarded
     }
   };
+  const remainingCorrections =
+    existingIndex >= 0
+      ? corrections.filter((_item, index) => index !== existingIndex)
+      : corrections;
   const nextPayload = {
     version: 1,
     updatedAt: now,
-    corrections: [correction, ...corrections].slice(0, 300)
+    corrections: [correction, ...remainingCorrections].slice(0, 300)
   };
   writeJson(EDITORIAL_CORRECTIONS_LOG_FILE, nextPayload);
   return {
@@ -15090,7 +15217,7 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/news") {
-    const limit = Number(searchParams.get("limit") || 60);
+    const limit = Number(searchParams.get("limit") || 1000);
     return sendJson(res, 200, getCachedArticleNewsApiPayload(limit));
   }
 
@@ -15923,14 +16050,20 @@ async function handleApi(req, res, pathname, searchParams) {
   }
 
   if (req.method === "GET" && pathname === "/api/preview-image") {
-    if (!requireFullAdminPasswordAccess(req)) {
+    const targetUrl = searchParams.get("url") || "";
+    let previewHostAllowed = false;
+    try {
+      previewHostAllowed = isAllowedPreviewHost(new URL(targetUrl).hostname);
+    } catch (_error) {
+      previewHostAllowed = false;
+    }
+    if (!previewHostAllowed && !requireFullAdminPasswordAccess(req)) {
       return sendJson(res, 401, {
         ok: false,
         error: "Senha admin total obrigatoria para consultar imagem."
       });
     }
 
-    const targetUrl = searchParams.get("url") || "";
     const imageUrl = await fetchPreviewImage(targetUrl);
     if (!imageUrl) {
       return sendJson(res, 200, { ok: false, imageUrl: "", message: "Imagem nao encontrada." });

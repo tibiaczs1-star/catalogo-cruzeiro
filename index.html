@@ -42,7 +42,7 @@
         }
         window.__CATALOGO_NEWS_PRELOAD__ =
           window.__CATALOGO_NEWS_PRELOAD__ ||
-          fetch("./api/news", {
+          fetch("./api/news?limit=1000", {
             method: "GET",
             credentials: "same-origin"
           })
@@ -131,14 +131,14 @@
         }
       </style>
     </noscript>
-    <link rel="stylesheet" href="./styles.css?v=20260513-tv-communityfix1" />
+    <link rel="stylesheet" href="./styles.css?v=20260513-review-photo-cta1" />
   <link rel="preload" as="style" href="./mobile-home-final.css?v=20260430-public-sync1" onload="this.onload=null;this.rel='stylesheet'" />
   <link rel="preload" as="style" href="./premium-clarity.css?v=20260507-jurua-flow1" onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
     <link rel="stylesheet" href="./mobile-home-final.css?v=20260430-public-sync1" />
     <link rel="stylesheet" href="./premium-clarity.css?v=20260507-jurua-flow1" />
   </noscript>
-  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260513-tv-communityfix1" />
+  <link rel="stylesheet" href="./premium-home-redesign.css?v=20260513-founder-premium1" />
 </head>
   <body class="editorial-home founder-prelude-pending catalogo-site-booting">
     <div
@@ -1541,7 +1541,7 @@
             </article>
             <article class="founder-banner-card founder-banner-card-grupoas">
               <span>Apoiador em destaque</span>
-              <img src="./assets/founders-grupo-as-logo.jpeg" alt="Logo do Grupo A.S" loading="lazy" decoding="async" />
+              <img src="./assets/founders-grupo-as-logo.png" alt="Logo do Grupo A.S" loading="lazy" decoding="async" />
             </article>
             <article class="founder-banner-card founder-banner-card-light">
               <span>Fundadora em destaque</span>
@@ -1549,7 +1549,7 @@
             </article>
             <article class="founder-banner-card founder-banner-card-dark">
               <span>Apoiador fundador</span>
-              <img src="./assets/founders-recommencer-logo.svg" alt="Logo da Recommencer" loading="lazy" decoding="async" />
+              <img src="./assets/founders-recommencer-logo.png" alt="Logo da Recommencer" loading="lazy" decoding="async" />
             </article>
           </div>
           <div class="founders-grid" id="founders-list">
@@ -1876,7 +1876,7 @@
       })();
     </script>
     <script defer src="./early-home-surfaces.js?v=20260513-tv-communityfix1"></script>
-  <script defer src="./script.js?v=20260513-tv-communityfix1"></script>
+  <script defer src="./script.js?v=20260513-review-photo-cta1"></script>
     <script>
       (function () {
         const styles = [
@@ -1897,7 +1897,7 @@
           "./modern-launch.css?v=20260415d",
           "./home-header-blue-restore.css?v=20260512-card-air1"
         ];
-        const premiumHomeStyle = "./premium-home-redesign.css?v=20260513-tv-communityfix1";
+        const premiumHomeStyle = "./premium-home-redesign.css?v=20260513-founder-premium1";
         const staticNewsFallbackScript = "./news-data.js?v=20260511-priority-sources1";
         const isStaticFile = window.location.protocol === "file:";
         const isCompactBoot =

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T04:36:14.028Z",
+  "lastUpdatedAt": "2026-05-13T05:30:23.033Z",
   "orders": [
     {
       "id": "2026-05-13-codex-sem-perguntas-permissao",
@@ -9380,6 +9380,36 @@
       "source": "chat",
       "rawRequest": "e ok, ja esta como ai? a questão do video e da intro ja da pra subir? vc travo",
       "summary": "Validar estado da intro, video/TV e botao de erro antes de decidir se pode subir.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-aplicar-acabamento-premium-animado-ao-mural-de-fundadores-com-logos-em-palco-azu",
+      "createdAt": "2026-05-13T05:19:41.637Z",
+      "updatedAt": "2026-05-13T05:19:41.637Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Melhorar visual do mural de fundadores: logos com fundo azul/transparente, efeito premium, animacao 3D rotacional e zoom in/out como se estivessem vivas.",
+      "summary": "Aplicar acabamento premium animado ao mural de fundadores, com logos em palco azul/transparente e movimentos 3D sutis.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-13-ajustar-cta-de-cards-fila-primaria-da-cheffe-imagens-de-fonte-acervo-amplo-e-rot",
+      "createdAt": "2026-05-13T05:30:23.033Z",
+      "updatedAt": "2026-05-13T05:30:23.033Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Corrigir Informar erro para fila primaria da Cheffe, trocar hierarquia Ler materia/Informar erro, buscar melhor foto na fonte quando houver fallback, sincronizar acervo amplo e clarear metricas como 81.",
+      "summary": "Ajustar CTA de cards, fila primaria da Cheffe, imagens de fonte, acervo amplo e rotulos de metricas.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

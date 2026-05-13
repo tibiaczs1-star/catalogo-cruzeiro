@@ -140,12 +140,12 @@
 
   const labelForUrl = (target) => {
     const path = target?.pathname || "";
-    if (/galeria\.html$/i.test(path)) return "Abrindo galeria";
-    if (/arquivo\.html$/i.test(path)) return "Abrindo arquivo";
-    if (/catalogo-servicos\.html$/i.test(path)) return "Abrindo serviços";
-    if (/noticia\.html$/i.test(path)) return "Abrindo matéria";
-    if (/cheffe-call\.html$/i.test(path)) return "Abrindo Cheffe Call";
-    return "Abrindo página";
+    if (/galeria\.html$/i.test(path)) return "Carregando galeria";
+    if (/arquivo\.html$/i.test(path)) return "Carregando arquivo";
+    if (/catalogo-servicos\.html$/i.test(path)) return "Carregando serviços";
+    if (/noticia\.html$/i.test(path)) return "Carregando matéria";
+    if (/cheffe-call\.html$/i.test(path)) return "Carregando Cheffe Call";
+    return "Carregando página";
   };
 
   const createLoader = (label) => {
@@ -206,9 +206,9 @@
   const finishThenNavigate = (target, label) => {
     const elapsed = Date.now() - activeStartedAt;
     const remaining = Math.max(0, minimumMs - elapsed);
-    updateLoader(92, "carregamento real pronto");
+    updateLoader(92, "Conteúdo carregado");
     window.setTimeout(() => {
-      updateLoader(100, "abrindo página");
+      updateLoader(100, "Abrindo agora");
       window.location.href = target.href;
     }, remaining || (label ? 40 : 0));
   };

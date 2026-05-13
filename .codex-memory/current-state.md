@@ -1,19 +1,15 @@
 # Current State
 
-Updated: 2026-05-13T05:00:38.971Z
+Updated: 2026-05-13T05:30:23.186Z
 
 ## Active Goal
 
-- TV embutida e ajustes finais da home
+- Correcoes finais de card, foto e Cheffe
 
 ## Summary
 
-TV do Catalogo com player dentro do site, 4 videos desktop/2 mobile; destaques com 4 cards; Comunidade mobile aponta para o formulario; Servicos navega direto sem loader preso; favicon.ico responde 200.
+CTA Ler materia virou principal; Informar erro ficou secundario e registra fila primaria; /api/news agora serve ate 1000 itens; fallback de foto tenta preview da fonte e problemas de foto entram na fila da Cheffe; metricas da Cheffe rotuladas.
 
 ## Next
 
-- Commitar e subir somente index.html
-- script.js
-- styles.css
-- navigation-loader.js
-- server.js e memorias.
+- Validar visual no navegador real e decidir commit/deploy somente com arquivos do pacote.

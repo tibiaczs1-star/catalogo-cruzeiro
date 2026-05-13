@@ -884,6 +884,15 @@ const sanitizeImageUrl = (value) => {
 const isGeneratedNewsFallbackImageUrl = (value) =>
   /(?:^|\/)assets\/news-fallbacks\//i.test(String(value || ""));
 
+const isWeakArticleImageUrl = (value) => {
+  const imageUrl = String(value || "").toLowerCase();
+  if (!imageUrl) return true;
+  if (isGeneratedNewsFallbackImageUrl(imageUrl)) return true;
+  if (/(?:placeholder|spacer|blank|favicon|logo|avatar|blur_\d)/i.test(imageUrl)) return true;
+  if (/\.(?:mp4|webm|mov)(?:[?#].*)?$/i.test(imageUrl)) return true;
+  return false;
+};
+
 const pushUniqueImageCandidate = (bucket, value) => {
   const normalized = String(value || "").trim();
   if (!normalized || bucket.includes(normalized)) {
@@ -1111,7 +1120,8 @@ const sourcePreviewImageResolveCache = new Map();
 
 const canRequestProtectedPreviewImage = () =>
   Boolean(
-    window.CATALOGO_ENABLE_PROTECTED_PREVIEWS === true ||
+    window.location.protocol !== "file:" ||
+      window.CATALOGO_ENABLE_PROTECTED_PREVIEWS === true ||
       document.body?.dataset?.allowProtectedPreviewImages === "true"
   );
 
@@ -1143,7 +1153,9 @@ const resolveSourcePreviewImage = async (article = {}) => {
 const resolveArticleImage = async (article, surface = "default") => {
   if (!article) return "";
   const candidates = collectArticleImageCandidates(article, surface).filter(
-    (candidate) => !isIllustrativeImage({ ...article, imageUrl: candidate })
+    (candidate) =>
+      !isIllustrativeImage({ ...article, imageUrl: candidate }) &&
+      !(String(article.sourceUrl || article.url || article.link || "").trim() && isWeakArticleImageUrl(candidate))
   );
 
   const sourceUrl = String(article.sourceUrl || article.url || article.link || "").trim();
@@ -1608,21 +1620,24 @@ const applyThumbImage = (thumbNode, article) => {
   const immediateImageUrl = sanitizeImageUrl(
     getArticleDisplayImageUrl(article) || getThumbFallbackImageUrl(thumbNode)
   );
+  const hasSourceUrl = Boolean(article?.sourceUrl || article?.url || article?.link);
+  const safeImmediateImageUrl =
+    hasSourceUrl && isWeakArticleImageUrl(immediateImageUrl) ? "" : immediateImageUrl;
   const immediateFocus = resolveArticleImageFocus(article, "center");
   const immediateFit = article?.imageFit || "cover";
 
-  if (immediateImageUrl) {
-    paintSurfaceImage(thumbNode, immediateImageUrl, immediateFocus, immediateFit);
-    thumbNode.dataset.imageUrl = immediateImageUrl;
-    thumbNode.dataset.sourceImage = immediateImageUrl;
+  if (safeImmediateImageUrl) {
+    paintSurfaceImage(thumbNode, safeImmediateImageUrl, immediateFocus, immediateFit);
+    thumbNode.dataset.imageUrl = safeImmediateImageUrl;
+    thumbNode.dataset.sourceImage = safeImmediateImageUrl;
     thumbNode.classList.add("has-photo", "has-real-photo");
-    applyThumbPhotoLighting(thumbNode, article, immediateImageUrl);
+    applyThumbPhotoLighting(thumbNode, article, safeImmediateImageUrl);
 
     if (photoCard) {
       photoCard.classList.add("news-photo-fixed");
-      photoCard.dataset.imageUrl = immediateImageUrl;
-      photoCard.dataset.sourceImage = immediateImageUrl;
-      photoCard.style.setProperty("--news-photo", `url('${immediateImageUrl}')`);
+      photoCard.dataset.imageUrl = safeImmediateImageUrl;
+      photoCard.dataset.sourceImage = safeImmediateImageUrl;
+      photoCard.style.setProperty("--news-photo", `url('${safeImmediateImageUrl}')`);
     }
   } else {
     clearSurfaceImage(thumbNode);
@@ -1630,7 +1645,7 @@ const applyThumbImage = (thumbNode, article) => {
   const requestId = String(++thumbImageRequestSequence);
   thumbNode.dataset.thumbImageRequest = requestId;
 
-  if (photoCard && !immediateImageUrl) {
+  if (photoCard && !safeImmediateImageUrl) {
     photoCard.classList.remove("news-photo-fixed");
     delete photoCard.dataset.imageUrl;
     delete photoCard.dataset.sourceImage;
@@ -1641,7 +1656,7 @@ const applyThumbImage = (thumbNode, article) => {
     return;
   }
 
-  if (immediateImageUrl) {
+  if (safeImmediateImageUrl) {
     return;
   }
 
@@ -15076,12 +15091,18 @@ const injectArticleReportButton = (card, primaryLink) => {
     event.preventDefault();
     event.stopPropagation();
     const payload = buildPublicCorrectionPayloadFromCard(card, primaryLink);
-    showInlineNavigationFallbackLoader({ label: "Informando erro" }).catch(() => {});
+    showInlineNavigationFallbackLoader({ label: "Carregando fila de revisão" }).catch(() => {});
     navigateToPublicCorrectionFlow(payload);
   });
 
   card.classList.add("has-article-report-button");
-  card.appendChild(button);
+  const footer = card.querySelector("footer");
+  if (footer) {
+    footer.classList.add("article-card-actions");
+    footer.appendChild(button);
+  } else {
+    card.appendChild(button);
+  }
 };
 
 const bindArticleCardLink = (card) => {
@@ -15220,7 +15241,7 @@ const shouldHandleArticleNavigationClick = (event, link) => {
 };
 
 const showInlineNavigationFallbackLoader = (options = {}) => {
-  const label = options.label || "Abrindo matéria";
+  const label = options.label || "Carregando matéria";
   const loader = document.createElement("div");
   loader.className = "catalogo-top-return-loader is-navigation-action-loader is-visible";
   loader.setAttribute("role", "status");
@@ -15238,7 +15259,7 @@ const showInlineNavigationFallbackLoader = (options = {}) => {
   return waitForSplashDelay(520).then(() => {
     loader.classList.add("is-completing");
     const textNode = loader.querySelector("[data-navigation-loader-status]");
-    if (textNode) textNode.textContent = "abrindo página";
+    if (textNode) textNode.textContent = "Carregamento concluído";
     const percentNode = loader.querySelector("[data-navigation-loader-percent]");
     if (percentNode) percentNode.textContent = "100%";
     const barNode = loader.querySelector(".catalogo-top-return-loader-track i");
@@ -15259,11 +15280,11 @@ const navigateWithArticleLoader = (href) => {
   const loaderPromise = window.CatalogoPageLoader?.showForNavigation
     ? window.CatalogoPageLoader.showForNavigation({
         href,
-        label: "Abrindo matéria"
+        label: "Carregando matéria"
       })
     : showInlineNavigationFallbackLoader({
         href,
-        label: "Abrindo matéria"
+        label: "Carregando matéria"
       });
 
   Promise.race([
@@ -17452,11 +17473,11 @@ const updateLiveFeedSummary = (filtered, visibleSlice) => {
   }
 
   if (visibleSlice.length < filtered.length) {
-    liveFeedStatus.textContent = `Mais notícias: ${filtered.length} cards na base. As ${liveFeedState.pageSize} primeiras já fecham 3 linhas sem área morta; o restante abre no botão abaixo.`;
+    liveFeedStatus.textContent = `Mais notícias: mostrando ${visibleSlice.length} de ${filtered.length}. Use o botão abaixo para carregar o restante do acervo.`;
     return;
   }
 
-  liveFeedStatus.textContent = `Mais notícias com ${filtered.length} cards. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
+  liveFeedStatus.textContent = `${filtered.length} notícias carregadas no acervo. Use a busca ou os filtros rápidos para achar bairros, temas, fontes e assuntos.`;
 };
 
 const renderLiveFeed = () => {

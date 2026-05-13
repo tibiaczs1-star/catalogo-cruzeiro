@@ -1,9 +1,9 @@
 # Handoff
 
-Updated: 2026-05-13T05:00:39.036Z
+Updated: 2026-05-13T05:30:23.224Z
 
-Validado local: JS ok, CSS braces ok, review:team zerado, perf ok, Playwright confirmou videos/cards/servicos/favicon.
+Patch local aplicado em index/script/styles/server/Cheffe/navigation para CTA, loader, foto de fonte, acervo e fila primaria. Checks: node --check e review:team totalIssues=0. Smoke API local em porta temporaria confirmou /api/news total 1188 returned 1000 e preview-image da Mailza com foto real da Agencia Acre.
 
 ## Next
 
-- Push para main e checar Render 200 com cache-bust 20260513-tv-communityfix1.
+- Rodar smoke visual final; stage apenas arquivos do pacote se for subir.

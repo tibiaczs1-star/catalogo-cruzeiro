@@ -4987,6 +4987,23 @@
     return String(value || "");
   }
 
+  const labelSceneMetric = (key = "") => {
+    const labels = {
+      totalNews: "notícias",
+      runtimeNews: "notícias vivas",
+      archiveNews: "arquivo",
+      topicFeeds: "feeds",
+      topicFeedItems: "itens de feed",
+      visits: "visitas registradas",
+      totalAgents: "agentes",
+      averageAutonomy: "autonomia média",
+      corrections: "correções",
+      review: "revisão",
+      ide: "IDE"
+    };
+    return labels[key] || key.replace(/([A-Z])/g, " $1").trim();
+  };
+
   function renderSceneMetrics(metrics = {}) {
     if (!sceneMetrics) return;
     const entries = Object.entries(metrics || {})
@@ -4997,7 +5014,7 @@
           .map(
             ([key, value]) => `
               <article>
-                <span>${escapeHtml(key.replace(/([A-Z])/g, " $1").trim())}</span>
+                <span>${escapeHtml(labelSceneMetric(key))}</span>
                 <strong>${escapeHtml(formatSceneMetricValue(value))}</strong>
               </article>
             `
@@ -5108,7 +5125,7 @@
         { label: "Arquivo", value: String(website.archiveNews || 0), detail: "Itens em news-archive.json." },
         { label: "Total", value: String(website.totalNews || 0), detail: "Volume lido pela Cheffe Call agora." },
         { label: "Feeds", value: String(website.topicFeeds || 0), detail: `${website.topicFeedItems || 0} itens nos feeds tematicos.` },
-        { label: "Visitas", value: String(website.visits || 0), detail: "Registros locais de visitas." },
+        { label: "Visitas registradas", value: String(website.visits || 0), detail: "Registros locais de visitas; não é total de contatos." },
         { label: "Categorias", value: topCategories || "sem ranking", detail: "Principais editorias em dados vivos." }
       ],
       "Sem numeros do website no payload."

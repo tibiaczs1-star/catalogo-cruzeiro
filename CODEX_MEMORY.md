@@ -1,5 +1,14 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-13 - CTA, fila primaria e foto de fonte
+
+- Usuario corrigiu a hierarquia dos cards: `Ler matéria` deve ser CTA principal e `Informar erro` acao pequena/secundaria.
+- `script.js` agora manda `Informar erro` para a fila de revisao primaria da Cheffe e tenta buscar imagem real na fonte quando a imagem do card for fallback/placeholder.
+- `server.js` inclui correcoes publicas e pendencias de foto/foco no `reviewQueue` da Cheffe; tambem deduplica cliques repetidos e amplia `/api/news` para servir ate 1000 itens.
+- `navigation-loader.js` e textos de loader passaram a dizer `Carregando...`/`Conteúdo carregado`, mais explicito para usuario.
+- `cheffe-call.js` rotula metricas como `visitas registradas` e `autonomia media`, evitando confundir numero solto com contatos cadastrados.
+- Validacoes: `node --check script.js server.js cheffe-call.js navigation-loader.js`; `npm run review:team` `totalIssues=0`; smoke local temporario confirmou `/api/news?limit=1000` com `total=1188` e `returned=1000`, e `/api/preview-image` achou foto real da materia da Mailza na Agencia Acre.
+
 ## Atualizacao rapida 2026-05-13 - TV embutida, comunidade mobile e servicos direto
 
 - Ajuste final pedido pelo usuario: TV do Catalogo agora toca dentro do site com iframe YouTube, mostrando 4 videos no desktop e 2 no mobile.
