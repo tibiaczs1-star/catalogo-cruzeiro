@@ -27050,3 +27050,475 @@ html body.editorial-home .hero-newsroom-shell.hero-restored-shell .hero-newsroom
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* 2026-05-13 hotfix: a intro fica sob controle do JS e sempre fecha. */
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 999999 !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(40, 142, 255, 0.48), transparent 32%),
+    radial-gradient(circle at 22% 16%, rgba(246, 168, 37, 0.18), transparent 24%),
+    linear-gradient(128deg, rgba(0, 6, 31, 0.98) 0%, rgba(0, 53, 130, 0.96) 46%, rgba(2, 8, 23, 0.98) 100%) !important;
+  animation: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe[hidden],
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe[aria-hidden="true"],
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-released {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 8% 6% !important;
+  z-index: 0 !important;
+  border: 1px solid rgba(214, 238, 255, 0.2) !important;
+  background:
+    linear-gradient(90deg, transparent 0 49%, rgba(214, 238, 255, 0.18) 49.5% 50.5%, transparent 51% 100%),
+    linear-gradient(0deg, transparent 0 49%, rgba(93, 184, 255, 0.16) 49.5% 50.5%, transparent 51% 100%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 86px) !important;
+  opacity: 0.82 !important;
+  transform: skewX(-10deg) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe::after {
+  display: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-noise,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-fragments,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-river {
+  display: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-broadcast {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 1 !important;
+  display: block !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  transform: none !important;
+  animation: introBroadcastDrift 4.7s cubic-bezier(0.16, 0.84, 0.2, 1) both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-broadcast {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-clock {
+  position: absolute !important;
+  left: 50% !important;
+  top: 47% !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: clamp(190px, 30vw, 420px) !important;
+  height: auto !important;
+  aspect-ratio: 1 !important;
+  opacity: 0.9 !important;
+  visibility: visible !important;
+  mix-blend-mode: screen !important;
+  transform: translate(-50%, -50%) !important;
+  filter: drop-shadow(0 0 34px rgba(80, 175, 255, 0.34)) drop-shadow(0 0 22px rgba(246, 168, 37, 0.2)) !important;
+  animation: introClockReveal 4.7s ease both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .clock-ring,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .clock-hand,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .clock-core {
+  display: block !important;
+  visibility: visible !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .clock-ring.ring-a {
+  border-color: rgba(255, 214, 106, 0.58) !important;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(255, 214, 106, 0.94) 0 2deg, transparent 2deg 10deg),
+    radial-gradient(circle, transparent 0 59%, rgba(0, 41, 104, 0.34) 60% 100%) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .clock-ring.ring-b {
+  border-color: rgba(143, 216, 255, 0.46) !important;
+  animation: introClockCounter 4.7s linear both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .clock-hand.hand-minute {
+  animation: introClockSweep 4.7s cubic-bezier(0.16, 0.84, 0.2, 1) both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cruzeiro-constellation {
+  display: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-stars {
+  display: block !important;
+  opacity: 0.62 !important;
+  visibility: visible !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-news-lines {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 3 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities span,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-news-lines span {
+  position: absolute !important;
+  right: -38vw !important;
+  top: var(--intro-name-y, 50%) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  width: max-content !important;
+  max-width: none !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 196, 70, 0.76), rgba(108, 189, 255, 0.5), transparent) !important;
+  color: rgba(225, 242, 255, 0.72) !important;
+  font-family: "Sora", system-ui, sans-serif !important;
+  font-size: clamp(0.64rem, 1vw, 0.98rem) !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.28em !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+  opacity: 0 !important;
+  transform: translate3d(0, -50%, 0) !important;
+  animation: introNamePassHotfix 4.7s linear both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities span:nth-child(1) { --intro-name-y: 18%; animation-delay: -0.25s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities span:nth-child(2) { --intro-name-y: 34%; animation-delay: -1.2s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities span:nth-child(3) { --intro-name-y: 52%; animation-delay: -2s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities span:nth-child(4) { --intro-name-y: 70%; animation-delay: -3s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-cities span:nth-child(5) { --intro-name-y: 84%; animation-delay: -3.8s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-news-lines span:nth-child(1) { --intro-name-y: 27%; animation-delay: -0.85s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-news-lines span:nth-child(2) { --intro-name-y: 62%; animation-delay: -2.35s !important; }
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-news-lines span:nth-child(3) { --intro-name-y: 78%; animation-delay: -3.2s !important; }
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-card {
+  position: relative !important;
+  z-index: 5 !important;
+  width: min(760px, calc(100vw - 36px)) !important;
+  margin: 0 !important;
+  display: grid !important;
+  justify-items: center !important;
+  gap: 0.82rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: introLogoFinaleHotfix 4.7s cubic-bezier(0.16, 0.84, 0.2, 1) both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-card::before,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-card::after {
+  display: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-compass {
+  display: grid !important;
+  place-items: center !important;
+  width: clamp(92px, 10vw, 132px) !important;
+  height: clamp(92px, 10vw, 132px) !important;
+  margin: 0 0 0.1rem !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  contain: layout paint !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-compass img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  filter: drop-shadow(0 0 24px rgba(246, 168, 37, 0.5)) drop-shadow(0 14px 36px rgba(0, 0, 0, 0.42)) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-kicker,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-label,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy small {
+  color: #f6a825 !important;
+  font-family: "Sora", system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.42em !important;
+  text-transform: uppercase !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-brand,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy {
+  display: grid !important;
+  justify-items: center !important;
+  min-width: 0 !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy strong {
+  display: block !important;
+  max-width: min(920px, calc(100vw - 28px)) !important;
+  color: #ffffff !important;
+  font-family: "Fraunces", Georgia, serif !important;
+  font-size: clamp(2.1rem, 6.4vw, 5.7rem) !important;
+  line-height: 0.92 !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance !important;
+  text-shadow: 0 0 42px rgba(77, 179, 214, 0.42), 0 18px 70px rgba(0, 0, 0, 0.62) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-copy,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-meta,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-progress {
+  display: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-card {
+  gap: 0.55rem !important;
+  animation: introPrimerLogoHotfix 0.72s ease both !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-compass {
+  width: clamp(128px, 16vw, 190px) !important;
+  height: clamp(128px, 16vw, 190px) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-kicker,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-brand,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-label,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-brand-copy small {
+  display: none !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-copy,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-meta,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-progress {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-copy {
+  color: rgba(240, 250, 255, 0.82) !important;
+  font-family: "Sora", system-ui, sans-serif !important;
+  font-size: 0.86rem !important;
+  font-weight: 800 !important;
+  justify-content: center !important;
+  letter-spacing: 0.08em !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-meta {
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.7rem !important;
+  color: rgba(225, 242, 255, 0.76) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-progress {
+  width: min(220px, 58vw) !important;
+  height: 4px !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+}
+
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .logo-splash-copy,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .logo-splash-meta,
+html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .logo-splash-progress {
+  display: none !important;
+}
+
+@keyframes introPrimerLogoHotfix {
+  0% { opacity: 0; transform: translate3d(0, 10px, 0) scale(0.94); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes introLogoFinaleHotfix {
+  0% { opacity: 0; transform: translate3d(0, 22px, 0) scale(0.98); }
+  18%, 82% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0, -10px, 0) scale(1.01); }
+}
+
+@keyframes introBroadcastDrift {
+  0% { opacity: 0; transform: translate3d(0, 18px, 0) scale(1.04); }
+  20%, 82% { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(-20px, -12px, 0) scale(1); }
+}
+
+@keyframes introClockReveal {
+  0%, 12% { opacity: 0; transform: translate(-50%, -50%) scale(0.84); }
+  28%, 78% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.03); }
+}
+
+@keyframes introClockSweep {
+  from { transform: rotate(-42deg); }
+  to { transform: rotate(328deg); }
+}
+
+@keyframes introClockCounter {
+  from { transform: rotate(0deg) scale(0.96); opacity: 0.46; }
+  to { transform: rotate(-86deg) scale(1.05); opacity: 0.82; }
+}
+
+@keyframes introNamePassHotfix {
+  0% { opacity: 0; transform: translate3d(0, -50%, 0) scaleX(0.94); }
+  10%, 72% { opacity: 0.72; }
+  100% { opacity: 0; transform: translate3d(calc(-136vw - 100%), -50%, 0) scaleX(1); }
+}
+
+@media (max-width: 620px) {
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .broadcast-clock {
+    top: 43% !important;
+    width: min(290px, 78vw) !important;
+  }
+
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-card {
+    width: min(94vw, 420px) !important;
+    gap: 0.62rem !important;
+  }
+
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-compass {
+    width: 84px !important;
+    height: 84px !important;
+  }
+
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-compass {
+    width: 136px !important;
+    height: 136px !important;
+  }
+
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy strong {
+    font-size: clamp(2rem, 11vw, 3.45rem) !important;
+  }
+
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-kicker,
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-label,
+  html body.editorial-home > .logo-splash.catalogo-cinematic-safe .logo-splash-brand-copy small {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.28em !important;
+  }
+}
+
+/* Specificity lock against older approved-intro rules. */
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe[hidden],
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe[aria-hidden="true"],
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-released {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-compass {
+  display: grid !important;
+  place-items: center !important;
+  width: clamp(92px, 10vw, 132px) !important;
+  height: clamp(92px, 10vw, 132px) !important;
+  margin: 0 0 0.1rem !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-compass img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-compass {
+  display: grid !important;
+  width: clamp(128px, 16vw, 190px) !important;
+  height: clamp(128px, 16vw, 190px) !important;
+}
+
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-broadcast {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-clock {
+  display: block !important;
+  left: 50% !important;
+  top: 47% !important;
+  width: clamp(190px, 30vw, 420px) !important;
+  opacity: 0.9 !important;
+  visibility: visible !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(circle at 50% 38%, rgba(40, 142, 255, 0.48), transparent 32%),
+    radial-gradient(circle at 22% 16%, rgba(246, 168, 37, 0.18), transparent 24%),
+    linear-gradient(128deg, rgba(0, 6, 31, 0.98) 0%, rgba(0, 53, 130, 0.96) 46%, rgba(2, 8, 23, 0.98) 100%) !important;
+  animation: introOverlayAutoRelease 6.2s ease forwards !important;
+}
+
+@keyframes introOverlayAutoRelease {
+  0%, 86% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 620px) {
+  html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-logo-primer .logo-splash-compass {
+    width: 136px !important;
+    height: 136px !important;
+  }
+
+  html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe .logo-splash-compass {
+    width: 84px !important;
+    height: 84px !important;
+  }
+
+  html body.editorial-home.site-loaded > .logo-splash.catalogo-cinematic-safe.is-broadcast-started .broadcast-clock {
+    top: 43% !important;
+    width: min(290px, 78vw) !important;
+  }
+}

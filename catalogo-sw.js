@@ -1,19 +1,19 @@
 "use strict";
 
-const VERSION = "20260513-editorial-flow2";
+const VERSION = "20260513-intro-hotfix1";
 const STATIC_CACHE = `catalogo-static-${VERSION}`;
 const RUNTIME_CACHE = `catalogo-runtime-${VERSION}`;
 const STATIC_ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=20260513-editorial-flow2",
+  "./styles.css?v=20260513-intro-hotfix1",
   "./premium-home-redesign.css?v=20260513-founder-premium1",
   "./mobile-home-final.css?v=20260430-public-sync1",
-  "./assets/logo-czs.svg?v=20260513-editorial-flow2",
+  "./assets/logo-czs.svg?v=20260513-intro-hotfix1",
   "./assets/favicon.svg",
   "./assets/icon-192.png",
   "./assets/icon-512.png",
-  "./catalogo-app-core.js?v=20260513-editorial-flow2"
+  "./catalogo-app-core.js?v=20260513-intro-hotfix1"
 ];
 
 self.addEventListener("install", (event) => {

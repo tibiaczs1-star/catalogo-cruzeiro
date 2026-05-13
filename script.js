@@ -2189,16 +2189,88 @@ const waitForSplashReadiness = async () => {
 const setupSplashExperience = () => {
   document.body.classList.remove("mobile-simple-shell", "mobile-page-shift");
 
-  clearSplashFailsafe();
-  document.body.classList.remove("catalogo-site-booting", "mobile-simple-shell", "mobile-page-shift", "broadcast-page-ready");
-  document.body.classList.add("site-loaded", "mobile-intro-ready");
   if (splashRoot?.classList.contains("catalogo-cinematic-safe")) {
+    clearSplashFailsafe();
+    document.body.classList.remove(
+      "catalogo-site-booting",
+      "mobile-simple-shell",
+      "mobile-page-shift",
+      "broadcast-page-ready"
+    );
+    document.body.classList.add("site-loaded", "mobile-intro-ready");
+
+    let safeIntroReleased = false;
+    let safeIntroBroadcastTimer = 0;
+    let safeIntroReleaseTimer = 0;
+    let safeIntroHardTimer = 0;
+
+    const releaseSafeIntro = () => {
+      if (safeIntroReleased) {
+        return;
+      }
+
+      safeIntroReleased = true;
+      window.clearTimeout(safeIntroBroadcastTimer);
+      window.clearTimeout(safeIntroReleaseTimer);
+      window.clearTimeout(safeIntroHardTimer);
+      updateSplashProgress(100, "Portal pronto para abrir");
+      splashRoot.classList.remove("is-logo-primer", "is-broadcast-started");
+      splashRoot.classList.add("is-completing", "is-leaving", "is-released");
+      splashRoot.setAttribute("aria-hidden", "true");
+      splashRoot.dataset.releaseReason = "safe-intro-complete";
+      window.__CATALOGO_LOGO_SPLASH_DONE__ = true;
+      warmPortalCacheInBackground();
+      window.dispatchEvent(new CustomEvent("catalogo:logo-splash-finished"));
+
+      window.setTimeout(() => {
+        splashRoot.hidden = true;
+      }, splashMotionQuery.matches ? 80 : 260);
+    };
+
+    if (shouldSkipHomeIntro) {
+      try {
+        sessionStorage.removeItem(skipHomeIntroKey);
+      } catch (_error) {
+        // ignore session storage failures
+      }
+
+      releaseSafeIntro();
+      return;
+    }
+
+    splashRoot.hidden = false;
+    splashRoot.classList.remove("is-completing", "is-leaving", "is-released", "is-broadcast-started");
+    splashRoot.classList.add("is-logo-primer");
+    splashRoot.setAttribute("aria-hidden", "false");
+    splashRoot.dataset.releaseReason = "";
+
+    if (splashDate) {
+      splashDate.textContent = formatSplashStamp();
+    }
+
+    updateSplashProgress(10, "Inicializando experiência...");
+
+    safeIntroBroadcastTimer = window.setTimeout(
+      () => {
+        if (safeIntroReleased) {
+          return;
+        }
+
+        splashRoot.classList.remove("is-logo-primer");
+        splashRoot.classList.add("is-broadcast-started");
+        updateSplashProgress(86, "Constelação do Cruzeiro do Sul");
+      },
+      splashMotionQuery.matches ? 120 : splashCompactViewportQuery.matches ? 420 : 720
+    );
+
+    safeIntroReleaseTimer = window.setTimeout(
+      releaseSafeIntro,
+      splashMotionQuery.matches ? 2800 : splashCompactViewportQuery.matches ? 4300 : 5200
+    );
+    safeIntroHardTimer = window.setTimeout(releaseSafeIntro, 7200);
+    rememberSplashToday();
     return;
   }
-  if (splashRoot) {
-    splashRoot.setAttribute("aria-hidden", "true");
-  }
-  return;
 
   if (performanceLiteMode) {
     clearSplashFailsafe();

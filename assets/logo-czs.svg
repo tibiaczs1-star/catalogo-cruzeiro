@@ -1,9 +1,9 @@
 <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
   <title>Rosa dos ventos do Portal Cruzeiro do Sul</title>
-  <circle cx="128" cy="128" r="108" stroke="#F0B429" stroke-width="6"/>
-  <circle cx="128" cy="128" r="60" stroke="#F0B429" stroke-width="3" opacity=".72"/>
-  <path d="M128 38 143 109 218 128 143 147 128 218 113 147 38 128 113 109 128 38Z" fill="#061624" stroke="#F0B429" stroke-width="7" stroke-linejoin="round"/>
-  <path d="M128 64 136 117 192 128 136 139 128 192 120 139 64 128 120 117 128 64Z" fill="#F0B429" stroke="#FFE39A" stroke-width="3" stroke-linejoin="round"/>
-  <path d="M128 38v180M38 128h180" stroke="#F0B429" stroke-width="3" stroke-linecap="round" opacity=".56"/>
-  <path d="M128 86 134 122 170 128 134 134 128 170 122 134 86 128 122 122 128 86Z" fill="#03101D"/>
+  <circle cx="128" cy="128" r="96" stroke="#F0B429" stroke-width="6"/>
+  <circle cx="128" cy="128" r="48" stroke="#F0B429" stroke-width="3" opacity=".62"/>
+  <path d="M128 32 146 110 224 128 146 146 128 224 110 146 32 128 110 110 128 32Z" fill="#061624" stroke="#F0B429" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M128 58 138 118 198 128 138 138 128 198 118 138 58 128 118 118 128 58Z" fill="#F0B429" stroke="#FFE39A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M128 32v192M32 128h192" stroke="#F0B429" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+  <path d="M128 84 135 121 172 128 135 135 128 172 121 135 84 128 121 121 128 84Z" fill="#03101D"/>
 </svg>

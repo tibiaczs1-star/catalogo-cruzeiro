@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-  const VERSION = "20260513-editorial-flow2";
+  const VERSION = "20260513-intro-hotfix1";
   const ROOT = window.__CATALOGO_APP__ || {};
   const supportsIdle = typeof window.requestIdleCallback === "function";
   const scheduleIdle = (task, timeout = 1400) => {
@@ -104,21 +104,21 @@
     critical: [
       "./",
       "./index.html",
-      "./styles.css?v=20260513-editorial-flow2",
+      "./styles.css?v=20260513-intro-hotfix1",
       "./premium-home-redesign.css?v=20260513-founder-premium1",
       "./mobile-home-final.css?v=20260430-public-sync1",
-      "./assets/logo-czs.svg?v=20260513-editorial-flow2",
+      "./assets/logo-czs.svg?v=20260513-intro-hotfix1",
       "./assets/favicon.svg",
       "./assets/icon-192.png",
       "./assets/icon-512.png",
-      "./catalogo-app-core.js?v=20260513-editorial-flow2"
+      "./catalogo-app-core.js?v=20260513-intro-hotfix1"
     ],
     async register() {
       if (!("serviceWorker" in navigator) || location.protocol === "file:") {
         return false;
       }
       try {
-        const registration = await navigator.serviceWorker.register("./catalogo-sw.js?v=20260513-editorial-flow2");
+        const registration = await navigator.serviceWorker.register("./catalogo-sw.js?v=20260513-intro-hotfix1");
         scheduleIdle(() => this.warm(), 2200);
         return registration;
       } catch (_error) {
