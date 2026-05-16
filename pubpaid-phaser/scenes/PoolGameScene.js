@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "../config/gameConfig.js";
-import { gameState, settleDemoMatch, updateGameState } from "../core/gameState.js";
+import { gameState, updateGameState } from "../core/gameState.js";
 import { fitImageToHeight } from "../core/assetRegistry.js";
 
 const TABLE = {
@@ -295,7 +295,7 @@ export class PoolGameScene extends Phaser.Scene {
 
   drawHud() {
     this.add.text(84, 74, "SINUCA", this.textStyle(42, "#fff6dc")).setLetterSpacing(5);
-    this.hud.subtitle = this.add.text(88, 132, `Você x ${this.opponent.name} / créditos demo ${this.stake}`, this.textStyle(15, "#d5dff2"));
+    this.hud.subtitle = this.add.text(88, 132, `Você x ${this.opponent.name} / entrada ${this.stake}`, this.textStyle(15, "#d5dff2"));
     this.hud.score = this.add.text(100, 204, "", this.textStyle(24, "#ffd06d")).setLetterSpacing(1);
     this.hud.round = this.add.text(102, 252, "", this.textStyle(16, "#d5dff2"));
     this.hud.target = this.add.text(102, 282, "", this.textStyle(17, "#8ef0a3"));
@@ -445,18 +445,7 @@ export class PoolGameScene extends Phaser.Scene {
     this.phase = "finished";
     const result = this.playerScore > this.aiScore ? "win" : this.aiScore > this.playerScore ? "loss" : "draw";
     const headline = result === "win" ? "VITÓRIA" : result === "loss" ? "DERROTA" : "EMPATE";
-    this.settlement = settleDemoMatch({
-      gameId: "pool",
-      result,
-      stake: this.stake,
-      summary: `Sinuca demo: ${this.playerScore} x ${this.aiScore}`
-    });
     const color = result === "win" ? 0x8ef0a3 : result === "loss" ? 0xff4fb8 : 0x50efff;
-    const creditCopy = this.settlement.delta > 0
-      ? `+${this.settlement.delta} créditos demo`
-      : this.settlement.delta < 0
-        ? `${this.settlement.delta} créditos demo`
-        : "sem alteração nos créditos demo";
     this.add.rectangle(TABLE.x + TABLE.width / 2, TABLE.y + TABLE.height / 2, 440, 188, 0x05070d, 0.88)
       .setStrokeStyle(5, color, 0.62)
       .setDepth(9);
@@ -464,18 +453,18 @@ export class PoolGameScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(10)
       .setLetterSpacing(4);
-    this.add.text(TABLE.x + TABLE.width / 2, TABLE.y + TABLE.height / 2 + 8, `${this.playerScore} x ${this.aiScore} / ${creditCopy}`, this.textStyle(17, "#fff6dc"))
+    this.add.text(TABLE.x + TABLE.width / 2, TABLE.y + TABLE.height / 2 + 8, `${this.playerScore} x ${this.aiScore}`, this.textStyle(17, "#fff6dc"))
       .setOrigin(0.5)
       .setDepth(10)
       .setWordWrapWidth(380);
     this.makeButton(TABLE.x + TABLE.width / 2 - 110, TABLE.y + TABLE.height / 2 + 82, 190, 40, "JOGAR DE NOVO", () => this.restartMatch(), true);
     this.makeButton(TABLE.x + TABLE.width / 2 + 110, TABLE.y + TABLE.height / 2 + 82, 170, 40, "VOLTAR LOBBY", () => this.backToLobby(), false);
-    this.updateHud(`Partida fechada: ${headline.toLowerCase()} por ${this.playerScore} x ${this.aiScore}. ${creditCopy}.`);
-    this.syncState(`Partida fechada: ${headline}. ${creditCopy}.`);
+    this.updateHud(`Partida fechada: ${headline.toLowerCase()} por ${this.playerScore} x ${this.aiScore}.`);
+    this.syncState(`Partida fechada: ${headline}.`);
     this.game.events.emit("pubpaid:pool-result", {
       result,
       settlement: this.settlement,
-      body: `${headline}: ${this.playerScore} x ${this.aiScore}. ${creditCopy}.`
+      body: `${headline}: ${this.playerScore} x ${this.aiScore}.`
     });
   }
 
@@ -588,7 +577,7 @@ export class PoolGameScene extends Phaser.Scene {
       activeGameId: "pool",
       dartsGame: null,
       lobbyPhase: this.phase === "finished" ? "finished" : "playing",
-      objective: "Vencer a IA na Sinuca demo",
+      objective: "Vencer a mesa de Sinuca",
       focus: "mesa de sinuca",
       poolGame: {
         round: this.round,

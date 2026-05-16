@@ -7,7 +7,7 @@ const GAME_META = {
     title: "Sinuca",
     accent: 0xffd06d,
     alt: 0x8ef0a3,
-    description: "Tacadas curtas, leitura de mesa e placar demo claro.",
+    description: "Mesa paga em preparação para backend real.",
     badge: "CONTROLE",
     strap: "Mira, força e mesa viva",
     panelA: 0x10241c,
@@ -33,7 +33,7 @@ const LOBBY_META = {
   title: "Lobby",
   accent: 0xffd06d,
   alt: 0x50efff,
-    description: "Escolha Sinuca ou Damas para abrir créditos demo, oponente e confirmação."
+    description: "Escolha Sinuca ou Damas. Mesas pagas exigem saldo real aprovado."
   };
 
 const STAKES = [2, 5, 10, 20, 30, 40, 50, 100];
@@ -57,7 +57,6 @@ export class GameLobbyScene extends Phaser.Scene {
     this.fxLayer = null;
     this.waiterSprite = null;
     this.waiterTalkTimer = null;
-    this.demoConfirmationPending = false;
   }
 
   init(data = {}) {
@@ -67,7 +66,6 @@ export class GameLobbyScene extends Phaser.Scene {
     this.stake = Number(data.stake || gameState.lobbyStake || 10);
     this.opponent = data.opponent || null;
     this.buttons = [];
-    this.demoConfirmationPending = false;
   }
 
   create() {
@@ -120,7 +118,7 @@ export class GameLobbyScene extends Phaser.Scene {
       strokeThickness: this.gameId ? 5 : 8
     }).setLetterSpacing(3).setOrigin(0.5);
     this.titleText.setShadow(0, 0, "#ff9d28", this.gameId ? 4 : 18, true, true);
-    this.statusText = this.add.text(GAME_WIDTH / 2, 126, this.gameId ? this.meta.description : "Sinuca ou Dama, com créditos demo e confirmação antes da partida.", {
+    this.statusText = this.add.text(GAME_WIDTH / 2, 126, this.gameId ? this.meta.description : "Sinuca ou Dama com carteira real e aprovação de saldo.", {
       fontFamily: "Georgia, Times New Roman, serif",
       fontSize: this.gameId ? "12px" : "14px",
       color: this.gameId ? "#d5dff2" : "#fff0c9",
@@ -194,7 +192,7 @@ export class GameLobbyScene extends Phaser.Scene {
         }, stake === this.stake);
       });
       const realCheckersReady = this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake;
-      const actionLabel = realCheckersReady ? "BUSCAR JOGADOR REAL" : "JOGAR DEMO";
+      const actionLabel = realCheckersReady ? "BUSCAR JOGADOR REAL" : "ABRIR CARTEIRA";
       this.makeButton(588, 658, 180, 28, actionLabel, () => this.findAiOpponent(), true);
       this.makeButton(770, 658, 124, 28, "TROCAR", () => this.selectGame(""), false);
     }
@@ -211,47 +209,29 @@ export class GameLobbyScene extends Phaser.Scene {
       this.game.events.emit("pubpaid:start-real-checkers");
       return;
     }
-    if (this.gameId === "checkers" && !this.demoConfirmationPending) {
-      this.demoConfirmationPending = true;
-      this.statusText?.setText("Você está sem saldo real. Quer usar o saldo demo?");
-      updateGameState({
-        lobbyPhase: "confirm-demo",
-        activeGameId: "checkers",
-        selectedTable: "checkers",
-        objective: "Confirmar Damas demo",
-        prompt: "Você está sem saldo real. Quer usar o saldo demo?"
-      });
-      this.game.events.emit("pubpaid:confirm-demo-checkers");
-      return;
-    }
-    this.phase = "matching";
-    const names = this.meta.ai;
-    const opponentIndex = (this.stake + (this.gameId === "pool" ? 0 : 1)) % names.length;
-    this.opponent = {
-      name: names[opponentIndex],
-      style: this.gameId === "pool" ? "controle de mesa" : "jogo posicional",
-      rating: this.gameId === "pool" ? 790 : 760
-    };
-    updateGameState({
-      lobbyPhase: "matched",
-      lobbyOpponent: this.opponent,
-      prompt: `${this.opponent.name} encontrado. Abrindo partida de teste.`
-    });
     if (this.gameId === "checkers") {
-      this.scene.start("checkers-game-scene", {
-        stake: this.stake,
-        opponent: this.opponent
+      this.statusText?.setText("Saldo real aprovado é obrigatório para Damas.");
+      updateGameState({
+        lobbyPhase: "blocked",
+        activeGameId: "",
+        selectedTable: "checkers",
+        objective: "Saldo aprovado obrigatório",
+        prompt: Number(gameState.pendingDeposits || 0) > 0
+          ? "Seu depósito está pendente de aprovação do admin."
+          : "Abra a carteira, faça um Pix e aguarde a aprovação do admin."
       });
+      this.game.events.emit("pubpaid:block-paid-game");
       return;
     }
-    if (this.gameId === "pool") {
-      this.scene.start("pool-game-scene", {
-        stake: this.stake,
-        opponent: this.opponent
-      });
-      return;
-    }
-    this.startMatchScreen();
+    this.statusText?.setText("Esta mesa paga ainda precisa do backend real antes de abrir.");
+    updateGameState({
+      lobbyPhase: "blocked",
+      activeGameId: "",
+      objective: "Mesa real indisponível",
+      prompt: "Esta mesa ainda precisa do backend real de partida, escrow e pagamento antes de abrir."
+    });
+    this.game.events.emit("pubpaid:block-paid-game", "unavailable");
+    return;
   }
 
   renderMatched() {
@@ -347,7 +327,7 @@ export class GameLobbyScene extends Phaser.Scene {
   drawPoolMatch() {
     this.drawMiniPoolTable(848, 374, 1.55);
     this.tableLayer.add(this.add.text(118, 310, "Tela própria da Sinuca", this.textStyle(20, "#ffd06d")));
-    this.tableLayer.add(this.add.text(118, 350, "Aqui entram mira, força, IA demo e liquidação de créditos demo.", this.textStyle(14, "#d5dff2")));
+    this.tableLayer.add(this.add.text(118, 350, "Esta mesa só deve abrir quando houver backend real de partida e pagamento.", this.textStyle(14, "#d5dff2")));
   }
 
   drawCheckersMatch() {
@@ -380,7 +360,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.titleText?.setColor(this.gameId ? "#fff6dc" : "#ffcf76");
     this.titleText?.setStroke("#160804", this.gameId ? 5 : 8);
     this.titleText?.setShadow(0, 0, "#ff9d28", this.gameId ? 4 : 18, true, true);
-    this.statusText?.setText(this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta abaixo.` : "Sinuca ou Dama, com créditos demo e confirmação antes da partida.");
+    this.statusText?.setText(this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta abaixo.` : "Sinuca ou Dama com carteira real e aprovação de saldo.");
     this.statusText?.setFontSize(this.gameId ? "12px" : "14px");
     this.statusText?.setColor(this.gameId ? "#d5dff2" : "#fff0c9");
     this.renderLobby();

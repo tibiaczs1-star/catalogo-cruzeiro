@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516realfix1" />
-    <script defer src="./site-google-auth.js?v=20260516realfix1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516-google-wallet-realflow1" />
+    <script defer src="./site-google-auth.js?v=20260516-google-wallet-realflow1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260516realfix1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260516-google-wallet-realflow1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -45,7 +45,7 @@
           <h1>A abertura agora é uma sequência bitmap dentro do jogo.</h1>
           <p>
             Seis frames montam a chegada, o celular, o toque, o neon e o frame final congelado.
-            Depois entram termos, Google e a rua em tela cheia.
+            Primeiro entra o Google; depois vêm termos, abertura, rua, carteira real e mesas pagas.
           </p>
         </div>
         <div class="ppg-topbar-actions">
@@ -79,7 +79,7 @@
           <button class="ppg-audio-toggle" type="button" data-audio-toggle aria-pressed="false">
             Som 16-bit
           </button>
-          <div class="ppg-permission-gate" data-permission-gate>
+          <div class="ppg-permission-gate" data-permission-gate hidden>
             <section class="ppg-permission-card" aria-label="Permissões para iniciar PubPaid 2.0">
               <p class="ppg-kicker">antes da abertura</p>
               <h2>Ative som e tela cheia.</h2>
@@ -95,35 +95,35 @@
               <span data-permission-status>Som 16-bit + fullscreen</span>
             </section>
           </div>
-          <div class="ppg-splash" data-splash-screen aria-live="polite" hidden>
-            <section class="ppg-splash-card ppg-splash-step is-active" data-splash-step="terms" hidden>
-              <p class="ppg-kicker">system ready</p>
-              <h2>Enter game</h2>
-              <label class="ppg-terms-check">
-                <input type="checkbox" data-terms-checkbox />
-                <span>
-                  Continuar inicia a run no PubPaid 2.0.
-                </span>
-              </label>
-              <p class="ppg-splash-note">
-                toque para entrar
-              </p>
-              <div class="ppg-splash-actions">
-                <button class="ppg-button primary" type="button" data-accept-terms>Enter game</button>
-              </div>
-            </section>
-
-            <section class="ppg-splash-card ppg-splash-step" data-splash-step="auth" hidden data-google-auth-card>
-              <p class="ppg-kicker">access port</p>
-              <h2 data-auth-title>Access ready</h2>
-              <p data-google-auth-status>Escolha como entrar.</p>
+          <div class="ppg-splash" data-splash-screen aria-live="polite">
+            <section class="ppg-splash-card ppg-splash-step is-active" data-splash-step="auth" data-google-auth-card>
+              <p class="ppg-kicker">google primeiro</p>
+              <h2 data-auth-title>Entre com Google</h2>
+              <p data-google-auth-status>Entre com Google para abrir o PubPaid.</p>
               <p class="ppg-splash-note" data-google-auth-email>
-                login gate
+                A carteira, depósitos e mesas pagas usam a mesma identidade.
               </p>
               <div class="ppg-google-stack ppg-google-stack--fit">
                 <div class="ppg-google-slot" data-google-auth-button></div>
                 <button class="ppg-button" type="button" data-google-auth-logout hidden>Sair do Google</button>
-                <button class="ppg-button primary" type="button" data-open-game disabled>Enter game</button>
+                <button class="ppg-button primary" type="button" data-open-game disabled>Continuar</button>
+              </div>
+            </section>
+
+            <section class="ppg-splash-card ppg-splash-step" data-splash-step="terms" hidden>
+              <p class="ppg-kicker">carteira real</p>
+              <h2>Confirmar entrada</h2>
+              <label class="ppg-terms-check">
+                <input type="checkbox" data-terms-checkbox />
+                <span>
+                  Entendo que depósitos só viram saldo jogável depois da aprovação do admin.
+                </span>
+              </label>
+              <p class="ppg-splash-note">
+                Sem saldo aprovado, mesas pagas ficam bloqueadas.
+              </p>
+              <div class="ppg-splash-actions">
+                <button class="ppg-button primary" type="button" data-accept-terms>Ativar abertura</button>
               </div>
             </section>
           </div>
@@ -139,10 +139,6 @@
             <article class="ppg-hud-debug">
               <span>modo</span>
               <strong data-game-mode>nucleo phaser</strong>
-            </article>
-            <article class="ppg-hud-chip">
-              <span>teste</span>
-              <strong data-game-test-balance>100</strong>
             </article>
             <article class="ppg-hud-chip">
               <span>real</span>
@@ -199,11 +195,11 @@
                 </button>
                 <button type="button" class="ppg-dom-game-card is-checkers" data-dom-start-game="checkers">
                   <span>Damas</span>
-                  <strong>turnos locais</strong>
+                  <strong>saldo real</strong>
                 </button>
               </div>
               <div class="ppg-dom-lobby-foot">
-                <span>créditos demo <strong data-dom-lobby-balance>100</strong></span>
+                <span>saldo livre <strong data-dom-lobby-balance>0</strong></span>
                 <span>entrada <strong data-dom-lobby-stake>10</strong></span>
                 <span data-dom-lobby-state>pronto</span>
                 <button type="button" data-dom-return-salon>Sair</button>
@@ -218,21 +214,21 @@
               <div class="ppg-dom-match-lights" aria-hidden="true">
                 <i></i><i></i><i></i><i></i>
               </div>
-              <p data-dom-matchmaking-status>Procurando oponente demo.</p>
+              <p data-dom-matchmaking-status>Procurando oponente real.</p>
               <div class="ppg-dom-actions">
                 <button type="button" data-dom-open-lobby>Cancelar</button>
               </div>
             </aside>
 
-            <aside class="ppg-dom-demo-confirm" data-dom-demo-confirm hidden>
+            <aside class="ppg-dom-access-block" data-dom-access-block hidden>
               <header>
-                <span class="ppg-kicker">saldo</span>
-                <h2>Sem saldo real</h2>
+                <span class="ppg-kicker">carteira real</span>
+                <h2 data-dom-access-block-title>Sem saldo aprovado</h2>
               </header>
-              <p>Você está sem saldo real. Quer usar o saldo demo?</p>
+              <p data-dom-access-block-body>Faça um depósito Pix e aguarde a aprovação do admin para jogar.</p>
               <div class="ppg-dom-actions">
-                <button type="button" class="primary" data-dom-confirm-demo>Usar saldo demo</button>
-                <button type="button" data-dom-cancel-demo>Voltar</button>
+                <button type="button" class="primary" data-dom-open-wallet>Abrir carteira</button>
+                <button type="button" data-dom-cancel-access-block>Voltar</button>
               </div>
             </aside>
 
@@ -258,7 +254,6 @@
               <p data-dom-pool-status>Trave mira e força para tacar.</p>
               <div class="ppg-dom-actions">
                 <button type="button" class="primary" data-dom-pool-shot>Tacada</button>
-                <button type="button" data-dom-game-reset="pool">Revanche</button>
                 <button type="button" data-dom-open-lobby>Lobby</button>
               </div>
             </aside>
@@ -274,7 +269,6 @@
                 <span data-dom-checkers-status>Escolha uma peça.</span>
               </div>
               <div class="ppg-dom-actions">
-                <button type="button" data-dom-game-reset="checkers">Reiniciar</button>
                 <button type="button" data-dom-open-lobby>Lobby</button>
               </div>
             </aside>
@@ -284,7 +278,6 @@
               <h2 data-dom-result-title>Partida encerrada</h2>
               <p data-dom-result-body></p>
               <div class="ppg-dom-actions">
-                <button type="button" class="primary" data-dom-result-again>Jogar de novo</button>
                 <button type="button" data-dom-open-lobby>Lobby</button>
                 <button type="button" data-dom-return-salon>Salão</button>
               </div>
@@ -301,6 +294,15 @@
                 <strong>PubPaid Pay</strong>
                 <small>carteira</small>
               </div>
+              <section class="ppg-wallet-identity" data-wallet-identity>
+                <img alt="" data-wallet-user-picture hidden />
+                <div>
+                  <span>Conta Google</span>
+                  <strong data-wallet-user-name>Entre com Google</strong>
+                  <small data-wallet-user-email>Carteira bloqueada sem login.</small>
+                  <code data-wallet-user-id></code>
+                </div>
+              </section>
 
               <div class="ppg-wallet-grid">
                 <article>
@@ -336,10 +338,6 @@
                     <option value="50">50 créditos</option>
                     <option value="100">100 créditos</option>
                   </select>
-                </label>
-                <label>
-                  <span>Nome no comprovante</span>
-                  <input type="text" maxlength="90" autocomplete="name" data-wallet-depositor-name placeholder="Nome de quem fez o Pix" />
                 </label>
                 <div class="ppg-wallet-actions">
                   <button type="button" class="primary" data-wallet-generate-deposit>Gerar QR</button>

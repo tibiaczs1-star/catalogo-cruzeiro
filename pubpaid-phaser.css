@@ -108,7 +108,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-lobby,
 .ppg-dom-matchmaking,
-.ppg-dom-demo-confirm,
+.ppg-dom-access-block,
 .ppg-dom-pool,
 .ppg-dom-checkers,
 .ppg-dom-result {
@@ -140,7 +140,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-lobby header,
 .ppg-dom-matchmaking header,
-.ppg-dom-demo-confirm header,
+.ppg-dom-access-block header,
 .ppg-dom-pool header,
 .ppg-dom-checkers header,
 .ppg-dom-result {
@@ -150,7 +150,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-lobby h2,
 .ppg-dom-matchmaking h2,
-.ppg-dom-demo-confirm h2,
+.ppg-dom-access-block h2,
 .ppg-dom-pool h2,
 .ppg-dom-checkers h2,
 .ppg-dom-result h2 {
@@ -217,7 +217,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-matchmaking,
-.ppg-dom-demo-confirm,
+.ppg-dom-access-block,
 .ppg-dom-pool {
   left: 18px;
   bottom: 22px;
@@ -225,12 +225,12 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   padding: 14px;
 }
 
-.ppg-dom-demo-confirm {
+.ppg-dom-access-block {
   display: grid;
   gap: 10px;
 }
 
-.ppg-dom-demo-confirm p {
+.ppg-dom-access-block p {
   margin: 0;
   color: #fff6dc;
   line-height: 1.4;
@@ -313,6 +313,38 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   padding: 8px;
   border: 1px solid rgba(255, 208, 109, 0.2);
   background: rgba(255, 208, 109, 0.06);
+}
+
+.ppg-wallet-identity {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid rgba(80, 239, 255, 0.22);
+  background: rgba(3, 7, 18, 0.54);
+}
+
+.ppg-wallet-identity img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ppg-wallet-identity span,
+.ppg-wallet-identity small,
+.ppg-wallet-identity code {
+  display: block;
+  color: #9fb0ca;
+  overflow-wrap: anywhere;
+}
+
+.ppg-wallet-identity strong {
+  display: block;
+  color: #fff6dc;
+  overflow-wrap: anywhere;
 }
 
 .ppg-wallet-section {
@@ -1662,33 +1694,6 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.64);
 }
 
-.ppg-splash-card.is-local-demo {
-  background:
-    radial-gradient(circle at 50% 52%, rgba(142, 240, 163, 0.13), transparent 62%),
-    linear-gradient(90deg, transparent, rgba(142, 240, 163, 0.08), transparent);
-}
-
-.ppg-splash-card.is-local-demo .ppg-kicker {
-  color: var(--ppg-green);
-}
-
-.ppg-splash-card.is-local-demo [data-google-auth-logout] {
-  display: none !important;
-}
-
-.ppg-splash-card.is-local-demo [data-google-auth-status] {
-  color: rgba(218, 255, 226, 0.82);
-}
-
-.ppg-splash-card.is-local-demo [data-google-auth-email] {
-  color: rgba(160, 227, 173, 0.78);
-}
-
-.ppg-splash-card.is-local-demo .ppg-button.primary {
-  background: linear-gradient(180deg, #2d7f4c, #17442c);
-  border-color: rgba(142, 240, 163, 0.72);
-}
-
 .ppg-terms-check {
   order: 4;
   display: block;
@@ -1777,74 +1782,6 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
   cursor: pointer;
 }
 
-.ppg-street-google-gate {
-  position: absolute;
-  right: calc(18px + var(--ppg-safe-right));
-  bottom: calc(86px + var(--ppg-safe-bottom));
-  z-index: 5;
-  display: grid;
-  justify-items: end;
-  gap: 6px;
-  pointer-events: none;
-}
-
-.ppg-street-google-gate[hidden] {
-  display: none;
-}
-
-.ppg-street-google-gate .ppg-kicker {
-  color: rgba(255, 208, 109, 0.88);
-  font-family: "Courier New", "Lucida Console", monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.7);
-}
-
-.ppg-street-google-button {
-  pointer-events: auto;
-  position: relative;
-  min-width: 232px;
-  min-height: 54px;
-  padding: 10px 20px 9px;
-  border: 3px solid rgba(191, 162, 128, 0.46);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(18, 20, 30, 0.88), rgba(7, 8, 14, 0.96));
-  background-size: 6px 6px, 6px 6px, auto;
-  clip-path: polygon(5% 0, 95% 0, 100% 28%, 100% 72%, 95% 100%, 5% 100%, 0 72%, 0 28%);
-  color: rgba(255, 243, 218, 0.86);
-  font-family: "Courier New", "Lucida Console", monospace;
-  font-size: 1rem;
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.74);
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 243, 214, 0.06),
-    0 0 0 1px rgba(20, 10, 4, 0.88),
-    0 10px 22px rgba(0, 0, 0, 0.32);
-  cursor: pointer;
-}
-
-.ppg-street-google-button:disabled {
-  border-color: rgba(120, 132, 156, 0.34);
-  color: rgba(220, 226, 236, 0.66);
-  cursor: default;
-}
-
-.ppg-street-google-gate [data-street-google-status] {
-  max-width: 252px;
-  color: rgba(173, 185, 205, 0.8);
-  font-family: "Courier New", "Lucida Console", monospace;
-  font-size: 0.54rem;
-  letter-spacing: 0.14em;
-  line-height: 1.45;
-  text-transform: uppercase;
-  text-align: right;
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.72);
-}
-
 .ppg-splash-step[data-splash-step="terms"] .ppg-button.primary::before,
 .ppg-splash-step[data-splash-step="terms"] .ppg-button.primary::after {
   display: none;
@@ -1902,15 +1839,6 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
   font-size: 0.52rem;
   letter-spacing: 0.14em;
   line-height: 1.5;
-}
-
-.pubpaid-phaser-page .ppg-splash-card.is-local-demo .ppg-button.primary {
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(23, 41, 28, 0.9), rgba(7, 18, 12, 0.96)) !important;
-  border-color: rgba(142, 240, 163, 0.42) !important;
-  color: rgba(229, 255, 236, 0.84) !important;
 }
 
 .ppg-footer-nav {
@@ -3019,21 +2947,6 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
     grid-template-columns: 1fr;
   }
 
-  .ppg-street-google-gate {
-    right: calc(10px + var(--ppg-safe-right));
-    bottom: calc(118px + var(--ppg-safe-bottom));
-    justify-items: stretch;
-  }
-
-  .ppg-street-google-button {
-    min-width: 188px;
-    min-height: 48px;
-    font-size: 0.84rem;
-  }
-
-  .ppg-street-google-gate [data-street-google-status] {
-    max-width: 188px;
-  }
 }
 
 @media (max-width: 430px) {

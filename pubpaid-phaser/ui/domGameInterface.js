@@ -1,4 +1,4 @@
-import { gameState, settleDemoMatch, subscribeGameState, updateGameState } from "../core/gameState.js";
+import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 import { joinPubpaidPvpQueue, leavePubpaidPvpQueue } from "../services/accountService.js";
 import { fetchPvpState, moveCheckers } from "../services/pvpService.js";
 
@@ -151,9 +151,10 @@ export function bindDomGameInterface(game) {
     matchmaking: document.querySelector("[data-dom-matchmaking]"),
     matchmakingGame: document.querySelector("[data-dom-matchmaking-game]"),
     matchmakingStatus: document.querySelector("[data-dom-matchmaking-status]"),
-    demoConfirm: document.querySelector("[data-dom-demo-confirm]"),
-    confirmDemo: document.querySelector("[data-dom-confirm-demo]"),
-    cancelDemo: document.querySelector("[data-dom-cancel-demo]"),
+    accessBlock: document.querySelector("[data-dom-access-block]"),
+    accessBlockTitle: document.querySelector("[data-dom-access-block-title]"),
+    accessBlockBody: document.querySelector("[data-dom-access-block-body]"),
+    cancelAccessBlock: document.querySelector("[data-dom-cancel-access-block]"),
     pool: document.querySelector("[data-dom-pool]"),
     poolTitle: document.querySelector("[data-dom-pool-title]"),
     poolScore: document.querySelector("[data-dom-pool-score]"),
@@ -185,13 +186,13 @@ export function bindDomGameInterface(game) {
   const setPanel = (name) => {
     refs.root.classList.toggle("is-lobby", name === "lobby");
     refs.root.classList.toggle("is-matchmaking", name === "matchmaking");
-    refs.root.classList.toggle("is-demo-confirm", name === "demo-confirm");
+    refs.root.classList.toggle("is-access-block", name === "access-block");
     refs.root.classList.toggle("is-pool", name === "pool");
     refs.root.classList.toggle("is-checkers", name === "checkers");
     refs.root.classList.toggle("is-result", name === "result");
     refs.lobby.hidden = name !== "lobby";
     refs.matchmaking.hidden = name !== "matchmaking";
-    refs.demoConfirm.hidden = name !== "demo-confirm";
+    refs.accessBlock.hidden = name !== "access-block";
     refs.pool.hidden = name !== "pool";
     refs.checkers.hidden = name !== "checkers";
     refs.result.hidden = name !== "result";
@@ -210,7 +211,7 @@ export function bindDomGameInterface(game) {
     updateGameState({
       lobbyPhase: "selecting",
       objective: "Escolher Sinuca ou Damas",
-      prompt: "Lobby aberto. Escolha uma mesa para jogar com créditos demo."
+      prompt: "Lobby aberto. Mesas pagas exigem saldo real aprovado."
     });
   };
 
@@ -244,43 +245,65 @@ export function bindDomGameInterface(game) {
     local.selectedGame = gameId;
     const gameName = gameId === "checkers" ? "Damas" : "Sinuca";
     refs.matchmakingGame.textContent = gameName;
-    refs.matchmakingStatus.textContent = `Procurando oponente demo para ${gameName}.`;
+    refs.matchmakingStatus.textContent = `Procurando oponente real para ${gameName}.`;
     setPanel("matchmaking");
     updateGameState({
       activeGameId: gameId,
       selectedTable: gameId,
       lobbyPhase: "matching",
       objective: `Encontrar oponente para ${gameName}`,
-      focus: "matchmaking demo",
-      prompt: `Buscando oponente demo para ${gameName}.`
+      focus: "matchmaking real",
+      prompt: `Buscando oponente real para ${gameName}.`
     });
     local.matchmakingTimer = window.setTimeout(() => {
       const opponent = pickOpponent(gameId);
       updateGameState({
         lobbyPhase: "matched",
         lobbyOpponent: opponent,
-        prompt: `${opponent.name} encontrado. Abrindo mesa demo.`
+        prompt: `${opponent.name} encontrado. Abrindo mesa.`
       });
-      gameId === "checkers" ? startCheckers(opponent) : startPool(opponent);
+      gameId === "checkers" ? showAccessBlock() : showAccessBlock("unavailable");
     }, 980);
   };
 
-  const showDemoConfirm = () => {
-    local.selectedGame = "checkers";
-    setPanel("demo-confirm");
+  const showAccessBlock = (reason = "deposit") => {
+    const user = gameState.googleUser || window.CatalogoGoogleAuth?.getUser?.() || null;
+    const pending = Number(gameState.pendingDeposits || 0);
+    const copy = !user?.email
+      ? {
+          title: "Login obrigatório",
+          body: "Entre com Google antes de abrir a carteira ou jogar mesas pagas."
+        }
+      : pending > 0
+        ? {
+            title: "Depósito pendente",
+            body: "Seu Pix foi avisado ao admin. O saldo só fica jogável depois da aprovação."
+          }
+        : {
+            title: "Sem saldo aprovado",
+            body: "Faça um depósito Pix na carteira e aguarde a aprovação do admin para jogar."
+          };
+    if (reason === "unavailable") {
+      copy.title = "Mesa real indisponível";
+      copy.body = "Esta mesa ainda precisa do backend real de partida, escrow e pagamento antes de abrir.";
+    }
+    refs.accessBlockTitle.textContent = copy.title;
+    refs.accessBlockBody.textContent = copy.body;
+    setPanel("access-block");
     updateGameState({
-      activeGameId: "checkers",
-      selectedTable: "checkers",
-      lobbyPhase: "confirm-demo",
-      objective: "Confirmar Damas demo",
-      focus: "saldo demo",
-      prompt: "Você está sem saldo real. Quer usar o saldo demo?"
+      activeGameId: "",
+      lobbyPhase: "blocked",
+      objective: copy.title,
+      focus: "carteira real",
+      prompt: copy.body
     });
   };
 
   const isRealCheckersEligible = () =>
     gameIdIsCheckers(local.selectedGame) &&
     Number(gameState.availableBalance || 0) >= Number(gameState.lobbyStake || 10);
+
+  const isLoggedIn = () => Boolean(gameState.googleUser?.email || window.CatalogoGoogleAuth?.isSignedIn?.());
 
   const gameIdIsCheckers = (gameId) => gameId === "checkers";
 
@@ -480,18 +503,7 @@ export function bindDomGameInterface(game) {
     const result = getCheckersResult(local.checkers.board, local.checkers.moveCount);
     if (!result) return false;
     local.checkers.result = result.result;
-    const settlement = settleDemoMatch({
-      gameId: "checkers",
-      result: result.result,
-      stake: gameState.lobbyStake || 10,
-      summary: `Damas demo: ${result.reason}`
-    });
-    const creditCopy = settlement.delta > 0
-      ? ` +${settlement.delta} créditos demo.`
-      : settlement.delta < 0
-        ? ` ${settlement.delta} créditos demo.`
-        : " Créditos demo sem alteração.";
-    local.checkers.status = `${result.reason}${creditCopy}`;
+    local.checkers.status = result.reason;
     renderCheckers();
     showResult("checkers", result.result, local.checkers.status);
     return true;
@@ -501,13 +513,7 @@ export function bindDomGameInterface(game) {
     const moves = getAllMoves(local.checkers.board, "ai", true);
     if (!moves.length) {
       local.checkers.result = "win";
-      const settlement = settleDemoMatch({
-        gameId: "checkers",
-        result: "win",
-        stake: gameState.lobbyStake || 10,
-        summary: "Damas demo: rival sem jogadas"
-      });
-      local.checkers.status = `A rival ficou sem jogadas. +${settlement.delta} créditos demo.`;
+      local.checkers.status = "A rival ficou sem jogadas.";
       renderCheckers();
       showResult("checkers", "win", local.checkers.status);
       return;
@@ -568,9 +574,9 @@ export function bindDomGameInterface(game) {
       if (nextGame === "checkers" && isRealCheckersEligible()) {
         startRealCheckers();
       } else if (nextGame === "checkers") {
-        showDemoConfirm();
+        showAccessBlock();
       } else {
-        showMatchmaking(nextGame);
+        showAccessBlock("unavailable");
       }
       return;
     }
@@ -602,11 +608,11 @@ export function bindDomGameInterface(game) {
     }
     const resetButton = event.target.closest("[data-dom-game-reset]");
     if (resetButton) {
-      resetButton.dataset.domGameReset === "checkers" ? startCheckers() : startPool();
+      resetButton.dataset.domGameReset === "checkers" ? showAccessBlock() : showAccessBlock("unavailable");
       return;
     }
     if (event.target.closest("[data-dom-result-again]")) {
-      local.selectedGame === "checkers" ? startCheckers() : startPool();
+      local.selectedGame === "checkers" && isRealCheckersEligible() ? startRealCheckers() : showAccessBlock();
       return;
     }
     const cell = event.target.closest("[data-dom-checkers-board] [data-row]");
@@ -644,16 +650,12 @@ export function bindDomGameInterface(game) {
     }
   });
 
-  refs.confirmDemo?.addEventListener("click", () => {
-    showMatchmaking("checkers");
-  });
-
-  refs.cancelDemo?.addEventListener("click", () => {
+  refs.cancelAccessBlock?.addEventListener("click", () => {
     showLobby();
   });
 
   game.events.on("pubpaid:open-dom-lobby", showLobby);
-  game.events.on("pubpaid:confirm-demo-checkers", showDemoConfirm);
+  game.events.on("pubpaid:block-paid-game", showAccessBlock);
   game.events.on("pubpaid:start-real-checkers", startRealCheckers);
   game.events.on("pubpaid:pool-result", ({ result, body } = {}) => {
     showResult("pool", result || "draw", body || "Partida encerrada.");
@@ -670,14 +672,14 @@ export function bindDomGameInterface(game) {
       state.activeGameId === "pool" ||
       state.activeGameId === "checkers" ||
       state.lobbyPhase === "selecting" ||
-      state.lobbyPhase === "confirm-demo" ||
+      state.lobbyPhase === "blocked" ||
       state.lobbyPhase === "matching" ||
       state.lobbyPhase === "matched" ||
       state.lobbyPhase === "playing" ||
       state.lobbyPhase === "finished";
     refs.root.classList.toggle("is-hidden", !shouldShow);
     document.body.classList.toggle("ppg-lobby-clean", shouldShow);
-    if (refs.lobbyBalance) refs.lobbyBalance.textContent = `${state.testBalance || 0}`;
+    if (refs.lobbyBalance) refs.lobbyBalance.textContent = `${state.availableBalance || 0}`;
     if (refs.lobbyStake) refs.lobbyStake.textContent = `${state.lobbyStake || 10}`;
     if (refs.lobbyState) {
       refs.lobbyState.textContent =
@@ -688,9 +690,9 @@ export function bindDomGameInterface(game) {
         "pronto";
     }
     if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
-    if (state.lobbyPhase === "confirm-demo" && !refs.demoConfirm.hidden) return;
-    if (state.lobbyPhase === "confirm-demo") {
-      setPanel("demo-confirm");
+    if (state.lobbyPhase === "blocked" && !refs.accessBlock.hidden) return;
+    if (state.lobbyPhase === "blocked") {
+      setPanel("access-block");
       return;
     }
     if (state.lobbyPhase === "matching" && !refs.matchmaking.hidden) return;

@@ -13846,8 +13846,11 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
     savePubpaidWalletStore({
       ...wallets,
       [key]: {
+        id: wallet.id,
+        walletKey: key,
         playerId: key,
         playerName: safeString(authUser.name, 120) || "Jogador",
+        user: publicAuthUser(authUser),
         balanceCoins: 0,
         availableCoins: 0,
         lockedMatchCoins: 0,
@@ -13897,8 +13900,11 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
   savePubpaidWalletStore({
     ...wallets,
     [key]: {
+      id: next.id,
+      walletKey: key,
       playerId: key,
       playerName: safeString(next?.user?.name || authUser.name || "", 120) || "Jogador",
+      user: publicAuthUser(authUser),
       balanceCoins: next.balanceCoins,
       availableCoins: next.availableCoins,
       lockedMatchCoins: next.lockedMatchCoins,
@@ -13947,8 +13953,9 @@ function buildPubpaidAccountPayload(authUser = {}) {
           availableCoins: normalizePubpaidMoney(wallet.availableCoins ?? (wallet.balanceCoins - wallet.lockedMatchCoins - wallet.lockedWithdrawalCoins)),
           lockedMatchCoins: normalizePubpaidMoney(wallet.lockedMatchCoins),
           lockedWithdrawalCoins: normalizePubpaidMoney(wallet.lockedWithdrawalCoins),
-          totalApprovedDeposits: normalizePubpaidMoney(wallet.totalApprovedDeposits),
-          totalApprovedWithdrawals: normalizePubpaidMoney(wallet.totalApprovedWithdrawals),
+        totalApprovedDeposits: normalizePubpaidMoney(wallet.totalApprovedDeposits),
+        totalApprovedWithdrawals: normalizePubpaidMoney(wallet.totalApprovedWithdrawals),
+          walletKey,
           createdAt: wallet.createdAt || "",
           updatedAt: wallet.updatedAt || ""
         }
@@ -13959,6 +13966,7 @@ function buildPubpaidAccountPayload(authUser = {}) {
           lockedWithdrawalCoins: 0,
           totalApprovedDeposits: 0,
           totalApprovedWithdrawals: 0,
+          walletKey,
           createdAt: "",
           updatedAt: ""
         },
@@ -14572,6 +14580,11 @@ function buildPubpaidAdminPayload() {
     createdAt: item.createdAt || "",
     email: item?.user?.email || "",
     name: item?.user?.name || "",
+    googleSub: item.googleSub || item?.user?.sub || item?.payment?.googleSub || "",
+    googleEmail: item.googleEmail || item?.user?.email || item?.payment?.googleEmail || "",
+    googleName: item.googleName || item?.user?.name || item?.payment?.googleName || "",
+    googlePicture: item.googlePicture || item?.user?.picture || "",
+    walletKey: item.walletKey || "",
     depositorName: item.depositorName || item?.payment?.depositorName || "",
     amount: item.amount || 0,
     creditsRequested: item.creditsRequested || 0,
@@ -14589,6 +14602,8 @@ function buildPubpaidAdminPayload() {
     createdAt: item.createdAt || "",
     email: item?.user?.email || "",
     name: item?.user?.name || "",
+    googleSub: item?.user?.sub || "",
+    walletKey: item.walletKey || "",
     amount: item.amount || 0,
     creditsRequested: item.creditsRequested || 0,
     status: item.status || "",
@@ -14600,6 +14615,8 @@ function buildPubpaidAdminPayload() {
     updatedAt: item.updatedAt || item.createdAt || "",
     email: item?.user?.email || "",
     name: item?.user?.name || "",
+    googleSub: item?.user?.sub || item.googleSub || "",
+    googlePicture: item?.user?.picture || item.googlePicture || "",
     walletKey: item.walletKey || "",
     balanceCoins: normalizePubpaidMoney(item.balanceCoins),
     lockedWithdrawalCoins: normalizePubpaidMoney(item.lockedWithdrawalCoins),
@@ -16869,11 +16886,12 @@ async function handleApi(req, res, pathname, searchParams) {
     const body = await parseBody(req);
     const amount = normalizePubpaidAmount(body.amount, 10);
     const txid = normalizePixToken(body.paymentTxid || body.txid || `PUB${Date.now()}`, 25) || `PUB${Date.now()}`;
-    const depositorName = cleanShortText(body.depositorName || body.depositName || body.payerName || "", 90);
-    if (!depositorName || depositorName.length < 3) {
+    const googleUser = publicAuthUser(authUser);
+    const depositorName = cleanShortText(googleUser?.name || googleUser?.email || "", 90);
+    if (!googleUser?.sub || !googleUser?.email || !depositorName) {
       return sendJson(res, 400, {
         ok: false,
-        error: "Informe o nome de quem fez o Pix para a conferencia manual."
+        error: "Entre com Google para registrar o deposito com nome e email reais."
       });
     }
     const tracking = buildTrackingMeta(req, body);
@@ -16882,9 +16900,13 @@ async function handleApi(req, res, pathname, searchParams) {
     const nextItem = {
       id: createRecordId("pubdep"),
       type: "pubpaid-deposito",
-      user: publicAuthUser(authUser),
+      user: googleUser,
       depositorName,
       walletKey: wallet?.walletKey || getPubpaidWalletKey(authUser),
+      googleSub: googleUser.sub,
+      googleEmail: googleUser.email,
+      googleName: googleUser.name,
+      googlePicture: googleUser.picture,
       amount: Number(amount.toFixed(2)),
       creditsRequested: Math.floor(amount),
       status: "aguardando-confirmacao-pix",
@@ -16893,6 +16915,9 @@ async function handleApi(req, res, pathname, searchParams) {
         keyVisible: false,
         txid,
         depositorName,
+        googleSub: googleUser.sub,
+        googleEmail: googleUser.email,
+        googleName: googleUser.name,
         status: "pendente-manual",
         confirmationMode: "manual"
       },
@@ -17073,14 +17098,15 @@ async function handleApi(req, res, pathname, searchParams) {
       createdAt: item.createdAt || "",
       player: item?.user?.name || "",
       email: item?.user?.email || "",
-      depositorName: item.depositorName || item?.payment?.depositorName || "",
+      googleSub: item.googleSub || item?.user?.sub || item?.payment?.googleSub || "",
+      walletKey: item.walletKey || "",
       amount: item.amount || 0,
       creditsRequested: item.creditsRequested || 0,
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
       txid: item?.payment?.txid || ""
     }));
-    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,depositorName,amount,creditsRequested,status,paymentStatus,txid\n", "pubpaid_depositos.csv");
+    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,googleSub,walletKey,amount,creditsRequested,status,paymentStatus,txid\n", "pubpaid_depositos.csv");
   }
 
   if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-withdrawals.csv") {

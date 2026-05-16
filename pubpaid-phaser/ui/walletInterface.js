@@ -71,8 +71,11 @@ export function bindWalletInterface() {
     lockedWithdrawal: document.querySelector("[data-wallet-locked-withdrawal]"),
     pending: document.querySelector("[data-wallet-pending]"),
     feedback: document.querySelector("[data-wallet-feedback]"),
+    userPicture: document.querySelector("[data-wallet-user-picture]"),
+    userName: document.querySelector("[data-wallet-user-name]"),
+    userEmail: document.querySelector("[data-wallet-user-email]"),
+    userId: document.querySelector("[data-wallet-user-id]"),
     depositAmount: document.querySelector("[data-wallet-deposit-amount]"),
-    depositorName: document.querySelector("[data-wallet-depositor-name]"),
     generateDeposit: document.querySelector("[data-wallet-generate-deposit]"),
     registerDeposit: document.querySelector("[data-wallet-register-deposit]"),
     qr: document.querySelector("[data-wallet-pix-qr]"),
@@ -117,6 +120,16 @@ export function bindWalletInterface() {
     updateGameState({ walletFeedback: message });
   };
 
+  const syncIdentity = (user = getGoogleUser()) => {
+    text(refs.userName, user?.name || "Entre com Google");
+    text(refs.userEmail, user?.email || "Carteira bloqueada sem login.");
+    text(refs.userId, user?.sub ? `Google id: ${user.sub}` : "");
+    if (refs.userPicture) {
+      refs.userPicture.hidden = !user?.picture;
+      if (user?.picture) refs.userPicture.src = user.picture;
+    }
+  };
+
   const resetDeposit = (message = "Gere o QR Code para abrir a etapa de confirmação.") => {
     local.txid = "";
     local.qrReady = false;
@@ -151,14 +164,8 @@ export function bindWalletInterface() {
     }
 
     const amount = getDepositAmount(refs.depositAmount);
-    const depositorName = String(refs.depositorName?.value || "").trim();
     if (!amount) {
       setFeedback("Escolha um valor de depósito.");
-      return;
-    }
-    if (depositorName.length < 3) {
-      setFeedback("Informe o nome que aparece no comprovante Pix.");
-      refs.depositorName?.focus?.();
       return;
     }
 
@@ -193,14 +200,14 @@ export function bindWalletInterface() {
   });
 
   refs.registerDeposit?.addEventListener("click", async () => {
-    const depositorName = String(refs.depositorName?.value || "").trim();
     if (!local.qrReady || !local.txid) {
       setFeedback("Gere o QR Code antes de registrar o deposito.");
       return;
     }
-    if (depositorName.length < 3) {
-      setFeedback("Informe o nome de quem fez o Pix.");
-      refs.depositorName?.focus?.();
+    const user = getGoogleUser();
+    if (!user?.email) {
+      setFeedback("Entre com Google para avisar o admin.");
+      await window.CatalogoGoogleAuth?.promptSignIn?.();
       return;
     }
 
@@ -210,7 +217,6 @@ export function bindWalletInterface() {
       const payload = await registerPubpaidDeposit({
         amount: local.amount || getDepositAmount(refs.depositAmount),
         paymentTxid: local.txid,
-        depositorName,
         sourcePage: "/pubpaid-v2.html"
       });
       html(refs.qr, `<p><strong>Deposito avisado.</strong></p><p>Referencia ${escapeHtml(local.txid)} enviada para o admin.</p>`);
@@ -244,6 +250,7 @@ export function bindWalletInterface() {
   });
 
   subscribeGameState((state) => {
+    syncIdentity(state.googleUser || getGoogleUser());
     text(refs.balance, formatCoins(state.realBalance));
     text(refs.available, formatCoins(state.availableBalance));
     text(refs.lockedMatch, formatCoins(state.lockedMatchBalance));
@@ -255,6 +262,7 @@ export function bindWalletInterface() {
   });
 
   resetDeposit();
+  syncIdentity();
   window.pubpaidWalletOpen = () => setOpen(true);
   window.pubpaidWalletClose = () => setOpen(false);
 }

@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
-import { gameState } from "./core/gameState.js";
+import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
 import { bindDomGameInterface } from "./ui/domGameInterface.js";
@@ -59,9 +59,6 @@ const refs = {
   googleLogout: document.querySelector("[data-google-auth-logout]"),
   authTitle: document.querySelector("[data-auth-title]"),
   audioToggle: document.querySelector("[data-audio-toggle]"),
-  streetGoogleGate: document.querySelector("[data-street-google-gate]"),
-  streetGoogleButton: document.querySelector("[data-street-google-button]"),
-  streetGoogleStatus: document.querySelector("[data-street-google-status]"),
   orientationGate: document.querySelector("[data-orientation-gate]"),
   orientationStatus: document.querySelector("[data-orientation-status]"),
   fullscreenWarning: document.querySelector("[data-fullscreen-warning]"),
@@ -104,11 +101,6 @@ function getAuthApi() {
 function isAuthRequired() {
   const auth = getAuthApi();
   return Boolean(auth?.isEnabled?.());
-}
-
-function canUseLocalDemoAccess() {
-  const auth = getAuthApi();
-  return Boolean(auth?.isReady?.() && !auth?.isEnabled?.());
 }
 
 function hasAcceptedTerms() {
@@ -158,19 +150,6 @@ function syncAudioButton() {
 }
 
 function syncStreetGoogleGate() {
-  const auth = getAuthApi();
-  const signedIn = Boolean(auth?.isSignedIn?.());
-  const localDemoAccess = canUseLocalDemoAccess();
-  const shouldShow = gameStarted && !signedIn;
-
-  refs.streetGoogleGate?.toggleAttribute("hidden", !shouldShow);
-  if (!refs.streetGoogleButton || !refs.streetGoogleStatus) return;
-
-  refs.streetGoogleButton.disabled = false;
-  refs.streetGoogleButton.textContent = "Entrar com Google";
-  refs.streetGoogleStatus.textContent = localDemoAccess
-    ? "Toque para tentar conectar a conta real."
-    : "Toque para conectar a conta.";
 }
 
 function startSoundtrackFromGesture() {
@@ -259,6 +238,12 @@ function startIntroScene() {
   if (!game.scene.isActive("intro-scene")) {
     game.scene.start("intro-scene");
   }
+}
+
+function openPermissionGate() {
+  refs.splash?.setAttribute("hidden", "");
+  refs.permissionGate?.removeAttribute("hidden");
+  setPermissionStatus("Som 16-bit + fullscreen");
 }
 
 async function activateExperience() {
@@ -375,31 +360,35 @@ function bindMobileControls() {
 async function syncAuthUi() {
   const auth = getAuthApi();
   const signedIn = Boolean(auth?.isSignedIn?.());
-  const localDemoAccess = canUseLocalDemoAccess();
-  refs.body?.classList.toggle("has-local-demo-access", localDemoAccess);
-  refs.authCard?.classList.toggle("is-local-demo", localDemoAccess);
-  refs.googleSlot?.toggleAttribute("hidden", localDemoAccess);
-  refs.googleLogout?.toggleAttribute("hidden", localDemoAccess || !signedIn);
+  const user = auth?.getUser?.() || null;
+  refs.googleSlot?.toggleAttribute("hidden", signedIn);
+  refs.googleLogout?.toggleAttribute("hidden", !signedIn);
   if (refs.openGame) {
-    refs.openGame.disabled = !((signedIn || localDemoAccess) && hasAcceptedTerms());
-    refs.openGame.textContent = localDemoAccess ? "Enter game" : "Google gate";
+    refs.openGame.disabled = !signedIn;
+    refs.openGame.textContent = signedIn ? "Continuar" : "Aguardando Google";
   }
   if (refs.authTitle) {
-    refs.authTitle.textContent = localDemoAccess ? "Local run ready." : "Google gate.";
+    refs.authTitle.textContent = signedIn ? "Google confirmado" : "Entre com Google";
   }
-  if (localDemoAccess) {
+  if (signedIn) {
+    updateGameState({
+      googleUser: user,
+      walletFeedback: user?.email ? `Carteira vinculada a ${user.email}.` : "Carteira vinculada ao Google."
+    });
     if (refs.authStatus) {
-      refs.authStatus.textContent = "Local access ready.";
+      refs.authStatus.textContent = `Conectado como ${user?.name || user?.email || "Google"}.`;
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = "Entre direto e continue a run.";
+      refs.authEmail.textContent = user?.email || "Conta Google validada.";
     }
   } else {
     if (refs.authStatus) {
-      refs.authStatus.textContent = signedIn ? "Conta conectada." : "Entre com Google para abrir o portao.";
+      refs.authStatus.textContent = auth?.isReady?.() && !auth?.isEnabled?.()
+        ? "Login Google não configurado neste ambiente."
+        : "Entre com Google para abrir o jogo.";
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = signedIn ? "Google sync ready." : "Google login";
+      refs.authEmail.textContent = "A carteira real usa nome, email e id da conta Google.";
     }
   }
   if (signedIn) {
@@ -420,6 +409,10 @@ function openSplash(step = "intro") {
 }
 
 function startGame() {
+  if (!getAuthApi()?.isSignedIn?.()) {
+    openSplash("auth");
+    return;
+  }
   refs.body?.classList.remove("game-is-locked");
   refs.splash?.setAttribute("hidden", "");
   if (game.scene.isActive("intro-scene")) {
@@ -442,7 +435,7 @@ function startGame() {
 }
 
 function resolveEntryStep() {
-  return "terms";
+  return getAuthApi()?.isSignedIn?.() ? "terms" : "auth";
 }
 
 function tryEnterFlow() {
@@ -497,21 +490,22 @@ function bindSplash() {
     }
 
     if (event.target.closest("[data-accept-terms]")) {
+      if (!getAuthApi()?.isSignedIn?.()) {
+        setStep("auth");
+        await getAuthApi()?.promptSignIn?.();
+        return;
+      }
       if (refs.termsCheckbox) {
         refs.termsCheckbox.checked = true;
       }
       setAcceptedTerms(true);
       await syncAuthUi();
-      startGame();
+      openPermissionGate();
       return;
     }
 
     if (event.target.closest("[data-open-game]")) {
       const auth = getAuthApi();
-      if (canUseLocalDemoAccess()) {
-        startGame();
-        return;
-      }
       if (!auth?.isSignedIn?.()) {
         await auth?.promptSignIn?.();
         return;
@@ -520,16 +514,7 @@ function bindSplash() {
         setStep("terms");
         return;
       }
-      startGame();
-    }
-
-    if (event.target.closest("[data-street-google-button]")) {
-      event.preventDefault();
-      const auth = getAuthApi();
-      if (!auth?.isEnabled?.() && auth?.refresh) {
-        await auth.refresh();
-      }
-      await auth?.promptSignIn?.();
+      openPermissionGate();
     }
 
     if (event.target.closest("[data-return-fullscreen]")) {
@@ -546,6 +531,9 @@ function bindSplash() {
   });
 
   window.addEventListener("keydown", () => {
+    if (!getAuthApi()?.isSignedIn?.() || refs.permissionGate?.hasAttribute("hidden")) {
+      return;
+    }
     if (!introStarted) {
       void activateExperience();
       return;
@@ -588,10 +576,10 @@ syncEnterExitButtons();
 refs.body?.classList.toggle("is-ios", isIOS);
 refs.body?.classList.toggle("is-touch", Boolean(isTouchDevice));
 refs.body?.classList.add("game-is-locked");
-refs.splash?.setAttribute("hidden", "");
+refs.splash?.removeAttribute("hidden");
 syncStreetGoogleGate();
 syncOrientationGate();
-setStep("terms");
+setStep("auth");
 window.setTimeout(() => {
   void syncAuthUi();
 }, 250);
@@ -604,7 +592,7 @@ document.addEventListener("webkitfullscreenchange", syncFullscreenWarning);
 window.setInterval(() => {
   if (!gameStarted) return;
   const auth = getAuthApi();
-  if (auth?.isSignedIn?.() || canUseLocalDemoAccess()) {
+  if (auth?.isSignedIn?.()) {
     void syncPubpaidAccount();
   }
 }, 10000);
@@ -617,11 +605,20 @@ window.addEventListener("focus", () => {
 });
 
 game.events.on("pubpaid:intro-ready", () => {
-  openSplash("terms");
+  if (!getAuthApi()?.isSignedIn?.()) {
+    openSplash("auth");
+    return;
+  }
+  if (!hasAcceptedTerms()) {
+    openSplash("terms");
+  }
 });
 
 game.events.on("pubpaid:intro-enter", () => {
-  setAcceptedTerms(true);
+  if (!getAuthApi()?.isSignedIn?.()) {
+    openSplash("auth");
+    return;
+  }
   startGame();
 });
 
@@ -635,14 +632,6 @@ game.events.on("pubpaid:intro-start", () => {
 
 game.events.on("pubpaid:intro-frame", ({ index = 0, totalFrames = 1 } = {}) => {
   soundtrack.accentFrame(index, totalFrames);
-});
-
-game.events.on("pubpaid:google-port-click", async () => {
-  const auth = getAuthApi();
-  if (!auth?.isEnabled?.() && auth?.refresh) {
-    await auth.refresh();
-  }
-  await auth?.promptSignIn?.();
 });
 
 game.events.on("pubpaid:music-zone", (zone) => {
@@ -669,7 +658,7 @@ window.render_game_to_text = () => {
     `focus=${gameState.focus}`,
     `objective=${gameState.objective}`,
     `prompt=${gameState.prompt}`,
-    `testBalance=${gameState.testBalance}`,
+    `googleUser=${gameState.googleUser?.email || "none"}`,
     `realBalance=${gameState.realBalance}`,
     `availableBalance=${gameState.availableBalance}`,
     `lockedMatchBalance=${gameState.lockedMatchBalance}`,
@@ -689,7 +678,6 @@ window.render_game_to_text = () => {
     `poolGame=${gameState.poolGame ? JSON.stringify(gameState.poolGame) : "none"}`,
     `dartsGame=${gameState.dartsGame ? JSON.stringify(gameState.dartsGame) : "none"}`,
     `checkersGame=${gameState.checkersGame ? JSON.stringify(gameState.checkersGame) : "none"}`,
-    `lastDemoSettlement=${gameState.lastDemoSettlement ? JSON.stringify(gameState.lastDemoSettlement) : "none"}`,
     `music=${soundtrack.getState().playing ? "on" : "off"}`,
     `musicStyle=${soundtrack.getState().style}`,
     `musicZone=${soundtrack.getState().zone}`,

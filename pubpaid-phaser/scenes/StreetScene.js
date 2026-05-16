@@ -12,14 +12,6 @@ const TERMINAL_PANEL = {
   actions: [{ id: "close-panel", label: "Fechar", primary: true }]
 };
 
-const GOOGLE_PANEL = {
-  kicker: "google port",
-  title: "Entrar com Google",
-  body: "Conecte sua conta real para liberar carteira, depósitos e mesas pagas.",
-  chips: ["google", "carteira real", "pvp"],
-  actions: [{ id: "close-panel", label: "Fechar", primary: true }]
-};
-
 const STREET_RAIN_DROPS = [
   { x: 72, y: 318, length: 30, speed: 7.2, alpha: 0.1 },
   { x: 156, y: 402, length: 36, speed: 8.4, alpha: 0.14 },
@@ -90,7 +82,6 @@ export class StreetScene extends Phaser.Scene {
     this.targetPoint = null;
     this.cursors = null;
     this.interactionCooldown = 0;
-    this.googlePortSign = null;
     this.doorHotspot = null;
     this.terminalHotspot = null;
     this.activeHotspot = null;
@@ -117,7 +108,6 @@ export class StreetScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "street-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientStreetFx();
     this.buildStreetLife();
-    this.googlePortSign = this.buildGooglePortSign(1056, 512);
     this.transitionVeil = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x04060d, 0)
       .setDepth(20)
       .setScrollFactor(0);
@@ -147,7 +137,7 @@ export class StreetScene extends Phaser.Scene {
       color: 0x50efff,
       label: "TERMINAL"
     });
-    this.hotspots = [this.doorHotspot, this.terminalHotspot, this.googlePortSign];
+    this.hotspots = [this.doorHotspot, this.terminalHotspot];
     this.validateStreetMap();
 
     this.player = this.buildPlayer(176, 560);
@@ -364,99 +354,6 @@ export class StreetScene extends Phaser.Scene {
     ], true);
   }
 
-  buildGooglePortSign(x, y) {
-    const sign = this.add.container(x, y).setDepth(3);
-    const glow = this.add.rectangle(0, 0, 302, 92, 0x50efff, 0.07)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
-    const glowAura = this.add.ellipse(0, 0, 352, 126, 0x50efff, 0.035)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
-    const magentaAura = this.add.ellipse(10, -8, 286, 88, 0xff4fb8, 0.022)
-      .setBlendMode(Phaser.BlendModes.SCREEN);
-    const plaque = this.add.graphics();
-    plaque.fillStyle(0x080b14, 0.88);
-    plaque.fillPoints([
-      new Phaser.Geom.Point(-136, -30),
-      new Phaser.Geom.Point(136, -30),
-      new Phaser.Geom.Point(152, -10),
-      new Phaser.Geom.Point(152, 26),
-      new Phaser.Geom.Point(136, 36),
-      new Phaser.Geom.Point(-136, 36),
-      new Phaser.Geom.Point(-152, 26),
-      new Phaser.Geom.Point(-152, -10)
-    ], true);
-    plaque.lineStyle(4, 0xbda37e, 0.52);
-    plaque.strokePoints([
-      new Phaser.Geom.Point(-136, -30),
-      new Phaser.Geom.Point(136, -30),
-      new Phaser.Geom.Point(152, -10),
-      new Phaser.Geom.Point(152, 26),
-      new Phaser.Geom.Point(136, 36),
-      new Phaser.Geom.Point(-136, 36),
-      new Phaser.Geom.Point(-152, 26),
-      new Phaser.Geom.Point(-152, -10)
-    ], true);
-    plaque.lineStyle(1, 0x50efff, 0.16);
-    for (let row = -22; row <= 24; row += 8) {
-      plaque.lineBetween(-124, row, 124, row);
-    }
-    plaque.fillStyle(0x50efff, 0.08);
-    plaque.fillRoundedRect(-120, -10, 22, 32, 2);
-    plaque.fillRoundedRect(98, -10, 22, 32, 2);
-
-    const kicker = this.add.text(0, -48, "GOOGLE PORT", {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "14px",
-      fontStyle: "bold",
-      color: "#7feeff"
-    }).setOrigin(0.5).setLetterSpacing(4).setAlpha(0.92);
-    const label = this.add.text(0, 2, "ENTRAR COM GOOGLE", {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "20px",
-      fontStyle: "bold",
-      color: "#fff3da",
-      stroke: "#03050b",
-      strokeThickness: 5
-    }).setOrigin(0.5).setLetterSpacing(2);
-    const status = this.add.text(0, 48, "EM ESPERA. TESTES LOCAIS LIBERADOS.", {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "10px",
-      color: "#aab7d0"
-    }).setOrigin(0.5).setLetterSpacing(2);
-    const spark = this.add.graphics().setBlendMode(Phaser.BlendModes.SCREEN);
-    spark.fillStyle(0x50efff, 0.32);
-    spark.fillRect(-62, -6, 10, 2);
-    spark.fillRect(-58, -10, 2, 10);
-    spark.fillStyle(0xffd06d, 0.24);
-    spark.fillRect(54, -3, 8, 2);
-    spark.fillRect(57, -6, 2, 8);
-
-    sign.add([glowAura, magentaAura, glow, plaque, spark, kicker, label, status]);
-    sign.setSize(296, 92);
-    sign.ppgHotspot = { id: "google", x, y, width: 296, height: 92, glow, softGlow: glowAura, pulse: spark, label, status, color: 0x50efff };
-    sign.setInteractive(new Phaser.Geom.Rectangle(-148, -46, 296, 92), Phaser.Geom.Rectangle.Contains);
-    sign.on("pointerdown", (_pointer, _localX, _localY, event) => {
-      event?.stopPropagation?.();
-      this.handleHotspot(sign);
-    });
-    this.tweens.add({
-      targets: glow,
-      alpha: { from: 0.04, to: 0.16 },
-      duration: 1100,
-      yoyo: true,
-      repeat: -1,
-      ease: "Sine.easeInOut"
-    });
-    this.tweens.add({
-      targets: [glowAura, magentaAura, spark],
-      alpha: { from: 0.02, to: 0.12 },
-      duration: 1600,
-      yoyo: true,
-      repeat: -1,
-      ease: "Sine.easeInOut"
-    });
-    return sign;
-  }
-
   getStreetMapSnapshot() {
     return {
       walkableAreas: STREET_MAP.walkableAreas.map((area) => ({ ...area })),
@@ -604,16 +501,6 @@ export class StreetScene extends Phaser.Scene {
       return;
     }
 
-    if (id === "google") {
-      openPanel(GOOGLE_PANEL);
-      this.game.events.emit("pubpaid:google-port-click");
-      updateGameState({
-        focus: "google port",
-        objective: "Entrar com Google",
-        nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-        prompt: "Google Port acionado. Conecte sua conta real para usar carteira e PvP."
-      });
-    }
   }
 
   buildPlayer(x, y) {

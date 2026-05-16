@@ -1,5 +1,5 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "../config/gameConfig.js";
-import { settleDemoMatch, updateGameState } from "../core/gameState.js";
+import { updateGameState } from "../core/gameState.js";
 
 const BOARD = {
   x: 720,
@@ -225,17 +225,6 @@ export class CheckersGameScene extends Phaser.Scene {
     this.turn = "none";
     const headline = result === "win" ? "VITÓRIA" : result === "loss" ? "DERROTA" : "EMPATE";
     const color = result === "win" ? 0x8ef0a3 : result === "loss" ? 0xff4fb8 : 0x50efff;
-    this.settlement = settleDemoMatch({
-      gameId: "checkers",
-      result,
-      stake: this.stake,
-      summary: `Damas demo: ${reason}`
-    });
-    const creditCopy = this.settlement.delta > 0
-      ? `+${this.settlement.delta} créditos demo`
-      : this.settlement.delta < 0
-        ? `${this.settlement.delta} créditos demo`
-        : "créditos demo sem alteração";
     this.add.rectangle(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4, 438, 166, 0x05070d, 0.88)
       .setStrokeStyle(5, color, 0.62)
       .setDepth(9);
@@ -243,12 +232,12 @@ export class CheckersGameScene extends Phaser.Scene {
       .setOrigin(0.5)
       .setDepth(10)
       .setLetterSpacing(4);
-    this.add.text(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4 + 18, `${reason}\n${creditCopy}`, this.textStyle(15, "#fff6dc"))
+    this.add.text(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4 + 18, reason, this.textStyle(15, "#fff6dc"))
       .setOrigin(0.5)
       .setDepth(10)
       .setWordWrapWidth(360);
     this.makeButton(BOARD.x + BOARD.tile * 4, BOARD.y + BOARD.tile * 4 + 82, 220, 44, "JOGAR DE NOVO", () => this.restartMatch(), true);
-    this.message = `${headline}: ${reason} ${creditCopy}.`;
+    this.message = `${headline}: ${reason}`;
     this.updateHud();
     this.syncState(this.message);
     this.game.events.emit("pubpaid:checkers-result", {

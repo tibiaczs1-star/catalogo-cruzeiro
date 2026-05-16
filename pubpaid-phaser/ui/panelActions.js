@@ -344,10 +344,10 @@ export function runPanelAction(actionId) {
 
   if (actionId === "reset-test") {
     updateGameState({
-      testBalance: 100,
-      objective: "Escolher uma mesa para testar",
+      testBalance: 0,
+      objective: "Abrir carteira real",
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Bartender: 100 créditos de teste recarregados."
+      prompt: "Mesas pagas exigem Google, depósito Pix e aprovação do admin."
     });
     return;
   }

@@ -50,7 +50,11 @@ export async function syncPubpaidAccount() {
       pendingWithdrawals: Number(payload?.pending?.withdrawals || 0),
       recentDeposits: Array.isArray(payload?.recentDeposits) ? payload.recentDeposits : [],
       recentWithdrawals: Array.isArray(payload?.recentWithdrawals) ? payload.recentWithdrawals : [],
-      walletFeedback: "Carteira sincronizada com a base do PubPaid 1.0."
+      googleUser: payload?.user || null,
+      walletKey: payload?.wallet?.walletKey || "",
+      walletFeedback: payload?.user?.email
+        ? `Carteira Google sincronizada: ${payload.user.email}.`
+        : "Carteira sincronizada com a base real do PubPaid."
     });
     return payload;
   } catch (error) {
@@ -70,13 +74,12 @@ export async function generatePubpaidDepositPix({ amount = 10, txid = "", descri
   return requestPubpaidJson(`./api/pubpaid/deposit/pix?${params.toString()}`, { method: "GET" });
 }
 
-export async function registerPubpaidDeposit({ amount = 10, paymentTxid = "", depositorName = "", sourcePage = "/pubpaid-v2.html" } = {}) {
+export async function registerPubpaidDeposit({ amount = 10, paymentTxid = "", sourcePage = "/pubpaid-v2.html" } = {}) {
   const payload = await requestPubpaidJson("./api/pubpaid/deposits", {
     method: "POST",
     body: JSON.stringify({
       amount,
       paymentTxid,
-      depositorName,
       sourcePage
     })
   });
