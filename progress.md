@@ -432,3 +432,12 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Damas sem saldo real nao inicia `checkers-game-scene`; tanto no DOM quanto no lobby Phaser cai na confirmacao `Voce esta sem saldo real. Quer usar o saldo demo?`.
 - Validacoes: `node --check` nos modulos tocados, `npm run guard:pubpaid`, CSS brace balance, Playwright local `output/playwright/pubpaid-realfix-final-local-20260516.png`.
 
+## 2026-05-16 hotfix Google fora do jogo realflow2
+
+- Feedback do usuario corrigido: a rua/jogo nao tem mais `Google Port`, `Entrar com Google` ou sincronizador interno de login.
+- Removidos `syncStreetGoogleGate` e chamadas em `pubpaid-phaser/app.js`; Google fica apenas no gate DOM antes da experiencia.
+- `pubpaid-v2.html` e `BootScene.js` subiram cache-bust para `20260516-google-wallet-realflow2`.
+- `pubpaid-phaser.css` passou a respeitar `[hidden]` dentro de `.ppg-game-shell`, evitando botao Google escondido aparecer por estilo pixel.
+- Gate de orientacao mobile foi adiado para depois da saida do gate inicial, preservando Google como primeira barreira em portrait.
+- Validacoes: `node --check` em `app.js`/`BootScene.js`, CSS `brace-balance=0`, `npm run guard:pubpaid`, web game client e Playwright desktop/mobile em `output/playwright/pubpaid-google-port-hotfix/flow/`.
+

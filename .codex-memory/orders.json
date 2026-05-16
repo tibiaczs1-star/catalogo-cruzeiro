@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T20:34:31.000Z",
+  "lastUpdatedAt": "2026-05-16T22:49:44.166Z",
   "orders": [
     {
       "id": "2026-05-16-pubpaid-main-character-rua-alta-v1",
@@ -9928,6 +9928,35 @@
         "validar no link online real em dois celulares"
       ],
       "notes": "Validacao local confirmou Enter abrindo carteira, idle-phone, Google Port chamando refresh/promptSignIn por mock e Damas sem saldo sem iniciar checkers-game-scene."
+    },
+    {
+      "id": "2026-05-16-remover-google-port-de-dentro-do-jogo-pubpaid-2-0-e-manter-google-apenas-como-ga",
+      "createdAt": "2026-05-16T22:49:44.166Z",
+      "updatedAt": "2026-05-16T22:49:44.166Z",
+      "status": "completed-local-validated",
+      "source": "chat",
+      "rawRequest": "ja estamos errados, primeiro, vc nao tirou o metodo google de dentro do game, se eu ja loguei pra que outro login?",
+      "summary": "Remover Google Port de dentro do jogo PubPaid 2.0 e manter Google apenas como gate antes do jogo.",
+      "normalizedTasks": [],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/scenes/BootScene.js"
+      ],
+      "assetRefs": [
+        "output/playwright/pubpaid-google-port-hotfix/flow/01-google-gate-authenticated-desktop.png",
+        "output/playwright/pubpaid-google-port-hotfix/flow/04-street-no-google-port.png",
+        "output/playwright/pubpaid-google-port-hotfix/flow/06-google-gate-mobile-before-game.png"
+      ],
+      "tags": [
+        "pubpaid",
+        "google",
+        "realflow",
+        "hotfix"
+      ],
+      "nextSteps": [],
+      "notes": ""
     }
   ]
 }

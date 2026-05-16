@@ -1,7 +1,7 @@
 import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260516-google-wallet-realflow1";
+const ASSET_VERSION = "20260516-google-wallet-realflow2";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {

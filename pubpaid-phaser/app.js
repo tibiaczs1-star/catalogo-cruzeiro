@@ -149,9 +149,6 @@ function syncAudioButton() {
   refs.audioToggle.classList.toggle("is-playing", playing);
 }
 
-function syncStreetGoogleGate() {
-}
-
 function startSoundtrackFromGesture() {
   if (soundtrack.isPlaying()) return;
   soundtrack.start();
@@ -207,9 +204,11 @@ function setPermissionStatus(message) {
 
 function syncOrientationGate() {
   const blocked = isOrientationBlocked();
-  refs.body?.classList.toggle("is-orientation-blocked", blocked);
+  const permissionGateVisible = Boolean(refs.permissionGate && !refs.permissionGate.hasAttribute("hidden"));
+  const shouldShowGate = blocked && (gameStarted || introStarted || permissionGateVisible);
+  refs.body?.classList.toggle("is-orientation-blocked", shouldShowGate);
   if (refs.orientationGate) {
-    refs.orientationGate.hidden = !blocked;
+    refs.orientationGate.hidden = !shouldShowGate;
   }
   if (refs.orientationStatus) {
     refs.orientationStatus.textContent = blocked
@@ -394,7 +393,6 @@ async function syncAuthUi() {
   if (signedIn) {
     await syncPubpaidAccount();
   }
-  syncStreetGoogleGate();
 }
 
 function openSplash(step = "intro") {
@@ -405,7 +403,6 @@ function openSplash(step = "intro") {
   gameStarted = false;
   closePanel();
   syncEnterExitButtons();
-  syncStreetGoogleGate();
 }
 
 function startGame() {
@@ -430,7 +427,6 @@ function startGame() {
   }
   gameStarted = true;
   syncEnterExitButtons();
-  syncStreetGoogleGate();
   syncFullscreenWarning();
 }
 
@@ -577,7 +573,6 @@ refs.body?.classList.toggle("is-ios", isIOS);
 refs.body?.classList.toggle("is-touch", Boolean(isTouchDevice));
 refs.body?.classList.add("game-is-locked");
 refs.splash?.removeAttribute("hidden");
-syncStreetGoogleGate();
 syncOrientationGate();
 setStep("auth");
 window.setTimeout(() => {

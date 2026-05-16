@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T20:34:31.000Z",
+  "lastUpdatedAt": "2026-05-16T22:49:56.359Z",
   "assets": [
     {
       "id": "pubpaid-main-character-rua-alta-v1",
@@ -2178,6 +2178,39 @@
         "2026-05-16-pubpaid-realfix-carros-google-enter-damas"
       ],
       "createdAt": "2026-05-16T21:15:00.000Z"
+    },
+    {
+      "id": "pubpaid-google-hotfix-gate-mobile-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-google-port-hotfix/flow/06-google-gate-mobile-before-game.png",
+      "source": "playwright",
+      "note": "Mobile mostra Google como primeiro gate; aviso de orientacao nao cobre mais o login.",
+      "linkedOrderIds": [
+        "2026-05-16-remover-google-port-de-dentro-do-jogo-pubpaid-2-0-e-manter-google-apenas-como-ga"
+      ],
+      "createdAt": "2026-05-16T22:49:56.171Z"
+    },
+    {
+      "id": "pubpaid-google-hotfix-street-no-port-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-google-port-hotfix/flow/04-street-no-google-port.png",
+      "source": "playwright",
+      "note": "Rua restaurada sem Google Port ou botao Entrar com Google dentro do jogo.",
+      "linkedOrderIds": [
+        "2026-05-16-remover-google-port-de-dentro-do-jogo-pubpaid-2-0-e-manter-google-apenas-como-ga"
+      ],
+      "createdAt": "2026-05-16T22:49:56.172Z"
+    },
+    {
+      "id": "pubpaid-google-hotfix-wallet-pending-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-google-port-hotfix/flow/02-wallet-google-identity-pending.png",
+      "source": "playwright",
+      "note": "Carteira mostra nome, email, sub Google e deposito pendente sem saldo jogavel.",
+      "linkedOrderIds": [
+        "2026-05-16-remover-google-port-de-dentro-do-jogo-pubpaid-2-0-e-manter-google-apenas-como-ga"
+      ],
+      "createdAt": "2026-05-16T22:49:56.359Z"
     }
   ]
 }

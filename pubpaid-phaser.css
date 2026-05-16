@@ -26,6 +26,10 @@
   display: none !important;
 }
 
+.ppg-game-shell [hidden] {
+  display: none !important;
+}
+
 .ppg-dom-game-ui.is-hidden {
   opacity: 0;
   visibility: hidden;
