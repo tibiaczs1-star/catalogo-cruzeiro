@@ -222,12 +222,18 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-wallet {
+  position: absolute;
   top: max(16px, calc(12px + var(--ppg-safe-top)));
   right: max(16px, calc(12px + var(--ppg-safe-right)));
   bottom: max(16px, calc(12px + var(--ppg-safe-bottom)));
   width: min(430px, calc(100% - 32px));
   padding: 14px;
-  overflow: auto;
+  pointer-events: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
   border-color: rgba(142, 240, 163, 0.42);
   background:
     linear-gradient(rgba(142, 240, 163, 0.035) 1px, transparent 1px),
@@ -468,6 +474,28 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-wallet.is-phone-opening {
   animation: ppgWalletPhoneIn 0.54s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+
+@media (max-width: 720px) {
+  .ppg-dom-wallet {
+    left: calc(10px + var(--ppg-safe-left));
+    right: calc(10px + var(--ppg-safe-right));
+    top: calc(10px + var(--ppg-safe-top));
+    bottom: calc(96px + var(--ppg-safe-bottom));
+    width: auto;
+    padding: 12px;
+  }
+
+  .ppg-wallet-phone {
+    min-height: 70px;
+    margin-top: 10px;
+  }
+
+  .ppg-wallet-grid,
+  .ppg-wallet-actions,
+  .ppg-wallet-history {
+    grid-template-columns: 1fr;
+  }
 }
 
 .ppg-fullscreen-warning {

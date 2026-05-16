@@ -184,6 +184,7 @@ export function bindWalletInterface() {
       `);
       if (refs.registerDeposit) refs.registerDeposit.disabled = false;
       setFeedback(`QR criado para ${formatCoins(amount)} creditos. Depois do Pix, avise o admin.`);
+      refs.qr?.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
     } catch (error) {
       resetDeposit(error?.message || "Nao foi possivel gerar QR agora.");
       setFeedback("Falha ao gerar Pix.");

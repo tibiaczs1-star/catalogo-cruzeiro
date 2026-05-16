@@ -2090,6 +2090,50 @@
         "2026-05-16-pubpaid-2-0-restaurar-protagonistas-jogaveis-e-corrigir-fluxo-real"
       ],
       "createdAt": "2026-05-16T18:08:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-mobile-portrait-after-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-wallet-mobile-portrait-after-20260516.png",
+      "source": "workspace",
+      "note": "Carteira mobile em portrait com rolagem funcional ate deposito.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-carteira-mobile-scroll-pix"
+      ],
+      "createdAt": "2026-05-16T20:18:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-mobile-landscape-after-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-wallet-mobile-landscape-after-20260516.png",
+      "source": "workspace",
+      "note": "Carteira mobile em landscape com deposito acessivel por scroll.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-carteira-mobile-scroll-pix"
+      ],
+      "createdAt": "2026-05-16T20:18:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-mobile-portrait-qr-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-wallet-mobile-portrait-qr-20260516.png",
+      "source": "workspace",
+      "note": "QR Pix visivel em portrait apos geracao.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-carteira-mobile-scroll-pix"
+      ],
+      "createdAt": "2026-05-16T20:18:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-mobile-landscape-qr-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-wallet-mobile-landscape-qr-20260516.png",
+      "source": "workspace",
+      "note": "QR Pix visivel em landscape apos geracao.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-carteira-mobile-scroll-pix"
+      ],
+      "createdAt": "2026-05-16T20:18:00.000Z"
     }
   ]
 }

@@ -9779,6 +9779,41 @@
         "validar com dois logins Google reais no ambiente online"
       ],
       "notes": "Teste local com dois usuarios autenticados falsos confirmou fila, pareamento, jogada validada e settlement stake 100 / pot 200 / houseFee 20 / payout 180."
+    },
+    {
+      "id": "2026-05-16-pubpaid-carteira-mobile-scroll-pix",
+      "createdAt": "2026-05-16T20:18:00.000Z",
+      "updatedAt": "2026-05-16T20:18:00.000Z",
+      "status": "completed-local-ready-for-deploy",
+      "source": "chat",
+      "rawRequest": "o scroll mobile da carteira ou seja, nao consigo mover a carteira ate aparecer deposito ... preciso fazer o teste em dois celulares ... abrir a parte de qr code pix que agora ta travado nao da pra scrolar pra baixo",
+      "summary": "Corrigir a carteira mobile do PubPaid 2.0 para permitir rolagem touch ate deposito e QR Pix durante teste real em dois celulares.",
+      "normalizedTasks": [
+        "tornar a carteira responsiva no mobile",
+        "permitir scroll touch ate Depositar por Pix",
+        "garantir acesso ao QR Pix em celular",
+        "preservar o fluxo Google online para teste real"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/ui/walletInterface.js"
+      ],
+      "assetRefs": [
+        "output/playwright/pubpaid-wallet-mobile-portrait-after-20260516.png",
+        "output/playwright/pubpaid-wallet-mobile-landscape-after-20260516.png",
+        "output/playwright/pubpaid-wallet-mobile-portrait-qr-20260516.png",
+        "output/playwright/pubpaid-wallet-mobile-landscape-qr-20260516.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "wallet",
+        "mobile",
+        "Pix"
+      ],
+      "nextSteps": [
+        "testar o fluxo em dois celulares reais no ambiente online"
+      ],
+      "notes": "Bug raiz: a carteira tinha offsets sem position; em mobile o painel crescia fora da viewport e nao havia area rolavel real."
     }
   ]
 }

@@ -409,3 +409,10 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Teste de integração local com dois usuários autenticados falsos confirmou fila, pareamento, jogada validada, encerramento e settlement `{ stake: 100, pot: 200, houseFee: 20, payout: 180 }`.
 - TODO seguinte: testar online com dois logins Google reais depois do deploy e confirmar a experiência entre duas abas/dispositivos.
 
+## 2026-05-16 carteira mobile Pix
+
+- Corrigido o bloqueio de scroll da carteira no celular: `.ppg-dom-wallet` agora e painel absoluto com rolagem touch propria.
+- Breakpoint ate 720px empilha grid, acoes e historico em uma coluna para o conteudo caber melhor em telas pequenas.
+- `walletInterface.js` usa `scrollIntoView()` apos gerar o QR Pix para trazer o codigo para a area visivel.
+- Validacoes: `node --check pubpaid-phaser/ui/walletInterface.js`, `brace-balance=0` em `pubpaid-phaser.css`, `npm run guard:pubpaid`, Playwright portrait/landscape com capturas `output/playwright/pubpaid-wallet-mobile-portrait-after-20260516.png`, `pubpaid-wallet-mobile-landscape-after-20260516.png`, `pubpaid-wallet-mobile-portrait-qr-20260516.png`, `pubpaid-wallet-mobile-landscape-qr-20260516.png`.
+
