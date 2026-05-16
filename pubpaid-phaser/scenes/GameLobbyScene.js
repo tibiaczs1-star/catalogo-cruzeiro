@@ -57,6 +57,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.fxLayer = null;
     this.waiterSprite = null;
     this.waiterTalkTimer = null;
+    this.demoConfirmationPending = false;
   }
 
   init(data = {}) {
@@ -66,6 +67,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.stake = Number(data.stake || gameState.lobbyStake || 10);
     this.opponent = data.opponent || null;
     this.buttons = [];
+    this.demoConfirmationPending = false;
   }
 
   create() {
@@ -192,7 +194,13 @@ export class GameLobbyScene extends Phaser.Scene {
         }, stake === this.stake);
       });
       const realCheckersReady = this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake;
-      this.makeButton(588, 658, 180, 28, realCheckersReady ? "BUSCAR JOGADOR REAL" : "JOGAR DEMO", () => this.findAiOpponent(), true);
+      const demoNeedsConfirm = this.gameId === "checkers" && !realCheckersReady && !this.demoConfirmationPending;
+      const actionLabel = realCheckersReady
+        ? "BUSCAR JOGADOR REAL"
+        : demoNeedsConfirm
+          ? "JOGAR DEMO"
+          : "USAR SALDO DEMO";
+      this.makeButton(588, 658, 180, 28, actionLabel, () => this.findAiOpponent(), true);
       this.makeButton(770, 658, 124, 28, "TROCAR", () => this.selectGame(""), false);
     }
     this.makeButton(1094, 702, 152, 28, "VOLTAR", () => this.backToSalon(), false);
@@ -206,6 +214,16 @@ export class GameLobbyScene extends Phaser.Scene {
         prompt: "Buscando outro jogador real para a mesa de Damas."
       });
       this.game.events.emit("pubpaid:start-real-checkers");
+      return;
+    }
+    if (this.gameId === "checkers" && !this.demoConfirmationPending) {
+      this.demoConfirmationPending = true;
+      this.statusText?.setText("Você está sem saldo real. Quer usar o saldo demo?");
+      updateGameState({
+        lobbyPhase: "confirm-demo",
+        prompt: "Você está sem saldo real. Quer usar o saldo demo?"
+      });
+      this.renderLobby();
       return;
     }
     this.phase = "matching";

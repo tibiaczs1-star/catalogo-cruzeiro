@@ -108,6 +108,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-lobby,
 .ppg-dom-matchmaking,
+.ppg-dom-demo-confirm,
 .ppg-dom-pool,
 .ppg-dom-checkers,
 .ppg-dom-result {
@@ -139,6 +140,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-lobby header,
 .ppg-dom-matchmaking header,
+.ppg-dom-demo-confirm header,
 .ppg-dom-pool header,
 .ppg-dom-checkers header,
 .ppg-dom-result {
@@ -148,6 +150,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-lobby h2,
 .ppg-dom-matchmaking h2,
+.ppg-dom-demo-confirm h2,
 .ppg-dom-pool h2,
 .ppg-dom-checkers h2,
 .ppg-dom-result h2 {
@@ -214,11 +217,23 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-matchmaking,
+.ppg-dom-demo-confirm,
 .ppg-dom-pool {
   left: 18px;
   bottom: 22px;
   width: min(330px, calc(100% - 36px));
   padding: 14px;
+}
+
+.ppg-dom-demo-confirm {
+  display: grid;
+  gap: 10px;
+}
+
+.ppg-dom-demo-confirm p {
+  margin: 0;
+  color: #fff6dc;
+  line-height: 1.4;
 }
 
 .ppg-dom-wallet {
@@ -476,7 +491,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   animation: ppgWalletPhoneIn 0.54s cubic-bezier(0.2, 0.9, 0.2, 1) both;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 960px) {
   .ppg-dom-wallet {
     left: calc(10px + var(--ppg-safe-left));
     right: calc(10px + var(--ppg-safe-right));

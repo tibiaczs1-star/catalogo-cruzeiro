@@ -1,14 +1,14 @@
 # Current State
 
-Updated: 2026-05-16T20:18:00.000Z
+Updated: 2026-05-16T20:42:00.000Z
 
 ## Active Goal
 
-- PubPaid 2.0 mobile wallet usability for real two-phone Pix testing
+- PubPaid 2.0 mobile wallet usability and demo-gate corrections
 
 ## Summary
 
-Carteira mobile corrigida para o teste real em dois celulares. O bug era estrutural: `.ppg-dom-wallet` tinha `top/right/bottom`, mas nao tinha `position`, entao crescia como bloco normal e o deposito ficava fora da area alcancavel no celular. A carteira agora e painel absoluto com rolagem touch propria, layout responsivo em coluna e auto-scroll para o QR Pix assim que ele e gerado.
+Carteira mobile corrigida para o teste real em dois celulares. Alem do ajuste estrutural anterior, o breakpoint responsivo foi ampliado ate 960px para cobrir aparelhos que ainda caiam no layout lateral. O atalho de carteira saiu de `Esc` e passou para `Enter`. Damas sem saldo real agora para numa confirmacao antes de usar credito demo.
 
 ## Next
 
@@ -24,7 +24,11 @@ Carteira mobile corrigida para o teste real em dois celulares. O bug era estrutu
 ## Files In Focus
 
 - pubpaid-phaser.css
+- pubpaid-v2.html
+- pubpaid-phaser/app.js
 - pubpaid-phaser/ui/walletInterface.js
+- pubpaid-phaser/ui/domGameInterface.js
+- pubpaid-phaser/scenes/GameLobbyScene.js
 - CODEX_MEMORY.md
 
 ## Assets In Focus
@@ -34,6 +38,8 @@ Carteira mobile corrigida para o teste real em dois celulares. O bug era estrutu
 - output/playwright/pubpaid-wallet-mobile-landscape-after-20260516.png
 - output/playwright/pubpaid-wallet-mobile-portrait-qr-20260516.png
 - output/playwright/pubpaid-wallet-mobile-landscape-qr-20260516.png
+- output/playwright/pubpaid-wallet-mobile-839-after-breakpoint-20260516.png
+- output/playwright/pubpaid-wallet-839-enter-demo-confirm-20260516.png
 
 ## Runtime Note
 
@@ -41,3 +47,5 @@ Carteira mobile corrigida para o teste real em dois celulares. O bug era estrutu
 - Damas real 1x1 agora usa matchmaking PvP autoritativo no backend; sem saldo segue demo, com saldo real suficiente entra em fila contra outro jogador real.
 - A liquidacao real foi alinhada ao exemplo pedido: stake 100 + 100 => casa 20, vencedor 180.
 - Carteira mobile agora tem `position:absolute`, rolagem touch propria e breakpoint ate 720px; o QR gerado usa `scrollIntoView()` para entrar na area visivel.
+- Carteira mobile agora usa breakpoint ate 960px; `Esc` nao abre mais carteira e `Enter` assumiu esse papel fora de campos de formulario.
+- Damas sem saldo real exibe confirmacao explicita antes de iniciar demo.

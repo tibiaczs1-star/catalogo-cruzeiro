@@ -552,7 +552,16 @@ function bindSplash() {
   }, { once: true });
 
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
+    const target = event.target;
+    const isTyping =
+      target instanceof HTMLElement &&
+      (target.matches("input, textarea, select") || target.isContentEditable);
+    if (
+      event.key === "Enter" &&
+      !isTyping &&
+      gameState.currentScene !== "intro" &&
+      gameState.currentScene !== "character-select"
+    ) {
       event.preventDefault();
       window.pubpaidWalletOpen?.();
     }

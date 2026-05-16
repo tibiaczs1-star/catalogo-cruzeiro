@@ -2134,6 +2134,28 @@
         "2026-05-16-pubpaid-carteira-mobile-scroll-pix"
       ],
       "createdAt": "2026-05-16T20:18:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-mobile-839-after-breakpoint-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-wallet-mobile-839-after-breakpoint-20260516.png",
+      "source": "workspace",
+      "note": "Carteira mobile ocupando a largura correta em viewport CSS de 839px.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-enter-wallet-e-confirmacao-demo"
+      ],
+      "createdAt": "2026-05-16T20:42:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-839-enter-demo-confirm-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-wallet-839-enter-demo-confirm-20260516.png",
+      "source": "workspace",
+      "note": "Confirmacao explicita antes de Damas demo sem saldo real.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-enter-wallet-e-confirmacao-demo"
+      ],
+      "createdAt": "2026-05-16T20:42:00.000Z"
     }
   ]
 }

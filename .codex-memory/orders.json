@@ -9814,6 +9814,43 @@
         "testar o fluxo em dois celulares reais no ambiente online"
       ],
       "notes": "Bug raiz: a carteira tinha offsets sem position; em mobile o painel crescia fora da viewport e nao havia area rolavel real."
+    },
+    {
+      "id": "2026-05-16-pubpaid-enter-wallet-e-confirmacao-demo",
+      "createdAt": "2026-05-16T20:42:00.000Z",
+      "updatedAt": "2026-05-16T20:42:00.000Z",
+      "status": "completed-local-ready-for-deploy",
+      "source": "chat",
+      "rawRequest": "ainda não funciona vamos trocar o esc por enter, assim ele nao vai tentar fechar o jogo, e quando eu entrei em damas sem saldo ele abriu o jogo, ele deve dizer vc esta sem saldo real quer usar o saldo demo?",
+      "summary": "Trocar o atalho de carteira de Esc para Enter, ampliar o breakpoint mobile da carteira e exigir confirmacao antes de Damas demo quando nao houver saldo real.",
+      "normalizedTasks": [
+        "remover uso de Esc para abrir carteira",
+        "usar Enter para carteira fora de campos de formulario",
+        "ampliar cobertura responsiva da carteira em celulares largos",
+        "pedir confirmacao antes de abrir Damas demo sem saldo real"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/scenes/GameLobbyScene.js"
+      ],
+      "assetRefs": [
+        "output/playwright/pubpaid-wallet-mobile-839-after-breakpoint-20260516.png",
+        "output/playwright/pubpaid-wallet-839-enter-demo-confirm-20260516.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "wallet",
+        "Enter",
+        "Damas",
+        "demo"
+      ],
+      "nextSteps": [
+        "validar novamente no celular real do usuario apos deploy"
+      ],
+      "notes": "Feedback real mostrou que viewport CSS acima de 720px ainda caia no layout lateral da carteira."
     }
   ]
 }

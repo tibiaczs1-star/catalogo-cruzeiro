@@ -416,3 +416,10 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - `walletInterface.js` usa `scrollIntoView()` apos gerar o QR Pix para trazer o codigo para a area visivel.
 - Validacoes: `node --check pubpaid-phaser/ui/walletInterface.js`, `brace-balance=0` em `pubpaid-phaser.css`, `npm run guard:pubpaid`, Playwright portrait/landscape com capturas `output/playwright/pubpaid-wallet-mobile-portrait-after-20260516.png`, `pubpaid-wallet-mobile-landscape-after-20260516.png`, `pubpaid-wallet-mobile-portrait-qr-20260516.png`, `pubpaid-wallet-mobile-landscape-qr-20260516.png`.
 
+## 2026-05-16 enter para carteira e confirmacao demo
+
+- Atalho de carteira saiu do `Esc` e passou para `Enter`, evitando conflito com saida de fullscreen.
+- O breakpoint responsivo da carteira subiu de 720px para 960px para cobrir celulares que reportam viewport CSS mais larga.
+- Damas sem saldo real deixou de entrar direto em partida demo: agora abre uma confirmacao explicita com o texto `Voce esta sem saldo real. Quer usar o saldo demo?`.
+- Validacoes: `node --check` em `app.js`, `domGameInterface.js` e `GameLobbyScene.js`; `npm run guard:pubpaid`; captura `output/playwright/pubpaid-wallet-839-enter-demo-confirm-20260516.png`.
+

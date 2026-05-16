@@ -151,6 +151,9 @@ export function bindDomGameInterface(game) {
     matchmaking: document.querySelector("[data-dom-matchmaking]"),
     matchmakingGame: document.querySelector("[data-dom-matchmaking-game]"),
     matchmakingStatus: document.querySelector("[data-dom-matchmaking-status]"),
+    demoConfirm: document.querySelector("[data-dom-demo-confirm]"),
+    confirmDemo: document.querySelector("[data-dom-confirm-demo]"),
+    cancelDemo: document.querySelector("[data-dom-cancel-demo]"),
     pool: document.querySelector("[data-dom-pool]"),
     poolTitle: document.querySelector("[data-dom-pool-title]"),
     poolScore: document.querySelector("[data-dom-pool-score]"),
@@ -182,11 +185,13 @@ export function bindDomGameInterface(game) {
   const setPanel = (name) => {
     refs.root.classList.toggle("is-lobby", name === "lobby");
     refs.root.classList.toggle("is-matchmaking", name === "matchmaking");
+    refs.root.classList.toggle("is-demo-confirm", name === "demo-confirm");
     refs.root.classList.toggle("is-pool", name === "pool");
     refs.root.classList.toggle("is-checkers", name === "checkers");
     refs.root.classList.toggle("is-result", name === "result");
     refs.lobby.hidden = name !== "lobby";
     refs.matchmaking.hidden = name !== "matchmaking";
+    refs.demoConfirm.hidden = name !== "demo-confirm";
     refs.pool.hidden = name !== "pool";
     refs.checkers.hidden = name !== "checkers";
     refs.result.hidden = name !== "result";
@@ -258,6 +263,19 @@ export function bindDomGameInterface(game) {
       });
       gameId === "checkers" ? startCheckers(opponent) : startPool(opponent);
     }, 980);
+  };
+
+  const showDemoConfirm = () => {
+    local.selectedGame = "checkers";
+    setPanel("demo-confirm");
+    updateGameState({
+      activeGameId: "checkers",
+      selectedTable: "checkers",
+      lobbyPhase: "confirm-demo",
+      objective: "Confirmar Damas demo",
+      focus: "saldo demo",
+      prompt: "Você está sem saldo real. Quer usar o saldo demo?"
+    });
   };
 
   const isRealCheckersEligible = () =>
@@ -549,6 +567,8 @@ export function bindDomGameInterface(game) {
       local.selectedGame = nextGame;
       if (nextGame === "checkers" && isRealCheckersEligible()) {
         startRealCheckers();
+      } else if (nextGame === "checkers") {
+        showDemoConfirm();
       } else {
         showMatchmaking(nextGame);
       }
@@ -622,6 +642,14 @@ export function bindDomGameInterface(game) {
       }
       handleCheckersCell(row, col);
     }
+  });
+
+  refs.confirmDemo?.addEventListener("click", () => {
+    showMatchmaking("checkers");
+  });
+
+  refs.cancelDemo?.addEventListener("click", () => {
+    showLobby();
   });
 
   game.events.on("pubpaid:open-dom-lobby", showLobby);
