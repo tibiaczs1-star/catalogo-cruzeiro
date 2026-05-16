@@ -1,14 +1,14 @@
 # Current State
 
-Updated: 2026-05-16T20:42:00.000Z
+Updated: 2026-05-16T21:15:00.000Z
 
 ## Active Goal
 
-- PubPaid 2.0 mobile wallet usability and demo-gate corrections
+- PubPaid 2.0 realfix for cars, Google, wallet shortcut, idle phone and Damas gate
 
 ## Summary
 
-Carteira mobile corrigida para o teste real em dois celulares. Alem do ajuste estrutural anterior, o breakpoint responsivo foi ampliado ate 960px para cobrir aparelhos que ainda caiam no layout lateral. O atalho de carteira saiu de `Esc` e passou para `Enter`. Damas sem saldo real agora para numa confirmacao antes de usar credito demo.
+Rodada realfix aplicada apos feedback do teste: carros aprovados corrigidos para nao andar de re; `Enter` abre carteira e porta usa `Espaco`; idle do protagonista so puxa celular apos 5s parado ou imediatamente ao abrir carteira; Google Port tenta login real; Damas sem saldo real fica preso na confirmacao demo e nao abre a cena sozinho.
 
 ## Next
 
@@ -25,6 +25,7 @@ Carteira mobile corrigida para o teste real em dois celulares. Alem do ajuste es
 
 - pubpaid-phaser.css
 - pubpaid-v2.html
+- pubpaid-phaser/core/gameState.js
 - pubpaid-phaser/app.js
 - pubpaid-phaser/ui/walletInterface.js
 - pubpaid-phaser/ui/domGameInterface.js
@@ -40,6 +41,7 @@ Carteira mobile corrigida para o teste real em dois celulares. Alem do ajuste es
 - output/playwright/pubpaid-wallet-mobile-landscape-qr-20260516.png
 - output/playwright/pubpaid-wallet-mobile-839-after-breakpoint-20260516.png
 - output/playwright/pubpaid-wallet-839-enter-demo-confirm-20260516.png
+- output/playwright/pubpaid-realfix-final-local-20260516.png
 
 ## Runtime Note
 
@@ -49,3 +51,5 @@ Carteira mobile corrigida para o teste real em dois celulares. Alem do ajuste es
 - Carteira mobile agora tem `position:absolute`, rolagem touch propria e breakpoint ate 720px; o QR gerado usa `scrollIntoView()` para entrar na area visivel.
 - Carteira mobile agora usa breakpoint ate 960px; `Esc` nao abre mais carteira e `Enter` assumiu esse papel fora de campos de formulario.
 - Damas sem saldo real exibe confirmacao explicita antes de iniciar demo.
+- Google Port chama `refresh()` + `promptSignIn()`; o teste local confirmou essas chamadas por mock.
+- `walletOpen` foi adicionado ao `gameState` e ao `render_game_to_text`.

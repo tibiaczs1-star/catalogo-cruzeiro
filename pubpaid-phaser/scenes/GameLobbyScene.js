@@ -194,12 +194,7 @@ export class GameLobbyScene extends Phaser.Scene {
         }, stake === this.stake);
       });
       const realCheckersReady = this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake;
-      const demoNeedsConfirm = this.gameId === "checkers" && !realCheckersReady && !this.demoConfirmationPending;
-      const actionLabel = realCheckersReady
-        ? "BUSCAR JOGADOR REAL"
-        : demoNeedsConfirm
-          ? "JOGAR DEMO"
-          : "USAR SALDO DEMO";
+      const actionLabel = realCheckersReady ? "BUSCAR JOGADOR REAL" : "JOGAR DEMO";
       this.makeButton(588, 658, 180, 28, actionLabel, () => this.findAiOpponent(), true);
       this.makeButton(770, 658, 124, 28, "TROCAR", () => this.selectGame(""), false);
     }
@@ -221,9 +216,12 @@ export class GameLobbyScene extends Phaser.Scene {
       this.statusText?.setText("Você está sem saldo real. Quer usar o saldo demo?");
       updateGameState({
         lobbyPhase: "confirm-demo",
+        activeGameId: "checkers",
+        selectedTable: "checkers",
+        objective: "Confirmar Damas demo",
         prompt: "Você está sem saldo real. Quer usar o saldo demo?"
       });
-      this.renderLobby();
+      this.game.events.emit("pubpaid:confirm-demo-checkers");
       return;
     }
     this.phase = "matching";

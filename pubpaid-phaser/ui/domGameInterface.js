@@ -653,6 +653,7 @@ export function bindDomGameInterface(game) {
   });
 
   game.events.on("pubpaid:open-dom-lobby", showLobby);
+  game.events.on("pubpaid:confirm-demo-checkers", showDemoConfirm);
   game.events.on("pubpaid:start-real-checkers", startRealCheckers);
   game.events.on("pubpaid:pool-result", ({ result, body } = {}) => {
     showResult("pool", result || "draw", body || "Partida encerrada.");
@@ -669,6 +670,7 @@ export function bindDomGameInterface(game) {
       state.activeGameId === "pool" ||
       state.activeGameId === "checkers" ||
       state.lobbyPhase === "selecting" ||
+      state.lobbyPhase === "confirm-demo" ||
       state.lobbyPhase === "matching" ||
       state.lobbyPhase === "matched" ||
       state.lobbyPhase === "playing" ||
@@ -686,6 +688,11 @@ export function bindDomGameInterface(game) {
         "pronto";
     }
     if (state.lobbyPhase === "selecting" && !refs.lobby.hidden) return;
+    if (state.lobbyPhase === "confirm-demo" && !refs.demoConfirm.hidden) return;
+    if (state.lobbyPhase === "confirm-demo") {
+      setPanel("demo-confirm");
+      return;
+    }
     if (state.lobbyPhase === "matching" && !refs.matchmaking.hidden) return;
     if (state.currentScene === "game-lobby" || state.lobbyPhase === "selecting") {
       if (refs.pool.hidden && refs.checkers.hidden && refs.result.hidden && refs.matchmaking.hidden) setPanel("lobby");

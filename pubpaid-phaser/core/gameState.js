@@ -33,6 +33,7 @@ export const gameState = {
   pendingWithdrawals: 0,
   recentDeposits: [],
   recentWithdrawals: [],
+  walletOpen: false,
   walletFeedback: "",
   pvpStatus: "idle",
   pvpGameId: "",

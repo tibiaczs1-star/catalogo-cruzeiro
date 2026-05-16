@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T19:45:00.000Z",
+  "lastUpdatedAt": "2026-05-16T20:34:31.000Z",
   "assets": [
+    {
+      "id": "pubpaid-main-character-rua-alta-v1",
+      "kind": "sprite-sheet-and-preview",
+      "path": "assets/pubpaid/sprites/protagonist/",
+      "source": "hermes-pixel-art-agent",
+      "note": "Lucas Rua Alta, protagonista PubPaid v1 draft: sheet 96x144 8 direções x 4 frames, board preview e manifest técnico.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-main-character-rua-alta-v1"
+      ],
+      "createdAt": "2026-05-16T20:34:31.000Z"
+    },
     {
       "id": "home-entry-separated-cards-validation-20260513",
       "kind": "image",
@@ -2156,6 +2167,17 @@
         "2026-05-16-pubpaid-enter-wallet-e-confirmacao-demo"
       ],
       "createdAt": "2026-05-16T20:42:00.000Z"
+    },
+    {
+      "id": "pubpaid-realfix-final-local-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-realfix-final-local-20260516.png",
+      "source": "workspace",
+      "note": "Validacao local da rodada realfix: carteira/idle, Google Port e gate de Damas sem saldo.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-realfix-carros-google-enter-damas"
+      ],
+      "createdAt": "2026-05-16T21:15:00.000Z"
     }
   ]
 }

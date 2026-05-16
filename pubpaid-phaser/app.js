@@ -166,10 +166,10 @@ function syncStreetGoogleGate() {
   refs.streetGoogleGate?.toggleAttribute("hidden", !shouldShow);
   if (!refs.streetGoogleButton || !refs.streetGoogleStatus) return;
 
-  refs.streetGoogleButton.disabled = localDemoAccess;
+  refs.streetGoogleButton.disabled = false;
   refs.streetGoogleButton.textContent = "Entrar com Google";
   refs.streetGoogleStatus.textContent = localDemoAccess
-    ? "Em espera. Testes locais liberados."
+    ? "Toque para tentar conectar a conta real."
     : "Toque para conectar a conta.";
 }
 
@@ -525,8 +525,10 @@ function bindSplash() {
 
     if (event.target.closest("[data-street-google-button]")) {
       event.preventDefault();
-      if (canUseLocalDemoAccess()) return;
       const auth = getAuthApi();
+      if (!auth?.isEnabled?.() && auth?.refresh) {
+        await auth.refresh();
+      }
       await auth?.promptSignIn?.();
     }
 
@@ -551,7 +553,7 @@ function bindSplash() {
     startSoundtrackFromGesture();
   }, { once: true });
 
-  window.addEventListener("keydown", (event) => {
+  const handleWalletShortcut = (event) => {
     const target = event.target;
     const isTyping =
       target instanceof HTMLElement &&
@@ -559,16 +561,20 @@ function bindSplash() {
     if (
       event.key === "Enter" &&
       !isTyping &&
+      !refs.body?.classList.contains("game-is-locked") &&
       gameState.currentScene !== "intro" &&
       gameState.currentScene !== "character-select"
     ) {
       event.preventDefault();
+      event.stopImmediatePropagation();
       window.pubpaidWalletOpen?.();
     }
     if (event.key === "F11") {
       window.setTimeout(syncFullscreenWarning, 160);
     }
-  });
+  };
+  window.addEventListener("keydown", handleWalletShortcut, true);
+  document.addEventListener("keydown", handleWalletShortcut, true);
 
   window.addEventListener("catalogo:google-auth", async () => {
     await syncAuthUi();
@@ -632,8 +638,10 @@ game.events.on("pubpaid:intro-frame", ({ index = 0, totalFrames = 1 } = {}) => {
 });
 
 game.events.on("pubpaid:google-port-click", async () => {
-  if (canUseLocalDemoAccess()) return;
   const auth = getAuthApi();
+  if (!auth?.isEnabled?.() && auth?.refresh) {
+    await auth.refresh();
+  }
   await auth?.promptSignIn?.();
 });
 
@@ -668,6 +676,7 @@ window.render_game_to_text = () => {
     `lockedWithdrawalBalance=${gameState.lockedWithdrawalBalance}`,
     `pendingDeposits=${gameState.pendingDeposits}`,
     `pendingWithdrawals=${gameState.pendingWithdrawals}`,
+    `walletOpen=${gameState.walletOpen ? "yes" : "no"}`,
     `walletFeedback=${gameState.walletFeedback}`,
     `pvpStatus=${gameState.pvpStatus}`,
     `pvpGameId=${gameState.pvpGameId}`,

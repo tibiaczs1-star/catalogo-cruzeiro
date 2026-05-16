@@ -95,6 +95,7 @@ export function bindWalletInterface() {
     refs.root.classList.toggle("is-open", open);
     refs.root.classList.toggle("is-phone-opening", open);
     refs.root.closest("[data-dom-game-ui]")?.classList.toggle("is-wallet-open", open);
+    updateGameState({ walletOpen: open });
     if (open) {
       const user = getGoogleUser();
       updateGameState({

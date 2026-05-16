@@ -14,9 +14,9 @@ const TERMINAL_PANEL = {
 
 const GOOGLE_PANEL = {
   kicker: "google port",
-  title: "Login em espera",
-  body: "Google Port está parado para os experimentos locais. Quando o modo real estiver ativo, este ponto abre a conexão da conta.",
-  chips: ["google", "modo local", "sem bloqueio"],
+  title: "Entrar com Google",
+  body: "Conecte sua conta real para liberar carteira, depósitos e mesas pagas.",
+  chips: ["google", "carteira real", "pvp"],
   actions: [{ id: "close-panel", label: "Fechar", primary: true }]
 };
 
@@ -191,7 +191,7 @@ export class StreetScene extends Phaser.Scene {
     this.input.keyboard.on("keydown-A", () => this.nudgePlayer(-40, 0));
     this.input.keyboard.on("keydown-S", () => this.nudgePlayer(0, 40));
     this.input.keyboard.on("keydown-D", () => this.nudgePlayer(40, 0));
-    this.input.keyboard.on("keydown-ENTER", () => this.tryDoorInteraction());
+    this.input.keyboard.on("keydown-SPACE", () => this.tryDoorInteraction());
     this.input.keyboard.on("keydown-E", () => this.tryNearestHotspot());
 
     updateGameState({
@@ -274,7 +274,7 @@ export class StreetScene extends Phaser.Scene {
       const car = this.add.sprite(0, 0, PUBPAID_TEXTURE_KEYS.trafficVehicles, lane.frameStart)
         .setOrigin(0.5, 0.72)
         .setDisplaySize(lane.width, lane.height)
-        .setFlipX(lane.direction < 0);
+        .setFlipX(lane.direction > 0);
       vehicle.add([shadow, car]);
       vehicle.ppgTraffic = { id: lane.id, spriteOnly: true, textureKey: PUBPAID_TEXTURE_KEYS.trafficVehicles };
       this.vehicles.push(vehicle);
@@ -609,9 +609,9 @@ export class StreetScene extends Phaser.Scene {
       this.game.events.emit("pubpaid:google-port-click");
       updateGameState({
         focus: "google port",
-        objective: "Google em espera para experimento local",
+        objective: "Entrar com Google",
         nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-        prompt: "Google Port parado. Testes locais continuam liberados."
+        prompt: "Google Port acionado. Conecte sua conta real para usar carteira e PvP."
       });
     }
   }
@@ -685,9 +685,10 @@ export class StreetScene extends Phaser.Scene {
       sprite.setRotation(0);
       sprite.setScale(baseScaleX, baseScaleY);
       const idleMs = Math.max(0, (this.time.now || 0) - (this.player.ppgLastMoveAt || 0));
-      const idleKey = idleMs > 2600 ? rig.idlePhoneKey : rig.idleBreatheKey;
+      const idleKey = gameState.walletOpen || idleMs >= 5000 ? rig.idlePhoneKey : rig.idleBreatheKey;
       if (sprite.texture.key !== idleKey) sprite.setTexture(idleKey);
-      const idleFrame = Math.floor((this.time.now || 0) / 240) % 4;
+      const idleFrameMs = idleKey === rig.idlePhoneKey ? 720 : 460;
+      const idleFrame = Math.floor((this.time.now || 0) / idleFrameMs) % 4;
       sprite.setFrame((this.player.ppgFacing || 0) * 4 + idleFrame);
       updateGameState({ playerMoving: false, playerDirection: this.playerDirection });
       return;

@@ -1,7 +1,43 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T19:45:00.000Z",
+  "lastUpdatedAt": "2026-05-16T20:34:31.000Z",
   "orders": [
+    {
+      "id": "2026-05-16-pubpaid-main-character-rua-alta-v1",
+      "createdAt": "2026-05-16T20:34:31.000Z",
+      "updatedAt": "2026-05-16T20:34:31.000Z",
+      "status": "draft-asset-ready",
+      "source": "chat",
+      "rawRequest": "então me faça um personagem principal para esse conecito",
+      "summary": "Criar um personagem principal v1 para o conceito PubPaid 2.0, seguindo a regra de pixel art adulto semi-realista e sem arte procedural final.",
+      "normalizedTasks": [
+        "criar protagonista original Lucas Rua Alta como v1 draft",
+        "exportar sprite sheet PNG 96x144, 8 direções, 4 frames idle/breathe",
+        "documentar manifesto técnico com âncora, hitbox, hurtbox e interaction box",
+        "criar página de prévia do conceito sem integrar no runtime oficial"
+      ],
+      "tags": [
+        "pubpaid",
+        "pixel-art",
+        "protagonist",
+        "sprite",
+        "v1-draft"
+      ],
+      "filesTouched": [
+        "scripts/create_pubpaid_main_character_v1.py",
+        "assets/pubpaid/sprites/protagonist/main-character-rua-alta-v1-idle-breathe-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/main-character-rua-alta-v1-board.png",
+        "assets/pubpaid/sprites/protagonist/main-character-rua-alta-v1.json",
+        "pubpaid-main-character-v1.html",
+        ".codex-memory/orders.json",
+        ".codex-memory/assets.json"
+      ],
+      "assetRefs": [
+        "assets/pubpaid/sprites/protagonist/main-character-rua-alta-v1-board.png",
+        "assets/pubpaid/sprites/protagonist/main-character-rua-alta-v1-idle-breathe-8dir-4f.png"
+      ],
+      "notes": "Resultado marcado honestamente como v1 draft. Script apenas exporta clusters nomeados/manualizados; não foi integrado ao runtime PubPaid 2.0."
+    },
     {
       "id": "2026-05-13-hero-cards-video-local",
       "createdAt": "2026-05-13T20:42:59.941Z",
@@ -9851,6 +9887,47 @@
         "validar novamente no celular real do usuario apos deploy"
       ],
       "notes": "Feedback real mostrou que viewport CSS acima de 720px ainda caia no layout lateral da carteira."
+    },
+    {
+      "id": "2026-05-16-pubpaid-realfix-carros-google-enter-damas",
+      "createdAt": "2026-05-16T21:15:00.000Z",
+      "updatedAt": "2026-05-16T21:15:00.000Z",
+      "status": "completed-local-ready-for-deploy",
+      "source": "chat",
+      "rawRequest": "os carros estão de ré ... nao consigo entra no google ... animação dele idle ta rapido demais ... deveria fica vendo o celular depois de 5 segundos, ou quando aperta enter para abrir a carteira ... damas ainda entra so sem pvp e sem credito",
+      "summary": "Corrigir carros, login Google, atalho Enter/celular idle e gate de Damas sem saldo no PubPaid 2.0.",
+      "normalizedTasks": [
+        "corrigir sentido visual dos carros aprovados",
+        "fazer Google Port tentar login real",
+        "usar Enter para abrir carteira e forcar animacao de celular",
+        "retardar idle-phone para 5 segundos parado",
+        "impedir Damas sem saldo de iniciar cena sem confirmacao demo"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/scenes/GameLobbyScene.js"
+      ],
+      "assetRefs": [
+        "output/playwright/pubpaid-realfix-final-local-20260516.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "realfix",
+        "Google",
+        "wallet",
+        "Damas",
+        "cars"
+      ],
+      "nextSteps": [
+        "validar no link online real em dois celulares"
+      ],
+      "notes": "Validacao local confirmou Enter abrindo carteira, idle-phone, Google Port chamando refresh/promptSignIn por mock e Damas sem saldo sem iniciar checkers-game-scene."
     }
   ]
 }

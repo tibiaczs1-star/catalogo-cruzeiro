@@ -1552,9 +1552,10 @@ export class InteriorScene extends Phaser.Scene {
       sprite.setRotation(0);
       sprite.setScale(baseScaleX, baseScaleY);
       const idleMs = Math.max(0, (this.time.now || 0) - (this.player.ppgLastMoveAt || 0));
-      const idleKey = idleMs > 2600 ? rig.idlePhoneKey : rig.idleBreatheKey;
+      const idleKey = gameState.walletOpen || idleMs >= 5000 ? rig.idlePhoneKey : rig.idleBreatheKey;
       if (sprite.texture.key !== idleKey) sprite.setTexture(idleKey);
-      const idleFrame = Math.floor((this.time.now || 0) / 240) % 4;
+      const idleFrameMs = idleKey === rig.idlePhoneKey ? 720 : 460;
+      const idleFrame = Math.floor((this.time.now || 0) / idleFrameMs) % 4;
       sprite.setFrame((this.player.ppgFacing || 0) * 4 + idleFrame);
       updateGameState({ playerMoving: false, playerDirection: this.playerDirection });
       return;

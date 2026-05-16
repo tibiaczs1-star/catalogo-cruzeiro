@@ -423,3 +423,12 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Damas sem saldo real deixou de entrar direto em partida demo: agora abre uma confirmacao explicita com o texto `Voce esta sem saldo real. Quer usar o saldo demo?`.
 - Validacoes: `node --check` em `app.js`, `domGameInterface.js` e `GameLobbyScene.js`; `npm run guard:pubpaid`; captura `output/playwright/pubpaid-wallet-839-enter-demo-confirm-20260516.png`.
 
+## 2026-05-16 correcao realfix carros/google/enter/damas
+
+- Corrigido o sentido visual dos carros aprovados: a regra de `flipX` agora acompanha o sentido real da faixa, evitando carros andando de re.
+- `Enter` agora e capturado tambem no `document` em fase de captura para abrir a carteira antes do Phaser consumir a tecla; a porta passou a usar `Espaco`.
+- Abrir a carteira marca `walletOpen` no estado e força o protagonista a usar o sheet `idle-phone`; idle normal so muda para celular depois de 5s parado e com frames mais lentos.
+- Google Port deixou de tratar o fluxo como bloqueado por teste local: clique no port agora tenta `refresh()` e `promptSignIn()`.
+- Damas sem saldo real nao inicia `checkers-game-scene`; tanto no DOM quanto no lobby Phaser cai na confirmacao `Voce esta sem saldo real. Quer usar o saldo demo?`.
+- Validacoes: `node --check` nos modulos tocados, `npm run guard:pubpaid`, CSS brace balance, Playwright local `output/playwright/pubpaid-realfix-final-local-20260516.png`.
+
