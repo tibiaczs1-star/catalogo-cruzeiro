@@ -16,6 +16,9 @@ import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
+const PUBPAID_BUILD_VERSION = "20260516-google-wallet-invitecopy2";
+window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
+
 bindOverlay();
 
 const config = {

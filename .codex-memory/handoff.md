@@ -2,7 +2,7 @@
 
 Updated: 2026-05-16T23:35:19.380Z
 
-PubPaid 2.0 receipt-name/admin verification change is locally validated in the clean deploy worktree. Version string is 20260516-google-wallet-invitecopy1. Remaining: commit, push to origin main, poll Render, and run online checks/screenshots.
+PubPaid 2.0 receipt-name/admin verification change is locally validated in the clean deploy worktree. Version string is 20260516-google-wallet-invitecopy2. Remaining: commit, push to origin main, poll Render, and run online checks/screenshots.
 
 ## Next
 

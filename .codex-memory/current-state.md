@@ -8,7 +8,7 @@ Updated: 2026-05-16T23:35:19.315Z
 
 ## Summary
 
-Local build now requires the Pix receipt name before Avisar admin, sends it with Google-bound deposit data, shows it in admin review, keeps Damas blocked without approved real balance, and uses inviting entry copy instead of Google primeiro/computer-language labels. Cache version: 20260516-google-wallet-invitecopy1.
+Local build now requires the Pix receipt name before Avisar admin, sends it with Google-bound deposit data, shows it in admin review, keeps Damas blocked without approved real balance, and uses inviting entry copy instead of Google primeiro/computer-language labels. Cache version: 20260516-google-wallet-invitecopy2.
 
 ## Next
 

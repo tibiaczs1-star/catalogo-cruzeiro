@@ -447,6 +447,6 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Backend exige `receiptName` em `/api/pubpaid/deposits`, armazena no deposito/pagamento e preserva no store canonico de `pubpaid-runtime.js`.
 - Admin PubPaid mostra nome real Google, email, ID Google, valor Pix, status, referencia e nome no comprovante para conferencia antes de aprovar saldo jogavel.
 - Textos publicos trocaram `Google primeiro`, `Aguardando Google`, `Google id` e linguagem tecnica por copy de entrada mais convidativa; o ID tecnico fica no admin.
-- Cache-bust atualizado para `20260516-google-wallet-invitecopy1`.
+- Cache-bust atualizado para `20260516-google-wallet-invitecopy2`.
 - Validacoes locais: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS/admin brace balance, Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-receiptname/`.
 
