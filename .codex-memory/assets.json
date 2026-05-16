@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T22:49:56.359Z",
+  "lastUpdatedAt": "2026-05-16T23:35:19.262Z",
   "assets": [
     {
       "id": "pubpaid-main-character-rua-alta-v1",
@@ -2211,6 +2211,94 @@
         "2026-05-16-remover-google-port-de-dentro-do-jogo-pubpaid-2-0-e-manter-google-apenas-como-ga"
       ],
       "createdAt": "2026-05-16T22:49:56.359Z"
+    },
+    {
+      "id": "pubpaid-receipt-google-gate",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-google-gate.png",
+      "source": "playwright-local",
+      "note": "Gate inicial com copy convidativa e sem Google primeiro.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:18.897Z"
+    },
+    {
+      "id": "pubpaid-receipt-auth-wallet",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-auth-wallet.png",
+      "source": "playwright-local",
+      "note": "Carteira autenticada com nome/email e campo nome no comprovante Pix.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:18.957Z"
+    },
+    {
+      "id": "pubpaid-receipt-deposit-pending",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-deposit-pending.png",
+      "source": "playwright-local",
+      "note": "Deposito enviado ao admin com nome no comprovante e estado pendente.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:19.008Z"
+    },
+    {
+      "id": "pubpaid-receipt-lobby-blocked",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-lobby-blocked.png",
+      "source": "playwright-local",
+      "note": "Damas bloqueada sem saldo real aprovado, com mensagem de aprovacao pendente.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:19.057Z"
+    },
+    {
+      "id": "pubpaid-receipt-admin-review",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-admin-review.png",
+      "source": "playwright-local",
+      "note": "Admin mostra nome Google, email, ID Google, valor Pix e nome no comprovante.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:19.111Z"
+    },
+    {
+      "id": "pubpaid-receipt-intro",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-restored-intro.png",
+      "source": "playwright-local",
+      "note": "Intro restaurada validada localmente.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:19.161Z"
+    },
+    {
+      "id": "pubpaid-receipt-street",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-restored-street.png",
+      "source": "playwright-local",
+      "note": "Rua/mapa restaurado validado localmente.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:19.213Z"
+    },
+    {
+      "id": "pubpaid-receipt-mobile-gate",
+      "kind": "screenshot",
+      "path": ".codex-temp/pubpaid-receiptname/local-mobile-google-gate.png",
+      "source": "playwright-local",
+      "note": "Gate inicial validado no viewport mobile.",
+      "linkedOrderIds": [
+        "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po"
+      ],
+      "createdAt": "2026-05-16T23:35:19.262Z"
     }
   ]
 }

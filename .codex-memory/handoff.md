@@ -1,23 +1,26 @@
 # Handoff
 
-Updated: 2026-05-16T22:50:11.728Z
+Updated: 2026-05-16T23:35:19.380Z
 
-PubPaid 2.0 hotfix realflow2: removido de vez o gancho interno de Google da rua/jogo (syncStreetGoogleGate e chamadas). pubpaid-v2.html e BootScene.js agora usam cache-bust 20260516-google-wallet-realflow2; CSS ganhou regra para respeitar hidden dentro do game shell; o gate de orientacao mobile nao cobre mais o Google antes do login. Validado localmente com Google mockado: gate autenticado mostra identidade, carteira mostra nome/email/sub e deposito pendente, intro carrega, rua aparece sem Google Port, Damas fica bloqueada sem saldo real aprovado.
+PubPaid 2.0 receipt-name/admin verification change is locally validated in the clean deploy worktree. Version string is 20260516-google-wallet-invitecopy1. Remaining: commit, push to origin main, poll Render, and run online checks/screenshots.
 
 ## Next
 
-- Depois do push
-- esperar Render servir realflow2
-- Validar online HTML/JS sem Google Port e com realflow2
-- Usar apenas a URL cache-killed /pubpaid-v2.html?v=20260516-google-wallet-realflow2
+- Deploy and online validation
 
 ## Files In Focus
 
 - pubpaid-v2.html
+- site-google-auth.js
+- pubpaid-admin.html
+- pubpaid-runtime.js
+- server.js
 - pubpaid-phaser/app.js
-- pubpaid-phaser.css
 - pubpaid-phaser/scenes/BootScene.js
+- pubpaid-phaser/services/accountService.js
+- pubpaid-phaser/ui/walletInterface.js
+- pubpaid-phaser/ui/domGameInterface.js
 
 ## Related Orders
 
-- 2026-05-16-remover-google-port-de-dentro-do-jogo-pubpaid-2-0-e-manter-google-apenas-como-ga
+- 2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po

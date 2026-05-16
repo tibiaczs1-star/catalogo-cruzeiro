@@ -82,34 +82,70 @@ function normalizeMoney(value) {
 }
 
 function normalizeDeposit(item = {}, index = 0) {
+  const user = item.user && typeof item.user === "object" ? item.user : {};
+  const payment = item.payment && typeof item.payment === "object" ? item.payment : {};
   const amount = normalizeMoney(
     item.amountCoins ?? item.amount ?? item.valueCoins ?? item.value ?? item.coins ?? item.creditsRequested
   );
+  const googleSub = normalizeText(item.googleSub ?? payment.googleSub ?? user.sub, "");
+  const googleEmail = normalizeText(item.googleEmail ?? payment.googleEmail ?? user.email, "");
+  const googleName = normalizeText(item.googleName ?? payment.googleName ?? user.name, "");
+  const googlePicture = normalizeText(item.googlePicture ?? user.picture, "");
+  const walletKey = normalizeText(item.walletKey ?? item.playerId ?? googleSub ?? googleEmail, "");
   const playerId = normalizeText(
     item.playerId ??
       item.walletKey ??
       item.userId ??
       item.playerSlug ??
-      item.user?.sub ??
+      googleSub ??
       item.email ??
       item.whatsApp ??
-      item.user?.email,
+      googleEmail,
     ""
   );
   const playerName = normalizeText(
-    item.playerName ?? item.player ?? item.name ?? item.depositante ?? item.depositorName ?? item.user?.name,
+    item.playerName ?? item.player ?? item.name ?? item.depositante ?? item.depositorName ?? googleName,
     "Jogador"
   );
   const reference = normalizeText(
-    item.reference ?? item.receiptReference ?? item.txid ?? item.comprovante ?? item.receipt ?? item.payment?.txid ?? "-",
+    item.reference ?? item.receiptReference ?? item.txid ?? item.comprovante ?? item.receipt ?? payment.txid ?? "-",
     "-"
+  );
+  const depositorName = normalizeText(item.depositorName ?? payment.depositorName ?? googleName ?? playerName, "");
+  const receiptName = normalizeText(
+    item.receiptName ?? item.pixReceiptName ?? item.proofName ?? item.comprovanteName ?? payment.receiptName ?? payment.pixReceiptName,
+    ""
   );
   return {
     id: normalizeId("deposit", item.id, index),
     playerId,
     playerName,
+    walletKey,
+    googleSub,
+    googleEmail,
+    googleName,
+    googlePicture,
+    user: {
+      sub: googleSub,
+      email: googleEmail,
+      name: googleName,
+      picture: googlePicture,
+    },
+    depositorName,
+    receiptName,
     amountCoins: amount,
     reference,
+    payment: {
+      method: normalizeText(payment.method ?? item.paymentMethod, "pix-qr-code"),
+      txid: reference,
+      depositorName,
+      receiptName,
+      googleSub,
+      googleEmail,
+      googleName,
+      status: normalizeText(payment.status ?? item.paymentStatus ?? item.status, "pending"),
+      confirmationMode: normalizeText(payment.confirmationMode, "manual"),
+    },
     notes: normalizeText(item.notes ?? item.observation ?? item.obs, ""),
     status: normalizeStatus(item.status ?? item.payment?.status, "pending"),
     createdAt: normalizeText(item.createdAt ?? item.requestedAt ?? item.date ?? item.when, new Date().toISOString()),
@@ -352,8 +388,18 @@ function buildDashboardPayload(storeInput) {
       value: item.amountCoins,
       player: item.playerName,
       depositante: item.playerName,
+      name: item.googleName || item.playerName,
+      email: item.googleEmail,
+      googleSub: item.googleSub,
+      googleEmail: item.googleEmail,
+      googleName: item.googleName,
+      googlePicture: item.googlePicture,
+      walletKey: item.walletKey,
+      depositorName: item.depositorName,
+      receiptName: item.receiptName,
       when: item.createdAt,
       referenceLabel: item.reference,
+      txid: item.reference,
     }))
     .sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   const pendingWithdrawals = store.withdrawals

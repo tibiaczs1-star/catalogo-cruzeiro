@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516-google-wallet-realflow2" />
-    <script defer src="./site-google-auth.js?v=20260516-google-wallet-realflow2"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516-google-wallet-invitecopy1" />
+    <script defer src="./site-google-auth.js?v=20260516-google-wallet-invitecopy1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260516-google-wallet-realflow2"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260516-google-wallet-invitecopy1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -45,7 +45,7 @@
           <h1>A abertura agora é uma sequência bitmap dentro do jogo.</h1>
           <p>
             Seis frames montam a chegada, o celular, o toque, o neon e o frame final congelado.
-            Primeiro entra o Google; depois vêm termos, abertura, rua, carteira real e mesas pagas.
+            Entre com sua conta para liberar a carteira, a abertura, a rua e as mesas pagas com segurança.
           </p>
         </div>
         <div class="ppg-topbar-actions">
@@ -97,15 +97,15 @@
           </div>
           <div class="ppg-splash" data-splash-screen aria-live="polite">
             <section class="ppg-splash-card ppg-splash-step is-active" data-splash-step="auth" data-google-auth-card>
-              <p class="ppg-kicker">google primeiro</p>
-              <h2 data-auth-title>Entre com Google</h2>
-              <p data-google-auth-status>Entre com Google para abrir o PubPaid.</p>
+              <p class="ppg-kicker">bem-vindo</p>
+              <h2 data-auth-title>Entre para jogar</h2>
+              <p data-google-auth-status>Use sua conta para abrir o PubPaid com segurança.</p>
               <p class="ppg-splash-note" data-google-auth-email>
-                A carteira, depósitos e mesas pagas usam a mesma identidade.
+                Assim o Pix, o saldo e as mesas ficam ligados à pessoa certa.
               </p>
               <div class="ppg-google-stack ppg-google-stack--fit">
                 <div class="ppg-google-slot" data-google-auth-button></div>
-                <button class="ppg-button" type="button" data-google-auth-logout hidden>Sair do Google</button>
+                <button class="ppg-button" type="button" data-google-auth-logout hidden>Trocar conta</button>
                 <button class="ppg-button primary" type="button" data-open-game disabled>Continuar</button>
               </div>
             </section>
@@ -297,9 +297,9 @@
               <section class="ppg-wallet-identity" data-wallet-identity>
                 <img alt="" data-wallet-user-picture hidden />
                 <div>
-                  <span>Conta Google</span>
-                  <strong data-wallet-user-name>Entre com Google</strong>
-                  <small data-wallet-user-email>Carteira bloqueada sem login.</small>
+                  <span>Sua conta</span>
+                  <strong data-wallet-user-name>Entre para continuar</strong>
+                  <small data-wallet-user-email>Carteira protegida até a entrada.</small>
                   <code data-wallet-user-id></code>
                 </div>
               </section>
@@ -338,6 +338,15 @@
                     <option value="50">50 créditos</option>
                     <option value="100">100 créditos</option>
                   </select>
+                </label>
+                <label>
+                  <span>Nome no comprovante Pix</span>
+                  <input
+                    type="text"
+                    autocomplete="name"
+                    placeholder="Como aparece no comprovante"
+                    data-wallet-receipt-name
+                  />
                 </label>
                 <div class="ppg-wallet-actions">
                   <button type="button" class="primary" data-wallet-generate-deposit>Gerar QR</button>

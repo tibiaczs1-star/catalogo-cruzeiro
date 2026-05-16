@@ -441,3 +441,12 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Gate de orientacao mobile foi adiado para depois da saida do gate inicial, preservando Google como primeira barreira em portrait.
 - Validacoes: `node --check` em `app.js`/`BootScene.js`, CSS `brace-balance=0`, `npm run guard:pubpaid`, web game client e Playwright desktop/mobile em `output/playwright/pubpaid-google-port-hotfix/flow/`.
 
+## 2026-05-16 nome no comprovante e copy convidativa
+
+- Carteira PubPaid 2.0 agora pede `Nome no comprovante Pix` antes de liberar `Avisar admin`; o campo e enviado junto com valor, txid e conta Google.
+- Backend exige `receiptName` em `/api/pubpaid/deposits`, armazena no deposito/pagamento e preserva no store canonico de `pubpaid-runtime.js`.
+- Admin PubPaid mostra nome real Google, email, ID Google, valor Pix, status, referencia e nome no comprovante para conferencia antes de aprovar saldo jogavel.
+- Textos publicos trocaram `Google primeiro`, `Aguardando Google`, `Google id` e linguagem tecnica por copy de entrada mais convidativa; o ID tecnico fica no admin.
+- Cache-bust atualizado para `20260516-google-wallet-invitecopy1`.
+- Validacoes locais: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS/admin brace balance, Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-receiptname/`.
+

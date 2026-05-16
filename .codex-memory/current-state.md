@@ -1,36 +1,41 @@
 # Current State
 
-Updated: 2026-05-16T22:50:11.722Z
+Updated: 2026-05-16T23:35:19.315Z
 
 ## Active Goal
 
-- PubPaid 2.0 Google gate hotfix realflow2
+- PubPaid 2.0 Google wallet real flow with receipt-name check
 
 ## Summary
 
-Hotfix aplicado apos feedback: o metodo Google foi removido da rua/jogo. PubPaid 2.0 agora mantem Google apenas no gate externo antes do jogo; usuario autenticado ve Continuar, carteira usa nome/email/sub Google, e Damas sem saldo aprovado fica bloqueada. Cache-bust subiu para 20260516-google-wallet-realflow2.
+Local build now requires the Pix receipt name before Avisar admin, sends it with Google-bound deposit data, shows it in admin review, keeps Damas blocked without approved real balance, and uses inviting entry copy instead of Google primeiro/computer-language labels. Cache version: 20260516-google-wallet-invitecopy1.
 
 ## Next
 
-- Apos deploy
-- abrir somente /pubpaid-v2.html?v=20260516-google-wallet-realflow2
-- Confirmar online que app.js/HTML contem realflow2 e nao contem Google Port
-- Manter npm run guard:pubpaid em toda mudanca PubPaid
+- Commit and push from clean deploy worktree
+- wait for Render
+- verify online cache-busted URL
 
 ## Files In Focus
 
 - pubpaid-v2.html
+- site-google-auth.js
+- pubpaid-admin.html
+- pubpaid-runtime.js
+- server.js
 - pubpaid-phaser/app.js
-- pubpaid-phaser.css
 - pubpaid-phaser/scenes/BootScene.js
-- CODEX_MEMORY.md
-- .codex-memory/current-state.md
-- .codex-memory/handoff.md
+- pubpaid-phaser/services/accountService.js
+- pubpaid-phaser/ui/walletInterface.js
+- pubpaid-phaser/ui/domGameInterface.js
 
 ## Assets In Focus
 
-- output/playwright/pubpaid-google-port-hotfix/flow/01-google-gate-authenticated-desktop.png
-- output/playwright/pubpaid-google-port-hotfix/flow/02-wallet-google-identity-pending.png
-- output/playwright/pubpaid-google-port-hotfix/flow/04-street-no-google-port.png
-- output/playwright/pubpaid-google-port-hotfix/flow/05-damas-blocked-no-real-balance.png
-- output/playwright/pubpaid-google-port-hotfix/flow/06-google-gate-mobile-before-game.png
+- local-google-gate
+- local-auth-wallet
+- local-deposit-pending
+- local-lobby-blocked
+- local-admin-review
+- local-restored-intro
+- local-restored-street
+- local-mobile-google-gate

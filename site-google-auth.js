@@ -52,7 +52,7 @@
       script.async = true;
       script.defer = true;
       script.onload = resolve;
-      script.onerror = () => reject(new Error("Nao foi possivel carregar o login Google."));
+      script.onerror = () => reject(new Error("Nao foi possivel abrir a entrada segura agora."));
       document.head.appendChild(script);
     });
     return state.scriptPromise;
@@ -107,8 +107,8 @@
         !state.enabled
           ? "Entrada segura em preparação"
           : signedIn
-            ? `Conectado como ${state.user.name || state.user.email}`
-            : "Entre com Google para continuar"
+            ? `Que bom ter voce aqui, ${state.user.name || state.user.email}.`
+            : "Entre para continuar com seguranca"
       );
     });
     $all("[data-google-auth-email]").forEach((node) => {
@@ -117,7 +117,7 @@
         signedIn
           ? state.user.email
           : state.enabled
-            ? "Cadastros, newsletter, fundadores e PubPaid usam a mesma identidade."
+            ? "Seu nome e email ajudam a proteger a sua experiencia."
             : "A equipe está preparando a entrada segura para newsletter e fundadores. A leitura do portal continua aberta."
       );
     });
@@ -214,7 +214,7 @@
       await renderGoogleButtons();
     } catch (error) {
       $all("[data-google-auth-email]").forEach((node) => {
-        setText(node, String(error?.message || "Nao foi possivel validar o Google agora."));
+        setText(node, String(error?.message || "Nao foi possivel confirmar sua entrada agora."));
       });
       emitAuthChange();
     }

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-16T22:49:44.166Z",
+  "lastUpdatedAt": "2026-05-16T23:35:18.774Z",
   "orders": [
     {
       "id": "2026-05-16-pubpaid-main-character-rua-alta-v1",
@@ -9954,6 +9954,53 @@
         "google",
         "realflow",
         "hotfix"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-adicionar-nome-do-comprovante-pix-ao-fluxo-pubpaid-2-0-e-trocar-copys-do-gate-po",
+      "createdAt": "2026-05-16T23:35:18.774Z",
+      "updatedAt": "2026-05-16T23:35:18.774Z",
+      "status": "completed-local-validated",
+      "source": "chat",
+      "rawRequest": "User pediu que o jogo avise o admin com o nome no comprovante Pix vinculado a conta Google e depois pediu retirar \"Google primeiro\"/linguagem de computador da entrada, deixando copys convidativas.",
+      "summary": "Adicionar nome do comprovante Pix ao fluxo PubPaid 2.0 e trocar copys do gate por entrada convidativa.",
+      "normalizedTasks": [
+        "receipt-name-required",
+        "admin-review-google-and-receipt",
+        "invite-copy-no-google-primeiro",
+        "cache-bust",
+        "local-validation"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "site-google-auth.js",
+        "pubpaid-admin.html",
+        "pubpaid-runtime.js",
+        "server.js",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid-phaser/ui/domGameInterface.js"
+      ],
+      "assetRefs": [
+        "local-google-gate",
+        "local-auth-wallet",
+        "local-deposit-pending",
+        "local-lobby-blocked",
+        "local-admin-review",
+        "local-restored-intro",
+        "local-restored-street",
+        "local-mobile-google-gate"
+      ],
+      "tags": [
+        "pubpaid-v2",
+        "wallet",
+        "google-auth",
+        "admin",
+        "copy"
       ],
       "nextSteps": [],
       "notes": ""

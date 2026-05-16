@@ -59,7 +59,7 @@ export async function syncPubpaidAccount() {
     return payload;
   } catch (error) {
     updateGameState({
-      walletFeedback: error?.message || "Entre com Google para abrir a carteira real do PubPaid."
+      walletFeedback: error?.message || "Entre para abrir sua carteira real do PubPaid."
     });
     return null;
   }
@@ -74,12 +74,18 @@ export async function generatePubpaidDepositPix({ amount = 10, txid = "", descri
   return requestPubpaidJson(`./api/pubpaid/deposit/pix?${params.toString()}`, { method: "GET" });
 }
 
-export async function registerPubpaidDeposit({ amount = 10, paymentTxid = "", sourcePage = "/pubpaid-v2.html" } = {}) {
+export async function registerPubpaidDeposit({
+  amount = 10,
+  paymentTxid = "",
+  receiptName = "",
+  sourcePage = "/pubpaid-v2.html"
+} = {}) {
   const payload = await requestPubpaidJson("./api/pubpaid/deposits", {
     method: "POST",
     body: JSON.stringify({
       amount,
       paymentTxid,
+      receiptName,
       sourcePage
     })
   });

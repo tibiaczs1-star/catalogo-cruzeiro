@@ -272,7 +272,7 @@ export function bindDomGameInterface(game) {
     const copy = !user?.email
       ? {
           title: "Login obrigatório",
-          body: "Entre com Google antes de abrir a carteira ou jogar mesas pagas."
+          body: "Entre com sua conta antes de abrir a carteira ou jogar mesas pagas."
         }
       : pending > 0
         ? {

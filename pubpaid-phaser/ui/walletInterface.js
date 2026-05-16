@@ -82,7 +82,8 @@ export function bindWalletInterface() {
     withdrawalAmount: document.querySelector("[data-wallet-withdrawal-amount]"),
     requestWithdrawal: document.querySelector("[data-wallet-request-withdrawal]"),
     deposits: document.querySelector("[data-wallet-recent-deposits]"),
-    withdrawals: document.querySelector("[data-wallet-recent-withdrawals]")
+    withdrawals: document.querySelector("[data-wallet-recent-withdrawals]"),
+    receiptName: document.querySelector("[data-wallet-receipt-name]")
   };
 
   if (!refs.root) return;
@@ -106,7 +107,7 @@ export function bindWalletInterface() {
         focus: "carteira real",
         walletFeedback: user?.email
           ? "Carteira aberta usando a base do PubPaid 1.0."
-          : "Entre com Google para abrir a carteira real do PubPaid."
+          : "Entre para abrir sua carteira real do PubPaid."
       });
       if (user?.email) {
         void syncPubpaidAccount();
@@ -121,9 +122,9 @@ export function bindWalletInterface() {
   };
 
   const syncIdentity = (user = getGoogleUser()) => {
-    text(refs.userName, user?.name || "Entre com Google");
+    text(refs.userName, user?.name || "Entre para continuar");
     text(refs.userEmail, user?.email || "Carteira bloqueada sem login.");
-    text(refs.userId, user?.sub ? `Google id: ${user.sub}` : "");
+    text(refs.userId, user?.sub ? "Conta confirmada para conferência" : "");
     if (refs.userPicture) {
       refs.userPicture.hidden = !user?.picture;
       if (user?.picture) refs.userPicture.src = user.picture;
@@ -136,6 +137,13 @@ export function bindWalletInterface() {
     local.amount = 0;
     html(refs.qr, `<p>${escapeHtml(message)}</p>`);
     if (refs.registerDeposit) refs.registerDeposit.disabled = true;
+  };
+
+  const getReceiptName = () => String(refs.receiptName?.value || "").trim();
+
+  const syncRegisterDepositButton = () => {
+    if (!refs.registerDeposit) return;
+    refs.registerDeposit.disabled = !local.qrReady || !local.txid || !getReceiptName();
   };
 
   refs.openButtons.forEach((button) => {
@@ -153,12 +161,17 @@ export function bindWalletInterface() {
 
   refs.depositAmount?.addEventListener("change", () => {
     resetDeposit("Valor alterado. Gere um novo QR antes de avisar o admin.");
+    syncRegisterDepositButton();
+  });
+
+  refs.receiptName?.addEventListener("input", () => {
+    syncRegisterDepositButton();
   });
 
   refs.generateDeposit?.addEventListener("click", async () => {
     const user = getGoogleUser();
     if (!user?.email) {
-      setFeedback("Entre com Google para gerar QR e usar a carteira real.");
+      setFeedback("Entre com sua conta para gerar QR e usar a carteira real.");
       await window.CatalogoGoogleAuth?.promptSignIn?.();
       return;
     }
@@ -190,7 +203,7 @@ export function bindWalletInterface() {
           <span>${escapeHtml(local.txid)}</span>
         </div>
       `);
-      if (refs.registerDeposit) refs.registerDeposit.disabled = false;
+      syncRegisterDepositButton();
       setFeedback(`QR criado para ${formatCoins(amount)} creditos. Depois do Pix, avise o admin.`);
       refs.qr?.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
     } catch (error) {
@@ -204,9 +217,15 @@ export function bindWalletInterface() {
       setFeedback("Gere o QR Code antes de registrar o deposito.");
       return;
     }
+    const receiptName = getReceiptName();
+    if (!receiptName) {
+      setFeedback("Informe o nome que aparece no comprovante Pix para o admin conferir.");
+      syncRegisterDepositButton();
+      return;
+    }
     const user = getGoogleUser();
     if (!user?.email) {
-      setFeedback("Entre com Google para avisar o admin.");
+      setFeedback("Entre com sua conta para avisar o admin.");
       await window.CatalogoGoogleAuth?.promptSignIn?.();
       return;
     }
@@ -217,13 +236,15 @@ export function bindWalletInterface() {
       const payload = await registerPubpaidDeposit({
         amount: local.amount || getDepositAmount(refs.depositAmount),
         paymentTxid: local.txid,
+        receiptName,
         sourcePage: "/pubpaid-v2.html"
       });
-      html(refs.qr, `<p><strong>Deposito avisado.</strong></p><p>Referencia ${escapeHtml(local.txid)} enviada para o admin.</p>`);
+      html(refs.qr, `<p><strong>Deposito avisado.</strong></p><p>Referencia ${escapeHtml(local.txid)} enviada para o admin com o nome do comprovante.</p>`);
       local.qrReady = false;
+      syncRegisterDepositButton();
       setFeedback(payload.message || "Deposito registrado. Aguarde a conferencia manual.");
     } catch (error) {
-      refs.registerDeposit.disabled = false;
+      syncRegisterDepositButton();
       setFeedback(error?.message || "Falha ao registrar deposito.");
     }
   });

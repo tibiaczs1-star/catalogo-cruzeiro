@@ -13981,6 +13981,7 @@ function buildPubpaidAccountPayload(authUser = {}) {
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
       txid: item?.payment?.txid || item.reference || "",
+      receiptName: item.receiptName || item?.payment?.receiptName || item?.payment?.pixReceiptName || "",
       createdAt: item.createdAt || "",
       reviewDeadlineAt: item.reviewDeadlineAt || ""
     })),
@@ -14586,6 +14587,7 @@ function buildPubpaidAdminPayload() {
     googlePicture: item.googlePicture || item?.user?.picture || "",
     walletKey: item.walletKey || "",
     depositorName: item.depositorName || item?.payment?.depositorName || "",
+    receiptName: item.receiptName || item?.payment?.receiptName || item?.payment?.pixReceiptName || "",
     amount: item.amount || 0,
     creditsRequested: item.creditsRequested || 0,
     status: item.status || "",
@@ -16888,10 +16890,20 @@ async function handleApi(req, res, pathname, searchParams) {
     const txid = normalizePixToken(body.paymentTxid || body.txid || `PUB${Date.now()}`, 25) || `PUB${Date.now()}`;
     const googleUser = publicAuthUser(authUser);
     const depositorName = cleanShortText(googleUser?.name || googleUser?.email || "", 90);
+    const receiptName = cleanShortText(
+      body.receiptName || body.pixReceiptName || body.proofName || body.comprovanteName || "",
+      120
+    );
     if (!googleUser?.sub || !googleUser?.email || !depositorName) {
       return sendJson(res, 400, {
         ok: false,
         error: "Entre com Google para registrar o deposito com nome e email reais."
+      });
+    }
+    if (!receiptName) {
+      return sendJson(res, 400, {
+        ok: false,
+        error: "Informe o nome que aparece no comprovante Pix para o admin conferir."
       });
     }
     const tracking = buildTrackingMeta(req, body);
@@ -16902,6 +16914,7 @@ async function handleApi(req, res, pathname, searchParams) {
       type: "pubpaid-deposito",
       user: googleUser,
       depositorName,
+      receiptName,
       walletKey: wallet?.walletKey || getPubpaidWalletKey(authUser),
       googleSub: googleUser.sub,
       googleEmail: googleUser.email,
@@ -16915,6 +16928,7 @@ async function handleApi(req, res, pathname, searchParams) {
         keyVisible: false,
         txid,
         depositorName,
+        receiptName,
         googleSub: googleUser.sub,
         googleEmail: googleUser.email,
         googleName: googleUser.name,
@@ -17104,9 +17118,10 @@ async function handleApi(req, res, pathname, searchParams) {
       creditsRequested: item.creditsRequested || 0,
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || ""
+      txid: item?.payment?.txid || "",
+      receiptName: item.receiptName || item?.payment?.receiptName || item?.payment?.pixReceiptName || ""
     }));
-    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,googleSub,walletKey,amount,creditsRequested,status,paymentStatus,txid\n", "pubpaid_depositos.csv");
+    return sendCsv(res, 200, toCsv(rows) || "createdAt,player,email,googleSub,walletKey,amount,creditsRequested,status,paymentStatus,txid,receiptName\n", "pubpaid_depositos.csv");
   }
 
   if (req.method === "GET" && pathname === "/api/pubpaid-admin/reports/pubpaid-withdrawals.csv") {

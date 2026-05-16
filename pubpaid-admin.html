@@ -47,6 +47,7 @@
       .grid { display: grid; gap: 14px; }
       .grid.kpis { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
       .grid.two { grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+      .grid.two > .is-wide { grid-column: 1 / -1; }
       .card { padding: 16px; min-width: 0; }
       .kpi-label { margin: 0 0 10px; color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: .08em; }
       .kpi-value { margin: 0; font-size: 1.9rem; font-weight: 800; }
@@ -103,11 +104,11 @@
       <section class="grid kpis" id="kpiGrid"></section>
 
       <section class="grid two">
-        <article class="card">
+        <article class="card is-wide">
           <h2>Depósitos pendentes</h2>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Quando</th><th>Conta Google</th><th>ID Google</th><th>Valor Pix</th><th>Status</th><th>Referência</th><th>Ação</th></tr></thead>
+              <thead><tr><th>Quando</th><th>Conta Google</th><th>Nome no comprovante</th><th>ID Google</th><th>Valor Pix</th><th>Status</th><th>Referência</th><th>Ação</th></tr></thead>
               <tbody id="pendingDepositsBody"></tbody>
             </table>
           </div>
@@ -231,6 +232,7 @@
             name: row.googleName || row.name || row.playerName || row.player || "-",
             email: row.googleEmail || row.email || row.playerId || "-",
             googleSub: row.googleSub || row.walletKey || row.playerId || "-",
+            receiptName: row.receiptName || row.pixReceiptName || row.depositorName || row.payment?.receiptName || "-",
             amount: row.amount ?? row.amountCoins ?? row.value ?? 0,
             status: row.paymentStatus || row.status || "-",
             txid: row.txid || row.reference || row.referenceLabel || "-",
@@ -269,8 +271,8 @@
         renderTableRows(
           document.getElementById("pendingDepositsBody"),
           normalized.pendingPubpaidDeposits || [],
-          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td class="mono">${escapeHtml(row.googleSub || "-")}</td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td>${escapeHtml(row.status || "-")}<br><small>${formatDateTime(row.reviewDeadlineAt)}</small></td><td class="mono">${escapeHtml(row.txid || "-")}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
-          7,
+          (row) => `<tr><td>${formatDateTime(row.createdAt)}</td><td class="truncate"><strong>${escapeHtml(row.name || "-")}</strong><br><span>${escapeHtml(row.email || "-")}</span></td><td class="truncate"><strong>${escapeHtml(row.receiptName || "-")}</strong></td><td class="mono">${escapeHtml(row.googleSub || "-")}</td><td><strong>${escapeHtml(String(row.amount || 0))}</strong> créditos</td><td>${escapeHtml(row.status || "-")}<br><small>${formatDateTime(row.reviewDeadlineAt)}</small></td><td class="mono">${escapeHtml(row.txid || "-")}</td><td><button class="btn" type="button" data-review="/api/pubpaid-admin/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="approve">Aprovar</button> <button class="btn" type="button" data-review="/api/pubpaid-admin/deposits/review" data-id="${escapeHtml(row.id)}" data-decision="reject">Rejeitar</button></td></tr>`,
+          8,
           "Sem depósitos pendentes."
         );
 

@@ -364,30 +364,30 @@ async function syncAuthUi() {
   refs.googleLogout?.toggleAttribute("hidden", !signedIn);
   if (refs.openGame) {
     refs.openGame.disabled = !signedIn;
-    refs.openGame.textContent = signedIn ? "Continuar" : "Aguardando Google";
+    refs.openGame.textContent = signedIn ? "Continuar" : "Entrar para jogar";
   }
   if (refs.authTitle) {
-    refs.authTitle.textContent = signedIn ? "Google confirmado" : "Entre com Google";
+    refs.authTitle.textContent = signedIn ? "Tudo pronto" : "Entre para jogar";
   }
   if (signedIn) {
     updateGameState({
       googleUser: user,
-      walletFeedback: user?.email ? `Carteira vinculada a ${user.email}.` : "Carteira vinculada ao Google."
+      walletFeedback: user?.email ? `Carteira pronta para ${user.email}.` : "Carteira pronta para jogar."
     });
     if (refs.authStatus) {
-      refs.authStatus.textContent = `Conectado como ${user?.name || user?.email || "Google"}.`;
+      refs.authStatus.textContent = `Que bom ter você aqui, ${user?.name || user?.email || "jogador"}.`;
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = user?.email || "Conta Google validada.";
+      refs.authEmail.textContent = user?.email || "Conta confirmada.";
     }
   } else {
     if (refs.authStatus) {
       refs.authStatus.textContent = auth?.isReady?.() && !auth?.isEnabled?.()
-        ? "Login Google não configurado neste ambiente."
-        : "Entre com Google para abrir o jogo.";
+        ? "A entrada segura ainda não está disponível aqui."
+        : "Entre para abrir o PubPaid.";
     }
     if (refs.authEmail) {
-      refs.authEmail.textContent = "A carteira real usa nome, email e id da conta Google.";
+      refs.authEmail.textContent = "Seu nome e email protegem a carteira e deixam a conferência do Pix mais simples.";
     }
   }
   if (signedIn) {
