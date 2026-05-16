@@ -13775,11 +13775,19 @@ function normalizePubpaidWalletRecord(item = {}) {
 
 function getPubpaidWalletStore() {
   const items = readMergedPubpaidArray(PUBPAID_WALLETS_FILE, LEGACY_PUBPAID_WALLETS_FILE);
-  return (Array.isArray(items) ? items : []).map((item) => normalizePubpaidWalletRecord(item));
+  return Object.fromEntries(
+    (Array.isArray(items) ? items : [])
+      .map((item) => normalizePubpaidWalletRecord(item))
+      .map((item) => [safeString(item.walletKey || item.playerId || item.userId || "", 180).toLowerCase(), item])
+      .filter(([key]) => Boolean(key))
+  );
 }
 
-function writePubpaidWalletStore(items = []) {
-  writePubpaidArrayCompat(PUBPAID_WALLETS_FILE, LEGACY_PUBPAID_WALLETS_FILE, items);
+function writePubpaidWalletStore(items = {}) {
+  const normalized = Array.isArray(items)
+    ? items
+    : Object.values(items && typeof items === "object" ? items : {});
+  writePubpaidArrayCompat(PUBPAID_WALLETS_FILE, LEGACY_PUBPAID_WALLETS_FILE, normalized);
 }
 
 function getPubpaidWithdrawals() {
@@ -13912,12 +13920,19 @@ function isPubpaidPendingStatus(value = "") {
 function buildPubpaidAccountPayload(authUser = {}) {
   const wallet = getPubpaidWallet(authUser);
   const walletKey = getPubpaidWalletKey(authUser);
-  const deposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE).filter(
-    (item) => safeString(item?.walletKey || "", 180).toLowerCase() === walletKey
-  );
-  const withdrawals = getPubpaidWithdrawals().filter(
-    (item) => safeString(item?.walletKey || "", 180).toLowerCase() === walletKey
-  );
+  const matchesPubpaidWallet = (item = {}) => {
+    const candidates = [
+      item.walletKey,
+      item.playerId,
+      item.userId,
+      item.email,
+      item?.user?.email,
+      item?.user?.sub
+    ].map((value) => safeString(value || "", 180).toLowerCase()).filter(Boolean);
+    return candidates.includes(walletKey);
+  };
+  const deposits = readMergedPubpaidArray(PUBPAID_DEPOSITS_FILE, LEGACY_PUBPAID_DEPOSITS_FILE).filter(matchesPubpaidWallet);
+  const withdrawals = getPubpaidWithdrawals().filter(matchesPubpaidWallet);
   const pendingDeposits = deposits.filter((item) => isPubpaidPendingStatus(item?.payment?.status || item?.status));
   const pendingWithdrawals = withdrawals.filter((item) =>
     isPubpaidPendingStatus(item?.payment?.status || item?.status || item?.status)
@@ -13953,21 +13968,21 @@ function buildPubpaidAccountPayload(authUser = {}) {
     },
     recentDeposits: sortByDateDesc(deposits, "createdAt", 8).map((item) => ({
       id: item.id,
-      amount: item.amount || 0,
-      creditsRequested: item.creditsRequested || 0,
+      amount: item.amount || item.amountCoins || 0,
+      creditsRequested: item.creditsRequested || item.amountCoins || item.amount || 0,
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || "",
+      txid: item?.payment?.txid || item.reference || "",
       createdAt: item.createdAt || "",
       reviewDeadlineAt: item.reviewDeadlineAt || ""
     })),
     recentWithdrawals: sortByDateDesc(withdrawals, "createdAt", 8).map((item) => ({
       id: item.id,
-      amount: item.amount || 0,
-      creditsRequested: item.creditsRequested || 0,
+      amount: item.amount || item.amountCoins || 0,
+      creditsRequested: item.creditsRequested || item.amountCoins || item.amount || 0,
       status: item.status || "",
       paymentStatus: item?.payment?.status || "",
-      txid: item?.payment?.txid || "",
+      txid: item?.payment?.txid || item.reference || "",
       createdAt: item.createdAt || "",
       reviewDeadlineAt: item.reviewDeadlineAt || ""
     }))
@@ -17702,7 +17717,7 @@ function settlePubpaidPvpMatch(match = {}) {
   if (!match || match.status !== "finished" || match.settlement?.status === "settled") return match;
   const stake = normalizePubpaidMoney(match.stake);
   const pot = normalizePubpaidMoney(stake * 2);
-  const houseFee = match.winner ? normalizePubpaidMoney(pot * 0.2) : 0;
+  const houseFee = match.winner ? normalizePubpaidMoney(stake * 0.2) : 0;
   const payout = match.winner ? normalizePubpaidMoney(pot - houseFee) : stake;
   releasePubpaidMatchEscrow(match.playerOne, stake);
   releasePubpaidMatchEscrow(match.playerTwo, stake);

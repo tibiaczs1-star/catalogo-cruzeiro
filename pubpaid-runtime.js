@@ -145,6 +145,7 @@ function normalizeWithdrawal(item = {}, index = 0) {
 function normalizeWallet(playerId, record = {}) {
   const balanceCoins = normalizeMoney(record.balanceCoins ?? record.balance ?? record.saldo);
   const lockedWithdrawalCoins = normalizeMoney(record.lockedWithdrawalCoins ?? record.locked ?? record.travado);
+  const lockedMatchCoins = normalizeMoney(record.lockedMatchCoins ?? record.lockedPvpCoins ?? 0);
   const totalApprovedDeposits = normalizeMoney(record.totalApprovedDeposits ?? record.approvedDeposits ?? record.depositosAprovados);
   const totalApprovedWithdrawals = normalizeMoney(record.totalApprovedWithdrawals ?? record.approvedWithdrawals ?? record.saquesAprovados);
   return {
@@ -152,6 +153,7 @@ function normalizeWallet(playerId, record = {}) {
     playerName: normalizeText(record.playerName ?? record.player ?? record.name, "Jogador"),
     balanceCoins,
     lockedWithdrawalCoins,
+    lockedMatchCoins,
     totalApprovedDeposits,
     totalApprovedWithdrawals,
   };
@@ -195,6 +197,7 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
         playerName: normalized.playerName,
         balanceCoins: 0,
         lockedWithdrawalCoins: 0,
+        lockedMatchCoins: normalizeMoney(normalized.lockedMatchCoins),
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
       });
@@ -214,6 +217,7 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
           playerName,
           balanceCoins: 0,
           lockedWithdrawalCoins: 0,
+          lockedMatchCoins: 0,
           totalApprovedDeposits: 0,
           totalApprovedWithdrawals: 0,
         })

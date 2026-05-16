@@ -158,6 +158,16 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - `InteriorScene.js` usa o sprite pequeno no centro do salão.
 - `GameLobbyScene.js` usa o sprite grande no lobby, com janela de fala/instrução do garçom.
 - `pubpaid-v2.html` ganhou cache-bust `20260423waitersprite`.
+
+## 2026-05-16 shell premium fullscreen e mobile controls
+
+- Pedido aplicado localmente no PubPaid 2.0 oficial (`pubpaid-v2.html` + `pubpaid-phaser/`): remover acessos de agentes da interface, manter shell fullscreen, ESC para carteira, remover pedestres/carros, melhorar seleção de personagem e adicionar controles mobile tipo RPG.
+- `pubpaid-v2.html` removeu links/botoes de agentes do topo do jogo, adicionou overlay de aviso fullscreen, controles touch estaticos e visual de celular dentro da carteira.
+- `pubpaid-phaser/app.js` adicionou estado de controles mobile, aviso de saida de fullscreen, retorno para fullscreen, ESC abrindo carteira e `render_game_to_text` com `fullscreenWarning`/`mobileInput`.
+- `CharacterSelectScene.js` foi redesenhada com cards premium, selo ativo, CTA claro e ajuste para desktop/mobile landscape.
+- `StreetScene.js` nao instancia mais pedestres/carros; `BootScene.js` e `assetRegistry.js` removeram o asset de carro ativo. Reintroduzir vida urbana so com pacote visual coerente.
+- `StreetScene.js` e `InteriorScene.js` consomem vetor/acao dos controles touch; botao Pay abre a carteira.
+- Validacoes: `node --check` nos arquivos tocados, `npm run guard:pubpaid`, CSS balanceado, Playwright desktop/mobile, ESC->carteira, aviso fullscreen e controles touch. Capturas em `output/playwright/pubpaid-v2-character-select-premium-20260516.png`, `pubpaid-v2-character-select-mobile-20260516.png`, `pubpaid-v2-mobile-controls-wallet-20260516.png`, `pubpaid-v2-esc-wallet-phone-20260516.png`.
 - Validações: `node --check` passou para `spriteFactory.js`, `BootScene.js`, `InteriorScene.js` e `GameLobbyScene.js`.
 
 ## 2026-04-23 lobby com garçom falando e público
@@ -390,4 +400,12 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - O caso de perigo real foi preservado: player forçado dentro da faixa faz o veiculo parar antes; se ja estiver colado, o veiculo fica no lugar sem dar re; a faixa bloqueada nao gera novo veiculo naquela direcao.
 - `scripts/pubpaid-build-traffic-spritesheet.py`: pilotos integrados das motos foram reforçados no proprio PNG, com tronco/quadril/perna/capacete desenhados nos frames.
 - Validacoes: `node --check`, `python -m py_compile` e Playwright custom em `output/web-game/pubpaid-traffic-check/`; report final confirmou `sidewalkNoStop=true`, `sidewalkLaneBlocked=false`, `sidewalkTrafficCollision=false`, `directTrafficCollision=true`, `hazardStoppedBeforePlayer=true`, `didNotReverse=true` e `spawnSuppressedOrOtherLane=true`.
+
+## 2026-05-16 Damas real 1x1
+
+- O fluxo de Damas passou a separar demo de dinheiro real: sem saldo disponível continua demo; com saldo suficiente, a mesa busca outro jogador real.
+- `domGameInterface.js` agora abre fila PvP real, faz polling, renderiza o tabuleiro autoritativo vindo do servidor e envia jogadas para `/api/pubpaid/pvp/checkers/move`.
+- O backend já tinha a base de partida autoritativa; a rodada corrigiu a preservação de `lockedMatchCoins` no store canônico e alinhou a liquidação ao exemplo pedido: stake 100 + 100 => casa 20, vencedor 180.
+- Teste de integração local com dois usuários autenticados falsos confirmou fila, pareamento, jogada validada, encerramento e settlement `{ stake: 100, pot: 200, houseFee: 20, payout: 180 }`.
+- TODO seguinte: testar online com dois logins Google reais depois do deploy e confirmar a experiência entre duas abas/dispositivos.
 

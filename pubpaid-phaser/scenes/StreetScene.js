@@ -70,15 +70,10 @@ const STREET_MAP = {
   doors: [
     { id: "pubpaid-main-door", x: 300, y: 486, approach: { x: 300, y: 526 } }
   ],
-  pedestrianRoutes: [
-    { id: "left-sidewalk", x: 94, y: 558, toX: 228, delay: 180, scale: 0.76, shadow: 42 },
-    { id: "pub-front", x: 660, y: 500, toX: 760, delay: 620, scale: 0.66, shadow: 38 },
-    { id: "bus-stop", x: 1128, y: 578, toX: 1042, delay: 980, scale: 0.7, shadow: 40 },
-    { id: "curb-walk", x: 920, y: 602, toX: 812, delay: 1320, scale: 0.72, shadow: 42 }
-  ],
+  pedestrianRoutes: [],
   trafficLanes: [
-    { id: "near-lane", y: 654, startX: -160, endX: 1430, direction: 1, width: 146, height: 42, duration: 7800, delay: 240, depth: 2.08 },
-    { id: "far-lane", y: 602, startX: 1390, endX: -170, direction: -1, width: 132, height: 38, duration: 9200, delay: 1680, depth: 1.82 }
+    { id: "teal-hatch-east", y: 656, startX: -220, endX: 1460, direction: 1, frameStart: 0, width: 230, height: 116, duration: 9400, delay: 280, depth: 2.05 },
+    { id: "amber-sedan-west", y: 610, startX: 1450, endX: -240, direction: -1, frameStart: 4, width: 236, height: 118, duration: 11200, delay: 3300, depth: 1.72 }
   ],
   lightingZones: [
     { id: "pub-neon", x: 474, y: 188, width: 388, height: 166, color: "cyan-magenta" },
@@ -114,10 +109,10 @@ export class StreetScene extends Phaser.Scene {
     this.streetSfxTimer = null;
     this.pendingDoorEntry = false;
     this.streetMapWarnings = [];
+    this.playerDirection = "down";
   }
 
   create() {
-    this.textures.get("ppg-car-side")?.setFilter?.(Phaser.Textures.FilterMode.NEAREST);
     this.game.events.emit("pubpaid:music-zone", "street");
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "street-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientStreetFx();
@@ -187,7 +182,7 @@ export class StreetScene extends Phaser.Scene {
         nerdAgent: formatNerdAgent(NERD_TEAM.physics),
         streetMap: this.getStreetMapSnapshot(),
         streetMapWarnings: this.streetMapWarnings,
-        prompt: "Destino marcado. Caminhe até a porta principal; a rua agora usa figurantes bitmap em escala controlada."
+        prompt: "Destino marcado. Caminhe até a porta principal; a rua voltou a usar arte pixel aprovada."
       });
     });
 
@@ -266,78 +261,44 @@ export class StreetScene extends Phaser.Scene {
   }
 
   buildStreetLife() {
-    STREET_MAP.pedestrianRoutes.forEach((person, index) => {
-      const sprite = this.add.image(person.x, person.y, PUBPAID_TEXTURE_KEYS.guestA)
-        .setOrigin(0.5, 1);
-      fitImageToHeight(sprite, PUBPAID_WORLD_SCALE.adultForegroundPx * person.scale);
-      sprite.setDepth(person.y > 540 ? 2.25 : 1.62);
-      sprite.setAlpha(0.94);
-      sprite.setFlipX(person.toX < person.x);
-      const shadow = this.add.ellipse(person.x, person.y + 2, person.shadow, person.shadow * 0.2, 0x000000, 0.22)
-        .setDepth(sprite.depth - 0.02)
-        .setBlendMode(Phaser.BlendModes.MULTIPLY);
-      this.pedestrians.push({ id: person.id, sprite, shadow, source: "bitmap-png" });
-      this.tweens.add({
-        targets: [sprite, shadow],
-        x: person.toX,
-        duration: 4200 + index * 540,
-        delay: person.delay,
-        yoyo: true,
-        repeat: -1,
-        ease: "Sine.easeInOut",
-        onYoyo: () => sprite.setFlipX(!sprite.flipX),
-        onRepeat: () => sprite.setFlipX(!sprite.flipX)
-      });
-    });
-
     this.buildTraffic();
-
-    const scaleNote = this.add.text(18, 704, `escala adulta: player ~${PUBPAID_WORLD_SCALE.adultForegroundPx}px / porta ~${PUBPAID_WORLD_SCALE.doorHeightPx}px`, {
-      fontFamily: "Courier New, Lucida Console, monospace",
-      fontSize: "9px",
-      color: "#8fa0ba",
-      stroke: "#02050d",
-      strokeThickness: 2
-    }).setAlpha(0.36).setDepth(4).setScrollFactor(0);
-    this.time.delayedCall(1800, () => {
-      this.tweens.add({ targets: scaleNote, alpha: 0, duration: 900, ease: "Sine.easeOut" });
-    });
-
     this.streetSfxTimer = null;
   }
 
   buildTraffic() {
+    if (!this.textures.exists(PUBPAID_TEXTURE_KEYS.trafficVehicles)) return;
     STREET_MAP.trafficLanes.forEach((lane, index) => {
       const vehicle = this.add.container(lane.startX, lane.y).setDepth(lane.depth);
-      const shadow = this.add.ellipse(0, 15, lane.width * 0.82, 13, 0x000000, 0.28)
+      const shadow = this.add.ellipse(0, 28, lane.width * 0.62, 17, 0x000000, 0.22)
         .setBlendMode(Phaser.BlendModes.MULTIPLY);
-      vehicle.add(shadow);
-      if (this.textures.exists("ppg-car-side")) {
-        const car = this.add.image(0, 0, "ppg-car-side")
-          .setDisplaySize(lane.width, lane.height)
-          .setFlipX(lane.direction < 0)
-          .setAlpha(0.94);
-        vehicle.add(car);
-      } else {
-        vehicle.add([
-          this.add.rectangle(0, 0, lane.width, lane.height * 0.62, index ? 0xff4fb8 : 0x50efff, 0.92),
-          this.add.rectangle(-lane.width * 0.16, -lane.height * 0.16, lane.width * 0.34, lane.height * 0.22, 0xc7ebff, 0.88),
-          this.add.rectangle(lane.width * 0.36 * lane.direction, 0, 18, 8, 0xffd06d, 0.9)
-        ]);
-      }
-      const lightA = this.add.rectangle(lane.width * 0.44 * lane.direction, 0, 28, 8, 0xffd06d, 0.42)
-        .setBlendMode(Phaser.BlendModes.SCREEN);
-      const tail = this.add.rectangle(-lane.width * 0.44 * lane.direction, 0, 18, 8, 0xff4fb8, 0.28)
-        .setBlendMode(Phaser.BlendModes.SCREEN);
-      vehicle.add([lightA, tail]);
-      this.vehicles.push({ id: lane.id, vehicle, lane });
+      const car = this.add.sprite(0, 0, PUBPAID_TEXTURE_KEYS.trafficVehicles, lane.frameStart)
+        .setOrigin(0.5, 0.72)
+        .setDisplaySize(lane.width, lane.height)
+        .setFlipX(lane.direction < 0);
+      vehicle.add([shadow, car]);
+      vehicle.ppgTraffic = { id: lane.id, spriteOnly: true, textureKey: PUBPAID_TEXTURE_KEYS.trafficVehicles };
+      this.vehicles.push(vehicle);
+      this.tweens.add({
+        targets: car,
+        duration: 520,
+        repeat: -1,
+        ease: "Steps",
+        onRepeat: () => {
+          const currentFrame = Number(car.frame.name) || lane.frameStart;
+          const nextFrame = lane.frameStart + ((currentFrame - lane.frameStart + 1) % 4);
+          car.setFrame(nextFrame);
+        }
+      });
       this.tweens.add({
         targets: vehicle,
         x: lane.endX,
         duration: lane.duration,
-        delay: lane.delay,
+        delay: lane.delay + index * 420,
         repeat: -1,
-        ease: "Linear"
+        ease: "Linear",
+        onRepeat: () => {
+          vehicle.x = lane.startX;
+        }
       });
     });
   }
@@ -501,7 +462,7 @@ export class StreetScene extends Phaser.Scene {
       walkableAreas: STREET_MAP.walkableAreas.map((area) => ({ ...area })),
       blockedAreas: STREET_MAP.blockedAreas.map((area) => ({ ...area })),
       doors: STREET_MAP.doors.map((door) => ({ ...door, approach: { ...door.approach } })),
-      pedestrianRoutes: STREET_MAP.pedestrianRoutes.map((route) => ({ ...route })),
+      pedestrianRoutes: [],
       trafficLanes: STREET_MAP.trafficLanes.map((lane) => ({ ...lane })),
       lightingZones: STREET_MAP.lightingZones.map((zone) => ({ ...zone }))
     };
@@ -511,14 +472,6 @@ export class StreetScene extends Phaser.Scene {
     const warnings = [];
     STREET_MAP.doors.forEach((door) => {
       if (!this.isStreetWalkable(door.approach.x, door.approach.y, 4)) warnings.push(`door-${door.id}-approach-blocked`);
-    });
-    STREET_MAP.pedestrianRoutes.forEach((route) => {
-      if (!this.isStreetWalkable(route.x, route.y, 0)) warnings.push(`pedestrian-${route.id}-start-blocked`);
-      if (!this.isStreetWalkable(route.toX, route.y, 0)) warnings.push(`pedestrian-${route.id}-end-blocked`);
-    });
-    STREET_MAP.trafficLanes.forEach((lane) => {
-      if (lane.y < STREET_BOUNDS.minY || lane.y > GAME_HEIGHT + 12) warnings.push(`traffic-${lane.id}-outside-road`);
-      if (lane.duration < 3000) warnings.push(`traffic-${lane.id}-too-fast`);
     });
     this.streetMapWarnings = warnings;
   }
@@ -556,11 +509,7 @@ export class StreetScene extends Phaser.Scene {
         ]
       : [];
     const doorPoints = STREET_MAP.doors.map((door) => door.approach);
-    const pedestrianPoints = STREET_MAP.pedestrianRoutes.flatMap((route) => [
-      { x: route.x, y: route.y },
-      { x: route.toX, y: route.y }
-    ]);
-    const candidates = [...edgeCandidates, ...doorPoints, ...pedestrianPoints]
+    const candidates = [...edgeCandidates, ...doorPoints]
       .filter((point) => this.isStreetWalkable(point.x, point.y, 10));
     candidates.sort((a, b) => (
       Phaser.Math.Distance.Between(clamped.x, clamped.y, a.x, a.y)
@@ -671,13 +620,88 @@ export class StreetScene extends Phaser.Scene {
     const player = this.add.container(x, y).setDepth(2.42);
     const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
-    const spriteKey = gameState.selectedCharacter?.spriteKey || PUBPAID_TEXTURE_KEYS.player;
-    const sprite = this.add.image(0, 0, spriteKey)
+    const rig = this.getPlayerRig();
+    const sprite = this.add.sprite(0, 0, rig.idleBreatheKey, 0)
       .setOrigin(0.5, 1);
     fitImageToHeight(sprite, PUBPAID_WORLD_SCALE.adultForegroundPx);
+    sprite.ppgBaseScaleX = sprite.scaleX;
+    sprite.ppgBaseScaleY = sprite.scaleY;
     player.ppgSprite = sprite;
+    player.ppgFacing = 0;
+    player.ppgCharacter = rig.id;
+    player.ppgLastMoveAt = this.time.now || 0;
     player.add([shadow, sprite]);
     return player;
+  }
+
+  getPlayerRig() {
+    const female = gameState.selectedCharacter?.id === "female";
+    return female
+      ? {
+          id: "female",
+          walkKey: PUBPAID_TEXTURE_KEYS.playerFemaleWalk,
+          idleBreatheKey: PUBPAID_TEXTURE_KEYS.playerFemaleIdleBreathe,
+          idlePhoneKey: PUBPAID_TEXTURE_KEYS.playerFemaleIdlePhone
+        }
+      : {
+          id: "male",
+          walkKey: PUBPAID_TEXTURE_KEYS.playerMaleWalk,
+          idleBreatheKey: PUBPAID_TEXTURE_KEYS.playerMaleIdleBreathe,
+          idlePhoneKey: PUBPAID_TEXTURE_KEYS.playerMaleIdlePhone
+        };
+  }
+
+  getFacingIndex(vectorX, vectorY) {
+    const angle = Phaser.Math.RadToDeg(Math.atan2(vectorY, vectorX));
+    if (angle >= 67.5 && angle < 112.5) return 0;
+    if (angle >= 22.5 && angle < 67.5) return 1;
+    if (angle >= -22.5 && angle < 22.5) return 2;
+    if (angle >= -67.5 && angle < -22.5) return 3;
+    if (angle >= -112.5 && angle < -67.5) return 4;
+    if (angle >= -157.5 && angle < -112.5) return 5;
+    if (angle >= 157.5 || angle < -157.5) return 6;
+    return 7;
+  }
+
+  directionFromVector(vectorX, vectorY) {
+    const vertical = vectorY < -0.35 ? "up" : vectorY > 0.35 ? "down" : "";
+    const horizontal = vectorX < -0.35 ? "left" : vectorX > 0.35 ? "right" : "";
+    return [vertical, horizontal].filter(Boolean).join("-") || this.playerDirection || "down";
+  }
+
+  updatePlayerMotion(vectorX = 0, vectorY = 0, moving = false) {
+    const sprite = this.player?.ppgSprite;
+    if (!sprite) return;
+    const baseScaleX = sprite.ppgBaseScaleX || sprite.scaleX || 1;
+    const baseScaleY = sprite.ppgBaseScaleY || sprite.scaleY || 1;
+    const rig = this.getPlayerRig();
+    if (this.player.ppgCharacter !== rig.id) {
+      this.player.ppgCharacter = rig.id;
+      this.player.ppgFacing = 0;
+      sprite.setTexture(rig.idleBreatheKey, 0);
+    }
+    if (!moving) {
+      sprite.setY(0);
+      sprite.setRotation(0);
+      sprite.setScale(baseScaleX, baseScaleY);
+      const idleMs = Math.max(0, (this.time.now || 0) - (this.player.ppgLastMoveAt || 0));
+      const idleKey = idleMs > 2600 ? rig.idlePhoneKey : rig.idleBreatheKey;
+      if (sprite.texture.key !== idleKey) sprite.setTexture(idleKey);
+      const idleFrame = Math.floor((this.time.now || 0) / 240) % 4;
+      sprite.setFrame((this.player.ppgFacing || 0) * 4 + idleFrame);
+      updateGameState({ playerMoving: false, playerDirection: this.playerDirection });
+      return;
+    }
+    this.playerDirection = this.directionFromVector(vectorX, vectorY);
+    this.player.ppgLastMoveAt = this.time.now || 0;
+    this.player.ppgFacing = this.getFacingIndex(vectorX, vectorY);
+    if (sprite.texture.key !== rig.walkKey) sprite.setTexture(rig.walkKey);
+    const walkFrame = Math.floor((this.time.now || 0) / 120) % 4;
+    sprite.setFrame(this.player.ppgFacing * 4 + walkFrame);
+    sprite.setY(0);
+    sprite.setRotation(0);
+    sprite.setScale(baseScaleX, baseScaleY);
+    updateGameState({ playerMoving: true, playerDirection: this.playerDirection });
   }
 
   handleResize(gameSize) {
@@ -737,10 +761,20 @@ export class StreetScene extends Phaser.Scene {
     if (this.cursors.right.isDown) keyboardVector.x += 1;
     if (this.cursors.up.isDown) keyboardVector.y -= 1;
     if (this.cursors.down.isDown) keyboardVector.y += 1;
+    const mobileVector = window.pubpaidMobileInput?.getVector?.() || { x: 0, y: 0 };
+    keyboardVector.x += mobileVector.x || 0;
+    keyboardVector.y += mobileVector.y || 0;
+    if (window.pubpaidMobileInput?.consumeAction?.()) {
+      this.tryNearestHotspot();
+    }
 
+    let motionVector = new Phaser.Math.Vector2(0, 0);
+    let playerMoved = false;
     if (keyboardVector.lengthSq() > 0) {
-      keyboardVector.normalize().scale(2.6);
-      this.moveStreetPlayerBy(keyboardVector.x, keyboardVector.y);
+      keyboardVector.normalize();
+      motionVector = keyboardVector.clone();
+      keyboardVector.scale(2.6);
+      playerMoved = this.moveStreetPlayerBy(keyboardVector.x, keyboardVector.y);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
     } else if (this.targetPoint) {
@@ -757,8 +791,9 @@ export class StreetScene extends Phaser.Scene {
         }
       } else {
         const speed = 2.8;
-        const moved = this.moveStreetPlayerBy((dx / distance) * speed, (dy / distance) * speed);
-        if (!moved) {
+        motionVector = new Phaser.Math.Vector2(dx / distance, dy / distance);
+        playerMoved = this.moveStreetPlayerBy(motionVector.x * speed, motionVector.y * speed);
+        if (!playerMoved) {
           this.targetPoint = null;
           this.targetMarker.setVisible(false);
           updateGameState({
@@ -768,6 +803,7 @@ export class StreetScene extends Phaser.Scene {
         }
       }
     }
+    this.updatePlayerMotion(motionVector.x, motionVector.y, playerMoved);
 
     const nearDoor = Phaser.Math.Distance.Between(this.player.x, this.player.y, 300, 486) < 74;
     const nearestHotspot = this.hotspots

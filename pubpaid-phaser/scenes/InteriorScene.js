@@ -103,6 +103,8 @@ const INTERIOR_MAP = {
     { id: "back-wall-shelves", kind: "wall", x: 84, y: 54, width: 1114, height: 86 },
     { id: "left-dining-north", kind: "tables", x: 76, y: 216, width: 402, height: 170 },
     { id: "left-dining-south", kind: "tables", x: 92, y: 430, width: 372, height: 168 },
+    { id: "center-round-table", kind: "tables", x: 432, y: 414, width: 226, height: 126 },
+    { id: "upper-round-table", kind: "tables", x: 724, y: 218, width: 256, height: 132 },
     { id: "stage-platform", kind: "stage", x: 928, y: 126, width: 292, height: 222 },
     { id: "jukebox", kind: "prop", x: 1164, y: 542, width: 88, height: 132 },
     { id: "pvp-checkers-table", kind: "gameplay", x: 208, y: 448, width: 222, height: 152 }
@@ -116,7 +118,7 @@ const INTERIOR_MAP = {
     { id: "checkers-seat-b", x: 420, y: 552, faces: "west", table: "pvp-checkers-table" }
   ],
   interactionPoints: {
-    waiter: { x: 620, y: 488 },
+    waiter: { x: 704, y: 506 },
     stage: { x: 990, y: 368 },
     exit: { x: 640, y: 610 }
   },
@@ -129,10 +131,10 @@ const INTERIOR_MAP = {
       { x: 854, y: 360 }
     ],
     waiterLoop: [
-      { x: 620, y: 418 },
-      { x: 566, y: 486 },
+      { x: 704, y: 506 },
+      { x: 672, y: 502 },
       { x: 704, y: 504 },
-      { x: 738, y: 408 }
+      { x: 760, y: 430 }
     ]
   },
   lightingZones: [
@@ -144,8 +146,8 @@ const INTERIOR_MAP = {
 
 const WALKABLE_ANCHORS = [
   { x: 640, y: 610 },
-  { x: 620, y: 488 },
-  { x: 520, y: 512 },
+  { x: 704, y: 506 },
+  { x: 606, y: 392 },
   { x: 730, y: 508 },
   { x: 836, y: 420 },
   { x: 990, y: 368 },
@@ -205,6 +207,7 @@ export class InteriorScene extends Phaser.Scene {
       darts: { signature: "" },
       checkers: { signature: "" }
     };
+    this.playerDirection = "down";
   }
 
   create() {
@@ -212,15 +215,18 @@ export class InteriorScene extends Phaser.Scene {
     this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "interior-bg").setDisplaySize(GAME_WIDTH, GAME_HEIGHT);
     this.buildAmbientFx();
 
+    const seatedNorth = this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 172, 348, 0.052, 2600, 0x50efff, { staticBitmap: true, depth: 2.16, alpha: 0.86 });
+    const seatedSouth = this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 178, 546, 0.054, 2800, 0xffd06d, { staticBitmap: true, depth: 2.22, alpha: 0.86 });
+    seatedSouth.setFlipX(true);
     this.actors = [
-      this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 620, 418, 0.075, 2400, 0xfff0c0, { depth: 2.48 }),
-      this.addActor(PUBPAID_TEXTURE_KEYS.singer, 1056, 322, 0.078, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.32, alpha: 0.92 }),
-      this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 874, 528, 0.06, 2600, 0x50efff, { staticBitmap: true, depth: 2.18, alpha: 0.82 }),
-      this.addActor(PUBPAID_TEXTURE_KEYS.guestA, 1112, 530, 0.062, 2800, 0xffd06d, { staticBitmap: true, depth: 2.2, alpha: 0.82 })
+      this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 506, 0.078, 2400, 0xfff0c0, { depth: 2.52 }),
+      this.addActor(PUBPAID_TEXTURE_KEYS.singer, 1120, 270, 0.072, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.24, alpha: 0.92 }),
+      seatedNorth,
+      seatedSouth
     ];
-    this.waiterIndicator = this.buildWaiterIndicator(620, 322);
+    this.waiterIndicator = this.buildWaiterIndicator(704, 404);
 
-    this.player = this.buildPlayer(640, 608);
+    this.player = this.buildPlayer(606, 392);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
     this.transitionVeil = this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x04060d, 0)
       .setDepth(20)
@@ -238,7 +244,7 @@ export class InteriorScene extends Phaser.Scene {
       .setDepth(1.4);
 
     this.zones = [
-      { id: "waiter", x: 620, y: 418, radius: 74, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter },
+      { id: "waiter", x: 704, y: 506, radius: 78, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter, labelOffsetY: -136 },
       { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco", approach: INTERIOR_MAP.interactionPoints.stage },
       { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua", approach: INTERIOR_MAP.interactionPoints.exit }
     ];
@@ -283,7 +289,7 @@ export class InteriorScene extends Phaser.Scene {
       nerdAgent: formatNerdAgent(NERD_TEAM.hud),
       interiorMap: this.getInteriorMapSnapshot(),
       interiorMapWarnings: this.interiorMapWarnings,
-      prompt: "Salão definitivo carregado. O garçom no centro abre o lobby; os jogos acontecem fora do bar, em tela própria."
+      prompt: "Salão definitivo carregado. O garçom no corredor abre o lobby; os jogos acontecem fora do bar, em tela própria."
     });
   }
 
@@ -1400,7 +1406,7 @@ export class InteriorScene extends Phaser.Scene {
     this.drawZoneFrame(frame, zone.radius, zone.color, 0.4);
     const pulse = this.add.ellipse(0, 0, zone.radius * 1.15, zone.radius * 0.88, zone.color, 0.02)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const text = this.add.text(0, -zone.radius * 0.88, zone.label, {
+    const text = this.add.text(0, zone.labelOffsetY ?? -zone.radius * 0.88, zone.label, {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "12px",
       fontStyle: "bold",
@@ -1481,13 +1487,88 @@ export class InteriorScene extends Phaser.Scene {
     const player = this.add.container(x, y).setDepth(2.55);
     const shadow = this.add.ellipse(0, 2, 48, 11, 0x000000, 0.2)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
-    const spriteKey = gameState.selectedCharacter?.spriteKey || PUBPAID_TEXTURE_KEYS.player;
-    const sprite = this.add.image(0, 0, spriteKey)
+    const rig = this.getPlayerRig();
+    const sprite = this.add.sprite(0, 0, rig.idleBreatheKey, 0)
       .setOrigin(0.5, 1);
     fitImageToHeight(sprite, 118);
+    sprite.ppgBaseScaleX = sprite.scaleX;
+    sprite.ppgBaseScaleY = sprite.scaleY;
     player.ppgSprite = sprite;
+    player.ppgFacing = 0;
+    player.ppgCharacter = rig.id;
+    player.ppgLastMoveAt = this.time.now || 0;
     player.add([shadow, sprite]);
     return player;
+  }
+
+  getPlayerRig() {
+    const female = gameState.selectedCharacter?.id === "female";
+    return female
+      ? {
+          id: "female",
+          walkKey: PUBPAID_TEXTURE_KEYS.playerFemaleWalk,
+          idleBreatheKey: PUBPAID_TEXTURE_KEYS.playerFemaleIdleBreathe,
+          idlePhoneKey: PUBPAID_TEXTURE_KEYS.playerFemaleIdlePhone
+        }
+      : {
+          id: "male",
+          walkKey: PUBPAID_TEXTURE_KEYS.playerMaleWalk,
+          idleBreatheKey: PUBPAID_TEXTURE_KEYS.playerMaleIdleBreathe,
+          idlePhoneKey: PUBPAID_TEXTURE_KEYS.playerMaleIdlePhone
+        };
+  }
+
+  getFacingIndex(vectorX, vectorY) {
+    const angle = Phaser.Math.RadToDeg(Math.atan2(vectorY, vectorX));
+    if (angle >= 67.5 && angle < 112.5) return 0;
+    if (angle >= 22.5 && angle < 67.5) return 1;
+    if (angle >= -22.5 && angle < 22.5) return 2;
+    if (angle >= -67.5 && angle < -22.5) return 3;
+    if (angle >= -112.5 && angle < -67.5) return 4;
+    if (angle >= -157.5 && angle < -112.5) return 5;
+    if (angle >= 157.5 || angle < -157.5) return 6;
+    return 7;
+  }
+
+  directionFromVector(vectorX, vectorY) {
+    const vertical = vectorY < -0.35 ? "up" : vectorY > 0.35 ? "down" : "";
+    const horizontal = vectorX < -0.35 ? "left" : vectorX > 0.35 ? "right" : "";
+    return [vertical, horizontal].filter(Boolean).join("-") || this.playerDirection || "down";
+  }
+
+  updatePlayerMotion(vectorX = 0, vectorY = 0, moving = false) {
+    const sprite = this.player?.ppgSprite;
+    if (!sprite) return;
+    const baseScaleX = sprite.ppgBaseScaleX || sprite.scaleX || 1;
+    const baseScaleY = sprite.ppgBaseScaleY || sprite.scaleY || 1;
+    const rig = this.getPlayerRig();
+    if (this.player.ppgCharacter !== rig.id) {
+      this.player.ppgCharacter = rig.id;
+      this.player.ppgFacing = 0;
+      sprite.setTexture(rig.idleBreatheKey, 0);
+    }
+    if (!moving) {
+      sprite.setY(0);
+      sprite.setRotation(0);
+      sprite.setScale(baseScaleX, baseScaleY);
+      const idleMs = Math.max(0, (this.time.now || 0) - (this.player.ppgLastMoveAt || 0));
+      const idleKey = idleMs > 2600 ? rig.idlePhoneKey : rig.idleBreatheKey;
+      if (sprite.texture.key !== idleKey) sprite.setTexture(idleKey);
+      const idleFrame = Math.floor((this.time.now || 0) / 240) % 4;
+      sprite.setFrame((this.player.ppgFacing || 0) * 4 + idleFrame);
+      updateGameState({ playerMoving: false, playerDirection: this.playerDirection });
+      return;
+    }
+    this.playerDirection = this.directionFromVector(vectorX, vectorY);
+    this.player.ppgLastMoveAt = this.time.now || 0;
+    this.player.ppgFacing = this.getFacingIndex(vectorX, vectorY);
+    if (sprite.texture.key !== rig.walkKey) sprite.setTexture(rig.walkKey);
+    const walkFrame = Math.floor((this.time.now || 0) / 120) % 4;
+    sprite.setFrame(this.player.ppgFacing * 4 + walkFrame);
+    sprite.setY(0);
+    sprite.setRotation(0);
+    sprite.setScale(baseScaleX, baseScaleY);
+    updateGameState({ playerMoving: true, playerDirection: this.playerDirection });
   }
 
   addActor(textureKey, x, y, scale, pulseDuration, glowColor, options = {}) {
@@ -1692,7 +1773,7 @@ export class InteriorScene extends Phaser.Scene {
     const zone = this.getNearestZone();
     if (!zone) {
       updateGameState({
-        prompt: "Chegue perto do garçom no centro do salão ou da saída."
+        prompt: "Chegue perto do garçom no corredor do salão ou da saída."
       });
       return;
     }
@@ -1734,10 +1815,20 @@ export class InteriorScene extends Phaser.Scene {
     if (this.cursors.right.isDown) keyboardVector.x += 1;
     if (this.cursors.up.isDown) keyboardVector.y -= 1;
     if (this.cursors.down.isDown) keyboardVector.y += 1;
+    const mobileVector = window.pubpaidMobileInput?.getVector?.() || { x: 0, y: 0 };
+    keyboardVector.x += mobileVector.x || 0;
+    keyboardVector.y += mobileVector.y || 0;
+    if (window.pubpaidMobileInput?.consumeAction?.()) {
+      this.tryInteraction();
+    }
 
+    let motionVector = new Phaser.Math.Vector2(0, 0);
+    let playerMoved = false;
     if (keyboardVector.lengthSq() > 0) {
-      keyboardVector.normalize().scale(2.6);
-      this.movePlayerBy(keyboardVector.x, keyboardVector.y);
+      keyboardVector.normalize();
+      motionVector = keyboardVector.clone();
+      keyboardVector.scale(2.6);
+      playerMoved = this.movePlayerBy(keyboardVector.x, keyboardVector.y);
       this.targetPoint = null;
       this.targetMarker.setVisible(false);
     } else if (this.targetPoint) {
@@ -1755,8 +1846,9 @@ export class InteriorScene extends Phaser.Scene {
         }
       } else {
         const speed = 2.8;
-        const moved = this.movePlayerBy((dx / distance) * speed, (dy / distance) * speed);
-        if (!moved) {
+        motionVector = new Phaser.Math.Vector2(dx / distance, dy / distance);
+        playerMoved = this.movePlayerBy(motionVector.x * speed, motionVector.y * speed);
+        if (!playerMoved) {
           this.targetPoint = null;
           this.targetMarker.setVisible(false);
           updateGameState({
@@ -1766,6 +1858,7 @@ export class InteriorScene extends Phaser.Scene {
         }
       }
     }
+    this.updatePlayerMotion(motionVector.x, motionVector.y, playerMoved);
 
     const zone = this.getNearestZone();
     this.setActiveZone(zone?.id || null);
@@ -1863,7 +1956,7 @@ export class InteriorScene extends Phaser.Scene {
           : zone.id === "waiter"
             ? "Apertar Enter para abrir o lobby"
             : "Apertar Enter para interagir"
-        : "Falar com o garçom no centro",
+        : "Falar com o garçom no corredor",
       nerdAgent: formatNerdAgent(zone ? zone.id === "stage" ? NERD_TEAM.sprite : NERD_TEAM.hud : NERD_TEAM.physics),
       prompt: zone
         ? zone.id === "exit"
@@ -1871,7 +1964,7 @@ export class InteriorScene extends Phaser.Scene {
           : zone.id === "waiter"
             ? "Garçom localizado. Aperte Enter para abrir o lobby de jogos."
             : `${zone.label} ativo. Aperte Enter para interagir.`
-        : "Explore o salão. O garçom no centro abre todos os jogos."
+        : "Explore o salão. O garçom no corredor abre todos os jogos."
     });
   }
 

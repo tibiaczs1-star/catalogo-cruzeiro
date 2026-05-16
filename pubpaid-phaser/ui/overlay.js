@@ -11,7 +11,6 @@ const refs = {
   lockedMatchBalance: document.querySelector("[data-game-locked-match-balance]"),
   pvpStatus: document.querySelector("[data-game-pvp-status]"),
   objective: document.querySelector("[data-game-objective]"),
-  nerdAgent: document.querySelector("[data-game-nerd-agent]"),
   prompt: document.querySelector("[data-game-prompt-copy]"),
   panel: document.querySelector("[data-game-panel]"),
   panelKicker: document.querySelector("[data-game-panel-kicker]"),
@@ -214,6 +213,7 @@ export function bindOverlay() {
   });
 
   subscribeGameState((state) => {
+    document.body.dataset.pubpaidScene = state.currentScene || "";
     if (refs.scene) refs.scene.textContent = state.currentScene;
     if (refs.focus) refs.focus.textContent = state.focus;
     if (refs.mode) refs.mode.textContent = state.mode;
@@ -227,7 +227,6 @@ export function bindOverlay() {
         : state.pvpStatus;
     }
     if (refs.objective) refs.objective.textContent = state.objective;
-    if (refs.nerdAgent) refs.nerdAgent.textContent = state.nerdAgent;
     if (refs.prompt) refs.prompt.textContent = state.prompt;
     if (refs.accountLabel) {
       refs.accountLabel.textContent =

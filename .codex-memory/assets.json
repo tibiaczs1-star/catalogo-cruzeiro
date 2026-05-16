@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T21:43:41.499Z",
+  "lastUpdatedAt": "2026-05-16T19:45:00.000Z",
   "assets": [
     {
       "id": "home-entry-separated-cards-validation-20260513",
@@ -1991,6 +1991,105 @@
       "note": "Validação local da home liberada após hotfix da splash presa sem logo.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-13T05:54:02.927Z"
+    },
+    {
+      "id": "pubpaid-v2-wallet-local-20260516-final",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-wallet-local-20260516-final.png",
+      "source": "workspace",
+      "note": "Validacao local Playwright da carteira PubPaid 2.0 integrada aos metodos/base do PubPaid original",
+      "linkedOrderIds": [
+        "2026-05-16-localmente-importar-reaproveitar-metodos-de-pagamento-e-base-de-dados-do-pubpaid"
+      ],
+      "createdAt": "2026-05-16T16:36:28.760Z"
+    },
+    {
+      "id": "pubpaid-v2-character-select-premium-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-character-select-premium-20260516.png",
+      "source": "workspace",
+      "note": "Selecao premium desktop PubPaid 2.0 apos redesign",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-remover-agentes-da-ui-exigir-fullscreen-orientacao-esc-para-carteira"
+      ],
+      "createdAt": "2026-05-16T17:03:26.599Z"
+    },
+    {
+      "id": "pubpaid-v2-character-select-mobile-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-character-select-mobile-20260516.png",
+      "source": "workspace",
+      "note": "Selecao premium mobile landscape com controles touch",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-remover-agentes-da-ui-exigir-fullscreen-orientacao-esc-para-carteira"
+      ],
+      "createdAt": "2026-05-16T17:03:26.665Z"
+    },
+    {
+      "id": "pubpaid-v2-mobile-controls-wallet-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-mobile-controls-wallet-20260516.png",
+      "source": "workspace",
+      "note": "Rua mobile com controles RPG e carteira aberta",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-remover-agentes-da-ui-exigir-fullscreen-orientacao-esc-para-carteira"
+      ],
+      "createdAt": "2026-05-16T17:03:26.732Z"
+    },
+    {
+      "id": "pubpaid-v2-esc-wallet-phone-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-esc-wallet-phone-20260516.png",
+      "source": "workspace",
+      "note": "ESC abrindo carteira com animacao de celular",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-remover-agentes-da-ui-exigir-fullscreen-orientacao-esc-para-carteira"
+      ],
+      "createdAt": "2026-05-16T17:03:26.782Z"
+    },
+    {
+      "id": "pubpaid-v2-character-select-playable-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-character-select-playable-20260516.png",
+      "source": "workspace",
+      "note": "Selecao com protagonistas jogaveis masculino/feminino corretos.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-restaurar-protagonistas-jogaveis-e-corrigir-fluxo-real"
+      ],
+      "createdAt": "2026-05-16T18:08:00.000Z"
+    },
+    {
+      "id": "pubpaid-v2-street-player-walk-playable-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-street-player-walk-playable-20260516.png",
+      "source": "workspace",
+      "note": "Rua com protagonista masculino real integrado ao fluxo jogavel.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-restaurar-protagonistas-jogaveis-e-corrigir-fluxo-real"
+      ],
+      "createdAt": "2026-05-16T18:08:00.000Z"
+    },
+    {
+      "id": "pubpaid-v2-street-female-playable-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-street-female-playable-20260516.png",
+      "source": "workspace",
+      "note": "Rua com protagonista feminina real integrada ao fluxo jogavel.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-restaurar-protagonistas-jogaveis-e-corrigir-fluxo-real"
+      ],
+      "createdAt": "2026-05-16T18:08:00.000Z"
+    },
+    {
+      "id": "pubpaid-v2-interior-female-playable-20260516",
+      "kind": "screenshot",
+      "path": "output/playwright/pubpaid-v2-interior-female-playable-20260516.png",
+      "source": "workspace",
+      "note": "Salao com protagonista feminina correta, cantora no palco e garcom no corredor.",
+      "linkedOrderIds": [
+        "2026-05-16-pubpaid-2-0-restaurar-protagonistas-jogaveis-e-corrigir-fluxo-real"
+      ],
+      "createdAt": "2026-05-16T18:08:00.000Z"
     }
   ]
 }

@@ -1,6 +1,12 @@
 export const PUBPAID_TEXTURE_KEYS = {
   player: "ppg-player-sprite",
   playerFemale: "ppg-singer-sprite",
+  playerMaleWalk: "ppg-player-male-walk-sheet",
+  playerMaleIdleBreathe: "ppg-player-male-idle-breathe-sheet",
+  playerMaleIdlePhone: "ppg-player-male-idle-phone-sheet",
+  playerFemaleWalk: "ppg-player-female-walk-sheet",
+  playerFemaleIdleBreathe: "ppg-player-female-idle-breathe-sheet",
+  playerFemaleIdlePhone: "ppg-player-female-idle-phone-sheet",
   waiterHero: "ppg-waiter-hero-sprite",
   waiterLobby: "ppg-waiter-lobby-sprite",
   waiterLobbySpeaking: "ppg-waiter-lobby-speaking-sprite",
@@ -8,7 +14,8 @@ export const PUBPAID_TEXTURE_KEYS = {
   singerLobby: "ppg-singer-lobby-sprite",
   guestA: "ppg-guest-a-sprite",
   guestB: "ppg-guest-b-sprite",
-  carSide: "ppg-car-side"
+  carSide: "ppg-car-side-sprite",
+  trafficVehicles: "ppg-traffic-vehicles-4f"
 };
 
 export const PUBPAID_WORLD_SCALE = {

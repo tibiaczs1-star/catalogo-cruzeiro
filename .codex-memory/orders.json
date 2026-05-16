@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-13T21:43:41.499Z",
+  "lastUpdatedAt": "2026-05-16T19:45:00.000Z",
   "orders": [
     {
       "id": "2026-05-13-hero-cards-video-local",
@@ -9515,6 +9515,270 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-14-novo-marco-operacional-site-funcional-daqui-em-diante-focar-apenas-correcoes-pon",
+      "createdAt": "2026-05-14T21:31:06.641Z",
+      "updatedAt": "2026-05-14T21:31:06.641Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "limpe sua memoria seu historico tudo que não vamos mais utilizar, a parti de agora o site fuunciona, o que vamos trabalhar sao correções pontuaiis o jogo e o chefe call",
+      "summary": "Novo marco operacional: site funcional; daqui em diante focar apenas correcoes pontuais, jogo e Cheffe Call.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "memoria",
+        "marco-operacional",
+        "site-funcional",
+        "jogo",
+        "cheffe-call"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-15-otimizar-o-modo-de-trabalho-do-codex-atuar-de-forma-mais-leve-pontual-e-focada-n",
+      "createdAt": "2026-05-15T00:26:33.692Z",
+      "updatedAt": "2026-05-15T00:26:33.692Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "se otimieze",
+      "summary": "Otimizar o modo de trabalho do Codex: atuar de forma mais leve, pontual e focada no novo marco do projeto.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "memoria",
+        "operacao",
+        "otimizacao"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-15-antes-de-avancar-testar-o-click-fix-criar-backup-do-estado-atual-para-restauraca",
+      "createdAt": "2026-05-15T00:54:11.517Z",
+      "updatedAt": "2026-05-15T00:54:11.517Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "faca mais com um backup do atual, vamos ver se da problema se der volta ao backu",
+      "summary": "Antes de avançar/testar o click-fix, criar backup do estado atual para restauração rápida se der problema.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [
+        "backup",
+        "clickfix",
+        "correcao-pontual"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-preparar-codex-para-retomada-limpar-suposicoes-antigas-reler-contexto-local-e-op",
+      "createdAt": "2026-05-16T16:09:16.625Z",
+      "updatedAt": "2026-05-16T16:09:16.625Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "ok eu quero que vc se atualize, se limpe inteiro, se prepare para o trabalho",
+      "summary": "Preparar Codex para retomada: limpar suposicoes antigas, reler contexto local e operar em modo focado antes do proximo trabalho.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-estudar-todo-o-contexto-do-pubpaid-original-e-pubpaid-2-0-antes-de-trabalhar-esp",
+      "createdAt": "2026-05-16T16:09:41.947Z",
+      "updatedAt": "2026-05-16T16:09:41.947Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "verifique e estude todo contestos de pub paid, tanto o original quanto o 2.0 porque vamos trabalhar especificamente nele",
+      "summary": "Estudar todo o contexto do PubPaid original e PubPaid 2.0 antes de trabalhar especificamente nessa frente.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-localmente-importar-reaproveitar-metodos-de-pagamento-e-base-de-dados-do-pubpaid",
+      "createdAt": "2026-05-16T16:24:06.268Z",
+      "updatedAt": "2026-05-16T16:24:06.268Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "vamos trabalhar local, o que eu quero agora, que vc importe os metodos de pagamento e a base de dados do pubpaid 1.0 para funcionar na carteira do pub.paid 2.0",
+      "summary": "Localmente, importar/reaproveitar metodos de pagamento e base de dados do PubPaid 1.0 para funcionar na carteira do PubPaid 2.0.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-instalar-open-design-gratuito-alternativa-open-source-local-ao-claude-design-seg",
+      "createdAt": "2026-05-16T16:34:32.999Z",
+      "updatedAt": "2026-05-16T16:34:32.999Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "https://www.youtube.com/watch?v=JxYA51g_x5k leia aqui tudo, e faça a instalação do cloude oepm design gratuito veja como se faz isso",
+      "summary": "Instalar Open Design gratuito, alternativa open-source/local ao Claude Design, seguindo tutorial/link informado e deixando pronto para uso local.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-adicionar-no-rodape-do-catalogo-czs-um-acesso-administrativo-para-pubpaid-chamad",
+      "createdAt": "2026-05-16T16:38:59.721Z",
+      "updatedAt": "2026-05-16T16:38:59.721Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "agora crie acesso de administrador dentro da pagina catalogo czs, para pub paid, chamado tem que ficar no rodape, chamado pubpaid pays",
+      "summary": "Adicionar no rodape do Catalogo CZS um acesso administrativo para PubPaid chamado PubPaid Pays.",
+      "normalizedTasks": [
+        "Adicionar link PubPaid Pays no rodape",
+        "Apontar para pubpaid-admin.html"
+      ],
+      "filesTouched": [
+        "index.html"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "footer",
+        "PubPaid",
+        "admin"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-pubpaid-2-0-remover-agentes-da-ui-exigir-fullscreen-orientacao-esc-para-carteira",
+      "createdAt": "2026-05-16T17:03:10.902Z",
+      "updatedAt": "2026-05-16T17:03:10.902Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "retire todas os botões ou ligações com os agentes da interface do jogo, mantenha o jogo sempre em full tela se tirar da tela full ele fecha e da aviso para aperta f11 ou no celular para ficar em orizontal full para melhor vizualização - tambem quero que o esc leve para a carteira a animação que leva a abrir a carteira e a de puxar o celular, retire os pedestres e carros todos, porque eles estão errados, melhore a interface de escoljha de personagens ela esta totalmente fora dos padroes atuais de jogo, melhore ela, para melhor se ajustar a mobile e web- e a padroes premium atuais., estude como fazer, baixe tudo que prescisa pra fazer, consulter doculmet5açõews e como torna o jogo parecer não um projeto procedural canvas, por enquanto e isso.... e adicionar os controles padroes mobile, que sempre tem em rpgs, botões e toque como nos rpgs ou outros jogos, pesquise",
+      "summary": "PubPaid 2.0: remover agentes da UI, exigir fullscreen/orientacao, ESC para carteira animada, remover pedestres/carros, melhorar selecao de personagem e adicionar controles mobile RPG.",
+      "normalizedTasks": [
+        "Remover links de agentes",
+        "Adicionar aviso fullscreen/orientacao",
+        "ESC abre carteira",
+        "Animacao carteira celular",
+        "Remover pedestres e carros",
+        "Redesign selecao personagem",
+        "Adicionar controles mobile",
+        "Validar desktop/mobile"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid-phaser/ui/overlay.js",
+        "pubpaid-phaser/scenes/CharacterSelectScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/core/assetRegistry.js"
+      ],
+      "assetRefs": [
+        "output/playwright/pubpaid-v2-character-select-premium-20260516.png",
+        "output/playwright/pubpaid-v2-character-select-mobile-20260516.png",
+        "output/playwright/pubpaid-v2-mobile-controls-wallet-20260516.png",
+        "output/playwright/pubpaid-v2-esc-wallet-phone-20260516.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "game-ui",
+        "mobile-controls",
+        "fullscreen"
+      ],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-16-pubpaid-2-0-restaurar-protagonistas-jogaveis-e-corrigir-fluxo-real",
+      "createdAt": "2026-05-16T18:08:00.000Z",
+      "updatedAt": "2026-05-16T18:08:00.000Z",
+      "status": "completed-local",
+      "source": "chat",
+      "rawRequest": "retire o ttexto feito pra progamador de toda seleção de persoangem; os dois personagens estão errados, esses ai são conceitos, existem personagens masculino e feminino que andam em 8 direções feitos exatamente para serem escolhidos e so ver quais tem animação puxando celular do bolso",
+      "summary": "Restaurar os protagonistas jogáveis corretos na seleção e no fluxo real do PubPaid 2.0, substituindo personagens-conceito por sheets masculino/feminino em 8 direções com animação de celular.",
+      "normalizedTasks": [
+        "remover excesso de texto da seleção",
+        "substituir sprites-conceito pelos protagonistas jogáveis corretos",
+        "usar os mesmos protagonistas na rua e no salão",
+        "validar caminhada em 8 direções e idle com celular"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/scenes/CharacterSelectScene.js",
+        "pubpaid-phaser/scenes/StreetScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/core/assetRegistry.js",
+        "assets/pubpaid/sprites/protagonist/protagonist-male-generated-walk-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-breathe-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-phone-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-generated-walk-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-generated-idle-breathe-8dir-4f.png",
+        "assets/pubpaid/sprites/protagonist/protagonist-female-generated-idle-phone-8dir-4f.png"
+      ],
+      "assetRefs": [
+        "output/playwright/pubpaid-v2-character-select-playable-20260516.png",
+        "output/playwright/pubpaid-v2-street-player-walk-playable-20260516.png",
+        "output/playwright/pubpaid-v2-street-female-playable-20260516.png",
+        "output/playwright/pubpaid-v2-interior-female-playable-20260516.png"
+      ],
+      "tags": [
+        "PubPaid",
+        "protagonistas",
+        "sprites",
+        "character-select"
+      ],
+      "nextSteps": [],
+      "notes": "Validado localmente com node --check, npm run guard:pubpaid e capturas Playwright desktop."
+    },
+    {
+      "id": "2026-05-16-pubpaid-damas-real-matchmaking-google-online",
+      "createdAt": "2026-05-16T19:45:00.000Z",
+      "updatedAt": "2026-05-16T19:45:00.000Z",
+      "status": "completed-local-ready-for-deploy",
+      "source": "chat",
+      "rawRequest": "ta otimo agora vamos por online, com a autenticação google e tentar finalmente fazer dois jogadores jogar ... vamos trabalhar so damas ... jogador real so pode ser um jogador real ... 20 por cento pra casa, e 180 da poll vai pro vencedor ... termine e suba o comit",
+      "summary": "Preparar Damas real 1x1 com Google auth, matchmaking real, demo para sem saldo, validação autoritativa no backend e liquidação 20/180 antes do deploy online.",
+      "normalizedTasks": [
+        "manter demo quando nao houver saldo real",
+        "buscar apenas jogador real contra jogador real em Damas pagas",
+        "validar tabuleiro e turnos no backend",
+        "travar escrow e liquidar 20 para casa / 180 para vencedor no exemplo de 100+100",
+        "subir commit e validar URL online"
+      ],
+      "filesTouched": [
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/scenes/GameLobbyScene.js",
+        "pubpaid-runtime.js",
+        "server.js"
+      ],
+      "assetRefs": [],
+      "tags": [
+        "PubPaid",
+        "Damas",
+        "PvP",
+        "Google auth",
+        "matchmaking"
+      ],
+      "nextSteps": [
+        "validar com dois logins Google reais no ambiente online"
+      ],
+      "notes": "Teste local com dois usuarios autenticados falsos confirmou fila, pareamento, jogada validada e settlement stake 100 / pot 200 / houseFee 20 / payout 180."
     }
   ]
 }

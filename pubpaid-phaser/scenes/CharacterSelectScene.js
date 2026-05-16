@@ -7,18 +7,16 @@ const CHARACTER_OPTIONS = [
   {
     id: "male",
     label: "MASCULINO",
-    title: "Cliente Azul",
-    spriteKey: PUBPAID_TEXTURE_KEYS.player,
-    accent: 0x50efff,
-    copy: "Passo firme, leitura direta da rua e presença discreta no salão."
+    title: "Masculino",
+    spriteKey: PUBPAID_TEXTURE_KEYS.playerMaleIdlePhone,
+    accent: 0x50efff
   },
   {
     id: "female",
     label: "FEMININO",
-    title: "Cliente Rosa",
-    spriteKey: PUBPAID_TEXTURE_KEYS.playerFemale,
-    accent: 0xff4fb8,
-    copy: "Silhueta leve, postura social e contraste forte com o neon do bar."
+    title: "Feminino",
+    spriteKey: PUBPAID_TEXTURE_KEYS.playerFemaleIdlePhone,
+    accent: 0xff4fb8
   }
 ];
 
@@ -35,20 +33,17 @@ export class CharacterSelectScene extends Phaser.Scene {
     if (this.textures.exists("street-bg")) {
       this.add.image(GAME_WIDTH / 2, GAME_HEIGHT / 2, "street-bg")
         .setDisplaySize(GAME_WIDTH, GAME_HEIGHT)
-        .setAlpha(0.72);
-      this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x02050d, 0.46);
+        .setAlpha(0.58);
+      this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x02050d, 0.58);
     }
-    this.add.rectangle(GAME_WIDTH / 2, 96, 820, 78, 0x06101a, 0.86)
-      .setStrokeStyle(3, 0xffd06d, 0.34);
-    this.add.text(GAME_WIDTH / 2, 78, "ESCOLHA O PERSONAGEM", this.titleStyle(34, "#fff6dc"))
-      .setOrigin(0.5)
-      .setLetterSpacing(4);
-    this.add.text(GAME_WIDTH / 2, 124, "a escolha define o personagem bitmap usado na rua, no salão e nas mesas demo", this.pixelStyle(13, "#d5dff2"))
+    this.add.rectangle(GAME_WIDTH / 2, 76, 660, 58, 0x06101a, 0.74)
+      .setStrokeStyle(1, 0xffd06d, 0.2);
+    this.add.text(GAME_WIDTH / 2, 76, "Escolha seu avatar", this.titleStyle(26, "#fff6dc"))
       .setOrigin(0.5)
       .setLetterSpacing(1);
 
     this.optionCards = CHARACTER_OPTIONS.map((option, index) => this.buildOption(option, index));
-    this.makeButton(GAME_WIDTH / 2, 628, 260, 46, "ENTRAR NA RUA", () => this.chooseSelected(), true);
+    this.makeButton(GAME_WIDTH / 2, 650, 250, 50, "CONFIRMAR", () => this.chooseSelected(), true);
 
     this.input.keyboard.on("keydown-LEFT", () => this.setSelected(0));
     this.input.keyboard.on("keydown-RIGHT", () => this.setSelected(1));
@@ -60,47 +55,40 @@ export class CharacterSelectScene extends Phaser.Scene {
     updateGameState({
       currentScene: "character-select",
       focus: "selecao de personagem",
-      objective: "Escolher personagem masculino ou feminino",
+      objective: "Escolher avatar",
       nerdAgent: formatNerdAgent(NERD_TEAM.sprite),
-      prompt: "Escolha masculino ou feminino. Enter confirma e leva para a rua viva."
+      prompt: "Escolha seu avatar e confirme."
     });
   }
 
   buildOption(option, index) {
     const x = index === 0 ? 430 : 850;
-    const card = this.add.container(x, 362).setDepth(2);
-    const shadow = this.add.rectangle(0, 18, 318, 338, 0x000000, 0.3);
-    const bg = this.add.rectangle(0, 0, 300, 332, 0x07101c, 0.92)
-      .setStrokeStyle(3, option.accent, 0.28);
-    const glow = this.add.rectangle(0, 0, 318, 348, option.accent, 0.04)
+    const card = this.add.container(x, 360).setDepth(2);
+    const shadow = this.add.ellipse(0, 166, 240, 34, 0x000000, 0.28)
+      .setBlendMode(Phaser.BlendModes.MULTIPLY);
+    const glow = this.add.rectangle(0, 8, 316, 428, option.accent, 0.035)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const stage = this.add.rectangle(0, 72, 196, 188, 0x05070d, 0.52)
-      .setStrokeStyle(2, option.accent, 0.18);
-    const sprite = this.add.image(0, 142, option.spriteKey)
+    const bg = this.add.rectangle(0, 8, 296, 408, 0x07101c, 0.74)
+      .setStrokeStyle(2, option.accent, 0.2);
+    const floor = this.add.ellipse(0, 154, 190, 32, option.accent, 0.12)
+      .setBlendMode(Phaser.BlendModes.SCREEN);
+    const sprite = this.add.sprite(0, 148, option.spriteKey, 1)
       .setOrigin(0.5, 1);
-    fitImageToHeight(sprite, 222);
-    const label = this.add.text(0, -124, option.label, this.pixelStyle(13, "#ffd06d"))
+    fitImageToHeight(sprite, 278);
+    const title = this.add.text(0, -230, option.title, this.titleStyle(22, "#fff6dc"))
       .setOrigin(0.5)
-      .setLetterSpacing(3);
-    const title = this.add.text(0, -88, option.title, this.titleStyle(24, "#fff6dc"))
-      .setOrigin(0.5)
-      .setLetterSpacing(1);
-    const copy = this.add.text(0, 174, option.copy, this.pixelStyle(12, "#d5dff2"))
-      .setOrigin(0.5, 0)
-      .setAlign("center")
-      .setWordWrapWidth(238);
-    const marker = this.add.text(0, 130, "◆", this.pixelStyle(20, "#ffd06d"))
-      .setOrigin(0.5)
+      .setLetterSpacing(0);
+    const marker = this.add.rectangle(0, 206, 86, 4, option.accent, 0.95)
       .setAlpha(0);
-    card.add([shadow, glow, bg, stage, sprite, label, title, marker, copy]);
-    card.setSize(300, 332);
-    card.setInteractive(new Phaser.Geom.Rectangle(-150, -166, 300, 332), Phaser.Geom.Rectangle.Contains);
+    card.add([shadow, glow, bg, floor, sprite, title, marker]);
+    card.setSize(296, 408);
+    card.setInteractive(new Phaser.Geom.Rectangle(-148, -204, 296, 408), Phaser.Geom.Rectangle.Contains);
     card.on("pointerover", () => this.setSelected(index));
     card.on("pointerdown", () => {
       this.setSelected(index);
       this.chooseSelected();
     });
-    card.ppgOption = { option, bg, glow, marker, sprite };
+    card.ppgOption = { option, bg, glow, marker, sprite, floor };
     return card;
   }
 
@@ -108,10 +96,17 @@ export class CharacterSelectScene extends Phaser.Scene {
     this.selectedIndex = index;
     this.optionCards.forEach((card, cardIndex) => {
       const active = cardIndex === index;
-      card.ppgOption.bg.setStrokeStyle(4, card.ppgOption.option.accent, active ? 0.82 : 0.28);
-      card.ppgOption.glow.setAlpha(active ? 0.16 : 0.04);
+      card.ppgOption.bg.setStrokeStyle(active ? 4 : 2, card.ppgOption.option.accent, active ? 0.82 : 0.2);
+      card.ppgOption.glow.setAlpha(active ? 0.13 : 0.035);
+      card.ppgOption.floor.setAlpha(active ? 0.2 : 0.1);
       card.ppgOption.marker.setAlpha(active ? 1 : 0);
-      card.setScale(active ? 1.03 : 1);
+      this.tweens.add({
+        targets: card,
+        scaleX: active ? 1.035 : 0.985,
+        scaleY: active ? 1.035 : 0.985,
+        duration: 140,
+        ease: "Sine.easeOut"
+      });
     });
     const option = CHARACTER_OPTIONS[index];
     updateGameState({
@@ -121,7 +116,7 @@ export class CharacterSelectScene extends Phaser.Scene {
         label: option.label,
         spriteKey: option.spriteKey
       },
-      prompt: `${option.label} selecionado. Aperte Enter para ir para a rua.`
+      prompt: `${option.title} selecionado.`
     });
   }
 
@@ -136,7 +131,7 @@ export class CharacterSelectScene extends Phaser.Scene {
       currentScene: "street",
       objective: "Entrar no PubPaid pela porta principal",
       focus: "rua viva",
-      prompt: `${option.label} confirmado. Spawnando na rua do PubPaid.`
+      prompt: `${option.title} confirmado. Boa noite.`
     });
     this.cameras.main.fadeOut(260, 5, 7, 14);
     this.cameras.main.once("camerafadeoutcomplete", () => {

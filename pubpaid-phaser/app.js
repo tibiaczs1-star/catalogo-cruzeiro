@@ -3,6 +3,7 @@ import { gameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
 import { bindDomGameInterface } from "./ui/domGameInterface.js";
+import { bindWalletInterface } from "./ui/walletInterface.js";
 import { closePanel } from "./ui/panelActions.js";
 import { syncPubpaidAccount } from "./services/accountService.js";
 import { BootScene } from "./scenes/BootScene.js";
@@ -33,6 +34,7 @@ const config = {
 
 const game = new Phaser.Game(config);
 bindDomGameInterface(game);
+bindWalletInterface();
 const soundtrack = createPubPaidSoundtrack();
 const isIOS =
   /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
@@ -62,6 +64,10 @@ const refs = {
   streetGoogleStatus: document.querySelector("[data-street-google-status]"),
   orientationGate: document.querySelector("[data-orientation-gate]"),
   orientationStatus: document.querySelector("[data-orientation-status]"),
+  fullscreenWarning: document.querySelector("[data-fullscreen-warning]"),
+  fullscreenWarningCopy: document.querySelector("[data-fullscreen-warning-copy]"),
+  returnFullscreen: document.querySelector("[data-return-fullscreen]"),
+  mobileControls: document.querySelector("[data-mobile-controls]"),
   permissionGate: document.querySelector("[data-permission-gate]"),
   startExperience: document.querySelector("[data-start-experience]"),
   permissionStatus: document.querySelector("[data-permission-status]"),
@@ -72,6 +78,12 @@ let currentStep = "intro";
 let gameStarted = false;
 let introStarted = false;
 let orientationLocked = false;
+const mobileInputState = {
+  x: 0,
+  y: 0,
+  actionPressed: false,
+  actionQueued: false
+};
 
 function needsLandscape() {
   return Boolean(isTouchDevice && isSmallScreen);
@@ -227,6 +239,19 @@ function syncOrientationGate() {
   }
 }
 
+function syncFullscreenWarning() {
+  const shouldWarn = Boolean(gameStarted && !document.fullscreenElement);
+  refs.body?.classList.toggle("is-fullscreen-warning", shouldWarn);
+  if (refs.fullscreenWarning) {
+    refs.fullscreenWarning.hidden = !shouldWarn;
+  }
+  if (refs.fullscreenWarningCopy) {
+    refs.fullscreenWarningCopy.textContent = needsLandscape()
+      ? "No celular, deixe em horizontal e volte para tela cheia para melhor visualização."
+      : "Aperte F11 ou volte para tela cheia para jogar com melhor leitura.";
+  }
+}
+
 function startIntroScene() {
   if (introStarted) return;
   introStarted = true;
@@ -262,6 +287,89 @@ async function activateExperience() {
   if (refs.startExperience) {
     refs.startExperience.disabled = false;
   }
+}
+
+function resetMobileInput() {
+  mobileInputState.x = 0;
+  mobileInputState.y = 0;
+  mobileInputState.actionPressed = false;
+  refs.mobileControls?.querySelectorAll(".is-pressed").forEach((button) => {
+    button.classList.remove("is-pressed");
+  });
+}
+
+function bindMobileControls() {
+  if (!refs.mobileControls) return;
+  const directionVectors = {
+    up: { x: 0, y: -1 },
+    down: { x: 0, y: 1 },
+    left: { x: -1, y: 0 },
+    right: { x: 1, y: 0 }
+  };
+  const activeDirections = new Set();
+  const syncVector = () => {
+    let x = 0;
+    let y = 0;
+    activeDirections.forEach((direction) => {
+      x += directionVectors[direction]?.x || 0;
+      y += directionVectors[direction]?.y || 0;
+    });
+    const length = Math.hypot(x, y);
+    mobileInputState.x = length > 0 ? x / length : 0;
+    mobileInputState.y = length > 0 ? y / length : 0;
+  };
+  const releaseDirection = (button, direction) => {
+    activeDirections.delete(direction);
+    button.classList.remove("is-pressed");
+    syncVector();
+  };
+
+  refs.mobileControls.querySelectorAll("[data-mobile-dir]").forEach((button) => {
+    const direction = button.getAttribute("data-mobile-dir");
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      try {
+        button.setPointerCapture?.(event.pointerId);
+      } catch (_error) {
+        // Synthetic test events do not always have an active pointer capture target.
+      }
+      activeDirections.add(direction);
+      button.classList.add("is-pressed");
+      syncVector();
+    });
+    button.addEventListener("pointerup", () => releaseDirection(button, direction));
+    button.addEventListener("pointercancel", () => releaseDirection(button, direction));
+    button.addEventListener("lostpointercapture", () => releaseDirection(button, direction));
+  });
+
+  refs.mobileControls.querySelectorAll("[data-mobile-action]").forEach((button) => {
+    const action = button.getAttribute("data-mobile-action");
+    button.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      try {
+        button.setPointerCapture?.(event.pointerId);
+      } catch (_error) {
+        // Synthetic test events do not always have an active pointer capture target.
+      }
+      button.classList.add("is-pressed");
+      if (action === "primary") {
+        mobileInputState.actionPressed = true;
+        mobileInputState.actionQueued = true;
+      }
+      if (action === "wallet") {
+        window.pubpaidWalletOpen?.();
+      }
+    });
+    const release = () => {
+      button.classList.remove("is-pressed");
+      if (action === "primary") {
+        mobileInputState.actionPressed = false;
+      }
+    };
+    button.addEventListener("pointerup", release);
+    button.addEventListener("pointercancel", release);
+    button.addEventListener("lostpointercapture", release);
+  });
 }
 
 async function syncAuthUi() {
@@ -330,6 +438,7 @@ function startGame() {
   gameStarted = true;
   syncEnterExitButtons();
   syncStreetGoogleGate();
+  syncFullscreenWarning();
 }
 
 function resolveEntryStep() {
@@ -420,6 +529,12 @@ function bindSplash() {
       const auth = getAuthApi();
       await auth?.promptSignIn?.();
     }
+
+    if (event.target.closest("[data-return-fullscreen]")) {
+      event.preventDefault();
+      await requestFullscreen();
+      syncFullscreenWarning();
+    }
   });
 
   refs.termsCheckbox?.addEventListener("change", () => {
@@ -436,12 +551,23 @@ function bindSplash() {
     startSoundtrackFromGesture();
   }, { once: true });
 
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      window.pubpaidWalletOpen?.();
+    }
+    if (event.key === "F11") {
+      window.setTimeout(syncFullscreenWarning, 160);
+    }
+  });
+
   window.addEventListener("catalogo:google-auth", async () => {
     await syncAuthUi();
   });
 }
 
 bindSplash();
+bindMobileControls();
 syncAudioButton();
 syncEnterExitButtons();
 refs.body?.classList.toggle("is-ios", isIOS);
@@ -457,6 +583,8 @@ window.setTimeout(() => {
 
 window.addEventListener("resize", syncOrientationGate);
 window.addEventListener("orientationchange", syncOrientationGate);
+document.addEventListener("fullscreenchange", syncFullscreenWarning);
+document.addEventListener("webkitfullscreenchange", syncFullscreenWarning);
 
 window.setInterval(() => {
   if (!gameStarted) return;
@@ -469,6 +597,7 @@ window.setInterval(() => {
 window.addEventListener("focus", () => {
   if (gameStarted) {
     void syncPubpaidAccount();
+    syncFullscreenWarning();
   }
 });
 
@@ -504,6 +633,17 @@ game.events.on("pubpaid:music-zone", (zone) => {
 });
 
 window.pubpaidPhaserGame = game;
+window.pubpaidMobileInput = {
+  getVector() {
+    return { x: mobileInputState.x, y: mobileInputState.y };
+  },
+  consumeAction() {
+    const queued = mobileInputState.actionQueued;
+    mobileInputState.actionQueued = false;
+    return queued;
+  },
+  reset: resetMobileInput
+};
 window.render_game_to_text = () => {
   const scene = game.scene.getScenes(true).map((activeScene) => activeScene.scene.key).join(", ");
   return [
@@ -516,10 +656,16 @@ window.render_game_to_text = () => {
     `realBalance=${gameState.realBalance}`,
     `availableBalance=${gameState.availableBalance}`,
     `lockedMatchBalance=${gameState.lockedMatchBalance}`,
+    `lockedWithdrawalBalance=${gameState.lockedWithdrawalBalance}`,
+    `pendingDeposits=${gameState.pendingDeposits}`,
+    `pendingWithdrawals=${gameState.pendingWithdrawals}`,
+    `walletFeedback=${gameState.walletFeedback}`,
     `pvpStatus=${gameState.pvpStatus}`,
     `pvpGameId=${gameState.pvpGameId}`,
     `pvpMatchId=${gameState.pvpMatchId}`,
     `selectedCharacter=${gameState.selectedCharacter ? JSON.stringify(gameState.selectedCharacter) : "none"}`,
+    `playerDirection=${gameState.playerDirection}`,
+    `playerMoving=${gameState.playerMoving ? "yes" : "no"}`,
     `activeGameId=${gameState.activeGameId}`,
     `lobbyPhase=${gameState.lobbyPhase}`,
     `poolGame=${gameState.poolGame ? JSON.stringify(gameState.poolGame) : "none"}`,
@@ -532,7 +678,9 @@ window.render_game_to_text = () => {
     `musicIntroSynced=${soundtrack.getState().introSynced ? "yes" : "no"}`,
     `introStarted=${introStarted ? "yes" : "no"}`,
     `fullscreen=${document.fullscreenElement ? "yes" : "no"}`,
+    `fullscreenWarning=${refs.fullscreenWarning && !refs.fullscreenWarning.hidden ? "yes" : "no"}`,
     `orientationBlocked=${isOrientationBlocked() ? "yes" : "no"}`,
+    `mobileInput=${JSON.stringify(window.pubpaidMobileInput.getVector())}`,
     `panelOpen=${gameState.panel.open}`,
     `panelTitle=${gameState.panel.title}`
   ].join("\n");

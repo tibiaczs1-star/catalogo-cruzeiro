@@ -1,5 +1,76 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-16 - Damas real PvP preparada para online
+
+- Usuario pediu subir PubPaid 2.0 online com login Google e finalmente permitir dois jogadores reais jogarem Damas entre si.
+- `pubpaid-phaser/ui/domGameInterface.js` agora separa Damas demo de Damas real: sem saldo disponivel abre demo; com saldo real suficiente entra em matchmaking PvP real, faz polling do servidor, renderiza o tabuleiro autoritativo e envia jogadas para `/api/pubpaid/pvp/checkers/move`.
+- `GameLobbyScene.js` passou a mostrar `BUSCAR JOGADOR REAL` quando a Dama tem saldo real suficiente e dispara a fila real; caso contrario mostra `JOGAR DEMO`.
+- Backend: `pubpaid-runtime.js` passou a preservar `lockedMatchCoins` no store canonico, permitindo escrow real persistente; a liquidacao em `server.js` foi alinhada ao exemplo pedido: com stake 100 + 100, a casa fica com 20 e o vencedor recebe 180.
+- Teste de integracao local com dois usuarios autenticados falsos confirmou fila, pareamento, jogada validada, fim de partida e settlement `{ stake: 100, pot: 200, houseFee: 20, payout: 180 }`.
+
+## Atualizacao rapida 2026-05-16 - Protagonistas jogaveis restaurados no fluxo real
+
+- Usuario apontou que os dois personagens mostrados na selecao eram conceitos, nao os protagonistas jogaveis certos.
+- Restaurados do historico os sheets `protagonist-male-generated-*` e `protagonist-female-generated-*` com `walk`, `idle-breathe` e `idle-phone` em 8 direcoes x 4 frames.
+- `CharacterSelectScene.js` agora exibe os protagonistas masculino/feminino reais; `StreetScene.js` e `InteriorScene.js` passaram a usar o mesmo rig jogavel selecionado, com caminhada real por frames e idle puxando celular apos pausa.
+- Removido o falso movimento por deformacao/rotacao do sprite nas cenas principais; a animacao agora vem dos sheets corretos.
+- Validacoes locais: `node --check` nos arquivos tocados, `npm run guard:pubpaid` e Playwright visual. Capturas: `output/playwright/pubpaid-v2-character-select-playable-20260516.png`, `pubpaid-v2-street-player-walk-playable-20260516.png`, `pubpaid-v2-street-female-playable-20260516.png` e `pubpaid-v2-interior-female-playable-20260516.png`.
+
+## Atualizacao rapida 2026-05-16 - PubPaid 2.0 biblia visual curta para agente de sprites
+
+- Usuario enviou o video `https://www.youtube.com/watch?v=hqbohVUzpiI` como estudo para melhorar olhos/rosto/cabelo e pediu que o trabalho de assets siga todos os conceitos do jogo PubPaid 2.0.
+- Transcricao estudada: fluxo de pixel art por variantes, começar pelo olho quando detalhe facial importa, esculpir cabeça/cabelo por massas, sombra um pixel abaixo/atrás, evitar contorno total e testar bocas/nariz/sobrancelha apenas quando couber.
+- Criada demo/biblia visual externa do agente em `C:\Users\junio\AppData\Local\hermes\hermes-agent\sprite-agent-demo\pubpaid-concepts.html`, com screenshots do PubPaid 2.0, protagonistas oficiais, prancha de estudo e pipeline de camadas.
+- Regra para próximos assets PubPaid: pensar no jogo inteiro (rua, salão, palco, lobby, carteira, aposta, mini-games), manter protagonistas adultos 96x144/8 direções, rosto/cabelo/roupa legíveis e hitbox nos pés; não voltar para chibi/procedural.
+- Não houve alteração no runtime oficial do PubPaid 2.0 nesta rodada; apenas demo externa e skill do agente de sprites foram atualizados.
+
+## Atualizacao rapida 2026-05-16 - PubPaid 2.0 mapa corrigido apos regressao
+
+- Usuario apontou que o carro restaurado era o asset errado, que o player entrava no bar em cima da porta, que o garcom do lobby estava entre pessoas sentadas e que a dancarina/cantora nao estava sobre o palco.
+- Restaurado localmente o pacote historico aprovado `assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png/json` a partir do commit `b355ace`, e `StreetScene.js` passou a usar o spritesheet `ppg-traffic-vehicles-4f` com frames animados, sem fallback procedural.
+- `InteriorScene.js` moveu o spawn inicial do player para o corredor interno, registrou novas colisoes para mesas redondas centrais e reposicionou a cantora/dancarina no palco elevado da direita.
+- `GameLobbyScene.js` moveu o garcom do lobby para o piso limpo central, fora da mesa ocupada da direita.
+- Validacoes locais: `node --check` nos arquivos tocados, `npm run guard:pubpaid` e Playwright. Capturas: `output/playwright/pubpaid-v2-approved-traffic-restored-20260516.png`, `pubpaid-v2-interior-map-corrected-20260516.png` e `pubpaid-v2-lobby-waiter-clean-floor-20260516.png`.
+
+## Atualizacao rapida 2026-05-16 - Open Design gratuito instalado
+
+- Usuario pediu estudar o video `https://www.youtube.com/watch?v=JxYA51g_x5k` e instalar o "Claude/Open Design" gratuito.
+- Open Design foi instalado fora do repo CZS em `C:\Users\junio\open-design`, seguindo o quickstart oficial do projeto `nexu-io/open-design`.
+- Ambiente confirmado: Node `v24.14.1`, Corepack, `pnpm 10.33.2`, Git, Claude Code, Codex CLI e Hermes no PATH.
+- Comandos executados: `git clone --depth 1 https://github.com/nexu-io/open-design.git C:\Users\junio\open-design`, `pnpm install`, `pnpm --filter @open-design/daemon build`, `pnpm tools-dev start web --daemon-port 7457 --web-port 5175`.
+- Validacao: `pnpm tools-dev status/check` OK, daemon `http://127.0.0.1:7457/api/health` retornou `{"ok":true,"version":"0.7.0"}`, web `http://127.0.0.1:5175` retornou HTTP 200 e `/api/agents` detectou Claude Code, Codex CLI e Hermes disponiveis.
+- Para retomar: abrir `http://127.0.0.1:5175`; parar com `cd C:\Users\junio\open-design && pnpm tools-dev stop`; religar com `pnpm tools-dev start web --daemon-port 7457 --web-port 5175`.
+
+## Marco operacional 2026-05-14 - Site funcional, foco pontual
+
+- Usuario pediu limpar o peso da memoria/historico que nao sera mais usado como fila ativa.
+- Novo marco: considerar o site/home CZS funcional; nao puxar reformas antigas de homepage como prioridade sem pedido explicito.
+- Foco daqui para frente: correcoes pontuais, jogo/PubPaid e Cheffe Call.
+- Historico antigo permanece como referencia tecnica, mas deve ser tratado como arquivo, nao como ordem aberta.
+- Para PubPaid 2.0, continuam valendo as travas: ler `PUBPAID_2_GLOBAL_HANDOFF.md` e rodar `npm run guard:pubpaid` antes de validar.
+- Para Cheffe Call, manter fluxo de fila primaria de correcoes, metricas claras e textos publicos em portugues.
+- Otimizacao 2026-05-15: agir em modo enxuto, lendo so o necessario, editando o minimo, validando proporcionalmente e atualizando memoria apenas quando houver novo marco, risco ou pendencia real.
+
+## Atualizacao rapida 2026-05-16 - Carteira PubPaid 2.0 com base original
+
+- Usuario pediu trabalho local para importar/reaproveitar metodos de pagamento e base de dados do PubPaid 1.0 na carteira do PubPaid 2.0.
+- `pubpaid-v2.html` ganhou UI estatica de carteira com saldo, disponivel, travas, pendentes, deposito Pix, solicitacao de saque e historico recente; sem criar DOM dinamico no runtime.
+- `pubpaid-phaser/ui/walletInterface.js` foi criado para ligar os controles da carteira aos endpoints existentes do PubPaid original: `/api/pubpaid/account`, `/api/pubpaid/deposit/pix`, `/api/pubpaid/deposits` e `/api/pubpaid/withdrawals`.
+- `pubpaid-phaser/services/accountService.js`, `core/gameState.js` e `app.js` agora sincronizam saldo real, depositos/saques pendentes, historico e estado textual da carteira.
+- `server.js` passou a reconhecer registros antigos por `walletKey`, `playerId`, `userId`, `email` e `sub`, alem de aceitar fallbacks `amountCoins`/`reference` em depositos e saques.
+- Validacoes locais: `node --check` nos arquivos tocados, `npm run guard:pubpaid`, CSS balanceado e Playwright abrindo a carteira em `pubpaid-v2.html` sem 401 anonimo. Captura: `output/playwright/pubpaid-v2-wallet-local-20260516-final.png`.
+
+## Atualizacao rapida 2026-05-16 - PubPaid 2.0 shell de jogo premium
+
+- Usuario pediu remover acessos de agentes do jogo, forcar experiencia fullscreen/orientacao, ESC para carteira, carteira com animacao de celular, remover pedestres/carros, melhorar selecao de personagem e adicionar controles mobile de RPG.
+- `pubpaid-v2.html` removeu links/botoes de agentes e a volta para a PubPaid antiga do topo do jogo; o modo oficial agora esconde chrome externo e fica como shell fullscreen.
+- `pubpaid-phaser/app.js` ganhou aviso de saida de fullscreen, retorno para tela cheia, ESC abrindo carteira, estado textual de fullscreen warning e controles touch estaticos.
+- `pubpaid-phaser/ui/walletInterface.js` expõe abertura/fechamento global da carteira e aplica animacao de celular ao abrir.
+- `pubpaid-phaser/scenes/StreetScene.js` deixou de instanciar pedestres e carros; `BootScene.js` e `assetRegistry.js` removeram o asset de carro do fluxo ativo.
+- `CharacterSelectScene.js` foi redesenhada com dois cards premium, selo ativo, CTA claro e melhor ajuste para desktop/mobile landscape.
+- Controles mobile: d-pad esquerdo, botao de acao e botao Pay; `StreetScene.js` e `InteriorScene.js` consomem o vetor/acao.
+- Validacoes locais: `node --check` nos arquivos tocados, `npm run guard:pubpaid`, CSS balanceado, Playwright desktop/mobile, ESC->carteira, aviso fullscreen e controles touch. Capturas em `output/playwright/pubpaid-v2-character-select-premium-20260516.png`, `pubpaid-v2-character-select-mobile-20260516.png`, `pubpaid-v2-mobile-controls-wallet-20260516.png` e `pubpaid-v2-esc-wallet-phone-20260516.png`.
+
 ## Atualizacao rapida 2026-05-13 - Hero com cards embaixo e video so local
 
 - Usuario pediu voltar o sistema de cards/fotos para trocar a hero, agora abaixo da manchete, com bolinhas para mudar manualmente a noticia ja lida antes de commit.

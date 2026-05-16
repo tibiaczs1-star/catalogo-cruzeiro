@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260507flow1" />
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260516gameui1" />
     <script defer src="./site-google-auth.js?v=20260420voteauthfix"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260507flow1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260516gameui1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -50,20 +50,29 @@
         </div>
         <div class="ppg-topbar-actions">
           <button class="ppg-button primary" type="button" data-enter-game>Entrar no jogo</button>
+          <button class="ppg-button" type="button" data-dom-open-wallet>Carteira</button>
           <button class="ppg-button" type="button" data-exit-game hidden>Sair do jogo</button>
-          <a class="ppg-button primary" href="./pubpaid.html">Voltar à PubPaid atual</a>
-          <a class="ppg-button" href="./escritorio-nerd.html">Equipe de agentes desenvolvedores</a>
         </div>
       </header>
 
       <section class="ppg-stage ppg-stage--official" aria-label="Jogo oficial da PubPaid 2.0">
         <div class="ppg-game-shell ppg-game-shell--official">
           <div id="pubpaid-phaser-root" class="ppg-game" aria-label="Jogo PubPaid 2.0 em Phaser"></div>
+          <div class="ppg-fullscreen-warning" data-fullscreen-warning hidden>
+            <section>
+              <p class="ppg-kicker">visualização</p>
+              <h2>Tela cheia saiu.</h2>
+              <p data-fullscreen-warning-copy>
+                Aperte F11 ou volte para tela cheia para jogar com melhor leitura.
+              </p>
+              <button class="ppg-button primary" type="button" data-return-fullscreen>Voltar ao jogo</button>
+            </section>
+          </div>
           <div class="ppg-orientation-gate" data-orientation-gate hidden>
             <section class="ppg-orientation-card" aria-label="Orientação recomendada para o PubPaid 2.0">
               <p class="ppg-kicker">mobile mode</p>
               <h2>Mude para horizontal.</h2>
-              <p>O PubPaid 2 foi preparado para jogar com o celular deitado.</p>
+              <p>O PubPaid 2 foi preparado para jogar em horizontal, tela cheia e com os controles livres.</p>
               <span data-orientation-status>Gire o aparelho para continuar.</span>
             </section>
           </div>
@@ -79,6 +88,9 @@
               </p>
               <button class="ppg-button primary" type="button" data-start-experience>
                 Ativar e começar
+              </button>
+              <button class="ppg-button" type="button" data-dom-open-wallet>
+                Abrir carteira
               </button>
               <span data-permission-status>Som 16-bit + fullscreen</span>
             </section>
@@ -148,10 +160,6 @@
               <span>pvp</span>
               <strong data-game-pvp-status>idle</strong>
             </article>
-            <article class="ppg-hud-agent">
-              <span>nerd</span>
-              <strong data-game-nerd-agent>Pixo FX</strong>
-            </article>
           </div>
           <div class="ppg-prompt" data-game-prompt>
             <span class="ppg-prompt-kicker">objetivo</span>
@@ -175,6 +183,7 @@
             <div class="ppg-dom-topline">
               <span data-dom-ui-scene>rua</span>
               <strong data-dom-ui-objective>Entrar no PubPaid</strong>
+              <button type="button" data-dom-open-wallet>Carteira</button>
               <button type="button" data-dom-return-salon hidden>Salão</button>
             </div>
 
@@ -268,6 +277,104 @@
                 <button type="button" data-dom-return-salon>Salão</button>
               </div>
             </aside>
+
+            <aside class="ppg-dom-wallet" data-dom-wallet hidden>
+              <header>
+                <span class="ppg-kicker">carteira real</span>
+                <h2>Caixa PubPaid</h2>
+                <button type="button" data-dom-close-wallet aria-label="Fechar carteira">Fechar</button>
+              </header>
+              <div class="ppg-wallet-phone" aria-hidden="true">
+                <span></span>
+                <strong>PubPaid Pay</strong>
+                <small>carteira</small>
+              </div>
+
+              <div class="ppg-wallet-grid">
+                <article>
+                  <span>saldo</span>
+                  <strong data-wallet-balance>0</strong>
+                </article>
+                <article>
+                  <span>livre</span>
+                  <strong data-wallet-available>0</strong>
+                </article>
+                <article>
+                  <span>em mesa</span>
+                  <strong data-wallet-locked-match>0</strong>
+                </article>
+                <article>
+                  <span>em saque</span>
+                  <strong data-wallet-locked-withdrawal>0</strong>
+                </article>
+              </div>
+
+              <p class="ppg-wallet-status">
+                Pendências: <strong data-wallet-pending>0 deposito(s), 0 saque(s)</strong>
+              </p>
+
+              <section class="ppg-wallet-section">
+                <h3>Depositar por Pix</h3>
+                <label>
+                  <span>Valor</span>
+                  <select data-wallet-deposit-amount>
+                    <option value="5">5 créditos</option>
+                    <option value="10" selected>10 créditos</option>
+                    <option value="20">20 créditos</option>
+                    <option value="50">50 créditos</option>
+                    <option value="100">100 créditos</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Nome no comprovante</span>
+                  <input type="text" maxlength="90" autocomplete="name" data-wallet-depositor-name placeholder="Nome de quem fez o Pix" />
+                </label>
+                <div class="ppg-wallet-actions">
+                  <button type="button" class="primary" data-wallet-generate-deposit>Gerar QR</button>
+                  <button type="button" data-wallet-register-deposit disabled>Avisar admin</button>
+                </div>
+                <div class="ppg-wallet-qr" data-wallet-pix-qr>
+                  <p>Gere o QR Code para abrir a etapa de confirmação.</p>
+                </div>
+              </section>
+
+              <section class="ppg-wallet-section">
+                <h3>Solicitar saque</h3>
+                <label>
+                  <span>Valor</span>
+                  <input type="text" inputmode="decimal" value="10,00" data-wallet-withdrawal-amount />
+                </label>
+                <div class="ppg-wallet-actions">
+                  <button type="button" data-wallet-request-withdrawal>Pedir retirada</button>
+                  <button type="button" data-dom-refresh-wallet>Sincronizar</button>
+                </div>
+              </section>
+
+              <section class="ppg-wallet-history">
+                <div>
+                  <h3>Depósitos</h3>
+                  <ul data-wallet-recent-deposits></ul>
+                </div>
+                <div>
+                  <h3>Saques</h3>
+                  <ul data-wallet-recent-withdrawals></ul>
+                </div>
+              </section>
+
+              <p class="ppg-wallet-feedback" data-wallet-feedback aria-live="polite"></p>
+            </aside>
+          </section>
+          <section class="ppg-mobile-controls" data-mobile-controls aria-label="Controles touch do PubPaid">
+            <div class="ppg-mobile-stick" aria-label="Direção">
+              <button type="button" data-mobile-dir="up" aria-label="Mover para cima">▲</button>
+              <button type="button" data-mobile-dir="left" aria-label="Mover para esquerda">◀</button>
+              <button type="button" data-mobile-dir="right" aria-label="Mover para direita">▶</button>
+              <button type="button" data-mobile-dir="down" aria-label="Mover para baixo">▼</button>
+            </div>
+            <div class="ppg-mobile-actions">
+              <button type="button" class="is-wallet" data-mobile-action="wallet" aria-label="Abrir carteira">Pay</button>
+              <button type="button" class="is-action" data-mobile-action="primary" aria-label="Interagir">A</button>
+            </div>
           </section>
         </div>
       </section>

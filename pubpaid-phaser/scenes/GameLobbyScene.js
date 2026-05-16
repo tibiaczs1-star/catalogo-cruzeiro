@@ -1,6 +1,6 @@
 import { GAME_HEIGHT, GAME_WIDTH } from "../config/gameConfig.js";
 import { gameState, updateGameState } from "../core/gameState.js";
-import { PUBPAID_TEXTURE_KEYS } from "../core/assetRegistry.js";
+import { PUBPAID_TEXTURE_KEYS, fitImageToHeight } from "../core/assetRegistry.js";
 
 const GAME_META = {
   pool: {
@@ -72,7 +72,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.game.events.emit("pubpaid:music-zone", "game");
     this.buildBackdrop();
     this.tableLayer = this.add.container(0, 0).setDepth(1);
-    this.drawLobbyWaiter(1088, 654, "Escolha a mesa.");
+    this.drawLobbyWaiter(720, 540, "Escolha a mesa.");
     this.game.events.emit("pubpaid:open-dom-lobby");
     updateGameState({
       currentScene: "game-lobby",
@@ -109,7 +109,7 @@ export class GameLobbyScene extends Phaser.Scene {
   }
 
   buildFrame() {
-    this.titleText = this.add.text(GAME_WIDTH / 2, 82, this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "ESCOLHA SEU SUB GAME", {
+    this.titleText = this.add.text(GAME_WIDTH / 2, 82, this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "Escolha sua mesa", {
       fontFamily: "Georgia, Times New Roman, serif",
       fontSize: this.gameId ? "24px" : "32px",
       fontStyle: "bold",
@@ -118,7 +118,7 @@ export class GameLobbyScene extends Phaser.Scene {
       strokeThickness: this.gameId ? 5 : 8
     }).setLetterSpacing(3).setOrigin(0.5);
     this.titleText.setShadow(0, 0, "#ff9d28", this.gameId ? 4 : 18, true, true);
-    this.statusText = this.add.text(GAME_WIDTH / 2, 126, this.gameId ? this.meta.description : "Escolha o jogo clicando direto na arte.", {
+    this.statusText = this.add.text(GAME_WIDTH / 2, 126, this.gameId ? this.meta.description : "Sinuca ou Dama, com créditos demo e confirmação antes da partida.", {
       fontFamily: "Georgia, Times New Roman, serif",
       fontSize: this.gameId ? "12px" : "14px",
       color: this.gameId ? "#d5dff2" : "#fff0c9",
@@ -166,9 +166,9 @@ export class GameLobbyScene extends Phaser.Scene {
     this.drawGameChoiceCard(410, 394, "pool");
     this.drawGameChoiceCard(742, 394, "checkers");
     if (this.gameId) {
-      this.drawLobbyWaiter(1094, 642, "Pronto para a mesa.");
+      this.drawLobbyWaiter(720, 540, "Pronto para a mesa.");
     } else {
-      this.drawLobbyWaiter(1094, 642, "Escolha seu jogo.");
+      this.drawLobbyWaiter(720, 540, "Escolha seu jogo.");
     }
 
     if (this.gameId) {
@@ -191,13 +191,23 @@ export class GameLobbyScene extends Phaser.Scene {
           this.renderLobby();
         }, stake === this.stake);
       });
-      this.makeButton(588, 658, 180, 28, "BUSCAR OPONENTE", () => this.findAiOpponent(), true);
+      const realCheckersReady = this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake;
+      this.makeButton(588, 658, 180, 28, realCheckersReady ? "BUSCAR JOGADOR REAL" : "JOGAR DEMO", () => this.findAiOpponent(), true);
       this.makeButton(770, 658, 124, 28, "TROCAR", () => this.selectGame(""), false);
     }
     this.makeButton(1094, 702, 152, 28, "VOLTAR", () => this.backToSalon(), false);
   }
 
   findAiOpponent() {
+    if (this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake) {
+      updateGameState({
+        lobbyPhase: "matching",
+        lobbyOpponent: null,
+        prompt: "Buscando outro jogador real para a mesa de Damas."
+      });
+      this.game.events.emit("pubpaid:start-real-checkers");
+      return;
+    }
     this.phase = "matching";
     const names = this.meta.ai;
     const opponentIndex = (this.stake + (this.gameId === "pool" ? 0 : 1)) % names.length;
@@ -349,12 +359,12 @@ export class GameLobbyScene extends Phaser.Scene {
       objective: this.gameId ? `Configurar ${this.meta.title}` : "Escolher jogo",
       prompt: this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta e busque um oponente.` : "Escolha um jogo no catálogo."
     });
-    this.titleText?.setText(this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "ESCOLHA SEU SUB GAME");
+    this.titleText?.setText(this.gameId ? `PUBPAID / ${this.meta.title.toUpperCase()}` : "Escolha sua mesa");
     this.titleText?.setFontSize(this.gameId ? "24px" : "32px");
     this.titleText?.setColor(this.gameId ? "#fff6dc" : "#ffcf76");
     this.titleText?.setStroke("#160804", this.gameId ? 5 : 8);
     this.titleText?.setShadow(0, 0, "#ff9d28", this.gameId ? 4 : 18, true, true);
-    this.statusText?.setText(this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta abaixo.` : "Escolha o jogo clicando direto na arte.");
+    this.statusText?.setText(this.gameId ? `${this.meta.title} selecionado. Ajuste a aposta abaixo.` : "Sinuca ou Dama, com créditos demo e confirmação antes da partida.");
     this.statusText?.setFontSize(this.gameId ? "12px" : "14px");
     this.statusText?.setColor(this.gameId ? "#d5dff2" : "#fff0c9");
     this.renderLobby();
@@ -461,23 +471,32 @@ export class GameLobbyScene extends Phaser.Scene {
 
   drawCatalogPreview(x, y) {
     this.tableLayer.add(this.add.rectangle(x, y, 410, 380, 0x05070d, 0.62).setStrokeStyle(3, this.meta.accent, 0.24));
-    this.tableLayer.add(this.add.text(x, y - 126, "ESCOLHA NO CATÁLOGO", this.textStyle(18, "#fff6dc")).setOrigin(0.5).setLetterSpacing(2));
+    this.tableLayer.add(this.add.text(x, y - 126, "MESAS DA NOITE", this.textStyle(18, "#fff6dc")).setOrigin(0.5).setLetterSpacing(2));
     this.drawMiniPoolTable(x - 100, y + 20, 0.64);
     this.drawCheckersBoard(x + 100, y + 20, 24);
   }
 
   drawLobbyWaiter(x, y, message) {
     if (this.textures.exists(PUBPAID_TEXTURE_KEYS.waiterLobby)) {
+      const shadow = this.add.ellipse(x, y - 8, 96, 20, 0x000000, 0.24)
+        .setBlendMode(Phaser.BlendModes.MULTIPLY)
+        .setDepth(2.05);
       this.waiterSprite = this.add.image(x, y, PUBPAID_TEXTURE_KEYS.waiterLobby)
         .setOrigin(0.5, 1)
-        .setScale(0.16)
         .setDepth(2.2);
+      fitImageToHeight(this.waiterSprite, 178);
+      this.tableLayer.add(shadow);
       this.tableLayer.add(this.waiterSprite);
       this.startWaiterTalking();
     } else {
       return;
     }
-    this.tableLayer.add(this.add.text(x, y - 214, message, {
+    const panelX = 938;
+    const panelY = 188;
+    this.tableLayer.add(this.add.rectangle(panelX, panelY, 276, 54, 0x120c08, 0.88)
+      .setStrokeStyle(2, 0xffd06d, 0.34)
+      .setDepth(2.45));
+    this.tableLayer.add(this.add.text(panelX, panelY, message, {
       fontFamily: "Georgia, Times New Roman, serif",
       fontSize: "14px",
       fontStyle: "bold",

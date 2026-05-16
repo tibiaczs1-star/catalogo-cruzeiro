@@ -19,7 +19,6 @@ export class BootScene extends Phaser.Scene {
     this.load.image("game-checkers-room", "./assets/pubpaid/lobby/pubpaid-checkers-room-v1.png");
     this.load.image("game-menu-damas-card", "./assets/pubpaid/lobby/pubpaid-menu-damas-card-v1.png");
     this.load.image("game-menu-dardos-card", "./assets/pubpaid/lobby/pubpaid-menu-dardos-card-v1.png");
-    this.load.image("ppg-car-side", "./assets/pubpaid/vehicles/pubpaid-car-side-v1.png");
     this.load.spritesheet("checkers-wood-tiles", "./assets/pubpaid/checkers/wood-tiles-oga.png", {
       frameWidth: 32,
       frameHeight: 32
@@ -32,10 +31,21 @@ export class BootScene extends Phaser.Scene {
     this.load.image("ppg-waiter-lobby-sprite", "./assets/pubpaid/characters/waiter-lobby-large-v1.png");
     this.load.image("ppg-waiter-lobby-speaking-sprite", "./assets/pubpaid/characters/waiter-lobby-speaking-v1.png");
     this.load.image("ppg-player-sprite", "./assets/pubpaid/sprites/adult-standing-tight-v1.png");
+    this.load.spritesheet("ppg-player-male-walk-sheet", "./assets/pubpaid/sprites/protagonist/protagonist-male-generated-walk-8dir-4f.png", { frameWidth: 96, frameHeight: 144 });
+    this.load.spritesheet("ppg-player-male-idle-breathe-sheet", "./assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-breathe-8dir-4f.png", { frameWidth: 96, frameHeight: 144 });
+    this.load.spritesheet("ppg-player-male-idle-phone-sheet", "./assets/pubpaid/sprites/protagonist/protagonist-male-generated-idle-phone-8dir-4f.png", { frameWidth: 96, frameHeight: 144 });
+    this.load.spritesheet("ppg-player-female-walk-sheet", "./assets/pubpaid/sprites/protagonist/protagonist-female-generated-walk-8dir-4f.png", { frameWidth: 96, frameHeight: 144 });
+    this.load.spritesheet("ppg-player-female-idle-breathe-sheet", "./assets/pubpaid/sprites/protagonist/protagonist-female-generated-idle-breathe-8dir-4f.png", { frameWidth: 96, frameHeight: 144 });
+    this.load.spritesheet("ppg-player-female-idle-phone-sheet", "./assets/pubpaid/sprites/protagonist/protagonist-female-generated-idle-phone-8dir-4f.png", { frameWidth: 96, frameHeight: 144 });
     this.load.image("ppg-singer-lobby-sprite", "./assets/pubpaid/characters/singer-lobby-v1.png");
     this.load.image("ppg-singer-sprite", "./assets/pubpaid/sprites/singer-stage-tight-v1.png");
     this.load.image("ppg-guest-a-sprite", "./assets/pubpaid/sprites/adult-standing-tight-v1.png");
     this.load.image("ppg-guest-b-sprite", "./assets/pubpaid/sprites/guest-seated-tight-v1.png");
+    this.load.image("ppg-car-side-sprite", "./assets/pubpaid/vehicles/pubpaid-car-side-v1.png");
+    this.load.spritesheet("ppg-traffic-vehicles-4f", "./assets/pubpaid/traffic/pubpaid-traffic-vehicles-4f.png", {
+      frameWidth: 256,
+      frameHeight: 128
+    });
   }
 
   create() {
