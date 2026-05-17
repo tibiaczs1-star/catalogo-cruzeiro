@@ -1,7 +1,18 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T07:30:16.546Z",
+  "lastUpdatedAt": "2026-05-17T08:20:00.000Z",
   "assets": [
+    {
+      "id": "pubpaid-real-pvp-checkers-validation-20260517",
+      "kind": "validation-report",
+      "path": ".codex-temp/pubpaid-real-pvp-checkers-validation-20260517.md",
+      "source": "local-api-browser-tests",
+      "note": "Resumo dos testes locais da build 20260517-real-pvp-checkers1: cache/no-store, profile/nick, carteira, PvP ready, movimento de Damas, captura obrigatoria, forcedPiece e dama voadora.",
+      "linkedOrderIds": [
+        "2026-05-17-executar-correcoes-pubpaid-persistencia-edicao-de-nick-remover-demo-wallet-corri"
+      ],
+      "createdAt": "2026-05-17T08:20:00.000Z"
+    },
     {
       "id": "pubpaid-fullfocus-local-screens-20260517",
       "kind": "image-set",

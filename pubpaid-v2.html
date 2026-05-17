@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-entry-sync-nick1" />
-    <script defer src="./site-google-auth.js?v=20260517-entry-sync-nick1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-real-pvp-checkers1" />
+    <script defer src="./site-google-auth.js?v=20260517-real-pvp-checkers1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-entry-sync-nick1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-real-pvp-checkers1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -51,6 +51,7 @@
         <div class="ppg-topbar-actions">
           <button class="ppg-button primary" type="button" data-enter-game>Entrar no jogo</button>
           <button class="ppg-button" type="button" data-dom-open-wallet>Carteira</button>
+          <button class="ppg-button" type="button" data-edit-player-profile hidden>Nick</button>
           <button class="ppg-button" type="button" data-exit-game hidden>Sair do jogo</button>
         </div>
       </header>
@@ -126,7 +127,7 @@
 
             <section class="ppg-splash-card ppg-splash-step ppg-profile-step" data-splash-step="profile" hidden>
               <p class="ppg-kicker">perfil</p>
-              <h2>Criar nick</h2>
+              <h2>Criar ou alterar nick</h2>
               <label class="ppg-profile-field">
                 <span>Nick</span>
                 <input type="text" inputmode="text" maxlength="18" autocomplete="nickname" data-player-nick placeholder="Seu nick" />
@@ -346,6 +347,7 @@
                   <small data-wallet-user-email>Carteira protegida até a entrada.</small>
                   <code data-wallet-user-id></code>
                 </div>
+                <button type="button" data-edit-player-profile hidden>Alterar nick</button>
               </section>
 
               <div class="ppg-wallet-grid">
@@ -442,29 +444,6 @@
         </div>
       </section>
 
-      <section class="ppg-notes ppg-notes--official">
-        <article>
-          <span class="ppg-kicker">visão</span>
-          <h2>Jogar em vez de simular</h2>
-          <p>O foco agora e fazer a 2.0 funcionar como jogo de verdade: tela limpa, cenas solidas, transicao real e presenca mais segura na tela.</p>
-        </article>
-        <article>
-          <span class="ppg-kicker">próxima camada</span>
-          <h2>Serviços e PvP</h2>
-          <p data-game-account-label>Rua e salão já estão organizados em scenes separadas. O próximo salto é ligar tudo à carteira e ao matchmaking real.</p>
-        </article>
-        <article>
-          <span class="ppg-kicker">ordem técnica</span>
-          <h2>Base certa</h2>
-          <p>Sprites, HUD, input, estado, cenas e overlays agora ficam na mesma linha oficial. O laboratório antigo deixa de guiar a evolução do produto.</p>
-        </article>
-      </section>
-
-      <footer class="ppg-footer-nav" aria-label="Acessos do PubPaid">
-        <a class="ppg-button" href="./index.html">Jornal</a>
-        <a class="ppg-button" href="./admin-dashboard.html">Administrador geral</a>
-        <a class="ppg-button" href="./pubpaid-admin.html">Administrador do PubPaid</a>
-      </footer>
     </main>
   </body>
 </html>

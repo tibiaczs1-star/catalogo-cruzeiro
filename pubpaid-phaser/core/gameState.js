@@ -4,7 +4,6 @@ export const gameState = {
   mode: "nucleo phaser",
   prompt: "Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão.",
   googleUser: null,
-  testBalance: 0,
   realBalance: 0,
   availableBalance: 0,
   lockedMatchBalance: 0,

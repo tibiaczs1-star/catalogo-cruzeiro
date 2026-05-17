@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20260517-entry-sync-nick1";
+const VERSION = "20260517-real-pvp-checkers1";
 const STATIC_CACHE = `catalogo-static-${VERSION}`;
 const RUNTIME_CACHE = `catalogo-runtime-${VERSION}`;
 const STATIC_ASSETS = [

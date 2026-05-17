@@ -321,7 +321,7 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-wallet-identity {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
   margin-top: 10px;
@@ -349,6 +349,12 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   display: block;
   color: #fff6dc;
   overflow-wrap: anywhere;
+}
+
+.ppg-wallet-identity button {
+  min-height: 32px;
+  padding: 0 10px;
+  white-space: nowrap;
 }
 
 .ppg-wallet-section {
@@ -1182,13 +1188,21 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 }
 
 .ppg-dom-checkers-board {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(8, minmax(0, 1fr));
   width: 100%;
   aspect-ratio: 1;
   margin-top: 10px;
-  border: 4px solid rgba(255, 208, 109, 0.34);
-  background: #0a0710;
+  padding: clamp(6px, 1vw, 10px);
+  border: 6px solid #3a2115;
+  background:
+    linear-gradient(135deg, rgba(255, 208, 109, 0.22), transparent 28%, rgba(80, 239, 255, 0.08)),
+    #140b08;
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.38),
+    inset 0 0 0 2px rgba(255, 246, 220, 0.1),
+    inset 0 0 38px rgba(0, 0, 0, 0.36);
 }
 
 .ppg-dom-cell {
@@ -1196,35 +1210,75 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
   display: grid;
   place-items: center;
   min-height: 0;
-  border: 0;
+  border: 1px solid rgba(5, 7, 13, 0.14);
   border-radius: 0;
   box-shadow: none;
+  transition: filter 140ms ease, box-shadow 140ms ease, transform 140ms ease;
 }
 
 .ppg-dom-cell.is-light {
-  background: #c79256;
+  background:
+    linear-gradient(135deg, rgba(255, 246, 220, 0.22), transparent 52%),
+    #d4aa6f;
 }
 
 .ppg-dom-cell.is-dark {
-  background: #241222;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(80, 239, 255, 0.08), transparent 42%),
+    #2a1421;
 }
 
 .ppg-dom-cell.is-selected {
-  box-shadow: inset 0 0 0 4px #ffd06d;
+  z-index: 2;
+  box-shadow: inset 0 0 0 4px #ffd06d, 0 0 18px rgba(255, 208, 109, 0.42);
 }
 
 .ppg-dom-cell.is-target {
-  box-shadow: inset 0 0 0 4px #8ef0a3;
+  z-index: 2;
+  box-shadow: inset 0 0 0 4px #8ef0a3, 0 0 18px rgba(142, 240, 163, 0.36);
+}
+
+.ppg-dom-cell.is-forced {
+  box-shadow: inset 0 0 0 4px #50efff, 0 0 20px rgba(80, 239, 255, 0.36);
+}
+
+.ppg-dom-cell.is-last-from {
+  box-shadow: inset 0 0 0 3px rgba(255, 246, 220, 0.42);
+}
+
+.ppg-dom-cell.is-last-to {
+  box-shadow: inset 0 0 0 4px rgba(255, 208, 109, 0.78), 0 0 18px rgba(255, 208, 109, 0.24);
+}
+
+.ppg-dom-cell.is-last-capture::after,
+.ppg-dom-cell.is-target::after {
+  content: "";
+  position: absolute;
+  width: 22%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(142, 240, 163, 0.78);
+  box-shadow: 0 0 16px rgba(142, 240, 163, 0.56);
+}
+
+.ppg-dom-cell.is-last-capture::after {
+  background: rgba(255, 79, 184, 0.72);
+  box-shadow: 0 0 16px rgba(255, 79, 184, 0.5);
 }
 
 .ppg-dom-piece {
+  position: relative;
   display: grid;
   place-items: center;
-  width: 72%;
+  width: 76%;
   aspect-ratio: 1;
-  border: 3px solid rgba(5, 7, 13, 0.7);
+  border: 3px solid rgba(5, 7, 13, 0.72);
   border-radius: 50%;
-  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.22), 0 5px 0 rgba(0, 0, 0, 0.22);
+  box-shadow:
+    inset 0 -7px 0 rgba(0, 0, 0, 0.24),
+    inset 0 4px 0 rgba(255, 255, 255, 0.18),
+    0 7px 0 rgba(0, 0, 0, 0.24),
+    0 10px 18px rgba(0, 0, 0, 0.28);
   font-size: 12px;
   font-weight: 900;
 }
@@ -1241,6 +1295,18 @@ body.pubpaid-phaser-page.ppg-lobby-clean .ppg-panel {
 
 .ppg-dom-piece.is-king {
   border-color: #ffd06d;
+  color: #fff6dc;
+}
+
+.ppg-dom-piece.is-king::before {
+  content: "";
+  position: absolute;
+  top: 16%;
+  width: 48%;
+  height: 18%;
+  border-radius: 0 0 999px 999px;
+  background: rgba(255, 208, 109, 0.96);
+  box-shadow: 0 -4px 0 rgba(255, 246, 220, 0.34);
 }
 
 .ppg-dom-result {
@@ -2440,8 +2506,8 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 
 .ppg-controls-guide {
   position: absolute;
-  left: calc(18px + var(--ppg-safe-left));
-  bottom: calc(18px + var(--ppg-safe-bottom));
+  top: calc(72px + var(--ppg-safe-top));
+  right: calc(18px + var(--ppg-safe-right));
   z-index: 18;
   display: flex;
   flex-wrap: wrap;

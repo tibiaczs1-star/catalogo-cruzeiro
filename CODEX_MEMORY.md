@@ -1,5 +1,18 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-17 - PubPaid PvP real, cache e Damas refeita
+
+- Usuario pediu executar testes e descobrir por que ainda precisava de aba anonima para atualizar; causa confirmada: aba normal podia ficar presa em service worker/cache antigo antes de carregar o novo runtime PubPaid.
+- Versao desta rodada: `20260517-real-pvp-checkers1`.
+- Entrada PubPaid agora reforca `no-store`, `Clear-Site-Data: "cache"`, header `X-PubPaid-Build`, build endpoint `/api/pubpaid/build` e limpeza de caches/service workers em toda entrada PubPaid, mesmo quando a versao local ja bate.
+- Nick passou a ser perfil por conta Google no backend (`/api/pubpaid/profile`) e no cliente, com botao para alterar; `pubpaid-runtime.js` agora preserva `profile`, `nickname`, `user` e datas ao recalcular a carteira canonica.
+- Removidos restos de saldo/teste e caminhos mortos: `testBalance`, `reset-test`, filas casual/premium, Damas local/IA em `domGameInterface.js`, e tela fake de oponente no lobby.
+- Damas foi reconstruida em `pubpaid-phaser/core/checkersRules.js` e alinhada ao backend: tabuleiro 8x8, captura obrigatoria, maior cadeia de captura, continuacao forcada por `forcedPiece`, homens capturam para tras, damas voadoras e destaque de ultima jogada.
+- Server PvP de Damas agora valida `forcedPiece`, captura em cadeia, dama voadora e encerra/continua a mesa pelo estado autoritativo.
+- Rodape conflitante foi removido de `pubpaid-v2.html`, guia de controles foi reposicionado para nao sobrepor a parte inferior, e o tabuleiro visual de Damas foi redesenhado.
+- Validacoes locais: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS brace balance, teste API completo de profile/carteira/PvP/ready/move, teste manual de captura obrigatoria/forcedPiece/dama voadora, Browser desktop/mobile contra URL antiga e `npm run review:team`.
+- Review team deixou risco separado fora do escopo: 4 textos em ingles em feeds `data/topic-feed-kids.json` e `data/topic-feed-tech.json`; nao misturar esses dados no commit PubPaid.
+
 ## Atualizacao rapida 2026-05-17 - PubPaid entrada sincronizada, nick e Damas
 
 - Usuario testou online e encontrou aparelhos com fluxos diferentes: desktop ficava aguardando, celular entrava, cache so funcionava em aba anonima, e o jogo precisava checar atualizacao antes de iniciar.

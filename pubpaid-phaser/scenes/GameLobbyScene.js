@@ -191,13 +191,13 @@ export class GameLobbyScene extends Phaser.Scene {
       });
       const realCheckersReady = this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake;
       const actionLabel = realCheckersReady ? "BUSCAR JOGADOR REAL" : "ABRIR CARTEIRA";
-      this.makeButton(588, 658, 180, 28, actionLabel, () => this.findAiOpponent(), true);
+      this.makeButton(588, 658, 180, 28, actionLabel, () => this.startRealMatchmaking(), true);
       this.makeButton(770, 658, 124, 28, "TROCAR", () => this.selectGame(""), false);
     }
     this.makeButton(1094, 702, 152, 28, "VOLTAR", () => this.backToSalon(), false);
   }
 
-  findAiOpponent() {
+  startRealMatchmaking() {
     if (this.gameId === "checkers" && Number(gameState.availableBalance || 0) >= this.stake) {
       updateGameState({
         lobbyPhase: "matching",
@@ -230,105 +230,6 @@ export class GameLobbyScene extends Phaser.Scene {
     });
     this.game.events.emit("pubpaid:block-paid-game", "unavailable");
     return;
-  }
-
-  renderMatched() {
-    this.clearSceneUi();
-    this.drawGlassPanel(92, 144, 650, 472, this.meta.alt);
-    this.tableLayer.add(this.add.text(110, 168, "OPONENTE ENCONTRADO", this.textStyle(30, "#fff6dc")).setLetterSpacing(3));
-    this.tableLayer.add(this.add.text(112, 224, `${this.opponent.name} / ${this.opponent.style} / rating ${this.opponent.rating}`, this.textStyle(15, "#d5dff2")));
-    this.tableLayer.add(this.add.text(112, 270, `Aposta: ${this.stake} créditos`, this.textStyle(18, "#ffd06d")));
-    this.drawOpponentCard(270, 402);
-    this.drawGamePreview(840, 378);
-    this.makeButton(220, 586, 220, 48, "CONFIRMAR", () => this.startMatchScreen(), true);
-    this.makeButton(470, 586, 190, 48, "PROCURAR OUTRO", () => this.findAiOpponent(), false);
-  }
-
-  startMatchScreen() {
-    this.phase = "match";
-    if (this.gameId === "pool") {
-      updateGameState({
-        currentScene: "pool-game",
-        activeGameId: "pool",
-        lobbyPhase: "playing",
-        objective: "Jogar Sinuca",
-        prompt: `Partida de Sinuca aberta contra ${this.opponent.name}.`
-      });
-      this.scene.start("pool-game-scene", {
-        stake: this.stake,
-        opponent: this.opponent
-      });
-      return;
-    }
-    if (this.gameId === "checkers") {
-      updateGameState({
-        currentScene: "game-lobby",
-        activeGameId: "checkers",
-        lobbyPhase: "matching",
-        objective: "Aguardar jogador real",
-        prompt: "Damas local/IA foi desligada. A mesa só abre com dois jogadores reais e confirmação dupla."
-      });
-      this.game.events.emit("pubpaid:start-real-checkers");
-      return;
-    }
-    updateGameState({
-      currentScene: "game-match",
-      lobbyPhase: "playing",
-      objective: `Jogar ${this.meta.title}`,
-      prompt: `Partida de ${this.meta.title} aberta em tela própria contra ${this.opponent.name}.`
-    });
-    this.renderMatchScreen();
-  }
-
-  renderMatchScreen() {
-    this.clearSceneUi();
-    this.drawMatchBackdrop();
-    this.drawGlassPanel(80, 128, 570, 444, this.meta.accent);
-    this.tableLayer.add(this.add.text(96, 150, this.meta.title.toUpperCase(), this.textStyle(40, "#fff6dc")).setLetterSpacing(4));
-    this.tableLayer.add(this.add.text(98, 206, `Você x ${this.opponent.name} / aposta ${this.stake}`, this.textStyle(16, "#d5dff2")));
-    if (this.gameId === "pool") {
-      this.drawPoolMatch();
-    } else {
-      this.drawCheckersMatch();
-    }
-    this.makeButton(218, 626, 220, 46, "VOLTAR AO LOBBY", () => this.renderMatched(), false);
-    this.makeButton(486, 626, 220, 46, "SAIR PRO SALÃO", () => this.backToSalon(), true);
-  }
-
-  drawGamePreview(x, y) {
-    this.tableLayer.add(this.add.rectangle(x, y, 410, 380, 0x05070d, 0.62).setStrokeStyle(3, this.meta.accent, 0.24));
-    if (this.gameId === "pool") {
-      this.drawMiniPoolTable(x, y, 1.35);
-    } else {
-      this.tableLayer.add(this.add.rectangle(x, y, 360, 320, 0x140b12, 1).setStrokeStyle(4, this.meta.alt, 0.34));
-      const size = 32;
-      for (let row = 0; row < 8; row += 1) {
-        for (let col = 0; col < 8; col += 1) {
-          this.tableLayer.add(this.add.rectangle(x - 112 + col * size, y - 112 + row * size, size, size, (row + col) % 2 ? 0x281322 : 0xc49a64, 1));
-        }
-      }
-    }
-  }
-
-  drawOpponentCard(x, y) {
-    this.tableLayer.add(this.add.rectangle(x, y, 280, 190, 0x0b1220, 0.95).setStrokeStyle(3, this.meta.alt, 0.32));
-    this.tableLayer.add(this.add.circle(x - 82, y - 20, 36, this.meta.accent, 0.95).setStrokeStyle(4, 0x07101c, 0.76));
-    this.tableLayer.add(this.add.rectangle(x - 82, y + 36, 62, 58, this.meta.alt, 0.82).setStrokeStyle(3, 0x07101c, 0.7));
-    this.tableLayer.add(this.add.text(x - 18, y - 50, this.opponent.name, this.textStyle(18, "#fff6dc")));
-    this.tableLayer.add(this.add.text(x - 18, y - 14, this.opponent.style, this.textStyle(12, "#d5dff2")));
-    this.tableLayer.add(this.add.text(x - 18, y + 22, `rating ${this.opponent.rating}`, this.textStyle(12, "#ffd06d")));
-  }
-
-  drawPoolMatch() {
-    this.drawMiniPoolTable(848, 374, 1.55);
-    this.tableLayer.add(this.add.text(118, 310, "Tela própria da Sinuca", this.textStyle(20, "#ffd06d")));
-    this.tableLayer.add(this.add.text(118, 350, "Esta mesa só deve abrir quando houver backend real de partida e pagamento.", this.textStyle(14, "#d5dff2")));
-  }
-
-  drawCheckersMatch() {
-    this.drawCheckersBoard(850, 392, 44);
-    this.tableLayer.add(this.add.text(118, 310, "Tela própria da Dama", this.textStyle(20, "#50efff")));
-    this.tableLayer.add(this.add.text(118, 350, "Damas abre somente em PvP real com dois dispositivos.", this.textStyle(14, "#d5dff2")));
   }
 
   switchGame() {

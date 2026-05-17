@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T07:10:36.511Z",
+  "lastUpdatedAt": "2026-05-17T07:43:00.301Z",
   "orders": [
     {
       "id": "2026-05-17-pubpaid-fullfocus-maintenance-onlinefix1",
@@ -10177,6 +10177,59 @@
       "tags": [],
       "nextSteps": [],
       "notes": ""
+    },
+    {
+      "id": "2026-05-17-executar-correcoes-pubpaid-persistencia-edicao-de-nick-remover-demo-wallet-corri",
+      "createdAt": "2026-05-17T07:43:00.301Z",
+      "updatedAt": "2026-05-17T08:20:00.000Z",
+      "status": "validated-local-pending-deploy",
+      "source": "chat",
+      "rawRequest": "Agora execute: nick armazenado com botao para alterar, corrigir rodape sobreposto, retirar dinheiro demo, fazer PvP real esperar adversario e confirmar partida, reconstruir Damas, testar e descobrir por que ainda precisa aba anonima para atualizar.",
+      "summary": "Executar correcoes PubPaid: persistencia/edicao de nick, remover demo wallet, corrigir rodape, refazer PvP real e Damas, testar cache/incognito.",
+      "normalizedTasks": [
+        "persistir e permitir alterar nick por conta Google",
+        "remover saldo/teste e caminhos demo/local que competiam com PvP",
+        "corrigir sobreposicao de rodape/guia de controles",
+        "refazer Damas com regras autoritativas e visual novo",
+        "validar PvP real com dois jogadores, confirmacao dupla e movimento no servidor",
+        "descobrir e corrigir cache/service worker que exigia aba anonima para atualizar"
+      ],
+      "filesTouched": [
+        "server.js",
+        "pubpaid-runtime.js",
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/core/checkersRules.js",
+        "pubpaid-phaser/core/gameState.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/CheckersGameScene.js",
+        "pubpaid-phaser/scenes/GameLobbyScene.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/ui/overlay.js",
+        "pubpaid-phaser/ui/panelActions.js",
+        "catalogo-sw.js",
+        "maintenance.html"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-real-pvp-checkers-validation-20260517.md"
+      ],
+      "tags": [
+        "pubpaid",
+        "pvp",
+        "checkers",
+        "cache",
+        "wallet",
+        "profile",
+        "render-pending"
+      ],
+      "nextSteps": [
+        "commit/push",
+        "validar Render online",
+        "testar dois aparelhos/contas reais"
+      ],
+      "notes": "Validacao local confirmou build sync/no-store/Clear-Site-Data, profile persistente, PvP waiting->readying->active, captura obrigatoria/forcedPiece/dama voadora. Review geral encontrou 4 textos em ingles em feeds fora do escopo PubPaid."
     }
   ]
 }

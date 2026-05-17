@@ -231,6 +231,13 @@ function normalizeWithdrawal(item = {}, index = 0) {
 }
 
 function normalizeWallet(playerId, record = {}) {
+  const profile = record.profile && typeof record.profile === "object"
+    ? {
+        ...record.profile,
+        nick: normalizeText(record.profile.nick ?? record.profile.name ?? record.nickname ?? record.nick, ""),
+        name: normalizeText(record.profile.name ?? record.profile.nick ?? record.nickname ?? record.nick, ""),
+      }
+    : null;
   const balanceCoins = normalizeMoney(record.balanceCoins ?? record.balance ?? record.saldo);
   const lockedWithdrawalCoins = normalizeMoney(record.lockedWithdrawalCoins ?? record.locked ?? record.travado);
   const lockedMatchCoins = normalizeMoney(record.lockedMatchCoins ?? record.lockedPvpCoins ?? 0);
@@ -255,6 +262,10 @@ function normalizeWallet(playerId, record = {}) {
   return {
     playerId: normalizeText(playerId || record.playerId || record.userId, ""),
     playerName: normalizeText(record.playerName ?? record.player ?? record.name, "Jogador"),
+    walletKey: normalizeText(record.walletKey ?? playerId ?? record.playerId ?? record.userId, ""),
+    nickname: normalizeText(record.nickname ?? record.nick ?? profile?.nick, ""),
+    profile,
+    user: record.user && typeof record.user === "object" ? { ...record.user } : null,
     balanceCoins,
     lockedWithdrawalCoins,
     lockedMatchCoins,
@@ -263,6 +274,8 @@ function normalizeWallet(playerId, record = {}) {
     totalApprovedWithdrawals,
     manualApprovedBalanceCoins,
     manualLockedWithdrawalCoins,
+    createdAt: normalizeText(record.createdAt, ""),
+    updatedAt: normalizeText(record.updatedAt, ""),
   };
 }
 
@@ -302,6 +315,10 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
       walletMap.set(normalized.playerId, {
         playerId: normalized.playerId,
         playerName: normalized.playerName,
+        walletKey: normalized.walletKey || normalized.playerId,
+        nickname: normalized.nickname,
+        profile: normalized.profile,
+        user: normalized.user,
         balanceCoins: 0,
         lockedWithdrawalCoins: normalizeMoney(normalized.manualLockedWithdrawalCoins),
         lockedMatchCoins: normalizeMoney(normalized.lockedMatchCoins),
@@ -310,6 +327,8 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
         totalApprovedWithdrawals: 0,
         manualApprovedBalanceCoins: normalizeMoney(normalized.manualApprovedBalanceCoins),
         manualLockedWithdrawalCoins: normalizeMoney(normalized.manualLockedWithdrawalCoins),
+        createdAt: normalized.createdAt,
+        updatedAt: normalized.updatedAt,
       });
     }
   });

@@ -54,6 +54,8 @@ export async function syncPubpaidAccount() {
       recentDeposits: Array.isArray(payload?.recentDeposits) ? payload.recentDeposits : [],
       recentWithdrawals: Array.isArray(payload?.recentWithdrawals) ? payload.recentWithdrawals : [],
       googleUser: payload?.user || null,
+      playerProfile: payload?.profile || null,
+      nickname: payload?.profile?.nick || "",
       walletKey: payload?.wallet?.walletKey || "",
       walletFeedback: payload?.user?.email
         ? `Saldo atualizado para ${payload.user.email}.`
@@ -66,6 +68,27 @@ export async function syncPubpaidAccount() {
     });
     return null;
   }
+}
+
+export async function syncPubpaidProfile() {
+  try {
+    return await requestPubpaidJson(`./api/pubpaid/profile?t=${Date.now()}`, { method: "GET" });
+  } catch (_error) {
+    return null;
+  }
+}
+
+export async function savePubpaidProfile({ nick = "" } = {}) {
+  const payload = await requestPubpaidJson("./api/pubpaid/profile", {
+    method: "POST",
+    body: JSON.stringify({ nick })
+  });
+  updateGameState({
+    playerProfile: payload?.profile || null,
+    nickname: payload?.profile?.nick || ""
+  });
+  await syncPubpaidAccount();
+  return payload;
 }
 
 export async function generatePubpaidDepositPix({ amount = 10, txid = "", description = "PubPaid Creditos" } = {}) {

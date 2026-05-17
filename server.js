@@ -64,7 +64,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260517-entry-sync-nick1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-real-pvp-checkers1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -675,7 +675,7 @@ const STATIC_PAGE_SEO = {
   "/pubpaid-v2.html": {
     title: `PubPaid 2.0 | Rua Viva e PvP`,
     description:
-      "Laboratorio jogavel da PubPaid 2.0 com rua viva, fachada do bar, creditos de teste e blueprint PvP real.",
+      "PubPaid 2.0 com rua viva, carteira real, Damas PvP e partidas confirmadas entre dois jogadores.",
     robots: "noindex,nofollow",
     themeColor: "#070A18",
     colorScheme: "dark",
@@ -6616,6 +6616,7 @@ function sendFile(req, res, filePath, options = {}) {
       "Content-Type": mimeType,
       "Cache-Control": cacheControl,
       "Content-Length": finalBuffer.length,
+      ...(options.headers || {}),
     };
 
     if (/no-store/i.test(cacheControl)) {
@@ -6634,6 +6635,14 @@ function sendFile(req, res, filePath, options = {}) {
     });
     res.end(finalBuffer);
   });
+}
+
+function pubpaidNoStoreHeaders() {
+  return {
+    "Clear-Site-Data": '"cache"',
+    "Service-Worker-Allowed": "/",
+    "X-PubPaid-Build": PUBPAID_CLIENT_BUILD_VERSION
+  };
 }
 
 function normalizeNewsItem(item) {
@@ -13963,6 +13972,71 @@ function isPubpaidPendingStatus(value = "") {
   return normalized.includes("pendente") || normalized.includes("aguardando");
 }
 
+function normalizePubpaidPlayerNick(value = "") {
+  return safeString(value, 120)
+    .normalize("NFKC")
+    .replace(/[^\p{L}\p{N}_. -]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 18);
+}
+
+function getPubpaidWalletRecordForAuth(authUser = {}) {
+  const wallets = getPubpaidWalletStore();
+  const aliases = getPubpaidWalletAliases(authUser);
+  const key = getPubpaidWalletKey(authUser);
+  return wallets[key] || aliases.map((alias) => wallets[alias]).find(Boolean) || null;
+}
+
+function getPubpaidPlayerProfile(authUser = {}) {
+  const record = getPubpaidWalletRecordForAuth(authUser) || {};
+  const profile = record.profile && typeof record.profile === "object" ? record.profile : {};
+  const nick = normalizePubpaidPlayerNick(
+    profile.nick || profile.name || record.playerNick || record.nickname || record.nick || record.playerName || ""
+  );
+  if (!nick) return null;
+  return {
+    nick,
+    name: nick,
+    updatedAt: safeString(profile.updatedAt || record.profileUpdatedAt || record.updatedAt || "", 60)
+  };
+}
+
+function savePubpaidPlayerProfile(authUser = {}, nickValue = "") {
+  const key = getPubpaidWalletKey(authUser);
+  const nick = normalizePubpaidPlayerNick(nickValue);
+  if (!key) return { ok: false, error: "Conta Google obrigatoria para salvar nick." };
+  if (nick.length < 3) return { ok: false, error: "Crie um nick com pelo menos 3 caracteres." };
+
+  const wallets = getPubpaidWalletStore();
+  const currentRecord = getPubpaidWalletRecordForAuth(authUser) || {};
+  const wallet = getPubpaidWallet(authUser, { createIfMissing: true }) || {};
+  const now = new Date().toISOString();
+  const profile = {
+    nick,
+    name: nick,
+    updatedAt: now
+  };
+
+  savePubpaidWalletStore({
+    ...wallets,
+    [key]: {
+      ...currentRecord,
+      ...wallet,
+      walletKey: key,
+      playerId: key,
+      playerName: nick,
+      nickname: nick,
+      profile,
+      user: publicAuthUser(authUser),
+      updatedAt: now,
+      createdAt: currentRecord.createdAt || wallet.createdAt || now
+    }
+  });
+
+  return { ok: true, profile };
+}
+
 function buildPubpaidAccountPayload(authUser = {}) {
   const wallet = getPubpaidWallet(authUser);
   const walletKey = getPubpaidWalletKey(authUser);
@@ -13995,6 +14069,7 @@ function buildPubpaidAccountPayload(authUser = {}) {
   return {
     ok: true,
     user: publicAuthUser(authUser),
+    profile: getPubpaidPlayerProfile(authUser),
     wallet: wallet
       ? {
           balanceCoins: normalizePubpaidMoney(wallet.balanceCoins),
@@ -16307,6 +16382,35 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildPubpaidAccountPayload(authUser));
   }
 
+  if (req.method === "GET" && pathname === "/api/pubpaid/profile") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para carregar seu nick." });
+    }
+    return sendJson(res, 200, {
+      ok: true,
+      user: publicAuthUser(authUser),
+      profile: getPubpaidPlayerProfile(authUser)
+    });
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/profile") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para salvar seu nick." });
+    }
+    const body = await parseBody(req);
+    const result = savePubpaidPlayerProfile(authUser, body.nick || body.name || "");
+    if (!result.ok) {
+      return sendJson(res, 400, result);
+    }
+    return sendJson(res, 200, {
+      ok: true,
+      user: publicAuthUser(authUser),
+      profile: result.profile
+    });
+  }
+
   if (req.method === "GET" && pathname === "/api/pubpaid/build") {
     return sendJson(
       res,
@@ -16539,7 +16643,7 @@ async function handleApi(req, res, pathname, searchParams) {
 
     const move = body.move || {};
     const board = Array.isArray(match.board) ? match.board : createCheckersPvPBoard();
-    const validMoves = getAllPvpCheckersMoves(board, seat);
+    const validMoves = getAllPvpCheckersMoves(board, seat, match.forcedPiece || null);
     const chosenMove = validMoves.find((entry) =>
       clampInteger(entry?.from?.row, -1) === clampInteger(move?.from?.row, -1) &&
       clampInteger(entry?.from?.col, -1) === clampInteger(move?.from?.col, -1) &&
@@ -16552,12 +16656,14 @@ async function handleApi(req, res, pathname, searchParams) {
 
     let nextBoard = applyPvpCheckersMove(board, chosenMove);
     let nextTurn = seat === "playerOne" ? "playerTwo" : "playerOne";
+    let forcedPiece = null;
     let resultSummary = "";
     let winner = getPvpCheckersOutcome(nextBoard);
     if (!winner && chosenMove.capture) {
-      const followCaptures = getMovesForPvpCheckersPiece(nextBoard, chosenMove.to.row, chosenMove.to.col).filter((entry) => entry.capture);
+      const followCaptures = getPvpCheckersCapturesForPiece(nextBoard, chosenMove.to.row, chosenMove.to.col);
       if (followCaptures.length) {
         nextTurn = seat;
+        forcedPiece = { row: chosenMove.to.row, col: chosenMove.to.col };
         resultSummary = "A captura continua com a mesma peca.";
       }
     }
@@ -16585,6 +16691,7 @@ async function handleApi(req, res, pathname, searchParams) {
         at: new Date().toISOString(),
       },
       turn: nextTurn,
+      forcedPiece: finished ? null : forcedPiece,
       winner: winner || "",
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
@@ -17610,7 +17717,10 @@ function handleStatic(req, res, pathname, requestUrl) {
   if (pathname === "/pubpaid" || pathname === "/pubpaid/" || pathname === "/pubpaid.html") {
     res.writeHead(302, {
       Location: `/pubpaid-v2.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
-      "Cache-Control": "no-store"
+      "Cache-Control": "no-store",
+      Pragma: "no-cache",
+      Expires: "0",
+      ...pubpaidNoStoreHeaders()
     });
     return res.end();
   }
@@ -17652,6 +17762,14 @@ function handleStatic(req, res, pathname, requestUrl) {
     return sendFile(req, res, MAINTENANCE_FILE, {
       cacheControl: "no-store",
       templateVars
+    });
+  }
+
+  if (pathname === "/pubpaid-v2.html") {
+    return sendFile(req, res, path.join(ROOT_DIR, "pubpaid-v2.html"), {
+      cacheControl: "no-store",
+      templateVars,
+      headers: pubpaidNoStoreHeaders()
     });
   }
 
@@ -17970,6 +18088,13 @@ function createCheckersPvPBoard() {
   return board;
 }
 
+const PVP_CHECKERS_DIRECTIONS = [
+  [-1, -1],
+  [-1, 1],
+  [1, -1],
+  [1, 1]
+];
+
 function drawPubpaid21Card(stateCards) {
   const deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 11];
   const value = deck[Math.floor(Math.random() * deck.length)];
@@ -18233,6 +18358,8 @@ function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
       board: createCheckersPvPBoard(),
       ready: { playerOne: false, playerTwo: false },
       coinFlip: null,
+      forcedPiece: null,
+      lastMove: null,
       matchedAt: new Date().toISOString(),
       startedAt: "",
       turn: "",
@@ -18339,14 +18466,12 @@ function getPvpCheckersOwner(piece = "") {
   return piece.toLowerCase() === "p" ? "playerOne" : "playerTwo";
 }
 
-function getPvpCheckersMoveDirections(piece = "") {
-  if (!piece) return [];
-  if (piece === piece.toUpperCase()) return [[-1, -1], [-1, 1], [1, -1], [1, 1]];
-  return piece.toLowerCase() === "p" ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]];
+function getPvpCheckersEnemy(owner = "") {
+  return owner === "playerOne" ? "playerTwo" : "playerOne";
 }
 
-function getPvpCheckersCaptureDirections(piece = "") {
-  return piece ? [[-1, -1], [-1, 1], [1, -1], [1, 1]] : [];
+function isPvpCheckersKing(piece = "") {
+  return Boolean(piece) && piece === String(piece).toUpperCase();
 }
 
 function inPvpCheckersBounds(row, col) {
@@ -18363,57 +18488,141 @@ function clonePvpCheckersBoard(board = []) {
   return board.map((row) => row.slice());
 }
 
-function getMovesForPvpCheckersPiece(board, row, col) {
+function getSimplePvpCheckersMovesForPiece(board, row, col) {
   const piece = board?.[row]?.[col];
   if (!piece) return [];
-  const owner = getPvpCheckersOwner(piece);
-  const enemy = owner === "playerOne" ? "playerTwo" : "playerOne";
   const moves = [];
-  getPvpCheckersMoveDirections(piece).forEach(([rowStep, colStep]) => {
+
+  if (isPvpCheckersKing(piece)) {
+    PVP_CHECKERS_DIRECTIONS.forEach(([rowStep, colStep]) => {
+      let nextRow = row + rowStep;
+      let nextCol = col + colStep;
+      while (inPvpCheckersBounds(nextRow, nextCol) && !board[nextRow][nextCol]) {
+        moves.push({ from: { row, col }, to: { row: nextRow, col: nextCol }, capture: null });
+        nextRow += rowStep;
+        nextCol += colStep;
+      }
+    });
+    return moves;
+  }
+
+  const directions = piece.toLowerCase() === "p" ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]];
+  directions.forEach(([rowStep, colStep]) => {
     const nextRow = row + rowStep;
     const nextCol = col + colStep;
-    if (!inPvpCheckersBounds(nextRow, nextCol)) return;
-    if (!board[nextRow][nextCol]) {
+    if (inPvpCheckersBounds(nextRow, nextCol) && !board[nextRow][nextCol]) {
       moves.push({ from: { row, col }, to: { row: nextRow, col: nextCol }, capture: null });
     }
-  });
-  getPvpCheckersCaptureDirections(piece).forEach(([rowStep, colStep]) => {
-    const nextRow = row + rowStep;
-    const nextCol = col + colStep;
-    if (!inPvpCheckersBounds(nextRow, nextCol)) return;
-    if (!board[nextRow][nextCol]) return;
-    if (getPvpCheckersOwner(board[nextRow][nextCol]) !== enemy) return;
-    const jumpRow = nextRow + rowStep;
-    const jumpCol = nextCol + colStep;
-    if (!inPvpCheckersBounds(jumpRow, jumpCol) || board[jumpRow][jumpCol]) return;
-    moves.push({
-      from: { row, col },
-      to: { row: jumpRow, col: jumpCol },
-      capture: { row: nextRow, col: nextCol },
-    });
   });
   return moves;
 }
 
-function getAllPvpCheckersMoves(board, owner) {
-  const moves = [];
-  for (let row = 0; row < 8; row += 1) {
-    for (let col = 0; col < 8; col += 1) {
-      if (getPvpCheckersOwner(board[row][col]) !== owner) continue;
-      moves.push(...getMovesForPvpCheckersPiece(board, row, col));
-    }
+function getPvpCheckersCapturesForPiece(board, row, col) {
+  const piece = board?.[row]?.[col];
+  if (!piece) return [];
+  const owner = getPvpCheckersOwner(piece);
+  const enemy = getPvpCheckersEnemy(owner);
+  const captures = [];
+
+  if (isPvpCheckersKing(piece)) {
+    PVP_CHECKERS_DIRECTIONS.forEach(([rowStep, colStep]) => {
+      let scanRow = row + rowStep;
+      let scanCol = col + colStep;
+      while (inPvpCheckersBounds(scanRow, scanCol) && !board[scanRow][scanCol]) {
+        scanRow += rowStep;
+        scanCol += colStep;
+      }
+      if (!inPvpCheckersBounds(scanRow, scanCol) || getPvpCheckersOwner(board[scanRow][scanCol]) !== enemy) return;
+      const capture = { row: scanRow, col: scanCol };
+      let landingRow = scanRow + rowStep;
+      let landingCol = scanCol + colStep;
+      while (inPvpCheckersBounds(landingRow, landingCol) && !board[landingRow][landingCol]) {
+        captures.push({
+          from: { row, col },
+          to: { row: landingRow, col: landingCol },
+          capture,
+        });
+        landingRow += rowStep;
+        landingCol += colStep;
+      }
+    });
+    return captures;
   }
-  const captures = moves.filter((move) => move.capture);
-  return captures.length ? captures : moves;
+
+  PVP_CHECKERS_DIRECTIONS.forEach(([rowStep, colStep]) => {
+    const enemyRow = row + rowStep;
+    const enemyCol = col + colStep;
+    const landingRow = enemyRow + rowStep;
+    const landingCol = enemyCol + colStep;
+    if (
+      inPvpCheckersBounds(landingRow, landingCol) &&
+      getPvpCheckersOwner(board?.[enemyRow]?.[enemyCol]) === enemy &&
+      !board[landingRow][landingCol]
+    ) {
+      captures.push({
+        from: { row, col },
+        to: { row: landingRow, col: landingCol },
+        capture: { row: enemyRow, col: enemyCol },
+      });
+    }
+  });
+  return captures;
 }
 
 function applyPvpCheckersMove(board, move) {
   const next = clonePvpCheckersBoard(board);
-  const piece = next[move.from.row][move.from.col];
+  const piece = next?.[move?.from?.row]?.[move?.from?.col] || "";
+  if (!piece) return next;
   next[move.from.row][move.from.col] = "";
   if (move.capture) next[move.capture.row][move.capture.col] = "";
   next[move.to.row][move.to.col] = crownPvpCheckersPiece(piece, move.to.row);
   return next;
+}
+
+function getPvpCheckersMaxCaptureDepth(board, row, col) {
+  const captures = getPvpCheckersCapturesForPiece(board, row, col);
+  if (!captures.length) return 0;
+  return Math.max(
+    ...captures.map((move) => 1 + getPvpCheckersMaxCaptureDepth(applyPvpCheckersMove(board, move), move.to.row, move.to.col))
+  );
+}
+
+function normalizePvpCheckersForcedPiece(value = null) {
+  if (!value) return null;
+  const row = clampInteger(value.row, -1);
+  const col = clampInteger(value.col, -1);
+  return inPvpCheckersBounds(row, col) ? { row, col } : null;
+}
+
+function getAllPvpCheckersMoves(board, owner, forcedPiece = null) {
+  const forced = normalizePvpCheckersForcedPiece(forcedPiece);
+  const captures = [];
+  for (let row = 0; row < 8; row += 1) {
+    for (let col = 0; col < 8; col += 1) {
+      if (forced && (forced.row !== row || forced.col !== col)) continue;
+      if (getPvpCheckersOwner(board[row][col]) !== owner) continue;
+      getPvpCheckersCapturesForPiece(board, row, col).forEach((move) => {
+        captures.push({
+          ...move,
+          chainLength: 1 + getPvpCheckersMaxCaptureDepth(applyPvpCheckersMove(board, move), move.to.row, move.to.col)
+        });
+      });
+    }
+  }
+  if (captures.length) {
+    const maxChain = Math.max(...captures.map((move) => move.chainLength || 1));
+    return captures.filter((move) => (move.chainLength || 1) === maxChain);
+  }
+  if (forced) return [];
+
+  const moves = [];
+  for (let row = 0; row < 8; row += 1) {
+    for (let col = 0; col < 8; col += 1) {
+      if (getPvpCheckersOwner(board[row][col]) !== owner) continue;
+      moves.push(...getSimplePvpCheckersMovesForPiece(board, row, col));
+    }
+  }
+  return moves;
 }
 
 function countPvpCheckersPieces(board, owner) {

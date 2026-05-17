@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-entry-sync-nick1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-entry-sync-nick1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-real-pvp-checkers1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-real-pvp-checkers1";
 import { closePanel } from "./ui/panelActions.js";
-import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-entry-sync-nick1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-entry-sync-nick1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-real-pvp-checkers1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-real-pvp-checkers1";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-entry-sync-nick1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-entry-sync-nick1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-real-pvp-checkers1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-real-pvp-checkers1";
 import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260517-entry-sync-nick1";
+const PUBPAID_BUILD_VERSION = "20260517-real-pvp-checkers1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -50,6 +50,7 @@ const soundtrack = createPubPaidSoundtrack();
 
 const TERMS_KEY = "pubpaid_v2_terms_accepted";
 const PROFILE_KEY = "pubpaid_v2_player_profile";
+let cachedPlayerProfile = null;
 const refs = {
   body: document.body,
   updateGate: document.querySelector("[data-update-gate]"),
@@ -70,6 +71,7 @@ const refs = {
   profileNick: document.querySelector("[data-player-nick]"),
   profileSave: document.querySelector("[data-save-player-profile]"),
   profileStatus: document.querySelector("[data-player-profile-status]"),
+  profileEdit: document.querySelectorAll("[data-edit-player-profile]"),
   audioToggle: document.querySelector("[data-audio-toggle]"),
   orientationGate: document.querySelector("[data-orientation-gate]"),
   orientationStatus: document.querySelector("[data-orientation-status]"),
@@ -137,7 +139,10 @@ async function clearPubpaidCachesAndWorkers() {
 async function refreshPubpaidRuntimeCache() {
   try {
     const previousVersion = window.localStorage?.getItem("pubpaid_v2_build_version") || "";
-    if (previousVersion === PUBPAID_BUILD_VERSION) return;
+    if (previousVersion === PUBPAID_BUILD_VERSION) {
+      await clearPubpaidCachesAndWorkers();
+      return;
+    }
     window.localStorage?.setItem("pubpaid_v2_build_version", PUBPAID_BUILD_VERSION);
     await clearPubpaidCachesAndWorkers();
   } catch (_error) {
@@ -270,10 +275,27 @@ function profileStorageKey() {
 }
 
 function getPlayerProfile() {
+  const stateProfile = gameState.playerProfile || cachedPlayerProfile;
+  const stateNick = normalizePlayerNick(stateProfile?.nick || stateProfile?.name || "");
+  if (stateNick) {
+    return {
+      ...stateProfile,
+      nick: stateNick,
+      name: stateNick
+    };
+  }
   try {
+    const user = getAuthApi()?.getUser?.() || gameState.googleUser || {};
     const keyed = window.localStorage.getItem(profileStorageKey());
     const fallback = window.localStorage.getItem(PROFILE_KEY);
-    const parsed = JSON.parse(keyed || fallback || "{}");
+    const parsedFallback = JSON.parse(fallback || "{}");
+    const fallbackMatchesUser =
+      !fallback ||
+      !user?.email ||
+      !parsedFallback?.email ||
+      String(parsedFallback.email).toLowerCase() === String(user.email).toLowerCase() ||
+      (user?.sub && parsedFallback?.sub && String(parsedFallback.sub) === String(user.sub));
+    const parsed = JSON.parse(keyed || (fallbackMatchesUser ? fallback : "") || "{}");
     const nick = normalizePlayerNick(parsed.nick || parsed.name || "");
     return nick
       ? {
@@ -287,29 +309,63 @@ function getPlayerProfile() {
   }
 }
 
-function savePlayerProfile(nickValue) {
-  const nick = normalizePlayerNick(nickValue);
+function persistPlayerProfile(profile = {}) {
+  const nick = normalizePlayerNick(profile.nick || profile.name || "");
   if (nick.length < 3) return null;
   const user = getAuthApi()?.getUser?.() || gameState.googleUser || {};
-  const profile = {
+  const nextProfile = {
+    ...profile,
     nick,
     name: nick,
-    email: user.email || "",
-    sub: user.sub || "",
-    updatedAt: new Date().toISOString()
+    email: profile.email || user.email || "",
+    sub: profile.sub || user.sub || "",
+    updatedAt: profile.updatedAt || new Date().toISOString()
   };
   try {
-    const serialized = JSON.stringify(profile);
+    const serialized = JSON.stringify(nextProfile);
     window.localStorage.setItem(profileStorageKey(), serialized);
     window.localStorage.setItem(PROFILE_KEY, serialized);
   } catch (_error) {
     // Profile is still usable in memory when storage is unavailable.
   }
+  cachedPlayerProfile = nextProfile;
   updateGameState({
-    playerProfile: profile,
+    playerProfile: nextProfile,
     nickname: nick
   });
-  return profile;
+  return nextProfile;
+}
+
+async function syncPlayerProfileFromServer() {
+  const auth = getAuthApi();
+  if (!auth?.isSignedIn?.()) return getPlayerProfile();
+  const payload = await syncPubpaidProfile();
+  const serverProfile = payload?.profile?.nick ? persistPlayerProfile(payload.profile) : null;
+  if (serverProfile) return serverProfile;
+  const localProfile = getPlayerProfile();
+  if (localProfile?.nick) {
+    try {
+      const saved = await savePubpaidProfile({ nick: localProfile.nick });
+      return persistPlayerProfile(saved?.profile || localProfile);
+    } catch (_error) {
+      return localProfile;
+    }
+  }
+  return null;
+}
+
+async function savePlayerProfile(nickValue) {
+  const localProfile = persistPlayerProfile({ nick: nickValue });
+  if (!localProfile) return null;
+  try {
+    const saved = await savePubpaidProfile({ nick: localProfile.nick });
+    return persistPlayerProfile(saved?.profile || localProfile);
+  } catch (error) {
+    if (refs.profileStatus) {
+      refs.profileStatus.textContent = error?.message || "Nick salvo localmente. Tentaremos sincronizar online.";
+    }
+    return localProfile;
+  }
 }
 
 function syncProfileUi() {
@@ -320,16 +376,23 @@ function syncProfileUi() {
     refs.profileNick.placeholder = normalizePlayerNick(user.givenName || user.name || "Jogador") || "Seu nick";
   }
   const candidate = normalizePlayerNick(refs.profileNick?.value || profile?.nick || "");
-  if (refs.profileSave) refs.profileSave.disabled = candidate.length < 3;
+  if (refs.profileSave) {
+    refs.profileSave.disabled = candidate.length < 3;
+    refs.profileSave.textContent = profile?.nick ? "Salvar nick" : "Jogar agora";
+  }
   if (refs.profileStatus) {
     refs.profileStatus.textContent = candidate.length >= 3
-      ? `${candidate} vai aparecer nas mesas e no PvP.`
+      ? `${candidate} fica salvo na sua conta Google e aparece nas mesas.`
       : "Crie um nick com pelo menos 3 caracteres para entrar.";
   }
+  refs.profileEdit?.forEach((button) => {
+    button.hidden = !profile?.nick;
+    button.textContent = profile?.nick ? `Nick: ${profile.nick}` : "Criar nick";
+  });
 }
 
 async function saveProfileAndEnter() {
-  const profile = savePlayerProfile(refs.profileNick?.value || "");
+  const profile = await savePlayerProfile(refs.profileNick?.value || "");
   if (!profile) {
     syncProfileUi();
     refs.profileNick?.focus();
@@ -641,6 +704,7 @@ async function syncAuthUi({ autoEnter = false } = {}) {
   }
   if (signedIn) {
     await syncPubpaidAccount();
+    await syncPlayerProfileFromServer();
   }
   syncProfileUi();
   if (autoEnter && signedIn && bootGateReady && !gameStarted) {
@@ -803,6 +867,17 @@ function bindSplash() {
         return;
       }
       await continueAfterAuth();
+      return;
+    }
+
+    if (event.target.closest("[data-edit-player-profile]")) {
+      event.preventDefault();
+      if (isAuthRequired() && !getAuthApi()?.isSignedIn?.()) {
+        await getAuthApi()?.promptSignIn?.();
+        return;
+      }
+      await syncPlayerProfileFromServer();
+      openSplash("profile");
       return;
     }
 

@@ -5,7 +5,6 @@ const refs = {
   scene: document.querySelector("[data-game-scene]"),
   focus: document.querySelector("[data-game-focus]"),
   mode: document.querySelector("[data-game-mode]"),
-  testBalance: document.querySelector("[data-game-test-balance]"),
   realBalance: document.querySelector("[data-game-real-balance]"),
   availableBalance: document.querySelector("[data-game-available-balance]"),
   lockedMatchBalance: document.querySelector("[data-game-locked-match-balance]"),
@@ -217,7 +216,6 @@ export function bindOverlay() {
     if (refs.scene) refs.scene.textContent = state.currentScene;
     if (refs.focus) refs.focus.textContent = state.focus;
     if (refs.mode) refs.mode.textContent = state.mode;
-    if (refs.testBalance) refs.testBalance.textContent = String(state.testBalance);
     if (refs.realBalance) refs.realBalance.textContent = String(state.realBalance);
     if (refs.availableBalance) refs.availableBalance.textContent = String(state.availableBalance);
     if (refs.lockedMatchBalance) refs.lockedMatchBalance.textContent = String(state.lockedMatchBalance);
@@ -232,7 +230,7 @@ export function bindOverlay() {
       refs.accountLabel.textContent =
         state.realBalance > 0
           ? `Carteira: ${state.availableBalance} disponível, ${state.lockedMatchBalance} em mesa e ${state.lockedWithdrawalBalance} em saque.`
-          : "Rua e salão já estão organizados em scenes separadas. O próximo salto é ligar tudo à carteira e ao matchmaking real.";
+          : "Carteira real aguardando depósito Pix aprovado pelo admin.";
     }
     if (refs.panel) refs.panel.hidden = !state.panel.open;
     if (refs.panelKicker) refs.panelKicker.textContent = state.panel.kicker;

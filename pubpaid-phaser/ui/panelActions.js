@@ -1,6 +1,7 @@
 import { TABLE_COPY } from "../config/gameConfig.js";
 import { NERD_TEAM, formatNerdAgent } from "../config/nerdTeam.js";
 import { gameState, updateGameState, updatePanel } from "../core/gameState.js";
+import { getCheckersLegalMoves } from "../core/checkersRules.js";
 import { joinPubpaidPvpQueue, leavePubpaidPvpQueue } from "../services/accountService.js";
 import { fetchPvpState, moveCheckers, throwDarts } from "../services/pvpService.js";
 
@@ -118,7 +119,7 @@ function openPvpPanel(payload = {}) {
       actions.push({ id: "pvp-darts-30-62", label: "Baixo esquerdo" });
     }
     if (match.turn === seat && isCheckers) {
-      const legalMoves = getLegalCheckersMoves(match.board || [], seat).slice(0, 6);
+      const legalMoves = getCheckersLegalMoves(match.board || [], seat, match.forcedPiece || null).slice(0, 6);
       legalMoves.forEach((move, index) => {
         actions.push({
           id: `pvp-checkers-move-${encodeCheckersMove(move)}`,
@@ -198,7 +199,7 @@ function buildPvpView({ gameId, state, match, seat }) {
       seat,
       turn: match?.turn || "",
       board,
-      legalMoves: match?.turn === seat ? getLegalCheckersMoves(board, seat).slice(0, 6) : [],
+      legalMoves: match?.turn === seat ? getCheckersLegalMoves(board, seat, match.forcedPiece || null).slice(0, 6) : [],
       settlement,
       selected: gameState.panelSelection,
       canPlay: state === "active" && match?.turn === seat,
@@ -230,88 +231,8 @@ function clearPanelBusyWithError(message) {
   });
 }
 
-function getCheckersOwner(piece = "") {
-  if (!piece) return "";
-  return piece.toLowerCase() === "p" ? "playerOne" : "playerTwo";
-}
-
-function getCheckersDirections(piece = "") {
-  if (!piece) return [];
-  if (piece === piece.toUpperCase()) return [[-1, -1], [-1, 1], [1, -1], [1, 1]];
-  return piece.toLowerCase() === "p" ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]];
-}
-
 function getAutoCheckersMove(board = [], owner = "playerOne") {
-  const moves = [];
-  for (let row = 0; row < 8; row += 1) {
-    for (let col = 0; col < 8; col += 1) {
-      const piece = board?.[row]?.[col];
-      if (getCheckersOwner(piece) !== owner) continue;
-      const enemy = owner === "playerOne" ? "playerTwo" : "playerOne";
-      getCheckersDirections(piece).forEach(([rowStep, colStep]) => {
-        const nextRow = row + rowStep;
-        const nextCol = col + colStep;
-        if (!board?.[nextRow] || nextCol < 0 || nextCol > 7) return;
-        if (!board[nextRow][nextCol]) {
-          moves.push({ from: { row, col }, to: { row: nextRow, col: nextCol }, capture: null });
-          return;
-        }
-        const jumpRow = nextRow + rowStep;
-        const jumpCol = nextCol + colStep;
-        if (
-          getCheckersOwner(board[nextRow][nextCol]) === enemy &&
-          board?.[jumpRow] &&
-          jumpCol >= 0 &&
-          jumpCol <= 7 &&
-          !board[jumpRow][jumpCol]
-        ) {
-          moves.unshift({
-            from: { row, col },
-            to: { row: jumpRow, col: jumpCol },
-            capture: { row: nextRow, col: nextCol }
-          });
-        }
-      });
-    }
-  }
-  return moves[0] || null;
-}
-
-function getLegalCheckersMoves(board = [], owner = "playerOne") {
-  const moves = [];
-  for (let row = 0; row < 8; row += 1) {
-    for (let col = 0; col < 8; col += 1) {
-      const piece = board?.[row]?.[col];
-      if (getCheckersOwner(piece) !== owner) continue;
-      const enemy = owner === "playerOne" ? "playerTwo" : "playerOne";
-      getCheckersDirections(piece).forEach(([rowStep, colStep]) => {
-        const nextRow = row + rowStep;
-        const nextCol = col + colStep;
-        if (!board?.[nextRow] || nextCol < 0 || nextCol > 7) return;
-        if (!board[nextRow][nextCol]) {
-          moves.push({ from: { row, col }, to: { row: nextRow, col: nextCol }, capture: null });
-          return;
-        }
-        const jumpRow = nextRow + rowStep;
-        const jumpCol = nextCol + colStep;
-        if (
-          getCheckersOwner(board[nextRow][nextCol]) === enemy &&
-          board?.[jumpRow] &&
-          jumpCol >= 0 &&
-          jumpCol <= 7 &&
-          !board[jumpRow][jumpCol]
-        ) {
-          moves.push({
-            from: { row, col },
-            to: { row: jumpRow, col: jumpCol },
-            capture: { row: nextRow, col: nextCol }
-          });
-        }
-      });
-    }
-  }
-  const captures = moves.filter((move) => move.capture);
-  return captures.length ? captures : moves;
+  return getCheckersLegalMoves(board, owner, gameState.pvpMatch?.forcedPiece || null)[0] || null;
 }
 
 function encodeCheckersMove(move) {
@@ -339,16 +260,6 @@ function formatSquare(row, col) {
 export function runPanelAction(actionId) {
   if (actionId === "close-panel") {
     closePanel();
-    return;
-  }
-
-  if (actionId === "reset-test") {
-    updateGameState({
-      testBalance: 0,
-      objective: "Abrir carteira real",
-      nerdAgent: formatNerdAgent(NERD_TEAM.hud),
-      prompt: "Mesas pagas exigem Google, depósito Pix e aprovação do admin."
-    });
     return;
   }
 
@@ -387,28 +298,6 @@ export function runPanelAction(actionId) {
       prompt: !gameState.stageEventActive
         ? "Evento do palco ativado. O salão ganhou clima de noite grande."
         : "Evento do palco encerrado. O salão voltou ao modo base."
-    });
-    return;
-  }
-
-  if (actionId === "queue-casual") {
-    setSelectedTable("checkers");
-    updateGameState({
-      loungeQueue: "casual",
-      objective: "Aguardar mesa casual",
-      nerdAgent: formatNerdAgent(NERD_TEAM.engine),
-      prompt: "Fila casual aberta na mesa oeste. Dama virou a mesa sugerida."
-    });
-    return;
-  }
-
-  if (actionId === "queue-premium") {
-    setSelectedTable("poker");
-    updateGameState({
-      loungeQueue: "premium",
-      objective: "Aguardar mesa premium",
-      nerdAgent: formatNerdAgent(NERD_TEAM.qa),
-      prompt: "Fila premium aberta na mesa leste. Poker virou a mesa social do momento."
     });
     return;
   }
@@ -540,7 +429,7 @@ export function handlePanelCheckersCell(row, col) {
     updateGameState({ prompt: "Aguarde sua vez na Dama." });
     return;
   }
-  const legalMoves = getLegalCheckersMoves(match.board || [], gameState.pvpSeat || "playerOne");
+  const legalMoves = getCheckersLegalMoves(match.board || [], gameState.pvpSeat || "playerOne", match.forcedPiece || null);
   const selected = gameState.panelSelection;
   const fromMoves = legalMoves.filter((move) => move.from.row === row && move.from.col === col);
   if (!selected && fromMoves.length) {
