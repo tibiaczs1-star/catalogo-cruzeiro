@@ -23,6 +23,12 @@ const {
 const vm = require("vm");
 const zlib = require("zlib");
 const { URL } = require("url");
+let Chess = null;
+try {
+  Chess = require("chess.js").Chess;
+} catch (_error) {
+  Chess = null;
+}
 let QRCode = null;
 try {
   QRCode = require("qrcode");
@@ -64,7 +70,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
-const PUBPAID_CLIENT_BUILD_VERSION = "20260517-avatarfix1";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-pvpgames1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16406,7 +16412,9 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!gameId) {
       return sendJson(res, 400, { ok: false, error: "Mesa PvP ainda nao liberada para esse jogo." });
     }
-    const store = writePubpaidPvpStore(cleanupPubpaidPvpStore(readPubpaidPvpStore()));
+    let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    store = touchPubpaidPvpPresence(store, authUser, gameId);
+    store = writePubpaidPvpStore(cleanupPubpaidPvpStore(store));
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
   }
 
@@ -16424,6 +16432,7 @@ async function handleApi(req, res, pathname, searchParams) {
     const wantsFreshQueue = body.fresh !== false && !body.reconnect;
     const walletKey = getPubpaidWalletKey(authUser);
     let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    store = touchPubpaidPvpPresence(store, authUser, gameId);
     const previousWaiting = store.waiting.filter((entry) => entry?.player?.walletKey === walletKey);
     previousWaiting.forEach((entry) => {
       if (entry?.escrow?.status === "locked") {
@@ -16437,36 +16446,21 @@ async function handleApi(req, res, pathname, searchParams) {
       [entry?.playerOne?.walletKey, entry?.playerTwo?.walletKey].includes(walletKey)
     );
     if (existingMatch) {
-      if (wantsFreshQueue && gameId === "checkers") {
+      if (wantsFreshQueue && existingMatch.status === "readying") {
         const oldMatchAgeMs = Date.now() - new Date(existingMatch.updatedAt || existingMatch.startedAt || existingMatch.createdAt || 0).getTime();
-        const canCloseWithoutResult = existingMatch.status === "readying" ||
-          existingMatch.status === "abandoned" ||
-          (existingMatch.status === "active" && clampInteger(existingMatch.moveCount) === 0 && oldMatchAgeMs > 15000);
+        const canCloseWithoutResult = oldMatchAgeMs > 15000;
         if (!canCloseWithoutResult) {
-          return sendJson(res, 409, {
-            ok: false,
-            error: "Voce tem uma mesa de Damas em andamento. Termine ou abandone essa mesa antes de buscar uma nova."
-          });
+          store = writePubpaidPvpStore(store);
+          return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
         }
-        if (existingMatch.status === "readying") {
-          releasePubpaidMatchEscrow(existingMatch.playerOne, existingMatch.stake);
-          releasePubpaidMatchEscrow(existingMatch.playerTwo, existingMatch.stake);
-          existingMatch.status = "canceled";
-          existingMatch.resultSummary = "Mesa antiga cancelada antes da confirmacao dupla. Escrow liberado.";
-        } else {
-          existingMatch.status = "finished";
-          existingMatch.winner = "";
-          existingMatch.resultSummary = "Mesa antiga encerrada sem jogadas para iniciar uma nova fila.";
-        }
+        releasePubpaidMatchEscrow(existingMatch.playerOne, existingMatch.stake);
+        releasePubpaidMatchEscrow(existingMatch.playerTwo, existingMatch.stake);
+        existingMatch.status = "canceled";
+        existingMatch.resultSummary = "Mesa antiga cancelada antes da confirmacao dupla. Escrow liberado.";
         existingMatch.finishedAt = new Date().toISOString();
         existingMatch.updatedAt = new Date().toISOString();
         store = cleanupPubpaidPvpStore(writePubpaidPvpStore(store));
-      } else if (existingMatch.status === "abandoned" && existingMatch.abandonedBy) {
-        existingMatch.status = "active";
-        existingMatch.abandonedBy = "";
-        existingMatch.deadlineAt = "";
-        existingMatch.resultSummary = "Jogador reconectou antes dos 60 segundos. A mesa voltou ao estado ativo.";
-        existingMatch.updatedAt = new Date().toISOString();
+      } else if (existingMatch.status === "active" || existingMatch.status === "abandoned") {
         store = writePubpaidPvpStore(store);
         return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
       } else {
@@ -16493,7 +16487,10 @@ async function handleApi(req, res, pathname, searchParams) {
           releasePubpaidMatchEscrow(player, stake);
           store.waiting = store.waiting.filter((entry) => entry.id !== rivalWaiting.id);
           store = writePubpaidPvpStore(store);
-          return sendJson(res, 409, { ok: false, error: "Rival saiu da mesa porque nao havia escrow disponivel." });
+          return sendJson(res, 409, {
+            ok: false,
+            error: "Rival saiu da mesa porque nao havia escrow disponivel."
+          });
         }
       }
       store.waiting = store.waiting.filter((entry) => entry.id !== rivalWaiting.id);
@@ -16527,6 +16524,10 @@ async function handleApi(req, res, pathname, searchParams) {
     if (!gameId) {
       return sendJson(res, 400, { ok: false, error: "Mesa PvP ainda nao liberada para esse jogo." });
     }
+    const leaveReason = cleanShortText(body.reason || "", 40).toLowerCase();
+    const wantsForfeit =
+      Boolean(body.forfeit) ||
+      ["forfeit", "resign", "desistir", "surrender"].includes(leaveReason);
     const walletKey = getPubpaidWalletKey(authUser);
     let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
     store.waiting
@@ -16534,11 +16535,13 @@ async function handleApi(req, res, pathname, searchParams) {
       .forEach((entry) => releasePubpaidMatchEscrow(entry.player, entry.stake));
     store.waiting = store.waiting.filter((entry) => !(entry?.gameId === gameId && entry?.player?.walletKey === walletKey));
     store.matches = store.matches.map((entry) => {
-      if (entry?.gameId !== gameId || !["readying", "active"].includes(entry?.status)) return entry;
+      if (entry?.gameId !== gameId || !["readying", "active", "abandoned"].includes(entry?.status)) return entry;
       const isPlayerOne = entry?.playerOne?.walletKey === walletKey;
       const isPlayerTwo = entry?.playerTwo?.walletKey === walletKey;
       if (!isPlayerOne && !isPlayerTwo) return entry;
       const abandonedBy = isPlayerOne ? "playerOne" : "playerTwo";
+      const rivalSeat = isPlayerOne ? "playerTwo" : "playerOne";
+      const nowIso = new Date().toISOString();
       if (entry.status === "readying") {
         releasePubpaidMatchEscrow(entry.playerOne, entry.stake);
         releasePubpaidMatchEscrow(entry.playerTwo, entry.stake);
@@ -16547,21 +16550,41 @@ async function handleApi(req, res, pathname, searchParams) {
           status: "canceled",
           abandonedBy,
           resultSummary: "Mesa cancelada antes da confirmacao dupla. Escrow liberado.",
-          finishedAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
+          finishedAt: nowIso,
+          updatedAt: nowIso,
+        };
+      }
+      if (!wantsForfeit) {
+        if (entry.status === "abandoned") return entry;
+        return {
+          ...entry,
+          status: "abandoned",
+          abandonedBy,
+          winner: "",
+          deadlineAt: new Date(Date.now() + PUBPAID_PVP_ABANDON_MS).toISOString(),
+          presence: {
+            ...(entry.presence || {}),
+            [abandonedBy]: {
+              ...(entry.presence?.[abandonedBy] || {}),
+              connected: false,
+              lastSeenAt: entry?.presence?.[abandonedBy]?.lastSeenAt || nowIso,
+            },
+          },
+          resultSummary: `${entry?.[abandonedBy]?.name || "Jogador"} desconectou. ${entry?.[rivalSeat]?.name || "Rival"} vence por W.O. se ele nao voltar em 60 segundos.`,
+          updatedAt: nowIso,
         };
       }
       return {
         ...entry,
         status: "finished",
         abandonedBy,
-        winner: isPlayerOne ? "playerTwo" : "playerOne",
+        winner: rivalSeat,
         deadlineAt: "",
         resultSummary: isPlayerOne
-          ? `${entry?.playerOne?.name || "Jogador 1"} saiu da mesa. ${entry?.playerTwo?.name || "Jogador 2"} venceu por abandono.`
-          : `${entry?.playerTwo?.name || "Jogador 2"} saiu da mesa. ${entry?.playerOne?.name || "Jogador 1"} venceu por abandono.`,
-        finishedAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+          ? `${entry?.playerOne?.name || "Jogador 1"} desistiu. ${entry?.playerTwo?.name || "Jogador 2"} venceu por W.O.`
+          : `${entry?.playerTwo?.name || "Jogador 2"} desistiu. ${entry?.playerOne?.name || "Jogador 1"} venceu por W.O.`,
+        finishedAt: nowIso,
+        updatedAt: nowIso,
       };
     });
     store = writePubpaidPvpStore(store);
@@ -16600,17 +16623,44 @@ async function handleApi(req, res, pathname, searchParams) {
     };
     const bothReady = ready.playerOne && ready.playerTwo;
     const coinFlip = bothReady ? match.coinFlip || createPubpaidPvpCoinFlip(match) : match.coinFlip || null;
+    const nowIso = new Date().toISOString();
+    const nextChessState = gameId === "chess" && bothReady
+      ? {
+          ...(match.chessState || createChessPvPState()),
+          whiteSeat: coinFlip.firstSeat,
+          blackSeat: coinFlip.firstSeat === "playerOne" ? "playerTwo" : "playerOne",
+        }
+      : match.chessState || null;
+    const nextPresence = {
+      ...(match.presence || createPubpaidPvpPresence(nowIso)),
+      [seat]: {
+        ...(match.presence?.[seat] || {}),
+        connected: true,
+        lastSeenAt: nowIso,
+      },
+    };
+    if (bothReady) {
+      PUBPAID_PVP_SEATS.forEach((entrySeat) => {
+        nextPresence[entrySeat] = {
+          ...(nextPresence[entrySeat] || {}),
+          connected: true,
+          lastSeenAt: nowIso,
+        };
+      });
+    }
     store.matches[matchIndex] = {
       ...match,
       ready,
       coinFlip,
+      ...(nextChessState ? { chessState: nextChessState } : {}),
+      presence: nextPresence,
       status: bothReady ? "active" : "readying",
-      startedAt: bothReady ? new Date().toISOString() : match.startedAt,
+      startedAt: bothReady ? nowIso : match.startedAt,
       turn: bothReady ? coinFlip.firstSeat : match.turn,
       resultSummary: bothReady
-        ? `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} começa. Damas liberada.`
+        ? `Moeda ${coinFlip.face}: ${coinFlip.firstPlayerName} começa. ${getPubpaidPvpGameLabel(gameId)} liberado.`
         : `${seat === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} confirmou. Aguardando o outro jogador.`,
-      updatedAt: new Date().toISOString(),
+      updatedAt: nowIso,
     };
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, gameId));
@@ -16683,15 +16733,24 @@ async function handleApi(req, res, pathname, searchParams) {
           : `${match?.playerTwo?.name || "Jogador 2"} fechou a mesa de damas.`;
     }
 
+    const nowIso = new Date().toISOString();
     store.matches[matchIndex] = {
       ...match,
+      presence: {
+        ...(match.presence || {}),
+        [seat]: {
+          ...(match.presence?.[seat] || {}),
+          connected: true,
+          lastSeenAt: nowIso,
+        },
+      },
       board: nextBoard,
       lastMove: {
         ...chosenMove,
         seat,
         piece: board?.[chosenMove.from.row]?.[chosenMove.from.col] || "",
         capturedPiece: chosenMove.capture ? board?.[chosenMove.capture.row]?.[chosenMove.capture.col] || "" : "",
-        at: new Date().toISOString(),
+        at: nowIso,
       },
       turn: nextTurn,
       forcedPiece: finished ? null : forcedPiece,
@@ -16699,8 +16758,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
       status: finished ? "finished" : "active",
-      finishedAt: finished ? new Date().toISOString() : "",
-      updatedAt: new Date().toISOString(),
+      finishedAt: finished ? nowIso : "",
+      updatedAt: nowIso,
     };
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "checkers"));
@@ -16790,7 +16849,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary = `${resultSummary} ${nextTurn === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} responde agora.`;
     }
 
-    store.matches[matchIndex] = {
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
       ...match,
       cardsState,
       turn: nextTurn,
@@ -16798,9 +16858,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
       status: finished ? "finished" : "active",
-      finishedAt: finished ? new Date().toISOString() : "",
-      updatedAt: new Date().toISOString(),
-    };
+      finishedAt: finished ? nowIso : "",
+    }, seat, nowIso);
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "cards21"));
   }
@@ -16874,7 +16933,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary = `${resultSummary} ${nextTurn === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} troca agora.`;
     }
 
-    store.matches[matchIndex] = {
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
       ...match,
       pokerState,
       turn: nextTurn,
@@ -16882,9 +16942,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
       status: finished ? "finished" : "active",
-      finishedAt: finished ? new Date().toISOString() : "",
-      updatedAt: new Date().toISOString(),
-    };
+      finishedAt: finished ? nowIso : "",
+    }, seat, nowIso);
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "poker"));
   }
@@ -16984,7 +17043,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary = `${resultSummary} ${nextTurn === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} responde agora.`;
     }
 
-    store.matches[matchIndex] = {
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
       ...match,
       dartsState,
       lastThrow: {
@@ -16992,16 +17052,15 @@ async function handleApi(req, res, pathname, searchParams) {
         seat,
         aimX,
         aimY,
-        at: new Date().toISOString(),
+        at: nowIso,
       },
       turn: nextTurn,
       winner,
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
       status: finished ? "finished" : "active",
-      finishedAt: finished ? new Date().toISOString() : "",
-      updatedAt: new Date().toISOString(),
-    };
+      finishedAt: finished ? nowIso : "",
+    }, seat, nowIso);
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "darts"));
   }
@@ -17094,7 +17153,8 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary = `${resultSummary} ${nextTurn === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} responde agora.`;
     }
 
-    store.matches[matchIndex] = {
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = patchPubpaidPvpMatchPresence({
       ...match,
       diceState,
       turn: nextTurn,
@@ -17102,11 +17162,203 @@ async function handleApi(req, res, pathname, searchParams) {
       resultSummary,
       moveCount: clampInteger(match.moveCount) + 1,
       status: finished ? "finished" : "active",
-      finishedAt: finished ? new Date().toISOString() : "",
-      updatedAt: new Date().toISOString(),
-    };
+      finishedAt: finished ? nowIso : "",
+    }, seat, nowIso);
     store = writePubpaidPvpStore(store);
     return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "dicecups"));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/pvp/truco/play") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para jogar a mesa PvP." });
+    }
+    const body = await parseBody(req);
+    const matchId = cleanShortText(body.matchId || "", 120);
+    const cardIndex = clampInteger(body.cardIndex, -1);
+    if (!matchId) {
+      return sendJson(res, 400, { ok: false, error: "Informe a mesa PvP." });
+    }
+    if (cardIndex < 0 || cardIndex > 2) {
+      return sendJson(res, 400, { ok: false, error: "Escolha uma carta valida." });
+    }
+
+    let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    const matchIndex = store.matches.findIndex((entry) => entry?.id === matchId && entry?.gameId === "truco");
+    if (matchIndex < 0) {
+      return sendJson(res, 404, { ok: false, error: "Mesa PvP nao encontrada." });
+    }
+    const match = store.matches[matchIndex];
+    const walletKey = getPubpaidWalletKey(authUser);
+    const seat = match?.playerOne?.walletKey === walletKey ? "playerOne" : match?.playerTwo?.walletKey === walletKey ? "playerTwo" : "";
+    if (!seat) {
+      return sendJson(res, 403, { ok: false, error: "Essa mesa pertence a outros jogadores." });
+    }
+    if (match.status !== "active") {
+      return sendJson(res, 400, { ok: false, error: "Essa mesa PvP nao esta mais ativa." });
+    }
+    if (match.turn !== seat) {
+      return sendJson(res, 409, { ok: false, error: "Espere a vez do outro jogador." });
+    }
+
+    const trucoState = match?.trucoState || createTrucoPvPState();
+    const cardsKey = seat === "playerOne" ? "playerOneCards" : "playerTwoCards";
+    const card = Array.isArray(trucoState[cardsKey]) ? trucoState[cardsKey][cardIndex] : null;
+    if (!card) {
+      return sendJson(res, 400, { ok: false, error: "Essa carta ja foi jogada." });
+    }
+    trucoState[cardsKey][cardIndex] = null;
+    trucoState.table = Array.isArray(trucoState.table) ? trucoState.table : [];
+    trucoState.table.push({ seat, card, at: new Date().toISOString() });
+
+    let nextTurn = seat === "playerOne" ? "playerTwo" : "playerOne";
+    let winner = "";
+    let finished = false;
+    let resultSummary = `${seat === "playerOne" ? match?.playerOne?.name || "Jogador 1" : match?.playerTwo?.name || "Jogador 2"} jogou ${card.rank} de ${card.suit}.`;
+
+    if (trucoState.table.length >= 2) {
+      const [firstPlay, secondPlay] = trucoState.table.slice(-2);
+      let roundWinner = "";
+      if (firstPlay.card.strength > secondPlay.card.strength) roundWinner = firstPlay.seat;
+      if (secondPlay.card.strength > firstPlay.card.strength) roundWinner = secondPlay.seat;
+      if (roundWinner === "playerOne") trucoState.playerOneScore += 1;
+      if (roundWinner === "playerTwo") trucoState.playerTwoScore += 1;
+      trucoState.history.push({
+        round: trucoState.round,
+        playerOne: firstPlay.seat === "playerOne" ? firstPlay.card : secondPlay.card,
+        playerTwo: firstPlay.seat === "playerTwo" ? firstPlay.card : secondPlay.card,
+        winner: roundWinner,
+      });
+      resultSummary = roundWinner
+        ? `${match?.[roundWinner]?.name || "Jogador"} levou a mao ${trucoState.round}.`
+        : `A mao ${trucoState.round} empatou.`;
+      trucoState.table = [];
+      if (trucoState.playerOneScore >= 2 || trucoState.playerTwoScore >= 2 || trucoState.round >= trucoState.maxRounds) {
+        finished = true;
+        if (trucoState.playerOneScore > trucoState.playerTwoScore) {
+          winner = "playerOne";
+          resultSummary = `${match?.playerOne?.name || "Jogador 1"} venceu o truco por ${trucoState.playerOneScore} a ${trucoState.playerTwoScore}.`;
+        } else if (trucoState.playerTwoScore > trucoState.playerOneScore) {
+          winner = "playerTwo";
+          resultSummary = `${match?.playerTwo?.name || "Jogador 2"} venceu o truco por ${trucoState.playerTwoScore} a ${trucoState.playerOneScore}.`;
+        } else {
+          resultSummary = `O truco fechou empatado em ${trucoState.playerOneScore} a ${trucoState.playerTwoScore}.`;
+        }
+      } else {
+        trucoState.round += 1;
+        nextTurn = roundWinner || "playerOne";
+        resultSummary = `${resultSummary} Mao ${trucoState.round}: ${match?.[nextTurn]?.name || "Jogador"} abre.`;
+      }
+    }
+
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = {
+      ...match,
+      trucoState,
+      presence: {
+        ...(match.presence || {}),
+        [seat]: {
+          ...(match.presence?.[seat] || {}),
+          connected: true,
+          lastSeenAt: nowIso,
+        },
+      },
+      turn: nextTurn,
+      winner,
+      resultSummary,
+      moveCount: clampInteger(match.moveCount) + 1,
+      status: finished ? "finished" : "active",
+      finishedAt: finished ? nowIso : "",
+      updatedAt: nowIso,
+    };
+    store = writePubpaidPvpStore(store);
+    return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "truco"));
+  }
+
+  if (req.method === "POST" && pathname === "/api/pubpaid/pvp/chess/move") {
+    const authUser = readCatalogoAuthSession(req);
+    if (!authUser) {
+      return sendJson(res, 401, { ok: false, error: "Entre com Google para jogar a mesa PvP." });
+    }
+    if (!Chess) {
+      return sendJson(res, 503, { ok: false, error: "Motor de xadrez indisponivel no servidor." });
+    }
+    const body = await parseBody(req);
+    const matchId = cleanShortText(body.matchId || "", 120);
+    const from = cleanShortText(body.from || "", 4).toLowerCase();
+    const to = cleanShortText(body.to || "", 4).toLowerCase();
+    const promotion = cleanShortText(body.promotion || "q", 1).toLowerCase() || "q";
+    if (!matchId || !/^[a-h][1-8]$/.test(from) || !/^[a-h][1-8]$/.test(to)) {
+      return sendJson(res, 400, { ok: false, error: "Informe origem e destino validos." });
+    }
+
+    let store = cleanupPubpaidPvpStore(readPubpaidPvpStore());
+    const matchIndex = store.matches.findIndex((entry) => entry?.id === matchId && entry?.gameId === "chess");
+    if (matchIndex < 0) {
+      return sendJson(res, 404, { ok: false, error: "Mesa PvP nao encontrada." });
+    }
+    const match = store.matches[matchIndex];
+    const walletKey = getPubpaidWalletKey(authUser);
+    const seat = match?.playerOne?.walletKey === walletKey ? "playerOne" : match?.playerTwo?.walletKey === walletKey ? "playerTwo" : "";
+    if (!seat) {
+      return sendJson(res, 403, { ok: false, error: "Essa mesa pertence a outros jogadores." });
+    }
+    if (match.status !== "active") {
+      return sendJson(res, 400, { ok: false, error: "Essa mesa PvP nao esta mais ativa." });
+    }
+    const chessState = match?.chessState || createChessPvPState();
+    const ownColor = chessState.whiteSeat === seat ? "w" : "b";
+    const chess = new Chess(chessState.fen || undefined);
+    if (chess.turn() !== ownColor) {
+      return sendJson(res, 409, { ok: false, error: "Espere a vez do outro jogador." });
+    }
+    const move = chess.move({ from, to, promotion });
+    if (!move) {
+      return sendJson(res, 400, { ok: false, error: "Lance invalido para o xadrez atual." });
+    }
+    chessState.fen = chess.fen();
+    chessState.history = Array.isArray(chessState.history) ? chessState.history : [];
+    chessState.history.push({ seat, from, to, san: move.san, at: new Date().toISOString() });
+
+    const whiteSeat = chessState.whiteSeat || "playerOne";
+    const blackSeat = chessState.blackSeat || "playerTwo";
+    let nextTurn = chess.turn() === "w" ? whiteSeat : blackSeat;
+    let winner = "";
+    let finished = false;
+    let resultSummary = `${match?.[seat]?.name || "Jogador"} jogou ${move.san}.`;
+    if (chess.isCheckmate()) {
+      finished = true;
+      winner = seat;
+      resultSummary = `${match?.[seat]?.name || "Jogador"} deu xeque-mate com ${move.san}.`;
+    } else if (chess.isDraw()) {
+      finished = true;
+      resultSummary = "A mesa de xadrez terminou empatada.";
+    } else if (chess.inCheck()) {
+      resultSummary = `${resultSummary} Xeque.`;
+    }
+
+    const nowIso = new Date().toISOString();
+    store.matches[matchIndex] = {
+      ...match,
+      chessState,
+      presence: {
+        ...(match.presence || {}),
+        [seat]: {
+          ...(match.presence?.[seat] || {}),
+          connected: true,
+          lastSeenAt: nowIso,
+        },
+      },
+      turn: nextTurn,
+      winner,
+      resultSummary,
+      moveCount: clampInteger(match.moveCount) + 1,
+      status: finished ? "finished" : "active",
+      finishedAt: finished ? nowIso : "",
+      updatedAt: nowIso,
+    };
+    store = writePubpaidPvpStore(store);
+    return sendJson(res, 200, buildPubpaidPvpStatePayload(store, authUser, "chess"));
   }
 
   if (req.method === "POST" && pathname === "/api/pubpaid/deposits") {
@@ -17873,10 +18125,12 @@ function buildPubpaidAdminPayload() {
   };
 }
 
-const PUBPAID_PVP_ENABLED_GAMES = new Set(["checkers", "cards21", "poker", "darts", "dicecups"]);
+const PUBPAID_PVP_ENABLED_GAMES = new Set(["checkers", "chess", "cards21", "poker", "truco", "darts", "dicecups"]);
 const PUBPAID_PVP_WAIT_MS = 1000 * 60 * 15;
 const PUBPAID_PVP_MATCH_MS = 1000 * 60 * 60 * 6;
 const PUBPAID_PVP_ABANDON_MS = 1000 * 60;
+const PUBPAID_PVP_DISCONNECT_GRACE_MS = 1000 * 10;
+const PUBPAID_PVP_SEATS = ["playerOne", "playerTwo"];
 
 function emptyPubpaidPvpStore() {
   return {
@@ -17910,6 +18164,32 @@ function cleanupPubpaidPvpStore(store = emptyPubpaidPvpStore()) {
   const now = Date.now();
   const expiredWaiting = [];
   const matches = (Array.isArray(store.matches) ? store.matches : []).map((entry) => {
+    if (entry?.status === "active") {
+      const staleSeat = PUBPAID_PVP_SEATS.find((seat) => {
+        const lastSeen = new Date(entry?.presence?.[seat]?.lastSeenAt || entry?.startedAt || 0).getTime();
+        return lastSeen && now - lastSeen > PUBPAID_PVP_DISCONNECT_GRACE_MS;
+      });
+      if (staleSeat) {
+        const rivalSeat = staleSeat === "playerOne" ? "playerTwo" : "playerOne";
+        return {
+          ...entry,
+          status: "abandoned",
+          abandonedBy: staleSeat,
+          deadlineAt: new Date(now + PUBPAID_PVP_ABANDON_MS).toISOString(),
+          presence: {
+            ...(entry.presence || {}),
+            [staleSeat]: {
+              ...(entry.presence?.[staleSeat] || {}),
+              connected: false,
+              lastSeenAt: entry?.presence?.[staleSeat]?.lastSeenAt || entry?.startedAt || new Date(now).toISOString(),
+            },
+          },
+          resultSummary: `${entry?.[staleSeat]?.name || "Jogador"} desconectou. ${entry?.[rivalSeat]?.name || "Rival"} vence por W.O. se ele nao voltar em 60 segundos.`,
+          updatedAt: new Date().toISOString(),
+        };
+      }
+      return entry;
+    }
     if (entry?.status !== "abandoned") return entry;
     const deadline = new Date(entry.deadlineAt || 0).getTime();
     if (!deadline || now < deadline) return entry;
@@ -18085,6 +18365,25 @@ function settleFinishedPubpaidPvpMatches(store = emptyPubpaidPvpStore()) {
 function normalizePubpaidPvpGameId(value = "") {
   const normalized = safeString(value, 40).toLowerCase();
   return PUBPAID_PVP_ENABLED_GAMES.has(normalized) ? normalized : "";
+}
+
+function getPubpaidPvpGameLabel(gameId = "") {
+  return {
+    checkers: "Damas",
+    chess: "Xadrez",
+    cards21: "21",
+    poker: "Poker",
+    truco: "Truco",
+    darts: "Dardos",
+    dicecups: "Dados",
+  }[gameId] || "Mesa";
+}
+
+function createPubpaidPvpPresence(nowIso = new Date().toISOString()) {
+  return {
+    playerOne: { connected: true, lastSeenAt: nowIso },
+    playerTwo: { connected: true, lastSeenAt: nowIso },
+  };
 }
 
 function createCheckersPvPBoard() {
@@ -18276,6 +18575,67 @@ function createDicecupsPvPState() {
   };
 }
 
+function createTrucoPvpDeck() {
+  const suits = ["ouros", "espadas", "copas", "paus"];
+  const ranks = [
+    { rank: "4", strength: 1 },
+    { rank: "5", strength: 2 },
+    { rank: "6", strength: 3 },
+    { rank: "7", strength: 4 },
+    { rank: "Q", strength: 5 },
+    { rank: "J", strength: 6 },
+    { rank: "K", strength: 7 },
+    { rank: "A", strength: 8 },
+    { rank: "2", strength: 9 },
+    { rank: "3", strength: 10 },
+  ];
+  const deck = [];
+  suits.forEach((suit) => {
+    ranks.forEach((entry) => deck.push({ suit, rank: entry.rank, strength: entry.strength }));
+  });
+  for (let index = deck.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(Math.random() * (index + 1));
+    const temp = deck[index];
+    deck[index] = deck[swapIndex];
+    deck[swapIndex] = temp;
+  }
+  return deck;
+}
+
+function drawTrucoPvpCards(deck, count) {
+  const cards = [];
+  for (let index = 0; index < count; index += 1) {
+    const card = deck.pop();
+    if (card) cards.push(card);
+  }
+  return cards;
+}
+
+function createTrucoPvPState() {
+  const deck = createTrucoPvpDeck();
+  return {
+    deck,
+    round: 1,
+    maxRounds: 3,
+    playerOneScore: 0,
+    playerTwoScore: 0,
+    playerOneCards: drawTrucoPvpCards(deck, 3),
+    playerTwoCards: drawTrucoPvpCards(deck, 3),
+    table: [],
+    history: [],
+  };
+}
+
+function createChessPvPState() {
+  const chess = Chess ? new Chess() : null;
+  return {
+    fen: chess ? chess.fen() : "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+    whiteSeat: "playerOne",
+    blackSeat: "playerTwo",
+    history: [],
+  };
+}
+
 function clampDartsAimValue(value, fallback = 50) {
   const numeric = Number(value);
   if (!Number.isFinite(numeric)) return fallback;
@@ -18349,71 +18709,101 @@ function getCards21SeatCardsKey(seat = "") {
   return seat === "playerOne" ? "playerOneCards" : seat === "playerTwo" ? "playerTwoCards" : "";
 }
 
+function patchPubpaidPvpMatchPresence(match = {}, seat = "", nowIso = new Date().toISOString()) {
+  if (!seat) return match;
+  return {
+    ...match,
+    presence: {
+      ...(match.presence || {}),
+      [seat]: {
+        ...(match.presence?.[seat] || {}),
+        connected: true,
+        lastSeenAt: nowIso,
+      },
+    },
+    updatedAt: nowIso,
+  };
+}
+
 function createPubpaidPvpMatch(gameId, stake, playerOne, playerTwo) {
+  const nowIso = new Date().toISOString();
   const match = {
     id: createRecordId("pvp"),
     gameId,
     stake,
-    status: "active",
-    createdAt: new Date().toISOString(),
-    startedAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    status: "readying",
+    createdAt: nowIso,
+    startedAt: "",
+    matchedAt: nowIso,
+    updatedAt: nowIso,
     playerOne,
     playerTwo,
+    presence: createPubpaidPvpPresence(nowIso),
+    ready: { playerOne: false, playerTwo: false },
+    coinFlip: null,
+    abandonedBy: "",
+    deadlineAt: "",
     winner: "",
     resultSummary: "",
     moveCount: 0,
+    turn: "",
   };
 
   if (gameId === "checkers") {
     return {
       ...match,
-      status: "readying",
       board: createCheckersPvPBoard(),
-      ready: { playerOne: false, playerTwo: false },
-      coinFlip: null,
       forcedPiece: null,
       lastMove: null,
-      matchedAt: new Date().toISOString(),
-      startedAt: "",
-      turn: "",
       resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar.",
+    };
+  }
+
+  if (gameId === "chess") {
+    return {
+      ...match,
+      chessState: createChessPvPState(),
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar o xadrez.",
     };
   }
 
   if (gameId === "cards21") {
     return {
       ...match,
-      turn: "playerOne",
       cardsState: createCards21PvPState(),
-      resultSummary: `${playerOne?.name || "Jogador 1"} compra ou para primeiro.`,
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar o 21.",
     };
   }
 
   if (gameId === "poker") {
     return {
       ...match,
-      turn: "playerOne",
       pokerState: createPokerPvPState(),
-      resultSummary: `${playerOne?.name || "Jogador 1"} segura cartas e troca primeiro.`,
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar o poker.",
+    };
+  }
+
+  if (gameId === "truco") {
+    return {
+      ...match,
+      trucoState: createTrucoPvPState(),
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar o truco.",
     };
   }
 
   if (gameId === "darts") {
     return {
       ...match,
-      turn: "playerOne",
       dartsState: createDartsPvPState(),
-      resultSummary: `${playerOne?.name || "Jogador 1"} mira primeiro no alvo.`,
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar os dardos.",
     };
   }
 
   if (gameId === "dicecups") {
     return {
       ...match,
-      turn: "playerOne",
       diceState: createDicecupsPvPState(),
-      resultSummary: `${playerOne?.name || "Jogador 1"} escolhe a soma primeiro.`,
+      resultSummary: "Jogador real encontrado. Os dois precisam confirmar para iniciar os dados.",
     };
   }
 
@@ -18429,6 +18819,52 @@ function createPubpaidPvpCoinFlip(match = {}) {
     firstSeat,
     firstPlayerName: firstPlayer.name || firstPlayer.email || (firstSeat === "playerOne" ? "Jogador 1" : "Jogador 2"),
     decidedAt: new Date().toISOString()
+  };
+}
+
+function getPubpaidPvpSeatForWallet(match = {}, walletKey = "") {
+  const key = safeString(walletKey || "", 180).toLowerCase();
+  if (!key) return "";
+  if (match?.playerOne?.walletKey === key) return "playerOne";
+  if (match?.playerTwo?.walletKey === key) return "playerTwo";
+  return "";
+}
+
+function touchPubpaidPvpPresence(store = emptyPubpaidPvpStore(), authUser = {}, gameId = "") {
+  const walletKey = getPubpaidWalletKey(authUser);
+  if (!walletKey || !gameId) return store;
+  const nowIso = new Date().toISOString();
+  return {
+    ...store,
+    matches: (Array.isArray(store.matches) ? store.matches : []).map((match) => {
+      if (match?.gameId !== gameId || !["active", "abandoned"].includes(match?.status)) return match;
+      const seat = getPubpaidPvpSeatForWallet(match, walletKey);
+      if (!seat) return match;
+      const nextPresence = {
+        ...(match.presence || {}),
+        [seat]: {
+          ...(match.presence?.[seat] || {}),
+          connected: true,
+          lastSeenAt: nowIso,
+        },
+      };
+      if (match.status === "abandoned" && match.abandonedBy === seat) {
+        return {
+          ...match,
+          status: "active",
+          abandonedBy: "",
+          deadlineAt: "",
+          presence: nextPresence,
+          resultSummary: `${match?.[seat]?.name || "Jogador"} reconectou. A mesa voltou ao estado ativo.`,
+          updatedAt: nowIso,
+        };
+      }
+      return {
+        ...match,
+        presence: nextPresence,
+        updatedAt: match.updatedAt || nowIso,
+      };
+    }),
   };
 }
 

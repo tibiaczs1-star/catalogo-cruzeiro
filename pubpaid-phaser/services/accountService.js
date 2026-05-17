@@ -174,7 +174,7 @@ export async function joinPubpaidPvpQueue(gameId = "pool", stake = 10, profile =
   }
 }
 
-export async function leavePubpaidPvpQueue(gameId = "pool") {
+export async function leavePubpaidPvpQueue(gameId = "pool", options = {}) {
   try {
     const response = await fetch("./api/pubpaid/pvp/leave", {
       method: "POST",
@@ -183,7 +183,11 @@ export async function leavePubpaidPvpQueue(gameId = "pool") {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ gameId })
+      body: JSON.stringify({
+        gameId,
+        reason: options.reason || "",
+        forfeit: Boolean(options.forfeit)
+      })
     });
     const payload = await response.json().catch(() => null);
     if (!response.ok || !payload?.ok) {

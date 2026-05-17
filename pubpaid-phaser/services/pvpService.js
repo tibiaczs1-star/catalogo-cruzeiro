@@ -54,6 +54,22 @@ export async function moveCheckers(matchId, move) {
   return requestPvp("./api/pubpaid/pvp/checkers/move", { matchId, move });
 }
 
+export async function drawPoker(matchId, held = []) {
+  return requestPvp("./api/pubpaid/pvp/poker/draw", { matchId, held });
+}
+
+export async function guessDicecups(matchId, guess) {
+  return requestPvp("./api/pubpaid/pvp/dicecups/guess", { matchId, guess });
+}
+
+export async function playTrucoCard(matchId, cardIndex) {
+  return requestPvp("./api/pubpaid/pvp/truco/play", { matchId, cardIndex });
+}
+
+export async function moveChess(matchId, from, to, promotion = "q") {
+  return requestPvp("./api/pubpaid/pvp/chess/move", { matchId, from, to, promotion });
+}
+
 export async function confirmPvpReady(matchId, gameId = "checkers") {
   return requestPvp("./api/pubpaid/pvp/ready", { matchId, gameId });
 }

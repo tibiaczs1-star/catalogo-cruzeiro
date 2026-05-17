@@ -23,8 +23,9 @@
     "sync:online-local": "node scripts/sync-online-local.js"
   },
   "dependencies": {
-    "phaser": "^3.90.0",
+    "chess.js": "^1.4.0",
     "pdfkit": "^0.17.2",
+    "phaser": "^3.90.0",
     "qrcode": "^1.5.4"
   },
   "engines": {

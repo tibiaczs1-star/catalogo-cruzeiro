@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20260517-avatarfix1";
+const VERSION = "20260517-pvpgames1";
 const CACHE_PREFIXES = ["catalogo-", "pubpaid", "ppg"];
 
 self.addEventListener("install", (event) => {

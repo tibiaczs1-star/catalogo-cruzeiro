@@ -21,10 +21,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-avatarfix1" />
-    <script defer src="./site-google-auth.js?v=20260517-avatarfix1"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-pvpgames1" />
+    <script defer src="./site-google-auth.js?v=20260517-pvpgames1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-avatarfix1"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-pvpgames1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -234,6 +234,22 @@
                   <span>Damas</span>
                   <strong>saldo real</strong>
                 </button>
+                <button type="button" class="ppg-dom-game-card is-chess" data-dom-start-game="chess">
+                  <span>Xadrez</span>
+                  <strong>PvP real</strong>
+                </button>
+                <button type="button" class="ppg-dom-game-card is-poker" data-dom-start-game="poker">
+                  <span>Poker</span>
+                  <strong>troca 5 cartas</strong>
+                </button>
+                <button type="button" class="ppg-dom-game-card is-truco" data-dom-start-game="truco">
+                  <span>Truco</span>
+                  <strong>melhor de 3</strong>
+                </button>
+                <button type="button" class="ppg-dom-game-card is-dicecups" data-dom-start-game="dicecups">
+                  <span>Dados</span>
+                  <strong>soma PvP</strong>
+                </button>
               </div>
               <div class="ppg-dom-lobby-foot">
                 <span>saldo livre <strong data-dom-lobby-balance>0</strong></span>
@@ -318,6 +334,23 @@
                 <span data-dom-checkers-status>Escolha uma peça.</span>
               </div>
               <div class="ppg-dom-actions">
+                <button type="button" class="danger" data-dom-forfeit-checkers>Desistir</button>
+                <button type="button" data-dom-open-lobby>Lobby</button>
+              </div>
+            </aside>
+
+            <aside class="ppg-dom-table" data-dom-table hidden>
+              <header>
+                <span class="ppg-kicker" data-dom-table-kicker>mesa PvP</span>
+                <h2 data-dom-table-title>Mesa real</h2>
+              </header>
+              <div class="ppg-dom-table-body" data-dom-table-body></div>
+              <div class="ppg-dom-score">
+                <strong data-dom-table-score>0 x 0</strong>
+                <span data-dom-table-status>Aguardando jogada.</span>
+              </div>
+              <div class="ppg-dom-actions" data-dom-table-actions>
+                <button type="button" class="danger" data-dom-generic-forfeit>Desistir</button>
                 <button type="button" data-dom-open-lobby>Lobby</button>
               </div>
             </aside>

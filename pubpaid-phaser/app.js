@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-avatarfix1";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-avatarfix1";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-pvpgames1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-pvpgames1";
 import { closePanel } from "./ui/panelActions.js";
-import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-avatarfix1";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-avatarfix1";
-import { IntroScene } from "./scenes/IntroScene.js?v=20260517-avatarfix1";
-import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-avatarfix1";
-import { StreetScene } from "./scenes/StreetScene.js?v=20260517-avatarfix1";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-avatarfix1";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-avatarfix1";
-import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-avatarfix1";
-import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-avatarfix1";
-import { UIScene } from "./scenes/UIScene.js?v=20260517-avatarfix1";
+import { savePubpaidProfile, syncPubpaidAccount, syncPubpaidProfile } from "./services/accountService.js?v=20260517-pvpgames1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-pvpgames1";
+import { IntroScene } from "./scenes/IntroScene.js?v=20260517-pvpgames1";
+import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js?v=20260517-pvpgames1";
+import { StreetScene } from "./scenes/StreetScene.js?v=20260517-pvpgames1";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-pvpgames1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-pvpgames1";
+import { PoolGameScene } from "./scenes/PoolGameScene.js?v=20260517-pvpgames1";
+import { CheckersGameScene } from "./scenes/CheckersGameScene.js?v=20260517-pvpgames1";
+import { UIScene } from "./scenes/UIScene.js?v=20260517-pvpgames1";
 
-const PUBPAID_BUILD_VERSION = "20260517-avatarfix1";
+const PUBPAID_BUILD_VERSION = "20260517-pvpgames1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -482,7 +482,7 @@ async function requestFullscreen() {
 }
 
 async function requestLandscapeLock() {
-  if (!needsLandscape() || orientationLocked) return false;
+  if (!needsLandscape() || orientationLocked || isTouchDevice) return false;
   const orientationApi = window.screen?.orientation;
   if (!orientationApi?.lock) return false;
   try {
@@ -1013,6 +1013,7 @@ window.setTimeout(() => {
 
 window.addEventListener("resize", syncOrientationGate);
 window.addEventListener("orientationchange", syncOrientationGate);
+window.visualViewport?.addEventListener?.("resize", syncOrientationGate);
 document.addEventListener("fullscreenchange", syncFullscreenWarning);
 document.addEventListener("webkitfullscreenchange", syncFullscreenWarning);
 
@@ -1082,6 +1083,10 @@ game.events.on("pubpaid:assets-ready", () => {
 });
 
 game.events.on("pubpaid:request-fullscreen", () => {
+  if (isOrientationBlocked()) {
+    syncOrientationGate();
+    return;
+  }
   void Promise.all([requestFullscreen(), requestLandscapeLock()]).then(syncFullscreenWarning);
 });
 
