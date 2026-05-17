@@ -1,7 +1,7 @@
 import { applyPixelTextureFilters } from "../core/assetRegistry.js";
 import { updateGameState } from "../core/gameState.js";
 
-const ASSET_VERSION = "20260517-mobile-matchmaking-flow2";
+const ASSET_VERSION = "20260517-mobile-fix-stage-wallet1";
 const versionedAsset = (path) => `${path}?v=${ASSET_VERSION}`;
 
 export class BootScene extends Phaser.Scene {
@@ -56,8 +56,8 @@ export class BootScene extends Phaser.Scene {
     updateGameState({
       currentScene: "intro",
       focus: "placa PUB PAID",
-      objective: "Liberar som e tela cheia",
-      prompt: "Toque em Ativar e começar para liberar áudio, tela cheia e iniciar a abertura."
+      objective: "Entrar no PubPaid",
+      prompt: "Entre com Google e comece. O som pode ser ligado depois."
     });
   }
 }

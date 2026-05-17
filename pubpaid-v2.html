@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-mobile-matchmaking-flow2" />
-    <script defer src="./site-google-auth.js?v=20260517-mobile-matchmaking-flow2"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-mobile-fix-stage-wallet1" />
+    <script defer src="./site-google-auth.js?v=20260517-mobile-fix-stage-wallet1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-mobile-matchmaking-flow2"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-mobile-fix-stage-wallet1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -81,11 +81,11 @@
           </button>
           <div class="ppg-permission-gate" data-permission-gate hidden>
             <section class="ppg-permission-card" aria-label="Permissões para iniciar PubPaid 2.0">
-              <p class="ppg-kicker">antes da abertura</p>
-              <h2>Ative som e tela cheia.</h2>
-              <p>Toque para liberar o som e começar a abertura. No celular, o jogo segue mesmo sem tela cheia.</p>
+              <p class="ppg-kicker">entrada</p>
+              <h2>Comece sua partida.</h2>
+              <p>O jogo abre direto. O som fica opcional e pode ser ligado depois.</p>
               <button class="ppg-button primary" type="button" data-start-experience>
-                Ativar e começar
+                Começar agora
               </button>
               <button class="ppg-button" type="button" data-dom-open-wallet>
                 Abrir carteira
@@ -130,7 +130,7 @@
                 Sem saldo aprovado, mesas pagas ficam bloqueadas.
               </p>
               <div class="ppg-splash-actions">
-                <button class="ppg-button primary" type="button" data-accept-terms>Ativar abertura</button>
+                <button class="ppg-button primary" type="button" data-accept-terms>Começar agora</button>
               </div>
             </section>
           </div>
@@ -365,7 +365,7 @@
                 </label>
                 <div class="ppg-wallet-actions">
                   <button type="button" class="primary" data-wallet-generate-deposit>Gerar QR</button>
-                  <button type="button" data-wallet-register-deposit disabled>Avisar admin</button>
+                  <button type="button" data-wallet-register-deposit disabled>Já fiz o pagamento</button>
                 </div>
                 <div class="ppg-wallet-qr" data-wallet-pix-qr>
                   <p>Gere o QR Code para abrir a etapa de confirmação.</p>
@@ -380,7 +380,7 @@
                 </label>
                 <div class="ppg-wallet-actions">
                   <button type="button" data-wallet-request-withdrawal>Pedir retirada</button>
-                  <button type="button" data-dom-refresh-wallet>Sincronizar</button>
+                  <button type="button" data-dom-refresh-wallet>Atualizar saldo</button>
                 </div>
               </section>
 

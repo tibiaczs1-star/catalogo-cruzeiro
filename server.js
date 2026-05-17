@@ -13761,6 +13761,9 @@ function normalizePubpaidWalletRecord(item = {}) {
   const lockedWithdrawalCoins = coerceMoney(item.lockedWithdrawalCoins ?? lockedLegacy);
   const lockedMatchCoins = coerceMoney(item.lockedMatchCoins ?? item.lockedPvpCoins ?? 0);
   const balanceCoins = coerceMoney(item.balanceCoins ?? item.balance ?? 0);
+  const manualApprovedBalanceCoins = coerceMoney(
+    item.manualApprovedBalanceCoins ?? item.manualApprovedCoins ?? item.matchPayoutCoins ?? item.bonusCoins ?? 0
+  );
   return {
     ...item,
     balanceCoins,
@@ -13769,6 +13772,7 @@ function normalizePubpaidWalletRecord(item = {}) {
     lockedWithdrawalCoins,
     totalApprovedDeposits: coerceMoney(item.totalApprovedDeposits ?? item.depositsApproved ?? 0),
     totalApprovedWithdrawals: coerceMoney(item.totalApprovedWithdrawals ?? item.withdrawalsApproved ?? 0),
+    manualApprovedBalanceCoins,
     locked: Boolean(item.locked ?? (lockedWithdrawalCoins + lockedMatchCoins > 0))
   };
 }
@@ -13824,6 +13828,7 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
         lockedWithdrawalCoins: normalizePubpaidMoney(walletRecord.lockedWithdrawalCoins ?? walletRecord.locked),
         totalApprovedDeposits: normalizePubpaidMoney(walletRecord.totalApprovedDeposits ?? walletRecord.approvedDeposits),
         totalApprovedWithdrawals: normalizePubpaidMoney(walletRecord.totalApprovedWithdrawals ?? walletRecord.approvedWithdrawals),
+        manualApprovedBalanceCoins: normalizePubpaidMoney(walletRecord.manualApprovedBalanceCoins ?? 0),
         createdAt: safeString(walletRecord.createdAt || "", 40),
         updatedAt: safeString(walletRecord.updatedAt || "", 40)
       }
@@ -13840,6 +13845,7 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
       lockedWithdrawalCoins: 0,
       totalApprovedDeposits: 0,
       totalApprovedWithdrawals: 0,
+      manualApprovedBalanceCoins: 0,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
@@ -13857,6 +13863,7 @@ function getPubpaidWallet(authUser = {}, { createIfMissing = true } = {}) {
         lockedWithdrawalCoins: 0,
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
+        manualApprovedBalanceCoins: 0,
         createdAt: wallet.createdAt,
         updatedAt: wallet.updatedAt
       }
@@ -13884,6 +13891,7 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
     lockedWithdrawalCoins: 0,
     totalApprovedDeposits: 0,
     totalApprovedWithdrawals: 0,
+    manualApprovedBalanceCoins: 0,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };
@@ -13893,6 +13901,7 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
   next.balanceCoins = Math.max(0, normalizePubpaidMoney(next.balanceCoins));
   next.lockedMatchCoins = Math.max(0, normalizePubpaidMoney(next.lockedMatchCoins));
   next.lockedWithdrawalCoins = Math.max(0, normalizePubpaidMoney(next.lockedWithdrawalCoins));
+  next.manualApprovedBalanceCoins = Math.max(0, normalizePubpaidMoney(next.manualApprovedBalanceCoins ?? 0));
   next.availableCoins = Math.max(0, normalizePubpaidMoney(next.balanceCoins - next.lockedMatchCoins - next.lockedWithdrawalCoins));
   next.totalApprovedDeposits = Math.max(0, normalizePubpaidMoney(next.totalApprovedDeposits));
   next.totalApprovedWithdrawals = Math.max(0, normalizePubpaidMoney(next.totalApprovedWithdrawals));
@@ -13911,6 +13920,7 @@ function updatePubpaidWallet(authUser = {}, updater = null) {
       lockedWithdrawalCoins: next.lockedWithdrawalCoins,
       totalApprovedDeposits: next.totalApprovedDeposits,
       totalApprovedWithdrawals: next.totalApprovedWithdrawals,
+      manualApprovedBalanceCoins: normalizePubpaidMoney(next.manualApprovedBalanceCoins ?? 0),
       createdAt: safeString(next.createdAt || "", 40) || new Date().toISOString(),
       updatedAt: next.updatedAt
     }
@@ -13953,8 +13963,9 @@ function buildPubpaidAccountPayload(authUser = {}) {
           availableCoins: normalizePubpaidMoney(wallet.availableCoins ?? (wallet.balanceCoins - wallet.lockedMatchCoins - wallet.lockedWithdrawalCoins)),
           lockedMatchCoins: normalizePubpaidMoney(wallet.lockedMatchCoins),
           lockedWithdrawalCoins: normalizePubpaidMoney(wallet.lockedWithdrawalCoins),
-        totalApprovedDeposits: normalizePubpaidMoney(wallet.totalApprovedDeposits),
-        totalApprovedWithdrawals: normalizePubpaidMoney(wallet.totalApprovedWithdrawals),
+          totalApprovedDeposits: normalizePubpaidMoney(wallet.totalApprovedDeposits),
+          totalApprovedWithdrawals: normalizePubpaidMoney(wallet.totalApprovedWithdrawals),
+          manualApprovedBalanceCoins: normalizePubpaidMoney(wallet.manualApprovedBalanceCoins ?? 0),
           walletKey,
           createdAt: wallet.createdAt || "",
           updatedAt: wallet.updatedAt || ""
@@ -13966,6 +13977,7 @@ function buildPubpaidAccountPayload(authUser = {}) {
           lockedWithdrawalCoins: 0,
           totalApprovedDeposits: 0,
           totalApprovedWithdrawals: 0,
+          manualApprovedBalanceCoins: 0,
           walletKey,
           createdAt: "",
           updatedAt: ""
@@ -16936,7 +16948,7 @@ async function handleApi(req, res, pathname, searchParams) {
         confirmationMode: "manual"
       },
       reviewDeadlineAt,
-      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid.html", 260),
+      sourcePage: cleanShortText(body.sourcePage || tracking.pagePath || "/pubpaid-v2.html", 260),
       visitorId: tracking.visitorId || tracking.cookieVisitorId,
       sessionId: tracking.sessionId || tracking.cookieSessionId,
       city: tracking.city,
@@ -16950,7 +16962,7 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 201, {
       ok: true,
       item: nextItem,
-      message: "Deposito PubPaid registrado. Os creditos ficam pendentes por ate 3 horas ou ate a confirmacao manual no admin."
+      message: "Pagamento informado. Aguarde confirmação para o saldo ficar jogável."
     });
   }
 
@@ -17747,9 +17759,11 @@ function creditPubpaidMatchPayout(player = {}, amount = 0) {
   const walletKey = safeString(player?.walletKey || "", 180).toLowerCase();
   const wallet = getPubpaidWalletRecordByKey(walletKey);
   if (!wallet) return null;
+  const payout = normalizePubpaidMoney(amount);
   return savePubpaidWalletRecordByKey(walletKey, {
     ...wallet,
-    balanceCoins: normalizePubpaidMoney(wallet.balanceCoins + normalizePubpaidMoney(amount)),
+    balanceCoins: normalizePubpaidMoney(wallet.balanceCoins + payout),
+    manualApprovedBalanceCoins: normalizePubpaidMoney((wallet.manualApprovedBalanceCoins || 0) + payout),
     playerName: player.name,
   });
 }

@@ -1,14 +1,14 @@
 # Current State
 
-Updated: 2026-05-17T01:37:14.506Z
+Updated: 2026-05-17T03:10:00.000Z
 
 ## Active Goal
 
-- PubPaid 2.0 mobile matchmaking flow
+- PubPaid 2.0 mobile gate, carteira e NPCs do salao
 
 ## Summary
 
-Fluxo mobile local corrigido: login Google tem fundo animado, controles touch somem quando menus/painéis abrem, botão de som fica isolado no topo, matchmaking mostra animação de espera, Damas sincroniza a carteira antes de bloquear/entrar e PvP ativo não recursa mais ao renderizar o tabuleiro. Versão: 20260517-mobile-matchmaking-flow2.
+Fluxo local ajustado: mobile nao fica mais preso na etapa de som/tela cheia, a carteira usa "Ja fiz o pagamento" e "Atualizar saldo", saldo aprovado/manualizado nao e zerado pela projecao da store, o garcom do salao ficou maior e a dancarina virou NPC sobre o palco com a palavra PALCO oculta. Versao: 20260517-mobile-fix-stage-wallet1.
 
 ## Next
 

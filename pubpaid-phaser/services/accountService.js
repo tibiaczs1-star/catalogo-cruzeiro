@@ -53,8 +53,8 @@ export async function syncPubpaidAccount() {
       googleUser: payload?.user || null,
       walletKey: payload?.wallet?.walletKey || "",
       walletFeedback: payload?.user?.email
-        ? `Carteira Google sincronizada: ${payload.user.email}.`
-        : "Carteira sincronizada com a base real do PubPaid."
+        ? `Saldo atualizado para ${payload.user.email}.`
+        : "Saldo atualizado com a base real do PubPaid."
     });
     return payload;
   } catch (error) {

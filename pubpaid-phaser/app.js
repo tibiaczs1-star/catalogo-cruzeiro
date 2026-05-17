@@ -2,21 +2,21 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-mobile-matchmaking-flow2";
-import { bindWalletInterface } from "./ui/walletInterface.js";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-mobile-fix-stage-wallet1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-mobile-fix-stage-wallet1";
 import { closePanel } from "./ui/panelActions.js";
-import { syncPubpaidAccount } from "./services/accountService.js";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-mobile-matchmaking-flow2";
+import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-mobile-fix-stage-wallet1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-mobile-fix-stage-wallet1";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-mobile-fix-stage-wallet1";
 import { GameLobbyScene } from "./scenes/GameLobbyScene.js";
 import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260517-mobile-matchmaking-flow2";
+const PUBPAID_BUILD_VERSION = "20260517-mobile-fix-stage-wallet1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
 
 bindOverlay();
@@ -256,16 +256,27 @@ async function activateExperience() {
   if (refs.startExperience) {
     refs.startExperience.disabled = true;
   }
-  setPermissionStatus("Iniciando abertura...");
-  soundtrack.startIntro();
-  syncAudioButton();
+  refs.body?.classList.remove("game-is-locked");
+  refs.splash?.setAttribute("hidden", "");
+  refs.permissionGate?.setAttribute("hidden", "");
+  setPermissionStatus("Abrindo o PubPaid...");
   startIntroScene();
+  let audioStarted = false;
+  try {
+    audioStarted = Boolean(soundtrack.startIntro());
+  } catch (_error) {
+    setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
+  }
+  syncAudioButton();
+  const fullscreenTask = isTouchDevice ? Promise.resolve(false) : withTimeout(requestFullscreen(), false, 900);
   const [fullscreenOk, orientationOk] = await Promise.all([
-    withTimeout(requestFullscreen(), false, 900),
+    fullscreenTask,
     withTimeout(requestLandscapeLock(), false, 900)
   ]);
   setPermissionStatus(
-    fullscreenOk || orientationOk
+    !audioStarted
+      ? "Jogo liberado. O som pode ser ligado depois."
+      : fullscreenOk || orientationOk
       ? "Tela cheia ativa."
       : isIOS
         ? "Som ativo. No iPhone/iPad, continue em tela ampla no Safari."
@@ -486,7 +497,7 @@ function bindSplash() {
 
     if (event.target.closest("[data-exit-game]")) {
       event.preventDefault();
-      openSplash(getAuthApi()?.isSignedIn?.() ? "auth" : "intro");
+      openSplash(getAuthApi()?.isSignedIn?.() ? "terms" : "auth");
       return;
     }
 
@@ -501,7 +512,7 @@ function bindSplash() {
       }
       setAcceptedTerms(true);
       await syncAuthUi();
-      openPermissionGate();
+      await activateExperience();
       return;
     }
 
@@ -515,7 +526,9 @@ function bindSplash() {
         setStep("terms");
         return;
       }
-      openPermissionGate();
+      await syncAuthUi();
+      await activateExperience();
+      return;
     }
 
     if (event.target.closest("[data-return-fullscreen]")) {
@@ -624,8 +637,12 @@ game.events.on("pubpaid:intro-enter", () => {
 
 game.events.on("pubpaid:intro-start", () => {
   soundtrack.setZone("street");
-  if (!soundtrack.isPlaying()) {
-    soundtrack.startIntro();
+  try {
+    if (!soundtrack.isPlaying()) {
+      soundtrack.startIntro();
+    }
+  } catch (_error) {
+    setPermissionStatus("Jogo liberado. O som pode ser ligado depois.");
   }
   syncAudioButton();
 });

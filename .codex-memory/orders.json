@@ -1,7 +1,52 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T01:37:14.398Z",
+  "lastUpdatedAt": "2026-05-17T03:10:00.000Z",
   "orders": [
+    {
+      "id": "2026-05-17-pubpaid-mobile-gate-wallet-stage-npcs",
+      "createdAt": "2026-05-17T03:10:00.000Z",
+      "updatedAt": "2026-05-17T03:10:00.000Z",
+      "status": "validated-local-pending-deploy",
+      "source": "chat",
+      "rawRequest": "Corrigir travamento mobile em som/tela cheia, trocar textos da carteira para Ja fiz o pagamento/Atualizar saldo, preservar saldo Google ao voltar, aumentar garcom e colocar dancarina NPC no palco sem palavra PALCO.",
+      "summary": "PubPaid 2.0: fluxo mobile entra direto apos Google/termos, carteira recebeu copia correta, runtime preserva saldo aprovado/manualizado, e NPCs do salao foram reposicionados/escalados.",
+      "normalizedTasks": [
+        "remover gate redundante de som/tela cheia no fluxo normal mobile",
+        "trocar Avisar admin por Ja fiz o pagamento e Sincronizar por Atualizar saldo",
+        "preservar saldo aprovado/manualizado por conta Google na store PubPaid",
+        "aumentar garcom do salao e transformar dancarina em NPC no palco sem texto PALCO",
+        "validar node --check, guard PubPaid, CSS e Playwright local desktop/mobile"
+      ],
+      "tags": [
+        "pubpaid",
+        "mobile",
+        "wallet",
+        "npc",
+        "phaser",
+        "realflow"
+      ],
+      "filesTouched": [
+        "pubpaid-v2.html",
+        "pubpaid-phaser.css",
+        "pubpaid-phaser/app.js",
+        "pubpaid-phaser/scenes/BootScene.js",
+        "pubpaid-phaser/scenes/InteriorScene.js",
+        "pubpaid-phaser/ui/walletInterface.js",
+        "pubpaid-phaser/ui/domGameInterface.js",
+        "pubpaid-phaser/services/accountService.js",
+        "pubpaid-runtime.js",
+        "server.js",
+        "CODEX_MEMORY.md",
+        ".codex-memory/current-state.md",
+        ".codex-memory/handoff.md"
+      ],
+      "assetRefs": [
+        ".codex-temp/pubpaid-mobile-fix-stage-wallet/desktop-wallet-google.png",
+        ".codex-temp/pubpaid-mobile-fix-stage-wallet/mobile-intro-direct-fixed.png",
+        ".codex-temp/pubpaid-mobile-fix-stage-wallet/desktop-salon-npcs-loaded.png"
+      ],
+      "notes": "Versao cache-busted 20260517-mobile-fix-stage-wallet1. Playwright confirmou gate mobile sem permissao redundante, carteira Google com textos novos e salao com PALCO oculto."
+    },
     {
       "id": "2026-05-16-pubpaid-main-character-rua-alta-v1",
       "createdAt": "2026-05-16T20:34:31.000Z",

@@ -1,5 +1,13 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-17 - PubPaid mobile gate, carteira e NPCs do salao
+
+- Usuario testou no celular e encontrou travamento na etapa "som/tela cheia"; `pubpaid-phaser/app.js` agora inicia a intro direto apos Google/termos e deixa som/tela cheia como opcional, sem abrir a permissao redundante no fluxo normal.
+- Carteira: copia trocada para `Ja fiz o pagamento` e `Atualizar saldo`; o retorno de deposito agora diz `Pagamento informado. Aguarde confirmacao`.
+- Persistencia: `pubpaid-runtime.js` preserva saldo aprovado/manualizado e ganhos de partida por `manualApprovedBalanceCoins`, evitando que a carteira Google zere ao fechar/voltar.
+- Salao: garcom foi aumentado para escala 0.108, dançarina virou NPC no palco e a palavra `PALCO` ficou oculta.
+- Versao cache-busted desta rodada: `20260517-mobile-fix-stage-wallet1`.
+
 ## Atualizacao rapida 2026-05-17 - PubPaid mobile matchmaking destravado
 
 - Usuario pediu finalizar a correcao do mobile: menus sobrepostos, botao de musica atrapalhando controles, tela preta no login Google e espera de oponente sem vida visual.

@@ -181,6 +181,7 @@ export class InteriorScene extends Phaser.Scene {
     this.stageOrb = null;
     this.loungeMist = null;
     this.actors = [];
+    this.stageNpc = null;
     this.waiterIndicator = null;
     this.neonSigns = [];
     this.machineGlows = [];
@@ -218,13 +219,30 @@ export class InteriorScene extends Phaser.Scene {
     const seatedNorth = this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 172, 348, 0.052, 2600, 0x50efff, { staticBitmap: true, depth: 2.16, alpha: 0.86 });
     const seatedSouth = this.addActor(PUBPAID_TEXTURE_KEYS.guestB, 178, 546, 0.054, 2800, 0xffd06d, { staticBitmap: true, depth: 2.22, alpha: 0.86 });
     seatedSouth.setFlipX(true);
+    const waiterNpc = this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 512, 0.108, 2400, 0xfff0c0, {
+      depth: 2.62,
+      glowDepth: 2.49,
+      alpha: 0.98
+    });
+    waiterNpc.ppgNpc = { id: "waiter-host", zone: "waiter", role: "lobby-host" };
+    const stageDancer = this.addActor(PUBPAID_TEXTURE_KEYS.singer, 1060, 324, 0.088, 2100, 0xff4fb8, {
+      staticBitmap: true,
+      depth: 2.38,
+      glowDepth: 2.18,
+      alpha: 0.96
+    });
+    stageDancer.ppgNpc = { id: "stage-dancer", zone: "stage", role: "dancer" };
+    stageDancer.ppgBaseX = stageDancer.x;
+    stageDancer.ppgBaseY = stageDancer.y;
+    stageDancer.ppgBaseScale = stageDancer.scaleX;
+    this.stageNpc = stageDancer;
     this.actors = [
-      this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 506, 0.078, 2400, 0xfff0c0, { depth: 2.52 }),
-      this.addActor(PUBPAID_TEXTURE_KEYS.singer, 1120, 270, 0.072, 2100, 0xff4fb8, { staticBitmap: true, depth: 2.24, alpha: 0.92 }),
+      waiterNpc,
+      stageDancer,
       seatedNorth,
       seatedSouth
     ];
-    this.waiterIndicator = this.buildWaiterIndicator(704, 404);
+    this.waiterIndicator = this.buildWaiterIndicator(704, 356);
 
     this.player = this.buildPlayer(606, 392);
     this.targetMarker = this.add.circle(this.player.x, this.player.y, 10, 0x50efff, 0.25).setVisible(false);
@@ -244,11 +262,12 @@ export class InteriorScene extends Phaser.Scene {
       .setDepth(1.4);
 
     this.zones = [
-      { id: "waiter", x: 704, y: 506, radius: 78, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter, labelOffsetY: -136 },
-      { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", objective: "Ativar o palco", approach: INTERIOR_MAP.interactionPoints.stage },
+      { id: "waiter", x: 704, y: 506, radius: 88, color: 0xffd06d, label: "GARÇOM", objective: "Falar com o garçom", approach: INTERIOR_MAP.interactionPoints.waiter, labelOffsetY: -150 },
+      { id: "stage", x: 1060, y: 242, radius: 84, color: 0xff4fb8, label: "PALCO", promptLabel: "Palco da dançarina", hideLabel: true, objective: "Ativar o palco", approach: INTERIOR_MAP.interactionPoints.stage },
       { id: "exit", x: 640, y: 580, radius: 96, color: 0x8ef0a3, label: "SAIDA", objective: "Voltar para a rua", approach: INTERIOR_MAP.interactionPoints.exit }
     ];
     this.zoneHotspots = this.zones.map((zone) => this.buildZoneHotspot(zone));
+    this.bindStageNpcInteraction();
     this.validateInteriorMap();
 
     this.cameras.main.setBounds(0, 0, GAME_WIDTH, GAME_HEIGHT);
@@ -1413,7 +1432,8 @@ export class InteriorScene extends Phaser.Scene {
       color: "#fff5de",
       stroke: "#04060b",
       strokeThickness: 4
-    }).setOrigin(0.5).setLetterSpacing(3).setAlpha(0.9);
+    }).setOrigin(0.5).setLetterSpacing(3).setAlpha(zone.hideLabel ? 0 : 0.9);
+    if (zone.hideLabel) text.setVisible(false);
     const chip = this.add.text(0, zone.radius * 0.62, "ENTER", {
       fontFamily: "Courier New, Lucida Console, monospace",
       fontSize: "10px",
@@ -1436,6 +1456,16 @@ export class InteriorScene extends Phaser.Scene {
       this.moveToZone(zone);
     });
     return container;
+  }
+
+  bindStageNpcInteraction() {
+    if (!this.stageNpc) return;
+    this.stageNpc.setInteractive();
+    this.stageNpc.on("pointerdown", (_pointer, _localX, _localY, event) => {
+      event?.stopPropagation?.();
+      const stageZone = this.zones.find((zone) => zone.id === "stage");
+      if (stageZone) this.moveToZone(stageZone);
+    });
   }
 
   buildWaiterIndicator(x, y) {
@@ -1575,7 +1605,7 @@ export class InteriorScene extends Phaser.Scene {
   addActor(textureKey, x, y, scale, pulseDuration, glowColor, options = {}) {
     const glow = this.add.ellipse(x, y - 8, Math.max(34, 680 * scale), Math.max(10, 150 * scale), glowColor, 0.1)
       .setBlendMode(Phaser.BlendModes.SCREEN)
-      .setDepth(2.36);
+      .setDepth(options.glowDepth ?? 2.36);
     const actor = this.add.image(x, y, textureKey)
       .setOrigin(0.5, 1)
       .setScale(scale);
@@ -1708,6 +1738,7 @@ export class InteriorScene extends Phaser.Scene {
 
   moveToZone(zone) {
     this.pendingZoneInteraction = zone.id === "waiter" || zone.id === "exit" ? zone.id : null;
+    const zoneName = zone.promptLabel || zone.label || this.getZoneLabel(zone.id);
     const approach = this.resolveWalkablePoint(zone.approach?.x ?? zone.x, zone.approach?.y ?? zone.y + 42);
     this.targetPoint = new Phaser.Math.Vector2(approach.x, approach.y);
     this.targetMarker.setPosition(this.targetPoint.x, this.targetPoint.y).setVisible(true);
@@ -1719,7 +1750,7 @@ export class InteriorScene extends Phaser.Scene {
       prompt:
         zone.id === "exit"
           ? "Saída marcada. Chegue perto e aperte Enter."
-          : `${zone.label} marcado. Chegue perto e aperte Enter.`
+          : `${zoneName} marcado. Chegue perto e aperte Enter.`
     });
   }
 
@@ -1761,9 +1792,24 @@ export class InteriorScene extends Phaser.Scene {
       hotspot.ppgZone.baseGlow.setAlpha(active ? 0.12 : 0.03);
       hotspot.ppgZone.shell.setAlpha(active ? 0.18 : 0.05);
       hotspot.ppgZone.pulse.setAlpha(active ? 0.16 : 0.02);
-      hotspot.ppgZone.text.setAlpha(active ? 1 : 0.9);
+      hotspot.ppgZone.text.setVisible(!hotspot.ppgZone.hideLabel);
+      hotspot.ppgZone.text.setAlpha(hotspot.ppgZone.hideLabel ? 0 : active ? 1 : 0.9);
       hotspot.ppgZone.chip.setAlpha(active ? 1 : 0.82);
     });
+  }
+
+  updateStageNpc() {
+    if (!this.stageNpc) return;
+    const t = this.time.now || 0;
+    const baseX = this.stageNpc.ppgBaseX ?? this.stageNpc.x;
+    const baseY = this.stageNpc.ppgBaseY ?? this.stageNpc.y;
+    const baseScale = this.stageNpc.ppgBaseScale || this.stageNpc.scaleX || 1;
+    this.stageNpc.setPosition(
+      baseX + Math.sin(t / 420) * 2.2,
+      baseY + Math.sin(t / 280) * 1.4
+    );
+    this.stageNpc.setAngle(Math.sin(t / 520) * 1.2);
+    this.stageNpc.setScale(baseScale * (1 + Math.sin(t / 360) * 0.015));
   }
 
   tryInteraction() {
@@ -1884,6 +1930,7 @@ export class InteriorScene extends Phaser.Scene {
       beam.rotation = Math.sin(this.time.now / 1000 + index) * 0.06;
       beam.scaleX = 1 + Math.sin(this.time.now / 700 + index) * 0.04;
     });
+    this.updateStageNpc();
     this.ambientBands.forEach((band, index) => {
       band.x += Math.sin(this.time.now / 900 + index) * 0.08;
     });
@@ -1964,7 +2011,7 @@ export class InteriorScene extends Phaser.Scene {
           ? "Saída localizada. Aperte Enter para voltar para a rua."
           : zone.id === "waiter"
             ? "Garçom localizado. Aperte Enter para abrir o lobby de jogos."
-            : `${zone.label} ativo. Aperte Enter para interagir.`
+            : `${zone.promptLabel || zone.label || this.getZoneLabel(zone.id)} ativo. Aperte Enter para interagir.`
         : "Explore o salão. O garçom no corredor abre todos os jogos."
     });
   }

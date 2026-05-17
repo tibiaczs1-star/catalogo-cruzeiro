@@ -5,7 +5,7 @@ import {
   registerPubpaidDeposit,
   requestPubpaidWithdrawal,
   syncPubpaidAccount
-} from "../services/accountService.js";
+} from "../services/accountService.js?v=20260517-mobile-fix-stage-wallet1";
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
 
 const DEPOSIT_AMOUNTS = new Set([5, 10, 20, 50, 100]);
@@ -106,7 +106,7 @@ export function bindWalletInterface() {
         objective: "Conferir carteira PubPaid",
         focus: "carteira real",
         walletFeedback: user?.email
-          ? "Carteira aberta usando a base do PubPaid 1.0."
+          ? "Carteira aberta para atualizar seu saldo real."
           : "Entre para abrir sua carteira real do PubPaid."
       });
       if (user?.email) {
@@ -154,13 +154,13 @@ export function bindWalletInterface() {
   });
   refs.refreshButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      setFeedback("Sincronizando carteira...");
+      setFeedback("Atualizando saldo...");
       void syncPubpaidAccount();
     });
   });
 
   refs.depositAmount?.addEventListener("change", () => {
-    resetDeposit("Valor alterado. Gere um novo QR antes de avisar o admin.");
+    resetDeposit("Valor alterado. Gere um novo QR antes de confirmar o pagamento.");
     syncRegisterDepositButton();
   });
 
@@ -204,7 +204,7 @@ export function bindWalletInterface() {
         </div>
       `);
       syncRegisterDepositButton();
-      setFeedback(`QR criado para ${formatCoins(amount)} creditos. Depois do Pix, avise o admin.`);
+      setFeedback(`QR criado para ${formatCoins(amount)} creditos. Depois do Pix, toque em Já fiz o pagamento.`);
       refs.qr?.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
     } catch (error) {
       resetDeposit(error?.message || "Nao foi possivel gerar QR agora.");
@@ -225,13 +225,13 @@ export function bindWalletInterface() {
     }
     const user = getGoogleUser();
     if (!user?.email) {
-      setFeedback("Entre com sua conta para avisar o admin.");
+      setFeedback("Entre com sua conta para confirmar o pagamento.");
       await window.CatalogoGoogleAuth?.promptSignIn?.();
       return;
     }
 
     refs.registerDeposit.disabled = true;
-    setFeedback("Enviando deposito para conferencia manual...");
+    setFeedback("Registrando pagamento para conferencia manual...");
     try {
       const payload = await registerPubpaidDeposit({
         amount: local.amount || getDepositAmount(refs.depositAmount),
@@ -239,10 +239,10 @@ export function bindWalletInterface() {
         receiptName,
         sourcePage: "/pubpaid-v2.html"
       });
-      html(refs.qr, `<p><strong>Deposito avisado.</strong></p><p>Referencia ${escapeHtml(local.txid)} enviada para o admin com o nome do comprovante.</p>`);
+      html(refs.qr, `<p><strong>Pagamento informado.</strong></p><p>Aguarde confirmação. Referência ${escapeHtml(local.txid)} enviada com o nome do comprovante.</p>`);
       local.qrReady = false;
       syncRegisterDepositButton();
-      setFeedback(payload.message || "Deposito registrado. Aguarde a conferencia manual.");
+      setFeedback(payload.message || "Pagamento informado. Aguarde confirmação.");
     } catch (error) {
       syncRegisterDepositButton();
       setFeedback(error?.message || "Falha ao registrar deposito.");

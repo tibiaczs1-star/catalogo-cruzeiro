@@ -1,7 +1,40 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T01:37:14.454Z",
+  "lastUpdatedAt": "2026-05-17T03:10:00.000Z",
   "assets": [
+    {
+      "id": "pubpaid-salon-npcs-stage-waiter-20260517",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobile-fix-stage-wallet/desktop-salon-npcs-loaded.png",
+      "source": "workspace-playwright",
+      "note": "Salao local com garcom maior e dancarina NPC sobre o palco, sem texto PALCO.",
+      "linkedOrderIds": [
+        "2026-05-17-pubpaid-mobile-gate-wallet-stage-npcs"
+      ],
+      "createdAt": "2026-05-17T03:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-mobile-intro-direct-20260517",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobile-fix-stage-wallet/mobile-intro-direct-fixed.png",
+      "source": "workspace-playwright",
+      "note": "Mobile apos termos entrando direto na intro, sem painel obrigatorio de som/tela cheia.",
+      "linkedOrderIds": [
+        "2026-05-17-pubpaid-mobile-gate-wallet-stage-npcs"
+      ],
+      "createdAt": "2026-05-17T03:10:00.000Z"
+    },
+    {
+      "id": "pubpaid-wallet-google-copy-20260517",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-mobile-fix-stage-wallet/desktop-wallet-google.png",
+      "source": "workspace-playwright",
+      "note": "Carteira local com identidade Google e botoes Ja fiz o pagamento / Atualizar saldo.",
+      "linkedOrderIds": [
+        "2026-05-17-pubpaid-mobile-gate-wallet-stage-npcs"
+      ],
+      "createdAt": "2026-05-17T03:10:00.000Z"
+    },
     {
       "id": "pubpaid-main-character-rua-alta-v1",
       "kind": "sprite-sheet-and-preview",

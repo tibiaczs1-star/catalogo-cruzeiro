@@ -1,5 +1,5 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-mobile-fix-stage-wallet1";
 import { fetchPvpState, moveCheckers } from "../services/pvpService.js";
 
 const CHECKERS_SIZE = 8;
@@ -283,7 +283,7 @@ export function bindDomGameInterface(game) {
       : pending > 0
         ? {
             title: "Depósito pendente",
-            body: "Seu Pix foi avisado ao admin. O saldo só fica jogável depois da aprovação."
+            body: "Seu pagamento foi informado. Aguarde confirmação para o saldo ficar jogável."
           }
         : {
             title: "Sem saldo aprovado",
@@ -604,8 +604,8 @@ export function bindDomGameInterface(game) {
           return;
         }
         startButton.disabled = true;
-        if (refs.lobbyState) refs.lobbyState.textContent = "sincronizando";
-        updateGameState({ prompt: "Conferindo saldo aprovado antes de abrir Damas." });
+        if (refs.lobbyState) refs.lobbyState.textContent = "atualizando saldo";
+        updateGameState({ prompt: "Atualizando saldo aprovado antes de abrir Damas." });
         await syncPubpaidAccount();
         startButton.disabled = false;
         if (isRealCheckersEligible()) {

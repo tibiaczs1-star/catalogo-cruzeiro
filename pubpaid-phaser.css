@@ -1456,7 +1456,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-mobile-matchmaking-flow2") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-mobile-fix-stage-wallet1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -1789,7 +1789,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-mobile-matchmaking-flow2");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-mobile-fix-stage-wallet1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 

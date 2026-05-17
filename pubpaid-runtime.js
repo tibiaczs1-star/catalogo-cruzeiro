@@ -184,6 +184,17 @@ function normalizeWallet(playerId, record = {}) {
   const lockedMatchCoins = normalizeMoney(record.lockedMatchCoins ?? record.lockedPvpCoins ?? 0);
   const totalApprovedDeposits = normalizeMoney(record.totalApprovedDeposits ?? record.approvedDeposits ?? record.depositosAprovados);
   const totalApprovedWithdrawals = normalizeMoney(record.totalApprovedWithdrawals ?? record.approvedWithdrawals ?? record.saquesAprovados);
+  const explicitManualApproved =
+    record.manualApprovedBalanceCoins ??
+    record.manualApprovedCoins ??
+    record.matchPayoutCoins ??
+    record.bonusCoins;
+  const inferredManualApproved = Math.max(
+    0,
+    normalizeMoney(balanceCoins - (totalApprovedDeposits - totalApprovedWithdrawals - lockedWithdrawalCoins))
+  );
+  const manualApprovedBalanceCoins = normalizeMoney(explicitManualApproved ?? inferredManualApproved);
+  const manualLockedWithdrawalCoins = normalizeMoney(record.manualLockedWithdrawalCoins ?? 0);
   return {
     playerId: normalizeText(playerId || record.playerId || record.userId, ""),
     playerName: normalizeText(record.playerName ?? record.player ?? record.name, "Jogador"),
@@ -192,6 +203,8 @@ function normalizeWallet(playerId, record = {}) {
     lockedMatchCoins,
     totalApprovedDeposits,
     totalApprovedWithdrawals,
+    manualApprovedBalanceCoins,
+    manualLockedWithdrawalCoins,
   };
 }
 
@@ -232,10 +245,12 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
         playerId: normalized.playerId,
         playerName: normalized.playerName,
         balanceCoins: 0,
-        lockedWithdrawalCoins: 0,
+        lockedWithdrawalCoins: normalizeMoney(normalized.manualLockedWithdrawalCoins),
         lockedMatchCoins: normalizeMoney(normalized.lockedMatchCoins),
         totalApprovedDeposits: 0,
         totalApprovedWithdrawals: 0,
+        manualApprovedBalanceCoins: normalizeMoney(normalized.manualApprovedBalanceCoins),
+        manualLockedWithdrawalCoins: normalizeMoney(normalized.manualLockedWithdrawalCoins),
       });
     }
   });
@@ -256,6 +271,8 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
           lockedMatchCoins: 0,
           totalApprovedDeposits: 0,
           totalApprovedWithdrawals: 0,
+          manualApprovedBalanceCoins: 0,
+          manualLockedWithdrawalCoins: 0,
         })
       );
     }
@@ -293,7 +310,10 @@ function rebuildWalletProjection(deposits, withdrawals, previousWallets = {}) {
   walletMap.forEach((wallet) => {
     wallet.balanceCoins = Math.max(
       0,
-      normalizeMoney(wallet.totalApprovedDeposits) - normalizeMoney(wallet.totalApprovedWithdrawals) - normalizeMoney(wallet.lockedWithdrawalCoins)
+      normalizeMoney(wallet.totalApprovedDeposits) +
+        normalizeMoney(wallet.manualApprovedBalanceCoins) -
+        normalizeMoney(wallet.totalApprovedWithdrawals) -
+        normalizeMoney(wallet.lockedWithdrawalCoins)
     );
   });
 
@@ -428,6 +448,7 @@ function buildDashboardPayload(storeInput) {
       approvedDeposits: wallet.totalApprovedDeposits,
       totalApprovedWithdrawals: wallet.totalApprovedWithdrawals,
       approvedWithdrawals: wallet.totalApprovedWithdrawals,
+      manualApprovedBalanceCoins: wallet.manualApprovedBalanceCoins || 0,
     }))
     .sort((a, b) => b.balanceCoins - a.balanceCoins || a.playerName.localeCompare(b.playerName));
 
