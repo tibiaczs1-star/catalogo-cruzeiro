@@ -1,5 +1,17 @@
 # CODEX Memory
 
+## Atualizacao rapida 2026-05-17 - PubPaid entrada sincronizada, nick e Damas
+
+- Usuario testou online e encontrou aparelhos com fluxos diferentes: desktop ficava aguardando, celular entrava, cache so funcionava em aba anonima, e o jogo precisava checar atualizacao antes de iniciar.
+- Versao desta rodada: `20260517-entry-sync-nick1`.
+- `pubpaid-v2.html` ganhou gate de atualizacao antes do login; `pubpaid-phaser/app.js` consulta `/api/pubpaid/build`, limpa caches/service workers PubPaid/Catalogo quando a versao diverge e redireciona para a URL versionada correta.
+- Depois do Google, o jogador cria um nick por conta; se o nick ja existe, entra automaticamente no jogo sem botao `Continuar`.
+- Selecao de personagem foi ampliada, recebeu layout especifico para mobile portrait e guia de controles no desktop; fullscreen warning nao aparece na autoentrada inicial sem gesto, so depois de fullscreen real ter sido usado.
+- Damas PvP envia nick ao backend, usa botao `Estou pronto`, continua exigindo confirmacao dupla, orienta o tabuleiro por assento e permite captura para tras; API local confirmou `waiting -> readying -> active` somente apos os dois prontos.
+- Garcom do salao agora usa altura do protagonista; garcom do lobby ficou grande, centralizado e como figura principal da cena.
+- Validacoes locais: `node --check` nos JS tocados, CSS brace balance, `npm run guard:pubpaid`, Playwright desktop/mobile, captura do lobby e teste API PvP com duas sessoes falsas em DATA_DIR temporario.
+- Proximo passo: commit/push e validar online no Render com dois aparelhos/contas reais em `pubpaid-v2.html?v=20260517-entry-sync-nick1`.
+
 ## Atualizacao rapida 2026-05-17 - PubPaid 2.0 unificado e 1.0 removido do runtime
 
 - Usuario mandou juntar tudo: agora so existe PubPaid 2.0 como projeto ativo; restos 1.0 devem redirecionar, retornar 410, ou virar dados/conceitos dentro do 2.0.

@@ -108,7 +108,7 @@ export async function requestPubpaidWithdrawal({ amount = 0, sourcePage = "/pubp
   return payload;
 }
 
-export async function joinPubpaidPvpQueue(gameId = "pool", stake = 10) {
+export async function joinPubpaidPvpQueue(gameId = "pool", stake = 10, profile = {}) {
   try {
     const response = await fetch("./api/pubpaid/pvp/join", {
       method: "POST",
@@ -117,7 +117,7 @@ export async function joinPubpaidPvpQueue(gameId = "pool", stake = 10) {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ gameId, stake })
+      body: JSON.stringify({ gameId, stake, profile })
     });
     const payload = await response.json().catch(() => null);
     if (!response.ok || !payload?.ok) {

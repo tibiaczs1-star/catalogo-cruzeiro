@@ -17,10 +17,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="PubPaid 2.0" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-pubpaid-unified2" />
-    <script defer src="./site-google-auth.js?v=20260517-pubpaid-unified2"></script>
+    <link rel="stylesheet" href="./pubpaid-phaser.css?v=20260517-entry-sync-nick1" />
+    <script defer src="./site-google-auth.js?v=20260517-entry-sync-nick1"></script>
     <script src="./assets/vendor/phaser.min.js?v=3.90.0"></script>
-    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-pubpaid-unified2"></script>
+    <script type="module" src="./pubpaid-phaser/app.js?v=20260517-entry-sync-nick1"></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         window.setTimeout(function () {
@@ -93,6 +93,14 @@
               <span data-permission-status>Som 16-bit + entrada</span>
             </section>
           </div>
+          <div class="ppg-update-gate" data-update-gate aria-live="polite">
+            <section class="ppg-update-card">
+              <p class="ppg-kicker">sincronizando</p>
+              <h2>PubPaid 2.0</h2>
+              <p data-update-status>Checando versão online...</p>
+              <button class="ppg-button" type="button" data-update-reload hidden>Atualizar agora</button>
+            </section>
+          </div>
           <div class="ppg-splash" data-splash-screen aria-live="polite">
             <div class="ppg-login-ambience" aria-hidden="true">
               <div class="ppg-login-neon">
@@ -112,7 +120,20 @@
               <div class="ppg-google-stack ppg-google-stack--fit">
                 <div class="ppg-google-slot" data-google-auth-button></div>
                 <button class="ppg-button" type="button" data-google-auth-logout hidden>Trocar conta</button>
-                <button class="ppg-button primary" type="button" data-open-game disabled>Continuar</button>
+                <button class="ppg-button primary" type="button" data-open-game hidden disabled>Jogar agora</button>
+              </div>
+            </section>
+
+            <section class="ppg-splash-card ppg-splash-step ppg-profile-step" data-splash-step="profile" hidden>
+              <p class="ppg-kicker">perfil</p>
+              <h2>Criar nick</h2>
+              <label class="ppg-profile-field">
+                <span>Nick</span>
+                <input type="text" inputmode="text" maxlength="18" autocomplete="nickname" data-player-nick placeholder="Seu nick" />
+              </label>
+              <p class="ppg-splash-note" data-player-profile-status>Crie um nick para aparecer nas mesas.</p>
+              <div class="ppg-splash-actions">
+                <button class="ppg-button primary" type="button" data-save-player-profile disabled>Jogar agora</button>
               </div>
             </section>
 
@@ -167,6 +188,11 @@
             <span class="ppg-prompt-kicker">objetivo</span>
             <strong data-game-objective>entrar no PubPaid</strong>
             <span data-game-prompt-copy>Clique na rua para mover. Entre pela porta ou use a saída para alternar entre rua e salão.</span>
+          </div>
+          <div class="ppg-controls-guide" data-controls-guide hidden aria-label="Controles do PubPaid">
+            <span><kbd>WASD</kbd><kbd>↑↓←→</kbd> mover</span>
+            <span><kbd>Enter</kbd> interagir</span>
+            <span><kbd>W</kbd> carteira</span>
           </div>
           <aside class="ppg-panel" data-game-panel hidden aria-live="polite">
             <div class="ppg-panel-head">
@@ -227,13 +253,13 @@
                 <article class="ppg-dom-match-player is-rival" data-dom-match-rival>
                   <img alt="" data-dom-match-rival-picture hidden>
                   <span data-dom-match-rival-initial>?</span>
-                  <strong data-dom-match-rival-name>Waiting for player</strong>
+                  <strong data-dom-match-rival-name>Aguardando jogador</strong>
                   <small data-dom-match-rival-state>outro dispositivo</small>
                 </article>
               </div>
               <p data-dom-matchmaking-status>Procurando oponente real.</p>
               <div class="ppg-dom-actions">
-                <button type="button" class="primary" data-dom-pvp-ready hidden>Iniciar partida</button>
+                <button type="button" class="primary" data-dom-pvp-ready hidden>Estou pronto</button>
                 <button type="button" data-dom-open-lobby>Cancelar</button>
               </div>
             </aside>

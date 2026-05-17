@@ -460,3 +460,12 @@ Original prompt: continuar o protótipo PubPaid 2.0 migrado para Phaser, com res
 - Cache-bust atualizado para `20260516-google-wallet-invitecopy2`.
 - Validacoes locais: `node --check` nos JS tocados, `npm run guard:pubpaid`, CSS/admin brace balance, Playwright desktop/mobile com capturas em `.codex-temp/pubpaid-receiptname/`.
 
+## 2026-05-17 entrada sincronizada, nick e Damas PvP
+
+- PubPaid 2.0 ganhou gate de atualizacao antes do login: consulta `/api/pubpaid/build`, limpa caches/service worker PubPaid/Catalogo quando a versao diverge e redireciona para `pubpaid-v2.html?v=20260517-entry-sync-nick1`.
+- Depois do Google, o fluxo abre criacao de nick por conta; se o nick ja existe, entra no jogo sem botao intermediario.
+- Selecao de personagem foi ampliada, recebeu layout melhor para mobile portrait e guia visual de controles; desktop mostra WASD/setas, Enter e carteira durante a rua.
+- Damas PvP agora manda o nick ao backend, mostra `Estou pronto`, exige confirmacao dupla, orienta o tabuleiro conforme o assento e permite captura para tras nas regras de Damas.
+- Garcom do salao foi reduzido para a altura do protagonista; garcom do lobby foi centralizado e aumentado para virar figura principal da cena.
+- Validacoes: `node --check` em `app.js`, `domGameInterface.js`, `CharacterSelectScene.js`, `GameLobbyScene.js`, `InteriorScene.js` e `server.js`; CSS brace balance; `npm run guard:pubpaid`; Playwright desktop/mobile e API PvP dupla em `.codex-temp/pubpaid-entry-sync-*`.
+

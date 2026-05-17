@@ -64,6 +64,7 @@ const PORT = Number(process.env.PORT || 3000);
 const HOST = "0.0.0.0";
 const ADMIN_TOKEN = String(process.env.ADMIN_TOKEN || "").trim();
 const IS_PRODUCTION = String(process.env.NODE_ENV || "").trim().toLowerCase() === "production";
+const PUBPAID_CLIENT_BUILD_VERSION = "20260517-entry-sync-nick1";
 
 function getRequiredSecret(name, fallbackValue) {
   const value = String(process.env[name] || "").trim();
@@ -16306,6 +16307,19 @@ async function handleApi(req, res, pathname, searchParams) {
     return sendJson(res, 200, buildPubpaidAccountPayload(authUser));
   }
 
+  if (req.method === "GET" && pathname === "/api/pubpaid/build") {
+    return sendJson(
+      res,
+      200,
+      {
+        ok: true,
+        buildVersion: PUBPAID_CLIENT_BUILD_VERSION,
+        clientVersion: cleanShortText(searchParams.get("client") || "", 80),
+        serverTime: new Date().toISOString()
+      }
+    );
+  }
+
   if (req.method === "GET" && pathname === "/api/pubpaid/pvp/state") {
     const authUser = readCatalogoAuthSession(req);
     if (!authUser) {
@@ -17595,7 +17609,7 @@ function handleStatic(req, res, pathname, requestUrl) {
 
   if (pathname === "/pubpaid" || pathname === "/pubpaid/" || pathname === "/pubpaid.html") {
     res.writeHead(302, {
-      Location: "/pubpaid-v2.html?v=20260517-pubpaid-unified2",
+      Location: `/pubpaid-v2.html?v=${PUBPAID_CLIENT_BUILD_VERSION}`,
       "Cache-Control": "no-store"
     });
     return res.end();
@@ -18325,10 +18339,14 @@ function getPvpCheckersOwner(piece = "") {
   return piece.toLowerCase() === "p" ? "playerOne" : "playerTwo";
 }
 
-function getPvpCheckersDirections(piece = "") {
+function getPvpCheckersMoveDirections(piece = "") {
   if (!piece) return [];
   if (piece === piece.toUpperCase()) return [[-1, -1], [-1, 1], [1, -1], [1, 1]];
   return piece.toLowerCase() === "p" ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]];
+}
+
+function getPvpCheckersCaptureDirections(piece = "") {
+  return piece ? [[-1, -1], [-1, 1], [1, -1], [1, 1]] : [];
 }
 
 function inPvpCheckersBounds(row, col) {
@@ -18351,14 +18369,19 @@ function getMovesForPvpCheckersPiece(board, row, col) {
   const owner = getPvpCheckersOwner(piece);
   const enemy = owner === "playerOne" ? "playerTwo" : "playerOne";
   const moves = [];
-  getPvpCheckersDirections(piece).forEach(([rowStep, colStep]) => {
+  getPvpCheckersMoveDirections(piece).forEach(([rowStep, colStep]) => {
     const nextRow = row + rowStep;
     const nextCol = col + colStep;
     if (!inPvpCheckersBounds(nextRow, nextCol)) return;
     if (!board[nextRow][nextCol]) {
       moves.push({ from: { row, col }, to: { row: nextRow, col: nextCol }, capture: null });
-      return;
     }
+  });
+  getPvpCheckersCaptureDirections(piece).forEach(([rowStep, colStep]) => {
+    const nextRow = row + rowStep;
+    const nextCol = col + colStep;
+    if (!inPvpCheckersBounds(nextRow, nextCol)) return;
+    if (!board[nextRow][nextCol]) return;
     if (getPvpCheckersOwner(board[nextRow][nextCol]) !== enemy) return;
     const jumpRow = nextRow + rowStep;
     const jumpCol = nextCol + colStep;

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T06:53:39.017Z",
+  "lastUpdatedAt": "2026-05-17T07:10:36.511Z",
   "orders": [
     {
       "id": "2026-05-17-pubpaid-fullfocus-maintenance-onlinefix1",
@@ -10141,6 +10141,36 @@
       "source": "chat",
       "rawRequest": "suba online vamos texta",
       "summary": "Subir PubPaid 2.0 unificado online para testar no Render.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-17-corrigir-pubpaid-online-update-gate-cache-sync-auto-enter-pos-google-pvp-ready-s",
+      "createdAt": "2026-05-17T07:09:44.240Z",
+      "updatedAt": "2026-05-17T07:09:44.240Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Desktop ficou aguardando, celular entrou; nenhum confirmou pronto; só funciona em aba anônima. Criar sistema de atualização antes do jogo começar para checar online se tudo está atualizado e evitar fluxos diferentes nos dispositivos. Depois do Google deve entrar no jogo automaticamente, sem botão. Aumentar garçom: no bar tamanho do protagonista; no lobby 5x maior e no meio. Reconstruir Damas seguindo exemplo PaperGames https://papergames.io/pt-br/r/l_Mmg25Cu.",
+      "summary": "Corrigir PubPaid online: update gate/cache sync, auto-enter pós-Google, PvP ready/sync entre desktop e mobile, garçom maior e Damas reconstruída com regras corretas.",
+      "normalizedTasks": [],
+      "filesTouched": [],
+      "assetRefs": [],
+      "tags": [],
+      "nextSteps": [],
+      "notes": ""
+    },
+    {
+      "id": "2026-05-17-adicionar-criacao-de-nick-apos-login-redesenhar-selecao-de-personagem-para-mobil",
+      "createdAt": "2026-05-17T07:10:36.511Z",
+      "updatedAt": "2026-05-17T07:10:36.511Z",
+      "status": "open",
+      "source": "chat",
+      "rawRequest": "Depois do Google, dar opção para criar nick; melhorar escolha de personagens, horrível no mobile; no desktop deixar evidente como funcionam os controles.",
+      "summary": "Adicionar criação de nick após login, redesenhar seleção de personagem para mobile/desktop e mostrar controles claramente no desktop.",
       "normalizedTasks": [],
       "filesTouched": [],
       "assetRefs": [],

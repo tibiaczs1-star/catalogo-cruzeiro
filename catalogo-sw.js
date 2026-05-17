@@ -1,6 +1,6 @@
 "use strict";
 
-const VERSION = "20260517-pubpaid-unified2";
+const VERSION = "20260517-entry-sync-nick1";
 const STATIC_CACHE = `catalogo-static-${VERSION}`;
 const RUNTIME_CACHE = `catalogo-runtime-${VERSION}`;
 const STATIC_ASSETS = [

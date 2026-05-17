@@ -1,6 +1,6 @@
 import { gameState, subscribeGameState, updateGameState } from "../core/gameState.js";
-import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-pubpaid-unified2";
-import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-pubpaid-unified2";
+import { joinPubpaidPvpQueue, leavePubpaidPvpQueue, syncPubpaidAccount } from "../services/accountService.js?v=20260517-entry-sync-nick1";
+import { confirmPvpReady, fetchPvpState, moveCheckers } from "../services/pvpService.js?v=20260517-entry-sync-nick1";
 
 const CHECKERS_SIZE = 8;
 const MATCH_OPPONENTS = {
@@ -38,18 +38,22 @@ function isInside(row, col) {
 function getMovesFor(board, row, col, enforceCapture = false) {
   const piece = board[row]?.[col];
   if (!piece) return [];
-  const directions = piece.king
+  const moveDirections = piece.king
     ? [[-1, -1], [-1, 1], [1, -1], [1, 1]]
     : piece.owner === "player"
       ? [[-1, -1], [-1, 1]]
       : [[1, -1], [1, 1]];
+  const captureDirections = [[-1, -1], [-1, 1], [1, -1], [1, 1]];
   const moves = [];
-  directions.forEach(([dr, dc]) => {
+  moveDirections.forEach(([dr, dc]) => {
     const mid = { row: row + dr, col: col + dc };
-    const landing = { row: row + dr * 2, col: col + dc * 2 };
     if (isInside(mid.row, mid.col) && !board[mid.row][mid.col]) {
       moves.push({ from: { row, col }, to: mid, capture: null });
     }
+  });
+  captureDirections.forEach(([dr, dc]) => {
+    const mid = { row: row + dr, col: col + dc };
+    const landing = { row: row + dr * 2, col: col + dc * 2 };
     if (
       isInside(landing.row, landing.col) &&
       board[mid.row]?.[mid.col] &&
@@ -340,7 +344,7 @@ export function bindDomGameInterface(game) {
     }
     if (reason === "pvp-only") {
       copy.title = "Damas é PvP real";
-      copy.body = "A mesa só inicia com dois jogadores reais conectados, pareados e confirmados no botão Iniciar partida.";
+      copy.body = "A mesa só inicia com dois jogadores reais conectados, pareados e confirmados no botão Estou pronto.";
     }
     refs.accessBlockTitle.textContent = copy.title;
     refs.accessBlockBody.textContent = copy.body;
@@ -420,21 +424,23 @@ export function bindDomGameInterface(game) {
     });
     refs.matchRival?.classList.toggle("is-pending", !rival);
     if (match?.status === "readying") {
+      setMatchmakingState("matched");
       refs.matchmakingStatus.textContent = ownReady
-        ? "Voce confirmou. Aguardando o outro jogador iniciar."
-        : "Jogador real encontrado. Os dois precisam confirmar para iniciar.";
+        ? "Voce esta pronto. Aguardando o outro aparelho confirmar."
+        : "Jogador real encontrado. Confirme pronto nos dois aparelhos para abrir o tabuleiro.";
       if (refs.pvpReady) {
         refs.pvpReady.hidden = false;
         refs.pvpReady.disabled = ownReady;
-        refs.pvpReady.textContent = ownReady ? "Aguardando rival" : "Iniciar partida";
+        refs.pvpReady.textContent = ownReady ? "Aguardando rival" : "Estou pronto";
       }
       return;
     }
+    setMatchmakingState(match ? "matched" : "waiting");
     refs.matchmakingStatus.textContent = "Aguardando jogador real";
     if (refs.pvpReady) {
       refs.pvpReady.hidden = true;
       refs.pvpReady.disabled = false;
-      refs.pvpReady.textContent = "Iniciar partida";
+      refs.pvpReady.textContent = "Estou pronto";
     }
   };
 
@@ -443,11 +449,14 @@ export function bindDomGameInterface(game) {
     return piece.toLowerCase() === "p" ? "playerOne" : "playerTwo";
   };
 
-  const getPvpDirections = (piece = "") => {
+  const getPvpMoveDirections = (piece = "") => {
     if (!piece) return [];
     if (piece === piece.toUpperCase()) return [[-1, -1], [-1, 1], [1, -1], [1, 1]];
     return piece.toLowerCase() === "p" ? [[-1, -1], [-1, 1]] : [[1, -1], [1, 1]];
   };
+
+  const getPvpCaptureDirections = (piece = "") =>
+    piece ? [[-1, -1], [-1, 1], [1, -1], [1, 1]] : [];
 
   const isPvpInside = (row, col) => row >= 0 && row < CHECKERS_SIZE && col >= 0 && col < CHECKERS_SIZE;
 
@@ -457,12 +466,15 @@ export function bindDomGameInterface(game) {
     const owner = getPvpOwner(piece);
     const enemy = owner === "playerOne" ? "playerTwo" : "playerOne";
     const moves = [];
-    getPvpDirections(piece).forEach(([dr, dc]) => {
+    getPvpMoveDirections(piece).forEach(([dr, dc]) => {
       const mid = { row: row + dr, col: col + dc };
-      const landing = { row: row + dr * 2, col: col + dc * 2 };
       if (isPvpInside(mid.row, mid.col) && !board[mid.row][mid.col]) {
         moves.push({ from: { row, col }, to: mid, capture: null });
       }
+    });
+    getPvpCaptureDirections(piece).forEach(([dr, dc]) => {
+      const mid = { row: row + dr, col: col + dc };
+      const landing = { row: row + dr * 2, col: col + dc * 2 };
       if (
         isPvpInside(landing.row, landing.col) &&
         board[mid.row]?.[mid.col] &&
@@ -498,10 +510,24 @@ export function bindDomGameInterface(game) {
     }
     if (!board.length || !seat) return;
     local.pvpRenderBusy = true;
-    const targetKeys = new Set(local.pvpLegalMoves.map((move) => `${move.to.row}-${move.to.col}`));
+    const boardToDisplay = (row, col) =>
+      seat === "playerTwo" ? { row: CHECKERS_SIZE - 1 - row, col: CHECKERS_SIZE - 1 - col } : { row, col };
+    const displayToBoard = (row, col) =>
+      seat === "playerTwo" ? { row: CHECKERS_SIZE - 1 - row, col: CHECKERS_SIZE - 1 - col } : { row, col };
+    const targetKeys = new Set(
+      local.pvpLegalMoves.map((move) => {
+        const display = boardToDisplay(move.to.row, move.to.col);
+        return `${display.row}-${display.col}`;
+      })
+    );
+    refs.checkersBoard.dataset.orientation = seat === "playerTwo" ? "flipped" : "normal";
+    refs.checkersBoard.dataset.seat = seat;
     try {
-      refs.checkersBoard.innerHTML = board.flatMap((row, rowIndex) => (
-        row.map((piece, colIndex) => {
+      refs.checkersBoard.innerHTML = Array.from({ length: CHECKERS_SIZE * CHECKERS_SIZE }, (_, index) => {
+          const displayRow = Math.floor(index / CHECKERS_SIZE);
+          const displayCol = index % CHECKERS_SIZE;
+          const { row: rowIndex, col: colIndex } = displayToBoard(displayRow, displayCol);
+          const piece = board[rowIndex]?.[colIndex] || "";
           const dark = (rowIndex + colIndex) % 2 === 1;
           const owner = getPvpOwner(piece);
           const own = owner && owner === seat;
@@ -509,15 +535,14 @@ export function bindDomGameInterface(game) {
             "ppg-dom-cell",
             dark ? "is-dark" : "is-light",
             local.pvpSelected?.row === rowIndex && local.pvpSelected?.col === colIndex ? "is-selected" : "",
-            targetKeys.has(`${rowIndex}-${colIndex}`) ? "is-target" : ""
+            targetKeys.has(`${displayRow}-${displayCol}`) ? "is-target" : ""
           ].filter(Boolean).join(" ");
           const disabled = match.status !== "active" || match.turn !== seat ? " disabled" : "";
           const checker = piece
             ? `<span class="ppg-dom-piece is-${own ? "player" : "ai"}${piece === piece.toUpperCase() ? " is-king" : ""}">${piece === piece.toUpperCase() ? "K" : ""}</span>`
             : "";
-          return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}"${disabled}>${checker}</button>`;
-        })
-      )).join("");
+          return `<button type="button" class="${className}" data-row="${rowIndex}" data-col="${colIndex}" data-display-row="${displayRow}" data-display-col="${displayCol}"${disabled}>${checker}</button>`;
+      }).join("");
       const ownPieces = board.flat().filter((piece) => getPvpOwner(piece) === seat).length;
       const rivalPieces = board.flat().filter((piece) => getPvpOwner(piece) && getPvpOwner(piece) !== seat).length;
       const coin = match.coinFlip || {};
@@ -576,6 +601,7 @@ export function bindDomGameInterface(game) {
   const routePvpState = (payload = {}) => {
     if (payload.state === "waiting" || payload.state === "readying") {
       setPanel("matchmaking");
+      setMatchmakingState(payload.state === "readying" ? "matched" : "waiting");
       renderMatchmakingState();
       return;
     }
@@ -611,7 +637,12 @@ export function bindDomGameInterface(game) {
       focus: "matchmaking real",
       prompt: "Buscando jogador real. Escrow travado no servidor."
     });
-    const payload = await joinPubpaidPvpQueue("checkers", gameState.lobbyStake || 10);
+    const profile = window.pubpaidPlayerProfile?.() || {};
+    const payload = await joinPubpaidPvpQueue("checkers", gameState.lobbyStake || 10, {
+      name: profile.nick || profile.name || gameState.googleUser?.name || "",
+      archetype: gameState.selectedCharacter?.id || "neon",
+      favorite: "checkers"
+    });
     if (!payload?.ok) {
       setMatchmakingState("error");
       refs.matchmakingStatus.textContent = payload?.error || "Nao foi possivel abrir a fila real.";
@@ -794,7 +825,7 @@ export function bindDomGameInterface(game) {
         else {
           refs.matchmakingStatus.textContent = payload?.error || "Nao foi possivel confirmar agora.";
           refs.pvpReady.disabled = false;
-          refs.pvpReady.textContent = "Iniciar partida";
+          refs.pvpReady.textContent = "Estou pronto";
         }
       });
       return;

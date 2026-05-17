@@ -1581,7 +1581,7 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(3, 7, 16, 0.18), rgba(3, 7, 16, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-pubpaid-unified2") center / cover no-repeat;
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-entry-sync-nick1") center / cover no-repeat;
   filter: saturate(1.04) contrast(1.03);
   transform: scale(1.02);
   animation: ppgLoginStreetDrift 12s ease-in-out infinite alternate;
@@ -1681,6 +1681,50 @@ body.pubpaid-phaser-page--official .ppg-game-shell--official {
 
 .ppg-permission-gate[hidden] {
   display: none;
+}
+
+.ppg-update-gate {
+  position: absolute;
+  inset: 0;
+  z-index: 34;
+  display: grid;
+  place-items: center;
+  padding: calc(18px + var(--ppg-safe-top)) calc(18px + var(--ppg-safe-right)) calc(18px + var(--ppg-safe-bottom)) calc(18px + var(--ppg-safe-left));
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.014) 1px, transparent 1px),
+    rgba(2, 5, 13, 0.94);
+  background-size: 8px 8px, 8px 8px, auto;
+}
+
+.ppg-update-gate[hidden] {
+  display: none;
+}
+
+.ppg-update-card {
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  width: min(380px, calc(100vw - 32px));
+  padding: 24px 22px;
+  border: 2px solid rgba(255, 208, 109, 0.36);
+  background: rgba(6, 10, 20, 0.92);
+  text-align: center;
+  box-shadow: 0 0 34px rgba(80, 239, 255, 0.16);
+}
+
+.ppg-update-card h2,
+.ppg-update-card p {
+  margin: 0;
+}
+
+.ppg-update-card h2 {
+  font-size: 1.8rem;
+  color: #fff6dc;
+}
+
+.ppg-update-card p {
+  color: rgba(213, 223, 242, 0.82);
 }
 
 .ppg-orientation-gate {
@@ -1914,7 +1958,7 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
 .ppg-splash-frame--street-alt {
   background-image:
     linear-gradient(180deg, rgba(5, 10, 22, 0.16), rgba(3, 8, 18, 0.82)),
-    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-pubpaid-unified2");
+    url("./assets/pubpaid-v2-street-bg-v1.png?v=20260517-entry-sync-nick1");
   animation: ppgFrameStreetAlt 8s ease-in-out infinite;
 }
 
@@ -2060,6 +2104,77 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+.ppg-profile-step.ppg-splash-card {
+  top: 50%;
+  bottom: auto;
+  width: min(420px, calc(100vw - 32px - var(--ppg-safe-left) - var(--ppg-safe-right)));
+  min-height: 0;
+  padding: 22px;
+  transform: translate(-50%, -50%);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+    rgba(7, 10, 18, 0.94);
+  background-size: 6px 6px, 6px 6px, auto;
+  border: 2px solid rgba(255, 208, 109, 0.38);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.42), 0 0 34px rgba(255, 208, 109, 0.12);
+}
+
+.ppg-profile-step.ppg-splash-card h2 {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  margin: 0;
+  color: #fff6dc;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.ppg-profile-field {
+  display: grid;
+  gap: 7px;
+  width: 100%;
+  text-align: left;
+}
+
+.ppg-profile-field span {
+  color: rgba(255, 208, 109, 0.84);
+  font-family: "Courier New", "Lucida Console", monospace;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ppg-profile-field input {
+  width: 100%;
+  min-height: 52px;
+  border: 2px solid rgba(80, 239, 255, 0.38);
+  border-radius: 0;
+  padding: 0 14px;
+  background: rgba(1, 4, 10, 0.82);
+  color: #fff6dc;
+  font: 900 1.2rem "Courier New", "Lucida Console", monospace;
+  outline: none;
+  text-transform: none;
+}
+
+.ppg-profile-field input:focus {
+  border-color: rgba(255, 208, 109, 0.84);
+  box-shadow: 0 0 0 3px rgba(255, 208, 109, 0.12);
+}
+
+.ppg-profile-step .ppg-splash-note {
+  max-width: 100%;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .ppg-splash-card p {
@@ -2321,6 +2436,52 @@ body.pubpaid-phaser-page.is-touch[data-pubpaid-scene="character-select"] .ppg-mo
   display: block;
   margin-top: 2px;
   font-size: 1rem;
+}
+
+.ppg-controls-guide {
+  position: absolute;
+  left: calc(18px + var(--ppg-safe-left));
+  bottom: calc(18px + var(--ppg-safe-bottom));
+  z-index: 18;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: min(520px, calc(100% - 36px));
+  padding: 8px;
+  border: 1px solid rgba(255, 208, 109, 0.28);
+  background: rgba(3, 6, 14, 0.72);
+  color: rgba(229, 238, 255, 0.86);
+  font-family: "Courier New", "Lucida Console", monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.ppg-controls-guide[hidden],
+body.pubpaid-phaser-page.ppg-lobby-clean .ppg-controls-guide,
+body.pubpaid-phaser-page[data-pubpaid-scene="character-select"] .ppg-controls-guide {
+  display: none;
+}
+
+.ppg-controls-guide span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 26px;
+}
+
+.ppg-controls-guide kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 25px;
+  min-height: 22px;
+  padding: 0 6px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff6dc;
+  font: inherit;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.28);
 }
 
 .ppg-hud-debug {

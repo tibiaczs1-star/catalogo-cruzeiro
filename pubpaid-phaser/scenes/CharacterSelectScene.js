@@ -27,9 +27,15 @@ export class CharacterSelectScene extends Phaser.Scene {
     this.optionCards = [];
     this.mobileSelectCooldown = 0;
     this.confirmLocked = false;
+    this.confirmButtonText = null;
+    this.mobilePortraitLayout = false;
   }
 
   create() {
+    this.mobilePortraitLayout = Boolean(
+      (window.matchMedia?.("(pointer: coarse)")?.matches || window.navigator.maxTouchPoints > 0) &&
+      window.innerHeight > window.innerWidth
+    );
     this.game.events.emit("pubpaid:music-zone", "street");
     this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x02050d, 1);
     if (this.textures.exists("street-bg")) {
@@ -38,14 +44,32 @@ export class CharacterSelectScene extends Phaser.Scene {
         .setAlpha(0.58);
       this.add.rectangle(GAME_WIDTH / 2, GAME_HEIGHT / 2, GAME_WIDTH, GAME_HEIGHT, 0x02050d, 0.58);
     }
-    this.add.rectangle(GAME_WIDTH / 2, 76, 660, 58, 0x06101a, 0.74)
+    this.add.rectangle(GAME_WIDTH / 2, 70, 700, 62, 0x06101a, 0.78)
       .setStrokeStyle(1, 0xffd06d, 0.2);
-    this.add.text(GAME_WIDTH / 2, 76, "Escolha seu avatar", this.titleStyle(26, "#fff6dc"))
+    this.add.text(GAME_WIDTH / 2, 62, "Escolha seu avatar", this.titleStyle(27, "#fff6dc"))
       .setOrigin(0.5)
-      .setLetterSpacing(1);
+      .setLetterSpacing(0);
+    this.add.text(
+      GAME_WIDTH / 2,
+      96,
+      this.mobilePortraitLayout ? "Toque no avatar ou use A no controle mobile" : "Desktop: setas ou A/D + Enter  |  Mobile: toque ou direcional + A",
+      this.pixelStyle(12, "#d5dff2")
+    )
+      .setOrigin(0.5)
+      .setAlpha(0.9);
 
     this.optionCards = CHARACTER_OPTIONS.map((option, index) => this.buildOption(option, index));
-    this.makeButton(GAME_WIDTH / 2, 650, 250, 50, "CONFIRMAR", () => this.chooseSelected(), true);
+    const confirmButton = this.makeButton(
+      GAME_WIDTH / 2,
+      this.mobilePortraitLayout ? 604 : 650,
+      this.mobilePortraitLayout ? 250 : 300,
+      54,
+      "JOGAR",
+      () => this.chooseSelected(),
+      true
+    );
+    this.confirmButtonText = confirmButton.ppgLabel;
+    if (!this.mobilePortraitLayout) this.drawControlStrip();
 
     this.input.keyboard.on("keydown-LEFT", () => this.setSelected(0));
     this.input.keyboard.on("keydown-RIGHT", () => this.setSelected(1));
@@ -76,33 +100,43 @@ export class CharacterSelectScene extends Phaser.Scene {
   }
 
   buildOption(option, index) {
-    const x = index === 0 ? 430 : 850;
-    const card = this.add.container(x, 360).setDepth(2);
-    const shadow = this.add.ellipse(0, 166, 240, 34, 0x000000, 0.28)
+    const x = this.mobilePortraitLayout
+      ? (index === 0 ? 550 : 730)
+      : (index === 0 ? 392 : 888);
+    const cardWidth = this.mobilePortraitLayout ? 200 : 330;
+    const cardHeight = this.mobilePortraitLayout ? 352 : 424;
+    const spriteHeight = this.mobilePortraitLayout ? 252 : 306;
+    const card = this.add.container(x, 370).setDepth(2);
+    const shadow = this.add.ellipse(0, 176, cardWidth * 0.8, 36, 0x000000, 0.3)
       .setBlendMode(Phaser.BlendModes.MULTIPLY);
-    const glow = this.add.rectangle(0, 8, 316, 428, option.accent, 0.035)
+    const glow = this.add.rectangle(0, 6, cardWidth + 20, cardHeight + 20, option.accent, 0.04)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const bg = this.add.rectangle(0, 8, 296, 408, 0x07101c, 0.74)
+    const bg = this.add.rectangle(0, 6, cardWidth, cardHeight, 0x07101c, 0.78)
       .setStrokeStyle(2, option.accent, 0.2);
-    const floor = this.add.ellipse(0, 154, 190, 32, option.accent, 0.12)
+    const floor = this.add.ellipse(0, 162, 208, 34, option.accent, 0.12)
       .setBlendMode(Phaser.BlendModes.SCREEN);
-    const sprite = this.add.sprite(0, 148, option.spriteKey, 1)
+    const sprite = this.add.sprite(0, 158, option.spriteKey, 1)
       .setOrigin(0.5, 1);
-    fitImageToHeight(sprite, 278);
-    const title = this.add.text(0, -230, option.title, this.titleStyle(22, "#fff6dc"))
+    fitImageToHeight(sprite, spriteHeight);
+    const title = this.add.text(0, this.mobilePortraitLayout ? -190 : -220, option.title, this.titleStyle(this.mobilePortraitLayout ? 18 : 22, "#fff6dc"))
       .setOrigin(0.5)
       .setLetterSpacing(0);
-    const marker = this.add.rectangle(0, 206, 86, 4, option.accent, 0.95)
+    const selectedBadge = this.add.text(0, this.mobilePortraitLayout ? -150 : -176, "SELECIONADO", this.pixelStyle(this.mobilePortraitLayout ? 9 : 11, "#07101c"))
+      .setOrigin(0.5)
+      .setPadding(10, 5, 10, 4)
+      .setBackgroundColor("#ffd06d")
       .setAlpha(0);
-    card.add([shadow, glow, bg, floor, sprite, title, marker]);
-    card.setSize(296, 408);
-    card.setInteractive(new Phaser.Geom.Rectangle(-148, -204, 296, 408), Phaser.Geom.Rectangle.Contains);
+    const marker = this.add.rectangle(0, this.mobilePortraitLayout ? 184 : 218, 108, 5, option.accent, 0.95)
+      .setAlpha(0);
+    card.add([shadow, glow, bg, floor, sprite, title, selectedBadge, marker]);
+    card.setSize(cardWidth, cardHeight);
+    card.setInteractive(new Phaser.Geom.Rectangle(-cardWidth / 2, -cardHeight / 2, cardWidth, cardHeight), Phaser.Geom.Rectangle.Contains);
     card.on("pointerover", () => this.setSelected(index));
     card.on("pointerdown", () => {
       this.setSelected(index);
       this.chooseSelected();
     });
-    card.ppgOption = { option, bg, glow, marker, sprite, floor };
+    card.ppgOption = { option, bg, glow, marker, selectedBadge, sprite, floor };
     return card;
   }
 
@@ -114,10 +148,11 @@ export class CharacterSelectScene extends Phaser.Scene {
       card.ppgOption.glow.setAlpha(active ? 0.13 : 0.035);
       card.ppgOption.floor.setAlpha(active ? 0.2 : 0.1);
       card.ppgOption.marker.setAlpha(active ? 1 : 0);
+      card.ppgOption.selectedBadge.setAlpha(active ? 1 : 0);
       this.tweens.add({
         targets: card,
-        scaleX: active ? 1.035 : 0.985,
-        scaleY: active ? 1.035 : 0.985,
+        scaleX: active ? 1.055 : 0.965,
+        scaleY: active ? 1.055 : 0.965,
         duration: 140,
         ease: "Sine.easeOut"
       });
@@ -132,6 +167,9 @@ export class CharacterSelectScene extends Phaser.Scene {
       },
       prompt: `${option.title} selecionado.`
     });
+    if (this.confirmButtonText) {
+      this.confirmButtonText.text = `JOGAR COM ${option.title.toUpperCase()}`;
+    }
   }
 
   chooseSelected() {
@@ -168,6 +206,7 @@ export class CharacterSelectScene extends Phaser.Scene {
       strokeThickness: primary ? 1 : 3
     }).setOrigin(0.5).setLetterSpacing(2);
     container.add([bg, text]);
+    container.ppgLabel = text;
     container.setSize(width, height);
     container.setInteractive(new Phaser.Geom.Rectangle(-width / 2, -height / 2, width, height), Phaser.Geom.Rectangle.Contains);
     if (container.input) container.input.cursor = "pointer";
@@ -182,6 +221,24 @@ export class CharacterSelectScene extends Phaser.Scene {
       bg.setScale(1, 1);
     });
     return container;
+  }
+
+  drawControlStrip() {
+    const y = 704;
+    const items = [
+      { x: 390, label: "A/D", value: "trocar" },
+      { x: 536, label: "ENTER", value: "confirmar" },
+      { x: 714, label: "TOQUE", value: "selecionar" },
+      { x: 888, label: "A", value: "mobile" }
+    ];
+    items.forEach((item) => {
+      const chip = this.add.container(item.x, y).setDepth(4).setAlpha(0.92);
+      const key = this.add.rectangle(-36, 0, 70, 26, 0x07101c, 0.86)
+        .setStrokeStyle(1, 0x50efff, 0.35);
+      const keyText = this.add.text(-36, 0, item.label, this.pixelStyle(11, "#fff6dc")).setOrigin(0.5);
+      const valueText = this.add.text(18, 0, item.value, this.pixelStyle(10, "#d5dff2")).setOrigin(0, 0.5);
+      chip.add([key, keyText, valueText]);
+    });
   }
 
   titleStyle(size, color) {

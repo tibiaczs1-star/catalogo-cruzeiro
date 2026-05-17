@@ -1,16 +1,16 @@
 # Current State
 
-Updated: 2026-05-17T06:47:49.785Z
+Updated: 2026-05-17T07:30:27.282Z
 
 ## Active Goal
 
-- PubPaid 2.0 unificado
+- PubPaid 2.0 entrada sincronizada
 
 ## Summary
 
-PubPaid agora foi consolidado como unico projeto 2.0: pubpaid.js/pubpaid.css removidos, /pubpaid.html redireciona para pubpaid-v2.html?v=20260517-pubpaid-unified2, cache-bust unificado, dados legados de carteira/deposito mesclados em data/pubpaid-store.json e arquivos legados esvaziados. API local confirmou saldo legado fake-sub/email teste.pubpaid@example.com = 5, e a tela inicial nao tem mais titulo branco duplicado sobre o letreiro.
+Rodada local implementou gate de atualizacao 20260517-entry-sync-nick1, nick apos Google, autoentrada sem botao, selecao de personagem melhor em desktop/mobile, guia de controles desktop, Damas PvP com confirmacao dupla/assento orientado/captura para tras, garcom do salao no tamanho do protagonista e garcom do lobby grande central.
 
 ## Next
 
-- Validar online no Render com Google real/admin real apos commit/push; se carteira ainda zerar online
-- checar DATA_DIR persistente /opt/render/project/src/render-data/data/pubpaid-store.json e migracao do disco Render.
+- Rodar checks finais
+- commitar/pushar e validar online no Render em desktop e celular.

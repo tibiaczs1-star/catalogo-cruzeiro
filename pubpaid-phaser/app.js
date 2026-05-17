@@ -2,25 +2,32 @@ import { GAME_HEIGHT, GAME_WIDTH } from "./config/gameConfig.js";
 import { gameState, updateGameState } from "./core/gameState.js";
 import { createPubPaidSoundtrack } from "./audio/chipTechSoundtrack.js";
 import { bindOverlay } from "./ui/overlay.js";
-import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-pubpaid-unified2";
-import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-pubpaid-unified2";
+import { bindDomGameInterface } from "./ui/domGameInterface.js?v=20260517-entry-sync-nick1";
+import { bindWalletInterface } from "./ui/walletInterface.js?v=20260517-entry-sync-nick1";
 import { closePanel } from "./ui/panelActions.js";
-import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-pubpaid-unified2";
-import { BootScene } from "./scenes/BootScene.js?v=20260517-pubpaid-unified2";
+import { syncPubpaidAccount } from "./services/accountService.js?v=20260517-entry-sync-nick1";
+import { BootScene } from "./scenes/BootScene.js?v=20260517-entry-sync-nick1";
 import { IntroScene } from "./scenes/IntroScene.js";
 import { CharacterSelectScene } from "./scenes/CharacterSelectScene.js";
 import { StreetScene } from "./scenes/StreetScene.js";
-import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-pubpaid-unified2";
-import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-pubpaid-unified2";
+import { InteriorScene } from "./scenes/InteriorScene.js?v=20260517-entry-sync-nick1";
+import { GameLobbyScene } from "./scenes/GameLobbyScene.js?v=20260517-entry-sync-nick1";
 import { PoolGameScene } from "./scenes/PoolGameScene.js";
 import { CheckersGameScene } from "./scenes/CheckersGameScene.js";
 import { UIScene } from "./scenes/UIScene.js";
 
-const PUBPAID_BUILD_VERSION = "20260517-pubpaid-unified2";
+const PUBPAID_BUILD_VERSION = "20260517-entry-sync-nick1";
 window.pubpaidBuildVersion = PUBPAID_BUILD_VERSION;
-void refreshPubpaidRuntimeCache();
 
 bindOverlay();
+
+const isIOS =
+  /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
+  (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
+const isTouchDevice =
+  window.matchMedia?.("(pointer: coarse)")?.matches || window.navigator.maxTouchPoints > 0;
+const isSmallScreen = window.matchMedia?.("(max-width: 960px)")?.matches ?? window.innerWidth <= 960;
+const isTouchPortraitAtBoot = Boolean(isTouchDevice && window.innerHeight > window.innerWidth);
 
 const config = {
   type: Phaser.AUTO,
@@ -28,7 +35,7 @@ const config = {
   transparent: true,
   backgroundColor: "#02050d",
   scale: {
-    mode: Phaser.Scale.FIT,
+    mode: isTouchPortraitAtBoot ? Phaser.Scale.ENVELOP : Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: GAME_WIDTH,
     height: GAME_HEIGHT
@@ -40,16 +47,14 @@ const game = new Phaser.Game(config);
 bindDomGameInterface(game);
 bindWalletInterface();
 const soundtrack = createPubPaidSoundtrack();
-const isIOS =
-  /iPad|iPhone|iPod/.test(window.navigator.userAgent) ||
-  (window.navigator.platform === "MacIntel" && window.navigator.maxTouchPoints > 1);
-const isTouchDevice =
-  window.matchMedia?.("(pointer: coarse)")?.matches || window.navigator.maxTouchPoints > 0;
-const isSmallScreen = window.matchMedia?.("(max-width: 960px)")?.matches ?? window.innerWidth <= 960;
 
 const TERMS_KEY = "pubpaid_v2_terms_accepted";
+const PROFILE_KEY = "pubpaid_v2_player_profile";
 const refs = {
   body: document.body,
+  updateGate: document.querySelector("[data-update-gate]"),
+  updateStatus: document.querySelector("[data-update-status]"),
+  updateReload: document.querySelector("[data-update-reload]"),
   splash: document.querySelector("[data-splash-screen]"),
   enterButtons: Array.from(document.querySelectorAll("[data-enter-game]")),
   exitButtons: Array.from(document.querySelectorAll("[data-exit-game]")),
@@ -62,6 +67,9 @@ const refs = {
   googleSlot: document.querySelector("[data-google-auth-button]"),
   googleLogout: document.querySelector("[data-google-auth-logout]"),
   authTitle: document.querySelector("[data-auth-title]"),
+  profileNick: document.querySelector("[data-player-nick]"),
+  profileSave: document.querySelector("[data-save-player-profile]"),
+  profileStatus: document.querySelector("[data-player-profile-status]"),
   audioToggle: document.querySelector("[data-audio-toggle]"),
   orientationGate: document.querySelector("[data-orientation-gate]"),
   orientationStatus: document.querySelector("[data-orientation-status]"),
@@ -72,6 +80,7 @@ const refs = {
   permissionGate: document.querySelector("[data-permission-gate]"),
   startExperience: document.querySelector("[data-start-experience]"),
   permissionStatus: document.querySelector("[data-permission-status]"),
+  controlsGuide: document.querySelector("[data-controls-guide]"),
   gameShell: document.querySelector(".ppg-game-shell")
 };
 
@@ -79,22 +88,115 @@ let currentStep = "intro";
 let gameStarted = false;
 let introStarted = false;
 let orientationLocked = false;
+let bootGateReady = false;
+let pendingAutoEntry = false;
+let fullscreenWasActive = false;
+
+function setUpdateStatus(message) {
+  if (refs.updateStatus) refs.updateStatus.textContent = message;
+}
+
+function pubpaidVersionedUrl(version = PUBPAID_BUILD_VERSION) {
+  const url = new URL(window.location.href);
+  url.pathname = url.pathname.replace(/\/?[^/]*$/, "/pubpaid-v2.html");
+  url.searchParams.set("v", version);
+  url.searchParams.set("sync", String(Date.now()));
+  return url.toString();
+}
+
+async function clearPubpaidCachesAndWorkers() {
+  try {
+    if ("caches" in window) {
+      const keys = await window.caches.keys();
+      await Promise.all(
+        keys
+          .filter((key) => /pubpaid|ppg|catalogo/i.test(key))
+          .map((key) => window.caches.delete(key))
+      );
+    }
+  } catch (_error) {
+    // Best effort: stale cache cleanup must not freeze the entry screen.
+  }
+  try {
+    if (navigator.serviceWorker?.getRegistrations) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(
+        registrations
+          .filter((registration) => {
+            const scriptUrl = registration.active?.scriptURL || registration.waiting?.scriptURL || registration.installing?.scriptURL || "";
+            return scriptUrl.startsWith(window.location.origin);
+          })
+          .map((registration) => registration.unregister())
+      );
+    }
+  } catch (_error) {
+    // Old service workers are cleared when possible, without blocking play.
+  }
+}
 
 async function refreshPubpaidRuntimeCache() {
   try {
     const previousVersion = window.localStorage?.getItem("pubpaid_v2_build_version") || "";
     if (previousVersion === PUBPAID_BUILD_VERSION) return;
     window.localStorage?.setItem("pubpaid_v2_build_version", PUBPAID_BUILD_VERSION);
-    if (!("caches" in window)) return;
-    const keys = await window.caches.keys();
-    await Promise.all(
-      keys
-        .filter((key) => /pubpaid|ppg/i.test(key))
-        .map((key) => window.caches.delete(key))
-    );
+    await clearPubpaidCachesAndWorkers();
   } catch (_error) {
     // Cache refresh must never block login, wallet, lobby, or Damas.
   }
+}
+
+async function runPubpaidUpdateGate() {
+  refs.updateGate?.removeAttribute("hidden");
+  refs.updateReload?.setAttribute("hidden", "");
+  setUpdateStatus("Checando versao online...");
+  const currentUrl = new URL(window.location.href);
+  const urlVersion = currentUrl.searchParams.get("v") || "";
+
+  let serverVersion = "";
+  try {
+    const response = await fetch(`./api/pubpaid/build?client=${encodeURIComponent(PUBPAID_BUILD_VERSION)}&t=${Date.now()}`, {
+      method: "GET",
+      credentials: "same-origin",
+      cache: "no-store",
+      headers: { Accept: "application/json", "Cache-Control": "no-store" }
+    });
+    const payload = await response.json().catch(() => null);
+    if (response.ok && payload?.buildVersion) {
+      serverVersion = String(payload.buildVersion || "");
+    }
+  } catch (_error) {
+    setUpdateStatus("Sem resposta do servidor. Limpando cache local...");
+  }
+
+  const targetVersion = serverVersion || PUBPAID_BUILD_VERSION;
+  if (serverVersion && serverVersion !== PUBPAID_BUILD_VERSION) {
+    setUpdateStatus("Atualizacao nova encontrada. Reabrindo o PubPaid...");
+    await clearPubpaidCachesAndWorkers();
+    try {
+      window.localStorage?.setItem("pubpaid_v2_build_version", serverVersion);
+    } catch (_error) {
+      // ignore storage failures
+    }
+    window.location.replace(pubpaidVersionedUrl(serverVersion));
+    return false;
+  }
+
+  if (urlVersion !== targetVersion) {
+    setUpdateStatus("Aplicando versao correta antes de entrar...");
+    await clearPubpaidCachesAndWorkers();
+    try {
+      window.localStorage?.setItem("pubpaid_v2_build_version", targetVersion);
+    } catch (_error) {
+      // ignore storage failures
+    }
+    window.location.replace(pubpaidVersionedUrl(targetVersion));
+    return false;
+  }
+
+  await refreshPubpaidRuntimeCache();
+  setUpdateStatus("Versao conferida. Abrindo entrada...");
+  window.setTimeout(() => refs.updateGate?.setAttribute("hidden", ""), 260);
+  return true;
 }
 
 const mobileInputState = {
@@ -152,6 +254,91 @@ function setAcceptedTerms(accepted) {
   }
 }
 
+function normalizePlayerNick(value = "") {
+  return String(value || "")
+    .normalize("NFKC")
+    .replace(/[^\p{L}\p{N}_. -]/gu, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 18);
+}
+
+function profileStorageKey() {
+  const user = getAuthApi()?.getUser?.() || gameState.googleUser || {};
+  const identity = String(user.sub || user.email || "local").trim().toLowerCase() || "local";
+  return `${PROFILE_KEY}:${identity}`;
+}
+
+function getPlayerProfile() {
+  try {
+    const keyed = window.localStorage.getItem(profileStorageKey());
+    const fallback = window.localStorage.getItem(PROFILE_KEY);
+    const parsed = JSON.parse(keyed || fallback || "{}");
+    const nick = normalizePlayerNick(parsed.nick || parsed.name || "");
+    return nick
+      ? {
+          ...parsed,
+          nick,
+          name: nick
+        }
+      : null;
+  } catch (_error) {
+    return null;
+  }
+}
+
+function savePlayerProfile(nickValue) {
+  const nick = normalizePlayerNick(nickValue);
+  if (nick.length < 3) return null;
+  const user = getAuthApi()?.getUser?.() || gameState.googleUser || {};
+  const profile = {
+    nick,
+    name: nick,
+    email: user.email || "",
+    sub: user.sub || "",
+    updatedAt: new Date().toISOString()
+  };
+  try {
+    const serialized = JSON.stringify(profile);
+    window.localStorage.setItem(profileStorageKey(), serialized);
+    window.localStorage.setItem(PROFILE_KEY, serialized);
+  } catch (_error) {
+    // Profile is still usable in memory when storage is unavailable.
+  }
+  updateGameState({
+    playerProfile: profile,
+    nickname: nick
+  });
+  return profile;
+}
+
+function syncProfileUi() {
+  const user = getAuthApi()?.getUser?.() || gameState.googleUser || {};
+  const profile = getPlayerProfile();
+  if (refs.profileNick && document.activeElement !== refs.profileNick) {
+    refs.profileNick.value = profile?.nick || "";
+    refs.profileNick.placeholder = normalizePlayerNick(user.givenName || user.name || "Jogador") || "Seu nick";
+  }
+  const candidate = normalizePlayerNick(refs.profileNick?.value || profile?.nick || "");
+  if (refs.profileSave) refs.profileSave.disabled = candidate.length < 3;
+  if (refs.profileStatus) {
+    refs.profileStatus.textContent = candidate.length >= 3
+      ? `${candidate} vai aparecer nas mesas e no PvP.`
+      : "Crie um nick com pelo menos 3 caracteres para entrar.";
+  }
+}
+
+async function saveProfileAndEnter() {
+  const profile = savePlayerProfile(refs.profileNick?.value || "");
+  if (!profile) {
+    syncProfileUi();
+    refs.profileNick?.focus();
+    return;
+  }
+  setAcceptedTerms(true);
+  await startGame({ allowProfilePrompt: false });
+}
+
 function setStep(step) {
   currentStep = step;
   document.querySelectorAll("[data-splash-step]").forEach((node) => {
@@ -159,6 +346,10 @@ function setStep(step) {
     node.hidden = !active;
     node.classList.toggle("is-active", active);
   });
+  if (step === "profile") {
+    syncProfileUi();
+    window.setTimeout(() => refs.profileNick?.focus(), 80);
+  }
 }
 
 function syncEnterExitButtons() {
@@ -168,6 +359,17 @@ function syncEnterExitButtons() {
   refs.exitButtons.forEach((button) => {
     button.hidden = !gameStarted;
   });
+  syncControlsGuide();
+}
+
+function syncControlsGuide() {
+  if (!refs.controlsGuide) return;
+  const shouldShow =
+    gameStarted &&
+    !refs.body?.classList.contains("game-is-locked") &&
+    !isTouchDevice &&
+    !["intro"].includes(gameState.currentScene);
+  refs.controlsGuide.hidden = !shouldShow;
 }
 
 function syncAudioButton() {
@@ -189,6 +391,7 @@ async function requestFullscreen() {
   if (document.fullscreenElement || !target?.requestFullscreen) return true;
   try {
     await target.requestFullscreen({ navigationUI: "hide" });
+    fullscreenWasActive = true;
     return true;
   } catch (_error) {
     try {
@@ -248,7 +451,8 @@ function syncOrientationGate() {
 
 function syncFullscreenWarning() {
   const fullscreenSupported = Boolean(document.fullscreenEnabled && (refs.gameShell || document.documentElement)?.requestFullscreen);
-  const shouldWarn = Boolean(gameStarted && !isTouchDevice && fullscreenSupported && !document.fullscreenElement);
+  if (document.fullscreenElement) fullscreenWasActive = true;
+  const shouldWarn = Boolean(gameStarted && !isTouchDevice && fullscreenSupported && fullscreenWasActive && !document.fullscreenElement);
   refs.body?.classList.toggle("is-fullscreen-warning", shouldWarn);
   if (refs.fullscreenWarning) {
     refs.fullscreenWarning.hidden = !shouldWarn;
@@ -399,7 +603,7 @@ function bindMobileControls() {
   });
 }
 
-async function syncAuthUi() {
+async function syncAuthUi({ autoEnter = false } = {}) {
   const auth = getAuthApi();
   const signedIn = Boolean(auth?.isSignedIn?.());
   const authRequired = isAuthRequired();
@@ -407,11 +611,12 @@ async function syncAuthUi() {
   refs.googleSlot?.toggleAttribute("hidden", signedIn);
   refs.googleLogout?.toggleAttribute("hidden", !signedIn);
   if (refs.openGame) {
+    refs.openGame.hidden = signedIn || authRequired;
     refs.openGame.disabled = authRequired && !signedIn;
-    refs.openGame.textContent = signedIn || !authRequired ? "Continuar" : "Entrar para jogar";
+    refs.openGame.textContent = signedIn || !authRequired ? "Jogar agora" : "Entrar para jogar";
   }
   if (refs.authTitle) {
-    refs.authTitle.textContent = signedIn || !authRequired ? "Tudo pronto" : "Entre para jogar";
+    refs.authTitle.textContent = signedIn || !authRequired ? "Entrada confirmada" : "Entre para jogar";
   }
   if (signedIn) {
     updateGameState({
@@ -437,6 +642,12 @@ async function syncAuthUi() {
   if (signedIn) {
     await syncPubpaidAccount();
   }
+  syncProfileUi();
+  if (autoEnter && signedIn && bootGateReady && !gameStarted) {
+    await continueAfterAuth({ syncFirst: false });
+  } else if (autoEnter && signedIn && !bootGateReady) {
+    pendingAutoEntry = true;
+  }
 }
 
 function openSplash(step = "intro") {
@@ -449,14 +660,43 @@ function openSplash(step = "intro") {
   syncEnterExitButtons();
 }
 
-async function startGame() {
+async function continueAfterAuth({ syncFirst = true } = {}) {
+  if (!bootGateReady) {
+    pendingAutoEntry = true;
+    return;
+  }
+  const auth = getAuthApi();
+  if (isAuthRequired() && !auth?.isSignedIn?.()) {
+    openSplash("auth");
+    return;
+  }
+  if (auth?.isSignedIn?.() && syncFirst) {
+    await syncAuthUi({ autoEnter: false });
+  }
+  if (auth?.isSignedIn?.() && !getPlayerProfile()?.nick) {
+    openSplash("profile");
+    return;
+  }
+  setAcceptedTerms(true);
+  await startGame({ allowProfilePrompt: false });
+}
+
+async function startGame({ allowProfilePrompt = true } = {}) {
   const auth = getAuthApi();
   if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");
     return;
   }
   if (auth?.isSignedIn?.()) {
-    await syncAuthUi();
+    await syncAuthUi({ autoEnter: false });
+    if (allowProfilePrompt && !getPlayerProfile()?.nick) {
+      openSplash("profile");
+      return;
+    }
+    setAcceptedTerms(true);
+  } else if (!hasAcceptedTerms()) {
+    openSplash("terms");
+    return;
   }
   refs.body?.classList.remove("game-is-locked");
   refs.splash?.setAttribute("hidden", "");
@@ -480,10 +720,17 @@ async function startGame() {
 
 function resolveEntryStep() {
   const auth = getAuthApi();
-  return !isAuthRequired() || auth?.isSignedIn?.() ? "terms" : "auth";
+  if (isAuthRequired() && !auth?.isSignedIn?.()) return "auth";
+  if (auth?.isSignedIn?.() && !getPlayerProfile()?.nick) return "profile";
+  return hasAcceptedTerms() ? "auth" : "terms";
 }
 
 function tryEnterFlow() {
+  const auth = getAuthApi();
+  if (!isAuthRequired() || auth?.isSignedIn?.()) {
+    void continueAfterAuth();
+    return;
+  }
   openSplash(resolveEntryStep());
 }
 
@@ -545,8 +792,7 @@ function bindSplash() {
         refs.termsCheckbox.checked = true;
       }
       setAcceptedTerms(true);
-      await syncAuthUi();
-      await activateExperience();
+      await continueAfterAuth();
       return;
     }
 
@@ -556,12 +802,13 @@ function bindSplash() {
         await auth?.promptSignIn?.();
         return;
       }
-      if (!hasAcceptedTerms()) {
-        setStep("terms");
-        return;
-      }
-      await syncAuthUi();
-      await activateExperience();
+      await continueAfterAuth();
+      return;
+    }
+
+    if (event.target.closest("[data-save-player-profile]")) {
+      event.preventDefault();
+      await saveProfileAndEnter();
       return;
     }
 
@@ -575,6 +822,14 @@ function bindSplash() {
   refs.termsCheckbox?.addEventListener("change", () => {
     if (refs.acceptTerms) {
       refs.acceptTerms.disabled = false;
+    }
+  });
+
+  refs.profileNick?.addEventListener("input", syncProfileUi);
+  refs.profileNick?.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      void saveProfileAndEnter();
     }
   });
 
@@ -614,7 +869,7 @@ function bindSplash() {
   document.addEventListener("keydown", handleWalletShortcut, true);
 
   window.addEventListener("catalogo:google-auth", async () => {
-    await syncAuthUi();
+    await syncAuthUi({ autoEnter: true });
   });
 }
 
@@ -628,9 +883,29 @@ refs.body?.classList.add("game-is-locked");
 refs.splash?.removeAttribute("hidden");
 syncOrientationGate();
 setStep("auth");
+refs.updateReload?.addEventListener("click", () => {
+  window.location.replace(pubpaidVersionedUrl(PUBPAID_BUILD_VERSION));
+});
+void (async () => {
+  try {
+    bootGateReady = await runPubpaidUpdateGate();
+  } catch (_error) {
+    bootGateReady = true;
+    refs.updateReload?.removeAttribute("hidden");
+    refs.updateGate?.setAttribute("hidden", "");
+  }
+  if (!bootGateReady) return;
+  await syncAuthUi({ autoEnter: true });
+  if (pendingAutoEntry) {
+    pendingAutoEntry = false;
+    await continueAfterAuth({ syncFirst: false });
+  }
+})();
 window.setTimeout(() => {
-  void syncAuthUi();
-}, 250);
+  if (bootGateReady && !gameStarted) {
+    void syncAuthUi({ autoEnter: true });
+  }
+}, 1200);
 
 window.addEventListener("resize", syncOrientationGate);
 window.addEventListener("orientationchange", syncOrientationGate);
@@ -656,6 +931,10 @@ game.events.on("pubpaid:intro-ready", () => {
   const auth = getAuthApi();
   if (isAuthRequired() && !auth?.isSignedIn?.()) {
     openSplash("auth");
+    return;
+  }
+  if (auth?.isSignedIn?.() && !getPlayerProfile()?.nick) {
+    openSplash("profile");
     return;
   }
   if (!hasAcceptedTerms()) {
@@ -693,6 +972,7 @@ game.events.on("pubpaid:music-zone", (zone) => {
 });
 
 window.pubpaidPhaserGame = game;
+window.pubpaidPlayerProfile = getPlayerProfile;
 window.pubpaidMobileInput = {
   getVector() {
     return { x: mobileInputState.x, y: mobileInputState.y };
@@ -713,6 +993,8 @@ window.render_game_to_text = () => {
     `objective=${gameState.objective}`,
     `prompt=${gameState.prompt}`,
     `googleUser=${gameState.googleUser?.email || "none"}`,
+    `nickname=${getPlayerProfile()?.nick || "none"}`,
+    `buildVersion=${PUBPAID_BUILD_VERSION}`,
     `realBalance=${gameState.realBalance}`,
     `availableBalance=${gameState.availableBalance}`,
     `lockedMatchBalance=${gameState.lockedMatchBalance}`,

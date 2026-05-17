@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "lastUpdatedAt": "2026-05-17T06:47:50.009Z",
+  "lastUpdatedAt": "2026-05-17T07:30:16.546Z",
   "assets": [
     {
       "id": "pubpaid-fullfocus-local-screens-20260517",
@@ -2361,6 +2361,42 @@
       "note": "Smoke visual PubPaid 2.0 unificado: build 20260517-pubpaid-unified2, sem titulo branco duplicado sobre o letreiro, sem versoes antigas no HTML.",
       "linkedOrderIds": [],
       "createdAt": "2026-05-17T06:47:50.009Z"
+    },
+    {
+      "id": "pubpaid-unified2-online-smoke-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-unified2-online-smoke.png",
+      "source": "workspace",
+      "note": "Smoke online apos deploy Render: build 20260517-pubpaid-unified2, canvas ativo, sem titulo duplicado e sem versoes antigas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T06:58:11.953Z"
+    },
+    {
+      "id": "pubpaid-entry-sync-desktop-character-v2-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-entry-sync-desktop-character-v2.png",
+      "source": "workspace",
+      "note": "PubPaid 2.0 desktop: criacao de nick concluida e selecao de personagem redesenhada.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T07:30:16.269Z"
+    },
+    {
+      "id": "pubpaid-entry-sync-lobby-waiter-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-entry-sync-lobby-waiter.png",
+      "source": "workspace",
+      "note": "PubPaid 2.0 lobby: garcom central grande na cena de mesas.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T07:30:16.538Z"
+    },
+    {
+      "id": "pubpaid-entry-sync-desktop-street-controls-v2-png",
+      "kind": "image",
+      "path": ".codex-temp/pubpaid-entry-sync-desktop-street-controls-v2.png",
+      "source": "workspace",
+      "note": "PubPaid 2.0 desktop: rua com guia de controles visivel apos autoentrada.",
+      "linkedOrderIds": [],
+      "createdAt": "2026-05-17T07:30:16.546Z"
     }
   ]
 }

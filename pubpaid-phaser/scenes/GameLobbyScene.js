@@ -70,7 +70,7 @@ export class GameLobbyScene extends Phaser.Scene {
     this.game.events.emit("pubpaid:music-zone", "game");
     this.buildBackdrop();
     this.tableLayer = this.add.container(0, 0).setDepth(1);
-    this.drawLobbyWaiter(720, 540, "Escolha a mesa.");
+    this.drawLobbyWaiter(GAME_WIDTH / 2, 684, "Escolha a mesa.");
     this.game.events.emit("pubpaid:open-dom-lobby");
     updateGameState({
       currentScene: "game-lobby",
@@ -164,9 +164,9 @@ export class GameLobbyScene extends Phaser.Scene {
     this.drawGameChoiceCard(410, 394, "pool");
     this.drawGameChoiceCard(742, 394, "checkers");
     if (this.gameId) {
-      this.drawLobbyWaiter(720, 540, "Pronto para a mesa.");
+      this.drawLobbyWaiter(GAME_WIDTH / 2, 684, "Pronto para a mesa.");
     } else {
-      this.drawLobbyWaiter(720, 540, "Escolha seu jogo.");
+      this.drawLobbyWaiter(GAME_WIDTH / 2, 684, "Escolha seu jogo.");
     }
 
     if (this.gameId) {
@@ -469,13 +469,13 @@ export class GameLobbyScene extends Phaser.Scene {
 
   drawLobbyWaiter(x, y, message) {
     if (this.textures.exists(PUBPAID_TEXTURE_KEYS.waiterLobby)) {
-      const shadow = this.add.ellipse(x, y - 8, 96, 20, 0x000000, 0.24)
+      const shadow = this.add.ellipse(x, y - 16, 360, 54, 0x000000, 0.32)
         .setBlendMode(Phaser.BlendModes.MULTIPLY)
         .setDepth(2.05);
       this.waiterSprite = this.add.image(x, y, PUBPAID_TEXTURE_KEYS.waiterLobby)
         .setOrigin(0.5, 1)
         .setDepth(2.2);
-      fitImageToHeight(this.waiterSprite, 88);
+      fitImageToHeight(this.waiterSprite, 440);
       this.tableLayer.add(shadow);
       this.tableLayer.add(this.waiterSprite);
       this.startWaiterTalking();

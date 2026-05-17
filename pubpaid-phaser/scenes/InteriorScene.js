@@ -219,7 +219,7 @@ export class InteriorScene extends Phaser.Scene {
     const waiterNpc = this.addActor(PUBPAID_TEXTURE_KEYS.waiterHero, 704, 526, 0.078, 2400, 0xfff0c0, {
       depth: 2.52,
       glowDepth: 2.49,
-      fitHeight: 170,
+      fitHeight: 118,
       alpha: 0.98
     });
     waiterNpc.ppgNpc = { id: "waiter-host", zone: "waiter", role: "lobby-host" };
